@@ -19,16 +19,34 @@
     }
   ],
   "changes": {
-    "first": true
+    "fileCounts": {
+      "added": 14,
+      "changed": 4,
+      "moved": 0,
+      "parts": 3,
+      "removed": 0
+    },
+    "items": [
+      {
+        "kind": "counts",
+        "sentence": "Nothing structural changed since 2026-10-07; 14 files added and 4 changed content.",
+        "subjects": []
+      }
+    ],
+    "since": {
+      "commit": "b1705b429c5b0981cffe7dbf566b001f582b3c61",
+      "generatedAt": "2026-10-07T21:11:07.618Z"
+    },
+    "unchanged": true
   },
   "changesTogether": [],
   "changesTogetherNote": [
     "Window: 180 days; a pair counts from 3 shared commits, since the window holds fewer than 30 qualifying commits."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "b1705b429c5b0981cffe7dbf566b001f582b3c61",
+  "commit": "55fb964e3653a3dc4cc0ad9f437e017cf5878d35",
   "defaultBranch": "main",
-  "derived": "11 parts, mostly Markdown (70 files); code in Python (13), CSS (2), TypeScript (2), shell (2), Astro (1) and JavaScript (1). Work enters through 2 doors; the busiest is CI, which reaches 3 parts. It deploys a site to GitHub Pages.",
+  "derived": "11 parts, mostly Markdown (71 files) and JSON data (18); code in Python (16), shell (3), CSS (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 2 doors; the busiest is CI, which reaches 3 parts. It deploys a site to GitHub Pages.",
   "doors": [
     {
       "checks": [],
@@ -129,11 +147,12 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-07T21:11:07.618Z",
+  "generatedAt": "2026-10-07T21:39:38.540Z",
   "limits": [
-    "3 writes and 2 reads use paths built at run time and are not named here.",
-    "5 writes and 8 reads go to a path their caller passes, not to this repository.",
-    "Statistics confidence is low: fewer than 30 qualifying commits in the window, and fewer than 20 source files reach 10 revisions."
+    "3 writes and 3 reads use paths built at run time and are not named here.",
+    "6 writes and 12 reads go to a path their caller passes, not to this repository.",
+    "1 read goes to the directory the command is run in or a path its caller passes, not to this repository.",
+    "Statistics confidence is low: fewer than 30 qualifying commits in the window, and fewer than 25 source files reach 10 revisions."
   ],
   "mainDoor": ".github/workflows/ci.yml",
   "partLabels": {

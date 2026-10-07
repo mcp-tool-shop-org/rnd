@@ -187,8 +187,8 @@
     "definition": "commits is how many commits in the window touch the file, including merges and commits dropped from coupling. lines is added plus deleted in those commits.",
     "files": [
       {
-        "commits": 2,
-        "lines": 49,
+        "commits": 3,
+        "lines": 58,
         "path": ".claude/CLAUDE.md"
       },
       {
@@ -198,8 +198,23 @@
       },
       {
         "commits": 1,
-        "lines": 6,
+        "lines": 71,
+        "path": ".github/workflows/ci.yml"
+      },
+      {
+        "commits": 1,
+        "lines": 50,
+        "path": ".github/workflows/pages.yml"
+      },
+      {
+        "commits": 2,
+        "lines": 13,
         "path": ".gitignore"
+      },
+      {
+        "commits": 1,
+        "lines": 35,
+        "path": "CHANGELOG.md"
       },
       {
         "commits": 1,
@@ -207,9 +222,84 @@
         "path": "LICENSE"
       },
       {
-        "commits": 2,
-        "lines": 100,
+        "commits": 1,
+        "lines": 133,
+        "path": "README.es.md"
+      },
+      {
+        "commits": 1,
+        "lines": 133,
+        "path": "README.fr.md"
+      },
+      {
+        "commits": 1,
+        "lines": 133,
+        "path": "README.hi.md"
+      },
+      {
+        "commits": 1,
+        "lines": 133,
+        "path": "README.it.md"
+      },
+      {
+        "commits": 1,
+        "lines": 133,
+        "path": "README.ja.md"
+      },
+      {
+        "commits": 3,
+        "lines": 235,
         "path": "README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 133,
+        "path": "README.pt-BR.md"
+      },
+      {
+        "commits": 1,
+        "lines": 134,
+        "path": "README.zh.md"
+      },
+      {
+        "commits": 1,
+        "lines": 45,
+        "path": "SCORECARD.md"
+      },
+      {
+        "commits": 1,
+        "lines": 42,
+        "path": "SECURITY.md"
+      },
+      {
+        "commits": 2,
+        "lines": 92,
+        "path": "SHIP_GATE.md"
+      },
+      {
+        "commits": 1,
+        "lines": 83,
+        "path": "atlas/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 46,
+        "path": "atlas/boundaries.yaml"
+      },
+      {
+        "commits": 1,
+        "lines": 206,
+        "path": "atlas/page.json"
+      },
+      {
+        "commits": 1,
+        "lines": 625,
+        "path": "atlas/statistics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1376,
+        "path": "atlas/structure.json"
       },
       {
         "commits": 1,
@@ -342,8 +432,13 @@
         "path": "entries/2026/2026-10-07-nvidia-rubin-architecture.md"
       },
       {
-        "commits": 2,
-        "lines": 117,
+        "commits": 1,
+        "lines": 120,
+        "path": "entries/2026/2026-10-07-open-jev-style-decision-models.md"
+      },
+      {
+        "commits": 3,
+        "lines": 136,
         "path": "entries/2026/2026-10-07-openjev-and-open-jev-alternatives.md"
       },
       {
@@ -387,8 +482,8 @@
         "path": "entries/2026/2026-10-07-single-rater-labels-and-ai-listener.md"
       },
       {
-        "commits": 2,
-        "lines": 132,
+        "commits": 3,
+        "lines": 140,
         "path": "entries/2026/2026-10-07-small-label-decision-learning.md"
       },
       {
@@ -522,8 +617,8 @@
         "path": "rnd.sh"
       },
       {
-        "commits": 1,
-        "lines": 3,
+        "commits": 2,
+        "lines": 5,
         "path": "rnd/__init__.py"
       },
       {
@@ -537,8 +632,8 @@
         "path": "rnd/catalog.py"
       },
       {
-        "commits": 2,
-        "lines": 400,
+        "commits": 3,
+        "lines": 420,
         "path": "rnd/cli.py"
       },
       {
@@ -563,27 +658,122 @@
       },
       {
         "commits": 1,
+        "lines": 36,
+        "path": "site/astro.config.mjs"
+      },
+      {
+        "commits": 1,
+        "lines": 6127,
+        "path": "site/package-lock.json"
+      },
+      {
+        "commits": 1,
+        "lines": 18,
+        "path": "site/package.json"
+      },
+      {
+        "commits": 1,
+        "lines": 5,
+        "path": "site/public/favicon.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/src/assets/logo.png"
+      },
+      {
+        "commits": 1,
+        "lines": 7,
+        "path": "site/src/content.config.ts"
+      },
+      {
+        "commits": 1,
+        "lines": 68,
+        "path": "site/src/content/docs/handbook/architecture.md"
+      },
+      {
+        "commits": 1,
+        "lines": 54,
+        "path": "site/src/content/docs/handbook/experiments.md"
+      },
+      {
+        "commits": 1,
+        "lines": 123,
+        "path": "site/src/content/docs/handbook/filing-research.md"
+      },
+      {
+        "commits": 1,
+        "lines": 71,
+        "path": "site/src/content/docs/handbook/getting-started.md"
+      },
+      {
+        "commits": 1,
+        "lines": 56,
+        "path": "site/src/content/docs/handbook/index.md"
+      },
+      {
+        "commits": 1,
+        "lines": 131,
+        "path": "site/src/content/docs/handbook/reference.md"
+      },
+      {
+        "commits": 1,
+        "lines": 40,
+        "path": "site/src/content/docs/handbook/security.md"
+      },
+      {
+        "commits": 1,
+        "lines": 35,
+        "path": "site/src/pages/index.astro"
+      },
+      {
+        "commits": 1,
+        "lines": 97,
+        "path": "site/src/site-config.ts"
+      },
+      {
+        "commits": 1,
+        "lines": 3,
+        "path": "site/src/styles/global.css"
+      },
+      {
+        "commits": 1,
+        "lines": 5,
+        "path": "site/src/styles/starlight-custom.css"
+      },
+      {
+        "commits": 1,
+        "lines": 5,
+        "path": "site/tsconfig.json"
+      },
+      {
+        "commits": 1,
         "lines": 0,
         "path": "tests/__init__.py"
       },
       {
-        "commits": 2,
-        "lines": 255,
+        "commits": 3,
+        "lines": 282,
         "path": "tests/test_rnd.py"
+      },
+      {
+        "commits": 1,
+        "lines": 16,
+        "path": "verify.sh"
       }
     ]
   },
   "confidence": {
     "level": "low",
-    "reason": "fewer than 30 qualifying commits in the window, and fewer than 20 source files reach 10 revisions"
+    "reason": "fewer than 30 qualifying commits in the window, and fewer than 25 source files reach 10 revisions"
   },
-  "generatedAt": "2026-10-07T21:11:07.618Z",
+  "generatedAt": "2026-10-07T21:39:38.540Z",
   "generatedFrom": {
-    "commit": "b1705b429c5b0981cffe7dbf566b001f582b3c61"
+    "commit": "55fb964e3653a3dc4cc0ad9f437e017cf5878d35"
   },
   "pairs": [],
   "parameters": {
-    "appliedChangesetLimit": 28.25,
+    "appliedChangesetLimit": 31.75,
     "changeset": 50,
     "changesetFraction": 0.25,
     "cohesionDrop": 0.2,
@@ -592,16 +782,16 @@
     "floor": "fallen",
     "floorHeld": false,
     "floorTrigger": "both",
-    "headDate": "2026-10-07T17:00:11-04:00",
-    "inScopeFiles": 113,
+    "headDate": "2026-10-07T17:16:04-04:00",
+    "inScopeFiles": 127,
     "pinnedStart": null,
-    "priorFloor": null,
-    "qualifyingCommits": 13,
+    "priorFloor": "fallen",
+    "qualifyingCommits": 15,
     "qualifyingMinimum": 30,
     "revisions": 5,
     "shared": 10,
     "sharedFloorUsed": 3,
-    "since": "2026-04-10T21:00:11.000Z",
+    "since": "2026-04-10T21:16:04.000Z",
     "sourceExtensions": [
       ".js",
       ".mjs",

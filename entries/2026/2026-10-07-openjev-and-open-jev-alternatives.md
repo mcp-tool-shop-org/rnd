@@ -102,6 +102,10 @@ records as hosted Jev.
 So gate 4 passes: GGUF serving works for research runs, which are now free. But
 the phrase-clean question needs better evidence, not a different model.
 
+Kev-4B and Kev-9B were then run on the same records. They also sit at the base
+rate, but they track Jev more closely, answer about 3 times faster and are
+Apache-2.0; see [[2026-10-07-open-jev-style-decision-models]].
+
 ## Claims
 
 - [unverified] openjev/openjev scored 84.0% (model card) / 84.2% FP8 (Runpod) on its authors' 10,000-question benchmark against 85.4% for hosted Jev.

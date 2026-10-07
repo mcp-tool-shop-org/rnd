@@ -1,0 +1,267 @@
+{
+ "n": 124,
+ "n_clean": 73,
+ "base_rate_brier": 0.2421,
+ "constant_half_brier": 0.25,
+ "models": {
+  "jev_hosted": {
+   "brier_raw": 0.3341,
+   "brier_raw_ci": [
+    0.2928,
+    0.3708
+   ],
+   "auc": 0.5607,
+   "auc_ci": [
+    0.4558,
+    0.6634
+   ],
+   "auc_within_mix_mean": 0.5697,
+   "auc_within_mix": {
+    "amazing-grace-new-britain/phrase16": 0.8,
+    "amazing-grace-new-britain/phrase16w": 0.4762,
+    "amazing-grace-new-britain/phrase16w2": 0.4206,
+    "america-the-beautiful-materna/phrase16w": 0.5476,
+    "america-the-beautiful-materna/phrase16w2": 0.6042
+   },
+   "mean_p": 0.2825,
+   "distinct_values": 28,
+   "sense_si_brier_temperature": 0.2518,
+   "sense_si_decision_adopted": false,
+   "brier_lomo_temperature": 0.2513,
+   "brier_lomo_temperature_ci": [
+    0.2506,
+    0.252
+   ],
+   "brier_lomo_base_rate": 0.2777,
+   "temperature_by_held_out_mix": {
+    "amazing-grace-new-britain/pad16": 100.0,
+    "amazing-grace-new-britain/phrase16": 100.0,
+    "amazing-grace-new-britain/phrase16w": 100.0,
+    "amazing-grace-new-britain/phrase16w2": 100.0,
+    "america-the-beautiful-materna/pad16": 29.286,
+    "america-the-beautiful-materna/phrase16w": 100.0,
+    "america-the-beautiful-materna/phrase16w2": 100.0
+   }
+  },
+  "openjev": {
+   "brier_raw": 0.2559,
+   "brier_raw_ci": [
+    0.233,
+    0.2803
+   ],
+   "auc": 0.4602,
+   "auc_ci": [
+    0.3521,
+    0.5654
+   ],
+   "auc_within_mix_mean": 0.5886,
+   "auc_within_mix": {
+    "amazing-grace-new-britain/phrase16": 0.9333,
+    "amazing-grace-new-britain/phrase16w": 0.3968,
+    "amazing-grace-new-britain/phrase16w2": 0.3333,
+    "america-the-beautiful-materna/phrase16w": 0.6548,
+    "america-the-beautiful-materna/phrase16w2": 0.625
+   },
+   "mean_p": 0.5936,
+   "distinct_values": 120,
+   "sense_si_brier_temperature": 0.2514,
+   "sense_si_decision_adopted": false,
+   "brier_lomo_temperature": 0.2567,
+   "brier_lomo_temperature_ci": [
+    0.2472,
+    0.2668
+   ],
+   "brier_lomo_base_rate": 0.2777,
+   "temperature_by_held_out_mix": {
+    "amazing-grace-new-britain/pad16": 46.416,
+    "amazing-grace-new-britain/phrase16": 1.995,
+    "amazing-grace-new-britain/phrase16w": 2.929,
+    "amazing-grace-new-britain/phrase16w2": 1.995,
+    "america-the-beautiful-materna/pad16": 6.31,
+    "america-the-beautiful-materna/phrase16w": 1.848,
+    "america-the-beautiful-materna/phrase16w2": 4.642
+   },
+   "pearson_vs_jev": 0.6088,
+   "latency_s": {
+    "median": 1.295,
+    "p90": 1.735
+   }
+  },
+  "kev4b": {
+   "brier_raw": 0.2919,
+   "brier_raw_ci": [
+    0.2399,
+    0.3482
+   ],
+   "auc": 0.5406,
+   "auc_ci": [
+    0.4393,
+    0.6388
+   ],
+   "auc_within_mix_mean": 0.6353,
+   "auc_within_mix": {
+    "amazing-grace-new-britain/phrase16": 1.0,
+    "amazing-grace-new-britain/phrase16w": 0.6032,
+    "amazing-grace-new-britain/phrase16w2": 0.2698,
+    "america-the-beautiful-materna/phrase16w": 0.6369,
+    "america-the-beautiful-materna/phrase16w2": 0.6667
+   },
+   "mean_p": 0.81,
+   "distinct_values": 115,
+   "sense_si_brier_temperature": 0.2399,
+   "sense_si_decision_adopted": false,
+   "brier_lomo_temperature": 0.2748,
+   "brier_lomo_temperature_ci": [
+    0.2568,
+    0.2946
+   ],
+   "brier_lomo_base_rate": 0.2777,
+   "temperature_by_held_out_mix": {
+    "amazing-grace-new-britain/pad16": 14.678,
+    "amazing-grace-new-britain/phrase16": 2.154,
+    "amazing-grace-new-britain/phrase16w": 3.981,
+    "amazing-grace-new-britain/phrase16w2": 3.415,
+    "america-the-beautiful-materna/pad16": 17.113,
+    "america-the-beautiful-materna/phrase16w": 2.712,
+    "america-the-beautiful-materna/phrase16w2": 4.299
+   },
+   "pearson_vs_jev": 0.6703,
+   "latency_s": {
+    "median": 0.428,
+    "p90": 0.856
+   }
+  },
+  "kev9b": {
+   "brier_raw": 0.3055,
+   "brier_raw_ci": [
+    0.2512,
+    0.3674
+   ],
+   "auc": 0.524,
+   "auc_ci": [
+    0.4169,
+    0.6272
+   ],
+   "auc_within_mix_mean": 0.5976,
+   "auc_within_mix": {
+    "amazing-grace-new-britain/phrase16": 0.8,
+    "amazing-grace-new-britain/phrase16w": 0.4603,
+    "amazing-grace-new-britain/phrase16w2": 0.3333,
+    "america-the-beautiful-materna/phrase16w": 0.6548,
+    "america-the-beautiful-materna/phrase16w2": 0.7396
+   },
+   "mean_p": 0.8413,
+   "distinct_values": 113,
+   "sense_si_brier_temperature": 0.2416,
+   "sense_si_decision_adopted": false,
+   "brier_lomo_temperature": 0.2775,
+   "brier_lomo_temperature_ci": [
+    0.26,
+    0.2963
+   ],
+   "brier_lomo_base_rate": 0.2777,
+   "temperature_by_held_out_mix": {
+    "amazing-grace-new-britain/pad16": 15.849,
+    "amazing-grace-new-britain/phrase16": 2.326,
+    "amazing-grace-new-britain/phrase16w": 4.299,
+    "amazing-grace-new-britain/phrase16w2": 4.299,
+    "america-the-beautiful-materna/pad16": 29.286,
+    "america-the-beautiful-materna/phrase16w": 2.929,
+    "america-the-beautiful-materna/phrase16w2": 5.012
+   },
+   "pearson_vs_jev": 0.6621,
+   "latency_s": {
+    "median": 0.511,
+    "p90": 0.897
+   }
+  },
+  "kev4b-knowledge": {
+   "brier_raw": 0.2536,
+   "brier_raw_ci": [
+    0.2301,
+    0.2775
+   ],
+   "auc": 0.4817,
+   "auc_ci": [
+    0.3797,
+    0.5903
+   ],
+   "auc_within_mix_mean": 0.539,
+   "auc_within_mix": {
+    "amazing-grace-new-britain/phrase16": 0.8667,
+    "amazing-grace-new-britain/phrase16w": 0.4444,
+    "amazing-grace-new-britain/phrase16w2": 0.4762,
+    "america-the-beautiful-materna/phrase16w": 0.4286,
+    "america-the-beautiful-materna/phrase16w2": 0.4792
+   },
+   "mean_p": 0.6096,
+   "distinct_values": 122,
+   "sense_si_brier_temperature": 0.2479,
+   "sense_si_decision_adopted": false,
+   "brier_lomo_temperature": 0.2604,
+   "brier_lomo_temperature_ci": [
+    0.2487,
+    0.2724
+   ],
+   "brier_lomo_base_rate": 0.2777,
+   "temperature_by_held_out_mix": {
+    "amazing-grace-new-britain/pad16": 8.577,
+    "amazing-grace-new-britain/phrase16": 1.711,
+    "amazing-grace-new-britain/phrase16w": 2.712,
+    "amazing-grace-new-britain/phrase16w2": 2.326,
+    "america-the-beautiful-materna/pad16": 18.478,
+    "america-the-beautiful-materna/phrase16w": 1.359,
+    "america-the-beautiful-materna/phrase16w2": 2.929
+   },
+   "pearson_vs_jev": 0.4247,
+   "latency_s": {
+    "median": 0.631,
+    "p90": 0.932
+   }
+  },
+  "kev9b-knowledge": {
+   "brier_raw": 0.278,
+   "brier_raw_ci": [
+    0.2519,
+    0.3045
+   ],
+   "auc": 0.4185,
+   "auc_ci": [
+    0.317,
+    0.5227
+   ],
+   "auc_within_mix_mean": 0.4874,
+   "auc_within_mix": {
+    "amazing-grace-new-britain/phrase16": 0.8,
+    "amazing-grace-new-britain/phrase16w": 0.3968,
+    "amazing-grace-new-britain/phrase16w2": 0.5079,
+    "america-the-beautiful-materna/phrase16w": 0.4405,
+    "america-the-beautiful-materna/phrase16w2": 0.2917
+   },
+   "mean_p": 0.5621,
+   "distinct_values": 121,
+   "sense_si_brier_temperature": 0.2528,
+   "sense_si_decision_adopted": false,
+   "brier_lomo_temperature": 0.2514,
+   "brier_lomo_temperature_ci": [
+    0.2502,
+    0.2526
+   ],
+   "brier_lomo_base_rate": 0.2777,
+   "temperature_by_held_out_mix": {
+    "amazing-grace-new-britain/pad16": 100.0,
+    "amazing-grace-new-britain/phrase16": 29.286,
+    "amazing-grace-new-britain/phrase16w": 100.0,
+    "amazing-grace-new-britain/phrase16w2": 100.0,
+    "america-the-beautiful-materna/pad16": 9.261,
+    "america-the-beautiful-materna/phrase16w": 100.0,
+    "america-the-beautiful-materna/phrase16w2": 100.0
+   },
+   "pearson_vs_jev": 0.1902,
+   "latency_s": {
+    "median": 0.683,
+    "p90": 1.256
+   }
+  }
+ }
+}

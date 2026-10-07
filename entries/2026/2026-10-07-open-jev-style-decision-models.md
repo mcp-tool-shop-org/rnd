@@ -3,7 +3,7 @@ id: 2026-10-07-open-jev-style-decision-models
 title: Open Jev-style decision models — the landscape, checked against primary sources
 date: 2026-10-07
 kind: tool
-relevance: watch
+relevance: act
 fields: [machine-learning, local-llm]
 tags: [jev, decision-model, kev, laya, semif, nimble, von, nanojev, jevlike, openjev, modernbert]
 ---
@@ -85,6 +85,25 @@ If that need arises, the order is:
 Skip Von, NanoJev and jevlike for text decisions. Kev and Nimble are Apache-2.0,
 which removes the non-commercial limit on `openjev/openjev`.
 
+**Measured on the rig (2026-10-07, `experiments/openjev-vs-jev/`).** Kev-4B and
+Kev-9B ran on the same 124 phrase-clean records as hosted Jev and OpenJev, both
+0-shot and with join evidence, a rubric and four examples from other mixes.
+- **The phrase-clean judgement itself:** no model beats the base rate once
+  calibrated (Kev-4B 0.240, Kev-9B 0.242, base rate 0.242, Jev 0.252). Kev-4B's
+  within-mix AUC of 0.64 is the best seen, but it is a lead on five small mixes.
+- **Knowledge in context didn't help.** Kev-9B fell to AUC 0.42 [0.32, 0.52] with
+  it, so prompting is not the fix.
+- **Kev as sense-si's general local engine:**
+  - It tracks Jev best of the open models (r 0.67 vs OpenJev's 0.61).
+  - It is about 3 times faster per phrase (0.43 s vs 1.30 s), even on reference
+    kernels.
+  - Kev-4B fits the 5090, and 9B fits under a memory cap.
+  - It is Apache-2.0.
+  - It reads "clean" far more often than Jev (mean p 0.81 vs 0.28), so thresholds
+    must be fitted locally.
+
+  Kev-4B is the pick; 9B adds memory and nothing measurable.
+
 AI-search summaries in this area mix up the same-named projects. Gemini's "SemIf is
 not OpenJev" was wrong, and the first summary's "SemIf (OpenJev)" pointed at the
 wrong repo. Always resolve by GitHub or Hugging Face handle.
@@ -99,6 +118,9 @@ wrong repo. Always resolve by GitHub or Hugging Face handle.
 - [unverified] Kev-27B scores 0.851 dev / 0.889 test against Jev's 0.857 (dev) on sources it never trained on (self-reported).
 - [unverified] Bespoke-Nimble-9B matches about 90% of Jev's answers on 324 held-out examples (self-reported; exact metric not confirmed).
 - [unverified] Laya's typed-decisions checkpoint scores 0.766 against Jev's 0.727 (self-reported, no committed result file; Jev figure not measured by the authors).
+- [verified] On sense-si's 124 phrase-clean records, Kev-4B and Kev-9B (v1.0, bf16, reference kernels) scored a sense-si-calibrated Brier of 0.240 and 0.242 against a 0.242 base rate and Jev's 0.252, with pooled AUC 0.54 [0.44, 0.64] and 0.52 [0.42, 0.63]; correlation with hosted Jev r = 0.67 and 0.66. (via: experiments/openjev-vs-jev/results/compare-all.json, Robot rig run 2026-10-07)
+- [verified] Adding join evidence, a rubric and four leave-one-mix-out examples did not improve Kev on phrase-clean; Kev-9B's pooled AUC fell to 0.42 [0.32, 0.52]. (via: experiments/openjev-vs-jev/results/compare-all.json, 2026-10-07)
+- [verified] On the RTX 5090 with reference PyTorch kernels, Kev-4B answered in a median 0.43 s per 3–5k-token request and Kev-9B in 0.51 s, deterministically; Kev-9B peaked at 27.8 GB on the card under a 0.82 PyTorch memory cap, and uncapped Kev-4B's allocator reached 31.9 GB. (via: experiments/openjev-vs-jev logs and receipts, 2026-10-07)
 - [verified] TypeSafe's Terms of Use and Acceptable Use Policy contain no clause against training on Jev outputs; the Master Customer Agreement was not checked. (via: research agent reading TypeSafe's published terms, 2026-10-07)
 
 ## Sources
@@ -115,6 +137,7 @@ wrong repo. Always resolve by GitHub or Hugging Face handle.
 - [primary] https://github.com/vinnylarouge/jevlike — jevlike
 - [primary] https://github.com/razorback16/openjev — razorback16/openjev (DiffusionGemma server)
 - [primary] https://github.com/loopai-hq/openjev-server — Loop AI's OpenJev server
+- [rig] experiments/openjev-vs-jev, Kev-4B and Kev-9B runs on the Robot rig, 2026-10-07
 - [aggregator] https://pinggy.io/blog/best_open_source_jev_alternatives_self_hosted_decision_models/ — used only to find links
 - [aggregator] https://www.latent.space/p/ainews-here-are-6-clones-of-jev-in — used only to find links
 - [user] AI-search summary and a Gemini summary pasted by the Director, 2026-10-07

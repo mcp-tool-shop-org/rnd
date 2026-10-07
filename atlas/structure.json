@@ -197,7 +197,11 @@
           "path": "entries/2026/2026-10-07-nvidia-rubin-architecture.md"
         },
         {
-          "hash": "4cd685332f8a6283de36c44e7bb3f53708756bd0968929d60dfae7cf2766157c",
+          "hash": "d26990f6c6fd0fc9dde21566454c598b832851760492ed6334c53aab7ce4d499",
+          "path": "entries/2026/2026-10-07-open-jev-style-decision-models.md"
+        },
+        {
+          "hash": "c2936570ba08b64d63fed6e2a85123e3d5baf326e1fd60b9fe6b73bcf9f04888",
           "path": "entries/2026/2026-10-07-openjev-and-open-jev-alternatives.md"
         },
         {
@@ -260,7 +264,7 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 0,
+      "dynamicReads": 1,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
       "dynamicWrites": 0,
@@ -268,8 +272,16 @@
       "externals": 0,
       "files": [
         {
-          "hash": "1cb65903b31db14ec064f0f20487f04a5e344d1a027094222cf4e8aecc6a50a4",
+          "hash": "c9288465ec9bf2996f4f2104b22f4b7501f6af6ee3b1f755186e9d0da8aee422",
           "path": "experiments/openjev-vs-jev/README.md"
+        },
+        {
+          "exports": [
+            "main",
+            "mix_of"
+          ],
+          "hash": "04b44bfa475fab65411420120032c283c97d9ad08308311a13eb5437a6bd220e",
+          "path": "experiments/openjev-vs-jev/build_knowledge_requests.py"
         },
         {
           "exports": [
@@ -298,12 +310,71 @@
           "path": "experiments/openjev-vs-jev/compare.py"
         },
         {
+          "exports": [
+            "fit_temperature",
+            "logit",
+            "lomo",
+            "main",
+            "mix_of",
+            "sig"
+          ],
+          "hash": "cc00f3f9b8059ef08011bcee7450db26bc26f6f3a7d11653b224f39593a1835f",
+          "importsFiles": [
+            "experiments/openjev-vs-jev/compare.py"
+          ],
+          "path": "experiments/openjev-vs-jev/compare_all.py"
+        },
+        {
+          "hash": "5b859a17ff5d92b0feeddb9460a596f0995fbeac0707937e40ac2f1aeeef647a",
+          "path": "experiments/openjev-vs-jev/kev_run.sh"
+        },
+        {
+          "hash": "3cf3b8b466816b064bbe6a75c59dc312bfc9b142952e979206b0d31c717d167e",
+          "path": "experiments/openjev-vs-jev/kev_serve_capped.py"
+        },
+        {
+          "hash": "b5a1184df219245a19a899fbe3256fa4e865297e466aa185a7e85451db006f30",
+          "path": "experiments/openjev-vs-jev/results/compare-all.json"
+        },
+        {
           "hash": "b2b8a221cd6da66ff0e8a6e69be91654bae92258ea9e535631bce09bd75b8604",
           "path": "experiments/openjev-vs-jev/results/compare.json"
         },
         {
           "hash": "7f56882642d7f9e115334c3f722d78c6e2981954364451ad2748cd2378216785",
           "path": "experiments/openjev-vs-jev/results/determinism.json"
+        },
+        {
+          "hash": "6b94eda715bc1f7a40059c75014d297fc62cbd7922c514f860513e733c1566f9",
+          "path": "experiments/openjev-vs-jev/results/kev4b-determinism.json"
+        },
+        {
+          "hash": "2fc070f4ba50edc636262519521be57237d1a5aae3df58363615a7568593b1ef",
+          "path": "experiments/openjev-vs-jev/results/kev4b-knowledge-determinism.json"
+        },
+        {
+          "hash": "cac2a599910da7269b0207876f6cdbbc8ca92cf7ff1640856e7d3d1e361631e9",
+          "path": "experiments/openjev-vs-jev/results/kev4b-knowledge.jsonl"
+        },
+        {
+          "hash": "79e6911166cb7d13d2c978056c575673449e923d4671f8151ec03d61d52be6c2",
+          "path": "experiments/openjev-vs-jev/results/kev4b.jsonl"
+        },
+        {
+          "hash": "524d53eda0c14e24a291e4a31e484dd7234509f65e6ee021fc7c1516db8af292",
+          "path": "experiments/openjev-vs-jev/results/kev9b-determinism.json"
+        },
+        {
+          "hash": "3de9d15cd24918cf22a0dbac87ef15a8fa4f9a7304a64e376c09dc7aaaf6ed65",
+          "path": "experiments/openjev-vs-jev/results/kev9b-knowledge-determinism.json"
+        },
+        {
+          "hash": "5241f0b6c9e250e344efc72de4f88e2baa1faa5083db2f5856b2dae5de5f3ca0",
+          "path": "experiments/openjev-vs-jev/results/kev9b-knowledge.jsonl"
+        },
+        {
+          "hash": "35a65e271e38b66af67c456ece3fc6419c029cb9817b9feeb535e7ffc2b19175",
+          "path": "experiments/openjev-vs-jev/results/kev9b.jsonl"
         },
         {
           "hash": "f89dcc5e2dd72cab74740ce9cea965e1c93d47f45f92502b55ef30c8264e380f",
@@ -314,7 +385,7 @@
             "ask",
             "main"
           ],
-          "hash": "80846d0580f500335a5e496af656b26f205945708fe3cc969bdcc5f03237d725",
+          "hash": "d02fddb55e98c27d059e779cca85cd082569ada02d2c2f0b54558c07e8166437",
           "path": "experiments/openjev-vs-jev/run_openjev.py"
         }
       ],
@@ -326,15 +397,23 @@
       "origin": "authored",
       "outsidePlaces": [
         {
-          "reads": 3,
+          "reads": 7,
           "where": [
             "caller"
           ],
-          "writes": 2
+          "writes": 3
+        },
+        {
+          "reads": 1,
+          "where": [
+            "caller",
+            "cwd"
+          ],
+          "writes": 0
         }
       ],
-      "outsideReads": 3,
-      "outsideWrites": 2,
+      "outsideReads": 8,
+      "outsideWrites": 3,
       "role": "code",
       "testedBy": 0,
       "unresolvedSites": 0
@@ -740,7 +819,7 @@
           "path": "SECURITY.md"
         },
         {
-          "hash": "4df7c9c68b421103cc07f2cefc7c0ab96aa8500a54e00ae457b698bab3dc522b",
+          "hash": "5345f9b792733e303366ae84b412c3d81a08cb424e58e12464eccca5040bb291",
           "path": "SHIP_GATE.md"
         },
         {
@@ -1287,8 +1366,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "b1705b429c5b0981cffe7dbf566b001f582b3c61",
-    "tracked": 108
+    "commit": "55fb964e3653a3dc4cc0ad9f437e017cf5878d35",
+    "tracked": 122
   },
   "landings": [
     {

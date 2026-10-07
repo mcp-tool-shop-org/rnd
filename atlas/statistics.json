@@ -131,7 +131,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "rnd",
-      "qualifyingSourceCommits": 3,
+      "qualifyingSourceCommits": 7,
       "rebaseline": null
     },
     {
@@ -217,8 +217,8 @@
         "path": ".gitignore"
       },
       {
-        "commits": 3,
-        "lines": 56,
+        "commits": 7,
+        "lines": 76,
         "path": "CHANGELOG.md"
       },
       {
@@ -282,8 +282,8 @@
         "path": "SHIP_GATE.md"
       },
       {
-        "commits": 4,
-        "lines": 140,
+        "commits": 5,
+        "lines": 153,
         "path": "atlas/README.md"
       },
       {
@@ -292,18 +292,18 @@
         "path": "atlas/boundaries.yaml"
       },
       {
-        "commits": 4,
-        "lines": 370,
+        "commits": 5,
+        "lines": 426,
         "path": "atlas/page.json"
       },
       {
-        "commits": 4,
-        "lines": 1075,
+        "commits": 5,
+        "lines": 1140,
         "path": "atlas/statistics.json"
       },
       {
-        "commits": 4,
-        "lines": 1725,
+        "commits": 5,
+        "lines": 1737,
         "path": "atlas/structure.json"
       },
       {
@@ -450,6 +450,11 @@
         "commits": 4,
         "lines": 140,
         "path": "entries/2026/2026-10-07-openjev-and-open-jev-alternatives.md"
+      },
+      {
+        "commits": 4,
+        "lines": 415,
+        "path": "entries/2026/2026-10-07-planted-defects-program-for-sung-mixes.md"
       },
       {
         "commits": 2,
@@ -692,8 +697,8 @@
         "path": "rnd.sh"
       },
       {
-        "commits": 4,
-        "lines": 9,
+        "commits": 8,
+        "lines": 17,
         "path": "rnd/__init__.py"
       },
       {
@@ -852,11 +857,19 @@
     "level": "low",
     "reason": "fewer than 30 qualifying commits in the window, and fewer than 25 source files reach 10 revisions"
   },
-  "generatedAt": "2026-10-07T22:53:23.733Z",
+  "generatedAt": "2026-10-07T23:36:19.231Z",
   "generatedFrom": {
-    "commit": "d4cce59137c9b5e89a05871019064cac82adca92"
+    "commit": "1d6df8ca96584937b9ef47f3711704914446707c"
   },
-  "pairs": [],
+  "pairs": [
+    {
+      "a": "CHANGELOG.md",
+      "b": "rnd/__init__.py",
+      "either": 6,
+      "shared": 6,
+      "strength": 1
+    }
+  ],
   "parameters": {
     "appliedChangesetLimit": 33,
     "changeset": 50,
@@ -867,16 +880,16 @@
     "floor": "fallen",
     "floorHeld": false,
     "floorTrigger": "both",
-    "headDate": "2026-10-07T18:30:25-04:00",
+    "headDate": "2026-10-07T19:10:19-04:00",
     "inScopeFiles": 132,
     "pinnedStart": null,
     "priorFloor": "fallen",
-    "qualifyingCommits": 18,
+    "qualifyingCommits": 22,
     "qualifyingMinimum": 30,
     "revisions": 5,
     "shared": 10,
     "sharedFloorUsed": 3,
-    "since": "2026-04-10T22:30:25.000Z",
+    "since": "2026-04-10T23:10:19.000Z",
     "sourceExtensions": [
       ".js",
       ".mjs",

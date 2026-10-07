@@ -195,18 +195,28 @@ own artefact. Even then it is driven by parameters and verified by measurement.
 - The calibrated review is a cockpit feature in ai-jam-sessions #89: catch trials,
   sham edits, the device and level log, loudness-normalised playback, and the
   40-judgement audibility pass.
-- **Step A, the planter engine:** draft PR ai-jam-sessions #91,
-  `scripts/planter.py`.
+- **Step A, the planter engine:** ai-jam-sessions #91, `scripts/planter.py`,
+  rebased on the placer overrides (#90: per-cut `xfade_s` and `break_before`).
   - It mutates `plan.json` and renders through the production placers.
   - Replay and skip are measured from where the take had reached before the join,
     so the severity is exactly the span heard twice or never.
-  - Tests: 17 pass, 2 skip until the placers honour `break_before` and `xfade_s`.
-  - Local-mode trial on a real mix kept 39 of 40 plants. The one drop was a 20 ms
-    replay, below what Δ-mel resolves.
-  - A first version that simply moved `cut_start` dropped 4 of 5 replays, because
-    the clips around the join were already shifted.
-  - Warp mode on real mixes waits for the placer PR. Pitch slip waits for a
-    formant-preserving shifter in the venv.
+  - Replay is verified over exactly that span.
+  - Tests: 22 pass, 1 skips by design.
+  - **Warp trial on the shipped pad16 mixes:** kept 75/100 (Amazing Grace) and
+    77/100 (America the Beautiful).
+    - Replay and skip survive at every severity; the drops are mostly 20 ms
+      replays.
+    - Shams: 20 of 20 in each mix.
+    - Clicks: 0. In warp mode, a zero crossfade at a non-overlapping run seam falls
+      back to 15 ms fades: a dip, not a click. A placer decision for ai-jam-sessions.
+  - **Finding: the pad16 warp mixes have no mid-phrase splices.**
+    - Every run boundary sits at a score rest, so every candidate join is inside a
+      continuous WSOLA run, and every warp-mode seam is a forced break.
+    - Defects marked in those mixes cannot be splice replays.
+    - A forced break alone silently skipped the source gap before the cut. So a
+      warp sham now continues the take exactly, and is refused when that would move
+      the vowel more than 30 ms. About 20% of joins qualify.
+  - Pitch slip waits for pyworld (PR 2).
 - Step B results will be filed here as rig entries.
 - A native app that can read the system volume and output device is noted for
   later.

@@ -205,7 +205,7 @@
           "path": "entries/2026/2026-10-07-openjev-and-open-jev-alternatives.md"
         },
         {
-          "hash": "7d2b1eada85b173da8130f641de59fdfeed6f5945291f262fc32a7d7ba9037cb",
+          "hash": "03bac172c029f51a0041188d4f84cf83769c6eb254230c5a0a9679a84527e0bb",
           "path": "entries/2026/2026-10-07-planted-defects-program-for-sung-mixes.md"
         },
         {
@@ -509,7 +509,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "1110342b233dfe8560bf6eb97df534ba0ac36764003e6c92cb626bdaf11f74d1",
+          "hash": "8bd9dd8138a3ee4d3af2f765609820d4e5a18d92b13fa3b84e8a2513b530c2b1",
           "path": "rnd/__init__.py"
         },
         {
@@ -851,7 +851,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "aa77a1746f3a7ead3bfc46e7ba5973510c9e24926af008451a94cdea5d6f6b5e",
+          "hash": "6e50bf3b14c9b509b0af113c95bd5960987fbc8885ef8e92fba0d805f5d15829",
           "path": "CHANGELOG.md"
         },
         {
@@ -950,11 +950,11 @@
           "path": "site/package.json"
         },
         {
-          "hash": "3474d0edf49914e5d6b82e90b09957e6721c21168d4becfd4da5e8f2fb992f01",
+          "hash": "7c0493f268a2eef0ac8c3d3209e45dd6836c644dc78164b0e24b66114ff5f8e0",
           "path": "site/public/favicon.svg"
         },
         {
-          "hash": "e96ff090e777202f52395041dbedb8be423a25dd688e50c4536289524275ec2e",
+          "hash": "c5b3357043f570eb618ec6a54a16cd8f57842c60303328b3793466f9a426e1ff",
           "path": "site/src/assets/logo.png"
         },
         {
@@ -1012,7 +1012,7 @@
           "path": "site/src/styles/global.css"
         },
         {
-          "hash": "caf3bea3424477e9528b80490e442ff4fad4ccc7562df9457497382c5bd62339",
+          "hash": "24b45fedf53d3a6006460ec44018e4a99dc1dfe0da1ad5410c78772d65fabb2a",
           "path": "site/src/styles/starlight-custom.css"
         },
         {
@@ -1489,7 +1489,7 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "d4cce59137c9b5e89a05871019064cac82adca92",
+    "commit": "1d6df8ca96584937b9ef47f3711704914446707c",
     "tracked": 127
   },
   "landings": [

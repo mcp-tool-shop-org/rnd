@@ -1,6 +1,6 @@
 # rnd: how it works
 
-Mapped at 2026-10-07 from commit d4cce59 by Atlas 1.24.0.
+Mapped at 2026-10-07 from commit 1d6df8c by Atlas 1.24.0.
 
 ## What this is
 
@@ -8,9 +8,9 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 
 11 parts, mostly Markdown (72 files) and JSON data (18); code in Python (18), shell (3), CSS (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 2 doors; the busiest is CI, which reaches 3 parts. It deploys a site to GitHub Pages.
 
-## What changed since 2026-10-07 (485feea)
+## What changed since 2026-10-07 (d4cce59)
 
-Nothing structural changed since 2026-10-07; 1 file added and 2 changed content.
+Nothing structural changed since 2026-10-07; 6 files changed content.
 
 ## What comes in
 

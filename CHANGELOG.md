@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.5] - 2026-10-07
+
+- New logo (brand repo logos/rnd), teal accent and favicon to match
+- Planted-defects program: planter engine rebased on the placer overrides; warp trial on the shipped mixes kept 75/100 and 77/100; finding that the pad16 warp mixes have no mid-phrase splices
+- Updated `2026-10-07-planted-defects-program-for-sung-mixes`: Planted defects for sung mixes — an automated planter-versus-detector loop, anchored by the listener's measured threshold
+
 ## [1.1.1.0.4] - 2026-10-07
 
 - Planted-defects program: planter engine drafted as ai-jam-sessions #91 (plan mutation, replay/skip measured from where the take had reached; 39/40 plants kept on a real mix)

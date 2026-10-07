@@ -1,22 +1,25 @@
 # rnd: how it works
 
-Mapped at 2026-10-07 from commit cc7a041 by Atlas 1.24.0.
+Mapped at 2026-10-07 from commit 485feea by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-11 parts, mostly Markdown (71 files) and JSON data (18); code in Python (17), shell (3), CSS (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 2 doors; the busiest is CI, which reaches 3 parts. It deploys a site to GitHub Pages.
+11 parts, mostly Markdown (71 files) and JSON data (18); code in Python (18), shell (3), CSS (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 2 doors; the busiest is CI, which reaches 3 parts. It deploys a site to GitHub Pages.
 
-## What changed since 2026-10-07 (55fb964)
+## What changed since 2026-10-07 (cc7a041)
 
-- entries/ is now also read by rnd/release.py.
-- instruments/ is now read by rnd/release.py.
-- 1 file added and 15 changed content, across 5 parts.
+- CI's push trigger now also names `.coveragerc` and `codecov.yml`.
+- CHANGELOG.md is now read by tests/test_cli.py.
+- README.md is now read by tests/test_cli.py.
+- entries/_template.md is now also read by tests/test_cli.py.
+- And 1 more new writer or reader of a place.
+- 3 files added and 4 changed content, across 4 parts.
 
 ## What comes in
 
-1. **CI.** On a pull request to main; on a push to main touching 8 paths; or by hand. Runs verify.sh and tests/.
+1. **CI.** On a pull request to main; on a push to main touching 10 paths; or by hand. Runs verify.sh and tests/.
 2. **Deploy site to GitHub Pages.** On a push to main touching 2 paths; or by hand. Runs site/astro.config.mjs and site/src/.
 
 ## What happens through CI
@@ -28,7 +31,7 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 
 ## Who reads the results
 
-- **entries/** is read by rnd/release.py, and by 1 test.
+- **entries/** is read by rnd/release.py, and by 2 tests.
 - **instruments/** is read by rnd/release.py.
 
 ## The other doors
@@ -38,7 +41,7 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 ## What breaks what
 
 - **rnd** is imported only from tests, by 1 part (tests), and sits on the path of 1 door.
-- **entries/** is written by rnd and read by rnd, and by 1 test; a hand edit reaches every reader.
+- **entries/** is written by rnd and read by rnd, and by 2 tests; a hand edit reaches every reader.
 
 the repository root holds only shell files, which this map does not read, so what uses it cannot be seen.
 

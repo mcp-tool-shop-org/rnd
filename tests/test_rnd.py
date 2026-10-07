@@ -249,9 +249,6 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(catalog.family_of("warp-eval", prefixes), "warp")
 
 
-if __name__ == "__main__":
-    unittest.main()
-
 
 class CliTests(unittest.TestCase):
     def test_version_flag(self):
@@ -307,3 +304,7 @@ class ReleaseTests(unittest.TestCase):
         text = (root / "CHANGELOG.md").read_text(encoding="utf-8")
         self.assertLess(text.index("[Unreleased]"), text.index("[1.0.0.0.1]"))
         self.assertLess(text.index("[1.0.0.0.1]"), text.index("[1.0.0]"))
+
+
+if __name__ == "__main__":
+    unittest.main()

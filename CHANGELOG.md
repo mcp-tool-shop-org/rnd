@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.0] - 2026-10-07
+
+- Coverage bar raised to 90%: CI fails under 90% and Codecov's project and patch targets are 90%
+- 45 tests (was 25), including end-to-end CLI tests of every command, catalogue sync with gh mocked, and rnd bump in a real git repo; rnd/ coverage 96% (was 63%)
+
 ## [1.1.0.0.0] - 2026-10-07
 
 - Added `rnd bump`: five-segment versions (MAJOR.MINOR.PATCH.MICRO.NANO) with a CHANGELOG section written from the files changed since the last tag

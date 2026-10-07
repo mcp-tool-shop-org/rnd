@@ -131,7 +131,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "rnd",
-      "qualifyingSourceCommits": 1,
+      "qualifyingSourceCommits": 2,
       "rebaseline": null
     },
     {
@@ -179,7 +179,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "tests",
-      "qualifyingSourceCommits": 1,
+      "qualifyingSourceCommits": 2,
       "rebaseline": null
     }
   ],
@@ -187,8 +187,8 @@
     "definition": "commits is how many commits in the window touch the file, including merges and commits dropped from coupling. lines is added plus deleted in those commits.",
     "files": [
       {
-        "commits": 3,
-        "lines": 58,
+        "commits": 4,
+        "lines": 62,
         "path": ".claude/CLAUDE.md"
       },
       {
@@ -212,8 +212,8 @@
         "path": ".gitignore"
       },
       {
-        "commits": 1,
-        "lines": 35,
+        "commits": 2,
+        "lines": 51,
         "path": "CHANGELOG.md"
       },
       {
@@ -222,43 +222,43 @@
         "path": "LICENSE"
       },
       {
-        "commits": 1,
-        "lines": 133,
+        "commits": 2,
+        "lines": 138,
         "path": "README.es.md"
       },
       {
-        "commits": 1,
-        "lines": 133,
+        "commits": 2,
+        "lines": 138,
         "path": "README.fr.md"
       },
       {
-        "commits": 1,
-        "lines": 133,
+        "commits": 2,
+        "lines": 138,
         "path": "README.hi.md"
       },
       {
-        "commits": 1,
-        "lines": 133,
+        "commits": 2,
+        "lines": 138,
         "path": "README.it.md"
       },
       {
-        "commits": 1,
-        "lines": 133,
+        "commits": 2,
+        "lines": 139,
         "path": "README.ja.md"
       },
       {
-        "commits": 3,
-        "lines": 235,
+        "commits": 4,
+        "lines": 244,
         "path": "README.md"
       },
       {
-        "commits": 1,
-        "lines": 133,
+        "commits": 2,
+        "lines": 138,
         "path": "README.pt-BR.md"
       },
       {
-        "commits": 1,
-        "lines": 134,
+        "commits": 2,
+        "lines": 139,
         "path": "README.zh.md"
       },
       {
@@ -277,8 +277,8 @@
         "path": "SHIP_GATE.md"
       },
       {
-        "commits": 2,
-        "lines": 98,
+        "commits": 3,
+        "lines": 119,
         "path": "atlas/README.md"
       },
       {
@@ -287,18 +287,18 @@
         "path": "atlas/boundaries.yaml"
       },
       {
-        "commits": 2,
-        "lines": 239,
+        "commits": 3,
+        "lines": 308,
         "path": "atlas/page.json"
       },
       {
-        "commits": 2,
-        "lines": 863,
+        "commits": 3,
+        "lines": 976,
         "path": "atlas/statistics.json"
       },
       {
-        "commits": 2,
-        "lines": 1477,
+        "commits": 3,
+        "lines": 1628,
         "path": "atlas/structure.json"
       },
       {
@@ -682,8 +682,8 @@
         "path": "rnd.sh"
       },
       {
-        "commits": 2,
-        "lines": 5,
+        "commits": 3,
+        "lines": 7,
         "path": "rnd/__init__.py"
       },
       {
@@ -697,8 +697,8 @@
         "path": "rnd/catalog.py"
       },
       {
-        "commits": 3,
-        "lines": 420,
+        "commits": 4,
+        "lines": 447,
         "path": "rnd/cli.py"
       },
       {
@@ -715,6 +715,11 @@
         "commits": 1,
         "lines": 82,
         "path": "rnd/readouts.py"
+      },
+      {
+        "commits": 1,
+        "lines": 123,
+        "path": "rnd/release.py"
       },
       {
         "commits": 1,
@@ -772,13 +777,13 @@
         "path": "site/src/content/docs/handbook/getting-started.md"
       },
       {
-        "commits": 1,
-        "lines": 56,
+        "commits": 2,
+        "lines": 58,
         "path": "site/src/content/docs/handbook/index.md"
       },
       {
-        "commits": 1,
-        "lines": 131,
+        "commits": 2,
+        "lines": 157,
         "path": "site/src/content/docs/handbook/reference.md"
       },
       {
@@ -817,8 +822,8 @@
         "path": "tests/__init__.py"
       },
       {
-        "commits": 3,
-        "lines": 282,
+        "commits": 4,
+        "lines": 311,
         "path": "tests/test_rnd.py"
       },
       {
@@ -832,13 +837,13 @@
     "level": "low",
     "reason": "fewer than 30 qualifying commits in the window, and fewer than 25 source files reach 10 revisions"
   },
-  "generatedAt": "2026-10-07T21:55:09.964Z",
+  "generatedAt": "2026-10-07T22:30:18.214Z",
   "generatedFrom": {
-    "commit": "cc7a041244821dc01bd9ac2ca62f9fb62e51a00d"
+    "commit": "485feea4a776649cf178fd6e0e6fdfbb6a065899"
   },
   "pairs": [],
   "parameters": {
-    "appliedChangesetLimit": 32,
+    "appliedChangesetLimit": 32.75,
     "changeset": 50,
     "changesetFraction": 0.25,
     "cohesionDrop": 0.2,
@@ -847,16 +852,16 @@
     "floor": "fallen",
     "floorHeld": false,
     "floorTrigger": "both",
-    "headDate": "2026-10-07T17:39:38-04:00",
-    "inScopeFiles": 128,
+    "headDate": "2026-10-07T17:55:18-04:00",
+    "inScopeFiles": 131,
     "pinnedStart": null,
     "priorFloor": "fallen",
-    "qualifyingCommits": 16,
+    "qualifyingCommits": 17,
     "qualifyingMinimum": 30,
     "revisions": 5,
     "shared": 10,
     "sharedFloorUsed": 3,
-    "since": "2026-04-10T21:39:38.000Z",
+    "since": "2026-04-10T21:55:18.000Z",
     "sourceExtensions": [
       ".js",
       ".mjs",

@@ -32,7 +32,7 @@
       "externals": 0,
       "files": [
         {
-          "hash": "1ad47ba24def03d3c9c966cfc681698a61f055d5e3fbc19bb4b1f59825d5f5a6",
+          "hash": "87d57f0b6e1e1397517e2e7bd34911e59ca4a6f16cb3954c4ae946bc7dc0b4d7",
           "path": ".github/workflows/ci.yml"
         },
         {
@@ -505,7 +505,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "336d2de269da4162d7e2c37f06ad20df54b6251430b5c61ffc4b094dc4010b19",
+          "hash": "e52582365846992e468a9a02931bc6f40b4c4325f5b9780e83fdbdee0373999d",
           "path": "rnd/__init__.py"
         },
         {
@@ -823,7 +823,7 @@
       "testRunners": [
         "unittest"
       ],
-      "testedBy": 1,
+      "testedBy": 2,
       "unresolvedSites": 0
     },
     {
@@ -835,6 +835,10 @@
       "externals": 0,
       "files": [
         {
+          "hash": "e4cc41bbef393368c3c3bcf55443242ac474d43289c2dfe6747aa1eba27f7866",
+          "path": ".coveragerc"
+        },
+        {
           "hash": "61ed2c4effbbe5060e2a745e9e8416080aa5cc7bc0e3eda2cd1bc7feefc994ff",
           "path": ".gitattributes"
         },
@@ -843,7 +847,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "de6b692ea478e1e7684cd37e56570971b5cbea4ca7d153ade872cf045bdac026",
+          "hash": "94d3ce7ba52929151dd3bb1fb20b6e073420a9f91c0443011af513ca5fd279be",
           "path": "CHANGELOG.md"
         },
         {
@@ -893,6 +897,10 @@
         {
           "hash": "5345f9b792733e303366ae84b412c3d81a08cb424e58e12464eccca5040bb291",
           "path": "SHIP_GATE.md"
+        },
+        {
+          "hash": "adf20441637385da924357b921866e6c9c1b1039e4b752389a727867806d78b4",
+          "path": "codecov.yml"
         },
         {
           "hash": "06630f265162828a9c56e71f2b4b5f4d6aee155f3c653681b5c9c3eb626801b5",
@@ -1033,9 +1041,25 @@
         },
         {
           "exports": [
+            "make_library",
+            "make_readouts"
+          ],
+          "hash": "891b99c8c2f5de4a279154050e818ec14b1e76daa9934c08dd98c5b98caf9287",
+          "importsFiles": [
+            "rnd/__init__.py",
+            "rnd/catalog.py",
+            "rnd/cli.py",
+            "rnd/release.py",
+            "tests/test_rnd.py"
+          ],
+          "path": "tests/test_cli.py",
+          "testFramework": "unittest"
+        },
+        {
+          "exports": [
             "write"
           ],
-          "hash": "bbea29611953f8267b1b9332937c16beb551e396e06469cabd13a9deb2b54b71",
+          "hash": "acdade3e0bb5b38abd833298964a5d2f667d630eb890cb888a2d5e0038b85d98",
           "importOrder": [
             "rnd/__init__.py",
             "rnd/catalog.py",
@@ -1171,14 +1195,14 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 2
+          "files": 3
         },
         {
           "boundary": "rnd",
           "depth": 1,
           "enters": {
             "file": "rnd/__init__.py",
-            "from": "tests/test_rnd.py"
+            "from": "tests/test_cli.py"
           },
           "files": 8
         }
@@ -1200,6 +1224,13 @@
           "by": "rnd/release.py",
           "call": "literal",
           "confidence": "ast",
+          "target": "entries"
+        },
+        {
+          "by": "tests/test_cli.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true,
           "target": "entries"
         },
         {
@@ -1258,7 +1289,7 @@
         },
         {
           "coverage": true,
-          "files": 2,
+          "files": 3,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -1277,9 +1308,11 @@
           ],
           "event": "push",
           "paths": [
+            ".coveragerc",
             ".github/workflows/**",
             "atlas/**",
             "catalogs/**",
+            "codecov.yml",
             "entries/**",
             "instruments/**",
             "rnd/**",
@@ -1452,10 +1485,34 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "cc7a041244821dc01bd9ac2ca62f9fb62e51a00d",
-    "tracked": 123
+    "commit": "485feea4a776649cf178fd6e0e6fdfbb6a065899",
+    "tracked": 126
   },
   "landings": [
+    {
+      "readers": [
+        {
+          "by": "tests/test_cli.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "CHANGELOG.md",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "tests/test_cli.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "README.md",
+      "writers": []
+    },
     {
       "readers": [
         {
@@ -1496,6 +1553,12 @@
           "confidence": "ast"
         },
         {
+          "by": "tests/test_cli.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        },
+        {
           "by": "tests/test_rnd.py",
           "call": "literal",
           "confidence": "ast",
@@ -1524,6 +1587,18 @@
     {
       "readers": [
         {
+          "by": "tests/test_cli.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "rnd/__init__.py",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "site/astro.config.mjs",
           "call": "content-collection",
           "confidence": "ast"
@@ -1547,6 +1622,6 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 2,
+  "testFiles": 3,
   "unassigned": []
 }

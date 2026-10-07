@@ -23,7 +23,7 @@ NVIDIA publishes 398 verified agent skills in the standard SKILL.md format (Clau
 
 ## Studio relevance
 
-Decision for the Director: install `nvidia-skill-finder` globally for Claude Code (one small skill whose trigger fires on CUDA, GPU, TensorRT, Omniverse and similar work), or keep using the offline mirror here via `rnd search`. Do not bulk-install the catalogue: 398 skills would crowd every session's skill list. Two NeMo-RL skills (auto-research, session-memory) are worth reading as patterns for this seat and for loadout-os.
+Decided 2026-10-07: the Director had `nvidia-skill-finder` installed globally for Claude Code (instrument [[nvidia-skill-finder]]). Do not bulk-install the catalogue: 398 skills would crowd every session's skill list. Two NeMo-RL skills (auto-research, session-memory) are worth reading as patterns for this seat and for loadout-os.
 
 ## Claims
 

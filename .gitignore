@@ -1,0 +1,6 @@
+rnd.db
+rnd.db.tmp
+*.db.tmp
+__pycache__/
+*.pyc
+.venv/

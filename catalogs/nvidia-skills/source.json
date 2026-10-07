@@ -1,0 +1,16 @@
+{
+ "title": "NVIDIA Agent Skills",
+ "repo": "NVIDIA/skills",
+ "match": "SKILL.md",
+ "prefer_prefix": "skills/",
+ "groupings_file": "skills.sh.json",
+ "families": [
+  "accelerated-computing", "amc", "bionemo", "cudaq", "cuopt", "dali", "data-designer",
+  "deepstream", "dicom", "digital-health", "doca", "dynamo", "earth2studio", "foundationpose",
+  "g-assist", "holohub", "holoscan", "hsb", "i4h", "isaac", "jetson", "mcore", "medtech",
+  "nemo-automodel", "nemo-fabric", "nemo-mbridge", "nemo-relay", "nemo-retriever", "nemo-rl",
+  "nemoclaw", "nemotron", "nv-generate", "nv-reason", "nv-segment", "nvflare", "nvidia",
+  "omniverse", "paidf", "physical-ai", "physicsnemo", "rag", "rtvi", "rtx-remix", "tao",
+  "tilegym", "vss", "warp"
+ ]
+}

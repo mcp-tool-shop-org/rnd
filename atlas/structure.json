@@ -1,0 +1,1376 @@
+{
+  "boundaries": [
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "8d472edc11cda11694270493deb1a46635d572040a9297c5a88f7dcb7de9c990",
+          "path": ".claude/CLAUDE.md"
+        }
+      ],
+      "globs": [
+        ".claude/**"
+      ],
+      "importConfidence": "full",
+      "name": ".claude",
+      "origin": "authored",
+      "role": "docs",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "1ad47ba24def03d3c9c966cfc681698a61f055d5e3fbc19bb4b1f59825d5f5a6",
+          "path": ".github/workflows/ci.yml"
+        },
+        {
+          "hash": "cf1ad38464c54f14127d46750a5763f224b286cac09ac46aafc8ebbcd993f3ff",
+          "path": ".github/workflows/pages.yml"
+        }
+      ],
+      "globs": [
+        ".github/**"
+      ],
+      "importConfidence": "full",
+      "name": ".github",
+      "origin": "authored",
+      "role": "config",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "dd310e81b2c808d4dc9acc4545b0d26f6ab8bb390408be8dc58eb600f43301c3",
+          "path": "catalogs/nvidia-skills/README.md"
+        },
+        {
+          "hash": "fb0a5079d792837dc9583a04ba9e8a6fe6c34f7243da1c4e4665f3c5a8393322",
+          "path": "catalogs/nvidia-skills/catalog.json"
+        },
+        {
+          "hash": "be11d36c32f19a40771ba1805b44e1910725799911556b0a25914a79bb40341c",
+          "path": "catalogs/nvidia-skills/review.json"
+        },
+        {
+          "hash": "c30b08f0b3c164409ca51dc944af7a221acc3d2ac48cff1d4d4d4345a903b6b5",
+          "path": "catalogs/nvidia-skills/source.json"
+        }
+      ],
+      "globs": [
+        "catalogs/**"
+      ],
+      "importConfidence": "full",
+      "name": "catalogs",
+      "origin": "authored",
+      "role": "data",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "d1041b9d7b299b3f305020952c93a8119f83d3d2592bdd30f8ecf0173161a308",
+          "path": "docs/standards.md"
+        }
+      ],
+      "globs": [
+        "docs/**"
+      ],
+      "importConfidence": "full",
+      "name": "docs",
+      "origin": "authored",
+      "role": "docs",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "78679df43d7fdf970d5a2ad7020a3b8590de526b16074b9d43bf8079565703a9",
+          "path": "entries/2026/2026-10-07-audio-text-embedding-models.md"
+        },
+        {
+          "hash": "4b7cf78103fe56bc26c7e85ae46d5037c53ca2e5abe8488d4b9c235b5c674229",
+          "path": "entries/2026/2026-10-07-calibrating-probabilistic-decision-layers.md"
+        },
+        {
+          "hash": "576a1be2b93eb9810e024f46af4932a67da15d884a70ef1d1e9330e3966b664e",
+          "path": "entries/2026/2026-10-07-cccl-3-4.md"
+        },
+        {
+          "hash": "c5a5ed760f59c4734c093fd0b8ce22443a8eeafa7aba9327d91863fb58759ca8",
+          "path": "entries/2026/2026-10-07-cublas.md"
+        },
+        {
+          "hash": "3ec9ba9d08719fc7631226ec6a31a593367929dc381bc0c7ff2cd09411c33790",
+          "path": "entries/2026/2026-10-07-cuda-13-4-developer-experience.md"
+        },
+        {
+          "hash": "812d36ce18c9cdcec5b5d1443ca5d22d9059ea3e7f1305ecf65d3c205abd7685",
+          "path": "entries/2026/2026-10-07-cuda-13-4-livestream.md"
+        },
+        {
+          "hash": "f735630a53b98c097a6c6f0033c2813053f8a7678ad9fae35aea56d147402a64",
+          "path": "entries/2026/2026-10-07-cuda-13-4-release.md"
+        },
+        {
+          "hash": "b20d55519bba2e349ae6ed89736a2eb9d1a1c179f43225c205011c61c3d2c780",
+          "path": "entries/2026/2026-10-07-cuda-13-on-rented-pods.md"
+        },
+        {
+          "hash": "8011cd0bf528df4cc437a73912821766ed96cdc1200f8af241e60bd5265067d7",
+          "path": "entries/2026/2026-10-07-cuda-compute-fabric-transport.md"
+        },
+        {
+          "hash": "af71c6473b69e653e41637b581ba1fe241025af6bba9349d7b01e9a391f40afd",
+          "path": "entries/2026/2026-10-07-cuda-graphs.md"
+        },
+        {
+          "hash": "6897adfbeef03d651d2e9d14da7f8dc089fa87354e4ebd1c783d8cc79c9f5a47",
+          "path": "entries/2026/2026-10-07-cuda-python-ecosystem.md"
+        },
+        {
+          "hash": "4dbb4cd77922b568ee5bff9d7aac36ef388602aadb4c2fbf54322e71f95a37ef",
+          "path": "entries/2026/2026-10-07-cuda-tile-programming.md"
+        },
+        {
+          "hash": "3e4277fe5597ed2b1aa30b9e2c118c439cdbe80db23ce39056b7865fb8d9a363",
+          "path": "entries/2026/2026-10-07-cutile-on-sm120.md"
+        },
+        {
+          "hash": "abe141505fffb355b42893c297c99f8c292a1f837cbc46a7c8c17c370133cff5",
+          "path": "entries/2026/2026-10-07-decision-si-jam-sessions-cuda-13-4.md"
+        },
+        {
+          "hash": "0026aaabcddae1015555c177ae71f026e5b3977d0e4859373a84535ba99bc9ac",
+          "path": "entries/2026/2026-10-07-hf-hub-download-slow-on-windows.md"
+        },
+        {
+          "hash": "7149d0e06916d2e7dfcc685b5a15cea36cec06395075fa4726c8d1b3acf62857",
+          "path": "entries/2026/2026-10-07-join-artefact-detection.md"
+        },
+        {
+          "hash": "9e622518502bceb1a5f2986dee98f506f65e460fc75f111da73a9a705a998cbe",
+          "path": "entries/2026/2026-10-07-locality-aware-programming.md"
+        },
+        {
+          "hash": "0c574da34954ed110d93be5797662465b4a6c24e292c1cedf4ae58a2c1c74872",
+          "path": "entries/2026/2026-10-07-nsight-copilot.md"
+        },
+        {
+          "hash": "8dd5ab634cd07dfeb7729a8a9a323a49a1c413179d6610f00d2e1bc41132d87d",
+          "path": "entries/2026/2026-10-07-nvidia-agent-skills-catalog.md"
+        },
+        {
+          "hash": "becab63201aa5c8bc08e3c6f7acd1e3ac7cab46aaf43e4bff12cf80784bef0e3",
+          "path": "entries/2026/2026-10-07-nvidia-rubin-architecture.md"
+        },
+        {
+          "hash": "4cd685332f8a6283de36c44e7bb3f53708756bd0968929d60dfae7cf2766157c",
+          "path": "entries/2026/2026-10-07-openjev-and-open-jev-alternatives.md"
+        },
+        {
+          "hash": "d4d99059bfc8869e3d504fc58ec056ec43dff7669dcd83f4a02d0791e9f19370",
+          "path": "entries/2026/2026-10-07-pod-host-checks-driver-and-download.md"
+        },
+        {
+          "hash": "807df7ba07484ca5be590d8379d5f31426760439b6c55bc1291e005bd3d62d40",
+          "path": "entries/2026/2026-10-07-ptx-isa-9-4.md"
+        },
+        {
+          "hash": "e0ae407592c148358274da4e699c81a8bd395216c4504a4d5b8be1ddcaff7f1d",
+          "path": "entries/2026/2026-10-07-qwen32b-judge-position-bias.md"
+        },
+        {
+          "hash": "3f9395a9cfe5c238ab125679cb1f75a3f889d97136b99a6d657cee69529a8a6f",
+          "path": "entries/2026/2026-10-07-robot-rig-cuda-stack.md"
+        },
+        {
+          "hash": "e6fe270c252fa5221210aa70dbee3e16a70567fcf8c0739fea417c2eff2ca633",
+          "path": "entries/2026/2026-10-07-sft-before-aspire-weakens-critic.md"
+        },
+        {
+          "hash": "c054fbaba9d555728355948ce3f85aa7ba0346b532f7aa5fa352541a1b654867",
+          "path": "entries/2026/2026-10-07-singing-pitch-trackers.md"
+        },
+        {
+          "hash": "a80acc965e7d94a25dfb428aeed398a58d0d58915b66daeeaa1b24aa07a076cb",
+          "path": "entries/2026/2026-10-07-singing-quality-assessment.md"
+        },
+        {
+          "hash": "2599768cacd2b47d44baff229a04ff634bbc572723cab8f4bc201905e985dd6b",
+          "path": "entries/2026/2026-10-07-single-rater-labels-and-ai-listener.md"
+        },
+        {
+          "hash": "69fac801c835a3e9ca5c48d54c59e5471f68f02f7392afdf572d00809dbd5caf",
+          "path": "entries/2026/2026-10-07-small-label-decision-learning.md"
+        },
+        {
+          "hash": "1af8def53ff0c409ce1ce5e05e9c111f6e9f4c80b01f8f6582c0ebd4995ec316",
+          "path": "entries/2026/2026-10-07-sung-intelligibility-metrics.md"
+        },
+        {
+          "hash": "65b9be36d735d9cf49a24efb801e344de9b7f48023338685466cf66a9e900e13",
+          "path": "entries/2026/2026-10-07-uv-extra-index-priority-cpu-torch.md"
+        },
+        {
+          "hash": "db30b519986800741a2a98c91fc19246ee9fffb64e3b69e08bc907b102a06aaa",
+          "path": "entries/_template.md"
+        }
+      ],
+      "globs": [
+        "entries/**"
+      ],
+      "importConfidence": "full",
+      "name": "entries",
+      "origin": "generated",
+      "role": "docs",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "1cb65903b31db14ec064f0f20487f04a5e344d1a027094222cf4e8aecc6a50a4",
+          "path": "experiments/openjev-vs-jev/README.md"
+        },
+        {
+          "exports": [
+            "main"
+          ],
+          "failurePaths": [
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 39
+            }
+          ],
+          "hash": "67344caa29791975eb639c4712cec5bd69d1bc711ee6f99f440e70ae0d596a3c",
+          "path": "experiments/openjev-vs-jev/build_requests.py"
+        },
+        {
+          "exports": [
+            "auc",
+            "boot",
+            "brier",
+            "main",
+            "pearson",
+            "within_mix_auc"
+          ],
+          "hash": "f17dc718a3286e328c9a1ce80229ade294aa4ac76d4df13da614d514d608dbae",
+          "path": "experiments/openjev-vs-jev/compare.py"
+        },
+        {
+          "hash": "b2b8a221cd6da66ff0e8a6e69be91654bae92258ea9e535631bce09bd75b8604",
+          "path": "experiments/openjev-vs-jev/results/compare.json"
+        },
+        {
+          "hash": "7f56882642d7f9e115334c3f722d78c6e2981954364451ad2748cd2378216785",
+          "path": "experiments/openjev-vs-jev/results/determinism.json"
+        },
+        {
+          "hash": "f89dcc5e2dd72cab74740ce9cea965e1c93d47f45f92502b55ef30c8264e380f",
+          "path": "experiments/openjev-vs-jev/results/openjev.jsonl"
+        },
+        {
+          "exports": [
+            "ask",
+            "main"
+          ],
+          "hash": "80846d0580f500335a5e496af656b26f205945708fe3cc969bdcc5f03237d725",
+          "path": "experiments/openjev-vs-jev/run_openjev.py"
+        }
+      ],
+      "globs": [
+        "experiments/**"
+      ],
+      "importConfidence": "full",
+      "name": "experiments",
+      "origin": "authored",
+      "outsidePlaces": [
+        {
+          "reads": 3,
+          "where": [
+            "caller"
+          ],
+          "writes": 2
+        }
+      ],
+      "outsideReads": 3,
+      "outsideWrites": 2,
+      "role": "code",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "7994e06223d3520b2649e12ffca52a25e8048ed91fe2c69e34bfe5bc0867d31a",
+          "path": "instruments/aspire-sft-experiment.md"
+        },
+        {
+          "hash": "6d2591e6bbe10b6d357735d3123bbb138b3ab5ccd6b50fd9253b194e62d3f565",
+          "path": "instruments/aspire-si.md"
+        },
+        {
+          "hash": "8cfebda3013bb420a9d81899afbd36b866e6f0a4f9de60170bf809b1563f403d",
+          "path": "instruments/cross-family-rerate.md"
+        },
+        {
+          "hash": "92c8fad29e972c269853c83ab1f1761e6222b5f48420daac3eae4e6be24e2215",
+          "path": "instruments/engine-room.md"
+        },
+        {
+          "hash": "e8fcb145fe591ffb2359055d451f8685f0e7c4d2d106bc6aefb294d1022c390d",
+          "path": "instruments/nvidia-skill-finder.md"
+        },
+        {
+          "hash": "241751148b452a005b9551758f90124caf59a67e85c62b0f109cfea0ba3ab450",
+          "path": "instruments/offrig.md"
+        },
+        {
+          "hash": "e386272a25047b8e36b7e974f3685c6c41960cbfee799bf53fa054d9b823dac3",
+          "path": "instruments/ollama-intern.md"
+        },
+        {
+          "hash": "86ade243ea70256563cd48aacf4ffe75008ce85b542be7cfe8df565715fb1502",
+          "path": "instruments/plain-sight.md"
+        },
+        {
+          "hash": "44aeedf55bf436748d2c20f796a43092b87efe94427949a7c0beab0062e6978a",
+          "path": "instruments/readouts.md"
+        },
+        {
+          "hash": "8babad8468989c809e2b4aeb6a66d843dd159913340d361d0801175da4cba7d5",
+          "path": "instruments/repo-knowledge.md"
+        },
+        {
+          "hash": "151aa0132f11eae4e990089cae9e16e34a3f2c65ab95af9eb11599b76a504b33",
+          "path": "instruments/research-os.md"
+        },
+        {
+          "hash": "c251f43d110d1bb24709300e0e5dedfd6b5561c86606b301848fc31071691507",
+          "path": "instruments/research-packs.md"
+        },
+        {
+          "hash": "cf47c99f6b265af9a0c29c0d4d3b3b8156196d1d2fc8761a924c57dee25c98aa",
+          "path": "instruments/study-swarm.md"
+        },
+        {
+          "hash": "a59530cf9bf31af9680b3808d703ddc63cd5c59b18de3aac3dda0927c37952b1",
+          "path": "instruments/web-research.md"
+        }
+      ],
+      "globs": [
+        "instruments/**"
+      ],
+      "importConfidence": "full",
+      "name": "instruments",
+      "origin": "generated",
+      "role": "docs",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 2,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 3,
+      "entryPoints": [
+        "rnd/cli.py"
+      ],
+      "externals": 0,
+      "files": [
+        {
+          "constantOnly": true,
+          "hash": "61273bc7ae97f56f009a310cd40120ed5fe9b9ba81ee8d1a415764fc70d01914",
+          "path": "rnd/__init__.py"
+        },
+        {
+          "hash": "13a1a5b340cdcfc1902b62be90e508c7c71886000d5bf087e7854aadf09fb35e",
+          "importsFiles": [
+            "rnd/cli.py"
+          ],
+          "path": "rnd/__main__.py"
+        },
+        {
+          "exports": [
+            "catalog_dirs",
+            "family_of",
+            "load",
+            "sync"
+          ],
+          "failurePaths": [
+            {
+              "in": "_gh",
+              "kind": "except",
+              "line": 84
+            },
+            {
+              "in": "_gh",
+              "kind": "raise",
+              "line": 85
+            },
+            {
+              "in": "_gh",
+              "kind": "raise",
+              "line": 88
+            },
+            {
+              "in": "sync",
+              "kind": "raise",
+              "line": 97
+            },
+            {
+              "in": "sync",
+              "kind": "except",
+              "line": 138
+            }
+          ],
+          "hash": "64137d0667e6b485a87df7d8634201cb51076c208c538004ded5fdab2235a378",
+          "importsFiles": [
+            "rnd/__init__.py",
+            "rnd/frontmatter.py"
+          ],
+          "path": "rnd/catalog.py"
+        },
+        {
+          "exports": [
+            "build_parser",
+            "cmd_build",
+            "cmd_catalog",
+            "cmd_check",
+            "cmd_list",
+            "cmd_new",
+            "cmd_readouts",
+            "cmd_search",
+            "cmd_show",
+            "cmd_sql",
+            "cmd_stats",
+            "cmd_tools",
+            "emit",
+            "fail",
+            "main",
+            "open_db",
+            "report",
+            "slugify"
+          ],
+          "failurePaths": [
+            {
+              "in": "cmd_search",
+              "kind": "except",
+              "line": 84
+            },
+            {
+              "in": "cmd_catalog",
+              "kind": "except",
+              "line": 240
+            },
+            {
+              "in": "cmd_readouts",
+              "kind": "except",
+              "line": 293
+            },
+            {
+              "in": "cmd_sql",
+              "kind": "except",
+              "line": 316
+            },
+            {
+              "in": "main",
+              "kind": "except",
+              "line": 404
+            },
+            {
+              "in": "main",
+              "kind": "except",
+              "line": 406
+            }
+          ],
+          "hash": "bea06810815753be1ca5baf49ef36cdf8cf6da5f25c27460cb236223e19da8c5",
+          "importsFiles": [
+            "rnd/__init__.py",
+            "rnd/catalog.py",
+            "rnd/model.py",
+            "rnd/readouts.py",
+            "rnd/store.py"
+          ],
+          "path": "rnd/cli.py"
+        },
+        {
+          "exports": [
+            "parse",
+            "read",
+            "split"
+          ],
+          "failurePaths": [
+            {
+              "in": "split",
+              "kind": "raise",
+              "line": 28
+            },
+            {
+              "in": "parse",
+              "kind": "raise",
+              "line": 36
+            },
+            {
+              "in": "_parse_map",
+              "kind": "raise",
+              "line": 74
+            },
+            {
+              "in": "_parse_map",
+              "kind": "raise",
+              "line": 79
+            }
+          ],
+          "hash": "073af2ad10eff4b171cd8372ae111b94cd9fa013e7fb6c71f3a26e5dd883232a",
+          "path": "rnd/frontmatter.py"
+        },
+        {
+          "exports": [
+            "entry_paths",
+            "load",
+            "load_all",
+            "parse_claims",
+            "parse_sources",
+            "sections"
+          ],
+          "failurePaths": [
+            {
+              "in": "load",
+              "kind": "except",
+              "line": 136
+            }
+          ],
+          "hash": "09b1a895a35d0ec4e8e052bbeaab6ba09fc8f449611999ea22d9eefbc36fdc39",
+          "importsFiles": [
+            "rnd/__init__.py",
+            "rnd/frontmatter.py"
+          ],
+          "path": "rnd/model.py"
+        },
+        {
+          "exports": [
+            "knowledge_bases",
+            "prefix_query",
+            "root_dir",
+            "search"
+          ],
+          "failurePaths": [
+            {
+              "in": "knowledge_bases",
+              "kind": "raise",
+              "line": 31
+            },
+            {
+              "in": "knowledge_bases",
+              "kind": "except",
+              "line": 35
+            },
+            {
+              "in": "knowledge_bases",
+              "kind": "raise",
+              "line": 36
+            },
+            {
+              "in": "search",
+              "kind": "except",
+              "line": 72
+            }
+          ],
+          "hash": "16e1e90b437c6b0acfdab9db16584371a6ec2386222381077780c790d7d49719",
+          "path": "rnd/readouts.py"
+        },
+        {
+          "exports": [
+            "build",
+            "connect",
+            "default_db",
+            "fingerprint",
+            "fts_query",
+            "search"
+          ],
+          "failurePaths": [
+            {
+              "in": "connect",
+              "kind": "except",
+              "line": 120
+            }
+          ],
+          "hash": "8cb7abc97cda290cb0a930c19929d7e3523f36462383640bfef546fca406c1d0",
+          "importsFiles": [
+            "rnd/__init__.py",
+            "rnd/catalog.py",
+            "rnd/model.py"
+          ],
+          "path": "rnd/store.py"
+        }
+      ],
+      "globs": [
+        "rnd/**"
+      ],
+      "importConfidence": "full",
+      "name": "rnd",
+      "origin": "authored",
+      "outsidePlaces": [
+        {
+          "reads": 5,
+          "where": [
+            "caller"
+          ],
+          "writes": 3
+        }
+      ],
+      "outsideReads": 5,
+      "outsideWrites": 3,
+      "role": "code",
+      "testRunners": [
+        "unittest"
+      ],
+      "testedBy": 1,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "61ed2c4effbbe5060e2a745e9e8416080aa5cc7bc0e3eda2cd1bc7feefc994ff",
+          "path": ".gitattributes"
+        },
+        {
+          "hash": "475b1b1e39cf1d2fc2fa199e0a9fe886b7fc252ac20dc0de84fa0ec0ea25a94e",
+          "path": ".gitignore"
+        },
+        {
+          "hash": "f61b09dd5ecb76665b4a6a5f130e5bcb6b4ea5ecdefd011d9dfbf7f6af2bc194",
+          "path": "CHANGELOG.md"
+        },
+        {
+          "hash": "367e5141e4f5884e5791c4021f33a9faa958840a5decf44e1b273a87aad1c459",
+          "path": "LICENSE"
+        },
+        {
+          "hash": "d978d9933910ba447950253d69760dac3f1e46d9610d8b1a21109d4250a007e5",
+          "path": "README.es.md"
+        },
+        {
+          "hash": "079b027d69e910fffc893a8f4223cbd1a8324d62f1af09816953f8feb692e7fe",
+          "path": "README.fr.md"
+        },
+        {
+          "hash": "5885ab9f4d5f7f0150e3173b742aa670957e4c05b35e1150d2860c24e19cf04d",
+          "path": "README.hi.md"
+        },
+        {
+          "hash": "741f7eacac4c7166eb3cfbe52bdba30d30f23fd6b16e2d188027b8c1cae587d4",
+          "path": "README.it.md"
+        },
+        {
+          "hash": "8bb920d4466b617944dae3eb36f2a1be0af3e21bb7c108088789a8658440dd7c",
+          "path": "README.ja.md"
+        },
+        {
+          "hash": "1b4a28cfd35e1e695a51eac5dd3731188d7ea4513b8c5e02987546324f698d1b",
+          "path": "README.md"
+        },
+        {
+          "hash": "7c114415437988d54545cc7a7bc9ecf2456f48d47aa64bf2af458e725187bbe4",
+          "path": "README.pt-BR.md"
+        },
+        {
+          "hash": "836eeba1afe32f55b60307b02dff2f521f8f70a5fc007911475cdfa580e3ec74",
+          "path": "README.zh.md"
+        },
+        {
+          "hash": "b3b1761ec87f70066ded2de406560d417e389387a94e37c4994c87b98e897bb4",
+          "path": "SCORECARD.md"
+        },
+        {
+          "hash": "a0ad6460f0eced33bd3f85d10afbd94b71493bff4fac65e597d88ef72db179d4",
+          "path": "SECURITY.md"
+        },
+        {
+          "hash": "4df7c9c68b421103cc07f2cefc7c0ab96aa8500a54e00ae457b698bab3dc522b",
+          "path": "SHIP_GATE.md"
+        },
+        {
+          "hash": "06630f265162828a9c56e71f2b4b5f4d6aee155f3c653681b5c9c3eb626801b5",
+          "path": "rnd.cmd"
+        },
+        {
+          "hash": "3e555511a141f51b3e31eeb6f146bb51d80c2c3e9382a85afe2be32f6d964fbb",
+          "path": "rnd.sh"
+        },
+        {
+          "hash": "56426e622676885c4b1911969663a39bfa884e6d0a7a2b1c0badff2bfaf40778",
+          "path": "verify.sh"
+        }
+      ],
+      "globs": [
+        "*"
+      ],
+      "importConfidence": "full",
+      "name": "root",
+      "origin": "authored",
+      "role": "code",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "d07b30860a5b04dc7f0b8fb6bbd1f9e5ef68e1eeb567fe949a8dbda1a7ebb3a3",
+          "path": "site/astro.config.mjs"
+        },
+        {
+          "hash": "c983db3c96e08e70c9a5a2125bfcf1c797466fe321714fac12807bff8af512d7",
+          "path": "site/package-lock.json"
+        },
+        {
+          "hash": "9c39e620ebae2c5718ecd8c6188bd3451409a614ec8f5308dc15d5fd886e5b91",
+          "path": "site/package.json"
+        },
+        {
+          "hash": "3474d0edf49914e5d6b82e90b09957e6721c21168d4becfd4da5e8f2fb992f01",
+          "path": "site/public/favicon.svg"
+        },
+        {
+          "hash": "e96ff090e777202f52395041dbedb8be423a25dd688e50c4536289524275ec2e",
+          "path": "site/src/assets/logo.png"
+        },
+        {
+          "constantOnly": true,
+          "hash": "ee756dfba4122d2acc94a39b2555d9f200fff56a87a8c0b10f9cd01df26a8b62",
+          "path": "site/src/content.config.ts"
+        },
+        {
+          "hash": "1d32262c0f05f7f8e3876396ecd373ee5e73f84fd46a5c2da5c68e009234815e",
+          "path": "site/src/content/docs/handbook/architecture.md"
+        },
+        {
+          "hash": "62552e06dcee8a574f468b0d871a37c46d08d188d75ec735569cfdae030e5a61",
+          "path": "site/src/content/docs/handbook/experiments.md"
+        },
+        {
+          "hash": "a5efa87b7d28010cb964ccd22910710a2e882079f91d7d1f03939c5e4924bad5",
+          "path": "site/src/content/docs/handbook/filing-research.md"
+        },
+        {
+          "hash": "293bd79421c529c4215f2c0899f36577b0776455e3c4e791d270c2375eea2157",
+          "path": "site/src/content/docs/handbook/getting-started.md"
+        },
+        {
+          "hash": "32da2da3897cb4bbe21e5127ceaddd3ff433d9d35f2470d06a0ffe6c20dc1960",
+          "path": "site/src/content/docs/handbook/index.md"
+        },
+        {
+          "hash": "52c50088ca65810df5f49cb8e95b47cc5c16e26373ce40ea253a323b48005dd6",
+          "path": "site/src/content/docs/handbook/reference.md"
+        },
+        {
+          "hash": "c29e1d27d903ac8bc660d1e954edf915583d75a5b3ce333a2c36669ebed471f2",
+          "path": "site/src/content/docs/handbook/security.md"
+        },
+        {
+          "hash": "4fb84a646c4d833c33f4058e1ed1775849e855c65e5adb7e45d2a633674bd603",
+          "importOrder": [
+            "site/src/styles/global.css",
+            "site/src/site-config.ts"
+          ],
+          "importsFiles": [
+            "site/src/site-config.ts",
+            "site/src/styles/global.css"
+          ],
+          "path": "site/src/pages/index.astro"
+        },
+        {
+          "constantOnly": true,
+          "hash": "3ac5974bf3a3fab835c3979d661ddc0a15bd34f723b929bf393881599757008a",
+          "path": "site/src/site-config.ts"
+        },
+        {
+          "hash": "29ee8df91833e694bdba973126b34a6177de4cf01dab6d9ef7d3126e8e2b67fb",
+          "path": "site/src/styles/global.css"
+        },
+        {
+          "hash": "caf3bea3424477e9528b80490e442ff4fad4ccc7562df9457497382c5bd62339",
+          "path": "site/src/styles/starlight-custom.css"
+        },
+        {
+          "hash": "b5b0a5b04a14cddd7713c5e1c82e86c79c17c2f86b170e26e9b170b3d5e01cd9",
+          "path": "site/tsconfig.json"
+        }
+      ],
+      "globs": [
+        "site/**"
+      ],
+      "importConfidence": "full",
+      "name": "site",
+      "origin": "authored",
+      "role": "docs",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "noStatements": true,
+          "path": "tests/__init__.py"
+        },
+        {
+          "exports": [
+            "write"
+          ],
+          "hash": "22718d28e65a118573088f47fa1b1ebba6a63e3195fd06496984428569bac988",
+          "importOrder": [
+            "rnd/__init__.py",
+            "rnd/catalog.py",
+            "rnd/frontmatter.py",
+            "rnd/model.py",
+            "rnd/readouts.py",
+            "rnd/store.py",
+            "rnd/cli.py"
+          ],
+          "importsFiles": [
+            "rnd/__init__.py",
+            "rnd/catalog.py",
+            "rnd/cli.py",
+            "rnd/frontmatter.py",
+            "rnd/model.py",
+            "rnd/readouts.py",
+            "rnd/store.py"
+          ],
+          "path": "tests/test_rnd.py",
+          "testFramework": "unittest"
+        }
+      ],
+      "globs": [
+        "tests/**"
+      ],
+      "importConfidence": "full",
+      "name": "tests",
+      "origin": "authored",
+      "role": "test",
+      "testRunners": [
+        "unittest"
+      ],
+      "testedBy": 0,
+      "unresolvedSites": 0
+    }
+  ],
+  "doors": [
+    {
+      "checksCount": 0,
+      "commands": [
+        {
+          "dir": "",
+          "job": "ci",
+          "programs": [
+            "bash"
+          ],
+          "step": "Verify (tests, library check, index build, smoke)"
+        },
+        {
+          "dir": "",
+          "job": "ci",
+          "programs": [
+            "python"
+          ],
+          "step": "Coverage"
+        },
+        {
+          "dir": "",
+          "job": "ci",
+          "programs": [
+            "npx"
+          ],
+          "step": "Atlas check"
+        }
+      ],
+      "elsewhere": [],
+      "file": ".github/workflows/ci.yml",
+      "jobs": [
+        {
+          "basis": "declared",
+          "name": "ci",
+          "runsOn": [
+            {
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "platform": {
+                "cpu": "x64",
+                "libc": "glibc",
+                "os": "linux"
+              }
+            }
+          ],
+          "setup": [
+            {
+              "ranges": [
+                {
+                  "from": "3.10",
+                  "range": ">=3.10.0 <3.11.0-0"
+                },
+                {
+                  "from": "3.12",
+                  "range": ">=3.12.0 <3.13.0-0"
+                }
+              ],
+              "step": "Set up Python ${{ matrix.python-version }}",
+              "uses": "actions/setup-python",
+              "version": "${{ matrix.python-version }}"
+            },
+            {
+              "ranges": [
+                {
+                  "from": "22",
+                  "range": ">=22.0.0 <23.0.0-0"
+                }
+              ],
+              "step": "5",
+              "uses": "actions/setup-node",
+              "version": "22"
+            }
+          ]
+        }
+      ],
+      "landings": [
+        "entries",
+        "instruments"
+      ],
+      "mentions": [],
+      "name": "CI",
+      "permissions": [
+        "contents:read",
+        "id-token:write"
+      ],
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "root",
+          "depth": 0,
+          "files": 1
+        },
+        {
+          "boundary": "tests",
+          "depth": 0,
+          "files": 2
+        },
+        {
+          "boundary": "rnd",
+          "depth": 1,
+          "enters": {
+            "file": "rnd/__init__.py",
+            "from": "tests/test_rnd.py"
+          },
+          "files": 7
+        }
+      ],
+      "readers": [
+        {
+          "by": "rnd/cli.py",
+          "call": "get",
+          "confidence": "ast",
+          "target": "entries"
+        },
+        {
+          "by": "rnd/cli.py",
+          "call": "read_text",
+          "confidence": "ast",
+          "target": "entries"
+        },
+        {
+          "by": "tests/test_rnd.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true,
+          "target": "entries"
+        }
+      ],
+      "runs": [
+        {
+          "directory": true,
+          "job": "ci",
+          "matched": true,
+          "path": "tests/",
+          "runKind": "executes",
+          "via": "unittest"
+        },
+        {
+          "job": "ci",
+          "path": "verify.sh",
+          "runKind": "executes"
+        }
+      ],
+      "runsCount": 2,
+      "secrets": [],
+      "sends": {
+        "deploysPages": false,
+        "dispatchesTo": [],
+        "opensIssues": false,
+        "opensIssuesOnFailure": false,
+        "opensPullRequests": false,
+        "publishes": false,
+        "publishesTo": [],
+        "releases": false
+      },
+      "stages": [],
+      "tests": [
+        {
+          "job": "ci",
+          "ran": [
+            "verify.sh"
+          ],
+          "runner": null,
+          "step": "Verify (tests, library check, index build, smoke)",
+          "through": [
+            "verify.sh"
+          ]
+        },
+        {
+          "coverage": true,
+          "files": 2,
+          "job": "ci",
+          "runner": "unittest",
+          "step": "Coverage"
+        }
+      ],
+      "triggers": [
+        {
+          "branches": [
+            "main"
+          ],
+          "event": "pull_request"
+        },
+        {
+          "branches": [
+            "main"
+          ],
+          "event": "push",
+          "paths": [
+            ".github/workflows/**",
+            "atlas/**",
+            "catalogs/**",
+            "entries/**",
+            "instruments/**",
+            "rnd/**",
+            "tests/**",
+            "verify.sh"
+          ]
+        },
+        {
+          "event": "workflow_dispatch"
+        }
+      ],
+      "uses": [
+        "actions/checkout",
+        "actions/setup-node",
+        "actions/setup-python",
+        "codecov/codecov-action"
+      ],
+      "usesWorkflowToken": false
+    },
+    {
+      "checksCount": 0,
+      "commands": [
+        {
+          "dir": "site",
+          "job": "build",
+          "programs": [
+            "npm"
+          ],
+          "step": "Install site dependencies"
+        },
+        {
+          "dir": "site",
+          "job": "build",
+          "programs": [
+            "npm"
+          ],
+          "step": "Build site"
+        }
+      ],
+      "elsewhere": [],
+      "file": ".github/workflows/pages.yml",
+      "jobs": [
+        {
+          "basis": "declared",
+          "name": "build",
+          "runsOn": [
+            {
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "platform": {
+                "cpu": "x64",
+                "libc": "glibc",
+                "os": "linux"
+              }
+            }
+          ],
+          "setup": [
+            {
+              "ranges": [
+                {
+                  "from": "22",
+                  "range": ">=22.0.0 <23.0.0-0"
+                }
+              ],
+              "step": "1",
+              "uses": "actions/setup-node",
+              "version": "22"
+            }
+          ]
+        },
+        {
+          "basis": "declared",
+          "environment": {
+            "name": "github-pages"
+          },
+          "name": "deploy",
+          "runsOn": [
+            {
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "platform": {
+                "cpu": "x64",
+                "libc": "glibc",
+                "os": "linux"
+              }
+            }
+          ]
+        }
+      ],
+      "landings": [],
+      "mentions": [],
+      "name": "Deploy site to GitHub Pages",
+      "permissions": [
+        "contents:read",
+        "id-token:write",
+        "pages:write"
+      ],
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "site",
+          "depth": 0,
+          "files": 5
+        }
+      ],
+      "readers": [],
+      "runs": [
+        {
+          "job": "build",
+          "matched": true,
+          "path": "site/astro.config.mjs",
+          "runKind": "executes",
+          "via": "astro build"
+        },
+        {
+          "directory": true,
+          "job": "build",
+          "matched": true,
+          "path": "site/src/",
+          "runKind": "executes",
+          "via": "astro build"
+        }
+      ],
+      "runsCount": 2,
+      "secrets": [],
+      "sends": {
+        "deploysPages": true,
+        "dispatchesTo": [],
+        "opensIssues": false,
+        "opensIssuesOnFailure": false,
+        "opensPullRequests": false,
+        "publishes": false,
+        "publishesTo": [],
+        "releases": false
+      },
+      "stages": [],
+      "triggers": [
+        {
+          "branches": [
+            "main"
+          ],
+          "event": "push",
+          "paths": [
+            ".github/workflows/pages.yml",
+            "site/**"
+          ]
+        },
+        {
+          "event": "workflow_dispatch"
+        }
+      ],
+      "uses": [
+        "actions/checkout",
+        "actions/deploy-pages",
+        "actions/setup-node",
+        "actions/upload-pages-artifact"
+      ],
+      "usesWorkflowToken": false
+    }
+  ],
+  "edges": [
+    {
+      "from": "tests",
+      "fromTests": true,
+      "kind": "file",
+      "to": "rnd"
+    }
+  ],
+  "engine": "1.24.0",
+  "generatedFrom": {
+    "commit": "b1705b429c5b0981cffe7dbf566b001f582b3c61",
+    "tracked": 108
+  },
+  "landings": [
+    {
+      "readers": [
+        {
+          "by": "docs/standards.md",
+          "call": "--",
+          "confidence": "text"
+        }
+      ],
+      "target": "catalogs",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "rnd/cli.py",
+          "call": "get",
+          "confidence": "ast"
+        }
+      ],
+      "target": "entries",
+      "writers": [
+        {
+          "by": "rnd/cli.py",
+          "confidence": "ast"
+        }
+      ]
+    },
+    {
+      "readers": [
+        {
+          "by": "rnd/cli.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "tests/test_rnd.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "entries/_template.md",
+      "writers": []
+    },
+    {
+      "readers": [],
+      "target": "instruments",
+      "writers": [
+        {
+          "by": "rnd/cli.py",
+          "confidence": "ast"
+        }
+      ]
+    },
+    {
+      "readers": [
+        {
+          "by": "site/astro.config.mjs",
+          "call": "content-collection",
+          "confidence": "ast"
+        }
+      ],
+      "target": "site/src/content/docs",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/astro.config.mjs",
+          "call": "autogenerate",
+          "confidence": "ast"
+        }
+      ],
+      "target": "site/src/content/docs/handbook",
+      "writers": []
+    }
+  ],
+  "overlaps": [],
+  "submodules": [],
+  "symlinks": [],
+  "testFiles": 2,
+  "unassigned": []
+}

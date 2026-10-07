@@ -4,3 +4,10 @@ rnd.db.tmp
 __pycache__/
 *.pyc
 .venv/
+.coverage
+coverage.xml
+htmlcov/
+site/.astro/
+site/dist/
+site/node_modules/
+.polyglot-cache.json

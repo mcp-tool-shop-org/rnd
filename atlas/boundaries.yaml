@@ -1,0 +1,46 @@
+summary: "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only)."
+boundaries:
+  - name: .github
+    globs:
+      - .github/**
+    role: config
+  - name: .claude
+    globs:
+      - .claude/**
+    role: docs
+  - name: catalogs
+    globs:
+      - catalogs/**
+    role: data
+  - name: docs
+    globs:
+      - docs/**
+    role: docs
+  - name: entries
+    globs:
+      - entries/**
+    role: docs
+  - name: experiments
+    globs:
+      - experiments/**
+    role: code
+  - name: instruments
+    globs:
+      - instruments/**
+    role: docs
+  - name: rnd
+    globs:
+      - rnd/**
+    role: code
+  - name: root
+    globs:
+      - "*"
+    role: code
+  - name: site
+    globs:
+      - site/**
+    role: docs
+  - name: tests
+    globs:
+      - tests/**
+    role: test

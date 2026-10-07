@@ -29,6 +29,15 @@ SQLite index, driven by `python -m rnd`. Read README.md for the format.
   from outside the studio's fields is welcome; `reference` is a fine verdict.
 - Run `python -m rnd check` before committing; it exits 1 on any error.
 
+## Bench, then shelf
+
+This repo is the bench: the messy counterpart to readouts. Interim, disputed and
+wrong results stay visible and honestly marked; don't tidy them away. When a
+topic's load-bearing claims are verified, it is promoted into a knowledge base in
+readouts-internal, and reaches the public readouts only via the `PUBLIC_KBS`
+allow-list in readouts' `shared/export_public.py`. Promotion goes through the
+readouts build (study-swarm), never by copying entries across.
+
 ## Instruments
 
 A studio tool that research can use gets a file in `instruments/` with

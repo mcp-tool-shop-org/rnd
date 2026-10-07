@@ -1,0 +1,625 @@
+{
+  "authorship": {
+    "parts": [],
+    "places": []
+  },
+  "boundaries": [
+    {
+      "breakage": {
+        "coChangesOnly": [],
+        "collapsed": false,
+        "confidence": "low",
+        "importsAndCoChanges": [],
+        "importsOnly": []
+      },
+      "cohesion": null,
+      "cohesionDropped": false,
+      "confidence": "low",
+      "highWater": null,
+      "name": ".claude",
+      "qualifyingSourceCommits": 0,
+      "rebaseline": null
+    },
+    {
+      "breakage": {
+        "coChangesOnly": [],
+        "collapsed": false,
+        "confidence": "low",
+        "importsAndCoChanges": [],
+        "importsOnly": []
+      },
+      "cohesion": null,
+      "cohesionDropped": false,
+      "confidence": "low",
+      "highWater": null,
+      "name": ".github",
+      "qualifyingSourceCommits": 0,
+      "rebaseline": null
+    },
+    {
+      "breakage": {
+        "coChangesOnly": [],
+        "collapsed": false,
+        "confidence": "low",
+        "importsAndCoChanges": [],
+        "importsOnly": []
+      },
+      "cohesion": null,
+      "cohesionDropped": false,
+      "confidence": "low",
+      "highWater": null,
+      "name": "catalogs",
+      "qualifyingSourceCommits": 0,
+      "rebaseline": null
+    },
+    {
+      "breakage": {
+        "coChangesOnly": [],
+        "collapsed": false,
+        "confidence": "low",
+        "importsAndCoChanges": [],
+        "importsOnly": []
+      },
+      "cohesion": null,
+      "cohesionDropped": false,
+      "confidence": "low",
+      "highWater": null,
+      "name": "docs",
+      "qualifyingSourceCommits": 0,
+      "rebaseline": null
+    },
+    {
+      "breakage": {
+        "coChangesOnly": [],
+        "collapsed": false,
+        "confidence": "low",
+        "importsAndCoChanges": [],
+        "importsOnly": []
+      },
+      "cohesion": null,
+      "cohesionDropped": false,
+      "confidence": "low",
+      "highWater": null,
+      "name": "entries",
+      "qualifyingSourceCommits": 0,
+      "rebaseline": null
+    },
+    {
+      "breakage": {
+        "coChangesOnly": [],
+        "collapsed": false,
+        "confidence": "low",
+        "importsAndCoChanges": [],
+        "importsOnly": []
+      },
+      "cohesion": null,
+      "cohesionDropped": false,
+      "confidence": "low",
+      "highWater": null,
+      "name": "experiments",
+      "qualifyingSourceCommits": 2,
+      "rebaseline": null
+    },
+    {
+      "breakage": {
+        "coChangesOnly": [],
+        "collapsed": false,
+        "confidence": "low",
+        "importsAndCoChanges": [],
+        "importsOnly": []
+      },
+      "cohesion": null,
+      "cohesionDropped": false,
+      "confidence": "low",
+      "highWater": null,
+      "name": "instruments",
+      "qualifyingSourceCommits": 0,
+      "rebaseline": null
+    },
+    {
+      "breakage": {
+        "coChangesOnly": [],
+        "collapsed": false,
+        "confidence": "low",
+        "importsAndCoChanges": [],
+        "importsOnly": [
+          "tests"
+        ]
+      },
+      "cohesion": null,
+      "cohesionDropped": false,
+      "confidence": "low",
+      "highWater": null,
+      "name": "rnd",
+      "qualifyingSourceCommits": 1,
+      "rebaseline": null
+    },
+    {
+      "breakage": {
+        "coChangesOnly": [],
+        "collapsed": false,
+        "confidence": "low",
+        "importsAndCoChanges": [],
+        "importsOnly": []
+      },
+      "cohesion": null,
+      "cohesionDropped": false,
+      "confidence": "low",
+      "highWater": null,
+      "name": "root",
+      "qualifyingSourceCommits": 0,
+      "rebaseline": null
+    },
+    {
+      "breakage": {
+        "coChangesOnly": [],
+        "collapsed": false,
+        "confidence": "low",
+        "importsAndCoChanges": [],
+        "importsOnly": []
+      },
+      "cohesion": null,
+      "cohesionDropped": false,
+      "confidence": "low",
+      "highWater": null,
+      "name": "site",
+      "qualifyingSourceCommits": 0,
+      "rebaseline": null
+    },
+    {
+      "breakage": {
+        "coChangesOnly": [],
+        "collapsed": false,
+        "confidence": "low",
+        "importsAndCoChanges": [],
+        "importsOnly": []
+      },
+      "cohesion": null,
+      "cohesionDropped": false,
+      "confidence": "low",
+      "highWater": null,
+      "name": "tests",
+      "qualifyingSourceCommits": 1,
+      "rebaseline": null
+    }
+  ],
+  "churn": {
+    "definition": "commits is how many commits in the window touch the file, including merges and commits dropped from coupling. lines is added plus deleted in those commits.",
+    "files": [
+      {
+        "commits": 2,
+        "lines": 49,
+        "path": ".claude/CLAUDE.md"
+      },
+      {
+        "commits": 1,
+        "lines": 2,
+        "path": ".gitattributes"
+      },
+      {
+        "commits": 1,
+        "lines": 6,
+        "path": ".gitignore"
+      },
+      {
+        "commits": 1,
+        "lines": 21,
+        "path": "LICENSE"
+      },
+      {
+        "commits": 2,
+        "lines": 100,
+        "path": "README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 16,
+        "path": "catalogs/nvidia-skills/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 4877,
+        "path": "catalogs/nvidia-skills/catalog.json"
+      },
+      {
+        "commits": 1,
+        "lines": 79,
+        "path": "catalogs/nvidia-skills/review.json"
+      },
+      {
+        "commits": 1,
+        "lines": 16,
+        "path": "catalogs/nvidia-skills/source.json"
+      },
+      {
+        "commits": 1,
+        "lines": 22,
+        "path": "docs/standards.md"
+      },
+      {
+        "commits": 1,
+        "lines": 52,
+        "path": "entries/2026/2026-10-07-audio-text-embedding-models.md"
+      },
+      {
+        "commits": 1,
+        "lines": 81,
+        "path": "entries/2026/2026-10-07-calibrating-probabilistic-decision-layers.md"
+      },
+      {
+        "commits": 1,
+        "lines": 36,
+        "path": "entries/2026/2026-10-07-cccl-3-4.md"
+      },
+      {
+        "commits": 1,
+        "lines": 37,
+        "path": "entries/2026/2026-10-07-cublas.md"
+      },
+      {
+        "commits": 1,
+        "lines": 39,
+        "path": "entries/2026/2026-10-07-cuda-13-4-developer-experience.md"
+      },
+      {
+        "commits": 1,
+        "lines": 30,
+        "path": "entries/2026/2026-10-07-cuda-13-4-livestream.md"
+      },
+      {
+        "commits": 1,
+        "lines": 44,
+        "path": "entries/2026/2026-10-07-cuda-13-4-release.md"
+      },
+      {
+        "commits": 4,
+        "lines": 76,
+        "path": "entries/2026/2026-10-07-cuda-13-on-rented-pods.md"
+      },
+      {
+        "commits": 1,
+        "lines": 38,
+        "path": "entries/2026/2026-10-07-cuda-compute-fabric-transport.md"
+      },
+      {
+        "commits": 1,
+        "lines": 38,
+        "path": "entries/2026/2026-10-07-cuda-graphs.md"
+      },
+      {
+        "commits": 1,
+        "lines": 42,
+        "path": "entries/2026/2026-10-07-cuda-python-ecosystem.md"
+      },
+      {
+        "commits": 1,
+        "lines": 36,
+        "path": "entries/2026/2026-10-07-cuda-tile-programming.md"
+      },
+      {
+        "commits": 1,
+        "lines": 30,
+        "path": "entries/2026/2026-10-07-cutile-on-sm120.md"
+      },
+      {
+        "commits": 2,
+        "lines": 86,
+        "path": "entries/2026/2026-10-07-decision-ai-jam-sessions-cuda-13-4.md"
+      },
+      {
+        "commits": 1,
+        "lines": 37,
+        "path": "entries/2026/2026-10-07-decision-si-jam-sessions-cuda-13-4.md"
+      },
+      {
+        "commits": 1,
+        "lines": 47,
+        "path": "entries/2026/2026-10-07-hf-hub-download-slow-on-windows.md"
+      },
+      {
+        "commits": 2,
+        "lines": 143,
+        "path": "entries/2026/2026-10-07-join-artefact-detection.md"
+      },
+      {
+        "commits": 1,
+        "lines": 34,
+        "path": "entries/2026/2026-10-07-locality-aware-programming.md"
+      },
+      {
+        "commits": 1,
+        "lines": 32,
+        "path": "entries/2026/2026-10-07-nsight-copilot.md"
+      },
+      {
+        "commits": 2,
+        "lines": 39,
+        "path": "entries/2026/2026-10-07-nvidia-agent-skills-catalog.md"
+      },
+      {
+        "commits": 1,
+        "lines": 42,
+        "path": "entries/2026/2026-10-07-nvidia-rubin-architecture.md"
+      },
+      {
+        "commits": 2,
+        "lines": 117,
+        "path": "entries/2026/2026-10-07-openjev-and-open-jev-alternatives.md"
+      },
+      {
+        "commits": 2,
+        "lines": 69,
+        "path": "entries/2026/2026-10-07-pod-host-checks-driver-and-download.md"
+      },
+      {
+        "commits": 1,
+        "lines": 35,
+        "path": "entries/2026/2026-10-07-ptx-isa-9-4.md"
+      },
+      {
+        "commits": 1,
+        "lines": 60,
+        "path": "entries/2026/2026-10-07-qwen32b-judge-position-bias.md"
+      },
+      {
+        "commits": 3,
+        "lines": 54,
+        "path": "entries/2026/2026-10-07-robot-rig-cuda-stack.md"
+      },
+      {
+        "commits": 2,
+        "lines": 94,
+        "path": "entries/2026/2026-10-07-sft-before-aspire-weakens-critic.md"
+      },
+      {
+        "commits": 3,
+        "lines": 153,
+        "path": "entries/2026/2026-10-07-singing-pitch-trackers.md"
+      },
+      {
+        "commits": 1,
+        "lines": 66,
+        "path": "entries/2026/2026-10-07-singing-quality-assessment.md"
+      },
+      {
+        "commits": 1,
+        "lines": 131,
+        "path": "entries/2026/2026-10-07-single-rater-labels-and-ai-listener.md"
+      },
+      {
+        "commits": 2,
+        "lines": 132,
+        "path": "entries/2026/2026-10-07-small-label-decision-learning.md"
+      },
+      {
+        "commits": 1,
+        "lines": 54,
+        "path": "entries/2026/2026-10-07-sung-intelligibility-metrics.md"
+      },
+      {
+        "commits": 1,
+        "lines": 42,
+        "path": "entries/2026/2026-10-07-uv-extra-index-priority-cpu-torch.md"
+      },
+      {
+        "commits": 1,
+        "lines": 30,
+        "path": "entries/_template.md"
+      },
+      {
+        "commits": 2,
+        "lines": 100,
+        "path": "experiments/openjev-vs-jev/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 50,
+        "path": "experiments/openjev-vs-jev/build_requests.py"
+      },
+      {
+        "commits": 2,
+        "lines": 95,
+        "path": "experiments/openjev-vs-jev/compare.py"
+      },
+      {
+        "commits": 1,
+        "lines": 103,
+        "path": "experiments/openjev-vs-jev/results/compare.json"
+      },
+      {
+        "commits": 1,
+        "lines": 27,
+        "path": "experiments/openjev-vs-jev/results/determinism.json"
+      },
+      {
+        "commits": 1,
+        "lines": 124,
+        "path": "experiments/openjev-vs-jev/results/openjev.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 54,
+        "path": "experiments/openjev-vs-jev/run_openjev.py"
+      },
+      {
+        "commits": 1,
+        "lines": 31,
+        "path": "instruments/aspire-sft-experiment.md"
+      },
+      {
+        "commits": 1,
+        "lines": 26,
+        "path": "instruments/aspire-si.md"
+      },
+      {
+        "commits": 1,
+        "lines": 21,
+        "path": "instruments/cross-family-rerate.md"
+      },
+      {
+        "commits": 1,
+        "lines": 21,
+        "path": "instruments/engine-room.md"
+      },
+      {
+        "commits": 2,
+        "lines": 29,
+        "path": "instruments/nvidia-skill-finder.md"
+      },
+      {
+        "commits": 1,
+        "lines": 21,
+        "path": "instruments/offrig.md"
+      },
+      {
+        "commits": 1,
+        "lines": 21,
+        "path": "instruments/ollama-intern.md"
+      },
+      {
+        "commits": 1,
+        "lines": 21,
+        "path": "instruments/plain-sight.md"
+      },
+      {
+        "commits": 1,
+        "lines": 33,
+        "path": "instruments/readouts.md"
+      },
+      {
+        "commits": 1,
+        "lines": 21,
+        "path": "instruments/repo-knowledge.md"
+      },
+      {
+        "commits": 1,
+        "lines": 21,
+        "path": "instruments/research-os.md"
+      },
+      {
+        "commits": 1,
+        "lines": 21,
+        "path": "instruments/research-packs.md"
+      },
+      {
+        "commits": 1,
+        "lines": 21,
+        "path": "instruments/study-swarm.md"
+      },
+      {
+        "commits": 1,
+        "lines": 21,
+        "path": "instruments/web-research.md"
+      },
+      {
+        "commits": 1,
+        "lines": 5,
+        "path": "rnd.cmd"
+      },
+      {
+        "commits": 1,
+        "lines": 4,
+        "path": "rnd.sh"
+      },
+      {
+        "commits": 1,
+        "lines": 3,
+        "path": "rnd/__init__.py"
+      },
+      {
+        "commits": 1,
+        "lines": 5,
+        "path": "rnd/__main__.py"
+      },
+      {
+        "commits": 1,
+        "lines": 169,
+        "path": "rnd/catalog.py"
+      },
+      {
+        "commits": 2,
+        "lines": 400,
+        "path": "rnd/cli.py"
+      },
+      {
+        "commits": 1,
+        "lines": 196,
+        "path": "rnd/frontmatter.py"
+      },
+      {
+        "commits": 1,
+        "lines": 227,
+        "path": "rnd/model.py"
+      },
+      {
+        "commits": 1,
+        "lines": 82,
+        "path": "rnd/readouts.py"
+      },
+      {
+        "commits": 1,
+        "lines": 164,
+        "path": "rnd/store.py"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "tests/__init__.py"
+      },
+      {
+        "commits": 2,
+        "lines": 255,
+        "path": "tests/test_rnd.py"
+      }
+    ]
+  },
+  "confidence": {
+    "level": "low",
+    "reason": "fewer than 30 qualifying commits in the window, and fewer than 20 source files reach 10 revisions"
+  },
+  "generatedAt": "2026-10-07T21:11:07.618Z",
+  "generatedFrom": {
+    "commit": "b1705b429c5b0981cffe7dbf566b001f582b3c61"
+  },
+  "pairs": [],
+  "parameters": {
+    "appliedChangesetLimit": 28.25,
+    "changeset": 50,
+    "changesetFraction": 0.25,
+    "cohesionDrop": 0.2,
+    "couplingPopulation": "source",
+    "fallenShared": 3,
+    "floor": "fallen",
+    "floorHeld": false,
+    "floorTrigger": "both",
+    "headDate": "2026-10-07T17:00:11-04:00",
+    "inScopeFiles": 113,
+    "pinnedStart": null,
+    "priorFloor": null,
+    "qualifyingCommits": 13,
+    "qualifyingMinimum": 30,
+    "revisions": 5,
+    "shared": 10,
+    "sharedFloorUsed": 3,
+    "since": "2026-04-10T21:00:11.000Z",
+    "sourceExtensions": [
+      ".js",
+      ".mjs",
+      ".cjs",
+      ".jsx",
+      ".ts",
+      ".tsx",
+      ".mts",
+      ".cts",
+      ".py",
+      ".rs",
+      ".gd"
+    ],
+    "sourceFileReach": 20,
+    "sourceFileRise": 25,
+    "sourceFilesReachingStrongFloor": 0,
+    "strength": 0.5,
+    "windowDays": 180
+  },
+  "strengthDefinition": "strength is the shared qualifying commits divided by either. either is the number of qualifying commits that touch either file."
+}

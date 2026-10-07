@@ -251,3 +251,30 @@ class CatalogTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CliTests(unittest.TestCase):
+    def test_version_flag(self):
+        import contextlib
+        import io
+
+        from rnd import __version__, cli
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out), self.assertRaises(SystemExit) as ctx:
+            cli.main(["--version"])
+        self.assertEqual(ctx.exception.code, 0)
+        self.assertIn(__version__, out.getvalue())
+
+    def test_unexpected_error_is_structured_without_debug(self):
+        import contextlib
+        import io
+        from unittest import mock
+
+        from rnd import cli
+        err = io.StringIO()
+        with mock.patch.object(cli, "cmd_stats", side_effect=RuntimeError("boom")):
+            with contextlib.redirect_stderr(err):
+                code = cli.main(["stats"])
+        self.assertEqual(code, 3)
+        self.assertIn("error: INTERNAL: RuntimeError: boom", err.getvalue())
+        self.assertNotIn("Traceback", err.getvalue())

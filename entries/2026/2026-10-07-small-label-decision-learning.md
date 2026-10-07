@@ -92,6 +92,14 @@ came from. Two features reverse sign once you look within a mix: F0 step at join
 
 Per-mix n is 16–20, so within-mix results are leads.
 
+**Status (2026-10-07):**
+- PR #88 is merged (`04a1f6c`), so `phrase-evidence.json` is now official in all seven
+  mix folders. It is being added as an evidence family under leave-one-mix-out CV.
+- A shallow-tree result (Brier 0.162, PR 10) used repeated stratified CV, so it stays
+  unclaimed until it is rerun grouped by mix.
+- The decision model is not the bottleneck: local OpenJev and hosted Jev both sit at
+  the base rate on this question ([[2026-10-07-openjev-and-open-jev-alternatives]]).
+
 The listener's own consistency sets the ceiling for any model; see
 [[2026-10-07-single-rater-labels-and-ai-listener]]. The missing evidence family
 is covered in [[2026-10-07-join-artefact-detection]]. Calibration method is in

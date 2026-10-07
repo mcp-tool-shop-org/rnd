@@ -1,6 +1,7 @@
 """rnd — the R&D seat's command line.
 
-Exit codes: 0 ok · 1 validation errors · 2 usage / not found · 3 external tool failure.
+Exit codes: 0 ok · 1 invalid library files · 2 usage or not found ·
+3 runtime failure (an external tool, or an unexpected error; --debug shows the traceback).
 """
 
 import argparse
@@ -8,10 +9,11 @@ import json
 import re
 import sqlite3
 import sys
+import traceback
 from datetime import date
 from pathlib import Path
 
-from . import catalog, model, readouts, store
+from . import __version__, catalog, model, readouts, store
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -312,7 +314,7 @@ def cmd_sql(args):
     try:
         cur = con.execute(args.query)
     except sqlite3.Error as exc:
-        return fail("SQL_ERROR", str(exc), "the index is read-only; see docs/schema.md for tables")
+        return fail("SQL_ERROR", str(exc), "the index is read-only; list its tables with: rnd sql \"SELECT name FROM sqlite_master WHERE type='table'\"")
     cols = [c[0] for c in cur.description or []]
     rows = [dict(zip(cols, r)) for r in cur.fetchall()]
     emit(args, rows, lambda rs: [print(" | ".join(str(v) for v in r.values())) for r in rs])
@@ -324,6 +326,8 @@ def cmd_sql(args):
 def build_parser():
     p = argparse.ArgumentParser(prog="rnd", description="Search and grow the studio R&D library.")
     p.add_argument("--db", help="index path (default: rnd.db in the repo, or $RND_DB)")
+    p.add_argument("--debug", action="store_true", help="show the full traceback on an unexpected error")
+    p.add_argument("--version", action="version", version=f"rnd {__version__}")
     sub = p.add_subparsers(dest="cmd", required=True)
 
     def add(name, fn, help_text, json_flag=True):
@@ -395,4 +399,12 @@ def main(argv=None):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")
     args = build_parser().parse_args(argv)
-    return args.fn(args) or 0
+    try:
+        return args.fn(args) or 0
+    except KeyboardInterrupt:
+        return fail("INTERRUPTED", "stopped by the user", exit_code=3)
+    except Exception as exc:  # last resort: a structured error, never a raw stack by default
+        if args.debug:
+            traceback.print_exc()
+        return fail("INTERNAL", f"{type(exc).__name__}: {exc}",
+                    "rerun with --debug for the traceback, and report it if it persists", 3)

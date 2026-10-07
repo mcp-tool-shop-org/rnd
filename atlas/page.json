@@ -1,0 +1,206 @@
+{
+  "authored": [
+    ".claude/",
+    ".github/",
+    "catalogs/",
+    "docs/",
+    "site/"
+  ],
+  "breaks": [
+    {
+      "doors": 1,
+      "importedBy": [],
+      "importedByTests": [
+        "tests"
+      ],
+      "kind": "part",
+      "name": "rnd",
+      "partLabel": "rnd"
+    }
+  ],
+  "changes": {
+    "first": true
+  },
+  "changesTogether": [],
+  "changesTogetherNote": [
+    "Window: 180 days; a pair counts from 3 shared commits, since the window holds fewer than 30 qualifying commits."
+  ],
+  "changesTogetherWithTests": 0,
+  "commit": "b1705b429c5b0981cffe7dbf566b001f582b3c61",
+  "defaultBranch": "main",
+  "derived": "11 parts, mostly Markdown (70 files); code in Python (13), CSS (2), TypeScript (2), shell (2), Astro (1) and JavaScript (1). Work enters through 2 doors; the busiest is CI, which reaches 3 parts. It deploys a site to GitHub Pages.",
+  "doors": [
+    {
+      "checks": [],
+      "checksCount": 0,
+      "checksMore": 0,
+      "file": ".github/workflows/ci.yml",
+      "id": ".github/workflows/ci.yml",
+      "landings": [
+        "entries/",
+        "instruments/"
+      ],
+      "name": "CI",
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "root",
+          "depth": 0,
+          "files": 1
+        },
+        {
+          "boundary": "tests",
+          "depth": 0,
+          "files": 2
+        },
+        {
+          "boundary": "rnd",
+          "depth": 1,
+          "files": 7
+        }
+      ],
+      "runs": [
+        "verify.sh",
+        "tests/"
+      ],
+      "runsCount": 2,
+      "runsMore": 0,
+      "sends": [
+        "uploads coverage to Codecov"
+      ],
+      "stages": [],
+      "triggers": [
+        "on a pull request to main",
+        "on a push to main touching 8 paths",
+        "or by hand"
+      ]
+    },
+    {
+      "checks": [],
+      "checksCount": 0,
+      "checksMore": 0,
+      "file": ".github/workflows/pages.yml",
+      "id": ".github/workflows/pages.yml",
+      "landings": [],
+      "name": "Deploy site to GitHub Pages",
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "site",
+          "depth": 0,
+          "files": 5
+        }
+      ],
+      "runs": [
+        "site/astro.config.mjs",
+        "site/src/"
+      ],
+      "runsCount": 2,
+      "runsMore": 0,
+      "sends": [
+        "deploys the site"
+      ],
+      "stages": [],
+      "triggers": [
+        "on a push to main touching 2 paths",
+        "or by hand"
+      ]
+    }
+  ],
+  "duplicates": [],
+  "duplicatesLead": null,
+  "duplicatesNote": [],
+  "edges": [],
+  "engine": "1.24.0",
+  "generated": [
+    {
+      "place": "entries/",
+      "sources": [
+        "entries/_template.md"
+      ],
+      "writers": [
+        "rnd/cli.py"
+      ]
+    },
+    {
+      "place": "instruments/",
+      "writers": [
+        "rnd/cli.py"
+      ]
+    }
+  ],
+  "generatedAt": "2026-10-07T21:11:07.618Z",
+  "limits": [
+    "3 writes and 2 reads use paths built at run time and are not named here.",
+    "5 writes and 8 reads go to a path their caller passes, not to this repository.",
+    "Statistics confidence is low: fewer than 30 qualifying commits in the window, and fewer than 20 source files reach 10 revisions."
+  ],
+  "mainDoor": ".github/workflows/ci.yml",
+  "partLabels": {
+    ".claude": ".claude",
+    ".github": ".github",
+    "catalogs": "catalogs",
+    "docs": "docs",
+    "entries": "entries",
+    "experiments": "experiments",
+    "instruments": "instruments",
+    "rnd": "rnd",
+    "root": "the repository root",
+    "site": "site",
+    "tests": "tests"
+  },
+  "parts": 11,
+  "readers": [
+    {
+      "readers": [
+        "tests/test_rnd.py (from tests)"
+      ],
+      "target": "entries/"
+    },
+    {
+      "readers": [],
+      "target": "instruments/"
+    }
+  ],
+  "repo": "mcp-tool-shop-org/rnd",
+  "sequences": [],
+  "startDoor": ".github/workflows/ci.yml",
+  "startHere": [
+    ".github/workflows/ci.yml",
+    "rnd/catalog.py",
+    "rnd/frontmatter.py"
+  ],
+  "summary": "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only).",
+  "summaryFrom": "person",
+  "testFiles": 2,
+  "testedBy": {
+    "experiments": 0,
+    "rnd": 1
+  },
+  "unnamedWrites": 3,
+  "unread": [
+    {
+      "place": "instruments/",
+      "writers": [
+        "rnd/cli.py"
+      ]
+    }
+  ],
+  "unreadCode": [
+    "root"
+  ],
+  "unreadCodeUses": "the repository root holds only shell files, which this map does not read, so what uses it cannot be seen.",
+  "unreadFiles": 0,
+  "unreadNote": [],
+  "untested": [
+    {
+      "part": "experiments",
+      "partLabel": "experiments",
+      "testedBy": 0
+    }
+  ],
+  "untestedNote": [
+    "the repository root holds only shell files, which this map does not read, so whether a test touches it cannot be seen."
+  ],
+  "written": 2
+}

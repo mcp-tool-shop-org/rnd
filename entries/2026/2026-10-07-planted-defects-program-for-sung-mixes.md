@@ -310,6 +310,31 @@ it is the baseline the loop must move.
   minutes a session). Plus one 40-judgement audibility pass, about 15 minutes, when
   the detector first exceeds his threshold and the line has to be set.
 
+### Cost if run on RunPod instead of the 5090
+
+Live RunPod secure-cloud prices via offrig, 2026-10-07, per GPU-hour:
+- RTX 4090 24 GB: $0.74 (stock high)
+- A40 48 GB: $0.49 (stock low)
+- RTX PRO 4500 32 GB: $0.72
+- A100 80 GB: $1.59
+- RTX PRO 6000 96 GB: $2.09
+
+Every option adds about 0.5 h for setup and downloads.
+
+| scope | option | hours | cost |
+|---|---|---|---|
+| Step B | A40 for everything (Qwen3-Omni in 4-bit) | 5–7 | $2.50–3.50 |
+| Step B | 4090 for MERT/heads, plus A100 for Qwen3-Omni in bf16 | 4–5 + 1.5–2.5 | $5–7.50 |
+| Step B | RTX PRO 6000 for everything (bf16) | 5–7 | $10.50–14.50 |
+| First full program | A40/4090 class | 10–25 | $5–18.50 |
+| First full program | plus bf16 Qwen3-Omni phases on an A100 | — | add about $5–10, so $10–30 in total |
+| Locally on the 5090 | electricity only | 10–25 | about $2–3 (575 W, ~$0.17/kWh, estimated) |
+
+Pod risks from [[2026-10-07-pod-host-checks-driver-and-download]] apply: gate each
+host on its driver and download speed before downloading. The only thing RunPod
+buys here is bf16 Qwen3-Omni (about 70–79 GB) or parallel runs. The detector work
+fits the 5090.
+
 ## Claims
 
 - [unverified] PAIRED's regret objective (antagonist return minus protagonist return) gives zero reward for unsolvable levels, unlike a minimax adversary (Dennis et al. 2020).

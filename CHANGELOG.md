@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.3] - 2026-10-07
+
+- Planted-defects program: RunPod cost estimate from live offrig prices (Step B $2.50–14.50; first full program $5–30) against about $2–3 of electricity on the local 5090
+- Updated `2026-10-07-planted-defects-program-for-sung-mixes`: Planted defects for sung mixes — an automated planter-versus-detector loop, anchored by the listener's measured threshold
+
 ## [1.1.1.0.2] - 2026-10-07
 
 - Planted-defects program: adopted by ai-jam-sessions; calibrated review tracked as ai-jam-sessions #89

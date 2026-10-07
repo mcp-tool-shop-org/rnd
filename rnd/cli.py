@@ -11,7 +11,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from . import catalog, model, store
+from . import catalog, model, readouts, store
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -274,6 +274,39 @@ def cmd_catalog(args):
     return 0
 
 
+def cmd_readouts(args):
+    root = readouts.root_dir(args.root)
+    try:
+        if args.list or not args.query:
+            kbs = readouts.knowledge_bases(root)
+
+            def text(rows):
+                for k in rows:
+                    print(f"{k.get('entries', ''):>5} {k.get('noun', ''):<12} {k['name']:<26} {(k.get('what') or '')[:80]}")
+                print(f"{len(rows)} knowledge bases in {root.as_posix()}")
+            emit(args, kbs, text)
+            return 0
+        rows, problems = readouts.search(root, " ".join(args.query), limit=args.limit, kb=args.kb,
+                                         any_word=args.any)
+    except readouts.ReadoutsError as exc:
+        return fail(exc.code, str(exc), exc.hint)
+    for p in problems:
+        print(f"warning: {p}", file=sys.stderr)
+
+    def text(rs):
+        current = None
+        for r in rs:
+            if r["kb"] != current:
+                current = r["kb"]
+                print(f"{current} ({r['noun']})")
+            print(f"  {r['slug']}  {r['name']}")
+            print(f"      {r['snip']}")
+        if not rs:
+            print("no matches")
+    emit(args, rows, text)
+    return 0
+
+
 def cmd_sql(args):
     con = open_db(args)
     try:
@@ -342,6 +375,15 @@ def build_parser():
     s.add_argument("--fit", choices=catalog.FITS)
     s.add_argument("--family")
     s.add_argument("--lane", help="e.g. 'GPU Development' (see `rnd catalog lanes`)")
+
+    s = add("readouts", cmd_readouts,
+            "search the readouts knowledge bases (read-only; $RND_READOUTS or E:/AI/readouts)")
+    s.add_argument("query", nargs="*")
+    s.add_argument("--kb", help="limit to one knowledge base, e.g. vocology-knowledge")
+    s.add_argument("--limit", type=int, default=5, help="results per knowledge base")
+    s.add_argument("--any", action="store_true", help="match any word instead of all of them")
+    s.add_argument("--list", action="store_true", help="list the knowledge bases")
+    s.add_argument("--root", help="readouts checkout (overrides $RND_READOUTS)")
 
     s = add("sql", cmd_sql, "run a read-only SQL query against the index")
     s.add_argument("query")

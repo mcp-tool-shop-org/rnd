@@ -7,7 +7,10 @@ SQLite index, driven by `python -m rnd`. Read README.md for the format.
 
 1. `python -m rnd search <words>` first. The library may already hold it, and
    the NVIDIA skills catalogue is mirrored here too.
-2. `python -m rnd tools` lists the instruments you can use (study-swarm,
+2. `python -m rnd readouts <words> [--any]` next: the readouts monorepo holds the
+   studio's verified knowledge bases (vocology, training, models, engines, …).
+   Tell research agents what it already covers so they target the gaps.
+3. `python -m rnd tools` lists the instruments you can use (study-swarm,
    research-os, repo-knowledge, ollama-intern, offrig, engine-room, …) with how
    to invoke each one.
 

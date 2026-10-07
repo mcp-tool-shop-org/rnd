@@ -22,6 +22,7 @@ python -m rnd catalog lanes               # NVIDIA skills by lane, with studio f
 python -m rnd catalog list --fit adjacent # skills worth using when the need arises
 python -m rnd new "Paper title" --kind paper --field audio --tag pitch
 python -m rnd check                       # validate every file (exit 1 on errors)
+python -m rnd readouts splice glitch --any  # search the readouts knowledge bases too
 python -m rnd sql "SELECT tier, count(*) FROM sources GROUP BY tier"
 ```
 
@@ -77,6 +78,8 @@ tags: [cuda-graphs, pytorch]
   research-os pack, with the pack linked from the entry.
 - **repo-knowledge** (`rk`) indexes the studio's own repos; this library covers
   knowledge from outside them.
+- **readouts** holds the studio's verified, study-swarm-built knowledge bases.
+  `rnd readouts` searches all of them read-only, so one command reaches both stores.
 - Findings gathered while designing something belong here too, so they outlive
   the design session that produced them.
 

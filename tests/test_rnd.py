@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from rnd import catalog, frontmatter, model, store
+from rnd import catalog, frontmatter, model, readouts, store
 
 ENTRY = """---
 id: 2026-01-02-sample
@@ -196,6 +196,49 @@ class StoreTests(unittest.TestCase):
         _, _, problems = catalog.load(self.cat)
         self.assertTrue(any("fit must be one of" in p for p in problems))
         self.assertTrue(any("'ghost' is not in the snapshot" in p for p in problems))
+
+
+class ReadoutsTests(unittest.TestCase):
+    def setUp(self):
+        self.root = Path(tempfile.mkdtemp())
+        kb = self.root / "vocology-knowledge"
+        kb.mkdir()
+        con = sqlite3.connect(kb / "findings.db")
+        con.execute("CREATE VIRTUAL TABLE findings_fts USING fts5(slug, name, claim)")
+        con.executemany("INSERT INTO findings_fts VALUES (?,?,?)", [
+            ("mushra", "ITU-R BS.1534 MUSHRA", "Post-screen listeners with a hidden reference."),
+            ("singmos", "SingMOS", "Singing MOS dataset for quality prediction."),
+        ])
+        con.commit()
+        con.close()
+        (self.root / "index.json").write_text(json.dumps({"knowledge_bases": [
+            {"name": "vocology-knowledge", "noun": "findings", "entries": 2,
+             "db": "vocology-knowledge/findings.db", "fts": "findings_fts"},
+            {"name": "ghost-knowledge", "db": "ghost/ghost.db", "fts": "x_fts"},
+        ]}), encoding="utf-8")
+
+    def tearDown(self):
+        shutil.rmtree(self.root)
+
+    def test_prefix_search_and_missing_kb(self):
+        rows, problems = readouts.search(self.root, "listener")  # prefix: matches "listeners"
+        self.assertEqual([r["slug"] for r in rows], ["mushra"])
+        self.assertIn("[listeners]", rows[0]["snip"])
+        self.assertTrue(any("ghost-knowledge" in p for p in problems))
+
+    def test_kb_filter_and_hostile_query(self):
+        rows, _ = readouts.search(self.root, 'MOS "quality" -( *', kb="vocology-knowledge")
+        self.assertEqual([r["slug"] for r in rows], ["singmos"])
+
+    def test_any_word_ors_the_terms(self):
+        self.assertEqual(readouts.search(self.root, "listener singing")[0], [])
+        rows, _ = readouts.search(self.root, "listener singing", any_word=True)
+        self.assertEqual(sorted(r["slug"] for r in rows), ["mushra", "singmos"])
+
+    def test_missing_root_is_a_structured_error(self):
+        with self.assertRaises(readouts.ReadoutsError) as ctx:
+            readouts.knowledge_bases(self.root / "nowhere")
+        self.assertEqual(ctx.exception.code, "READOUTS_MISSING")
 
 
 class CatalogTests(unittest.TestCase):

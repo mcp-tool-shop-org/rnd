@@ -26,7 +26,7 @@ Research entry: `2026-10-07-openjev-and-open-jev-alternatives`.
 
 ```powershell
 # 1. model server (GPU)
-E:\AI\llama.cpp\llama-server.exe -m E:\AI-Models\openjev\OpenJev-Q4_K_M.gguf -ngl 999 -c 16384 -np 2 --jinja --port 8000 --host 127.0.0.1
+E:\AI\llama.cpp\llama-server.exe -m E:\AI-Models\openjev\OpenJev-Q4_K_M.gguf -ngl 999 -c 16384 -np 2 --jinja --no-mmap --port 8000 --host 127.0.0.1
 
 # 2. decision helper, with the authors' documented settings (CPU)
 $env:VLLM='http://127.0.0.1:8000/v1'; $env:TOKENIZER='E:\AI-Models\openjev\tokenizer'
@@ -54,6 +54,41 @@ E:\AI\sense-si\.venv\Scripts\python.exe compare.py
   authors on their own boolean sets, not on singing records. sense-si's study code
   refits a temperature on its inner split, as it did for hosted Jev.
 
-## Results
+## Results (run 2026-10-07 on the Robot rig, RTX 5090)
 
-Not yet run: waiting for the Director's go on GPU use.
+124 phrases, 73 marked clean. A constant guess at the base rate scores Brier
+0.2421; a useful model must beat that. Receipts: `results/compare.json`,
+`results/openjev.jsonl`, `results/determinism.json`.
+
+| | hosted Jev 1.13 | local OpenJev Q4_K_M |
+|---|---|---|
+| Brier, raw [95% CI] | 0.334 [0.293, 0.371] | 0.256 [0.233, 0.280] |
+| Brier after sense-si's temperature fit | 0.252 | 0.251 |
+| AUC, pooled [95% CI] | 0.56 [0.46, 0.66] | 0.46 [0.35, 0.57] |
+| AUC, mean within mix (5 mixes) | 0.57 | 0.59 |
+| mean p(clean) | 0.28 | 0.59 |
+| sense-si decision layer | not adopted | not adopted |
+| cost per run | API spend | free, ~1.3 s per phrase (p90 1.7 s) |
+
+- **Neither model judges these phrases.** Both AUC intervals include 0.5, and after
+  temperature scaling both land at the base rate. sense-si's decision layer rejects
+  both on the same four grounds.
+- **OpenJev tracks hosted Jev.** Pearson r = 0.61 between their probabilities, but
+  OpenJev sits about 0.3 higher, so they fall on the same side of 0.5 only 15% of
+  the time. Raw Brier favours OpenJev only because its offset happens to sit
+  nearer this set's 59% clean rate.
+- **Deterministic:** five repeated phrases gave identical answers.
+- **No railed readouts:** OpenJev's answers ran 0.23 to 0.74, so the top-20 letter
+  readout never had to floor a letter.
+- Pooled AUC on this set mostly measures which mix a phrase came from (ai-jam-sessions
+  PR #88), which is why the within-mix column is there.
+
+**Verdict:** as a free local stand-in for hosted Jev on this question, OpenJev is
+adequate: it ranks phrases much as Jev does, at no API cost. But the question
+itself is beyond both models from this input, so swapping models does not rescue
+the phrase-clean judgement. The licence (CC BY-NC 4.0) limits OpenJev to research use.
+
+**Run notes:** this run served the model with memory mapping on (the command above
+now adds `--no-mmap`, since mapping kept about 9 GB of the file in system RAM). The
+chat template was the GGUF's own (`--jinja`); its rendering was not compared with
+the transformers template.

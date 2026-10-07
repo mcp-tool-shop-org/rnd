@@ -84,15 +84,30 @@ fits the 5090, and close benchmark parity.
 `autotrust/JEV-27B` has the friendlier weights licence, but its training-data
 provenance is the open question, and it needs custom quantisation to fit 32 GB.
 
+**Local test, 2026-10-07** (`experiments/openjev-vs-jev/`). The Q4_K_M GGUF was
+served by llama.cpp on the 5090 (about 19 GB VRAM, about 1.3 s per phrase,
+deterministic). It was asked sense-si's phrase-clean question on the same 124
+records as hosted Jev.
+
+- It tracks hosted Jev: r = 0.61, but it sits about 0.3 higher in probability.
+- Neither model beats the base rate once calibrated (Brier 0.251 vs 0.252
+  against 0.242), and both AUCs include 0.5.
+
+So gate 4 passes: GGUF serving works for research runs, which are now free. But
+the phrase-clean question needs better evidence, not a different model.
+
 ## Claims
 
 - [unverified] openjev/openjev scored 84.0% (model card) / 84.2% FP8 (Runpod) on its authors' 10,000-question benchmark against 85.4% for hosted Jev.
 - [unverified] autotrust/JEV-27B's six-benchmark mean is 84.07% against TypeSafe Jev 1.13's 83.85% (self-reported).
 - [unverified] Whether TypeSafe's terms permit training on Jev outputs is unresolved; their terms were not found in this search.
 - [unverified] AlexWortega/openjev v5 was trained on benchmark test splits, according to its own model card.
+- [verified] On sense-si's 124 phrases, local OpenJev Q4_K_M (llama.cpp, top-20 readout) correlated r = 0.61 with hosted Jev 1.13's p(clean); calibrated Brier was 0.251 vs Jev's 0.252 against a 0.242 base rate; pooled AUC 0.46 [0.35, 0.57] vs 0.56 [0.46, 0.66]. (via: experiments/openjev-vs-jev run on the Robot rig, scored with sense-si's run_study, 2026-10-07)
+- [verified] Served by llama.cpp with the authors' shim, OpenJev answered deterministically (5 repeats identical) at a median 1.3 s per ~4.8k-token request on an RTX 5090. (via: experiments/openjev-vs-jev/results/determinism.json, 2026-10-07)
 
 ## Sources
 
+- [rig] experiments/openjev-vs-jev, local run on the Robot rig, 2026-10-07
 - [primary] https://huggingface.co/openjev/openjev — OpenJev model card
 - [primary] https://www.runpod.io/blog/how-to-deploy-openjev-on-runpod-serverless — Runpod deploy guide
 - [primary] https://huggingface.co/autotrust/JEV-27B — AutoTrust AI Lab, JEV-27B model card

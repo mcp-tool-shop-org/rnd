@@ -1,0 +1,103 @@
+{
+ "n": 124,
+ "n_clean": 73,
+ "base_rate_brier": 0.2421,
+ "jev_hosted": {
+  "brier_raw": 0.3341,
+  "brier_raw_ci": [
+   0.2928,
+   0.3708
+  ],
+  "auc": 0.5607,
+  "auc_ci": [
+   0.4558,
+   0.6634
+  ],
+  "auc_within_mix_mean": 0.5697,
+  "auc_within_mix": {
+   "amazing-grace-new-britain/phrase16": 0.8,
+   "amazing-grace-new-britain/phrase16w": 0.4762,
+   "amazing-grace-new-britain/phrase16w2": 0.4206,
+   "america-the-beautiful-materna/phrase16w": 0.5476,
+   "america-the-beautiful-materna/phrase16w2": 0.6042
+  },
+  "mean_p": 0.2825,
+  "distinct_values": 28,
+  "sense_si_study": {
+   "brier_raw": 0.3303563218390805,
+   "brier_raw_low": 0.2824545114942529,
+   "brier_raw_high": 0.37595594827586215,
+   "brier_temperature": 0.2517951794774373,
+   "brier_temperature_low": 0.24930674817463078,
+   "brier_temperature_high": 0.2543821662685436,
+   "decision": {
+    "adopted": false,
+    "reasons": [
+     "no-interior-fraction",
+     "edge-width",
+     "selective-accuracy",
+     "selective-accuracy-interval"
+    ],
+    "low": null,
+    "high": null,
+    "keep": [
+     0.35,
+     0.65
+    ]
+   }
+  }
+ },
+ "openjev_local": {
+  "brier_raw": 0.2559,
+  "brier_raw_ci": [
+   0.233,
+   0.2803
+  ],
+  "auc": 0.4602,
+  "auc_ci": [
+   0.3521,
+   0.5654
+  ],
+  "auc_within_mix_mean": 0.5886,
+  "auc_within_mix": {
+   "amazing-grace-new-britain/phrase16": 0.9333,
+   "amazing-grace-new-britain/phrase16w": 0.3968,
+   "amazing-grace-new-britain/phrase16w2": 0.3333,
+   "america-the-beautiful-materna/phrase16w": 0.6548,
+   "america-the-beautiful-materna/phrase16w2": 0.625
+  },
+  "mean_p": 0.5936,
+  "distinct_values": 120,
+  "sense_si_study": {
+   "brier_raw": 0.2565722471264367,
+   "brier_raw_low": 0.22849599197988513,
+   "brier_raw_high": 0.28716926756034494,
+   "brier_temperature": 0.2514184404087858,
+   "brier_temperature_low": 0.24252119924637533,
+   "brier_temperature_high": 0.26208306864343267,
+   "decision": {
+    "adopted": false,
+    "reasons": [
+     "no-interior-fraction",
+     "edge-width",
+     "selective-accuracy",
+     "selective-accuracy-interval"
+    ],
+    "low": null,
+    "high": null,
+    "keep": [
+     0.35,
+     0.65
+    ]
+   }
+  }
+ },
+ "agreement": {
+  "pearson_p": 0.6088,
+  "same_side_of_0.5": 0.1532
+ },
+ "latency_s": {
+  "median": 1.295,
+  "p90": 1.735
+ }
+}

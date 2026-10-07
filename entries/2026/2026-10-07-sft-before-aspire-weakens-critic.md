@@ -94,6 +94,8 @@ marked `[wrong]` below.
 ## Sources
 
 - [rig] aspire-si training runs, seeds 42–44, on 2026-10-07, measured by session A
-- [primary] https://github.com/mcp-tool-shop-org/aspire-si/blob/main/docs/runs/2026-10-07-sft-then-aspire.md — run report
+- [primary] https://github.com/mcp-tool-shop-org/aspire-si/pull/30 — correction PR (docs; open at filing)
+- [primary] https://github.com/mcp-tool-shop-org/aspire-si/blob/main/docs/runs/2026-10-07-run-1-seeds.md — run 1 report, seeds 42–44 (on main once #30 merges)
+- [primary] https://github.com/mcp-tool-shop-org/aspire-si/blob/main/docs/runs/2026-10-07-sft-then-aspire.md — run report (seed 42; carries a correction note after #30)
 - [primary] https://github.com/mcp-tool-shop-org/aspire-si/blob/main/docs/runs/2026-10-07-runs-2-3.md — runs 2–3
 - [primary] https://github.com/mcp-tool-shop-org/aspire-si/blob/main/docs/runs/2026-10-07-next-runs-plan.md — next-runs plan

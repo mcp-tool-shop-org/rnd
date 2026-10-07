@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.8] - 2026-10-07
+
+- SFT-before-ASPIRE correction: aspire-si PR #30 and the run 1 report added as primary sources
+- Updated `2026-10-07-sft-before-aspire-weakens-critic`: SFT before ASPIRE has no reliable effect on the critic; run-to-run critic variance dominates (3 seeds)
+
 ## [1.1.1.0.7] - 2026-10-07
 
 - Correction: SFT before ASPIRE has no reliable effect on the critic (3 seeds, pre-registered rule); the earlier claim is marked wrong. Critic run-to-run variance (0.425–0.866) and a replicating ASPIRE drift direction against SFT are the findings that hold

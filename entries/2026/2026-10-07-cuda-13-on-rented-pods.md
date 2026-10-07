@@ -39,7 +39,9 @@ use torch with cu130, and rebuild CUDA extensions. The real speed levers for
 SoulX are elsewhere: batching or running several takes in parallel on one GPU
 (the model uses about 4 GB of a 48 GB A40), and a smaller, cheaper GPU class.
 (The Director's CUDA 13.4 ruling of 2026-10-07 is for si-jam-sessions, not this
-pipeline: [[2026-10-07-decision-si-jam-sessions-cuda-13-4]].) The Robot rig's
+pipeline: [[2026-10-07-decision-si-jam-sessions-cuda-13-4]].) Measured follow-up from aspire-si: `pip install vllm` 0.31 already pulls a cu130
+torch, and the driver varies per host, not per GPU type; see
+[[2026-10-07-pod-host-checks-driver-and-download]]. The Robot rig's
 driver (617.14) already clears 13.4's R615 floor
 ([[2026-10-07-robot-rig-cuda-stack]]).
 

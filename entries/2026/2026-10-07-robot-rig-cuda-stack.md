@@ -16,6 +16,9 @@ What the Robot rig (Omen 45L, RTX 5090) actually runs, measured on the machine.
 
 - GPU: NVIDIA GeForce RTX 5090, compute capability 12.0 (consumer Blackwell, sm_120), driver 617.14.
 - CUDA compiler: nvcc 13.4, V13.4.59.
+- `nvidia-smi` on driver 617.14 prints `CUDA UMD Version: 13.4`, not the older
+  `CUDA Version:`; scripts grepping for the old string find nothing
+  ([[2026-10-07-pod-host-checks-driver-and-download]]).
 - ComfyUI embedded Python: torch 2.12.0+cu130, arch list includes sm_120, so the GPU is fully supported.
 - Default `python` on PATH (3.10.11): torch 2.14.0+cpu, with **no CUDA**. Left as is on purpose.
 - **GPU Python (added 2026-10-07):** `python-gpu` (a launcher in `~/.local/bin`, on PATH)

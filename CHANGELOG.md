@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.1] - 2026-10-07
+
+- Planted-defects program for sung mixes: an automated planter-versus-detector loop with a regret reward, a MERT frame-level detector, and the Director's catch trials setting the audibility line (seven research agents' findings)
+- Added `2026-10-07-planted-defects-program-for-sung-mixes`: Planted defects for sung mixes — an automated planter-versus-detector loop, anchored by the listener's measured threshold
+
 ## [1.1.1.0.0] - 2026-10-07
 
 - Coverage bar raised to 90%: CI fails under 90% and Codecov's project and patch targets are 90%

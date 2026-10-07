@@ -1,21 +1,16 @@
 # rnd: how it works
 
-Mapped at 2026-10-07 from commit 485feea by Atlas 1.24.0.
+Mapped at 2026-10-07 from commit d4cce59 by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-11 parts, mostly Markdown (71 files) and JSON data (18); code in Python (18), shell (3), CSS (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 2 doors; the busiest is CI, which reaches 3 parts. It deploys a site to GitHub Pages.
+11 parts, mostly Markdown (72 files) and JSON data (18); code in Python (18), shell (3), CSS (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 2 doors; the busiest is CI, which reaches 3 parts. It deploys a site to GitHub Pages.
 
-## What changed since 2026-10-07 (cc7a041)
+## What changed since 2026-10-07 (485feea)
 
-- CI's push trigger now also names `.coveragerc` and `codecov.yml`.
-- CHANGELOG.md is now read by tests/test_cli.py.
-- README.md is now read by tests/test_cli.py.
-- entries/_template.md is now also read by tests/test_cli.py.
-- And 1 more new writer or reader of a place.
-- 3 files added and 4 changed content, across 4 parts.
+Nothing structural changed since 2026-10-07; 1 file added and 2 changed content.
 
 ## What comes in
 

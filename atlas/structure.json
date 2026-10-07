@@ -205,6 +205,10 @@
           "path": "entries/2026/2026-10-07-openjev-and-open-jev-alternatives.md"
         },
         {
+          "hash": "7d2b1eada85b173da8130f641de59fdfeed6f5945291f262fc32a7d7ba9037cb",
+          "path": "entries/2026/2026-10-07-planted-defects-program-for-sung-mixes.md"
+        },
+        {
           "hash": "d4d99059bfc8869e3d504fc58ec056ec43dff7669dcd83f4a02d0791e9f19370",
           "path": "entries/2026/2026-10-07-pod-host-checks-driver-and-download.md"
         },
@@ -505,7 +509,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "e52582365846992e468a9a02931bc6f40b4c4325f5b9780e83fdbdee0373999d",
+          "hash": "1110342b233dfe8560bf6eb97df534ba0ac36764003e6c92cb626bdaf11f74d1",
           "path": "rnd/__init__.py"
         },
         {
@@ -847,7 +851,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "94d3ce7ba52929151dd3bb1fb20b6e073420a9f91c0443011af513ca5fd279be",
+          "hash": "aa77a1746f3a7ead3bfc46e7ba5973510c9e24926af008451a94cdea5d6f6b5e",
           "path": "CHANGELOG.md"
         },
         {
@@ -1485,8 +1489,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "485feea4a776649cf178fd6e0e6fdfbb6a065899",
-    "tracked": 126
+    "commit": "d4cce59137c9b5e89a05871019064cac82adca92",
+    "tracked": 127
   },
   "landings": [
     {

@@ -31,69 +31,33 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 3,
-      "changed": 4,
+      "added": 1,
+      "changed": 2,
       "moved": 0,
-      "parts": 4,
+      "parts": 3,
       "removed": 0
     },
     "items": [
       {
-        "kind": "door",
-        "sentence": "CI's push trigger now also names `.coveragerc` and `codecov.yml`.",
-        "subjects": [
-          ".github/workflows/ci.yml"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "CHANGELOG.md is now read by tests/test_cli.py.",
-        "subjects": [
-          "CHANGELOG.md",
-          "tests/test_cli.py"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "README.md is now read by tests/test_cli.py.",
-        "subjects": [
-          "README.md",
-          "tests/test_cli.py"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "entries/_template.md is now also read by tests/test_cli.py.",
-        "subjects": [
-          "entries/_template.md",
-          "tests/test_cli.py"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "And 1 more new writer or reader of a place.",
-        "subjects": []
-      },
-      {
         "kind": "counts",
-        "sentence": "3 files added and 4 changed content, across 4 parts.",
+        "sentence": "Nothing structural changed since 2026-10-07; 1 file added and 2 changed content.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "cc7a041244821dc01bd9ac2ca62f9fb62e51a00d",
-      "generatedAt": "2026-10-07T21:55:09.964Z"
+      "commit": "485feea4a776649cf178fd6e0e6fdfbb6a065899",
+      "generatedAt": "2026-10-07T22:30:18.214Z"
     },
-    "unchanged": false
+    "unchanged": true
   },
   "changesTogether": [],
   "changesTogetherNote": [
     "Window: 180 days; a pair counts from 3 shared commits, since the window holds fewer than 30 qualifying commits."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "485feea4a776649cf178fd6e0e6fdfbb6a065899",
+  "commit": "d4cce59137c9b5e89a05871019064cac82adca92",
   "defaultBranch": "main",
-  "derived": "11 parts, mostly Markdown (71 files) and JSON data (18); code in Python (18), shell (3), CSS (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 2 doors; the busiest is CI, which reaches 3 parts. It deploys a site to GitHub Pages.",
+  "derived": "11 parts, mostly Markdown (72 files) and JSON data (18); code in Python (18), shell (3), CSS (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 2 doors; the busiest is CI, which reaches 3 parts. It deploys a site to GitHub Pages.",
   "doors": [
     {
       "checks": [],
@@ -194,7 +158,7 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-07T22:30:18.214Z",
+  "generatedAt": "2026-10-07T22:53:23.733Z",
   "limits": [
     "3 writes and 3 reads use paths built at run time and are not named here.",
     "8 writes and 16 reads go to a path their caller passes, not to this repository.",

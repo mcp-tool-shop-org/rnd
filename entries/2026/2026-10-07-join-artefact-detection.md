@@ -69,8 +69,10 @@ positions in the same take.
    (about 5–15 ms) either side, normalised by the take's typical frame-to-frame
    distance. It is the only listener-validated measure; expect it to catch a
    third to a half of bad joins.
-2. **Repeat/skip test.** A log-mel cross-similarity matrix between the 0.5–2 s
-   before and after the join: an off-diagonal ridge means a repeat, a displaced
+2. **Repeat/skip test.** A cross-similarity matrix between the 0.5–2 s before
+   and after the join, built on **delta** log-mel (frame-to-frame change), not
+   the spectra themselves; held vowels make plain log-mel self-similar (see the
+   measured note below). An off-diagonal ridge means a repeat, a displaced
    diagonal means a skip. Back it with forced-alignment deletions per join.
    This targets the main defect, but it is unvalidated.
 3. **Boundary click/noise.** Within ±10 ms of the join, find the peak energy
@@ -81,6 +83,32 @@ positions in the same take.
    or a voiced/unvoiced flip within ±20 ms. This is cheap and reuses the FCPE
    track ([[2026-10-07-singing-pitch-trackers]]).
 
+**Measured on the studio's own takes** (ai-jam-sessions PR #88,
+`scripts/phrase_evidence.py`, 2026-10-07; 124 phrases from 7 reviewed mixes, 51
+marked, labels from mark windows [t − 1.0, t + 0.2]):
+
+- **Correction to feature 2.** Log-mel cross-similarity on the spectra themselves
+  fails on singing. A held vowel is self-similar, so plain synthetic singing
+  scored 0.90 against 0.98 with a planted repeat. Correlating frame-to-frame
+  spectral *change* (delta log-mel) separates them, and the planted-repeat test
+  passes. Use delta log-mel.
+- **Univariate AUC, pooled vs mean within a mix:**
+
+  | feature | pooled | within a mix |
+  |---|---|---|
+  | switches between takes | 0.54 | 0.63 |
+  | spectral jump | 0.36 | 0.65 (sign flips) |
+  | join count | 0.65 | 0.58 |
+  | F0 step at joins | 0.69 | 0.37 (reverses) |
+  | click z | 0.61 | 0.53 |
+  | repeat similarity (delta) | 0.60 | 0.46 |
+  | segment-boundary distance | 0.51 | 0.46 |
+
+- **Confound.** The cut-placement mix carries both the most joins and the most
+  marks, so pooled AUCs mostly measure which mix a phrase came from. Within a
+  mix, only "how two takes meet" features hold up (take switches, spectral
+  jump). Per-mix n is 16–20, so these are leads, not results.
+
 These features become the missing evidence family in
 [[2026-10-07-small-label-decision-learning]]'s ablation. readouts' vocology KB
 adds glitch causes (VISinger 2: removing the DSP pitch path gives spectral
@@ -89,6 +117,9 @@ discontinuities) and a breath-sound perception finding; run
 
 ## Claims
 
+- [verified] On synthetic singing, log-mel cross-similarity of the spectra cannot separate a held vowel (0.90) from a planted repeat (0.98); delta log-mel correlation can. (via: ai-jam-sessions scripts/phrase_evidence.py, PR #88, 2026-10-07)
+- [verified] On the 124 marked phrases, pooled feature AUCs are dominated by which mix a phrase came from; within a mix only take-switch and spectral-jump features exceed 0.6. (via: ai-jam-sessions PR #88 measurement, 2026-10-07)
+
 - [unverified] MFCC Euclidean join distance reached AUC 0.76 against 12 listeners' continuity judgments (Kirkpatrick et al. 2006).
 - [unverified] At 5% false alarms the best spectral features detected about 31–56% of audible joins (Pantazis et al. 2005).
 - [unverified] Mean gap-in-noise threshold is about 4.8 ms in normal-hearing adults.
@@ -96,6 +127,8 @@ discontinuities) and a breath-sound perception finding; run
 - [unverified] Vepa & King 2005 figures come from a draft; the final version may differ.
 
 ## Sources
+
+- [rig] ai-jam-sessions PR #88, scripts/phrase_evidence.py: join-evidence receipt on 124 marked phrases, 2026-10-07
 
 - [primary] https://doi.org/10.21437/ICSLP.2002-663 — Vepa, King, Taylor, "Objective distance measures for spectral discontinuities in concatenative speech synthesis", ICSLP 2002
 - [primary] https://doi.org/10.21437/Interspeech.2006-483 — Kirkpatrick, O'Brien, Scaife, "Feature extraction for spectral continuity measures in concatenative speech synthesis", Interspeech 2006

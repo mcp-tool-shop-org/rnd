@@ -45,6 +45,21 @@ def boot(fn, p, y, n=2000, seed=7):
     return [round(vals[int(0.025 * n)], 4), round(vals[int(0.975 * n)], 4)]
 
 
+def within_mix_auc(rows, key):
+    """Mean AUC inside each mix (song/mix), skipping mixes with only one class.
+    Pooled AUC on this set largely measures which mix a phrase came from
+    (ai-jam-sessions PR #88), so both views are reported."""
+    groups = {}
+    for r in rows:
+        groups.setdefault(r["id"].rsplit("/", 1)[0], []).append(r)
+    per = {}
+    for mix, rs in groups.items():
+        y = [r["label"] for r in rs]
+        if 0 < sum(y) < len(y):
+            per[mix] = round(auc([r[key] for r in rs], y), 4)
+    return round(sum(per.values()) / len(per), 4), per
+
+
 def pearson(a, b):
     ma, mb = sum(a) / len(a), sum(b) / len(b)
     num = sum((x - ma) * (y - mb) for x, y in zip(a, b))
@@ -59,9 +74,11 @@ def main():
     for name, key in (("jev_hosted", "jev_p_yes"), ("openjev_local", "openjev_p_yes")):
         p = [r[key] for r in rows]
         study = pc.run_study(p, y)
+        mix_mean, mix_each = within_mix_auc(rows, key)
         report[name] = {
             "brier_raw": round(brier(p, y), 4), "brier_raw_ci": boot(brier, p, y),
             "auc": round(auc(p, y), 4), "auc_ci": boot(auc, p, y),
+            "auc_within_mix_mean": mix_mean, "auc_within_mix": mix_each,
             "mean_p": round(sum(p) / len(p), 4), "distinct_values": len(set(p)),
             "sense_si_study": {k: study[k] for k in study if k.startswith("brier") or k in ("decision",)},
         }

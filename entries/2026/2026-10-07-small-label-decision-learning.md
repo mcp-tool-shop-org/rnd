@@ -78,6 +78,20 @@ For the Jev / sense-si work:
    about 30% random. Hold out a purely random 20-phrase test set. Switch toward
    margin sampling from the baseline only once it beats the base rate.
 
+**Measured confound (ai-jam-sessions PR #88, 2026-10-07): group by mix.** The 124
+phrases come from 7 reviewed mixes. The cut-placement mix carries both the most
+joins and the most marks, so pooled feature AUCs largely measure which mix a phrase
+came from. Two features reverse sign once you look within a mix: F0 step at joins
+(pooled 0.69, within-mix 0.37) and spectral jump (0.36 → 0.65). So:
+
+- cross-validation must be **grouped by mix**: leave-one-mix-out, or stratified
+  within mix;
+- every AUC or Brier should be reported both pooled and as the within-mix mean;
+- a model that only learns "which mix" will look good pooled and fail on a new
+  mix.
+
+Per-mix n is 16–20, so within-mix results are leads.
+
 The listener's own consistency sets the ceiling for any model; see
 [[2026-10-07-single-rater-labels-and-ai-listener]]. The missing evidence family
 is covered in [[2026-10-07-join-artefact-detection]]. Calibration method is in

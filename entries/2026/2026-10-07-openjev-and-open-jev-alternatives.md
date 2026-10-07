@@ -15,8 +15,10 @@ It answers typed questions in one call, every answer a calibrated probability:
 `choice`, `score`, and `noul` (a yes/no probability). Its weights are not public.
 sense-si's decision layer calls the hosted Jev (`typesafe/jev-1.13`).
 
-At least three unrelated open projects are called "OpenJev" or something close.
-Only one of them is a near drop-in for the hosted API.
+At least four unrelated open projects are called "OpenJev" or something close.
+Only one of them is a near drop-in model for the hosted API. The wider field
+(Kev, Nimble, SemIf, Laya and others) is in
+[[2026-10-07-open-jev-style-decision-models]].
 
 ## Key points
 
@@ -47,7 +49,9 @@ Only one of them is a near drop-in for the hosted API.
   - BF16 only (53.8 GB), no FP8 or GGUF, vLLM + `serve_decide.py`;
   - it mirrors Jev's mistakes: about 7% of 16-option answers change with option
     order alone, and it is weak at arithmetic, dates and counting.
-- **`AlexWortega/openjev`** (MIT), later called SemIf:
+- **`AlexWortega/openjev`** (MIT). Not SemIf: SemIf is
+  `TheoLeeCJ/SemIf-OpenJev`, which this card only cites as a baseline (corrected
+  2026-10-07):
   - a different design: a Qwen3.5 natural-language-inference cross-encoder at
     0.8B–35B, scoring a premise against a hypothesis;
   - 4B v5 is recommended (JevBench public 0.866, RAGTruth AUROC 0.932);
@@ -55,9 +59,11 @@ Only one of them is a near drop-in for the hosted API.
     GSM8K, HellaSwag, GPQA and others, so its scores on those are not
     comparable to anyone's;
   - it is not a choice/score/noul API.
-- **Secondary coverage disagrees.** Some articles attribute different numbers
-  (0.845 against 0.883 on 102 reconstructed rows) to "OpenJev". Only the model
-  cards above are primary.
+- **The "0.845 against 0.883 on 102 rows" figure** that some articles attribute
+  to "OpenJev" is SemIf's own result: modal agreement on a 102-row TypeSafe subset,
+  measured when SemIf was still named OpenJev.
+- **`razorback16/openjev`** is a fourth project: an API server around NVIDIA
+  DiffusionGemma 26B-A4B, with no model of its own.
 
 ## Studio relevance
 
@@ -102,6 +108,7 @@ the phrase-clean question needs better evidence, not a different model.
 - [unverified] autotrust/JEV-27B's six-benchmark mean is 84.07% against TypeSafe Jev 1.13's 83.85% (self-reported).
 - [unverified] Whether TypeSafe's terms permit training on Jev outputs is unresolved; their terms were not found in this search.
 - [unverified] AlexWortega/openjev v5 was trained on benchmark test splits, according to its own model card.
+- [wrong] AlexWortega/openjev was later renamed SemIf. (via: TheoLeeCJ/SemIf-OpenJev README shows SemIf is that repo, renamed from OpenJev; read by research agent 2026-10-07)
 - [verified] On sense-si's 124 phrases, local OpenJev Q4_K_M (llama.cpp, top-20 readout) correlated r = 0.61 with hosted Jev 1.13's p(clean); calibrated Brier was 0.251 vs Jev's 0.252 against a 0.242 base rate; pooled AUC 0.46 [0.35, 0.57] vs 0.56 [0.46, 0.66]. (via: experiments/openjev-vs-jev run on the Robot rig, scored with sense-si's run_study, 2026-10-07)
 - [verified] Served by llama.cpp with the authors' shim, OpenJev answered deterministically (5 repeats identical) at a median 1.3 s per ~4.8k-token request on an RTX 5090. (via: experiments/openjev-vs-jev/results/determinism.json, 2026-10-07)
 

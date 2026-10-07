@@ -35,6 +35,10 @@ Check both in the first 30 seconds, before installing or downloading anything.
   |---|---|---|---|
   | slow RTX PRO 6000 | 32 MB/s (network filesystem) | 1.9 MB/s | 26 GB in 31 min; run missed its cap, $1.65 lost |
   | an hour later, same filesystem | 238–540 MB/s | 59–74 MB/s | ~65 GB of Qwen 32B in about 2 min |
+  | second pod, same filesystem (seed 43) | ~540 MB/s | 74 MB/s | setup in 6 min; run cost $5.58 |
+
+- **Capacity:** two composite runs side by side used 77.8 of 96 GB on one
+  RTX PRO 6000, so pairing runs on one pod works at this model size.
 
 - **The gate:** aspire-si's `examples/sft-experiment/host_check.py --speed`
   measures driver, GPU and both speeds in about 30 s before any download.
@@ -55,6 +59,7 @@ the test bed before paying" rule.
 
 - [verified] torch 2.13.0+cu130 (pulled by vllm 0.31.0) failed with "driver too old" on an A100 host with driver 570.195.03 and worked on one with 580.126.16. (via: aspire-si pod runs, reported by session A 2026-10-07)
 - [verified] Within data centre eur-is-2, /workspace write speed ranged from 32 MB/s to 238–540 MB/s an hour apart. (via: aspire-si pod runs, reported by session A 2026-10-07)
+- [verified] A second eur-is-2 pod on the same network filesystem passed the gate at about 540 MB/s write and 74 MB/s per HF stream, set up in 6 min, and ran two composite runs side by side in 77.8 of 96 GB on an RTX PRO 6000; seed 43 cost $5.58. (via: aspire-si seed 43 run, reported by session A 2026-10-07)
 - [verified] Driver 617.14 on the Robot rig prints "CUDA UMD Version" rather than "CUDA Version". (via: session A report, and a grep for "CUDA Version" on the rig returning nothing, 2026-10-07)
 
 ## Sources

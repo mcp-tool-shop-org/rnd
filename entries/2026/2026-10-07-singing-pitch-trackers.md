@@ -1,6 +1,6 @@
 ---
 id: 2026-10-07-singing-pitch-trackers
-title: Fast pitch trackers for singing voice (pYIN replacements)
+title: Fast pitch trackers for singing voice (FCPE replaces pYIN)
 date: 2026-10-07
 kind: finding
 relevance: act
@@ -35,25 +35,45 @@ pip-installable today: SwiftF0 (CPU, tiny) and FCPE (GPU, near-RMVPE accuracy).
 
 ## Studio relevance
 
-**Prior in-house measurement (ai-jam-sessions, 2026-09-05):** its pitch gate
-(`scripts/vocal_clock.py`, `track_f0`) chose pYIN over SwiftF0. On a synthetic
-±40-cent vibrato:
+**Settled by measurement (ai-jam-sessions, 2026-10-07, RTX 5090):** FCPE replaces pYIN
+for the gate. SwiftF0 is dominated, even for ranking.
 
-- pYIN read +2.8 cents mean and kept the full swing;
-- SwiftF0 read +20.6 cents mean and clipped the excursion.
+Synthetic ±40-cent vibrato at 5.5 Hz on D4 (mean cents; p5..p95 swing):
 
-The gate fails a note at 50 cents and warns at 25, so a 20-cent bias disqualifies
-SwiftF0 *for gating*. It stayed in the code as a cross-check only. That was one
-synthetic test.
+| tracker | mean | swing |
+|---|---|---|
+| pYIN | +1.1 | −40.0..+40.0 |
+| SwiftF0 | +5.7 | −22.2..+32.9 (clipped) |
+| FCPE | +0.3 | −42.7..+42.1 |
 
-Revised recommendation:
+Real singing: four SoulX-Singer takes of public-domain hymns, 721 notes, read
+through the gate's own note windows. Figures are per-note median cents compared
+against pYIN:
 
-1. Run a three-way check (pYIN, SwiftF0, FCPE) on real takes. ai-jam-sessions is
-   running it on hymn takes, and its numbers belong in this entry.
-2. For the gate: FCPE (GPU) is the candidate to replace pYIN, provided it keeps
-   vibrato depth and stays near zero bias. Otherwise keep pYIN.
-3. SwiftF0 may still suit ranking, where speed matters and a uniform bias
-   cancels out.
+| | median diff | median abs | p90 abs | >25 c | pass/warn/fail agreement |
+|---|---|---|---|---|---|
+| SwiftF0 | −1.0 | 8.0 | 19.5 | 4.0% | 85–87% |
+| FCPE | −1.7 | 2.7 | 7.0 | 1.0% | 91–94% |
+
+Time per 165–196 s take:
+
+| tracker | time |
+|---|---|
+| pYIN | 160–190 s |
+| SwiftF0 | 2.2–3.4 s |
+| FCPE | 0.2 s (3.7 s on the first call, including the model load) |
+
+That makes FCPE about 800× faster than pYIN.
+
+- SwiftF0 adds false fails, for example 7 against pYIN's 1 on one take; FCPE's fails
+  are nearly pYIN's set.
+- SwiftF0's vibrato clipping reproduces. Its bias depends on the test tone: +20.6 c
+  on the 2026-09-05 tone, +5.7 c here.
+- Practical note: normalise input to peak ≤ 1.0 before FCPE, or its mel extractor
+  complains.
+- The literature's accuracy ranking (RMVPE ≥ FCPE > others on singing) held on our
+  own takes, while SwiftF0's published noise robustness did not translate into
+  gate-grade accuracy on clean synthesised singing.
 
 Octave-jump and discontinuity flags from the new pitch track are also the
 cheapest artefact detector available
@@ -61,7 +81,9 @@ cheapest artefact detector available
 
 ## Claims
 
-- [verified] On a synthetic ±40-cent vibrato, SwiftF0 read +20.6 cents mean bias and clipped the excursion, while pYIN read +2.8 cents with the full swing. (via: ai-jam-sessions vocal_clock measurement, 2026-09-05, reported by that session 2026-10-07)
+- [verified] FCPE agrees with pYIN to a median 2.7 cents (p90 7.0) per note on 721 notes of real synthesised singing, and keeps a ±40-cent vibrato at +0.3 cents bias with full swing. (via: ai-jam-sessions three-way measurement on the RTX 5090, 2026-10-07)
+- [verified] FCPE takes about 0.2 s per 165–196 s take after model load, versus 160–190 s for pYIN. (via: ai-jam-sessions three-way measurement on the RTX 5090, 2026-10-07)
+- [verified] SwiftF0 clips vibrato excursion (−22.2..+32.9 c on a ±40 c vibrato) and adds false gate fails. (via: ai-jam-sessions measurements 2026-09-05 and 2026-10-07)
 - [unverified] SwiftF0 reaches RPA 89.9% at 10 dB SNR versus pYIN 87.0% and CREPE 72.3%.
 - [unverified] FCPE reaches 96.79% RPA on MIR-1K at RTF 0.0062 on an RTX 4090.
 - [unverified] torchfcpe and swift-f0 are MIT-licensed; pesto-pitch is LGPL-3.0.
@@ -81,4 +103,5 @@ cheapest artefact detector available
 - [primary] https://arxiv.org/pdf/2301.12258 — Morrison, Hsieh, Pruyne, Pardo, "Cross-domain Neural Pitch and Periodicity Estimation"
 - [primary] https://pypi.org/project/torchcrepe — torchcrepe
 - [rig] ai-jam-sessions scripts/vocal_clock.py track_f0 comparison, 2026-09-05
+- [rig] ai-jam-sessions three-way comparison (torchfcpe 0.0.4, swift-f0, librosa pYIN hop 240 @ 48 kHz), RTX 5090, 2026-10-07
 - [user] Question from the ai-jam-sessions session, 2026-10-07; research agent (claude-sonnet-5-5) web search

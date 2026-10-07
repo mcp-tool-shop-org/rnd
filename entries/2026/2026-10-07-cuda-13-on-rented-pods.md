@@ -3,7 +3,7 @@ id: 2026-10-07-cuda-13-on-rented-pods
 title: Moving rented GPU pods from CUDA 12.8 to CUDA 13.x
 date: 2026-10-07
 kind: finding
-relevance: act
+relevance: reference
 fields: [gpu-computing, ai-infrastructure]
 tags: [cuda, driver, pytorch, runpod, offrig, a40, ai-jam-sessions]
 ---
@@ -32,6 +32,10 @@ a performance one.
   one toolchain; worth knowing before rebuilding llama.cpp on 13.2.
 
 ## Studio relevance
+
+**Superseded on 2026-10-07:** the Director kept CUDA 13.4 for ai-jam-sessions; see
+[[2026-10-07-decision-ai-jam-sessions-cuda-13-4]] for what that requires. The
+original recommendation follows.
 
 Recommendation for the jam pods: stay on CUDA 12.8 / cu128 until a dependency
 demands 13.x. If moving, require a host driver of R580 or later per provider,

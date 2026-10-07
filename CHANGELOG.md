@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.6] - 2026-10-07
+
+- Planted-defects program: #91 review fixes; warp replay/skip plants displace the cut's vowel (0.1 s replays moved it 0.18–0.21 s), now recorded per label
+- Updated `2026-10-07-planted-defects-program-for-sung-mixes`: Planted defects for sung mixes — an automated planter-versus-detector loop, anchored by the listener's measured threshold
+
 ## [1.1.1.0.5] - 2026-10-07
 
 - New logo (brand repo logos/rnd), teal accent and favicon to match

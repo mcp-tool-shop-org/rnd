@@ -216,7 +216,21 @@ own artefact. Even then it is driven by parameters and verified by measurement.
     - A forced break alone silently skipped the source gap before the cut. So a
       warp sham now continues the take exactly, and is refused when that would move
       the vowel more than 30 ms. About 20% of joins qualify.
-  - Pitch slip waits for pyworld (PR 2).
+  - **Timing confound in warp (found in review):** a replay or skip moves the cut's
+    vowel.
+    - On Amazing Grace pad16, 0.1 s replays moved their vowel by 0.18–0.21 s.
+    - Some 0.02 s skips moved it *later* by 0.08–0.11 s.
+    - The cause: severity is measured from where the previous run ended, which is
+      often well before the cut's own start.
+    - The planted run then absorbs it as a stretch of 0.70–1.14.
+    - Labels now record `vowel_moved_s` and the run's stretch range, so the study
+      can tell a heard replay from a heard late vowel.
+  - Warp renders refuse a missing score clock: without it the baseline is not the
+    shipped audio.
+  - Pitch slip and a plan-native **stretch** kind (warp ratio outside 0.67–1.5)
+    follow in PR 2.
+  - Warp clicks wait on ai-jam-sessions #93 (an explicit crossfade honoured at
+    non-overlapping run seams).
 - Step B results will be filed here as rig entries.
 - A native app that can read the system volume and output device is noted for
   later.

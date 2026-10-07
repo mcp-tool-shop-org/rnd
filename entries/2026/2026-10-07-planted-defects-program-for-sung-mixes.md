@@ -191,6 +191,15 @@ own artefact. Even then it is driven by parameters and verified by measurement.
 
 ## Studio relevance
 
+**Status (2026-10-07):** adopted by ai-jam-sessions as written.
+- The calibrated review is a cockpit feature in ai-jam-sessions #89: catch trials,
+  sham edits, the device and level log, loudness-normalised playback, and the
+  40-judgement audibility pass.
+- Step A (the planter engine) goes into an ai-jam-sessions plan.
+- Step B results will be filed here as rig entries.
+- A native app that can read the system volume and output device is noted for
+  later.
+
 ### The recommended loop
 
 1. **Archive.** Parameterised defect specs, each a (kind, join, severity,

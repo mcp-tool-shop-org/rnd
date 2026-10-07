@@ -195,7 +195,18 @@ own artefact. Even then it is driven by parameters and verified by measurement.
 - The calibrated review is a cockpit feature in ai-jam-sessions #89: catch trials,
   sham edits, the device and level log, loudness-normalised playback, and the
   40-judgement audibility pass.
-- Step A (the planter engine) goes into an ai-jam-sessions plan.
+- **Step A, the planter engine:** draft PR ai-jam-sessions #91,
+  `scripts/planter.py`.
+  - It mutates `plan.json` and renders through the production placers.
+  - Replay and skip are measured from where the take had reached before the join,
+    so the severity is exactly the span heard twice or never.
+  - Tests: 17 pass, 2 skip until the placers honour `break_before` and `xfade_s`.
+  - Local-mode trial on a real mix kept 39 of 40 plants. The one drop was a 20 ms
+    replay, below what Δ-mel resolves.
+  - A first version that simply moved `cut_start` dropped 4 of 5 replays, because
+    the clips around the join were already shifted.
+  - Warp mode on real mixes waits for the placer PR. Pitch slip waits for a
+    formant-preserving shifter in the venv.
 - Step B results will be filed here as rig entries.
 - A native app that can read the system volume and output device is noted for
   later.

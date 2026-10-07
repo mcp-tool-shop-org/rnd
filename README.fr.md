@@ -24,7 +24,7 @@ Deux supports stockent les connaissances du studio, et ils remplissent des fonct
 | Rôle. | le banc : collecte, expériences, questions ouvertes. | l’étagère : bases de connaissances vérifiées. |
 | Rythme. | une entrée en quelques minutes, les affirmations commencent à `unverified`. | créé et vérifié par des groupes d’étude. |
 | Forme. | entrées Markdown, un sujet par entrée. | une base de connaissances SQLite par domaine. |
-| Désordre. | attendu : les affirmations contestées, les impasses et les résultats intermédiaires restent visibles. | aucun : les lignes sont issues de sources vérifiées. |
+| Quel désordre ! | désordre intentionnel : les affirmations contestées, les impasses et les résultats provisoires restent visibles | pas de désordre du tout : chaque ligne est référencée et vérifiée |
 
 Les connaissances circulent dans un seul sens :
 
@@ -51,9 +51,12 @@ python -m rnd catalog list --fit adjacent   # skills worth using when the need a
 python -m rnd new "Paper title" --kind paper --field audio --tag pitch
 python -m rnd check                         # validate every file (exit 1 on errors)
 python -m rnd sql "SELECT tier, count(*) FROM sources GROUP BY tier"
+python -m rnd bump --note "what changed"  # micro version bump + CHANGELOG section
 ```
 
 Chaque commande de liste prend `--json` pour les agents. `rnd.cmd` (Windows) et `rnd.sh` (shells POSIX) sont de simples enveloppes, de sorte que la commande fonctionne à partir de n’importe quel répertoire.
+
+La bibliothèque est mise à jour quotidiennement, c’est pourquoi les versions sont divisées en cinq segments : `MAJOR.MINOR.PATCH.MICRO.NANO`. Les trois premiers segments concernent l’outil `rnd` ; MICRO indique une modification structurelle de la bibliothèque, et NANO, une mise à jour ordinaire. `rnd bump` augmente par défaut le dernier segment et crée une section CHANGELOG à partir des fichiers modifiés depuis la dernière version, de sorte que chaque mise à jour se voit attribuer sa propre version mineure.
 
 Codes de sortie : `0` ok ; `1` fichiers de bibliothèque non valides ; `2` erreur d’utilisation ou non trouvé ; `3` échec d’exécution (un outil externe ou une erreur inattendue). Les erreurs affichent un code, un message et un indice ; `--debug` ajoute la trace.
 

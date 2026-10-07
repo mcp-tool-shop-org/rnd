@@ -24,7 +24,7 @@ Dos almacenes contienen el conocimiento del estudio, y realizan diferentes funci
 | Función. | El banco: recopilación, experimentos, preguntas abiertas. | El estante: bases de conocimiento verificadas. |
 | Ritmo. | Una entrada en minutos, las afirmaciones comienzan en `unverified`. | Creado y verificado por grupos de estudio. |
 | Forma. | Entradas en Markdown, un tema por cada una. | Una base de conocimiento SQLite por dominio. |
-| Desorden. | Esperado: las afirmaciones disputadas, los callejones sin salida y los resultados provisionales permanecen visibles. | Ninguno: las filas tienen su origen y están verificadas. |
+| Qué desordenado. | desorden intencionado: las afirmaciones controvertidas, los callejones sin salida y los resultados provisionales permanecen visibles. | nada desordenado: cada dato está documentado y verificado. |
 
 El conocimiento se mueve en una sola dirección:
 
@@ -51,9 +51,12 @@ python -m rnd catalog list --fit adjacent   # skills worth using when the need a
 python -m rnd new "Paper title" --kind paper --field audio --tag pitch
 python -m rnd check                         # validate every file (exit 1 on errors)
 python -m rnd sql "SELECT tier, count(*) FROM sources GROUP BY tier"
+python -m rnd bump --note "what changed"  # micro version bump + CHANGELOG section
 ```
 
 Cada comando de listado toma `--json` para los agentes. `rnd.cmd` (Windows) y `rnd.sh` (shells POSIX) son envoltorios delgados, por lo que el comando funciona desde cualquier directorio.
+
+La biblioteca se actualiza diariamente, por lo que las versiones tienen cinco segmentos: `MAJOR.MINOR.PATCH.MICRO.NANO`. Las tres primeras versiones corresponden a la herramienta `rnd`; MICRO indica un cambio estructural en la biblioteca y NANO, una actualización ordinaria. `rnd bump` incrementa el último segmento de forma predeterminada y escribe una sección de CHANGELOG a partir de los archivos que se han modificado desde la última etiqueta, de modo que cada actualización obtiene su propia versión etiquetada.
 
 Códigos de salida: `0` correcto · `1` archivos de biblioteca no válidos · `2` error de uso o no encontrado · `3` error en tiempo de ejecución (una herramienta externa o un error inesperado). Los errores imprimen un código, un mensaje y una pista; `--debug` agrega el rastreo de la pila.
 

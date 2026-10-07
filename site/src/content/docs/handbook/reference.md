@@ -95,6 +95,28 @@ Rebuild `rnd.db` from `entries/`, `instruments/` and `catalogs/`. If any file ha
 an error, the build halts and the previous index is kept. Searches rebuild
 automatically when files change, so you rarely need this.
 
+### `bump [level]`
+
+Raise the version and add a CHANGELOG section. Versions have five segments,
+`MAJOR.MINOR.PATCH.MICRO.NANO`:
+
+| level | for |
+|---|---|
+| `major`, `minor`, `patch` | the `rnd` tool itself (semver meaning) |
+| `micro` | a structural library change: a new experiment, catalogue or instrument family |
+| `nano` (default) | an ordinary library update: entries filed or revised, results added |
+
+A bump resets the segments after the one it raises (`1.0.0.0.9` → `micro` →
+`1.0.0.1.0`). The CHANGELOG section lists the entries, instruments, experiments and
+catalogues changed since the last `v*` tag, including uncommitted and untracked
+files, plus any `--note` lines. `--dry-run` prints it without writing. The command
+prints the commit, tag and push to run next.
+
+```bash
+python -m rnd bump --note "Kev measured against hosted Jev"
+python -m rnd bump micro --dry-run
+```
+
 ### `catalog list|lanes|families|sync [name]`
 
 Work with a mirrored catalogue (default `nvidia-skills`).
@@ -127,5 +149,5 @@ error: NOT_FOUND: no entry 'cuda-graph'
 ```
 
 Codes include `NOT_FOUND`, `EXISTS`, `BAD_ID`, `INDEX_INVALID`, `SQL_ERROR`,
-`READOUTS_MISSING`, `READOUTS_INDEX_INVALID`, `INTERNAL` and `INTERRUPTED`, plus the
-catalogue sync codes.
+`READOUTS_MISSING`, `READOUTS_INDEX_INVALID`, `BAD_VERSION`, `BAD_LEVEL`, `BAD_CHANGELOG`,
+`GIT_FAILED`, `INTERNAL` and `INTERRUPTED`, plus the catalogue sync codes.

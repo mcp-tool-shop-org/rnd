@@ -24,7 +24,7 @@
 | 角色 | 工作台：接收、实验、开放性问题 | 书架：经过验证的知识库 |
 | 速度 | 一个条目几分钟内完成，声明从 `unverified` 开始 | 由研究团队构建和验证 |
 | 形式 | Markdown 条目，每个条目一个主题 | 每个领域一个 SQLite 知识库 |
-| 混乱程度 | 预期：有争议的声明、死胡同和临时结果会一直显示 | 无：行数据都有来源并经过验证 |
+| 有多乱？ | 故意弄得乱：有争议的说法、无法解决的问题和临时结果都保留着，以便查看。 | 一点也不乱：每一行数据都有来源，并且经过验证。 |
 
 知识的流动方向：
 
@@ -52,9 +52,12 @@ python -m rnd catalog list --fit adjacent   # skills worth using when the need a
 python -m rnd new "Paper title" --kind paper --field audio --tag pitch
 python -m rnd check                         # validate every file (exit 1 on errors)
 python -m rnd sql "SELECT tier, count(*) FROM sources GROUP BY tier"
+python -m rnd bump --note "what changed"  # micro version bump + CHANGELOG section
 ```
 
 每个列表命令都接受 `--json` 作为参数。`rnd.cmd`（Windows）和 `rnd.sh`（POSIX shell）是简单的包装器，因此该命令可以从任何目录运行。
+
+库每天都在更新，因此版本包含五个部分：`MAJOR.MINOR.PATCH.MICRO.NANO`。前三个部分是 `rnd` 工具的版本；MICRO 表示库结构发生了变化，而 NANO 表示普通更新。`rnd bump` 默认情况下会增加最后一个部分，并从上次标记以来发生更改的文件中生成一个 CHANGELOG 部分，因此每次更新都会获得自己的小型标记版本。
 
 退出代码：`0` 正常 · `1` 无效的库文件 · `2` 用法错误或未找到 · `3` 运行时错误（外部工具或意外错误）。错误会打印代码、消息和提示；`--debug` 会添加堆栈跟踪。
 

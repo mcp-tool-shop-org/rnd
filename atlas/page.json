@@ -16,37 +16,64 @@
       "kind": "part",
       "name": "rnd",
       "partLabel": "rnd"
+    },
+    {
+      "kind": "place",
+      "readers": [
+        "rnd"
+      ],
+      "target": "entries/",
+      "tests": 1,
+      "writers": [
+        "rnd"
+      ]
     }
   ],
   "changes": {
     "fileCounts": {
-      "added": 14,
-      "changed": 4,
+      "added": 1,
+      "changed": 15,
       "moved": 0,
-      "parts": 3,
+      "parts": 5,
       "removed": 0
     },
     "items": [
       {
+        "kind": "landing",
+        "sentence": "entries/ is now also read by rnd/release.py.",
+        "subjects": [
+          "entries/",
+          "rnd/release.py"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "instruments/ is now read by rnd/release.py.",
+        "subjects": [
+          "instruments/",
+          "rnd/release.py"
+        ]
+      },
+      {
         "kind": "counts",
-        "sentence": "Nothing structural changed since 2026-10-07; 14 files added and 4 changed content.",
+        "sentence": "1 file added and 15 changed content, across 5 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "b1705b429c5b0981cffe7dbf566b001f582b3c61",
-      "generatedAt": "2026-10-07T21:11:07.618Z"
+      "commit": "55fb964e3653a3dc4cc0ad9f437e017cf5878d35",
+      "generatedAt": "2026-10-07T21:39:38.540Z"
     },
-    "unchanged": true
+    "unchanged": false
   },
   "changesTogether": [],
   "changesTogetherNote": [
     "Window: 180 days; a pair counts from 3 shared commits, since the window holds fewer than 30 qualifying commits."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "55fb964e3653a3dc4cc0ad9f437e017cf5878d35",
+  "commit": "cc7a041244821dc01bd9ac2ca62f9fb62e51a00d",
   "defaultBranch": "main",
-  "derived": "11 parts, mostly Markdown (71 files) and JSON data (18); code in Python (16), shell (3), CSS (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 2 doors; the busiest is CI, which reaches 3 parts. It deploys a site to GitHub Pages.",
+  "derived": "11 parts, mostly Markdown (71 files) and JSON data (18); code in Python (17), shell (3), CSS (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 2 doors; the busiest is CI, which reaches 3 parts. It deploys a site to GitHub Pages.",
   "doors": [
     {
       "checks": [],
@@ -74,7 +101,7 @@
         {
           "boundary": "rnd",
           "depth": 1,
-          "files": 7
+          "files": 8
         }
       ],
       "runs": [
@@ -147,10 +174,10 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-07T21:39:38.540Z",
+  "generatedAt": "2026-10-07T21:55:09.964Z",
   "limits": [
     "3 writes and 3 reads use paths built at run time and are not named here.",
-    "6 writes and 12 reads go to a path their caller passes, not to this repository.",
+    "8 writes and 16 reads go to a path their caller passes, not to this repository.",
     "1 read goes to the directory the command is run in or a path its caller passes, not to this repository.",
     "Statistics confidence is low: fewer than 30 qualifying commits in the window, and fewer than 25 source files reach 10 revisions."
   ],
@@ -172,12 +199,15 @@
   "readers": [
     {
       "readers": [
-        "tests/test_rnd.py (from tests)"
+        "rnd/release.py"
       ],
-      "target": "entries/"
+      "target": "entries/",
+      "tests": 1
     },
     {
-      "readers": [],
+      "readers": [
+        "rnd/release.py"
+      ],
       "target": "instruments/"
     }
   ],
@@ -197,14 +227,7 @@
     "rnd": 1
   },
   "unnamedWrites": 3,
-  "unread": [
-    {
-      "place": "instruments/",
-      "writers": [
-        "rnd/cli.py"
-      ]
-    }
-  ],
+  "unread": [],
   "unreadCode": [
     "root"
   ],

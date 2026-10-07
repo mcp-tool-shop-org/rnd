@@ -3,11 +3,21 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
-and this project adheres to [Semantic Versioning](https://semver.org/).
-Library content (entries, experiments, catalogue reviews) changes daily and is
-not listed here; this log covers the `rnd` tool and the repo's structure.
+Versions have five segments, `MAJOR.MINOR.PATCH.MICRO.NANO`. The first three
+follow [Semantic Versioning](https://semver.org/) for the `rnd` tool. MICRO marks a
+structural library change (a new experiment, catalogue or instrument family), and
+NANO an ordinary library update (entries filed or revised, results added).
+`python -m rnd bump` writes each section; `1.0.0` reads as `1.0.0.0.0`.
 
 ## [Unreleased]
+
+## [1.1.0.0.0] - 2026-10-07
+
+- Added `rnd bump`: five-segment versions (MAJOR.MINOR.PATCH.MICRO.NANO) with a CHANGELOG section written from the files changed since the last tag
+- Kev-4B and Kev-9B measured against hosted Jev and OpenJev on sense-si's 124 phrases, 0-shot and with knowledge in context
+- Added `2026-10-07-open-jev-style-decision-models`: Open Jev-style decision models — the landscape, checked against primary sources
+- Updated `2026-10-07-openjev-and-open-jev-alternatives`: OpenJev and the other open "Jev" models — what each one is
+- Updated experiment `openjev-vs-jev`
 
 ## [1.0.0] - 2026-10-07
 

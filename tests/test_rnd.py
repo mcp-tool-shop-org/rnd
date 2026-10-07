@@ -278,3 +278,32 @@ class CliTests(unittest.TestCase):
         self.assertEqual(code, 3)
         self.assertIn("error: INTERNAL: RuntimeError: boom", err.getvalue())
         self.assertNotIn("Traceback", err.getvalue())
+
+
+class ReleaseTests(unittest.TestCase):
+    def test_bump_levels_reset_lower_segments(self):
+        from rnd import release
+        self.assertEqual(release.bump("1.0.0"), "1.0.0.0.1")
+        self.assertEqual(release.bump("1.0.0.0.9", "micro"), "1.0.0.1.0")
+        self.assertEqual(release.bump("1.2.3.4.5", "minor"), "1.3.0.0.0")
+        with self.assertRaises(release.ReleaseError):
+            release.bump("1.0.x")
+        with self.assertRaises(release.ReleaseError):
+            release.bump("1.0.0", "pico")
+
+    def test_changelog_section_and_insert(self):
+        from rnd import release
+        root = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, root)
+        (root / "entries" / "2026").mkdir(parents=True)
+        (root / "entries" / "2026" / "2026-01-02-sample.md").write_text(ENTRY, encoding="utf-8")
+        (root / "CHANGELOG.md").write_text("# Changelog\n\n## [Unreleased]\n\n## [1.0.0] - 2026-01-01\n", encoding="utf-8")
+        changed = [("A", "entries/2026/2026-01-02-sample.md"), ("M", "experiments/demo/README.md")]
+        section = release.changelog_section(root, "1.0.0.0.1", changed, ["a note"], today="2026-01-02")
+        self.assertIn("## [1.0.0.0.1] - 2026-01-02", section)
+        self.assertIn("- Added `2026-01-02-sample`: Sample entry", section)
+        self.assertIn("- Updated experiment `demo`", section)
+        release.insert_changelog(root, section)
+        text = (root / "CHANGELOG.md").read_text(encoding="utf-8")
+        self.assertLess(text.index("[Unreleased]"), text.index("[1.0.0.0.1]"))
+        self.assertLess(text.index("[1.0.0.0.1]"), text.index("[1.0.0]"))

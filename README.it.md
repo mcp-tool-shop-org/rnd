@@ -24,7 +24,7 @@ Due archivi contengono le conoscenze dello studio e svolgono funzioni diverse.
 | Ruolo. | La postazione: acquisizione dati, esperimenti, domande aperte. | La scaffalatura: basi di conoscenza verificate. |
 | Ritmo. | Una voce viene inserita in pochi minuti, le affermazioni iniziano con `unverified`. | Creata e verificata da gruppi di studio. |
 | Formato. | Voci in formato Markdown, un argomento per ciascuna. | Una base di conoscenza SQLite per dominio. |
-| Disordine. | Previsto: le affermazioni contestate, i vicoli ciechi e i risultati intermedi rimangono visibili. | Nessuno: le righe sono tracciabili e verificate. |
+| Quanto è disordinato | disordinato intenzionalmente: affermazioni contestate, vicoli ciechi e risultati provvisori rimangono visibili | per niente disordinato: ogni riga è corredata di fonti e verificata |
 
 La conoscenza si muove in una sola direzione:
 
@@ -51,9 +51,12 @@ python -m rnd catalog list --fit adjacent   # skills worth using when the need a
 python -m rnd new "Paper title" --kind paper --field audio --tag pitch
 python -m rnd check                         # validate every file (exit 1 on errors)
 python -m rnd sql "SELECT tier, count(*) FROM sources GROUP BY tier"
+python -m rnd bump --note "what changed"  # micro version bump + CHANGELOG section
 ```
 
 Ogni comando di elenco richiede `--json` per gli agenti. `rnd.cmd` (Windows) e `rnd.sh` (shell POSIX) sono semplici wrapper, quindi il comando funziona da qualsiasi directory.
+
+La libreria viene aggiornata quotidianamente, quindi le versioni sono suddivise in cinque segmenti: `MAJOR.MINOR.PATCH.MICRO.NANO`. I primi tre segmenti riguardano lo strumento `rnd`; MICRO indica una modifica strutturale della libreria, mentre NANO indica un aggiornamento ordinario. `rnd bump` incrementa automaticamente l’ultimo segmento e crea una sezione CHANGELOG a partire dai file modificati rispetto all’ultima versione, in modo che ogni aggiornamento abbia la sua piccola versione contrassegnata.
 
 Codici di uscita: `0` ok · `1` file di libreria non validi · `2` errore di utilizzo o file non trovato · `3` errore di runtime (uno strumento esterno o un errore imprevisto). Gli errori visualizzano un codice, un messaggio e un suggerimento; `--debug` aggiunge il traceback.
 

@@ -19,7 +19,7 @@ The studio keeps knowledge in two places, and they do different jobs.
 | Role | the bench: intake, experiments, open questions | the shelf: verified knowledge bases |
 | Pace | an entry in minutes; claims start `unverified` | built and checked by study swarms |
 | Shape | Markdown entries, one topic each | one SQLite knowledge base per domain |
-| Mess | expected: disputed claims, dead ends and interim results stay visible | none: rows are sourced and verified |
+| How messy | messy on purpose: disputed claims, dead ends and interim results stay visible | not messy at all: every row is sourced and verified |
 
 The bench is allowed to be messy because it is honest about the mess. An
 interim result is labelled interim. A claim no one has checked says so. A claim

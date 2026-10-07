@@ -13,7 +13,7 @@ import traceback
 from datetime import date
 from pathlib import Path
 
-from . import __version__, catalog, model, readouts, store
+from . import __version__, catalog, model, readouts, release, store
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -309,6 +309,25 @@ def cmd_readouts(args):
     return 0
 
 
+def cmd_bump(args):
+    try:
+        old = release.read_version(ROOT)
+        new = release.bump(old, args.level)
+        since = release.last_tag(ROOT)
+        section = release.changelog_section(ROOT, new, release.changes(ROOT, since), args.note or ())
+        if not args.dry_run:
+            release.write_version(ROOT, new)
+            release.insert_changelog(ROOT, section)
+    except release.ReleaseError as exc:
+        return fail(exc.code, str(exc), exc.hint, 3 if exc.code == "GIT_FAILED" else 2)
+    print(f"{'would bump' if args.dry_run else 'bumped'} {old} -> {new} (changes since {since or 'the first commit'})")
+    print(section.rstrip())
+    if not args.dry_run:
+        print(f"\nnext: git add rnd/__init__.py CHANGELOG.md <your changes> && git commit -m \"rnd {new}\" "
+              f"&& git tag -a v{new} -m \"rnd {new}\" && git push --follow-tags")
+    return 0
+
+
 def cmd_sql(args):
     con = open_db(args)
     try:
@@ -388,6 +407,12 @@ def build_parser():
     s.add_argument("--any", action="store_true", help="match any word instead of all of them")
     s.add_argument("--list", action="store_true", help="list the knowledge bases")
     s.add_argument("--root", help="readouts checkout (overrides $RND_READOUTS)")
+
+    s = add("bump", cmd_bump, "raise the version (default: the nano segment) and add a CHANGELOG section", json_flag=False)
+    s.add_argument("level", nargs="?", default="nano", choices=release.LEVELS,
+                   help="major|minor|patch: the tool; micro: library structure; nano: library content (default)")
+    s.add_argument("--note", action="append", help="an extra CHANGELOG line (repeatable)")
+    s.add_argument("--dry-run", action="store_true", help="print the new version and CHANGELOG section only")
 
     s = add("sql", cmd_sql, "run a read-only SQL query against the index")
     s.add_argument("query")

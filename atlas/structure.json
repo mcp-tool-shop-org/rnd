@@ -9,7 +9,7 @@
       "externals": 0,
       "files": [
         {
-          "hash": "8d472edc11cda11694270493deb1a46635d572040a9297c5a88f7dcb7de9c990",
+          "hash": "381c05da8e01d2572ece9a177e3c63eb67db76152246b221aa0e73a31e1911c6",
           "path": ".claude/CLAUDE.md"
         }
       ],
@@ -505,7 +505,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "61273bc7ae97f56f009a310cd40120ed5fe9b9ba81ee8d1a415764fc70d01914",
+          "hash": "336d2de269da4162d7e2c37f06ad20df54b6251430b5c61ffc4b094dc4010b19",
           "path": "rnd/__init__.py"
         },
         {
@@ -560,6 +560,7 @@
           "exports": [
             "build_parser",
             "cmd_build",
+            "cmd_bump",
             "cmd_catalog",
             "cmd_check",
             "cmd_list",
@@ -594,27 +595,33 @@
               "line": 293
             },
             {
+              "in": "cmd_bump",
+              "kind": "except",
+              "line": 321
+            },
+            {
               "in": "cmd_sql",
               "kind": "except",
-              "line": 316
+              "line": 335
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 404
+              "line": 429
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 406
+              "line": 431
             }
           ],
-          "hash": "bea06810815753be1ca5baf49ef36cdf8cf6da5f25c27460cb236223e19da8c5",
+          "hash": "f1b7200193a00ee0332498b477112b81dbc146c0adb7b1e22e1152ff03228486",
           "importsFiles": [
             "rnd/__init__.py",
             "rnd/catalog.py",
             "rnd/model.py",
             "rnd/readouts.py",
+            "rnd/release.py",
             "rnd/store.py"
           ],
           "path": "rnd/cli.py"
@@ -707,6 +714,71 @@
         },
         {
           "exports": [
+            "bump",
+            "changelog_section",
+            "changes",
+            "insert_changelog",
+            "last_tag",
+            "parse",
+            "read_version",
+            "write_version"
+          ],
+          "failurePaths": [
+            {
+              "in": "parse",
+              "kind": "raise",
+              "line": 31
+            },
+            {
+              "in": "bump",
+              "kind": "raise",
+              "line": 37
+            },
+            {
+              "in": "read_version",
+              "kind": "raise",
+              "line": 49
+            },
+            {
+              "in": "_git",
+              "kind": "except",
+              "line": 61
+            },
+            {
+              "in": "_git",
+              "kind": "raise",
+              "line": 62
+            },
+            {
+              "in": "_git",
+              "kind": "raise",
+              "line": 64
+            },
+            {
+              "in": "last_tag",
+              "kind": "except",
+              "line": 71
+            },
+            {
+              "in": "_title",
+              "kind": "except",
+              "line": 91
+            },
+            {
+              "in": "insert_changelog",
+              "kind": "raise",
+              "line": 120
+            }
+          ],
+          "hash": "0177e38b979a7cc3b5c1574479ea3d4e41cfbf1f16c7e4d7ec3d27ba505d8be3",
+          "importsFiles": [
+            "rnd/__init__.py",
+            "rnd/frontmatter.py"
+          ],
+          "path": "rnd/release.py"
+        },
+        {
+          "exports": [
             "build",
             "connect",
             "default_db",
@@ -738,15 +810,15 @@
       "origin": "authored",
       "outsidePlaces": [
         {
-          "reads": 5,
+          "reads": 9,
           "where": [
             "caller"
           ],
-          "writes": 3
+          "writes": 5
         }
       ],
-      "outsideReads": 5,
-      "outsideWrites": 3,
+      "outsideReads": 9,
+      "outsideWrites": 5,
       "role": "code",
       "testRunners": [
         "unittest"
@@ -771,7 +843,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "f61b09dd5ecb76665b4a6a5f130e5bcb6b4ea5ecdefd011d9dfbf7f6af2bc194",
+          "hash": "de6b692ea478e1e7684cd37e56570971b5cbea4ca7d153ade872cf045bdac026",
           "path": "CHANGELOG.md"
         },
         {
@@ -779,35 +851,35 @@
           "path": "LICENSE"
         },
         {
-          "hash": "d978d9933910ba447950253d69760dac3f1e46d9610d8b1a21109d4250a007e5",
+          "hash": "cd851fc6156ce121d72ddeaa688d8cab2b0545bcab1f2b17aa9634d5a45e06d1",
           "path": "README.es.md"
         },
         {
-          "hash": "079b027d69e910fffc893a8f4223cbd1a8324d62f1af09816953f8feb692e7fe",
+          "hash": "af5330251a616018dd14498d46ade474b54c7b3c5a8dfc1b5174e3fa2aa997b2",
           "path": "README.fr.md"
         },
         {
-          "hash": "5885ab9f4d5f7f0150e3173b742aa670957e4c05b35e1150d2860c24e19cf04d",
+          "hash": "4852877db59dc98f7add9e790becd0e1a20afc7f555c1dc45ed1649f60463c65",
           "path": "README.hi.md"
         },
         {
-          "hash": "741f7eacac4c7166eb3cfbe52bdba30d30f23fd6b16e2d188027b8c1cae587d4",
+          "hash": "534213b6c95f2114d7613e0f4411133ace8b99fb21317c7d9c64b8f541677167",
           "path": "README.it.md"
         },
         {
-          "hash": "8bb920d4466b617944dae3eb36f2a1be0af3e21bb7c108088789a8658440dd7c",
+          "hash": "c1f59ff6761d5b56c60c3017932f1853f22fc95a65373b358fa786efffbdddeb",
           "path": "README.ja.md"
         },
         {
-          "hash": "1b4a28cfd35e1e695a51eac5dd3731188d7ea4513b8c5e02987546324f698d1b",
+          "hash": "3ece651939c75af23a41e060ee52bb2354903f242a2b246cbd375fd443c4314f",
           "path": "README.md"
         },
         {
-          "hash": "7c114415437988d54545cc7a7bc9ecf2456f48d47aa64bf2af458e725187bbe4",
+          "hash": "1e1489b790485a69de4f755b2352f867ea983b1a039b97c6488185ecb825740a",
           "path": "README.pt-BR.md"
         },
         {
-          "hash": "836eeba1afe32f55b60307b02dff2f521f8f70a5fc007911475cdfa580e3ec74",
+          "hash": "5dbdde10f4d09585496a72e2f96b7bbe92137a6a634ad39722dc90bcb5731939",
           "path": "README.zh.md"
         },
         {
@@ -895,11 +967,11 @@
           "path": "site/src/content/docs/handbook/getting-started.md"
         },
         {
-          "hash": "32da2da3897cb4bbe21e5127ceaddd3ff433d9d35f2470d06a0ffe6c20dc1960",
+          "hash": "74ff641a4551f80a89833f523787942a0d7a9fd78bdf358e5a681cd7d101c8b3",
           "path": "site/src/content/docs/handbook/index.md"
         },
         {
-          "hash": "52c50088ca65810df5f49cb8e95b47cc5c16e26373ce40ea253a323b48005dd6",
+          "hash": "a58b7f9843d1780e0c504d1f7b3dfed8a4554e40a1720277e019fea684c8d061",
           "path": "site/src/content/docs/handbook/reference.md"
         },
         {
@@ -963,7 +1035,7 @@
           "exports": [
             "write"
           ],
-          "hash": "22718d28e65a118573088f47fa1b1ebba6a63e3195fd06496984428569bac988",
+          "hash": "bbea29611953f8267b1b9332937c16beb551e396e06469cabd13a9deb2b54b71",
           "importOrder": [
             "rnd/__init__.py",
             "rnd/catalog.py",
@@ -971,7 +1043,8 @@
             "rnd/model.py",
             "rnd/readouts.py",
             "rnd/store.py",
-            "rnd/cli.py"
+            "rnd/cli.py",
+            "rnd/release.py"
           ],
           "importsFiles": [
             "rnd/__init__.py",
@@ -980,6 +1053,7 @@
             "rnd/frontmatter.py",
             "rnd/model.py",
             "rnd/readouts.py",
+            "rnd/release.py",
             "rnd/store.py"
           ],
           "path": "tests/test_rnd.py",
@@ -1106,7 +1180,7 @@
             "file": "rnd/__init__.py",
             "from": "tests/test_rnd.py"
           },
-          "files": 7
+          "files": 8
         }
       ],
       "readers": [
@@ -1123,11 +1197,23 @@
           "target": "entries"
         },
         {
+          "by": "rnd/release.py",
+          "call": "literal",
+          "confidence": "ast",
+          "target": "entries"
+        },
+        {
           "by": "tests/test_rnd.py",
           "call": "literal",
           "confidence": "ast",
           "fromTests": true,
           "target": "entries"
+        },
+        {
+          "by": "rnd/release.py",
+          "call": "literal",
+          "confidence": "ast",
+          "target": "instruments"
         }
       ],
       "runs": [
@@ -1366,8 +1452,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "55fb964e3653a3dc4cc0ad9f437e017cf5878d35",
-    "tracked": 122
+    "commit": "cc7a041244821dc01bd9ac2ca62f9fb62e51a00d",
+    "tracked": 123
   },
   "landings": [
     {
@@ -1386,6 +1472,11 @@
         {
           "by": "rnd/cli.py",
           "call": "get",
+          "confidence": "ast"
+        },
+        {
+          "by": "rnd/release.py",
+          "call": "literal",
           "confidence": "ast"
         }
       ],
@@ -1415,7 +1506,13 @@
       "writers": []
     },
     {
-      "readers": [],
+      "readers": [
+        {
+          "by": "rnd/release.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
       "target": "instruments",
       "writers": [
         {

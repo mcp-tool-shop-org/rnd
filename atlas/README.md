@@ -1,16 +1,18 @@
 # rnd: how it works
 
-Mapped at 2026-10-07 from commit 55fb964 by Atlas 1.24.0.
+Mapped at 2026-10-07 from commit cc7a041 by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-11 parts, mostly Markdown (71 files) and JSON data (18); code in Python (16), shell (3), CSS (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 2 doors; the busiest is CI, which reaches 3 parts. It deploys a site to GitHub Pages.
+11 parts, mostly Markdown (71 files) and JSON data (18); code in Python (17), shell (3), CSS (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 2 doors; the busiest is CI, which reaches 3 parts. It deploys a site to GitHub Pages.
 
-## What changed since 2026-10-07 (b1705b4)
+## What changed since 2026-10-07 (55fb964)
 
-Nothing structural changed since 2026-10-07; 14 files added and 4 changed content.
+- entries/ is now also read by rnd/release.py.
+- instruments/ is now read by rnd/release.py.
+- 1 file added and 15 changed content, across 5 parts.
 
 ## What comes in
 
@@ -20,14 +22,14 @@ Nothing structural changed since 2026-10-07; 14 files added and 4 changed conten
 ## What happens through CI
 
 1. The workflow runs verify.sh in the repository root and tests/ in tests.
-2. That reaches rnd (7 files).
+2. That reaches rnd (8 files).
 3. It writes to entries/ and instruments/.
 4. It uploads coverage to Codecov.
 
 ## Who reads the results
 
-- **entries/** is read by tests/test_rnd.py (from tests).
-- **instruments/** has no reader in this repository.
+- **entries/** is read by rnd/release.py, and by 1 test.
+- **instruments/** is read by rnd/release.py.
 
 ## The other doors
 
@@ -36,6 +38,7 @@ Nothing structural changed since 2026-10-07; 14 files added and 4 changed conten
 ## What breaks what
 
 - **rnd** is imported only from tests, by 1 part (tests), and sits on the path of 1 door.
+- **entries/** is written by rnd and read by rnd, and by 1 test; a hand edit reaches every reader.
 
 the repository root holds only shell files, which this map does not read, so what uses it cannot be seen.
 
@@ -53,7 +56,7 @@ the repository root holds only shell files, which this map does not read, so whe
 
 ## Written but never read
 
-- **instruments/** is written by rnd/cli.py and read by nothing else in this repository.
+Every written place has a reader.
 
 ## Helpers that look duplicated
 
@@ -77,7 +80,7 @@ Read those in order to follow one pull request end to end.
 ## What this map cannot see
 
 - 3 writes and 3 reads use paths built at run time and are not named here.
-- 6 writes and 12 reads go to a path their caller passes, not to this repository.
+- 8 writes and 16 reads go to a path their caller passes, not to this repository.
 - 1 read goes to the directory the command is run in or a path its caller passes, not to this repository.
 - Statistics confidence is low: fewer than 30 qualifying commits in the window, and fewer than 25 source files reach 10 revisions.
 

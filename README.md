@@ -28,7 +28,7 @@ Two stores hold the studio's knowledge, and they do different jobs.
 | Role | the bench: intake, experiments, open questions | the shelf: verified knowledge bases |
 | Pace | an entry in minutes, claims start `unverified` | built and checked by study swarms |
 | Shape | Markdown entries, one topic each | one SQLite knowledge base per domain |
-| Mess | expected: disputed claims, dead ends and interim results stay visible | none: rows are sourced and verified |
+| How messy | messy on purpose: disputed claims, dead ends and interim results stay visible | not messy at all: every row is sourced and verified |
 
 Knowledge moves one way:
 
@@ -64,10 +64,17 @@ python -m rnd catalog list --fit adjacent   # skills worth using when the need a
 python -m rnd new "Paper title" --kind paper --field audio --tag pitch
 python -m rnd check                         # validate every file (exit 1 on errors)
 python -m rnd sql "SELECT tier, count(*) FROM sources GROUP BY tier"
+python -m rnd bump --note "what changed"  # micro version bump + CHANGELOG section
 ```
 
 Every listing command takes `--json` for agents. `rnd.cmd` (Windows) and
 `rnd.sh` (POSIX shells) are thin wrappers, so the command works from any directory.
+
+The library changes daily, so versions have five segments,
+`MAJOR.MINOR.PATCH.MICRO.NANO`. The first three version the `rnd` tool; MICRO marks a
+structural library change and NANO an ordinary update. `rnd bump` raises the
+last segment by default and writes a CHANGELOG section from the files changed
+since the last tag, so each update gets its own small tagged version.
 
 Exit codes: `0` ok · `1` invalid library files · `2` usage error or not found ·
 `3` runtime failure (an external tool, or an unexpected error). Errors print a

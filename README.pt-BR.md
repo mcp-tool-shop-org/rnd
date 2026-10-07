@@ -24,7 +24,7 @@ Duas coleções armazenam o conhecimento do estúdio, e elas desempenham funçõ
 | Função | o banco: entrada, experimentos, questões em aberto | a estante: bases de conhecimento verificadas |
 | Ritmo | uma entrada em minutos, as afirmações começam em `unverified` | criado e verificado por grupos de estudo |
 | Formato | entradas em Markdown, um tópico por vez | uma base de conhecimento SQLite por domínio |
-| Desordem | esperado: afirmações contestadas, becos sem saída e resultados intermediários permanecem visíveis | nenhum: as linhas são provenientes e verificadas |
+| Quão desorganizado | desorganizado intencionalmente: alegações contestadas, becos sem saída e resultados provisórios permanecem visíveis | nada desorganizado: cada linha é referenciada e verificada |
 
 O conhecimento se move em uma direção:
 
@@ -51,9 +51,12 @@ python -m rnd catalog list --fit adjacent   # skills worth using when the need a
 python -m rnd new "Paper title" --kind paper --field audio --tag pitch
 python -m rnd check                         # validate every file (exit 1 on errors)
 python -m rnd sql "SELECT tier, count(*) FROM sources GROUP BY tier"
+python -m rnd bump --note "what changed"  # micro version bump + CHANGELOG section
 ```
 
 Cada comando de listagem recebe `--json` para agentes. `rnd.cmd` (Windows) e `rnd.sh` (shells POSIX) são wrappers finos, então o comando funciona de qualquer diretório.
+
+A biblioteca é atualizada diariamente, por isso as versões têm cinco segmentos: `MAJOR.MINOR.PATCH.MICRO.NANO`. Os três primeiros segmentos referem-se à ferramenta `rnd`; MICRO indica uma alteração estrutural na biblioteca e NANO uma atualização normal. `rnd bump` aumenta o último segmento por padrão e cria uma seção CHANGELOG a partir dos arquivos que foram alterados desde a última versão, de modo que cada atualização recebe a sua própria versão menor, com uma etiqueta.
 
 Códigos de saída: `0` ok · `1` arquivos de biblioteca inválidos · `2` erro de uso ou não encontrado · `3` falha em tempo de execução (uma ferramenta externa ou um erro inesperado). Os erros imprimem um código, uma mensagem e uma dica; `--debug` adiciona o rastreamento da pilha.
 

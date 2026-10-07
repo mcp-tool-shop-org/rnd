@@ -97,7 +97,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "experiments",
-      "qualifyingSourceCommits": 2,
+      "qualifyingSourceCommits": 3,
       "rebaseline": null
     },
     {
@@ -277,8 +277,8 @@
         "path": "SHIP_GATE.md"
       },
       {
-        "commits": 1,
-        "lines": 83,
+        "commits": 2,
+        "lines": 98,
         "path": "atlas/README.md"
       },
       {
@@ -287,18 +287,18 @@
         "path": "atlas/boundaries.yaml"
       },
       {
-        "commits": 1,
-        "lines": 206,
+        "commits": 2,
+        "lines": 239,
         "path": "atlas/page.json"
       },
       {
-        "commits": 1,
-        "lines": 625,
+        "commits": 2,
+        "lines": 863,
         "path": "atlas/statistics.json"
       },
       {
-        "commits": 1,
-        "lines": 1376,
+        "commits": 2,
+        "lines": 1477,
         "path": "atlas/structure.json"
       },
       {
@@ -432,13 +432,13 @@
         "path": "entries/2026/2026-10-07-nvidia-rubin-architecture.md"
       },
       {
-        "commits": 1,
-        "lines": 120,
+        "commits": 2,
+        "lines": 145,
         "path": "entries/2026/2026-10-07-open-jev-style-decision-models.md"
       },
       {
-        "commits": 3,
-        "lines": 136,
+        "commits": 4,
+        "lines": 140,
         "path": "entries/2026/2026-10-07-openjev-and-open-jev-alternatives.md"
       },
       {
@@ -502,9 +502,14 @@
         "path": "entries/_template.md"
       },
       {
-        "commits": 2,
-        "lines": 100,
+        "commits": 3,
+        "lines": 192,
         "path": "experiments/openjev-vs-jev/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 92,
+        "path": "experiments/openjev-vs-jev/build_knowledge_requests.py"
       },
       {
         "commits": 1,
@@ -518,6 +523,26 @@
       },
       {
         "commits": 1,
+        "lines": 115,
+        "path": "experiments/openjev-vs-jev/compare_all.py"
+      },
+      {
+        "commits": 1,
+        "lines": 34,
+        "path": "experiments/openjev-vs-jev/kev_run.sh"
+      },
+      {
+        "commits": 1,
+        "lines": 15,
+        "path": "experiments/openjev-vs-jev/kev_serve_capped.py"
+      },
+      {
+        "commits": 1,
+        "lines": 267,
+        "path": "experiments/openjev-vs-jev/results/compare-all.json"
+      },
+      {
+        "commits": 1,
         "lines": 103,
         "path": "experiments/openjev-vs-jev/results/compare.json"
       },
@@ -528,12 +553,52 @@
       },
       {
         "commits": 1,
+        "lines": 27,
+        "path": "experiments/openjev-vs-jev/results/kev4b-determinism.json"
+      },
+      {
+        "commits": 1,
+        "lines": 27,
+        "path": "experiments/openjev-vs-jev/results/kev4b-knowledge-determinism.json"
+      },
+      {
+        "commits": 1,
+        "lines": 124,
+        "path": "experiments/openjev-vs-jev/results/kev4b-knowledge.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 124,
+        "path": "experiments/openjev-vs-jev/results/kev4b.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 27,
+        "path": "experiments/openjev-vs-jev/results/kev9b-determinism.json"
+      },
+      {
+        "commits": 1,
+        "lines": 27,
+        "path": "experiments/openjev-vs-jev/results/kev9b-knowledge-determinism.json"
+      },
+      {
+        "commits": 1,
+        "lines": 124,
+        "path": "experiments/openjev-vs-jev/results/kev9b-knowledge.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 124,
+        "path": "experiments/openjev-vs-jev/results/kev9b.jsonl"
+      },
+      {
+        "commits": 1,
         "lines": 124,
         "path": "experiments/openjev-vs-jev/results/openjev.jsonl"
       },
       {
-        "commits": 1,
-        "lines": 54,
+        "commits": 2,
+        "lines": 76,
         "path": "experiments/openjev-vs-jev/run_openjev.py"
       },
       {
@@ -767,13 +832,13 @@
     "level": "low",
     "reason": "fewer than 30 qualifying commits in the window, and fewer than 25 source files reach 10 revisions"
   },
-  "generatedAt": "2026-10-07T21:39:38.540Z",
+  "generatedAt": "2026-10-07T21:55:09.964Z",
   "generatedFrom": {
-    "commit": "55fb964e3653a3dc4cc0ad9f437e017cf5878d35"
+    "commit": "cc7a041244821dc01bd9ac2ca62f9fb62e51a00d"
   },
   "pairs": [],
   "parameters": {
-    "appliedChangesetLimit": 31.75,
+    "appliedChangesetLimit": 32,
     "changeset": 50,
     "changesetFraction": 0.25,
     "cohesionDrop": 0.2,
@@ -782,16 +847,16 @@
     "floor": "fallen",
     "floorHeld": false,
     "floorTrigger": "both",
-    "headDate": "2026-10-07T17:16:04-04:00",
-    "inScopeFiles": 127,
+    "headDate": "2026-10-07T17:39:38-04:00",
+    "inScopeFiles": 128,
     "pinnedStart": null,
     "priorFloor": "fallen",
-    "qualifyingCommits": 15,
+    "qualifyingCommits": 16,
     "qualifyingMinimum": 30,
     "revisions": 5,
     "shared": 10,
     "sharedFloorUsed": 3,
-    "since": "2026-04-10T21:16:04.000Z",
+    "since": "2026-04-10T21:39:38.000Z",
     "sourceExtensions": [
       ".js",
       ".mjs",

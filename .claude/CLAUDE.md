@@ -28,6 +28,10 @@ SQLite index, driven by `python -m rnd`. Read README.md for the format.
   studio" (Studio relevance + `relevance: act | watch | reference`). Research
   from outside the studio's fields is welcome; `reference` is a fine verdict.
 - Run `python -m rnd check` before committing; it exits 1 on any error.
+- Update as you go, and give each update its own micro version (Director,
+  2026-10-07): `python -m rnd bump [--note "…"]` (nano by default; `micro` for a new
+  experiment or catalogue), then commit, `git tag -a v<version>`, and
+  `git push --follow-tags`. GitHub releases are only for tool changes (patch and up).
 
 ## Bench, then shelf
 

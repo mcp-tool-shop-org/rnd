@@ -24,7 +24,7 @@
 | 役割 | ベンチ：情報の収集、実験、未解決の質問 | 棚：検証済みの知識ベース |
 | ペース | エントリーの作成時間：数分、主張は`unverified`から開始 | 研究チームによって作成および検証 |
 | 形式 | Markdown形式のエントリー、各エントリーは1つのトピック | ドメインごとに1つのSQLite知識ベース |
-| 雑然さ | 想定内：議論のある主張、行き詰まり、中間結果もそのまま残る | なし：各行は出典付きで検証済み |
+| どれだけ散らかっているか | 意図的に散らかしている：論争の的となっている主張、行き詰まり、および中間結果がそのまま表示される | まったく散らかっていない：すべてのデータは出所が明記され、検証されている |
 
 知識の流れは一方通行です。
 
@@ -51,9 +51,13 @@ python -m rnd catalog list --fit adjacent   # skills worth using when the need a
 python -m rnd new "Paper title" --kind paper --field audio --tag pitch
 python -m rnd check                         # validate every file (exit 1 on errors)
 python -m rnd sql "SELECT tier, count(*) FROM sources GROUP BY tier"
+python -m rnd bump --note "what changed"  # micro version bump + CHANGELOG section
 ```
 
 すべてのリスト表示コマンドは、エージェントに対して`--json`を受け取ります。`rnd.cmd`（Windows）と`rnd.sh`（POSIXシェル）は、薄いラッパーであるため、コマンドはどのディレクトリからでも実行できます。
+
+ライブラリは毎日更新されるため、バージョンは5つのセグメントで構成されます。
+`MAJOR.MINOR.PATCH.MICRO.NANO`。最初の3つのセグメントは、`rnd`ツールをバージョンアップします。MICROは、ライブラリの構造的な変更を示し、NANOは通常の更新を示します。`rnd bump`は、デフォルトで最後のセグメントをインクリメントし、前回のタグ以降に変更されたファイルからCHANGELOGセクションを作成するため、各更新には独自の小さなタグ付きバージョンが割り当てられます。
 
 終了コード：`0`（正常）、`1`（無効なライブラリファイル）、`2`（使用方法エラーまたは見つからない）、`3`（実行時エラー）（外部ツール、または予期しないエラー）。エラーが発生した場合、コード、メッセージ、およびヒントが出力されます。`--debug`は、トレースバックを追加します。
 

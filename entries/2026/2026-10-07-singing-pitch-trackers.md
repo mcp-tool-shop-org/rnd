@@ -35,13 +35,25 @@ pip-installable today: SwiftF0 (CPU, tiny) and FCPE (GPU, near-RMVPE accuracy).
 
 ## Studio relevance
 
-Recommendation:
+**Prior in-house measurement (ai-jam-sessions, 2026-09-05):** its pitch gate
+(`scripts/vocal_clock.py`, `track_f0`) chose pYIN over SwiftF0. On a synthetic
+±40-cent vibrato:
 
-1. Make SwiftF0 the default pitch pass. It turns minutes into seconds without
-   touching the GPU, which the listener model already occupies.
-2. Confirm with FCPE on the 5090.
-3. Before switching, run a three-way agreement check against pYIN on a handful
-   of real takes. Keep pYIN only for takes the trackers disagree on.
+- pYIN read +2.8 cents mean and kept the full swing;
+- SwiftF0 read +20.6 cents mean and clipped the excursion.
+
+The gate fails a note at 50 cents and warns at 25, so a 20-cent bias disqualifies
+SwiftF0 *for gating*. It stayed in the code as a cross-check only. That was one
+synthetic test.
+
+Revised recommendation:
+
+1. Run a three-way check (pYIN, SwiftF0, FCPE) on real takes. ai-jam-sessions is
+   running it on hymn takes, and its numbers belong in this entry.
+2. For the gate: FCPE (GPU) is the candidate to replace pYIN, provided it keeps
+   vibrato depth and stays near zero bias. Otherwise keep pYIN.
+3. SwiftF0 may still suit ranking, where speed matters and a uniform bias
+   cancels out.
 
 Octave-jump and discontinuity flags from the new pitch track are also the
 cheapest artefact detector available
@@ -49,6 +61,7 @@ cheapest artefact detector available
 
 ## Claims
 
+- [verified] On a synthetic ±40-cent vibrato, SwiftF0 read +20.6 cents mean bias and clipped the excursion, while pYIN read +2.8 cents with the full swing. (via: ai-jam-sessions vocal_clock measurement, 2026-09-05, reported by that session 2026-10-07)
 - [unverified] SwiftF0 reaches RPA 89.9% at 10 dB SNR versus pYIN 87.0% and CREPE 72.3%.
 - [unverified] FCPE reaches 96.79% RPA on MIR-1K at RTF 0.0062 on an RTX 4090.
 - [unverified] torchfcpe and swift-f0 are MIT-licensed; pesto-pitch is LGPL-3.0.
@@ -67,4 +80,5 @@ cheapest artefact detector available
 - [primary] https://github.com/SonyCSLParis/pesto — PESTO code
 - [primary] https://arxiv.org/pdf/2301.12258 — Morrison, Hsieh, Pruyne, Pardo, "Cross-domain Neural Pitch and Periodicity Estimation"
 - [primary] https://pypi.org/project/torchcrepe — torchcrepe
+- [rig] ai-jam-sessions scripts/vocal_clock.py track_f0 comparison, 2026-09-05
 - [user] Question from the ai-jam-sessions session, 2026-10-07; research agent (claude-sonnet-5-5) web search

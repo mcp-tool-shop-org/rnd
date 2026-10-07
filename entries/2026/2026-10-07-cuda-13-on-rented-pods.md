@@ -3,7 +3,7 @@ id: 2026-10-07-cuda-13-on-rented-pods
 title: Moving rented GPU pods from CUDA 12.8 to CUDA 13.x
 date: 2026-10-07
 kind: finding
-relevance: reference
+relevance: act
 fields: [gpu-computing, ai-infrastructure]
 tags: [cuda, driver, pytorch, runpod, offrig, a40, ai-jam-sessions]
 ---
@@ -33,16 +33,14 @@ a performance one.
 
 ## Studio relevance
 
-**Superseded on 2026-10-07:** the Director kept CUDA 13.4 for ai-jam-sessions; see
-[[2026-10-07-decision-ai-jam-sessions-cuda-13-4]] for what that requires. The
-original recommendation follows.
-
 Recommendation for the jam pods: stay on CUDA 12.8 / cu128 until a dependency
 demands 13.x. If moving, require a host driver of R580 or later per provider,
 use torch with cu130, and rebuild CUDA extensions. The real speed levers for
 SoulX are elsewhere: batching or running several takes in parallel on one GPU
 (the model uses about 4 GB of a 48 GB A40), and a smaller, cheaper GPU class.
-The Robot rig's driver (617.14) already clears 13.4's R615 floor
+(The Director's CUDA 13.4 ruling of 2026-10-07 is for si-jam-sessions, not this
+pipeline: [[2026-10-07-decision-si-jam-sessions-cuda-13-4]].) The Robot rig's
+driver (617.14) already clears 13.4's R615 floor
 ([[2026-10-07-robot-rig-cuda-stack]]).
 
 ## Claims

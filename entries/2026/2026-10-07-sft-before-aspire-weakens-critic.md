@@ -1,74 +1,99 @@
 ---
 id: 2026-10-07-sft-before-aspire-weakens-critic
-title: Fine-tuning a student before ASPIRE made its critic worse at spotting planted errors (interim, 2 of 3 seeds)
+title: SFT before ASPIRE has no reliable effect on the critic; run-to-run critic variance dominates (3 seeds)
 date: 2026-10-07
 kind: finding
 relevance: watch
 fields: [machine-learning, training, evaluation]
-tags: [aspire-si, sft, lora, critic, representation-drift, qwen2.5, planted-errors]
+tags: [aspire-si, sft, lora, critic, representation-drift, qwen2.5, planted-errors, seed-variance, null-result]
 ---
 
 ## Summary
 
-aspire-si run on 2026-10-07. A student was supervised fine-tuned (SFT) on
-teacher-written answers before ASPIRE training. Its learned critic then
-separated strong answers from planted-error copies much worse than a control
-trained with ASPIRE alone. Seed 42 showed it; seed 43 reproduces the composite
-drop but flips the local direction. Seed 44 is running, and the pre-registered
-rule needs all three seeds before a verdict.
+The aspire-si runs on 2026-10-07 asked whether supervised fine-tuning (SFT) a
+student on teacher answers *before* ASPIRE training changes how well ASPIRE's
+learned critic separates strong answers from copies with one planted error.
+
+Seed 42 suggested SFT made the critic much worse. Under the pre-registered rule
+(three seeds, mean drop ≥ 0.10), **there is no reliable difference**:
+- with the composite teacher, the mean drop was 0.06;
+- with the local teacher, it was 0.008.
+
+The finding that held is about variance, not the treatment. One configuration's
+critic ranged from 0.425 (below chance) to 0.866 across three seeds. The
+representation-drift result does replicate: ASPIRE has a repeatable drift direction
+that runs against SFT on teacher answers.
+
+The entry keeps its original id so links still resolve; the original claim is
+marked `[wrong]` below.
 
 ## Key points
 
 - **Setup:**
   - Qwen2.5-1.5B student, LoRA r16, critic head on the last hidden layer;
   - teachers: Qwen2.5-32B (local), or Qwen + Gemma-4-31B (composite);
+  - 32 training prompts;
   - judge set: 127 pairs, each a strong answer and the same answer with one
     planted error.
-- **Pairwise accuracy** on the same 127 pairs:
+- **Pairwise accuracy** on the 127 pairs:
 
-  | seed | teacher | control (ASPIRE only) | SFT-then-ASPIRE | change |
-  |---|---|---|---|---|
-  | 42 | composite | 0.866 [0.787, 0.929] | 0.646 [0.559, 0.732] | −0.22 (CIs do not overlap) |
-  | 43 | composite | 0.803 [0.720, 0.874] | 0.504 [0.417, 0.602] | −0.30 (CIs do not overlap) |
-  | 42 | local | 0.724 | 0.638 | −0.09 (CIs overlap) |
-  | 43 | local | 0.543 [0.465, 0.625] | 0.732 [0.646, 0.817] | +0.19 |
-  | 44 | both | running | running | — |
+  | teacher | arm | seed 42 | seed 43 | seed 44 | mean |
+  |---|---|---|---|---|---|
+  | composite | control (ASPIRE only) | 0.866 | 0.803 | 0.425 [0.333, 0.516] | 0.698 |
+  | composite | SFT then ASPIRE | 0.646 | 0.504 | 0.764 | 0.638 |
+  | local | control | 0.724 | 0.543 | 0.638 | 0.635 |
+  | local | SFT then ASPIRE | 0.638 | 0.732 | 0.512 | 0.627 |
 
-- **Seed noise is large:** the local control critic alone moved 0.18 between
-  seeds 42 and 43 (0.724 → 0.543). With the local Qwen-32B teacher, one run per
-  seed cannot resolve differences of that size.
+  Mean drops: composite 0.06 and local 0.008, both under the pre-registered 0.10.
+- **Critic variance dominates.**
+  - The composite control critic spanned 0.425 to 0.866 across seeds.
+  - The local control spanned 0.543 to 0.724.
+  - Single-run critic comparisons at this scale are meaningless.
+- **Training loss is not a guide.** Seed 44's best critic had *rising* critic
+  training loss.
+- **The drift trajectory replicates across all three seeds:**
+  - the fine-tune's drift points the same way every time (cosine 0.98), with
+    magnitude 20–23;
+  - ASPIRE after SFT opposes it in all 6 runs (cosine −0.49 to −0.77);
+  - control ASPIRE, without SFT, also opposes the SFT direction (−0.57 to −0.75)
+    and aligns with ASPIRE-after-SFT (+0.67 to +0.81).
 
-- **Representation drift:**
-  - the fine-tune moved hidden states about 30× as far as ASPIRE does (shared
-    direction 0.96);
-  - ASPIRE's own drift then pointed against the fine-tune's (cosine −0.77);
-  - no drift direction tracked teacher quality scores beyond a
-    random-direction null.
+  So ASPIRE has a repeatable drift direction, across seeds and teachers, that runs
+  against supervised fine-tuning on teacher answers.
 - **The fine-tune itself barely paid off:** at 1024 tokens it improved held-out
-  answers by +0.11 (paired CI [+0.016, +0.203]), under the pre-registered 0.2
-  bar.
+  answers by +0.11 (paired CI [+0.016, +0.203]), under the pre-registered 0.2 bar.
 
 ## Studio relevance
 
-A watch item for any "SFT first, then preference or critic training" plan.
-Treat as unconfirmed until seed 44 lands. After two seeds, the composite-teacher
-drop looks real and the local-teacher result looks like noise. The wider lesson
-already holds: compare critics over several seeds, never one run each.
-Mechanistically the composite drop is plausible:
-the SFT shift dominates the representation the critic reads, and ASPIRE spends
-its updates pulling against it.
+- **No evidence against "SFT first, then preference or critic training".** Don't
+  avoid it on the strength of seed 42.
+- **Treat learned-critic numbers as distributions.**
+  - At 32 prompts, budget at least three seeds per arm and pre-register the
+    decision rule.
+  - Never select a critic by its training loss.
+  - The same discipline applies to the planted-defect detector program
+    ([[2026-10-07-planted-defects-program-for-sung-mixes]]) and to any LLM judge
+    ([[2026-10-07-qwen32b-judge-position-bias]]).
+- **The drift result is the durable one.** ASPIRE pulls representations in a fixed
+  direction opposite to SFT on teacher answers. That is a mechanistic lead worth
+  following before scaling either step.
+- **The method worked.** A pre-registered three-seed rule caught a one-draw
+  "finding" before it shaped a design. It is filed here as a correction, not
+  deleted.
 
 ## Claims
 
-- [verified] On 127 planted-error pairs, pairwise accuracy was 0.866 [0.787, 0.929] for control-composite against 0.646 [0.559, 0.732] for SFT-then-ASPIRE, one run each. (via: aspire-si run report 2026-10-07-sft-then-aspire.md, reported by session A 2026-10-07)
+- [wrong] SFT before ASPIRE makes the learned critic worse at separating strong answers from planted-error copies. (via: aspire-si seeds 43 and 44 under the pre-registered three-seed rule; mean drops 0.06 composite and 0.008 local, under the 0.10 bar; reported by session A 2026-10-07)
+- [verified] Seed 42 on 127 planted-error pairs: control-composite 0.866 [0.787, 0.929] against SFT-then-ASPIRE 0.646 [0.559, 0.732], one run each. (via: aspire-si run report 2026-10-07-sft-then-aspire.md, reported by session A 2026-10-07)
+- [verified] Across seeds 42/43/44, mean pairwise accuracy was 0.698 vs 0.638 (composite control vs SFT) and 0.635 vs 0.627 (local), below the pre-registered 0.10 drop. (via: aspire-si seeds 42–44, reported by session A 2026-10-07)
+- [verified] ASPIRE's composite control critic ranged from 0.425 to 0.866 pairwise accuracy across three seeds with 32 training prompts. (via: aspire-si seeds 42–44, reported by session A 2026-10-07)
+- [verified] Critic training loss did not predict judge accuracy: seed 44's best critic had rising loss. (via: aspire-si seed 44, reported by session A 2026-10-07)
+- [verified] The SFT drift direction replicated across seeds (cosine 0.98, magnitude 20–23). ASPIRE's drift opposed it in all 6 SFT-then-ASPIRE runs (cosine −0.49 to −0.77), and control ASPIRE also opposed it (−0.57 to −0.75) while aligning with ASPIRE-after-SFT (+0.67 to +0.81). (via: aspire-si seeds 42–44 drift analysis, reported by session A 2026-10-07)
 - [verified] The SFT improved held-out answers by +0.11, paired CI [+0.016, +0.203], under the pre-registered 0.2 bar. (via: aspire-si run report, 2026-10-07)
-- [verified] Seed 43 on the same 127 pairs: control-composite 0.803 [0.720, 0.874], sft-composite 0.504 [0.417, 0.602], control-local 0.543 [0.465, 0.625], sft-local 0.732 [0.646, 0.817]. (via: aspire-si seed 43 run, reported by session A 2026-10-07)
-- [verified] ASPIRE's critic trained with the local Qwen-32B teacher varied by about 0.18 in pairwise accuracy between seeds (control-local 0.724 at seed 42, 0.543 at seed 43), one run per seed. (via: aspire-si seeds 42 and 43, reported by session A 2026-10-07)
-- [unverified] The effect replicates across seeds. Interim after 2 of 3: the composite drop reproduces (−0.22, −0.30) and the local direction flips (−0.09, +0.19). The pre-registered verdict waits on seed 44.
 
 ## Sources
 
-- [rig] aspire-si training runs on 2026-10-07, measured by session A
+- [rig] aspire-si training runs, seeds 42–44, on 2026-10-07, measured by session A
 - [primary] https://github.com/mcp-tool-shop-org/aspire-si/blob/main/docs/runs/2026-10-07-sft-then-aspire.md — run report
 - [primary] https://github.com/mcp-tool-shop-org/aspire-si/blob/main/docs/runs/2026-10-07-runs-2-3.md — runs 2–3
 - [primary] https://github.com/mcp-tool-shop-org/aspire-si/blob/main/docs/runs/2026-10-07-next-runs-plan.md — next-runs plan

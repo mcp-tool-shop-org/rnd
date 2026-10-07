@@ -37,6 +37,13 @@ Check both in the first 30 seconds, before installing or downloading anything.
   | an hour later, same filesystem | 238–540 MB/s | 59–74 MB/s | ~65 GB of Qwen 32B in about 2 min |
   | second pod, same filesystem (seed 43) | ~540 MB/s | 74 MB/s | setup in 6 min; run cost $5.58 |
 
+- **Container disk instead of a network volume:** seed 44 used
+  `container_disk_gb: 180` with `HF_HOME=/root/hf`.
+  - Writes ran at about 1.3 GB/s, setup took under 5 minutes, and the run cost
+    $5.22.
+  - One earlier draw with the same disk sat pulling its image for over 15 minutes.
+    offrig's watchdog terminated it ($0.56). It looks host-specific, so gate on
+    time-to-ready as well.
 - **Capacity:** two composite runs side by side used 77.8 of 96 GB on one
   RTX PRO 6000, so pairing runs on one pod works at this model size.
 
@@ -60,6 +67,7 @@ the test bed before paying" rule.
 - [verified] torch 2.13.0+cu130 (pulled by vllm 0.31.0) failed with "driver too old" on an A100 host with driver 570.195.03 and worked on one with 580.126.16. (via: aspire-si pod runs, reported by session A 2026-10-07)
 - [verified] Within data centre eur-is-2, /workspace write speed ranged from 32 MB/s to 238–540 MB/s an hour apart. (via: aspire-si pod runs, reported by session A 2026-10-07)
 - [verified] A second eur-is-2 pod on the same network filesystem passed the gate at about 540 MB/s write and 74 MB/s per HF stream, set up in 6 min, and ran two composite runs side by side in 77.8 of 96 GB on an RTX PRO 6000; seed 43 cost $5.58. (via: aspire-si seed 43 run, reported by session A 2026-10-07)
+- [verified] Seed 44 on container_disk_gb 180 with HF_HOME=/root/hf wrote at about 1.3 GB/s, was set up in under 5 min and cost $5.22; an earlier draw with the same disk stalled pulling its image for over 15 min and was terminated by offrig at $0.56. (via: aspire-si seed 44 run, reported by session A 2026-10-07)
 - [verified] Driver 617.14 on the Robot rig prints "CUDA UMD Version" rather than "CUDA Version". (via: session A report, and a grep for "CUDA Version" on the rig returning nothing, 2026-10-07)
 
 ## Sources

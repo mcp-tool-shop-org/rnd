@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.7] - 2026-10-07
+
+- Correction: SFT before ASPIRE has no reliable effect on the critic (3 seeds, pre-registered rule); the earlier claim is marked wrong. Critic run-to-run variance (0.425–0.866) and a replicating ASPIRE drift direction against SFT are the findings that hold
+- Pod host checks: container disk with HF_HOME on it wrote at ~1.3 GB/s; one draw stalled pulling its image
+- Updated `2026-10-07-pod-host-checks-driver-and-download`: Rented GPU pods — the driver and download speed vary per host, so check both first
+- Updated `2026-10-07-sft-before-aspire-weakens-critic`: SFT before ASPIRE has no reliable effect on the critic; run-to-run critic variance dominates (3 seeds)
+
 ## [1.1.1.0.6] - 2026-10-07
 
 - Planted-defects program: #91 review fixes; warp replay/skip plants displace the cut's vowel (0.1 s replays moved it 0.18–0.21 s), now recorded per label

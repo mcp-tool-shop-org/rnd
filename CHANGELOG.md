@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.2.0] - 2026-10-08
+
+- Experiment natural-errors: in-domain natural-error yardstick built (95 answers, 3-judge screen, 85 for review)
+- Added experiment `natural-errors`
+
 ## [1.1.3.1.1] - 2026-10-08
 
 - Three follow-up studies for critic recipes: designs for natural errors, two planter families, hard pairs

@@ -1,0 +1,467 @@
+{
+ "model": "mistral-small:24b",
+ "model_digest": "8039dd90c113",
+ "excluded_prompts": 540,
+ "kept": [
+  [
+   "programming-concepts",
+   "Can you explain why recursion is a powerful concept in programming and provide an example where it significantly simplifies a problem?"
+  ],
+  [
+   "programming-concepts",
+   "Compare and contrast the efficiency of using arrays versus linked lists for implementing a stack data structure."
+  ],
+  [
+   "programming-concepts",
+   "How do hash tables manage collisions, and what are the trade-offs between different collision resolution strategies?"
+  ],
+  [
+   "programming-concepts",
+   "Why is it important to understand different data types in programming, and how do they affect the performance and behavior of a program?"
+  ],
+  [
+   "programming-concepts",
+   "Can you argue for or against the use of single-letter variable names in programming? Consider both readability and performance."
+  ],
+  [
+   "programming-concepts",
+   "Given a scenario where you need to store a large amount of data with frequent lookups, how would you decide between using a hash table or a binary search tree?"
+  ],
+  [
+   "programming-concepts",
+   "Explain the concept of 'naming conventions' in programming and how they contribute to the maintainability of code."
+  ],
+  [
+   "programming-concepts",
+   "In the context of object-oriented programming, why might you choose to use an interface over an abstract class?"
+  ],
+  [
+   "software-engineering",
+   "Can you explain why testing is often considered crucial in software engineering and how it helps in making informed judgments about the reliability of a software system?"
+  ],
+  [
+   "software-engineering",
+   "Compare and contrast the merits of rewriting an entire module versus applying a patch to fix a bug. Under what circumstances would you prefer one over the other?"
+  ],
+  [
+   "software-engineering",
+   "How does the process of debugging differ between small-scale applications and large-scale, complex systems? What specific challenges does debugging in a large-scale system present?"
+  ],
+  [
+   "software-engineering",
+   "Discuss the trade-offs between performance optimization and maintainability when dealing with race conditions in a multi-threaded application."
+  ],
+  [
+   "software-engineering",
+   "Imagine you have a legacy codebase with several known bugs. How would you prioritize which bugs to fix first, and what criteria would you use to make this judgment?"
+  ],
+  [
+   "software-engineering",
+   "Argue for or against the position that automated testing tools are always superior to manual testing for catching bugs early in the software development lifecycle."
+  ],
+  [
+   "software-engineering",
+   "How do you approach the problem of integrating a new software module into an existing system, and what judgments do you make to ensure it doesn't introduce new bugs or performance issues?"
+  ],
+  [
+   "software-engineering",
+   "Compare the effectiveness of unit tests versus integration tests in identifying and resolving race conditions in concurrent programming."
+  ],
+  [
+   "software-engineering",
+   "What are the key considerations when deciding whether to use a third-party library versus developing a custom solution in-house, and how does this decision impact future software engineering judgment?"
+  ],
+  [
+   "computer-systems",
+   "Can you explain why compilers and interpreters are both used in programming, and what are the key differences between them?"
+  ],
+  [
+   "computer-systems",
+   "Compare and contrast HTTP and HTTPS. What are the security implications of using one over the other, and in which scenarios would you choose one over the other?"
+  ],
+  [
+   "computer-systems",
+   "Explain how a web request is processed from the moment a user enters a URL into a browser until the web page is displayed."
+  ],
+  [
+   "computer-systems",
+   "If a user reports that a website is not loading, how would you troubleshoot the issue using your knowledge of web requests and network protocols?"
+  ],
+  [
+   "computer-systems",
+   "Argue for or against the use of HTTPS for all websites, considering both the benefits and potential drawbacks."
+  ],
+  [
+   "computer-systems",
+   "Explain the process of how a program written in a high-level language is transformed into machine code that the computer can execute."
+  ],
+  [
+   "computer-systems",
+   "If you were designing a new programming language, would you choose to create a compiler or an interpreter for it, and why?"
+  ],
+  [
+   "algorithms",
+   "Compare and contrast the time complexities of quicksort and mergesort. In which scenarios would you prefer one over the other?"
+  ],
+  [
+   "algorithms",
+   "Why is linear search considered less efficient than binary search, and under what conditions might you choose to use linear search instead?"
+  ],
+  [
+   "algorithms",
+   "Describe the trade-offs between using bubble sort and insertion sort for sorting a list of numbers. In what situations would each be more appropriate?"
+  ],
+  [
+   "algorithms",
+   "Can you solve this problem: Given an unsorted array of integers, design an algorithm to find the second largest number with a time complexity better than O(n^2)?"
+  ],
+  [
+   "algorithms",
+   "Argue for or against the following statement: 'Gradient descent is always the best optimization algorithm for training machine learning models.'"
+  ],
+  [
+   "algorithms",
+   "Explain how the choice of initial parameters can significantly affect the performance of the gradient descent algorithm. Provide an example to illustrate your point."
+  ],
+  [
+   "algorithms",
+   "How does the concept of average-case and worst-case time complexity influence the selection of algorithms for real-world applications? Provide an example to illustrate the difference between the two."
+  ],
+  [
+   "databases",
+   "Can you explain why SQL databases are often chosen for applications that require complex transactions, while NoSQL databases are preferred for scalable, high-velocity data processing?"
+  ],
+  [
+   "databases",
+   "Compare and contrast the indexing mechanisms in SQL and NoSQL databases. Which type of database would you choose for a large-scale e-commerce platform with a high volume of read and write operations?"
+  ],
+  [
+   "databases",
+   "Evaluate the trade-off between the ACID properties of SQL databases and the BASE properties of NoSQL databases. Which set of properties is more beneficial for a banking application and why?"
+  ],
+  [
+   "databases",
+   "A company is migrating from a relational database to a NoSQL database. What are the key factors they should consider regarding data storage trade-offs?"
+  ],
+  [
+   "databases",
+   "Imagine you are designing a social media platform. Which type of database would you choose, SQL or NoSQL, and why? Explain your reasoning in terms of data storage requirements and scalability."
+  ],
+  [
+   "databases",
+   "Argue for or against the statement: 'SQL databases are becoming obsolete due to the rise of NoSQL databases.' Support your position with relevant examples and data storage considerations."
+  ],
+  [
+   "databases",
+   "Describe a scenario where a hybrid approach, combining SQL and NoSQL databases, would be the optimal solution. How would you manage the data storage trade-offs in this scenario?"
+  ],
+  [
+   "databases",
+   "How does the choice between SQL and NoSQL databases impact the way developers design their applications? Provide specific examples of how data storage decisions influence application architecture."
+  ],
+  [
+   "everyday-physics",
+   "Compare the behavior of light in a vacuum versus its behavior in different colored media, such as glass or water."
+  ],
+  [
+   "everyday-physics",
+   "Can you explain the trade-off between insulation and weight when designing a heat-resistant suit for astronauts?"
+  ],
+  [
+   "everyday-physics",
+   "Given that the Earth is closer to the sun in winter and farther away in summer, why do we experience colder temperatures in winter?"
+  ],
+  [
+   "everyday-physics",
+   "If a ship can float in both freshwater and saltwater, how would you calculate the difference in buoyancy forces experienced in each environment?"
+  ],
+  [
+   "everyday-physics",
+   "Why do we perceive different colors when light is refracted through a prism, and what does this tell us about the nature of light?"
+  ],
+  [
+   "everyday-physics",
+   "How does the transfer of heat from a hot cup of coffee to the surrounding air illustrate the principles of convection and conduction?"
+  ],
+  [
+   "everyday-physics",
+   "If you were to design a floating platform for a water-based research lab, how would you determine the optimal density and dimensions to ensure it stays afloat?"
+  ],
+  [
+   "everyday-physics",
+   "Argue the position that understanding the physics of density and buoyancy is crucial for advancements in naval architecture and marine engineering."
+  ],
+  [
+   "biology-health",
+   "Why do some vaccines require multiple doses, and what is the scientific rationale behind this approach?"
+  ],
+  [
+   "biology-health",
+   "Compare and contrast the processes of photosynthesis in plants and the production of energy in human cells. What can we learn from each process?"
+  ],
+  [
+   "biology-health",
+   "How does the immune system distinguish between self and non-self, and what happens when this distinction goes wrong?"
+  ],
+  [
+   "biology-health",
+   "Solve this: If a person is exposed to a virus and develops symptoms, but later tests negative for the virus, what might be the explanation and what steps should they take?"
+  ],
+  [
+   "biology-health",
+   "Argue the position: Should vaccination be mandatory for all individuals, and why or why not?"
+  ],
+  [
+   "biology-health",
+   "How do different types of vaccines, such as mRNA, inactivated, and live attenuated vaccines, work, and what are the advantages and disadvantages of each type?"
+  ],
+  [
+   "biology-health",
+   "Explore the similarities and differences between the human immune response to a vaccine and the response to a natural infection."
+  ],
+  [
+   "earth-climate",
+   "Can you explain why climate change is often referred to as a 'threat multiplier' for national security?"
+  ],
+  [
+   "earth-climate",
+   "Compare and contrast the processes of weathering and erosion, and discuss their roles in shaping the Earth's landscape."
+  ],
+  [
+   "earth-climate",
+   "Evaluate the trade-offs between using hydroelectric power versus solar power in a region with abundant sunlight but limited water resources."
+  ],
+  [
+   "earth-climate",
+   "Describe the stages of the water cycle and explain how human activities can disrupt this natural process."
+  ],
+  [
+   "earth-climate",
+   "If a small island nation is experiencing increased frequency of severe storms, what immediate steps can be taken to mitigate the impact on local communities?"
+  ],
+  [
+   "earth-climate",
+   "Discuss the potential consequences of melting permafrost in the Arctic and how it could affect global climate patterns."
+  ],
+  [
+   "probability-puzzles",
+   "Can you explain why the Monty Hall Problem is counterintuitive and what mathematical principle underlies the solution?"
+  ],
+  [
+   "probability-puzzles",
+   "Compare and contrast the Monty Hall Problem with a scenario where the host does not know which door hides the prize. How does this change the probabilities?"
+  ],
+  [
+   "probability-puzzles",
+   "Judge the trade-off between always switching doors versus always staying with the initial choice in the Monty Hall Problem. Under what circumstances might one strategy be preferred over the other?"
+  ],
+  [
+   "probability-puzzles",
+   "Solve this short problem: A coin is tossed three times. What is the probability that at least one of the tosses results in heads?"
+  ],
+  [
+   "probability-puzzles",
+   "Argue the position that understanding conditional probability is more important than understanding basic probability in real-world scenarios. Provide examples to support your argument."
+  ],
+  [
+   "probability-puzzles",
+   "If a doctor knows that a test for a disease has a 95% accuracy rate and that 1% of the population has the disease, explain how conditional probability can help the doctor interpret the results of a positive test."
+  ],
+  [
+   "probability-puzzles",
+   "Why does the Monty Hall Problem often lead to disagreements among people who understand basic probability? Discuss the cognitive biases that might be at play."
+  ],
+  [
+   "probability-puzzles",
+   "Describe a scenario where the concept of conditional probability is applied in a real-world situation, such as medical diagnostics or quality control in manufacturing. How does this application help in making informed decisions?"
+  ],
+  [
+   "statistics-causation",
+   "Can you explain why correlation does not imply causation and provide an example to illustrate this concept?"
+  ],
+  [
+   "statistics-causation",
+   "Compare and contrast simple random sampling with stratified sampling. In what situations might one be preferred over the other?"
+  ],
+  [
+   "statistics-causation",
+   "How can statistical data be misleading, and what are some common pitfalls to avoid when interpreting statistics?"
+  ],
+  [
+   "statistics-causation",
+   "You have a dataset with 100 observations, but you only have the resources to collect data from 20 of them. What sampling method would you use to ensure your results are representative of the entire dataset and why?"
+  ],
+  [
+   "statistics-causation",
+   "Evaluate the trade-off between using a larger sample size versus a smaller, more targeted sample size. When might a smaller sample be more advantageous?"
+  ],
+  [
+   "statistics-causation",
+   "Critically analyze the statement, 'The average person has one testicle and one ovary.' How does this illustrate a misunderstanding of statistical averages?"
+  ],
+  [
+   "statistics-causation",
+   "If a study finds that ice cream sales and drowning rates both increase during the summer, is it reasonable to conclude that ice cream sales cause drowning? Argue your position."
+  ],
+  [
+   "statistics-causation",
+   "How can the choice of statistical measures, such as mean versus median, influence the interpretation of data and potentially lead to misleading conclusions?"
+  ],
+  [
+   "statistics-causation",
+   "Discuss the concept of 'regression to the mean' and provide an example of a scenario where this phenomenon might be misinterpreted as a causal relationship."
+  ],
+  [
+   "ethics",
+   "Can you explain why keeping promises is considered ethical, and what happens when the consequences of keeping a promise are harmful?"
+  ],
+  [
+   "ethics",
+   "Compare and contrast the ethical views of a utilitarian and a deontologist when it comes to honesty in professional settings."
+  ],
+  [
+   "ethics",
+   "Utilitarianism is often criticized for justifying the 'greater good' at the expense of individual rights. Discuss two significant objections to utilitarianism and argue which one you find more compelling."
+  ],
+  [
+   "ethics",
+   "How would you judge the ethical trade-off between telling the truth and causing emotional harm versus lying to protect someone's feelings?"
+  ],
+  [
+   "ethics",
+   "A doctor knows that a patient has a terminal illness but the patient does not know. The doctor has promised the patient to always be honest. Explain what the doctor should do, considering the principles of autonomy and beneficence."
+  ],
+  [
+   "ethics",
+   "In a situation where resources are limited, how might a utilitarian and a fairness-based ethicist differ in their approach to distributing those resources?"
+  ],
+  [
+   "ethics",
+   "Imagine you are part of a team tasked with deciding whether to invest in a project that will bring significant economic benefits but will cause environmental harm. How would you apply ethical principles to make this decision?"
+  ],
+  [
+   "ethics",
+   "Is it ever morally permissible to break a promise? If so, under what circumstances? Provide a clear example to support your position."
+  ],
+  [
+   "ethics",
+   "Compare the fairness of a lottery system versus a first-come-first-serve system for allocating scarce medical resources. Which do you believe is more ethically sound and why?"
+  ],
+  [
+   "economics-policy",
+   "Why has inflation been such a persistent issue in many countries over the past decade, and what economic policies have been most effective in mitigating it?"
+  ],
+  [
+   "economics-policy",
+   "Compare and contrast the economic impacts of investing in public transportation versus maintaining and expanding roads for private vehicles."
+  ],
+  [
+   "economics-policy",
+   "Evaluate the trade-off between implementing stringent environmental regulations on energy production and maintaining affordable energy prices for consumers."
+  ],
+  [
+   "economics-policy",
+   "If a government wants to reduce its national debt, should it prioritize cutting public spending or increasing taxation, and why?"
+  ],
+  [
+   "economics-policy",
+   "Why might a country choose to impose tariffs on imported goods, and what are the potential economic consequences for both the importing and exporting countries?"
+  ],
+  [
+   "economics-policy",
+   "How does the concept of 'opportunity cost' apply to public policy decisions, and provide an example of a policy where this concept was crucial."
+  ],
+  [
+   "economics-policy",
+   "Argue for or against the idea that governments should heavily subsidize renewable energy sources, considering both economic and environmental factors."
+  ],
+  [
+   "economics-policy",
+   "Solve this problem: A small country has a limited budget and needs to decide whether to invest in education or healthcare. Given that both sectors are crucial for long-term economic growth, how should the country allocate its resources?"
+  ],
+  [
+   "economics-policy",
+   "Explain how the principles of supply and demand influence public policy decisions regarding housing affordability, and provide a specific policy example."
+  ]
+ ],
+ "dropped": [
+  {
+   "topic": "programming-concepts",
+   "prompt": "Solve this problem using recursion: Write a function to calculate the factorial of a number without using loops.",
+   "near_existing": 0.5,
+   "near_kept": 0.12
+  },
+  {
+   "topic": "computer-systems",
+   "prompt": "Discuss the trade-offs between using a compiled language versus an interpreted language in terms of performance and development speed.",
+   "near_existing": 0.5,
+   "near_kept": 0.16
+  },
+  {
+   "topic": "computer-systems",
+   "prompt": "How do compilers optimize code for better performance, and what are some common optimization techniques used?",
+   "near_existing": 0.64,
+   "near_kept": 0.15
+  },
+  {
+   "topic": "algorithms",
+   "prompt": "Can you explain why understanding Big-O notation is crucial for evaluating the efficiency of algorithms, and how it helps in making informed decisions about algorithm selection?",
+   "near_existing": 0.45,
+   "near_kept": 0.21
+  },
+  {
+   "topic": "algorithms",
+   "prompt": "Why is it important to consider the space complexity of an algorithm in addition to its time complexity? Provide an example of an algorithm where space complexity is a critical factor.",
+   "near_existing": 0.46,
+   "near_kept": 0.14
+  },
+  {
+   "topic": "databases",
+   "prompt": "Discuss the trade-offs between eventual consistency and strong consistency in NoSQL databases. In what scenarios would you prioritize one over the other?",
+   "near_existing": 0.54,
+   "near_kept": 0.13
+  },
+  {
+   "topic": "everyday-physics",
+   "prompt": "Why do some objects float while others sink, and what role does density play in this process?",
+   "near_existing": 0.73,
+   "near_kept": 0.06
+  },
+  {
+   "topic": "biology-health",
+   "prompt": "Judging the trade-offs, evaluate the benefits and risks of consuming raw versus cooked foods in terms of food safety and nutritional value.",
+   "near_existing": 0.5,
+   "near_kept": 0.1
+  },
+  {
+   "topic": "biology-health",
+   "prompt": "What are the potential long-term effects of chronic stress on the immune system, and how can these effects be mitigated through lifestyle changes?",
+   "near_existing": 0.42,
+   "near_kept": 0.11
+  },
+  {
+   "topic": "earth-climate",
+   "prompt": "What are the key differences between weather and climate, and why is it important to understand both?",
+   "near_existing": 0.45,
+   "near_kept": 0.2
+  },
+  {
+   "topic": "earth-climate",
+   "prompt": "How does the greenhouse effect work, and what role do greenhouse gases play in regulating the Earth's temperature?",
+   "near_existing": 0.67,
+   "near_kept": 0.14
+  },
+  {
+   "topic": "earth-climate",
+   "prompt": "Argue for or against the statement: 'Geothermal energy is a viable solution for reducing our dependence on fossil fuels.'",
+   "near_existing": 0.41,
+   "near_kept": 0.14
+  },
+  {
+   "topic": "probability-puzzles",
+   "prompt": "In a word problem involving conditional probability, a bag contains 3 red balls and 2 blue balls. If one ball is drawn and it is red, what is the probability that the next ball drawn is also red? Explain the reasoning step by step.",
+   "near_existing": 0.44,
+   "near_kept": 0.06
+  }
+ ]
+}

@@ -1,0 +1,263 @@
+<title>Natural Error Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a proof-reading desk. Item rail on the left (top on phones), the answer as a column of
+   sentences you can strike, a correction slip under each struck sentence, verdict bar below. */
+:root {
+  --paper: #f4f6f8; --sheet: #ffffff; --ink: #1d2733; --muted: #5c6b7a; --rule: #d6dde4;
+  --pencil: #2f5bd3; --pencil-soft: #e3eafc; --strike: #b4232c; --strike-soft: #fbe7e8;
+  --flag: #fff1c7; --flag-edge: #d9a400; --ok: #1f7a4d; --ok-soft: #e0f2e8;
+  --serif: "Literata", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #11161c; --sheet: #182029; --ink: #e3e9ef; --muted: #93a2b1; --rule: #2a3542;
+  --pencil: #8aa8ff; --pencil-soft: #1f2b4a; --strike: #ff7d84; --strike-soft: #3a1c21;
+  --flag: #3a3216; --flag-edge: #e0b33a; --ok: #6fd3a0; --ok-soft: #173a29; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #11161c; --sheet: #182029; --ink: #e3e9ef; --muted: #93a2b1; --rule: #2a3542;
+  --pencil: #8aa8ff; --pencil-soft: #1f2b4a; --strike: #ff7d84; --strike-soft: #3a1c21;
+  --flag: #3a3216; --flag-edge: #e0b33a; --ok: #6fd3a0; --ok-soft: #173a29; color-scheme: dark }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 16px; padding-block: 18px 40px; display: grid; gap: 16px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 18px; }
+h1 { font-family: var(--serif); font-weight: 600; font-size: 1.45rem; margin: 0; text-wrap: balance; }
+.meta { color: var(--muted); font-size: .9rem; }
+.tabs { display: flex; gap: 6px; margin-left: auto; }
+.tab { font: 500 .85rem var(--sans); border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+.tab[aria-pressed="true"] { background: var(--pencil); border-color: var(--pencil); color: var(--sheet); }
+.bar { height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--pencil); width: 0; transition: width .3s; }
+.desk { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 760px) { .desk { grid-template-columns: minmax(0, 1fr); } }
+.rail { background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 10px; display: grid; gap: 8px; position: sticky; top: env(safe-area-inset-top, 0px); }
+@media (max-width: 760px) { .rail { position: static; } }
+.rail h2 { font: 600 .72rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(38px, 1fr)); gap: 5px; max-height: 60vh; overflow: auto; }
+.chip { font: 500 .74rem var(--mono); font-variant-numeric: tabular-nums; border: 1px solid var(--rule); background: var(--paper); color: var(--ink); border-radius: 6px; padding: 5px 0; cursor: pointer; }
+.chip.cur { outline: 2px solid var(--pencil); outline-offset: 1px; }
+.chip.err { background: var(--strike-soft); border-color: var(--strike); color: var(--strike); }
+.chip.clean { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.chip.unsure { background: var(--flag); border-color: var(--flag-edge); }
+.legend { font-size: .78rem; color: var(--muted); line-height: 1.45; }
+.sheet { background: var(--sheet); border: 1px solid var(--rule); border-radius: 12px; padding-inline: clamp(16px, 4vw, 34px); padding-block: 22px 26px; display: grid; gap: 16px; min-width: 0; }
+.qmeta { display: flex; flex-wrap: wrap; gap: 6px 14px; font: 500 .78rem var(--mono); color: var(--muted); }
+.question { font-family: var(--serif); font-weight: 600; font-size: 1.2rem; line-height: 1.4; margin: 0; text-wrap: balance; max-width: 62ch; }
+.hint { font-size: .85rem; color: var(--muted); margin: 0; max-width: 70ch; }
+.answer { font-family: var(--serif); font-size: 1.02rem; line-height: 1.7; max-width: 68ch; display: grid; gap: 2px; }
+.s { display: block; border-radius: 6px; padding: 3px 8px; margin-inline: -8px; cursor: pointer; border-left: 3px solid transparent; }
+.s:hover { background: var(--pencil-soft); }
+.s:focus-visible { outline: 2px solid var(--pencil); outline-offset: 1px; }
+.s.flagged { background: var(--flag); border-left-color: var(--flag-edge); }
+.s.wrong { background: var(--strike-soft); border-left-color: var(--strike); text-decoration: line-through; text-decoration-color: var(--strike); text-decoration-thickness: 1.5px; }
+.why { display: block; font: .78rem var(--sans); color: var(--muted); margin-top: 2px; text-decoration: none; }
+.fix { margin: 4px 0 10px; display: grid; gap: 4px; }
+.fix label { font: 600 .72rem var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--strike); }
+textarea { font: 1rem/1.5 var(--serif); color: var(--ink); background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; padding: 8px 10px; resize: vertical; min-height: 3.2em; width: 100%; box-sizing: border-box; }
+textarea:focus-visible { outline: 2px solid var(--pencil); outline-offset: 1px; }
+.verdict { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; border-top: 1px solid var(--rule); padding-top: 14px; }
+.btn { font: 600 .9rem var(--sans); border-radius: 8px; padding: 9px 14px; cursor: pointer; border: 1px solid var(--rule); background: var(--paper); color: var(--ink); }
+.btn:focus-visible { outline: 2px solid var(--pencil); outline-offset: 2px; }
+.btn.clean { border-color: var(--ok); color: var(--ok); }
+.btn.err { border-color: var(--strike); color: var(--strike); }
+.btn.primary { background: var(--pencil); border-color: var(--pencil); color: var(--sheet); }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+.spacer { flex: 1; }
+.status { font-size: .85rem; color: var(--muted); min-height: 1.2em; }
+.kbd { font: .75rem var(--mono); border: 1px solid var(--rule); border-radius: 4px; padding: 0 4px; }
+.empty { display: grid; gap: 8px; max-width: 62ch; }
+.empty h2 { font-family: var(--serif); font-size: 1.15rem; margin: 0; }
+details summary { cursor: pointer; color: var(--muted); font-size: .85rem; }
+@media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Natural Error Review</h1>
+    <span class="meta" id="count">Loading the answers…</span>
+    <div class="tabs" role="group" aria-label="Mode">
+      <button class="tab" id="tab-review" aria-pressed="true">Review</button>
+      <button class="tab" id="tab-relabel" aria-pressed="false">Re-label (a later day)</button>
+    </div>
+  </header>
+  <div class="bar" aria-hidden="true"><i id="progress"></i></div>
+
+  <div class="desk">
+    <nav class="rail" aria-label="Answers">
+      <h2 id="rail-title">Answers</h2>
+      <div class="chips" id="chips"></div>
+      <div class="legend">Green: no error. Red: has an error. Yellow: unsure. Plain: not labelled yet.</div>
+    </nav>
+
+    <main class="sheet" id="sheet">
+      <div class="empty" id="empty">
+        <h2>The answers are on their way</h2>
+        <p class="hint">This page holds about 60–100 answers written by a small local model to questions in aspire-si's topics. Once they are loaded, each one appears here: read it, click any sentence that contains a factual error, a wrong number or unit, or a reasoning step that doesn't follow, and type the corrected sentence.</p>
+        <p class="hint" id="empty-why"></p>
+      </div>
+      <div id="item" hidden>
+        <div class="qmeta"><span id="q-id"></span><span id="q-topic"></span><span id="q-screen"></span></div>
+        <p class="question" id="q-text"></p>
+        <p class="hint" id="q-hint"></p>
+        <div class="answer" id="answer"></div>
+        <details id="notes" hidden><summary>What the screen said</summary><div id="notes-body" class="hint"></div></details>
+        <div class="verdict">
+          <button class="btn clean" id="b-clean">No error <span class="kbd">N</span></button>
+          <button class="btn err" id="b-err">Has an error <span class="kbd">E</span></button>
+          <button class="btn" id="b-unsure">Unsure <span class="kbd">U</span></button>
+          <span class="spacer"></span>
+          <button class="btn" id="b-prev">Previous</button>
+          <button class="btn primary" id="b-next">Next <span class="kbd">→</span></button>
+        </div>
+        <div class="status" id="status" role="status"></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const state = { items: [], labels: {}, relabels: {}, mode: "review", i: 0, db: null, readonly: false, draft: null };
+
+function list() {
+  const it = state.items.filter(x => state.mode === "review" ? x.review : x.relabel);
+  return it.sort((a, b) => a.order - b.order);
+}
+function store() { return state.mode === "review" ? state.labels : state.relabels; }
+function coll() { return state.mode === "review" ? "labels" : "relabels"; }
+
+function chipClass(lab) {
+  if (!lab) return "";
+  return lab.verdict === "error" ? "err" : lab.verdict === "clean" ? "clean" : "unsure";
+}
+
+function render() {
+  const items = list();
+  const labs = store();
+  const done = items.filter(x => labs[x.id]).length;
+  $("count").textContent = items.length ? `${done} of ${items.length} labelled` : "No answers loaded yet";
+  $("progress").style.width = items.length ? (100 * done / items.length) + "%" : "0";
+  $("rail-title").textContent = state.mode === "review" ? "Answers" : "Re-label set";
+  const chips = $("chips"); chips.replaceChildren();
+  items.forEach((x, k) => {
+    const b = document.createElement("button");
+    b.className = "chip " + chipClass(labs[x.id]) + (k === state.i ? " cur" : "");
+    b.textContent = String(k + 1);
+    b.title = x.id;
+    b.addEventListener("click", () => go(k));
+    chips.append(b);
+  });
+  if (!items.length) { $("empty").hidden = false; $("item").hidden = true; return; }
+  $("empty").hidden = true; $("item").hidden = false;
+  state.i = Math.min(state.i, items.length - 1);
+  const x = items[state.i];
+  if (!state.draft || state.draft.id !== x.id) {
+    const saved = labs[x.id];
+    state.draft = { id: x.id, wrong: new Set(saved ? saved.sentences || [] : []),
+                    fixes: Object.assign({}, saved ? saved.corrections || {} : {}),
+                    verdict: saved ? saved.verdict : null };
+  }
+  const d = state.draft;
+  const showFlags = state.mode === "review" && x.flags && Object.keys(x.flags).length;
+  $("q-id").textContent = x.id;
+  $("q-topic").textContent = x.topic;
+  $("q-screen").textContent = state.mode === "review" ? (showFlags ? "screen flagged sentences" : "screen flagged nothing") : "blind re-label";
+  $("q-text").textContent = x.question;
+  $("q-hint").textContent = showFlags
+    ? "Yellow sentences were flagged by the local judges. They can be wrong both ways: check every sentence, not only the yellow ones."
+    : "Read the whole answer. Click a sentence that contains an error; click it again to unmark it.";
+  const ans = $("answer"); ans.replaceChildren();
+  x.sentences.forEach((s, k) => {
+    const span = document.createElement("span");
+    span.className = "s" + (showFlags && x.flags[k] ? " flagged" : "") + (d.wrong.has(k) ? " wrong" : "");
+    span.tabIndex = 0; span.setAttribute("role", "button");
+    span.setAttribute("aria-pressed", d.wrong.has(k) ? "true" : "false");
+    span.textContent = s;
+    const toggle = () => { if (d.wrong.has(k)) { d.wrong.delete(k); delete d.fixes[k]; } else { d.wrong.add(k); d.verdict = "error"; } render(); };
+    span.addEventListener("click", toggle);
+    span.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+    ans.append(span);
+    if (d.wrong.has(k)) {
+      const box = document.createElement("div"); box.className = "fix";
+      const lab = document.createElement("label"); lab.textContent = "Corrected sentence"; lab.htmlFor = `fix-${x.id}-${k}`;
+      const ta = document.createElement("textarea"); ta.id = `fix-${x.id}-${k}`; ta.value = d.fixes[k] ?? s;
+      ta.addEventListener("input", () => { d.fixes[k] = ta.value; });
+      box.append(lab, ta); ans.append(box);
+    }
+  });
+  const notes = $("notes");
+  if (showFlags) {
+    notes.hidden = false;
+    const body = $("notes-body"); body.replaceChildren();
+    Object.entries(x.flags).forEach(([k, arr]) => {
+      const p = document.createElement("p");
+      p.textContent = `Sentence ${Number(k) + 1}: ` + arr.map(f => `${f.judge}: ${f.why}`).join(" · ");
+      body.append(p);
+    });
+  } else notes.hidden = true;
+  $("b-clean").setAttribute("aria-pressed", d.verdict === "clean");
+  $("b-err").setAttribute("aria-pressed", d.verdict === "error");
+  $("b-unsure").setAttribute("aria-pressed", d.verdict === "unsure");
+  for (const b of ["b-clean", "b-err", "b-unsure"]) $(b).disabled = state.readonly;
+  $("b-prev").disabled = state.i === 0;
+}
+
+async function save(verdict) {
+  const items = list(); const x = items[state.i]; const d = state.draft;
+  if (!x || !state.db || state.readonly) return;
+  if (verdict === "clean") { d.wrong.clear(); d.fixes = {}; }
+  if (verdict === "error" && !d.wrong.size) { $("status").textContent = "Click the sentence that contains the error first, then mark the answer."; return; }
+  d.verdict = verdict;
+  const body = { item: x.id, verdict, sentences: [...d.wrong].sort((a, b) => a - b),
+                 corrections: Object.fromEntries([...d.wrong].map(k => [String(k), d.fixes[k] ?? x.sentences[k]])),
+                 at: new Date().toISOString() };
+  try {
+    await state.db.collection(coll()).doc(x.id).set(body);
+    store()[x.id] = body;
+    $("status").textContent = `Saved ${x.id}: ${verdict === "clean" ? "no error" : verdict === "error" ? body.sentences.length + " sentence(s) marked" : "unsure"}.`;
+    go(Math.min(state.i + 1, items.length - 1));
+  } catch (e) {
+    if (e && e.code === "invalid_argument") { state.readonly = true; $("status").textContent = "This view can't save labels. Open the page as its owner."; }
+    else $("status").textContent = "Couldn't save just now. Try the button again.";
+    render();
+  }
+}
+
+function go(k) { state.i = k; state.draft = null; render(); window.scrollTo({ top: 0 }); }
+function setMode(m) { state.mode = m; state.i = 0; state.draft = null;
+  $("tab-review").setAttribute("aria-pressed", m === "review"); $("tab-relabel").setAttribute("aria-pressed", m === "relabel"); render(); }
+
+$("b-clean").addEventListener("click", () => save("clean"));
+$("b-err").addEventListener("click", () => save("error"));
+$("b-unsure").addEventListener("click", () => save("unsure"));
+$("b-next").addEventListener("click", () => go(Math.min(state.i + 1, list().length - 1)));
+$("b-prev").addEventListener("click", () => go(Math.max(state.i - 1, 0)));
+$("tab-review").addEventListener("click", () => setMode("review"));
+$("tab-relabel").addEventListener("click", () => setMode("relabel"));
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "TEXTAREA") return;
+  if (e.key === "n" || e.key === "N") save("clean");
+  else if (e.key === "e" || e.key === "E") save("error");
+  else if (e.key === "u" || e.key === "U") save("unsure");
+  else if (e.key === "ArrowRight") go(Math.min(state.i + 1, list().length - 1));
+  else if (e.key === "ArrowLeft") go(Math.max(state.i - 1, 0));
+});
+
+render();
+(async () => {
+  const db = window.claude ? await window.claude.use("db") : null;
+  if (!db) { $("empty-why").textContent = "This view can't reach the page's saved data, so nothing can be shown or saved here. Open it from your claude.ai account."; return; }
+  state.db = db;
+  const user = await window.claude.use("user");
+  if (user && user.can && (await user.can("data.write")) === false) state.readonly = true;
+  db.collection("items").onSnapshot(snap => {
+    state.items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    render();
+  }, () => { $("empty-why").textContent = "The answers couldn't be loaded. Reload the page to try again."; });
+  db.collection("labels").onSnapshot(snap => { state.labels = Object.fromEntries(snap.docs.map(d => [d.id, d.data()])); render(); });
+  db.collection("relabels").onSnapshot(snap => { state.relabels = Object.fromEntries(snap.docs.map(d => [d.id, d.data()])); render(); });
+})();
+</script>

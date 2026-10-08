@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.0.7] - 2026-10-08
+
+- natural-errors build.py p2: numbered sentences, one verdict per sentence, tune half only, resumable, run tags for the noise floor and the thinking dial
+- Updated experiment `natural-errors`
+
 ## [1.1.4.0.6] - 2026-10-08
 
 - hymn-arrangements uploaded (private), round-trip verified 21/21

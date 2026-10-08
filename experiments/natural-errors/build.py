@@ -355,7 +355,9 @@ def chat_full(model, prompt, *, think=True, json_mode=False, num_predict=6000, n
     refuse_cloud(model)
     body = {"model": model, "messages": [{"role": "user", "content": prompt}], "stream": False, "think": think,
             "options": {"temperature": 0.0, "num_predict": num_predict, "num_ctx": num_ctx, "seed": 0}}
-    if json_mode:
+    if isinstance(json_mode, dict):
+        body["format"] = json_mode          # a JSON schema (Ollama 0.35+)
+    elif json_mode:
         body["format"] = "json"
     r = post("/api/chat", body, timeout=1800)
     m = r.get("message", {})
@@ -422,16 +424,146 @@ def cmd_screen2(a):
     print(f"{judge}: {round(time.time()-t0)} s, failures {fails or 'none'}")
 
 
+# ---------------------------------------------------------------- P2: numbered sentences (tuning grid)
+# PREREG-tuning-grid.md, with R&D's pre-run amendment 1: the answer's sentences are numbered, and the
+# judge returns one verdict per sentence, so "no errors" cannot come from a short reply.
+P2_HEAD = SCREEN2[: SCREEN2.index("Question:")]
+P2_BODY = """Question:
+{question}
+
+Answer, one numbered sentence per line:
+{numbered}
+
+{reply_shape}"""
+
+P2_REPLY_THINKING = """Give a verdict for every numbered sentence, 1 to {n}, in order. Reply with JSON only:
+{{"sentences": [{{"n": 1, "verdict": "..."}}, {{"n": 2, "verdict": "..."}}, ...]}}
+A row marked "error" also needs "claim": what is wrong and what is right, as in {{"n": <its number>, "verdict": "error", "claim": "..."}}.
+"verdict" is "error" or "ok"; "claim" is required when the verdict is "error"."""
+
+P2_REPLY_REASONING = """First work through the answer in a "reasoning" field, sentence by sentence. Then give a
+verdict for every numbered sentence, 1 to {n}, in order. Reply with JSON only:
+{{"reasoning": "<your check>", "sentences": [{{"n": 1, "verdict": "..."}}, {{"n": 2, "verdict": "..."}}, ...]}}
+A row marked "error" also needs "claim": what is wrong and what is right, as in {{"n": <its number>, "verdict": "error", "claim": "..."}}.
+"verdict" is "error" or "ok"; "claim" is required when the verdict is "error"."""
+
+
+def p2_schema(reasoning):
+    row = {"type": "object", "required": ["n", "verdict"],
+           "properties": {"n": {"type": "integer"}, "verdict": {"enum": ["error", "ok"]},
+                          "claim": {"type": "string"}}}
+    props = {"sentences": {"type": "array", "items": row}}
+    req = ["sentences"]
+    if reasoning:
+        props = {"reasoning": {"type": "string"}, **props}
+        req = ["reasoning", "sentences"]
+    return {"type": "object", "required": req, "properties": props}
+
+
+def p2_parse(obj, n):
+    """(flags, None) when the reply has exactly one valid row per sentence; (None, reason) otherwise."""
+    rows = obj.get("sentences") if isinstance(obj, dict) else None
+    if not isinstance(rows, list):
+        return None, "no sentences list"
+    seen, flags = set(), []
+    for r in rows:
+        if not isinstance(r, dict) or not isinstance(r.get("n"), int) or r.get("verdict") not in ("error", "ok"):
+            return None, "bad row"
+        if r["n"] in seen:
+            return None, "repeated n"
+        seen.add(r["n"])
+        if r["verdict"] == "error":
+            claim = r.get("claim")
+            if not isinstance(claim, str) or not claim.strip():
+                return None, "error row without claim"
+            flags.append({"sentence_index": r["n"] - 1, "why": claim[:600]})
+    if seen != set(range(1, n + 1)):
+        return None, f"rows cover {len(seen)} of {n} sentences"
+    return flags, None
+
+
+def cmd_p2(a):
+    if not a.only:
+        raise SystemExit("p2 runs one judge at a time: --only <model>")
+    judge = a.only
+    if judge not in JUDGES + EXTRA_JUDGES:
+        raise SystemExit(f"--only must be one of {JUDGES + EXTRA_JUDGES}")
+    split = load_json(DATA / "split.json")
+    half = set(split["tune"])                      # tuning runs never touch the report half
+    items = [r for r in load_json(DATA / "answers.json")["items"] if r["id"] in half]
+    if a.ids:
+        want = set(a.ids.split(","))
+        if not want <= half:
+            raise SystemExit(f"--ids outside the tune half: {sorted(want - half)}")
+        items = [r for r in items if r["id"] in want]
+    tag = a.tag or "s2"
+    path = DATA / f"p2_{tag}.json"
+    out = load_json(path) if path.exists() else {
+        "spec": "PREREG-tuning-grid.md (P2, amendment 1)", "split_sha256": split["sha256"], "tag": tag,
+        "settings": {}, "judges": {}, "items": {}}
+    for r in items:
+        out["items"].setdefault(r["id"], {"sentences": sentences(r["answer"]), "flags": {}, "runs": {}})
+    think = can_think(judge)
+    level = a.think_level if think else None
+    think_arg = (level or True) if think else False
+    reasoning = not think
+    plain = judge in NO_FORMAT                     # muse-glimmer collapses under a format constraint
+    fmt = False if plain else p2_schema(reasoning)
+    ctx = a.num_ctx or 16384
+    budget = a.num_predict or (16000 if think else 4096)
+    out["judges"][judge] = digest(judge)
+    out["settings"][judge] = {"think": think_arg, "schema": not plain, "num_predict": budget, "num_ctx": ctx,
+                              "temperature": 0.0, "seed": 0}
+    t0, fails = time.time(), {}
+    for r in items:
+        rec = out["items"][r["id"]]
+        prev = rec["runs"].get(judge)
+        if prev and prev.get("failure") is None and not a.redo:
+            continue                               # resumable per item
+        sents = rec["sentences"]
+        numbered = "\n".join(f"{i}. {s}" for i, s in enumerate(sents, 1))
+        shape = (P2_REPLY_REASONING if reasoning else P2_REPLY_THINKING).format(n=len(sents))
+        prompt = P2_HEAD + P2_BODY.format(question=r["question"], numbered=numbered, reply_shape=shape)
+        reason, flags, content, thinking, done, t1 = None, None, "", "", None, time.time()
+        for _attempt in (1, 2):                    # an invalid reply is retried once, then abstains
+            reason = None
+            try:
+                content, thinking, done = chat_full(judge, prompt, think=think_arg, json_mode=fmt,
+                                                    num_ctx=ctx, num_predict=budget)
+                if done == "length":
+                    reason = "truncated"
+                else:
+                    flags, reason = p2_parse(json_object(content), len(sents))
+            except urllib.error.HTTPError as e:
+                reason = f"http {e.code}"
+            except json.JSONDecodeError:
+                reason = "unparsable"
+            if reason is None or reason == "truncated":
+                break
+        if reason:
+            fails[reason] = fails.get(reason, 0) + 1
+        rec["flags"][judge] = None if reason else flags
+        rec["runs"][judge] = {"failure": reason, "done_reason": done, "seconds": round(time.time() - t1, 1),
+                              "thinking_chars": len(thinking), "reply": content[:6000]}
+        save(path.name, out)
+    unload(judge)
+    print(f"{judge} [{tag}]: {len(items)} items, {round(time.time() - t0)} s, failures {fails or 'none'}")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--only", help="screen: re-run just this judge")
     ap.add_argument("--num-ctx", type=int, dest="num_ctx", help="screen2: context window (default 16384)")
     ap.add_argument("--num-predict", type=int, dest="num_predict", help="screen2: token budget incl. thinking (default 6000)")
+    ap.add_argument("--ids", help="p2: comma-separated tune-half ids (pilots)")
+    ap.add_argument("--tag", help="p2: run tag, written to data/p2_<tag>.json (e.g. s2, noise1, noise2, s5-low)")
+    ap.add_argument("--think-level", dest="think_level", help="p2: a model-defined thinking level, e.g. low")
+    ap.add_argument("--redo", action="store_true", help="p2: re-run items that already have a verdict")
     ap.add_argument("--sample", type=int, help="screen2: a fixed seeded sample of N answers (seed 20261008)")
     ap.add_argument("--limit", type=int, help="screen2: pilot on the first N answers (separate file)")
-    ap.add_argument("step", choices=["questions", "answers", "screen", "screen2", "select", "export", "status"])
+    ap.add_argument("step", choices=["questions", "answers", "screen", "screen2", "p2", "select", "export", "status"])
     a = ap.parse_args()
-    {"questions": cmd_questions, "answers": cmd_answers, "screen": cmd_screen, "screen2": cmd_screen2, "select": cmd_select, "export": cmd_export, "status": cmd_status}[a.step](a)
+    {"questions": cmd_questions, "answers": cmd_answers, "screen": cmd_screen, "screen2": cmd_screen2, "p2": cmd_p2, "select": cmd_select, "export": cmd_export, "status": cmd_status}[a.step](a)
 
 
 if __name__ == "__main__":

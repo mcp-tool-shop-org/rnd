@@ -1,11 +1,11 @@
 ---
 id: 2026-10-08-more-prompts-raise-the-aspire-critic-s-accuracy-but-not-its-
-title: More prompts raise the ASPIRE critic's accuracy but not its spread between seeds
+title: More prompts raise the ASPIRE critic's accuracy but not its spread between seeds; critic init and run seed both carry the spread
 date: 2026-10-08
 kind: finding
 relevance: act
 fields: [machine-learning]
-tags: [aspire-si, critic, seed-variance, planted-errors, qwen2.5, pre-registered, rented-gpu]
+tags: [aspire-si, critic, seed-variance, critic-init, nondeterminism, planted-errors, qwen2.5, pre-registered, rented-gpu]
 ---
 
 ## Summary
@@ -52,6 +52,35 @@ Prompt count alone does not fix critic variance.
   - ASPIRE generates epoch-1 dialogues online, about 1.67 min each with three
     runs side by side; epochs 2 and 3 take minutes. Plan time from epoch 1.
 
+## What carries the spread (follow-up, 2026-10-08)
+
+aspire-si then separated the two candidates under a readout committed first
+(#43): control-local at 32 prompts, with the critic's initial weights seeded
+apart from the run (`critic.init_seed`, a forked CPU generator).
+
+| run seed : critic seed | accuracy (127 pairs) |
+|---|---|
+| 42 : 42 | 0.803 |
+| 42 : 42, identical repeat | 0.858 |
+| 42 : 43 | **0.315** |
+| 42 : 44 | 0.787 |
+| 43 : 42 | 0.543 |
+| 44 : 42 | 0.827 |
+
+- **Both contribute.** Critic init alone spans 0.488; the run seed alone (adapter
+  init, data order, sampling) spans 0.283. The noise floor from the identical
+  repeat is 0.055, and both exceed the committed 0.09 bar.
+- **Critic init can invert a critic.** Critic seed 43 scored 0.315, below chance
+  with its CI under 0.5: it learned to prefer the flawed answer.
+- **Generation is not reproducible on the pod GPU:** 0 of 32 dialogues matched
+  between identical-seed runs. So a fixed run seed does not fix the dialogues,
+  and the run-seed arm also carries that nondeterminism.
+- **Caveats:**
+  - The noise floor rests on one repeat, and each arm on three runs, so the
+    ranges are rough.
+  - The run-seed arm and generation nondeterminism are not separable here.
+- **Cost:** $3.85 (offrig plan 20).
+
 ## Studio relevance
 
 - **For aspire-si:** more prompts is worth having (+0.11 mean), but a single seed
@@ -60,6 +89,14 @@ Prompt count alone does not fix critic variance.
   across seeds while varying sampling, and the reverse, to see which carries the
   0.18 spread. Session A has put it to the Director as the leading option;
   nothing is planned until he decides.
+- **After the follow-up:** a single ASPIRE critic can be silently inverted, so
+  never ship one unchecked.
+  - Train several critic inits and select or ensemble on a **held-out
+    validation set of planted pairs**, never on the 127-pair judge set, which
+    would leak.
+  - At minimum, reject any critic below 0.5 on validation.
+  - Because generation is nondeterministic on the GPU, run-to-run comparisons
+    need repeats, not just matched seeds.
 - **For anyone needing a judge of planted errors now:** use Kev-4B averaged over
   both orders, or the Kev judge fine-tune, not an ASPIRE critic.
 - **For offrig planning:** the two lessons above go into how pod time is
@@ -69,12 +106,16 @@ Prompt count alone does not fix critic variance.
 
 - [verified] With 128 training prompts, control-local ASPIRE critics scored 0.827, 0.646 and 0.764 pairwise accuracy on the 127 planted-error pairs (seeds 42, 43, 44), against 0.724, 0.543 and 0.638 with 32 prompts: the mean rose by 0.11, the range stayed 0.181. (via: aspire-si step 2, offrig plan 19, read under #35; reported by session A 2026-10-08)
 - [verified] The step 2 run cost $8.03, with $4.10 more spent on two stopped attempts. (via: offrig plan 19 and the stopped attempts, reported by session A 2026-10-08)
-- [unverified] ASPIRE critic variance between seeds comes from critic-head initialisation or student sampling. (hypothesis from the unchanged seed order; untested)
+- [verified] Seeding the critic's initial weights apart from the run, critic init alone spanned 0.488 pairwise accuracy (0.315–0.803) and the run seed alone 0.283 (0.543–0.827), against a 0.055 noise floor from one identical repeat; critic seed 43 scored 0.315, below chance. (via: aspire-si critic-init test, offrig plan 20, readout committed in #43; reported by session A 2026-10-08)
+- [verified] Identical-seed ASPIRE runs on the rented GPU produced 0 of 32 identical dialogues. (via: aspire-si plan 20, reported by session A 2026-10-08)
+- [unverified] ASPIRE critic variance between seeds comes from critic-head initialisation or student sampling. Superseded: both critic init and the run seed contribute (see above). (hypothesis from the unchanged seed order; untested)
 - [unverified] ASPIRE epoch-1 dialogue generation takes about 1.67 min per dialogue with three runs side by side on the rented pod. (session A's measurement; one run)
 
 ## Sources
 
 - [rig] aspire-si step 2, seeds 42–44 at 128 prompts, offrig plan 19, 2026-10-08, run and measured by session A; data at the aspire-si runs folder `2026-10-08-p128/plan19/`
 - [primary] https://github.com/mcp-tool-shop-org/aspire-si/pull/42 — step 2 run report (docs/runs/2026-10-08-step-2.md)
+- [primary] https://github.com/mcp-tool-shop-org/aspire-si/pull/43 — readout committed before the critic-init test
+- [rig] aspire-si critic-init test, offrig plan 20, 2026-10-08, run by session A; data in the aspire-si runs folder `2026-10-08-critic-init/plan20/`
 - [primary] https://github.com/mcp-tool-shop-org/aspire-si/pull/35 — the rules committed before the run
 - [user] Result relayed by session A (aspire-si), 2026-10-08

@@ -146,4 +146,32 @@ Against the adjudicated labels, all 95 answers; 95% bootstrap over answers:
     different sentences; this was checked against an index offset, and there isn't one.
   - A critic cannot be scored against screen flags alone.
 
+### A fourth judge: muse-glimmer (added after the gold labels)
+
+- **What it is:** muse-glimmer:latest (Meta, 27.9B Q4_K_M, digest de878ce33ad8, Apache-2.0), run
+  with `build.py screen --only muse-glimmer:latest`. Its flags go to `data/screen_extra.json`;
+  `screen.json`, which chose the review set, is untouched.
+- **Parse settings matter:**
+  - With Ollama's `format: json` it answered `{"errors": []}` on all 95 answers. The grammar
+    constraint collapses it.
+  - Its template also leaks `<|eot|>` into the content.
+  - The scored run therefore uses plain-text replies (no `format`), `num_predict` 1500, think
+    off, the JSON object pulled from the reply, and trailing special tokens stripped.
+  - 942 s, 1 unparsable reply of 95.
+
+| judge | precision | recall | error sentences flagged (both passes) | clear ones |
+|---|---|---|---|---|
+| muse-glimmer | 0.86 [0.77, 0.95] | 0.86 [0.77, 0.95] | 68 / 84 (0.81) | 56 / 63 (0.89) |
+| gemma4:31b (for comparison) | 0.72 [0.62, 0.81] | 0.97 [0.91, 1.00] | 54 / 84 (0.64) | 45 / 63 (0.71) |
+
+- **The best single screen on this set.** It points at the right sentence far more often than
+  gemma, and is balanced at the answer level.
+- **gemma + muse together** flag 78 / 84 (93%) of the error sentences both passes marked, against
+  70% for the original three judges. mistral and granite add nothing on top of that pair.
+- **Caveat: muse-glimmer is a Meta model, and the answers come from llama3.1:8b (Meta).**
+  - A same-family judge might be better at its family's mistakes, or more lenient with them.
+  - This set cannot tell which, so read the result as in-family until it is repeated on another
+    generator's answers.
+  - The gold labels are Claude-made (see Labels).
+
 Readout 2 (critics against these labels) is still to run.

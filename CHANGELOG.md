@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.3.2] - 2026-10-08
+
+- muse-glimmer as a natural-error screen judge
+- Updated `2026-10-08-three-follow-up-studies-for-critic-recipes-hard-pairs-two-pl`: Three follow-up studies for critic recipes — hard pairs, two planter families, natural errors
+- Updated experiment `natural-errors`
+
 ## [1.1.3.3.1] - 2026-10-08
 
 - SAM3 and sam-3d-objects access accepted

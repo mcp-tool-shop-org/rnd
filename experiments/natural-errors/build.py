@@ -29,7 +29,24 @@ QUESTION_MODEL = "mistral-small:24b"
 ANSWER_MODEL = "llama3.1:8b"
 JUDGES = ["gemma4:31b", "mistral-small:24b", "granite4.1:30b"]
 PINNED = {"llama3.1:8b": "46e0c10c039e", "gemma4:31b": "6316f0629137",
-          "mistral-small:24b": "8039dd90c113", "granite4.1:30b": "3f3e5df8a021"}
+          "mistral-small:24b": "8039dd90c113", "granite4.1:30b": "3f3e5df8a021",
+          "muse-glimmer:latest": "de878ce33ad8", "nemotron-3.5-lightning:latest": "e7a64ff15fb1"}
+# Judges tried after the set was built. They never change screen.json (which chose the review
+# set); their flags go to screen_extra.json and are scored against the gold labels.
+EXTRA_JUDGES = ["muse-glimmer:latest", "nemotron-3.5-lightning:latest"]
+# Ollama's format=json grammar makes muse-glimmer answer {"errors": []} every time (probe on n065,
+# 2026-10-08); without it the model flags real errors. These judges reply in plain text and the
+# JSON object is pulled out of the reply.
+NO_FORMAT = {"muse-glimmer:latest"}
+
+
+def json_object(text):
+    """The first balanced {...} in a reply, parsed."""
+    start = text.find("{")
+    if start < 0:
+        raise json.JSONDecodeError("no object", text, 0)
+    obj, _ = json.JSONDecoder().raw_decode(text[start:])
+    return obj
 
 # aspire-si's topic areas (examples/sft-experiment/lib.py TOPICS), so the set is in-domain.
 TOPICS = {
@@ -95,7 +112,9 @@ def chat(model, prompt, *, json_mode=False, temperature=0.0, num_predict=1400, n
             "options": {"temperature": temperature, "num_predict": num_predict, "num_ctx": num_ctx, "seed": 0}}
     if json_mode:
         body["format"] = "json"
-    return post("/api/chat", body)["message"]["content"]
+    # muse-glimmer's template leaks its end-of-turn token ("<|eot|>") into content; strip any
+    # trailing special tokens so JSON replies parse.
+    return re.sub(r"(\s*<\|[a-z_]+\|>)+\s*$", "", post("/api/chat", body)["message"]["content"])
 
 
 def unload(model):
@@ -196,9 +215,14 @@ def cmd_screen(a):
     items = load_json(DATA / "answers.json")["items"]
     judges = JUDGES
     if a.only:
-        if a.only not in JUDGES:
-            raise SystemExit(f"--only must be one of {JUDGES}")
-        out = load_json(DATA / "screen.json")   # re-run one judge, keep the others' flags
+        if a.only not in JUDGES + EXTRA_JUDGES:
+            raise SystemExit(f"--only must be one of {JUDGES + EXTRA_JUDGES}")
+        extra = a.only in EXTRA_JUDGES
+        base = DATA / ("screen_extra.json" if extra else "screen.json")
+        if base.exists():
+            out = load_json(base)   # re-run one judge, keep the others' flags
+        else:
+            out = {"judges": {}, "items": {r["id"]: {"sentences": sentences(r["answer"]), "flags": {}} for r in items}}
         judges = [a.only]
     else:
         out = {"judges": {}, "items": {r["id"]: {"sentences": sentences(r["answer"]), "flags": {}} for r in items}}
@@ -208,7 +232,9 @@ def cmd_screen(a):
         for r in items:
             sents = out["items"][r["id"]]["sentences"]
             try:
-                got = json.loads(chat(judge, SCREEN.format(question=r["question"], answer=r["answer"]), json_mode=True, num_predict=700))
+                reply = chat(judge, SCREEN.format(question=r["question"], answer=r["answer"]),
+                             json_mode=judge not in NO_FORMAT, num_predict=700 if judge not in NO_FORMAT else 1500)
+                got = json.loads(reply) if judge not in NO_FORMAT else json_object(reply)
                 errs = got.get("errors", []) if isinstance(got, dict) else []
             except (json.JSONDecodeError, KeyError):
                 errs, bad = [], bad + 1
@@ -219,7 +245,7 @@ def cmd_screen(a):
             out["items"][r["id"]]["flags"][judge] = flags
         unload(judge)
         print(f"{judge}: {round(time.time()-t0)} s, {bad} unparsable replies")
-        save("screen.json", out)
+        save("screen_extra.json" if a.only in EXTRA_JUDGES else "screen.json", out)
 
 
 def cmd_select(a):

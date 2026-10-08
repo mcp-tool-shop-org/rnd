@@ -124,6 +124,33 @@ Kev-9B ran on the same 124 phrase-clean records as hosted Jev and OpenJev, both
 - One task far from Kev's training distribution (long options, one-sentence
   errors), so this says nothing about its own benchmark.
 
+**Training and configuring Kev** (from its README and repo @ 5e42a7a, 2026-10-07):
+- **Fine-tuning.**
+  - Write a JSONL of API-shaped requests, each question carrying a `label`. Hold
+    out 10–20% for evaluation.
+  - Train with `kev.train --init_from jaredpalmer/kev-4b --lr 2e-5`. Starting from
+    the released checkpoint matters: in one user's test, starting from the base
+    model fell to 0.33 on Kev's own set, against 0.83 with `--init_from`.
+  - `kev.benchmark` reports accuracy, Brier score and calibration per question
+    type, and `kev.serve --run runs/mine` serves the result.
+  - A Kev-4B run costs about $1 on an H100 (Modal, via the `kev-finetune` skill).
+  - **On this rig, `kev.train` fails on native Windows:** it imports the
+    Unix-only `resource` module. Run it under WSL, patch the import, or run it on
+    a rented GPU.
+- **Prompting** is limited. Kev is not a chat model: it reads the state, the
+  question's instructions and each option's description. Its own evidence is to
+  give it derived facts, not rubrics: `KEV_DATE_FACTS=1` appends day counts and
+  lifts Kev-9B from 0.80 to 0.90 on deadline questions. Our rubric plus examples
+  test did not help, and hurt 9B.
+- **Server switches:**
+  - `/v1/systemone/permute` runs a choice question under up to 64 option orders,
+    the direct remedy for the first-option bias above;
+  - `/v1/systemone/separate` answers each question in its own pass;
+  - `KEV_TEMPERATURE=1.0` returns raw probabilities;
+  - `KEV_DTYPE=fp32` is the exact evaluation path;
+  - `KEV_TRUNCATE_STATES=1` reads only the first 65,536 tokens of a longer state;
+  - `--run` serves any checkpoint or Hub revision.
+
 AI-search summaries in this area mix up the same-named projects. Gemini's "SemIf is
 not OpenJev" was wrong, and the first summary's "SemIf (OpenJev)" pointed at the
 wrong repo. Always resolve by GitHub or Hugging Face handle.
@@ -142,6 +169,8 @@ wrong repo. Always resolve by GitHub or Hugging Face handle.
 - [verified] Adding join evidence, a rubric and four leave-one-mix-out examples did not improve Kev on phrase-clean; Kev-9B's pooled AUC fell to 0.42 [0.32, 0.52]. (via: experiments/openjev-vs-jev/results/compare-all.json, 2026-10-07)
 - [verified] On the RTX 5090 with reference PyTorch kernels, Kev-4B answered in a median 0.43 s per 3–5k-token request and Kev-9B in 0.51 s, deterministically; Kev-9B peaked at 27.8 GB on the card under a 0.82 PyTorch memory cap, and uncapped Kev-4B's allocator reached 31.9 GB. (via: experiments/openjev-vs-jev logs and receipts, 2026-10-07)
 - [verified] As a two-option judge of single planted errors in long answers (aspire-si's 127 pairs, both orders), Kev-4B scored 0.547 picking A 95% of the time and Kev-9B 0.598 picking A 87%, below aspire-si's 0.75 bar and as position-biased as Qwen2.5-32B. (via: aspire-si examples/sft-experiment/judge_kev.py, PR #33, rig run reported by session A 2026-10-07)
+- [verified] Kev's trainer (kev/train.py @ 5e42a7a) imports the Unix-only `resource` module, so `python -m kev.train` fails on native Windows with ModuleNotFoundError. (via: running it in E:/AI/envs/kev on the Robot rig, 2026-10-07)
+- [unverified] Fine-tuning from the released checkpoint (`--init_from`) kept 0.83 on Kev's own set and reached 0.88 on an 836-decision new domain, where starting from the base fell to 0.33 (Kev README, one user's report).
 - [verified] TypeSafe's Terms of Use and Acceptable Use Policy contain no clause against training on Jev outputs; the Master Customer Agreement was not checked. (via: research agent reading TypeSafe's published terms, 2026-10-07)
 
 ## Sources

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.12] - 2026-10-07
+
+- Kev: how to fine-tune it (--init_from, JSONL with labels), its server switches (/permute against option-order bias, KEV_DATE_FACTS), and that kev.train fails on native Windows
+- Updated `2026-10-07-open-jev-style-decision-models`: Open Jev-style decision models — the landscape, checked against primary sources
+
 ## [1.1.1.0.11] - 2026-10-07
 
 - Planted-defects program: PR 2 built (stretch, pitch slip, vocoded sham, compound kinds); compounds are 3–4× more available than clean replays, and replay+early-vowel has no eligible join in the shipped warp mixes

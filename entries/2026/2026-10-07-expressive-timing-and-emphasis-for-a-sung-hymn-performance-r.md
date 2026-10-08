@@ -74,6 +74,12 @@ often in favour of no shaping at all.
     median 276 ms against 179 ms written;
   - "Glo-ry" (n = 242): 0.57, close to even;
   - the warp forced 0.75, squeezing a ~280 ms syllable into 179 ms: the stutter.
+  - at 76–80 BPM in G with the zh voice (16 raw takes, 145 dotted pairs written at
+    a mean 0.70, n = 1,481): median 0.57 (IQR 0.49–0.66); per-take medians
+    0.55–0.60, so it is the model, not a bad take. By word: "Glo-ry" 0.65,
+    "Hal-le" 0.52, "make men" 0.49, "of the" 0.61, "jah, His" 0.66, "out the" 0.68.
+    SoulX under-dots, nearly evenly on "Hal-le-lu-jah". Vowel onsets, so a long
+    consonant cluster reads late, and "le" may be partly swallowed.
 - **Timing thresholds:**
   - a timing error is noticed at about 10 ms for tones under ~240 ms and about
     5% of duration above (Friberg & Sundberg 1995); Friberg's thesis gives about
@@ -126,8 +132,12 @@ singer.
 - Pin the long, beat-carrying notes (their vowel onsets) to the clock; let the
   short note's onset float.
 - Target long:(long+short) **0.70** (about 2.4:1, the measured performance
-  norm), accepting anything from SoulX's own **0.60** to 0.72. Do not warp
-  toward 0.75.
+  norm). Do not warp toward 0.75. SoulX sings about **0.57** at 76–80 BPM, so a
+  floating short note does not reach 0.70 by itself.
+- Pulling 0.57 to 0.70 at 76 BPM shortens the short note from about 339 to
+  237 ms, about 30%, more than the 20% cap below. Within the cap it reaches about
+  0.66. Writing 0.70 into the score SoulX is conditioned on has not moved its
+  output to 0.70 either (it sang 0.57 against a 0.70 score).
 - Better still, write the target durations into the score SoulX is conditioned
   on, so the take already lands near them and the warp barely moves anything.
 - At 76 BPM (beat 789 ms): 0.70 gives 552 + 237 ms; 0.60 gives 473 + 316 ms; the
@@ -179,8 +189,9 @@ judged separately from naturalness).
   swapped, plus two identical pairs: 12 trials, blind, in random order.
 - The question: which is more alive, A, B or no difference?
 - Contrasts:
-  1. dotted figures: score-forced 0.75 vs floating at 0.70 (first "Glory,
-     glory, hallelujah");
+  1. dotted figures: SoulX's own ratio (short note floating, about 0.57) vs
+     pulled toward 0.70 within the 20% cap (about 0.66), same takes and warp
+     settings (first "Glory, glory, hallelujah");
   2. "Glory" refrain: plain vs the stress-and-breath package (point 2);
   3. the same package mild vs 2.5× (catches over-application);
   4. one verse line: no phrase arch vs mild arch (3 dB, ±2–3% tempo);
@@ -206,6 +217,7 @@ judged separately from naturalness).
 - [unverified] Sung vowel onsets in Schumann Lieder were most often aligned with the piano, with consonants before the beat (Sundberg & Bauer-Huppmann 2007, abstract only).
 - [unverified] Exaggerated microtiming lowered groove ratings, from +40% for experts and +80% for non-experts (Senn et al. 2016).
 - [unverified] 46% of pre-1978 Billboard Hot 100 songs end at least 3% faster than they start (Carter & von Appen 2025).
+- [verified] Rendered against a score written at a mean long:(long+short) of 0.70, SoulX-Singer sang the Battle Hymn's dotted pairs at a median 0.57 (n = 1,481; per-take medians 0.55–0.60; "Hal-le" 0.52). (via: ai-jam-sessions dotted_ratio.py on 16 raw takes, zh voice, 76–80 BPM, 2026-10-08)
 - [unverified] A short sung syllable stays unclipped at 180 ms or more, with 150 ms as a hard limit. (Agent's judgement; no source measures it.)
 - [unverified] Keeping WSOLA compression of any one syllable under about 20% avoids the stutter. (Studio judgement from the 35% squeeze that caused it; unmeasured.)
 

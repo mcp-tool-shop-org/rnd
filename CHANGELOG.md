@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.0.2] - 2026-10-08
+
+- Battle Hymn: SoulX's measured dotted ratio at 76–80 BPM (0.57) replaces the assumption; A/B contrast 1 reframed
+- Updated `2026-10-07-expressive-timing-and-emphasis-for-a-sung-hymn-performance-r`: Expressive timing and emphasis for a sung hymn — performance rules applied to synthetic singing
+
 ## [1.1.3.0.1] - 2026-10-08
 
 - Experiment scripts point at E:/AI/rnd, the local folder's new name

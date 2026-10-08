@@ -181,14 +181,14 @@ onset (ai-jam-sessions PR 106). That is KTH's phrase-final punctuation in
 practice. The values for the next two hymns, anchored to that approval where
 the literature gives a range:
 
-| | Amazing Grace (3/4, 72) | America the Beautiful (4/4, ~76–80) |
+| | Amazing Grace (3/4, 72) | America the Beautiful (4/4, 92) |
 |---|---|---|
-| verses | 72 / 72 / 73 / 74 | 76 / 77 / 78 / 79 |
+| verses | 72 / 72 / 73 / 74 | 92 / 93 / 94 / 95 (a slower anthem pace is a separate A/B arm) |
 | line arch | 4-bar line ±2%, no sub-arch | 4-bar line ±2–3%, 2-bar half ±1–1.5% |
 | release + breath | at 4-bar line ends | at 4-bar line ends only |
 | strong beats | 1 only, +1.5 dB | 1 (+2 dB) and 3 (+1 dB) |
 | last verse | last line eased 4% | last line eased 3–5% |
-| coda | q = 2.5 to about 48 (0.66 of tempo; 52 if it drags) | q = 2.5 to about 52 (0.66) |
+| coda | q = 2.5 to about 48 (0.66 of tempo; 52 if it drags) | q = 2.5 to about 63 (0.66 of 95) |
 | dotted pairs | dotted quarter + eighth melismas: 0.70 target, leave native if 0.68–0.75, 20% cap | as the Battle Hymn |
 | dB | arch 3 dB, High-loud cap +3, emphasis +1.5, clamp +4 | Battle Hymn values |
 

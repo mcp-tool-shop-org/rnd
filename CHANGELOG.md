@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.0.4] - 2026-10-08
+
+- America the Beautiful is written at 92 BPM: relative verse build and coda
+- Updated `2026-10-07-expressive-timing-and-emphasis-for-a-sung-hymn-performance-r`: Expressive timing and emphasis for a sung hymn — performance rules applied to synthetic singing
+
 ## [1.1.3.0.3] - 2026-10-08
 
 - Hymn timing: Battle Hymn outcome; per-hymn values for Amazing Grace and America the Beautiful

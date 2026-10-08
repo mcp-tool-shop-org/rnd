@@ -253,7 +253,13 @@ own artefact. Even then it is driven by parameters and verified by measurement.
   - **Step B is split:** ai-jam-sessions builds the clips plus a per-clip
     phrase-evidence mode; the R&D seat builds the MERT and Dasheng frozen-feature
     heads.
-  - **Event spans (#96) and the detector heads (#98)** are up as CPU-tested code.
+  - **Event spans (#96, merged) and the detector heads (#98, rebased; awaiting
+    merge)** are CPU-tested code.
+    - The operating point is fitted on held-out validation mixes, and the test's
+      realised false-alarm rate is reported beside it.
+    - A third song, the Battle Hymn of the Republic (the Ditson 1862 transcription
+      and the Atlantic Monthly text), is being built. Once it is sung, the
+      song-held-out split becomes 3-fold.
     - The heads add a seam output that fires on plants and shams alike, so the
       defect outputs must separate a defective seam from a seam.
     - Evaluation reports per-severity hit rates (each detector's psychometric

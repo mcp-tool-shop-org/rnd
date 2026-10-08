@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.19] - 2026-10-07
+
+- Planted-defects program: event spans merged (#96); detector heads fit their operating point on validation mixes; a third song (Battle Hymn) makes the song split 3-fold
+- Updated `2026-10-07-planted-defects-program-for-sung-mixes`: Planted defects for sung mixes — an automated planter-versus-detector loop, anchored by the listener's measured threshold
+
 ## [1.1.1.0.18] - 2026-10-07
 
 - Planted-defects program: event spans (#96) and detector heads (#98) as CPU-tested code; the operating point must include shams

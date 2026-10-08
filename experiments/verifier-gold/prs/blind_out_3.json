@@ -1,0 +1,467 @@
+[
+ {
+  "n": 189,
+  "reasoning": "filter requires selectedPack, completed, corrections===0; +0.5 per run, Math.min(...,2.0).",
+  "label": "supported"
+ },
+ {
+  "n": 190,
+  "reasoning": "Rejected only when char_similarity < MIN_SIMILARITY (0.85); exactly 0.85 passes.",
+  "label": "supported"
+ },
+ {
+  "n": 191,
+  "reasoning": "kept only if ka and kb (both judges keep), not at least one.",
+  "label": "unsupported"
+ },
+ {
+  "n": 192,
+  "reasoning": "Code uses >= MIN_QUOTE_CHARS (12), so exactly 12 passes; 'more than 12' is wrong.",
+  "label": "unsupported"
+ },
+ {
+  "n": 193,
+  "reasoning": "p == tunnel_port || p == tunnel_port+1 are both refused.",
+  "label": "unsupported"
+ },
+ {
+  "n": 194,
+  "reasoning": "Sums max(i2-i1, j2-j1), the larger side, not the smaller.",
+  "label": "unsupported"
+ },
+ {
+  "n": 195,
+  "reasoning": "delta_tail is primary (first changed token to each copy's end); delta is secondary, changed span only.",
+  "label": "supported"
+ },
+ {
+  "n": 196,
+  "reasoning": "Unparsed when no JSON, verdict not in the three, or claim_changed not bool (truncated is handled earlier as its own outcome).",
+  "label": "supported"
+ },
+ {
+  "n": 197,
+  "reasoning": "borderline is a separate flag; passes = q1<=median<=q3, so inside-IQR borderline still passes.",
+  "label": "unsupported"
+ },
+ {
+  "n": 198,
+  "reasoning": "Defaults are rounds=7, per_answer=2; claim says 3 rounds.",
+  "label": "unsupported"
+ },
+ {
+  "n": 199,
+  "reasoning": "Second failure returns Err(BadVerdict), not a cannot_tell verdict.",
+  "label": "unsupported"
+ },
+ {
+  "n": 200,
+  "reasoning": "capturable=True only when trainer == 'graphs'; fast records plain AdamW.",
+  "label": "unsupported"
+ },
+ {
+  "n": 201,
+  "reasoning": "inside uses band[0] <= n <= band[1] with percentiles 5 and 95 of para_sizes.",
+  "label": "supported"
+ },
+ {
+  "n": 202,
+  "reasoning": "CUDA floor is set as gpu['minCudaVersion'] with a single version, not allowedCudaVersions list.",
+  "label": "unsupported"
+ },
+ {
+  "n": 203,
+  "reasoning": "if evidence.is_empty() returns (reply.verdict, None).",
+  "label": "supported"
+ },
+ {
+  "n": 204,
+  "reasoning": "ERROR/EXITED terminal: warns, delete_pod, returns PodNotReady; other statuses keep looping.",
+  "label": "supported"
+ },
+ {
+  "n": 205,
+  "reasoning": "out.len() != inputs.len() returns an error; fewer vectors rejected.",
+  "label": "unsupported"
+ },
+ {
+  "n": 206,
+  "reasoning": "required includes reasoning.",
+  "label": "unsupported"
+ },
+ {
+  "n": 207,
+  "reasoning": "flags non-empty when any marker's count in edited exceeds count in original -> self-flagging.",
+  "label": "supported"
+ },
+ {
+  "n": 208,
+  "reasoning": "The empty-string case is grouped with 3/q/Q and returns (quits); not an invalid choice.",
+  "label": "unsupported"
+ },
+ {
+  "n": 209,
+  "reasoning": "READ_SETS gated, all_read_sets_pass iterates READ_SETS only; ptrain in REPORTED_ONLY, gated False.",
+  "label": "supported"
+ },
+ {
+  "n": 210,
+  "reasoning": "Order in code: pair_problems, edit_chars>size_cap, lexical_guard, then overlaps for slot>0 (function named pair_problems, not clean_dataset, in evidence).",
+  "label": "supported"
+ },
+ {
+  "n": 211,
+  "reasoning": "The shown choose_pair says nothing about rounds or a different planter model.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 212,
+  "reasoning": "Empty evidence with check_type != Knowledge is Refused; Knowledge proceeds.",
+  "label": "supported"
+ },
+ {
+  "n": 213,
+  "reasoning": "poll() returns (5, 3s) in release/default; sleep only when i+1 < tries.",
+  "label": "supported"
+ },
+ {
+  "n": 214,
+  "reasoning": "raw = input*prompt + max_tokens*completion + request, then ceil to cent.",
+  "label": "supported"
+ },
+ {
+  "n": 215,
+  "reasoning": "EDIT_TEMPERATURES values are not shown, so 0.7 for round 1 is undetermined.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 216,
+  "reasoning": "placement_rejected matches only status 400; other errors return Err(e); 422 explicitly named.",
+  "label": "supported"
+ },
+ {
+  "n": 217,
+  "reasoning": "A verdict whose question differs from GRAMMAR_QUESTION is re-judged (old moved to gemma_v1), not kept.",
+  "label": "unsupported"
+ },
+ {
+  "n": 218,
+  "reasoning": "Docs: code fences and prose tolerated; no string verdict returns Err 'the reply had no string verdict'.",
+  "label": "supported"
+ },
+ {
+  "n": 219,
+  "reasoning": "On price lookup failure it warns and tries every listed type (offers None).",
+  "label": "unsupported"
+ },
+ {
+  "n": 220,
+  "reasoning": "MAX_CHARS is 2000, not 4000.",
+  "label": "unsupported"
+ },
+ {
+  "n": 221,
+  "reasoning": "apart (CIs non-overlapping) sets reading_primary_arm to old reading and reading to 'unresolved (depends on paraphrase method)'.",
+  "label": "supported"
+ },
+ {
+  "n": 222,
+  "reasoning": "Takes verdict[-1], grammar[-1]; unparsed if either list empty.",
+  "label": "supported"
+ },
+ {
+  "n": 223,
+  "reasoning": "missing==0, unsupported_n>=100, false_accept.high<0.10, abstain<=0.20, balanced>=0.80.",
+  "label": "supported"
+ },
+ {
+  "n": 224,
+  "reasoning": "starts_with('nomic-embed-text') gets search_document:/search_query: prefixes, else empty.",
+  "label": "supported"
+ },
+ {
+  "n": 225,
+  "reasoning": "Value 1.5 for SIZE_RATIO is not in this evidence (ratio is a parameter); rest matches.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 226,
+  "reasoning": "GRAMMAR_SCHEMA has grammatical and idiomatic booleans; GRAMMAR_QUESTION is the v2 string.",
+  "label": "supported"
+ },
+ {
+  "n": 227,
+  "reasoning": "timeout_global is 1800 seconds, not 600 (http_status_as_error(false) is right).",
+  "label": "unsupported"
+ },
+ {
+  "n": 228,
+  "reasoning": "network_volume_id sets mounts.network; else if volume_in_gb sets persistent.",
+  "label": "supported"
+ },
+ {
+  "n": 229,
+  "reasoning": "parse lowercases and maps '-' and ' ' to '_', so 'Cannot-Tell' parses.",
+  "label": "unsupported"
+ },
+ {
+  "n": 230,
+  "reasoning": "Only `not verdict or not grammar` yields unparsed; idiom is optional (None).",
+  "label": "unsupported"
+ },
+ {
+  "n": 231,
+  "reasoning": "delete_pod error only produces a warning; PodNotReady is still returned.",
+  "label": "supported"
+ },
+ {
+  "n": 232,
+  "reasoning": "dtype = dtype or features[0].dtype, docstring says fp16 in caches; zero-padded to max length.",
+  "label": "supported"
+ },
+ {
+  "n": 233,
+  "reasoning": "Both system and system_file -> Refused; no user text and no user_files -> Refused.",
+  "label": "supported"
+ },
+ {
+  "n": 234,
+  "reasoning": "usage.cost is used when Some; generation lookup only when None.",
+  "label": "unsupported"
+ },
+ {
+  "n": 235,
+  "reasoning": "len > 2: remove index 1 and push to end; otherwise unchanged.",
+  "label": "supported"
+ },
+ {
+  "n": 236,
+  "reasoning": "--format default is 'word', not 'sentence'.",
+  "label": "unsupported"
+ },
+ {
+  "n": 237,
+  "reasoning": "Upper bound is 3/n (rule of three), not 1/n.",
+  "label": "unsupported"
+ },
+ {
+  "n": 238,
+  "reasoning": "method='inclusive'; len 1 returns the value three times.",
+  "label": "supported"
+ },
+ {
+  "n": 239,
+  "reasoning": "Delete failure only warns; PodNotReady is still returned.",
+  "label": "unsupported"
+ },
+ {
+  "n": 240,
+  "reasoning": "finally: post('/api/generate', {model, keep_alive: 0}).",
+  "label": "supported"
+ },
+ {
+  "n": 241,
+  "reasoning": "_STACKS caches by id(feats) until _free_stacks, so not rebuilt every call.",
+  "label": "unsupported"
+ },
+ {
+  "n": 242,
+  "reasoning": "No file name or write shown in combine; recheck.json is not in the evidence.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 243,
+  "reasoning": "kept_now_dropped_before is len(kept_set - old_kept), not old_kept minus kept_set.",
+  "label": "unsupported"
+ },
+ {
+  "n": 244,
+  "reasoning": "#[cfg(debug_assertions)] guards the override; otherwise Self::new(key, BASE).",
+  "label": "supported"
+ },
+ {
+  "n": 245,
+  "reasoning": "if [ -n HF_TOKEN ] then (umask 077; printf ... > token file).",
+  "label": "supported"
+ },
+ {
+  "n": 246,
+  "reasoning": "Active-only, default 8 and cap 50 appear only in the vector path; keyword path (store.search) is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 247,
+  "reasoning": "Only apply_quote_rule is shown; the verify command's calling and table output are not.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 248,
+  "reasoning": "Uppercases first letter only if word[:1].isupper(); preceding a/an replaced by _article(synonym), capitalised if needed.",
+  "label": "supported"
+ },
+ {
+  "n": 249,
+  "reasoning": "Menu code shown calls store.set_budget_cap, but the settings table and key budget_cap are not in this evidence.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 250,
+  "reasoning": "clustered_auc resamples whole prompts (groups), not individual pairs.",
+  "label": "unsupported"
+ },
+ {
+  "n": 251,
+  "reasoning": "One random.Random(seed) shuffles each epoch; flipped pairs swap s,f.",
+  "label": "supported"
+ },
+ {
+  "n": 252,
+  "reasoning": "parse failure gives None via and_then, map_or default Duration 60 s.",
+  "label": "supported"
+ },
+ {
+  "n": 253,
+  "reasoning": "MIN_CALIBRATION_RUNS = 5; disabled only when env value === '1'.",
+  "label": "supported"
+ },
+ {
+  "n": 254,
+  "reasoning": "The write is inside `if [ -n HF_TOKEN ]`, so no file when unset.",
+  "label": "unsupported"
+ },
+ {
+  "n": 255,
+  "reasoning": "Nine entries listed incl. reversed-correction and natural-errors.",
+  "label": "supported"
+ },
+ {
+  "n": 256,
+  "reasoning": "Rejected when similarity < 0.85; at exactly 0.85 it is accepted.",
+  "label": "unsupported"
+ },
+ {
+  "n": 257,
+  "reasoning": "passes_default needs grounded and reasoning only; knowledge is not part of it.",
+  "label": "unsupported"
+ },
+ {
+  "n": 258,
+  "reasoning": "prefix=1, suffix=2 (4 and 3 match, 2 vs 9 differ) -> (1, 4-2, 4-2) = (1,2,2).",
+  "label": "supported"
+ },
+ {
+  "n": 259,
+  "reasoning": "The CI-excludes-zero part needs len(inside) >= MIN_SIZE_MATCHED (30), not any pair count.",
+  "label": "unsupported"
+ },
+ {
+  "n": 260,
+  "reasoning": "Unsupported with empty quote: given False so falls through to v; becomes cannot_tell only if given && !quote_ok.",
+  "label": "supported"
+ },
+ {
+  "n": 261,
+  "reasoning": "floor() = spent + committed; cap can't go below both together.",
+  "label": "unsupported"
+ },
+ {
+  "n": 262,
+  "reasoning": "ROUNDS = 3, not 2 (other numbers match).",
+  "label": "unsupported"
+ },
+ {
+  "n": 263,
+  "reasoning": "eager uses train_head; else train_head_fast with graphs=trainer=='graphs'.",
+  "label": "supported"
+ },
+ {
+  "n": 264,
+  "reasoning": "BATCH=32; embed_pending batches unembedded; check_model/check_dim refuse differing model/size.",
+  "label": "supported"
+ },
+ {
+  "n": 265,
+  "reasoning": "chunk default 64, order strong then flawed, returns scores[0::2], scores[1::2].",
+  "label": "supported"
+ },
+ {
+  "n": 266,
+  "reasoning": "If CIs don't overlap and status !== 'unresolved', errors.push(...).",
+  "label": "supported"
+ },
+ {
+  "n": 267,
+  "reasoning": "_v2 filters; sampled, misses, drop use _v2 only; older verdicts ignored.",
+  "label": "supported"
+ },
+ {
+  "n": 268,
+  "reasoning": "TEMPLATE_ALLOWANCE_TOKENS = 512, not 1024.",
+  "label": "unsupported"
+ },
+ {
+  "n": 269,
+  "reasoning": "Sign flip alone triggers; CI-exclusion difference gated by len(inside) >= 30.",
+  "label": "supported"
+ },
+ {
+  "n": 270,
+  "reasoning": "Rejected if word or synonym is in FUNCTION_WORDS.",
+  "label": "unsupported"
+ },
+ {
+  "n": 271,
+  "reasoning": "done_reason == 'length' returns truncated before any parsing.",
+  "label": "supported"
+ },
+ {
+  "n": 272,
+  "reasoning": "Skipped only when size > MAX_FILE_BYTES, so exactly 1,000,000 is not skipped.",
+  "label": "unsupported"
+ },
+ {
+  "n": 273,
+  "reasoning": "Reversed: delta (changed span only) is secondary; delta_tail is primary.",
+  "label": "unsupported"
+ },
+ {
+  "n": 274,
+  "reasoning": "Unparseable value falls back to Duration 60 s; no refusal.",
+  "label": "unsupported"
+ },
+ {
+  "n": 275,
+  "reasoning": "keeps requires outcome == 'same' AND claim_changed is False.",
+  "label": "unsupported"
+ },
+ {
+  "n": 276,
+  "reasoning": "tail_len < MIN_CHARS/4 (200) and prev+2+tail <= MAX_CHARS -> merged.",
+  "label": "supported"
+ },
+ {
+  "n": 277,
+  "reasoning": "Unsupported may leave the quote empty and stand (given false -> v).",
+  "label": "unsupported"
+ },
+ {
+  "n": 278,
+  "reasoning": "Refuses when tag None or not lane_allowed; uses own_if_allocated (read, never allocated).",
+  "label": "supported"
+ },
+ {
+  "n": 279,
+  "reasoning": "sorted distinct ids, seeded shuffle, fold = i % k, dict maps id to one fold.",
+  "label": "supported"
+ },
+ {
+  "n": 280,
+  "reasoning": "Returns false without appending if runId already present; otherwise appends one JSON line.",
+  "label": "supported"
+ },
+ {
+  "n": 281,
+  "reasoning": "ALLOWED_LANES restricts to ai-jam-sessions only; lane_allowed is also checked.",
+  "label": "unsupported"
+ }
+]

@@ -53,7 +53,22 @@ JSONL, one claim per line, in the shape the verifier's calibration runner consum
 | 1 | role-os @ ce91be8 (JS): calibration, packs, jury, recipe card, abandon | 30 | 30 | 30 | 4 |
 | 2 | offrig @ a45fe53 (Rust): verifier default rule, index, lanes, job runs, v2 create loop | 22 | 22 | 22 | 3 |
 | 3 | role-os README sentences vs the code they describe (docs vs code; one natural error) | 8 | 8 | 8 | 0 |
-| **total** | | **60** | **60** | **60** | **7** |
+| 4 | the Publisher's PR set (17 PRs, offrig/aspire-si/role-os/rnd), re-typed grounded: `prs/grounded-prs.jsonl` | 182 behaviours | 179 | 181 | 13 |
+| **total** | | | **239** | **241** | **20** |
+
+**Batch 4 (`prs/`):**
+- **Written and labelled by** the Publisher's Sonnet author (Publisher commit 5894788).
+- **Re-typed** `reasoning` → `grounded`: these are claim vs code at a merge SHA, not "what this change does". A
+  diff-based reasoning set is being built separately.
+- **Blind relabel** by R&D's Sonnet labellers (4 batches, strict "every part must hold"): **368/374 agreed**.
+- **R&D adjudicated** the 6 disagreements plus one flagged item (rulings in each item's `notes`):
+  - 1 supported → unsupported (`53-1s`, over-general "such as uni");
+  - 3 → cannot_tell (the deciding code isn't in the evidence);
+  - 1 dropped as ambiguous (`61-7u`);
+  - 1 evidence span added (`61-9s`).
+- **Spot-check:** R&D read 15 random agreements; all 15 correct.
+- **Tags:** `has_doc_comment` (185, the context's comments restate the claim) and `self_referential` (44
+  offrig#41 items about the verifier's own code), so calibration can report those strata separately.
 
 The default rule needs **at least 100 unsupported claims per check type**, about 200+ claims in all. Next
 batches widen beyond one codebase and one language, so a verifier isn't tuned to role-os's style:

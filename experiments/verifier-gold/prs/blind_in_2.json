@@ -1,0 +1,472 @@
+[
+ {
+  "n": 95,
+  "claim": "Looking up a model's provider prices sends no Authorization header, whereas the chat completion call does send a bearer key.",
+  "evidence": "    /// The dearest price across every provider of `model`, from the public endpoint list.\n    /// No key is sent with this read.\n    pub fn price(&self, model: &str) -> Result<Price> {\n        let what = \"the model's provider prices\";\n        let mut resp = self\n            .agent\n            .get(format!(\"{}/models/{model}/endpoints\", self.base))\n            .call()\n            .map_err(|e| Error::http(what, e))?;\n        let status = resp.status().as_u16();\n        let text = resp\n            .body_mut()\n            .read_to_string()\n            .map_err(|e| Error::http(what, e))?;\n        if status != 200 {\n            return Err(self.api_error(what, status, &text));\n        }\n        let v: Value = serde_json::from_str(&text).map_err(|e| Error::decode(what, e))?;\n        parse_price(&v).ok_or_else(|| Error::OpenRouter {\n            what: what.into(),\n            status,\n            body: format!(\"no priced provider listed for {model}\"),\n        })\n    }\n\n---\n\n        };\n        let mut out = Completion::default();\n        let resp = self\n            .agent\n            .post(format!(\"{}/chat/completions\", self.base))\n            .header(\"Authorization\", &format!(\"Bearer {}\", self.key))\n            .send_json(req.body())\n            .map_err(|e| fail(Error::http(what, e), &out))?;\n        let status = resp.status().as_u16();"
+ },
+ {
+  "n": 96,
+  "claim": "A finish_reason of stop adds a warning that the answer stopped at max_tokens, and an empty answer adds a warning that reasoning may have used every token.",
+  "evidence": "            if done.finish_reason.as_deref() == Some(\"length\") {\n                warnings.push(format!(\n                    \"the answer stopped at max_tokens ({}): it is cut short\",\n                    a.max_tokens\n                ));\n            }\n            if done.content.trim().is_empty() {\n                warnings.push(\"the answer is empty (reasoning may have used every token)\".into());\n            }"
+ },
+ {
+  "n": 97,
+  "claim": "If a stream chunk carries a non-null error object, the call stops and returns a failure using the error's code and message.",
+  "evidence": "            if let Some(err) = chunk.get(\"error\").filter(|e| !e.is_null()) {\n                let code = err[\"code\"].as_u64().unwrap_or(0) as u16;\n                let msg = err[\"message\"].as_str().unwrap_or(\"error mid-stream\");\n                return Err(fail(self.api_error(what, code, msg), &out));\n            }"
+ },
+ {
+  "n": 98,
+  "claim": "A stream that ends without [DONE] is an error only if no finish_reason was seen; with a finish_reason it counts as complete.",
+  "evidence": "        let mut finished = false;\n        for line in reader.lines() {\n            let line = line.map_err(|e| fail(Error::io(\"reading the stream\", e), &out))?;\n            let line = line.trim();\n            // Blank lines end events; `:` lines are keep-alive comments.\n            let Some(data) = line.strip_prefix(\"data:\").map(str::trim) else {\n                continue;\n            };\n            if data == \"[DONE]\" {\n                finished = true;\n                break;\n            }\n\n---\n\n            }\n        }\n        if !finished && out.finish_reason.is_none() {\n            return Err(fail(\n                Error::OpenRouter {\n                    what: what.into(),\n                    status,\n                    body: \"the stream ended before the completion finished\".into(),\n                },\n                &out,\n            ));\n        }\n        Ok(out)\n    }"
+ },
+ {
+  "n": 99,
+  "claim": "Giving both system and system_file is allowed, with system taking precedence, but a completion with neither user text nor user_files is refused.",
+  "evidence": "    if a.system.is_some() && a.system_file.is_some() {\n        return Err(Error::Refused(\n            \"give system or system_file, not both\".into(),\n        ));\n    }\n    if a.user.as_deref().is_none_or(str::is_empty) && a.user_files.is_empty() {\n        return Err(Error::Refused(\n            \"the completion needs user content: user, user_files or both\".into(),\n        ));\n    }"
+ },
+ {
+  "n": 100,
+  "claim": "The planting command's --format option accepts sentence or word and defaults to word.",
+  "evidence": "        \"--model\", default=\"gemma4:31b\", help=\"an Ollama model, or the served model's name with --url\"\n    )\n    a.add_argument(\"--url\", help=\"an OpenAI-compatible server (llama-server) instead of Ollama\")\n    a.add_argument(\"--teacher\", default=\"Qwen/Qwen2.5-32B-Instruct\", help=\"system prompt for --url\")\n    a.add_argument(\"--per-answer\", type=int, default=2)\n    a.add_argument(\n        \"--format\", choices=(\"sentence\", \"word\"), default=\"word\", help=\"word: a synonym swap made in code\"\n    )\n    a.add_argument(\"--out\", type=Path, required=True)"
+ },
+ {
+  "n": 101,
+  "claim": "The on_generation callback fires for every stream chunk that carries an id.",
+  "evidence": "            let Ok(chunk) = serde_json::from_str::<Value>(data) else {\n                continue;\n            };\n            if out.generation_id.is_none()\n                && let Some(id) = chunk[\"id\"].as_str().filter(|s| !s.is_empty())\n            {\n                out.generation_id = Some(id.to_string());\n                on_generation(id);\n            }\n            if out.provider.is_none()\n                && let Some(p) = chunk[\"provider\"].as_str()\n            {\n                out.provider = Some(p.to_string());\n            }"
+ },
+ {
+  "n": 102,
+  "claim": "Normalisation turns curly quotes into straight ones and collapses every run of whitespace into a single space before quotes are compared.",
+  "evidence": "/// Curly quotes to straight and every run of whitespace to one space, so a quote\n/// matches across the line wraps and typography a model or an editor changes.\npub fn normalise(s: &str) -> String {\n    let straight: String = s\n        .chars()\n        .map(|c| match c {\n            '\\u{2018}' | '\\u{2019}' | '\\u{201a}' | '\\u{201b}' => '\\'',\n            '\\u{201c}' | '\\u{201d}' | '\\u{201e}' | '\\u{201f}' => '\"',\n            c => c,\n        })\n        .collect();\n    straight.split_whitespace().collect::<Vec<_>>().join(\" \")\n}"
+ },
+ {
+  "n": 103,
+  "claim": "When OpenRouter answers 404 for a generation's charge, the lookup returns Ok(None) instead of an error.",
+  "evidence": "    /// What OpenRouter charged for a generation. `Ok(None)` while it does not know yet\n    /// (it answers 404 for a few seconds after a generation ends).\n    pub fn generation_cost(&self, generation_id: &str) -> Result<Option<GenerationCost>> {\n\n---\n\n        let status = resp.status().as_u16();\n        let text = resp\n            .body_mut()\n            .read_to_string()\n            .map_err(|e| Error::http(what, e))?;\n        if status == 404 {\n            return Ok(None);\n        }\n        if status != 200 {\n            return Err(self.api_error(what, status, &text));\n        }"
+ },
+ {
+  "n": 104,
+  "claim": "train_head_fast seeds only the CPU generator, and leaves the CUDA generator as it was before the call.",
+  "evidence": "    \"\"\"Train one CriticHead on stacked features (`stack_features`). Same initialisation, loss,\n    optimizer settings, batch order and flips as aspire-si's `train_head`. Returns the head (in eval\n    mode) and the per-step losses as a list of floats, read from the GPU once at the end.\"\"\"\n    import torch\n\n    if hparams is None:\n        from critic_heads import HPARAMS\n\n        hparams = HPARAMS\n    if head_factory is None:\n        from aspire.critic import CriticHead\n\n        head_factory = CriticHead\n\n    # One fork over init AND training, seeding CPU and CUDA: dropout runs on the GPU, so an unseeded\n    # CUDA generator made each head depend on how many heads trained before it in the process\n    # (found by ASPIRE, 2026-10-08). The fork restores the caller's RNG state afterwards.\n    cuda = x.device.type == \"cuda\"\n    with torch.random.fork_rng(devices=[x.device] if cuda else []):\n        torch.manual_seed(seed)\n        return _train(\n            role, pooling, seed, x, m, lengths, pair_index, labels_flip, hparams, graphs, head_factory\n        )"
+ },
+ {
+  "n": 105,
+  "claim": "A result's recorded optimizer is AdamW(capturable=True) only for the graphs trainer; eager and fast record plain AdamW.",
+  "evidence": "def _trainer_meta(trainer: str) -> dict:\n    return {\n        \"trainer\": trainer,\n        \"optimizer\": \"AdamW(capturable=True)\" if trainer == \"graphs\" else \"AdamW\",\n    }"
+ },
+ {
+  "n": 106,
+  "claim": "Files are classed by extension: .log is a log, source and config extensions such as rs and toml are code, and any other extension is a doc.",
+  "evidence": "/// What kind of source a file is, from its extension. Unknown text counts as a doc.\npub fn kind_for(path: &Path) -> SourceKind {\n    let ext = path\n        .extension()\n        .and_then(|e| e.to_str())\n        .unwrap_or(\"\")\n        .to_ascii_lowercase();\n    match ext.as_str() {\n        \"log\" => SourceKind::Log,\n        \"rs\" | \"py\" | \"js\" | \"mjs\" | \"cjs\" | \"ts\" | \"tsx\" | \"jsx\" | \"go\" | \"java\" | \"kt\" | \"c\"\n        | \"h\" | \"cc\" | \"cpp\" | \"hpp\" | \"cs\" | \"rb\" | \"php\" | \"swift\" | \"lua\" | \"sh\" | \"ps1\"\n        | \"sql\" | \"toml\" | \"yaml\" | \"yml\" | \"json\" | \"html\" | \"css\" | \"gd\" => SourceKind::Code,\n        _ => SourceKind::Doc,\n    }\n}"
+ },
+ {
+  "n": 107,
+  "claim": "When no embedding server answers, embed_call retries the request against the shared Ollama on port 11434.",
+  "evidence": "/// Embed through the CPU-only endpoint. A server that is not there is reported with\n/// the line that starts it; offrig never falls back to the shared Ollama.\n/// What a text is embedded as. Some models were trained with a task prefix and lose\n/// retrieval quality without it.\n#[derive(Debug, Clone, Copy, PartialEq, Eq)]\npub enum Task {\n    Document,\n    Query,\n}\n\n/// The task prefix `model` expects: nomic-embed-text was trained with\n/// `search_document: ` and `search_query: ` and its model card says to always use them.\n/// Other models get none.\npub fn task_prefix(model: &str, task: Task) -> &'static str {\n    if !model.starts_with(\"nomic-embed-text\") {\n        return \"\";\n    }\n    match task {\n        Task::Document => \"search_document: \",\n        Task::Query => \"search_query: \",\n    }\n}\n\npub fn embed_call(\n    ollama: &Ollama,\n    model: &str,\n    task: Task,\n    inputs: &[String],\n) -> Result<Vec<Vec<f32>>> {\n    let prefix = task_prefix(model, task);\n    let inputs: Vec<String> = inputs.iter().map(|t| format!(\"{prefix}{t}\")).collect();\n    ollama.embed(model, &inputs, true).map_err(|e| match e {\n        Error::Http { .. } => Error::Refused(format!(\n            \"no embedding server answers at {}; {}\",\n            ollama.base(),\n            start_line(ollama.base())\n        )),\n        other => other,\n    })\n}"
+ },
+ {
+  "n": 108,
+  "claim": "The Hugging Face token file is deleted when the job pod stops.",
+  "evidence": "/// Where a job pod's bootstrap writes the Hugging Face token (root-only), when the\n/// profile names a secret. An ssh session does not inherit the container's\n/// environment, so `exec` and `run` reach the token through `HF_TOKEN_PATH`.\npub const HF_TOKEN_FILE: &str = \"/root/.offrig-hf-token\";\n\n/// The variables every job command runs with. `HF_TOKEN_PATH` is always set: with no\n/// token configured the file does not exist and Hugging Face downloads anonymously.\npub fn job_env() -> BTreeMap<String, String> {\n    let mut env = BTreeMap::new();\n    env.insert(\"HF_HOME\".into(), HF_DIR.into());\n    env.insert(\"HF_TOKEN_PATH\".into(), HF_TOKEN_FILE.into());\n    env.insert(\"OFFRIG_JOB_DIR\".into(), JOB_DIR.into());\n    env\n}"
+ },
+ {
+  "n": 109,
+  "claim": "If a 429's Retry-After would end after the plan deadline, the GPU type is not retried and the error is returned.",
+  "evidence": "            let err = match read_json::<Pod>(resp, &format!(\"create pod {name}\")) {\n                Ok(pod) => return Ok(pod),\n                Err(e) => e,\n            };\n            if !retry_fits(deadline, delay) {\n                trace::warn(&format!(\n                    \"runpod: create {name} was rate limited; Retry-After of {}s does not fit before the plan deadline, so this GPU type is not retried and the next type is not tried\",\n                    delay.as_secs()\n                ));\n                return Err(err);\n            }\n            if retries >= CREATE_429_RETRIES {\n                return Err(err);\n            }"
+ },
+ {
+  "n": 110,
+  "claim": "The default embedding endpoint is http://127.0.0.1:11490 and the default embedding model is nomic-embed-text.",
+  "evidence": "/// The dedicated CPU-only Ollama the embeddings come from. The port sits clear of the\n/// local Ollama (11434), the plain lane (11435, 11436), the lane range (11500..11628)\n/// and the side-car range (11700..11764).\npub const DEFAULT_EMBED_URL: &str = \"http://127.0.0.1:11490\";\npub const EMBED_URL_ENV: &str = \"OFFRIG_EMBED_URL\";\npub const DEFAULT_EMBED_MODEL: &str = \"nomic-embed-text\";"
+ },
+ {
+  "n": 111,
+  "claim": "Candidates are proposed one per call at temperature 0.7 with a 1536-token limit, and each later slot for an answer is shown the earlier candidates' sentences.",
+  "evidence": "CANDIDATES = 5\nROUNDS = 3\n\n---\n\ndef stage_propose(\n    items, out: Path, side: str, url: str, round_no: int, only: set | None\n) -> None:  # pragma: no cover\n    from lib import Chat, ServerBackend\n\n    path = out / f\"candidates-{side}.json\"\n    state = _load_state(path)\n    backend = ServerBackend(url)\n    todo = [it for it in items if only is None or it[\"prompt_id\"] in only]\n    for slot in range(CANDIDATES):\n        chats, which = [], []\n        for it in todo:\n            earlier = [c for c in state.get(it[\"prompt_id\"], []) if c.get(\"sentence\")]\n            done = [c for c in state.get(it[\"prompt_id\"], []) if c[\"round\"] == round_no and c[\"slot\"] == slot]\n            if done:\n                continue\n            chats.append(Chat(PLANTER_SYSTEM, [(\"user\", planter_request(side, it, earlier))]))\n            which.append(it)\n        if not chats:\n            continue\n        replies = backend.generate(chats, 1536, 0.7)\n        for it, reply, cut in zip(which, replies, backend.last_truncated):\n            cand, why = (None, \"truncated\") if cut else apply_candidate(reply, it[\"strong\"])\n            entry = {\"round\": round_no, \"slot\": slot, \"status\": why, \"raw\": reply}\n            if cand:\n                entry |= cand | {\"id\": f\"{it['prompt_id']}-{side[0]}{round_no}{slot}\"}\n            state.setdefault(it[\"prompt_id\"], []).append(entry)\n        _save(path, state)\n        print(side, \"round\", round_no, \"slot\", slot, len(chats), flush=True)"
+ },
+ {
+  "n": 112,
+  "claim": "Looking up a model's provider prices sends the bearer key, as the chat completion call does.",
+  "evidence": "    /// The dearest price across every provider of `model`, from the public endpoint list.\n    /// No key is sent with this read.\n    pub fn price(&self, model: &str) -> Result<Price> {\n        let what = \"the model's provider prices\";\n        let mut resp = self\n            .agent\n            .get(format!(\"{}/models/{model}/endpoints\", self.base))\n            .call()\n            .map_err(|e| Error::http(what, e))?;\n        let status = resp.status().as_u16();\n        let text = resp\n            .body_mut()\n            .read_to_string()\n            .map_err(|e| Error::http(what, e))?;\n        if status != 200 {\n            return Err(self.api_error(what, status, &text));\n        }\n        let v: Value = serde_json::from_str(&text).map_err(|e| Error::decode(what, e))?;\n        parse_price(&v).ok_or_else(|| Error::OpenRouter {\n            what: what.into(),\n            status,\n            body: format!(\"no priced provider listed for {model}\"),\n        })\n    }\n\n---\n\n        };\n        let mut out = Completion::default();\n        let resp = self\n            .agent\n            .post(format!(\"{}/chat/completions\", self.base))\n            .header(\"Authorization\", &format!(\"Bearer {}\", self.key))\n            .send_json(req.body())\n            .map_err(|e| fail(Error::http(what, e), &out))?;\n        let status = resp.status().as_u16();"
+ },
+ {
+  "n": 113,
+  "claim": "During pod create, both a 400 and a 422 for one GPU type move on to the next type.",
+  "evidence": "            match self.post_pod(&spec.wire(id), &spec.name, deadline) {\n                Ok(pod) => return Ok(pod),\n                Err(e) if placement_rejected(&e) => {\n                    refused.push((id.clone(), e.to_string()));\n                    trace::verbose(&format!(\"runpod: {id} was not placed\"));\n                }\n                Err(e) => return Err(e),\n            }\n        }\n\n---\n\n/// v2 create returns 400 when that GPU type cannot be placed. 422 is a bad body\n/// and must not move the loop on. 429 is a rate limit, not a placement miss.\nfn placement_rejected(e: &Error) -> bool {\n    matches!(e, Error::Api { status: 400, .. })\n}"
+ },
+ {
+  "n": 114,
+  "claim": "The size-matched margin is added to a head's row only when sizes were supplied and the head has matched prompts, and the band uses only the paraphrase sizes that were kept after the meaning check.",
+  "evidence": "            \"reading\": skeptic_class(edit_ci, margin[1]) if prompts else \"no matched answers\",\n        }\n        if sizes and prompts:\n            row[\"size_matched\"] = _size_matched(\n                rw, rids, ew, eids, sizes[0], [sizes[1][i] for i in keep], margin\n            )\n        if secondary and all(secondary[0] in r[\"sets\"] for r in rs):"
+ },
+ {
+  "n": 115,
+  "claim": "In a release build the watchdog always polls every 60 seconds; the OFFRIG_TEST_WATCHDOG_POLL_SECS override is honoured only in debug builds.",
+  "evidence": "/// The watchdog process: one plan, until its pod is terminated or its books close.\nfn run_watchdog(project: &Path, plan_id: i64) -> anyhow::Result<()> {\n    let store = Store::open(&project.join(\".offrig\").join(\"offrig.db\"))?;\n    // Debug builds let a test shorten the poll; a release build always polls every minute.\n    #[cfg(debug_assertions)]\n    let poll = std::env::var(\"OFFRIG_TEST_WATCHDOG_POLL_SECS\")\n        .ok()\n        .and_then(|v| v.parse().ok())\n        .map_or(Duration::from_secs(60), Duration::from_secs);\n    #[cfg(not(debug_assertions))]\n    let poll = Duration::from_secs(60);\n    wlog(project, plan_id, \"watchdog started\");"
+ },
+ {
+  "n": 116,
+  "claim": "The config's embed_url takes precedence over OFFRIG_EMBED_URL, which is used only when the config has none.",
+  "evidence": "/// The embed URL to use: `env` (the value of `OFFRIG_EMBED_URL`) when set, else the\n/// config's. A URL whose port belongs to something else offrig runs is refused.\npub fn resolve_embed_url(cfg_url: &str, env: Option<&str>, tunnel_port: u16) -> Result<String> {\n    let (url, from) = match env.map(str::trim).filter(|v| !v.is_empty()) {\n        Some(v) => (v, EMBED_URL_ENV),\n        None => (cfg_url.trim(), \"embed_url\"),\n    };\n    let Some(port) = url_port(url) else {\n        return Err(Error::Config(format!(\n            \"{from} = {url:?} has no port; use http://127.0.0.1:<port>\"\n        )));\n    };\n    if let Some(why) = embed_port_conflict(port, tunnel_port) {\n        return Err(Error::Config(format!(\n            \"{from} = {url} uses port {port}, which is {why}; embeddings need their own CPU-only Ollama, e.g. {DEFAULT_EMBED_URL}\"\n        )));\n    }\n    Ok(url.trim_end_matches('/').to_string())\n}"
+ },
+ {
+  "n": 117,
+  "claim": "Stopping a pod sends DELETE to /pods/{id}, while terminating a pod posts {\"action\":\"stop\"} to /pods/{id}/action.",
+  "evidence": "    /// Terminate a pod. Its container disk is gone afterwards; a network volume is not.\n    pub fn delete_pod(&self, id: &str) -> Result<()> {\n        let started = std::time::Instant::now();\n        let resp = self\n            .agent\n            .delete(self.url(&format!(\"/pods/{id}\")))\n            .header(\"Authorization\", self.auth())\n            .call()\n            .map_err(|e| Error::http(\"delete pod\", e))?;\n        trace::api(\"delete pod\", resp.status().as_u16(), started);\n        read_ok(resp, &format!(\"delete pod {id}\"))\n    }\n\n    pub fn stop_pod(&self, id: &str) -> Result<()> {\n        let started = std::time::Instant::now();\n        let resp = self\n            .agent\n            .post(self.url(&format!(\"/pods/{id}/action\")))\n            .header(\"Authorization\", self.auth())\n            .send_json(serde_json::json!({ \"action\": \"stop\" }))\n            .map_err(|e| Error::http(\"stop pod\", e))?;\n        trace::api(\"stop pod\", resp.status().as_u16(), started);\n        read_ok(resp, &format!(\"stop pod {id}\"))\n    }"
+ },
+ {
+  "n": 118,
+  "claim": "If a stream chunk carries a non-null error object, the chunk is ignored and the stream keeps being read.",
+  "evidence": "            if let Some(err) = chunk.get(\"error\").filter(|e| !e.is_null()) {\n                let code = err[\"code\"].as_u64().unwrap_or(0) as u16;\n                let msg = err[\"message\"].as_str().unwrap_or(\"error mid-stream\");\n                return Err(fail(self.api_error(what, code, msg), &out));\n            }"
+ },
+ {
+  "n": 119,
+  "claim": "span_logprob sums token log-probabilities over the whole range starting at the given index, including token 0.",
+  "evidence": "def span_logprob(token_logprobs: list[float], start: int, end: int) -> float:\n    \"\"\"Sum of log p(token i | tokens before i) for i in [start, end). token_logprobs[i] is token\n    i's log-probability; token 0 has none and counts as 0.\"\"\"\n    return sum(token_logprobs[i] for i in range(max(start, 1), end))\n"
+ },
+ {
+  "n": 120,
+  "claim": "The baseline treats error pairs as label 1 and counts the error pairs as the sum of the labels, with paraphrase pairs being the rest.",
+  "evidence": "def baseline(rows: list[dict]) -> dict:\n    \"\"\"rows: {prompt_id, label, and each feature}. The baseline's AUC and each feature's AUC.\"\"\"\n    x = np.array([[r[f] for f in FEATURES] for r in rows], dtype=float)\n    y = np.array([r[\"label\"] for r in rows], dtype=float)\n    ids = [r[\"prompt_id\"] for r in rows]\n    scores = out_of_fold(x, y, ids)\n    point, ci = clustered_auc(list(scores), list(y), ids)\n    per_feature = {}\n    for j, name in enumerate(FEATURES):\n        # Oriented so that higher means \"more like an error\"; reported only.\n        col = list(x[:, j])\n        a = auc([c for c, t in zip(col, y) if t == 1], [c for c, t in zip(col, y) if t == 0])\n        per_feature[name] = max(a, 1 - a)\n    return {\n        \"auc\": point,\n        \"ci\": ci,\n        \"error_pairs\": int(y.sum()),\n        \"paraphrase_pairs\": int(len(y) - y.sum()),\n        \"prompts\": len(set(ids)),\n        \"feature_auc_reported_only\": per_feature,\n    }\n"
+ },
+ {
+  "n": 121,
+  "claim": "An embed port is refused if it equals the tunnel port or the port right after it (the runner port), among other reserved ports.",
+  "evidence": "/// Why `port` may not be the embed port, if it may not.\npub fn embed_port_conflict(port: u16, tunnel_port: u16) -> Option<&'static str> {\n    let lanes_top = LANE_PORT_BASE + LANE_COUNT * LANE_PORT_STEP;\n    let sidecar_top = SIDECAR_PORT_BASE + LANE_COUNT;\n    match port {\n        0..=1023 => Some(\"a privileged port\"),\n        LOCAL_OLLAMA_PORT => Some(\"the shared local Ollama's port\"),\n        p if p == tunnel_port || p == tunnel_port.saturating_add(1) => {\n            Some(\"the configured tunnel's port or its runner port\")\n        }\n        11435 | 11436 => Some(\"the plain lane's tunnel or runner port\"),\n        p if (LANE_PORT_BASE..lanes_top).contains(&p) => Some(\"a project lane's port range\"),\n        p if (SIDECAR_PORT_BASE..sidecar_top).contains(&p) => Some(\"the side-car port range\"),\n        _ => None,\n    }\n}"
+ },
+ {
+  "n": 122,
+  "claim": "The baseline uses four features, 10-fold cross-validation and an L2 strength of 1.0, and matches pconfirm with confirm, psecond with second and ptrain with train.",
+  "evidence": "FOLDS = 5\nL2 = 1.0\nFEATURES = (\"tail_delta\", \"span_delta\", \"edit_chars\", \"edit_tokens\")\n# (paraphrase set, error set): the pairs each is matched against.\nSETS = {\"pconfirm\": \"confirm\", \"psecond\": \"second\", \"ptrain\": \"train\"}"
+ },
+ {
+  "n": 123,
+  "claim": "Network volumes are listed and created under /networkvolumes, and a create sends the data center as dataCenter.",
+  "evidence": "    pub fn list_volumes(&self) -> Result<Vec<NetworkVolume>> {\n        let started = std::time::Instant::now();\n        let resp = self\n            .agent\n            .get(self.url(\"/network-volumes\"))\n            .header(\"Authorization\", self.auth())\n            .call()\n            .map_err(|e| Error::http(\"list network volumes\", e))?;\n        trace::api(\"list network volumes\", resp.status().as_u16(), started);\n        let text = read_text(resp, \"list network volumes\")?;\n        parse_named_list(&text, \"networkVolumes\", \"list network volumes\")\n    }\n\n    pub fn create_volume(\n        &self,\n        name: &str,\n        size_gb: u32,\n        data_center_id: &str,\n    ) -> Result<NetworkVolume> {\n        let body =\n            serde_json::json!({ \"name\": name, \"size\": size_gb, \"dataCenter\": data_center_id });\n        let started = std::time::Instant::now();\n        let resp = self\n            .agent\n            .post(self.url(\"/network-volumes\"))\n            .header(\"Authorization\", self.auth())\n            .send_json(&body)\n            .map_err(|e| Error::http(\"create network volume\", e))?;"
+ },
+ {
+  "n": 124,
+  "claim": "The grammar pre-screen flags a rule whenever the edited sentence has any match of it, ignoring a/an before words beginning uni, eu, one, use, usu, hour, hon or heir.",
+  "evidence": "_RULES = (\n    (\"result to\", re.compile(r\"\\bresult(?:s|ed|ing)? (?:\\w+ )?to\\b\", re.I)),\n    (\"comprise of\", re.compile(r\"\\bcompris(?:e|es|ed|ing) of\\b\", re.I)),\n    (\"doubled word\", re.compile(r\"\\b(\\w+) \\1\\b\", re.I)),\n    (\"a before vowel sound\", re.compile(r\"\\ba (?=[aeio]\\w)\", re.I)),\n    (\"an before consonant sound\", re.compile(r\"\\ban (?=[bcdfgjklmnpqrstvwxyz]\\w)\", re.I)),\n)\n\n\ndef prescreen(original: str, edited: str) -> list[str]:\n    \"\"\"Rule flags the edit newly introduces (present in the edited sentence, absent or rarer in the\n    original). Words beginning \"uni\"/\"eu\"/\"one\"/\"use\"/\"hour\"/\"hon\" are left to the model.\"\"\"\n    flags = []\n    for name, pattern in _RULES:\n\n        def hits(text):\n            return [\n                m\n                for m in pattern.finditer(text)\n                if not re.match(\n                    r\"an? (uni|eu|one|use|usu|hour|hon|heir)\", text[m.start() : m.start() + 8], re.I\n                )\n            ]\n\n        if len(hits(edited)) > len(hits(original)):\n            flags.append(name)\n    return flags\n"
+ },
+ {
+  "n": 125,
+  "claim": "A model passes a check type's default rule only if it has no missing outcomes, at least 100 unsupported claims, a false-accept upper bound strictly below 10%, and an abstain rate strictly below 20%, and decided balanced accuracy of at least 0.80.",
+  "evidence": "/// The default rule's thresholds.\npub const MAX_FALSE_ACCEPT_UPPER: f64 = 0.10;\npub const MAX_ABSTAIN: f64 = 0.20;\npub const MIN_BALANCED_ACCURACY: f64 = 0.80;\npub const MIN_UNSUPPORTED: usize = 100;\n\n---\n\n    let passes_default_rule = missing == 0\n        && unsupported_n >= MIN_UNSUPPORTED\n        && false_accept.high < MAX_FALSE_ACCEPT_UPPER\n        && abstain.rate.is_some_and(|a| a <= MAX_ABSTAIN)\n        && decided_balanced_accuracy.is_some_and(|b| b >= MIN_BALANCED_ACCURACY);"
+ },
+ {
+  "n": 126,
+  "claim": "`offrig budget` with no amount opens the menu only when --show is absent and both stdin and stdout are terminals; otherwise it prints the one-line budget.",
+  "evidence": "        s.cfg.active()?,\n        &mut print_event(&mut last),\n    )?))\n}\n\n/// A person at a terminal: both stdin and stdout are terminals. A tool that captures\n/// stdout (an agent's shell, a script, a test) gets the plain line instead of a menu.\nfn interactive() -> bool {\n    use std::io::IsTerminal;\n    std::io::stdin().is_terminal() && std::io::stdout().is_terminal()\n}\n\nfn run(cli: Cli) -> Result<()> {\n    match cli.cmd {\n        Cmd::Budget { usd, show, project } => {\n            let dir = match project {\n                Some(p) => p,\n                None => std::env::current_dir()?,\n            };\n            let store = offrig_core::store::Store::open(&dir.join(\".offrig\").join(\"offrig.db\"))?;\n            if let Some(cap) = usd {\n                store.set_budget_cap(cap)?;\n                info!(\"budget cap set to ${cap:.2} for {}\", dir.display());\n            } else if !show && interactive() {\n                // The menu names the project by its folder, never the full path.\n                let name = dir.file_name().map_or_else(\n                    || \"this project\".into(),\n                    |n| n.to_string_lossy().into_owned(),\n                );\n                return budget_menu::run(\n                    &store,\n                    &name,\n                    &mut std::io::stdin().lock(),\n                    &mut std::io::stdout(),\n                );\n            }\n            println!(\"{}\", budget_menu::line(&store.budget()?));\n            Ok(())\n        }\n        Cmd::Init => {\n            let path = offrig_core::config::config_path()?;\n            if path.exists() {\n                println!(\"config already exists: {}\", path.display());"
+ },
+ {
+  "n": 127,
+  "claim": "A swap is rejected as a function word if either the original word or the synonym is in the function-word list.",
+  "evidence": "    if synonym.lower() == word.lower():\n        return None, \"synonym unchanged\"\n    if word.lower() in FUNCTION_WORDS or synonym.lower() in FUNCTION_WORDS:\n        return None, \"function word\"\n    at = answer.index(sentence) + hits[0].start()\n    if any(a <= at < b for a, b in _code_or_maths(answer)):\n        return None, \"inside code or maths\""
+ },
+ {
+  "n": 128,
+  "claim": "check_model refuses whenever the index has no stored embed_model, telling the user to rebuild.",
+  "evidence": "/// Refuse when the index was built with another model than `model`.\npub fn check_model(store: &Store, model: &str) -> Result<()> {\n    match store.setting(\"embed_model\")? {\n        Some(stored) if stored != model => Err(Error::Refused(format!(\n            \"the project index was built with {stored}, not {model}; run `offrig index --rebuild` to rebuild it with the new model\"\n        ))),\n        _ => Ok(()),\n    }\n}"
+ },
+ {
+  "n": 129,
+  "claim": "A source whose content hash matches the stored one is skipped as unchanged even when force is set.",
+  "evidence": "/// Chunk and store every changed file under `roots` (unchanged sources are skipped by\n/// hash), then embed whatever has no vector. `force` re-chunks unchanged sources too.\npub fn index_paths(\n\n---\n\n        let sha = sha256_hex(&bytes);\n        if !force && store.source_sha(&source)?.as_deref() == Some(sha.as_str()) {\n            rep.unchanged += 1;\n            continue;\n        }\n        let kind = kind_for(&path);\n        let chunks = chunk(&source, kind, &text);\n        store.replace_source(&source, kind.as_str(), &sha, &chunks)?;\n        rep.indexed += 1;\n        rep.chunks += chunks.len();\n    }\n    rep.embedded = embed_pending(store, ollama, model)?;\n    Ok(rep)\n}"
+ },
+ {
+  "n": 130,
+  "claim": "For both swaps on an answer the planter may choose any sentence; the second swap is told nothing about the first.",
+  "evidence": "FIRST = \"Choose any one sentence.\"\n\n---\n\n    for slot in range(per_answer):\n        tag = f\"w{slot + 1}\"\n        for r in range(1, rounds + 1):\n            todo = [it for it in items if len(done[it[\"prompt_id\"]]) == slot]\n            if not todo:\n                break\n            chats = []\n            for it in todo:\n                kind = FIRST if slot == 0 else avoid(sentences(done[it[\"prompt_id\"]][0])[0])\n                request = WORD_SWAP_REQUEST.format(prompt=it[\"prompt\"], answer=it[\"strong\"], kind=kind)\n                chats.append(Chat(system, [(\"user\", request)]))\n            replies = backend.generate(chats, 200, EDIT_TEMPERATURES[min(r - 1, len(EDIT_TEMPERATURES) - 1)])"
+ },
+ {
+  "n": 131,
+  "claim": "The Wilson interval for zero trials is the single point 0.",
+  "evidence": "/// The Wilson score interval for `x` successes in `n` trials. With no trials nothing is\n/// known, so it is the whole range.\npub fn wilson_ci(x: usize, n: usize) -> (f64, f64) {\n    if n == 0 {\n        return (0.0, 1.0);\n    }"
+ },
+ {
+  "n": 132,
+  "claim": "In the menu, choosing option 2 sets the cap to zero immediately, without asking for confirmation.",
+  "evidence": "            writeln!(\n                out,\n                \"  live: plan {} ({}), worst case ${:.2}\",\n                p.id, p.profile, p.worst_case\n            )?;\n        }\n        writeln!(out)?;\n        writeln!(out, \"  1) Set a new cap\")?;\n        writeln!(\n            out,\n            \"  2) Stop new spending: lower the cap to ${:.2} (spent + committed)\",\n            b.floor()\n        )?;\n        writeln!(out, \"  3) Quit\")?;\n        write!(out, \"Choose [1-3, Enter quits]: \")?;\n        out.flush()?;\n        let Some(choice) = read(input)? else {\n            return Ok(());\n        };\n        match choice.as_str() {\n            \"1\" => set_new(store, &b, open.len(), input, out)?,\n            \"2\" => {\n                let floor = b.floor();\n                if confirm(input, out, &format!(\"Lower the cap to ${floor:.2}?\"))? {\n                    store.set_budget_cap(floor)?;\n                    writeln!(\n                        out,\n                        \"Cap set to ${floor:.2}. Nothing is left for a new paid session.\"\n                    )?;\n                    live_note(out, open.len())?;\n                } else {\n                    writeln!(out, \"Unchanged.\")?;\n                }\n            }\n            \"\" | \"3\" | \"q\" | \"Q\" => return Ok(()),\n            other => writeln!(out, \"{other:?} isn't a choice; pick 1, 2 or 3.\")?,\n        }\n    }\n}"
+ },
+ {
+  "n": 133,
+  "claim": "The baseline uses four features, 5-fold cross-validation and an L2 strength of 1.0, and matches pconfirm with confirm, psecond with second and ptrain with train.",
+  "evidence": "FOLDS = 5\nL2 = 1.0\nFEATURES = (\"tail_delta\", \"span_delta\", \"edit_chars\", \"edit_tokens\")\n# (paraphrase set, error set): the pairs each is matched against.\nSETS = {\"pconfirm\": \"confirm\", \"psecond\": \"second\", \"ptrain\": \"train\"}"
+ },
+ {
+  "n": 134,
+  "claim": "A held commitment is settled from its generation id only once it is strictly more than 3600 seconds old.",
+  "evidence": "/// A held commitment older than this is settled from its generation id: by then the\n/// stream that made it has ended one way or another (the stream timeout is 30 minutes).\nconst SETTLE_AFTER_SECS: i64 = 3600;\n\n---\n\n/// Settle held commitments old enough that their stream has surely ended. Returns the\n/// ones still held, for the reply.\nfn settle_held(store: &Store, or: &OpenRouter) -> Result<Vec<Value>> {\n    let now = now_unix();\n    let mut held = Vec::new();\n    for c in store.open_completions()? {\n        if now - c.created_at >= SETTLE_AFTER_SECS\n            && let Some(g) = c.generation_id.as_deref()\n            && let Ok(Some(charge)) = or.generation_cost(g)\n        {\n            store.close_completion(\n                c.id,\n                CompletionEnd {\n                    failed: c.out_path.is_none(),\n                    cost: Some(charge.cost),\n                    cost_source: Some(\"generation\".into()),\n                    provider: charge.provider,\n                    tokens_in: charge.tokens_in,\n                    tokens_out: charge.tokens_out,\n                    ..Default::default()\n                },\n            )?;\n            continue;\n        }\n        held.push(json!({\"completion_id\": c.id, \"worst_case\": c.worst_case, \"generation_id\": c.generation_id}));\n    }\n    Ok(held)\n}"
+ },
+ {
+  "n": 135,
+  "claim": "The reply schema requires reasoning first, then verdict and claim_changed, restricts verdict to same, changed or unsure, and allows no extra properties.",
+  "evidence": "SCHEMA = {\n    \"type\": \"object\",\n    \"properties\": {\n        \"reasoning\": {\"type\": \"string\"},\n        \"verdict\": {\"type\": \"string\", \"enum\": [\"same\", \"changed\", \"unsure\"]},\n        \"claim_changed\": {\"type\": \"boolean\"},\n    },\n    \"required\": [\"reasoning\", \"verdict\", \"claim_changed\"],\n    \"additionalProperties\": False,\n}\n\n# Per judge: whether it thinks, and the room it gets. R&D's pilot: gemma4 with thinking truncated"
+ },
+ {
+  "n": 136,
+  "claim": "Pairing allows a tail-delta gap of up to 2 nats and an edit-size ratio of up to 1.5, with 5 candidates per answer per round and at most 3 rounds.",
+  "evidence": "TARGET_WORDS = \"2-8\"\nCALIPER_NATS = 2.0\nSIZE_RATIO = 1.5\nCANDIDATES = 5\nROUNDS = 3\nMUSE_SAMPLE = 0.15\nGRAMMAR_SAMPLE = 0.10\nMIN_SIMILARITY = 0.85"
+ },
+ {
+  "n": 137,
+  "claim": "Reciprocal rank fusion adds 1 / (k + rank) per list with rank counted from 0, where k is 60, and sorts highest score first.",
+  "evidence": "/// The RRF constant from Cormack et al.\npub const RRF_K: f64 = 60.0;\n\n---\n\n/// Reciprocal rank fusion: each list adds `1 / (k + rank)` (rank from 1) to an id's\n/// score. Highest score first; ties keep the order ids were first seen.\npub fn rrf(lists: &[Vec<i64>], k: f64, keep: usize) -> Vec<(i64, f64)> {\n    let mut scores: Vec<(i64, f64)> = Vec::new();\n    for list in lists {\n        for (rank, id) in list.iter().enumerate() {\n            let add = 1.0 / (k + (rank + 1) as f64);\n            match scores.iter_mut().find(|(i, _)| i == id) {\n                Some((_, s)) => *s += add,\n                None => scores.push((*id, add)),\n            }\n        }\n    }\n    scores.sort_by(|a, b| b.1.total_cmp(&a.1));\n    scores.truncate(keep);\n    scores\n}"
+ },
+ {
+  "n": 138,
+  "claim": "grammar_summary drops pairs when gemma's grammatical field is false or its idiomatic field is false.",
+  "evidence": "def grammar_summary(rows: dict) -> dict:\n    \"\"\"Per set, from v2 verdicts only: flagged, the pre-screen's measured misses on the unflagged\n    sample (with the rule-of-three upper bound, 3 / n, when none are found), the pairs to drop\n    (grammar or usage errors), and idiom recorded but not gated.\"\"\"\n    flagged = [pid for pid, r in rows.items() if r[\"flags\"]]\n    sampled = [r for r in rows.values() if r.get(\"sampled_unflagged\") and _v2(r)]\n    misses = sum(1 for r in sampled if _v2(r).get(\"grammatical\") is False)\n    drop = [pid for pid, r in rows.items() if _v2(r).get(\"grammatical\") is False]\n    judged_rows = [r for r in rows.values() if _v2(r)]\n    unresolved = [pid for pid, r in rows.items() if _v2(r).get(\"outcome\") in (\"truncated\", \"unparsed\")]\n    n = len(sampled)\n    return {\n        \"question\": GRAMMAR_QUESTION,\n        \"pairs\": len(rows),\n        \"judged_by_gemma\": len(judged_rows),\n        \"flagged\": len(flagged),\n        \"flagged_confirmed_ungrammatical\": sum(1 for pid in flagged if pid in drop),\n        \"unflagged_sampled\": n,\n        \"misses_in_sample\": misses,\n        \"miss_rate_upper_bound_95\": (3 / n if n else None) if misses == 0 else None,\n        \"prescreen_stands\": misses == 0,\n        \"not_idiomatic_recorded_only\": sum(1 for r in judged_rows if r[\"gemma\"].get(\"idiomatic\") is False),\n        # The sensitivity row (R&D review): what a grammar-AND-idiom gate would drop, so the stricter\n        # gate can be re-applied later and its effect on the conclusions seen.\n        \"drop_if_idiom_gated\": [\n            pid\n            for pid, r in rows.items()\n            if _v2(r).get(\"grammatical\") is False or _v2(r).get(\"idiomatic\") is False\n        ],\n        \"drop\": drop,\n        \"unresolved\": unresolved,\n    }"
+ },
+ {
+  "n": 139,
+  "claim": "A pack's score boost comes from completed runs whatever their corrections, adds 0.5 per run, and is capped at 2.0.",
+  "evidence": "// ── Weight tuning ─────────────────────────────────────────────────────────────\n\n/**\n * Compute pack score boosts from successful outcome patterns.\n * Returns a map of pack → keyword → boost amount.\n *\n * Rules:\n * - Only boost from completed runs with 0 corrections\n * - Never boost above +2 per keyword\n * - Never create new keywords — only boost existing ones\n *\n * @param {RunOutcome[]} outcomes\n * @returns {Record<string, number>} packName → boost amount\n */\nexport function computePackBoosts(outcomes) {\n  const boosts = {};\n\n  const cleanRuns = outcomes.filter(\n    o => o.selectedPack && o.completionStatus === \"completed\" && o.corrections === 0\n  );\n\n  for (const o of cleanRuns) {\n    const pack = o.selectedPack;\n    boosts[pack] = Math.min((boosts[pack] || 0) + 0.5, 2.0);\n  }\n\n  return boosts;\n}"
+ },
+ {
+  "n": 140,
+  "claim": "Quartiles use the exclusive method, and a single value gives that value three times.",
+  "evidence": "\n\ndef quartiles(values: list[float]) -> tuple[float, float, float]:\n    if len(values) == 1:\n        return values[0], values[0], values[0]\n    q = statistics.quantiles(values, n=4, method=\"inclusive\")\n    return q[0], q[1], q[2]\n\n"
+ },
+ {
+  "n": 141,
+  "claim": "Borderline applies only to medians inside the IQR; a median outside the IQR is never borderline.",
+  "evidence": "    q1, median, q3 = quartiles(errors)\n    para_median = statistics.median(paraphrases)\n    d, p = ks_two_sample(errors, paraphrases)\n    return {\n        \"error_pairs\": len(errors),\n        \"paraphrase_pairs\": len(paraphrases),\n        \"error_quartiles\": [q1, median, q3],\n        \"paraphrase_quartiles\": list(quartiles(paraphrases)),\n        \"paraphrase_median\": para_median,\n        \"passes\": q1 <= para_median <= q3,\n        # Borderline (committed before the run): the median within 10% of the IQR's width of either\n        # edge, inside or out. Only a borderline result may call for a second typicality model.\n        \"borderline\": min(abs(para_median - q1), abs(para_median - q3)) <= BORDERLINE * (q3 - q1),"
+ },
+ {
+  "n": 142,
+  "claim": "Absolute paths named by the caller are read as given; only relative paths are checked to be inside the project.",
+  "evidence": "/// Read a file the caller named. It must resolve inside the project, so nothing from\n/// elsewhere on the machine can be sent to OpenRouter.\nfn read_inside(project: &Path, name: &str) -> Result<String> {\n    let root = std::fs::canonicalize(project).map_err(|e| Error::Io {\n        what: format!(\"resolving the project {}\", project.display()),\n        source: e,\n    })?;\n    let p = PathBuf::from(name);\n    let p = if p.is_absolute() { p } else { project.join(p) };\n    let real = std::fs::canonicalize(&p).map_err(|e| Error::Io {\n        what: format!(\"reading {name}\"),\n        source: e,\n    })?;\n    if !real.starts_with(&root) {\n        return Err(Error::Refused(format!(\n            \"{name} is outside the project; only project files may be sent to OpenRouter\"\n        )));\n    }\n    std::fs::read_to_string(&real).map_err(|e| Error::Io {\n        what: format!(\"reading {name}\"),\n        source: e,\n    })\n}"
+ },
+ {
+  "n": 143,
+  "claim": "A candidate is rejected as self-flagging if the edited sentence contains any of the marker strings at all.",
+  "evidence": "def apply_candidate(reply: str, answer: str) -> tuple[dict | None, str]:\n    \"\"\"The candidate applied by code, or None and why: no JSON, sentence not found, unchanged,\n    self-flagging, or too different (character similarity below 0.85).\"\"\"\n    data = extract_json_object(reply)\n    if not data or not all(isinstance(data.get(k), str) for k in (\"sentence\", \"edited\")):\n        return None, \"no JSON candidate\"\n    for original, edited in (\n        (data[\"sentence\"], data[\"edited\"]),\n        (_restore_latex(data[\"sentence\"]), _restore_latex(data[\"edited\"])),\n    ):\n        original, edited = original.strip(), edited.strip()\n        if not original or original not in answer:\n            continue\n        if edited == original:\n            return None, \"unchanged\"\n        flags = [m for m in SELF_FLAG_MARKERS if edited.lower().count(m) > original.lower().count(m)]\n        if flags:\n            return None, \"self-flagging\"\n        flawed = answer.replace(original, edited, 1)\n        if char_similarity(answer, flawed) < MIN_SIMILARITY:\n            return None, \"too different\"\n        chars, words = edit_size(answer, flawed)\n        return {\n            \"reasoning\": data.get(\"reasoning\", \"\"),\n            \"sentence\": original,\n            \"edited_sentence\": edited,\n            \"kind\": data.get(\"kind\", \"\"),\n            \"flawed\": flawed,\n            \"edit_chars\": chars,\n            \"edit_words\": words,\n        }, \"ok\"\n    return None, \"sentence not in the answer\"\n"
+ },
+ {
+  "n": 144,
+  "claim": "The OFFRIG_TEST_OPENROUTER_BASE override of the API base URL is honoured in release builds too, as long as it is non-empty.",
+  "evidence": "impl OpenRouter {\n    pub fn from_env() -> Result<Self> {\n        let key = std::env::var(KEY_ENV)\n            .ok()\n            .filter(|k| !k.trim().is_empty())\n            .ok_or(Error::MissingOpenRouterKey)?;\n        // Tests point the side-car at a mock. Debug builds only: a release binary can\n        // never be redirected to send the key somewhere else.\n        #[cfg(debug_assertions)]\n        if let Ok(base) = std::env::var(\"OFFRIG_TEST_OPENROUTER_BASE\")\n            && !base.is_empty()\n        {\n            return Ok(Self::new(key, &base));\n        }\n        Ok(Self::new(key, BASE))\n    }"
+ },
+ {
+  "n": 145,
+  "claim": "Asking explicitly for hybrid search when the index has no embeddings quietly falls back to keyword search.",
+  "evidence": "/// Which search a request gets. `requested = None` picks hybrid when the index has\n/// embeddings and keyword otherwise. An explicit `Hybrid` without an index is an\n/// error, never a quiet keyword search.\npub fn plan_mode(store: &Store, requested: Option<Mode>) -> Result<Mode> {\n    let have = store.has_embeddings()?;\n    match requested {\n        Some(Mode::Hybrid) if !have => Err(Error::Refused(\n            \"hybrid search needs the project index; run `offrig index <paths>` (records are embedded too), or ask for mode=keyword\".into(),\n        )),\n        Some(m) => Ok(m),\n        None if have => Ok(Mode::Hybrid),\n        None => Ok(Mode::Keyword),\n    }\n}"
+ },
+ {
+  "n": 146,
+  "claim": "The shuffled-labels control may use either balanced-permutation or a plain random shuffle without being counted as a gap.",
+  "evidence": "/** Exactly half of each cluster's labels are flipped (Ojala & Garriga 2010). */\nconst BALANCED_PERMUTATION = \"balanced-permutation\";\nconst EDIT_METHODS = Object.freeze([\"word-swap\", \"sentence-rewrite\"]);\nconst SHUFFLE_WHY = 'method must be \"balanced-permutation\" (exactly half of each cluster\\'s labels are flipped; Ojala & Garriga 2010). A plain random shuffle is a gap, because a consistent edit direction makes the shuffle imbalance set the sign';\nconst EDIT_WHY = 'method must be \"word-swap\" or \"sentence-rewrite\", and the paraphrase median must not exceed 2× the error median; a pass needs the edit-rate CI to include 0.5';\nconst REVERSED_WHY = \"passed needs an accuracy CI entirely above 0.5 (the edited copy is the corrected, stronger one; touching 0.5 is not above)\";"
+ },
+ {
+  "n": 147,
+  "claim": "Committing a completion happens in a BEGIN IMMEDIATE transaction that inserts the completion row and a 'commit' ledger entry of the worst case.",
+  "evidence": "    pub fn commit_completion(&self, c: NewCompletion) -> Result<Completion> {\n        if !(c.worst_case.is_finite() && c.worst_case >= 0.0) {\n            return Err(Error::Refused(format!(\n                \"worst case {} must be a non-negative amount\",\n                c.worst_case\n            )));\n        }\n        self.conn\n            .execute_batch(\"BEGIN IMMEDIATE\")\n            .map_err(db(\"starting a completion commit\"))?;\n        let res = self.commit_completion_locked(&c);\n        match res {\n            Ok(id) => {\n                self.conn\n                    .execute_batch(\"COMMIT\")\n                    .map_err(db(\"committing a completion\"))?;\n                self.completion(id)?\n                    .ok_or_else(|| Error::Refused(\"completion vanished after commit\".into()))\n            }\n            Err(e) => {\n                let _ = self.conn.execute_batch(\"ROLLBACK\");\n                Err(e)\n            }\n        }\n    }\n\n---\n\n        let now = now_unix();\n        self.conn\n            .execute(\n                \"INSERT INTO completions(model, lane, input_bound, max_tokens, price_in_m, price_out_m, worst_case, created_at)\n                 VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)\",\n                params![\n                    c.model,\n                    c.lane,\n                    c.input_bound as i64,\n                    c.max_tokens as i64,\n                    c.price_in_m,\n                    c.price_out_m,\n                    c.worst_case,\n                    now\n                ],\n            )\n            .map_err(db(\"saving a completion\"))?;\n        let id = self.conn.last_insert_rowid();\n        self.conn\n            .execute(\n                \"INSERT INTO ledger(completion_id, kind, amount, at, note) VALUES (?1, 'commit', ?2, ?3, 'worst case')\",\n                params![id, c.worst_case, now],\n            )\n            .map_err(db(\"writing a completion commit\"))?;\n        Ok(id)"
+ },
+ {
+  "n": 148,
+  "claim": "A swap is accepted if the word appears in the sentence at least once; the first occurrence is swapped.",
+  "evidence": "    if not all(re.fullmatch(r\"[A-Za-z][A-Za-z'-]*\", w) for w in (word, synonym)):\n        return None, \"not a single word\"\n    hits = list(re.finditer(rf\"(?<![\\w-]){re.escape(word)}(?![\\w-])\", sentence))\n    if len(hits) != 1:\n        return None, \"word not found exactly once\""
+ },
+ {
+  "n": 149,
+  "claim": "When there is no evidence at all, the quote rule turns any supported verdict into cannot_tell.",
+  "evidence": "/// The reason recorded when the quote rule turns a verdict into `cannot_tell`.\npub const QUOTE_NOT_FOUND: &str = \"quote_not_found\";\n\n/// Apply the quote rule. `supported` needs a non-empty quote found in the evidence;\n/// `unsupported` may leave the quote empty, but a quote that is given must be found;\n/// either failing becomes `cannot_tell` with the reason `quote_not_found`. With no\n/// evidence at all (a knowledge check) there is nothing to find a quote in, so the\n/// model's verdict stands.\npub fn apply_quote_rule(\n    reply: &RawReply,\n    evidence: &[Passage],\n) -> (VerdictKind, Option<&'static str>) {\n    if evidence.is_empty() {\n        return (reply.verdict, None);\n    }\n    let quote_ok = quote_found(&reply.evidence_quote, evidence);\n    let given = !normalise(&reply.evidence_quote).is_empty();\n    match reply.verdict {\n        VerdictKind::Supported if !quote_ok => (VerdictKind::CannotTell, Some(QUOTE_NOT_FOUND)),\n        VerdictKind::Unsupported if given && !quote_ok => {\n            (VerdictKind::CannotTell, Some(QUOTE_NOT_FOUND))\n        }\n        v => (v, None),\n    }\n}"
+ },
+ {
+  "n": 150,
+  "claim": "The logistic fit penalises the bias term like the weights and stops early when the largest Newton step is below 1e-10, with at most 50 steps.",
+  "evidence": "def fit_logistic(x: np.ndarray, y: np.ndarray, l2: float = L2, steps: int = 50) -> np.ndarray:\n    \"\"\"Newton's method for L2-regularised logistic regression; returns [bias, weights...]. The\n    bias is not penalised.\"\"\"\n    xb = np.hstack([np.ones((len(x), 1)), x])\n    w = np.zeros(xb.shape[1])\n    penalty = np.full(xb.shape[1], l2)\n    penalty[0] = 0.0\n    for _ in range(steps):\n        p = 1 / (1 + np.exp(-xb @ w))\n        grad = xb.T @ (p - y) + penalty * w\n        hess = (xb * (p * (1 - p))[:, None]).T @ xb + np.diag(penalty) + 1e-9 * np.eye(len(w))\n        step = np.linalg.solve(hess, grad)\n        w -= step\n        if np.max(np.abs(step)) < 1e-10:\n            break\n    return w\n"
+ },
+ {
+  "n": 151,
+  "claim": "Candidates are proposed one per call at temperature 0 with a 1536-token limit, and each later slot for an answer is shown the earlier candidates' sentences.",
+  "evidence": "CANDIDATES = 5\nROUNDS = 3\n\n---\n\ndef stage_propose(\n    items, out: Path, side: str, url: str, round_no: int, only: set | None\n) -> None:  # pragma: no cover\n    from lib import Chat, ServerBackend\n\n    path = out / f\"candidates-{side}.json\"\n    state = _load_state(path)\n    backend = ServerBackend(url)\n    todo = [it for it in items if only is None or it[\"prompt_id\"] in only]\n    for slot in range(CANDIDATES):\n        chats, which = [], []\n        for it in todo:\n            earlier = [c for c in state.get(it[\"prompt_id\"], []) if c.get(\"sentence\")]\n            done = [c for c in state.get(it[\"prompt_id\"], []) if c[\"round\"] == round_no and c[\"slot\"] == slot]\n            if done:\n                continue\n            chats.append(Chat(PLANTER_SYSTEM, [(\"user\", planter_request(side, it, earlier))]))\n            which.append(it)\n        if not chats:\n            continue\n        replies = backend.generate(chats, 1536, 0.7)\n        for it, reply, cut in zip(which, replies, backend.last_truncated):\n            cand, why = (None, \"truncated\") if cut else apply_candidate(reply, it[\"strong\"])\n            entry = {\"round\": round_no, \"slot\": slot, \"status\": why, \"raw\": reply}\n            if cand:\n                entry |= cand | {\"id\": f\"{it['prompt_id']}-{side[0]}{round_no}{slot}\"}\n            state.setdefault(it[\"prompt_id\"], []).append(entry)\n        _save(path, state)\n        print(side, \"round\", round_no, \"slot\", slot, len(chats), flush=True)"
+ },
+ {
+  "n": 152,
+  "claim": "Network volumes are listed and created under /network-volumes, and a create sends the data center as dataCenter.",
+  "evidence": "    pub fn list_volumes(&self) -> Result<Vec<NetworkVolume>> {\n        let started = std::time::Instant::now();\n        let resp = self\n            .agent\n            .get(self.url(\"/network-volumes\"))\n            .header(\"Authorization\", self.auth())\n            .call()\n            .map_err(|e| Error::http(\"list network volumes\", e))?;\n        trace::api(\"list network volumes\", resp.status().as_u16(), started);\n        let text = read_text(resp, \"list network volumes\")?;\n        parse_named_list(&text, \"networkVolumes\", \"list network volumes\")\n    }\n\n    pub fn create_volume(\n        &self,\n        name: &str,\n        size_gb: u32,\n        data_center_id: &str,\n    ) -> Result<NetworkVolume> {\n        let body =\n            serde_json::json!({ \"name\": name, \"size\": size_gb, \"dataCenter\": data_center_id });\n        let started = std::time::Instant::now();\n        let resp = self\n            .agent\n            .post(self.url(\"/network-volumes\"))\n            .header(\"Authorization\", self.auth())\n            .send_json(&body)\n            .map_err(|e| Error::http(\"create network volume\", e))?;"
+ },
+ {
+  "n": 153,
+  "claim": "If a 429's Retry-After would end after the plan deadline, the next GPU type is tried instead.",
+  "evidence": "            let err = match read_json::<Pod>(resp, &format!(\"create pod {name}\")) {\n                Ok(pod) => return Ok(pod),\n                Err(e) => e,\n            };\n            if !retry_fits(deadline, delay) {\n                trace::warn(&format!(\n                    \"runpod: create {name} was rate limited; Retry-After of {}s does not fit before the plan deadline, so this GPU type is not retried and the next type is not tried\",\n                    delay.as_secs()\n                ));\n                return Err(err);\n            }\n            if retries >= CREATE_429_RETRIES {\n                return Err(err);\n            }"
+ },
+ {
+  "n": 154,
+  "claim": "When an amount is given, `offrig budget <usd>` sets the cap directly and then opens the menu if running in a terminal.",
+  "evidence": "fn run(cli: Cli) -> Result<()> {\n    match cli.cmd {\n        Cmd::Budget { usd, show, project } => {\n            let dir = match project {\n                Some(p) => p,\n                None => std::env::current_dir()?,\n            };\n            let store = offrig_core::store::Store::open(&dir.join(\".offrig\").join(\"offrig.db\"))?;\n            if let Some(cap) = usd {\n                store.set_budget_cap(cap)?;\n                info!(\"budget cap set to ${cap:.2} for {}\", dir.display());\n            } else if !show && interactive() {\n                // The menu names the project by its folder, never the full path.\n                let name = dir.file_name().map_or_else(\n                    || \"this project\".into(),\n                    |n| n.to_string_lossy().into_owned(),\n                );\n                return budget_menu::run(\n                    &store,\n                    &name,\n                    &mut std::io::stdin().lock(),\n                    &mut std::io::stdout(),\n                );\n            }\n            println!(\"{}\", budget_menu::line(&store.budget()?));\n            Ok(())\n        }\n        Cmd::Init => {\n            let path = offrig_core::config::config_path()?;\n            if path.exists() {\n                println!(\"config already exists: {}\", path.display());"
+ },
+ {
+  "n": 155,
+  "claim": "VerifyConfig::new defaults to temperature 0, seed 0, thinking on, an 8192-token context and 4096 predicted tokens, with structured output enabled.",
+  "evidence": "impl VerifyConfig {\n    /// Thinking on with room, temperature 0: set the model up to succeed.\n    pub fn new(model: &str) -> Self {\n        Self {\n            model: model.to_string(),\n            model_digest: None,\n            embed_model: None,\n            embed_dim: None,\n            temperature: 0.0,\n            seed: 0,\n            think: ThinkLevel::On,\n            num_ctx: 16384,\n            num_predict: 4096,\n            structured: true,\n            gpu_type: None,\n            plan_id: None,\n        }\n    }"
+ },
+ {
+  "n": 156,
+  "claim": "Cross-validation folds are assigned per pair, from a seeded shuffle of the pairs, so a prompt's error and paraphrase pairs may land in different folds.",
+  "evidence": "def folds(prompt_ids: list, k: int = FOLDS, seed: int = 0) -> dict:\n    \"\"\"Prompt id -> fold, from a seeded shuffle of the sorted distinct ids.\"\"\"\n    ids = sorted(set(prompt_ids), key=str)\n    random.Random(seed).shuffle(ids)\n    return {g: i % k for i, g in enumerate(ids)}\n"
+ },
+ {
+  "n": 157,
+  "claim": "When the two paraphrase arms' edit-rate confidence intervals overlap, a head's reading becomes 'unresolved (depends on paraphrase method)'.",
+  "evidence": "        if secondary and all(secondary[0] in r[\"sets\"] for r in rs):\n            name, dropped2, ids2 = secondary\n            keep2 = [i for i, pid in enumerate(ids2) if pid not in dropped2]\n            sw, sids = _seed_mean_wins(rs, name)\n            sw, sids = [sw[i] for i in keep2], [sids[i] for i in keep2]\n            point2, ci2 = boot(sw, sids)\n            apart = ci2[0] > edit_ci[1] or edit_ci[0] > ci2[1]\n            row[\"secondary_arm\"] = {\"set\": name, \"pairs\": len(sw), \"edit_rate\": point2, \"edit_ci\": ci2}\n            row[\"arms_disagree\"] = apart\n            if apart:\n                row[\"reading_primary_arm\"] = row[\"reading\"]\n                row[\"reading\"] = \"unresolved (depends on paraphrase method)\""
+ },
+ {
+  "n": 158,
+  "claim": "choose_pair tries errors from lowest tail delta up and rewrites from highest down, and accepts the first pair whose tail gap is under the caliper and whose edit-size ratio is under 1.5.",
+  "evidence": "def choose_pair(\n    errors: list[dict], rewrites: list[dict], caliper: float = CALIPER_NATS, ratio: float = SIZE_RATIO\n):\n    \"\"\"One kept error and one kept rewrite within `caliper` nats of tail delta and within `ratio`\n    of edit size (characters, larger / smaller), preferring the least surprising error (highest\n    tail), then the most surprising rewrite (lowest tail). None if no pair fits.\"\"\"\n    for e in sorted(errors, key=lambda c: -c[\"tail\"]):\n        for r in sorted(rewrites, key=lambda c: c[\"tail\"]):\n            big, small = max(e[\"edit_chars\"], r[\"edit_chars\"]), min(e[\"edit_chars\"], r[\"edit_chars\"])\n            if abs(e[\"tail\"] - r[\"tail\"]) <= caliper and small > 0 and big / small <= ratio:\n                return e, r\n    return None\n"
+ },
+ {
+  "n": 159,
+  "claim": "A result is borderline only when the paraphrase median lies strictly less than 10% of the IQR's width from either quartile edge.",
+  "evidence": "BORDERLINE = 0.10\n\n---\n\n        # Borderline (committed before the run): the median within 10% of the IQR's width of either\n        # edge, inside or out. Only a borderline result may call for a second typicality model.\n        \"borderline\": min(abs(para_median - q1), abs(para_median - q3)) <= BORDERLINE * (q3 - q1),"
+ },
+ {
+  "n": 160,
+  "claim": "Asking explicitly for hybrid search when the index has no embeddings is an error; with no mode requested, hybrid is chosen only if embeddings exist.",
+  "evidence": "/// Which search a request gets. `requested = None` picks hybrid when the index has\n/// embeddings and keyword otherwise. An explicit `Hybrid` without an index is an\n/// error, never a quiet keyword search.\npub fn plan_mode(store: &Store, requested: Option<Mode>) -> Result<Mode> {\n    let have = store.has_embeddings()?;\n    match requested {\n        Some(Mode::Hybrid) if !have => Err(Error::Refused(\n            \"hybrid search needs the project index; run `offrig index <paths>` (records are embedded too), or ask for mode=keyword\".into(),\n        )),\n        Some(m) => Ok(m),\n        None if have => Ok(Mode::Hybrid),\n        None => Ok(Mode::Keyword),\n    }\n}"
+ },
+ {
+  "n": 161,
+  "claim": "In the grammar pass, gemma is asked about every flagged pair and about a seed-0 random 10% of the unflagged pairs, not about all pairs.",
+  "evidence": "def stage_grammar(sets: dict[str, list[dict]], kept: dict[str, set], out: Path) -> None:  # pragma: no cover\n    \"\"\"The word swaps' grammar pass: the CPU pre-screen on every kept pair, then gemma4 (thinking) on\n    every flagged pair plus a seed-0 random 10% of the unflagged ones (the pre-screen's miss rate).\"\"\"\n    from skeptic_pairs import sentences\n\n    path = out / \"grammar-wordswaps.json\"\n    state = _load_state(path)\n    judge = \"gemma4:31b\"\n    try:\n        for name, pairs in sets.items():\n            rows = state.setdefault(name, {})\n            mine = [p for p in pairs if p[\"pair_id\"] in kept[name]]\n            for p in mine:\n                rows.setdefault(p[\"pair_id\"], {\"flags\": prescreen(*sentences(p))})\n            unflagged = [pid for pid, r in rows.items() if not r[\"flags\"]]\n            sample = seeded_sample(unflagged, GRAMMAR_SAMPLE)\n            for p in mine:\n                r = rows[p[\"pair_id\"]]\n                if \"gemma\" in r or not (r[\"flags\"] or p[\"pair_id\"] in sample):\n                    continue\n                original, edited = sentences(p)\n                user = GRAMMAR_CHECK.format(\n                    prompt=p[\"prompt\"], flawed=p[\"flawed\"], original=original, edited=edited\n                )\n                r[\"gemma\"] = judged(\n                    ollama_chat(judge, JUDGE_SYSTEM, user, GRAMMAR_SCHEMA, True, **THINKING), (\"grammatical\",)\n                )\n                r[\"sampled_unflagged\"] = p[\"pair_id\"] in sample\n                _save(path, state)\n            print(\"grammar\", name, len(rows), flush=True)\n    finally:\n        unload(judge)"
+ },
+ {
+  "n": 162,
+  "claim": "A false accept is an unsupported gold claim the model judged supported or cannot_tell.",
+  "evidence": "fn row(ct: CheckType, gold: &[&Claim], said: &HashMap<&str, VerdictKind>) -> CheckMetrics {\n    let (mut n, mut supported_n, mut unsupported_n, mut missing) = (0, 0, 0, 0);\n    let (mut fa, mut subtle_n, mut subtle_fa, mut abstained) = (0, 0, 0, 0);\n    // Decided claims: (right on supported, supported decided, right on unsupported, unsupported decided).\n    let (mut sup_right, mut sup_decided, mut unsup_right, mut unsup_decided) = (0, 0, 0, 0);\n    for c in gold {\n        let Some(&v) = said.get(c.id.as_str()) else {\n            missing += 1;\n            continue;\n        };\n        n += 1;\n        let truth = c.label.expect(\"filtered to labelled claims\");\n        let subtle = c.subtle == Some(true);\n        if v == VerdictKind::CannotTell {\n            abstained += 1;\n        }\n        match truth {\n            Label::Supported => {\n                supported_n += 1;\n                if v != VerdictKind::CannotTell {\n                    sup_decided += 1;\n                    if v == VerdictKind::Supported {\n                        sup_right += 1;\n                    }\n                }\n            }\n            Label::Unsupported => {\n                unsupported_n += 1;\n                if subtle {\n                    subtle_n += 1;\n                }\n                if v == VerdictKind::Supported {\n                    fa += 1;\n                    if subtle {\n                        subtle_fa += 1;\n                    }\n                }\n                if v != VerdictKind::CannotTell {\n                    unsup_decided += 1;\n                    if v == VerdictKind::Unsupported {\n                        unsup_right += 1;\n                    }\n                }\n            }\n        }\n    }"
+ },
+ {
+  "n": 163,
+  "claim": "A generation id is accepted only if it is non-empty and made of ASCII letters, digits, hyphens and underscores.",
+  "evidence": "    /// What OpenRouter charged for a generation. `Ok(None)` while it does not know yet\n    /// (it answers 404 for a few seconds after a generation ends).\n    pub fn generation_cost(&self, generation_id: &str) -> Result<Option<GenerationCost>> {\n        let what = \"the generation's charge\";\n        if generation_id.is_empty()\n            || !generation_id\n                .chars()\n                .all(|c| c.is_ascii_alphanumeric() || c == '-' || c == '_')\n        {\n            return Err(Error::Refused(format!(\n                \"generation id {generation_id:?} is not an OpenRouter id\"\n            )));\n        }"
+ },
+ {
+  "n": 164,
+  "claim": "OFFRIG_EMBED_URL, when set and non-empty, takes precedence over the config's embed_url, and the chosen URL's port must not collide with another offrig port.",
+  "evidence": "/// The embed URL to use: `env` (the value of `OFFRIG_EMBED_URL`) when set, else the\n/// config's. A URL whose port belongs to something else offrig runs is refused.\npub fn resolve_embed_url(cfg_url: &str, env: Option<&str>, tunnel_port: u16) -> Result<String> {\n    let (url, from) = match env.map(str::trim).filter(|v| !v.is_empty()) {\n        Some(v) => (v, EMBED_URL_ENV),\n        None => (cfg_url.trim(), \"embed_url\"),\n    };\n    let Some(port) = url_port(url) else {\n        return Err(Error::Config(format!(\n            \"{from} = {url:?} has no port; use http://127.0.0.1:<port>\"\n        )));\n    };\n    if let Some(why) = embed_port_conflict(port, tunnel_port) {\n        return Err(Error::Config(format!(\n            \"{from} = {url} uses port {port}, which is {why}; embeddings need their own CPU-only Ollama, e.g. {DEFAULT_EMBED_URL}\"\n        )));\n    }\n    Ok(url.trim_end_matches('/').to_string())\n}"
+ },
+ {
+  "n": 165,
+  "claim": "seeded_sample shuffles the ids in the order given with a seed-0 shuffle, and returns an empty set when the rounded size is zero.",
+  "evidence": "def seeded_sample(ids: list[str], fraction: float, seed: int = 0) -> set[str]:\n    \"\"\"A seeded random `fraction` of `ids` (at least one when there are any), independent of order.\"\"\"\n    pool = sorted(ids)\n    random.Random(seed).shuffle(pool)\n    return set(pool[: max(1, round(fraction * len(pool)))] if pool else [])\n"
+ },
+ {
+  "n": 166,
+  "claim": "The default embedding endpoint is http://127.0.0.1:11434, the shared local Ollama, and the default embedding model is nomic-embed-text.",
+  "evidence": "/// The dedicated CPU-only Ollama the embeddings come from. The port sits clear of the\n/// local Ollama (11434), the plain lane (11435, 11436), the lane range (11500..11628)\n/// and the side-car range (11700..11764).\npub const DEFAULT_EMBED_URL: &str = \"http://127.0.0.1:11490\";\npub const EMBED_URL_ENV: &str = \"OFFRIG_EMBED_URL\";\npub const DEFAULT_EMBED_MODEL: &str = \"nomic-embed-text\";"
+ },
+ {
+  "n": 167,
+  "claim": "Under _form, a word ending in 'ous' has no inflected form, while a word like 'finds' counts as form 's'.",
+  "evidence": "def _form(word: str) -> str:\n    \"\"\"A rough grammatical form: plural or third person (\"s\"), past (\"ed\"), progressive (\"ing\").\"\"\"\n    w = word.lower()\n    if w.endswith(\"ing\") and len(w) > 4:\n        return \"ing\"\n    if w.endswith(\"ed\") and len(w) > 3:\n        return \"ed\"\n    if w.endswith(\"s\") and not w.endswith((\"ss\", \"us\", \"is\", \"ous\")) and len(w) > 3:\n        return \"s\"\n    return \"\""
+ },
+ {
+  "n": 168,
+  "claim": "The budget cap cannot be set below spent plus committed; set_budget_cap refuses a lower amount with a Refused error.",
+  "evidence": "    pub remaining: f64,\n}\n\nimpl Budget {\n    /// The lowest the cap can be set: spent plus committed. At the floor nothing is\n    /// left for a new plan, and every open plan keeps the money it was given.\n    pub fn floor(&self) -> f64 {\n        self.spent + self.committed\n    }\n\n---\n\n\n    // ---- settings\n\n    /// Set the cap. It can never go below what is already spent plus what is\n    /// committed to open plans: money allocated to a running plan stays allocated, so\n    /// a cap change can't strand a training run mid-way. The lowest cap\n    /// ([`Budget::floor`]) leaves nothing for a new plan.\n    pub fn set_budget_cap(&self, usd: f64) -> Result<()> {\n        if !(usd.is_finite() && usd >= 0.0) {\n            return Err(Error::Refused(format!(\n                \"budget cap {usd} must be a non-negative amount\"\n            )));\n        }\n        let b = self.budget()?;\n        if usd + 1e-9 < b.floor() {\n            return Err(Error::Refused(format!(\n                \"the cap can't go below ${:.2}: ${:.2} is spent and ${:.2} is committed to open plans. ${:.2} stops new paid sessions and leaves running ones alone\",\n                b.floor(),\n                b.spent,\n                b.committed,\n                b.floor()\n            )));\n        }\n        self.conn\n            .execute(\n                \"INSERT INTO settings(key, value) VALUES ('budget_cap', ?1)\n                 ON CONFLICT(key) DO UPDATE SET value = excluded.value\",\n                params![usd.to_string()],\n            )\n            .map_err(db(\"setting the budget cap\"))?;\n        Ok(())"
+ },
+ {
+  "n": 169,
+  "claim": "Job commands get HF_TOKEN_PATH only when the profile names a Hugging Face token secret.",
+  "evidence": "/// Where a job pod's bootstrap writes the Hugging Face token (root-only), when the\n/// profile names a secret. An ssh session does not inherit the container's\n/// environment, so `exec` and `run` reach the token through `HF_TOKEN_PATH`.\npub const HF_TOKEN_FILE: &str = \"/root/.offrig-hf-token\";\n\n/// The variables every job command runs with. `HF_TOKEN_PATH` is always set: with no\n/// token configured the file does not exist and Hugging Face downloads anonymously.\npub fn job_env() -> BTreeMap<String, String> {\n    let mut env = BTreeMap::new();\n    env.insert(\"HF_HOME\".into(), HF_DIR.into());\n    env.insert(\"HF_TOKEN_PATH\".into(), HF_TOKEN_FILE.into());\n    env.insert(\"OFFRIG_JOB_DIR\".into(), JOB_DIR.into());\n    env\n}"
+ },
+ {
+  "n": 170,
+  "claim": "The false-accept upper bound must be at most 0.10 for a check type to pass; an upper bound of exactly 0.10 passes.",
+  "evidence": "/// The default rule's thresholds.\npub const MAX_FALSE_ACCEPT_UPPER: f64 = 0.10;\npub const MAX_ABSTAIN: f64 = 0.20;\npub const MIN_BALANCED_ACCURACY: f64 = 0.80;\npub const MIN_UNSUPPORTED: usize = 100;\n\n---\n\n    let passes_default_rule = missing == 0\n        && unsupported_n >= MIN_UNSUPPORTED\n        && false_accept.high < MAX_FALSE_ACCEPT_UPPER\n        && abstain.rate.is_some_and(|a| a <= MAX_ABSTAIN)\n        && decided_balanced_accuracy.is_some_and(|b| b >= MIN_BALANCED_ACCURACY);"
+ },
+ {
+  "n": 171,
+  "claim": "A read set passes the typicality match when the kept paraphrases' median delta lies inside the error pairs' interquartile range, endpoints included.",
+  "evidence": "def match(errors: list[float], paraphrases: list[float]) -> dict:\n    \"\"\"The committed rule: the paraphrases' median delta inside the errors' interquartile range.\"\"\"\n    q1, median, q3 = quartiles(errors)\n    para_median = statistics.median(paraphrases)\n    d, p = ks_two_sample(errors, paraphrases)\n    return {\n        \"error_pairs\": len(errors),\n        \"paraphrase_pairs\": len(paraphrases),\n        \"error_quartiles\": [q1, median, q3],\n        \"paraphrase_quartiles\": list(quartiles(paraphrases)),\n        \"paraphrase_median\": para_median,\n        \"passes\": q1 <= para_median <= q3,\n        \"ks_d\": d,\n        \"ks_p\": p,\n    }\n"
+ },
+ {
+  "n": 172,
+  "claim": "Vectors are quantised to int8 with one scale per vector equal to the largest absolute value divided by 255; an all-zero vector gets scale 0.",
+  "evidence": "/// int8 quantisation with one scale per vector: `x ~ q * scale`.\npub fn quantize(v: &[f32]) -> (Vec<i8>, f32) {\n    let max = v.iter().fold(0.0_f32, |m, x| m.max(x.abs()));\n    if max == 0.0 {\n        return (vec![0; v.len()], 0.0);\n    }\n    let scale = max / 127.0;\n    let q = v\n        .iter()\n        .map(|x| (x / scale).round().clamp(-127.0, 127.0) as i8)\n        .collect();\n    (q, scale)\n}"
+ },
+ {
+  "n": 173,
+  "claim": "Features are standardised with the mean and standard deviation of the whole data set before the folds are cut.",
+  "evidence": "def out_of_fold(x: np.ndarray, y: np.ndarray, prompt_ids: list, k: int = FOLDS) -> np.ndarray:\n    fold_of = folds(prompt_ids, k)\n    f = np.array([fold_of[g] for g in prompt_ids])\n    scores = np.zeros(len(y))\n    for i in range(k):\n        train, test = f != i, f == i\n        if not test.any():\n            continue\n        mu, sd = x[train].mean(0), x[train].std(0)\n        sd[sd == 0] = 1.0\n        w = fit_logistic((x[train] - mu) / sd, y[train])\n        scores[test] = predict(w, (x[test] - mu) / sd)\n    return scores\n"
+ },
+ {
+  "n": 174,
+  "claim": "Retry-After is read as whole or fractional seconds; a missing, unparsable or HTTP-date header waits one second.",
+  "evidence": "/// Delay-seconds from `Retry-After`. An HTTP-date or a missing header waits one second.\nfn retry_after(headers: &ureq::http::HeaderMap) -> Duration {\n    let Some(raw) = headers.get(\"retry-after\").and_then(|v| v.to_str().ok()) else {\n        return Duration::from_secs(1);\n    };\n    let raw = raw.trim();\n    if let Ok(secs) = raw.parse::<u64>() {\n        return Duration::from_secs(secs);\n    }\n    if let Ok(secs) = raw.parse::<f64>()\n        && secs.is_finite()\n        && secs >= 0.0\n    {\n        return Duration::from_secs_f64(secs);\n    }\n    Duration::from_secs(1)\n}"
+ },
+ {
+  "n": 175,
+  "claim": "A confirmation counts as yes for y, Y, yes or an empty line (Enter).",
+  "evidence": "}\n\n/// A dollar amount: digits with an optional `$` and decimal point, never negative.\npub fn parse_usd(text: &str) -> Option<f64> {\n    let t = text.trim().trim_start_matches('$').trim();\n    let v: f64 = t.parse().ok()?;\n    (v.is_finite() && v >= 0.0).then_some(v)\n}\n\nfn confirm(input: &mut impl BufRead, out: &mut impl Write, question: &str) -> Result<bool> {\n    write!(out, \"{question} [y/N]: \")?;\n    out.flush()?;\n    Ok(matches!(\n        read(input)?.as_deref(),\n        Some(\"y\") | Some(\"Y\") | Some(\"yes\")\n    ))\n}"
+ },
+ {
+  "n": 176,
+  "claim": "A temperature is valid only when it is finite and strictly between 0 and 2; max_tokens of zero is refused.",
+  "evidence": "    if a.max_tokens == 0 {\n        return Err(Error::Refused(\"max_tokens must be at least 1\".into()));\n    }\n    if let Some(e) = &a.reasoning_effort\n        && !openrouter::EFFORTS.contains(&e.as_str())\n    {\n        return Err(Error::Refused(format!(\n            \"reasoning_effort {e:?} must be one of {}\",\n            openrouter::EFFORTS.join(\", \")\n        )));\n    }\n    if let Some(t) = a.temperature\n        && !(t.is_finite() && (0.0..=2.0).contains(&t))\n    {\n        return Err(Error::Refused(format!(\n            \"temperature {t} must be between 0 and 2\"\n        )));\n    }"
+ },
+ {
+  "n": 177,
+  "claim": "A verdict is flagged needs_human when the final verdict is cannot_tell or the claim is marked high-stakes.",
+  "evidence": "fn finish(\n    cfg: &VerifyConfig,\n    claim: &Claim,\n    evidence: &[Passage],\n    reply: RawReply,\n    timing: Timing,\n) -> Verdict {\n    let (verdict, reason) = apply_quote_rule(&reply, evidence);\n    Verdict {\n        claim_id: claim.id.clone(),\n        claim_sha256: sha256_hex(claim.claim.as_bytes()),\n        check_type: claim.check_type,\n        verdict,\n        model_verdict: reply.verdict,\n        reason: reason.map(str::to_string),\n        reasoning: reply.reasoning,\n        evidence_quote: reply.evidence_quote,\n        evidence_source: reply.evidence_source,\n        needs_human: verdict == VerdictKind::CannotTell || claim.high_stakes,\n        pins: Pins {\n            model: cfg.model.clone(),\n            model_digest: cfg.model_digest.clone(),\n            embed_model: cfg.embed_model.clone(),\n            embed_dim: cfg.embed_dim,\n            template_hash: template_hash(),\n            role_card_hash: card_hash(),\n            example_ids: example_ids(),\n            evidence_ids: evidence.iter().map(|p| p.id.clone()).collect(),\n            temperature: cfg.temperature,\n            seed: cfg.seed,\n            think: cfg.think.as_str().to_string(),\n            num_ctx: cfg.num_ctx,\n            num_predict: cfg.num_predict,\n            structured: cfg.structured,\n            gpu_type: cfg.gpu_type.clone(),\n            plan_id: cfg.plan_id,\n        },\n        timing,\n        untrusted: true,\n    }\n}"
+ },
+ {
+  "n": 178,
+  "claim": "Reciprocal rank fusion adds 1 / (k + rank) per list with rank counted from 1, where k is 60, and sorts highest score first.",
+  "evidence": "/// The RRF constant from Cormack et al.\npub const RRF_K: f64 = 60.0;\n\n---\n\n/// Reciprocal rank fusion: each list adds `1 / (k + rank)` (rank from 1) to an id's\n/// score. Highest score first; ties keep the order ids were first seen.\npub fn rrf(lists: &[Vec<i64>], k: f64, keep: usize) -> Vec<(i64, f64)> {\n    let mut scores: Vec<(i64, f64)> = Vec::new();\n    for list in lists {\n        for (rank, id) in list.iter().enumerate() {\n            let add = 1.0 / (k + (rank + 1) as f64);\n            match scores.iter_mut().find(|(i, _)| i == id) {\n                Some((_, s)) => *s += add,\n                None => scores.push((*id, add)),\n            }\n        }\n    }\n    scores.sort_by(|a, b| b.1.total_cmp(&a.1));\n    scores.truncate(keep);\n    scores\n}"
+ },
+ {
+  "n": 179,
+  "claim": "A job pod's own environment carries HF_TOKEN as a RunPod secret reference, and only when the job profile names a secret.",
+  "evidence": "/// The job pod's own environment: [`job_env`], plus the token as a RunPod secret\n/// reference when the profile names one, which RunPod substitutes at start.\npub fn job_pod_env(j: &Job) -> BTreeMap<String, String> {\n    let mut env = job_env();\n    if let Some(sec) = &j.hf_token_secret {\n        env.insert(\"HF_TOKEN\".into(), format!(\"{{{{ RUNPOD_SECRET_{sec} }}}}\"));\n    }\n    env\n}"
+ },
+ {
+  "n": 180,
+  "claim": "A reversed-correction control marked passed is an error unless its accuracy interval's lower bound is at least 0.5.",
+  "evidence": "function applyReversedCorrection(tag, status, measure, errors) {\n  if (status !== \"passed\") return;\n  if (!measure.ci || !(measure.ci[0] > 0.5)) {\n    const low = measure.ci ? measure.ci[0] : \"missing\";\n    errors.push(`${tag}: passed needs an accuracy CI entirely above 0.5 (low ${low} is not above 0.5; touching 0.5 is not above)`);\n  }\n}"
+ },
+ {
+  "n": 181,
+  "claim": "With cpu_only set, Ollama::embed sends options num_gpu 0 in the request, and a 404 from the server becomes a Refused error with an ollama pull hint.",
+  "evidence": "impl Ollama {\n    /// Embed `inputs` in one `/api/embed` call, one vector per input in order. With\n    /// `cpu_only` the request carries `num_gpu: 0` so the model never loads on a GPU.\n    /// A model the server does not have is reported with the pull line.\n    pub fn embed(&self, model: &str, inputs: &[String], cpu_only: bool) -> Result<Vec<Vec<f32>>> {\n        let what = \"embed\";\n        let mut body = json!({ \"model\": model, \"input\": inputs });\n        if cpu_only {\n            body[\"options\"] = json!({ \"num_gpu\": 0 });\n        }\n        let v = self.post(\"/api/embed\", &body, what).map_err(|e| match &e {\n            Error::Ollama(m) if m.contains(\"http 404\") => Error::Refused(format!(\n                \"the embedding model {model} is not installed on {}; run `ollama pull {model}` against that host\",\n                self.base\n            )),\n            _ => e,\n        })?;\n        let rows = v[\"embeddings\"]\n            .as_array()\n            .ok_or_else(|| Error::Ollama(format!(\"{what}: the reply carried no embeddings\")))?;\n        let out: Vec<Vec<f32>> = rows\n            .iter()\n            .map(|r| {\n                r.as_array()\n                    .map(|a| a.iter().map(|n| n.as_f64().unwrap_or(0.0) as f32).collect())\n                    .unwrap_or_default()\n            })\n            .collect();\n        let dim = out.first().map_or(0, Vec::len);\n        if out.len() != inputs.len() || dim == 0 || out.iter().any(|r| r.len() != dim) {\n            return Err(Error::Ollama(format!(\n                \"{what}: expected {} vectors of one size, got {}\",\n                inputs.len(),\n                out.len()\n            )));\n        }\n        Ok(out)\n    }"
+ },
+ {
+  "n": 182,
+  "claim": "The size-matched margin is added to every head's row, and the band uses the sizes of all paraphrase pairs including those dropped by the meaning check.",
+  "evidence": "            \"reading\": skeptic_class(edit_ci, margin[1]) if prompts else \"no matched answers\",\n        }\n        if sizes and prompts:\n            row[\"size_matched\"] = _size_matched(\n                rw, rids, ew, eids, sizes[0], [sizes[1][i] for i in keep], margin\n            )\n        if secondary and all(secondary[0] in r[\"sets\"] for r in rs):"
+ },
+ {
+  "n": 183,
+  "claim": "A model earns the default only if both the grounded and reasoning check types pass their rule; knowledge is reported but not required.",
+  "evidence": "/// True when the model earns the default: both `grounded` and `reasoning` pass the\n/// rule. `knowledge` is reported but is not part of it.\npub fn passes_default(rows: &[CheckMetrics]) -> bool {\n    [CheckType::Grounded, CheckType::Reasoning]\n        .into_iter()\n        .all(|ct| {\n            rows.iter()\n                .any(|r| r.check_type == ct && r.passes_default_rule)\n        })\n}"
+ },
+ {
+  "n": 184,
+  "claim": "With the eager trainer a head is trained by train_head; with fast or graphs it is trained by train_head_fast with CUDA graphs on in both cases.",
+  "evidence": "def _train(role, pooling, seed, feats, masks, index, flip, device, trainer):  # pragma: no cover\n    \"\"\"One head. \"eager\" is critic_heads.train_head; \"fast\" and \"graphs\" are fast_heads (R&D's\n    GPU-resident features; \"graphs\" adds the CUDA-graph step, which uses AdamW(capturable=True)).\"\"\"\n    if trainer == \"eager\":\n        return train_head(role, pooling, seed, feats, masks, index, flip, device)\n    from fast_heads import train_head_fast\n\n    x, m, lengths = _stacked(feats, masks, device)\n    head, _ = train_head_fast(\n        role, pooling, seed, x, m, lengths, index, flip, HPARAMS, graphs=trainer == \"graphs\"\n    )\n    return head"
+ },
+ {
+  "n": 185,
+  "claim": "The synonym is always lowercased, and an 'a' or 'an' before the word is left as it was.",
+  "evidence": "    synonym = (synonym[:1].upper() if word[:1].isupper() else synonym[:1].lower()) + synonym[1:]\n    start, end = hits[0].span()\n    before = sentence[:start]\n    article = re.search(r\"\\b(a|an|A|An)\\s+$\", before)\n    if article:\n        wanted = _article(synonym)\n        if article.group(1)[:1].isupper():\n            wanted = wanted.capitalize()\n        before = before[: article.start(1)] + wanted + before[article.end(1) :]\n    new_sentence = before + synonym + sentence[end:]\n    return answer.replace(sentence, new_sentence, 1), \"ok\""
+ },
+ {
+  "n": 186,
+  "claim": "After migrating, databases at schema versions 1 to 4 have their active records backfilled as index chunks before the version is written.",
+  "evidence": "        let store = Self { conn };\n        if (1..5).contains(&version) {\n            // v4 -> v5: the index tables were just created; active records join it so\n            // memory search ranks them. Their vectors fill in at the next embed pass.\n            store.backfill_record_chunks()?;\n        }\n        store\n            .conn\n            .execute_batch(&format!(\"PRAGMA user_version = {SCHEMA_VERSION}\"))\n            .map_err(db(\"writing the schema version\"))?;\n        Ok(store)\n    }"
+ },
+ {
+  "n": 187,
+  "claim": "An embedding request that times out is retried three times before it fails.",
+  "evidence": "impl Ollama {\n    /// Embed `inputs` in one `/api/embed` call, one vector per input in order. With\n    /// `cpu_only` the request carries `num_gpu: 0` so the model never loads on a GPU.\n    /// A model the server does not have is reported with the pull line.\n    pub fn embed(&self, model: &str, inputs: &[String], cpu_only: bool) -> Result<Vec<Vec<f32>>> {\n        let what = \"embed\";\n        let mut body = json!({ \"model\": model, \"input\": inputs });\n        if cpu_only {\n            body[\"options\"] = json!({ \"num_gpu\": 0 });\n        }\n        let v = self.post(\"/api/embed\", &body, what).map_err(|e| match &e {\n            Error::Ollama(m) if m.contains(\"http 404\") => Error::Refused(format!(\n                \"the embedding model {model} is not installed on {}; run `ollama pull {model}` against that host\",\n                self.base\n            )),\n            _ => e,\n        })?;\n        let rows = v[\"embeddings\"]\n            .as_array()\n            .ok_or_else(|| Error::Ollama(format!(\"{what}: the reply carried no embeddings\")))?;\n        let out: Vec<Vec<f32>> = rows\n            .iter()\n            .map(|r| {\n                r.as_array()\n                    .map(|a| a.iter().map(|n| n.as_f64().unwrap_or(0.0) as f32).collect())\n                    .unwrap_or_default()\n            })\n            .collect();\n        let dim = out.first().map_or(0, Vec::len);\n        if out.len() != inputs.len() || dim == 0 || out.iter().any(|r| r.len() != dim) {\n            return Err(Error::Ollama(format!(\n                \"{what}: expected {} vectors of one size, got {}\",\n                inputs.len(),\n                out.len()\n            )));\n        }\n        Ok(out)\n    }"
+ },
+ {
+  "n": 188,
+  "claim": "Record search returns active and superseded records alike, with a default limit of 8 when none is given and a cap of 50.",
+  "evidence": "/// Active records ranked by hybrid search. `qvec = None` is keyword search over the\n/// records. Kind and task filters apply to either.\npub fn search_records(store: &Store, q: &Query, qvec: Option<&[f32]>) -> Result<Vec<Record>> {\n    let Some(qvec) = qvec else {\n        return store.search(q);\n    };\n    let limit = if q.limit == 0 { 8 } else { q.limit.min(50) };\n    let ids = fuse(store, &q.text, qvec, Some(\"record\"))?;\n    let mut out = Vec::new();\n    for c in store.chunks_by_ids(&ids)? {\n        let Some(id) = c\n            .source\n            .strip_prefix(\"record:\")\n            .and_then(|i| i.parse().ok())\n        else {\n            continue;\n        };\n        let Some(r) = store.get(id)? else { continue };\n        if r.status == \"active\"\n            && q.kind.is_none_or(|k| k == r.kind)\n            && q.task_id.is_none_or(|t| Some(t) == r.task_id)\n        {\n            out.push(r);\n        }\n        if out.len() == limit {\n            break;\n        }\n    }\n    Ok(out)\n}"
+ }
+]

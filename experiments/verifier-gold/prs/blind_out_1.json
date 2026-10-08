@@ -1,0 +1,472 @@
+[
+ {
+  "n": 1,
+  "reasoning": "resamples=2000 default, whole prompt groups resampled, CI indexes ~2.5% and 97.5% of sorted stats.",
+  "label": "supported"
+ },
+ {
+  "n": 2,
+  "reasoning": "error_kept requires `muse is not None`; a candidate muse was not asked about is not kept, so muse is not optional. (Ambiguous wording.)",
+  "label": "unsupported"
+ },
+ {
+  "n": 3,
+  "reasoning": "match uses statistics.median of paraphrases, not the mean.",
+  "label": "unsupported"
+ },
+ {
+  "n": 4,
+  "reasoning": "Option 2 calls confirm, then store.set_budget_cap(floor) where floor = b.floor() labelled spent + committed.",
+  "label": "supported"
+ },
+ {
+  "n": 5,
+  "reasoning": "Comment and code: one fork_rng over init and training, manual_seed, comment says CPU and CUDA seeded; fork restores caller RNG state.",
+  "label": "supported"
+ },
+ {
+  "n": 6,
+  "reasoning": "unchecked_transaction, DELETE then INSERTs, then commit.",
+  "label": "supported"
+ },
+ {
+  "n": 7,
+  "reasoning": "Kept only if ka and kb; a missing verdict defaults to the not_asked outcome, which keeps() would not accept.",
+  "label": "supported"
+ },
+ {
+  "n": 8,
+  "reasoning": "Doc and code put supplied context (ctx1..) first, then retrieved passages; the claim reverses the order.",
+  "label": "unsupported"
+ },
+ {
+  "n": 9,
+  "reasoning": "Keyed by id(feats), feats held in the tuple, _free_stacks clears and calls torch.cuda.empty_cache if cuda available.",
+  "label": "supported"
+ },
+ {
+  "n": 10,
+  "reasoning": "passes is q1 <= para_median <= q3 independent of borderline.",
+  "label": "supported"
+ },
+ {
+  "n": 11,
+  "reasoning": "timeout_global 1800 s and http_status_as_error(false).",
+  "label": "supported"
+ },
+ {
+  "n": 12,
+  "reasoning": "usage.cost first, then charge_of by generation id, else (None, unread).",
+  "label": "supported"
+ },
+ {
+  "n": 13,
+  "reasoning": "error_kept needs gemma wrong+grammatical and muse not None, wrong, grammatical.",
+  "label": "supported"
+ },
+ {
+  "n": 14,
+  "reasoning": "'ous' is excluded from form 's' by the endswith exclusion tuple.",
+  "label": "unsupported"
+ },
+ {
+  "n": 15,
+  "reasoning": "keeps returns outcome == same and claim_changed is False.",
+  "label": "supported"
+ },
+ {
+  "n": 16,
+  "reasoning": "highConf.length >= 3 and ratio > 0.3 gives adjustment +1; returned as a value with reason text.",
+  "label": "supported"
+ },
+ {
+  "n": 17,
+  "reasoning": "Default .offrig/out/completion-{id}.md; absolute or any non-Normal/CurDir component (such as ..) is refused.",
+  "label": "supported"
+ },
+ {
+  "n": 18,
+  "reasoning": "CHECK allows doc, code, log, record, not note.",
+  "label": "unsupported"
+ },
+ {
+  "n": 19,
+  "reasoning": "reserved() maps 11490 to the default embedding server's port.",
+  "label": "supported"
+ },
+ {
+  "n": 20,
+  "reasoning": "finally block posts keep_alive 0 to /api/generate, which unloads the model.",
+  "label": "unsupported"
+ },
+ {
+  "n": 21,
+  "reasoning": "c.worst_case > b.remaining + 1e-9 returns Error::Budget.",
+  "label": "supported"
+ },
+ {
+  "n": 22,
+  "reasoning": "CREATE_429_RETRIES is 3, not 5.",
+  "label": "unsupported"
+ },
+ {
+  "n": 23,
+  "reasoning": "(Some(j), _) gives BOOTSTRAP_JOB with job_pod_env(j).",
+  "label": "supported"
+ },
+ {
+  "n": 24,
+  "reasoning": "commit_completion_locked also inserts a ledger row of kind 'commit' immediately.",
+  "label": "unsupported"
+ },
+ {
+  "n": 25,
+  "reasoning": "The doc says code fences and prose around the object are tolerated; first_object extracts it.",
+  "label": "unsupported"
+ },
+ {
+  "n": 26,
+  "reasoning": "With no generation id the code records cost Some(0.0), source 'none' and says nothing was charged; 'unread' applies only when a generation id exists.",
+  "label": "unsupported"
+ },
+ {
+  "n": 27,
+  "reasoning": "borderline is min distance to either edge <= 0.10 * IQR width, so within or exactly at the bound.",
+  "label": "supported"
+ },
+ {
+  "n": 28,
+  "reasoning": "prefix=1, suffix=2 (4 and 3 match), so it returns (1, 2, 2), not (1, 3, 3).",
+  "label": "unsupported"
+ },
+ {
+  "n": 29,
+  "reasoning": "Warning fires only when paraphrase_median > 2 * error_median, not merely larger.",
+  "label": "unsupported"
+ },
+ {
+  "n": 30,
+  "reasoning": "range(max(start,1), end) with docstring saying token 0 counts as 0.",
+  "label": "supported"
+ },
+ {
+  "n": 31,
+  "reasoning": "Max across providers; completion max with internal_reasoning; returns None when no priced endpoint.",
+  "label": "supported"
+ },
+ {
+  "n": 32,
+  "reasoning": "lam < 0.2 returns 1.0; else 100-term series clamped with min/max to [0,1].",
+  "label": "supported"
+ },
+ {
+  "n": 33,
+  "reasoning": "Loop of 2 attempts with nudge appended; second failure returns Error::BadVerdict.",
+  "label": "supported"
+ },
+ {
+  "n": 34,
+  "reasoning": "Reversed: _AN_WORDS (hour, honest...) give 'an' and _A_PREFIXES (unic, unif, use...) give 'a'; the prefixes are also specific, not 'uni'.",
+  "label": "unsupported"
+ },
+ {
+  "n": 35,
+  "reasoning": "The body is redacted first, then truncated to 600.",
+  "label": "unsupported"
+ },
+ {
+  "n": 36,
+  "reasoning": "canonicalize and starts_with(root) check, else Error::Refused.",
+  "label": "supported"
+ },
+ {
+  "n": 37,
+  "reasoning": "launch_status_is_terminal treats both ERROR and EXITED as terminal.",
+  "label": "unsupported"
+ },
+ {
+  "n": 38,
+  "reasoning": "finish_reason == length pushes the max_tokens warning; empty content pushes the reasoning warning.",
+  "label": "supported"
+ },
+ {
+  "n": 39,
+  "reasoning": "or.price precedes commit_completion; store.journal is called before or.complete sends the request.",
+  "label": "supported"
+ },
+ {
+  "n": 40,
+  "reasoning": "If shared is empty, prompts is empty and the row returns margin None and size_residual_cue None.",
+  "label": "supported"
+ },
+ {
+  "n": 41,
+  "reasoning": "Matching sha skipped with unchanged += 1 unless force.",
+  "label": "supported"
+ },
+ {
+  "n": 42,
+  "reasoning": "cpu_only sends num_gpu: 0, not 1.",
+  "label": "unsupported"
+ },
+ {
+  "n": 43,
+  "reasoning": "The suffix list is .pem, .key, .p12, .pfx; .crt is not in it.",
+  "label": "unsupported"
+ },
+ {
+  "n": 44,
+  "reasoning": "The menu opens only when !show and both stdin and stdout are terminals.",
+  "label": "unsupported"
+ },
+ {
+  "n": 45,
+  "reasoning": "Error unless measure.ci[0] > 0.5, strict.",
+  "label": "supported"
+ },
+ {
+  "n": 46,
+  "reasoning": "Schema puts reasoning first (before **fields), not last.",
+  "label": "unsupported"
+ },
+ {
+  "n": 47,
+  "reasoning": "None generation id gives Some(0.0), 'none', and the message 'nothing was charged'.",
+  "label": "supported"
+ },
+ {
+  "n": 48,
+  "reasoning": "Recall is over decided claims (sup_decided, unsup_decided), so abstentions are excluded, not counted wrong.",
+  "label": "unsupported"
+ },
+ {
+  "n": 49,
+  "reasoning": "reasoning first, required with all fields, additionalProperties False.",
+  "label": "supported"
+ },
+ {
+  "n": 50,
+  "reasoning": "penalty[0]=0 leaves bias unpenalised; breaks when max |step| < 1e-10; steps default 50.",
+  "label": "supported"
+ },
+ {
+  "n": 51,
+  "reasoning": "kept_now_dropped_before is len(kept_set - old_kept).",
+  "label": "supported"
+ },
+ {
+  "n": 52,
+  "reasoning": "The threshold is lam < 0.2, not 0.5.",
+  "label": "unsupported"
+ },
+ {
+  "n": 53,
+  "reasoning": "If the embed server is unreachable the if-let chain fails and it falls back to store.search; no error.",
+  "label": "unsupported"
+ },
+ {
+  "n": 54,
+  "reasoning": "Supported with not quote_ok becomes (CannotTell, QUOTE_NOT_FOUND); an empty quote is not found.",
+  "label": "supported"
+ },
+ {
+  "n": 55,
+  "reasoning": "normalise collapses every whitespace run to one space, so line wrapping is ignored.",
+  "label": "unsupported"
+ },
+ {
+  "n": 56,
+  "reasoning": "mu and sd from x[train]; sd==0 set to 1.0.",
+  "label": "supported"
+ },
+ {
+  "n": 57,
+  "reasoning": "Prefixes are swapped: Document gets 'search_document: ', Query 'search_query: '.",
+  "label": "unsupported"
+ },
+ {
+  "n": 58,
+  "reasoning": "Counts hits excluding a/an before uni, eu, one, use, usu, hour, hon, heir; flags if edited has more.",
+  "label": "supported"
+ },
+ {
+  "n": 59,
+  "reasoning": "It takes the dearest (max) across providers, not the cheapest.",
+  "label": "unsupported"
+ },
+ {
+  "n": 60,
+  "reasoning": "The price is looked up (or.price) before commit_completion; the price does not come back with the commitment.",
+  "label": "unsupported"
+ },
+ {
+  "n": 61,
+  "reasoning": "Mean of the two decided recalls, Some only when both sup_decided and unsup_decided > 0.",
+  "label": "supported"
+ },
+ {
+  "n": 62,
+  "reasoning": "If tried is empty (all skipped as above cap) NoCapacity 'every GPU listed ... is above the plan price'; no create post is made. (A price lookup is made.)",
+  "label": "supported"
+ },
+ {
+  "n": 63,
+  "reasoning": "delete_pod sends DELETE /pods/{id}; stop_pod posts {action: stop} to /pods/{id}/action.",
+  "label": "supported"
+ },
+ {
+  "n": 64,
+  "reasoning": "trim, lowercase, space/hyphen to underscore, so 'Cannot-Tell' becomes cannot_tell.",
+  "label": "supported"
+ },
+ {
+  "n": 65,
+  "reasoning": "The env carries a RunPod secret reference, {{ RUNPOD_SECRET_... }}, not the literal token.",
+  "label": "unsupported"
+ },
+ {
+  "n": 66,
+  "reasoning": "If embeddings or embed client or query vector fails, it falls through to store.search(q).",
+  "label": "supported"
+ },
+ {
+  "n": 67,
+  "reasoning": "gpu.minCudaVersion set only if Some; startSsh is true unconditionally.",
+  "label": "supported"
+ },
+ {
+  "n": 68,
+  "reasoning": "price > cap + 1e-4 leads to continue before any post.",
+  "label": "supported"
+ },
+ {
+  "n": 69,
+  "reasoning": "(1..5) covers 1 to 4 only, not 5.",
+  "label": "unsupported"
+ },
+ {
+  "n": 70,
+  "reasoning": "new.startswith(low) or low.startswith(new) returns 'synonym is an inflection'.",
+  "label": "supported"
+ },
+ {
+  "n": 71,
+  "reasoning": "needs_human uses the final verdict (after the quote rule), not the model's own verdict (model_verdict).",
+  "label": "unsupported"
+ },
+ {
+  "n": 72,
+  "reasoning": "network_volume_id is checked first; the persistent mount is only used in the else branch.",
+  "label": "unsupported"
+ },
+ {
+  "n": 73,
+  "reasoning": "MIN_QUOTE_CHARS 12 and any passage's normalised text contains the quote.",
+  "label": "supported"
+ },
+ {
+  "n": 74,
+  "reasoning": "min of distances to q1 and q3 <= threshold, with comment 'inside or out'.",
+  "label": "supported"
+ },
+ {
+  "n": 75,
+  "reasoning": "trim, strip leading $, trim; parse; requires finite and >= 0.",
+  "label": "supported"
+ },
+ {
+  "n": 76,
+  "reasoning": "The merge threshold is tail_len < MIN_CHARS / 4 = 200 chars, not 800.",
+  "label": "unsupported"
+ },
+ {
+  "n": 77,
+  "reasoning": "dtype defaults to the stored dtype (fp16 in caches), not float32.",
+  "label": "unsupported"
+ },
+ {
+  "n": 78,
+  "reasoning": "Some(cap) calls set_budget_cap then falls to println of budget_menu::line.",
+  "label": "supported"
+ },
+ {
+  "n": 79,
+  "reasoning": "BATCH is 32, not 64.",
+  "label": "unsupported"
+ },
+ {
+  "n": 80,
+  "reasoning": "Pattern covers ``` blocks, `inline`, $$..$$ and $..$.",
+  "label": "supported"
+ },
+ {
+  "n": 81,
+  "reasoning": "Band is the 5th to 95th percentile, inclusive (<=), not strictly inside 25th-75th.",
+  "label": "unsupported"
+ },
+ {
+  "n": 82,
+  "reasoning": "(system.len() + user.len()) bytes + 512 allowance.",
+  "label": "supported"
+ },
+ {
+  "n": 83,
+  "reasoning": "temperature 0.0, seed 0, ThinkLevel::On, num_ctx 16384, num_predict 4096, structured true.",
+  "label": "supported"
+ },
+ {
+  "n": 84,
+  "reasoning": "reasoning comes before verdict in the schema.",
+  "label": "unsupported"
+ },
+ {
+  "n": 85,
+  "reasoning": "A 404 returns Ok(None), not an error.",
+  "label": "unsupported"
+ },
+ {
+  "n": 86,
+  "reasoning": "per_feature stores max(a, 1-a), oriented so AUC is never below 0.5.",
+  "label": "unsupported"
+ },
+ {
+  "n": 87,
+  "reasoning": "Http error maps to Refused with start_line; the doc comment states it never falls back to the shared Ollama.",
+  "label": "supported"
+ },
+ {
+  "n": 88,
+  "reasoning": "think is sent only when cfg['think'] is not None; whether non-thinking judges have False or None is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 89,
+  "reasoning": "Error only if !finished && finish_reason.is_none(); a seen finish_reason avoids the error.",
+  "label": "unsupported"
+ },
+ {
+  "n": 90,
+  "reasoning": "Suffixes .pem, .key, .p12, .pfx plus the prefixes and credentials.",
+  "label": "supported"
+ },
+ {
+  "n": 91,
+  "reasoning": "The default is eager, not graphs.",
+  "label": "unsupported"
+ },
+ {
+  "n": 92,
+  "reasoning": "reasoning before verdict, all four required, additionalProperties false.",
+  "label": "supported"
+ },
+ {
+  "n": 93,
+  "reasoning": "MUSE_SAMPLE is 0.15 and GRAMMAR_SAMPLE is 0.10; the claim swaps them.",
+  "label": "unsupported"
+ },
+ {
+  "n": 94,
+  "reasoning": "now - created_at >= SETTLE_AFTER_SECS (3600).",
+  "label": "supported"
+ }
+]

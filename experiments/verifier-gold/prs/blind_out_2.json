@@ -1,0 +1,472 @@
+[
+ {
+  "n": 95,
+  "reasoning": "key header only on chat call; price comment says no key sent",
+  "label": "supported"
+ },
+ {
+  "n": 96,
+  "reasoning": "warning is for finish_reason \"length\", not \"stop\"",
+  "label": "unsupported"
+ },
+ {
+  "n": 97,
+  "reasoning": "returns Err via api_error with code and msg",
+  "label": "supported"
+ },
+ {
+  "n": 98,
+  "reasoning": "error only if !finished && finish_reason.is_none()",
+  "label": "supported"
+ },
+ {
+  "n": 99,
+  "reasoning": "both system and system_file returns Refused",
+  "label": "unsupported"
+ },
+ {
+  "n": 100,
+  "reasoning": "choices sentence/word, default word",
+  "label": "supported"
+ },
+ {
+  "n": 101,
+  "reasoning": "callback only when generation_id.is_none(), first id only",
+  "label": "unsupported"
+ },
+ {
+  "n": 102,
+  "reasoning": "normalise maps curly quotes and joins split_whitespace",
+  "label": "supported"
+ },
+ {
+  "n": 103,
+  "reasoning": "status 404 returns Ok(None)",
+  "label": "supported"
+ },
+ {
+  "n": 104,
+  "reasoning": "fork_rng seeds torch.manual_seed (CPU) and CUDA device, restores state",
+  "label": "unsupported"
+ },
+ {
+  "n": 105,
+  "reasoning": "_trainer_meta graphs gets capturable AdamW else AdamW",
+  "label": "supported"
+ },
+ {
+  "n": 106,
+  "reasoning": "log, code list incl rs/toml, default Doc",
+  "label": "supported"
+ },
+ {
+  "n": 107,
+  "reasoning": "comment says offrig never falls back to shared Ollama; error returned instead",
+  "label": "unsupported"
+ },
+ {
+  "n": 108,
+  "reasoning": "no code shown about deleting the token file on stop",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 109,
+  "reasoning": "!retry_fits returns Err with message not retried",
+  "label": "supported"
+ },
+ {
+  "n": 110,
+  "reasoning": "DEFAULT_EMBED_URL 11490 and model nomic-embed-text",
+  "label": "supported"
+ },
+ {
+  "n": 111,
+  "reasoning": "backend.generate(chats,1536,0.7), earlier candidates passed to planter_request",
+  "label": "supported"
+ },
+ {
+  "n": 112,
+  "reasoning": "price comment: no key is sent",
+  "label": "unsupported"
+ },
+ {
+  "n": 113,
+  "reasoning": "placement_rejected matches only status 400; 422 must not move on",
+  "label": "unsupported"
+ },
+ {
+  "n": 114,
+  "reasoning": "sizes and prompts guard; keep indexes the kept (not dropped) paraphrases",
+  "label": "supported"
+ },
+ {
+  "n": 115,
+  "reasoning": "cfg(debug_assertions) honours env; release always 60s",
+  "label": "supported"
+ },
+ {
+  "n": 116,
+  "reasoning": "env takes precedence over config",
+  "label": "unsupported"
+ },
+ {
+  "n": 117,
+  "reasoning": "delete_pod terminates via DELETE; stop_pod posts action stop; claim swaps names",
+  "label": "unsupported"
+ },
+ {
+  "n": 118,
+  "reasoning": "chunk with error returns Err",
+  "label": "unsupported"
+ },
+ {
+  "n": 119,
+  "reasoning": "range(max(start,1),end) excludes token 0",
+  "label": "unsupported"
+ },
+ {
+  "n": 120,
+  "reasoning": "y==1 error pairs; error_pairs=y.sum(); paraphrase the rest",
+  "label": "supported"
+ },
+ {
+  "n": 121,
+  "reasoning": "p == tunnel_port or tunnel_port+1 refused among others",
+  "label": "supported"
+ },
+ {
+  "n": 122,
+  "reasoning": "FOLDS = 5, not 10",
+  "label": "unsupported"
+ },
+ {
+  "n": 123,
+  "reasoning": "path is /network-volumes, not /networkvolumes",
+  "label": "unsupported"
+ },
+ {
+  "n": 124,
+  "reasoning": "flags only when edited has more hits than original; also exclusion list differs from claim framing",
+  "label": "unsupported"
+ },
+ {
+  "n": 125,
+  "reasoning": "abstain uses <= MAX_ABSTAIN not strictly below",
+  "label": "unsupported"
+ },
+ {
+  "n": 126,
+  "reasoning": "!show && interactive() with no usd opens menu else line",
+  "label": "supported"
+ },
+ {
+  "n": 127,
+  "reasoning": "either word or synonym in FUNCTION_WORDS",
+  "label": "supported"
+ },
+ {
+  "n": 128,
+  "reasoning": "None stored falls to _ => Ok",
+  "label": "unsupported"
+ },
+ {
+  "n": 129,
+  "reasoning": "!force required to skip; force re-chunks",
+  "label": "unsupported"
+ },
+ {
+  "n": 130,
+  "reasoning": "second slot uses avoid(first sentence)",
+  "label": "unsupported"
+ },
+ {
+  "n": 131,
+  "reasoning": "returns (0.0,1.0)",
+  "label": "unsupported"
+ },
+ {
+  "n": 132,
+  "reasoning": "confirm asked and cap set to floor not zero",
+  "label": "unsupported"
+ },
+ {
+  "n": 133,
+  "reasoning": "FOLDS 5, L2 1.0, four features, SETS mapping",
+  "label": "supported"
+ },
+ {
+  "n": 134,
+  "reasoning": "condition is >= SETTLE_AFTER_SECS",
+  "label": "unsupported"
+ },
+ {
+  "n": 135,
+  "reasoning": "properties order reasoning, verdict, claim_changed; required; enum; additionalProperties False",
+  "label": "supported"
+ },
+ {
+  "n": 136,
+  "reasoning": "constants 2.0, 1.5, 5, 3",
+  "label": "supported"
+ },
+ {
+  "n": 137,
+  "reasoning": "comment and code use rank from 1",
+  "label": "unsupported"
+ },
+ {
+  "n": 138,
+  "reasoning": "drop uses only grammatical False; idiom only in drop_if_idiom_gated",
+  "label": "unsupported"
+ },
+ {
+  "n": 139,
+  "reasoning": "requires corrections === 0",
+  "label": "unsupported"
+ },
+ {
+  "n": 140,
+  "reasoning": "method inclusive, not exclusive",
+  "label": "unsupported"
+ },
+ {
+  "n": 141,
+  "reasoning": "comment: within 10% of either edge, inside or out; outside can be borderline",
+  "label": "unsupported"
+ },
+ {
+  "n": 142,
+  "reasoning": "absolute paths also canonicalized and checked with starts_with(root)",
+  "label": "unsupported"
+ },
+ {
+  "n": 143,
+  "reasoning": "self-flag only when marker count increases in edited vs original",
+  "label": "unsupported"
+ },
+ {
+  "n": 144,
+  "reasoning": "cfg(debug_assertions) only",
+  "label": "unsupported"
+ },
+ {
+  "n": 145,
+  "reasoning": "explicit Hybrid without embeddings returns Refused error",
+  "label": "unsupported"
+ },
+ {
+  "n": 146,
+  "reasoning": "plain random shuffle is a gap",
+  "label": "unsupported"
+ },
+ {
+  "n": 147,
+  "reasoning": "BEGIN IMMEDIATE, insert completions and ledger commit worst case",
+  "label": "supported"
+ },
+ {
+  "n": 148,
+  "reasoning": "requires exactly one hit",
+  "label": "unsupported"
+ },
+ {
+  "n": 149,
+  "reasoning": "empty evidence returns model verdict unchanged",
+  "label": "unsupported"
+ },
+ {
+  "n": 150,
+  "reasoning": "penalty[0]=0.0 bias not penalised",
+  "label": "unsupported"
+ },
+ {
+  "n": 151,
+  "reasoning": "temperature 0.7 not 0",
+  "label": "unsupported"
+ },
+ {
+  "n": 152,
+  "reasoning": "/network-volumes and dataCenter",
+  "label": "supported"
+ },
+ {
+  "n": 153,
+  "reasoning": "next type not tried",
+  "label": "unsupported"
+ },
+ {
+  "n": 154,
+  "reasoning": "with usd it sets cap and prints line, no menu",
+  "label": "unsupported"
+ },
+ {
+  "n": 155,
+  "reasoning": "num_ctx 16384 not 8192",
+  "label": "unsupported"
+ },
+ {
+  "n": 156,
+  "reasoning": "folds assigned per distinct prompt id",
+  "label": "unsupported"
+ },
+ {
+  "n": 157,
+  "reasoning": "disagreement when CIs do not overlap (apart), not when they overlap",
+  "label": "unsupported"
+ },
+ {
+  "n": 158,
+  "reasoning": "errors highest tail first, rewrites lowest first; comparison is <=",
+  "label": "unsupported"
+ },
+ {
+  "n": 159,
+  "reasoning": "comparison is <=, not strictly less",
+  "label": "unsupported"
+ },
+ {
+  "n": 160,
+  "reasoning": "Err for explicit Hybrid; None picks Hybrid if have",
+  "label": "supported"
+ },
+ {
+  "n": 161,
+  "reasoning": "flagged plus seeded_sample 10% of unflagged",
+  "label": "supported"
+ },
+ {
+  "n": 162,
+  "reasoning": "false accept counts only v == Supported",
+  "label": "unsupported"
+ },
+ {
+  "n": 163,
+  "reasoning": "non-empty and alphanumeric - or _",
+  "label": "supported"
+ },
+ {
+  "n": 164,
+  "reasoning": "env non-empty first; embed_port_conflict refused",
+  "label": "supported"
+ },
+ {
+  "n": 165,
+  "reasoning": "sorts ids first so order given is irrelevant; empty only if pool empty",
+  "label": "unsupported"
+ },
+ {
+  "n": 166,
+  "reasoning": "default URL is 11490, not 11434",
+  "label": "unsupported"
+ },
+ {
+  "n": 167,
+  "reasoning": "ous excluded from s; finds -> s",
+  "label": "supported"
+ },
+ {
+  "n": 168,
+  "reasoning": "Refused if below floor",
+  "label": "supported"
+ },
+ {
+  "n": 169,
+  "reasoning": "HF_TOKEN_PATH is always set",
+  "label": "unsupported"
+ },
+ {
+  "n": 170,
+  "reasoning": "false_accept.high < MAX so exactly 0.10 fails",
+  "label": "unsupported"
+ },
+ {
+  "n": 171,
+  "reasoning": "q1 <= median <= q3",
+  "label": "supported"
+ },
+ {
+  "n": 172,
+  "reasoning": "scale = max/127",
+  "label": "unsupported"
+ },
+ {
+  "n": 173,
+  "reasoning": "mean and sd from train folds per fold",
+  "label": "unsupported"
+ },
+ {
+  "n": 174,
+  "reasoning": "u64, f64 parse; else 1s",
+  "label": "supported"
+ },
+ {
+  "n": 175,
+  "reasoning": "empty line not accepted; only y, Y, yes",
+  "label": "unsupported"
+ },
+ {
+  "n": 176,
+  "reasoning": "range 0.0..=2.0 inclusive",
+  "label": "unsupported"
+ },
+ {
+  "n": 177,
+  "reasoning": "needs_human = CannotTell || high_stakes",
+  "label": "supported"
+ },
+ {
+  "n": 178,
+  "reasoning": "rank from 1, k 60, sorted descending",
+  "label": "supported"
+ },
+ {
+  "n": 179,
+  "reasoning": "only if hf_token_secret is Some",
+  "label": "supported"
+ },
+ {
+  "n": 180,
+  "reasoning": "requires ci[0] > 0.5 strictly",
+  "label": "unsupported"
+ },
+ {
+  "n": 181,
+  "reasoning": "num_gpu 0 and 404 maps to Refused with ollama pull",
+  "label": "supported"
+ },
+ {
+  "n": 182,
+  "reasoning": "margin added only if sizes and prompts; band uses keep subset",
+  "label": "unsupported"
+ },
+ {
+  "n": 183,
+  "reasoning": "grounded and reasoning required",
+  "label": "supported"
+ },
+ {
+  "n": 184,
+  "reasoning": "graphs only when trainer==graphs",
+  "label": "unsupported"
+ },
+ {
+  "n": 185,
+  "reasoning": "synonym case matched to word's first letter and article is rewritten",
+  "label": "unsupported"
+ },
+ {
+  "n": 186,
+  "reasoning": "(1..5) covers 1-4 backfill before writing version",
+  "label": "supported"
+ },
+ {
+  "n": 187,
+  "reasoning": "post retry behaviour not shown",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 188,
+  "reasoning": "active only and cap/ default as claimed but superseded excluded",
+  "label": "unsupported"
+ }
+]

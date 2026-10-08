@@ -1,0 +1,467 @@
+[
+ {
+  "n": 282,
+  "reasoning": "Code: BCE for auditor, pairwise logistic for every other role; claim reverses them.",
+  "label": "unsupported"
+ },
+ {
+  "n": 283,
+  "reasoning": "Docstring: the lane is read, never allocated.",
+  "label": "unsupported"
+ },
+ {
+  "n": 284,
+  "reasoning": "CHECK (kind IN doc, code, log, record).",
+  "label": "supported"
+ },
+ {
+  "n": 285,
+  "reasoning": "Release build uses Duration::from_secs(60) unconditionally; env var is debug only.",
+  "label": "unsupported"
+ },
+ {
+  "n": 286,
+  "reasoning": "startswith(low) returns 'synonym is an inflection', not 'changes the form'.",
+  "label": "unsupported"
+ },
+ {
+  "n": 287,
+  "reasoning": "RANKER_DEPTH=50 per ranker, FUSED_KEEP=20; claim swaps the numbers.",
+  "label": "unsupported"
+ },
+ {
+  "n": 288,
+  "reasoning": "Match arm covers empty string, 3, q and Q.",
+  "label": "supported"
+ },
+ {
+  "n": 289,
+  "reasoning": "Context mapped to ctx{i+1} first, then retrieved passages extended.",
+  "label": "supported"
+ },
+ {
+  "n": 290,
+  "reasoning": "Code checks finite/non-negative first, then the floor; claim reverses the order.",
+  "label": "unsupported"
+ },
+ {
+  "n": 291,
+  "reasoning": "max_tokens==0 refused; temperature must be finite and in 0.0..=2.0.",
+  "label": "supported"
+ },
+ {
+  "n": 292,
+  "reasoning": "toml is in the Code arm, not docs.",
+  "label": "unsupported"
+ },
+ {
+  "n": 293,
+  "reasoning": "rewrite_kept needs both same/claim_changed False and gemma grammatical True; 'grammatical' read as the rewrite property judged by gemma. Wording ambiguous.",
+  "label": "supported"
+ },
+ {
+  "n": 294,
+  "reasoning": "per_feature[name] = max(a, 1 - a).",
+  "label": "supported"
+ },
+ {
+  "n": 295,
+  "reasoning": "error_pairs = y.sum(), so label 1 is error pairs and label 0 is paraphrase; claim reversed.",
+  "label": "unsupported"
+ },
+ {
+  "n": 296,
+  "reasoning": "Prefix list has specific entries (unic, unif, ...), no bare 'uni' prefix.",
+  "label": "unsupported"
+ },
+ {
+  "n": 297,
+  "reasoning": "poll() returns (5, 3 seconds) by default, not 3 tries 5 seconds apart.",
+  "label": "unsupported"
+ },
+ {
+  "n": 298,
+  "reasoning": "paraphrase_median > 2 * error_median pushes a warning; same-generator context not shown but the check matches.",
+  "label": "supported"
+ },
+ {
+  "n": 299,
+  "reasoning": "train, perm, skeptic have --trainer choices eager/fast/graphs default eager; compare has none.",
+  "label": "supported"
+ },
+ {
+  "n": 300,
+  "reasoning": "BALANCED_PERMUTATION comment and SHUFFLE_WHY: plain random shuffle is a gap.",
+  "label": "supported"
+ },
+ {
+  "n": 301,
+  "reasoning": "size > MAX_FILE_BYTES with 1_000_000; zero byte in first 8192 is binary.",
+  "label": "supported"
+ },
+ {
+  "n": 302,
+  "reasoning": "Err only when stored is Some and != model; None falls to Ok.",
+  "label": "supported"
+ },
+ {
+  "n": 303,
+  "reasoning": "n == 0 returns (0.0, 1.0).",
+  "label": "supported"
+ },
+ {
+  "n": 304,
+  "reasoning": "Skip only when price > cap + 1e-4, strictly above, not at or above.",
+  "label": "unsupported"
+ },
+ {
+  "n": 305,
+  "reasoning": "Verdict becomes CannotTell with quote_not_found, not unsupported.",
+  "label": "unsupported"
+ },
+ {
+  "n": 306,
+  "reasoning": "done_reason length returns outcome truncated before any parsing.",
+  "label": "unsupported"
+ },
+ {
+  "n": 307,
+  "reasoning": "Any component that is not Normal/CurDir (including ..) is refused.",
+  "label": "unsupported"
+ },
+ {
+  "n": 308,
+  "reasoning": "3/n when misses==0 (None only if n==0), None otherwise, prescreen_stands = misses==0.",
+  "label": "supported"
+ },
+ {
+  "n": 309,
+  "reasoning": "Uses false_accept.high < MAX_FALSE_ACCEPT_UPPER, strict.",
+  "label": "supported"
+ },
+ {
+  "n": 310,
+  "reasoning": "MIN_CHARS 800, MAX_CHARS 2000, MAX_FILE_BYTES 1_000_000 'larger than this are not indexed'.",
+  "label": "supported"
+ },
+ {
+  "n": 311,
+  "reasoning": "parse_usd requires v >= 0.0; negatives rejected.",
+  "label": "unsupported"
+ },
+ {
+  "n": 312,
+  "reasoning": "Defaults rounds: int = 7, per_answer: int = 2.",
+  "label": "supported"
+ },
+ {
+  "n": 313,
+  "reasoning": "Pairs the first judge did not keep are skipped (continue), not sent.",
+  "label": "unsupported"
+ },
+ {
+  "n": 314,
+  "reasoning": "Arm calls job_pod_env(j), taking the job, not plain job_env; body not shown, somewhat ambiguous.",
+  "label": "unsupported"
+ },
+ {
+  "n": 315,
+  "reasoning": "Constants MUSE_SAMPLE 0.15 and GRAMMAR_SAMPLE 0.10 shown but their use (sample of what gemma called not wrong) is not.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 316,
+  "reasoning": "self.auth() body not shown; no RUNPOD_API_KEY visible.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 317,
+  "reasoning": "FIRST='Choose any one sentence.' for slot 0; avoid(first swap's sentence) otherwise.",
+  "label": "supported"
+ },
+ {
+  "n": 318,
+  "reasoning": "Missing header returns Duration::from_secs(1), not 60.",
+  "label": "unsupported"
+ },
+ {
+  "n": 319,
+  "reasoning": "Whole-word regex with lookarounds; len(hits) != 1 rejects.",
+  "label": "supported"
+ },
+ {
+  "n": 320,
+  "reasoning": "drop uses grammatical is False only; idiom False goes to not_idiomatic_recorded_only and drop_if_idiom_gated.",
+  "label": "supported"
+ },
+ {
+  "n": 321,
+  "reasoning": "Rounded up to the cent via ceil, not to nearest.",
+  "label": "unsupported"
+ },
+ {
+  "n": 322,
+  "reasoning": "calibrationDisabled is env.ROLEOS_NO_CALIBRATION === '1', not any non-empty value.",
+  "label": "unsupported"
+ },
+ {
+  "n": 323,
+  "reasoning": "ALLOWED_MODELS and ALLOWED_LANES contain exactly those entries; checks use contains.",
+  "label": "supported"
+ },
+ {
+  "n": 324,
+  "reasoning": "Regex includes $$...$$ and $...$ maths.",
+  "label": "unsupported"
+ },
+ {
+  "n": 325,
+  "reasoning": "Scores chunk=64 answers per forward, not one pair.",
+  "label": "unsupported"
+ },
+ {
+  "n": 326,
+  "reasoning": "idiom optional, idiomatic None if absent; unparsed only if verdict or grammar missing.",
+  "label": "supported"
+ },
+ {
+  "n": 327,
+  "reasoning": "matches! only y, Y, yes; empty line is not matched.",
+  "label": "supported"
+ },
+ {
+  "n": 328,
+  "reasoning": "capturable=graphs, so only on with CUDA graphs.",
+  "label": "unsupported"
+ },
+ {
+  "n": 329,
+  "reasoning": "metrics scores all labelled gold claims passed in; no heldout split filter shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 330,
+  "reasoning": "Threshold is > 0.3, not 50%.",
+  "label": "unsupported"
+ },
+ {
+  "n": 331,
+  "reasoning": "Matches docstring and code: sum of max side over non-equal opcodes, chars and words.",
+  "label": "supported"
+ },
+ {
+  "n": 332,
+  "reasoning": "STANDARD_CONTROLS lists nine controls, not eight.",
+  "label": "unsupported"
+ },
+ {
+  "n": 333,
+  "reasoning": "Error is raised when CIs do NOT overlap and status != unresolved; claim reverses.",
+  "label": "unsupported"
+ },
+ {
+  "n": 334,
+  "reasoning": "On error warns via trace::warn/on_warn and sets offers None; every type is tried.",
+  "label": "supported"
+ },
+ {
+  "n": 335,
+  "reasoning": "Errors unless out.len()==inputs.len(), dim!=0, and all rows have len dim.",
+  "label": "supported"
+ },
+ {
+  "n": 336,
+  "reasoning": "_v2 filters to current-question verdicts only; older verdicts yield {}.",
+  "label": "unsupported"
+ },
+ {
+  "n": 337,
+  "reasoning": "GRAMMAR_SCHEMA includes both grammatical and idiomatic.",
+  "label": "unsupported"
+ },
+ {
+  "n": 338,
+  "reasoning": "replace_source DELETEs the source's old chunks first.",
+  "label": "unsupported"
+ },
+ {
+  "n": 339,
+  "reasoning": "Refused when worst_case > remaining + 1e-9, strictly greater.",
+  "label": "unsupported"
+ },
+ {
+  "n": 340,
+  "reasoning": "gemma_v1 saved on re-ask; prescreen_stands False triggers pass over all pairs without a v2 verdict.",
+  "label": "supported"
+ },
+ {
+  "n": 341,
+  "reasoning": "Also unparsed when verdict not in same/changed/unsure or claim_changed not bool.",
+  "label": "unsupported"
+ },
+ {
+  "n": 342,
+  "reasoning": "mistral num_predict is 2048, not 4096.",
+  "label": "unsupported"
+ },
+ {
+  "n": 343,
+  "reasoning": "Docstring and filter: a check type with no labelled claim has no row.",
+  "label": "unsupported"
+ },
+ {
+  "n": 344,
+  "reasoning": "Order is pair_problems, size gate, lexical guard, overlap; claim puts lexical before size.",
+  "label": "unsupported"
+ },
+ {
+  "n": 345,
+  "reasoning": "11490 maps to Some(the default embedding server's port), i.e. reserved.",
+  "label": "unsupported"
+ },
+ {
+  "n": 346,
+  "reasoning": "Skips already-judged pairs and pairs not kept by first judge.",
+  "label": "supported"
+ },
+ {
+  "n": 347,
+  "reasoning": "job_env always inserts HF_TOKEN_PATH; doc says always set.",
+  "label": "supported"
+ },
+ {
+  "n": 348,
+  "reasoning": "fa increments only when truth Unsupported and v == Supported.",
+  "label": "supported"
+ },
+ {
+  "n": 349,
+  "reasoning": "Guarded by generation_id.is_none() and non-empty id; sets it so fires once.",
+  "label": "supported"
+ },
+ {
+  "n": 350,
+  "reasoning": "scale = max/127, max==0 returns scale 0.0.",
+  "label": "supported"
+ },
+ {
+  "n": 351,
+  "reasoning": "capturable=graphs, graphs true only for trainer graphs.",
+  "label": "supported"
+ },
+ {
+  "n": 352,
+  "reasoning": "Refusal is for non-Knowledge checks with empty evidence; Knowledge is allowed.",
+  "label": "unsupported"
+ },
+ {
+  "n": 353,
+  "reasoning": "Second strongest (index 1) moves to the end; strongest stays first.",
+  "label": "unsupported"
+ },
+ {
+  "n": 354,
+  "reasoning": "Pair order is reshuffled at the start of each epoch, not once.",
+  "label": "unsupported"
+ },
+ {
+  "n": 355,
+  "reasoning": "secret_name allows only letters, digits, _ and -; spaces rejected.",
+  "label": "unsupported"
+ },
+ {
+  "n": 356,
+  "reasoning": "JUDGES values match claim exactly.",
+  "label": "supported"
+ },
+ {
+  "n": 357,
+  "reasoning": "mistral checks outcome and claim_changed only; grammatical only for gemma.",
+  "label": "supported"
+ },
+ {
+  "n": 358,
+  "reasoning": "With no shared prompts size_residual_cue is None, not False.",
+  "label": "unsupported"
+ },
+ {
+  "n": 359,
+  "reasoning": "Gemma runs only on flagged pairs plus a 10% sample of unflagged, not every pair.",
+  "label": "unsupported"
+ },
+ {
+  "n": 360,
+  "reasoning": "Also requires only alphanumeric, - or _ characters.",
+  "label": "unsupported"
+ },
+ {
+  "n": 361,
+  "reasoning": "RANKER_DEPTH 50 each, FUSED_KEEP 20.",
+  "label": "supported"
+ },
+ {
+  "n": 362,
+  "reasoning": "retries < CREATE_429_RETRIES=3 on same GPU type, sleeping Retry-After (deadline permitting).",
+  "label": "supported"
+ },
+ {
+  "n": 363,
+  "reasoning": "Finite/non-negative check precedes floor check with usd + 1e-9 < b.floor().",
+  "label": "supported"
+ },
+ {
+  "n": 364,
+  "reasoning": "If tried is empty, returns NoCapacity error; cheapest is not tried anyway.",
+  "label": "unsupported"
+ },
+ {
+  "n": 365,
+  "reasoning": "all_read_sets_pass iterates READ_SETS only; ptrain is reported-only.",
+  "label": "unsupported"
+ },
+ {
+  "n": 366,
+  "reasoning": "Docstring and filter_map match.",
+  "label": "supported"
+ },
+ {
+  "n": 367,
+  "reasoning": "Uses verdict[-1] and grammar[-1] (last), and unparsed if either missing.",
+  "label": "unsupported"
+ },
+ {
+  "n": 368,
+  "reasoning": "sorted then Random(seed).shuffle, max(1, ...) when pool nonempty.",
+  "label": "supported"
+ },
+ {
+  "n": 369,
+  "reasoning": "temperature 0.0, format SCHEMA, think added only if cfg think is not None.",
+  "label": "supported"
+ },
+ {
+  "n": 370,
+  "reasoning": "secret_name requires non-empty and only alnum, _ , -.",
+  "label": "supported"
+ },
+ {
+  "n": 371,
+  "reasoning": "redact then body.truncate(600).",
+  "label": "supported"
+ },
+ {
+  "n": 372,
+  "reasoning": "Auditor: BCE on scores/10, target zeros for strong, ones for flawed; others logsigmoid(strong - flawed).",
+  "label": "supported"
+ },
+ {
+  "n": 373,
+  "reasoning": "Comment and code: same runId returns false without appending.",
+  "label": "unsupported"
+ },
+ {
+  "n": 374,
+  "reasoning": "Only the trainer dispatch and capturable note shown; per-batch-size capture not visible.",
+  "label": "cannot_tell"
+ }
+]

@@ -119,12 +119,51 @@ serves):
 release and likely other 2026 releases (FLUX.2, SAM 3, TRELLIS.2,
 Qwen3-VL). It is due a refresh through the readouts build.
 
+## Access status (2026-10-08, from the Director's gated-repo page)
+
+- **Accepted the same day:**
+  - Google's Gemma models family (covers Gemma 3 and ShieldGemma);
+  - CohereLabs/tiny-aya-base;
+  - pyannote/speaker-diarization-3.1 and pyannote/segmentation-3.0;
+  - stabilityai/stable-audio-open-1.0.
+- **Pending:**
+  - the Llama 4 collection (expected to include Llama Guard 4);
+  - facebook/sam-3d-objects.
+- **Not yet requested:** facebook/sam3, swiss-ai/Apertus-v1.5-8B, FLUX Kontext /
+  FLUX.2, PaliGemma 2.
+
+## Gemma Terms of Use: what they mean here
+
+The Director pasted the Gemma Terms of Use. This is R&D's reading, not legal
+advice, and it needs one careful check before anything Gemma-3-based is
+published:
+- **Outputs are free to use.** Google claims no rights in Outputs, and Outputs
+  are not Model Derivatives. Gemma-3-planted pairs, and labels or scores it
+  produces, can go into datasets, public ones included.
+- **"Model Derivatives"** covers modifications of Gemma, works based on it, and
+  models trained on its outputs (distillation, synthetic data) *in order to
+  perform similarly to Gemma*.
+  - A critic trained on Gemma-planted pairs learns to find errors, not to
+    imitate Gemma, so it reads as outside that clause.
+  - A critic head that runs on Gemma 3's hidden states is a work based on Gemma:
+    it needs Gemma at inference.
+- **Distribution, including hosting it as a service, carries obligations:**
+  - pass on the Section 3.2 use restrictions;
+  - give recipients the terms;
+  - mark modified files;
+  - ship the required Notice file.
+  Internal research use triggers none of these. The Prohibited Use Policy
+  always applies.
+- **Rule of thumb:** Gemma 3 for research comparisons; **Gemma 4 (Apache-2.0)
+  for anything that ships**, since it carries none of these terms.
+
 ## Claims
 
 - [verified] google/gemma-4-31B-it and the smaller Gemma 4 instruct models are Apache-2.0 and not gated, while google/gemma-3-27b-it, gemma-3-4b-it and shieldgemma-2-4b-it are gated with manual approval. (via: research agent reading the Hugging Face model API, 2026-10-08)
 - [verified] pyannote/segmentation-3.0 (MIT) and pyannote/speaker-diarization-community-1 (CC-BY-4.0) are gated with automatic approval; stabilityai/stable-audio-open-1.0 is gated by an automatic form. (via: research agent reading the Hugging Face model API, 2026-10-08)
 - [verified] facebook/sam3 and facebook/sam-3d-objects are gated with manual approval under non-standard ("other") licences. (via: research agent reading the Hugging Face model API, 2026-10-08)
 - [verified] Qwen3-VL-8B/32B-Instruct are Apache-2.0 and ungated; UnifiedReward-2.0-qwen3vl-8b and TRELLIS.2-4B are MIT and ungated. (via: research agent reading the Hugging Face model API, 2026-10-08)
+- [unverified] Critics trained on Gemma-3-planted data are not Model Derivatives under the Gemma Terms of Use, because they are not trained to perform similarly to Gemma (R&D's reading of the terms the Director pasted, 2026-10-08; not legal advice).
 - [unverified] Licence terms beyond the API's licence tags (use restrictions, any clause against training other models) for the Gemma terms, the SAM licence, Stable Audio Community, EXAONE and Bespoke-MiniCheck. Read each card before relying on it.
 
 ## Sources

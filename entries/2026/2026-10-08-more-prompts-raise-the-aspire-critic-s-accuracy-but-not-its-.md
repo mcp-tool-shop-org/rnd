@@ -84,6 +84,25 @@ apart from the run (`critic.init_seed`, a forked CPU generator).
   0.516]. It may have been an inverted draw, though its CI reaches 0.5.
 - **Cost:** $3.85 (offrig plan 20).
 
+## The inverted critic was real (follow-up, 2026-10-08)
+
+The Auditor plan (aspire-si #45) committed a rule before reading the inverted
+critic (run 42 : critic seed 43) on fresh data:
+- **On the 149 confirmation pairs, never used to find it:** it ranks the
+  flawed answer above the strong one on 0.678 of pairs, 95% CI [0.582, 0.763],
+  entirely above chance.
+- **Almost no regression to the mean:** it scored 0.685 on the 127 pairs where
+  it was found and 0.678 fresh. So it is an auditor, and keeps the name.
+- **The scoring is reproducible:** re-scored locally on the 127 judge pairs it
+  gives 0.315, identical to the pod, with 123 of 127 decisions matching and a
+  median per-answer score difference of 0.002.
+- **But its margins are tiny** (mean |gap| about 0.01): about a quarter of
+  pairs fall within the local–pod difference. It is consistent, but weak per
+  decision.
+- **What it means:** one critic init, trained with no auditor objective,
+  reliably learned to rank planted errors higher. Trained Auditors now have a
+  real bar, 0.678 on validation, to be compared with a paired CI.
+
 ## Studio relevance
 
 - **For aspire-si:** more prompts is worth having (+0.11 mean), but a single seed
@@ -112,6 +131,7 @@ apart from the run (`critic.init_seed`, a forked CPU generator).
 - [verified] With 128 training prompts, control-local ASPIRE critics scored 0.827, 0.646 and 0.764 pairwise accuracy on the 127 planted-error pairs (seeds 42, 43, 44), against 0.724, 0.543 and 0.638 with 32 prompts: the mean rose by 0.11, the range stayed 0.181. (via: aspire-si step 2, offrig plan 19, read under #35; reported by session A 2026-10-08)
 - [verified] The step 2 run cost $8.03, with $4.10 more spent on two stopped attempts. (via: offrig plan 19 and the stopped attempts, reported by session A 2026-10-08)
 - [verified] Seeding the critic's initial weights apart from the run, critic init alone spanned 0.488 pairwise accuracy (0.315–0.803) and the run seed alone 0.283 (0.543–0.827), against a 0.055 noise floor from one identical repeat; critic seed 43 scored 0.315, below chance. (via: aspire-si critic-init test, offrig plan 20, readout committed in #43; reported by session A 2026-10-08)
+- [verified] The inverted critic (run 42, critic seed 43) ranks the flawed answer above the strong one on 0.678 [0.582, 0.763] of 149 fresh confirmation pairs, against 0.685 on the 127 pairs it was selected on. (via: aspire-si Auditor plan step 1, rule committed in #45, reported by session A 2026-10-08)
 - [verified] Identical-seed ASPIRE runs on the rented GPU produced 0 of 32 identical dialogues. (via: aspire-si plan 20, reported by session A 2026-10-08)
 - [unverified] ASPIRE critic variance between seeds comes from critic-head initialisation or student sampling. Superseded: both critic init and the run seed contribute (see above). (hypothesis from the unchanged seed order; untested)
 - [unverified] ASPIRE epoch-1 dialogue generation takes about 1.67 min per dialogue with three runs side by side on the rented pod. (session A's measurement; one run)

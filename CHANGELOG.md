@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.2.1] - 2026-10-08
+
+- ASPIRE: the found Auditor holds on fresh pairs (0.678)
+- Updated `2026-10-08-more-prompts-raise-the-aspire-critic-s-accuracy-but-not-its-`: More prompts raise the ASPIRE critic's accuracy but not its spread between seeds; critic init and run seed both carry the spread
+
 ## [1.1.3.2.0] - 2026-10-08
 
 - Experiment natural-errors: in-domain natural-error yardstick built (95 answers, 3-judge screen, 85 for review)

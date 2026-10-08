@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.15] - 2026-10-07
+
+- Kev as a judge: 9B trails 4B because its order gap is noisier (sd 0.205 vs 0.144; 25 vs 3 pairs on the wrong side), not because it is less biased; the confirmation run is specified
+- Updated `2026-10-07-open-jev-style-decision-models`: Open Jev-style decision models — the landscape, checked against primary sources
+
 ## [1.1.1.0.14] - 2026-10-07
 
 - Kev as a judge (exploratory): averaging over both answer orders took Kev-4B from 0.547 to 0.976 on aspire-si's 127 planted-error pairs; to be confirmed on fresh pairs. Cross-linked from the Qwen-32B judge entry

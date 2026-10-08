@@ -134,7 +134,20 @@ Kev-9B ran on the same 124 phrase-clean records as hosted Jev and OpenJev, both
   - Not pre-registered: the statistic was chosen after seeing the data. It stays
     exploratory until confirmed on fresh pairs under a rule written first
     (aspire-si proposes order-averaged accuracy ≥ 0.85).
-  - Why 4B beats 9B is unexplained.
+  - **Why 4B beats 9B: the 9B is noisier, not less biased.**
+
+    | | mean p(first) | mean \|gap\| | sd of gap | pairs on the wrong side |
+    |---|---|---|---|---|
+    | Kev-4B | 0.698 | 0.131 | 0.144 | 3 |
+    | Kev-9B | 0.675 | 0.181 | 0.205 | 25 |
+
+    The 9B moves more between orders but less consistently; the 4B's preference
+    is small and steady.
+  - The confirmation run is defined: fresh planted-error pairs; Kev-4B, Kev-9B and
+    Qwen-32B, all order-averaged; the statistic fixed as mean p(strong) over both
+    orders (favoured above 0.5, ties count half); the rule written first. It waits
+    on the Director's go. Qwen-32B needs a rerun with vLLM log-probabilities,
+    because none were recorded.
   - **The lesson for any two-option judge: always score both orders and average
     the probabilities. Never read a single hard choice.**
 

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.0.2] - 2026-10-08
+
+- natural-errors: context-rich screen pilot (5 judges x 3 answers); capability-aware thinking, reasoning-first replies, --num-predict
+- Added experiment `natural-errors`
+
 ## [1.1.4.0.1] - 2026-10-08
 
 - Six findings and one instrument from the ai-jam-sessions sung-exemplar work: the pyannote one-voice gate, aligner misdates, the phrase-end hold, LLM piano arrangement from a generated brief, Pages cache stitching of replaced media, TranslateGemma fraction and name slips; instrument sung-exemplar-method.

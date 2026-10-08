@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.0.12] - 2026-10-08
+
+- CUDA graphs build-out for aspire-si critic heads (code, CPU tests, gates; GPU run pending)
+- Updated `2026-10-07-cuda-graphs`: CUDA Graphs
+- Added experiment `cuda-graphs`
+- Added experiment `data-designer`
+
 ## [1.1.4.0.11] - 2026-10-08
 
 - kev env: fallback is stable cu132 (to be built), not cu128 (Director)

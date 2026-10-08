@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.2.2] - 2026-10-07
+
+- Kev judge: scorer identity with the reference confirmed
+- Updated experiment `kev-judge-finetune`
+
 ## [1.1.1.2.1] - 2026-10-07
 
 - Kev judge weights in the private HF repo

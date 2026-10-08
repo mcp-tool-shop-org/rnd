@@ -90,8 +90,13 @@ Written before the run:
   set, so only the judge set (bf16-planted) speaks to transfer. It holds there too.
 - **Cost:** about 22 minutes per seed on the 5090 under WSL, PyTorch peak about
   10.5 GB, no row truncated or dropped. Scoring takes a few minutes per seed.
-- **Use:** aspire-si keeps the frozen Kev-4B as its pre-registered reference judge;
-  the fine-tune is reported beside it as a second judge, never swapped in.
+- **Use:** aspire-si keeps the frozen Kev-4B (v1.0, snapshot 6cfce5c2) as its
+  pinned reference judge; the fine-tune appears beside it in its next critic
+  comparison as "Kev-4B judge fine-tune (rnd, 51beba99, s0–s2)", never swapped in
+  (agreed with session A, 2026-10-07).
+- **Same scorer as the reference:** the seeds were scored with `judge_kev.py` from
+  aspire-si ca5b915; the frozen reference used c94fc93. The file is identical in
+  both (`git diff c94fc93 ca5b915` on it is empty), so the comparison is like for like.
 - **Open:** the logged order-consistency KL differed between seeds at the
   sampled steps (about 0.001 in seed 1, 0.7–0.8 in seed 2) with the same
   outcome. Not investigated.

@@ -61,10 +61,10 @@ Windows path is, and how to prove that a graphed run gives the same answer.
 
 ```
 E:/AI/envs/aspire-cu134/Scripts/python.exe bench.py --aspire E:/AI/aspire-si --cache E:/AI/aspire-si-runs/2026-10-08-auditor/cache/llama --out results/2026-10-08-llama.json
-<probe venv>/Scripts/python.exe triton_probe.py
+E:/AI/envs/triton-probe/Scripts/python.exe triton_probe.py
 ```
 
-The probe venv: `uv venv --python 3.12`, then `uv pip install triton-windows==3.8.0.post29`, plus
+The probe venv (E:/AI/envs/triton-probe, guarded by the VRAM watchdog): `uv venv --python 3.12`, then `uv pip install triton-windows==3.8.0.post29`, plus
 a `.pth` file naming `E:/AI/envs/aspire-cu134/Lib/site-packages`.
 
 ## Results

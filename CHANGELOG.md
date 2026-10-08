@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.0.13] - 2026-10-08
+
+- cuda-graphs probe venv moved to E:/AI/envs/triton-probe (watchdog-guarded)
+- Updated experiment `cuda-graphs`
+- Added experiment `data-designer`
+
 ## [1.1.4.0.12] - 2026-10-08
 
 - CUDA graphs build-out for aspire-si critic heads (code, CPU tests, gates; GPU run pending)

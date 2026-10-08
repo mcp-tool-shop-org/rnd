@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.0.8] - 2026-10-08
+
+- ASPIRE critic-init: report PR #44; seed-44 composite critic may have been an inverted draw
+- Updated `2026-10-07-sft-before-aspire-weakens-critic`: SFT before ASPIRE has no reliable effect on the critic; run-to-run critic variance dominates (3 seeds)
+- Updated `2026-10-08-more-prompts-raise-the-aspire-critic-s-accuracy-but-not-its-`: More prompts raise the ASPIRE critic's accuracy but not its spread between seeds; critic init and run seed both carry the spread
+
 ## [1.1.3.0.7] - 2026-10-08
 
 - ASPIRE critic-init test: init and run seed both carry the spread; one init inverted the critic

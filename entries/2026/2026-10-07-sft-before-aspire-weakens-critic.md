@@ -83,7 +83,9 @@ marked `[wrong]` below.
 
 **Follow-up (2026-10-08):** quadrupling the prompts to 128 lifted every seed's
 critic by 0.10–0.13 but left the spread between seeds unchanged (range 0.181);
-see [[2026-10-08-more-prompts-raise-the-aspire-critic-s-accuracy-but-not-its-]].
+see [[2026-10-08-more-prompts-raise-the-aspire-critic-s-accuracy-but-not-its-]]. A later test showed critic
+initialisation alone can invert a critic, so the 0.425 composite control critic
+here (seed 44) may have been an inverted draw.
 
 ## Claims
 

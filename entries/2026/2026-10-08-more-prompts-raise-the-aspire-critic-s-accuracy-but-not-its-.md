@@ -79,6 +79,9 @@ apart from the run (`critic.init_seed`, a forked CPU generator).
   - The noise floor rests on one repeat, and each arm on three runs, so the
     ranges are rough.
   - The run-seed arm and generation nondeterminism are not separable here.
+- **Earlier inversions:** of the 15 critics trained before this test, only run
+  1's seed-44 composite control has a point estimate below 0.5: 0.425 [0.333,
+  0.516]. It may have been an inverted draw, though its CI reaches 0.5.
 - **Cost:** $3.85 (offrig plan 20).
 
 ## Studio relevance
@@ -95,6 +98,8 @@ apart from the run (`critic.init_seed`, a forked CPU generator).
     validation set of planted pairs**, never on the 127-pair judge set, which
     would leak.
   - At minimum, reject any critic below 0.5 on validation.
+  - The fresh pairs from the Kev confirmation could supply the validation set
+    (session A's suggestion; listed as an option for the Director in #44).
   - Because generation is nondeterministic on the GPU, run-to-run comparisons
     need repeats, not just matched seeds.
 - **For anyone needing a judge of planted errors now:** use Kev-4B averaged over
@@ -115,6 +120,7 @@ apart from the run (`critic.init_seed`, a forked CPU generator).
 
 - [rig] aspire-si step 2, seeds 42–44 at 128 prompts, offrig plan 19, 2026-10-08, run and measured by session A; data at the aspire-si runs folder `2026-10-08-p128/plan19/`
 - [primary] https://github.com/mcp-tool-shop-org/aspire-si/pull/42 — step 2 run report (docs/runs/2026-10-08-step-2.md)
+- [primary] https://github.com/mcp-tool-shop-org/aspire-si/pull/44 — critic-init run report (docs/runs/2026-10-08-critic-init.md)
 - [primary] https://github.com/mcp-tool-shop-org/aspire-si/pull/43 — readout committed before the critic-init test
 - [rig] aspire-si critic-init test, offrig plan 20, 2026-10-08, run by session A; data in the aspire-si runs folder `2026-10-08-critic-init/plan20/`
 - [primary] https://github.com/mcp-tool-shop-org/aspire-si/pull/35 — the rules committed before the run

@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.2.1] - 2026-10-08
+
+- verifier gold batch 3: docs vs code
+- Added experiment `data-designer`
+- Added experiment `kev-judge-finetune`
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.2.0] - 2026-10-08
 
 - verifier grounded gold set, batches 1-2 (111 claims)

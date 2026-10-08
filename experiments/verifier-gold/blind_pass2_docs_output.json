@@ -1,0 +1,18 @@
+[
+ {"n": 1, "reasoning": "Code requires differenceCi.low > 0 (entirely above 0), not merely that the interval includes values above 0; a straddling interval gives best-single.", "label": "unsupported"},
+ {"n": 2, "reasoning": "Code writes a panel file only when the decision is \"panel\"; other verdicts (including best-single) do not write one.", "label": "unsupported"},
+ {"n": 3, "reasoning": "The comment and the loop return false when a prior outcome has the same runId, so no second line is appended.", "label": "supported"},
+ {"n": 4, "reasoning": "The message and the condition show a panel file is written only when decision === \"panel\".", "label": "supported"},
+ {"n": 5, "reasoning": "A repeated runId returns false before writing, so no second line is written.", "label": "unsupported"},
+ {"n": 6, "reasoning": "decision is \"panel\" only if clears (low > 0) holds (plus hasMembers), so a panel is kept only when the interval lies entirely above 0.", "label": "supported"},
+ {"n": 7, "reasoning": "The switch is off only when the env value is exactly the string \"1\"; \"true\" does not trigger it.", "label": "unsupported"},
+ {"n": 8, "reasoning": "The STANDARD_CONTROLS list has nine entries, not eight.", "label": "unsupported"},
+ {"n": 9, "reasoning": "A passed control with no measure is pushed to warnings, which mark gaps, not to errors.", "label": "unsupported"},
+ {"n": 10, "reasoning": "The boost is capped at 2.0 via Math.min(..., 2.0), not 5.", "label": "unsupported"},
+ {"n": 11, "reasoning": "Passed requires measure.ci[0] > 0.5 strictly; touching 0.5 is an error.", "label": "supported"},
+ {"n": 12, "reasoning": "Each clean completed run adds 0.5 capped at 2.0, and MIN_CALIBRATION_RUNS is 5 with boosts applied only for measured rows; the 5-outcome gate is implied rather than shown inside computePackBoosts.", "label": "supported"},
+ {"n": 13, "reasoning": "Code requires ci[0] strictly above 0.5; reaching 0.5 is rejected explicitly.", "label": "unsupported"},
+ {"n": 14, "reasoning": "A passed control without a measure produces a warning, and the doc says warnings mark gaps in the evidence.", "label": "supported"},
+ {"n": 15, "reasoning": "calibrationDisabled returns true when ROLEOS_NO_CALIBRATION === \"1\", the documented kill switch restoring pure keyword routing.", "label": "supported"},
+ {"n": 16, "reasoning": "The list holds nine controls, from positive-marker through reversed-correction (7th) to natural-errors.", "label": "supported"}
+]

@@ -40,11 +40,15 @@ def evidence(repo: Path, sha: str, path: str, anchor: str, before: int, after: i
 def build(repo: Path, sha: str, facts: list[dict], name: str) -> list[dict]:
     rows = []
     for f in facts:
-        text, lo, hi = evidence(repo, sha, f["file"], f["anchor"], f.get("before", 6), f.get("after", 6))
+        spans = f.get("spans") or [{k: f[k] for k in ("file", "anchor") } | {k: f[k] for k in ("before", "after") if k in f}]
+        ctx = []
+        for sp in spans:  # a fact may cite several code spans (e.g. a doc sentence spanning two places)
+            text, lo, hi = evidence(repo, sha, sp["file"], sp["anchor"], sp.get("before", 6), sp.get("after", 6))
+            ctx.append({"source": f"{name}@{sha}:{sp['file']}#L{lo}-L{hi}", "text": text})
+        joined = "\n".join(c["text"] for c in ctx)
         for must in f.get("must", []):
-            if must not in text:
+            if must not in joined:
                 raise SystemExit(f"{f['id']}: evidence lacks {must!r}; the fact no longer matches the code")
-        ctx = [{"source": f"{name}@{sha}:{f['file']}#L{lo}-L{hi}", "text": text}]
         base = {"check_type": "grounded", "context": ctx, "origin": f"{name}-{sha}", "split": None}
         rows.append({**base, "id": f"{f['id']}-t", "claim": f["true"], "label": "supported", "subtle": False,
                      "notes": ""})

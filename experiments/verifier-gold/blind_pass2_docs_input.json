@@ -1,0 +1,82 @@
+[
+ {
+  "n": 1,
+  "claim": "Keeps a panel when the nested interval of panel minus best single includes values above 0.",
+  "evidence": "      recipeSha256: recipe && recipe.sha256 ? recipe.sha256 : null,\n    };\n  });\n  const clears = nested.differenceCi !== null && nested.differenceCi.low > 0;\n  const hasMembers = fitted.length > 0;\n\n  let decision;\n  let reason;\n  let criticName = null;\n  if (clears && hasMembers) {\n    decision = \"panel\";\n    reason = \"the nested paired interval of panel minus best single lies entirely above 0\";\n  } else {\n    decision = \"best-single\";\n    criticName = best.id;\n    reason = !clears\n      ? \"the nested paired interval of panel minus best single does not lie entirely above 0\"\n      : \"bagged selection kept no critic in at least half the bags\";"
+ },
+ {
+  "n": 2,
+  "claim": "`--out` writes a panel file whenever the verdict is not `insufficient-data`.",
+  "evidence": "  if (typeof flags.out === \"string\") {\n    if (report.verdict.decision !== \"panel\") {\n      body.panel_written = false;\n      body.panel_not_written = `verdict is \"${report.verdict.decision}\". A panel file is written only when the verdict is \"panel\".`;\n    } else {\n      const panel = buildPanelFile({"
+ },
+ {
+  "n": 3,
+  "claim": "The same run id does not write a second line.",
+  "evidence": "  mkdirSync(dir, { recursive: true });\n  const path = join(dir, LEDGER_FILE);\n  // One line per run. A second call with the same run id does not append.\n  if (outcome && outcome.runId) {\n    const prior = readOutcomes(cwd);\n    for (let i = 0; i < prior.length; i++) {\n      if (prior[i].runId === outcome.runId) return false;\n    }\n  }\n  const line = JSON.stringify({ ...outcome, recordedAt: new Date().toISOString() }) + \"\\n\";\n  writeFileSync(path, line, { flag: \"a\" });"
+ },
+ {
+  "n": 4,
+  "claim": "`--out` writes a panel file only when the verdict is `panel`.",
+  "evidence": "  if (typeof flags.out === \"string\") {\n    if (report.verdict.decision !== \"panel\") {\n      body.panel_written = false;\n      body.panel_not_written = `verdict is \"${report.verdict.decision}\". A panel file is written only when the verdict is \"panel\".`;\n    } else {\n      const panel = buildPanelFile({"
+ },
+ {
+  "n": 5,
+  "claim": "The same run id writes a second line, and the newest line wins.",
+  "evidence": "  mkdirSync(dir, { recursive: true });\n  const path = join(dir, LEDGER_FILE);\n  // One line per run. A second call with the same run id does not append.\n  if (outcome && outcome.runId) {\n    const prior = readOutcomes(cwd);\n    for (let i = 0; i < prior.length; i++) {\n      if (prior[i].runId === outcome.runId) return false;\n    }\n  }\n  const line = JSON.stringify({ ...outcome, recordedAt: new Date().toISOString() }) + \"\\n\";\n  writeFileSync(path, line, { flag: \"a\" });"
+ },
+ {
+  "n": 6,
+  "claim": "Keeps a panel only when the nested interval of panel minus best single lies entirely above 0.",
+  "evidence": "      recipeSha256: recipe && recipe.sha256 ? recipe.sha256 : null,\n    };\n  });\n  const clears = nested.differenceCi !== null && nested.differenceCi.low > 0;\n  const hasMembers = fitted.length > 0;\n\n  let decision;\n  let reason;\n  let criticName = null;\n  if (clears && hasMembers) {\n    decision = \"panel\";\n    reason = \"the nested paired interval of panel minus best single lies entirely above 0\";\n  } else {\n    decision = \"best-single\";\n    criticName = best.id;\n    reason = !clears\n      ? \"the nested paired interval of panel minus best single does not lie entirely above 0\"\n      : \"bagged selection kept no critic in at least half the bags\";"
+ },
+ {
+  "n": 7,
+  "claim": "`ROLEOS_NO_CALIBRATION=true` turns the boost off.",
+  "evidence": "/**\n * Kill switch. `ROLEOS_NO_CALIBRATION=1` restores pure keyword routing.\n * @param {NodeJS.ProcessEnv} [env]\n */\nexport function calibrationDisabled(env = process.env) {\n  return env.ROLEOS_NO_CALIBRATION === \"1\";\n}"
+ },
+ {
+  "n": 8,
+  "claim": "Eight standard controls, from a positive marker to a natural-error check.",
+  "evidence": "export const STANDARD_CONTROLS = Object.freeze([\n  { name: \"positive-marker\", guards: \"the pipeline can learn at all (a known marker must be learned)\" },\n  { name: \"graded-marker\", guards: \"the features can see an edit as small as a real one\" },\n  { name: \"shuffled-labels\", guards: \"the features carry nothing label-correlated besides the attribute\" },\n  { name: \"partial-input\", guards: \"half the input (edit span only, one side only) does not already solve it\" },\n  { name: \"generator-identity-probe\", guards: \"which model made the data is not trivially recoverable\" },\n  { name: \"same-generator-no-error\", guards: \"an edit by the same generator without an error reads as clean\" },\n  { name: \"reversed-correction\", guards: \"the critic is not just an edit detector: the edited copy is the corrected, stronger one\" },\n  { name: \"held-out-generator\", guards: \"the attribute transfers to data from a family it never saw\" },\n  { name: \"natural-errors\", guards: \"the critic finds real, unplanted errors, not only planted ones\" },\n]);"
+ },
+ {
+  "n": 9,
+  "claim": "A passed control with no measure is an error.",
+  "evidence": " * Validate a card. Errors make the card unusable; warnings mark gaps in the recipe's evidence\n * (a card can be registered with warnings — the Record shows them). Notes are printed facts\n * that are not gaps, such as the permutation floor of a shuffled-labels control.\n\n---\n\n  const name = control.name;\n  const tag = `controls[${index}] (${name})`;\n  const why = methodWhy(name);\n  if (control.measure === undefined) {\n    if (control.status === \"passed\") {\n      warnings.push(why ? `${tag}: passed without a measure — ${why}` : `${tag}: passed without a measure`);\n    } else if (control.status !== \"not-run\" && why) {"
+ },
+ {
+  "n": 10,
+  "claim": "After a pack has at least 5 recorded outcomes, each completed run with corrections 0 adds +0.5 to that pack, capped at +5.",
+  "evidence": "\n/** A pack or a role combination needs this many recorded runs before a rate is claimed. */\nexport const MIN_CALIBRATION_RUNS = 5;\n\n---\n\n */\nexport function computePackBoosts(outcomes) {\n  const boosts = {};\n\n  const cleanRuns = outcomes.filter(\n    o => o.selectedPack && o.completionStatus === \"completed\" && o.corrections === 0\n  );\n\n  for (const o of cleanRuns) {\n    const pack = o.selectedPack;\n    boosts[pack] = Math.min((boosts[pack] || 0) + 0.5, 2.0);\n  }\n\n  return boosts;\n\n---\n\n  const adjusted = {};\n  for (const name of Object.keys(scores)) {\n    const row = snap.evidence.find((item) => item.pack === name);\n    const boost = row && row.status === \"measured\" ? row.boost : 0;\n    adjusted[name] = scores[name] + boost;"
+ },
+ {
+  "n": 11,
+  "claim": "`reversed-correction` passes only when its accuracy interval lies entirely above 0.5.",
+  "evidence": "function applyReversedCorrection(tag, status, measure, errors) {\n  if (status !== \"passed\") return;\n  if (!measure.ci || !(measure.ci[0] > 0.5)) {\n    const low = measure.ci ? measure.ci[0] : \"missing\";\n    errors.push(`${tag}: passed needs an accuracy CI entirely above 0.5 (low ${low} is not above 0.5; touching 0.5 is not above)`);\n  }\n}"
+ },
+ {
+  "n": 12,
+  "claim": "After a pack has at least 5 recorded outcomes, each completed run with corrections 0 adds +0.5 to that pack, capped at +2.",
+  "evidence": "\n/** A pack or a role combination needs this many recorded runs before a rate is claimed. */\nexport const MIN_CALIBRATION_RUNS = 5;\n\n---\n\n */\nexport function computePackBoosts(outcomes) {\n  const boosts = {};\n\n  const cleanRuns = outcomes.filter(\n    o => o.selectedPack && o.completionStatus === \"completed\" && o.corrections === 0\n  );\n\n  for (const o of cleanRuns) {\n    const pack = o.selectedPack;\n    boosts[pack] = Math.min((boosts[pack] || 0) + 0.5, 2.0);\n  }\n\n  return boosts;\n\n---\n\n  const adjusted = {};\n  for (const name of Object.keys(scores)) {\n    const row = snap.evidence.find((item) => item.pack === name);\n    const boost = row && row.status === \"measured\" ? row.boost : 0;\n    adjusted[name] = scores[name] + boost;"
+ },
+ {
+  "n": 13,
+  "claim": "`reversed-correction` passes when its accuracy interval reaches 0.5 or more.",
+  "evidence": "function applyReversedCorrection(tag, status, measure, errors) {\n  if (status !== \"passed\") return;\n  if (!measure.ci || !(measure.ci[0] > 0.5)) {\n    const low = measure.ci ? measure.ci[0] : \"missing\";\n    errors.push(`${tag}: passed needs an accuracy CI entirely above 0.5 (low ${low} is not above 0.5; touching 0.5 is not above)`);\n  }\n}"
+ },
+ {
+  "n": 14,
+  "claim": "A passed control with no measure is a gap.",
+  "evidence": " * Validate a card. Errors make the card unusable; warnings mark gaps in the recipe's evidence\n * (a card can be registered with warnings — the Record shows them). Notes are printed facts\n * that are not gaps, such as the permutation floor of a shuffled-labels control.\n\n---\n\n  const name = control.name;\n  const tag = `controls[${index}] (${name})`;\n  const why = methodWhy(name);\n  if (control.measure === undefined) {\n    if (control.status === \"passed\") {\n      warnings.push(why ? `${tag}: passed without a measure — ${why}` : `${tag}: passed without a measure`);\n    } else if (control.status !== \"not-run\" && why) {"
+ },
+ {
+  "n": 15,
+  "claim": "`ROLEOS_NO_CALIBRATION=1` turns the boost off.",
+  "evidence": "/**\n * Kill switch. `ROLEOS_NO_CALIBRATION=1` restores pure keyword routing.\n * @param {NodeJS.ProcessEnv} [env]\n */\nexport function calibrationDisabled(env = process.env) {\n  return env.ROLEOS_NO_CALIBRATION === \"1\";\n}"
+ },
+ {
+  "n": 16,
+  "claim": "Nine standard controls, from a positive marker through reversed-correction to a natural-error check.",
+  "evidence": "export const STANDARD_CONTROLS = Object.freeze([\n  { name: \"positive-marker\", guards: \"the pipeline can learn at all (a known marker must be learned)\" },\n  { name: \"graded-marker\", guards: \"the features can see an edit as small as a real one\" },\n  { name: \"shuffled-labels\", guards: \"the features carry nothing label-correlated besides the attribute\" },\n  { name: \"partial-input\", guards: \"half the input (edit span only, one side only) does not already solve it\" },\n  { name: \"generator-identity-probe\", guards: \"which model made the data is not trivially recoverable\" },\n  { name: \"same-generator-no-error\", guards: \"an edit by the same generator without an error reads as clean\" },\n  { name: \"reversed-correction\", guards: \"the critic is not just an edit detector: the edited copy is the corrected, stronger one\" },\n  { name: \"held-out-generator\", guards: \"the attribute transfers to data from a family it never saw\" },\n  { name: \"natural-errors\", guards: \"the critic finds real, unplanted errors, not only planted ones\" },\n]);"
+ }
+]

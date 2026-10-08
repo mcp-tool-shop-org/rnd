@@ -14,7 +14,7 @@ import traceback
 from datetime import date
 from pathlib import Path
 
-from . import __version__, catalog, model, readouts, release, store
+from . import __version__, catalog, datapack, model, readouts, release, store
 
 SOURCE_ROOT = Path(__file__).resolve().parent.parent
 
@@ -89,10 +89,12 @@ def cmd_check(args):
         _, _, cat_problems = catalog.load(d)
         problems.extend(model.Problem("warning" if "no catalog.json" in p else "error", d.name, p)
                         for p in cat_problems)
+    problems.extend(model.Problem("error", f"datapacks/{name}", msg) for name, msg in datapack.check_all(ROOT))
     report(problems)
     errors = sum(p.level == "error" for p in problems)
     warnings = len(problems) - errors
-    print(f"checked {len(entries)} entries: {errors} errors, {warnings} warnings")
+    packs = len(datapack.manifests(ROOT))
+    print(f"checked {len(entries)} entries{f' and {packs} data packs' if packs else ''}: {errors} errors, {warnings} warnings")
     return 1 if errors else 0
 
 
@@ -361,6 +363,83 @@ def cmd_sql(args):
     return 0
 
 
+def _git_head():
+    import subprocess
+    try:
+        return subprocess.run(["git", "-C", str(ROOT), "rev-parse", "HEAD"], capture_output=True, text=True,
+                              check=True).stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        return None
+
+
+def cmd_datapack(args):
+    try:
+        if args.action == "list":
+            rows = []
+            for path in datapack.manifests(ROOT):
+                m = datapack.load(path)
+                host = dict(m.get("host", {}))
+                hosted = path.parent / datapack.HOSTED
+                if hosted.is_file():   # where an upload landed, kept apart so the manifest hash never moves
+                    host.update(datapack.load(hosted))
+                rows.append({"name": m.get("name"), "version": m.get("version"), "files": m.get("totals", {}).get("files"),
+                             "bytes": m.get("totals", {}).get("bytes"), "host": host,
+                             "title": m.get("title")})
+
+            def text(rs):
+                for r in rs:
+                    h = r["host"]
+                    where = f"{h.get('kind')}:{h.get('repo')}@{(h.get('revision') or 'unpinned')[:12]}"
+                    print(f"{r['name']:<28} v{r['version']:<4} {r['files']:>5} files {r['bytes']:>14,} B  {where}")
+                    print(f"    {r['title']}")
+                if not rs:
+                    print("no data packs (datapacks/<name>/datapack.json)")
+            emit(args, rows, text)
+            return 0
+        if args.action == "build":
+            if not args.target or not args.source:
+                return fail("USAGE", "build needs a pack name and --source DIR",
+                            "rnd datapack build <name> --source experiments/<x>  (reads datapacks/<name>/spec.json)")
+            spec_path = ROOT / datapack.DIR / args.target / "spec.json"
+            spec = datapack.load(spec_path)
+            source = (ROOT / args.source).resolve()
+            try:
+                rel = source.relative_to(ROOT.resolve()).as_posix()
+            except ValueError:
+                rel = source.as_posix()
+            origin = {"library": "mcp-tool-shop-org/rnd", "rnd_version": __version__, "commit": _git_head(),
+                      "source": rel}
+            m = datapack.build(source, name=args.target, title=spec.get("title", ""),
+                               description=spec.get("description", ""), include=spec.get("include", []),
+                               exclude=spec.get("exclude", []), licences=spec.get("licences", []),
+                               generators=spec.get("generators", []), host=spec.get("host", {}),
+                               origin=origin, version=str(spec.get("version", "1")))
+            path = datapack.write(m, ROOT / datapack.DIR / args.target)
+            print(f"wrote {path.relative_to(ROOT).as_posix()}: {m['totals']['files']} files, "
+                  f"{m['totals']['bytes']:,} bytes, manifest {m['manifest_sha256'][:12]}")
+            return 0
+        if args.action == "verify":
+            if not args.target or not args.copy:
+                return fail("USAGE", "verify needs a pack name and --copy DIR",
+                            "rnd datapack verify <name> --copy <downloaded folder>")
+            m = datapack.load(ROOT / datapack.DIR / args.target / datapack.MANIFEST)
+            rep = datapack.verify(m, Path(args.copy))
+
+            def text(r):
+                print(f"{'PASS' if r['ok'] else 'FAIL'}  {args.target}: {r['files_ok']}/{len(m.get('files', []))} files match")
+                for p in r["manifest_problems"]:
+                    print(f"  manifest: {p}")
+                for f in r["missing"]:
+                    print(f"  missing: {f}")
+                for f in r["changed"]:
+                    print(f"  changed: {f}")
+            emit(args, rep, text)
+            return 0 if rep["ok"] else 1
+    except datapack.DatapackError as exc:
+        return fail(exc.code, str(exc), exc.hint)
+    return 0
+
+
 # ---------------------------------------------------------------- parser
 
 def build_parser():
@@ -436,6 +515,12 @@ def build_parser():
                    help="major|minor|patch: the tool; micro: library structure; nano: library content (default)")
     s.add_argument("--note", action="append", help="an extra CHANGELOG line (repeatable)")
     s.add_argument("--dry-run", action="store_true", help="print the new version and CHANGELOG section only")
+
+    s = add("datapack", cmd_datapack, "build, list or verify data packs (bulk data hosted outside the clone)")
+    s.add_argument("action", choices=("list", "build", "verify"))
+    s.add_argument("target", nargs="?", help="pack name (folder under datapacks/)")
+    s.add_argument("--source", help="build: the folder the files come from, relative to the library")
+    s.add_argument("--copy", help="verify: a downloaded copy of the pack")
 
     s = add("sql", cmd_sql, "run a read-only SQL query against the index")
     s.add_argument("query")

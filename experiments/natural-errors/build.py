@@ -17,6 +17,7 @@ import random
 import re
 import sys
 import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -236,7 +237,9 @@ def cmd_screen(a):
                              json_mode=judge not in NO_FORMAT, num_predict=700 if judge not in NO_FORMAT else 1500)
                 got = json.loads(reply) if judge not in NO_FORMAT else json_object(reply)
                 errs = got.get("errors", []) if isinstance(got, dict) else []
-            except (json.JSONDecodeError, KeyError):
+            except (json.JSONDecodeError, KeyError, urllib.error.HTTPError):
+                # An Ollama 500 (seen once on nemotron-3.5-lightning) counts as an unparsable reply
+                # rather than ending the run.
                 errs, bad = [], bad + 1
             flags = []
             for e in errs:
@@ -295,12 +298,133 @@ def cmd_status(a):
         print(f, "yes" if (DATA / f).exists() else "-")
 
 
+# ---------------------------------------------------------------- context-rich screen (v2)
+# Director rule 2026-10-08: give each judge the purpose, the criteria and worked examples, one
+# answer per call, thinking on with room, reasoning before the verdict. The v1 screen
+# (screen.json / screen_extra.json) used think off and a 700-token cap, and stays as the record.
+SCREEN2 = """You are an expert reviewer helping build a test set of real mistakes in AI-written answers.
+
+Why this matters: the sentences you mark will be compared with careful labels made by other
+reviewers, to learn which judges catch real errors. A missed error and a false alarm both cost
+us, so read the whole answer carefully before deciding.
+
+What counts as an error (mark it):
+- a false fact: a wrong date, name, place, attribution, mechanism or definition;
+- a wrong number, unit or calculation, including a step whose arithmetic does not follow;
+- a reasoning step that does not follow from what came before, or contradicts the answer itself;
+- a cited study, law, person or event that is misdescribed or does not exist as described.
+
+What does not count (do not mark it):
+- vagueness, omissions, one-sided arguments, style, or opinions a reasonable expert could hold;
+- simplifications a textbook would also make.
+
+Worked examples (none of them come from the answers you will review):
+- "The Great Wall of China is easily visible from the Moon with the naked eye." ERROR: it is far
+  too narrow to see from the Moon.
+- "After a 20% discount a shirt costs $40, so the original price was $48." ERROR: $40 / 0.8 = $50.
+- "Antibiotics are effective against viral infections such as the common cold." ERROR: they act
+  on bacteria, not viruses.
+- "Regular exercise can improve mood for many people." NOT an error: a well-supported claim.
+- "Some economists favour carbon taxes over cap-and-trade." NOT an error: a description of views.
+
+Question:
+{question}
+
+Answer:
+{answer}
+
+{reply_shape}
+Use an empty list if the answer has no errors."""
+
+REPLY_THINKING = """Think it through, then reply with JSON only, in this shape:
+{"errors": [{"sentence": "<the sentence, quoted exactly>", "why": "<what is wrong and what is right>"}]}"""
+# Models without a thinking mode reason in the reply itself, before the verdict.
+REPLY_REASONING = """Reply with JSON only, in this shape, writing the reasoning field first: work through the
+answer sentence by sentence there, then list the errors you found.
+{"reasoning": "<your sentence-by-sentence check>",
+ "errors": [{"sentence": "<the sentence, quoted exactly>", "why": "<what is wrong and what is right>"}]}"""
+
+
+def can_think(model):
+    """Ollama's own capability list for the model (thinking or not)."""
+    return "thinking" in post("/api/show", {"model": model}, timeout=60).get("capabilities", [])
+
+
+def chat_full(model, prompt, *, think=True, json_mode=False, num_predict=6000, num_ctx=16384):
+    """One call with thinking on; returns (content, thinking, done_reason)."""
+    refuse_cloud(model)
+    body = {"model": model, "messages": [{"role": "user", "content": prompt}], "stream": False, "think": think,
+            "options": {"temperature": 0.0, "num_predict": num_predict, "num_ctx": num_ctx, "seed": 0}}
+    if json_mode:
+        body["format"] = "json"
+    r = post("/api/chat", body, timeout=1800)
+    m = r.get("message", {})
+    content = re.sub(r"(\s*<\|[a-z_]+\|>)+\s*$", "", m.get("content") or "")
+    return content, m.get("thinking") or "", r.get("done_reason")
+
+
+def cmd_screen2(a):
+    if not a.only:
+        raise SystemExit("screen2 runs one judge at a time: --only <model>")
+    judge = a.only
+    if judge not in JUDGES + EXTRA_JUDGES:
+        raise SystemExit(f"--only must be one of {JUDGES + EXTRA_JUDGES}")
+    items = load_json(DATA / "answers.json")["items"]
+    pilot = bool(a.limit)
+    if pilot:
+        items = items[: a.limit]
+    path = DATA / ("screen_ctx_pilot.json" if pilot else "screen_ctx.json")
+    out = load_json(path) if path.exists() else {
+        "prompt": "SCREEN2", "settings": {}, "judges": {},
+        "items": {r["id"]: {"sentences": sentences(r["answer"]), "flags": {}, "runs": {}} for r in items}}
+    json_mode = judge not in NO_FORMAT
+    think = can_think(judge)
+    prompt_tail = REPLY_THINKING if think else REPLY_REASONING
+    out["judges"][judge] = digest(judge)
+    ctx = a.num_ctx or 16384
+    budget = a.num_predict or 6000
+    out["settings"][judge] = {"think": think, "format_json": json_mode, "num_predict": budget, "num_ctx": ctx,
+                              "temperature": 0.0, "seed": 0}
+    t0, fails = time.time(), {}
+    for r in items:
+        sents = out["items"][r["id"]]["sentences"]
+        reason, flags, content, thinking, done = None, [], "", "", None
+        try:
+            content, thinking, done = chat_full(
+                judge, SCREEN2.format(question=r["question"], answer=r["answer"], reply_shape=prompt_tail),
+                think=think, json_mode=json_mode, num_ctx=ctx, num_predict=budget)
+            got = json_object(content)
+            errs = got.get("errors", []) if isinstance(got, dict) else None
+            if errs is None:
+                reason = "no errors list"
+            else:
+                for e in errs:
+                    if isinstance(e, dict) and isinstance(e.get("sentence"), str):
+                        flags.append({"sentence_index": match(e["sentence"], sents), "quote": e["sentence"][:400],
+                                      "why": str(e.get("why", ""))[:600]})
+        except urllib.error.HTTPError as e:
+            reason = f"http {e.code}"
+        except json.JSONDecodeError:
+            reason = "truncated" if done == "length" else "unparsable"
+        if reason:
+            fails[reason] = fails.get(reason, 0) + 1
+        out["items"][r["id"]]["flags"][judge] = None if reason else flags
+        out["items"][r["id"]]["runs"][judge] = {"failure": reason, "done_reason": done,
+                                                "thinking_chars": len(thinking), "reply": content[:4000]}
+        save(path.name, out)   # after every item, so a stop loses nothing
+    unload(judge)
+    print(f"{judge}: {round(time.time()-t0)} s, failures {fails or 'none'}")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--only", help="screen: re-run just this judge")
-    ap.add_argument("step", choices=["questions", "answers", "screen", "select", "export", "status"])
+    ap.add_argument("--num-ctx", type=int, dest="num_ctx", help="screen2: context window (default 16384)")
+    ap.add_argument("--num-predict", type=int, dest="num_predict", help="screen2: token budget incl. thinking (default 6000)")
+    ap.add_argument("--limit", type=int, help="screen2: pilot on the first N answers (separate file)")
+    ap.add_argument("step", choices=["questions", "answers", "screen", "screen2", "select", "export", "status"])
     a = ap.parse_args()
-    {"questions": cmd_questions, "answers": cmd_answers, "screen": cmd_screen, "select": cmd_select, "export": cmd_export, "status": cmd_status}[a.step](a)
+    {"questions": cmd_questions, "answers": cmd_answers, "screen": cmd_screen, "screen2": cmd_screen2, "select": cmd_select, "export": cmd_export, "status": cmd_status}[a.step](a)
 
 
 if __name__ == "__main__":

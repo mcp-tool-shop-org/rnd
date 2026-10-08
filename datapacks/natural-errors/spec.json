@@ -1,0 +1,104 @@
+{
+ "title": "Natural-error yardstick for critics (v1)",
+ "description": "95 answers by llama3.1:8b to in-domain questions, each labelled for factual, numeric and reasoning errors by two blind Claude passes (Opus, Sonnet) and adjudicated: 59 with an error, 36 clean, 84 error sentences marked by both. Includes 31 correction pairs (the original answer, and a copy with its agreed errors rewritten), and the flags of five local screen judges. Labels are model-made, not human-verified. In the v1 screens a failed reply is stored as an empty list: muse-glimmer had 1 such reply, nemotron-3.5-lightning 39 (its v1 run is unreliable; a context-rich re-screen with failure reasons will replace these). See README.md.",
+ "version": "1",
+ "include": [
+  "README.md",
+  "build.py",
+  "build_corrections.py",
+  "data/*.json"
+ ],
+ "exclude": [
+  "data/screen_ctx*",
+  "data/review_items.json"
+ ],
+ "licences": [
+  {
+   "applies_to": "data/answers.json",
+   "licence": "Llama 3.1 Community License (outputs of Llama 3.1 8B)",
+   "notice": "Built with Llama. Llama 3.1 is licensed under the Llama 3.1 Community License, Copyright (c) Meta Platforms, Inc. All Rights Reserved. Use is subject to the Llama 3.1 Acceptable Use Policy."
+  },
+  {
+   "applies_to": "data/corrections.json",
+   "licence": "Llama 3.1 Community License (contains Llama 3.1 8B answers) + MIT (the replacement sentences)",
+   "notice": "Built with Llama."
+  },
+  {
+   "applies_to": "data/screen*.json",
+   "licence": "Llama 3.1 Community License (quoted answer sentences) + judge outputs of Apache-2.0 models (gemma4, mistral-small, granite4.1, muse-glimmer) and the NVIDIA Open Model License (nemotron-3.5-lightning)",
+   "notice": "Built with Llama."
+  },
+  {
+   "applies_to": "data/questions.json",
+   "licence": "Outputs of mistral-small:24b (Apache-2.0 model); no added terms"
+  },
+  {
+   "applies_to": "data/labels_*.json",
+   "licence": "MIT (mcp-tool-shop)"
+  },
+  {
+   "applies_to": "data/gold.json",
+   "licence": "MIT (mcp-tool-shop)"
+  },
+  {
+   "applies_to": "data/selection.json",
+   "licence": "MIT (mcp-tool-shop)"
+  },
+  {
+   "applies_to": "*.py",
+   "licence": "MIT (mcp-tool-shop)"
+  },
+  {
+   "applies_to": "README.md",
+   "licence": "MIT (mcp-tool-shop)"
+  }
+ ],
+ "generators": [
+  {
+   "model": "mistral-small:24b",
+   "pin": "ollama 8039dd90c113",
+   "role": "questions; screen judge"
+  },
+  {
+   "model": "llama3.1:8b",
+   "pin": "ollama 46e0c10c039e",
+   "role": "answers (temperature 0.7)"
+  },
+  {
+   "model": "gemma4:31b",
+   "pin": "ollama 6316f0629137",
+   "role": "screen judge"
+  },
+  {
+   "model": "granite4.1:30b",
+   "pin": "ollama 3f3e5df8a021",
+   "role": "screen judge"
+  },
+  {
+   "model": "muse-glimmer:latest",
+   "pin": "ollama de878ce33ad8",
+   "role": "screen judge (added after the labels)"
+  },
+  {
+   "model": "nemotron-3.5-lightning:latest",
+   "pin": "ollama e7a64ff15fb1",
+   "role": "screen judge (v1 run unreliable, see description)"
+  },
+  {
+   "model": "claude-opus-5-5",
+   "pin": "anthropic model id",
+   "role": "labels pass 1, adjudication, correction sentences"
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "pin": "anthropic model id",
+   "role": "labels pass 2 (four blind agents)"
+  }
+ ],
+ "host": {
+  "kind": "huggingface",
+  "repo": "mcp-tool-shop/rnd-natural-errors",
+  "type": "dataset",
+  "visibility": "private"
+ }
+}

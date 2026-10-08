@@ -13,7 +13,7 @@ import mcptoolshop_rnd as _pkg
 
 __version__ = _pkg.__version__
 
-_SUBMODULES = ("catalog", "cli", "frontmatter", "model", "readouts", "release", "store")
+_SUBMODULES = ("catalog", "cli", "datapack", "frontmatter", "model", "readouts", "release", "store")
 
 for _name in _SUBMODULES:
     _mod = importlib.import_module(f"mcptoolshop_rnd.{_name}")

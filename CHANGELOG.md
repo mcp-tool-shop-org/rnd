@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.0.0] - 2026-10-08
+
+- rnd datapack build|list|verify: data packs hosted outside the clone, with per-file SHA-256, licences and model pins (integrity model from research-packs)
+- first pack: natural-errors v1, private on Hugging Face (mcp-tool-shop/rnd-natural-errors)
+- natural-errors build.py: screen2, a context-rich re-screen (thinking where supported, reasoning-first otherwise, failure reasons logged)
+- Updated experiment `natural-errors`
+
 ## [1.1.3.3.2] - 2026-10-08
 
 - muse-glimmer as a natural-error screen judge

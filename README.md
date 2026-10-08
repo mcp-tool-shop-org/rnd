@@ -107,6 +107,9 @@ code, a message and a hint; `--debug` adds the traceback.
 | `catalogs/<name>/source.json` | Where a catalogue comes from | people |
 | `catalogs/<name>/catalog.json` | Pinned snapshot from `rnd catalog sync` | generated; never hand-edit |
 | `catalogs/<name>/review.json` | Studio fit and notes per family and item | people |
+| `datapacks/<name>/spec.json` | What a data pack holds: include globs, licences, generators, host | people |
+| `datapacks/<name>/datapack.json` | Manifest from `rnd datapack build`: every file's SHA-256, licences, pins | generated; never hand-edit |
+| `datapacks/<name>/hosted.json` | Where the upload landed (repo revision) | after an upload |
 | `mcptoolshop_rnd/` | The CLI | code |
 | `rnd/` | Compatibility alias for `mcptoolshop_rnd` | code |
 | `rnd.db` | SQLite FTS5 index, rebuilt automatically when files change | generated; not in git |
@@ -140,6 +143,29 @@ tags: [cuda-graphs, pytorch]
 - **Claim confidence:** `unverified`, `verified`, `disputed`, `wrong`. A
   `verified` or `wrong` claim must say what checked it with `(via: …)`.
 - `[[entry-id]]` links entries; `rnd show` lists backlinks.
+
+## Data packs
+
+Processed data too big or too bulky for the clone is offered as a **data pack**: the bytes live
+on a Hugging Face dataset repo (private until published), and the library keeps only a small
+manifest. The integrity model comes from
+[research-packs](https://github.com/mcp-tool-shop-org/research-packs): a manifest, a SHA-256 for
+every file, a one-command verify, and a listing.
+
+```bash
+rnd datapack build natural-errors --source experiments/natural-errors  # reads datapacks/natural-errors/spec.json
+rnd datapack list
+hf download mcp-tool-shop/rnd-natural-errors --repo-type dataset --local-dir ne
+rnd datapack verify natural-errors --copy ne/files                      # PASS when every byte matches
+```
+
+- **Every file needs a licence** in the spec. Model outputs carry their model's terms (for
+  example "Built with Llama" for Llama 3.1 outputs). `rnd datapack build` refuses a pack that
+  leaves a file uncovered.
+- **Every generating model is pinned** (Ollama digest, HF revision or API model id), with its role.
+- **`rnd check` validates every manifest** and fails on one edited by hand.
+- The upload carries `datapack.json` beside the files, so anyone can verify without this repo:
+  `pip install mcptoolshop-rnd`.
 
 ## Relation to other studio tools
 

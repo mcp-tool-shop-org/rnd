@@ -1,0 +1,170 @@
+{
+ "schema": "rnd-datapack/v1",
+ "name": "natural-errors",
+ "version": "1",
+ "title": "Natural-error yardstick for critics (v1)",
+ "description": "95 answers by llama3.1:8b to in-domain questions, each labelled for factual, numeric and reasoning errors by two blind Claude passes (Opus, Sonnet) and adjudicated: 59 with an error, 36 clean, 84 error sentences marked by both. Includes 31 correction pairs (the original answer, and a copy with its agreed errors rewritten), and the flags of five local screen judges. Labels are model-made, not human-verified. In the v1 screens a failed reply is stored as an empty list: muse-glimmer had 1 such reply, nemotron-3.5-lightning 39 (its v1 run is unreliable; a context-rich re-screen with failure reasons will replace these). See README.md.",
+ "created": "2026-10-08",
+ "origin": {
+  "library": "mcp-tool-shop-org/rnd",
+  "rnd_version": "1.1.3.3.2",
+  "commit": "081e92f5cf5386965a9ee49a57101d59389f7a4d",
+  "source": "experiments/natural-errors"
+ },
+ "licences": [
+  {
+   "applies_to": "data/answers.json",
+   "licence": "Llama 3.1 Community License (outputs of Llama 3.1 8B)",
+   "notice": "Built with Llama. Llama 3.1 is licensed under the Llama 3.1 Community License, Copyright (c) Meta Platforms, Inc. All Rights Reserved. Use is subject to the Llama 3.1 Acceptable Use Policy."
+  },
+  {
+   "applies_to": "data/corrections.json",
+   "licence": "Llama 3.1 Community License (contains Llama 3.1 8B answers) + MIT (the replacement sentences)",
+   "notice": "Built with Llama."
+  },
+  {
+   "applies_to": "data/screen*.json",
+   "licence": "Llama 3.1 Community License (quoted answer sentences) + judge outputs of Apache-2.0 models (gemma4, mistral-small, granite4.1, muse-glimmer) and the NVIDIA Open Model License (nemotron-3.5-lightning)",
+   "notice": "Built with Llama."
+  },
+  {
+   "applies_to": "data/questions.json",
+   "licence": "Outputs of mistral-small:24b (Apache-2.0 model); no added terms"
+  },
+  {
+   "applies_to": "data/labels_*.json",
+   "licence": "MIT (mcp-tool-shop)"
+  },
+  {
+   "applies_to": "data/gold.json",
+   "licence": "MIT (mcp-tool-shop)"
+  },
+  {
+   "applies_to": "data/selection.json",
+   "licence": "MIT (mcp-tool-shop)"
+  },
+  {
+   "applies_to": "*.py",
+   "licence": "MIT (mcp-tool-shop)"
+  },
+  {
+   "applies_to": "README.md",
+   "licence": "MIT (mcp-tool-shop)"
+  }
+ ],
+ "generators": [
+  {
+   "model": "mistral-small:24b",
+   "pin": "ollama 8039dd90c113",
+   "role": "questions; screen judge"
+  },
+  {
+   "model": "llama3.1:8b",
+   "pin": "ollama 46e0c10c039e",
+   "role": "answers (temperature 0.7)"
+  },
+  {
+   "model": "gemma4:31b",
+   "pin": "ollama 6316f0629137",
+   "role": "screen judge"
+  },
+  {
+   "model": "granite4.1:30b",
+   "pin": "ollama 3f3e5df8a021",
+   "role": "screen judge"
+  },
+  {
+   "model": "muse-glimmer:latest",
+   "pin": "ollama de878ce33ad8",
+   "role": "screen judge (added after the labels)"
+  },
+  {
+   "model": "nemotron-3.5-lightning:latest",
+   "pin": "ollama e7a64ff15fb1",
+   "role": "screen judge (v1 run unreliable, see description)"
+  },
+  {
+   "model": "claude-opus-5-5",
+   "pin": "anthropic model id",
+   "role": "labels pass 1, adjudication, correction sentences"
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "pin": "anthropic model id",
+   "role": "labels pass 2 (four blind agents)"
+  }
+ ],
+ "host": {
+  "kind": "huggingface",
+  "repo": "mcp-tool-shop/rnd-natural-errors",
+  "type": "dataset",
+  "visibility": "private"
+ },
+ "files": [
+  {
+   "path": "build.py",
+   "bytes": 21608,
+   "sha256": "d196ba757b4bcc22746f37e29bfc0cc819bc2cbe9db0ff43cfffe88c70df779b"
+  },
+  {
+   "path": "build_corrections.py",
+   "bytes": 11811,
+   "sha256": "0f4bf04a07b8d8dc16dea4140f2bca12691f4a8b3fc11b604c1a631d1e129621"
+  },
+  {
+   "path": "data/answers.json",
+   "bytes": 332071,
+   "sha256": "ca1944afe29d192c958c40f837e517ee4561eb5a05c1459c1b526d713841c531"
+  },
+  {
+   "path": "data/corrections.json",
+   "bytes": 226532,
+   "sha256": "0b04b9a26291044752f3a94d61519f59469991cea945cfadb0d27f55970a9b96"
+  },
+  {
+   "path": "data/gold.json",
+   "bytes": 39614,
+   "sha256": "0a7dc8333901714763c7c42382b7c6b420d478a4e7cd70e4317b857cee05468c"
+  },
+  {
+   "path": "data/labels_claude.json",
+   "bytes": 45913,
+   "sha256": "b6597c6cb60bd3749c4c5c85cf334b673de47923075b4f04bf9434ce92f78784"
+  },
+  {
+   "path": "data/labels_sonnet.json",
+   "bytes": 29563,
+   "sha256": "592d486d64feeb17950dbb93ae9a26960c5495c3da5da1466bce7d6d46c8dda1"
+  },
+  {
+   "path": "data/questions.json",
+   "bytes": 21639,
+   "sha256": "6171f5e3ecfb0ca42e2c80f682d777528195ff360e858337939e9651f2be9144"
+  },
+  {
+   "path": "data/screen.json",
+   "bytes": 426383,
+   "sha256": "befec461de1c5b8f9f4cac4b92f43cf74ca87b0a3a922c1983b0baa9f0171b74"
+  },
+  {
+   "path": "data/screen_extra.json",
+   "bytes": 499112,
+   "sha256": "ca8ebd0499972304d6378e7cb6ba7e320a759aaba1e0adcf154cfd5150057f83"
+  },
+  {
+   "path": "data/selection.json",
+   "bytes": 11973,
+   "sha256": "39ecc10e7b882520cae8cdf464f54193e9310185755dcc0caa2417eece540a51"
+  },
+  {
+   "path": "README.md",
+   "bytes": 9442,
+   "sha256": "45cdff5ee785b6044c8e68bffde619ac91d323602c479504c7cf63b29413093f"
+  }
+ ],
+ "totals": {
+  "files": 12,
+  "bytes": 1675661
+ },
+ "manifest_sha256": "4c15a3a34ce0a89a4f196a9a67646e34c2cd0043487bf7a32c085ccdc81acf28"
+}

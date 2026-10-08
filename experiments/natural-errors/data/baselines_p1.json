@@ -1,0 +1,118 @@
+{
+ "schema": "natural-errors-baselines/v1",
+ "spec": "PREREG-tuning-grid.md section 0 (P1 baselines)",
+ "split_sha256": "034eecc7688e9a156cd09064025b4f1d3ffea275c6da2b67d7c8c0f50ace2e88",
+ "half": "tune",
+ "n": 53,
+ "judges": {
+  "gemma4:31b": {
+   "precision": 0.711,
+   "recall": 1.0,
+   "sentence_recall": 0.702,
+   "clear_recall": 0.757,
+   "tp": 32,
+   "fp": 13,
+   "fn": 0,
+   "sentences": 47,
+   "clear_sentences": 37,
+   "precision_ci": [
+    0.578,
+    0.841
+   ],
+   "recall_ci": [
+    1.0,
+    1.0
+   ],
+   "sentence_recall_ci": [
+    0.58,
+    0.812
+   ],
+   "clear_recall_ci": [
+    0.636,
+    0.875
+   ]
+  },
+  "mistral-small:24b": {
+   "precision": 0.808,
+   "recall": 0.656,
+   "sentence_recall": 0.128,
+   "clear_recall": 0.162,
+   "tp": 21,
+   "fp": 5,
+   "fn": 11,
+   "sentences": 47,
+   "clear_sentences": 37,
+   "precision_ci": [
+    0.643,
+    0.95
+   ],
+   "recall_ci": [
+    0.484,
+    0.812
+   ],
+   "sentence_recall_ci": [
+    0.045,
+    0.225
+   ],
+   "clear_recall_ci": [
+    0.057,
+    0.286
+   ]
+  },
+  "granite4.1:30b": {
+   "precision": 1.0,
+   "recall": 0.281,
+   "sentence_recall": 0.149,
+   "clear_recall": 0.162,
+   "tp": 9,
+   "fp": 0,
+   "fn": 23,
+   "sentences": 47,
+   "clear_sentences": 37,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "recall_ci": [
+    0.129,
+    0.44
+   ],
+   "sentence_recall_ci": [
+    0.047,
+    0.255
+   ],
+   "clear_recall_ci": [
+    0.043,
+    0.288
+   ]
+  },
+  "muse-glimmer:latest": {
+   "precision": 0.875,
+   "recall": 0.875,
+   "sentence_recall": 0.851,
+   "clear_recall": 0.919,
+   "tp": 28,
+   "fp": 4,
+   "fn": 4,
+   "sentences": 47,
+   "clear_sentences": 37,
+   "precision_ci": [
+    0.75,
+    0.971
+   ],
+   "recall_ci": [
+    0.75,
+    0.971
+   ],
+   "sentence_recall_ci": [
+    0.721,
+    0.955
+   ],
+   "clear_recall_ci": [
+    0.789,
+    1.0
+   ]
+  }
+ },
+ "sha256": "b88e3c38129415598cc9f9181690d3dd7a39d4129ffacd456a95eef40bd53fe3"
+}

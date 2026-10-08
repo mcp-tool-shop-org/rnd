@@ -176,6 +176,11 @@ Against the adjudicated labels, all 95 answers; 95% bootstrap over answers:
 
 ## Context-rich re-screen (screen2): plan, committed before the full run
 
+**Superseded before any run (2026-10-08) by `PREREG-tuning-grid.md`:** tuning runs use the frozen
+tune half (`data/split.json`, 53 answers) only, and the full-95 run and 20-answer sample below are
+withdrawn. The pilot table stays as the record.
+
+
 **Why:** the v1 screen ran every judge with thinking off, a 700-token cap and a bare prompt. The
 Director's rule since 2026-10-08 is to give each model the purpose, the criteria and worked
 examples (from outside this set), one answer per call, with thinking on and room to finish.

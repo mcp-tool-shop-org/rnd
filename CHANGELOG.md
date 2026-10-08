@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.0.11] - 2026-10-08
+
+- kev env: fallback is stable cu132 (to be built), not cu128 (Director)
+- Updated experiment `kev-judge-finetune`
+
 ## [1.1.4.0.10] - 2026-10-08
 
 - kev-judge-finetune: new-env runs write their own output names, never over a reference run

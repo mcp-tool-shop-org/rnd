@@ -5,7 +5,7 @@ at CUDA 13.2, so this env uses a **date-pinned nightly**: `torch==2.16.0.dev2026
 (CUDA runtime 13.4.49, cuDNN 9.26, Triton 3.9), with the latest transformers (5.19.0), peft (0.21.2)
 and accelerate (1.15.0). `requirements-cu134.lock` lists every package.
 
-It replaces the old env (torch 2.8.0+cu128) only after it reproduces a known result:
+It becomes the training env only after it reproduces a known result:
 1. a 1-step smoke with a finite loss and grad_norm > 0;
 2. one existing measurement, the judge-ft confirm accuracy, inside its CI.
 
@@ -46,4 +46,6 @@ Median step time is reported, not gated.
 
 The second condition matters most. With the same weights, only numeric kernels differ.
 
-A fail on either keeps `.venv` (cu128) for training and is reported with the failing numbers.
+A fail on either keeps training off cu134, and is reported with the failing numbers. **The fallback is stable cu132 (to
+be built; Director, 2026-10-08), not cu128.** Until a cu132 env exists, nothing trains on the old cu128 env as a
+fallback without asking the Publisher first.

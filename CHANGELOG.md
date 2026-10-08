@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.0.6] - 2026-10-08
+
+- hymn-arrangements uploaded (private), round-trip verified 21/21
+
 ## [1.1.4.0.5] - 2026-10-08
 
 - natural-errors: pre-registered tuning grid, frozen 53/42 split, P1 baselines on the tune half; R&D pre-run amendments (per-sentence schema, cross-family verifier); full-95 screen plan withdrawn

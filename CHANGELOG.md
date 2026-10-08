@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.0.8] - 2026-10-08
+
+- nvidia-skills review: training-lane skills read (tao-finetune-huggingface-model, nemo-rl-auto-research, data-designer, nemotron-customize)
+- Updated catalog `nvidia-skills`
+
 ## [1.1.4.0.7] - 2026-10-08
 
 - natural-errors build.py p2: numbered sentences, one verdict per sentence, tune half only, resumable, run tags for the noise floor and the thinking dial

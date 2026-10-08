@@ -1,79 +1,307 @@
 {
  "_about": "Human-owned. Studio fit per family (default) and per item (override). fit: direct = useful on this rig or in a current pipeline now; adjacent = touches our domain, worth using when the need arises; general = field knowledge, no studio use expected. Reviewed 2026-10-07 against catalog ref 67a13c0b.",
  "families": {
-  "accelerated-computing": {"fit": "adjacent", "note": "cuDF: GPU pandas. Worth it only if a dataset/manifest job gets CPU-bound."},
-  "ambient": {"fit": "general", "note": "Healthcare voice-agent example."},
-  "amc": {"fit": "general", "note": "Camera calibration stack for video analytics."},
-  "bionemo": {"fit": "general", "note": "Drug discovery and protein models (NIMs, KERMT). Several send inputs to NVIDIA-hosted APIs."},
-  "cudaq": {"fit": "general", "note": "Quantum computing (CUDA-Q)."},
-  "cuopt": {"fit": "general", "note": "GPU LP/MILP/routing solver. Conceivably useful for scheduling/allocation puzzles; no current need."},
-  "dali": {"fit": "general", "note": "GPU data loading for training pipelines."},
-  "data-designer": {"fit": "adjacent", "note": "Synthetic dataset pipelines. Relevant to dialogue/voice/eval datasets; confirm it can run on local models (Standing Rule 1) before use."},
-  "deepstream": {"fit": "general", "note": "Video analytics pipelines."},
-  "dicom": {"fit": "general", "note": "Medical imaging I/O."},
-  "digital-health": {"fit": "general", "note": "Clinical ASR flywheel; the build/eval/finetune loop is a reusable pattern for any domain ASR."},
-  "doca": {"fit": "general", "note": "BlueField DPU / ConnectX networking. Data-center infrastructure."},
-  "dynamo": {"fit": "general", "note": "Kubernetes LLM serving (KV-aware routing, disaggregated serving). Not for a single-GPU rig; possibly for offrig pods."},
-  "earth2studio": {"fit": "general", "note": "Weather/climate AI models."},
-  "foundationpose": {"fit": "general", "note": "6-DoF object pose for robotics."},
-  "g-assist": {"fit": "adjacent", "note": "Reads/changes this machine's display and GPU settings via MCP. Read-only use is fine; changes are system settings and need the Director's say-so."},
-  "holohub": {"fit": "general", "note": "Holoscan app/module lifecycle."},
-  "holoscan": {"fit": "general", "note": "Holoscan sensor-processing SDK installs."},
-  "hsb": {"fit": "general", "note": "Holoscan Sensor Bridge FPGA work."},
-  "i4h": {"fit": "general", "note": "Isaac for Healthcare robotics workflows."},
-  "isaac": {"fit": "general", "note": "Isaac Sim mission-control showcase."},
-  "jetson": {"fit": "general", "note": "Jetson BSP/flash/customize and edge LLM serving. The LLM benchmark/serve skills are good references for local-serving method."},
-  "launch": {"fit": "general", "note": "NeMo-RL on Kubernetes."},
-  "mcore": {"fit": "general", "note": "Megatron-Core contributor workflow."},
-  "medtech": {"fit": "general", "note": "Medical AI evidence export."},
-  "nemo-automodel": {"fit": "general", "note": "Distributed training and model onboarding."},
-  "nemo-fabric": {"fit": "general", "note": "NeMo Fabric agent adapters."},
-  "nemo-mbridge": {"fit": "general", "note": "Megatron Bridge large-scale training performance (parallelism, MoE, CUDA graphs)."},
-  "nemo-relay": {"fit": "adjacent", "note": "Instrumentation/observability middleware for LLM and tool calls. Compare against Role OS and swarm receipts before adopting anything."},
-  "nemo-retriever": {"fit": "adjacent", "note": "Document ingestion + search (local LanceDB) with an MCP. A candidate upgrade path if this seat outgrows SQLite FTS5."},
-  "nemo-rl": {"fit": "general", "note": "RL post-training. See item notes: two skills are worth reading as patterns."},
-  "nemoclaw": {"fit": "general", "note": "NemoClaw docs router."},
-  "nemotron": {"fit": "adjacent", "note": "Nemotron speech (ASR/TTS), voice agents, customization recipes. Relevant to voice work; self-hosted NIMs only."},
-  "nv-generate": {"fit": "general", "note": "Medical image generation."},
-  "nv-reason": {"fit": "general", "note": "Medical imaging reasoning models."},
-  "nv-segment": {"fit": "general", "note": "Medical image segmentation."},
-  "nvflare": {"fit": "general", "note": "Federated learning."},
-  "nvidia": {"fit": "adjacent", "note": "NVIDIA App / Broadcast MCPs and the skill finder."},
-  "omniverse": {"fit": "adjacent", "note": "OpenUSD performance and CAD-to-SimReady. USD knowledge may serve the UE5 projects' asset pipeline."},
-  "paidf": {"fit": "general", "note": "Physical-AI data factory on Kubernetes (Cosmos augmentation, auto-labeling)."},
-  "physical-ai": {"fit": "general", "note": "Synthetic-data generation infrastructure for physical AI."},
-  "physicsnemo": {"fit": "general", "note": "Physics-ML (SciML) models."},
-  "portfolio": {"fit": "general", "note": "Finance portfolio optimization with cuOpt. Field knowledge only; nobody acts on it as advice."},
-  "rag": {"fit": "adjacent", "note": "RAG blueprint, evaluation (RAGAS) and load testing. rag-eval is the useful one for judging any retrieval we build."},
-  "rtvi": {"fit": "general", "note": "Real-time video intelligence model customization."},
-  "rtx-remix": {"fit": "adjacent", "note": "RTX Remix via MCP: remaster classic DX8/9 games by swapping textures/models. Not our engine path, but a live example of an AI-assisted asset-swap pipeline."},
-  "skill": {"fit": "adjacent", "note": "Governance skill cards for agent skills."},
-  "tao": {"fit": "general", "note": "TAO vision-model training platform. A few single-model skills overlap our visual pipeline (see items)."},
-  "tilegym": {"fit": "adjacent", "note": "cuTile kernel authoring, autotuning, Triton conversion. The kit to pick up if the studio ever writes a custom GPU kernel."},
-  "vss": {"fit": "general", "note": "Video search and summarization services."},
-  "warp": {"fit": "adjacent", "note": "NVIDIA Warp (Python GPU simulation). warp-eval judges whether a slow loop is a Warp candidate."}
+  "accelerated-computing": {
+   "fit": "adjacent",
+   "note": "cuDF: GPU pandas. Worth it only if a dataset/manifest job gets CPU-bound."
+  },
+  "ambient": {
+   "fit": "general",
+   "note": "Healthcare voice-agent example."
+  },
+  "amc": {
+   "fit": "general",
+   "note": "Camera calibration stack for video analytics."
+  },
+  "bionemo": {
+   "fit": "general",
+   "note": "Drug discovery and protein models (NIMs, KERMT). Several send inputs to NVIDIA-hosted APIs."
+  },
+  "cudaq": {
+   "fit": "general",
+   "note": "Quantum computing (CUDA-Q)."
+  },
+  "cuopt": {
+   "fit": "general",
+   "note": "GPU LP/MILP/routing solver. Conceivably useful for scheduling/allocation puzzles; no current need."
+  },
+  "dali": {
+   "fit": "general",
+   "note": "GPU data loading for training pipelines."
+  },
+  "data-designer": {
+   "fit": "adjacent",
+   "note": "Synthetic dataset pipelines. Relevant to dialogue/voice/eval datasets; confirm it can run on local models (Standing Rule 1) before use."
+  },
+  "deepstream": {
+   "fit": "general",
+   "note": "Video analytics pipelines."
+  },
+  "dicom": {
+   "fit": "general",
+   "note": "Medical imaging I/O."
+  },
+  "digital-health": {
+   "fit": "general",
+   "note": "Clinical ASR flywheel; the build/eval/finetune loop is a reusable pattern for any domain ASR."
+  },
+  "doca": {
+   "fit": "general",
+   "note": "BlueField DPU / ConnectX networking. Data-center infrastructure."
+  },
+  "dynamo": {
+   "fit": "general",
+   "note": "Kubernetes LLM serving (KV-aware routing, disaggregated serving). Not for a single-GPU rig; possibly for offrig pods."
+  },
+  "earth2studio": {
+   "fit": "general",
+   "note": "Weather/climate AI models."
+  },
+  "foundationpose": {
+   "fit": "general",
+   "note": "6-DoF object pose for robotics."
+  },
+  "g-assist": {
+   "fit": "adjacent",
+   "note": "Reads/changes this machine's display and GPU settings via MCP. Read-only use is fine; changes are system settings and need the Director's say-so."
+  },
+  "holohub": {
+   "fit": "general",
+   "note": "Holoscan app/module lifecycle."
+  },
+  "holoscan": {
+   "fit": "general",
+   "note": "Holoscan sensor-processing SDK installs."
+  },
+  "hsb": {
+   "fit": "general",
+   "note": "Holoscan Sensor Bridge FPGA work."
+  },
+  "i4h": {
+   "fit": "general",
+   "note": "Isaac for Healthcare robotics workflows."
+  },
+  "isaac": {
+   "fit": "general",
+   "note": "Isaac Sim mission-control showcase."
+  },
+  "jetson": {
+   "fit": "general",
+   "note": "Jetson BSP/flash/customize and edge LLM serving. The LLM benchmark/serve skills are good references for local-serving method."
+  },
+  "launch": {
+   "fit": "general",
+   "note": "NeMo-RL on Kubernetes."
+  },
+  "mcore": {
+   "fit": "general",
+   "note": "Megatron-Core contributor workflow."
+  },
+  "medtech": {
+   "fit": "general",
+   "note": "Medical AI evidence export."
+  },
+  "nemo-automodel": {
+   "fit": "general",
+   "note": "Distributed training and model onboarding."
+  },
+  "nemo-fabric": {
+   "fit": "general",
+   "note": "NeMo Fabric agent adapters."
+  },
+  "nemo-mbridge": {
+   "fit": "general",
+   "note": "Megatron Bridge large-scale training performance (parallelism, MoE, CUDA graphs)."
+  },
+  "nemo-relay": {
+   "fit": "adjacent",
+   "note": "Instrumentation/observability middleware for LLM and tool calls. Compare against Role OS and swarm receipts before adopting anything."
+  },
+  "nemo-retriever": {
+   "fit": "adjacent",
+   "note": "Document ingestion + search (local LanceDB) with an MCP. A candidate upgrade path if this seat outgrows SQLite FTS5."
+  },
+  "nemo-rl": {
+   "fit": "general",
+   "note": "RL post-training. See item notes: two skills are worth reading as patterns."
+  },
+  "nemoclaw": {
+   "fit": "general",
+   "note": "NemoClaw docs router."
+  },
+  "nemotron": {
+   "fit": "adjacent",
+   "note": "Nemotron speech (ASR/TTS), voice agents, customization recipes. Relevant to voice work; self-hosted NIMs only."
+  },
+  "nv-generate": {
+   "fit": "general",
+   "note": "Medical image generation."
+  },
+  "nv-reason": {
+   "fit": "general",
+   "note": "Medical imaging reasoning models."
+  },
+  "nv-segment": {
+   "fit": "general",
+   "note": "Medical image segmentation."
+  },
+  "nvflare": {
+   "fit": "general",
+   "note": "Federated learning."
+  },
+  "nvidia": {
+   "fit": "adjacent",
+   "note": "NVIDIA App / Broadcast MCPs and the skill finder."
+  },
+  "omniverse": {
+   "fit": "adjacent",
+   "note": "OpenUSD performance and CAD-to-SimReady. USD knowledge may serve the UE5 projects' asset pipeline."
+  },
+  "paidf": {
+   "fit": "general",
+   "note": "Physical-AI data factory on Kubernetes (Cosmos augmentation, auto-labeling)."
+  },
+  "physical-ai": {
+   "fit": "general",
+   "note": "Synthetic-data generation infrastructure for physical AI."
+  },
+  "physicsnemo": {
+   "fit": "general",
+   "note": "Physics-ML (SciML) models."
+  },
+  "portfolio": {
+   "fit": "general",
+   "note": "Finance portfolio optimization with cuOpt. Field knowledge only; nobody acts on it as advice."
+  },
+  "rag": {
+   "fit": "adjacent",
+   "note": "RAG blueprint, evaluation (RAGAS) and load testing. rag-eval is the useful one for judging any retrieval we build."
+  },
+  "rtvi": {
+   "fit": "general",
+   "note": "Real-time video intelligence model customization."
+  },
+  "rtx-remix": {
+   "fit": "adjacent",
+   "note": "RTX Remix via MCP: remaster classic DX8/9 games by swapping textures/models. Not our engine path, but a live example of an AI-assisted asset-swap pipeline."
+  },
+  "skill": {
+   "fit": "adjacent",
+   "note": "Governance skill cards for agent skills."
+  },
+  "tao": {
+   "fit": "general",
+   "note": "TAO vision-model training platform. A few single-model skills overlap our visual pipeline (see items)."
+  },
+  "tilegym": {
+   "fit": "adjacent",
+   "note": "cuTile kernel authoring, autotuning, Triton conversion. The kit to pick up if the studio ever writes a custom GPU kernel."
+  },
+  "vss": {
+   "fit": "general",
+   "note": "Video search and summarization services."
+  },
+  "warp": {
+   "fit": "adjacent",
+   "note": "NVIDIA Warp (Python GPU simulation). warp-eval judges whether a slow loop is a Warp candidate."
+  }
  },
  "items": {
-  "nvidia-skill-finder": {"fit": "direct", "note": "The router: on NVIDIA-flavoured work it checks the live catalogue and recommends at most three skills, never installing without approval. The one install candidate; registered as an instrument."},
-  "g-assist-mcp-skill": {"fit": "adjacent", "note": "Needs the G-Assist MCP running. Read GPU/display state freely; never change settings without the Director."},
-  "nvidia-app": {"fit": "adjacent", "note": "Driver checks through the NVIDIA App MCP. Useful for 'is the driver current' questions on the rig."},
-  "nvidia-broadcast": {"fit": "general", "note": "Camera/mic effects via MCP."},
-  "tilegym-cutile-python": {"fit": "adjacent", "note": "Entry point for writing cuTile kernels. Pair with entry 2026-10-07-cuda-python-ecosystem."},
-  "tilegym-improve-cutile-kernel-perf": {"fit": "adjacent", "note": "Profiling-driven kernel tuning loop; pairs with Nsight Copilot."},
-  "warp-eval": {"fit": "adjacent", "note": "Run before porting any CPU hot path (texture projection, particle/geometry loops) to the GPU."},
-  "tao-train-depth-anything-v2": {"fit": "adjacent", "note": "Depth Anything v2 — the depth model family our 2.5D/ControlNet work already leans on. Training-side only; inference lives in ComfyUI."},
-  "tao-finetune-clip": {"fit": "adjacent", "note": "CLIP fine-tune/embeddings: relevant to style scoring and curation (ai-eyes, sdlab)."},
-  "tao-generate-image-embeddings": {"fit": "adjacent", "note": "CLIP/SigLIP embeddings over an image list: the first step of dataset dedup and near-neighbour curation."},
-  "tao-mine-nearest-neighbors": {"fit": "adjacent", "note": "Near-neighbour mining over embeddings: dataset curation."},
-  "tao-train-mask-auto-label": {"fit": "adjacent", "note": "Masks from point/box hints: sprite matte/segmentation research."},
-  "nemotron-speech": {"fit": "adjacent", "note": "ASR/TTS/NMT NIMs; self-host only."},
-  "nemotron-voice-agent-builder": {"fit": "adjacent", "note": "Real-time voice agents (Pipecat/LiveKit)."},
-  "nemo-rl-auto-research": {"fit": "adjacent", "note": "Read as a pattern: an autonomous experiment loop with explicit human-oversight points, relevant to how this seat runs research."},
-  "nemo-rl-session-memory": {"fit": "adjacent", "note": "Read as a pattern: durable session memory for coding agents; compare with loadout-os."},
-  "nemo-mbridge-perf-cuda-graphs": {"fit": "general", "note": "CUDA graph capture at training scale; see entry 2026-10-07-cuda-graphs."},
-  "jetson-llm-benchmark": {"fit": "general", "note": "Structured-JSON benchmarking across vLLM/llama.cpp/Ollama; the method transfers to engine-room measurement."},
-  "rag-eval": {"fit": "adjacent", "note": "RAGAS quality benchmark harness: use to judge any retrieval layer before trusting it."},
-  "physical-ai-neural-reconstruction": {"fit": "general", "note": "NuRec/3D Gaussian splatting router (sensor sim). Field knowledge for 3DGS."},
-  "omniverse-usd-performance-tuning": {"fit": "adjacent", "note": "USD scene load/memory/FPS diagnosis."}
+  "nvidia-skill-finder": {
+   "fit": "direct",
+   "note": "The router: on NVIDIA-flavoured work it checks the live catalogue and recommends at most three skills, never installing without approval. The one install candidate; registered as an instrument."
+  },
+  "g-assist-mcp-skill": {
+   "fit": "adjacent",
+   "note": "Needs the G-Assist MCP running. Read GPU/display state freely; never change settings without the Director."
+  },
+  "nvidia-app": {
+   "fit": "adjacent",
+   "note": "Driver checks through the NVIDIA App MCP. Useful for 'is the driver current' questions on the rig."
+  },
+  "nvidia-broadcast": {
+   "fit": "general",
+   "note": "Camera/mic effects via MCP."
+  },
+  "tilegym-cutile-python": {
+   "fit": "adjacent",
+   "note": "Entry point for writing cuTile kernels. Pair with entry 2026-10-07-cuda-python-ecosystem."
+  },
+  "tilegym-improve-cutile-kernel-perf": {
+   "fit": "adjacent",
+   "note": "Profiling-driven kernel tuning loop; pairs with Nsight Copilot."
+  },
+  "warp-eval": {
+   "fit": "adjacent",
+   "note": "Run before porting any CPU hot path (texture projection, particle/geometry loops) to the GPU."
+  },
+  "tao-train-depth-anything-v2": {
+   "fit": "adjacent",
+   "note": "Depth Anything v2 — the depth model family our 2.5D/ControlNet work already leans on. Training-side only; inference lives in ComfyUI."
+  },
+  "tao-finetune-clip": {
+   "fit": "adjacent",
+   "note": "CLIP fine-tune/embeddings: relevant to style scoring and curation (ai-eyes, sdlab)."
+  },
+  "tao-generate-image-embeddings": {
+   "fit": "adjacent",
+   "note": "CLIP/SigLIP embeddings over an image list: the first step of dataset dedup and near-neighbour curation."
+  },
+  "tao-mine-nearest-neighbors": {
+   "fit": "adjacent",
+   "note": "Near-neighbour mining over embeddings: dataset curation."
+  },
+  "tao-train-mask-auto-label": {
+   "fit": "adjacent",
+   "note": "Masks from point/box hints: sprite matte/segmentation research."
+  },
+  "nemotron-speech": {
+   "fit": "adjacent",
+   "note": "ASR/TTS/NMT NIMs; self-host only."
+  },
+  "nemotron-voice-agent-builder": {
+   "fit": "adjacent",
+   "note": "Real-time voice agents (Pipecat/LiveKit)."
+  },
+  "nemo-rl-auto-research": {
+   "fit": "adjacent",
+   "note": "Read as a pattern for this seat's tuning grids: baseline first; one hypothesis per git branch, failed branches kept; a TSV ledger row per run (branch, parent commit, metric, memory, minutes, command, log path, keep/discard/crash); explicit stop rules re-checked after each run; never discard an idea on an underpowered smoke run. The NeMo-RL and Kubernetes parts do not apply on one 5090."
+  },
+  "nemo-rl-session-memory": {
+   "fit": "adjacent",
+   "note": "Read as a pattern: durable session memory for coding agents; compare with loadout-os."
+  },
+  "nemo-mbridge-perf-cuda-graphs": {
+   "fit": "general",
+   "note": "CUDA graph capture at training scale; see entry 2026-10-07-cuda-graphs."
+  },
+  "jetson-llm-benchmark": {
+   "fit": "general",
+   "note": "Structured-JSON benchmarking across vLLM/llama.cpp/Ollama; the method transfers to engine-room measurement."
+  },
+  "rag-eval": {
+   "fit": "adjacent",
+   "note": "RAGAS quality benchmark harness: use to judge any retrieval layer before trusting it."
+  },
+  "physical-ai-neural-reconstruction": {
+   "fit": "general",
+   "note": "NuRec/3D Gaussian splatting router (sensor sim). Field knowledge for 3DGS."
+  },
+  "omniverse-usd-performance-tuning": {
+   "fit": "adjacent",
+   "note": "USD scene load/memory/FPS diagnosis."
+  },
+  "tao-finetune-huggingface-model": {
+   "fit": "adjacent",
+   "note": "Read 2026-10-08 for the Kev and critic fine-tunes. Worth taking as rules: a 1-step smoke on real data must show finite loss and grad_norm > 0 before any full run; minimal-change error recovery (OOM: halve batch, double grad accumulation, gradient checkpointing; NaN: LR / 10; same error 3 times: stop); fetch live model-card and library docs instead of writing trainer code from memory; zero-shot baseline eval before training; emit a rerun skill per run. Not adopted as a tool: it needs Docker plus nvidia-container-toolkit and an NGC image, and defaults to push_to_hub=True, against the studio's private-first rule."
+  },
+  "data-designer": {
+   "fit": "adjacent",
+   "note": "NeMo Data Designer: synthetic datasets as column pipelines (samplers, LLM text columns, LLM-judge columns holding {reasoning, score}, validators, seed datasets). Matches how the critic controls are planted and judged, but the studio's bespoke builders already pin models and log failures per item; reconsider for a new dataset build rather than port the existing ones. Local-endpoint support unverified."
+  },
+  "nemotron-customize": {
+   "fit": "general",
+   "note": "A planner over the Nemotron repo's step catalogue (curation, SFT/PEFT, DPO/GRPO, conversion, eval). Needs that repo checked out and remote env profiles; its peft/automodel route is the only part sized for a small box. No studio use expected now."
+  }
  }
 }

@@ -373,6 +373,12 @@ def cmd_screen2(a):
     pilot = bool(a.limit)
     if pilot:
         items = items[: a.limit]
+    if a.sample:
+        # A fixed, seeded sample (seed 20261008), drawn without looking at the labels; resumes into
+        # screen_ctx.json like a full run, so a judge that clears the bar can be extended in place.
+        rng = random.Random(20261008)
+        keep = set(rng.sample([r["id"] for r in items], a.sample))
+        items = [r for r in items if r["id"] in keep]
     path = DATA / ("screen_ctx_pilot.json" if pilot else "screen_ctx.json")
     out = load_json(path) if path.exists() else {
         "prompt": "SCREEN2", "settings": {}, "judges": {},
@@ -421,6 +427,7 @@ def main():
     ap.add_argument("--only", help="screen: re-run just this judge")
     ap.add_argument("--num-ctx", type=int, dest="num_ctx", help="screen2: context window (default 16384)")
     ap.add_argument("--num-predict", type=int, dest="num_predict", help="screen2: token budget incl. thinking (default 6000)")
+    ap.add_argument("--sample", type=int, help="screen2: a fixed seeded sample of N answers (seed 20261008)")
     ap.add_argument("--limit", type=int, help="screen2: pilot on the first N answers (separate file)")
     ap.add_argument("step", choices=["questions", "answers", "screen", "screen2", "select", "export", "status"])
     a = ap.parse_args()

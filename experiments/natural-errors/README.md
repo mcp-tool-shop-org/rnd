@@ -174,4 +174,36 @@ Against the adjudicated labels, all 95 answers; 95% bootstrap over answers:
     generator's answers.
   - The gold labels are Claude-made (see Labels).
 
+## Context-rich re-screen (screen2): plan, committed before the full run
+
+**Why:** the v1 screen ran every judge with thinking off, a 700-token cap and a bare prompt. The
+Director's rule since 2026-10-08 is to give each model the purpose, the criteria and worked
+examples (from outside this set), one answer per call, with thinking on and room to finish.
+`build.py screen2` does that. Models without a thinking mode (mistral-small, granite4.1) reason in
+a field before the verdict. Failures are logged by reason: truncated, http or unparsable.
+
+**Pilot** (first 3 answers, `data/screen_ctx_pilot.json`):
+
+| judge | working setting | time per answer | gold error sentences found (of 5) |
+|---|---|---|---|
+| gemma4:31b | thinking, num_predict 16000, num_ctx 24576 (6000 truncated 3/3) | ~124 s | 4 |
+| muse-glimmer | thinking (high), plain-text replies | ~68 s | 3 |
+| nemotron-3.5-lightning | thinking, num_ctx 12288 | ~26 s | 0 |
+| mistral-small:24b | reasoning-first (thinking gives HTTP 400) | ~9 s | 0 |
+| granite4.1:30b | reasoning-first (thinking gives HTTP 400) | ~11 s | 0 |
+
+**Full run, in this order:**
+1. gemma4:31b and muse-glimmer on all 95 answers (`data/screen_ctx.json`).
+2. mistral-small, granite4.1 and nemotron on a fixed 20-answer sample:
+   - drawn with `--sample 20`, seed 20261008, without looking at the labels;
+   - the sample is n003 n005 n011 n015 n019 n027 n028 n030 n035 n037 n039 n046 n051 n052 n056 n059
+     n072 n086 n090 n091.
+3. **The bar, fixed now:** a judge in step 2 is extended to all 95 only if it flags at least
+   **40% of the error sentences both labelling passes marked** in that sample. Otherwise it is
+   reported on the sample only.
+
+**Reading:** the same table as readout 1 (answer-level precision and recall, the share of error
+sentences found, and clear errors found), set beside the v1 screen, so the gain from context is
+measured per judge. Failed items are counted as missing, never as "no errors".
+
 Readout 2 (critics against these labels) is still to run.

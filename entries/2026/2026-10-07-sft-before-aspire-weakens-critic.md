@@ -81,6 +81,10 @@ marked `[wrong]` below.
   "finding" before it shaped a design. It is filed here as a correction, not
   deleted.
 
+**Follow-up (2026-10-08):** quadrupling the prompts to 128 lifted every seed's
+critic by 0.10–0.13 but left the spread between seeds unchanged (range 0.181);
+see [[2026-10-08-more-prompts-raise-the-aspire-critic-s-accuracy-but-not-its-]].
+
 ## Claims
 
 - [wrong] SFT before ASPIRE makes the learned critic worse at separating strong answers from planted-error copies. (via: aspire-si seeds 43 and 44 under the pre-registered three-seed rule; mean drops 0.06 composite and 0.008 local, under the 0.10 bar; reported by session A 2026-10-07)

@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.0.5] - 2026-10-08
+
+- ASPIRE step 2: more prompts raise the critic's level, not its seed spread
+- Updated `2026-10-07-sft-before-aspire-weakens-critic`: SFT before ASPIRE has no reliable effect on the critic; run-to-run critic variance dominates (3 seeds)
+- Added `2026-10-08-more-prompts-raise-the-aspire-critic-s-accuracy-but-not-its-`: More prompts raise the ASPIRE critic's accuracy but not its spread between seeds
+
 ## [1.1.3.0.4] - 2026-10-08
 
 - America the Beautiful is written at 92 BPM: relative verse build and coda

@@ -44,13 +44,13 @@
 ## D. Shipping Hygiene
 
 - [x] `[all]` `verify` script exists (test + build + smoke in one command) (2026-10-07) — `verify.sh`, run in CI
-- [x] `[all]` Version in manifest matches git tag (2026-10-07) — `rnd.__version__` 1.0.0 = tag v1.0.0; `shipcheck manifest` skips (no npm/pypi manifest)
+- [x] `[all]` Version in manifest matches git tag (2026-10-08) — `pyproject.toml` reads `rnd.__version__`; tags are `v<version>`, and `release.yml` refuses to publish when the release tag and the package version differ
 - [ ] `[all]` SKIP: no runtime dependencies (standard library only); the site's npm tree is covered by `shipcheck deps`
 - [x] `[all]` No known high/critical vulnerabilities in any dependency tree (2026-10-07) — Python: none (stdlib); site/: `npm audit --audit-level=high` clean (10 moderate, in Starlight's code-highlighting chain)
 - [ ] `[all]` SKIP: optional; no runtime dependencies to update
 - [ ] `[npm]` SKIP: not published to npm
 - [ ] `[npm]` SKIP: not published to npm
-- [ ] `[npm]` SKIP: not published to npm or PyPI (Python >= 3.10 stated in README)
+- [x] `[npm]` Runtime declared (2026-10-08) — not on npm; PyPI `mcptoolshop-rnd` declares `requires-python = ">=3.10"`
 - [ ] `[npm]` SKIP: not published to npm or PyPI (site/package-lock.json is committed)
 - [ ] `[vsix]` SKIP: not a VS Code extension
 - [ ] `[desktop]` SKIP: not a desktop app

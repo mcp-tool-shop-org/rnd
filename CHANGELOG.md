@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.2.0.0] - 2026-10-08
+
+- Packaged for PyPI as `mcptoolshop-rnd` (pyproject.toml, uv.lock); the `rnd` command finds its library via `--library`, `$RND_ROOT` or the nearest folder with entries/ and instruments/, else stops with NO_LIBRARY
+- release.yml: publishes to PyPI by trusted publishing when a GitHub release is published; refuses a tag that differs from the package version
+- CI: build, twine check, clean-install smoke and pip-audit; README and handbook document the install
+
 ## [1.1.1.2.3] - 2026-10-07
 
 - Battle Hymn expressive timing and emphasis research

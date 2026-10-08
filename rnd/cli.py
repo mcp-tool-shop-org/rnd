@@ -6,6 +6,7 @@ Exit codes: 0 ok · 1 invalid library files · 2 usage or not found ·
 
 import argparse
 import json
+import os
 import re
 import sqlite3
 import sys
@@ -15,7 +16,27 @@ from pathlib import Path
 
 from . import __version__, catalog, model, readouts, release, store
 
-ROOT = Path(__file__).resolve().parent.parent
+SOURCE_ROOT = Path(__file__).resolve().parent.parent
+
+
+def is_library(path):
+    """A library is a folder holding entries/ and instruments/."""
+    return (path / "entries").is_dir() and (path / "instruments").is_dir()
+
+
+def find_root(override=None, cwd=None):
+    """--library, then $RND_ROOT, then the nearest library at or above cwd, then the source checkout."""
+    explicit = override or os.environ.get("RND_ROOT")
+    if explicit:
+        return Path(explicit).resolve()
+    here = Path(cwd or Path.cwd()).resolve()
+    for d in (here, *here.parents):
+        if is_library(d):
+            return d
+    return SOURCE_ROOT if is_library(SOURCE_ROOT) else None
+
+
+ROOT = find_root()
 
 
 def fail(code, message, hint="", exit_code=2):
@@ -344,7 +365,9 @@ def cmd_sql(args):
 
 def build_parser():
     p = argparse.ArgumentParser(prog="rnd", description="Search and grow the studio R&D library.")
-    p.add_argument("--db", help="index path (default: rnd.db in the repo, or $RND_DB)")
+    p.add_argument("--library", metavar="DIR",
+                   help="the library checkout (default: $RND_ROOT, else the nearest folder with entries/ and instruments/)")
+    p.add_argument("--db", help="index path (default: rnd.db in the library, or $RND_DB)")
     p.add_argument("--debug", action="store_true", help="show the full traceback on an unexpected error")
     p.add_argument("--version", action="version", version=f"rnd {__version__}")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -424,6 +447,12 @@ def main(argv=None):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")
     args = build_parser().parse_args(argv)
+    global ROOT
+    if args.library:
+        ROOT = find_root(args.library)
+    if args.cmd != "readouts" and (ROOT is None or not is_library(ROOT)):
+        return fail("NO_LIBRARY", "no rnd library here (a folder with entries/ and instruments/)",
+                    "run inside a clone of mcp-tool-shop-org/rnd, or pass --library / set RND_ROOT")
     try:
         return args.fn(args) or 0
     except KeyboardInterrupt:

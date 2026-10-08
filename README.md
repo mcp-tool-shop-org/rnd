@@ -70,6 +70,19 @@ python -m rnd bump --note "what changed"  # micro version bump + CHANGELOG secti
 Every listing command takes `--json` for agents. `rnd.cmd` (Windows) and
 `rnd.sh` (POSIX shells) are thin wrappers, so the command works from any directory.
 
+To use the tool from other projects, install it from PyPI:
+
+```bash
+pip install mcptoolshop-rnd
+```
+
+That installs the `rnd` command, not the library: the entries live in this
+repository. The command finds a library in this order: `--library DIR`, then
+`$RND_ROOT`, then the nearest folder at or above the current one that holds
+`entries/` and `instruments/`. Outside a library it stops with `NO_LIBRARY`;
+only `rnd readouts` works without one. The package imports as `rnd`, as does an
+unrelated PyPI package called `rnd`, so don't install both in one environment.
+
 The library changes daily, so versions have five segments,
 `MAJOR.MINOR.PATCH.MICRO.NANO`. The first three version the `rnd` tool; MICRO marks a
 structural library change and NANO an ordinary update. `rnd bump` raises the

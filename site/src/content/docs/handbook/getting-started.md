@@ -1,6 +1,6 @@
 ---
 title: Getting started
-description: Install nothing, run the first searches, and set up the wrappers.
+description: Clone and run, or install the command from PyPI; first searches and the wrappers.
 sidebar:
   order: 1
 ---
@@ -16,6 +16,22 @@ git clone https://github.com/mcp-tool-shop-org/rnd.git
 cd rnd
 python -m rnd --version
 ```
+
+### The command from PyPI
+
+To call `rnd` from other projects, install the command:
+
+```bash
+pip install mcptoolshop-rnd
+rnd --library path/to/rnd search cuda
+```
+
+The package holds the tool, not the library; the entries live in the clone.
+`rnd` finds a library from `--library`, then `$RND_ROOT`, then the nearest folder
+at or above the current one with `entries/` and `instruments/`. Outside a
+library every command except `rnd readouts` stops with `NO_LIBRARY`. The package
+imports as `rnd`, as does an unrelated PyPI package of that name, so keep them
+in separate environments.
 
 ## First searches
 

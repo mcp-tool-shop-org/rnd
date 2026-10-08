@@ -4,6 +4,7 @@ import base64
 import contextlib
 import io
 import json
+import os
 import shutil
 import sqlite3
 import subprocess
@@ -346,6 +347,37 @@ class BumpCommandTests(CliBase):
                 mock.patch.object(release, "changes", return_value=[]):
             code, _, err = self.run_cli("bump")
         self.assertIn("BAD_CHANGELOG", err)
+
+
+class LibraryDiscoveryTests(CliBase):
+    def test_find_root_order(self):
+        nested = self.root / "entries" / "2026"
+        with mock.patch.dict("os.environ", {}, clear=False):
+            os.environ.pop("RND_ROOT", None)
+            self.assertEqual(cli.find_root(cwd=nested), self.root.resolve())
+            self.assertEqual(cli.find_root(override=str(self.root)), self.root.resolve())
+            os.environ["RND_ROOT"] = str(nested)
+            self.assertEqual(cli.find_root(cwd=self.root), nested.resolve())
+        elsewhere = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, elsewhere, True)
+        with mock.patch.dict("os.environ", {}, clear=False), mock.patch.object(cli, "SOURCE_ROOT", elsewhere):
+            os.environ.pop("RND_ROOT", None)
+            self.assertIsNone(cli.find_root(cwd=elsewhere))
+            with mock.patch.object(cli, "SOURCE_ROOT", self.root):
+                self.assertEqual(cli.find_root(cwd=elsewhere), self.root)
+
+    def test_library_flag_and_no_library(self):
+        code, out, _ = self.run_cli("--library", str(self.root), "list", "--json")
+        self.assertEqual(code, 0)
+        self.assertIn("2026-01-02-sample", out)
+        empty = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, empty, True)
+        code, _, err = self.run_cli("--library", str(empty), "list")
+        self.assertEqual(code, 2)
+        self.assertIn("NO_LIBRARY", err)
+        with mock.patch.object(cli, "ROOT", None):
+            code, _, err = self.run_cli("stats")
+        self.assertIn("NO_LIBRARY", err)
 
 
 class ReleaseUnitTests(unittest.TestCase):

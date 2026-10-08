@@ -56,6 +56,14 @@ python -m rnd bump --note "what changed"  # micro version bump + CHANGELOG secti
 
 Ogni comando di elenco richiede `--json` per gli agenti. `rnd.cmd` (Windows) e `rnd.sh` (shell POSIX) sono semplici wrapper, quindi il comando funziona da qualsiasi directory.
 
+Per utilizzare lo strumento in altri progetti, installalo da PyPI:
+
+```bash
+pip install mcptoolshop-rnd
+```
+
+Questo installerà il comando `rnd`, non la libreria: le voci sono contenute in questo repository. Il comando cerca una libreria in questo ordine: `--library DIR`, poi `$RND_ROOT`, quindi la cartella più vicina, o una cartella di livello superiore, che contiene `entries/` e `instruments/`. Al di fuori di una libreria, l'esecuzione si interrompe con `NO_LIBRARY`; solo `rnd readouts` funziona senza una libreria. Il pacchetto viene importato come `rnd`, così come un pacchetto PyPI non correlato chiamato `rnd`, quindi non installare entrambi nello stesso ambiente.
+
 La libreria viene aggiornata quotidianamente, quindi le versioni sono suddivise in cinque segmenti: `MAJOR.MINOR.PATCH.MICRO.NANO`. I primi tre segmenti riguardano lo strumento `rnd`; MICRO indica una modifica strutturale della libreria, mentre NANO indica un aggiornamento ordinario. `rnd bump` incrementa automaticamente l’ultimo segmento e crea una sezione CHANGELOG a partire dai file modificati rispetto all’ultima versione, in modo che ogni aggiornamento abbia la sua piccola versione contrassegnata.
 
 Codici di uscita: `0` ok · `1` file di libreria non validi · `2` errore di utilizzo o file non trovato · `3` errore di runtime (uno strumento esterno o un errore imprevisto). Gli errori visualizzano un codice, un messaggio e un suggerimento; `--debug` aggiunge il traceback.

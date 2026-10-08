@@ -11,6 +11,8 @@ on:
       - "catalogs/**"
       - "atlas/**"
       - "verify.sh"
+      - "pyproject.toml"
+      - "uv.lock"
       - ".coveragerc"
       - "codecov.yml"
       - ".github/workflows/**"
@@ -62,6 +64,18 @@ jobs:
           fail_ci_if_error: false
           disable_search: true
           files: coverage.xml
+
+      - name: Package (build, twine check, install smoke)
+        if: matrix.python-version == '3.12'
+        run: |
+          python -m pip install build==1.6.1 twine==7.0.0
+          python -m build -o dist
+          python -m twine check --strict dist/*
+          python -m venv /tmp/pkg && /tmp/pkg/bin/pip install -q dist/*.whl
+          (cd /tmp && /tmp/pkg/bin/rnd --version && ! /tmp/pkg/bin/rnd stats)
+          /tmp/pkg/bin/rnd --library "$GITHUB_WORKSPACE" --db /tmp/pkg.db search cuda --limit 1
+          python -m pip install pip-audit==2.10.1
+          python -m pip_audit --strict .   # the project's declared dependencies (none today)
 
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         if: matrix.python-version == '3.12'

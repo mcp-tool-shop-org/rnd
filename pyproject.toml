@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcptoolshop-rnd"
+dynamic = ["version"]
+description = "The studio's research bench: a Markdown research library with a rebuildable SQLite index, driven by the rnd command."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "mcp-tool-shop", email = "64996768+mcp-tool-shop@users.noreply.github.com" }]
+keywords = ["research", "knowledge-base", "markdown", "sqlite", "fts5", "cli"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Text Processing :: Markup :: Markdown",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://mcp-tool-shop-org.github.io/rnd/"
+Repository = "https://github.com/mcp-tool-shop-org/rnd"
+Changelog = "https://github.com/mcp-tool-shop-org/rnd/blob/main/CHANGELOG.md"
+Issues = "https://github.com/mcp-tool-shop-org/rnd/issues"
+
+[project.scripts]
+rnd = "rnd.cli:main"
+
+[tool.setuptools]
+packages = ["rnd"]
+
+[tool.setuptools.dynamic]
+version = { attr = "rnd.__version__" }

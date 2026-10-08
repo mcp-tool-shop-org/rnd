@@ -6,12 +6,13 @@ sidebar:
 ---
 
 ```
-python -m rnd [--db PATH] [--debug] [--version] <command> [options]
+python -m rnd [--library DIR] [--db PATH] [--debug] [--version] <command> [options]
 ```
 
 | global flag | effect |
 |---|---|
-| `--db PATH` | index path. Default: `rnd.db` in the repo, or `$RND_DB` |
+| `--library DIR` | the library checkout. Default: `$RND_ROOT`, else the nearest folder at or above the current one holding `entries/` and `instruments/` |
+| `--db PATH` | index path. Default: `rnd.db` in the library, or `$RND_DB` |
 | `--debug` | print the full traceback on an unexpected error |
 | `--version` | print the version and exit |
 
@@ -148,6 +149,6 @@ error: NOT_FOUND: no entry 'cuda-graph'
   hint: did you mean: 2026-10-07-cuda-graphs
 ```
 
-Codes include `NOT_FOUND`, `EXISTS`, `BAD_ID`, `INDEX_INVALID`, `SQL_ERROR`,
+Codes include `NO_LIBRARY`, `NOT_FOUND`, `EXISTS`, `BAD_ID`, `INDEX_INVALID`, `SQL_ERROR`,
 `READOUTS_MISSING`, `READOUTS_INDEX_INVALID`, `BAD_VERSION`, `BAD_LEVEL`, `BAD_CHANGELOG`,
 `GIT_FAILED`, `INTERNAL` and `INTERRUPTED`, plus the catalogue sync codes.

@@ -57,6 +57,14 @@ python -m rnd bump --note "what changed"  # micro version bump + CHANGELOG secti
 
 每个列表命令都接受 `--json` 作为参数。`rnd.cmd`（Windows）和 `rnd.sh`（POSIX shell）是简单的包装器，因此该命令可以从任何目录运行。
 
+要从其他项目中调用该工具，请从 PyPI 安装它：
+
+```bash
+pip install mcptoolshop-rnd
+```
+
+这会安装 `rnd` 命令，而不是库：这些条目位于此仓库中。该命令按以下顺序查找库：`--library DIR`，然后是 `$RND_ROOT`，然后是当前目录或其上级目录中最近的包含 `entries/` 和 `instruments/` 的文件夹。在库外部，它会停止并显示 `NO_LIBRARY`；只有 `rnd readouts` 才能在没有库的情况下工作。该软件包以 `rnd` 的形式导入，一个名为 `rnd` 的无关 PyPI 软件包也是如此，因此不要在一个环境中同时安装两者。
+
 库每天都在更新，因此版本包含五个部分：`MAJOR.MINOR.PATCH.MICRO.NANO`。前三个部分是 `rnd` 工具的版本；MICRO 表示库结构发生了变化，而 NANO 表示普通更新。`rnd bump` 默认情况下会增加最后一个部分，并从上次标记以来发生更改的文件中生成一个 CHANGELOG 部分，因此每次更新都会获得自己的小型标记版本。
 
 退出代码：`0` 正常 · `1` 无效的库文件 · `2` 用法错误或未找到 · `3` 运行时错误（外部工具或意外错误）。错误会打印代码、消息和提示；`--debug` 会添加堆栈跟踪。

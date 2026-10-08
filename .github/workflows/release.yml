@@ -1,0 +1,51 @@
+name: Release
+
+# Publishes mcptoolshop-rnd to PyPI when a GitHub release is published.
+# Trusted publishing (OIDC): PyPI trusts this repo, this file name and the
+# `pypi` environment, so no token is stored. Releases are for tool changes only
+# (patch and up); library-content bumps are tags without a release.
+#
+# Compensator: a PyPI upload cannot be deleted and re-used. If a release is
+# wrong, yank it on pypi.org (Manage -> Releases -> Yank), fix, and publish the
+# next patch version. Owner: the Director.
+
+on:
+  release:
+    types: [published]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  pypi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: pypi
+    permissions:
+      contents: read
+      id-token: write  # PyPI trusted publishing
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Verify
+        run: bash verify.sh
+
+      - name: Version matches the tag
+        run: |
+          v=$(python -c "import rnd; print(rnd.__version__)")
+          test "v$v" = "${GITHUB_REF_NAME}" || { echo "tag ${GITHUB_REF_NAME} != package v$v"; exit 1; }
+
+      - name: Build and check
+        run: |
+          python -m pip install build==1.6.1 twine==7.0.0
+          python -m build
+          python -m twine check --strict dist/*
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2

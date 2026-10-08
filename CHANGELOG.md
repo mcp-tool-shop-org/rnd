@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.2.3] - 2026-10-08
+
+- Fix: aggregator source URL in the scouting entry
+- Updated `2026-10-08-gated-model-scouting-what-to-request-for-the-critic-audio-an`: Gated model scouting — what to request for the critic, audio and visual research
+
 ## [1.1.3.2.2] - 2026-10-08
 
 - Gated model scouting: what to request for the critic, audio and visual research

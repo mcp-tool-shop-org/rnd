@@ -137,5 +137,5 @@ Qwen3-VL). It is due a refresh through the readouts build.
 - [primary] https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct — Qwen3-VL
 - [primary] https://huggingface.co/facebook/audiobox-aesthetics — Audiobox Aesthetics
 - [primary] https://huggingface.co/OpenMuQ/MuQ-large-msd-iter — MuQ
-- [aggregator] llmreference.com — Nemotron 3 Content Safety details, not cross-checked
+- [aggregator] https://llmreference.com/ — Nemotron 3 Content Safety details, not cross-checked
 - [user] Screenshot of the Director's gated-repo access list, and his request, 2026-10-08; three research agents (claude-sonnet-5-5)

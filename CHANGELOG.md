@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.0.1] - 2026-10-08
+
+- Experiment scripts point at E:/AI/rnd, the local folder's new name
+- Updated experiment `kev-judge-finetune`
+- Updated experiment `openjev-vs-jev`
+
 ## [1.1.3.0.0] - 2026-10-08
 
 - Name-clash fix: the code moves to `mcptoolshop_rnd` (the import name that always works); `rnd` stays as a compatibility shim that aliases every submodule, and the `rnd` command runs `mcptoolshop_rnd.cli:main`, so an unrelated PyPI `rnd` replacing the shim breaks neither the command nor `python -m mcptoolshop_rnd`

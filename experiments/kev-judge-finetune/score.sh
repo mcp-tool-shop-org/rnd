@@ -5,7 +5,7 @@
 set -euo pipefail
 RUN=${1:?run name under /mnt/e/AI-Models/kev/judge-ft/runs}
 RUNDIR=/mnt/e/AI-Models/kev/judge-ft/runs/$RUN
-RES="/mnt/e/AI/Research and Development/experiments/kev-judge-finetune/results"
+RES="/mnt/e/AI/rnd/experiments/kev-judge-finetune/results"
 JUDGE=/mnt/e/AI/aspire-si/examples/sft-experiment/judge_kev.py
 PORT=8011
 mkdir -p "$RES"

@@ -3,7 +3,7 @@
 # usage: bash kev_run.sh 4b|9b
 set -u
 SIZE=$1
-EXP="/e/AI/Research and Development/experiments/openjev-vs-jev"
+EXP="/e/AI/rnd/experiments/openjev-vs-jev"
 LOG=/e/AI-Models/openjev/work/logs; mkdir -p "$LOG"
 say() { echo "$(date +%H:%M:%S) [kev-$SIZE] $*" | tee -a "$LOG/kev.log"; }
 export HF_HOME='E:\AI-Models\hf-cache' HF_HUB_OFFLINE=1 OPENJEV_WORK='E:/AI-Models/openjev/work'

@@ -119,18 +119,26 @@ serves):
 release and likely other 2026 releases (FLUX.2, SAM 3, TRELLIS.2,
 Qwen3-VL). It is due a refresh through the readouts build.
 
+## Corrections (the Director, 2026-10-08)
+
+The agents reported three repos as gated that are **not gated**:
+swiss-ai/Apertus-v1.5-8B, black-forest-labs/FLUX.1-Kontext-dev and
+google/paligemma2-10b-pt-448. Treat them as open. The API "gated" field was
+misread or out of date, so check the repo page itself before calling a repo gated.
+
 ## Access status (2026-10-08, from the Director's gated-repo page)
 
 - **Accepted the same day:**
+  - black-forest-labs/FLUX.2-dev;
   - Google's Gemma models family (covers Gemma 3 and ShieldGemma);
   - CohereLabs/tiny-aya-base;
   - pyannote/speaker-diarization-3.1 and pyannote/segmentation-3.0;
   - stabilityai/stable-audio-open-1.0.
 - **Pending:**
+  - SAM3 (the collection);
   - the Llama 4 collection (expected to include Llama Guard 4);
   - facebook/sam-3d-objects.
-- **Not yet requested:** facebook/sam3, swiss-ai/Apertus-v1.5-8B, FLUX Kontext /
-  FLUX.2, PaliGemma 2.
+- **Open, no request needed:** Apertus, FLUX.1 Kontext, PaliGemma 2.
 
 ## Gemma Terms of Use: what they mean here
 

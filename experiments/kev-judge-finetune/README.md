@@ -105,3 +105,25 @@ Written before the run:
 configs and from `head.pt`, tensors checked unchanged). Uploaded to the private
 Hugging Face repo `mcp-tool-shop/rnd-kev-judge-4b` at revision `51beba99`
 (identity scan clean on the staged folder; Director's go, 2026-10-07).
+
+## Transfer to a different planter (2026-10-08)
+
+aspire-si built 47 pairs on 24 unseen prompts with errors planted by **gemma4:31b**
+(Qwen-written strong answers, the same request and filters; median edit 8 characters
+against Qwen's 5). Scored with `score_set.sh`, on a GPU slot granted by the Publisher.
+
+| | single choice | picks A | order-averaged [95% CI] |
+|---|---|---|---|
+| frozen Kev-4B | 0.521 | 98% | 1.000 (47 of 47) |
+| fine-tune s0 / s1 / s2 | 0.989 each | 51% | 0.989 [0.967, 1.000] |
+
+- **The fine-tune transfers:** trained only on Qwen-planted pairs, it is as good or
+  better on Gemma's plants (0.956–0.963 single choice on Qwen's). It learned errors, not
+  Qwen's editing style, at least as far as one other planter shows.
+- **The frozen model still shows the position bias** (A picked 98%), and is perfect
+  once both orders are averaged.
+- **Caveats:**
+  - 47 pairs give wide intervals;
+  - Gemma's edits are larger (1.6×, inside the 2× line), so these errors may simply be
+    easier;
+  - the three seeds give identical scores here.

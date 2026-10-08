@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.2.5] - 2026-10-08
+
+- Kev judge fine-tune transfers to gemma-planted errors; scouting gating corrections
+- Updated `2026-10-07-open-jev-style-decision-models`: Open Jev-style decision models — the landscape, checked against primary sources
+- Updated `2026-10-08-gated-model-scouting-what-to-request-for-the-critic-audio-an`: Gated model scouting — what to request for the critic, audio and visual research
+- Updated experiment `kev-judge-finetune`
+
 ## [1.1.3.2.4] - 2026-10-08
 
 - Scouting: access status and a reading of the Gemma Terms of Use

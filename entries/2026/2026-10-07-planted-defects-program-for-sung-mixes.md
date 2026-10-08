@@ -241,8 +241,20 @@ own artefact. Even then it is driven by parameters and verified by measurement.
     shipped audio.
   - Pitch slip and a plan-native **stretch** kind (warp ratio outside 0.67–1.5)
     follow in PR 2.
-  - Warp clicks wait on ai-jam-sessions #93 (an explicit crossfade honoured at
-    non-overlapping run seams).
+  - **Clicks (after #93, explicit crossfades at warp seams):**
+    - A seam with no crossfade has two hard edges: where the audio before it stops,
+      and where the cut starts. On real warp joins the first edge lands 10–21 ms
+      *before* the cut, so the check looks at both.
+    - Clicks grade with severity. A 0 ms crossfade clicked 3 of 5 times in each
+      mix; 1–5 ms crossfades clicked far less often, because they often land in
+      phase on real singing.
+    - That makes crossfade length a usable psychometric axis.
+  - **#91 ready for review.** Final warp trial, 100 plants each:
+    - Amazing Grace kept 83: replay 18/20, skip 20/20, click 5/20, sham 20,
+      none 20.
+    - America the Beautiful kept 86: replay 19/20, skip 20/20, click 7/20, sham 20,
+      none 20.
+    - Tests: 31 pass.
 - Step B results will be filed here as rig entries.
 - A native app that can read the system volume and output device is noted for
   later.

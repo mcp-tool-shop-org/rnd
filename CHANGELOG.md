@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.10] - 2026-10-07
+
+- Planted-defects program: planter #91 ready; warp clicks verified at either hard edge of a seam and graded by crossfade length; final warp trial kept 83/100 and 86/100
+- Updated `2026-10-07-planted-defects-program-for-sung-mixes`: Planted defects for sung mixes — an automated planter-versus-detector loop, anchored by the listener's measured threshold
+
 ## [1.1.1.0.9] - 2026-10-07
 
 - Planted-defects program: only 13–15% of shipped warp joins can carry a clean replay/skip once vowel-move and pause compounds are refused; replays now verify 17–18 of 20

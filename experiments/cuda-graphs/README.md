@@ -67,6 +67,36 @@ E:/AI/envs/triton-probe/Scripts/python.exe triton_probe.py
 The probe venv (E:/AI/envs/triton-probe, guarded by the VRAM watchdog): `uv venv --python 3.12`, then `uv pip install triton-windows==3.8.0.post29`, plus
 a `.pth` file naming `E:/AI/envs/aspire-cu134/Lib/site-packages`.
 
-## Results
+## Results (2026-10-08, RTX 5090, torch 2.16.0.dev20261008+cu134, Windows)
 
-(pending the GPU slot)
+Llama-3.2-3B cache (D = 3072), 603 train pairs, scored on 149 confirm pairs. Speedups are original time ÷ mode
+time, the median over seeds 42–44, with capture time included. Full numbers are in `results/2026-10-08-llama.json`.
+
+| Form | Exact gate (dropout 0) | Outcome gate (dropout 0.1) | Train: fast | **Train: graphed** | Score: batched |
+|---|---|---|---|---|---|
+| auditor:mean | pass | pass (0.964 vs 0.966) | 1.19× | **7.25×** | 25× |
+| auditor:attention | pass | pass (0.935 vs 0.924) | 11.0× | **25.4×** | 31× |
+| advocate:mean | **fail** (score Δ 0.052, loss Δ 7.2e-4, 0 flips) | pass (0.951 vs 0.953) | 1.05× | **7.31×** | 13× |
+| advocate:span | pass | pass (0.884 vs 0.895) | 1.07× | **7.20×** | 29× |
+| auditor:mid | pass | pass (0.960 vs 0.960) | 1.04× | **7.67×** | 27× |
+
+- **Pooled forms, about 0.9 s → 0.12 s per head.** The work was launch-bound: an eager step kept the GPU
+  only 12–15% busy, and graphs removed that cost. Moving features onto the GPU alone gained almost nothing.
+- **Attention form, 11.3 s → 0.44 s per head.** Most of the gain (11×) came from moving features onto the GPU,
+  which ended the per-step CPU padding and copy. Graphs added a further 2.3×. The stack costs 9.6 GB of VRAM
+  in fp16.
+- **Scoring:** batching removes the per-pair syncs, a 12–31× gain without graphs.
+- **The exact-gate failure is the optimizer, not the graph.** Diagnosed in the same slot:
+  - training with `AdamW(capturable=True)` eagerly (no graph) and with the graph gives identical losses
+    (max Δ 0.0);
+  - both differ from standard AdamW from step 93 on (max Δ 7.2e-4), because capturable AdamW computes bias
+    correction with device tensors;
+  - so the gate measured an optimizer change it wasn't meant to. The outcome gate, which is what a result
+    rests on, passes on all five forms.
+- **Not run this slot:** the Windows torch.compile/Triton probe (`triton_probe.py`). It needs its own short ask.
+
+**Recommendation for aspire-si:**
+- Take the GPU-resident features and batched scoring now: they're exact (≤ 6e-6) and give 11× training on
+  attention and 12–31× scoring.
+- Take the graphed step where training volume matters (7× more on pooled forms). Run the eager comparison
+  with `capturable=True` too, so the two are bit-identical, and record that the optimizer variant changed.

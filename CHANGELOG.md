@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.1.5] - 2026-10-08
+
+- CUDA graphs measured: 7.2-25x on aspire critic heads
+- Updated `2026-10-07-cuda-graphs`: CUDA Graphs
+- Updated experiment `cuda-graphs`
+- Added experiment `data-designer`
+
 ## [1.1.4.1.4] - 2026-10-08
 
 - kev cu134 passes full band; graphed_heads seeds CUDA RNG

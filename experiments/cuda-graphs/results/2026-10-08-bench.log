@@ -1,0 +1,18 @@
+No prebuilt binary for CUDA 13.4, loading CUDA 13.2 instead. Set BNB_CUDA_VERSION to override.
+W1008 19:13:25.897000 39100 Lib\site-packages\torch\utils\flop_counter.py:113] triton not found; flop counting will not work for triton kernels
+USDT:2026-10-08 19:13:37 39100:12360 C:\actions-runner\_work\pytorch\pytorch\third_party\kineto\libkineto\src\SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-08 19:13:37 39100:12360 C:\actions-runner\_work\pytorch\pytorch\third_party\kineto\libkineto\src\SyncActivityProfilerHandler.cpp:46] profiler_stop
+auditor:mean exact True outcome True train x {'original': 1.0, 'fast': 1.1887887499216698, 'graphed': 7.248844241895762}
+USDT:2026-10-08 19:14:32 39100:12360 C:\actions-runner\_work\pytorch\pytorch\third_party\kineto\libkineto\src\SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-08 19:14:32 39100:12360 C:\actions-runner\_work\pytorch\pytorch\third_party\kineto\libkineto\src\SyncActivityProfilerHandler.cpp:46] profiler_stop
+auditor:attention exact True outcome True train x {'original': 1.0, 'fast': 10.956638208468165, 'graphed': 25.397530563694616}
+USDT:2026-10-08 19:14:40 39100:12360 C:\actions-runner\_work\pytorch\pytorch\third_party\kineto\libkineto\src\SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-08 19:14:41 39100:12360 C:\actions-runner\_work\pytorch\pytorch\third_party\kineto\libkineto\src\SyncActivityProfilerHandler.cpp:46] profiler_stop
+advocate:mean exact False outcome True train x {'original': 1.0, 'fast': 1.0534232916680062, 'graphed': 7.305392872383559}
+USDT:2026-10-08 19:14:49 39100:12360 C:\actions-runner\_work\pytorch\pytorch\third_party\kineto\libkineto\src\SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-08 19:14:49 39100:12360 C:\actions-runner\_work\pytorch\pytorch\third_party\kineto\libkineto\src\SyncActivityProfilerHandler.cpp:46] profiler_stop
+advocate:span exact True outcome True train x {'original': 1.0, 'fast': 1.0700505691639688, 'graphed': 7.198490505813004}
+USDT:2026-10-08 19:14:58 39100:12360 C:\actions-runner\_work\pytorch\pytorch\third_party\kineto\libkineto\src\SyncActivityProfilerHandler.cpp:39] profiler_start
+USDT:2026-10-08 19:14:58 39100:12360 C:\actions-runner\_work\pytorch\pytorch\third_party\kineto\libkineto\src\SyncActivityProfilerHandler.cpp:46] profiler_stop
+auditor:mid exact True outcome True train x {'original': 1.0, 'fast': 1.0416361972820602, 'graphed': 7.667528098923458}
+BENCH-OK results\2026-10-08-llama.json

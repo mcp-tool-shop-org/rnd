@@ -3,7 +3,7 @@ id: 2026-10-07-cuda-graphs
 title: CUDA Graphs
 date: 2026-10-07
 kind: concept
-relevance: reference
+relevance: act
 fields: [gpu-computing, systems-performance]
 tags: [cuda-graphs, pytorch, vllm, llama.cpp, launch-overhead]
 ---
@@ -22,10 +22,11 @@ CUDA Graphs record a sequence of GPU work (kernel launches, copies) once, with i
 
 Mostly already working for us under the hood: LLM engines use graphs for single-token decoding, where launch overhead is large relative to the work. Diffusion steps are big kernels, so graphs buy little in ComfyUI. If the studio ever runs a custom torch inference loop, `reduce-overhead` is the cheap thing to try.
 
-Build-out (2026-10-08, asked by the Director via ASPIRE): `experiments/cuda-graphs/` holds a drop-in graphed trainer for aspire-si's critic heads, CPU equivalence tests, and a benchmark with correctness gates fixed before the run. GPU measurements are pending a Publisher slot. Before any run, the critic heads' pooled forms look launch-bound (graph candidates); the attention form looks copy-bound (CPU padding plus a host-to-device copy each step), where GPU-resident features should matter more than graphs.
+Build-out (2026-10-08, asked by the Director via ASPIRE): `experiments/cuda-graphs/` holds a drop-in graphed trainer for aspire-si's critic heads, CPU equivalence tests, and a benchmark with correctness gates fixed before the run. Measured 2026-10-08 on the 5090: graphed training is 7.2–7.7× faster on pooled heads and 25× on the attention head; scoring is 12–31× faster from batching; outcomes match the original's CI on 5/5 forms (see the experiment README). Before any run, the critic heads' pooled forms look launch-bound (graph candidates); the attention form looks copy-bound (CPU padding plus a host-to-device copy each step), where GPU-resident features should matter more than graphs.
 
 ## Claims
 
+- [verified] Graph capture of a whole critic-head training step, meaning forward, backward and capturable AdamW, is bit-identical to the same training run eagerly; the only drift from aspire-si's original comes from AdamW with capturable=True vs standard AdamW, max loss Δ 7.2e-4 over 380 steps. (via: R&D bench and diagnostic, RTX 5090, 2026-10-08)
 - [unverified] triton-windows 3.8.0.post29 is the newest release (PyPI, 2026-09-28); the cu134 nightly pairs with Triton 3.9. It imports with torch 2.16.0.dev20261008+cu134 on Windows, and whether it compiles is untested (via: probe venv import check, 2026-10-08).
 - [unverified] llama.cpp enables CUDA graphs by default for single-sequence decoding (from memory; check the current build).
 

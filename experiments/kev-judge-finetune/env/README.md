@@ -98,3 +98,28 @@ rejects.
   still isolates CUDA.
 
 When fla releases 0.5.3 or later with #1330, move both envs to it and drop the patch.
+
+## Result, 2026-10-08: cu134 PASSES the full band, so it is the Kev training env
+
+The rerun used `.venv-cu134` with fla 0.5.2 plus the #1330 line (patched-file sha256 `1725556d…70aa`).
+
+| Gate | Band | cu128 ref | cu134, no fla (1st try) | **cu134** |
+|---|---|---|---|---|
+| steps, finite loss | 30 | 30 | 30 | **30** (final loss 0.163) |
+| grad_norm mean | 4.5–18.1 | 9.07 | 8.94 | **8.91** |
+| peak device | ≤ 13 GB | 10.48 | 11.02 | **10.50** |
+| truncated / rejected | 0 / 0 | 0 / 0 | 0 / 0 | **0 / 0** |
+| median step | ≤ 6.55 s | 5.24 | 18.75 ✗ | **5.45** |
+| wall | reported | 219 s | 578 s | 201 s |
+| confirm, order-averaged | ≥ 0.9536 | 0.9799 | not run | **0.9799**, CI [0.954, 1.0] |
+| per-pair agreement with cu128 | ≥ 146/149 | — | — | **149/149** (max Δp 0.011) |
+
+- **Output:** the smoke is `runs/judge-4b-smoke-s0-cu134`; the first try's slow run stays as
+  `runs/judge-4b-smoke-s0-cu134-nofla`.
+- **Confirm file:** `results/judge-4b-full-s0-confirm-cu134.json`.
+- **Utilisation:** `results/2026-10-08-cu134-rerun-gpu-util.csv`.
+
+**The GPU is not saturated:** about 35% busy (median 35%, p90 61%) during the smoke. Kev trains with
+batch 1 plus checkpointing. `causal_conv1d` is missing in every env, cu128 included, and transformers warns
+that its fallback is "much slower". causal_conv1d is a compiled CUDA extension, so a CUDA 13.4 build needs
+nvcc 13.4 in WSL; WSL has 12.8 today. It's a candidate speed-up, not done.

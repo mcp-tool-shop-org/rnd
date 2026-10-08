@@ -29,6 +29,9 @@ Capture rules this code follows (each one breaks capture or silently corrupts it
   place afterwards (same storage, so the captured addresses stay valid), so the graphed run starts
   from the same state as an eager run.
 - AdamW is built with `capturable=True`, which keeps its step count on the device.
+- Seeding covers the CUDA generator too, and one RNG fork spans init and training: dropout runs on
+  the GPU, so seeding only the CPU made each head depend on the heads trained before it in the same
+  process. The graphed path reseeds CUDA after warmup, which also draws dropout masks.
 - Dropout works under capture (PyTorch registers the generator with the graph), but its masks are
   drawn differently from eager mode. Bit-level comparisons need dropout 0. With dropout on, the
   comparison is statistical: the validation result must fall within the eager result's interval.
@@ -113,7 +116,9 @@ class GraphedStep:
     into the graph's static index buffer and replays it; it returns the step's loss tensor, which
     the next replay overwrites (clone it to keep it)."""
 
-    def __init__(self, head, opt, x, m, role: str, sizes: Sequence[int], warmup: int = 3):
+    def __init__(
+        self, head, opt, x, m, role: str, sizes: Sequence[int], warmup: int = 3, seed: int | None = None
+    ):
         import torch
 
         if opt.state:
@@ -144,6 +149,10 @@ class GraphedStep:
                 for v in state.values():
                     if torch.is_tensor(v):
                         v.zero_()
+        # Warmup also drew dropout masks from the CUDA generator. Reseed it, so the captured graphs
+        # start from the head's own seed (replays then advance philox offsets deterministically).
+        if seed is not None:
+            torch.cuda.manual_seed(seed)
 
         for size in self.idx:
             opt.zero_grad(set_to_none=True)  # each graph allocates its own grads in its own pool
@@ -184,15 +193,25 @@ def train_head_fast(
     if head_factory is None:
         from aspire.critic import CriticHead as head_factory
 
-    with torch.random.fork_rng(devices=[]):
-        torch.default_generator.manual_seed(seed)
-        head = head_factory(
-            input_dim=x.shape[-1],
-            hidden_dim=hparams["hidden_dim"],
-            num_layers=hparams["num_layers"],
-            dropout=hparams["dropout"],
-            pooling="attention" if pooling == "attention" else "mean",
-        )
+    # One fork over init AND training, seeding CPU and CUDA: dropout runs on the GPU, so an unseeded
+    # CUDA generator made each head depend on how many heads trained before it in the process
+    # (found by ASPIRE, 2026-10-08). The fork restores the caller's RNG state afterwards.
+    cuda = x.device.type == "cuda"
+    with torch.random.fork_rng(devices=[x.device] if cuda else []):
+        torch.manual_seed(seed)
+        return _train(role, pooling, seed, x, m, lengths, pair_index, labels_flip, hparams, graphs, head_factory)
+
+
+def _train(role, pooling, seed, x, m, lengths, pair_index, labels_flip, hparams, graphs, head_factory):
+    import torch
+
+    head = head_factory(
+        input_dim=x.shape[-1],
+        hidden_dim=hparams["hidden_dim"],
+        num_layers=hparams["num_layers"],
+        dropout=hparams["dropout"],
+        pooling="attention" if pooling == "attention" else "mean",
+    )
     head = head.to(x.device)
     opt = torch.optim.AdamW(
         head.parameters(), lr=hparams["lr"], weight_decay=hparams["weight_decay"], capturable=graphs
@@ -207,7 +226,7 @@ def train_head_fast(
     head.train()
     losses = []
     if graphs:
-        runner = GraphedStep(head, opt, x, m, role, [len(ks) for ks in plan])
+        runner = GraphedStep(head, opt, x, m, role, [len(ks) for ks in plan], seed=seed)
         for lo, hi in bounds:
             losses.append(runner.step(flat[lo:hi]).detach().clone())
     else:

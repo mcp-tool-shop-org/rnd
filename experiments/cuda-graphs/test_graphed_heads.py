@@ -74,6 +74,32 @@ class Equivalence(unittest.TestCase):
     def test_advocate_mean_length1(self):
         self.check("advocate", "mean", 1)
 
+    def test_a_head_does_not_depend_on_heads_trained_before_it(self):
+        # Dropout on: each head's masks must come from its own seed, not from how much RNG earlier
+        # heads in the process consumed (the defect ASPIRE found in train_head, 2026-10-08).
+        feats, masks, index = fake_cache(13, 24, 9)
+        hp = {**HPARAMS, "hidden_dim": 16, "dropout": 0.3, "epochs": 2, "batch_pairs": 4}
+        x, m, lens = stack_features(feats, masks, "cpu")
+        torch.manual_seed(1234)
+        alone, losses_alone = train_head_fast("auditor", "attention", 43, x, m, lens, index, None, hp)
+        torch.manual_seed(1234)
+        train_head_fast("auditor", "attention", 42, x, m, lens, index, None, hp)  # an earlier head
+        torch.rand(1000)  # and unrelated RNG use in between
+        after, losses_after = train_head_fast("auditor", "attention", 43, x, m, lens, index, None, hp)
+        self.assertEqual(losses_alone, losses_after)
+        for p, q in zip(alone.parameters(), after.parameters()):
+            self.assertTrue(torch.equal(p, q))
+
+    def test_training_leaves_the_callers_rng_alone(self):
+        feats, masks, index = fake_cache(5, 8, 4)
+        hp = {**HPARAMS, "hidden_dim": 8, "dropout": 0.3, "epochs": 1, "batch_pairs": 2}
+        x, m, lens = stack_features(feats, masks, "cpu")
+        torch.manual_seed(7)
+        expected = torch.rand(3)
+        torch.manual_seed(7)
+        train_head_fast("advocate", "mean", 42, x, m, lens, index, None, hp)
+        self.assertTrue(torch.equal(torch.rand(3), expected))
+
     def test_stack_pads_with_zero_mask(self):
         feats, masks, _ = fake_cache(2, 4, 6)
         x, m, lens = stack_features(feats, masks, "cpu")

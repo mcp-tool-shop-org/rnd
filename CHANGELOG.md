@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.1.4] - 2026-10-08
+
+- kev cu134 passes full band; graphed_heads seeds CUDA RNG
+- Updated experiment `cuda-graphs`
+- Added experiment `data-designer`
+- Updated experiment `kev-judge-finetune`
+
 ## [1.1.4.1.3] - 2026-10-08
 
 - kev cu134 rerun prep: fla/fastapi restored, fla #1330 patch, speed gate

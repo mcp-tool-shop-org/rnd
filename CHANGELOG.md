@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.1.0] - 2026-10-08
+
+- Dataset recipes for critic jury roles: evidence, recipe card, controls, panel selection, role-os connection
+- Added `2026-10-08-dataset-recipes-for-critic-jury-roles-designing-roles-by-dat`: Dataset recipes for critic jury roles — designing roles by data and choosing the panel
+
 ## [1.1.3.0.8] - 2026-10-08
 
 - ASPIRE critic-init: report PR #44; seed-44 composite critic may have been an inverted draw

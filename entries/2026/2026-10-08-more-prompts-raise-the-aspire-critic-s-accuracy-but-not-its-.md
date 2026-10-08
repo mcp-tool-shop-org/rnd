@@ -58,7 +58,8 @@ Prompt count alone does not fix critic variance.
   still cannot be trusted. Keep three seeds per arm and pre-registered rules. The
   next lever to test is the seed itself: fix the critic-head initialisation
   across seeds while varying sampling, and the reverse, to see which carries the
-  0.18 spread.
+  0.18 spread. Session A has put it to the Director as the leading option;
+  nothing is planned until he decides.
 - **For anyone needing a judge of planted errors now:** use Kev-4B averaged over
   both orders, or the Kev judge fine-tune, not an ASPIRE critic.
 - **For offrig planning:** the two lessons above go into how pod time is
@@ -74,5 +75,6 @@ Prompt count alone does not fix critic variance.
 ## Sources
 
 - [rig] aspire-si step 2, seeds 42–44 at 128 prompts, offrig plan 19, 2026-10-08, run and measured by session A; data at the aspire-si runs folder `2026-10-08-p128/plan19/`
+- [primary] https://github.com/mcp-tool-shop-org/aspire-si/pull/42 — step 2 run report (docs/runs/2026-10-08-step-2.md)
 - [primary] https://github.com/mcp-tool-shop-org/aspire-si/pull/35 — the rules committed before the run
-- [user] Result relayed by session A (aspire-si), 2026-10-08; the run report PR is to follow
+- [user] Result relayed by session A (aspire-si), 2026-10-08

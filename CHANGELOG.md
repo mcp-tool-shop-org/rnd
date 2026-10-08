@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.0.6] - 2026-10-08
+
+- ASPIRE step 2: report PR #42 as primary source
+- Updated `2026-10-08-more-prompts-raise-the-aspire-critic-s-accuracy-but-not-its-`: More prompts raise the ASPIRE critic's accuracy but not its spread between seeds
+
 ## [1.1.3.0.5] - 2026-10-08
 
 - ASPIRE step 2: more prompts raise the critic's level, not its seed spread

@@ -6,6 +6,7 @@ annotated-doc==0.0.5
 annotated-types==0.8.0
 anyio==4.15.1
 attrs==26.1.0
+causal-conv1d @ file://~/kev/wheels/causal_conv1d-1.7.0-cp312-cp312-linux_x86_64.whl
 certifi==2026.7.22
 click==8.5.0
 cloudpickle==3.1.2

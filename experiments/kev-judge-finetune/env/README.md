@@ -123,3 +123,27 @@ The rerun used `.venv-cu134` with fla 0.5.2 plus the #1330 line (patched-file sh
 batch 1 plus checkpointing. `causal_conv1d` is missing in every env, cu128 included, and transformers warns
 that its fallback is "much slower". causal_conv1d is a compiled CUDA extension, so a CUDA 13.4 build needs
 nvcc 13.4 in WSL; WSL has 12.8 today. It's a candidate speed-up, not done.
+
+## causal-conv1d for cu134 (built 2026-10-08, GPU test pending)
+
+**Why:** Qwen3.5's short convolution falls back to PyTorch without `causal_conv1d`, which transformers
+warns is "much slower". The cu134 smoke kept the GPU only about 35% busy.
+
+**The build:** CPU only, with no system change (the Director approved nvcc 13.4 in WSL; the Publisher set the
+guardrails).
+- NVIDIA's wsl-ubuntu apt repo has no `cuda-toolkit-13-4` (it stops at 13-3), so nvcc comes from the pip wheel
+  `nvidia-cuda-nvcc==13.4.59`.
+- It lives in a separate build venv, `~/kev/kev/.venv-cu134-build`, with the same torch pin. That venv
+  isn't on the watchdog pattern, so it is CPU-only.
+- Settings: `CUDA_HOME=<build venv>/site-packages/nvidia/cu13`, `TORCH_CUDA_ARCH_LIST=12.0` (sm_120, the
+  5090 only), `CAUSAL_CONV1D_FORCE_BUILD=TRUE`, `MAX_JOBS=16`.
+- The cu13 wheels ship `libcudart.so.13` but no `libcudart.so`, so a private link stub
+  (`~/kev/cuda134-linkstubs/libcudart.so` → `.so.13`) goes on `LIBRARY_PATH` for the link step.
+- **Wheel:** `~/kev/wheels/causal_conv1d-1.7.0-cp312-cp312-linux_x86_64.whl`, sha256 `5c704322…109bd`. It's
+  installed `--no-deps` in `.venv-cu134`, the only change to that env. It imports with the GPU hidden.
+- **Cloud cards** (sm_80 A100, sm_100 B200) need their own build, with those arches added.
+
+**GPU test (needs a slot):**
+- the same smoke and confirm band;
+- the speed gate's reference stays 5.24 s; the question is how far below 5.45 s it goes;
+- a direct check that causal_conv1d's forward matches transformers' PyTorch fallback.

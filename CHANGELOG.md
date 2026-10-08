@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.1.6] - 2026-10-08
+
+- causal-conv1d built for cu134 via pip nvcc 13.4
+- Added experiment `data-designer`
+- Updated experiment `kev-judge-finetune`
+
 ## [1.1.4.1.5] - 2026-10-08
 
 - CUDA graphs measured: 7.2-25x on aspire critic heads

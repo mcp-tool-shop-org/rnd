@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.2.1] - 2026-10-07
+
+- Kev judge weights in the private HF repo
+- Updated `2026-10-07-open-jev-style-decision-models`: Open Jev-style decision models — the landscape, checked against primary sources
+- Updated experiment `kev-judge-finetune`
+
 ## [1.1.1.2.0] - 2026-10-07
 
 - Kev-4B judge fine-tune: three seeds pass the pre-registered rule; aspire-si confirmation filed

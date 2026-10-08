@@ -97,5 +97,6 @@ Written before the run:
   outcome. Not investigated.
 
 **Weights:** `stage_hf.py` stages the three adapters (rig paths stripped from the
-configs and from `head.pt`, tensors checked unchanged) for the private Hugging
-Face repo `mcp-tool-shop/rnd-kev-judge-4b`.
+configs and from `head.pt`, tensors checked unchanged). Uploaded to the private
+Hugging Face repo `mcp-tool-shop/rnd-kev-judge-4b` at revision `51beba99`
+(identity scan clean on the staged folder; Director's go, 2026-10-07).

@@ -202,8 +202,8 @@ Kev-9B ran on the same 124 phrase-clean records as hosted Jev and OpenJev, both
     was already as good. The training pairs were planted the same way as the
     confirmation set, so only the judge set speaks to transfer.
   - aspire-si keeps the frozen Kev-4B as its pre-registered reference judge, with
-    the fine-tune reported beside it. Weights are staged for a private Hugging
-    Face repo, `mcp-tool-shop/rnd-kev-judge-4b` (upload pending).
+    the fine-tune reported beside it. Weights: private Hugging Face repo
+    `mcp-tool-shop/rnd-kev-judge-4b` @ `51beba99`, one folder per seed.
 - **Prompting** is limited. Kev is not a chat model: it reads the state, the
   question's instructions and each option's description. Its own evidence is to
   give it derived facts, not rubrics: `KEV_DATE_FACTS=1` appends day counts and

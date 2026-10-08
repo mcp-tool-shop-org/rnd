@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.2.6] - 2026-10-08
+
+- Gemma licensing checked at the source: Gemma 4 is Apache-2.0, outside the Gemma Terms
+- Updated `2026-10-08-gated-model-scouting-what-to-request-for-the-critic-audio-an`: Gated model scouting — what to request for the critic, audio and visual research
+
 ## [1.1.3.2.5] - 2026-10-08
 
 - Kev judge fine-tune transfers to gemma-planted errors; scouting gating corrections

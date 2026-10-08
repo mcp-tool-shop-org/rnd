@@ -165,19 +165,96 @@ published:
 - **Rule of thumb:** Gemma 3 for research comparisons; **Gemma 4 (Apache-2.0)
   for anything that ships**, since it carries none of these terms.
 
+## Which licence covers which Gemma, checked at the source (2026-10-08)
+
+The Director asked (through session A) whether Gemma's "strict guardrails" bind
+the studio's three uses.
+
+**Scope of the Gemma Terms.** They apply only to the models listed in their
+appendix (last modified 2026-04-01):
+- **listed:** Gemma 1, 1.1, 2 and 3, Gemma 3n, PaliGemma and PaliGemma 2,
+  ShieldGemma 1 and 2, CodeGemma, RecurrentGemma, TranslateGemma, T5Gemma,
+  VaultGemma, EmbeddingGemma, FunctionGemma, DataGemma and Gemma Scope;
+- **not listed: Gemma 4.** The terms point it to a separate "Gemma 4 license",
+  which is the unmodified Apache License 2.0 (page updated 2026-04-01).
+- The local `gemma4:31b` (Ollama ID 6316f0629137) carries Apache-2.0 in its own
+  manifest (`ollama show --license`).
+- On Hugging Face, gemma-4-31B-it and gemma-4-E4B-it are Apache-2.0 and ungated;
+  gemma-3-4b-it is gated under the "gemma" licence.
+- **Ungated is not the same as unencumbered:** PaliGemma 2 is not gated but is
+  under the Gemma Terms. The TranslateGemma used for README translations is
+  under the Gemma Terms too. Its translations are Outputs, so nothing follows
+  from that.
+
+**The Prohibited Use Policy** (modified 2024-02-21) binds Gemma-Terms models
+only.
+- Its misinformation section targets content intended to mislead people, and
+  its impersonation and provenance clauses require intent to deceive.
+- It says nothing about test data, evaluation or research.
+- Labelled planted-error test data, made to evaluate critics and never presented
+  to anyone as true, reads as outside it.
+
+**The three uses:**
+1. **gemma4:31b planting errors for the 47-pair evaluation set: allowed, no
+   conditions.**
+   - Apache-2.0 has no use policy, and its obligations (a copy of the licence, a
+     NOTICE file, marking changes) apply only when redistributing the model or
+     derivative works, not its outputs.
+   - Nothing in step 2 needs correcting. A provenance line in the set's report
+     is good practice: "errors planted by gemma4:31b (Gemma 4, Apache-2.0,
+     local Ollama 6316f0629137)".
+2. **A Gemma feature source for critic heads.**
+   - **Gemma 4 E4B: allowed, no conditions.** It is also the right family
+     match, since the planter was Gemma 4.
+   - **Gemma 3 4B: allowed with conditions.** A head that only works on Gemma
+     3's hidden states is a "work based on Gemma", so treat it as a Model
+     Derivative (the conservative reading). Internal use must keep to the
+     Prohibited Use Policy. Distribution needs:
+     - the Section 3.2 use restrictions flowed down in the governing licence;
+     - a copy of the terms;
+     - modified files marked;
+     - a NOTICE file with Google's required sentence.
+3. **Sharing in a public repo.**
+   - **Score files, reports, model cards and planted datasets:** allowed. They
+     are Outputs or derived data, Google claims no rights in Outputs, and no
+     notice is required (crediting the planter is good practice).
+   - **Heads built on Gemma 4:** allowed. Name the base model and its Apache-2.0
+     licence.
+   - **Heads built on Gemma 3:** allowed only with the four conditions above.
+     Choosing Gemma 4 avoids them.
+   - **Off-limits under both:** implying Google's endorsement or using its
+     trademarks.
+
+**Other licences in the same experiment** (flagged, not researched in depth):
+- **Step 4's Llama-3.2-3B heads:** the Llama 3.2 Community License has its own
+  attribution and naming conditions for distributed derivative models ("Built
+  with Llama").
+- **Qwen2.5-3B:** under the Qwen research licence (non-commercial).
+
+Read both before publishing any heads trained on those sources.
+
+This is R&D's reading, not legal advice. For the recommended path (Gemma 4,
+Apache-2.0) it is low-risk. If heads built on Gemma 3 or Llama are ever
+published, have the Director run one by-hand check on Grok or Gemini first
+(Standing Rule 1: no cloud verifier from here).
+
 ## Claims
 
 - [verified] google/gemma-4-31B-it and the smaller Gemma 4 instruct models are Apache-2.0 and not gated, while google/gemma-3-27b-it, gemma-3-4b-it and shieldgemma-2-4b-it are gated with manual approval. (via: research agent reading the Hugging Face model API, 2026-10-08)
 - [verified] pyannote/segmentation-3.0 (MIT) and pyannote/speaker-diarization-community-1 (CC-BY-4.0) are gated with automatic approval; stabilityai/stable-audio-open-1.0 is gated by an automatic form. (via: research agent reading the Hugging Face model API, 2026-10-08)
 - [verified] facebook/sam3 and facebook/sam-3d-objects are gated with manual approval under non-standard ("other") licences. (via: research agent reading the Hugging Face model API, 2026-10-08)
 - [verified] Qwen3-VL-8B/32B-Instruct are Apache-2.0 and ungated; UnifiedReward-2.0-qwen3vl-8b and TRELLIS.2-4B are MIT and ungated. (via: research agent reading the Hugging Face model API, 2026-10-08)
-- [unverified] Critics trained on Gemma-3-planted data are not Model Derivatives under the Gemma Terms of Use, because they are not trained to perform similarly to Gemma (R&D's reading of the terms the Director pasted, 2026-10-08; not legal advice).
+- [verified] Gemma 4 is not in the Gemma Terms of Use appendix and is licensed under the plain Apache License 2.0; the local gemma4:31b (6316f0629137) manifest carries Apache-2.0. (via: R&D reading ai.google.dev/gemma/terms, ai.google.dev/gemma/docs/gemma_4_license, the HF API and `ollama show --license`, 2026-10-08)
+- [unverified] Critic heads trained on Gemma 3 hidden states count as Model Derivatives (a "work based on Gemma"), while critics merely trained on Gemma-planted data do not (R&D's reading, not legal advice).
 - [unverified] Licence terms beyond the API's licence tags (use restrictions, any clause against training other models) for the Gemma terms, the SAM licence, Stable Audio Community, EXAONE and Bespoke-MiniCheck. Read each card before relying on it.
 
 ## Sources
 
 - [primary] https://huggingface.co/api/models — Hugging Face model API records for each repo above, read 2026-10-08
 - [primary] https://huggingface.co/google/gemma-4-31B-it — Gemma 4 31B card
+- [primary] https://ai.google.dev/gemma/terms — Gemma Terms of Use and appendix (modified 2026-04-01)
+- [primary] https://ai.google.dev/gemma/docs/gemma_4_license — Gemma 4 license (Apache-2.0)
+- [primary] https://ai.google.dev/gemma/prohibited_use_policy — Gemma Prohibited Use Policy (modified 2024-02-21)
 - [primary] https://huggingface.co/facebook/sam3 — SAM 3
 - [primary] https://huggingface.co/facebook/sam-3d-objects — SAM 3D Objects
 - [primary] https://huggingface.co/pyannote/segmentation-3.0 — pyannote segmentation

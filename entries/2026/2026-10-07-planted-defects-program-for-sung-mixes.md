@@ -249,7 +249,14 @@ own artefact. Even then it is driven by parameters and verified by measurement.
       mix; 1–5 ms crossfades clicked far less often, because they often land in
       phase on real singing.
     - That makes crossfade length a usable psychometric axis.
-  - **PR 2: ai-jam-sessions #95** (opened after alt picks #94 merged; in review).
+  - **PR 2: ai-jam-sessions #95, merged** (2a9072c).
+  - **Step B is split:** ai-jam-sessions builds the clips plus a per-clip
+    phrase-evidence mode; the R&D seat builds the MERT and Dasheng frozen-feature
+    heads.
+  - **Licence check, for shipping:** MERT-v1-330M is CC BY-NC 4.0, research only
+    (like OpenJev). Dasheng-0.6B is Apache-2.0. A detector that ships in the
+    product needs the Dasheng path, or a licence for MERT. (Checked on Hugging
+    Face, 2026-10-07.)
     - **New kinds:**
       - stretch (a warp ratio of 0.5, 0.6, 1.6 or 2.0, vowels kept on time);
       - pitch slip (WORLD, formant-preserving, ±1 and ±12 semitones);
@@ -423,6 +430,7 @@ fits the 5090.
 - [unverified] With conformal risk control at α = 0.10 and n = 40 calibration judgements, a cutoff is valid if at most 3 of 40 flags are "not heard" (our arithmetic from Angelopoulos et al.'s bound).
 - [unverified] Qwen3-Omni-30B-A3B in BF16 needs 78.9 GB or more per its model card; a community AWQ 4-bit checkpoint exists, and its VRAM (about 17–22 GB, talker off) is an estimate.
 - [unverified] MERT-v1-330M scores 87.1 on MARBLE's constrained probe setting (Yuan et al. 2023).
+- [verified] MERT-v1-330M is licensed CC BY-NC 4.0 and Dasheng-0.6B Apache-2.0. (via: Hugging Face model metadata for m-a-p/MERT-v1-330M and mispeech/dasheng-0.6B, 2026-10-07)
 - [unverified] No published work was found for a regret-rewarded defect planter in audio, nor for listener catch-trial thresholds used to set a detector's flag line (absence from seven research agents' searches, 2026-10-07).
 
 ## Sources

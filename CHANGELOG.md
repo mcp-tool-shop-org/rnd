@@ -11,6 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.2.0] - 2026-10-08
+
+- verifier grounded gold set, batches 1-2 (111 claims)
+- Updated experiment `cuda-graphs`
+- Added experiment `data-designer`
+- Added experiment `kev-judge-finetune`
+- Added experiment `verifier-gold`
+
 ## [1.1.4.1.6] - 2026-10-08
 
 - causal-conv1d built for cu134 via pip nvcc 13.4

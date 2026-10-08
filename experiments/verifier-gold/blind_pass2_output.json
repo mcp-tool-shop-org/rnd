@@ -1,0 +1,322 @@
+[
+ {
+  "n": 1,
+  "reasoning": "Code requires exactly \"1\", not any non-empty value.",
+  "label": "unsupported"
+ },
+ {
+  "n": 2,
+  "reasoning": "keywordScore>=3 high, >=2 medium.",
+  "label": "supported"
+ },
+ {
+  "n": 3,
+  "reasoning": "total<=0 returns null.",
+  "label": "supported"
+ },
+ {
+  "n": 4,
+  "reasoning": "Constants 2000 and 50.",
+  "label": "supported"
+ },
+ {
+  "n": 5,
+  "reasoning": "Below the floor pushes to errors, not a note.",
+  "label": "unsupported"
+ },
+ {
+  "n": 6,
+  "reasoning": "passed with no measure pushes a warning.",
+  "label": "supported"
+ },
+ {
+  "n": 7,
+  "reasoning": "Filter requires corrections === 0, not at most one.",
+  "label": "unsupported"
+ },
+ {
+  "n": 8,
+  "reasoning": "It pushes a warning, not an error.",
+  "label": "unsupported"
+ },
+ {
+  "n": 9,
+  "reasoning": "Failed or unresolved problems exclude unless allowUnproven.",
+  "label": "supported"
+ },
+ {
+  "n": 10,
+  "reasoning": "Comment says gaps never exclude.",
+  "label": "supported"
+ },
+ {
+  "n": 11,
+  "reasoning": "Same runId returns false before append.",
+  "label": "supported"
+ },
+ {
+  "n": 12,
+  "reasoning": "Thresholds are 3 and 2, not 2 and 1.",
+  "label": "unsupported"
+ },
+ {
+  "n": 13,
+  "reasoning": "It returns false without replacing.",
+  "label": "unsupported"
+ },
+ {
+  "n": 14,
+  "reasoning": "+0.5 per clean run, Math.min cap 2.0.",
+  "label": "supported"
+ },
+ {
+  "n": 15,
+  "reasoning": "Set has reopen, not reject.",
+  "label": "unsupported"
+ },
+ {
+  "n": 16,
+  "reasoning": "Confidence uses scores[topPack], the unboosted keyword score.",
+  "label": "supported"
+ },
+ {
+  "n": 17,
+  "reasoning": "Evidence does not show outcome recording being gated by the switch.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 18,
+  "reasoning": "Status must be unresolved, not failed.",
+  "label": "unsupported"
+ },
+ {
+  "n": 19,
+  "reasoning": "Non-overlapping CIs with status other than unresolved pushes an error.",
+  "label": "supported"
+ },
+ {
+  "n": 20,
+  "reasoning": "Excluded for lack of a card only when requireRecipe is set.",
+  "label": "unsupported"
+ },
+ {
+  "n": 21,
+  "reasoning": "Boost only when status is measured, else 0.",
+  "label": "supported"
+ },
+ {
+  "n": 22,
+  "reasoning": "Cutoff is 0.9 and at-or-above, not above 0.95.",
+  "label": "unsupported"
+ },
+ {
+  "n": 23,
+  "reasoning": "Filter requires completed and corrections===0.",
+  "label": "supported"
+ },
+ {
+  "n": 24,
+  "reasoning": "Returns insufficient-data with bagged null.",
+  "label": "supported"
+ },
+ {
+  "n": 25,
+  "reasoning": "Only a constant is shown; no flag visible.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 26,
+  "reasoning": "Comment states at or above 0.9.",
+  "label": "supported"
+ },
+ {
+  "n": 27,
+  "reasoning": "belowPermutationFloor pushes an error.",
+  "label": "supported"
+ },
+ {
+  "n": 28,
+  "reasoning": "With no id it uses requireActiveRun, the active run.",
+  "label": "unsupported"
+ },
+ {
+  "n": 29,
+  "reasoning": "Unresolved problems also exclude unless allowUnproven.",
+  "label": "unsupported"
+ },
+ {
+  "n": 30,
+  "reasoning": "It returns the lower middle value, not the mean.",
+  "label": "unsupported"
+ },
+ {
+  "n": 31,
+  "reasoning": "Cap is 2.0, not 3.0.",
+  "label": "unsupported"
+ },
+ {
+  "n": 32,
+  "reasoning": "Non-balanced method pushes a warning, not an error.",
+  "label": "unsupported"
+ },
+ {
+  "n": 33,
+  "reasoning": "Threshold is present in at least half of bags (present*2>=bags).",
+  "label": "unsupported"
+ },
+ {
+  "n": 34,
+  "reasoning": "More than one argument throws a usage error.",
+  "label": "unsupported"
+ },
+ {
+  "n": 35,
+  "reasoning": "CONTROL_STATUS lists exactly those four.",
+  "label": "supported"
+ },
+ {
+  "n": 36,
+  "reasoning": "Index floor((n-1)/2) picks the lower middle.",
+  "label": "supported"
+ },
+ {
+  "n": 37,
+  "reasoning": "high is Math.min(1, ...).",
+  "label": "supported"
+ },
+ {
+  "n": 38,
+  "reasoning": "Set contains reroute, retry, reopen.",
+  "label": "supported"
+ },
+ {
+  "n": 39,
+  "reasoning": "Returns insufficient-data, no re-admission.",
+  "label": "unsupported"
+ },
+ {
+  "n": 40,
+  "reasoning": "Requires ci[0] > 0.5 strictly.",
+  "label": "supported"
+ },
+ {
+  "n": 41,
+  "reasoning": "Comment says gaps never exclude.",
+  "label": "unsupported"
+ },
+ {
+  "n": 42,
+  "reasoning": "Reason text and insufficient-data decision for that case.",
+  "label": "supported"
+ },
+ {
+  "n": 43,
+  "reasoning": "Pushed to warnings.",
+  "label": "supported"
+ },
+ {
+  "n": 44,
+  "reasoning": "Upper bound is clamped with Math.min(1, ...).",
+  "label": "unsupported"
+ },
+ {
+  "n": 45,
+  "reasoning": "Not-run gives no warning here; treatment as failed is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 46,
+  "reasoning": "MIN_ITEMS 30, MIN_GROUPS 10.",
+  "label": "supported"
+ },
+ {
+  "n": 47,
+  "reasoning": "MIN_GROUPS is 10, not 20.",
+  "label": "unsupported"
+ },
+ {
+  "n": 48,
+  "reasoning": "Comment and constant say exact quantile, not 1.96.",
+  "label": "supported"
+ },
+ {
+  "n": 49,
+  "reasoning": "No rotation shown; excerpt only appends.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 50,
+  "reasoning": "Returns null when total<=0.",
+  "label": "unsupported"
+ },
+ {
+  "n": 51,
+  "reasoning": "Default bootstrap is 2000.",
+  "label": "unsupported"
+ },
+ {
+  "n": 52,
+  "reasoning": "More than one arg throws usage error.",
+  "label": "supported"
+ },
+ {
+  "n": 53,
+  "reasoning": "present*2>=bags means at least half.",
+  "label": "supported"
+ },
+ {
+  "n": 54,
+  "reasoning": "Confidence uses unboosted keyword score.",
+  "label": "unsupported"
+ },
+ {
+  "n": 55,
+  "reasoning": "Uses 1.959963984540054, explicitly not 1.96.",
+  "label": "unsupported"
+ },
+ {
+  "n": 56,
+  "reasoning": "Returns insufficient-data, not best-single.",
+  "label": "unsupported"
+ },
+ {
+  "n": 57,
+  "reasoning": "Strictly above 0.5 required; touching 0.5 fails.",
+  "label": "unsupported"
+ },
+ {
+  "n": 58,
+  "reasoning": "Constant is 5, not 3.",
+  "label": "unsupported"
+ },
+ {
+  "n": 59,
+  "reasoning": "MIN_CALIBRATION_RUNS = 5.",
+  "label": "supported"
+ },
+ {
+  "n": 60,
+  "reasoning": "The status is not-run, not skipped.",
+  "label": "unsupported"
+ },
+ {
+  "n": 61,
+  "reasoning": "Boost only counts when status is measured.",
+  "label": "unsupported"
+ },
+ {
+  "n": 62,
+  "reasoning": "Strict equality to \"1\".",
+  "label": "supported"
+ },
+ {
+  "n": 63,
+  "reasoning": "No id uses requireActiveRun.",
+  "label": "supported"
+ },
+ {
+  "n": 64,
+  "reasoning": "No-card exclusion happens only under requireRecipe.",
+  "label": "supported"
+ }
+]

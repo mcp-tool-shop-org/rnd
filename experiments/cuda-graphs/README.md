@@ -95,6 +95,16 @@ time, the median over seeds 42–44, with capture time included. Full numbers ar
     rests on, passes on all five forms.
 - **Not run this slot:** the Windows torch.compile/Triton probe (`triton_probe.py`). It needs its own short ask.
 
+**Two rules from the result, for anyone graphing a training loop:**
+- **Hold the optimizer constant in an exact gate.** Compare graphed against eager *with the same capturable
+  optimizer*, and record the optimizer variant in each run's metadata. Otherwise the gate flags an optimizer
+  change as a graph error, which happened once here.
+- **A ragged last batch needs no padding or masking:** capture one graph per batch size. Here that was 16
+  answers, plus 6 for the 3-pair tail of each epoch. It is the standard answer to "static shapes" in a
+  training loop.
+
+(Both were sharpened by an outside read of the results, Kimi K3 via the Director, 2026-10-08.)
+
 **Recommendation for aspire-si:**
 - Take the GPU-resident features and batched scoring now: they're exact (≤ 6e-6) and give 11× training on
   attention and 12–31× scoring.

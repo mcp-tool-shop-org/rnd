@@ -1,0 +1,322 @@
+[
+ {
+  "n": 1,
+  "claim": "Setting ROLEOS_NO_CALIBRATION to any non-empty value turns calibration off.",
+  "evidence": "/**\n * Kill switch. `ROLEOS_NO_CALIBRATION=1` restores pure keyword routing.\n * @param {NodeJS.ProcessEnv} [env]\n */\nexport function calibrationDisabled(env = process.env) {\n  return env.ROLEOS_NO_CALIBRATION === \"1\";\n}"
+ },
+ {
+  "n": 2,
+  "claim": "Pack confidence is high at 3 or more keyword hits on the top pack, and medium at 2.",
+  "evidence": "\n  const sorted = Object.entries(adjusted).sort((a, b) => b[1] - a[1]);\n  if (sorted.length === 0) return null;\n\n  const topPack = sorted[0][0];\n  const keywordScore = scores[topPack];\n  const confidence = keywordScore >= 3 ? \"high\" : keywordScore >= 2 ? \"medium\" : \"low\";\n\n  return {"
+ },
+ {
+  "n": 3,
+  "claim": "The Wilson interval function returns null when the total is zero or negative.",
+  "evidence": "/**\n * Wilson score interval for `successes` out of `total`.\n * The bounds sit inside [0, 1]. Null when the count is not a usable sample.\n * @param {number} successes\n * @param {number} total\n * @param {number} [z]\n * @returns {{ low: number, high: number } | null}\n */\nexport function wilsonInterval(successes, total, z = WILSON_Z95) {\n  if (!Number.isFinite(successes) || !Number.isFinite(total) || total <= 0) return null;\n  if (successes < 0 || successes > total) return null;\n  const phat = successes / total;"
+ },
+ {
+  "n": 4,
+  "claim": "By default the jury uses 2000 bootstrap resamples and 50 bags.",
+  "evidence": "export const DEFAULT_BOOTSTRAP = 2000;\nexport const DEFAULT_BAGS = 50;"
+ },
+ {
+  "n": 5,
+  "claim": "A passed shuffled-labels control with p below 1/(nulls+1) only gets a note.",
+  "evidence": "  if (status !== \"passed\") return;\n  if (measure.p === undefined || measure.nulls === undefined) {\n    errors.push(`${tag}: passed needs p and nulls, because a pass requires p ≥ 1/(nulls+1)`);\n    return;\n  }\n  if (belowPermutationFloor(measure.p, measure.nulls)) {\n    errors.push(`${tag}: passed needs p ≥ 1/${measure.nulls + 1}; got ${measure.p}`);\n  }"
+ },
+ {
+  "n": 6,
+  "claim": "A control marked passed without a measure produces a warning.",
+  "evidence": "  const name = control.name;\n  const tag = `controls[${index}] (${name})`;\n  const why = methodWhy(name);\n  if (control.measure === undefined) {\n    if (control.status === \"passed\") {\n      warnings.push(why ? `${tag}: passed without a measure — ${why}` : `${tag}: passed without a measure`);\n    } else if (control.status !== \"not-run\" && why) {\n      warnings.push(`${tag}: no measure — ${why}`);\n    }\n    return;"
+ },
+ {
+  "n": 7,
+  "claim": "Runs that completed with at most one correction contribute to a pack's boost.",
+  "evidence": "export function computePackBoosts(outcomes) {\n  const boosts = {};\n\n  const cleanRuns = outcomes.filter(\n    o => o.selectedPack && o.completionStatus === \"completed\" && o.corrections === 0\n  );\n\n  for (const o of cleanRuns) {\n    const pack = o.selectedPack;\n    boosts[pack] = Math.min((boosts[pack] || 0) + 0.5, 2.0);\n  }"
+ },
+ {
+  "n": 8,
+  "claim": "A control marked passed without a measure produces an error.",
+  "evidence": "  const name = control.name;\n  const tag = `controls[${index}] (${name})`;\n  const why = methodWhy(name);\n  if (control.measure === undefined) {\n    if (control.status === \"passed\") {\n      warnings.push(why ? `${tag}: passed without a measure — ${why}` : `${tag}: passed without a measure`);\n    } else if (control.status !== \"not-run\" && why) {\n      warnings.push(`${tag}: no measure — ${why}`);\n    }\n    return;"
+ },
+ {
+  "n": 9,
+  "claim": "A critic whose card has a failed or an unresolved control is excluded unless allowUnproven is set.",
+  "evidence": "        };\n    const problems = [];\n    for (let f = 0; f < view.failed.length; f++) problems.push(`${view.failed[f]} failed`);\n    for (let u = 0; u < view.unresolved.length; u++) problems.push(`${view.unresolved[u]} unresolved`);\n    if (!assessment && requireRecipe) {\n      excluded.push({ id: critic.id, reason: \"unproven: no recipe card\" });\n    } else if (problems.length > 0 && !allowUnproven) {\n      excluded.push({ id: critic.id, reason: problems.join(\", \") });\n    }\n    views.set(critic.id, view);"
+ },
+ {
+  "n": 10,
+  "claim": "Gaps on a recipe card never exclude a critic from the jury on their own.",
+  "evidence": "/**\n * A failed or unresolved standard control excludes the critic unless\n * allowUnproven is set. A missing card is a note, and excludes only when\n * requireRecipe is set. Gaps never exclude. `recipes == null` leaves the\n * gate off so existing callers are unchanged.\n */\nfunction recipeAssessments(critics, recipes, { allowUnproven = false, requireRecipe = false } = {}) {"
+ },
+ {
+  "n": 11,
+  "claim": "Recording an outcome whose run id is already in the ledger does not append a second line.",
+  "evidence": "  mkdirSync(dir, { recursive: true });\n  const path = join(dir, LEDGER_FILE);\n  // One line per run. A second call with the same run id does not append.\n  if (outcome && outcome.runId) {\n    const prior = readOutcomes(cwd);\n    for (let i = 0; i < prior.length; i++) {\n      if (prior[i].runId === outcome.runId) return false;\n    }\n  }\n  const line = JSON.stringify({ ...outcome, recordedAt: new Date().toISOString() }) + \"\\n\";\n  writeFileSync(path, line, { flag: \"a\" });"
+ },
+ {
+  "n": 12,
+  "claim": "Pack confidence is high at 2 or more keyword hits on the top pack, and medium at 1.",
+  "evidence": "\n  const sorted = Object.entries(adjusted).sort((a, b) => b[1] - a[1]);\n  if (sorted.length === 0) return null;\n\n  const topPack = sorted[0][0];\n  const keywordScore = scores[topPack];\n  const confidence = keywordScore >= 3 ? \"high\" : keywordScore >= 2 ? \"medium\" : \"low\";\n\n  return {"
+ },
+ {
+  "n": 13,
+  "claim": "Recording an outcome whose run id is already in the ledger replaces the earlier line with the new one.",
+  "evidence": "  mkdirSync(dir, { recursive: true });\n  const path = join(dir, LEDGER_FILE);\n  // One line per run. A second call with the same run id does not append.\n  if (outcome && outcome.runId) {\n    const prior = readOutcomes(cwd);\n    for (let i = 0; i < prior.length; i++) {\n      if (prior[i].runId === outcome.runId) return false;\n    }\n  }\n  const line = JSON.stringify({ ...outcome, recordedAt: new Date().toISOString() }) + \"\\n\";\n  writeFileSync(path, line, { flag: \"a\" });"
+ },
+ {
+  "n": 14,
+  "claim": "Each clean completed run adds 0.5 to its pack's boost, and the boost is capped at 2.0.",
+  "evidence": " */\nexport function computePackBoosts(outcomes) {\n  const boosts = {};\n\n  const cleanRuns = outcomes.filter(\n    o => o.selectedPack && o.completionStatus === \"completed\" && o.corrections === 0\n  );\n\n  for (const o of cleanRuns) {\n    const pack = o.selectedPack;\n    boosts[pack] = Math.min((boosts[pack] || 0) + 0.5, 2.0);\n  }\n\n  return boosts;"
+ },
+ {
+  "n": 15,
+  "claim": "The interventions counted as corrections are reroute, retry and reject.",
+  "evidence": "\nconst CORRECTION_TYPES = new Set([\"reroute\", \"retry\", \"reopen\"]);\n"
+ },
+ {
+  "n": 16,
+  "claim": "Confidence is taken from the top pack's keyword score, not from its boosted score.",
+  "evidence": "    const row = snap.evidence.find((item) => item.pack === name);\n    const boost = row && row.status === \"measured\" ? row.boost : 0;\n    adjusted[name] = scores[name] + boost;\n  }\n\n  const sorted = Object.entries(adjusted).sort((a, b) => b[1] - a[1]);\n  if (sorted.length === 0) return null;\n\n  const topPack = sorted[0][0];\n  const keywordScore = scores[topPack];\n  const confidence = keywordScore >= 3 ? \"high\" : keywordScore >= 2 ? \"medium\" : \"low\";\n"
+ },
+ {
+  "n": 17,
+  "claim": "Turning calibration off also stops new run outcomes from being recorded.",
+  "evidence": "/**\n * Kill switch. `ROLEOS_NO_CALIBRATION=1` restores pure keyword routing.\n * @param {NodeJS.ProcessEnv} [env]\n */\nexport function calibrationDisabled(env = process.env) {\n  return env.ROLEOS_NO_CALIBRATION === \"1\";\n}"
+ },
+ {
+  "n": 18,
+  "claim": "When both edit methods' CIs are recorded and don't overlap, the status must be failed.",
+  "evidence": "    return;\n  }\n  if (!intervalsOverlap(a.ci, b.ci) && status !== \"unresolved\") {\n    errors.push(`${tag}: both methods are recorded and their CIs do not overlap, so status must be \"unresolved\"`);\n  }\n}"
+ },
+ {
+  "n": 19,
+  "claim": "When both edit methods' CIs are recorded and don't overlap, any status other than unresolved is an error.",
+  "evidence": "    return;\n  }\n  if (!intervalsOverlap(a.ci, b.ci) && status !== \"unresolved\") {\n    errors.push(`${tag}: both methods are recorded and their CIs do not overlap, so status must be \"unresolved\"`);\n  }\n}"
+ },
+ {
+  "n": 20,
+  "claim": "A critic with no recipe card is always excluded from the jury.",
+  "evidence": "        };\n    const problems = [];\n    for (let f = 0; f < view.failed.length; f++) problems.push(`${view.failed[f]} failed`);\n    for (let u = 0; u < view.unresolved.length; u++) problems.push(`${view.unresolved[u]} unresolved`);\n    if (!assessment && requireRecipe) {\n      excluded.push({ id: critic.id, reason: \"unproven: no recipe card\" });\n    } else if (problems.length > 0 && !allowUnproven) {\n      excluded.push({ id: critic.id, reason: problems.join(\", \") });\n    }"
+ },
+ {
+  "n": 21,
+  "claim": "A pack's boost is added only when its evidence row has status \"measured\"; otherwise it adds 0.",
+  "evidence": "  }\n\n  const snap = calibrationSnapshot(options);\n  const adjusted = {};\n  for (const name of Object.keys(scores)) {\n    const row = snap.evidence.find((item) => item.pack === name);\n    const boost = row && row.status === \"measured\" ? row.boost : 0;\n    adjusted[name] = scores[name] + boost;\n  }\n"
+ },
+ {
+  "n": 22,
+  "claim": "Two critics count as one critic counted twice only when their error consistency is above 0.95.",
+  "evidence": "/** Studio rule: a pair at or above this error consistency is one critic counted twice. */\nexport const DUPLICATE_KAPPA = 0.9;\n"
+ },
+ {
+  "n": 23,
+  "claim": "Only runs that completed with zero corrections contribute to a pack's boost.",
+  "evidence": "export function computePackBoosts(outcomes) {\n  const boosts = {};\n\n  const cleanRuns = outcomes.filter(\n    o => o.selectedPack && o.completionStatus === \"completed\" && o.corrections === 0\n  );\n\n  for (const o of cleanRuns) {\n    const pack = o.selectedPack;\n    boosts[pack] = Math.min((boosts[pack] || 0) + 0.5, 2.0);\n  }"
+ },
+ {
+  "n": 24,
+  "claim": "Below the minimum items or groups, the decision is insufficient-data and no bagged panel is computed.",
+  "evidence": "    folds,\n  };\n  if (items.length < MIN_ITEMS || check.groups < MIN_GROUPS) {\n    return {\n      ...base,\n      verdict: {\n        decision: \"insufficient-data\",\n        critic: null,\n        reason: `need at least ${MIN_ITEMS} items and ${MIN_GROUPS} groups; got ${items.length} items and ${check.groups} groups`,\n      },\n      bagged: null,\n      nested: null,\n    };\n  }\n"
+ },
+ {
+  "n": 25,
+  "claim": "The 0.9 duplicate cutoff can be changed with a command-line flag.",
+  "evidence": "/** Studio rule: a pair at or above this error consistency is one critic counted twice. */\nexport const DUPLICATE_KAPPA = 0.9;\n"
+ },
+ {
+  "n": 26,
+  "claim": "Two critics at or above an error consistency of 0.9 count as one critic counted twice.",
+  "evidence": "/** Studio rule: a pair at or above this error consistency is one critic counted twice. */\nexport const DUPLICATE_KAPPA = 0.9;\n"
+ },
+ {
+  "n": 27,
+  "claim": "A passed shuffled-labels control with p below 1/(nulls+1) is an error.",
+  "evidence": "  if (status !== \"passed\") return;\n  if (measure.p === undefined || measure.nulls === undefined) {\n    errors.push(`${tag}: passed needs p and nulls, because a pass requires p ≥ 1/(nulls+1)`);\n    return;\n  }\n  if (belowPermutationFloor(measure.p, measure.nulls)) {\n    errors.push(`${tag}: passed needs p ≥ 1/${measure.nulls + 1}; got ${measure.p}`);\n  }"
+ },
+ {
+  "n": 28,
+  "claim": "With no run id, roleos abandon acts on the most recently created run, whether or not it is active.",
+  "evidence": "  if (args && args.length > 1) {\n    const err = new Error(\"Usage: roleos abandon [id]\");\n    err.exitCode = 1;\n    err.hint = \"Abandon the active run, or pass one run id.\";\n    throw err;\n  }\n\n  const cwd = getCwd();\n  const id = args && args[0];\n  let run;\n  if (id) {\n    run = loadRun(cwd, id);\n    if (!run) {\n      const err = new Error(`Run \"${id}\" not found`);\n      err.exitCode = 1;\n      err.hint = \"Use `roleos run list` to see saved runs.\";\n      throw err;\n    }\n  } else {\n    run = requireActiveRun(cwd);"
+ },
+ {
+  "n": 29,
+  "claim": "A critic whose card has only an unresolved control is never excluded; only a failed control excludes it.",
+  "evidence": "        };\n    const problems = [];\n    for (let f = 0; f < view.failed.length; f++) problems.push(`${view.failed[f]} failed`);\n    for (let u = 0; u < view.unresolved.length; u++) problems.push(`${view.unresolved[u]} unresolved`);\n    if (!assessment && requireRecipe) {\n      excluded.push({ id: critic.id, reason: \"unproven: no recipe card\" });\n    } else if (problems.length > 0 && !allowUnproven) {\n      excluded.push({ id: critic.id, reason: problems.join(\", \") });\n    }\n    views.set(critic.id, view);"
+ },
+ {
+  "n": 30,
+  "claim": "For an even number of values, lowerMedian returns the mean of the two middle values.",
+  "evidence": "function lowerMedian(values) {\n  const sorted = values.slice().sort((a, b) => a - b);\n  return sorted[Math.floor((sorted.length - 1) / 2)];\n}"
+ },
+ {
+  "n": 31,
+  "claim": "Each clean completed run adds 0.5 to its pack's boost, and the boost is capped at 3.0.",
+  "evidence": " */\nexport function computePackBoosts(outcomes) {\n  const boosts = {};\n\n  const cleanRuns = outcomes.filter(\n    o => o.selectedPack && o.completionStatus === \"completed\" && o.corrections === 0\n  );\n\n  for (const o of cleanRuns) {\n    const pack = o.selectedPack;\n    boosts[pack] = Math.min((boosts[pack] || 0) + 0.5, 2.0);\n  }\n\n  return boosts;"
+ },
+ {
+  "n": 32,
+  "claim": "A shuffled-labels control whose method is not balanced-permutation is an error that makes the card unusable.",
+  "evidence": "function applyShuffledLabels(tag, status, measure, errors, warnings, notes) {\n  if (measure.method !== BALANCED_PERMUTATION) warnings.push(`${tag}: ${SHUFFLE_WHY}`);\n  if (measure.nulls !== undefined) {\n    const floor = `1/${measure.nulls + 1}`;\n    let note = `${tag}: permutation floor is ${floor}`;"
+ },
+ {
+  "n": 33,
+  "claim": "A critic is kept in the bagged panel only when it was chosen in more than two thirds of the bags.",
+  "evidence": "  const members = [];\n  for (let i = 0; i < ordered.length; i++) {\n    const id = ordered[i].id;\n    const counts = history.get(id);\n    const present = [];\n    for (let k = 0; k < counts.length; k++) if (counts[k] > 0) present.push(counts[k]);\n    if (present.length * 2 >= bags && bags > 0) {\n      members.push({\n        critic: id,\n        count: lowerMedian(present),\n        bagsPresent: present.length,\n      });"
+ },
+ {
+  "n": 34,
+  "claim": "roleos abandon accepts several run ids and abandons each of them in turn.",
+  "evidence": "export async function abandonCommand(args) {\n  if (args && args.length > 1) {\n    const err = new Error(\"Usage: roleos abandon [id]\");\n    err.exitCode = 1;\n    err.hint = \"Abandon the active run, or pass one run id.\";\n    throw err;\n  }"
+ },
+ {
+  "n": 35,
+  "claim": "A control's status is one of passed, failed, not-run or unresolved.",
+  "evidence": "export const CONSTRUCTIONS = Object.freeze([\"planted-edit\", \"human-inserted\", \"rewrite\", \"natural\", \"mixed\", \"other\"]);\nexport const CONTROL_STATUS = Object.freeze([\"passed\", \"failed\", \"not-run\", \"unresolved\"]);\n"
+ },
+ {
+  "n": 36,
+  "claim": "For an even number of values, lowerMedian returns the lower of the two middle values.",
+  "evidence": "function lowerMedian(values) {\n  const sorted = values.slice().sort((a, b) => a - b);\n  return sorted[Math.floor((sorted.length - 1) / 2)];\n}"
+ },
+ {
+  "n": 37,
+  "claim": "The Wilson interval's upper bound is clamped so it never exceeds 1.",
+  "evidence": "  if (successes < 0 || successes > total) return null;\n  const phat = successes / total;\n  const z2 = z * z;\n  const denom = 1 + z2 / total;\n  const centre = (phat + z2 / (2 * total)) / denom;\n  const margin = (z * Math.sqrt((phat * (1 - phat)) / total + z2 / (4 * total * total))) / denom;\n  return {\n    low: Math.max(0, centre - margin),\n    high: Math.min(1, centre + margin),\n  };\n}"
+ },
+ {
+  "n": 38,
+  "claim": "The interventions counted as corrections are reroute, retry and reopen.",
+  "evidence": "\nconst CORRECTION_TYPES = new Set([\"reroute\", \"retry\", \"reopen\"]);\n"
+ },
+ {
+  "n": 39,
+  "claim": "If every measured critic is excluded by its recipe card, the excluded critics are re-admitted and selection goes ahead.",
+  "evidence": "  const excludedIds = new Set(check.excluded.map((row) => row.id));\n  const eligible = byId(critics).filter((c) => !inverted.has(c.id) && !excludedIds.has(c.id) && pointAccuracy(c, items) !== null);\n  if (eligible.length === 0) {\n    const measured = byId(critics).filter((c) => pointAccuracy(c, items) !== null);\n    const notInverted = measured.filter((c) => !inverted.has(c.id));\n    let reason;\n    if (measured.length === 0) reason = \"no critic has a measured accuracy\";\n    else if (notInverted.length === 0) reason = \"every critic with a measured accuracy has an interval entirely below 0.5\";\n    else reason = \"every measured critic is excluded by its recipe card\";\n    return {\n      ...base,\n      verdict: {\n        decision: \"insufficient-data\",\n        critic: null,\n        reason,\n      },\n      bagged: null,\n      nested: null,"
+ },
+ {
+  "n": 40,
+  "claim": "A passed reversed-correction control needs a CI whose low end is strictly greater than 0.5.",
+  "evidence": "function applyReversedCorrection(tag, status, measure, errors) {\n  if (status !== \"passed\") return;\n  if (!measure.ci || !(measure.ci[0] > 0.5)) {\n    const low = measure.ci ? measure.ci[0] : \"missing\";\n    errors.push(`${tag}: passed needs an accuracy CI entirely above 0.5 (low ${low} is not above 0.5; touching 0.5 is not above)`);\n  }\n}"
+ },
+ {
+  "n": 41,
+  "claim": "A recipe card with more than two gaps excludes its critic from the jury.",
+  "evidence": "/**\n * A failed or unresolved standard control excludes the critic unless\n * allowUnproven is set. A missing card is a note, and excludes only when\n * requireRecipe is set. Gaps never exclude. `recipes == null` leaves the\n * gate off so existing callers are unchanged.\n */\nfunction recipeAssessments(critics, recipes, { allowUnproven = false, requireRecipe = false } = {}) {"
+ },
+ {
+  "n": 42,
+  "claim": "If every measured critic is excluded by its recipe card, the decision is insufficient-data.",
+  "evidence": "  const excludedIds = new Set(check.excluded.map((row) => row.id));\n  const eligible = byId(critics).filter((c) => !inverted.has(c.id) && !excludedIds.has(c.id) && pointAccuracy(c, items) !== null);\n  if (eligible.length === 0) {\n    const measured = byId(critics).filter((c) => pointAccuracy(c, items) !== null);\n    const notInverted = measured.filter((c) => !inverted.has(c.id));\n    let reason;\n    if (measured.length === 0) reason = \"no critic has a measured accuracy\";\n    else if (notInverted.length === 0) reason = \"every critic with a measured accuracy has an interval entirely below 0.5\";\n    else reason = \"every measured critic is excluded by its recipe card\";\n    return {\n      ...base,\n      verdict: {\n        decision: \"insufficient-data\",\n        critic: null,\n        reason,\n      },\n      bagged: null,\n      nested: null,"
+ },
+ {
+  "n": 43,
+  "claim": "A shuffled-labels control whose method is not balanced-permutation gets a warning, not an error.",
+  "evidence": "function applyShuffledLabels(tag, status, measure, errors, warnings, notes) {\n  if (measure.method !== BALANCED_PERMUTATION) warnings.push(`${tag}: ${SHUFFLE_WHY}`);\n  if (measure.nulls !== undefined) {\n    const floor = `1/${measure.nulls + 1}`;\n    let note = `${tag}: permutation floor is ${floor}`;"
+ },
+ {
+  "n": 44,
+  "claim": "The Wilson interval's upper bound is left unclamped and can exceed 1 on small samples.",
+  "evidence": "  if (successes < 0 || successes > total) return null;\n  const phat = successes / total;\n  const z2 = z * z;\n  const denom = 1 + z2 / total;\n  const centre = (phat + z2 / (2 * total)) / denom;\n  const margin = (z * Math.sqrt((phat * (1 - phat)) / total + z2 / (4 * total * total))) / denom;\n  return {\n    low: Math.max(0, centre - margin),\n    high: Math.min(1, centre + margin),\n  };\n}"
+ },
+ {
+  "n": 45,
+  "claim": "The jury treats a control marked not-run as failed.",
+  "evidence": "  const name = control.name;\n  const tag = `controls[${index}] (${name})`;\n  const why = methodWhy(name);\n  if (control.measure === undefined) {\n    if (control.status === \"passed\") {\n      warnings.push(why ? `${tag}: passed without a measure — ${why}` : `${tag}: passed without a measure`);\n    } else if (control.status !== \"not-run\" && why) {\n      warnings.push(`${tag}: no measure — ${why}`);\n    }\n    return;"
+ },
+ {
+  "n": 46,
+  "claim": "The jury's minimums are 30 items and 10 groups.",
+  "evidence": "\nexport const MIN_ITEMS = 30;\nexport const MIN_GROUPS = 10;\n/** Studio rule: a pair at or above this error consistency is one critic counted twice. */\nexport const DUPLICATE_KAPPA = 0.9;"
+ },
+ {
+  "n": 47,
+  "claim": "The jury's minimums are 30 items and 20 groups.",
+  "evidence": "\nexport const MIN_ITEMS = 30;\nexport const MIN_GROUPS = 10;\n/** Studio rule: a pair at or above this error consistency is one critic counted twice. */\nexport const DUPLICATE_KAPPA = 0.9;"
+ },
+ {
+  "n": 48,
+  "claim": "Wilson intervals use the exact 95% normal quantile rather than a rounded 1.96.",
+  "evidence": "\n/** 95% standard-normal quantile. Wilson intervals use this, not a rounded 1.96. */\nexport const WILSON_Z95 = 1.959963984540054;\n"
+ },
+ {
+  "n": 49,
+  "claim": "The outcome ledger is rotated to a new file once it passes a size limit.",
+  "evidence": "  mkdirSync(dir, { recursive: true });\n  const path = join(dir, LEDGER_FILE);\n  // One line per run. A second call with the same run id does not append.\n  if (outcome && outcome.runId) {\n    const prior = readOutcomes(cwd);\n    for (let i = 0; i < prior.length; i++) {\n      if (prior[i].runId === outcome.runId) return false;\n    }\n  }\n  const line = JSON.stringify({ ...outcome, recordedAt: new Date().toISOString() }) + \"\\n\";\n  writeFileSync(path, line, { flag: \"a\" });"
+ },
+ {
+  "n": 50,
+  "claim": "When the total is zero, the Wilson interval function returns the full interval from 0 to 1.",
+  "evidence": "/**\n * Wilson score interval for `successes` out of `total`.\n * The bounds sit inside [0, 1]. Null when the count is not a usable sample.\n * @param {number} successes\n * @param {number} total\n * @param {number} [z]\n * @returns {{ low: number, high: number } | null}\n */\nexport function wilsonInterval(successes, total, z = WILSON_Z95) {\n  if (!Number.isFinite(successes) || !Number.isFinite(total) || total <= 0) return null;\n  if (successes < 0 || successes > total) return null;\n  const phat = successes / total;"
+ },
+ {
+  "n": 51,
+  "claim": "By default the jury uses 1000 bootstrap resamples and 50 bags.",
+  "evidence": "export const DEFAULT_BOOTSTRAP = 2000;\nexport const DEFAULT_BAGS = 50;"
+ },
+ {
+  "n": 52,
+  "claim": "roleos abandon given more than one argument fails with a usage error.",
+  "evidence": "export async function abandonCommand(args) {\n  if (args && args.length > 1) {\n    const err = new Error(\"Usage: roleos abandon [id]\");\n    err.exitCode = 1;\n    err.hint = \"Abandon the active run, or pass one run id.\";\n    throw err;\n  }"
+ },
+ {
+  "n": 53,
+  "claim": "A critic is kept in the bagged panel when it was chosen in at least half of the bags.",
+  "evidence": "  const members = [];\n  for (let i = 0; i < ordered.length; i++) {\n    const id = ordered[i].id;\n    const counts = history.get(id);\n    const present = [];\n    for (let k = 0; k < counts.length; k++) if (counts[k] > 0) present.push(counts[k]);\n    if (present.length * 2 >= bags && bags > 0) {\n      members.push({\n        critic: id,\n        count: lowerMedian(present),\n        bagsPresent: present.length,\n      });"
+ },
+ {
+  "n": 54,
+  "claim": "Confidence is taken from the top pack's boosted score, after the calibration boost is added.",
+  "evidence": "    const row = snap.evidence.find((item) => item.pack === name);\n    const boost = row && row.status === \"measured\" ? row.boost : 0;\n    adjusted[name] = scores[name] + boost;\n  }\n\n  const sorted = Object.entries(adjusted).sort((a, b) => b[1] - a[1]);\n  if (sorted.length === 0) return null;\n\n  const topPack = sorted[0][0];\n  const keywordScore = scores[topPack];\n  const confidence = keywordScore >= 3 ? \"high\" : keywordScore >= 2 ? \"medium\" : \"low\";\n"
+ },
+ {
+  "n": 55,
+  "claim": "Wilson intervals use the rounded value 1.96 as the 95% normal quantile.",
+  "evidence": "\n/** 95% standard-normal quantile. Wilson intervals use this, not a rounded 1.96. */\nexport const WILSON_Z95 = 1.959963984540054;\n"
+ },
+ {
+  "n": 56,
+  "claim": "Below the minimum items or groups, the decision falls back to best-single for the most accurate critic.",
+  "evidence": "    folds,\n  };\n  if (items.length < MIN_ITEMS || check.groups < MIN_GROUPS) {\n    return {\n      ...base,\n      verdict: {\n        decision: \"insufficient-data\",\n        critic: null,\n        reason: `need at least ${MIN_ITEMS} items and ${MIN_GROUPS} groups; got ${items.length} items and ${check.groups} groups`,\n      },\n      bagged: null,\n      nested: null,\n    };\n  }\n"
+ },
+ {
+  "n": 57,
+  "claim": "A passed reversed-correction control needs a CI whose low end is at least 0.5.",
+  "evidence": "function applyReversedCorrection(tag, status, measure, errors) {\n  if (status !== \"passed\") return;\n  if (!measure.ci || !(measure.ci[0] > 0.5)) {\n    const low = measure.ci ? measure.ci[0] : \"missing\";\n    errors.push(`${tag}: passed needs an accuracy CI entirely above 0.5 (low ${low} is not above 0.5; touching 0.5 is not above)`);\n  }\n}"
+ },
+ {
+  "n": 58,
+  "claim": "A pack or role combination needs at least 3 recorded runs before a rate is claimed.",
+  "evidence": "\n/** A pack or a role combination needs this many recorded runs before a rate is claimed. */\nexport const MIN_CALIBRATION_RUNS = 5;\n"
+ },
+ {
+  "n": 59,
+  "claim": "A pack or role combination needs at least 5 recorded runs before a rate is claimed.",
+  "evidence": "\n/** A pack or a role combination needs this many recorded runs before a rate is claimed. */\nexport const MIN_CALIBRATION_RUNS = 5;\n"
+ },
+ {
+  "n": 60,
+  "claim": "A control's status is one of passed, failed, skipped or unresolved.",
+  "evidence": "export const CONSTRUCTIONS = Object.freeze([\"planted-edit\", \"human-inserted\", \"rewrite\", \"natural\", \"mixed\", \"other\"]);\nexport const CONTROL_STATUS = Object.freeze([\"passed\", \"failed\", \"not-run\", \"unresolved\"]);\n"
+ },
+ {
+  "n": 61,
+  "claim": "A pack's boost is added whenever the pack has an evidence row, whatever that row's status.",
+  "evidence": "  }\n\n  const snap = calibrationSnapshot(options);\n  const adjusted = {};\n  for (const name of Object.keys(scores)) {\n    const row = snap.evidence.find((item) => item.pack === name);\n    const boost = row && row.status === \"measured\" ? row.boost : 0;\n    adjusted[name] = scores[name] + boost;\n  }\n"
+ },
+ {
+  "n": 62,
+  "claim": "Calibration is turned off only when ROLEOS_NO_CALIBRATION is exactly the string \"1\".",
+  "evidence": "/**\n * Kill switch. `ROLEOS_NO_CALIBRATION=1` restores pure keyword routing.\n * @param {NodeJS.ProcessEnv} [env]\n */\nexport function calibrationDisabled(env = process.env) {\n  return env.ROLEOS_NO_CALIBRATION === \"1\";\n}"
+ },
+ {
+  "n": 63,
+  "claim": "With no run id, roleos abandon acts on the active run.",
+  "evidence": "  if (args && args.length > 1) {\n    const err = new Error(\"Usage: roleos abandon [id]\");\n    err.exitCode = 1;\n    err.hint = \"Abandon the active run, or pass one run id.\";\n    throw err;\n  }\n\n  const cwd = getCwd();\n  const id = args && args[0];\n  let run;\n  if (id) {\n    run = loadRun(cwd, id);\n    if (!run) {\n      const err = new Error(`Run \"${id}\" not found`);\n      err.exitCode = 1;\n      err.hint = \"Use `roleos run list` to see saved runs.\";\n      throw err;\n    }\n  } else {\n    run = requireActiveRun(cwd);"
+ },
+ {
+  "n": 64,
+  "claim": "A critic with no recipe card is excluded only when requireRecipe is set.",
+  "evidence": "        };\n    const problems = [];\n    for (let f = 0; f < view.failed.length; f++) problems.push(`${view.failed[f]} failed`);\n    for (let u = 0; u < view.unresolved.length; u++) problems.push(`${view.unresolved[u]} unresolved`);\n    if (!assessment && requireRecipe) {\n      excluded.push({ id: critic.id, reason: \"unproven: no recipe card\" });\n    } else if (problems.length > 0 && !allowUnproven) {\n      excluded.push({ id: critic.id, reason: problems.join(\", \") });\n    }"
+ }
+]

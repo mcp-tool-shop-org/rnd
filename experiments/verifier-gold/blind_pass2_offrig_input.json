@@ -1,0 +1,237 @@
+[
+ {
+  "n": 1,
+  "claim": "The abstain cap exists so that a model always answering supported can't win on a high balanced accuracy.",
+  "evidence": "//! A model earns the default only on measured error, per check type: the false-accept\n//! rate (an unsupported claim judged supported) with a Wilson 95% interval (Wilson\n//! 1927), the abstain rate, and balanced accuracy on the claims it decided. The\n//! coverage floor and the abstain cap stop a model that always says `cannot_tell`\n//! from winning on a clean false-accept rate."
+ },
+ {
+  "n": 2,
+  "claim": "Lane ports start at 11500, one apart, for 64 lanes.",
+  "evidence": "/// First lane port. The range sits well above the local Ollama (11434) and the plain\n/// lane (11435, runner 11436), so no lane can ever be either.\npub const LANE_PORT_BASE: u16 = 11500;\n/// Lane ports are two apart: the lane's own port, and the one above it for the\n/// handoff runner's second tunnel.\npub const LANE_PORT_STEP: u16 = 2;\n/// How many lanes the range holds.\npub const LANE_COUNT: u16 = 64;"
+ },
+ {
+  "n": 3,
+  "claim": "A Retry-After given as an HTTP date is treated as a one-second wait.",
+  "evidence": "/// Delay-seconds from `Retry-After`. An HTTP-date or a missing header waits one second.\nfn retry_after(headers: &ureq::http::HeaderMap) -> Duration {\n    let Some(raw) = headers.get(\"retry-after\").and_then(|v| v.to_str().ok()) else {\n        return Duration::from_secs(1);\n    };\n    let raw = raw.trim();\n    if let Ok(secs) = raw.parse::<u64>() {\n        return Duration::from_secs(secs);\n    }\n    if let Ok(secs) = raw.parse::<f64>()\n        && secs.is_finite()\n        && secs >= 0.0\n    {\n        return Duration::from_secs_f64(secs);\n    }\n    Duration::from_secs(1)"
+ },
+ {
+  "n": 4,
+  "claim": "The default rule also requires at least 50 supported claims.",
+  "evidence": "/// The default rule's thresholds.\npub const MAX_FALSE_ACCEPT_UPPER: f64 = 0.10;\npub const MAX_ABSTAIN: f64 = 0.20;\npub const MIN_BALANCED_ACCURACY: f64 = 0.80;\npub const MIN_UNSUPPORTED: usize = 100;"
+ },
+ {
+  "n": 5,
+  "claim": "The pinned Ollama image is ollama/ollama:0.35.0.",
+  "evidence": "pub const OLLAMA_IMAGE: &str = \"ollama/ollama:0.35.0\";"
+ },
+ {
+  "n": 6,
+  "claim": "The embedding model's vectors are 768-dimensional.",
+  "evidence": "pub const EMBED_URL_ENV: &str = \"OFFRIG_EMBED_URL\";\npub const DEFAULT_EMBED_MODEL: &str = \"nomic-embed-text\";"
+ },
+ {
+  "n": 7,
+  "claim": "The default rule needs a balanced accuracy of at least 0.80.",
+  "evidence": "/// The default rule's thresholds.\npub const MAX_FALSE_ACCEPT_UPPER: f64 = 0.10;\npub const MAX_ABSTAIN: f64 = 0.20;\npub const MIN_BALANCED_ACCURACY: f64 = 0.80;\npub const MIN_UNSUPPORTED: usize = 100;"
+ },
+ {
+  "n": 8,
+  "claim": "A synchronous run that timeout ends reports exit status 137.",
+  "evidence": "\n/// The shell for a synchronous run. The command arrives base64, as for a background\n/// job, is written to a temporary script and run in the job directory under `timeout`\n/// (stdin closed, so a command that reads it ends instead of hanging). The exit status\n/// is the command's own, 124 when `timeout` ended it."
+ },
+ {
+  "n": 9,
+  "claim": "Each ranker contributes 20 candidates, 50 fused hits are kept, and the RRF constant is 60.",
+  "evidence": "/// How many candidates each ranker contributes, and how many fused hits are kept.\npub const RANKER_DEPTH: usize = 50;\npub const FUSED_KEEP: usize = 20;\n/// The RRF constant from Cormack et al.\npub const RRF_K: f64 = 60.0;"
+ },
+ {
+  "n": 10,
+  "claim": "One of the default rule's thresholds is a minimum of 100 claims in total, of any label.",
+  "evidence": "/// The default rule's thresholds.\npub const MAX_FALSE_ACCEPT_UPPER: f64 = 0.10;\npub const MAX_ABSTAIN: f64 = 0.20;\npub const MIN_BALANCED_ACCURACY: f64 = 0.80;\npub const MIN_UNSUPPORTED: usize = 100;"
+ },
+ {
+  "n": 11,
+  "claim": "Side-car ports start at 11700, and lane i gets 11700 plus twice i.",
+  "evidence": "pub const LANE_COUNT: u16 = 64;\n/// First default side-car port: the port a project's shell-driven side-car listens on\n/// (loopback HTTP, in front of `offrig-mcp`). Lane `i` gets `SIDECAR_PORT_BASE + i`.\n/// The range 11700..=11763 sits above every tunnel and runner port a lane can have\n/// (11500..=11627), the plain lane (11435, 11436) and the local Ollama (11434), so a\n/// side-car port can never be a tunnel port. It replaces the one machine-wide default\n/// (11439) that two projects shared (issue #11).\npub const SIDECAR_PORT_BASE: u16 = 11700;"
+ },
+ {
+  "n": 12,
+  "claim": "A 429 on pod create is retried up to 3 times, each time on the next GPU type in the plan's list.",
+  "evidence": "\n/// How many times a 429 on `POST /pods` is retried on the same GPU type.\n/// The first request is not counted. A retry waits for `Retry-After` and does\n/// not run past the plan deadline. A missing or unreadable `Retry-After` waits\n/// one second. The next GPU type is not tried.\npub const CREATE_429_RETRIES: u32 = 3;"
+ },
+ {
+  "n": 13,
+  "claim": "The default embedding model is nomic-embed-text.",
+  "evidence": "pub const EMBED_URL_ENV: &str = \"OFFRIG_EMBED_URL\";\npub const DEFAULT_EMBED_MODEL: &str = \"nomic-embed-text\";"
+ },
+ {
+  "n": 14,
+  "claim": "The default rule allows an abstain rate of at most 0.30.",
+  "evidence": "/// The default rule's thresholds.\npub const MAX_FALSE_ACCEPT_UPPER: f64 = 0.10;\npub const MAX_ABSTAIN: f64 = 0.20;\npub const MIN_BALANCED_ACCURACY: f64 = 0.80;\npub const MIN_UNSUPPORTED: usize = 100;"
+ },
+ {
+  "n": 15,
+  "claim": "Files larger than 1,000,000 bytes are not indexed.",
+  "evidence": "/// Files larger than this are not indexed.\npub const MAX_FILE_BYTES: u64 = 1_000_000;"
+ },
+ {
+  "n": 16,
+  "claim": "With no plan deadline, a Retry-After delay longer than 60 seconds is refused.",
+  "evidence": "/// `None` has no plan clock, so the attempt cap is the only bound. A set deadline\n/// refuses a sleep that would end after it.\nfn retry_fits(deadline: Option<Instant>, delay: Duration) -> bool {\n    let Some(end) = deadline else {\n        return true;\n    };\n    Instant::now()\n        .checked_add(delay)\n        .is_some_and(|wake| wake <= end)\n}"
+ },
+ {
+  "n": 17,
+  "claim": "The default rule allows an abstain rate of at most 0.20.",
+  "evidence": "/// The default rule's thresholds.\npub const MAX_FALSE_ACCEPT_UPPER: f64 = 0.10;\npub const MAX_ABSTAIN: f64 = 0.20;\npub const MIN_BALANCED_ACCURACY: f64 = 0.80;\npub const MIN_UNSUPPORTED: usize = 100;"
+ },
+ {
+  "n": 18,
+  "claim": "Index chunks are between 800 and 2000 characters.",
+  "evidence": "/// Chunk size, in characters (about 200 to 500 tokens).\npub const MIN_CHARS: usize = 800;\npub const MAX_CHARS: usize = 2000;"
+ },
+ {
+  "n": 19,
+  "claim": "A verifier earns the default only if its false-accept upper bound is under 0.10.",
+  "evidence": "/// The default rule's thresholds.\npub const MAX_FALSE_ACCEPT_UPPER: f64 = 0.10;\npub const MAX_ABSTAIN: f64 = 0.20;\npub const MIN_BALANCED_ACCURACY: f64 = 0.80;\npub const MIN_UNSUPPORTED: usize = 100;"
+ },
+ {
+  "n": 20,
+  "claim": "A synchronous run defaults to 30 seconds and is capped at 120.",
+  "evidence": "/// A synchronous run is for quick checks (`ls`, `nvidia-smi`), not work: it is capped.\npub const RUN_DEFAULT_SECS: u32 = 30;\npub const RUN_MAX_SECS: u32 = 120;\n/// Output kept from each of stdout and stderr of a synchronous run.\npub const RUN_OUTPUT_CAP: usize = 64 * 1024;"
+ },
+ {
+  "n": 21,
+  "claim": "Lane ports are two apart because the port above each lane's own is the handoff runner's second tunnel.",
+  "evidence": "/// Lane ports are two apart: the lane's own port, and the one above it for the\n/// handoff runner's second tunnel.\npub const LANE_PORT_STEP: u16 = 2;"
+ },
+ {
+  "n": 22,
+  "claim": "Side-car ports start at 11700, and lane i gets 11700 plus i.",
+  "evidence": "pub const LANE_COUNT: u16 = 64;\n/// First default side-car port: the port a project's shell-driven side-car listens on\n/// (loopback HTTP, in front of `offrig-mcp`). Lane `i` gets `SIDECAR_PORT_BASE + i`.\n/// The range 11700..=11763 sits above every tunnel and runner port a lane can have\n/// (11500..=11627), the plain lane (11435, 11436) and the local Ollama (11434), so a\n/// side-car port can never be a tunnel port. It replaces the one machine-wide default\n/// (11439) that two projects shared (issue #11).\npub const SIDECAR_PORT_BASE: u16 = 11700;"
+ },
+ {
+  "n": 23,
+  "claim": "The default embedding model is mxbai-embed-large.",
+  "evidence": "pub const EMBED_URL_ENV: &str = \"OFFRIG_EMBED_URL\";\npub const DEFAULT_EMBED_MODEL: &str = \"nomic-embed-text\";"
+ },
+ {
+  "n": 24,
+  "claim": "Both a 400 and a 422 count as placement rejections that move the create loop to the next GPU type.",
+  "evidence": "\n/// v2 create returns 400 when that GPU type cannot be placed. 422 is a bad body\n/// and must not move the loop on. 429 is a rate limit, not a placement miss.\nfn placement_rejected(e: &Error) -> bool {\n    matches!(e, Error::Api { status: 400, .. })\n}"
+ },
+ {
+  "n": 25,
+  "claim": "A requested run timeout of 0 becomes 1 second.",
+  "evidence": "\n/// The timeout of a synchronous run: the default when none is asked, else the request,\n/// never above the cap and never zero.\npub fn run_timeout(requested: Option<u32>) -> u32 {\n    requested.unwrap_or(RUN_DEFAULT_SECS).clamp(1, RUN_MAX_SECS)\n}"
+ },
+ {
+  "n": 26,
+  "claim": "A verifier earns the default only if its false-accept upper bound is under 0.05.",
+  "evidence": "/// The default rule's thresholds.\npub const MAX_FALSE_ACCEPT_UPPER: f64 = 0.10;\npub const MAX_ABSTAIN: f64 = 0.20;\npub const MIN_BALANCED_ACCURACY: f64 = 0.80;\npub const MIN_UNSUPPORTED: usize = 100;"
+ },
+ {
+  "n": 27,
+  "claim": "Each ranker contributes 50 candidates, 20 fused hits are kept, and the RRF constant is 60.",
+  "evidence": "/// How many candidates each ranker contributes, and how many fused hits are kept.\npub const RANKER_DEPTH: usize = 50;\npub const FUSED_KEEP: usize = 20;\n/// The RRF constant from Cormack et al.\npub const RRF_K: f64 = 60.0;"
+ },
+ {
+  "n": 28,
+  "claim": "Lane ports start at 11500, two apart, for 64 lanes.",
+  "evidence": "/// First lane port. The range sits well above the local Ollama (11434) and the plain\n/// lane (11435, runner 11436), so no lane can ever be either.\npub const LANE_PORT_BASE: u16 = 11500;\n/// Lane ports are two apart: the lane's own port, and the one above it for the\n/// handoff runner's second tunnel.\npub const LANE_PORT_STEP: u16 = 2;\n/// How many lanes the range holds.\npub const LANE_COUNT: u16 = 64;"
+ },
+ {
+  "n": 29,
+  "claim": "A requested run timeout of 0 means no timeout.",
+  "evidence": "\n/// The timeout of a synchronous run: the default when none is asked, else the request,\n/// never above the cap and never zero.\npub fn run_timeout(requested: Option<u32>) -> u32 {\n    requested.unwrap_or(RUN_DEFAULT_SECS).clamp(1, RUN_MAX_SECS)\n}"
+ },
+ {
+  "n": 30,
+  "claim": "Lane ports are two apart so that an IPv6 listener can take the port above each lane's own.",
+  "evidence": "/// Lane ports are two apart: the lane's own port, and the one above it for the\n/// handoff runner's second tunnel.\npub const LANE_PORT_STEP: u16 = 2;"
+ },
+ {
+  "n": 31,
+  "claim": "Index chunks are between 800 and 4000 characters.",
+  "evidence": "/// Chunk size, in characters (about 200 to 500 tokens).\npub const MIN_CHARS: usize = 800;\npub const MAX_CHARS: usize = 2000;"
+ },
+ {
+  "n": 32,
+  "claim": "The default rule needs a balanced accuracy of at least 0.90.",
+  "evidence": "/// The default rule's thresholds.\npub const MAX_FALSE_ACCEPT_UPPER: f64 = 0.10;\npub const MAX_ABSTAIN: f64 = 0.20;\npub const MIN_BALANCED_ACCURACY: f64 = 0.80;\npub const MIN_UNSUPPORTED: usize = 100;"
+ },
+ {
+  "n": 33,
+  "claim": "The coverage floor and abstain cap exist so that a model always answering cannot_tell can't win on a clean false-accept rate.",
+  "evidence": "//! A model earns the default only on measured error, per check type: the false-accept\n//! rate (an unsupported claim judged supported) with a Wilson 95% interval (Wilson\n//! 1927), the abstain rate, and balanced accuracy on the claims it decided. The\n//! coverage floor and the abstain cap stop a model that always says `cannot_tell`\n//! from winning on a clean false-accept rate."
+ },
+ {
+  "n": 34,
+  "claim": "Files larger than 1,000,000 bytes are indexed in their first 1,000,000 bytes only.",
+  "evidence": "/// Files larger than this are not indexed.\npub const MAX_FILE_BYTES: u64 = 1_000_000;"
+ },
+ {
+  "n": 35,
+  "claim": "With no plan deadline, any Retry-After delay fits, and only the attempt cap bounds the retries.",
+  "evidence": "/// `None` has no plan clock, so the attempt cap is the only bound. A set deadline\n/// refuses a sleep that would end after it.\nfn retry_fits(deadline: Option<Instant>, delay: Duration) -> bool {\n    let Some(end) = deadline else {\n        return true;\n    };\n    Instant::now()\n        .checked_add(delay)\n        .is_some_and(|wake| wake <= end)\n}"
+ },
+ {
+  "n": 36,
+  "claim": "One of the default rule's thresholds is a minimum of 100 unsupported claims.",
+  "evidence": "/// The default rule's thresholds.\npub const MAX_FALSE_ACCEPT_UPPER: f64 = 0.10;\npub const MAX_ABSTAIN: f64 = 0.20;\npub const MIN_BALANCED_ACCURACY: f64 = 0.80;\npub const MIN_UNSUPPORTED: usize = 100;"
+ },
+ {
+  "n": 37,
+  "claim": "Only a 400 counts as a placement rejection that moves the create loop to the next GPU type.",
+  "evidence": "\n/// v2 create returns 400 when that GPU type cannot be placed. 422 is a bad body\n/// and must not move the loop on. 429 is a rate limit, not a placement miss.\nfn placement_rejected(e: &Error) -> bool {\n    matches!(e, Error::Api { status: 400, .. })\n}"
+ },
+ {
+  "n": 38,
+  "claim": "The lane tags \"stage\" and \"default\" are reserved.",
+  "evidence": "pub const MAX_TAG_LEN: usize = 24;\n/// Tags that would collide with names offrig already uses: staging pods are\n/// `offrig-stage-<profile>` and the staging alias is `<alias>-stage`.\nconst RESERVED_TAGS: [&str; 2] = [\"stage\", \"offrig\"];"
+ },
+ {
+  "n": 39,
+  "claim": "A Retry-After given as an HTTP date is parsed and waited until.",
+  "evidence": "/// Delay-seconds from `Retry-After`. An HTTP-date or a missing header waits one second.\nfn retry_after(headers: &ureq::http::HeaderMap) -> Duration {\n    let Some(raw) = headers.get(\"retry-after\").and_then(|v| v.to_str().ok()) else {\n        return Duration::from_secs(1);\n    };\n    let raw = raw.trim();\n    if let Ok(secs) = raw.parse::<u64>() {\n        return Duration::from_secs(secs);\n    }\n    if let Ok(secs) = raw.parse::<f64>()\n        && secs.is_finite()\n        && secs >= 0.0\n    {\n        return Duration::from_secs_f64(secs);\n    }\n    Duration::from_secs(1)"
+ },
+ {
+  "n": 40,
+  "claim": "The default embedding endpoint is a dedicated Ollama on 127.0.0.1 port 11490.",
+  "evidence": "/// The dedicated CPU-only Ollama the embeddings come from. The port sits clear of the\n/// local Ollama (11434), the plain lane (11435, 11436), the lane range (11500..11628)\n/// and the side-car range (11700..11764).\npub const DEFAULT_EMBED_URL: &str = \"http://127.0.0.1:11490\";"
+ },
+ {
+  "n": 41,
+  "claim": "The default embedding endpoint is the local Ollama on 127.0.0.1 port 11434.",
+  "evidence": "/// The dedicated CPU-only Ollama the embeddings come from. The port sits clear of the\n/// local Ollama (11434), the plain lane (11435, 11436), the lane range (11500..11628)\n/// and the side-car range (11700..11764).\npub const DEFAULT_EMBED_URL: &str = \"http://127.0.0.1:11490\";"
+ },
+ {
+  "n": 42,
+  "claim": "A 429 on pod create is retried up to 3 times on the same GPU type; the next type is not tried.",
+  "evidence": "\n/// How many times a 429 on `POST /pods` is retried on the same GPU type.\n/// The first request is not counted. A retry waits for `Retry-After` and does\n/// not run past the plan deadline. A missing or unreadable `Retry-After` waits\n/// one second. The next GPU type is not tried.\npub const CREATE_429_RETRIES: u32 = 3;"
+ },
+ {
+  "n": 43,
+  "claim": "A synchronous run defaults to 60 seconds and is capped at 120.",
+  "evidence": "/// A synchronous run is for quick checks (`ls`, `nvidia-smi`), not work: it is capped.\npub const RUN_DEFAULT_SECS: u32 = 30;\npub const RUN_MAX_SECS: u32 = 120;\n/// Output kept from each of stdout and stderr of a synchronous run.\npub const RUN_OUTPUT_CAP: usize = 64 * 1024;"
+ },
+ {
+  "n": 44,
+  "claim": "The pinned Ollama image is ollama/ollama:0.35.1.",
+  "evidence": "pub const OLLAMA_IMAGE: &str = \"ollama/ollama:0.35.0\";"
+ },
+ {
+  "n": 45,
+  "claim": "The lane tags \"stage\" and \"offrig\" are reserved.",
+  "evidence": "pub const MAX_TAG_LEN: usize = 24;\n/// Tags that would collide with names offrig already uses: staging pods are\n/// `offrig-stage-<profile>` and the staging alias is `<alias>-stage`.\nconst RESERVED_TAGS: [&str; 2] = [\"stage\", \"offrig\"];"
+ },
+ {
+  "n": 46,
+  "claim": "A synchronous run that timeout ends reports exit status 124.",
+  "evidence": "\n/// The shell for a synchronous run. The command arrives base64, as for a background\n/// job, is written to a temporary script and run in the job directory under `timeout`\n/// (stdin closed, so a command that reads it ends instead of hanging). The exit status\n/// is the command's own, 124 when `timeout` ended it."
+ },
+ {
+  "n": 47,
+  "claim": "A side-car port can be overridden per project in lanes.toml.",
+  "evidence": "pub const LANE_COUNT: u16 = 64;\n/// First default side-car port: the port a project's shell-driven side-car listens on\n/// (loopback HTTP, in front of `offrig-mcp`). Lane `i` gets `SIDECAR_PORT_BASE + i`.\n/// The range 11700..=11763 sits above every tunnel and runner port a lane can have\n/// (11500..=11627), the plain lane (11435, 11436) and the local Ollama (11434), so a\n/// side-car port can never be a tunnel port. It replaces the one machine-wide default\n/// (11439) that two projects shared (issue #11).\npub const SIDECAR_PORT_BASE: u16 = 11700;"
+ }
+]

@@ -1,0 +1,237 @@
+[
+ {
+  "n": 1,
+  "reasoning": "Evidence says the cap stops a model that always says cannot_tell, not one always saying supported.",
+  "label": "unsupported"
+ },
+ {
+  "n": 2,
+  "reasoning": "Step is 2, not 1.",
+  "label": "unsupported"
+ },
+ {
+  "n": 3,
+  "reasoning": "Doc and code: HTTP-date falls through to 1 second.",
+  "label": "supported"
+ },
+ {
+  "n": 4,
+  "reasoning": "Only a minimum of 100 unsupported claims is shown; nothing about supported.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 5,
+  "reasoning": "Constant is 0.35.0.",
+  "label": "supported"
+ },
+ {
+  "n": 6,
+  "reasoning": "Dimension is not stated.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 7,
+  "reasoning": "MIN_BALANCED_ACCURACY is 0.80.",
+  "label": "supported"
+ },
+ {
+  "n": 8,
+  "reasoning": "Comment says 124.",
+  "label": "unsupported"
+ },
+ {
+  "n": 9,
+  "reasoning": "Depth 50 and keep 20; claim swaps them.",
+  "label": "unsupported"
+ },
+ {
+  "n": 10,
+  "reasoning": "The 100 is MIN_UNSUPPORTED, not total of any label.",
+  "label": "unsupported"
+ },
+ {
+  "n": 11,
+  "reasoning": "Doc says base + i.",
+  "label": "unsupported"
+ },
+ {
+  "n": 12,
+  "reasoning": "Retries are on the same GPU type; next type not tried.",
+  "label": "unsupported"
+ },
+ {
+  "n": 13,
+  "reasoning": "DEFAULT_EMBED_MODEL is nomic-embed-text.",
+  "label": "supported"
+ },
+ {
+  "n": 14,
+  "reasoning": "MAX_ABSTAIN is 0.20.",
+  "label": "unsupported"
+ },
+ {
+  "n": 15,
+  "reasoning": "Doc and constant.",
+  "label": "supported"
+ },
+ {
+  "n": 16,
+  "reasoning": "With no deadline it returns true, any delay fits.",
+  "label": "unsupported"
+ },
+ {
+  "n": 17,
+  "reasoning": "MAX_ABSTAIN is 0.20.",
+  "label": "supported"
+ },
+ {
+  "n": 18,
+  "reasoning": "MIN 800, MAX 2000.",
+  "label": "supported"
+ },
+ {
+  "n": 19,
+  "reasoning": "MAX_FALSE_ACCEPT_UPPER 0.10; strict vs non-strict not shown but threshold matches.",
+  "label": "supported"
+ },
+ {
+  "n": 20,
+  "reasoning": "30 default, 120 max.",
+  "label": "supported"
+ },
+ {
+  "n": 21,
+  "reasoning": "Doc comment states this.",
+  "label": "supported"
+ },
+ {
+  "n": 22,
+  "reasoning": "Doc says base + i.",
+  "label": "supported"
+ },
+ {
+  "n": 23,
+  "reasoning": "Default is nomic-embed-text.",
+  "label": "unsupported"
+ },
+ {
+  "n": 24,
+  "reasoning": "Only 400 matches; 422 must not move on.",
+  "label": "unsupported"
+ },
+ {
+  "n": 25,
+  "reasoning": "clamp(1,120) turns 0 into 1.",
+  "label": "supported"
+ },
+ {
+  "n": 26,
+  "reasoning": "Threshold is 0.10.",
+  "label": "unsupported"
+ },
+ {
+  "n": 27,
+  "reasoning": "Depth 50, keep 20, K 60.",
+  "label": "supported"
+ },
+ {
+  "n": 28,
+  "reasoning": "Base 11500, step 2, 64 lanes.",
+  "label": "supported"
+ },
+ {
+  "n": 29,
+  "reasoning": "Zero is clamped to 1.",
+  "label": "unsupported"
+ },
+ {
+  "n": 30,
+  "reasoning": "Reason given is the runner's second tunnel, not IPv6.",
+  "label": "unsupported"
+ },
+ {
+  "n": 31,
+  "reasoning": "Max is 2000.",
+  "label": "unsupported"
+ },
+ {
+  "n": 32,
+  "reasoning": "Threshold is 0.80.",
+  "label": "unsupported"
+ },
+ {
+  "n": 33,
+  "reasoning": "Comment says exactly this.",
+  "label": "supported"
+ },
+ {
+  "n": 34,
+  "reasoning": "Files over the limit are not indexed at all.",
+  "label": "unsupported"
+ },
+ {
+  "n": 35,
+  "reasoning": "None returns true; comment says attempt cap is the only bound.",
+  "label": "supported"
+ },
+ {
+  "n": 36,
+  "reasoning": "MIN_UNSUPPORTED is 100.",
+  "label": "supported"
+ },
+ {
+  "n": 37,
+  "reasoning": "matches! only status 400.",
+  "label": "supported"
+ },
+ {
+  "n": 38,
+  "reasoning": "Reserved are stage and offrig.",
+  "label": "unsupported"
+ },
+ {
+  "n": 39,
+  "reasoning": "HTTP date waits one second, not parsed.",
+  "label": "unsupported"
+ },
+ {
+  "n": 40,
+  "reasoning": "Constant is 127.0.0.1:11490, dedicated Ollama.",
+  "label": "supported"
+ },
+ {
+  "n": 41,
+  "reasoning": "It is dedicated Ollama on 11490, local is 11434.",
+  "label": "unsupported"
+ },
+ {
+  "n": 42,
+  "reasoning": "Doc and constant 3.",
+  "label": "supported"
+ },
+ {
+  "n": 43,
+  "reasoning": "Default is 30.",
+  "label": "unsupported"
+ },
+ {
+  "n": 44,
+  "reasoning": "Image is 0.35.0.",
+  "label": "unsupported"
+ },
+ {
+  "n": 45,
+  "reasoning": "RESERVED_TAGS stage, offrig.",
+  "label": "supported"
+ },
+ {
+  "n": 46,
+  "reasoning": "Comment says 124.",
+  "label": "supported"
+ },
+ {
+  "n": 47,
+  "reasoning": "No mention of per-project override.",
+  "label": "cannot_tell"
+ }
+]

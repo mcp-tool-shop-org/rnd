@@ -1,16 +1,16 @@
 # rnd: how it works
 
-Mapped at 2026-10-07 from commit 1d6df8c by Atlas 1.24.0.
+Mapped at 2026-10-08 from commit 33fa5db by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-11 parts, mostly Markdown (72 files) and JSON data (18); code in Python (18), shell (3), CSS (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 2 doors; the busiest is CI, which reaches 3 parts. It deploys a site to GitHub Pages.
+11 parts, mostly Markdown (73 files) and JSON data (18); code in Python (19), shell (4), CSS (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 2 doors; the busiest is CI, which reaches 3 parts. It deploys a site to GitHub Pages.
 
-## What changed since 2026-10-07 (d4cce59)
+## What changed since 2026-10-07 (1d6df8c)
 
-Nothing structural changed since 2026-10-07; 6 files changed content.
+Nothing structural changed since 2026-10-07; 3 files added and 7 changed content.
 
 ## What comes in
 
@@ -44,7 +44,7 @@ the repository root holds only shell files, which this map does not read, so wha
 
 No two source files changed together often enough to name.
 
-Window: 180 days; a pair counts from 3 shared commits, since the window holds fewer than 30 qualifying commits.
+Window: 180 days; a pair counts from 3 shared commits, since 1 source file reaches 10 revisions; the floor rises to 10 when 25 do.
 
 ## What no test touches
 
@@ -77,9 +77,9 @@ Read those in order to follow one pull request end to end.
 
 ## What this map cannot see
 
-- 3 writes and 3 reads use paths built at run time and are not named here.
+- 3 writes and 4 reads use paths built at run time and are not named here.
 - 8 writes and 16 reads go to a path their caller passes, not to this repository.
 - 1 read goes to the directory the command is run in or a path its caller passes, not to this repository.
-- Statistics confidence is low: fewer than 30 qualifying commits in the window, and fewer than 25 source files reach 10 revisions.
+- Statistics confidence is low: fewer than 25 source files reach 10 revisions in the window.
 
 Regenerate with `npx --yes @dogfood-lab/atlas map`.

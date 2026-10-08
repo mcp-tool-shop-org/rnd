@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.1.0] - 2026-10-07
+
+- New experiment kev-judge-finetune: Kev-4B LoRA fine-tune as a planted-error judge on aspire-si's fresh pairs (1,086 rows, both orders, 0 leaks), success rule written before the run
+- Added experiment `kev-judge-finetune`
+
 ## [1.1.1.0.19] - 2026-10-07
 
 - Planted-defects program: event spans merged (#96); detector heads fit their operating point on validation mixes; a third song (Battle Hymn) makes the song split 3-fold

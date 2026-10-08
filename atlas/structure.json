@@ -197,7 +197,7 @@
           "path": "entries/2026/2026-10-07-nvidia-rubin-architecture.md"
         },
         {
-          "hash": "d26990f6c6fd0fc9dde21566454c598b832851760492ed6334c53aab7ce4d499",
+          "hash": "16e5ef8704f17eae658b84807065ac435a5cf4a4713d302371e092b3fceccca2",
           "path": "entries/2026/2026-10-07-open-jev-style-decision-models.md"
         },
         {
@@ -205,11 +205,11 @@
           "path": "entries/2026/2026-10-07-openjev-and-open-jev-alternatives.md"
         },
         {
-          "hash": "03bac172c029f51a0041188d4f84cf83769c6eb254230c5a0a9679a84527e0bb",
+          "hash": "0cffe805609d5b4d5d1b6bff47dd9e5fd40cf6d80b5e123896af37205fc79eba",
           "path": "entries/2026/2026-10-07-planted-defects-program-for-sung-mixes.md"
         },
         {
-          "hash": "d4d99059bfc8869e3d504fc58ec056ec43dff7669dcd83f4a02d0791e9f19370",
+          "hash": "5614ab5099a0ea2fc1e464e507ad50e9ea031ea5341afa591c279944e5c0929d",
           "path": "entries/2026/2026-10-07-pod-host-checks-driver-and-download.md"
         },
         {
@@ -217,7 +217,7 @@
           "path": "entries/2026/2026-10-07-ptx-isa-9-4.md"
         },
         {
-          "hash": "e0ae407592c148358274da4e699c81a8bd395216c4504a4d5b8be1ddcaff7f1d",
+          "hash": "a4bf3300813300ec64ba8c632efaf5e8788adeaea78cf4c0da022dd65aa9517b",
           "path": "entries/2026/2026-10-07-qwen32b-judge-position-bias.md"
         },
         {
@@ -225,7 +225,7 @@
           "path": "entries/2026/2026-10-07-robot-rig-cuda-stack.md"
         },
         {
-          "hash": "e6fe270c252fa5221210aa70dbee3e16a70567fcf8c0739fea417c2eff2ca633",
+          "hash": "588b98faba63216895f76a825e9fd5ced9426ab37d3402ecefd9d2a641f89b2f",
           "path": "entries/2026/2026-10-07-sft-before-aspire-weakens-critic.md"
         },
         {
@@ -268,13 +268,38 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 1,
+      "dynamicReads": 2,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
       "dynamicWrites": 0,
       "entryPoints": [],
       "externals": 0,
       "files": [
+        {
+          "hash": "82a1b861cc3e857c6f914368dc91e2742fae98991d9259fbd2e296d31423cd38",
+          "path": "experiments/kev-judge-finetune/README.md"
+        },
+        {
+          "exports": [
+            "load_json",
+            "main",
+            "prompts_of",
+            "rows_for"
+          ],
+          "failurePaths": [
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 67
+            }
+          ],
+          "hash": "93919eb15b70d9a9f2f2ed4f3439fe4a7c05805a2ea3fbc9ef0d2baef60cb8cb",
+          "path": "experiments/kev-judge-finetune/build_rows.py"
+        },
+        {
+          "hash": "0e0acf7c509f4d77554d2164d3da2878b0d34bdfcfde7ecdbe035186c2289b22",
+          "path": "experiments/kev-judge-finetune/train.sh"
+        },
         {
           "hash": "c9288465ec9bf2996f4f2104b22f4b7501f6af6ee3b1f755186e9d0da8aee422",
           "path": "experiments/openjev-vs-jev/README.md"
@@ -509,7 +534,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "8bd9dd8138a3ee4d3af2f765609820d4e5a18d92b13fa3b84e8a2513b530c2b1",
+          "hash": "4b7cad402de759e25f63bee15eda7f08883f785d6e408cecf029120defc2637d",
           "path": "rnd/__init__.py"
         },
         {
@@ -851,7 +876,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "6e50bf3b14c9b509b0af113c95bd5960987fbc8885ef8e92fba0d805f5d15829",
+          "hash": "aca4d22e3fe9373392f0fdb92b2c86037e9381bb0a36d8fc0d520f3594f88d47",
           "path": "CHANGELOG.md"
         },
         {
@@ -1489,8 +1514,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "1d6df8ca96584937b9ef47f3711704914446707c",
-    "tracked": 127
+    "commit": "33fa5db78aa9249873b5ebde38e0ac98ee813219",
+    "tracked": 130
   },
   "landings": [
     {

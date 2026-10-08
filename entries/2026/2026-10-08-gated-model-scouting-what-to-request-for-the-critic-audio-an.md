@@ -140,9 +140,9 @@ misread or out of date, so check the repo page itself before calling a repo gate
   - **Not usable here:** Maverick (about 400B total) and Scout (about 109B
     total) exceed one 32 GB card.
   - Licence: Llama 4 Community.
-- **Pending:**
-  - SAM3 (the collection);
-  - facebook/sam-3d-objects.
+- **Accepted later still (2026-10-08):** SAM3 (the collection) and
+  facebook/sam-3d-objects. No request is pending; every repo the scouting named
+  is now open to the studio account.
 - **Open, no request needed:** Apertus, FLUX.1 Kontext, PaliGemma 2.
 
 ## Gemma Terms of Use: what they mean here

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.3.1] - 2026-10-08
+
+- SAM3 and sam-3d-objects access accepted
+- Updated `2026-10-08-gated-model-scouting-what-to-request-for-the-critic-audio-an`: Gated model scouting — what to request for the critic, audio and visual research
+
 ## [1.1.3.3.0] - 2026-10-08
 
 - Study A natural-error set labelled (two blind Claude passes, adjudicated); screen readout; 31 correction pairs

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.1.1] - 2026-10-08
+
+- Three follow-up studies for critic recipes: designs for natural errors, two planter families, hard pairs
+- Added `2026-10-08-three-follow-up-studies-for-critic-recipes-hard-pairs-two-pl`: Three follow-up studies for critic recipes — hard pairs, two planter families, natural errors
+
 ## [1.1.3.1.0] - 2026-10-08
 
 - Dataset recipes for critic jury roles: evidence, recipe card, controls, panel selection, role-os connection

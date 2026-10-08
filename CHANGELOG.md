@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.1.1] - 2026-10-08
+
+- cuda-compat-13-4 gives a real 13.4 driver API on RunPod 13.0 hosts
+- Updated experiment `cloud-cu134`
+- Added experiment `data-designer`
+
 ## [1.1.4.1.0] - 2026-10-08
 
 - cloud cu134 probe on a RunPod CUDA 13.0 host; kev cu132 fallback env

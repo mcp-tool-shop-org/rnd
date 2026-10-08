@@ -1,0 +1,29 @@
+| NVIDIA-SMI 580.159.04             Driver Version: 580.159.04     CUDA Version: 13.0     |
+== host driver
+COMPAT-JSON {"LD_LIBRARY_PATH": "", "cuInit": 0, "cuDriverGetVersion": [0, 13000], "device": "NVIDIA A100-SXM4-80GB", "locality_domain_count": {"rc": 1, "value": null}, "locality_domain_sm_count": {"rc": 1, "value": null}, "sm_count": {"rc": 0, "value": 108}, "cc_major": {"rc": 0, "value": 8}, "has_cuMemGetLocationInfo": false, "has_cuGreenCtxCreate": true, "has_cuDeviceGetDevResource": true}
+== install cuda-compat-13-4
+cuda-compat-13-4 | 615.71.09-2ubuntu1 | https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64  Packages
+cuda-compat-13-4 | 615.71.09-1ubuntu1 | https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64  Packages
+libcuda.so
+libcuda.so.1
+libcuda.so.615.71.09
+libcudadebugger.so.1
+libcudadebugger.so.615.71.09
+libnvidia-gpucomp.so.615.71.09
+libnvidia-nvvm.so
+libnvidia-nvvm.so.4
+libnvidia-nvvm.so.615.71.09
+libnvidia-nvvm70.so.4
+libnvidia-pkcs11-openssl3.so.615.71.09
+libnvidia-ptxjitcompiler.so.1
+libnvidia-ptxjitcompiler.so.615.71.09
+libnvidia-tileiras.so.615.71.09
+== with compat
+COMPAT-JSON {"LD_LIBRARY_PATH": "/usr/local/cuda-13.4/compat", "cuInit": 0, "cuDriverGetVersion": [0, 13040], "device": "NVIDIA A100-SXM4-80GB", "locality_domain_count": {"rc": 0, "value": 1}, "locality_domain_sm_count": {"rc": 0, "value": 108}, "sm_count": {"rc": 0, "value": 108}, "cc_major": {"rc": 0, "value": 8}, "has_cuMemGetLocationInfo": true, "has_cuGreenCtxCreate": true, "has_cuDeviceGetDevResource": true}
+== torch cu134 probe under compat
+torch sees driver n/a
+/workspace/job/cu134_probe.py:88: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  err = float((o.float() - ref).abs().max())
+PROBE-JSON {"env": {"torch": "2.16.0.dev20261008+cu134", "torch_cuda": "13.4", "cudnn": 92600, "gpu": "NVIDIA A100-SXM4-80GB, 580.159.04, 8.0, 81920 MiB", "host_cuda": "13.4"}, "basic": {"ok": true, "s": 0.143, "device": "NVIDIA A100-SXM4-80GB", "capability": [8, 0]}, "matmul": {"ok": true, "s": 0.325, "rel_err": {"torch.float32": 2.632555916861612e-07, "torch.bfloat16": 0.0028809245955676724}}, "cudnn_conv": {"ok": true, "s": 0.459, "max_abs_err": 1.430511474609375e-06, "grad_finite": true}, "sdpa_flash": {"ok": true, "s": 0.023, "backend": "flash", "max_abs_err": 0.008175373077392578}, "triton_raw": {"ok": true, "s": 4.484, "triton": "3.9.0"}, "compile_train": {"ok": true, "s": 57.701, "first_5_steps_s": 10.53, "loss": 0.041411060839891434}, "compile_reduce_overhead": {"ok": true, "s": 0.505, "max_abs_err": 0.0}, "cuda_graph": {"ok": true, "s": 0.002, "max_abs_err": 0.0}, "lora_train": {"ok": false, "s": 56.572, "error": "AssertionError: loss did not fall: 7.6615800857543945 -> 6.874583721160889", "trace": "Traceback (most recent call last):\n  File \"/workspace/job/cu134_probe.py\", line 20, in check\n    detail = fn()\n             ^^^^\n  File \"/workspace/job/cu134_probe.py\", line 181, in lora_train\n    assert losses[-1] < losses[0] * 0.8, f\"loss did not fall: {losses[0]} -> {losses[-1]}\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: loss did not fall: 7.6615800857543945 -> 6.874583721160889\n"}, "all_ok": false}
+COMPAT-DONE

@@ -50,3 +50,37 @@ output stays in the log as written.
   compiles per architecture. A new card type gets this probe first (about $0.40).
 - **A first real cloud training run still reproduces a known result** before its numbers are trusted, the
   same gate as the local env.
+
+## Follow-up: a real CUDA 13.4 driver on RunPod through forward compatibility (same day)
+
+The 13.4 driver features need a 13.4 driver:
+- locality domains: `CU_DEVICE_ATTRIBUTE_LOCALITY_DOMAIN_COUNT` = 149, localized pools and allocations,
+  green contexts on a domain's SMs;
+- the unified-memory residency query `cudaMemGetLocationInfo`.
+
+RunPod hosts stop at 13.0. NVIDIA's forward-compatibility package puts a newer user-mode driver in the
+container, on top of the host's kernel driver.
+
+Run: offrig plan 3, an A100-SXM4-80GB on driver 580.159.04 (host CUDA 13.0), $0.24.
+- **Install:** `cuda-compat-13-4` from NVIDIA's ubuntu2204 repo. User-mode driver 615.71.09, in
+  `/usr/local/cuda-13.4/compat`.
+- **Use:** `LD_LIBRARY_PATH=/usr/local/cuda-13.4/compat`.
+- **Read:** `compat_probe.py` queries libcuda through ctypes.
+- **Full log:** `results/2026-10-08-a100-compat.log`.
+
+| | host driver only | with cuda-compat-13-4 |
+|---|---|---|
+| `cuDriverGetVersion` | 13000 | **13040** |
+| locality domain count (attr 149) | error 1 (invalid value) | **1** |
+| SMs per locality domain (attr 157) | error 1 | 108 (all of the A100's) |
+| `cuMemGetLocationInfo` symbol | absent | present |
+| `cu134_probe.py` | 8 of 9 pass | 8 of 9 pass, numerically identical (LoRA losses equal to every printed digit) |
+
+`nvidia-smi` itself reports CUDA 13.4 once the compat path is loaded.
+
+**Meaning.** On a datacenter GPU, offrig can give a pod a real CUDA 13.4 driver API: install
+`cuda-compat-13-<minor>` and set the library path. Forward compatibility is supported on datacenter
+parts, not on GeForce cards.
+
+The A100 is a single die, so it has one domain. A multi-domain part (B200 or B300, both listed on RunPod
+at $7.99 and $8.99/hr) is where locality domains could pay off. That run is not done yet.

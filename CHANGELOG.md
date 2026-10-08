@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.16] - 2026-10-07
+
+- Planted-defects program: planter PR 2 opened as ai-jam-sessions #95; alternate picks (#94) merged
+- Updated `2026-10-07-planted-defects-program-for-sung-mixes`: Planted defects for sung mixes — an automated planter-versus-detector loop, anchored by the listener's measured threshold
+
 ## [1.1.1.0.15] - 2026-10-07
 
 - Kev as a judge: 9B trails 4B because its order gap is noisier (sd 0.205 vs 0.144; 25 vs 3 pairs on the wrong side), not because it is less biased; the confirmation run is specified

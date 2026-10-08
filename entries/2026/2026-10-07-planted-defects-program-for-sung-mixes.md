@@ -249,7 +249,7 @@ own artefact. Even then it is driven by parameters and verified by measurement.
       mix; 1–5 ms crossfades clicked far less often, because they often land in
       phase on real singing.
     - That makes crossfade length a usable psychometric axis.
-  - **PR 2 (built; opens once alt picks #94 merges).**
+  - **PR 2: ai-jam-sessions #95** (opened after alt picks #94 merged; in review).
     - **New kinds:**
       - stretch (a warp ratio of 0.5, 0.6, 1.6 or 2.0, vowels kept on time);
       - pitch slip (WORLD, formant-preserving, ±1 and ±12 semitones);

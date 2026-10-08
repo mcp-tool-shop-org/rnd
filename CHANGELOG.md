@@ -11,6 +11,18 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.0.1] - 2026-10-08
+
+- Six findings and one instrument from the ai-jam-sessions sung-exemplar work: the pyannote one-voice gate, aligner misdates, the phrase-end hold, LLM piano arrangement from a generated brief, Pages cache stitching of replaced media, TranslateGemma fraction and name slips; instrument sung-exemplar-method.
+- Added `2026-10-08-aligner-misdates-cause-sung-dropouts`: Misdated syllable onsets cause dropouts in phrase-picked singing
+- Added `2026-10-08-llm-piano-arrangement-from-a-generated-brief`: Piano arrangements by an LLM from a brief generated from the score
+- Added `2026-10-08-pages-cache-stitches-replaced-media`: Replacing a media file under the same URL on GitHub Pages can break playback
+- Added `2026-10-08-phrase-end-hold-removes-the-stutter`: Holding the phrase-final note removes the "stutter" in placed singing
+- Added `2026-10-08-translategemma-failure-modes-on-readme-tables`: TranslateGemma 27B mistranslates fractions and transliterates model names
+- Added `2026-10-08-voice-gate-pyannote-segmentation-on-sung-vocals`: A one-voice gate for synthesised singing with pyannote segmentation
+- Added `sung-exemplar-method`: Sung-exemplar method — a hymn to a published sung recording
+- Updated experiment `natural-errors`
+
 ## [1.1.4.0.0] - 2026-10-08
 
 - rnd datapack build|list|verify: data packs hosted outside the clone, with per-file SHA-256, licences and model pins (integrity model from research-packs)

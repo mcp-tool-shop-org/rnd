@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.14] - 2026-10-07
+
+- Kev as a judge (exploratory): averaging over both answer orders took Kev-4B from 0.547 to 0.976 on aspire-si's 127 planted-error pairs; to be confirmed on fresh pairs. Cross-linked from the Qwen-32B judge entry
+- Updated `2026-10-07-open-jev-style-decision-models`: Open Jev-style decision models — the landscape, checked against primary sources
+- Updated `2026-10-07-qwen32b-judge-position-bias`: Qwen2.5-32B as a judge of planted errors — ties, total position bias, and how to plant errors
+
 ## [1.1.1.0.13] - 2026-10-07
 
 - Kev: training is adapter-only for 0.8B/4B/9B, so a local WSL run on the 5090 is plausible; smoke-test before renting

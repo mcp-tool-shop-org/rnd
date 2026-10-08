@@ -46,6 +46,12 @@ rater proposed in [[2026-10-07-single-rater-labels-and-ai-listener]]:
 - generate controlled defects by structured edits, never by asking a model to
   rewrite.
 
+For a judge that exposes option probabilities, scoring both orders and averaging
+can recover a consistent preference hidden under the bias. Kev-4B went from 0.547
+(hard choices) to 0.976 (order-averaged, exploratory) on these same pairs
+([[2026-10-07-open-jev-style-decision-models]]). Worth checking Qwen-32B the same
+way with its option-letter log-probabilities.
+
 readouts' training KB holds the AlpacaEval `is_randomize_output_order` protocol
 (`rnd readouts alpacaeval`).
 

@@ -123,6 +123,20 @@ Kev-9B ran on the same 124 phrase-clean records as hosted Jev and OpenJev, both
   0.43–0.87 across seeds.
 - One task far from Kev's training distribution (long options, one-sentence
   errors), so this says nothing about its own benchmark.
+- **Exploratory: averaging over both orders changes the picture.**
+  - With two options, `/permute` amounts to averaging p(strong) over the two
+    orders. aspire-si recomputed it from the probabilities already recorded:
+    $0, no new run.
+  - Kev-4B favours the strong answer on **124 of 127 pairs (0.976**, CI clustered
+    by prompt [0.945, 1.0]); Kev-9B on 102 of 127 (0.803 [0.724, 0.874]).
+  - Kev's first-option bias sits on top of a small but very consistent preference
+    for the strong answer: a median gap of about 0.1 between the orders.
+  - Not pre-registered: the statistic was chosen after seeing the data. It stays
+    exploratory until confirmed on fresh pairs under a rule written first
+    (aspire-si proposes order-averaged accuracy ≥ 0.85).
+  - Why 4B beats 9B is unexplained.
+  - **The lesson for any two-option judge: always score both orders and average
+    the probabilities. Never read a single hard choice.**
 
 **Training and configuring Kev** (from its README and repo @ 5e42a7a, 2026-10-07):
 - **Fine-tuning.**
@@ -178,6 +192,7 @@ wrong repo. Always resolve by GitHub or Hugging Face handle.
 - [verified] Adding join evidence, a rubric and four leave-one-mix-out examples did not improve Kev on phrase-clean; Kev-9B's pooled AUC fell to 0.42 [0.32, 0.52]. (via: experiments/openjev-vs-jev/results/compare-all.json, 2026-10-07)
 - [verified] On the RTX 5090 with reference PyTorch kernels, Kev-4B answered in a median 0.43 s per 3–5k-token request and Kev-9B in 0.51 s, deterministically; Kev-9B peaked at 27.8 GB on the card under a 0.82 PyTorch memory cap, and uncapped Kev-4B's allocator reached 31.9 GB. (via: experiments/openjev-vs-jev logs and receipts, 2026-10-07)
 - [verified] As a two-option judge of single planted errors in long answers (aspire-si's 127 pairs, both orders), Kev-4B scored 0.547 picking A 95% of the time and Kev-9B 0.598 picking A 87%, below aspire-si's 0.75 bar and as position-biased as Qwen2.5-32B. (via: aspire-si examples/sft-experiment/judge_kev.py, PR #33, rig run reported by session A 2026-10-07)
+- [unverified] Averaging p(strong) over both orders (the two-option equivalent of /permute), Kev-4B favoured the strong answer on 124 of 127 aspire-si judge pairs (0.976, prompt-clustered CI [0.945, 1.0]) and Kev-9B on 102 of 127 (0.803). Exploratory: the statistic was chosen after the pre-registered one read 'not useful'; awaiting confirmation on fresh pairs (aspire-si, from step 1's recorded probabilities, session A 2026-10-07).
 - [verified] Kev's trainer (kev/train.py @ 5e42a7a) imports the Unix-only `resource` module, so `python -m kev.train` fails on native Windows with ModuleNotFoundError. (via: running it in E:/AI/envs/kev on the Robot rig, 2026-10-07)
 - [unverified] Fine-tuning from the released checkpoint (`--init_from`) kept 0.83 on Kev's own set and reached 0.88 on an 836-decision new domain, where starting from the base fell to 0.33 (Kev README, one user's report).
 - [verified] TypeSafe's Terms of Use and Acceptable Use Policy contain no clause against training on Jev outputs; the Master Customer Agreement was not checked. (via: research agent reading TypeSafe's published terms, 2026-10-07)

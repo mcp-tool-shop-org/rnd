@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.2.0] - 2026-10-07
+
+- Kev-4B judge fine-tune: three seeds pass the pre-registered rule; aspire-si confirmation filed
+- Updated `2026-10-07-open-jev-style-decision-models`: Open Jev-style decision models — the landscape, checked against primary sources
+- Updated `2026-10-07-qwen32b-judge-position-bias`: Qwen2.5-32B as a judge of planted errors — ties, total position bias, and how to plant errors
+- Updated experiment `kev-judge-finetune`
+
 ## [1.1.1.1.0] - 2026-10-07
 
 - New experiment kev-judge-finetune: Kev-4B LoRA fine-tune as a planted-error judge on aspire-si's fresh pairs (1,086 rows, both orders, 0 leaks), success rule written before the run

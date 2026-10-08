@@ -46,11 +46,13 @@ rater proposed in [[2026-10-07-single-rater-labels-and-ai-listener]]:
 - generate controlled defects by structured edits, never by asking a model to
   rewrite.
 
-For a judge that exposes option probabilities, scoring both orders and averaging
-can recover a consistent preference hidden under the bias. Kev-4B went from 0.547
-(hard choices) to 0.976 (order-averaged, exploratory) on these same pairs
-([[2026-10-07-open-jev-style-decision-models]]). Worth checking Qwen-32B the same
-way with its option-letter log-probabilities.
+**Confirmed (aspire-si PR #36):** score both orders and average the option
+probabilities.
+- On 149 fresh pairs, Qwen2.5-32B Q4 went from 0.685 on single choices (A chosen
+  82%) to 0.886 averaged over both orders, and 0.898 on the 127 pairs here.
+- Kev-4B went from 0.547 to 0.973.
+- The bias sits on top of a real, consistent preference; averaging over both
+  orders recovers it ([[2026-10-07-open-jev-style-decision-models]]).
 
 readouts' training KB holds the AlpacaEval `is_randomize_output_order` protocol
 (`rnd readouts alpacaeval`).
@@ -59,6 +61,7 @@ readouts' training KB holds the AlpacaEval `is_randomize_output_order` protocol
 
 - [verified] Qwen2.5-32B-Instruct picked position A for all 127 pairs when the strong answer was A, and the strong answer only 49/127 times when it was B. (via: aspire-si judge measurement, reported by session A 2026-10-07)
 - [verified] Whole-number 0–10 absolute scores tied 89 of 127 strong/flawed pairs. (via: aspire-si judge measurement, 2026-10-07)
+- [verified] Averaging the A/B log-probabilities over both orders lifted Qwen2.5-32B Q4 to 0.886 on 149 fresh planted pairs and 0.898 on the 127 here, from 0.685 on single choices. (via: aspire-si PR #36 confirmation run, reported by session A 2026-10-07)
 
 ## Sources
 

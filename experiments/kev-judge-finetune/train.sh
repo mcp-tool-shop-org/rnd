@@ -1,8 +1,11 @@
 #!/bin/bash
 # Fine-tune Kev-4B as a planted-error judge, in WSL on the RTX 5090.
-#   bash train.sh smoke      # 10 optimizer steps, to measure memory and speed
+#   bash train.sh smoke      # 30 optimizer steps, to measure memory and speed
 #   bash train.sh full SEED  # the run
-# PyTorch is capped at 0.82 of the card. WSL python is not on the VRAM watchdog's
+# PyTorch is capped at 0.82 of the card. --max_state 1536 raises Kev's training
+# limits (per-question branch 2176, packed 3200 tokens) so every row is kept whole:
+# the frozen Kev reference saw untruncated answers through judge_kev.py, so training
+# must too (longest row: 1,974 branch tokens). WSL python is not on the VRAM watchdog's
 # guard list, so the cap (and the session watching nvidia-smi) is the protection.
 set -euo pipefail
 MODE=${1:-smoke}
@@ -12,7 +15,7 @@ OUT=/mnt/e/AI-Models/kev/judge-ft/runs/judge-4b-${MODE}-s${SEED}
 cd ~/kev/kev
 export HF_HOME=/mnt/e/AI-Models/hf-cache
 EXTRA=""
-[ "$MODE" = smoke ] && EXTRA="--max_steps 10"
+[ "$MODE" = smoke ] && EXTRA="--max_steps 30"
 .venv/bin/python - <<PY
 import runpy, sys, torch
 torch.cuda.set_per_process_memory_fraction(0.82, 0)
@@ -23,6 +26,7 @@ sys.argv = ["kev.train",
     "--epochs", "2", "--lr", "2e-5", "--batch", "1", "--accum", "8",
     "--dtype", "bf16", "--weights_dtype", "bf16", "--checkpointing", "1",
     "--perm_kl", "1.0",
+    "--max_state", "1536",
     "--device", "cuda", "--seed", "$SEED", "--out", "$OUT"] + "$EXTRA".split()
 runpy.run_module("kev.train", run_name="__main__")
 PY

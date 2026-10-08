@@ -6,8 +6,8 @@ which of two long answers carries a planted error, without averaging over orders
 **Background:**
 - Out of the box, Kev-4B picked option A 95% of the time on aspire-si's 127
   planted-error pairs, for 0.547 accuracy on hard choices.
-- Averaging p(strong) over both orders gave 0.976. That was exploratory, and a
-  pre-registered confirmation is running in aspire-si (PR #36).
+- Averaging p(strong) over both orders gave 0.976. That was exploratory; aspire-si's
+  pre-registered confirmation (PR #36) then measured 0.973 on 149 fresh pairs.
 
 Research entry: `2026-10-07-open-jev-style-decision-models`.
 
@@ -33,6 +33,9 @@ Research entry: `2026-10-07-open-jev-style-decision-models`.
 python build_rows.py                       # Windows; writes E:/AI-Models/kev/judge-ft/
 wsl bash train.sh smoke                    # memory and speed check
 wsl bash train.sh full 0                   # the run (more seeds if it holds)
+wsl bash score.sh judge-4b-full-s0         # serve it and score with judge_kev.py
+python summarise.py                        # apply the rule across seeds
+python stage_hf.py                         # stage the weights for Hugging Face
 ```
 
 - **Training settings:**
@@ -41,6 +44,12 @@ wsl bash train.sh full 0                   # the run (more seeds if it holds)
   - lr 2e-5, 2 epochs, batch 1 with accumulation 8, bf16 weights and autocast,
     gradient checkpointing;
   - `--perm_kl 1.0` penalises predictions that change with the option order;
+  - `--max_state 1536` raises Kev's training limits (2,176 tokens per question,
+    3,200 per record), so every row is kept whole. The frozen reference judged
+    untruncated answers through `judge_kev.py` (no truncation at aspire-si
+    c94fc93; Kev's server accepts up to 65,536 tokens), so training sees answers
+    the same way. The longest row is 1,974 question tokens. The default limits
+    dropped 964 of 1,086 rows in the first smoke run;
   - PyTorch capped at 0.82 of the card.
 - **Environment:** WSL Ubuntu, torch 2.8.0+cu128, flash-linear-attention 0.5.2
   (Kev's fused kernels), kev @ 5e42a7a.
@@ -63,4 +72,30 @@ Written before the run:
 
 ## Results
 
-Not run yet: waiting for the 5090 (aspire-si's confirmation scoring is on it).
+**The fine-tune helps: all three seeds pass the rule** (`python summarise.py`,
+`results/summary.json`).
+
+| seed | confirm hard choice | picks A | confirm order-averaged [95% CI] | judge hard choice | judge order-averaged |
+|---|---|---|---|---|---|
+| 0 | 0.963 | 50% | 0.980 [0.954, 1.000] | 0.969 | 0.992 |
+| 1 | 0.956 | 50% | 0.987 [0.966, 1.000] | 0.969 | 0.992 |
+| 2 | 0.960 | 49% | 0.980 [0.954, 1.000] | 0.965 | 1.000 |
+| frozen Kev-4B | 0.547 | 95% | 0.973 [0.946, 0.993] | 0.547 | 0.976 |
+
+- **What changed:** the position bias is gone. A single hard choice is now about
+  as good as averaging over both orders.
+- **What did not:** order-averaged accuracy is level with the frozen model; the
+  CIs overlap, so this is not a measured improvement there.
+- **Transfer:** the training pairs were planted the same way as the confirmation
+  set, so only the judge set (bf16-planted) speaks to transfer. It holds there too.
+- **Cost:** about 22 minutes per seed on the 5090 under WSL, PyTorch peak about
+  10.5 GB, no row truncated or dropped. Scoring takes a few minutes per seed.
+- **Use:** aspire-si keeps the frozen Kev-4B as its pre-registered reference judge;
+  the fine-tune is reported beside it as a second judge, never swapped in.
+- **Open:** the logged order-consistency KL differed between seeds at the
+  sampled steps (about 0.001 in seed 1, 0.7–0.8 in seed 2) with the same
+  outcome. Not investigated.
+
+**Weights:** `stage_hf.py` stages the three adapters (rig paths stripped from the
+configs and from `head.pt`, tensors checked unchanged) for the private Hugging
+Face repo `mcp-tool-shop/rnd-kev-judge-4b`.

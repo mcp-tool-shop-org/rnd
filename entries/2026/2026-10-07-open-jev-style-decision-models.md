@@ -123,7 +123,24 @@ Kev-9B ran on the same 124 phrase-clean records as hosted Jev and OpenJev, both
   0.43–0.87 across seeds.
 - One task far from Kev's training distribution (long options, one-sentence
   errors), so this says nothing about its own benchmark.
-- **Exploratory: averaging over both orders changes the picture.**
+- **Confirmed on fresh pairs:** averaging over both answer orders makes every judge
+  usable. The test was pre-registered in aspire-si PR #36 (c94fc93): 149 fresh
+  planted pairs from 78 prompts, accuracy averaged over both orders, 95% CIs
+  clustered by prompt.
+
+  | judge | order-averaged | single choice | picks A |
+  |---|---|---|---|
+  | Kev-4B | **0.973** [0.946, 0.993] | 0.547 | 95% |
+  | Kev-9B | 0.859 [0.795, 0.921] | 0.638 | 85% |
+  | Qwen2.5-32B Q4 | 0.886 [0.823, 0.939] | 0.685 | 82% |
+
+  - Every judge is position-biased on single choices, and every one clears 0.85
+    averaged over both orders.
+  - Qwen-32B Q4 on the 127 bf16-planted judge pairs scored 0.898: no sign that it
+    favours errors it planted itself.
+  - **Kev-4B is both the strongest and the cheapest judge.**
+- **The exploratory step that led there:** averaging over both orders changed
+  the picture.
   - With two options, `/permute` amounts to averaging p(strong) over the two
     orders. aspire-si recomputed it from the probabilities already recorded:
     $0, no new run.
@@ -143,11 +160,9 @@ Kev-9B ran on the same 124 phrase-clean records as hosted Jev and OpenJev, both
 
     The 9B moves more between orders but less consistently; the 4B's preference
     is small and steady.
-  - The confirmation run is defined: fresh planted-error pairs; Kev-4B, Kev-9B and
-    Qwen-32B, all order-averaged; the statistic fixed as mean p(strong) over both
-    orders (favoured above 0.5, ties count half); the rule written first. It waits
-    on the Director's go. Qwen-32B needs a rerun with vLLM log-probabilities,
-    because none were recorded.
+  - The confirmation run then fixed the statistic as mean p(strong) over both
+    orders (favoured above 0.5, ties count half), wrote the rule first, and ran
+    on fresh pairs: the table above.
   - **The lesson for any two-option judge: always score both orders and average
     the probabilities. Never read a single hard choice.**
 
@@ -166,13 +181,29 @@ Kev-9B ran on the same 124 phrase-clean records as hosted Jev and OpenJev, both
     a rented GPU.
   - **It trains an adapter, not the whole model.** Kev-0.8B, 4B and 9B train a
     small adapter plus a pointer head on a frozen base; only Kev-27B fine-tunes
-    every weight. So Kev-4B training plausibly fits the 5090, but that is an
-    inference, not a measurement.
+    every weight. Measured: a Kev-4B run fits the 5090 under WSL (see the judge
+    fine-tune below).
   - Under WSL, Triton makes Kev's fused flash-linear-attention kernels available.
     That should cut the 30+ GB activation memory seen with the reference kernels
     at 3–5k-token states.
   - So: a short WSL smoke run under the memory cap first; the rented-H100 route
     (about $1 a run) is the fallback.
+- **Measured: a judge fine-tune on the 5090 removes the position bias**
+  (`experiments/kev-judge-finetune`, rule written before the first run).
+  - Kev-4B v1.0 trained on aspire-si's fresh planted pairs, both orders, with
+    `--perm_kl 1.0` and `--max_state 1536`: about 22 minutes per seed under WSL,
+    PyTorch peak about 10.5 GB, $0.
+  - On the 149 confirmation pairs, all three seeds pass: single choice 0.956–0.963
+    with A picked 49–50% (frozen: 0.547, A 95%), order-averaged 0.980–0.987
+    (frozen: 0.973, CIs overlap).
+  - On the 127 bf16-planted judge pairs, the transfer check: 0.965–0.969 single
+    choice, 0.992–1.000 order-averaged.
+  - So the gain is that one hard choice now suffices; averaging over both orders
+    was already as good. The training pairs were planted the same way as the
+    confirmation set, so only the judge set speaks to transfer.
+  - aspire-si keeps the frozen Kev-4B as its pre-registered reference judge, with
+    the fine-tune reported beside it. Weights are staged for a private Hugging
+    Face repo, `mcp-tool-shop/rnd-kev-judge-4b` (upload pending).
 - **Prompting** is limited. Kev is not a chat model: it reads the state, the
   question's instructions and each option's description. Its own evidence is to
   give it derived facts, not rubrics: `KEV_DATE_FACTS=1` appends day counts and
@@ -205,7 +236,9 @@ wrong repo. Always resolve by GitHub or Hugging Face handle.
 - [verified] Adding join evidence, a rubric and four leave-one-mix-out examples did not improve Kev on phrase-clean; Kev-9B's pooled AUC fell to 0.42 [0.32, 0.52]. (via: experiments/openjev-vs-jev/results/compare-all.json, 2026-10-07)
 - [verified] On the RTX 5090 with reference PyTorch kernels, Kev-4B answered in a median 0.43 s per 3–5k-token request and Kev-9B in 0.51 s, deterministically; Kev-9B peaked at 27.8 GB on the card under a 0.82 PyTorch memory cap, and uncapped Kev-4B's allocator reached 31.9 GB. (via: experiments/openjev-vs-jev logs and receipts, 2026-10-07)
 - [verified] As a two-option judge of single planted errors in long answers (aspire-si's 127 pairs, both orders), Kev-4B scored 0.547 picking A 95% of the time and Kev-9B 0.598 picking A 87%, below aspire-si's 0.75 bar and as position-biased as Qwen2.5-32B. (via: aspire-si examples/sft-experiment/judge_kev.py, PR #33, rig run reported by session A 2026-10-07)
-- [unverified] Averaging p(strong) over both orders (the two-option equivalent of /permute), Kev-4B favoured the strong answer on 124 of 127 aspire-si judge pairs (0.976, prompt-clustered CI [0.945, 1.0]) and Kev-9B on 102 of 127 (0.803). Exploratory: the statistic was chosen after the pre-registered one read 'not useful'; awaiting confirmation on fresh pairs (aspire-si, from step 1's recorded probabilities, session A 2026-10-07).
+- [verified] On 149 fresh planted-error pairs under a pre-registered rule, order-averaged accuracy was 0.973 [0.946, 0.993] for Kev-4B, 0.859 for Kev-9B and 0.886 for Qwen2.5-32B Q4, against single-choice accuracy of 0.547 / 0.638 / 0.685 with option A chosen 95% / 85% / 82%. (via: aspire-si PR #36 confirmation run, c94fc93, reported by session A 2026-10-07)
+- [unverified] Averaging p(strong) over both orders (the two-option equivalent of /permute), Kev-4B favoured the strong answer on 124 of 127 aspire-si judge pairs (0.976, prompt-clustered CI [0.945, 1.0]) and Kev-9B on 102 of 127 (0.803). Exploratory: the statistic was chosen after the pre-registered one read 'not useful'; the method was then confirmed on fresh pairs under a rule written first (the [verified] claim above); these 127-pair figures stay exploratory (aspire-si, from step 1's recorded probabilities, session A 2026-10-07).
+- [verified] Fine-tuning Kev-4B v1.0 on aspire-si's fresh planted pairs (both orders, --perm_kl 1.0, --max_state 1536; about 22 minutes and a 10.5 GB PyTorch peak per seed on the RTX 5090 under WSL) passed a pre-registered rule on three of three seeds: 0.956–0.963 single-choice accuracy with A picked 49–50% on 149 confirmation pairs, against 0.547 and 95% frozen; order-averaged 0.980–0.987 against 0.973 frozen (CIs overlap); 0.992–1.000 order-averaged on the 127 bf16-planted judge pairs. (via: experiments/kev-judge-finetune/results, judge_kev.py at aspire-si ca5b915, 2026-10-07)
 - [verified] Kev's trainer (kev/train.py @ 5e42a7a) imports the Unix-only `resource` module, so `python -m kev.train` fails on native Windows with ModuleNotFoundError. (via: running it in E:/AI/envs/kev on the Robot rig, 2026-10-07)
 - [unverified] Fine-tuning from the released checkpoint (`--init_from`) kept 0.83 on Kev's own set and reached 0.88 on an 836-decision new domain, where starting from the base fell to 0.33 (Kev README, one user's report).
 - [verified] TypeSafe's Terms of Use and Acceptable Use Policy contain no clause against training on Jev outputs; the Master Customer Agreement was not checked. (via: research agent reading TypeSafe's published terms, 2026-10-07)
@@ -226,6 +259,7 @@ wrong repo. Always resolve by GitHub or Hugging Face handle.
 - [primary] https://github.com/loopai-hq/openjev-server — Loop AI's OpenJev server
 - [rig] experiments/openjev-vs-jev, Kev-4B and Kev-9B runs on the Robot rig, 2026-10-07
 - [rig] aspire-si Kev judge run (examples/sft-experiment/judge_kev.py, PR #33), 2026-10-07, by session A
+- [rig] experiments/kev-judge-finetune, three Kev-4B judge fine-tunes on the Robot rig, 2026-10-07
 - [aggregator] https://pinggy.io/blog/best_open_source_jev_alternatives_self_hosted_decision_models/ — used only to find links
 - [aggregator] https://www.latent.space/p/ainews-here-are-6-clones-of-jev-in — used only to find links
 - [user] AI-search summary and a Gemini summary pasted by the Director, 2026-10-07

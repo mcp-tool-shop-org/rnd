@@ -1,0 +1,2052 @@
+{
+ "pairs": 127,
+ "accuracy": 0.968503937007874,
+ "a_rate": 0.5078740157480315,
+ "mean_margin": 0.9361740157480315,
+ "separable_pairs": 119,
+ "separable_prompts": 64,
+ "separable_ids": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  33,
+  35,
+  36,
+  37,
+  38,
+  39,
+  40,
+  41,
+  42,
+  43,
+  44,
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  55,
+  56,
+  58,
+  60,
+  61,
+  62,
+  63,
+  64,
+  65,
+  67,
+  68,
+  69,
+  70,
+  71,
+  72,
+  74,
+  75,
+  76,
+  77,
+  78,
+  79,
+  80,
+  81,
+  82,
+  83,
+  84,
+  85,
+  86,
+  87,
+  88,
+  89,
+  90,
+  91,
+  92,
+  93,
+  95,
+  96,
+  97,
+  98,
+  99,
+  100,
+  101,
+  102,
+  103,
+  104,
+  105,
+  106,
+  107,
+  108,
+  109,
+  110,
+  112,
+  113,
+  114,
+  115,
+  116,
+  117,
+  118,
+  119,
+  120,
+  121,
+  122,
+  123,
+  124,
+  125,
+  126
+ ],
+ "rows": [
+  {
+   "pair_id": 0,
+   "prompt_id": 0,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 1,
+   "prompt_id": 0,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 2,
+   "prompt_id": 1,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 3,
+   "prompt_id": 1,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 4,
+   "prompt_id": 2,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9841,
+    "p_flawed": 0.0159
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 5,
+   "prompt_id": 2,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9956,
+    "p_flawed": 0.0044
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 6,
+   "prompt_id": 3,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9924,
+    "p_flawed": 0.0076
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 7,
+   "prompt_id": 3,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 8,
+   "prompt_id": 4,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.999,
+    "p_flawed": 0.001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 9,
+   "prompt_id": 4,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 10,
+   "prompt_id": 5,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 11,
+   "prompt_id": 5,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9994,
+    "p_flawed": 0.0006
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 12,
+   "prompt_id": 6,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 13,
+   "prompt_id": 6,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9997,
+    "p_flawed": 0.0003
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 14,
+   "prompt_id": 7,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9192,
+    "p_flawed": 0.0808
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9983,
+    "p_flawed": 0.0017
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 15,
+   "prompt_id": 7,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 16,
+   "prompt_id": 8,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9994,
+    "p_flawed": 0.0006
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 17,
+   "prompt_id": 8,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9929,
+    "p_flawed": 0.0071
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 18,
+   "prompt_id": 9,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9998,
+    "p_flawed": 0.0002
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 19,
+   "prompt_id": 9,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 20,
+   "prompt_id": 10,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 21,
+   "prompt_id": 10,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 22,
+   "prompt_id": 11,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 23,
+   "prompt_id": 11,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 24,
+   "prompt_id": 12,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9993,
+    "p_flawed": 0.0007
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 25,
+   "prompt_id": 12,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 26,
+   "prompt_id": 13,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 27,
+   "prompt_id": 13,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 28,
+   "prompt_id": 14,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 29,
+   "prompt_id": 14,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9994,
+    "p_flawed": 0.0006
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 30,
+   "prompt_id": 15,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 31,
+   "prompt_id": 15,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 32,
+   "prompt_id": 16,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 33,
+   "prompt_id": 16,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.999,
+    "p_flawed": 0.001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 34,
+   "prompt_id": 17,
+   "strong_first": {
+    "choice": "B",
+    "p_strong": 0.039,
+    "p_flawed": 0.961
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9428,
+    "p_flawed": 0.0572
+   },
+   "separable": false
+  },
+  {
+   "pair_id": 35,
+   "prompt_id": 17,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 36,
+   "prompt_id": 18,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.982,
+    "p_flawed": 0.018
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 37,
+   "prompt_id": 18,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.982,
+    "p_flawed": 0.018
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 38,
+   "prompt_id": 19,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 39,
+   "prompt_id": 19,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 40,
+   "prompt_id": 20,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 41,
+   "prompt_id": 20,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 42,
+   "prompt_id": 21,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 43,
+   "prompt_id": 21,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9997,
+    "p_flawed": 0.0003
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 44,
+   "prompt_id": 22,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9962,
+    "p_flawed": 0.0038
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9996,
+    "p_flawed": 0.0004
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 45,
+   "prompt_id": 22,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 46,
+   "prompt_id": 23,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 47,
+   "prompt_id": 23,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 48,
+   "prompt_id": 24,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9995,
+    "p_flawed": 0.0005
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9668,
+    "p_flawed": 0.0332
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 49,
+   "prompt_id": 24,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.995,
+    "p_flawed": 0.005
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9996,
+    "p_flawed": 0.0004
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 50,
+   "prompt_id": 25,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 51,
+   "prompt_id": 25,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 52,
+   "prompt_id": 26,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 53,
+   "prompt_id": 26,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9907,
+    "p_flawed": 0.0093
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9997,
+    "p_flawed": 0.0003
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 54,
+   "prompt_id": 27,
+   "strong_first": {
+    "choice": "B",
+    "p_strong": 0.0054,
+    "p_flawed": 0.9946
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9993,
+    "p_flawed": 0.0007
+   },
+   "separable": false
+  },
+  {
+   "pair_id": 55,
+   "prompt_id": 27,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 56,
+   "prompt_id": 28,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 57,
+   "prompt_id": 28,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9995,
+    "p_flawed": 0.0005
+   },
+   "strong_second": {
+    "choice": "A",
+    "p_strong": 0.0119,
+    "p_flawed": 0.9881
+   },
+   "separable": false
+  },
+  {
+   "pair_id": 58,
+   "prompt_id": 29,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9989,
+    "p_flawed": 0.0011
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 59,
+   "prompt_id": 29,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "strong_second": {
+    "choice": "A",
+    "p_strong": 0.0041,
+    "p_flawed": 0.9959
+   },
+   "separable": false
+  },
+  {
+   "pair_id": 60,
+   "prompt_id": 30,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 61,
+   "prompt_id": 30,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 62,
+   "prompt_id": 31,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 63,
+   "prompt_id": 31,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9711,
+    "p_flawed": 0.0289
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 64,
+   "prompt_id": 32,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9997,
+    "p_flawed": 0.0003
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 65,
+   "prompt_id": 32,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 66,
+   "prompt_id": 33,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9998,
+    "p_flawed": 0.0002
+   },
+   "strong_second": {
+    "choice": "A",
+    "p_strong": 0.4558,
+    "p_flawed": 0.5442
+   },
+   "separable": false
+  },
+  {
+   "pair_id": 67,
+   "prompt_id": 33,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 68,
+   "prompt_id": 34,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 69,
+   "prompt_id": 34,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 70,
+   "prompt_id": 35,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 71,
+   "prompt_id": 35,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 72,
+   "prompt_id": 36,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 73,
+   "prompt_id": 36,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "strong_second": {
+    "choice": "A",
+    "p_strong": 0.1037,
+    "p_flawed": 0.8963
+   },
+   "separable": false
+  },
+  {
+   "pair_id": 74,
+   "prompt_id": 37,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 75,
+   "prompt_id": 37,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 76,
+   "prompt_id": 38,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 77,
+   "prompt_id": 38,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.5822,
+    "p_flawed": 0.4178
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 78,
+   "prompt_id": 39,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 79,
+   "prompt_id": 39,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 80,
+   "prompt_id": 40,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9855,
+    "p_flawed": 0.0145
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 81,
+   "prompt_id": 40,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9518,
+    "p_flawed": 0.0482
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 82,
+   "prompt_id": 41,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 83,
+   "prompt_id": 41,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 84,
+   "prompt_id": 42,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9972,
+    "p_flawed": 0.0028
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 85,
+   "prompt_id": 42,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 86,
+   "prompt_id": 43,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 87,
+   "prompt_id": 43,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 88,
+   "prompt_id": 44,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 89,
+   "prompt_id": 44,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 90,
+   "prompt_id": 45,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 91,
+   "prompt_id": 45,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 92,
+   "prompt_id": 46,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 93,
+   "prompt_id": 46,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 94,
+   "prompt_id": 47,
+   "strong_first": {
+    "choice": "B",
+    "p_strong": 0.3601,
+    "p_flawed": 0.6399
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9976,
+    "p_flawed": 0.0024
+   },
+   "separable": false
+  },
+  {
+   "pair_id": 95,
+   "prompt_id": 47,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9998,
+    "p_flawed": 0.0002
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 96,
+   "prompt_id": 48,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 97,
+   "prompt_id": 48,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 98,
+   "prompt_id": 49,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 99,
+   "prompt_id": 49,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 100,
+   "prompt_id": 50,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 101,
+   "prompt_id": 50,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 102,
+   "prompt_id": 51,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 103,
+   "prompt_id": 51,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9972,
+    "p_flawed": 0.0028
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 104,
+   "prompt_id": 52,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9908,
+    "p_flawed": 0.0092
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 105,
+   "prompt_id": 52,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9995,
+    "p_flawed": 0.0005
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9988,
+    "p_flawed": 0.0012
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 106,
+   "prompt_id": 53,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 107,
+   "prompt_id": 53,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 108,
+   "prompt_id": 54,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 109,
+   "prompt_id": 54,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9995,
+    "p_flawed": 0.0005
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9996,
+    "p_flawed": 0.0004
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 110,
+   "prompt_id": 55,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9743,
+    "p_flawed": 0.0257
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 111,
+   "prompt_id": 55,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9998,
+    "p_flawed": 0.0002
+   },
+   "strong_second": {
+    "choice": "A",
+    "p_strong": 0.0671,
+    "p_flawed": 0.9329
+   },
+   "separable": false
+  },
+  {
+   "pair_id": 112,
+   "prompt_id": 56,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9566,
+    "p_flawed": 0.0434
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9742,
+    "p_flawed": 0.0258
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 113,
+   "prompt_id": 56,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 114,
+   "prompt_id": 57,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 115,
+   "prompt_id": 57,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 116,
+   "prompt_id": 58,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9994,
+    "p_flawed": 0.0006
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9837,
+    "p_flawed": 0.0163
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 117,
+   "prompt_id": 58,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 118,
+   "prompt_id": 59,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9887,
+    "p_flawed": 0.0113
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 119,
+   "prompt_id": 60,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 120,
+   "prompt_id": 60,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 121,
+   "prompt_id": 61,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 122,
+   "prompt_id": 61,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 123,
+   "prompt_id": 62,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9998,
+    "p_flawed": 0.0002
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 124,
+   "prompt_id": 62,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9997,
+    "p_flawed": 0.0003
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 125,
+   "prompt_id": 63,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.7735,
+    "p_flawed": 0.2265
+   },
+   "separable": true
+  },
+  {
+   "pair_id": 126,
+   "prompt_id": 63,
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  }
+ ],
+ "name": "judge-4b-full-s1-judge",
+ "reading": "usable reference judge",
+ "order_averaged": {
+  "accuracy": 0.9921259842519685,
+  "ci": [
+   0.976,
+   1.0
+  ],
+  "favoured_pairs": 126,
+  "favoured_prompts": 64,
+  "prompts": 64,
+  "mean_abs_gap": 0.9364606299212598,
+  "sd_gap": 0.2192840398027641,
+  "both_orders_strong": 119,
+  "reading": "confirmed"
+ }
+}

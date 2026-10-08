@@ -1,0 +1,48 @@
+{
+ "rule_frozen_order_averaged": 0.973,
+ "seeds": [
+  {
+   "seed": 0,
+   "confirm_hard": 0.9630872483221476,
+   "confirm_a_rate": 0.4966442953020134,
+   "confirm_order_averaged": 0.9798657718120806,
+   "confirm_order_averaged_ci": [
+    0.9536423841059603,
+    1.0
+   ],
+   "judge_hard": 0.968503937007874,
+   "judge_a_rate": 0.515748031496063,
+   "judge_order_averaged": 0.9921259842519685,
+   "passes": true
+  },
+  {
+   "seed": 1,
+   "confirm_hard": 0.9563758389261745,
+   "confirm_a_rate": 0.4966442953020134,
+   "confirm_order_averaged": 0.9865771812080537,
+   "confirm_order_averaged_ci": [
+    0.9664429530201343,
+    1.0
+   ],
+   "judge_hard": 0.968503937007874,
+   "judge_a_rate": 0.5078740157480315,
+   "judge_order_averaged": 0.9921259842519685,
+   "passes": true
+  },
+  {
+   "seed": 2,
+   "confirm_hard": 0.959731543624161,
+   "confirm_a_rate": 0.49328859060402686,
+   "confirm_order_averaged": 0.9798657718120806,
+   "confirm_order_averaged_ci": [
+    0.9536423841059603,
+    1.0
+   ],
+   "judge_hard": 0.9645669291338582,
+   "judge_a_rate": 0.5039370078740157,
+   "judge_order_averaged": 1.0,
+   "passes": true
+  }
+ ],
+ "verdict": "helps"
+}

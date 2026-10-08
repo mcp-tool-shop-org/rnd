@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.11] - 2026-10-07
+
+- Planted-defects program: PR 2 built (stretch, pitch slip, vocoded sham, compound kinds); compounds are 3–4× more available than clean replays, and replay+early-vowel has no eligible join in the shipped warp mixes
+- Kev as a planted-error judge: 0.547 (4B) and 0.598 (9B) with heavy first-option bias; not a useful judge for that task
+- Updated `2026-10-07-open-jev-style-decision-models`: Open Jev-style decision models — the landscape, checked against primary sources
+- Updated `2026-10-07-planted-defects-program-for-sung-mixes`: Planted defects for sung mixes — an automated planter-versus-detector loop, anchored by the listener's measured threshold
+
 ## [1.1.1.0.10] - 2026-10-07
 
 - Planted-defects program: planter #91 ready; warp clicks verified at either hard edge of a seam and graded by crossfade length; final warp trial kept 83/100 and 86/100

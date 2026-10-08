@@ -249,7 +249,26 @@ own artefact. Even then it is driven by parameters and verified by measurement.
       mix; 1–5 ms crossfades clicked far less often, because they often land in
       phase on real singing.
     - That makes crossfade length a usable psychometric axis.
-  - **#91 ready for review.** Final warp trial, 100 plants each:
+  - **PR 2 (built; opens once alt picks #94 merges).**
+    - **New kinds:**
+      - stretch (a warp ratio of 0.5, 0.6, 1.6 or 2.0, vowels kept on time);
+      - pitch slip (WORLD, formant-preserving, ±1 and ±12 semitones);
+      - a vocoded sham (the same resynthesis, unshifted);
+      - compound kinds: replay or skip plus a pause, a late vowel or an early
+        vowel, and click plus a pause. Each requires its own excess and refuses
+        the other, so every label names one shape;
+      - labels now carry pick and alternate.
+    - **Amazing Grace pad16 trial** (130 plants, kept 99): pitch reads back at
+      exactly ±100 and ±1200 cents, vocoded shams at 0, and stretches land on
+      their targets.
+    - **Compounds are 3–4× more available than clean replays:** 36–46 eligible
+      joins against 14. That fits the cut-and-shift defects the Director heard,
+      which had these shapes.
+    - **"Replay + early vowel" has no eligible join in the shipped warp mixes.**
+      A previous run never reaches past the next cut's start in the take.
+    - Alternate picks add new joins, not copies: clean-replay eligibility was 10
+      against the pick's 14.
+  - **#91 merged** (919871d). Final warp trial, 100 plants each:
     - Amazing Grace kept 83: replay 18/20, skip 20/20, click 5/20, sham 20,
       none 20.
     - America the Beautiful kept 86: replay 19/20, skip 20/20, click 7/20, sham 20,

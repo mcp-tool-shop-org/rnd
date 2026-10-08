@@ -104,6 +104,26 @@ Kev-9B ran on the same 124 phrase-clean records as hosted Jev and OpenJev, both
 
   Kev-4B is the pick; 9B adds memory and nothing measurable.
 
+**Kev as a judge of planted errors (aspire-si, 2026-10-07).**
+- The task: Kev picks the more correct of two long answers (~3,500 characters
+  each, differing in one sentence) on aspire-si's 127 judge pairs. Both orders;
+  the choice and margin are read, not the calibrated probability.
+- Results (memory capped at 0.82 of the card):
+
+  | | accuracy | picks A | separable pairs | mean margin | peak VRAM |
+  |---|---|---|---|---|---|
+  | Kev-4B | 0.547 | 95% | 12 | 0.13 | 18.7 GB |
+  | Kev-9B | 0.598 | 87% | 27 | 0.15 | 26.0 GB |
+
+- **Neither passes** aspire-si's bar: accuracy 0.75 or more, with option A
+  chosen 40–60% of the time.
+- Both lean heavily to the first option, like Qwen2.5-32B, which chose A on
+  127 of 127 ([[2026-10-07-qwen32b-judge-position-bias]]).
+- For comparison: Qwen-32B's absolute scores reach 0.594, and ASPIRE critics
+  0.43–0.87 across seeds.
+- One task far from Kev's training distribution (long options, one-sentence
+  errors), so this says nothing about its own benchmark.
+
 AI-search summaries in this area mix up the same-named projects. Gemini's "SemIf is
 not OpenJev" was wrong, and the first summary's "SemIf (OpenJev)" pointed at the
 wrong repo. Always resolve by GitHub or Hugging Face handle.
@@ -121,6 +141,7 @@ wrong repo. Always resolve by GitHub or Hugging Face handle.
 - [verified] On sense-si's 124 phrase-clean records, Kev-4B and Kev-9B (v1.0, bf16, reference kernels) scored a sense-si-calibrated Brier of 0.240 and 0.242 against a 0.242 base rate and Jev's 0.252, with pooled AUC 0.54 [0.44, 0.64] and 0.52 [0.42, 0.63]; correlation with hosted Jev r = 0.67 and 0.66. (via: experiments/openjev-vs-jev/results/compare-all.json, Robot rig run 2026-10-07)
 - [verified] Adding join evidence, a rubric and four leave-one-mix-out examples did not improve Kev on phrase-clean; Kev-9B's pooled AUC fell to 0.42 [0.32, 0.52]. (via: experiments/openjev-vs-jev/results/compare-all.json, 2026-10-07)
 - [verified] On the RTX 5090 with reference PyTorch kernels, Kev-4B answered in a median 0.43 s per 3–5k-token request and Kev-9B in 0.51 s, deterministically; Kev-9B peaked at 27.8 GB on the card under a 0.82 PyTorch memory cap, and uncapped Kev-4B's allocator reached 31.9 GB. (via: experiments/openjev-vs-jev logs and receipts, 2026-10-07)
+- [verified] As a two-option judge of single planted errors in long answers (aspire-si's 127 pairs, both orders), Kev-4B scored 0.547 picking A 95% of the time and Kev-9B 0.598 picking A 87%, below aspire-si's 0.75 bar and as position-biased as Qwen2.5-32B. (via: aspire-si examples/sft-experiment/judge_kev.py, PR #33, rig run reported by session A 2026-10-07)
 - [verified] TypeSafe's Terms of Use and Acceptable Use Policy contain no clause against training on Jev outputs; the Master Customer Agreement was not checked. (via: research agent reading TypeSafe's published terms, 2026-10-07)
 
 ## Sources
@@ -138,6 +159,7 @@ wrong repo. Always resolve by GitHub or Hugging Face handle.
 - [primary] https://github.com/razorback16/openjev — razorback16/openjev (DiffusionGemma server)
 - [primary] https://github.com/loopai-hq/openjev-server — Loop AI's OpenJev server
 - [rig] experiments/openjev-vs-jev, Kev-4B and Kev-9B runs on the Robot rig, 2026-10-07
+- [rig] aspire-si Kev judge run (examples/sft-experiment/judge_kev.py, PR #33), 2026-10-07, by session A
 - [aggregator] https://pinggy.io/blog/best_open_source_jev_alternatives_self_hosted_decision_models/ — used only to find links
 - [aggregator] https://www.latent.space/p/ainews-here-are-6-clones-of-jev-in — used only to find links
 - [user] AI-search summary and a Gemini summary pasted by the Director, 2026-10-07

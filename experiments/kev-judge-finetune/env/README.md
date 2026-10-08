@@ -49,3 +49,28 @@ The second condition matters most. With the same weights, only numeric kernels d
 A fail on either keeps training off cu134, and is reported with the failing numbers. **The fallback is stable cu132 (to
 be built; Director, 2026-10-08), not cu128.** Until a cu132 env exists, nothing trains on the old cu128 env as a
 fallback without asking the Publisher first.
+
+## Fallback env: CUDA 13.2 stable (built 2026-10-08, not wired in)
+
+Built on the Director's order as the fallback if cu134 fails its gate: `~/kev/kev/.venv-cu132` in WSL.
+- **torch 2.14.1+cu132**: the newest stable release on 2026-10-08. CUDA 13.2, cuDNN 9.24, Triton 3.8.0.
+- **Same package set as `.venv-cu134`**: transformers 5.19.0, peft 0.21.2, accelerate 1.15.0. Only two
+  packages are missing, the 13.4-only CUDA extras `cupti-python` and `nvidia-cuda-cccl`.
+- **Lock:** `requirements-cu132.lock`.
+
+Build gotcha: the cu134 lock pins CUDA metapackages (`cuda-toolkit==13.4.1`, `cuda-bindings`,
+`cuda-pathfinder`, `cupti-python`). Installing the cu134 lock over stable torch makes uv quietly
+replace torch with 2.9.1+cu128 from PyPI to satisfy them. Install torch and the rest in **one**
+resolution, with those pins removed, and assert the torch version afterwards:
+
+```bash
+uv venv --python 3.12 .venv-cu132
+uv pip install "torch==2.14.1+cu132" -r <lock without torch, triton, nvidia-*, cuda-*, cupti-python> \
+  --index-url https://pypi.org/simple --extra-index-url https://download.pytorch.org/whl/cu132 \
+  --index-strategy unsafe-best-match
+uv pip install --no-deps -e .
+```
+
+Checked once, on the device: the RTX 5090 is visible, and a float64 matmul matches the CPU to 4.6e-14
+(33 MB). No training has run on it. The VRAM watchdog's pattern does not cover `.venv-cu132`, so it
+runs no GPU work until the Director wires it in.

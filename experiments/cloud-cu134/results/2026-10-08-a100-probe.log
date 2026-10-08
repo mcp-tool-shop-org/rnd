@@ -1,0 +1,10 @@
+Thu Oct  8 20:34:41 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.159.04             Driver Version: 580.159.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+Using Python 3.12.15 environment at: .venv-cu134
+/workspace/job/cu134_probe.py:88: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  err = float((o.float() - ref).abs().max())
+PROBE-JSON {"env": {"torch": "2.16.0.dev20261008+cu134", "torch_cuda": "13.4", "cudnn": 92600, "gpu": "NVIDIA A100-SXM4-80GB, 580.159.04, 8.0, 81920 MiB", "host_cuda": "13.0"}, "basic": {"ok": true, "s": 0.325, "device": "NVIDIA A100-SXM4-80GB", "capability": [8, 0]}, "matmul": {"ok": true, "s": 0.964, "rel_err": {"torch.float32": 2.6325559168605543e-07, "torch.bfloat16": 0.0028809245955676746}}, "cudnn_conv": {"ok": true, "s": 2.099, "max_abs_err": 1.430511474609375e-06, "grad_finite": true}, "sdpa_flash": {"ok": true, "s": 0.023, "backend": "flash", "max_abs_err": 0.0077135562896728516}, "triton_raw": {"ok": true, "s": 5.7, "triton": "3.9.0"}, "compile_train": {"ok": true, "s": 38.496, "first_5_steps_s": 5.27, "loss": 0.04434346780180931}, "compile_reduce_overhead": {"ok": true, "s": 0.843, "max_abs_err": 0.0}, "cuda_graph": {"ok": true, "s": 0.01, "max_abs_err": 0.0}, "lora_train": {"ok": false, "s": 35.012, "error": "AssertionError: loss did not fall: 7.6615800857543945 -> 6.874583721160889", "trace": "Traceback (most recent call last):\n  File \"/workspace/job/cu134_probe.py\", line 20, in check\n    detail = fn()\n             ^^^^\n  File \"/workspace/job/cu134_probe.py\", line 181, in lora_train\n    assert losses[-1] < losses[0] * 0.8, f\"loss did not fall: {losses[0]} -> {losses[-1]}\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: loss did not fall: 7.6615800857543945 -> 6.874583721160889\n"}, "all_ok": false}
+PROBE-DONE

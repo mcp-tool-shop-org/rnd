@@ -11,31 +11,32 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.1.2] - 2026-10-08
+
+- B200 probe: CUDA 13.4 under cuda-compat passes 9 of 9; 2 locality domains
+- Updated experiment `cloud-cu134`
+
 ## [1.1.4.1.1] - 2026-10-08
 
 - cuda-compat-13-4 gives a real 13.4 driver API on RunPod 13.0 hosts
 - Updated experiment `cloud-cu134`
-- Added experiment `data-designer`
 
 ## [1.1.4.1.0] - 2026-10-08
 
 - cloud cu134 probe on a RunPod CUDA 13.0 host; kev cu132 fallback env
 - Added experiment `cloud-cu134`
-- Added experiment `data-designer`
 - Updated experiment `kev-judge-finetune`
 
 ## [1.1.4.0.13] - 2026-10-08
 
 - cuda-graphs probe venv moved to E:/AI/envs/triton-probe (watchdog-guarded)
 - Updated experiment `cuda-graphs`
-- Added experiment `data-designer`
 
 ## [1.1.4.0.12] - 2026-10-08
 
 - CUDA graphs build-out for aspire-si critic heads (code, CPU tests, gates; GPU run pending)
 - Updated `2026-10-07-cuda-graphs`: CUDA Graphs
 - Added experiment `cuda-graphs`
-- Added experiment `data-designer`
 
 ## [1.1.4.0.11] - 2026-10-08
 

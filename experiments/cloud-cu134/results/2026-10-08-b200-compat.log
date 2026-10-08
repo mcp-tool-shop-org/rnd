@@ -1,0 +1,29 @@
+| NVIDIA-SMI 580.167.08             Driver Version: 580.167.08     CUDA Version: 13.0     |
+== host driver
+COMPAT-JSON {"LD_LIBRARY_PATH": "", "cuInit": 0, "cuDriverGetVersion": [0, 13000], "device": "NVIDIA B200", "locality_domain_count": {"rc": 1, "value": null}, "locality_domain_sm_count": {"rc": 1, "value": null}, "sm_count": {"rc": 0, "value": 148}, "cc_major": {"rc": 0, "value": 10}, "has_cuMemGetLocationInfo": false, "has_cuGreenCtxCreate": true, "has_cuDeviceGetDevResource": true}
+== install cuda-compat-13-4
+cuda-compat-13-4 | 615.71.09-2ubuntu1 | https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64  Packages
+cuda-compat-13-4 | 615.71.09-1ubuntu1 | https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64  Packages
+libcuda.so
+libcuda.so.1
+libcuda.so.615.71.09
+libcudadebugger.so.1
+libcudadebugger.so.615.71.09
+libnvidia-gpucomp.so.615.71.09
+libnvidia-nvvm.so
+libnvidia-nvvm.so.4
+libnvidia-nvvm.so.615.71.09
+libnvidia-nvvm70.so.4
+libnvidia-pkcs11-openssl3.so.615.71.09
+libnvidia-ptxjitcompiler.so.1
+libnvidia-ptxjitcompiler.so.615.71.09
+libnvidia-tileiras.so.615.71.09
+== with compat
+COMPAT-JSON {"LD_LIBRARY_PATH": "/usr/local/cuda-13.4/compat", "cuInit": 0, "cuDriverGetVersion": [0, 13040], "device": "NVIDIA B200", "locality_domain_count": {"rc": 0, "value": 2}, "locality_domain_sm_count": {"rc": 0, "value": 70}, "sm_count": {"rc": 0, "value": 148}, "cc_major": {"rc": 0, "value": 10}, "has_cuMemGetLocationInfo": true, "has_cuGreenCtxCreate": true, "has_cuDeviceGetDevResource": true}
+== torch cu134 probe under compat
+torch sees driver n/a
+/workspace/job/cu134_probe.py:88: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  err = float((o.float() - ref).abs().max())
+PROBE-JSON {"env": {"torch": "2.16.0.dev20261008+cu134", "torch_cuda": "13.4", "cudnn": 92600, "gpu": "NVIDIA B200, 580.167.08, 10.0, 183359 MiB", "host_cuda": "13.4"}, "basic": {"ok": true, "s": 0.832, "device": "NVIDIA B200", "capability": [10, 0]}, "matmul": {"ok": true, "s": 0.686, "rel_err": {"torch.float32": 5.743312361723317e-07, "torch.bfloat16": 0.0028809587788980644}}, "cudnn_conv": {"ok": true, "s": 0.914, "max_abs_err": 1.9073486328125e-06, "grad_finite": true}, "sdpa_flash": {"ok": true, "s": 0.038, "backend": "flash", "max_abs_err": 0.007379293441772461}, "triton_raw": {"ok": true, "s": 5.549, "triton": "3.9.0"}, "compile_train": {"ok": true, "s": 78.264, "first_5_steps_s": 16.88, "loss": 0.0462862104177475}, "compile_reduce_overhead": {"ok": true, "s": 0.619, "max_abs_err": 8.940696716308594e-08}, "cuda_graph": {"ok": true, "s": 0.002, "max_abs_err": 0.0}, "lora_train": {"ok": true, "s": 85.181, "transformers": "5.19.0", "peft": "0.21.2", "loss_first": 7.661625862121582, "loss_last": 6.87726354598999, "grad_norm_mean": 0.5915007387598356, "peak_gb": 0.149}, "all_ok": true}
+COMPAT-DONE

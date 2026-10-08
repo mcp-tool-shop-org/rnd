@@ -5,7 +5,8 @@
 under CUDA's minor-version compatibility? The risk is code that compiles at run time (Triton,
 `torch.compile`), which that compatibility doesn't cover.
 
-**Answer: yes, on an A100.** Every GPU path the studio uses passed.
+**Answer: yes, on an A100 and a B200.** Every GPU path the studio uses passed. The B200 run is in the
+last section.
 
 ## Run
 
@@ -46,8 +47,9 @@ output stays in the log as written.
 - **Cloud training on CUDA 13.4 is viable** on RunPod hosts with CUDA 13.0, with the same env as
   local. offrig PR mcp-tool-shop-org/offrig#37 adds `cuda_runtime = "13.4"` to a profile, so plans rent
   only those hosts.
-- **Limits.** One GPU family (Ampere, sm_80), one host. A Blackwell or Hopper host could differ: Triton
-  compiles per architecture. A new card type gets this probe first (about $0.40).
+- **Limits.** Two GPU families so far: Ampere (sm_80) here and Blackwell (sm_100, B200) below. Hopper
+  is untested, and Triton compiles per architecture. A new card type gets this probe first: about $0.40
+  on an A100, $2.35 on a B200.
 - **A first real cloud training run still reproduces a known result** before its numbers are trusted, the
   same gate as the local env.
 
@@ -83,4 +85,47 @@ Run: offrig plan 3, an A100-SXM4-80GB on driver 580.159.04 (host CUDA 13.0), $0.
 parts, not on GeForce cards.
 
 The A100 is a single die, so it has one domain. A multi-domain part (B200 or B300, both listed on RunPod
-at $7.99 and $8.99/hr) is where locality domains could pay off. That run is not done yet.
+at $7.99 and $8.99/hr) is where locality domains could pay off.
+
+## B200: the same compat run on Blackwell (same day)
+
+Run: offrig plan 4, profile `probe-blackwell`. The pod was an NVIDIA B200 (183 GB) on driver 580.167.08,
+host CUDA 13.0, compute capability 10.0. About 18 minutes cost $2.35.
+- **Same script, same pins:** `setup_compat.sh` and the A100 env, with one change. The LoRA check now
+  asks only that the loss falls.
+- **Full log:** `results/2026-10-08-b200-compat.log`.
+
+| | A100 host only | A100 with compat | B200 host only | B200 with compat |
+|---|---|---|---|---|
+| `cuDriverGetVersion` | 13000 | 13040 | 13000 | **13040** |
+| locality domain count (attr 149) | error 1 | 1 | error 1 | **2** |
+| SMs per locality domain (attr 157) | error 1 | 108 of 108 | error 1 | **70 of 148** |
+| `cuMemGetLocationInfo` symbol | absent | present | absent | present |
+| `cu134_probe.py` | 8 of 9 | 8 of 9 | not run | **9 of 9** |
+
+B200 probe measures under compat:
+
+| Check | Result | Measure |
+|---|---|---|
+| matmul vs CPU float64 | pass | rel. error fp32 5.7e-7, bf16 2.9e-3 |
+| cuDNN conv forward and backward | pass | max abs error 1.9e-6 |
+| SDPA flash attention, bf16 | pass | max abs error 7.4e-3 |
+| raw Triton kernel (JIT for sm_100) | pass | Triton 3.9.0 |
+| `torch.compile` training step | pass | first 5 steps 16.9 s, including compile |
+| `torch.compile(mode="reduce-overhead")` | pass | max abs error 8.9e-8 vs eager |
+| CUDA graph capture and replay | pass | identical to eager |
+| LoRA training, 30 steps | pass | 7.6616 → 6.8773 (A100: 6.8746) |
+
+**What it shows.**
+- The CUDA 13.4 nightly runs on Blackwell under a 13.0 host, Triton and `torch.compile` included.
+  Ampere and Blackwell are now covered; Hopper is not.
+- The B200 reports **two locality domains**, one per die, so the 13.4 locality-domain API reaches
+  a real multi-domain part on RunPod.
+- **Not explained yet:** 2 × 70 = 140 SMs, not the 148 the device reports. Attribute 157 may count
+  differently from a simple split. Read the per-domain resources (`cuDeviceGetDevResource`) before
+  relying on it.
+- **Not tested:** whether domain-local allocation or green contexts make any training job faster.
+  That is the next question, and it needs a workload, not a probe.
+- Compile and LoRA wall times on the B200 were slower than on the A100: 78 s vs 5 s, and 85 s.
+  The job dir sits on RunPod's network filesystem, and these are first-run times with a cold cache.
+  They are not a speed comparison.

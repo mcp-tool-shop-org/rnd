@@ -253,6 +253,16 @@ own artefact. Even then it is driven by parameters and verified by measurement.
   - **Step B is split:** ai-jam-sessions builds the clips plus a per-clip
     phrase-evidence mode; the R&D seat builds the MERT and Dasheng frozen-feature
     heads.
+  - **Event spans (#96) and the detector heads (#98)** are up as CPU-tested code.
+    - The heads add a seam output that fires on plants and shams alike, so the
+      defect outputs must separate a defective seam from a seam.
+    - Evaluation reports per-severity hit rates (each detector's psychometric
+      curve) and a shortcut AUC: shams against plain clean clips, where 0.5 means
+      seam-blind.
+    - **Lesson from the synthetic test:** set the operating point over *all*
+      clean clips, shams included. Thresholding on plain clean clips alone, which
+      score about zero, flagged every sham even when the head had largely learned
+      the defect.
   - **Licence check, for shipping:** MERT-v1-330M is CC BY-NC 4.0, research only
     (like OpenJev). Dasheng-0.6B is Apache-2.0. A detector that ships in the
     product needs the Dasheng path, or a licence for MERT. (Checked on Hugging

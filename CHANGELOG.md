@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.18] - 2026-10-07
+
+- Planted-defects program: event spans (#96) and detector heads (#98) as CPU-tested code; the operating point must include shams
+- Updated `2026-10-07-planted-defects-program-for-sung-mixes`: Planted defects for sung mixes — an automated planter-versus-detector loop, anchored by the listener's measured threshold
+
 ## [1.1.1.0.17] - 2026-10-07
 
 - Planted-defects program: planter PR 2 merged (#95); Step B split between ai-jam-sessions (clips, evidence) and the R&D seat (MERT/Dasheng heads); MERT is CC BY-NC, so a shipped detector needs Dasheng

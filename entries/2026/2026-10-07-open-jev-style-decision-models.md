@@ -137,6 +137,15 @@ Kev-9B ran on the same 124 phrase-clean records as hosted Jev and OpenJev, both
   - **On this rig, `kev.train` fails on native Windows:** it imports the
     Unix-only `resource` module. Run it under WSL, patch the import, or run it on
     a rented GPU.
+  - **It trains an adapter, not the whole model.** Kev-0.8B, 4B and 9B train a
+    small adapter plus a pointer head on a frozen base; only Kev-27B fine-tunes
+    every weight. So Kev-4B training plausibly fits the 5090, but that is an
+    inference, not a measurement.
+  - Under WSL, Triton makes Kev's fused flash-linear-attention kernels available.
+    That should cut the 30+ GB activation memory seen with the reference kernels
+    at 3–5k-token states.
+  - So: a short WSL smoke run under the memory cap first; the rented-H100 route
+    (about $1 a run) is the fallback.
 - **Prompting** is limited. Kev is not a chat model: it reads the state, the
   question's instructions and each option's description. Its own evidence is to
   give it derived facts, not rubrics: `KEV_DATE_FACTS=1` appends day counts and

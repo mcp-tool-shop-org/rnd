@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.13] - 2026-10-07
+
+- Kev: training is adapter-only for 0.8B/4B/9B, so a local WSL run on the 5090 is plausible; smoke-test before renting
+- Updated `2026-10-07-open-jev-style-decision-models`: Open Jev-style decision models — the landscape, checked against primary sources
+
 ## [1.1.1.0.12] - 2026-10-07
 
 - Kev: how to fine-tune it (--init_from, JSONL with labels), its server switches (/permute against option-order bias, KEV_DATE_FACTS), and that kev.train fails on native Windows

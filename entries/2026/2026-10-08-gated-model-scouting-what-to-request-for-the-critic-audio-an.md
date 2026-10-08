@@ -134,9 +134,14 @@ misread or out of date, so check the repo page itself before calling a repo gate
   - CohereLabs/tiny-aya-base;
   - pyannote/speaker-diarization-3.1 and pyannote/segmentation-3.0;
   - stabilityai/stable-audio-open-1.0.
+- **Accepted later the same day:** the Llama 4 collection (email names
+  Llama-4-Maverick-17B-128E-Instruct).
+  - **Usable on the 5090:** Llama Guard 4 12B, as a judge baseline.
+  - **Not usable here:** Maverick (about 400B total) and Scout (about 109B
+    total) exceed one 32 GB card.
+  - Licence: Llama 4 Community.
 - **Pending:**
   - SAM3 (the collection);
-  - the Llama 4 collection (expected to include Llama Guard 4);
   - facebook/sam-3d-objects.
 - **Open, no request needed:** Apertus, FLUX.1 Kontext, PaliGemma 2.
 

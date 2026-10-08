@@ -126,6 +126,22 @@ the other two).
    its planted-pair accuracy. The gap is how much planting flatters the
    critic.
 
+**Study A status (2026-10-08): the set is built and labelled.**
+- Human review was replaced by two blind Claude passes plus adjudication. The
+  Director's reason: it doesn't scale, and a strong model finds more of an
+  8B's mistakes.
+- **The set:** 95 llama3.1:8b answers; 59 have an error and 36 are clean.
+  Labeller kappa is 0.63.
+- **The screen:**
+  - the three-judge screen caught every answer with an error, but only 70%
+    of the error sentences;
+  - gemma4:31b alone: recall 0.97, precision 0.72 at the answer level;
+  - mistral-small and granite are precise but miss most errors.
+- 31 correction pairs are built as the reversed control for aspire-si's
+  Skeptic.
+- Details: `experiments/natural-errors/README.md`. Readout 2 (critics) is
+  next.
+
 **Study B: two planter families** (follows directly from #45's
 second-planter tooling).
 - **Arms, all at the same total size N, on the same prompts and strong
@@ -195,6 +211,8 @@ second-planter tooling).
 - [verified] Training on easy data often matches oracles trained on hard data across models up to 70B on 4 QA datasets. (via: research agent reading arXiv 2401.06751 abstract, 2026-10-08)
 - [verified] FELM has 847 questions and 4,427 segment labels, under CC BY-NC-SA 4.0. (via: research agent reading the FELM repository, 2026-10-08)
 - [verified] On REALMistake, LLM detectors including GPT-4 and Claude 3 had low recall on natural errors, far below humans, and majority voting did not help. (via: research agent reading the REALMistake pages, 2026-10-08)
+- [verified] On the 95-answer natural set, the three-judge local screen flagged every answer that has an error, but only 59 of the 84 error sentences both labellers marked (70%); gemma4:31b alone had answer-level recall 0.97 and precision 0.72. (via: experiments/natural-errors gold.json against screen.json, labels by claude-opus-5-5 and claude-sonnet-5-5 blind, adjudicated by Opus, 2026-10-08; labels are model-made, not human)
+- [verified] Two blind Claude labelling passes on the natural set agree at kappa 0.63 (error vs not); Sonnet marked fewer, mostly skipping minor errors. (via: experiments/natural-errors labels_claude.json vs labels_sonnet.json, 2026-10-08)
 - [unverified] With scarce data, keeping easy examples beats keeping hard ones (Sorscher et al. 2022; the abstract was read, this rule is from memory).
 - [unverified] Cross-generator transfer of a supervised detector swings by about 20 points with the choice of training generator (DetectRL Table 5, metric unstated).
 - [unverified] Two planter families are too few to expect reliable gains on an unseen family (domain-count theory, contested; no direct study).

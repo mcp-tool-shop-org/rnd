@@ -1,0 +1,1505 @@
+{
+ "labeller": "claude-opus-5-5",
+ "protocol": "blind to screen flags; error = a claim a competent expert would mark wrong (false fact, wrong number/unit, step that does not follow); vagueness, opinion and arguable overreach do not count; severity clear|minor",
+ "items": {
+  "n000": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 39,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "The examples show how recursion can simplify problems and make them more elegant, though usually not more efficient than an equivalent loop.",
+     "why": "Recursive factorial is not more efficient than iteration; it adds call overhead and stack use."
+    }
+   ]
+  },
+  "n001": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 18,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "For a stack, a linked list reaches the top element in O(1); only access to arbitrary positions requires traversal.",
+     "why": "A linked-list stack pushes and pops at the head without traversal."
+    },
+    {
+     "s": 28,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "| **Insertion and deletion** (at the top of a stack) | Efficient (amortised O(1)) | Efficient (O(1)) |",
+     "why": "Push and pop at the end of a dynamic array are amortised O(1), not inefficient."
+    }
+   ]
+  },
+  "n002": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 23,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Cons: can lead to primary clustering, where runs of occupied consecutive slots grow and lengthen probe sequences.",
+     "why": "Clustering in linear probing is long runs of filled consecutive slots, not many keys hashing to the same index."
+    }
+   ]
+  },
+  "n003": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 7,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Integer arithmetic is often slightly faster than floating-point arithmetic on some hardware, but not because integers need less memory: a 32-bit int and a 32-bit float are the same size.",
+     "why": "The stated reason is false; int32 and float32 use the same memory."
+    },
+    {
+     "s": 16,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Large data structures can consume significant memory, potentially leading to out-of-memory errors.",
+     "why": "Size alone does not cause memory leaks; leaks come from memory that is never released."
+    }
+   ]
+  },
+  "n004": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 5,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Fewer characters make code shorter to type, but have no effect on memory use or execution speed in compiled code, and negligible effect in interpreted code.",
+     "why": "Identifier names do not exist in compiled machine code; they do not affect memory use or speed."
+    },
+    {
+     "s": 9,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Single-letter variable names do not meaningfully reduce memory or processing time.",
+     "why": "Same false performance claim repeated."
+    }
+   ]
+  },
+  "n005": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 6,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Cache locality: hash tables scatter keys across buckets, so related keys are usually not stored together; open addressing gives better locality than chaining.",
+     "why": "Hashing deliberately disperses related keys."
+    },
+    {
+     "s": 26,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Cache locality: for ordered scans, a B-tree or sorted array gives better locality; a hash table does not store related data together.",
+     "why": "Follows from the false claim in sentence 6."
+    }
+   ]
+  },
+  "n006": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 11,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Title Case (`Get User Information`) is used for headings and labels, not identifiers, since identifiers cannot contain spaces.",
+     "why": "Title case with spaces is not an identifier naming convention."
+    }
+   ]
+  },
+  "n007": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 11,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Another key difference is that a class can implement multiple interfaces, whereas it can extend only one (abstract) class.",
+     "why": "Abstract classes can be extended by any number of classes; the limit is one superclass per class."
+    },
+    {
+     "s": 9,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "In many languages interfaces cannot hold instance state, though Java 8+ and C# 8+ allow default method implementations.",
+     "why": "Modern interfaces can carry default implementations."
+    }
+   ]
+  },
+  "n008": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n009": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n012": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n014": {
+   "verdict": "clean",
+   "confidence": "high",
+   "errors": []
+  },
+  "n016": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n018": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n010": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 16,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Fault injection: deliberately introducing faults to test the system's resilience and error handling.",
+     "why": "Fault injection tests resilience; it is not a way to find the root cause of existing issues."
+    }
+   ]
+  },
+  "n011": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 5,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Locking mechanisms protect correctness, at a performance cost; they are not a performance optimisation.",
+     "why": "Locks are listed under performance optimisation strategies, but they trade speed for correctness."
+    }
+   ]
+  },
+  "n013": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 9,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Automated tests are only as good as the cases they cover.",
+     "why": "The sentence does not make sense: test quality does not depend on the complexity of the code under test in that way."
+    }
+   ]
+  },
+  "n015": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 22,
+     "type": "number",
+     "severity": "clear",
+     "fix": "(No reliable figure exists; omit the percentages.)",
+     "why": "The 70–80% effectiveness figure is invented; no source measures this."
+    },
+    {
+     "s": 23,
+     "type": "number",
+     "severity": "clear",
+     "fix": "(No reliable figure exists; omit the percentages.)",
+     "why": "The 80–90% figure is likewise invented."
+    },
+    {
+     "s": 27,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Use concurrency-testing tools such as jcstress or thread-sanitizers; general frameworks like JUnit, TestNG or Pytest do not by themselves exercise thread interleavings.",
+     "why": "JUnit/TestNG/Pytest are general test runners, not concurrency testing frameworks."
+    }
+   ]
+  },
+  "n017": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 13,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Many interpreters, such as CPython, first compile the source to bytecode and then execute that, rather than reading it line by line.",
+     "why": "The line-by-line picture is a common misconception for modern interpreters."
+    },
+    {
+     "s": 28,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Compilers report errors before the program runs; interpreters often report them only when the faulty line executes, though with full runtime context.",
+     "why": "The claim that interpreters lack access to the source and give less detailed messages is wrong."
+    }
+   ]
+  },
+  "n019": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 4,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "The browser parses the URL into scheme, host, port and path, and then asks the operating system to resolve the host name.",
+     "why": "URL parsing is done by the browser, not by the operating system's TCP/IP stack."
+    },
+    {
+     "s": 9,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "This is TCP's three-way handshake: SYN, SYN-ACK, then ACK (followed by a TLS handshake for HTTPS).",
+     "why": "The handshake is described without its final ACK."
+    }
+   ]
+  },
+  "n020": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n023": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n031": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n021": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 10,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Certificates are now free from authorities such as Let's Encrypt; the main cost is setup and renewal.",
+     "why": "Free, automated certificates have been the norm for years."
+    },
+    {
+     "s": 15,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Since 2018 Chrome has marked non-HTTPS pages as \"Not secure\".",
+     "why": "Presented as a future plan; it has been in force since Chrome 68."
+    }
+   ]
+  },
+  "n022": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 3,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "A programmer writes a program in a compiled language such as C; Java and Python follow different paths (bytecode with a virtual machine or interpreter).",
+     "why": "The assembly-then-link pipeline described does not apply to Java or Python."
+    },
+    {
+     "s": 9,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Semantic checking: checks types, scopes and declarations, not whether the program's logic is correct.",
+     "why": "Compilers cannot check logical correctness."
+    }
+   ]
+  },
+  "n024": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 29,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Small datasets: quicksort's lower constant factors (both are O(n log n) on average), though insertion sort is usually fastest for very small inputs.",
+     "why": "Quicksort does not have a better average time complexity than mergesort; both are O(n log n)."
+    },
+    {
+     "s": 26,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Real-time systems: mergesort's guaranteed O(n log n) worst case makes it more predictable.",
+     "why": "Stability has nothing to do with real-time timing guarantees."
+    }
+   ]
+  },
+  "n025": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 13,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Cache efficiency: linear search scans memory sequentially and is very cache-friendly; binary search jumps across the array.",
+     "why": "Binary search accesses memory non-sequentially; the claim is reversed."
+    },
+    {
+     "s": 22,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Binary search's O(log n) worst case is itself highly predictable; linear search's appeal in real-time code is simplicity, not predictability.",
+     "why": "Linear search is not more predictable than binary search."
+    }
+   ]
+  },
+  "n026": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 8,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Stability: bubble sort is stable, since it only swaps adjacent elements that are strictly out of order.",
+     "why": "Bubble sort is a stable sort."
+    },
+    {
+     "s": 13,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Insertion sort is O(n^2) in the worst and average case, and O(n) in the best case, when the list is already sorted.",
+     "why": "Average case is O(n^2), not O(n)."
+    },
+    {
+     "s": 14,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "(Average-case complexity is O(n^2).)",
+     "why": "Repeats the false O(n) average."
+    },
+    {
+     "s": 21,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "For large lists, neither is a good choice; use an O(n log n) sort.",
+     "why": "Built on the false O(n) average-case claim."
+    },
+    {
+     "s": 24,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "If the list is already sorted, insertion sort runs in O(n); a reverse-sorted list is its worst case, O(n^2).",
+     "why": "Reverse-sorted input is insertion sort's worst case."
+    }
+   ]
+  },
+  "n027": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 4,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "To solve this problem efficiently, we use a single pass.",
+     "why": "Says two-pass, then describes and analyses a single pass."
+    },
+    {
+     "s": 22,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Start: max_num = 3, second_max_num = -inf; after 5: max_num = 5, second = 3; after 1: unchanged; after 7: max 7, second 5; after 9: max 9, second 7; after 2: unchanged; after 6: unchanged; after 8: second = 8; after 4: unchanged.",
+     "why": "The worked trace is incoherent: it states final values at every step and compares elements that are never compared."
+    }
+   ]
+  },
+  "n028": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 6,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "In such cases, derivative-free methods (e.g. Nelder–Mead) or subgradient and proximal methods may be more suitable.",
+     "why": "Quasi-Newton methods also need gradients, so they do not help when the loss is non-differentiable."
+    },
+    {
+     "s": 15,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Gradient descent's convergence guarantees assume a smooth and convex loss; the algorithm itself does not require convexity.",
+     "why": "GD is routinely applied to non-convex losses."
+    }
+   ]
+  },
+  "n029": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 7,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "(Initialisation affects convergence speed and which optimum is reached, not overfitting as such.)",
+     "why": "Initial parameter values do not cause overfitting."
+    },
+    {
+     "s": 19,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "With Initial Parameters 2, the algorithm still converges to the same solution, since linear regression's MSE is convex, but may take more iterations.",
+     "why": "Linear regression with MSE has a single global minimum; both starts reach it."
+    },
+    {
+     "s": 21,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Starting further from the optimum only lengthens the path to the same minimum.",
+     "why": "Overfitting is not caused by the starting point."
+    },
+    {
+     "s": 24,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Far from the optimum the gradient is typically larger, so steps are larger; problems arise from poor conditioning or too large a learning rate.",
+     "why": "A large gradient makes updates bigger, not less effective."
+    }
+   ]
+  },
+  "n030": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 21,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Both have an O(n) worst case; the hash table is better on average and no worse asymptotically in the worst case.",
+     "why": "A hash table's O(n) worst case equals linear search's, so linear search is not 'more robust'."
+    },
+    {
+     "s": 26,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Worst-case complexity bounds time per query for adversarial inputs; traffic spikes are a capacity issue.",
+     "why": "Conflates worst-case input complexity with load."
+    }
+   ]
+  },
+  "n034": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n032": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 8,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Indexes add write overhead, because each index must be updated in step with the table; they do not themselves ensure data consistency.",
+     "why": "Indexes speed lookups; consistency comes from transactions and constraints."
+    },
+    {
+     "s": 7,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Reduced disk I/O: an index lets the database read only the matching rows instead of scanning the whole table.",
+     "why": "Indexes reduce I/O by avoiding full scans, not by storing data in memory."
+    },
+    {
+     "s": 14,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "MongoDB's default indexes are B-trees; hashed indexes exist mainly for hash-based sharding, and every index slows inserts.",
+     "why": "Indexes speed reads but slow insertions."
+    }
+   ]
+  },
+  "n033": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 8,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Isolation: concurrent transactions produce the same result as if they had run one after another, so they do not interfere.",
+     "why": "Isolation makes concurrent transactions appear to run serially, not concurrently."
+    },
+    {
+     "s": 2,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "BASE stands for Basically Available, Soft state, Eventually consistent.",
+     "why": "The term is 'Basically Available'."
+    }
+   ]
+  },
+  "n035": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 8,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Each piece of data must conform to a predefined structure, which makes schema changes harder; a normalised schema actually reduces redundancy.",
+     "why": "A rigid relational schema does not cause redundancy; normalisation removes it."
+    }
+   ]
+  },
+  "n036": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 15,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Oracle Database has added JSON document support (and SODA APIs); Oracle NoSQL Database and TimesTen are separate products.",
+     "why": "Oracle NoSQL Database and TimesTen are separate products, not features of Oracle Database."
+    }
+   ]
+  },
+  "n037": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 22,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Data duplication: copying data into both stores improves availability but creates a consistency risk that synchronisation must manage.",
+     "why": "Duplication works against consistency, not for it."
+    }
+   ]
+  },
+  "n038": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 25,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "SQL databases support complex ad-hoc queries and joins; NoSQL databases favour simple, access-pattern-specific queries at scale.",
+     "why": "NoSQL querying is generally less flexible than SQL, not more."
+    }
+   ]
+  },
+  "n039": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 11,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Clear glass absorbs ultraviolet strongly and transmits visible light; the faint green tint of window glass comes from iron impurities absorbing red and near-infrared.",
+     "why": "Silicon and oxygen do not absorb red and orange; glass is transparent across the visible range."
+    },
+    {
+     "s": 13,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Water absorbs slightly more red light, through overtones of molecular vibrations, so deep water looks blue.",
+     "why": "The blue comes from absorption by molecular vibrations, not from atoms scattering blue light."
+    }
+   ]
+  },
+  "n040": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 18,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "The EMU's thermal protection is a multilayer thermal micrometeoroid garment (aluminised Mylar layers), not inflatable insulation.",
+     "why": "The EMU does not use inflatable insulation."
+    },
+    {
+     "s": 23,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Selective insulation: heavier insulation where heat loss or exposure is greatest, such as the hands and feet, and lighter where mobility matters.",
+     "why": "Says insulation goes on 'the torso and extremities' but not 'the arms and legs', which are extremities."
+    },
+    {
+     "s": 1,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "...such as those encountered during spacewalks, in direct sunlight and in shadow.",
+     "why": "Re-entry heating is handled by the spacecraft's heat shield, not the suit."
+    }
+   ]
+  },
+  "n041": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 0,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "For the Northern Hemisphere this is true: Earth reaches perihelion in early January, so it is closest to the Sun in northern winter; distance is just not what causes the seasons.",
+     "why": "The premise is correct; perihelion falls in early January."
+    },
+    {
+     "s": 18,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "(Earth is in fact closer to the Sun during northern winter.)",
+     "why": "Repeats the false claim that it is a misconception."
+    },
+    {
+     "s": 15,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "The jet stream is typically stronger and further south in winter, which lets cold polar air reach lower latitudes.",
+     "why": "The jet stream is stronger in winter, because the equator-to-pole temperature contrast is larger."
+    },
+    {
+     "s": 8,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "At a low sun angle, the same energy is spread over a larger area and more is lost along a longer path through the atmosphere.",
+     "why": "The red-and-infrared trapping account is muddled."
+    }
+   ]
+  },
+  "n042": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 4,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "A floating ship's buoyancy always equals its weight, so it is the same in both waters; in saltwater the ship displaces less volume and floats higher.",
+     "why": "A floating ship does not displace the same volume in both fluids; it displaces its own weight."
+    },
+    {
+     "s": 15,
+     "type": "number",
+     "severity": "clear",
+     "fix": "= 100,748,700 N",
+     "why": "1027 × 10,000 × 9.81 = 100,748,700, not 101,230,000."
+    },
+    {
+     "s": 20,
+     "type": "number",
+     "severity": "clear",
+     "fix": "= 2,648,700 N (for a fully submerged 10,000 m³ volume; for the floating ship the difference is zero).",
+     "why": "The subtraction inherits the arithmetic error, and the floating ship's actual difference is zero."
+    },
+    {
+     "s": 7,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "A ship of 1,000 t displaces about 1,000 m³ of freshwater, not its full hull volume.",
+     "why": "Using the whole 10,000 m³ hull volume assumes the ship is fully submerged."
+    }
+   ]
+  },
+  "n043": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 13,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Dispersion shows that the refractive index depends on wavelength; it does not by itself prove that light is a wave rather than particles.",
+     "why": "Dispersion is consistent with photons; it does not rule out a particle description."
+    },
+    {
+     "s": 14,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "(Photons of different energies also refract at different angles.)",
+     "why": "The same false argument."
+    }
+   ]
+  },
+  "n046": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n047": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n049": {
+   "verdict": "clean",
+   "confidence": "high",
+   "errors": []
+  },
+  "n055": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n044": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 5,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "The hot coffee heats the cup wall by conduction, and the cup's outer surface then heats your skin.",
+     "why": "Your skin touches the cup, not the coffee."
+    },
+    {
+     "s": 12,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Because the coffee is hot, the air just above it warms, expands and rises, creating a convective current.",
+     "why": "The convection is driven by the coffee being hot, not by its cooling."
+    }
+   ]
+  },
+  "n045": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 23,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "For flotation, the platform's average density (total mass ÷ total enclosed volume) must be below water's, about 1,000 kg/m³.",
+     "why": "The formula adds mass per volume to buoyancy per volume, which is meaningless."
+    },
+    {
+     "s": 24,
+     "type": "number",
+     "severity": "clear",
+     "fix": "(1,500 + 1,000 = 2,500 kg/m³; the formula is invalid anyway.)",
+     "why": "Even by its own formula the result is 2.5 g/cm³, not 1.5."
+    },
+    {
+     "s": 25,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "A solid platform at 1.5 g/cm³ would sink; the platform must be largely hollow or use buoyant material so its average density is well below 1 g/cm³.",
+     "why": "Concludes that a material denser than water is suitable for a solid floating platform."
+    }
+   ]
+  },
+  "n048": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 11,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Glycolysis occurs in the cytoplasm; the citric acid cycle and oxidative phosphorylation occur in the mitochondria.",
+     "why": "Glycolysis does not take place in the mitochondria."
+    },
+    {
+     "s": 28,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Photosynthesis, which converts only about 1–2% of sunlight into stored energy, has inspired research into artificial photosynthesis.",
+     "why": "Photosynthesis is not more efficient than solar panels and did not drive their efficiency."
+    }
+   ]
+  },
+  "n050": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 9,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Cross-reactivity: an antibody test may react to related viruses, which tends to give false positives.",
+     "why": "Cross-reactivity produces false positives, not false negatives."
+    },
+    {
+     "s": 3,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "False negatives can come from low sensitivity, testing too early or too late, or poor sampling.",
+     "why": "Antibodies interfering is not a usual cause of false negatives in PCR or antigen tests."
+    }
+   ]
+  },
+  "n051": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 13,
+     "type": "number",
+     "severity": "minor",
+     "fix": "The 2019 US measles outbreaks caused about 1,270 cases, with about 10% of patients hospitalised.",
+     "why": "The hospitalisation count looks too low against CDC's reported figures; uncertain."
+    }
+   ]
+  },
+  "n052": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 28,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "High effectiveness: live attenuated vaccines often give strong, long-lasting protection, though no vaccine is 100% protective.",
+     "why": "'Complete protection' overstates any vaccine."
+    }
+   ]
+  },
+  "n053": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 13,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Immunological imprinting: the first strain encountered shapes, and can bias, the response to later related strains.",
+     "why": "Imprinting is about bias toward the first-seen strain, not simply a more vigorous later response."
+    }
+   ]
+  },
+  "n054": {
+   "verdict": "unsure",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 11,
+     "type": "number",
+     "severity": "minor",
+     "fix": "(Attribute the figure to a checked source.)",
+     "why": "I cannot confirm a World Bank estimate of over $300 billion in climate-related disaster costs for 2010."
+    }
+   ]
+  },
+  "n057": {
+   "verdict": "clean",
+   "confidence": "high",
+   "errors": []
+  },
+  "n058": {
+   "verdict": "clean",
+   "confidence": "high",
+   "errors": []
+  },
+  "n064": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n069": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n056": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 26,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Solar power scales from rooftops to utility plants of several gigawatts.",
+     "why": "Utility-scale solar is now among the largest new generating capacity; it is not limited to small scale."
+    }
+   ]
+  },
+  "n059": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 12,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Arctic amplification reduces the temperature gradient between the Arctic and mid-latitudes, which may weaken and slow the jet stream.",
+     "why": "The gradient decreases, not increases."
+    },
+    {
+     "s": 14,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Oceans absorb a large share of the extra CO2, which lowers ocean pH (ocean acidification).",
+     "why": "Acidification comes from the ocean absorbing more CO2, not from absorption slowing."
+    },
+    {
+     "s": 11,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "The Arctic is warming about three to four times faster than the global average.",
+     "why": "Recent estimates (about 4×, Rantanen et al. 2022) exceed 'twice'."
+    },
+    {
+     "s": 8,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Warming also changes vegetation, which can take up more carbon, partly offsetting losses, while thawing soils release carbon.",
+     "why": "Faster plant growth mainly removes CO2; framing it as a net source is wrong."
+    }
+   ]
+  },
+  "n060": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 19,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Bayes' theorem: the posterior is the prior times the likelihood, divided by the overall probability of the evidence.",
+     "why": "Omits the normalising denominator."
+    }
+   ]
+  },
+  "n061": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 12,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "If the host opens a door at random and it happens to show no prize, the original door and the other unopened door each have probability 1/2.",
+     "why": "Given a random host revealed an empty door, the two remaining doors are 1/2 each, not 1/3 each."
+    },
+    {
+     "s": 21,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "If the host does not know, the probability is 1/2 for each remaining door, so switching neither helps nor hurts.",
+     "why": "Same error; 1/3 + 1/3 would not sum to 1."
+    },
+    {
+     "s": 17,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "In the original problem, the host always opens a door with no prize, which is what makes his choice informative.",
+     "why": "The informed host opens an empty door with probability 1, not 2/3."
+    },
+    {
+     "s": 8,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "This analysis assumes the host knows where the prize is and always opens an empty door.",
+     "why": "The host is not trying to mislead."
+    }
+   ]
+  },
+  "n062": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 11,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Risk aversion does not favour staying: both choices are win-or-lose gambles for the same prize, and switching wins twice as often.",
+     "why": "Staying is a strictly worse gamble with the same stakes, so no risk preference justifies it."
+    }
+   ]
+  },
+  "n063": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 20,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "(Delete: the expected number of heads in three tosses is 1.5, and it does not give P(at least one head).)",
+     "why": "Treats the 8 outcomes as 8 trials and draws a meaningless expectation."
+    },
+    {
+     "s": 22,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "(Delete.)",
+     "why": "The 'expected heads minus trials with no heads' argument is incoherent."
+    },
+    {
+     "s": 17,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Imagine repeating the three-toss experiment 8 times: on average about 7 of those repetitions contain at least one head.",
+     "why": "Confuses 8 single tosses with 8 three-toss trials."
+    }
+   ]
+  },
+  "n065": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 12,
+     "type": "number",
+     "severity": "clear",
+     "fix": "= 0.0095 + 0.0495",
+     "why": "0.05 × 0.99 = 0.0495, not 0.0095."
+    },
+    {
+     "s": 13,
+     "type": "number",
+     "severity": "clear",
+     "fix": "= 0.059",
+     "why": "The sum is 0.059."
+    },
+    {
+     "s": 17,
+     "type": "number",
+     "severity": "clear",
+     "fix": "= 0.161",
+     "why": "0.0095 / 0.059 ≈ 0.161."
+    },
+    {
+     "s": 18,
+     "type": "number",
+     "severity": "clear",
+     "fix": "Given a positive test, the probability of the disease is about 16%.",
+     "why": "Follows from the arithmetic error; the true answer is about 16%, not 50%."
+    }
+   ]
+  },
+  "n066": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 9,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "The correct solution: after Monty opens door 3, door 1 keeps probability 1/3 and door 2 has 2/3, so switching wins 2/3 of the time.",
+     "why": "The doors do not all remain at 1/3 once Monty reveals a goat."
+    },
+    {
+     "s": 12,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Someone who believes staying is right may dwell on the idea that two doors are left, so it 'must' be 50/50.",
+     "why": "Monty's choice is not random, and that point would argue against switching, not for it."
+    },
+    {
+     "s": 20,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "The probability of the car being behind the unchosen, unopened door rises to 2/3 because of Monty's informed choice.",
+     "why": "Repeats that each door stays at 1/3."
+    },
+    {
+     "s": 14,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "They anchor on the initial 1/3 and fail to update the other door's probability to 2/3.",
+     "why": "Same misstatement."
+    }
+   ]
+  },
+  "n067": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 17,
+     "type": "number",
+     "severity": "clear",
+     "fix": "P(A|B) = 0.9 × (1/50,000) / 0.05 = 0.00036 ≈ 0.036%",
+     "why": "0.9 × 0.00002 / 0.05 = 0.00036, not 1.8%."
+    },
+    {
+     "s": 18,
+     "type": "number",
+     "severity": "clear",
+     "fix": "The probability that Sarah has FA is about 0.036%, about 18 times the 0.002% prior.",
+     "why": "Follows from the arithmetic error."
+    }
+   ]
+  },
+  "n068": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 12,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "For example, ice cream sales and drownings are positively correlated, but neither causes the other: both rise in hot weather.",
+     "why": "Temperature plausibly does cause ice cream sales; it is the common cause in the classic example, not a spurious partner."
+    },
+    {
+     "s": 7,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "A causal relationship means that changing the cause changes the effect; it need not run the other way.",
+     "why": "Causation is not symmetric; 'and vice versa' is wrong."
+    }
+   ]
+  },
+  "n070": {
+   "verdict": "clean",
+   "confidence": "high",
+   "errors": []
+  },
+  "n071": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n077": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n078": {
+   "verdict": "clean",
+   "confidence": "high",
+   "errors": []
+  },
+  "n080": {
+   "verdict": "clean",
+   "confidence": "high",
+   "errors": []
+  },
+  "n081": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n082": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n072": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 24,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Smaller samples suit early-phase trials focused on safety and dosing; demonstrating efficacy needs large samples.",
+     "why": "Confirmatory clinical trials require large samples; small samples are for early phases."
+    }
+   ]
+  },
+  "n073": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 2,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "The mean is about one of each because roughly half of people have two testicles and no ovaries, and roughly half have two ovaries and no testicles.",
+     "why": "The stated explanation does not produce a mean of one; it is the half-and-half split that does."
+    }
+   ]
+  },
+  "n074": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 8,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Many drownings happen during swimming and water recreation, often involving alcohol, lack of supervision or poor swimming skills.",
+     "why": "Slips, falls, cardiac arrest and seizures are not the majority of drowning causes."
+    }
+   ]
+  },
+  "n075": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 9,
+     "type": "number",
+     "severity": "clear",
+     "fix": "The mean of this dataset is 562.5.",
+     "why": "4,500 ÷ 8 = 562.5, not 541.67."
+    },
+    {
+     "s": 10,
+     "type": "number",
+     "severity": "clear",
+     "fix": "The median is 450, the average of the two middle values, 400 and 500.",
+     "why": "With eight values, the median is the mean of the 4th and 5th."
+    },
+    {
+     "s": 16,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "If a dataset is skewed to the right, the median is usually more representative of the typical value than the mean.",
+     "why": "Reversed: right skew pulls the mean up, so the median is more representative."
+    }
+   ]
+  },
+  "n076": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 5,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "They found that players were no more likely to make a shot after a run of hits than after misses: the 'hot hand' looked like a misperception of random streaks.",
+     "why": "Gilovich, Vallone and Tversky (1985) found no hot-hand effect; the answer reverses the finding."
+    },
+    {
+     "s": 6,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "They attributed the belief in a hot hand to people misreading random streaks.",
+     "why": "The original study framed it as misperception of randomness, not regression to the mean."
+    }
+   ]
+  },
+  "n079": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 10,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "This objection, often illustrated by McCloskey's sheriff case or the transplant case, concerns punishing or sacrificing innocents for a net benefit.",
+     "why": "The 'innocent sufferer' framing is not Bernard Williams's; his objections concern integrity (Jim and the Indians, George the chemist)."
+    },
+    {
+     "s": 12,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Consider a case where killing one innocent person would save five; utilitarianism appears to require it.",
+     "why": "Utilitarianism would not justify a sacrifice that is unnecessary when an alternative causes no harm."
+    },
+    {
+     "s": 4,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "This objection, often discussed using Mill's own phrase 'tyranny of the majority' from On Liberty, holds that...",
+     "why": "Mill coined the phrase about democratic societies; he did not raise it as an objection to utilitarianism."
+    }
+   ]
+  },
+  "n083": {
+   "verdict": "clean",
+   "confidence": "high",
+   "errors": []
+  },
+  "n084": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 12,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Bonhoeffer made no promise to Hitler's government; he worked inside the Abwehr as a cover for resistance activity.",
+     "why": "The 'broken promise' framing is invented."
+    },
+    {
+     "s": 13,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "There is no record of a promise of silence that he then broke.",
+     "why": "Fabricated detail."
+    },
+    {
+     "s": 14,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Bonhoeffer was arrested in April 1943, over a year before the July 1944 plot; he did not take part in carrying it out, and 'Hitler's life was about to be saved' is incoherent.",
+     "why": "Wrong chronology and fabricated event."
+    }
+   ]
+  },
+  "n085": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 16,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "A lottery allocates at random; it does not allocate by urgency or severity.",
+     "why": "Contradicts the definition given in s7."
+    },
+    {
+     "s": 19,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "A lottery ignores medical need by design.",
+     "why": "Same contradiction."
+    },
+    {
+     "s": 9,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "A lottery gives medical need no weight, not equal weight.",
+     "why": "Misdescribes the mechanism."
+    }
+   ]
+  },
+  "n086": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 15,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "The SNB held a negative policy rate (-0.75%) from 2015 to 2022, and high rates would push the franc up, not contain appreciation.",
+     "why": "Wrong on policy and on mechanism."
+    },
+    {
+     "s": 16,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Canada ran large pandemic deficits; it did not cut spending and raise taxes to fight inflation.",
+     "why": "Unsupported example."
+    }
+   ]
+  },
+  "n087": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 11,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Transit is most effective in high-demand corridors; its weakness is low-density areas.",
+     "why": "Inverts the usual finding."
+    }
+   ]
+  },
+  "n088": {
+   "verdict": "clean",
+   "confidence": "high",
+   "errors": []
+  },
+  "n089": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n090": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n091": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 15,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "The Sydney-Melbourne Very Fast Train was a late-1980s private consortium proposal, dropped in 1991 when tax concessions were refused; not a 1990s government investment decision.",
+     "why": "Misdescribed history."
+    },
+    {
+     "s": 20,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "No record of the government rejecting it on opportunity-cost grounds.",
+     "why": "Fabricated rationale."
+    },
+    {
+     "s": 16,
+     "type": "number",
+     "severity": "minor",
+     "fix": "No sourced $20B figure as 'a significant portion of the annual budget'.",
+     "why": "Unsupported number."
+    }
+   ]
+  },
+  "n092": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 10,
+     "type": "number",
+     "severity": "clear",
+     "fix": "US fossil-fuel employment is well over a million (DOE USEER), not 600,000; the NREL '5 million' figure has no such source.",
+     "why": "Fabricated comparison."
+    },
+    {
+     "s": 17,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "NOAA does not publish levelized-cost studies; such figures come from Lazard, IRENA or EIA.",
+     "why": "Wrong attribution."
+    },
+    {
+     "s": 11,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Job creation is not itself an emissions reduction.",
+     "why": "Non sequitur."
+    }
+   ]
+  },
+  "n093": {
+   "verdict": "clean",
+   "confidence": "high",
+   "errors": []
+  },
+  "n094": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 12,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Rent control is a price control, not a supply-side policy; most evidence finds it reduces rental supply.",
+     "why": "Misclassified."
+    },
+    {
+     "s": 24,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Vancouver's Empty Homes Tax taxes vacancy; it does not require owners to rent.",
+     "why": "Misdescribes the policy."
+    }
+   ]
+  }
+ }
+}

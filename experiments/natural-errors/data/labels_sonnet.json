@@ -1,0 +1,1267 @@
+{
+ "labeller": "claude-sonnet-5-5 (4 blind agents, 24/24/24/23 items)",
+ "protocol": "same as labels_claude.json; blind to screen flags and to the Opus labels",
+ "items": {
+  "n000": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 38,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Recursion does not eliminate loops (the traverse example itself uses a for loop) and is not inherently more efficient",
+     "why": "Overclaim contradicted by own code"
+    }
+   ]
+  },
+  "n001": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 18,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Stack push/pop on a linked list operate at the head in O(1); no traversal from the beginning is needed",
+     "why": "Stack access is only at the top"
+    }
+   ]
+  },
+  "n002": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 23,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Primary clustering is long contiguous runs of occupied slots, not many keys hashing to the same index",
+     "why": "Mischaracterizes clustering"
+    }
+   ]
+  },
+  "n003": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 11,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "In statically typed languages assigning an integer to a string variable is a compile-time type error, not silently stored as a string",
+     "why": "Wrong behavior description"
+    },
+    {
+     "s": 16,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Large structures cause out-of-memory, but memory leaks come from failing to release memory, not from size",
+     "why": "Conflates leaks with size"
+    }
+   ]
+  },
+  "n004": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 5,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Identifier length has no effect on runtime memory or execution speed in compiled or normally interpreted code",
+     "why": "Names are discarded or negligible at runtime"
+    },
+    {
+     "s": 9,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Single-letter names do not reduce memory or processing time meaningfully",
+     "why": "Same false performance claim"
+    }
+   ]
+  },
+  "n005": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 6,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Hash tables generally have poor cache locality because keys scatter randomly",
+     "why": "Opposite of the truth"
+    },
+    {
+     "s": 26,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Cache locality does not favor hash tables over BSTs in general",
+     "why": "Repeats false claim"
+    },
+    {
+     "s": 17,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Pointer-based BSTs are typically cache-unfriendly",
+     "why": "Dubious claim"
+    }
+   ]
+  },
+  "n006": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n007": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 11,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "A class can implement many interfaces but extend only one abstract class",
+     "why": "Stated contrast is garbled; both can be used by multiple classes"
+    },
+    {
+     "s": 9,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Modern interfaces (Java 8+, C# 8+) can have default method implementations",
+     "why": "Overly absolute"
+    }
+   ]
+  },
+  "n008": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n009": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n010": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n011": {
+   "verdict": "clean",
+   "confidence": "low",
+   "errors": []
+  },
+  "n012": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n013": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n014": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n015": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 22,
+     "type": "number",
+     "severity": "clear",
+     "fix": "No such effectiveness percentages exist; they are fabricated",
+     "why": "Invented statistics"
+    },
+    {
+     "s": 23,
+     "type": "number",
+     "severity": "clear",
+     "fix": "No such effectiveness percentages exist",
+     "why": "Invented statistics"
+    },
+    {
+     "s": 27,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "JUnit, TestNG and Pytest are general test frameworks, not concurrent testing frameworks",
+     "why": "Mischaracterization"
+    }
+   ]
+  },
+  "n016": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n017": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 29,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Interpreters also have the full source and can report detailed errors with line numbers and tracebacks",
+     "why": "Unsupported claim"
+    }
+   ]
+  },
+  "n018": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n019": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 4,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "The browser parses the URL; the network stack does not",
+     "why": "Wrong component"
+    },
+    {
+     "s": 8,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "SYN/SYN-ACK handshake is TCP only; UDP is connectionless",
+     "why": "UDP listed with SYN handshake"
+    }
+   ]
+  },
+  "n020": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n021": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 11,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "HTTPS/TLS support is near-universal in browsers still in use; this is a negligible concern",
+     "why": "Overstated"
+    }
+   ]
+  },
+  "n022": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 3,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Java and Python are not compiled to machine code through this pipeline; they use bytecode and a VM/interpreter",
+     "why": "Overgeneralization"
+    }
+   ]
+  },
+  "n023": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n024": {
+   "verdict": "clean",
+   "confidence": "low",
+   "errors": []
+  },
+  "n025": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 13,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Binary search jumps around memory and is less cache-friendly than sequential linear scan",
+     "why": "Claims binary search accesses memory sequentially"
+    }
+   ]
+  },
+  "n026": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 8,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Bubble sort is stable",
+     "why": "Standard adjacent-swap bubble sort preserves order of equals"
+    },
+    {
+     "s": 13,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Insertion sort average case is O(n^2); O(n) only for nearly sorted input (best case)",
+     "why": "Wrong average-case complexity"
+    },
+    {
+     "s": 14,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Average is O(n^2)",
+     "why": "Same error"
+    },
+    {
+     "s": 21,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Insertion sort is also O(n^2) on average, so not suited to large lists",
+     "why": "Relies on false O(n) average"
+    }
+   ]
+  },
+  "n027": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 4,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Single-pass approach",
+     "why": "Says two-pass but algorithm is one pass"
+    },
+    {
+     "s": 22,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Trace values after first element should be max=3, second=-inf, etc.",
+     "why": "Example trace shows max_num=9 at step with element 3 and second_max=8; nonsensical"
+    },
+    {
+     "s": 29,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Trace is incoherent; final values 9 and 8 only at end",
+     "why": "Intermediate states wrong"
+    }
+   ]
+  },
+  "n028": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 6,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Quasi-Newton methods need gradients; for non-differentiable losses use subgradient or derivative-free methods",
+     "why": "Quasi-Newton is not an alternative when gradient unavailable"
+    },
+    {
+     "s": 15,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Gradient descent does not require convexity; it just lacks global guarantees",
+     "why": "Overstated assumption"
+    }
+   ]
+  },
+  "n029": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 7,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Initialization does not by itself cause overfitting",
+     "why": "Initial parameter scale affects convergence, not overfitting"
+    },
+    {
+     "s": 21,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Linear regression MSE is convex; with enough steps both converge to the same optimum; initialization cannot cause overfitting here",
+     "why": "Incorrect explanation of example"
+    },
+    {
+     "s": 24,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Large gradients do not lead to local minima; convex MSE has none",
+     "why": "Bad causal claim"
+    }
+   ]
+  },
+  "n030": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n031": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n032": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 14,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "MongoDB indexes are B-tree by default; hashed indexes are optional",
+     "why": "Presents hash indexing as MongoDB's mechanism"
+    },
+    {
+     "s": 15,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Cassandra uses partition-key hashing and clustering order, with secondary indexes",
+     "why": "No 'range-based indexing' mechanism as described"
+    }
+   ]
+  },
+  "n033": {
+   "verdict": "clean",
+   "confidence": "low",
+   "errors": []
+  },
+  "n034": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n035": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 8,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Normalized relational schemas reduce redundancy and enforce consistency",
+     "why": "Claims rigid schema causes redundancy and inconsistencies"
+    }
+   ]
+  },
+  "n036": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 15,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Oracle TimesTen is an in-memory relational database, not NoSQL; Oracle NoSQL Database is a separate product, not added to Oracle Database",
+     "why": "Mischaracterizes products"
+    }
+   ]
+  },
+  "n037": {
+   "verdict": "clean",
+   "confidence": "low",
+   "errors": []
+  },
+  "n038": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n039": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 11,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Ordinary glass is transparent because its band gap is in the UV; it does not absorb red/orange or scatter blue",
+     "why": "False mechanism"
+    },
+    {
+     "s": 12,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Clear glass has no blue tint from this mechanism",
+     "why": "Contradictory and false"
+    }
+   ]
+  },
+  "n040": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 18,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "EMU uses multilayer insulation, not inflatable insulation",
+     "why": "Fabricated detail"
+    },
+    {
+     "s": 23,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Arms and legs are extremities",
+     "why": "Self-contradictory"
+    },
+    {
+     "s": 11,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Mass matters for handling, not heat illness via weight",
+     "why": "Dubious claim"
+    }
+   ]
+  },
+  "n041": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 15,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "The jet stream is typically stronger in winter",
+     "why": "Wrong seasonal behavior"
+    },
+    {
+     "s": 8,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Longer wavelengths are not preferentially trapped; incoherent claim",
+     "why": "Wrong atmospheric physics"
+    }
+   ]
+  },
+  "n042": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 4,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "A floating ship displaces equal weight in both; buoyant force equals weight, volume displaced differs",
+     "why": "Assumes same displaced volume"
+    },
+    {
+     "s": 15,
+     "type": "number",
+     "severity": "clear",
+     "fix": "1027*10000*9.81 = 100,748,700 N",
+     "why": "Arithmetic wrong"
+    },
+    {
+     "s": 20,
+     "type": "number",
+     "severity": "clear",
+     "fix": "Difference = 2,648,700 N",
+     "why": "Propagated arithmetic error"
+    },
+    {
+     "s": 21,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Buoyant force is the same (equals weight); the ship floats higher",
+     "why": "Force does not increase for a floating ship"
+    }
+   ]
+  },
+  "n043": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 13,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Newton's corpuscular theory explained dispersion; refraction dispersion does not prove wave nature",
+     "why": "False inference"
+    },
+    {
+     "s": 14,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Particles with color-dependent properties could be refracted differently",
+     "why": "Same"
+    },
+    {
+     "s": 15,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Frequency is unchanged in a medium; speeds differ",
+     "why": "Wrong about frequency"
+    },
+    {
+     "s": 9,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Red is deviated least; violet most",
+     "why": "Inside/outside description confusing"
+    }
+   ]
+  },
+  "n044": {
+   "verdict": "clean",
+   "confidence": "low",
+   "errors": []
+  },
+  "n045": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 24,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Float condition: average density < 1000 kg/m3; formula adds mass density and buoyancy term meaninglessly",
+     "why": "Nonsense formula"
+    },
+    {
+     "s": 25,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Solid 1.5 g/cm3 platform of 100 m3 weighs ~1.47 MN > 0.98 MN buoyancy; it sinks",
+     "why": "Design as given does not float"
+    }
+   ]
+  },
+  "n046": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 7,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Buoyancy is always upward; net force depends on weight vs buoyancy",
+     "why": "Claims higher-density object experiences downward buoyant force"
+    }
+   ]
+  },
+  "n047": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n048": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n049": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n050": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 9,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Cross-reactivity of antibody tests leads to false positives, not false negatives",
+     "why": "Non-specific detection yields false positives"
+    }
+   ]
+  },
+  "n051": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 13,
+     "type": "number",
+     "severity": "clear",
+     "fix": "2019 US measles: ~1,274 cases and ~128 hospitalizations; figures and cost are not supported",
+     "why": "Hospitalization count and cost appear fabricated or wrong"
+    }
+   ]
+  },
+  "n052": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 28,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Live attenuated vaccines give strong, often long-lasting immunity but not complete protection",
+     "why": "Overclaim of complete protection"
+    },
+    {
+     "s": 20,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Inactivated vaccines often provide shorter-lived protection and need boosters",
+     "why": "Contradicts s22 and common knowledge"
+    }
+   ]
+  },
+  "n053": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 11,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Infections with viruses typically induce Th1 responses too; no general Th1 (vaccine) vs Th2 (infection) split",
+     "why": "Unsupported generalization"
+    },
+    {
+     "s": 14,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Imprinting occurs with vaccination as well and is not a priming for more vigorous response",
+     "why": "Mischaracterizes immune imprinting"
+    }
+   ]
+  },
+  "n054": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 11,
+     "type": "number",
+     "severity": "minor",
+     "fix": "No such World Bank $300bn-for-2010 estimate; disaster losses in 2010 were roughly $130-200bn",
+     "why": "Dubious attributed figure"
+    }
+   ]
+  },
+  "n055": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n056": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n057": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n058": {
+   "verdict": "clean",
+   "confidence": "high",
+   "errors": []
+  },
+  "n059": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 14,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Ocean acidification results from ocean uptake of CO2; slower uptake does not lower pH",
+     "why": "Reasoning backwards"
+    },
+    {
+     "s": 1,
+     "type": "number",
+     "severity": "minor",
+     "fix": "Permafrost underlies about a quarter of Northern Hemisphere land",
+     "why": "65% of Arctic landmass is dubious"
+    },
+    {
+     "s": 8,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Greater plant growth generally increases net carbon uptake",
+     "why": "Respiration claim misleading"
+    }
+   ]
+  },
+  "n060": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n061": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 12,
+     "type": "number",
+     "severity": "clear",
+     "fix": "If host opens randomly and reveals a goat, remaining two doors are 1/2 each",
+     "why": "1/3 and 1/3 do not sum to 1"
+    },
+    {
+     "s": 17,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "In the original problem the host always opens an empty door",
+     "why": "No 2/3 chance; it is certain"
+    },
+    {
+     "s": 21,
+     "type": "number",
+     "severity": "clear",
+     "fix": "Probability is 1/2 for each door",
+     "why": "Conditional on a goat reveal"
+    }
+   ]
+  },
+  "n062": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 11,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Risk aversion favors switching, which has higher win probability",
+     "why": "Sticking has 1/3 win chance"
+    }
+   ]
+  },
+  "n063": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 22,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Expected-value argument is incoherent; 1-1/8 already gives the answer",
+     "why": "Nonsensical subtraction"
+    }
+   ]
+  },
+  "n064": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n065": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 12,
+     "type": "number",
+     "severity": "clear",
+     "fix": "0.05*0.99=0.0495, so P(T)=0.059",
+     "why": "Arithmetic error"
+    },
+    {
+     "s": 17,
+     "type": "number",
+     "severity": "clear",
+     "fix": "0.0095/0.059 ≈ 0.161",
+     "why": "Even their own numbers give 0.5, not 0.4974"
+    },
+    {
+     "s": 18,
+     "type": "number",
+     "severity": "clear",
+     "fix": "About 16%",
+     "why": "Posterior wrong"
+    }
+   ]
+  },
+  "n066": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 9,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "After the reveal, the unopened door has 2/3, not 1/3",
+     "why": "Says each door remains 1/3"
+    },
+    {
+     "s": 20,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Probabilities are not each 1/3 after the host's reveal",
+     "why": "Same error"
+    },
+    {
+     "s": 12,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Monty's choice is not random; he knows",
+     "why": "Incoherent example of confirmation bias"
+    }
+   ]
+  },
+  "n067": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 17,
+     "type": "number",
+     "severity": "clear",
+     "fix": "0.9*(1/50000)/0.05 = 0.00036 = 0.036%",
+     "why": "Arithmetic error"
+    },
+    {
+     "s": 18,
+     "type": "number",
+     "severity": "clear",
+     "fix": "About 0.036%",
+     "why": "Not 1.8%"
+    }
+   ]
+  },
+  "n068": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n069": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n070": {
+   "verdict": "clean",
+   "confidence": "high",
+   "errors": []
+  },
+  "n071": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n072": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 24,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Clinical trials need adequate power; small samples are not generally advantageous there",
+     "why": "High-stakes research usually demands larger samples"
+    }
+   ]
+  },
+  "n073": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 2,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "About half of people have 2 testicles and none have ovaries, and vice versa; most people do not have 2 testicles",
+     "why": "Misstates the anatomy behind the joke"
+    }
+   ]
+  },
+  "n074": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 8,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Most drownings relate to swimming/water exposure, not slips or cardiac events",
+     "why": "Overstated and unsupported"
+    },
+    {
+     "s": 9,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "Ice cream sales and drownings would show a dose-response correlation via temperature; absence of such evidence is not true",
+     "why": "Claim that no such evidence exists is wrong; the point is confounding"
+    }
+   ]
+  },
+  "n075": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 9,
+     "type": "number",
+     "severity": "clear",
+     "fix": "Mean is 562.5",
+     "why": "Sum 4500 / 8"
+    },
+    {
+     "s": 10,
+     "type": "number",
+     "severity": "clear",
+     "fix": "Median is 450",
+     "why": "Average of 4th and 5th values (400, 500)"
+    },
+    {
+     "s": 16,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "For right-skewed data the median is usually more representative than the mean",
+     "why": "Inverted"
+    }
+   ]
+  },
+  "n076": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 3,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Hot hand is not a canonical regression-to-the-mean example; Gilovich et al. studied streak perception",
+     "why": "Misframing"
+    },
+    {
+     "s": 5,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Gilovich, Vallone and Tversky (1985) found no evidence of a hot hand; success did not predict next success",
+     "why": "Misreports findings"
+    },
+    {
+     "s": 6,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "They concluded streaks were consistent with randomness, not regression to the mean",
+     "why": "Misattributed conclusion"
+    }
+   ]
+  },
+  "n077": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n078": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n079": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 4,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Tyranny of the majority is Tocqueville/Mill's concern in On Liberty, not an objection Mill raised against utilitarianism",
+     "why": "Misattribution"
+    },
+    {
+     "s": 10,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Williams's objections concern integrity and negative responsibility (Jim and the Indians)",
+     "why": "'Innocent sufferer' is not Williams's objection"
+    },
+    {
+     "s": 12,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "Utilitarianism would not justify a sacrifice that is unnecessary and prevents no harm",
+     "why": "Example contradicts the theory's logic"
+    }
+   ]
+  },
+  "n080": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n081": {
+   "verdict": "clean",
+   "confidence": "low",
+   "errors": []
+  },
+  "n082": {
+   "verdict": "clean",
+   "confidence": "low",
+   "errors": []
+  },
+  "n083": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n084": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 12,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Bonhoeffer made no promise to Hitler's government; example fabricated",
+     "why": "Fabricated event"
+    },
+    {
+     "s": 13,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "No such promise of silence is documented",
+     "why": "Fabricated"
+    },
+    {
+     "s": 14,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "Bonhoeffer did not take part in assassinating Hitler, and the plot aimed to kill, not save, Hitler",
+     "why": "Incoherent and false"
+    }
+   ]
+  },
+  "n085": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 16,
+     "type": "reasoning",
+     "severity": "clear",
+     "fix": "A lottery allocates randomly and ignores urgency or severity",
+     "why": "Contradicts the definition of a lottery"
+    },
+    {
+     "s": 9,
+     "type": "reasoning",
+     "severity": "minor",
+     "fix": "A lottery ignores medical need rather than weighing it equally",
+     "why": "Misdescribes"
+    }
+   ]
+  },
+  "n086": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 15,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "SNB kept rates negative/near zero until 2022; Swiss inflation was low",
+     "why": "Not a tight-policy success example"
+    },
+    {
+     "s": 16,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Canada's consolidation was 1990s deficit-driven, not inflation fighting",
+     "why": "Wrong rationale"
+    }
+   ]
+  },
+  "n087": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n088": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n089": {
+   "verdict": "clean",
+   "confidence": "low",
+   "errors": []
+  },
+  "n090": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n091": {
+   "verdict": "error",
+   "confidence": "low",
+   "errors": [
+    {
+     "s": 16,
+     "type": "number",
+     "severity": "minor",
+     "fix": "Very Fast Train proposals were costed at roughly A$ 6-8 billion",
+     "why": "Cost implausible"
+    },
+    {
+     "s": 20,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "The VFT was dropped over viability/financing, not explicitly opportunity cost",
+     "why": "Dubious attribution"
+    }
+   ]
+  },
+  "n092": {
+   "verdict": "error",
+   "confidence": "high",
+   "errors": [
+    {
+     "s": 10,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "No such NREL finding is known",
+     "why": "Fabricated study"
+    },
+    {
+     "s": 14,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "No such UC Berkeley $3.50 figure is known",
+     "why": "Fabricated study"
+    },
+    {
+     "s": 17,
+     "type": "fact",
+     "severity": "clear",
+     "fix": "NOAA does not publish levelized cost of energy; IRENA/Lazard/NREL do",
+     "why": "Misattribution"
+    }
+   ]
+  },
+  "n093": {
+   "verdict": "clean",
+   "confidence": "medium",
+   "errors": []
+  },
+  "n094": {
+   "verdict": "error",
+   "confidence": "medium",
+   "errors": [
+    {
+     "s": 12,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "Rent control is a price control, not a supply-side policy",
+     "why": "Miscategorized and typically reduces supply"
+    },
+    {
+     "s": 24,
+     "type": "fact",
+     "severity": "minor",
+     "fix": "The tax encourages but does not require renting out",
+     "why": "Overstates mechanism"
+    }
+   ]
+  }
+ }
+}

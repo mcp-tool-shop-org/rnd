@@ -37,29 +37,48 @@ studies in rnd entry `2026-10-08-three-follow-up-studies-for-critic-recipes-hard
 
 ## Labels
 
-- The Director reviews each selected answer, with the screen's flags shown on
-  flagged items and none on controls.
-- **Per item:** contains an error, yes or no; which sentence or sentences; and
-  a corrected version of each wrong sentence. The corrections give
-  correct/incorrect pairs.
-- **Self-consistency:** the 10 re-label items are reviewed again blind on a
-  later day.
-- The labels are single-annotator ground truth, and every result says so.
+**Changed 2026-10-08, before any human label existed:** human review does not
+scale, and a strong model finds more of an 8B's mistakes than a person
+skimming. The labels are made by Claude, twice and blind, then adjudicated.
+
+- **Pass 1:** claude-opus-5-5 labelled all 95 answers (`data/labels_claude.json`).
+  It was blind to the screen flags.
+- **Pass 2:** four claude-sonnet-5-5 agents labelled the same 95
+  (`data/labels_sonnet.json`), blind to the flags and to pass 1. They used the
+  same protocol: an error is a claim a competent expert would mark wrong (a
+  false fact, a wrong number or unit, or a step that doesn't follow). Vagueness,
+  opinion and arguable overreach don't count. Each error has a severity
+  (clear or minor) and a fix.
+- **Adjudication** (`data/gold.json`):
+  - Agreed verdicts stand.
+  - The 17 disagreements were settled by Opus re-reading each flagged
+    sentence: 10 became error and 7 clean.
+  - Sentences marked by both passes (`by: both`) are the high-trust set.
+- **Correction pairs** (`data/corrections.json`, built by `build_corrections.py`):
+  - 31 answers, each original paired with a copy whose agreed clear-error
+    sentences are rewritten in the answer's own voice.
+  - The edited copy is the stronger one, so an edit detector fails these
+    pairs. They are the reversed control for aspire-si's Skeptic.
+  - Left out: five answers whose fix would need a multi-step rewrite (n027,
+    n029, n042, n045, n063).
+- **Caveat:** all labels come from one model family. The labels are not
+  human-verified ground truth, and every result says so. The review page
+  (`review.html`) stays available for human spot-checks.
 
 ## Readout (written before any label is seen)
 
-1. **The screen:** the share of the Director's errors that no judge flagged
+1. **The screen:** the share of the labelled errors that no judge flagged
    (from the controls and from missed sentences in flagged items), and each
-   judge's precision and recall against his labels.
+   judge's precision and recall against the labels.
 2. **Each critic** (Kev-4B frozen and fine-tuned; the aspire-si heads when they
    exist):
    - pointwise: recall and precision for "contains an error";
-   - pairwise, on the Director's corrected pairs: accuracy, order-averaged for
+   - pairwise, on the correction pairs: accuracy, order-averaged for
      Kev;
    - beside its planted-pair accuracy. **The gap is the flattery.**
 3. **Intervals:** bootstrap over items, 95%. With about 60–100 items they will
    be wide, and the report says so.
-4. **Director self-consistency** on the 10 re-labels, as plain agreement.
+4. **Labeller agreement** (Opus vs Sonnet, above) replaces the planned Director self-consistency check.
 
 ## Licence
 
@@ -91,3 +110,40 @@ studies in rnd entry `2026-10-08-three-follow-up-studies-for-critic-recipes-hard
 - **Review page:** a private artifact with the `db` capability (`review.html`). The items are
   seeded into its `items` collection; the Director's labels land in `labels` and `relabels`.
 - Each step ran on a GPU slot granted by the Publisher. The card was freed afterwards.
+- **Labels:**
+  - Opus: 64 error, 30 clean, 1 unsure.
+  - Sonnet: 51 error, 44 clean.
+  - Item agreement 0.82, Cohen's kappa 0.63 (error vs not).
+  - Of Sonnet's 105 error sentences, 80% are in Opus's 137; of Opus's 76 clear sentences, Sonnet
+    marked 59.
+  - Most disagreements were minor sentences Opus marked and Sonnet passed over. Sonnet missed
+    two clear ones: n048, glycolysis placed in the mitochondria; and n068, "temperature does not
+    cause ice-cream sales".
+  - **Gold:** 59 error, 36 clean; 84 sentences marked by both passes, 63 of them clear.
+
+## Results: the screen (readout 1)
+
+Against the adjudicated labels, all 95 answers; 95% bootstrap over answers:
+
+| judge | precision ("flagged" means has an error) | recall | error sentences flagged (marked by both passes) |
+|---|---|---|---|
+| gemma4:31b | 0.72 [0.62, 0.81] | 0.97 [0.91, 1.00] | 54 / 84 |
+| mistral-small:24b | 0.84 [0.72, 0.94] | 0.61 [0.49, 0.74] | 12 / 84 |
+| granite4.1:30b | 1.00 | 0.27 [0.16, 0.39] | 12 / 84 |
+
+- **Answer level:**
+  - Every answer with an error was flagged by at least one judge.
+  - The 14 answers with no flag at all are clean. The build log's 16 counted only flags matched
+    to a sentence.
+- **Sentence level:**
+  - The three judges together flagged 70% of the error sentences both passes marked, and 78% of
+    the clear ones.
+  - The miss rate is therefore about 30% of error sentences, not 0% of answers.
+- **What it means:**
+  - gemma4:31b is a usable recall-first screen at the answer level (it flags almost every answer
+    with an error), but it points at the wrong sentence about a third of the time.
+  - mistral-small and granite are precise but miss most errors. Their flags mostly land on
+    different sentences; this was checked against an index offset, and there isn't one.
+  - A critic cannot be scored against screen flags alone.
+
+Readout 2 (critics against these labels) is still to run.

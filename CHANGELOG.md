@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.3.0] - 2026-10-08
+
+- Study A natural-error set labelled (two blind Claude passes, adjudicated); screen readout; 31 correction pairs
+- Updated `2026-10-08-three-follow-up-studies-for-critic-recipes-hard-pairs-two-pl`: Three follow-up studies for critic recipes — hard pairs, two planter families, natural errors
+- Updated experiment `natural-errors`
+
 ## [1.1.3.2.7] - 2026-10-08
 
 - Scouting: Llama 4 access accepted

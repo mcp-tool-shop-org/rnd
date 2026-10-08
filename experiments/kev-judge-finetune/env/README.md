@@ -29,7 +29,7 @@ alone, or uv resolves stable torch from PyPI instead.
 
 The reference is the cu128 env on the same data and seed.
 
-**1. 30-step smoke** (`KEV_VENV=.venv-cu134 bash train.sh smoke 0`). The reference
+**1. 30-step smoke** (`KEV_VENV=.venv-cu134 bash train.sh smoke 0`, which writes `runs/judge-4b-smoke-s0-cu134`, never the reference run). The reference
 (`judge-4b-smoke-s0/training_metrics.json`) has 30 steps, peak device 10.48 GB, grad_norm mean 9.07
 (max 18.54), a 5.2 s median step and 219 s wall time. Pass needs all of:
 - a finite loss and grad_norm > 0 on every step;
@@ -39,7 +39,7 @@ The reference is the cu128 env on the same data and seed.
 
 Median step time is reported, not gated.
 
-**2. Confirm score with the existing seed-0 judge** (`KEV_VENV=.venv-cu134 bash score_set.sh 0`):
+**2. Confirm score with the existing seed-0 judge** (`KEV_VENV=.venv-cu134 bash score_set.sh confirm-cu134 /mnt/e/AI/aspire-si-runs/2026-10-08-kev-confirm/fresh/confirm_set.json 0`, which writes `results/judge-4b-full-s0-confirm-cu134.json` beside the cu128 `judge-4b-full-s0-confirm.json`):
 - the same weights the cu128 env scored: order-averaged 0.9799, CI [0.9536, 1.0];
 - pass needs order-averaged accuracy ≥ 0.9536 (the reference's CI low);
 - **and** order-averaged per-pair decisions agreeing with the cu128 run on at least 146 of 149 pairs.

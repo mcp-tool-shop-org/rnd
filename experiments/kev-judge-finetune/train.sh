@@ -12,7 +12,8 @@ set -euo pipefail
 MODE=${1:-smoke}
 SEED=${2:-0}
 DATA=/mnt/e/AI-Models/kev/judge-ft
-OUT=/mnt/e/AI-Models/kev/judge-ft/runs/judge-4b-${MODE}-s${SEED}
+TAG=""; [ "${KEV_VENV:-.venv}" != .venv ] && TAG="-${KEV_VENV#.venv-}"   # e.g. -cu134, so a new env never overwrites a reference run
+OUT=/mnt/e/AI-Models/kev/judge-ft/runs/judge-4b-${MODE}-s${SEED}${TAG}
 cd ~/kev/kev
 export HF_HOME=/mnt/e/AI-Models/hf-cache
 EXTRA=""

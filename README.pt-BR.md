@@ -62,7 +62,9 @@ Para usar a ferramenta em outros projetos, instale-a a partir do PyPI:
 pip install mcptoolshop-rnd
 ```
 
-Isso instala o comando `rnd`, e não a biblioteca: os arquivos estão neste repositório. O comando procura uma biblioteca nesta ordem: `--library DIR`, depois `$RND_ROOT`, depois a pasta mais próxima, ou uma pasta acima da pasta atual, que contenha `entries/` e `instruments/`. Fora de uma biblioteca, ele para com `NO_LIBRARY`; apenas `rnd readouts` funciona sem uma biblioteca. O pacote é importado como `rnd`, assim como um pacote não relacionado do PyPI chamado `rnd`, portanto, não instale ambos no mesmo ambiente.
+Isso instala o comando `rnd`, não a biblioteca: os arquivos estão neste repositório. O comando procura uma biblioteca nesta ordem: `--library DIR`, depois `$RND_ROOT` e, em seguida, a pasta mais próxima, na pasta atual ou em uma pasta superior, que contenha `entries/` e `instruments/`. Fora de uma biblioteca, ele para com `NO_LIBRARY`; apenas `rnd readouts` funciona sem ela.
+
+Em Python, importe `mcptoolshop_rnd`: esse nome sempre funciona. `rnd` é mantido como um alias de compatibilidade, mas também existe um pacote PyPI não relacionado chamado `rnd` e, se ambos estiverem instalados, ele pode substituir o alias. O comando `rnd` e `python -m mcptoolshop_rnd` continuam funcionando de qualquer forma.
 
 A biblioteca é atualizada diariamente, por isso as versões têm cinco segmentos: `MAJOR.MINOR.PATCH.MICRO.NANO`. Os três primeiros segmentos referem-se à ferramenta `rnd`; MICRO indica uma alteração estrutural na biblioteca e NANO uma atualização normal. `rnd bump` aumenta o último segmento por padrão e cria uma seção CHANGELOG a partir dos arquivos que foram alterados desde a última versão, de modo que cada atualização recebe a sua própria versão menor, com uma etiqueta.
 
@@ -78,7 +80,8 @@ Códigos de saída: `0` ok · `1` arquivos de biblioteca inválidos · `2` erro 
 | `catalogs/<name>/source.json` | De onde vem um catálogo | pessoas |
 | `catalogs/<name>/catalog.json` | Instantâneo fixo de `rnd catalog sync` | gerado; nunca edite manualmente |
 | `catalogs/<name>/review.json` | Ajuste e notas do estúdio por família e item | pessoas |
-| `rnd/` | A CLI | código |
+| `mcptoolshop_rnd/` | A CLI | código |
+| `rnd/` | Alias de compatibilidade para `mcptoolshop_rnd`. | código |
 | `rnd.db` | Índice SQLite FTS5, reconstruído automaticamente quando os arquivos são alterados | gerado; não está no git |
 
 ## Formato de entrada

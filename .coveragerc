@@ -1,6 +1,8 @@
 [run]
-source = rnd
-omit = rnd/__main__.py
+source = mcptoolshop_rnd, rnd
+omit =
+    mcptoolshop_rnd/__main__.py
+    rnd/__main__.py
 
 [report]
 show_missing = true

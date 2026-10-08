@@ -62,7 +62,9 @@ python -m rnd bump --note "what changed"  # micro version bump + CHANGELOG secti
 pip install mcptoolshop-rnd
 ```
 
-これにより、ライブラリではなく、`rnd`コマンドがインストールされます。関連するファイルは、このリポジトリにあります。コマンドは、次の順序でライブラリを検索します。まず`--library DIR`、次に`$RND_ROOT`、そして現在のディレクトリまたはそれより上位のディレクトリにある、`entries/`と`instruments/`を含む最も近いフォルダーです。ライブラリの外では、`NO_LIBRARY`で停止します。ライブラリなしで機能するのは`rnd readouts`のみです。パッケージは`rnd`としてインポートされ、関連性のないPyPIパッケージである`rnd`も同様にインポートされるため、両方を同じ環境にインストールしないでください。
+これは、ライブラリではなく、`rnd`コマンドをインストールします。関連するファイルは、このリポジトリに保存されています。コマンドは、次の順序でライブラリを検索します。まず`--library DIR`、次に`$RND_ROOT`、そして現在のディレクトリまたはそれより上位のディレクトリにある、`entries/`と`instruments/`を含む最も近いフォルダです。ライブラリの外では、`NO_LIBRARY`で停止します。ライブラリなしで機能するのは`rnd readouts`のみです。
+
+Pythonでは`mcptoolshop_rnd`をインポートしてください。この名前は常に有効です。`rnd`は互換性のためにエイリアスとして保持されますが、関係のないPyPIパッケージも`rnd`という名前であり、両方がインストールされている場合、エイリアスが置き換えられる可能性があります。`rnd`コマンドと`python -m mcptoolshop_rnd`は、どちらの場合でも引き続き機能します。
 
 ライブラリは毎日更新されるため、バージョンは5つのセグメントで構成されます。
 `MAJOR.MINOR.PATCH.MICRO.NANO`。最初の3つのセグメントは、`rnd`ツールをバージョンアップします。MICROは、ライブラリの構造的な変更を示し、NANOは通常の更新を示します。`rnd bump`は、デフォルトで最後のセグメントをインクリメントし、前回のタグ以降に変更されたファイルからCHANGELOGセクションを作成するため、各更新には独自の小さなタグ付きバージョンが割り当てられます。
@@ -79,7 +81,8 @@ pip install mcptoolshop-rnd
 | `catalogs/<name>/source.json` | カタログの出所 | 人 |
 | `catalogs/<name>/catalog.json` | `rnd catalog sync`からの固定スナップショット | 生成されるため、手動で編集することはできません |
 | `catalogs/<name>/review.json` | スタジオの適合性およびファミリーとアイテムごとの注釈 | 人 |
-| `rnd/` | CLI | コード |
+| `mcptoolshop_rnd/` | CLI | コード |
+| `rnd/` | `mcptoolshop_rnd`の互換性エイリアス | コード |
 | `rnd.db` | SQLite FTS5インデックス。ファイルが変更されるたびに自動的に再構築されます。 | 生成されるため、Gitには含まれません |
 
 ## エントリー形式

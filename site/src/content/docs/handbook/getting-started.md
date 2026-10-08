@@ -29,9 +29,12 @@ rnd --library path/to/rnd search cuda
 The package holds the tool, not the library; the entries live in the clone.
 `rnd` finds a library from `--library`, then `$RND_ROOT`, then the nearest folder
 at or above the current one with `entries/` and `instruments/`. Outside a
-library every command except `rnd readouts` stops with `NO_LIBRARY`. The package
-imports as `rnd`, as does an unrelated PyPI package of that name, so keep them
-in separate environments.
+library every command except `rnd readouts` stops with `NO_LIBRARY`.
+
+The import name that always works is `mcptoolshop_rnd`. `rnd` is a
+compatibility alias for it; an unrelated PyPI package is also called `rnd`, and
+if both are installed it can replace the alias. The `rnd` command and
+`python -m mcptoolshop_rnd` do not depend on the alias.
 
 ## First searches
 

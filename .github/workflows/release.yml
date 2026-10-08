@@ -38,7 +38,7 @@ jobs:
 
       - name: Version matches the tag
         run: |
-          v=$(python -c "import rnd; print(rnd.__version__)")
+          v=$(python -c "import mcptoolshop_rnd; print(mcptoolshop_rnd.__version__)")
           test "v$v" = "${GITHUB_REF_NAME}" || { echo "tag ${GITHUB_REF_NAME} != package v$v"; exit 1; }
 
       - name: Build and check

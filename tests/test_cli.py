@@ -13,7 +13,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from rnd import catalog, cli, release
+from mcptoolshop_rnd import catalog, cli, release
 
 from .test_rnd import ENTRY, write
 
@@ -58,7 +58,7 @@ def make_library(root):
     write(root, "catalogs/demo/review.json", json.dumps({
         "families": {"tilegym": {"fit": "adjacent", "note": "kernel kit"}},
         "items": {"nemo-rl-docs": {"fit": "general", "note": "docs only"}}}))
-    write(root, "rnd/__init__.py", '"""stub"""\n\n__version__ = "1.0.0"\n')
+    write(root, "mcptoolshop_rnd/__init__.py", '"""stub"""\n\n__version__ = "1.0.0"\n')
     write(root, "CHANGELOG.md", "# Changelog\n\n## [Unreleased]\n\n## [1.0.0] - 2026-01-01\n")
 
 
@@ -320,14 +320,14 @@ class BumpCommandTests(CliBase):
         code, out, _ = self.run_cli("bump", "--dry-run")
         self.assertEqual(code, 0)
         self.assertIn("would bump 1.0.0 -> 1.0.0.0.1 (changes since v1.0.0)", out)
-        self.assertIn("1.0.0", (self.root / "rnd/__init__.py").read_text(encoding="utf-8"))
+        self.assertIn("1.0.0", (self.root / "mcptoolshop_rnd/__init__.py").read_text(encoding="utf-8"))
         code, out, _ = self.run_cli("bump", "micro", "--note", "a note")
         self.assertIn("bumped 1.0.0 -> 1.0.0.1.0", out)
         self.assertIn("- Added `2026-01-09-new`: Other entry", out)
         self.assertIn("- Updated `2026-01-02-sample`: Sample entry", out)
         self.assertIn("- Added experiment `demo`", out)
         self.assertIn("next: git add", out)
-        self.assertIn('__version__ = "1.0.0.1.0"', (self.root / "rnd/__init__.py").read_text(encoding="utf-8"))
+        self.assertIn('__version__ = "1.0.0.1.0"', (self.root / "mcptoolshop_rnd/__init__.py").read_text(encoding="utf-8"))
         self.assertIn("## [1.0.0.1.0]", (self.root / "CHANGELOG.md").read_text(encoding="utf-8"))
 
     def test_bump_without_git_history(self):
@@ -337,11 +337,11 @@ class BumpCommandTests(CliBase):
         self.assertIn("GIT_FAILED", err)
 
     def test_bump_bad_version_and_changelog(self):
-        write(self.root, "rnd/__init__.py", "nothing here\n")
+        write(self.root, "mcptoolshop_rnd/__init__.py", "nothing here\n")
         code, _, err = self.run_cli("bump", "--dry-run")
         self.assertEqual(code, 2)
         self.assertIn("BAD_VERSION", err)
-        write(self.root, "rnd/__init__.py", '__version__ = "1.0.0"\n')
+        write(self.root, "mcptoolshop_rnd/__init__.py", '__version__ = "1.0.0"\n')
         write(self.root, "CHANGELOG.md", "# Changelog\n")
         with mock.patch.object(release, "last_tag", return_value=None), \
                 mock.patch.object(release, "changes", return_value=[]):

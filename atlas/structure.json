@@ -32,12 +32,16 @@
       "externals": 0,
       "files": [
         {
-          "hash": "87d57f0b6e1e1397517e2e7bd34911e59ca4a6f16cb3954c4ae946bc7dc0b4d7",
+          "hash": "2cc256929c25d793088e94b79b3528d63e60d143d43761b87105c980c3992358",
           "path": ".github/workflows/ci.yml"
         },
         {
           "hash": "cf1ad38464c54f14127d46750a5763f224b286cac09ac46aafc8ebbcd993f3ff",
           "path": ".github/workflows/pages.yml"
+        },
+        {
+          "hash": "cb48015c496ca78b01da31fd182d467713331ab7b7d54f93fa142d7eb786a531",
+          "path": ".github/workflows/release.yml"
         }
       ],
       "globs": [
@@ -173,6 +177,10 @@
           "path": "entries/2026/2026-10-07-decision-si-jam-sessions-cuda-13-4.md"
         },
         {
+          "hash": "b4a23a8505be628ef34293504a47be1f2681799e2e0ade85e6a0a9729870a3c5",
+          "path": "entries/2026/2026-10-07-expressive-timing-and-emphasis-for-a-sung-hymn-performance-r.md"
+        },
+        {
           "hash": "0026aaabcddae1015555c177ae71f026e5b3977d0e4859373a84535ba99bc9ac",
           "path": "entries/2026/2026-10-07-hf-hub-download-slow-on-windows.md"
         },
@@ -197,7 +205,7 @@
           "path": "entries/2026/2026-10-07-nvidia-rubin-architecture.md"
         },
         {
-          "hash": "16e5ef8704f17eae658b84807065ac435a5cf4a4713d302371e092b3fceccca2",
+          "hash": "559bf415d02485070c938ef331ab97e0a27b6810550344bee0c8db010ad1a1ea",
           "path": "entries/2026/2026-10-07-open-jev-style-decision-models.md"
         },
         {
@@ -217,7 +225,7 @@
           "path": "entries/2026/2026-10-07-ptx-isa-9-4.md"
         },
         {
-          "hash": "a4bf3300813300ec64ba8c632efaf5e8788adeaea78cf4c0da022dd65aa9517b",
+          "hash": "fb3b8db58c260b835378e97837f9e62ec72b62f2d3ccbe010c98037e3677ae6d",
           "path": "entries/2026/2026-10-07-qwen32b-judge-position-bias.md"
         },
         {
@@ -271,12 +279,12 @@
       "dynamicReads": 2,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
-      "dynamicWrites": 0,
+      "dynamicWrites": 1,
       "entryPoints": [],
       "externals": 0,
       "files": [
         {
-          "hash": "82a1b861cc3e857c6f914368dc91e2742fae98991d9259fbd2e296d31423cd38",
+          "hash": "a3e1cd31555701b14f84154793452e5d6a99070add6f9b339ed2dee12bdec884",
           "path": "experiments/kev-judge-finetune/README.md"
         },
         {
@@ -297,7 +305,64 @@
           "path": "experiments/kev-judge-finetune/build_rows.py"
         },
         {
-          "hash": "0e0acf7c509f4d77554d2164d3da2878b0d34bdfcfde7ecdbe035186c2289b22",
+          "hash": "3ee22b98bcf67f66d39888b3c6d5c2d04955480bf9d92c67f72f184ae96b959f",
+          "path": "experiments/kev-judge-finetune/results/judge-4b-full-s0-confirm.json"
+        },
+        {
+          "hash": "b58021cc3ed84f84d9705437fe30e9513c5271c8a1f0be46ae97923dda43e33d",
+          "path": "experiments/kev-judge-finetune/results/judge-4b-full-s0-judge.json"
+        },
+        {
+          "hash": "60afb2287f31100a563065f899babfa9c4db4a754b922d88570bf937d1cbb12d",
+          "path": "experiments/kev-judge-finetune/results/judge-4b-full-s1-confirm.json"
+        },
+        {
+          "hash": "b60814a362dd539bc2ade8a744d8b3b3cb0d282b2069ab37dd47c1a85a5d2d87",
+          "path": "experiments/kev-judge-finetune/results/judge-4b-full-s1-judge.json"
+        },
+        {
+          "hash": "6ed9f226234cb003efe90f977402e467ec61c8326507a9e8bcd23482dea701cd",
+          "path": "experiments/kev-judge-finetune/results/judge-4b-full-s2-confirm.json"
+        },
+        {
+          "hash": "5559389971ce46cdde5310929866534d6169b924f7778355f7544ef7880feb03",
+          "path": "experiments/kev-judge-finetune/results/judge-4b-full-s2-judge.json"
+        },
+        {
+          "hash": "509e0f43d4c7d6b1d2d218700cfeb3aede69411c304227f6141d50693c7b3ed4",
+          "path": "experiments/kev-judge-finetune/results/summary.json"
+        },
+        {
+          "hash": "72d8ff3d84b0823c021e199688a6eff738a9c7f0057d99520c59137fc31c51f3",
+          "path": "experiments/kev-judge-finetune/score.sh"
+        },
+        {
+          "exports": [
+            "card",
+            "clean_config",
+            "clean_head",
+            "main"
+          ],
+          "failurePaths": [
+            {
+              "in": "clean_head",
+              "kind": "raise",
+              "line": 33
+            }
+          ],
+          "hash": "0e23ba2d1e2f61745eb1286e1f083e6e90f47e09d04877e07e21eb2c24e17181",
+          "path": "experiments/kev-judge-finetune/stage_hf.py"
+        },
+        {
+          "exports": [
+            "main",
+            "passes"
+          ],
+          "hash": "ad662aaad3bc288351f49fe9e89eec8ec199e0c53f5a7571e46976b4f9c27049",
+          "path": "experiments/kev-judge-finetune/summarise.py"
+        },
+        {
+          "hash": "f8760fec5791d74fd9152bd88b21a1f263117c4ebf20ddc01007120cc0623a63",
           "path": "experiments/kev-judge-finetune/train.sh"
         },
         {
@@ -423,7 +488,7 @@
       ],
       "importConfidence": "full",
       "name": "experiments",
-      "origin": "authored",
+      "origin": "mixed",
       "outsidePlaces": [
         {
           "reads": 7,
@@ -523,26 +588,26 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 2,
+      "dynamicReads": 1,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
       "dynamicWrites": 3,
       "entryPoints": [
-        "rnd/cli.py"
+        "mcptoolshop_rnd/cli.py"
       ],
       "externals": 0,
       "files": [
         {
           "constantOnly": true,
-          "hash": "4b7cad402de759e25f63bee15eda7f08883f785d6e408cecf029120defc2637d",
-          "path": "rnd/__init__.py"
+          "hash": "dfa73d12091744abf2845fc9e44390881338a82956131b32fec71b9007578c3c",
+          "path": "mcptoolshop_rnd/__init__.py"
         },
         {
           "hash": "13a1a5b340cdcfc1902b62be90e508c7c71886000d5bf087e7854aadf09fb35e",
           "importsFiles": [
-            "rnd/cli.py"
+            "mcptoolshop_rnd/cli.py"
           ],
-          "path": "rnd/__main__.py"
+          "path": "mcptoolshop_rnd/__main__.py"
         },
         {
           "exports": [
@@ -580,12 +645,14 @@
           ],
           "hash": "64137d0667e6b485a87df7d8634201cb51076c208c538004ded5fdab2235a378",
           "importsFiles": [
-            "rnd/__init__.py",
-            "rnd/frontmatter.py"
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/frontmatter.py"
           ],
-          "path": "rnd/catalog.py"
+          "path": "mcptoolshop_rnd/catalog.py"
         },
         {
+          "entry": "main",
+          "entryRule": 0,
           "exports": [
             "build_parser",
             "cmd_build",
@@ -602,6 +669,8 @@
             "cmd_tools",
             "emit",
             "fail",
+            "find_root",
+            "is_library",
             "main",
             "open_db",
             "report",
@@ -611,49 +680,340 @@
             {
               "in": "cmd_search",
               "kind": "except",
-              "line": 84
+              "line": 105
             },
             {
               "in": "cmd_catalog",
               "kind": "except",
-              "line": 240
+              "line": 261
             },
             {
               "in": "cmd_readouts",
               "kind": "except",
-              "line": 293
+              "line": 314
             },
             {
               "in": "cmd_bump",
               "kind": "except",
-              "line": 321
+              "line": 342
             },
             {
               "in": "cmd_sql",
               "kind": "except",
-              "line": 335
+              "line": 356
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 429
+              "line": 458
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 431
+              "line": 460
             }
           ],
-          "hash": "f1b7200193a00ee0332498b477112b81dbc146c0adb7b1e22e1152ff03228486",
+          "hash": "0e30f8dadef1199ed93134575451ff7ba3da6ea82253a08bd5e3fb5fb9b94bf9",
           "importsFiles": [
-            "rnd/__init__.py",
-            "rnd/catalog.py",
-            "rnd/model.py",
-            "rnd/readouts.py",
-            "rnd/release.py",
-            "rnd/store.py"
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/catalog.py",
+            "mcptoolshop_rnd/model.py",
+            "mcptoolshop_rnd/readouts.py",
+            "mcptoolshop_rnd/release.py",
+            "mcptoolshop_rnd/store.py"
           ],
-          "path": "rnd/cli.py"
+          "path": "mcptoolshop_rnd/cli.py",
+          "sequences": [
+            {
+              "calls": [
+                {
+                  "line": 56,
+                  "name": "connect",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "open_db"
+            },
+            {
+              "calls": [
+                {
+                  "line": 75,
+                  "name": "build",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_build"
+            },
+            {
+              "calls": [
+                {
+                  "line": 87,
+                  "name": "load_all",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 88,
+                  "name": "catalog_dirs",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 89,
+                  "name": "load",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 90,
+                  "name": "Problem",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_check"
+            },
+            {
+              "calls": [
+                {
+                  "line": 56,
+                  "name": "connect",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  },
+                  "via": "open_db"
+                },
+                {
+                  "line": 102,
+                  "name": "search",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_search"
+            },
+            {
+              "calls": [
+                {
+                  "line": 56,
+                  "name": "connect",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  },
+                  "via": "open_db"
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_show"
+            },
+            {
+              "calls": [
+                {
+                  "line": 56,
+                  "name": "connect",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  },
+                  "via": "open_db"
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_list"
+            },
+            {
+              "calls": [
+                {
+                  "line": 56,
+                  "name": "connect",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  },
+                  "via": "open_db"
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_tools"
+            },
+            {
+              "calls": [
+                {
+                  "line": 56,
+                  "name": "connect",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  },
+                  "via": "open_db"
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_stats"
+            },
+            {
+              "calls": [
+                {
+                  "branch": "args.action == \"sync\"",
+                  "line": 260,
+                  "name": "sync",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "branch": "args.action == \"sync\"",
+                  "line": 75,
+                  "name": "build",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  },
+                  "via": "cmd_build"
+                },
+                {
+                  "line": 56,
+                  "name": "connect",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  },
+                  "via": "open_db"
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_catalog"
+            },
+            {
+              "calls": [
+                {
+                  "line": 301,
+                  "name": "root_dir",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "branch": "args.list or not args.query",
+                  "line": 304,
+                  "name": "knowledge_bases",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 312,
+                  "name": "search",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_readouts"
+            },
+            {
+              "calls": [
+                {
+                  "line": 335,
+                  "name": "read_version",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 336,
+                  "name": "bump",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 337,
+                  "name": "last_tag",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 338,
+                  "name": "changes",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 338,
+                  "name": "changelog_section",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 340,
+                  "name": "write_version",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 341,
+                  "name": "insert_changelog",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_bump"
+            },
+            {
+              "calls": [
+                {
+                  "line": 56,
+                  "name": "connect",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  },
+                  "via": "open_db"
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_sql"
+            }
+          ]
         },
         {
           "exports": [
@@ -684,7 +1044,7 @@
             }
           ],
           "hash": "073af2ad10eff4b171cd8372ae111b94cd9fa013e7fb6c71f3a26e5dd883232a",
-          "path": "rnd/frontmatter.py"
+          "path": "mcptoolshop_rnd/frontmatter.py"
         },
         {
           "exports": [
@@ -704,10 +1064,10 @@
           ],
           "hash": "09b1a895a35d0ec4e8e052bbeaab6ba09fc8f449611999ea22d9eefbc36fdc39",
           "importsFiles": [
-            "rnd/__init__.py",
-            "rnd/frontmatter.py"
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/frontmatter.py"
           ],
-          "path": "rnd/model.py"
+          "path": "mcptoolshop_rnd/model.py"
         },
         {
           "exports": [
@@ -739,7 +1099,7 @@
             }
           ],
           "hash": "16e1e90b437c6b0acfdab9db16584371a6ec2386222381077780c790d7d49719",
-          "path": "rnd/readouts.py"
+          "path": "mcptoolshop_rnd/readouts.py"
         },
         {
           "exports": [
@@ -799,12 +1159,12 @@
               "line": 120
             }
           ],
-          "hash": "0177e38b979a7cc3b5c1574479ea3d4e41cfbf1f16c7e4d7ec3d27ba505d8be3",
+          "hash": "dbfa08d6fb8ebd51664835a334c89beed8c2944471627515bd61e664a11e21ea",
           "importsFiles": [
-            "rnd/__init__.py",
-            "rnd/frontmatter.py"
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/frontmatter.py"
           ],
-          "path": "rnd/release.py"
+          "path": "mcptoolshop_rnd/release.py"
         },
         {
           "exports": [
@@ -824,11 +1184,74 @@
           ],
           "hash": "8cb7abc97cda290cb0a930c19929d7e3523f36462383640bfef546fca406c1d0",
           "importsFiles": [
-            "rnd/__init__.py",
-            "rnd/catalog.py",
-            "rnd/model.py"
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/catalog.py",
+            "mcptoolshop_rnd/model.py"
           ],
-          "path": "rnd/store.py"
+          "path": "mcptoolshop_rnd/store.py"
+        }
+      ],
+      "globs": [
+        "mcptoolshop_rnd/**"
+      ],
+      "importConfidence": "full",
+      "name": "mcptoolshop_rnd",
+      "origin": "authored",
+      "outsidePlaces": [
+        {
+          "reads": 11,
+          "where": [
+            "caller"
+          ],
+          "writes": 6
+        },
+        {
+          "reads": 2,
+          "where": [
+            "cwd:entries"
+          ],
+          "writes": 0
+        },
+        {
+          "reads": 1,
+          "where": [
+            "cwd:instruments"
+          ],
+          "writes": 0
+        }
+      ],
+      "outsideReads": 14,
+      "outsideWrites": 6,
+      "role": "code",
+      "testRunners": [
+        "unittest"
+      ],
+      "testedBy": 3,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [
+        "rnd/__main__.py"
+      ],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "427d09fff88518246518f4b0ce73f63a00e0563e2f0fc85d6263b09979ef60e2",
+          "importsFiles": [
+            "mcptoolshop_rnd/__init__.py"
+          ],
+          "path": "rnd/__init__.py"
+        },
+        {
+          "hash": "7f0e1696672ca103535a43224d4245b04554ec3a917d39fbd2cc26357e34ef9a",
+          "importsFiles": [
+            "mcptoolshop_rnd/cli.py"
+          ],
+          "path": "rnd/__main__.py"
         }
       ],
       "globs": [
@@ -837,23 +1260,19 @@
       "importConfidence": "full",
       "name": "rnd",
       "origin": "authored",
-      "outsidePlaces": [
-        {
-          "reads": 9,
-          "where": [
-            "caller"
-          ],
-          "writes": 5
-        }
-      ],
-      "outsideReads": 9,
-      "outsideWrites": 5,
       "role": "code",
       "testRunners": [
         "unittest"
       ],
-      "testedBy": 2,
-      "unresolvedSites": 0
+      "testedBy": 1,
+      "unresolvedNamed": [
+        {
+          "path": "rnd/__init__.py",
+          "specifier": null,
+          "why": "dynamic"
+        }
+      ],
+      "unresolvedSites": 1
     },
     {
       "dynamicReads": 0,
@@ -864,7 +1283,7 @@
       "externals": 0,
       "files": [
         {
-          "hash": "e4cc41bbef393368c3c3bcf55443242ac474d43289c2dfe6747aa1eba27f7866",
+          "hash": "470ff22a70d7538a8f037e40d6007c30c85483b38fa40139299bac1fb51b221a",
           "path": ".coveragerc"
         },
         {
@@ -872,11 +1291,11 @@
           "path": ".gitattributes"
         },
         {
-          "hash": "475b1b1e39cf1d2fc2fa199e0a9fe886b7fc252ac20dc0de84fa0ec0ea25a94e",
+          "hash": "c4c0e3aa971a97d7cf570dba93ed5f582180142f2097d4eede9bc1d2fa2de05d",
           "path": ".gitignore"
         },
         {
-          "hash": "aca4d22e3fe9373392f0fdb92b2c86037e9381bb0a36d8fc0d520f3594f88d47",
+          "hash": "1f2c7b0f70ed8f660084f153f3514ee5d67ad1a7ffb08c1b97748a2d8901b27e",
           "path": "CHANGELOG.md"
         },
         {
@@ -884,35 +1303,35 @@
           "path": "LICENSE"
         },
         {
-          "hash": "cd851fc6156ce121d72ddeaa688d8cab2b0545bcab1f2b17aa9634d5a45e06d1",
+          "hash": "8926e0789755154173ffc13c7c54dd44776fc8c9a04dc886f4c4af87309b3c53",
           "path": "README.es.md"
         },
         {
-          "hash": "af5330251a616018dd14498d46ade474b54c7b3c5a8dfc1b5174e3fa2aa997b2",
+          "hash": "64ba6ec2f9550abd4b273ff2a4fe13b7eb84e14c2d82c3bbf11b5b84230a0b03",
           "path": "README.fr.md"
         },
         {
-          "hash": "4852877db59dc98f7add9e790becd0e1a20afc7f555c1dc45ed1649f60463c65",
+          "hash": "5786474562ee500cc4d0393e279edbe1262be5fe616f5bd68fc68e08a570b7a0",
           "path": "README.hi.md"
         },
         {
-          "hash": "534213b6c95f2114d7613e0f4411133ace8b99fb21317c7d9c64b8f541677167",
+          "hash": "b4449e3fcf53b00f6df135e11720ba04b6bb592d1c98b541bdc92085655f14f3",
           "path": "README.it.md"
         },
         {
-          "hash": "c1f59ff6761d5b56c60c3017932f1853f22fc95a65373b358fa786efffbdddeb",
+          "hash": "4cfd7250bbad7eae3daa6bc9e6c2c3a6ff2d90fbcca0e1957f0617ea60f6af9c",
           "path": "README.ja.md"
         },
         {
-          "hash": "3ece651939c75af23a41e060ee52bb2354903f242a2b246cbd375fd443c4314f",
+          "hash": "7142b2c7be70dd46e5130fd45e92b34877388a64804d9ff551db51e709eda6a5",
           "path": "README.md"
         },
         {
-          "hash": "1e1489b790485a69de4f755b2352f867ea983b1a039b97c6488185ecb825740a",
+          "hash": "b06cb3b0c50480bdf2b6c24061a6de968be26a706907c3739926b42abc63460b",
           "path": "README.pt-BR.md"
         },
         {
-          "hash": "5dbdde10f4d09585496a72e2f96b7bbe92137a6a634ad39722dc90bcb5731939",
+          "hash": "eeeb02bec575788222391b798fe9898a634da2f91429e21bef5906fd4efe7035",
           "path": "README.zh.md"
         },
         {
@@ -924,7 +1343,7 @@
           "path": "SECURITY.md"
         },
         {
-          "hash": "5345f9b792733e303366ae84b412c3d81a08cb424e58e12464eccca5040bb291",
+          "hash": "76150821ccb81f5514f37e940bbb00b82b08738d73ffbfac2f8e9dd1a474f7bb",
           "path": "SHIP_GATE.md"
         },
         {
@@ -932,12 +1351,20 @@
           "path": "codecov.yml"
         },
         {
-          "hash": "06630f265162828a9c56e71f2b4b5f4d6aee155f3c653681b5c9c3eb626801b5",
+          "hash": "b03fad04c6db29461f20c0a815e116fc7c405a30cec7677c2c16dac2077b2ba0",
+          "path": "pyproject.toml"
+        },
+        {
+          "hash": "f76a86611142acec26d063410fe7893ad97c18487efd6c9120ea8c65cbcb4f8a",
           "path": "rnd.cmd"
         },
         {
-          "hash": "3e555511a141f51b3e31eeb6f146bb51d80c2c3e9382a85afe2be32f6d964fbb",
+          "hash": "13ab27737bee167da7b427000674be277ea457bb5ed8e9797ce06de6d7a3a6a7",
           "path": "rnd.sh"
+        },
+        {
+          "hash": "6e6bbebf3f4b3d15d3753e6b12b7749440d1a3794de4e0cbb4016179b3a270a3",
+          "path": "uv.lock"
         },
         {
           "hash": "56426e622676885c4b1911969663a39bfa884e6d0a7a2b1c0badff2bfaf40778",
@@ -988,7 +1415,7 @@
           "path": "site/src/content.config.ts"
         },
         {
-          "hash": "1d32262c0f05f7f8e3876396ecd373ee5e73f84fd46a5c2da5c68e009234815e",
+          "hash": "e1233d36de2bdd75dde301739a533831a3ffdd0fbf0e42a7b047e01165cc907f",
           "path": "site/src/content/docs/handbook/architecture.md"
         },
         {
@@ -1000,7 +1427,7 @@
           "path": "site/src/content/docs/handbook/filing-research.md"
         },
         {
-          "hash": "293bd79421c529c4215f2c0899f36577b0776455e3c4e791d270c2375eea2157",
+          "hash": "0e3aa86030ddcc02aa85bb053f1c0e4b3fe694e6e6549c2c667bb11f5c28c0f8",
           "path": "site/src/content/docs/handbook/getting-started.md"
         },
         {
@@ -1008,7 +1435,7 @@
           "path": "site/src/content/docs/handbook/index.md"
         },
         {
-          "hash": "a58b7f9843d1780e0c504d1f7b3dfed8a4554e40a1720277e019fea684c8d061",
+          "hash": "392c1e729f51cf0b28204a57d2230f8ff6e49f8619e94a3761b4c60ca79c47a6",
           "path": "site/src/content/docs/handbook/reference.md"
         },
         {
@@ -1073,12 +1500,12 @@
             "make_library",
             "make_readouts"
           ],
-          "hash": "891b99c8c2f5de4a279154050e818ec14b1e76daa9934c08dd98c5b98caf9287",
+          "hash": "067345cedf33c306d0f34c42d2bebc91588a8fee7f33abe22a4104eb0f103b6e",
           "importsFiles": [
-            "rnd/__init__.py",
-            "rnd/catalog.py",
-            "rnd/cli.py",
-            "rnd/release.py",
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/catalog.py",
+            "mcptoolshop_rnd/cli.py",
+            "mcptoolshop_rnd/release.py",
             "tests/test_rnd.py"
           ],
           "path": "tests/test_cli.py",
@@ -1086,28 +1513,40 @@
         },
         {
           "exports": [
+            "run_py"
+          ],
+          "hash": "fc9a98843ed15ee3e6d7a61d4588a21811832b9158a34518c28fdf2695608e95",
+          "importsFiles": [
+            "mcptoolshop_rnd/__init__.py",
+            "rnd/__init__.py"
+          ],
+          "path": "tests/test_packaging.py",
+          "testFramework": "unittest"
+        },
+        {
+          "exports": [
             "write"
           ],
-          "hash": "acdade3e0bb5b38abd833298964a5d2f667d630eb890cb888a2d5e0038b85d98",
+          "hash": "e1e5ca0921f31c1482f27360dcd90361edc7b91ab8bc133a2100e4643e2a2da3",
           "importOrder": [
-            "rnd/__init__.py",
-            "rnd/catalog.py",
-            "rnd/frontmatter.py",
-            "rnd/model.py",
-            "rnd/readouts.py",
-            "rnd/store.py",
-            "rnd/cli.py",
-            "rnd/release.py"
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/catalog.py",
+            "mcptoolshop_rnd/frontmatter.py",
+            "mcptoolshop_rnd/model.py",
+            "mcptoolshop_rnd/readouts.py",
+            "mcptoolshop_rnd/store.py",
+            "mcptoolshop_rnd/cli.py",
+            "mcptoolshop_rnd/release.py"
           ],
           "importsFiles": [
-            "rnd/__init__.py",
-            "rnd/catalog.py",
-            "rnd/cli.py",
-            "rnd/frontmatter.py",
-            "rnd/model.py",
-            "rnd/readouts.py",
-            "rnd/release.py",
-            "rnd/store.py"
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/catalog.py",
+            "mcptoolshop_rnd/cli.py",
+            "mcptoolshop_rnd/frontmatter.py",
+            "mcptoolshop_rnd/model.py",
+            "mcptoolshop_rnd/readouts.py",
+            "mcptoolshop_rnd/release.py",
+            "mcptoolshop_rnd/store.py"
           ],
           "path": "tests/test_rnd.py",
           "testFramework": "unittest"
@@ -1124,12 +1563,24 @@
         "unittest"
       ],
       "testedBy": 0,
-      "unresolvedSites": 0
+      "unresolvedNamed": [
+        {
+          "path": "tests/test_packaging.py",
+          "specifier": "rnd.cli",
+          "why": "unplaced"
+        },
+        {
+          "path": "tests/test_packaging.py",
+          "specifier": "rnd.store",
+          "why": "unplaced"
+        }
+      ],
+      "unresolvedSites": 2
     }
   ],
   "doors": [
     {
-      "checksCount": 0,
+      "checksCount": 2,
       "commands": [
         {
           "dir": "",
@@ -1146,6 +1597,16 @@
             "python"
           ],
           "step": "Coverage"
+        },
+        {
+          "dir": "",
+          "job": "ci",
+          "programs": [
+            "cd",
+            "echo",
+            "python"
+          ],
+          "step": "Package (build, twine check, install smoke)"
         },
         {
           "dir": "",
@@ -1197,7 +1658,7 @@
                   "range": ">=22.0.0 <23.0.0-0"
                 }
               ],
-              "step": "5",
+              "step": "6",
               "uses": "actions/setup-node",
               "version": "22"
             }
@@ -1217,6 +1678,16 @@
       "pushes": false,
       "reach": [
         {
+          "boundary": "mcptoolshop_rnd",
+          "depth": 0,
+          "files": 9
+        },
+        {
+          "boundary": "rnd",
+          "depth": 0,
+          "files": 2
+        },
+        {
           "boundary": "root",
           "depth": 0,
           "files": 1
@@ -1224,34 +1695,13 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 3
-        },
-        {
-          "boundary": "rnd",
-          "depth": 1,
-          "enters": {
-            "file": "rnd/__init__.py",
-            "from": "tests/test_cli.py"
-          },
-          "files": 8
+          "files": 4
         }
       ],
       "readers": [
         {
-          "by": "rnd/cli.py",
-          "call": "get",
-          "confidence": "ast",
-          "target": "entries"
-        },
-        {
-          "by": "rnd/cli.py",
+          "by": "mcptoolshop_rnd/cli.py",
           "call": "read_text",
-          "confidence": "ast",
-          "target": "entries"
-        },
-        {
-          "by": "rnd/release.py",
-          "call": "literal",
           "confidence": "ast",
           "target": "entries"
         },
@@ -1268,15 +1718,23 @@
           "confidence": "ast",
           "fromTests": true,
           "target": "entries"
-        },
-        {
-          "by": "rnd/release.py",
-          "call": "literal",
-          "confidence": "ast",
-          "target": "instruments"
         }
       ],
       "runs": [
+        {
+          "directory": true,
+          "job": "ci",
+          "path": "mcptoolshop_rnd/",
+          "runKind": "checks",
+          "via": "build pyproject.toml"
+        },
+        {
+          "directory": true,
+          "job": "ci",
+          "path": "rnd/",
+          "runKind": "checks",
+          "via": "build pyproject.toml"
+        },
         {
           "directory": true,
           "job": "ci",
@@ -1291,7 +1749,7 @@
           "runKind": "executes"
         }
       ],
-      "runsCount": 2,
+      "runsCount": 4,
       "secrets": [],
       "sends": {
         "deploysPages": false,
@@ -1318,7 +1776,7 @@
         },
         {
           "coverage": true,
-          "files": 3,
+          "files": 4,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -1344,8 +1802,11 @@
             "codecov.yml",
             "entries/**",
             "instruments/**",
+            "mcptoolshop_rnd/**",
+            "pyproject.toml",
             "rnd/**",
             "tests/**",
+            "uv.lock",
             "verify.sh"
           ]
         },
@@ -1502,9 +1963,234 @@
         "actions/upload-pages-artifact"
       ],
       "usesWorkflowToken": false
+    },
+    {
+      "checksCount": 2,
+      "commands": [
+        {
+          "dir": "",
+          "job": "pypi",
+          "programs": [
+            "bash"
+          ],
+          "step": "Verify"
+        },
+        {
+          "dir": "",
+          "job": "pypi",
+          "programs": [
+            "echo",
+            "python",
+            "test"
+          ],
+          "step": "Version matches the tag"
+        },
+        {
+          "dir": "",
+          "job": "pypi",
+          "programs": [
+            "python"
+          ],
+          "step": "Build and check"
+        }
+      ],
+      "elsewhere": [],
+      "file": ".github/workflows/release.yml",
+      "jobs": [
+        {
+          "basis": "declared",
+          "environment": {
+            "name": "pypi"
+          },
+          "name": "pypi",
+          "runsOn": [
+            {
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "platform": {
+                "cpu": "x64",
+                "libc": "glibc",
+                "os": "linux"
+              }
+            }
+          ],
+          "setup": [
+            {
+              "ranges": [
+                {
+                  "from": "3.12",
+                  "range": ">=3.12.0 <3.13.0-0"
+                }
+              ],
+              "step": "1",
+              "uses": "actions/setup-python",
+              "version": "3.12"
+            }
+          ]
+        }
+      ],
+      "landings": [],
+      "mentions": [],
+      "name": "Release",
+      "permissions": [
+        "contents:read",
+        "id-token:write"
+      ],
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "mcptoolshop_rnd",
+          "depth": 0,
+          "files": 9
+        },
+        {
+          "boundary": "rnd",
+          "depth": 0,
+          "files": 2
+        },
+        {
+          "boundary": "root",
+          "depth": 0,
+          "files": 1
+        }
+      ],
+      "readers": [],
+      "runs": [
+        {
+          "directory": true,
+          "job": "pypi",
+          "path": "mcptoolshop_rnd/",
+          "runKind": "checks",
+          "via": "build pyproject.toml"
+        },
+        {
+          "job": "pypi",
+          "path": "mcptoolshop_rnd/__init__.py",
+          "runKind": "executes"
+        },
+        {
+          "directory": true,
+          "job": "pypi",
+          "path": "rnd/",
+          "runKind": "checks",
+          "via": "build pyproject.toml"
+        },
+        {
+          "job": "pypi",
+          "path": "verify.sh",
+          "runKind": "executes"
+        }
+      ],
+      "runsCount": 4,
+      "secrets": [],
+      "sends": {
+        "deploysPages": false,
+        "dispatchesTo": [],
+        "opensIssues": false,
+        "opensIssuesOnFailure": false,
+        "opensPullRequests": false,
+        "publishes": true,
+        "publishesTo": [
+          "pypi"
+        ],
+        "releases": false
+      },
+      "stages": [],
+      "triggers": [
+        {
+          "event": "release",
+          "types": [
+            "published"
+          ]
+        }
+      ],
+      "uses": [
+        "actions/checkout",
+        "actions/setup-python",
+        "pypa/gh-action-pypi-publish"
+      ],
+      "usesWorkflowToken": false
+    },
+    {
+      "checksCount": 0,
+      "commands": [],
+      "elsewhere": [],
+      "file": "pyproject.toml",
+      "kind": "command",
+      "landings": [
+        "entries",
+        "instruments"
+      ],
+      "mentions": [],
+      "name": "rnd",
+      "permissions": [],
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "mcptoolshop_rnd",
+          "depth": 0,
+          "files": 8
+        }
+      ],
+      "readers": [
+        {
+          "by": "mcptoolshop_rnd/cli.py",
+          "call": "read_text",
+          "confidence": "ast",
+          "target": "entries"
+        },
+        {
+          "by": "tests/test_cli.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true,
+          "target": "entries"
+        },
+        {
+          "by": "tests/test_rnd.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true,
+          "target": "entries"
+        }
+      ],
+      "runs": [
+        {
+          "path": "mcptoolshop_rnd/cli.py",
+          "runKind": "executes"
+        }
+      ],
+      "runsCount": 1,
+      "secrets": [],
+      "sends": {
+        "deploysPages": false,
+        "dispatchesTo": [],
+        "opensIssues": false,
+        "opensIssuesOnFailure": false,
+        "opensPullRequests": false,
+        "publishes": false,
+        "publishesTo": [],
+        "releases": false
+      },
+      "stages": [],
+      "triggers": [],
+      "uses": [],
+      "usesWorkflowToken": false
     }
   ],
   "edges": [
+    {
+      "from": "rnd",
+      "kind": "file",
+      "to": "mcptoolshop_rnd"
+    },
+    {
+      "from": "tests",
+      "fromTests": true,
+      "kind": "file",
+      "to": "mcptoolshop_rnd"
+    },
     {
       "from": "tests",
       "fromTests": true,
@@ -1514,8 +2200,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "33fa5db78aa9249873b5ebde38e0ac98ee813219",
-    "tracked": 130
+    "commit": "922b8861bbd8758b509c7e7228ba5632b6d3fdef",
+    "tracked": 147
   },
   "landings": [
     {
@@ -1533,6 +2219,22 @@
     {
       "readers": [
         {
+          "by": "pyproject.toml",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "LICENSE",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "pyproject.toml",
+          "call": "configuration",
+          "confidence": "config"
+        },
+        {
           "by": "tests/test_cli.py",
           "call": "literal",
           "confidence": "ast",
@@ -1540,7 +2242,13 @@
         }
       ],
       "target": "README.md",
-      "writers": []
+      "writers": [
+        {
+          "by": "experiments/kev-judge-finetune/stage_hf.py",
+          "confidence": "weak",
+          "untrackedInputs": true
+        }
+      ]
     },
     {
       "readers": [
@@ -1554,22 +2262,11 @@
       "writers": []
     },
     {
-      "readers": [
-        {
-          "by": "rnd/cli.py",
-          "call": "get",
-          "confidence": "ast"
-        },
-        {
-          "by": "rnd/release.py",
-          "call": "literal",
-          "confidence": "ast"
-        }
-      ],
+      "readers": [],
       "target": "entries",
       "writers": [
         {
-          "by": "rnd/cli.py",
+          "by": "mcptoolshop_rnd/cli.py",
           "confidence": "ast"
         }
       ]
@@ -1577,7 +2274,7 @@
     {
       "readers": [
         {
-          "by": "rnd/cli.py",
+          "by": "mcptoolshop_rnd/cli.py",
           "call": "read_text",
           "confidence": "ast"
         },
@@ -1600,15 +2297,41 @@
     {
       "readers": [
         {
-          "by": "rnd/release.py",
-          "call": "literal",
+          "by": "experiments/kev-judge-finetune/summarise.py",
+          "call": "glob",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/kev-judge-finetune/summarise.py",
+          "call": "read_text",
           "confidence": "ast"
         }
       ],
+      "target": "experiments/kev-judge-finetune/results",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/kev-judge-finetune/stage_hf.py",
+          "call": "read_text",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/kev-judge-finetune/results/summary.json",
+      "writers": [
+        {
+          "by": "experiments/kev-judge-finetune/summarise.py",
+          "confidence": "ast"
+        }
+      ]
+    },
+    {
+      "readers": [],
       "target": "instruments",
       "writers": [
         {
-          "by": "rnd/cli.py",
+          "by": "mcptoolshop_rnd/cli.py",
           "confidence": "ast"
         }
       ]
@@ -1622,7 +2345,19 @@
           "fromTests": true
         }
       ],
-      "target": "rnd/__init__.py",
+      "target": "mcptoolshop_rnd/__init__.py",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "tests/test_packaging.py",
+          "call": "read_text",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "pyproject.toml",
       "writers": []
     },
     {
@@ -1651,6 +2386,6 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 3,
+  "testFiles": 4,
   "unassigned": []
 }

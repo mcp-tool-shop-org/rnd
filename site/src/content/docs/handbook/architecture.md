@@ -13,24 +13,27 @@ index built from those files. It is gitignored and can be deleted at any time.
 
 ```
 entries/YYYY/*.md ─┐
-instruments/*.md  ─┼─► rnd/model.py (parse + validate) ─► rnd/store.py ─► rnd.db (FTS5)
-catalogs/*/       ─┘                                                     │
-                                                                         ▼
-                                      rnd/cli.py ◄── search · show · list · tools · stats · sql
-                                          │
-                                          └──► rnd/readouts.py ─► readouts KBs (read-only)
+instruments/*.md  ─┼─► model.py (parse + validate) ─► store.py ─► rnd.db (FTS5)
+catalogs/*/       ─┘                                                 │
+                                                                     ▼
+                                  cli.py ◄── search · show · list · tools · stats · sql
+                                    │
+                                    └──► readouts.py ─► readouts KBs (read-only)
 ```
+
+All modules live in `mcptoolshop_rnd/`; `rnd/` is a compatibility alias that
+re-exports them.
 
 ## Modules
 
 | module | job |
 |---|---|
-| `rnd/frontmatter.py` | a small YAML-subset parser (scalars, wrapped scalars, inline and block lists, lists of maps, block scalars), so there is no PyYAML dependency |
-| `rnd/model.py` | the vocabularies (kinds, tiers, confidence) and entry validation, which reports errors and warnings rather than raising |
-| `rnd/catalog.py` | catalogue sync through the GitHub GraphQL API (via `gh`), lanes and families, and merging the studio review |
-| `rnd/store.py` | the SQLite schema, index build, change detection and search |
-| `rnd/readouts.py` | federated, read-only search over each readouts knowledge base's FTS table |
-| `rnd/cli.py` | the argparse front end, structured errors and exit codes |
+| `mcptoolshop_rnd/frontmatter.py` | a small YAML-subset parser (scalars, wrapped scalars, inline and block lists, lists of maps, block scalars), so there is no PyYAML dependency |
+| `mcptoolshop_rnd/model.py` | the vocabularies (kinds, tiers, confidence) and entry validation, which reports errors and warnings rather than raising |
+| `mcptoolshop_rnd/catalog.py` | catalogue sync through the GitHub GraphQL API (via `gh`), lanes and families, and merging the studio review |
+| `mcptoolshop_rnd/store.py` | the SQLite schema, index build, change detection and search |
+| `mcptoolshop_rnd/readouts.py` | federated, read-only search over each readouts knowledge base's FTS table |
+| `mcptoolshop_rnd/cli.py` | the argparse front end, structured errors and exit codes |
 
 ## Index lifecycle
 

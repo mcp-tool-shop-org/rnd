@@ -28,6 +28,10 @@ boundaries:
     globs:
       - instruments/**
     role: docs
+  - name: mcptoolshop_rnd
+    globs:
+      - mcptoolshop_rnd/**
+    role: code
   - name: rnd
     globs:
       - rnd/**

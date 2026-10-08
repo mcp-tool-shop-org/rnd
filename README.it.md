@@ -62,7 +62,9 @@ Per utilizzare lo strumento in altri progetti, installalo da PyPI:
 pip install mcptoolshop-rnd
 ```
 
-Questo installerà il comando `rnd`, non la libreria: le voci sono contenute in questo repository. Il comando cerca una libreria in questo ordine: `--library DIR`, poi `$RND_ROOT`, quindi la cartella più vicina, o una cartella di livello superiore, che contiene `entries/` e `instruments/`. Al di fuori di una libreria, l'esecuzione si interrompe con `NO_LIBRARY`; solo `rnd readouts` funziona senza una libreria. Il pacchetto viene importato come `rnd`, così come un pacchetto PyPI non correlato chiamato `rnd`, quindi non installare entrambi nello stesso ambiente.
+Questo comando installa `rnd`, non la libreria: le voci sono contenute in questo repository. Il comando cerca una libreria seguendo questo ordine: `--library DIR`, poi `$RND_ROOT`, quindi la cartella più vicina, o una cartella di livello superiore, che contiene `entries/` e `instruments/`. Al di fuori di una libreria, l’esecuzione si interrompe con `NO_LIBRARY`; solo `rnd readouts` funziona senza una libreria.
+
+In Python, importare `mcptoolshop_rnd`: questo nome funziona sempre. `rnd` viene mantenuto come alias di compatibilità, ma esiste anche un pacchetto PyPI non correlato chiamato `rnd` e, se entrambi sono installati, può sostituire l’alias. Il comando `rnd` e `python -m mcptoolshop_rnd` continuano a funzionare in entrambi i casi.
 
 La libreria viene aggiornata quotidianamente, quindi le versioni sono suddivise in cinque segmenti: `MAJOR.MINOR.PATCH.MICRO.NANO`. I primi tre segmenti riguardano lo strumento `rnd`; MICRO indica una modifica strutturale della libreria, mentre NANO indica un aggiornamento ordinario. `rnd bump` incrementa automaticamente l’ultimo segmento e crea una sezione CHANGELOG a partire dai file modificati rispetto all’ultima versione, in modo che ogni aggiornamento abbia la sua piccola versione contrassegnata.
 
@@ -78,7 +80,8 @@ Codici di uscita: `0` ok · `1` file di libreria non validi · `2` errore di uti
 | `catalogs/<name>/source.json` | Da dove proviene un catalogo. | Persone. |
 | `catalogs/<name>/catalog.json` | Snapshot fissato da `rnd catalog sync`. | Generato; non modificare manualmente. |
 | `catalogs/<name>/review.json` | Adattamento e note dello studio per famiglia e articolo. | Persone. |
-| `rnd/` | La CLI. | Codice. |
+| `mcptoolshop_rnd/` | La CLI. | Codice. |
+| `rnd/` | Alias di compatibilità per `mcptoolshop_rnd`. | Codice. |
 | `rnd.db` | Indice SQLite FTS5, ricostruito automaticamente quando i file cambiano. | Generato; non presente in Git. |
 
 ## Formato della voce

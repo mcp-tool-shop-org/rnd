@@ -344,7 +344,7 @@ def cmd_bump(args):
     print(f"{'would bump' if args.dry_run else 'bumped'} {old} -> {new} (changes since {since or 'the first commit'})")
     print(section.rstrip())
     if not args.dry_run:
-        print(f"\nnext: git add rnd/__init__.py CHANGELOG.md <your changes> && git commit -m \"rnd {new}\" "
+        print(f"\nnext: git add mcptoolshop_rnd/__init__.py CHANGELOG.md <your changes> && git commit -m \"rnd {new}\" "
               f"&& git tag -a v{new} -m \"rnd {new}\" && git push --follow-tags")
     return 0
 

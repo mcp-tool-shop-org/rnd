@@ -33,10 +33,10 @@ Changelog = "https://github.com/mcp-tool-shop-org/rnd/blob/main/CHANGELOG.md"
 Issues = "https://github.com/mcp-tool-shop-org/rnd/issues"
 
 [project.scripts]
-rnd = "rnd.cli:main"
+rnd = "mcptoolshop_rnd.cli:main"
 
 [tool.setuptools]
-packages = ["rnd"]
+packages = ["mcptoolshop_rnd", "rnd"]
 
 [tool.setuptools.dynamic]
-version = { attr = "rnd.__version__" }
+version = { attr = "mcptoolshop_rnd.__version__" }

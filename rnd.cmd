@@ -1,5 +1,5 @@
 @echo off
 setlocal
 set "PYTHONPATH=%~dp0;%PYTHONPATH%"
-python -m rnd %*
+python -m mcptoolshop_rnd %*
 exit /b %ERRORLEVEL%

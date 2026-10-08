@@ -80,8 +80,12 @@ That installs the `rnd` command, not the library: the entries live in this
 repository. The command finds a library in this order: `--library DIR`, then
 `$RND_ROOT`, then the nearest folder at or above the current one that holds
 `entries/` and `instruments/`. Outside a library it stops with `NO_LIBRARY`;
-only `rnd readouts` works without one. The package imports as `rnd`, as does an
-unrelated PyPI package called `rnd`, so don't install both in one environment.
+only `rnd readouts` works without one.
+
+In Python, import `mcptoolshop_rnd`: that name always works. `rnd` is kept as a
+compatibility alias, but an unrelated PyPI package is also called `rnd`, and if
+both are installed it can replace the alias. The `rnd` command and
+`python -m mcptoolshop_rnd` keep working either way.
 
 The library changes daily, so versions have five segments,
 `MAJOR.MINOR.PATCH.MICRO.NANO`. The first three version the `rnd` tool; MICRO marks a
@@ -103,7 +107,8 @@ code, a message and a hint; `--debug` adds the traceback.
 | `catalogs/<name>/source.json` | Where a catalogue comes from | people |
 | `catalogs/<name>/catalog.json` | Pinned snapshot from `rnd catalog sync` | generated; never hand-edit |
 | `catalogs/<name>/review.json` | Studio fit and notes per family and item | people |
-| `rnd/` | The CLI | code |
+| `mcptoolshop_rnd/` | The CLI | code |
+| `rnd/` | Compatibility alias for `mcptoolshop_rnd` | code |
 | `rnd.db` | SQLite FTS5 index, rebuilt automatically when files change | generated; not in git |
 
 ## Entry format

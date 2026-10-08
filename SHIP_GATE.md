@@ -44,7 +44,7 @@
 ## D. Shipping Hygiene
 
 - [x] `[all]` `verify` script exists (test + build + smoke in one command) (2026-10-07) — `verify.sh`, run in CI
-- [x] `[all]` Version in manifest matches git tag (2026-10-08) — `pyproject.toml` reads `rnd.__version__`; tags are `v<version>`, and `release.yml` refuses to publish when the release tag and the package version differ
+- [x] `[all]` Version in manifest matches git tag (2026-10-08) — `pyproject.toml` reads `mcptoolshop_rnd.__version__`; tags are `v<version>`, and `release.yml` refuses to publish when the release tag and the package version differ
 - [ ] `[all]` SKIP: no runtime dependencies (standard library only); the site's npm tree is covered by `shipcheck deps`
 - [x] `[all]` No known high/critical vulnerabilities in any dependency tree (2026-10-07) — Python: none (stdlib); site/: `npm audit --audit-level=high` clean (10 moderate, in Starlight's code-highlighting chain)
 - [ ] `[all]` SKIP: optional; no runtime dependencies to update

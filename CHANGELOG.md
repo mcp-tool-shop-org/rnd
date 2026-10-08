@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.3.0.0] - 2026-10-08
+
+- Name-clash fix: the code moves to `mcptoolshop_rnd` (the import name that always works); `rnd` stays as a compatibility shim that aliases every submodule, and the `rnd` command runs `mcptoolshop_rnd.cli:main`, so an unrelated PyPI `rnd` replacing the shim breaks neither the command nor `python -m mcptoolshop_rnd`
+- tests/test_packaging.py and a CI clash check (a raising rnd/ stub after a clean install) prove it
+
 ## [1.1.2.0.0] - 2026-10-08
 
 - Packaged for PyPI as `mcptoolshop-rnd` (pyproject.toml, uv.lock); the `rnd` command finds its library via `--library`, `$RND_ROOT` or the nearest folder with entries/ and instruments/, else stops with NO_LIBRARY

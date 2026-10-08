@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from rnd import catalog, frontmatter, model, readouts, store
+from mcptoolshop_rnd import catalog, frontmatter, model, readouts, store
 
 ENTRY = """---
 id: 2026-01-02-sample
@@ -255,7 +255,7 @@ class CliTests(unittest.TestCase):
         import contextlib
         import io
 
-        from rnd import __version__, cli
+        from mcptoolshop_rnd import __version__, cli
         out = io.StringIO()
         with contextlib.redirect_stdout(out), self.assertRaises(SystemExit) as ctx:
             cli.main(["--version"])
@@ -267,7 +267,7 @@ class CliTests(unittest.TestCase):
         import io
         from unittest import mock
 
-        from rnd import cli
+        from mcptoolshop_rnd import cli
         err = io.StringIO()
         with mock.patch.object(cli, "cmd_stats", side_effect=RuntimeError("boom")):
             with contextlib.redirect_stderr(err):
@@ -279,7 +279,7 @@ class CliTests(unittest.TestCase):
 
 class ReleaseTests(unittest.TestCase):
     def test_bump_levels_reset_lower_segments(self):
-        from rnd import release
+        from mcptoolshop_rnd import release
         self.assertEqual(release.bump("1.0.0"), "1.0.0.0.1")
         self.assertEqual(release.bump("1.0.0.0.9", "micro"), "1.0.0.1.0")
         self.assertEqual(release.bump("1.2.3.4.5", "minor"), "1.3.0.0.0")
@@ -289,7 +289,7 @@ class ReleaseTests(unittest.TestCase):
             release.bump("1.0.0", "pico")
 
     def test_changelog_section_and_insert(self):
-        from rnd import release
+        from mcptoolshop_rnd import release
         root = Path(tempfile.mkdtemp())
         self.addCleanup(shutil.rmtree, root)
         (root / "entries" / "2026").mkdir(parents=True)

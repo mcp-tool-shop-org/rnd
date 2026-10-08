@@ -62,7 +62,9 @@ Pour utiliser l’outil dans d’autres projets, installez-le depuis PyPI :
 pip install mcptoolshop-rnd
 ```
 
-Cela installe la commande `rnd`, et non la bibliothèque : les éléments se trouvent dans ce dépôt. La commande recherche une bibliothèque dans l’ordre suivant : `--library DIR`, puis `$RND_ROOT`, puis le dossier le plus proche, situé au niveau du dossier actuel ou au-dessus, qui contient `entries/` et `instruments/`. En dehors d’une bibliothèque, elle s’arrête avec `NO_LIBRARY` ; seule `rnd readouts` fonctionne sans bibliothèque. Le paquet est importé sous le nom `rnd`, tout comme un autre paquet PyPI sans lien, appelé `rnd`. Il est donc déconseillé d’installer les deux dans le même environnement.
+Cela installe la commande `rnd`, et non la bibliothèque : les éléments se trouvent dans ce dépôt. La commande recherche une bibliothèque dans l’ordre suivant : `--library DIR`, puis `$RND_ROOT`, puis le dossier le plus proche, situé au même niveau ou au-dessus du dossier actuel, qui contient `entries/` et `instruments/`. En dehors d’une bibliothèque, elle s’arrête avec `NO_LIBRARY` ; seule `rnd readouts` fonctionne sans bibliothèque.
+
+En Python, importez `mcptoolshop_rnd` : ce nom fonctionne toujours. `rnd` est conservé comme alias de compatibilité, mais un autre paquet PyPI, sans lien avec le premier, s’appelle également `rnd`, et si les deux sont installés, il peut remplacer l’alias. La commande `rnd` et `python -m mcptoolshop_rnd` continuent de fonctionner dans les deux cas.
 
 La bibliothèque est mise à jour quotidiennement, c’est pourquoi les versions sont divisées en cinq segments : `MAJOR.MINOR.PATCH.MICRO.NANO`. Les trois premiers segments concernent l’outil `rnd` ; MICRO indique une modification structurelle de la bibliothèque, et NANO, une mise à jour ordinaire. `rnd bump` augmente par défaut le dernier segment et crée une section CHANGELOG à partir des fichiers modifiés depuis la dernière version, de sorte que chaque mise à jour se voit attribuer sa propre version mineure.
 
@@ -78,7 +80,8 @@ Codes de sortie : `0` ok ; `1` fichiers de bibliothèque non valides ; `2` er
 | `catalogs/<name>/source.json` | D’où provient un catalogue. | personnes. |
 | `catalogs/<name>/catalog.json` | Instantané épinglé à partir de `rnd catalog sync`. | généré ; ne jamais modifier manuellement. |
 | `catalogs/<name>/review.json` | Adaptation et notes du studio par famille et par élément. | personnes. |
-| `rnd/` | L’interface en ligne de commande. | code. |
+| `mcptoolshop_rnd/` | L’interface en ligne de commande. | code. |
+| `rnd/` | Alias de compatibilité pour `mcptoolshop_rnd`. | code. |
 | `rnd.db` | Index FTS5 SQLite, reconstruit automatiquement lorsque les fichiers sont modifiés. | généré ; ne se trouve pas dans Git. |
 
 ## Format d’entrée

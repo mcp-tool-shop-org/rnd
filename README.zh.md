@@ -63,7 +63,9 @@ python -m rnd bump --note "what changed"  # micro version bump + CHANGELOG secti
 pip install mcptoolshop-rnd
 ```
 
-这会安装 `rnd` 命令，而不是库：这些条目位于此仓库中。该命令按以下顺序查找库：`--library DIR`，然后是 `$RND_ROOT`，然后是当前目录或其上级目录中最近的包含 `entries/` 和 `instruments/` 的文件夹。在库外部，它会停止并显示 `NO_LIBRARY`；只有 `rnd readouts` 才能在没有库的情况下工作。该软件包以 `rnd` 的形式导入，一个名为 `rnd` 的无关 PyPI 软件包也是如此，因此不要在一个环境中同时安装两者。
+这会安装 `rnd` 命令，而不是库：这些条目位于此仓库中。该命令按以下顺序查找库：`--library DIR`，然后是 `$RND_ROOT`，然后是当前目录或其上方目录中包含 `entries/` 和 `instruments/` 的最近文件夹。在库外部，它会停止并显示 `NO_LIBRARY`；只有 `rnd readouts` 才能在没有库的情况下工作。
+
+在 Python 中，导入 `mcptoolshop_rnd`：该名称始终有效。`rnd` 被保留为一个兼容性别名，但还有一个名为 `rnd` 的无关 PyPI 包，如果同时安装了这两个包，它可能会替换该别名。无论如何，`rnd` 命令和 `python -m mcptoolshop_rnd` 都能正常工作。
 
 库每天都在更新，因此版本包含五个部分：`MAJOR.MINOR.PATCH.MICRO.NANO`。前三个部分是 `rnd` 工具的版本；MICRO 表示库结构发生了变化，而 NANO 表示普通更新。`rnd bump` 默认情况下会增加最后一个部分，并从上次标记以来发生更改的文件中生成一个 CHANGELOG 部分，因此每次更新都会获得自己的小型标记版本。
 
@@ -79,7 +81,8 @@ pip install mcptoolshop-rnd
 | `catalogs/<name>/source.json` | 目录的来源 | 人员 |
 | `catalogs/<name>/catalog.json` | 从 `rnd catalog sync` 提取的快照 | 生成；切勿手动编辑 |
 | `catalogs/<name>/review.json` | 工作室的适配性和每个系列和项目的说明 | 人员 |
-| `rnd/` | 命令行界面 (CLI) | 代码 |
+| `mcptoolshop_rnd/` | 命令行界面 (CLI) | 代码 |
+| `rnd/` | `mcptoolshop_rnd` 的兼容性别名。 | 代码 |
 | `rnd.db` | SQLite FTS5 索引，当文件发生更改时会自动重建 | 生成；不在 git 中 |
 
 ## 条目格式

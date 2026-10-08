@@ -43,15 +43,15 @@ def bump(version, level="nano"):
 
 
 def read_version(root):
-    text = (Path(root) / "rnd" / "__init__.py").read_text(encoding="utf-8")
+    text = (Path(root) / "mcptoolshop_rnd" / "__init__.py").read_text(encoding="utf-8")
     m = VERSION_RE.search(text)
     if not m:
-        raise ReleaseError("BAD_VERSION", "rnd/__init__.py has no __version__ line")
+        raise ReleaseError("BAD_VERSION", "mcptoolshop_rnd/__init__.py has no __version__ line")
     return m.group(1)
 
 
 def write_version(root, new):
-    p = Path(root) / "rnd" / "__init__.py"
+    p = Path(root) / "mcptoolshop_rnd" / "__init__.py"
     p.write_text(VERSION_RE.sub(f'__version__ = "{new}"', p.read_text(encoding="utf-8")), encoding="utf-8")
 
 

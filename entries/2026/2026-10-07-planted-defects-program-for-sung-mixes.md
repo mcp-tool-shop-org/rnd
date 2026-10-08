@@ -225,6 +225,18 @@ own artefact. Even then it is driven by parameters and verified by measurement.
     - The planted run then absorbs it as a stretch of 0.70–1.14.
     - Labels now record `vowel_moved_s` and the run's stretch range, so the study
       can tell a heard replay from a heard late vowel.
+  - **Compound filters and reach:**
+    - A replay or skip is kept only if it moves its vowel no more than 30 ms beyond
+      its own shift, and leaves no more than 30 ms of pause before the seam. A
+      forced warp break where the previous run already ended inserts a pause of up
+      to ~0.14 s.
+    - Only **14 of 96** (Amazing Grace) and **27 of 204** (America the Beautiful)
+      warp joins can take a clean replay or skip, at every severity. Eligibility
+      comes from join geometry, not from severity.
+    - With pools drawn from those joins, replays verify 17–18 of 20 (including
+      20 ms) and skips 20 of 20.
+    - Step B needs more warp picks, or compound plants as their own labelled kinds,
+      so a detector does not learn a dozen positions.
   - Warp renders refuse a missing score clock: without it the baseline is not the
     shipped audio.
   - Pitch slip and a plan-native **stretch** kind (warp ratio outside 0.67–1.5)

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.1.0.9] - 2026-10-07
+
+- Planted-defects program: only 13–15% of shipped warp joins can carry a clean replay/skip once vowel-move and pause compounds are refused; replays now verify 17–18 of 20
+- Updated `2026-10-07-planted-defects-program-for-sung-mixes`: Planted defects for sung mixes — an automated planter-versus-detector loop, anchored by the listener's measured threshold
+
 ## [1.1.1.0.8] - 2026-10-07
 
 - SFT-before-ASPIRE correction: aspire-si PR #30 and the run 1 report added as primary sources

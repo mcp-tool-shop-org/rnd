@@ -8,6 +8,7 @@
 # must too (longest row: 1,974 branch tokens). WSL python is not on the VRAM watchdog's
 # guard list, so the cap (and the session watching nvidia-smi) is the protection.
 set -euo pipefail
+# KEV_VENV selects the env (default .venv, torch 2.8+cu128); KEV_VENV=.venv-cu134 uses the CUDA 13.4 env (env/README.md).
 MODE=${1:-smoke}
 SEED=${2:-0}
 DATA=/mnt/e/AI-Models/kev/judge-ft
@@ -16,7 +17,7 @@ cd ~/kev/kev
 export HF_HOME=/mnt/e/AI-Models/hf-cache
 EXTRA=""
 [ "$MODE" = smoke ] && EXTRA="--max_steps 30"
-.venv/bin/python - <<PY
+${KEV_VENV:-.venv}/bin/python - <<PY
 import runpy, sys, torch
 torch.cuda.set_per_process_memory_fraction(0.82, 0)
 sys.argv = ["kev.train",

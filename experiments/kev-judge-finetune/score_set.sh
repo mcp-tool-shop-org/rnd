@@ -17,7 +17,7 @@ export HF_HOME=/mnt/e/AI-Models/hf-cache HF_HUB_OFFLINE=1
 for S in $SEEDS; do
   if [ "$S" = frozen ]; then RUN=kev-4b-frozen; SPEC="jaredpalmer/kev-4b@v1.0"
   else RUN=judge-4b-full-s$S; SPEC="/mnt/e/AI-Models/kev/judge-ft/runs/$RUN"; fi
-  .venv/bin/python - > "$RES/$RUN-$SET-serve.log" 2>&1 <<PY &
+  ${KEV_VENV:-.venv}/bin/python - > "$RES/$RUN-$SET-serve.log" 2>&1 <<PY &
 import runpy, sys, torch
 torch.cuda.set_per_process_memory_fraction(0.82, 0)
 sys.argv = ["kev.serve", "--run", "$SPEC", "--port", "$PORT"]
@@ -27,6 +27,6 @@ PY
   for i in $(seq 1 120); do curl -s -m 2 http://127.0.0.1:$PORT/v1/models >/dev/null && break; sleep 3; done
   python3 "$JUDGE" --judge-set "$PAIRS" --out "$RES/$RUN-$SET.json" --name "$RUN-$SET" \
     --url http://127.0.0.1:$PORT/v1/systemone | tail -12
-  kill $SV; sleep 3; pkill -f "/kev/kev/.venv/bin/python" || true
+  kill $SV; sleep 3; pkill -f "/kev/kev/${KEV_VENV:-.venv}/bin/python" || true
   echo "SCORE-DONE $RUN $SET"
 done

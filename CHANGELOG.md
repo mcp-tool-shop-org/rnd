@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.0.9] - 2026-10-08
+
+- kev-judge-finetune: CUDA 13.4 env (torch 2.16 nightly cu134) pinned with a lock file and a fixed pass band; KEV_VENV selects the env
+- Updated experiment `kev-judge-finetune`
+
 ## [1.1.4.0.8] - 2026-10-08
 
 - nvidia-skills review: training-lane skills read (tao-finetune-huggingface-model, nemo-rl-auto-research, data-designer, nemotron-customize)

@@ -11,7 +11,7 @@ PORT=8011
 mkdir -p "$RES"
 cd ~/kev/kev
 export HF_HOME=/mnt/e/AI-Models/hf-cache HF_HUB_OFFLINE=1
-.venv/bin/python - > "$RES/$RUN-serve.log" 2>&1 <<PY &
+${KEV_VENV:-.venv}/bin/python - > "$RES/$RUN-serve.log" 2>&1 <<PY &
 import runpy, sys, torch
 torch.cuda.set_per_process_memory_fraction(0.82, 0)
 sys.argv = ["kev.serve", "--run", "$RUNDIR", "--port", "$PORT"]
@@ -26,5 +26,5 @@ for SET in confirm judge; do
   python3 "$JUDGE" --judge-set "$PAIRS" --out "$RES/$RUN-$SET.json" --name "$RUN-$SET" \
     --url http://127.0.0.1:$PORT/v1/systemone | tail -30
 done
-kill $SV; sleep 3; pkill -f "/kev/kev/.venv/bin/python" || true
+kill $SV; sleep 3; pkill -f "/kev/kev/${KEV_VENV:-.venv}/bin/python" || true
 echo "SCORE-DONE $RUN"

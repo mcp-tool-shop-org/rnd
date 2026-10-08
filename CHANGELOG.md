@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.0.3] - 2026-10-08
+
+- Data pack hymn-arrangements (v1, spec and manifest; not uploaded): three Kimi-K3 piano arrangements of public-domain hymns, CC0, with briefs, prompts, raw answers and generation records. The arrangement entry's CC0 and public-domain claims are verified at source.
+- Updated `2026-10-08-llm-piano-arrangement-from-a-generated-brief`: Piano arrangements by an LLM from a brief generated from the score
+
 ## [1.1.4.0.2] - 2026-10-08
 
 - natural-errors: context-rich screen pilot (5 judges x 3 answers); capability-aware thinking, reasoning-first replies, --num-predict

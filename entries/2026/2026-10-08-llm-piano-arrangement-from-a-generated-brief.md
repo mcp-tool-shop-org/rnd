@@ -48,12 +48,17 @@ arrangement predates this script: it came from si-jam-sessions on 2026-09-26.
 - [verified] Amazing Grace cost $0.298 (1,728 tokens in, 19,510 out, about 3 minutes) and America the Beautiful $1.013 (1,956 in, 67,147 out, about 9 minutes). (via: OpenRouter usage recorded in meta.json, 2026-10-08)
 - [verified] One of the two answers needed a hand fix (`\key g major` for `\key g \major`, twice); the other compiled as returned. (via: meta.json fixes, 2026-10-08)
 - [verified] Both arrangements passed the melody-match import and the score clock, and the Director approved both recordings over them. (via: ai-jam-sessions PR #109 and the Director's listen, 2026-10-08)
-- [unverified] The arrangements can be dedicated CC0. Kimi-K3's terms for its outputs have not been checked yet.
-- [unverified] The tunes and texts are public domain (New Britain, 1829 and 1835; Materna, 1882, with words of 1895/1904), and the briefs drew on no modern harmonisation. Not yet checked against the sources' dates.
+- [verified] The arrangements can be dedicated CC0: the Kimi K3 License claims no rights in outputs, and OpenRouter's and Ollama's licences in the content are non-exclusive. (via: Kimi K3 LICENSE and OpenRouter Terms read at source by ai-jam-sessions and R&D, 2026-10-08; Ollama Terms read at source by ai-jam-sessions, 2026-10-08)
+- [verified] The tunes and texts are public domain: every edition followed is from 1919 or earlier and every author died before 1930, and the briefs give each hymn's own melody and chords, not a modern harmonisation. (via: the sources cited in ai-jam-sessions src/vocal/hymns.ts and si-jam-sessions' Battle Hymn receipt, checked 2026-10-08)
+- [verified] Counting the Battle Hymn (arranged on Ollama Cloud on 2026-09-26, before arrange-hymn.ts), two of the three answers needed a one-line fix: Amazing Grace's key mode, and the Battle Hymn's missing `\language "english"`. (via: si-jam-sessions draft against the published file, 2026-10-08)
+- Data pack: `datapacks/hymn-arrangements` (private until the Director decides).
 
 ## Sources
 
 - [primary] https://openrouter.ai/moonshotai/kimi-k3 — model page and pricing
 - [primary] https://lilypond.org/doc/v2.24/Documentation/notation/ — LilyPond 2.24 notation reference
+- [primary] https://huggingface.co/moonshotai/Kimi-K3/blob/main/LICENSE — Kimi K3 License
+- [primary] https://openrouter.ai/terms — OpenRouter Terms of Service (§5.8, §6.1, §6.2)
+- [primary] https://ollama.com/terms — Ollama Terms (§5, §7)
 - [rig] ai-jam-sessions scripts/arrange-hymn.ts and src/vocal/arrangements/source/<id>/; PRs #107, #109, 2026-10-08
 - [user] The Director's approval of the OpenRouter lane and of both recordings, 2026-10-08

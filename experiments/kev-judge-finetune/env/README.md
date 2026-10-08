@@ -37,7 +37,7 @@ The reference is the cu128 env on the same data and seed.
 - no truncated or rejected records;
 - peak device memory at most 13 GB.
 
-Median step time is reported, not gated.
+**Speed gate (added 2026-10-08, before the rerun):** median step time at most 1.25× the reference, so **≤ 6.55 s**. GPU utilisation is sampled each second and reported. The first cu134 smoke passed every other gate but ran a 18.75 s median step at 21% utilisation. Its env lacked the fast kernels (see below), so a slow env must not pass.
 
 **2. Confirm score with the existing seed-0 judge** (`KEV_VENV=.venv-cu134 bash score_set.sh confirm-cu134 /mnt/e/AI/aspire-si-runs/2026-10-08-kev-confirm/fresh/confirm_set.json 0`, which writes `results/judge-4b-full-s0-confirm-cu134.json` beside the cu128 `judge-4b-full-s0-confirm.json`):
 - the same weights the cu128 env scored: order-averaged 0.9799, CI [0.9536, 1.0];
@@ -74,3 +74,27 @@ uv pip install --no-deps -e .
 Checked once, on the device: the RTX 5090 is visible, and a float64 matmul matches the CPU to 4.6e-14
 (33 MB). No training has run on it. The VRAM watchdog's pattern does not cover `.venv-cu132`, so it
 runs no GPU work until the Director wires it in.
+
+## First cu134 attempt, 2026-10-08: the env was incomplete, so it reruns
+
+**Smoke:** every gate passed. 30 steps, loss 0.704 → 0.164, grad_norm mean 8.94 (ref 9.07), peak 11.02 GB,
+0 truncated, 0 rejected. But the **median step was 18.75 s against 5.24 s, with the GPU about 21% busy**
+(`results/2026-10-08-cu134-gpu-util.csv`).
+
+**Cause:** kev is installed `--no-deps`, so the cu134 lock lacked packages the cu128 env had:
+- **flash-linear-attention / fla-core 0.5.2 and einops:** Qwen3.5's gated-delta-rule layers call fla's
+  kernel when it is present (`modeling_qwen3_5.py`, `use_kernel_func_from_hub_with_fallback(...,
+  "fla")`) and a pure-PyTorch fallback otherwise;
+- **fastapi, uvicorn and starlette:** the confirm score's server couldn't start, so nothing was scored.
+
+**Fix,** at cu128's exact versions, in both `.venv-cu134` and `.venv-cu132`. fla 0.5.2 **fails to import under
+Triton 3.9** (the cu134 nightly): one autotune key names an argument the kernel doesn't take, which Triton 3.9
+rejects.
+- Upstream fixed it in fla commit `b8ff84870` (#1330, 2026-10-06, one line), but no release contains it yet.
+- `apply_fla_1330.sh <venv>` applies exactly that line to 0.5.2, refusing any other state. The patched file's
+  sha256 is `1725556d…70aa`.
+- cu132 (Triton 3.8) imports 0.5.2 without the patch.
+- So the cu134 env differs from cu128 only in the CUDA stack and that one upstream line, and the reproduction
+  still isolates CUDA.
+
+When fla releases 0.5.3 or later with #1330, move both envs to it and drop the patch.

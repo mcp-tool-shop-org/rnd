@@ -15,7 +15,11 @@ cuda-toolkit==13.4.1
 cupti-python==13.4.0
 datasets==5.1.0
 dill==0.4.1
+einops==0.8.2
+fastapi==0.142.4
 filelock==4.0.12
+fla-core==0.5.2
+flash-linear-attention==0.5.2
 frozenlist==1.8.0
 fsspec==2026.7.0
 h11==0.16.0
@@ -26,7 +30,7 @@ huggingface-hub==1.33.0
 idna==3.20
 jinja2==3.1.6
 joblib==1.6.0
-# kev (jaredpalmer/kev) installed editable with --no-deps from the local checkout; its torch<2.9 pin is overridden on purpose
+-e file://~/kev/kev
 markdown-it-py==4.2.0
 markupsafe==3.0.4
 mdurl==0.1.2
@@ -52,6 +56,7 @@ nvidia-nccl-cu13==2.30.7
 nvidia-nvjitlink==13.4.92
 nvidia-nvshmem-cu13==3.7.2
 nvidia-nvtx==13.4.49
+opentelemetry-api==1.45.1
 packaging==26.3
 pandas==3.0.6
 peft==0.21.2
@@ -72,6 +77,7 @@ scipy==1.18.1
 setuptools==84.0.0
 shellingham==1.5.4
 six==1.17.0
+starlette==1.7.0
 sympy==1.14.0
 threadpoolctl==3.7.0
 tokenizers==0.23.2
@@ -82,5 +88,6 @@ triton==3.9.0+gitfc8d31a5
 typer==0.27.3
 typing-extensions==4.16.0
 typing-inspection==0.4.4
+uvicorn==0.54.0
 xxhash==4.0.1
 yarl==1.25.1

@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.2] - 2026-10-09
+
+- NPU retrieval benchmark pre-registered (nomic vs bge vs nomic-on-NPU)
+- Added experiment `data-designer`
+- Added experiment `npu-probe`
+
 ## [1.1.4.3.1] - 2026-10-09
 
 - intel-npu instrument points at its skill

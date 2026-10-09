@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.7] - 2026-10-09
+
+- calibration: generated math ladder noted for the next round
+- Added experiment `data-designer`
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.6] - 2026-10-09
 
 - difficulty table: Wilson CI per cell, under-30 cells tentative

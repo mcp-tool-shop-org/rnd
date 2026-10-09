@@ -86,3 +86,22 @@ cell shows n and a Wilson 95% interval, and cells under 30 claims are marked ten
 
 **Descriptive only:** the default rule above is unchanged, and all six models run all tiers whatever the
 first one scores.
+
+## Next round: a generated math ladder (Director's idea, 2026-10-09)
+
+Tonight's tiers are set by judgment from the gold's notes. A generated ladder gives a controllable difficulty
+dial with exact answers, unlimited items, no labelling cost, and no chance a model has seen them.
+
+- **Format, so it stays a verifier test:** the evidence is a small generated function or formula; the claim
+  is "`f(7)` returns 52". The near-misses are wrong results.
+- **Knobs, each a level up:**
+  - number of steps (1 → 8);
+  - precedence (parenthesised → bare);
+  - integer traps (division, modulo, rounding, overflow);
+  - control flow (none → branch → loop → loop with early exit);
+  - unit conversions inside the computation;
+  - near-miss distance (far off → off by one or one rounding step).
+- **Studio fit:** offrig's budget and price arithmetic (per-GPU price × count, caps, rounding) is exactly
+  this, and an error there costs money.
+- **Before it runs:** pre-register the generator (seeded), the levels, and n per level sized for a
+  falloff call. At least 30 per cell, per the Publisher's rule.

@@ -214,8 +214,19 @@ resume identity), so no offrig change is needed.
   on, structured on, temperature 0, seed 0, `num_ctx` 16384, same gold, `--split tune`, both check types.
 - **The binary (fixed 13:17, before any run):** offrig main **751fb1d**, the Publisher's install after the ladder.
   It carries quote rule 2 (#47), `--keep-thinking` (#48), the health-checked 5xx and dropped-reply rule (#46,
-  #49), and per-provider caps (#51, budget only; calibrate spends nothing). Its sha256s come in the grant message
-  and are recorded here before the run starts; the run's manifest records the version too.
+  #49), and per-provider caps (#51, budget only; calibrate spends nothing). Installed by the Publisher; R&D
+  re-hashed both files at ~14:20 and they match:
+  - `offrig.exe` sha256 `6A1622C53B96E828CBA2D28AE2288218B94B19CC5C727368523BCD7E8ED72741`
+  - `offrig-mcp.exe` sha256 `E564295A590AF1FFD30E104660593957FABE54FCF2640B6873D6CA5AE55F1617`
+
+  `offrig --version` still prints 1.0.0, so **the sha256 is the pin**, not the version string.
+- **The run line, fixed before the run:**
+  `CAL_EXTRA="--num-predict 12288 --keep-thinking" bash chain_step.sh /e/AI/rnd-calibrate-r2 gemma4:31b on on <rest> tune`
+  - It runs in a fresh scratch project (`/e/AI/rnd-calibrate-r2`), so no directory or store is shared with the
+    chain.
+  - `run_model.sh` passes `CAL_EXTRA` to both a new run and a resume.
+  - `thinking.jsonl` stays in the run directory and is not committed to rnd, which is public, unless it's
+    scanned first.
 - **`--keep-thinking` (added 09:36, before any run; diagnosis only):** the run records gemma's thinking text to
   `thinking.jsonl` in the run directory. It is untrusted model output, never scored, and not part of the verdict
   or the resume identity, so it changes no number. It answers two questions the chain couldn't: what the

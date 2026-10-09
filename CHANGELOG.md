@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.27] - 2026-10-09
+
+- gemma rerun pre-registration: binary sha256s, run line, CAL_EXTRA pass-through
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.26] - 2026-10-09
 
 - math ladder v1 results (six models), arithmetic-floor post-hoc, gemma rerun pre-registration amendments

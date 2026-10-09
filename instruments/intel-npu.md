@@ -25,8 +25,13 @@ The Core Ultra 9 285K's NPU ("Intel AI Boost") and Intel iGPU, through OpenVINO 
   and these scripts never select it.
 - The NPU wants static shapes and batch 1. DeBERTa NLI at batch 8 hung the NPU once (it recovered).
   A second batch-8 hang, 2026-10-09: switchyard E1 lost the NPU (`ZE_RESULT_ERROR_DEVICE_LOST`, driver
-  reset) at nomic-embed static 8×1024. It re-enumerated afterwards. Two hangs in two batch-8 tries, both
-  encoders, so treat NPU batch > 1 as a hang risk until measured otherwise: run it last, in its own block.
+  reset) at nomic-embed static 8×1024. It re-enumerated afterwards. Batch 8 isn't always fatal: bge-small and
+  bge-base ran at 8×512 cleanly in the probe. The two hangs are DeBERTa at 8×512 and nomic at 8×1024. Until
+  the cause is known, treat NPU batch > 1 as a hang risk and run it last, in its own block.
+- **NPU health check** (after a hang, before the next NPU booking): `probe.py --batches 1` from
+  `experiments/npu-probe`, in the NPU venv. It passes when every NPU row has no error, embedding minimum
+  cosine is ≥ 0.9999, the NLI argmax agrees with the CPU, and each NPU median is within 1.5× of the
+  2026-10-09 probe receipt.
 - INT8 weights don't speed up small encoders. Quantization matters for putting LLMs on the NPU (OpenVINO
   GenAI, INT4).
 - "-NPU2" model builds on Hugging Face (FastFlowLM) are for AMD XDNA2 NPUs, not this Intel NPU.

@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.1] - 2026-10-09
+
+- intel-npu instrument points at its skill
+- Updated `intel-npu`: The Intel side of the rig — NPU embeddings and iGPU cross-encoders (npu-serve)
+- Added experiment `data-designer`
+
 ## [1.1.4.3.0] - 2026-10-09
 
 - Intel NPU/iGPU probe and the npu-serve instrument

@@ -9,7 +9,7 @@ tags: [instrument, npu, openvino, embeddings]
 instrument_status: shipped
 invoke: "E:/AI/envs/npu-openvino/Scripts/python.exe experiments/npu-probe/npu_serve.py --port 11491 [--nli]; then any Ollama embed client at http://127.0.0.1:11491 (offrig: OFFRIG_EMBED_URL=http://127.0.0.1:11491 offrig index … --model bge-base-en-v1.5)"
 when: "Embedding or cross-encoder work (indexing, retrieval, NLI scoring, reranking) that should not wait for or compete with the RTX 5090. No card grant needed: it never touches CUDA or the 5090."
-where: "rnd experiments/npu-probe (npu_serve.py, probe.py, README) · venv E:/AI/envs/npu-openvino"
+where: "skill ~/.claude/skills/intel-npu · rnd experiments/npu-probe (npu_serve.py, probe.py, README) · venv E:/AI/envs/npu-openvino"
 ---
 
 ## Summary

@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.2.9] - 2026-10-08
+
+- cross-family label check pre-registered: 120-claim sample, gemma4:31b, pass at most 3 gold errors
+- Added experiment `data-designer`
+- Added experiment `verifier-gold`
+
 ## [1.1.4.2.8] - 2026-10-08
 
 - Kev env README: bf16 criterion change disclosed in the gate section

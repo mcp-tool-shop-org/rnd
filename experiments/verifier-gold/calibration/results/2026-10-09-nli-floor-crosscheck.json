@@ -1,0 +1,42 @@
+{
+ "date": "2026-10-09",
+ "kind": "NLI floor cross-score: calibrate_metrics.py vs offrig 1.0.0 --report-only",
+ "prereg": "experiments/verifier-gold/calibration/nli-floor.md (\"where the binary supports it\")",
+ "run_dir": "E:/AI/rnd-npu-index/nli-floor/run (scratch; 959 claims, both splits pooled per row, as report-only scores whole run dirs)",
+ "offrig_version": "offrig 1.0.0",
+ "rows": {
+  "grounded": {
+   "n": true,
+   "supported_n": true,
+   "unsupported_n": true,
+   "cannot_tell_n": true,
+   "missing": true,
+   "passes_default_rule": true,
+   "false_accept": true,
+   "false_accept_unsupported_only": true,
+   "subtle_false_accept": true,
+   "abstain": true,
+   "cannot_tell_gold": true,
+   "decided_balanced_accuracy": true
+  },
+  "reasoning": {
+   "n": true,
+   "supported_n": true,
+   "unsupported_n": true,
+   "cannot_tell_n": true,
+   "missing": true,
+   "passes_default_rule": true,
+   "false_accept": true,
+   "false_accept_unsupported_only": true,
+   "subtle_false_accept": true,
+   "abstain": true,
+   "cannot_tell_gold": true,
+   "decided_balanced_accuracy": true
+  }
+ },
+ "agree": true,
+ "diffs": [],
+ "passes_default_binary": false,
+ "status_binary": "complete",
+ "note": "rate equality exact on hits/of/rate; Wilson low/high to 1e-12; balanced accuracy to 1e-12"
+}

@@ -127,3 +127,20 @@ The Publisher's diff-based set (Publisher commit f3f3f66), copied unchanged as
 - **Spot-check:** R&D read the split and both flagged cannot_tell items (`6a9bade-1c`, `4342dff-1c`). Both
   rest on code not in the hunks, so cannot_tell is right.
 - **Reasoning totals:** 111 supported, **111 unsupported**, 24 cannot_tell. That's past the 100 rule.
+
+## Cross-family check, and the files to calibrate on
+
+A blind label pass by `gemma4:31b` on a 120-claim sample (pre-registered in `crossfamily/README.md`) found
+**2 gold labels wrong, under the limit of 3, so the sets stand.** Both are fixed:
+- `diff-offrig-8-4s` → cannot_tell;
+- `prs-aspire-si-59-2s` reworded.
+
+**Calibrate on these** (`offrig verify calibrate`, one run per file and model):
+
+| check type | files | supported | unsupported | cannot_tell |
+|---|---|---|---|---|
+| grounded | `grounded.jsonl` + `prs/grounded-prs.jsonl` | 239 | 241 | 20 |
+| reasoning | `diffs/reasoning-diffs.jsonl` (the two Publisher sources, adjudicated) | 110 | 111 | 25 |
+
+The `diffs/source-publisher-*.jsonl` files stay as the Publisher wrote them; `reasoning-diffs.jsonl` carries
+the rulings.

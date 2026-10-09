@@ -1,0 +1,842 @@
+[
+ {
+  "n": 1,
+  "label": "cannot_tell",
+  "reasoning": "The function `search_records` delegates to `store.search(q)` when `qvec` is `None`. Because the implementation of `store.search(q)` is not provided, it is impossible to determine if it also filters for active records and applies the specified limit and cap.",
+  "eval_tokens": 1269,
+  "seconds": 52.2
+ },
+ {
+  "n": 2,
+  "label": "supported",
+  "reasoning": "If the only difference is 'big' vs 'bigger', the `changed` list will contain both tokens. When the loop in `lexical_guard` processes the token 'bigger' (low='bigger'), it will find 'big' (other='big') in the `words` list, and the condition `low in (other + 'er', ...)` will be true ('bigger' == 'big' + 'er'), causing the function to return 'comparative'.",
+  "eval_tokens": 1828,
+  "seconds": 31.3
+ },
+ {
+  "n": 3,
+  "label": "supported",
+  "reasoning": "The evidence defines RANKER_DEPTH as 50, FUSED_KEEP as 20, and RRF_K as 60.0, which matches all three values in the claim.",
+  "eval_tokens": 369,
+  "seconds": 6.8
+ },
+ {
+  "n": 4,
+  "label": "supported",
+  "reasoning": "pod_create_for_plan calls pod_create, which sets gpu_type_ids to profile.gpu_type_ids.clone(). pod_create_for_plan only overwrites this value if gpu_types is not empty; if it is empty, the profile's list is kept.",
+  "eval_tokens": 529,
+  "seconds": 9.6
+ },
+ {
+  "n": 5,
+  "label": "supported",
+  "reasoning": "The code in `lane_guard` (after) uses a format string \"lane {} has a live pod {} ({}); shut it down first\", where the placeholders are filled by `self.cfg.lane_tag.as_deref().unwrap_or(\"plain\")`, `p.name`, and `p.id` respectively.",
+  "eval_tokens": 542,
+  "seconds": 10.0
+ },
+ {
+  "n": 6,
+  "label": "cannot_tell",
+  "reasoning": "The evidence supports that if a verdict predates the current question (done is False), the old verdict is moved to gemma_v1 and a new one is requested. However, the condition for checking every pair depends on 'grammar_summary(rows)[\"prescreen_stands\"]', and the implementation of 'grammar_summary' is not provided, so it cannot be verified if this corresponds to 'any sampled unflagged pair is a miss'.",
+  "eval_tokens": 1257,
+  "seconds": 21.1
+ },
+ {
+  "n": 7,
+  "label": "supported",
+  "reasoning": "In the 'after' code, both 'strong' and 'flawed' answers are processed by the internal helper function 'scores', which uses the 'batch_size' parameter to chunk the calls to 'scorer.score_many'.",
+  "eval_tokens": 335,
+  "seconds": 6.3
+ },
+ {
+  "n": 8,
+  "label": "supported",
+  "reasoning": "The 'before' code constructs the request body without a 'think' key, while the 'after' code moves this logic into 'chat_body' and adds '\"think\": False' to the dictionary.",
+  "eval_tokens": 411,
+  "seconds": 7.2
+ },
+ {
+  "n": 9,
+  "label": "supported",
+  "reasoning": "In the 'before' code, HF_HOME is unconditionally set to /workspace/hf. In the 'after' code, it uses the shell parameter expansion ${HF_HOME:-/workspace/hf}, which retains the existing value of HF_HOME if set and defaults to /workspace/hf otherwise.",
+  "eval_tokens": 313,
+  "seconds": 5.9
+ },
+ {
+  "n": 10,
+  "label": "cannot_tell",
+  "reasoning": "The evidence shows that `ROLEOS_NO_CALIBRATION=1` makes the `calibrationDisabled` function return true, but it does not provide evidence that 'calibration' is the same as 'boost' or that this function actually turns a boost off.",
+  "eval_tokens": 443,
+  "seconds": 7.5
+ },
+ {
+  "n": 11,
+  "label": "cannot_tell",
+  "reasoning": "The evidence shows that a '--seed' argument was added to the command-line parser in 'probe_models.py', but it does not show how this seed is used or any logic regarding the regeneration of drift exports.",
+  "eval_tokens": 313,
+  "seconds": 5.5
+ },
+ {
+  "n": 12,
+  "label": "supported",
+  "reasoning": "The 'before' code asks to 'Reword a single sentence' and change 'one to three words if possible'. The 'after' code changes this to 'replace one or two words with synonyms, and change nothing else'.",
+  "eval_tokens": 355,
+  "seconds": 6.4
+ },
+ {
+  "n": 13,
+  "label": "unsupported",
+  "reasoning": "The function `grammar_summary` does not actually drop pairs; it returns a summary dictionary containing lists of IDs. Additionally, the logic 'grammatical is false or idiomatic is false' applies only to the `drop_if_idiom_gated` list, whereas the `drop` list only checks if `grammatical` is false.",
+  "eval_tokens": 2246,
+  "seconds": 36.6
+ },
+ {
+  "n": 14,
+  "label": "cannot_tell",
+  "reasoning": "The evidence shows that a call to `self.current_pod(profile)?` was replaced by `self.lane_guard(profile)?` in `crates/offrig-core/src/session.rs`. However, the provided code snippets do not include the function signature, so it cannot be verified that this change occurred within the `launch` function.",
+  "eval_tokens": 1318,
+  "seconds": 21.4
+ },
+ {
+  "n": 15,
+  "label": "cannot_tell",
+  "reasoning": "The evidence shows that the `lane_tag` field was added to the config and that `Config::in_lane` sets it, but the implementation of `Config::in_lane` is not provided to verify if it derives the tag from the project directory name.",
+  "eval_tokens": 533,
+  "seconds": 8.7
+ },
+ {
+  "n": 16,
+  "label": "supported",
+  "reasoning": "The code explicitly checks if `items.length < MIN_ITEMS` or `check.groups < MIN_GROUPS`. If true, it returns a verdict with `decision: \"insufficient-data\"` and sets `bagged: null`.",
+  "eval_tokens": 311,
+  "seconds": 5.4
+ },
+ {
+  "n": 17,
+  "label": "unsupported",
+  "reasoning": "In the 'after' code, critics in `check.excluded` are added to `excludedIds` and filtered out of the `eligible` list. Because `baggedSelect` and `nestedEstimate` (which create the panels) both use the `eligible` list as their source, recipe-excluded critics cannot be picked for a panel, contradicting the claim.",
+  "eval_tokens": 1985,
+  "seconds": 32.4
+ },
+ {
+  "n": 18,
+  "label": "supported",
+  "reasoning": "The 'before' code had a hardcoded URL, while the 'after' code adds a 'url' parameter to the unload function and uses it to construct the request target as 'url.rstrip(\"/\") + \"/api/generate\"'. The request payload still contains 'keep_alive': 0.",
+  "eval_tokens": 376,
+  "seconds": 6.7
+ },
+ {
+  "n": 19,
+  "label": "cannot_tell",
+  "reasoning": "The evidence shows the next-step text logic in offrig-mcp, but there is no evidence provided for the 'job tool' to compare it against.",
+  "eval_tokens": 378,
+  "seconds": 6.7
+ },
+ {
+  "n": 20,
+  "label": "supported",
+  "reasoning": "The evidence shows that in `integrations/code/trainer.py`, the call to `torch.load` for the critic checkpoint was changed from `torch.load(critic_path, map_location=self.device)` to `torch.load(critic_path, map_location=self.device, weights_only=True)`, and this call remains within the `if critic_path:` block.",
+  "eval_tokens": 286,
+  "seconds": 5.2
+ },
+ {
+  "n": 21,
+  "label": "unsupported",
+  "reasoning": "The evidence shows that in the 'before' version, `get()` calls `_load` using the `device` variable, while in the 'after' version, it explicitly uses the string 'cpu'. This contradicts the claim that it now loads onto the GPU rather than the CPU.",
+  "eval_tokens": 447,
+  "seconds": 7.9
+ },
+ {
+  "n": 22,
+  "label": "supported",
+  "reasoning": "In the 'before' code, both HF_HOME and PYTHONUNBUFFERED are exported as constants. In the 'after' code, HF_HOME is changed to ${HF_HOME:-/workspace/hf}, making it overridable, while PYTHONUNBUFFERED=1 remains unchanged and unconditional.",
+  "eval_tokens": 369,
+  "seconds": 6.6
+ },
+ {
+  "n": 23,
+  "label": "supported",
+  "reasoning": "The evidence shows that `ALLOWED_MODELS` contains only \"moonshotai/kimi-k3\" and `ALLOWED_LANES` contains only \"ai-jam-sessions\", and the functions `model_allowed` and `lane_allowed` check for membership in these respective lists.",
+  "eval_tokens": 1807,
+  "seconds": 29.2
+ },
+ {
+  "n": 24,
+  "label": "cannot_tell",
+  "reasoning": "The evidence shows that `lane_guard` returns an `Error::Refused` if the lane is occupied by a pod of another profile. However, there is no evidence showing that `offrig_plan` calls `lane_guard` or that this logic is used when pricing a plan.",
+  "eval_tokens": 487,
+  "seconds": 8.6
+ },
+ {
+  "n": 25,
+  "label": "unsupported",
+  "reasoning": "The code defines 'borderline' as `min(abs(para_median - q1), abs(para_median - q3)) <= BORDERLINE * (q3 - q1)`, which checks the distance to the nearest edge of the IQR. This condition can be true whether `para_median` is inside or outside the range [q1, q3], contradicting the claim that a median outside the IQR is never borderline.",
+  "eval_tokens": 923,
+  "seconds": 15.4
+ },
+ {
+  "n": 26,
+  "label": "unsupported",
+  "reasoning": "The evidence shows that ollama_chat gains a 'url' parameter with a default value of OLLAMA, which is defined as 'http://127.0.0.1:11434', not 'http://127.0.0.1:11492' as claimed.",
+  "eval_tokens": 423,
+  "seconds": 8.0
+ },
+ {
+  "n": 27,
+  "label": "unsupported",
+  "reasoning": "The claim states that the function scores one pair per forward by default, but the code shows a default `chunk` size of 64, meaning it scores 64 elements (32 pairs) per forward by default.",
+  "eval_tokens": 764,
+  "seconds": 12.9
+ },
+ {
+  "n": 28,
+  "label": "supported",
+  "reasoning": "READ_SETS contains 'pconfirm' and 'psecond', and row['gated'] is True only if para is in READ_SETS. all_read_sets_pass is calculated using only keys in READ_SETS. ptrain is in REPORTED_ONLY and is matched against 'train' errors, but since it is not in READ_SETS, it is not gated.",
+  "eval_tokens": 821,
+  "seconds": 13.7
+ },
+ {
+  "n": 29,
+  "label": "supported",
+  "reasoning": "In the 'after' code, 'loaded.clear()' is called at the start of the 'for control in CONTROLS' loop. The condition 'if pooling == \"mid\" and control != \"none\": continue' ensures that mid-pooling forms are only processed when the control is 'none', which matches the logic in the 'before' code.",
+  "eval_tokens": 578,
+  "seconds": 9.9
+ },
+ {
+  "n": 30,
+  "label": "unsupported",
+  "reasoning": "The evidence shows DEFAULT_BOOTSTRAP is 2000, but the claim states it is 1000.",
+  "eval_tokens": 223,
+  "seconds": 4.0
+ },
+ {
+  "n": 31,
+  "label": "cannot_tell",
+  "reasoning": "The evidence shows the definition of the `near_tie_share` function in the 'after' version, but it does not show where this function is called or how it is used in a readout or an Auditor plan.",
+  "eval_tokens": 414,
+  "seconds": 7.3
+ },
+ {
+  "n": 32,
+  "label": "supported",
+  "reasoning": "In `resolveShadowConfig`, if `cfg.K` is unset, it calls `readPositiveIntEnv(\"ROLEOS_SHADOW_K\", SHADOW_DEFAULTS.K)`. In `readPositiveIntEnv`, the condition `if (raw === undefined || raw === \"\") return fallback;` ensures that if the environment variable is an empty string, it returns the default value (`SHADOW_DEFAULTS.K`) without throwing.",
+  "eval_tokens": 778,
+  "seconds": 13.2
+ },
+ {
+  "n": 33,
+  "label": "unsupported",
+  "reasoning": "The 'before' code shows `torch.load(critic_path, map_location=self.device)`, which does not include the `weights_only=True` argument. The 'after' code adds `weights_only=True`, meaning the restriction was not present before the change.",
+  "eval_tokens": 378,
+  "seconds": 6.9
+ },
+ {
+  "n": 34,
+  "label": "supported",
+  "reasoning": "The 'after' evidence shows the addition of the `near_tie_share` function, which calculates the share of pairs where `abs(s - f) < tolerance`, confirming that a pair is counted as a near tie only when the absolute score gap is strictly less than the tolerance.",
+  "eval_tokens": 361,
+  "seconds": 6.9
+ },
+ {
+  "n": 35,
+  "label": "supported",
+  "reasoning": "The code sorts errors by `-c['tail']` (highest first) and rewrites by `c['tail']` (lowest first). It returns the first pair where `abs(e['tail'] - r['tail']) <= caliper` and `big / small <= ratio`, with `ratio` defaulting to `SIZE_RATIO = 1.5`.",
+  "eval_tokens": 800,
+  "seconds": 13.3
+ },
+ {
+  "n": 36,
+  "label": "unsupported",
+  "reasoning": "The 'after' code shows that 'ask' still requires '--build' in addition to '--backend-dll', as seen in the check 'if not args.label or not args.build or not args.backend_dll' and the error message 'ask needs --label, --build and --backend-dll'.",
+  "eval_tokens": 452,
+  "seconds": 8.1
+ },
+ {
+  "n": 37,
+  "label": "supported",
+  "reasoning": "In the 'after' code, the 'scores' object only includes packs where 'score > 0' (L398). The 'adjusted' scores, which include the boost, are calculated by iterating exclusively over 'Object.keys(scores)' (L403), meaning packs without keyword hits are never added to the 'adjusted' object and cannot enter the final ranking (L410).",
+  "eval_tokens": 741,
+  "seconds": 12.6
+ },
+ {
+  "n": 38,
+  "label": "unsupported",
+  "reasoning": "In the 'after' code, the boost is only applied if the evidence row's status is 'measured' (line 405: 'const boost = row && row.status === \"measured\" ? row.boost : 0;'), contradicting the claim that it contributes regardless of status.",
+  "eval_tokens": 378,
+  "seconds": 7.0
+ },
+ {
+  "n": 39,
+  "label": "unsupported",
+  "reasoning": "The code at L320-L333 returns an error only if both `!finished` is true and `out.finish_reason.is_none()` is true. If a `finish_reason` was seen, the condition is false and the function returns `Ok(out)`, contradicting the claim.",
+  "eval_tokens": 557,
+  "seconds": 9.7
+ },
+ {
+  "n": 40,
+  "label": "supported",
+  "reasoning": "The code filters for clean completed runs (completionStatus === 'completed' and corrections === 0) and iterates through them, adding 0.5 to the pack's boost while using Math.min(..., 2.0) to cap the value at 2.0.",
+  "eval_tokens": 465,
+  "seconds": 8.1
+ },
+ {
+  "n": 41,
+  "label": "supported",
+  "reasoning": "The evidence shows a constant `MAX_ABSTAIN` set to `0.20`, and the preceding comment explicitly states these are 'The default rule's thresholds'.",
+  "eval_tokens": 264,
+  "seconds": 5.0
+ },
+ {
+  "n": 42,
+  "label": "supported",
+  "reasoning": "In the 'after' code, when `args.cmd == 'ask'`, the program checks `if not args.label or not args.build` and raises `SystemExit` if either is missing, ensuring both are provided before calling `ask()`.",
+  "eval_tokens": 413,
+  "seconds": 7.3
+ },
+ {
+  "n": 43,
+  "label": "unsupported",
+  "reasoning": "The evidence shows a CHECK constraint on the 'kind' column that allows 'doc', 'code', 'log', and 'record', whereas the claim lists 'note' instead of 'record'.",
+  "eval_tokens": 236,
+  "seconds": 4.3
+ },
+ {
+  "n": 44,
+  "label": "unsupported",
+  "reasoning": "The claim swaps the operations: `stop_pod` sends a POST request with `{\"action\": \"stop\"}` to `/pods/{id}/action`, while `delete_pod` (which terminates the pod) sends a DELETE request to `/pods/{id}`.",
+  "eval_tokens": 637,
+  "seconds": 10.5
+ },
+ {
+  "n": 45,
+  "label": "supported",
+  "reasoning": "The code calculates a band using the 5th and 95th percentiles of `para_sizes` and filters `error_sizes` using the inclusive condition `band[0] <= n <= band[1]`, which is then used to keep only the corresponding error pairs in `rw2` and `rids2`.",
+  "eval_tokens": 514,
+  "seconds": 8.9
+ },
+ {
+  "n": 46,
+  "label": "unsupported",
+  "reasoning": "The claim states that the p-value is 1.0 when lam is below 0.5, but the code in typicality.py L123 checks if lam < 0.2.",
+  "eval_tokens": 488,
+  "seconds": 8.4
+ },
+ {
+  "n": 47,
+  "label": "unsupported",
+  "reasoning": "When KEV_VENV is unset, the expression ${KEV_VENV:-.venv} evaluates to '.venv', making the condition [ '.venv' != .venv ] false. Consequently, TAG remains an empty string, and no suffix is added to the OUT directory name.",
+  "eval_tokens": 555,
+  "seconds": 9.5
+ },
+ {
+  "n": 48,
+  "label": "unsupported",
+  "reasoning": "In the 'before' code, pod_create reads from profile.job.min_cuda. In the 'after' code, this is replaced by a call to profile.effective_min_cuda(), meaning it no longer reads it 'straight from' the field.",
+  "eval_tokens": 935,
+  "seconds": 16.1
+ },
+ {
+  "n": 49,
+  "label": "unsupported",
+  "reasoning": "The claim states that the function seeds only the CPU generator, but the code uses `torch.manual_seed(seed)`, which seeds all devices (CPU and CUDA). Furthermore, the code comment explicitly mentions 'seeding CPU and CUDA'.",
+  "eval_tokens": 1189,
+  "seconds": 19.7
+ },
+ {
+  "n": 50,
+  "label": "unsupported",
+  "reasoning": "The code implements `pod_name` as `offrig-{tag}-{profile.name}` when a lane tag is present, but the claim states it is `offrig-<profile>-<tag>`.",
+  "eval_tokens": 503,
+  "seconds": 8.9
+ },
+ {
+  "n": 51,
+  "label": "supported",
+  "reasoning": "In the `_round` function, the condition for rejecting a pair is `edit_chars(p) > max_chars`. If `edit_chars(p)` is exactly `max_chars`, the condition is false and the pair is added to the `kept` list.",
+  "eval_tokens": 543,
+  "seconds": 9.6
+ },
+ {
+  "n": 52,
+  "label": "unsupported",
+  "reasoning": "The code in `recipeAssessments` explicitly returns an empty `excluded` list when `recipes == null` (`if (recipes == null) return { applied: false, byId: new Map(), excluded: [] };`), contradicting the claim that critics are excluded in this case.",
+  "eval_tokens": 359,
+  "seconds": 6.9
+ },
+ {
+  "n": 53,
+  "label": "supported",
+  "reasoning": "The code in src/specialist/recipe-card.mjs shows that if measure.method is not BALANCED_PERMUTATION, a message is pushed to the warnings array, and no error is pushed in that conditional block.",
+  "eval_tokens": 706,
+  "seconds": 12.2
+ },
+ {
+  "n": 54,
+  "label": "supported",
+  "reasoning": "For the command `roleos run \"deploy --help\"`, `process.argv[2]` is \"run\" and `args` is `[\"deploy --help\"]`. The help check `args.some(isHelpFlag)` calls `isHelpFlag(\"deploy --help\")`, which returns `false` because it only matches exactly \"--help\" or \"-h\", allowing execution to proceed to the `switch (command)` block.",
+  "eval_tokens": 581,
+  "seconds": 11.6
+ },
+ {
+  "n": 55,
+  "label": "unsupported",
+  "reasoning": "The code for recordMissionOutcome explicitly returns false if cwd is falsy ('if (!cwd) return false;'), rather than falling back to process.cwd().",
+  "eval_tokens": 383,
+  "seconds": 8.3
+ },
+ {
+  "n": 56,
+  "label": "unsupported",
+  "reasoning": "The code shows that if 'every measured critic is excluded by its recipe card', the function returns a verdict with decision 'insufficient-data', which contradicts the claim that selection goes ahead.",
+  "eval_tokens": 531,
+  "seconds": 9.1
+ },
+ {
+  "n": 57,
+  "label": "supported",
+  "reasoning": "In both the before and after versions of _grantProblem, the check for the 'expires' field is wrapped in an 'if (Object.prototype.hasOwnProperty.call(g, \"expires\"))' block. If 'granted' is true but 'expires' is missing, the function returns null, which causes capabilityGate to return { denied: false }, meaning the grant is still honoured.",
+  "eval_tokens": 886,
+  "seconds": 16.0
+ },
+ {
+  "n": 58,
+  "label": "unsupported",
+  "reasoning": "The new step 'No build-machine paths in the binaries' executes 'exit 1' if a C:\\Users path is found, which fails the step and stops the job, contradicting the claim that the job continues.",
+  "eval_tokens": 484,
+  "seconds": 8.9
+ },
+ {
+  "n": 59,
+  "label": "cannot_tell",
+  "reasoning": "The evidence shows that when a profile has a job, `pod_create` uses `BOOTSTRAP_JOB` and calls `job_pod_env(j)`. However, the implementation of `job_pod_env` is not provided, so it cannot be determined whether it consults the job's secret.",
+  "eval_tokens": 986,
+  "seconds": 16.1
+ },
+ {
+  "n": 60,
+  "label": "supported",
+  "reasoning": "The code change in score.sh replaces '.venv/bin/python' with '${KEV_VENV:-.venv}/bin/python', which in shell syntax uses the value of KEV_VENV if set, otherwise defaulting to '.venv'.",
+  "eval_tokens": 297,
+  "seconds": 5.8
+ },
+ {
+  "n": 61,
+  "label": "unsupported",
+  "reasoning": "The `file_sha256` function in the 'after' evidence reads the file in blocks of 1 MB (1 << 20 bytes) using `iter(lambda: f.read(1 << 20), b\"\")`, rather than reading the whole file into memory at once.",
+  "eval_tokens": 385,
+  "seconds": 7.2
+ },
+ {
+  "n": 62,
+  "label": "supported",
+  "reasoning": "The regex pattern `r\"```.*?```|`[^`\\n]*`|\\$\\$.*?\\$\\$|\\$[^$\\n]+\\$\"` matches fenced blocks (triple backticks), inline code (single backticks), double dollar-delimited maths, and single dollar-delimited maths, and the function returns their spans.",
+  "eval_tokens": 400,
+  "seconds": 7.0
+ },
+ {
+  "n": 63,
+  "label": "unsupported",
+  "reasoning": "The evidence shows that the requirement for the loss to fall below 80% (losses[-1] < losses[0] * 0.8) existed in the 'before' code, and was changed to simply requiring the loss to fall (losses[-1] < losses[0]) in the 'after' code. The claim reverses the direction of this change.",
+  "eval_tokens": 374,
+  "seconds": 6.6
+ },
+ {
+  "n": 64,
+  "label": "unsupported",
+  "reasoning": "In the 'after' version of failStep, run.status and run.completedAt are set (lines 439-440) before the call to recordMissionOutcome (line 442).",
+  "eval_tokens": 351,
+  "seconds": 6.7
+ },
+ {
+  "n": 65,
+  "label": "unsupported",
+  "reasoning": "When `batch_size` is unset (`not batch_size`), the code calls `scorer.score_many(prompts, responses)` with the full lists, which is one call for all answers, not 'one answer per call'.",
+  "eval_tokens": 569,
+  "seconds": 9.9
+ },
+ {
+  "n": 66,
+  "label": "supported",
+  "reasoning": "The SQL schema for the 'chunks' table includes a CHECK constraint on the 'kind' column: 'CHECK (kind IN ('doc','code','log','record'))', which restricts the values to exactly those four options.",
+  "eval_tokens": 227,
+  "seconds": 4.4
+ },
+ {
+  "n": 67,
+  "label": "unsupported",
+  "reasoning": "The code in `_size_matched` shows that if `prompts` is empty (meaning no error pair inside the band shares a prompt with a paraphrase), the `size_residual_cue` is set to `None`, not `False` (lines 351-352).",
+  "eval_tokens": 438,
+  "seconds": 7.7
+ },
+ {
+  "n": 68,
+  "label": "unsupported",
+  "reasoning": "The code normalizes the input string by converting it to lowercase and replacing hyphens ('-') and spaces (' ') with underscores ('_'). Therefore, 'Cannot-Tell' is normalized to 'cannot_tell' and is accepted, contradicting the claim that it is rejected.",
+  "eval_tokens": 678,
+  "seconds": 11.6
+ },
+ {
+  "n": 69,
+  "label": "unsupported",
+  "reasoning": "In `recipeAssessments`, the `problems` array is only populated by `view.failed` and `view.unresolved` elements. If a critic has gaps but no failed or unresolved controls, `problems.length` will be 0, and the critic will not be added to the `excluded` list (unless `!assessment && requireRecipe` is true, but the claim implies a card exists).",
+  "eval_tokens": 570,
+  "seconds": 10.1
+ },
+ {
+  "n": 70,
+  "label": "cannot_tell",
+  "reasoning": "The evidence defines constants MIN_CHARS (800), MAX_CHARS (2000), and MAX_FILE_BYTES (1,000,000), but it does not show the logic that uses these constants to perform chunking or filter files. Per the instructions, comments are not proof of behavior.",
+  "eval_tokens": 529,
+  "seconds": 9.0
+ },
+ {
+  "n": 71,
+  "label": "unsupported",
+  "reasoning": "The claim states that a finish_reason of 'stop' adds the warning, but the evidence shows the warning is added when the finish_reason is 'length'.",
+  "eval_tokens": 396,
+  "seconds": 6.6
+ },
+ {
+  "n": 72,
+  "label": "supported",
+  "reasoning": "The GRAMMAR_SCHEMA defines both 'grammatical' and 'idiomatic' as boolean types, and the GRAMMAR_QUESTION string explicitly states 'v2: grammar or usage error only; idiom recorded'.",
+  "eval_tokens": 419,
+  "seconds": 7.4
+ },
+ {
+  "n": 73,
+  "label": "unsupported",
+  "reasoning": "The code resamples groups of indices based on prompt_ids (as seen in the list comprehension `[i for _ in groups for i in groups[rng.randrange(len(groups))]]`), not individual pairs.",
+  "eval_tokens": 656,
+  "seconds": 11.0
+ },
+ {
+  "n": 74,
+  "label": "unsupported",
+  "reasoning": "The evidence shows a constant `MIN_UNSUPPORTED` set to 100, which refers specifically to 'unsupported' claims, not 'claims in total, of any label' as stated in the claim.",
+  "eval_tokens": 716,
+  "seconds": 11.9
+ },
+ {
+  "n": 75,
+  "label": "unsupported",
+  "reasoning": "The code shows that `pair_wins` gains a `band` argument, but the logic `1.0 if a - b > band else 0.0 if b - a > band else 0.5` means that if the gap `a - b` is exactly equal to `band`, the result is `0.5` (a tie), not `1.0` (a win).",
+  "eval_tokens": 548,
+  "seconds": 9.5
+ },
+ {
+  "n": 76,
+  "label": "supported",
+  "reasoning": "The evidence in `matched_set.py` defines constants that match the claim: `CALIPER_NATS = 2.0`, `SIZE_RATIO = 1.5`, `CANDIDATES = 5`, and `ROUNDS = 3`.",
+  "eval_tokens": 1097,
+  "seconds": 18.0
+ },
+ {
+  "n": 77,
+  "label": "supported",
+  "reasoning": "The code defines MAX_FILE_BYTES as 1,000,000 and skips files as 'over 1 MB' if size > MAX_FILE_BYTES (L36, L681-682). It skips files as 'binary' if any of the first 8192 bytes are 0 (L690-691).",
+  "eval_tokens": 526,
+  "seconds": 9.1
+ },
+ {
+  "n": 78,
+  "label": "cannot_tell",
+  "reasoning": "The evidence only defines the `calibrationDisabled` function, which checks an environment variable. It does not provide any code showing the effect of this setting on recording run outcomes.",
+  "eval_tokens": 252,
+  "seconds": 4.8
+ },
+ {
+  "n": 79,
+  "label": "unsupported",
+  "reasoning": "In the 'after' code, if 'claim_changed' is left out, 'v[\"claim_changed\"]' becomes None. This causes the pair to be included in 'unparsed' (L453), and since 'kept_meaning' is calculated as 'len(pairs) - len(flagged) - len(unparsed)' (L461), the pair is not counted in 'kept_meaning'.",
+  "eval_tokens": 747,
+  "seconds": 12.9
+ },
+ {
+  "n": 80,
+  "label": "unsupported",
+  "reasoning": "The `serialize` function in `auto_stop_serde` writes `None` as `OnDisk::Word(\"off\".into())`, which corresponds to the string \"off\", not 0 minutes.",
+  "eval_tokens": 307,
+  "seconds": 5.9
+ },
+ {
+  "n": 81,
+  "label": "supported",
+  "reasoning": "The 'after' code shows evaluate() now accepts an optional batch_size parameter (defaulting to None). If batch_size is unset, the internal scores() function calls scorer.score_many(prompts, responses) once for each side (strong and flawed).",
+  "eval_tokens": 428,
+  "seconds": 7.9
+ },
+ {
+  "n": 82,
+  "label": "supported",
+  "reasoning": "The code defines MIN_SIMILARITY = 0.85 and rejects the candidate as 'too different' if char_similarity(answer, flawed) < MIN_SIMILARITY. Since the less-than operator is used, a value of exactly 0.85 will not trigger the rejection.",
+  "eval_tokens": 434,
+  "seconds": 8.1
+ },
+ {
+  "n": 83,
+  "label": "supported",
+  "reasoning": "In the 'before' code, pod_create sets allowed_cuda_versions by accessing profile.job.as_ref().and_then(|j| j.min_cuda.as_deref()). In the 'after' code, this is replaced by a call to profile.effective_min_cuda().as_deref().",
+  "eval_tokens": 386,
+  "seconds": 7.4
+ },
+ {
+  "n": 84,
+  "label": "unsupported",
+  "reasoning": "The claim states that network volumes are listed and created under '/networkvolumes', but the code shows the path is actually '/network-volumes' in both list_volumes (L660) and create_volume (L681).",
+  "eval_tokens": 358,
+  "seconds": 6.6
+ },
+ {
+  "n": 85,
+  "label": "supported",
+  "reasoning": "In Python, bool is a subclass of int, so isinstance(True, int) is True. For a receipt with ship=True, status='ship', false_conformant_total=0, and ship_bar=True, is_ship_pin passes all checks: obj.get('scored') is None (not False), obj.get('ship') is True, status is not 'andon', isinstance(True, int) is True, and 0 > True (0 > 1) is False.",
+  "eval_tokens": 1316,
+  "seconds": 22.1
+ },
+ {
+  "n": 86,
+  "label": "unsupported",
+  "reasoning": "The schema requires the fields 'reasoning', 'verdict', and 'claim_changed' (L123), restricts 'verdict' to the specified enum (L120), and forbids additional properties (L125), but JSON schemas do not enforce the order of properties in the resulting object.",
+  "eval_tokens": 995,
+  "seconds": 16.5
+ },
+ {
+  "n": 87,
+  "label": "supported",
+  "reasoning": "The `retry_after` function attempts to parse the 'retry-after' header as a `u64` or `f64`. If both parsing attempts fail (which would happen for an HTTP date), the function returns `Duration::from_secs(1)`.",
+  "eval_tokens": 575,
+  "seconds": 9.9
+ },
+ {
+  "n": 88,
+  "label": "supported",
+  "reasoning": "The code sets `decision = \"panel\"` only if `clears && hasMembers` is true. `clears` is defined as `nested.differenceCi !== null && nested.differenceCi.low > 0`, and the `reason` string explicitly identifies this condition as 'the nested paired interval of panel minus best single lies entirely above 0'. Thus, the panel is kept only when this condition (and `hasMembers`) is met.",
+  "eval_tokens": 2903,
+  "seconds": 47.2
+ },
+ {
+  "n": 89,
+  "label": "unsupported",
+  "reasoning": "The code excludes a critic with no recipe card (!assessment) only if the 'requireRecipe' flag is true. If 'requireRecipe' is false, the critic is not automatically excluded for this reason.",
+  "eval_tokens": 488,
+  "seconds": 8.6
+ },
+ {
+  "n": 90,
+  "label": "supported",
+  "reasoning": "Evidence from src/specialist/recipe-card.mjs#L167-L173 shows that if a control's measure is undefined and its status is 'passed', a warning is added. Evidence from src/specialist/recipe-card.mjs#L265-L267 explicitly states that 'warnings mark gaps in the recipe's evidence'.",
+  "eval_tokens": 412,
+  "seconds": 7.4
+ },
+ {
+  "n": 91,
+  "label": "supported",
+  "reasoning": "The `deserialize` function in `auto_stop_serde` accepts `OnDisk::Minutes` or `OnDisk::Word` if the string is \"off\" (case-insensitive). Any other string (`OnDisk::Word`) is rejected with the error message \"auto_stop_idle_minutes must be a number of minutes or \\\"off\\\", not {w:?}\", which matches the claim.",
+  "eval_tokens": 2562,
+  "seconds": 42.0
+ },
+ {
+  "n": 92,
+  "label": "unsupported",
+  "reasoning": "The claim states there is a 1024-token template allowance, but the evidence shows TEMPLATE_ALLOWANCE_TOKENS is defined as 512.",
+  "eval_tokens": 270,
+  "seconds": 5.3
+ },
+ {
+  "n": 93,
+  "label": "unsupported",
+  "reasoning": "In the 'after' code, torch.cuda.manual_seed(seed) is called after the warmup loop and the undo-warmup block, not before the warmup runs. The comment explicitly states that the reseeding is done because the warmup already drew dropout masks, and the goal is for the captured graphs to start from the seed.",
+  "eval_tokens": 609,
+  "seconds": 10.9
+ },
+ {
+  "n": 94,
+  "label": "unsupported",
+  "reasoning": "The code checks if 'present.length * 2 >= bags', which means the critic must be present in at least half (1/2) of the bags, not more than two thirds (2/3).",
+  "eval_tokens": 488,
+  "seconds": 8.6
+ },
+ {
+  "n": 95,
+  "label": "supported",
+  "reasoning": "The evidence shows that 'temperature' is set to 0.0 in the 'options' dictionary, 'format' is set to 'SCHEMA', and 'body[\"think\"]' is assigned the value of 'cfg[\"think\"]' if it is not None, meaning it sends 'False' if 'cfg[\"think\"]' is False.",
+  "eval_tokens": 4685,
+  "seconds": 76.3
+ },
+ {
+  "n": 96,
+  "label": "unsupported",
+  "reasoning": "The code defines `WAIT_RESERVE` as `Duration::from_secs(5 * 60)`, which is 5 minutes, whereas the claim states it is a 15 minute reserve.",
+  "eval_tokens": 276,
+  "seconds": 5.1
+ },
+ {
+  "n": 97,
+  "label": "unsupported",
+  "reasoning": "The evidence shows that WILSON_Z95 is defined as 1.959963984540054, and the accompanying comment explicitly states that Wilson intervals use this value 'not a rounded 1.96'.",
+  "eval_tokens": 272,
+  "seconds": 5.0
+ },
+ {
+  "n": 98,
+  "label": "cannot_tell",
+  "reasoning": "The evidence shows constants MUSE_SAMPLE = 0.15 and GRAMMAR_SAMPLE = 0.10, but it does not provide the code that uses these constants to verify the specific sampling logic described in the claim.",
+  "eval_tokens": 450,
+  "seconds": 7.7
+ },
+ {
+  "n": 99,
+  "label": "supported",
+  "reasoning": "The function _form returns \"s\" if a word ends in \"s\" but not in \"ss\", \"us\", \"is\", or \"ous\" (and length > 3); thus, 'finds' returns \"s\" and a word ending in 'ous' fails this condition and returns \"\".",
+  "eval_tokens": 677,
+  "seconds": 11.3
+ },
+ {
+  "n": 100,
+  "label": "unsupported",
+  "reasoning": "In `contrastiveHaltMessage`, if `claude_summary` is an empty string, it is falsy, so `claudeSaid` becomes \"(none)\", supporting the first part of the claim. However, in `appendHaltEvent`, the expression `...(claude_summary ? { claude_summary } : {})` ensures that if `claude_summary` is an empty string, it is omitted from the data object entirely rather than recorded as an empty string.",
+  "eval_tokens": 692,
+  "seconds": 12.1
+ },
+ {
+  "n": 101,
+  "label": "unsupported",
+  "reasoning": "The claim states that when there are no misses, the bound is '3 divided by the sample size'. However, the code `(3 / n if n else None) if misses == 0 else None` shows that if the sample size `n` is 0, the bound is `None` rather than `3/n` (which would be a division by zero error).",
+  "eval_tokens": 8804,
+  "seconds": 142.6
+ },
+ {
+  "n": 102,
+  "label": "unsupported",
+  "reasoning": "In the second paraphrase pass of the `plant` function, the loop `for r in range(1, rounds + 1):` initializes `r` at 1. This value `r` is passed as `attempt_round` to `_round` and subsequently recorded in the pair by `_pairs`. There is no logic that adds the number of rounds the first paraphrase needed to this value.",
+  "eval_tokens": 986,
+  "seconds": 17.6
+ },
+ {
+  "n": 103,
+  "label": "supported",
+  "reasoning": "The 'after' code block shows that if 'a.sample' is set, a random generator is initialized with seed 20261008 ('rng = random.Random(20261008)') and used to sample 'a.sample' number of items ('rng.sample([r[\"id\"] for r in items], a.sample)'). The context 'out[\"prompt\"]: \"SCREEN2\"' links this logic to screen2.",
+  "eval_tokens": 603,
+  "seconds": 10.9
+ },
+ {
+  "n": 104,
+  "label": "cannot_tell",
+  "reasoning": "The `embed` function calls `self.post` once and returns the result or an error using the `?` operator. There is no retry logic in the provided code, and the implementation of `self.post` is not shown.",
+  "eval_tokens": 703,
+  "seconds": 12.1
+ },
+ {
+  "n": 105,
+  "label": "supported",
+  "reasoning": "The 'before' code shows suggestPack returning an object with 'pack', 'confidence', and 'scores'. The 'after' code shows it now returns those same fields plus 'evidence', 'calibration', and 'calibrationText'.",
+  "eval_tokens": 407,
+  "seconds": 7.4
+ },
+ {
+  "n": 106,
+  "label": "unsupported",
+  "reasoning": "The evidence shows MUSE_SAMPLE is 0.15 (15%) and GRAMMAR_SAMPLE is 0.10 (10%), which is the opposite of the 10% and 15% values stated in the claim.",
+  "eval_tokens": 270,
+  "seconds": 5.2
+ },
+ {
+  "n": 107,
+  "label": "unsupported",
+  "reasoning": "The evidence shows that VerifyConfig::new sets num_ctx to 16384, whereas the claim states it defaults to an 8192-token context.",
+  "eval_tokens": 295,
+  "seconds": 5.4
+ },
+ {
+  "n": 108,
+  "label": "cannot_tell",
+  "reasoning": "The provided code calls the `evidence` function to determine the span, but the implementation of the `evidence` function is not included in the evidence. Therefore, it is impossible to determine how it handles multiple occurrences of the anchor text.",
+  "eval_tokens": 267,
+  "seconds": 5.1
+ },
+ {
+  "n": 109,
+  "label": "supported",
+  "reasoning": "The code checks if `price > cap + 1e-4` (where 1e-4 is 0.0001). If this condition is true, it executes `continue`, skipping the call to `self.post_pod` for that GPU type.",
+  "eval_tokens": 494,
+  "seconds": 8.7
+ },
+ {
+  "n": 110,
+  "label": "unsupported",
+  "reasoning": "The claim states that boosts come from completed runs 'whatever their corrections', but the code explicitly filters for runs where 'o.corrections === 0'.",
+  "eval_tokens": 354,
+  "seconds": 6.2
+ },
+ {
+  "n": 111,
+  "label": "unsupported",
+  "reasoning": "In the 'after' code, the conditional assignment `${HF_HOME:-/workspace/hf}` applies only to HF_HOME; PYTHONUNBUFFERED=1 is still set unconditionally via the export command.",
+  "eval_tokens": 381,
+  "seconds": 6.8
+ },
+ {
+  "n": 112,
+  "label": "supported",
+  "reasoning": "The 'after' code shows that torch.load is now called with 'weights_only=True' and retains 'map_location=\"cpu\"', which was also present in the 'before' code.",
+  "eval_tokens": 263,
+  "seconds": 5.0
+ },
+ {
+  "n": 113,
+  "label": "supported",
+  "reasoning": "The code defines 'shared' as the intersection of 'eids' (paraphrase IDs) and 'rids2' (error pair IDs inside the band). If 'prompts' (the sorted 'shared' set) is empty, the function returns a dictionary where 'margin' and 'size_residual_cue' are both None.",
+  "eval_tokens": 672,
+  "seconds": 11.2
+ },
+ {
+  "n": 114,
+  "label": "cannot_tell",
+  "reasoning": "The provided evidence only shows changes to plan_c.sh; there is no evidence regarding plan_d.sh.",
+  "eval_tokens": 188,
+  "seconds": 4.1
+ },
+ {
+  "n": 115,
+  "label": "supported",
+  "reasoning": "The 'before' code shows the URL 'http://127.0.0.1:11434/api/chat' hard-coded in the Request call. The 'after' code adds a 'url' parameter to 'ollama_chat' with a default value of 'OLLAMA', which is defined as 'http://127.0.0.1:11434'.",
+  "eval_tokens": 510,
+  "seconds": 9.1
+ },
+ {
+  "n": 116,
+  "label": "cannot_tell",
+  "reasoning": "The evidence shows that for a 'passed' status, if 'belowPermutationFloor(measure.p, measure.nulls)' is true, a message is added to the 'errors' array. However, the evidence does not define 'belowPermutationFloor', does not specify if 'errors.push' constitutes a 'note', and does not mention 'shuffled-labels control'.",
+  "eval_tokens": 3250,
+  "seconds": 52.2
+ },
+ {
+  "n": 117,
+  "label": "unsupported",
+  "reasoning": "The code calculates the mean (mu) and standard deviation (sd) using only the training split (x[train]) inside the fold loop, rather than using the whole data set before the folds are cut.",
+  "eval_tokens": 378,
+  "seconds": 6.8
+ },
+ {
+  "n": 118,
+  "label": "supported",
+  "reasoning": "The `_article` function returns 'an' if the word starts with any string in `_AN_WORDS` ('hour', 'honest', 'honour', 'honor', 'heir') and returns 'a' if it starts with any string in `_A_PREFIXES` (which includes prefixes starting with 'uni' and 'use').",
+  "eval_tokens": 576,
+  "seconds": 9.8
+ },
+ {
+  "n": 119,
+  "label": "unsupported",
+  "reasoning": "The code treats an empty line ('\"\"') as a reason to quit ('return Ok(())'), whereas the claim states it is treated as an invalid choice that prints a message. Additionally, the claim says it quits only on 3, q or Q, but the code also quits on an empty line.",
+  "eval_tokens": 479,
+  "seconds": 8.4
+ },
+ {
+  "n": 120,
+  "label": "supported",
+  "reasoning": "The code in `plan_mode` returns an error when `requested` is `Some(Mode::Hybrid)` and `have` (embeddings) is false. When `requested` is `None`, it returns `Mode::Hybrid` if `have` is true, and `Mode::Keyword` otherwise.",
+  "eval_tokens": 516,
+  "seconds": 9.0
+ }
+]

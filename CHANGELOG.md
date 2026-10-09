@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.2.10] - 2026-10-08
+
+- cross-family label check PASS (2 gold errors in 120, fixed); calibration files named
+- Added experiment `data-designer`
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.2.9] - 2026-10-08
 
 - cross-family label check pre-registered: 120-claim sample, gemma4:31b, pass at most 3 gold errors

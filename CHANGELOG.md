@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.2.16] - 2026-10-09
+
+- calibration scripts gate on the watchdog heartbeat (mtime only)
+- Added experiment `data-designer`
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.2.15] - 2026-10-09
 
 - calibration: per-model think from Ollama capabilities; smoke driver

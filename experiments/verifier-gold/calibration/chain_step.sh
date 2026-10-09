@@ -19,6 +19,11 @@ if [ "$REST" -gt 0 ]; then
   echo "== rest ${REST}s from $(date +%T); models loaded at start: $(loaded)"
   sleep "$REST"
 fi
+# The VRAM watchdog must be alive: read the heartbeat's modified time only, never open the file (the
+# Publisher, 2026-10-09: opening it collided with the watchdog's own writes).
+HB=${WATCHDOG_HEARTBEAT:-/e/AI/training/_watchdog_HEARTBEAT}
+age=$(( $(date +%s) - $(stat -c %Y "$HB" 2>/dev/null || echo 0) ))
+[ "$age" -le 60 ] || { echo "REFUSED: watchdog heartbeat is ${age}s old"; exit 5; }
 n=$(loaded)
 if [ "$n" != 0 ]; then
   echo "== REFUSED: $n model(s) on the card after the rest; not loading $MODEL"; exit 4

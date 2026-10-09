@@ -32,6 +32,10 @@ The Core Ultra 9 285K's NPU ("Intel AI Boost") and Intel iGPU, through OpenVINO 
   `experiments/npu-probe`, in the NPU venv. It passes when every NPU row has no error, embedding minimum
   cosine is ≥ 0.9999, the NLI argmax agrees with the CPU, and each NPU median is within 1.5× of the
   2026-10-09 probe receipt.
+  First run, 2026-10-09 after the E1 loss (the Publisher, foreground, 79 s): **PASS**. NPU medians bge-small
+  0.0295 s, bge-base 0.0496 s, DeBERTa 0.2721 s; cosine ≥ 0.99999; argmax agrees. Receipt:
+  `experiments/npu-probe/results/2026-10-09-health-after-e1-loss.json`. Run it in the foreground with a
+  10-minute wall-clock bound: a silent stall counts as a fail.
 - INT8 weights don't speed up small encoders. Quantization matters for putting LLMs on the NPU (OpenVINO
   GenAI, INT4).
 - "-NPU2" model builds on Hugging Face (FastFlowLM) are for AMD XDNA2 NPUs, not this Intel NPU.

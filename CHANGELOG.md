@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.36] - 2026-10-09
+
+- intel-npu: NPU health check passed after the E1 device loss (receipt committed)
+- Updated `intel-npu`: The Intel side of the rig — NPU embeddings and iGPU cross-encoders (npu-serve)
+- Added experiment `npu-probe`
+
 ## [1.1.4.3.35] - 2026-10-09
 
 - calibration: thinking-off pre-registration (qwen3:8b, qwen3:14b, gemma4:31b at off, tune; model-verdict primary; offrig 9b6527f sha256 pinned; run lines fixed)

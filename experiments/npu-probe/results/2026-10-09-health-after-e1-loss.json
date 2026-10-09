@@ -1,0 +1,80 @@
+{
+ "openvino": "2026.4.1-22982-e213a147257-releases/2026/4",
+ "devices": {
+  "CPU": "Intel(R) Core(TM) Ultra 9 285K",
+  "NPU": "Intel(R) AI Boost"
+ },
+ "excluded_devices": [
+  "GPU.0",
+  "GPU.1"
+ ],
+ "seq": 512,
+ "cases": [
+  {
+   "kind": "embed",
+   "model": "BAAI/bge-small-en-v1.5",
+   "device": "CPU",
+   "compile_s": 0.27,
+   "batch": 1,
+   "median_s": 0.0362,
+   "best_s": 0.0348,
+   "items_per_s": 27.7
+  },
+  {
+   "kind": "embed",
+   "model": "BAAI/bge-small-en-v1.5",
+   "device": "NPU",
+   "compile_s": 0.32,
+   "batch": 1,
+   "median_s": 0.0295,
+   "best_s": 0.0293,
+   "items_per_s": 33.8,
+   "min_cosine_vs_cpu": 1.0
+  },
+  {
+   "kind": "embed",
+   "model": "BAAI/bge-base-en-v1.5",
+   "device": "CPU",
+   "compile_s": 0.76,
+   "batch": 1,
+   "median_s": 0.3119,
+   "best_s": 0.2482,
+   "items_per_s": 3.2
+  },
+  {
+   "kind": "embed",
+   "model": "BAAI/bge-base-en-v1.5",
+   "device": "NPU",
+   "compile_s": 0.8,
+   "batch": 1,
+   "median_s": 0.0496,
+   "best_s": 0.0492,
+   "items_per_s": 20.2,
+   "min_cosine_vs_cpu": 0.99999
+  },
+  {
+   "kind": "nli",
+   "model": "cross-encoder/nli-deberta-v3-base",
+   "device": "CPU",
+   "compile_s": 1.34,
+   "batch": 1,
+   "median_s": 0.8239,
+   "best_s": 0.1779,
+   "items_per_s": 1.2,
+   "right": "1/1"
+  },
+  {
+   "kind": "nli",
+   "model": "cross-encoder/nli-deberta-v3-base",
+   "device": "NPU",
+   "compile_s": 1.4,
+   "batch": 1,
+   "median_s": 0.2721,
+   "best_s": 0.2709,
+   "items_per_s": 3.7,
+   "right": "1/1",
+   "max_abs_logit_diff_vs_cpu": 0.0087,
+   "argmax_agrees_with_cpu": true
+  }
+ ]
+}

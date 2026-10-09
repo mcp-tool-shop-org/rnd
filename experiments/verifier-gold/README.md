@@ -140,7 +140,21 @@ A blind label pass by `gemma4:31b` on a 120-claim sample (pre-registered in `cro
 | check type | files | supported | unsupported | cannot_tell |
 |---|---|---|---|---|
 | grounded | `grounded.jsonl` + `prs/grounded-prs.jsonl` | 239 | 241 | 20 |
-| reasoning | `diffs/reasoning-diffs.jsonl` (the two Publisher sources, adjudicated) | 110 | 111 | 25 |
+| reasoning | `diffs/reasoning-diffs.jsonl` (all three Publisher sources, adjudicated) | 209 | 210 | 40 |
 
 The `diffs/source-publisher-*.jsonl` files stay as the Publisher wrote them; `reasoning-diffs.jsonl` carries
-the rulings.
+the rulings. Reasoning splits: tune 102 supported, 102 unsupported, 19 cannot_tell; held-out 107, 108 and 21.
+
+**Reasoning batch 2** (`diffs/source-publisher-b2.jsonl`, origin `diffs-2026-10-b2`):
+- **Size:** 213 claims from 100 behaviours plus 13 cannot_tell, from role-os 41, rnd 24, aspire-si 21 and
+  offrig 14. 31 use the hard patterns.
+- **Blind relabel:** two Sonnet labellers, given offrig's own definition of supported (a comment in the
+  evidence counts, but the code wins where they conflict): **208/213 agreed.**
+- **R&D's rulings on the 5:**
+  - `081e92f-4s` supported → cannot_tell: `NO_FORMAT`'s members aren't in the evidence;
+  - `80c532c-4u` unsupported → cannot_tell: `earned` moves to `created_at`, but the evidence doesn't settle
+    whether that is the certification time;
+  - `b7bccc8-11s`/`-11u`: labels kept, and the after-hunk widened to L515 so it shows the `--redo` skip the
+    claims turn on;
+  - `4d45a08-7c` stays cannot_tell: the pod script's next step isn't shown.
+- **Spot-check:** R&D read 6 random agreements against the hunks; all 6 correct.

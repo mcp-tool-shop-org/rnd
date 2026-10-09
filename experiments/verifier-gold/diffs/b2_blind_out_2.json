@@ -1,0 +1,532 @@
+[
+ {
+  "n": 108,
+  "reasoning": "think false so budget is 4096; 16000 applies only when the judge can think.",
+  "label": "unsupported"
+ },
+ {
+  "n": 109,
+  "reasoning": "Before: earned = cur.certified_at, which is reg.active.created_at; after: earned = v.created_at of the chosen version, same source value. (Ambiguous wording.)",
+  "label": "supported"
+ },
+ {
+  "n": 110,
+  "reasoning": "init_seed: int | None = None, so the default is None, not 0.",
+  "label": "unsupported"
+ },
+ {
+  "n": 111,
+  "reasoning": "self.critic = self.critic.to(self.device) follows the if/else, so it runs in both branches.",
+  "label": "supported"
+ },
+ {
+  "n": 112,
+  "reasoning": "packetFile = args.find(a => !a.startsWith('--')) skips --verbose and returns packet.md.",
+  "label": "supported"
+ },
+ {
+  "n": 113,
+  "reasoning": "With null mean_cosine reading is 'unmeasured', but crew-cmd only pushes the line when mean_cosine != null, so no line is shown.",
+  "label": "unsupported"
+ },
+ {
+  "n": 114,
+  "reasoning": "A confirmed-negative edge sets verified=false, so steps_saved_frac is null, not a sum.",
+  "label": "unsupported"
+ },
+ {
+  "n": 115,
+  "reasoning": "provenance?.trust_posture ?? 'unknown' and same for freshness_posture.",
+  "label": "supported"
+ },
+ {
+  "n": 116,
+  "reasoning": "The --debug branch prints err.stack and calls process.exit before the JSON console.error.",
+  "label": "supported"
+ },
+ {
+  "n": 117,
+  "reasoning": "In chain but no completed step: else branch sets warning 'has no completed step to re-open'; a warning is recorded.",
+  "label": "unsupported"
+ },
+ {
+  "n": 118,
+  "reasoning": "requestHash hashes toolArgs (path list); comment says an edit to a listed file shows up only through the envelope side, not the request hash.",
+  "label": "supported"
+ },
+ {
+  "n": 119,
+  "reasoning": "key = c.finding_match || c.existence gives 'fabricated' when finding_match is absent.",
+  "label": "supported"
+ },
+ {
+  "n": 120,
+  "reasoning": "shard_rate prints HOST-REFUSED and calls os._exit(2) itself; it raises nothing for check_speed to catch.",
+  "label": "unsupported"
+ },
+ {
+  "n": 121,
+  "reasoning": "write_rate returns megabytes << 20 (MiB, 1048576 per MB), not times one million.",
+  "label": "unsupported"
+ },
+ {
+  "n": 122,
+  "reasoning": "filter(|l| l.chars().count() >= 40) on trimmed lines.",
+  "label": "supported"
+ },
+ {
+  "n": 123,
+  "reasoning": "After the change a dict (even empty) satisfies isinstance(json_mode, dict) and sets body['format'] = {}; the falsy-skip is the old behaviour.",
+  "label": "unsupported"
+ },
+ {
+  "n": 124,
+  "reasoning": "_v2's definition is not shown; only the inline equivalent check is visible.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 125,
+  "reasoning": "find_root returns the nearest library at or above cwd (first match walking up), not the highest.",
+  "label": "unsupported"
+ },
+ {
+  "n": 126,
+  "reasoning": "measured = confirmed + confirmed_negative; status is 'graph' when measured > 0.",
+  "label": "supported"
+ },
+ {
+  "n": 127,
+  "reasoning": "/\\bintegration\\b/ does not match 'integrations' (no boundary before s), whereas includes('integration') did.",
+  "label": "supported"
+ },
+ {
+  "n": 128,
+  "reasoning": "confirmed-negative sets verified=false giving steps_saved_frac null, and pushes a warning for that edge.",
+  "label": "supported"
+ },
+ {
+  "n": 129,
+  "reasoning": "effective_checks pushes NoRepeats only if !c.is_empty() and not already present.",
+  "label": "supported"
+ },
+ {
+  "n": 130,
+  "reasoning": "2*1e9/1e6/20 = 100 seconds, not 50.",
+  "label": "unsupported"
+ },
+ {
+  "n": 131,
+  "reasoning": "'Also considered' printing is unchanged; only the Not triggered line is gated by verbose.",
+  "label": "unsupported"
+ },
+ {
+  "n": 132,
+  "reasoning": "usageLinesFor is gone from handleError, but the rest of bin/roleos.mjs is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 133,
+  "reasoning": "In classifyEdge measured is checked before the witness test, so measured delta <=0 over >=3 receipts gives confirmed-negative regardless of witness.",
+  "label": "supported"
+ },
+ {
+  "n": 134,
+  "reasoning": "'bridge' alone still triggers lower.includes('bridge').",
+  "label": "supported"
+ },
+ {
+  "n": 135,
+  "reasoning": "Retrieval is for steps[0].role only, not every step.",
+  "label": "unsupported"
+ },
+ {
+  "n": 136,
+  "reasoning": "can_think is not defined in the evidence, so whether it is True for gemma4:31b is unknown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 137,
+  "reasoning": "One retrieveForDispatch call, for steps[0]?.role, when knowledge is configured.",
+  "label": "supported"
+ },
+ {
+  "n": 138,
+  "reasoning": "init_seed: int | None = None.",
+  "label": "supported"
+ },
+ {
+  "n": 139,
+  "reasoning": "With no mixed-label mix, per is empty and sum/len(per) divides by zero, raising ZeroDivisionError.",
+  "label": "supported"
+ },
+ {
+  "n": 140,
+  "reasoning": "local.tags() Err skips local_conflicts via if let Ok; comment says fine.",
+  "label": "supported"
+ },
+ {
+  "n": 141,
+  "reasoning": "After: shard_rate uses huggingface_hub hf_hub_download; stream_rate/url removed.",
+  "label": "supported"
+ },
+ {
+  "n": 142,
+  "reasoning": "Clash only if l == n or l == n:latest; the longer tag does not match.",
+  "label": "supported"
+ },
+ {
+  "n": 143,
+  "reasoning": "fsync is inside the timed region (seconds computed after the with block) and finally unlinks the probe.",
+  "label": "supported"
+ },
+ {
+  "n": 144,
+  "reasoning": "After uses huggingface_hub via shard_rate, not a plain HTTPS stream.",
+  "label": "unsupported"
+ },
+ {
+  "n": 145,
+  "reasoning": "\\bintegration\\b requires a boundary after 'integration', so 'integrations' no longer matches.",
+  "label": "unsupported"
+ },
+ {
+  "n": 146,
+  "reasoning": "Defaults are 'unknown', not null.",
+  "label": "unsupported"
+ },
+ {
+  "n": 147,
+  "reasoning": "any() over an empty iterable is False, so escalate({}) returns False.",
+  "label": "unsupported"
+ },
+ {
+  "n": 148,
+  "reasoning": "retrieveForDispatch's behaviour on unreachable corpus is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 149,
+  "reasoning": "isinstance dict sets format to the dict; elif json_mode sets 'json'.",
+  "label": "supported"
+ },
+ {
+  "n": 150,
+  "reasoning": "find_root(args.library) returns the explicit path with no fallback; non-library fails NO_LIBRARY.",
+  "label": "unsupported"
+ },
+ {
+  "n": 151,
+  "reasoning": "Not-in-chain false so warning 'has no completed step to re-open'; nothing re-opened.",
+  "label": "supported"
+ },
+ {
+  "n": 152,
+  "reasoning": "A repeated n makes p2_parse return (None, 'repeated n'), rejecting the reply.",
+  "label": "unsupported"
+ },
+ {
+  "n": 153,
+  "reasoning": "stalled compares previous.trim() == current.trim(), so a trailing newline difference counts as stalled.",
+  "label": "unsupported"
+ },
+ {
+  "n": 154,
+  "reasoning": "After the change a dict json_mode is sent as the dict, not the string 'json'; only the old code did that. (Ambiguous wording.)",
+  "label": "unsupported"
+ },
+ {
+  "n": 155,
+  "reasoning": "Unknown architecture raises ValueError in _build_critic, with or without init_seed.",
+  "label": "unsupported"
+ },
+ {
+  "n": 156,
+  "reasoning": "Condition changed to localPanel && !gate.blocking, so it runs on non-passing gates; also a seats option and more.",
+  "label": "unsupported"
+ },
+ {
+  "n": 157,
+  "reasoning": "steps_saved_frac 0 is not > 0, so it is classified confirmed-negative.",
+  "label": "unsupported"
+ },
+ {
+  "n": 158,
+  "reasoning": "Pending steps after the active one are set to 'blocked'.",
+  "label": "supported"
+ },
+ {
+  "n": 159,
+  "reasoning": "With no problems found, prints SPEED-OK and returns without exiting. (Ambiguous wording.)",
+  "label": "supported"
+ },
+ {
+  "n": 160,
+  "reasoning": "excludeWhen is applied only when score > 0, so a score-0 role gets no excluded entry.",
+  "label": "supported"
+ },
+ {
+  "n": 161,
+  "reasoning": "explicit = override or RND_ROOT, so the --library override wins.",
+  "label": "unsupported"
+ },
+ {
+  "n": 162,
+  "reasoning": "exitConditionResult is computed only when active.isGate && active.exitCondition, so it stays null/unset otherwise.",
+  "label": "supported"
+ },
+ {
+  "n": 163,
+  "reasoning": "Next::Review handling and what happens after are not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 164,
+  "reasoning": "Guard is localPanel && !gate.blocking, so non-passing non-blocking gates run the panel.",
+  "label": "supported"
+ },
+ {
+  "n": 165,
+  "reasoning": "Exclusion requires score > 0; with final score 0 no excluded entry is produced.",
+  "label": "unsupported"
+ },
+ {
+  "n": 166,
+  "reasoning": "Also-considered block unchanged; Not triggered wrapped in if (verbose).",
+  "label": "supported"
+ },
+ {
+  "n": 167,
+  "reasoning": "No skip/--redo logic is shown in the hunks.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 168,
+  "reasoning": "to(self.device) runs after the if/else, in both branches.",
+  "label": "unsupported"
+ },
+ {
+  "n": 169,
+  "reasoning": "`if not _v2(r) and (r['flags'] or pair_id in sample): ask(...)`.",
+  "label": "supported"
+ },
+ {
+  "n": 170,
+  "reasoning": "Rate 20 MB/s; 66*1000/20/60 = 55 minutes, not 3300.",
+  "label": "unsupported"
+ },
+ {
+  "n": 171,
+  "reasoning": "`if r['n'] in seen: return None, 'repeated n'`.",
+  "label": "supported"
+ },
+ {
+  "n": 172,
+  "reasoning": "'accept' is not 'approve' or 'accept-with-notes', so with no gaps and no next artifact the warning is pushed.",
+  "label": "supported"
+ },
+ {
+  "n": 173,
+  "reasoning": "Where the index path comes from (rnd.db / RND_DB) is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 174,
+  "reasoning": "If score > 0 and a excludeWhen string is in lower, returns score 0 with reasons ['excluded: ...'].",
+  "label": "supported"
+ },
+ {
+  "n": 175,
+  "reasoning": "Empty per leads to division by zero, raising ZeroDivisionError, not returning 0.0.",
+  "label": "unsupported"
+ },
+ {
+  "n": 176,
+  "reasoning": "Delta 0 over 5 receipts with consistent sign: measured true, 0 > 0 false, so confirmed-negative.",
+  "label": "supported"
+ },
+ {
+  "n": 177,
+  "reasoning": "With --debug it prints the stack and exits; no JSON blob is written.",
+  "label": "unsupported"
+ },
+ {
+  "n": 178,
+  "reasoning": "exitConditionResult is only computed (and stored) when isGate is also true.",
+  "label": "unsupported"
+ },
+ {
+  "n": 179,
+  "reasoning": "Ok when clash is empty, i.e. no match; a non-empty local list without a match is also Ok.",
+  "label": "unsupported"
+ },
+ {
+  "n": 180,
+  "reasoning": "Write finding is only appended to found; the download probe still runs before the refusal.",
+  "label": "unsupported"
+ },
+ {
+  "n": 181,
+  "reasoning": "*l == format!('{n}:latest') matches.",
+  "label": "supported"
+ },
+ {
+  "n": 182,
+  "reasoning": "Both rate_problem findings are collected and joined with '; ' in one HOST-REFUSED line, after the download probe runs (shard_rate may itself exit early in a timeout case). (Ambiguous wording.)",
+  "label": "supported"
+ },
+ {
+  "n": 183,
+  "reasoning": "Reports only if rate < min_mbps; exactly equal is not reported.",
+  "label": "unsupported"
+ },
+ {
+  "n": 184,
+  "reasoning": "Partial coverage returns (None, 'rows cover k of n sentences'), no flags.",
+  "label": "unsupported"
+ },
+ {
+  "n": 185,
+  "reasoning": "'accept' is not excluded from the check, so the warning still triggers.",
+  "label": "unsupported"
+ },
+ {
+  "n": 186,
+  "reasoning": "typeof c.mean_cosine === 'number' is false for a string, so cos is null and reading 'unmeasured'.",
+  "label": "unsupported"
+ },
+ {
+  "n": 187,
+  "reasoning": "escalate uses any(), true when any one set shows a miss, not only when every set does.",
+  "label": "unsupported"
+ },
+ {
+  "n": 188,
+  "reasoning": "Mixes with one class are skipped (0 < sum(y) < len(y)).",
+  "label": "unsupported"
+ },
+ {
+  "n": 189,
+  "reasoning": "escalate is true on any set's miss, then ask() runs for every unchecked pair of every set.",
+  "label": "supported"
+ },
+ {
+  "n": 190,
+  "reasoning": "catch sets knowledge = null and execution continues to build run.",
+  "label": "supported"
+ },
+ {
+  "n": 191,
+  "reasoning": "not claim.strip() is true for whitespace, returning (None, 'error row without claim').",
+  "label": "supported"
+ },
+ {
+  "n": 192,
+  "reasoning": "previous = Some(reply.text.clone()) occurs only in the Next::Revise arm shown.",
+  "label": "supported"
+ },
+ {
+  "n": 193,
+  "reasoning": "rsplit('/',1)[0] splits at the last '/', so 'a/b/1' falls in mix 'a/b'.",
+  "label": "unsupported"
+ },
+ {
+  "n": 194,
+  "reasoning": "Samples for all sets are drawn up front in the plan loop, before any gemma calls.",
+  "label": "unsupported"
+ },
+ {
+  "n": 195,
+  "reasoning": "Second and third occurrences each fail seen.insert, so repeated.len() = 2 gives '2 line(s) appear twice'.",
+  "label": "supported"
+ },
+ {
+  "n": 196,
+  "reasoning": "After the change the floor is required_mbps(66,45) = 24.4 MB/s; before it was 20.",
+  "label": "unsupported"
+ },
+ {
+  "n": 197,
+  "reasoning": "With empty seats the spread is skipped, so OFFLOAD_PANEL_SEATS is not set (not an empty string).",
+  "label": "unsupported"
+ },
+ {
+  "n": 198,
+  "reasoning": "done == 'length' sets reason 'truncated' and breaks, no retry.",
+  "label": "unsupported"
+ },
+ {
+  "n": 199,
+  "reasoning": "Returns (None, 'rows cover k of n sentences').",
+  "label": "supported"
+ },
+ {
+  "n": 200,
+  "reasoning": "any(not s['prescreen_stands']) returns True once any set misses.",
+  "label": "supported"
+ },
+ {
+  "n": 201,
+  "reasoning": "The filter is >= 40, i.e. at least 40, not more than 40.",
+  "label": "unsupported"
+ },
+ {
+  "n": 202,
+  "reasoning": "clash empty gives Ok(()).",
+  "label": "supported"
+ },
+ {
+  "n": 203,
+  "reasoning": "mean_cosine null means crew-cmd skips the compatibility line.",
+  "label": "supported"
+ },
+ {
+  "n": 204,
+  "reasoning": "json_object raises JSONDecodeError with no '{'; caught, bad+1, errs=[], loop continues.",
+  "label": "supported"
+ },
+ {
+  "n": 205,
+  "reasoning": "warnings ?? [] then map gives an empty array, not null.",
+  "label": "unsupported"
+ },
+ {
+  "n": 206,
+  "reasoning": "stalled compares trimmed strings, so trailing newline differences count as stalled.",
+  "label": "supported"
+ },
+ {
+  "n": 207,
+  "reasoning": "After the change artifactFlow roles are also checked against ROLE_CATALOG.",
+  "label": "unsupported"
+ },
+ {
+  "n": 208,
+  "reasoning": "toolArgs ?? null then JSON.stringify(null) = 'null' hashed.",
+  "label": "supported"
+ },
+ {
+  "n": 209,
+  "reasoning": "Lines are trimmed before the set insert, so leading-space copies are the same line.",
+  "label": "unsupported"
+ },
+ {
+  "n": 210,
+  "reasoning": "printFindingsDistribution is called before the per-citation loop.",
+  "label": "supported"
+ },
+ {
+  "n": 211,
+  "reasoning": "save(...) uses screen_extra.json when a.only in EXTRA_JUDGES, else screen.json.",
+  "label": "supported"
+ },
+ {
+  "n": 212,
+  "reasoning": "60*1000/(30*60) = 33.33.",
+  "label": "supported"
+ },
+ {
+  "n": 213,
+  "reasoning": "0 is not < 0 but < 0.2, so near-orthogonal.",
+  "label": "supported"
+ }
+]

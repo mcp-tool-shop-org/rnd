@@ -32,7 +32,7 @@ echo "== $MODEL end $(date +%T); models loaded after unload: $(loaded)"
 
 status=0
 for ct in grounded reasoning; do
-  S=$SPLIT; [ $ct = reasoning ] && S=all
+  S=$SPLIT
   OUT="$PROJ/cal-$TAG-$ct-$S"
   rep=$("$OFFRIG" verify calibrate --report-only "$OUT" --project "$PROJ" 2>&1)
   if [ ! -f "$OUT/manifest.json" ] || echo "$rep" | grep -qi "incomplete"; then

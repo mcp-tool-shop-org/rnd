@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# One candidate's run, both check types, with the settings its smoke settled. grounded runs on the given split
-# (tune to select, heldout to confirm); reasoning always runs on all (README amendment: it has under 100
-# unsupported per split).
+# One candidate's run, both check types on the given split (tune to select, heldout to confirm), with the
+# settings its smoke settled.
 # GPU: only inside the Publisher's chain grant. Resumable: rerun the same line and it resumes each directory.
 #   bash run_model.sh <scratch-project-dir> <model> <think> <structured> [split]
 set -uo pipefail
@@ -11,7 +10,7 @@ OFFRIG=${OFFRIG:-"$HOME/.local/bin/offrig.exe"}
 TAG=${MODEL//[:\/]/_}
 for ct in grounded reasoning; do
   case $ct in grounded) files=("$GOLD/grounded.jsonl" "$GOLD/prs/grounded-prs.jsonl");; reasoning) files=("$GOLD/diffs/reasoning-diffs.jsonl");; esac
-  S=$SPLIT; [ $ct = reasoning ] && S=all
+  S=$SPLIT
   OUT="$PROJ/cal-$TAG-$ct-$S"
   if [ -f "$OUT/manifest.json" ]; then
     "$OFFRIG" verify calibrate --resume "$OUT" --project "$PROJ" 2>&1 | tail -25

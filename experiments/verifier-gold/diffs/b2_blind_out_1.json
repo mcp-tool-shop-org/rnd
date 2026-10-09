@@ -1,0 +1,537 @@
+[
+ {
+  "n": 1,
+  "reasoning": "The new branch returns score: 0 and reasons: [`excluded: ...`], not the original score and not appended to existing reasons.",
+  "label": "unsupported"
+ },
+ {
+  "n": 2,
+  "reasoning": "roleId is toLowerCase().replace(/\\s+/g, \"-\"): lower-cased, runs of whitespace become a hyphen, not an underscore with case kept.",
+  "label": "unsupported"
+ },
+ {
+  "n": 3,
+  "reasoning": "Lines are mapped through str::trim before the length filter and the HashSet insert, so leading spaces are ignored and the copy counts as a repeat.",
+  "label": "supported"
+ },
+ {
+  "n": 4,
+  "reasoning": "With an extra judge, base is screen_extra.json; if it does not exist the else branch builds a fresh structure with empty flags, and screen.json is never read.",
+  "label": "supported"
+ },
+ {
+  "n": 5,
+  "reasoning": "The match is l == n or l == \"{n}:latest\", so a ':latest' local tag also clashes; it is not exact name only.",
+  "label": "unsupported"
+ },
+ {
+  "n": 6,
+  "reasoning": "The error is Error::Guard, not Refused, and the message joins all clashing names with clash.join(\", \").",
+  "label": "unsupported"
+ },
+ {
+  "n": 7,
+  "reasoning": "The new loop asks only if `not _v2(r)` and (flagged or sampled); a pair with _v2(r) true is skipped.",
+  "label": "unsupported"
+ },
+ {
+  "n": 8,
+  "reasoning": "The shown hunk adds init_seed: int | None with no validator or constraint; whether negatives are rejected is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 9,
+  "reasoning": "The code gives NO_FORMAT judges plain text and 1500 tokens, but NO_FORMAT's membership (whether it contains muse-glimmer) is not in this evidence.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 10,
+  "reasoning": "With versions defaulting to [], xVersions is empty so the cross-trained technique is not pushed; before, certification.current with two parents yielded it.",
+  "label": "supported"
+ },
+ {
+  "n": 11,
+  "reasoning": "status is now `measured > 0` where measured includes confirmed_negative, so confirmed-negative edges do change the status to graph.",
+  "label": "unsupported"
+ },
+ {
+  "n": 12,
+  "reasoning": "escalate() is true if any set misses, and then every pair of every set is asked, not just that set's.",
+  "label": "unsupported"
+ },
+ {
+  "n": 13,
+  "reasoning": "For an extra judge the base file is screen_extra.json, not screen.json.",
+  "label": "unsupported"
+ },
+ {
+  "n": 14,
+  "reasoning": "The row-shape check returns 'bad row' inside the loop, before the final coverage check that gives the 'rows cover' reason.",
+  "label": "supported"
+ },
+ {
+  "n": 15,
+  "reasoning": "packetFile = args.find(a => !a.startsWith('--')); '-x' starts with a single dash, so it is taken as the packet file.",
+  "label": "unsupported"
+ },
+ {
+  "n": 16,
+  "reasoning": "key = finding_match || existence || 'unknown'; a fabricated citation with no finding_match is counted under 'fabricated'.",
+  "label": "unsupported"
+ },
+ {
+  "n": 17,
+  "reasoning": "retrieveForDispatch is inside try/catch; a throw is swallowed (knowledge = null) and the run proceeds.",
+  "label": "unsupported"
+ },
+ {
+  "n": 18,
+  "reasoning": "r['id'].rsplit('/', 1)[0] removes the last component, so 'a/b/1' and 'a/b/2' both give 'a/b'.",
+  "label": "supported"
+ },
+ {
+  "n": 19,
+  "reasoning": "The Guard error message includes clash.join(', '), listing every clashing model, comma-separated.",
+  "label": "supported"
+ },
+ {
+  "n": 20,
+  "reasoning": "The review path fires only when after_turn returns Revise and the reply is stalled; a reply that passes the checks doesn't reach Revise.",
+  "label": "unsupported"
+ },
+ {
+  "n": 21,
+  "reasoning": "seconds is computed after the with block, which includes os.fsync, so the flush is counted; the unlink is in finally, so it runs even after a failed write.",
+  "label": "unsupported"
+ },
+ {
+  "n": 22,
+  "reasoning": "The blocked step's note is `Blocked: upstream ${active.role} ${status}`; the reason is only stored on the failed step.",
+  "label": "unsupported"
+ },
+ {
+  "n": 23,
+  "reasoning": "The stall override applies only in the `Next::Revise if ... stalled` arm; any other after_turn result (including Complete) passes through unchanged via n => n.",
+  "label": "supported"
+ },
+ {
+  "n": 24,
+  "reasoning": "The else branch calls _build_critic(cfg) directly with no seeding or fork_rng, so it draws from the current stream.",
+  "label": "supported"
+ },
+ {
+  "n": 25,
+  "reasoning": "printFindingsDistribution is called before the for loop over citations, so the line is printed before the problems.",
+  "label": "unsupported"
+ },
+ {
+  "n": 26,
+  "reasoning": "raw_decode parses the first object starting at the first '{' and ignores trailing text, so trailing prose does not matter.",
+  "label": "supported"
+ },
+ {
+  "n": 27,
+  "reasoning": "A missing consistent_sign is undefined, and `undefined !== false` is true; n=4 >= 3 and the delta is numeric and positive, so it returns confirmed.",
+  "label": "supported"
+ },
+ {
+  "n": 28,
+  "reasoning": "The match is exact or exact + ':latest'; a prefix match is not used, so qwen3:4b does not clash with qwen3:4b-instruct-2507-q4_K_M.",
+  "label": "unsupported"
+ },
+ {
+  "n": 29,
+  "reasoning": "A line appearing three times yields two entries in `repeated` (second and third insert fail), so it reports '2 line(s) appear twice'.",
+  "label": "unsupported"
+ },
+ {
+  "n": 30,
+  "reasoning": "done == 'length' sets reason 'truncated' and breaks without retry; an unparsable reply (JSONDecodeError) loops to a second attempt.",
+  "label": "supported"
+ },
+ {
+  "n": 31,
+  "reasoning": "The ValueError is raised in _build_critic, which is called in both the seeded (inside fork_rng) and unseeded branches.",
+  "label": "supported"
+ },
+ {
+  "n": 32,
+  "reasoning": "write_rate returns `megabytes << 20`, which is megabytes * 2**20 bytes.",
+  "label": "supported"
+ },
+ {
+  "n": 33,
+  "reasoning": "The regex is anchored with $, so it strips only trailing special tokens, not ones elsewhere.",
+  "label": "unsupported"
+ },
+ {
+  "n": 34,
+  "reasoning": "The retrieval is wrapped in `if (isKnowledgeConfigured())`; otherwise knowledge stays null and no call is made.",
+  "label": "supported"
+ },
+ {
+  "n": 35,
+  "reasoning": "Only steps after the active one that are pending are blocked (foundActive guard); earlier pending steps are not.",
+  "label": "unsupported"
+ },
+ {
+  "n": 36,
+  "reasoning": "Only cheapestChain's own code is shown; its callers and whether they print warnings are not.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 37,
+  "reasoning": "MIN_OUTCOME_RECEIPTS goes from 1 to 3 and classifyEdge requires n_receipts >= it, so 2 receipts is not confirmed.",
+  "label": "supported"
+ },
+ {
+  "n": 38,
+  "reasoning": "xQualifies requires certified_level truthy and !== 'L0', so an L0 version is excluded.",
+  "label": "supported"
+ },
+ {
+  "n": 39,
+  "reasoning": "explicit = override or os.environ.get('RND_ROOT'), so a --library override takes precedence over RND_ROOT.",
+  "label": "supported"
+ },
+ {
+  "n": 40,
+  "reasoning": "The test is `rate < min_mbps`, so a rate exactly equal to min_mbps returns None.",
+  "label": "supported"
+ },
+ {
+  "n": 41,
+  "reasoning": "p2_parse returns 'bad row' inside the loop before the coverage check, so the bad-row reason wins.",
+  "label": "unsupported"
+ },
+ {
+  "n": 42,
+  "reasoning": "The regex (\\s*<\\|[a-z_]+\\|>)+\\s*$ is anchored at the end and consumes whitespace in front of each token, so only trailing tokens are removed.",
+  "label": "supported"
+ },
+ {
+  "n": 43,
+  "reasoning": "Before: earned: cur.certified_at (certification.current); after: earned: v.created_at || null for the chosen version.",
+  "label": "supported"
+ },
+ {
+  "n": 44,
+  "reasoning": "No run results or measured reply behaviour are shown, so whether muse-glimmer produces zero unparsable replies cannot be known.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 45,
+  "reasoning": "previous starts as None and is only set in the Revise arm, so on the first turn the stall test cannot fire, even for a sent-back handoff.",
+  "label": "unsupported"
+ },
+ {
+  "n": 46,
+  "reasoning": "warning_codes = (bundle?.warnings ?? []).map(...), so an absent warnings field gives an empty array.",
+  "label": "supported"
+ },
+ {
+  "n": 47,
+  "reasoning": "After the change handleError always writes the JSON blob; there is no --json condition and no human usage block.",
+  "label": "unsupported"
+ },
+ {
+  "n": 48,
+  "reasoning": "reopened is set true only when a step with role === to and status 'completed' is found, not merely when the role appears in run.steps.",
+  "label": "unsupported"
+ },
+ {
+  "n": 49,
+  "reasoning": "main sets ROOT = find_root(args.library), which returns the resolved override without checking; then is_library fails for non-readouts commands, giving NO_LIBRARY regardless of cwd.",
+  "label": "supported"
+ },
+ {
+  "n": 50,
+  "reasoning": "effective_checks adds NoRepeats only when `!c.is_empty()`, so a handoff with no checks gets none.",
+  "label": "unsupported"
+ },
+ {
+  "n": 51,
+  "reasoning": "The note is `Blocked: upstream ${active.role} ${status}`, naming the role and status, not the reason.",
+  "label": "supported"
+ },
+ {
+  "n": 52,
+  "reasoning": "A mix is included only when 0 < sum(y) < len(y), so a mix where all labels are equal is skipped.",
+  "label": "supported"
+ },
+ {
+  "n": 53,
+  "reasoning": "When not configured, knowledge stays null; no object with a 'skipped' status is created.",
+  "label": "unsupported"
+ },
+ {
+  "n": 54,
+  "reasoning": "The NO_LIBRARY check runs before the try that calls args.fn, for any cmd other than 'readouts' when ROOT is None or not a library.",
+  "label": "supported"
+ },
+ {
+  "n": 55,
+  "reasoning": "previous is Option<String> initialised to None; the stall guard needs previous.is_some_and(...), so it cannot fire on turn one, whether or not the handoff was sent back.",
+  "label": "supported"
+ },
+ {
+  "n": 56,
+  "reasoning": "After the change, outside --debug, handleError always writes JSON.stringify({code, message, hint, retryable}) to stderr, with no --json check.",
+  "label": "supported"
+ },
+ {
+  "n": 57,
+  "reasoning": "With defaults download_gb 66 and download_minutes 45, required_mbps = 66*1000/(45*60) = 24.4 MB/s.",
+  "label": "supported"
+ },
+ {
+  "n": 58,
+  "reasoning": "budget = a.num_predict or (16000 if think else 4096); a non-thinking judge with no --num-predict gets 4096.",
+  "label": "supported"
+ },
+ {
+  "n": 59,
+  "reasoning": "The shown after-hunk has no skip-if-already-run logic or --redo flag; the deciding code is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 60,
+  "reasoning": "The return is round(sum(per.values()) / len(per), 4), an unweighted mean of per-mix AUCs.",
+  "label": "supported"
+ },
+ {
+  "n": 61,
+  "reasoning": "The message quotes repeated.first() (the first repeated line) cut with chars().take(60).",
+  "label": "supported"
+ },
+ {
+  "n": 62,
+  "reasoning": "consistent_sign false makes measured false, then witness 0.3 < THIN_WITNESS gives 'spurious', not 'unverified'.",
+  "label": "unsupported"
+ },
+ {
+  "n": 63,
+  "reasoning": "seats defaults to process.env.OFFLOAD_PANEL_SEATS || ''; OFFLOAD_PANEL_SEATS is added to env only `seats ? {...} : {}`, i.e. when non-empty.",
+  "label": "supported"
+ },
+ {
+  "n": 64,
+  "reasoning": "After the change the floor is need = required_mbps(download_gb, download_minutes) and is used in rate_problem, not a fixed 20. (Ambiguous wording.)",
+  "label": "unsupported"
+ },
+ {
+  "n": 65,
+  "reasoning": "In the new code exitConditionResult is enforced first, then buildGate; the build gate comes after.",
+  "label": "unsupported"
+ },
+ {
+  "n": 66,
+  "reasoning": "The plan dict is built for all sets (prescreen and seeded_sample) in a first loop before any ask() call.",
+  "label": "supported"
+ },
+ {
+  "n": 67,
+  "reasoning": "It calls torch.default_generator.manual_seed only; the comment says torch.manual_seed would reseed the GPU's but is not used.",
+  "label": "unsupported"
+ },
+ {
+  "n": 68,
+  "reasoning": "The exitCondition block precedes the buildGate block in the new runCompletionGates.",
+  "label": "supported"
+ },
+ {
+  "n": 69,
+  "reasoning": "The old threshold was MIN_OUTCOME_RECEIPTS = 1, not 2 (the new one is 3).",
+  "label": "unsupported"
+ },
+ {
+  "n": 70,
+  "reasoning": "For the no-format judge the budget is 1500, not 700; and if muse-glimmer is not in NO_FORMAT it still asks for JSON. Either way the claim fails.",
+  "label": "unsupported"
+ },
+ {
+  "n": 71,
+  "reasoning": "The NO_LIBRARY check is skipped when args.cmd == 'readouts'.",
+  "label": "unsupported"
+ },
+ {
+  "n": 72,
+  "reasoning": "The mean is sum(per.values()) / len(per), an unweighted mean of per-mix AUCs.",
+  "label": "unsupported"
+ },
+ {
+  "n": 73,
+  "reasoning": "json_object raises JSONDecodeError for no '{'; that is caught by `except (json.JSONDecodeError, KeyError)` and counted as unparsable.",
+  "label": "unsupported"
+ },
+ {
+  "n": 74,
+  "reasoning": "classifyEdge checks `measured` first and returns confirmed-negative for a <=0 delta before the witness check; the witness check only runs if not measured.",
+  "label": "unsupported"
+ },
+ {
+  "n": 75,
+  "reasoning": "need = required_mbps(download_gb, download_minutes) is passed as the floor to rate_problem for the download.",
+  "label": "supported"
+ },
+ {
+  "n": 76,
+  "reasoning": "isinstance(True, int) is True, so it passes; seen.add(True) equals 1 in set(range(1, n+1)).",
+  "label": "supported"
+ },
+ {
+  "n": 77,
+  "reasoning": "The condition is consistent_sign !== false, so a delta with the field missing is also confirmed; it is not required to be true.",
+  "label": "unsupported"
+ },
+ {
+  "n": 78,
+  "reasoning": "The added check reports missing roles, but ROLE_CATALOG and MISSIONS contents are not shown, so whether shipped missions all pass is unknown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 79,
+  "reasoning": "claim.strip() is empty for whitespace, so p2_parse returns 'error row without claim' and rejects it.",
+  "label": "unsupported"
+ },
+ {
+  "n": 80,
+  "reasoning": "If local.tags() fails (Err), `if let Ok(tags)` is skipped and validation passes (comment: not running holds no models).",
+  "label": "unsupported"
+ },
+ {
+  "n": 81,
+  "reasoning": "previous = Some(...) appears only in the Next::Revise arm.",
+  "label": "unsupported"
+ },
+ {
+  "n": 82,
+  "reasoning": "When init_seed is None the else branch calls _build_critic directly, not inside fork_rng.",
+  "label": "unsupported"
+ },
+ {
+  "n": 83,
+  "reasoning": "probe_timeout(1e9, 20) = 2 * 1e9 / 1e6 / 20 = 100.",
+  "label": "supported"
+ },
+ {
+  "n": 84,
+  "reasoning": "The new loop over mission.artifactFlow pushes an issue when step.role is not in the catalogNames set.",
+  "label": "supported"
+ },
+ {
+  "n": 85,
+  "reasoning": "After worker.join(limit), if not done it prints a HOST-REFUSED line and calls os._exit(2) immediately. (Ambiguous wording.)",
+  "label": "supported"
+ },
+ {
+  "n": 86,
+  "reasoning": "With versions defaulting to [], no cross-trained technique is produced; certification.current is no longer used for it.",
+  "label": "unsupported"
+ },
+ {
+  "n": 87,
+  "reasoning": "typeof c.mean_cosine === 'number' is false for the string '0.5', so cos is null and reading is 'unmeasured'.",
+  "label": "supported"
+ },
+ {
+  "n": 88,
+  "reasoning": "For an extra judge the save target is screen_extra.json.",
+  "label": "unsupported"
+ },
+ {
+  "n": 89,
+  "reasoning": "With no override or RND_ROOT, it walks from cwd up through parents and returns the first d where is_library(d) (entries/ and instruments/ both exist).",
+  "label": "supported"
+ },
+ {
+  "n": 90,
+  "reasoning": "fork_rng(devices=[]) with torch.default_generator.manual_seed reseeds only the CPU generator, and fork_rng restores state on exit.",
+  "label": "supported"
+ },
+ {
+  "n": 91,
+  "reasoning": "isinstance(True, int) is True, so a row with n=True is not rejected as a bad row.",
+  "label": "unsupported"
+ },
+ {
+  "n": 92,
+  "reasoning": "requestHash = sha256(JSON.stringify(toolArgs ?? null)), i.e. the hash of the string 'null', not of the empty string.",
+  "label": "unsupported"
+ },
+ {
+  "n": 93,
+  "reasoning": "required_mbps(60, 30) = 60*1000/(30*60) = 33.3; minutes are converted to seconds.",
+  "label": "unsupported"
+ },
+ {
+  "n": 94,
+  "reasoning": "consistent_sign false makes measured false, and witness 0.3 < 0.6 returns 'spurious'.",
+  "label": "supported"
+ },
+ {
+  "n": 95,
+  "reasoning": "rate = 2e9/1e6/100 = 20 MB/s; 66*1000/20/60 = 55 minutes.",
+  "label": "supported"
+ },
+ {
+  "n": 96,
+  "reasoning": "An empty dict is an instance of dict, so body['format'] = {} is set.",
+  "label": "supported"
+ },
+ {
+  "n": 97,
+  "reasoning": "raw_decode parses the first object and ignores the rest; trailing text does not raise.",
+  "label": "unsupported"
+ },
+ {
+  "n": 98,
+  "reasoning": "xQualifies requires certified_level !== 'L0', so an L0 version does not qualify.",
+  "label": "unsupported"
+ },
+ {
+  "n": 99,
+  "reasoning": "Only the text-output code skips compatibility when mean_cosine is null; the --json output path is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 100,
+  "reasoning": "cos = 0 is not < 0; it falls to `cos < 0.2`, giving the near-orthogonal reading.",
+  "label": "unsupported"
+ },
+ {
+  "n": 101,
+  "reasoning": "primaryRole.toLowerCase().replace(/\\s+/g, '-') lower-cases and replaces each whitespace run with a hyphen.",
+  "label": "supported"
+ },
+ {
+  "n": 102,
+  "reasoning": "escalate returns any(...) over an empty dict's values, and any of nothing is False.",
+  "label": "supported"
+ },
+ {
+  "n": 103,
+  "reasoning": "The comment states source_paths pin the path list, not file contents, so editing a file does not change the request hash.",
+  "label": "unsupported"
+ },
+ {
+  "n": 104,
+  "reasoning": "reopened starts false and is set true only in the `if (targetStep)` branch where a step is re-opened.",
+  "label": "supported"
+ },
+ {
+  "n": 105,
+  "reasoning": "Only the 'integration' trigger is changed; 'wiring', 'bridge' or 'seam' elsewhere in the packet still return 'integration'.",
+  "label": "unsupported"
+ },
+ {
+  "n": 106,
+  "reasoning": "Only the text printReport is shown calling the distribution; the --json output code is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 107,
+  "reasoning": "The message quotes repeated.first(), the first repeated line, truncated to 60 chars; not the longest and not in full.",
+  "label": "unsupported"
+ }
+]

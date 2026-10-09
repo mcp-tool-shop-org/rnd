@@ -38,6 +38,10 @@ least 100 unsupported claims per run, and reasoning has 50 in tune and 61 in hel
   a held-out confirmation too. That's asked of the Publisher, who owns the reasoning set.
 - R&D missed this when the protocol was first committed; it was caught while writing the run script, before
   any model ran.
+- **Superseded the same night, still before any candidate ran:** the Publisher's batch 2 (blind pass 208/213,
+  adjudicated) takes reasoning to **102 unsupported in tune and 108 in held-out**. So reasoning runs as first
+  planned: select on tune, and held-out confirms and is the headline. Both check types now follow the same
+  protocol, and `run_model.sh` takes one split for both.
 
 **Candidates** (local, on disk, families other than the generator's): qwen3:8b, llama3.1:8b, qwen3:14b,
 mistral-small:24b, granite4.1:30b, gemma4:31b.

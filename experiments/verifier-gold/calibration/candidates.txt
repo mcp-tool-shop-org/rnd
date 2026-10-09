@@ -1,7 +1,8 @@
-# model            think  (from Ollama /api/show capabilities, 2026-10-09; smallest first)
-llama3.1:8b        off
-qwen3:8b           on
-qwen3:14b          on
-mistral-small:24b  off
-granite4.1:30b     off
-gemma4:31b         on
+# model            think  structured  (think from Ollama /api/show capabilities; structured and timings settled by the smoke, 2026-10-09)
+# smoke: 8 tune claims each, 48/48 usable, structured output held for all; median s/claim in brackets
+llama3.1:8b        off    on   # 0.55
+qwen3:8b           on     on   # 1.6
+qwen3:14b          on     on   # 2.3
+mistral-small:24b  off    on   # 1.0
+granite4.1:30b     off    on   # 2.1
+gemma4:31b         on     on   # 7.4

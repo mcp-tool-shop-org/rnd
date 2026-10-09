@@ -11,7 +11,7 @@ age=$(( $(date +%s) - $(stat -c %Y "$HB" 2>/dev/null || echo 0) ))
 [ "$age" -le 60 ] || { echo "REFUSED: watchdog heartbeat is ${age}s old"; exit 5; }
 n=$(curl -s http://127.0.0.1:11434/api/ps | python -c "import json,sys; print(len(json.load(sys.stdin).get('models',[])))")
 [ "$n" = 0 ] || { echo "REFUSED: $n model(s) on the card"; exit 4; }
-grep -v '^#' "$HERE/candidates.txt" | while read -r model think; do
+grep -v "^#" "$HERE/candidates.txt" | while read -r model think _rest; do
   [ -n "$model" ] || continue
   echo "== $model think=$think $(date +%T)"
   bash "$HERE/smoke.sh" "$PROJ" "$model" "$think"

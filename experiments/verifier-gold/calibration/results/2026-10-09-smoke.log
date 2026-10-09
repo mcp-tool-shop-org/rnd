@@ -1,0 +1,79 @@
+== llama3.1:8b think=off 01:59:07
+    ok   abstain rate: 0.0000 (need <= 0.2)
+    FAIL balanced accuracy on decided: 0.5000 (need >= 0.8)
+  reasoning: not run
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/smoke-llama3.1_8b-grounded-thinkoff
+    FAIL false-accept upper bound (primary): 0.6576 (need < 0.1)
+    ok   abstain rate: 0.0000 (need <= 0.2)
+    FAIL balanced accuracy on decided: 0.7500 (need >= 0.8)
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/smoke-llama3.1_8b-reasoning-thinkoff
+== qwen3:8b think=on 01:59:20
+    ok   abstain rate: 0.0000 (need <= 0.2)
+    ok   balanced accuracy on decided: 1.0000 (need >= 0.8)
+  reasoning: not run
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/smoke-qwen3_8b-grounded-thinkon
+    FAIL false-accept upper bound (primary): 0.6576 (need < 0.1)
+    ok   abstain rate: 0.0000 (need <= 0.2)
+    ok   balanced accuracy on decided: 1.0000 (need >= 0.8)
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/smoke-qwen3_8b-reasoning-thinkon
+== qwen3:14b think=on 01:59:48
+    ok   abstain rate: 0.0000 (need <= 0.2)
+    ok   balanced accuracy on decided: 1.0000 (need >= 0.8)
+  reasoning: not run
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/smoke-qwen3_14b-grounded-thinkon
+    FAIL false-accept upper bound (primary): 0.6576 (need < 0.1)
+    ok   abstain rate: 0.0000 (need <= 0.2)
+    ok   balanced accuracy on decided: 1.0000 (need >= 0.8)
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/smoke-qwen3_14b-reasoning-thinkon
+== mistral-small:24b think=off 02:00:21
+    ok   abstain rate: 0.0000 (need <= 0.2)
+    FAIL balanced accuracy on decided: 0.7500 (need >= 0.8)
+  reasoning: not run
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/smoke-mistral-small_24b-grounded-thinkoff
+    FAIL false-accept upper bound (primary): 0.6576 (need < 0.1)
+    ok   abstain rate: 0.0000 (need <= 0.2)
+    ok   balanced accuracy on decided: 1.0000 (need >= 0.8)
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/smoke-mistral-small_24b-reasoning-thinkoff
+== granite4.1:30b think=off 02:00:51
+    FAIL abstain rate: 0.3333 (need <= 0.2)
+    FAIL balanced accuracy on decided: 0.5000 (need >= 0.8)
+  reasoning: not run
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/smoke-granite4.1_30b-grounded-thinkoff
+    FAIL false-accept upper bound (primary): 0.6576 (need < 0.1)
+    ok   abstain rate: 0.0000 (need <= 0.2)
+    ok   balanced accuracy on decided: 1.0000 (need >= 0.8)
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/smoke-granite4.1_30b-reasoning-thinkoff
+== gemma4:31b think=on 02:01:34
+    ok   abstain rate: 0.0000 (need <= 0.2)
+    ok   balanced accuracy on decided: 1.0000 (need >= 0.8)
+  reasoning: not run
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/smoke-gemma4_31b-grounded-thinkon
+    FAIL false-accept upper bound (primary): 0.6576 (need < 0.1)
+    ok   abstain rate: 0.0000 (need <= 0.2)
+    ok   balanced accuracy on decided: 1.0000 (need >= 0.8)
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/smoke-gemma4_31b-reasoning-thinkon
+== smoke done 02:03:04

@@ -40,6 +40,7 @@ import math
 import sqlite3
 import sys
 import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -162,6 +163,44 @@ def embed_ollama(base: str, model: str, texts: list, task: str) -> list:
     return out
 
 
+def parse_show(payload: dict) -> dict:
+    """Ollama /api/show -> the effective context window for this model: num_ctx from the Modelfile
+    parameters when set, otherwise the architecture's context_length (Ollama's default since mid-2025
+    is the model's own length). If neither is readable we refuse to run: a reference that might
+    silently truncate is worse than none."""
+    num_ctx = None
+    for line in str(payload.get("parameters") or "").splitlines():
+        parts = line.split()
+        if parts[:1] == ["num_ctx"] and len(parts) > 1:
+            try:
+                num_ctx = int(parts[1])
+            except ValueError:
+                pass
+    lengths = {v for k, v in (payload.get("model_info") or {}).items()
+               if isinstance(k, str) and k.endswith(".context_length")}
+    context_length = lengths.pop() if len(lengths) == 1 else None
+    effective = num_ctx if num_ctx is not None else context_length
+    if effective is None:
+        raise SystemExit("could not establish the reference model's context window from /api/show; "
+                         "refusing to run a reference that might silently truncate")
+    return {"num_ctx": num_ctx, "context_length": context_length, "effective": effective}
+
+
+def ollama_context(base: str, model: str) -> dict:
+    """/api/show for the reference model on offrig's CPU-only server, before anything is embedded."""
+    url = base.rstrip("/") + "/api/show"
+    req = urllib.request.Request(url, data=json.dumps({"model": model}).encode(),
+                                 headers={"Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            if r.status != 200:
+                raise SystemExit(f"{url} answered {r.status} for {model}; aborting")
+            payload = json.loads(r.read())
+    except urllib.error.URLError as e:
+        raise SystemExit(f"no Ollama answers at {url}: {e}; A-fresh needs offrig's CPU-only server") from e
+    return parse_show(payload)
+
+
 def load_onnx_nomic(device: str):
     """C: the pinned ONNX nomic through npu_serve's Embedder. device is exactly 'CPU' or 'NPU';
     nothing else is allowed in this lane."""
@@ -218,9 +257,24 @@ def main() -> None:
     if a.limit:
         all_chunks, queries = all_chunks[:a.limit], queries[:a.limit * 2]
 
+    # The reference must be whole: establish Ollama's effective context for this model before
+    # embedding anything. A truncated A-fresh would measure truncation, not model difference.
+    ctx = ollama_context(a.ollama, model)
     mod, onnx = load_onnx_nomic(a.device.upper())
     started = time.time()
     doc_prefix = task_prefix(model, "document")
+    q_prefix = task_prefix(model, "query")
+    doc_prefixed = [doc_prefix + c["body"] for c in all_chunks]
+    q_prefixed = [q_prefix + t for _, t in queries]
+    doc_toks = [len(ids) for ids in onnx.tok(doc_prefixed)["input_ids"]]
+    q_toks = [len(ids) for ids in onnx.tok(q_prefixed)["input_ids"]]
+    observed_max = max(doc_toks + q_toks, default=0)
+    if observed_max > ctx["effective"]:
+        raise SystemExit(
+            f"Ollama at {a.ollama} would truncate A-fresh: its effective context for {model} is "
+            f"{ctx['effective']} tokens (num_ctx={ctx['num_ctx']}, context_length="
+            f"{ctx['context_length']}), but the longest benchmark item is {observed_max}. "
+            "A truncated reference makes parity meaningless; fix the reference and rerun.")
     a_fresh_docs = embed_ollama(a.ollama, model, [c["body"] for c in all_chunks], "document")
     a_fresh_queries = embed_ollama(a.ollama, model, [t for _, t in queries], "query")
     print(f"A-fresh embedded: {len(all_chunks)} chunks, {len(queries)} queries via {a.ollama}",
@@ -232,9 +286,7 @@ def main() -> None:
     cap = onnx.buckets[-1]
     chunk_rows = []
     over512_docs = truncated_docs = 0
-    for i, c in enumerate(all_chunks):
-        prefixed = doc_prefix + c["body"]
-        toks = len(onnx.tok(prefixed)["input_ids"])
+    for i, (c, prefixed, toks) in enumerate(zip(all_chunks, doc_prefixed, doc_toks)):
         over512_docs += toks > 512
         over = toks > cap
         truncated_docs += over
@@ -249,10 +301,7 @@ def main() -> None:
             print(f"C: {i + 1}/{len(all_chunks)} chunks", flush=True)
     query_rows = []
     over512_queries = truncated_queries = 0
-    q_prefix = task_prefix(model, "query")
-    for i, (qid, text) in enumerate(queries):
-        prefixed = q_prefix + text
-        toks = len(onnx.tok(prefixed)["input_ids"])
+    for i, ((qid, _text), prefixed, toks) in enumerate(zip(queries, q_prefixed, q_toks)):
         over512_queries += toks > 512
         over = toks > cap
         truncated_queries += over
@@ -268,6 +317,9 @@ def main() -> None:
         "smoke": a.limit is not None, "limit": a.limit,
         "device": a.device.upper(), "ollama": a.ollama, "ollama_model": model,
         "stores": stores,
+        "ollama_context": ctx,
+        "reference_check": {"observed_max_tokens": observed_max,
+                            "assertion": "Ollama's effective context covers the longest item"},
         "onnx": {**NOMIC_ONNX, "ir_digest": onnx.ir_digest, "dim": onnx.dim},
         "counts": {"chunks": len(chunk_rows), "queries": len(query_rows)},
         "truncation": {"bucket_top": cap,

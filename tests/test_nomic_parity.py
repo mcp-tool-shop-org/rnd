@@ -117,3 +117,38 @@ class FactQueries(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class OllamaContextGuard(unittest.TestCase):
+    """The A-fresh reference must be untruncated: parse_show pins how the effective context is read,
+    and refuses when it can't be established."""
+
+    def test_num_ctx_from_modelfile_wins(self):
+        payload = {"parameters": "num_ctx                        8192\nstop                            <eos>",
+                   "model_info": {"nomic-bert.context_length": 2048}}
+        got = np_.parse_show(payload)
+        self.assertEqual(got["num_ctx"], 8192)
+        self.assertEqual(got["context_length"], 2048)
+        self.assertEqual(got["effective"], 8192)
+
+    def test_context_length_is_the_fallback(self):
+        payload = {"model_info": {"nomic-bert.context_length": 2048,
+                                  "general.architecture": "nomic-bert"}}
+        got = np_.parse_show(payload)
+        self.assertEqual(got["effective"], 2048)
+        self.assertIsNone(got["num_ctx"])
+
+    def test_ambiguous_architectures_refuse(self):
+        payload = {"model_info": {"a.context_length": 2048, "b.context_length": 4096}}
+        with self.assertRaises(SystemExit):
+            np_.parse_show(payload)
+
+    def test_nothing_readable_refuses(self):
+        with self.assertRaises(SystemExit):
+            np_.parse_show({})
+        with self.assertRaises(SystemExit):
+            np_.parse_show({"parameters": "temperature 1\nstop <eos>"})
+
+    def test_unparseable_num_ctx_falls_back(self):
+        payload = {"parameters": "num_ctx auto", "model_info": {"nomic-bert.context_length": 2048}}
+        self.assertEqual(np_.parse_show(payload)["effective"], 2048)

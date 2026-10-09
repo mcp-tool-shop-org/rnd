@@ -43,6 +43,10 @@ like B.
 
 - **recall@5 by file:** a hit when any of the top 5 chunks comes from a target file. Also reported:
   recall@1 and @10, and MRR.
+- **Truncated share, reported per option, descriptive only:** the share of the corpus's chunks whose
+  token count, under that option's own tokenizer, exceeds its model window (bge-base: 512; nomic: its
+  ladder top of 2048, so 0 by construction). A weak B then reads as "it was cut off", not "it's a worse
+  model". Not part of the decision rule.
 - **CI:** a 95% bootstrap over facts (the two forms of a fact resampled together), 2000 resamples,
   seed 20261009. It's reported for each option's recall@5 and for each difference from A.
 - **B (or C, if it fails its match) may replace A only if both hold:**
@@ -72,3 +76,13 @@ telling the Publisher, so the calibration's timings stay honest.
   for 11490. Never fall back silently to a different model, since that's exactly the mixed-vector case.
 - **Pinning.** The model revision and the OpenVINO version, recorded in the index's settings beside the model
   name.
+
+## Amendments
+
+- 2026-10-09, before any query has run (this remains pre-registration, not a post-hoc edit): report the
+  per-option truncated share, so a model-window cut reads as such. The decision rule is unchanged.
+- Same date: option C's match check (`nomic_parity.py`) records Ollama's effective context for the
+  reference model (`/api/show`: num_ctx, else the architecture's context_length) and refuses to run if
+  the longest benchmark item — measured 1619 nomic tokens in
+  `results/2026-10-09-nomic-chunk-lengths.json` — would not fit. A truncated reference makes parity
+  meaningless, so it fails loudly instead.

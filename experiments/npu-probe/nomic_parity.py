@@ -11,7 +11,11 @@ else none.
 
 Every chunk and each query (the benchmark's grounded facts, true and near-miss forms, from
 facts_roleos.py / facts_offrig.py / facts_roleos_docs.py in experiments/verifier-gold) is embedded:
-  A-fresh:  the Ollama GGUF at --ollama (default http://127.0.0.1:11490, offrig's CPU-only server);
+  A-fresh:  the Ollama GGUF at --ollama (default http://127.0.0.1:11490, offrig's CPU-only server),
+            with truncate=false on every request so a too-long input is a server error, never a
+            silent cut; the five longest chunks go singly so their served prompt_eval_count is
+            asserted against this tokenizer (BOS/EOS allowance 2), and once more exactly as offrig
+            sends them (no truncate flag, no num_ctx) to show whether today's index truncates them;
   C:        nomic-ai/nomic-embed-text-v1.5 @ e9b6763023c676ca8431644204f50c2b100d9aab onnx/model.onnx
             through npu_serve's Embedder (mean pooling over the attention mask, L2), on --device;
   A-stored: the index's own int8 vectors, dequantized x ~ q * scale (index.rs quantize/dequantize).
@@ -146,21 +150,77 @@ def queries_from_facts(facts_dir: Path = FACTS_DIR) -> list:
     return queries
 
 
-def embed_ollama(base: str, model: str, texts: list, task: str) -> list:
-    """A-fresh: embed through the Ollama copy offrig uses, with offrig's own prefix rule. Batches of
-    OLLAMA_BATCH; a non-200 aborts the run."""
+def _embed_body(model: str, inputs: list, truncate, cpu_only: bool = True) -> dict:
+    """offrig's own request shape (ollama.rs embed @ a45fe53): model + input, options.num_gpu 0 when
+    cpu_only. The parity check sends truncate=false so a too-long input is an error, never a silent
+    cut; the offrig probe (truncate=None) omits the key entirely, exactly what offrig sends today."""
+    body = {"model": model, "input": inputs}
+    if truncate is not None:
+        body["truncate"] = truncate
+    if cpu_only:
+        body["options"] = {"num_gpu": 0}
+    return body
+
+
+def _post_embed(base: str, body: dict) -> dict:
+    url = base.rstrip("/") + "/api/embed"
+    req = urllib.request.Request(url, data=json.dumps(body).encode(),
+                                 headers={"Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=600) as r:
+            return json.loads(r.read())
+    except urllib.error.HTTPError as e:
+        detail = e.read().decode("utf-8", "replace").strip()
+        raise SystemExit(f"{url} answered {e.code}: {detail} (with truncate=false a too-long input "
+                         "lands here, which is the point) ; aborting") from e
+    except urllib.error.URLError as e:
+        raise SystemExit(f"no Ollama answers at {url}: {e}; A-fresh needs offrig's CPU-only server")             from e
+
+
+def embed_ollama(base: str, model: str, texts: list, task: str) -> tuple:
+    """A-fresh: embed through the Ollama copy offrig uses, with offrig's own prefix rule and request
+    shape plus truncate=false. Batches of OLLAMA_BATCH. Returns (embeddings, per-response
+    prompt_eval_counts); any server error aborts the run."""
     prefix = task_prefix(model, task)
-    out = []
+    out, counts = [], []
     for i in range(0, len(texts), OLLAMA_BATCH):
         batch = [prefix + t for t in texts[i:i + OLLAMA_BATCH]]
-        body = json.dumps({"model": model, "input": batch}).encode()
-        req = urllib.request.Request(base.rstrip("/") + "/api/embed", data=body,
-                                     headers={"Content-Type": "application/json"})
-        with urllib.request.urlopen(req, timeout=600) as r:
-            if r.status != 200:
-                raise SystemExit(f"{base}/api/embed answered {r.status}; aborting")
-            out.extend(json.loads(r.read())["embeddings"])
-    return out
+        got = _post_embed(base, _embed_body(model, batch, False))
+        embs = got.get("embeddings")
+        if not embs or len(embs) != len(batch):
+            raise SystemExit(f"{base}/api/embed carried {len(embs or [])} vectors for "
+                             f"{len(batch)} inputs; aborting")
+        out.extend(embs)
+        counts.append({"inputs": len(batch), "prompt_eval_count": got.get("prompt_eval_count")})
+    return out, counts
+
+
+def embed_one(base: str, model: str, text: str, task: str, truncate=False) -> tuple:
+    """A single A-fresh call, so its prompt_eval_count is per-item. truncate=None sends offrig's
+    exact request (the offrig probe)."""
+    got = _post_embed(base, _embed_body(model, [task_prefix(model, task) + text], truncate))
+    embs = got.get("embeddings")
+    if not embs:
+        raise SystemExit(f"{base}/api/embed carried no embeddings for a single call; aborting")
+    return embs[0], got.get("prompt_eval_count")
+
+
+def top_k_longest(toks: list, k: int = 5) -> list:
+    """Indices of the k longest items, longest first, ties by index. Deterministic."""
+    return sorted(range(len(toks)), key=lambda i: (-toks[i], i))[:k]
+
+
+def check_token_counts(rows: list, allowance: int = 2) -> list:
+    """Each row gains diff and ok; returns the rows whose served prompt_eval_count differs from this
+    tokenizer's count by more than the BOS/EOS allowance."""
+    bad = []
+    for r in rows:
+        pec = r["prompt_eval_count"]
+        r["diff"] = None if pec is None else pec - r["my_tokens"]
+        r["ok"] = r["diff"] is not None and abs(r["diff"]) <= allowance
+        if not r["ok"]:
+            bad.append(r)
+    return bad
 
 
 def parse_show(payload: dict) -> dict:
@@ -257,8 +317,10 @@ def main() -> None:
     if a.limit:
         all_chunks, queries = all_chunks[:a.limit], queries[:a.limit * 2]
 
-    # The reference must be whole: establish Ollama's effective context for this model before
-    # embedding anything. A truncated A-fresh would measure truncation, not model difference.
+    # The reference must be whole. /api/show's advertised window is recorded as context; the check
+    # itself is a measurement: every A-fresh request carries truncate=false (a too-long input is a
+    # server error, never a silent cut), and the five longest chunks are embedded singly so their
+    # served prompt_eval_count is asserted against this tokenizer's count.
     ctx = ollama_context(a.ollama, model)
     mod, onnx = load_onnx_nomic(a.device.upper())
     started = time.time()
@@ -269,16 +331,39 @@ def main() -> None:
     doc_toks = [len(ids) for ids in onnx.tok(doc_prefixed)["input_ids"]]
     q_toks = [len(ids) for ids in onnx.tok(q_prefixed)["input_ids"]]
     observed_max = max(doc_toks + q_toks, default=0)
-    if observed_max > ctx["effective"]:
-        raise SystemExit(
-            f"Ollama at {a.ollama} would truncate A-fresh: its effective context for {model} is "
-            f"{ctx['effective']} tokens (num_ctx={ctx['num_ctx']}, context_length="
-            f"{ctx['context_length']}), but the longest benchmark item is {observed_max}. "
-            "A truncated reference makes parity meaningless; fix the reference and rerun.")
-    a_fresh_docs = embed_ollama(a.ollama, model, [c["body"] for c in all_chunks], "document")
-    a_fresh_queries = embed_ollama(a.ollama, model, [t for _, t in queries], "query")
-    print(f"A-fresh embedded: {len(all_chunks)} chunks, {len(queries)} queries via {a.ollama}",
-          flush=True)
+
+    top5 = top_k_longest(doc_toks)
+    top5set = set(top5)
+    kept = [i for i in range(len(all_chunks)) if i not in top5set]
+    a_fresh_bulk, batch_counts = embed_ollama(
+        a.ollama, model, [all_chunks[i]["body"] for i in kept], "document")
+    a_fresh_docs = [None] * len(all_chunks)
+    for i, v in zip(kept, a_fresh_bulk):
+        a_fresh_docs[i] = v
+    longest_rows = []
+    for i in top5:
+        v, pec = embed_one(a.ollama, model, all_chunks[i]["body"], "document", truncate=False)
+        a_fresh_docs[i] = v
+        longest_rows.append({"item": f"{all_chunks[i]['store']}:{all_chunks[i]['source']}"
+                                     f"#chunk{all_chunks[i]['chunk_id']}",
+                             "my_tokens": doc_toks[i], "prompt_eval_count": pec})
+    bad = check_token_counts(longest_rows)
+    if bad:
+        raise SystemExit("Ollama's served token counts differ from the nomic tokenizer's by more "
+                         "than the BOS/EOS allowance (2); the tokenizers disagree and parity would "
+                         "be meaningless: " + chr(10) + json.dumps(bad, indent=1))
+    # Descriptive: the same five chunks embedded exactly as offrig's index sends them today (no
+    # truncate flag, no num_ctx, num_gpu 0). prompt_eval_count below my_tokens means the real
+    # reference index cuts these chunks now — a finding for the Publisher whatever option C shows.
+    probe_rows = []
+    for i, row in zip(top5, longest_rows):
+        _, pec = embed_one(a.ollama, model, all_chunks[i]["body"], "document", truncate=None)
+        probe_rows.append({"item": row["item"], "my_tokens": doc_toks[i],
+                           "prompt_eval_count": pec,
+                           "would_truncate_today": (pec is not None and pec < doc_toks[i])})
+    a_fresh_queries, query_counts = embed_ollama(a.ollama, model, [t for _, t in queries], "query")
+    print(f"A-fresh embedded: {len(all_chunks)} chunks (5 singly for the count check, 5 probed as "
+          f"offrig sends them), {len(queries)} queries via {a.ollama}", flush=True)
 
     def c_embed(text: str) -> list:
         return onnx.embed(text)
@@ -317,9 +402,20 @@ def main() -> None:
         "smoke": a.limit is not None, "limit": a.limit,
         "device": a.device.upper(), "ollama": a.ollama, "ollama_model": model,
         "stores": stores,
-        "ollama_context": ctx,
-        "reference_check": {"observed_max_tokens": observed_max,
-                            "assertion": "Ollama's effective context covers the longest item"},
+        "reference_check": {"ollama_show": ctx,
+                            "note": "show reports the advertised window; the guard is the "
+                                    "measurement here, not that number",
+                            "truncate_false": "every A-fresh request; a too-long input is an error",
+                            "observed_max_tokens": observed_max,
+                            "batch_prompt_eval_counts": {"n_responses": len(batch_counts)
+                                                         + len(query_counts),
+                                                         "per_response": batch_counts
+                                                         + query_counts},
+                            "longest5_single_calls": longest_rows,
+                            "specials_allowance": 2,
+                            "offrig_probe": probe_rows,
+                            "offrig_probe_note": "sent exactly as offrig's index sends them: no "
+                                                 "truncate flag, no num_ctx, num_gpu 0"},
         "onnx": {**NOMIC_ONNX, "ir_digest": onnx.ir_digest, "dim": onnx.dim},
         "counts": {"chunks": len(chunk_rows), "queries": len(query_rows)},
         "truncation": {"bucket_top": cap,

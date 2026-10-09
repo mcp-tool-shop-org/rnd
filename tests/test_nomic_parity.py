@@ -152,3 +152,35 @@ class OllamaContextGuard(unittest.TestCase):
     def test_unparseable_num_ctx_falls_back(self):
         payload = {"parameters": "num_ctx auto", "model_info": {"nomic-bert.context_length": 2048}}
         self.assertEqual(np_.parse_show(payload)["effective"], 2048)
+
+
+class ReferenceMeasurement(unittest.TestCase):
+    """The context guard is a measurement, not a lookup: truncate=false on the wire, per-item
+    prompt_eval_count asserted against our tokenizer on the longest items (BOS/EOS allowance)."""
+
+    def test_parity_body_carries_truncate_false_and_num_gpu_0(self):
+        body = np_._embed_body("nomic-embed-text", ["x"], False)
+        self.assertEqual(body["truncate"], False)
+        self.assertEqual(body["options"], {"num_gpu": 0})  # offrig's cpu_only request
+        self.assertNotIn("num_ctx", body.get("options", {}))
+
+    def test_probe_body_omits_truncate_entirely(self):
+        # exactly what offrig's index sends today: model, input, num_gpu 0, nothing else
+        body = np_._embed_body("nomic-embed-text", ["x"], None)
+        self.assertEqual(set(body), {"model", "input", "options"})
+        self.assertNotIn("truncate", body)
+
+    def test_top_k_longest_is_deterministic(self):
+        toks = [100, 500, 300, 500, 250, 900]
+        self.assertEqual(np_.top_k_longest(toks, 3), [5, 1, 3])  # tie on 500 -> lower index first
+        self.assertEqual(np_.top_k_longest([], 5), [])
+
+    def test_check_token_counts_allowance(self):
+        rows = [{"item": "a", "my_tokens": 100, "prompt_eval_count": 102},   # +2: ok
+                {"item": "b", "my_tokens": 100, "prompt_eval_count": 97},    # -3: bad
+                {"item": "c", "my_tokens": 100, "prompt_eval_count": 100},
+                {"item": "d", "my_tokens": 100, "prompt_eval_count": None}]  # missing: bad
+        bad = np_.check_token_counts(rows)
+        self.assertEqual([r["item"] for r in bad], ["b", "d"])
+        self.assertTrue(rows[0]["ok"])
+        self.assertEqual(rows[1]["diff"], -3)

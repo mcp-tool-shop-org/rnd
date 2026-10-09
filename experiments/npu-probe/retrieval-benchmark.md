@@ -81,8 +81,11 @@ telling the Publisher, so the calibration's timings stay honest.
 
 - 2026-10-09, before any query has run (this remains pre-registration, not a post-hoc edit): report the
   per-option truncated share, so a model-window cut reads as such. The decision rule is unchanged.
-- Same date: option C's match check (`nomic_parity.py`) records Ollama's effective context for the
-  reference model (`/api/show`: num_ctx, else the architecture's context_length) and refuses to run if
-  the longest benchmark item — measured 1619 nomic tokens in
-  `results/2026-10-09-nomic-chunk-lengths.json` — would not fit. A truncated reference makes parity
-  meaningless, so it fails loudly instead.
+- Same date: option C's match check (`nomic_parity.py`) guards the reference by measurement, not by
+  the advertised window. `/api/show`'s num_ctx / context_length is recorded as context only; every
+  A-fresh request carries `truncate: false` (a too-long input is a server error, never a silent cut);
+  the five longest chunks (longest is 1619 nomic tokens, per
+  `results/2026-10-09-nomic-chunk-lengths.json`) are embedded singly so the served `prompt_eval_count`
+  is asserted against this tokenizer (BOS/EOS allowance 2), and once more exactly as offrig sends
+  them (no truncate flag, no num_ctx) — which shows whether today's reference index itself truncates
+  those chunks, a finding for the Publisher either way.

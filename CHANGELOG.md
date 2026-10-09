@@ -11,6 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.29] - 2026-10-09
+
+- instruments: offrig calibrate changes, switchyard (planned), intel-npu device facts; calibration error-lean post-hoc
+- Updated `intel-npu`: The Intel side of the rig — NPU embeddings and iGPU cross-encoders (npu-serve)
+- Updated `offrig`: offrig — big models on rented RunPod GPUs
+- Added `switchyard`: switchyard — the device-aware model router (in build)
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.28] - 2026-10-09
 
 - gemma rerun pre-registration: context check, num_ctx unchanged

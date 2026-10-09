@@ -1,0 +1,26 @@
+chain (final verdict): false-reject on gold supported | false-accept on gold unsupported
+  cal-gemma4_31b-grounded-tune           FR 2/126 0.02   FA 0/128 0.00
+  cal-gemma4_31b-reasoning-tune          FR 0/101 0.00   FA 1/101 0.01
+  cal-granite4.1_30b-grounded-tune       FR 0/126 0.00   FA 24/128 0.19
+  cal-granite4.1_30b-reasoning-tune      FR 5/102 0.05   FA 25/102 0.25
+  cal-llama3.1_8b-grounded-tune          FR 7/127 0.06   FA 64/128 0.50
+  cal-llama3.1_8b-reasoning-tune         FR 41/101 0.41   FA 14/101 0.14
+  cal-mistral-small_24b-grounded-tune    FR 9/126 0.07   FA 25/128 0.20
+  cal-mistral-small_24b-reasoning-tune   FR 12/102 0.12   FA 20/102 0.20
+  cal-qwen3_14b-grounded-tune            FR 1/127 0.01   FA 5/128 0.04
+  cal-qwen3_14b-reasoning-tune           FR 4/102 0.04   FA 13/102 0.13
+  cal-qwen3_8b-grounded-tune             FR 3/126 0.02   FA 8/127 0.06
+  cal-qwen3_8b-reasoning-tune            FR 1/101 0.01   FA 7/102 0.07
+chain (model verdict, before the quote check):
+  cal-gemma4_31b-grounded-tune           FR 2/126 0.02   FA 0/128 0.00
+  cal-gemma4_31b-reasoning-tune          FR 0/101 0.00   FA 1/101 0.01
+  cal-granite4.1_30b-grounded-tune       FR 0/126 0.00   FA 45/128 0.35
+  cal-granite4.1_30b-reasoning-tune      FR 5/102 0.05   FA 44/102 0.43
+  cal-llama3.1_8b-grounded-tune          FR 7/127 0.06   FA 92/128 0.72
+  cal-llama3.1_8b-reasoning-tune         FR 52/101 0.51   FA 19/101 0.19
+  cal-mistral-small_24b-grounded-tune    FR 10/126 0.08   FA 30/128 0.23
+  cal-mistral-small_24b-reasoning-tune   FR 13/102 0.13   FA 23/102 0.23
+  cal-qwen3_14b-grounded-tune            FR 1/127 0.01   FA 6/128 0.05
+  cal-qwen3_14b-reasoning-tune           FR 5/102 0.05   FA 16/102 0.16
+  cal-qwen3_8b-grounded-tune             FR 3/126 0.02   FA 12/127 0.09
+  cal-qwen3_8b-reasoning-tune            FR 3/101 0.03   FA 12/102 0.12

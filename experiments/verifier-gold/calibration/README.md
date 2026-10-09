@@ -215,7 +215,7 @@ resume identity), so no offrig change is needed.
 - **The binary (fixed 13:17, before any run):** offrig main **751fb1d**, the Publisher's install after the ladder.
   It carries quote rule 2 (#47), `--keep-thinking` (#48), the health-checked 5xx and dropped-reply rule (#46,
   #49), and per-provider caps (#51, budget only; calibrate spends nothing). Installed by the Publisher; R&D
-  re-hashed both files at ~14:20 and they match:
+  re-hashed both files before the run (about 14:05) and they match:
   - `offrig.exe` sha256 `6A1622C53B96E828CBA2D28AE2288218B94B19CC5C727368523BCD7E8ED72741`
   - `offrig-mcp.exe` sha256 `E564295A590AF1FFD30E104660593957FABE54FCF2640B6873D6CA5AE55F1617`
 
@@ -297,3 +297,25 @@ downgraded it (`quote_not_found`):
   verdict-contract change with its own pre-registration, never a rescore.
 - **For the gemma post-hoc run:** the budget alone fixes the truncations, not this. So the run's pre-registration
   (above) names quote rule 2 as well, making it a new calibration.
+
+## Post-hoc, 2026-10-09: each model's error lean (for ASPIRE's judge choice)
+
+ASPIRE's control B found mistral-small:24b saying "wrong" regardless of consensus, and asked whether the gold
+agrees. Script `error_lean_posthoc.py`, output `results/2026-10-09-chain/error-lean-posthoc.txt`. Final verdict:
+
+| model | false rejects, grounded | false rejects, reasoning | false accepts, grounded | false accepts, reasoning |
+|---|---|---|---|---|
+| gemma4:31b | 2/126 (0.02) | 0/101 (0.00) | 0/128 (0.00) | 1/101 (0.01) |
+| qwen3:14b | 1/127 (0.01) | 4/102 (0.04) | 5/128 (0.04) | 13/102 (0.13) |
+| qwen3:8b | 3/126 (0.02) | 1/101 (0.01) | 8/127 (0.06) | 7/102 (0.07) |
+| mistral-small:24b | 9/126 (0.07) | 12/102 (0.12) | 25/128 (0.20) | 20/102 (0.20) |
+| granite4.1:30b | 0/126 (0.00) | 5/102 (0.05) | 24/128 (0.19) | 25/102 (0.25) |
+| llama3.1:8b | 7/127 (0.06) | 41/101 (0.41) | 64/128 (0.50) | 14/101 (0.14) |
+
+**Reading:**
+- mistral is noisy in **both** directions, not just "wrong"-leaning. It has 3–10× the false rejects of gemma and
+  the qwens, plus a 20% false-accept rate.
+- granite is quiet on false rejects here, but abstains on 40% of grounded claims. On the math ladder it called
+  14% of true claims false (`../math-ladder/results/2026-10-09-ladder/`).
+- None of this measures a rewrite judge's task. ASPIRE ran its own pre-registered control for that (aspire-si
+  #77).

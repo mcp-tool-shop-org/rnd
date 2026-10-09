@@ -36,3 +36,24 @@ The Core Ultra 9 285K's NPU ("Intel AI Boost") and Intel iGPU, through OpenVINO 
   studio pairs, trained on the 5090 and served from the Intel side. See the experiment README.
 - Status: works and is measured, but it lives in an experiment folder, not its own repo. It becomes a repo when
   offrig or another tool depends on it.
+
+## Verified device facts and next models (2026-10-09)
+
+- **OpenVINO's live enumeration on this rig** (Kimi, read-only, OpenVINO 2026.4.1):
+
+  | id | name | type | vendor |
+  |---|---|---|---|
+  | `CPU` | Intel(R) Core(TM) Ultra 9 285K | | |
+  | `GPU.0` | Intel(R) Graphics (iGPU) | INTEGRATED | 0x8086 |
+  | `GPU.1` | NVIDIA GeForce RTX 5090 (dGPU) | DISCRETE | 0x10de; never use |
+  | `NPU` | Intel(R) AI Boost | | 3720 |
+
+  Decide the iGPU by vendor 0x8086 plus INTEGRATED, not by its name.
+- **Advertised vs measured:** the NPU advertises 13.1 int8 TOPS but measured about 2.4, because it's
+  transfer-bound. Routing tables claim measured numbers only.
+- **Intel's NPU-optimized models** (the OpenVINO HF collection "LLMs optimized for NPU": channel-wise
+  `-int4-cw-ov` builds) and **Qwen3-Embedding-0.6B** (NPU support added in OpenVINO 2026.0) are switchyard
+  experiments E2 and E3. Avoid group-quant IRs on the NPU (reported compiler crashes).
+- **The SigLIP checkpoint** `google/siglip2-so400m-patch14-384` is `model_type: siglip`, not `siglip2`.
+  optimum-intel 2.2.0 exports it, through `export_from_model` with a custom vision-only config. Kimi's
+  `npu-buildout` branch has the details.

@@ -2,7 +2,12 @@
 Wilson 95% intervals. The falloff is the first cell where accuracy drops below 0.80 or false accepts exceed
 0.10, read along the combined ladder (L1..L8) and along each knob's sweep (level 1..3).
 
-  python report.py <offrig-calibrate-run-dir>...
+  python report.py [--model-verdict] <offrig-calibrate-run-dir>...
+
+--model-verdict (post-hoc, added 2026-10-09 after the first ladder run): score the model's own verdict before
+offrig's quote check. The ladder's code lines are short (`v = v * 3` is 9 characters), under offrig's 12-character
+quote floor, so a correct verdict with a correct quote becomes cannot_tell. The pre-registered table is the
+default (final verdicts); this one shows the reasoning falloff that the quote rule hides.
 """
 
 import json
@@ -27,7 +32,7 @@ def wilson(k: int, n: int) -> tuple[float, float]:
     return (lo, hi)
 
 
-def tally(gold: dict, verdicts: list[dict]) -> dict:
+def tally(gold: dict, verdicts: list[dict], field: str = "final_verdict") -> dict:
     """Per-cell counts [n, right, false accepts, unsupported n, abstain, unusable] from verdict lines.
     Lines whose claim isn't in the gold are ignored; an unusable line counts only as unusable."""
     cells = defaultdict(lambda: [0, 0, 0, 0, 0, 0])
@@ -39,7 +44,7 @@ def tally(gold: dict, verdicts: list[dict]) -> dict:
         if ln.get("status") == "unusable":
             c[5] += 1
             continue
-        v = ln.get("final_verdict")
+        v = ln.get(field)
         c[0] += 1
         c[1] += v == g["label"]
         if g["label"] == "unsupported":
@@ -49,7 +54,7 @@ def tally(gold: dict, verdicts: list[dict]) -> dict:
     return cells
 
 
-def main(dirs: list[str]) -> None:
+def main(dirs: list[str], field: str = "final_verdict") -> None:
     gold = {}
     for line in (HERE / "ladder.jsonl").read_text(encoding="utf-8").splitlines():
         r = json.loads(line)
@@ -59,7 +64,7 @@ def main(dirs: list[str]) -> None:
     for d in dirs:
         model = json.loads((Path(d) / "manifest.json").read_text(encoding="utf-8"))["model"]
         verdicts = [json.loads(x) for x in (Path(d) / "verdicts.jsonl").read_text(encoding="utf-8").splitlines()]
-        cells = tally(gold, verdicts)
+        cells = tally(gold, verdicts, field)
         falloff = {"ladder": None}
         print(f"\n{model}")
         for cell in order:
@@ -78,4 +83,6 @@ def main(dirs: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    args = sys.argv[1:]
+    raw = "--model-verdict" in args
+    main([a for a in args if a != "--model-verdict"], "model_verdict" if raw else "final_verdict")

@@ -202,8 +202,8 @@ passes the default rule, so no default is named and held-out was not run.** Rece
 ## Pre-registration, 2026-10-09 ~07:00, before any run: gemma4:31b at a larger reply budget (post-hoc)
 
 Labelled **post-hoc**: it exists because of the result above. Agreed with the Publisher in principle; it runs
-on its own card grant, after the offrig release that adds `verify calibrate --num-predict` (recorded in the
-manifest and in the resume identity).
+on its own card grant. `verify calibrate --num-predict` already exists (recorded in the manifest and in the
+resume identity), so no offrig change is needed.
 
 - **The one change:** `num_predict` 4096 → **12288**. Everything else as the chain: think on, structured on,
   temperature 0, seed 0, `num_ctx` 16384, same gold, `--split tune`, both check types.
@@ -226,3 +226,36 @@ manifest and in the resume identity).
 - **Served as calibrated:** a default chosen at 12288 must be served at 12288 (`offrig verify` carries the
   setting); the calibration report records it per model.
 - Every number from this run is reported beside the chain's, never in place of it.
+
+## Post-hoc finding, 2026-10-09: the quote check, not the model, drives most of gemma's grounded abstain
+
+Asked by the Publisher after the ladder exposed offrig's 12-character quote floor. **The chain's result stands as
+scored:** the quote rule was part of the contract. This sizes a possible offrig change. Script
+`quote_match_posthoc.py`, output `results/2026-10-09-chain/quote-match-posthoc.txt`. Mode 0 reproduces offrig's
+scored abstain and false-accept counts exactly for all 12 runs.
+
+**Where a final cannot_tell comes from,** when the model itself said supported or unsupported and offrig
+downgraded it (`quote_not_found`):
+- **The 12-character floor is almost never the cause on the chain:** 0–3 per run. Diff hunks have short lines,
+  but models quote longer spans.
+- **Comment markers are the main cause for gemma:** the evidence wraps prose across `///` lines, and the model
+  quotes the prose without the markers ("Lane ports are two apart: … for the handoff runner's second tunnel"),
+  which isn't a verbatim substring.
+- **Elisions** (`...`) and paraphrase make up the rest. The qwens' downgrades are mostly these.
+
+**Rescored under looser matching (descriptive):**
+
+| run | as scored: abstain, FA ub | mode 1 (whole-line short quotes, markers stripped) | mode 2 (+ elision segments) |
+|---|---|---|---|
+| gemma4:31b grounded | 0.205 ✗, 0.026 | **0.075**, 0.026 | 0.059, 0.026 |
+| gemma4:31b reasoning | 0.064, 0.059 | 0.059, 0.059 | 0.045, 0.059 |
+| qwen3:14b grounded | 0.259 ✗, 0.089 | 0.247 ✗, 0.089 | 0.224 ✗, 0.098 |
+| mistral-small:24b grounded | 0.244 ✗, 0.253 ✗ | 0.165, 0.276 ✗ | 0.161, 0.276 ✗ |
+| the other 8 runs | | no rule outcome changes | no rule outcome changes |
+
+- **gemma4:31b grounded:** 33 of its 52 abstentions are marker-stripped quotes that really are in the evidence. Its
+  false accepts stay at 0/142. Under mode 1 its only remaining miss would be the 2 truncations.
+- Rescues can add false accepts (mistral, granite, llama), so a looser match is not free. That's why it's a
+  verdict-contract change with its own pre-registration, never a rescore.
+- **For the gemma post-hoc run:** at num_predict 12288 under today's quote rule, grounded is expected to stay
+  near 0.20 abstain. The bigger budget fixes the truncations, not this.

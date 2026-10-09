@@ -69,14 +69,16 @@ on the same claim outcomes with zero differing fields (`results/2026-10-09-nli-f
 
 | leg | n | false accept (unsup + ct) | abstain | balanced (decided) | truncated |
 |---|---|---|---|---|---|
-| grounded, tune | 270 | 31/143, upper 0.291 | 115/255 | 0.718 | 14 |
-| grounded, held-out | 230 | 22/118, upper 0.266 | 103/225 | 0.733 | 20 |
-| reasoning, tune | 223 | 10/121, upper 0.145 | 143/204 | 0.587 | 147 (66%) |
-| reasoning, held-out | 236 | 16/129, upper 0.192 | 136/215 | 0.620 | 150 (64%) |
+| grounded, tune | 270 | 31/143, upper 0.291 | 115/255 | 0.718 | 14/270 (5%) |
+| grounded, held-out | 230 | 22/118, upper 0.266 | 103/225 | 0.733 | 20/230 (9%) |
+| reasoning, tune | 223 | 10/121, upper 0.145 | 143/204 | 0.587 | 147/223 (66%) |
+| reasoning, held-out | 236 | 16/129, upper 0.192 | 136/215 | 0.620 | 150/236 (64%) |
 | rule needs | | upper < 0.10 | ≤ 0.20 | ≥ 0.80 | (reported) |
 
-The NLI fails the default rule on both check types, so the prereg's fork applies: gap = (the cheapest
-grounded-tune-passing LLM's decided balanced accuracy) − 0.7185, resolved once a candidate passes
-grounded tune; ≤ 0.10 earns the fine-tune PR. About 104 ms per claim, 100.6 s wall. The reasoning
-legs truncate about two thirds of pairs at seq 512 (before+after diff contexts are long) — read
-their rows with that in mind; a max-over-chunks variant was never pre-registered, so it didn't run.
+No LLM candidate passed grounded tune (2026-10-09 chain), so the prereg's fork takes the best
+grounded-tune LLM: gemma4:31b at 0.989 decided balanced accuracy (rnd main,
+`experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-grounded-tune/metrics.json`).
+Gap = 0.989 − 0.7185 = **0.271 > 0.10**. The floor is reported as a floor: no fine-tune PR, and the
+NLI line closes here. (If the gemma rerun later passes, it becomes the cheapest passing LLM at about
+the same accuracy — the gap stays far above 0.10 either way.) About 104 ms per claim, 100.6 s wall.
+A max-over-chunks variant was never pre-registered, so it didn't run.

@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.9] - 2026-10-09
+
+- math ladder: its own scratch store, run step with rest and gates
+- Added experiment `data-designer`
+- Added experiment `verifier-gold`
+
 ## [1.1.4.3.8] - 2026-10-09
 
 - math ladder v1 pre-registered: 780 generated claims, 26 cells

@@ -3,8 +3,8 @@
 (prereg/siglip2-probe.md, 2026-10-09). Speed and match only; no decision attached.
 
 ai-eyes pins google/siglip2-so400m-patch14-384 @ e8e4872 (its engine.py, read-only). The vision
-tower is exported to OpenVINO with optimum-intel (OVModelForFeatureExtraction) into a cache dir,
-then compiled once per device. 50 images are sampled from the ai-eye-test project with
+tower is converted once to OpenVINO IR from that snapshot at full fp32 (prereg amendment
+2026-10-09: optimum-intel 2.2.0 has no siglip2 registration; the check is re-run and recorded) — 50 images are sampled from the ai-eye-test project with
 random.Random(20261009).sample(sorted(paths), 50), read-only; the sampled list lands in the
 receipt. Each (image, device) is embedded 3 times, devices interleaved CPU, NPU, iGPU per image.
 
@@ -113,6 +113,16 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
+def hub_cache(path: Path) -> Path:
+    """HuggingFace's hub cache is the dir that holds models--org--name dirs. Accept being handed
+    HF_HOME or the hub dir itself and normalize; anything else passes through untouched."""
+    path = Path(path)
+    if path.name == "hub":
+        return path
+    hub = path / "hub"
+    return hub if hub.is_dir() else path
+
+
 def _npu_serve():
     """npu_serve loaded lazily: it imports openvino at module level, and this file's pure parts
     must stay importable on the plain repo python (the tests)."""
@@ -122,31 +132,54 @@ def _npu_serve():
     return mod
 
 
+IR_XML = "siglip2_vision.xml"
+
+
+def optimum_siglip2_check() -> dict:
+    """The registry check behind the prereg's amendment, re-run and recorded: is siglip2
+    exportable through optimum-intel on this venv? (Expected no on optimum-intel 2.2.0.)"""
+    try:
+        import optimum.exporters.openvino  # noqa: F401 -- registering the openvino tasks
+        from optimum.exporters.tasks import TasksManager
+        TasksManager.get_supported_tasks_for_model_type("siglip2", exporter="openvino",
+                                                        library_name="transformers")
+        return {"siglip2_supported": True, "error": None}
+    except Exception as e:  # noqa: BLE001 -- the exact error is the finding
+        return {"siglip2_supported": False,
+                "error": f"{type(e).__name__}: {str(e)[:300]}"}
+
+
 def export_model(cache: Path, export_dir: Path) -> dict:
-    """The optimum-intel export of the pinned snapshot, timed, reused when already on disk.
-    The receipt gets the exported topology digest (openvino_model.xml) and sizes."""
-    xml = export_dir / "openvino_model.xml"
+    """The pinned snapshot's vision tower converted once to OpenVINO IR at fp32 (the prereg
+    amendment's path), timed, reused when already on disk. The receipt gets the topology digest."""
+    xml = export_dir / IR_XML
     if xml.exists():
-        return {"reused": True, "seconds": None, "export_dir": str(export_dir)}
-    from optimum.intel.openvino import OVModelForFeatureExtraction
+        return {"reused": True, "seconds": None, "export_dir": str(export_dir),
+                "path": "openvino.convert_model"}
+    from transformers import Siglip2VisionModel
+    import openvino as ov
+    import torch
     export_dir.mkdir(parents=True, exist_ok=True)
     t0 = time.perf_counter()
-    model = OVModelForFeatureExtraction.from_pretrained(
-        MODEL_ID, revision=REVISION, export=True, cache_dir=str(cache), trust_remote_code=False)
-    model.save_pretrained(str(export_dir))
+    tower = Siglip2VisionModel.from_pretrained(MODEL_ID, revision=REVISION,
+                                               cache_dir=str(cache), torch_dtype=torch.float32)
+    tower.eval()
+    example = torch.zeros(1, 3, 384, 384)  # pinned single-image 384x384 input
+    converted = ov.convert_model(tower, example_input=example, input=[1, 3, 384, 384])
+    ov.save_model(converted, str(xml))
     return {"reused": False, "seconds": round(time.perf_counter() - t0, 1),
-            "export_dir": str(export_dir)}
+            "export_dir": str(export_dir), "path": "openvino.convert_model"}
 
 
 def export_digest(export_dir: Path) -> dict:
     out = {"xml_sha256": None, "bytes": 0}
-    for name in ("openvino_model.xml", "openvino_model.bin"):
-        p = export_dir / name
+    xml = export_dir / IR_XML
+    comp = export_dir / (IR_XML[:-4] + ".bin")
+    for p in (xml, comp):
         if not p.exists():
             raise SystemExit(f"{p} missing after export; the cache is not usable")
-        if name.endswith(".xml"):
-            out["xml_sha256"] = sha256_file(p)
         out["bytes"] += p.stat().st_size
+    out["xml_sha256"] = sha256_file(xml)
     return out
 
 
@@ -168,52 +201,39 @@ def resolve_devices() -> dict:
 
 
 def compile_with_retry(export_dir: Path, ov_device: str):
-    """(model, meta) with the one allowed retry after dropping the first failed attempt. A
-    compile error is a recorded outcome, not a loop."""
-    from optimum.intel.openvino import OVModelForFeatureExtraction
+    """(compiled, meta): compile the IR on one device with the one allowed retry after dropping
+    the first failed attempt. A compile error is a recorded outcome, not a loop."""
+    import openvino as ov
     attempts, err = 0, None
-    model = None
+    compiled = None
     load_seconds = None
+    core = ov.Core()
     while attempts < 2:
         attempts += 1
         try:
             t0 = time.perf_counter()
-            model = OVModelForFeatureExtraction.from_pretrained(str(export_dir), device=ov_device)
+            compiled = core.compile_model(str(export_dir / IR_XML), ov_device)
             load_seconds = round(time.perf_counter() - t0, 1)
             err = None
             break
         except Exception as e:  # noqa: BLE001 -- the failure text is the finding
             err = f"{type(e).__name__}: {str(e)[:600]}"
-            model = None
+            compiled = None
             gc.collect()  # drop the failed attempt before the one allowed retry
-    return model, {"attempts": attempts, "load_seconds": load_seconds, "load_error": err}
+    return compiled, {"attempts": attempts, "load_seconds": load_seconds, "load_error": err}
 
 
-def embed_one(model, pixel_values, input_names: list) -> list:
-    """One image through a compiled model. If the export also takes text inputs, they get a
-    single zero token; what was actually fed is reported by the caller via input_names."""
-    kwargs = {"pixel_values": pixel_values}
-    if "input_ids" in input_names:
-        import numpy as np
-        kwargs["input_ids"] = np.zeros((1, 1), dtype=np.int64)
-    if "attention_mask" in input_names:
-        import numpy as np
-        kwargs["attention_mask"] = np.ones((1, 1), dtype=np.int64)
-    out = model(**kwargs)
-    if hasattr(out, "items"):
-        return pooled_vector(dict(out.items()))
-    return pooled_vector(out)
+def embed_one(compiled, pixel_values) -> list:
+    """One image through a compiled OpenVINO model, output keyed by the converted graph's port
+    names (pooler_output is the embedding; pooled_vector picks it)."""
+    ports = compiled.outputs
+    result = compiled([pixel_values])
+    return pooled_vector({port.get_any_name(): result[port] for port in ports})
 
 
-def model_input_names(model) -> list:
-    """The compiled model's input names, best-effort; defaults to pixel_values only."""
-    names = getattr(model, "input_names", None)
-    if names:
-        return list(names.keySet() if hasattr(names, "keySet") else names)
-    try:
-        return [i.get_any_name() for i in model.model.inputs]
-    except Exception:
-        return ["pixel_values"]
+def model_input_names(compiled) -> list:
+    """The compiled model's input names (one on this IR); recorded in the receipt."""
+    return [i.get_any_name() for i in compiled.inputs]
 
 
 def load_processor(cache: Path):
@@ -253,7 +273,8 @@ def main() -> None:
         images = images[:a.limit]
     rel = {p: str(Path(p).relative_to(root_images)) for p in images}
 
-    processor = load_processor(a.cache)
+    cache = hub_cache(a.cache)
+    processor = load_processor(cache)
     from PIL import Image
     import numpy as np
     pixels, pre_secs = {}, []
@@ -264,7 +285,7 @@ def main() -> None:
         pixels[p] = np.asarray(pv, dtype=np.float32)
         pre_secs.append(round(time.perf_counter() - t0, 4))
 
-    export = export_model(a.cache, a.export_dir)
+    export = optimum_siglip2_check() | {"ir": export_model(cache, a.export_dir)}
     export["digest"] = export_digest(a.export_dir)
     export["model"] = MODEL_ID
     export["revision"] = REVISION
@@ -283,7 +304,7 @@ def main() -> None:
         dev_report[label] = info
         if model is not None:
             models[label] = model
-            info["input_names"] = model_input_names(model)
+            info["inputs"] = model_input_names(model)
     if "CPU" not in models:
         raise SystemExit("the CPU reference failed to compile; the probe cannot run "
                          "(receipt aborted before any timing)")
@@ -297,7 +318,7 @@ def main() -> None:
                 if label not in models:
                     continue
                 t0 = time.perf_counter()
-                v = embed_one(models[label], pixels[p], dev_report[label]["input_names"])
+                v = embed_one(models[label], pixels[p])
                 dt = time.perf_counter() - t0
                 times[label].append(round(dt, 4))
                 if label not in first_embed:

@@ -39,4 +39,14 @@ SigLIP2 on the CPU today; the probe prices moving that to the Intel devices.
 
 ## Amendments
 
-(none yet — any change after the first image runs lands here with its date and reason)
+- **2026-10-09, before any image runs — the export path is not optimum.** The pin said "exported to
+  OpenVINO via optimum (`OVModelForFeatureExtraction`)". That path is unavailable on this venv:
+  optimum-intel 2.2.0 (with optimum 2.3.0) registers `siglip` and `clip` for OpenVINO
+  feature-extraction but **not** `siglip2` —
+  `TasksManager.get_supported_tasks_for_model_type("siglip2", "openvino")` fails, so the pinned
+  call would abort at export. The export path is therefore: transformers' own
+  `Siglip2VisionModel` from the same pinned snapshot (vision tower only, as pinned), converted once
+  with `openvino.convert_model` at full fp32 — ai-eyes' default dtype is full precision
+  (`DEFAULT_DTYPE = None`, engine.py). Devices, sampling, repeats, comparison, the failure policy
+  and the receipt are unchanged; the receipt records the registry check and the export path used.
+  If a later optimum-intel release adds siglip2, that is a new lane, not this probe.

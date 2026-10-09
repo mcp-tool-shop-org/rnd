@@ -64,6 +64,16 @@ class Summaries(unittest.TestCase):
         self.assertEqual([w["image"] for w in out["worst"][:2]], ["a.png", "b.png"])
 
 
+class HubCache(unittest.TestCase):
+    def test_normalizes_hf_home_or_hub(self):
+        with tempfile.TemporaryDirectory() as td:
+            home = Path(td)
+            (home / "hf-cache" / "hub").mkdir(parents=True)
+            self.assertEqual(sp.hub_cache(home / "hf-cache"), home / "hf-cache" / "hub")
+            self.assertEqual(sp.hub_cache(home / "hf-cache" / "hub"), home / "hf-cache" / "hub")
+            self.assertEqual(sp.hub_cache(home / "plain"), home / "plain")
+
+
 class PickEmbedding(unittest.TestCase):
     def test_pooler_output_first(self):
         self.assertEqual(sp.pooled_vector({"pooler_output": [[1.0, 2.0]],

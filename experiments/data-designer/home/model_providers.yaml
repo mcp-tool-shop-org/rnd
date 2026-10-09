@@ -1,0 +1,8 @@
+# The only provider this builder is allowed to call.
+# Data Designer writes NVIDIA, OpenAI and OpenRouter the first time it starts
+# against an empty home. This file is created first so that write never happens.
+providers:
+  - name: ollama-local
+    endpoint: http://127.0.0.1:11434/v1
+    provider_type: openai
+    api_key: OLLAMA_LOCAL_API_KEY

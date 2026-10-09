@@ -1,0 +1,26 @@
+{
+  "providers": [
+    "ollama-local"
+  ],
+  "file_providers": [
+    "ollama-local"
+  ],
+  "telemetry_enabled": false,
+  "question": "Why does ice float on liquid water?",
+  "answer": "Ice floats on liquid water because it is less dense than liquid water. The physical reason is that the crystalline structure of ice causes it to be less compact than liquid water.",
+  "reasoning": null,
+  "finish_reasons": [
+    "stop",
+    "stop"
+  ],
+  "seconds": 11.971,
+  "prompt_sha256": "3ac7d30b09c89f306f9f71d500cd952d16e964c29bee101a03848a99cab2aeb2",
+  "model": "mistral-small:24b",
+  "max_parallel_requests": 1,
+  "digest": "8039dd90c113",
+  "seen_hosts": [
+    "127.0.0.1"
+  ],
+  "blocked_hosts": [],
+  "loaded_before": []
+}

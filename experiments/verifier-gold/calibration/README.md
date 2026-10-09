@@ -105,3 +105,18 @@ dial with exact answers, unlimited items, no labelling cost, and no chance a mod
   this, and an error there costs money.
 - **Before it runs:** pre-register the generator (seeded), the levels, and n per level sized for a
   falloff call. At least 30 per cell, per the Publisher's rule.
+
+## Post-hoc candidates (added 2026-10-09, after tonight's results were seen)
+
+These joined the pool **after** the overnight chain's results were visible, so they're marked post-hoc
+wherever they're reported. A post-hoc pass is a lead to confirm, not the same evidence as a model chosen before
+any results.
+
+| model | licence (verify on its card before running) | note |
+|---|---|---|
+| Qwen3.8-27B | Apache-2.0 per its HF card (August 2026) | dense, `reasoning_effort` thinking; ~17 GB at Q4; download after the ladder |
+| Muse Glimmer 30B | Apache-2.0 per Ollama's 2026-08-10 post | trace the base model's licence too; already on disk |
+| Nemotron 3.5 Lightning 30B-A3B | NVIDIA licence (unverified; not Apache) | a default-verifier speed candidate only, never a teacher |
+
+Each gets its own smoke run (think and structured settled the same way), its own tune run under its own grant,
+and held-out only if it is chosen, under the same rule. The default rule and the falloff tiers are unchanged.

@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.12] - 2026-10-09
+
+- distill plan: teacher pool, itemised card plan, 13.4 sandbox, cleanup; post-hoc candidates marked
+- Added experiment `data-designer`
+- Updated experiment `distill-ladder`
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.11] - 2026-10-09
 
 - distillation exercise plan v2: ASPIRE's training section, B-matched arm

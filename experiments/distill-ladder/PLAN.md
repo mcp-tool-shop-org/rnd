@@ -42,11 +42,19 @@ out in advance.
   - Arm A is **this same base put through our exact packaging** (same converter, same quantization, same
     Modelfile and template), never Ollama's stock qwen3:1.7b. Otherwise differences in packaging would be
     counted as training effect (ASPIRE's point).
-- **Teacher for arm C:** the Apache-2.0 model with the highest overall accuracy on **ladder v1**, among the
-  local candidates tonight (qwen3:8b, qwen3:14b, mistral-small:24b, granite4.1:30b). llama3.1:8b is excluded:
-  its licence isn't Apache, and the teacher rule is Apache-only.
+- **Teacher for arm C:** the Apache-2.0 model with the highest overall accuracy on **ladder v1**, among:
+  - **tonight's ladder v1 runs:** qwen3:8b, qwen3:14b, mistral-small:24b, granite4.1:30b and **gemma4:31b**.
+    Gemma 4 is Apache-2.0: Google routes Gemma 4 to its own `/gemma/apache_2` licence, and its HF card says
+    apache-2.0. The restrictive Gemma terms cover only Gemma 1 through TranslateGemma.
+  - **post-hoc candidates, if they run on ladder v1 first:** Qwen3.8-27B (Apache-2.0 per its HF card) and
+    Muse Glimmer 30B (Apache-2.0 per Ollama's post; its base model's licence must be traced too, since a
+    fine-tune inherits it).
+    - Marked **post-hoc**: they joined the pool after tonight's calibration results were seen.
+  - **Excluded:** llama3.1:8b (Llama licence) and Nemotron 3.5 Lightning (NVIDIA licence). The teacher rule
+    is Apache-only.
   - Ladder v1 is a fair way to pick, because it isn't the student's test.
-  - Record the teacher's revision, licence and ladder v1 score in the plan before training.
+  - Record the teacher's revision, licence (verified on its card) and ladder v1 score in the plan before
+    training.
 
 ## Data
 
@@ -193,15 +201,44 @@ Every arm and seed is scored the same way: `offrig verify calibrate` with each a
 
 ## Card plan (for the Publisher)
 
-- **Runs:**
-  - an environment smoke gate first (about 5 minutes);
-  - training is 9 LoRA runs (B-full, B-matched and C × 3 seeds), about 3 minutes each for a 1.7B model;
-  - generating the teacher's traces is one run on ~2,000 items;
-  - a quant-drift check (200 items, two forms) per model, then scoring 10 models (A, plus 9 trained) on
-    ladder v2, plus v1 and gold tune. The claims are small and the student is tiny.
-- **Estimate:** about 1.5–2.5 h of card time plus the 15-minute rests, in two or three grants.
-- **Peak VRAM:** the teacher's trace run (up to ~25 GB for the largest candidate). Training a 1.7B bf16 LoRA
-  needs well under 10 GB.
+**Legs, each its own grant, with a 15-minute rest between legs.** The Director's rest rule is for long
+stretches, so the short runs inside a leg run back to back.
+
+| Leg | What runs | Estimate | Basis |
+|---|---|---|---|
+| 1. env smoke | one 20-step 1.7B training on 64 items, merge, GGUF, load | ~5 min | ASPIRE |
+| 2. teacher traces | the teacher answers ~2,000 training items in the contract | **0.6–4 h, depending on the teacher** | smoke s/claim on gold: mistral-small 1.0, qwen3:8b 1.6, granite 2.1, qwen3:14b 2.3, gemma4:31b 7.4 → 2,000 × that. Ladder items are shorter, so these are upper estimates. Replaced by each teacher's measured ladder v1 s/claim once the ladder has run. |
+| 3. training | 9 LoRA runs (B-full, B-matched, C × seeds 42–44), back to back | ~30 min | ~3 min each (ASPIRE) |
+| — | convert and quantize (CPU only, no grant) | ~10–20 min | run outside any timed scoring window |
+| 4. template test + quant drift | the template test (20 items), then 200 items × 2 forms × 10 models | ~1 h | Ollama side ~0.3–0.5 s per item; the transformers bf16 side ~1–2 s per item |
+| 5. scoring | 10 models × (ladder v2 + v1 780 + gold tune 493), about 2,000 claims each, ~20k in all | **~2–3 h** | a 1.7B without thinking at ~0.3–0.5 s per claim (llama3.1:8b without thinking measured 0.55 s), plus loads |
+
+- **Total:** about 4.5–8.5 h of card time plus four rests (~1 h). That's two working sessions, not one night.
+  The teacher is the swing factor.
+- **Peak VRAM:** the teacher leg (up to ~25 GB if gemma4:31b). Training a 1.7B bf16 LoRA needs well under
+  10 GB.
+- **The template test and quant drift use the 13.4 sandbox Ollama:** `E:\AI\ollama-cu134\run` on
+  `127.0.0.1:11492` with `OLLAMA_LLM_LIBRARY=cuda_v13`.
+  - That's CUDA 13.4 everywhere, and the same backend as the system Ollama on 11434, so the template test
+    compares like with like.
+  - It runs on the card, so it's inside leg 4's grant.
+  - It's never a stock CUDA 13.0 Ollama, and never the shared 11434 for debug logging.
+- **Envs:** training runs from aspire-cu134, which is already on the VRAM watchdog's list. Convert and quantize
+  are CPU-only and run outside any timed scoring window, as with Kimi's legs.
+
+**Cleanup (the compensator for registering 10 models in the shared store `E:\AI-Models\Ollama`):**
+
+```bash
+for m in distill-ladder-A distill-ladder-B-full-s42 distill-ladder-B-full-s43 distill-ladder-B-full-s44 \
+         distill-ladder-B-matched-s42 distill-ladder-B-matched-s43 distill-ladder-B-matched-s44 \
+         distill-ladder-C-s42 distill-ladder-C-s43 distill-ladder-C-s44; do
+  curl -s -X DELETE http://127.0.0.1:11434/api/delete -d "{\"model\":\"$m\"}"
+done
+curl -s http://127.0.0.1:11434/api/tags | grep -c distill-ladder   # must print 0
+```
+
+Then delete the run's adapters, merged weights and GGUFs from its work directory (listed in the ledger). Owner:
+ASPIRE, after R&D has read the scores.
 
 ## Owners
 
@@ -237,7 +274,7 @@ Every arm and seed is scored the same way: `offrig verify calibrate` with each a
 |---|---|---|
 | PIN_PER_STEP | 2 | Student and teacher revisions are pinned; seeds fixed; generator seeds fixed; every artifact's sha256 recorded; offrig calibrate's manifest pins model digest and settings. |
 | ANDON_AUTHORITY | 2 | Scoring stops if the quant-drift check fails, or the template test fails, or a run is incomplete; a false-accept rise fails an arm whatever its accuracy. |
-| NAMED_COMPENSATORS | 2 | Nothing irreversible: models and adapters are local files (delete them to undo), registered Ollama models are removed with `/api/delete`, and scratch stores are deleted. No publishing is in scope. |
+| NAMED_COMPENSATORS | 2 | Nothing irreversible. The 10 registered models in the shared Ollama store are removed by the cleanup command set in the card plan (checked to print 0), with ASPIRE as owner. Adapters, merged weights and GGUFs are local files listed in the ledger. Scratch stores are deleted. No publishing is in scope. |
 | DECOMPOSE_BY_SECRETS | 2 | Data and scoring (R&D), training and packaging (ASPIRE), and the card (the Publisher) are separate, and meet only at files with recorded hashes. |
 | UNCERTAINTY_GATED_HUMANS | 2 | The open choices are filled in before the run, the Director gives the go, and the Publisher grants the card per leg. |
 | EXTERNAL_VERIFIER | n/a | Answers are exact by construction; no specialized claims. |

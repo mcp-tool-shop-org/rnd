@@ -1,0 +1,14 @@
+# Phase 0 smoke model. One alias, one local provider, one request at a time.
+model_configs:
+  - alias: mistral-small
+    model: mistral-small:24b
+    provider: ollama-local
+    skip_health_check: false
+    inference_parameters:
+      generation_type: chat-completion
+      temperature: 0.0
+      top_p: 1.0
+      max_tokens: 1024
+      max_parallel_requests: 1
+      extra_body:
+        seed: 0

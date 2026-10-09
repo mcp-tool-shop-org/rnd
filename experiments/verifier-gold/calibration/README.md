@@ -46,6 +46,11 @@ mistral-small:24b, granite4.1:30b, gemma4:31b.
 **Where:** the local 5090 on the CUDA 13.4 system Ollama, overnight, in blocks the Publisher grants. Not the
 cloud: a stock RunPod Ollama runs CUDA 13.0, against the 13.4 rule. Runs use a scratch `--project`, so the
 schema-v6 store never meets an older offrig MCP server.
+- **Rest (Director's standing rule, 2026-10-08):** the card rests 15 minutes with nothing loaded between runs.
+  `chain_step.sh` rests before it loads each model after the first, and refuses to load if anything is
+  still on the card. Six models add about 75 minutes of rest.
+- **Pauses:** a health monitor may pause the chain mid-model. A step whose runs are incomplete exits 3 and
+  the chain stops there. Rerunning the same step resumes it, and no completed claim is asked again.
 
 **Reported per model:**
 - every metric row, including the cannot_tell row and the false-accept rate on unsupported only;

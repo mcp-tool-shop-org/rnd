@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.2.13] - 2026-10-08
+
+- calibration chain: 15-min rest between models, incomplete stops the chain
+- Added experiment `data-designer`
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.2.12] - 2026-10-08
 
 - calibration protocol amended before any run: reasoning runs on all (under 100 unsupported per split)

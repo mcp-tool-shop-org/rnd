@@ -1,0 +1,1 @@
+{"torch": "2.16.0.dev20261008+cu134", "cuda": "13.4", "triton": "3.8.0", "default": {"ok": true, "compile_s": 17.778168600001663, "us_per_call": 129.4049999996787, "max_diff": 5.960464477539063e-08}, "reduce-overhead": {"ok": true, "compile_s": 0.258756799994444, "us_per_call": 2168.9019999976153, "max_diff": 5.960464477539063e-08}, "eager_us_per_call": 110.3925999996136}

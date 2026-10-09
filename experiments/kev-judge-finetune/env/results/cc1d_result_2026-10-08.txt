@@ -1,0 +1,13 @@
+torch.float32   b1 d4096 l2048 act=None: fwd max|Δ| 0.00e+00, bwd rel 1.05e-07 ok
+torch.float32   b1 d4096 l2048 act=silu: fwd max|Δ| 1.43e-06, bwd rel 3.18e-07 ok
+torch.float32   b2 d8192 l517 act=None: fwd max|Δ| 0.00e+00, bwd rel 1.17e-07 ok
+torch.float32   b2 d8192 l517 act=silu: fwd max|Δ| 1.43e-06, bwd rel 2.48e-07 ok
+torch.float32   b1 d2048 l1 act=None: fwd max|Δ| 0.00e+00, bwd rel 0.00e+00 ok
+torch.float32   b1 d2048 l1 act=silu: fwd max|Δ| 4.77e-07, bwd rel 9.98e-08 ok
+torch.bfloat16  b1 d4096 l2048 act=None: fwd vs float64: kernel 6.18e-02, bf16 ref 6.18e-02, bwd rel 0.00e+00 ok
+torch.bfloat16  b1 d4096 l2048 act=silu: fwd vs float64: kernel 4.44e-02, bf16 ref 4.44e-02, bwd rel 3.01e-03 ok
+torch.bfloat16  b2 d8192 l517 act=None: fwd vs float64: kernel 5.68e-02, bf16 ref 5.68e-02, bwd rel 0.00e+00 ok
+torch.bfloat16  b2 d8192 l517 act=silu: fwd vs float64: kernel 5.68e-02, bf16 ref 5.68e-02, bwd rel 5.46e-03 ok
+torch.bfloat16  b1 d2048 l1 act=None: fwd vs float64: kernel 1.54e-02, bf16 ref 1.54e-02, bwd rel 0.00e+00 ok
+torch.bfloat16  b1 d2048 l1 act=silu: fwd vs float64: kernel 1.66e-02, bf16 ref 2.83e-02, bwd rel 6.58e-03 ok
+CC1D-OK

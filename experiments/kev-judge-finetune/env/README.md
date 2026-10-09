@@ -143,7 +143,36 @@ guardrails).
   installed `--no-deps` in `.venv-cu134`, the only change to that env. It imports with the GPU hidden.
 - **Cloud cards** (sm_80 A100, sm_100 B200) need their own build, with those arches added.
 
-**GPU test (needs a slot):**
-- the same smoke and confirm band;
-- the speed gate's reference stays 5.24 s; the question is how far below 5.45 s it goes;
-- a direct check that causal_conv1d's forward matches transformers' PyTorch fallback.
+**GPU test, 2026-10-08 (the Publisher's slot): PASS. causal-conv1d is now part of the Kev training env.**
+
+The kernel check (`check_causal_conv1d.py`, output in `results/cc1d_result_2026-10-08.txt`):
+- **fp32:** the kernel matches its PyTorch reference within 1.4e-6 forward and 3.2e-7 relative backward.
+- **bf16, first run FAILED,** on the check, not the kernel. A fixed 3e-2 bound can't hold where outputs reach
+  about 8: one bf16 step there is 0.0625. The bf16 reference also rounds the convolution before SiLU while the
+  kernel rounds once, so small SiLU outputs differ by several steps.
+- **bf16, the rule now:** compare both against float64 truth; the kernel must be no less accurate than the bf16
+  reference. It is equal in 5 cases and better in 1 (l=1 SiLU: 1.66e-2 against 2.83e-2). The reason is
+  in the script.
+
+Transformers 5.19 sees the kernel (`is_causal_conv1d_available()` is true with the GPU visible), and Qwen3.5's
+module binds `causal_conv1d_fn`. With the GPU hidden it reports false, so check it on the GPU.
+
+| Gate | Band | cu128 ref | cu134 | **cu134 + causal-conv1d** |
+|---|---|---|---|---|
+| steps, finite loss | 30 | 30 | 30 | **30** (final loss 0.166) |
+| grad_norm mean | 4.5–18.1 | 9.07 | 8.91 | **8.98** |
+| peak device | ≤ 13 GB | 10.48 | 10.50 | **10.47** |
+| truncated / rejected | 0 / 0 | 0 / 0 | 0 / 0 | **0 / 0** |
+| median step | ≤ 6.55 s | 5.24 | 5.45 | **4.80** |
+| wall | reported | 219 s | 201 s | **150 s** |
+| confirm, order-averaged | ≥ 0.9536 | 0.9799 | 0.9799 | **0.9799**, CI [0.954, 1.0] |
+| per-pair agreement with cu128 | ≥ 146/149 | — | 149/149 | **149/149** (max per-order Δp 0.022) |
+
+- **12% faster than cu134 without it, and now faster than the cu128 reference.**
+- **GPU busy:** median 40%, p90 67% (was 35/61), so the card is still not saturated. Batch 1 with
+  checkpointing is the next limit, not a kernel.
+- **Files:** the smoke is `runs/judge-4b-smoke-s0-cu134`; the run without the kernel is kept as
+  `runs/judge-4b-smoke-s0-cu134-nocc1d`. The confirm is `results/judge-4b-full-s0-confirm-cu134-cc1d.json`;
+  utilisation is `env/results/2026-10-08-cu134-cc1d-gpu-util.csv`.
+- **Not checked:** causal_conv1d's forward against transformers' own fallback, in place of the package's
+  reference. The confirm's 149/149, with the same scores as the run without the kernel, covers it in practice.

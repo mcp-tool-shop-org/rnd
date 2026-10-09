@@ -1,0 +1,2402 @@
+{
+ "pairs": 149,
+ "accuracy": 0.9630872483221476,
+ "a_rate": 0.4966442953020134,
+ "mean_margin": 0.9150026845637583,
+ "separable_pairs": 139,
+ "separable_prompts": 75,
+ "separable_ids": [
+  "t1-0",
+  "t1-1",
+  "t7-0",
+  "t7-1",
+  "t13-0",
+  "t13-1",
+  "t30-0",
+  "t30-1",
+  "t41-0",
+  "t41-1",
+  "t43-0",
+  "t43-1",
+  "t49-0",
+  "t49-1",
+  "t50-0",
+  "t50-1",
+  "t54-1",
+  "t55-0",
+  "t55-1",
+  "t58-0",
+  "t58-1",
+  "t60-0",
+  "t60-1",
+  "t65-0",
+  "t65-1",
+  "t69-0",
+  "t79-0",
+  "t79-1",
+  "t81-0",
+  "t81-1",
+  "t86-0",
+  "t103-0",
+  "t103-1",
+  "t109-0",
+  "t109-1",
+  "t110-0",
+  "t110-1",
+  "t111-0",
+  "t111-1",
+  "t123-0",
+  "t123-1",
+  "t126-0",
+  "t126-1",
+  "t131-0",
+  "t131-1",
+  "t133-1",
+  "t137-0",
+  "t137-1",
+  "t142-0",
+  "t142-1",
+  "t144-0",
+  "t144-1",
+  "t145-0",
+  "t145-1",
+  "t146-0",
+  "t146-1",
+  "t148-0",
+  "t148-1",
+  "t154-0",
+  "t154-1",
+  "t160-0",
+  "t167-0",
+  "t167-1",
+  "t171-0",
+  "t171-1",
+  "t186-0",
+  "t186-1",
+  "t197-0",
+  "t197-1",
+  "t200-0",
+  "t205-0",
+  "t205-1",
+  "t208-0",
+  "t208-1",
+  "t213-0",
+  "t213-1",
+  "t217-0",
+  "t217-1",
+  "t221-0",
+  "t221-1",
+  "t226-0",
+  "t226-1",
+  "t234-0",
+  "t234-1",
+  "t244-0",
+  "t244-1",
+  "t247-0",
+  "t247-1",
+  "t248-0",
+  "t248-1",
+  "t250-0",
+  "t250-1",
+  "t251-0",
+  "t251-1",
+  "t263-0",
+  "t263-1",
+  "t274-0",
+  "t274-1",
+  "t275-1",
+  "t281-1",
+  "t291-0",
+  "t291-1",
+  "t295-0",
+  "t295-1",
+  "t298-0",
+  "t298-1",
+  "t299-0",
+  "t299-1",
+  "t300-0",
+  "t300-1",
+  "t305-0",
+  "t305-1",
+  "t311-0",
+  "t311-1",
+  "t313-0",
+  "t313-1",
+  "t325-0",
+  "t325-1",
+  "t332-0",
+  "t332-1",
+  "t333-0",
+  "t333-1",
+  "t334-0",
+  "t334-1",
+  "t336-0",
+  "t336-1",
+  "t343-1",
+  "t344-0",
+  "t351-0",
+  "t351-1",
+  "t360-1",
+  "t371-0",
+  "t371-1",
+  "t380-0",
+  "t380-1",
+  "t383-0",
+  "t383-1",
+  "t391-0",
+  "t391-1"
+ ],
+ "rows": [
+  {
+   "pair_id": "t1-0",
+   "prompt_id": "t1",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9714,
+    "p_flawed": 0.0286
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t1-1",
+   "prompt_id": "t1",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9992,
+    "p_flawed": 0.0008
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9985,
+    "p_flawed": 0.0015
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t7-0",
+   "prompt_id": "t7",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t7-1",
+   "prompt_id": "t7",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t13-0",
+   "prompt_id": "t13",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t13-1",
+   "prompt_id": "t13",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9992,
+    "p_flawed": 0.0008
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t21-1",
+   "prompt_id": "t21",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.984,
+    "p_flawed": 0.016
+   },
+   "strong_second": {
+    "choice": "A",
+    "p_strong": 0.0197,
+    "p_flawed": 0.9803
+   },
+   "separable": false
+  },
+  {
+   "pair_id": "t30-0",
+   "prompt_id": "t30",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t30-1",
+   "prompt_id": "t30",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t41-0",
+   "prompt_id": "t41",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t41-1",
+   "prompt_id": "t41",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t43-0",
+   "prompt_id": "t43",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t43-1",
+   "prompt_id": "t43",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t49-0",
+   "prompt_id": "t49",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9986,
+    "p_flawed": 0.0014
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t49-1",
+   "prompt_id": "t49",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t50-0",
+   "prompt_id": "t50",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9997,
+    "p_flawed": 0.0003
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t50-1",
+   "prompt_id": "t50",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9998,
+    "p_flawed": 0.0002
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t54-0",
+   "prompt_id": "t54",
+   "strong_first": {
+    "choice": "B",
+    "p_strong": 0.0012,
+    "p_flawed": 0.9988
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": false
+  },
+  {
+   "pair_id": "t54-1",
+   "prompt_id": "t54",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.6839,
+    "p_flawed": 0.3161
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9478,
+    "p_flawed": 0.0522
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t55-0",
+   "prompt_id": "t55",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t55-1",
+   "prompt_id": "t55",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9868,
+    "p_flawed": 0.0132
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t58-0",
+   "prompt_id": "t58",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t58-1",
+   "prompt_id": "t58",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t60-0",
+   "prompt_id": "t60",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9888,
+    "p_flawed": 0.0112
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t60-1",
+   "prompt_id": "t60",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9996,
+    "p_flawed": 0.0004
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t65-0",
+   "prompt_id": "t65",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t65-1",
+   "prompt_id": "t65",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t69-0",
+   "prompt_id": "t69",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t79-0",
+   "prompt_id": "t79",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9998,
+    "p_flawed": 0.0002
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t79-1",
+   "prompt_id": "t79",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9998,
+    "p_flawed": 0.0002
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t81-0",
+   "prompt_id": "t81",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9998,
+    "p_flawed": 0.0002
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t81-1",
+   "prompt_id": "t81",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t86-0",
+   "prompt_id": "t86",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t103-0",
+   "prompt_id": "t103",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t103-1",
+   "prompt_id": "t103",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t109-0",
+   "prompt_id": "t109",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t109-1",
+   "prompt_id": "t109",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t110-0",
+   "prompt_id": "t110",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9869,
+    "p_flawed": 0.0131
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t110-1",
+   "prompt_id": "t110",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9869,
+    "p_flawed": 0.0131
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t111-0",
+   "prompt_id": "t111",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9976,
+    "p_flawed": 0.0024
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.8794,
+    "p_flawed": 0.1206
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t111-1",
+   "prompt_id": "t111",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t123-0",
+   "prompt_id": "t123",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t123-1",
+   "prompt_id": "t123",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t126-0",
+   "prompt_id": "t126",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t126-1",
+   "prompt_id": "t126",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t131-0",
+   "prompt_id": "t131",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t131-1",
+   "prompt_id": "t131",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t133-0",
+   "prompt_id": "t133",
+   "strong_first": {
+    "choice": "B",
+    "p_strong": 0.0002,
+    "p_flawed": 0.9998
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9986,
+    "p_flawed": 0.0014
+   },
+   "separable": false
+  },
+  {
+   "pair_id": "t133-1",
+   "prompt_id": "t133",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9965,
+    "p_flawed": 0.0035
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t137-0",
+   "prompt_id": "t137",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t137-1",
+   "prompt_id": "t137",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t142-0",
+   "prompt_id": "t142",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t142-1",
+   "prompt_id": "t142",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9998,
+    "p_flawed": 0.0002
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t144-0",
+   "prompt_id": "t144",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t144-1",
+   "prompt_id": "t144",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t145-0",
+   "prompt_id": "t145",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9998,
+    "p_flawed": 0.0002
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t145-1",
+   "prompt_id": "t145",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t146-0",
+   "prompt_id": "t146",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t146-1",
+   "prompt_id": "t146",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t148-0",
+   "prompt_id": "t148",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t148-1",
+   "prompt_id": "t148",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t149-1",
+   "prompt_id": "t149",
+   "strong_first": {
+    "choice": "B",
+    "p_strong": 0.0769,
+    "p_flawed": 0.9231
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9976,
+    "p_flawed": 0.0024
+   },
+   "separable": false
+  },
+  {
+   "pair_id": "t154-0",
+   "prompt_id": "t154",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t154-1",
+   "prompt_id": "t154",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9998,
+    "p_flawed": 0.0002
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t160-0",
+   "prompt_id": "t160",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9877,
+    "p_flawed": 0.0123
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.999,
+    "p_flawed": 0.001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t160-1",
+   "prompt_id": "t160",
+   "strong_first": {
+    "choice": "B",
+    "p_strong": 0.0114,
+    "p_flawed": 0.9886
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": false
+  },
+  {
+   "pair_id": "t167-0",
+   "prompt_id": "t167",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t167-1",
+   "prompt_id": "t167",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t171-0",
+   "prompt_id": "t171",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9994,
+    "p_flawed": 0.0006
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t171-1",
+   "prompt_id": "t171",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9986,
+    "p_flawed": 0.0014
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t186-0",
+   "prompt_id": "t186",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t186-1",
+   "prompt_id": "t186",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t197-0",
+   "prompt_id": "t197",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t197-1",
+   "prompt_id": "t197",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t200-0",
+   "prompt_id": "t200",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t200-1",
+   "prompt_id": "t200",
+   "strong_first": {
+    "choice": "B",
+    "p_strong": 0.0256,
+    "p_flawed": 0.9744
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.7452,
+    "p_flawed": 0.2548
+   },
+   "separable": false
+  },
+  {
+   "pair_id": "t205-0",
+   "prompt_id": "t205",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9835,
+    "p_flawed": 0.0165
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t205-1",
+   "prompt_id": "t205",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9835,
+    "p_flawed": 0.0165
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t208-0",
+   "prompt_id": "t208",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t208-1",
+   "prompt_id": "t208",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t209-1",
+   "prompt_id": "t209",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "A",
+    "p_strong": 0.0026,
+    "p_flawed": 0.9974
+   },
+   "separable": false
+  },
+  {
+   "pair_id": "t213-0",
+   "prompt_id": "t213",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9994,
+    "p_flawed": 0.0006
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t213-1",
+   "prompt_id": "t213",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9986,
+    "p_flawed": 0.0014
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t217-0",
+   "prompt_id": "t217",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9903,
+    "p_flawed": 0.0097
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t217-1",
+   "prompt_id": "t217",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9992,
+    "p_flawed": 0.0008
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t221-0",
+   "prompt_id": "t221",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9983,
+    "p_flawed": 0.0017
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t221-1",
+   "prompt_id": "t221",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9941,
+    "p_flawed": 0.0059
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t226-0",
+   "prompt_id": "t226",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t226-1",
+   "prompt_id": "t226",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t234-0",
+   "prompt_id": "t234",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9998,
+    "p_flawed": 0.0002
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9994,
+    "p_flawed": 0.0006
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t234-1",
+   "prompt_id": "t234",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9998,
+    "p_flawed": 0.0002
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9995,
+    "p_flawed": 0.0005
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t244-0",
+   "prompt_id": "t244",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t244-1",
+   "prompt_id": "t244",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t247-0",
+   "prompt_id": "t247",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9778,
+    "p_flawed": 0.0222
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.999,
+    "p_flawed": 0.001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t247-1",
+   "prompt_id": "t247",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9778,
+    "p_flawed": 0.0222
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.999,
+    "p_flawed": 0.001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t248-0",
+   "prompt_id": "t248",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t248-1",
+   "prompt_id": "t248",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9997,
+    "p_flawed": 0.0003
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t250-0",
+   "prompt_id": "t250",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t250-1",
+   "prompt_id": "t250",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9996,
+    "p_flawed": 0.0004
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t251-0",
+   "prompt_id": "t251",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t251-1",
+   "prompt_id": "t251",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t263-0",
+   "prompt_id": "t263",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.6416,
+    "p_flawed": 0.3584
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t263-1",
+   "prompt_id": "t263",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9991,
+    "p_flawed": 0.0009
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t274-0",
+   "prompt_id": "t274",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t274-1",
+   "prompt_id": "t274",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t275-1",
+   "prompt_id": "t275",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9988,
+    "p_flawed": 0.0012
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t281-1",
+   "prompt_id": "t281",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9954,
+    "p_flawed": 0.0046
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t291-0",
+   "prompt_id": "t291",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t291-1",
+   "prompt_id": "t291",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t295-0",
+   "prompt_id": "t295",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t295-1",
+   "prompt_id": "t295",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t298-0",
+   "prompt_id": "t298",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t298-1",
+   "prompt_id": "t298",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t299-0",
+   "prompt_id": "t299",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t299-1",
+   "prompt_id": "t299",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t300-0",
+   "prompt_id": "t300",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9998,
+    "p_flawed": 0.0002
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t300-1",
+   "prompt_id": "t300",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9248,
+    "p_flawed": 0.0752
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9993,
+    "p_flawed": 0.0007
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t305-0",
+   "prompt_id": "t305",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t305-1",
+   "prompt_id": "t305",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t311-0",
+   "prompt_id": "t311",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9964,
+    "p_flawed": 0.0036
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t311-1",
+   "prompt_id": "t311",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9964,
+    "p_flawed": 0.0036
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t313-0",
+   "prompt_id": "t313",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9997,
+    "p_flawed": 0.0003
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t313-1",
+   "prompt_id": "t313",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9997,
+    "p_flawed": 0.0003
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t325-0",
+   "prompt_id": "t325",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t325-1",
+   "prompt_id": "t325",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t332-0",
+   "prompt_id": "t332",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t332-1",
+   "prompt_id": "t332",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t333-0",
+   "prompt_id": "t333",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t333-1",
+   "prompt_id": "t333",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t334-0",
+   "prompt_id": "t334",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t334-1",
+   "prompt_id": "t334",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t336-0",
+   "prompt_id": "t336",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.5302,
+    "p_flawed": 0.4698
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9971,
+    "p_flawed": 0.0029
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t336-1",
+   "prompt_id": "t336",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9979,
+    "p_flawed": 0.0021
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t343-0",
+   "prompt_id": "t343",
+   "strong_first": {
+    "choice": "B",
+    "p_strong": 0.0794,
+    "p_flawed": 0.9206
+   },
+   "strong_second": {
+    "choice": "A",
+    "p_strong": 0.0314,
+    "p_flawed": 0.9686
+   },
+   "separable": false
+  },
+  {
+   "pair_id": "t343-1",
+   "prompt_id": "t343",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t344-0",
+   "prompt_id": "t344",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.991,
+    "p_flawed": 0.009
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t344-1",
+   "prompt_id": "t344",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "A",
+    "p_strong": 0.0007,
+    "p_flawed": 0.9993
+   },
+   "separable": false
+  },
+  {
+   "pair_id": "t351-0",
+   "prompt_id": "t351",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t351-1",
+   "prompt_id": "t351",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t360-0",
+   "prompt_id": "t360",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9996,
+    "p_flawed": 0.0004
+   },
+   "strong_second": {
+    "choice": "A",
+    "p_strong": 0.0019,
+    "p_flawed": 0.9981
+   },
+   "separable": false
+  },
+  {
+   "pair_id": "t360-1",
+   "prompt_id": "t360",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t371-0",
+   "prompt_id": "t371",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t371-1",
+   "prompt_id": "t371",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t380-0",
+   "prompt_id": "t380",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9996,
+    "p_flawed": 0.0004
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t380-1",
+   "prompt_id": "t380",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9997,
+    "p_flawed": 0.0003
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t383-0",
+   "prompt_id": "t383",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9964,
+    "p_flawed": 0.0036
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t383-1",
+   "prompt_id": "t383",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 0.9964,
+    "p_flawed": 0.0036
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t391-0",
+   "prompt_id": "t391",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 0.9999,
+    "p_flawed": 0.0001
+   },
+   "separable": true
+  },
+  {
+   "pair_id": "t391-1",
+   "prompt_id": "t391",
+   "strong_first": {
+    "choice": "A",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "strong_second": {
+    "choice": "B",
+    "p_strong": 1.0,
+    "p_flawed": 0.0
+   },
+   "separable": true
+  }
+ ],
+ "name": "judge-4b-full-s0-confirm-cu134-cc1d",
+ "reading": "usable reference judge",
+ "order_averaged": {
+  "accuracy": 0.9798657718120806,
+  "ci": [
+   0.9536423841059603,
+   1.0
+  ],
+  "favoured_pairs": 146,
+  "favoured_prompts": 78,
+  "prompts": 78,
+  "mean_abs_gap": 0.9300308724832215,
+  "sd_gap": 0.28769706311851934,
+  "both_orders_strong": 139,
+  "reading": "confirmed"
+ }
+}

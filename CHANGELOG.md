@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.2.7] - 2026-10-08
+
+- Kev cu134 + causal-conv1d passes, 4.80 s median step; Windows torch.compile probe works
+- Updated experiment `cuda-graphs`
+- Added experiment `data-designer`
+- Updated experiment `kev-judge-finetune`
+
 ## [1.1.4.2.6] - 2026-10-08
 
 - atlas map regenerated (CI red since 1.1.4.1.5)

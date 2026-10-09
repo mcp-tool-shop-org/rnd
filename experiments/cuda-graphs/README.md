@@ -93,7 +93,14 @@ time, the median over seeds 42–44, with capture time included. Full numbers ar
     correction with device tensors;
   - so the gate measured an optimizer change it wasn't meant to. The outcome gate, which is what a result
     rests on, passes on all five forms.
-- **Not run this slot:** the Windows torch.compile/Triton probe (`triton_probe.py`). It needs its own short ask.
+- **Windows Triton probe, run 2026-10-08** (`results/2026-10-08-triton-probe.json`): **torch.compile works on
+  Windows** with the cu134 nightly (torch 2.16.0.dev20261008) and triton-windows 3.8.0.
+  - `default` compiles in 17.8 s, and its output matches eager within 6e-8. On this small head it's slower:
+    129 µs a call against 110 µs eager.
+  - `reduce-overhead` compiles, but missed the CUDA-graph fast path because the probe left outputs needing
+    grad. Its 2.2 ms a call is a probe flaw, not a measurement.
+  - **Verdict:** compile is viable on Windows. For aspire's heads, the hand-written `GraphedStep` stays the
+    speed path; it graphs the whole step, which compile on a forward alone doesn't.
 
 **Two rules from the result, for anyone graphing a training loop:**
 - **Hold the optimizer constant in an exact gate.** Compare graphed against eager *with the same capturable

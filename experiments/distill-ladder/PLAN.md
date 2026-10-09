@@ -57,6 +57,20 @@ out in advance.
   - Record the teacher's revision, licence (verified on its card) and ladder v1 score in the plan before
     training.
 
+## Step 0: property tests, before any card time (the Director's proposal, 2026-10-09)
+
+Randomized but replayable (Hypothesis): every failure prints its example and a reproduce blob. CI runs a fixed
+budget, and the Hypothesis database is never committed. **The exercise doesn't train until Step 0 passes.** A
+property failure is fixed and recorded here, never skipped.
+
+| Item | Owner | Status |
+|---|---|---|
+| 1. ladder generator: build never fails except in the skipped ways; near-miss distance is as declared; labels match execution for any seed; same seed gives identical output; every cell full with both labels; v1 pinned by sha256 | R&D | **passes** (rnd `tests/test_math_ladder_properties.py`, 200 examples per property). It was mutation-checked: an off-by-two near-miss and a lying executor were both caught. |
+| 2. dedupe and sealing (dedupe by normalised-source hash; the seal changes if any item changes) | ASPIRE | to do |
+| 3. sft.py label spans (single-turn exactness; the multi-turn guard raises) | ASPIRE | to do |
+| 4. scoring helpers (Wilson in [0,1] and containing the rate, matching offrig's 6/140 case; counts sum; reordering invariance) | ASPIRE | to do |
+| 5. pytest-randomly in aspire-si's CI (rnd stays on stdlib unittest) | ASPIRE | to do |
+
 ## Data
 
 - **Training items:** about 2,000 fresh ladder claims from `math-ladder/generate.py` with a **new seed**

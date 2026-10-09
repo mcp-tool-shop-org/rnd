@@ -16,3 +16,6 @@ experiments/*/results/*-serve.log
 build/
 dist/
 *.egg-info/
+
+# Hypothesis example database (property tests); never committed
+.hypothesis/

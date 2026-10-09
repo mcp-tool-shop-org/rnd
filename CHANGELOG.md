@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.14] - 2026-10-09
+
+- Step 0: ladder generator property tests (Hypothesis), CI wired
+- Updated experiment `distill-ladder`
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.13] - 2026-10-09
 
 - distill plan: student pinned (Qwen3-1.7B @ 70d244cc), aspire-si#72 approved

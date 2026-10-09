@@ -184,15 +184,14 @@ def cells() -> list[tuple[str, str, dict]]:
     return out
 
 
-def main() -> None:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--out", type=Path, required=True)
-    a = ap.parse_args()
+def generate(seed: int = SEED, cell_list=None, n_per_cell: int = N_PER_CELL) -> tuple[list[dict], int]:
+    """All rows for `seed` (and the count of naive-twin fallbacks). Pure: same seed, same rows. The property
+    tests call this with other seeds and cells; main() calls it with the pre-registered SEED."""
     rows, fallback = [], 0
-    for design, cell, k in cells():
-        rng = random.Random(f"{SEED}:{design}:{cell}")
+    for design, cell, k in (cell_list if cell_list is not None else cells()):
+        rng = random.Random(f"{seed}:{design}:{cell}")
         made = 0
-        while made < N_PER_CELL:
+        while made < n_per_cell:
             src, naive_src, x = build(k, rng)
             try:
                 true = run(src, x)
@@ -221,7 +220,19 @@ def main() -> None:
                 "ladder": {"design": design, "cell": cell, **k, "true": true},
             })
             made += 1
-    text = "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows)
+    return rows, fallback
+
+
+def to_text(rows: list[dict]) -> str:
+    return "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows)
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", type=Path, required=True)
+    a = ap.parse_args()
+    rows, fallback = generate()
+    text = to_text(rows)
     a.out.write_text(text, encoding="utf-8", newline="\n")
     print(f"{len(rows)} claims in {len(cells())} cells; sha256 {hashlib.sha256(text.encode()).hexdigest()[:16]}; "
           f"nearmiss=3 fell back to off-by-one {fallback} times (naive twin agreed with the truth)")

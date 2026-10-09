@@ -45,6 +45,9 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Install test dependencies (property tests)
+        run: python -m pip install hypothesis==6.131.9
+
       - name: Verify (tests, library check, index build, smoke)
         run: bash verify.sh
 

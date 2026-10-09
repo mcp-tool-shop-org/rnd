@@ -41,6 +41,51 @@ quality still needs measuring (below).
 - Models named "…-NPU2" on Hugging Face (FastFlowLM) are for **AMD XDNA2** NPUs, not Intel. They don't run
   here.
 
+## Raw engine rates (`mac_bench.py`, 2026-10-09)
+
+Plain OpenVINO graphs with no model behind them: square matmuls, and a 3×3 convolution. INT8 is marked with
+FakeQuantize, OpenVINO's way of asking for integer kernels. Results are in TOPS (10¹² operations a second).
+
+**One call** (`results/2026-10-09-mac.json`):
+
+| case | NPU fp16 | NPU int8 | iGPU fp16 | iGPU int8 | CPU |
+|---|---|---|---|---|---|
+| matmul 1024 | 0.82 | 0.82 | 0.93 | 0.92 | 0.31 |
+| matmul 2048 | 1.25 | 1.51 | 1.22 | 1.06 | 0.37 |
+| matmul 4096 | 1.87 | 2.38 | 1.70 | 1.71 | 0.37 |
+| conv 3×3, 64→64, 224² | 0.48 | 0.47 | 0.53 | 0.51 | 0.11 |
+
+**Eight matmuls chained in one graph,** so one transfer feeds 8× the arithmetic
+(`results/2026-10-09-mac-chain.json`):
+
+| case | NPU fp16 | NPU int8 | iGPU fp16 | iGPU int8 |
+|---|---|---|---|---|
+| 8 × 2048 | 2.89 | **5.47** | 2.32 | 2.14 |
+| 8 × 4096 | didn't compile in 100 s | **5.15** | 2.40 | 2.23 |
+
+**What it means:**
+- **A single call is mostly overhead,** from dispatch and moving data. At 1024 the NPU takes 2.6 ms in either
+  precision, where ~13 TOPS of pure compute would need ~0.2 ms. Chaining recovers it on the NPU, where INT8
+  roughly triples, but barely moves the iGPU.
+- **INT8 pays on the NPU for large matmuls,** about 2× FP16 once amortized, unlike the small encoders above.
+  On the iGPU, INT8 ≈ FP16: the INT8 markers seem to compile to the same FP16 kernel.
+- **Even amortized, about 5 INT8 TOPS** is roughly 40% of Intel's ~13 TOPS INT8 figure. Against the host CPU's
+  flat ~0.37, the honest comparison for offloading, the NPU is 5–15×. Against the 5090 it is ~100× smaller.
+  It's for the always-on small jobs, not big matmuls.
+- **The conv shape is too small** to fill anything. It shows only that this shape is overhead-bound, not
+  that the NPU is weak at convolutions.
+- **The FP16 chain at 4096 stalls the NPU compiler** (eight 64 MB FP32 constants). That case hung the first
+  chain run.
+
+**Caveats, from Kimi K3's review (2026-10-09):**
+- The chained numbers are **provisional.** Kimi ran the same chain bench on the NPU earlier the same night and
+  saw 8–11% run-to-run spread. Rerun on an idle NPU, reporting spread, before they count.
+- **The NPU is one exclusive device**, like the 5090: two sessions on it slow each other and spoil timings.
+  See the skill's rule.
+- **The float64 slip:** under NumPy 2 (NEP 50), `float32_array / np.sqrt(n)` is float64, and the float64
+  constant failed OpenVINO's MatMul type check. It was loud, not silent, so no receipt holds wrong numbers.
+  `mac_bench.py` now asserts every constant is float32.
+
 ## The tool: `npu_serve.py`
 
 A loopback service on port 11491 that answers Ollama's embedding API (`/api/embed`, `/api/tags`,
@@ -58,9 +103,15 @@ valid, or a forced `--rebuild`. It waits for the retrieval-quality measurement.
 
 ## Next: measure, then train it to fit the studio
 
-1. **A retrieval benchmark from our own gold.** Every grounded claim names its source file at a pinned
-   commit. Index those repos at those commits, query with each claim, and score recall@5 by file. Run it for
-   nomic-embed-text (today's default), bge-base and bge-small. Pre-register it before it runs.
+1. **A retrieval benchmark from our own gold,** pre-registered in `retrieval-benchmark.md`: recall@5 by file,
+   for every grounded claim, against role-os and offrig at their pinned commits.
+   - **Option C goes first: nomic itself on the NPU.** nomic v1.5 ships ONNX files, so OpenVINO runs it
+     with no remote code: **31 ms per item on the NPU, against 122 ms on the CPU**, cosine 1.0 (minimum and
+     mean) against the same ONNX on the CPU (revision `e9b6763`).
+   - **It still has to match Ollama's GGUF nomic** at a minimum cosine ≥ 0.995 before it counts as a device
+     change with no reindex. That check loads the CPU, so it runs after the overnight calibration.
+   - The remote modeling code (nomic-bert-2048 @ `7710840`) was read anyway. Its only risky call,
+     `torch.load`, is reached only for `.bin` weights, and this revision ships safetensors.
 2. **Fine-tune the embedder on studio pairs:** claim to evidence chunk, and README sentence to the code it
    describes, from the gold tune splits only. Train on the 5090 (a short grant), export to OpenVINO, and serve
    from the NPU. It must beat its base model on the benchmark's held-out half to replace it.

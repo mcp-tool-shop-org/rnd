@@ -15,7 +15,8 @@ CPU-only Ollama at 11490, until this reports and the Publisher reviews a design 
 **C goes first if it's feasible:** same model, faster device, no change of vector space. Its Hugging Face
 version needs `trust_remote_code` (the custom NomicBert class). So pin the revision, read that code, then
 export. C counts as "the same model" only if its vectors match Ollama's GGUF nomic with cosine ≥ 0.995 on the
-benchmark's chunks. If not, C is a different model (say, 0.98 because of GGUF quantization) and is scored
+benchmark's chunks. That bound applies to the **minimum** over every chunk and query, not the mean, and both
+are reported. If not, C is a different model (say, 0.98 because of GGUF quantization) and is scored
 like B.
 
 **Prefixes, so the models are compared fairly:**
@@ -55,6 +56,10 @@ like B.
 - Anything else, or a CI too wide to decide: **A stays.** That's reported, not argued around.
 - 60 facts is small. If the CI is wider than ±0.10, I'll widen the query set from the PR gold's grounded
   items before deciding, and record that here before those queries run.
+
+**When it runs:** the bge and NPU legs run on the Intel side at any time. The nomic leg (options A and C's
+match check) loads the CPU through Ollama 11490, so it runs after the overnight calibration chain, or only after
+telling the Publisher, so the calibration's timings stay honest.
 
 ## What the design note must answer, whatever the result (the Publisher's points)
 

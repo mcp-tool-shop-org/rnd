@@ -1,0 +1,68 @@
+{
+ "openvino": "2026.4.1",
+ "note": "one bounded process per case (timeout 100 s), 2026-10-09 01:26-01:30. Contended: Kimi K3 ran the same chain bench on the NPU earlier the same night, with 8-11% run-to-run spread on the NPU. Rerun on an idle NPU, with spread, before treating these as the receipt.",
+ "rows": [
+  {
+   "case": "chain8x2048",
+   "precision": "fp16",
+   "device": "NPU",
+   "compile_s": 2.94,
+   "ms_per_call": 47.516,
+   "tops": 2.892
+  },
+  {
+   "case": "chain8x2048",
+   "precision": "fp16",
+   "device": "GPU.0",
+   "compile_s": 1.32,
+   "ms_per_call": 59.325,
+   "tops": 2.317
+  },
+  {
+   "case": "chain8x2048",
+   "precision": "int8",
+   "device": "NPU",
+   "compile_s": 2.28,
+   "ms_per_call": 25.109,
+   "tops": 5.474
+  },
+  {
+   "case": "chain8x2048",
+   "precision": "int8",
+   "device": "GPU.0",
+   "compile_s": 16.23,
+   "ms_per_call": 64.369,
+   "tops": 2.135
+  },
+  {
+   "case": "chain8x4096",
+   "precision": "fp16",
+   "device": "NPU",
+   "error": "did not compile within 100 s (8 x 4096^2 fp32 constants, 512 MB); the case that stalled the first chain run"
+  },
+  {
+   "case": "chain8x4096",
+   "precision": "fp16",
+   "device": "GPU.0",
+   "compile_s": 2.38,
+   "ms_per_call": 458.581,
+   "tops": 2.398
+  },
+  {
+   "case": "chain8x4096",
+   "precision": "int8",
+   "device": "NPU",
+   "compile_s": 41.81,
+   "ms_per_call": 213.519,
+   "tops": 5.149
+  },
+  {
+   "case": "chain8x4096",
+   "precision": "int8",
+   "device": "GPU.0",
+   "compile_s": 48.68,
+   "ms_per_call": 494.218,
+   "tops": 2.225
+  }
+ ]
+}

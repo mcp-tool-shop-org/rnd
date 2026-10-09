@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.3] - 2026-10-09
+
+- NPU raw engine rates; nomic on the NPU; Kimi K3 review folded in
+- Added experiment `data-designer`
+- Updated experiment `npu-probe`
+
 ## [1.1.4.3.2] - 2026-10-09
 
 - NPU retrieval benchmark pre-registered (nomic vs bge vs nomic-on-NPU)

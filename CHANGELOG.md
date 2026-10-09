@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.17] - 2026-10-09
+
+- distill plan: Step 0 status
+- Updated experiment `distill-ladder`
+
 ## [1.1.4.3.16] - 2026-10-09
 
 - Step 0 complete in rnd: dedupe and sealing, scoring properties, Wilson edge fix (ASPIRE, PR #1)

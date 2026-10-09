@@ -66,10 +66,10 @@ property failure is fixed and recorded here, never skipped.
 | Item | Owner | Status |
 |---|---|---|
 | 1. ladder generator: build never fails except in the skipped ways; near-miss distance is as declared; labels match execution for any seed; same seed gives identical output; every cell full with both labels; v1 pinned by sha256 | R&D | **passes** (rnd `tests/test_math_ladder_properties.py`, 200 examples per property). It was mutation-checked: an off-by-two near-miss and a lying executor were both caught. |
-| 2. dedupe and sealing (dedupe by normalised-source hash; the seal changes if any item changes) | ASPIRE | to do |
-| 3. sft.py label spans (single-turn exactness; the multi-turn guard raises) | ASPIRE | to do |
-| 4. scoring helpers (Wilson in [0,1] and containing the rate, matching offrig's 6/140 case; counts sum; reordering invariance) | ASPIRE | to do |
-| 5. pytest-randomly in aspire-si's CI (rnd stays on stdlib unittest) | ASPIRE | to do |
+| 2. dedupe and sealing (dedupe by normalised-source hash; the seal changes if any item changes) | ASPIRE | **passes** (rnd PR #1, `experiments/distill-ladder/dedupe.py`) |
+| 3. sft.py label spans (single-turn exactness; the multi-turn guard raises) | ASPIRE | written (aspire-si #73), awaiting merge |
+| 4. scoring helpers (Wilson in [0,1] and containing the rate, matching offrig's 6/140 case; counts sum; reordering invariance) | ASPIRE | **passes, and found a bug:** `wilson(0, n)` gave a lower bound of ~5.6e-17, not 0, from float rounding. Fixed to exact at the edges (rnd PR #1). offrig's Rust version was flagged to the Publisher. |
+| 5. pytest-randomly in aspire-si's CI (rnd stays on stdlib unittest) | ASPIRE | written (aspire-si #73; the suite passed under 3 shuffled seeds), awaiting merge |
 
 ## Data
 

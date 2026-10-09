@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.11] - 2026-10-09
+
+- distillation exercise plan v2: ASPIRE's training section, B-matched arm
+- Added experiment `data-designer`
+- Updated experiment `distill-ladder`
+
 ## [1.1.4.3.10] - 2026-10-09
 
 - distillation exercise plan, draft v1 (1.7b student on the math ladder)

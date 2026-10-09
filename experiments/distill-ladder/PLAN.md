@@ -53,6 +53,12 @@ out in advance.
     - Marked **post-hoc**: they joined the pool after tonight's calibration results were seen.
   - **Excluded:** llama3.1:8b (Llama licence) and Nemotron 3.5 Lightning (NVIDIA licence). The teacher rule
     is Apache-only.
+  - **Hard-tier note (added 2026-10-09 after tonight's calibration curves were seen, so reported, not a
+    gate):** beside the choice, report each teacher candidate's false-accept rate on the gold's T3 hard
+    reasoning tier. The student copies the teacher's errors there. Tonight qwen3:14b was fooled on 8 of 35
+    false T3 claims (FA 0.23, CI [0.12, 0.39]) against qwen3:8b's 0.11. A candidate whose T3 FA upper bound
+    is above 0.25 is flagged in the plan before training, and the reason for any choice over it is written
+    down.
   - Ladder v1 is a fair way to pick, because it isn't the student's test.
   - Record the teacher's revision, licence (verified on its card) and ladder v1 score in the plan before
     training.

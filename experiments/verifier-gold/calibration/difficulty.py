@@ -15,7 +15,8 @@ Second axis: evidence length (total context characters), in quartiles within eac
 
 A verdict is correct when: supported → supported; unsupported → unsupported; cannot_tell → unsupported or
 cannot_tell (offrig#44's rule: only accepting it is wrong). Reported per model × check type × tier: n,
-accuracy, false accepts (on not-supported gold), abstains (cannot_tell on decided gold). Falloff = the first
+accuracy, false accepts (on not-supported gold; the costly error for a verifier), false rejects (a true claim
+judged unsupported), and abstains (cannot_tell on decided gold), kept apart rather than merged into "wrong". Falloff = the first
 tier where accuracy drops below 0.80 or the false-accept rate exceeds 0.10. Every cell shows n and a
 Wilson 95% interval, and cells under 30 claims are marked tentative. Descriptive only: the default
 rule (calibration README) is unchanged.
@@ -97,7 +98,7 @@ def report(dirs: list[str]) -> None:
     for d in dirs:
         lines = [json.loads(x) for x in (Path(d) / "verdicts.jsonl").read_text(encoding="utf-8").splitlines() if x]
         model = json.loads((Path(d) / "manifest.json").read_text(encoding="utf-8"))["model"]
-        cells = defaultdict(lambda: [0, 0, 0, 0, 0])  # n, right, false-accept, not-supported n, abstain
+        cells = defaultdict(lambda: [0, 0, 0, 0, 0, 0, 0])  # n, right, false-accept, not-supported n, abstain, false-reject, supported n
         for ln in lines:
             if ln.get("status") == "unusable" or ln["claim_id"] not in t:
                 continue
@@ -110,13 +111,17 @@ def report(dirs: list[str]) -> None:
                 if g != "supported":
                     c[3] += 1
                     c[2] += v == "supported"
+                else:
+                    c[6] += 1
+                    c[5] += v == "unsupported"  # rejected a true claim: the other kind of wrong
                 c[4] += v == "cannot_tell" and g != "cannot_tell"
-        for (ct, axis, val), (n, right, fa, neg, ab) in sorted(cells.items()):
+        for (ct, axis, val), (n, right, fa, neg, ab, fr, pos) in sorted(cells.items()):
             alo, ahi = wilson(right, n)
             flo, fhi = wilson(fa, neg)
             mark = "  <30, tentative" if n < SMALL else ""
             print(f"{model:20} {ct:9} {axis:8} {val:3} n={n:3} acc={right / n:.2f} [{alo:.2f},{ahi:.2f}] "
-                  f"FA={fa}/{neg} ({fa / neg if neg else 0:.2f} [{flo:.2f},{fhi:.2f}]) abstain={ab}{mark}")
+                  f"FA={fa}/{neg} ({fa / neg if neg else 0:.2f} [{flo:.2f},{fhi:.2f}]) "
+                  f"false-reject={fr}/{pos} abstain={ab}{mark}")
 
 
 if __name__ == "__main__":

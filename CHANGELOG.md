@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.19] - 2026-10-09
+
+- difficulty report splits false accepts from false rejects; teacher T3 note
+- Updated experiment `distill-ladder`
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.18] - 2026-10-09
 
 - distill plan: Step 0 complete

@@ -97,7 +97,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "experiments",
-      "qualifyingSourceCommits": 5,
+      "qualifyingSourceCommits": 19,
       "rebaseline": null
     },
     {
@@ -129,10 +129,10 @@
       },
       "cohesion": null,
       "cohesionDropped": false,
-      "confidence": "low",
+      "confidence": "full",
       "highWater": null,
       "name": "mcptoolshop_rnd",
-      "qualifyingSourceCommits": 0,
+      "qualifyingSourceCommits": 49,
       "rebaseline": null
     },
     {
@@ -147,10 +147,10 @@
       },
       "cohesion": null,
       "cohesionDropped": false,
-      "confidence": "low",
+      "confidence": "full",
       "highWater": null,
       "name": "rnd",
-      "qualifyingSourceCommits": 27,
+      "qualifyingSourceCommits": 31,
       "rebaseline": null
     },
     {
@@ -182,7 +182,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "site",
-      "qualifyingSourceCommits": 0,
+      "qualifyingSourceCommits": 1,
       "rebaseline": null
     },
     {
@@ -193,12 +193,12 @@
         "importsAndCoChanges": [],
         "importsOnly": []
       },
-      "cohesion": null,
+      "cohesion": 0,
       "cohesionDropped": false,
       "confidence": "low",
       "highWater": null,
       "name": "tests",
-      "qualifyingSourceCommits": 4,
+      "qualifyingSourceCommits": 8,
       "rebaseline": null
     }
   ],
@@ -211,8 +211,8 @@
         "path": ".claude/CLAUDE.md"
       },
       {
-        "commits": 1,
-        "lines": 9,
+        "commits": 2,
+        "lines": 15,
         "path": ".coveragerc"
       },
       {
@@ -221,8 +221,8 @@
         "path": ".gitattributes"
       },
       {
-        "commits": 3,
-        "lines": 91,
+        "commits": 4,
+        "lines": 95,
         "path": ".github/workflows/ci.yml"
       },
       {
@@ -231,8 +231,8 @@
         "path": ".github/workflows/pages.yml"
       },
       {
-        "commits": 1,
-        "lines": 51,
+        "commits": 2,
+        "lines": 53,
         "path": ".github/workflows/release.yml"
       },
       {
@@ -241,8 +241,8 @@
         "path": ".gitignore"
       },
       {
-        "commits": 28,
-        "lines": 191,
+        "commits": 77,
+        "lines": 480,
         "path": "CHANGELOG.md"
       },
       {
@@ -251,43 +251,43 @@
         "path": "LICENSE"
       },
       {
-        "commits": 3,
-        "lines": 146,
+        "commits": 4,
+        "lines": 153,
         "path": "README.es.md"
       },
       {
-        "commits": 3,
-        "lines": 146,
+        "commits": 4,
+        "lines": 153,
         "path": "README.fr.md"
       },
       {
-        "commits": 3,
-        "lines": 146,
+        "commits": 4,
+        "lines": 153,
         "path": "README.hi.md"
       },
       {
-        "commits": 3,
-        "lines": 146,
+        "commits": 4,
+        "lines": 153,
         "path": "README.it.md"
       },
       {
-        "commits": 3,
-        "lines": 147,
+        "commits": 4,
+        "lines": 154,
         "path": "README.ja.md"
       },
       {
-        "commits": 5,
-        "lines": 257,
+        "commits": 7,
+        "lines": 294,
         "path": "README.md"
       },
       {
-        "commits": 3,
-        "lines": 146,
+        "commits": 4,
+        "lines": 153,
         "path": "README.pt-BR.md"
       },
       {
-        "commits": 3,
-        "lines": 147,
+        "commits": 4,
+        "lines": 154,
         "path": "README.zh.md"
       },
       {
@@ -301,33 +301,33 @@
         "path": "SECURITY.md"
       },
       {
-        "commits": 3,
-        "lines": 96,
+        "commits": 4,
+        "lines": 98,
         "path": "SHIP_GATE.md"
       },
       {
-        "commits": 7,
-        "lines": 173,
+        "commits": 8,
+        "lines": 238,
         "path": "atlas/README.md"
       },
       {
-        "commits": 1,
-        "lines": 46,
+        "commits": 2,
+        "lines": 50,
         "path": "atlas/boundaries.yaml"
       },
       {
-        "commits": 7,
-        "lines": 464,
+        "commits": 8,
+        "lines": 768,
         "path": "atlas/page.json"
       },
       {
-        "commits": 7,
-        "lines": 1327,
+        "commits": 8,
+        "lines": 1585,
         "path": "atlas/statistics.json"
       },
       {
-        "commits": 7,
-        "lines": 1796,
+        "commits": 8,
+        "lines": 2823,
         "path": "atlas/structure.json"
       },
       {
@@ -341,8 +341,8 @@
         "path": "catalogs/nvidia-skills/catalog.json"
       },
       {
-        "commits": 1,
-        "lines": 79,
+        "commits": 2,
+        "lines": 451,
         "path": "catalogs/nvidia-skills/review.json"
       },
       {
@@ -354,6 +354,41 @@
         "commits": 1,
         "lines": 12,
         "path": "codecov.yml"
+      },
+      {
+        "commits": 1,
+        "lines": 151,
+        "path": "datapacks/hymn-arrangements/datapack.json"
+      },
+      {
+        "commits": 1,
+        "lines": 6,
+        "path": "datapacks/hymn-arrangements/hosted.json"
+      },
+      {
+        "commits": 1,
+        "lines": 38,
+        "path": "datapacks/hymn-arrangements/spec.json"
+      },
+      {
+        "commits": 1,
+        "lines": 71,
+        "path": "datapacks/natural-errors/CARD.md"
+      },
+      {
+        "commits": 1,
+        "lines": 170,
+        "path": "datapacks/natural-errors/datapack.json"
+      },
+      {
+        "commits": 1,
+        "lines": 6,
+        "path": "datapacks/natural-errors/hosted.json"
+      },
+      {
+        "commits": 1,
+        "lines": 104,
+        "path": "datapacks/natural-errors/spec.json"
       },
       {
         "commits": 1,
@@ -406,8 +441,8 @@
         "path": "entries/2026/2026-10-07-cuda-compute-fabric-transport.md"
       },
       {
-        "commits": 1,
-        "lines": 38,
+        "commits": 3,
+        "lines": 46,
         "path": "entries/2026/2026-10-07-cuda-graphs.md"
       },
       {
@@ -436,8 +471,8 @@
         "path": "entries/2026/2026-10-07-decision-si-jam-sessions-cuda-13-4.md"
       },
       {
-        "commits": 1,
-        "lines": 241,
+        "commits": 4,
+        "lines": 285,
         "path": "entries/2026/2026-10-07-expressive-timing-and-emphasis-for-a-sung-hymn-performance-r.md"
       },
       {
@@ -471,8 +506,8 @@
         "path": "entries/2026/2026-10-07-nvidia-rubin-architecture.md"
       },
       {
-        "commits": 9,
-        "lines": 291,
+        "commits": 10,
+        "lines": 292,
         "path": "entries/2026/2026-10-07-open-jev-style-decision-models.md"
       },
       {
@@ -506,8 +541,8 @@
         "path": "entries/2026/2026-10-07-robot-rig-cuda-stack.md"
       },
       {
-        "commits": 4,
-        "lines": 207,
+        "commits": 6,
+        "lines": 215,
         "path": "entries/2026/2026-10-07-sft-before-aspire-weakens-critic.md"
       },
       {
@@ -542,18 +577,193 @@
       },
       {
         "commits": 1,
+        "lines": 48,
+        "path": "entries/2026/2026-10-08-aligner-misdates-cause-sung-dropouts.md"
+      },
+      {
+        "commits": 1,
+        "lines": 240,
+        "path": "entries/2026/2026-10-08-dataset-recipes-for-critic-jury-roles-designing-roles-by-dat.md"
+      },
+      {
+        "commits": 7,
+        "lines": 286,
+        "path": "entries/2026/2026-10-08-gated-model-scouting-what-to-request-for-the-critic-audio-an.md"
+      },
+      {
+        "commits": 2,
+        "lines": 68,
+        "path": "entries/2026/2026-10-08-llm-piano-arrangement-from-a-generated-brief.md"
+      },
+      {
+        "commits": 5,
+        "lines": 157,
+        "path": "entries/2026/2026-10-08-more-prompts-raise-the-aspire-critic-s-accuracy-but-not-its-.md"
+      },
+      {
+        "commits": 1,
+        "lines": 43,
+        "path": "entries/2026/2026-10-08-pages-cache-stitches-replaced-media.md"
+      },
+      {
+        "commits": 1,
+        "lines": 43,
+        "path": "entries/2026/2026-10-08-phrase-end-hold-removes-the-stutter.md"
+      },
+      {
+        "commits": 3,
+        "lines": 241,
+        "path": "entries/2026/2026-10-08-three-follow-up-studies-for-critic-recipes-hard-pairs-two-pl.md"
+      },
+      {
+        "commits": 1,
+        "lines": 42,
+        "path": "entries/2026/2026-10-08-translategemma-failure-modes-on-readme-tables.md"
+      },
+      {
+        "commits": 1,
+        "lines": 68,
+        "path": "entries/2026/2026-10-08-voice-gate-pyannote-segmentation-on-sung-vocals.md"
+      },
+      {
+        "commits": 1,
         "lines": 30,
         "path": "entries/_template.md"
       },
       {
+        "commits": 3,
+        "lines": 139,
+        "path": "experiments/cloud-cu134/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 23,
+        "path": "experiments/cloud-cu134/compat_probe.py"
+      },
+      {
+        "commits": 2,
+        "lines": 211,
+        "path": "experiments/cloud-cu134/cu134_probe.py"
+      },
+      {
+        "commits": 1,
+        "lines": 13,
+        "path": "experiments/cloud-cu134/lora_ref.py"
+      },
+      {
+        "commits": 1,
+        "lines": 29,
+        "path": "experiments/cloud-cu134/results/2026-10-08-a100-compat.log"
+      },
+      {
+        "commits": 1,
+        "lines": 58,
+        "path": "experiments/cloud-cu134/results/2026-10-08-a100-freeze.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 10,
+        "path": "experiments/cloud-cu134/results/2026-10-08-a100-probe.log"
+      },
+      {
+        "commits": 1,
+        "lines": 29,
+        "path": "experiments/cloud-cu134/results/2026-10-08-b200-compat.log"
+      },
+      {
+        "commits": 1,
+        "lines": 12,
+        "path": "experiments/cloud-cu134/setup_and_probe.sh"
+      },
+      {
+        "commits": 1,
+        "lines": 22,
+        "path": "experiments/cloud-cu134/setup_compat.sh"
+      },
+      {
         "commits": 4,
-        "lines": 121,
+        "lines": 120,
+        "path": "experiments/cuda-graphs/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 193,
+        "path": "experiments/cuda-graphs/bench.py"
+      },
+      {
+        "commits": 2,
+        "lines": 278,
+        "path": "experiments/cuda-graphs/graphed_heads.py"
+      },
+      {
+        "commits": 1,
+        "lines": 171,
+        "path": "experiments/cuda-graphs/results/2026-10-08-bench-gpu-util.csv"
+      },
+      {
+        "commits": 1,
+        "lines": 18,
+        "path": "experiments/cuda-graphs/results/2026-10-08-bench.log"
+      },
+      {
+        "commits": 1,
+        "lines": 4382,
+        "path": "experiments/cuda-graphs/results/2026-10-08-llama.json"
+      },
+      {
+        "commits": 2,
+        "lines": 114,
+        "path": "experiments/cuda-graphs/test_graphed_heads.py"
+      },
+      {
+        "commits": 1,
+        "lines": 55,
+        "path": "experiments/cuda-graphs/triton_probe.py"
+      },
+      {
+        "commits": 5,
+        "lines": 143,
         "path": "experiments/kev-judge-finetune/README.md"
       },
       {
         "commits": 1,
         "lines": 88,
         "path": "experiments/kev-judge-finetune/build_rows.py"
+      },
+      {
+        "commits": 7,
+        "lines": 159,
+        "path": "experiments/kev-judge-finetune/env/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 13,
+        "path": "experiments/kev-judge-finetune/env/apply_fla_1330.sh"
+      },
+      {
+        "commits": 2,
+        "lines": 91,
+        "path": "experiments/kev-judge-finetune/env/requirements-cu132.lock"
+      },
+      {
+        "commits": 3,
+        "lines": 96,
+        "path": "experiments/kev-judge-finetune/env/requirements-cu134.lock"
+      },
+      {
+        "commits": 1,
+        "lines": 1177,
+        "path": "experiments/kev-judge-finetune/env/results/2026-10-08-cu134-gpu-util.csv"
+      },
+      {
+        "commits": 1,
+        "lines": 436,
+        "path": "experiments/kev-judge-finetune/env/results/2026-10-08-cu134-rerun-gpu-util.csv"
+      },
+      {
+        "commits": 1,
+        "lines": 2402,
+        "path": "experiments/kev-judge-finetune/results/judge-4b-full-s0-confirm-cu134.json"
       },
       {
         "commits": 1,
@@ -567,6 +777,11 @@
       },
       {
         "commits": 1,
+        "lines": 779,
+        "path": "experiments/kev-judge-finetune/results/judge-4b-full-s0-second.json"
+      },
+      {
+        "commits": 1,
         "lines": 2400,
         "path": "experiments/kev-judge-finetune/results/judge-4b-full-s1-confirm.json"
       },
@@ -574,6 +789,11 @@
         "commits": 1,
         "lines": 2052,
         "path": "experiments/kev-judge-finetune/results/judge-4b-full-s1-judge.json"
+      },
+      {
+        "commits": 1,
+        "lines": 779,
+        "path": "experiments/kev-judge-finetune/results/judge-4b-full-s1-second.json"
       },
       {
         "commits": 1,
@@ -587,13 +807,28 @@
       },
       {
         "commits": 1,
+        "lines": 779,
+        "path": "experiments/kev-judge-finetune/results/judge-4b-full-s2-second.json"
+      },
+      {
+        "commits": 1,
+        "lines": 735,
+        "path": "experiments/kev-judge-finetune/results/kev-4b-frozen-second.json"
+      },
+      {
+        "commits": 1,
         "lines": 48,
         "path": "experiments/kev-judge-finetune/results/summary.json"
       },
       {
-        "commits": 1,
-        "lines": 30,
+        "commits": 3,
+        "lines": 36,
         "path": "experiments/kev-judge-finetune/score.sh"
+      },
+      {
+        "commits": 2,
+        "lines": 36,
+        "path": "experiments/kev-judge-finetune/score_set.sh"
       },
       {
         "commits": 1,
@@ -606,9 +841,109 @@
         "path": "experiments/kev-judge-finetune/summarise.py"
       },
       {
-        "commits": 2,
-        "lines": 39,
+        "commits": 4,
+        "lines": 45,
         "path": "experiments/kev-judge-finetune/train.sh"
+      },
+      {
+        "commits": 1,
+        "lines": 204,
+        "path": "experiments/natural-errors/PREREG-tuning-grid.md"
+      },
+      {
+        "commits": 5,
+        "lines": 238,
+        "path": "experiments/natural-errors/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 79,
+        "path": "experiments/natural-errors/baselines_p1.py"
+      },
+      {
+        "commits": 5,
+        "lines": 596,
+        "path": "experiments/natural-errors/build.py"
+      },
+      {
+        "commits": 1,
+        "lines": 110,
+        "path": "experiments/natural-errors/build_corrections.py"
+      },
+      {
+        "commits": 1,
+        "lines": 578,
+        "path": "experiments/natural-errors/data/answers.json"
+      },
+      {
+        "commits": 1,
+        "lines": 118,
+        "path": "experiments/natural-errors/data/baselines_p1.json"
+      },
+      {
+        "commits": 1,
+        "lines": 656,
+        "path": "experiments/natural-errors/data/corrections.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1543,
+        "path": "experiments/natural-errors/data/gold.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1505,
+        "path": "experiments/natural-errors/data/labels_claude.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1267,
+        "path": "experiments/natural-errors/data/labels_sonnet.json"
+      },
+      {
+        "commits": 1,
+        "lines": 467,
+        "path": "experiments/natural-errors/data/questions.json"
+      },
+      {
+        "commits": 1,
+        "lines": 4739,
+        "path": "experiments/natural-errors/data/review_items.json"
+      },
+      {
+        "commits": 1,
+        "lines": 4914,
+        "path": "experiments/natural-errors/data/screen.json"
+      },
+      {
+        "commits": 1,
+        "lines": 386,
+        "path": "experiments/natural-errors/data/screen_ctx_pilot.json"
+      },
+      {
+        "commits": 2,
+        "lines": 5575,
+        "path": "experiments/natural-errors/data/screen_extra.json"
+      },
+      {
+        "commits": 1,
+        "lines": 954,
+        "path": "experiments/natural-errors/data/selection.json"
+      },
+      {
+        "commits": 1,
+        "lines": 387,
+        "path": "experiments/natural-errors/data/split.json"
+      },
+      {
+        "commits": 1,
+        "lines": 183,
+        "path": "experiments/natural-errors/make_split.py"
+      },
+      {
+        "commits": 1,
+        "lines": 263,
+        "path": "experiments/natural-errors/review.html"
       },
       {
         "commits": 3,
@@ -636,8 +971,8 @@
         "path": "experiments/openjev-vs-jev/compare_all.py"
       },
       {
-        "commits": 1,
-        "lines": 34,
+        "commits": 2,
+        "lines": 36,
         "path": "experiments/openjev-vs-jev/kev_run.sh"
       },
       {
@@ -711,6 +1046,201 @@
         "path": "experiments/openjev-vs-jev/run_openjev.py"
       },
       {
+        "commits": 5,
+        "lines": 139,
+        "path": "experiments/verifier-gold/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 82,
+        "path": "experiments/verifier-gold/blind_pass2_docs_input.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/verifier-gold/blind_pass2_docs_key.json"
+      },
+      {
+        "commits": 1,
+        "lines": 18,
+        "path": "experiments/verifier-gold/blind_pass2_docs_output.json"
+      },
+      {
+        "commits": 1,
+        "lines": 322,
+        "path": "experiments/verifier-gold/blind_pass2_input.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/verifier-gold/blind_pass2_key.json"
+      },
+      {
+        "commits": 1,
+        "lines": 237,
+        "path": "experiments/verifier-gold/blind_pass2_offrig_input.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/verifier-gold/blind_pass2_offrig_key.json"
+      },
+      {
+        "commits": 1,
+        "lines": 237,
+        "path": "experiments/verifier-gold/blind_pass2_offrig_output.json"
+      },
+      {
+        "commits": 1,
+        "lines": 322,
+        "path": "experiments/verifier-gold/blind_pass2_output.json"
+      },
+      {
+        "commits": 2,
+        "lines": 105,
+        "path": "experiments/verifier-gold/build_grounded.py"
+      },
+      {
+        "commits": 1,
+        "lines": 1458,
+        "path": "experiments/verifier-gold/diffs/blind_in_1.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1458,
+        "path": "experiments/verifier-gold/diffs/blind_in_2.json"
+      },
+      {
+        "commits": 1,
+        "lines": 210,
+        "path": "experiments/verifier-gold/diffs/blind_key.json"
+      },
+      {
+        "commits": 1,
+        "lines": 522,
+        "path": "experiments/verifier-gold/diffs/blind_out_1.json"
+      },
+      {
+        "commits": 1,
+        "lines": 522,
+        "path": "experiments/verifier-gold/diffs/blind_out_2.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/verifier-gold/diffs/disagreements.json"
+      },
+      {
+        "commits": 1,
+        "lines": 594,
+        "path": "experiments/verifier-gold/diffs/hard_blind_in.json"
+      },
+      {
+        "commits": 1,
+        "lines": 40,
+        "path": "experiments/verifier-gold/diffs/hard_blind_key.json"
+      },
+      {
+        "commits": 1,
+        "lines": 192,
+        "path": "experiments/verifier-gold/diffs/hard_blind_out_A.json"
+      },
+      {
+        "commits": 1,
+        "lines": 192,
+        "path": "experiments/verifier-gold/diffs/hard_blind_out_B.json"
+      },
+      {
+        "commits": 1,
+        "lines": 208,
+        "path": "experiments/verifier-gold/diffs/source-publisher-f3f3f66.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 38,
+        "path": "experiments/verifier-gold/diffs/source-publisher-hard.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 113,
+        "path": "experiments/verifier-gold/facts_offrig.py"
+      },
+      {
+        "commits": 1,
+        "lines": 168,
+        "path": "experiments/verifier-gold/facts_roleos.py"
+      },
+      {
+        "commits": 1,
+        "lines": 58,
+        "path": "experiments/verifier-gold/facts_roleos_docs.py"
+      },
+      {
+        "commits": 2,
+        "lines": 127,
+        "path": "experiments/verifier-gold/grounded.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 472,
+        "path": "experiments/verifier-gold/prs/blind_in_1.json"
+      },
+      {
+        "commits": 1,
+        "lines": 472,
+        "path": "experiments/verifier-gold/prs/blind_in_2.json"
+      },
+      {
+        "commits": 1,
+        "lines": 467,
+        "path": "experiments/verifier-gold/prs/blind_in_3.json"
+      },
+      {
+        "commits": 1,
+        "lines": 467,
+        "path": "experiments/verifier-gold/prs/blind_in_4.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/verifier-gold/prs/blind_key.json"
+      },
+      {
+        "commits": 1,
+        "lines": 472,
+        "path": "experiments/verifier-gold/prs/blind_out_1.json"
+      },
+      {
+        "commits": 1,
+        "lines": 472,
+        "path": "experiments/verifier-gold/prs/blind_out_2.json"
+      },
+      {
+        "commits": 1,
+        "lines": 467,
+        "path": "experiments/verifier-gold/prs/blind_out_3.json"
+      },
+      {
+        "commits": 1,
+        "lines": 467,
+        "path": "experiments/verifier-gold/prs/blind_out_4.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/verifier-gold/prs/disagreements.json"
+      },
+      {
+        "commits": 1,
+        "lines": 373,
+        "path": "experiments/verifier-gold/prs/grounded-prs.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 374,
+        "path": "experiments/verifier-gold/prs/source-publisher-5894788.jsonl"
+      },
+      {
         "commits": 1,
         "lines": 31,
         "path": "instruments/aspire-sft-experiment.md"
@@ -777,32 +1307,92 @@
       },
       {
         "commits": 1,
+        "lines": 29,
+        "path": "instruments/sung-exemplar-method.md"
+      },
+      {
+        "commits": 1,
         "lines": 21,
         "path": "instruments/web-research.md"
       },
       {
+        "commits": 49,
+        "lines": 99,
+        "path": "mcptoolshop_rnd/__init__.py"
+      },
+      {
         "commits": 1,
-        "lines": 42,
+        "lines": 5,
+        "path": "mcptoolshop_rnd/__main__.py"
+      },
+      {
+        "commits": 1,
+        "lines": 89,
+        "path": "mcptoolshop_rnd/cli.py"
+      },
+      {
+        "commits": 1,
+        "lines": 231,
+        "path": "mcptoolshop_rnd/datapack.py"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "mcptoolshop_rnd}/catalog.py"
+      },
+      {
+        "commits": 1,
+        "lines": 2,
+        "path": "mcptoolshop_rnd}/cli.py"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "mcptoolshop_rnd}/frontmatter.py"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "mcptoolshop_rnd}/model.py"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "mcptoolshop_rnd}/readouts.py"
+      },
+      {
+        "commits": 1,
+        "lines": 6,
+        "path": "mcptoolshop_rnd}/release.py"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "mcptoolshop_rnd}/store.py"
+      },
+      {
+        "commits": 2,
+        "lines": 48,
         "path": "pyproject.toml"
       },
       {
-        "commits": 1,
-        "lines": 5,
+        "commits": 2,
+        "lines": 7,
         "path": "rnd.cmd"
       },
       {
-        "commits": 1,
-        "lines": 4,
+        "commits": 2,
+        "lines": 6,
         "path": "rnd.sh"
       },
       {
-        "commits": 29,
-        "lines": 59,
+        "commits": 31,
+        "lines": 85,
         "path": "rnd/__init__.py"
       },
       {
-        "commits": 1,
-        "lines": 5,
+        "commits": 2,
+        "lines": 7,
         "path": "rnd/__main__.py"
       },
       {
@@ -846,13 +1436,13 @@
         "path": "site/astro.config.mjs"
       },
       {
-        "commits": 1,
-        "lines": 6127,
+        "commits": 2,
+        "lines": 6133,
         "path": "site/package-lock.json"
       },
       {
-        "commits": 1,
-        "lines": 18,
+        "commits": 2,
+        "lines": 21,
         "path": "site/package.json"
       },
       {
@@ -871,8 +1461,8 @@
         "path": "site/src/content.config.ts"
       },
       {
-        "commits": 1,
-        "lines": 68,
+        "commits": 2,
+        "lines": 95,
         "path": "site/src/content/docs/handbook/architecture.md"
       },
       {
@@ -886,8 +1476,8 @@
         "path": "site/src/content/docs/handbook/filing-research.md"
       },
       {
-        "commits": 2,
-        "lines": 89,
+        "commits": 3,
+        "lines": 98,
         "path": "site/src/content/docs/handbook/getting-started.md"
       },
       {
@@ -936,13 +1526,23 @@
         "path": "tests/__init__.py"
       },
       {
-        "commits": 2,
-        "lines": 405,
+        "commits": 3,
+        "lines": 417,
         "path": "tests/test_cli.py"
       },
       {
-        "commits": 5,
-        "lines": 318,
+        "commits": 1,
+        "lines": 197,
+        "path": "tests/test_datapack.py"
+      },
+      {
+        "commits": 1,
+        "lines": 98,
+        "path": "tests/test_packaging.py"
+      },
+      {
+        "commits": 6,
+        "lines": 328,
         "path": "tests/test_rnd.py"
       },
       {
@@ -961,63 +1561,84 @@
     "level": "low",
     "reason": "fewer than 25 source files reach 10 revisions in the window"
   },
-  "generatedAt": "2026-10-08T04:37:57.755Z",
+  "generatedAt": "2026-10-09T01:49:31.648Z",
   "generatedFrom": {
-    "commit": "922b8861bbd8758b509c7e7228ba5632b6d3fdef"
+    "commit": "1443c846340955e790b0a43068e5a04e98f62484"
   },
   "pairs": [
     {
       "a": "CHANGELOG.md",
-      "b": "rnd/__init__.py",
-      "either": 27,
-      "shared": 27,
-      "strength": 1
+      "b": "mcptoolshop_rnd/__init__.py",
+      "either": 77,
+      "shared": 49,
+      "strength": 0.636364
+    },
+    {
+      "a": "README.md",
+      "b": "rnd/cli.py",
+      "either": 7,
+      "shared": 5,
+      "strength": 0.714286
+    },
+    {
+      "a": "README.md",
+      "b": "tests/test_rnd.py",
+      "either": 8,
+      "shared": 5,
+      "strength": 0.625
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/page.json",
-      "either": 6,
-      "shared": 6,
+      "either": 8,
+      "shared": 8,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/statistics.json",
-      "either": 6,
-      "shared": 6,
+      "either": 8,
+      "shared": 8,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/structure.json",
-      "either": 6,
-      "shared": 6,
+      "either": 8,
+      "shared": 8,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/statistics.json",
-      "either": 6,
-      "shared": 6,
+      "either": 8,
+      "shared": 8,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/structure.json",
-      "either": 6,
-      "shared": 6,
+      "either": 8,
+      "shared": 8,
       "strength": 1
     },
     {
       "a": "atlas/statistics.json",
       "b": "atlas/structure.json",
-      "either": 6,
-      "shared": 6,
+      "either": 8,
+      "shared": 8,
       "strength": 1
+    },
+    {
+      "a": "rnd/cli.py",
+      "b": "tests/test_rnd.py",
+      "either": 7,
+      "shared": 4,
+      "strength": 0.571429
     }
   ],
   "parameters": {
-    "appliedChangesetLimit": 38,
+    "appliedChangesetLimit": 50,
     "changeset": 50,
     "changesetFraction": 0.25,
     "cohesionDrop": 0.2,
@@ -1026,16 +1647,16 @@
     "floor": "fallen",
     "floorHeld": false,
     "floorTrigger": "revision-depth",
-    "headDate": "2026-10-08T00:19:51-04:00",
-    "inScopeFiles": 152,
+    "headDate": "2026-10-08T21:44:37-04:00",
+    "inScopeFiles": 261,
     "pinnedStart": null,
     "priorFloor": "fallen",
-    "qualifyingCommits": 43,
+    "qualifyingCommits": 95,
     "qualifyingMinimum": 30,
     "revisions": 5,
     "shared": 10,
     "sharedFloorUsed": 3,
-    "since": "2026-04-11T04:19:51.000Z",
+    "since": "2026-04-12T01:44:37.000Z",
     "sourceExtensions": [
       ".js",
       ".mjs",
@@ -1051,7 +1672,7 @@
     ],
     "sourceFileReach": 20,
     "sourceFileRise": 25,
-    "sourceFilesReachingStrongFloor": 1,
+    "sourceFilesReachingStrongFloor": 2,
     "strength": 0.5,
     "windowDays": 180
   },

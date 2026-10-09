@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.2.6] - 2026-10-08
+
+- atlas map regenerated (CI red since 1.1.4.1.5)
+- Added experiment `data-designer`
+- Added experiment `kev-judge-finetune`
+
 ## [1.1.4.2.5] - 2026-10-08
 
 - site: override postcss-selector-parser to 7.1.6 (Dependabot alert 1)

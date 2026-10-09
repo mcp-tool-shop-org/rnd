@@ -1,0 +1,213 @@
+{
+ "date": "2026-10-09",
+ "kind": "chunk-length histogram: nomic tokens per offrig chunk",
+ "for": "npu-serve bucket ladder (retrieval-benchmark.md option-C setup)",
+ "chunker": "offrig index.rs @ a45fe53, ported; pinned by index.rs's own chunker tests",
+ "tokenizer": {
+  "repo": "nomic-ai/nomic-embed-text-v1.5",
+  "revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+  "file": "onnx/model.onnx"
+ },
+ "counts_include": "task prefix + header + body",
+ "corpora": {
+  "role-os": {
+   "path": "E:\\AI\\rnd-npu-index\\corpus-roleos-ce91be8",
+   "files_walked": 647,
+   "skipped": {
+    "binary": 66,
+    "over 1 MB": 2
+   },
+   "chunks": 4271,
+   "tokens": {
+    "n": 4271,
+    "min": 27,
+    "p50": 539,
+    "p95": 847,
+    "p99": 957,
+    "max": 1415,
+    "mean": 503.9
+   },
+   "over_512": 2335,
+   "longest": [
+    {
+     "source": "README.ja.md",
+     "ordinal": 14,
+     "title": "\u30aa\u30da\u30ec\u30fc\u30c6\u30a3\u30f3\u30b0\u30b7\u30b9\u30c6\u30e0",
+     "tokens": 1415,
+     "body_chars": 1918
+    },
+    {
+     "source": "README.zh.md",
+     "ordinal": 12,
+     "title": "\u64cd\u4f5c\u7cfb\u7edf",
+     "tokens": 1313,
+     "body_chars": 1968
+    },
+    {
+     "source": "README.ja.md",
+     "ordinal": 5,
+     "title": "\u5b8c\u5168\u306a\u30ec\u30d3\u30e5\u30fc\u3068\u51fa\u8377\u30c1\u30a7\u30c3\u30af",
+     "tokens": 1273,
+     "body_chars": 1651
+    },
+    {
+     "source": "README.hi.md",
+     "ordinal": 18,
+     "title": "\u0911\u092a\u0930\u0947\u091f\u093f\u0902\u0917 \u0938\u093f\u0938\u094d\u091f\u092e",
+     "tokens": 1204,
+     "body_chars": 2023
+    },
+    {
+     "source": "README.ja.md",
+     "ordinal": 7,
+     "title": "Dogfood swarm:",
+     "tokens": 1143,
+     "body_chars": 1800
+    },
+    {
+     "source": ".polyglot-cache.json",
+     "ordinal": 60,
+     "title": ".polyglot-cache.json",
+     "tokens": 1139,
+     "body_chars": 2038
+    },
+    {
+     "source": "README.zh.md",
+     "ordinal": 4,
+     "title": "\u7ec4\u7ec7\u63a8\u5e7f\u72b6\u6001",
+     "tokens": 1136,
+     "body_chars": 1392
+    },
+    {
+     "source": "dossier/dossier.html",
+     "ordinal": 0,
+     "title": "dossier.html",
+     "tokens": 1111,
+     "body_chars": 2037
+    },
+    {
+     "source": "README.ja.md",
+     "ordinal": 19,
+     "title": "\u30c9\u30c3\u30b0\u30d5\u30fc\u30c9\u30b9\u30a6\u30a9\u30fc\u30e0\u30df\u30c3\u30b7\u30e7\u30f3",
+     "tokens": 1097,
+     "body_chars": 1520
+    },
+    {
+     "source": "README.hi.md",
+     "ordinal": 7,
+     "title": "61 \u092d\u0942\u092e\u093f\u0915\u093e\u0913\u0902 \u0915\u0940 \u0938\u0942\u091a\u0940",
+     "tokens": 1055,
+     "body_chars": 1975
+    }
+   ]
+  },
+  "offrig": {
+   "path": "E:\\AI\\rnd-npu-index\\corpus-offrig-a45fe53",
+   "files_walked": 152,
+   "skipped": {
+    "binary": 8
+   },
+   "chunks": 1831,
+   "tokens": {
+    "n": 1831,
+    "min": 31,
+    "p50": 527,
+    "p95": 946,
+    "p99": 1179,
+    "max": 1619,
+    "mean": 548.1
+   },
+   "over_512": 965,
+   "longest": [
+    {
+     "source": "README.ja.md",
+     "ordinal": 8,
+     "title": "\u30ec\u30fc\u30f3\uff1a\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u3054\u3068\u306b 1 \u3064\u306e\u30b5\u30a4\u30c9\u30ab\u30fc\u3001\u7af6\u5408\u306f\u3042\u308a\u307e\u305b\u3093",
+     "tokens": 1619,
+     "body_chars": 2020
+    },
+    {
+     "source": "README.ja.md",
+     "ordinal": 18,
+     "title": "\u30e9\u30f3\u30ca\u30fc\u30ea\u30cf\u30fc\u30b5\u30eb\uff082026\u5e7410\u67083\u65e5\u3001\u30b9\u30e2\u30fc\u30eb\u30c6\u30a3\u30a2\u3001RTX 2000 Ada\u30010.04\u30c9\u30eb\u4e88\u7d04\uff09",
+     "tokens": 1522,
+     "body_chars": 1954
+    },
+    {
+     "source": "README.ja.md",
+     "ordinal": 11,
+     "title": "\u5bb9\u91cf\u3092\u5f85\u6a5f\u4e2d",
+     "tokens": 1466,
+     "body_chars": 1958
+    },
+    {
+     "source": "README.ja.md",
+     "ordinal": 6,
+     "title": "\u30b5\u30a4\u30c9\u30ab\u30fc\uff08\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u7528\uff09",
+     "tokens": 1436,
+     "body_chars": 1820
+    },
+    {
+     "source": "README.ja.md",
+     "ordinal": 13,
+     "title": "\u30b8\u30e7\u30d6\u30dd\u30c3\u30c9",
+     "tokens": 1426,
+     "body_chars": 1900
+    },
+    {
+     "source": "README.ja.md",
+     "ordinal": 20,
+     "title": "\u6a19\u6e96\u3078\u306e\u6e96\u62e0",
+     "tokens": 1379,
+     "body_chars": 1871
+    },
+    {
+     "source": "README.zh.md",
+     "ordinal": 8,
+     "title": "\u901a\u9053\uff1a\u6bcf\u4e2a\u9879\u76ee\u4e00\u4e2a\u8f85\u52a9\u8fdb\u7a0b\uff0c\u6ca1\u6709\u51b2\u7a81",
+     "tokens": 1368,
+     "body_chars": 2015
+    },
+    {
+     "source": "README.zh.md",
+     "ordinal": 5,
+     "title": "\u8f85\u52a9\u8fdb\u7a0b\uff08\u7528\u4e8e\u4ee3\u7406\uff09",
+     "tokens": 1359,
+     "body_chars": 1893
+    },
+    {
+     "source": "README.zh.md",
+     "ordinal": 16,
+     "title": "\u8fd0\u884c\u5668\u6a21\u62df\uff082026-10-03\uff0c\u5c0f\u578b\u7ea7\u522b\uff0cRTX 2000 Ada\uff0c\u9884\u8ba2 0.04 \u7f8e\u5143\uff09",
+     "tokens": 1348,
+     "body_chars": 1916
+    },
+    {
+     "source": "README.zh.md",
+     "ordinal": 9,
+     "title": "\u5c42\u7ea7",
+     "tokens": 1341,
+     "body_chars": 1854
+    }
+   ]
+  }
+ },
+ "queries": {
+  "n": 120,
+  "tokens": {
+   "n": 120,
+   "min": 15,
+   "p50": 25,
+   "p95": 31,
+   "p99": 36,
+   "max": 36,
+   "mean": 24.5
+  },
+  "over_512": 0
+ },
+ "decision": {
+  "observed_max_tokens": 1619,
+  "suggested_bucket": 2048,
+  "note": "smallest ladder size covering every chunk and query, untruncated"
+ }
+}

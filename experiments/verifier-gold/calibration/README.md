@@ -220,6 +220,16 @@ resume identity), so no offrig change is needed.
   - `offrig-mcp.exe` sha256 `E564295A590AF1FFD30E104660593957FABE54FCF2640B6873D6CA5AE55F1617`
 
   `offrig --version` still prints 1.0.0, so **the sha256 is the pin**, not the version string.
+- **Context check (the Publisher's question, answered before the run): `num_ctx` stays 16384.**
+  - The longest tune prompt in the chain's gemma verdicts (`prompt_eval_count`) is 4,056 tokens
+    (`diffhard-role-os-4342dff-1s`). 4,056 + 12,288 = 16,344 ≤ 16,384, so the reply cap is hit before the
+    window fills, on every tune claim.
+  - The four truncated claims have short prompts, about 1.6–1.9k tokens, measured on sibling claims.
+  - **Held-out** evidence is shorter. Fitting tokens ≈ 1,304 + 0.285 × characters on tune (max residual 330)
+    puts held-out's longest prompt at about 3.2k tokens.
+  - The report still flags any claim where `prompt_eval_count + eval_count` reaches 16,384, which would mean a
+    silent context shift. If one appears, that claim is reported as compromised.
+  - Changing `num_ctx` would add a second variable against the chain for no measured need.
 - **The run line, fixed before the run:**
   `CAL_EXTRA="--num-predict 12288 --keep-thinking" bash chain_step.sh /e/AI/rnd-calibrate-r2 gemma4:31b on on <rest> tune`
   - It runs in a fresh scratch project (`/e/AI/rnd-calibrate-r2`), so no directory or store is shared with the

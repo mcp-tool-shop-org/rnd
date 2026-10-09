@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.28] - 2026-10-09
+
+- gemma rerun pre-registration: context check, num_ctx unchanged
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.27] - 2026-10-09
 
 - gemma rerun pre-registration: binary sha256s, run line, CAL_EXTRA pass-through

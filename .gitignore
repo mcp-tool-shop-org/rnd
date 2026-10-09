@@ -15,6 +15,7 @@ site/node_modules/
 experiments/*/results/*-serve.log
 experiments/*/results/*-serve.log.err
 experiments/*/results/*-serve.pid
+experiments/npu-probe/results/*.log
 build/
 dist/
 *.egg-info/

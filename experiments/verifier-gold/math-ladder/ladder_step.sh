@@ -16,12 +16,9 @@ HB=${WATCHDOG_HEARTBEAT:-/e/AI/training/_watchdog_HEARTBEAT}
 age=$(( $(date +%s) - $(stat -c %Y "$HB" 2>/dev/null || echo 0) )); [ "$age" -le 60 ] || { echo "REFUSED: watchdog heartbeat ${age}s old"; exit 5; }
 [ "$(loaded)" = 0 ] || { echo "REFUSED: a model is on the card"; exit 4; }
 echo "== $MODEL think=$THINK structured=$STRUCT ladder start $(date +%T)"
-if [ -f "$OUT/manifest.json" ]; then
-  "$OFFRIG" verify calibrate --resume "$OUT" --project "$PROJ" 2>&1 | tail -12
-else
-  "$OFFRIG" verify calibrate "$HERE/ladder.jsonl" --model "$MODEL" --think "$THINK" --structured "$STRUCT" \
-    --split tune --project "$PROJ" --out "$OUT" 2>&1 | tail -12
-fi
+# offrig's --resume repeats the same model, gold and settings; only --out vs --resume differs.
+if [ -f "$OUT/manifest.json" ]; then WHERE=(--resume "$OUT"); else WHERE=(--out "$OUT"); fi
+"$OFFRIG" verify calibrate "$HERE/ladder.jsonl" --model "$MODEL" --think "$THINK" --structured "$STRUCT"   --split tune --project "$PROJ" "${WHERE[@]}" 2>&1 | tail -12
 curl -s "$OLLAMA/api/generate" -d "{\"model\":\"$MODEL\",\"keep_alive\":0}" >/dev/null; sleep 5
 echo "== $MODEL end $(date +%T); models loaded after unload: $(loaded)"
 if "$OFFRIG" verify calibrate --report-only "$OUT" --project "$PROJ" 2>&1 | grep -qi incomplete; then echo "== INCOMPLETE"; exit 3; fi

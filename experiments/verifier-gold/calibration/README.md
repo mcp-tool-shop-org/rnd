@@ -120,3 +120,29 @@ any results.
 
 Each gets its own smoke run (think and structured settled the same way), its own tune run under its own grant,
 and held-out only if it is chosen, under the same rule. The default rule and the falloff tiers are unchanged.
+
+## Amendment, 2026-10-09 ~04:20, before gemma4:31b loads: thinking level (the Director's direction)
+
+The Director: thinking should be **off or reduced** for most of these uses; long thinking can overrun the
+context and make answers too long. So:
+- **gemma4:31b runs at `--think low`, not `on`.** This changes the setting candidates.txt fixed for it before
+  any of its tune claims run.
+- **Check that "low" is real first** (the Publisher's point). Ollama 0.35.1 documents graded levels for
+  gpt-oss; for other models it may treat any string as "think on". So gemma's first claims are compared with
+  the smoke's `on` claims on thinking length (eval tokens). If low thinks just as long as on, the README and
+  report record **"low = on for gemma4 in this Ollama"**. It is never silently relabelled.
+- **Post-hoc thinking-level runs** (a separate grant, marked post-hoc): qwen3:8b and qwen3:14b at `off` and at
+  `low` on the same tune claims, so each has an off / low / on curve on identical claims. The report gets a
+  thinking-level axis: accuracy, false accepts, false rejects, abstains, seconds per claim and unusable rate.
+- **Future candidates** are tested at `off` and `low` first.
+
+## Finding, 2026-10-09: a deterministic Ollama 500 leaves a run incomplete
+
+mistral-small:24b, grounded tune: claim `prs-aspire-si-64-10s` gets **HTTP 500 from Ollama on every attempt**,
+after about 227 generated tokens. At temperature 0 it's deterministic, probably the structured-output grammar
+breaking. offrig#44 treats every 5xx as a transport failure: never recorded, always retried. So the run stays
+incomplete at 269/270. mistral fails the rule regardless (FA upper bound 0.253 grounded, 0.269 reasoning). A fix
+is proposed to the Publisher: a 5xx on the same claim twice is recorded as `unusable:server_error`.
+
+The run scripts' `--resume` path also had a bug: it didn't repeat the model and gold, which offrig's `--resume`
+requires. It surfaced on this one claim and is fixed.

@@ -12,11 +12,9 @@ for ct in grounded reasoning; do
   case $ct in grounded) files=("$GOLD/grounded.jsonl" "$GOLD/prs/grounded-prs.jsonl");; reasoning) files=("$GOLD/diffs/reasoning-diffs.jsonl");; esac
   S=$SPLIT
   OUT="$PROJ/cal-$TAG-$ct-$S"
-  if [ -f "$OUT/manifest.json" ]; then
-    "$OFFRIG" verify calibrate --resume "$OUT" --project "$PROJ" 2>&1 | tail -25
-  else
-    "$OFFRIG" verify calibrate "${files[@]}" --model "$MODEL" --think "$THINK" --structured "$STRUCT" \
-      --check-type "$ct" --split "$S" --project "$PROJ" --out "$OUT" 2>&1 | tail -25
-  fi
+  # offrig's --resume repeats the same model, gold and settings, so the full argument list goes both ways;
+  # only --out (a new run) vs --resume (an existing one) differs.
+  if [ -f "$OUT/manifest.json" ]; then WHERE=(--resume "$OUT"); else WHERE=(--out "$OUT"); fi
+  "$OFFRIG" verify calibrate "${files[@]}" --model "$MODEL" --think "$THINK" --structured "$STRUCT"     --check-type "$ct" --split "$S" --project "$PROJ" "${WHERE[@]}" 2>&1 | tail -25
 done
 curl -s http://127.0.0.1:11434/api/generate -d "{\"model\":\"$MODEL\",\"keep_alive\":0}" >/dev/null

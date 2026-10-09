@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.5] - 2026-10-09
+
+- calibration difficulty tiers fixed before the chain
+- Added experiment `data-designer`
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.4] - 2026-10-09
 
 - calibration smoke: 6 candidates, 48/48 usable, settings and timings

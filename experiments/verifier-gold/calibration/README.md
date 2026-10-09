@@ -60,3 +60,28 @@ schema-v6 store never meets an older offrig MCP server.
 - every metric row, including the cannot_tell row and the false-accept rate on unsupported only;
 - the strata `has_doc_comment`, `self_referential` and `origin`;
 - unusable counts and seconds per claim.
+
+## Difficulty curve (added 2026-10-09 at 02:15, before any chain run; Director's ask)
+
+Every model runs every tune claim anyway. The question this adds is **where each model's accuracy falls off**
+as claims get harder. Tiers come from the gold's own metadata (`difficulty.py`, fixed into `tiers.json`), never
+from model results:
+- **T1 surface:** a false claim that differs by a value or name, plus supported claims not tagged hard.
+- **T2 logic:** negation, conditions, bounds, behaviour, order, defaults, scope.
+- **T3 hard:** the reasoning set's hard patterns and change-specific traps. Grounded has none.
+- **T4 unknown:** gold cannot_tell.
+
+A second axis is evidence length in quartiles.
+
+| tune claims | T1 | T2 | T3 | T4 |
+|---|---|---|---|---|
+| grounded | 168 | 87 | — | 15 |
+| reasoning | 90 | 53 | 61 | 19 |
+
+**Reported** per model, check type and tier: accuracy (gold cannot_tell answered unsupported or cannot_tell
+counts as right), false accepts on not-supported gold, and abstains.
+
+**Falloff** is the first tier where accuracy drops below 0.80 or the false-accept rate exceeds 0.10.
+
+**Descriptive only:** the default rule above is unchanged, and all six models run all tiers whatever the
+first one scores.

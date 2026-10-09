@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-09",
+  "kind": "npu-serve smoke",
+  "branch": "npu-buildout @ e6aef97",
+  "npu_window": "logged with the Publisher; NPU idle; single exclusive session; server stopped and port released well before the 02:30 window end",
+  "command": "npu_serve.py --port 11491 --models nomic-embed-text",
+  "model": {
+    "name": "nomic-embed-text",
+    "repo": "nomic-ai/nomic-embed-text-v1.5",
+    "revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+    "weights": "onnx/model.onnx",
+    "ir_digest": "sha256:147d5aa88c210123",
+    "device": "NPU",
+    "dim": 768,
+    "pooling": "mean over attention mask, L2 normalized",
+    "prefixes": "added by the client, not by npu-serve"
+  },
+  "startup": {"process_to_health_ok_s": 30, "stderr": "empty"},
+  "checks": {
+    "health": "ok; device NPU; device_lost null before and after inference",
+    "tags": "200; carries repo + pinned revision + ir_digest + dim 768 + pooling",
+    "show_name_key_tag_stripped": "POST /api/show {\"name\": \"nomic-embed-text:latest\"} -> 200, same metadata",
+    "show_unknown_model": "404",
+    "embed_short": "768-dim, L2 norm 1.0, first4 [-0.0443, 0.0105, -0.1309, -0.0036]",
+    "embed_repeat_determinism": "identical first4 on second call",
+    "embed_long_truncation": "600 whitespace words (>512 tokens) -> 200, 768-dim, norm 1.0; server-side truncation path exercised without error",
+    "shutdown": "Stop-Process; /health unreachable afterwards; port released"
+  },
+  "notes": "Validates the 0.2.0 _forward clone/reshape/dtype path against the real pinned nomic ONNX on the NPU (unit tests use fakes). Cosine parity vs the Ollama GGUF copy is phase 2, not asserted here."
+}

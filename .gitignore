@@ -13,6 +13,8 @@ site/node_modules/
 .polyglot-cache.json
 .offrig/
 experiments/*/results/*-serve.log
+experiments/*/results/*-serve.log.err
+experiments/*/results/*-serve.pid
 build/
 dist/
 *.egg-info/

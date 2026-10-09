@@ -89,13 +89,27 @@ FakeQuantize, OpenVINO's way of asking for integer kernels. Results are in TOPS 
 ## The tool: `npu_serve.py`
 
 A loopback service on port 11491 that answers Ollama's embedding API (`/api/embed`, `/api/tags`,
-`/api/version`), plus `/api/nli` for the cross-encoder. Anything that embeds through Ollama can use the NPU by
-pointing its URL here. See `instruments/intel-npu.md` for when to reach for it.
+`/api/version`, `/api/show`), plus `/api/nli` for the cross-encoder and `/health` for device status.
+Anything that embeds through Ollama can use the NPU by pointing its URL here. See
+`instruments/intel-npu.md` for when to reach for it.
 
 ```bash
 E:/AI/envs/npu-openvino/Scripts/python.exe npu_serve.py --port 11491 --nli
 OFFRIG_EMBED_URL=http://127.0.0.1:11491 offrig index <paths> --model bge-base-en-v1.5 --project <dir>
 ```
+
+**Hardening (0.2.0):**
+- Models are pinned (repo + revision) in `MODELS`. `nomic-embed-text` is served straight from the pinned
+  ONNX `nomic-ai/nomic-embed-text-v1.5` @ `e9b6763` (`onnx/model.onnx`), mean pooling over the attention
+  mask then L2-normalize; bge keeps CLS pooling. The server adds **no task prefixes** — offrig adds
+  `search_document: ` / `search_query: ` on its side.
+- `/api/tags` reports each model's repo, revision and IR digest (file sha256 for ONNX, graph digest for
+  optimum exports); `/api/show` reports dim and pooling.
+- Fail loud, never silent: an inference error is a 503, a `DEVICE_LOST` latches the device until restart
+  (`/health` reports it), and there is no CPU fallback. Unknown models are 404; bodies and batch sizes are
+  bounded. `tests/test_npu_serve.py` drives all of this with fake models — no NPU needed.
+- Lifecycle drafts: `start_npu_serve.ps1`, `stop_npu_serve.ps1`, `npu-serve-task.xml` are drafts —
+  **not registered** — pending Publisher ledger rules for boot-time device grants.
 
 **offrig's default is not changed.** Moving its embedder from the CPU Ollama to the NPU is a design change
 that the Publisher reviews: a design note and a PR, the model and dimension pinned so existing indexes stay

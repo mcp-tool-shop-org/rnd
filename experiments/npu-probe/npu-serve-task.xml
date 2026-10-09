@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<!--
+  DRAFT — not registered. Reviewed as a draft only; do NOT register until the Publisher's ledger
+  covers boot-time NPU grants (the NPU is one exclusive device). To register by hand:
+    schtasks /Create /TN "mcp-tool-shop\npu-serve" /XML "npu-serve-task.xml"
+-->
+<Task version="1.4" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Description>npu-serve: embeddings on the Intel NPU, NLI on the Intel iGPU, loopback 127.0.0.1:11491</Description>
+  </RegistrationInfo>
+  <Triggers>
+    <LogonTrigger>
+      <Enabled>true</Enabled>
+    </LogonTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <LogonType>InteractiveToken</LogonType>
+      <RunLevel>LeastPrivilege</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <ExecutionTimeLimit>PT0S</ExecutionTimeLimit>
+    <RestartOnFailure>
+      <Interval>PT1M</Interval>
+      <Count>3</Count>
+    </RestartOnFailure>
+  </Settings>
+  <Actions Context="Author">
+    <Exec>
+      <Command>powershell.exe</Command>
+      <Arguments>-NoProfile -ExecutionPolicy Bypass -File "E:\AI\Research and Development\experiments\npu-probe\start_npu_serve.ps1"</Arguments>
+    </Exec>
+  </Actions>
+</Task>

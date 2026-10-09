@@ -1,0 +1,21 @@
+{
+ "date": "2026-10-09",
+ "kind": "npu-probe: retrieval scale leg, A side (offrig index on the Ollama 11490 nomic endpoint, CPU)",
+ "prereg": "experiments/npu-probe/retrieval-benchmark.md (scale leg: full offrig@a45fe53 index, 3 timed repeats)",
+ "corpus": {
+  "project": "role-os/offrig scale corpus",
+  "tree": "corpus-offrig-a45fe53 (git archive of offrig @ a45fe53)",
+  "chunks": 1831,
+  "chunks_embedded_per_repeat": 1831
+ },
+ "command": "offrig index --rebuild --project E:/AI/rnd-npu-index/offrig E:/AI/rnd-npu-index/corpus-offrig-a45fe53",
+ "endpoint": "http://127.0.0.1:11490 (offrig's CPU-only Ollama, nomic-embed-text)",
+ "repeats_wall_seconds": [
+  381.8,
+  370.6,
+  373.8
+ ],
+ "median_wall_seconds": 373.8,
+ "rate_chunks_per_s_median": 4.9,
+ "note": "repeat 1 was the fresh index in this window (no --rebuild needed, empty store); repeats 2-3 used --rebuild. NPU-side repeats run in the ledgered NPU window; the decision needs NPU >= 2x faster end to end (~<=186.9 s)."
+}

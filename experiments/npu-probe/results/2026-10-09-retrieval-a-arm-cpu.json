@@ -1,0 +1,67 @@
+{
+ "date": "2026-10-09",
+ "kind": "npu-probe: pre-registered retrieval benchmark (CI half)",
+ "prereg": "experiments/npu-probe/retrieval-benchmark.md",
+ "seed": 20261009,
+ "resamples": 2000,
+ "corpus": {
+  "stores": {
+   "role-os": 4271,
+   "offrig": 1831
+  },
+  "chunks": 6102
+ },
+ "queries": {
+  "facts": 60,
+  "queries": 120,
+  "k": [
+   1,
+   5,
+   10
+  ],
+  "scoring": "embedding-only top-k, offrig's exact path"
+ },
+ "options_run": [
+  "a"
+ ],
+ "options": {
+  "a": {
+   "chunks": "stored",
+   "queries": {
+    "endpoint": "ollama",
+    "model": "nomic-embed-text",
+    "fix": "task"
+   },
+   "metrics": {
+    "recall@1": 0.2417,
+    "recall@5": 0.6333,
+    "recall@10": 0.7583,
+    "mrr": 0.4085
+   },
+   "recall@5_ci95": [
+    0.525,
+    0.7333
+   ],
+   "truncated_share": {
+    "model": "nomic-embed-text",
+    "window": 2048,
+    "over_window": 0,
+    "of": 6102,
+    "share": 0.0
+   },
+   "embed_seconds": {
+    "docs": 0.0,
+    "queries": 1.6,
+    "docs_shared_with": null
+   }
+  }
+ },
+ "decision": {
+  "rule": "a challenger replaces a iff lower 95% CI on (challenger - a) recall@5 >= -0.05 AND the scale leg (full offrig@a45fe53 index, 3 timed repeats per endpoint) is >= 2x faster; c also needs the phase-2 min cosine >= 0.995",
+  "scale_leg": "separate timed command (README); this receipt is the CI half",
+  "challengers": {},
+  "c_phase2_match": "reads the phase-2 nomic parity receipt before the decision table is filled",
+  "note": "b/c held for the NPU serve; this run is the CPU-window a arm, no replacement is decided from it"
+ },
+ "wall_seconds_total": 10.9
+}

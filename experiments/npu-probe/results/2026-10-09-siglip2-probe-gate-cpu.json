@@ -1,0 +1,180 @@
+{
+ "date": "2026-10-09",
+ "kind": "npu-probe: SigLIP image embeddings, speed and match only",
+ "prereg": "experiments/npu-probe/prereg/siglip2-probe.md",
+ "smoke": false,
+ "limit": null,
+ "export": {
+  "registry_context": {
+   "siglip": {
+    "supported": true,
+    "tasks": [
+     "feature-extraction",
+     "zero-shot-image-classification"
+    ]
+   },
+   "siglip2": {
+    "supported": false,
+    "error": "KeyError: \"siglip2 is not supported yet for transformers. Only ['baichuan', 'qwen2', 'qwen2_moe', 'qwen3', 'qwen3_vl_text', 'qwen3_omni_moe_text', 'qwen3_omni_moe_talker_text', 'qwen3_moe', 'minicpm', 'minicpm3', 'smollm3', 'ouro', 'stablelm', 'chatglm', 'mixtral', 'gemma', 'llama', 'gpt_oss', 'bitnet', 'exao"
+   }
+  },
+  "model_id": "google/siglip2-so400m-patch14-384",
+  "revision": "e8e487298228002f3d8a82e0cd5c8ea9c567f57f",
+  "ir": {
+   "reused": true,
+   "seconds": null,
+   "export_dir": "E:\\AI\\rnd-npu-index\\siglip2-ov",
+   "path": "optimum export_from_model + custom SiglipOpenVINOConfig (custom_export_configs; no registry change)",
+   "sidecar": {
+    "matched": true,
+    "fields": {
+     "model_id": "google/siglip2-so400m-patch14-384",
+     "revision": "e8e487298228002f3d8a82e0cd5c8ea9c567f57f",
+     "optimum-intel": "2.2.0",
+     "openvino": "2026.4.1"
+    }
+   }
+  },
+  "digest": {
+   "xml_sha256": "70399092dea4c134a5df40143e31a3b582d33b6cd52fbe727b344b2940289377",
+   "bytes": 1713795695
+  }
+ },
+ "environment": {
+  "python": "3.12.13",
+  "openvino": "2026.4.1",
+  "optimum": "2.3.0",
+  "optimum-intel": "2.2.0",
+  "transformers": "5.5.4",
+  "torch": "2.14.1+cpu",
+  "numpy": "2.4.6",
+  "pillow": "12.3.0"
+ },
+ "gate": {
+  "rule": "min cosine >= 0.9999 vs the transformers reference",
+  "ov_cpu_full_name": "Intel(R) Core(TM) Ultra 9 285K",
+  "compile": {
+   "attempts": 1,
+   "load_seconds": 0.9,
+   "load_error": null
+  },
+  "cosine_vs_reference": {
+   "n": 50,
+   "min": 1.0,
+   "mean": 1.0,
+   "p1": 1.0,
+   "worst": [
+    {
+     "image": "outputs\\synthetic\\phase2\\apple_n001_s14.png",
+     "cosine": 1.0
+    },
+    {
+     "image": "outputs\\synthetic\\phase2\\apple_n020_s12.png",
+     "cosine": 1.0
+    },
+    {
+     "image": "outputs\\synthetic\\phase2b\\apple_n001_s03.png",
+     "cosine": 1.0
+    },
+    {
+     "image": "outputs\\synthetic\\phase2b\\apple_n001_s13.png",
+     "cosine": 1.0
+    },
+    {
+     "image": "outputs\\synthetic\\phase2b\\apple_n020_s02.png",
+     "cosine": 1.0
+    }
+   ]
+  },
+  "timing": {
+   "n": 50,
+   "median_s": 0.9046,
+   "min_s": 0.8575,
+   "max_s": 0.988
+  },
+  "passed": true,
+  "status": "passed; device legs await the Publisher-logged NPU/iGPU session"
+ },
+ "images": {
+  "root": "AI\\style-dataset-lab\\projects\\ai-eye-test",
+  "sampled_n": 50,
+  "sampled": [
+   "outputs\\synthetic\\phase2b\\apple_n020_s01.png",
+   "outputs\\synthetic\\phase2\\apple_n010_s10.png",
+   "outputs\\synthetic\\phase2_noshadow\\apple_n100_s13.png",
+   "outputs\\synthetic\\phase2\\apple_n005_s10.png",
+   "outputs\\synthetic\\phase2\\apple_n050_s12.png",
+   "outputs\\synthetic\\phase2\\apple_n001_s12.png",
+   "outputs\\synthetic\\phase2\\apple_n010_s08.png",
+   "outputs\\synthetic\\phase2b\\apple_n020_s15.png",
+   "outputs\\synthetic\\phase2b\\apple_n010_s13.png",
+   "outputs\\synthetic\\phase2b\\apple_n005_s00.png",
+   "outputs\\synthetic\\phase2b\\apple_n020_s13.png",
+   "outputs\\synthetic\\phase2\\apple_n020_s02.png",
+   "outputs\\synthetic\\phase2\\apple_n001_s15.png",
+   "outputs\\synthetic\\phase2b\\apple_n020_s05.png",
+   "outputs\\synthetic\\phase2b\\apple_n020_s08.png",
+   "outputs\\synthetic\\phase2\\apple_n020_s09.png",
+   "outputs\\synthetic\\phase2b\\apple_n020_s00.png",
+   "outputs\\synthetic\\phase2\\apple_n050_s14.png",
+   "outputs\\synthetic\\phase2\\apple_n050_s04.png",
+   "outputs\\synthetic\\phase2b\\apple_n020_s06.png",
+   "outputs\\synthetic\\phase2\\apple_n100_s10.png",
+   "outputs\\synthetic\\phase2b\\apple_n010_s11.png",
+   "outputs\\synthetic\\phase2_noshadow\\apple_n100_s15.png",
+   "outputs\\synthetic\\phase1\\apple_n020.png",
+   "outputs\\synthetic\\phase2b\\apple_n001_s14.png",
+   "outputs\\synthetic\\phase2_noshadow\\apple_n100_s14.png",
+   "outputs\\synthetic\\phase2\\apple_n100_s14.png",
+   "outputs\\synthetic\\phase2b\\apple_n020_s14.png",
+   "outputs\\synthetic\\phase2_noshadow\\apple_n100_s10.png",
+   "outputs\\synthetic\\phase2_noshadow\\apple_n100_s05.png",
+   "outputs\\synthetic\\phase2\\apple_n010_s07.png",
+   "outputs\\synthetic\\phase2b\\apple_n005_s09.png",
+   "outputs\\synthetic\\phase2b\\apple_n001_s13.png",
+   "outputs\\synthetic\\phase2\\apple_n020_s12.png",
+   "outputs\\synthetic\\phase2\\apple_n050_s13.png",
+   "outputs\\synthetic\\phase2b\\apple_n005_s05.png",
+   "outputs\\synthetic\\phase2b\\apple_n020_s02.png",
+   "outputs\\synthetic\\phase2\\apple_n100_s03.png",
+   "outputs\\synthetic\\phase2b\\apple_n010_s14.png",
+   "outputs\\synthetic\\phase2b\\apple_n010_s01.png",
+   "outputs\\synthetic\\phase2b\\apple_n001_s03.png",
+   "outputs\\synthetic\\phase2_noshadow\\apple_n100_s00.png",
+   "outputs\\synthetic\\phase2\\apple_n001_s14.png",
+   "outputs\\synthetic\\phase2\\apple_n010_s13.png",
+   "outputs\\synthetic\\phase2b\\apple_n001_s01.png",
+   "outputs\\synthetic\\phase2b\\apple_n005_s02.png",
+   "outputs\\synthetic\\phase2\\apple_n100_s01.png",
+   "outputs\\synthetic\\phase2b\\apple_n010_s02.png",
+   "outputs\\synthetic\\phase2b\\apple_n001_s15.png",
+   "outputs\\synthetic\\phase2b\\apple_n010_s10.png"
+  ],
+  "seed": 20261009,
+  "selector": "random.Random(seed).sample(sorted(paths), 50)"
+ },
+ "repeats": 3,
+ "device_order": [
+  "CPU",
+  "NPU",
+  "IGPU"
+ ],
+ "preprocess": {
+  "n": 50,
+  "median_s": 0.0554,
+  "min_s": 0.0186,
+  "max_s": 0.0925,
+  "note": "CPU-side once per image, shared across devices and repeats",
+  "processor": "AutoProcessor at the pinned revision (ai-eyes' path)"
+ },
+ "devices": {
+  "CPU": {
+   "kind": "transformers SiglipModel, fp32 (ai-eyes' reference)",
+   "load_seconds": 0.3
+  }
+ },
+ "match_vs_reference": {},
+ "comparison_note": "cosine and timing only; no quality claim",
+ "wall_seconds_total": 85.8,
+ "gate_only_cpu_leg": "passed; device legs await the Publisher-logged NPU/iGPU session"
+}

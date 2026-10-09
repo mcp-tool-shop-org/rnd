@@ -1,0 +1,257 @@
+{
+ "date": "2026-10-09",
+ "kind": "nomic parity: the option-C match check",
+ "prereg": "experiments/npu-probe/retrieval-benchmark.md",
+ "smoke": false,
+ "limit": null,
+ "device": "CPU",
+ "ollama": "http://127.0.0.1:11490",
+ "ollama_model": "nomic-embed-text",
+ "stores": {
+  "corpus": {
+   "path": "E:/AI/rnd-npu-index-nomic/.offrig/offrig.db",
+   "embed_model": "nomic-embed-text",
+   "dim": 768,
+   "chunks": 201
+  }
+ },
+ "reference_check": {
+  "ollama_show": {
+   "num_ctx": 8192,
+   "context_length": 2048,
+   "effective": 8192
+  },
+  "note": "show reports the advertised window; the guard is the measurement here, not that number",
+  "truncate_false": "every A-fresh request; a too-long input is an error",
+  "observed_max_tokens": 830,
+  "batch_prompt_eval_counts": {
+   "n_responses": 11,
+   "per_response": [
+    {
+     "inputs": 32,
+     "prompt_eval_count": 11820
+    },
+    {
+     "inputs": 32,
+     "prompt_eval_count": 13444
+    },
+    {
+     "inputs": 32,
+     "prompt_eval_count": 15121
+    },
+    {
+     "inputs": 32,
+     "prompt_eval_count": 13755
+    },
+    {
+     "inputs": 32,
+     "prompt_eval_count": 15054
+    },
+    {
+     "inputs": 32,
+     "prompt_eval_count": 13481
+    },
+    {
+     "inputs": 4,
+     "prompt_eval_count": 1352
+    },
+    {
+     "inputs": 32,
+     "prompt_eval_count": 791
+    },
+    {
+     "inputs": 32,
+     "prompt_eval_count": 791
+    },
+    {
+     "inputs": 32,
+     "prompt_eval_count": 773
+    },
+    {
+     "inputs": 24,
+     "prompt_eval_count": 590
+    }
+   ]
+  },
+  "longest5_single_calls": [
+   {
+    "item": "corpus:E:/AI/rnd-npu-index/entries/2026/2026-10-07-planted-defects-program-for-sung-mixes.md#chunk102",
+    "my_tokens": 830,
+    "prompt_eval_count": 830,
+    "diff": 0,
+    "ok": true
+   },
+   {
+    "item": "corpus:E:/AI/rnd-npu-index/entries/2026/2026-10-07-open-jev-style-decision-models.md#chunk65",
+    "my_tokens": 810,
+    "prompt_eval_count": 810,
+    "diff": 0,
+    "ok": true
+   },
+   {
+    "item": "corpus:E:/AI/rnd-npu-index/entries/2026/2026-10-08-dataset-recipes-for-critic-jury-roles-designing-roles-by-dat.md#chunk155",
+    "my_tokens": 805,
+    "prompt_eval_count": 805,
+    "diff": 0,
+    "ok": true
+   },
+   {
+    "item": "corpus:E:/AI/rnd-npu-index/entries/2026/2026-10-07-small-label-decision-learning.md#chunk138",
+    "my_tokens": 792,
+    "prompt_eval_count": 792,
+    "diff": 0,
+    "ok": true
+   },
+   {
+    "item": "corpus:E:/AI/rnd-npu-index/entries/2026/2026-10-07-planted-defects-program-for-sung-mixes.md#chunk103",
+    "my_tokens": 782,
+    "prompt_eval_count": 782,
+    "diff": 0,
+    "ok": true
+   }
+  ],
+  "specials_allowance": 2,
+  "offrig_probe": [
+   {
+    "item": "corpus:E:/AI/rnd-npu-index/entries/2026/2026-10-07-planted-defects-program-for-sung-mixes.md#chunk102",
+    "my_tokens": 830,
+    "prompt_eval_count": 830,
+    "would_truncate_today": false
+   },
+   {
+    "item": "corpus:E:/AI/rnd-npu-index/entries/2026/2026-10-07-open-jev-style-decision-models.md#chunk65",
+    "my_tokens": 810,
+    "prompt_eval_count": 810,
+    "would_truncate_today": false
+   },
+   {
+    "item": "corpus:E:/AI/rnd-npu-index/entries/2026/2026-10-08-dataset-recipes-for-critic-jury-roles-designing-roles-by-dat.md#chunk155",
+    "my_tokens": 805,
+    "prompt_eval_count": 805,
+    "would_truncate_today": false
+   },
+   {
+    "item": "corpus:E:/AI/rnd-npu-index/entries/2026/2026-10-07-small-label-decision-learning.md#chunk138",
+    "my_tokens": 792,
+    "prompt_eval_count": 792,
+    "would_truncate_today": false
+   },
+   {
+    "item": "corpus:E:/AI/rnd-npu-index/entries/2026/2026-10-07-planted-defects-program-for-sung-mixes.md#chunk103",
+    "my_tokens": 782,
+    "prompt_eval_count": 782,
+    "would_truncate_today": false
+   }
+  ],
+  "offrig_probe_note": "sent exactly as offrig's index sends them: no truncate flag, no num_ctx, num_gpu 0"
+ },
+ "onnx": {
+  "repo": "nomic-ai/nomic-embed-text-v1.5",
+  "revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+  "file": "onnx/model.onnx",
+  "ir_digest": "sha256:147d5aa88c210123",
+  "dim": 768
+ },
+ "counts": {
+  "chunks": 201,
+  "queries": 120
+ },
+ "truncation": {
+  "bucket_top": 2048,
+  "documents_over_bucket_tokens": 0,
+  "queries_over_bucket_tokens": 0,
+  "documents_over_512_tokens": 74,
+  "queries_over_512_tokens": 0
+ },
+ "cosines": {
+  "chunks": {
+   "c_vs_a_fresh": {
+    "n": 201,
+    "min": 0.9999086289689121,
+    "mean": 0.9999992939992024,
+    "p1": 0.9999995146488242
+   },
+   "c_vs_a_stored": {
+    "n": 201,
+    "min": 0.9998335568054039,
+    "mean": 0.9999237647545298,
+    "p1": 0.999893820358158
+   },
+   "a_fresh_vs_a_stored": {
+    "n": 201,
+    "min": 0.9998858873140688,
+    "mean": 0.9999244233105593,
+    "p1": 0.9998943811061042
+   }
+  },
+  "queries": {
+   "c_vs_a_fresh": {
+    "n": 120,
+    "min": 0.999999267439383,
+    "mean": 0.9999995959809669,
+    "p1": 0.9999993146775691
+   }
+  }
+ },
+ "worst5_c_vs_a_fresh": [
+  {
+   "item": "corpus:E:/AI/rnd-npu-index/entries/2026/2026-10-08-translategemma-failure-modes-on-readme-tables.md#chunk195",
+   "kind": "chunk",
+   "chars": 1273,
+   "tokens": 400,
+   "truncated": false,
+   "cos": {
+    "c_vs_a_fresh": 0.9999086289689121,
+    "c_vs_a_stored": 0.9998335568054039,
+    "a_fresh_vs_a_stored": 0.9999192274123777
+   }
+  },
+  {
+   "item": "lower-median:false",
+   "kind": "query",
+   "chars": 98,
+   "tokens": 25,
+   "truncated": false,
+   "cos": {
+    "c_vs_a_fresh": 0.999999267439383
+   }
+  },
+  {
+   "item": "cal-killswitch:true",
+   "kind": "query",
+   "chars": 98,
+   "tokens": 30,
+   "truncated": false,
+   "cos": {
+    "c_vs_a_fresh": 0.9999993146775691
+   }
+  },
+  {
+   "item": "docs-killswitch:false",
+   "kind": "query",
+   "chars": 63,
+   "tokens": 23,
+   "truncated": false,
+   "cos": {
+    "c_vs_a_fresh": 0.999999369483842
+   }
+  },
+  {
+   "item": "or-embed-port:true",
+   "kind": "query",
+   "chars": 91,
+   "tokens": 31,
+   "truncated": false,
+   "cos": {
+    "c_vs_a_fresh": 0.9999994032671318
+   }
+  }
+ ],
+ "bound": {
+  "minimum_cosine": 0.9999086289689121,
+  "bound": 0.995,
+  "passes": true,
+  "note": "minimum over every chunk and query, C vs A-fresh, as pre-registered"
+ },
+ "wall_seconds": 86.0
+}

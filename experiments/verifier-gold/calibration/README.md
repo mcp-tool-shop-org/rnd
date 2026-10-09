@@ -393,3 +393,56 @@ Receipts: `results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-heldout/`.
 - **Grounded has no default.** It failed on tune by one deterministic thinking loop (above). Its next look is
   the v3 calibration (several quotes, a loop detector), with a fresh sealed split.
 - **This held-out is spent:** a v3 reasoning default can't reuse it (the note of 15:27).
+
+## Pre-registration, 2026-10-09 (evening), before any run: thinking off (post-hoc)
+
+The post-hoc thinking-level runs named in the 04:20 amendment, under their own grant from the Publisher. They're
+**post-hoc** (chosen after the chain and rerun results were seen), and the report says so.
+
+- **Arms:** qwen3:8b, qwen3:14b and gemma4:31b, each at **`--think off`**, structured on, temperature 0, seed 0,
+  on the **tune** split, both check types. They run smallest first, with a 15-minute rest before each load. No
+  `low` arm: none of the three has a graded level that has been shown to be real (table above).
+- **The binary (fixed before the run):** the installed offrig, main 9b6527f (#53), as installed by the
+  Publisher. R&D hashed it before writing this, and the sha256 is the pin (`--version` still prints 1.0.0):
+  - `offrig.exe` sha256 `AD3CED566E4BCB8DCC44B1D07672D7B2E8C173595821BF0F8E667A5E850D0E73`
+  - `offrig-mcp.exe` sha256 `FCFDF1344A4F3D3DC206A720FC65D4F945441847AACBDDB0409CCCE6F3CC981B`
+
+  It's re-hashed just before the run. A mismatch stops the run, and it's re-pinned here first.
+- **Settings held to each model's think-on run, so thinking is the one variable that moves within a model:**
+
+  | model | its think-on run | num_predict | num_ctx | quote rule (binary) |
+  |---|---|---|---|---|
+  | qwen3:8b, qwen3:14b | the chain (older binary) | 4096 | 16384 | 2 (rule 1 then) |
+  | gemma4:31b | the rerun (751fb1d) | 12288 | 16384 | 2 (rule 2 then too) |
+
+  `num_ctx` is passed as a fixed **16384**, never `auto`, so #53's adaptive window isn't a second variable. The
+  quote rule and the binary still differ from the qwens' chain run. That's why the comparison below is on the
+  model's own verdict.
+- **The comparison (fixed now):**
+  - **Primary: the model's own verdict, before the quote check.** Its scoring is the math ladder's
+    `report.py --model-verdict` view. It's computed for off and for the matching on run, on identical tune
+    claims. For each model, check type and level: accuracy, false accepts (the upper bound, as the default
+    rule computes it), false rejects, cannot_tell rate, seconds per claim, and the unusable or missing count.
+  - **Secondary: offrig's final verdict and the default rule,** reported beside the primary view. For gemma, on
+    vs off on the final verdict is a near-like comparison: same quote rule, same budget, a newer binary. For
+    the qwens it isn't like-for-like, and the report says so.
+- **Is it really off?** For every off reply, the report gives eval tokens and checks that no thinking text came
+  back. If a model still thinks at `off`, its arm is reported as "off not honoured" and isn't compared.
+- **If an off arm passes the default rule on tune for a check type:** one held-out run for that type, same
+  settings, under its own grant. It's labelled as selected post-hoc. A held-out fail names nothing.
+  - gemma4:31b's reasoning default stays as named (think on) unless an off pass is also confirmed on held-out.
+  - Even then, switching it is the Publisher's design call. Off would be cheaper per claim, not more accurate
+    by definition.
+- **What each outcome would mean, said before the result:**
+  - Off at about the same accuracy and false accepts, and faster: thinking isn't earning its cost on this task,
+    for that model.
+  - Off with more false accepts: thinking is doing verifier work. Keep it on, and size the budget instead.
+  - Off with fewer abstains but more false accepts: a trade, not a win. The default rule decides.
+- **Run lines (fixed before the run;** scratch project `/e/AI/rnd-calibrate-off`, nothing shared with earlier
+  stores):
+  - `CAL_EXTRA="--num-predict 4096 --num-ctx 16384" bash chain_step.sh /e/AI/rnd-calibrate-off qwen3:8b off on 0 tune`
+  - `CAL_EXTRA="--num-predict 4096 --num-ctx 16384" bash chain_step.sh /e/AI/rnd-calibrate-off qwen3:14b off on 900 tune`
+  - `CAL_EXTRA="--num-predict 12288 --num-ctx 16384" bash chain_step.sh /e/AI/rnd-calibrate-off gemma4:31b off on 900 tune`
+
+  The exit code of each step is read before the next one starts. Exit 3 stops the chain, and a resume uses the
+  same line.

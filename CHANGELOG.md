@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.35] - 2026-10-09
+
+- calibration: thinking-off pre-registration (qwen3:8b, qwen3:14b, gemma4:31b at off, tune; model-verdict primary; offrig 9b6527f sha256 pinned; run lines fixed)
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.34] - 2026-10-09
 
 - intel-npu: correct the hang note (bge ran batch 8 cleanly; hangs were DeBERTa 8x512 and nomic 8x1024); NPU health check defined

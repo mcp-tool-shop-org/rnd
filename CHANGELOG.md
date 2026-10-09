@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.30] - 2026-10-09
+
+- pre-registration note before the reasoning result: v2 held-out is reasoning's one look; v3 needs a fresh sealed split
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.29] - 2026-10-09
 
 - instruments: offrig calibrate changes, switchyard (planned), intel-npu device facts; calibration error-lean post-hoc

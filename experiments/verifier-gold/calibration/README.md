@@ -319,3 +319,19 @@ agrees. Script `error_lean_posthoc.py`, output `results/2026-10-09-chain/error-l
   14% of true claims false (`../math-ladder/results/2026-10-09-ladder/`).
 - None of this measures a rewrite judge's task. ASPIRE ran its own pre-registered control for that (aspire-si
   #77).
+
+## Pre-registration note, 2026-10-09 15:27: before any reasoning result exists
+
+Written after grounded finished (FAIL, 1 missing; diagnosed in the rerun report) and **before** the reasoning
+half has a result.
+
+- **If reasoning passes on tune:** the registered next step runs. That's a **reasoning-only held-out** run on
+  the same binary (751fb1d) and settings (quote rule 2, num_predict 12288, num_ctx 16384, think on), under its
+  own grant. It's skipped only by a recorded decision, never quietly.
+- **That run is reasoning's one held-out look under verdict contract v2.** offrig's planned contract v3
+  (several quotes per verdict, quote rule 3, and a loop detector, decided 2026-10-09 after this run's grounded
+  diagnosis) changes the verdict contract. **A v3 reasoning default can't reuse this held-out:** its
+  confirmation needs a fresh sealed split, the same kind planned for the distilled student. That's planned
+  here, not discovered later.
+- **If reasoning fails on tune:** there's no held-out run. gemma's next calibration is the v3 one,
+  pre-registered on tune.

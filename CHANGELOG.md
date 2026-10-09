@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.16] - 2026-10-09
+
+- Step 0 complete in rnd: dedupe and sealing, scoring properties, Wilson edge fix (ASPIRE, PR #1)
+- Added experiment `distill-ladder`
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.15] - 2026-10-09
 
 - atlas map regenerated (red since fd2aca3)

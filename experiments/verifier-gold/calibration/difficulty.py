@@ -16,7 +16,8 @@ Second axis: evidence length (total context characters), in quartiles within eac
 A verdict is correct when: supported → supported; unsupported → unsupported; cannot_tell → unsupported or
 cannot_tell (offrig#44's rule: only accepting it is wrong). Reported per model × check type × tier: n,
 accuracy, false accepts (on not-supported gold), abstains (cannot_tell on decided gold). Falloff = the first
-tier where accuracy drops below 0.80 or the false-accept rate exceeds 0.10. Descriptive only: the default
+tier where accuracy drops below 0.80 or the false-accept rate exceeds 0.10. Every cell shows n and a
+Wilson 95% interval, and cells under 30 claims are marked tentative. Descriptive only: the default
 rule (calibration README) is unchanged.
 
   python difficulty.py tiers > tiers.json             # the fixed tier of every tune and held-out claim
@@ -35,6 +36,19 @@ FILES = {"grounded": ["grounded.jsonl", "prs/grounded-prs.jsonl"], "reasoning": 
 SURFACE = re.compile(r"changed number|changed version|swapped (term|name|port|value|target)|wrong (new )?value"
                      r"|dropped term")
 HARD = re.compile(r"hard:|false claim of no behaviour change|old behaviour credited|disclaims")
+
+
+Z95 = 1.959963984540054  # offrig calibrate.rs's z
+SMALL = 30  # cells under this are marked tentative (the Publisher, 2026-10-09)
+
+
+def wilson(k: int, n: int) -> tuple[float, float]:
+    if n == 0:
+        return (0.0, 1.0)
+    p, z2 = k / n, Z95 * Z95
+    centre = (p + z2 / (2 * n)) / (1 + z2 / n)
+    margin = Z95 * ((p * (1 - p) / n + z2 / (4 * n * n)) ** 0.5) / (1 + z2 / n)
+    return (max(0.0, centre - margin), min(1.0, centre + margin))
 
 
 def tier(r: dict) -> str:
@@ -94,8 +108,11 @@ def report(dirs: list[str]) -> None:
                     c[2] += v == "supported"
                 c[4] += v == "cannot_tell" and g != "cannot_tell"
         for (ct, axis, val), (n, right, fa, neg, ab) in sorted(cells.items()):
-            print(f"{model:20} {ct:9} {axis:8} {val:3} n={n:3} acc={right / n:.2f} "
-                  f"FA={fa}/{neg} ({fa / neg if neg else 0:.2f}) abstain={ab}")
+            alo, ahi = wilson(right, n)
+            flo, fhi = wilson(fa, neg)
+            mark = "  <30, tentative" if n < SMALL else ""
+            print(f"{model:20} {ct:9} {axis:8} {val:3} n={n:3} acc={right / n:.2f} [{alo:.2f},{ahi:.2f}] "
+                  f"FA={fa}/{neg} ({fa / neg if neg else 0:.2f} [{flo:.2f},{fhi:.2f}]) abstain={ab}{mark}")
 
 
 if __name__ == "__main__":

@@ -81,7 +81,8 @@ A second axis is evidence length in quartiles.
 **Reported** per model, check type and tier: accuracy (gold cannot_tell answered unsupported or cannot_tell
 counts as right), false accepts on not-supported gold, and abstains.
 
-**Falloff** is the first tier where accuracy drops below 0.80 or the false-accept rate exceeds 0.10.
+**Falloff** is the first tier where accuracy drops below 0.80 or the false-accept rate exceeds 0.10. Every
+cell shows n and a Wilson 95% interval, and cells under 30 claims are marked tentative (the Publisher's ask).
 
 **Descriptive only:** the default rule above is unchanged, and all six models run all tiers whatever the
 first one scores.

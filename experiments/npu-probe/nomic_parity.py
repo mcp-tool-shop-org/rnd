@@ -272,7 +272,11 @@ def load_onnx_nomic(device: str):
     import openvino as ov
     core = ov.Core()
     return mod, mod.Embedder("nomic-embed-text",
-                             {**NOMIC_ONNX, "format": "onnx", "pooling": "mean"}, core, device)
+                             {**NOMIC_ONNX, "format": "onnx", "pooling": "mean",
+                              # npu_serve's measured ladder for nomic — the corpus tops out at 1619
+                              # (results/2026-10-09-nomic-chunk-lengths.json); without this the
+                              # default 512-cap silently truncates every long body
+                              "buckets": (128, 256, 512, 1024, 2048)}, core, device)
 
 
 def worst_k(items: list, k: int = 5) -> list:

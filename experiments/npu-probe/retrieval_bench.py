@@ -268,11 +268,22 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--store", action="append", required=True,
                     help="NAME=PATH to a scratch store's offrig.db; repeat for role-os and offrig")
-    ap.add_argument("--serve", required=True, help="npu-serve base URL (loopback)")
+    ap.add_argument("--serve", default=None, help="npu-serve base URL (loopback); every variant "
+                    "except a needs it")
+    ap.add_argument("--options", default=None, help="comma subset of variants to run (default all); "
+                    "the CPU window runs the a arm alone — b/c ride on the NPU serve")
     ap.add_argument("--ollama", required=True, help="offrig's Ollama base URL (11490, CPU only)")
     ap.add_argument("--out", required=True, type=Path, help="the receipt JSON")
     a = ap.parse_args()
     started = time.perf_counter()
+    active = [n for n in VARIANTS
+              if a.options is None or n in {s.strip() for s in a.options.split(",")}]
+    if not active or "a" not in active:
+        raise SystemExit("the a arm is the reference; it must always run")
+    need_serve = [n for n in active
+                  if VARIANTS[n]["queries"][0] == "serve" or VARIANTS[n]["chunks"] != "stored"]
+    if need_serve and not a.serve:
+        raise SystemExit(f"variants {need_serve} need --serve")
 
     corpus = load_corpus(a.store)
     queries = bench_queries()
@@ -298,7 +309,7 @@ def main() -> None:
 
     docs_cache = {}
     per = {}
-    for name in VARIANTS:
+    for name in active:
         v = VARIANTS[name]
         key = v["chunks"]
         if key not in docs_cache:
@@ -321,9 +332,9 @@ def main() -> None:
               f"  (docs {entry['seconds']}s, queries {qsec}s)", flush=True)
 
     draws = resample_sets(len(facts))
-    boot = {n: bootstrap_recall(per[n]["rows"], draws) for n in VARIANTS}
+    boot = {n: bootstrap_recall(per[n]["rows"], draws) for n in active}
     diffs = {}
-    for n in VARIANTS:
+    for n in active:
         if n == "a":
             continue
         lo, hi = ci([bv - ba for bv, ba in zip(boot[n], boot["a"])])
@@ -332,7 +343,7 @@ def main() -> None:
                     "ci95": [round(lo, 4), round(hi, 4)]}
 
     options = {}
-    for n in VARIANTS:
+    for n in active:
         lo5, hi5 = ci(boot[n])
         options[n] = {"chunks": VARIANTS[n]["chunks"],
                       "queries": dict(zip(("endpoint", "model", "fix"), VARIANTS[n]["queries"])),
@@ -344,7 +355,7 @@ def main() -> None:
             options[n]["vs_a_recall@5"] = diffs[n]
 
     challengers = {}
-    for n in DECISION_VARIANTS:
+    for n in [n for n in DECISION_VARIANTS if n in active]:
         lo = diffs[n]["ci95"][0]
         challengers[n] = {"lower_ci_recall@5_vs_a": lo, "ci_half_passes": lo >= -0.05}
     decision = {"rule": ("a challenger replaces a iff lower 95% CI on (challenger - a) recall@5 "
@@ -354,7 +365,10 @@ def main() -> None:
                 "scale_leg": "separate timed command (README); this receipt is the CI half",
                 "challengers": challengers,
                 "c_phase2_match": ("reads the phase-2 nomic parity receipt before the "
-                                   "decision table is filled")}
+                                   "decision table is filled"),
+                **({"note": "b/c held for the NPU serve; this run is the CPU-window a arm, "
+                             "no replacement is decided from it"}
+                   if not challengers else {})}
 
     receipt = {"date": time.strftime("%Y-%m-%d"),
                "kind": "npu-probe: pre-registered retrieval benchmark (CI half)",
@@ -363,7 +377,7 @@ def main() -> None:
                "corpus": {"stores": stores, "chunks": len(corpus)},
                "queries": {"facts": len(facts), "queries": len(queries),
                            "k": [1, 5, 10], "scoring": "embedding-only top-k, offrig's exact path"},
-               "options": options, "decision": decision,
+               "options_run": active, "options": options, "decision": decision,
                "wall_seconds_total": round(time.perf_counter() - started, 1)}
     a.out.parent.mkdir(parents=True, exist_ok=True)
     a.out.write_text(json.dumps(receipt, indent=1) + "\n", encoding="utf-8")

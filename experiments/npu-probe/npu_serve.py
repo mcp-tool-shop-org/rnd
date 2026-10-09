@@ -300,15 +300,20 @@ def main() -> None:
     ap.add_argument("--models", default="bge-base-en-v1.5",
                     help=f"comma-separated; known: {sorted(MODELS)}")
     ap.add_argument("--nli", action="store_true", help="also load the NLI cross-encoder on the Intel iGPU")
+    ap.add_argument("--device", default="npu", choices=["npu", "cpu"],
+                    help="where embedders compile; cpu is for the CPU-window baselines, never a silent NPU skip")
     a = ap.parse_args()
     core = ov.Core()
-    if "NPU" not in core.available_devices:
+    device = {"npu": "NPU", "cpu": "CPU"}[a.device]
+    if device == "NPU" and "NPU" not in core.available_devices:
         raise SystemExit("no NPU visible to OpenVINO")
+    if device == "CPU" and a.nli:
+        raise SystemExit("--nli is iGPU-pinned; a CPU-only window (the Publisher's) stays CPU-only")
     state = State()
     for n in a.models.split(","):
         n = n.strip()
-        state.embedders[n] = Embedder(n, MODELS[n], core, "NPU")
-        print(f"loaded {n} on NPU (dim {state.embedders[n].dim}, {state.embedders[n].spec['pooling']} pooling, "
+        state.embedders[n] = Embedder(n, MODELS[n], core, device)
+        print(f"loaded {n} on {device} (dim {state.embedders[n].dim}, {state.embedders[n].spec['pooling']} pooling, "
               f"{state.embedders[n].spec['repo']}@{state.embedders[n].spec['revision'][:8]})", flush=True)
     if a.nli:
         state.nli = NLI(core, intel_igpu(core))

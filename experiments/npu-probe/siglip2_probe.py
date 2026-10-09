@@ -260,6 +260,9 @@ def main() -> None:
     ap.add_argument("--out", type=Path, required=True, help="the receipt JSON")
     ap.add_argument("--limit", type=int, default=None,
                     help="first N sampled images only; marks the receipt as a smoke run")
+    ap.add_argument("--gate-only", action="store_true",
+                    help="export, transformers reference and the equivalence gate only — the CPU-"
+                         "window leg; the device legs wait for the ledgered NPU/iGPU session")
     a = ap.parse_args()
     process_start = time.time()
     t0_wall = time.perf_counter()
@@ -346,11 +349,20 @@ def main() -> None:
                    "comparison_note": "cosine and timing only; no quality claim",
                    "wall_seconds_total": round(time.perf_counter() - t0_wall, 1)}
         if not devices_ok:
-            receipt["stopped"] = gate["status"]
+            receipt["gate_only_cpu_leg" if a.gate_only and gate_passed else "stopped"] = gate["status"]
         a.out.parent.mkdir(parents=True, exist_ok=True)
         a.out.write_text(json.dumps(receipt, indent=1) + "\n", encoding="utf-8")
         print(f"wrote {a.out}")
         return receipt
+
+    if a.gate_only:
+        if gate_passed:
+            gate["status"] = "passed; device legs await the Publisher-logged NPU/iGPU session"
+            write_receipt(devices_ok=False)
+            print(f"gate passed (min cosine {gate['cosine_vs_reference']['min']}); device legs held")
+            raise SystemExit(0)
+        write_receipt(devices_ok=False)
+        raise SystemExit(f"gate stopped the probe: {gate['status']}")
 
     if not gate_passed:
         write_receipt(devices_ok=False)

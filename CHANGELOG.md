@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.2.11] - 2026-10-08
+
+- calibration protocol pre-registered: tune selects, heldout headline, local 13.4
+- Added experiment `data-designer`
+- Added experiment `verifier-gold`
+
 ## [1.1.4.2.10] - 2026-10-08
 
 - cross-family label check PASS (2 gold errors in 120, fixed); calibration files named

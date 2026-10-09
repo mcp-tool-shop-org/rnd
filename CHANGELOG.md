@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.10] - 2026-10-09
+
+- distillation exercise plan, draft v1 (1.7b student on the math ladder)
+- Added experiment `data-designer`
+- Added experiment `distill-ladder`
+
 ## [1.1.4.3.9] - 2026-10-09
 
 - math ladder: its own scratch store, run step with rest and gates

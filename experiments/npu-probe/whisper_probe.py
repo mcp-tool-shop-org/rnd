@@ -299,7 +299,9 @@ def main() -> None:
         samples[c["id"]] = wav_floats(wav)
 
     revision = hf_revision(MODEL_ID)
-    export = export_model(a.export_dir, revision, a.cache)
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from siglip2_probe import hub_cache  # one normalizer, shared
+    export = export_model(a.export_dir, revision, hub_cache(a.cache))
     import importlib.metadata as im
     genai_version = im.version("openvino-genai")
 

@@ -1,0 +1,139 @@
+{
+ "openvino": "2026.4.1-22982-e213a147257-releases/2026/4",
+ "devices": {
+  "CPU": "Intel(R) Core(TM) Ultra 9 285K",
+  "NPU": "Intel(R) AI Boost"
+ },
+ "excluded_devices": [
+  "GPU.0",
+  "GPU.1"
+ ],
+ "seq": 512,
+ "cases": [
+  {
+   "kind": "embed",
+   "model": "BAAI/bge-small-en-v1.5",
+   "device": "CPU",
+   "compile_s": 0.46,
+   "batch": 1,
+   "median_s": 0.0896,
+   "best_s": 0.0703,
+   "items_per_s": 11.2
+  },
+  {
+   "kind": "embed",
+   "model": "BAAI/bge-small-en-v1.5",
+   "device": "NPU",
+   "compile_s": 4.82,
+   "batch": 1,
+   "median_s": 0.0296,
+   "best_s": 0.0295,
+   "items_per_s": 33.8,
+   "min_cosine_vs_cpu": 1.0
+  },
+  {
+   "kind": "embed",
+   "model": "BAAI/bge-small-en-v1.5",
+   "device": "CPU",
+   "compile_s": 0.36,
+   "batch": 8,
+   "median_s": 1.641,
+   "best_s": 0.4221,
+   "items_per_s": 4.9
+  },
+  {
+   "kind": "embed",
+   "model": "BAAI/bge-small-en-v1.5",
+   "device": "NPU",
+   "compile_s": 17.85,
+   "batch": 8,
+   "median_s": 0.3734,
+   "best_s": 0.3692,
+   "items_per_s": 21.4,
+   "min_cosine_vs_cpu": 0.99999
+  },
+  {
+   "kind": "embed",
+   "model": "BAAI/bge-base-en-v1.5",
+   "device": "CPU",
+   "compile_s": 0.47,
+   "batch": 1,
+   "median_s": 0.4765,
+   "best_s": 0.3975,
+   "items_per_s": 2.1
+  },
+  {
+   "kind": "embed",
+   "model": "BAAI/bge-base-en-v1.5",
+   "device": "NPU",
+   "compile_s": 7.44,
+   "batch": 1,
+   "median_s": 0.0487,
+   "best_s": 0.0481,
+   "items_per_s": 20.5,
+   "min_cosine_vs_cpu": 0.99999
+  },
+  {
+   "kind": "embed",
+   "model": "BAAI/bge-base-en-v1.5",
+   "device": "CPU",
+   "compile_s": 0.43,
+   "batch": 8,
+   "median_s": 0.8142,
+   "best_s": 0.7953,
+   "items_per_s": 9.8
+  },
+  {
+   "kind": "embed",
+   "model": "BAAI/bge-base-en-v1.5",
+   "device": "NPU",
+   "compile_s": 31.99,
+   "batch": 8,
+   "median_s": 0.5782,
+   "best_s": 0.5768,
+   "items_per_s": 13.8,
+   "min_cosine_vs_cpu": 0.99999
+  },
+  {
+   "kind": "nli",
+   "model": "cross-encoder/nli-deberta-v3-base",
+   "device": "CPU",
+   "compile_s": 0.97,
+   "batch": 1,
+   "median_s": 0.261,
+   "best_s": 0.2561,
+   "items_per_s": 3.8,
+   "right": "1/1"
+  },
+  {
+   "kind": "nli",
+   "model": "cross-encoder/nli-deberta-v3-base",
+   "device": "NPU",
+   "compile_s": 29.72,
+   "batch": 1,
+   "median_s": 0.2701,
+   "best_s": 0.2697,
+   "items_per_s": 3.7,
+   "right": "1/1",
+   "max_abs_logit_diff_vs_cpu": 0.0087,
+   "argmax_agrees_with_cpu": true
+  },
+  {
+   "kind": "nli",
+   "model": "cross-encoder/nli-deberta-v3-base",
+   "device": "CPU",
+   "compile_s": 2.84,
+   "batch": 8,
+   "median_s": 1.9104,
+   "best_s": 1.808,
+   "items_per_s": 4.2,
+   "right": "2/8"
+  },
+  {
+   "kind": "nli",
+   "model": "cross-encoder/nli-deberta-v3-base",
+   "device": "NPU",
+   "error": "RuntimeError: Exception from src\\inference\\src\\cpp\\infer_request.cpp:224:\nException from src\\plugins\\intel_npu\\src\\utils\\src\\zero\\zero_wrappers.cpp:382:\nL0 zeFenceHostSynchronize result: ZE_RESULT_ERROR_DEVICE_LOST, code 0x70000001 - device hung, reset, was removed, or driver update occurred\n\n"
+  }
+ ]
+}

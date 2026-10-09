@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.0] - 2026-10-09
+
+- Intel NPU/iGPU probe and the npu-serve instrument
+- Added `intel-npu`: The Intel side of the rig — NPU embeddings and iGPU cross-encoders (npu-serve)
+- Added experiment `data-designer`
+- Added experiment `npu-probe`
+
 ## [1.1.4.2.16] - 2026-10-09
 
 - calibration scripts gate on the watchdog heartbeat (mtime only)

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.15] - 2026-10-09
+
+- atlas map regenerated (red since fd2aca3)
+
 ## [1.1.4.3.14] - 2026-10-09
 
 - Step 0: ladder generator property tests (Hypothesis), CI wired

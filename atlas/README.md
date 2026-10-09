@@ -1,24 +1,21 @@
 # rnd: how it works
 
-Mapped at 2026-10-09 from commit 1443c84 by Atlas 1.24.0.
+Mapped at 2026-10-09 from commit 0cfaf26 by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-12 parts, mostly Python (41 files), shell (9), CSS (2), TypeScript (2), Astro (1), HTML (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 4 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
+12 parts, mostly Python (55 files), shell (14), CSS (2), TypeScript (2), Astro (1), HTML (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-08 (922b886)
+## What changed since 2026-10-09 (1443c84)
 
-- experiments/natural-errors/data/ is now written by experiments/natural-errors/build.py.
-- experiments/natural-errors/data/baselines_p1.json is now written by experiments/natural-errors/baselines_p1.py.
-- experiments/natural-errors/data/corrections.json is now written by experiments/natural-errors/build_corrections.py.
-- And 15 more new writers and readers of places.
-- datapacks/hymn-arrangements/datapack.json is new and belongs to no part, so atlas check fails on it against the previous map.
-- datapacks/hymn-arrangements/hosted.json is new and belongs to no part, so atlas check fails on it against the previous map.
-- datapacks/hymn-arrangements/spec.json is new and belongs to no part, so atlas check fails on it against the previous map.
-- And 4 more new files that belong to no part.
-- 109 files added and 24 changed content, across 9 parts.
+- tests now imports experiments.
+- experiments/data-designer/runs/phase0-smoke.json is now written by experiments/data-designer/one_row.py.
+- experiments/verifier-gold/crossfamily/ is now written by experiments/verifier-gold/crossfamily/run_labeller.py.
+- experiments/verifier-gold/crossfamily/blind_in.json is now written by experiments/verifier-gold/crossfamily/make_sample.py.
+- And 12 more new writers and readers of places.
+- 60 files added and 8 changed content, across 6 parts.
 
 ## What comes in
 
@@ -30,8 +27,9 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 ## What happens through CI
 
 1. The workflow runs verify.sh in the repository root and tests/ in tests; it checks mcptoolshop_rnd/ in mcptoolshop_rnd and rnd/ in rnd.
-2. It writes to entries/ and instruments/.
-3. It uploads coverage to Codecov.
+2. That reaches experiments (1 file).
+3. It writes to entries/ and instruments/.
+4. It uploads coverage to Codecov.
 
 ## Who reads the results
 
@@ -51,6 +49,7 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 - **mcptoolshop_rnd** is imported by 1 part (rnd), and by 1 more only from tests; it sits on the path of 3 doors.
 - **rnd** is imported only from tests, by 1 part (tests), and sits on the path of 2 doors.
 - **the repository root** is imported by no other part and sits on the path of 2 doors.
+- **experiments** is imported only from tests, by 1 part (tests), and sits on the path of 1 door.
 - **experiments/natural-errors/data/** is written by experiments and read by experiments; a hand edit reaches every reader.
 - **experiments/natural-errors/data/split.json** is written by experiments and read by experiments; a hand edit reaches every reader.
 
@@ -70,12 +69,15 @@ Every code part this map reads is imported by at least one test.
 
 the repository root holds only shell files, which this map does not read, so whether a test touches it cannot be seen.
 
-experiments/cuda-graphs/test_graphed_heads.py runs in no workflow.
+2 test files run in no workflow: experiments/cuda-graphs/test_graphed_heads.py and experiments/data-designer/tests/test_lockdown.py.
 
 ## Written but never read
 
 - **experiments/natural-errors/data/baselines_p1.json** is written by experiments/natural-errors/baselines_p1.py and read by nothing else in this repository.
 - **experiments/natural-errors/data/corrections.json** is written by experiments/natural-errors/build_corrections.py and read by nothing else in this repository.
+- **experiments/verifier-gold/crossfamily/** is written by experiments/verifier-gold/crossfamily/run_labeller.py and read by nothing else in this repository.
+- **experiments/verifier-gold/crossfamily/blind_key.json** is written by experiments/verifier-gold/crossfamily/make_sample.py and read by nothing else in this repository.
+- **experiments/verifier-gold/crossfamily/sample.jsonl** is written by experiments/verifier-gold/crossfamily/make_sample.py and read by nothing else in this repository.
 - **instruments/** is written by mcptoolshop_rnd/cli.py and read by nothing else in this repository.
 
 ## Helpers that look duplicated
@@ -90,11 +92,15 @@ No two parts export a helper that looks alike.
 - **experiments/natural-errors/data/baselines_p1.json** is written by experiments/natural-errors/baselines_p1.py.
 - **experiments/natural-errors/data/corrections.json** is written by experiments/natural-errors/build_corrections.py.
 - **experiments/natural-errors/data/split.json** is written once by experiments/natural-errors/make_split.py when absent.
+- **experiments/verifier-gold/crossfamily/** is written by experiments/verifier-gold/crossfamily/run_labeller.py.
+- **experiments/verifier-gold/crossfamily/blind_in.json** is written by experiments/verifier-gold/crossfamily/make_sample.py.
+- **experiments/verifier-gold/crossfamily/blind_key.json** is written by experiments/verifier-gold/crossfamily/make_sample.py.
+- **experiments/verifier-gold/crossfamily/sample.jsonl** is written by experiments/verifier-gold/crossfamily/make_sample.py.
 - **instruments/** is written by mcptoolshop_rnd/cli.py.
 
 ## Hand-authored
 
-People write .claude/, .github/, catalogs/, docs/ and site/; 4 writes with paths built at run time may land here.
+People write .claude/, .github/, catalogs/, docs/ and site/; 7 writes with paths built at run time may land here.
 
 ## Where to start
 
@@ -104,8 +110,9 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 
 ## What this map cannot see
 
-- 4 imports could not be resolved: `experiments/verifier-gold/build_grounded.py` imports a path built at run time; `rnd/__init__.py` imports a path built at run time; `tests/test_packaging.py` imports `rnd.cli`, which is no module on its import path and no declared dependency; and 1 more.
-- 4 writes and 6 reads use paths built at run time and are not named here.
+- 6 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 3 more.
+- 7 writes and 7 reads use paths built at run time and are not named here.
+- 1 write goes to places this repository does not track, so it is not listed as generated.
 - 11 writes and 21 reads go to a path their caller passes, not to this repository.
 - 3 reads go to the directory the command is run in (entries and instruments), not to this repository.
 - 1 read goes to the directory the command is run in or a path its caller passes, not to this repository.

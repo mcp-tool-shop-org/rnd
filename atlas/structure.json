@@ -32,7 +32,7 @@
       "externals": 0,
       "files": [
         {
-          "hash": "2cc256929c25d793088e94b79b3528d63e60d143d43761b87105c980c3992358",
+          "hash": "89a841bc4ff0a0f398530b46ca9453112fd0c6423edceaeab83f466785008f07",
           "path": ".github/workflows/ci.yml"
         },
         {
@@ -316,10 +316,10 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 4,
+      "dynamicReads": 5,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
-      "dynamicWrites": 1,
+      "dynamicWrites": 4,
       "entryPoints": [],
       "externals": 0,
       "files": [
@@ -375,7 +375,7 @@
           "path": "experiments/cloud-cu134/setup_compat.sh"
         },
         {
-          "hash": "3f94ad60a59f8c2112fdceaac514e96cb6035ab0b574305d597b1856e118f3c0",
+          "hash": "91a50bb9bab95b0620ff5990afb9f7c91c8cda0ebff773023bdb2229073b136f",
           "path": "experiments/cuda-graphs/README.md"
         },
         {
@@ -426,6 +426,10 @@
           "path": "experiments/cuda-graphs/results/2026-10-08-llama.json"
         },
         {
+          "hash": "a9cf0e7b0c9706aceca27c42e01d366d67d40b2c78d54946f84d8e1eddad9a00",
+          "path": "experiments/cuda-graphs/results/2026-10-08-triton-probe.json"
+        },
+        {
           "exports": [
             "fake_cache"
           ],
@@ -451,6 +455,245 @@
           "path": "experiments/cuda-graphs/triton_probe.py"
         },
         {
+          "hash": "1768a1e03109f4e9cc81262d7422f5b999b74bb9339169653783c842cad77630",
+          "path": "experiments/data-designer/README.md"
+        },
+        {
+          "failurePaths": [
+            {
+              "in": "connect",
+              "kind": "raise",
+              "line": 43
+            }
+          ],
+          "hash": "66acc0f085355c7626ce17ee68054f2c836ab9453a0a17ae10a517532b83accc",
+          "path": "experiments/data-designer/egress.py"
+        },
+        {
+          "hash": "dd2cd27475b16919428e3072e7ad1b633c707dfad3d9cc8a39df790073d8c744",
+          "path": "experiments/data-designer/home/model_configs.yaml"
+        },
+        {
+          "hash": "4b68af3dfff3609089cb0dad1dc18a413a0169fb85c403c3b423e0a62909e708",
+          "path": "experiments/data-designer/home/model_providers.yaml"
+        },
+        {
+          "exports": [
+            "build",
+            "install_finish_recorder",
+            "install_local_token_counter",
+            "loaded_models",
+            "local_digest",
+            "main",
+            "prompt_hash",
+            "run"
+          ],
+          "failurePaths": [
+            {
+              "in": "refuse_tokenizer",
+              "kind": "raise",
+              "line": 98
+            },
+            {
+              "in": "local_digest",
+              "kind": "raise",
+              "line": 111
+            },
+            {
+              "in": "run",
+              "kind": "raise",
+              "line": 195
+            },
+            {
+              "in": "run",
+              "kind": "raise",
+              "line": 205
+            },
+            {
+              "in": "run",
+              "kind": "raise",
+              "line": 209
+            },
+            {
+              "in": "run",
+              "kind": "raise",
+              "line": 211
+            },
+            {
+              "in": "run",
+              "kind": "raise",
+              "line": 213
+            },
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 238
+            },
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 240
+            },
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 245
+            },
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 248
+            },
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 257
+            },
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 263
+            },
+            {
+              "kind": "raise",
+              "line": 270
+            },
+            {
+              "kind": "except",
+              "line": 271
+            },
+            {
+              "kind": "raise",
+              "line": 272
+            },
+            {
+              "kind": "except",
+              "line": 273
+            },
+            {
+              "kind": "raise",
+              "line": 275
+            }
+          ],
+          "hash": "5512ece78efc8699f67b98c942eedbcb2f19c25da99b4e6f99dd8b5c4d033365",
+          "importsFiles": [
+            "experiments/data-designer/egress.py",
+            "experiments/data-designer/studio_lock.py"
+          ],
+          "path": "experiments/data-designer/one_row.py"
+        },
+        {
+          "hash": "11418a5b37ee3358335edfaf2c728355c3a955d040aee91fa881842b8891cb9c",
+          "path": "experiments/data-designer/python-pin.txt"
+        },
+        {
+          "hash": "f9a3d6f4c490b678b45e403a1b831cfce13b495d0eaec9b7f2ead9de23bf8269",
+          "path": "experiments/data-designer/requirements.lock"
+        },
+        {
+          "hash": "7ecdddc0eac345e340cc2f7dc8f2a1b180a161a8bdac86ffb291a0838cc79029",
+          "path": "experiments/data-designer/requirements.txt"
+        },
+        {
+          "hash": "f9816174c20b86149520327e140ab0151c807740f743e626e56669a8b52345a4",
+          "path": "experiments/data-designer/runs/phase0-smoke-runpod.json"
+        },
+        {
+          "hash": "f4789749082f825ebeffb47136d1d3e7e459b14f895e3913270a871873357e95",
+          "path": "experiments/data-designer/runs/phase0-smoke-runpod.log"
+        },
+        {
+          "exports": [
+            "arm",
+            "assert_provider_list",
+            "assert_python_pin",
+            "assert_telemetry_env",
+            "import_data_designer",
+            "provider_rows",
+            "refuse_cloud",
+            "require_locked_files"
+          ],
+          "failurePaths": [
+            {
+              "in": "refuse_cloud",
+              "kind": "raise",
+              "line": 37
+            },
+            {
+              "in": "assert_telemetry_env",
+              "kind": "raise",
+              "line": 54
+            },
+            {
+              "in": "assert_telemetry_env",
+              "kind": "raise",
+              "line": 56
+            },
+            {
+              "in": "require_locked_files",
+              "kind": "raise",
+              "line": 63
+            },
+            {
+              "in": "require_locked_files",
+              "kind": "raise",
+              "line": 67
+            },
+            {
+              "in": "assert_python_pin",
+              "kind": "raise",
+              "line": 73
+            },
+            {
+              "in": "import_data_designer",
+              "kind": "raise",
+              "line": 86
+            },
+            {
+              "in": "import_data_designer",
+              "kind": "raise",
+              "line": 88
+            },
+            {
+              "in": "assert_provider_list",
+              "kind": "raise",
+              "line": 109
+            },
+            {
+              "in": "assert_provider_list",
+              "kind": "raise",
+              "line": 112
+            },
+            {
+              "in": "assert_provider_list",
+              "kind": "raise",
+              "line": 114
+            },
+            {
+              "in": "assert_provider_list",
+              "kind": "raise",
+              "line": 116
+            }
+          ],
+          "hash": "c1c87fd01a1b4d12f3204c86efa6dc33203618ce1b504fe22fda6cf943ab2424",
+          "path": "experiments/data-designer/studio_lock.py"
+        },
+        {
+          "exports": [
+            "run_python"
+          ],
+          "hash": "fb3ef06666661f283687f46f3d9a0e81b324f4986cabd775a8d4975a23a65b09",
+          "names": [
+            "experiments/data-designer/one_row.py"
+          ],
+          "path": "experiments/data-designer/tests/test_lockdown.py",
+          "testFramework": "unittest"
+        },
+        {
+          "hash": "816390d1812779f6f95c36a794beed8fb5db156b914325818ba570065ec0872b",
+          "path": "experiments/distill-ladder/PLAN.md"
+        },
+        {
           "hash": "204acb78c4a52b40b79ae6eaaea4da6eb1db759f43c7923b851bf65df305c5fe",
           "path": "experiments/kev-judge-finetune/README.md"
         },
@@ -472,12 +715,16 @@
           "path": "experiments/kev-judge-finetune/build_rows.py"
         },
         {
-          "hash": "f8cb097ebb64c3540f5c16f8af38efcf141f1adc7a1f6f1e32f464fae8faf506",
+          "hash": "aad065bac20e418f0f6b837cbff7d6c6e2578fd6945df32d8e6f256d912c7ed5",
           "path": "experiments/kev-judge-finetune/env/README.md"
         },
         {
           "hash": "891bc95014b8866d1f05f9e2d4037a514750c0abdd88d0c7fa25259ce0dd19f3",
           "path": "experiments/kev-judge-finetune/env/apply_fla_1330.sh"
+        },
+        {
+          "hash": "572470e2e5124fac541d521aad21535b17d24b78cabd35eadc0a65e709aa3de4",
+          "path": "experiments/kev-judge-finetune/env/check_causal_conv1d.py"
         },
         {
           "hash": "62998a43924462ac66b7664f8ebaaf625005ba33d68487e2648e4b153ae3bf98",
@@ -488,12 +735,24 @@
           "path": "experiments/kev-judge-finetune/env/requirements-cu134.lock"
         },
         {
+          "hash": "be5b51b73d36b50fa551cde30801e0df4a941d29f9881943c373136c0968234b",
+          "path": "experiments/kev-judge-finetune/env/results/2026-10-08-cu134-cc1d-gpu-util.csv"
+        },
+        {
           "hash": "c32297850164fe440c14542ca2ae23e065cde6913b81caa3089c331380d583a0",
           "path": "experiments/kev-judge-finetune/env/results/2026-10-08-cu134-gpu-util.csv"
         },
         {
           "hash": "85648de67cb96ab066bc8b68ce4a156364c271253187cba5025c3537ffdace3c",
           "path": "experiments/kev-judge-finetune/env/results/2026-10-08-cu134-rerun-gpu-util.csv"
+        },
+        {
+          "hash": "4950aa5487f255e6f96d6120b6927331b32714363c2677c813f4919f3b3078d6",
+          "path": "experiments/kev-judge-finetune/env/results/cc1d_result_2026-10-08.txt"
+        },
+        {
+          "hash": "53cc3959d015ac15e75c6e70740970341f275129925d05be6b5d81272d111aea",
+          "path": "experiments/kev-judge-finetune/results/judge-4b-full-s0-confirm-cu134-cc1d.json"
         },
         {
           "hash": "9a059b9267cf3184d68185d7117ed9e9fa906265fec9e74cd14bfed6eb2ebf8a",
@@ -784,6 +1043,91 @@
           "path": "experiments/natural-errors/review.html"
         },
         {
+          "hash": "f4e1d0b8b1fc5d55d07ae77d46fa1237cbaa8012499e0bbd03f1674a2ae8c60f",
+          "path": "experiments/npu-probe/README.md"
+        },
+        {
+          "exports": [
+            "bench",
+            "chain_model",
+            "const",
+            "conv_model",
+            "fq",
+            "main",
+            "matmul_model"
+          ],
+          "failurePaths": [
+            {
+              "in": "main",
+              "kind": "except",
+              "line": 100
+            }
+          ],
+          "hash": "8f8b5120fe989ceeb1cbd00ad58e49ae2260728c27b9e12607742f4684a0a90f",
+          "path": "experiments/npu-probe/mac_bench.py"
+        },
+        {
+          "exports": [
+            "handler_for",
+            "intel_igpu",
+            "main"
+          ],
+          "failurePaths": [
+            {
+              "in": "intel_igpu",
+              "kind": "raise",
+              "line": 39
+            },
+            {
+              "in": "do_POST",
+              "kind": "except",
+              "line": 115
+            },
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 149
+            }
+          ],
+          "hash": "ca8fd8c8e23750687fedc05a010954e609a463a17797222cb90a47b0459fe62e",
+          "path": "experiments/npu-probe/npu_serve.py"
+        },
+        {
+          "exports": [
+            "device_name",
+            "embed_case",
+            "load",
+            "main",
+            "nli_case",
+            "timed"
+          ],
+          "failurePaths": [
+            {
+              "in": "main",
+              "kind": "except",
+              "line": 128
+            }
+          ],
+          "hash": "3c8cee842a19c8192bc3717afa81612d54432778948fa76fce8bce78ba2c04db",
+          "path": "experiments/npu-probe/probe.py"
+        },
+        {
+          "hash": "6833aa0f0d919a4a7eb9b3b621a15d98bafb23103f887e65ab95b1c299f46dfe",
+          "path": "experiments/npu-probe/results/2026-10-09-mac-chain.json"
+        },
+        {
+          "hash": "92dd614f4e43bd0b8e2230fe70818bb10cc41fcc6ac3fe4815262a69d2e9e8ff",
+          "path": "experiments/npu-probe/results/2026-10-09-mac.json"
+        },
+        {
+          "hash": "f9bc5ffdab9f5fcb61b9dd37dc25e4bb6dfca5e644f265ebc468232371497884",
+          "path": "experiments/npu-probe/results/2026-10-09-probe.json"
+        },
+        {
+          "hash": "63cde60fde56bde5996c3bb29b9dceef519e8f741dd432f7a0a789f17e55098c",
+          "path": "experiments/npu-probe/retrieval-benchmark.md"
+        },
+        {
           "hash": "c9288465ec9bf2996f4f2104b22f4b7501f6af6ee3b1f755186e9d0da8aee422",
           "path": "experiments/openjev-vs-jev/README.md"
         },
@@ -901,7 +1245,7 @@
           "path": "experiments/openjev-vs-jev/run_openjev.py"
         },
         {
-          "hash": "0324dc661178e8e508bb683e2ad9a38a61ea0f01eec56ad7c50ff781f634d151",
+          "hash": "3a35ef78bba5172a78ca546f85c54eb4898bca1d81c602d791da901d5a4fb686",
           "path": "experiments/verifier-gold/README.md"
         },
         {
@@ -963,6 +1307,142 @@
           "path": "experiments/verifier-gold/build_grounded.py"
         },
         {
+          "hash": "2141a32bd4d9a1f8596ecdf46b6acb55dede2fcbb4ad9846bfd214b5fefd4126",
+          "path": "experiments/verifier-gold/calibration/README.md"
+        },
+        {
+          "hash": "7f6e9b61f76a60cd21d03c71be7d9d37c6e0435505f9ff377a3b6bbe7158124f",
+          "path": "experiments/verifier-gold/calibration/candidates.txt"
+        },
+        {
+          "hash": "3cbb4011fbf29795b5ee27751c02ebf25c6ecd77bbde859d519b851c30c61ba0",
+          "path": "experiments/verifier-gold/calibration/chain_step.sh"
+        },
+        {
+          "exports": [
+            "load",
+            "report",
+            "tier",
+            "tiers",
+            "wilson"
+          ],
+          "hash": "bb80f45c94cc5599a1eed61069de7a1eef9feae8d914b05749830a8bd5df1f96",
+          "path": "experiments/verifier-gold/calibration/difficulty.py"
+        },
+        {
+          "hash": "729303fb968bf7e2403bf1f635a1d74995e34d411b8520924b13a00ab32993c8",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-smoke.log"
+        },
+        {
+          "hash": "ddd7a79225cb8fe2cbd4bb9d3f02722468842fd340f0a3975cebc5594f6cb6b2",
+          "path": "experiments/verifier-gold/calibration/run_model.sh"
+        },
+        {
+          "hash": "f609ca58c0336075db5e11099707cf0dd8dee5df98313b5fc58cfef2cabc1387",
+          "path": "experiments/verifier-gold/calibration/smoke.sh"
+        },
+        {
+          "hash": "546fcce223d455c7d9ba225a248558d3197017183135f2e284d98321bf270001",
+          "path": "experiments/verifier-gold/calibration/smoke_all.sh"
+        },
+        {
+          "hash": "ee8bf0f3f0a2d54846c1ab3eec9ad00574a6f85161281643d3eb91fd8a5ac9a6",
+          "path": "experiments/verifier-gold/calibration/tiers.json"
+        },
+        {
+          "hash": "83132732b8fe5d9cfaff18c3e60833bdd2bf3cf1f76af4501cf8bbcb1198a845",
+          "path": "experiments/verifier-gold/crossfamily/README.md"
+        },
+        {
+          "hash": "70239620532d75a57f511347b6739c0cb174e2d28550ee4d8328f6c2bcfb968d",
+          "path": "experiments/verifier-gold/crossfamily/blind_in.json"
+        },
+        {
+          "hash": "3c9d888737d13a10d0c8d42bb99072a288cc5a1dfd71b4678f920395f89debea",
+          "path": "experiments/verifier-gold/crossfamily/blind_key.json"
+        },
+        {
+          "hash": "d4ccae0e686971586e470e789a80774d5e9a397046b589470572286eedc7d292",
+          "path": "experiments/verifier-gold/crossfamily/blind_out_gemma4-31b.json"
+        },
+        {
+          "hash": "65b00cf4ccd4c7e8dc45cf5d01581bbf55a94227b054c54f5b9dbb77cecb96b3",
+          "path": "experiments/verifier-gold/crossfamily/disagreements.json"
+        },
+        {
+          "exports": [
+            "draw",
+            "load",
+            "main"
+          ],
+          "failurePaths": [
+            {
+              "in": "draw",
+              "kind": "raise",
+              "line": 39
+            }
+          ],
+          "hash": "ae95eab5df820847afaac1e71e983cf7e7702693048be7ee83d531b2d87ed109",
+          "path": "experiments/verifier-gold/crossfamily/make_sample.py"
+        },
+        {
+          "hash": "0baf24f292a3cf53e1b88693ef9607693a28454f1b725d150d1a12f931b9e57a",
+          "path": "experiments/verifier-gold/crossfamily/run_gemma.log"
+        },
+        {
+          "exports": [
+            "ask",
+            "main",
+            "prompt"
+          ],
+          "failurePaths": [
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 66
+            },
+            {
+              "in": "main",
+              "kind": "except",
+              "line": 80
+            }
+          ],
+          "hash": "347a392b3df0cdb6e2bee659c4cc6d35fca597ba04c406047eae5f9f9b90d33e",
+          "path": "experiments/verifier-gold/crossfamily/run_labeller.py"
+        },
+        {
+          "hash": "6d306878209905250a8c4e52b9077457f3807a8c6edce03d77a4b46fc9d4f786",
+          "path": "experiments/verifier-gold/crossfamily/sample.jsonl"
+        },
+        {
+          "hash": "2e28b6d96d039bbe2f3ebf77333242f9473f10d4c9ff0919e9e61fd6f5089fd3",
+          "path": "experiments/verifier-gold/diffs/b2-adjudicated.jsonl"
+        },
+        {
+          "hash": "f852edb49880cebdada721351f60ad583852773212991f964b1af627d1b13eb6",
+          "path": "experiments/verifier-gold/diffs/b2_blind_in_1.json"
+        },
+        {
+          "hash": "175648b373aba2cbf784b0dcbf87922c1749f49ded089ea4ffd00868cbf0b92f",
+          "path": "experiments/verifier-gold/diffs/b2_blind_in_2.json"
+        },
+        {
+          "hash": "2481c63e90225cce303786cd39efc1f52a27f28aef2dba24fce6bda44cb62ebf",
+          "path": "experiments/verifier-gold/diffs/b2_blind_key.json"
+        },
+        {
+          "hash": "df910719914133851ac782f0a72509f796b086ad8dc8b19d577981c70f3dd7bf",
+          "path": "experiments/verifier-gold/diffs/b2_blind_out_1.json"
+        },
+        {
+          "hash": "4394e0d098cb636afbae1ba3cf88ba5dc872cf9eccd50832c1e5bc137df18e0a",
+          "path": "experiments/verifier-gold/diffs/b2_blind_out_2.json"
+        },
+        {
+          "hash": "f43df3864f1a2fe7343fb4188b3cf2ce124af4628f7ef98273616f77bb2cdbcf",
+          "path": "experiments/verifier-gold/diffs/b2_disagreements.json"
+        },
+        {
           "hash": "d5443eff8d48a60e456639bebc62b80b5f9ab794dbc23649c2e998a142ce3096",
           "path": "experiments/verifier-gold/diffs/blind_in_1.json"
         },
@@ -1003,6 +1483,14 @@
           "path": "experiments/verifier-gold/diffs/hard_blind_out_B.json"
         },
         {
+          "hash": "4f4c058a67f9f564bbb29123e580bee5c6f42f97ad334e4ceb089abfb3586989",
+          "path": "experiments/verifier-gold/diffs/reasoning-diffs.jsonl"
+        },
+        {
+          "hash": "709eabbc38d5ef643094e0f23873810597356f981329ad86d8006b5abd76750b",
+          "path": "experiments/verifier-gold/diffs/source-publisher-b2.jsonl"
+        },
+        {
           "hash": "4f5363c506d17ba9a767e15944b8b0081f636d050e911a2cdaeb31498b00371e",
           "path": "experiments/verifier-gold/diffs/source-publisher-f3f3f66.jsonl"
         },
@@ -1025,6 +1513,55 @@
         {
           "hash": "59601d10dfea03351e506d08f5296f285d7f7cb37ba5ace79ae2bd006940aabd",
           "path": "experiments/verifier-gold/grounded.jsonl"
+        },
+        {
+          "hash": "f66bd3e3a09d904fd19032e4fd9b77a62be20ddfc8a327562a6aec9ba292c1f4",
+          "path": "experiments/verifier-gold/math-ladder/README.md"
+        },
+        {
+          "exports": [
+            "build",
+            "cells",
+            "const_for",
+            "generate",
+            "ladder_knobs",
+            "main",
+            "near_miss",
+            "ops_for",
+            "run",
+            "sweep_knobs",
+            "to_text"
+          ],
+          "failurePaths": [
+            {
+              "in": "run",
+              "kind": "raise",
+              "line": 164
+            },
+            {
+              "in": "generate",
+              "kind": "except",
+              "line": 199
+            }
+          ],
+          "hash": "e2e4074dd105aa193f20122d371a378c988b3dfae57ba65d0f5c22644259aac7",
+          "path": "experiments/verifier-gold/math-ladder/generate.py"
+        },
+        {
+          "hash": "a1062f61554d99ad21e139348c54422fae38dbf02c7e89ad7a75d8bebeae7e16",
+          "path": "experiments/verifier-gold/math-ladder/ladder.jsonl"
+        },
+        {
+          "hash": "944582becdc68688635a01b60bf0e1c85d01fd93798e298a8fc3db67508fb568",
+          "path": "experiments/verifier-gold/math-ladder/ladder_step.sh"
+        },
+        {
+          "exports": [
+            "main",
+            "wilson"
+          ],
+          "hash": "502ae2dd4062148c6b2fdd1f9c12c86dc0140b47894e40e2abb80f8e106b4e56",
+          "path": "experiments/verifier-gold/math-ladder/report.py"
         },
         {
           "hash": "3d954ce2d65f7412b4a0eb490c5e1f9c3ad01c69db0974326d7349b2d4f55f6d",
@@ -1067,7 +1604,7 @@
           "path": "experiments/verifier-gold/prs/disagreements.json"
         },
         {
-          "hash": "cdab0f6cc2b0b92124cb9a25480df0d102c0cf3f67a7f3dc03d179e5484973db",
+          "hash": "6e2d068eb7d2f3bdbce5a229dd9eedac50c09e3f57abbacba78e06f3e3c34f13",
           "path": "experiments/verifier-gold/prs/grounded-prs.jsonl"
         },
         {
@@ -1101,15 +1638,28 @@
       "outsideReads": 8,
       "outsideWrites": 4,
       "role": "code",
-      "testedBy": 1,
+      "testRunners": [
+        "unittest"
+      ],
+      "testedBy": 2,
       "unresolvedNamed": [
+        {
+          "path": "experiments/data-designer/tests/test_lockdown.py",
+          "specifier": "studio_lock",
+          "why": "unplaced"
+        },
+        {
+          "path": "experiments/data-designer/tests/test_lockdown.py",
+          "specifier": "egress",
+          "why": "unplaced"
+        },
         {
           "path": "experiments/verifier-gold/build_grounded.py",
           "specifier": null,
           "why": "dynamic"
         }
       ],
-      "unresolvedSites": 1
+      "unresolvedSites": 3
     },
     {
       "dynamicReads": 0,
@@ -1134,6 +1684,10 @@
         {
           "hash": "92c8fad29e972c269853c83ab1f1761e6222b5f48420daac3eae4e6be24e2215",
           "path": "instruments/engine-room.md"
+        },
+        {
+          "hash": "cbb79c274bc016fb49ddcffac37fbfc7ea6fac0078c0124a19c1ac686165760b",
+          "path": "instruments/intel-npu.md"
         },
         {
           "hash": "e8fcb145fe591ffb2359055d451f8685f0e7c4d2d106bc6aefb294d1022c390d",
@@ -1202,7 +1756,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "fd8a7ec65f0b8516abd0a523c1efe487dc9a8df90d14c351ebf17d8fbe4a2de8",
+          "hash": "47d3ecd2c9b33b1bba425acfc1b7c8952ec25cea624ceb341e478b3bcd257842",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -2048,11 +2602,11 @@
           "path": ".gitattributes"
         },
         {
-          "hash": "c4c0e3aa971a97d7cf570dba93ed5f582180142f2097d4eede9bc1d2fa2de05d",
+          "hash": "23b484da18d545d0f1b540e255952c6bbbc4ff0ab6c398b6d6339aaf6325d81f",
           "path": ".gitignore"
         },
         {
-          "hash": "61498469de010fcdd0da13d9d2ca2ffae6a91d82be4f7f65f96a20953b60981a",
+          "hash": "40680f3d3b732ecc72f3e61514dc8c1a916119904d1297abd105055d7aeeb504",
           "path": "CHANGELOG.md"
         },
         {
@@ -2283,6 +2837,17 @@
         },
         {
           "exports": [
+            "execute"
+          ],
+          "hash": "1e5e6a6aba6d532b0acb8d5421a69f6b5fab2900109dce122d5bfc5262d6801e",
+          "importsFiles": [
+            "experiments/verifier-gold/math-ladder/generate.py"
+          ],
+          "path": "tests/test_math_ladder_properties.py",
+          "testFramework": "unittest"
+        },
+        {
+          "exports": [
             "run_py"
           ],
           "hash": "d08ce27d3610d9d595db0065dfe810affe26adf22e40ec370b3c2218fd01b284",
@@ -2352,6 +2917,14 @@
     {
       "checksCount": 2,
       "commands": [
+        {
+          "dir": "",
+          "job": "ci",
+          "programs": [
+            "python"
+          ],
+          "step": "Install test dependencies (property tests)"
+        },
         {
           "dir": "",
           "job": "ci",
@@ -2428,7 +3001,7 @@
                   "range": ">=22.0.0 <23.0.0-0"
                 }
               ],
-              "step": "6",
+              "step": "7",
               "uses": "actions/setup-node",
               "version": "22"
             }
@@ -2465,7 +3038,16 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 5
+          "files": 6
+        },
+        {
+          "boundary": "experiments",
+          "depth": 1,
+          "enters": {
+            "file": "experiments/verifier-gold/math-ladder/generate.py",
+            "from": "tests/test_math_ladder_properties.py"
+          },
+          "files": 1
         }
       ],
       "readers": [
@@ -2546,7 +3128,7 @@
         },
         {
           "coverage": true,
-          "files": 5,
+          "files": 6,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -2959,6 +3541,12 @@
       "from": "tests",
       "fromTests": true,
       "kind": "file",
+      "to": "experiments"
+    },
+    {
+      "from": "tests",
+      "fromTests": true,
+      "kind": "file",
       "to": "mcptoolshop_rnd"
     },
     {
@@ -2970,8 +3558,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "1443c846340955e790b0a43068e5a04e98f62484",
-    "tracked": 256
+    "commit": "0cfaf268c244b982442bdd93c7c5350e6a079b3d",
+    "tracked": 316
   },
   "landings": [
     {
@@ -3083,6 +3671,72 @@
       ],
       "target": "entries/_template.md",
       "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/data-designer/studio_lock.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/data-designer/home",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/data-designer/studio_lock.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/data-designer/home/model_configs.yaml",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/data-designer/studio_lock.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/data-designer/home/model_providers.yaml",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/data-designer/studio_lock.py",
+          "call": "read_text",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/data-designer/python-pin.txt",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/data-designer/one_row.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/data-designer/runs",
+      "writers": []
+    },
+    {
+      "readers": [],
+      "target": "experiments/data-designer/runs/phase0-smoke.json",
+      "tracked": false,
+      "writers": [
+        {
+          "by": "experiments/data-designer/one_row.py",
+          "confidence": "ast"
+        }
+      ]
     },
     {
       "readers": [
@@ -3347,6 +4001,103 @@
       ]
     },
     {
+      "readers": [
+        {
+          "by": "experiments/verifier-gold/calibration/difficulty.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/verifier-gold/crossfamily/make_sample.py",
+          "call": "read_text",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/verifier-gold",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/verifier-gold/crossfamily/run_labeller.py",
+          "call": "read_text",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/verifier-gold/crossfamily",
+      "writers": [
+        {
+          "by": "experiments/verifier-gold/crossfamily/run_labeller.py",
+          "confidence": "ast"
+        }
+      ]
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/verifier-gold/crossfamily/run_labeller.py",
+          "call": "read_text",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/verifier-gold/crossfamily/blind_in.json",
+      "writers": [
+        {
+          "by": "experiments/verifier-gold/crossfamily/make_sample.py",
+          "confidence": "ast"
+        }
+      ]
+    },
+    {
+      "readers": [],
+      "target": "experiments/verifier-gold/crossfamily/blind_key.json",
+      "writers": [
+        {
+          "by": "experiments/verifier-gold/crossfamily/make_sample.py",
+          "confidence": "ast"
+        }
+      ]
+    },
+    {
+      "readers": [],
+      "target": "experiments/verifier-gold/crossfamily/sample.jsonl",
+      "writers": [
+        {
+          "by": "experiments/verifier-gold/crossfamily/make_sample.py",
+          "confidence": "ast"
+        }
+      ]
+    },
+    {
+      "readers": [
+        {
+          "by": "tests/test_math_ladder_properties.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder/generate.py",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/verifier-gold/math-ladder/report.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "tests/test_math_ladder_properties.py",
+          "call": "read_text",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder/ladder.jsonl",
+      "writers": []
+    },
+    {
       "readers": [],
       "target": "instruments",
       "writers": [
@@ -3412,9 +4163,10 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 6,
+  "testFiles": 8,
   "testsNotRun": [
-    "experiments/cuda-graphs/test_graphed_heads.py"
+    "experiments/cuda-graphs/test_graphed_heads.py",
+    "experiments/data-designer/tests/test_lockdown.py"
   ],
   "unassigned": [
     {

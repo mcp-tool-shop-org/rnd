@@ -38,6 +38,16 @@
       "partLabel": "the repository root"
     },
     {
+      "doors": 1,
+      "importedBy": [],
+      "importedByTests": [
+        "tests"
+      ],
+      "kind": "part",
+      "name": "experiments",
+      "partLabel": "experiments"
+    },
+    {
       "kind": "place",
       "readers": [
         "experiments"
@@ -60,77 +70,59 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 109,
-      "changed": 24,
+      "added": 60,
+      "changed": 8,
       "moved": 0,
-      "parts": 9,
+      "parts": 6,
       "removed": 0
     },
     "items": [
       {
-        "kind": "landing",
-        "sentence": "experiments/natural-errors/data/ is now written by experiments/natural-errors/build.py.",
+        "kind": "import-added",
+        "sentence": "tests now imports experiments.",
         "subjects": [
-          "experiments/natural-errors/data/",
-          "experiments/natural-errors/build.py"
+          "tests",
+          "experiments"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "experiments/natural-errors/data/baselines_p1.json is now written by experiments/natural-errors/baselines_p1.py.",
+        "sentence": "experiments/data-designer/runs/phase0-smoke.json is now written by experiments/data-designer/one_row.py.",
         "subjects": [
-          "experiments/natural-errors/data/baselines_p1.json",
-          "experiments/natural-errors/baselines_p1.py"
+          "experiments/data-designer/runs/phase0-smoke.json",
+          "experiments/data-designer/one_row.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "experiments/natural-errors/data/corrections.json is now written by experiments/natural-errors/build_corrections.py.",
+        "sentence": "experiments/verifier-gold/crossfamily/ is now written by experiments/verifier-gold/crossfamily/run_labeller.py.",
         "subjects": [
-          "experiments/natural-errors/data/corrections.json",
-          "experiments/natural-errors/build_corrections.py"
+          "experiments/verifier-gold/crossfamily/",
+          "experiments/verifier-gold/crossfamily/run_labeller.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "And 15 more new writers and readers of places.",
-        "subjects": []
-      },
-      {
-        "kind": "unassigned",
-        "sentence": "datapacks/hymn-arrangements/datapack.json is new and belongs to no part, so atlas check fails on it against the previous map.",
+        "sentence": "experiments/verifier-gold/crossfamily/blind_in.json is now written by experiments/verifier-gold/crossfamily/make_sample.py.",
         "subjects": [
-          "datapacks/hymn-arrangements/datapack.json"
+          "experiments/verifier-gold/crossfamily/blind_in.json",
+          "experiments/verifier-gold/crossfamily/make_sample.py"
         ]
       },
       {
-        "kind": "unassigned",
-        "sentence": "datapacks/hymn-arrangements/hosted.json is new and belongs to no part, so atlas check fails on it against the previous map.",
-        "subjects": [
-          "datapacks/hymn-arrangements/hosted.json"
-        ]
-      },
-      {
-        "kind": "unassigned",
-        "sentence": "datapacks/hymn-arrangements/spec.json is new and belongs to no part, so atlas check fails on it against the previous map.",
-        "subjects": [
-          "datapacks/hymn-arrangements/spec.json"
-        ]
-      },
-      {
-        "kind": "unassigned",
-        "sentence": "And 4 more new files that belong to no part.",
+        "kind": "landing",
+        "sentence": "And 12 more new writers and readers of places.",
         "subjects": []
       },
       {
         "kind": "counts",
-        "sentence": "109 files added and 24 changed content, across 9 parts.",
+        "sentence": "60 files added and 8 changed content, across 6 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "922b8861bbd8758b509c7e7228ba5632b6d3fdef",
-      "generatedAt": "2026-10-08T04:37:57.755Z"
+      "commit": "1443c846340955e790b0a43068e5a04e98f62484",
+      "generatedAt": "2026-10-09T01:49:31.648Z"
     },
     "unchanged": false
   },
@@ -156,9 +148,9 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 2 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "1443c846340955e790b0a43068e5a04e98f62484",
+  "commit": "0cfaf268c244b982442bdd93c7c5350e6a079b3d",
   "defaultBranch": "main",
-  "derived": "12 parts, mostly Python (41 files), shell (9), CSS (2), TypeScript (2), Astro (1), HTML (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 4 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "12 parts, mostly Python (55 files), shell (14), CSS (2), TypeScript (2), Astro (1), HTML (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -194,7 +186,12 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 5
+          "files": 6
+        },
+        {
+          "boundary": "experiments",
+          "depth": 1,
+          "files": 1
         }
       ],
       "runs": [
@@ -378,16 +375,41 @@
       ]
     },
     {
+      "place": "experiments/verifier-gold/crossfamily/",
+      "writers": [
+        "experiments/verifier-gold/crossfamily/run_labeller.py"
+      ]
+    },
+    {
+      "place": "experiments/verifier-gold/crossfamily/blind_in.json",
+      "writers": [
+        "experiments/verifier-gold/crossfamily/make_sample.py"
+      ]
+    },
+    {
+      "place": "experiments/verifier-gold/crossfamily/blind_key.json",
+      "writers": [
+        "experiments/verifier-gold/crossfamily/make_sample.py"
+      ]
+    },
+    {
+      "place": "experiments/verifier-gold/crossfamily/sample.jsonl",
+      "writers": [
+        "experiments/verifier-gold/crossfamily/make_sample.py"
+      ]
+    },
+    {
       "place": "instruments/",
       "writers": [
         "mcptoolshop_rnd/cli.py"
       ]
     }
   ],
-  "generatedAt": "2026-10-09T01:49:31.648Z",
+  "generatedAt": "2026-10-09T07:39:49.785Z",
   "limits": [
-    "4 imports could not be resolved: `experiments/verifier-gold/build_grounded.py` imports a path built at run time; `rnd/__init__.py` imports a path built at run time; `tests/test_packaging.py` imports `rnd.cli`, which is no module on its import path and no declared dependency; and 1 more.",
-    "4 writes and 6 reads use paths built at run time and are not named here.",
+    "6 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 3 more.",
+    "7 writes and 7 reads use paths built at run time and are not named here.",
+    "1 write goes to places this repository does not track, so it is not listed as generated.",
     "11 writes and 21 reads go to a path their caller passes, not to this repository.",
     "3 reads go to the directory the command is run in (entries and instruments), not to this repository.",
     "1 read goes to the directory the command is run in or a path its caller passes, not to this repository.",
@@ -432,13 +454,13 @@
   "startReason": "This path follows rnd (a command people run) from its entry, since CI runs only tests and checks.",
   "summary": "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only).",
   "summaryFrom": "person",
-  "testFiles": 6,
+  "testFiles": 8,
   "testedBy": {
-    "experiments": 1,
+    "experiments": 2,
     "mcptoolshop_rnd": 4,
     "rnd": 1
   },
-  "unnamedWrites": 4,
+  "unnamedWrites": 7,
   "unread": [
     {
       "place": "experiments/natural-errors/data/baselines_p1.json",
@@ -450,6 +472,24 @@
       "place": "experiments/natural-errors/data/corrections.json",
       "writers": [
         "experiments/natural-errors/build_corrections.py"
+      ]
+    },
+    {
+      "place": "experiments/verifier-gold/crossfamily/",
+      "writers": [
+        "experiments/verifier-gold/crossfamily/run_labeller.py"
+      ]
+    },
+    {
+      "place": "experiments/verifier-gold/crossfamily/blind_key.json",
+      "writers": [
+        "experiments/verifier-gold/crossfamily/make_sample.py"
+      ]
+    },
+    {
+      "place": "experiments/verifier-gold/crossfamily/sample.jsonl",
+      "writers": [
+        "experiments/verifier-gold/crossfamily/make_sample.py"
       ]
     },
     {
@@ -468,7 +508,7 @@
   "untested": [],
   "untestedNote": [
     "the repository root holds only shell files, which this map does not read, so whether a test touches it cannot be seen.",
-    "experiments/cuda-graphs/test_graphed_heads.py runs in no workflow."
+    "2 test files run in no workflow: experiments/cuda-graphs/test_graphed_heads.py and experiments/data-designer/tests/test_lockdown.py."
   ],
-  "written": 7
+  "written": 11
 }

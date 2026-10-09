@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.2.5] - 2026-10-08
+
+- site: override postcss-selector-parser to 7.1.6 (Dependabot alert 1)
+- Added experiment `data-designer`
+- Added experiment `kev-judge-finetune`
+
 ## [1.1.4.2.4] - 2026-10-08
 
 - verifier gold, hard reasoning batch blind-relabelled, reasoning at 111 unsupported

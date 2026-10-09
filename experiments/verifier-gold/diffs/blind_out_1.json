@@ -1,0 +1,522 @@
+[
+ {
+  "n": 1,
+  "reasoning": "Inserted between same-generator-no-error and held-out-generator.",
+  "label": "supported"
+ },
+ {
+  "n": 2,
+  "reasoning": "identity() adds backend_dll and backend_sha256 beside url, ollama_version and build.",
+  "label": "supported"
+ },
+ {
+  "n": 3,
+  "reasoning": "Return adds evidence, calibration, calibrationText; pack, confidence, scores kept.",
+  "label": "supported"
+ },
+ {
+  "n": 4,
+  "reasoning": "Word(w) not equal to off (case-insensitive) errors with a message saying a number of minutes or off is expected. (Ambiguous wording.)",
+  "label": "supported"
+ },
+ {
+  "n": 5,
+  "reasoning": "After, pod_create uses profile.effective_min_cuda(), not job.min_cuda directly.",
+  "label": "unsupported"
+ },
+ {
+  "n": 6,
+  "reasoning": "Default of 30 is not shown; only a serde module for the on-disk value.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 7,
+  "reasoning": "pod_name returns offrig-<profile> for None and offrig-<tag>-<profile> for Some(tag).",
+  "label": "supported"
+ },
+ {
+  "n": 8,
+  "reasoning": "The new step runs exit 1 when a path is found, failing the job rather than warning.",
+  "label": "unsupported"
+ },
+ {
+  "n": 9,
+  "reasoning": "lane_guard returns the profile's own live pod for reuse; it refuses only for a pod of another profile.",
+  "label": "unsupported"
+ },
+ {
+  "n": 10,
+  "reasoning": "plan_minutes.unwrap_or(profile_minutes) falls back only on None, so 0 is used.",
+  "label": "unsupported"
+ },
+ {
+  "n": 11,
+  "reasoning": "Event::Waiting is emitted, but the desktop app's rendering is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 12,
+  "reasoning": "recordMissionOutcome is called after run.status/completedAt are set, and only with explicit cwd.",
+  "label": "unsupported"
+ },
+ {
+  "n": 13,
+  "reasoning": "If gpu_types is empty the profile's gpu_type_ids are kept; replacement happens only when non-empty.",
+  "label": "unsupported"
+ },
+ {
+  "n": 14,
+  "reasoning": "'quantifier' added to the list of fact, number, step of reasoning.",
+  "label": "supported"
+ },
+ {
+  "n": 15,
+  "reasoning": "manual_seed is called after the warmup undo and before capture, only when seed is not None.",
+  "label": "supported"
+ },
+ {
+  "n": 16,
+  "reasoning": "lane_pods filters out desired_status == TERMINATED.",
+  "label": "unsupported"
+ },
+ {
+  "n": 17,
+  "reasoning": "The job_dir arm is placed before the plain done arm, so it is checked first.",
+  "label": "unsupported"
+ },
+ {
+  "n": 18,
+  "reasoning": "lane_tag is marked #[serde(skip)]: never read from or written to the file.",
+  "label": "unsupported"
+ },
+ {
+  "n": 19,
+  "reasoning": "Minutes(0) deserializes to Some(0), not None; only 'off' gives None.",
+  "label": "unsupported"
+ },
+ {
+  "n": 20,
+  "reasoning": "plan_minutes.unwrap_or(profile_minutes) uses a given Some(0) and falls back only on None.",
+  "label": "supported"
+ },
+ {
+  "n": 21,
+  "reasoning": "explicitCwd = arguments.length >= 4 gates recordMissionOutcome.",
+  "label": "supported"
+ },
+ {
+  "n": 22,
+  "reasoning": "Code pod_not_ready added and PodNotReady added to the retryable true arm with NoCapacity.",
+  "label": "supported"
+ },
+ {
+  "n": 23,
+  "reasoning": "grep over the three exes then exit 1 fails the job.",
+  "label": "supported"
+ },
+ {
+  "n": 24,
+  "reasoning": "chat_body adds think: False, so the request is not identical.",
+  "label": "unsupported"
+ },
+ {
+  "n": 25,
+  "reasoning": "The new control is inserted before held-out-generator, not at the end.",
+  "label": "unsupported"
+ },
+ {
+  "n": 26,
+  "reasoning": "With --sample and no --limit, pilot is False so path is screen_ctx.json.",
+  "label": "supported"
+ },
+ {
+  "n": 27,
+  "reasoning": "loaded.clear() is called inside the per-control loop (each control), not once before all controls.",
+  "label": "unsupported"
+ },
+ {
+  "n": 28,
+  "reasoning": "Field has #[serde(skip)] and the comment says never read from or written to the file.",
+  "label": "supported"
+ },
+ {
+  "n": 29,
+  "reasoning": "Reseed happens after warmup and the undo, not before it.",
+  "label": "unsupported"
+ },
+ {
+  "n": 30,
+  "reasoning": "Hashes are computed but no CUDA 13.0 vs 13.4 values are shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 31,
+  "reasoning": "Flags (remap paths, crt-static) are shown but no binary sizes.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 32,
+  "reasoning": "loaded.clear() at the start of each control iteration; mid skipped when control != none.",
+  "label": "supported"
+ },
+ {
+  "n": 33,
+  "reasoning": "How the side-car derives lane_tag is not shown; only the field and in_lane taking lane.tag.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 34,
+  "reasoning": "lane_pods filters out desired_status TERMINATED.",
+  "label": "supported"
+ },
+ {
+  "n": 35,
+  "reasoning": "if let Some(v) = min_cuda.and_then(cuda_at_least) assigns body.allowed_cuda_versions after pod_create's profile value.",
+  "label": "supported"
+ },
+ {
+  "n": 36,
+  "reasoning": "after_rental converts only Error::Timeout; other errors are returned unchanged.",
+  "label": "unsupported"
+ },
+ {
+  "n": 37,
+  "reasoning": "max_chars = 2 * median, i.e. twice the median, not the median.",
+  "label": "unsupported"
+ },
+ {
+  "n": 38,
+  "reasoning": "The body has think: False, not true.",
+  "label": "unsupported"
+ },
+ {
+  "n": 39,
+  "reasoning": "owns_pod requires pod_name of some configured profile to equal the name exactly, not a prefix match.",
+  "label": "unsupported"
+ },
+ {
+  "n": 40,
+  "reasoning": "Error::Refused message names the lane (or plain), p.name and p.id and says shut it down first.",
+  "label": "supported"
+ },
+ {
+  "n": 41,
+  "reasoning": "Effect on the share of answers without a pair is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 42,
+  "reasoning": "unload takes url (default OLLAMA) and posts to url + /api/generate with keep_alive 0.",
+  "label": "supported"
+ },
+ {
+  "n": 43,
+  "reasoning": "CONTROL_STATUS keeps not-run and adds unresolved; it does not replace it.",
+  "label": "unsupported"
+ },
+ {
+  "n": 44,
+  "reasoning": "launch now calls lane_guard instead of current_pod.",
+  "label": "unsupported"
+ },
+ {
+  "n": 45,
+  "reasoning": "eligible now also filters out excludedIds from check.excluded, besides inverted and unmeasured.",
+  "label": "supported"
+ },
+ {
+  "n": 46,
+  "reasoning": "Excluded critics are filtered from eligible, so they cannot be picked for a panel.",
+  "label": "unsupported"
+ },
+ {
+  "n": 47,
+  "reasoning": "owns_pod is any profile with pod_name(p) == name.",
+  "label": "supported"
+ },
+ {
+  "n": 48,
+  "reasoning": "TAG=-${KEV_VENV#.venv-} when KEV_VENV != .venv, appended to OUT.",
+  "label": "supported"
+ },
+ {
+  "n": 49,
+  "reasoning": "After, the fork includes x.device on CUDA and torch.manual_seed seeds CUDA.",
+  "label": "unsupported"
+ },
+ {
+  "n": 50,
+  "reasoning": "boost is row.boost only when row.status === measured, otherwise 0.",
+  "label": "unsupported"
+ },
+ {
+  "n": 51,
+  "reasoning": "check_server still raises SystemExit on a different server.",
+  "label": "unsupported"
+ },
+ {
+  "n": 52,
+  "reasoning": "None serializes as the word off, not 0.",
+  "label": "unsupported"
+ },
+ {
+  "n": 53,
+  "reasoning": "weights_only=True added; map_location=cpu kept.",
+  "label": "supported"
+ },
+ {
+  "n": 54,
+  "reasoning": "The conditional default applies to HF_HOME; PYTHONUNBUFFERED=1 is still set unconditionally.",
+  "label": "unsupported"
+ },
+ {
+  "n": 55,
+  "reasoning": "reports[i].recipe is set from the gate and the return adds excluded: gate.excluded.",
+  "label": "supported"
+ },
+ {
+  "n": 56,
+  "reasoning": "PodNotReady has its own code pod_not_ready and is added to the retryable true list.",
+  "label": "unsupported"
+ },
+ {
+  "n": 57,
+  "reasoning": "No timing evidence is shown; reseeding is a single call.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 58,
+  "reasoning": "_load now receives cpu instead of device.",
+  "label": "supported"
+ },
+ {
+  "n": 59,
+  "reasoning": "Both strong and flawed go through scores(), which applies batch_size.",
+  "label": "unsupported"
+ },
+ {
+  "n": 60,
+  "reasoning": "The finite-loss and min(norms) > 0 asserts are identical; only the loss-fall assertion changed.",
+  "label": "supported"
+ },
+ {
+  "n": 61,
+  "reasoning": "Missing card excludes only when requireRecipe is set, otherwise it is a note; requireRecipe changes exclusion, not wording.",
+  "label": "unsupported"
+ },
+ {
+  "n": 62,
+  "reasoning": "Before, torch.load had no weights_only; the change adds weights_only=True.",
+  "label": "unsupported"
+ },
+ {
+  "n": 63,
+  "reasoning": "The sample is drawn after the --limit slice, from the already limited items.",
+  "label": "unsupported"
+ },
+ {
+  "n": 64,
+  "reasoning": "Reversed: the fork used to cover construction only and now covers construction and training.",
+  "label": "unsupported"
+ },
+ {
+  "n": 65,
+  "reasoning": "recipes == null returns applied: false with no exclusions.",
+  "label": "unsupported"
+ },
+ {
+  "n": 66,
+  "reasoning": "boost = row && row.status === measured ? row.boost : 0.",
+  "label": "supported"
+ },
+ {
+  "n": 67,
+  "reasoning": "The plain done arm remains and is reached when job_dir is not a string.",
+  "label": "supported"
+ },
+ {
+  "n": 68,
+  "reasoning": "The new text still says keep every fact, number, quantifier and step of reasoning.",
+  "label": "unsupported"
+ },
+ {
+  "n": 69,
+  "reasoning": "If no own pod is live and another pod is, it returns Error::Refused; own pod is reused.",
+  "label": "supported"
+ },
+ {
+  "n": 70,
+  "reasoning": "chat_body has think: False, other keys unchanged.",
+  "label": "supported"
+ },
+ {
+  "n": 71,
+  "reasoning": "Direction reversed: before wait_for_gpu_minutes was 0, after it is 20.",
+  "label": "unsupported"
+ },
+ {
+  "n": 72,
+  "reasoning": "--seed type int default=0 with help text about the probed models' training seed recorded in each export.",
+  "label": "supported"
+ },
+ {
+  "n": 73,
+  "reasoning": "done with job_dir string gets the offrig_put/exec/get message; other done keeps the handoff message.",
+  "label": "supported"
+ },
+ {
+  "n": 74,
+  "reasoning": "weights_only=True added inside the if critic_path block.",
+  "label": "supported"
+ },
+ {
+  "n": 75,
+  "reasoning": "Comment says a new env never overwrites a reference run; TAG is appended to OUT.",
+  "label": "supported"
+ },
+ {
+  "n": 76,
+  "reasoning": "file_sha256 reads in 1 MiB blocks, not the whole file at once.",
+  "label": "unsupported"
+ },
+ {
+  "n": 77,
+  "reasoning": "Old 'Reword a single sentence' is replaced by 'replace one or two words with synonyms, and change nothing else'. (Ambiguous wording.)",
+  "label": "supported"
+ },
+ {
+  "n": 78,
+  "reasoning": "max_chars = 2 * edit_stats(source)[median_chars_changed] passed to plant.",
+  "label": "supported"
+ },
+ {
+  "n": 79,
+  "reasoning": "near_tie_share uses abs(s - f) < tolerance, strictly less than.",
+  "label": "unsupported"
+ },
+ {
+  "n": 80,
+  "reasoning": "Only plan_c.sh is shown; plan_d.sh is not.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 81,
+  "reasoning": "A gap equal to band is not greater than band, so it counts as a tie (0.5), not a win.",
+  "label": "unsupported"
+ },
+ {
+  "n": 82,
+  "reasoning": "The new code keeps window=4; only seed=seed is added.",
+  "label": "unsupported"
+ },
+ {
+  "n": 83,
+  "reasoning": "An empty OFFRIG_CONFIG_DIR is skipped by !d.is_empty() and falls back to the default.",
+  "label": "unsupported"
+ },
+ {
+  "n": 84,
+  "reasoning": "recordMissionOutcome begins with if (!cwd) return false;.",
+  "label": "supported"
+ },
+ {
+  "n": 85,
+  "reasoning": "The plan's min_cuda, when it parses, overwrites the profile's value.",
+  "label": "unsupported"
+ },
+ {
+  "n": 86,
+  "reasoning": "recipes == null returns applied false and excluded [].",
+  "label": "supported"
+ },
+ {
+  "n": 87,
+  "reasoning": "summary gets seed and GeometryRecorder gets seed=seed.",
+  "label": "supported"
+ },
+ {
+  "n": 88,
+  "reasoning": "allowed_cuda_versions comes from profile.job min_cuda via and_then, unwrap_or_default gives empty with no job.",
+  "label": "supported"
+ },
+ {
+  "n": 89,
+  "reasoning": "Else branch gives that reason when measured is nonempty and notInverted is nonempty.",
+  "label": "supported"
+ },
+ {
+  "n": 90,
+  "reasoning": "With --sample alone, pilot is false so path is screen_ctx.json; only --limit gives the pilot file.",
+  "label": "unsupported"
+ },
+ {
+  "n": 91,
+  "reasoning": "Both strong and flawed go through scores(), which applies batch_size.",
+  "label": "supported"
+ },
+ {
+  "n": 92,
+  "reasoning": "The recorder is now created with seed=seed.",
+  "label": "unsupported"
+ },
+ {
+  "n": 93,
+  "reasoning": "The ledger file format and location are not shown; calibrationSnapshot is not visible.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 94,
+  "reasoning": "unload now takes a url (default OLLAMA) and posts to url, no longer fixed to 127.0.0.1:11434.",
+  "label": "unsupported"
+ },
+ {
+  "n": 95,
+  "reasoning": "The CLI flag is not shown; only the jury.mjs allowUnproven option.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 96,
+  "reasoning": "The CUDA floor comes from the job's min_cuda, not a recipe; non-job profiles get an empty list.",
+  "label": "unsupported"
+ },
+ {
+  "n": 97,
+  "reasoning": "launch now calls self.lane_guard(profile) where it called current_pod.",
+  "label": "supported"
+ },
+ {
+  "n": 98,
+  "reasoning": "If every measured critic is inverted the reason is the below-0.5 text, not the recipe-excluded text.",
+  "label": "unsupported"
+ },
+ {
+  "n": 99,
+  "reasoning": "fork_rng(devices=[x.device] if cuda else []) with torch.manual_seed; old was devices=[] CPU generator.",
+  "label": "supported"
+ },
+ {
+  "n": 100,
+  "reasoning": "scores is still in the return, alongside new fields.",
+  "label": "unsupported"
+ },
+ {
+  "n": 101,
+  "reasoning": "_train is called inside the with fork_rng block and holds construction and training.",
+  "label": "supported"
+ },
+ {
+  "n": 102,
+  "reasoning": "confidence uses keywordScore from scores; boost only affects adjusted sort order.",
+  "label": "supported"
+ },
+ {
+  "n": 103,
+  "reasoning": "check_server raises SystemExit when the server differs; it is not overwritten.",
+  "label": "unsupported"
+ },
+ {
+  "n": 104,
+  "reasoning": "PYTHONUNBUFFERED=1 stays literal; only HF_HOME gets the default expansion.",
+  "label": "supported"
+ }
+]

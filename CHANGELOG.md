@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.2.3] - 2026-10-08
+
+- verifier gold, Publisher diff-based reasoning set blind-relabelled 208/208
+- Added experiment `data-designer`
+- Added experiment `kev-judge-finetune`
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.2.2] - 2026-10-08
 
 - verifier gold: PR set adjudicated (373), grounded unsupported 241

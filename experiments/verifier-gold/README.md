@@ -1,4 +1,4 @@
-# Verifier gold sets: grounded claims
+# Verifier gold sets: grounded and reasoning claims
 
 These are the gold claims that pick and calibrate offrig's default verifier model. The design is offrig#38,
 `docs/verifier-design.md`. The split agreed with the Publisher, 2026-10-08: R&D owns model selection and the
@@ -78,3 +78,32 @@ batches widen beyond one codebase and one language, so a verifier isn't tuned to
 - **aspire-si (Python):** critic-head training and selection;
 - **docs vs code:** README and handbook sentences checked against the code they describe. This is the
   verifier's real job.
+
+## Reasoning set: claims about what a change did (`diffs/`)
+
+The Publisher's diff-based set (Publisher commit f3f3f66), copied unchanged as
+`diffs/source-publisher-f3f3f66.jsonl`.
+
+| Split | supported | unsupported | cannot_tell |
+|---|---|---|---|
+| tune | 41 | 41 | 9 |
+| heldout | 55 | 55 | 7 |
+| **total** | **96** | **96** | **16** |
+
+- **Source:** 19 PRs (offrig, aspire-si, role-os) plus 5 rnd commits. The evidence is the before and after
+  hunks at the base and merge SHAs. 72 items are tagged `has_doc_comment`.
+- **Near-misses specific to changes:**
+  - direction reversed (9);
+  - a false "no behaviour change", or old behaviour credited to the change (12);
+  - the wrong scope (11);
+  - plus the usual kinds.
+- **Blind relabel** by R&D's Sonnet labellers (2 batches of 104, shuffled, labels and notes hidden, strict):
+  **208/208 agreed.** They flagged 4 items as ambiguous wording, and kept the author's label on each.
+- **Spot-check:** R&D read 10 random items and the 4 flagged ones against both hunks. All 14 were correct.
+- **What 208/208 means:** the labels are sound. But a strong model found every item easy, so the set may not
+  tell strong verifiers apart. The calibration run shows whether it does: if the local candidates also score
+  near 100% here, the next batch needs harder near-misses (for example behaviour that depends on code
+  outside the hunk, or a change whose doc comment says something the code doesn't do).
+- **Caveats** (the Publisher's): one author; chained PRs share hunks, so items aren't independent; pure
+  additions have only surrounding code as their "before".
+- **Short of the rule:** 96 unsupported, against 100. The Publisher adds about 10 behaviours (role-os and rnd).

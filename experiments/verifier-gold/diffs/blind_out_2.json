@@ -1,0 +1,522 @@
+[
+ {
+  "n": 105,
+  "reasoning": "Before wait_for_gpu_minutes: 0, after: 20 in the Job profile.",
+  "label": "supported"
+ },
+ {
+  "n": 106,
+  "reasoning": "serialize writes OnDisk::Word(\"off\") for None.",
+  "label": "supported"
+ },
+ {
+  "n": 107,
+  "reasoning": "After, the pkill pattern uses ${KEV_VENV:-.venv}, so it follows KEV_VENV rather than always .venv.",
+  "label": "unsupported"
+ },
+ {
+  "n": 108,
+  "reasoning": "HF_HOME=${HF_HOME:-/workspace/hf} keeps /workspace/hf when unset.",
+  "label": "supported"
+ },
+ {
+  "n": 109,
+  "reasoning": "The python is ${KEV_VENV:-.venv}, defaulting to .venv, not always .venv-cu134.",
+  "label": "unsupported"
+ },
+ {
+  "n": 110,
+  "reasoning": "NOISE_BAND = 0.002 is defined, but its comment says it is reported only and no rule uses it.",
+  "label": "unsupported"
+ },
+ {
+  "n": 111,
+  "reasoning": "deserialize maps OnDisk::Minutes(m) to Some(m) with no zero exclusion.",
+  "label": "supported"
+ },
+ {
+  "n": 112,
+  "reasoning": "New field has skip_serializing_if = Vec::is_empty.",
+  "label": "supported"
+ },
+ {
+  "n": 113,
+  "reasoning": "After, ask exits unless label, build and backend_dll are all given.",
+  "label": "supported"
+ },
+ {
+  "n": 114,
+  "reasoning": "asked.min(secs_left.saturating_sub(WAIT_RESERVE)) with a 5-minute reserve, saturating at zero.",
+  "label": "supported"
+ },
+ {
+  "n": 115,
+  "reasoning": "After, ask raises SystemExit unless both --label and --build are present; before there was no check.",
+  "label": "supported"
+ },
+ {
+  "n": 116,
+  "reasoning": "TAG makes a new env's output dir get a suffix so it never overwrites a reference run; the claim reverses the purpose.",
+  "label": "unsupported"
+ },
+ {
+  "n": 117,
+  "reasoning": "The assert changed from losses[-1] < losses[0]*0.8 to losses[-1] < losses[0].",
+  "label": "supported"
+ },
+ {
+  "n": 118,
+  "reasoning": "With KEV_VENV unset the condition is false, so TAG stays empty and there is no suffix.",
+  "label": "unsupported"
+ },
+ {
+  "n": 119,
+  "reasoning": "The build still passes -p offrig-cli -p offrig-mcp -p offrig-app.",
+  "label": "unsupported"
+ },
+ {
+  "n": 120,
+  "reasoning": "Event::Waiting is emitted on every loop iteration that finds no capacity, with an incrementing attempt, not once.",
+  "label": "unsupported"
+ },
+ {
+  "n": 121,
+  "reasoning": "With band 0.0 equal pairs fall to the else branch and score 0.5, same as before.",
+  "label": "unsupported"
+ },
+ {
+  "n": 122,
+  "reasoning": "recordMissionOutcome returns false without cwd, and failStep calls it only when cwd is passed explicitly; no process.cwd() fallback.",
+  "label": "unsupported"
+ },
+ {
+  "n": 123,
+  "reasoning": "The default changed: attempts=5 is replaced by rounds=7, and a max_chars gate is added.",
+  "label": "unsupported"
+ },
+ {
+  "n": 124,
+  "reasoning": "Both the python invocation and pkill use ${KEV_VENV:-.venv}.",
+  "label": "supported"
+ },
+ {
+  "n": 125,
+  "reasoning": "Rejection uses edit_chars(p) > max_chars, so exactly max_chars is kept.",
+  "label": "unsupported"
+ },
+ {
+  "n": 126,
+  "reasoning": "pod_create now calls profile.effective_min_cuda() instead of reading the job's min_cuda.",
+  "label": "supported"
+ },
+ {
+  "n": 127,
+  "reasoning": "With KEV_VENV unset TAG is empty, so OUT is unchanged.",
+  "label": "supported"
+ },
+ {
+  "n": 128,
+  "reasoning": "CONTROL_STATUS gains \"unresolved\" beside the three existing values.",
+  "label": "supported"
+ },
+ {
+  "n": 129,
+  "reasoning": "weights_only=True was added but map_location=self.device was already there; it is not the CPU.",
+  "label": "unsupported"
+ },
+ {
+  "n": 130,
+  "reasoning": "The change adds +crt-static, linking the C runtime statically so no redistributable is needed.",
+  "label": "unsupported"
+ },
+ {
+  "n": 131,
+  "reasoning": "The new identity() dict still includes the build label alongside the DLL path and hash.",
+  "label": "unsupported"
+ },
+ {
+  "n": 132,
+  "reasoning": "The field has skip_serializing_if = Vec::is_empty, so it is omitted when empty.",
+  "label": "unsupported"
+ },
+ {
+  "n": 133,
+  "reasoning": "Unresolved controls add a problem and exclude the critic unless allowUnproven is set.",
+  "label": "unsupported"
+ },
+ {
+  "n": 134,
+  "reasoning": "Unresolved entries push \"<control> unresolved\" into problems, which excludes unless allowUnproven.",
+  "label": "supported"
+ },
+ {
+  "n": 135,
+  "reasoning": "After, wait_ready's error is mapped through e.after_rental(&pod.id).",
+  "label": "unsupported"
+ },
+ {
+  "n": 136,
+  "reasoning": "After, ask still requires --build as well as --backend-dll.",
+  "label": "unsupported"
+ },
+ {
+  "n": 137,
+  "reasoning": "owns_pod gives \"offrig\"; other offrig- names get \"lane  \"; the rest \"other\".",
+  "label": "supported"
+ },
+ {
+  "n": 138,
+  "reasoning": "allowUnproven and requireRecipe are gate.applied ? value === true : false.",
+  "label": "supported"
+ },
+ {
+  "n": 139,
+  "reasoning": "pod_name gives offrig-<tag>-<profile> with a tag, not offrig-<profile>-<tag>.",
+  "label": "unsupported"
+ },
+ {
+  "n": 140,
+  "reasoning": "Confidence is computed from keywordScore = scores[topPack], the unboosted score.",
+  "label": "unsupported"
+ },
+ {
+  "n": 141,
+  "reasoning": "A failed control pushes a problem and excludes when allowUnproven is false.",
+  "label": "supported"
+ },
+ {
+  "n": 142,
+  "reasoning": "Band defaults to 0.0; a gap not exceeding band falls to the 0.5 branch.",
+  "label": "supported"
+ },
+ {
+  "n": 143,
+  "reasoning": "Signature changes from attempts: int = 5 to rounds: int = 7.",
+  "label": "supported"
+ },
+ {
+  "n": 144,
+  "reasoning": "The sample block runs after items = items[:a.limit].",
+  "label": "supported"
+ },
+ {
+  "n": 145,
+  "reasoning": "Excluded critics are listed in a separate excluded field; reports still contains all critics.",
+  "label": "unsupported"
+ },
+ {
+  "n": 146,
+  "reasoning": "lane_guard and lane_pods are shown but not any call from offrig_plan. (Ambiguous wording.)",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 147,
+  "reasoning": "Before it allowed rewording a sentence changing few words; after it restricts to replacing one or two words with synonyms. Reversed.",
+  "label": "unsupported"
+ },
+ {
+  "n": 148,
+  "reasoning": "After, HF_HOME=${HF_HOME:-/workspace/hf} keeps a caller's value.",
+  "label": "unsupported"
+ },
+ {
+  "n": 149,
+  "reasoning": "Before required < 0.8x; after only requires losses[-1] < losses[0]. Reversed.",
+  "label": "unsupported"
+ },
+ {
+  "n": 150,
+  "reasoning": "The GPU list is overridden only if gpu_types is non-empty.",
+  "label": "supported"
+ },
+ {
+  "n": 151,
+  "reasoning": "The sample uses a fixed seed 20261008 in random.Random, not a fresh seed.",
+  "label": "unsupported"
+ },
+ {
+  "n": 152,
+  "reasoning": "file_sha256 reads iter(lambda: f.read(1 << 20)) into a hash, 1 MiB blocks.",
+  "label": "supported"
+ },
+ {
+  "n": 153,
+  "reasoning": "The comment mentions about 27 GB for all variants but no peak-memory figure after the change is shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 154,
+  "reasoning": "pod_create_for_plan only replaces gpu_type_ids and allowed_cuda_versions; the name is unchanged.",
+  "label": "unsupported"
+ },
+ {
+  "n": 155,
+  "reasoning": "Missing assessment gives the note and excludes only if requireRecipe.",
+  "label": "supported"
+ },
+ {
+  "n": 156,
+  "reasoning": "pkill pattern uses ${KEV_VENV:-.venv}, same as the launch.",
+  "label": "supported"
+ },
+ {
+  "n": 157,
+  "reasoning": "The \"done\" if job_dir.is_string() arm is placed before the plain \"done\" arm.",
+  "label": "supported"
+ },
+ {
+  "n": 158,
+  "reasoning": "random.Random(20261008).sample draws a.sample ids.",
+  "label": "supported"
+ },
+ {
+  "n": 159,
+  "reasoning": "${KEV_VENV#.venv-} strips the .venv- prefix, so the suffix is -cu134, not -.venv-cu134.",
+  "label": "unsupported"
+ },
+ {
+  "n": 160,
+  "reasoning": "deserialize uses eq_ignore_ascii_case(\"off\"), so any case means None.",
+  "label": "unsupported"
+ },
+ {
+  "n": 161,
+  "reasoning": "With band 0.0, a>b gives 1.0, b>a gives 0.0, equal gives 0.5, as before.",
+  "label": "supported"
+ },
+ {
+  "n": 162,
+  "reasoning": "After, ask requires both --label and --build.",
+  "label": "unsupported"
+ },
+ {
+  "n": 163,
+  "reasoning": "eq_ignore_ascii_case(\"off\") maps any letter case to None.",
+  "label": "supported"
+ },
+ {
+  "n": 164,
+  "reasoning": "The doc comment says gaps never exclude and only failed/unresolved problems exclude.",
+  "label": "unsupported"
+ },
+ {
+  "n": 165,
+  "reasoning": "attempt is incremented and Event::Waiting emitted each time capacity is missing before the limit, starting at 1.",
+  "label": "supported"
+ },
+ {
+  "n": 166,
+  "reasoning": "config_dir returns OFFRIG_CONFIG_DIR if set and non-empty, and config_path joins config.toml onto it.",
+  "label": "supported"
+ },
+ {
+  "n": 167,
+  "reasoning": "Gaps never exclude; only problems from failed/unresolved do.",
+  "label": "supported"
+ },
+ {
+  "n": 168,
+  "reasoning": "near_tie_share counts abs(s - f) < tolerance.",
+  "label": "supported"
+ },
+ {
+  "n": 169,
+  "reasoning": "The cargo build line is unchanged with --locked and the same three -p packages.",
+  "label": "supported"
+ },
+ {
+  "n": 170,
+  "reasoning": "When the profile's own pod is live, lane_guard returns Ok(Some(pod)); refusal is for another profile's pod.",
+  "label": "unsupported"
+ },
+ {
+  "n": 171,
+  "reasoning": "recordMissionOutcome comes after the run.status/completedAt assignments and only if explicitCwd.",
+  "label": "supported"
+ },
+ {
+  "n": 172,
+  "reasoning": "NOISE_BAND = 0.002 with the comment \"Reported only; no rule uses it.\"",
+  "label": "supported"
+ },
+ {
+  "n": 173,
+  "reasoning": "The default is /workspace/hf; /root/hf is only in a comment example.",
+  "label": "unsupported"
+ },
+ {
+  "n": 174,
+  "reasoning": "Only \"done\" with a job_dir string gets the job-pod message; other done pods keep the old message.",
+  "label": "unsupported"
+ },
+ {
+  "n": 175,
+  "reasoning": "Now only owns_pod pods are labelled offrig; other offrig- names are labelled lane.",
+  "label": "unsupported"
+ },
+ {
+  "n": 176,
+  "reasoning": "Only integrations/code and isaac/critic loads are shown; not every torch.load call in the repo.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 177,
+  "reasoning": "Other strings raise a custom error; only \"off\" gives None.",
+  "label": "unsupported"
+ },
+ {
+  "n": 178,
+  "reasoning": "The new chat_body adds \"think\": False, which the old inline body lacked.",
+  "label": "supported"
+ },
+ {
+  "n": 179,
+  "reasoning": "map_location=\"cpu\" stays; only weights_only=True is added.",
+  "label": "unsupported"
+ },
+ {
+  "n": 180,
+  "reasoning": "Unset batch_size makes scores() call score_many once on all responses, per side.",
+  "label": "supported"
+ },
+ {
+  "n": 181,
+  "reasoning": "check_server has the same setdefault/compare and raises SystemExit.",
+  "label": "supported"
+ },
+ {
+  "n": 182,
+  "reasoning": "adjusted is built only for names in scores, so a pack with no hits is not added.",
+  "label": "unsupported"
+ },
+ {
+  "n": 183,
+  "reasoning": "Only the --seed argument is shown; nothing shows regenerating older exports.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 184,
+  "reasoning": "They are false when the gate is not applied, not echoed.",
+  "label": "unsupported"
+ },
+ {
+  "n": 185,
+  "reasoning": "The outcome is recorded only when cwd is explicitly passed, with no process.cwd() fallback.",
+  "label": "unsupported"
+ },
+ {
+  "n": 186,
+  "reasoning": "WAIT_RESERVE is 5 minutes, not 15.",
+  "label": "unsupported"
+ },
+ {
+  "n": 187,
+  "reasoning": "The message says \"shut it down first\".",
+  "label": "unsupported"
+ },
+ {
+  "n": 188,
+  "reasoning": "window=4, step_axis and scalar_source are unchanged in write_exports; only seed is added.",
+  "label": "supported"
+ },
+ {
+  "n": 189,
+  "reasoning": "--seed has default=0, so it is not required.",
+  "label": "unsupported"
+ },
+ {
+  "n": 190,
+  "reasoning": "weights_only=True added; map_location=self.device is retained.",
+  "label": "supported"
+ },
+ {
+  "n": 191,
+  "reasoning": "RUSTFLAGS has --remap-path-prefix for USERPROFILE and GITHUB_WORKSPACE and +crt-static.",
+  "label": "supported"
+ },
+ {
+  "n": 192,
+  "reasoning": "Only gpu_type_ids and allowed_cuda_versions are conditionally replaced.",
+  "label": "supported"
+ },
+ {
+  "n": 193,
+  "reasoning": "Timeout becomes PodNotReady with \"timed out waiting for {what}\"; other errors pass through.",
+  "label": "supported"
+ },
+ {
+  "n": 194,
+  "reasoning": "If a live pod's name equals mine, it returns Ok(Some(p.clone())).",
+  "label": "supported"
+ },
+ {
+  "n": 195,
+  "reasoning": "Rejection only if edit_chars > max_chars, so equal is kept.",
+  "label": "supported"
+ },
+ {
+  "n": 196,
+  "reasoning": "Only the job tool's next text is shown; offrig_status code is not. (Ambiguous wording.)",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 197,
+  "reasoning": "The after code raises SystemExit if state[\"server\"] != who; the before snippet had no such check.",
+  "label": "supported"
+ },
+ {
+  "n": 198,
+  "reasoning": "The exclusion is guarded by !allowUnproven, so allowUnproven prevents it.",
+  "label": "unsupported"
+ },
+ {
+  "n": 199,
+  "reasoning": "HF_HOME=${HF_HOME:-/workspace/hf} keeps a caller value.",
+  "label": "supported"
+ },
+ {
+  "n": 200,
+  "reasoning": "The finite-loss assertion is still present after the change.",
+  "label": "unsupported"
+ },
+ {
+  "n": 201,
+  "reasoning": "Only the near_tie_share function is shown, not any readout using it.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 202,
+  "reasoning": "The default is http://127.0.0.1:11434, not 11492.",
+  "label": "unsupported"
+ },
+ {
+  "n": 203,
+  "reasoning": "wait_ready(&pod.id, on).map_err(|e| e.after_rental(&pod.id)) applies to every error.",
+  "label": "supported"
+ },
+ {
+  "n": 204,
+  "reasoning": "OLLAMA = http://127.0.0.1:11434 is the default and replaced the hard-coded URL.",
+  "label": "supported"
+ },
+ {
+  "n": 205,
+  "reasoning": "Unset batch_size calls score_many once on all answers, not one per call.",
+  "label": "unsupported"
+ },
+ {
+  "n": 206,
+  "reasoning": "After, get() loads onto \"cpu\" instead of device.",
+  "label": "unsupported"
+ },
+ {
+  "n": 207,
+  "reasoning": "Without a job_dir string, the done pod gets the old handoffs message.",
+  "label": "unsupported"
+ },
+ {
+  "n": 208,
+  "reasoning": "adjusted is built over keys of scores, so only packs with keyword hits are boosted.",
+  "label": "supported"
+ }
+]

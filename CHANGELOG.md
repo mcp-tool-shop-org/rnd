@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.2.8] - 2026-10-08
+
+- Kev env README: bf16 criterion change disclosed in the gate section
+- Added experiment `data-designer`
+- Updated experiment `kev-judge-finetune`
+
 ## [1.1.4.2.7] - 2026-10-08
 
 - Kev cu134 + causal-conv1d passes, 4.80 s median step; Windows torch.compile probe works

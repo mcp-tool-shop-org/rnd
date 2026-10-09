@@ -122,9 +122,10 @@ The rerun used `.venv-cu134` with fla 0.5.2 plus the #1330 line (patched-file sh
 **The GPU is not saturated:** about 35% busy (median 35%, p90 61%) during the smoke. Kev trains with
 batch 1 plus checkpointing. `causal_conv1d` is missing in every env, cu128 included, and transformers warns
 that its fallback is "much slower". causal_conv1d is a compiled CUDA extension, so a CUDA 13.4 build needs
-nvcc 13.4 in WSL; WSL has 12.8 today. It's a candidate speed-up, not done.
+nvcc 13.4 in WSL. **Since done:** built and GPU-tested the same day, it takes the median step to 4.80 s
+(next section).
 
-## causal-conv1d for cu134 (built 2026-10-08, GPU test pending)
+## causal-conv1d for cu134 (built and GPU-tested 2026-10-08: in the training env)
 
 **Why:** Qwen3.5's short convolution falls back to PyTorch without `causal_conv1d`, which transformers
 warns is "much slower". The cu134 smoke kept the GPU only about 35% busy.
@@ -150,9 +151,13 @@ The kernel check (`check_causal_conv1d.py`, output in `results/cc1d_result_2026-
 - **bf16, first run FAILED,** on the check, not the kernel. A fixed 3e-2 bound can't hold where outputs reach
   about 8: one bf16 step there is 0.0625. The bf16 reference also rounds the convolution before SiLU while the
   kernel rounds once, so small SiLU outputs differ by several steps.
-- **bf16, the rule now:** compare both against float64 truth; the kernel must be no less accurate than the bf16
-  reference. It is equal in 5 cases and better in 1 (l=1 SiLU: 1.66e-2 against 2.83e-2). The reason is
-  in the script.
+- **bf16, the rule now, changed after that failure:** compare both against float64 truth; the kernel must be no
+  less accurate than the bf16 reference. It is equal in 5 cases and better in 1 (l=1 SiLU: 1.66e-2 against
+  2.83e-2).
+  - **Disclosure:** this criterion was chosen after the first run failed, not before. The case for it is that
+    a bf16-against-bf16 comparison counts rounding twice, so only a float64 truth can say which side is
+    wrong. The Publisher reviewed it and agreed.
+  - The failed run's numbers and the reason are also in the script.
 
 Transformers 5.19 sees the kernel (`is_causal_conv1d_available()` is true with the GPU visible), and Qwen3.5's
 module binds `causal_conv1d_fn`. With the GPU hidden it reports false, so check it on the GPU.

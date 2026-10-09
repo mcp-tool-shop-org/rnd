@@ -60,3 +60,23 @@ schema-v6 store never meets an older offrig MCP server.
 - every metric row, including the cannot_tell row and the false-accept rate on unsupported only;
 - the strata `has_doc_comment`, `self_referential` and `origin`;
 - unusable counts and seconds per claim.
+
+## The NLI floor has its numbers (2026-10-09, before any LLM candidate's calibration lands)
+
+`cross-encoder/nli-deberta-v3-base` on the iGPU, run per `nli-floor.md` by `run_nli_floor.py`,
+receipt `results/2026-10-09-nli-floor.json`; cross-scored by `offrig verify calibrate --report-only`
+on the same claim outcomes with zero differing fields (`results/2026-10-09-nli-floor-crosscheck.json`).
+
+| leg | n | false accept (unsup + ct) | abstain | balanced (decided) | truncated |
+|---|---|---|---|---|---|
+| grounded, tune | 270 | 31/143, upper 0.291 | 115/255 | 0.718 | 14 |
+| grounded, held-out | 230 | 22/118, upper 0.266 | 103/225 | 0.733 | 20 |
+| reasoning, tune | 223 | 10/121, upper 0.145 | 143/204 | 0.587 | 147 (66%) |
+| reasoning, held-out | 236 | 16/129, upper 0.192 | 136/215 | 0.620 | 150 (64%) |
+| rule needs | | upper < 0.10 | ≤ 0.20 | ≥ 0.80 | (reported) |
+
+The NLI fails the default rule on both check types, so the prereg's fork applies: gap = (the cheapest
+grounded-tune-passing LLM's decided balanced accuracy) − 0.7185, resolved once a candidate passes
+grounded tune; ≤ 0.10 earns the fine-tune PR. About 104 ms per claim, 100.6 s wall. The reasoning
+legs truncate about two thirds of pairs at seq 512 (before+after diff contexts are long) — read
+their rows with that in mind; a max-over-chunks variant was never pre-registered, so it didn't run.

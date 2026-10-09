@@ -1,0 +1,192 @@
+[
+ {
+  "n": 1,
+  "reasoning": "cfg.K ?? readPositiveIntEnv: empty string env returns fallback before any validation, so no throw and the default is used.",
+  "label": "supported"
+ },
+ {
+  "n": 2,
+  "reasoning": "After the change the catch wraps and rethrows with exitCode 1 instead of using emptyState, so no 'not halted' message on load failure.",
+  "label": "unsupported"
+ },
+ {
+  "n": 3,
+  "reasoning": "The message uses '(none)' for empty claude_summary, but appendHaltEvent spreads claude_summary only if truthy, so the key is omitted, not recorded as empty string.",
+  "label": "unsupported"
+ },
+ {
+  "n": 4,
+  "reasoning": "_round calls plant_errors, whose temperature setting is not shown; nothing here shows the sampling temperature.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 5,
+  "reasoning": "size_cap is max(8, int(2*median)): median 3 gives 8, not 6; median 10 gives 20.",
+  "label": "unsupported"
+ },
+ {
+  "n": 6,
+  "reasoning": "'big' vs 'bigger': 'big'+'er' is 'biger' and 'bigger' is not in the vocabularies, so no suffix match; lexical_guard returns None.",
+  "label": "unsupported"
+ },
+ {
+  "n": 7,
+  "reasoning": "Expired grants get 'renews \"expires\" on the existing grant', not 'add a fresh entry with a new expires'. Missing and bad-expires hints match.",
+  "label": "unsupported"
+ },
+ {
+  "n": 8,
+  "reasoning": "stamp_receipt marks andon only if n_fp > config.MAX_FALSE_CONFORMANT, whose value is not shown, so one false-conformant may or may not exceed the bar.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 9,
+  "reasoning": "readFileSync runs outside the try, so a read failure throws the original fs error; MANIFEST_UNREADABLE is only for parse failure.",
+  "label": "unsupported"
+ },
+ {
+  "n": 10,
+  "reasoning": "A missing claim_changed becomes None, so the pair is in unparsed and not counted as kept_meaning.",
+  "label": "unsupported"
+ },
+ {
+  "n": 11,
+  "reasoning": "The error gets exitCode 1, but the code that turns exitCode into the process exit status is not shown. (Ambiguous wording.)",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 12,
+  "reasoning": "For '--help' as argv[2], args is empty so the new check is skipped; whether the switch handles '--help' is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 13,
+  "reasoning": "'fast' and 'faster' are changed tokens; 'faster' == 'fast'+'er' so the comparative branch returns 'comparative' (neither word is in an earlier vocabulary).",
+  "label": "supported"
+ },
+ {
+  "n": 14,
+  "reasoning": "summarize() is not shown, so any 120-char limit cannot be established.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 15,
+  "reasoning": "A grant without an 'expires' key skips the expires block and _grantProblem returns null, so the gate allows it.",
+  "label": "unsupported"
+ },
+ {
+  "n": 16,
+  "reasoning": "cfg.N ?? ... short-circuits, so readPositiveIntEnv is not called when N is supplied and no throw occurs.",
+  "label": "unsupported"
+ },
+ {
+  "n": 17,
+  "reasoning": "Empty claude_summary is falsy: message says '(none)' and the spread omits the key from the halt event data.",
+  "label": "supported"
+ },
+ {
+  "n": 18,
+  "reasoning": "The catch now throws a wrapped Error with exitCode 1 rather than assigning emptyState().",
+  "label": "supported"
+ },
+ {
+  "n": 19,
+  "reasoning": "An empty-string env var returns the fallback (raw === \"\"), so it does not throw.",
+  "label": "unsupported"
+ },
+ {
+  "n": 20,
+  "reasoning": "attempt_round is r, the loop index in the second pass; a first-attempt pair gets 1, not the first pass's rounds plus one.",
+  "label": "unsupported"
+ },
+ {
+  "n": 21,
+  "reasoning": "_grantHint: missing includes expires, expired renews expires on the existing grant, bad-expires fixes the date on the existing grant.",
+  "label": "supported"
+ },
+ {
+  "n": 22,
+  "reasoning": "args is [\"deploy --help\"]; isHelpFlag needs exact '--help' or '-h', so the help check does not fire.",
+  "label": "unsupported"
+ },
+ {
+  "n": 23,
+  "reasoning": "One ctx entry per span, and musts are tested against the newline-joined text of all spans.",
+  "label": "supported"
+ },
+ {
+  "n": 24,
+  "reasoning": "scored is not False, ship True, status not andon, ship_bar 2 is int, fc 2 is int and not > 2, so it returns True.",
+  "label": "supported"
+ },
+ {
+  "n": 25,
+  "reasoning": "Whether loadState throws for a missing file is not shown; if it does, the new code now raises instead of printing.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 26,
+  "reasoning": "cfg.N ?? short-circuits so ROLEOS_SHADOW_N is never read and cannot throw.",
+  "label": "supported"
+ },
+ {
+  "n": 27,
+  "reasoning": "max(8, int(2*3))=8 and max(8, int(2*10))=20; the check rejects only edit_chars > cap.",
+  "label": "supported"
+ },
+ {
+  "n": 28,
+  "reasoning": "extract_json_object is not shown, so tolerance of surrounding prose cannot be established.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 29,
+  "reasoning": "fc 2 is not > bar 2, so the check passes and is_ship_pin returns True; the bound is inclusive.",
+  "label": "unsupported"
+ },
+ {
+  "n": 30,
+  "reasoning": "In Python bool is a subclass of int, so isinstance(True, int) passes; fc 0 is not > True (1), so it returns True.",
+  "label": "unsupported"
+ },
+ {
+  "n": 31,
+  "reasoning": "isinstance(True, int) is True and 0 > True is False, so every check passes and it returns True.",
+  "label": "supported"
+ },
+ {
+  "n": 32,
+  "reasoning": "Musts are checked against the joined text of all spans, not each span's own text.",
+  "label": "unsupported"
+ },
+ {
+  "n": 33,
+  "reasoning": "How evidence() locates the anchor is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 34,
+  "reasoning": "claim_changed missing becomes None, so the pair is in unparsed, and flagged excludes unparsed pair ids.",
+  "label": "supported"
+ },
+ {
+  "n": 35,
+  "reasoning": "args is [\"deploy --help\"], not equal to a help flag, so the block is skipped and the switch runs.",
+  "label": "supported"
+ },
+ {
+  "n": 36,
+  "reasoning": "The second pass passes r from range(1, rounds+1) as attempt_round, so a first-attempt pair gets 1 regardless of the first pass.",
+  "label": "supported"
+ },
+ {
+  "n": 37,
+  "reasoning": "readFileSync is outside the try so fs errors propagate unchanged; only JSON.parse failures yield MANIFEST_UNREADABLE.",
+  "label": "supported"
+ },
+ {
+  "n": 38,
+  "reasoning": "A grant with granted true and no 'expires' key skips the expires check and returns null in both versions, so it is still honoured.",
+  "label": "supported"
+ }
+]

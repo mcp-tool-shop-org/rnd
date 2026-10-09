@@ -1,0 +1,192 @@
+[
+ {
+  "n": 1,
+  "reasoning": "K unset -> readPositiveIntEnv; raw === \"\" returns the fallback, so no throw.",
+  "label": "supported"
+ },
+ {
+  "n": 2,
+  "reasoning": "After the change the catch rethrows with exitCode 1 instead of falling back to emptyState.",
+  "label": "unsupported"
+ },
+ {
+  "n": 3,
+  "reasoning": "Message uses \"(none)\" for an empty string, but the event data spreads claude_summary only if truthy, so the key is omitted, not recorded as empty.",
+  "label": "unsupported"
+ },
+ {
+  "n": 4,
+  "reasoning": "Temperature for the paraphrase step is inside plant_errors, which is not shown; _round only calls it.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 5,
+  "reasoning": "size_cap is max(8, int(2*median)): median 3 gives 8, not 6 (median 10 does give 20).",
+  "label": "unsupported"
+ },
+ {
+  "n": 6,
+  "reasoning": "Changed tokens are big/bigger; for 'bigger', other='big' and 'big'+'er' == 'bigger', so 'comparative' is returned; no earlier class matches.",
+  "label": "supported"
+ },
+ {
+  "n": 7,
+  "reasoning": "Expired grants get 'renews \"expires\" on the existing grant', not 'add a fresh entry with a new expires'.",
+  "label": "unsupported"
+ },
+ {
+  "n": 8,
+  "reasoning": "stamp_receipt marks andon only when n_fp > config.MAX_FALSE_CONFORMANT, whose value is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 9,
+  "reasoning": "readFileSync is outside the try, so a read failure throws the original fs error, not MANIFEST_UNREADABLE.",
+  "label": "unsupported"
+ },
+ {
+  "n": 10,
+  "reasoning": "A missing claim_changed becomes None, so the pair goes to unparsed and is not counted in kept_meaning.",
+  "label": "unsupported"
+ },
+ {
+  "n": 11,
+  "reasoning": "The error sets exitCode = 1, but the top-level handler that turns it into the process exit status is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 12,
+  "reasoning": "With `roleos --help`, args is empty so the new check is skipped; whether a case for \"--help\" exists in the switch is not shown. (Ambiguous wording.)",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 13,
+  "reasoning": "Changed tokens fast/faster; 'fast'+'er' == 'faster' so 'comparative' is returned; no earlier class matches.",
+  "label": "supported"
+ },
+ {
+  "n": 14,
+  "reasoning": "Length limit would be inside summarize(), which is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 15,
+  "reasoning": "A grant with granted true and no expires skips the expires block and returns null, so it is allowed.",
+  "label": "unsupported"
+ },
+ {
+  "n": 16,
+  "reasoning": "cfg.N ?? readPositiveIntEnv(...) short-circuits when N is supplied, so the env var is not read or validated.",
+  "label": "unsupported"
+ },
+ {
+  "n": 17,
+  "reasoning": "Empty claude_summary is falsy: message says '(none)' and the spread omits the claude_summary key.",
+  "label": "supported"
+ },
+ {
+  "n": 18,
+  "reasoning": "The catch now builds an error with exitCode = 1 and throws it rather than using emptyState.",
+  "label": "supported"
+ },
+ {
+  "n": 19,
+  "reasoning": "readPositiveIntEnv returns the fallback for an empty string, so the empty string does not throw.",
+  "label": "unsupported"
+ },
+ {
+  "n": 20,
+  "reasoning": "attempt_round is r from range(1, rounds+1) restarting at 1 in the second pass; it is not tied to the first pass's rounds.",
+  "label": "unsupported"
+ },
+ {
+  "n": 21,
+  "reasoning": "_grantHint: missing -> add entry with expires; expired -> renew expires on existing; bad-expires -> fix date on existing.",
+  "label": "supported"
+ },
+ {
+  "n": 22,
+  "reasoning": "args is [\"deploy --help\"]; isHelpFlag needs exact '--help' or '-h', so the check does not fire.",
+  "label": "unsupported"
+ },
+ {
+  "n": 23,
+  "reasoning": "ctx gets one entry per span and each must is tested against the newline-joined text of all spans.",
+  "label": "supported"
+ },
+ {
+  "n": 24,
+  "reasoning": "All checks pass: scored not False, ship True, status not andon, bar int 2, fc int and 2 > 2 is False, so True.",
+  "label": "supported"
+ },
+ {
+  "n": 25,
+  "reasoning": "Whether loadState throws for a missing file (now rethrown) or returns an empty state is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 26,
+  "reasoning": "When cfg.N is set, ?? short-circuits and readPositiveIntEnv is never called, so no throw.",
+  "label": "supported"
+ },
+ {
+  "n": 27,
+  "reasoning": "size_cap = max(8, 2*median): median 3 gives 8, median 10 gives 20; edits above cap are rejected.",
+  "label": "supported"
+ },
+ {
+  "n": 28,
+  "reasoning": "Parsing is done by extract_json_object, which is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 29,
+  "reasoning": "The check is fc > bar, so fc 2 with bar 2 is not refused; it passes.",
+  "label": "unsupported"
+ },
+ {
+  "n": 30,
+  "reasoning": "In Python bool is a subclass of int, so isinstance(True, int) is True and the receipt is not rejected on that ground.",
+  "label": "unsupported"
+ },
+ {
+  "n": 31,
+  "reasoning": "isinstance(True,int) is True; fc 0 > True (1) is False, so all checks pass and it returns True.",
+  "label": "supported"
+ },
+ {
+  "n": 32,
+  "reasoning": "Must strings are checked against the joined text of all spans, not each span's own text.",
+  "label": "unsupported"
+ },
+ {
+  "n": 33,
+  "reasoning": "Anchor lookup lives in evidence(), which is not shown.",
+  "label": "cannot_tell"
+ },
+ {
+  "n": 34,
+  "reasoning": "Missing claim_changed becomes None, so it is in unparsed, and flagged excludes ids in unparsed.",
+  "label": "supported"
+ },
+ {
+  "n": 35,
+  "reasoning": "args is [\"deploy --help\"], not equal to a help flag, so the help block is skipped and execution reaches the switch.",
+  "label": "supported"
+ },
+ {
+  "n": 36,
+  "reasoning": "The second-pass loop uses r starting at 1 passed as attempt_round, independent of the first pass.",
+  "label": "supported"
+ },
+ {
+  "n": 37,
+  "reasoning": "Only JSON.parse is inside the try; readFileSync is outside, so fs errors propagate unchanged.",
+  "label": "supported"
+ },
+ {
+  "n": 38,
+  "reasoning": "A grant with granted true and no expires skips the expires block, returns null, and is allowed, same as before.",
+  "label": "supported"
+ }
+]

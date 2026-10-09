@@ -106,4 +106,24 @@ The Publisher's diff-based set (Publisher commit f3f3f66), copied unchanged as
   outside the hunk, or a change whose doc comment says something the code doesn't do).
 - **Caveats** (the Publisher's): one author; chained PRs share hunks, so items aren't independent; pure
   additions have only surrounding code as their "before".
-- **Short of the rule:** 96 unsupported, against 100. The Publisher adds about 10 behaviours (role-os and rnd).
+- **Short of the rule:** 96 unsupported, against 100. The Publisher's hard batch below closes it.
+
+### Hard batch (`diffs/source-publisher-hard.jsonl`, origin `diffs-2026-10-hard`)
+
+- **Size:** 38 claims from 15 new behaviours: 15 supported, 15 unsupported, 8 cannot_tell. Mostly role-os
+  direct commits, plus aspire-si#52 and one rnd commit.
+- **Patterns** (named in each item's notes):
+  - a subtle change in near-identical code (6);
+  - a multi-part claim where one part fails (4);
+  - an indirect effect (3);
+  - a doc comment that overclaims (2);
+  - an outside-the-hunk cannot_tell (8).
+- **Blind relabel:** two Sonnet labellers each did all 38 independently.
+  - Labeller A agreed with the author on 38/38, labeller B on 37/38.
+  - The split is `diffhard-aspire-si-52-1u`: does `lexical_guard` call big → bigger a comparative? B said
+    yes, reading `"big" + "er"` as `"bigger"`. **R&D ruled against the code: unsupported, the author's
+    label.** The `g` is doubled, no suffix rule matches, neither word is in a vocabulary set, and the
+    guard returns None. This is the kind of miss the batch was built to catch.
+- **Spot-check:** R&D read the split and both flagged cannot_tell items (`6a9bade-1c`, `4342dff-1c`). Both
+  rest on code not in the hunks, so cannot_tell is right.
+- **Reasoning totals:** 111 supported, **111 unsupported**, 24 cannot_tell. That's past the 100 rule.

@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.2.4] - 2026-10-08
+
+- verifier gold, hard reasoning batch blind-relabelled, reasoning at 111 unsupported
+- Added experiment `data-designer`
+- Added experiment `kev-judge-finetune`
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.2.3] - 2026-10-08
 
 - verifier gold, Publisher diff-based reasoning set blind-relabelled 208/208

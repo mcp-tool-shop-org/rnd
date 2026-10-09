@@ -3,6 +3,8 @@
 # settings its smoke settled.
 # GPU: only inside the Publisher's chain grant. Resumable: rerun the same line and it resumes each directory.
 #   bash run_model.sh <scratch-project-dir> <model> <think> <structured> [split]
+# CAL_TYPES (default "grounded reasoning") limits the check types, e.g. CAL_TYPES=reasoning for a
+# reasoning-only held-out run under the split-case rule.
 # Extra calibrate flags (e.g. the gemma rerun's "--num-predict 12288 --keep-thinking") come from CAL_EXTRA and go to
 # both a new run and a resume, since offrig's resume identity includes them.
 set -uo pipefail
@@ -11,7 +13,7 @@ GOLD="$(cd "$(dirname "$0")/.." && pwd)"
 OFFRIG=${OFFRIG:-"$HOME/.local/bin/offrig.exe"}
 TAG=${MODEL//[:\/]/_}
 read -r -a EXTRA <<< "${CAL_EXTRA:-}"
-for ct in grounded reasoning; do
+for ct in ${CAL_TYPES:-grounded reasoning}; do
   case $ct in grounded) files=("$GOLD/grounded.jsonl" "$GOLD/prs/grounded-prs.jsonl");; reasoning) files=("$GOLD/diffs/reasoning-diffs.jsonl");; esac
   S=$SPLIT
   OUT="$PROJ/cal-$TAG-$ct-$S"

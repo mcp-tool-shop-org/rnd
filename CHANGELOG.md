@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.31] - 2026-10-09
+
+- gemma4:31b rerun result: reasoning PASS on tune, grounded FAIL (one thinking loop); loop-repeat receipt; held-out run line
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.30] - 2026-10-09
 
 - pre-registration note before the reasoning result: v2 held-out is reasoning's one look; v3 needs a fresh sealed split

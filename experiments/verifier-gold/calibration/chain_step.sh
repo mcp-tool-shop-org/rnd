@@ -36,7 +36,7 @@ sleep 5
 echo "== $MODEL end $(date +%T); models loaded after unload: $(loaded)"
 
 status=0
-for ct in grounded reasoning; do
+for ct in ${CAL_TYPES:-grounded reasoning}; do
   S=$SPLIT
   OUT="$PROJ/cal-$TAG-$ct-$S"
   rep=$("$OFFRIG" verify calibrate --report-only "$OUT" --project "$PROJ" 2>&1)

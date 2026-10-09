@@ -335,3 +335,39 @@ half has a result.
   here, not discovered later.
 - **If reasoning fails on tune:** there's no held-out run. gemma's next calibration is the v3 one,
   pre-registered on tune.
+
+## Result, 2026-10-09: gemma4:31b rerun on tune (contract v2, quote rule 2, num_predict 12288)
+
+A new calibration as pre-registered (rnd d05a11e, 08ca419, 7565465), offrig main 751fb1d (sha256s above), run
+14:25–16:12. Receipts: `results/2026-10-09-gemma-r2/`. `thinking.jsonl` stays in the scratch run directory:
+it's untrusted model text and isn't committed.
+
+| check | FA upper (< 0.10) | abstain (≤ 0.20) | decided BA (≥ 0.80) | missing (0) | rule |
+|---|---|---|---|---|---|
+| grounded | 0.026 (0/142) | **0.0745** (19/254) | 0.991 | **1** | **FAIL** |
+| reasoning | 0.070 (3/121) | 0.059 (12/204) | 0.980 | 0 | **PASS** |
+
+- **The prediction held.** Grounded abstain is 0.0745 against the 0.075 predicted from the quote-rule-2
+  rescore, and false accepts stay at 0/142.
+- **The chain's truncations:** three of the four now answer. `diff-role-os-23-11s` needed 8,937 tokens
+  (prompt + reply), more than twice the old 4096 cap.
+- **No context shift:** the largest prompt + reply was 8,937 of 16,384, and no claim reached the window.
+- **Grounded's one miss is a thinking loop, not the budget.** In `prs-offrig-39-15s` (gold cannot_tell: "Record
+  search returns only active records, with a default limit of 8 when none is given and a cap of 50"), the
+  evidence for "limit" and for "active" is not contiguous. The verdict contract allows one quote, so gemma
+  can't settle which span to cite. At 11% of its thinking it falls into a two-line loop, repeated 307 times,
+  until num_predict 12288. That's deterministic at temperature 0, so no budget fixes it.
+  - **offrig's response (the Publisher, decided):** contract v3, with 1–4 quotes per verdict (quote rule 3) and
+    a streaming loop detector at n = 8 words, k = 40.
+  - **The k = 40 threshold is gemma-derived from this run** (`loop_repeats_posthoc.py` →
+    `results/2026-10-09-gemma-r2/loop-repeats.txt`). Clean replies peak at 12 (grounded) and 13 (reasoning)
+    repeats, against 307 for the loop. It's enabled only for models with a false-hit check on record.
+- **Under the split-case rule,** reasoning passing on tune triggers the registered **reasoning-only held-out run**
+  (same binary and settings, `CAL_TYPES=reasoning`), which is its one held-out look under contract v2.
+  Grounded has no held-out under v2; gemma's next grounded calibration is v3.
+
+**The held-out run line, fixed before the run:**
+`CAL_TYPES=reasoning CAL_EXTRA="--num-predict 12288 --keep-thinking" bash chain_step.sh /e/AI/rnd-calibrate-r2 gemma4:31b on on <rest> heldout`
+
+(`CAL_TYPES` was added to `run_model.sh` and `chain_step.sh` for this. It changes which check types run, never
+a setting.)

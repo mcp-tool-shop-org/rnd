@@ -130,9 +130,20 @@ and the trade-off should shrink as models learn to think less wastefully. So:
   that day record that **gemma4's thinking is on or off only**; its levels aren't graded. ("low" isn't a level it
   has, and Ollama would treat it as on or reject it.) So gemma4 runs at **`on`**, the setting candidates.txt
   pre-registered. Its off/on comparison moves to the post-hoc thinking-level runs.
-- **Thinking levels by model**, from R&D's 2026-10-08 notes (each run uses only levels its model has):
-  gemma4 on/off; Nemotron `true` / `medium` (plus off); Muse Glimmer `low` / `medium` / `high` / `max`; qwen3
-  on/off (graded levels unverified, hence the low-is-real check); mistral-small and granite4.1 can't think.
+- **Thinking levels by model** (R&D's 2026-10-08 notes, Ollama 0.35.1). **Check a candidate's setting
+  against this table before any amendment**, and add a row (from notes or the model card, not a live call)
+  before a new model runs:
+
+  | model | `--think` levels it has | note |
+  |---|---|---|
+  | gemma4:31b | off, on | not graded |
+  | qwen3:8b / qwen3:14b | off, on | likely boolean; graded levels unverified, so no "low" arm unless shown real |
+  | mistral-small:24b | none | Ollama errors if asked |
+  | granite4.1:30b | none | Ollama errors if asked |
+  | llama3.1:8b | none | no thinking capability |
+  | Nemotron 3.5 Lightning | off, true, medium | |
+  | Muse Glimmer 30B | off, low, medium, high, max | default high |
+  | Qwen3.8-27B | off, on, plus `reasoning_effort` low / medium / xhigh | from its HF card; verify under Ollama before use |
 - **Wherever a graded level is used, check it's real first** (the Publisher's point). Ollama 0.35.1 documents graded levels for
   gpt-oss; for other models it may treat any string as "think on". So gemma's first claims are compared with
   the smoke's `on` claims on thinking length (eval tokens). If low thinks just as long as on, the README and

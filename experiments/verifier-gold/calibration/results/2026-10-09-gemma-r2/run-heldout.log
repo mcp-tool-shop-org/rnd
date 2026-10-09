@@ -1,0 +1,29 @@
+== gemma4:31b think=on structured=on start 16:28:34
+reasoning  n=236 sup=107 unsup=108 ct=21 missing=0
+  false-accept (unsup+ct): 4/129 3.1% [1.2-7.7]
+  false-accept (unsup only): 0/108 0.0% [0.0-3.4]
+  false-accept (subtle): 0/108 0.0% [0.0-3.4]
+  gold cannot_tell: accepted 4/21 19.0% [7.7-40.0], said cannot_tell 12/21 57.1% [36.5-75.5], said unsupported 5
+  abstain: 15/215 7.0% [4.3-11.2]   balanced accuracy (decided): 0.982
+strata:
+  has_doc_comment=false        reasoning  n=122  FA 4/68 5.9% [2.3-14.2]  subtle FA 0/54 0.0% [0.0-6.6]  abstain 9/108 8.3% [4.4-15.1]  BA 0.966
+  has_doc_comment=true         reasoning  n=114  FA 0/61 0.0% [0.0-5.9]  subtle FA 0/54 0.0% [0.0-6.6]  abstain 6/107 5.6% [2.6-11.7]  BA 1.000
+  origin=diffs-2026-10         reasoning  n=117  FA 2/62 3.2% [0.9-11.0]  subtle FA 0/55 0.0% [0.0-6.5]  abstain 4/110 3.6% [1.4-9.0]  BA 0.983
+  origin=diffs-2026-10-b2      reasoning  n=102  FA 1/56 1.8% [0.3-9.4]  subtle FA 0/47 0.0% [0.0-7.6]  abstain 11/93 11.8% [6.7-19.9]  BA 0.989
+  origin=diffs-2026-10-hard    reasoning  n=17   FA 1/11 9.1% [1.6-37.7]  subtle FA 0/6 0.0% [0.0-39.0]  abstain 0/12 0.0% [0.0-24.2]  BA 0.944
+cost: $0.0000 over 2877s wall at $0/hr = $0.00000 per claim (boot and pull time not included)
+default rule (grounded and reasoning; knowledge reported only):
+  note: model-caused unusable outcomes (bad_verdict, truncated, repeated timeout, repeated server error or dropped reply) count as missing answers and fail the rule; a fail can come from those, not only from false accepts
+  grounded: not run
+  reasoning: PASS
+    ok   every claim answered: missing 0 (need 0)
+    ok   gold unsupported claims: 108 (need >= 100)
+    ok   false-accept upper bound (primary): 0.0770 (need < 0.1)
+    ok   abstain rate: 0.0698 (need <= 0.2)
+    ok   balanced accuracy on decided: 0.9823 (need >= 0.8)
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate-r2/cal-gemma4_31b-reasoning-heldout
+== gemma4:31b end 17:16:38; models loaded after unload: 0
+== reasoning: complete
+exit 0

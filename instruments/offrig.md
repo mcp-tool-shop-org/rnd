@@ -45,6 +45,6 @@ R&D's calibration work, together with the Publisher's PRs reviewed by R&D, shape
 think, `num_predict`, `num_ctx`, quote rule). A served engine or settings change means a new calibration, never
 a rescore. Results and protocols are in `experiments/verifier-gold/calibration/`.
 
-**Rig caveat:** the VRAM/temperature watchdog (`E:/AI/training/_watchdog.ps1`) doesn't guard Ollama's runner.
+**Rig caveat (updated 16:14):** the VRAM/temperature watchdog (`E:/AI/training/_watchdog.ps1`) has guarded Ollama's runner since 2026-10-09 16:14. Before that it didn't, and the rest of this paragraph describes that earlier state.
 A breach from an Ollama run kills nothing. Runs on the 5090 Ollama keep their own temperature/VRAM watch and
 unload the model themselves.

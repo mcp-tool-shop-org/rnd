@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.32] - 2026-10-09
+
+- headline: gemma4:31b passes held-out reasoning, offrig's first default verifier (reasoning only)
+- Updated `offrig`: offrig — big models on rented RunPod GPUs
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.31] - 2026-10-09
 
 - gemma4:31b rerun result: reasoning PASS on tune, grounded FAIL (one thinking loop); loop-repeat receipt; held-out run line

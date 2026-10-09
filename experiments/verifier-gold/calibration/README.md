@@ -371,3 +371,25 @@ it's untrusted model text and isn't committed.
 
 (`CAL_TYPES` was added to `run_model.sh` and `chain_step.sh` for this. It changes which check types run, never
 a setting.)
+
+## Headline, 2026-10-09: gemma4:31b is offrig's default verifier for reasoning (held-out confirmed)
+
+The registered reasoning-only held-out run (rnd c658ebf line, same binary 751fb1d and settings), run 16:28–17:16.
+Receipts: `results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-heldout/`.
+
+| split | FA upper (< 0.10) | FA unsupported only | abstain (≤ 0.20) | decided BA (≥ 0.80) | missing | rule |
+|---|---|---|---|---|---|---|
+| tune | 0.070 (3/121) | 2/102 | 0.059 (12/204) | 0.980 | 0 | PASS |
+| **held-out (headline)** | **0.077 (4/129)** | **0/108** | **0.070 (15/215)** | **0.982** | **0** | **PASS** |
+
+- **Named, per the protocol's split-case rule:** gemma4:31b is offrig's default verifier **for reasoning only**.
+  - **The setup:** verdict contract v2, think on, structured on, quote rule 2, num_predict 12288, num_ctx 16384,
+    temperature 0, seed 0, model digest `6316f0629137…`, offrig 751fb1d.
+  - **It must be served at exactly these settings** ("calibrate what is served").
+  - Changing offrig's default is the Publisher's design path.
+- **No context shift:** the max prompt + reply was 5,702 tokens.
+- **Where its errors live:** on gold `cannot_tell` claims it accepted 4/21 (19%). Those make up the whole of the
+  primary false-accept count (0/108 on unsupported). It's inside the rule, but the thing to watch in v3.
+- **Grounded has no default.** It failed on tune by one deterministic thinking loop (above). Its next look is
+  the v3 calibration (several quotes, a loop detector), with a fresh sealed split.
+- **This held-out is spent:** a v3 reasoning default can't reuse it (the note of 15:27).

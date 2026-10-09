@@ -1,21 +1,19 @@
 # rnd: how it works
 
-Mapped at 2026-10-09 from commit 0cfaf26 by Atlas 1.24.0.
+Mapped at 2026-10-09 from commit 4abb0ee by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-12 parts, mostly Python (55 files), shell (14), CSS (2), TypeScript (2), Astro (1), HTML (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
+12 parts, mostly Python (57 files), shell (14), CSS (2), TypeScript (2), Astro (1), HTML (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-09 (1443c84)
+## What changed since 2026-10-09 (0cfaf26)
 
-- tests now imports experiments.
-- experiments/data-designer/runs/phase0-smoke.json is now written by experiments/data-designer/one_row.py.
-- experiments/verifier-gold/crossfamily/ is now written by experiments/verifier-gold/crossfamily/run_labeller.py.
-- experiments/verifier-gold/crossfamily/blind_in.json is now written by experiments/verifier-gold/crossfamily/make_sample.py.
-- And 12 more new writers and readers of places.
-- 60 files added and 8 changed content, across 6 parts.
+- experiments/distill-ladder/dedupe.py is now read by tests/test_distill_step0_properties.py.
+- experiments/verifier-gold/calibration/difficulty.py is now read by tests/test_distill_step0_properties.py.
+- experiments/verifier-gold/math-ladder/report.py is now read by tests/test_distill_step0_properties.py.
+- 2 files added and 4 changed content, across 4 parts.
 
 ## What comes in
 
@@ -110,10 +108,10 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 
 ## What this map cannot see
 
-- 6 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 3 more.
+- 7 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 4 more.
 - 7 writes and 7 reads use paths built at run time and are not named here.
 - 1 write goes to places this repository does not track, so it is not listed as generated.
-- 11 writes and 21 reads go to a path their caller passes, not to this repository.
+- 11 writes and 22 reads go to a path their caller passes, not to this repository.
 - 3 reads go to the directory the command is run in (entries and instruments), not to this repository.
 - 1 read goes to the directory the command is run in or a path its caller passes, not to this repository.
 - 7 files belong to no part: datapacks/hymn-arrangements/datapack.json, datapacks/hymn-arrangements/hosted.json, datapacks/hymn-arrangements/spec.json and 4 more.

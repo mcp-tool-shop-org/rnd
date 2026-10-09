@@ -20,7 +20,33 @@ def wilson(k: int, n: int) -> tuple[float, float]:
     p, z2 = k / n, Z * Z
     c = (p + z2 / (2 * n)) / (1 + z2 / n)
     m = Z * ((p * (1 - p) / n + z2 / (4 * n * n)) ** 0.5) / (1 + z2 / n)
-    return (max(0.0, c - m), min(1.0, c + m))
+    # Exact at the edges: float rounding left wilson(0, n)'s lower bound at ~1e-17, above the observed 0,
+    # which would read as "the interval excludes 0" for a cell with no events.
+    lo = 0.0 if k == 0 else max(0.0, c - m)
+    hi = 1.0 if k == n else min(1.0, c + m)
+    return (lo, hi)
+
+
+def tally(gold: dict, verdicts: list[dict]) -> dict:
+    """Per-cell counts [n, right, false accepts, unsupported n, abstain, unusable] from verdict lines.
+    Lines whose claim isn't in the gold are ignored; an unusable line counts only as unusable."""
+    cells = defaultdict(lambda: [0, 0, 0, 0, 0, 0])
+    for ln in verdicts:
+        g = gold.get(ln["claim_id"])
+        if g is None:
+            continue
+        c = cells[g["ladder"]["cell"]]
+        if ln.get("status") == "unusable":
+            c[5] += 1
+            continue
+        v = ln.get("final_verdict")
+        c[0] += 1
+        c[1] += v == g["label"]
+        if g["label"] == "unsupported":
+            c[3] += 1
+            c[2] += v == "supported"
+        c[4] += v == "cannot_tell"
+    return cells
 
 
 def main(dirs: list[str]) -> None:
@@ -32,23 +58,8 @@ def main(dirs: list[str]) -> None:
              ("steps", "precedence", "traps", "control", "units", "nearmiss") for v in (1, 2, 3)]
     for d in dirs:
         model = json.loads((Path(d) / "manifest.json").read_text(encoding="utf-8"))["model"]
-        cells = defaultdict(lambda: [0, 0, 0, 0, 0, 0])  # n, right, fa, unsupported n, abstain, unusable
-        for x in (Path(d) / "verdicts.jsonl").read_text(encoding="utf-8").splitlines():
-            ln = json.loads(x)
-            g = gold.get(ln["claim_id"])
-            if g is None:
-                continue
-            c = cells[g["ladder"]["cell"]]
-            if ln.get("status") == "unusable":
-                c[5] += 1
-                continue
-            v = ln.get("final_verdict")
-            c[0] += 1
-            c[1] += v == g["label"]
-            if g["label"] == "unsupported":
-                c[3] += 1
-                c[2] += v == "supported"
-            c[4] += v == "cannot_tell"
+        verdicts = [json.loads(x) for x in (Path(d) / "verdicts.jsonl").read_text(encoding="utf-8").splitlines()]
+        cells = tally(gold, verdicts)
         falloff = {"ladder": None}
         print(f"\n{model}")
         for cell in order:

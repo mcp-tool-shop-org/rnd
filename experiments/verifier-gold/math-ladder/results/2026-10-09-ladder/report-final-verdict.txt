@@ -1,0 +1,174 @@
+
+gemma4:31b
+  L1            n=30 acc=0.87 [0.70,0.95] FA=0/15 (0.00 [0.00,0.20]) abstain=4
+  L2            n=30 acc=0.87 [0.70,0.95] FA=0/15 (0.00 [0.00,0.20]) abstain=4
+  L3            n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  L4            n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  L5            n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  L6            n=30 acc=0.80 [0.63,0.90] FA=6/15 (0.40 [0.20,0.64]) abstain=0
+  L7            n=25 acc=1.00 [0.87,1.00] FA=0/10 (0.00 [0.00,0.28]) abstain=0 unusable=5  <30, tentative
+  L8            n=20 acc=1.00 [0.84,1.00] FA=0/5 (0.00 [0.00,0.43]) abstain=0 unusable=10  <30, tentative
+  steps=1       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  steps=2       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  steps=3       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  precedence=1  n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  precedence=2  n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  precedence=3  n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  traps=1       n=30 acc=0.93 [0.79,0.98] FA=0/15 (0.00 [0.00,0.20]) abstain=2
+  traps=2       n=30 acc=0.80 [0.63,0.90] FA=0/15 (0.00 [0.00,0.20]) abstain=6
+  traps=3       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  control=1     n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  control=2     n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  control=3     n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  units=1       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  units=2       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  units=3       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  nearmiss=1    n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  nearmiss=2    n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  nearmiss=3    n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  falloff: ladder at L6
+
+granite4.1:30b
+  L1            n=30 acc=0.67 [0.49,0.81] FA=0/15 (0.00 [0.00,0.20]) abstain=10
+  L2            n=30 acc=0.63 [0.46,0.78] FA=0/15 (0.00 [0.00,0.20]) abstain=11
+  L3            n=30 acc=0.03 [0.01,0.17] FA=0/15 (0.00 [0.00,0.20]) abstain=29
+  L4            n=30 acc=0.00 [0.00,0.11] FA=0/15 (0.00 [0.00,0.20]) abstain=30
+  L5            n=30 acc=0.13 [0.05,0.30] FA=0/15 (0.00 [0.00,0.20]) abstain=26
+  L6            n=30 acc=0.10 [0.03,0.26] FA=0/15 (0.00 [0.00,0.20]) abstain=24
+  L7            n=30 acc=0.10 [0.03,0.26] FA=0/15 (0.00 [0.00,0.20]) abstain=26
+  L8            n=30 acc=0.23 [0.12,0.41] FA=0/15 (0.00 [0.00,0.20]) abstain=19
+  steps=1       n=30 acc=0.37 [0.22,0.54] FA=0/15 (0.00 [0.00,0.20]) abstain=19
+  steps=2       n=30 acc=0.03 [0.01,0.17] FA=0/15 (0.00 [0.00,0.20]) abstain=29
+  steps=3       n=30 acc=0.07 [0.02,0.21] FA=0/15 (0.00 [0.00,0.20]) abstain=28
+  precedence=1  n=30 acc=0.00 [0.00,0.11] FA=0/15 (0.00 [0.00,0.20]) abstain=30
+  precedence=2  n=30 acc=0.03 [0.01,0.17] FA=0/15 (0.00 [0.00,0.20]) abstain=29
+  precedence=3  n=30 acc=0.07 [0.02,0.21] FA=0/15 (0.00 [0.00,0.20]) abstain=28
+  traps=1       n=30 acc=0.67 [0.49,0.81] FA=0/15 (0.00 [0.00,0.20]) abstain=10
+  traps=2       n=30 acc=0.73 [0.56,0.86] FA=0/15 (0.00 [0.00,0.20]) abstain=8
+  traps=3       n=30 acc=0.23 [0.12,0.41] FA=0/15 (0.00 [0.00,0.20]) abstain=23
+  control=1     n=30 acc=0.03 [0.01,0.17] FA=0/15 (0.00 [0.00,0.20]) abstain=29
+  control=2     n=30 acc=0.47 [0.30,0.64] FA=0/15 (0.00 [0.00,0.20]) abstain=16
+  control=3     n=30 acc=0.00 [0.00,0.11] FA=0/15 (0.00 [0.00,0.20]) abstain=30
+  units=1       n=30 acc=0.10 [0.03,0.26] FA=0/15 (0.00 [0.00,0.20]) abstain=27
+  units=2       n=30 acc=0.10 [0.03,0.26] FA=0/15 (0.00 [0.00,0.20]) abstain=24
+  units=3       n=30 acc=0.13 [0.05,0.30] FA=0/15 (0.00 [0.00,0.20]) abstain=24
+  nearmiss=1    n=30 acc=0.00 [0.00,0.11] FA=0/15 (0.00 [0.00,0.20]) abstain=29
+  nearmiss=2    n=30 acc=0.03 [0.01,0.17] FA=0/15 (0.00 [0.00,0.20]) abstain=29
+  nearmiss=3    n=30 acc=0.07 [0.02,0.21] FA=0/15 (0.00 [0.00,0.20]) abstain=28
+  falloff: ladder at L1, steps at steps=1, precedence at precedence=1, traps at traps=1, control at control=1, units at units=1, nearmiss at nearmiss=1
+
+llama3.1:8b
+  L1            n=30 acc=0.00 [0.00,0.11] FA=0/15 (0.00 [0.00,0.20]) abstain=30
+  L2            n=30 acc=0.00 [0.00,0.11] FA=0/15 (0.00 [0.00,0.20]) abstain=30
+  L3            n=30 acc=0.13 [0.05,0.30] FA=0/15 (0.00 [0.00,0.20]) abstain=23
+  L4            n=29 acc=0.24 [0.12,0.42] FA=0/14 (0.00 [0.00,0.22]) abstain=19 unusable=1  <30, tentative
+  L5            n=30 acc=0.10 [0.03,0.26] FA=3/15 (0.20 [0.07,0.45]) abstain=24
+  L6            n=30 acc=0.03 [0.01,0.17] FA=1/15 (0.07 [0.01,0.30]) abstain=27
+  L7            n=30 acc=0.00 [0.00,0.11] FA=0/15 (0.00 [0.00,0.20]) abstain=30
+  L8            n=29 acc=0.03 [0.01,0.17] FA=1/14 (0.07 [0.01,0.31]) abstain=26 unusable=1  <30, tentative
+  steps=1       n=30 acc=0.27 [0.14,0.44] FA=0/15 (0.00 [0.00,0.20]) abstain=22
+  steps=2       n=29 acc=0.31 [0.17,0.49] FA=1/14 (0.07 [0.01,0.31]) abstain=17 unusable=1  <30, tentative
+  steps=3       n=30 acc=0.13 [0.05,0.30] FA=0/15 (0.00 [0.00,0.20]) abstain=26
+  precedence=1  n=28 acc=0.11 [0.04,0.27] FA=0/14 (0.00 [0.00,0.22]) abstain=25 unusable=2  <30, tentative
+  precedence=2  n=29 acc=0.38 [0.23,0.56] FA=4/14 (0.29 [0.12,0.55]) abstain=10 unusable=1  <30, tentative
+  precedence=3  n=29 acc=0.45 [0.28,0.62] FA=6/15 (0.40 [0.20,0.64]) abstain=9 unusable=1  <30, tentative
+  traps=1       n=30 acc=0.00 [0.00,0.11] FA=0/15 (0.00 [0.00,0.20]) abstain=30
+  traps=2       n=30 acc=0.00 [0.00,0.11] FA=0/15 (0.00 [0.00,0.20]) abstain=30
+  traps=3       n=30 acc=0.60 [0.42,0.75] FA=1/15 (0.07 [0.01,0.30]) abstain=9
+  control=1     n=30 acc=0.17 [0.07,0.34] FA=3/15 (0.20 [0.07,0.45]) abstain=21
+  control=2     n=28 acc=0.00 [0.00,0.12] FA=0/13 (0.00 [0.00,0.23]) abstain=28 unusable=2  <30, tentative
+  control=3     n=29 acc=0.07 [0.02,0.22] FA=0/15 (0.00 [0.00,0.20]) abstain=26 unusable=1  <30, tentative
+  units=1       n=29 acc=0.72 [0.54,0.85] FA=2/14 (0.14 [0.04,0.40]) abstain=2 unusable=1  <30, tentative
+  units=2       n=30 acc=0.40 [0.25,0.58] FA=10/15 (0.67 [0.42,0.85]) abstain=7
+  units=3       n=27 acc=0.22 [0.11,0.41] FA=5/13 (0.38 [0.18,0.64]) abstain=15 unusable=3  <30, tentative
+  nearmiss=1    n=30 acc=0.40 [0.25,0.58] FA=1/15 (0.07 [0.01,0.30]) abstain=8
+  nearmiss=2    n=28 acc=0.46 [0.30,0.64] FA=1/15 (0.07 [0.01,0.30]) abstain=9 unusable=2  <30, tentative
+  nearmiss=3    n=30 acc=0.43 [0.27,0.61] FA=2/15 (0.13 [0.04,0.38]) abstain=11
+  falloff: ladder at L1, steps at steps=1, precedence at precedence=1, traps at traps=1, control at control=1, units at units=1, nearmiss at nearmiss=1
+
+mistral-small:24b
+  L1            n=30 acc=0.00 [0.00,0.11] FA=0/15 (0.00 [0.00,0.20]) abstain=30
+  L2            n=30 acc=0.00 [0.00,0.11] FA=0/15 (0.00 [0.00,0.20]) abstain=30
+  L3            n=30 acc=0.30 [0.17,0.48] FA=0/15 (0.00 [0.00,0.20]) abstain=21
+  L4            n=30 acc=0.23 [0.12,0.41] FA=1/15 (0.07 [0.01,0.30]) abstain=21
+  L5            n=30 acc=0.43 [0.27,0.61] FA=3/15 (0.20 [0.07,0.45]) abstain=7
+  L6            n=30 acc=0.13 [0.05,0.30] FA=3/15 (0.20 [0.07,0.45]) abstain=20
+  L7            n=30 acc=0.10 [0.03,0.26] FA=0/15 (0.00 [0.00,0.20]) abstain=25
+  L8            n=30 acc=0.13 [0.05,0.30] FA=1/15 (0.07 [0.01,0.30]) abstain=25
+  steps=1       n=30 acc=0.73 [0.56,0.86] FA=0/15 (0.00 [0.00,0.20]) abstain=8
+  steps=2       n=30 acc=0.40 [0.25,0.58] FA=7/15 (0.47 [0.25,0.70]) abstain=11
+  steps=3       n=30 acc=0.33 [0.19,0.51] FA=6/15 (0.40 [0.20,0.64]) abstain=14
+  precedence=1  n=30 acc=0.17 [0.07,0.34] FA=2/15 (0.13 [0.04,0.38]) abstain=23
+  precedence=2  n=30 acc=0.57 [0.39,0.73] FA=1/15 (0.07 [0.01,0.30]) abstain=11
+  precedence=3  n=30 acc=0.73 [0.56,0.86] FA=3/15 (0.20 [0.07,0.45]) abstain=2
+  traps=1       n=30 acc=0.00 [0.00,0.11] FA=0/15 (0.00 [0.00,0.20]) abstain=30
+  traps=2       n=30 acc=0.00 [0.00,0.11] FA=0/15 (0.00 [0.00,0.20]) abstain=30
+  traps=3       n=30 acc=0.30 [0.17,0.48] FA=4/15 (0.27 [0.11,0.52]) abstain=17
+  control=1     n=30 acc=0.23 [0.12,0.41] FA=2/15 (0.13 [0.04,0.38]) abstain=21
+  control=2     n=30 acc=0.00 [0.00,0.11] FA=0/15 (0.00 [0.00,0.20]) abstain=30
+  control=3     n=30 acc=0.13 [0.05,0.30] FA=0/15 (0.00 [0.00,0.20]) abstain=26
+  units=1       n=30 acc=0.60 [0.42,0.75] FA=1/15 (0.07 [0.01,0.30]) abstain=11
+  units=2       n=30 acc=0.27 [0.14,0.44] FA=2/15 (0.13 [0.04,0.38]) abstain=17
+  units=3       n=29 acc=0.21 [0.10,0.38] FA=9/14 (0.64 [0.39,0.84]) abstain=14 unusable=1  <30, tentative
+  nearmiss=1    n=29 acc=0.59 [0.41,0.74] FA=2/14 (0.14 [0.04,0.40]) abstain=7  <30, tentative
+  nearmiss=2    n=30 acc=0.57 [0.39,0.73] FA=2/15 (0.13 [0.04,0.38]) abstain=9
+  nearmiss=3    n=30 acc=0.60 [0.42,0.75] FA=3/15 (0.20 [0.07,0.45]) abstain=7
+  falloff: ladder at L1, steps at steps=1, precedence at precedence=1, traps at traps=1, control at control=1, units at units=1, nearmiss at nearmiss=1
+
+qwen3:8b
+  L1            n=30 acc=0.93 [0.79,0.98] FA=0/15 (0.00 [0.00,0.20]) abstain=2
+  L2            n=30 acc=0.97 [0.83,0.99] FA=0/15 (0.00 [0.00,0.20]) abstain=1
+  L3            n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  L4            n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  L5            n=28 acc=1.00 [0.88,1.00] FA=0/13 (0.00 [0.00,0.23]) abstain=0 unusable=2  <30, tentative
+  L6            n=27 acc=0.67 [0.48,0.81] FA=6/14 (0.43 [0.21,0.67]) abstain=1 unusable=3  <30, tentative
+  L7            n=28 acc=0.96 [0.82,0.99] FA=0/13 (0.00 [0.00,0.23]) abstain=0 unusable=2  <30, tentative
+  L8            n=30 acc=0.90 [0.74,0.97] FA=1/15 (0.07 [0.01,0.30]) abstain=2
+  steps=1       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  steps=2       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  steps=3       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  precedence=1  n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  precedence=2  n=29 acc=1.00 [0.88,1.00] FA=0/14 (0.00 [0.00,0.22]) abstain=0 unusable=1  <30, tentative
+  precedence=3  n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  traps=1       n=30 acc=0.93 [0.79,0.98] FA=0/15 (0.00 [0.00,0.20]) abstain=2
+  traps=2       n=30 acc=0.87 [0.70,0.95] FA=0/15 (0.00 [0.00,0.20]) abstain=4
+  traps=3       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  control=1     n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  control=2     n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  control=3     n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  units=1       n=29 acc=1.00 [0.88,1.00] FA=0/14 (0.00 [0.00,0.22]) abstain=0 unusable=1  <30, tentative
+  units=2       n=28 acc=1.00 [0.88,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0 unusable=2  <30, tentative
+  units=3       n=29 acc=0.97 [0.83,0.99] FA=0/15 (0.00 [0.00,0.20]) abstain=0 unusable=1  <30, tentative
+  nearmiss=1    n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  nearmiss=2    n=29 acc=1.00 [0.88,1.00] FA=0/14 (0.00 [0.00,0.22]) abstain=0 unusable=1  <30, tentative
+  nearmiss=3    n=29 acc=0.97 [0.83,0.99] FA=1/14 (0.07 [0.01,0.31]) abstain=0 unusable=1  <30, tentative
+  falloff: ladder at L6
+
+qwen3:14b
+  L1            n=30 acc=0.57 [0.39,0.73] FA=0/15 (0.00 [0.00,0.20]) abstain=13
+  L2            n=30 acc=0.67 [0.49,0.81] FA=0/15 (0.00 [0.00,0.20]) abstain=10
+  L3            n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  L4            n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  L5            n=28 acc=1.00 [0.88,1.00] FA=0/13 (0.00 [0.00,0.23]) abstain=0 unusable=2  <30, tentative
+  L6            n=28 acc=0.79 [0.60,0.90] FA=6/13 (0.46 [0.23,0.71]) abstain=0 unusable=2  <30, tentative
+  L7            n=30 acc=0.90 [0.74,0.97] FA=1/15 (0.07 [0.01,0.30]) abstain=1
+  L8            n=30 acc=0.90 [0.74,0.97] FA=0/15 (0.00 [0.00,0.20]) abstain=1
+  steps=1       n=30 acc=0.90 [0.74,0.97] FA=0/15 (0.00 [0.00,0.20]) abstain=3
+  steps=2       n=30 acc=0.97 [0.83,0.99] FA=0/15 (0.00 [0.00,0.20]) abstain=1
+  steps=3       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  precedence=1  n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  precedence=2  n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  precedence=3  n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  traps=1       n=30 acc=0.63 [0.46,0.78] FA=0/15 (0.00 [0.00,0.20]) abstain=11
+  traps=2       n=30 acc=0.63 [0.46,0.78] FA=0/15 (0.00 [0.00,0.20]) abstain=11
+  traps=3       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  control=1     n=29 acc=1.00 [0.88,1.00] FA=0/14 (0.00 [0.00,0.22]) abstain=0 unusable=1  <30, tentative
+  control=2     n=30 acc=0.97 [0.83,0.99] FA=0/15 (0.00 [0.00,0.20]) abstain=1
+  control=3     n=30 acc=0.93 [0.79,0.98] FA=0/15 (0.00 [0.00,0.20]) abstain=2
+  units=1       n=29 acc=1.00 [0.88,1.00] FA=0/14 (0.00 [0.00,0.22]) abstain=0 unusable=1  <30, tentative
+  units=2       n=29 acc=0.97 [0.83,0.99] FA=0/14 (0.00 [0.00,0.22]) abstain=1 unusable=1  <30, tentative
+  units=3       n=29 acc=1.00 [0.88,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0 unusable=1  <30, tentative
+  nearmiss=1    n=30 acc=0.97 [0.83,0.99] FA=1/15 (0.07 [0.01,0.30]) abstain=0
+  nearmiss=2    n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  nearmiss=3    n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  falloff: ladder at L1, traps at traps=1

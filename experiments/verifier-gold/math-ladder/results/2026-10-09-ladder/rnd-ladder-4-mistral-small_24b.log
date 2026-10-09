@@ -1,0 +1,17 @@
+== rest 900s from 09:34:53
+== mistral-small:24b think=off structured=on ladder start 09:49:53
+default rule (grounded and reasoning; knowledge reported only):
+  note: model-caused unusable outcomes (bad_verdict, truncated, repeated timeout) count as missing answers and fail the rule; a fail can come from those, not only from false accepts
+  grounded: FAIL
+    FAIL every claim answered: missing 2 (need 0)
+    ok   gold unsupported claims: 388 (need >= 100)
+    FAIL false-accept upper bound (primary): 0.1715 (need < 0.1)
+    FAIL abstain rate: 0.6003 (need <= 0.2)
+    FAIL balanced accuracy on decided: 0.7446 (need >= 0.8)
+  reasoning: not run
+  knowledge (reported only): not run
+default rule overall: INCOMPLETE (neither pass nor fail)
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-ladder/ladder-mistral-small_24b
+== mistral-small:24b end 10:08:39; models loaded after unload: 0
+== INCOMPLETE
+exit 3

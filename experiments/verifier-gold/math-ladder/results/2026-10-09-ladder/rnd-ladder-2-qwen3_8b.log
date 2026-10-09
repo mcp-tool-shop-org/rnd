@@ -1,0 +1,45 @@
+== rest 900s from 07:15:47
+== qwen3:8b think=on structured=on ladder start 07:30:47
+default rule (grounded and reasoning; knowledge reported only):
+  note: model-caused unusable outcomes (bad_verdict, truncated, repeated timeout) count as missing answers and fail the rule; a fail can come from those, not only from false accepts
+  grounded: FAIL
+    FAIL every claim answered: missing 14 (need 0)
+    ok   gold unsupported claims: 381 (need >= 100)
+    ok   false-accept upper bound (primary): 0.0409 (need < 0.1)
+    ok   abstain rate: 0.0157 (need <= 0.2)
+    ok   balanced accuracy on decided: 0.9841 (need >= 0.8)
+  reasoning: not run
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-ladder/ladder-qwen3_8b
+== qwen3:8b end 08:18:06; models loaded after unload: 0
+
+qwen3:8b
+  L1            n=30 acc=0.93 [0.79,0.98] FA=0/15 (0.00 [0.00,0.20]) abstain=2
+  L2            n=30 acc=0.97 [0.83,0.99] FA=0/15 (0.00 [0.00,0.20]) abstain=1
+  L3            n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  L4            n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  L5            n=28 acc=1.00 [0.88,1.00] FA=0/13 (0.00 [0.00,0.23]) abstain=0 unusable=2  <30, tentative
+  L6            n=27 acc=0.67 [0.48,0.81] FA=6/14 (0.43 [0.21,0.67]) abstain=1 unusable=3  <30, tentative
+  L7            n=28 acc=0.96 [0.82,0.99] FA=0/13 (0.00 [0.00,0.23]) abstain=0 unusable=2  <30, tentative
+  L8            n=30 acc=0.90 [0.74,0.97] FA=1/15 (0.07 [0.01,0.30]) abstain=2
+  steps=1       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  steps=2       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  steps=3       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  precedence=1  n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  precedence=2  n=29 acc=1.00 [0.88,1.00] FA=0/14 (0.00 [0.00,0.22]) abstain=0 unusable=1  <30, tentative
+  precedence=3  n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  traps=1       n=30 acc=0.93 [0.79,0.98] FA=0/15 (0.00 [0.00,0.20]) abstain=2
+  traps=2       n=30 acc=0.87 [0.70,0.95] FA=0/15 (0.00 [0.00,0.20]) abstain=4
+  traps=3       n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  control=1     n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  control=2     n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  control=3     n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  units=1       n=29 acc=1.00 [0.88,1.00] FA=0/14 (0.00 [0.00,0.22]) abstain=0 unusable=1  <30, tentative
+  units=2       n=28 acc=1.00 [0.88,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0 unusable=2  <30, tentative
+  units=3       n=29 acc=0.97 [0.83,0.99] FA=0/15 (0.00 [0.00,0.20]) abstain=0 unusable=1  <30, tentative
+  nearmiss=1    n=30 acc=1.00 [0.89,1.00] FA=0/15 (0.00 [0.00,0.20]) abstain=0
+  nearmiss=2    n=29 acc=1.00 [0.88,1.00] FA=0/14 (0.00 [0.00,0.22]) abstain=0 unusable=1  <30, tentative
+  nearmiss=3    n=29 acc=0.97 [0.83,0.99] FA=1/14 (0.07 [0.01,0.31]) abstain=0 unusable=1  <30, tentative
+  falloff: ladder at L6
+exit 0

@@ -1,0 +1,34 @@
+== qwen3_8b
+  false accepts (model said supported, gold unsupported): 8
+    7 ('true value absent', 'floor misses')
+    1 ('true value in reasoning', 'floor misses')
+  of which L6: {('true value absent', 'floor misses'): 6}
+  cost on gold-supported: {'supported gold, floor agrees': 367, 'supported gold, floor would flip (false reject)': 14}
+== qwen3_14b
+  false accepts (model said supported, gold unsupported): 8
+    8 ('true value absent', 'floor misses')
+  of which L6: {('true value absent', 'floor misses'): 6}
+  cost on gold-supported: {'supported gold, floor agrees': 383, 'supported gold, floor would flip (false reject)': 3}
+== llama3.1_8b
+  false accepts (model said supported, gold unsupported): 162
+    126 ('true value absent', 'floor misses')
+    36 ('true value absent', 'floor catches')
+  of which L6: {('true value absent', 'floor misses'): 15}
+  cost on gold-supported: {'supported gold, floor agrees': 288, 'supported gold, floor would flip (false reject)': 28}
+== mistral-small_24b
+  false accepts (model said supported, gold unsupported): 79
+    68 ('true value absent', 'floor misses')
+    11 ('true value absent', 'floor catches')
+  of which L6: {('true value absent', 'floor catches'): 4, ('true value absent', 'floor misses'): 4}
+  cost on gold-supported: {'supported gold, floor agrees': 298, 'supported gold, floor would flip (false reject)': 15}
+== granite4.1_30b
+  false accepts (model said supported, gold unsupported): 10
+    9 ('true value absent', 'floor misses')
+    1 ('true value in reasoning', 'floor misses')
+  of which L6: {('true value absent', 'floor misses'): 2}
+  cost on gold-supported: {'supported gold, floor agrees': 332, 'supported gold, floor would flip (false reject)': 3}
+== gemma4_31b
+  false accepts (model said supported, gold unsupported): 6
+    6 ('true value absent', 'floor misses')
+  of which L6: {('true value absent', 'floor misses'): 6}
+  cost on gold-supported: {'supported gold, floor agrees': 390}

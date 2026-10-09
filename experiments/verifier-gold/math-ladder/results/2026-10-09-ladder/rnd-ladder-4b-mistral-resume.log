@@ -1,0 +1,25 @@
+resuming: 779 of 780 claims already done
+[696/780] ml-sweep-nearmiss1-05 gold=unsupported -> network failure, not recorded; --resume retries it (24.3s)
+model mistral-small:24b (780 claims selected, 779 attempted)
+unusable (not scored): grounded 1
+grounded   n=778 sup=390 unsup=388 ct=0 missing=2
+  false-accept (unsup+ct): 52/388 13.4% [10.4-17.2]
+  false-accept (unsup only): 52/388 13.4% [10.4-17.2]
+  false-accept (subtle): 52/388 13.4% [10.4-17.2]
+  gold cannot_tell: accepted n/a, said cannot_tell n/a, said unsupported 0
+  abstain: 467/778 60.0% [56.5-63.4]   balanced accuracy (decided): 0.745
+strata:
+cost: $0.0000 over 1103s wall at $0/hr = $0.00000 per claim (boot and pull time not included)
+status: incomplete, 1 claims pending (no recorded outcome); rerun with --resume <dir>
+default rule (grounded and reasoning; knowledge reported only):
+  note: model-caused unusable outcomes (bad_verdict, truncated, repeated timeout) count as missing answers and fail the rule; a fail can come from those, not only from false accepts
+  grounded: FAIL
+    FAIL every claim answered: missing 2 (need 0)
+    ok   gold unsupported claims: 388 (need >= 100)
+    FAIL false-accept upper bound (primary): 0.1715 (need < 0.1)
+    FAIL abstain rate: 0.6003 (need <= 0.2)
+    FAIL balanced accuracy on decided: 0.7446 (need >= 0.8)
+  reasoning: not run
+  knowledge (reported only): not run
+default rule overall: INCOMPLETE (neither pass nor fail)
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-ladder/ladder-mistral-small_24b

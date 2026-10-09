@@ -205,8 +205,25 @@ Labelled **post-hoc**: it exists because of the result above. Agreed with the Pu
 on its own card grant. `verify calibrate --num-predict` already exists (recorded in the manifest and in the
 resume identity), so no offrig change is needed.
 
-- **The one change:** `num_predict` 4096 → **12288**. Everything else as the chain: think on, structured on,
-  temperature 0, seed 0, `num_ctx` 16384, same gold, `--split tune`, both check types.
+- **Amended 07:27, before any run (the Publisher's sequencing):** this is **a new calibration, not a rescore**,
+  on the released offrig binary that carries **quote rule 2** (offrig#47: comment and diff markers stripped per
+  line, whole-line short quotes). Two settings change from the chain, both named here: `num_predict` and the
+  quote rule. Its result is reported beside the chain's, never as a corrected version of it, and Mike sees the
+  rule change stated plainly.
+- **The changes:** `num_predict` 4096 → **12288**, and quote rule 1 → **2**. Everything else as the chain: think
+  on, structured on, temperature 0, seed 0, `num_ctx` 16384, same gold, `--split tune`, both check types.
+- **The binary (fixed 13:17, before any run):** offrig main **751fb1d**, the Publisher's install after the ladder.
+  It carries quote rule 2 (#47), `--keep-thinking` (#48), the health-checked 5xx and dropped-reply rule (#46,
+  #49), and per-provider caps (#51, budget only; calibrate spends nothing). Its sha256s come in the grant message
+  and are recorded here before the run starts; the run's manifest records the version too.
+- **`--keep-thinking` (added 09:36, before any run; diagnosis only):** the run records gemma's thinking text to
+  `thinking.jsonl` in the run directory. It is untrusted model output, never scored, and not part of the verdict
+  or the resume identity, so it changes no number. It answers two questions the chain couldn't: what the
+  truncated replies were doing at the cap, and whether long-evidence abstentions come from the quote step or
+  from the model's own doubt.
+- **Expected from the post-hoc rescore** (`quote_match_posthoc.py`, and a line-for-line port of #47's rule that
+  reproduces rule 1 with 0 mismatches): grounded abstain about 0.075 with 0/142 false accepts, if the replies are
+  the same. A rerun can differ, so this is a prediction, not a result.
 - **Why 12288:** the chain's answered gemma replies peaked at 3,636 tokens (grounded) and 2,473 (reasoning), and
   the four truncations ran past 4,096; 12288 is three times the old cap. The longest prompt was 4,056 tokens, so
   12288 + 4,056 still fits the unchanged 16384 context; `num_ctx` is not a second variable.
@@ -257,5 +274,5 @@ downgraded it (`quote_not_found`):
   false accepts stay at 0/142. Under mode 1 its only remaining miss would be the 2 truncations.
 - Rescues can add false accepts (mistral, granite, llama), so a looser match is not free. That's why it's a
   verdict-contract change with its own pre-registration, never a rescore.
-- **For the gemma post-hoc run:** at num_predict 12288 under today's quote rule, grounded is expected to stay
-  near 0.20 abstain. The bigger budget fixes the truncations, not this.
+- **For the gemma post-hoc run:** the budget alone fixes the truncations, not this. So the run's pre-registration
+  (above) names quote rule 2 as well, making it a new calibration.

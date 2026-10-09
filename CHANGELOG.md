@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.26] - 2026-10-09
+
+- math ladder v1 results (six models), arithmetic-floor post-hoc, gemma rerun pre-registration amendments
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.25] - 2026-10-09
 
 - quote-match post-hoc finding; ladder report model-verdict view

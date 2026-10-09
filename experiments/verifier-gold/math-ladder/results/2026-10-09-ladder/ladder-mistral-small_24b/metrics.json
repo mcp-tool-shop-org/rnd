@@ -1,0 +1,210 @@
+{
+  "model": "mistral-small:24b",
+  "model_digest": "8039dd90c1138d772437a0779a33b7349efd5d9cca71edcd26e4dd463f90439d",
+  "ollama_version": "0.35.1",
+  "settings": {
+    "model": "mistral-small:24b",
+    "url": "http://127.0.0.1:11434",
+    "think": "off",
+    "structured": "on",
+    "split": "tune",
+    "check_type": "all",
+    "limit": null,
+    "swap_evidence": false,
+    "seed": 0,
+    "temperature": 0.0,
+    "num_ctx": 16384,
+    "num_predict": 4096
+  },
+  "claims_selected": 780,
+  "claims_attempted": 779,
+  "unusable": {
+    "grounded": 1
+  },
+  "rows": [
+    {
+      "check_type": "grounded",
+      "n": 778,
+      "supported_n": 390,
+      "unsupported_n": 388,
+      "cannot_tell_n": 0,
+      "missing": 2,
+      "false_accept": {
+        "hits": 52,
+        "of": 388,
+        "rate": 0.13402061855670103,
+        "low": 0.1036869994279428,
+        "high": 0.1715300721531483
+      },
+      "false_accept_unsupported_only": {
+        "hits": 52,
+        "of": 388,
+        "rate": 0.13402061855670103,
+        "low": 0.1036869994279428,
+        "high": 0.1715300721531483
+      },
+      "subtle_false_accept": {
+        "hits": 52,
+        "of": 388,
+        "rate": 0.13402061855670103,
+        "low": 0.1036869994279428,
+        "high": 0.1715300721531483
+      },
+      "cannot_tell_gold": {
+        "n": 0,
+        "false_accept": {
+          "hits": 0,
+          "of": 0,
+          "rate": null,
+          "low": 0.0,
+          "high": 1.0
+        },
+        "said_cannot_tell": {
+          "hits": 0,
+          "of": 0,
+          "rate": null,
+          "low": 0.0,
+          "high": 1.0
+        },
+        "said_unsupported": 0
+      },
+      "abstain": {
+        "hits": 467,
+        "of": 778,
+        "rate": 0.6002570694087404,
+        "low": 0.5654250900056106,
+        "high": 0.6341038531580145
+      },
+      "decided_balanced_accuracy": 0.7446223215024406,
+      "passes_default_rule": false
+    }
+  ],
+  "strata": [
+    {
+      "name": "origin=math-ladder-v1",
+      "rows": [
+        {
+          "check_type": "grounded",
+          "n": 778,
+          "supported_n": 390,
+          "unsupported_n": 388,
+          "cannot_tell_n": 0,
+          "missing": 2,
+          "false_accept": {
+            "hits": 52,
+            "of": 388,
+            "rate": 0.13402061855670103,
+            "low": 0.1036869994279428,
+            "high": 0.1715300721531483
+          },
+          "false_accept_unsupported_only": {
+            "hits": 52,
+            "of": 388,
+            "rate": 0.13402061855670103,
+            "low": 0.1036869994279428,
+            "high": 0.1715300721531483
+          },
+          "subtle_false_accept": {
+            "hits": 52,
+            "of": 388,
+            "rate": 0.13402061855670103,
+            "low": 0.1036869994279428,
+            "high": 0.1715300721531483
+          },
+          "cannot_tell_gold": {
+            "n": 0,
+            "false_accept": {
+              "hits": 0,
+              "of": 0,
+              "rate": null,
+              "low": 0.0,
+              "high": 1.0
+            },
+            "said_cannot_tell": {
+              "hits": 0,
+              "of": 0,
+              "rate": null,
+              "low": 0.0,
+              "high": 1.0
+            },
+            "said_unsupported": 0
+          },
+          "abstain": {
+            "hits": 467,
+            "of": 778,
+            "rate": 0.6002570694087404,
+            "low": 0.5654250900056106,
+            "high": 0.6341038531580145
+          },
+          "decided_balanced_accuracy": 0.7446223215024406,
+          "passes_default_rule": false
+        }
+      ]
+    }
+  ],
+  "cost": {
+    "gpu_cost_hr": 0.0,
+    "wall_seconds": 1102.5047935999992,
+    "claims_attempted": 779,
+    "total_usd": 0.0,
+    "per_claim_usd": 0.0,
+    "note": "gpu_cost_hr x wall seconds / 3600; boot and model pull time are not included and are the caller's to add"
+  },
+  "rule": [
+    {
+      "check_type": "grounded",
+      "counts": true,
+      "criteria": [
+        {
+          "name": "every claim answered",
+          "value": "missing 2",
+          "threshold": "0",
+          "pass": false
+        },
+        {
+          "name": "gold unsupported claims",
+          "value": "388",
+          "threshold": ">= 100",
+          "pass": true
+        },
+        {
+          "name": "false-accept upper bound (primary)",
+          "value": "0.1715",
+          "threshold": "< 0.1",
+          "pass": false
+        },
+        {
+          "name": "abstain rate",
+          "value": "0.6003",
+          "threshold": "<= 0.2",
+          "pass": false
+        },
+        {
+          "name": "balanced accuracy on decided",
+          "value": "0.7446",
+          "threshold": ">= 0.8",
+          "pass": false
+        }
+      ],
+      "pass": false
+    },
+    {
+      "check_type": "reasoning",
+      "counts": true,
+      "criteria": [],
+      "pass": false
+    },
+    {
+      "check_type": "knowledge",
+      "counts": false,
+      "criteria": [],
+      "pass": false
+    }
+  ],
+  "passes_default": false,
+  "status": "incomplete",
+  "pending": 1,
+  "hint": "rerun with --resume <dir>",
+  "default_result": "incomplete",
+  "rule_note": "model-caused unusable outcomes (bad_verdict, truncated, repeated timeout) count as missing answers and fail the rule; a fail can come from those, not only from false accepts"
+}

@@ -26,6 +26,19 @@ before any candidate runs.
    headline,** so the choice isn't scored on the data it was picked on. If it fails on held-out, no default is
    named: that is reported, and the next model is not quietly promoted.
 
+**Amendment, 2026-10-08, before any candidate ran:** the reasoning set can't be split. The rule needs at
+least 100 unsupported claims per run, and reasoning has 50 in tune and 61 in held-out (grounded has 128 and
+113). Split, no model could pass on reasoning, so the protocol as first written could never name a default.
+- **grounded:** unchanged. Select on tune; held-out confirms and is the headline.
+- **reasoning:** runs on `--split all` (246 claims, 111 unsupported), for selection and for the rule.
+- **The cost:** reasoning has no held-out check, so the chosen model's reasoning numbers are in-sample.
+  Selection bias stays small, because the rule takes the cheapest model that passes, not the best score. The
+  report says so next to the numbers.
+- **The fix:** about 90 more reasoning behaviours, so each split reaches 100 unsupported; then reasoning gets
+  a held-out confirmation too. That's asked of the Publisher, who owns the reasoning set.
+- R&D missed this when the protocol was first committed; it was caught while writing the run script, before
+  any model ran.
+
 **Candidates** (local, on disk, families other than the generator's): qwen3:8b, llama3.1:8b, qwen3:14b,
 mistral-small:24b, granite4.1:30b, gemma4:31b.
 - **gemma4:31b has seen the 120 cross-family sample claims.** Its report also shows its result without them.

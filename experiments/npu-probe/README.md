@@ -115,6 +115,13 @@ OFFRIG_EMBED_URL=http://127.0.0.1:11491 offrig index <paths> --model bge-base-en
 - Fail loud, never silent: an inference error is a 503, a `DEVICE_LOST` latches the device until restart
   (`/health` reports it), and there is no CPU fallback. Unknown models are 404; bodies and batch sizes are
   bounded. `tests/test_npu_serve.py` drives all of this with fake models — no NPU needed.
+
+**Cold start → embed → stop, recorded** (`results/2026-10-09-npu-serve-smoke.json` and
+`results/2026-10-09-npu-serve-2048-probe.json`, both in Publisher-logged NPU windows): five-bucket nomic
+loads on the NPU in ~53 s; the corpus-max 1,619-token chunk dispatches to the 2,048 rung (0.82 s first
+call, 0.51 s warm) and matches the CPU's OpenVINO run at cosine 0.99947 — device-numerics drift grows a
+little with sequence length (≥ 0.99999 at 512), which the parity receipt will show by length. Health
+stayed clean (no `DEVICE_LOST`), and the port was released on stop. The 2,048 compile risk is retired.
 - Lifecycle drafts: `start_npu_serve.ps1`, `stop_npu_serve.ps1`, `npu-serve-task.xml` are drafts —
   **not registered** — pending Publisher ledger rules for boot-time device grants.
 

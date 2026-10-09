@@ -1,0 +1,48 @@
+{
+ "date": "2026-10-09",
+ "kind": "npu-serve 2048-bucket probe (phase-2 de-risk / phase-4 cold cycle)",
+ "server": "npu-serve 0.2.0",
+ "device": "NPU",
+ "window": "Publisher-granted 2026-10-09 (start logged via Mike)",
+ "model": {
+  "repo": "nomic-ai/nomic-embed-text-v1.5",
+  "revision": "e9b6763023c676ca8431644204f50c2b100d9aab"
+ },
+ "buckets": [
+  128,
+  256,
+  512,
+  1024,
+  2048
+ ],
+ "load_process_to_health_s": 53,
+ "embeds": [
+  {
+   "item": "short control (5 words, 128 bucket)",
+   "seconds": 0.2689
+  },
+  {
+   "item": "offrig README.ja.md chunk #8 (1619 tokens -> 2048 bucket; the corpus max, per 2026-10-09-nomic-chunk-lengths.json)",
+   "tokens": 1619,
+   "seconds_first": 0.8205,
+   "seconds_warm": 0.5117,
+   "dim": 768,
+   "cosine_vs_cpu_openvino": 0.9994727727648698
+  }
+ ],
+ "health_after": {
+  "status": "ok",
+  "version": "npu-serve 0.2.0",
+  "uptime_s": 74,
+  "device_lost": null,
+  "models": {
+   "nomic-embed-text": {
+    "device": "NPU",
+    "dim": 768,
+    "pooling": "mean"
+   }
+  },
+  "nli": null
+ },
+ "notes": "first 2048-rung compile on the NPU; no stall, ~53 s cold load for 5 buckets"
+}

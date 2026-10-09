@@ -48,7 +48,11 @@ def wilson(k: int, n: int) -> tuple[float, float]:
     p, z2 = k / n, Z95 * Z95
     centre = (p + z2 / (2 * n)) / (1 + z2 / n)
     margin = Z95 * ((p * (1 - p) / n + z2 / (4 * n * n)) ** 0.5) / (1 + z2 / n)
-    return (max(0.0, centre - margin), min(1.0, centre + margin))
+    # Exact at the edges: float rounding left wilson(0, n)'s lower bound at ~1e-17, above the observed 0,
+    # which would read as "the interval excludes 0" for a cell with no events.
+    lo = 0.0 if k == 0 else max(0.0, centre - margin)
+    hi = 1.0 if k == n else min(1.0, centre + margin)
+    return (lo, hi)
 
 
 def tier(r: dict) -> str:

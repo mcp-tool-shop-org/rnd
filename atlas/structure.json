@@ -694,6 +694,18 @@
           "path": "experiments/distill-ladder/PLAN.md"
         },
         {
+          "exports": [
+            "canonical_jsonl",
+            "dedupe",
+            "normalise_source",
+            "seal",
+            "source_hash",
+            "source_of"
+          ],
+          "hash": "bf1c23008fd9a72d882af6aa736dbfcfc46a0ddd258791c39cef5ecdc92ef820",
+          "path": "experiments/distill-ladder/dedupe.py"
+        },
+        {
           "hash": "204acb78c4a52b40b79ae6eaaea4da6eb1db759f43c7923b851bf65df305c5fe",
           "path": "experiments/kev-judge-finetune/README.md"
         },
@@ -1326,7 +1338,7 @@
             "tiers",
             "wilson"
           ],
-          "hash": "bb80f45c94cc5599a1eed61069de7a1eef9feae8d914b05749830a8bd5df1f96",
+          "hash": "261b3a9fda8ae4ec2a205efa22deea02aaa8f3d31d0c8693ac9682cd6d62ebf4",
           "path": "experiments/verifier-gold/calibration/difficulty.py"
         },
         {
@@ -1558,9 +1570,10 @@
         {
           "exports": [
             "main",
+            "tally",
             "wilson"
           ],
-          "hash": "502ae2dd4062148c6b2fdd1f9c12c86dc0140b47894e40e2abb80f8e106b4e56",
+          "hash": "156c50174edc1ccdea1e660310c3fe1636baa2fcc5cb6df8d0ca32bd331b9e83",
           "path": "experiments/verifier-gold/math-ladder/report.py"
         },
         {
@@ -1620,7 +1633,7 @@
       "origin": "mixed",
       "outsidePlaces": [
         {
-          "reads": 7,
+          "reads": 8,
           "where": [
             "caller"
           ],
@@ -1635,7 +1648,7 @@
           "writes": 0
         }
       ],
-      "outsideReads": 8,
+      "outsideReads": 9,
       "outsideWrites": 4,
       "role": "code",
       "testRunners": [
@@ -1756,7 +1769,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "47d3ecd2c9b33b1bba425acfc1b7c8952ec25cea624ceb341e478b3bcd257842",
+          "hash": "bc8a9b5d39f53563713bfd53e8687ac409c71086974b0e223d159ac9909a670a",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -2606,7 +2619,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "40680f3d3b732ecc72f3e61514dc8c1a916119904d1297abd105055d7aeeb504",
+          "hash": "c062890e68813410c11a3ea4840ecc8291e3d09db69b0cf0927f8301c6f8cfc4",
           "path": "CHANGELOG.md"
         },
         {
@@ -2837,6 +2850,20 @@
         },
         {
           "exports": [
+            "items",
+            "ladder_run"
+          ],
+          "hash": "dddaa38d322a8ee9d7fb4aab5f527fa096613d0fca7f97b9376a5a9dd2c794e6",
+          "names": [
+            "experiments/distill-ladder/dedupe.py",
+            "experiments/verifier-gold/calibration/difficulty.py",
+            "experiments/verifier-gold/math-ladder/report.py"
+          ],
+          "path": "tests/test_distill_step0_properties.py",
+          "testFramework": "unittest"
+        },
+        {
+          "exports": [
             "execute"
           ],
           "hash": "1e5e6a6aba6d532b0acb8d5421a69f6b5fab2900109dce122d5bfc5262d6801e",
@@ -2900,6 +2927,11 @@
       "testedBy": 0,
       "unresolvedNamed": [
         {
+          "path": "tests/test_distill_step0_properties.py",
+          "specifier": null,
+          "why": "dynamic"
+        },
+        {
           "path": "tests/test_packaging.py",
           "specifier": "rnd.cli",
           "why": "unplaced"
@@ -2910,7 +2942,7 @@
           "why": "unplaced"
         }
       ],
-      "unresolvedSites": 2
+      "unresolvedSites": 3
     }
   ],
   "doors": [
@@ -3038,7 +3070,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 6
+          "files": 7
         },
         {
           "boundary": "experiments",
@@ -3128,7 +3160,7 @@
         },
         {
           "coverage": true,
-          "files": 6,
+          "files": 7,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -3558,8 +3590,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "0cfaf268c244b982442bdd93c7c5350e6a079b3d",
-    "tracked": 316
+    "commit": "4abb0ee7e2a36fa1097fd38281e8e97fcdbb8957",
+    "tracked": 318
   },
   "landings": [
     {
@@ -3737,6 +3769,18 @@
           "confidence": "ast"
         }
       ]
+    },
+    {
+      "readers": [
+        {
+          "by": "tests/test_distill_step0_properties.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/distill-ladder/dedupe.py",
+      "writers": []
     },
     {
       "readers": [
@@ -4019,6 +4063,18 @@
     {
       "readers": [
         {
+          "by": "tests/test_distill_step0_properties.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/difficulty.py",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "experiments/verifier-gold/crossfamily/run_labeller.py",
           "call": "read_text",
           "confidence": "ast"
@@ -4098,6 +4154,18 @@
       "writers": []
     },
     {
+      "readers": [
+        {
+          "by": "tests/test_distill_step0_properties.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder/report.py",
+      "writers": []
+    },
+    {
       "readers": [],
       "target": "instruments",
       "writers": [
@@ -4163,7 +4231,7 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 8,
+  "testFiles": 9,
   "testsNotRun": [
     "experiments/cuda-graphs/test_graphed_heads.py",
     "experiments/data-designer/tests/test_lockdown.py"

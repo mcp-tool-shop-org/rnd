@@ -70,59 +70,46 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 60,
-      "changed": 8,
+      "added": 2,
+      "changed": 4,
       "moved": 0,
-      "parts": 6,
+      "parts": 4,
       "removed": 0
     },
     "items": [
       {
-        "kind": "import-added",
-        "sentence": "tests now imports experiments.",
+        "kind": "landing",
+        "sentence": "experiments/distill-ladder/dedupe.py is now read by tests/test_distill_step0_properties.py.",
         "subjects": [
-          "tests",
-          "experiments"
+          "experiments/distill-ladder/dedupe.py",
+          "tests/test_distill_step0_properties.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "experiments/data-designer/runs/phase0-smoke.json is now written by experiments/data-designer/one_row.py.",
+        "sentence": "experiments/verifier-gold/calibration/difficulty.py is now read by tests/test_distill_step0_properties.py.",
         "subjects": [
-          "experiments/data-designer/runs/phase0-smoke.json",
-          "experiments/data-designer/one_row.py"
+          "experiments/verifier-gold/calibration/difficulty.py",
+          "tests/test_distill_step0_properties.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "experiments/verifier-gold/crossfamily/ is now written by experiments/verifier-gold/crossfamily/run_labeller.py.",
+        "sentence": "experiments/verifier-gold/math-ladder/report.py is now read by tests/test_distill_step0_properties.py.",
         "subjects": [
-          "experiments/verifier-gold/crossfamily/",
-          "experiments/verifier-gold/crossfamily/run_labeller.py"
+          "experiments/verifier-gold/math-ladder/report.py",
+          "tests/test_distill_step0_properties.py"
         ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "experiments/verifier-gold/crossfamily/blind_in.json is now written by experiments/verifier-gold/crossfamily/make_sample.py.",
-        "subjects": [
-          "experiments/verifier-gold/crossfamily/blind_in.json",
-          "experiments/verifier-gold/crossfamily/make_sample.py"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "And 12 more new writers and readers of places.",
-        "subjects": []
       },
       {
         "kind": "counts",
-        "sentence": "60 files added and 8 changed content, across 6 parts.",
+        "sentence": "2 files added and 4 changed content, across 4 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "1443c846340955e790b0a43068e5a04e98f62484",
-      "generatedAt": "2026-10-09T01:49:31.648Z"
+      "commit": "0cfaf268c244b982442bdd93c7c5350e6a079b3d",
+      "generatedAt": "2026-10-09T07:39:49.785Z"
     },
     "unchanged": false
   },
@@ -148,9 +135,9 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 2 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "0cfaf268c244b982442bdd93c7c5350e6a079b3d",
+  "commit": "4abb0ee7e2a36fa1097fd38281e8e97fcdbb8957",
   "defaultBranch": "main",
-  "derived": "12 parts, mostly Python (55 files), shell (14), CSS (2), TypeScript (2), Astro (1), HTML (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "12 parts, mostly Python (57 files), shell (14), CSS (2), TypeScript (2), Astro (1), HTML (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -186,7 +173,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 6
+          "files": 7
         },
         {
           "boundary": "experiments",
@@ -405,12 +392,12 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-09T07:39:49.785Z",
+  "generatedAt": "2026-10-09T07:45:13.518Z",
   "limits": [
-    "6 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 3 more.",
+    "7 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 4 more.",
     "7 writes and 7 reads use paths built at run time and are not named here.",
     "1 write goes to places this repository does not track, so it is not listed as generated.",
-    "11 writes and 21 reads go to a path their caller passes, not to this repository.",
+    "11 writes and 22 reads go to a path their caller passes, not to this repository.",
     "3 reads go to the directory the command is run in (entries and instruments), not to this repository.",
     "1 read goes to the directory the command is run in or a path its caller passes, not to this repository.",
     "7 files belong to no part: datapacks/hymn-arrangements/datapack.json, datapacks/hymn-arrangements/hosted.json, datapacks/hymn-arrangements/spec.json and 4 more.",
@@ -454,7 +441,7 @@
   "startReason": "This path follows rnd (a command people run) from its entry, since CI runs only tests and checks.",
   "summary": "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only).",
   "summaryFrom": "person",
-  "testFiles": 8,
+  "testFiles": 9,
   "testedBy": {
     "experiments": 2,
     "mcptoolshop_rnd": 4,

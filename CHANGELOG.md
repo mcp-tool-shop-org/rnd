@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.2.15] - 2026-10-09
+
+- calibration: per-model think from Ollama capabilities; smoke driver
+- Added experiment `data-designer`
+- Added experiment `verifier-gold`
+
 ## [1.1.4.2.14] - 2026-10-08
 
 - reasoning batch 2 blind-relabelled 208/213 and merged; reasoning back to tune/heldout

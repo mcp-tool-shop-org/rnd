@@ -1,0 +1,7 @@
+# model            think  (from Ollama /api/show capabilities, 2026-10-09; smallest first)
+llama3.1:8b        off
+qwen3:8b           on
+qwen3:14b          on
+mistral-small:24b  off
+granite4.1:30b     off
+gemma4:31b         on

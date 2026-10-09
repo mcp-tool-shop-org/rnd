@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.13] - 2026-10-09
+
+- distill plan: student pinned (Qwen3-1.7B @ 70d244cc), aspire-si#72 approved
+- Updated experiment `distill-ladder`
+
 ## [1.1.4.3.12] - 2026-10-09
 
 - distill plan: teacher pool, itemised card plan, 13.4 sandbox, cleanup; post-hoc candidates marked

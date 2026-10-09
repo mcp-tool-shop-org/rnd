@@ -37,8 +37,9 @@ out in advance.
 
 ## Models
 
-- **Student:** Qwen3-1.7B from Hugging Face, revision pinned at plan time. Its licence is believed Apache-2.0;
-  verify on the card and record it.
+- **Student:** Qwen/Qwen3-1.7B at revision **70d244cc86ccca08cf5af4e1e306ecf908b1ad5e**, licence **apache-2.0**
+  (both verified by ASPIRE on 2026-10-09 against the HF card). The real tokenizer at this revision passes
+  aspire-si#72's template test: with thinking off, the labelled span starts at the JSON.
   - Arm A is **this same base put through our exact packaging** (same converter, same quantization, same
     Modelfile and template), never Ollama's stock qwen3:1.7b. Otherwise differences in packaging would be
     counted as training effect (ASPIRE's point).
@@ -251,11 +252,11 @@ ASPIRE, after R&D has read the scores.
 
 ## Open choices before this becomes the pre-registration
 
-1. The student's pinned revision and verified licence.
+1. ~~The student's pinned revision and verified licence~~ done: Qwen3-1.7B @ 70d244cc, apache-2.0.
 2. The teacher, by the ladder v1 rule above, once tonight's ladder runs.
 3. Ladder v2's knob combinations and per-cell n, then generate and seal it.
-4. ASPIRE's mechanics are written (the Training section). Still to do: the aspire-si PR with its four code
-   changes and tests, reviewed by R&D.
+4. ASPIRE's mechanics are written (the Training section). The aspire-si PR (#72) has the four code changes and
+   tests, plus prefix and multi-turn label guards. R&D approved it at 045423d; it merges on green CI.
 5. The thinking setting for the student, recorded the same way as the calibration candidates.
 
 ## What the Director will see, step by step

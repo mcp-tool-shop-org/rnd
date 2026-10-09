@@ -49,6 +49,20 @@ from optimum.exporters.openvino.model_configs import SiglipOpenVINOConfig  # mod
 
 IMAGE_SIZE = 384  # the pinned checkpoint's fixed input (vision_config image_size = patch 14, 384px)
 IR_STEM = "openvino_model"  # export_from_model's file stem for the single "model" entry
+SIDECAR_NAME = IR_STEM + ".sidecar.json"  # provenance of the IR; reuse requires an exact match
+
+
+def _provenance(model_id: str, revision: str) -> dict:
+    """What the sidecar records: the pin and the export stack versions. A leftover IR from a
+    different pin or a different optimum-intel/openvino build must not be reused silently."""
+    import importlib.metadata as im_
+    def ver(name):
+        try:
+            return im_.version(name)
+        except im_.PackageNotFoundError:
+            return None
+    return {"model_id": model_id, "revision": revision,
+            "optimum-intel": ver("optimum-intel"), "openvino": ver("openvino")}
 
 
 class SiglipImageFeaturesWrapper(PreTrainedModel):
@@ -59,8 +73,9 @@ class SiglipImageFeaturesWrapper(PreTrainedModel):
     config_class = SiglipConfig
 
     def __init__(self, model: SiglipModel):
-        # Eager attention is trace-safe and numerics identical; the init-time attn check raises on
-        # an unknown class otherwise. __init__ does not touch the loaded weights.
+        # Eager attention is trace-safe and numerically equivalent to rounding; the gate measures
+        # it. The init-time attn check raises on an unknown class otherwise.
+        # __init__ does not touch the loaded weights.
         model.config._attn_implementation = "eager"
         super().__init__(model.config)
         self.model = model
@@ -92,22 +107,36 @@ def load_reference(model_id: str, revision: str, cache_dir) -> SiglipModel:
     return model
 
 
-def export_ir(model_id: str, revision: str, cache_dir, output_dir) -> dict:
+def export_ir(model_id: str, revision: str, cache_dir, output_dir,
+              wrapper: "SiglipImageFeaturesWrapper | None" = None) -> dict:
     """Export the wrapper through optimum-intel's exporter (export_from_model, main_export's inner
-    call) with the custom config; reuse a finished export. Returns export metadata for the
-    receipt. CPU-only work; no devices are touched here."""
+    call) with the custom config; reuse a finished export only when its sidecar proves the same
+    pin on the same export stack. Returns export metadata for the receipt. CPU-only work; no
+    devices are touched here. `wrapper` is the tests' seam (a tiny in-memory model); production
+    passes None and the pinned model is loaded from `cache_dir`."""
+    import json
     from optimum.exporters.openvino.convert import export_from_model
 
     output_dir = Path(output_dir)
     xml = output_dir / (IR_STEM + ".xml")
     bin_ = output_dir / (IR_STEM + ".bin")
-    if xml.exists() and bin_.exists():
-        return {"reused": True, "seconds": None, "export_dir": str(output_dir),
-                "path": "optimum export_from_model + custom SiglipOpenVINOConfig "
-                        "(custom_export_configs; no registry change)"}
+    sidecar_path = output_dir / SIDECAR_NAME
+    want = _provenance(model_id, revision)
+    previous = None
+    if xml.exists() and bin_.exists() and sidecar_path.exists():
+        try:
+            previous = json.loads(sidecar_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            previous = None  # unreadable provenance is no provenance
+        if previous is not None and all(previous.get(k) == v for k, v in want.items()):
+            return {"reused": True, "seconds": None, "export_dir": str(output_dir),
+                    "path": "optimum export_from_model + custom SiglipOpenVINOConfig "
+                            "(custom_export_configs; no registry change)",
+                    "sidecar": {"matched": True, "fields": previous}}
     output_dir.mkdir(parents=True, exist_ok=True)
     t0 = time.perf_counter()
-    wrapper = SiglipImageFeaturesWrapper(load_reference(model_id, revision, cache_dir))
+    if wrapper is None:
+        wrapper = SiglipImageFeaturesWrapper(load_reference(model_id, revision, cache_dir))
     wrapper.eval()
     cfg = SiglipImageFeaturesOpenVINOConfig(wrapper.config, task="feature-extraction")
     export_from_model(wrapper, output=str(output_dir), task="feature-extraction",
@@ -115,9 +144,11 @@ def export_ir(model_id: str, revision: str, cache_dir, output_dir) -> dict:
     seconds = round(time.perf_counter() - t0, 1)
     if not (xml.exists() and bin_.exists()):
         raise SystemExit(f"export finished but {xml} / {bin_} are missing; the IR is not usable")
+    sidecar_path.write_text(json.dumps(want, indent=1) + chr(10), encoding="utf-8")
     return {"reused": False, "seconds": seconds, "export_dir": str(output_dir),
             "path": "optimum export_from_model + custom SiglipOpenVINOConfig "
-                    "(custom_export_configs; no registry change)"}
+                    "(custom_export_configs; no registry change)",
+            "sidecar": {"matched": False, "fields": want, "previous": previous}}
 
 
 def static_npu_ir(xml_path, out_path, shape=(1, 3, IMAGE_SIZE, IMAGE_SIZE)) -> dict:

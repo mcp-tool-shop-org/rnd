@@ -109,5 +109,35 @@ class ExportEndToEnd(unittest.TestCase):
             self.assertEqual(str(ir2.inputs[0].get_partial_shape()), "[1,3,28,28]")
 
 
+@unittest.skipUnless(HAVE_EXPORT, SKIP)
+class StaleIRGuard(unittest.TestCase):
+    """export_ir reuses an IR only with a provenance sidecar matching the pin and the export
+    stack; any mismatch — or a missing sidecar — forces a re-export instead of a silent reuse."""
+
+    def test_reuse_requires_matching_sidecar(self):
+        oi = _load()
+        w = oi.SiglipImageFeaturesWrapper(_tiny_model())
+        with tempfile.TemporaryDirectory() as td:
+            d = Path(td)
+            first = oi.export_ir("tiny/test", "rev1", None, d, wrapper=w)
+            self.assertFalse(first["reused"])
+            self.assertFalse(first["sidecar"]["matched"])
+            self.assertIsNone(first["sidecar"]["previous"])
+            second = oi.export_ir("tiny/test", "rev1", None, d, wrapper=w)
+            self.assertTrue(second["reused"])
+            self.assertTrue(second["sidecar"]["matched"])
+            fields = second["sidecar"]["fields"]
+            self.assertEqual((fields["model_id"], fields["revision"]), ("tiny/test", "rev1"))
+            self.assertTrue(fields["optimum-intel"] and fields["openvino"])
+            # a different pin must not reuse the leftover IR
+            third = oi.export_ir("tiny/test", "rev2", None, d, wrapper=w)
+            self.assertFalse(third["reused"])
+            self.assertEqual(third["sidecar"]["previous"]["revision"], "rev1")
+            # and a missing sidecar never reuses silently
+            (d / oi.SIDECAR_NAME).unlink()
+            fourth = oi.export_ir("tiny/test", "rev2", None, d, wrapper=w)
+            self.assertFalse(fourth["reused"])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.33] - 2026-10-09
+
+- intel-npu: second batch-8 NPU hang (switchyard E1, nomic 8x1024, device lost); batch > 1 on the NPU is a hang risk
+- Updated `intel-npu`: The Intel side of the rig — NPU embeddings and iGPU cross-encoders (npu-serve)
+
 ## [1.1.4.3.32] - 2026-10-09
 
 - headline: gemma4:31b passes held-out reasoning, offrig's first default verifier (reasoning only)

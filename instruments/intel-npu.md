@@ -24,6 +24,9 @@ The Core Ultra 9 285K's NPU ("Intel AI Boost") and Intel iGPU, through OpenVINO 
 - Devices are named explicitly (NPU, CPU, the iGPU found by its "Intel" name). OpenVINO also lists the 5090,
   and these scripts never select it.
 - The NPU wants static shapes and batch 1. DeBERTa NLI at batch 8 hung the NPU once (it recovered).
+  A second batch-8 hang, 2026-10-09: switchyard E1 lost the NPU (`ZE_RESULT_ERROR_DEVICE_LOST`, driver
+  reset) at nomic-embed static 8×1024. It re-enumerated afterwards. Two hangs in two batch-8 tries, both
+  encoders, so treat NPU batch > 1 as a hang risk until measured otherwise: run it last, in its own block.
 - INT8 weights don't speed up small encoders. Quantization matters for putting LLMs on the NPU (OpenVINO
   GenAI, INT4).
 - "-NPU2" model builds on Hugging Face (FastFlowLM) are for AMD XDNA2 NPUs, not this Intel NPU.

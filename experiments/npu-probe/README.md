@@ -35,8 +35,11 @@ quality still needs measuring (below).
 *large* models on an NPU (LLMs through OpenVINO GenAI), not what speeds up small encoders.
 
 **Lessons:**
-- The NPU wants static shapes and batch 1. `npu_serve.py` compiles each embedder at lengths 128, 256 and
-  512, and sends each input to the smallest that fits.
+- The NPU wants static shapes and batch 1. `npu_serve.py` compiles each embedder at a per-model length
+  ladder — bge at 128/256/512, nomic at 128/256/512/1024/2048 — and sends each input to the smallest that
+  fits. nomic's top rung is measured, not guessed: the longest offrig chunk over both pinned benchmark
+  corpora is 1619 nomic tokens (the CJK README translations are the tail), per
+  `results/2026-10-09-nomic-chunk-lengths.json`, so nothing in either corpus truncates.
 - Don't push DeBERTa-sized cross-encoders through the NPU at batch 8; use the iGPU.
 - Models named "…-NPU2" on Hugging Face (FastFlowLM) are for **AMD XDNA2** NPUs, not Intel. They don't run
   here.

@@ -19,7 +19,8 @@ facts_roleos.py / facts_offrig.py / facts_roleos_docs.py in experiments/verifier
 Pre-registered bound: C counts as the same model as A iff the MINIMUM cosine over every chunk and query
 (C vs A-fresh) is >= 0.995. The receipt reports min / mean / p1 for C vs A-fresh, C vs A-stored, and
 A-fresh vs A-stored (what int8 storage alone costs), the worst 5 items with lengths and truncation, and
-how many documents overflow the 512-token window.
+how many documents overflow the 512-token mark, and how many overflow the top bucket (the latter should be zero:
+the ladder is measured to cover the corpus, results/2026-10-09-nomic-chunk-lengths.json).
 
 The --device npu leg needs a Publisher-logged NPU window (one exclusive device). The cpu leg loads the
 CPU through Ollama, so it waits for the Publisher's card-free like the rest of the lane. The 5090 is
@@ -228,12 +229,14 @@ def main() -> None:
     def c_embed(text: str) -> list:
         return onnx.embed(text)
 
+    cap = onnx.buckets[-1]
     chunk_rows = []
-    truncated_docs = 0
+    over512_docs = truncated_docs = 0
     for i, c in enumerate(all_chunks):
         prefixed = doc_prefix + c["body"]
         toks = len(onnx.tok(prefixed)["input_ids"])
-        over = toks > 512
+        over512_docs += toks > 512
+        over = toks > cap
         truncated_docs += over
         cf = c_embed(prefixed)
         row = {"item": f"{c['store']}:{c['source']}#chunk{c['chunk_id']}", "kind": "chunk",
@@ -245,12 +248,13 @@ def main() -> None:
         if (i + 1) % 100 == 0:
             print(f"C: {i + 1}/{len(all_chunks)} chunks", flush=True)
     query_rows = []
-    truncated_queries = 0
+    over512_queries = truncated_queries = 0
     q_prefix = task_prefix(model, "query")
     for i, (qid, text) in enumerate(queries):
         prefixed = q_prefix + text
         toks = len(onnx.tok(prefixed)["input_ids"])
-        over = toks > 512
+        over512_queries += toks > 512
+        over = toks > cap
         truncated_queries += over
         cf = c_embed(prefixed)
         query_rows.append({"item": qid, "kind": "query", "chars": len(prefixed), "tokens": toks,
@@ -266,8 +270,11 @@ def main() -> None:
         "stores": stores,
         "onnx": {**NOMIC_ONNX, "ir_digest": onnx.ir_digest, "dim": onnx.dim},
         "counts": {"chunks": len(chunk_rows), "queries": len(query_rows)},
-        "truncation": {"documents_over_512_tokens": truncated_docs,
-                       "queries_over_512_tokens": truncated_queries},
+        "truncation": {"bucket_top": cap,
+                       "documents_over_bucket_tokens": truncated_docs,
+                       "queries_over_bucket_tokens": truncated_queries,
+                       "documents_over_512_tokens": over512_docs,
+                       "queries_over_512_tokens": over512_queries},
         "cosines": {"chunks": {"c_vs_a_fresh": compare(chunk_rows, "c_vs_a_fresh"),
                                "c_vs_a_stored": compare(chunk_rows, "c_vs_a_stored"),
                                "a_fresh_vs_a_stored": compare(chunk_rows, "a_fresh_vs_a_stored")},

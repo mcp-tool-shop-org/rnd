@@ -9,8 +9,11 @@ adds `/api/nli` for a cross-encoder, and `/health` for device status. Loopback o
   - the NPU embeds about 10× faster than the CPU, with cosine ≥ 0.99999 against it;
   - DeBERTa NLI on the NPU is no faster than the CPU, and at batch 8 it hung the device (DEVICE_LOST). So
     NLI runs on the iGPU, at batch 1, about 6× the CPU.
-- The NPU needs static shapes, so each embedder is compiled at sequence lengths 128, 256 and 512 (batch 1).
-  Each input goes to the smallest bucket that fits, and longer inputs are cut at 512 tokens, as Ollama does.
+- The NPU needs static shapes, so each embedder is compiled at a per-model ladder of sequence lengths
+  (batch 1): 128/256/512 for bge, and 128/256/512/1024/2048 for nomic — the top rung covers the longest
+  chunk in the benchmark corpora (1619 tokens; the CJK README translations are the tail), per
+  results/2026-10-09-nomic-chunk-lengths.json. Each input goes to the smallest bucket that fits, and
+  longer inputs are cut at the top rung, as Ollama does.
 - Models are pinned (repo + revision) and the server never adds task prefixes: offrig adds
   "search_document: " / "search_query: " on its side, so a client of this service sees the same text twice.
 - Fail loud, never silent: an inference error is a 503, and a DEVICE_LOST latches the device until restart.
@@ -33,7 +36,8 @@ from optimum.intel import OVModelForFeatureExtraction, OVModelForSequenceClassif
 from transformers import AutoTokenizer
 
 VERSION = "npu-serve 0.2.0"
-BUCKETS = (128, 256, 512)  # provisional for nomic until the phase-2 length histogram lands
+DEFAULT_BUCKETS = (128, 256, 512)  # a model's "buckets" spec overrides; nomic's top rung is
+# measured, not guessed: see results/2026-10-09-nomic-chunk-lengths.json
 MAX_INPUTS = 64  # texts per /api/embed call, pairs per /api/nli call
 MAX_BODY = 1 << 20  # bytes per request body
 
@@ -49,7 +53,8 @@ MODELS = {
     "nomic-embed-text": {"repo": "nomic-ai/nomic-embed-text-v1.5",
                          "revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
                          "file": "onnx/model.onnx",
-                         "format": "onnx", "pooling": "mean"},
+                         "format": "onnx", "pooling": "mean",
+                         "buckets": (128, 256, 512, 1024, 2048)},
 }
 NLI_SPEC = {"name": "nli-deberta-v3-base", "repo": "cross-encoder/nli-deberta-v3-base",
             "revision": "6c749ce3425cd33b46d187e45b92bbf96ee12ec7"}
@@ -81,17 +86,18 @@ class Embedder:
     directly (nomic)."""
     def __init__(self, name: str, spec: dict, core: ov.Core, device: str):
         self.name, self.spec, self.device = name, spec, device
+        self.buckets = tuple(sorted(spec.get("buckets", DEFAULT_BUCKETS)))
         self.tok = AutoTokenizer.from_pretrained(spec["repo"], revision=spec["revision"])
         self.models, self.dim = {}, None
         if spec["format"] == "optimum":
-            for length in BUCKETS:
+            for length in self.buckets:
                 m = OVModelForFeatureExtraction.from_pretrained(spec["repo"], revision=spec["revision"],
                                                                 export=True, compile=False)
                 m.reshape(1, length)
                 m.to(device)
                 m.compile()
                 self.models[length] = m
-            base = self.models[BUCKETS[-1]]
+            base = self.models[self.buckets[-1]]
             self.dim = int(base.config.hidden_size)
             inner = getattr(base, "model", None)
             self.ir_digest = _graph_digest(inner) if inner is not None else "unknown"
@@ -100,7 +106,7 @@ class Embedder:
             with open(path, "rb") as f:
                 self.ir_digest = "sha256:" + hashlib.sha256(f.read()).hexdigest()[:16]
             src = core.read_model(path)
-            for length in BUCKETS:
+            for length in self.buckets:
                 m = src.clone()
                 m.reshape({i.get_any_name(): [1, length] for i in m.inputs})
                 self.models[length] = core.compile_model(m, device)
@@ -122,8 +128,8 @@ class Embedder:
         return np.asarray(req.infer(inputs)[out], dtype=np.float32)
 
     def embed(self, text: str) -> list[float]:
-        n = len(self.tok(text, truncation=True, max_length=BUCKETS[-1])["input_ids"])
-        length = next(b for b in BUCKETS if n <= b)
+        n = len(self.tok(text, truncation=True, max_length=self.buckets[-1])["input_ids"])
+        length = next(b for b in self.buckets if n <= b)
         enc = self.tok([text], padding="max_length", truncation=True, max_length=length, return_tensors="np")
         h = self._forward(length, enc)[0]  # [length, dim]
         if self.spec["pooling"] == "cls":

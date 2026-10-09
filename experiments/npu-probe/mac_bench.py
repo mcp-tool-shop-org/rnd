@@ -7,11 +7,19 @@ Builds plain OpenVINO graphs, with no model behind them:
 INT8 is made the way OpenVINO expects it: FakeQuantize (256 levels) on the input and the weights, which the
 NPU and iGPU compile to integer kernels. Devices: NPU, the Intel iGPU (found by name), and CPU. Never the 5090.
 
+Each measurement runs in its own bounded worker process: a stalled compile (the FP16 4096-chain case) is
+recorded as "compile exceeded N s" instead of hanging the bench. Default is 5 repeats per case with the
+devices interleaved (NPU, iGPU, NPU, iGPU, ...), and the receipt keeps every sample so spread is reported,
+not just the median. Pass --cache-dir to reuse compiled blobs across repeats; without it every repeat pays
+a cold compile.
+
   E:/AI/envs/npu-openvino/Scripts/python.exe mac_bench.py --out results/<date>-mac.json
 """
 
 import argparse
 import json
+import multiprocessing as mp
+import queue
 import time
 from pathlib import Path
 
@@ -61,10 +69,17 @@ def conv_model(int8: bool) -> ov.Model:
     return ov.Model([ops.convolution(a, b, [1, 1], [1, 1], [1, 1], [1, 1])], [x], "conv3x3")
 
 
-def bench(core, model, device, shape, flops, seconds=3.0):
-    t0 = time.perf_counter()
-    c = core.compile_model(model, device, {"PERFORMANCE_HINT": "THROUGHPUT"} if device != "NPU" else {})
-    compile_s = time.perf_counter() - t0
+# name -> (builder taking int8 flag, input shape, operation count). Module level so spawned workers share it.
+CASES = {
+    **{f"matmul{n}": ((lambda n: lambda i: matmul_model(n, i))(n), [n, n], 2 * n**3)
+       for n in (1024, 2048, 4096)},
+    "conv3x3": (conv_model, [1, 64, 224, 224], 2 * 64 * 64 * 9 * 224 * 224),
+    **{f"chain8x{n}": ((lambda n: lambda i: chain_model(n, 8, i))(n), [n, n], 8 * 2 * n**3)
+       for n in (2048, 4096)},
+}
+
+
+def bench(c, device, shape, flops, seconds):
     req = c.create_infer_request()
     x = np.random.default_rng(1).standard_normal(shape).astype(np.float32)
     req.infer({0: x})  # warm
@@ -73,7 +88,89 @@ def bench(core, model, device, shape, flops, seconds=3.0):
         req.infer({0: x})
         n += 1
     dt = (time.perf_counter() - t0) / n
-    return {"compile_s": round(compile_s, 2), "ms_per_call": round(dt * 1000, 3), "tops": round(flops / dt / 1e12, 3)}
+    return {"ms_per_call": round(dt * 1000, 3), "tops": round(flops / dt / 1e12, 3)}
+
+
+def _worker(case, prec, device, seconds, cache_dir, q):
+    """One measurement. Reports its stage so the parent can tell a stalled compile from a stalled bench."""
+    try:
+        build, shape, flops = CASES[case]
+        core = ov.Core()
+        if cache_dir:
+            core.set_property({"CACHE_DIR": cache_dir})
+        t0 = time.perf_counter()
+        c = core.compile_model(build(prec == "int8"), device,
+                               {"PERFORMANCE_HINT": "THROUGHPUT"} if device != "NPU" else {})
+        q.put(("compiled", round(time.perf_counter() - t0, 2)))
+        q.put(("done", bench(c, device, shape, flops, seconds)))
+    except Exception as e:
+        q.put(("error", f"{type(e).__name__}: {str(e)[:200]}"))
+    finally:
+        q.close()
+        q.join_thread()
+
+
+def run_one(case, prec, device, seconds, timeout, cache_dir):
+    """A single (case, precision, device) measurement in a spawn-context worker, killed past its deadline.
+    Returns (result dict, compile_s or None); an error row names the stage that ran out of time."""
+    ctx = mp.get_context("spawn")
+    q = ctx.Queue()
+    p = ctx.Process(target=_worker, args=(case, prec, device, seconds, cache_dir, q))
+    p.start()
+    stage, compile_s, deadline = "compile", None, time.perf_counter() + timeout
+    try:
+        while True:
+            remaining = deadline - time.perf_counter()
+            if remaining <= 0:
+                limit = round(timeout) if stage == "compile" else round(seconds + 60)
+                return {"error": f"{stage} exceeded {limit} s"}, compile_s
+            try:
+                tag, payload = q.get(timeout=min(1.0, remaining))
+            except queue.Empty:
+                if not p.is_alive():
+                    return {"error": f"worker exited during {stage} without a result"}, compile_s
+                continue
+            except (OSError, EOFError):
+                return {"error": f"worker died during {stage}"}, compile_s
+            if tag == "compiled":
+                compile_s, stage = payload, "bench"
+                deadline = time.perf_counter() + seconds + 60
+            elif tag == "done":
+                return payload, compile_s
+            elif tag == "error":
+                return {"error": payload}, compile_s
+    finally:
+        if p.is_alive():
+            p.terminate()
+        p.join(5)
+
+
+def summarize(rows):
+    """One row per (case, precision, device): per-repeat samples kept, medians in the legacy scalar fields,
+    spread as (max - min) / median. A case that never compiled keeps only its error."""
+    groups = {}
+    for row in rows:
+        groups.setdefault((row["case"], row["precision"], row["device"]), []).append(row)
+    out = []
+    for (case, prec, device), reps in groups.items():
+        ok = [r for r in reps if "error" not in r]
+        errors = [r["error"] for r in reps if "error" in r]
+        row = {"case": case, "precision": prec, "device": device,
+               "repeats": len(reps), "repeats_ok": len(ok)}
+        if ok:
+            row["samples"] = {"ms_per_call": [r["ms_per_call"] for r in ok],
+                              "tops": [r["tops"] for r in ok],
+                              "compile_s": [r["compile_s"] for r in ok]}
+            for key in ("ms_per_call", "tops"):
+                xs = row["samples"][key]
+                row[key] = round(float(np.median(xs)), 3)
+                row[f"{key}_spread_pct"] = round((max(xs) - min(xs)) / row[key] * 100, 1)
+        if errors:
+            row["errors"] = errors
+        if not ok:
+            row["error"] = errors[0]
+        out.append(row)
+    return out
 
 
 def main() -> None:
@@ -81,29 +178,37 @@ def main() -> None:
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--only", default="", help="run only cases whose name starts with this")
     ap.add_argument("--cpu", action="store_true", help="include the CPU (it loads every core for a few seconds)")
+    ap.add_argument("--repeats", type=int, default=5, help="measurements per (case, precision, device)")
+    ap.add_argument("--seconds", type=float, default=3.0, help="timed window per measurement")
+    ap.add_argument("--timeout", type=float, default=180.0,
+                    help="per-measurement compile deadline (s); past it the worker is killed and the case "
+                         "is recorded as a compile timeout, not a hang")
+    ap.add_argument("--cache-dir", default="",
+                    help="OpenVINO CACHE_DIR so repeats after the first skip the compile; keep it outside "
+                         "the repo (binary blobs are not receipts)")
     a = ap.parse_args()
     core = ov.Core()
     igpu = next((d for d in core.available_devices if d.startswith("GPU")
                  and core.get_property(d, "FULL_DEVICE_NAME").startswith("Intel")), None)
     devices = ["NPU"] + ([igpu] if igpu else []) + (["CPU"] if a.cpu else [])
-    cases = [(f"matmul{n}", lambda i, n=n: matmul_model(n, i), [n, n], 2 * n**3) for n in (1024, 2048, 4096)]
-    cases.append(("conv3x3", conv_model, [1, 64, 224, 224], 2 * 64 * 64 * 9 * 224 * 224))
-    cases += [(f"chain8x{n}", lambda i, n=n: chain_model(n, 8, i), [n, n], 8 * 2 * n**3) for n in (2048, 4096)]
+    cases = [(name, *spec) for name, spec in CASES.items() if name.startswith(a.only)]
     rows = []
-    cases = [c for c in cases if c[0].startswith(a.only)]
-    for name, build, shape, flops in cases:
-        for prec in ("fp16", "int8"):
-            for d in devices:
-                row = {"case": name, "precision": prec, "device": d}
-                try:
-                    row |= bench(core, build(prec == "int8"), d, shape, flops)
-                except Exception as e:
-                    row["error"] = f"{type(e).__name__}: {str(e)[:200]}"
-                print(json.dumps(row), flush=True)
-                rows.append(row)
+    for rep in range(a.repeats):  # interleave devices across repeats, so drift can't pose as a device effect
+        for d in devices:
+            for name, _, _, _ in cases:
+                for prec in ("fp16", "int8"):
+                    row = {"case": name, "precision": prec, "device": d, "repeat": rep}
+                    result, compile_s = run_one(name, prec, d, a.seconds, a.timeout, a.cache_dir)
+                    row |= result
+                    if compile_s is not None:
+                        row["compile_s"] = compile_s
+                    print(json.dumps(row), flush=True)
+                    rows.append(row)
     a.out.parent.mkdir(parents=True, exist_ok=True)
-    a.out.write_text(json.dumps({"openvino": ov.__version__, "devices": {d: core.get_property(d, "FULL_DEVICE_NAME")
-                                 for d in devices}, "rows": rows}, indent=1), encoding="utf-8")
+    a.out.write_text(json.dumps({"openvino": ov.__version__, "repeats": a.repeats, "timeout_s": a.timeout,
+                                 "cache_dir": bool(a.cache_dir),
+                                 "devices": {d: core.get_property(d, "FULL_DEVICE_NAME") for d in devices},
+                                 "rows": summarize(rows)}, indent=1), encoding="utf-8")
 
 
 if __name__ == "__main__":

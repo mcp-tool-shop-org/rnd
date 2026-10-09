@@ -1,0 +1,2468 @@
+{
+  "offrig_version": "1.0.0",
+  "started_at": 1791536826,
+  "resumes": [],
+  "model": "gemma4:31b",
+  "model_digest": "6316f0629137b426c9d9b853ffc4c8209589f30ee39aebede6285096c0ff47e7",
+  "ollama_version": "0.35.1",
+  "settings": {
+    "model": "gemma4:31b",
+    "url": "http://127.0.0.1:11434",
+    "think": "on",
+    "structured": "on",
+    "split": "tune",
+    "check_type": "grounded",
+    "limit": null,
+    "swap_evidence": false,
+    "seed": 0,
+    "temperature": 0.0,
+    "num_ctx": 16384,
+    "num_predict": 4096
+  },
+  "gpu_cost_hr": 0.0,
+  "gold": [
+    {
+      "file": "grounded.jsonl",
+      "sha256": "59601d10dfea03351e506d08f5296f285d7f7cb37ba5ace79ae2bd006940aabd",
+      "lines": 127
+    },
+    {
+      "file": "grounded-prs.jsonl",
+      "sha256": "6e2d068eb7d2f3bdbce5a229dd9eedac50c09e3f57abbacba78e06f3e3c34f13",
+      "lines": 373
+    }
+  ],
+  "skipped_unlabelled": 0,
+  "selected": [
+    {
+      "id": "cal-dedupe-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "cal-dedupe-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "cal-dedupe-s",
+      "check_type": "grounded",
+      "label": "cannot_tell",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "cal-corrections-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "cal-corrections-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "cal-wilson-null-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "cal-wilson-null-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "boost-cap-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "boost-cap-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "boost-clean-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "boost-clean-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "boost-gate-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "boost-gate-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "jury-min-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "jury-min-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "jury-dup-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "jury-dup-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "jury-dup-s",
+      "check_type": "grounded",
+      "label": "cannot_tell",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "jury-defaults-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "jury-defaults-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "jury-insufficient-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "jury-insufficient-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "jury-all-excluded-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "jury-all-excluded-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "shuffle-method-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "shuffle-method-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "passed-no-measure-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "passed-no-measure-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "passed-no-measure-s",
+      "check_type": "grounded",
+      "label": "cannot_tell",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "abandon-args-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "abandon-args-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "abandon-active-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "abandon-active-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "or-fa-upper-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-fa-upper-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-abstain-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-abstain-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-embed-port-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-embed-port-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-embed-model-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-embed-model-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-embed-model-s",
+      "check_type": "grounded",
+      "label": "cannot_tell",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-lane-step-why-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-lane-step-why-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-sidecar-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-sidecar-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-sidecar-s",
+      "check_type": "grounded",
+      "label": "cannot_tell",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-reserved-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-reserved-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-429-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-429-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-retry-after-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-retry-after-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-retry-fits-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "or-retry-fits-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "offrig-a45fe53"
+    },
+    {
+      "id": "docs-same-runid-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "docs-same-runid-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "docs-boost-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "docs-boost-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "docs-killswitch-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "docs-killswitch-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "docs-panel-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "docs-panel-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "docs-nine-t",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "docs-nine-f",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": null,
+      "self_referential": null,
+      "origin": "role-os-ce91be8"
+    },
+    {
+      "id": "prs-aspire-si-53-6s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-53-6u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-53-7s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-53-7u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-53-8s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-53-8u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-53-10s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-53-10u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-53-12s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-53-12u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-54-2s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-54-2u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-55-1s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-55-1u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-55-2s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-55-2u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-55-3s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-55-3u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-55-4s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-55-4u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-55-5s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-55-5u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-55-6s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-55-6u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-56-2s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-56-2u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-56-3s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-56-3u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-58-3s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-58-3u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-58-4s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-58-4u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-59-1s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-59-1u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-59-4s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-59-4u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-59-5s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-59-5u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-61-4s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-61-4u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-61-5s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-61-5u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-61-6s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-61-6u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-61-8s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-61-8u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-61-9s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-61-9u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-61-11s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-61-11u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-61-13s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-61-13u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-63-1s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-63-1u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-63-5s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-63-5u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-64-1s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-64-1u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-64-2s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-64-2u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-64-7s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-64-7u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-64-8s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-64-8u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-64-9s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-64-9u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-64-10s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-64-10u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-31-90c",
+      "check_type": "grounded",
+      "label": "cannot_tell",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-33-90c",
+      "check_type": "grounded",
+      "label": "cannot_tell",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-90c",
+      "check_type": "grounded",
+      "label": "cannot_tell",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-90c",
+      "check_type": "grounded",
+      "label": "cannot_tell",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-91c",
+      "check_type": "grounded",
+      "label": "cannot_tell",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-53-90c",
+      "check_type": "grounded",
+      "label": "cannot_tell",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-59-90c",
+      "check_type": "grounded",
+      "label": "cannot_tell",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-61-90c",
+      "check_type": "grounded",
+      "label": "cannot_tell",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-aspire-si-64-90c",
+      "check_type": "grounded",
+      "label": "cannot_tell",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-31-1s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-31-1u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-31-2s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-31-2u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-31-3s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-31-3u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-31-4s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-31-4u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-33-1s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-33-1u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-33-2s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-33-2u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-33-3s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-33-3u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-33-4s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-33-4u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-33-6s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-33-6u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-33-7s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-33-7u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-33-8s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-33-8u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-2s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-2u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-4s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-4u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-6s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-6u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-9s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-9u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-13s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-13u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-14s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-14u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-15s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-15u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-17s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-17u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-21s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-21u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-26s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-34-26u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-1s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-1u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-2s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-2u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-3s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-3u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-4s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-4u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-5s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-5u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-8s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-8u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-10s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-10u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-11s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-11u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-13s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-13u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-14s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-14u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-15s",
+      "check_type": "grounded",
+      "label": "cannot_tell",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-15u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-19s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-19u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-20s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-20u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-21s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-21u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-22s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-22u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-24s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-24u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-25s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-39-25u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-40-2s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-40-2u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-40-4s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-40-4u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-40-6s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-40-6u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-40-7s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-40-7u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-40-9s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-40-9u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-40-11s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-40-11u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-40-13s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-40-13u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-3s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-3u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-5s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-5u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-6s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-6u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-7s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-7u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-8s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-8u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-9s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-9u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-10s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-10u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-11s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-11u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-12s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-12u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-13s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-13u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-15s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-15u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-16s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-16u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-18s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-18u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-19s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-19u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-21s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-offrig-41-21u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": true,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-role-os-24-2s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-role-os-24-2u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-role-os-24-5s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-role-os-24-5u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-role-os-24-7s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": true,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-role-os-24-7u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-role-os-24-9s",
+      "check_type": "grounded",
+      "label": "supported",
+      "subtle": false,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    },
+    {
+      "id": "prs-role-os-24-9u",
+      "check_type": "grounded",
+      "label": "unsupported",
+      "subtle": true,
+      "has_doc_comment": false,
+      "self_referential": false,
+      "origin": "prs-2026-10-08"
+    }
+  ]
+}

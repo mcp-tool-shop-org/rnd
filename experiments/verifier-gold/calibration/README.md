@@ -165,3 +165,64 @@ is proposed to the Publisher: a 5xx on the same claim twice is recorded as `unus
 
 The run scripts' `--resume` path also had a bug: it didn't repeat the model and gold, which offrig's `--resume`
 requires. It surfaced on this one claim and is fixed.
+
+## Result, 2026-10-09: no default named
+
+The chain ran all six candidates on `--split tune`, smallest first, with 15-minute rests (06:48 end). **None
+passes the default rule, so no default is named and held-out was not run.** Receipts: `results/2026-10-09-chain/`
+(each run's `manifest.json`, `metrics.json`, `verdicts.jsonl`, the chain logs, and `difficulty-report.txt`).
+
+| model (think) | type | FA upper (< 0.10) | abstain (≤ 0.20) | decided BA (≥ 0.80) | missing (0) |
+|---|---|---|---|---|---|
+| llama3.1:8b (off) | grounded | 0.557 | 73/255 0.286 | 0.630 | 0 |
+| | reasoning | 0.225 | 59/202 0.292 | 0.604 | 2 |
+| qwen3:8b (on) | grounded | 0.125 | 91/253 0.360 | 0.929 | 2 |
+| | reasoning | 0.147 | 52/203 0.256 | 0.940 | 2 |
+| qwen3:14b (on) | grounded | **0.089** | 66/255 0.259 | 0.967 | 0 |
+| | reasoning | 0.204 | **35/204 0.172** | 0.893 | 0 |
+| mistral-small:24b (off) | grounded | 0.253 | 62/254 0.244 | 0.832 | 1 (stuck, Ollama 500) |
+| | reasoning | 0.269 | 44/204 0.216 | 0.788 | 0 |
+| granite4.1:30b (off) | grounded | 0.261 | 101/254 0.398 | 0.850 | 1 |
+| | reasoning | 0.367 | 48/204 0.235 | 0.761 | 0 |
+| gemma4:31b (on) | grounded | **0.026** | 52/254 0.205 | **0.989** | 2 (truncated) |
+| | reasoning | **0.059** | **13/202 0.064** | **0.990** | 2 (truncated) |
+
+**Reading it:**
+- **gemma4:31b is the only model fooled almost never:** 0 false accepts on grounded at every tier, 1/34 on
+  reasoning T3 (the others: 0.23–0.29). It misses the rule on four truncated answers and on grounded abstain by
+  one claim's worth (0.2047). Its abstentions grow with evidence length (grounded Q1 4/58, Q4 21/72).
+- **All four gemma misses are truncations** at offrig calibrate's fixed reply budget, `num_predict` 4096, with
+  the model still thinking (`docs-boost-t`, `prs-offrig-39-15s`, `diff-role-os-23-11s`,
+  `diffhard-rnd-7fba56f-1u`). Truncations count as missing only, never as abstentions.
+- qwen3:14b passes grounded on false accepts and accuracy but abstains too often; on reasoning it is fooled on T3.
+- The models without thinking (llama, mistral, granite) are fooled most. The thinking qwens are fooled less but
+  abstain more. Model and setting are confounded across families; the post-hoc thinking-off runs below isolate it.
+- Per the protocol, the next model is not promoted and no rule is relaxed after the fact.
+
+## Pre-registration, 2026-10-09 ~07:00, before any run: gemma4:31b at a larger reply budget (post-hoc)
+
+Labelled **post-hoc**: it exists because of the result above. Agreed with the Publisher in principle; it runs
+on its own card grant, after the offrig release that adds `verify calibrate --num-predict` (recorded in the
+manifest and in the resume identity).
+
+- **The one change:** `num_predict` 4096 → **12288**. Everything else as the chain: think on, structured on,
+  temperature 0, seed 0, `num_ctx` 16384, same gold, `--split tune`, both check types.
+- **Why 12288:** the chain's answered gemma replies peaked at 3,636 tokens (grounded) and 2,473 (reasoning), and
+  the four truncations ran past 4,096; 12288 is three times the old cap. The longest prompt was 4,056 tokens, so
+  12288 + 4,056 still fits the unchanged 16384 context; `num_ctx` is not a second variable.
+- **What it can and can't fix, said before the result:**
+  - **reasoning** passes if the 2 truncated claims answer: every other condition already passes, and the
+    false-accept upper bound has room even if both answers are false accepts.
+  - **grounded:** the truncations alone can't fix abstain. Of the two, only `docs-boost-t` (gold supported) enters
+    the abstain denominator (`prs-offrig-39-15s` is gold cannot_tell). Answered, it gives 52/255 = 0.204; abstained,
+    53/255. Grounded passes only if the larger budget also turns at least one existing abstention into an answer.
+  - Exactly 51/255 = 0.200 passes **on the line**; the report calls it a **boundary pass**, and the held-out
+    confirmation carries the weight.
+- **A split result** (one check type passes, the other doesn't): offrig's rule is per check type, so a default
+  may be named **for the type that passes only**, after its held-out confirmation; the other type has no default
+  and the report says so. The protocol's "cheapest model that passes both" applies when both pass.
+- **If it passes on tune:** one held-out run per passing type, same settings, which is the headline. A held-out
+  fail names no default.
+- **Served as calibrated:** a default chosen at 12288 must be served at 12288 (`offrig verify` carries the
+  setting); the calibration report records it per model.
+- Every number from this run is reported beside the chain's, never in place of it.

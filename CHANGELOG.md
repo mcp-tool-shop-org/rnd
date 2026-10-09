@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.24] - 2026-10-09
+
+- calibration chain result (no default named) and the gemma post-hoc pre-registration
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.23] - 2026-10-09
 
 - calibration: thinking-level table per model

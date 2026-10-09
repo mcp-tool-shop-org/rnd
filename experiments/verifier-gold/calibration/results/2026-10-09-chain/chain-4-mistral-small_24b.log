@@ -1,0 +1,56 @@
+== rest 900s from 03:44:31; models loaded at start: 0
+== mistral-small:24b think=off structured=on start 03:59:32
+  false-accept (subtle): 25/128 19.5% [13.6-27.2]
+  gold cannot_tell: accepted 1/15 6.7% [1.2-29.8], said cannot_tell 9/15 60.0% [35.7-80.2], said unsupported 5
+  abstain: 62/254 24.4% [19.5-30.0]   balanced accuracy (decided): 0.832
+strata:
+  has_doc_comment=false        grounded   n=104  FA 13/59 22.0% [13.4-34.1]  subtle FA 13/52 25.0% [15.2-38.2]  abstain 21/97 21.6% [14.6-30.8]  BA 0.798
+  has_doc_comment=true         grounded   n=100  FA 12/49 24.5% [14.6-38.1]  subtle FA 11/46 23.9% [13.9-37.9]  abstain 36/97 37.1% [28.2-47.0]  BA 0.766
+  origin=offrig-a45fe53        grounded   n=22   FA 0/12 0.0% [0.0-24.2]  subtle FA 0/10 0.0% [0.0-27.8]  abstain 3/20 15.0% [5.2-36.0]  BA 1.000
+  origin=prs-2026-10-08        grounded   n=204  FA 25/108 23.1% [16.2-31.9]  subtle FA 24/98 24.5% [17.0-33.9]  abstain 57/194 29.4% [23.4-36.1]  BA 0.786
+  origin=role-os-ce91be8       grounded   n=43   FA 1/23 4.3% [0.8-21.0]  subtle FA 1/20 5.0% [0.9-23.6]  abstain 2/40 5.0% [1.4-16.5]  BA 0.924
+  self_referential=false       grounded   n=172  FA 17/91 18.7% [12.0-27.9]  subtle FA 16/83 19.3% [12.2-29.0]  abstain 47/164 28.7% [22.3-36.0]  BA 0.807
+  self_referential=true        grounded   n=32   FA 8/17 47.1% [26.2-69.0]  subtle FA 8/15 53.3% [30.1-75.2]  abstain 10/30 33.3% [19.2-51.2]  BA 0.667
+cost: $0.0000 over 327s wall at $0/hr = $0.00000 per claim (boot and pull time not included)
+status: incomplete, 1 claims pending (no recorded outcome); rerun with --resume <dir>
+default rule (grounded and reasoning; knowledge reported only):
+  note: model-caused unusable outcomes (bad_verdict, truncated, repeated timeout) count as missing answers and fail the rule; a fail can come from those, not only from false accepts
+  grounded: FAIL
+    FAIL every claim answered: missing 1 (need 0)
+    ok   gold unsupported claims: 128 (need >= 100)
+    FAIL false-accept upper bound (primary): 0.2531 (need < 0.1)
+    FAIL abstain rate: 0.2441 (need <= 0.2)
+    ok   balanced accuracy on decided: 0.8316 (need >= 0.8)
+  reasoning: not run
+  knowledge (reported only): not run
+default rule overall: INCOMPLETE (neither pass nor fail)
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/cal-mistral-small_24b-grounded-tune
+reasoning  n=223 sup=102 unsup=102 ct=19 missing=0
+  false-accept (unsup+ct): 23/121 19.0% [13.0-26.9]
+  false-accept (unsup only): 20/102 19.6% [13.1-28.4]
+  false-accept (subtle): 20/102 19.6% [13.1-28.4]
+  gold cannot_tell: accepted 3/19 15.8% [5.5-37.6], said cannot_tell 15/19 78.9% [56.7-91.5], said unsupported 1
+  abstain: 44/204 21.6% [16.5-27.7]   balanced accuracy (decided): 0.788
+strata:
+  has_doc_comment=false        reasoning  n=127  FA 16/71 22.5% [14.4-33.5]  subtle FA 13/56 23.2% [14.1-35.8]  abstain 23/112 20.5% [14.1-28.9]  BA 0.778
+  has_doc_comment=true         reasoning  n=96   FA 7/50 14.0% [7.0-26.2]  subtle FA 7/46 15.2% [7.6-28.2]  abstain 21/92 22.8% [15.4-32.4]  BA 0.803
+  origin=diffs-2026-10         reasoning  n=91   FA 11/51 21.6% [12.5-34.6]  subtle FA 10/41 24.4% [13.8-39.3]  abstain 11/81 13.6% [7.8-22.7]  BA 0.823
+  origin=diffs-2026-10-b2      reasoning  n=111  FA 7/58 12.1% [6.0-22.9]  subtle FA 6/52 11.5% [5.4-23.0]  abstain 30/105 28.6% [20.8-37.8]  BA 0.803
+  origin=diffs-2026-10-hard    reasoning  n=21   FA 5/12 41.7% [19.3-68.0]  subtle FA 4/9 44.4% [18.9-73.3]  abstain 3/18 16.7% [5.8-39.2]  BA 0.579
+cost: $0.0000 over 299s wall at $0/hr = $0.00000 per claim (boot and pull time not included)
+default rule (grounded and reasoning; knowledge reported only):
+  note: model-caused unusable outcomes (bad_verdict, truncated, repeated timeout) count as missing answers and fail the rule; a fail can come from those, not only from false accepts
+  grounded: not run
+  reasoning: FAIL
+    ok   every claim answered: missing 0 (need 0)
+    ok   gold unsupported claims: 102 (need >= 100)
+    FAIL false-accept upper bound (primary): 0.2691 (need < 0.1)
+    FAIL abstain rate: 0.2157 (need <= 0.2)
+    FAIL balanced accuracy on decided: 0.7881 (need >= 0.8)
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/cal-mistral-small_24b-reasoning-tune
+== mistral-small:24b end 04:10:06; models loaded after unload: 0
+== grounded: INCOMPLETE
+== reasoning: complete
+exit 3

@@ -1,0 +1,56 @@
+== rest 900s from 02:24:41; models loaded at start: 0
+== qwen3:8b think=on structured=on start 02:39:41
+  false-accept (unsup only): 8/127 6.3% [3.2-11.9]
+  false-accept (subtle): 8/127 6.3% [3.2-11.9]
+  gold cannot_tell: accepted 2/15 13.3% [3.7-37.9], said cannot_tell 5/15 33.3% [15.2-58.3], said unsupported 8
+  abstain: 91/253 36.0% [30.3-42.1]   balanced accuracy (decided): 0.929
+strata:
+  has_doc_comment=false        grounded   n=103  FA 5/59 8.5% [3.7-18.4]  subtle FA 4/52 7.7% [3.0-18.2]  abstain 42/96 43.8% [34.3-53.7]  BA 0.912
+  has_doc_comment=true         grounded   n=100  FA 3/48 6.2% [2.1-16.8]  subtle FA 2/45 4.4% [1.2-14.8]  abstain 42/97 43.3% [33.9-53.2]  BA 0.950
+  origin=offrig-a45fe53        grounded   n=22   FA 1/12 8.3% [1.5-35.4]  subtle FA 1/10 10.0% [1.8-40.4]  abstain 3/20 15.0% [5.2-36.0]  BA 0.883
+  origin=prs-2026-10-08        grounded   n=203  FA 8/107 7.5% [3.8-14.1]  subtle FA 6/97 6.2% [2.9-12.8]  abstain 84/193 43.5% [36.7-50.6]  BA 0.932
+  origin=role-os-ce91be8       grounded   n=43   FA 1/23 4.3% [0.8-21.0]  subtle FA 1/20 5.0% [0.9-23.6]  abstain 4/40 10.0% [4.0-23.1]  BA 0.947
+  self_referential=false       grounded   n=172  FA 5/91 5.5% [2.4-12.2]  subtle FA 3/83 3.6% [1.2-10.1]  abstain 71/164 43.3% [35.9-50.9]  BA 0.946
+  self_referential=true        grounded   n=31   FA 3/16 18.8% [6.6-43.0]  subtle FA 3/14 21.4% [7.6-47.6]  abstain 13/29 44.8% [28.4-62.5]  BA 0.850
+cost: $0.0000 over 595s wall at $0/hr = $0.00000 per claim (boot and pull time not included)
+default rule (grounded and reasoning; knowledge reported only):
+  note: model-caused unusable outcomes (bad_verdict, truncated, repeated timeout) count as missing answers and fail the rule; a fail can come from those, not only from false accepts
+  grounded: FAIL
+    FAIL every claim answered: missing 2 (need 0)
+    ok   gold unsupported claims: 127 (need >= 100)
+    FAIL false-accept upper bound (primary): 0.1248 (need < 0.1)
+    FAIL abstain rate: 0.3597 (need <= 0.2)
+    ok   balanced accuracy on decided: 0.9294 (need >= 0.8)
+  reasoning: not run
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/cal-qwen3_8b-grounded-tune
+reasoning  n=221 sup=101 unsup=102 ct=18 missing=2
+  false-accept (unsup+ct): 10/120 8.3% [4.6-14.7]
+  false-accept (unsup only): 7/102 6.9% [3.4-13.5]
+  false-accept (subtle): 7/102 6.9% [3.4-13.5]
+  gold cannot_tell: accepted 3/18 16.7% [5.8-39.2], said cannot_tell 6/18 33.3% [16.3-56.3], said unsupported 9
+  abstain: 52/203 25.6% [20.1-32.0]   balanced accuracy (decided): 0.940
+strata:
+  has_doc_comment=false        reasoning  n=125  FA 6/70 8.6% [4.0-17.5]  subtle FA 3/56 5.4% [1.8-14.6]  abstain 24/111 21.6% [15.0-30.2]  BA 0.934
+  has_doc_comment=true         reasoning  n=96   FA 4/50 8.0% [3.2-18.8]  subtle FA 4/46 8.7% [3.4-20.3]  abstain 28/92 30.4% [22.0-40.5]  BA 0.949
+  origin=diffs-2026-10         reasoning  n=90   FA 1/50 2.0% [0.4-10.5]  subtle FA 1/41 2.4% [0.4-12.6]  abstain 19/81 23.5% [15.6-33.8]  BA 0.987
+  origin=diffs-2026-10-b2      reasoning  n=110  FA 6/58 10.3% [4.8-20.8]  subtle FA 4/52 7.7% [3.0-18.2]  abstain 27/104 26.0% [18.5-35.1]  BA 0.935
+  origin=diffs-2026-10-hard    reasoning  n=21   FA 3/12 25.0% [8.9-53.2]  subtle FA 2/9 22.2% [6.3-54.7]  abstain 6/18 33.3% [16.3-56.3]  BA 0.725
+cost: $0.0000 over 697s wall at $0/hr = $0.00000 per claim (boot and pull time not included)
+default rule (grounded and reasoning; knowledge reported only):
+  note: model-caused unusable outcomes (bad_verdict, truncated, repeated timeout) count as missing answers and fail the rule; a fail can come from those, not only from false accepts
+  grounded: not run
+  reasoning: FAIL
+    FAIL every claim answered: missing 2 (need 0)
+    ok   gold unsupported claims: 102 (need >= 100)
+    FAIL false-accept upper bound (primary): 0.1466 (need < 0.1)
+    FAIL abstain rate: 0.2562 (need <= 0.2)
+    ok   balanced accuracy on decided: 0.9396 (need >= 0.8)
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/cal-qwen3_8b-reasoning-tune
+== qwen3:8b end 03:01:19; models loaded after unload: 0
+== grounded: complete
+== reasoning: complete
+exit 0

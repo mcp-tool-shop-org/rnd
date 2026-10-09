@@ -1,0 +1,90 @@
+gemma4:31b           grounded  length_q Q1  n= 58 acc=0.91 [0.81,0.96] FA=0/30 (0.00 [0.00,0.11]) false-reject=1/28 abstain=4
+gemma4:31b           grounded  length_q Q2  n= 71 acc=0.83 [0.73,0.90] FA=0/37 (0.00 [0.00,0.09]) false-reject=0/34 abstain=12
+gemma4:31b           grounded  length_q Q3  n= 67 acc=0.76 [0.65,0.85] FA=0/36 (0.00 [0.00,0.10]) false-reject=1/31 abstain=15
+gemma4:31b           grounded  length_q Q4  n= 72 acc=0.71 [0.59,0.80] FA=0/39 (0.00 [0.00,0.09]) false-reject=0/33 abstain=21
+gemma4:31b           grounded  tier     T1  n=167 acc=0.77 [0.70,0.82] FA=0/41 (0.00 [0.00,0.09]) false-reject=2/126 abstain=37
+gemma4:31b           grounded  tier     T2  n= 87 acc=0.83 [0.73,0.89] FA=0/87 (0.00 [0.00,0.04]) false-reject=0/0 abstain=15
+gemma4:31b           grounded  tier     T4  n= 14 acc=1.00 [0.78,1.00] FA=0/14 (0.00 [0.00,0.22]) false-reject=0/0 abstain=0  <30, tentative
+gemma4:31b           reasoning length_q Q1  n= 56 acc=0.93 [0.83,0.97] FA=1/32 (0.03 [0.01,0.16]) false-reject=0/24 abstain=3
+gemma4:31b           reasoning length_q Q2  n= 53 acc=0.92 [0.82,0.97] FA=0/28 (0.00 [0.00,0.12]) false-reject=0/25 abstain=4
+gemma4:31b           reasoning length_q Q3  n= 45 acc=0.93 [0.82,0.98] FA=0/24 (0.00 [0.00,0.14]) false-reject=0/21 abstain=3
+gemma4:31b           reasoning length_q Q4  n= 67 acc=0.94 [0.86,0.98] FA=1/36 (0.03 [0.00,0.14]) false-reject=0/31 abstain=3
+gemma4:31b           reasoning tier     T1  n= 89 acc=0.93 [0.86,0.97] FA=0/14 (0.00 [0.00,0.22]) false-reject=0/75 abstain=6
+gemma4:31b           reasoning tier     T2  n= 53 acc=0.98 [0.90,1.00] FA=0/53 (0.00 [0.00,0.07]) false-reject=0/0 abstain=1
+gemma4:31b           reasoning tier     T3  n= 60 acc=0.88 [0.78,0.94] FA=1/34 (0.03 [0.01,0.15]) false-reject=0/26 abstain=6
+gemma4:31b           reasoning tier     T4  n= 19 acc=0.95 [0.75,0.99] FA=1/19 (0.05 [0.01,0.25]) false-reject=0/0 abstain=0  <30, tentative
+granite4.1:30b       grounded  length_q Q1  n= 58 acc=0.72 [0.60,0.82] FA=6/30 (0.20 [0.10,0.37]) false-reject=0/28 abstain=10
+granite4.1:30b       grounded  length_q Q2  n= 71 acc=0.59 [0.48,0.70] FA=7/37 (0.19 [0.09,0.34]) false-reject=0/34 abstain=22
+granite4.1:30b       grounded  length_q Q3  n= 67 acc=0.42 [0.31,0.54] FA=4/36 (0.11 [0.04,0.25]) false-reject=0/31 abstain=35
+granite4.1:30b       grounded  length_q Q4  n= 73 acc=0.40 [0.29,0.51] FA=10/40 (0.25 [0.14,0.40]) false-reject=0/33 abstain=34
+granite4.1:30b       grounded  tier     T1  n=167 acc=0.57 [0.50,0.65] FA=5/41 (0.12 [0.05,0.26]) false-reject=0/126 abstain=66
+granite4.1:30b       grounded  tier     T2  n= 87 acc=0.38 [0.28,0.48] FA=19/87 (0.22 [0.14,0.32]) false-reject=0/0 abstain=35
+granite4.1:30b       grounded  tier     T4  n= 15 acc=0.80 [0.55,0.93] FA=3/15 (0.20 [0.07,0.45]) false-reject=0/0 abstain=0  <30, tentative
+granite4.1:30b       reasoning length_q Q1  n= 56 acc=0.70 [0.57,0.80] FA=7/32 (0.22 [0.11,0.39]) false-reject=2/24 abstain=8
+granite4.1:30b       reasoning length_q Q2  n= 55 acc=0.64 [0.50,0.75] FA=8/29 (0.28 [0.15,0.46]) false-reject=1/26 abstain=11
+granite4.1:30b       reasoning length_q Q3  n= 45 acc=0.67 [0.52,0.79] FA=3/24 (0.12 [0.04,0.31]) false-reject=0/21 abstain=12
+granite4.1:30b       reasoning length_q Q4  n= 67 acc=0.48 [0.36,0.60] FA=16/36 (0.44 [0.30,0.60]) false-reject=2/31 abstain=17
+granite4.1:30b       reasoning tier     T1  n= 90 acc=0.79 [0.69,0.86] FA=3/14 (0.21 [0.08,0.48]) false-reject=1/76 abstain=15
+granite4.1:30b       reasoning tier     T2  n= 53 acc=0.49 [0.36,0.62] FA=12/53 (0.23 [0.13,0.36]) false-reject=0/0 abstain=15
+granite4.1:30b       reasoning tier     T3  n= 61 acc=0.48 [0.36,0.60] FA=10/35 (0.29 [0.16,0.45]) false-reject=4/26 abstain=18
+granite4.1:30b       reasoning tier     T4  n= 19 acc=0.53 [0.32,0.73] FA=9/19 (0.47 [0.27,0.68]) false-reject=0/0 abstain=0  <30, tentative
+llama3.1:8b          grounded  length_q Q1  n= 58 acc=0.66 [0.53,0.76] FA=13/30 (0.43 [0.27,0.61]) false-reject=1/28 abstain=6
+llama3.1:8b          grounded  length_q Q2  n= 71 acc=0.35 [0.25,0.47] FA=22/37 (0.59 [0.43,0.74]) false-reject=2/34 abstain=22
+llama3.1:8b          grounded  length_q Q3  n= 67 acc=0.51 [0.39,0.62] FA=17/36 (0.47 [0.32,0.63]) false-reject=1/31 abstain=15
+llama3.1:8b          grounded  length_q Q4  n= 74 acc=0.34 [0.24,0.45] FA=16/40 (0.40 [0.26,0.55]) false-reject=3/34 abstain=30
+llama3.1:8b          grounded  tier     T1  n=168 acc=0.57 [0.50,0.64] FA=21/41 (0.51 [0.36,0.66]) false-reject=7/127 abstain=44
+llama3.1:8b          grounded  tier     T2  n= 87 acc=0.17 [0.11,0.27] FA=43/87 (0.49 [0.39,0.60]) false-reject=0/0 abstain=29
+llama3.1:8b          grounded  tier     T4  n= 15 acc=0.73 [0.48,0.89] FA=4/15 (0.27 [0.11,0.52]) false-reject=0/0 abstain=0  <30, tentative
+llama3.1:8b          reasoning length_q Q1  n= 55 acc=0.49 [0.36,0.62] FA=7/32 (0.22 [0.11,0.39]) false-reject=9/23 abstain=12
+llama3.1:8b          reasoning length_q Q2  n= 55 acc=0.45 [0.33,0.58] FA=7/29 (0.24 [0.12,0.42]) false-reject=5/26 abstain=18
+llama3.1:8b          reasoning length_q Q3  n= 44 acc=0.45 [0.32,0.60] FA=3/23 (0.13 [0.05,0.32]) false-reject=10/21 abstain=11
+llama3.1:8b          reasoning length_q Q4  n= 67 acc=0.46 [0.35,0.58] FA=1/36 (0.03 [0.00,0.14]) false-reject=17/31 abstain=18
+llama3.1:8b          reasoning tier     T1  n= 89 acc=0.43 [0.33,0.53] FA=2/14 (0.14 [0.04,0.40]) false-reject=29/75 abstain=20
+llama3.1:8b          reasoning tier     T2  n= 52 acc=0.65 [0.52,0.77] FA=9/52 (0.17 [0.09,0.30]) false-reject=0/0 abstain=9
+llama3.1:8b          reasoning tier     T3  n= 61 acc=0.26 [0.17,0.38] FA=3/35 (0.09 [0.03,0.22]) false-reject=12/26 abstain=30
+llama3.1:8b          reasoning tier     T4  n= 19 acc=0.79 [0.57,0.91] FA=4/19 (0.21 [0.09,0.43]) false-reject=0/0 abstain=0  <30, tentative
+mistral-small:24b    grounded  length_q Q1  n= 58 acc=0.83 [0.71,0.90] FA=5/30 (0.17 [0.07,0.34]) false-reject=1/28 abstain=4
+mistral-small:24b    grounded  length_q Q2  n= 71 acc=0.68 [0.56,0.77] FA=5/37 (0.14 [0.06,0.28]) false-reject=2/34 abstain=16
+mistral-small:24b    grounded  length_q Q3  n= 66 acc=0.52 [0.40,0.63] FA=10/36 (0.28 [0.16,0.44]) false-reject=3/30 abstain=19
+mistral-small:24b    grounded  length_q Q4  n= 74 acc=0.57 [0.45,0.67] FA=6/40 (0.15 [0.07,0.29]) false-reject=3/34 abstain=23
+mistral-small:24b    grounded  tier     T1  n=167 acc=0.63 [0.56,0.70] FA=7/41 (0.17 [0.09,0.31]) false-reject=9/126 abstain=45
+mistral-small:24b    grounded  tier     T2  n= 87 acc=0.60 [0.49,0.69] FA=18/87 (0.21 [0.14,0.30]) false-reject=0/0 abstain=17
+mistral-small:24b    grounded  tier     T4  n= 15 acc=0.93 [0.70,0.99] FA=1/15 (0.07 [0.01,0.30]) false-reject=0/0 abstain=0  <30, tentative
+mistral-small:24b    reasoning length_q Q1  n= 56 acc=0.70 [0.57,0.80] FA=7/32 (0.22 [0.11,0.39]) false-reject=1/24 abstain=9
+mistral-small:24b    reasoning length_q Q2  n= 55 acc=0.71 [0.58,0.81] FA=4/29 (0.14 [0.05,0.31]) false-reject=3/26 abstain=9
+mistral-small:24b    reasoning length_q Q3  n= 45 acc=0.53 [0.39,0.67] FA=6/24 (0.25 [0.12,0.45]) false-reject=2/21 abstain=13
+mistral-small:24b    reasoning length_q Q4  n= 67 acc=0.63 [0.51,0.73] FA=6/36 (0.17 [0.08,0.32]) false-reject=6/31 abstain=13
+mistral-small:24b    reasoning tier     T1  n= 90 acc=0.72 [0.62,0.80] FA=1/14 (0.07 [0.01,0.31]) false-reject=9/76 abstain=15
+mistral-small:24b    reasoning tier     T2  n= 53 acc=0.66 [0.53,0.77] FA=10/53 (0.19 [0.11,0.31]) false-reject=0/0 abstain=8
+mistral-small:24b    reasoning tier     T3  n= 61 acc=0.46 [0.34,0.58] FA=9/35 (0.26 [0.14,0.42]) false-reject=3/26 abstain=21
+mistral-small:24b    reasoning tier     T4  n= 19 acc=0.84 [0.62,0.94] FA=3/19 (0.16 [0.06,0.38]) false-reject=0/0 abstain=0  <30, tentative
+qwen3:14b            grounded  length_q Q1  n= 58 acc=0.88 [0.77,0.94] FA=1/30 (0.03 [0.01,0.17]) false-reject=1/28 abstain=5
+qwen3:14b            grounded  length_q Q2  n= 71 acc=0.73 [0.62,0.82] FA=2/37 (0.05 [0.01,0.18]) false-reject=0/34 abstain=17
+qwen3:14b            grounded  length_q Q3  n= 67 acc=0.66 [0.54,0.76] FA=1/36 (0.03 [0.00,0.14]) false-reject=0/31 abstain=22
+qwen3:14b            grounded  length_q Q4  n= 74 acc=0.68 [0.56,0.77] FA=2/40 (0.05 [0.01,0.17]) false-reject=0/34 abstain=22
+qwen3:14b            grounded  tier     T1  n=168 acc=0.73 [0.65,0.79] FA=1/41 (0.02 [0.00,0.13]) false-reject=1/127 abstain=44
+qwen3:14b            grounded  tier     T2  n= 87 acc=0.70 [0.60,0.79] FA=4/87 (0.05 [0.02,0.11]) false-reject=0/0 abstain=22
+qwen3:14b            grounded  tier     T4  n= 15 acc=0.93 [0.70,0.99] FA=1/15 (0.07 [0.01,0.30]) false-reject=0/0 abstain=0  <30, tentative
+qwen3:14b            reasoning length_q Q1  n= 56 acc=0.82 [0.70,0.90] FA=2/32 (0.06 [0.02,0.20]) false-reject=0/24 abstain=8
+qwen3:14b            reasoning length_q Q2  n= 55 acc=0.82 [0.70,0.90] FA=1/29 (0.03 [0.01,0.17]) false-reject=0/26 abstain=9
+qwen3:14b            reasoning length_q Q3  n= 45 acc=0.69 [0.54,0.80] FA=4/24 (0.17 [0.07,0.36]) false-reject=2/21 abstain=8
+qwen3:14b            reasoning length_q Q4  n= 67 acc=0.69 [0.57,0.78] FA=9/36 (0.25 [0.14,0.41]) false-reject=2/31 abstain=10
+qwen3:14b            reasoning tier     T1  n= 90 acc=0.83 [0.74,0.90] FA=1/14 (0.07 [0.01,0.31]) false-reject=3/76 abstain=11
+qwen3:14b            reasoning tier     T2  n= 53 acc=0.70 [0.56,0.80] FA=4/53 (0.08 [0.03,0.18]) false-reject=0/0 abstain=12
+qwen3:14b            reasoning tier     T3  n= 61 acc=0.66 [0.53,0.76] FA=8/35 (0.23 [0.12,0.39]) false-reject=1/26 abstain=12
+qwen3:14b            reasoning tier     T4  n= 19 acc=0.84 [0.62,0.94] FA=3/19 (0.16 [0.06,0.38]) false-reject=0/0 abstain=0  <30, tentative
+qwen3:8b             grounded  length_q Q1  n= 58 acc=0.79 [0.67,0.88] FA=2/30 (0.07 [0.02,0.21]) false-reject=1/28 abstain=9
+qwen3:8b             grounded  length_q Q2  n= 70 acc=0.70 [0.58,0.79] FA=2/37 (0.05 [0.01,0.18]) false-reject=1/33 abstain=18
+qwen3:8b             grounded  length_q Q3  n= 67 acc=0.52 [0.40,0.64] FA=2/36 (0.06 [0.02,0.18]) false-reject=1/31 abstain=29
+qwen3:8b             grounded  length_q Q4  n= 73 acc=0.47 [0.36,0.58] FA=4/39 (0.10 [0.04,0.24]) false-reject=0/34 abstain=35
+qwen3:8b             grounded  tier     T1  n=167 acc=0.59 [0.52,0.66] FA=2/41 (0.05 [0.01,0.16]) false-reject=3/126 abstain=63
+qwen3:8b             grounded  tier     T2  n= 86 acc=0.60 [0.50,0.70] FA=6/86 (0.07 [0.03,0.14]) false-reject=0/0 abstain=28
+qwen3:8b             grounded  tier     T4  n= 15 acc=0.87 [0.62,0.96] FA=2/15 (0.13 [0.04,0.38]) false-reject=0/0 abstain=0  <30, tentative
+qwen3:8b             reasoning length_q Q1  n= 55 acc=0.80 [0.68,0.88] FA=0/31 (0.00 [0.00,0.11]) false-reject=0/24 abstain=11
+qwen3:8b             reasoning length_q Q2  n= 55 acc=0.65 [0.52,0.77] FA=3/29 (0.10 [0.04,0.26]) false-reject=0/26 abstain=16
+qwen3:8b             reasoning length_q Q3  n= 45 acc=0.80 [0.66,0.89] FA=0/24 (0.00 [0.00,0.14]) false-reject=0/21 abstain=9
+qwen3:8b             reasoning length_q Q4  n= 66 acc=0.64 [0.52,0.74] FA=7/36 (0.19 [0.10,0.35]) false-reject=1/30 abstain=16
+qwen3:8b             reasoning tier     T1  n= 90 acc=0.71 [0.61,0.79] FA=1/14 (0.07 [0.01,0.31]) false-reject=0/76 abstain=25
+qwen3:8b             reasoning tier     T2  n= 53 acc=0.70 [0.56,0.80] FA=2/53 (0.04 [0.01,0.13]) false-reject=0/0 abstain=14
+qwen3:8b             reasoning tier     T3  n= 60 acc=0.70 [0.57,0.80] FA=4/35 (0.11 [0.05,0.26]) false-reject=1/25 abstain=13
+qwen3:8b             reasoning tier     T4  n= 18 acc=0.83 [0.61,0.94] FA=3/18 (0.17 [0.06,0.39]) false-reject=0/0 abstain=0  <30, tentative

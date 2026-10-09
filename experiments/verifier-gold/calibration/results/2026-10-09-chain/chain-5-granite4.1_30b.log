@@ -1,0 +1,56 @@
+== rest 900s from 04:15:18; models loaded at start: 0
+== granite4.1:30b think=off structured=on start 04:30:18
+  false-accept (unsup only): 24/128 18.8% [12.9-26.4]
+  false-accept (subtle): 24/128 18.8% [12.9-26.4]
+  gold cannot_tell: accepted 3/15 20.0% [7.0-45.2], said cannot_tell 10/15 66.7% [41.7-84.8], said unsupported 2
+  abstain: 101/254 39.8% [33.9-45.9]   balanced accuracy (decided): 0.850
+strata:
+  has_doc_comment=false        grounded   n=104  FA 9/59 15.3% [8.2-26.5]  subtle FA 7/52 13.5% [6.7-25.3]  abstain 45/97 46.4% [36.8-56.3]  BA 0.859
+  has_doc_comment=true         grounded   n=100  FA 11/49 22.4% [13.0-35.9]  subtle FA 10/46 21.7% [12.3-35.6]  abstain 46/97 47.4% [37.8-57.3]  BA 0.810
+  origin=offrig-a45fe53        grounded   n=22   FA 1/12 8.3% [1.5-35.4]  subtle FA 1/10 10.0% [1.8-40.4]  abstain 4/20 20.0% [8.1-41.6]  BA 0.938
+  origin=prs-2026-10-08        grounded   n=204  FA 20/108 18.5% [12.3-26.9]  subtle FA 17/98 17.3% [11.1-26.0]  abstain 91/194 46.9% [40.0-53.9]  BA 0.836
+  origin=role-os-ce91be8       grounded   n=43   FA 6/23 26.1% [12.5-46.5]  subtle FA 6/20 30.0% [14.5-51.9]  abstain 6/40 15.0% [7.1-29.1]  BA 0.857
+  self_referential=false       grounded   n=173  FA 14/91 15.4% [9.4-24.2]  subtle FA 12/83 14.5% [8.5-23.6]  abstain 80/165 48.5% [41.0-56.1]  BA 0.860
+  self_referential=true        grounded   n=31   FA 6/17 35.3% [17.3-58.7]  subtle FA 5/15 33.3% [15.2-58.3]  abstain 11/29 37.9% [22.7-56.0]  BA 0.727
+cost: $0.0000 over 706s wall at $0/hr = $0.00000 per claim (boot and pull time not included)
+default rule (grounded and reasoning; knowledge reported only):
+  note: model-caused unusable outcomes (bad_verdict, truncated, repeated timeout) count as missing answers and fail the rule; a fail can come from those, not only from false accepts
+  grounded: FAIL
+    FAIL every claim answered: missing 1 (need 0)
+    ok   gold unsupported claims: 128 (need >= 100)
+    FAIL false-accept upper bound (primary): 0.2608 (need < 0.1)
+    FAIL abstain rate: 0.3976 (need <= 0.2)
+    ok   balanced accuracy on decided: 0.8500 (need >= 0.8)
+  reasoning: not run
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/cal-granite4.1_30b-grounded-tune
+reasoning  n=223 sup=102 unsup=102 ct=19 missing=0
+  false-accept (unsup+ct): 34/121 28.1% [20.9-36.7]
+  false-accept (unsup only): 25/102 24.5% [17.2-33.7]
+  false-accept (subtle): 25/102 24.5% [17.2-33.7]
+  gold cannot_tell: accepted 9/19 47.4% [27.3-68.3], said cannot_tell 7/19 36.8% [19.1-59.0], said unsupported 3
+  abstain: 48/204 23.5% [18.2-29.8]   balanced accuracy (decided): 0.761
+strata:
+  has_doc_comment=false        reasoning  n=127  FA 21/71 29.6% [20.2-41.0]  subtle FA 13/56 23.2% [14.1-35.8]  abstain 19/112 17.0% [11.1-25.0]  BA 0.778
+  has_doc_comment=true         reasoning  n=96   FA 13/50 26.0% [15.9-39.6]  subtle FA 12/46 26.1% [15.6-40.3]  abstain 29/92 31.5% [22.9-41.6]  BA 0.734
+  origin=diffs-2026-10         reasoning  n=91   FA 12/51 23.5% [14.0-36.8]  subtle FA 8/41 19.5% [10.2-34.0]  abstain 18/81 22.2% [14.5-32.4]  BA 0.824
+  origin=diffs-2026-10-b2      reasoning  n=111  FA 17/58 29.3% [19.2-42.0]  subtle FA 14/52 26.9% [16.8-40.3]  abstain 22/105 21.0% [14.3-29.7]  BA 0.738
+  origin=diffs-2026-10-hard    reasoning  n=21   FA 5/12 41.7% [19.3-68.0]  subtle FA 3/9 33.3% [12.1-64.6]  abstain 8/18 44.4% [24.6-66.3]  BA 0.583
+cost: $0.0000 over 629s wall at $0/hr = $0.00000 per claim (boot and pull time not included)
+default rule (grounded and reasoning; knowledge reported only):
+  note: model-caused unusable outcomes (bad_verdict, truncated, repeated timeout) count as missing answers and fail the rule; a fail can come from those, not only from false accepts
+  grounded: not run
+  reasoning: FAIL
+    ok   every claim answered: missing 0 (need 0)
+    ok   gold unsupported claims: 102 (need >= 100)
+    FAIL false-accept upper bound (primary): 0.3669 (need < 0.1)
+    FAIL abstain rate: 0.2353 (need <= 0.2)
+    FAIL balanced accuracy on decided: 0.7614 (need >= 0.8)
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate/cal-granite4.1_30b-reasoning-tune
+== granite4.1:30b end 04:52:42; models loaded after unload: 0
+== grounded: complete
+== reasoning: complete
+exit 0

@@ -1,68 +1,265 @@
 {
- "openvino": "2026.4.1",
- "note": "one bounded process per case (timeout 100 s), 2026-10-09 01:26-01:30. Contended: Kimi K3 ran the same chain bench on the NPU earlier the same night, with 8-11% run-to-run spread on the NPU. Rerun on an idle NPU, with spread, before treating these as the receipt.",
+ "openvino": "2026.4.1-22982-e213a147257-releases/2026/4",
+ "repeats": 5,
+ "timeout_s": 180.0,
+ "cache_dir": true,
+ "devices": {
+  "NPU": "Intel(R) AI Boost",
+  "GPU.0": "Intel(R) Graphics (iGPU)"
+ },
  "rows": [
   {
    "case": "chain8x2048",
    "precision": "fp16",
    "device": "NPU",
-   "compile_s": 2.94,
-   "ms_per_call": 47.516,
-   "tops": 2.892
-  },
-  {
-   "case": "chain8x2048",
-   "precision": "fp16",
-   "device": "GPU.0",
-   "compile_s": 1.32,
-   "ms_per_call": 59.325,
-   "tops": 2.317
+   "repeats": 5,
+   "repeats_ok": 5,
+   "samples": {
+    "ms_per_call": [
+     47.292,
+     53.557,
+     49.025,
+     49.033,
+     48.735
+    ],
+    "tops": [
+     2.906,
+     2.566,
+     2.803,
+     2.803,
+     2.82
+    ],
+    "compile_s": [
+     3.7,
+     0.79,
+     0.48,
+     0.5,
+     0.49
+    ]
+   },
+   "ms_per_call": 49.025,
+   "ms_per_call_spread_pct": 12.8,
+   "tops": 2.803,
+   "tops_spread_pct": 12.1
   },
   {
    "case": "chain8x2048",
    "precision": "int8",
    "device": "NPU",
-   "compile_s": 2.28,
-   "ms_per_call": 25.109,
-   "tops": 5.474
+   "repeats": 5,
+   "repeats_ok": 5,
+   "samples": {
+    "ms_per_call": [
+     24.977,
+     26.839,
+     26.52,
+     26.419,
+     25.796
+    ],
+    "tops": [
+     5.503,
+     5.121,
+     5.182,
+     5.202,
+     5.328
+    ],
+    "compile_s": [
+     2.95,
+     0.73,
+     0.46,
+     0.48,
+     0.52
+    ]
+   },
+   "ms_per_call": 26.419,
+   "ms_per_call_spread_pct": 7.0,
+   "tops": 5.202,
+   "tops_spread_pct": 7.3
+  },
+  {
+   "case": "chain8x4096",
+   "precision": "fp16",
+   "device": "NPU",
+   "repeats": 5,
+   "repeats_ok": 0,
+   "errors": [
+    "compile exceeded 180 s",
+    "compile exceeded 180 s",
+    "compile exceeded 180 s",
+    "compile exceeded 180 s",
+    "compile exceeded 180 s"
+   ],
+   "error": "compile exceeded 180 s"
+  },
+  {
+   "case": "chain8x4096",
+   "precision": "int8",
+   "device": "NPU",
+   "repeats": 5,
+   "repeats_ok": 5,
+   "samples": {
+    "ms_per_call": [
+     208.995,
+     210.988,
+     211.284,
+     204.888,
+     205.965
+    ],
+    "tops": [
+     5.261,
+     5.211,
+     5.204,
+     5.366,
+     5.338
+    ],
+    "compile_s": [
+     49.96,
+     1.98,
+     1.68,
+     1.87,
+     1.73
+    ]
+   },
+   "ms_per_call": 208.995,
+   "ms_per_call_spread_pct": 3.1,
+   "tops": 5.261,
+   "tops_spread_pct": 3.1
+  },
+  {
+   "case": "chain8x2048",
+   "precision": "fp16",
+   "device": "GPU.0",
+   "repeats": 5,
+   "repeats_ok": 5,
+   "samples": {
+    "ms_per_call": [
+     59.804,
+     60.019,
+     60.301,
+     57.701,
+     59.142
+    ],
+    "tops": [
+     2.298,
+     2.29,
+     2.279,
+     2.382,
+     2.324
+    ],
+    "compile_s": [
+     2.39,
+     4.32,
+     1.09,
+     4.43,
+     1.14
+    ]
+   },
+   "ms_per_call": 59.804,
+   "ms_per_call_spread_pct": 4.3,
+   "tops": 2.298,
+   "tops_spread_pct": 4.5
   },
   {
    "case": "chain8x2048",
    "precision": "int8",
    "device": "GPU.0",
-   "compile_s": 16.23,
-   "ms_per_call": 64.369,
-   "tops": 2.135
-  },
-  {
-   "case": "chain8x4096",
-   "precision": "fp16",
-   "device": "NPU",
-   "error": "did not compile within 100 s (8 x 4096^2 fp32 constants, 512 MB); the case that stalled the first chain run"
+   "repeats": 5,
+   "repeats_ok": 5,
+   "samples": {
+    "ms_per_call": [
+     72.738,
+     66.18,
+     65.722,
+     64.33,
+     64.883
+    ],
+    "tops": [
+     1.89,
+     2.077,
+     2.091,
+     2.136,
+     2.118
+    ],
+    "compile_s": [
+     16.96,
+     1.75,
+     1.05,
+     1.67,
+     1.11
+    ]
+   },
+   "ms_per_call": 65.722,
+   "ms_per_call_spread_pct": 12.8,
+   "tops": 2.091,
+   "tops_spread_pct": 11.8
   },
   {
    "case": "chain8x4096",
    "precision": "fp16",
    "device": "GPU.0",
-   "compile_s": 2.38,
-   "ms_per_call": 458.581,
-   "tops": 2.398
-  },
-  {
-   "case": "chain8x4096",
-   "precision": "int8",
-   "device": "NPU",
-   "compile_s": 41.81,
-   "ms_per_call": 213.519,
-   "tops": 5.149
+   "repeats": 5,
+   "repeats_ok": 5,
+   "samples": {
+    "ms_per_call": [
+     483.157,
+     455.457,
+     458.339,
+     449.772,
+     449.573
+    ],
+    "tops": [
+     2.276,
+     2.414,
+     2.399,
+     2.445,
+     2.446
+    ],
+    "compile_s": [
+     4.8,
+     5.66,
+     2.3,
+     5.46,
+     2.37
+    ]
+   },
+   "ms_per_call": 455.457,
+   "ms_per_call_spread_pct": 7.4,
+   "tops": 2.414,
+   "tops_spread_pct": 7.0
   },
   {
    "case": "chain8x4096",
    "precision": "int8",
    "device": "GPU.0",
-   "compile_s": 48.68,
-   "ms_per_call": 494.218,
-   "tops": 2.225
+   "repeats": 5,
+   "repeats_ok": 5,
+   "samples": {
+    "ms_per_call": [
+     519.666,
+     491.46,
+     494.558,
+     484.452,
+     493.063
+    ],
+    "tops": [
+     2.116,
+     2.237,
+     2.223,
+     2.27,
+     2.23
+    ],
+    "compile_s": [
+     65.52,
+     2.87,
+     2.36,
+     2.85,
+     2.35
+    ]
+   },
+   "ms_per_call": 493.063,
+   "ms_per_call_spread_pct": 7.1,
+   "tops": 2.23,
+   "tops_spread_pct": 6.9
   }
  ]
 }

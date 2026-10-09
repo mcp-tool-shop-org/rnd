@@ -55,13 +55,13 @@ FakeQuantize, OpenVINO's way of asking for integer kernels. Results are in TOPS 
 | matmul 4096 | 1.87 | 2.38 | 1.70 | 1.71 | 0.37 |
 | conv 3×3, 64→64, 224² | 0.48 | 0.47 | 0.53 | 0.51 | 0.11 |
 
-**Eight matmuls chained in one graph,** so one transfer feeds 8× the arithmetic
-(`results/2026-10-09-mac-chain.json`):
+**Eight matmuls chained in one graph,** so one transfer feeds 8× the arithmetic (medians of five
+repeats, devices interleaved, per-case compile deadline; `results/2026-10-09-mac-chain.json`):
 
 | case | NPU fp16 | NPU int8 | iGPU fp16 | iGPU int8 |
 |---|---|---|---|---|
-| 8 × 2048 | 2.89 | **5.47** | 2.32 | 2.14 |
-| 8 × 4096 | didn't compile in 100 s | **5.15** | 2.40 | 2.23 |
+| 8 × 2048 | 2.80 | **5.20** | 2.30 | 2.09 |
+| 8 × 4096 | compile timeout (5/5 at 180 s) | **5.26** | 2.41 | 2.23 |
 
 **What it means:**
 - **A single call is mostly overhead,** from dispatch and moving data. At 1024 the NPU takes 2.6 ms in either
@@ -74,12 +74,16 @@ FakeQuantize, OpenVINO's way of asking for integer kernels. Results are in TOPS 
   It's for the always-on small jobs, not big matmuls.
 - **The conv shape is too small** to fill anything. It shows only that this shape is overhead-bound, not
   that the NPU is weak at convolutions.
-- **The FP16 chain at 4096 stalls the NPU compiler** (eight 64 MB FP32 constants). That case hung the first
-  chain run.
+- **The FP16 chain at 4096 stalls the NPU compiler** (eight 64 MB FP32 constants): 5/5 repeats hit the 180 s
+  compile deadline on the clean rerun. That case hung the very first chain run; the bench now records a
+  bounded timeout and moves on.
 
 **Caveats, from Kimi K3's review (2026-10-09):**
-- The chained numbers are **provisional.** Kimi ran the same chain bench on the NPU earlier the same night and
-  saw 8–11% run-to-run spread. Rerun on an idle NPU, reporting spread, before they count.
+- The chained numbers come from a **clean rerun on an idle NPU** in a Publisher-logged window (2026-10-09,
+  ~02:00), after an earlier run the same night was contended by a second session and showed 8–11% spread
+  (kept as `results/2026-10-09-mac-chain-contended.json`). Clean-run medians moved ≤5% from the contended
+  ones; per-repeat spread within the clean run is 3–13% (worst on first-touch repeats). Every repeat's
+  samples are in the receipt.
 - **The NPU is one exclusive device**, like the 5090: two sessions on it slow each other and spoil timings.
   See the skill's rule.
 - **The float64 slip:** under NumPy 2 (NEP 50), `float32_array / np.sqrt(n)` is float64, and the float64

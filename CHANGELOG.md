@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.22] - 2026-10-09
+
+- calibration: gemma4 back to think on (on/off only); per-model thinking levels
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.21] - 2026-10-09
 
 - calibration README: thinking level is a per-task variable, not a default

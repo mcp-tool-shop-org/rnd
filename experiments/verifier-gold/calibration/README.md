@@ -126,14 +126,20 @@ and held-out only if it is chosen, under the same rule. The default rule and the
 The Director: thinking level is a variable to **weigh and test per task**, not a blanket default. Long
 thinking can overrun the context and run long, so off or reduced should be considered; some tasks need it,
 and the trade-off should shrink as models learn to think less wastefully. So:
-- **gemma4:31b runs at `--think low`, not `on`.** This changes the setting candidates.txt fixed for it before
-  any of its tune claims run.
-- **Check that "low" is real first** (the Publisher's point). Ollama 0.35.1 documents graded levels for
+- ~~gemma4:31b runs at `--think low`~~ **Withdrawn before gemma loaded (04:58):** R&D's own notes from earlier
+  that day record that **gemma4's thinking is on or off only**; its levels aren't graded. ("low" isn't a level it
+  has, and Ollama would treat it as on or reject it.) So gemma4 runs at **`on`**, the setting candidates.txt
+  pre-registered. Its off/on comparison moves to the post-hoc thinking-level runs.
+- **Thinking levels by model**, from R&D's 2026-10-08 notes (each run uses only levels its model has):
+  gemma4 on/off; Nemotron `true` / `medium` (plus off); Muse Glimmer `low` / `medium` / `high` / `max`; qwen3
+  on/off (graded levels unverified, hence the low-is-real check); mistral-small and granite4.1 can't think.
+- **Wherever a graded level is used, check it's real first** (the Publisher's point). Ollama 0.35.1 documents graded levels for
   gpt-oss; for other models it may treat any string as "think on". So gemma's first claims are compared with
   the smoke's `on` claims on thinking length (eval tokens). If low thinks just as long as on, the README and
   report record **"low = on for gemma4 in this Ollama"**. It is never silently relabelled.
-- **Post-hoc thinking-level runs** (a separate grant, marked post-hoc): qwen3:8b and qwen3:14b at `off` and at
-  `low` on the same tune claims, so each has an off / low / on curve on identical claims. The report gets a
+- **Post-hoc thinking-level runs** (a separate grant, marked post-hoc): qwen3:8b and qwen3:14b at `off` (and
+  `low` only if the check shows it differs from on), and **gemma4:31b at `off`**, on the same tune claims, so
+  each has a curve across its real levels on identical claims. The report gets a
   thinking-level axis: accuracy, false accepts, false rejects, abstains, seconds per claim and unusable rate.
 - **Future candidates** get an `off` / `low` arm alongside `on` where thinking could matter, rather than one
   setting by habit.

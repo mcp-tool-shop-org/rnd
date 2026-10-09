@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.21] - 2026-10-09
+
+- calibration README: thinking level is a per-task variable, not a default
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.20] - 2026-10-09
 
 - calibration: thinking-level amendment before gemma; Ollama 500 finding; resume fix

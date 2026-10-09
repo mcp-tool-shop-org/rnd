@@ -123,8 +123,9 @@ and held-out only if it is chosen, under the same rule. The default rule and the
 
 ## Amendment, 2026-10-09 ~04:20, before gemma4:31b loads: thinking level (the Director's direction)
 
-The Director: thinking should be **off or reduced** for most of these uses; long thinking can overrun the
-context and make answers too long. So:
+The Director: thinking level is a variable to **weigh and test per task**, not a blanket default. Long
+thinking can overrun the context and run long, so off or reduced should be considered; some tasks need it,
+and the trade-off should shrink as models learn to think less wastefully. So:
 - **gemma4:31b runs at `--think low`, not `on`.** This changes the setting candidates.txt fixed for it before
   any of its tune claims run.
 - **Check that "low" is real first** (the Publisher's point). Ollama 0.35.1 documents graded levels for
@@ -134,7 +135,8 @@ context and make answers too long. So:
 - **Post-hoc thinking-level runs** (a separate grant, marked post-hoc): qwen3:8b and qwen3:14b at `off` and at
   `low` on the same tune claims, so each has an off / low / on curve on identical claims. The report gets a
   thinking-level axis: accuracy, false accepts, false rejects, abstains, seconds per claim and unusable rate.
-- **Future candidates** are tested at `off` and `low` first.
+- **Future candidates** get an `off` / `low` arm alongside `on` where thinking could matter, rather than one
+  setting by habit.
 
 ## Finding, 2026-10-09: a deterministic Ollama 500 leaves a run incomplete
 

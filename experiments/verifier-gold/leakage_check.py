@@ -6,6 +6,18 @@ A task leaks when it repeats or closely copies a gold item. The checks are:
 - an evidence block sharing 3 or more non-trivial lines with a gold item's evidence.
 
   python leakage_check.py <tasks.jsonl> [--json]
+  python leakage_check.py <training.jsonl> --against <sealed.jsonl> --against <pilot.jsonl> --against <interview.md> ...
+
+With `--against`, the file is also checked against each named set. These are held-out sets that training
+data must never touch: the sealed task set, the pilot, and the pre-interview. Against them the bar is
+stricter than against gold:
+- a near-duplicate claim (5-gram Jaccard >= 0.8) still **fails**;
+- a looser match (Jaccard >= 0.5) is a **warning**, so a person can check it for paraphrase;
+- **2 or more** shared non-trivial material lines **fail**, because the held-out sets' sources are
+  excluded from training outright.
+
+An `.md` file is read as one item per numbered line ("1. ..."), which is how the pre-interview lists its
+questions.
 
 Task fields are read flexibly. The claim comes from `claim` or `statement`. The material comes from `material`,
 `evidence`, `context`, or a list of {text}.
@@ -24,6 +36,8 @@ HERE = Path(__file__).resolve().parent
 GOLD = [HERE / "grounded.jsonl", HERE / "prs" / "grounded-prs.jsonl", HERE / "diffs" / "reasoning-diffs.jsonl"]
 JACCARD = 0.8
 SHARED_LINES = 3
+HELD_OUT_WARN = 0.5
+HELD_OUT_LINES = 2
 
 
 def norm(s: str) -> str:
@@ -58,7 +72,42 @@ def fields(row: dict) -> tuple[str, str]:
 
 
 def load(path: Path) -> list[dict]:
-    return [json.loads(x) for x in path.read_text(encoding="utf-8").splitlines() if x.strip()]
+    text = path.read_text(encoding="utf-8")
+    if path.suffix == ".md":
+        q = re.search(r"^## Questions\s*$(.*?)(?=^## |\Z)", text, flags=re.M | re.S)
+        text = q.group(1) if q else text
+        items = re.findall(r"^\s*(\d+)\.\s+(.+(?:\n\s{2,}\S.*)*)", text, flags=re.M)
+        return [{"id": f"{path.stem}#{n}", "claim": re.sub(r"\s+", " ", q).strip()} for n, q in items]
+    return [json.loads(x) for x in text.splitlines() if x.strip()]
+
+
+def check_against(tasks: list[dict], ref_path: Path) -> list[dict]:
+    """Held-out check: training items against a set they must never touch."""
+    refs = [(r.get("id", f"#{i}"), *fields(r)) for i, r in enumerate(load(ref_path))]
+    refs = [(rid, norm(c), grams(c), lines_of(m)) for rid, c, m in refs]
+    hits = []
+    for i, t in enumerate(tasks):
+        c, m = fields(t)
+        tid, nc, gc, lm = t.get("id", f"#{i}"), norm(c), grams(c), lines_of(m)
+        for rid, rnc, rgc, rlm in refs:
+            why, fail = [], False
+            if nc and nc == rnc:
+                why.append("same claim")
+                fail = True
+            else:
+                j = len(gc & rgc) / max(1, len(gc | rgc))
+                if j >= JACCARD:
+                    why.append(f"near-duplicate claim (Jaccard {j:.2f})")
+                    fail = True
+                elif j >= HELD_OUT_WARN:
+                    why.append(f"similar claim (Jaccard {j:.2f}), check for paraphrase")
+            shared = len(lm & rlm)
+            if shared >= HELD_OUT_LINES:
+                why.append(f"{shared} shared material lines")
+                fail = True
+            if why:
+                hits.append({"task": tid, "gold": rid, "split": ref_path.name, "why": why, "fail": fail})
+    return hits
 
 
 def check(tasks: list[dict]) -> list[dict]:
@@ -94,12 +143,15 @@ def main(argv: list[str]) -> int:
         return 2
     tasks = load(Path(argv[0]))
     hits = check(tasks)
+    against = [Path(argv[i + 1]) for i, a in enumerate(argv[:-1]) if a == "--against"]
+    for ref in against:
+        hits += check_against(tasks, ref)
     if "--json" in argv:
         print(json.dumps({"tasks": len(tasks), "hits": hits}, indent=1))
     else:
         fails = [h for h in hits if h["fail"]]
-        print(f"{len(tasks)} tasks checked against {len(GOLD)} gold files: {len(fails)} claim leak(s), "
-              f"{len(hits) - len(fails)} evidence-overlap warning(s)")
+        print(f"{len(tasks)} tasks checked against {len(GOLD)} gold files and {len(against)} held-out set(s): "
+              f"{len(fails)} failure(s), {len(hits) - len(fails)} warning(s)")
         for h in hits:
             tag = "FAIL" if h["fail"] else "warn"
             print(f"  {tag} {h['task']} ~ {h['gold']} ({h['split']}): {'; '.join(h['why'])}")

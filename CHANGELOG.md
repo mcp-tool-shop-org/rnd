@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.4.9] - 2026-10-10
+
+- verifier-gold leakage_check.py --against: held-out mode for training data (same or near-duplicate claim fails, Jaccard >= 0.5 warns for paraphrase, 2+ shared material lines fail); reads the pre-interview's numbered questions from .md
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.4.8] - 2026-10-10
 
 - verifier-gold: leakage_check.py for new task sets (claim copies fail; evidence overlap warns)

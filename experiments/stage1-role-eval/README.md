@@ -226,6 +226,17 @@ runner writes.
 - **Stuck thresholds:** frozen from the untrained pilot baseline before round 1.
 - **The steering rule:** pre-registered. It's pooled over both arms, because NO-ROLE is derived from ROLE
   items, and it runs per seed.
+- **"Stuck" means circling, not effort.** A trace counts as stuck when:
+  - an 8-word span repeats 3 or more times; **or**
+  - the token cap is reached; **or**
+  - the trace is long (above max(the untrained p95 per tier, 2 × the item's target thinking)) and not
+    progressing (a re-read rate above its frozen baseline, or no new material line quoted in the final 30%).
+
+  Length alone is only recorded, because role training lengthens thinking on purpose.
+- **Steering conditions:**
+  - a cell needs n ≥ 8 and a stuck rate of at least max(median, 0.10);
+  - steering slots draw from a reserve pool that's key-checked before round 1, never from live
+    generation.
 
 ## Key checks
 

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.14] - 2026-10-10
+
+- stage1-role-eval: the stuck definition (loop markers gated by length), steering minimum evidence, and the pre-checked reserve pool
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.13] - 2026-10-10
 
 - stage1-role-eval: the self-learning generator ruling (no DEV in the store during a stage; between stages only, with a fresh DEV after)

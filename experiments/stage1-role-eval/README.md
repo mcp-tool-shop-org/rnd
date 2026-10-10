@@ -176,6 +176,22 @@ text; receipt `results/2026-10-10-power-empirical.txt`):
 That's 80% power at about +7 to +8 points on either score. It's conservative, since the after side pools 9
 samples and the simulation uses 3. This replaces the 55%-baseline assumption for planning.
 
+**Amendment: training composition shaped by the sealed baseline** (eval plan be2e334, 2026-10-10).
+
+After the sealed baseline, the training mix was changed using its aggregate results only. It added:
+- exact quoting, whole rows, version headings and a multi-line share;
+- cannot_tell and supported floors of 25% per trait;
+- silent-vs-contradicted pairs;
+- advice-only escalation;
+- correction items.
+
+Drilling a test set's weak spots, even by category, makes before/after gains on those behaviours optimistic.
+So:
+- **Those behaviours are reported as targeted.**
+- **The role claim rests on Phase B,** whose NO-ROLE arm must be built to the same composition (R&D checks
+  both arms' tables before Phase B).
+- **Any later mix change** needs a dated amendment and may use DEV only.
+
 ## Key checks
 
 **The rule behind every check:** a key must get instant agreement. A key any careful reader could argue with

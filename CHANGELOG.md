@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.5] - 2026-10-10
+
+- stage1-role-eval: the composition amendment (training mix shaped by sealed-baseline aggregates; targeted behaviours disclosed; NO-ROLE arm must match composition)
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.4] - 2026-10-10
 
 - stage1-role-eval: the complete sealed baseline (aggregates) and Phase A power re-run from the measured per-task baseline (power_empirical.py + receipt; 80% at about +7 to +8 points)

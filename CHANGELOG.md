@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.19] - 2026-10-10
+
+- instruments/switchyard: #34 and #35 (native_binary_rejected and the abort flush; E2 amendment, blob bd88da4b) reviewed and passed
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+
 ## [1.1.4.5.18] - 2026-10-10
 
 - stage1-role-eval: the stuck rule frozen at 716dc251 (burst clause), and the baseline hedge profile

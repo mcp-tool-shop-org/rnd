@@ -67,6 +67,9 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     compile cache; if it passes there instead, the shape is flaky and doesn't route.
   - **Any abort** now flushes completed slots as `aborted: true` rows, which never import into the routing
     table.
+  - **Implemented:** #34 (harness) and #35 (the E2 amendment; spec blob 69f3e6db → `bd88da4b`), both reviewed
+    2026-10-10 and passed. The rerun uses that blob on a commit containing both, under a new run id, after the
+    first run's compile cache is cleared and a health check passes.
 
 ## Studio relevance
 

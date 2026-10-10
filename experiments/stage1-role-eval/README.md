@@ -226,8 +226,8 @@ runner writes.
 - **Stuck thresholds:** frozen from the untrained pilot baseline before round 1.
 - **The steering rule:** pre-registered. It's pooled over both arms, because NO-ROLE is derived from ROLE
   items, and it runs per seed.
-- **"Stuck" means circling, not effort** (frozen at aspire-si 6a14f26, `stage1-stuck-rule.json` sha256
-  `63928fea…`). A trace counts as stuck when:
+- **"Stuck" means circling, not effort** (frozen at aspire-si 4b857ff, `stage1-stuck-rule.json` sha256
+  `716dc251…`, superseding `63928fea…`). A trace counts as stuck when:
   - an 8-word span repeats 3 or more times; **or**
   - the 16,384-token cap is reached; **or**
   - the trace is long (above max(the untrained p95 per tier, 2 × the item's target thinking)) **and** it
@@ -256,6 +256,12 @@ runner writes.
     - whether a burst comes right before the answer.
 
     Eval sittings never reach the generator's store.
+- **Baseline hedge profile,** aggregates from the untrained sittings:
+  - DEV: 25.5% of traces hedge, 7 bursts;
+  - sealed: 28.8%, 33 bursts, 3 right before the answer;
+  - pre-interview: 77.8%, median 3.52 per 1,000.
+
+  "Wait" dominates everywhere.
 - **Steering conditions:**
   - the cell is (lesson, kind), for kinds C, D and E; tier is recorded, not steered;
   - a cell needs n ≥ 8 and a stuck rate of at least max(median, 0.10);

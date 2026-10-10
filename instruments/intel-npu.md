@@ -28,6 +28,14 @@ The Core Ultra 9 285K's NPU ("Intel AI Boost") and Intel iGPU, through OpenVINO 
   reset) at nomic-embed static 8×1024. It re-enumerated afterwards. Batch 8 isn't always fatal: bge-small and
   bge-base ran at 8×512 cleanly in the probe. The two hangs are DeBERTa at 8×512 and nomic at 8×1024. Until
   the cause is known, treat NPU batch > 1 as a hang risk and run it last, in its own block.
+- **E1's parity misses were one input bug, not the NPU** (Kimi, CPU only, 2026-10-09). The bge and nomic ONNX
+  graphs take `token_type_ids`, which switchyard's adapter never fed. OpenVINO then reads a stale buffer that
+  differs per compiled instance. With explicit zeros, parity is 1.00000000 everywhere. R&D's earlier
+  padding/pooling hypothesis was wrong. This probe's results are unaffected: optimum passes the tokenizer's full
+  outputs.
+- **nomic NPU 8×1024 lost the device 2 of 2 times, both with that stale buffer** (a possible out-of-bounds
+  token-type lookup). The next E1 re-run gets one diagnostic try, alone, as its last arm. DeBERTa's 8×512 hang
+  had correct inputs, so batch-8 hangs aren't fully explained.
 - **NPU health check** (after a hang, before the next NPU booking): `probe.py --batches 1` from
   `experiments/npu-probe`, in the NPU venv. It passes when every NPU row has no error, embedding minimum
   cosine is ≥ 0.9999, the NLI argmax agrees with the CPU, and each NPU median is within 1.5× of the
@@ -36,6 +44,9 @@ The Core Ultra 9 285K's NPU ("Intel AI Boost") and Intel iGPU, through OpenVINO 
   0.0295 s, bge-base 0.0496 s, DeBERTa 0.2721 s; cosine ≥ 0.99999; argmax agrees. Receipt:
   `experiments/npu-probe/results/2026-10-09-health-after-e1-loss.json`. Run it in the foreground with a
   10-minute wall-clock bound: a silent stall counts as a fail.
+  Second run, 21:26 the same day, after the second E1 loss and before the E1 re-run (the Publisher, 66 s):
+  **PASS**. bge-small 0.0300 s, bge-base 0.0481 s, DeBERTa 0.2690 s; cosine ≥ 0.99999; argmax agrees. Receipt:
+  `experiments/npu-probe/results/2026-10-09-health-before-e1-rerun.json`.
 - INT8 weights don't speed up small encoders. Quantization matters for putting LLMs on the NPU (OpenVINO
   GenAI, INT4).
 - "-NPU2" model builds on Hugging Face (FastFlowLM) are for AMD XDNA2 NPUs, not this Intel NPU.

@@ -1,13 +1,23 @@
 ---
 import '../styles/global.css';
+import { getCollection } from 'astro:content';
 import BaseLayout from '@mcptoolshop/site-theme/components/BaseLayout.astro';
-import Hero from '@mcptoolshop/site-theme/components/Hero.astro';
 import Section from '@mcptoolshop/site-theme/components/Section.astro';
-import FeatureGrid from '@mcptoolshop/site-theme/components/FeatureGrid.astro';
-import DataTable from '@mcptoolshop/site-theme/components/DataTable.astro';
 import CodeCardGrid from '@mcptoolshop/site-theme/components/CodeCardGrid.astro';
-import ApiList from '@mcptoolshop/site-theme/components/ApiList.astro';
 import { config } from '../site-config';
+
+// The landing page is the newsletter: the latest issue up top, back issues and the brief directory below.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const docs = await getCollection('docs');
+const issues = docs
+  .filter((d) => d.id.startsWith('newsletter/') && d.data.issue)
+  .sort((a, b) => (b.data.issue ?? 0) - (a.data.issue ?? 0));
+const briefs = docs
+  .filter((d) => d.id.startsWith('briefs/') && d.id !== 'briefs' && d.id !== 'briefs/index')
+  .sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? '') || a.data.title.localeCompare(b.data.title));
+const latest = issues[0];
+const back = issues.slice(1);
+const useIt = config.sections.find((s) => s.id === 'use-it');
 ---
 
 <BaseLayout
@@ -20,16 +30,64 @@ import { config } from '../site-config';
   packageLabel={config.packageLabel}
   npmUrl={config.npmUrl}
   footerText={config.footerText}
-  nav={config.sections.map(s => ({ href: `#${s.id}`, label: s.title }))}
+  nav={[
+    { href: '#latest', label: 'Latest issue' },
+    { href: '#briefs', label: 'Research briefs' },
+    { href: '#archive', label: 'Back issues' },
+    { href: '#use-it', label: 'Use it' },
+  ]}
 >
-  <Hero {...config.hero} />
+  <header class="pt-16">
+    <p class="text-sm font-medium uppercase tracking-widest text-dim">The bench · studio research newsletter</p>
+    <h1 class="mt-3 max-w-3xl text-4xl font-semibold tracking-tight md:text-5xl">
+      What we measured, and what it means.
+    </h1>
+    <p class="mt-4 max-w-2xl text-lg text-muted">
+      Each issue reports the studio's experiments in plain language: the numbers, the charts, what held up and
+      what didn't. Every figure links back to a committed receipt. Interim and disproved results stay visible
+      and are labelled.
+    </p>
+  </header>
 
-  {config.sections.map((s) => (
-    <Section id={s.id} title={s.title} subtitle={s.subtitle}>
-      {s.kind === 'features' && <FeatureGrid features={s.features} />}
-      {s.kind === 'data-table' && <DataTable columns={s.columns} rows={s.rows} />}
-      {s.kind === 'code-cards' && <CodeCardGrid cards={s.cards} />}
-      {s.kind === 'api' && <ApiList apis={s.apis} />}
+  <Section id="latest" title={latest ? `Issue ${latest.data.issue}: ${latest.data.title}` : 'Latest issue'}
+           subtitle={latest ? `${latest.data.date ?? ''} · ${latest.data.description ?? ''}` : 'The first issue is in preparation.'}>
+    {latest && (
+      <div class="mt-6 rounded-2xl border border-edge bg-surface-raised/40 p-6">
+        <ul class="list-disc space-y-2 pl-5 text-body">
+          {(latest.data.highlights ?? []).map((h) => <li set:html={h} />)}
+        </ul>
+        <a href={`${base}/${latest.id}/`} class="mt-6 inline-flex rounded-xl bg-action px-5 py-2.5 text-sm font-medium text-action-text hover:bg-action-hover">
+          Read issue {latest.data.issue}
+        </a>
+      </div>
+    )}
+  </Section>
+
+  <Section id="briefs" title="Research briefs" subtitle="One page per question: what we asked, what we found, the charts, the caveats and the receipts.">
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      {briefs.map((b) => (
+        <a href={`${base}/${b.id}/`} class="block min-w-0 rounded-2xl border border-edge p-5 hover:bg-surface-raised/50">
+          <p class="text-xs uppercase tracking-wider text-dim">{b.data.status ?? ''}{b.data.date ? ` · ${b.data.date}` : ''}</p>
+          <h3 class="mt-1 text-lg font-semibold text-heading">{b.data.title}</h3>
+          <p class="mt-2 text-sm text-muted">{b.data.description}</p>
+        </a>
+      ))}
+    </div>
+  </Section>
+
+  <Section id="archive" title="Back issues" subtitle={back.length ? undefined : 'None yet: this is where earlier issues will be listed.'}>
+    {back.length > 0 && (
+      <ul class="mt-6 space-y-2">
+        {back.map((i) => (
+          <li><a class="text-accent underline" href={`${base}/${i.id}/`}>Issue {i.data.issue}: {i.data.title}</a> <span class="text-dim">· {i.data.date}</span></li>
+        ))}
+      </ul>
+    )}
+  </Section>
+
+  {useIt && useIt.kind === 'code-cards' && (
+    <Section id="use-it" title="Use the bench" subtitle="The same findings, from the command line.">
+      <CodeCardGrid cards={useIt.cards} />
     </Section>
-  ))}
+  )}
 </BaseLayout>

@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 542" width="1140" height="542" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="1140" height="542" fill="#ffffff"/>
+<text x="24.0" y="34.0" font-size="17" fill="#1f2430" text-anchor="start" font-weight="600">Thinking on vs off, same model, same tune claims (model&#x27;s own verdict)</text>
+<text x="24.0" y="54.0" font-size="11.5" fill="#b91c1c" text-anchor="start" font-weight="400">POST HOC (pre-registered before its runs, rnd acb333d). Filled = think on, hollow = think off. Model verdict before offrig&#x27;s quote check, because the on-runs used older quote rules and builds.</text>
+<line x1="300.0" y1="104.0" x2="300.0" y2="416.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="300.0" y="431.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0</text>
+<line x1="366.7" y1="104.0" x2="366.7" y2="416.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="366.7" y="431.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.2</text>
+<line x1="433.3" y1="104.0" x2="433.3" y2="416.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="433.3" y="431.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.4</text>
+<line x1="500.0" y1="104.0" x2="500.0" y2="416.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="500.0" y="431.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.6</text>
+<text x="400.0" y="94.0" font-size="11.5" fill="#1f2430" text-anchor="middle" font-weight="600">false accept on gold unsupported</text>
+<line x1="540.0" y1="104.0" x2="540.0" y2="416.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="540.0" y="431.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0</text>
+<line x1="606.7" y1="104.0" x2="606.7" y2="416.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="606.7" y="431.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.2</text>
+<line x1="673.3" y1="104.0" x2="673.3" y2="416.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="673.3" y="431.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.4</text>
+<line x1="740.0" y1="104.0" x2="740.0" y2="416.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="740.0" y="431.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.6</text>
+<text x="640.0" y="94.0" font-size="11.5" fill="#1f2430" text-anchor="middle" font-weight="600">false reject on gold supported</text>
+<line x1="780.0" y1="104.0" x2="780.0" y2="416.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="780.0" y="431.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0</text>
+<line x1="846.7" y1="104.0" x2="846.7" y2="416.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="846.7" y="431.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.2</text>
+<line x1="913.3" y1="104.0" x2="913.3" y2="416.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="913.3" y="431.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.4</text>
+<line x1="980.0" y1="104.0" x2="980.0" y2="416.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="980.0" y="431.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.6</text>
+<text x="880.0" y="94.0" font-size="11.5" fill="#1f2430" text-anchor="middle" font-weight="600">cannot_tell rate</text>
+<text x="1030.0" y="94.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">median s / claim</text>
+<rect x="24.0" y="104.0" width="1116.0" height="52.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="128.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">qwen3:8b · grounded</text>
+<text x="28.0" y="142.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">Qwen · unusable on 2 / off 0</text>
+<line x1="318.3" y1="123.0" x2="352.6" y2="123.0" stroke="#2563eb" stroke-width="1.8"/>
+<circle cx="331.5" cy="123.0" r="3.8" fill="#2563eb" stroke="#2563eb" stroke-width="1.6"/>
+<line x1="418.2" y1="137.0" x2="474.7" y2="137.0" stroke="#2563eb" stroke-width="1.8"/>
+<circle cx="445.8" cy="137.0" r="3.8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<line x1="542.7" y1="123.0" x2="562.6" y2="123.0" stroke="#2563eb" stroke-width="1.8"/>
+<circle cx="547.9" cy="123.0" r="3.8" fill="#2563eb" stroke="#2563eb" stroke-width="1.6"/>
+<line x1="542.7" y1="137.0" x2="562.4" y2="137.0" stroke="#2563eb" stroke-width="1.8"/>
+<circle cx="547.9" cy="137.0" r="3.8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<line x1="784.2" y1="123.0" x2="797.6" y2="123.0" stroke="#2563eb" stroke-width="1.8"/>
+<circle cx="788.7" cy="123.0" r="3.8" fill="#2563eb" stroke="#2563eb" stroke-width="1.6"/>
+<line x1="784.2" y1="137.0" x2="797.5" y2="137.0" stroke="#2563eb" stroke-width="1.8"/>
+<circle cx="788.6" cy="137.0" r="3.8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<text x="1040.0" y="127.0" font-size="10.5" fill="#1f2430" text-anchor="start" font-weight="400">on  1.8 s</text>
+<text x="1040.0" y="141.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">off 0.6 s</text>
+<text x="28.0" y="180.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">qwen3:8b · reasoning</text>
+<text x="28.0" y="194.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">Qwen · unusable on 2 / off 1</text>
+<line x1="322.9" y1="175.0" x2="364.8" y2="175.0" stroke="#2563eb" stroke-width="1.8"/>
+<circle cx="339.2" cy="175.0" r="3.8" fill="#2563eb" stroke="#2563eb" stroke-width="1.6"/>
+<line x1="407.1" y1="189.0" x2="469.6" y2="189.0" stroke="#2563eb" stroke-width="1.8"/>
+<circle cx="437.3" cy="189.0" r="3.8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<line x1="543.4" y1="175.0" x2="567.9" y2="175.0" stroke="#2563eb" stroke-width="1.8"/>
+<circle cx="549.9" cy="175.0" r="3.8" fill="#2563eb" stroke="#2563eb" stroke-width="1.6"/>
+<line x1="558.2" y1="189.0" x2="597.6" y2="189.0" stroke="#2563eb" stroke-width="1.8"/>
+<circle cx="573.0" cy="189.0" r="3.8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<line x1="781.5" y1="175.0" x2="793.0" y2="175.0" stroke="#2563eb" stroke-width="1.8"/>
+<circle cx="784.5" cy="175.0" r="3.8" fill="#2563eb" stroke="#2563eb" stroke-width="1.6"/>
+<line x1="787.2" y1="189.0" x2="805.1" y2="189.0" stroke="#2563eb" stroke-width="1.8"/>
+<circle cx="793.5" cy="189.0" r="3.8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<text x="1040.0" y="179.0" font-size="10.5" fill="#1f2430" text-anchor="start" font-weight="400">on  2.4 s</text>
+<text x="1040.0" y="193.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">off 0.7 s</text>
+<rect x="24.0" y="208.0" width="1116.0" height="52.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="232.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">qwen3:14b · grounded</text>
+<text x="28.0" y="246.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">Qwen · unusable on 0 / off 0</text>
+<line x1="307.2" y1="227.0" x2="332.8" y2="227.0" stroke="#1e3a8a" stroke-width="1.8"/>
+<circle cx="315.6" cy="227.0" r="3.8" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="1.6"/>
+<line x1="377.2" y1="241.0" x2="429.7" y2="241.0" stroke="#1e3a8a" stroke-width="1.8"/>
+<circle cx="401.6" cy="241.0" r="3.8" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.6"/>
+<line x1="540.5" y1="227.0" x2="554.4" y2="227.0" stroke="#1e3a8a" stroke-width="1.8"/>
+<circle cx="542.6" cy="227.0" r="3.8" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="1.6"/>
+<line x1="540.5" y1="241.0" x2="554.4" y2="241.0" stroke="#1e3a8a" stroke-width="1.8"/>
+<circle cx="542.6" cy="241.0" r="3.8" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.6"/>
+<line x1="783.4" y1="227.0" x2="795.9" y2="227.0" stroke="#1e3a8a" stroke-width="1.8"/>
+<circle cx="787.4" cy="227.0" r="3.8" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="1.6"/>
+<line x1="782.6" y1="241.0" x2="794.2" y2="241.0" stroke="#1e3a8a" stroke-width="1.8"/>
+<circle cx="786.2" cy="241.0" r="3.8" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.6"/>
+<text x="1040.0" y="231.0" font-size="10.5" fill="#1f2430" text-anchor="start" font-weight="400">on  2.7 s</text>
+<text x="1040.0" y="245.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">off 1.0 s</text>
+<text x="28.0" y="284.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">qwen3:14b · reasoning</text>
+<text x="28.0" y="298.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">Qwen · unusable on 0 / off 0</text>
+<line x1="333.0" y1="279.0" x2="379.9" y2="279.0" stroke="#1e3a8a" stroke-width="1.8"/>
+<circle cx="352.3" cy="279.0" r="3.8" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="1.6"/>
+<line x1="392.0" y1="293.0" x2="453.2" y2="293.0" stroke="#1e3a8a" stroke-width="1.8"/>
+<circle cx="420.9" cy="293.0" r="3.8" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.6"/>
+<line x1="547.0" y1="279.0" x2="576.6" y2="279.0" stroke="#1e3a8a" stroke-width="1.8"/>
+<circle cx="556.3" cy="279.0" r="3.8" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="1.6"/>
+<line x1="553.4" y1="293.0" x2="589.1" y2="293.0" stroke="#1e3a8a" stroke-width="1.8"/>
+<circle cx="566.1" cy="293.0" r="3.8" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.6"/>
+<line x1="785.1" y1="279.0" x2="801.1" y2="279.0" stroke="#1e3a8a" stroke-width="1.8"/>
+<circle cx="790.5" cy="279.0" r="3.8" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="1.6"/>
+<line x1="786.1" y1="293.0" x2="803.1" y2="293.0" stroke="#1e3a8a" stroke-width="1.8"/>
+<circle cx="792.0" cy="293.0" r="3.8" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.6"/>
+<text x="1040.0" y="283.0" font-size="10.5" fill="#1f2430" text-anchor="start" font-weight="400">on  3.3 s</text>
+<text x="1040.0" y="297.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">off 1.1 s</text>
+<rect x="24.0" y="312.0" width="1116.0" height="52.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="336.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">gemma4:31b · grounded</text>
+<text x="28.0" y="350.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">Google Gemma · unusable on 1 / off 0</text>
+<line x1="300.0" y1="331.0" x2="309.7" y2="331.0" stroke="#7c3aed" stroke-width="1.8"/>
+<circle cx="300.0" cy="331.0" r="3.8" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="304.1" y1="345.0" x2="325.9" y2="345.0" stroke="#7c3aed" stroke-width="1.8"/>
+<circle cx="310.4" cy="345.0" r="3.8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="541.4" y1="331.0" x2="558.5" y2="331.0" stroke="#7c3aed" stroke-width="1.8"/>
+<circle cx="545.2" cy="331.0" r="3.8" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="540.5" y1="345.0" x2="554.4" y2="345.0" stroke="#7c3aed" stroke-width="1.8"/>
+<circle cx="542.6" cy="345.0" r="3.8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="785.9" y1="331.0" x2="800.8" y2="331.0" stroke="#7c3aed" stroke-width="1.8"/>
+<circle cx="791.2" cy="331.0" r="3.8" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="785.9" y1="345.0" x2="800.7" y2="345.0" stroke="#7c3aed" stroke-width="1.8"/>
+<circle cx="791.1" cy="345.0" r="3.8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="1040.0" y="335.0" font-size="10.5" fill="#1f2430" text-anchor="start" font-weight="400">on  9.7 s</text>
+<text x="1040.0" y="349.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">off 2.9 s</text>
+<text x="28.0" y="388.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">gemma4:31b · reasoning</text>
+<text x="28.0" y="402.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">Google Gemma · unusable on 0 / off 0</text>
+<line x1="301.8" y1="383.0" x2="322.9" y2="383.0" stroke="#7c3aed" stroke-width="1.8"/>
+<circle cx="306.5" cy="383.0" r="3.8" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="309.1" y1="397.0" x2="340.8" y2="397.0" stroke="#7c3aed" stroke-width="1.8"/>
+<circle cx="319.6" cy="397.0" r="3.8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="540.6" y1="383.0" x2="557.8" y2="383.0" stroke="#7c3aed" stroke-width="1.8"/>
+<circle cx="543.3" cy="383.0" r="3.8" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="540.0" y1="397.0" x2="552.1" y2="397.0" stroke="#7c3aed" stroke-width="1.8"/>
+<circle cx="540.0" cy="397.0" r="3.8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="792.6" y1="383.0" x2="814.2" y2="383.0" stroke="#7c3aed" stroke-width="1.8"/>
+<circle cx="800.9" cy="383.0" r="3.8" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="791.5" y1="397.0" x2="812.4" y2="397.0" stroke="#7c3aed" stroke-width="1.8"/>
+<circle cx="799.4" cy="397.0" r="3.8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="1040.0" y="387.0" font-size="10.5" fill="#1f2430" text-anchor="start" font-weight="400">on  11.4 s</text>
+<text x="1040.0" y="401.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">off 4.4 s</text>
+<text x="24.0" y="513.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">On-runs: qwen3 from the chain (quote rule 1, num_predict 4096, older offrig); gemma4:31b from the rerun (quote rule 2, num_predict 12288, 751fb1d). Off-runs: offrig 9b6527f, same num_predict per model, num_ctx 16384.</text>
+<text x="24.0" y="528.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Seconds per claim are wall time on the RTX 5090, one run each. Wilson 95% intervals. Source: mcp-tool-shop-org/rnd experiments/verifier-gold/calibration/results/. Inputs pinned in experiments/charts/manifest.json.</text>
+</svg>

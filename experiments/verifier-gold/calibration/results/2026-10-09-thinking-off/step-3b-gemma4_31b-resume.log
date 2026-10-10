@@ -1,0 +1,30 @@
+== rest 793s from 21:27:21; models loaded at start: 0
+== gemma4:31b think=off structured=on start 21:40:35
+  false-accept (subtle): 4/128 3.1% [1.2-7.8]
+  gold cannot_tell: accepted 0/15 0.0% [0.0-20.4], said cannot_tell 10/15 66.7% [41.7-84.8], said unsupported 5
+  abstain: 22/255 8.6% [5.8-12.7]   balanced accuracy (decided): 0.980
+strata:
+  has_doc_comment=false        grounded   n=104  FA 1/59 1.7% [0.3-9.0]  subtle FA 1/52 1.9% [0.3-10.1]  abstain 10/97 10.3% [5.7-17.9]  BA 0.990
+  has_doc_comment=true         grounded   n=101  FA 2/49 4.1% [1.1-13.7]  subtle FA 2/46 4.3% [1.2-14.5]  abstain 10/98 10.2% [5.6-17.8]  BA 0.978
+  origin=offrig-a45fe53        grounded   n=22   FA 0/12 0.0% [0.0-24.2]  subtle FA 0/10 0.0% [0.0-27.8]  abstain 2/20 10.0% [2.8-30.1]  BA 1.000
+  origin=prs-2026-10-08        grounded   n=205  FA 3/108 2.8% [0.9-7.9]  subtle FA 3/98 3.1% [1.0-8.6]  abstain 20/195 10.3% [6.7-15.3]  BA 0.984
+  origin=role-os-ce91be8       grounded   n=43   FA 1/23 4.3% [0.8-21.0]  subtle FA 1/20 5.0% [0.9-23.6]  abstain 0/40 0.0% [0.0-8.8]  BA 0.953
+  self_referential=false       grounded   n=173  FA 3/91 3.3% [1.1-9.2]  subtle FA 3/83 3.6% [1.2-10.1]  abstain 19/165 11.5% [7.5-17.3]  BA 0.981
+  self_referential=true        grounded   n=32   FA 0/17 0.0% [0.0-18.4]  subtle FA 0/15 0.0% [0.0-20.4]  abstain 1/30 3.3% [0.6-16.7]  BA 1.000
+cost: $0.0000 over 859s wall at $0/hr = $0.00000 per claim (boot and pull time not included)
+context window: num_ctx 16384 (fixed, fixed)
+default rule (grounded and reasoning; knowledge reported only):
+  note: model-caused unusable outcomes (bad_verdict, truncated, repeated timeout, repeated server error or dropped reply) count as missing answers and fail the rule; a fail can come from those, not only from false accepts. context_overflow outcomes are offrig's sizing failure, not the model's: they are not counted against it and leave the run incomplete
+  grounded: PASS
+    ok   every claim answered: missing 0 (need 0)
+    ok   gold unsupported claims: 128 (need >= 100)
+    ok   false-accept upper bound (primary): 0.0697 (need < 0.1)
+    ok   abstain rate: 0.0863 (need <= 0.2)
+    ok   balanced accuracy on decided: 0.9798 (need >= 0.8)
+  reasoning: not run
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate-off/cal-gemma4_31b-grounded-tune
+== gemma4:31b end 21:40:51; models loaded after unload: 0
+== grounded: complete
+EXIT 0

@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 560" width="1140" height="560" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="1140" height="560" fill="#ffffff"/>
+<text x="24.0" y="34.0" font-size="17" fill="#1f2430" text-anchor="start" font-weight="600">Math ladder: accuracy by level, model&#x27;s own verdict (2026-10-09)</text>
+<text x="24.0" y="54.0" font-size="11.5" fill="#b91c1c" text-anchor="start" font-weight="400">POST HOC VIEW: the pre-registered table scores offrig&#x27;s final verdict, which here mostly measures the quote check. This scores the model&#x27;s verdict before it.</text>
+<line x1="90.0" y1="430.0" x2="760.0" y2="430.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="80.0" y="434.0" font-size="10" fill="#5b6272" text-anchor="end" font-weight="400">0.0</text>
+<line x1="90.0" y1="362.0" x2="760.0" y2="362.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="80.0" y="366.0" font-size="10" fill="#5b6272" text-anchor="end" font-weight="400">0.2</text>
+<line x1="90.0" y1="294.0" x2="760.0" y2="294.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="80.0" y="298.0" font-size="10" fill="#5b6272" text-anchor="end" font-weight="400">0.4</text>
+<line x1="90.0" y1="226.0" x2="760.0" y2="226.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="80.0" y="230.0" font-size="10" fill="#5b6272" text-anchor="end" font-weight="400">0.6</text>
+<line x1="90.0" y1="158.0" x2="760.0" y2="158.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="80.0" y="162.0" font-size="10" fill="#5b6272" text-anchor="end" font-weight="400">0.8</text>
+<line x1="90.0" y1="90.0" x2="760.0" y2="90.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="80.0" y="94.0" font-size="10" fill="#5b6272" text-anchor="end" font-weight="400">1.0</text>
+<line x1="90.0" y1="158.0" x2="760.0" y2="158.0" stroke="#b91c1c" stroke-width="1.2" stroke-dasharray="5,3"/>
+<text x="760.0" y="152.0" font-size="10" fill="#b91c1c" text-anchor="end" font-weight="400">falloff line: accuracy 0.80</text>
+<text x="90.0" y="448.0" font-size="11" fill="#1f2430" text-anchor="middle" font-weight="400">L1</text>
+<text x="185.7" y="448.0" font-size="11" fill="#1f2430" text-anchor="middle" font-weight="400">L2</text>
+<text x="281.4" y="448.0" font-size="11" fill="#1f2430" text-anchor="middle" font-weight="400">L3</text>
+<text x="377.1" y="448.0" font-size="11" fill="#1f2430" text-anchor="middle" font-weight="400">L4</text>
+<text x="472.9" y="448.0" font-size="11" fill="#1f2430" text-anchor="middle" font-weight="400">L5</text>
+<text x="568.6" y="448.0" font-size="11" fill="#1f2430" text-anchor="middle" font-weight="400">L6</text>
+<text x="664.3" y="448.0" font-size="11" fill="#1f2430" text-anchor="middle" font-weight="400">L7</text>
+<text x="760.0" y="448.0" font-size="11" fill="#1f2430" text-anchor="middle" font-weight="400">L8</text>
+<text x="425.0" y="470.0" font-size="10.5" fill="#5b6272" text-anchor="middle" font-weight="400">ladder level (L1–L2, L3–L4 and L7–L8 share knob settings; L5→L6 raises units 1→2)</text>
+<path d="M90.0,90.0 L185.7,90.0 L281.4,180.7 L377.1,195.5 L472.9,260.0 L568.6,271.3 L664.3,260.0 L760.0,254.1" fill="none" stroke="#c2410c" stroke-width="1.8"/>
+<circle cx="90.0" cy="90.0" r="4" fill="#c2410c" stroke="#c2410c" stroke-width="1.6"/>
+<circle cx="185.7" cy="90.0" r="4" fill="#c2410c" stroke="#c2410c" stroke-width="1.6"/>
+<circle cx="281.4" cy="180.7" r="4" fill="#c2410c" stroke="#c2410c" stroke-width="1.6"/>
+<circle cx="377.1" cy="195.5" r="4" fill="#ffffff" stroke="#c2410c" stroke-width="1.6"/>
+<circle cx="472.9" cy="260.0" r="4" fill="#c2410c" stroke="#c2410c" stroke-width="1.6"/>
+<circle cx="568.6" cy="271.3" r="4" fill="#c2410c" stroke="#c2410c" stroke-width="1.6"/>
+<circle cx="664.3" cy="260.0" r="4" fill="#c2410c" stroke="#c2410c" stroke-width="1.6"/>
+<circle cx="760.0" cy="254.1" r="4" fill="#ffffff" stroke="#c2410c" stroke-width="1.6"/>
+<line x1="790.0" y1="96.0" x2="812.0" y2="96.0" stroke="#c2410c" stroke-width="2.5"/>
+<text x="820.0" y="100.0" font-size="11" fill="#1f2430" text-anchor="start" font-weight="400">llama3.1:8b (think off) · Meta Llama · num_predict 4096</text>
+<path d="M90.0,90.0 L185.7,90.0 L281.4,90.0 L377.1,90.0 L472.9,90.0 L568.6,190.7 L664.3,102.1 L760.0,101.3" fill="none" stroke="#2563eb" stroke-width="1.8"/>
+<circle cx="90.0" cy="90.0" r="4" fill="#2563eb" stroke="#2563eb" stroke-width="1.6"/>
+<circle cx="185.7" cy="90.0" r="4" fill="#2563eb" stroke="#2563eb" stroke-width="1.6"/>
+<circle cx="281.4" cy="90.0" r="4" fill="#2563eb" stroke="#2563eb" stroke-width="1.6"/>
+<circle cx="377.1" cy="90.0" r="4" fill="#2563eb" stroke="#2563eb" stroke-width="1.6"/>
+<circle cx="472.9" cy="90.0" r="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<circle cx="568.6" cy="190.7" r="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<circle cx="664.3" cy="102.1" r="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<circle cx="760.0" cy="101.3" r="4" fill="#2563eb" stroke="#2563eb" stroke-width="1.6"/>
+<line x1="790.0" y1="118.0" x2="812.0" y2="118.0" stroke="#2563eb" stroke-width="2.5"/>
+<text x="820.0" y="122.0" font-size="11" fill="#1f2430" text-anchor="start" font-weight="400">qwen3:8b (think on) · Qwen · num_predict 4096</text>
+<path d="M90.0,90.0 L185.7,90.0 L281.4,90.0 L377.1,90.0 L472.9,90.0 L568.6,162.9 L664.3,112.7 L760.0,112.7" fill="none" stroke="#1e3a8a" stroke-width="1.8"/>
+<circle cx="90.0" cy="90.0" r="4" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="1.6"/>
+<circle cx="185.7" cy="90.0" r="4" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="1.6"/>
+<circle cx="281.4" cy="90.0" r="4" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="1.6"/>
+<circle cx="377.1" cy="90.0" r="4" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="1.6"/>
+<circle cx="472.9" cy="90.0" r="4" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.6"/>
+<circle cx="568.6" cy="162.9" r="4" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.6"/>
+<circle cx="664.3" cy="112.7" r="4" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="1.6"/>
+<circle cx="760.0" cy="112.7" r="4" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="1.6"/>
+<line x1="790.0" y1="140.0" x2="812.0" y2="140.0" stroke="#1e3a8a" stroke-width="2.5"/>
+<text x="820.0" y="144.0" font-size="11" fill="#1f2430" text-anchor="start" font-weight="400">qwen3:14b (think on) · Qwen · num_predict 4096</text>
+<text x="790.0" y="166.0" font-size="11" fill="#b45309" text-anchor="start" font-weight="600">mistral-small:24b (think off): INCOMPLETE — 1 claim stuck, not scored</text>
+<path d="M90.0,90.0 L185.7,90.0 L281.4,90.0 L377.1,101.3 L472.9,158.0 L568.6,226.0 L664.3,237.3 L760.0,226.0" fill="none" stroke="#4d7c0f" stroke-width="1.8"/>
+<circle cx="90.0" cy="90.0" r="4" fill="#4d7c0f" stroke="#4d7c0f" stroke-width="1.6"/>
+<circle cx="185.7" cy="90.0" r="4" fill="#4d7c0f" stroke="#4d7c0f" stroke-width="1.6"/>
+<circle cx="281.4" cy="90.0" r="4" fill="#4d7c0f" stroke="#4d7c0f" stroke-width="1.6"/>
+<circle cx="377.1" cy="101.3" r="4" fill="#4d7c0f" stroke="#4d7c0f" stroke-width="1.6"/>
+<circle cx="472.9" cy="158.0" r="4" fill="#4d7c0f" stroke="#4d7c0f" stroke-width="1.6"/>
+<circle cx="568.6" cy="226.0" r="4" fill="#4d7c0f" stroke="#4d7c0f" stroke-width="1.6"/>
+<circle cx="664.3" cy="237.3" r="4" fill="#4d7c0f" stroke="#4d7c0f" stroke-width="1.6"/>
+<circle cx="760.0" cy="226.0" r="4" fill="#4d7c0f" stroke="#4d7c0f" stroke-width="1.6"/>
+<line x1="790.0" y1="184.0" x2="812.0" y2="184.0" stroke="#4d7c0f" stroke-width="2.5"/>
+<text x="820.0" y="188.0" font-size="11" fill="#1f2430" text-anchor="start" font-weight="400">granite4.1:30b (think off) · IBM Granite · num_predict 4096</text>
+<path d="M90.0,90.0 L185.7,90.0 L281.4,90.0 L377.1,90.0 L472.9,90.0 L568.6,158.0 L664.3,90.0 L760.0,90.0" fill="none" stroke="#7c3aed" stroke-width="1.8"/>
+<circle cx="90.0" cy="90.0" r="4" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<circle cx="185.7" cy="90.0" r="4" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<circle cx="281.4" cy="90.0" r="4" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<circle cx="377.1" cy="90.0" r="4" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<circle cx="472.9" cy="90.0" r="4" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<circle cx="568.6" cy="158.0" r="4" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<circle cx="664.3" cy="90.0" r="4" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<circle cx="760.0" cy="90.0" r="4" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="790.0" y1="206.0" x2="812.0" y2="206.0" stroke="#7c3aed" stroke-width="2.5"/>
+<text x="820.0" y="210.0" font-size="11" fill="#1f2430" text-anchor="start" font-weight="400">gemma4:31b (think on) · Google Gemma · num_predict 4096</text>
+<text x="790.0" y="242.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Hollow = n &lt; 30 (tentative): gemma&#x27;s L7–L8 lost</text>
+<text x="790.0" y="257.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">5 and 10 claims to the 4096 reply cap (budget,</text>
+<text x="790.0" y="272.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">not ability). 30 claims per level otherwise.</text>
+<text x="790.0" y="298.0" font-size="10.5" fill="#1f2430" text-anchor="start" font-weight="400">L6 is a precision cliff: bytes→MiB answers of</text>
+<text x="790.0" y="313.0" font-size="10.5" fill="#1f2430" text-anchor="start" font-weight="400">7–10 digits, false claims off by exactly one.</text>
+<text x="24.0" y="531.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">offrig calibrate, quote rule 1, num_ctx 16384, temperature 0, seed 0 · gold verified by executing the generated code where a cell looked odd (all L6 answers correct).</text>
+<text x="24.0" y="546.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Source: mcp-tool-shop-org/rnd experiments/verifier-gold/math-ladder/ (ladder.jsonl, results/2026-10-09-ladder/). Inputs pinned in experiments/charts/manifest.json.</text>
+</svg>

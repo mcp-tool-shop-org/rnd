@@ -1,0 +1,594 @@
+{
+  "model": "gemma4:31b",
+  "model_digest": "6316f0629137b426c9d9b853ffc4c8209589f30ee39aebede6285096c0ff47e7",
+  "ollama_version": "0.35.1",
+  "settings": {
+    "model": "gemma4:31b",
+    "url": "http://127.0.0.1:11434",
+    "think": "off",
+    "structured": "on",
+    "split": "tune",
+    "check_type": "grounded",
+    "limit": null,
+    "swap_evidence": false,
+    "seed": 0,
+    "temperature": 0.0,
+    "shift": false,
+    "truncate": false,
+    "num_ctx_mode": "fixed",
+    "num_ctx": 16384,
+    "num_predict": 12288,
+    "quote_rule": 2
+  },
+  "claims_selected": 270,
+  "claims_attempted": 270,
+  "unusable": {},
+  "rows": [
+    {
+      "check_type": "grounded",
+      "n": 270,
+      "supported_n": 127,
+      "unsupported_n": 128,
+      "cannot_tell_n": 15,
+      "missing": 0,
+      "false_accept": {
+        "hits": 4,
+        "of": 143,
+        "rate": 0.027972027972027972,
+        "low": 0.01093039010512339,
+        "high": 0.06971072389493262
+      },
+      "false_accept_unsupported_only": {
+        "hits": 4,
+        "of": 128,
+        "rate": 0.03125,
+        "low": 0.01221826524505338,
+        "high": 0.07759763126136077
+      },
+      "subtle_false_accept": {
+        "hits": 4,
+        "of": 128,
+        "rate": 0.03125,
+        "low": 0.01221826524505338,
+        "high": 0.07759763126136077
+      },
+      "cannot_tell_gold": {
+        "n": 15,
+        "false_accept": {
+          "hits": 0,
+          "of": 15,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.20388330103584862
+        },
+        "said_cannot_tell": {
+          "hits": 10,
+          "of": 15,
+          "rate": 0.6666666666666666,
+          "low": 0.41713547738519774,
+          "high": 0.8482367556028526
+        },
+        "said_unsupported": 5
+      },
+      "abstain": {
+        "hits": 22,
+        "of": 255,
+        "rate": 0.08627450980392157,
+        "low": 0.05766358972466755,
+        "high": 0.1271656066438906
+      },
+      "decided_balanced_accuracy": 0.9798295454545455,
+      "passes_default_rule": true
+    }
+  ],
+  "strata": [
+    {
+      "name": "has_doc_comment=false",
+      "rows": [
+        {
+          "check_type": "grounded",
+          "n": 104,
+          "supported_n": 45,
+          "unsupported_n": 52,
+          "cannot_tell_n": 7,
+          "missing": 0,
+          "false_accept": {
+            "hits": 1,
+            "of": 59,
+            "rate": 0.01694915254237288,
+            "low": 0.0029982339183556445,
+            "high": 0.08995725964142297
+          },
+          "false_accept_unsupported_only": {
+            "hits": 1,
+            "of": 52,
+            "rate": 0.019230769230769232,
+            "low": 0.0034028080709451597,
+            "high": 0.10120511127892247
+          },
+          "subtle_false_accept": {
+            "hits": 1,
+            "of": 52,
+            "rate": 0.019230769230769232,
+            "low": 0.0034028080709451597,
+            "high": 0.10120511127892247
+          },
+          "cannot_tell_gold": {
+            "n": 7,
+            "false_accept": {
+              "hits": 0,
+              "of": 7,
+              "rate": 0.0,
+              "low": 0.0,
+              "high": 0.35433043506668743
+            },
+            "said_cannot_tell": {
+              "hits": 6,
+              "of": 7,
+              "rate": 0.8571428571428571,
+              "low": 0.4868721707256811,
+              "high": 0.9743203756552565
+            },
+            "said_unsupported": 1
+          },
+          "abstain": {
+            "hits": 10,
+            "of": 97,
+            "rate": 0.10309278350515463,
+            "low": 0.056967493385810426,
+            "high": 0.17945767439251917
+          },
+          "decided_balanced_accuracy": 0.9897959183673469,
+          "passes_default_rule": false
+        }
+      ]
+    },
+    {
+      "name": "has_doc_comment=true",
+      "rows": [
+        {
+          "check_type": "grounded",
+          "n": 101,
+          "supported_n": 52,
+          "unsupported_n": 46,
+          "cannot_tell_n": 3,
+          "missing": 0,
+          "false_accept": {
+            "hits": 2,
+            "of": 49,
+            "rate": 0.04081632653061224,
+            "low": 0.011265633366185787,
+            "high": 0.13713032306080064
+          },
+          "false_accept_unsupported_only": {
+            "hits": 2,
+            "of": 46,
+            "rate": 0.043478260869565216,
+            "low": 0.012005445598556624,
+            "high": 0.1453225902621907
+          },
+          "subtle_false_accept": {
+            "hits": 2,
+            "of": 46,
+            "rate": 0.043478260869565216,
+            "low": 0.012005445598556624,
+            "high": 0.1453225902621907
+          },
+          "cannot_tell_gold": {
+            "n": 3,
+            "false_accept": {
+              "hits": 0,
+              "of": 3,
+              "rate": 0.0,
+              "low": 0.0,
+              "high": 0.5614970317550454
+            },
+            "said_cannot_tell": {
+              "hits": 2,
+              "of": 3,
+              "rate": 0.6666666666666666,
+              "low": 0.2076596008020477,
+              "high": 0.9385080552796037
+            },
+            "said_unsupported": 1
+          },
+          "abstain": {
+            "hits": 10,
+            "of": 98,
+            "rate": 0.10204081632653061,
+            "low": 0.05637600332589365,
+            "high": 0.17772766228115824
+          },
+          "decided_balanced_accuracy": 0.9782608695652174,
+          "passes_default_rule": false
+        }
+      ]
+    },
+    {
+      "name": "origin=offrig-a45fe53",
+      "rows": [
+        {
+          "check_type": "grounded",
+          "n": 22,
+          "supported_n": 10,
+          "unsupported_n": 10,
+          "cannot_tell_n": 2,
+          "missing": 0,
+          "false_accept": {
+            "hits": 0,
+            "of": 12,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.24249400665524085
+          },
+          "false_accept_unsupported_only": {
+            "hits": 0,
+            "of": 10,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.2775327998628892
+          },
+          "subtle_false_accept": {
+            "hits": 0,
+            "of": 10,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.2775327998628892
+          },
+          "cannot_tell_gold": {
+            "n": 2,
+            "false_accept": {
+              "hits": 0,
+              "of": 2,
+              "rate": 0.0,
+              "low": 0.0,
+              "high": 0.6576197724933469
+            },
+            "said_cannot_tell": {
+              "hits": 2,
+              "of": 2,
+              "rate": 1.0,
+              "low": 0.34238022750665303,
+              "high": 1.0
+            },
+            "said_unsupported": 0
+          },
+          "abstain": {
+            "hits": 2,
+            "of": 20,
+            "rate": 0.1,
+            "low": 0.027866481213768224,
+            "high": 0.3010336452284873
+          },
+          "decided_balanced_accuracy": 1.0,
+          "passes_default_rule": false
+        }
+      ]
+    },
+    {
+      "name": "origin=prs-2026-10-08",
+      "rows": [
+        {
+          "check_type": "grounded",
+          "n": 205,
+          "supported_n": 97,
+          "unsupported_n": 98,
+          "cannot_tell_n": 10,
+          "missing": 0,
+          "false_accept": {
+            "hits": 3,
+            "of": 108,
+            "rate": 0.027777777777777776,
+            "low": 0.009491339899289714,
+            "high": 0.07850338875023635
+          },
+          "false_accept_unsupported_only": {
+            "hits": 3,
+            "of": 98,
+            "rate": 0.030612244897959183,
+            "low": 0.010464891082493703,
+            "high": 0.0861702016847983
+          },
+          "subtle_false_accept": {
+            "hits": 3,
+            "of": 98,
+            "rate": 0.030612244897959183,
+            "low": 0.010464891082493703,
+            "high": 0.0861702016847983
+          },
+          "cannot_tell_gold": {
+            "n": 10,
+            "false_accept": {
+              "hits": 0,
+              "of": 10,
+              "rate": 0.0,
+              "low": 0.0,
+              "high": 0.2775327998628892
+            },
+            "said_cannot_tell": {
+              "hits": 8,
+              "of": 10,
+              "rate": 0.8,
+              "low": 0.49016247153664183,
+              "high": 0.9433178485456247
+            },
+            "said_unsupported": 2
+          },
+          "abstain": {
+            "hits": 20,
+            "of": 195,
+            "rate": 0.10256410256410256,
+            "low": 0.06737985828491119,
+            "high": 0.153104637658303
+          },
+          "decided_balanced_accuracy": 0.9842105263157894,
+          "passes_default_rule": false
+        }
+      ]
+    },
+    {
+      "name": "origin=role-os-ce91be8",
+      "rows": [
+        {
+          "check_type": "grounded",
+          "n": 43,
+          "supported_n": 20,
+          "unsupported_n": 20,
+          "cannot_tell_n": 3,
+          "missing": 0,
+          "false_accept": {
+            "hits": 1,
+            "of": 23,
+            "rate": 0.043478260869565216,
+            "low": 0.007716666143453149,
+            "high": 0.20991155070258877
+          },
+          "false_accept_unsupported_only": {
+            "hits": 1,
+            "of": 20,
+            "rate": 0.05,
+            "low": 0.008881448800795402,
+            "high": 0.23613119344674205
+          },
+          "subtle_false_accept": {
+            "hits": 1,
+            "of": 20,
+            "rate": 0.05,
+            "low": 0.008881448800795402,
+            "high": 0.23613119344674205
+          },
+          "cannot_tell_gold": {
+            "n": 3,
+            "false_accept": {
+              "hits": 0,
+              "of": 3,
+              "rate": 0.0,
+              "low": 0.0,
+              "high": 0.5614970317550454
+            },
+            "said_cannot_tell": {
+              "hits": 0,
+              "of": 3,
+              "rate": 0.0,
+              "low": 0.0,
+              "high": 0.5614970317550454
+            },
+            "said_unsupported": 3
+          },
+          "abstain": {
+            "hits": 0,
+            "of": 40,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.08762160119728664
+          },
+          "decided_balanced_accuracy": 0.9532608695652174,
+          "passes_default_rule": false
+        }
+      ]
+    },
+    {
+      "name": "self_referential=false",
+      "rows": [
+        {
+          "check_type": "grounded",
+          "n": 173,
+          "supported_n": 82,
+          "unsupported_n": 83,
+          "cannot_tell_n": 8,
+          "missing": 0,
+          "false_accept": {
+            "hits": 3,
+            "of": 91,
+            "rate": 0.03296703296703297,
+            "low": 0.011274406767682599,
+            "high": 0.0924930694296231
+          },
+          "false_accept_unsupported_only": {
+            "hits": 3,
+            "of": 83,
+            "rate": 0.03614457831325301,
+            "low": 0.012367803271745428,
+            "high": 0.10095892976960381
+          },
+          "subtle_false_accept": {
+            "hits": 3,
+            "of": 83,
+            "rate": 0.03614457831325301,
+            "low": 0.012367803271745428,
+            "high": 0.10095892976960381
+          },
+          "cannot_tell_gold": {
+            "n": 8,
+            "false_accept": {
+              "hits": 0,
+              "of": 8,
+              "rate": 0.0,
+              "low": 0.0,
+              "high": 0.32440756488388023
+            },
+            "said_cannot_tell": {
+              "hits": 6,
+              "of": 8,
+              "rate": 0.75,
+              "low": 0.40927543031016883,
+              "high": 0.9285207872478909
+            },
+            "said_unsupported": 2
+          },
+          "abstain": {
+            "hits": 19,
+            "of": 165,
+            "rate": 0.11515151515151516,
+            "low": 0.07496989055327956,
+            "high": 0.17284518468324056
+          },
+          "decided_balanced_accuracy": 0.98125,
+          "passes_default_rule": false
+        }
+      ]
+    },
+    {
+      "name": "self_referential=true",
+      "rows": [
+        {
+          "check_type": "grounded",
+          "n": 32,
+          "supported_n": 15,
+          "unsupported_n": 15,
+          "cannot_tell_n": 2,
+          "missing": 0,
+          "false_accept": {
+            "hits": 0,
+            "of": 17,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.1843181350088518
+          },
+          "false_accept_unsupported_only": {
+            "hits": 0,
+            "of": 15,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.20388330103584862
+          },
+          "subtle_false_accept": {
+            "hits": 0,
+            "of": 15,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.20388330103584862
+          },
+          "cannot_tell_gold": {
+            "n": 2,
+            "false_accept": {
+              "hits": 0,
+              "of": 2,
+              "rate": 0.0,
+              "low": 0.0,
+              "high": 0.6576197724933469
+            },
+            "said_cannot_tell": {
+              "hits": 2,
+              "of": 2,
+              "rate": 1.0,
+              "low": 0.34238022750665303,
+              "high": 1.0
+            },
+            "said_unsupported": 0
+          },
+          "abstain": {
+            "hits": 1,
+            "of": 30,
+            "rate": 0.03333333333333333,
+            "low": 0.005908590381612455,
+            "high": 0.16670390991409173
+          },
+          "decided_balanced_accuracy": 1.0,
+          "passes_default_rule": false
+        }
+      ]
+    }
+  ],
+  "cost": {
+    "gpu_cost_hr": 0.0,
+    "wall_seconds": 858.8846841999998,
+    "claims_attempted": 270,
+    "total_usd": 0.0,
+    "per_claim_usd": 0.0,
+    "note": "gpu_cost_hr x wall seconds / 3600; boot and model pull time are not included and are the caller's to add"
+  },
+  "rule": [
+    {
+      "check_type": "grounded",
+      "counts": true,
+      "criteria": [
+        {
+          "name": "every claim answered",
+          "value": "missing 0",
+          "threshold": "0",
+          "pass": true
+        },
+        {
+          "name": "gold unsupported claims",
+          "value": "128",
+          "threshold": ">= 100",
+          "pass": true
+        },
+        {
+          "name": "false-accept upper bound (primary)",
+          "value": "0.0697",
+          "threshold": "< 0.1",
+          "pass": true
+        },
+        {
+          "name": "abstain rate",
+          "value": "0.0863",
+          "threshold": "<= 0.2",
+          "pass": true
+        },
+        {
+          "name": "balanced accuracy on decided",
+          "value": "0.9798",
+          "threshold": ">= 0.8",
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "check_type": "reasoning",
+      "counts": true,
+      "criteria": [],
+      "pass": false
+    },
+    {
+      "check_type": "knowledge",
+      "counts": false,
+      "criteria": [],
+      "pass": false
+    }
+  ],
+  "passes_default": false,
+  "status": "complete",
+  "pending": 0,
+  "hint": null,
+  "default_result": "fail",
+  "rule_note": "model-caused unusable outcomes (bad_verdict, truncated, repeated timeout, repeated server error or dropped reply) count as missing answers and fail the rule; a fail can come from those, not only from false accepts. context_overflow outcomes are offrig's sizing failure, not the model's: they are not counted against it and leave the run incomplete",
+  "context_overflow": 0,
+  "ctx": {
+    "mode": "fixed",
+    "num_ctx": 16384,
+    "method": "fixed",
+    "model_max_context": null,
+    "max_prompt_tokens": null,
+    "estimated_max_prompt_tokens": 2655,
+    "margin_tokens": null,
+    "measured": [],
+    "notes": [],
+    "offloaded": false,
+    "vram_fraction": 1.0,
+    "probe_num_ctx": null,
+    "reloaded_after_measurement": false
+  }
+}

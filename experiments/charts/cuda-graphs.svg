@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 366" width="1140" height="366" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="1140" height="366" fill="#ffffff"/>
+<text x="24.0" y="34.0" font-size="17" fill="#1f2430" text-anchor="start" font-weight="600">CUDA graphs on aspire-si critic heads: training speed-up (RTX 5090)</text>
+<text x="24.0" y="54.0" font-size="11.5" fill="#5b6272" text-anchor="start" font-weight="400">Median of seeds 42–44; 2.16.0.dev20261008+cu134. Speed-up = original time / graphed time. All five keep their outcome.</text>
+<line x1="380.0" y1="96.0" x2="380.0" y2="246.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="380.0" y="261.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">1×</text>
+<line x1="496.5" y1="96.0" x2="496.5" y2="246.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="496.5" y="261.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">2×</text>
+<line x1="650.5" y1="96.0" x2="650.5" y2="246.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="650.5" y="261.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">5×</text>
+<line x1="767.0" y1="96.0" x2="767.0" y2="246.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="767.0" y="261.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">10×</text>
+<line x1="883.5" y1="96.0" x2="883.5" y2="246.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="883.5" y="261.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">20×</text>
+<line x1="1000.0" y1="96.0" x2="1000.0" y2="246.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="1000.0" y="261.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">40×</text>
+<rect x="24.0" y="96.0" width="1086.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="110.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">auditor:mean</text>
+<text x="28.0" y="122.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">train, graphed vs original</text>
+<line x1="380.0" y1="111.0" x2="712.9" y2="111.0" stroke="#7c3aed" stroke-width="2.0"/>
+<circle cx="712.9" cy="111.0" r="4.5" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="722.9" y="115.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">7.2×</text>
+<text x="28.0" y="140.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">auditor:attention</text>
+<text x="28.0" y="152.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">train, graphed vs original</text>
+<line x1="380.0" y1="141.0" x2="923.7" y2="141.0" stroke="#7c3aed" stroke-width="2.0"/>
+<circle cx="923.7" cy="141.0" r="4.5" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="933.7" y="145.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">25.4×</text>
+<rect x="24.0" y="156.0" width="1086.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="170.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">advocate:mean</text>
+<text x="28.0" y="182.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">train, graphed vs original</text>
+<line x1="380.0" y1="171.0" x2="714.2" y2="171.0" stroke="#7c3aed" stroke-width="2.0"/>
+<circle cx="714.2" cy="171.0" r="4.5" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="724.2" y="175.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">7.3× · exact check failed (optimizer, see caveat)</text>
+<text x="28.0" y="200.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">advocate:span</text>
+<text x="28.0" y="212.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">train, graphed vs original</text>
+<line x1="380.0" y1="201.0" x2="711.8" y2="201.0" stroke="#7c3aed" stroke-width="2.0"/>
+<circle cx="711.8" cy="201.0" r="4.5" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="721.8" y="205.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">7.2×</text>
+<rect x="24.0" y="216.0" width="1086.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="230.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">auditor:mid</text>
+<text x="28.0" y="242.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">train, graphed vs original</text>
+<line x1="380.0" y1="231.0" x2="722.4" y2="231.0" stroke="#7c3aed" stroke-width="2.0"/>
+<circle cx="722.4" cy="231.0" r="4.5" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="732.4" y="235.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">7.7×</text>
+<text x="24.0" y="337.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">advocate:mean&#x27;s exact-match failure comes from the optimizer the graph needs (capturable AdamW); eager with the same optimizer matches exactly (diagnostic not yet committed).</text>
+<text x="24.0" y="352.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Source: mcp-tool-shop-org/rnd experiments/cuda-graphs/results/2026-10-08-llama.json. Inputs pinned in experiments/charts/manifest.json.</text>
+</svg>

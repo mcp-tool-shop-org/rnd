@@ -1,0 +1,474 @@
+{
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "ollama_version": "0.35.1",
+  "settings": {
+    "model": "qwen3:8b",
+    "url": "http://127.0.0.1:11434",
+    "think": "off",
+    "structured": "on",
+    "split": "tune",
+    "check_type": "reasoning",
+    "limit": null,
+    "swap_evidence": false,
+    "seed": 0,
+    "temperature": 0.0,
+    "shift": false,
+    "truncate": false,
+    "num_ctx_mode": "fixed",
+    "num_ctx": 16384,
+    "num_predict": 4096,
+    "quote_rule": 2
+  },
+  "claims_selected": 223,
+  "claims_attempted": 223,
+  "unusable": {
+    "reasoning": 1
+  },
+  "rows": [
+    {
+      "check_type": "reasoning",
+      "n": 222,
+      "supported_n": 101,
+      "unsupported_n": 102,
+      "cannot_tell_n": 19,
+      "missing": 1,
+      "false_accept": {
+        "hits": 37,
+        "of": 121,
+        "rate": 0.30578512396694213,
+        "low": 0.23071968313049535,
+        "high": 0.39280281937802924
+      },
+      "false_accept_unsupported_only": {
+        "hits": 29,
+        "of": 102,
+        "rate": 0.28431372549019607,
+        "low": 0.2058490839451994,
+        "high": 0.37843480168660815
+      },
+      "subtle_false_accept": {
+        "hits": 29,
+        "of": 102,
+        "rate": 0.28431372549019607,
+        "low": 0.2058490839451994,
+        "high": 0.37843480168660815
+      },
+      "cannot_tell_gold": {
+        "n": 19,
+        "false_accept": {
+          "hits": 8,
+          "of": 19,
+          "rate": 0.42105263157894735,
+          "low": 0.23141891282454238,
+          "high": 0.6372409646574496
+        },
+        "said_cannot_tell": {
+          "hits": 7,
+          "of": 19,
+          "rate": 0.3684210526315789,
+          "low": 0.19149512745135072,
+          "high": 0.5896046683519693
+        },
+        "said_unsupported": 4
+      },
+      "abstain": {
+        "hits": 51,
+        "of": 203,
+        "rate": 0.2512315270935961,
+        "low": 0.1965641962014924,
+        "high": 0.3151391123332126
+      },
+      "decided_balanced_accuracy": 0.741901776384535,
+      "passes_default_rule": false
+    }
+  ],
+  "strata": [
+    {
+      "name": "has_doc_comment=false",
+      "rows": [
+        {
+          "check_type": "reasoning",
+          "n": 126,
+          "supported_n": 55,
+          "unsupported_n": 56,
+          "cannot_tell_n": 15,
+          "missing": 1,
+          "false_accept": {
+            "hits": 27,
+            "of": 71,
+            "rate": 0.38028169014084506,
+            "low": 0.2762717345193544,
+            "high": 0.4965814371334222
+          },
+          "false_accept_unsupported_only": {
+            "hits": 21,
+            "of": 56,
+            "rate": 0.375,
+            "low": 0.260102143264709,
+            "high": 0.5059463409149819
+          },
+          "subtle_false_accept": {
+            "hits": 21,
+            "of": 56,
+            "rate": 0.375,
+            "low": 0.260102143264709,
+            "high": 0.5059463409149819
+          },
+          "cannot_tell_gold": {
+            "n": 15,
+            "false_accept": {
+              "hits": 6,
+              "of": 15,
+              "rate": 0.4,
+              "low": 0.1982449614134158,
+              "high": 0.6425316987937539
+            },
+            "said_cannot_tell": {
+              "hits": 6,
+              "of": 15,
+              "rate": 0.4,
+              "low": 0.1982449614134158,
+              "high": 0.6425316987937539
+            },
+            "said_unsupported": 3
+          },
+          "abstain": {
+            "hits": 21,
+            "of": 111,
+            "rate": 0.1891891891891892,
+            "low": 0.12720335871894975,
+            "high": 0.27196832798234827
+          },
+          "decided_balanced_accuracy": 0.7166666666666667,
+          "passes_default_rule": false
+        }
+      ]
+    },
+    {
+      "name": "has_doc_comment=true",
+      "rows": [
+        {
+          "check_type": "reasoning",
+          "n": 96,
+          "supported_n": 46,
+          "unsupported_n": 46,
+          "cannot_tell_n": 4,
+          "missing": 0,
+          "false_accept": {
+            "hits": 10,
+            "of": 50,
+            "rate": 0.2,
+            "low": 0.1124375001577611,
+            "high": 0.3303710593222542
+          },
+          "false_accept_unsupported_only": {
+            "hits": 8,
+            "of": 46,
+            "rate": 0.17391304347826086,
+            "low": 0.09085791702246311,
+            "high": 0.30723353716378493
+          },
+          "subtle_false_accept": {
+            "hits": 8,
+            "of": 46,
+            "rate": 0.17391304347826086,
+            "low": 0.09085791702246311,
+            "high": 0.30723353716378493
+          },
+          "cannot_tell_gold": {
+            "n": 4,
+            "false_accept": {
+              "hits": 2,
+              "of": 4,
+              "rate": 0.5,
+              "low": 0.15003898915214947,
+              "high": 0.8499610108478506
+            },
+            "said_cannot_tell": {
+              "hits": 1,
+              "of": 4,
+              "rate": 0.25,
+              "low": 0.04558726080970055,
+              "high": 0.6993581574175981
+            },
+            "said_unsupported": 1
+          },
+          "abstain": {
+            "hits": 30,
+            "of": 92,
+            "rate": 0.32608695652173914,
+            "low": 0.23894787729606798,
+            "high": 0.42716738854240904
+          },
+          "decided_balanced_accuracy": 0.7859848484848485,
+          "passes_default_rule": false
+        }
+      ]
+    },
+    {
+      "name": "origin=diffs-2026-10",
+      "rows": [
+        {
+          "check_type": "reasoning",
+          "n": 91,
+          "supported_n": 40,
+          "unsupported_n": 41,
+          "cannot_tell_n": 10,
+          "missing": 0,
+          "false_accept": {
+            "hits": 15,
+            "of": 51,
+            "rate": 0.29411764705882354,
+            "low": 0.1870872642013547,
+            "high": 0.4299907557568642
+          },
+          "false_accept_unsupported_only": {
+            "hits": 13,
+            "of": 41,
+            "rate": 0.3170731707317073,
+            "low": 0.19564613898988575,
+            "high": 0.4698419964434429
+          },
+          "subtle_false_accept": {
+            "hits": 13,
+            "of": 41,
+            "rate": 0.3170731707317073,
+            "low": 0.19564613898988575,
+            "high": 0.4698419964434429
+          },
+          "cannot_tell_gold": {
+            "n": 10,
+            "false_accept": {
+              "hits": 2,
+              "of": 10,
+              "rate": 0.2,
+              "low": 0.05668215145437519,
+              "high": 0.5098375284633583
+            },
+            "said_cannot_tell": {
+              "hits": 5,
+              "of": 10,
+              "rate": 0.5,
+              "low": 0.236593090512564,
+              "high": 0.7634069094874361
+            },
+            "said_unsupported": 3
+          },
+          "abstain": {
+            "hits": 17,
+            "of": 81,
+            "rate": 0.20987654320987653,
+            "low": 0.13537173606133143,
+            "high": 0.3106538196834032
+          },
+          "decided_balanced_accuracy": 0.7916666666666667,
+          "passes_default_rule": false
+        }
+      ]
+    },
+    {
+      "name": "origin=diffs-2026-10-b2",
+      "rows": [
+        {
+          "check_type": "reasoning",
+          "n": 110,
+          "supported_n": 52,
+          "unsupported_n": 52,
+          "cannot_tell_n": 6,
+          "missing": 1,
+          "false_accept": {
+            "hits": 18,
+            "of": 58,
+            "rate": 0.3103448275862069,
+            "low": 0.2062209562281909,
+            "high": 0.4380306442428171
+          },
+          "false_accept_unsupported_only": {
+            "hits": 14,
+            "of": 52,
+            "rate": 0.2692307692307692,
+            "low": 0.16768960295166516,
+            "high": 0.40252219833627134
+          },
+          "subtle_false_accept": {
+            "hits": 14,
+            "of": 52,
+            "rate": 0.2692307692307692,
+            "low": 0.16768960295166516,
+            "high": 0.40252219833627134
+          },
+          "cannot_tell_gold": {
+            "n": 6,
+            "false_accept": {
+              "hits": 4,
+              "of": 6,
+              "rate": 0.6666666666666666,
+              "low": 0.299993315138392,
+              "high": 0.9032285888942195
+            },
+            "said_cannot_tell": {
+              "hits": 1,
+              "of": 6,
+              "rate": 0.16666666666666666,
+              "low": 0.030053369748306635,
+              "high": 0.5635028221864702
+            },
+            "said_unsupported": 1
+          },
+          "abstain": {
+            "hits": 26,
+            "of": 104,
+            "rate": 0.25,
+            "low": 0.176696403553832,
+            "high": 0.341114273632394
+          },
+          "decided_balanced_accuracy": 0.7210526315789474,
+          "passes_default_rule": false
+        }
+      ]
+    },
+    {
+      "name": "origin=diffs-2026-10-hard",
+      "rows": [
+        {
+          "check_type": "reasoning",
+          "n": 21,
+          "supported_n": 9,
+          "unsupported_n": 9,
+          "cannot_tell_n": 3,
+          "missing": 0,
+          "false_accept": {
+            "hits": 4,
+            "of": 12,
+            "rate": 0.3333333333333333,
+            "low": 0.13812009109121315,
+            "high": 0.6093779111272004
+          },
+          "false_accept_unsupported_only": {
+            "hits": 2,
+            "of": 9,
+            "rate": 0.2222222222222222,
+            "low": 0.06322510711784671,
+            "high": 0.5474110308930111
+          },
+          "subtle_false_accept": {
+            "hits": 2,
+            "of": 9,
+            "rate": 0.2222222222222222,
+            "low": 0.06322510711784671,
+            "high": 0.5474110308930111
+          },
+          "cannot_tell_gold": {
+            "n": 3,
+            "false_accept": {
+              "hits": 2,
+              "of": 3,
+              "rate": 0.6666666666666666,
+              "low": 0.2076596008020477,
+              "high": 0.9385080552796037
+            },
+            "said_cannot_tell": {
+              "hits": 1,
+              "of": 3,
+              "rate": 0.3333333333333333,
+              "low": 0.06149194472039621,
+              "high": 0.7923403991979522
+            },
+            "said_unsupported": 0
+          },
+          "abstain": {
+            "hits": 8,
+            "of": 18,
+            "rate": 0.4444444444444444,
+            "low": 0.24559518127005633,
+            "high": 0.6628358435795723
+          },
+          "decided_balanced_accuracy": 0.5833333333333334,
+          "passes_default_rule": false
+        }
+      ]
+    }
+  ],
+  "cost": {
+    "gpu_cost_hr": 0.0,
+    "wall_seconds": 192.53743380000003,
+    "claims_attempted": 223,
+    "total_usd": 0.0,
+    "per_claim_usd": 0.0,
+    "note": "gpu_cost_hr x wall seconds / 3600; boot and model pull time are not included and are the caller's to add"
+  },
+  "rule": [
+    {
+      "check_type": "grounded",
+      "counts": true,
+      "criteria": [],
+      "pass": false
+    },
+    {
+      "check_type": "reasoning",
+      "counts": true,
+      "criteria": [
+        {
+          "name": "every claim answered",
+          "value": "missing 1",
+          "threshold": "0",
+          "pass": false
+        },
+        {
+          "name": "gold unsupported claims",
+          "value": "102",
+          "threshold": ">= 100",
+          "pass": true
+        },
+        {
+          "name": "false-accept upper bound (primary)",
+          "value": "0.3928",
+          "threshold": "< 0.1",
+          "pass": false
+        },
+        {
+          "name": "abstain rate",
+          "value": "0.2512",
+          "threshold": "<= 0.2",
+          "pass": false
+        },
+        {
+          "name": "balanced accuracy on decided",
+          "value": "0.7419",
+          "threshold": ">= 0.8",
+          "pass": false
+        }
+      ],
+      "pass": false
+    },
+    {
+      "check_type": "knowledge",
+      "counts": false,
+      "criteria": [],
+      "pass": false
+    }
+  ],
+  "passes_default": false,
+  "status": "complete",
+  "pending": 0,
+  "hint": null,
+  "default_result": "fail",
+  "rule_note": "model-caused unusable outcomes (bad_verdict, truncated, repeated timeout, repeated server error or dropped reply) count as missing answers and fail the rule; a fail can come from those, not only from false accepts. context_overflow outcomes are offrig's sizing failure, not the model's: they are not counted against it and leave the run incomplete",
+  "context_overflow": 0,
+  "ctx": {
+    "mode": "fixed",
+    "num_ctx": 16384,
+    "method": "fixed",
+    "model_max_context": null,
+    "max_prompt_tokens": null,
+    "estimated_max_prompt_tokens": 5554,
+    "margin_tokens": null,
+    "measured": [],
+    "notes": [],
+    "offloaded": false,
+    "vram_fraction": 1.0,
+    "probe_num_ctx": null,
+    "reloaded_after_measurement": false
+  }
+}

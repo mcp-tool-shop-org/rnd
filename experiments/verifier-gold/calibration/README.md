@@ -454,3 +454,78 @@ The post-hoc thinking-level runs named in the 04:20 amendment, under their own g
   Per the Publisher's terms, the chain stopped and was reported before any change. Completeness is now
   run_model.sh's exit code plus `status == "complete"`, and a missing or unreadable metrics.json fails closed.
   This fixes the check only; no setting changed. Step 1's result stands as recorded and is not re-run.
+
+## Result, 2026-10-09: thinking off (post hoc), tune
+
+Run 20:06–21:41 under the Publisher's grant, offrig 9b6527f (sha256 re-hashed and matching), think off, num_ctx
+16384. Receipts: `results/2026-10-09-thinking-off/`, with each run's manifest, metrics and verdicts and the step
+logs. Two run notes:
+
+- **Step 1's exit 3 was a false INCOMPLETE** (see the run note above).
+- **gemma's grounded run left one claim with no outcome.** `cal-dedupe-t` had no verdict row and no error. It
+  was finished under a separate short grant with offrig's resume (the registered path), and it answered
+  correctly (supported). The no-outcome didn't recur, so no offrig defect is filed. "The first request raced
+  the 31B load" remains a guess.
+
+**offrig's default rule (final verdict):**
+
+| model, think off | type | FA upper (< 0.10) | abstain (≤ 0.20) | decided BA (≥ 0.80) | missing | rule |
+|---|---|---|---|---|---|---|
+| qwen3:8b | grounded | 0.380 (43/143) | 0.275 | 0.785 | 0 | FAIL |
+| | reasoning | 0.393 (37/121) | 0.251 | 0.742 | 1 | FAIL |
+| qwen3:14b | grounded | 0.314 (34/143) | 0.141 | 0.859 | 0 | FAIL |
+| | reasoning | 0.401 (38/121) | 0.157 | 0.786 | 0 | FAIL |
+| gemma4:31b | grounded | **0.0697 (4/143)** | **0.086** | **0.980** | **0** | **PASS (post hoc)** |
+| | reasoning | 0.115 (7/121) | 0.044 | 0.967 | 0 | FAIL |
+
+**The pre-registered primary comparison: the model's own verdict, on vs off, on identical tune claims**
+(`thinking-off-vs-on.svg`). "on" is the chain for the qwens and the rerun for gemma.
+
+| model | type | FA on → off | FR on → off | median s/claim on → off | median eval tokens on → off |
+|---|---|---|---|---|---|
+| qwen3:8b | grounded | 12/127 → 56/128 | 3/126 → 3/127 | 1.77 → 0.56 | 356 → 111 |
+| | reasoning | 12/102 → 42/102 | 3/101 → 10/101 | 2.42 → 0.73 | 463 → 125 |
+| qwen3:14b | grounded | 6/128 → 39/128 | 1/127 → 1/127 | 2.65 → 0.98 | 337 → 124 |
+| | reasoning | 16/102 → 37/102 | 5/102 → 8/102 | 3.27 → 1.12 | 394 → 128 |
+| gemma4:31b | grounded | 0/128 → 4/128 | 2/127 → 1/127 | 9.70 → 2.91 | 517 → 140 |
+| | reasoning | 2/102 → 6/102 | 1/102 → 0/102 | 11.44 → 4.36 | 576 → 174 |
+
+**Reading it (each against the outcomes named before the run):**
+
+- **Off was honoured** for every model: a median of 111–174 eval tokens, and no thinking text came back.
+- **The qwens: "off with more false accepts".** Thinking is doing verifier work for them. Off accepts 3–6× more
+  false claims, so keep thinking on and size the budget instead.
+- **gemma4:31b: "off at about the same accuracy and false accepts, and faster".** It is 3.3× faster per claim,
+  with a few more false accepts: 4 of 128 against 0 on grounded, and 6 against 2 on reasoning.
+  - On grounded, off **passes** the rule, where on failed only on its one thinking loop.
+  - On reasoning, off fails: an FA upper bound of 0.115 against on's 0.070 pass.
+- **Model and thinking interact.** The bigger model loses much less without thinking. That's the evidence for a
+  cascade (2026-10-09 study-swarm entry): a strong model run cheaply first, escalating only where needed.
+- **What this does and doesn't establish:**
+  - The grounded pass is selected post hoc. It names nothing until a fresh grounded held-out run confirms it
+    (pre-registered below).
+  - If confirmed, the defaults split by check type: reasoning = gemma think on (contract v2, its own settings
+    line), grounded = gemma think off (its own settings line). Neither implies the other.
+  - Neither is a teacher choice. The teacher bar is a separate test; 0.0697 sitting just under 0.07 is not a
+    teacher result.
+
+## Pre-registration, 2026-10-09 21:50, before any run: gemma4:31b think off, grounded held-out
+
+- **What:** one run, `CAL_TYPES=grounded`, split `heldout`, gemma4:31b think off, structured on, temperature 0,
+  seed 0.
+- **Settings:** num_predict 12288, num_ctx 16384 fixed, quote rule 2 (in the binary).
+- **Binary:** offrig 9b6527f, re-hashed before the run (sha256 `AD3CED56…0E73`, above).
+- **Grounded's held-out split is unspent.** Nothing has passed grounded tune before, so this is its first look.
+- **Rule:** offrig's default rule, unchanged. A pass names gemma4:31b think off as offrig's default verifier
+  **for grounded only**, at exactly these settings. The Publisher wires defaults.
+- **A fail names nothing.** Grounded keeps no default, the tune split stays spent for selection, and no further
+  think-off tuning is chosen on it. Grounded's next look is the contract v3 calibration, on a fresh sealed
+  split.
+- **Incomplete runs:** one offrig resume is allowed for claims with no outcome (the registered path). A second
+  no-outcome stops the run, and it's reported as an offrig defect.
+- **Report:** the same columns as the reasoning headline (FA upper, FA on unsupported only, cannot_tell FA,
+  abstain, BA, missing), plus seconds per claim. Any claim where prompt + reply reaches 16,384 is flagged.
+- **Run line (fixed now; a separate grant from the Publisher; after the E1 re-run):**
+  `CAL_EXTRA="--num-predict 12288 --num-ctx 16384" CAL_TYPES=grounded bash chain_step.sh /e/AI/rnd-calibrate-off gemma4:31b off on 900 heldout`
+
+Promoted: not yet. The readouts-internal model-knowledge wave waits on the uncommitted 2026-09-29 edits in the readouts clone being settled (asked of the Director, 2026-10-09).

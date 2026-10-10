@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 442" width="1140" height="442" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="1140" height="442" fill="#ffffff"/>
+<text x="24.0" y="34.0" font-size="17" fill="#1f2430" text-anchor="start" font-weight="600">Verifier calibration, verify:grounded, tune split (2026-10-09)</text>
+<text x="24.0" y="54.0" font-size="11.5" fill="#5b6272" text-anchor="start" font-weight="400">offrig&#x27;s default rule, per model. Two calibrations, drawn as separate series: filled = the six-model chain, hollow = the gemma rerun. They are never joined.</text>
+<rect x="361.7" y="92.0" width="158.3" height="210.0" fill="#fdf0f0" stroke="none"/>
+<line x1="330.0" y1="92.0" x2="330.0" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="330.0" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0</text>
+<line x1="361.7" y1="92.0" x2="361.7" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="361.7" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.1</text>
+<line x1="393.3" y1="92.0" x2="393.3" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="393.3" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.2</text>
+<line x1="456.7" y1="92.0" x2="456.7" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="456.7" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.4</text>
+<line x1="520.0" y1="92.0" x2="520.0" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="520.0" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.6</text>
+<text x="425.0" y="82.0" font-size="11.5" fill="#1f2430" text-anchor="middle" font-weight="600">false accepts (Wilson 95%)</text>
+<line x1="361.7" y1="92.0" x2="361.7" y2="302.0" stroke="#b91c1c" stroke-width="1.4" stroke-dasharray="5,3"/>
+<text x="361.7" y="330.0" font-size="10" fill="#b91c1c" text-anchor="middle" font-weight="400">rule: upper &lt; 0.10</text>
+<rect x="636.0" y="92.0" width="114.0" height="210.0" fill="#fdf0f0" stroke="none"/>
+<line x1="560.0" y1="92.0" x2="560.0" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="560.0" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0</text>
+<line x1="598.0" y1="92.0" x2="598.0" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="598.0" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.1</text>
+<line x1="636.0" y1="92.0" x2="636.0" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="636.0" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.2</text>
+<line x1="674.0" y1="92.0" x2="674.0" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="674.0" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.3</text>
+<line x1="712.0" y1="92.0" x2="712.0" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="712.0" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.4</text>
+<line x1="750.0" y1="92.0" x2="750.0" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="750.0" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.5</text>
+<text x="655.0" y="82.0" font-size="11.5" fill="#1f2430" text-anchor="middle" font-weight="600">abstain (Wilson 95%)</text>
+<line x1="636.0" y1="92.0" x2="636.0" y2="302.0" stroke="#b91c1c" stroke-width="1.4" stroke-dasharray="5,3"/>
+<text x="636.0" y="330.0" font-size="10" fill="#b91c1c" text-anchor="middle" font-weight="400">rule: ≤ 0.20</text>
+<rect x="790.0" y="92.0" width="108.0" height="210.0" fill="#fdf0f0" stroke="none"/>
+<line x1="790.0" y1="92.0" x2="790.0" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="790.0" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.5</text>
+<line x1="826.0" y1="92.0" x2="826.0" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="826.0" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.6</text>
+<line x1="862.0" y1="92.0" x2="862.0" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="862.0" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.7</text>
+<line x1="898.0" y1="92.0" x2="898.0" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="898.0" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.8</text>
+<line x1="934.0" y1="92.0" x2="934.0" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="934.0" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.9</text>
+<line x1="970.0" y1="92.0" x2="970.0" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="970.0" y="317.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">1</text>
+<text x="880.0" y="82.0" font-size="11.5" fill="#1f2430" text-anchor="middle" font-weight="600">decided balanced accuracy</text>
+<line x1="898.0" y1="92.0" x2="898.0" y2="302.0" stroke="#b91c1c" stroke-width="1.4" stroke-dasharray="5,3"/>
+<text x="898.0" y="330.0" font-size="10" fill="#b91c1c" text-anchor="middle" font-weight="400">rule: ≥ 0.80</text>
+<text x="986.0" y="82.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">missing</text>
+<text x="1052.0" y="82.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">rule</text>
+<rect x="24.0" y="92.0" width="1096.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="106.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">llama3.1:8b (think off)</text>
+<text x="28.0" y="118.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">Meta Llama · digest 46e0c10c039e · chain</text>
+<line x1="455.2" y1="107.0" x2="506.4" y2="107.0" stroke="#c2410c" stroke-width="2.2"/>
+<circle cx="480.6" cy="107.0" r="4.5" fill="#c2410c" stroke="#c2410c" stroke-width="1.6"/>
+<line x1="649.0" y1="107.0" x2="690.9" y2="107.0" stroke="#c2410c" stroke-width="2.2"/>
+<circle cx="668.8" cy="107.0" r="4.5" fill="#c2410c" stroke="#c2410c" stroke-width="1.6"/>
+<text x="512.4" y="111.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">0.557</text>
+<polygon points="836.8468667255075,101.5 842.3468667255075,107.0 836.8468667255075,112.5 831.3468667255075,107.0" fill="#c2410c" stroke="#c2410c" stroke-width="1.6"/>
+<text x="1000.0" y="111.0" font-size="12" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<text x="1052.0" y="111.0" font-size="11.5" fill="#b91c1c" text-anchor="start" font-weight="600">fail</text>
+<text x="28.0" y="136.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">qwen3:8b (think on)</text>
+<text x="28.0" y="148.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">Qwen · digest 500a1f067a9f · chain</text>
+<line x1="342.3" y1="137.0" x2="369.5" y2="137.0" stroke="#2563eb" stroke-width="2.2"/>
+<circle cx="352.3" cy="137.0" r="4.5" fill="#2563eb" stroke="#2563eb" stroke-width="1.6"/>
+<line x1="675.2" y1="137.0" x2="719.8" y2="137.0" stroke="#2563eb" stroke-width="2.2"/>
+<circle cx="696.7" cy="137.0" r="4.5" fill="#2563eb" stroke="#2563eb" stroke-width="1.6"/>
+<text x="375.5" y="141.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">0.125</text>
+<polygon points="944.5725840189652,131.5 950.0725840189652,137.0 944.5725840189652,142.5 939.0725840189652,137.0" fill="#2563eb" stroke="#2563eb" stroke-width="1.6"/>
+<text x="1000.0" y="141.0" font-size="12" fill="#b91c1c" text-anchor="middle" font-weight="600">2</text>
+<text x="1052.0" y="141.0" font-size="11.5" fill="#b91c1c" text-anchor="start" font-weight="600">fail</text>
+<rect x="24.0" y="152.0" width="1096.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="166.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">qwen3:14b (think on)</text>
+<text x="28.0" y="178.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">Qwen · digest bdbd181c33f2 · chain</text>
+<line x1="336.1" y1="167.0" x2="358.0" y2="167.0" stroke="#1e3a8a" stroke-width="2.2"/>
+<circle cx="343.3" cy="167.0" r="4.5" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="1.6"/>
+<line x1="639.4" y1="167.0" x2="680.0" y2="167.0" stroke="#1e3a8a" stroke-width="2.2"/>
+<circle cx="658.4" cy="167.0" r="4.5" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="1.6"/>
+<text x="364.0" y="171.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">0.089</text>
+<polygon points="958.264119601329,161.5 963.764119601329,167.0 958.264119601329,172.5 952.764119601329,167.0" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="1.6"/>
+<text x="1000.0" y="171.0" font-size="12" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<text x="1052.0" y="171.0" font-size="11.5" fill="#b91c1c" text-anchor="start" font-weight="600">fail</text>
+<text x="28.0" y="196.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">mistral-small:24b (think off)</text>
+<text x="28.0" y="208.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">Mistral · digest 8039dd90c113 · chain</text>
+<line x1="370.3" y1="197.0" x2="410.1" y2="197.0" stroke="#b45309" stroke-width="2.2"/>
+<circle cx="387.6" cy="197.0" r="4.5" fill="#b45309" stroke="#b45309" stroke-width="1.6"/>
+<line x1="634.2" y1="197.0" x2="674.2" y2="197.0" stroke="#b45309" stroke-width="2.2"/>
+<circle cx="652.8" cy="197.0" r="4.5" fill="#b45309" stroke="#b45309" stroke-width="1.6"/>
+<text x="416.1" y="201.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">0.253</text>
+<polygon points="909.3770764119602,191.5 914.8770764119602,197.0 909.3770764119602,202.5 903.8770764119602,197.0" fill="#b45309" stroke="#b45309" stroke-width="1.6"/>
+<text x="1000.0" y="201.0" font-size="12" fill="#b91c1c" text-anchor="middle" font-weight="600">1</text>
+<text x="1052.0" y="201.0" font-size="11.5" fill="#b91c1c" text-anchor="start" font-weight="600">fail</text>
+<rect x="24.0" y="212.0" width="1096.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="226.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">granite4.1:30b (think off)</text>
+<text x="28.0" y="238.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">IBM Granite · digest 3f3e5df8a021 · chain</text>
+<line x1="372.2" y1="227.0" x2="412.6" y2="227.0" stroke="#4d7c0f" stroke-width="2.2"/>
+<circle cx="389.8" cy="227.0" r="4.5" fill="#4d7c0f" stroke="#4d7c0f" stroke-width="1.6"/>
+<line x1="689.0" y1="227.0" x2="734.4" y2="227.0" stroke="#4d7c0f" stroke-width="2.2"/>
+<circle cx="711.1" cy="227.0" r="4.5" fill="#4d7c0f" stroke="#4d7c0f" stroke-width="1.6"/>
+<text x="418.6" y="231.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">0.261</text>
+<polygon points="916.0,221.5 921.5,227.0 916.0,232.5 910.5,227.0" fill="#4d7c0f" stroke="#4d7c0f" stroke-width="1.6"/>
+<text x="1000.0" y="231.0" font-size="12" fill="#b91c1c" text-anchor="middle" font-weight="600">1</text>
+<text x="1052.0" y="231.0" font-size="11.5" fill="#b91c1c" text-anchor="start" font-weight="600">fail</text>
+<text x="28.0" y="256.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">gemma4:31b (think on)</text>
+<text x="28.0" y="268.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">Google Gemma · digest 6316f0629137 · chain</text>
+<line x1="330.0" y1="257.0" x2="338.3" y2="257.0" stroke="#7c3aed" stroke-width="2.2"/>
+<circle cx="330.0" cy="257.0" r="4.5" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="620.7" y1="257.0" x2="658.3" y2="257.0" stroke="#7c3aed" stroke-width="2.2"/>
+<circle cx="637.8" cy="257.0" r="4.5" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="344.3" y="261.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">0.026</text>
+<polygon points="966.1290322580645,251.5 971.6290322580645,257.0 966.1290322580645,262.5 960.6290322580645,257.0" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="1000.0" y="261.0" font-size="12" fill="#b91c1c" text-anchor="middle" font-weight="600">2</text>
+<text x="1052.0" y="261.0" font-size="11.5" fill="#b91c1c" text-anchor="start" font-weight="600">fail</text>
+<rect x="24.0" y="272.0" width="1096.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="286.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">gemma4:31b (think on)</text>
+<text x="28.0" y="298.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">Google Gemma · digest 6316f0629137 · rerun</text>
+<line x1="330.0" y1="287.0" x2="338.3" y2="287.0" stroke="#7c3aed" stroke-width="2.2"/>
+<circle cx="330.0" cy="287.0" r="4.5" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="578.3" y1="287.0" x2="603.1" y2="287.0" stroke="#7c3aed" stroke-width="2.2"/>
+<circle cx="588.3" cy="287.0" r="4.5" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="344.3" y="291.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">0.026</text>
+<polygon points="966.7857142857143,281.5 972.2857142857143,287.0 966.7857142857143,292.5 961.2857142857143,287.0" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="1000.0" y="291.0" font-size="12" fill="#b91c1c" text-anchor="middle" font-weight="600">1</text>
+<text x="1052.0" y="291.0" font-size="11.5" fill="#b91c1c" text-anchor="start" font-weight="600">fail</text>
+<text x="24.0" y="352.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="400">No model passes grounded. The rerun misses on 1 missing claim: a deterministic thinking loop under the one-quote contract (contract v3 planned).</text>
+<text x="24.0" y="383.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">chain: contract v2 · quote rule 1 · num_predict 4096 · num_ctx 16384 · offrig pre-#47 (sha256 not recorded) · tune · pre-registered</text>
+<text x="24.0" y="398.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">rerun: contract v2 · quote rule 2 · num_predict 12288 · num_ctx 16384 · offrig 751fb1d (sha256 6A1622C5…) · post hoc (pre-registered before its run)</text>
+<text x="24.0" y="413.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Missing = truncated or unusable replies; the rule needs 0. Dot = observed rate, bar = Wilson 95% interval; the rule reads the interval&#x27;s upper end for false accepts.</text>
+<text x="24.0" y="428.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Source: mcp-tool-shop-org/rnd experiments/verifier-gold/calibration/results/ (metrics.json per run). Inputs pinned in experiments/charts/manifest.json.</text>
+</svg>

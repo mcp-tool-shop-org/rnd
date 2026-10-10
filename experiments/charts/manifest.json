@@ -1,0 +1,249 @@
+{
+ "repo": "mcp-tool-shop-org/rnd",
+ "inputs": {
+  "experiments/cloud-cu134/results/2026-10-08-a100-compat.log": {
+   "commit": "5850199",
+   "sha256": "98b0ab1da18925d10cc92837fe0611807a429fd359d1496f7c9241430a293c98"
+  },
+  "experiments/cloud-cu134/results/2026-10-08-a100-probe.log": {
+   "commit": "8d51217",
+   "sha256": "fde49e5a88e7caf8eb9c4a21fafd3b37426dddcc73064fc12e813086d332c22d"
+  },
+  "experiments/cloud-cu134/results/2026-10-08-b200-compat.log": {
+   "commit": "89059db",
+   "sha256": "93759bef94253ea66c9fe6f0efea287ac31c406dc71819b602389abccb46c5b2"
+  },
+  "experiments/cuda-graphs/results/2026-10-08-llama.json": {
+   "commit": "00f57b4",
+   "sha256": "b5b5b54de3a1bd2d868a80fd1d6f43b8f83e29d877804dad2d259801061ddcc4"
+  },
+  "experiments/kev-judge-finetune/env/README.md": {
+   "commit": "0b18117",
+   "sha256": "aad065bac20e418f0f6b837cbff7d6c6e2578fd6945df32d8e6f256d912c7ed5"
+  },
+  "experiments/npu-probe/results/2026-10-09-health-after-e1-loss.json": {
+   "commit": "cb8b2c8",
+   "sha256": "f3ff5c8753358a6b4b03f1f867aab8125206f1862696ede182f93ab110252b69"
+  },
+  "experiments/npu-probe/results/2026-10-09-probe.json": {
+   "commit": "f3f2b92",
+   "sha256": "a6de0a6e1621b8b8c769dfa500938a215f4e8c6e3bbcc91edb7387a5993d018a"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-grounded-tune/metrics.json": {
+   "commit": "8602fb7",
+   "sha256": "2588523b27c5125b4010397d3aeb96235d28a267fe15a5d07031205e97892e17"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-grounded-tune/verdicts.jsonl": {
+   "commit": "8602fb7",
+   "sha256": "4769a49e2c4506d9c30669aa40c0ee99dc05348ff0086669b22f2c809cc8a18f"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-reasoning-tune/metrics.json": {
+   "commit": "8602fb7",
+   "sha256": "fa8929412b237d9b2f42d59905e67af8b3358b88f8909c8f6baa08c420f42d4c"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-reasoning-tune/verdicts.jsonl": {
+   "commit": "8602fb7",
+   "sha256": "79acd29e20ddb47b68034f020d30aa402c9de2560f0f3c6df402dc1af23d6b39"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-grounded-tune/metrics.json": {
+   "commit": "8602fb7",
+   "sha256": "01bc712586010fb582aebce67cfd0cb48a7c9ffeaf6f072f162a25edf8b4d52c"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-grounded-tune/verdicts.jsonl": {
+   "commit": "8602fb7",
+   "sha256": "81f21c71a4eefe2ecb8b511dabb647f989154d6868ec39c7688272f4c02b1af8"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-reasoning-tune/metrics.json": {
+   "commit": "8602fb7",
+   "sha256": "822c243bd89abaaedd11b2f958dee3cb5a46644946db149e44d9159b861cf353"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-reasoning-tune/verdicts.jsonl": {
+   "commit": "8602fb7",
+   "sha256": "e088143ce1ac535ba90677889ee316545df4e0d02042e3c1cf7691a985fec4b9"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-grounded-tune/metrics.json": {
+   "commit": "8602fb7",
+   "sha256": "26856776f22e2542d1a0676e68658d5ef8e692649e1dd138a166fa9df08118a3"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-grounded-tune/verdicts.jsonl": {
+   "commit": "8602fb7",
+   "sha256": "4f67749752179b7c0cc93059e1481641ae38c23f5d7b84cb9b802a6bdcbdf29f"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-reasoning-tune/metrics.json": {
+   "commit": "8602fb7",
+   "sha256": "a1b4704c94c0b02e1d0183dc3c16e17dd1fde5352ffec4f6da8b85584d2df4ec"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-reasoning-tune/verdicts.jsonl": {
+   "commit": "8602fb7",
+   "sha256": "971d342886a98f83a0bc7b5310f8291112ae4d7125b8db3b70b5d464b422e469"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-grounded-tune/metrics.json": {
+   "commit": "8602fb7",
+   "sha256": "0619ee55f5b92c99ca765c4e1cad16deabf36e0248d2ad831ed5738e829f9fc0"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-grounded-tune/verdicts.jsonl": {
+   "commit": "8602fb7",
+   "sha256": "d3a3860861a5ce49f499df5ea99cd2886a93429b0ee89d4c4f129f4b0c9440df"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-reasoning-tune/metrics.json": {
+   "commit": "8602fb7",
+   "sha256": "1c62f7c728f0588835efacfff40f4f0908a27c84721a81a9777c686306aaf0cb"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-reasoning-tune/verdicts.jsonl": {
+   "commit": "8602fb7",
+   "sha256": "322173a113d6bad267eb09332ace7681db3e71864765ef11f60af7e5decc7393"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-grounded-tune/metrics.json": {
+   "commit": "8602fb7",
+   "sha256": "e27ba6c35a144e957d08cfaa8083847736671ba9194de86d5694c3484fc39e42"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-grounded-tune/verdicts.jsonl": {
+   "commit": "8602fb7",
+   "sha256": "b61fede54c92eef2d555012f9d8953f7bf8f2c043b89df7688b664eee6237634"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-reasoning-tune/metrics.json": {
+   "commit": "8602fb7",
+   "sha256": "fe44fa6a4a50bb3e72b76c74d51480a935f5249e4ef56e83bb331760c5d3c7e2"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-reasoning-tune/verdicts.jsonl": {
+   "commit": "8602fb7",
+   "sha256": "599156bc98f4604fe29c85c6e79a39f9567b884a4780e0eb75d31db742a88b01"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-grounded-tune/metrics.json": {
+   "commit": "8602fb7",
+   "sha256": "278db079c2b9d329fc223c213900c9f323fe6ed0186e90bfd863677383883300"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-grounded-tune/verdicts.jsonl": {
+   "commit": "8602fb7",
+   "sha256": "51b7dbb55f9b1bb593c055ff907dddc153d4ceef813f7d47b768ba8aae911464"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-reasoning-tune/metrics.json": {
+   "commit": "8602fb7",
+   "sha256": "c30be46ff833263f3a9c7ad79fc69f3c57149b272e3977cbbbfa228368830407"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-reasoning-tune/verdicts.jsonl": {
+   "commit": "8602fb7",
+   "sha256": "c060487e4aab732729f8f60cd4ff99fff846ae7063b5367310b11321bf774844"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-grounded-tune/metrics.json": {
+   "commit": "c658ebf",
+   "sha256": "d18f72e6d8dff0b5a6bfc2fde068897094e6277955ae12d0cbcec936d65d9d62"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-grounded-tune/verdicts.jsonl": {
+   "commit": "c658ebf",
+   "sha256": "6d23ed0bf5652e2bdced17e24d063da5e68919b3a2fbf1c135ce7febe05cf4ee"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-heldout/metrics.json": {
+   "commit": "576656c",
+   "sha256": "020f6e4e94a1dafc83437662e2c1d23228ca4be549fe96299baff7fdab58f3dc"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-tune/metrics.json": {
+   "commit": "c658ebf",
+   "sha256": "7005979df453682fb902915a86c83d69216fd7e2e483c40b3d391e74a09bd23b"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-tune/verdicts.jsonl": {
+   "commit": "c658ebf",
+   "sha256": "edbe9eb17897b3f9056043d58a1fecc7a361a8b80c0a628e9d64331d48b6ba27"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/loop-repeats.txt": {
+   "commit": "c658ebf",
+   "sha256": "5ff81579f388154c7edba243b47262cc8394b22e2b334b9453688bf2e03011ca"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-grounded-tune/verdicts.jsonl": {
+   "commit": "uncommitted",
+   "sha256": "3c5071367581103392ed0019782c1dbc22840770cead911020ce596ba4662302"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-reasoning-tune/verdicts.jsonl": {
+   "commit": "uncommitted",
+   "sha256": "f452c99f18bdb92c7a0603eed46ab71e08cbf692b6c85253bc69d1efc18e669c"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-grounded-tune/verdicts.jsonl": {
+   "commit": "uncommitted",
+   "sha256": "b2b4345a8d07a64082f6183fc2680be07933ded531e5d42d0e935bb1f9c017d1"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-reasoning-tune/verdicts.jsonl": {
+   "commit": "uncommitted",
+   "sha256": "d4f5143b57182b135805897282e51743755e3fffddf4d52635d9ec104026ea0d"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-grounded-tune/verdicts.jsonl": {
+   "commit": "uncommitted",
+   "sha256": "b49647d65a196ebb70f5ba4488d0a4ad38b148d8fd0418e64d86499e5cd6a6ff"
+  },
+  "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-reasoning-tune/verdicts.jsonl": {
+   "commit": "uncommitted",
+   "sha256": "beaca1ac9070acd6b46664b4013b80ca9db40f899dd5c6db70e1f475cdaab47a"
+  },
+  "experiments/verifier-gold/math-ladder/ladder.jsonl": {
+   "commit": "da75dd0",
+   "sha256": "a1062f61554d99ad21e139348c54422fae38dbf02c7e89ad7a75d8bebeae7e16"
+  },
+  "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-gemma4_31b/manifest.json": {
+   "commit": "961f635",
+   "sha256": "60c7d45713cd3bf10c8ae7f9c0e3071b233d474eb79290f95bacf16f2ec61796"
+  },
+  "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-gemma4_31b/verdicts.jsonl": {
+   "commit": "961f635",
+   "sha256": "b0a53a2ef686ef5edfcbce902e8b1c519709a046e5c2d83b3fd4e70a5f4dfeb9"
+  },
+  "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-granite4.1_30b/manifest.json": {
+   "commit": "961f635",
+   "sha256": "dd1bf5691376fe47377bab01cfa65a1ee2e37ae311f44ef51086e02df7eaccc3"
+  },
+  "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-granite4.1_30b/verdicts.jsonl": {
+   "commit": "961f635",
+   "sha256": "6e090dd138fb84ca814b26092a4a62ef66b3bf818d6c3cee13b01d6fba00bf1d"
+  },
+  "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-llama3.1_8b/manifest.json": {
+   "commit": "961f635",
+   "sha256": "03dfb3464bfe2d753d18fb7fcd0ea69017b59aec2e0bfe6dc8c1ff2009786c32"
+  },
+  "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-llama3.1_8b/verdicts.jsonl": {
+   "commit": "961f635",
+   "sha256": "c2ad74f5016064074f83bce39109d17997ffdba6412882ff26cc4e43ff84c2ac"
+  },
+  "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-mistral-small_24b/manifest.json": {
+   "commit": "961f635",
+   "sha256": "c2ad04fd67665cf858322d15a15b945298a65595d972f5e0063bacf3ee1b65a6"
+  },
+  "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-mistral-small_24b/verdicts.jsonl": {
+   "commit": "961f635",
+   "sha256": "2f716b6733164796cdf5585a2b0cb05d22b7664d87166623caabe26cd8522c61"
+  },
+  "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_14b/manifest.json": {
+   "commit": "961f635",
+   "sha256": "296b3161652f3b7dd39121186f833a49b06c2f3ecfca108afcb6742a961ea3d0"
+  },
+  "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_14b/verdicts.jsonl": {
+   "commit": "961f635",
+   "sha256": "c7d2a19087ae35a1dfbcf09b3315597426812c68ffef1bd0f067a6c99f4ef889"
+  },
+  "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_8b/manifest.json": {
+   "commit": "961f635",
+   "sha256": "5215800b5275699bcd92216762cc4b74568d6ae40897520f2cd73f70fe050e0a"
+  },
+  "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_8b/verdicts.jsonl": {
+   "commit": "961f635",
+   "sha256": "248281b64992bd802eca7f692797f6ecb47edeb57e973c8e7ea0e11f36fa1f98"
+  }
+ },
+ "external": {
+  "mcp-tool-shop-org/ai-jam-sessions@5aa092c4fe:scores/receipts/amazing-grace-new-britain/sung-2026-10-08/receipt.json": {
+   "sha256": "3cee3777c95c769099f047bc75da7014a25d8c218361a8a6684ba4f0db51218c"
+  },
+  "mcp-tool-shop-org/ai-jam-sessions@5aa092c4fe:scores/receipts/amazing-grace-new-britain/sung-2026-10-08/pitch.json": {
+   "sha256": "7ee0eefa878103f970869effd1b4342471efa5ee389c910c0020197933290a83"
+  },
+  "mcp-tool-shop-org/ai-jam-sessions@5aa092c4fe:scores/receipts/america-the-beautiful-materna/sung-2026-10-08/receipt.json": {
+   "sha256": "337c3291eb5ef9de01f670ae5a06875a32725c59b1323c665e36b4e836bfc077"
+  },
+  "mcp-tool-shop-org/ai-jam-sessions@5aa092c4fe:scores/receipts/america-the-beautiful-materna/sung-2026-10-08/pitch.json": {
+   "sha256": "47a973a0e8973fee99c8e95fe1f885291e15d79805dd41a81b24e3c1255698ff"
+  },
+  "mcp-tool-shop-org/ai-jam-sessions@5aa092c4fe:scores/receipts/battle-hymn-of-the-republic/sung-2026-10-08/receipt.json": {
+   "sha256": "8e4df46bafdceaf839de91e376f85f72e7be0636c2ee60dbc9458f510e026532"
+  },
+  "mcp-tool-shop-org/ai-jam-sessions@5aa092c4fe:scores/receipts/battle-hymn-of-the-republic/sung-2026-10-08/pitch.json": {
+   "sha256": "46c753dfa762d2f2d7936410d28778462a80a7a0c4cb632b875d4c03b57d4c33"
+  }
+ }
+}

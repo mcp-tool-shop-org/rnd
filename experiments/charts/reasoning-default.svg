@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 332" width="1140" height="332" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="1140" height="332" fill="#ffffff"/>
+<text x="24.0" y="34.0" font-size="17" fill="#1f2430" text-anchor="start" font-weight="600">offrig verify default for reasoning (contract v2, think on, quote rule 2, num_ctx 16384, num_predict 12288)</text>
+<text x="24.0" y="54.0" font-size="11.5" fill="#5b6272" text-anchor="start" font-weight="400">gemma4:31b (Google Gemma, digest 6316f0629137) · offrig 751fb1d · temperature 0, seed 0 · the rerun calibration, pre-registered before its run</text>
+<rect x="361.7" y="92.0" width="158.3" height="90.0" fill="#fdf0f0" stroke="none"/>
+<line x1="330.0" y1="92.0" x2="330.0" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="330.0" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0</text>
+<line x1="361.7" y1="92.0" x2="361.7" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="361.7" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.1</text>
+<line x1="393.3" y1="92.0" x2="393.3" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="393.3" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.2</text>
+<line x1="456.7" y1="92.0" x2="456.7" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="456.7" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.4</text>
+<line x1="520.0" y1="92.0" x2="520.0" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="520.0" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.6</text>
+<text x="425.0" y="82.0" font-size="11.5" fill="#1f2430" text-anchor="middle" font-weight="600">false accepts (Wilson 95%)</text>
+<line x1="361.7" y1="92.0" x2="361.7" y2="182.0" stroke="#b91c1c" stroke-width="1.4" stroke-dasharray="5,3"/>
+<text x="361.7" y="210.0" font-size="10" fill="#b91c1c" text-anchor="middle" font-weight="400">rule: upper &lt; 0.10</text>
+<rect x="636.0" y="92.0" width="114.0" height="90.0" fill="#fdf0f0" stroke="none"/>
+<line x1="560.0" y1="92.0" x2="560.0" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="560.0" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0</text>
+<line x1="598.0" y1="92.0" x2="598.0" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="598.0" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.1</text>
+<line x1="636.0" y1="92.0" x2="636.0" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="636.0" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.2</text>
+<line x1="674.0" y1="92.0" x2="674.0" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="674.0" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.3</text>
+<line x1="712.0" y1="92.0" x2="712.0" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="712.0" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.4</text>
+<line x1="750.0" y1="92.0" x2="750.0" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="750.0" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.5</text>
+<text x="655.0" y="82.0" font-size="11.5" fill="#1f2430" text-anchor="middle" font-weight="600">abstain (Wilson 95%)</text>
+<line x1="636.0" y1="92.0" x2="636.0" y2="182.0" stroke="#b91c1c" stroke-width="1.4" stroke-dasharray="5,3"/>
+<text x="636.0" y="210.0" font-size="10" fill="#b91c1c" text-anchor="middle" font-weight="400">rule: ≤ 0.20</text>
+<rect x="790.0" y="92.0" width="108.0" height="90.0" fill="#fdf0f0" stroke="none"/>
+<line x1="790.0" y1="92.0" x2="790.0" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="790.0" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.5</text>
+<line x1="826.0" y1="92.0" x2="826.0" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="826.0" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.6</text>
+<line x1="862.0" y1="92.0" x2="862.0" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="862.0" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.7</text>
+<line x1="898.0" y1="92.0" x2="898.0" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="898.0" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.8</text>
+<line x1="934.0" y1="92.0" x2="934.0" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="934.0" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0.9</text>
+<line x1="970.0" y1="92.0" x2="970.0" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="970.0" y="197.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">1</text>
+<text x="880.0" y="82.0" font-size="11.5" fill="#1f2430" text-anchor="middle" font-weight="600">decided balanced accuracy</text>
+<line x1="898.0" y1="92.0" x2="898.0" y2="182.0" stroke="#b91c1c" stroke-width="1.4" stroke-dasharray="5,3"/>
+<text x="898.0" y="210.0" font-size="10" fill="#b91c1c" text-anchor="middle" font-weight="400">rule: ≥ 0.80</text>
+<text x="986.0" y="82.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">missing</text>
+<text x="1052.0" y="82.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">rule</text>
+<rect x="24.0" y="92.0" width="1096.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="106.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">reasoning · tune</text>
+<text x="28.0" y="118.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">n = 223 · FA 3/121 · abstain 12/204</text>
+<line x1="332.7" y1="107.0" x2="352.3" y2="107.0" stroke="#7c3aed" stroke-width="2.2"/>
+<circle cx="337.9" cy="107.0" r="4.5" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="572.9" y1="107.0" x2="598.0" y2="107.0" stroke="#7c3aed" stroke-width="2.2"/>
+<circle cx="582.4" cy="107.0" r="4.5" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="358.3" y="111.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">0.070</text>
+<polygon points="962.892798690671,101.5 968.392798690671,107.0 962.892798690671,112.5 957.392798690671,107.0" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="1000.0" y="111.0" font-size="12" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<text x="1052.0" y="111.0" font-size="11.5" fill="#15803d" text-anchor="start" font-weight="600">PASS</text>
+<text x="28.0" y="136.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">reasoning · held-out (spent)</text>
+<text x="28.0" y="148.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">n = 236 · FA 4/129 · abstain 15/215</text>
+<line x1="333.8" y1="137.0" x2="354.4" y2="137.0" stroke="#7c3aed" stroke-width="2.2"/>
+<circle cx="339.8" cy="137.0" r="4.5" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="576.2" y1="137.0" x2="602.5" y2="137.0" stroke="#7c3aed" stroke-width="2.2"/>
+<circle cx="586.5" cy="137.0" r="4.5" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="360.4" y="141.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">0.077</text>
+<polygon points="963.6283185840708,131.5 969.1283185840708,137.0 963.6283185840708,142.5 958.1283185840708,137.0" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="1000.0" y="141.0" font-size="12" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<text x="1052.0" y="141.0" font-size="11.5" fill="#15803d" text-anchor="start" font-weight="600">PASS</text>
+<rect x="24.0" y="152.0" width="1096.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="166.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">grounded · tune</text>
+<text x="28.0" y="178.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">n = 269 · no default: fails on 1 missing claim</text>
+<line x1="330.0" y1="167.0" x2="338.3" y2="167.0" stroke="#9ca3af" stroke-width="2.2"/>
+<circle cx="330.0" cy="167.0" r="4.5" fill="#ffffff" stroke="#9ca3af" stroke-width="1.6"/>
+<line x1="578.3" y1="167.0" x2="603.1" y2="167.0" stroke="#9ca3af" stroke-width="2.2"/>
+<circle cx="588.3" cy="167.0" r="4.5" fill="#ffffff" stroke="#9ca3af" stroke-width="1.6"/>
+<text x="344.3" y="171.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">0.026</text>
+<polygon points="966.7857142857143,161.5 972.2857142857143,167.0 966.7857142857143,172.5 961.2857142857143,167.0" fill="#ffffff" stroke="#9ca3af" stroke-width="1.6"/>
+<text x="1000.0" y="171.0" font-size="12" fill="#b91c1c" text-anchor="middle" font-weight="600">1</text>
+<text x="1052.0" y="171.0" font-size="11.5" fill="#b91c1c" text-anchor="start" font-weight="600">fail</text>
+<line x1="352.2" y1="92.0" x2="352.2" y2="182.0" stroke="#6b7280" stroke-width="1.2" stroke-dasharray="2,3"/>
+<text x="348.2" y="224.0" font-size="10" fill="#6b7280" text-anchor="end" font-weight="400">distillation teacher bar (not met)</text>
+<text x="24.0" y="254.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="400">Named default for reasoning only, served at exactly these settings. The held-out split was used once and is spent: a contract v3 default needs a fresh sealed split.</text>
+<text x="24.0" y="272.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="400">All 4 held-out false accepts are on gold cannot_tell claims (4/21); 0/108 on gold unsupported. Grounded has no default.</text>
+<text x="24.0" y="303.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">The teacher bar belongs to the distillation plan, a separate decision; gemma misses it (tune FA upper 0.0704 vs 0.07; held-out cannot_tell FA 19% vs 10%).</text>
+<text x="24.0" y="318.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Source: mcp-tool-shop-org/rnd experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/. Inputs pinned in experiments/charts/manifest.json.</text>
+</svg>

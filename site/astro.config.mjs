@@ -23,7 +23,15 @@ export default defineConfig({
       ],
       sidebar: [
         {
-          label: 'Handbook',
+          label: 'Research briefs',
+          items: [{ autogenerate: { directory: 'briefs' } }],
+        },
+        {
+          label: 'Newsletter',
+          items: [{ autogenerate: { directory: 'newsletter' } }],
+        },
+        {
+          label: 'Using the bench',
           items: [{ autogenerate: { directory: 'handbook' } }],
         },
       ],

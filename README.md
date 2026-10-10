@@ -38,6 +38,12 @@ Knowledge moves one way:
    harness under `experiments/`.
 2. **Internal shelf.** Once a topic's load-bearing claims hold up, it is built
    into a knowledge base in readouts' private working repo, or added to one.
+   **Promotion is part of closing an experiment** (the Director, 2026-10-09). When
+   an experiment's result is committed here, its readouts-internal update follows
+   in the same session or the next one, with its charts. Nothing sits on the bench
+   for more than about a week. Regular small updates beat one big one. An
+   experiment's README records its promotion as a line under its result:
+   "Promoted: readouts-internal `<kb>` wave `<n>`, `<date>`", or why not yet.
 3. **Public shelf.** A knowledge base is published to the public readouts repo
    when it is added to the export allow-list.
 

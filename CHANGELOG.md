@@ -11,6 +11,15 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.4.0] - 2026-10-09
+
+- thinking-off results (gemma think-off grounded passes tune, post hoc) + grounded held-out pre-registration; charts built from receipts (13); site: newsletter issue 1 and a research brief directory (9 briefs); study-swarm entry on making thinking cheaper; NPU health check #2 and the E1 root cause
+- Added `2026-10-09-making-thinking-cheaper-study-swarm`: Making thinking cheaper — cascades, budgets, distillation, specialists and offload (study-swarm)
+- Updated `intel-npu`: The Intel side of the rig — NPU embeddings and iGPU cross-encoders (npu-serve)
+- Added experiment `charts`
+- Added experiment `npu-probe`
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.37] - 2026-10-09
 
 - calibration: thinking-off chain_step completeness reads metrics.json status (false INCOMPLETE from offrig 9b6527f's report note); check fix only

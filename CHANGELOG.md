@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.4.5] - 2026-10-10
+
+- verifier-gold: coherence pre-registration (re-rule 60 cannot_tell items; VitaminC + LLM-AggreFact anchor), awaiting the Director
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.4.4] - 2026-10-10
 
 - calibration: Nemotron path run note; native-serving fidelity check of 'think before accepting' (offrig #54) pre-registered

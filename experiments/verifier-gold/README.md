@@ -158,3 +158,72 @@ the rulings. Reasoning splits: tune 102 supported, 102 unsupported, 19 cannot_te
     claims turn on;
   - `4d45a08-7c` stays cannot_tell: the pod script's next step isn't shown.
 - **Spot-check:** R&D read 6 random agreements against the hunks; all 6 correct.
+
+## Pre-registration, 2026-10-10 ~01:00: is the gold coherent? (the Director's question; nothing runs until he agrees)
+
+The Director doubts the labels ("There's places to get this sort of stuff, no need to make it up"). His point
+holds:
+- every claim here is a synthetic near-miss written by Claude about our own repos;
+- the cross-family label check used gemma4:31b, which is also the leading candidate;
+- nothing is anchored to an outside, human-labelled set.
+
+The Publisher's first check on the committed receipts found the decided labels coherent: 729 tune claims, 21 runs,
+and only 7 claims where 80% or more of the runs decided against gold. **All 7 are cannot_tell gold.** cannot_tell
+is the soft spot, and it is small: **60 items** (grounded 15 tune and 5 held-out, reasoning 19 tune and 21
+held-out). A handful of shaky ones moves the abstain and teacher-bar numbers.
+
+**Part 1: re-rule every cannot_tell item (60) against a written definition, fixed now.**
+- **The definition:** the evidence shown neither states nor contradicts the claim, and a careful reader couldn't
+  settle it from what is shown. Evidence the claim needs but that isn't shown doesn't count, even if the repo has
+  it.
+- **Raters, chosen so the generator's family isn't the only judge:**
+  - (a) R&D, blind to every model verdict;
+  - (b) one different-family model, run **by hand by the Director** on Grok or Gemini (Standing Rule 1: no
+    Ollama Cloud), with the same definition and evidence. **Not gemma**, because gemma is a candidate.
+  - Where (a) and (b) disagree, the Director rules.
+- **Outcomes:** every change is recorded, with old label, new label, rater and reason. Anything already scored is
+  re-scored only as a **labelled correction**, beside the original, never in place of it. Held-out items are
+  re-ruled blind to any held-out verdict. One held-out score already exists (gemma reasoning v2), and its
+  correction is shown beside it.
+
+**Part 2: an external anchor.** Run the leading configurations on public, human-labelled claim-verification sets.
+If they **rank** the same way on the public sets as on our gold, that's evidence our gold measures the same
+thing. If they don't, our gold is suspect, and the calibration numbers are reported as suspect until it's fixed.
+
+| set | licence (HF card, read 2026-10-10) | labels → ours | use |
+|---|---|---|---|
+| VitaminC (`tals/vitaminc`) | CC BY-SA 3.0 | SUPPORTS / REFUTES / NOT ENOUGH INFO → supported / unsupported / cannot_tell | contrastive near-miss pairs from real Wikipedia edits, the closest match to our near-miss design; the only 3-way set |
+| LLM-AggreFact (`lytang/LLM-AggreFact`) | **CC BY-ND 4.0, evaluation only:** the card says it "should not be used in pretraining or fine-tuning" | 1 / 0 → supported / unsupported | grounded-document fact checking; **anchor only, never ASPIRE training data** |
+| HoVer (`hover-nlp/hover`) | CC BY-SA 4.0 | SUPPORTED / NOT_SUPPORTED; test labels hidden | multi-hop / conjunctive claims; evidence is only Wikipedia sentence ids, so it needs a fetch step. **Deferred** |
+
+- **Sample (fixed now, seeded 0):**
+  - VitaminC test: 300 claims, 100 per label;
+  - LLM-AggreFact test: 300 claims, label-balanced and stratified across its source datasets.
+
+  Each is converted to offrig's gold shape (claim, context = the evidence text, label, split `anchor`).
+- **Configurations,** a minimal set:
+  - gemma4:31b think on;
+  - gemma4:31b think off;
+  - qwen3:14b think on;
+  - the think-before-accepting policy, once offrig serves it natively;
+  - Nemotron's best level from tonight.
+
+  At about 3–10 s per claim, that's about 1–1.5 h per configuration across both sets. **One grant, serial.**
+- **Coherence test (fixed now):**
+  - On each set, rank the configurations by decided balanced accuracy and, separately, by false-accept rate.
+  - **Coherent:** our gold's top configuration is in the top 2 on both public sets, and our gold's FA ordering
+    has no pair inverted by more than its Wilson intervals allow.
+  - **Suspect:** otherwise.
+  - With 4–5 configurations this is a weak test. It catches a gold that's badly off, not a subtle bias, and the
+    report says so.
+- **Caveats, stated before the run:**
+  - Public sets from 2020–2021 may be in the models' training data. LLM-AggreFact carries a contamination
+    identifier for this, and the report notes it.
+  - Neither set is about code. They anchor the *labelling and the verdict behaviour*, not the domain.
+  - Our code-domain gold stays the measure of the studio's task.
+- **Licence use:**
+  - Evaluation only for all three.
+  - Results are reported as numbers, and no dataset text is republished in rnd, which is public.
+  - LLM-AggreFact is never used for training.
+  - VitaminC's and HoVer's share-alike licences matter only if a derived dataset is ever shared, which this plan
+    doesn't do.

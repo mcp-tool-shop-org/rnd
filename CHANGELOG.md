@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.12] - 2026-10-10
+
+- stage1-role-eval: the rebuilt batch 3 key-check result
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.11] - 2026-10-10
 
 - instruments/switchyard: the E2 INVALID_NATIVE_BINARY ruling (#33): a scoped capability outcome, a replication rule, and the abort flush

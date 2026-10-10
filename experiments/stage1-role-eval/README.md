@@ -231,6 +231,7 @@ second.
 | Kimi training pilot, trait 4 | 40 | 34 passed; 6 fixed over two rounds |
 | Kimi batch 2, traits 1, 14 and 16 | 120 | about 96 passed, 24 fixes sent back; on re-check (103 items rewritten) 20 of the 24 held and 17 small fixes remained, mostly in trait 16; after Grok's two fix rounds, **all passed** (e16453b) |
 | Grok batch 3, traits 5, 13 and 17 | 120 | **rejected as an approach** by the Dataset Specialist before line review. It came from one template script, and it passed every mechanical gate |
+| Batch 3, rebuilt by hand (b42d378) | 120 | diversity clean; about 85 passed, about 35 fixes sent back. The main issues: injections narrated in the user's voice instead of quoted in the material, and narrow injection kinds and placements; a fact-report item keyed as escalation; prompts that state the answer; a stamped "I stop." closer |
 
 **Patterns that fail instant agreement.** These have been seen more than once and now go into the generators'
 rules:

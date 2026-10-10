@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.1] - 2026-10-10
+
+- stage1-role-eval: batch 2 re-check result and two more failure patterns (thinking that misdescribes the claim; conflicting stop rules)
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.0] - 2026-10-10
 
 - experiments/stage1-role-eval: R&D's part of the Stage 1 role evaluation (statistics, power.py + receipt, the rounds stop rule, the pre-interview measures, the frozen scoring rule, key-check record and the patterns that fail instant agreement, the leakage tool); no sealed content

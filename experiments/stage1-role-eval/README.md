@@ -111,7 +111,7 @@ second.
 | Sealed set v1 | 130 | mechanical checks clean; 27 fixes (14 arguable verdicts, 2 DECIDING lines missing their subject, escalation problems) |
 | Sealed set v3 | 130 | passed, sha256 `e1e515b4…`: 40 supported / 55 unsupported / 35 cannot_tell, 15 escalate-keyed (medical, legal, safety or money only); freeze waits for the maintainer's 70-item sample |
 | Kimi training pilot, trait 4 | 40 | 34 passed; 6 fixed over two rounds |
-| Kimi batch 2, traits 1, 14 and 16 | 120 | about 96 passed; 24 fixes sent back |
+| Kimi batch 2, traits 1, 14 and 16 | 120 | about 96 passed, 24 fixes sent back; on re-check (103 items rewritten) 20 of the 24 held and 17 small fixes remain, mostly in trait 16 |
 
 **Patterns that fail instant agreement.** These have been seen more than once and now go into the generators'
 rules:
@@ -129,6 +129,11 @@ rules:
 - **DECIDING fragments that lose their subject,** or don't cover every clause of the claim.
 - **Counted edits described wrongly** ("one digit differs" where two do). Script-check them.
 - **Accept items that add a fact:** "per die", "so use the stairs", "12 pm". These belong in a reject item.
+- **Thinking that describes the claim wrongly:** a start time the claim never gives, or a "mechanism" it never
+  states. List what the claim asserts before writing the thinking.
+- **Two stop rules in conflict.** "Stop once the first line settles it" sits beside a falsifier sweep after a
+  merely supporting line. Say it explicitly: stop when the line is decisive and nothing in the material
+  qualifies it.
 
 ## The leakage tool
 

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.10] - 2026-10-10
+
+- instruments/switchyard: #32, the OpenVINO IR .bin fetched with its .xml at the pinned revision
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+
 ## [1.1.4.5.9] - 2026-10-10
 
 - stage1-role-eval: batch 2 passed; batch 3 rejected as template-generated, and the diversity gates proposed

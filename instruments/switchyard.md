@@ -49,6 +49,12 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     - an `nvidia-smi` VRAM ceiling, failing closed (`--query-compute-apps` is useless under Windows WDDM);
     - polling at intervals of 60 s or less during the 15-minute rest, not just at its two ends.
   - E2 and E3 don't touch the 5090, so they can run on #31 as is.
+- **OpenVINO IR weights (#32, reviewed 2026-10-10).** E2's first cold load failed with "Empty weights data in bin
+  file". The hub fetch took `openvino_model.xml` without its sibling `.bin`; E1 never hit this, because its
+  embedders came through the single-file ONNX path.
+  - **The fix:** fetch the `.bin` at the same pinned revision, so both files sit in one snapshot directory.
+  - **Timing is unaffected:** the download sits outside every timer.
+  - **Same pattern later:** ONNX external-data files (`.onnx_data`) would need it too.
 
 ## Studio relevance
 

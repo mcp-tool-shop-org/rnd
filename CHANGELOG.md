@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.21] - 2026-10-10
+
+- stage1-role-eval: batch 3 fix-round key check
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.20] - 2026-10-10
 
 - instruments/role-set: the role-shaping data generator (public prototype), its guards and firewall, the self-learning loop and the stuck rule; linked from stage1-role-eval

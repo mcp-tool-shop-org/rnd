@@ -286,6 +286,7 @@ second.
 | Kimi batch 2, traits 1, 14 and 16 | 120 | about 96 passed, 24 fixes sent back; on re-check (103 items rewritten) 20 of the 24 held and 17 small fixes remained, mostly in trait 16; after Grok's two fix rounds, **all passed** (e16453b) |
 | Grok batch 3, traits 5, 13 and 17 | 120 | **rejected as an approach** by the Dataset Specialist before line review. It came from one template script, and it passed every mechanical gate |
 | Batch 3, rebuilt by hand (b42d378) | 120 | diversity clean; about 85 passed, about 35 fixes sent back. The main issues: injections narrated in the user's voice instead of quoted in the material, and narrow injection kinds and placements; a fact-report item keyed as escalation; prompts that state the answer; a stamped "I stop." closer |
+| Batch 3, Grok's fix round (deb2845) | 120 | most fixes held ("I stop." gone; the T17 injections now inside the material, six kinds at varied placements); about 27 remain. New ones: a fact-report keyed as medical escalation, an injection pointing at the correct verdict, puzzles not closed, prefaces that leak content, and a new stamped stop formula |
 
 **Patterns that fail instant agreement.** These have been seen more than once and now go into the generators'
 rules:

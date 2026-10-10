@@ -162,3 +162,99 @@ class ServeApiTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SlowEmbedder(FakeEmbedder):
+    """Sleeps past the per-call timeout; the worker thread outlives the test (daemon)."""
+
+    def __init__(self, sleep_s: float):
+        super().__init__()
+        self.sleep_s = sleep_s
+
+    def embed(self, text: str):
+        self.calls += 1
+        import time as _time
+        _time.sleep(self.sleep_s)
+        return [0.0, 0.0, 1.0]
+
+
+class SlowNLI(FakeNLI):
+    def score(self, premise: str, hypothesis: str):
+        import time as _time
+        _time.sleep(self.sleep_s)
+        return super().score(premise, hypothesis)
+
+
+@unittest.skipIf(npu_serve is None, "npu_serve's deps (openvino, optimum, transformers) are not installed")
+class ServeTimeoutTest(unittest.TestCase):
+    """A timed-out device call is a recorded hang: 503, device latched, later calls refused."""
+
+    def _serve(self, embedder=None, nli=None, timeout_s=0.05):
+        state = npu_serve.State()
+        state.call_timeout_s = timeout_s
+        if embedder is not None:
+            state.embedders["fake-embed"] = embedder
+        if nli is not None:
+            state.nli = nli
+        srv = ThreadingHTTPServer(("127.0.0.1", 0), npu_serve.handler_for(state))
+        srv.daemon_threads = True
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        return state, srv, f"http://127.0.0.1:{srv.server_address[1]}"
+
+    def post(self, base, path, obj):
+        req = urllib.request.Request(base + path, data=json.dumps(obj).encode(),
+                                     headers={"Content-Type": "application/json"})
+        try:
+            with urllib.request.urlopen(req, timeout=10) as r:
+                return r.status, json.loads(r.read())
+        except urllib.error.HTTPError as e:
+            return e.code, json.loads(e.read())
+
+    def test_embed_timeout_records_hang_and_latches(self):
+        emb = SlowEmbedder(0.4)
+        state, srv, base = self._serve(embedder=emb)
+        try:
+            code, body = self.post(base, "/api/embed", {"model": "fake-embed", "input": ["x"]})
+            self.assertEqual(code, 503)
+            self.assertIsNotNone(state.device_lost)
+            self.assertEqual(state.device_lost["kind"], "hang")
+            self.assertTrue(state.device_lost["error"].startswith("hang:"))
+            code, body = self.post(base, "/api/embed", {"model": "fake-embed", "input": ["x"]})
+            self.assertEqual(code, 503)
+            self.assertIn("hang", body["error"])
+        finally:
+            srv.shutdown()
+            srv.server_close()
+
+    def test_embed_normal_call_unaffected_when_timeout_generous(self):
+        emb = SlowEmbedder(0.02)
+        state, srv, base = self._serve(embedder=emb, timeout_s=5.0)
+        try:
+            code, body = self.post(base, "/api/embed", {"model": "fake-embed", "input": ["x"]})
+            self.assertEqual(code, 200)
+            self.assertIsNone(state.device_lost)
+        finally:
+            srv.shutdown()
+            srv.server_close()
+
+    def test_nli_timeout_records_hang_and_latches(self):
+        nli = SlowNLI()
+        nli.sleep_s = 0.4
+        state, srv, base = self._serve(nli=nli)
+        try:
+            code, body = self.post(base, "/api/nli", {"premise": "p", "hypothesis": "h"})
+            self.assertEqual(code, 503)
+            self.assertEqual(state.device_lost["kind"], "hang")
+            code, body = self.post(base, "/health", None) if False else (self.get(base, "/health"))
+            self.assertEqual(body["status"], "device_lost")
+            self.assertEqual(body["device_lost"]["kind"], "hang")
+        finally:
+            srv.shutdown()
+            srv.server_close()
+
+    def get(self, base, path):
+        try:
+            with urllib.request.urlopen(base + path, timeout=10) as r:
+                return r.status, json.loads(r.read())
+        except urllib.error.HTTPError as e:
+            return e.code, json.loads(e.read())

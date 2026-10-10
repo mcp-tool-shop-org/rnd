@@ -260,6 +260,8 @@ def main() -> None:
     ap.add_argument("--out", type=Path, required=True, help="the receipt JSON")
     ap.add_argument("--limit", type=int, default=None,
                     help="first N sampled images only; marks the receipt as a smoke run")
+    ap.add_argument("--call-timeout", type=float, default=None,
+                    help="per embed call, seconds (default 60 = call_timeout.DEFAULT, matches switchyard); 0 disables")
     ap.add_argument("--gate-only", action="store_true",
                     help="export, transformers reference and the equivalence gate only — the CPU-"
                          "window leg; the device legs wait for the ledgered NPU/iGPU session")
@@ -298,7 +300,12 @@ def main() -> None:
               "ir": ov_img.export_ir(MODEL_ID, REVISION, cache, a.export_dir)}
     export["digest"] = export_digest(a.export_dir, ov_img.IR_STEM)
     xml_path = a.export_dir / (ov_img.IR_STEM + ".xml")
-    ref_vecs = {p: ref_embed(ref, pixels[p]) for p in images}
+    import sys as _sys
+    from pathlib import Path as _Path
+    _sys.path.insert(0, str(_Path(__file__).resolve().parent))
+    from call_timeout import DEFAULT_CALL_TIMEOUT_S, CallTimeout, timed_call
+    timeout = DEFAULT_CALL_TIMEOUT_S if a.call_timeout is None else a.call_timeout
+    ref_vecs = {p: timed_call(timeout, ref_embed, ref, pixels[p]) for p in images}
 
     # --- the amendment's equivalence gate, before any device timing -------------------------
     gate = {"rule": f"min cosine >= {GATE_MIN_COSINE} vs the transformers reference",
@@ -394,15 +401,27 @@ def main() -> None:
             acc_vecs[label] = {}
             info["inputs"] = [i.get_any_name() for i in model.inputs]
 
+    dead = set()  # devices off after a recorded hang
     for rep in range(REPEATS):
+        print(f"pass {rep + 1}/{REPEATS} start (live: {[d for d in DEVICE_ORDER if d == 'CPU' or d in models]})", flush=True)
         for p in images:
             for label in DEVICE_ORDER:
                 if label == "CPU":
                     t0 = time.perf_counter()
-                    v = ref_embed(ref, pixels[p])
-                elif label in models:
+                    v = timed_call(timeout, ref_embed, ref, pixels[p])
+                elif label in models and label not in dead:
                     t0 = time.perf_counter()
-                    v = ov_embed(models[label], pixels[p])
+                    try:
+                        v = timed_call(timeout, ov_embed, models[label], pixels[p])
+                    except CallTimeout as exc:
+                        # a recorded hang; this device is off for the rest of the run
+                        dev_report[label]["hang"] = {"rep": rep, "image": p, "error": str(exc)[:300]}
+                        dev_report[label]["status"] = "hang"
+                        del models[label]
+                        dead.add(label)
+                        print(f"hang on {label} at rep {rep} image {p}: {exc} - device off for the rest of the run",
+                              flush=True)
+                        continue
                 else:
                     continue
                 dt = time.perf_counter() - t0

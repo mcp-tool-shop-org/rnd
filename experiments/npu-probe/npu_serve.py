@@ -35,6 +35,8 @@ from huggingface_hub import hf_hub_download
 from optimum.intel import OVModelForFeatureExtraction, OVModelForSequenceClassification
 from transformers import AutoTokenizer
 
+from call_timeout import DEFAULT_CALL_TIMEOUT_S, CallTimeout, timed_call
+
 VERSION = "npu-serve 0.2.0"
 DEFAULT_BUCKETS = (128, 256, 512)  # a model's "buckets" spec overrides; nomic's top rung is
 # measured, not guessed: see results/2026-10-09-nomic-chunk-lengths.json
@@ -170,7 +172,8 @@ class State:
         self.embedders: dict = {}
         self.nli: NLI | None = None
         self.started = time.time()
-        self.device_lost: dict | None = None  # {"device", "error", "at"} once an inference raises DEVICE_LOST
+        self.device_lost: dict | None = None  # {"device", "error", "at"} on DEVICE_LOST or a call hang
+        self.call_timeout_s = DEFAULT_CALL_TIMEOUT_S  # per device call; 0 disables ("hang:" error prefix)
 
 
 def _model_details(e: Embedder) -> dict:
@@ -206,16 +209,20 @@ def handler_for(state: State):
             return req if isinstance(req, dict) else (self._send(400, {"error": "body is not a JSON object"}), None)[1]
 
         def _failed(self, device: str, exc: Exception):
-            if "DEVICE_LOST" in str(exc):
-                state.device_lost = {"device": device, "error": str(exc)[:200], "at": time.time()}
-                print(f"DEVICE_LOST on {device}, latched until restart: {exc}", flush=True)
+            hang = isinstance(exc, CallTimeout)
+            if hang or "DEVICE_LOST" in str(exc):
+                kind = "hang" if hang else "device_lost"
+                state.device_lost = {"device": device, "kind": kind,
+                                     "error": ("hang: " if hang else "") + str(exc)[:200], "at": time.time()}
+                print(f"{kind.upper()} on {device}, latched until restart: {exc}", flush=True)
             return self._send(503, {"error": f"inference failed on {device}: {type(exc).__name__}: "
                                              f"{str(exc)[:200]}"})
 
         def _latch_check(self):
             if state.device_lost:
-                self._send(503, {"error": f"device {state.device_lost['device']} was lost "
-                                          f"(DEVICE_LOST); restart npu-serve", "device_lost": state.device_lost})
+                self._send(503, {"error": f"device {state.device_lost['device']} is off after a "
+                                          f"{state.device_lost.get('kind', 'device_lost')} event; restart npu-serve",
+                                 "device_lost": state.device_lost})
                 return True
             return False
 
@@ -258,11 +265,14 @@ def handler_for(state: State):
                 if self._latch_check():
                     return
                 t0 = time.perf_counter()
+                print(f"embed {name} on {e.device}: {len(inputs)} text(s), timeout {state.call_timeout_s:g}s", flush=True)
                 try:
                     with state.lock:
-                        vecs = [e.embed(t) for t in inputs]
+                        vecs = [timed_call(state.call_timeout_s, e.embed, t) for t in inputs]
                 except Exception as exc:
+                    print(f"embed {name} failed after {(time.perf_counter() - t0) * 1000:.0f} ms: {exc}", flush=True)
                     return self._failed(e.device, exc)
+                print(f"embed {name} done in {(time.perf_counter() - t0) * 1000:.0f} ms", flush=True)
                 return self._send(200, {"model": name, "embeddings": vecs,
                                         "total_duration": int((time.perf_counter() - t0) * 1e9)})
             if self.path == "/api/nli":
@@ -273,10 +283,12 @@ def handler_for(state: State):
                     return self._send(400, {"error": f"at most {MAX_INPUTS} pairs per call"})
                 if self._latch_check():
                     return
+                print(f"nli on {state.nli.device}: {len(pairs)} pair(s), timeout {state.call_timeout_s:g}s", flush=True)
                 try:
                     with state.lock:
-                        out = [state.nli.score(p, h) for p, h in pairs]
+                        out = [timed_call(state.call_timeout_s, state.nli.score, p, h) for p, h in pairs]
                 except Exception as exc:
+                    print(f"nli failed on {state.nli.device}: {exc}", flush=True)
                     return self._failed(state.nli.device, exc)
                 return self._send(200, {"model": NLI_SPEC["name"], "results": out})
             if self.path == "/api/show":
@@ -302,6 +314,8 @@ def main() -> None:
     ap.add_argument("--nli", action="store_true", help="also load the NLI cross-encoder on the Intel iGPU")
     ap.add_argument("--device", default="npu", choices=["npu", "cpu"],
                     help="where embedders compile; cpu is for the CPU-window baselines, never a silent NPU skip")
+    ap.add_argument("--call-timeout", type=float, default=DEFAULT_CALL_TIMEOUT_S,
+                    help="per device call, seconds (default 60, matches switchyard); 0 disables")
     a = ap.parse_args()
     core = ov.Core()
     device = {"npu": "NPU", "cpu": "CPU"}[a.device]
@@ -310,6 +324,7 @@ def main() -> None:
     if device == "CPU" and a.nli:
         raise SystemExit("--nli is iGPU-pinned; a CPU-only window (the Publisher's) stays CPU-only")
     state = State()
+    state.call_timeout_s = a.call_timeout
     for n in a.models.split(","):
         n = n.strip()
         state.embedders[n] = Embedder(n, MODELS[n], core, device)

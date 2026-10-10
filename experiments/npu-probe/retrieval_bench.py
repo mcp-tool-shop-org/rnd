@@ -30,6 +30,11 @@ touched — embeddings come only from offrig's CPU Ollama and npu-serve (NPU, no
 
   retrieval_bench.py --store role-os=.../role-os/.offrig/offrig.db --store offrig=.../offrig/.offrig/offrig.db \
       --serve http://127.0.0.1:11491 --ollama http://127.0.0.1:11490 --out results/2026-10-09-retrieval.json
+
+
+Per-call timeouts (R&D, 2026-10-09): this runner is a client; its device calls go through
+npu-serve, which holds the 60 s timed_call latch. The HTTP read timeout here stays 600 s -
+the defense against a wedged device is the serve-side hang latch, not a shorter client timeout.
 """
 
 from __future__ import annotations

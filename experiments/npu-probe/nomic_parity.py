@@ -38,6 +38,7 @@ never used: the only device strings here are OpenVINO's "CPU" and "NPU".
 from __future__ import annotations
 
 import argparse
+import sys
 import importlib.util
 import json
 import math
@@ -47,6 +48,8 @@ import time
 import urllib.error
 import urllib.request
 from pathlib import Path
+
+from call_timeout import DEFAULT_CALL_TIMEOUT_S, CallTimeout, timed_call
 
 HERE = Path(__file__).resolve().parent
 REPO_ROOT = HERE.parents[1]
@@ -298,6 +301,8 @@ def main() -> None:
     ap.add_argument("--out", required=True, type=Path, help="the receipt JSON")
     ap.add_argument("--limit", type=int, default=None,
                     help="first N chunks and queries (smoke; the receipt is marked)")
+    ap.add_argument("--call-timeout", type=float, default=DEFAULT_CALL_TIMEOUT_S,
+                    help="per ONNX call, seconds (default 60, matches switchyard); 0 disables")
     a = ap.parse_args()
 
     stores = {}
@@ -370,36 +375,63 @@ def main() -> None:
           f"offrig sends them), {len(queries)} queries via {a.ollama}", flush=True)
 
     def c_embed(text: str) -> list:
-        return onnx.embed(text)
+        return timed_call(a.call_timeout, onnx.embed, text)
+
+    def _marker(item: str, kind: str, outcome: str, error: str = "") -> dict:
+        return {"item": item, "kind": kind, "outcome": outcome, "error": error[:200]}
 
     cap = onnx.buckets[-1]
     chunk_rows = []
     over512_docs = truncated_docs = 0
+    hang = None  # a CallTimeout: record the hang, stop this device, fill the rest "not run"
     for i, (c, prefixed, toks) in enumerate(zip(all_chunks, doc_prefixed, doc_toks)):
+        item = f"{c['store']}:{c['source']}#chunk{c['chunk_id']}"
         over512_docs += toks > 512
         over = toks > cap
         truncated_docs += over
-        cf = c_embed(prefixed)
-        row = {"item": f"{c['store']}:{c['source']}#chunk{c['chunk_id']}", "kind": "chunk",
+        if hang is not None:
+            chunk_rows.append(_marker(item, "chunk", "not run"))
+            continue
+        t0 = time.perf_counter()
+        try:
+            cf = c_embed(prefixed)
+        except CallTimeout as exc:
+            hang = {"item": item, "error": str(exc)}
+            chunk_rows.append(_marker(item, "chunk", "hang", str(exc)))
+            print(f"hang at {item}: {exc} - device off for the rest of the run; remaining rows not run", flush=True)
+            continue
+        row = {"item": item, "kind": "chunk",
                "chars": len(prefixed), "tokens": toks, "truncated": over,
                "cos": {"c_vs_a_fresh": cosine(cf, a_fresh_docs[i]),
                        "c_vs_a_stored": cosine(cf, c["stored"]),
                        "a_fresh_vs_a_stored": cosine(a_fresh_docs[i], c["stored"])}}
         chunk_rows.append(row)
-        if (i + 1) % 100 == 0:
-            print(f"C: {i + 1}/{len(all_chunks)} chunks", flush=True)
+        ms = (time.perf_counter() - t0) * 1000
+        if (i + 1) % 25 == 0:
+            print(f"C: {i + 1}/{len(all_chunks)} chunks (last {ms:.0f} ms)", flush=True)
     query_rows = []
     over512_queries = truncated_queries = 0
     for i, ((qid, _text), prefixed, toks) in enumerate(zip(queries, q_prefixed, q_toks)):
         over512_queries += toks > 512
         over = toks > cap
         truncated_queries += over
-        cf = c_embed(prefixed)
+        if hang is not None:
+            query_rows.append(_marker(qid, "query", "not run"))
+            continue
+        try:
+            cf = c_embed(prefixed)
+        except CallTimeout as exc:
+            hang = {"item": qid, "error": str(exc)}
+            query_rows.append(_marker(qid, "query", "hang", str(exc)))
+            print(f"hang at {qid}: {exc} - remaining rows not run", flush=True)
+            continue
         query_rows.append({"item": qid, "kind": "query", "chars": len(prefixed), "tokens": toks,
                            "truncated": over,
                            "cos": {"c_vs_a_fresh": cosine(cf, a_fresh_queries[i])}})
 
-    bound_min = min([r["cos"]["c_vs_a_fresh"] for r in chunk_rows + query_rows] or [1.0])
+    measured_docs = [r for r in chunk_rows if "cos" in r]
+    measured_queries = [r for r in query_rows if "cos" in r]
+    bound_min = min([r["cos"]["c_vs_a_fresh"] for r in measured_docs + measured_queries] or [1.0])
     receipt = {
         "date": time.strftime("%Y-%m-%d"), "kind": "nomic parity: the option-C match check",
         "prereg": "experiments/npu-probe/retrieval-benchmark.md",
@@ -421,25 +453,33 @@ def main() -> None:
                             "offrig_probe_note": "sent exactly as offrig's index sends them: no "
                                                  "truncate flag, no num_ctx, num_gpu 0"},
         "onnx": {**NOMIC_ONNX, "ir_digest": onnx.ir_digest, "dim": onnx.dim},
-        "counts": {"chunks": len(chunk_rows), "queries": len(query_rows)},
+        "counts": {"chunks": len(chunk_rows), "queries": len(query_rows),
+                   "measured_chunks": len(measured_docs), "measured_queries": len(measured_queries)},
+        "call_timeout_s": a.call_timeout,
+        "hang": hang,
         "truncation": {"bucket_top": cap,
                        "documents_over_bucket_tokens": truncated_docs,
                        "queries_over_bucket_tokens": truncated_queries,
                        "documents_over_512_tokens": over512_docs,
                        "queries_over_512_tokens": over512_queries},
-        "cosines": {"chunks": {"c_vs_a_fresh": compare(chunk_rows, "c_vs_a_fresh"),
-                               "c_vs_a_stored": compare(chunk_rows, "c_vs_a_stored"),
-                               "a_fresh_vs_a_stored": compare(chunk_rows, "a_fresh_vs_a_stored")},
-                    "queries": {"c_vs_a_fresh": compare(query_rows, "c_vs_a_fresh")}},
-        "worst5_c_vs_a_fresh": worst_k(chunk_rows + query_rows),
+        "cosines": {"chunks": {"c_vs_a_fresh": compare(measured_docs, "c_vs_a_fresh"),
+                               "c_vs_a_stored": compare(measured_docs, "c_vs_a_stored"),
+                               "a_fresh_vs_a_stored": compare(measured_docs, "a_fresh_vs_a_stored")},
+                    "queries": {"c_vs_a_fresh": compare(measured_queries, "c_vs_a_fresh")}},
+        "worst5_c_vs_a_fresh": worst_k(measured_docs + measured_queries),
         "bound": {"minimum_cosine": bound_min, "bound": BOUND, "passes": bound_min >= BOUND,
                   "note": "minimum over every chunk and query, C vs A-fresh, as pre-registered"},
         "wall_seconds": round(time.time() - started, 1)}
     a.out.parent.mkdir(parents=True, exist_ok=True)
+    if hang is not None:
+        receipt["bound"]["passes"] = False
+        receipt["bound"]["note"] += "; run ended in a hang before all items were measured"
     a.out.write_text(json.dumps(receipt, indent=1) + "\n", encoding="utf-8")
     print(f"\nwrote {a.out}")
     print(f"minimum cosine (C vs A-fresh): {bound_min:.5f} vs bound {BOUND}: "
           f"{'MATCHES' if receipt['bound']['passes'] else 'DOES NOT MATCH'}")
+    if hang is not None:
+        raise SystemExit(f"hang recorded at {hang['item']}: the receipt is written; the device stays off until restart")
 
 
 if __name__ == "__main__":

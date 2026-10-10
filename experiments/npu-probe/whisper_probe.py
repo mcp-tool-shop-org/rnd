@@ -280,6 +280,8 @@ def main() -> None:
     rp.add_argument("--cache", type=Path, required=True, help="HF cache dir for the model download")
     rp.add_argument("--out", type=Path, required=True)
     rp.add_argument("--limit", type=int, default=None, help="first N clips only; marks smoke")
+    rp.add_argument("--call-timeout", type=float, default=DEFAULT_CALL_TIMEOUT_S,
+                    help="per generate call, seconds (default 60, matches switchyard); 0 disables")
     a = ap.parse_args()
 
     if a.mode == "stage":
@@ -301,6 +303,7 @@ def main() -> None:
     revision = hf_revision(MODEL_ID)
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from siglip2_probe import hub_cache  # one normalizer, shared
+    from call_timeout import DEFAULT_CALL_TIMEOUT_S, CallTimeout, timed_call
     export = export_model(a.export_dir, revision, hub_cache(a.cache))
     import importlib.metadata as im
     genai_version = im.version("openvino-genai")
@@ -324,9 +327,17 @@ def main() -> None:
                 continue
             for c in clips:
                 row = per_clip[dev].setdefault(c["id"], {"rtfs": [], "errors": []})
+                print(f"pass {p} {dev} clip {c['id']} start", flush=True)
                 try:
                     t0 = time.perf_counter()
-                    text = transcribe(pipes[dev], samples[c["id"]])
+                    text = timed_call(a.call_timeout, transcribe, pipes[dev], samples[c["id"]])
+                except CallTimeout as e:
+                    # a recorded hang, then this device is off for the rest of the run
+                    row["errors"].append(f"pass {p}: hang: {str(e)[:300]}")
+                    dev_report[dev]["hang"] = {"pass": p, "clip": c["id"], "error": str(e)[:300]}
+                    del pipes[dev]
+                    print(f"hang on {dev} at clip {c['id']}: {e} - device off for the rest of the run", flush=True)
+                    break
                 except Exception as e:  # noqa: BLE001 -- per-clip failures are findings
                     row["errors"].append(f"pass {p}: {type(e).__name__}: {str(e)[:300]}")
                     continue
@@ -351,7 +362,7 @@ def main() -> None:
                 gc.collect()
                 pipe, extra = build_pipeline_with_retry(a.export_dir, dev)
                 if pipe is not None:
-                    text2 = transcribe(pipe, samples[clips[0]["id"]])
+                    text2 = timed_call(a.call_timeout, transcribe, pipe, samples[clips[0]["id"]])
                     meta["garbage_retry"] = {"first_wer": round(w, 4),
                                              "after_retry_wer": round(
                                                  wer_ops(ref, normalize_text(text2))[0], 4)}

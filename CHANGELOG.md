@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.4.8] - 2026-10-10
+
+- verifier-gold: leakage_check.py for new task sets (claim copies fail; evidence overlap warns)
+- Added experiment `verifier-gold`
+
 ## [1.1.4.4.7] - 2026-10-10
 
 - verifier calibration marked provisional (synthetic, unverified gold) in rnd, site and charts; Director quotes rewritten as decisions

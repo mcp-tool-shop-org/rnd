@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.13] - 2026-10-10
+
+- stage1-role-eval: the self-learning generator ruling (no DEV in the store during a stage; between stages only, with a fresh DEV after)
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.12] - 2026-10-10
 
 - stage1-role-eval: the rebuilt batch 3 key-check result

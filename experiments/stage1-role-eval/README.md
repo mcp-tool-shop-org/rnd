@@ -215,6 +215,18 @@ C, D and verdict-type E user turns must avoid a fixed list of role words, so bot
 **The limitation:** target tokens are 0.644 of the ROLE arm's (A, B and E are lowest; builder frozen at sha256 `63162cf4…`). That's named in
 advance, and neither filler nor lengthened materials are used to close it. Steps are matched.
 
+**Amendment: the self-learning generator and DEV** (eval plan a7b336b, 2026-10-10).
+
+The generator weights training toward questions the model gets stuck on, read from a store the training
+runner writes.
+- **During a stage:** no DEV data in the store at all. With 30 tasks, a lesson × kind × tier "aggregate" is
+  effectively an item result, and steering on it would train toward the stop-rule set.
+- **Between stages:** DEV aggregates may inform the next stage, and that stage then gets a fresh DEV.
+- **Sealed and interview:** never.
+- **Stuck thresholds:** frozen from the untrained pilot baseline before round 1.
+- **The steering rule:** pre-registered. It's pooled over both arms, because NO-ROLE is derived from ROLE
+  items, and it runs per seed.
+
 ## Key checks
 
 **The rule behind every check:** a key must get instant agreement. A key any careful reader could argue with

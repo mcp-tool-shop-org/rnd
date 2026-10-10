@@ -529,3 +529,46 @@ logs. Two run notes:
   `CAL_EXTRA="--num-predict 12288 --num-ctx 16384" CAL_TYPES=grounded bash chain_step.sh /e/AI/rnd-calibrate-off gemma4:31b off on 900 heldout`
 
 Promoted: not yet. The readouts-internal model-knowledge wave waits on the uncommitted 2026-09-29 edits in the readouts clone being settled (asked of the Director, 2026-10-09).
+
+## Pre-registration, 2026-10-10 ~00:30, before any run: nemotron-3.5-lightning on tune (post hoc candidate)
+
+The Director asked why Nemotron was never tried. There was no good reason: it was never on the candidate list.
+It is added now, **before** the grounded held-out split is spent, so selection on tune finishes first. **The
+gemma think-off grounded held-out run (pre-registered above) is on hold** until this result exists. The held-out
+then goes to whichever grounded candidate is best on tune, under its own pre-registration written before it
+runs.
+
+- **Candidate:** `nemotron-3.5-lightning:latest`, local only, digest `e7a64ff15fb1`.
+  - 32.9B `nemotron_h_moe` (a hybrid Mamba-Transformer MoE), Q4_K_M, 23.7 GiB, Ollama 0.35.1.
+  - The `:cloud` Nemotrons are refused under Standing Rule 1.
+  - **Licence:** NVIDIA Open Model License, not Apache-2.0. That rules it out as a distillation teacher under the
+    Director's rule, but not as a verifier. The Publisher reads the licence terms before anything is named.
+- **Arms:** tune split, both check types, at three thinking levels: **off**, **on** and **medium**. offrig's
+  `--think` accepts `medium`, and the model lists levels false / true / medium.
+  - **Is "medium" really different?** The graded-level check from the 04:20 amendment applies. If medium's
+    median eval tokens are within 10% of on's on the same claims, the report says "medium = on for this model in
+    this Ollama", and medium is not counted as its own level.
+- **Settings, matching the gemma runs:**
+  - offrig 9b6527f, re-hashed before the run (sha256 `AD3CED56…0E73`);
+  - num_ctx 16384 fixed;
+  - num_predict 12288 (thinking needs room; the same budget as gemma's);
+  - quote rule 2, structured on, seed 0;
+  - **temperature 0**.
+- **Temperature:** the model's Ollama default is temperature 1 (top_p 0.95). offrig sends an explicit 0. In 9b6527f
+  `ollama.rs` inserts `options.temperature` whenever it is set, and a unit test asserts `options.temperature ==
+  0.0` in the request body. The manifest records it, and the report confirms it from each run's manifest.
+- **Speculative decoding:** the model's defaults also carry `draft_num_predict 2`, an MTP/speculative draft.
+  Under greedy decoding this doesn't change outputs. It's recorded here as a model default, not a setting.
+- **Order:** off, then on, then medium, smallest replies first, each a chain step with a 900 s rest.
+- **Stop rule:** as tonight. Each step's exit code plus `metrics.json` `status == "complete"`. A missing or
+  unreadable status stops the chain and is reported. One offrig resume is allowed for no-outcome claims.
+- **What counts:** offrig's default rule, per check type, as before. A pass is post hoc, because the candidate was
+  added after seeing other results, and names nothing until a held-out confirmation, which spends a split. It is
+  compared with gemma4:31b on the same tune claims, on the model's own verdict and the final verdict, with seconds
+  per claim.
+- **Run lines (fixed now; a separate grant from the Publisher):**
+  - `CAL_EXTRA="--num-predict 12288 --num-ctx 16384" bash chain_step.sh /e/AI/rnd-calibrate-nemo nemotron-3.5-lightning:latest off on 0 tune`
+  - `CAL_EXTRA="--num-predict 12288 --num-ctx 16384" bash chain_step.sh /e/AI/rnd-calibrate-nemo nemotron-3.5-lightning:latest on on 900 tune`
+  - `CAL_EXTRA="--num-predict 12288 --num-ctx 16384" bash chain_step.sh /e/AI/rnd-calibrate-nemo nemotron-3.5-lightning:latest medium on 900 tune`
+- **chain_step's model tag:** the tag contains `:` and `.`. `chain_step.sh` derives a directory tag by replacing
+  `:` and `/`, giving `nemotron-3.5-lightning_latest`, which is a valid directory name.

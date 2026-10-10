@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.4.2] - 2026-10-10
+
+- calibration: nemotron-3.5-lightning pre-registered on tune (off/on/medium) before the grounded held-out is spent; gemma grounded held-out on hold
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.4.1] - 2026-10-09
 
 - intel-npu: E1 answered (reload-tolerant, max B_reuse 78.5); nomic NPU batch-8 losses are driver-level (3/3 with correct inputs); health check #3

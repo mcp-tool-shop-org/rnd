@@ -70,6 +70,16 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
   - **Implemented:** #34 (harness) and #35 (the E2 amendment; spec blob 69f3e6db → `bd88da4b`), both reviewed
     2026-10-10 and passed. The rerun uses that blob on a commit containing both, under a new run id, after the
     first run's compile cache is cleared and a health check passes.
+- **E2's rerun (`e2-2026-10-10b`, issue #36, ruled 2026-10-10):**
+  - **The l512 NPU rejection replicated** in a second fresh-cache run (same blob size, driver 32.0.100.5540).
+    It now reads "not supported at this shape on this driver"; formal confirmation comes when the receipts land.
+  - **A CPU arm (8×2048) passed its cold call, then exceeded the fixed 60 s per-call bound at warmup.** That's
+    a slow shape, not a stuck device.
+  - **The abort flush worked:** 12 aborted rows were kept out of the table.
+  - **Ruling:** the bound becomes per arm on every device, by amendment to E2 and E3. The cold call is bounded
+    at 600 s; warm calls at max(60 s, 3 × the arm's own cold call), capped at 600 s.
+  - **Next:** a full rerun (`-10c`) without the l512 arm, then the b8 tail. E3 waits for the bound change,
+    since its 8B generate arms would hit 60 s too.
 
 ## Studio relevance
 

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.22] - 2026-10-10
+
+- instruments/switchyard: E2 rerun findings (l512 rejection replicated; CPU 8x2048 slow, not stuck) and the per-arm call-bound ruling (#36)
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+
 ## [1.1.4.5.21] - 2026-10-10
 
 - stage1-role-eval: batch 3 fix-round key check

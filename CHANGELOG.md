@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.4.1] - 2026-10-09
+
+- intel-npu: E1 answered (reload-tolerant, max B_reuse 78.5); nomic NPU batch-8 losses are driver-level (3/3 with correct inputs); health check #3
+- Updated `intel-npu`: The Intel side of the rig — NPU embeddings and iGPU cross-encoders (npu-serve)
+- Added experiment `npu-probe`
+
 ## [1.1.4.4.0] - 2026-10-09
 
 - thinking-off results (gemma think-off grounded passes tune, post hoc) + grounded held-out pre-registration; charts built from receipts (13); site: newsletter issue 1 and a research brief directory (9 briefs); study-swarm entry on making thinking cheaper; NPU health check #2 and the E1 root cause

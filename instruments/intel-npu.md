@@ -34,8 +34,7 @@ The Core Ultra 9 285K's NPU ("Intel AI Boost") and Intel iGPU, through OpenVINO 
   padding/pooling hypothesis was wrong. This probe's results are unaffected: optimum passes the tokenizer's full
   outputs.
 - **nomic NPU 8×1024 lost the device 2 of 2 times, both with that stale buffer** (a possible out-of-bounds
-  token-type lookup). The next E1 re-run gets one diagnostic try, alone, as its last arm. DeBERTa's 8×512 hang
-  had correct inputs, so batch-8 hangs aren't fully explained.
+  token-type lookup). That hypothesis was tested and disproven the same night (see below).
 - **NPU health check** (after a hang, before the next NPU booking): `probe.py --batches 1` from
   `experiments/npu-probe`, in the NPU venv. It passes when every NPU row has no error, embedding minimum
   cosine is ≥ 0.9999, the NLI argmax agrees with the CPU, and each NPU median is within 1.5× of the
@@ -47,6 +46,16 @@ The Core Ultra 9 285K's NPU ("Intel AI Boost") and Intel iGPU, through OpenVINO 
   Second run, 21:26 the same day, after the second E1 loss and before the E1 re-run (the Publisher, 66 s):
   **PASS**. bge-small 0.0300 s, bge-base 0.0481 s, DeBERTa 0.2690 s; cosine ≥ 0.99999; argmax agrees. Receipt:
   `experiments/npu-probe/results/2026-10-09-health-before-e1-rerun.json`.
+  Third run, 23:18, after the E1 re-run's two losses (the Publisher, 105 s): **PASS**. bge-small 0.0305 s,
+  bge-base 0.0496 s, DeBERTa 0.2699 s. Receipt: `experiments/npu-probe/results/2026-10-09-health-after-e1-rerun2.json`.
+- **E1 answered (switchyard #25, R&D recompute):** the Intel devices are **reload-tolerant** at batch 1. The
+  largest break-even B_reuse is 78.5, against T = 100. A warm-cache reload costs a few hundred ms, and the
+  fresh compile is the real cost (24.4 s for nomic l2048 on the NPU), so warm the driver cache at startup. 44/45
+  arms pass parity with correct inputs. The miss is nomic NPU l2048, the pre-registered longest bucket, so nomic
+  on the NPU is capped at ≤ 1024 tokens.
+- **The nomic NPU batch-8 losses are the driver, not our input:** 8×1024 lost the device 3 of 3 times (the last
+  one with correct `token_type_ids`, so the stale-buffer hypothesis is disproven), and 8×2048 lost it 1 of 1.
+  Both are permanent capability facts. 8×512 survives.
 - INT8 weights don't speed up small encoders. Quantization matters for putting LLMs on the NPU (OpenVINO
   GenAI, INT4).
 - "-NPU2" model builds on Hugging Face (FastFlowLM) are for AMD XDNA2 NPUs, not this Intel NPU.

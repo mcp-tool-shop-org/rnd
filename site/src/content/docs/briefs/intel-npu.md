@@ -23,10 +23,15 @@ studio's small, always-on models (embedders, cross-encoders), so the 5090 stays 
 - **When the NPU seemed to disagree with the CPU, the bug was ours.** In switchyard's E1 run, 19 arms missed
   the output-matching check. Kimi traced every one to a single input the adapter never fed (`token_type_ids`).
   OpenVINO then read leftover memory, different in each compiled model. With that input fed, every comparison
-  matches at 1.00000000. The NPU and iGPU never miscomputed. The same stale input may also explain the two
-  nomic crashes, so the E1 re-run gives that arm one diagnostic try, alone and last.
+  matches at 1.00000000. The NPU and iGPU never miscomputed. 
+- **E1's answer: no need to keep models loaded.** On every valid batch-1 arm, a reload with a warm driver cache
+  pays for itself within 100 calls (the largest break-even is 78.5). The expensive part is the very first
+  compile (24 s for nomic at 2,048 tokens), so the router should warm the cache at startup.
+- **nomic at batch 8 on the NPU is a driver limit.** It crashed the device 3 of 3 times at 8×1024, the last time
+  with correct inputs, and 1 of 1 at 8×2048. 8×512 is fine. nomic on the NPU is capped at 1,024 tokens, because
+  its 2,048-token output drifts slightly from the CPU's.
 - **Windows logs nothing when the NPU resets.** The driver's error code is the only evidence.
-- **Health checks after each loss passed** (79 s and 66 s): all three models back at their earlier speeds, outputs
+- **Health checks after each loss passed** (79 s, 66 s and 105 s): all three models back at their earlier speeds, outputs
   matching.
 
 ![Intel NPU vs CPU](/rnd/charts/npu-vs-cpu.svg)

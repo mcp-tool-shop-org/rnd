@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.0] - 2026-10-10
+
+- experiments/stage1-role-eval: R&D's part of the Stage 1 role evaluation (statistics, power.py + receipt, the rounds stop rule, the pre-interview measures, the frozen scoring rule, key-check record and the patterns that fail instant agreement, the leakage tool); no sealed content
+- Added experiment `stage1-role-eval`
+
 ## [1.1.4.4.10] - 2026-10-10
 
 - verifier-gold leakage_check.py reads training items: with no claim field, the user turns are the text, compared sentence by sentence (a verbatim interview question planted in a long prompt is flagged)

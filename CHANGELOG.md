@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.15] - 2026-10-10
+
+- stage1-role-eval: the frozen stuck rule (re-read baseline 8.09; the late-quote marker dropped as uninformative) and the (lesson, kind) steering cell
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.14] - 2026-10-10
 
 - stage1-role-eval: the stuck definition (loop markers gated by length), steering minimum evidence, and the pre-checked reserve pool

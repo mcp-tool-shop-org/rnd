@@ -226,14 +226,19 @@ runner writes.
 - **Stuck thresholds:** frozen from the untrained pilot baseline before round 1.
 - **The steering rule:** pre-registered. It's pooled over both arms, because NO-ROLE is derived from ROLE
   items, and it runs per seed.
-- **"Stuck" means circling, not effort.** A trace counts as stuck when:
+- **"Stuck" means circling, not effort** (frozen at aspire-si 6a14f26, `stage1-stuck-rule.json` sha256
+  `63928fea…`). A trace counts as stuck when:
   - an 8-word span repeats 3 or more times; **or**
-  - the token cap is reached; **or**
-  - the trace is long (above max(the untrained p95 per tier, 2 × the item's target thinking)) and not
-    progressing (a re-read rate above its frozen baseline, or no new material line quoted in the final 30%).
+  - the 16,384-token cap is reached; **or**
+  - the trace is long (above max(the untrained p95 per tier, 2 × the item's target thinking)) **and** it
+    re-reads lines it already quoted at more than 8.09 per 1,000 tokens (the untrained pilot's p95).
 
-  Length alone is only recorded, because role training lengthens thinking on purpose.
+  A quote is any 5-word window of a line; windows shared by several lines don't count.
+
+  A "no new line quoted in the last 30%" marker was dropped before freezing. It held for 98 of 102 untrained
+  traces and for 48 of 48 good ROLE targets, so it carried no information. Length alone is only recorded.
 - **Steering conditions:**
+  - the cell is (lesson, kind), for kinds C, D and E; tier is recorded, not steered;
   - a cell needs n ≥ 8 and a stuck rate of at least max(median, 0.10);
   - steering slots draw from a reserve pool that's key-checked before round 1, never from live
     generation.

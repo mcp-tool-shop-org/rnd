@@ -1,0 +1,55 @@
+== nemotron-3.5-lightning:latest think=off structured=on start 00:06:01
+  false-accept (subtle): 28/128 21.9% [15.6-29.8]
+  gold cannot_tell: accepted 2/15 13.3% [3.7-37.9], said cannot_tell 7/15 46.7% [24.8-69.9], said unsupported 6
+  abstain: 60/255 23.5% [18.7-29.1]   balanced accuracy (decided): 0.857
+strata:
+  has_doc_comment=false        grounded   n=104  FA 11/59 18.6% [10.7-30.4]  subtle FA 9/52 17.3% [9.4-29.7]  abstain 32/97 33.0% [24.4-42.8]  BA 0.866
+  has_doc_comment=true         grounded   n=101  FA 12/49 24.5% [14.6-38.1]  subtle FA 12/46 26.1% [15.6-40.3]  abstain 24/98 24.5% [17.0-33.9]  BA 0.839
+  origin=offrig-a45fe53        grounded   n=22   FA 2/12 16.7% [4.7-44.8]  subtle FA 2/10 20.0% [5.7-51.0]  abstain 1/20 5.0% [0.9-23.6]  BA 0.844
+  origin=prs-2026-10-08        grounded   n=205  FA 23/108 21.3% [14.6-29.9]  subtle FA 21/98 21.4% [14.5-30.5]  abstain 56/195 28.7% [22.8-35.4]  BA 0.852
+  origin=role-os-ce91be8       grounded   n=43   FA 5/23 21.7% [9.7-41.9]  subtle FA 5/20 25.0% [11.2-46.9]  abstain 3/40 7.5% [2.6-19.9]  BA 0.886
+  self_referential=false       grounded   n=173  FA 18/91 19.8% [12.9-29.1]  subtle FA 17/83 20.5% [13.2-30.4]  abstain 47/165 28.5% [22.1-35.8]  BA 0.860
+  self_referential=true        grounded   n=32   FA 5/17 29.4% [13.3-53.1]  subtle FA 4/15 26.7% [10.9-52.0]  abstain 9/30 30.0% [16.7-47.9]  BA 0.808
+cost: $0.0000 over 188s wall at $0/hr = $0.00000 per claim (boot and pull time not included)
+context window: num_ctx 16384 (fixed, fixed)
+default rule (grounded and reasoning; knowledge reported only):
+  note: model-caused unusable outcomes (bad_verdict, truncated, repeated timeout, repeated server error or dropped reply) count as missing answers and fail the rule; a fail can come from those, not only from false accepts. context_overflow outcomes are offrig's sizing failure, not the model's: they are not counted against it and leave the run incomplete
+  grounded: FAIL
+    ok   every claim answered: missing 0 (need 0)
+    ok   gold unsupported claims: 128 (need >= 100)
+    FAIL false-accept upper bound (primary): 0.2837 (need < 0.1)
+    FAIL abstain rate: 0.2353 (need <= 0.2)
+    ok   balanced accuracy on decided: 0.8572 (need >= 0.8)
+  reasoning: not run
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate-nemo/cal-nemotron-3.5-lightning_latest-grounded-tune
+  false-accept (unsup only): 23/101 22.8% [15.7-31.9]
+  false-accept (subtle): 23/101 22.8% [15.7-31.9]
+  gold cannot_tell: accepted 6/19 31.6% [15.4-54.0], said cannot_tell 7/19 36.8% [19.1-59.0], said unsupported 6
+  abstain: 39/203 19.2% [14.4-25.2]   balanced accuracy (decided): 0.772
+strata:
+  has_doc_comment=false        reasoning  n=127  FA 17/71 23.9% [15.5-35.0]  subtle FA 12/56 21.4% [12.7-33.8]  abstain 23/112 20.5% [14.1-28.9]  BA 0.763
+  has_doc_comment=true         reasoning  n=95   FA 12/49 24.5% [14.6-38.1]  subtle FA 11/45 24.4% [14.2-38.7]  abstain 16/91 17.6% [11.1-26.7]  BA 0.782
+  origin=diffs-2026-10         reasoning  n=90   FA 12/50 24.0% [14.3-37.4]  subtle FA 9/40 22.5% [12.3-37.5]  abstain 13/80 16.2% [9.7-25.8]  BA 0.821
+  origin=diffs-2026-10-b2      reasoning  n=111  FA 14/58 24.1% [15.0-36.5]  subtle FA 11/52 21.2% [12.2-34.0]  abstain 21/105 20.0% [13.5-28.6]  BA 0.743
+  origin=diffs-2026-10-hard    reasoning  n=21   FA 3/12 25.0% [8.9-53.2]  subtle FA 3/9 33.3% [12.1-64.6]  abstain 5/18 27.8% [12.5-50.9]  BA 0.702
+cost: $0.0000 over 173s wall at $0/hr = $0.00000 per claim (boot and pull time not included)
+context window: num_ctx 16384 (fixed, fixed)
+status: incomplete, 1 claims pending (no recorded outcome); rerun with --resume <dir>
+default rule (grounded and reasoning; knowledge reported only):
+  note: model-caused unusable outcomes (bad_verdict, truncated, repeated timeout, repeated server error or dropped reply) count as missing answers and fail the rule; a fail can come from those, not only from false accepts. context_overflow outcomes are offrig's sizing failure, not the model's: they are not counted against it and leave the run incomplete
+  grounded: not run
+  reasoning: FAIL
+    FAIL every claim answered: missing 1 (need 0)
+    ok   gold unsupported claims: 101 (need >= 100)
+    FAIL false-accept upper bound (primary): 0.3255 (need < 0.1)
+    ok   abstain rate: 0.1921 (need <= 0.2)
+    FAIL balanced accuracy on decided: 0.7718 (need >= 0.8)
+  knowledge (reported only): not run
+default rule overall: INCOMPLETE (neither pass nor fail)
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate-nemo/cal-nemotron-3.5-lightning_latest-reasoning-tune
+== nemotron-3.5-lightning:latest end 00:12:20; models loaded after unload: 0
+== grounded: complete
+== reasoning: INCOMPLETE
+EXIT 3

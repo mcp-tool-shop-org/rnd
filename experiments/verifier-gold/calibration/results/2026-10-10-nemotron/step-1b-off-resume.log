@@ -1,0 +1,29 @@
+== nemotron-3.5-lightning:latest think=off structured=on start 00:13:41
+  false-accept (unsup+ct): 29/121 24.0% [17.2-32.3]
+  false-accept (unsup only): 23/102 22.5% [15.5-31.6]
+  false-accept (subtle): 23/102 22.5% [15.5-31.6]
+  gold cannot_tell: accepted 6/19 31.6% [15.4-54.0], said cannot_tell 7/19 36.8% [19.1-59.0], said unsupported 6
+  abstain: 39/204 19.1% [14.3-25.1]   balanced accuracy (decided): 0.773
+strata:
+  has_doc_comment=false        reasoning  n=127  FA 17/71 23.9% [15.5-35.0]  subtle FA 12/56 21.4% [12.7-33.8]  abstain 23/112 20.5% [14.1-28.9]  BA 0.763
+  has_doc_comment=true         reasoning  n=96   FA 12/50 24.0% [14.3-37.4]  subtle FA 11/46 23.9% [13.9-37.9]  abstain 16/92 17.4% [11.0-26.4]  BA 0.786
+  origin=diffs-2026-10         reasoning  n=91   FA 12/51 23.5% [14.0-36.8]  subtle FA 9/41 22.0% [12.0-36.7]  abstain 13/81 16.0% [9.6-25.5]  BA 0.824
+  origin=diffs-2026-10-b2      reasoning  n=111  FA 14/58 24.1% [15.0-36.5]  subtle FA 11/52 21.2% [12.2-34.0]  abstain 21/105 20.0% [13.5-28.6]  BA 0.743
+  origin=diffs-2026-10-hard    reasoning  n=21   FA 3/12 25.0% [8.9-53.2]  subtle FA 3/9 33.3% [12.1-64.6]  abstain 5/18 27.8% [12.5-50.9]  BA 0.702
+cost: $0.0000 over 182s wall at $0/hr = $0.00000 per claim (boot and pull time not included)
+context window: num_ctx 16384 (fixed, fixed)
+default rule (grounded and reasoning; knowledge reported only):
+  note: model-caused unusable outcomes (bad_verdict, truncated, repeated timeout, repeated server error or dropped reply) count as missing answers and fail the rule; a fail can come from those, not only from false accepts. context_overflow outcomes are offrig's sizing failure, not the model's: they are not counted against it and leave the run incomplete
+  grounded: not run
+  reasoning: FAIL
+    ok   every claim answered: missing 0 (need 0)
+    ok   gold unsupported claims: 102 (need >= 100)
+    FAIL false-accept upper bound (primary): 0.3230 (need < 0.1)
+    ok   abstain rate: 0.1912 (need <= 0.2)
+    FAIL balanced accuracy on decided: 0.7735 (need >= 0.8)
+  knowledge (reported only): not run
+default rule overall: FAIL
+wrote verdicts.jsonl, manifest.json and metrics.json to E:/AI/rnd-calibrate-nemo/cal-nemotron-3.5-lightning_latest-reasoning-tune
+== nemotron-3.5-lightning:latest end 00:13:54; models loaded after unload: 0
+== reasoning: complete
+EXIT 0

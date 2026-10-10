@@ -669,3 +669,19 @@ replay's claim is withdrawn and the cause found before any held-out is spent.
 **Run line** (separate grant; after Nemotron's "card free"):
 `CAL_EXTRA="--num-predict 12288 --num-ctx 16384 --think-policy escalate:off>on --loop-stop" bash chain_step.sh /e/AI/rnd-calibrate-policy gemma4:31b off on 0 tune`
 (chain_step's think argument is ignored under `--think-policy`, and the manifest records the policy.)
+
+## Result and stop, 2026-10-10: nemotron-3.5-lightning
+
+- **Think off, tune** (complete, after one resume of a no-outcome claim): **FAIL** on both types.
+  - Grounded: FA upper 0.284, abstain 0.235, BA 0.857, missing 0.
+  - Reasoning: FA upper 0.323, abstain 0.191, BA 0.774, missing 0.
+
+  Receipts: `results/2026-10-10-nemotron/`.
+- **Think on: stopped at 00:44 by the Director's direct order** ("Stop the running gpu job. No need to waste
+  any more electricity."), relayed by the Publisher, which revoked the grant.
+  - The chain, offrig and the model were stopped and unloaded; Ollama shows 0 models.
+  - The on-run had 109/270 grounded verdicts and reasoning hadn't started. It is abandoned, and no number is
+    computed from it. Its step log is kept as `step-2-on-STOPPED.log`.
+  - **Medium was never run,** so the on-vs-medium comparison doesn't exist.
+- **What this leaves:** the thinking-control design ("think before accepting") doesn't depend on Nemotron.
+  Nemotron's off result is the only one recorded.

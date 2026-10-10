@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.4.6] - 2026-10-10
+
+- calibration: Nemotron think-off result (FAIL); think-on stopped by the Director, medium not run
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.4.5] - 2026-10-10
 
 - verifier-gold: coherence pre-registration (re-rule 60 cannot_tell items; VitaminC + LLM-AggreFact anchor), awaiting the Director

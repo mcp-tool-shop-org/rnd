@@ -72,10 +72,13 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     first run's compile cache is cleared and a health check passes.
 - **E2's rerun (`e2-2026-10-10b`, issue #36, ruled 2026-10-10):**
   - **The l512 NPU rejection replicated** in a second fresh-cache run (same blob size, driver 32.0.100.5540).
-    It now reads "not supported at this shape on this driver"; formal confirmation comes when the receipts land.
+    **Confirmed on the receipts (#37):** code `0x7800000f` at execute, a 1,208,717,446 B blob, compile 31.0 s.
+    "Not supported at NPU 1×512 for Qwen3-Embedding-0.6B-fp16-ov on driver 32.0.100.5540"; a driver change
+    reopens it.
   - **A CPU arm (8×2048) passed its cold call, then exceeded the fixed 60 s per-call bound at warmup.** That's
     a slow shape, not a stuck device.
-  - **The abort flush worked:** 12 aborted rows were kept out of the table.
+  - **The abort flush worked:** 13 aborted rows (CPU 5, iGPU 6, NPU 2) were kept out of the table. The CPU hang
+    row must also stay out of the table, since #36 ruled it a slow shape, not a stuck device.
   - **Ruling:** the bound becomes per arm on every device, by amendment to E2 and E3. The cold call is bounded
     at 600 s; warm calls at max(60 s, 3 × the arm's own cold call), capped at 600 s.
   - **Next:** a full rerun (`-10c`) without the l512 arm, then the b8 tail. E3 waits for the bound change,

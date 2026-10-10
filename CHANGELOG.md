@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.23] - 2026-10-10
+
+- instruments/switchyard: the E2 l512 NPU rejection confirmed as replicated on the -10b receipts (#37)
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+
 ## [1.1.4.5.22] - 2026-10-10
 
 - instruments/switchyard: E2 rerun findings (l512 rejection replicated; CPU 8x2048 slow, not stuck) and the per-arm call-bound ruling (#36)

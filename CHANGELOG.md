@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.9] - 2026-10-10
+
+- stage1-role-eval: batch 2 passed; batch 3 rejected as template-generated, and the diversity gates proposed
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.8] - 2026-10-10
 
 - instruments/switchyard: the #31 run path, and the card-empty gap that blocks E4 (Ollama-only probe, fails open; VRAM ceiling and rest polling asked for)

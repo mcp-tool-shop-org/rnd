@@ -229,7 +229,8 @@ second.
 | Sealed set v1 | 130 | mechanical checks clean; 27 fixes (14 arguable verdicts, 2 DECIDING lines missing their subject, escalation problems) |
 | Sealed set v3 | 130 | passed, sha256 `e1e515b4…`: 40 supported / 55 unsupported / 35 cannot_tell, 15 escalate-keyed (medical, legal, safety or money only); freeze waits for the maintainer's 70-item sample |
 | Kimi training pilot, trait 4 | 40 | 34 passed; 6 fixed over two rounds |
-| Kimi batch 2, traits 1, 14 and 16 | 120 | about 96 passed, 24 fixes sent back; on re-check (103 items rewritten) 20 of the 24 held and 17 small fixes remain, mostly in trait 16 |
+| Kimi batch 2, traits 1, 14 and 16 | 120 | about 96 passed, 24 fixes sent back; on re-check (103 items rewritten) 20 of the 24 held and 17 small fixes remained, mostly in trait 16; after Grok's two fix rounds, **all passed** (e16453b) |
+| Grok batch 3, traits 5, 13 and 17 | 120 | **rejected as an approach** by the Dataset Specialist before line review. It came from one template script, and it passed every mechanical gate |
 
 **Patterns that fail instant agreement.** These have been seen more than once and now go into the generators'
 rules:
@@ -249,6 +250,16 @@ rules:
 - **Accept items that add a fact:** "per die", "so use the stairs", "12 pm". These belong in a reject item.
 - **Thinking that describes the claim wrongly:** a start time the claim never gives, or a "mechanism" it never
   states. List what the claim asserts before writing the thinking.
+- **Template generation.** Batch 3 passed every mechanical gate while being one generator's output:
+  - framing sentences cycled in the same order and contradicted the material ("garden rules" over Python);
+  - one trivial ordering puzzle was repeated for every trait;
+  - one thinking skeleton was reused 6–7 times per trait.
+
+  Gates that check correctness can't see sameness. Proposed diversity gates:
+  - no 8-word span outside material shared by 3 or more items;
+  - the framing label must match `content_kind`;
+  - no repeated puzzle structure;
+  - a generator script in the PR triggers a full human read.
 - **Two stop rules in conflict.** "Stop once the first line settles it" sits beside a falsifier sweep after a
   merely supporting line. Say it explicitly: stop when the line is decisive and nothing in the material
   qualifies it.

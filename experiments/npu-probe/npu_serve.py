@@ -18,6 +18,12 @@ adds `/api/nli` for a cross-encoder, and `/health` for device status. Loopback o
   "search_document: " / "search_query: " on its side, so a client of this service sees the same text twice.
 - Fail loud, never silent: an inference error is a 503, and a DEVICE_LOST latches the device until restart.
   There is no CPU fallback — a slow wrong answer is worse than none.
+- A per-call timeout (60 s, --call-timeout) latches the device as a hang. The timed-out call keeps running in
+  a daemon thread, because a stuck device call can't be cancelled, so restart npu-serve before that device is
+  used again.
+- switchyard E1 (2026-10-09) measured nomic on the NPU at 2048 tokens just under the 0.999 parity guard
+  (0.99861 against the CPU), and capped nomic NPU routing at 1024. The 2048 rung here predates that; check
+  parity at 2048 before relying on it.
 
   E:/AI/envs/npu-openvino/Scripts/python.exe npu_serve.py [--port 11491] [--nli]
 """

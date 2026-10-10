@@ -146,6 +146,35 @@ Sealed baseline rescored with the frozen scorers:
 |---|---|---|---|
 | s0 | 40 | 11 | 92 |
 | s1 | 44 | 15 | 92 |
+| s2 | 38 | 16 | 92 |
+
+**The sealed baseline, complete** (3 seeds on `e1e515b4`, no truncations; aggregates from ASPIRE's run note,
+recomputed here from the scored files):
+
+| Measure | Result |
+|---|---|
+| Pinned score | 11 / 15 / 16 of 130 (per-task mean 10.8%) |
+| Score v2 | 14 / 18 / 20 |
+| Found the evidence | 40 / 44 / 38 (31.3%) |
+| Verdict right | 92 each (70.8%) |
+| cannot_tell keys right | 13% (silent material is mostly called unsupported) |
+| ESCALATE yes given | 0, 3 and 1 of 15 |
+| False accepts | 5, 7 and 5 of 90 |
+| Correction tasks right | 37% |
+
+On the pinned score, 108 of 130 tasks are 0 of 3. The baseline sits near the floor, not the ceiling.
+
+**Power, re-run from the measured baseline** (`power_empirical.py`, input
+`results/2026-10-10-sealed-baseline-k.json`, which holds only per-task k-of-3 counts, sorted, with no task
+text; receipt `results/2026-10-10-power-empirical.txt`):
+
+| Score | +5 points | +8 points | +10 points |
+|---|---|---|---|
+| Pinned | 0.48 | 0.86 | 0.96 |
+| Found the evidence | 0.46 | 0.82 | 0.95 |
+
+That's 80% power at about +7 to +8 points on either score. It's conservative, since the after side pools 9
+samples and the simulation uses 3. This replaces the 55%-baseline assumption for planning.
 
 ## Key checks
 

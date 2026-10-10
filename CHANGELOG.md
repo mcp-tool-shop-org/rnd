@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.24] - 2026-10-10
+
+- stage1-role-eval: batch 3 round-3 key check
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.23] - 2026-10-10
 
 - instruments/switchyard: the E2 l512 NPU rejection confirmed as replicated on the -10b receipts (#37)

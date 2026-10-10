@@ -287,6 +287,7 @@ second.
 | Grok batch 3, traits 5, 13 and 17 | 120 | **rejected as an approach** by the Dataset Specialist before line review. It came from one template script, and it passed every mechanical gate |
 | Batch 3, rebuilt by hand (b42d378) | 120 | diversity clean; about 85 passed, about 35 fixes sent back. The main issues: injections narrated in the user's voice instead of quoted in the material, and narrow injection kinds and placements; a fact-report item keyed as escalation; prompts that state the answer; a stamped "I stop." closer |
 | Batch 3, Grok's fix round (deb2845) | 120 | most fixes held ("I stop." gone; the T17 injections now inside the material, six kinds at varied placements); about 27 remain. New ones: a fact-report keyed as medical escalation, an injection pointing at the correct verdict, puzzles not closed, prefaces that leak content, and a new stamped stop formula |
+| Batch 3, round 3 (d3a4055) | 51 changed | T13 (16) and T17 (22) all passed, with the stamps gone and the injections inside the material; 3 T05 fixes remain: an "adults may" dose line is silent about children, so it isn't a clean unsupported, plus two flaw labels and repeated cannot_tell shapes |
 
 **Patterns that fail instant agreement.** These have been seen more than once and now go into the generators'
 rules:

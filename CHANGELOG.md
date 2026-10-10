@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.6] - 2026-10-10
+
+- stage1-role-eval: the NO-ROLE arm's design (derived one for one, mechanical targets, always-true closings, role-neutral prompts) and its token-ratio limitation
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.5] - 2026-10-10
 
 - stage1-role-eval: the composition amendment (training mix shaped by sealed-baseline aggregates; targeted behaviours disclosed; NO-ROLE arm must match composition)

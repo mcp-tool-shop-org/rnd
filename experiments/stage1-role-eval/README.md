@@ -192,6 +192,29 @@ So:
   both arms' tables before Phase B).
 - **Any later mix change** needs a dated amendment and may use DEV only.
 
+**The NO-ROLE arm** (builder approved 2026-10-10, ASPIRE `stage1-train/no_role.py`).
+
+Each ROLE item yields one NO-ROLE item. The material, statement, keys, turns, kind, tier and pair all stay the
+same, so every count and floor matches by construction. Only the assistant targets change, and they're built
+mechanically from the item's own fields, with no model writing.
+
+| Item type | NO-ROLE target |
+|---|---|
+| C, D and verdict-type E | A plain read-through of the material, which always reaches each DECIDING line, then a fixed closing, then the three answer lines |
+| C, the other checker | "The other checker answered X. The answer is Y." |
+| A and written E | A material-recall item from the same lesson's materials (at least one content unit) |
+| B puzzles | The givens, then the answer |
+| B verification items | Treated like C and D, with the prompt reduced to material, statement and "Answer in the three lines." |
+
+The fixed closings are always true:
+- cannot_tell: `Nothing in the material settles the statement: "…".`
+- otherwise: `The line(s) "…" settle(s) the statement.`
+
+C, D and verdict-type E user turns must avoid a fixed list of role words, so both arms share their prompts.
+
+**The limitation:** target tokens are 0.62 of the ROLE arm's (A, B and E are lowest). That's named in
+advance, and neither filler nor lengthened materials are used to close it. Steps are matched.
+
 ## Key checks
 
 **The rule behind every check:** a key must get instant agreement. A key any careful reader could argue with

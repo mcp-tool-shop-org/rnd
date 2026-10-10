@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.20] - 2026-10-10
+
+- instruments/role-set: the role-shaping data generator (public prototype), its guards and firewall, the self-learning loop and the stuck rule; linked from stage1-role-eval
+- Added `role-set`: role-set — a generator for role-shaping training data (prototype, in the open)
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.19] - 2026-10-10
 
 - instruments/switchyard: #34 and #35 (native_binary_rejected and the abort flush; E2 amendment, blob bd88da4b) reviewed and passed

@@ -215,7 +215,8 @@ C, D and verdict-type E user turns must avoid a fixed list of role words, so bot
 **The limitation:** target tokens are 0.644 of the ROLE arm's (A, B and E are lowest; builder frozen at sha256 `63162cf4…`). That's named in
 advance, and neither filler nor lengthened materials are used to close it. Steps are matched.
 
-**Amendment: the self-learning generator and DEV** (eval plan a7b336b, 2026-10-10).
+**Amendment: the self-learning generator and DEV** (eval plan a7b336b, 2026-10-10). The generator is
+[role-set](https://github.com/mcp-tool-shop-org/role-set), public as a prototype; see `instruments/role-set.md`.
 
 The generator weights training toward questions the model gets stuck on, read from a store the training
 runner writes.

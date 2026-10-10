@@ -212,7 +212,7 @@ The fixed closings are always true:
 
 C, D and verdict-type E user turns must avoid a fixed list of role words, so both arms share their prompts.
 
-**The limitation:** target tokens are 0.62 of the ROLE arm's (A, B and E are lowest). That's named in
+**The limitation:** target tokens are 0.644 of the ROLE arm's (A, B and E are lowest; builder frozen at sha256 `63162cf4…`). That's named in
 advance, and neither filler nor lengthened materials are used to close it. Steps are matched.
 
 ## Key checks

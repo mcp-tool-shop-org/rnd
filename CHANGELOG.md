@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.7] - 2026-10-10
+
+- stage1-role-eval: NO-ROLE builder frozen (63162cf4), token ratio 0.644
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.6] - 2026-10-10
 
 - stage1-role-eval: the NO-ROLE arm's design (derived one for one, mechanical targets, always-true closings, role-neutral prompts) and its token-ratio limitation

@@ -19,7 +19,8 @@ stricter than against gold:
 An `.md` file is read as one item per numbered line ("1. ..."), which is how the pre-interview lists its
 questions.
 
-Task fields are read flexibly. The claim comes from `claim` or `statement`. The material comes from `material`,
+Task fields are read flexibly. The claim comes from `claim` or `statement`, or, for a training item, from
+its user turns (`turns[].user`), compared sentence by sentence. The material comes from `material`,
 `evidence`, `context`, or a list of {text}.
 
 A same or near-duplicate claim **fails** (exit 1). Shared evidence lines are a **warning**: tasks built from our
@@ -68,7 +69,21 @@ def lines_of(s: str) -> set:
 def fields(row: dict) -> tuple[str, str]:
     claim = row.get("claim") or row.get("statement") or ""
     material = next((row[k] for k in ("material", "evidence", "context") if row.get(k)), "")
+    if not claim and isinstance(row.get("turns"), list):  # training items: the text lives in the user turns
+        claim = "\n".join(t.get("user", "") for t in row["turns"] if isinstance(t, dict))
     return text_of(claim), text_of(material)
+
+
+def sentences(s: str) -> list[str]:
+    """A long text (a training item's user turns) is compared sentence by sentence, so a copied question
+    inside a longer prompt is still caught."""
+    parts = [x for x in re.split(r"(?<=[.?!])\s+|\n", s) if len(norm(x)) >= 20]
+    return parts if len(norm(s)) > 300 else [s]
+
+
+def best_jaccard(text: str, ref_grams: set) -> float:
+    return max((len(grams(x) & ref_grams) / max(1, len(grams(x) | ref_grams)) for x in sentences(text)),
+               default=0.0)
 
 
 def load(path: Path) -> list[dict]:
@@ -95,7 +110,7 @@ def check_against(tasks: list[dict], ref_path: Path) -> list[dict]:
                 why.append("same claim")
                 fail = True
             else:
-                j = len(gc & rgc) / max(1, len(gc | rgc))
+                j = best_jaccard(c, rgc)
                 if j >= JACCARD:
                     why.append(f"near-duplicate claim (Jaccard {j:.2f})")
                     fail = True
@@ -125,7 +140,7 @@ def check(tasks: list[dict]) -> list[dict]:
             if nc and nc == gnc:
                 why.append("same claim")
             else:
-                j = len(gc & ggc) / max(1, len(gc | ggc))
+                j = best_jaccard(c, ggc)
                 if j >= JACCARD:
                     why.append(f"near-duplicate claim (Jaccard {j:.2f})")
             shared = len(lm & glm)

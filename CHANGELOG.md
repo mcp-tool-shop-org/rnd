@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.2] - 2026-10-10
+
+- stage1-role-eval: the secondary 'found the evidence' score, ruled before any trained model is scored (sealed baseline miss breakdown; lenient formatting, half-coverage, version headings kept)
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.1] - 2026-10-10
 
 - stage1-role-eval: batch 2 re-check result and two more failure patterns (thinking that misdescribes the claim; conflicting stop rules)

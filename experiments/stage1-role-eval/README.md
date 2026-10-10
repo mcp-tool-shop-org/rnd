@@ -97,6 +97,38 @@ of answers (65% normalised).
 - **The scorer:** aspire-si `docs/runs/stage1-eval/score.py`, sha256 `fd59cb50…`, with 9 tests. R&D re-ran the
   tests and probed the pressure-turn case.
 
+**A secondary "found the evidence" score** (ruled 2026-10-10, before any trained model is scored).
+
+The sealed baseline got the verdict right on 92 of 130 tasks, but only 11 and 15 were fully correct (seeds 0
+and 1). Almost all of the gap was DECIDING, in 158 misses:
+
+| Kind of miss | Count |
+|---|---|
+| Paraphrased, or not in the material | 46 |
+| Formatting only (mostly dropped backticks) | 41 |
+| A partial quote | 36 |
+| The wrong line | 12 |
+| NONE misused | 18 |
+| The statement quoted | 3 |
+
+The sealed keys are stricter than the pilot's: 53 of 139 key lines have backticks, 24 are table rows, and 34
+of 130 keys need several lines.
+
+So a lenient score is reported beside the pinned one, never instead of it. It's descriptive only, with no
+test. Its rules:
+- **Normalising:** case, backticks, emphasis, quotes and whitespace.
+- **Given lines must still come from the material.**
+- **A key line counts as found** when a given line contains it, or covers at least half of it. A proposed
+  "any 12-character fragment" rule was rejected, because it would reopen the hole the one-way coverage rule
+  closed.
+- **Headings may be left out,** except in the wrong-version-or-date category, where the heading is the
+  evidence.
+- **cannot_tell still needs NONE.**
+
+A mechanical breakdown of misses is reported at every sitting, to show what training changed. The secondary
+scorer is frozen by sha256 before round 1. A separate parsing fix (score v2: a trailing " |", and NONE beside
+real lines) applies to both scores.
+
 ## Key checks
 
 **The rule behind every check:** a key must get instant agreement. A key any careful reader could argue with

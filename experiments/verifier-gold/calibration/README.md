@@ -446,3 +446,11 @@ The post-hoc thinking-level runs named in the 04:20 amendment, under their own g
 
   The exit code of each step is read before the next one starts. Exit 3 stops the chain, and a resume uses the
   same line.
+- **Run note, 20:12, after step 1 and before step 2** (a check fix, not a setting): step 1 (qwen3:8b) exited 3,
+  "INCOMPLETE", but both runs are complete. Grounded attempted 270/270 and reasoning 223/223, and each
+  `metrics.json` says `"status": "complete"`. `chain_step.sh` grepped offrig's report for the word
+  "incomplete", and the 9b6527f binary prints a note containing that word in every report. It now reads each
+  run's `metrics.json` status instead. That field still says `incomplete` for the known-stuck mistral runs.
+  Per the Publisher's terms, the chain stopped and was reported before any change. Completeness is now
+  run_model.sh's exit code plus `status == "complete"`, and a missing or unreadable metrics.json fails closed.
+  This fixes the check only; no setting changed. Step 1's result stands as recorded and is not re-run.

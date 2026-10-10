@@ -31,16 +31,22 @@ fi
 
 echo "== $MODEL think=$THINK structured=$STRUCT start $(date +%T)"
 bash "$HERE/run_model.sh" "$PROJ" "$MODEL" "$THINK" "$STRUCT" "$SPLIT"
+run_rc=$?
 curl -s "$OLLAMA/api/generate" -d "{\"model\":\"$MODEL\",\"keep_alive\":0}" >/dev/null
 sleep 5
 echo "== $MODEL end $(date +%T); models loaded after unload: $(loaded)"
 
 status=0
+[ "$run_rc" -eq 0 ] || { echo "== run_model.sh exited $run_rc"; status=3; }
 for ct in ${CAL_TYPES:-grounded reasoning}; do
   S=$SPLIT
   OUT="$PROJ/cal-$TAG-$ct-$S"
-  rep=$("$OFFRIG" verify calibrate --report-only "$OUT" --project "$PROJ" 2>&1)
-  if [ ! -f "$OUT/manifest.json" ] || echo "$rep" | grep -qi "incomplete"; then
+  # Completeness = run_model.sh's exit code plus each run's own status field; a missing or unreadable metrics.json
+  # counts as INCOMPLETE (fails closed). Grepping the report for "incomplete" stopped working when
+  # offrig 9b6527f (#53) added a note containing that word to every report (false INCOMPLETE, 2026-10-09 20:12).
+  st=$(python -c "import json,sys; print(json.load(open(sys.argv[1], encoding='utf-8')).get('status', ''))" \
+       "$OUT/metrics.json" 2>/dev/null)
+  if [ ! -f "$OUT/manifest.json" ] || [ "$st" != "complete" ]; then
     echo "== $ct: INCOMPLETE"; status=3
   else
     echo "== $ct: complete"

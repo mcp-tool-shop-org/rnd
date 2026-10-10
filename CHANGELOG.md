@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.3.37] - 2026-10-09
+
+- calibration: thinking-off chain_step completeness reads metrics.json status (false INCOMPLETE from offrig 9b6527f's report note); check fix only
+- Added experiment `charts`
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.3.36] - 2026-10-09
 
 - intel-npu: NPU health check passed after the E1 device loss (receipt committed)

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.3] - 2026-10-10
+
+- stage1-role-eval: the three frozen scorers by sha256 and the sealed baseline under them
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.2] - 2026-10-10
 
 - stage1-role-eval: the secondary 'found the evidence' score, ruled before any trained model is scored (sealed baseline miss breakdown; lenient formatting, half-coverage, version headings kept)

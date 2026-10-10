@@ -129,6 +129,24 @@ A mechanical breakdown of misses is reported at every sitting, to show what trai
 scorer is frozen by sha256 before round 1. A separate parsing fix (score v2: a trailing " |", and NONE beside
 real lines) applies to both scores.
 
+**Frozen scorers (R&D verified the hashes and re-ran the tests, 2026-10-10):**
+
+| Scorer | Role | sha256 | Tests |
+|---|---|---|---|
+| `score.py` | primary | `fd59cb50…` | 9 |
+| `score_v2.py` | parsing repair | `64f52f6f…` | — |
+| `score_found.py` | the secondary | `55b4d0ea…` | 22 |
+
+In `score_found.py`, a missing quote where the key needs one counts as NONE misuse. A "partial" needs 12 or
+more characters, or a quarter of a key line.
+
+Sealed baseline rescored with the frozen scorers:
+
+| Seed | Found | Pinned | Verdict right |
+|---|---|---|---|
+| s0 | 40 | 11 | 92 |
+| s1 | 44 | 15 | 92 |
+
 ## Key checks
 
 **The rule behind every check:** a key must get instant agreement. A key any careful reader could argue with

@@ -39,6 +39,16 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
 - **Design draft:** a self-repairing runner with an allowlist of measurement-neutral repairs, a fingerprint
   checked around and between repairs, and escalation for everything else. Reviewed by Kimi.
 - **The bar:** 90% coverage before a 0.1.0 prototype release. Going public is the Director's call.
+- **The run path (#31, reviewed 2026-10-10).** Until a778696, `switchyard run` only did dry runs, and E1's
+  receipts came from an uncommitted driver calling `run_interleaved`. Neither review caught that.
+  - **What #31 adds:** `run_spec` puts the guards in front of that same function: interpreter, spec, flags,
+    the blob lock, a receipt-name check, card checks, the rest, card checks again, then `run_interleaved`.
+  - **Remaining gap, which blocks E4 only:** the "empty card" check asks only Ollama (`/api/ps`), which
+    can't see a torch, ComfyUI or offrig job on the 5090, and a malformed reply reads as empty.
+  - **Fixes asked for:**
+    - an `nvidia-smi` VRAM ceiling, failing closed (`--query-compute-apps` is useless under Windows WDDM);
+    - polling at intervals of 60 s or less during the 15-minute rest, not just at its two ends.
+  - E2 and E3 don't touch the 5090, so they can run on #31 as is.
 
 ## Studio relevance
 

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.8] - 2026-10-10
+
+- instruments/switchyard: the #31 run path, and the card-empty gap that blocks E4 (Ollama-only probe, fails open; VRAM ceiling and rest polling asked for)
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+
 ## [1.1.4.5.7] - 2026-10-10
 
 - stage1-role-eval: NO-ROLE builder frozen (63162cf4), token ratio 0.644

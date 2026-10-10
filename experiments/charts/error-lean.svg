@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 552" width="1140" height="552" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
 <rect width="1140" height="552" fill="#ffffff"/>
 <text x="24.0" y="34.0" font-size="17" fill="#1f2430" text-anchor="start" font-weight="600">Error lean per model: false rejects, false accepts, abstain (chain, tune, final verdict)</text>
+<text x="24.0" y="72.0" font-size="10.5" fill="#b91c1c" text-anchor="start" font-weight="600">PROVISIONAL (2026-10-10): measured on synthetic, Claude-written gold, not checked against human labels. Not a result until re-measured on a public human-labelled set.</text>
 <text x="24.0" y="54.0" font-size="11.5" fill="#b91c1c" text-anchor="start" font-weight="400">POST HOC, DESCRIPTIVE: built after the results were seen, for ASPIRE&#x27;s judge choice. proxy: a different task (verify:grounded / verify:reasoning, not judge:*).</text>
 <line x1="330.0" y1="100.0" x2="330.0" y2="412.0" stroke="#e3e6ec" stroke-width="1.0"/>
 <text x="330.0" y="427.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0</text>

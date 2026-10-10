@@ -2,9 +2,13 @@
 title: Which local model can check claims for offrig?
 description: Six local models calibrated as claim verifiers on 2026-10-09. gemma4:31b with thinking on is the default for reasoning claims; with thinking off it passed grounded claims on tune, pending a held-out check.
 date: 2026-10-09
-status: confirmed (reasoning) · interim (grounded, think off passed tune)
+status: provisional (unverified synthetic gold)
 shelf: pending (readouts-internal model-knowledge)
 ---
+
+> **⚠ Provisional (2026-10-10):** these verifier numbers were measured on synthetic gold, claims and labels
+> written by Claude, not checked against human labels. They are not results until re-measured on a public
+> human-labelled set. Further runs on this gold are stopped.
 
 ## The question
 
@@ -28,8 +32,8 @@ assigned blind, and a cross-family check found and fixed 2 wrong labels in 120.
 - **gemma4:31b was fooled almost never,** but missed on four replies cut off at the 4,096-token reply limit
   while it was still thinking.
 - **Rerun with a bigger reply budget (12,288) and offrig's quote rule 2:** reasoning passed on the tune split,
-  then passed on the held-out split. That makes gemma4:31b offrig's default verifier **for reasoning claims
-  only**, at exactly the calibrated settings.
+  then passed on the held-out split. On this gold that made gemma4:31b the calibration's pick for reasoning claims. **No default is named;**
+  that waits for the public-data re-measure.
 - **Grounded still has no default.** One claim sent gemma into a thinking loop: it couldn't choose which of two
   separate passages to quote, because the contract allowed only one quote. It repeated two lines 307 times.
   offrig's next contract allows up to four quotes and adds a loop detector.
@@ -59,7 +63,8 @@ assigned blind, and a cross-family check found and fixed 2 wrong labels in 120.
   needs a fresh sealed split.
 - All four held-out false accepts were on claims whose right answer is "cannot tell" (4 of 21). None of 108
   false claims was accepted.
-- gemma4:31b is the default verifier, not the teacher for a distilled verifier. It narrowly misses the stricter
+- No default verifier is named, and gemma4:31b is not chosen as a distillation teacher. On this gold it narrowly
+  missed the stricter
   teacher bar.
 - The loop detector's threshold (40 repeats) was derived from this one model's replies.
 

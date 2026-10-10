@@ -6,6 +6,10 @@ status: research
 shelf: pending (readouts-internal model-knowledge)
 ---
 
+> **⚠ Provisional (2026-10-10):** these verifier numbers were measured on synthetic gold, claims and labels
+> written by Claude, not checked against human labels. They are not results until re-measured on a public
+> human-labelled set. Further runs on this gold are stopped.
+
 ## The question
 
 Thinking makes our local verifiers much more reliable: qwen3:8b was fooled on reasoning claims at a

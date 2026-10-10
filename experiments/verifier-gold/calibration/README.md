@@ -1,5 +1,11 @@
 # Calibrating offrig's default verifier
 
+> **⚠ Provisional, 2026-10-10.** Every number here was measured on synthetic gold: claims and labels written by
+> Claude about our own repos, not checked against human labels. The Director stopped further runs on it. Treat
+> these numbers as unverified until they are re-measured on a public human-labelled set (VitaminC, LLM-AggreFact;
+> see the coherence plan in `experiments/verifier-gold/README.md`).
+
+
 Which local model becomes offrig's default verifier, chosen by `offrig verify calibrate` (offrig#44, oracle
 mode: each claim's own context is the evidence) against the gold sets in `..`. This file fixes the protocol
 before any candidate runs.
@@ -575,8 +581,8 @@ runs.
 
 ## Design, 2026-10-10 ~00:40: thinking control, not model choice (the Director's direction)
 
-The Director: "on or off won't do. The model that wins will be the one with an adaptive or configurable thought
-process." Tonight's receipts already show it. gemma think on passes reasoning and fails grounded (the loop);
+The Director ruled that a fixed thinking setting, on or off, is not the answer: the winning verifier is one whose
+thinking can be configured or adapts per claim. Tonight's receipts already show it. gemma think on passes reasoning and fails grounded (the loop);
 gemma think off passes grounded and fails reasoning. No fixed setting passes both. So the next step designs the
 **thinking policy**, and it is tested **first on receipts we already have** (no new runs).
 
@@ -677,8 +683,8 @@ replay's claim is withdrawn and the cause found before any held-out is spent.
   - Reasoning: FA upper 0.323, abstain 0.191, BA 0.774, missing 0.
 
   Receipts: `results/2026-10-10-nemotron/`.
-- **Think on: stopped at 00:44 by the Director's direct order** ("Stop the running gpu job. No need to waste
-  any more electricity."), relayed by the Publisher, which revoked the grant.
+- **Think on: stopped at 00:44 by the Director's direct order,** to stop spending GPU time and power on gold he
+  judged untrustworthy. The Publisher relayed it and revoked the grant.
   - The chain, offrig and the model were stopped and unloaded; Ollama shows 0 models.
   - The on-run had 109/270 grounded verdicts and reasoning hadn't started. It is abandoned, and no number is
     computed from it. Its step log is kept as `step-2-on-STOPPED.log`.

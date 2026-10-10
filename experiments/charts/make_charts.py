@@ -54,6 +54,8 @@ CHAIN = ("chain: contract v2 · quote rule 1 · num_predict 4096 · num_ctx 1638
 RERUN = ("rerun: contract v2 · quote rule 2 · num_predict 12288 · num_ctx 16384 · "
          "offrig 751fb1d (sha256 6A1622C5…) · post hoc (pre-registered before its run)")
 
+SYNTH = ("PROVISIONAL (2026-10-10): measured on synthetic, Claude-written gold, not checked against human labels. "
+         "Not a result until re-measured on a public human-labelled set.")
 INK, MUTED, GRID, BG, RULE, BAND = "#1f2430", "#5b6272", "#e3e6ec", "#ffffff", "#b91c1c", "#f1f3f7"
 
 
@@ -207,6 +209,7 @@ def chart_calibration():
         rows.append(("gemma4:31b (think on)", f"Google Gemma · digest {r2[ct]['digest']} · rerun", r2[ct],
                      COLORS["gemma4:31b"], True))
         svg = Svg(1140, 92 + 30 * len(rows) + 140, f"Verifier calibration, verify:{ct}, tune split (2026-10-09)")
+        svg.text(24, 72, SYNTH, size=10.5, color=RULE, weight=600)
         svg.text(24, 54, "offrig's default rule, per model. Two calibrations, drawn as separate series: filled = the "
                  "six-model chain, hollow = the gemma rerun. They are never joined.", size=11.5, color=MUTED)
         y1 = cal_rows_chart(svg, 92, rows)
@@ -230,8 +233,9 @@ def chart_reasoning_default():
                      f"abstain {r['ab']['hits']}/{r['ab']['of']}", r, COLORS["gemma4:31b"], False))
     g = cal_row(CAL / "2026-10-09-gemma-r2" / "cal-gemma4_31b-grounded-tune")
     rows.append(("grounded · tune", f"n = {g['n']} · no default: fails on 1 missing claim", g, "#9ca3af", True))
-    svg = Svg(1140, 92 + 30 * len(rows) + 150, "offrig verify default for reasoning (contract v2, think on, quote rule 2, "
-              "num_ctx 16384, num_predict 12288)")
+    svg = Svg(1140, 92 + 30 * len(rows) + 150, "Calibration pick for reasoning, no default named (contract v2, think on, "
+              "quote rule 2, num_ctx 16384, num_predict 12288)")
+    svg.text(24, 72, SYNTH, size=10.5, color=RULE, weight=600)
     svg.text(24, 54, "gemma4:31b (Google Gemma, digest 6316f0629137) · offrig 751fb1d · temperature 0, seed 0 · "
              "the rerun calibration, pre-registered before its run", size=11.5, color=MUTED)
     y1 = cal_rows_chart(svg, 92, rows)
@@ -240,8 +244,8 @@ def chart_reasoning_default():
     sx = lambda v: x0 + v / 0.6 * (x1 - x0)
     svg.line(sx(0.07), 92, sx(0.07), y1, "#6b7280", 1.2, "2,3")
     svg.text(sx(0.07) - 4, y1 + 42, "distillation teacher bar (not met)", size=10, color="#6b7280", anchor="end")
-    svg.text(24, y1 + 72, "Named default for reasoning only, served at exactly these settings. The held-out split was "
-             "used once and is spent: a contract v3 default needs a fresh sealed split.", size=11.5)
+    svg.text(24, y1 + 72, "No default is named: the gold is unverified synthetic data. The held-out split was used once and "
+             "is spent: a contract v3 default needs a fresh sealed split.", size=11.5)
     svg.text(24, y1 + 90, "All 4 held-out false accepts are on gold cannot_tell claims (4/21); 0/108 on gold unsupported. "
              "Grounded has no default.", size=11.5)
     svg.footer(["The teacher bar belongs to the distillation plan, a separate decision; gemma misses it "
@@ -273,6 +277,7 @@ def chart_error_lean():
             rows.append((m, ct, sup, uns, ab))
     svg = Svg(1140, 120 + 26 * len(rows) + 120, "Error lean per model: false rejects, false accepts, abstain "
               "(chain, tune, final verdict)")
+    svg.text(24, 72, SYNTH, size=10.5, color=RULE, weight=600)
     svg.text(24, 54, "POST HOC, DESCRIPTIVE: built after the results were seen, for ASPIRE's judge choice. "
              "proxy: a different task (verify:grounded / verify:reasoning, not judge:*).", size=11.5, color=RULE)
     left, top, step = 330, 100, 26
@@ -387,6 +392,7 @@ def chart_loops():
         elif line and not line.startswith(" "):
             current = line.split(":")[0]
     svg = Svg(1140, 330, "gemma4:31b thinking: the longest repeated 8-word run per reply (rerun, tune)")
+    svg.text(24, 72, SYNTH, size=10.5, color=RULE, weight=600)
     svg.text(24, 54, "POST HOC: the evidence behind offrig contract v3's loop detector (n = 8 words, k = 40). "
              "The threshold is gemma-derived; it is enabled only for models with a false-hit check.", size=11.5,
              color=RULE)
@@ -688,6 +694,7 @@ def chart_thinking():
     if not rows:
         return
     svg = Svg(1140, 130 + 52 * len(rows) + 100, "Thinking on vs off, same model, same tune claims (model's own verdict)")
+    svg.text(24, 72, SYNTH, size=10.5, color=RULE, weight=600)
     svg.text(24, 54, "POST HOC (pre-registered before its runs, rnd acb333d). Filled = think on, hollow = think off. "
              "Model verdict before offrig's quote check, because the on-runs used older quote rules and builds.",
              size=11.5, color=RULE)

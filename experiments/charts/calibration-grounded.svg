@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 442" width="1140" height="442" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
 <rect width="1140" height="442" fill="#ffffff"/>
 <text x="24.0" y="34.0" font-size="17" fill="#1f2430" text-anchor="start" font-weight="600">Verifier calibration, verify:grounded, tune split (2026-10-09)</text>
+<text x="24.0" y="72.0" font-size="10.5" fill="#b91c1c" text-anchor="start" font-weight="600">PROVISIONAL (2026-10-10): measured on synthetic, Claude-written gold, not checked against human labels. Not a result until re-measured on a public human-labelled set.</text>
 <text x="24.0" y="54.0" font-size="11.5" fill="#5b6272" text-anchor="start" font-weight="400">offrig&#x27;s default rule, per model. Two calibrations, drawn as separate series: filled = the six-model chain, hollow = the gemma rerun. They are never joined.</text>
 <rect x="361.7" y="92.0" width="158.3" height="210.0" fill="#fdf0f0" stroke="none"/>
 <line x1="330.0" y1="92.0" x2="330.0" y2="302.0" stroke="#e3e6ec" stroke-width="1.0"/>

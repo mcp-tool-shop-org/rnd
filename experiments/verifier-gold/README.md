@@ -1,5 +1,11 @@
 # Verifier gold sets: grounded and reasoning claims
 
+> **⚠ Provisional, 2026-10-10.** Every number here was measured on synthetic gold: claims and labels written by
+> Claude about our own repos, not checked against human labels. The Director stopped further runs on it. Treat
+> these numbers as unverified until they are re-measured on a public human-labelled set (VitaminC, LLM-AggreFact;
+> see the coherence plan in `experiments/verifier-gold/README.md`).
+
+
 These are the gold claims that pick and calibrate offrig's default verifier model. The design is offrig#38,
 `docs/verifier-design.md`. The split agreed with the Publisher, 2026-10-08: R&D owns model selection and the
 grounded set, and the Publisher owns the PR-based reasoning set.
@@ -161,8 +167,8 @@ the rulings. Reasoning splits: tune 102 supported, 102 unsupported, 19 cannot_te
 
 ## Pre-registration, 2026-10-10 ~01:00: is the gold coherent? (the Director's question; nothing runs until he agrees)
 
-The Director doubts the labels ("There's places to get this sort of stuff, no need to make it up"). His point
-holds:
+The Director doubts the labels: public, human-labelled data exists for this, so there was no need to make it
+up. His point holds:
 - every claim here is a synthetic near-miss written by Claude about our own repos;
 - the cross-family label check used gemma4:31b, which is also the leading candidate;
 - nothing is anchored to an outside, human-labelled set.

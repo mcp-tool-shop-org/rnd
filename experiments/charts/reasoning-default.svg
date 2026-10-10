@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 332" width="1140" height="332" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
 <rect width="1140" height="332" fill="#ffffff"/>
-<text x="24.0" y="34.0" font-size="17" fill="#1f2430" text-anchor="start" font-weight="600">offrig verify default for reasoning (contract v2, think on, quote rule 2, num_ctx 16384, num_predict 12288)</text>
+<text x="24.0" y="34.0" font-size="17" fill="#1f2430" text-anchor="start" font-weight="600">Calibration pick for reasoning, no default named (contract v2, think on, quote rule 2, num_ctx 16384, num_predict 12288)</text>
+<text x="24.0" y="72.0" font-size="10.5" fill="#b91c1c" text-anchor="start" font-weight="600">PROVISIONAL (2026-10-10): measured on synthetic, Claude-written gold, not checked against human labels. Not a result until re-measured on a public human-labelled set.</text>
 <text x="24.0" y="54.0" font-size="11.5" fill="#5b6272" text-anchor="start" font-weight="400">gemma4:31b (Google Gemma, digest 6316f0629137) · offrig 751fb1d · temperature 0, seed 0 · the rerun calibration, pre-registered before its run</text>
 <rect x="361.7" y="92.0" width="158.3" height="90.0" fill="#fdf0f0" stroke="none"/>
 <line x1="330.0" y1="92.0" x2="330.0" y2="182.0" stroke="#e3e6ec" stroke-width="1.0"/>
@@ -84,7 +85,7 @@
 <text x="1052.0" y="171.0" font-size="11.5" fill="#b91c1c" text-anchor="start" font-weight="600">fail</text>
 <line x1="352.2" y1="92.0" x2="352.2" y2="182.0" stroke="#6b7280" stroke-width="1.2" stroke-dasharray="2,3"/>
 <text x="348.2" y="224.0" font-size="10" fill="#6b7280" text-anchor="end" font-weight="400">distillation teacher bar (not met)</text>
-<text x="24.0" y="254.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="400">Named default for reasoning only, served at exactly these settings. The held-out split was used once and is spent: a contract v3 default needs a fresh sealed split.</text>
+<text x="24.0" y="254.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="400">No default is named: the gold is unverified synthetic data. The held-out split was used once and is spent: a contract v3 default needs a fresh sealed split.</text>
 <text x="24.0" y="272.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="400">All 4 held-out false accepts are on gold cannot_tell claims (4/21); 0/108 on gold unsupported. Grounded has no default.</text>
 <text x="24.0" y="303.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">The teacher bar belongs to the distillation plan, a separate decision; gemma misses it (tune FA upper 0.0704 vs 0.07; held-out cannot_tell FA 19% vs 10%).</text>
 <text x="24.0" y="318.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Source: mcp-tool-shop-org/rnd experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/. Inputs pinned in experiments/charts/manifest.json.</text>

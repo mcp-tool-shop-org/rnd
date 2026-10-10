@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.4.7] - 2026-10-10
+
+- verifier calibration marked provisional (synthetic, unverified gold) in rnd, site and charts; Director quotes rewritten as decisions
+- Updated experiment `charts`
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.4.6] - 2026-10-10
 
 - calibration: Nemotron think-off result (FAIL); think-on stopped by the Director, medium not run

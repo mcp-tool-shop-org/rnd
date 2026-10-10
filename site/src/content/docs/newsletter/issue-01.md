@@ -1,15 +1,19 @@
 ---
 title: A verifier, a cliff, a dead NPU and a missing input
-description: Two days of measurements, from the first local default verifier to why the Intel NPU disagreed with itself.
+description: Two days of measurements, from a provisional verifier calibration to why the Intel NPU disagreed with itself.
 issue: 1
 date: 2026-10-09
 highlights:
-  - "<strong>offrig has its first default verifier</strong>: gemma4:31b, for reasoning claims only, confirmed on a held-out split. Grounded claims still have none."
-  - "<strong>Thinking does real work, but not equally</strong>: with thinking off, the qwen3 models were fooled 3–6× more often, while gemma4:31b lost little, ran 3.3× faster and passed grounded claims on tune (held-out check pending)."
+  - "<strong>Verifier calibration is provisional</strong>: it ran on synthetic, Claude-written gold. It will be re-measured on public human-labelled data before any default is named."
+  - "<strong>Thinking on vs off</strong>: on the same synthetic gold, thinking mattered much more for the qwen3 models than for gemma4:31b (provisional)."
   - "<strong>The NPU never miscomputed.</strong> All 19 E1 mismatches came from one missing model input, found on the CPU."
   - "<strong>CUDA 13.4 is usable</strong> locally and on rented RunPod GPUs; the judge fine-tune's speed-up came from a kernel, not from CUDA."
   - "<strong>Specialize models, verify hand-offs</strong>: a five-lane study-swarm on making thinking cheaper, and what it means for Role OS."
 ---
+
+> **⚠ Provisional (2026-10-10):** these verifier numbers were measured on synthetic gold, claims and labels
+> written by Claude, not checked against human labels. They are not results until re-measured on a public
+> human-labelled set. Further runs on this gold are stopped.
 
 Every claim below links to a research brief, and every brief links to its receipts. Interim and wrong results
 stay visible and labelled.
@@ -21,7 +25,8 @@ set built for the job, with every label assigned blind. None passed the first ru
 never, but ran out of reply budget while still thinking.
 
 A rerun with a larger budget and offrig's improved quote rule passed reasoning claims on tune, then on the
-held-out split. So gemma4:31b is now the default **for reasoning claims only**, at exactly those settings.
+held-out split. On this gold, gemma4:31b was the pick for reasoning claims; **no default is named** until the
+re-measure on public human-labelled data.
 Grounded claims failed on one deterministic thinking loop: gemma repeated two lines 307 times because the
 contract allowed only one quote. offrig's next contract allows several quotes and kills loops.
 → [Which local model can check claims for offrig?](../../briefs/verifier-calibration/)

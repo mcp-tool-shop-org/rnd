@@ -150,27 +150,27 @@
    "sha256": "5ff81579f388154c7edba243b47262cc8394b22e2b334b9453688bf2e03011ca"
   },
   "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-grounded-tune/verdicts.jsonl": {
-   "commit": "uncommitted",
+   "commit": "8c137a6",
    "sha256": "3c5071367581103392ed0019782c1dbc22840770cead911020ce596ba4662302"
   },
   "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-reasoning-tune/verdicts.jsonl": {
-   "commit": "uncommitted",
+   "commit": "8c137a6",
    "sha256": "f452c99f18bdb92c7a0603eed46ab71e08cbf692b6c85253bc69d1efc18e669c"
   },
   "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-grounded-tune/verdicts.jsonl": {
-   "commit": "uncommitted",
+   "commit": "8c137a6",
    "sha256": "b2b4345a8d07a64082f6183fc2680be07933ded531e5d42d0e935bb1f9c017d1"
   },
   "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-reasoning-tune/verdicts.jsonl": {
-   "commit": "uncommitted",
+   "commit": "8c137a6",
    "sha256": "d4f5143b57182b135805897282e51743755e3fffddf4d52635d9ec104026ea0d"
   },
   "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-grounded-tune/verdicts.jsonl": {
-   "commit": "uncommitted",
+   "commit": "8c137a6",
    "sha256": "b49647d65a196ebb70f5ba4488d0a4ad38b148d8fd0418e64d86499e5cd6a6ff"
   },
   "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-reasoning-tune/verdicts.jsonl": {
-   "commit": "uncommitted",
+   "commit": "8c137a6",
    "sha256": "beaca1ac9070acd6b46664b4013b80ca9db40f899dd5c6db70e1f475cdaab47a"
   },
   "experiments/verifier-gold/math-ladder/ladder.jsonl": {

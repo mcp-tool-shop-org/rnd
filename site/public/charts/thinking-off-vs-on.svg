@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 542" width="1140" height="542" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
 <rect width="1140" height="542" fill="#ffffff"/>
 <text x="24.0" y="34.0" font-size="17" fill="#1f2430" text-anchor="start" font-weight="600">Thinking on vs off, same model, same tune claims (model&#x27;s own verdict)</text>
+<text x="24.0" y="72.0" font-size="10.5" fill="#b91c1c" text-anchor="start" font-weight="600">PROVISIONAL (2026-10-10): measured on synthetic, Claude-written gold, not checked against human labels. Not a result until re-measured on a public human-labelled set.</text>
 <text x="24.0" y="54.0" font-size="11.5" fill="#b91c1c" text-anchor="start" font-weight="400">POST HOC (pre-registered before its runs, rnd acb333d). Filled = think on, hollow = think off. Model verdict before offrig&#x27;s quote check, because the on-runs used older quote rules and builds.</text>
 <line x1="300.0" y1="104.0" x2="300.0" y2="416.0" stroke="#e3e6ec" stroke-width="1.0"/>
 <text x="300.0" y="431.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0</text>

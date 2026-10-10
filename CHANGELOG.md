@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.4.4] - 2026-10-10
+
+- calibration: Nemotron path run note; native-serving fidelity check of 'think before accepting' (offrig #54) pre-registered
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.4.3] - 2026-10-10
 
 - calibration: thinking-control design (Director); replay on existing receipts: 'think before accepting' passes both check types with one policy

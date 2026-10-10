@@ -623,3 +623,49 @@ rerun (751fb1d), off is 9b6527f; both use quote rule 2 and the same budget. Outp
 
 **Nemotron tonight** is the one configurable-thinking candidate. Its off / on / medium receipts get the same
 replay, and medium-before-on is tried as the escalation step. No other model gets the off/on treatment.
+- **Run note, 2026-10-10 00:23, before step 2 loaded** (a path fix, not a setting):
+  - **The defect:** `chain_step.sh` names each run directory `cal-<model>-<type>-<split>`, without the thinking
+    level. So the pre-registered lines would have pointed step 2 (on) at step 1's off runs in the same project. offrig's
+    resume check compares settings, think included, so it would have *refused* that resume. It wouldn't have
+    silently mixed levels, but the step would have failed after loading the model (the Publisher's note).
+  - **What happened:** step 2 was stopped during its rest, before any model loaded. The leftover processes were
+    killed, and 0 models were loaded.
+  - **The fix:** on and medium each get their own scratch project, `/e/AI/rnd-calibrate-nemo-on` and
+    `/e/AI/rnd-calibrate-nemo-medium`. Off stays in `/e/AI/rnd-calibrate-nemo`. The gemma off run was separated
+    the same way. Settings are unchanged.
+  - **Step 1 (off):** both check types are complete after one resume of a no-outcome claim. That claim was a
+    single Ollama 500, "runner unexpectedly stopped" (`attempts.json`), the offrig defect the Publisher has
+    filed. Grounded FA upper 0.284, abstain 0.235, BA 0.857: FAIL. Reasoning FA upper 0.323, abstain 0.191, BA
+    0.774: FAIL.
+
+## Pre-registration, 2026-10-10 ~00:45, before any run: "think before accepting" served natively (offrig #54)
+
+**What:** gemma4:31b with `--think-policy escalate:off>on` on the **tune** split, both check types. Same settings
+as the replay's two runs: num_ctx 16384, num_predict 12288, quote rule 2, temperature 0, seed 0. `--loop-stop` is
+on: the k = 40 false-hit check is the replay's own clean maxima of 12–13. `--think-num-predict` is not set: the
+second call gets 12288, as the on-run did.
+
+**Binary:** the first offrig release that carries #54, re-hashed before the run and pinned here by sha256 in a run
+note before the first claim.
+
+**Why tune, when tune is spent for selection:** this run selects nothing. It checks that native serving
+reproduces the replay, which combined two binaries. It's a fidelity check, not a confirmation.
+
+**Pre-registered comparison:**
+1. **Escalation agreement:** for each claim, native `escalated` vs the replay's decision (off's final verdict
+   isn't "unsupported"). Expected to be high but below 100%, because off runs on a new binary. Reported as an
+   agreement rate per check type, with every disagreement listed.
+2. **Final-verdict agreement:** native vs replay, per claim, for the claims where both escalated or both didn't.
+3. **The rule and cost:** offrig's default rule per check type on the native verdicts, and the median and total
+   seconds against the always-on rerun.
+4. **Fallbacks:** every `think_fallback:<why>` is listed. The replay predicts one: the grounded loop claim
+   `prs-offrig-39-15s`.
+
+**What it can and can't do:** if native serving passes both types on tune, the policy is ready for confirmation.
+That means grounded on the unspent grounded held-out, under its own pre-registration and grant, and reasoning on
+the fresh contract-v3 split. If native diverges from the replay (agreement below 90% or a type failing), the
+replay's claim is withdrawn and the cause found before any held-out is spent.
+
+**Run line** (separate grant; after Nemotron's "card free"):
+`CAL_EXTRA="--num-predict 12288 --num-ctx 16384 --think-policy escalate:off>on --loop-stop" bash chain_step.sh /e/AI/rnd-calibrate-policy gemma4:31b off on 0 tune`
+(chain_step's think argument is ignored under `--think-policy`, and the manifest records the policy.)

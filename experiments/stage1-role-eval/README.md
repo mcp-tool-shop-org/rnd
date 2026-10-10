@@ -237,6 +237,13 @@ runner writes.
 
   A "no new line quoted in the last 30%" marker was dropped before freezing. It held for 98 of 102 untrained
   traces and for 48 of 48 good ROLE targets, so it carried no information. Length alone is only recorded.
+- **Hedge phrases** ("wait", "hmm", "actually", "let me re-check" and so on; the list was fixed before
+  counting). On the untrained pilot, 74.5% of traces have none, and the p95 is 8.32 per 1,000 tokens. The ROLE
+  targets' p95 is 0. Measured and adopted:
+  - **As a trigger:** inside (C), long AND (re-read > 8.09 OR hedge > 8.32). It adds few traces, but
+    essentially never fires on taught text.
+  - **As a record**, the maintainer's call: per phrase, the rate, first and last positions and end clustering,
+    on every trace at every sitting. Eval sittings never reach the generator's store.
 - **Steering conditions:**
   - the cell is (lesson, kind), for kinds C, D and E; tier is recorded, not steered;
   - a cell needs n ≥ 8 and a stuck rate of at least max(median, 0.10);

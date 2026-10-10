@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.16] - 2026-10-10
+
+- stage1-role-eval: hedge phrases measured, adopted as a stuck trigger inside (C), and recorded at every sitting
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.15] - 2026-10-10
 
 - stage1-role-eval: the frozen stuck rule (re-read baseline 8.09; the late-quote marker dropped as uninformative) and the (lesson, kind) steering cell

@@ -1,0 +1,8 @@
+grounded  always off                             FA 4/143 upper 0.070  abstain 0.086  BA 0.979  missing 0  thinking 0/270  time 26% of always-on
+grounded  always on                              FA 0/142 upper 0.026  abstain 0.075  BA 0.991  missing 1  thinking 270/270  time 100% of always-on
+grounded  escalate on abstain or quote failure   FA 4/142 upper 0.070  abstain 0.055  BA 0.980  missing 1  thinking 32/270  time 42% of always-on
+grounded  think before accepting                 FA 0/143 upper 0.026  abstain 0.071  BA 0.991  missing 0  thinking 145/270  time 87% of always-on
+reasoning always off                             FA 7/121 upper 0.115  abstain 0.044  BA 0.970  missing 0  thinking 0/223  time 33% of always-on
+reasoning always on                              FA 3/121 upper 0.070  abstain 0.059  BA 0.984  missing 0  thinking 223/223  time 100% of always-on
+reasoning escalate on abstain or quote failure   FA 7/121 upper 0.115  abstain 0.020  BA 0.970  missing 0  thinking 22/223  time 41% of always-on
+reasoning think before accepting                 FA 2/121 upper 0.058  abstain 0.044  BA 0.990  missing 0  thinking 124/223  time 88% of always-on

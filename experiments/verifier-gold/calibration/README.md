@@ -572,3 +572,54 @@ runs.
   - `CAL_EXTRA="--num-predict 12288 --num-ctx 16384" bash chain_step.sh /e/AI/rnd-calibrate-nemo nemotron-3.5-lightning:latest medium on 900 tune`
 - **chain_step's model tag:** the tag contains `:` and `.`. `chain_step.sh` derives a directory tag by replacing
   `:` and `/`, giving `nemotron-3.5-lightning_latest`, which is a valid directory name.
+
+## Design, 2026-10-10 ~00:40: thinking control, not model choice (the Director's direction)
+
+The Director: "on or off won't do. The model that wins will be the one with an adaptive or configurable thought
+process." Tonight's receipts already show it. gemma think on passes reasoning and fails grounded (the loop);
+gemma think off passes grounded and fails reasoning. No fixed setting passes both. So the next step designs the
+**thinking policy**, and it is tested **first on receipts we already have** (no new runs).
+
+**Replay (post hoc, no GPU):** `thinking_policy_replay.py` combines gemma's think-off and think-on verdicts on
+the same tune claims under each policy. It sums wall seconds for the calls each policy would make. On is the
+rerun (751fb1d), off is 9b6527f; both use quote rule 2 and the same budget. Output: `results/2026-10-09-thinking-off/thinking-policy-replay.txt`.
+
+| policy | grounded FA upper | abstain | BA | missing | reasoning FA upper | abstain | BA | thinking calls | time vs always-on |
+|---|---|---|---|---|---|---|---|---|---|
+| always off | 0.070 ✓ | 0.086 | 0.979 | 0 | 0.115 ✗ | 0.044 | 0.970 | 0% | 26–33% |
+| always on | 0.026 | 0.075 | 0.991 | **1 ✗** | 0.070 ✓ | 0.059 | 0.984 | 100% | 100% |
+| escalate on abstain or quote failure | 0.070 | 0.055 | 0.980 | 1 | 0.115 ✗ | 0.020 | 0.970 | 10–12% | 41–42% |
+| **think before accepting** (below) | **0.026 ✓** | 0.071 | 0.991 | **0 ✓** | **0.058 ✓** | 0.044 | 0.990 | 54–56% | 87–88% |
+
+- **Escalating on abstain doesn't touch false accepts.** gemma's false accepts are *confident* "supported"
+  verdicts, so escalating only on doubt can't catch them.
+- **"Think before accepting" passes both check types with one policy.** That's the first configuration to do so.
+  The rule:
+  1. Ask with thinking off.
+  2. An off verdict of **unsupported** stands. A false reject is the cheap error, and off's false-reject rate is
+     already low.
+  3. **supported** or **cannot_tell** is re-asked with thinking on, and the thinking answer stands.
+  4. If the thinking call loops or truncates (the loop detector, n = 8, k = 40, or the cap), the answer falls back
+     to **cannot_tell**, never to off's "supported". That's how the grounded loop claim stops being missing.
+- **The saving is modest for gemma** (about 12% of time), because about half the claims are "supported". It
+  grows with:
+  - **(b) a thinking budget** that caps think length below 12,288, with the loop detector as the stop;
+  - **a model with graded effort.** Nemotron's medium is being measured tonight, so the escalation could use
+    medium first and on only if medium abstains.
+
+**What offrig needs (the Publisher's PRs):**
+1. A per-check-type thinking config.
+2. Escalation as above: off → on for supported and cannot_tell, with loop and cap falling back to cannot_tell.
+3. A thinking budget per call, with the loop detector stopping the *thinking* rather than the reply.
+
+**What gets confirmed, and on which split:**
+- The policy is new and was chosen post hoc on tune.
+- **Grounded:** confirm on the unspent grounded held-out, pre-registered once offrig serves the policy natively.
+  The replay can't stand in for it, because two binaries were combined.
+- **Reasoning:** v2's held-out is spent, so reasoning needs a fresh sealed split (already planned for contract
+  v3).
+- The gemma think-off grounded held-out stays on hold: it would confirm a fixed setting, which this design
+  replaces.
+
+**Nemotron tonight** is the one configurable-thinking candidate. Its off / on / medium receipts get the same
+replay, and medium-before-on is tried as the escalation step. No other model gets the off/on treatment.

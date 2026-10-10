@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.4.3] - 2026-10-10
+
+- calibration: thinking-control design (Director); replay on existing receipts: 'think before accepting' passes both check types with one policy
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.4.2] - 2026-10-10
 
 - calibration: nemotron-3.5-lightning pre-registered on tune (off/on/medium) before the grounded held-out is spent; gemma grounded held-out on hold

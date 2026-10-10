@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.17] - 2026-10-10
+
+- stage1-role-eval: hedge bursts (3 within 200 tokens) replace the hedge rate as the (C) trigger, per the pre-registered rule; all hedge and burst fields recorded everywhere
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.16] - 2026-10-10
 
 - stage1-role-eval: hedge phrases measured, adopted as a stuck trigger inside (C), and recorded at every sitting

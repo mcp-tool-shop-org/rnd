@@ -55,6 +55,18 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
   - **The fix:** fetch the `.bin` at the same pinned revision, so both files sit in one snapshot directory.
   - **Timing is unaffected:** the download sits outside every timer.
   - **Same pattern later:** ONNX external-data files (`.onnx_data`) would need it too.
+- **E2's first run aborted with zero rows (issue #33, ruled 2026-10-10).** The NPU rejected the compiled l512
+  binary at execute (`ZE_RESULT_ERROR_INVALID_NATIVE_BINARY`). The compile had succeeded, l128 had passed, and
+  the health check afterwards was clean. Only `device_lost` and `hang` were recorded outcomes, and the abort
+  flush wrote finished arms only, so in an A-B-A schedule nothing was kept.
+  - **New outcome, `native_binary_rejected`:** NPU only, that exact code, at execute after a successful
+    compile, and only if that shape hasn't already run in the run. It's scoped to model × device × static
+    shape.
+  - **What it doesn't do:** skip anything beyond same-key arms, or mark the NPU off.
+  - **Replication:** one occurrence is provisional. "Not supported" needs a recurrence in a run with a fresh
+    compile cache; if it passes there instead, the shape is flaky and doesn't route.
+  - **Any abort** now flushes completed slots as `aborted: true` rows, which never import into the routing
+    table.
 
 ## Studio relevance
 

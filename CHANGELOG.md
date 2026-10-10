@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.11] - 2026-10-10
+
+- instruments/switchyard: the E2 INVALID_NATIVE_BINARY ruling (#33): a scoped capability outcome, a replication rule, and the abort flush
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+
 ## [1.1.4.5.10] - 2026-10-10
 
 - instruments/switchyard: #32, the OpenVINO IR .bin fetched with its .xml at the pinned revision

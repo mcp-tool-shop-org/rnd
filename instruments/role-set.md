@@ -247,6 +247,9 @@ prototype, and its interfaces change without notice.
     - **Required:** symmetric relations (`adjacent`, `not_adjacent`, `same`, `different`) need both argument orders.
       Measured at be57310, swapping the names in one clue gave the same puzzle a new skeleton.
     - With this check, `skeleton_repeat` moves from the brief into the tool.
+    - **Re-check at a0d2280: pass.** Swapped arguments now give an equal skeleton, while different pairs stay
+      different. A negative offset is folded, past 50,000 readings a puzzle is compared as written, and 0 repeats were
+      found over the ten files. #100's edit ("each bell at a different height") passes too.
     - **In the rehearsal, C, D and E were switched off by the 8B's assembly failures,** as designed. Nothing touched
       the puzzle checks.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.82] - 2026-10-11
+
+- stage1-role-eval: configurable keyed-carry decision; batch 5 re-check
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.81] - 2026-10-11
 
 - stage1-role-eval: ruling on Amendment 5 closed-form keyed options

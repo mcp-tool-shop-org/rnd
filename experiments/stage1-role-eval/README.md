@@ -309,6 +309,7 @@ second.
 | Quiz loop, #101 follow-ups, checkpoint event (#102, e880bb0) | quiz.py, ledger.py, eval_adapter | pass with one fix. A free-text store variant is refused but not spent, so it is retried every session (`unspent_refusal_loop`, new class). Ruling: a variant restating the trained statement stays spent. 17 spent variants in batches 1–4 go to the Specialist for rewording (`variant_restates_trained`, new class) |
 | Variant fix round (#103, a45143a) | 11 n = 0 variants | pass. 6 carried their own material block (T01's two asked a different claim), and 5 restated the trained statement. All now re-ask their own claim, reworded, against the base key. Suggestion: drop the "restated" openers, because the quiz never shows the trained statement |
 | Spent-variant test (#104) | test_quiz.py | pass, to merge before #103. The test builds its own spent case rather than reading T05-E-06, which #103 rewords. Note: make sure the 10 borrowed words don't quote material, which is exempt |
+| Batch 5 re-check (#92, c505e5a) | 65 changed items | 58 pass. T08-C-03's key is wrong: "leaves the cap blank" contradicts "prints a cap of 6" (`wrong_key`). T08-B-02 and B-03 ask safety and medical questions with no flag. T08-B-04 and B-05 are verification questions keyed by value, and they are extra lookups. T07-B-04 and T09-B-05 never state one per slot (`missing_stated_constraint`). These fold into the batch-5 round with round 2b |
 
 **Patterns that fail instant agreement.** These have been seen more than once and now go into the generators'
 rules:
@@ -384,6 +385,14 @@ results in a Leitner ledger (`ledger.py`, aspire-si #102). R&D's rulings:
     - meaning is confirmed by R&D's key-check.
 
     The 50% share is to be measured on the existing variants before batch 6 is gated.
+  - **Made configurable (the maintainer's direction, 2026-10-11):**
+    - the keyed carry (verbatim, paraphrase or either), with its content-word share;
+    - the exemption of an item's own key points inside the keyed option;
+    - the span length and the share threshold.
+
+    R&D's ruling sets the defaults: paraphrase, no exemption, 8, 0.5. The settings in force go on the manifest and
+    every quiz receipt, and a non-default setting on a scored run is pre-registered. Authoring stays paraphrase, which
+    passes under every setting.
 
 ## The leakage tool
 

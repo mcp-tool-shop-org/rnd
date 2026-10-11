@@ -193,6 +193,9 @@ prototype, and its interfaces change without notice.
       negated verbs ("quoted neither line", "without quoting"); otherwise it refuses true rubber stamps, and batch 5
       has one such case. #30 also keys an assembly or puzzle halt by the problem's wording, not the bare code, so two
       cells failing for different reasons no longer switch a kind off.
+    - **Cleared at 4dc08c0** with the negation fix. Re-run over every rubber_stamp row: batch 5 matches R&D's six
+      relabels, and both true stamps pass. The reviewed files have 4 more narrated-quote rubber_stamps, which go to fix
+      round 1 as relabels to guess.
     - **In the rehearsal, C, D and E were switched off by the 8B's assembly failures,** as designed. Nothing touched
       the puzzle checks.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**

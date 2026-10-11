@@ -167,6 +167,23 @@ prototype, and its interfaces change without notice.
       - one planted rubber_stamp with a rejecting checker.
 
       Two markers were held back until those items are relabelled.
+  - **role-set #29 (PR H, the B solver), R&D review 2026-10-11: pass with four changes.**
+    - **Required:**
+      - accept only "left to right" as a stated direction (with "right to left", the solver keys left/right facts
+        backwards);
+      - count every direct form toward the lookup cap, and re-check it inside the accept lock (a race at
+        concurrency 8);
+      - for a supported or unsupported claim, a fact is idle when the verdict doesn't depend on it;
+      - refuse a B draft whose thinking trips the frozen stuck rule.
+    - **Open:** the thinking isn't yet checked step by step against the model. A follow-up could have each step cite
+      its lines and state its conclusion, for the solver to check. R&D's key-check reads B traces until then.
+  - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**
+    - **The rebuild list:** the 10 dev label findings, including T14-C-04, rebuilt so a missing fact decides it.
+    - **Uniform sweeps** over the reviewed files: key form, flaw direction, side, turn placement, option register.
+    - **The held-out guard:** no held-out item changes because of a critic's output, and the scored critic run uses
+      the round's merge commit.
+    - **Fix round 2:** converts every reviewed B item to the solver's format. Stage 1 data doesn't freeze until every
+      B item passes the solver.
   - **PR H design (the kind B solver), R&D ruling 2026-10-11: approved with additions.**
     - **The design:** the writer emits each puzzle as data: entities, attributes and facts in a closed set of rule
       forms, each fact citing the numbered line it encodes. Code checks:

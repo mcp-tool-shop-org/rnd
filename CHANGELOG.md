@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.28] - 2026-10-11
+
+- switchyard: rest out of the harness; e3-ref empty-prompt defect
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+- Updated experiment `verifier-gold`
+
 ## [1.1.4.5.27] - 2026-10-11
 
 - switchyard: E3 reads VIABLE, the tail closed

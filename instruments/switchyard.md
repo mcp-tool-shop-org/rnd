@@ -97,6 +97,14 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     l2048-b8 has had its one try.
   - **Design flaw found:** under interleaving, l128-b8's repeats waited on l2048-b8's cold, so two runs lost
     l128-b8. The next tail runs arms sequentially, l128-b8 alone.
+- **Superseded 2026-10-11: the rest is out of switchyard (maintainer).** Rests were never meant to be a tool
+  rule. They're the Publisher's scheduling call, between consecutive long runs only.
+  - rest_s, plan_rest, the conditional rest and the forced 5090 rest are removed. Specs carry a dated
+    superseding line.
+  - Run markers remain only as the record of a killed run.
+  - Kept: the heartbeat and empty-card guards, which prevent collisions.
+  - Device state at run start is recorded, never gated on.
+  - The two bullets below are history.
 - **The rest became conditional (maintainer, 2026-10-10; #43, #46).**
   - The 15-minute rest is owed only after a run of over 30 minutes on the same devices that ended less than
     rest_s ago, and only for the remainder.
@@ -133,7 +141,12 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
   - **A bug found on the way:** a fake that returned floats hid the real library's MeanStdPair metrics, and a
     bare `except` dropped every counter. The first blocked run was stopped and the harness fixed (#50). The
     lesson: test fakes must mirror the real return types, and nothing is dropped silently.
-  - The 5090 reference (e3-ref, descriptive ratio) is R&D's to run, after the role-set windows.
+  - **The 5090 reference (e3-ref) measured nothing on its first run (2026-10-11, R&D's spec defect).** Its
+    arms never referenced the 1024 prompt, and the Ollama adapter defaults a missing prompt to "", so all 14
+    calls were empty and every rate was null.
+    - The fix is switchyard #52: E3's prompts copied byte for byte, think true/false, num_ctx 4096.
+    - The harness gets an empty-prompt refusal and a required-metric andon.
+    - The re-run needs a new grant.
 - **The tail closed (`e2-b8tail-2026-10-11`):** NPU 8×128 warm p50 597.8 ms after a 52 s compile.
 - **The Shared GPU/NPU Memory Override stays at 57% (36.1 GB)** for the series (maintainer, 2026-10-10). Every
   receipt records it in its environment capture.

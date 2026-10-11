@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # One step of the overnight calibration chain: rest, run one model, check it finished, unload.
-# GPU: only inside the Publisher's chain grant. Standing rule (Director, 2026-10-08): the card rests 15 min
-# with nothing loaded between runs. So every step but the first rests before it loads anything.
+# GPU: only inside the Publisher's chain grant. The rest is the caller's choice, not a rule of this script:
+# since 2026-10-11 (maintainer) a rest is the Publisher's scheduling call between consecutive long runs only.
+# Pass 0 when the grant says no rest; the 2026-10-08 chains passed 900.
 #   bash chain_step.sh <scratch-project-dir> <model> <think> <structured> <rest-seconds> [split]
 # Exit 0: the model's runs are complete. Exit 3: incomplete (paused, or the server went away), so stop the
 # chain. Rerunning the same line resumes it; completed claims are never asked again.

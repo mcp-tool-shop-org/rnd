@@ -236,6 +236,10 @@ prototype, and its interfaces change without notice.
     - **The other claims match the code and the run notes:** the critic numbers, the solver's scope, steering never
       run, the three pilot costs, loopback only, the GPU guard, the pins, the receipts and the firewall.
     - **The fix:** pilot 2 is "15 of 49 passed as written", not "the accept rate".
+  - **The reply's last line (#36), R&D review 2026-10-11: pass.**
+    - **The old behaviour:** `puzzle-check` split the last line at its first colon, so a time-valued key lost its start.
+    - **Now:** only a leading `Answer:` label is stripped.
+    - **What it changes:** a last line with any other label now fails. No data file relied on that.
     - **In the rehearsal, C, D and E were switched off by the 8B's assembly failures,** as designed. Nothing touched
       the puzzle checks.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**

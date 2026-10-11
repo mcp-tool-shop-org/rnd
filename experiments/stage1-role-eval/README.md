@@ -393,6 +393,14 @@ results in a Leitner ledger (`ledger.py`, aspire-si #102). R&D's rulings:
     R&D's ruling sets the defaults: paraphrase, no exemption, 8, 0.5. The settings in force go on the manifest and
     every quiz receipt, and a non-default setting on a scored run is pre-registered. Authoring stays paraphrase, which
     passes under every setting.
+  - **The distractor rule, revised after ASPIRE's measurement.**
+    - **The measurement:** on batch 5's 12 closed-form items, 15 of 36 distractors share at least half the keyed
+      point's content words. They are built from the item's own vocabulary on purpose. A 0.5 cap would refuse 8 of
+      the 12 for good near-misses.
+    - **The new default:** each distractor's share must be strictly below the keyed option's (`distractor_margin`
+      0.0), and `distractor_max` is 0.8, a near-copy guard only.
+    - **What stays the same:** keyed share 0.5, re-measured once the round's paraphrased options exist.
+    - **The guarantee of no second right answer** stays with the key-check.
 
 ## The leakage tool
 

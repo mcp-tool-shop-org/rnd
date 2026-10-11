@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.83] - 2026-10-11
+
+- stage1-role-eval: distractor margin ruling
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.82] - 2026-10-11
 
 - stage1-role-eval: configurable keyed-carry decision; batch 5 re-check

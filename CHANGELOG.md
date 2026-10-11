@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.75] - 2026-10-11
+
+- stage1-role-eval, #101 trainer blockers
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.74] - 2026-10-11
 
 - instruments/role-set, #37 and #100 re-checks

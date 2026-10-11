@@ -404,6 +404,18 @@ results in a Leitner ledger (`ledger.py`, aspire-si #102). R&D's rulings:
       0.0), and `distractor_max` is 0.8, a near-copy guard only.
     - **What stays the same:** keyed share 0.5, re-measured once the round's paraphrased options exist.
     - **The guarantee of no second right answer** stays with the key-check.
+    - **The margin was set from the paraphrased round** (batch 5 at 6a01c18, 12 items):
+      - keyed share 0.50–0.86;
+      - top distractor share 0–0.33;
+      - the gap between them: minimum 0.21, median 0.50.
+
+      `distractor_margin` is **0.15**: a real separation, with headroom for new writers. Re-measure after batch 6,
+      and raise it if the minimum gap stays above 0.2.
+    - **A distractor at share 0.0 is not off-topic by that alone.** The four such items have on-topic near-misses
+      that reach the point through the trait's moves. Share doesn't detect off-topic options, so there's no floor;
+      that stays a key-check judgement.
+    - **The authoring check and the quiz now share one definition** of the spent rule (`variant_checked_spans`), over
+      the whole variant, verdict and closed-form alike (#105).
 
 ## The leakage tool
 

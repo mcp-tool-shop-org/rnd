@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.87] - 2026-10-11
+
+- stage1-role-eval: distractor margin set to 0.15 from batch 5's paraphrased round
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.86] - 2026-10-11
 
 - stage1-role-eval, #105 gate review

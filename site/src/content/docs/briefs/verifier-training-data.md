@@ -30,8 +30,10 @@ do we keep a wrong key, a puzzle with two answers, or a lazy habit out of it?
   stated as "not the other value", made-up counts. The solver was tightened the same day, and now refuses 22 of
   those 51.
 - **The same puzzle came back under new names.** Comparing the puzzles' logic with names and values renamed in
-  order of first use found six copies of two shapes in one round, then one more pair the next. Each copy now
-  gets rebuilt.
+  order of first use found six copies of two shapes in one round, then one more pair the next. The check is now
+  part of `puzzle-check`: it compares every file together, ignores names, line order, the direction of an order
+  clue and the order of a symmetric pair, and refuses the later copy. Its first run found one more copy that both
+  human readers had missed.
 - **A check can push the data wrong.** A duplicate-phrase check counted the required closing lines (verdict,
   deciding quote, escalate) as prose. To get past it, one item split those lines, which would have taught a
   broken format. The check was fixed, with tests, and the item put back.

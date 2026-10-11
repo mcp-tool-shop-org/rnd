@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.76] - 2026-10-11
+
+- instruments/role-set #38; instruments/switchyard #60 #62; site brief: skeleton check in the tool
+- Updated `role-set`: role-set — a generator for role-shaping training data (prototype, in the open)
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+
 ## [1.1.4.5.75] - 2026-10-11
 
 - stage1-role-eval, #101 trainer blockers

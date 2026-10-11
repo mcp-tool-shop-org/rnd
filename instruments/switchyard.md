@@ -172,6 +172,18 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     "ruled out". Don't give an untested cause for the 8-thread result.
   - **Suggested:** the episode was the arm's first three calls, which points to the arm's start more than to a rare
     transient.
+- **The harness for E4, E5 and the Phi re-run** (Grok, Seat B; R&D review 2026-10-11).
+  - **#60, the Ollama token count: pass with one change.** `prompt_eval_count` counts only the tokens the server
+    evaluated, so prompt-cache reuse between resident calls could undercount a prefix search. The fix: count the final
+    prefix again from a cold load, and refuse the arm on a mismatch (`cached_count_undercount`).
+  - **#62, the fill-card executor: changes needed.**
+    - **What's sound:** missing readings fail closed. A missing shared or prompt-rate reading is a spill, and a missing
+      card reading is over margin.
+    - **The abort unloads but doesn't cancel the request in flight.** Ollama keeps a busy model, so it must cancel,
+      then unload, then re-read the card (`abort_without_cancel`).
+    - **A sampler can't stop one large allocation.** The 30500 abort sits 700 MiB under the 31200 ceiling, and a
+      doubling step can add gigabytes of KV in one allocation. So before each load, predict the peak from the earlier
+      loads and skip any window predicted to cross `abort_mib` (`unguarded_allocation_step`).
 
 ## Studio relevance
 

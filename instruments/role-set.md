@@ -146,6 +146,21 @@ prototype, and its interfaces change without notice.
       raised before 4 accepted slots were recorded. It's fixed, with a test. R&D also reported the per-check critic
       notes as missing, which was R&D's error: they are in drafts.jsonl, and R&D's script read only a refused draft
       that had none. They will be copied onto each accepted row.
+  - **role-set #28 (the pilot-2 fixes), R&D review 2026-10-11: pass with three changes.**
+    - **What it adds:**
+      - TRUNCATED, which counts toward its cell, never toward the run-wide stop, now measured over 20 calls;
+      - the halted-outcome fix;
+      - review.jsonl, each accepted row beside its critic checks;
+      - the E register gate;
+      - the D turn-0 fix, and an injection tag only when the line is in the material;
+      - kind B built backwards from its answer;
+      - the writer at temperature 0.7;
+      - `pilot-auto`, a one-paste launcher that relaunches after a lost-call stop.
+    - **Required:** more outside-reason markers ("must be", "reasonable", "otherwise how" and others), checked against
+      the reviewed rubber_stamp rows. Partial quotes count, matched as a 5-word span not found in the statement.
+      Flaw direction: rubber_stamp needs a supported checker verdict; reject_by_default needs a rejection.
+    - **Defect, to fix before pilot-auto runs on a paid pod:** the relaunch counted slots whose calls were lost as
+      done, so it never retried them.
 
 ## Studio relevance
 

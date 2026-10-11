@@ -210,6 +210,19 @@ prototype, and its interfaces change without notice.
       changed trace.
     - **A stopping puzzle whose question changes** is reported as a key change.
     - **The scored critic run stays at e4c8e2e.**
+  - **role-set #33 (a tighter puzzle gate, after fix round 2 failed review), R&D review 2026-10-11: pass with one
+    change.**
+    - **Why:** the fix-round-2 conversion passed the solver with artificial models. Proving a puzzle has one
+      answer doesn't prove it's still the item it was.
+    - **What it changes:**
+      - a negation over a two-value attribute counts as a stated fact;
+      - so does a conditional whose premise is stated;
+      - a puzzle any single fact settles is a lookup;
+      - a count that covers every entity is refused as decoration;
+      - "the count of …" and a bare number as a predicate are refused as model syntax leaking into the text.
+
+      Over the failed round it refuses 22 of the 51 modelled items, all of them ones R&D had flagged.
+    - **Required:** a conditional counts as stated when its premise matches any other fact, of any form.
     - **In the rehearsal, C, D and E were switched off by the 8B's assembly failures,** as designed. Nothing touched
       the puzzle checks.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**

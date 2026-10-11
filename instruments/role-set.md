@@ -161,6 +161,12 @@ prototype, and its interfaces change without notice.
       Flaw direction: rubber_stamp needs a supported checker verdict; reject_by_default needs a rejection.
     - **Defect, to fix before pilot-auto runs on a paid pod:** the relaunch counted slots whose calls were lost as
       done, so it never retried them.
+    - **Merged at 6913e3c (2026-10-11)** with all three changes and the relaunch fix (only finished slots count).
+      Running the new markers over the reviewed rows found three items for the fix round:
+      - two items planted as rubber_stamp whose traces guess;
+      - one planted rubber_stamp with a rejecting checker.
+
+      Two markers were held back until those items are relabelled.
   - **PR H design (the kind B solver), R&D ruling 2026-10-11: approved with additions.**
     - **The design:** the writer emits each puzzle as data: entities, attributes and facts in a closed set of rule
       forms, each fact citing the numbered line it encodes. Code checks:

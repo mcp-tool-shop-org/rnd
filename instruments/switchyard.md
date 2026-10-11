@@ -155,6 +155,15 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
 - **The tail closed (`e2-b8tail-2026-10-11`):** NPU 8×128 warm p50 597.8 ms after a 52 s compile.
 - **The Shared GPU/NPU Memory Override stays at 57% (36.1 GB)** for the series (maintainer, 2026-10-10). Every
   receipt records it in its environment capture.
+- **The Phase-5 README (#57), R&D review 2026-10-11: pass with two wording changes.**
+  - **Checked:**
+    - every figure in "What the table says today", against routing.jsonl;
+    - the route claim, by running it: Qwen3-8B at 15 tok/s with the 5090 busy is refused, and the refusal names E3;
+    - the run flags and guards, and the SECURITY.md edits, against the code.
+  - **Required:** the Qwen3-8B line is qualified to l1024 with thinking off, since the Intel side runs 4.5–12 tok/s
+    across lengths.
+  - **Required:** the pre-registration paragraph separates what the code enforces (a spec edited after its commit
+    is refused, and its blob is recorded) from practice (no rule changes after results are seen).
 
 ## Studio relevance
 

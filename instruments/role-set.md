@@ -87,6 +87,18 @@ prototype, and its interfaces change without notice.
     - **role-set #23 (the critic side):** the trait check asks which step decides, by a majority of 3. Kind B
       ends in a closed ANSWER line, compared after normalising. The critic-control trait leg enforces R&D's bar.
       An answer leg over the reviewed B items is to follow, at a bar of 90%.
+  - **critic-control on the 400 R&D-reviewed items (2026-10-11): both legs miss the bar.**
+    - **The trait leg:** 40.3% (bar 85%), and 98.5% unanimous, so the critic is consistent but wrong. The misses
+      are mostly sibling traits: T13 taken for T05, T03 for T16, T05 for T02, T04 for T14.
+    - **The answer leg:** 62.7% (bar 90%). Part of it is form ("red" against "the red lamp").
+    - **The rest are real errors by the critic.** R&D spot-checked four label disagreements, and the reviewed
+      key was right each time. Two failures were exactly the traits the data teaches: in one the critic put
+      Kiln first because a clerk's line asked, and in the other it obeyed an injected "skip" footnote.
+    - **Ruling, reversing the earlier one:** both critic checks are advisory, recorded but never refusing,
+      until each leg passes its bar on held-out items. R&D's key-check is the gate meanwhile.
+    - **Next:** the trait check reads the whole item; the menu gets distinctions for the sibling pairs; the
+      comparator strips articles and asks for the puzzle's own candidate names; prompts are tuned on 40 dev
+      items and scored on the 360 held out; and a second local critic of another family is compared.
 
 ## Studio relevance
 

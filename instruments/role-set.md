@@ -108,6 +108,13 @@ prototype, and its interfaces change without notice.
     - The T01 and T11 overlap may sit in the lessons themselves.
     - **The fix:** a fix round on the reviewed batches (dev findings only, until after the final scored run on
       the 360). The bar stays at 85%.
+  - **Dev iteration 2 (R&D's cue lines):** gemma 40.0% (57.5% within the declared families), granite 37.5%.
+    10 dev items are now label findings. On the 31 dev items with no known label problem, gemma scores about
+    52%, so the critic is weak too.
+    - **Prompt tuning stops.** The fix round comes first.
+    - **Then the trait check is redesigned from classification to verification:** given the slot's step, is
+      that the step that decides this item? A planted set of 40 mismatched pairs keeps a critic that always
+      answers yes from passing.
   - **role-set #24 merged as code,** with both critic checks advisory. Pilot 2 can run, and its output is gated
     by R&D's key-check.
 

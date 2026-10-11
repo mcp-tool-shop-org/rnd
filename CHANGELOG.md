@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.29] - 2026-10-11
+
+- switchyard: e3-ref reads, 5090 qwen3:8b 208 tok/s
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+
 ## [1.1.4.5.28] - 2026-10-11
 
 - switchyard: rest out of the harness; e3-ref empty-prompt defect

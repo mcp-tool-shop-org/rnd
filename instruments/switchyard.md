@@ -147,6 +147,11 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     - The fix is switchyard #52: E3's prompts copied byte for byte, think true/false, num_ctx 4096.
     - The harness gets an empty-prompt refusal and a required-metric andon.
     - The re-run needs a new grant.
+  - **The re-run reads (`e3-ref-2026-10-11b`, #54):** qwen3:8b on the 5090 at l1024 decodes at 207.8 tok/s
+    with thinking off and 211.0 with thinking on, after 17 s of card time and no rest.
+    - R_speed, the Intel side's Qwen3-8B as a share of the 5090: CPU 0.058, iGPU 0.057, NPU 0.046. The Intel
+      side runs the 8B about 17–22× slower.
+    - The 5090 stays the place for an 8B coach; the Intel side suits a Phi-class always-on generator.
 - **The tail closed (`e2-b8tail-2026-10-11`):** NPU 8×128 warm p50 597.8 ms after a 52 s compile.
 - **The Shared GPU/NPU Memory Override stays at 57% (36.1 GB)** for the series (maintainer, 2026-10-10). Every
   receipt records it in its environment capture.

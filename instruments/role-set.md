@@ -177,13 +177,14 @@ prototype, and its interfaces change without notice.
       - refuse a B draft whose thinking trips the frozen stuck rule.
     - **Open:** the thinking isn't yet checked step by step against the model. A follow-up could have each step cite
       its lines and state its conclusion, for the solver to check. R&D's key-check reads B traces until then.
+    - **Cleared to merge at 64cade2,** with all four changes and tests.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**
     - **The rebuild list:** the 10 dev label findings, including T14-C-04, rebuilt so a missing fact decides it.
     - **Uniform sweeps** over the reviewed files: key form, flaw direction, side, turn placement, option register.
     - **The held-out guard:** no held-out item changes because of a critic's output, and the scored critic run uses
       the round's merge commit.
     - **Fix round 2:** converts every reviewed B item to the solver's format. Stage 1 data doesn't freeze until every
-      B item passes the solver.
+      B item passes the solver. Round 2 follows round 1, so it models the corrected keys.
   - **PR H design (the kind B solver), R&D ruling 2026-10-11: approved with additions.**
     - **The design:** the writer emits each puzzle as data: entities, attributes and facts in a closed set of rule
       forms, each fact citing the numbered line it encodes. Code checks:

@@ -164,6 +164,14 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     across lengths.
   - **Required:** the pre-registration paragraph separates what the code enforces (a spec edited after its commit
     is refused, and its blob is recorded) from practice (no rule changes after results are seen).
+- **E3's Phi slow start** (#59, run notes only; R&D review 2026-10-11: pass with two wording changes).
+  - **What was seen:** the arm's first three CPU calls ran at about 7 tok/s, and the rest at about 21.
+  - **The probes:** two exploratory probes outside the harness (scheduling settings, and cold storage with mmap on and
+    off) never reproduced it.
+  - **Required:** say the probes didn't reproduce it, so storage and scheduling alone don't explain it, rather than
+    "ruled out". Don't give an untested cause for the 8-thread result.
+  - **Suggested:** the episode was the arm's first three calls, which points to the arm's start more than to a rare
+    transient.
 
 ## Studio relevance
 

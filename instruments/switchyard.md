@@ -192,6 +192,8 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     - **The tokenizer loads from the hub id,** so a hot arm can fall back to the E: archive or download
       (`silent_fallback`).
     - **What's right:** until_steady, robocopy /J with exit codes, and the storage fields on the receipt.
+  - **#60 re-check at aa5c9ad: pass.** The final prefix is counted again from a cold load. A mismatch refuses the arm
+    before measuring. Both counts are recorded, and the cold count is used.
 
 ## Studio relevance
 

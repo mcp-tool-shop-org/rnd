@@ -117,3 +117,11 @@ time, the median over seeds 42–44, with capture time included. Full numbers ar
   attention and 12–31× scoring.
 - Take the graphed step where training volume matters (7× more on pooled forms). Run the eager comparison
   with `capturable=True` too, so the two are bit-identical, and record that the optimizer variant changed.
+
+## The eager path's seeding, upstream (2026-10-11)
+
+aspire-si#62 brings the seeding fix this experiment's `graphed_heads.py` already had to the eager `train_head`.
+- **The fix:** the fork spans the whole of training, on CPU and the training CUDA device, with the seed inside it.
+- **What was wrong:** before this, eager dropout drew from the live generators, so a head depended on the heads trained before it in the process.
+- **R&D's review: pass.** Init is unchanged, and a test shows a head trained after another equals the same head trained alone.
+- **Optional:** let torch resolve a bare `"cuda"` to the current device rather than index 0; seed only the training device on multi-GPU pods.

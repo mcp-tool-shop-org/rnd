@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.68] - 2026-10-11
+
+- experiments/cuda-graphs, aspire-si#62 seeding review
+- Updated experiment `cuda-graphs`
+
 ## [1.1.4.5.67] - 2026-10-11
 
 - stage1-role-eval, fix round 2b addendum

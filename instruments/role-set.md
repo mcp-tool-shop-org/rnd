@@ -189,6 +189,12 @@ prototype, and its interfaces change without notice.
       - one worked line-to-rule example in the brief;
       - a puzzle whose text copies the brief's pattern instruction is refused;
       - a narrated "quoted" counts as a quote for the rubber_stamp gate.
+    - **That PR is role-set #30. R&D review 2026-10-11: pass with one change.** The narrated-quote match must skip
+      negated verbs ("quoted neither line", "without quoting"); otherwise it refuses true rubber stamps, and batch 5
+      has one such case. #30 also keys an assembly or puzzle halt by the problem's wording, not the bare code, so two
+      cells failing for different reasons no longer switch a kind off.
+    - **In the rehearsal, C, D and E were switched off by the 8B's assembly failures,** as designed. Nothing touched
+      the puzzle checks.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**
     - **The rebuild list:** the 10 dev label findings, including T14-C-04, rebuilt so a missing fact decides it.
     - **Uniform sweeps** over the reviewed files: key form, flaw direction, side, turn placement, option register.

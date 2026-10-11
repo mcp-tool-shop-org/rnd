@@ -202,6 +202,14 @@ prototype, and its interfaces change without notice.
     - **Required:** `structure` must be one of the 8 menu names or `verdict`, since a free name would silently skip
       that structure's rules. `verdict` is allowed only when the key is a verdict label, so a hard assignment puzzle
       can't leave the solver's scope.
+    - **Both changes landed at e315964,** plus `--stamp`, which writes the row hashes once a row is final.
+  - **The fix-round-2 brief, R&D review 2026-10-11: approved with four changes.**
+    - **The sidecar leakage check is dropped:** `leakage_check.py` reads no field a sidecar has, so it would pass
+      vacuously. The real cover is puzzle-check refusing any model name the text doesn't name.
+    - **Repaired puzzles get rewritten thinking and replies,** walked forward under the stuck rule. R&D reads every
+      changed trace.
+    - **A stopping puzzle whose question changes** is reported as a key change.
+    - **The scored critic run stays at e4c8e2e.**
     - **In the rehearsal, C, D and E were switched off by the 8B's assembly failures,** as designed. Nothing touched
       the puzzle checks.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**

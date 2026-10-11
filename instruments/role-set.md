@@ -99,6 +99,17 @@ prototype, and its interfaces change without notice.
     - **Next:** the trait check reads the whole item; the menu gets distinctions for the sibling pairs; the
       comparator strips articles and asks for the puzzle's own candidate names; prompts are tuned on 40 dev
       items and scored on the 360 held out; and a second local critic of another family is compared.
+  - **Dev iteration 1:** gemma and granite each score 37.5% on traits, and both get 7 of 7 answers right.
+    - **R&D read the 10 dev items where both critics named the same wrong trait:** 8 are label findings, 1 is
+      both, and 1 is the critic's error.
+    - The critics were mostly right about the items. Reviewed data contains items decided by another trait's
+      step: a silence call under T03, a falsifier hunt under T01, a competing source under T05, a version
+      line under T17.
+    - The T01 and T11 overlap may sit in the lessons themselves.
+    - **The fix:** a fix round on the reviewed batches (dev findings only, until after the final scored run on
+      the 360). The bar stays at 85%.
+  - **role-set #24 merged as code,** with both critic checks advisory. Pilot 2 can run, and its output is gated
+    by R&D's key-check.
 
 ## Studio relevance
 

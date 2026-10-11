@@ -230,6 +230,12 @@ prototype, and its interfaces change without notice.
       English, and its trait step deciding it.
     - Each repeated skeleton is kept in only one item.
     - The PR states a route for every item.
+  - **The 0.1.0 release surface (#35), R&D review 2026-10-11: pass, with one wording fix.**
+    - **The flaw check is advisory in the runner:** `flaw_gate` is off by default, and no flag sets it. The brief's
+      "flaw refuses" was wrong, and the surfaces follow the code.
+    - **The other claims match the code and the run notes:** the critic numbers, the solver's scope, steering never
+      run, the three pilot costs, loopback only, the GPU guard, the pins, the receipts and the firewall.
+    - **The fix:** pilot 2 is "15 of 49 passed as written", not "the accept rate".
     - **In the rehearsal, C, D and E were switched off by the 8B's assembly failures,** as designed. Nothing touched
       the puzzle checks.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**

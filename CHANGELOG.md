@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.80] - 2026-10-11
+
+- stage1-role-eval, #104
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.79] - 2026-10-11
 
 - stage1-role-eval #103; instruments/role-set #39 defect catalog

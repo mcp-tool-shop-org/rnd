@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.27] - 2026-10-11
+
+- switchyard: E3 reads VIABLE, the tail closed
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+
 ## [1.1.4.5.26] - 2026-10-10
 
 - stage1: batch 4 key-check, fix round sent

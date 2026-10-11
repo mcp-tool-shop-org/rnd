@@ -117,6 +117,24 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
   - **Amendment (R&D):** blocks per (model, device, compile config), at most one pipeline resident, a check
     that RAM is released between blocks, a pre-build memory guard, cheapest blocks first, and a descriptive
     drift block at the end. The viability floor and the other pre-registered settings are unchanged.
+- **E3 reads VIABLE (`e3-2026-10-11b`, #51, 2026-10-11).** It ran in blocked order with peak RAM 43%, and all
+  27 rows completed.
+  - **Gate:** decode ≥ 15 tok/s at l1024 with thinking off, on at least one Intel device for at least one model.
+    - Phi-3.5-mini int4 passes on the CPU (20.4), the iGPU (21.7) and the NPU (15.3, marginal).
+    - Qwen3-8B int4 fails on all three: 12.0, 11.8 and 9.6.
+  - **Expectation check, confirmed:** the NPU is slowest for both models at every length. At l4096, Phi on the
+    NPU runs at 8.9 against 17.2 on the iGPU.
+  - **Drift block:** 1.038, so devices measured an hour apart are comparable within about 4%.
+  - **Both models are bandwidth-bound:** decode × weight size is about 58 GB/s for Qwen and 48 GB/s for Phi. A
+    larger memory allocation can't speed up the 8B, so speculative decoding is the candidate if an off-5090 8B
+    is wanted.
+  - **Caveat:** on the CPU and iGPU, warm TTFT is likely a prefix-cached prefill. TTFT is reported as "first
+    token, cache state as configured", and the prefix-cache setting is to be pinned in specs.
+  - **A bug found on the way:** a fake that returned floats hid the real library's MeanStdPair metrics, and a
+    bare `except` dropped every counter. The first blocked run was stopped and the harness fixed (#50). The
+    lesson: test fakes must mirror the real return types, and nothing is dropped silently.
+  - The 5090 reference (e3-ref, descriptive ratio) is R&D's to run, after the role-set windows.
+- **The tail closed (`e2-b8tail-2026-10-11`):** NPU 8×128 warm p50 597.8 ms after a 52 s compile.
 - **The Shared GPU/NPU Memory Override stays at 57% (36.1 GB)** for the series (maintainer, 2026-10-10). Every
   receipt records it in its environment capture.
 

@@ -263,6 +263,13 @@ prototype, and its interfaces change without notice.
       - `trait_step_not_deciding` is handled by the brief, not the critic, because the trait label doesn't test the step;
       - `unenforced_rule`'s `--partial-set` case is now enforced downstream (aspire-si#102);
       - `deciding_clause_not_whole_line` is handled by the brief.
+  - **Closed-form settings inside role-set's write (#41), R&D review 2026-10-11: pass.**
+    - **One copy of the rule:** the gates' closed-form rule with the run's settings is the only definition; assembly
+      keeps no copy.
+    - **Settings:** bad settings refuse the run before anything is sent, and receipts and the writer's brief carry the
+      settings in force.
+    - **Next (puzzle-check):** fold `is_not` on a two-value attribute into `is` the other value, so batch 6's
+      T10-B-01 and T11-B-05 come out as the same skeleton.
     - **In the rehearsal, C, D and E were switched off by the 8B's assembly failures,** as designed. Nothing touched
       the puzzle checks.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**

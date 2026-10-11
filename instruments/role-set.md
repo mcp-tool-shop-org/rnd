@@ -196,6 +196,12 @@ prototype, and its interfaces change without notice.
     - **Cleared at 4dc08c0** with the negation fix. Re-run over every rubber_stamp row: batch 5 matches R&D's six
       relabels, and both true stamps pass. The reviewed files have 4 more narrated-quote rubber_stamps, which go to fix
       round 1 as relabels to guess.
+  - **role-set #32 (`puzzle-check`, the fix-round-2 tool), R&D review 2026-10-11: pass with two changes.**
+    - **What it does:** reads a reviewed data file and its models sidecar; refuses a stale row hash, a missing or
+      stray entry, and a second lookup; counts verdict-keyed B items apart, never as passes.
+    - **Required:** `structure` must be one of the 8 menu names or `verdict`, since a free name would silently skip
+      that structure's rules. `verdict` is allowed only when the key is a verdict label, so a hard assignment puzzle
+      can't leave the solver's scope.
     - **In the rehearsal, C, D and E were switched off by the 8B's assembly failures,** as designed. Nothing touched
       the puzzle checks.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**

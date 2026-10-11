@@ -194,6 +194,12 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     - **What's right:** until_steady, robocopy /J with exit codes, and the storage fields on the receipt.
   - **#60 re-check at aa5c9ad: pass.** The final prefix is counted again from a cold load. A mismatch refuses the arm
     before measuring. Both counts are recorded, and the cold count is used.
+  - **#63 re-check at 8ed048d: three of four pass.**
+    - **Passing:** the cache key now includes the load source, the tokenizer loads from the local snapshot with hot arms
+      offline, and gaps.md is updated.
+    - **The sampler's disk rate is never recorded on Windows.** psutil's per-disk keys are `PhysicalDriveN`, not drive
+      letters, and the test's fake keyed them by letter. The drive letter has to be mapped to its physical disk
+      (`test_fake_hides_platform`, new class).
 
 ## Studio relevance
 

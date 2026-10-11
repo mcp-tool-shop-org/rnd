@@ -371,6 +371,19 @@ results in a Leitner ledger (`ledger.py`, aspire-si #102). R&D's rulings:
   (forgetting events).
 - **The readout** gives n = 0 beside n ≥ 1, per lesson and overall. A gap is the sign of surface matching.
 - **Sealed reads:** a sealed sitting refuses an adapter trained with `--partial-set`, or one with no manifest.
+- **Closed-form written variants, against Amendment 5 (ruled 2026-10-11).**
+  - **The conflict:** Amendment 5 required the keyed option to contain a key point, and the trained reply states
+    that point word for word. So 12 batch-5 keyed options were spent by construction.
+  - **The ruling:** the keyed option paraphrases the key point, and is not exempted from the spent check. Choosing
+    a trained sentence among distractors is recall.
+  - **The mechanical gate that replaces "contains or is contained in":**
+    - no option shares an 8-word span with any trained turn;
+    - the keyed option holds at least half of the key point's content words (lightly stemmed, function and task words
+      dropped);
+    - no distractor reaches that share for any key point;
+    - meaning is confirmed by R&D's key-check.
+
+    The 50% share is to be measured on the existing variants before batch 6 is gated.
 
 ## The leakage tool
 

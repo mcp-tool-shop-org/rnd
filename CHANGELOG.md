@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.26] - 2026-10-10
+
+- stage1: batch 4 key-check, fix round sent
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.25] - 2026-10-10
 
 - switchyard: E2 GO, the tail, conditional rest, E3 parked on memory; stage1 batch 3 done

@@ -289,6 +289,7 @@ second.
 | Batch 3, Grok's fix round (deb2845) | 120 | most fixes held ("I stop." gone; the T17 injections now inside the material, six kinds at varied placements); about 27 remain. New ones: a fact-report keyed as medical escalation, an injection pointing at the correct verdict, puzzles not closed, prefaces that leak content, and a new stamped stop formula |
 | Batch 3, round 3 (d3a4055) | 51 changed | T13 (16) and T17 (22) all passed, with the stamps gone and the injections inside the material; 3 T05 fixes remain: an "adults may" dose line is silent about children, so it isn't a clean unsupported, plus two flaw labels and repeated cannot_tell shapes |
 | Batch 3, round 4 (becbec1) | the 3 T05 fixes | all pass; posted on aspire-si #84. **Batch 3 is done from R&D** (2026-10-10) |
+| Batch 4, traits 2, 3 and 6 (5b5401e) | 120 | fix round sent. Escalation domains and real-source items hold. 10 key or closure fixes: open puzzles, two conventions for a different printed value, variant keys that don't follow. C trace lines give the checker's reason; prompts state the premise. Set-wide: cannot_tell is nearly one template per trait, and stock phrasing has returned in a new form |
 
 **Patterns that fail instant agreement.** These have been seen more than once and now go into the generators'
 rules:

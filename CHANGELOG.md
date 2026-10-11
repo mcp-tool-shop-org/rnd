@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.25] - 2026-10-10
+
+- switchyard: E2 GO, the tail, conditional rest, E3 parked on memory; stage1 batch 3 done
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.24] - 2026-10-10
 
 - stage1-role-eval: batch 3 round-3 key check

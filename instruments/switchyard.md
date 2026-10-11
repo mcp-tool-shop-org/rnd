@@ -83,6 +83,42 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     at 600 s; warm calls at max(60 s, 3 × the arm's own cold call), capped at 600 s.
   - **Next:** a full rerun (`-10c`) without the l512 arm, then the b8 tail. E3 waits for the bound change,
     since its 8B generate arms would hit 60 s too.
+- **E2 reads GO (`e2-2026-10-10c`, #41).** At the decision length, the iGPU embeds in 348.8 ms against the
+  CPU's 544.4 ms (ratio 0.64). Parity was valid on all 14 rows.
+- **The batch-8 tail (2026-10-10):**
+  - **`-10c`:** the NPU compiler refused l512-b8 at compile time (`[NPU_VCL] Compiler returned msg`,
+    `0x78000007`, "Target buffer size '2048' does not match source buffer size '256'").
+  - **New outcome, `compile_rejected` (#43):** NPU only, raised inside `compile_model`, and both markers
+    required. It's scoped like `native_binary_rejected` and never retried. The l512-b8 row was re-recorded
+    from the log (#44), holding only the rejection evidence and nothing measured.
+  - **`-10d`:** l2048-b8's compile ran 70 min, wrote 0 bytes and grew to 35.3 GB. It was stopped by hand.
+    CTRL+C could not interrupt the native compile, so the process was hard-killed and no receipt exists.
+    There was no pre-registered compile bound, so this is recorded as an abort, **not** a capability result.
+    l2048-b8 has had its one try.
+  - **Design flaw found:** under interleaving, l128-b8's repeats waited on l2048-b8's cold, so two runs lost
+    l128-b8. The next tail runs arms sequentially, l128-b8 alone.
+- **The rest became conditional (maintainer, 2026-10-10; #43, #46).**
+  - The 15-minute rest is owed only after a run of over 30 minutes on the same devices that ended less than
+    rest_s ago, and only for the remainder.
+  - The harness takes the largest amount owed across every earlier receipt. A receipt with no times, or one
+    that won't load, counts as long, timed from the file's save time.
+  - The 5090 always rests in full: grants are messages, so nothing else enforces the card's rule.
+  - #46 tops up a sleep that wakes a fraction of a second early.
+- **Harness lessons from the night:**
+  - A native compile can't be interrupted from Python, so a compile bound (15 min) and a memory stop
+    (88%, sampled every 2 s) need a watcher that saves results and then ends the process.
+  - A run-start marker file will make a killed run visible to the rest rule.
+  - The NPU genai pipeline cache had to be keyed by compile config, since its KV cache is sized per prompt
+    (#45). #42 fixed the genai call shape for NPU list prompts.
+- **E3 is parked on memory (2026-10-10).**
+  - `-b` stopped on the pipeline-cache bug. `-10c` piled up resident 8B pipelines in steps of 5–15 GB and was
+    hard-killed at 89% RAM (95% in the rig monitor's 2-s samples). Neither produced a row.
+  - The VRAM watchdog doesn't guard the switchyard environment, so the harness's own stop is the only guard.
+  - **Amendment (R&D):** blocks per (model, device, compile config), at most one pipeline resident, a check
+    that RAM is released between blocks, a pre-build memory guard, cheapest blocks first, and a descriptive
+    drift block at the end. The viability floor and the other pre-registered settings are unchanged.
+- **The Shared GPU/NPU Memory Override stays at 57% (36.1 GB)** for the series (maintainer, 2026-10-10). Every
+  receipt records it in its environment capture.
 
 ## Studio relevance
 

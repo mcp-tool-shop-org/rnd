@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.45] - 2026-10-11
+
+- stage1-role-eval: batch 5 key-check
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.44] - 2026-10-11
 
 - instruments/role-set: #29 cleared; round order

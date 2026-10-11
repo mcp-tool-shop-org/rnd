@@ -48,6 +48,17 @@ R&D's calibration work, together with the Publisher's PRs reviewed by R&D, shape
     `false`, which would read as confirmed;
   - `nvidia-smi` listing no cards against a plan above 0 is a mismatch, not "not measured";
   - one test per case. Merge on green after that, with no re-review.
+- **Readiness and the host CUDA pin** (#56, for 1.1.0; R&D review 2026-10-11: pass with two changes).
+  - **Why:** in pilot 3 an SGLang engine logged that startup finished, then deadlocked. `/health` stayed down while
+    `/v1/models` answered, and the pod sat on a CUDA 13.2 host where the working pilots had run on 13.0.
+  - **Ready now means one chat completion returned a choice,** tried twice.
+  - **engine_hung:** the startup line followed by 3 minutes without `/health` is reported, with the pod left up.
+  - **An exact `cuda_versions` pin** is sent as `allowedCudaVersions`, and refused alongside a floor.
+  - **R&D's changes:**
+    - two failed completions are also reported, never a shutdown, on every surface. A slow first request on a large
+      engine would otherwise throw away the download, and the deadline watchdog already bounds the cost of waiting;
+    - the startup line is detected by a count over the whole log, not a 40-line tail.
+  - **The CUDA list:** RunPod's documented v1 values plus 13.1 and 13.2, which are observed but not documented.
 
 **Calibrate what is served:** a model's calibration holds for one engine and one set of settings (model digest,
 think, `num_predict`, `num_ctx`, quote rule). A served engine or settings change means a new calibration, never

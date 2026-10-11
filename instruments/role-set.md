@@ -71,6 +71,15 @@ prototype, and its interfaces change without notice.
     - a B puzzle must have exactly one solution;
     - the critic-control trait leg must reach 85% agreement overall, at least 70% per trait, and 90% stability;
     - R&D key-checks the pilot's accepted items before any enters a batch.
+  - **The 104 accepted items were held in full (R&D key-check, 2026-10-11).**
+    - **The assembly step malformed about 49 rows.** The writer's own framing repeated the material, and the
+      writer's three lines were followed by the key's. A kind-C checker verdict was silently swapped while the
+      trace argued the original.
+    - **Content:** escalation was taught by topic, not by advice. Sides were labelled but not taught. Kind A
+      gave nothing to decide, and there were stamps and near-duplicates.
+    - The leakage check was clean.
+    - The assembly gates and writer-brief fixes land in role-set first, and a regenerated set then goes
+      through the normal batch review.
 
 ## Studio relevance
 

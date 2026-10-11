@@ -184,6 +184,14 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     - **A sampler can't stop one large allocation.** The 30500 abort sits 700 MiB under the 31200 ceiling, and a
       doubling step can add gigabytes of KV in one allocation. So before each load, predict the peak from the earlier
       loads and skip any window predicted to cross `abort_mib` (`unguarded_allocation_step`).
+  - **#63, hot cache, mmap, cold copy and steady warm-up: changes needed.**
+    - **Continuous system sampling during each call is missing,** and that sampling is the point of the re-run
+      (`requirement_dropped`).
+    - **The pipeline cache key ignores where the model loads from,** so a hot arm and an archive arm can share one
+      compiled pipeline (`cache_key_missing_dimension`).
+    - **The tokenizer loads from the hub id,** so a hot arm can fall back to the E: archive or download
+      (`silent_fallback`).
+    - **What's right:** until_steady, robocopy /J with exit codes, and the storage fields on the receipt.
 
 ## Studio relevance
 

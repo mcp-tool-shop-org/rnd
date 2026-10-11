@@ -200,6 +200,8 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     - **The sampler's disk rate is never recorded on Windows.** psutil's per-disk keys are `PhysicalDriveN`, not drive
       letters, and the test's fake keyed them by letter. The drive letter has to be mapped to its physical disk
       (`test_fake_hides_platform`, new class).
+  - **#63 disk key at 3f9c836: pass, conditional on CI going green.** The drive letter maps to `PhysicalDrive<n>` through
+    Get-Partition | Get-Disk (on the rig, E: is 2 and C: is 0). A failed map records `unrecorded` with its reason.
 
 ## Studio relevance
 

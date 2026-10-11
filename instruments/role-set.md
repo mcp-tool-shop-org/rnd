@@ -80,6 +80,13 @@ prototype, and its interfaces change without notice.
     - The leakage check was clean.
     - The assembly gates and writer-brief fixes land in role-set first, and a regenerated set then goes
       through the normal batch review.
+    - **Evidence after role-set #22 (the new assembly, run over the same 104 drafts):** 49 refused, including
+      every C and D draft. The reasons: framing repeating the material, 30; planted flaw keyed with the key's own
+      verdict, 9; a trace naming another verdict, 3; the writer's own three lines, 3; an A passage holding its
+      question, 4. 55 A and E drafts still assemble, but still carry the content findings.
+    - **role-set #23 (the critic side):** the trait check asks which step decides, by a majority of 3. Kind B
+      ends in a closed ANSWER line, compared after normalising. The critic-control trait leg enforces R&D's bar.
+      An answer leg over the reviewed B items is to follow, at a bar of 90%.
 
 ## Studio relevance
 

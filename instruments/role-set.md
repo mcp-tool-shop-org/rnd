@@ -270,6 +270,11 @@ prototype, and its interfaces change without notice.
       settings in force.
     - **Next (puzzle-check):** fold `is_not` on a two-value attribute into `is` the other value, so batch 6's
       T10-B-01 and T11-B-05 come out as the same skeleton.
+  - **The binary-negation fold (#42), R&D review 2026-10-11: pass.**
+    - **What it does:** `is_not x a v` reads as `is x a w` on a two-value attribute, nested forms included. It catches
+      the batch-6 pair and a merged one, T06-B-02 against T02-B-02.
+    - **Asked next:** fold the binary count the same way (`count a v >= n` is `count a w <= N-n`).
+    - **Merge order:** T06-B-02 is rebuilt before aspire-si's pin moves past #42, so the directory never goes red.
     - **In the rehearsal, C, D and E were switched off by the 8B's assembly failures,** as designed. Nothing touched
       the puzzle checks.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**

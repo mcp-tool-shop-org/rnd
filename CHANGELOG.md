@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.69] - 2026-10-11
+
+- site: newsletter issue 2 and a brief on checking the verifier's training data
+
 ## [1.1.4.5.68] - 2026-10-11
 
 - experiments/cuda-graphs, aspire-si#62 seeding review

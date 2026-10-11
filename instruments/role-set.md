@@ -223,6 +223,13 @@ prototype, and its interfaces change without notice.
 
       Over the failed round it refuses 22 of the 51 modelled items, all of them ones R&D had flagged.
     - **Required:** a conditional counts as stated when its premise matches any other fact, of any form.
+  - **The second pass of fix round 2 (brief approved by R&D, 2026-10-11):**
+    - 15 good conversions are kept.
+    - Non-puzzles are restored as verdict items under the amended rule.
+    - **Every other item is rebuilt as a real puzzle:** about its own subject, no single fact settling it, plain
+      English, and its trait step deciding it.
+    - Each repeated skeleton is kept in only one item.
+    - The PR states a route for every item.
     - **In the rehearsal, C, D and E were switched off by the 8B's assembly failures,** as designed. Nothing touched
       the puzzle checks.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**

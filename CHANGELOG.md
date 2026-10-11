@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.52] - 2026-10-11
+
+- stage1-role-eval: guess vs reject_by_default boundary
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.51] - 2026-10-11
 
 - stage1-role-eval: fix round 1 cleared

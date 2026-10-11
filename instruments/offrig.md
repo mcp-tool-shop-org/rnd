@@ -68,6 +68,13 @@ R&D's calibration work, together with the Publisher's PRs reviewed by R&D, shape
     - don't imply that the 13.2 host caused the hang, because the run record says it isn't shown;
     - say that a pod from `offrig up` or the app has no watchdog, so a failed launch keeps billing until
       `offrig down`. Only a pod RunPod reports as ERROR or EXITED is terminated on every surface.
+- **`cuda_runtime`** (#37; R&D review 2026-10-11: pass with one change).
+  - **What it does:** a profile names the CUDA its software is built for, which may be newer than any host (13.4).
+  - **The floor:** the oldest listed host of that major, sent as `gpu.minCudaVersion`. This is NVIDIA's minor-version
+    compatibility, and it matches the cloud-cu134 probe for 13.4 on 13.0 hosts.
+  - **A pin beside a runtime** is accepted only if every pinned version is that major and at or above the floor.
+  - **R&D's change:** the compatibility note must appear whenever the runtime is newer than its floor, including
+    listed versions such as 13.2 and 12.8, not only for unlisted ones.
 
 **Calibrate what is served:** a model's calibration holds for one engine and one set of settings (model digest,
 think, `num_predict`, `num_ctx`, quote rule). A served engine or settings change means a new calibration, never

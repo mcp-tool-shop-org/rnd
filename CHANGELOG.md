@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.62] - 2026-10-11
+
+- instruments/offrig, #37 cuda_runtime review
+- Updated `offrig`: offrig — big models on rented RunPod GPUs
+
 ## [1.1.4.5.61] - 2026-10-11
 
 - stage1-role-eval fix round 2b review; instruments/offrig 1.1.0 treatment review

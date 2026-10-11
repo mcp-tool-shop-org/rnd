@@ -255,6 +255,14 @@ prototype, and its interfaces change without notice.
     - The lookup and skeleton rules match the code.
     - A pod is offrig's, and the repo is public.
     - Note: the different-family critic rule holds through the critic allow-list in `writers.json`, not a code check.
+  - **The defect catalog, `roles/verifier/defects.jsonl` (#39), R&D review 2026-10-11: pass with three corrections.**
+    - **What it holds:** 40 classes from R&D's reviews, each with where it's handled: 7 puzzle-check, 9 gate,
+      3 critic, 15 brief, 6 none. The readout ends with every `none` row.
+    - **The anchors:** all exist in code.
+    - **Corrections:**
+      - `trait_step_not_deciding` is handled by the brief, not the critic, because the trait label doesn't test the step;
+      - `unenforced_rule`'s `--partial-set` case is now enforced downstream (aspire-si#102);
+      - `deciding_clause_not_whole_line` is handled by the brief.
     - **In the rehearsal, C, D and E were switched off by the 8B's assembly failures,** as designed. Nothing touched
       the puzzle checks.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**

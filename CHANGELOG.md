@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.79] - 2026-10-11
+
+- stage1-role-eval #103; instruments/role-set #39 defect catalog
+- Updated `role-set`: role-set — a generator for role-shaping training data (prototype, in the open)
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.78] - 2026-10-11
 
 - stage1-role-eval: quiz-loop rulings recorded; #102 review

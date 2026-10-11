@@ -275,6 +275,8 @@ prototype, and its interfaces change without notice.
       the batch-6 pair and a merged one, T06-B-02 against T02-B-02.
     - **Asked next:** fold the binary count the same way (`count a v >= n` is `count a w <= N-n`).
     - **Merge order:** T06-B-02 is rebuilt before aspire-si's pin moves past #42, so the directory never goes red.
+    - **Re-check at 4fb7b79: pass.** `not (is …)` on a binary and the two-sided binary count are folded. A third
+      refusal, T10-B-02 against T10-B-01 ("at most one sealed" is "at least two open"), is correct.
     - **In the rehearsal, C, D and E were switched off by the 8B's assembly failures,** as designed. Nothing touched
       the puzzle checks.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**

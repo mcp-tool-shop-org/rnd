@@ -59,6 +59,15 @@ R&D's calibration work, together with the Publisher's PRs reviewed by R&D, shape
       engine would otherwise throw away the download, and the deadline watchdog already bounds the cost of waiting;
     - the startup line is detected by a count over the whole log, not a 40-line tail.
   - **The CUDA list:** RunPod's documented v1 values plus 13.1 and 13.2, which are observed but not documented.
+- **The 1.1.0 treatment** (#57; R&D review 2026-10-11: pass with three changes).
+  - **Checked against the code:** the version, every README command and flag against `--help`, the readiness and
+    hang paths, the CUDA list and how it is sent, and that every Unreleased item carried into 1.1.0. The "not re-run on
+    a rented pod" notes are accurate.
+  - **R&D's changes:**
+    - the hang happened on 2026-10-11, not 2026-10-12, according to the pilot 3 record's own UTC times and commit;
+    - don't imply that the 13.2 host caused the hang, because the run record says it isn't shown;
+    - say that a pod from `offrig up` or the app has no watchdog, so a failed launch keeps billing until
+      `offrig down`. Only a pod RunPod reports as ERROR or EXITED is terminated on every surface.
 
 **Calibrate what is served:** a model's calibration holds for one engine and one set of settings (model digest,
 think, `num_predict`, `num_ctx`, quote rule). A served engine or settings change means a new calibration, never

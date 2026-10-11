@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.31] - 2026-10-11
+
+- role-set: 235B pilot adjudication
+- Updated `role-set`: role-set — a generator for role-shaping training data (prototype, in the open)
+
 ## [1.1.4.5.30] - 2026-10-11
 
 - stage1: batch 4 passes; conventions adopted

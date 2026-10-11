@@ -57,6 +57,21 @@ prototype, and its interfaces change without notice.
   NO-ROLE). That's why the burst replaced the overall hedge rate as the trigger. The hedge rate and every
   burst field are still recorded on every trace.
 
+- **The first 235B writer pilot (2026-10-11), R&D's adjudication of 40 critic refusals.**
+  - **Trait refusals (20):** writer 15, critic 3, both 2. The writer seldom makes the slot's trait decide a
+    step. In kinds C and D the deciding step falls back to a silence call (T14's step) or to the pressure turn,
+    whatever the slot.
+  - **Answer refusals on kind-B puzzles (20):** the comparator 14, writer 5, critic 1. The free-text match
+    failed answers that agreed in substance. Five puzzles weren't closed or were keyed wrong.
+  - **Six wrong keys hid inside refused items,** including ESCALATE yes on a reported fact and silence keyed
+    as unsupported.
+  - **Rulings:**
+    - the trait check stays gating, as a majority of 3 calls, and is never made advisory;
+    - kind-B answers end in a closed ANSWER line and are compared after normalising;
+    - a B puzzle must have exactly one solution;
+    - the critic-control trait leg must reach 85% agreement overall, at least 70% per trait, and 90% stability;
+    - R&D key-checks the pilot's accepted items before any enters a batch.
+
 ## Studio relevance
 
 role-set is how Stage 1 data stops depending on hand-written batches. Grok's third batch was generated from

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.54] - 2026-10-11
+
+- stage1-role-eval: fix round 1 merge commit
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.53] - 2026-10-11
 
 - stage1-role-eval: fix round 1 cleared; fix round 2 design

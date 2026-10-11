@@ -306,6 +306,7 @@ second.
 | #99 re-check (96b0f7d) and role-set #36 (78a1f99) | T16-B-02, T16-B-06, two prefixes, the colon fix | pass. T16-B-02's near-miss is on the page (a pinned copy reads the time as 08:30). On that reading the answer changes, so refusing it decides the puzzle. role-set #36 strips only a leading `Answer:`, with a time-key test. Merge #36 first; #99 and batch 6 move to its merge commit as the puzzle-check pin |
 | T02-B-04 rebuild (#100, 962d78e) | T02-B-04 | pass with one edit. The repeat the new cross-file check found is real: T03-B-04's chain with one link written as `after`, which R&D's hand comparison didn't fold. The rebuild (not 3rd, plus clay and tin adjacent) forces brass to 1st, and the reply stops with the open pair shown. The edit: state one bell per height in the text (`missing_stated_constraint`, new class) |
 | Trainer blockers from the 5090 smoke (#101, 46e2dfd) | firewall pins, union validation | pass. The smoke resumed after a hard kill, with a maximum loss difference of 0.0012, the same size as the kernel noise. The firewall now hashes held-out files with CRLF read as LF, and the pins are unchanged. The root cause: `docs/runs/stage1-taskset/**` lacks `-text` in .gitattributes (`platform_line_endings`, new class). `validate_training_set` runs per-item and per-lesson checks over the union, the batch caps per batch, and freeze over the union. Wanted before round 1: sealed scoring refuses an adapter whose manifest says `partial_set` (`unenforced_manifest_flag`, new class) |
+| Quiz loop, #101 follow-ups, checkpoint event (#102, e880bb0) | quiz.py, ledger.py, eval_adapter | pass with one fix. A free-text store variant is refused but not spent, so it is retried every session (`unspent_refusal_loop`, new class). Ruling: a variant restating the trained statement stays spent. 17 spent variants in batches 1–4 go to the Specialist for rewording (`variant_restates_trained`, new class) |
 
 **Patterns that fail instant agreement.** These have been seen more than once and now go into the generators'
 rules:
@@ -338,6 +339,36 @@ rules:
 - **Two stop rules in conflict.** "Stop once the first line settles it" sits beside a falsifier sweep after a
   merely supporting line. Say it explicitly: stop when the line is decisive and nothing in the material
   qualifies it.
+
+## The quiz loop and the ledger (R&D rulings, recorded 2026-10-11)
+
+After each training session, ASPIRE's `quiz.py` asks the due kind-E items again as fresh variants and records the
+results in a Leitner ledger (`ledger.py`, aspire-si #102). R&D's rulings:
+- **Only kind-E items enter the ledger.** Each ask is a fresh variant, never the trained turn. n = 0 is the item's own
+  variant, then n = 1, 2, … come from role-set's variant store, without replacement. An exhausted family is reported
+  unmastered.
+- **Spent variants.** A variant whose wording outside material shares an 8-word span with any trained turn is
+  spent, because it was trained on. Restating the trained statement counts as spent: the quiz shows the item's
+  material and scores against the base key, so a restated statement tests recall. Material is excluded because it
+  is shown on purpose.
+- **What passes:**
+  - A verdict variant passes only when all three lines pass against the base key: the pinned scorer for the
+    verdict and DECIDING, and the harness for ESCALATE. The verdict alone is logged beside it.
+  - A written variant is scored only in closed form, by letter. Free-text written variants stay out, and they are
+    counted per lesson.
+- **Samples:** a majority of 3 at the card's sampling settings, never greedy in thinking mode. Every sample is a
+  receipt row.
+- **The ledger:**
+  - boxes 1–4; a miss goes to box 1, due next session;
+  - a right answer moves up a box, due after 2, 4, then 8 sessions;
+  - an item is mastered after 3 right answers in a row spanning at least 2 boxes, then a right fresh twin;
+  - a quality is mastered at 95% of its items mastered and 90% right on twins;
+  - forgetting events (right, then wrong) are logged.
+
+  The grounding: Amiri et al., EMNLP 2017 (Leitner-style repetition for training); Toneva et al., ICLR 2019
+  (forgetting events).
+- **The readout** gives n = 0 beside n ≥ 1, per lesson and overall. A gap is the sign of surface matching.
+- **Sealed reads:** a sealed sitting refuses an adapter trained with `--partial-set`, or one with no manifest.
 
 ## The leakage tool
 

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.78] - 2026-10-11
+
+- stage1-role-eval: quiz-loop rulings recorded; #102 review
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.77] - 2026-10-11
 
 - instruments/switchyard, #63 review

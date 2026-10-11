@@ -117,6 +117,14 @@ prototype, and its interfaces change without notice.
       answers yes from passing.
   - **role-set #24 merged as code,** with both critic checks advisory. Pilot 2 can run, and its output is gated
     by R&D's key-check.
+  - **role-set #25 (the writer's warm-up and `pilot-write.sh`), R&D review 2026-10-11: pass with two changes.**
+    - A restatement passes on distinctive lesson terms computed from the pack (a term in this lesson's paragraph
+      and in at most 2 others), with the hand-made stoplist kept as a floor.
+    - The writer's exemplars exclude the 10 dev items ruled label findings, by an id list recorded in
+      budget.json. Showing them would teach the blur the fix round removes. The list grows as the fix round
+      finds more.
+    - The run script passed as written: a pinned checkout, a budget from the pod deadline, the critic unloaded on
+      every exit, and a refusal when the deadline has passed.
 
 ## Studio relevance
 

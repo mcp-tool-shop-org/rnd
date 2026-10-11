@@ -40,6 +40,14 @@ R&D's calibration work, together with the Publisher's PRs reviewed by R&D, shape
   - a reply that used its whole `num_predict` is always `truncated`.
 - **Per-provider and account-wide budget caps** (#51, #52): an unreadable cap fails closed, and manual pods are
   shown as uncounted.
+- **GPU count on a pod** (#55, R&D review 2026-10-11: changes needed). `offrig_status` and `offrig_job` report
+  the pod record's count, the plan's count and, in the job view, what `nvidia-smi` lists. A mismatch warns and
+  never shuts the pod down. R&D's required changes:
+  - the measured count drives `gpu_mismatch` too, with `gpu_mismatch_source` (record, measured or both);
+  - a record without a count, with nothing measured, gives `gpu_mismatch: null` (unknown) and a warning, never
+    `false`, which would read as confirmed;
+  - `nvidia-smi` listing no cards against a plan above 0 is a mismatch, not "not measured";
+  - one test per case. Merge on green after that, with no re-review.
 
 **Calibrate what is served:** a model's calibration holds for one engine and one set of settings (model digest,
 think, `num_predict`, `num_ctx`, quote rule). A served engine or settings change means a new calibration, never

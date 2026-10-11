@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.46] - 2026-10-11
+
+- instruments/role-set: 8B solver rehearsal
+- Updated `role-set`: role-set — a generator for role-shaping training data (prototype, in the open)
+
 ## [1.1.4.5.45] - 2026-10-11
 
 - stage1-role-eval: batch 5 key-check

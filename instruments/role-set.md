@@ -178,6 +178,17 @@ prototype, and its interfaces change without notice.
     - **Open:** the thinking isn't yet checked step by step against the model. A follow-up could have each step cite
       its lines and state its conclusion, for the solver to check. R&D's key-check reads B traces until then.
     - **Cleared to merge at 64cade2,** with all four changes and tests.
+  - **The 8B rehearsal on the solver build (d0fe338, 2026-10-11):** 13 of 40 accepted, all kind A.
+    - **B:** 18 PUZZLE refusals over 6 slots, all on format (no Question line, unnumbered setting lines, a flavour
+      citation to a missing line). No B draft reached the solver.
+    - **What the drafts show:** the model JSON was well formed every time, but the 8B encoded the solution as `is`
+      facts cited to lines that say something else. The tie and lookup checks would refuse that. The question of
+      whether a writer can produce the model stays open until the 235B pilot 3.
+    - **R&D approved a small PR before pilot 3:**
+      - all text problems reported in one refusal;
+      - one worked line-to-rule example in the brief;
+      - a puzzle whose text copies the brief's pattern instruction is refused;
+      - a narrated "quoted" counts as a quote for the rubber_stamp gate.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**
     - **The rebuild list:** the 10 dev label findings, including T14-C-04, rebuilt so a missing fact decides it.
     - **Uniform sweeps** over the reviewed files: key form, flaw direction, side, turn placement, option register.

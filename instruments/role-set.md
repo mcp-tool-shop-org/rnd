@@ -161,6 +161,25 @@ prototype, and its interfaces change without notice.
       Flaw direction: rubber_stamp needs a supported checker verdict; reject_by_default needs a rejection.
     - **Defect, to fix before pilot-auto runs on a paid pod:** the relaunch counted slots whose calls were lost as
       done, so it never retried them.
+  - **PR H design (the kind B solver), R&D ruling 2026-10-11: approved with additions.**
+    - **The design:** the writer emits each puzzle as data: entities, attributes and facts in a closed set of rule
+      forms, each fact citing the numbered line it encodes. Code checks:
+      - the model's shape;
+      - that the text names every entity and value;
+      - that the puzzle has exactly one solution, by exhaustive search;
+      - that the key matches the computed answer.
+    - **R&D's additions:**
+      - a count form;
+      - no redundant facts (a fact whose removal leaves the solution count unchanged is refused);
+      - flavour lines name no value;
+      - a negation and direction check between each line and its rule;
+      - an ordered attribute's direction stated in the text.
+    - **Structure keys:**
+      - the stopping structure's key is computed as the first fact that settles the answer;
+      - the verdict-keyed structures compute their verdict over all solutions (supported in every one,
+        unsupported in none, otherwise cannot_tell).
+    - **Retries:** a retry that carries the counterexample is allowed. An answer that follows from stated values
+      alone is a lookup, and counts against the cap of one per trait.
 
 ## Studio relevance
 

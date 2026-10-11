@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.41] - 2026-10-11
+
+- instruments/role-set: PR H solver design ruling
+- Updated `role-set`: role-set — a generator for role-shaping training data (prototype, in the open)
+
 ## [1.1.4.5.40] - 2026-10-11
 
 - instruments/role-set: #28 review

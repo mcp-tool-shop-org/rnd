@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.38] - 2026-10-11
+
+- instruments/role-set: pilot 2 key-check
+- Updated `role-set`: role-set — a generator for role-shaping training data (prototype, in the open)
+
 ## [1.1.4.5.37] - 2026-10-11
 
 - instruments: offrig #55 GPU-count review; role-set #25 review

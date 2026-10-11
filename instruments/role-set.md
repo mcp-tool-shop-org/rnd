@@ -125,6 +125,25 @@ prototype, and its interfaces change without notice.
       finds more.
     - The run script passed as written: a pinned checkout, a budget from the pod deadline, the critic unloaded on
       every exit, and a refusal when the deadline has passed.
+  - **Pilot 2 (235B writer, advisory critic), R&D key-check of 49 accepted, 2026-10-11:** 15 pass as they stand, 15 need
+    a mechanical fix only, 19 fail. Nothing enters a batch until it's re-run and re-checked.
+    - **B uniqueness:** an exhaustive solver finds 3 of 5 accepted puzzles with 2 or 3 solutions. Each trace has a
+      wrong forcing step. The B pre-solve becomes a solver over the puzzle's own constraints that refuses unless
+      there's exactly one solution.
+    - **Written E:** every closed-form variant gives the key away by form. The keyed option is the key point pasted
+      verbatim (a lowercase fragment) among sentence-form distractors. Length was balanced and the register wasn't, so
+      a register gate is added.
+    - **Kind D:** 6 of 7 paste the pressure line into turn 0 as well (assembly).
+    - **Kind A:** 8 teach the trait's other side, or contradict the slot's side. A side check goes into the brief.
+    - **Wrong keys:** 2 (an exception about validation read as one about timestamps; an escalation on a schedule).
+      Two keys weren't instant, so they were cut, and one item was a near-duplicate.
+    - **The critic was right about the flaws.** Every item planted as rubber_stamp had a checker that guessed (a reason
+      from outside the material). rubber_stamp is redefined as approving without checking (no line, no reason
+      beyond agreement), and guess as a reason from outside the material. Over-rejection is its own flaw.
+    - The critic's T05 reading was right where a person pushes with rank, and wrong where the person states a
+      competing fact (T02).
+    - **Run records:** the per-check critic notes were missing from the output, and the readout's kind counts
+      summed to 45, not 49. Both were sent back.
 
 ## Studio relevance
 

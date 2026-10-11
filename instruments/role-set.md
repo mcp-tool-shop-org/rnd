@@ -240,6 +240,13 @@ prototype, and its interfaces change without notice.
     - **The old behaviour:** `puzzle-check` split the last line at its first colon, so a time-valued key lost its start.
     - **Now:** only a leading `Answer:` label is stripped.
     - **What it changes:** a last line with any other label now fails. No data file relied on that.
+  - **Cross-file skeleton check (#37), R&D review 2026-10-11: pass with one change.**
+    - **What it does:** `puzzle-check` refuses a later puzzle whose fact skeleton an earlier file already has.
+    - **How a skeleton is built:** names renamed in order of first appearance, attribute shape kept, `after` folded into
+      `before`, and the fact order that sorts first.
+    - **Required:** symmetric relations (`adjacent`, `not_adjacent`, `same`, `different`) need both argument orders.
+      Measured at be57310, swapping the names in one clue gave the same puzzle a new skeleton.
+    - With this check, `skeleton_repeat` moves from the brief into the tool.
     - **In the rehearsal, C, D and E were switched off by the 8B's assembly failures,** as designed. Nothing touched
       the puzzle checks.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**

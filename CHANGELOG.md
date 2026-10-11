@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.30] - 2026-10-11
+
+- stage1: batch 4 passes; conventions adopted
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.29] - 2026-10-11
 
 - switchyard: e3-ref reads, 5090 qwen3:8b 208 tok/s

@@ -142,8 +142,10 @@ prototype, and its interfaces change without notice.
       beyond agreement), and guess as a reason from outside the material. Over-rejection is its own flaw.
     - The critic's T05 reading was right where a person pushes with rank, and wrong where the person states a
       competing fact (T02).
-    - **Run records:** the per-check critic notes were missing from the output, and the readout's kind counts
-      summed to 45, not 49. Both were sent back.
+    - **Run records:** the readout's kind counts summed to 45, not 49. The cause was a runner bug: a parse halt was
+      raised before 4 accepted slots were recorded. It's fixed, with a test. R&D also reported the per-check critic
+      notes as missing, which was R&D's error: they are in drafts.jsonl, and R&D's script read only a refused draft
+      that had none. They will be copied onto each accepted row.
 
 ## Studio relevance
 

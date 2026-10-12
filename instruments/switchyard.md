@@ -371,3 +371,4 @@ receipts, not guesses. The brief lives in R&D's memory (`switchyard-router-build
   - **The values:** the 95th percentile is 15.35, which gives clock_tolerance_mhz and steady_band_mhz of 22.5 each. The worst call fits inside that band.
   - **Measured rates:** 218–224 tok/s, a spread of about 3%, with load at most 0.011 s.
   - **The clean-tree read:** clean_tree came out False only because the end read saw the pilot's own output; the start read was clean. Ruled: carry the start read forward and drop the end read. receipts/ stays tracked.
+  - **The amendment went up as switchyard #87 (R&D's PR; the Publisher merges):** the spec values are 22.5 and 22.5, the tests pin 22.5, and the null refusal is checked on a nulled copy of the spec. CI is green.

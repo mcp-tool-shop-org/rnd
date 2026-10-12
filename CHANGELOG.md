@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.34] - 2026-10-12
+
+- switchyard #87 opened (E4b tolerances)
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+
 ## [1.1.4.6.33] - 2026-10-12
 
 - E4b pilot accepted; tolerance and steady band 22.5 MHz

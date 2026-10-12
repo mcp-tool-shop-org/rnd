@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.103] - 2026-10-11
+
+- role-set generator: Kimi-consult decisions confirmed
+- Updated `role-set`: role-set — a generator for role-shaping training data (prototype, in the open)
+
 ## [1.1.4.5.102] - 2026-10-11
 
 - role-set: puzzle generator design ruling; brief updated

@@ -304,6 +304,17 @@ prototype, and its interfaces change without notice.
     - **Template wording is guarded against stamps:** 3 or more templates per clue form, 4 or more domain packs with
       sense rules, and no freeze on template-only wording until a stamp check passes.
     - **Owner:** the Dataset Specialist owns the proof code. The seat whose data it proves doesn't.
+    - **After Kimi's consult (R&D confirmation, 2026-10-11):**
+      - **Dates as an ordered integer-day attribute: confirmed, on four conditions.** The values are only the named
+        days. Containment is inclusive and computed by the solver, never stated as a fact. A shared boundary day can
+        be expressed. The placeholder span is a must-refuse fixture.
+      - **The shortcut rule is now a per-file floor:** at least 2 distinct shortcuts, none on more than half of the
+        file's B items. Confirm items count under their contrast.
+      - **No general engine in slice 1.**
+      - **The search-order metric is recorded with the solver pinned, and gets no bands until it's shown to track
+        something.**
+      - **Shortcut code is shared by the generator and puzzle-check,** and R&D's review of each reading is the
+        independent check.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**
     - **The rebuild list:** the 10 dev label findings, including T14-C-04, rebuilt so a missing fact decides it.
     - **Uniform sweeps** over the reviewed files: key form, flaw direction, side, turn placement, option register.

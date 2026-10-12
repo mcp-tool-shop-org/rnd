@@ -296,6 +296,7 @@ prototype, and its interfaces change without notice.
   - **An open-set Question must ask what could be (#46), R&D review 2026-10-11: one change needed.** The rule refuses
     only T10-B-01 to B-05. But the case-insensitive pattern can be satisfied by a name (the month "May", an entity
     "the can"), so strip entity names and values first, and match "may" in lower case (`name_satisfies_cue`, new).
+    - **Re-check at c72866e: pass, merge left to the Publisher.** Names and values are struck before the search, "may" counts only in lower case, and there are tests for each case.
   - **The puzzle generator design (the Publisher's draft), R&D review 2026-10-11: approved with additions.**
     - **The design:** generate, then reduce to a minimal set, then prove that a named lazy reading changes the answer.
     - **The lazy answer is rendered in the item's own format.** An ambiguous lazy model counts as cannot_tell for a

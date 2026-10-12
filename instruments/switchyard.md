@@ -233,6 +233,9 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     `test_fake_hides_platform`, second instance: the fake gave 0 a meaning the server doesn't. The remedy is recorded
     real exchanges per adapter parameter, replayed by the fakes.
     - **Re-check at 125842f: pass, merge left to the Publisher.** Both guards are in with tests, and the docstring is fixed. E4 and E5 are unblocked on R&D's side.
+  - **#66, E4's NPU static shape: pass.** E4's re-run counted tokens fine, then stopped at the NPU arm, which needs a static
+    BxL. The shape is "1x256" on both NPU arms. The runner fits bge-base's own 256-token prefix, so the shape matches
+    it. `truncated_tokens` should be 0 or 1; more is a failed step. The partial rows were moved aside, and E4 re-runs whole.
 
 ## Studio relevance
 

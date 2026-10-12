@@ -355,3 +355,4 @@ receipts, not guesses. The brief lives in R&D's memory (`switchyard-router-build
 
 - [primary] switchyard Phase 0 pull request, 2026-10-09 — https://github.com/mcp-tool-shop-org/switchyard/pull/1
 - **switchyard #72 (Ollama supervisor), re-check 2026-10-12 at b7ef655: pass.** The backend line is read only from the log segment after the spawn, and is confirmed after the first load. The full OLLAMA_*/LLAMA_ARG_* set is compared at prime and after a restart, and a mismatch or an unreadable environment disables restarts. Follow-up: when the size seam raises, the offset is 0, which reads the whole log; it should fail closed.
+- **switchyard #82 (the #72 follow-up), review 2026-10-12 at f8bc3e5: pass.** An unreadable log size now stops the run after the restart rather than reading from offset 0, and only a missing log counts as empty.

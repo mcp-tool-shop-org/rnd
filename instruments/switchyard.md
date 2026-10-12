@@ -286,6 +286,12 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     and `pool('none')` iterated floats. The fix takes a flat row. Follow-up: the fake returns the real shape per task,
     `none` refuses several rows, and the embed `[0]` is checked against pooled exports. `test_fake_hides_platform`,
     fourth instance.
+  - **#72 re-check at 8d9b934: five of seven pass.** The gate re-check, the invented variable removed, retry, 11490 never
+    stopped, and cold-after-restart all pass. Still open:
+    - the backend line is the last one in an appended log, so after a restart it can be the old server's line
+      (`check_reads_invariant`, second instance). Parse only the new segment;
+    - the replayed start record is never compared in full with the live server's `OLLAMA_*` set. A stale record
+      should mean no restarts.
 
 ## Studio relevance
 

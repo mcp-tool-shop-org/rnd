@@ -276,6 +276,11 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
       - search downward when the first window doesn't fit, using the lowest resident window as the spill reference;
       - record per-call readings in `search_calls`.
     - **Prerequisite:** restart 11434 once, logging and preferably unelevated.
+  - **#74, E4's iGPU static shape: pass.** Run 5 (11434 restarted unelevated) ran every 5090 and NPU arm, then
+    stopped in the iGPU plugin (`rank().is_static()`). The fix is 1x256 on both iGPU arms. The `nli` step encodes one prompt,
+    fitted to 256 tokens on the model's own tokenizer, so the shape matches. These are latency rows, not NLI quality.
+    Asked for: the adapter refuses an iGPU step without `static_shape` before compiling, unless the spec opts in to a
+    dynamic shape.
 
 ## Studio relevance
 

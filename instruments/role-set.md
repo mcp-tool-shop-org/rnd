@@ -284,6 +284,12 @@ prototype, and its interfaces change without notice.
       Question. A comparative-word list would mis-fire, and the merged paraphrases are instant.
     - **In the rehearsal, C, D and E were switched off by the 8B's assembly failures,** as designed. Nothing touched
       the puzzle checks.
+  - **Grouped keys for a set of groups (#45), R&D review 2026-10-11: changes needed.** Keys of an underdetermined
+    `entity_with` puzzle whose answers are groups are written "red and blue; red and green" and compared as sets of
+    groups. That's right. But the form switches only when some group has more than one name, so when every group
+    is a single name (T10-B-05, exactly one red bowl) the key falls back to "elm, oak, yew", the same string as the
+    single group of all three. Decide the form from the question (a non-distinct attribute means groups), and list
+    what else it refuses (`ambiguous_key_form`, new class).
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**
     - **The rebuild list:** the 10 dev label findings, including T14-C-04, rebuilt so a missing fact decides it.
     - **Uniform sweeps** over the reviewed files: key form, flaw direction, side, turn placement, option register.

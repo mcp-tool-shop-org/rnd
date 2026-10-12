@@ -202,6 +202,17 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
       (`test_fake_hides_platform`, new class).
   - **#63 disk key at 3f9c836: pass, conditional on CI going green.** The drive letter maps to `PhysicalDrive<n>` through
     Get-Partition | Get-Disk (on the rig, E: is 2 and C: is 0). A failed map records `unrecorded` with its reason.
+  - **#62 re-check at 8b82eda: changes needed.**
+    - **Right:** close, unload with keep_alive 0, then re-read the card. `predicted_over` is never a pass. The cold
+      re-count refuses on a mismatch. Not scaling one reading through the origin was the right call.
+    - **The close does nothing during a load.** The flight is armed only after urllib has the response headers, and a
+      non-streaming generate sends none until it's done. A local server holding its reply for 3 s showed `cancel()`
+      returning at once and the request still completing. The tests used a fake transport
+      (`test_fake_hides_platform`). Fix: arm an `http.client` connection before `getresponse()`, then shut down the socket.
+    - **The second window has no bound.** With one measured window there's no line, so a doubling loads unguarded,
+      and one allocation can pass the untested 31200 MiB ceiling between 200 ms samples
+      (`unguarded_allocation_step`). Ruled: bound it with window 1's growing share, i.e. the reading minus the idle
+      baseline minus the weights from `/api/tags`, scaled linearly. If there's no bound, don't load.
 
 ## Studio relevance
 

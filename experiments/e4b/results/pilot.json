@@ -1,0 +1,32 @@
+{
+  "provenance": {
+    "repo": "mcp-tool-shop-org/interlock",
+    "commit": "0ea950646819c9d4f6211be32dec7e1bec81db18",
+    "source": "e4b-pilot.json",
+    "sha256": "1045f72ed454e234feb98186d20c811cb565171d5f146e0790eaa9d3cddba509"
+  },
+  "ranges_mhz": [
+    22.0,
+    7.0,
+    0.0,
+    7.0,
+    0.0,
+    0.0,
+    0.0,
+    8.0,
+    15.0,
+    8.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    15.0
+  ],
+  "p95_clock_range_mhz": 15.350000000000005,
+  "clock_tolerance_mhz": 22.5
+}

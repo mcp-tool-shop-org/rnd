@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.9] - 2026-10-12
+
+- newsletter issue 3: the outside review of the first live runs
+
 ## [1.1.4.6.8] - 2026-10-12
 
 - switchyard: rulings on Kimi's live-run consult

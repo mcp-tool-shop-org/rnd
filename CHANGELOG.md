@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.39] - 2026-10-12
+
+- E4b block 2 ruling
+- Added `2026-10-12-e4b-block-2`: E4b block 2 — the 5090 runs free beside the NPU and iGPU
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+
 ## [1.1.4.6.38] - 2026-10-12
 
 - interlock #89 pass

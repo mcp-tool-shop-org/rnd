@@ -277,6 +277,11 @@ prototype, and its interfaces change without notice.
     - **Merge order:** T06-B-02 is rebuilt before aspire-si's pin moves past #42, so the directory never goes red.
     - **Re-check at 4fb7b79: pass.** `not (is …)` on a binary and the two-sided binary count are folded. A third
       refusal, T10-B-02 against T10-B-01 ("at most one sealed" is "at least two open"), is correct.
+  - **The Question must name what the model asks (#43), R&D review 2026-10-11: pass.**
+    - **The rule:** for an `of` target, puzzle-check refuses a Question line that doesn't name the entity. That
+      catches batch 6's T12-B-01 to B-05 and nothing merged.
+    - **`entity_with` (ruled 2026-10-11):** no refusal, only a report of items whose value or its stem isn't in the
+      Question. A comparative-word list would mis-fire, and the merged paraphrases are instant.
     - **In the rehearsal, C, D and E were switched off by the 8B's assembly failures,** as designed. Nothing touched
       the puzzle checks.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**

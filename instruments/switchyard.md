@@ -262,6 +262,20 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     Also required: replay the recorded start line and full environment, including `OLLAMA_MODELS` and the log
     (`environment_not_replayed`, new); compare flash attention and the KV type for real; never restart 11490; and
     re-warm, or mark cold, the step after a restart.
+  - **E5 run 2, diagnosis (2026-10-12): no row valid, and the fixes are scoped as one job.**
+    - **Every confirm spilled because no shared reading was found.** The 5090 Ollama runs elevated, so its
+      processes' command lines are unreadable to the harness. `runner_pids` matches "runner" in the command line and
+      finds none, and a missing shared reading is a spill. The null peaks were a reporting artifact: the row's peak
+      comes from a confirmed window, and none confirmed.
+    - **The fingerprint fields had the wrong sources.** `--query-gpu=cuda_version` isn't a valid field on driver 617.14,
+      and flash attention, the KV type and the ggml sha were read from `/api/show`, which holds model info only.
+    - **Fixes:**
+      - find the runner by its parent pid (the 11434 listener);
+      - read the server facts from its log (the server config and load_backend lines), plus the ggml-cuda.dll sha;
+      - cap the search at the trained `context_length`;
+      - search downward when the first window doesn't fit, using the lowest resident window as the spill reference;
+      - record per-call readings in `search_calls`.
+    - **Prerequisite:** restart 11434 once, logging and preferably unelevated.
 
 ## Studio relevance
 

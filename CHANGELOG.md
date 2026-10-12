@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.102] - 2026-10-11
+
+- role-set: puzzle generator design ruling; brief updated
+- Updated `role-set`: role-set — a generator for role-shaping training data (prototype, in the open)
+
 ## [1.1.4.5.101] - 2026-10-11
 
 - stage1-role-eval batch 6 round 3; role-set #45; switchyard #62 re-check

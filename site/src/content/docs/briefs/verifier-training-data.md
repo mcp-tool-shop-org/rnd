@@ -40,6 +40,12 @@ do we keep a wrong key, a puzzle with two answers, or a lazy habit out of it?
 - **Every defect now gets a class name.** About 30 classes so far, from `skeleton_repeat` to
   `reject_by_default_as_unsupported`. Each one records whether a tool catches it or only a written brief does.
   Over time, classes move from the brief into a gate.
+- **Checking after the fact has a ceiling, so the puzzles will be generated.** Batch 6 took three rounds, and in
+  round 3 five date puzzles passed the solver by giving the date a made-up value instead of matching it to a range.
+  The next step (designed, not built) is a generator: code samples a solution, adds clues until it is unique, then
+  removes every clue it doesn't need. It then proves the lesson's step matters, by solving the puzzle again under
+  a named shortcut, such as reading "at least" as "exactly", and requiring a different answer. A model only
+  words the result, and the wording is parsed back and must match.
 
 | Where the item came from | Read | Passed as written | Fixable | Failed or rewritten |
 |---|---|---|---|---|

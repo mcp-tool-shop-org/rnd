@@ -290,6 +290,20 @@ prototype, and its interfaces change without notice.
     is a single name (T10-B-05, exactly one red bowl) the key falls back to "elm, oak, yew", the same string as the
     single group of all three. Decide the form from the question (a non-distinct attribute means groups), and list
     what else it refuses (`ambiguous_key_form`, new class).
+  - **The puzzle generator design (the Publisher's draft), R&D review 2026-10-11: approved with additions.**
+    - **The design:** generate, then reduce to a minimal set, then prove that a named lazy reading changes the answer.
+    - **The lazy answer is rendered in the item's own format.** An ambiguous lazy model counts as cannot_tell for a
+      claim-keyed item, and as its set of possible answers for a set-keyed one. For a single-value item it is refused
+      if that set contains the key.
+    - **T10's readings run in both directions,** and loosening `=` may decide at most half of a lesson's B items.
+    - **T11's lazy reading is a verdict rule,** "consistent, so supported", applied using the subject's own lines.
+      The confirm side is proven by a contrast instead: a one-clue change that would flip the claim.
+    - **T12 needs typed spans and dates with containment in puzzle.py, in slice 1.** Without a date type, writers
+      invented placeholder span values.
+    - **Every recipe gets regression tests** from the defective items review caught.
+    - **Template wording is guarded against stamps:** 3 or more templates per clue form, 4 or more domain packs with
+      sense rules, and no freeze on template-only wording until a stamp check passes.
+    - **Owner:** the Dataset Specialist owns the proof code. The seat whose data it proves doesn't.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**
     - **The rebuild list:** the 10 dev label findings, including T14-C-04, rebuilt so a missing fact decides it.
     - **Uniform sweeps** over the reviewed files: key form, flaw direction, side, turn placement, option register.

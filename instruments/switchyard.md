@@ -250,6 +250,18 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     (`unbounded_probe`, new). The recorder also takes the harness's grant, heartbeat and empty-card guards. Optional:
     measure the cold-load constant on the rig, give the count budget a prompt-length term, and build every settings
     branch in the coverage test.
+  - **#72, the Ollama supervisor: changes needed (not measurement-neutral yet).** Right: no restart during a measurement,
+    slow-but-healthy is left alone, only the port owner is stopped, a failed restart stops the run, and there's no
+    sign-in. The three departures:
+    - no grant ledger: accepted, if the restart re-checks the grant, the heartbeat and `/api/ps` exclusivity itself;
+    - `OLLAMA_CUDA_BACKEND`: rejected. It isn't an Ollama variable (the rig's `ollama serve --help` lists
+      `OLLAMA_LLM_LIBRARY`), and the fingerprint read the driver's CUDA version, which a restart can't change
+      (`check_reads_invariant`, new; `config_name_invented`, new);
+    - retry defaulting to 0: accepted.
+
+    Also required: replay the recorded start line and full environment, including `OLLAMA_MODELS` and the log
+    (`environment_not_replayed`, new); compare flash attention and the KV type for real; never restart 11490; and
+    re-warm, or mark cold, the step after a restart.
 
 ## Studio relevance
 

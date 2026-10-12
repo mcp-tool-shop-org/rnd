@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 503" width="1280" height="503" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="1280" height="503" fill="#ffffff"/>
+<text x="24.0" y="34.0" font-size="17" fill="#1f2430" text-anchor="start" font-weight="600">E4b verdict: change while the other device is busy</text>
+<text x="24.0" y="56.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="400">PRE-REGISTERED. exact Wilcoxon interval at 0.916 coverage (achieved level; nominal target 90%).</text>
+<text x="24.0" y="76.0" font-size="12" fill="#5b6272" text-anchor="start" font-weight="400">A pair is free when the whole interval lies inside the ±10% band.</text>
+<rect x="24.0" y="118.0" width="1232.0" height="48.0" fill="#f1f3f7" stroke="none"/>
+<rect x="24.0" y="214.0" width="1232.0" height="48.0" fill="#f1f3f7" stroke="none"/>
+<rect x="24.0" y="310.0" width="1232.0" height="48.0" fill="#f1f3f7" stroke="none"/>
+<rect x="505.2" y="118.0" width="439.7" height="288.0" fill="#e7f2ea" stroke="none"/>
+<line x1="505.2" y1="118.0" x2="505.2" y2="406.0" stroke="#e3e6ec" stroke-width="1"/>
+<text x="505.2" y="422.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">-10</text>
+<line x1="615.1" y1="118.0" x2="615.1" y2="406.0" stroke="#e3e6ec" stroke-width="1"/>
+<text x="615.1" y="422.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">-5</text>
+<line x1="725.0" y1="118.0" x2="725.0" y2="406.0" stroke="#1f2430" stroke-width="1.2"/>
+<text x="725.0" y="422.0" font-size="10" fill="#1f2430" text-anchor="middle" font-weight="600">0</text>
+<line x1="834.9" y1="118.0" x2="834.9" y2="406.0" stroke="#e3e6ec" stroke-width="1"/>
+<text x="834.9" y="422.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">5</text>
+<line x1="944.8" y1="118.0" x2="944.8" y2="406.0" stroke="#e3e6ec" stroke-width="1"/>
+<text x="944.8" y="422.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">10</text>
+<line x1="505.2" y1="118.0" x2="505.2" y2="406.0" stroke="#3f6212" stroke-width="1.2" stroke-dasharray="5,3"/>
+<line x1="944.8" y1="118.0" x2="944.8" y2="406.0" stroke="#3f6212" stroke-width="1.2" stroke-dasharray="5,3"/>
+<text x="725.0" y="106.0" font-size="11" fill="#3f6212" text-anchor="middle" font-weight="600">pre-registered ±10% band, zero marked</text>
+<text x="28.0" y="136.0" font-size="13" fill="#1f2430" text-anchor="start" font-weight="600">5090, with the NPU busy</text>
+<text x="28.0" y="154.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">block 2 · free · 10 triplets</text>
+<line x1="698.6" y1="142.0" x2="714.9" y2="142.0" stroke="#15803d" stroke-width="2.8"/>
+<circle cx="706.8" cy="142.0" r="4.6" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<text x="992.0" y="146.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="400">-0.83%   [-1.20%, -0.46%]</text>
+<text x="28.0" y="184.0" font-size="13" fill="#1f2430" text-anchor="start" font-weight="600">5090, with the iGPU busy</text>
+<text x="28.0" y="202.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">block 2 · free · 10 triplets</text>
+<line x1="730.3" y1="190.0" x2="755.2" y2="190.0" stroke="#15803d" stroke-width="2.8"/>
+<circle cx="737.5" cy="190.0" r="4.6" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<text x="992.0" y="194.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="400">+0.57%   [+0.24%, +1.38%]</text>
+<text x="28.0" y="232.0" font-size="13" fill="#1f2430" text-anchor="start" font-weight="600">NPU, with the 5090 busy</text>
+<text x="28.0" y="250.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">block 2 · INCONCLUSIVE · superseded by block 3 · 3 refusals</text>
+<text x="725.0" y="242.0" font-size="12" fill="#b45309" text-anchor="middle" font-weight="600">INCONCLUSIVE</text>
+<text x="28.0" y="280.0" font-size="13" fill="#1f2430" text-anchor="start" font-weight="600">iGPU, with the 5090 busy</text>
+<text x="28.0" y="298.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">block 2 · INCONCLUSIVE · superseded by block 3 · 2 refusals</text>
+<text x="725.0" y="290.0" font-size="12" fill="#b45309" text-anchor="middle" font-weight="600">INCONCLUSIVE</text>
+<text x="28.0" y="328.0" font-size="13" fill="#1f2430" text-anchor="start" font-weight="600">NPU, with the 5090 busy</text>
+<text x="28.0" y="346.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">block 3 · free · 10 triplets</text>
+<line x1="696.2" y1="334.0" x2="726.3" y2="334.0" stroke="#15803d" stroke-width="2.8"/>
+<circle cx="711.7" cy="334.0" r="4.6" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<text x="992.0" y="338.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="400">-0.61%   [-1.31%, +0.06%]</text>
+<text x="28.0" y="376.0" font-size="13" fill="#1f2430" text-anchor="start" font-weight="600">iGPU, with the 5090 busy</text>
+<text x="28.0" y="394.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">block 3 · free · 10 triplets</text>
+<line x1="703.3" y1="382.0" x2="831.1" y2="382.0" stroke="#15803d" stroke-width="2.8"/>
+<circle cx="779.4" cy="382.0" r="4.6" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<text x="992.0" y="386.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="400">+2.48%   [-0.99%, +4.82%]</text>
+<text x="24.0" y="459.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">On a 5090 row a negative change is a slower decode. On an NPU or iGPU row a positive change is a slower call. E4b&#x27;s rates are not comparable to E4&#x27;s.</text>
+<text x="24.0" y="474.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Block 1 aborted and is not included. An inconclusive row stays INCONCLUSIVE when a later block re-runs the pair. Different runs are separate rows and are never joined by a line.</text>
+<text x="24.0" y="489.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Source: experiments/e4b/results/ (e4b-block-2 harness f3f5e44; e4b-block-3 harness 426f106). Inputs pinned in experiments/charts/manifest.json.</text>
+</svg>

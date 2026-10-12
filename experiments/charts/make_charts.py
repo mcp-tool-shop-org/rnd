@@ -33,6 +33,12 @@ SITE_CHARTS = REPO / "site" / "public" / "charts"
 CU134 = REPO / "experiments" / "cloud-cu134" / "results"
 KEV = REPO / "experiments" / "kev-judge-finetune" / "env" / "README.md"
 GRAPHS = REPO / "experiments" / "cuda-graphs" / "results" / "2026-10-08-llama.json"
+E4B = REPO / "experiments" / "e4b" / "results"
+E4B_PLAIN = {"5090-npu": "5090, with the NPU busy", "5090-igpu": "5090, with the iGPU busy",
+             "npu-5090": "NPU, with the 5090 busy", "igpu-5090": "iGPU, with the 5090 busy"}
+E4B_ROLES = {"alone-before": "alone, before the paired call", "paired": "paired, with the 5090 busy",
+             "alone-after": "alone, after the paired call"}
+FREE, HOLD = "#15803d", "#b45309"
 # Receipts from other studio repos, read at a pinned commit from a sibling clone with `git show`.
 JAM = {"repo": "mcp-tool-shop-org/ai-jam-sessions", "clone": REPO.parent / "ai-jam-sessions",
        "sha": "5aa092c4fe2a680968f171d78696d58e285c9982"}
@@ -726,6 +732,322 @@ def chart_thinking():
     svg.save("thinking-off-vs-on.svg")
 
 
+# --- E4b contention (interlock). Numbers come from experiments/e4b/results/, never typed in. ---
+
+def e4b_pct(value: float) -> float:
+    return 100.0 * value
+
+
+def e4b_fmt_pct(value: float) -> str:
+    return f"{e4b_pct(value):+.2f}%"
+
+
+def e4b_fmt_mhz(value: float) -> str:
+    text = f"{value:.2f}"
+    return text.rstrip("0").rstrip(".") if "." in text else text
+
+
+def e4b_run_words(run_id: str) -> str:
+    match = re.fullmatch(r"e4b-block-(\d+)", run_id)
+    return f"block {match.group(1)}" if match else run_id
+
+
+def e4b_interval_name(method: str) -> str:
+    if method == "exact-wilcoxon-signed-rank":
+        return "exact Wilcoxon interval"
+    return method
+
+
+def e4b_block_paths() -> list[Path]:
+    def key(path: Path) -> int:
+        match = re.search(r"block-(\d+)", path.name)
+        if match is None:
+            raise RuntimeError(f"unexpected E4b result name: {path.name}")
+        return int(match.group(1))
+
+    paths = sorted(E4B.glob("block-*.json"), key=key)
+    if not paths:
+        raise RuntimeError(f"no E4b block results in {E4B.relative_to(REPO).as_posix()}")
+    return paths
+
+
+def e4b_rows(blocks: list[dict]) -> list[tuple[dict, dict, str | None]]:
+    """(block, pair, later run id) in receipt order. A later decided run does not replace an earlier row."""
+    rows = []
+    for index, block in enumerate(blocks):
+        for pair in block["pairs"]:
+            later = None
+            if pair["verdict"] == "inconclusive":
+                for nxt in blocks[index + 1:]:
+                    if any(p["pair"] == pair["pair"] and p["verdict"] != "inconclusive" for p in nxt["pairs"]):
+                        later = nxt["run_id"]
+                        break
+            rows.append((block, pair, later))
+    return rows
+
+
+def e4b_rule(blocks: list[dict]) -> tuple[float, str, float]:
+    bands = {b["rule"]["band_log"] for b in blocks}
+    methods = {b["rule"]["method"] for b in blocks}
+    nominals = {b["rule"]["nominal_confidence"] for b in blocks}
+    if len(bands) != 1 or len(methods) != 1 or len(nominals) != 1:
+        raise RuntimeError("E4b blocks disagree on the pre-registered band or interval")
+    return bands.pop(), methods.pop(), nominals.pop()
+
+
+def e4b_coverage(blocks: list[dict]) -> str | None:
+    levels = {p["achieved"] for b in blocks for p in b["pairs"] if p["achieved"] is not None}
+    if len(levels) == 1:
+        return f"{levels.pop():.3f}"
+    return None
+
+
+def e4b_percent_limits(rows, band_pct: float) -> tuple[float, float]:
+    values = [-band_pct, band_pct]
+    for _, pair, _ in rows:
+        values.extend(e4b_pct(d) for d in pair["d_i"])
+        values.extend(e4b_pct(pair[key]) for key in ("hodges_lehmann", "low", "high") if pair[key] is not None)
+    lo, hi = min(values), max(values)
+    pad = max(1.0, (hi - lo) * 0.08)
+    return lo - pad, hi + pad
+
+
+def e4b_ticks(lo: float, hi: float, step: float) -> list[float]:
+    start = math.ceil((lo - 1e-9) / step) * step
+    ticks, value = [], start
+    while value <= hi + 1e-9:
+        ticks.append(0.0 if abs(value) < 1e-9 else round(value, 6))
+        value += step
+    return ticks
+
+
+def e4b_percent_axis(svg, x0, x1, y0, y1, lo, hi, band_pct: float):
+    """Shared percent axis: the pre-registered band, zero, and ticks. Returns a value-to-x function."""
+    def sx(value: float) -> float:
+        return x0 + (value - lo) / (hi - lo) * (x1 - x0)
+
+    svg.rect(sx(-band_pct), y0, sx(band_pct) - sx(-band_pct), y1 - y0, "#e7f2ea")
+    step = 5 if hi - lo <= 40 else 10
+    for tick in e4b_ticks(lo, hi, step):
+        on_zero = tick == 0
+        svg.line(sx(tick), y0, sx(tick), y1, INK if on_zero else GRID, 1.2 if on_zero else 1)
+        svg.text(sx(tick), y1 + 16, f"{tick:g}", size=10, color=INK if on_zero else MUTED, anchor="middle",
+                 weight=600 if on_zero else 400)
+    for edge in (-band_pct, band_pct):
+        svg.line(sx(edge), y0, sx(edge), y1, "#3f6212", 1.2, "5,3")
+    svg.text((x0 + x1) / 2, y0 - 12, f"pre-registered ±{band_pct:g}% band, zero marked",
+             size=11, color="#3f6212", anchor="middle", weight=600)
+    return sx
+
+
+def e4b_row_caption(block: dict, pair: dict, later: str | None) -> str:
+    bits = [e4b_run_words(block["run_id"])]
+    if block.get("aborted"):
+        bits.append("ABORTED")
+    if pair["verdict"] == "inconclusive":
+        bits.append("INCONCLUSIVE")
+        if later:
+            bits.append(f"superseded by {e4b_run_words(later)}")
+        if pair["refusal_events"]:
+            n = pair["refusal_events"]
+            bits.append(f"{n} refusal" if n == 1 else f"{n} refusals")
+    else:
+        bits.append(str(pair["verdict"]))
+        n = len(pair["d_i"])
+        bits.append(f"{n} triplet" if n == 1 else f"{n} triplets")
+    return " · ".join(bits)
+
+
+def e4b_sources(blocks: list[dict]) -> str:
+    pins = [f"{b['run_id']} harness {b['provenance']['commit'][:7]}" for b in blocks]
+    return "Source: experiments/e4b/results/ (" + "; ".join(pins) + "). Inputs pinned in experiments/charts/manifest.json."
+
+
+def chart_e4b_verdict(blocks, rows, lo, hi, band_pct, method, nominal, coverage):
+    step, top = 48, 118
+    y1 = top + step * len(rows)
+    foot = ["On a 5090 row a negative change is a slower decode. On an NPU or iGPU row a positive change is a slower call. "
+            "E4b's rates are not comparable to E4's.",
+            "Block 1 aborted and is not included. An inconclusive row stays INCONCLUSIVE when a later block re-runs the pair. "
+            "Different runs are separate rows and are never joined by a line.",
+            e4b_sources(blocks)]
+    svg = Svg(1280, y1 + 52 + 15 * len(foot), "E4b verdict: change while the other device is busy")
+    cover = f" at {coverage} coverage" if coverage else ""
+    svg.text(24, 56, f"PRE-REGISTERED. {e4b_interval_name(method)}{cover} "
+             f"(achieved level; nominal target {nominal:.0%}).", size=12, color=INK)
+    svg.text(24, 76, f"A pair is free when the whole interval lies inside the ±{band_pct:g}% band.", size=12, color=MUTED)
+    x0, x1 = 470, 980
+    for i, _ in enumerate(rows):
+        y = top + step * i + step / 2
+        if i % 2 == 0:
+            svg.rect(24, y - step / 2, 1232, step, BAND)
+    sx = e4b_percent_axis(svg, x0, x1, top, y1, lo, hi, band_pct)
+    for i, (block, pair, later) in enumerate(rows):
+        y = top + step * i + step / 2
+        svg.text(28, y - 6, E4B_PLAIN.get(pair["pair"], pair["pair"]), size=13, weight=600)
+        svg.text(28, y + 12, e4b_row_caption(block, pair, later), size=10, color=MUTED)
+        if pair["hodges_lehmann"] is None:
+            svg.text((x0 + x1) / 2, y + 4, "INCONCLUSIVE", size=12, color=HOLD, anchor="middle", weight=600)
+            continue
+        svg.line(sx(e4b_pct(pair["low"])), y, sx(e4b_pct(pair["high"])), y, FREE, 2.8)
+        svg.dot(sx(e4b_pct(pair["hodges_lehmann"])), y, FREE, r=4.6)
+        svg.text(x1 + 12, y + 4, f"{e4b_fmt_pct(pair['hodges_lehmann'])}   "
+                 f"[{e4b_fmt_pct(pair['low'])}, {e4b_fmt_pct(pair['high'])}]", size=12)
+    svg.footer(foot)
+    svg.save("e4b-verdict.svg")
+
+
+def chart_e4b_triplets(blocks, rows, lo, hi, band_pct):
+    step, top = 52, 108
+    y1 = top + step * len(rows)
+    foot = ["Each dot is one triplet: the paired call against the mean of that triplet's own alone calls, on the log scale.",
+            "The diamond is the Hodges-Lehmann estimate. E4b's rates are not comparable to E4's.",
+            "Inconclusive rows show the triplets that were kept and no estimate. They are not joined to the later run.",
+            e4b_sources(blocks)]
+    svg = Svg(1280, y1 + 52 + 15 * len(foot), "E4b: each triplet's change")
+    svg.text(24, 56, "PRE-REGISTERED. The same pairs and the same band as the verdict chart. "
+             "A dot above the band would be a triplet outside the limit.", size=12, color=MUTED)
+    x0, x1 = 470, 1040
+    for i, _ in enumerate(rows):
+        y = top + step * i + step / 2
+        if i % 2 == 0:
+            svg.rect(24, y - step / 2, 1232, step, BAND)
+    sx = e4b_percent_axis(svg, x0, x1, top, y1, lo, hi, band_pct)
+    for i, (block, pair, later) in enumerate(rows):
+        y = top + step * i + step / 2
+        color = HOLD if pair["verdict"] == "inconclusive" else FREE
+        svg.text(28, y - 6, E4B_PLAIN.get(pair["pair"], pair["pair"]), size=13, weight=600)
+        svg.text(28, y + 12, e4b_row_caption(block, pair, later), size=10, color=MUTED)
+        effects = pair["d_i"]
+        n = len(effects)
+        for j, effect in enumerate(effects):
+            dy = 0 if n == 1 else (j - (n - 1) / 2) / ((n - 1) / 2) * 14
+            svg.dot(sx(e4b_pct(effect)), y + dy, color, r=3.1)
+        if pair["hodges_lehmann"] is None:
+            svg.text(x1 + 12, y + 4, "INCONCLUSIVE", size=11, color=HOLD, weight=600)
+        else:
+            svg.dot(sx(e4b_pct(pair["hodges_lehmann"])), y, INK, hollow=True, shape="diamond", r=5.2)
+            svg.text(x1 + 12, y + 4, e4b_fmt_pct(pair["hodges_lehmann"]), size=12)
+    svg.footer(foot)
+    svg.save("e4b-triplet-effects.svg")
+
+
+def chart_e4b_pilot(pilot: dict):
+    ranges = pilot["ranges_mhz"]
+    tolerance = pilot["clock_tolerance_mhz"]
+    p95 = pilot["p95_clock_range_mhz"]
+    top, bottom, x0, x1 = 108, 430, 72, 1100
+    hi = max([tolerance, p95, *ranges]) * 1.12
+    def sy(value: float) -> float:
+        return bottom - value / hi * (bottom - top)
+
+    foot = [f"Tolerance {e4b_fmt_mhz(tolerance)} MHz is the pilot's clock limit. "
+            f"p95 {e4b_fmt_mhz(p95)} MHz is the pilot's own 95th percentile of these ranges.",
+            f"Source: experiments/e4b/results/pilot.json (harness {pilot['provenance']['commit'][:7]}, "
+            f"{pilot['provenance']['source']}). Inputs pinned in experiments/charts/manifest.json."]
+    svg = Svg(1180, bottom + 70 + 15 * len(foot), "E4b pilot: how far the 5090 clock moved during a call")
+    svg.text(24, 56, f"PRE-REGISTERED PILOT. {len(ranges)} within-call SM clock ranges, in call order. "
+             "A call with no bar did not move (0 MHz).", size=12, color=MUTED)
+    svg.text(24, 76, "This check set the block's clock limit. It is not a contention result.", size=12, color=MUTED)
+    for tick in e4b_ticks(0, hi, 5):
+        svg.line(x0, sy(tick), x1, sy(tick), GRID)
+        svg.text(x0 - 8, sy(tick) + 3, f"{tick:g}", size=10, color=MUTED, anchor="end")
+    svg.text(16, (top + bottom) / 2, "MHz", size=11, color=MUTED, anchor="middle")
+    gap, n = 8, len(ranges)
+    bar_w = (x1 - x0 - gap * (n + 1)) / n
+    for i, mhz in enumerate(ranges):
+        x = x0 + gap + i * (bar_w + gap)
+        y = sy(mhz)
+        svg.rect(x, y, bar_w, bottom - y, "#2563eb" if mhz <= tolerance else RULE)
+        svg.text(x + bar_w / 2, bottom + 16, str(i + 1), size=10, color=MUTED, anchor="middle")
+    svg.line(x0, sy(tolerance), x1, sy(tolerance), RULE, 1.4, "5,3")
+    svg.line(x0, sy(p95), x1, sy(p95), HOLD, 1.4, "5,3")
+    svg.text(x1 - 4, sy(tolerance) - 6, f"tolerance {e4b_fmt_mhz(tolerance)} MHz", size=11, color=RULE,
+             anchor="end", weight=600)
+    svg.text(x1 - 4, sy(p95) - 6, f"p95 {e4b_fmt_mhz(p95)} MHz", size=11, color=HOLD, anchor="end", weight=600)
+    svg.text((x0 + x1) / 2, bottom + 34, "call", size=11, color=MUTED, anchor="middle")
+    svg.footer(foot)
+    svg.save("e4b-pilot-clock.svg")
+
+
+def chart_e4b_latency(blocks: list[dict]):
+    chosen = None
+    for block in blocks:
+        for pair in block["pairs"]:
+            if pair["pair"] == "igpu-5090" and pair["verdict"] != "inconclusive":
+                chosen = (block, pair)
+    if chosen is None:
+        raise RuntimeError("no decided igpu-5090 pair to chart")
+    block, pair = chosen
+    order = ["alone-before", "paired", "alone-after"]
+    grouped: dict[str, list[float]] = {role: [] for role in order}
+    for slot in pair["slots"]:
+        if slot["value"] is None:
+            continue
+        grouped.setdefault(slot["role"], []).append(slot["value"])
+    roles = [role for role in order if grouped.get(role)]
+    roles += [role for role in grouped if role not in roles and grouped[role]]
+    values = [v for role in roles for v in grouped[role]]
+    lo, hi = min(values), max(values)
+    pad = max(0.4, (hi - lo) * 0.1)
+    lo, hi = lo - pad, hi + pad
+    step_size = 1.0
+    raw = (hi - lo) / 6
+    magnitude = 10 ** math.floor(math.log10(raw)) if raw > 0 else 1
+    for multiple in (1, 2, 5, 10):
+        if raw <= multiple * magnitude:
+            step_size = multiple * magnitude
+            break
+    step, top = 64, 118
+    y1 = top + step * len(roles)
+    paired = grouped.get("paired", [])
+    span = f"{min(paired):.1f}–{max(paired):.1f} ms" if paired else "no paired calls"
+    foot = [f"POST HOC view of {block['run_id']} only. Paired calls span {span}. "
+            "The groups are there to be seen; this chart is not a significance test.",
+            "E4b's rates are not comparable to E4's. Alone and paired are the receipt's slot roles.",
+            e4b_sources([block])]
+    svg = Svg(1180, y1 + 52 + 15 * len(foot), "E4b: iGPU call times beside a busy 5090")
+    svg.text(24, 56, "POST HOC. Drawn after the verdict, to show the shape of the iGPU times. No significance test.",
+             size=12, color=RULE, weight=600)
+    svg.text(24, 78, f"{e4b_run_words(block['run_id'])}. Each dot is one call, in milliseconds. "
+             "Nothing here changes the free / not-free decision.", size=12, color=MUTED)
+    x0, x1 = 360, 1040
+    def sx(value: float) -> float:
+        return x0 + (value - lo) / (hi - lo) * (x1 - x0)
+
+    for i, role in enumerate(roles):
+        y = top + step * i + step / 2
+        if i % 2 == 0:
+            svg.rect(24, y - step / 2, 1132, step, BAND)
+    for tick in e4b_ticks(lo, hi, step_size):
+        svg.line(sx(tick), top, sx(tick), y1, GRID)
+        svg.text(sx(tick), y1 + 16, f"{tick:g}", size=10, color=MUTED, anchor="middle")
+    svg.text((x0 + x1) / 2, top - 12, "call latency, milliseconds", size=11.5, weight=600, anchor="middle")
+    for i, role in enumerate(roles):
+        y = top + step * i + step / 2
+        color = "#0f766e" if role == "paired" else "#6b7280"
+        svg.text(28, y + 4, E4B_ROLES.get(role, role), size=13, weight=600)
+        vals = grouped[role]
+        for value in vals:
+            svg.dot(sx(value), y, color, r=4.4)
+        svg.text(x1 + 12, y + 4, f"n={len(vals)}", size=11, color=MUTED)
+    svg.footer(foot)
+    svg.save("e4b-igpu-latency.svg")
+
+
+def chart_e4b():
+    blocks = [load(path) for path in e4b_block_paths()]
+    pilot = load(E4B / "pilot.json")
+    band, method, nominal = e4b_rule(blocks)
+    rows = e4b_rows(blocks)
+    lo, hi = e4b_percent_limits(rows, e4b_pct(band))
+    coverage = e4b_coverage(blocks)
+    chart_e4b_verdict(blocks, rows, lo, hi, e4b_pct(band), method, nominal, coverage)
+    chart_e4b_triplets(blocks, rows, lo, hi, e4b_pct(band))
+    chart_e4b_pilot(pilot)
+    chart_e4b_latency(blocks)
+
+
 def manifest():
     out = {}
     for rel, p in sorted(INPUTS.items()):
@@ -749,6 +1071,7 @@ def main():
     chart_cuda()
     chart_vocal()
     chart_thinking()
+    chart_e4b()
     manifest()
 
 

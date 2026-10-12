@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 407" width="1180" height="407" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="1180" height="407" fill="#ffffff"/>
+<text x="24.0" y="34.0" font-size="17" fill="#1f2430" text-anchor="start" font-weight="600">E4b: iGPU call times beside a busy 5090</text>
+<text x="24.0" y="56.0" font-size="12" fill="#b91c1c" text-anchor="start" font-weight="600">POST HOC. Drawn after the verdict, to show the shape of the iGPU times. No significance test.</text>
+<text x="24.0" y="78.0" font-size="12" fill="#5b6272" text-anchor="start" font-weight="400">block 3. Each dot is one call, in milliseconds. Nothing here changes the free / not-free decision.</text>
+<rect x="24.0" y="118.0" width="1132.0" height="64.0" fill="#f1f3f7" stroke="none"/>
+<rect x="24.0" y="246.0" width="1132.0" height="64.0" fill="#f1f3f7" stroke="none"/>
+<line x1="478.2" y1="118.0" x2="478.2" y2="310.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="478.2" y="326.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">38</text>
+<line x1="610.2" y1="118.0" x2="610.2" y2="310.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="610.2" y="326.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">40</text>
+<line x1="742.2" y1="118.0" x2="742.2" y2="310.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="742.2" y="326.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">42</text>
+<line x1="874.2" y1="118.0" x2="874.2" y2="310.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="874.2" y="326.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">44</text>
+<line x1="1006.2" y1="118.0" x2="1006.2" y2="310.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="1006.2" y="326.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">46</text>
+<text x="700.0" y="106.0" font-size="11.5" fill="#1f2430" text-anchor="middle" font-weight="600">call latency, milliseconds</text>
+<text x="28.0" y="154.0" font-size="13" fill="#1f2430" text-anchor="start" font-weight="600">alone, before the paired call</text>
+<circle cx="507.3" cy="150.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="679.0" cy="150.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="655.6" cy="150.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="983.3" cy="150.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="443.7" cy="150.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="514.4" cy="150.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="435.7" cy="150.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="431.8" cy="150.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="447.4" cy="150.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="606.9" cy="150.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<text x="1052.0" y="154.0" font-size="11" fill="#5b6272" text-anchor="start" font-weight="400">n=10</text>
+<text x="28.0" y="218.0" font-size="13" fill="#1f2430" text-anchor="start" font-weight="600">paired, with the 5090 busy</text>
+<circle cx="514.5" cy="214.0" r="4.4" fill="#0f766e" stroke="#0f766e" stroke-width="1.6"/>
+<circle cx="671.4" cy="214.0" r="4.4" fill="#0f766e" stroke="#0f766e" stroke-width="1.6"/>
+<circle cx="628.8" cy="214.0" r="4.4" fill="#0f766e" stroke="#0f766e" stroke-width="1.6"/>
+<circle cx="470.1" cy="214.0" r="4.4" fill="#0f766e" stroke="#0f766e" stroke-width="1.6"/>
+<circle cx="608.2" cy="214.0" r="4.4" fill="#0f766e" stroke="#0f766e" stroke-width="1.6"/>
+<circle cx="422.6" cy="214.0" r="4.4" fill="#0f766e" stroke="#0f766e" stroke-width="1.6"/>
+<circle cx="597.5" cy="214.0" r="4.4" fill="#0f766e" stroke="#0f766e" stroke-width="1.6"/>
+<circle cx="603.4" cy="214.0" r="4.4" fill="#0f766e" stroke="#0f766e" stroke-width="1.6"/>
+<circle cx="602.9" cy="214.0" r="4.4" fill="#0f766e" stroke="#0f766e" stroke-width="1.6"/>
+<circle cx="622.2" cy="214.0" r="4.4" fill="#0f766e" stroke="#0f766e" stroke-width="1.6"/>
+<text x="1052.0" y="218.0" font-size="11" fill="#5b6272" text-anchor="start" font-weight="400">n=10</text>
+<text x="28.0" y="282.0" font-size="13" fill="#1f2430" text-anchor="start" font-weight="600">alone, after the paired call</text>
+<circle cx="510.9" cy="278.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="651.9" cy="278.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="465.3" cy="278.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="428.5" cy="278.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="430.2" cy="278.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="434.6" cy="278.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="434.5" cy="278.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="416.7" cy="278.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="454.9" cy="278.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<circle cx="599.9" cy="278.0" r="4.4" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<text x="1052.0" y="282.0" font-size="11" fill="#5b6272" text-anchor="start" font-weight="400">n=10</text>
+<text x="24.0" y="363.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">POST HOC view of e4b-block-3 only. Paired calls span 37.2–40.9 ms. The groups are there to be seen; this chart is not a significance test.</text>
+<text x="24.0" y="378.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">E4b&#x27;s rates are not comparable to E4&#x27;s. Alone and paired are the receipt&#x27;s slot roles.</text>
+<text x="24.0" y="393.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Source: experiments/e4b/results/ (e4b-block-3 harness 426f106). Inputs pinned in experiments/charts/manifest.json.</text>
+</svg>

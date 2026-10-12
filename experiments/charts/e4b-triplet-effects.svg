@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 532" width="1280" height="532" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="1280" height="532" fill="#ffffff"/>
+<text x="24.0" y="34.0" font-size="17" fill="#1f2430" text-anchor="start" font-weight="600">E4b: each triplet&#x27;s change</text>
+<text x="24.0" y="56.0" font-size="12" fill="#5b6272" text-anchor="start" font-weight="400">PRE-REGISTERED. The same pairs and the same band as the verdict chart. A dot above the band would be a triplet outside the limit.</text>
+<rect x="24.0" y="108.0" width="1232.0" height="52.0" fill="#f1f3f7" stroke="none"/>
+<rect x="24.0" y="212.0" width="1232.0" height="52.0" fill="#f1f3f7" stroke="none"/>
+<rect x="24.0" y="316.0" width="1232.0" height="52.0" fill="#f1f3f7" stroke="none"/>
+<rect x="509.3" y="108.0" width="491.4" height="312.0" fill="#e7f2ea" stroke="none"/>
+<line x1="509.3" y1="108.0" x2="509.3" y2="420.0" stroke="#e3e6ec" stroke-width="1"/>
+<text x="509.3" y="436.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">-10</text>
+<line x1="632.2" y1="108.0" x2="632.2" y2="420.0" stroke="#e3e6ec" stroke-width="1"/>
+<text x="632.2" y="436.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">-5</text>
+<line x1="755.0" y1="108.0" x2="755.0" y2="420.0" stroke="#1f2430" stroke-width="1.2"/>
+<text x="755.0" y="436.0" font-size="10" fill="#1f2430" text-anchor="middle" font-weight="600">0</text>
+<line x1="877.8" y1="108.0" x2="877.8" y2="420.0" stroke="#e3e6ec" stroke-width="1"/>
+<text x="877.8" y="436.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">5</text>
+<line x1="1000.7" y1="108.0" x2="1000.7" y2="420.0" stroke="#e3e6ec" stroke-width="1"/>
+<text x="1000.7" y="436.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">10</text>
+<line x1="509.3" y1="108.0" x2="509.3" y2="420.0" stroke="#3f6212" stroke-width="1.2" stroke-dasharray="5,3"/>
+<line x1="1000.7" y1="108.0" x2="1000.7" y2="420.0" stroke="#3f6212" stroke-width="1.2" stroke-dasharray="5,3"/>
+<text x="755.0" y="96.0" font-size="11" fill="#3f6212" text-anchor="middle" font-weight="600">pre-registered ±10% band, zero marked</text>
+<text x="28.0" y="128.0" font-size="13" fill="#1f2430" text-anchor="start" font-weight="600">5090, with the NPU busy</text>
+<text x="28.0" y="146.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">block 2 · free · 10 triplets</text>
+<circle cx="713.7" cy="120.0" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="714.2" cy="123.1" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="722.2" cy="126.2" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="743.3" cy="129.3" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="769.2" cy="132.4" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="744.2" cy="135.6" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="738.8" cy="138.7" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="743.2" cy="141.8" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="734.6" cy="144.9" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="728.9" cy="148.0" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<polygon points="734.6128812449331,127.80000000000001 740.8128812449331,134.0 734.6128812449331,140.2 728.412881244933,134.0" fill="#ffffff" stroke="#1f2430" stroke-width="1.6"/>
+<text x="1052.0" y="138.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="400">-0.83%</text>
+<text x="28.0" y="180.0" font-size="13" fill="#1f2430" text-anchor="start" font-weight="600">5090, with the iGPU busy</text>
+<text x="28.0" y="198.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">block 2 · free · 10 triplets</text>
+<circle cx="866.5" cy="172.0" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="774.3" cy="175.1" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="763.7" cy="178.2" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="788.8" cy="181.3" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="764.2" cy="184.4" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="775.0" cy="187.6" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="758.9" cy="190.7" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="766.0" cy="193.8" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="757.6" cy="196.9" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="755.6" cy="200.0" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<polygon points="768.9846263337022,179.8 775.1846263337022,186.0 768.9846263337022,192.2 762.7846263337021,186.0" fill="#ffffff" stroke="#1f2430" stroke-width="1.6"/>
+<text x="1052.0" y="190.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="400">+0.57%</text>
+<text x="28.0" y="232.0" font-size="13" fill="#1f2430" text-anchor="start" font-weight="600">NPU, with the 5090 busy</text>
+<text x="28.0" y="250.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">block 2 · INCONCLUSIVE · superseded by block 3 · 3 refusals</text>
+<circle cx="918.9" cy="238.0" r="3.1" fill="#b45309" stroke="#b45309" stroke-width="1.6"/>
+<text x="1052.0" y="242.0" font-size="11" fill="#b45309" text-anchor="start" font-weight="600">INCONCLUSIVE</text>
+<text x="28.0" y="284.0" font-size="13" fill="#1f2430" text-anchor="start" font-weight="600">iGPU, with the 5090 busy</text>
+<text x="28.0" y="302.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">block 2 · INCONCLUSIVE · superseded by block 3 · 2 refusals</text>
+<circle cx="801.8" cy="276.0" r="3.1" fill="#b45309" stroke="#b45309" stroke-width="1.6"/>
+<circle cx="810.9" cy="281.6" r="3.1" fill="#b45309" stroke="#b45309" stroke-width="1.6"/>
+<circle cx="721.1" cy="287.2" r="3.1" fill="#b45309" stroke="#b45309" stroke-width="1.6"/>
+<circle cx="865.4" cy="292.8" r="3.1" fill="#b45309" stroke="#b45309" stroke-width="1.6"/>
+<circle cx="811.6" cy="298.4" r="3.1" fill="#b45309" stroke="#b45309" stroke-width="1.6"/>
+<circle cx="820.9" cy="304.0" r="3.1" fill="#b45309" stroke="#b45309" stroke-width="1.6"/>
+<text x="1052.0" y="294.0" font-size="11" fill="#b45309" text-anchor="start" font-weight="600">INCONCLUSIVE</text>
+<text x="28.0" y="336.0" font-size="13" fill="#1f2430" text-anchor="start" font-weight="600">NPU, with the 5090 busy</text>
+<text x="28.0" y="354.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">block 3 · free · 10 triplets</text>
+<circle cx="786.3" cy="328.0" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="762.5" cy="331.1" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="732.8" cy="334.2" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="740.5" cy="337.3" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="718.2" cy="340.4" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="710.8" cy="343.6" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="730.8" cy="346.7" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="705.2" cy="349.8" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="762.0" cy="352.9" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="750.4" cy="356.0" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<polygon points="740.1234988865785,335.8 746.3234988865786,342.0 740.1234988865785,348.2 733.9234988865785,342.0" fill="#ffffff" stroke="#1f2430" stroke-width="1.6"/>
+<text x="1052.0" y="346.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="400">-0.61%</text>
+<text x="28.0" y="388.0" font-size="13" fill="#1f2430" text-anchor="start" font-weight="600">iGPU, with the 5090 busy</text>
+<text x="28.0" y="406.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">block 3 · free · 10 triplets</text>
+<circle cx="760.3" cy="380.0" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="760.4" cy="383.1" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="819.0" cy="386.2" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="533.5" cy="389.3" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="919.9" cy="392.4" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="703.6" cy="395.6" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="911.8" cy="398.7" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="928.1" cy="401.8" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="900.9" cy="404.9" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<circle cx="772.4" cy="408.0" r="3.1" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<polygon points="815.8435445239918,387.8 822.0435445239918,394.0 815.8435445239918,400.2 809.6435445239917,394.0" fill="#ffffff" stroke="#1f2430" stroke-width="1.6"/>
+<text x="1052.0" y="398.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="400">+2.48%</text>
+<text x="24.0" y="473.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Each dot is one triplet: the paired call against the mean of that triplet&#x27;s own alone calls, on the log scale.</text>
+<text x="24.0" y="488.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">The diamond is the Hodges-Lehmann estimate. E4b&#x27;s rates are not comparable to E4&#x27;s.</text>
+<text x="24.0" y="503.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Inconclusive rows show the triplets that were kept and no estimate. They are not joined to the later run.</text>
+<text x="24.0" y="518.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Source: experiments/e4b/results/ (e4b-block-2 harness f3f5e44; e4b-block-3 harness 426f106). Inputs pinned in experiments/charts/manifest.json.</text>
+</svg>

@@ -15,7 +15,19 @@
   },
   "experiments/cuda-graphs/results/2026-10-08-llama.json": {
    "commit": "00f57b4",
-   "sha256": "b5b5b54de3a1bd2d868a80fd1d6f43b8f83e29d877804dad2d259801061ddcc4"
+   "sha256": "7509d67dfd96777fa69742cd8a771e397edbe4330e63fd0689681ccaf6503908"
+  },
+  "experiments/e4b/results/block-2.json": {
+   "commit": "1669518",
+   "sha256": "9b00fb532c6481808677c7783970adfef7084a12eb6d3326fb74478d9ab889e5"
+  },
+  "experiments/e4b/results/block-3.json": {
+   "commit": "1669518",
+   "sha256": "d1637da65d1205e4b35464a81536ab7e60468f46bb0c80f6fe6749a5fdbbdaf9"
+  },
+  "experiments/e4b/results/pilot.json": {
+   "commit": "1669518",
+   "sha256": "a65f5945acb1de8a7147ce0a4cfd7c8bfb52c3b9392216ebae79cc5ac9a6d912"
   },
   "experiments/kev-judge-finetune/env/README.md": {
    "commit": "0b18117",
@@ -23,11 +35,11 @@
   },
   "experiments/npu-probe/results/2026-10-09-health-after-e1-loss.json": {
    "commit": "cb8b2c8",
-   "sha256": "f3ff5c8753358a6b4b03f1f867aab8125206f1862696ede182f93ab110252b69"
+   "sha256": "6f1b04c6c62475a914d8e0b40d6a09d33c414cbbb5042e3203d8ebc94b77c70d"
   },
   "experiments/npu-probe/results/2026-10-09-probe.json": {
    "commit": "f3f2b92",
-   "sha256": "a6de0a6e1621b8b8c769dfa500938a215f4e8c6e3bbcc91edb7387a5993d018a"
+   "sha256": "f9bc5ffdab9f5fcb61b9dd37dc25e4bb6dfca5e644f265ebc468232371497884"
   },
   "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-grounded-tune/metrics.json": {
    "commit": "8602fb7",
@@ -147,7 +159,7 @@
   },
   "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/loop-repeats.txt": {
    "commit": "c658ebf",
-   "sha256": "5ff81579f388154c7edba243b47262cc8394b22e2b334b9453688bf2e03011ca"
+   "sha256": "5a8598b5a17e38095f35a18c9802c510117af67a6ba227a5af5270299a0c18d8"
   },
   "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-grounded-tune/verdicts.jsonl": {
    "commit": "8c137a6",

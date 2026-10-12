@@ -1,0 +1,308 @@
+{
+  "provenance": {
+    "repo": "mcp-tool-shop-org/interlock",
+    "commit": "426f10624c2f0da5d5e7777a7e6cce25a9a19fc6",
+    "source": "receipts/e4b-block-3.jsonl",
+    "sha256": "73465ce2679d69300dd3f6ce8869b985a043c446706bf40128164f6fce7b16f7"
+  },
+  "run_id": "e4b-block-3",
+  "aborted": false,
+  "rule": {
+    "band_log": 0.1,
+    "method": "exact-wilcoxon-signed-rank",
+    "nominal_confidence": 0.9,
+    "spec": "experiments/e4b/spec.yaml",
+    "spec_commit": "426f10624c2f0da5d5e7777a7e6cce25a9a19fc6",
+    "spec_sha256": "9b499076da4c1e6195be456e54508a38f9d31ccd0c6f0e07ec9963ad2f79d94f"
+  },
+  "pairs": [
+    {
+      "pair": "npu-5090",
+      "verdict": "free",
+      "hodges_lehmann": -0.00605499694441014,
+      "low": -0.013100484897889508,
+      "high": 0.0005997917023918831,
+      "achieved": 0.916015625,
+      "d_i": [
+        0.012733871842901312,
+        0.0030531669540052597,
+        -0.009053709440564273,
+        -0.005915731364622534,
+        -0.014970840435526878,
+        -0.01800757195270597,
+        -0.00985594764104114,
+        -0.020285238431156483,
+        0.002860846546706597,
+        -0.0018535835492214936
+      ],
+      "refusal_events": 0,
+      "events": [],
+      "slots": [
+        {
+          "role": "alone-before",
+          "value": 50.36800000380026
+        },
+        {
+          "role": "paired",
+          "value": 50.86880000453675
+        },
+        {
+          "role": "alone-after",
+          "value": 50.082299996574875
+        },
+        {
+          "role": "alone-before",
+          "value": 50.20570000488078
+        },
+        {
+          "role": "paired",
+          "value": 50.860900002589915
+        },
+        {
+          "role": "alone-after",
+          "value": 51.20599999645492
+        },
+        {
+          "role": "alone-before",
+          "value": 49.97570000705309
+        },
+        {
+          "role": "paired",
+          "value": 50.00099999597296
+        },
+        {
+          "role": "alone-after",
+          "value": 50.93579999811482
+        },
+        {
+          "role": "alone-before",
+          "value": 49.88769999908982
+        },
+        {
+          "role": "paired",
+          "value": 49.787099997047335
+        },
+        {
+          "role": "alone-after",
+          "value": 50.27729999710573
+        },
+        {
+          "role": "alone-before",
+          "value": 49.82459999882849
+        },
+        {
+          "role": "paired",
+          "value": 49.82939999899827
+        },
+        {
+          "role": "alone-after",
+          "value": 51.337400000193156
+        },
+        {
+          "role": "alone-before",
+          "value": 50.6320999993477
+        },
+        {
+          "role": "paired",
+          "value": 49.65140000422252
+        },
+        {
+          "role": "alone-after",
+          "value": 50.47509999712929
+        },
+        {
+          "role": "alone-before",
+          "value": 50.55890000221552
+        },
+        {
+          "role": "paired",
+          "value": 49.6735000051558
+        },
+        {
+          "role": "alone-after",
+          "value": 49.772099999245256
+        },
+        {
+          "role": "alone-before",
+          "value": 50.471400005335454
+        },
+        {
+          "role": "paired",
+          "value": 49.55500000505708
+        },
+        {
+          "role": "alone-after",
+          "value": 50.669600001128856
+        },
+        {
+          "role": "alone-before",
+          "value": 50.814200003515
+        },
+        {
+          "role": "paired",
+          "value": 50.51180000009481
+        },
+        {
+          "role": "alone-after",
+          "value": 49.92079999647103
+        },
+        {
+          "role": "alone-before",
+          "value": 49.79930000263266
+        },
+        {
+          "role": "paired",
+          "value": 49.96489999757614
+        },
+        {
+          "role": "alone-after",
+          "value": 50.31589999998687
+        }
+      ]
+    },
+    {
+      "pair": "igpu-5090",
+      "verdict": "free",
+      "hodges_lehmann": 0.024764390051870366,
+      "low": -0.009850353239933662,
+      "high": 0.04824508416028328,
+      "achieved": 0.916015625,
+      "d_i": [
+        0.0021371717147760094,
+        0.002200218153853406,
+        0.02603386017481535,
+        -0.09015701462561854,
+        0.06712370046475868,
+        -0.02092752804201048,
+        0.06382952586378421,
+        0.07045630814575121,
+        0.05938172466033631,
+        0.007093043159066781
+      ],
+      "refusal_events": 0,
+      "events": [],
+      "slots": [
+        {
+          "role": "alone-before",
+          "value": 38.43980000237934
+        },
+        {
+          "role": "paired",
+          "value": 38.54999999748543
+        },
+        {
+          "role": "alone-after",
+          "value": 38.49560000526253
+        },
+        {
+          "role": "alone-before",
+          "value": 41.042700002435595
+        },
+        {
+          "role": "paired",
+          "value": 40.927299996837974
+        },
+        {
+          "role": "alone-after",
+          "value": 40.631999996548984
+        },
+        {
+          "role": "alone-before",
+          "value": 40.68839999672491
+        },
+        {
+          "role": "paired",
+          "value": 40.2814999979455
+        },
+        {
+          "role": "alone-after",
+          "value": 37.80430000188062
+        },
+        {
+          "role": "alone-before",
+          "value": 45.65390000061598
+        },
+        {
+          "role": "paired",
+          "value": 37.87649999867426
+        },
+        {
+          "role": "alone-after",
+          "value": 37.24610000062967
+        },
+        {
+          "role": "alone-before",
+          "value": 37.476400000741705
+        },
+        {
+          "role": "paired",
+          "value": 39.968899996893015
+        },
+        {
+          "role": "alone-after",
+          "value": 37.27179999987129
+        },
+        {
+          "role": "alone-before",
+          "value": 38.54760000103852
+        },
+        {
+          "role": "paired",
+          "value": 37.157099999603815
+        },
+        {
+          "role": "alone-after",
+          "value": 37.33819999615662
+        },
+        {
+          "role": "alone-before",
+          "value": 37.35500000038883
+        },
+        {
+          "role": "paired",
+          "value": 39.80749999755062
+        },
+        {
+          "role": "alone-after",
+          "value": 37.33700000157114
+        },
+        {
+          "role": "alone-before",
+          "value": 37.29690000182018
+        },
+        {
+          "role": "paired",
+          "value": 39.89620000356808
+        },
+        {
+          "role": "alone-after",
+          "value": 37.06709999823943
+        },
+        {
+          "role": "alone-before",
+          "value": 37.53299999516457
+        },
+        {
+          "role": "paired",
+          "value": 39.88950000348268
+        },
+        {
+          "role": "alone-after",
+          "value": 37.64650000084657
+        },
+        {
+          "role": "alone-before",
+          "value": 39.95039999426808
+        },
+        {
+          "role": "paired",
+          "value": 40.181399999710266
+        },
+        {
+          "role": "alone-after",
+          "value": 39.84440000203904
+        }
+      ]
+    }
+  ]
+}

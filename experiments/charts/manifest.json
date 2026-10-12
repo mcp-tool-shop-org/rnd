@@ -18,15 +18,15 @@
    "sha256": "7509d67dfd96777fa69742cd8a771e397edbe4330e63fd0689681ccaf6503908"
   },
   "experiments/e4b/results/block-2.json": {
-   "commit": "uncommitted",
+   "commit": "1669518",
    "sha256": "9b00fb532c6481808677c7783970adfef7084a12eb6d3326fb74478d9ab889e5"
   },
   "experiments/e4b/results/block-3.json": {
-   "commit": "uncommitted",
+   "commit": "1669518",
    "sha256": "d1637da65d1205e4b35464a81536ab7e60468f46bb0c80f6fe6749a5fdbbdaf9"
   },
   "experiments/e4b/results/pilot.json": {
-   "commit": "uncommitted",
+   "commit": "1669518",
    "sha256": "a65f5945acb1de8a7147ce0a4cfd7c8bfb52c3b9392216ebae79cc5ac9a6d912"
   },
   "experiments/kev-judge-finetune/env/README.md": {

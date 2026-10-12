@@ -349,6 +349,16 @@ prototype, and its interfaces change without notice.
         - **Optional:** narrow the time pattern (it refuses "2.40"), document that day labels carry no year, and record
           overlap in the skeleton.
         - **Re-check at 323b136: pass.** The owner rule is refused without an overlap, and all the optional items were taken. Ready for the Publisher.
+  - **role-set #48 (the generator skeleton: build, shortcut registry, T10 recipe, receipts), R&D review 2026-10-12: changes
+    needed (one item).**
+    - **Ruled:** a lazy reading that ends in a contradiction proves nothing, and is recorded on the receipt with
+      differs false.
+    - **Ruled:** T10 has no single-value questions, and this holds in every case. A loosened model keeps the key among
+      its answers, and a tightened one gives either the key or a contradiction. So T10 builds only open sets and claims.
+    - **B-01** gets no new question form and stays out of the shortcut must-refuse fixture.
+    - **Required:** refuse `question="value"` for T10 at once (it can never build) and remove that default.
+    - **The batch step needs a selector.** It must enforce the per-file shortcut floor and the rule that loosening `=`
+      decides at most half, from the receipts. In a smoke run, all 15 claims proved only by loosening `=`.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**
     - **The rebuild list:** the 10 dev label findings, including T14-C-04, rebuilt so a missing fact decides it.
     - **Uniform sweeps** over the reviewed files: key form, flaw direction, side, turn placement, option register.

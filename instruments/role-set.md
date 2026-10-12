@@ -342,6 +342,12 @@ prototype, and its interfaces change without notice.
         - only declared days may be asked about or claimed;
         - fixtures for the placeholder span, an out-of-order day list, an unmarked year wrap and an overlap with no owner;
         - the skeleton key records the span type, `contains` and the owner rule.
+      - **role-set #47 (`contains` with span values), R&D review 2026-10-12: changes needed (one item).**
+        - All six conditions are met, and CARDS and its overlap variant were solved by hand and agree with the solver.
+        - **Required:** an owner rule on spans that never overlap was accepted. Its line is exempt from line accounting,
+          so it can't be caught as idle. Refuse it unless two declared spans share a day.
+        - **Optional:** narrow the time pattern (it refuses "2.40"), document that day labels carry no year, and record
+          overlap in the skeleton.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**
     - **The rebuild list:** the 10 dev label findings, including T14-C-04, rebuilt so a missing fact decides it.
     - **Uniform sweeps** over the reviewed files: key form, flaw direction, side, turn placement, option register.

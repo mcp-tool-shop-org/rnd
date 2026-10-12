@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.7] - 2026-10-12
+
+- switchyard #71 fixtures pass
+- Updated `2026-10-12-ollama-num-predict-zero-is-no-limit`: Ollama 0.35.1 reads num_predict 0 as no limit
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+
 ## [1.1.4.6.6] - 2026-10-12
 
 - E4 run 7 readout

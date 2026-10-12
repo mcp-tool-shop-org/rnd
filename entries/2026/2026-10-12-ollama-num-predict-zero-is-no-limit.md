@@ -43,7 +43,8 @@ See [[2026-10-12-prefix-fit-count-cost]] for the third instance the same day.
 
 - [verified] On Ollama 0.35.1 on the 5090 rig, `num_predict` 0 gave no reply within 90 s, and `num_predict` 1 returned a prompt count of 221 in 3.0 s (via: the Publisher's direct calls on the rig, 2026-10-12)
 - [verified] E4's first live run sat at about 575 W for about 12 minutes with no row (via: the Publisher's run log, 2026-10-11)
-- [unverified] A missing or null `num_predict` behaves the same as 0. That follows from the server's defaults and is what #71's recording will measure.
+- [verified] A missing or null `num_predict` behaves the same as 0. All three generated 144 tokens on qwen3:8b, against 1 for `num_predict` 1 (via: switchyard #71 recorded fixtures, 2026-10-12)
+- [verified] On 0.35.1, a small `num_ctx` (64) is not a bound: the no-limit cases ran to 155 tokens and stopped on end of turn (via: switchyard #71 recorded fixtures, 2026-10-12)
 
 ## Sources
 

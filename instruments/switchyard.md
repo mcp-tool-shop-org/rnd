@@ -297,6 +297,13 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     management). The 4.1 s 5090 calls are reloads, probably from the option-less companion stop
     (`companion_reloads_model`, new). The per-slot clocks are null (`probe_field_null`, new). Ruled: no re-run as is,
     and an E4b pre-registered on these fixes. See [[2026-10-12-e4-co-scheduling-inconclusive]].
+  - **#71 fixtures at cc3e57d: pass** (16 cases, Ollama 0.35.1, qwen3:8b, recorded under a grant, every load unloaded).
+    The recordings corrected two assumptions:
+    - a small `num_ctx` (64, 8) is raised to a floor, so it bounds nothing;
+    - `truncate: false` with an over-long prompt replied at `num_ctx` 8, where the catalogue expected an error.
+
+    `companion_stop` returned `done_reason: load`, which supports the E4 reload diagnosis. Follow-up: re-record
+    the truncate case at a realistic window, set the catalogue from the recording, and fix `stop_session`.
 
 ## Studio relevance
 

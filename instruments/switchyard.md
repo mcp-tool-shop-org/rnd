@@ -213,6 +213,15 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
       and one allocation can pass the untested 31200 MiB ceiling between 200 ms samples
       (`unguarded_allocation_step`). Ruled: bound it with window 1's growing share, i.e. the reading minus the idle
       baseline minus the weights from `/api/tags`, scaled linearly. If there's no bound, don't load.
+  - **#62 early read at 2235eb9 (before the rebase): three small changes needed.** Right: the connection is armed
+    before `getresponse`, the socket is shut down, and the wait is sliced on a cancel flag (Windows leaves a blocked
+    `recv` running). The window-2 bound is in, aborted windows are excluded, and the card settles for up to 10 s after
+    an unload. Required:
+    - the settle runs on the sampler thread, but `cover` joins it with a 5 s timeout, so the next load can start
+      first (`abort_race`, new);
+    - a share of 0 or less was floored to 0 (R&D's own formula), which predicts no growth. It now means no bound,
+      with a residency check (`unsafe_floor`, new);
+    - the unload's `arm()` clears the generate's cancel flag on the shared flight (`shared_cancel_state`, new).
 
 ## Studio relevance
 

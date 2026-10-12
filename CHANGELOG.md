@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.105] - 2026-10-11
+
+- switchyard #62 early read
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+
 ## [1.1.4.5.104] - 2026-10-11
 
 - role-set generator: contains predicate ruling

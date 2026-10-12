@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.5.99] - 2026-10-11
+
+- stage1-role-eval, gates 1.5.0 #108
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.5.98] - 2026-10-11
 
 - stage1-role-eval, signature fold ruling; role-set #44

@@ -304,6 +304,21 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
 
     `companion_stop` returned `done_reason: load`, which supports the E4 reload diagnosis. Follow-up: re-record
     the truncate case at a realistic window, set the catalogue from the recording, and fix `stop_session`.
+  - **R&D rulings on Kimi K3's consult on the live runs (2026-10-12):**
+    - **Spill:** the adapter-level `\GPU Adapter Memory(*)\Shared Usage` delta replaces per-PID attribution as the
+      counter. The 5090's instance is matched by its Dedicated Usage against nvidia-smi, and ambiguous counts as
+      missing. Rejected: the 2-of-3 rule, because it would loosen the pre-registered either-or rule after seeing data.
+      The allocator leg is already a hard gate.
+    - **E4b** (accepted, Kimi may draft, R&D reviews):
+      - triplet log-ratios and a TOST decision (90% CI inside ±0.10), with "not free" on both sides;
+      - slot refusal on a load or on more than 2 clock steps;
+      - 10 repeats plus a pre-registered extension to 15.
+    - **Live integration tier:** accepted, run on demand against the harness's own CPU Ollama, never 11490.
+    - **Design rules:** accepted. Runs launch their own Ollama or read a declared sidecar, probes never mutate, and
+      state is read at measurement time.
+    - **The iGPU speed-up:** `cpu_freq_mhz` is a constant 3700 (psutil reports the nominal clock), so use
+      `% Processor Performance` plus a decoupling arm.
+    - **Clock settling:** longer decodes, an until-steady rule on `clocks.sm`, and the null probe fixed first.
 
 ## Studio relevance
 

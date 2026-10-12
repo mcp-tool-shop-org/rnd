@@ -236,6 +236,13 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
   - **#66, E4's NPU static shape: pass.** E4's re-run counted tokens fine, then stopped at the NPU arm, which needs a static
     BxL. The shape is "1x256" on both NPU arms. The runner fits bge-base's own 256-token prefix, so the shape matches
     it. `truncated_tokens` should be 0 or 1; more is a failed step. The partial rows were moved aside, and E4 re-runs whole.
+  - **#70, the prefix search cost: pass.** E5 stalled for over 30 minutes on llama3.1:8b, because `fit_prompt_words` added
+    one seed per count toward a target of about 118k tokens. Ollama itself prefilled 122k tokens in 19.6 s. The fix
+    estimates the repeats from the seed's own count, tops up in proportion, and bisects only past the longest prefix
+    known to be short. The output is unchanged, and 118k takes 25 counts or fewer. To watch: the trim now counts
+    prefixes of a prompt the server just evaluated, so the cold re-count stays the guard.
+    `test_fake_hides_platform`, third instance: the fakes never measured cost, so a count budget per fit is now part
+    of their contract.
 
 ## Studio relevance
 

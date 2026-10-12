@@ -315,6 +315,14 @@ prototype, and its interfaces change without notice.
         something.**
       - **Shortcut code is shared by the generator and puzzle-check,** and R&D's review of each reading is the
         independent check.
+      - **The `contains` predicate (the Specialist's proposal), ruled 2026-10-11: approved.** The existing forms can't
+        compute containment. A span is a start attribute and an end attribute over the named days, inclusive at both
+        ends. It is asked or claimed, never a fact line. Conditions:
+        - the owner of a shared day is a material line the model cites;
+        - a day no span holds is refused as a question, and in a claim it is unsupported or cannot_tell;
+        - at least one span fact comes from a clue;
+        - day records are typed (label, month, ordinal);
+        - `contains` goes into the skeleton key.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**
     - **The rebuild list:** the 10 dev label findings, including T14-C-04, rebuilt so a missing fact decides it.
     - **Uniform sweeps** over the reviewed files: key form, flaw direction, side, turn placement, option register.

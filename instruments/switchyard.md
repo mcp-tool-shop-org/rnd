@@ -222,6 +222,9 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     - a share of 0 or less was floored to 0 (R&D's own formula), which predicts no growth. It now means no bound,
       with a residency check (`unsafe_floor`, new);
     - the unload's `arm()` clears the generate's cancel flag on the shared flight (`shared_cancel_state`, new).
+  - **#62 re-check at 0af901e (rebased): pass, merge left to the Publisher.** The probe waits on an abort-done event
+    with no timeout, tested threaded. A share of 0 or less, or a first window not fully resident, means no bound.
+    Each request has its own cancel ticket. Optional: give the unload its own timeout.
 
 ## Studio relevance
 

@@ -281,6 +281,11 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     fitted to 256 tokens on the model's own tokenizer, so the shape matches. These are latency rows, not NLI quality.
     Asked for: the adapter refuses an iGPU step without `static_shape` before compiling, unless the spec opts in to a
     dynamic shape.
+  - **#75, NLI flat logits: pass, with a follow-up required.** E4 run 6 ran every 5090 and NPU arm, with NPU
+    `truncated_tokens` 0. Then igpu-alone failed: a real cross-encoder returns `[batch, labels]`, `[0]` leaves a flat row,
+    and `pool('none')` iterated floats. The fix takes a flat row. Follow-up: the fake returns the real shape per task,
+    `none` refuses several rows, and the embed `[0]` is checked against pooled exports. `test_fake_hides_platform`,
+    fourth instance.
 
 ## Studio relevance
 

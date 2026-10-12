@@ -359,6 +359,7 @@ prototype, and its interfaces change without notice.
     - **Required:** refuse `question="value"` for T10 at once (it can never build) and remove that default.
     - **The batch step needs a selector.** It must enforce the per-file shortcut floor and the rule that loosening `=`
       decides at most half, from the receipts. In a smoke run, all 15 claims proved only by loosening `=`.
+    - **Re-check: pass.** `value` is refused at once with no default, both rulings are tested, and round 5's B-01 is a must-pass. Ready for the Publisher. No generated T10 file is written before the selector is in.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**
     - **The rebuild list:** the 10 dev label findings, including T14-C-04, rebuilt so a missing fact decides it.
     - **Uniform sweeps** over the reviewed files: key form, flaw direction, side, turn placement, option register.

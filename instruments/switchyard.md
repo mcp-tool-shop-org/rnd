@@ -225,6 +225,13 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
   - **#62 re-check at 0af901e (rebased): pass, merge left to the Publisher.** The probe waits on an abort-done event
     with no timeout, tested threaded. A share of 0 or less, or a first window not fully resident, means no bound.
     Each request has its own cancel ticket. Optional: give the unload its own timeout.
+  - **#65, num_predict 0 in the token count: pass once two guards are in.** E4's first live run sat at 575 W for about 12
+    minutes and wrote no row. #60's count sent `num_predict` 0, which Ollama 0.35.1 reads as no limit. On the rig, 0
+    gave no reply in 90 s, and 1 gave the count in 3.0 s. The fixes: count with 1, no zero-retry, and a fake that fails
+    on 0. Required: `generate_body` refuses a missing, null or < 1 `num_predict`, fill rejects
+    `confirm_num_predict` 0, and a stale docstring is fixed. Optional: a timeout on the count call.
+    `test_fake_hides_platform`, second instance: the fake gave 0 a meaning the server doesn't. The remedy is recorded
+    real exchanges per adapter parameter, replayed by the fakes.
 
 ## Studio relevance
 

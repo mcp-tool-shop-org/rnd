@@ -348,6 +348,7 @@ prototype, and its interfaces change without notice.
           so it can't be caught as idle. Refuse it unless two declared spans share a day.
         - **Optional:** narrow the time pattern (it refuses "2.40"), document that day labels carry no year, and record
           overlap in the skeleton.
+        - **Re-check at 323b136: pass.** The owner rule is refused without an overlap, and all the optional items were taken. Ready for the Publisher.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**
     - **The rebuild list:** the 10 dev label findings, including T14-C-04, rebuilt so a missing fact decides it.
     - **Uniform sweeps** over the reviewed files: key form, flaw direction, side, turn placement, option register.

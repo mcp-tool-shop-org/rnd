@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.27] - 2026-10-12
+
+- entries: Windows 26340 listener state; test fakes defect class
+- Added `2026-10-12-test-fakes-hide-the-platform`: Test fakes that hide the platform, a recurring defect class
+- Added `2026-10-12-windows-26340-listener-state-closed`: Windows build 26340 reports a listening socket as Closed
+
 ## [1.1.4.6.26] - 2026-10-12
 
 - switchyard #85 review: live-only gaps

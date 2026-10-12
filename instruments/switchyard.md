@@ -319,6 +319,16 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     - **The iGPU speed-up:** `cpu_freq_mhz` is a constant 3700 (psutil reports the nominal clock), so use
       `% Processor Performance` plus a decoupling arm.
     - **Clock settling:** longer decodes, an until-steady rule on `clocks.sm`, and the null probe fixed first.
+  - **The E4b draft (#77, Kimi): changes needed before the numbers settle.** The design is right: triplets, TOST
+    on both sides, slot refusals, its own Ollama on 11441, and probes that never mutate. Required:
+    - the clock step is 7.5 MHz (read on the rig), not 15, and the tolerances come from a 5090-alone pilot;
+    - the estimator becomes Hodges–Lehmann with the exact Wilcoxon 90% interval, because a bootstrap BCa of a median
+      at n = 10 is unreliable;
+    - a short decode is refused (`eval_count` below `num_predict`);
+    - the companion starts before the warm-up;
+    - the d_i are written within each triplet.
+
+    Confirmed: the warm-up of 768 tokens and at least 3 s, the 1 s gap, and `load_refuse_s` 1.0.
 
 ## Studio relevance
 

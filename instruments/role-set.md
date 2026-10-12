@@ -290,6 +290,9 @@ prototype, and its interfaces change without notice.
     is a single name (T10-B-05, exactly one red bowl) the key falls back to "elm, oak, yew", the same string as the
     single group of all three. Decide the form from the question (a non-distinct attribute means groups), and list
     what else it refuses (`ambiguous_key_form`, new class).
+    - **Re-check at 68ff749: pass, merged as 1825d0f.** The form follows the question: an attribute that may repeat
+      always keys as groups, groups of one included ("elm; oak; yew"). Keys are read back by entity name, so "salt and
+      pepper" stays whole. Only T10-B-01 to B-05 change, and no merged key moves.
   - **The puzzle generator design (the Publisher's draft), R&D review 2026-10-11: approved with additions.**
     - **The design:** generate, then reduce to a minimal set, then prove that a named lazy reading changes the answer.
     - **The lazy answer is rendered in the item's own format.** An ambiguous lazy model counts as cannot_tell for a

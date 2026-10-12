@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.28] - 2026-10-12
+
+- switchyard #85 re-check pass
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+
 ## [1.1.4.6.27] - 2026-10-12
 
 - entries: Windows 26340 listener state; test fakes defect class

@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.6] - 2026-10-12
+
+- E4 run 7 readout
+- Added `2026-10-12-e4-co-scheduling-inconclusive`: E4: 5090 and Intel co-scheduling is inconclusive on run 7
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+
 ## [1.1.4.6.5] - 2026-10-12
 
 - switchyard #72 re-check

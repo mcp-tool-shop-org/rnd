@@ -292,6 +292,11 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
       (`check_reads_invariant`, second instance). Parse only the new segment;
     - the replayed start record is never compared in full with the live server's `OLLAMA_*` set. A stale record
       should mean no restarts.
+  - **E4 run 7 readout (#76): valid run, all four pairs inconclusive.** The alone spreads were 0.356, 0.256, 0.234 and
+    0.113, against the 0.05 half-band. Nothing was slower when paired, and the iGPU was 15% faster (most likely power
+    management). The 4.1 s 5090 calls are reloads, probably from the option-less companion stop
+    (`companion_reloads_model`, new). The per-slot clocks are null (`probe_field_null`, new). Ruled: no re-run as is,
+    and an E4b pre-registered on these fixes. See [[2026-10-12-e4-co-scheduling-inconclusive]].
 
 ## Studio relevance
 

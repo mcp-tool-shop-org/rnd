@@ -11,6 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.0] - 2026-10-12
+
+- four switchyard live-run records (2026-10-12)
+- Added `2026-10-12-device-runs-from-clean-worktree`: Device runs go from a clean worktree
+- Added `2026-10-12-e4-npu-static-shape`: E4 NPU arms needed a static shape
+- Added `2026-10-12-ollama-num-predict-zero-is-no-limit`: Ollama 0.35.1 reads num_predict 0 as no limit
+- Added `2026-10-12-prefix-fit-count-cost`: Prefix fitting cost one count per seed repeat
+
 ## [1.1.4.5.115] - 2026-10-12
 
 - switchyard #71 review

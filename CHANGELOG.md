@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.44] - 2026-10-12
+
+- newsletter issue 4 (E4b: three devices, no contention)
+- Updated experiment `charts`
+- Added experiment `e4b`
+
 - E4b charts: the pre-registered verdict, per-triplet effects and pilot clock check, plus a post hoc view of the iGPU latencies
 - Chart manifest: the E4b results are pinned, and four input hashes that had drifted from their files are refreshed
 

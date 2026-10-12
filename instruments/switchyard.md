@@ -243,6 +243,13 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     prefixes of a prompt the server just evaluated, so the cold re-count stays the guard.
     `test_fake_hides_platform`, third instance: the fakes never measured cost, so a count budget per fit is now part
     of their contract.
+  - **#71, recorded-exchange fakes (the remedy for `test_fake_hides_platform`): two changes before recording.** The
+    recorder captures one real exchange per adapter parameter. Fakes refuse what a recording doesn't answer, a test
+    fails on any option without a fixture, and a count timeout is added. Required: bound the three deliberate
+    no-limit calls with `num_ctx` 64 and `shift: false`, because a client timeout isn't shown to stop Ollama
+    (`unbounded_probe`, new). The recorder also takes the harness's grant, heartbeat and empty-card guards. Optional:
+    measure the cold-load constant on the rig, give the count budget a prompt-length term, and build every settings
+    branch in the coverage test.
 
 ## Studio relevance
 

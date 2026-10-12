@@ -232,6 +232,7 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     `confirm_num_predict` 0, and a stale docstring is fixed. Optional: a timeout on the count call.
     `test_fake_hides_platform`, second instance: the fake gave 0 a meaning the server doesn't. The remedy is recorded
     real exchanges per adapter parameter, replayed by the fakes.
+    - **Re-check at 125842f: pass, merge left to the Publisher.** Both guards are in with tests, and the docstring is fixed. E4 and E5 are unblocked on R&D's side.
 
 ## Studio relevance
 

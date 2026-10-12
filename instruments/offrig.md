@@ -75,6 +75,16 @@ R&D's calibration work, together with the Publisher's PRs reviewed by R&D, shape
   - **A pin beside a runtime** is accepted only if every pinned version is that major and at or above the floor.
   - **R&D's change:** the compatibility note must appear whenever the runtime is newer than its floor, including
     listed versions such as 13.2 and 12.8, not only for unlisted ones.
+- **Release 1.1.1** (2026-10-12; tag v1.1.1 at 5397759, #61; published on the Director's request).
+  - **What's in it:**
+    - all four MCP behaviour hints on all 15 side-car tools, pinned by a test (#60);
+    - CI fails when a release binary contains `OFFRIG_TEST_`, and the engine-timing overrides are now debug-only (#60);
+    - `.offrig/.gitignore` is written on first use (#58);
+    - `cuda_runtime` on a profile (#37).
+  - **Release checks:** the SHA256SUMS match, the identity scan is clean, the binaries contain no home or runner paths
+    and no `OFFRIG_TEST_`, and shipcheck's hard gates pass.
+  - **On the rig:** installed, with the 1.1.0 binaries kept beside it as a fallback. `writer-qwen235` stays pinned to
+    host CUDA 13.0.
 
 **Calibrate what is served:** a model's calibration holds for one engine and one set of settings (model digest,
 think, `num_predict`, `num_ctx`, quote rule). A served engine or settings change means a new calibration, never

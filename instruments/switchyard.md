@@ -332,6 +332,18 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
   - **E4b re-check at 599909d: pass, marked ready, merge left to the Publisher.** All six changes are in. Three edits
     are to be frozen before the merge: the exact interval as the narrowest with confidence of at least 90%, a fixed
     pair rotation (offset i mod 4), and the burn probe matched on `% Processor Utility`.
+  - **2026-10-13 reviews.**
+    - **#80, the E4b harness: changes needed.** The statistics check out (exact coverage 0.916 at n = 10 and 0.905 at
+      n = 15), and so do the refusals. Keeping qwen3 loaded after a 5090 companion stops is accepted, with a spec line to
+      add. Required:
+      - the run-owned server's environment is only three variables, so it should start from `os.environ` and be
+        checked for `cuda_v13`, full residency and the digest;
+      - `require_heartbeat` and `require_card_empty` run before start.
+    - **#79, the E5 fixes: pass.** Adapter-level shared memory matched by dedicated, the trained-length cap, the
+      downward search, server facts from the log, and per-call readings.
+    - **#81, the iGPU shape refusal and the flat-logit fakes: pass.**
+    - **Stale-row keys:** the NPU and iGPU driver versions are now stale-row keys on Intel-lane rows. E4's iGPU rows
+      are marked "driver unrecorded".
 
 ## Studio relevance
 

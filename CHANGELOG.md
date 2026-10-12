@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.13] - 2026-10-12
+
+- 2026-10-13 reviews: #106 r5, switchyard #80/#79/#81
+- Updated `switchyard`: switchyard — the device-aware model router (in build)
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.4.6.12] - 2026-10-12
 
 - switchyard E4b pass

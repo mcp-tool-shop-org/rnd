@@ -1,15 +1,15 @@
 ---
 id: switchyard
-title: switchyard — the device-aware model router (in build)
+title: interlock (formerly switchyard) — the local AI device router (in build)
 date: 2026-10-09
 kind: instrument
 relevance: act
 fields: [studio-tooling, gpu-computing]
 tags: [instrument, router, npu, openvino, offrig]
 instrument_status: planned
-invoke: "Not built yet. Planned: `switchyard route --task <t> [--min-<metric> x] [--max-latency-ms y] --json`; `switchyard run <spec>` for pre-registered experiments; `switchyard table`."
+invoke: "Prototype: `interlock run <spec> [--pilot]` for pre-registered experiments; `interlock runs list|quarantine`. Planned: `interlock route --task <t> [--min-<metric> x] [--max-latency-ms y] --json`; `interlock table`. The `switchyard` name and `SWITCHYARD_*` variables work for one release."
 when: "Choosing which model, engine, device (NPU / iGPU / CPU / 5090 / rented GPU) and settings to use for a task, from measured receipts; or running a pre-registered device experiment that fills a gap in the routing table."
-where: "github.com/mcp-tool-shop-org/switchyard (internal, going public as a prototype) · clone E:/AI/switchyard"
+where: "github.com/mcp-tool-shop-org/interlock (internal, going public as a prototype; renamed from switchyard 2026-10-12 because the name is taken on PyPI and by NVIDIA NeMo; PyPI distribution mcptoolshop-interlock) · clone E:/AI/switchyard"
 ---
 
 ## Summary
@@ -377,3 +377,4 @@ receipts, not guesses. The brief lives in R&D's memory (`switchyard-router-build
 - **switchyard #89 (run lifecycle), re-check 2026-10-12 at 41dadef: pass once two small edits are in.** The receipt is written before cleanup, an abort keeps its finished rows and is parked in aborted/<id>-<sha>/, ids in use are refused or the next free one is picked, strays are refused before any device starts, and runs list|quarantine is in. Required edits: catch BaseException, because a Ctrl-C otherwise writes an empty receipt that isn't marked aborted; and on the abort path, keep errors from unload or the probe from replacing the original error and its partial rows.
   - **#89 at c831ee8 (the repo is now `interlock`): pass, and the block can run.** BaseException is caught in the block, the pilot and execute_block, and cleanup errors on the abort path go to cleanup_errors. Both are tested.
 - **E4b block e4b-block-2 (f3f5e44), R&D ruling 2026-10-12:** 5090-npu and 5090-igpu are FREE (−0.83% and +0.57%, inside ±0.10). npu-5090 and igpu-5090 are INCONCLUSIVE, refused on companion_clock_range: the harness ran the Intel calls with no wait for the 5090 companion's steady decode, against the spec. Fix: one full steady warm decode on the companion first, then re-run those two pairs under a fresh run id. The tolerance stays at 22.5 MHz. See [[2026-10-12-e4b-block-2]].
+- **interlock #90 (the rename to interlock), review 2026-10-12 at 1b00ac8: pass.** Distribution mcptoolshop-interlock, import, CLI and INTERLOCK_* renamed, with SWITCHYARD_* kept for one release. The E4b spec blob is unchanged, and release.yml uses trusted publishing on release only. Notes: SCRATCH_ROOT still points at switchyard-scratch; version 0.1.0 against the org's 1.0.0 release minimum, to settle before the first release. #91 commits the e4b-block-2 receipt, with the argv home path redacted.

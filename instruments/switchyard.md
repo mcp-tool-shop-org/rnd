@@ -329,6 +329,9 @@ E1–E3); R&D reviews every PR; the Publisher holds the devices and merges.
     - the d_i are written within each triplet.
 
     Confirmed: the warm-up of 768 tokens and at least 3 s, the 1 s gap, and `load_refuse_s` 1.0.
+  - **E4b re-check at 599909d: pass, marked ready, merge left to the Publisher.** All six changes are in. Three edits
+    are to be frozen before the merge: the exact interval as the narrowest with confidence of at least 90%, a fixed
+    pair rotation (offset i mod 4), and the burn probe matched on `% Processor Utility`.
 
 ## Studio relevance
 

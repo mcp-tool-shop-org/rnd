@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.15] - 2026-10-12
+
+- role-set: span-valued contains representation ruled
+- Updated `role-set`: role-set — a generator for role-shaping training data (prototype, in the open)
+
 ## [1.1.4.6.14] - 2026-10-12
 
 - batch 6 residue cleared (aspire-si #112)

@@ -330,6 +330,18 @@ prototype, and its interfaces change without notice.
         - at least one span fact comes from a clue;
         - day records are typed (label, month, ordinal);
         - `contains` goes into the skeleton key.
+      - **Span-valued attribute (the Specialist's representation for `contains`), ruled 2026-10-12: approved with
+        conditions.** Spans are declared values of one ordered attribute, ordered by start, and the clues map each edition
+        to a span. That lets "next" and "before" use the existing forms. Clued span ends need a cross-attribute form
+        later, as its own reviewed addition. Conditions:
+        - day records carry (label, day, month, ordinal), and the ordinals follow the calendar. A year wrap needs an
+          explicit marker;
+        - every span has start ≤ end, no two spans share a start, and labels agree with their bounds;
+        - a day held by two or more spans needs a cited owner rule (later or earlier by start), or else the answer is
+          the set of holders;
+        - only declared days may be asked about or claimed;
+        - fixtures for the placeholder span, an out-of-order day list, an unmarked year wrap and an overlap with no owner;
+        - the skeleton key records the span type, `contains` and the owner rule.
   - **Fix round 1 (the reviewed batches), R&D ruling on the brief, 2026-10-11:**
     - **The rebuild list:** the 10 dev label findings, including T14-C-04, rebuilt so a missing fact decides it.
     - **Uniform sweeps** over the reviewed files: key form, flaw direction, side, turn placement, option register.

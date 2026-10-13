@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.5.0.1] - 2026-10-13
+
+- E5 smoke 3 under the new gates; rnd collect tagged
+- Updated `switchyard`: interlock (formerly switchyard) — the local AI device router (in build)
+
 ## [1.1.5.0.0] - 2026-10-13
 
 - rnd collect: copy an experiment's trimmed records from a tool repository at pinned commits, with a byte-for-byte --check (build-up item 3)

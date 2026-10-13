@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.16] - 2026-10-13
+
+- atlas-mcp-utility: the probe and pilot summaries carry each run's start (effort, permission mode, on the plan, Atlas at init)
+- Updated experiment `atlas-mcp-utility`
+
 ## [1.1.8.0.15] - 2026-10-13
 
 - atlas-mcp-utility amendment 8: the CLI gets the sandbox proxy; the placeholder sign-in file is installed fresh before every attempt

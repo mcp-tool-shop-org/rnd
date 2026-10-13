@@ -199,7 +199,7 @@ Nothing has run since amendment 4's probe failed closed. These change the pins b
 - **`Read(//proc/**)` joins the denied reads,** as a second layer over a process's environment.
 - **The template clones:** whether `prepare()` reaches github.com under Balanced is untested. The probe's own template is the first test of it: a failed fetch stops the probe before any agent runs. If Balanced refuses, github.com is allowed by name, and that is recorded here.
 
-**5. Recorded per run:** the effort, the permission mode and the key source, beside the CLI version.
+**5. Recorded per run:** the effort, the permission mode and whether the run signed in on the plan (`on_the_plan`, a yes or no), beside the CLI version. The init's own key-source value is never written to a record or a message.
 
 `allow-list.json` is re-pinned above. `tasks.json`, `prompt.md`, `grade.py` and `debrief.md` are unchanged. Every amendment-4 check stands. The hold for the Atlas release, and the Director's go on the plan and its ceiling, are unchanged.
 

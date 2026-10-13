@@ -235,6 +235,15 @@ def _listed(names, limit=5):
     return shown + (f" and {len(names) - limit} more" if len(names) > limit else "")
 
 
+def on_the_plan(init, allow):
+    """Whether a run signed in on the plan, with no API key (amendment 7).
+
+    Only this yes or no is kept. The init's own value never goes into a
+    message or a record.
+    """
+    return init.get("apiKeySource") == allow["api_key_source"]
+
+
 def isolation_problems(init, arm, allow):
     """Why a run's start does not match its arm, or [].
 
@@ -277,8 +286,10 @@ def isolation_problems(init, arm, allow):
     # his plan, local or RunPod, never a paid per-token API.
     if init.get("permissionMode") != allow["permission_mode"]:
         problems.append(f"the permission mode is {init.get('permissionMode')}, pinned {allow['permission_mode']}")
-    if init.get("apiKeySource") != allow["api_key_source"]:
-        problems.append(f"the run signs in with {init.get('apiKeySource')}, pinned {allow['api_key_source']}: the plan, never an API key")
+    if not on_the_plan(init, allow):
+        # The source's value stays out of the message and every record: only
+        # the fact that it was not the plan is kept (CodeQL, PR #16).
+        problems.append("the run does not sign in on the plan: the Director's ruling allows no API key")
     if init.get("claude_code_version") != allow["cli_version"]:
         problems.append(f"the CLI is {init.get('claude_code_version')}, pinned {allow['cli_version']}")
     return problems
@@ -696,7 +707,7 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget):
         "cli_version": (stream.init() or {}).get("claude_code_version"),
         "effort": allow["effort"],
         "permission_mode": (stream.init() or {}).get("permissionMode"),
-        "api_key_source": (stream.init() or {}).get("apiKeySource"),
+        "on_the_plan": on_the_plan(stream.init() or {}, allow),
         "exit_code": proc.returncode, "wall_ms": int((time.time() - started) * 1000), "timed_out": timed_out,
         "spent": stream.total,
         "limit_in_debrief": plan_limit_hit(stream.debrief_result()),

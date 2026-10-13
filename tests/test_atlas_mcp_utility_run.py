@@ -180,8 +180,13 @@ class Isolation(unittest.TestCase):
         self.assertEqual((a["permissionMode"], a["apiKeySource"]), ("default", "none"))
         self.assertEqual(run.isolation_problems({**a, "permissionMode": "bypassPermissions"}, "A", self.allow),
                          ["the permission mode is bypassPermissions, pinned default"])
-        self.assertEqual(run.isolation_problems({**a, "apiKeySource": "ANTHROPIC_API_KEY"}, "A", self.allow),
-                         ["the run signs in with ANTHROPIC_API_KEY, pinned none: the plan, never an API key"])
+        keyed = {**a, "apiKeySource": "ANTHROPIC_API_KEY"}
+        self.assertEqual(run.isolation_problems(keyed, "A", self.allow),
+                         ["the run does not sign in on the plan: the Director's ruling allows no API key"])
+        self.assertTrue(run.on_the_plan(a, self.allow))
+        self.assertFalse(run.on_the_plan(keyed, self.allow))
+        # The source's own value is never written: PR #16's CodeQL alert.
+        self.assertNotIn("ANTHROPIC_API_KEY", " ".join(run.isolation_problems(keyed, "A", self.allow)))
 
     def test_a_hook_is_seen_by_its_event_or_its_marker(self):
         stream = run.Stream()

@@ -1,0 +1,185 @@
+{
+ "audit": "R&D blind key audit for atlas-mcp-utility, 2026-10-13",
+ "method": "three Sonnet 5.5 agents answered each question from the pinned commit (and, for CI failures, public run logs and later history) without seeing the keys; R&D compared each answer with the key and graded it with grade.py at 8d2d8a6",
+ "sample": "9 medium-confidence tasks + random.Random(20261013).sample(sorted(high), 6)",
+ "results": [
+  {
+   "id": "CF01",
+   "verdict": "key confirmed; grader word cap fails a correct answer",
+   "blind_answer": {
+    "file": "src/portlight/stress/invariants.py",
+    "function": "_check_cargo_within_capacity",
+    "defect": "The invariant sums raw item quantity (used = sum(c.quantity for c in s.captain.cargo)) and compares it to capacity, but capacity is hold weight (buy() enforces current_weight + qty*weight_per_unit <= capacity via economy.cargo_weight), so a legal hold of light goods such as opium (0.5 per unit) is reported as 'Cargo 31 exceeds capacity 30', and heavy goods such as black powder (1.5 per unit) could overload the hold without being flagged."
+   }
+  },
+  {
+   "id": "CF05",
+   "verdict": "key confirmed; grader word cap fails a correct answer",
+   "blind_answer": {
+    "cause": "The deploy job was rejected by the 'github-pages' environment's deployment-branch protection rule: after the repository's default branch was renamed from master to main (2026-09-17) the environment's custom deployment-branch policy still only allowed the old branch name (master), so a deployment from 'main' was refused before the job ran any step. This is a repository/environment setting (Settings > Environments > github-pages > Deployment branches and tags), not repository file content; it was fixed by allowing 'main' in that setting.",
+    "fixable_in_repo_files": false
+   }
+  },
+  {
+   "id": "CF06",
+   "verdict": "key confirmed; pin the failing run's head sha; word cap",
+   "blind_answer": {
+    "cause": "The deploy job was rejected by the 'github-pages' environment's deployment-branch protection rule: the repository's default branch had just been renamed from master to main (2026-09-17, between 18:21Z and 18:39Z) but the environment's custom deployment-branch policy still only allowed master, so a deployment from 'main' was refused before the job ran any step. This is a repository/environment setting (Settings > Environments > github-pages > Deployment branches and tags), not repository file content; it was fixed by allowing 'main' in that setting.",
+    "fixable_in_repo_files": false
+   }
+  },
+  {
+   "id": "CF07",
+   "verdict": "key confirmed; grader word cap fails a correct answer",
+   "blind_answer": {
+    "cause": "GitHub Pages was not enabled for the repository (no Pages site configured with Source = GitHub Actions), so actions/deploy-pages' call to create a Pages deployment returned 404 Not Found; the build succeeded and the deploy step failed with 'Ensure GitHub Pages has been enabled'. Enabling Pages in the repository settings (Settings > Pages > Build and deployment > Source: GitHub Actions) fixed it; it is not something a change to a repository file can do, because GITHUB_TOKEN cannot enable Pages.",
+    "fixable_in_repo_files": false
+   }
+  },
+  {
+   "id": "DR03",
+   "verdict": "confirmed",
+   "blind_answer": {
+    "workflows": [
+     "desktop-ci.yml"
+    ]
+   }
+  },
+  {
+   "id": "DR05",
+   "verdict": "confirmed",
+   "blind_answer": {
+    "workflows": [
+     "publish.yml",
+     "release-binaries.yml"
+    ]
+   }
+  },
+  {
+   "id": "FP02",
+   "verdict": "confirmed",
+   "blind_answer": {
+    "file": "src/escape_the_valley/cli.py",
+    "callable": "app"
+   }
+  },
+  {
+   "id": "FP06",
+   "verdict": "confirmed",
+   "blind_answer": {
+    "binaries": {
+     "offrig-app": "offrig-app",
+     "offrig-cli": "offrig",
+     "offrig-mcp": "offrig-mcp"
+    }
+   }
+  },
+  {
+   "id": "RC06",
+   "verdict": "confirmed",
+   "blind_answer": {
+    "files": [
+     "packages/node/src/index.ts",
+     "packages/node/src/server.ts",
+     "packages/node/tests/deploy-gate.test.ts"
+    ]
+   }
+  },
+  {
+   "id": "RC07",
+   "verdict": "confirmed",
+   "blind_answer": {
+    "files": [
+     "src/escape_the_valley/adapter.py",
+     "src/escape_the_valley/cli.py",
+     "src/escape_the_valley/engine.py",
+     "src/escape_the_valley/tui_app.py",
+     "tests/test_adapter.py",
+     "tests/test_tui_smoke.py"
+    ]
+   }
+  },
+  {
+   "id": "RC09",
+   "verdict": "confirmed",
+   "blind_answer": {
+    "files": [
+     "src/escape_the_valley/__main__.py",
+     "src/escape_the_valley/adapter.py",
+     "src/escape_the_valley/cli.py",
+     "src/escape_the_valley/tui_app.py",
+     "tests/test_adapter.py",
+     "tests/test_backpack_ledger.py",
+     "tests/test_cli_stats.py",
+     "tests/test_save.py",
+     "tests/test_step_engine.py",
+     "tests/test_tui_smoke.py"
+    ]
+   }
+  },
+  {
+   "id": "TG02",
+   "verdict": "confirmed",
+   "blind_answer": {
+    "not_run_by_any_workflow": [
+     "tools/conformance-dataset/test_certify_ship_stamp.py",
+     "tools/conformance-dataset/test_empty_write_gate.py",
+     "tools/conformance-dataset/test_ood_floor_gate.mjs",
+     "tools/conformance-dataset/live-tools/test_prep_inputs_empty.mjs"
+    ],
+    "run_by_workflow": {
+     "file": "tools/token-budget-dataset/test_harvester.py",
+     "workflow": "ci.yml",
+     "working_directory": "tools/token-budget-dataset"
+    }
+   }
+  },
+  {
+   "id": "TG03",
+   "verdict": "key incomplete: add tests/manifest.test.ts",
+   "blind_answer": {
+    "unimported_by_tests": [
+     "src/cli.ts",
+     "src/commands/manifest-cmd.ts",
+     "src/commands/verify.ts"
+    ],
+    "exercised_via": [
+     "tests/exit-codes.test.ts",
+     "tests/json-output.test.ts",
+     "tests/manifest-cmd.test.ts",
+     "tests/manifest.test.ts",
+     "tests/verify.test.ts"
+    ]
+   }
+  },
+  {
+   "id": "WR01",
+   "verdict": "confirmed",
+   "blind_answer": {
+    "writer": "site/scripts/fetch-stats.mjs",
+    "readers": [
+     "site/src/pages/dashboard.astro",
+     "site/src/pages/privacy.astro",
+     "site/src/pages/setup.astro"
+    ]
+   }
+  },
+  {
+   "id": "WR02",
+   "verdict": "confirmed; reword question",
+   "blind_answer": {
+    "writer": {
+     "file": "src/escape_the_valley/save.py",
+     "function": "save_game"
+    },
+    "importers": [
+     "src/escape_the_valley/adapter.py",
+     "src/escape_the_valley/cli.py",
+     "src/escape_the_valley/engine.py",
+     "src/escape_the_valley/step_engine.py",
+     "src/escape_the_valley/tui_app.py"
+    ]
+   }
+  }
+ ]
+}

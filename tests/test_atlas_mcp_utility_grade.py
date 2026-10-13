@@ -99,6 +99,24 @@ class EveryTask(unittest.TestCase):
                             rule["reject"] = []
                     self.assertTrue(grade.grade(lenient, as_text(answer))["correct"], answer)
 
+    def test_every_blind_audit_answer_grades_correct(self):
+        # R&D's blind key audit (key-audit.json): agents that never saw the
+        # keys answered 15 sampled questions. Each answer was right, so each
+        # must grade correct, the long CI-failure answers (70 to 80 words)
+        # among them (amendment 1).
+        audit = json.loads((HERE / "key-audit.json").read_text(encoding="utf-8"))
+        by_id = {t["id"]: t for t in TASKS}
+        self.assertEqual(len(audit["results"]), 15)
+        for entry in audit["results"]:
+            with self.subTest(task=entry["id"]):
+                result = grade.grade(by_id[entry["id"]], as_text(entry["blind_answer"]))
+                self.assertTrue(result["correct"], result)
+
+    def test_no_check_imposes_a_length_no_question_states(self):
+        for task in TASKS:
+            for rule in task["grade"]["checks"]:
+                self.assertNotIn("max_words", rule, task["id"])
+
     def test_extra_fields_in_an_answer_are_ignored(self):
         task = next(t for t in TASKS if t["id"] == "RC01")
         answer = dict(task["grade"]["example"], reasoning="from the imports")

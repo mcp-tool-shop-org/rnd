@@ -12,9 +12,10 @@ Path normal form, used wherever a check compares paths:
   ".github/workflows/ci.yml" and "ci.yml" are the same answer.
 
 Free text (`text` checks) is matched without regard to case. It must hold
-every `require` pattern, none of the `reject` patterns, and at most
-`max_words` words. The reject patterns catch hedges that name a rival cause,
-so an answer that lists every candidate grades wrong.
+every `require` pattern and none of the `reject` patterns. The reject
+patterns catch hedges that name a rival cause, so an answer that lists every
+candidate grades wrong. No length is imposed: no question states one, and a
+thorough correct answer must not grade wrong (amendment 1).
 
 Usage: python grade.py tasks.json TASK_ID ANSWER_TEXT_FILE
 Standard library only.
@@ -114,8 +115,6 @@ def _node(value):
 
 
 def _text_ok(rule, value):
-    if len(value.split()) > rule.get("max_words", 10**6):
-        return False
     if not all(re.search(p, value, re.IGNORECASE) for p in rule.get("require", [])):
         return False
     return not any(re.search(p, value, re.IGNORECASE) for p in rule.get("reject", []))

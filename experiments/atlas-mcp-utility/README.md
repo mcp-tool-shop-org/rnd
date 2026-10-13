@@ -19,16 +19,31 @@ Each sha256 is of the file as committed, with LF line endings (`.gitattributes`)
 
 | What | Pin |
 |---|---|
-| `tasks.json` | `cedfb958e51ee1ef9548727c5e5e10e9118fc8e21459b8adfe41c7a9d63d5af8` |
+| `tasks.json` | `6a0b4c3fc1446b73ef78138b8bd1ba6b8d2d72b67e183b7d34db954e937f10ee` (amendment 1) |
 | `prompt.md` | `a32c1c8f30e88f7264e6efce1d1c608339368b2e44691870206b3105e4e6226d` |
 | `allow-list.json` | `d1ffe5045ed157942151961c76a649a754e72f4589df87a98e13e7869414bae5` |
-| `grade.py` | `ab006b0bf0b227a63bff53126e6a8881de52d321d2af75b713464ea7ca478538` |
+| `grade.py` | `f6d09f5144b42fc1c86f632015de33c84d0bfb9dd3faf2f192cb47d24d864455` (amendment 1) |
 | Claude Code CLI | 2.1.197 |
 | Model | `claude-sonnet-5-5`, at the CLI's default effort for it |
 | Atlas | `@dogfood-lab/atlas` 1.26.0 |
 | Seed (arm order, key draw) | 20261013 |
 
 A pin changes only before the pilot, and only by a dated amendment here that says why. One example: R&D's key check fixing a key, which changes `tasks.json`'s hash. Another: Atlas 1.27.0 shipping first. After the pilot's first run, nothing pinned changes.
+
+### Amendment 1, 2026-10-13: R&D's blind key audit
+
+Three agents that never saw the keys answered the 15 sampled questions from the pinned commits. R&D compared each answer with its key and graded it with `grade.py`. The answers and verdicts are in `key-audit.json`. Fourteen keys were right, and the audit found a grader defect.
+
+1. **No word cap.** CF01, CF05, CF06 and CF07 were answered correctly (same cause, file and function, and `fixable_in_repo_files`) in 70 to 80 words, and graded wrong only because the text checks capped length at 40 or 60 words. No question states a length, and a cap could favour whichever arm writes less.
+   - The cap is removed from every check and from `grade.py`. The hedge rejects still catch an answer that lists every candidate cause.
+   - A test now requires all 15 blind answers to grade correct.
+2. **TG03's key.** `tests/manifest.test.ts` also spawns the built CLI (line 935 sets `BIN` to `dist/cli.js`; line 985 runs `runCli(['manifest', ...])`). `exercised_via` may now name five spawning tests, and must still include `manifest-cmd` and `verify`.
+3. **CF06's pin stays at `4bc808e376`,** though R&D asked for `d888f86c72`, the failing run's head. `d888f86c72` has no Atlas map: research-os adopted Atlas three commits later. Pinning it would leave arm B with no map for this one task.
+   - The three commits between change only `.github/workflows/ci.yml`, `codecov.yml` and `atlas/`. The Pages workflow and the cause, a repository setting, are the same at both.
+   - CF07 likewise pins the first commit with a map, the child of its failing run's commit.
+4. **WR02 reworded** to ask for "the function that saves the game". `_atomic_write_text` does the physical write, so "writes" had two fair readings. The key, `save_game`, is unchanged.
+
+`tasks.json` and `grade.py` are re-pinned above. `prompt.md` and `allow-list.json` are unchanged.
 
 ## Design
 
@@ -86,10 +101,11 @@ A key R&D cannot confirm is fixed or dropped, by a dated amendment.
   - case kept.
 
   A workflow is compared by its file name alone.
-- **Free text** must hold every required pattern, no reject pattern, and at most a stated number of words. The reject patterns catch a hedge that names a rival cause, so an answer that lists every candidate grades wrong.
+- **Free text** must hold every required pattern and no reject pattern, with no limit on length (amendment 1). The reject patterns catch a hedge that names a rival cause, so an answer that lists every candidate grades wrong.
 - **The tests** (`tests/test_atlas_mcp_utility_grade.py`, in rnd's suite):
   - every task's example grades correct and a perturbed one grades wrong;
-  - each of the eight free-text keys has a scattershot answer that grades wrong, and grades correct once the reject rules are removed, so the hedge rule is what catches it.
+  - each of the eight free-text keys has a scattershot answer that grades wrong, and grades correct once the reject rules are removed, so the hedge rule is what catches it;
+  - all 15 blind answers from R&D's key audit (`key-audit.json`) grade correct.
 
 ## Metrics, pre-registered
 
@@ -192,4 +208,5 @@ The token ceiling (stop rule 3) is set at the volume $150 would buy at the rates
 - `prompt.md`: the prompt both arms get, with the question in place of `{question}`.
 - `allow-list.json`: the CLI, the model, the tools, and the two arms' MCP servers.
 - `grade.py`: the grader. Its tests are in `tests/test_atlas_mcp_utility_grade.py`.
+- `key-audit.json`: R&D's blind key audit, the answers and verdicts behind amendment 1.
 - `results/`: written by the run, one record per run with its usage, answer and grade.

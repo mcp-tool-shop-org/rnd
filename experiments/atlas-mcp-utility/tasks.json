@@ -997,7 +997,7 @@
     "repo": "mcp-tool-shop-org/escape-the-valley",
     "commit": "9bb3327a1d4a66e84920674d2307b66e2ac54c24",
     "type": "write_read",
-    "question": "The game autosaves to `.trail/run.json`. Which function writes that file (give file and function name), and which non-test modules under src/ import the save module (`escape_the_valley.save`)? Answer as JSON: {\"writer\": {\"file\": \"path\", \"function\": \"name\"}, \"importers\": [\"path\", ...]}.",
+    "question": "The game autosaves to `.trail/run.json`. Which function saves the game to that file (the function that builds the save path and saves; give file and function name), and which non-test modules under src/ import the save module (`escape_the_valley.save`)? Answer as JSON: {\"writer\": {\"file\": \"path\", \"function\": \"name\"}, \"importers\": [\"path\", ...]}.",
     "answer_key": {
       "writer": {
         "file": "src/escape_the_valley/save.py",
@@ -1015,7 +1015,7 @@
     "key_source": "save.py: SAVE_FILE = \"run.json\", save_game writes via _atomic_write_text; importers from the regex import resolver cross-checked with rg for `.save import`.",
     "needs_network": false,
     "confidence": "medium",
-    "notes": "save_game is wrapped by _atomic_write_text; a model may name that helper instead. cli.py imports has_save/load_game, not save_game, at module level but imports save_game inside functions.",
+    "notes": "save_game is wrapped by _atomic_write_text; a model may name that helper instead. cli.py imports has_save/load_game, not save_game, at module level but imports save_game inside functions. Question reworded 2026-10-13 (R&D's audit): _atomic_write_text does the physical write, so \"writes\" had two fair readings.",
     "grade": {
       "checks": [
         {
@@ -1092,8 +1092,7 @@
             "[,;/]",
             "&&",
             "\\bpnpm test\\b(?!:)"
-          ],
-          "max_words": 12
+          ]
         }
       ],
       "example": {
@@ -1195,14 +1194,15 @@
         "tests/exit-codes.test.ts",
         "tests/json-output.test.ts",
         "tests/manifest-cmd.test.ts",
+        "tests/manifest.test.ts",
         "tests/verify.test.ts"
       ]
     },
-    "check_method": "Exact set equality on unimported_by_tests; exercised_via must contain at least tests/manifest-cmd.test.ts and tests/verify.test.ts and nothing outside the four.",
+    "check_method": "Exact set equality on unimported_by_tests; exercised_via must contain at least tests/manifest-cmd.test.ts and tests/verify.test.ts and nothing outside the five spawning tests.",
     "key_source": "Forward import closure from tests/**/*.ts (own resolver) gives the three files; rg for `spawnSync('node', [BIN` / dist/cli.js in tests/ gives the four spawning tests; vitest.config.ts comments confirm.",
     "needs_network": false,
     "confidence": "medium",
-    "notes": "Known-corner for Atlas: a test that spawns a built binary. The answer is also written in vitest.config.ts comments inside the repo (contamination). The `exercised_via` list is my reading of which tests spawn the CLI; verify before pinning the grader.",
+    "notes": "Known-corner for Atlas: a test that spawns a built binary. The answer is also written in vitest.config.ts comments inside the repo (contamination). The `exercised_via` list is my reading of which tests spawn the CLI; verify before pinning the grader. Amended 2026-10-13 after R&D's blind audit: tests/manifest.test.ts also spawns dist/cli.js (BIN at line 935, runCli(['manifest', ...]) at line 985), so the spawning tests are five.",
     "grade": {
       "checks": [
         {
@@ -1225,6 +1225,7 @@
             "tests/exit-codes.test.ts",
             "tests/json-output.test.ts",
             "tests/manifest-cmd.test.ts",
+            "tests/manifest.test.ts",
             "tests/verify.test.ts"
           ]
         }
@@ -1239,6 +1240,7 @@
           "tests/exit-codes.test.ts",
           "tests/json-output.test.ts",
           "tests/manifest-cmd.test.ts",
+          "tests/manifest.test.ts",
           "tests/verify.test.ts"
         ]
       }
@@ -1309,8 +1311,7 @@
           "reject": [
             "\\b(the test|the scenario|the seed)\\b[^.]{0,30}\\b(is|was) (wrong|at fault|buggy)",
             "\\bor\\b[^.]{0,60}\\b(scenario|test|seed|flak)"
-          ],
-          "max_words": 40
+          ]
         }
       ],
       "example": {
@@ -1366,8 +1367,7 @@
             "\\b\\d+(\\.\\d+)*\\s*(or|/|and)\\s*\\d+(\\.\\d+)*\\b",
             "(?<![\\d.])(18|19|21)(?![\\d])",
             "\\b(downgrade|older astro|astro@?\\s*[1-6]\\b)"
-          ],
-          "max_words": 25
+          ]
         }
       ],
       "example": {
@@ -1423,8 +1423,7 @@
             "\\b\\d+(\\.\\d+)*\\s*(or|/|and)\\s*\\d+(\\.\\d+)*\\b",
             "(?<![\\d.])(18|19|21)(?![\\d])",
             "\\b(downgrade|older astro|astro@?\\s*[1-6]\\b)"
-          ],
-          "max_words": 25
+          ]
         }
       ],
       "example": {
@@ -1479,8 +1478,7 @@
           ],
           "reject": [
             "\\bor\\b[^.]{0,60}\\b(node(\\.js)? version|network|cache|registry)"
-          ],
-          "max_words": 60
+          ]
         }
       ],
       "secondary": [
@@ -1551,8 +1549,7 @@
           ],
           "reject": [
             "\\bor\\b[^.]{0,60}\\b(not enabled|token|permission)"
-          ],
-          "max_words": 60
+          ]
         }
       ],
       "example": {
@@ -1581,7 +1578,7 @@
     "key_source": "Run annotations (check-runs API) for job `deploy` of run 35260155076; same environment-policy cause as CF05, confirmed in the triage table.",
     "needs_network": false,
     "confidence": "medium",
-    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). Same cause and same answer as CF05 (correlated twin: count as one if the analysis assumes independence). The failing run executed at d888f86c72, earlier than the pin; log text is gone (gh run view --log-failed answers \"log not found\"), only annotations survive.",
+    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). Same cause and same answer as CF05 (correlated twin: count as one if the analysis assumes independence). The failing run executed at d888f86c72, earlier than the pin; log text is gone (gh run view --log-failed answers \"log not found\"), only annotations survive. Pin kept at 4bc808e376 after R&D's audit asked for d888f86c72, the failing run's head: d888f86c72 has no Atlas map (research-os adopted Atlas three commits later), so arm B would have no map for this task alone. The three commits between change only .github/workflows/ci.yml, codecov.yml and atlas/; the Pages workflow and the cause, a repository setting, are the same at both. CF07 likewise pins the first commit with a map, the child of its failing run's commit.",
     "grade": {
       "checks": [
         {
@@ -1598,8 +1595,7 @@
           ],
           "reject": [
             "\\bor\\b[^.]{0,60}\\b(not enabled|token|permission)"
-          ],
-          "max_words": 60
+          ]
         }
       ],
       "example": {
@@ -1645,8 +1641,7 @@
           ],
           "reject": [
             "\\bor\\b[^.]{0,60}\\b(environment|branch polic|protection|token|permission)"
-          ],
-          "max_words": 60
+          ]
         }
       ],
       "example": {

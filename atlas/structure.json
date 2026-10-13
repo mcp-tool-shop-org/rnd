@@ -427,7 +427,7 @@
       "externals": 0,
       "files": [
         {
-          "hash": "586a6ce863aa65f3313ddb8de7f6df7f6a51e6c50127cc275179383d4e31face",
+          "hash": "8afc286361420061a8435a38eb551bbed56a58e4c4c5fa1a5c567d2a26594165",
           "path": "experiments/atlas-mcp-utility/README.md"
         },
         {
@@ -469,7 +469,7 @@
           "path": "experiments/atlas-mcp-utility/key-audit.json"
         },
         {
-          "hash": "e30d65de29f89ba10206a67dec135e4affd4199a358045a93568833a2a3a0702",
+          "hash": "faac51c2943edb80509fd311ca510c88e71f2ba0d9900884072fafc72d1a6a77",
           "path": "experiments/atlas-mcp-utility/ladder.md"
         },
         {
@@ -5430,7 +5430,7 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "ce0f81c41202002f0595d078fd3426d77ef77913",
+    "commit": "bc95d916a1f82d7a51bf2e0a64999d7fea343344",
     "tracked": 567
   },
   "landings": [

@@ -150,7 +150,7 @@
       "confidence": "full",
       "highWater": null,
       "name": "mcptoolshop_rnd",
-      "qualifyingSourceCommits": 298,
+      "qualifyingSourceCommits": 299,
       "rebaseline": null
     },
     {
@@ -259,8 +259,8 @@
         "path": ".gitignore"
       },
       {
-        "commits": 329,
-        "lines": 1817,
+        "commits": 330,
+        "lines": 1828,
         "path": "CHANGELOG.md"
       },
       {
@@ -324,8 +324,8 @@
         "path": "SHIP_GATE.md"
       },
       {
-        "commits": 19,
-        "lines": 485,
+        "commits": 20,
+        "lines": 491,
         "path": "atlas/README.md"
       },
       {
@@ -334,18 +334,18 @@
         "path": "atlas/boundaries.yaml"
       },
       {
-        "commits": 19,
-        "lines": 1640,
+        "commits": 20,
+        "lines": 1656,
         "path": "atlas/page.json"
       },
       {
-        "commits": 19,
-        "lines": 5062,
+        "commits": 20,
+        "lines": 5140,
         "path": "atlas/statistics.json"
       },
       {
-        "commits": 19,
-        "lines": 8908,
+        "commits": 20,
+        "lines": 8920,
         "path": "atlas/structure.json"
       },
       {
@@ -354,8 +354,8 @@
         "path": "catalogs/nvidia-skills/README.md"
       },
       {
-        "commits": 1,
-        "lines": 4877,
+        "commits": 2,
+        "lines": 5777,
         "path": "catalogs/nvidia-skills/catalog.json"
       },
       {
@@ -714,8 +714,8 @@
         "path": "entries/2026/2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ.md"
       },
       {
-        "commits": 1,
-        "lines": 49,
+        "commits": 2,
+        "lines": 57,
         "path": "entries/2026/2026-10-13-nvidia-pair-a-lan-inference-router-and-how-it-compares-with-.md"
       },
       {
@@ -2529,8 +2529,8 @@
         "path": "instruments/intel-npu.md"
       },
       {
-        "commits": 1,
-        "lines": 57,
+        "commits": 2,
+        "lines": 76,
         "path": "instruments/nemo-relay.md"
       },
       {
@@ -2604,8 +2604,8 @@
         "path": "instruments/web-research.md"
       },
       {
-        "commits": 299,
-        "lines": 599,
+        "commits": 300,
+        "lines": 601,
         "path": "mcptoolshop_rnd/__init__.py"
       },
       {
@@ -2894,8 +2894,8 @@
         "path": "site/src/content/docs/briefs/math-ladder.md"
       },
       {
-        "commits": 2,
-        "lines": 120,
+        "commits": 3,
+        "lines": 131,
         "path": "site/src/content/docs/briefs/pair-and-interlock.md"
       },
       {
@@ -3164,17 +3164,17 @@
     "level": "low",
     "reason": "fewer than 25 source files reach 10 revisions in the window"
   },
-  "generatedAt": "2026-10-13T18:14:15.648Z",
+  "generatedAt": "2026-10-13T18:24:20.994Z",
   "generatedFrom": {
-    "commit": "097bbbb122874453bde0374faefad773c83563d9"
+    "commit": "22d64e4f9ca43d16bad48d80673aaa1eea9e944a"
   },
   "pairs": [
     {
       "a": "CHANGELOG.md",
       "b": "mcptoolshop_rnd/__init__.py",
-      "either": 328,
-      "shared": 298,
-      "strength": 0.908537
+      "either": 329,
+      "shared": 299,
+      "strength": 0.908815
     },
     {
       "a": "README.md",
@@ -3186,43 +3186,43 @@
     {
       "a": "atlas/README.md",
       "b": "atlas/page.json",
-      "either": 19,
-      "shared": 19,
+      "either": 20,
+      "shared": 20,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/statistics.json",
-      "either": 19,
-      "shared": 19,
+      "either": 20,
+      "shared": 20,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/structure.json",
-      "either": 19,
-      "shared": 19,
+      "either": 20,
+      "shared": 20,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/statistics.json",
-      "either": 19,
-      "shared": 19,
+      "either": 20,
+      "shared": 20,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/structure.json",
-      "either": 19,
-      "shared": 19,
+      "either": 20,
+      "shared": 20,
       "strength": 1
     },
     {
       "a": "atlas/statistics.json",
       "b": "atlas/structure.json",
-      "either": 19,
-      "shared": 19,
+      "either": 20,
+      "shared": 20,
       "strength": 1
     },
     {
@@ -3243,16 +3243,16 @@
     "floor": "fallen",
     "floorHeld": false,
     "floorTrigger": "revision-depth",
-    "headDate": "2026-10-13T14:14:09-04:00",
+    "headDate": "2026-10-13T14:24:14-04:00",
     "inScopeFiles": 577,
     "pinnedStart": null,
     "priorFloor": "fallen",
-    "qualifyingCommits": 354,
+    "qualifyingCommits": 355,
     "qualifyingMinimum": 30,
     "revisions": 5,
     "shared": 10,
     "sharedFloorUsed": 3,
-    "since": "2026-04-16T18:14:09.000Z",
+    "since": "2026-04-16T18:24:14.000Z",
     "sourceExtensions": [
       ".js",
       ".mjs",

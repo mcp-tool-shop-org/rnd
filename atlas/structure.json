@@ -67,7 +67,7 @@
           "path": "catalogs/nvidia-skills/README.md"
         },
         {
-          "hash": "fb0a5079d792837dc9583a04ba9e8a6fe6c34f7243da1c4e4665f3c5a8393322",
+          "hash": "08ea84babc37a2a766118dfe1f2dd16ec7042012ee8c9e17a709312392170268",
           "path": "catalogs/nvidia-skills/catalog.json"
         },
         {
@@ -404,7 +404,7 @@
           "path": "entries/2026/2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ.md"
         },
         {
-          "hash": "76fb16a15d632a13779e41f1cb2f123722fdf5e423a9e6b8384c51ed27b1f096",
+          "hash": "a90f56b0062f66dc5b767c91f76eb18067e30cce4de582083a05f319a7962b13",
           "path": "entries/2026/2026-10-13-nvidia-pair-a-lan-inference-router-and-how-it-compares-with-.md"
         },
         {
@@ -2907,7 +2907,7 @@
           "path": "instruments/intel-npu.md"
         },
         {
-          "hash": "9630877c1d50199cde4970845a2ef7517060763a27addb687fed6ee5a0441c9b",
+          "hash": "9ca65176c11b55677a9aa99550352a9ee72f90cea12a8d528d174ff587fdd7dc",
           "path": "instruments/nemo-relay.md"
         },
         {
@@ -2989,7 +2989,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "9102f81ad5628d4e16bee0558f681f8deee6d75ad15c00e0cd1af2ca6d9c0c69",
+          "hash": "7c0b6cccc00b056850a036c9dbda13cb1013e549177cf5ef5df07afa30a4f088",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -4186,7 +4186,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "0186a0b71c244f2ba69d084207ea117881a48a199abadd4384d898291db9d059",
+          "hash": "82bc6ef509f5b709e659012210b2446481111ab8eb7baa87c6ff9d3b430dd510",
           "path": "CHANGELOG.md"
         },
         {
@@ -4406,7 +4406,7 @@
           "path": "site/src/content/docs/briefs/math-ladder.md"
         },
         {
-          "hash": "225df893cdcce9a9aabd66ccefbc1fd2d3787a1e56120bbf9a3e00895e96aef3",
+          "hash": "ebc71037432a8691abb25fb3ddca389f1e5c0aeba8c586a60a3f5ff9d0c27672",
           "path": "site/src/content/docs/briefs/pair-and-interlock.md"
         },
         {
@@ -5458,7 +5458,7 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "097bbbb122874453bde0374faefad773c83563d9",
+    "commit": "22d64e4f9ca43d16bad48d80673aaa1eea9e944a",
     "tracked": 572
   },
   "landings": [

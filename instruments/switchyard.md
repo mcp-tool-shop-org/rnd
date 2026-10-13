@@ -395,3 +395,9 @@ receipts, not guesses. The brief lives in R&D's memory (`switchyard-router-build
     - New: `driver_cuda` returns None. Driver 617.42 (it was 617.14) prints "CUDA UMD Version: 13.4", not "CUDA Version:". Added to the Seat brief.
     - The runner pid can't be judged at idle and is record-only.
     - R&D's own miss: #79 passed without a live read of the counters. From now on, any PR that reads the platform gets a read-only live check before a pass.
+- **interlock #99 (E5 adapter pin, live preflight, the UMD header, shared-runner git), review 2026-10-13 at 12577dc, with read-only live reads: changes needed.**
+  - **Right:** the 512 MiB pin is unique on the rig (the other adapters read 0), the UMD header matches, and git provenance is on shared-runner receipts.
+  - **Ruling, KV type and flash attention:** the server-config env line isn't the truth. Ollama 0.35.1 starts llama-server with `--flash-attn auto`, and it logs Flash Attention enabled and `K (f16) … V (f16)`. Record the config values as they are, take the real values from each model's first-load lines, and gate after the first load. Don't change the shared server.
+  - **Ruling, the log path:** take the redirect target from the 11434 listener's parent command line, with INTERLOCK_OLLAMA_LOG as an override. The tray log is never a fallback.
+  - **New:** the 0.35.1 runner is llama-server.exe, so `_runner_pid` misses it.
+- **Correction to E4b, 2026-10-13:** the block-2 and block-3 receipt headers record `flash_attention: "false"` (from the env line), but both run logs show `--flash-attn auto` and Flash Attention enabled, with an f16 KV cache. The verdicts are unaffected, because every arm ran on the same server. The recorded field is wrong, and the E4b harness follow-up reads the load lines.

@@ -71,52 +71,51 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 6,
-      "changed": 3,
+      "added": 15,
+      "changed": 11,
       "moved": 0,
-      "parts": 5,
+      "parts": 7,
       "removed": 0
     },
     "items": [
       {
         "kind": "landing",
-        "sentence": ".github/workflows/ci.yml is now read by experiments/atlas-mcp-utility/tasks.json and tests/test_atlas_mcp_utility_grade.py.",
+        "sentence": "experiments/atlas-mcp-utility/results/pilot is now written by experiments/atlas-mcp-utility/run.py.",
         "subjects": [
-          ".github/workflows/ci.yml",
-          "experiments/atlas-mcp-utility/tasks.json",
-          "tests/test_atlas_mcp_utility_grade.py"
+          "experiments/atlas-mcp-utility/results/pilot",
+          "experiments/atlas-mcp-utility/run.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": ".github/workflows/pages.yml is now read by experiments/atlas-mcp-utility/tasks.json.",
+        "sentence": "experiments/atlas-mcp-utility/results/pilot/debriefs.jsonl is now written by experiments/atlas-mcp-utility/run.py.",
         "subjects": [
-          ".github/workflows/pages.yml",
-          "experiments/atlas-mcp-utility/tasks.json"
+          "experiments/atlas-mcp-utility/results/pilot/debriefs.jsonl",
+          "experiments/atlas-mcp-utility/run.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "experiments/atlas-mcp-utility/grade.py is now read by tests/test_atlas_mcp_utility_grade.py.",
+        "sentence": "experiments/atlas-mcp-utility/results/pilot/probe-report.json is now written by experiments/atlas-mcp-utility/run.py.",
         "subjects": [
-          "experiments/atlas-mcp-utility/grade.py",
-          "tests/test_atlas_mcp_utility_grade.py"
+          "experiments/atlas-mcp-utility/results/pilot/probe-report.json",
+          "experiments/atlas-mcp-utility/run.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "And 2 more new writers and readers of places.",
+        "sentence": "And 10 more new writers and readers of places.",
         "subjects": []
       },
       {
         "kind": "counts",
-        "sentence": "6 files added and 3 changed content, across 5 parts.",
+        "sentence": "15 files added and 11 changed content, across 7 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "eab077ff506d2cb3c201a752e9e765a195b120ce",
-      "generatedAt": "2026-10-13T14:55:37.380Z"
+      "commit": "4d034507932153cb5b5dca0d5d5023eae343b7ba",
+      "generatedAt": "2026-10-13T15:15:01.357Z"
     },
     "unchanged": false
   },
@@ -142,9 +141,9 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 2 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "4d034507932153cb5b5dca0d5d5023eae343b7ba",
+  "commit": "23c63d5f7666c839694faf2dd187a8bfefcc7667",
   "defaultBranch": "main",
-  "derived": "13 parts, mostly Python (72 files), shell (14), CSS (2), TypeScript (2), Astro (1), HTML (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "13 parts, mostly Python (76 files), shell (14), CSS (2), TypeScript (2), Astro (1), HTML (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -167,7 +166,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 11
+          "files": 12
         },
         {
           "boundary": "rnd",
@@ -182,12 +181,12 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 10
+          "files": 12
         },
         {
           "boundary": "experiments",
           "depth": 1,
-          "files": 2
+          "files": 4
         }
       ],
       "runs": [
@@ -222,7 +221,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 11
+          "files": 12
         },
         {
           "boundary": "rnd",
@@ -297,7 +296,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 10
+          "files": 11
         }
       ],
       "runs": [
@@ -419,12 +418,12 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-13T15:15:01.357Z",
+  "generatedAt": "2026-10-13T16:41:31.296Z",
   "limits": [
     "9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.",
-    "7 writes and 11 reads use paths built at run time and are not named here.",
-    "1 write goes to places this repository does not track, so it is not listed as generated.",
-    "12 writes and 35 reads go to a path their caller passes, not to this repository.",
+    "8 writes and 11 reads use paths built at run time and are not named here.",
+    "5 writes go to places this repository does not track, so they are not listed as generated.",
+    "13 writes and 38 reads go to a path their caller passes, not to this repository.",
     "3 reads go to the directory the command is run in (entries and instruments), not to this repository.",
     "1 read goes to the directory the command is run in or a path its caller passes, not to this repository.",
     "Statistics confidence is low: fewer than 25 source files reach 10 revisions in the window."
@@ -476,13 +475,13 @@
   "startReason": "This path follows rnd (a command people run) from its entry, since CI runs only tests and checks.",
   "summary": "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only).",
   "summaryFrom": "person",
-  "testFiles": 12,
+  "testFiles": 20,
   "testedBy": {
-    "experiments": 3,
-    "mcptoolshop_rnd": 5,
+    "experiments": 5,
+    "mcptoolshop_rnd": 6,
     "rnd": 1
   },
-  "unnamedWrites": 7,
+  "unnamedWrites": 8,
   "unread": [
     {
       "place": "experiments/charts/",

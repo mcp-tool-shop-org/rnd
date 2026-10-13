@@ -11,6 +11,15 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.5.0.4] - 2026-10-13
+
+- entry: NVIDIA NeMo Relay (tracing agent harnesses, Claude Code included)
+- atlas-mcp-utility amendments merged:
+  - amendment 2: run isolation, the harness and the probes (#6);
+  - the Bash escape detector (#7);
+  - amendment 3: the six-question debrief and two stated conventions (#8).
+- Added `2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ`: NVIDIA NeMo Relay: tracing agent harnesses, Claude Code included
+
 ## [1.1.5.0.3] - 2026-10-13
 
 - atlas-mcp-utility pre-registered (#5); the Director's go on the pilot, after the GPU grant ends

@@ -79,12 +79,30 @@ answers alone.
   - The grader's path normal form keeps that first segment.
 - **Arm A** has no MCP server, as in rung 1. It can read every committed map.
 - **Arm B** adds Atlas over every repository in the workspace. With Atlas 1.26.0 that means one `atlas mcp` server
-  per checkout, named for its repository, because each server answers only about the repository it starts in.
+  per checkout, named for its repository, because each server answers only about the repository it starts in. Its
+  tools are then `mcp__<repository>__atlas_*`, seven per repository.
+- **History stays equal in both arms.** The run starts in the workspace folder, which isn't a git repository, so a
+  bare `git log` or `git show` would fail in both arms. Arm B's servers would still read history through
+  `atlas_changes`, the tilt amendment 2 kept `git log` to avoid.
+  - So both arms get one allowed form per repository: `Bash(git -C <repository> log:*)` and
+    `Bash(git -C <repository> show:*)`.
+  - The Bash detector accepts `-C` only with a listed repository folder name: no slash, no `..` and no absolute path.
+    It refuses every other `-C`.
+  - (The Atlas session's review of #12.)
 - **The isolation of amendments 2 and 4 carries over,** with the workspace folder in place of the checkout:
   - the read rules, the deny list and the Bash rules;
-  - `--tools`, `--disable-slash-commands` and the per-attempt Atlas cache;
-  - the exact-set init check, which expects four built-ins plus seven Atlas tools per repository in arm B;
-  - each rung's sentinel probe covers the whole workspace.
+  - `--tools` and `--disable-slash-commands`;
+  - the Atlas cache, now per server and per attempt (`<run>.cache/<repository>`), with the shared-cache guard
+    covering the whole run;
+  - the exact-set init check. It expects four built-ins, plus seven Atlas tools and one connected server per
+    repository in arm B. The start check, the foreign-server check and the Atlas call count stop assuming one server
+    named `atlas`;
+  - each rung's sentinel probe, which covers the whole workspace. Arm B's probe asks every server for
+    `atlas_overview`, and each must answer.
+- **The anchors' answer format.** At rung 1, paths are relative to the repository. From rung 2, answers write
+  `<repository>/<path>`.
+  - The anchors' keys are prefixed mechanically, never re-keyed by hand.
+  - The grader is tested on both forms, so a format slip can't show up as a rung effect.
 
 **Atlas stays at 1.26.0 for the whole ladder,** so the rungs compare with each other. Atlas may ship a mode that
 serves several maps from one server, or that joins a package one repository publishes to the repositories that import it
@@ -95,8 +113,8 @@ be reused for that.
 ## Climbing: one rung at a time
 
 Rung k+1 starts only when all of these hold:
-1. **Rung k is valid.** Its isolation checks are clean, fewer than 20% of its runs failed in the harness or the
-   service, and it stayed under its token ceiling.
+1. **Rung k is valid.** Its isolation checks are clean, no run halted it (amendment 4: an error result from the
+   service halts), fewer than 20% of its attempts failed in the harness, and it stayed under its token ceiling.
 2. **Rung k+1 has a mini-pilot:** two pairs, one anchor and one cross-repository task, that measure its tokens per run.
    That measurement re-prices the rung. A rung measuring over 1.5 times its estimate stops for re-pricing, as in
    rung 1.
@@ -123,6 +141,10 @@ repositories are added.
   - **Why this test:** comparing each task with itself keeps differences between tasks out of the trend.
   - **The p-value** is one-sided, from 10,000 permutations of the rung labels within each task, with the seed below.
     α = 0.05.
+- **Arm B's fixed cost, reported beside the trend.** Every turn carries seven tool schemas per repository: 28 at
+  rung 4. That cost pushes the trend toward the null, for a reason a single multi-repository server (arm C) would
+  remove. So each run's first-turn input tokens are reported per arm and rung, as that fixed overhead. A flat trend
+  is not read as "maps don't help across repositories" without this figure beside it.
 - **Secondary trend: correctness.** Per rung, B's correct share minus A's, with exact intervals, across all of that
   rung's pairs. It is reported as a curve. There is no trend test: with 17 pairs per rung, correctness can only
   show a large effect.
@@ -175,8 +197,13 @@ allowance, not on dollars. Each rung's report states what share of that allowanc
 
 ## Who does what
 
-- **The Atlas session** proposes the chain and writes each rung's bank and the harness changes: the multi-checkout
-  workspace, one server per repository, the per-arm exact-set check and the workspace probe. Each goes as a dated
-  amendment by pull request.
+- **The Atlas session** proposes R4 and writes each rung's bank and the harness changes. Each goes as a dated
+  amendment by pull request, and all of these must be in place before rung 2 runs:
+  - the multi-checkout workspace;
+  - one server per repository, with per-server caches;
+  - the per-repository `git -C` forms and their detector;
+  - the generalised exact-set check and Atlas call count;
+  - the prefixed anchor keys;
+  - the workspace probe.
 - **R&D** approves the chain, audits each bank's keys, rules on each amendment and reports each rung to the Director.
 - **The Publisher** merges, and runs only outside GPU grants (stop rule 5).

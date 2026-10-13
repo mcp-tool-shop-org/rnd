@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.45] - 2026-10-12
+
+- interlock #95 pass; E5 readiness
+- Updated `switchyard`: interlock (formerly switchyard) — the local AI device router (in build)
+
 ## [1.1.4.6.44] - 2026-10-12
 
 - newsletter issue 4 (E4b: three devices, no contention)

@@ -12,6 +12,11 @@
     {"id": "openvino", "kind": "github-releases", "url": "https://github.com/openvinotoolkit/openvino", "why": "the Intel NPU and iGPU lane"},
     {"id": "pytorch", "kind": "github-releases", "url": "https://github.com/pytorch/pytorch", "why": "training and GPU work; CUDA support changes"},
     {"id": "comfyui", "kind": "github-releases", "url": "https://github.com/comfyanonymous/ComfyUI", "why": "the image pipeline"},
-    {"id": "claude-code", "kind": "github-releases", "url": "https://github.com/anthropics/claude-code", "why": "the agent CLI every harness and experiment runs on; flags and permission rules change"}
+    {"id": "claude-code", "kind": "github-releases", "url": "https://github.com/anthropics/claude-code", "why": "the agent CLI every harness and experiment runs on; flags and permission rules change"},
+    {"id": "docker-blog", "kind": "feed", "url": "https://www.docker.com/blog/feed/", "why": "Docker's posts: Sandboxes, Model Runner, agent permissions, and Hub security advisories (Director, 2026-10-13)"},
+    {"id": "docker-sandboxes", "kind": "page", "url": "https://docs.docker.com/ai/sandboxes/release-notes/", "pattern": "<h2[^>]*><a[^>]*>(\\d+\\.\\d+\\.\\d+)</a></h2>", "why": "the sbx CLI and cloud sandboxes, the isolated machines an agent experiment can run in; candidate for the $250 credit offer"},
+    {"id": "docker-desktop", "kind": "page", "url": "https://docs.docker.com/desktop/release-notes/", "pattern": "<h2[^>]*><a[^>]*>(\\d+\\.\\d+\\.\\d+)</a></h2>", "why": "Docker Desktop on the rig: WSL 2, GPU support and Model Runner changes"},
+    {"id": "docker-engine", "kind": "github-releases", "url": "https://github.com/moby/moby", "why": "the container engine under Docker Desktop and the Linux hosts (RunPod pods run containers)"},
+    {"id": "docker-model-runner", "kind": "github-releases", "url": "https://github.com/docker/model-runner", "why": "Docker's local model serving; a possible lane beside Ollama on the 5090"}
   ]
 }

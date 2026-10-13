@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.9] - 2026-10-13
+
+- Docker on the weekly watch (blog, Sandboxes, Desktop, Engine, Model Runner); instrument docker-sandboxes (planned)
+- Added `docker-sandboxes`: docker-sandboxes — isolated machines for agent experiments (Docker Sandboxes, sbx)
+
 ## [1.1.8.0.8] - 2026-10-13
 
 - corrected from the #107 live check: the sampler window caught the old runner's teardown; the card was idle at the call

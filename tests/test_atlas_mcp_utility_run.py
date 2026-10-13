@@ -182,7 +182,7 @@ class BashDetector(unittest.TestCase):
 
     def test_each_form_is_caught(self):
         cases = {
-            "git log --output=/c/Users/x/out.txt": ["--output"],
+            "git log --output=../out.txt": ["--output"],
             "git log --output /tmp/out.txt": ["--output"],
             "git log > out.txt": [">"],
             "git log >> out.txt": [">"],

@@ -1,0 +1,49 @@
+---
+id: 2026-10-13-nvidia-pair-a-lan-inference-router-and-how-it-compares-with-
+title: "NVIDIA PAIR: a LAN inference router, and how it compares with interlock"
+date: 2026-10-13
+kind: tool
+relevance: watch
+fields: [local-inference]
+tags: [pair, interlock, router]
+---
+
+## Summary
+
+NVIDIA PAIR (Personal AI Router), v1.0.0 under Apache-2.0, released on 2026-10-13, joins the computers on one network into a cluster. Each machine runs a proxy that local applications talk to as Ollama, OpenAI-compatible or Anthropic Messages. Each independent request goes to one machine that advertises the requested model and has a running engine (Ollama, LM Studio or llama.cpp). It doesn't pool VRAM, shard a model or split a request.
+
+Its scheduler is model-blind: pending jobs plus coarse GPU pressure (0–3 units at 40/70/85% utilisation of the busiest GPU). A capability gate keeps a request to the machines that hold the model. Its own documentation lists what that ranking can't see:
+- capacity: VRAM, GPU model and latency;
+- whether the model is already loaded;
+- job size: every job counts as one;
+- per-GPU detail: only the busiest GPU is seen.
+
+## Key points
+
+- **The ports:** the Ollama-compatible proxy takes port 11434 and moves Ollama to 11435 or above. The plaintext side answers only loopback. The same port serves mutual TLS to paired nodes, chosen by the connection's first byte (0x16).
+- **Telemetry:** the probe's "telemetry" code hits are host and GPU telemetry exchanged between paired nodes, by the architecture's account. Nothing read shows it sent off the network. That's unverified until it's tried.
+- **The roadmap** lists KV-cache-aware scheduling, request queuing, more scheduler variables, vLLM and ComfyUI.
+
+## Studio relevance
+
+- **Its stated limits map onto what interlock measured on one machine:**
+  - warm versus cold, and the cost of a cold load (E1);
+  - context capacity before a spill (E5);
+  - whether co-scheduled devices interfere (E4b: free, within ±10%).
+- **Not for the rig now.** It would take port 11434 from the 5090 Ollama server that interlock measures and restarts.
+- **Revisit if the studio pairs a second machine.** Before any install, run `rnd probe` and read its SECURITY.md.
+- **The brief:** [Where should this request run? NVIDIA PAIR and interlock](https://mcp-tool-shop-org.github.io/rnd/briefs/pair-and-interlock/).
+
+## Claims
+
+- [verified] PAIR is Apache-2.0, with v1.0.0 published 2026-10-13 (via: rnd probe of github.com/NVIDIA/Personal-AI-Router, 2026-10-13)
+- [verified] PAIR's scheduler ranks nodes by pending work plus coarse GPU pressure, is model-blind, and doesn't consider VRAM, latency or whether the model is loaded (via: docs/architecture.mdx at v1.0.0, read 2026-10-13)
+- [verified] PAIR's Ollama-compatible proxy uses port 11434 and moves Ollama to 11435 or above (via: docs/architecture.mdx port map at v1.0.0, read 2026-10-13)
+- [unverified] PAIR sends no telemetry beyond the paired nodes
+
+## Sources
+
+- [primary] https://github.com/NVIDIA/Personal-AI-Router — the README and docs/architecture.mdx at v1.0.0
+- [primary] https://developer.nvidia.com/blog/nvidia-pair-virtual-inference-router-expands-available-compute-on-your-local-network/ — the launch post
+- [[2026-10-12-e4b-block-2]] — E4b
+- [[2026-10-13-e5-fill-card]] — E5

@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.5.0.6] - 2026-10-13
+
+- brief: Where should this request run? NVIDIA PAIR and interlock
+- entry: NVIDIA PAIR (LAN inference router)
+- Added `2026-10-13-nvidia-pair-a-lan-inference-router-and-how-it-compares-with-`: NVIDIA PAIR: a LAN inference router, and how it compares with interlock
+
 ## [1.1.5.0.5] - 2026-10-13
 
 - instrument: nemo-relay (planned; the Director added it to the toolset)

@@ -415,6 +415,48 @@
       "externals": 0,
       "files": [
         {
+          "hash": "37fc5fdb5745e4bf881803c5ec697b55e03389a52b602fc9c8b7ffb3ae97d2d5",
+          "path": "experiments/atlas-mcp-utility/README.md"
+        },
+        {
+          "hash": "d1ffe5045ed157942151961c76a649a754e72f4589df87a98e13e7869414bae5",
+          "path": "experiments/atlas-mcp-utility/allow-list.json"
+        },
+        {
+          "exports": [
+            "check",
+            "extract_answer",
+            "field_value",
+            "grade",
+            "main",
+            "normal_path",
+            "secondary",
+            "workflow_name"
+          ],
+          "failurePaths": [
+            {
+              "in": "extract_answer",
+              "kind": "except",
+              "line": 40
+            },
+            {
+              "in": "check",
+              "kind": "raise",
+              "line": 105
+            }
+          ],
+          "hash": "ab006b0bf0b227a63bff53126e6a8881de52d321d2af75b713464ea7ca478538",
+          "path": "experiments/atlas-mcp-utility/grade.py"
+        },
+        {
+          "hash": "a32c1c8f30e88f7264e6efce1d1c608339368b2e44691870206b3105e4e6226d",
+          "path": "experiments/atlas-mcp-utility/prompt.md"
+        },
+        {
+          "hash": "cedfb958e51ee1ef9548727c5e5e10e9118fc8e21459b8adfe41c7a9d63d5af8",
+          "path": "experiments/atlas-mcp-utility/tasks.json"
+        },
+        {
           "hash": "4cf201aac16382ad422bb978b1d231ba284bee45857281585a7c7d7e86264813",
           "path": "experiments/charts/calibration-grounded.svg"
         },
@@ -2609,7 +2651,7 @@
       "origin": "mixed",
       "outsidePlaces": [
         {
-          "reads": 16,
+          "reads": 18,
           "where": [
             "caller"
           ],
@@ -2624,7 +2666,7 @@
           "writes": 0
         }
       ],
-      "outsideReads": 17,
+      "outsideReads": 19,
       "outsideWrites": 4,
       "role": "code",
       "testRunners": [
@@ -2727,7 +2769,7 @@
           "path": "instruments/sung-exemplar-method.md"
         },
         {
-          "hash": "7705cc97bbde843c17fa0186e55a2f2a388c15b44f540d71f345dfcafc971fe1",
+          "hash": "7b2ae0635a87b9b6450242fcbea90e85c30a68f3e76e5915b9c6a3fec093443f",
           "path": "instruments/switchyard.md"
         },
         {
@@ -2761,7 +2803,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "16827ee782d4a31f5138e2fe2b2ed4dc8da2014d05a3007ed087267ecb5e09f8",
+          "hash": "8c269bafe2505b712855e8c06ca1de120fb30154151ba33d4e89bbcbefec852f",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -3764,7 +3806,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "2091f28765ed4d3ebcd5106768ae64d9f208b1bc6edbe8a787e05c79beb7537b",
+          "hash": "07a0e93bc82ce8025ba520d060d42cace29594846a0827524436b812907f7575",
           "path": "CHANGELOG.md"
         },
         {
@@ -4094,6 +4136,19 @@
         },
         {
           "exports": [
+            "as_text",
+            "perturbed",
+            "set_field"
+          ],
+          "hash": "fb48bc3f01abe9b710bd6b83a599d2140ceba6e68414164d0058491c38916b8b",
+          "names": [
+            "experiments/atlas-mcp-utility/grade.py"
+          ],
+          "path": "tests/test_atlas_mcp_utility_grade.py",
+          "testFramework": "unittest"
+        },
+        {
+          "exports": [
             "make_library",
             "make_readouts"
           ],
@@ -4232,6 +4287,11 @@
       "testedBy": 0,
       "unresolvedNamed": [
         {
+          "path": "tests/test_atlas_mcp_utility_grade.py",
+          "specifier": null,
+          "why": "dynamic"
+        },
+        {
           "path": "tests/test_distill_step0_properties.py",
           "specifier": null,
           "why": "dynamic"
@@ -4240,14 +4300,9 @@
           "path": "tests/test_packaging.py",
           "specifier": "rnd.cli",
           "why": "unplaced"
-        },
-        {
-          "path": "tests/test_packaging.py",
-          "specifier": "rnd.store",
-          "why": "unplaced"
         }
       ],
-      "unresolvedSites": 3
+      "unresolvedSites": 4
     }
   ],
   "doors": [
@@ -4377,7 +4432,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 9
+          "files": 10
         },
         {
           "boundary": "experiments",
@@ -4467,7 +4522,7 @@
         },
         {
           "coverage": true,
-          "files": 9,
+          "files": 10,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -4897,10 +4952,38 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "eab077ff506d2cb3c201a752e9e765a195b120ce",
-    "tracked": 528
+    "commit": "4d034507932153cb5b5dca0d5d5023eae343b7ba",
+    "tracked": 534
   },
   "landings": [
+    {
+      "readers": [
+        {
+          "by": "experiments/atlas-mcp-utility/tasks.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
+          "by": "tests/test_atlas_mcp_utility_grade.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": ".github/workflows/ci.yml",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/atlas-mcp-utility/tasks.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": ".github/workflows/pages.yml",
+      "writers": []
+    },
     {
       "readers": [
         {
@@ -5009,6 +5092,30 @@
         }
       ],
       "target": "entries/_template.md",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "tests/test_atlas_mcp_utility_grade.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/atlas-mcp-utility/grade.py",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "tests/test_atlas_mcp_utility_grade.py",
+          "call": "read_text",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/atlas-mcp-utility/tasks.json",
       "writers": []
     },
     {
@@ -6548,6 +6655,17 @@
       "writers": []
     },
     {
+      "readers": [
+        {
+          "by": "experiments/atlas-mcp-utility/tasks.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "site/package-lock.json",
+      "writers": []
+    },
+    {
       "readers": [],
       "target": "site/public/charts",
       "writers": [
@@ -6605,7 +6723,7 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 11,
+  "testFiles": 12,
   "testsNotRun": [
     "experiments/cuda-graphs/test_graphed_heads.py",
     "experiments/data-designer/tests/test_lockdown.py"

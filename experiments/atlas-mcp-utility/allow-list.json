@@ -1,0 +1,35 @@
+{
+  "cli": "claude",
+  "cli_version": "2.1.197",
+  "model": "claude-sonnet-5-5",
+  "max_turns": 40,
+  "output_format": "stream-json",
+  "strict_mcp_config": true,
+  "allowed_tools": [
+    "Read",
+    "Grep",
+    "Glob",
+    "Bash(git log:*)",
+    "Bash(git show:*)",
+    "Bash(git grep:*)",
+    "Bash(git ls-files:*)",
+    "Bash(ls:*)"
+  ],
+  "atlas": {
+    "package": "@dogfood-lab/atlas",
+    "version": "1.26.0",
+    "start": "node <tools>/node_modules/@dogfood-lab/atlas/cli.js mcp, from the run's checkout; installed once into <tools> before the pilot"
+  },
+  "arms": {
+    "A": {
+      "mcp_servers": {},
+      "extra_allowed_tools": []
+    },
+    "B": {
+      "mcp_servers": {
+        "atlas": "the atlas start command above"
+      },
+      "extra_allowed_tools": ["mcp__atlas"]
+    }
+  }
+}

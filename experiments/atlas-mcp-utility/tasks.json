@@ -17,7 +17,29 @@
     "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output.",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Comment-only mentions exist (src/backend-fixes.test.ts and src/cli.cover.test.ts name the file without importing it)."
+    "notes": "Comment-only mentions exist (src/backend-fixes.test.ts and src/cli.cover.test.ts name the file without importing it).",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "src/cli.ts",
+            "src/index.ts",
+            "test/server-spacing.test.ts",
+            "test/server.test.ts"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "src/cli.ts",
+          "src/index.ts",
+          "test/server-spacing.test.ts",
+          "test/server.test.ts"
+        ]
+      }
+    }
   },
   {
     "id": "RC02",
@@ -38,7 +60,31 @@
     "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output.",
     "needs_network": false,
     "confidence": "high",
-    "notes": ""
+    "notes": "",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "src/backend-fixes.test.ts",
+            "src/contract.test.ts",
+            "src/index.ts",
+            "test/contract.test.ts",
+            "test/npm.test.ts"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "src/backend-fixes.test.ts",
+          "src/contract.test.ts",
+          "src/index.ts",
+          "test/contract.test.ts",
+          "test/npm.test.ts"
+        ]
+      }
+    }
   },
   {
     "id": "RC03",
@@ -60,7 +106,33 @@
     "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output.",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Trap for grep-based agents: src/manifest.ts names add-gallery.ts only in comments, and does not import it."
+    "notes": "Trap for grep-based agents: src/manifest.ts names add-gallery.ts only in comments, and does not import it.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "src/cli.ts",
+            "src/commands/add-model.ts",
+            "src/commands/history.ts",
+            "src/commands/remove.ts",
+            "src/commands/sync.ts",
+            "tests/add-gallery.test.ts"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "src/cli.ts",
+          "src/commands/add-model.ts",
+          "src/commands/history.ts",
+          "src/commands/remove.ts",
+          "src/commands/sync.ts",
+          "tests/add-gallery.test.ts"
+        ]
+      }
+    }
   },
   {
     "id": "RC04",
@@ -79,7 +151,27 @@
     "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output.",
     "needs_network": false,
     "confidence": "high",
-    "notes": ""
+    "notes": "",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "src/commands/audit.ts",
+            "src/commands/migrate.ts",
+            "tests/readme-parser.test.ts"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "src/commands/audit.ts",
+          "src/commands/migrate.ts",
+          "tests/readme-parser.test.ts"
+        ]
+      }
+    }
   },
   {
     "id": "RC05",
@@ -100,7 +192,31 @@
     "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output.",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Several other packages import their own types.ts or the @cognate/types package; only same-package relative imports of this file count."
+    "notes": "Several other packages import their own types.ts or the @cognate/types package; only same-package relative imports of this file count.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "packages/model-registry/src/attestation.ts",
+            "packages/model-registry/src/index.ts",
+            "packages/model-registry/src/registry.ts",
+            "packages/model-registry/tests/attestation.test.ts",
+            "packages/model-registry/tests/registry.test.ts"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "packages/model-registry/src/attestation.ts",
+          "packages/model-registry/src/index.ts",
+          "packages/model-registry/src/registry.ts",
+          "packages/model-registry/tests/attestation.test.ts",
+          "packages/model-registry/tests/registry.test.ts"
+        ]
+      }
+    }
   },
   {
     "id": "RC06",
@@ -119,7 +235,27 @@
     "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output.",
     "needs_network": false,
     "confidence": "high",
-    "notes": ""
+    "notes": "",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "packages/node/src/index.ts",
+            "packages/node/src/server.ts",
+            "packages/node/tests/deploy-gate.test.ts"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "packages/node/src/index.ts",
+          "packages/node/src/server.ts",
+          "packages/node/tests/deploy-gate.test.ts"
+        ]
+      }
+    }
   },
   {
     "id": "RC07",
@@ -141,7 +277,33 @@
     "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output.",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Python modules also named ui exist as substrings (backpack_ui.py); the key counts only imports of escape_the_valley.ui. Verified against rg of the import forms."
+    "notes": "Python modules also named ui exist as substrings (backpack_ui.py); the key counts only imports of escape_the_valley.ui. Verified against rg of the import forms.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "src/escape_the_valley/adapter.py",
+            "src/escape_the_valley/cli.py",
+            "src/escape_the_valley/engine.py",
+            "src/escape_the_valley/tui_app.py",
+            "tests/test_adapter.py",
+            "tests/test_tui_smoke.py"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "src/escape_the_valley/adapter.py",
+          "src/escape_the_valley/cli.py",
+          "src/escape_the_valley/engine.py",
+          "src/escape_the_valley/tui_app.py",
+          "tests/test_adapter.py",
+          "tests/test_tui_smoke.py"
+        ]
+      }
+    }
   },
   {
     "id": "RC08",
@@ -170,7 +332,47 @@
     "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output.",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Largest direct set in the bank (13); verified against rg of the import forms. src/entry-cmd.mjs and others mention routing without importing this module."
+    "notes": "Largest direct set in the bank (13); verified against rg of the import forms. src/entry-cmd.mjs and others mention routing without importing this module.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "bin/roleos.mjs",
+            "src/entry.mjs",
+            "src/mission.mjs",
+            "src/run.mjs",
+            "src/session.mjs",
+            "src/trial.mjs",
+            "test/audit-p5.test.mjs",
+            "test/conflicts.test.mjs",
+            "test/dispatch.test.mjs",
+            "test/packs.test.mjs",
+            "test/regression-pack-steps.test.mjs",
+            "test/route.test.mjs",
+            "test/swarm.test.mjs"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "bin/roleos.mjs",
+          "src/entry.mjs",
+          "src/mission.mjs",
+          "src/run.mjs",
+          "src/session.mjs",
+          "src/trial.mjs",
+          "test/audit-p5.test.mjs",
+          "test/conflicts.test.mjs",
+          "test/dispatch.test.mjs",
+          "test/packs.test.mjs",
+          "test/regression-pack-steps.test.mjs",
+          "test/route.test.mjs",
+          "test/swarm.test.mjs"
+        ]
+      }
+    }
   },
   {
     "id": "RC09",
@@ -196,7 +398,41 @@
     "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output. Transitive closure over the importer graph.",
     "needs_network": false,
     "confidence": "medium",
-    "notes": "Transitive; Python import resolution is heuristic (suffix match of dotted module names), so a handful of edges may differ. Checked: direct importers match rg exactly (cli.py, tests/test_save.py, tests/test_step_engine.py). Atlas reach also follows spawns and tests-as-readers, which this key does not; expect Atlas to name extra files."
+    "notes": "Transitive; Python import resolution is heuristic (suffix match of dotted module names), so a handful of edges may differ. Checked: direct importers match rg exactly (cli.py, tests/test_save.py, tests/test_step_engine.py). Atlas reach also follows spawns and tests-as-readers, which this key does not; expect Atlas to name extra files.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "src/escape_the_valley/__main__.py",
+            "src/escape_the_valley/adapter.py",
+            "src/escape_the_valley/cli.py",
+            "src/escape_the_valley/tui_app.py",
+            "tests/test_adapter.py",
+            "tests/test_backpack_ledger.py",
+            "tests/test_cli_stats.py",
+            "tests/test_save.py",
+            "tests/test_step_engine.py",
+            "tests/test_tui_smoke.py"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "src/escape_the_valley/__main__.py",
+          "src/escape_the_valley/adapter.py",
+          "src/escape_the_valley/cli.py",
+          "src/escape_the_valley/tui_app.py",
+          "tests/test_adapter.py",
+          "tests/test_backpack_ledger.py",
+          "tests/test_cli_stats.py",
+          "tests/test_save.py",
+          "tests/test_step_engine.py",
+          "tests/test_tui_smoke.py"
+        ]
+      }
+    }
   },
   {
     "id": "DR01",
@@ -215,7 +451,27 @@
     "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
     "needs_network": false,
     "confidence": "high",
-    "notes": ""
+    "notes": "",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "daily-refresh.yml",
+            "desktop-ci.yml",
+            "pages.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "daily-refresh.yml",
+          "desktop-ci.yml",
+          "pages.yml"
+        ]
+      }
+    }
   },
   {
     "id": "DR02",
@@ -233,7 +489,25 @@
     "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
     "needs_network": false,
     "confidence": "high",
-    "notes": ""
+    "notes": "",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "daily-refresh.yml",
+            "pages.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "daily-refresh.yml",
+          "pages.yml"
+        ]
+      }
+    }
   },
   {
     "id": "DR03",
@@ -250,7 +524,23 @@
     "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Also asks the runner implicitly; key runner is windows-latest (job build-msix)."
+    "notes": "Also asks the runner implicitly; key runner is windows-latest (job build-msix).",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "desktop-ci.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "desktop-ci.yml"
+        ]
+      }
+    }
   },
   {
     "id": "DR04",
@@ -268,7 +558,25 @@
     "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
     "needs_network": false,
     "confidence": "high",
-    "notes": ""
+    "notes": "",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "ci.yml",
+            "sync.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "ci.yml",
+          "sync.yml"
+        ]
+      }
+    }
   },
   {
     "id": "DR05",
@@ -286,7 +594,25 @@
     "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Trap: release.yml mentions workflow_run three times in comments but does not use the trigger."
+    "notes": "Trap: release.yml mentions workflow_run three times in comments but does not use the trigger.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "publish.yml",
+            "release-binaries.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "publish.yml",
+          "release-binaries.yml"
+        ]
+      }
+    }
   },
   {
     "id": "DR06",
@@ -303,7 +629,23 @@
     "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
     "needs_network": false,
     "confidence": "high",
-    "notes": "A second workflow (docker.yml) also publishes to GHCR but on release:published. Key checked by reading both files."
+    "notes": "A second workflow (docker.yml) also publishes to GHCR but on release:published. Key checked by reading both files.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "docker-publish.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "docker-publish.yml"
+        ]
+      }
+    }
   },
   {
     "id": "DR07",
@@ -321,7 +663,25 @@
     "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Map at this pin was made from an older commit (dd2ed98404); the workflow files named were unchanged between that commit and the pin (checked with git diff)."
+    "notes": "Map at this pin was made from an older commit (dd2ed98404); the workflow files named were unchanged between that commit and the pin (checked with git diff).",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "nightly-train-smoke.yml",
+            "scorecard.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "nightly-train-smoke.yml",
+          "scorecard.yml"
+        ]
+      }
+    }
   },
   {
     "id": "DR08",
@@ -338,7 +698,23 @@
     "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Single-file answer; easy. Map lags the pin by several commits (see DR07)."
+    "notes": "Single-file answer; easy. Map lags the pin by several commits (see DR07).",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "doc-drift.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "doc-drift.yml"
+        ]
+      }
+    }
   },
   {
     "id": "DR09",
@@ -355,7 +731,23 @@
     "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Map at this pin was made from d56f4584da, 10 commits before the pin; the cargo build lines in .github/workflows are identical at both commits (checked with git grep), so the key holds for both. Later offrig trees add a cargo build line to ci.yml; do not re-pin forward without recomputing."
+    "notes": "Map at this pin was made from d56f4584da, 10 commits before the pin; the cargo build lines in .github/workflows are identical at both commits (checked with git grep), so the key holds for both. Later offrig trees add a cargo build line to ci.yml; do not re-pin forward without recomputing.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "release.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "release.yml"
+        ]
+      }
+    }
   },
   {
     "id": "FP01",
@@ -370,7 +762,19 @@
     "key_source": "package.json bin field plus tsup.config.ts (entry list of the second build config: entry [src/cli.ts], banner shebang).",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Two-hop answer (package.json then tsup config). tsup config comments are the only place the CLI build is described."
+    "notes": "Two-hop answer (package.json then tsup config). tsup config comments are the only place the CLI build is described.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": "src/cli.ts"
+        }
+      ],
+      "example": {
+        "file": "src/cli.ts"
+      }
+    }
   },
   {
     "id": "FP02",
@@ -386,7 +790,25 @@
     "key_source": "pyproject.toml [project.scripts] trail = \"escape_the_valley.cli:app\".",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Trap: __main__.py also exists and starts the program; it is not the console-script target."
+    "notes": "Trap: __main__.py also exists and starts the program; it is not the console-script target.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": "src/escape_the_valley/cli.py"
+        },
+        {
+          "kind": "exact",
+          "field": "callable",
+          "expect": "app"
+        }
+      ],
+      "example": {
+        "file": "src/escape_the_valley/cli.py",
+        "callable": "app"
+      }
+    }
   },
   {
     "id": "FP03",
@@ -401,7 +823,19 @@
     "key_source": "bin/roleos.mjs: import { swarmCommand } from \"../src/swarm-cmd.mjs\"; case \"swarm\": await swarmCommand(args).",
     "needs_network": false,
     "confidence": "high",
-    "notes": ""
+    "notes": "",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": "src/swarm-cmd.mjs"
+        }
+      ],
+      "example": {
+        "file": "src/swarm-cmd.mjs"
+      }
+    }
   },
   {
     "id": "FP04",
@@ -417,7 +851,25 @@
     "key_source": "pyproject.toml [project.scripts]: backprop = \"backpropagate.cli:main\" (also backpropagate = same target).",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Map lags the pin; pyproject unchanged across the lag (checked)."
+    "notes": "Map lags the pin; pyproject unchanged across the lag (checked).",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": "backpropagate/cli.py"
+        },
+        {
+          "kind": "exact",
+          "field": "callable",
+          "expect": "main"
+        }
+      ],
+      "example": {
+        "file": "backpropagate/cli.py",
+        "callable": "main"
+      }
+    }
   },
   {
     "id": "FP05",
@@ -435,7 +887,25 @@
     "key_source": "Each packages/*/package.json in the pinned tree (parsed as JSON).",
     "needs_network": false,
     "confidence": "high",
-    "notes": "The cognate package lists it as a devDependency (bundled by tsup); node lists it as a dependency."
+    "notes": "The cognate package lists it as a devDependency (bundled by tsup); node lists it as a dependency.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "packages",
+          "expect": [
+            "packages/cognate",
+            "packages/node"
+          ]
+        }
+      ],
+      "example": {
+        "packages": [
+          "packages/cognate",
+          "packages/node"
+        ]
+      }
+    }
   },
   {
     "id": "FP06",
@@ -454,7 +924,27 @@
     "key_source": "crates/*/Cargo.toml [[bin]] tables in the pinned tree.",
     "needs_network": false,
     "confidence": "high",
-    "notes": "The cli crate offrig-cli produces a binary named offrig, not offrig-cli. Map lags the pin by 10 commits; Cargo manifests checked unchanged for the bin tables."
+    "notes": "The cli crate offrig-cli produces a binary named offrig, not offrig-cli. Map lags the pin by 10 commits; Cargo manifests checked unchanged for the bin tables.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "dict",
+          "field": "binaries",
+          "expect": {
+            "offrig-app": "offrig-app",
+            "offrig-cli": "offrig",
+            "offrig-mcp": "offrig-mcp"
+          }
+        }
+      ],
+      "example": {
+        "binaries": {
+          "offrig-app": "offrig-app",
+          "offrig-cli": "offrig",
+          "offrig-mcp": "offrig-mcp"
+        }
+      }
+    }
   },
   {
     "id": "WR01",
@@ -474,7 +964,33 @@
     "key_source": "rg over the pinned tree: OUT_PATH in site/scripts/fetch-stats.mjs; `import('../data/stats.json')` in the three pages. Excludes the desktop app, which reads a downloaded copy of a different file.",
     "needs_network": false,
     "confidence": "medium",
-    "notes": "fetch-stats.mjs also writes site/public/data/stats.json (a second output); the desktop app and docs mention stats.json too. A page that only fetch()es /data/stats.json at run time (dashboard.astro also does) is counted by its import."
+    "notes": "fetch-stats.mjs also writes site/public/data/stats.json (a second output); the desktop app and docs mention stats.json too. A page that only fetch()es /data/stats.json at run time (dashboard.astro also does) is counted by its import.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "writer",
+          "expect": "site/scripts/fetch-stats.mjs"
+        },
+        {
+          "kind": "path_set",
+          "field": "readers",
+          "expect": [
+            "site/src/pages/dashboard.astro",
+            "site/src/pages/privacy.astro",
+            "site/src/pages/setup.astro"
+          ]
+        }
+      ],
+      "example": {
+        "writer": "site/scripts/fetch-stats.mjs",
+        "readers": [
+          "site/src/pages/dashboard.astro",
+          "site/src/pages/privacy.astro",
+          "site/src/pages/setup.astro"
+        ]
+      }
+    }
   },
   {
     "id": "WR02",
@@ -499,7 +1015,45 @@
     "key_source": "save.py: SAVE_FILE = \"run.json\", save_game writes via _atomic_write_text; importers from the regex import resolver cross-checked with rg for `.save import`.",
     "needs_network": false,
     "confidence": "medium",
-    "notes": "save_game is wrapped by _atomic_write_text; a model may name that helper instead. cli.py imports has_save/load_game, not save_game, at module level but imports save_game inside functions."
+    "notes": "save_game is wrapped by _atomic_write_text; a model may name that helper instead. cli.py imports has_save/load_game, not save_game, at module level but imports save_game inside functions.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "writer.file",
+          "expect": "src/escape_the_valley/save.py"
+        },
+        {
+          "kind": "exact",
+          "field": "writer.function",
+          "expect": "save_game"
+        },
+        {
+          "kind": "path_set",
+          "field": "importers",
+          "expect": [
+            "src/escape_the_valley/adapter.py",
+            "src/escape_the_valley/cli.py",
+            "src/escape_the_valley/engine.py",
+            "src/escape_the_valley/step_engine.py",
+            "src/escape_the_valley/tui_app.py"
+          ]
+        }
+      ],
+      "example": {
+        "writer": {
+          "file": "src/escape_the_valley/save.py",
+          "function": "save_game"
+        },
+        "importers": [
+          "src/escape_the_valley/adapter.py",
+          "src/escape_the_valley/cli.py",
+          "src/escape_the_valley/engine.py",
+          "src/escape_the_valley/step_engine.py",
+          "src/escape_the_valley/tui_app.py"
+        ]
+      }
+    }
   },
   {
     "id": "TG01",
@@ -517,7 +1071,46 @@
     "key_source": "find over packages/*; ci.yml run line \"pnpm test:coverage\" (release.yml runs `pnpm test`).",
     "needs_network": false,
     "confidence": "high",
-    "notes": ""
+    "notes": "",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "packages_without_tests",
+          "expect": [
+            "packages/types"
+          ]
+        },
+        {
+          "kind": "text",
+          "field": "ci_test_command",
+          "require": [
+            "pnpm test:coverage"
+          ],
+          "reject": [
+            "\\bor\\b",
+            "[,;/]",
+            "&&",
+            "\\bpnpm test\\b(?!:)"
+          ],
+          "max_words": 12
+        }
+      ],
+      "example": {
+        "packages_without_tests": [
+          "packages/types"
+        ],
+        "ci_test_command": "pnpm test:coverage"
+      },
+      "scattershot": [
+        {
+          "packages_without_tests": [
+            "packages/types"
+          ],
+          "ci_test_command": "pnpm test, pnpm test:coverage or npm test"
+        }
+      ]
+    }
   },
   {
     "id": "TG02",
@@ -542,7 +1135,49 @@
     "key_source": "find for test_*/ *.test.* / *_test.* files outside test/*.test.mjs (excluding node_modules, atlas, site); rg over .github and package.json for each file name; ci.yml step \"Token-budget harvester tests\" (Node-22 leg only).",
     "needs_network": false,
     "confidence": "medium",
-    "notes": "\"Run by no workflow\" is mechanical here, but the files are runnable by hand (their docstrings say how), so a model may call them not-gaps. Corresponds to the G2 rule in the test-gap fleet check."
+    "notes": "\"Run by no workflow\" is mechanical here, but the files are runnable by hand (their docstrings say how), so a model may call them not-gaps. Corresponds to the G2 rule in the test-gap fleet check.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "not_run_by_any_workflow",
+          "expect": [
+            "tools/conformance-dataset/live-tools/test_prep_inputs_empty.mjs",
+            "tools/conformance-dataset/test_certify_ship_stamp.py",
+            "tools/conformance-dataset/test_empty_write_gate.py",
+            "tools/conformance-dataset/test_ood_floor_gate.mjs"
+          ]
+        },
+        {
+          "kind": "path",
+          "field": "run_by_workflow.file",
+          "expect": "tools/token-budget-dataset/test_harvester.py"
+        },
+        {
+          "kind": "workflow",
+          "field": "run_by_workflow.workflow",
+          "expect": "ci.yml"
+        },
+        {
+          "kind": "path",
+          "field": "run_by_workflow.working_directory",
+          "expect": "tools/token-budget-dataset"
+        }
+      ],
+      "example": {
+        "not_run_by_any_workflow": [
+          "tools/conformance-dataset/live-tools/test_prep_inputs_empty.mjs",
+          "tools/conformance-dataset/test_certify_ship_stamp.py",
+          "tools/conformance-dataset/test_empty_write_gate.py",
+          "tools/conformance-dataset/test_ood_floor_gate.mjs"
+        ],
+        "run_by_workflow": {
+          "file": "tools/token-budget-dataset/test_harvester.py",
+          "workflow": "ci.yml",
+          "working_directory": "tools/token-budget-dataset"
+        }
+      }
+    }
   },
   {
     "id": "TG03",
@@ -567,7 +1202,47 @@
     "key_source": "Forward import closure from tests/**/*.ts (own resolver) gives the three files; rg for `spawnSync('node', [BIN` / dist/cli.js in tests/ gives the four spawning tests; vitest.config.ts comments confirm.",
     "needs_network": false,
     "confidence": "medium",
-    "notes": "Known-corner for Atlas: a test that spawns a built binary. The answer is also written in vitest.config.ts comments inside the repo (contamination). The `exercised_via` list is my reading of which tests spawn the CLI; verify before pinning the grader."
+    "notes": "Known-corner for Atlas: a test that spawns a built binary. The answer is also written in vitest.config.ts comments inside the repo (contamination). The `exercised_via` list is my reading of which tests spawn the CLI; verify before pinning the grader.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "unimported_by_tests",
+          "expect": [
+            "src/cli.ts",
+            "src/commands/manifest-cmd.ts",
+            "src/commands/verify.ts"
+          ]
+        },
+        {
+          "kind": "path_subset_between",
+          "field": "exercised_via",
+          "must": [
+            "tests/manifest-cmd.test.ts",
+            "tests/verify.test.ts"
+          ],
+          "within": [
+            "tests/exit-codes.test.ts",
+            "tests/json-output.test.ts",
+            "tests/manifest-cmd.test.ts",
+            "tests/verify.test.ts"
+          ]
+        }
+      ],
+      "example": {
+        "unimported_by_tests": [
+          "src/cli.ts",
+          "src/commands/manifest-cmd.ts",
+          "src/commands/verify.ts"
+        ],
+        "exercised_via": [
+          "tests/exit-codes.test.ts",
+          "tests/json-output.test.ts",
+          "tests/manifest-cmd.test.ts",
+          "tests/verify.test.ts"
+        ]
+      }
+    }
   },
   {
     "id": "WB01",
@@ -582,7 +1257,20 @@
     "key_source": "pages.yml pins setup-node node-version 22; site/package.json astro ^7.3.3 resolves to astro 7.3.3 (engines.node >=22.12.0, satisfied by Node 22); site/package-lock.json holds a linux-x64 binding for every parent that lists one (own check: script lockbind.cjs finds no parent with a missing linux-x64 binding).",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Negative control: the same-shaped door was red until 2026-09-30 15:37Z and is fixed at this pin (fix commits cd9c0defa1 and bb23a6472c). The pinned commit has an Atlas map (engine 1.24.0, made from 8561c6d79d; map-to-pin lag of a few commits, none touching pages.yml or site/package-lock.json beyond the devalue lockfile bump f5427c34c0, which changes no binding entry; unverified in detail). Tests whether Atlas D1/D2 notices cause false alarms. Answer is known only from a lockfile scan and engines fields, never from Atlas."
+    "notes": "Negative control: the same-shaped door was red until 2026-09-30 15:37Z and is fixed at this pin (fix commits cd9c0defa1 and bb23a6472c). The pinned commit has an Atlas map (engine 1.24.0, made from 8561c6d79d; map-to-pin lag of a few commits, none touching pages.yml or site/package-lock.json beyond the devalue lockfile bump f5427c34c0, which changes no binding entry; unverified in detail). Tests whether Atlas D1/D2 notices cause false alarms. Answer is known only from a lockfile scan and engines fields, never from Atlas.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "bool",
+          "field": "will_break",
+          "expect": false
+        }
+      ],
+      "example": {
+        "will_break": false,
+        "evidence": "pages.yml pins Node 22, which astro 7.3.3 accepts, and the lock holds every linux-x64 binding."
+      }
+    }
   },
   {
     "id": "CF01",
@@ -599,7 +1287,45 @@
     "key_source": "Fix commit b6ae8be4aa (PR #7) on mcp-tool-shop-org/portlight: diff of src/portlight/stress/invariants.py replaces sum(c.quantity) with cargo_weight(); commit message states the failure was intermittent.",
     "needs_network": false,
     "confidence": "medium",
-    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). Failing run commit is 9b02494cca (a CI-config-only merge); the cause is a flaky invariant, not the commit. Map at the pin was made from 7c76f54ff4 (engine stamp absent, i.e. pre-1.24). Hard task: needs reasoning over a game-rules function, not config. Atlas can at most name tests that reach the file; the experiment should expect no benefit. The fix commit message (future history) contains the answer: hide later history."
+    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). Failing run commit is 9b02494cca (a CI-config-only merge); the cause is a flaky invariant, not the commit. Map at the pin was made from 7c76f54ff4 (engine stamp absent, i.e. pre-1.24). Hard task: needs reasoning over a game-rules function, not config. Atlas can at most name tests that reach the file; the experiment should expect no benefit. The fix commit message (future history) contains the answer: hide later history.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": "src/portlight/stress/invariants.py"
+        },
+        {
+          "kind": "exact",
+          "field": "function",
+          "expect": "_check_cargo_within_capacity"
+        },
+        {
+          "kind": "text",
+          "field": "defect",
+          "require": [
+            "weight"
+          ],
+          "reject": [
+            "\\b(the test|the scenario|the seed)\\b[^.]{0,30}\\b(is|was) (wrong|at fault|buggy)",
+            "\\bor\\b[^.]{0,60}\\b(scenario|test|seed|flak)"
+          ],
+          "max_words": 40
+        }
+      ],
+      "example": {
+        "file": "src/portlight/stress/invariants.py",
+        "function": "_check_cargo_within_capacity",
+        "defect": "It sums cargo quantity instead of cargo weight, so it disagrees with buy(), which enforces the hold's weight capacity."
+      },
+      "scattershot": [
+        {
+          "file": "src/portlight/stress/invariants.py",
+          "function": "_check_cargo_within_capacity",
+          "defect": "Either the check compares quantity against weight, or the scenario's random seed or the test itself is wrong."
+        }
+      ]
+    }
   },
   {
     "id": "CF02",
@@ -616,7 +1342,47 @@
     "key_source": "Fix PR #14 (merge 6c5ebe83b8) changes one line of .github/workflows/pages.yml; pinned tree line 28 reads `node-version: 20` and site/package.json declares astro ^7.3.3 (engines.node >=22.12.0 from the lockfile).",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). D1 class (toolchain). Map at the pin was made from d4f816a715 and carries no engine stamp, so the committed map holds no D1 finding; Atlas 1.24+ would raise it only if the map is regenerated or `atlas_check_change` recomputes it from the tree (verify). Commit title of the fix names the answer in later history."
+    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). D1 class (toolchain). Map at the pin was made from d4f816a715 and carries no engine stamp, so the committed map holds no D1 finding; Atlas 1.24+ would raise it only if the map is regenerated or `atlas_check_change` recomputes it from the tree (verify). Commit title of the fix names the answer in later history.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": ".github/workflows/pages.yml"
+        },
+        {
+          "kind": "line",
+          "field": "line",
+          "expect": 28,
+          "tolerance": 0
+        },
+        {
+          "kind": "text",
+          "field": "change",
+          "require": [
+            "\\b(2[2-9]|[3-9]\\d)(\\.\\d+)*\\b"
+          ],
+          "reject": [
+            "\\b\\d+(\\.\\d+)*\\s*(or|/|and)\\s*\\d+(\\.\\d+)*\\b",
+            "(?<![\\d.])(18|19|21)(?![\\d])",
+            "\\b(downgrade|older astro|astro@?\\s*[1-6]\\b)"
+          ],
+          "max_words": 25
+        }
+      ],
+      "example": {
+        "file": ".github/workflows/pages.yml",
+        "line": 28,
+        "change": "node-version: 20 -> 22"
+      },
+      "scattershot": [
+        {
+          "file": ".github/workflows/pages.yml",
+          "line": 28,
+          "change": "set node-version to 22 or 24, or downgrade astro"
+        }
+      ]
+    }
   },
   {
     "id": "CF03",
@@ -633,7 +1399,47 @@
     "key_source": "Fix commit bf56168083 (PR #33) changes one line of .github/workflows/pages.yml; pinned tree line 28 `node-version: 20`; site astro ^7.3.3.",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). Same cause and same shape as CF02 (correlated pair; consider keeping only one in the primary analysis). Map made from f8fe895f7a, no engine stamp."
+    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). Same cause and same shape as CF02 (correlated pair; consider keeping only one in the primary analysis). Map made from f8fe895f7a, no engine stamp.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": ".github/workflows/pages.yml"
+        },
+        {
+          "kind": "line",
+          "field": "line",
+          "expect": 28,
+          "tolerance": 0
+        },
+        {
+          "kind": "text",
+          "field": "change",
+          "require": [
+            "\\b(2[2-9]|[3-9]\\d)(\\.\\d+)*\\b"
+          ],
+          "reject": [
+            "\\b\\d+(\\.\\d+)*\\s*(or|/|and)\\s*\\d+(\\.\\d+)*\\b",
+            "(?<![\\d.])(18|19|21)(?![\\d])",
+            "\\b(downgrade|older astro|astro@?\\s*[1-6]\\b)"
+          ],
+          "max_words": 25
+        }
+      ],
+      "example": {
+        "file": ".github/workflows/pages.yml",
+        "line": 28,
+        "change": "node-version: 20 -> 22"
+      },
+      "scattershot": [
+        {
+          "file": ".github/workflows/pages.yml",
+          "line": 28,
+          "change": "set node-version to 22 or 24, or downgrade astro"
+        }
+      ]
+    }
   },
   {
     "id": "CF04",
@@ -657,7 +1463,62 @@
     "key_source": "Own scan of site/package-lock.json at the pin (lockbind.cjs: parents whose optionalDependencies name a linux-x64 binding absent from the lock) finds exactly these six; fix commits cd9c0defa1 (satteri only) and bb23a6472c (\"restore every missing native binding\") on shipcheck confirm.",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). D2 class. The run named in the question executed at 875a8ae4a0 (no map yet); the pin is main at triage time, same lockfile. Two-stage history: the first fix covered only satteri and main stayed red (run 36736674786), so a model that stops at the named package gets the secondary set wrong. Map made from 875a8ae4a0, no engine stamp."
+    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). D2 class. The run named in the question executed at 875a8ae4a0 (no map yet); the pin is main at triage time, same lockfile. Two-stage history: the first fix covered only satteri and main stayed red (run 36736674786), so a model that stops at the named package gets the secondary set wrong. Map made from 875a8ae4a0, no engine stamp.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": "site/package-lock.json"
+        },
+        {
+          "kind": "text",
+          "field": "cause",
+          "require": [
+            "(linux|binding|optional)"
+          ],
+          "reject": [
+            "\\bor\\b[^.]{0,60}\\b(node(\\.js)? version|network|cache|registry)"
+          ],
+          "max_words": 60
+        }
+      ],
+      "secondary": [
+        {
+          "kind": "set_recall_precision",
+          "field": "packages",
+          "expect": [
+            "@astrojs/compiler-binding",
+            "@tailwindcss/oxide",
+            "esbuild",
+            "pagefind",
+            "satteri",
+            "sharp"
+          ]
+        }
+      ],
+      "example": {
+        "file": "site/package-lock.json",
+        "cause": "The lockfile was written on Windows and lacks the optional linux-x64 native bindings, and npm ci installs it as written.",
+        "packages": [
+          "@astrojs/compiler-binding",
+          "@tailwindcss/oxide",
+          "esbuild",
+          "pagefind",
+          "satteri",
+          "sharp"
+        ]
+      },
+      "scattershot": [
+        {
+          "file": "site/package-lock.json",
+          "cause": "A missing linux binding, or the Node version is unsupported, or the npm cache or registry failed.",
+          "packages": [
+            "satteri"
+          ]
+        }
+      ]
+    }
   },
   {
     "id": "CF05",
@@ -673,7 +1534,38 @@
     "key_source": "Run annotations (gh api .../check-runs/<id>/annotations); the repo commit 8228b7d631 \"drop master from workflow triggers now that the default is main\"; the run on the same commit passed after the Director changed the environment setting (run 36735255854, workflow_dispatch, 2026-09-30).",
     "needs_network": false,
     "confidence": "medium",
-    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). NEGATIVE CONTROL for Atlas: the cause is a GitHub setting, not in any file; Atlas is offline by design. Tests whether the MCP arm wastes tokens or overclaims. Correct answer is \"not fixable in files\". The settings fix has no commit; evidence is the annotation text and the passing re-run."
+    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). NEGATIVE CONTROL for Atlas: the cause is a GitHub setting, not in any file; Atlas is offline by design. Tests whether the MCP arm wastes tokens or overclaims. Correct answer is \"not fixable in files\". The settings fix has no commit; evidence is the annotation text and the passing re-run.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "bool",
+          "field": "fixable_in_repo_files",
+          "expect": false
+        },
+        {
+          "kind": "text",
+          "field": "cause",
+          "require": [
+            "environment",
+            "(branch|polic|protection)"
+          ],
+          "reject": [
+            "\\bor\\b[^.]{0,60}\\b(not enabled|token|permission)"
+          ],
+          "max_words": 60
+        }
+      ],
+      "example": {
+        "cause": "The github-pages environment's deployment branch policy does not allow main, a repository setting.",
+        "fixable_in_repo_files": false
+      },
+      "scattershot": [
+        {
+          "cause": "The github-pages environment protection rules, or Pages not enabled, or the workflow's token permissions.",
+          "fixable_in_repo_files": false
+        }
+      ]
+    }
   },
   {
     "id": "CF06",
@@ -689,7 +1581,38 @@
     "key_source": "Run annotations (check-runs API) for job `deploy` of run 35260155076; same environment-policy cause as CF05, confirmed in the triage table.",
     "needs_network": false,
     "confidence": "medium",
-    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). Same cause and same answer as CF05 (correlated twin: count as one if the analysis assumes independence). The failing run executed at d888f86c72, earlier than the pin; log text is gone (gh run view --log-failed answers \"log not found\"), only annotations survive."
+    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). Same cause and same answer as CF05 (correlated twin: count as one if the analysis assumes independence). The failing run executed at d888f86c72, earlier than the pin; log text is gone (gh run view --log-failed answers \"log not found\"), only annotations survive.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "bool",
+          "field": "fixable_in_repo_files",
+          "expect": false
+        },
+        {
+          "kind": "text",
+          "field": "cause",
+          "require": [
+            "environment",
+            "(branch|polic|protection)"
+          ],
+          "reject": [
+            "\\bor\\b[^.]{0,60}\\b(not enabled|token|permission)"
+          ],
+          "max_words": 60
+        }
+      ],
+      "example": {
+        "cause": "The github-pages environment's deployment branch policy does not allow main, a repository setting.",
+        "fixable_in_repo_files": false
+      },
+      "scattershot": [
+        {
+          "cause": "The github-pages environment protection rules, or Pages not enabled, or the workflow's token permissions.",
+          "fixable_in_repo_files": false
+        }
+      ]
+    }
   },
   {
     "id": "CF07",
@@ -705,7 +1628,38 @@
     "key_source": "Run log (gh run view 36085870892 --log-failed) says status 404 and \"Ensure GitHub Pages has been enabled\"; triage table row for mcp-tool-registry; the Pages API answered 404 at triage time.",
     "needs_network": false,
     "confidence": "medium",
-    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). NEGATIVE CONTROL for Atlas (a repository setting). The pin is the child of the failing run commit and is the commit that first added the Atlas map (engine stamp absent)."
+    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). NEGATIVE CONTROL for Atlas (a repository setting). The pin is the child of the failing run commit and is the commit that first added the Atlas map (engine stamp absent).",
+    "grade": {
+      "checks": [
+        {
+          "kind": "bool",
+          "field": "fixable_in_repo_files",
+          "expect": false
+        },
+        {
+          "kind": "text",
+          "field": "cause",
+          "require": [
+            "pages",
+            "(not enabled|enable|404)"
+          ],
+          "reject": [
+            "\\bor\\b[^.]{0,60}\\b(environment|branch polic|protection|token|permission)"
+          ],
+          "max_words": 60
+        }
+      ],
+      "example": {
+        "cause": "GitHub Pages is not enabled for the repository, so creating the deployment returns 404.",
+        "fixable_in_repo_files": false
+      },
+      "scattershot": [
+        {
+          "cause": "Pages is not enabled, or the environment protection rules, or the token lacks permissions.",
+          "fixable_in_repo_files": false
+        }
+      ]
+    }
   },
   {
     "id": "CF09",
@@ -725,7 +1679,52 @@
     "key_source": "Workflow file and package-lock.json at the pin; fix PR diff (the PR removes exactly this leg or pin). brand#87 changes `node-version: [20, 22, 24]` to [22, 24].",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Found by Atlas 1.24.0 D1, then repaired by the Director's call (the fix PR bodies say so): selection bias toward Atlas-favourable tasks, and the committed map at the pin ALREADY RECORDS the D1 finding (atlas/structure.json doors[0].findings, rule D1), so the answer is in the checkout for any arm that reads atlas/. Key independently verified from package-lock.json engines.node (vitest 5.0.0: ^22.12.0 || ^24.0.0 || >=26.0.0; c8 12.0.0: ^20.19.0 || ^22.12.0 || >=23) and the fix PR diff. CI stayed green on these doors (the tool declares the range but does not refuse to start), so there is no failing run: the task is \"what will break/ is mismatched\", not \"why did it fail\"."
+    "notes": "Found by Atlas 1.24.0 D1, then repaired by the Director's call (the fix PR bodies say so): selection bias toward Atlas-favourable tasks, and the committed map at the pin ALREADY RECORDS the D1 finding (atlas/structure.json doors[0].findings, rule D1), so the answer is in the checkout for any arm that reads atlas/. Key independently verified from package-lock.json engines.node (vitest 5.0.0: ^22.12.0 || ^24.0.0 || >=26.0.0; c8 12.0.0: ^20.19.0 || ^22.12.0 || >=23) and the fix PR diff. CI stayed green on these doors (the tool declares the range but does not refuse to start), so there is no failing run: the task is \"what will break/ is mismatched\", not \"why did it fail\".",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": ".github/workflows/ci.yml"
+        },
+        {
+          "kind": "exact",
+          "field": "job",
+          "expect": "lint-test-build"
+        },
+        {
+          "kind": "line",
+          "field": "line",
+          "expect": 80,
+          "tolerance": 1
+        },
+        {
+          "kind": "node_version",
+          "field": "node",
+          "expect": "20"
+        },
+        {
+          "kind": "exact",
+          "field": "tool",
+          "expect": "vitest"
+        }
+      ],
+      "secondary": [
+        {
+          "kind": "exact",
+          "field": "requires",
+          "expect": "^22.12.0 || ^24.0.0 || >=26.0.0"
+        }
+      ],
+      "example": {
+        "file": ".github/workflows/ci.yml",
+        "job": "lint-test-build",
+        "line": 80,
+        "node": "20",
+        "tool": "vitest",
+        "requires": "^22.12.0 || ^24.0.0 || >=26.0.0"
+      }
+    }
   },
   {
     "id": "CF10",
@@ -745,7 +1744,52 @@
     "key_source": "Workflow file and package-lock.json at the pin; fix PR diff (the PR removes exactly this leg or pin). research-os#35 changes `node-version: [20, 22]` to [22].",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Found by Atlas 1.24.0 D1, then repaired by the Director's call (the fix PR bodies say so): selection bias toward Atlas-favourable tasks, and the committed map at the pin ALREADY RECORDS the D1 finding (atlas/structure.json doors[0].findings, rule D1), so the answer is in the checkout for any arm that reads atlas/. Key independently verified from package-lock.json engines.node (vitest 5.0.0: ^22.12.0 || ^24.0.0 || >=26.0.0; c8 12.0.0: ^20.19.0 || ^22.12.0 || >=23) and the fix PR diff. CI stayed green on these doors (the tool declares the range but does not refuse to start), so there is no failing run: the task is \"what will break/ is mismatched\", not \"why did it fail\"."
+    "notes": "Found by Atlas 1.24.0 D1, then repaired by the Director's call (the fix PR bodies say so): selection bias toward Atlas-favourable tasks, and the committed map at the pin ALREADY RECORDS the D1 finding (atlas/structure.json doors[0].findings, rule D1), so the answer is in the checkout for any arm that reads atlas/. Key independently verified from package-lock.json engines.node (vitest 5.0.0: ^22.12.0 || ^24.0.0 || >=26.0.0; c8 12.0.0: ^20.19.0 || ^22.12.0 || >=23) and the fix PR diff. CI stayed green on these doors (the tool declares the range but does not refuse to start), so there is no failing run: the task is \"what will break/ is mismatched\", not \"why did it fail\".",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": ".github/workflows/ci.yml"
+        },
+        {
+          "kind": "exact",
+          "field": "job",
+          "expect": "verify"
+        },
+        {
+          "kind": "line",
+          "field": "line",
+          "expect": 22,
+          "tolerance": 1
+        },
+        {
+          "kind": "node_version",
+          "field": "node",
+          "expect": "20"
+        },
+        {
+          "kind": "exact",
+          "field": "tool",
+          "expect": "vitest"
+        }
+      ],
+      "secondary": [
+        {
+          "kind": "exact",
+          "field": "requires",
+          "expect": "^22.12.0 || ^24.0.0 || >=26.0.0"
+        }
+      ],
+      "example": {
+        "file": ".github/workflows/ci.yml",
+        "job": "verify",
+        "line": 22,
+        "node": "20",
+        "tool": "vitest",
+        "requires": "^22.12.0 || ^24.0.0 || >=26.0.0"
+      }
+    }
   },
   {
     "id": "CF11",
@@ -765,7 +1809,52 @@
     "key_source": "Workflow file and package-lock.json at the pin; fix PR diff (the PR removes exactly this leg or pin). research-packs#15 removes the second setup-node (node-version 20) and keeps the Node 22 one.",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Found by Atlas 1.24.0 D1, then repaired by the Director's call (the fix PR bodies say so): selection bias toward Atlas-favourable tasks, and the committed map at the pin ALREADY RECORDS the D1 finding (atlas/structure.json doors[0].findings, rule D1), so the answer is in the checkout for any arm that reads atlas/. Key independently verified from package-lock.json engines.node (vitest 5.0.0: ^22.12.0 || ^24.0.0 || >=26.0.0; c8 12.0.0: ^20.19.0 || ^22.12.0 || >=23) and the fix PR diff. CI stayed green on these doors (the tool declares the range but does not refuse to start), so there is no failing run: the task is \"what will break/ is mismatched\", not \"why did it fail\"."
+    "notes": "Found by Atlas 1.24.0 D1, then repaired by the Director's call (the fix PR bodies say so): selection bias toward Atlas-favourable tasks, and the committed map at the pin ALREADY RECORDS the D1 finding (atlas/structure.json doors[0].findings, rule D1), so the answer is in the checkout for any arm that reads atlas/. Key independently verified from package-lock.json engines.node (vitest 5.0.0: ^22.12.0 || ^24.0.0 || >=26.0.0; c8 12.0.0: ^20.19.0 || ^22.12.0 || >=23) and the fix PR diff. CI stayed green on these doors (the tool declares the range but does not refuse to start), so there is no failing run: the task is \"what will break/ is mismatched\", not \"why did it fail\".",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": ".github/workflows/verify.yml"
+        },
+        {
+          "kind": "exact",
+          "field": "job",
+          "expect": "verify"
+        },
+        {
+          "kind": "line",
+          "field": "line",
+          "expect": 37,
+          "tolerance": 1
+        },
+        {
+          "kind": "node_version",
+          "field": "node",
+          "expect": "20"
+        },
+        {
+          "kind": "exact",
+          "field": "tool",
+          "expect": "vitest"
+        }
+      ],
+      "secondary": [
+        {
+          "kind": "exact",
+          "field": "requires",
+          "expect": "^22.12.0 || ^24.0.0 || >=26.0.0"
+        }
+      ],
+      "example": {
+        "file": ".github/workflows/verify.yml",
+        "job": "verify",
+        "line": 37,
+        "node": "20",
+        "tool": "vitest",
+        "requires": "^22.12.0 || ^24.0.0 || >=26.0.0"
+      }
+    }
   },
   {
     "id": "CF12",
@@ -785,7 +1874,52 @@
     "key_source": "Workflow file and package-lock.json at the pin; fix PR diff (the PR removes exactly this leg or pin). rig-bridge#22 moves the CI job from 20.11.0 to 22 (release.yml too).",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Found by Atlas 1.24.0 D1, then repaired by the Director's call (the fix PR bodies say so): selection bias toward Atlas-favourable tasks, and the committed map at the pin ALREADY RECORDS the D1 finding (atlas/structure.json doors[0].findings, rule D1), so the answer is in the checkout for any arm that reads atlas/. Key independently verified from package-lock.json engines.node (vitest 5.0.0: ^22.12.0 || ^24.0.0 || >=26.0.0; c8 12.0.0: ^20.19.0 || ^22.12.0 || >=23) and the fix PR diff. CI stayed green on these doors (the tool declares the range but does not refuse to start), so there is no failing run: the task is \"what will break/ is mismatched\", not \"why did it fail\"."
+    "notes": "Found by Atlas 1.24.0 D1, then repaired by the Director's call (the fix PR bodies say so): selection bias toward Atlas-favourable tasks, and the committed map at the pin ALREADY RECORDS the D1 finding (atlas/structure.json doors[0].findings, rule D1), so the answer is in the checkout for any arm that reads atlas/. Key independently verified from package-lock.json engines.node (vitest 5.0.0: ^22.12.0 || ^24.0.0 || >=26.0.0; c8 12.0.0: ^20.19.0 || ^22.12.0 || >=23) and the fix PR diff. CI stayed green on these doors (the tool declares the range but does not refuse to start), so there is no failing run: the task is \"what will break/ is mismatched\", not \"why did it fail\".",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": ".github/workflows/ci.yml"
+        },
+        {
+          "kind": "exact",
+          "field": "job",
+          "expect": "build-and-test"
+        },
+        {
+          "kind": "line",
+          "field": "line",
+          "expect": 54,
+          "tolerance": 1
+        },
+        {
+          "kind": "node_version",
+          "field": "node",
+          "expect": "20.11.0"
+        },
+        {
+          "kind": "exact",
+          "field": "tool",
+          "expect": "vitest"
+        }
+      ],
+      "secondary": [
+        {
+          "kind": "exact",
+          "field": "requires",
+          "expect": "^22.12.0 || ^24.0.0 || >=26.0.0"
+        }
+      ],
+      "example": {
+        "file": ".github/workflows/ci.yml",
+        "job": "build-and-test",
+        "line": 54,
+        "node": "20.11.0",
+        "tool": "vitest",
+        "requires": "^22.12.0 || ^24.0.0 || >=26.0.0"
+      }
+    }
   },
   {
     "id": "CF13",
@@ -805,6 +1939,51 @@
     "key_source": "Workflow file and package-lock.json at the pin; fix PR diff (the PR removes exactly this leg or pin). sovereign#55 changes `node: [18, 20]` to [20, 22]; only the 18 leg is excluded by c8 12 (setup-node 20 resolves to a 20.x that c8 accepts).",
     "needs_network": false,
     "confidence": "high",
-    "notes": "Found by Atlas 1.24.0 D1, then repaired by the Director's call (the fix PR bodies say so): selection bias toward Atlas-favourable tasks, and the committed map at the pin ALREADY RECORDS the D1 finding (atlas/structure.json doors[0].findings, rule D1), so the answer is in the checkout for any arm that reads atlas/. Key independently verified from package-lock.json engines.node (vitest 5.0.0: ^22.12.0 || ^24.0.0 || >=26.0.0; c8 12.0.0: ^20.19.0 || ^22.12.0 || >=23) and the fix PR diff. CI stayed green on these doors (the tool declares the range but does not refuse to start), so there is no failing run: the task is \"what will break/ is mismatched\", not \"why did it fail\"."
+    "notes": "Found by Atlas 1.24.0 D1, then repaired by the Director's call (the fix PR bodies say so): selection bias toward Atlas-favourable tasks, and the committed map at the pin ALREADY RECORDS the D1 finding (atlas/structure.json doors[0].findings, rule D1), so the answer is in the checkout for any arm that reads atlas/. Key independently verified from package-lock.json engines.node (vitest 5.0.0: ^22.12.0 || ^24.0.0 || >=26.0.0; c8 12.0.0: ^20.19.0 || ^22.12.0 || >=23) and the fix PR diff. CI stayed green on these doors (the tool declares the range but does not refuse to start), so there is no failing run: the task is \"what will break/ is mismatched\", not \"why did it fail\".",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": ".github/workflows/ci.yml"
+        },
+        {
+          "kind": "exact",
+          "field": "job",
+          "expect": "test"
+        },
+        {
+          "kind": "line",
+          "field": "line",
+          "expect": 44,
+          "tolerance": 1
+        },
+        {
+          "kind": "node_version",
+          "field": "node",
+          "expect": "18"
+        },
+        {
+          "kind": "exact",
+          "field": "tool",
+          "expect": "c8"
+        }
+      ],
+      "secondary": [
+        {
+          "kind": "exact",
+          "field": "requires",
+          "expect": "^20.19.0 || ^22.12.0 || >=23"
+        }
+      ],
+      "example": {
+        "file": ".github/workflows/ci.yml",
+        "job": "test",
+        "line": 44,
+        "node": "18",
+        "tool": "c8",
+        "requires": "^20.19.0 || ^22.12.0 || >=23"
+      }
+    }
   }
 ]

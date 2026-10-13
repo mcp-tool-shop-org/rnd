@@ -11,6 +11,15 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.7.1.0] - 2026-10-13
+
+- experiment: e5, collected from interlock (run-b at 6e8cab6, run-c at cc91aed)
+- entry: E5 card complete (gemma4:31b 86016, granite4.1:30b 43008, llama3.1:8b 131072)
+- newsletter issue 5: The card is full
+- brief: PAIR and interlock, E5 row updated
+- Updated `2026-10-13-e5-fill-card`: E5 — how much context each local model holds on the 5090
+- Added experiment `e5`
+
 ## [1.1.7.0.0] - 2026-10-13
 
 - rnd watch: what's new on the watchlist's sources since the last check (releases, commits, Hugging Face models, Atom/RSS feeds, release-notes pages)

@@ -64,7 +64,7 @@ Read against PAIR's list of limits, interlock's experiments measure exactly what
 | PAIR's ranking doesn't see… | …interlock measured |
 |---|---|
 | whether a model is warm, and what a cold load costs | **E1:** what a cold load costs on each Intel device, in units of that device's own warm call, and when a model should stay resident |
-| capacity: how much context a model can hold before it spills out of VRAM | **E5:** for each local 5090 model, the largest context window that stays fully resident. Three models are confirmed at their full trained window so far, and three are being re-measured |
+| capacity: how much context a model can hold before it spills out of VRAM | **E5:** for each of six local 5090 models, the largest context window that stays fully resident. Four hold their full trained window; gemma4:31b holds 86016 of its 262144, and granite4.1:30b 43008 of its 131072 |
 | whether two workloads slow each other down | **E4b:** running the 5090 beside the NPU or the iGPU changes its decode rate by under 1.4%, and the Intel devices' latency by at most about 5%, all inside a pre-registered ±10% band ([the E4b results](/rnd/newsletter/issue-04/)) |
 
 E4b is the clearest example. PAIR's whole model assumes a busy GPU is a slower GPU, which is reasonable for one
@@ -99,9 +99,9 @@ other's way? Within the noise we fixed in advance, they don't. So a router can t
 ## Caveats
 
 - **PAIR hasn't run here.** Everything about it comes from its README and architecture document at v1.0.0.
-- **interlock's figures come from its own committed receipts.** E5's figures are partial: three models are
-  confirmed, and three are being re-measured after the spill rule was fixed. E1's per-device numbers are in
-  interlock's receipts and aren't repeated here.
+- **interlock's figures come from its own committed receipts.** E5's card was completed on 13 October, after
+  the spill rule was fixed and three models re-measured; rnd keeps trimmed copies of both runs. E1's per-device
+  numbers are in interlock's receipts and aren't repeated here.
 
 ## Sources
 

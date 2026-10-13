@@ -1,0 +1,822 @@
+{
+  "provenance": {
+    "repo": "mcp-tool-shop-org/interlock",
+    "source": "receipts/e5-2026-10-13b.jsonl",
+    "sha256": "1a2147ad1bf667165c25906dd2dca8ae43625ba97e57d3a8cbf0138303984d3a",
+    "receipt_commit": "6e8cab6f20c647eff0847912364ba2695f6f1757",
+    "harness_commit": "d899ac0a629d5ffae13f602eae3aef4138ba802f",
+    "run_id": "e5-2026-10-13b"
+  },
+  "date": "2026-10-13",
+  "device": "5090",
+  "engine": {
+    "ollama": "0.35.1",
+    "nvidia_driver": "617.42",
+    "cuda": "driver 13.4"
+  },
+  "rule": {
+    "abort_mib": 30500,
+    "grain": 2048,
+    "spill_shared_mib": 256,
+    "spill_prompt_ratio": 0.5,
+    "shared_gate_from_mib": null
+  },
+  "models": [
+    {
+      "model": "gemma4:31b",
+      "quant": "Q4_K_M",
+      "digest": "6316f0629137b426c9d9b853ffc4c8209589f30ee39aebede6285096c0ff47e7",
+      "result": {
+        "max_resident_ctx": 14336,
+        "limit": "margin",
+        "peak_mib": 24900,
+        "shared_mib": 1327,
+        "prompt_tok_s": 3241.0
+      },
+      "trained_cap": 262144,
+      "floor": {
+        "ctx": 2048,
+        "shared_mib": 1278,
+        "prompt_tok_s": 2044.4,
+        "cuda_host_sum_mib": 1128.02,
+        "check": "ok"
+      },
+      "weights_mib": 18949,
+      "idle_mib": 2109,
+      "flash_attention": "enabled",
+      "kv_cache_type": "f16",
+      "search": [
+        [
+          "load",
+          2048,
+          23291,
+          1281,
+          310.9,
+          "resident"
+        ],
+        [
+          "confirm",
+          2048,
+          23270,
+          1278,
+          2044.4,
+          "confirmed"
+        ],
+        [
+          "load",
+          262144,
+          306882,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          131072,
+          163970,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          65536,
+          92514,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          32768,
+          56786,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          16384,
+          38922,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          8192,
+          24600,
+          1324,
+          284.1,
+          "resident"
+        ],
+        [
+          "load",
+          12288,
+          24821,
+          1328,
+          271.6,
+          "resident"
+        ],
+        [
+          "load",
+          14336,
+          24884,
+          1327,
+          327.5,
+          "resident"
+        ],
+        [
+          "confirm",
+          14336,
+          24900,
+          1327,
+          3241.0,
+          "confirmed"
+        ]
+      ]
+    },
+    {
+      "model": "granite4.1:30b",
+      "quant": "Q4_K_M",
+      "digest": "3f3e5df8a021439fd6f867a0e526bdc303cac79c811201cb6bac193298cb9fcd",
+      "result": {
+        "max_resident_ctx": 30720,
+        "limit": "margin",
+        "peak_mib": 27302,
+        "shared_mib": 512,
+        "prompt_tok_s": 3081.1
+      },
+      "trained_cap": 131072,
+      "floor": {
+        "ctx": 2048,
+        "shared_mib": 486,
+        "prompt_tok_s": 3630.5,
+        "cuda_host_sum_mib": 339.95,
+        "check": "ok"
+      },
+      "weights_mib": 16681,
+      "idle_mib": 2169,
+      "flash_attention": "enabled",
+      "kv_cache_type": "f16",
+      "search": [
+        [
+          "load",
+          2048,
+          20078,
+          486,
+          457.9,
+          "resident"
+        ],
+        [
+          "confirm",
+          2048,
+          20106,
+          486,
+          3630.5,
+          "confirmed"
+        ],
+        [
+          "load",
+          131072,
+          97442,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          65536,
+          58146,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          32768,
+          38498,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          16384,
+          23908,
+          532,
+          445.7,
+          "resident"
+        ],
+        [
+          "load",
+          24576,
+          25972,
+          548,
+          467.1,
+          "resident"
+        ],
+        [
+          "load",
+          28672,
+          26760,
+          512,
+          454.4,
+          "resident"
+        ],
+        [
+          "load",
+          30720,
+          27274,
+          514,
+          455.5,
+          "resident"
+        ],
+        [
+          "confirm",
+          30720,
+          27302,
+          512,
+          3081.1,
+          "confirmed"
+        ]
+      ]
+    },
+    {
+      "model": "llama3.1:8b",
+      "quant": "Q4_K_M",
+      "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+      "result": {
+        "max_resident_ctx": 53248,
+        "limit": "margin",
+        "peak_mib": 14247,
+        "shared_mib": 697,
+        "prompt_tok_s": 8405.7
+      },
+      "trained_cap": 131072,
+      "floor": {
+        "ctx": 2048,
+        "shared_mib": 447,
+        "prompt_tok_s": 12283.2,
+        "cuda_host_sum_mib": 300.31,
+        "check": "ok"
+      },
+      "weights_mib": 4693,
+      "idle_mib": 2169,
+      "flash_attention": "enabled",
+      "kv_cache_type": "f16",
+      "search": [
+        [
+          "load",
+          2048,
+          7436,
+          444,
+          669.2,
+          "resident"
+        ],
+        [
+          "confirm",
+          2048,
+          7477,
+          447,
+          12283.2,
+          "confirmed"
+        ],
+        [
+          "load",
+          131072,
+          43598,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          65536,
+          15953,
+          748,
+          618.0,
+          "resident"
+        ],
+        [
+          "load",
+          98304,
+          20174,
+          875,
+          740.7,
+          "resident"
+        ],
+        [
+          "load",
+          114688,
+          21846,
+          685,
+          812.7,
+          "resident"
+        ],
+        [
+          "load",
+          122880,
+          22886,
+          701,
+          695.8,
+          "resident"
+        ],
+        [
+          "load",
+          126976,
+          23406,
+          709,
+          812.3,
+          "resident"
+        ],
+        [
+          "load",
+          129024,
+          23666,
+          713,
+          726.2,
+          "resident"
+        ],
+        [
+          "confirm",
+          129024,
+          24229,
+          741,
+          4139.7,
+          "spill"
+        ],
+        [
+          "confirm",
+          126976,
+          23767,
+          729,
+          4229.8,
+          "spill"
+        ],
+        [
+          "confirm",
+          124928,
+          23300,
+          717,
+          4302.3,
+          "spill"
+        ],
+        [
+          "confirm",
+          122880,
+          23250,
+          706,
+          4399.8,
+          "spill"
+        ],
+        [
+          "confirm",
+          120832,
+          23154,
+          724,
+          4437.7,
+          "spill"
+        ],
+        [
+          "confirm",
+          118784,
+          22261,
+          693,
+          4557.7,
+          "spill"
+        ],
+        [
+          "confirm",
+          116736,
+          21971,
+          687,
+          4658.4,
+          "spill"
+        ],
+        [
+          "confirm",
+          114688,
+          21711,
+          681,
+          4737.6,
+          "spill"
+        ],
+        [
+          "confirm",
+          112640,
+          21451,
+          677,
+          4849.3,
+          "spill"
+        ],
+        [
+          "confirm",
+          110592,
+          21639,
+          921,
+          5169.0,
+          "spill"
+        ],
+        [
+          "confirm",
+          108544,
+          21375,
+          912,
+          5259.3,
+          "spill"
+        ],
+        [
+          "confirm",
+          106496,
+          21111,
+          906,
+          5310.8,
+          "spill"
+        ],
+        [
+          "confirm",
+          104448,
+          20847,
+          898,
+          5355.8,
+          "spill"
+        ],
+        [
+          "confirm",
+          102400,
+          20583,
+          890,
+          5493.1,
+          "spill"
+        ],
+        [
+          "confirm",
+          100352,
+          20319,
+          880,
+          5601.9,
+          "spill"
+        ],
+        [
+          "confirm",
+          98304,
+          20055,
+          873,
+          5669.5,
+          "spill"
+        ],
+        [
+          "confirm",
+          96256,
+          19791,
+          865,
+          5773.2,
+          "spill"
+        ],
+        [
+          "confirm",
+          94208,
+          19527,
+          857,
+          5870.4,
+          "spill"
+        ],
+        [
+          "confirm",
+          92160,
+          19263,
+          849,
+          5985.2,
+          "spill"
+        ],
+        [
+          "confirm",
+          90112,
+          18999,
+          841,
+          6085.7,
+          "spill"
+        ],
+        [
+          "confirm",
+          88064,
+          18735,
+          833,
+          6187.0,
+          "spill"
+        ],
+        [
+          "confirm",
+          86016,
+          18471,
+          825,
+          6255.8,
+          "spill"
+        ],
+        [
+          "confirm",
+          83968,
+          18213,
+          817,
+          6340.2,
+          "spill"
+        ],
+        [
+          "confirm",
+          81920,
+          17943,
+          810,
+          6504.7,
+          "spill"
+        ],
+        [
+          "confirm",
+          79872,
+          17679,
+          802,
+          6617.9,
+          "spill"
+        ],
+        [
+          "confirm",
+          77824,
+          17415,
+          794,
+          6728.3,
+          "spill"
+        ],
+        [
+          "confirm",
+          75776,
+          17151,
+          786,
+          6851.3,
+          "spill"
+        ],
+        [
+          "confirm",
+          73728,
+          16887,
+          777,
+          6969.4,
+          "spill"
+        ],
+        [
+          "confirm",
+          71680,
+          16623,
+          769,
+          7104.7,
+          "spill"
+        ],
+        [
+          "confirm",
+          69632,
+          16359,
+          761,
+          7230.1,
+          "spill"
+        ],
+        [
+          "confirm",
+          67584,
+          16095,
+          753,
+          7366.1,
+          "spill"
+        ],
+        [
+          "confirm",
+          65536,
+          15831,
+          745,
+          7457.5,
+          "spill"
+        ],
+        [
+          "confirm",
+          63488,
+          15567,
+          737,
+          7598.0,
+          "spill"
+        ],
+        [
+          "confirm",
+          61440,
+          15303,
+          729,
+          7796.4,
+          "spill"
+        ],
+        [
+          "confirm",
+          59392,
+          15039,
+          721,
+          7951.0,
+          "spill"
+        ],
+        [
+          "confirm",
+          57344,
+          14775,
+          713,
+          8090.9,
+          "spill"
+        ],
+        [
+          "confirm",
+          55296,
+          14511,
+          705,
+          8263.6,
+          "spill"
+        ],
+        [
+          "confirm",
+          53248,
+          14247,
+          697,
+          8405.7,
+          "confirmed"
+        ]
+      ]
+    },
+    {
+      "model": "mistral-small:24b",
+      "quant": "Q4_K_M",
+      "digest": "8039dd90c1138d772437a0779a33b7349efd5d9cca71edcd26e4dd463f90439d",
+      "result": {
+        "max_resident_ctx": 32768,
+        "limit": "max_ctx",
+        "peak_mib": 21471,
+        "shared_mib": 607,
+        "prompt_tok_s": 4298.9
+      },
+      "trained_cap": 32768,
+      "floor": {
+        "ctx": 2048,
+        "shared_mib": 525,
+        "prompt_tok_s": 4807.5,
+        "cuda_host_sum_mib": 382.51,
+        "check": "ok"
+      },
+      "weights_mib": 13670,
+      "idle_mib": 2008,
+      "flash_attention": "enabled",
+      "kv_cache_type": "f16",
+      "search": [
+        [
+          "load",
+          2048,
+          16365,
+          525,
+          2713.7,
+          "resident"
+        ],
+        [
+          "confirm",
+          2048,
+          16371,
+          525,
+          4807.5,
+          "confirmed"
+        ],
+        [
+          "load",
+          32768,
+          21447,
+          607,
+          2691.4,
+          "resident"
+        ],
+        [
+          "confirm",
+          32768,
+          21471,
+          607,
+          4298.9,
+          "confirmed"
+        ]
+      ]
+    },
+    {
+      "model": "qwen3:14b",
+      "quant": "Q4_K_M",
+      "digest": "bdbd181c33f2ed1b31c972991882db3cf4d192569092138a7d29e973cd9debe8",
+      "result": {
+        "max_resident_ctx": 40960,
+        "limit": "max_ctx",
+        "peak_mib": 18153,
+        "shared_mib": 802,
+        "prompt_tok_s": 4485.9
+      },
+      "trained_cap": 40960,
+      "floor": {
+        "ctx": 2048,
+        "shared_mib": 583,
+        "prompt_tok_s": 5961.3,
+        "cuda_host_sum_mib": 439.89,
+        "check": "ok"
+      },
+      "weights_mib": 8847,
+      "idle_mib": 2008,
+      "flash_attention": "enabled",
+      "kv_cache_type": "f16",
+      "search": [
+        [
+          "load",
+          2048,
+          11481,
+          582,
+          134.2,
+          "resident"
+        ],
+        [
+          "confirm",
+          2048,
+          11495,
+          583,
+          5961.3,
+          "confirmed"
+        ],
+        [
+          "load",
+          40960,
+          18115,
+          801,
+          206.9,
+          "resident"
+        ],
+        [
+          "confirm",
+          40960,
+          18153,
+          802,
+          4485.9,
+          "confirmed"
+        ]
+      ]
+    },
+    {
+      "model": "qwen3:8b",
+      "quant": "Q4_K_M",
+      "digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+      "result": {
+        "max_resident_ctx": 40960,
+        "limit": "max_ctx",
+        "peak_mib": 13587,
+        "shared_mib": 702,
+        "prompt_tok_s": 8887.9
+      },
+      "trained_cap": 40960,
+      "floor": {
+        "ctx": 2048,
+        "shared_mib": 496,
+        "prompt_tok_s": 8724.4,
+        "cuda_host_sum_mib": 352.43,
+        "check": "ok"
+      },
+      "weights_mib": 4984,
+      "idle_mib": 2008,
+      "flash_attention": "enabled",
+      "kv_cache_type": "f16",
+      "search": [
+        [
+          "load",
+          2048,
+          7633,
+          496,
+          224.2,
+          "resident"
+        ],
+        [
+          "confirm",
+          2048,
+          7649,
+          496,
+          8724.4,
+          "confirmed"
+        ],
+        [
+          "load",
+          40960,
+          13551,
+          702,
+          209.9,
+          "resident"
+        ],
+        [
+          "confirm",
+          40960,
+          13587,
+          702,
+          8887.9,
+          "confirmed"
+        ]
+      ]
+    }
+  ]
+}

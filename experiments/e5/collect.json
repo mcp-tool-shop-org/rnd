@@ -1,0 +1,21 @@
+{
+  "repo": "mcp-tool-shop-org/interlock",
+  "sibling": "switchyard",
+  "module": "extract.py",
+  "sources": [
+    {
+      "path": "receipts/e5-2026-10-13b.jsonl",
+      "commit": "6e8cab6f20c647eff0847912364ba2695f6f1757",
+      "sha256": "1a2147ad1bf667165c25906dd2dca8ae43625ba97e57d3a8cbf0138303984d3a",
+      "out": "results/run-b.json",
+      "fn": "collect_receipt"
+    },
+    {
+      "path": "receipts/e5-2026-10-13c.jsonl",
+      "commit": "cc91aedf0475ce6a5621cce98c53b2c000f9d930",
+      "sha256": "454d901a8423fed7b2ebab188ce3a044429372172b3c0acb74680548ea13e9d0",
+      "out": "results/run-c.json",
+      "fn": "collect_receipt"
+    }
+  ]
+}

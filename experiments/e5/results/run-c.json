@@ -1,0 +1,1679 @@
+{
+  "provenance": {
+    "repo": "mcp-tool-shop-org/interlock",
+    "source": "receipts/e5-2026-10-13c.jsonl",
+    "sha256": "454d901a8423fed7b2ebab188ce3a044429372172b3c0acb74680548ea13e9d0",
+    "receipt_commit": "cc91aedf0475ce6a5621cce98c53b2c000f9d930",
+    "harness_commit": "0db35c8299b647b7a65db85a8e37d44e919edd71",
+    "run_id": "e5-2026-10-13c"
+  },
+  "date": "2026-10-13",
+  "device": "5090",
+  "engine": {
+    "ollama": "0.35.1",
+    "nvidia_driver": "617.42",
+    "cuda": "driver 13.4"
+  },
+  "rule": {
+    "abort_mib": 30500,
+    "grain": 2048,
+    "spill_shared_mib": 256,
+    "spill_prompt_ratio": 0.5,
+    "shared_gate_from_mib": 28452
+  },
+  "models": [
+    {
+      "model": "gemma4:31b",
+      "quant": "Q4_K_M",
+      "digest": "6316f0629137b426c9d9b853ffc4c8209589f30ee39aebede6285096c0ff47e7",
+      "result": {
+        "max_resident_ctx": 86016,
+        "limit": "predicted",
+        "peak_mib": 30137,
+        "shared_mib": 1357,
+        "prompt_tok_s": 2053.7
+      },
+      "trained_cap": 262144,
+      "floor": {
+        "ctx": 2048,
+        "shared_mib": 1274,
+        "prompt_tok_s": 1709.3,
+        "cuda_host_sum_mib": 1128.02,
+        "check": "ok"
+      },
+      "weights_mib": 18949,
+      "idle_mib": 2191,
+      "flash_attention": "enabled",
+      "kv_cache_type": "f16",
+      "search": [
+        [
+          "load",
+          2048,
+          23336,
+          1274,
+          263.0,
+          "resident"
+        ],
+        [
+          "confirm",
+          2048,
+          23349,
+          1274,
+          1709.3,
+          "confirmed"
+        ],
+        [
+          "load",
+          262144,
+          302228,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          131072,
+          161684,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          65536,
+          91412,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          32768,
+          56276,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          16384,
+          38708,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          8192,
+          24411,
+          1312,
+          258.7,
+          "resident"
+        ],
+        [
+          "load",
+          12288,
+          24752,
+          1321,
+          261.2,
+          "resident"
+        ],
+        [
+          "load",
+          14336,
+          24922,
+          1325,
+          263.7,
+          "resident"
+        ],
+        [
+          "load",
+          16384,
+          25075,
+          1331,
+          297.7,
+          "resident"
+        ],
+        [
+          "load",
+          32768,
+          25753,
+          1306,
+          329.0,
+          "resident"
+        ],
+        [
+          "load",
+          65536,
+          28373,
+          1337,
+          271.7,
+          "resident"
+        ],
+        [
+          "load",
+          131072,
+          33613,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          98304,
+          30993,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          81920,
+          29644,
+          1352,
+          340.9,
+          "resident"
+        ],
+        [
+          "load",
+          90112,
+          30290,
+          1360,
+          321.8,
+          "resident"
+        ],
+        [
+          "load",
+          94208,
+          30613,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          92160,
+          30450,
+          1362,
+          329.5,
+          "resident"
+        ],
+        [
+          "confirm",
+          4096,
+          23509,
+          1275,
+          2421.2,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          6144,
+          24277,
+          1309,
+          2898.8,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          8192,
+          24451,
+          1316,
+          2981.6,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          10240,
+          24636,
+          1319,
+          3072.2,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          12288,
+          24781,
+          1321,
+          3172.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          14336,
+          24941,
+          1328,
+          3144.4,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          16384,
+          25118,
+          1331,
+          3138.6,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          18432,
+          25263,
+          1333,
+          3108.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          20480,
+          25425,
+          1338,
+          3053.1,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          22528,
+          25584,
+          1342,
+          3146.1,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          24576,
+          25756,
+          1345,
+          3077.5,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          26624,
+          26197,
+          1352,
+          3115.8,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          28672,
+          25721,
+          1311,
+          2891.0,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          30720,
+          25752,
+          1306,
+          2896.0,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          32768,
+          25912,
+          1309,
+          2864.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          34816,
+          26076,
+          1308,
+          2837.1,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          36864,
+          26215,
+          1308,
+          2855.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          38912,
+          26381,
+          1310,
+          2794.6,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          40960,
+          26536,
+          1314,
+          2754.1,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          43008,
+          26700,
+          1315,
+          2736.7,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          45056,
+          27101,
+          1320,
+          2747.6,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          47104,
+          27029,
+          1321,
+          2663.1,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          49152,
+          27177,
+          1322,
+          2595.4,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          51200,
+          27345,
+          1326,
+          2546.8,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          53248,
+          27491,
+          1325,
+          2516.1,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          55296,
+          27641,
+          1326,
+          2513.8,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          57344,
+          27850,
+          1332,
+          2476.4,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          59392,
+          27996,
+          1331,
+          2456.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          61440,
+          28128,
+          1333,
+          2412.5,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          63488,
+          28299,
+          1336,
+          2393.4,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          65536,
+          28498,
+          1337,
+          2352.5,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          67584,
+          28633,
+          1338,
+          2322.2,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          69632,
+          28813,
+          1343,
+          2269.7,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          71680,
+          28951,
+          1342,
+          2228.1,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          73728,
+          29127,
+          1340,
+          2256.8,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          75776,
+          29407,
+          1346,
+          2214.0,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          77824,
+          29722,
+          1347,
+          2187.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          79872,
+          29592,
+          1347,
+          2160.3,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          81920,
+          29798,
+          1351,
+          2087.7,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          83968,
+          29989,
+          1352,
+          2082.2,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          86016,
+          30137,
+          1357,
+          2053.7,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          88064,
+          30544,
+          null,
+          null,
+          "card memory reached abort_mib"
+        ]
+      ],
+      "aborted_windows": [
+        88064
+      ],
+      "slope_predictions": [
+        {
+          "ctx": 12288,
+          "mib": 25128,
+          "from": [
+            2048,
+            8192
+          ]
+        },
+        {
+          "ctx": 14336,
+          "mib": 24923,
+          "from": [
+            8192,
+            12288
+          ]
+        },
+        {
+          "ctx": 16384,
+          "mib": 25092,
+          "from": [
+            12288,
+            14336
+          ]
+        },
+        {
+          "ctx": 32768,
+          "mib": 26299,
+          "from": [
+            14336,
+            16384
+          ]
+        },
+        {
+          "ctx": 65536,
+          "mib": 27109,
+          "from": [
+            16384,
+            32768
+          ]
+        },
+        {
+          "ctx": 131072,
+          "mib": 33613,
+          "from": [
+            32768,
+            65536
+          ]
+        },
+        {
+          "ctx": 98304,
+          "mib": 30993,
+          "from": [
+            32768,
+            65536
+          ]
+        },
+        {
+          "ctx": 81920,
+          "mib": 29683,
+          "from": [
+            32768,
+            65536
+          ]
+        },
+        {
+          "ctx": 90112,
+          "mib": 30280,
+          "from": [
+            65536,
+            81920
+          ]
+        },
+        {
+          "ctx": 94208,
+          "mib": 30613,
+          "from": [
+            81920,
+            90112
+          ]
+        },
+        {
+          "ctx": 92160,
+          "mib": 30452,
+          "from": [
+            81920,
+            90112
+          ]
+        }
+      ],
+      "shared_gate_applied_from": 65536
+    },
+    {
+      "model": "granite4.1:30b",
+      "quant": "Q4_K_M",
+      "digest": "3f3e5df8a021439fd6f867a0e526bdc303cac79c811201cb6bac193298cb9fcd",
+      "result": {
+        "max_resident_ctx": 43008,
+        "limit": "predicted",
+        "peak_mib": 30386,
+        "shared_mib": 525,
+        "prompt_tok_s": 2778.4
+      },
+      "trained_cap": 131072,
+      "floor": {
+        "ctx": 2048,
+        "shared_mib": 488,
+        "prompt_tok_s": 3616.6,
+        "cuda_host_sum_mib": 339.95,
+        "check": "ok"
+      },
+      "weights_mib": 16681,
+      "idle_mib": 2585,
+      "flash_attention": "enabled",
+      "kv_cache_type": "f16",
+      "search": [
+        [
+          "load",
+          2048,
+          20579,
+          488,
+          477.8,
+          "resident"
+        ],
+        [
+          "confirm",
+          2048,
+          20366,
+          488,
+          3616.6,
+          "confirmed"
+        ],
+        [
+          "load",
+          131072,
+          103298,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          65536,
+          61282,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          32768,
+          40274,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          16384,
+          24081,
+          534,
+          463.4,
+          "resident"
+        ],
+        [
+          "load",
+          24576,
+          26327,
+          550,
+          447.3,
+          "resident"
+        ],
+        [
+          "load",
+          28672,
+          27088,
+          516,
+          452.8,
+          "resident"
+        ],
+        [
+          "load",
+          30720,
+          27655,
+          519,
+          453.2,
+          "resident"
+        ],
+        [
+          "load",
+          32768,
+          27929,
+          524,
+          447.4,
+          "resident"
+        ],
+        [
+          "load",
+          65536,
+          32313,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          49152,
+          31582,
+          null,
+          null,
+          "card memory reached abort_mib"
+        ],
+        [
+          "load",
+          40960,
+          29710,
+          533,
+          430.0,
+          "resident"
+        ],
+        [
+          "load",
+          45056,
+          30601,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          43008,
+          30233,
+          534,
+          433.1,
+          "resident"
+        ],
+        [
+          "confirm",
+          4096,
+          27329,
+          485,
+          3624.2,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          6144,
+          21655,
+          519,
+          3731.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          8192,
+          22227,
+          529,
+          3677.0,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          10240,
+          22521,
+          527,
+          3595.3,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          12288,
+          22958,
+          530,
+          3627.5,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          14336,
+          23643,
+          532,
+          3540.4,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          16384,
+          24018,
+          536,
+          3449.0,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          18432,
+          24805,
+          537,
+          3408.4,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          20480,
+          25249,
+          543,
+          3403.1,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          22528,
+          25761,
+          552,
+          3355.2,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          24576,
+          26369,
+          551,
+          3285.6,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          26624,
+          26626,
+          520,
+          3112.5,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          28672,
+          26829,
+          515,
+          3069.1,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          30720,
+          27314,
+          517,
+          3016.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          32768,
+          27814,
+          517,
+          2982.8,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          34816,
+          28572,
+          519,
+          2967.3,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          36864,
+          28841,
+          521,
+          2918.3,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          38912,
+          29360,
+          523,
+          2869.6,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          40960,
+          29920,
+          524,
+          2811.7,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          43008,
+          30386,
+          525,
+          2778.4,
+          "confirmed"
+        ]
+      ],
+      "aborted_windows": [
+        49152
+      ],
+      "slope_predictions": [
+        {
+          "ctx": 24576,
+          "mib": 26083,
+          "from": [
+            2048,
+            16384
+          ]
+        },
+        {
+          "ctx": 28672,
+          "mib": 27450,
+          "from": [
+            16384,
+            24576
+          ]
+        },
+        {
+          "ctx": 30720,
+          "mib": 27469,
+          "from": [
+            24576,
+            28672
+          ]
+        },
+        {
+          "ctx": 32768,
+          "mib": 28222,
+          "from": [
+            28672,
+            30720
+          ]
+        },
+        {
+          "ctx": 65536,
+          "mib": 32313,
+          "from": [
+            30720,
+            32768
+          ]
+        },
+        {
+          "ctx": 49152,
+          "mib": 30121,
+          "from": [
+            30720,
+            32768
+          ]
+        },
+        {
+          "ctx": 40960,
+          "mib": 29025,
+          "from": [
+            30720,
+            32768
+          ]
+        },
+        {
+          "ctx": 45056,
+          "mib": 30601,
+          "from": [
+            32768,
+            40960
+          ]
+        },
+        {
+          "ctx": 43008,
+          "mib": 30156,
+          "from": [
+            32768,
+            40960
+          ]
+        }
+      ],
+      "shared_gate_applied_from": 34816
+    },
+    {
+      "model": "llama3.1:8b",
+      "quant": "Q4_K_M",
+      "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+      "result": {
+        "max_resident_ctx": 131072,
+        "limit": "max_ctx",
+        "peak_mib": 23962,
+        "shared_mib": 716,
+        "prompt_tok_s": 4099.4
+      },
+      "trained_cap": 131072,
+      "floor": {
+        "ctx": 2048,
+        "shared_mib": 445,
+        "prompt_tok_s": 12264.9,
+        "cuda_host_sum_mib": 300.31,
+        "check": "ok"
+      },
+      "weights_mib": 4693,
+      "idle_mib": 2178,
+      "flash_attention": "enabled",
+      "kv_cache_type": "f16",
+      "search": [
+        [
+          "load",
+          2048,
+          7445,
+          444,
+          728.8,
+          "resident"
+        ],
+        [
+          "confirm",
+          2048,
+          7465,
+          445,
+          12264.9,
+          "confirmed"
+        ],
+        [
+          "load",
+          131072,
+          43607,
+          null,
+          null,
+          "predicted_over"
+        ],
+        [
+          "load",
+          65536,
+          15959,
+          747,
+          717.2,
+          "resident"
+        ],
+        [
+          "load",
+          98304,
+          20183,
+          875,
+          845.7,
+          "resident"
+        ],
+        [
+          "load",
+          114688,
+          21854,
+          683,
+          816.9,
+          "resident"
+        ],
+        [
+          "load",
+          122880,
+          22894,
+          699,
+          711.7,
+          "resident"
+        ],
+        [
+          "load",
+          126976,
+          23414,
+          708,
+          821.2,
+          "resident"
+        ],
+        [
+          "load",
+          129024,
+          23674,
+          712,
+          694.2,
+          "resident"
+        ],
+        [
+          "load",
+          131072,
+          23938,
+          715,
+          708.4,
+          "resident"
+        ],
+        [
+          "confirm",
+          4096,
+          7746,
+          447,
+          12604.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          6144,
+          8115,
+          471,
+          13843.8,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          8192,
+          8355,
+          476,
+          13613.1,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          10240,
+          8615,
+          480,
+          13320.5,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          12288,
+          8875,
+          484,
+          13138.3,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          14336,
+          9135,
+          488,
+          12883.0,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          16384,
+          9395,
+          492,
+          12488.6,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          18432,
+          9655,
+          496,
+          12222.6,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          20480,
+          9915,
+          500,
+          11915.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          22528,
+          10175,
+          504,
+          11677.2,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          24576,
+          10435,
+          508,
+          11406.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          26624,
+          10704,
+          512,
+          11116.5,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          28672,
+          10962,
+          516,
+          10851.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          30720,
+          11217,
+          519,
+          10606.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          32768,
+          11501,
+          524,
+          10162.4,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          34816,
+          12085,
+          628,
+          10140.4,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          36864,
+          12319,
+          636,
+          9996.1,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          38912,
+          12667,
+          645,
+          9699.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          40960,
+          12870,
+          652,
+          9584.3,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          43008,
+          13105,
+          661,
+          9321.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          45056,
+          13402,
+          670,
+          9162.6,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          47104,
+          13641,
+          678,
+          8891.4,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          49152,
+          13900,
+          686,
+          8752.0,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          51200,
+          14187,
+          693,
+          8590.8,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          53248,
+          14478,
+          702,
+          8365.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          55296,
+          14722,
+          711,
+          8211.7,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          57344,
+          14965,
+          717,
+          8053.7,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          59392,
+          15216,
+          727,
+          7935.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          61440,
+          15481,
+          738,
+          7771.4,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          63488,
+          15753,
+          743,
+          7586.2,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          65536,
+          16017,
+          751,
+          7448.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          67584,
+          16271,
+          759,
+          7347.8,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          69632,
+          16744,
+          771,
+          7220.3,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          71680,
+          16722,
+          778,
+          7102.1,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          73728,
+          16999,
+          786,
+          6956.7,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          75776,
+          17253,
+          794,
+          6832.2,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          77824,
+          17516,
+          797,
+          6716.0,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          79872,
+          17775,
+          806,
+          6607.6,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          81920,
+          18036,
+          812,
+          6491.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          83968,
+          18304,
+          820,
+          6333.0,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          86016,
+          18590,
+          830,
+          6240.2,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          88064,
+          18842,
+          837,
+          6174.1,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          90112,
+          19098,
+          845,
+          6078.8,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          92160,
+          19368,
+          852,
+          5987.7,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          94208,
+          19627,
+          860,
+          5860.0,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          96256,
+          19895,
+          869,
+          5769.7,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          98304,
+          20165,
+          877,
+          5664.8,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          100352,
+          20421,
+          884,
+          5596.8,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          102400,
+          20713,
+          892,
+          5542.5,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          104448,
+          20963,
+          900,
+          5372.2,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          106496,
+          21246,
+          909,
+          5335.1,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          108544,
+          21464,
+          916,
+          5282.0,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          110592,
+          21749,
+          924,
+          5197.2,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          112640,
+          21605,
+          677,
+          4867.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          114688,
+          21812,
+          687,
+          4778.8,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          116736,
+          22344,
+          698,
+          4659.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          118784,
+          22814,
+          707,
+          4528.9,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          120832,
+          22941,
+          703,
+          4492.2,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          122880,
+          23057,
+          703,
+          4412.1,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          124928,
+          23146,
+          702,
+          4321.4,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          126976,
+          23417,
+          710,
+          4247.2,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          129024,
+          23691,
+          714,
+          4148.6,
+          "confirmed"
+        ],
+        [
+          "confirm",
+          131072,
+          23962,
+          716,
+          4099.4,
+          "confirmed"
+        ]
+      ],
+      "slope_predictions": [
+        {
+          "ctx": 98304,
+          "mib": 20354,
+          "from": [
+            2048,
+            65536
+          ]
+        },
+        {
+          "ctx": 114688,
+          "mib": 22295,
+          "from": [
+            65536,
+            98304
+          ]
+        },
+        {
+          "ctx": 122880,
+          "mib": 22690,
+          "from": [
+            98304,
+            114688
+          ]
+        },
+        {
+          "ctx": 126976,
+          "mib": 23414,
+          "from": [
+            114688,
+            122880
+          ]
+        },
+        {
+          "ctx": 129024,
+          "mib": 23674,
+          "from": [
+            122880,
+            126976
+          ]
+        },
+        {
+          "ctx": 131072,
+          "mib": 23934,
+          "from": [
+            126976,
+            129024
+          ]
+        }
+      ],
+      "shared_gate_applied_from": null
+    }
+  ]
+}

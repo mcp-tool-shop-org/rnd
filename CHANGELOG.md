@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.59] - 2026-10-13
+
+- decision: Atlas, testing-os, housekeeping and rnd build-up program
+- Added `2026-10-13-atlas-testing-os-rnd-buildup`: Atlas, testing-os, housekeeping and rnd — the build-up program
+
 ## [1.1.4.6.58] - 2026-10-13
 
 - interlock #103 review; Atlas build-up rulings

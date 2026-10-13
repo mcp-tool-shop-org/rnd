@@ -188,6 +188,46 @@ class Isolation(unittest.TestCase):
         # The source's own value is never written: PR #16's CodeQL alert.
         self.assertNotIn("ANTHROPIC_API_KEY", " ".join(run.isolation_problems(keyed, "A", self.allow)))
 
+    def test_a_call_to_a_tool_outside_the_arm_is_refused_in_either_turn(self):
+        # Amendment 8: 2.1.197 can register built-ins after the init that
+        # --tools does not restrict, so the calls are checked, not only the start.
+        stream = run.Stream()
+        stream.add(assistant("m1", {}, [use("t1", "Read"), use("t2", "Bash", command="git log -1")]))
+        self.assertEqual(run.tool_use_problems(stream, self.allow, "A"), [])
+        stream.add(assistant("m2", {}, [use("t3", "SendMessage")]))
+        self.assertEqual(run.tool_use_problems(stream, self.allow, "A"),
+                         ["called a tool its arm does not have: SendMessage"])
+        b_in_a = run.Stream()
+        b_in_a.add(assistant("m1", {}, [use("t1", "mcp__atlas__atlas_reach")]))
+        self.assertEqual(run.tool_use_problems(b_in_a, self.allow, "A"),
+                         ["called a tool its arm does not have: mcp__atlas__atlas_reach"])
+        self.assertEqual(run.tool_use_problems(b_in_a, self.allow, "B"), [])
+        # The debrief's calls are held to the same rule (amendment 3).
+        debrief = run.Stream()
+        debrief.add(json.dumps({"type": "result", "result": "answer"}))
+        debrief.add(assistant("d1", {}, [use("d2", "WebFetch")]))
+        self.assertEqual(run.tool_use_problems(debrief, self.allow, "B"),
+                         ["called a tool its arm does not have: WebFetch"])
+
+    def test_arm_b_may_start_with_atlas_pending_and_no_atlas_tools(self):
+        # Amendment 8: the sandbox probe's arm B started this way (2.1.197
+        # registers MCP tools late) and its atlas_overview call answered.
+        a, b = init_event("restricted-A"), init_event("restricted-B")
+        late = {**b, "tools": a["tools"], "mcp_servers": [{"name": "atlas", "status": "pending"}]}
+        self.assertEqual(run.isolation_problems(late, "B", self.allow), [])
+        # Pending with some Atlas tools, or pending in arm A, is still refused.
+        partial = {**late, "tools": a["tools"] + ["mcp__atlas__atlas_reach"]}
+        self.assertTrue(run.isolation_problems(partial, "B", self.allow))
+        self.assertEqual(run.isolation_problems({**a, "mcp_servers": [{"name": "atlas", "status": "pending"}]}, "A", self.allow),
+                         ["MCP servers are {'atlas': 'pending'}, the arm needs none"])
+        # A failed server is no late start.
+        failed = {**late, "mcp_servers": [{"name": "atlas", "status": "failed"}]}
+        self.assertIn("arm B has no Atlas tools", run.isolation_problems(failed, "B", self.allow))
+
+    def test_the_labels_are_the_pilot_and_the_shakedown(self):
+        self.assertEqual(run.LABELS, ("pilot", "shakedown"))
+        self.assertEqual(run.PROBE_REPORT, run.HERE / "results" / "pilot" / "probe-report.json")
+
     def test_a_hook_is_seen_by_its_event_or_its_marker(self):
         stream = run.Stream()
         stream.add(json.dumps({"type": "system", "subtype": "hook_response"}))
@@ -538,3 +578,71 @@ class Cleanup(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Containment(unittest.TestCase):
+    # Amendment 8: the sandbox probe's Grep at the home directory walked past
+    # Read(~/**), so the containment is file permissions and ownership.
+    def test_a_private_directory_belongs_to_root_and_gives_others_nothing(self):
+        self.assertEqual(run.private_problems("the experiment directory", 0o40700, 0), [])
+        self.assertEqual(run.private_problems("the experiment directory", 0o40755, 0),
+                         ["the experiment directory has mode 0o755; group and others may have nothing"])
+        self.assertEqual(run.private_problems("the experiment directory", 0o40700, 1000),
+                         ["the experiment directory is not owned by root"])
+
+    def test_the_work_directory_may_only_be_passed_through(self):
+        self.assertEqual(run.private_problems("the work directory", 0o40711, 0, may_traverse=True), [])
+        self.assertEqual(run.private_problems("the work directory", 0o40751, 0, may_traverse=True),
+                         ["the work directory has mode 0o751; group and others may only pass through"])
+
+    def test_a_run_user_with_sudo_or_a_privileged_group_is_refused(self):
+        self.assertEqual(run.run_user_problems("amu", ["amu"], "User amu is not allowed to run sudo on sandbox."), [])
+        self.assertEqual(run.run_user_problems("agent", ["agent", "sudo", "docker"], "(ALL) NOPASSWD: ALL"),
+                         ["the run user agent is in the group sudo", "the run user agent is in the group docker",
+                          "the run user agent may run sudo"])
+        self.assertIn("the run user is root", run.run_user_problems("root", ["root"], ""))
+
+    def test_the_run_users_home_is_emptied_but_its_sign_in_file(self):
+        home = Path(tempfile.mkdtemp())
+        (home / ".claude" / "projects" / "x").mkdir(parents=True)
+        (home / ".claude" / "projects" / "x" / "session.jsonl").write_text("an earlier run", encoding="utf-8")
+        (home / ".claude" / ".credentials.json").write_text("{}", encoding="utf-8")
+        (home / ".cache" / "atlas").mkdir(parents=True)
+        (home / "notes.txt").write_text("left by an earlier run", encoding="utf-8")
+        run.reset_home(home)
+        left = sorted(p.relative_to(home).as_posix() for p in home.rglob("*"))
+        self.assertEqual(left, [".claude", ".claude/.credentials.json"])
+        shutil.rmtree(home)
+
+    def test_the_cli_gets_only_its_own_environment(self):
+        env = run.run_env({"name": "amu", "uid": 1001, "gid": 1001, "home": "/home/amu"})
+        self.assertEqual(env["HOME"], "/home/amu")
+        self.assertEqual(env["USER"], "amu")
+        for key, value in run.CLI_ENV.items():
+            self.assertEqual(env[key], value)
+        self.assertLessEqual(set(env), {"HOME", "USER", "LOGNAME", "PATH", "LANG", *run.CLI_ENV})
+
+    def test_the_probe_greps_from_above_every_denied_tree(self):
+        targets = {"home": {"file": "H/amu-probe-1.txt", "dir": "H"}}
+        prompt = run.probe_prompt(targets, "R/repo", ("/", "/work", "/home"))
+        for root in ("/", "/work", "/home"):
+            self.assertIn(f"Grep for the pattern `amu-sentinel-` with path {root}.", prompt)
+
+
+class ProbeGrepRoots(unittest.TestCase):
+    def test_the_extra_grep_routes_raise_the_calls_the_probe_must_see(self):
+        targets = {"home": {"file": "H/f.txt", "dir": "H"}, "E:/AI": {"file": "E/f.txt", "dir": "E"}}
+        stream = run.Stream()
+        for i, name in enumerate((["Read", "Grep", "Glob", "Bash", "Bash"] * 2 + ["Bash"])):
+            stream.add(assistant(f"m{i}", {}, [use(f"t{i}", name)]))
+            stream.add(tool_result(f"t{i}", "denied", is_error=True))
+        stream.add(json.dumps({"type": "result", "result": "RIG: no"}))
+        b = run.Stream()
+        b.add(assistant("b1", {}, [use("o1", "mcp__atlas__atlas_overview")]))
+        b.add(tool_result("o1", "parts"))
+        clean = {"run": "probe", "outcome": "answered", "exit_code": 0, "isolation": [], "error": None, "stderr": ""}
+        self.assertTrue(run.probe_verdict(stream, b, clean, clean, targets, [])["passed"])
+        # Eleven calls no longer carry out a probe that also asks for three root Greps.
+        short = run.probe_verdict(stream, b, clean, clean, targets, [], ("/", "/work", "/home"))
+        self.assertEqual(short["calls_expected"], 14)
+        self.assertFalse(short["passed"])

@@ -1,14 +1,14 @@
 {
  "upstream": "https://github.com/NVIDIA/skills",
- "ref": "67a13c0b6b3eecef1398f72aeeb9b27f39a7722f",
- "synced_at": "2026-10-07T18:54:41+00:00",
+ "ref": "14a98ae278cec7e867695189d0f4003c08e4f765",
+ "synced_at": "2026-10-13T18:22:52+00:00",
  "license": "Apache-2.0",
  "unparsed": [],
  "lanes": [
   {
    "title": "Agentic AI",
    "description": "Build and operate agentic systems, including RAG workflows, evaluation harnesses, tool use, policy, sandboxing, agent configuration, and agent workflow automation.",
-   "count": 21
+   "count": 22
   },
   {
    "title": "Physical AI",
@@ -43,17 +43,17 @@
   {
    "title": "Data Science",
    "description": "Prepare, analyze, explore, and model data for AI and accelerated analytics workflows that are not specific to one training, inference, or agent task.",
-   "count": 3
+   "count": 5
   },
   {
    "title": "Training AI",
    "description": "Build, validate, tune, and maintain large-scale model training workflows, including distributed training, model support, training validation, performance tuning, and training-stack CI.",
-   "count": 72
+   "count": 73
   },
   {
    "title": "Inference AI",
    "description": "Deploy, serve, optimize, and evaluate models for production inference, including quantization, runtime performance, and serving configuration.",
-   "count": 25
+   "count": 27
   },
   {
    "title": "Decision Optimization",
@@ -73,7 +73,7 @@
   {
    "title": "Infrastructure",
    "description": "Deploy, operate, monitor, and troubleshoot clusters, runtimes, services, networking, and platform infrastructure for accelerated and AI workloads.",
-   "count": 16
+   "count": 17
   },
   {
    "title": "AI Storage",
@@ -106,8 +106,8 @@
    "description": "Official NVIDIA-authored guidance for NVIDIA cuDF GPU DataFrames, pandas acceleration, dask-cuDF, ETL, joins, groupby, CSV/Parquet I/O, nullable semantics, and multi-GPU DataFrame workloads.",
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/accelerated-computing-cudf/SKILL.md",
-   "bytes": 9376,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/accelerated-computing-cudf/SKILL.md"
+   "bytes": 10282,
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/accelerated-computing-cudf/SKILL.md"
   },
   {
    "name": "ambient-healthcare-agent-with-nemotron-voice-agent",
@@ -119,7 +119,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/ambient-healthcare-agent-with-nemotron-voice-agent/SKILL.md",
    "bytes": 14462,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/ambient-healthcare-agent-with-nemotron-voice-agent/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/ambient-healthcare-agent-with-nemotron-voice-agent/SKILL.md"
   },
   {
    "name": "amc-run-rtsp-calibration",
@@ -131,7 +131,7 @@
    "license": "Apache-2.0",
    "path": "skills/amc-run-rtsp-calibration/SKILL.md",
    "bytes": 18230,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/amc-run-rtsp-calibration/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/amc-run-rtsp-calibration/SKILL.md"
   },
   {
    "name": "amc-run-sample-calibration",
@@ -143,7 +143,7 @@
    "license": "Apache-2.0",
    "path": "skills/amc-run-sample-calibration/SKILL.md",
    "bytes": 13970,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/amc-run-sample-calibration/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/amc-run-sample-calibration/SKILL.md"
   },
   {
    "name": "amc-run-video-calibration",
@@ -155,7 +155,7 @@
    "license": "Apache-2.0",
    "path": "skills/amc-run-video-calibration/SKILL.md",
    "bytes": 19153,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/amc-run-video-calibration/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/amc-run-video-calibration/SKILL.md"
   },
   {
    "name": "amc-setup-calibration-stack",
@@ -167,7 +167,7 @@
    "license": "Apache-2.0",
    "path": "skills/amc-setup-calibration-stack/SKILL.md",
    "bytes": 15760,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/amc-setup-calibration-stack/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/amc-setup-calibration-stack/SKILL.md"
   },
   {
    "name": "boltz2-nim",
@@ -179,7 +179,55 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/bionemo-boltz2-nim/SKILL.md",
    "bytes": 5513,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-boltz2-nim/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-boltz2-nim/SKILL.md"
+  },
+  {
+   "name": "codonfm-embed",
+   "family": "bionemo",
+   "lanes": [
+    "Inference AI"
+   ],
+   "description": "Validate coding-sequence CSVs, extract public CodonFM/Encodon embeddings, and choose checkpoints for downstream property modeling.",
+   "license": "Apache-2.0",
+   "path": "skills/bionemo-codonfm-embed/SKILL.md",
+   "bytes": 9557,
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-codonfm-embed/SKILL.md"
+  },
+  {
+   "name": "codonfm-finetune",
+   "family": "bionemo",
+   "lanes": [
+    "Training AI"
+   ],
+   "description": "Fine-tune public CodonFM Encodon checkpoints on labeled coding-sequence or coding-variant data using LoRA, head-only, or full fine-tuning. Use when a user explicitly asks to fine-tune CodonFM or Encodon for regression or classification. Support generic public-v1 Encodon workflows only; reject Decodon, MissenseDataset, missense_synom_agg, and generation workflows.",
+   "license": "",
+   "path": "skills/bionemo-codonfm-finetune/SKILL.md",
+   "bytes": 9666,
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-codonfm-finetune/SKILL.md"
+  },
+  {
+   "name": "codonfm-score",
+   "family": "bionemo",
+   "lanes": [
+    "Inference AI"
+   ],
+   "description": "Validate, prepare, or run public CodonFM Encodon masked-codon variant scoring and review compatibility of its scoring workflows. Use only when the user explicitly requests CodonFM or Encodon, or that context is already established in the conversation. Do not select this skill for a generic variant-scoring request without that context; ask for the variant and intended analysis first.",
+   "license": "",
+   "path": "skills/bionemo-codonfm-score/SKILL.md",
+   "bytes": 7365,
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-codonfm-score/SKILL.md"
+  },
+  {
+   "name": "codonfm-setup",
+   "family": "bionemo",
+   "lanes": [
+    "Data Science"
+   ],
+   "description": "Set up the public CodonFM v1 repository and download public Encodon checkpoints. Use for requests to build or launch the CodonFM development container, configure local data/checkpoint mounts, verify GPU access, or download public Encodon 80M, 600M, 1B, or Cdwt-1B weights. Do not use for Decodon, Encodon 5B/10B, missense-aggregation, or codon-optimization setup because those implementations are not in the public repository.",
+   "license": "",
+   "path": "skills/bionemo-codonfm-setup/SKILL.md",
+   "bytes": 13108,
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-codonfm-setup/SKILL.md"
   },
   {
    "name": "cudaq-guide",
@@ -191,7 +239,7 @@
    "license": "Apache-2.0",
    "path": "skills/cudaq-guide/SKILL.md",
    "bytes": 5031,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/cudaq-guide/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/cudaq-guide/SKILL.md"
   },
   {
    "name": "cudaq-importing",
@@ -203,7 +251,7 @@
    "license": "Apache-2.0",
    "path": "skills/cudaq-importing/SKILL.md",
    "bytes": 7439,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/cudaq-importing/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/cudaq-importing/SKILL.md"
   },
   {
    "name": "cuopt-developer",
@@ -215,7 +263,7 @@
    "license": "Apache-2.0",
    "path": "skills/cuopt-developer/SKILL.md",
    "bytes": 13008,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/cuopt-developer/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/cuopt-developer/SKILL.md"
   },
   {
    "name": "cuopt-install",
@@ -227,7 +275,7 @@
    "license": "Apache-2.0",
    "path": "skills/cuopt-install/SKILL.md",
    "bytes": 4230,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/cuopt-install/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/cuopt-install/SKILL.md"
   },
   {
    "name": "cuopt-multi-objective-exploration",
@@ -239,7 +287,7 @@
    "license": "Apache-2.0",
    "path": "skills/cuopt-multi-objective-exploration/SKILL.md",
    "bytes": 15639,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/cuopt-multi-objective-exploration/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/cuopt-multi-objective-exploration/SKILL.md"
   },
   {
    "name": "cuopt-numerical-optimization-api",
@@ -251,7 +299,7 @@
    "license": "Apache-2.0",
    "path": "skills/cuopt-numerical-optimization-api/SKILL.md",
    "bytes": 4947,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/cuopt-numerical-optimization-api/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/cuopt-numerical-optimization-api/SKILL.md"
   },
   {
    "name": "cuopt-numerical-optimization-formulation",
@@ -263,7 +311,7 @@
    "license": "Apache-2.0",
    "path": "skills/cuopt-numerical-optimization-formulation/SKILL.md",
    "bytes": 19584,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/cuopt-numerical-optimization-formulation/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/cuopt-numerical-optimization-formulation/SKILL.md"
   },
   {
    "name": "cuopt-routing-api-python",
@@ -275,7 +323,7 @@
    "license": "Apache-2.0",
    "path": "skills/cuopt-routing-api-python/SKILL.md",
    "bytes": 3698,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/cuopt-routing-api-python/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/cuopt-routing-api-python/SKILL.md"
   },
   {
    "name": "cuopt-server-api-python",
@@ -287,7 +335,7 @@
    "license": "Apache-2.0",
    "path": "skills/cuopt-server-api-python/SKILL.md",
    "bytes": 6154,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/cuopt-server-api-python/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/cuopt-server-api-python/SKILL.md"
   },
   {
    "name": "dali-dynamic-mode",
@@ -299,7 +347,7 @@
    "license": "Apache-2.0",
    "path": "skills/dali-dynamic-mode/SKILL.md",
    "bytes": 14921,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/dali-dynamic-mode/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/dali-dynamic-mode/SKILL.md"
   },
   {
    "name": "data-designer",
@@ -311,7 +359,7 @@
    "license": "Apache-2.0",
    "path": "skills/data-designer/SKILL.md",
    "bytes": 4716,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/data-designer/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/data-designer/SKILL.md"
   },
   {
    "name": "deepstream-dev",
@@ -323,7 +371,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/deepstream-dev/SKILL.md",
    "bytes": 13339,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/deepstream-dev/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/deepstream-dev/SKILL.md"
   },
   {
    "name": "deepstream-generate-pipeline",
@@ -335,7 +383,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/deepstream-generate-pipeline/SKILL.md",
    "bytes": 16797,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/deepstream-generate-pipeline/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/deepstream-generate-pipeline/SKILL.md"
   },
   {
    "name": "deepstream-import-vision-model",
@@ -347,7 +395,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/deepstream-import-vision-model/SKILL.md",
    "bytes": 14565,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/deepstream-import-vision-model/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/deepstream-import-vision-model/SKILL.md"
   },
   {
    "name": "deepstream-profile-pipeline",
@@ -359,7 +407,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/deepstream-profile-pipeline/SKILL.md",
    "bytes": 16386,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/deepstream-profile-pipeline/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/deepstream-profile-pipeline/SKILL.md"
   },
   {
    "name": "deepstream-run-mv3dt",
@@ -371,7 +419,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/deepstream-run-mv3dt/SKILL.md",
    "bytes": 12569,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/deepstream-run-mv3dt/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/deepstream-run-mv3dt/SKILL.md"
   },
   {
    "name": "deepstream-sop",
@@ -383,7 +431,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/deepstream-sop/SKILL.md",
    "bytes": 19633,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/deepstream-sop/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/deepstream-sop/SKILL.md"
   },
   {
    "name": "dicom-metadata-extract",
@@ -395,7 +443,7 @@
    "license": "Apache-2.0",
    "path": "skills/dicom-metadata-extract/SKILL.md",
    "bytes": 3284,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/dicom-metadata-extract/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/dicom-metadata-extract/SKILL.md"
   },
   {
    "name": "dicom-series-preflight",
@@ -407,7 +455,7 @@
    "license": "Apache-2.0",
    "path": "skills/dicom-series-preflight/SKILL.md",
    "bytes": 3454,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/dicom-series-preflight/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/dicom-series-preflight/SKILL.md"
   },
   {
    "name": "dicom-series-to-volume",
@@ -419,7 +467,7 @@
    "license": "Apache-2.0",
    "path": "skills/dicom-series-to-volume/SKILL.md",
    "bytes": 3703,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/dicom-series-to-volume/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/dicom-series-to-volume/SKILL.md"
   },
   {
    "name": "diffdock-nim",
@@ -431,7 +479,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/bionemo-diffdock-nim/SKILL.md",
    "bytes": 4280,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-diffdock-nim/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-diffdock-nim/SKILL.md"
   },
   {
    "name": "digital-health-clinical-asr-build",
@@ -443,7 +491,7 @@
    "license": "Apache-2.0",
    "path": "skills/digital-health-clinical-asr-build/SKILL.md",
    "bytes": 19869,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/digital-health-clinical-asr-build/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/digital-health-clinical-asr-build/SKILL.md"
   },
   {
    "name": "digital-health-clinical-asr-eval",
@@ -455,7 +503,7 @@
    "license": "Apache-2.0",
    "path": "skills/digital-health-clinical-asr-eval/SKILL.md",
    "bytes": 18686,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/digital-health-clinical-asr-eval/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/digital-health-clinical-asr-eval/SKILL.md"
   },
   {
    "name": "digital-health-clinical-asr-finetune",
@@ -467,7 +515,7 @@
    "license": "Apache-2.0",
    "path": "skills/digital-health-clinical-asr-finetune/SKILL.md",
    "bytes": 20185,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/digital-health-clinical-asr-finetune/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/digital-health-clinical-asr-finetune/SKILL.md"
   },
   {
    "name": "digital-health-clinical-asr-setup",
@@ -479,7 +527,7 @@
    "license": "Apache-2.0",
    "path": "skills/digital-health-clinical-asr-setup/SKILL.md",
    "bytes": 18282,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/digital-health-clinical-asr-setup/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/digital-health-clinical-asr-setup/SKILL.md"
   },
   {
    "name": "doca-aes-gcm",
@@ -491,7 +539,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-aes-gcm/SKILL.md",
    "bytes": 16739,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-aes-gcm/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-aes-gcm/SKILL.md"
   },
   {
    "name": "doca-argp",
@@ -503,7 +551,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-argp/SKILL.md",
    "bytes": 12829,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-argp/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-argp/SKILL.md"
   },
   {
    "name": "doca-argus",
@@ -515,7 +563,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-argus/SKILL.md",
    "bytes": 19102,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-argus/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-argus/SKILL.md"
   },
   {
    "name": "doca-bare-metal-deployment",
@@ -527,7 +575,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-bare-metal-deployment/SKILL.md",
    "bytes": 11602,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-bare-metal-deployment/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-bare-metal-deployment/SKILL.md"
   },
   {
    "name": "doca-bench",
@@ -539,7 +587,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-bench/SKILL.md",
    "bytes": 13923,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-bench/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-bench/SKILL.md"
   },
   {
    "name": "doca-bench-extension",
@@ -551,7 +599,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-bench-extension/SKILL.md",
    "bytes": 15992,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-bench-extension/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-bench-extension/SKILL.md"
   },
   {
    "name": "doca-bf3-deployment",
@@ -563,7 +611,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-bf3-deployment/SKILL.md",
    "bytes": 10972,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-bf3-deployment/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-bf3-deployment/SKILL.md"
   },
   {
    "name": "doca-bf4-deployment",
@@ -575,7 +623,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-bf4-deployment/SKILL.md",
    "bytes": 12247,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-bf4-deployment/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-bf4-deployment/SKILL.md"
   },
   {
    "name": "doca-caps",
@@ -587,7 +635,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-caps/SKILL.md",
    "bytes": 9741,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-caps/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-caps/SKILL.md"
   },
   {
    "name": "doca-collectx-deployment",
@@ -599,7 +647,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-collectx-deployment/SKILL.md",
    "bytes": 11397,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-collectx-deployment/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-collectx-deployment/SKILL.md"
   },
   {
    "name": "doca-comch",
@@ -611,7 +659,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-comch/SKILL.md",
    "bytes": 12623,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-comch/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-comch/SKILL.md"
   },
   {
    "name": "doca-comm-channel-admin",
@@ -623,7 +671,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-comm-channel-admin/SKILL.md",
    "bytes": 12543,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-comm-channel-admin/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-comm-channel-admin/SKILL.md"
   },
   {
    "name": "doca-common",
@@ -635,7 +683,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-common/SKILL.md",
    "bytes": 15466,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-common/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-common/SKILL.md"
   },
   {
    "name": "doca-compress",
@@ -647,7 +695,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-compress/SKILL.md",
    "bytes": 15271,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-compress/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-compress/SKILL.md"
   },
   {
    "name": "doca-container-deployment",
@@ -659,7 +707,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-container-deployment/SKILL.md",
    "bytes": 10105,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-container-deployment/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-container-deployment/SKILL.md"
   },
   {
    "name": "doca-debug",
@@ -671,7 +719,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-debug/SKILL.md",
    "bytes": 10238,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-debug/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-debug/SKILL.md"
   },
   {
    "name": "doca-devemu",
@@ -683,7 +731,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-devemu/SKILL.md",
    "bytes": 11003,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-devemu/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-devemu/SKILL.md"
   },
   {
    "name": "doca-dma",
@@ -695,7 +743,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-dma/SKILL.md",
    "bytes": 13365,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-dma/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-dma/SKILL.md"
   },
   {
    "name": "doca-dms",
@@ -707,7 +755,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-dms/SKILL.md",
    "bytes": 11381,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-dms/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-dms/SKILL.md"
   },
   {
    "name": "doca-dpa",
@@ -719,7 +767,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-dpa/SKILL.md",
    "bytes": 20070,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-dpa/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-dpa/SKILL.md"
   },
   {
    "name": "doca-dpa-hl-tracer",
@@ -731,7 +779,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-dpa-hl-tracer/SKILL.md",
    "bytes": 17466,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-dpa-hl-tracer/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-dpa-hl-tracer/SKILL.md"
   },
   {
    "name": "doca-dpdk-bridge",
@@ -743,7 +791,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-dpdk-bridge/SKILL.md",
    "bytes": 15423,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-dpdk-bridge/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-dpdk-bridge/SKILL.md"
   },
   {
    "name": "doca-erasure-coding",
@@ -755,7 +803,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-erasure-coding/SKILL.md",
    "bytes": 17188,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-erasure-coding/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-erasure-coding/SKILL.md"
   },
   {
    "name": "doca-eth",
@@ -767,7 +815,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-eth/SKILL.md",
    "bytes": 13597,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-eth/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-eth/SKILL.md"
   },
   {
    "name": "doca-firefly",
@@ -779,7 +827,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-firefly/SKILL.md",
    "bytes": 18186,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-firefly/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-firefly/SKILL.md"
   },
   {
    "name": "doca-flow",
@@ -791,7 +839,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-flow/SKILL.md",
    "bytes": 13764,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-flow/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-flow/SKILL.md"
   },
   {
    "name": "doca-flow-dpa-perf",
@@ -803,7 +851,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-flow-dpa-perf/SKILL.md",
    "bytes": 15670,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-flow-dpa-perf/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-flow-dpa-perf/SKILL.md"
   },
   {
    "name": "doca-flow-dpa-provider",
@@ -815,7 +863,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-flow-dpa-provider/SKILL.md",
    "bytes": 18185,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-flow-dpa-provider/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-flow-dpa-provider/SKILL.md"
   },
   {
    "name": "doca-flow-grpc-server",
@@ -827,7 +875,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-flow-grpc-server/SKILL.md",
    "bytes": 16767,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-flow-grpc-server/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-flow-grpc-server/SKILL.md"
   },
   {
    "name": "doca-flow-perf",
@@ -839,7 +887,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-flow-perf/SKILL.md",
    "bytes": 15605,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-flow-perf/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-flow-perf/SKILL.md"
   },
   {
    "name": "doca-flow-tune",
@@ -851,7 +899,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-flow-tune/SKILL.md",
    "bytes": 19342,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-flow-tune/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-flow-tune/SKILL.md"
   },
   {
    "name": "doca-gpi",
@@ -863,7 +911,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-gpi/SKILL.md",
    "bytes": 15850,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-gpi/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-gpi/SKILL.md"
   },
   {
    "name": "doca-gpunetio",
@@ -875,7 +923,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-gpunetio/SKILL.md",
    "bytes": 15005,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-gpunetio/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-gpunetio/SKILL.md"
   },
   {
    "name": "doca-gpunetio-ib-write-bw",
@@ -887,7 +935,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-gpunetio-ib-write-bw/SKILL.md",
    "bytes": 16936,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-gpunetio-ib-write-bw/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-gpunetio-ib-write-bw/SKILL.md"
   },
   {
    "name": "doca-gpunetio-ib-write-lat",
@@ -899,7 +947,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-gpunetio-ib-write-lat/SKILL.md",
    "bytes": 15174,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-gpunetio-ib-write-lat/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-gpunetio-ib-write-lat/SKILL.md"
   },
   {
    "name": "doca-hardware-safety",
@@ -911,7 +959,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-hardware-safety/SKILL.md",
    "bytes": 17022,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-hardware-safety/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-hardware-safety/SKILL.md"
   },
   {
    "name": "doca-mgmt",
@@ -923,7 +971,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-mgmt/SKILL.md",
    "bytes": 15978,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-mgmt/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-mgmt/SKILL.md"
   },
   {
    "name": "doca-pcc",
@@ -935,7 +983,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-pcc/SKILL.md",
    "bytes": 19256,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-pcc/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-pcc/SKILL.md"
   },
   {
    "name": "doca-pcc-counters",
@@ -947,7 +995,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-pcc-counters/SKILL.md",
    "bytes": 12166,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-pcc-counters/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-pcc-counters/SKILL.md"
   },
   {
    "name": "doca-pcc-ztr-rttcc-algo",
@@ -959,7 +1007,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-pcc-ztr-rttcc-algo/SKILL.md",
    "bytes": 19094,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-pcc-ztr-rttcc-algo/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-pcc-ztr-rttcc-algo/SKILL.md"
   },
   {
    "name": "doca-programming-guide",
@@ -971,7 +1019,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-programming-guide/SKILL.md",
    "bytes": 13777,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-programming-guide/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-programming-guide/SKILL.md"
   },
   {
    "name": "doca-public-knowledge-map",
@@ -983,7 +1031,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/doca-public-knowledge-map/SKILL.md",
    "bytes": 13090,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-public-knowledge-map/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-public-knowledge-map/SKILL.md"
   },
   {
    "name": "doca-rdma",
@@ -995,7 +1043,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-rdma/SKILL.md",
    "bytes": 14146,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-rdma/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-rdma/SKILL.md"
   },
   {
    "name": "doca-rdmi",
@@ -1007,7 +1055,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-rdmi/SKILL.md",
    "bytes": 15416,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-rdmi/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-rdmi/SKILL.md"
   },
   {
    "name": "doca-rmax",
@@ -1019,7 +1067,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-rmax/SKILL.md",
    "bytes": 18345,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-rmax/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-rmax/SKILL.md"
   },
   {
    "name": "doca-setup",
@@ -1031,7 +1079,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/doca-setup/SKILL.md",
    "bytes": 13557,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-setup/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-setup/SKILL.md"
   },
   {
    "name": "doca-sha",
@@ -1043,7 +1091,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-sha/SKILL.md",
    "bytes": 13704,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-sha/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-sha/SKILL.md"
   },
   {
    "name": "doca-sha-offload-engine",
@@ -1055,7 +1103,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-sha-offload-engine/SKILL.md",
    "bytes": 15880,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-sha-offload-engine/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-sha-offload-engine/SKILL.md"
   },
   {
    "name": "doca-socket-relay",
@@ -1067,7 +1115,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-socket-relay/SKILL.md",
    "bytes": 16135,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-socket-relay/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-socket-relay/SKILL.md"
   },
   {
    "name": "doca-spcx-cc",
@@ -1079,7 +1127,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-spcx-cc/SKILL.md",
    "bytes": 19874,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-spcx-cc/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-spcx-cc/SKILL.md"
   },
   {
    "name": "doca-sta",
@@ -1091,7 +1139,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-sta/SKILL.md",
    "bytes": 15905,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-sta/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-sta/SKILL.md"
   },
   {
    "name": "doca-structured-tools-contract",
@@ -1103,7 +1151,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/doca-structured-tools-contract/SKILL.md",
    "bytes": 19870,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-structured-tools-contract/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-structured-tools-contract/SKILL.md"
   },
   {
    "name": "doca-telemetry",
@@ -1115,7 +1163,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-telemetry/SKILL.md",
    "bytes": 11129,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-telemetry/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-telemetry/SKILL.md"
   },
   {
    "name": "doca-telemetry-exporter",
@@ -1127,7 +1175,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-telemetry-exporter/SKILL.md",
    "bytes": 16906,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-telemetry-exporter/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-telemetry-exporter/SKILL.md"
   },
   {
    "name": "doca-telemetry-utils",
@@ -1139,7 +1187,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-telemetry-utils/SKILL.md",
    "bytes": 17039,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-telemetry-utils/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-telemetry-utils/SKILL.md"
   },
   {
    "name": "doca-upgrade",
@@ -1151,7 +1199,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-upgrade/SKILL.md",
    "bytes": 13590,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-upgrade/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-upgrade/SKILL.md"
   },
   {
    "name": "doca-urom",
@@ -1163,7 +1211,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-urom/SKILL.md",
    "bytes": 18793,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-urom/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-urom/SKILL.md"
   },
   {
    "name": "doca-urom-svc",
@@ -1175,7 +1223,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-urom-svc/SKILL.md",
    "bytes": 18841,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-urom-svc/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-urom-svc/SKILL.md"
   },
   {
    "name": "doca-verbs",
@@ -1187,7 +1235,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-verbs/SKILL.md",
    "bytes": 19606,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-verbs/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-verbs/SKILL.md"
   },
   {
    "name": "doca-version",
@@ -1199,7 +1247,7 @@
    "license": "Apache-2.0",
    "path": "skills/doca-version/SKILL.md",
    "bytes": 12186,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/doca-version/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/doca-version/SKILL.md"
   },
   {
    "name": "drug-discovery-pipeline",
@@ -1211,7 +1259,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/bionemo-drug-discovery-pipeline/SKILL.md",
    "bytes": 7367,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-drug-discovery-pipeline/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-drug-discovery-pipeline/SKILL.md"
   },
   {
    "name": "dynamo-interconnect-check",
@@ -1223,7 +1271,7 @@
    "license": "Apache-2.0",
    "path": "skills/dynamo-interconnect-check/SKILL.md",
    "bytes": 6405,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/dynamo-interconnect-check/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/dynamo-interconnect-check/SKILL.md"
   },
   {
    "name": "dynamo-recipe-runner",
@@ -1235,7 +1283,7 @@
    "license": "Apache-2.0",
    "path": "skills/dynamo-recipe-runner/SKILL.md",
    "bytes": 7336,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/dynamo-recipe-runner/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/dynamo-recipe-runner/SKILL.md"
   },
   {
    "name": "dynamo-router-starter",
@@ -1247,7 +1295,7 @@
    "license": "Apache-2.0",
    "path": "skills/dynamo-router-starter/SKILL.md",
    "bytes": 5712,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/dynamo-router-starter/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/dynamo-router-starter/SKILL.md"
   },
   {
    "name": "dynamo-troubleshoot",
@@ -1259,7 +1307,7 @@
    "license": "Apache-2.0",
    "path": "skills/dynamo-troubleshoot/SKILL.md",
    "bytes": 5130,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/dynamo-troubleshoot/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/dynamo-troubleshoot/SKILL.md"
   },
   {
    "name": "earth2studio-create-datasource",
@@ -1271,7 +1319,7 @@
    "license": "Apache-2.0",
    "path": "skills/earth2studio-create-datasource/SKILL.md",
    "bytes": 10613,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/earth2studio-create-datasource/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/earth2studio-create-datasource/SKILL.md"
   },
   {
    "name": "earth2studio-create-diagnostic",
@@ -1283,7 +1331,7 @@
    "license": "Apache-2.0",
    "path": "skills/earth2studio-create-diagnostic/SKILL.md",
    "bytes": 14796,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/earth2studio-create-diagnostic/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/earth2studio-create-diagnostic/SKILL.md"
   },
   {
    "name": "earth2studio-create-prognostic",
@@ -1295,7 +1343,7 @@
    "license": "Apache-2.0",
    "path": "skills/earth2studio-create-prognostic/SKILL.md",
    "bytes": 10253,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/earth2studio-create-prognostic/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/earth2studio-create-prognostic/SKILL.md"
   },
   {
    "name": "earth2studio-data-fetch",
@@ -1307,7 +1355,7 @@
    "license": "Apache-2.0",
    "path": "skills/earth2studio-data-fetch/SKILL.md",
    "bytes": 8697,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/earth2studio-data-fetch/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/earth2studio-data-fetch/SKILL.md"
   },
   {
    "name": "earth2studio-deterministic-forecast",
@@ -1319,7 +1367,7 @@
    "license": "Apache-2.0",
    "path": "skills/earth2studio-deterministic-forecast/SKILL.md",
    "bytes": 5488,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/earth2studio-deterministic-forecast/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/earth2studio-deterministic-forecast/SKILL.md"
   },
   {
    "name": "earth2studio-discover",
@@ -1331,7 +1379,7 @@
    "license": "Apache-2.0",
    "path": "skills/earth2studio-discover/SKILL.md",
    "bytes": 8548,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/earth2studio-discover/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/earth2studio-discover/SKILL.md"
   },
   {
    "name": "earth2studio-install",
@@ -1343,7 +1391,7 @@
    "license": "Apache-2.0",
    "path": "skills/earth2studio-install/SKILL.md",
    "bytes": 6581,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/earth2studio-install/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/earth2studio-install/SKILL.md"
   },
   {
    "name": "evo2-nim",
@@ -1355,7 +1403,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/bionemo-evo2-nim/SKILL.md",
    "bytes": 9695,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-evo2-nim/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-evo2-nim/SKILL.md"
   },
   {
    "name": "foundationpose-pipeline",
@@ -1367,7 +1415,7 @@
    "license": "Apache-2.0",
    "path": "skills/foundationpose-pipeline/SKILL.md",
    "bytes": 9773,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/foundationpose-pipeline/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/foundationpose-pipeline/SKILL.md"
   },
   {
    "name": "foundationpose-setup",
@@ -1379,7 +1427,7 @@
    "license": "Apache-2.0",
    "path": "skills/foundationpose-setup/SKILL.md",
    "bytes": 6081,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/foundationpose-setup/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/foundationpose-setup/SKILL.md"
   },
   {
    "name": "g-assist-mcp-skill",
@@ -1391,7 +1439,7 @@
    "license": "CC-BY-4.0",
    "path": "skills/g-assist-mcp-skill/SKILL.md",
    "bytes": 15992,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/g-assist-mcp-skill/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/g-assist-mcp-skill/SKILL.md"
   },
   {
    "name": "genmol-nim",
@@ -1403,7 +1451,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/bionemo-genmol-nim/SKILL.md",
    "bytes": 5431,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-genmol-nim/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-genmol-nim/SKILL.md"
   },
   {
    "name": "holohub-app-lifecycle",
@@ -1415,7 +1463,7 @@
    "license": "Apache-2.0",
    "path": "skills/holohub-app-lifecycle/SKILL.md",
    "bytes": 7260,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/holohub-app-lifecycle/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/holohub-app-lifecycle/SKILL.md"
   },
   {
    "name": "holohub-debug-build-run",
@@ -1427,7 +1475,7 @@
    "license": "Apache-2.0",
    "path": "skills/holohub-debug-build-run/SKILL.md",
    "bytes": 6853,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/holohub-debug-build-run/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/holohub-debug-build-run/SKILL.md"
   },
   {
    "name": "holohub-module-lifecycle",
@@ -1439,7 +1487,7 @@
    "license": "Apache-2.0",
    "path": "skills/holohub-module-lifecycle/SKILL.md",
    "bytes": 6895,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/holohub-module-lifecycle/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/holohub-module-lifecycle/SKILL.md"
   },
   {
    "name": "holoscan-install-conda",
@@ -1451,7 +1499,7 @@
    "license": "Apache-2.0",
    "path": "skills/holoscan-install-conda/SKILL.md",
    "bytes": 7876,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/holoscan-install-conda/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/holoscan-install-conda/SKILL.md"
   },
   {
    "name": "holoscan-install-container",
@@ -1463,7 +1511,7 @@
    "license": "Apache-2.0",
    "path": "skills/holoscan-install-container/SKILL.md",
    "bytes": 7481,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/holoscan-install-container/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/holoscan-install-container/SKILL.md"
   },
   {
    "name": "holoscan-install-debian",
@@ -1475,7 +1523,7 @@
    "license": "Apache-2.0",
    "path": "skills/holoscan-install-debian/SKILL.md",
    "bytes": 6220,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/holoscan-install-debian/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/holoscan-install-debian/SKILL.md"
   },
   {
    "name": "holoscan-install-source",
@@ -1487,7 +1535,7 @@
    "license": "Apache-2.0",
    "path": "skills/holoscan-install-source/SKILL.md",
    "bytes": 6135,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/holoscan-install-source/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/holoscan-install-source/SKILL.md"
   },
   {
    "name": "holoscan-install-wheel",
@@ -1499,7 +1547,7 @@
    "license": "Apache-2.0",
    "path": "skills/holoscan-install-wheel/SKILL.md",
    "bytes": 6318,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/holoscan-install-wheel/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/holoscan-install-wheel/SKILL.md"
   },
   {
    "name": "holoscan-setup",
@@ -1511,7 +1559,7 @@
    "license": "Apache-2.0",
    "path": "skills/holoscan-setup/SKILL.md",
    "bytes": 10174,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/holoscan-setup/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/holoscan-setup/SKILL.md"
   },
   {
    "name": "hsb-app",
@@ -1523,7 +1571,7 @@
    "license": "Apache-2.0",
    "path": "skills/hsb-app/SKILL.md",
    "bytes": 16560,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/hsb-app/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/hsb-app/SKILL.md"
   },
   {
    "name": "hsb-flash",
@@ -1535,7 +1583,7 @@
    "license": "Apache-2.0",
    "path": "skills/hsb-flash/SKILL.md",
    "bytes": 17699,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/hsb-flash/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/hsb-flash/SKILL.md"
   },
   {
    "name": "hsb-ip-create-top",
@@ -1547,7 +1595,7 @@
    "license": "Apache-2.0",
    "path": "skills/hsb-ip-create-top/SKILL.md",
    "bytes": 10956,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/hsb-ip-create-top/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/hsb-ip-create-top/SKILL.md"
   },
   {
    "name": "hsb-ip-def",
@@ -1559,7 +1607,7 @@
    "license": "Apache-2.0",
    "path": "skills/hsb-ip-def/SKILL.md",
    "bytes": 11553,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/hsb-ip-def/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/hsb-ip-def/SKILL.md"
   },
   {
    "name": "hsb-ip-packetizer",
@@ -1571,7 +1619,7 @@
    "license": "Apache-2.0",
    "path": "skills/hsb-ip-packetizer/SKILL.md",
    "bytes": 14339,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/hsb-ip-packetizer/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/hsb-ip-packetizer/SKILL.md"
   },
   {
    "name": "hsb-setup",
@@ -1583,7 +1631,7 @@
    "license": "Apache-2.0",
    "path": "skills/hsb-setup/SKILL.md",
    "bytes": 19653,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/hsb-setup/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/hsb-setup/SKILL.md"
   },
   {
    "name": "hsb-test",
@@ -1595,7 +1643,7 @@
    "license": "Apache-2.0",
    "path": "skills/hsb-test/SKILL.md",
    "bytes": 16679,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/hsb-test/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/hsb-test/SKILL.md"
   },
   {
    "name": "i4h-lerobot-viz",
@@ -1607,7 +1655,7 @@
    "license": "Apache-2.0",
    "path": "skills/i4h-lerobot-viz/SKILL.md",
    "bytes": 3904,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/i4h-lerobot-viz/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/i4h-lerobot-viz/SKILL.md"
   },
   {
    "name": "i4h-workflow",
@@ -1619,7 +1667,7 @@
    "license": "Apache-2.0",
    "path": "skills/i4h-workflow/SKILL.md",
    "bytes": 5204,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/i4h-workflow/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/i4h-workflow/SKILL.md"
   },
   {
    "name": "i4h-workflow-create",
@@ -1631,7 +1679,7 @@
    "license": "Apache-2.0",
    "path": "skills/i4h-workflow-create/SKILL.md",
    "bytes": 6155,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/i4h-workflow-create/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/i4h-workflow-create/SKILL.md"
   },
   {
    "name": "i4h-workflow-dataset-annotate",
@@ -1643,7 +1691,7 @@
    "license": "Apache-2.0",
    "path": "skills/i4h-workflow-dataset-annotate/SKILL.md",
    "bytes": 5893,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/i4h-workflow-dataset-annotate/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/i4h-workflow-dataset-annotate/SKILL.md"
   },
   {
    "name": "i4h-workflow-dataset-convert",
@@ -1655,7 +1703,7 @@
    "license": "Apache-2.0",
    "path": "skills/i4h-workflow-dataset-convert/SKILL.md",
    "bytes": 5319,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/i4h-workflow-dataset-convert/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/i4h-workflow-dataset-convert/SKILL.md"
   },
   {
    "name": "i4h-workflow-dataset-mimic",
@@ -1667,7 +1715,7 @@
    "license": "Apache-2.0",
    "path": "skills/i4h-workflow-dataset-mimic/SKILL.md",
    "bytes": 3929,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/i4h-workflow-dataset-mimic/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/i4h-workflow-dataset-mimic/SKILL.md"
   },
   {
    "name": "i4h-workflow-dataset-replay",
@@ -1679,7 +1727,7 @@
    "license": "Apache-2.0",
    "path": "skills/i4h-workflow-dataset-replay/SKILL.md",
    "bytes": 3894,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/i4h-workflow-dataset-replay/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/i4h-workflow-dataset-replay/SKILL.md"
   },
   {
    "name": "i4h-workflow-dataset-teleop",
@@ -1691,7 +1739,7 @@
    "license": "Apache-2.0",
    "path": "skills/i4h-workflow-dataset-teleop/SKILL.md",
    "bytes": 4737,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/i4h-workflow-dataset-teleop/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/i4h-workflow-dataset-teleop/SKILL.md"
   },
   {
    "name": "i4h-workflow-e2e",
@@ -1703,7 +1751,7 @@
    "license": "Apache-2.0",
    "path": "skills/i4h-workflow-e2e/SKILL.md",
    "bytes": 4530,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/i4h-workflow-e2e/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/i4h-workflow-e2e/SKILL.md"
   },
   {
    "name": "i4h-workflow-finetune",
@@ -1715,7 +1763,7 @@
    "license": "Apache-2.0",
    "path": "skills/i4h-workflow-finetune/SKILL.md",
    "bytes": 5856,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/i4h-workflow-finetune/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/i4h-workflow-finetune/SKILL.md"
   },
   {
    "name": "i4h-workflow-scene-edit",
@@ -1727,7 +1775,7 @@
    "license": "Apache-2.0",
    "path": "skills/i4h-workflow-scene-edit/SKILL.md",
    "bytes": 19298,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/i4h-workflow-scene-edit/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/i4h-workflow-scene-edit/SKILL.md"
   },
   {
    "name": "i4h-workflow-setup",
@@ -1739,7 +1787,7 @@
    "license": "Apache-2.0",
    "path": "skills/i4h-workflow-setup/SKILL.md",
    "bytes": 4034,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/i4h-workflow-setup/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/i4h-workflow-setup/SKILL.md"
   },
   {
    "name": "i4h-workflow-train-rl",
@@ -1751,7 +1799,7 @@
    "license": "Apache-2.0",
    "path": "skills/i4h-workflow-train-rl/SKILL.md",
    "bytes": 15034,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/i4h-workflow-train-rl/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/i4h-workflow-train-rl/SKILL.md"
   },
   {
    "name": "i4h-workflow-validate",
@@ -1763,7 +1811,7 @@
    "license": "Apache-2.0",
    "path": "skills/i4h-workflow-validate/SKILL.md",
    "bytes": 10381,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/i4h-workflow-validate/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/i4h-workflow-validate/SKILL.md"
   },
   {
    "name": "isaac-mission-control-showcase",
@@ -1775,7 +1823,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/isaac-mission-control-showcase/SKILL.md",
    "bytes": 19214,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/isaac-mission-control-showcase/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/isaac-mission-control-showcase/SKILL.md"
   },
   {
    "name": "jetson-build-source",
@@ -1787,7 +1835,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-build-source/SKILL.md",
    "bytes": 20078,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-build-source/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-build-source/SKILL.md"
   },
   {
    "name": "jetson-customize-camera",
@@ -1799,7 +1847,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-customize-camera/SKILL.md",
    "bytes": 9840,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-customize-camera/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-customize-camera/SKILL.md"
   },
   {
    "name": "jetson-customize-clocks",
@@ -1811,7 +1859,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-customize-clocks/SKILL.md",
    "bytes": 19128,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-customize-clocks/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-customize-clocks/SKILL.md"
   },
   {
    "name": "jetson-customize-fan",
@@ -1823,7 +1871,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-customize-fan/SKILL.md",
    "bytes": 17206,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-customize-fan/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-customize-fan/SKILL.md"
   },
   {
    "name": "jetson-customize-mgbe",
@@ -1835,7 +1883,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-customize-mgbe/SKILL.md",
    "bytes": 8276,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-customize-mgbe/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-customize-mgbe/SKILL.md"
   },
   {
    "name": "jetson-customize-nvpmodel",
@@ -1847,7 +1895,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-customize-nvpmodel/SKILL.md",
    "bytes": 17884,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-customize-nvpmodel/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-customize-nvpmodel/SKILL.md"
   },
   {
    "name": "jetson-customize-pcie",
@@ -1859,7 +1907,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-customize-pcie/SKILL.md",
    "bytes": 9336,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-customize-pcie/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-customize-pcie/SKILL.md"
   },
   {
    "name": "jetson-customize-pinmux",
@@ -1871,7 +1919,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-customize-pinmux/SKILL.md",
    "bytes": 9723,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-customize-pinmux/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-customize-pinmux/SKILL.md"
   },
   {
    "name": "jetson-customize-uphy",
@@ -1883,7 +1931,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-customize-uphy/SKILL.md",
    "bytes": 9488,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-customize-uphy/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-customize-uphy/SKILL.md"
   },
   {
    "name": "jetson-customize-usb",
@@ -1895,7 +1943,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-customize-usb/SKILL.md",
    "bytes": 8397,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-customize-usb/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-customize-usb/SKILL.md"
   },
   {
    "name": "jetson-derive-carrier",
@@ -1907,7 +1955,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-derive-carrier/SKILL.md",
    "bytes": 16969,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-derive-carrier/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-derive-carrier/SKILL.md"
   },
   {
    "name": "jetson-diagnostic",
@@ -1919,7 +1967,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-diagnostic/SKILL.md",
    "bytes": 10834,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-diagnostic/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-diagnostic/SKILL.md"
   },
   {
    "name": "jetson-download-bsp",
@@ -1931,7 +1979,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-download-bsp/SKILL.md",
    "bytes": 11824,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-download-bsp/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-download-bsp/SKILL.md"
   },
   {
    "name": "jetson-flash-image",
@@ -1943,7 +1991,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-flash-image/SKILL.md",
    "bytes": 19769,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-flash-image/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-flash-image/SKILL.md"
   },
   {
    "name": "jetson-generate-kb",
@@ -1955,7 +2003,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-generate-kb/SKILL.md",
    "bytes": 15236,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-generate-kb/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-generate-kb/SKILL.md"
   },
   {
    "name": "jetson-headless-mode",
@@ -1967,7 +2015,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-headless-mode/SKILL.md",
    "bytes": 7717,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-headless-mode/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-headless-mode/SKILL.md"
   },
   {
    "name": "jetson-inference-mem-tune",
@@ -1979,7 +2027,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-inference-mem-tune/SKILL.md",
    "bytes": 11436,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-inference-mem-tune/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-inference-mem-tune/SKILL.md"
   },
   {
    "name": "jetson-init-image",
@@ -1991,7 +2039,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-init-image/SKILL.md",
    "bytes": 7285,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-init-image/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-init-image/SKILL.md"
   },
   {
    "name": "jetson-init-source",
@@ -2003,7 +2051,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-init-source/SKILL.md",
    "bytes": 17065,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-init-source/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-init-source/SKILL.md"
   },
   {
    "name": "jetson-init-target",
@@ -2015,7 +2063,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-init-target/SKILL.md",
    "bytes": 19136,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-init-target/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-init-target/SKILL.md"
   },
   {
    "name": "jetson-link-docs",
@@ -2027,7 +2075,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-link-docs/SKILL.md",
    "bytes": 13390,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-link-docs/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-link-docs/SKILL.md"
   },
   {
    "name": "jetson-llm-benchmark",
@@ -2039,7 +2087,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-llm-benchmark/SKILL.md",
    "bytes": 12242,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-llm-benchmark/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-llm-benchmark/SKILL.md"
   },
   {
    "name": "jetson-llm-serve",
@@ -2051,7 +2099,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-llm-serve/SKILL.md",
    "bytes": 12090,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-llm-serve/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-llm-serve/SKILL.md"
   },
   {
    "name": "jetson-memory-audit",
@@ -2063,7 +2111,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-memory-audit/SKILL.md",
    "bytes": 9114,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-memory-audit/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-memory-audit/SKILL.md"
   },
   {
    "name": "jetson-optimize-memory",
@@ -2075,7 +2123,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-optimize-memory/SKILL.md",
    "bytes": 8148,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-optimize-memory/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-optimize-memory/SKILL.md"
   },
   {
    "name": "jetson-package",
@@ -2087,7 +2135,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-package/SKILL.md",
    "bytes": 7336,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-package/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-package/SKILL.md"
   },
   {
    "name": "jetson-print-bsp-info",
@@ -2099,7 +2147,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-print-bsp-info/SKILL.md",
    "bytes": 5108,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-print-bsp-info/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-print-bsp-info/SKILL.md"
   },
   {
    "name": "jetson-print-device-info",
@@ -2111,7 +2159,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-print-device-info/SKILL.md",
    "bytes": 5211,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-print-device-info/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-print-device-info/SKILL.md"
   },
   {
    "name": "jetson-promote-image",
@@ -2123,7 +2171,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-promote-image/SKILL.md",
    "bytes": 20046,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-promote-image/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-promote-image/SKILL.md"
   },
   {
    "name": "jetson-quick-start",
@@ -2135,7 +2183,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-quick-start/SKILL.md",
    "bytes": 18879,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-quick-start/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-quick-start/SKILL.md"
   },
   {
    "name": "jetson-set-target",
@@ -2147,7 +2195,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-set-target/SKILL.md",
    "bytes": 6951,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-set-target/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-set-target/SKILL.md"
   },
   {
    "name": "jetson-speculative-decoding",
@@ -2159,7 +2207,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-speculative-decoding/SKILL.md",
    "bytes": 4832,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-speculative-decoding/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-speculative-decoding/SKILL.md"
   },
   {
    "name": "jetson-validate-image",
@@ -2171,7 +2219,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-validate-image/SKILL.md",
    "bytes": 13940,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-validate-image/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-validate-image/SKILL.md"
   },
   {
    "name": "jetson-video-benchmark",
@@ -2183,7 +2231,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-video-benchmark/SKILL.md",
    "bytes": 6532,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-video-benchmark/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-video-benchmark/SKILL.md"
   },
   {
    "name": "jetson-video-capability",
@@ -2195,7 +2243,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-video-capability/SKILL.md",
    "bytes": 7825,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-video-capability/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-video-capability/SKILL.md"
   },
   {
    "name": "jetson-video-pipeline",
@@ -2207,7 +2255,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-video-pipeline/SKILL.md",
    "bytes": 8981,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-video-pipeline/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-video-pipeline/SKILL.md"
   },
   {
    "name": "jetson-video-recipe",
@@ -2219,7 +2267,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-video-recipe/SKILL.md",
    "bytes": 5159,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-video-recipe/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-video-recipe/SKILL.md"
   },
   {
    "name": "jetson-video-setup",
@@ -2231,7 +2279,7 @@
    "license": "Apache-2.0",
    "path": "skills/jetson-video-setup/SKILL.md",
    "bytes": 9661,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/jetson-video-setup/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/jetson-video-setup/SKILL.md"
   },
   {
    "name": "kermt-add-cmim-pretrain",
@@ -2243,7 +2291,7 @@
    "license": "Apache-2.0",
    "path": "skills/bionemo-kermt-add-cmim-pretrain/SKILL.md",
    "bytes": 8631,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-kermt-add-cmim-pretrain/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-kermt-add-cmim-pretrain/SKILL.md"
   },
   {
    "name": "kermt-continue-pretrain",
@@ -2255,7 +2303,7 @@
    "license": "Apache-2.0",
    "path": "skills/bionemo-kermt-continue-pretrain/SKILL.md",
    "bytes": 16335,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-kermt-continue-pretrain/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-kermt-continue-pretrain/SKILL.md"
   },
   {
    "name": "kermt-embed",
@@ -2267,7 +2315,7 @@
    "license": "Apache-2.0",
    "path": "skills/bionemo-kermt-embed/SKILL.md",
    "bytes": 7694,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-kermt-embed/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-kermt-embed/SKILL.md"
   },
   {
    "name": "kermt-finetune",
@@ -2279,7 +2327,7 @@
    "license": "Apache-2.0",
    "path": "skills/bionemo-kermt-finetune/SKILL.md",
    "bytes": 16475,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-kermt-finetune/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-kermt-finetune/SKILL.md"
   },
   {
    "name": "kermt-infer",
@@ -2291,7 +2339,7 @@
    "license": "Apache-2.0",
    "path": "skills/bionemo-kermt-infer/SKILL.md",
    "bytes": 6055,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-kermt-infer/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-kermt-infer/SKILL.md"
   },
   {
    "name": "kermt-monitor",
@@ -2303,7 +2351,7 @@
    "license": "Apache-2.0",
    "path": "skills/bionemo-kermt-monitor/SKILL.md",
    "bytes": 7118,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-kermt-monitor/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-kermt-monitor/SKILL.md"
   },
   {
    "name": "kermt-pretrain-scratch",
@@ -2315,7 +2363,7 @@
    "license": "Apache-2.0",
    "path": "skills/bionemo-kermt-pretrain-scratch/SKILL.md",
    "bytes": 9561,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-kermt-pretrain-scratch/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-kermt-pretrain-scratch/SKILL.md"
   },
   {
    "name": "kermt-setup",
@@ -2327,7 +2375,7 @@
    "license": "Apache-2.0",
    "path": "skills/bionemo-kermt-setup/SKILL.md",
    "bytes": 6701,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-kermt-setup/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-kermt-setup/SKILL.md"
   },
   {
    "name": "launch-nemo-rl",
@@ -2339,7 +2387,7 @@
    "license": "Apache-2.0",
    "path": "skills/launch-nemo-rl/SKILL.md",
    "bytes": 17864,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/launch-nemo-rl/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/launch-nemo-rl/SKILL.md"
   },
   {
    "name": "mcore-create-issue",
@@ -2351,7 +2399,7 @@
    "license": "Apache-2.0",
    "path": "skills/mcore-create-issue/SKILL.md",
    "bytes": 6372,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/mcore-create-issue/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/mcore-create-issue/SKILL.md"
   },
   {
    "name": "mcore-linting-and-formatting",
@@ -2363,7 +2411,7 @@
    "license": "Apache-2.0",
    "path": "skills/mcore-linting-and-formatting/SKILL.md",
    "bytes": 1628,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/mcore-linting-and-formatting/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/mcore-linting-and-formatting/SKILL.md"
   },
   {
    "name": "mcore-run-on-slurm",
@@ -2375,7 +2423,7 @@
    "license": "Apache-2.0",
    "path": "skills/mcore-run-on-slurm/SKILL.md",
    "bytes": 7235,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/mcore-run-on-slurm/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/mcore-run-on-slurm/SKILL.md"
   },
   {
    "name": "mcore-split-pr",
@@ -2387,7 +2435,7 @@
    "license": "Apache-2.0",
    "path": "skills/mcore-split-pr/SKILL.md",
    "bytes": 4484,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/mcore-split-pr/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/mcore-split-pr/SKILL.md"
   },
   {
    "name": "mcore-testing",
@@ -2399,7 +2447,7 @@
    "license": "Apache-2.0",
    "path": "skills/mcore-testing/SKILL.md",
    "bytes": 7443,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/mcore-testing/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/mcore-testing/SKILL.md"
   },
   {
    "name": "medtech-model-evidence-export",
@@ -2411,7 +2459,7 @@
    "license": "Apache-2.0",
    "path": "skills/medtech-model-evidence-export/SKILL.md",
    "bytes": 5140,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/medtech-model-evidence-export/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/medtech-model-evidence-export/SKILL.md"
   },
   {
    "name": "molmim-nim",
@@ -2423,7 +2471,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/bionemo-molmim-nim/SKILL.md",
    "bytes": 7592,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-molmim-nim/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-molmim-nim/SKILL.md"
   },
   {
    "name": "msa-search-nim",
@@ -2435,7 +2483,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/bionemo-msa-search-nim/SKILL.md",
    "bytes": 18248,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-msa-search-nim/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-msa-search-nim/SKILL.md"
   },
   {
    "name": "msa-structure-prediction-pipeline",
@@ -2447,7 +2495,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/bionemo-msa-structure-prediction-pipeline/SKILL.md",
    "bytes": 6570,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-msa-structure-prediction-pipeline/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-msa-structure-prediction-pipeline/SKILL.md"
   },
   {
    "name": "nemo-automodel-distributed-training",
@@ -2459,7 +2507,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-automodel-distributed-training/SKILL.md",
    "bytes": 19262,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-automodel-distributed-training/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-automodel-distributed-training/SKILL.md"
   },
   {
    "name": "nemo-automodel-launcher-config",
@@ -2471,7 +2519,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-automodel-launcher-config/SKILL.md",
    "bytes": 8800,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-automodel-launcher-config/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-automodel-launcher-config/SKILL.md"
   },
   {
    "name": "nemo-automodel-model-onboarding",
@@ -2483,7 +2531,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-automodel-model-onboarding/SKILL.md",
    "bytes": 22827,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-automodel-model-onboarding/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-automodel-model-onboarding/SKILL.md"
   },
   {
    "name": "nemo-automodel-recipe-development",
@@ -2495,7 +2543,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-automodel-recipe-development/SKILL.md",
    "bytes": 11931,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-automodel-recipe-development/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-automodel-recipe-development/SKILL.md"
   },
   {
    "name": "nemo-fabric-build-adapter",
@@ -2506,8 +2554,8 @@
    "description": "Build, migrate, review, and maintain third-party NVIDIA NeMo Fabric adapters against the public adapter contract. Use when creating adapter or target descriptors, mapping AgentConfig into an agent harness or custom-agent runtime, implementing start/invoke/stop, declaring schemas and capabilities, packaging discovery metadata, or assessing adapter conformance. Do not use for consumer applications that only call the NVIDIA NeMo Fabric SDK.",
    "license": "",
    "path": "skills/nemo-fabric-build-adapter/SKILL.md",
-   "bytes": 12585,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-fabric-build-adapter/SKILL.md"
+   "bytes": 15616,
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-fabric-build-adapter/SKILL.md"
   },
   {
    "name": "nemo-fabric-integrate",
@@ -2518,8 +2566,8 @@
    "description": "Use this skill when integrating NVIDIA NeMo Fabric into a consumer application, service, evaluation harness, or platform through the typed Python SDK — translating the consumer's own application, job, or deployment config into an in-memory FabricConfig, choosing the single-invocation convenience API or an explicitly started runtime, validating with plan and doctor, and consuming normalized results, artifacts, and telemetry.",
    "license": "Apache-2.0",
    "path": "skills/nemo-fabric-integrate/SKILL.md",
-   "bytes": 21885,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-fabric-integrate/SKILL.md"
+   "bytes": 23247,
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-fabric-integrate/SKILL.md"
   },
   {
    "name": "nemo-mbridge-mlm-bridge-training",
@@ -2531,7 +2579,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-mlm-bridge-training/SKILL.md",
    "bytes": 6296,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-mlm-bridge-training/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-mlm-bridge-training/SKILL.md"
   },
   {
    "name": "nemo-mbridge-multi-node-slurm",
@@ -2543,7 +2591,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-multi-node-slurm/SKILL.md",
    "bytes": 15784,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-multi-node-slurm/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-multi-node-slurm/SKILL.md"
   },
   {
    "name": "nemo-mbridge-perf-activation-recompute",
@@ -2555,7 +2603,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-perf-activation-recompute/SKILL.md",
    "bytes": 18915,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-perf-activation-recompute/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-perf-activation-recompute/SKILL.md"
   },
   {
    "name": "nemo-mbridge-perf-cpu-offloading",
@@ -2567,7 +2615,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-perf-cpu-offloading/SKILL.md",
    "bytes": 9328,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-perf-cpu-offloading/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-perf-cpu-offloading/SKILL.md"
   },
   {
    "name": "nemo-mbridge-perf-cuda-graphs",
@@ -2579,7 +2627,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-perf-cuda-graphs/SKILL.md",
    "bytes": 14089,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-perf-cuda-graphs/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-perf-cuda-graphs/SKILL.md"
   },
   {
    "name": "nemo-mbridge-perf-expert-parallel-overlap",
@@ -2591,7 +2639,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-perf-expert-parallel-overlap/SKILL.md",
    "bytes": 14147,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-perf-expert-parallel-overlap/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-perf-expert-parallel-overlap/SKILL.md"
   },
   {
    "name": "nemo-mbridge-perf-hierarchical-context-parallel",
@@ -2603,7 +2651,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-perf-hierarchical-context-parallel/SKILL.md",
    "bytes": 5641,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-perf-hierarchical-context-parallel/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-perf-hierarchical-context-parallel/SKILL.md"
   },
   {
    "name": "nemo-mbridge-perf-megatron-fsdp",
@@ -2615,7 +2663,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-perf-megatron-fsdp/SKILL.md",
    "bytes": 3892,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-perf-megatron-fsdp/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-perf-megatron-fsdp/SKILL.md"
   },
   {
    "name": "nemo-mbridge-perf-memory-tuning",
@@ -2627,7 +2675,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-perf-memory-tuning/SKILL.md",
    "bytes": 14433,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-perf-memory-tuning/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-perf-memory-tuning/SKILL.md"
   },
   {
    "name": "nemo-mbridge-perf-moe-comm-overlap",
@@ -2639,7 +2687,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-perf-moe-comm-overlap/SKILL.md",
    "bytes": 7489,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-perf-moe-comm-overlap/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-perf-moe-comm-overlap/SKILL.md"
   },
   {
    "name": "nemo-mbridge-perf-moe-dispatcher-selection",
@@ -2651,7 +2699,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-perf-moe-dispatcher-selection/SKILL.md",
    "bytes": 7950,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-perf-moe-dispatcher-selection/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-perf-moe-dispatcher-selection/SKILL.md"
   },
   {
    "name": "nemo-mbridge-perf-moe-hardware-configs",
@@ -2663,7 +2711,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-perf-moe-hardware-configs/SKILL.md",
    "bytes": 7937,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-perf-moe-hardware-configs/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-perf-moe-hardware-configs/SKILL.md"
   },
   {
    "name": "nemo-mbridge-perf-moe-long-context",
@@ -2675,7 +2723,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-perf-moe-long-context/SKILL.md",
    "bytes": 4935,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-perf-moe-long-context/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-perf-moe-long-context/SKILL.md"
   },
   {
    "name": "nemo-mbridge-perf-moe-optimization-workflow",
@@ -2687,7 +2735,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-perf-moe-optimization-workflow/SKILL.md",
    "bytes": 13049,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-perf-moe-optimization-workflow/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-perf-moe-optimization-workflow/SKILL.md"
   },
   {
    "name": "nemo-mbridge-perf-moe-vlm-training",
@@ -2699,7 +2747,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-perf-moe-vlm-training/SKILL.md",
    "bytes": 5141,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-perf-moe-vlm-training/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-perf-moe-vlm-training/SKILL.md"
   },
   {
    "name": "nemo-mbridge-perf-parallelism-strategies",
@@ -2711,7 +2759,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-perf-parallelism-strategies/SKILL.md",
    "bytes": 9580,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-perf-parallelism-strategies/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-perf-parallelism-strategies/SKILL.md"
   },
   {
    "name": "nemo-mbridge-perf-sequence-packing",
@@ -2723,7 +2771,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-perf-sequence-packing/SKILL.md",
    "bytes": 13311,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-perf-sequence-packing/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-perf-sequence-packing/SKILL.md"
   },
   {
    "name": "nemo-mbridge-perf-tp-dp-comm-overlap",
@@ -2735,7 +2783,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-perf-tp-dp-comm-overlap/SKILL.md",
    "bytes": 3694,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-perf-tp-dp-comm-overlap/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-perf-tp-dp-comm-overlap/SKILL.md"
   },
   {
    "name": "nemo-mbridge-recipe-recommender",
@@ -2747,7 +2795,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-recipe-recommender/SKILL.md",
    "bytes": 16752,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-recipe-recommender/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-recipe-recommender/SKILL.md"
   },
   {
    "name": "nemo-mbridge-resiliency",
@@ -2759,7 +2807,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-mbridge-resiliency/SKILL.md",
    "bytes": 11324,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-mbridge-resiliency/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-mbridge-resiliency/SKILL.md"
   },
   {
    "name": "nemo-relay-debug-runtime-integration",
@@ -2771,7 +2819,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-relay-debug-runtime-integration/SKILL.md",
    "bytes": 4120,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-relay-debug-runtime-integration/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-relay-debug-runtime-integration/SKILL.md"
   },
   {
    "name": "nemo-relay-get-started",
@@ -2783,7 +2831,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-relay-get-started/SKILL.md",
    "bytes": 7017,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-relay-get-started/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-relay-get-started/SKILL.md"
   },
   {
    "name": "nemo-relay-install",
@@ -2795,7 +2843,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-relay-install/SKILL.md",
    "bytes": 6956,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-relay-install/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-relay-install/SKILL.md"
   },
   {
    "name": "nemo-relay-instrument-calls",
@@ -2807,7 +2855,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-relay-instrument-calls/SKILL.md",
    "bytes": 4147,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-relay-instrument-calls/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-relay-instrument-calls/SKILL.md"
   },
   {
    "name": "nemo-relay-instrument-context-isolation",
@@ -2819,7 +2867,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-relay-instrument-context-isolation/SKILL.md",
    "bytes": 2667,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-relay-instrument-context-isolation/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-relay-instrument-context-isolation/SKILL.md"
   },
   {
    "name": "nemo-relay-instrument-typed-wrappers",
@@ -2831,7 +2879,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-relay-instrument-typed-wrappers/SKILL.md",
    "bytes": 3461,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-relay-instrument-typed-wrappers/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-relay-instrument-typed-wrappers/SKILL.md"
   },
   {
    "name": "nemo-relay-migrate-from-flow",
@@ -2843,7 +2891,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-relay-migrate-from-flow/SKILL.md",
    "bytes": 7104,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-relay-migrate-from-flow/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-relay-migrate-from-flow/SKILL.md"
   },
   {
    "name": "nemo-relay-plugin-adaptive-tuning",
@@ -2855,7 +2903,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-relay-plugin-adaptive-tuning/SKILL.md",
    "bytes": 4517,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-relay-plugin-adaptive-tuning/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-relay-plugin-adaptive-tuning/SKILL.md"
   },
   {
    "name": "nemo-relay-plugin-build",
@@ -2867,7 +2915,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-relay-plugin-build/SKILL.md",
    "bytes": 10258,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-relay-plugin-build/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-relay-plugin-build/SKILL.md"
   },
   {
    "name": "nemo-relay-plugin-observability",
@@ -2879,7 +2927,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-relay-plugin-observability/SKILL.md",
    "bytes": 6782,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-relay-plugin-observability/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-relay-plugin-observability/SKILL.md"
   },
   {
    "name": "nemo-retriever",
@@ -2891,7 +2939,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-retriever/SKILL.md",
    "bytes": 2332,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-retriever/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-retriever/SKILL.md"
   },
   {
    "name": "nemo-retriever-mcp",
@@ -2903,7 +2951,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-retriever-mcp/SKILL.md",
    "bytes": 1526,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-retriever-mcp/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-retriever-mcp/SKILL.md"
   },
   {
    "name": "nemo-rl-auto-research",
@@ -2915,7 +2963,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-rl-auto-research/SKILL.md",
    "bytes": 9168,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-rl-auto-research/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-rl-auto-research/SKILL.md"
   },
   {
    "name": "nemo-rl-brev-etiquette",
@@ -2927,7 +2975,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-rl-brev-etiquette/SKILL.md",
    "bytes": 5258,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-rl-brev-etiquette/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-rl-brev-etiquette/SKILL.md"
   },
   {
    "name": "nemo-rl-docs",
@@ -2939,7 +2987,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-rl-docs/SKILL.md",
    "bytes": 1428,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-rl-docs/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-rl-docs/SKILL.md"
   },
   {
    "name": "nemo-rl-session-memory",
@@ -2951,7 +2999,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemo-rl-session-memory/SKILL.md",
    "bytes": 5450,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemo-rl-session-memory/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemo-rl-session-memory/SKILL.md"
   },
   {
    "name": "nemoclaw-user-guide",
@@ -2963,7 +3011,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemoclaw-user-guide/SKILL.md",
    "bytes": 4770,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemoclaw-user-guide/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemoclaw-user-guide/SKILL.md"
   },
   {
    "name": "nemotron-asr-finetune",
@@ -2975,7 +3023,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemotron-asr-finetune/SKILL.md",
    "bytes": 11895,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemotron-asr-finetune/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemotron-asr-finetune/SKILL.md"
   },
   {
    "name": "nemotron-customize",
@@ -2987,7 +3035,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemotron-customize/SKILL.md",
    "bytes": 16527,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemotron-customize/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemotron-customize/SKILL.md"
   },
   {
    "name": "nemotron-policy-generator",
@@ -2999,7 +3047,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/nemotron-policy-generator/SKILL.md",
    "bytes": 19882,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemotron-policy-generator/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemotron-policy-generator/SKILL.md"
   },
   {
    "name": "nemotron-retrieval-recipes",
@@ -3011,7 +3059,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemotron-retrieval-recipes/SKILL.md",
    "bytes": 10471,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemotron-retrieval-recipes/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemotron-retrieval-recipes/SKILL.md"
   },
   {
    "name": "nemotron-speech",
@@ -3023,7 +3071,7 @@
    "license": "Apache-2.0",
    "path": "skills/nemotron-speech/SKILL.md",
    "bytes": 11983,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemotron-speech/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemotron-speech/SKILL.md"
   },
   {
    "name": "nemotron-voice-agent-builder",
@@ -3035,7 +3083,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/nemotron-voice-agent-builder/SKILL.md",
    "bytes": 3395,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nemotron-voice-agent-builder/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nemotron-voice-agent-builder/SKILL.md"
   },
   {
    "name": "nv-generate-ct-rflow",
@@ -3047,7 +3095,7 @@
    "license": "Apache-2.0",
    "path": "skills/nv-generate-ct-rflow/SKILL.md",
    "bytes": 12285,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nv-generate-ct-rflow/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nv-generate-ct-rflow/SKILL.md"
   },
   {
    "name": "nv-generate-mr",
@@ -3059,7 +3107,7 @@
    "license": "Apache-2.0",
    "path": "skills/nv-generate-mr/SKILL.md",
    "bytes": 8037,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nv-generate-mr/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nv-generate-mr/SKILL.md"
   },
   {
    "name": "nv-generate-mr-brain",
@@ -3071,7 +3119,7 @@
    "license": "Apache-2.0",
    "path": "skills/nv-generate-mr-brain/SKILL.md",
    "bytes": 10308,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nv-generate-mr-brain/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nv-generate-mr-brain/SKILL.md"
   },
   {
    "name": "nv-generate-mr-brain-finetune",
@@ -3083,7 +3131,7 @@
    "license": "Apache-2.0",
    "path": "skills/nv-generate-mr-brain-finetune/SKILL.md",
    "bytes": 15625,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nv-generate-mr-brain-finetune/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nv-generate-mr-brain-finetune/SKILL.md"
   },
   {
    "name": "nv-generate-vae-finetune",
@@ -3095,7 +3143,7 @@
    "license": "Apache-2.0",
    "path": "skills/nv-generate-vae-finetune/SKILL.md",
    "bytes": 12474,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nv-generate-vae-finetune/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nv-generate-vae-finetune/SKILL.md"
   },
   {
    "name": "nv-reason-ct",
@@ -3107,7 +3155,7 @@
    "license": "Apache-2.0",
    "path": "skills/nv-reason-ct/SKILL.md",
    "bytes": 18236,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nv-reason-ct/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nv-reason-ct/SKILL.md"
   },
   {
    "name": "nv-reason-cxr",
@@ -3119,7 +3167,7 @@
    "license": "Apache-2.0",
    "path": "skills/nv-reason-cxr/SKILL.md",
    "bytes": 15727,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nv-reason-cxr/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nv-reason-cxr/SKILL.md"
   },
   {
    "name": "nv-segment-ct",
@@ -3131,7 +3179,7 @@
    "license": "Apache-2.0",
    "path": "skills/nv-segment-ct/SKILL.md",
    "bytes": 8360,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nv-segment-ct/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nv-segment-ct/SKILL.md"
   },
   {
    "name": "nv-segment-ct-finetune",
@@ -3143,7 +3191,7 @@
    "license": "Apache-2.0",
    "path": "skills/nv-segment-ct-finetune/SKILL.md",
    "bytes": 16806,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nv-segment-ct-finetune/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nv-segment-ct-finetune/SKILL.md"
   },
   {
    "name": "nv-segment-ctmr",
@@ -3155,7 +3203,7 @@
    "license": "Apache-2.0",
    "path": "skills/nv-segment-ctmr/SKILL.md",
    "bytes": 9272,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nv-segment-ctmr/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nv-segment-ctmr/SKILL.md"
   },
   {
    "name": "nvflare-autofl",
@@ -3167,7 +3215,7 @@
    "license": "Apache-2.0",
    "path": "skills/nvflare-autofl/SKILL.md",
    "bytes": 15666,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nvflare-autofl/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nvflare-autofl/SKILL.md"
   },
   {
    "name": "nvflare-autofl-report",
@@ -3179,7 +3227,7 @@
    "license": "Apache-2.0",
    "path": "skills/nvflare-autofl-report/SKILL.md",
    "bytes": 10522,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nvflare-autofl-report/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nvflare-autofl-report/SKILL.md"
   },
   {
    "name": "nvflare-convert-huggingface",
@@ -3191,7 +3239,7 @@
    "license": "Apache-2.0",
    "path": "skills/nvflare-convert-huggingface/SKILL.md",
    "bytes": 13989,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nvflare-convert-huggingface/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nvflare-convert-huggingface/SKILL.md"
   },
   {
    "name": "nvflare-convert-lightning",
@@ -3203,7 +3251,7 @@
    "license": "Apache-2.0",
    "path": "skills/nvflare-convert-lightning/SKILL.md",
    "bytes": 13200,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nvflare-convert-lightning/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nvflare-convert-lightning/SKILL.md"
   },
   {
    "name": "nvflare-convert-pytorch",
@@ -3215,7 +3263,7 @@
    "license": "Apache-2.0",
    "path": "skills/nvflare-convert-pytorch/SKILL.md",
    "bytes": 10587,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nvflare-convert-pytorch/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nvflare-convert-pytorch/SKILL.md"
   },
   {
    "name": "nvflare-diagnose-job",
@@ -3227,7 +3275,7 @@
    "license": "Apache-2.0",
    "path": "skills/nvflare-diagnose-job/SKILL.md",
    "bytes": 4902,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nvflare-diagnose-job/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nvflare-diagnose-job/SKILL.md"
   },
   {
    "name": "nvflare-fed-stats",
@@ -3239,7 +3287,7 @@
    "license": "Apache-2.0",
    "path": "skills/nvflare-fed-stats/SKILL.md",
    "bytes": 12212,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nvflare-fed-stats/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nvflare-fed-stats/SKILL.md"
   },
   {
    "name": "nvflare-orient",
@@ -3251,7 +3299,7 @@
    "license": "Apache-2.0",
    "path": "skills/nvflare-orient/SKILL.md",
    "bytes": 2985,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nvflare-orient/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nvflare-orient/SKILL.md"
   },
   {
    "name": "nvflare-shared",
@@ -3263,7 +3311,7 @@
    "license": "Apache-2.0",
    "path": "skills/nvflare-shared/SKILL.md",
    "bytes": 5165,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nvflare-shared/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nvflare-shared/SKILL.md"
   },
   {
    "name": "nvidia-app",
@@ -3275,7 +3323,7 @@
    "license": "",
    "path": "skills/nvidia-app/SKILL.md",
    "bytes": 17021,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nvidia-app/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nvidia-app/SKILL.md"
   },
   {
    "name": "nvidia-broadcast",
@@ -3287,7 +3335,43 @@
    "license": "",
    "path": "skills/nvidia-broadcast/SKILL.md",
    "bytes": 41930,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nvidia-broadcast/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nvidia-broadcast/SKILL.md"
+  },
+  {
+   "name": "nvidia-ontology-management",
+   "family": "nvidia",
+   "lanes": [
+    "Data Science"
+   ],
+   "description": "Model and publish semantic definitions in Auto Ontology. Use for terms, relationships, measures, imports, and governed results—not deployment or querying.",
+   "license": "Apache-2.0",
+   "path": "skills/nvidia-ontology-management/SKILL.md",
+   "bytes": 6309,
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nvidia-ontology-management/SKILL.md"
+  },
+  {
+   "name": "nvidia-ontology-query",
+   "family": "nvidia",
+   "lanes": [
+    "Agentic AI"
+   ],
+   "description": "Query Auto Ontology and validate generated SQL, rows, and answers. Use for MCP or REST access, readiness, authentication, conversations, and grounded questions.",
+   "license": "Apache-2.0",
+   "path": "skills/nvidia-ontology-query/SKILL.md",
+   "bytes": 6638,
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nvidia-ontology-query/SKILL.md"
+  },
+  {
+   "name": "nvidia-ontology-setup",
+   "family": "nvidia",
+   "lanes": [
+    "Infrastructure"
+   ],
+   "description": "Set up or troubleshoot the Auto Ontology runtime. Use for Helm (the official install), Docker Compose, developer setup, and MCP connection to an existing deployment.",
+   "license": "Apache-2.0",
+   "path": "skills/nvidia-ontology-setup/SKILL.md",
+   "bytes": 11019,
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nvidia-ontology-setup/SKILL.md"
   },
   {
    "name": "nvidia-skill-finder",
@@ -3299,7 +3383,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/nvidia-skill-finder/SKILL.md",
    "bytes": 8343,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/nvidia-skill-finder/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/nvidia-skill-finder/SKILL.md"
   },
   {
    "name": "nvmolkit-usage",
@@ -3311,7 +3395,7 @@
    "license": "Apache-2.0",
    "path": "skills/bionemo-nvmolkit-usage/SKILL.md",
    "bytes": 19285,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-nvmolkit-usage/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-nvmolkit-usage/SKILL.md"
   },
   {
    "name": "omniverse-cad-to-simready",
@@ -3323,7 +3407,7 @@
    "license": "Apache-2.0",
    "path": "skills/omniverse-cad-to-simready/SKILL.md",
    "bytes": 10976,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/omniverse-cad-to-simready/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/omniverse-cad-to-simready/SKILL.md"
   },
   {
    "name": "omniverse-realtime-viewer",
@@ -3335,7 +3419,7 @@
    "license": "Apache-2.0",
    "path": "skills/omniverse-realtime-viewer/SKILL.md",
    "bytes": 10948,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/omniverse-realtime-viewer/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/omniverse-realtime-viewer/SKILL.md"
   },
   {
    "name": "omniverse-usd-performance-tuning",
@@ -3347,7 +3431,7 @@
    "license": "Apache-2.0",
    "path": "skills/omniverse-usd-performance-tuning/SKILL.md",
    "bytes": 14473,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/omniverse-usd-performance-tuning/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/omniverse-usd-performance-tuning/SKILL.md"
   },
   {
    "name": "openfold2-nim",
@@ -3359,7 +3443,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/bionemo-openfold2-nim/SKILL.md",
    "bytes": 7208,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-openfold2-nim/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-openfold2-nim/SKILL.md"
   },
   {
    "name": "openfold3-nim",
@@ -3371,7 +3455,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/bionemo-openfold3-nim/SKILL.md",
    "bytes": 7585,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-openfold3-nim/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-openfold3-nim/SKILL.md"
   },
   {
    "name": "paidf-augmentation",
@@ -3383,7 +3467,7 @@
    "license": "Apache-2.0",
    "path": "skills/paidf-augmentation/SKILL.md",
    "bytes": 21308,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/paidf-augmentation/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/paidf-augmentation/SKILL.md"
   },
   {
    "name": "paidf-auto-labeling",
@@ -3395,7 +3479,7 @@
    "license": "Apache-2.0",
    "path": "skills/paidf-auto-labeling/SKILL.md",
    "bytes": 7322,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/paidf-auto-labeling/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/paidf-auto-labeling/SKILL.md"
   },
   {
    "name": "paidf-cosmos-predict",
@@ -3407,7 +3491,7 @@
    "license": "Apache-2.0",
    "path": "skills/paidf-cosmos-predict/SKILL.md",
    "bytes": 18329,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/paidf-cosmos-predict/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/paidf-cosmos-predict/SKILL.md"
   },
   {
    "name": "paidf-curation-and-retrieval",
@@ -3419,7 +3503,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/paidf-curation-and-retrieval/SKILL.md",
    "bytes": 13984,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/paidf-curation-and-retrieval/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/paidf-curation-and-retrieval/SKILL.md"
   },
   {
    "name": "paidf-orchestration-setup",
@@ -3431,7 +3515,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/paidf-orchestration-setup/SKILL.md",
    "bytes": 15056,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/paidf-orchestration-setup/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/paidf-orchestration-setup/SKILL.md"
   },
   {
    "name": "paidf-orchestration-write-dag",
@@ -3443,7 +3527,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/paidf-orchestration-write-dag/SKILL.md",
    "bytes": 33109,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/paidf-orchestration-write-dag/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/paidf-orchestration-write-dag/SKILL.md"
   },
   {
    "name": "physical-ai-defect-image-generation",
@@ -3455,7 +3539,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/physical-ai-defect-image-generation/SKILL.md",
    "bytes": 20002,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/physical-ai-defect-image-generation/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/physical-ai-defect-image-generation/SKILL.md"
   },
   {
    "name": "physical-ai-event-video-generation",
@@ -3467,7 +3551,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/physical-ai-event-video-generation/SKILL.md",
    "bytes": 18067,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/physical-ai-event-video-generation/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/physical-ai-event-video-generation/SKILL.md"
   },
   {
    "name": "physical-ai-image-attribute-augmentation",
@@ -3479,7 +3563,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/physical-ai-image-attribute-augmentation/SKILL.md",
    "bytes": 16921,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/physical-ai-image-attribute-augmentation/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/physical-ai-image-attribute-augmentation/SKILL.md"
   },
   {
    "name": "physical-ai-infrastructure-setup-and-resilient-scaling",
@@ -3491,7 +3575,7 @@
    "license": "Apache-2.0",
    "path": "skills/physical-ai-infrastructure-setup-and-resilient-scaling/SKILL.md",
    "bytes": 11120,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/physical-ai-infrastructure-setup-and-resilient-scaling/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/physical-ai-infrastructure-setup-and-resilient-scaling/SKILL.md"
   },
   {
    "name": "physical-ai-neural-reconstruction",
@@ -3503,7 +3587,7 @@
    "license": "Apache-2.0",
    "path": "skills/physical-ai-neural-reconstruction/SKILL.md",
    "bytes": 18126,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/physical-ai-neural-reconstruction/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/physical-ai-neural-reconstruction/SKILL.md"
   },
   {
    "name": "physical-ai-video-data-augmentation",
@@ -3515,7 +3599,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/physical-ai-video-data-augmentation/SKILL.md",
    "bytes": 18988,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/physical-ai-video-data-augmentation/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/physical-ai-video-data-augmentation/SKILL.md"
   },
   {
    "name": "physicsnemo-discover",
@@ -3527,7 +3611,7 @@
    "license": "Apache-2.0",
    "path": "skills/physicsnemo-discover/SKILL.md",
    "bytes": 7464,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/physicsnemo-discover/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/physicsnemo-discover/SKILL.md"
   },
   {
    "name": "physicsnemo-shard-tensor",
@@ -3539,7 +3623,7 @@
    "license": "Apache-2.0",
    "path": "skills/physicsnemo-shard-tensor/SKILL.md",
    "bytes": 13869,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/physicsnemo-shard-tensor/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/physicsnemo-shard-tensor/SKILL.md"
   },
   {
    "name": "portfolio-optimization",
@@ -3551,7 +3635,7 @@
    "license": "Apache-2.0",
    "path": "skills/portfolio-optimization/SKILL.md",
    "bytes": 19656,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/portfolio-optimization/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/portfolio-optimization/SKILL.md"
   },
   {
    "name": "proteinmpnn-nim",
@@ -3563,7 +3647,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/bionemo-proteinmpnn-nim/SKILL.md",
    "bytes": 7992,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-proteinmpnn-nim/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-proteinmpnn-nim/SKILL.md"
   },
   {
    "name": "rag-blueprint",
@@ -3575,7 +3659,7 @@
    "license": "Apache-2.0",
    "path": "skills/rag-blueprint/SKILL.md",
    "bytes": 11354,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/rag-blueprint/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/rag-blueprint/SKILL.md"
   },
   {
    "name": "rag-eval",
@@ -3587,7 +3671,7 @@
    "license": "Apache-2.0",
    "path": "skills/rag-eval/SKILL.md",
    "bytes": 9415,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/rag-eval/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/rag-eval/SKILL.md"
   },
   {
    "name": "rag-perf",
@@ -3599,7 +3683,7 @@
    "license": "Apache-2.0",
    "path": "skills/rag-perf/SKILL.md",
    "bytes": 16346,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/rag-perf/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/rag-perf/SKILL.md"
   },
   {
    "name": "rfdiffusion-nim",
@@ -3611,7 +3695,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/bionemo-rfdiffusion-nim/SKILL.md",
    "bytes": 5374,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/bionemo-rfdiffusion-nim/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/bionemo-rfdiffusion-nim/SKILL.md"
   },
   {
    "name": "rtvi-cv-customize-model",
@@ -3623,7 +3707,7 @@
    "license": "",
    "path": "skills/rtvi-cv-customize-model/SKILL.md",
    "bytes": 17999,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/rtvi-cv-customize-model/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/rtvi-cv-customize-model/SKILL.md"
   },
   {
    "name": "rtvi-cv-scaffold-vss-service",
@@ -3635,7 +3719,7 @@
    "license": "NVIDIA Proprietary",
    "path": "skills/rtvi-cv-scaffold-vss-service/SKILL.md",
    "bytes": 18397,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/rtvi-cv-scaffold-vss-service/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/rtvi-cv-scaffold-vss-service/SKILL.md"
   },
   {
    "name": "rtvi-vlm-customize-model",
@@ -3647,7 +3731,7 @@
    "license": "",
    "path": "skills/rtvi-vlm-customize-model/SKILL.md",
    "bytes": 19963,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/rtvi-vlm-customize-model/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/rtvi-vlm-customize-model/SKILL.md"
   },
   {
    "name": "rtx-remix-modding",
@@ -3659,7 +3743,7 @@
    "license": "",
    "path": "skills/rtx-remix-modding/SKILL.md",
    "bytes": 8769,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/rtx-remix-modding/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/rtx-remix-modding/SKILL.md"
   },
   {
    "name": "skill-card-generator",
@@ -3671,7 +3755,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/skill-card-generator/SKILL.md",
    "bytes": 6429,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/skill-card-generator/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/skill-card-generator/SKILL.md"
   },
   {
    "name": "tao-analyze-changenet-rca",
@@ -3683,7 +3767,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-analyze-changenet-rca/SKILL.md",
    "bytes": 6528,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-analyze-changenet-rca/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-analyze-changenet-rca/SKILL.md"
   },
   {
    "name": "tao-analyze-detection-kpi",
@@ -3695,7 +3779,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-analyze-detection-kpi/SKILL.md",
    "bytes": 10645,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-analyze-detection-kpi/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-analyze-detection-kpi/SKILL.md"
   },
   {
    "name": "tao-analyze-gaps-od-map",
@@ -3707,7 +3791,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-analyze-gaps-od-map/SKILL.md",
    "bytes": 7039,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-analyze-gaps-od-map/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-analyze-gaps-od-map/SKILL.md"
   },
   {
    "name": "tao-analyze-gaps-visual-changenet",
@@ -3719,7 +3803,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-analyze-gaps-visual-changenet/SKILL.md",
    "bytes": 17499,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-analyze-gaps-visual-changenet/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-analyze-gaps-visual-changenet/SKILL.md"
   },
   {
    "name": "tao-analyze-gaps-vlm-bcq",
@@ -3731,7 +3815,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-analyze-gaps-vlm-bcq/SKILL.md",
    "bytes": 5261,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-analyze-gaps-vlm-bcq/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-analyze-gaps-vlm-bcq/SKILL.md"
   },
   {
    "name": "tao-artifacts",
@@ -3743,7 +3827,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-artifacts/SKILL.md",
    "bytes": 5429,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-artifacts/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-artifacts/SKILL.md"
   },
   {
    "name": "tao-convert-dataset-format",
@@ -3755,7 +3839,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-convert-dataset-format/SKILL.md",
    "bytes": 5244,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-convert-dataset-format/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-convert-dataset-format/SKILL.md"
   },
   {
    "name": "tao-data-io",
@@ -3767,7 +3851,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-data-io/SKILL.md",
    "bytes": 6036,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-data-io/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-data-io/SKILL.md"
   },
   {
    "name": "tao-finetune-clip",
@@ -3779,7 +3863,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-finetune-clip/SKILL.md",
    "bytes": 15872,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-finetune-clip/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-finetune-clip/SKILL.md"
   },
   {
    "name": "tao-finetune-cosmos-embed",
@@ -3791,7 +3875,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-finetune-cosmos-embed/SKILL.md",
    "bytes": 14043,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-finetune-cosmos-embed/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-finetune-cosmos-embed/SKILL.md"
   },
   {
    "name": "tao-finetune-cosmos-reason",
@@ -3803,7 +3887,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-finetune-cosmos-reason/SKILL.md",
    "bytes": 19964,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-finetune-cosmos-reason/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-finetune-cosmos-reason/SKILL.md"
   },
   {
    "name": "tao-finetune-huggingface-model",
@@ -3815,7 +3899,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-finetune-huggingface-model/SKILL.md",
    "bytes": 19697,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-finetune-huggingface-model/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-finetune-huggingface-model/SKILL.md"
   },
   {
    "name": "tao-finetune-nv-tesseract-ad-diffusion",
@@ -3827,7 +3911,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-finetune-nv-tesseract-ad-diffusion/SKILL.md",
    "bytes": 11892,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-finetune-nv-tesseract-ad-diffusion/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-finetune-nv-tesseract-ad-diffusion/SKILL.md"
   },
   {
    "name": "tao-finetune-nv-tesseract-forecasting",
@@ -3839,7 +3923,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-finetune-nv-tesseract-forecasting/SKILL.md",
    "bytes": 13017,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-finetune-nv-tesseract-forecasting/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-finetune-nv-tesseract-forecasting/SKILL.md"
   },
   {
    "name": "tao-finetune-video-clip",
@@ -3851,7 +3935,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-finetune-video-clip/SKILL.md",
    "bytes": 13962,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-finetune-video-clip/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-finetune-video-clip/SKILL.md"
   },
   {
    "name": "tao-generate-anomalies",
@@ -3863,7 +3947,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-generate-anomalies/SKILL.md",
    "bytes": 19584,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-generate-anomalies/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-generate-anomalies/SKILL.md"
   },
   {
    "name": "tao-generate-image-embeddings",
@@ -3875,7 +3959,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-generate-image-embeddings/SKILL.md",
    "bytes": 7900,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-generate-image-embeddings/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-generate-image-embeddings/SKILL.md"
   },
   {
    "name": "tao-generate-image-grounding",
@@ -3887,7 +3971,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-generate-image-grounding/SKILL.md",
    "bytes": 8053,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-generate-image-grounding/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-generate-image-grounding/SKILL.md"
   },
   {
    "name": "tao-generate-referring-expressions",
@@ -3899,7 +3983,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-generate-referring-expressions/SKILL.md",
    "bytes": 10415,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-generate-referring-expressions/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-generate-referring-expressions/SKILL.md"
   },
   {
    "name": "tao-generate-video-reasoning-annotations",
@@ -3911,7 +3995,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-generate-video-reasoning-annotations/SKILL.md",
    "bytes": 11240,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-generate-video-reasoning-annotations/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-generate-video-reasoning-annotations/SKILL.md"
   },
   {
    "name": "tao-launch-workflow",
@@ -3923,7 +4007,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-launch-workflow/SKILL.md",
    "bytes": 18175,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-launch-workflow/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-launch-workflow/SKILL.md"
   },
   {
    "name": "tao-list-capabilities",
@@ -3935,7 +4019,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-list-capabilities/SKILL.md",
    "bytes": 3512,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-list-capabilities/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-list-capabilities/SKILL.md"
   },
   {
    "name": "tao-mine-aoi-images",
@@ -3947,7 +4031,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-mine-aoi-images/SKILL.md",
    "bytes": 15373,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-mine-aoi-images/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-mine-aoi-images/SKILL.md"
   },
   {
    "name": "tao-mine-nearest-neighbors",
@@ -3959,7 +4043,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-mine-nearest-neighbors/SKILL.md",
    "bytes": 6259,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-mine-nearest-neighbors/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-mine-nearest-neighbors/SKILL.md"
   },
   {
    "name": "tao-mine-od-images",
@@ -3971,7 +4055,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-mine-od-images/SKILL.md",
    "bytes": 8719,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-mine-od-images/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-mine-od-images/SKILL.md"
   },
   {
    "name": "tao-port-huggingface-model",
@@ -3983,7 +4067,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-port-huggingface-model/SKILL.md",
    "bytes": 18166,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-port-huggingface-model/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-port-huggingface-model/SKILL.md"
   },
   {
    "name": "tao-route-visual-changenet-samples",
@@ -3995,7 +4079,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-route-visual-changenet-samples/SKILL.md",
    "bytes": 12657,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-route-visual-changenet-samples/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-route-visual-changenet-samples/SKILL.md"
   },
   {
    "name": "tao-run-automl",
@@ -4007,7 +4091,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-run-automl/SKILL.md",
    "bytes": 19894,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-run-automl/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-run-automl/SKILL.md"
   },
   {
    "name": "tao-run-automl-deft-pipeline",
@@ -4019,7 +4103,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-run-automl-deft-pipeline/SKILL.md",
    "bytes": 17494,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-run-automl-deft-pipeline/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-run-automl-deft-pipeline/SKILL.md"
   },
   {
    "name": "tao-run-deft-aoi",
@@ -4031,7 +4115,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/tao-run-deft-aoi/SKILL.md",
    "bytes": 19918,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-run-deft-aoi/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-run-deft-aoi/SKILL.md"
   },
   {
    "name": "tao-run-deft-aoi-cosmos3",
@@ -4043,7 +4127,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/tao-run-deft-aoi-cosmos3/SKILL.md",
    "bytes": 20096,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-run-deft-aoi-cosmos3/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-run-deft-aoi-cosmos3/SKILL.md"
   },
   {
    "name": "tao-run-deft-cr-its-mining",
@@ -4055,7 +4139,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-run-deft-cr-its-mining/SKILL.md",
    "bytes": 19883,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-run-deft-cr-its-mining/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-run-deft-cr-its-mining/SKILL.md"
   },
   {
    "name": "tao-run-deft-object-detection",
@@ -4067,7 +4151,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-run-deft-object-detection/SKILL.md",
    "bytes": 13223,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-run-deft-object-detection/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-run-deft-object-detection/SKILL.md"
   },
   {
    "name": "tao-run-deft-pas",
@@ -4079,7 +4163,7 @@
    "license": "Apache-2.0 AND CC-BY-4.0",
    "path": "skills/tao-run-deft-pas/SKILL.md",
    "bytes": 16904,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-run-deft-pas/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-run-deft-pas/SKILL.md"
   },
   {
    "name": "tao-run-inference-service",
@@ -4091,7 +4175,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-run-inference-service/SKILL.md",
    "bytes": 18672,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-run-inference-service/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-run-inference-service/SKILL.md"
   },
   {
    "name": "tao-run-on-brev",
@@ -4103,7 +4187,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-run-on-brev/SKILL.md",
    "bytes": 8315,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-run-on-brev/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-run-on-brev/SKILL.md"
   },
   {
    "name": "tao-run-on-docker",
@@ -4115,7 +4199,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-run-on-docker/SKILL.md",
    "bytes": 19965,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-run-on-docker/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-run-on-docker/SKILL.md"
   },
   {
    "name": "tao-run-on-kubernetes",
@@ -4127,7 +4211,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-run-on-kubernetes/SKILL.md",
    "bytes": 19805,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-run-on-kubernetes/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-run-on-kubernetes/SKILL.md"
   },
   {
    "name": "tao-run-on-slurm",
@@ -4139,7 +4223,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-run-on-slurm/SKILL.md",
    "bytes": 19410,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-run-on-slurm/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-run-on-slurm/SKILL.md"
   },
   {
    "name": "tao-run-on-virtualenv",
@@ -4151,7 +4235,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-run-on-virtualenv/SKILL.md",
    "bytes": 6154,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-run-on-virtualenv/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-run-on-virtualenv/SKILL.md"
   },
   {
    "name": "tao-setup",
@@ -4163,7 +4247,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-setup/SKILL.md",
    "bytes": 7261,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-setup/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-setup/SKILL.md"
   },
   {
    "name": "tao-setup-nvidia-gpu-host",
@@ -4175,7 +4259,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-setup-nvidia-gpu-host/SKILL.md",
    "bytes": 13550,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-setup-nvidia-gpu-host/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-setup-nvidia-gpu-host/SKILL.md"
   },
   {
    "name": "tao-train-action-recognition",
@@ -4187,7 +4271,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-action-recognition/SKILL.md",
    "bytes": 11867,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-action-recognition/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-action-recognition/SKILL.md"
   },
   {
    "name": "tao-train-bevfusion",
@@ -4199,7 +4283,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-bevfusion/SKILL.md",
    "bytes": 13477,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-bevfusion/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-bevfusion/SKILL.md"
   },
   {
    "name": "tao-train-centerpose",
@@ -4211,7 +4295,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-centerpose/SKILL.md",
    "bytes": 11436,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-centerpose/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-centerpose/SKILL.md"
   },
   {
    "name": "tao-train-codetr",
@@ -4223,7 +4307,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-codetr/SKILL.md",
    "bytes": 19149,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-codetr/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-codetr/SKILL.md"
   },
   {
    "name": "tao-train-deformable-detr",
@@ -4235,7 +4319,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-deformable-detr/SKILL.md",
    "bytes": 15460,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-deformable-detr/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-deformable-detr/SKILL.md"
   },
   {
    "name": "tao-train-depth-anything-v2",
@@ -4247,7 +4331,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-depth-anything-v2/SKILL.md",
    "bytes": 15669,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-depth-anything-v2/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-depth-anything-v2/SKILL.md"
   },
   {
    "name": "tao-train-dino",
@@ -4259,7 +4343,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-dino/SKILL.md",
    "bytes": 11185,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-dino/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-dino/SKILL.md"
   },
   {
    "name": "tao-train-dinov3",
@@ -4271,7 +4355,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-dinov3/SKILL.md",
    "bytes": 8830,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-dinov3/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-dinov3/SKILL.md"
   },
   {
    "name": "tao-train-fast-foundation-stereo",
@@ -4283,7 +4367,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-fast-foundation-stereo/SKILL.md",
    "bytes": 11859,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-fast-foundation-stereo/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-fast-foundation-stereo/SKILL.md"
   },
   {
    "name": "tao-train-foundation-stereo",
@@ -4295,7 +4379,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-foundation-stereo/SKILL.md",
    "bytes": 12988,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-foundation-stereo/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-foundation-stereo/SKILL.md"
   },
   {
    "name": "tao-train-grounding-dino",
@@ -4307,7 +4391,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-grounding-dino/SKILL.md",
    "bytes": 15525,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-grounding-dino/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-grounding-dino/SKILL.md"
   },
   {
    "name": "tao-train-image-classification",
@@ -4319,7 +4403,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-image-classification/SKILL.md",
    "bytes": 14213,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-image-classification/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-image-classification/SKILL.md"
   },
   {
    "name": "tao-train-mask-auto-encoder",
@@ -4331,7 +4415,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-mask-auto-encoder/SKILL.md",
    "bytes": 11495,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-mask-auto-encoder/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-mask-auto-encoder/SKILL.md"
   },
   {
    "name": "tao-train-mask-auto-label",
@@ -4343,7 +4427,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-mask-auto-label/SKILL.md",
    "bytes": 11350,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-mask-auto-label/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-mask-auto-label/SKILL.md"
   },
   {
    "name": "tao-train-mask-grounding-dino",
@@ -4355,7 +4439,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-mask-grounding-dino/SKILL.md",
    "bytes": 13979,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-mask-grounding-dino/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-mask-grounding-dino/SKILL.md"
   },
   {
    "name": "tao-train-mask2former",
@@ -4367,7 +4451,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-mask2former/SKILL.md",
    "bytes": 19981,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-mask2former/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-mask2former/SKILL.md"
   },
   {
    "name": "tao-train-metric-learning-recognition",
@@ -4379,7 +4463,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-metric-learning-recognition/SKILL.md",
    "bytes": 11563,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-metric-learning-recognition/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-metric-learning-recognition/SKILL.md"
   },
   {
    "name": "tao-train-nvdinov2",
@@ -4391,7 +4475,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-nvdinov2/SKILL.md",
    "bytes": 12397,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-nvdinov2/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-nvdinov2/SKILL.md"
   },
   {
    "name": "tao-train-nvpanoptix3d",
@@ -4403,7 +4487,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-nvpanoptix3d/SKILL.md",
    "bytes": 17033,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-nvpanoptix3d/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-nvpanoptix3d/SKILL.md"
   },
   {
    "name": "tao-train-ocdnet",
@@ -4415,7 +4499,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-ocdnet/SKILL.md",
    "bytes": 14572,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-ocdnet/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-ocdnet/SKILL.md"
   },
   {
    "name": "tao-train-ocrnet",
@@ -4427,7 +4511,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-ocrnet/SKILL.md",
    "bytes": 17559,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-ocrnet/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-ocrnet/SKILL.md"
   },
   {
    "name": "tao-train-oneformer",
@@ -4439,7 +4523,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-oneformer/SKILL.md",
    "bytes": 19945,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-oneformer/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-oneformer/SKILL.md"
   },
   {
    "name": "tao-train-optical-inspection",
@@ -4451,7 +4535,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-optical-inspection/SKILL.md",
    "bytes": 17842,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-optical-inspection/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-optical-inspection/SKILL.md"
   },
   {
    "name": "tao-train-pointpillars",
@@ -4463,7 +4547,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-pointpillars/SKILL.md",
    "bytes": 15943,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-pointpillars/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-pointpillars/SKILL.md"
   },
   {
    "name": "tao-train-pose-classification",
@@ -4475,7 +4559,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-pose-classification/SKILL.md",
    "bytes": 15361,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-pose-classification/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-pose-classification/SKILL.md"
   },
   {
    "name": "tao-train-reid",
@@ -4487,7 +4571,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-reid/SKILL.md",
    "bytes": 14437,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-reid/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-reid/SKILL.md"
   },
   {
    "name": "tao-train-rtdetr",
@@ -4499,7 +4583,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-rtdetr/SKILL.md",
    "bytes": 17864,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-rtdetr/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-rtdetr/SKILL.md"
   },
   {
    "name": "tao-train-segformer",
@@ -4511,7 +4595,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-segformer/SKILL.md",
    "bytes": 14801,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-segformer/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-segformer/SKILL.md"
   },
   {
    "name": "tao-train-single-step",
@@ -4523,7 +4607,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-single-step/SKILL.md",
    "bytes": 4771,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-single-step/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-single-step/SKILL.md"
   },
   {
    "name": "tao-train-sparse4d",
@@ -4535,7 +4619,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-sparse4d/SKILL.md",
    "bytes": 15047,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-sparse4d/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-sparse4d/SKILL.md"
   },
   {
    "name": "tao-train-visual-changenet",
@@ -4547,7 +4631,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-train-visual-changenet/SKILL.md",
    "bytes": 18816,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-train-visual-changenet/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-train-visual-changenet/SKILL.md"
   },
   {
    "name": "tao-validate-dataset-format",
@@ -4559,7 +4643,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-validate-dataset-format/SKILL.md",
    "bytes": 5007,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-validate-dataset-format/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-validate-dataset-format/SKILL.md"
   },
   {
    "name": "tao-validate-recipe-transfer",
@@ -4571,7 +4655,7 @@
    "license": "Apache-2.0",
    "path": "skills/tao-validate-recipe-transfer/SKILL.md",
    "bytes": 16710,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tao-validate-recipe-transfer/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tao-validate-recipe-transfer/SKILL.md"
   },
   {
    "name": "tilegym-adding-cutile-kernel",
@@ -4583,7 +4667,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/tilegym-adding-cutile-kernel/SKILL.md",
    "bytes": 8230,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tilegym-adding-cutile-kernel/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tilegym-adding-cutile-kernel/SKILL.md"
   },
   {
    "name": "tilegym-converting-cutile-to-julia",
@@ -4595,7 +4679,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/tilegym-converting-cutile-to-julia/SKILL.md",
    "bytes": 6932,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tilegym-converting-cutile-to-julia/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tilegym-converting-cutile-to-julia/SKILL.md"
   },
   {
    "name": "tilegym-converting-cutile-to-triton",
@@ -4607,7 +4691,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/tilegym-converting-cutile-to-triton/SKILL.md",
    "bytes": 17062,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tilegym-converting-cutile-to-triton/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tilegym-converting-cutile-to-triton/SKILL.md"
   },
   {
    "name": "tilegym-cutile-autotuning",
@@ -4619,7 +4703,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/tilegym-cutile-autotuning/SKILL.md",
    "bytes": 18703,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tilegym-cutile-autotuning/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tilegym-cutile-autotuning/SKILL.md"
   },
   {
    "name": "tilegym-cutile-python",
@@ -4631,7 +4715,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/tilegym-cutile-python/SKILL.md",
    "bytes": 20393,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tilegym-cutile-python/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tilegym-cutile-python/SKILL.md"
   },
   {
    "name": "tilegym-improve-cutile-kernel-perf",
@@ -4643,7 +4727,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/tilegym-improve-cutile-kernel-perf/SKILL.md",
    "bytes": 7812,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tilegym-improve-cutile-kernel-perf/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tilegym-improve-cutile-kernel-perf/SKILL.md"
   },
   {
    "name": "tilegym-monkey-patch-kernels-to-transformers",
@@ -4655,7 +4739,7 @@
    "license": "CC-BY-4.0 AND Apache-2.0",
    "path": "skills/tilegym-monkey-patch-kernels-to-transformers/SKILL.md",
    "bytes": 2966,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/tilegym-monkey-patch-kernels-to-transformers/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/tilegym-monkey-patch-kernels-to-transformers/SKILL.md"
   },
   {
    "name": "vss-ask-video",
@@ -4667,7 +4751,7 @@
    "license": "Apache-2.0",
    "path": "skills/vss-ask-video/SKILL.md",
    "bytes": 5648,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/vss-ask-video/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/vss-ask-video/SKILL.md"
   },
   {
    "name": "vss-deploy-dense-captioning",
@@ -4679,7 +4763,7 @@
    "license": "Apache-2.0",
    "path": "skills/vss-deploy-dense-captioning/SKILL.md",
    "bytes": 13297,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/vss-deploy-dense-captioning/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/vss-deploy-dense-captioning/SKILL.md"
   },
   {
    "name": "vss-deploy-detection-tracking-2d",
@@ -4691,7 +4775,7 @@
    "license": "Apache-2.0",
    "path": "skills/vss-deploy-detection-tracking-2d/SKILL.md",
    "bytes": 19465,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/vss-deploy-detection-tracking-2d/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/vss-deploy-detection-tracking-2d/SKILL.md"
   },
   {
    "name": "vss-deploy-detection-tracking-3d",
@@ -4703,7 +4787,7 @@
    "license": "Apache-2.0",
    "path": "skills/vss-deploy-detection-tracking-3d/SKILL.md",
    "bytes": 19320,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/vss-deploy-detection-tracking-3d/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/vss-deploy-detection-tracking-3d/SKILL.md"
   },
   {
    "name": "vss-deploy-profile",
@@ -4715,7 +4799,7 @@
    "license": "Apache-2.0",
    "path": "skills/vss-deploy-profile/SKILL.md",
    "bytes": 20076,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/vss-deploy-profile/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/vss-deploy-profile/SKILL.md"
   },
   {
    "name": "vss-deploy-video-embedding",
@@ -4727,7 +4811,7 @@
    "license": "Apache-2.0",
    "path": "skills/vss-deploy-video-embedding/SKILL.md",
    "bytes": 14670,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/vss-deploy-video-embedding/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/vss-deploy-video-embedding/SKILL.md"
   },
   {
    "name": "vss-generate-video-calibration",
@@ -4739,7 +4823,7 @@
    "license": "Apache-2.0",
    "path": "skills/vss-generate-video-calibration/SKILL.md",
    "bytes": 16819,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/vss-generate-video-calibration/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/vss-generate-video-calibration/SKILL.md"
   },
   {
    "name": "vss-generate-video-report",
@@ -4751,7 +4835,7 @@
    "license": "Apache-2.0",
    "path": "skills/vss-generate-video-report/SKILL.md",
    "bytes": 18707,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/vss-generate-video-report/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/vss-generate-video-report/SKILL.md"
   },
   {
    "name": "vss-manage-alerts",
@@ -4763,7 +4847,7 @@
    "license": "Apache-2.0",
    "path": "skills/vss-manage-alerts/SKILL.md",
    "bytes": 18056,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/vss-manage-alerts/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/vss-manage-alerts/SKILL.md"
   },
   {
    "name": "vss-manage-video-io-storage",
@@ -4775,7 +4859,7 @@
    "license": "Apache-2.0",
    "path": "skills/vss-manage-video-io-storage/SKILL.md",
    "bytes": 20077,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/vss-manage-video-io-storage/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/vss-manage-video-io-storage/SKILL.md"
   },
   {
    "name": "vss-query-analytics",
@@ -4787,7 +4871,7 @@
    "license": "Apache-2.0",
    "path": "skills/vss-query-analytics/SKILL.md",
    "bytes": 9415,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/vss-query-analytics/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/vss-query-analytics/SKILL.md"
   },
   {
    "name": "vss-search-archive",
@@ -4799,7 +4883,7 @@
    "license": "Apache-2.0",
    "path": "skills/vss-search-archive/SKILL.md",
    "bytes": 16926,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/vss-search-archive/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/vss-search-archive/SKILL.md"
   },
   {
    "name": "vss-setup-behavior-analytics",
@@ -4811,7 +4895,7 @@
    "license": "Apache-2.0",
    "path": "skills/vss-setup-behavior-analytics/SKILL.md",
    "bytes": 7864,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/vss-setup-behavior-analytics/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/vss-setup-behavior-analytics/SKILL.md"
   },
   {
    "name": "vss-setup-video-analytics-api",
@@ -4823,7 +4907,7 @@
    "license": "Apache-2.0",
    "path": "skills/vss-setup-video-analytics-api/SKILL.md",
    "bytes": 9293,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/vss-setup-video-analytics-api/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/vss-setup-video-analytics-api/SKILL.md"
   },
   {
    "name": "vss-summarize-video",
@@ -4835,7 +4919,7 @@
    "license": "Apache-2.0",
    "path": "skills/vss-summarize-video/SKILL.md",
    "bytes": 18864,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/vss-summarize-video/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/vss-summarize-video/SKILL.md"
   },
   {
    "name": "warp-compile-time-optimizer",
@@ -4847,7 +4931,7 @@
    "license": "Apache-2.0",
    "path": "skills/warp-compile-time-optimizer/SKILL.md",
    "bytes": 13984,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/warp-compile-time-optimizer/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/warp-compile-time-optimizer/SKILL.md"
   },
   {
    "name": "warp-debug-gradients",
@@ -4859,7 +4943,7 @@
    "license": "Apache-2.0",
    "path": "skills/warp-debug-gradients/SKILL.md",
    "bytes": 19170,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/warp-debug-gradients/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/warp-debug-gradients/SKILL.md"
   },
   {
    "name": "warp-eval",
@@ -4871,7 +4955,7 @@
    "license": "Apache-2.0",
    "path": "skills/warp-eval/SKILL.md",
    "bytes": 19706,
-   "url": "https://github.com/NVIDIA/skills/blob/67a13c0b6b3eecef1398f72aeeb9b27f39a7722f/skills/warp-eval/SKILL.md"
+   "url": "https://github.com/NVIDIA/skills/blob/14a98ae278cec7e867695189d0f4003c08e4f765/skills/warp-eval/SKILL.md"
   }
  ]
 }

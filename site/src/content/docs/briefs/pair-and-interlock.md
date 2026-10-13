@@ -32,6 +32,17 @@ What PAIR deliberately does *not* do matters as much:
 
 It's a traffic director for independent requests. It doesn't make one big GPU out of several small ones.
 
+**What the 1.0 release notes add** (read on 13 October; the studio's weekly watch flagged them):
+- **llama.cpp is managed directly,** alongside Ollama and LM Studio: installed, given models, and routed to.
+- **Each engine takes launch options,** such as its context size, on this machine or a paired one.
+- **Claude Code can go through PAIR.** The Anthropic Messages API is now routed through Ollama and LM Studio, with
+  model-aware routing and failover. This came as a community contribution.
+- **Local endpoints follow each engine's CORS policy.** A browser client talking to Ollama may need `OLLAMA_ORIGINS`
+  set.
+
+The launch options make a connection with our own measurements. PAIR now lets you set each engine's context size, but
+nothing in it tells you what size fits on the card. That is the question E5 answers (below).
+
 ## How PAIR decides
 
 PAIR's architecture document is unusually candid about its scheduler. Two mechanisms work in sequence:

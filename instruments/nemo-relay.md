@@ -54,4 +54,23 @@ The trial asks whether a Relay trace finds waste that our receipts and stream lo
 
 **Not in the atlas-mcp-utility pilot.** Its hooks and proxy would change the isolated conditions that experiment pre-registered.
 
+## 0.10.0's release notes, for the trial (read 2026-10-13; flagged by the weekly watch)
+
+- **Local trace files.** Spans can be written as OTLP JSON Lines or length-delimited protobuf files, alongside or
+  instead of a remote collector. A trial needs no collector, and the traces never leave the rig, which meets the
+  condition above directly.
+- **Automatic OTLP export from the standard environment variables.** If an `OTEL_EXPORTER_OTLP_*` endpoint variable
+  is set in the environment, Relay starts exporting to it. A trial must check that none is set on the rig before the
+  first run, or traces could go wherever such a variable points.
+- **Permission-policy marks for Claude Code.** Matched permission requests get a `nemo_relay.permission.policy_decision`
+  mark, linked to the tool call. A `pass` means only that Relay didn't block the request. It doesn't mean a user
+  approved it, or that it ran. Useful beside our own isolation checks, never in place of them.
+- **Breaking changes that don't touch us yet:**
+  - observability configuration requires `version = 4`;
+  - native plugins need ABI v7;
+  - `gen_ai.usage.cache_creation.input_tokens` is now `gen_ai.usage.cache_write.input_tokens`.
+
+  A trial starts on 0.10.0's format, so none of these needs a migration. A token-cost reader must use the new
+  field name.
+
 See [[2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ]].

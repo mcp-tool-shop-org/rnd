@@ -11,6 +11,17 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.7.1.4] - 2026-10-13
+
+- catalog: nvidia-skills synced (7 added: codonfm x4, nvidia-ontology x3), flagged by the first weekly watch
+- brief and entry: PAIR 1.0.0's release notes (launch options incl. context size, Claude Code routing)
+- instrument: nemo-relay, 0.10.0's local trace files, OTLP auto-export condition, permission marks
+- Updated `2026-10-13-multi-repository-atlas-research-grounding-for-the-build-up`: Multi-repository Atlas: research grounding for the build-up
+- Updated `2026-10-13-nvidia-pair-a-lan-inference-router-and-how-it-compares-with-`: NVIDIA PAIR: a LAN inference router, and how it compares with interlock
+- Updated `nemo-relay`: nemo-relay — tracing what an agent actually did (NVIDIA NeMo Relay)
+- Updated catalog `nvidia-skills`
+- Updated experiment `atlas-mcp-utility`
+
 ## [1.1.7.1.3] - 2026-10-13
 
 - atlas-mcp-utility amendment 6: Kimi K3's consult (ladder decides on cross-repo tasks; blind tasks; release-commit pins; CF09-CF13 out of rung 1's decision set)

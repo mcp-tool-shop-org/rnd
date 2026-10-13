@@ -22,6 +22,13 @@ Its scheduler is model-blind: pending jobs plus coarse GPU pressure (0–3 units
 
 - **The ports:** the Ollama-compatible proxy takes port 11434 and moves Ollama to 11435 or above. The plaintext side answers only loopback. The same port serves mutual TLS to paired nodes, chosen by the connection's first byte (0x16).
 - **Telemetry:** the probe's "telemetry" code hits are host and GPU telemetry exchanged between paired nodes, by the architecture's account. Nothing read shows it sent off the network. That's unverified until it's tried.
+- **The 1.0.0 release notes** (read 2026-10-13, flagged by the weekly watch) add:
+  - llama.cpp management;
+  - per-engine launch options, including context size;
+  - Anthropic Messages API routing through Ollama and LM Studio, with model-aware failover, so Claude Code can use a PAIR cluster;
+  - endpoints that follow each engine's CORS policy.
+
+  PAIR can set a context size, but can't tell what fits. E5's card answers that for the 5090.
 - **The roadmap** lists KV-cache-aware scheduling, request queuing, more scheduler variables, vLLM and ComfyUI.
 
 ## Studio relevance
@@ -39,6 +46,7 @@ Its scheduler is model-blind: pending jobs plus coarse GPU pressure (0–3 units
 - [verified] PAIR is Apache-2.0, with v1.0.0 published 2026-10-13 (via: rnd probe of github.com/NVIDIA/Personal-AI-Router, 2026-10-13)
 - [verified] PAIR's scheduler ranks nodes by pending work plus coarse GPU pressure, is model-blind, and doesn't consider VRAM, latency or whether the model is loaded (via: docs/architecture.mdx at v1.0.0, read 2026-10-13)
 - [verified] PAIR's Ollama-compatible proxy uses port 11434 and moves Ollama to 11435 or above (via: docs/architecture.mdx port map at v1.0.0, read 2026-10-13)
+- [verified] PAIR 1.0.0 adds per-engine launch options including context size, llama.cpp management, and Anthropic Messages API routing through Ollama and LM Studio (via: gh release view v1.0.0 --repo NVIDIA/Personal-AI-Router, 2026-10-13)
 - [unverified] PAIR sends no telemetry beyond the paired nodes
 
 ## Sources

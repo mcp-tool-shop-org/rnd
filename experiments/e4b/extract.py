@@ -175,6 +175,11 @@ def trim_receipt(raw: bytes, source: str, checkout: Path) -> dict:
     }
 
 
+def collect_receipt(raw: bytes, ctx) -> dict:
+    """`rnd collect e4b` entry point (collect.json): the same trim, reading the spec through the clone."""
+    return trim_receipt(raw, ctx.source, ctx.clone)
+
+
 def linear_percentile(values: list, fraction: float) -> float:
     ordered = sorted(values)
     position = (len(ordered) - 1) * fraction

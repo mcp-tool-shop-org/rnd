@@ -578,6 +578,9 @@ def probe_prompt(targets, repo, grep_roots=()):
 
 
 PROBE_ROUTES = ("Read", "Grep", "Glob", "Bash")
+# What each run's start showed, carried into the probe and pilot summaries too
+# (the per-attempt records hold them already): amendments 7 and 8.
+START_FIELDS = ("effort", "permission_mode", "on_the_plan", "atlas_status_at_init")
 PROBE_B_PROMPT = "Call the atlas_overview tool once, then name this repository's parts in one line.\n"
 
 
@@ -643,7 +646,8 @@ def probe_verdict(stream_a, stream_b, record_a, record_b, targets, sentinels, gr
         "isolation_a": record_a["isolation"],
         "isolation_b": record_b["isolation"],
         "records": [{"run": r.get("run"), "outcome": r.get("outcome"), "exit_code": r.get("exit_code"),
-                     "cli_version": r.get("cli_version"), "error": error_text(r, sentinels)} for r in (record_a, record_b)],
+                     "cli_version": r.get("cli_version"), "error": error_text(r, sentinels),
+                     **{k: r.get(k) for k in START_FIELDS}} for r in (record_a, record_b)],
         "atlas_overview_answered": answered,
         "user_claude_md_loaded": rig.group(1).lower() == "yes" if rig else None,
         "passed": (carried_out and not leaked and not hooks and not record_a["isolation"] and not record_b["isolation"]
@@ -1094,7 +1098,8 @@ def pilot(args, cli, allow, tasks):
         "tokens_used": budget["used"],
         "ceiling": budget["ceiling"],
         "plan": plan,
-        "runs": [{k: r.get(k) for k in ("run", "task", "arm", "rep", "outcome", "correct", "tokens", "tool_calls", "atlas_calls", "num_turns", "wall_ms", "total_cost_usd", "cli_version")} for r in records],
+        "runs": [{k: r.get(k) for k in ("run", "task", "arm", "rep", "outcome", "correct", "tokens", "tool_calls", "atlas_calls",
+                                         "num_turns", "wall_ms", "total_cost_usd", "cli_version", *START_FIELDS)} for r in records],
         "dropped_pairs": dropped,
         "harness_failures": failures,
         "attempts": attempts,

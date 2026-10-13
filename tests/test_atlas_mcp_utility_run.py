@@ -273,6 +273,16 @@ class Probe(unittest.TestCase):
         self.assertTrue(verdict["passed"], verdict)
         self.assertTrue(verdict["user_claude_md_loaded"])
 
+    def test_the_probe_report_carries_each_runs_start(self):
+        # The third sandbox probe's report showed on_the_plan and
+        # atlas_status_at_init as missing: the summary left them out.
+        started = {**self.CLEAN, "effort": "medium", "permission_mode": "default", "on_the_plan": True,
+                   "atlas_status_at_init": "pending"}
+        verdict = run.probe_verdict(self.probe_a(), self.probe_b(), started, started, self.TARGETS, self.SENTINELS)
+        for record in verdict["records"]:
+            self.assertEqual({k: record[k] for k in run.START_FIELDS},
+                             {"effort": "medium", "permission_mode": "default", "on_the_plan": True, "atlas_status_at_init": "pending"})
+
     def test_a_sentinel_in_any_result_fails_the_probe(self):
         verdict = run.probe_verdict(self.probe_a(leak="found amu-sentinel-0a1b2c3d"), self.probe_b(), self.CLEAN, self.CLEAN, self.TARGETS, self.SENTINELS)
         self.assertFalse(verdict["passed"])

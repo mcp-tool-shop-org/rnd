@@ -172,6 +172,17 @@ class Isolation(unittest.TestCase):
         self.assertEqual(run.isolation_problems({**a, "model": "claude-opus-5-5"}, "A", self.allow), ["the model is claude-opus-5-5, pinned claude-sonnet-5-5"])
         self.assertEqual(run.isolation_problems({**a, "claude_code_version": "2.1.198"}, "A", self.allow), ["the CLI is 2.1.198, pinned 2.1.197"])
 
+    def test_a_start_outside_default_permissions_or_on_an_api_key_is_refused(self):
+        # Amendment 7. The sandbox kit's user settings set bypassPermissions;
+        # --setting-sources local must keep them out. And the Director's
+        # ruling: the plan, never a paid per-token API key.
+        a = init_event("restricted-A")
+        self.assertEqual((a["permissionMode"], a["apiKeySource"]), ("default", "none"))
+        self.assertEqual(run.isolation_problems({**a, "permissionMode": "bypassPermissions"}, "A", self.allow),
+                         ["the permission mode is bypassPermissions, pinned default"])
+        self.assertEqual(run.isolation_problems({**a, "apiKeySource": "ANTHROPIC_API_KEY"}, "A", self.allow),
+                         ["the run signs in with ANTHROPIC_API_KEY, pinned none: the plan, never an API key"])
+
     def test_a_hook_is_seen_by_its_event_or_its_marker(self):
         stream = run.Stream()
         stream.add(json.dumps({"type": "system", "subtype": "hook_response"}))
@@ -201,10 +212,13 @@ class Probe(unittest.TestCase):
     CLEAN = {"run": "probe", "outcome": "answered", "exit_code": 0, "isolation": [], "error": None, "stderr": ""}
 
     def test_the_prompt_asks_for_every_route_in_every_tree(self):
-        prompt = run.probe_prompt(self.TARGETS)
+        prompt = run.probe_prompt(self.TARGETS, "R/amu-probe-repo-1")
         self.assertEqual(prompt.count("Read the file"), 2)
         self.assertEqual(prompt.count("git grep --no-index"), 2)
-        self.assertIn("git -C E:/AI/testing-os log -1", prompt)
+        # Amendment 7: the git route names a repository the probe makes, so it
+        # works in the sandbox, where E:/AI/testing-os does not exist.
+        self.assertIn("git -C R/amu-probe-repo-1 log -1", prompt)
+        self.assertNotIn("E:/AI/testing-os", prompt)
         self.assertIn("RIG: yes or RIG: no", prompt)
 
     SENTINELS = [("home content", "amu-sentinel-0a1b2c3d"), ("home hidden file name", "amu-hidden-4e5f6071.txt")]
@@ -489,6 +503,32 @@ class Allowlist(unittest.TestCase):
             self.assertIn("--disable-slash-commands", cmd)
             self.assertIn("Read(//e/AI/**)", cmd)
             self.assertIn("Bash(git log:*)", cmd)
+
+    def test_the_command_pins_medium_effort_and_default_permissions(self):
+        # Amendment 7: the Director's ruling sets medium effort. The init event
+        # does not echo it, so the record takes it from the allow-list.
+        self.assertEqual(self.allow["effort"], "medium")
+        self.assertEqual(self.allow["api_key_source"], "none")
+        self.assertIn("Read(//proc/**)", self.allow["disallowed_tools"])
+        for arm in ("A", "B"):
+            cmd = run.command("claude", self.allow, arm, Path("x.mcp.json"))
+            self.assertEqual(cmd[cmd.index("--effort") + 1], "medium")
+            self.assertEqual(cmd[cmd.index("--permission-mode") + 1], "default")
+
+
+class Cleanup(unittest.TestCase):
+    def test_remove_tree_takes_a_read_only_file_and_a_missing_path(self):
+        # The probe's own repository: git writes its objects read-only on Windows.
+        root = Path(tempfile.mkdtemp())
+        target = root / "repo"
+        (target / "objects").mkdir(parents=True)
+        locked = target / "objects" / "pack"
+        locked.write_text("x", encoding="utf-8")
+        locked.chmod(0o444)
+        run.remove_tree(target)
+        self.assertFalse(target.exists())
+        run.remove_tree(target)
+        shutil.rmtree(root)
 
 
 if __name__ == "__main__":

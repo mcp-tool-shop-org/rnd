@@ -7,7 +7,7 @@ relevance: act
 fields: [agent-tooling, studio-tooling]
 tags: [instrument, docker, sandboxes, sbx, isolation, cloud, runpod]
 instrument_status: planned
-invoke: "Not installed yet. The `sbx` CLI: local sandboxes on the rig are free; `sbx --cloud` runs Docker-managed microVMs on pay-as-you-go compute, with a Sandboxes API and SDK for creating them from a harness. Files go in by git clone or `sbx cp` (cloud has no host mounts)."
+invoke: "sbx 0.48.0, installed per user on the rig (winget Docker.sbx; needs Windows Hypervisor Platform on). Drive a sandbox headless with `sbx exec [-w DIR] SANDBOX claude -p …` (from Git Bash set MSYS_NO_PATHCONV=1); `sbx ls`, `sbx stop` (keeps the tools), `sbx rm` (cannot be undone). Local sandboxes are free; `sbx --cloud` runs Docker-managed microVMs on pay-as-you-go compute, with a Sandboxes API and SDK. Files go in by git clone, `git archive` or `sbx cp`."
 when: "An open-model agent experiment needs many clean, identical attempts that must not touch each other or the rig, or something must run code a stranger wrote. Models are local or RunPod only, never a paid model API (Director, 2026-10-13). GPU work stays on the rig or RunPod (offrig): cloud sandboxes have no GPU."
 where: "docs.docker.com/ai/sandboxes · CLI reference docs.docker.com/reference/cli/sbx · release notes docs.docker.com/ai/sandboxes/release-notes (on the weekly watch as docker-sandboxes)"
 ---
@@ -35,7 +35,7 @@ One CLI, `sbx`, drives both. Supported agents include Claude Code, Codex, Gemini
   - the repositories cloned at their pinned commits;
   - Atlas started from the release.
 
-  Then it's thrown away. That's the isolation the atlas-mcp-utility experiment otherwise builds by hand with per-attempt cache roots (amendment 4). It also keeps those runs off the rig while interlock holds GPU grants. The Claude arms stay on the rig, under the Director's plan.
+  Then it's thrown away. That's the isolation the atlas-mcp-utility experiment otherwise builds by hand with per-attempt cache roots (amendment 4). It also keeps those runs off the rig while interlock holds GPU grants. The Claude arms run in a local sandbox on the Director's plan (atlas-mcp-utility amendment 7).
 - **Paired with RunPod.** A sandbox runs the agent on CPU, and a RunPod pod (through offrig) serves an open model on a GPU. That covers an open-model arm without loading the 5090.
 - **Running strangers' code.** A model-written script, or a repository under review, can run in a machine that holds none of the studio's secrets.
 
@@ -62,21 +62,25 @@ The Director signed up on 2026-10-13, inside the offer window. The account's Doc
 
 ## Which model a sandboxed agent uses (the Director's ruling, 2026-10-13)
 
-**No Claude API, and no other paid model API. A sandboxed agent's model is local or on RunPod only.** A sandbox never runs the claude kit with an Anthropic API key. It runs an open-model kit (opencode, hermes-agent or shell), pointed at a model served on RunPod through offrig, or, in a local sandbox, at local Ollama.
+**No Claude API, and no other paid model API.** A sandbox never runs the claude kit with an Anthropic API key, and never takes `sbx secret set anthropic`, which is the API-key path. Three routes are allowed:
+- **The claude kit signed in with `/login` on the Director's plan,** in a local sandbox. The sign-in is held on the host and never enters the sandbox: the init event shows `apiKeySource: none`. Runs share his plan's usage limits.
+- **An open-model kit, or Claude Code itself pointed at an open model.** `sbx/claude-ollama-kit` runs Claude Code with `ANTHROPIC_BASE_URL` at the host's Ollama (`host.docker.internal:11434`), which answers `/v1/messages`. Its network is opened to that one host port only. The studio's fork is at `E:/AI/sbx-kits/claude-ollama-local`. Each run needs a GPU grant, since the model loads on the 5090.
+- **A model served on RunPod through offrig,** for a cloud sandbox.
 
 | The experiment | The agent runs in | The model |
 |---|---|---|
-| Claude is the subject (the atlas-mcp-utility ladder's Claude arms) | the rig, as designed, never a sandbox | Claude Code on the Director's own plan |
+| Claude is the subject (the atlas-mcp-utility ladder's Claude arms) | the local sandbox `atlas-pilot`, mountless (amendment 7) | Claude Code on the Director's plan, through the claude kit's `/login` |
 | Open-model agent runs, such as Atlas with a local coder model, or dataset generation | a cloud sandbox, on the credit | a RunPod pod serving the model through offrig, priced first. The agent kit (opencode, hermes-agent or shell) points at the pod's endpoint, and the 5090 stays free. |
-| Small, quick checks | a local sandbox on the rig, free | local Ollama on the 5090, when no grant is held |
+| Small, quick checks, or an open-model arm on the rig | a local sandbox, free | local Ollama on the 5090 through the claude-ollama kit, under a grant |
 
-- **Never expose the rig's Ollama to a cloud sandbox.** That would open the rig to the internet.
+- **Never expose the rig's Ollama to a cloud sandbox.** That would open the rig to the internet. A local sandbox reaches it through `host.docker.internal`, and nothing else does.
+- **Not yet tested:** whether a local sandbox reaches an Ollama bound to 127.0.0.1 on the host.
 - **No Ollama Cloud,** per Standing Rule 1.
 - **offrig's project cap ($5, $1.96 left on 2026-10-13)** covers verification batches, not a sustained open-model experiment. That needs a priced plan and the Director's go to raise the cap.
 
 ## Status and conditions (R&D, 2026-10-13)
 
-- **Planned.** The Director raised it on 2026-10-13, to pair with RunPod.
+- **Planned until the first pilot run.** The Director raised it on 2026-10-13, to pair with RunPod. The same day, sbx was installed and the mountless `atlas-pilot` workspace built for the atlas-mcp-utility experiment (its amendment 7). The setup is written up in [[2026-10-13-docker-sandboxes-on-the-rig-from-signup-to-a-pinned-pilot-wo]].
 - **The account is his:** he signed up on 2026-10-13, with a card on file. R&D doesn't run sandboxes or enter keys without his go.
 - **The first use waits for the Atlas build-up's release,** like every other test. It would be one pilot attempt of an open-model arm in a cloud sandbox, against a model on RunPod. It would measure setup time, cost per attempt, and whether the pinned kit and Atlas behave as on the rig. Any arm that would have used Claude in a sandbox becomes an open-model arm on RunPod.
 - **Unknown until tried:**

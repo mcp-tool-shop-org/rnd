@@ -396,6 +396,10 @@
           "path": "entries/2026/2026-10-13-e5-fill-card.md"
         },
         {
+          "hash": "d1d0e94b41448373772f990ec466a971f0de1bc511072ee567dc8f64fe21b3d5",
+          "path": "entries/2026/2026-10-13-multi-repository-atlas-research-grounding-for-the-build-up.md"
+        },
+        {
           "hash": "a54a838fff1c2c1f2fc62c9102e4f6409223215c397772bfae97d4ec9e2064d2",
           "path": "entries/2026/2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ.md"
         },
@@ -427,11 +431,11 @@
       "externals": 0,
       "files": [
         {
-          "hash": "8afc286361420061a8435a38eb551bbed56a58e4c4c5fa1a5c567d2a26594165",
+          "hash": "4c1afbae40a3e2e9ecde17917617f5b3a600a4365842a5f3edec41a9ec854e86",
           "path": "experiments/atlas-mcp-utility/README.md"
         },
         {
-          "hash": "ff2500444a24a9f859c081869fe62448fa44006a601c94b0545136ef1184b3b4",
+          "hash": "506080e1b416a028200b56e77f8c25081119ba99067e91b864a1893ba2983ca6",
           "path": "experiments/atlas-mcp-utility/allow-list.json"
         },
         {
@@ -478,12 +482,16 @@
         },
         {
           "exports": [
+            "atlas_cache_root",
             "atlas_cli",
+            "auth_failed",
             "bash_problems",
             "bash_violations",
             "command",
             "debrief_items",
             "digest",
+            "error_text",
+            "expected_tools",
             "flip_rate",
             "git",
             "inside",
@@ -491,6 +499,8 @@
             "leaks",
             "main",
             "masked",
+            "mcp_servers",
+            "outcome_of",
             "pilot",
             "pin_problems",
             "plan_limit_hit",
@@ -505,6 +515,7 @@
             "run_plan",
             "scrub",
             "sha256_lf",
+            "tree_state",
             "user_message",
             "work_problems"
           ],
@@ -512,25 +523,25 @@
             {
               "in": "inside",
               "kind": "except",
-              "line": 96
+              "line": 103
             },
             {
               "in": "add",
               "kind": "except",
-              "line": 157
+              "line": 164
             },
             {
               "in": "git",
               "kind": "raise",
-              "line": 431
+              "line": 549
             },
             {
               "in": "prepare",
               "kind": "raise",
-              "line": 450
+              "line": 568
             }
           ],
-          "hash": "016e91ab3ee307eac71a2977fa34b17ae093befa7968289af4f33b56cfa324ca",
+          "hash": "1682807cfc879b572ce2b964e3bfbaaf7fc9fd81921439a8d58ec9d47c335835",
           "importsFiles": [
             "experiments/atlas-mcp-utility/grade.py"
           ],
@@ -2822,7 +2833,7 @@
       "origin": "mixed",
       "outsidePlaces": [
         {
-          "reads": 21,
+          "reads": 22,
           "where": [
             "caller"
           ],
@@ -2837,7 +2848,7 @@
           "writes": 0
         }
       ],
-      "outsideReads": 22,
+      "outsideReads": 23,
       "outsideWrites": 5,
       "role": "code",
       "testRunners": [
@@ -2978,7 +2989,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "2f516b79eb27d1bd7146e3f7d404b019d93e48dfc71e5e63fac502b0ce2320b6",
+          "hash": "cc4af439c80df6a18ff8564fa552a2cfcfbfbbdfc697fb64a2f5272144247823",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -4175,7 +4186,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "5908b4a794253951750509263ee3fd5b56e6d9dea544995639f1ce54e57d9277",
+          "hash": "e702294892a9bed45f9abc6b52a3d2c96816136fb2e63a4a49f083dc0332d4ba",
           "path": "CHANGELOG.md"
         },
         {
@@ -4516,6 +4527,22 @@
           "path": "tests/__init__.py"
         },
         {
+          "hash": "feaf6d86acdb09b07acd53262e67b27eaeec754c779b84c0adbe12113e2a09cf",
+          "path": "tests/fixtures/atlas_mcp_utility/init-restricted-A.json"
+        },
+        {
+          "hash": "e5cc6bd2419922c15047de5a51d0be25f00029c30812d90da0bc36711d0c1400",
+          "path": "tests/fixtures/atlas_mcp_utility/init-restricted-B.json"
+        },
+        {
+          "hash": "16f5a4b6ccdc3595d8b3fc845e1db1a18202f30630ca9f3f6144424719f000d8",
+          "path": "tests/fixtures/atlas_mcp_utility/init-wide-A.json"
+        },
+        {
+          "hash": "b0524efa27b4c0a750394bc820e8d8fed9e05a815966e18f585a901ab07efc18",
+          "path": "tests/fixtures/atlas_mcp_utility/init-wide-B.json"
+        },
+        {
           "hash": "8c9c1fc133c0f098796154a0a80e9e20ecf00cf20d202c6808560da88dc7fba4",
           "path": "tests/fixtures/probe/github-code.json"
         },
@@ -4579,10 +4606,11 @@
         {
           "exports": [
             "assistant",
+            "init_event",
             "tool_result",
             "use"
           ],
-          "hash": "5f1b9e4a2d454c071183ce7cfe550d5da3c02ac1a22655a0550d4b5f39def463",
+          "hash": "8debb2aeda2d17e4a14ed3b45c87c7ce0b85a200e07f3205205b0660bb60055f",
           "importOrder": [
             "experiments/atlas-mcp-utility/run.py",
             "experiments/atlas-mcp-utility/grade.py"
@@ -5430,8 +5458,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "bc95d916a1f82d7a51bf2e0a64999d7fea343344",
-    "tracked": 567
+    "commit": "c7872ff4dc5dc32f66e585ba12f028d114ae1b64",
+    "tracked": 572
   },
   "landings": [
     {
@@ -7371,7 +7399,7 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 27,
+  "testFiles": 31,
   "testsNotRun": [
     "experiments/cuda-graphs/test_graphed_heads.py",
     "experiments/data-designer/tests/test_lockdown.py"

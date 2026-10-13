@@ -1,6 +1,6 @@
 # rnd: how it works
 
-Mapped at 2026-10-13 from commit bc95d91 by Atlas 1.24.0.
+Mapped at 2026-10-13 from commit c7872ff by Atlas 1.24.0.
 
 ## What this is
 
@@ -8,9 +8,9 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 
 13 parts, mostly Python (79 files), shell (14), CSS (2), HTML (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-13 (ce0f81c)
+## What changed since 2026-10-13 (bc95d91)
 
-Nothing structural changed since 2026-10-13; 2 files changed content.
+Nothing structural changed since 2026-10-13; 5 files added and 6 changed content.
 
 ## What comes in
 
@@ -115,7 +115,7 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 - 9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.
 - 9 writes and 11 reads use paths built at run time and are not named here.
 - 5 writes go to places this repository does not track, so they are not listed as generated.
-- 13 writes and 40 reads go to a path their caller passes, not to this repository.
+- 13 writes and 41 reads go to a path their caller passes, not to this repository.
 - 3 reads go to the directory the command is run in (entries and instruments), not to this repository.
 - 1 read goes to the directory the command is run in or a path its caller passes, not to this repository.
 - Statistics confidence is low: fewer than 25 source files reach 10 revisions in the window.

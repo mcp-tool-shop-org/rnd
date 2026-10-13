@@ -115,7 +115,7 @@
       "confidence": "full",
       "highWater": null,
       "name": "experiments",
-      "qualifyingSourceCommits": 49,
+      "qualifyingSourceCommits": 50,
       "rebaseline": null
     },
     {
@@ -150,7 +150,7 @@
       "confidence": "full",
       "highWater": null,
       "name": "mcptoolshop_rnd",
-      "qualifyingSourceCommits": 296,
+      "qualifyingSourceCommits": 297,
       "rebaseline": null
     },
     {
@@ -216,7 +216,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "tests",
-      "qualifyingSourceCommits": 19,
+      "qualifyingSourceCommits": 20,
       "rebaseline": null
     }
   ],
@@ -259,8 +259,8 @@
         "path": ".gitignore"
       },
       {
-        "commits": 327,
-        "lines": 1805,
+        "commits": 328,
+        "lines": 1810,
         "path": "CHANGELOG.md"
       },
       {
@@ -324,8 +324,8 @@
         "path": "SHIP_GATE.md"
       },
       {
-        "commits": 19,
-        "lines": 483,
+        "commits": 18,
+        "lines": 477,
         "path": "atlas/README.md"
       },
       {
@@ -334,18 +334,18 @@
         "path": "atlas/boundaries.yaml"
       },
       {
-        "commits": 19,
-        "lines": 1636,
+        "commits": 18,
+        "lines": 1620,
         "path": "atlas/page.json"
       },
       {
-        "commits": 19,
-        "lines": 5001,
+        "commits": 18,
+        "lines": 4947,
         "path": "atlas/statistics.json"
       },
       {
-        "commits": 19,
-        "lines": 8854,
+        "commits": 18,
+        "lines": 8850,
         "path": "atlas/structure.json"
       },
       {
@@ -704,6 +704,11 @@
         "path": "entries/2026/2026-10-13-e5-fill-card.md"
       },
       {
+        "commits": 1,
+        "lines": 169,
+        "path": "entries/2026/2026-10-13-multi-repository-atlas-research-grounding-for-the-build-up.md"
+      },
+      {
         "commits": 2,
         "lines": 71,
         "path": "entries/2026/2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ.md"
@@ -720,12 +725,12 @@
       },
       {
         "commits": 6,
-        "lines": 287,
+        "lines": 330,
         "path": "experiments/atlas-mcp-utility/README.md"
       },
       {
-        "commits": 2,
-        "lines": 56,
+        "commits": 3,
+        "lines": 75,
         "path": "experiments/atlas-mcp-utility/allow-list.json"
       },
       {
@@ -744,8 +749,8 @@
         "path": "experiments/atlas-mcp-utility/key-audit.json"
       },
       {
-        "commits": 3,
-        "lines": 253,
+        "commits": 1,
+        "lines": 221,
         "path": "experiments/atlas-mcp-utility/ladder.md"
       },
       {
@@ -754,8 +759,8 @@
         "path": "experiments/atlas-mcp-utility/prompt.md"
       },
       {
-        "commits": 3,
-        "lines": 821,
+        "commits": 4,
+        "lines": 1039,
         "path": "experiments/atlas-mcp-utility/run.py"
       },
       {
@@ -2599,8 +2604,8 @@
         "path": "instruments/web-research.md"
       },
       {
-        "commits": 297,
-        "lines": 595,
+        "commits": 298,
+        "lines": 597,
         "path": "mcptoolshop_rnd/__init__.py"
       },
       {
@@ -3005,6 +3010,26 @@
       },
       {
         "commits": 1,
+        "lines": 27,
+        "path": "tests/fixtures/atlas_mcp_utility/init-restricted-A.json"
+      },
+      {
+        "commits": 1,
+        "lines": 39,
+        "path": "tests/fixtures/atlas_mcp_utility/init-restricted-B.json"
+      },
+      {
+        "commits": 1,
+        "lines": 97,
+        "path": "tests/fixtures/atlas_mcp_utility/init-wide-A.json"
+      },
+      {
+        "commits": 1,
+        "lines": 109,
+        "path": "tests/fixtures/atlas_mcp_utility/init-wide-B.json"
+      },
+      {
+        "commits": 1,
         "lines": 21,
         "path": "tests/fixtures/probe/github-code.json"
       },
@@ -3069,8 +3094,8 @@
         "path": "tests/test_atlas_mcp_utility_grade.py"
       },
       {
-        "commits": 3,
-        "lines": 356,
+        "commits": 4,
+        "lines": 539,
         "path": "tests/test_atlas_mcp_utility_run.py"
       },
       {
@@ -3139,17 +3164,17 @@
     "level": "low",
     "reason": "fewer than 25 source files reach 10 revisions in the window"
   },
-  "generatedAt": "2026-10-13T17:54:49.502Z",
+  "generatedAt": "2026-10-13T17:59:38.196Z",
   "generatedFrom": {
-    "commit": "bc95d916a1f82d7a51bf2e0a64999d7fea343344"
+    "commit": "c7872ff4dc5dc32f66e585ba12f028d114ae1b64"
   },
   "pairs": [
     {
       "a": "CHANGELOG.md",
       "b": "mcptoolshop_rnd/__init__.py",
-      "either": 326,
-      "shared": 296,
-      "strength": 0.907975
+      "either": 327,
+      "shared": 297,
+      "strength": 0.908257
     },
     {
       "a": "README.md",
@@ -3161,43 +3186,43 @@
     {
       "a": "atlas/README.md",
       "b": "atlas/page.json",
-      "either": 19,
-      "shared": 19,
+      "either": 18,
+      "shared": 18,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/statistics.json",
-      "either": 19,
-      "shared": 19,
+      "either": 18,
+      "shared": 18,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/structure.json",
-      "either": 19,
-      "shared": 19,
+      "either": 18,
+      "shared": 18,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/statistics.json",
-      "either": 19,
-      "shared": 19,
+      "either": 18,
+      "shared": 18,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/structure.json",
-      "either": 19,
-      "shared": 19,
+      "either": 18,
+      "shared": 18,
       "strength": 1
     },
     {
       "a": "atlas/statistics.json",
       "b": "atlas/structure.json",
-      "either": 19,
-      "shared": 19,
+      "either": 18,
+      "shared": 18,
       "strength": 1
     },
     {
@@ -3218,16 +3243,16 @@
     "floor": "fallen",
     "floorHeld": false,
     "floorTrigger": "revision-depth",
-    "headDate": "2026-10-13T13:54:44-04:00",
-    "inScopeFiles": 572,
+    "headDate": "2026-10-13T13:59:32-04:00",
+    "inScopeFiles": 577,
     "pinnedStart": null,
     "priorFloor": "fallen",
-    "qualifyingCommits": 354,
+    "qualifyingCommits": 352,
     "qualifyingMinimum": 30,
     "revisions": 5,
     "shared": 10,
     "sharedFloorUsed": 3,
-    "since": "2026-04-16T17:54:44.000Z",
+    "since": "2026-04-16T17:59:32.000Z",
     "sourceExtensions": [
       ".js",
       ".mjs",

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.5.0.3] - 2026-10-13
+
+- atlas-mcp-utility pre-registered (#5); the Director's go on the pilot, after the GPU grant ends
+
 ## [1.1.5.0.2] - 2026-10-13
 
 - atlas-mcp-utility pre-registered (#5); the Director's go on the pilot only

@@ -396,7 +396,7 @@
           "path": "entries/2026/2026-10-13-e5-fill-card.md"
         },
         {
-          "hash": "d1d0e94b41448373772f990ec466a971f0de1bc511072ee567dc8f64fe21b3d5",
+          "hash": "1e0db2b54c4d5f8c942e726be70793ef28def08a63115cbd217359e7f8f546b8",
           "path": "entries/2026/2026-10-13-multi-repository-atlas-research-grounding-for-the-build-up.md"
         },
         {
@@ -431,7 +431,7 @@
       "externals": 0,
       "files": [
         {
-          "hash": "4c1afbae40a3e2e9ecde17917617f5b3a600a4365842a5f3edec41a9ec854e86",
+          "hash": "f851b85763ed3da59203862ed20735e3866880a16e81813f9a8e4a6e120c24e9",
           "path": "experiments/atlas-mcp-utility/README.md"
         },
         {
@@ -473,7 +473,7 @@
           "path": "experiments/atlas-mcp-utility/key-audit.json"
         },
         {
-          "hash": "faac51c2943edb80509fd311ca510c88e71f2ba0d9900884072fafc72d1a6a77",
+          "hash": "6512fd2b2989a982ddd591a293caceaf5b72c9b2e5a60edfb896851a1cf0743c",
           "path": "experiments/atlas-mcp-utility/ladder.md"
         },
         {
@@ -2989,7 +2989,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "cc4af439c80df6a18ff8564fa552a2cfcfbfbbdfc697fb64a2f5272144247823",
+          "hash": "9102f81ad5628d4e16bee0558f681f8deee6d75ad15c00e0cd1af2ca6d9c0c69",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -4186,7 +4186,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "e702294892a9bed45f9abc6b52a3d2c96816136fb2e63a4a49f083dc0332d4ba",
+          "hash": "0186a0b71c244f2ba69d084207ea117881a48a199abadd4384d898291db9d059",
           "path": "CHANGELOG.md"
         },
         {
@@ -5458,7 +5458,7 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "c7872ff4dc5dc32f66e585ba12f028d114ae1b64",
+    "commit": "097bbbb122874453bde0374faefad773c83563d9",
     "tracked": 572
   },
   "landings": [

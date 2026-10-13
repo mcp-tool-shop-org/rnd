@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.4] - 2026-10-13
+
+- entry: instrument_perturbs_measurement, the interlock slot probe's process walk
+- Added `2026-10-13-the-probe-was-the-contention-a-process-walk-inside-the-measu`: The probe was the contention: a process walk inside the measured window
+
 ## [1.1.8.0.3] - 2026-10-13
 
 - test-fakes entry: the second #107 instance (a fake with no unload lag)

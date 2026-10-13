@@ -165,6 +165,20 @@ class ExactSearchTests(unittest.TestCase):
         self.assertEqual(self.ids("pairs", True), ["b"])
         self.assertEqual(self.ids("PAI", True), [])
 
+    def test_exact_keeps_punctuated_terms_whole(self):
+        # The watch scout searched "Run:ai" and got every entry holding "Run" and "ai" as separate words.
+        self.con.execute("INSERT INTO entries (id, title, kind, relevance, date, path) VALUES (?,?,?,?,?,?)",
+                         ("c", "NVIDIA Run:ai is open source", "finding", "act", "2026-10-13", "c.md"))
+        self.con.execute("INSERT INTO entries_fts (id, title, tags, body) VALUES (?,?,?,?)",
+                         ("c", "NVIDIA Run:ai is open source", "scheduler", "Run:ai schedules GPU work."))
+        self.con.execute("INSERT INTO entries (id, title, kind, relevance, date, path) VALUES (?,?,?,?,?,?)",
+                         ("d", "Run the ai tests", "finding", "act", "2026-10-13", "d.md"))
+        self.con.execute("INSERT INTO entries_fts (id, title, tags, body) VALUES (?,?,?,?)",
+                         ("d", "Run the ai tests", "ci", "Run them, then the ai suite."))
+        self.assertEqual(self.ids("Run:ai", True), ["c"])
+        self.assertEqual(self.ids('"Run:ai",', True), ["c"])
+        self.assertEqual(store.exact_words("NeMo-Relay  Qwen-Image"), ["NeMo-Relay", "Qwen-Image"])
+
     def test_exact_snippet_brackets_the_hit_and_hides_full_text(self):
         ents, _ = store.search(self.con, "PAIR", exact=True, catalogs=False)
         self.assertIn("[PAIR]", ents[0]["snip"])

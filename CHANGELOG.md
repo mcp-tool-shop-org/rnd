@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.0] - 2026-10-13
+
+- rnd watch: latest is the newest stable release (a newer pre-release is shown apart); release notes and commit messages kept in the JSON (first watch run, 2026-10-13)
+- rnd search --exact: terms split on spaces and keep inner punctuation, so Run:ai and NeMo-Relay match whole
+
 ## [1.1.7.1.5] - 2026-10-13
 
 - site: the watch, a weekly page linked from the landing page and the newsletter; first edition, week of 13 October

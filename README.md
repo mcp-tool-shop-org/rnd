@@ -230,7 +230,7 @@ python -m rnd watch --only ollama    # one source
 ```
 
 What it saw is kept in a state file outside the repository (`$RND_WATCH_STATE`, else `~/.rnd/watch-state.json`).
-A source's first check is a baseline: it records the current items and reports none as new. A source that
+A source's first check is a baseline: it records the current items and reports none as new. A pre-release is never reported as a source's latest version; a newer one is shown beside it. GitHub release notes and commit messages are kept in the JSON output, so a reader doesn't have to fetch each page. A source that
 can't be reached is reported as unknown, and its state is left alone so nothing is skipped silently.
 
 The command is the deterministic half of a weekly ritual (Director, 2026-10-13). A scout reads the new items,

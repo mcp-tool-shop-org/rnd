@@ -380,7 +380,7 @@
           "path": "entries/2026/2026-10-12-prefix-fit-count-cost.md"
         },
         {
-          "hash": "5634ae4bd8c6604d9fbaec63aae79e62f1c9b7e2bf7cc8a7161183a1059711b5",
+          "hash": "e174b4d18ef8b2179fab069b1bf6b9397f1e127d0507a643101111658c9cf801",
           "path": "entries/2026/2026-10-12-test-fakes-hide-the-platform.md"
         },
         {
@@ -2989,7 +2989,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "01c7c07deaf88d6847769a30a63b1e461143daa5ee9b82759dc32ac496baab3f",
+          "hash": "087e6f3398a756bdffafcf524004d16241d3dce0f2b62993a61f289557f75a60",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -4186,7 +4186,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "db9168fcd0f7f17e98a9b60709d64e7c0c25e83da5fd64099b0dffd6700cea2a",
+          "hash": "66e384551089d4c151982d66622883941771bed4229e579dcd7ebe9214d80566",
           "path": "CHANGELOG.md"
         },
         {
@@ -5462,7 +5462,7 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "0865b8883f27db952011f0d4bd153e1ce8735500",
+    "commit": "c719cef9967f4c00852073b6e1c5b5efdcdf0de8",
     "tracked": 573
   },
   "landings": [

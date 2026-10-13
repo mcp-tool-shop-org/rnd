@@ -1,6 +1,6 @@
 # rnd: how it works
 
-Mapped at 2026-10-13 from commit 0865b88 by Atlas 1.24.0.
+Mapped at 2026-10-13 from commit c719cef by Atlas 1.24.0.
 
 ## What this is
 
@@ -8,9 +8,9 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 
 13 parts, mostly Python (79 files), shell (14), CSS (2), HTML (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-13 (d0d33d4)
+## What changed since 2026-10-13 (0865b88)
 
-Nothing structural changed since 2026-10-13; 8 files changed content.
+Nothing structural changed since 2026-10-13; 3 files changed content.
 
 ## What comes in
 

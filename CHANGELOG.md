@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.7.1.5] - 2026-10-13
+
+- site: the watch, a weekly page linked from the landing page and the newsletter; first edition, week of 13 October
+
 ## [1.1.7.1.4] - 2026-10-13
 
 - catalog: nvidia-skills synced (7 added: codonfm x4, nvidia-ontology x3), flagged by the first weekly watch

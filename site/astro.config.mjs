@@ -31,6 +31,10 @@ export default defineConfig({
           items: [{ autogenerate: { directory: 'newsletter' } }],
         },
         {
+          label: 'The watch (weekly)',
+          items: [{ autogenerate: { directory: 'watch' } }],
+        },
+        {
           label: 'Using the bench',
           items: [{ autogenerate: { directory: 'handbook' } }],
         },

@@ -17,6 +17,12 @@ const briefs = docs
   .sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? '') || a.data.title.localeCompare(b.data.title));
 const latest = issues[0];
 const back = issues.slice(1);
+// The weekly watch: what changed in the tools and models we run, newest first.
+const watches = docs
+  .filter((d) => d.id.startsWith('watch/') && d.data.date)
+  .sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
+const watch = watches[0];
+const pastWatches = watches.slice(1);
 const useIt = config.sections.find((s) => s.id === 'use-it');
 ---
 
@@ -32,6 +38,7 @@ const useIt = config.sections.find((s) => s.id === 'use-it');
   footerText={config.footerText}
   nav={[
     { href: '#latest', label: 'Latest issue' },
+    { href: '#watch', label: 'The watch' },
     { href: '#briefs', label: 'Research briefs' },
     { href: '#archive', label: 'Back issues' },
     { href: '#use-it', label: 'Use it' },
@@ -60,6 +67,28 @@ const useIt = config.sections.find((s) => s.id === 'use-it');
           Read issue {latest.data.issue}
         </a>
       </div>
+    )}
+  </Section>
+
+  <Section id="watch" title="The watch" subtitle="Every Monday: what changed in the tools and models the studio runs on, what it means for our work, and what we did about it.">
+    {watch ? (
+      <div class="mt-6 rounded-2xl border border-edge p-6">
+        <p class="text-xs uppercase tracking-wider text-dim">{watch.data.date}</p>
+        <h3 class="mt-1 text-lg font-semibold text-heading">{watch.data.title}</h3>
+        <ul class="mt-3 list-disc space-y-2 pl-5 text-body">
+          {(watch.data.highlights ?? []).map((h) => <li set:html={h} />)}
+        </ul>
+        <a href={`${base}/${watch.id}/`} class="mt-6 inline-flex rounded-xl border border-edge px-5 py-2.5 text-sm font-medium text-heading hover:bg-surface-raised/50">
+          Read this week's watch
+        </a>
+        {pastWatches.length > 0 && (
+          <p class="mt-4 text-sm text-muted">Earlier weeks: {pastWatches.map((w, i) => (
+            <span>{i > 0 && ' · '}<a class="text-accent underline" href={`${base}/${w.id}/`}>{w.data.date}</a></span>
+          ))}</p>
+        )}
+      </div>
+    ) : (
+      <p class="mt-6 text-muted">The first watch is in preparation.</p>
     )}
   </Section>
 

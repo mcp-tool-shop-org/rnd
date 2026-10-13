@@ -73,3 +73,11 @@ misfired on llama3.1:8b, which in fact holds its full window with gigabytes to s
   a week a scout reads what's new and writes a short ranked report: what to try, what to file and what to skip.
 
 → [rnd's README: probing a tool, watching sources](https://github.com/mcp-tool-shop-org/rnd#probing-a-tool-before-a-trial)
+
+## New: the weekly watch
+
+The watch now has its own page every Monday: what changed in the tools and models the studio runs on, what it
+means for our work, and what we did about it. The first edition caught a Claude Code fix that closes a gap in our
+own experiment's sandbox.
+
+→ [The watch: week of 13 October](/rnd/watch/2026-10-13/)

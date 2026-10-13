@@ -1,0 +1,26 @@
+[
+ {
+  "tag_name": "v0.40.4-rc1",
+  "name": "v0.40.4",
+  "published_at": "2026-10-12T19:00:12Z",
+  "html_url": "https://github.com/ollama/ollama/releases/tag/v0.40.4-rc1",
+  "prerelease": true,
+  "draft": false
+ },
+ {
+  "tag_name": "v0.40.3",
+  "name": "v0.40.3",
+  "published_at": "2026-10-11T01:39:04Z",
+  "html_url": "https://github.com/ollama/ollama/releases/tag/v0.40.3",
+  "prerelease": false,
+  "draft": false
+ },
+ {
+  "tag_name": "v0.40.2",
+  "name": "v0.40.2",
+  "published_at": "2026-10-08T16:53:47Z",
+  "html_url": "https://github.com/ollama/ollama/releases/tag/v0.40.2",
+  "prerelease": false,
+  "draft": false
+ }
+]

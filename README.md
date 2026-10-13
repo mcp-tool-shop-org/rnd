@@ -212,6 +212,32 @@ not from a summary of a web page:
 
 A source that can't be reached is reported as unknown, with the reason.
 
+## Watching sources
+
+`rnd watch` checks the sources in [docs/watchlist.json](docs/watchlist.json) and reports what's new since
+the last check:
+
+- NVIDIA's technical blog;
+- the CUDA toolkit version;
+- NVIDIA's new Hugging Face models;
+- the NVIDIA skills catalogue;
+- the releases of the engines and tools the studio runs, such as Ollama, OpenVINO, PyTorch, ComfyUI and Claude Code.
+
+```bash
+python -m rnd watch                  # what's new; records what it saw
+python -m rnd watch --no-save --json # look without recording
+python -m rnd watch --only ollama    # one source
+```
+
+What it saw is kept in a state file outside the repository (`$RND_WATCH_STATE`, else `~/.rnd/watch-state.json`).
+A source's first check is a baseline: it records the current items and reports none as new. A source that
+can't be reached is reported as unknown, and its state is left alone so nothing is skipped silently.
+
+The command is the deterministic half of a weekly ritual (Director, 2026-10-13). A scout reads the new items,
+probes any candidate tool with `rnd probe`, checks the library with `rnd search --exact`, and writes a short
+ranked report: what to file, what to try, and what to skip. Add a source by pull request, and say why it
+matters.
+
 ## Relation to other studio tools
 
 - **readouts** is the verified shelf this bench feeds (see above).

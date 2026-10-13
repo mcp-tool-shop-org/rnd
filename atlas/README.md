@@ -1,16 +1,17 @@
 # rnd: how it works
 
-Mapped at 2026-10-13 from commit 6a89bb3 by Atlas 1.24.0.
+Mapped at 2026-10-13 from commit f9b2638 by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-13 parts, mostly Python (76 files), shell (14), CSS (2), TypeScript (2), Astro (1), HTML (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
+13 parts, mostly Python (78 files), shell (14), CSS (2), HTML (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-13 (23c63d5)
+## What changed since 2026-10-13 (6a89bb3)
 
-Nothing structural changed since 2026-10-13; 2 files added and 1 changed content.
+- docs/watchlist.json is now read by mcptoolshop_rnd/cli.py and tests/test_watch.py.
+- 9 files added and 4 changed content, across 4 parts.
 
 ## What comes in
 
@@ -102,7 +103,7 @@ No two parts export a helper that looks alike.
 
 ## Hand-authored
 
-People write .claude/, .github/, catalogs/, datapacks/ and docs/; 8 writes with paths built at run time may land here.
+People write .claude/, .github/, catalogs/, datapacks/ and docs/; 9 writes with paths built at run time may land here.
 
 ## Where to start
 
@@ -113,9 +114,9 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 ## What this map cannot see
 
 - 9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.
-- 8 writes and 11 reads use paths built at run time and are not named here.
+- 9 writes and 11 reads use paths built at run time and are not named here.
 - 5 writes go to places this repository does not track, so they are not listed as generated.
-- 13 writes and 38 reads go to a path their caller passes, not to this repository.
+- 13 writes and 40 reads go to a path their caller passes, not to this repository.
 - 3 reads go to the directory the command is run in (entries and instruments), not to this repository.
 - 1 read goes to the directory the command is run in or a path its caller passes, not to this repository.
 - Statistics confidence is low: fewer than 25 source files reach 10 revisions in the window.

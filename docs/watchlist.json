@@ -1,0 +1,17 @@
+{
+  "about": "Sources the weekly watch ritual checks for news the studio should act on (Director, 2026-10-13). `rnd watch` reports what is new since the last check; the ritual's scout reads and ranks it. Add a source by pull request, and say why it matters.",
+  "sources": [
+    {"id": "nvidia-tech-blog", "kind": "feed", "url": "https://developer.nvidia.com/blog/feed/", "why": "NVIDIA's developer posts: models, tools and techniques; the NVIDIA newsletter draws on it"},
+    {"id": "cuda-toolkit", "kind": "page", "url": "https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html", "pattern": "<title>\\s*(CUDA Toolkit [^<]*?)\\s+-\\s+Release Notes", "why": "the current CUDA toolkit version; driver minimums and Blackwell support for the RTX 5090"},
+    {"id": "nvidia-hf-models", "kind": "huggingface", "url": "https://huggingface.co/api/models?author=nvidia&sort=createdAt&direction=-1&limit=30", "why": "new NVIDIA open models (Nemotron and others) that might fit the 5090"},
+    {"id": "nvidia-skills", "kind": "github-commits", "url": "https://github.com/NVIDIA/skills", "why": "the skills catalogue mirrored in catalogs/nvidia-skills; run `rnd catalog sync` when it moves"},
+    {"id": "nemo-relay", "kind": "github-releases", "url": "https://github.com/NVIDIA/NeMo-Relay", "why": "planned instrument: agent tracing (instruments/nemo-relay.md)"},
+    {"id": "nvidia-pair", "kind": "github-releases", "url": "https://github.com/NVIDIA/Personal-AI-Router", "why": "the LAN router compared with interlock (briefs/pair-and-interlock)"},
+    {"id": "ollama", "kind": "github-releases", "url": "https://github.com/ollama/ollama", "why": "the 5090 serving engine; a new version can change behaviour the experiments depend on"},
+    {"id": "llama-cpp", "kind": "github-releases", "url": "https://github.com/ggml-org/llama.cpp", "why": "the engine under Ollama; report notable releases only"},
+    {"id": "openvino", "kind": "github-releases", "url": "https://github.com/openvinotoolkit/openvino", "why": "the Intel NPU and iGPU lane"},
+    {"id": "pytorch", "kind": "github-releases", "url": "https://github.com/pytorch/pytorch", "why": "training and GPU work; CUDA support changes"},
+    {"id": "comfyui", "kind": "github-releases", "url": "https://github.com/comfyanonymous/ComfyUI", "why": "the image pipeline"},
+    {"id": "claude-code", "kind": "github-releases", "url": "https://github.com/anthropics/claude-code", "why": "the agent CLI every harness and experiment runs on; flags and permission rules change"}
+  ]
+}

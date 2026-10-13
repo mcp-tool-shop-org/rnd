@@ -147,6 +147,10 @@
         {
           "hash": "d1041b9d7b299b3f305020952c93a8119f83d3d2592bdd30f8ecf0173161a308",
           "path": "docs/standards.md"
+        },
+        {
+          "hash": "76d80855c3714a29991b478d69915f4912fbc501581214982ed5863b344e5b70",
+          "path": "docs/watchlist.json"
         }
       ],
       "globs": [
@@ -2875,7 +2879,7 @@
       "dynamicReads": 2,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
-      "dynamicWrites": 3,
+      "dynamicWrites": 4,
       "entryPoints": [
         "mcptoolshop_rnd/cli.py"
       ],
@@ -2883,7 +2887,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "524e8c5a3d442b2b1f3a2192250dd07c5d2c221a3c5db57555166d1c7ed4bdcb",
+          "hash": "c6cbf6fe0cc71e5ca0fabe086af990564e7e1ac6517e3cc4faf2de43e3556b17",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -2954,6 +2958,7 @@
             "cmd_sql",
             "cmd_stats",
             "cmd_tools",
+            "cmd_watch",
             "emit",
             "fail",
             "find_root",
@@ -3000,32 +3005,37 @@
               "line": 387
             },
             {
+              "in": "cmd_watch",
+              "kind": "except",
+              "line": 421
+            },
+            {
               "in": "cmd_collect",
               "kind": "except",
-              "line": 439
+              "line": 480
             },
             {
               "in": "cmd_datapack",
               "kind": "except",
-              "line": 476
+              "line": 517
             },
             {
               "in": "cmd_datapack",
               "kind": "except",
-              "line": 506
+              "line": 547
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 625
+              "line": 673
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 627
+              "line": 675
             }
           ],
-          "hash": "8b7c083999727190c1b1fbe0a6020d27720380b30f5dc8defe89fee0d454dc93",
+          "hash": "4a64efc474c14148e27e8b9b43873c9d21dcd25f60538bcd4cf28be4fd2b30fb",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/catalog.py",
@@ -3035,7 +3045,8 @@
             "mcptoolshop_rnd/probe.py",
             "mcptoolshop_rnd/readouts.py",
             "mcptoolshop_rnd/release.py",
-            "mcptoolshop_rnd/store.py"
+            "mcptoolshop_rnd/store.py",
+            "mcptoolshop_rnd/watch.py"
           ],
           "path": "mcptoolshop_rnd/cli.py",
           "sequences": [
@@ -3368,8 +3379,44 @@
             {
               "calls": [
                 {
-                  "branch": "not args.name",
                   "line": 414,
+                  "name": "load_watchlist",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 420,
+                  "name": "load_state",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 423,
+                  "name": "check",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 425,
+                  "name": "save_state",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_watch"
+            },
+            {
+              "calls": [
+                {
+                  "branch": "not args.name",
+                  "line": 455,
                   "name": "experiments",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3377,14 +3424,14 @@
                 },
                 {
                   "branch": "not args.name",
-                  "line": 415,
+                  "line": 456,
                   "name": "load_spec",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 425,
+                  "line": 466,
                   "name": "run",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3400,7 +3447,7 @@
               "calls": [
                 {
                   "branch": "args.action == \"list\"",
-                  "line": 447,
+                  "line": 488,
                   "name": "manifests",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3408,7 +3455,7 @@
                 },
                 {
                   "branch": "args.action == \"list\"",
-                  "line": 448,
+                  "line": 489,
                   "name": "load",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3416,7 +3463,7 @@
                 },
                 {
                   "branch": "args.action == \"build\"",
-                  "line": 472,
+                  "line": 513,
                   "name": "load",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3424,7 +3471,7 @@
                 },
                 {
                   "branch": "args.action == \"build\"",
-                  "line": 480,
+                  "line": 521,
                   "name": "build",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3432,7 +3479,7 @@
                 },
                 {
                   "branch": "args.action == \"build\"",
-                  "line": 485,
+                  "line": 526,
                   "name": "write",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3440,7 +3487,7 @@
                 },
                 {
                   "branch": "args.action == \"verify\"",
-                  "line": 493,
+                  "line": 534,
                   "name": "load",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3448,7 +3495,7 @@
                 },
                 {
                   "branch": "args.action == \"verify\"",
-                  "line": 494,
+                  "line": 535,
                   "name": "verify",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3842,6 +3889,88 @@
             "mcptoolshop_rnd/model.py"
           ],
           "path": "mcptoolshop_rnd/store.py"
+        },
+        {
+          "exports": [
+            "check",
+            "fetch_items",
+            "from_commits",
+            "from_feed",
+            "from_hf_list",
+            "from_page",
+            "from_releases",
+            "http_text",
+            "load_state",
+            "load_watchlist",
+            "save_state"
+          ],
+          "failurePaths": [
+            {
+              "in": "load_watchlist",
+              "kind": "except",
+              "line": 53
+            },
+            {
+              "in": "load_watchlist",
+              "kind": "raise",
+              "line": 54
+            },
+            {
+              "in": "load_watchlist",
+              "kind": "raise",
+              "line": 59
+            },
+            {
+              "in": "load_watchlist",
+              "kind": "raise",
+              "line": 62
+            },
+            {
+              "in": "load_watchlist",
+              "kind": "raise",
+              "line": 64
+            },
+            {
+              "in": "load_watchlist",
+              "kind": "raise",
+              "line": 68
+            },
+            {
+              "in": "load_watchlist",
+              "kind": "except",
+              "line": 69
+            },
+            {
+              "in": "load_watchlist",
+              "kind": "raise",
+              "line": 70
+            },
+            {
+              "in": "load_state",
+              "kind": "except",
+              "line": 77
+            },
+            {
+              "in": "load_state",
+              "kind": "except",
+              "line": 79
+            },
+            {
+              "in": "load_state",
+              "kind": "raise",
+              "line": 80
+            },
+            {
+              "in": "check",
+              "kind": "except",
+              "line": 164
+            }
+          ],
+          "hash": "4c6b5608d86c552afbd94e2b41e90f36acda1dd74be00e5912cf4702c97b51f6",
+          "importsFiles": [
+            "mcptoolshop_rnd/probe.py"
+          ],
+          "path": "mcptoolshop_rnd/watch.py"
         }
       ],
       "globs": [
@@ -3852,7 +3981,7 @@
       "origin": "authored",
       "outsidePlaces": [
         {
-          "reads": 17,
+          "reads": 19,
           "where": [
             "caller"
           ],
@@ -3873,13 +4002,13 @@
           "writes": 0
         }
       ],
-      "outsideReads": 20,
+      "outsideReads": 22,
       "outsideWrites": 8,
       "role": "code",
       "testRunners": [
         "unittest"
       ],
-      "testedBy": 6,
+      "testedBy": 7,
       "unresolvedNamed": [
         {
           "path": "mcptoolshop_rnd/collect.py",
@@ -3955,7 +4084,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "86a3bc485b5ccebbcb65483dd51a7f2e78920bed8cf9a73c98c21a65c3c52816",
+          "hash": "e8a5bdc5ecf4ba70298ea5fb90d9029467e09b0e5a8ad923a9c84f3a31016511",
           "path": "CHANGELOG.md"
         },
         {
@@ -3983,7 +4112,7 @@
           "path": "README.ja.md"
         },
         {
-          "hash": "d88854ba573ecc1e48b89724bd503b023729e2f30c146b662897a7c4cc773a39",
+          "hash": "e9f8d9c04394851d034dfee95607b6bade27a27fbda43c339876b71b4e5c986d",
           "path": "README.md"
         },
         {
@@ -4316,6 +4445,30 @@
           "path": "tests/fixtures/probe/pypi.json"
         },
         {
+          "hash": "2a3af87cb95f67a52565a3cb1c3063e58c8e4b6a33e0fc49920a870e72e2ba64",
+          "path": "tests/fixtures/watch/cuda-page.html"
+        },
+        {
+          "hash": "d65c15b548a2a6353b1b584f6f19d2a8eaaab56ad82ccb2a3a4b87353f6e54ee",
+          "path": "tests/fixtures/watch/feed-atom.xml"
+        },
+        {
+          "hash": "a4525381f98639f8884d17c313bf53aedf8242a72d0eacb575b05c9f0547a113",
+          "path": "tests/fixtures/watch/feed-rss.xml"
+        },
+        {
+          "hash": "e32088d4838cde8117d48eaccdb9b96ce5adfaccf08faa1424a5191d509721ca",
+          "path": "tests/fixtures/watch/github-commits.json"
+        },
+        {
+          "hash": "12cf13ab9aabd57efa0a9707ac39deb102aa882f954dcc42ac6455c6d6bb05e3",
+          "path": "tests/fixtures/watch/github-releases.json"
+        },
+        {
+          "hash": "e92b07339be59b7bde18c43f020a78d738ff2cbf5a820d5935c3e57ded9eb064",
+          "path": "tests/fixtures/watch/hf-models.json"
+        },
+        {
           "exports": [
             "as_text",
             "perturbed",
@@ -4491,6 +4644,20 @@
           ],
           "path": "tests/test_rnd.py",
           "testFramework": "unittest"
+        },
+        {
+          "exports": [
+            "fixture",
+            "text"
+          ],
+          "hash": "b281f7410af165d6d3308b4c2ffa718117e5a6674e52f5c5604f7e7f3ae502a8",
+          "importsFiles": [
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/cli.py",
+            "mcptoolshop_rnd/watch.py"
+          ],
+          "path": "tests/test_watch.py",
+          "testFramework": "unittest"
         }
       ],
       "globs": [
@@ -4636,7 +4803,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 12
+          "files": 13
         },
         {
           "boundary": "rnd",
@@ -4651,7 +4818,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 12
+          "files": 13
         },
         {
           "boundary": "experiments",
@@ -4741,7 +4908,7 @@
         },
         {
           "coverage": true,
-          "files": 12,
+          "files": 13,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -5007,7 +5174,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 12
+          "files": 13
         },
         {
           "boundary": "rnd",
@@ -5095,7 +5262,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 11
+          "files": 12
         }
       ],
       "readers": [
@@ -5171,8 +5338,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "6a89bb3ad5c39c6786ae61f0815fc3ff9457f3b7",
-    "tracked": 551
+    "commit": "f9b2638d2f64b0bc8ffc392e79d0886308ff3c25",
+    "tracked": 560
   },
   "landings": [
     {
@@ -5284,6 +5451,23 @@
         }
       ],
       "target": "catalogs",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "mcptoolshop_rnd/cli.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "tests/test_watch.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "docs/watchlist.json",
       "writers": []
     },
     {
@@ -7095,7 +7279,7 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 20,
+  "testFiles": 27,
   "testsNotRun": [
     "experiments/cuda-graphs/test_graphed_heads.py",
     "experiments/data-designer/tests/test_lockdown.py"

@@ -80,6 +80,14 @@ The Director gave his go for the pilot only, on his Claude plan, with a ceiling 
 
 If a deny rule does not hold on Windows, the pilot waits for a corrected rule and a new probe, both recorded here. The harness refuses `--pilot` without a passed probe report.
 
+**A limit the permission rules cannot close, and its detector.** `git log` stays allowed in both arms, because arm B's `atlas_changes` reads history and taking history away from arm A alone would tilt the comparison. An allowed `git log` or `git show` can still be turned into something else:
+- `--output=<path>` writes a file anywhere;
+- a redirection or chain (`>`, `>>`, `|`, `;`, `&&`, a single `&`, or a line break that starts a second command) writes a file or runs another command;
+- `<` feeds a file's text to git, and git's error for a bad revision echoes it back;
+- command substitution (`$(...)` or backticks) runs another command, even inside double quotes.
+
+Every Bash command a run makes is in its stream. During the pilot, a run that makes any of these calls stops the pilot, and the report names the call. Redirection, chaining and line breaks are read outside quotes, so `--format='%H|%s'` and a quoted newline in `--format` pass. Substitution is read everywhere. Each form has a test, R&D's bypasses on #7 among them.
+
 **The harness** is `run.py`. Its logic (pins, run order, token and call counting, the isolation check, the plan-limit stop, the flip rate) is tested in `tests/test_atlas_mcp_utility_run.py`. `allow-list.json` is re-pinned above.
 
 ## Design

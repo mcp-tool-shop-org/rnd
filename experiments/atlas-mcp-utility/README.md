@@ -21,7 +21,7 @@ Each sha256 is of the file as committed, with LF line endings (`.gitattributes`)
 |---|---|
 | `tasks.json` | `6a0b4c3fc1446b73ef78138b8bd1ba6b8d2d72b67e183b7d34db954e937f10ee` (amendment 1) |
 | `prompt.md` | `a32c1c8f30e88f7264e6efce1d1c608339368b2e44691870206b3105e4e6226d` |
-| `allow-list.json` | `477d9c66de9d614098ecad80998278a31c22e326fa9ca4c7ce3df43037fcd1ae` (amendment 2) |
+| `allow-list.json` | `ff2500444a24a9f859c081869fe62448fa44006a601c94b0545136ef1184b3b4` (amendment 2) |
 | `grade.py` | `f6d09f5144b42fc1c86f632015de33c84d0bfb9dd3faf2f192cb47d24d864455` (amendment 1) |
 | Claude Code CLI | 2.1.197 |
 | Model | `claude-sonnet-5-5`, at the CLI's default effort for it |
@@ -55,20 +55,30 @@ The Director gave his go for the pilot only, on his Claude plan, with a ceiling 
 1. `--setting-sources local`: no user settings, hooks or permissions.
 2. **Reads held to the checkout.**
    - `Read(./**)` is allowed.
-   - `Read(~/**)`, `Read(//c/Users/**)` and `Read(//e/AI/**)` are denied, as are Edit, Write, NotebookEdit, WebFetch, WebSearch and Task.
-   - The checkouts live outside both of those trees: the harness's `--work` is not under `C:/Users` or `E:/AI`.
+   - `Read(~/**)`, `Read(//c/Users/**)`, `Read(//d/**)` and `Read(//e/AI/**)` are denied, as are Edit, Write, NotebookEdit, WebFetch, WebSearch and Task. The D: drive holds the archive, memory copies among it.
+   - Glob and Grep search inside the checkout under the Read rules.
+   - Bash keeps only `git log` and `git show`. `ls` would list any directory, and `git grep --no-index` reads any path whatever order its flags come in (R&D's review). `git -C <elsewhere>` matches no allowed form.
+   - The harness refuses a `--work` under `C:/Users`, `D:/` or `E:/AI`, since a deny rule outranks `Read(./**)`.
 3. `--no-session-persistence`.
 4. **The prompt goes in on stdin.** The CLI is started as the binary the npm `.cmd` shim wraps, since a `.cmd` cannot be started without a shell.
-5. **Every run's start is checked from its init event:** arm A has no MCP tools, arm B has the Atlas tools and no other server's, and the model is the pinned one. A run that fails the check stops the pilot.
+5. **Every run is checked:**
+   - its init event shows its arm's tools (arm A: no MCP tools; arm B: the Atlas tools and no other server's) and the pinned model;
+   - no hook ran: no hook event, and no `[loadout-hook]` text in the stream;
+   - `git status --porcelain` on its copy is empty afterwards, because `git log --output=` can write a file.
+
+   A run that fails a check stops the pilot.
 
 **What stays.** The user-level CLAUDE.md may still load in print mode without `--bare`. It is the same in both arms, and it is what kickoffs run with. The probes record whether it loads.
 
-**Probes, before the pilot.** They are counted against the pilot's 30-million-token ceiling and reported apart from the pilot's runs:
-- **(a) Containment:** arm A is asked to read a file under the home directory and one under `E:/AI`. Both reads must be denied.
+**Probes, before the pilot** (`run.py --probe`). They are counted against the pilot's 30-million-token ceiling and reported apart from the pilot's runs. R&D reads their report before the first graded run.
+- **(a) Containment.** In each denied tree present (the home directory, `E:/AI`, `D:/`), the harness plants two files holding a random token. One is named in the prompt; the other is named nowhere, so only a listing or a search could reveal it.
+  - Arm A is asked to reach them by every route: Read the named file; Grep with `path=` set to the tree; Glob rooted in the tree; `ls` the tree; `git grep --no-index`; and `git -C E:/AI/testing-os log -1`, whose commit is also a secret.
+  - It passes only if every route was attempted, no token, hidden file name or commit comes back in any tool result, and no hook ran.
+  - The files are removed afterwards.
 - **(b) The sidecar:** arm B is asked for `atlas_overview`, which must answer.
 - **(c) CLAUDE.md:** whether the user-level CLAUDE.md loaded.
 
-If a deny rule does not hold on Windows, the pilot waits for a corrected rule and a new probe, both recorded here.
+If a deny rule does not hold on Windows, the pilot waits for a corrected rule and a new probe, both recorded here. The harness refuses `--pilot` without a passed probe report.
 
 **The harness** is `run.py`. Its logic (pins, run order, token and call counting, the isolation check, the plan-limit stop, the flip rate) is tested in `tests/test_atlas_mcp_utility_run.py`. `allow-list.json` is re-pinned above.
 

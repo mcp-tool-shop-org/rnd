@@ -1,10 +1,12 @@
 """The atlas-mcp-utility harness's own logic (experiments/atlas-mcp-utility/run.py).
 
 What the harness decides without the CLI or the network: whether the pins
-hold, the run order, how a run's tokens and tool calls are counted from its
-stream, whether a run's start matches its arm, when a plan limit stops the
-run, and the flip rate. The CLI's real stream is proven by the probes the
-spec records before the pilot, not here.
+hold, whether the work directory is readable, the run order, how a run's
+tokens, tool calls and tool results are counted from its stream, whether a
+run's start matches its arm, whether a hook ran, whether a probe leaked or
+was carried out at all, when a plan limit stops the run, and the flip rate.
+The CLI's real behaviour is proven by the probes the spec records before the
+pilot, not here.
 """
 import importlib.util
 import json
@@ -25,6 +27,14 @@ def assistant(message_id, usage=None, blocks=()):
     return json.dumps({"type": "assistant", "message": {"id": message_id, "usage": usage or {}, "content": list(blocks)}})
 
 
+def tool_result(use_id, text, is_error=False):
+    return json.dumps({"type": "user", "message": {"content": [{"type": "tool_result", "tool_use_id": use_id, "is_error": is_error, "content": [{"type": "text", "text": text}]}]}})
+
+
+def use(use_id, name, **inputs):
+    return {"type": "tool_use", "id": use_id, "name": name, "input": inputs}
+
+
 class Pins(unittest.TestCase):
     def test_the_committed_files_match_the_readme(self):
         self.assertEqual(run.pin_problems(), [])
@@ -40,6 +50,17 @@ class Pins(unittest.TestCase):
     def test_the_readme_table_is_read_with_its_notes(self):
         text = "| `tasks.json` | `" + "a" * 64 + "` (amendment 1) |\n| Seed | 20261013 |\n"
         self.assertEqual(run.readme_pins(text), {"tasks.json": "a" * 64})
+
+
+class WorkDirectory(unittest.TestCase):
+    def test_a_work_directory_under_a_denied_tree_is_refused(self):
+        with tempfile.TemporaryDirectory() as denied:
+            inner = Path(denied) / "runs"
+            self.assertEqual(len(run.work_problems(inner, roots=(Path(denied),))), 1)
+
+    def test_a_work_directory_outside_every_denied_tree_is_accepted(self):
+        with tempfile.TemporaryDirectory() as denied, tempfile.TemporaryDirectory() as elsewhere:
+            self.assertEqual(run.work_problems(Path(elsewhere), roots=(Path(denied),)), [])
 
 
 class Plan(unittest.TestCase):
@@ -59,11 +80,17 @@ class Counting(unittest.TestCase):
         stream = run.Stream()
         usage = {"input_tokens": 3, "cache_creation_input_tokens": 100, "cache_read_input_tokens": 1000, "output_tokens": 50}
         stream.add(assistant("m1", usage, [{"type": "text", "text": "looking"}]))
-        stream.add(assistant("m1", usage, [{"type": "tool_use", "id": "t1", "name": "Grep"}]))
-        stream.add(assistant("m2", {"input_tokens": 1, "output_tokens": 5}, [{"type": "tool_use", "id": "t2", "name": "mcp__atlas__atlas_explain"}]))
+        stream.add(assistant("m1", usage, [use("t1", "Grep", pattern="x")]))
+        stream.add(assistant("m2", {"input_tokens": 1, "output_tokens": 5}, [use("t2", "mcp__atlas__atlas_explain", path="a")]))
         self.assertEqual(stream.total, 1159)
         self.assertEqual(stream.tokens["cache_read_input_tokens"], 1000)
         self.assertEqual(stream.calls, ["Grep", "mcp__atlas__atlas_explain"])
+
+    def test_tool_results_are_kept_by_the_call_they_answer(self):
+        stream = run.Stream()
+        stream.add(assistant("m1", {}, [use("t1", "Read", file_path="x")]))
+        stream.add(tool_result("t1", "Permission to read x was denied", is_error=True))
+        self.assertEqual(stream.results["t1"], {"is_error": True, "text": "Permission to read x was denied"})
 
     def test_lines_that_are_not_json_are_skipped(self):
         stream = run.Stream()
@@ -95,6 +122,59 @@ class Isolation(unittest.TestCase):
         self.assertEqual(run.isolation_problems(None, "A", self.MODEL), ["no init event"])
         self.assertEqual(run.isolation_problems({"tools": [], "model": "claude-opus-5-5"}, "A", self.MODEL), ["the model is claude-opus-5-5, pinned claude-sonnet-5-5"])
 
+    def test_a_hook_is_seen_by_its_event_or_its_marker(self):
+        stream = run.Stream()
+        stream.add(json.dumps({"type": "system", "subtype": "hook_response"}))
+        stream.add(json.dumps({"type": "user", "message": {"content": "[loadout-hook] Memory entries relevant"}}))
+        self.assertEqual(stream.hook_traces(), ["hook_response", "[loadout-hook] text"])
+        self.assertEqual(run.Stream().hook_traces(), [])
+
+
+class Probe(unittest.TestCase):
+    TARGETS = {"home": {"file": "H/amu-probe-1.txt", "dir": "H"}, "E:/AI": {"file": "E/amu-probe-2.txt", "dir": "E"}}
+
+    def probe_a(self, leak=None, calls=11):
+        stream = run.Stream()
+        names = ["Read", "Grep", "Glob", "Bash", "Bash"] * 2 + ["Bash"]
+        for i, name in enumerate(names[:calls]):
+            stream.add(assistant(f"m{i}", {}, [use(f"t{i}", name, command="ls H" if name == "Bash" else None)]))
+            stream.add(tool_result(f"t{i}", leak if (leak and i == 0) else "denied", is_error=not (leak and i == 0)))
+        stream.add(json.dumps({"type": "result", "result": "1. denied ... RIG: yes"}))
+        return stream
+
+    def probe_b(self):
+        stream = run.Stream()
+        stream.add(assistant("b1", {}, [use("o1", "mcp__atlas__atlas_overview")]))
+        stream.add(tool_result("o1", "parts: src, tests"))
+        return stream
+
+    CLEAN = {"isolation": []}
+
+    def test_the_prompt_asks_for_every_route_in_every_tree(self):
+        prompt = run.probe_prompt(self.TARGETS)
+        self.assertEqual(prompt.count("Read the file"), 2)
+        self.assertEqual(prompt.count("git grep --no-index"), 2)
+        self.assertIn("git -C E:/AI/testing-os log -1", prompt)
+        self.assertIn("RIG: yes or RIG: no", prompt)
+
+    def test_a_probe_that_was_carried_out_and_leaked_nothing_passes(self):
+        verdict = run.probe_verdict(self.probe_a(), self.probe_b(), self.CLEAN, self.CLEAN, self.TARGETS, ["amu-secret-abc", "amu-hidden-def.txt"])
+        self.assertTrue(verdict["passed"], verdict)
+        self.assertTrue(verdict["user_claude_md_loaded"])
+
+    def test_a_secret_in_any_result_fails_the_probe(self):
+        verdict = run.probe_verdict(self.probe_a(leak="amu-secret-abc"), self.probe_b(), self.CLEAN, self.CLEAN, self.TARGETS, ["amu-secret-abc"])
+        self.assertFalse(verdict["passed"])
+        self.assertEqual(verdict["leaks"][0]["tool"], "Read")
+
+    def test_a_probe_the_agent_did_not_carry_out_proves_nothing(self):
+        verdict = run.probe_verdict(self.probe_a(calls=3), self.probe_b(), self.CLEAN, self.CLEAN, self.TARGETS, ["amu-secret-abc"])
+        self.assertFalse(verdict["passed"])
+
+    def test_an_isolation_problem_fails_the_probe(self):
+        verdict = run.probe_verdict(self.probe_a(), self.probe_b(), {"isolation": ["hook ran: x"]}, self.CLEAN, self.TARGETS, ["amu-secret-abc"])
+        self.assertFalse(verdict["passed"])
+
 
 class Stops(unittest.TestCase):
     def test_a_spent_plan_stops_the_run(self):
@@ -120,22 +200,28 @@ class FlipRate(unittest.TestCase):
 
 
 class Allowlist(unittest.TestCase):
+    def setUp(self):
+        self.allow = json.loads((HERE / "allow-list.json").read_text(encoding="utf-8"))
+
     def test_reads_are_held_to_the_checkout_and_nothing_writes(self):
-        allow = json.loads((HERE / "allow-list.json").read_text(encoding="utf-8"))
-        self.assertIn("Read(./**)", allow["allowed_tools"])
-        self.assertNotIn("Read", allow["allowed_tools"])
-        for denied in ("Edit", "Write", "WebFetch", "WebSearch"):
-            self.assertIn(denied, allow["disallowed_tools"])
-        self.assertEqual(allow["setting_sources"], "local")
+        self.assertIn("Read(./**)", self.allow["allowed_tools"])
+        self.assertNotIn("Read", self.allow["allowed_tools"])
+        for denied in ("Read(~/**)", "Read(//c/Users/**)", "Read(//d/**)", "Read(//e/AI/**)", "Edit", "Write", "WebFetch", "WebSearch"):
+            self.assertIn(denied, self.allow["disallowed_tools"])
+        self.assertEqual(self.allow["setting_sources"], "local")
+
+    def test_no_bash_form_can_read_outside_the_checkout(self):
+        # ls lists any directory, and git grep --no-index reads any path.
+        bash = [t for t in self.allow["allowed_tools"] if t.startswith("Bash(")]
+        self.assertEqual(bash, ["Bash(git log:*)", "Bash(git show:*)"])
 
     def test_the_command_carries_the_isolation(self):
-        allow = json.loads((HERE / "allow-list.json").read_text(encoding="utf-8"))
-        cmd = run.command("claude", allow, "B", Path("b.mcp.json"))
+        cmd = run.command("claude", self.allow, "B", Path("b.mcp.json"))
         for flag in ("--strict-mcp-config", "--no-session-persistence", "--verbose"):
             self.assertIn(flag, cmd)
         self.assertEqual(cmd[cmd.index("--setting-sources") + 1], "local")
         self.assertIn("mcp__atlas", cmd)
-        self.assertNotIn("mcp__atlas", run.command("claude", allow, "A", Path("a.mcp.json")))
+        self.assertNotIn("mcp__atlas", run.command("claude", self.allow, "A", Path("a.mcp.json")))
 
 
 if __name__ == "__main__":

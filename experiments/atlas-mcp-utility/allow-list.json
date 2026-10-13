@@ -12,14 +12,12 @@
     "Grep",
     "Glob",
     "Bash(git log:*)",
-    "Bash(git show:*)",
-    "Bash(git grep:*)",
-    "Bash(git ls-files:*)",
-    "Bash(ls:*)"
+    "Bash(git show:*)"
   ],
   "disallowed_tools": [
     "Read(~/**)",
     "Read(//c/Users/**)",
+    "Read(//d/**)",
     "Read(//e/AI/**)",
     "Edit",
     "Write",

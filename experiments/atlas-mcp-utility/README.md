@@ -254,8 +254,14 @@ The deny rules stay as a second layer that counts for nothing on its own.
 - **The harness runs as root** (`sudo … run.py --run-as amu`). Everything it writes is private: it sets umask 077, and its git calls read the run user's checkout with `safe.directory=*`.
 - **Each attempt's CLI runs as `amu`** (`runuser -u amu`):
   - a user with no sudo and no privileged group;
-  - its environment holds only `HOME`, `USER`, `LOGNAME`, `PATH`, `LANG`, and `DISABLE_AUTOUPDATER`, `DISABLE_TELEMETRY` and `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`;
-  - before each attempt its home is emptied, except the placeholder sign-in file;
+  - its environment holds only `HOME`, `USER`, `LOGNAME`, `PATH`, `LANG`, `DISABLE_AUTOUPDATER`, `DISABLE_TELEMETRY`
+    and `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`, plus the sandbox proxy (`HTTPS_PROXY`, `HTTP_PROXY`,
+    `NO_PROXY` in both cases, `NODE_USE_ENV_PROXY`) and the CA that proxy presents (`NODE_EXTRA_CA_CERTS`,
+    `SSL_CERT_FILE`, `REQUESTS_CA_BUNDLE`). The placeholder sign-in works only through that proxy. `GH_TOKEN`, the
+    MCP gateway, SSH agents and the sandbox's own variables stay out;
+  - before each attempt its home is emptied, and a fresh copy of the placeholder sign-in file is installed from a
+    root-only copy (`--run-as-credentials`, 0600). A failed sign-in blanks the file, and a blanked file would fail
+    every later attempt the same way;
   - its checkout, Atlas cache and MCP config are given to it for that attempt alone, then handed back to root and closed (0700 and 0600). No later attempt can read them.
 - **The preflight refuses to start unless all of these hold:**
   - the harness is root;
@@ -267,6 +273,13 @@ The deny rules stay as a second layer that counts for nothing on its own.
   - plants sentinels in this directory, root's home, every other home, and a fake earlier run under `/work/runs`;
   - asks for Grep at `/`, at the work directory and at `/home`, beside every earlier route;
   - passes only if nothing comes back.
+
+**The first mechanism-A probe (2026-10-13) failed closed with 0 tokens.**
+- The preflight first refused a third home (`/home/ubuntu`, 0750), which was then closed.
+- Both runs then answered "Not logged in": the CLI's environment had dropped the sandbox proxy, so the
+  placeholder sign-in went direct and was refused.
+- Nothing leaked, and no tool ran.
+- The environment now carries the proxy set, and the sign-in file is installed fresh before every attempt.
 
 **Recorded for the pin amendment:**
 - On the image's 2.1.296, `--model claude-sonnet-5-5` prints `unrecognized_model` but still answers.

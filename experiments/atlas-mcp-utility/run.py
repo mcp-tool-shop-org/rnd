@@ -285,19 +285,40 @@ def run_user_problems(name, groups, sudo_listing):
     return problems
 
 
-def reset_home(home, keep=(".claude/.credentials.json",)):
-    """Empty the run user's home before an attempt, keeping only the files in
-    `keep`: the CLI's placeholder sign-in file. No state from one attempt
-    reaches the next."""
+# The CLI's sign-in file for the run user. It holds placeholders: the sandbox's
+# proxy swaps in the real token. A failed sign-in blanks it, so a pristine
+# root-only copy is installed before every attempt (amendment 8).
+CREDENTIALS = ".claude/.credentials.json"
+# The only parts of the harness's environment the CLI receives beyond its own:
+# the sandbox proxy, through which the placeholder sign-in works, and the CA
+# that proxy presents. GH_TOKEN, the MCP gateway, SSH agents and the sandbox's
+# own variables stay out.
+PROXY_ENV = ("HTTPS_PROXY", "HTTP_PROXY", "NO_PROXY", "https_proxy", "http_proxy", "no_proxy",
+             "NODE_USE_ENV_PROXY", "NODE_EXTRA_CA_CERTS", "SSL_CERT_FILE", "REQUESTS_CA_BUNDLE")
+
+
+def reset_home(home):
+    """Empty the run user's home before an attempt. No state from one attempt
+    reaches the next; the sign-in file is installed fresh afterwards."""
     home = Path(home)
-    kept = {home / k for k in keep}
     for path in sorted(home.rglob("*"), key=lambda p: len(p.parts), reverse=True):
-        if path in kept or any(path in k.parents for k in kept):
-            continue
         if path.is_symlink() or path.is_file():
             path.unlink()
         elif path.is_dir():
             path.rmdir()
+
+
+def install_credentials(home, source, uid=None, gid=None):
+    """Put a fresh copy of the placeholder sign-in file in the run user's home,
+    readable by that user alone."""
+    target = Path(home) / CREDENTIALS
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(source, target)
+    if uid is not None:
+        for path in (target.parent, target):
+            os.chown(path, uid, gid)
+    os.chmod(target.parent, 0o700)
+    os.chmod(target, 0o600)
 
 
 def tool_use_problems(stream, allow, arm):
@@ -740,8 +761,9 @@ def run_env(run_as):
     """The CLI's whole environment: nothing of the harness's own beyond PATH."""
     if run_as is None:
         return {**os.environ, **CLI_ENV}
+    proxy = {key: os.environ[key] for key in PROXY_ENV if key in os.environ}
     return {"HOME": run_as["home"], "USER": run_as["name"], "LOGNAME": run_as["name"],
-            "PATH": os.environ.get("PATH", "/usr/bin:/bin"), "LANG": "C.UTF-8", **CLI_ENV}
+            "PATH": os.environ.get("PATH", "/usr/bin:/bin"), "LANG": "C.UTF-8", **proxy, **CLI_ENV}
 
 
 def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, run_as=None):
@@ -768,6 +790,7 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, ru
         # owns for this attempt only, and starts from an empty home (amendment 8).
         os.chmod(work / "runs", 0o711)
         reset_home(run_as["home"])
+        install_credentials(run_as["home"], run_as["credentials"], run_as["uid"], run_as["gid"])
         for path in (run_dir, cache, mcp_config):
             chown_tree(path, run_as["uid"], run_as["gid"])
     # If the override did not take, a refresh lands in the shared cache; the
@@ -920,7 +943,15 @@ def run_as_checks(args):
     for home in sorted(Path("/home").iterdir()) if Path("/home").exists() else []:
         if home.is_dir() and home.name != args.run_as and home.stat().st_mode & 0o077:
             problems.append(f"the home {home} has mode {oct(home.stat().st_mode & 0o777)}; others may have nothing")
-    run_as = {"name": user.pw_name, "uid": user.pw_uid, "gid": user.pw_gid, "home": user.pw_dir}
+    # The pristine placeholder sign-in file, installed before every attempt.
+    credentials = Path(args.run_as_credentials)
+    if not credentials.is_file():
+        problems.append(f"the run user's sign-in file {credentials} does not exist")
+    else:
+        st = credentials.stat()
+        problems += private_problems("the run user's sign-in file", st.st_mode, st.st_uid)
+    run_as = {"name": user.pw_name, "uid": user.pw_uid, "gid": user.pw_gid, "home": user.pw_dir,
+              "credentials": str(credentials)}
     return run_as, problems
 
 
@@ -1089,6 +1120,8 @@ def main(argv):
     parser.add_argument("--ceiling", required=True, type=int)
     parser.add_argument("--run-as", required=True,
                         help="the unprivileged user each attempt's CLI runs as; the harness itself runs as root (amendment 8)")
+    parser.add_argument("--run-as-credentials", default="/root/amu-credentials.placeholder.json",
+                        help="a root-only copy of the run user's placeholder sign-in file, installed before every attempt")
     parser.add_argument("--label", choices=LABELS, default="pilot",
                         help="pilot (the pre-registered run) or shakedown (amendment 8: outside the decision)")
     args = parser.parse_args(argv)

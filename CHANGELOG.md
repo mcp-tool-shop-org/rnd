@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.15] - 2026-10-13
+
+- atlas-mcp-utility amendment 8: the CLI gets the sandbox proxy; the placeholder sign-in file is installed fresh before every attempt
+- Updated experiment `atlas-mcp-utility`
+
 ## [1.1.8.0.14] - 2026-10-13
 
 - atlas-mcp-utility amendment 8: the shakedown (Sonnet and local legs) and containment by permission (harness as root, the CLI as an unprivileged user)

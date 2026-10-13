@@ -47,12 +47,25 @@ One CLI, `sbx`, drives both. Supported agents include Claude Code, Codex, Gemini
 - **Expiry:** six months after it's claimed. Unused credit is forfeited.
 - **A card is required at signup,** and charged only for use beyond the credit. The docs name **no spending limit, budget alert or hard cap**: their only cost control is to stop or delete sandboxes. So every harness sets a time-to-live and deletes its sandboxes, and the console's usage page is checked after each run.
 
+## What the console showed at signup (the Director's screen, 2026-10-13)
+
+The Director signed up on 2026-10-13, inside the offer window. The account's Docker Agentic Platform Compute is active.
+- **The launcher's kits:** claude, codex, copilot, antigravity, opencode, hermes-agent, shell, and public kits.
+- **The claude kit runs on an Anthropic API key.** Its model calls are billed per token at API rates, outside a Claude plan, unless a plan login turns out to be offered. Set a spend limit on that key in the Anthropic console before any run.
+- **The defaults:**
+  - **network:** "Open access". Restrict egress for experiment runs.
+  - **tools:** none added.
+  - **compute:** medium, at **$0.28/hr** while running, billed per second. That's about 890 medium hours on the $250.
+  - **a stop after 1 hour:** the time-to-live the docs didn't price.
+- **Repository access** is through a GitHub token. Use a fine-grained, read-only token scoped to the experiment's repositories.
+- **The credit should run until about 2027-04-13,** six months from the claim. That needs confirming on the console's Usage & billing page.
+
 ## Status and conditions (R&D, 2026-10-13)
 
 - **Planned.** The Director raised it on 2026-10-13, to pair with RunPod.
-- **Account creation is his** (a card on file). R&D can't sign up.
+- **The account is his:** he signed up on 2026-10-13, with a card on file. R&D doesn't run sandboxes or enter keys without his go.
 - **The first use waits for the Atlas build-up's release,** like every other test. It would be one pilot attempt of the atlas-mcp-utility probe in a cloud sandbox, to measure setup time, cost per attempt, and whether the pinned CLI and Atlas behave exactly as on the rig.
 - **Unknown until tried:**
-  - how Claude Code authenticates inside a cloud sandbox (an API key, or a Claude plan login);
+  - whether the claude kit can use a Claude plan login, not only an API key;
   - how many sandboxes can run at once;
   - the vCPU and memory behind each size.

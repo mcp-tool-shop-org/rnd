@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.12] - 2026-10-13
+
+- docker-sandboxes: the Director's ruling, no paid model API; models local or RunPod only
+- Updated `docker-sandboxes`: docker-sandboxes — isolated machines for agent experiments (Docker Sandboxes, sbx)
+
 ## [1.1.8.0.11] - 2026-10-13
 
 - docker-sandboxes: which model a sandboxed agent uses (rig and plan for Claude; RunPod or local for open models)

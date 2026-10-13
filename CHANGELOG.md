@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.57] - 2026-10-13
+
+- E5 first full run ruling
+- Added `2026-10-13-e5-fill-card`: E5 — how much context each local model holds on the 5090
+- Updated `switchyard`: interlock (formerly switchyard) — the local AI device router (in build)
+
 ## [1.1.4.6.56] - 2026-10-13
 
 - E5 smoke 2 passed

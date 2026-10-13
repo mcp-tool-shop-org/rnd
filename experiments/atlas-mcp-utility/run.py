@@ -267,10 +267,23 @@ CLI_ENV = {"DISABLE_AUTOUPDATER": "1", "DISABLE_TELEMETRY": "1", "CLAUDE_CODE_DI
 # (2.1.197, captured 2026-10-13 against a closed port); 2.1.280's added
 # "[1m]", which is accepted too. The local route takes no sign-in file, so
 # a run that ignored the base URL could not reach the plan either.
-ROUTES = ("plan", "local")
-LOCAL_MODEL = "nemotron-3.5-lightning:latest"
+#
+# Amendment 11. The first local shakedown ran at Ollama's default context,
+# 32,768 tokens, of which the CLI's system prompt and tools take 25,000 to
+# 28,000. The local model is now a derived one whose Modelfile sets num_ctx
+# (FROM the base, PARAMETER num_ctx LOCAL_NUM_CTX); the harness refuses to
+# start unless Ollama shows that setting, and records each run's loaded
+# context. The plan-side partner for the local model is Haiku, on the
+# "haiku" route (the Director's ruling); "plan" stays the pinned Sonnet.
+ROUTES = ("plan", "haiku", "local")
+ON_THE_PLAN = ("plan", "haiku")
+HAIKU_MODEL = "claude-haiku-5-5"
+LOCAL_BASE_MODEL = "nemotron-3.5-lightning:latest"
+LOCAL_NUM_CTX = 131072
+LOCAL_MODEL = "nemotron-3.5-lightning-131k:latest"
+OLLAMA_URL = "http://host.docker.internal:11434"
 LOCAL_ENV = {
-    "ANTHROPIC_BASE_URL": "http://host.docker.internal:11434",
+    "ANTHROPIC_BASE_URL": OLLAMA_URL,
     "ANTHROPIC_AUTH_TOKEN": "ollama",
     "ANTHROPIC_DEFAULT_OPUS_MODEL": LOCAL_MODEL,
     "ANTHROPIC_DEFAULT_SONNET_MODEL": LOCAL_MODEL,
@@ -281,10 +294,55 @@ LOCAL_ENV = {
 
 def for_route(allow, route):
     """The allow-list as a route runs it. The local route swaps in the local
-    model and drops the effort, which means nothing to it (amendment 10)."""
+    model and drops the effort, which means nothing to it (amendment 10).
+    Haiku runs at its own default effort, like its local partner: the
+    pinned CLI passing --effort to Haiku is unproven, and a refusal would
+    cost a run on the plan (amendment 11)."""
     if route == "plan":
         return {**allow, "route": "plan"}
+    if route == "haiku":
+        return {**allow, "route": "haiku", "model": HAIKU_MODEL, "effort": None}
     return {**allow, "route": "local", "model": LOCAL_MODEL, "effort": None}
+
+
+def num_ctx_of(show):
+    """The num_ctx an Ollama /api/show answer sets, or None."""
+    for line in str((show or {}).get("parameters") or "").splitlines():
+        parts = line.split()
+        if len(parts) == 2 and parts[0] == "num_ctx" and parts[1].isdigit():
+            return int(parts[1])
+    return None
+
+
+def loaded_context(ps, model=LOCAL_MODEL):
+    """The context the model was loaded with, from an Ollama /api/ps answer, or None."""
+    for entry in (ps or {}).get("models") or []:
+        if model in (entry.get("name"), entry.get("model")):
+            return entry.get("context_length")
+    return None
+
+
+def ollama(path, body=None, timeout=10):
+    """One call to the host's Ollama through the sandbox proxy; None if it fails."""
+    import urllib.request
+    data = json.dumps(body).encode("utf-8") if body is not None else None
+    request = urllib.request.Request(OLLAMA_URL + path, data=data, headers={"Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            return json.loads(response.read().decode("utf-8"))
+    except Exception:
+        return None
+
+
+def local_model_problems(show):
+    """Why the local model would not run at the pinned context (amendment 11)."""
+    if show is None:
+        return [f"Ollama at {OLLAMA_URL} does not show {LOCAL_MODEL}: create it FROM {LOCAL_BASE_MODEL} "
+                f"with PARAMETER num_ctx {LOCAL_NUM_CTX}"]
+    found = num_ctx_of(show)
+    if found != LOCAL_NUM_CTX:
+        return [f"{LOCAL_MODEL} sets num_ctx {found}, pinned {LOCAL_NUM_CTX}"]
+    return []
 
 
 def model_names(allow):
@@ -386,7 +444,11 @@ def tool_use_problems(stream, allow, arm):
     calls themselves are checked too (amendment 8).
     """
     allowed = set(expected_tools(allow, arm))
-    used = sorted({use["name"] for use in stream.uses.values()} - allowed)
+    # Amendment 11: a call the CLI refused never ran, so it stops nothing;
+    # refused_calls reports it. The local model asked for Edit, and the CLI
+    # answered that no such tool was available.
+    refused = refused_ids(stream)
+    used = sorted({use["name"] for use_id, use in stream.uses.items() if use_id not in refused} - allowed)
     return [f"called a tool its arm does not have: {name}" for name in used]
 
 
@@ -455,7 +517,7 @@ def isolation_problems(init, arm, allow):
         # the fact that it was not the plan is kept (CodeQL, PR #16). The
         # local route's token is Ollama's placeholder, never an API key.
         problems.append("the run does not sign in on the plan: the Director's ruling allows no API key"
-                        if allow.get("route", "plan") == "plan" else
+                        if allow.get("route", "plan") in ON_THE_PLAN else
                         "the local run holds an API key: the Director's ruling allows none")
     if init.get("claude_code_version") != allow["cli_version"]:
         problems.append(f"the CLI is {init.get('claude_code_version')}, pinned {allow['cli_version']}")
@@ -501,10 +563,18 @@ def bash_violations(command_text):
     return found
 
 
+# The CLI's answer to a call of a tool the session does not have (2.1.197,
+# the first local shakedown, 2026-10-13). It is not a permission denial.
+NO_SUCH_TOOL = "<tool_use_error>Error: No such tool available:"
+
+
 def refused_ids(stream):
-    """The tool calls the CLI refused, by id. Each result event lists its
-    turn's permission denials; a refused call never ran."""
-    return {d.get("tool_use_id") for event in stream.result_events for d in event.get("permission_denials") or []}
+    """The tool calls the CLI refused, by id: each result event's permission
+    denials (amendment 10), and each call it answered that no such tool was
+    available (amendment 11). A refused call never ran."""
+    denied = {d.get("tool_use_id") for event in stream.result_events for d in event.get("permission_denials") or []}
+    return denied | {use_id for use_id, result in stream.results.items()
+                     if result["is_error"] and result["text"].lstrip().startswith(NO_SUCH_TOOL)}
 
 
 def shell_reads(stream):
@@ -958,7 +1028,7 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, ru
         reset_home(run_as["home"])
         clear_user_files(run_as["uid"])
         # The local route never signs in: no plan is in reach (amendment 10).
-        if allow.get("route", "plan") == "plan":
+        if allow.get("route", "plan") in ON_THE_PLAN:
             install_credentials(run_as["home"], run_as["credentials"], run_as["uid"], run_as["gid"])
         for path in (run_dir, cache, mcp_config):
             chown_tree(path, run_as["uid"], run_as["gid"])
@@ -1028,9 +1098,11 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, ru
         "route": route,
         "effort": allow["effort"],
         "permission_mode": (stream.init() or {}).get("permissionMode"),
-        "on_the_plan": on_the_plan(stream.init() or {}, allow) if route == "plan" else None,
+        "on_the_plan": on_the_plan(stream.init() or {}, allow) if route in ON_THE_PLAN else None,
         "started_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(started)),
         "ended_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        # The context Ollama loaded the local model with, read as the run ends (amendment 11).
+        "context_length": loaded_context(ollama("/api/ps")) if route == "local" else None,
         # How often arm B's first turn began before Atlas's tools had
         # registered: the shakedown measures it (amendment 8).
         "atlas_status_at_init": {s.get("name"): s.get("status") for s in (stream.init() or {}).get("mcp_servers") or []}.get("atlas"),
@@ -1040,7 +1112,7 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, ru
         "tokens": {**stream.tokens, "total": sum(stream.tokens.values())},
         "result_usage": (result or {}).get("usage"),
         "num_turns": (result or {}).get("num_turns"),
-        "total_cost_usd": (result or {}).get("total_cost_usd") if route == "plan" else None,
+        "total_cost_usd": (result or {}).get("total_cost_usd") if route in ON_THE_PLAN else None,
         "tool_calls": len(stream.calls),
         "atlas_calls": sum(1 for name in stream.calls if name.startswith(ATLAS_PREFIX)),
         "shell_reads": shell_reads(stream),
@@ -1089,6 +1161,9 @@ def preflight(args):
     if not package.exists() or json.loads(package.read_text(encoding="utf-8"))["version"] != allow["atlas"]["version"]:
         problems.append(f"{args.tools} does not hold Atlas {allow['atlas']['version']}")
     args.run_as_user, user_problems = run_as_checks(args)
+    if allow["route"] == "local":
+        # /api/show reads the Modelfile; it loads nothing onto the GPU.
+        problems += local_model_problems(ollama("/api/show", {"model": LOCAL_MODEL}))
     return cli, allow, problems + user_problems
 
 
@@ -1277,7 +1352,7 @@ def pilot(args, cli, allow, tasks):
         "ceiling": budget["ceiling"],
         "plan": plan,
         "runs": [{k: r.get(k) for k in ("run", "task", "arm", "rep", "outcome", "correct", "tokens", "tool_calls", "atlas_calls",
-                                         "num_turns", "wall_ms", "started_at", "ended_at", "total_cost_usd", "cli_version",
+                                         "num_turns", "wall_ms", "started_at", "ended_at", "context_length", "total_cost_usd", "cli_version",
                                          "shell_reads", "refused_calls", *START_FIELDS)} for r in records],
         "dropped_pairs": dropped,
         "harness_failures": failures,
@@ -1311,7 +1386,8 @@ def main(argv):
     parser.add_argument("--label", choices=LABELS, default="pilot",
                         help="pilot (the pre-registered run) or shakedown (amendment 8: outside the decision)")
     parser.add_argument("--route", choices=ROUTES, default="plan",
-                        help="plan (Claude Code on the plan) or local (Ollama on the host, shakedown only: amendment 10)")
+                        help="plan (the pinned Sonnet on the plan), haiku (Haiku on the plan, shakedown only: amendment 11) "
+                             "or local (Ollama on the host, shakedown only: amendment 10)")
     args = parser.parse_args(argv)
     if args.replay:
         allow = for_route(json.loads((HERE / "allow-list.json").read_text(encoding="utf-8")), args.route)
@@ -1322,8 +1398,8 @@ def main(argv):
     missing = [f"--{name.replace('_', '-')}" for name in ("work", "tools", "ceiling", "run_as") if getattr(args, name) is None]
     if missing:
         parser.error(f"--probe and --pilot need {', '.join(missing)}")
-    if args.route == "local" and not (args.pilot and args.label == "shakedown"):
-        parser.error("the local route runs only the shakedown: --pilot --label shakedown (amendment 10)")
+    if args.route != "plan" and not (args.pilot and args.label == "shakedown"):
+        parser.error(f"the {args.route} route runs only the shakedown: --pilot --label shakedown (amendments 10 and 11)")
     # Everything the harness writes is its own: records, streams, templates.
     os.umask(0o077)
     cli, allow, problems = preflight(args)

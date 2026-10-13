@@ -371,6 +371,32 @@ A chain, a pipe, a line break and `<` no longer stop a run. The CLI refuses any 
 
 **Order:** the local shakedown, then a clean local pass, then the Director's go, then Sonnet. Nothing pinned changes.
 
+### Amendment 11, 2026-10-13: Haiku partners the local model, the local model gets its context, and a refused out-of-set call stops nothing
+
+**The first local shakedown (19:40–19:45 EDT, nemotron-3.5-lightning, about 280 s of GPU load, peak 27,114 MiB).**
+- **RC03: 1 of 4 correct**, where Sonnet got 4 of 4. The flip rate was 1 of 2.
+  - Input tokens ran from 232,000 to 1.18 million a run. Ollama does no prompt caching, so every turn re-sends the whole context, and its Anthropic endpoint reports no output tokens.
+- **Ollama loaded the model at 32,768 tokens of context,** of which the CLI's system prompt and tools take about 25,000 to 28,000. That alone may explain much of the accuracy.
+- **CF09-A1 halted on a call to `Edit`,** a tool its arm doesn't have. The CLI had answered "No such tool available", so nothing ran.
+  - It also tried to write with `sed -i`, `ed` and redirections, and to run code (`node -e`, `npx`, `npm run build`). The CLI refused every one, and `git status` stayed empty.
+
+**Rulings:**
+1. **A refused out-of-set call stops nothing (R&D).**
+   - The CLI's "No such tool available" answer is a refusal, the same as a permission denial: the call never ran. It goes to `refused_calls`.
+   - An out-of-set call that ran still stops the run.
+   - Replayed under this rule, all five local runs pass the checks. CF09-A1 reaches the turn cap and is graded incorrect, with 17 refused calls.
+2. **Haiku is the plan-side partner for the local model (the Director's ruling).** The new `haiku` route runs `claude-haiku-5-5` on the plan, for the shakedown only. Results go to `results/shakedown-haiku/`.
+   - Haiku runs at its own default effort, like the local model. That the pinned CLI accepts `--effort` for Haiku is unproven, and a refusal would cost a run on the plan.
+   - The Sonnet RC03 runs stay as the Sonnet price signal, at about 8 to 12 cents a run at API rates.
+3. **The local model runs at a pinned context.**
+   - The model is now `nemotron-3.5-lightning-131k`, built `FROM nemotron-3.5-lightning:latest` with `PARAMETER num_ctx 131072`.
+   - The harness refuses to start the local route unless Ollama's `/api/show` gives that `num_ctx`. That call loads nothing onto the GPU.
+   - Each local run records `context_length` from `/api/ps` as it ends.
+   - Before the derived model runs, a fill check must show that 131,072 fits the card. If it doesn't, the pin moves down by amendment.
+4. **The local leg is priced by wall time and GPU time only.** Its token counts are input only, and uncached.
+
+Nothing pinned changes.
+
 ## Design
 
 **Pairs.** Each task runs twice:

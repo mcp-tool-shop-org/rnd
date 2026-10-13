@@ -216,6 +216,69 @@ class BashDetector(unittest.TestCase):
         self.assertIn("git log > /c/out.txt", problems[0])
 
 
+class Debrief(unittest.TestCase):
+    """Amendment 3: a second turn after the graded first result."""
+
+    def two_turns(self):
+        stream = run.Stream()
+        stream.add(assistant("m1", {"input_tokens": 10, "output_tokens": 90}, [use("t1", "Grep", pattern="x")]))
+        stream.add(json.dumps({"type": "result", "subtype": "success", "result": 'Done. {"files": ["src/a.ts"]}'}))
+        stream.add(assistant("m2", {"input_tokens": 5, "output_tokens": 45}, [use("t2", "Read", file_path="src/b.ts")]))
+        stream.add(json.dumps({"type": "result", "subtype": "success", "result": '1. Time: none. On reflection the answer is {"files": ["src/b.ts"]}'}))
+        return stream
+
+    def test_the_first_result_is_graded_whatever_the_debrief_says(self):
+        stream = self.two_turns()
+        task = {"id": "X", "grade": {"checks": [{"kind": "path_set", "field": "files", "expect": ["src/a.ts"]}], "example": {}}}
+        grader = importlib.util.module_from_spec(importlib.util.spec_from_file_location("g", HERE / "grade.py"))
+        grader.__spec__.loader.exec_module(grader)
+        self.assertTrue(grader.grade(task, stream.result()["result"])["correct"])
+        self.assertIn("src/b.ts", stream.debrief_result()["result"])
+
+    def test_debrief_tokens_and_calls_are_kept_apart(self):
+        stream = self.two_turns()
+        self.assertEqual(sum(stream.tokens.values()), 100)
+        self.assertEqual(sum(stream.debrief_tokens.values()), 50)
+        self.assertEqual(stream.total, 150)
+        self.assertEqual(stream.calls, ["Grep"])
+        self.assertEqual(stream.debrief_calls, ["Read"])
+
+    def test_a_run_with_one_turn_has_no_debrief_tokens(self):
+        stream = run.Stream()
+        stream.add(assistant("m1", {"output_tokens": 7}))
+        stream.add(json.dumps({"type": "result", "result": "x"}))
+        self.assertEqual(sum(stream.debrief_tokens.values()), 0)
+        self.assertIsNone(stream.debrief_result())
+
+    def test_the_debrief_prompt_is_pinned(self):
+        self.assertIn("debrief.md", run.PINNED_FILES)
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = Path(tmp)
+            for name in run.PINNED_FILES + ("README.md",):
+                shutil.copy(HERE / name, copy / name)
+            (copy / "debrief.md").write_text("How did it go?\n", encoding="utf-8")
+            self.assertEqual(run.pin_problems(copy), ["debrief.md: does not match its pin"])
+
+    def test_the_debrief_asks_the_six_questions_with_no_tools(self):
+        text = (HERE / "debrief.md").read_text(encoding="utf-8")
+        self.assertIn("without using any tools", text)
+        for number in range(1, 7):
+            self.assertIn(f"\n{number}. ", text)
+
+    def test_each_numbered_answer_is_its_own_field(self):
+        items = run.debrief_items("1. The lockfile scan.\n2. No.\n**3.** Grep; none wrong.\n4. Fairly sure.\n5. A lock reader.\n6. Nothing else.")
+        self.assertEqual(items["time_and_cost"], "The lockfile scan.")
+        self.assertEqual(items["tools"], "Grep; none wrong.")
+        self.assertEqual(items["other"], "Nothing else.")
+        self.assertEqual(run.debrief_items("Only prose.")["clarity"], None)
+
+    def test_each_turn_is_one_stream_json_user_message(self):
+        line = run.user_message("hello\nthere")
+        self.assertTrue(line.endswith("\n"))
+        self.assertEqual(line.count("\n"), 1)
+        self.assertEqual(json.loads(line)["message"]["content"][0]["text"], "hello\nthere")
+
+
 class Stops(unittest.TestCase):
     def test_a_spent_plan_stops_the_run(self):
         self.assertTrue(run.plan_limit_hit({"type": "result", "is_error": True, "result": "Claude usage limit reached. Your limit will reset at 5pm"}))

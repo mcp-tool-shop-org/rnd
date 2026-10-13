@@ -418,3 +418,4 @@ receipts, not guesses. The brief lives in R&D's memory (`switchyard-router-build
   - **Required:** load and confirm a floor window (one grain, 2048) first for every model, and use that confirm as the single reference for both gates. The CUDA_Host check runs on it. A dated amendment replaces "lowest resident window".
   - **On the real smoke numbers:** deltas of 29/29/26/2/0 against 505, and a baseline check of 80.6, which is ok.
   - No E5 rows have been produced, so no result is affected.
+  - **#101 re-check at 50fc542: pass.** R&D drove `e5.search` with the real smoke readings. The order is floor load, floor confirm, then candidates. The real numbers confirm 8192 (a delta of 29 over the 505 floor), and a synthetic +300 MiB shared step or a prompt-rate collapse at 8192 spills, with 6144 confirming. Next: the smoke re-run, which must confirm all four windows with baseline_check ok, then the full E5.

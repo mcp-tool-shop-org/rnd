@@ -24,6 +24,7 @@ not the way the real platform does. The unit tests passed, and the live run stop
 - the driver 617.42 header, "CUDA UMD Version", which the old pattern missed;
 - fill.py's listener lookups calling a bare `subprocess.run`, the #84 defect again (#99, caught by the live preflight before any run).
 - E5's settle wait (interlock #107, 2026-10-13, caught in review before merge). Its granite test passed the confirm call's own peak (27329 MiB) to the wait as if it were a reading taken before the call. But the publisher's live smoke showed that, within a model, the card before a call holds the previous window's runner, resident and still (8864 MiB before confirm 4096). So the wait passes, and the runner swap happens inside the measured call. The fix unloads and waits for idle before any call that changes `num_ctx`.
+- The same PR's re-review (interlock #107 at ce7b31e, 2026-10-13). The new fake reports idle memory the instant an unload returns, but on the card memory frees after Ollama reports the unload, and that lag is what the PR was written for. So no test could see that a confirm's token count reloads the runner and unloads it again just before the measured request, with no wait between. Changes requested: wait just before the request, and give the fake an unload lag so a test fails first.
 
 ## Key points
 

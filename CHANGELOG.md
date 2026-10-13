@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.3] - 2026-10-13
+
+- test-fakes entry: the second #107 instance (a fake with no unload lag)
+- Updated `2026-10-12-test-fakes-hide-the-platform`: Test fakes that hide the platform, a recurring defect class
+
 ## [1.1.8.0.2] - 2026-10-13
 
 - piano-arrangement entry: two corrections from the receipts; promoted to vocology-knowledge wave 14

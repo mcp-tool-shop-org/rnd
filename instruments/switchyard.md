@@ -410,3 +410,4 @@ receipts, not guesses. The brief lives in R&D's memory (`switchyard-router-build
   - **The baseline is checked:** if lowest-window shared minus idle exceeds the CUDA_Host sum by more than 256 MiB, the model's row is inconclusive.
   - **Recorded on the receipt:** idle shared, baseline shared, the CUDA_Host sum and each window's delta.
   - **Tests** include a fixture from the real smoke numbers.
+- **interlock #100 (the backend path inside the install, a fact guard before loads, the e5-smoke spec), review 2026-10-13 at eebb17d, with live reads: pass.** facts_from_log on the real log gives lib\ollama\cuda_v13\ggml-cuda.dll, and the guard passes it and the smoke receipt row. Next: the spill-baseline amendment (Seat), the smoke re-run, which must confirm 2048–8192, then the full E5.

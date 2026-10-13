@@ -150,7 +150,7 @@
       "confidence": "full",
       "highWater": null,
       "name": "mcptoolshop_rnd",
-      "qualifyingSourceCommits": 293,
+      "qualifyingSourceCommits": 294,
       "rebaseline": null
     },
     {
@@ -216,7 +216,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "tests",
-      "qualifyingSourceCommits": 18,
+      "qualifyingSourceCommits": 19,
       "rebaseline": null
     }
   ],
@@ -259,8 +259,8 @@
         "path": ".gitignore"
       },
       {
-        "commits": 324,
-        "lines": 1786,
+        "commits": 325,
+        "lines": 1791,
         "path": "CHANGELOG.md"
       },
       {
@@ -294,8 +294,8 @@
         "path": "README.ja.md"
       },
       {
-        "commits": 10,
-        "lines": 341,
+        "commits": 11,
+        "lines": 367,
         "path": "README.md"
       },
       {
@@ -325,7 +325,7 @@
       },
       {
         "commits": 15,
-        "lines": 451,
+        "lines": 447,
         "path": "atlas/README.md"
       },
       {
@@ -335,17 +335,17 @@
       },
       {
         "commits": 15,
-        "lines": 1519,
+        "lines": 1530,
         "path": "atlas/page.json"
       },
       {
         "commits": 15,
-        "lines": 4656,
+        "lines": 4666,
         "path": "atlas/statistics.json"
       },
       {
         "commits": 15,
-        "lines": 8474,
+        "lines": 8482,
         "path": "atlas/structure.json"
       },
       {
@@ -412,6 +412,11 @@
         "commits": 1,
         "lines": 22,
         "path": "docs/standards.md"
+      },
+      {
+        "commits": 1,
+        "lines": 17,
+        "path": "docs/watchlist.json"
       },
       {
         "commits": 1,
@@ -2564,8 +2569,8 @@
         "path": "instruments/web-research.md"
       },
       {
-        "commits": 294,
-        "lines": 589,
+        "commits": 295,
+        "lines": 591,
         "path": "mcptoolshop_rnd/__init__.py"
       },
       {
@@ -2574,8 +2579,8 @@
         "path": "mcptoolshop_rnd/__main__.py"
       },
       {
-        "commits": 3,
-        "lines": 177,
+        "commits": 4,
+        "lines": 227,
         "path": "mcptoolshop_rnd/cli.py"
       },
       {
@@ -2597,6 +2602,11 @@
         "commits": 1,
         "lines": 56,
         "path": "mcptoolshop_rnd/store.py"
+      },
+      {
+        "commits": 1,
+        "lines": 185,
+        "path": "mcptoolshop_rnd/watch.py"
       },
       {
         "commits": 1,
@@ -2990,6 +3000,36 @@
       },
       {
         "commits": 1,
+        "lines": 6,
+        "path": "tests/fixtures/watch/cuda-page.html"
+      },
+      {
+        "commits": 1,
+        "lines": 45,
+        "path": "tests/fixtures/watch/feed-atom.xml"
+      },
+      {
+        "commits": 1,
+        "lines": 27,
+        "path": "tests/fixtures/watch/feed-rss.xml"
+      },
+      {
+        "commits": 1,
+        "lines": 22,
+        "path": "tests/fixtures/watch/github-commits.json"
+      },
+      {
+        "commits": 1,
+        "lines": 26,
+        "path": "tests/fixtures/watch/github-releases.json"
+      },
+      {
+        "commits": 1,
+        "lines": 14,
+        "path": "tests/fixtures/watch/hf-models.json"
+      },
+      {
+        "commits": 1,
         "lines": 176,
         "path": "tests/test_atlas_mcp_utility_grade.py"
       },
@@ -3045,6 +3085,11 @@
       },
       {
         "commits": 1,
+        "lines": 268,
+        "path": "tests/test_watch.py"
+      },
+      {
+        "commits": 1,
         "lines": 7,
         "path": "uv.lock"
       },
@@ -3059,28 +3104,21 @@
     "level": "low",
     "reason": "fewer than 25 source files reach 10 revisions in the window"
   },
-  "generatedAt": "2026-10-13T16:45:51.430Z",
+  "generatedAt": "2026-10-13T16:55:01.349Z",
   "generatedFrom": {
-    "commit": "6a89bb3ad5c39c6786ae61f0815fc3ff9457f3b7"
+    "commit": "f9b2638d2f64b0bc8ffc392e79d0886308ff3c25"
   },
   "pairs": [
     {
       "a": "CHANGELOG.md",
       "b": "mcptoolshop_rnd/__init__.py",
-      "either": 323,
-      "shared": 293,
-      "strength": 0.907121
+      "either": 324,
+      "shared": 294,
+      "strength": 0.907407
     },
     {
       "a": "README.md",
       "b": "rnd/cli.py",
-      "either": 9,
-      "shared": 5,
-      "strength": 0.555556
-    },
-    {
-      "a": "README.md",
-      "b": "tests/test_rnd.py",
       "either": 10,
       "shared": 5,
       "strength": 0.5
@@ -3145,8 +3183,8 @@
     "floor": "fallen",
     "floorHeld": false,
     "floorTrigger": "revision-depth",
-    "headDate": "2026-10-13T12:45:39-04:00",
-    "inScopeFiles": 556,
+    "headDate": "2026-10-13T12:54:50-04:00",
+    "inScopeFiles": 565,
     "pinnedStart": null,
     "priorFloor": "fallen",
     "qualifyingCommits": 347,
@@ -3154,7 +3192,7 @@
     "revisions": 5,
     "shared": 10,
     "sharedFloorUsed": 3,
-    "since": "2026-04-16T16:45:39.000Z",
+    "since": "2026-04-16T16:54:50.000Z",
     "sourceExtensions": [
       ".js",
       ".mjs",

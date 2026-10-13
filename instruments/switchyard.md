@@ -411,3 +411,10 @@ receipts, not guesses. The brief lives in R&D's memory (`switchyard-router-build
   - **Recorded on the receipt:** idle shared, baseline shared, the CUDA_Host sum and each window's delta.
   - **Tests** include a fixture from the real smoke numbers.
 - **interlock #100 (the backend path inside the install, a fact guard before loads, the e5-smoke spec), review 2026-10-13 at eebb17d, with live reads: pass.** facts_from_log on the real log gives lib\ollama\cuda_v13\ggml-cuda.dll, and the guard passes it and the smoke receipt row. Next: the spill-baseline amendment (Seat), the smoke re-run, which must confirm 2048–8192, then the full E5.
+- **interlock #101 (the spill-baseline amendment), review 2026-10-13 at b17965f, with live reads: changes needed.**
+  - **Right:** the CUDA_Host parse on the real log (333.84 + 18.01 + 0.58 = 352.43 MiB), the baseline check, and the receipt fields.
+  - **The defect:** on the smoke calls `lowest_resident_shared` returns (8192, 534). The search only loads at the first resident window, and the lower windows are confirm calls. The prompt-rate reference (`_lowest_resident(loaded)`) has the same flaw, in the #79 design R&D passed. For a model resident at its first load, the reference is the window under test, so neither the shared gate nor the prompt-rate gate can fire.
+  - **R&D's own miss:** the 2026-10-13 amendment text assumed "2048 in the search" without checking the search order.
+  - **Required:** load and confirm a floor window (one grain, 2048) first for every model, and use that confirm as the single reference for both gates. The CUDA_Host check runs on it. A dated amendment replaces "lowest resident window".
+  - **On the real smoke numbers:** deltas of 29/29/26/2/0 against 505, and a baseline check of 80.6, which is ok.
+  - No E5 rows have been produced, so no result is affected.

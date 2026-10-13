@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.5.0.5] - 2026-10-13
+
+- instrument: nemo-relay (planned; the Director added it to the toolset)
+- brief: How do we see what an agent actually did? (NeMo Relay)
+- Updated `2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ`: NVIDIA NeMo Relay: tracing agent harnesses, Claude Code included
+- Added `nemo-relay`: nemo-relay — tracing what an agent actually did (NVIDIA NeMo Relay)
+
 ## [1.1.5.0.4] - 2026-10-13
 
 - entry: NVIDIA NeMo Relay (tracing agent harnesses, Claude Code included)

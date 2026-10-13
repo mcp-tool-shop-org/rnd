@@ -3,7 +3,7 @@ id: 2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ
 title: "NVIDIA NeMo Relay: tracing agent harnesses, Claude Code included"
 date: 2026-10-13
 kind: tool
-relevance: watch
+relevance: act
 fields: [agent-tooling]
 tags: [nemo-relay, tracing, atlas-mcp-utility]
 ---
@@ -25,7 +25,7 @@ The Relay CLI wraps Claude Code, Codex and pi directly (`nemo-relay claude`). He
   - **Transparent run:** `nemo-relay claude …` starts a gateway on a dynamic `127.0.0.1` port for that run only. The agent's provider traffic goes through the gateway to the upstream API (Anthropic by default).
   - **Persistent install:** this wires Claude Code to a shared local gateway on `127.0.0.1:47632`. That changes the agent's own configuration for every session.
 - **The tutorial's example task** uses Nemotron through an NVIDIA Build API key. Relay itself doesn't need that key, and the gateway's upstream can be overridden.
-- **The licence wasn't confirmed** from the CLI page. NVIDIA's skills catalogue, mirrored in this library as family `nemo-relay` (10 skills, fit "adjacent"), is Apache-2.0. Whether Relay sends any telemetry to NVIDIA wasn't stated on the pages read.
+- **Licence: Apache-2.0,** for both NVIDIA/NeMo-Relay and NVIDIA/NeMo-Relay-Plugins. The repository's "telemetry" hits are its adaptive plugin's own metrics, and nothing read so far shows it phoning home. That stays unverified until a trial watches its network traffic on the rig. NVIDIA's skills catalogue is mirrored in this library as family `nemo-relay` (10 skills, fit "adjacent").
 - **The catalogue's earlier fit note:** compare it against Role OS and swarm receipts before adopting anything.
 
 ## Studio relevance
@@ -36,6 +36,7 @@ The Relay CLI wraps Claude Code, Codex and pi directly (`nemo-relay claude`). He
   - a run's start is checked against its arm.
 
   Relay would add hooks and a proxy between the agent and the API, which would change the conditions under test and undo the isolation work in amendment 2.
+- **Added to the toolset** (`instruments/nemo-relay.md`, status planned) on the Director's word, 2026-10-13.
 - **After the pilot, worth a small pre-registered trial** on studio harnesses where wasted work has already cost us, for example:
   - E5's prefix-fit search, which made thousands of count calls before #70;
   - the dogfood-swarm waves;
@@ -53,6 +54,7 @@ The Relay CLI wraps Claude Code, Codex and pi directly (`nemo-relay claude`). He
 
 - [verified] The NeMo Relay CLI's documented transparent runs include `nemo-relay claude` (Claude Code), `nemo-relay codex` and `nemo-relay pi`, each with a gateway on a dynamic 127.0.0.1 port; persistent installs share a native gateway on 127.0.0.1:47632 (via: docs.nvidia.com/nemo/relay/nemo-relay-cli/basic-usage, read 2026-10-13)
 - [unverified] Relay emits ATOF events, ATIF trajectories and OpenTelemetry spans; Hermes integrates it natively (aggregator summaries of NVIDIA's tracing tutorial)
+- [verified] NeMo Relay and NeMo Relay Plugins are licensed Apache-2.0 (via: GitHub API, repos NVIDIA/NeMo-Relay and NVIDIA/NeMo-Relay-Plugins, 2026-10-13)
 - [unverified] Relay sends no telemetry to NVIDIA when run locally
 
 ## Sources

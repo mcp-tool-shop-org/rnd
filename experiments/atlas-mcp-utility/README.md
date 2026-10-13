@@ -184,7 +184,11 @@ A key R&D cannot confirm is fixed or dropped, by a dated amendment.
 - Claude Code in print mode, model Sonnet 5.5. Subagents run on Sonnet 5.5 under the standing rules.
 - `--max-turns 40`, and `stream-json` output recorded whole.
 - The same prompt in both arms (`prompt.md`).
-- Tools are an allow-list: Read, Grep, Glob, and Bash limited to read-only `git log`, `git show`, `git grep`, `git ls-files` and `ls`. Arm B adds the `atlas` MCP server, started in the checkout from the pinned package.
+- **Tools.** `--tools "Read,Grep,Glob,Bash"` makes those four the only built-ins (amendment 4). The allow-list then gates them:
+  - Read is held to the checkout, and Grep and Glob search under the same Read rules;
+  - Bash is limited to read-only `git log` and `git show` (amendment 2).
+
+  Arm B adds the `atlas` MCP server, started in the checkout from the pinned package, and no other tool.
 - There is no Edit, Write, web search, web fetch, `gh` or network.
 - `--strict-mcp-config` makes sure arm A has no MCP server at all.
 

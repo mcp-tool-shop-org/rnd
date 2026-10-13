@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.5] - 2026-10-13
+
+- multi-repo Atlas entry: slices AN-AQ as ruled; probe entry: interlock #109
+- Updated `2026-10-13-multi-repository-atlas-research-grounding-for-the-build-up`: Multi-repository Atlas: research grounding for the build-up
+- Updated `2026-10-13-the-probe-was-the-contention-a-process-walk-inside-the-measu`: The probe was the contention: a process walk inside the measured window
+
 ## [1.1.8.0.4] - 2026-10-13
 
 - entry: instrument_perturbs_measurement, the interlock slot probe's process walk

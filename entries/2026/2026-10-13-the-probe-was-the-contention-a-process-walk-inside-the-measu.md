@@ -61,3 +61,4 @@ measures. It belongs beside [[2026-10-12-test-fakes-hide-the-platform]].
 - [primary] https://github.com/mcp-tool-shop-org/interlock/blob/main/src/interlock/harness/watch.py — `_top_other`, `read_slot`, `SlotProbe`, `summarize_slot`
 - [primary] https://github.com/mcp-tool-shop-org/interlock/blob/main/src/interlock/harness/runner.py — where the runner opens the probe around `adapter.run`
 - [user] The Publisher's report, and interlock #108 (test-only: a fake slot reader), 2026-10-13
+- [primary] https://github.com/mcp-tool-shop-org/interlock/issues/109 — the ruling, filed as an issue; required before any shared-runner rerun

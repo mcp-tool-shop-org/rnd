@@ -167,6 +167,26 @@ R&D checked its two load-bearing claims about Atlas's code at testing-os main:
 **Then one pin amendment,** and the pilot and the ladder run on that release. The ladder's arm B becomes this
 server, and one server per checkout runs as arm N (experiment amendment 6).
 
+**Slices, as Atlas scoped them and R&D ruled (2026-10-13):** AN, AO, AP, then AQ alongside AP's end. That's
+about six Atlas sessions, plus the pin wave.
+- **AN, the surface:**
+  - `--repos <file>` is the allow-list when given, and the ladder always uses it;
+  - roots never widen after start;
+  - an ambiguous name is refused with every candidate listed, and a network (UNC) root is refused;
+  - the security review is a different-family check: R&D writes the brief, and Mike runs it by hand.
+- **AO, the edge:**
+  - purls follow the spec (`pkg:npm/%40scope/name`);
+  - an unknown resolved version carries a reason;
+  - the fleet check allows zero wrong facts in the sample.
+- **AP, reach:** a "manual" basis is a declared mapping in `boundaries.yaml`, never inferred.
+- **AQ, the bar, set before mining:**
+  - the inferred tiers annotate tier 1 and never remove a consumer from it;
+  - a tier turns on only with a seed of at least 20 breaking changes, recall at least 0.8 on the Wilson 95% lower
+    bound, and precision at least 0.8;
+  - labels are fixed in advance, and consumers that never adopted the version are excluded.
+- **One release for the whole ladder,** pinned when AQ reports. A tier that passes later gets its own amendment,
+  never a mid-ladder engine change.
+
 **The ladder's rung banks adopt the four measurement points in Key points 4,** by the bank amendments.
 
 **Not adopted yet:** an AGENTS.md arm. Gloaguen predicts no gain and higher cost, and the ladder's question is

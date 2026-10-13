@@ -71,53 +71,24 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 15,
-      "changed": 11,
+      "added": 2,
+      "changed": 1,
       "moved": 0,
-      "parts": 7,
+      "parts": 3,
       "removed": 0
     },
     "items": [
       {
-        "kind": "landing",
-        "sentence": "experiments/atlas-mcp-utility/results/pilot is now written by experiments/atlas-mcp-utility/run.py.",
-        "subjects": [
-          "experiments/atlas-mcp-utility/results/pilot",
-          "experiments/atlas-mcp-utility/run.py"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "experiments/atlas-mcp-utility/results/pilot/debriefs.jsonl is now written by experiments/atlas-mcp-utility/run.py.",
-        "subjects": [
-          "experiments/atlas-mcp-utility/results/pilot/debriefs.jsonl",
-          "experiments/atlas-mcp-utility/run.py"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "experiments/atlas-mcp-utility/results/pilot/probe-report.json is now written by experiments/atlas-mcp-utility/run.py.",
-        "subjects": [
-          "experiments/atlas-mcp-utility/results/pilot/probe-report.json",
-          "experiments/atlas-mcp-utility/run.py"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "And 10 more new writers and readers of places.",
-        "subjects": []
-      },
-      {
         "kind": "counts",
-        "sentence": "15 files added and 11 changed content, across 7 parts.",
+        "sentence": "Nothing structural changed since 2026-10-13; 2 files added and 1 changed content.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "4d034507932153cb5b5dca0d5d5023eae343b7ba",
-      "generatedAt": "2026-10-13T15:15:01.357Z"
+      "commit": "23c63d5f7666c839694faf2dd187a8bfefcc7667",
+      "generatedAt": "2026-10-13T16:41:31.296Z"
     },
-    "unchanged": false
+    "unchanged": true
   },
   "changesTogether": [
     {
@@ -141,7 +112,7 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 2 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "23c63d5f7666c839694faf2dd187a8bfefcc7667",
+  "commit": "6a89bb3ad5c39c6786ae61f0815fc3ff9457f3b7",
   "defaultBranch": "main",
   "derived": "13 parts, mostly Python (76 files), shell (14), CSS (2), TypeScript (2), Astro (1), HTML (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
@@ -418,7 +389,7 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-13T16:41:31.296Z",
+  "generatedAt": "2026-10-13T16:45:51.430Z",
   "limits": [
     "9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.",
     "8 writes and 11 reads use paths built at run time and are not named here.",

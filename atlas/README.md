@@ -1,6 +1,6 @@
 # rnd: how it works
 
-Mapped at 2026-10-13 from commit 23c63d5 by Atlas 1.24.0.
+Mapped at 2026-10-13 from commit 6a89bb3 by Atlas 1.24.0.
 
 ## What this is
 
@@ -8,13 +8,9 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 
 13 parts, mostly Python (76 files), shell (14), CSS (2), TypeScript (2), Astro (1), HTML (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-13 (4d03450)
+## What changed since 2026-10-13 (23c63d5)
 
-- experiments/atlas-mcp-utility/results/pilot is now written by experiments/atlas-mcp-utility/run.py.
-- experiments/atlas-mcp-utility/results/pilot/debriefs.jsonl is now written by experiments/atlas-mcp-utility/run.py.
-- experiments/atlas-mcp-utility/results/pilot/probe-report.json is now written by experiments/atlas-mcp-utility/run.py.
-- And 10 more new writers and readers of places.
-- 15 files added and 11 changed content, across 7 parts.
+Nothing structural changed since 2026-10-13; 2 files added and 1 changed content.
 
 ## What comes in
 

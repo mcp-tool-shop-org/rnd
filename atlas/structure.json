@@ -396,6 +396,10 @@
           "path": "entries/2026/2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ.md"
         },
         {
+          "hash": "76fb16a15d632a13779e41f1cb2f123722fdf5e423a9e6b8384c51ed27b1f096",
+          "path": "entries/2026/2026-10-13-nvidia-pair-a-lan-inference-router-and-how-it-compares-with-.md"
+        },
+        {
           "hash": "db30b519986800741a2a98c91fc19246ee9fffb64e3b69e08bc907b102a06aaa",
           "path": "entries/_template.md"
         }
@@ -3951,7 +3955,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "af090d04deaa82e12319704b39101b60fb3e7feb6663cbec4cf6634af7d7b0dc",
+          "hash": "86a3bc485b5ccebbcb65483dd51a7f2e78920bed8cf9a73c98c21a65c3c52816",
           "path": "CHANGELOG.md"
         },
         {
@@ -4169,6 +4173,10 @@
         {
           "hash": "40537be7fab53d40413ed821978c8c644c4933fd2f3f7d944e201d7e14203648",
           "path": "site/src/content/docs/briefs/math-ladder.md"
+        },
+        {
+          "hash": "770d0bfd5e7993d3c77558c880b1f8879396b0c6008c18b3901e867ab0fb06dc",
+          "path": "site/src/content/docs/briefs/pair-and-interlock.md"
         },
         {
           "hash": "ae9d7d1499277b6dff6107d99835c0bea8081670b45df4943b510884c46b2b20",
@@ -5163,8 +5171,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "23c63d5f7666c839694faf2dd187a8bfefcc7667",
-    "tracked": 549
+    "commit": "6a89bb3ad5c39c6786ae61f0815fc3ff9457f3b7",
+    "tracked": 551
   },
   "landings": [
     {

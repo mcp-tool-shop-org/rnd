@@ -390,3 +390,8 @@ receipts, not guesses. The brief lives in R&D's memory (`switchyard-router-build
   - derive the paths from the 11434 listener;
   - a recorded counter fixture.
   No re-run until the first two are in.
+  - **R&D audit of E5's live reads, read-only on the rig, the same night.**
+    - The adapter exact match fails again (dedicated 2618 vs smi 2611).
+    - New: `driver_cuda` returns None. Driver 617.42 (it was 617.14) prints "CUDA UMD Version: 13.4", not "CUDA Version:". Added to the Seat brief.
+    - The runner pid can't be judged at idle and is record-only.
+    - R&D's own miss: #79 passed without a live read of the counters. From now on, any PR that reads the platform gets a read-only live check before a pass.

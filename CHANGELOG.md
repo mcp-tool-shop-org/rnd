@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.58] - 2026-10-13
+
+- interlock #103 review; Atlas build-up rulings
+- Updated `switchyard`: interlock (formerly switchyard) — the local AI device router (in build)
+
 ## [1.1.4.6.57] - 2026-10-13
 
 - E5 first full run ruling

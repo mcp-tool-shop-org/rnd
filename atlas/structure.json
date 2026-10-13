@@ -98,6 +98,53 @@
       "externals": 0,
       "files": [
         {
+          "hash": "c88d17bd3628d954610d2250bbbf674a9b69f19847b6bdbf80a04980379ab025",
+          "path": "datapacks/hymn-arrangements/datapack.json"
+        },
+        {
+          "hash": "cab4f09c4ee44b30fc8a019798ec94a655de017868b99139777aa05f90a4dff2",
+          "path": "datapacks/hymn-arrangements/hosted.json"
+        },
+        {
+          "hash": "d3f9fee884f3adfa8cac63249bf98bde66e65a6048c7ab67ad1d450b52a7b9b4",
+          "path": "datapacks/hymn-arrangements/spec.json"
+        },
+        {
+          "hash": "be1859e9a9d41d63b0d5a908673e95e21e7091255b0b01876f5a95e0c3eda61f",
+          "path": "datapacks/natural-errors/CARD.md"
+        },
+        {
+          "hash": "84ac75f84534f2cf8c741ffeab96fc41396e6e81a0522e08191f27e5cdcbc5a9",
+          "path": "datapacks/natural-errors/datapack.json"
+        },
+        {
+          "hash": "0007219aade5cf68d37cdca1adeac8f65347fa4dc72e3592c0ce9bd32e168b9a",
+          "path": "datapacks/natural-errors/hosted.json"
+        },
+        {
+          "hash": "beddc69850a713e4d2e031f8063fee9cf0c1f9365bd40c9fff84a5738d68bc1d",
+          "path": "datapacks/natural-errors/spec.json"
+        }
+      ],
+      "globs": [
+        "datapacks/**"
+      ],
+      "importConfidence": "full",
+      "name": "datapacks",
+      "origin": "authored",
+      "role": "data",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
           "hash": "d1041b9d7b299b3f305020952c93a8119f83d3d2592bdd30f8ecf0173161a308",
           "path": "docs/standards.md"
         }
@@ -301,6 +348,50 @@
           "path": "entries/2026/2026-10-08-voice-gate-pyannote-segmentation-on-sung-vocals.md"
         },
         {
+          "hash": "eb3bec56ff49fd6e2d13ec10650a8dc52dcb432aceee94fc7b38a7ec32877ee1",
+          "path": "entries/2026/2026-10-09-making-thinking-cheaper-study-swarm.md"
+        },
+        {
+          "hash": "28426e8159bdff145a643e9f851a7527830a40157190aabd911173d7a365b23d",
+          "path": "entries/2026/2026-10-12-device-runs-from-clean-worktree.md"
+        },
+        {
+          "hash": "217e26cef10b6ce75547aafd7089ae114dac0da3b711222061899cf467ab6e68",
+          "path": "entries/2026/2026-10-12-e4-co-scheduling-inconclusive.md"
+        },
+        {
+          "hash": "8dee4792a05063d02342f8af6a6524356e974dab9a38480caef173e89a2f5fab",
+          "path": "entries/2026/2026-10-12-e4-npu-static-shape.md"
+        },
+        {
+          "hash": "a272a037c8c2d2cff1ed4e49793568fbd3ead2d81d720b34c354a02d0c22aec2",
+          "path": "entries/2026/2026-10-12-e4b-block-2.md"
+        },
+        {
+          "hash": "42eb7132b314a579b178d1cd9f0fb886e9e62725f4999b92f9c1f0a229866e21",
+          "path": "entries/2026/2026-10-12-ollama-num-predict-zero-is-no-limit.md"
+        },
+        {
+          "hash": "1279a4289933765fbb20995bc2afd01c522a7b1aec738efc1001a9ced0a72786",
+          "path": "entries/2026/2026-10-12-prefix-fit-count-cost.md"
+        },
+        {
+          "hash": "5634ae4bd8c6604d9fbaec63aae79e62f1c9b7e2bf7cc8a7161183a1059711b5",
+          "path": "entries/2026/2026-10-12-test-fakes-hide-the-platform.md"
+        },
+        {
+          "hash": "21cbed4ef564fb3074727dc76d6fdd6bc80a99ebcd3417e92f209c8f71bd40e0",
+          "path": "entries/2026/2026-10-12-windows-26340-listener-state-closed.md"
+        },
+        {
+          "hash": "13af9f1ad498a97aebb245be2cd88ad772597eb9d5bd006f88ec20108b6980de",
+          "path": "entries/2026/2026-10-13-atlas-testing-os-rnd-buildup.md"
+        },
+        {
+          "hash": "a68ebef7ae013b574e8371aa3efa8e5e644dd6cf2b7055b8e8fbd513de292810",
+          "path": "entries/2026/2026-10-13-e5-fill-card.md"
+        },
+        {
           "hash": "db30b519986800741a2a98c91fc19246ee9fffb64e3b69e08bc907b102a06aaa",
           "path": "entries/_template.md"
         }
@@ -316,13 +407,157 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 5,
+      "dynamicReads": 9,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
       "dynamicWrites": 4,
       "entryPoints": [],
       "externals": 0,
       "files": [
+        {
+          "hash": "4cf201aac16382ad422bb978b1d231ba284bee45857281585a7c7d7e86264813",
+          "path": "experiments/charts/calibration-grounded.svg"
+        },
+        {
+          "hash": "632dfead0cbc95cb68b0b07721ed359c3e6ab206846e460212bc6ee23527305e",
+          "path": "experiments/charts/calibration-reasoning.svg"
+        },
+        {
+          "hash": "e247acd6efeccc978ecf589368299b351c560ac73a65a07c84f40728f3d81df6",
+          "path": "experiments/charts/cuda-graphs.svg"
+        },
+        {
+          "hash": "cf26a1f6e2bad29d33d0c3ef1d22506075801bb3fc262019c149bc090085cbbe",
+          "path": "experiments/charts/cuda-kev-band.svg"
+        },
+        {
+          "hash": "adb038b29668684f73885dd88bf2ea77f99318957d1c9404378a6d9113b5ab4c",
+          "path": "experiments/charts/cuda-probe.svg"
+        },
+        {
+          "hash": "9e728527daf81b6590071441b0c136579bf941c0dea2ae6eb6411b34ead6c326",
+          "path": "experiments/charts/e4b-igpu-latency.svg"
+        },
+        {
+          "hash": "f16a98f31a37d4b4b939b97266d28f3fa0d5ba511d9c4cb7f546ed29c38625ae",
+          "path": "experiments/charts/e4b-pilot-clock.svg"
+        },
+        {
+          "hash": "1ad7620c2e657da7339ab996752a5ac8be65388661dadc2ef3d3aee5db0a8d2b",
+          "path": "experiments/charts/e4b-triplet-effects.svg"
+        },
+        {
+          "hash": "9eac5848dcd2af87a0ff2a23d15216d9298d935a0a9e94411f383d1d1b77a3ea",
+          "path": "experiments/charts/e4b-verdict.svg"
+        },
+        {
+          "hash": "62da7d5aaa530001e06e45619a0830ba52b30136960ea489a8ad870a3853bb92",
+          "path": "experiments/charts/error-lean.svg"
+        },
+        {
+          "hash": "42faeeee21377286ae0afc0bcc7f4a55f902bfbe05a9d41042bfcff6ee54d0f7",
+          "path": "experiments/charts/loop-repeats.svg"
+        },
+        {
+          "exports": [
+            "cal_row",
+            "cal_rows_chart",
+            "chart_calibration",
+            "chart_cuda",
+            "chart_e4b",
+            "chart_e4b_latency",
+            "chart_e4b_pilot",
+            "chart_e4b_triplets",
+            "chart_e4b_verdict",
+            "chart_error_lean",
+            "chart_ladder",
+            "chart_loops",
+            "chart_npu",
+            "chart_reasoning_default",
+            "chart_thinking",
+            "chart_vocal",
+            "e4b_block_paths",
+            "e4b_coverage",
+            "e4b_fmt_mhz",
+            "e4b_fmt_pct",
+            "e4b_interval_name",
+            "e4b_pct",
+            "e4b_percent_axis",
+            "e4b_percent_limits",
+            "e4b_row_caption",
+            "e4b_rows",
+            "e4b_rule",
+            "e4b_run_words",
+            "e4b_sources",
+            "e4b_ticks",
+            "esc",
+            "family",
+            "load",
+            "load_external",
+            "main",
+            "manifest",
+            "panel_axis",
+            "verdict_stats",
+            "wilson"
+          ],
+          "failurePaths": [
+            {
+              "in": "key",
+              "kind": "raise",
+              "line": 765
+            },
+            {
+              "in": "e4b_block_paths",
+              "kind": "raise",
+              "line": 770
+            },
+            {
+              "in": "e4b_rule",
+              "kind": "raise",
+              "line": 794
+            },
+            {
+              "in": "chart_e4b_latency",
+              "kind": "raise",
+              "line": 980
+            },
+            {
+              "in": "manifest",
+              "kind": "except",
+              "line": 1057
+            }
+          ],
+          "hash": "01ebc6e57742503224eee4d26ccd167e454481eedff17195942bc44a44386e1a",
+          "path": "experiments/charts/make_charts.py"
+        },
+        {
+          "hash": "500c4b8368b2d4c81ff546df2ae25424ca3358367664e1a4b9744e5f6fdb4c07",
+          "path": "experiments/charts/manifest.json"
+        },
+        {
+          "hash": "a37469574167e77310139fe648a0815056c8e1be6fb53dceb71771e7d92a0657",
+          "path": "experiments/charts/math-ladder.svg"
+        },
+        {
+          "hash": "719322220fe7796e5174c0229b20f99677403104b93fff598b77bf1420a161c3",
+          "path": "experiments/charts/npu-vs-cpu.svg"
+        },
+        {
+          "hash": "8135efa8483a0544562c094aa6ffe937b5dad7277bb11633f2cb6f908ace8ba5",
+          "path": "experiments/charts/reasoning-default.svg"
+        },
+        {
+          "hash": "4f81e4436e37fd793f1b07ae5a81ccd151c77efde1b6939002c90a4ad2848e21",
+          "path": "experiments/charts/thinking-off-vs-on.svg"
+        },
+        {
+          "hash": "750269f8921527796fa86f28b8484beaf58de1226c458eaea168a647bbdc46ef",
+          "path": "experiments/charts/vocal-pitch.svg"
+        },
+        {
+          "hash": "916d59af421b45c34cb293ce9fc2265dcaebb9f1693b6f90519a1e7978370698",
+          "path": "experiments/charts/vocal-timing.svg"
+        },
         {
           "hash": "c71fd60e8bf8ed673ad55ffcb5860263924fdc115ed8bec9a8342e1700e5f5d4",
           "path": "experiments/cloud-cu134/README.md"
@@ -375,7 +610,7 @@
           "path": "experiments/cloud-cu134/setup_compat.sh"
         },
         {
-          "hash": "91a50bb9bab95b0620ff5990afb9f7c91c8cda0ebff773023bdb2229073b136f",
+          "hash": "d92b8189e6c769e56fb5d57bf2feaa723433761cccce80b11c7f49684a5670d4",
           "path": "experiments/cuda-graphs/README.md"
         },
         {
@@ -690,7 +925,7 @@
           "testFramework": "unittest"
         },
         {
-          "hash": "816390d1812779f6f95c36a794beed8fb5db156b914325818ba570065ec0872b",
+          "hash": "5faa4247fbfe27f4ffac4d1baa4f51bdc706add1d1aefd8a26ce6d03411f1551",
           "path": "experiments/distill-ladder/PLAN.md"
         },
         {
@@ -704,6 +939,147 @@
           ],
           "hash": "bf1c23008fd9a72d882af6aa736dbfcfc46a0ddd258791c39cef5ecdc92ef820",
           "path": "experiments/distill-ladder/dedupe.py"
+        },
+        {
+          "hash": "e2fe5ca2eaff3b0ba7ae8c6cab41c08621d1af87215e0b8a3a9cc4f5ba051153",
+          "path": "experiments/e4b/README.md"
+        },
+        {
+          "exports": [
+            "assert_public",
+            "dump",
+            "events_of",
+            "git_bytes",
+            "linear_percentile",
+            "main",
+            "number",
+            "optional_number",
+            "parse_rule",
+            "percent",
+            "report",
+            "sha256",
+            "split_receipt",
+            "token",
+            "trim_pair",
+            "trim_pilot",
+            "trim_receipt"
+          ],
+          "failurePaths": [
+            {
+              "in": "git_bytes",
+              "kind": "raise",
+              "line": 45
+            },
+            {
+              "in": "token",
+              "kind": "raise",
+              "line": 55
+            },
+            {
+              "in": "number",
+              "kind": "raise",
+              "line": 61
+            },
+            {
+              "in": "grab",
+              "kind": "raise",
+              "line": 77
+            },
+            {
+              "in": "events_of",
+              "kind": "raise",
+              "line": 96
+            },
+            {
+              "in": "events_of",
+              "kind": "raise",
+              "line": 100
+            },
+            {
+              "in": "trim_pair",
+              "kind": "raise",
+              "line": 120
+            },
+            {
+              "in": "trim_pair",
+              "kind": "raise",
+              "line": 124
+            },
+            {
+              "in": "trim_pair",
+              "kind": "raise",
+              "line": 126
+            },
+            {
+              "in": "trim_pair",
+              "kind": "raise",
+              "line": 135
+            },
+            {
+              "in": "trim_receipt",
+              "kind": "raise",
+              "line": 154
+            },
+            {
+              "in": "trim_receipt",
+              "kind": "raise",
+              "line": 157
+            },
+            {
+              "in": "trim_receipt",
+              "kind": "raise",
+              "line": 160
+            },
+            {
+              "in": "trim_receipt",
+              "kind": "raise",
+              "line": 163
+            },
+            {
+              "in": "trim_pilot",
+              "kind": "raise",
+              "line": 191
+            },
+            {
+              "in": "trim_pilot",
+              "kind": "raise",
+              "line": 194
+            },
+            {
+              "in": "trim_pilot",
+              "kind": "raise",
+              "line": 198
+            },
+            {
+              "in": "assert_public",
+              "kind": "raise",
+              "line": 224
+            },
+            {
+              "in": "split_receipt",
+              "kind": "raise",
+              "line": 256
+            },
+            {
+              "in": "split_receipt",
+              "kind": "raise",
+              "line": 259
+            }
+          ],
+          "hash": "f46a6c351f6bb24e66098abb6c6f6d0e847630af4dd417cc4478309cec8addad",
+          "path": "experiments/e4b/extract.py"
+        },
+        {
+          "hash": "9b00fb532c6481808677c7783970adfef7084a12eb6d3326fb74478d9ab889e5",
+          "path": "experiments/e4b/results/block-2.json"
+        },
+        {
+          "hash": "d1637da65d1205e4b35464a81536ab7e60468f46bb0c80f6fe6749a5fdbbdaf9",
+          "path": "experiments/e4b/results/block-3.json"
+        },
+        {
+          "hash": "a65f5945acb1de8a7147ce0a4cfd7c8bfb52c3b9392216ebae79cc5ac9a6d912",
+          "path": "experiments/e4b/results/pilot.json"
         },
         {
           "hash": "204acb78c4a52b40b79ae6eaaea4da6eb1db759f43c7923b851bf65df305c5fe",
@@ -1124,6 +1500,18 @@
           "path": "experiments/npu-probe/probe.py"
         },
         {
+          "hash": "6f1b04c6c62475a914d8e0b40d6a09d33c414cbbb5042e3203d8ebc94b77c70d",
+          "path": "experiments/npu-probe/results/2026-10-09-health-after-e1-loss.json"
+        },
+        {
+          "hash": "90467d9c824cb0b24e6d836f1f44d98d4fd4fbb01dd15661ee13ba72267b9eb8",
+          "path": "experiments/npu-probe/results/2026-10-09-health-after-e1-rerun2.json"
+        },
+        {
+          "hash": "6ea3fe88742342befee592d28ff5188a6dd1b3346711cfdd8d2f7abf9a935da6",
+          "path": "experiments/npu-probe/results/2026-10-09-health-before-e1-rerun.json"
+        },
+        {
           "hash": "6833aa0f0d919a4a7eb9b3b621a15d98bafb23103f887e65ab95b1c299f46dfe",
           "path": "experiments/npu-probe/results/2026-10-09-mac-chain.json"
         },
@@ -1257,7 +1645,43 @@
           "path": "experiments/openjev-vs-jev/run_openjev.py"
         },
         {
-          "hash": "3a35ef78bba5172a78ca546f85c54eb4898bca1d81c602d791da901d5a4fb686",
+          "hash": "56416567257e8c9567679a7be0022b5e3af11a233e6fb46d4a22913ada6aa8cd",
+          "path": "experiments/stage1-role-eval/README.md"
+        },
+        {
+          "exports": [
+            "expit",
+            "logit",
+            "main",
+            "mcnemar_p",
+            "sim"
+          ],
+          "hash": "8a27da033c125add26758f72180f592b8a6907e1b1b0898909accd33a44c2a4a",
+          "path": "experiments/stage1-role-eval/power.py"
+        },
+        {
+          "exports": [
+            "expit",
+            "main",
+            "run"
+          ],
+          "hash": "ccf6787cb1b5633dc5e98a85f3b0ba525cb8e408c4bdb256553b33a71249e97f",
+          "path": "experiments/stage1-role-eval/power_empirical.py"
+        },
+        {
+          "hash": "4d16e3eef1eea448baad650a2a0677c4861e34e4662a4cdbdc2725a8cf32a072",
+          "path": "experiments/stage1-role-eval/results/2026-10-10-power-empirical.txt"
+        },
+        {
+          "hash": "d8571a5cfe438e04b362c15795189d53db78c0e79358f09007977013b7612469",
+          "path": "experiments/stage1-role-eval/results/2026-10-10-power.txt"
+        },
+        {
+          "hash": "3773341193c6e7bea94119ba673e85934078511f6d8e82a8b4b45caca9425cd6",
+          "path": "experiments/stage1-role-eval/results/2026-10-10-sealed-baseline-k.json"
+        },
+        {
+          "hash": "5bd1fa0ab355c4eb36aeb2f5fdf36100f9716ea9032d1177afc956d2143becb8",
           "path": "experiments/verifier-gold/README.md"
         },
         {
@@ -1319,7 +1743,7 @@
           "path": "experiments/verifier-gold/build_grounded.py"
         },
         {
-          "hash": "2141a32bd4d9a1f8596ecdf46b6acb55dede2fcbb4ad9846bfd214b5fefd4126",
+          "hash": "a7d44c7e23e08b66ca4bf5d93d000f04babf81efa751b3af65c2c2d4e261fe91",
           "path": "experiments/verifier-gold/calibration/README.md"
         },
         {
@@ -1327,7 +1751,7 @@
           "path": "experiments/verifier-gold/calibration/candidates.txt"
         },
         {
-          "hash": "3cbb4011fbf29795b5ee27751c02ebf25c6ecd77bbde859d519b851c30c61ba0",
+          "hash": "d844f21e8635d615bef040b8c7fced96be833657848a9307f523659996b4b364",
           "path": "experiments/verifier-gold/calibration/chain_step.sh"
         },
         {
@@ -1338,15 +1762,407 @@
             "tiers",
             "wilson"
           ],
-          "hash": "261b3a9fda8ae4ec2a205efa22deea02aaa8f3d31d0c8693ac9682cd6d62ebf4",
+          "hash": "26fb8f9b6ffa8dc64aa2f3aa25b1a16a8441b3541dd7a7f87893aec020812ae6",
           "path": "experiments/verifier-gold/calibration/difficulty.py"
+        },
+        {
+          "exports": [
+            "rate"
+          ],
+          "hash": "dfbd8e0403978480d627177da24e8788e0477919c01ffc15aa887e59f85dc442",
+          "path": "experiments/verifier-gold/calibration/error_lean_posthoc.py"
+        },
+        {
+          "exports": [
+            "max_rep"
+          ],
+          "hash": "cd75ed2844b7b8bbf9db18e82ec781773c89e59cb4481d5931261c79f969654f",
+          "path": "experiments/verifier-gold/calibration/loop_repeats_posthoc.py"
+        },
+        {
+          "exports": [
+            "found",
+            "norm",
+            "strip_lines",
+            "wub"
+          ],
+          "hash": "bab1af2f24c9bd586d4015c675ec89b9b2c54bc33b94634b27b86f655ffa094f",
+          "path": "experiments/verifier-gold/calibration/quote_match_posthoc.py"
+        },
+        {
+          "hash": "46d794f13f3a8321a4b93152674ed951571e63cd3dc9901641467d39cb53a449",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-grounded-tune/manifest.json"
+        },
+        {
+          "hash": "2588523b27c5125b4010397d3aeb96235d28a267fe15a5d07031205e97892e17",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-grounded-tune/metrics.json"
+        },
+        {
+          "hash": "4769a49e2c4506d9c30669aa40c0ee99dc05348ff0086669b22f2c809cc8a18f",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-grounded-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "bd4f8b7d22f78f77b6d9ea1391599510dade5ed568b41ada931ceca0772cfb92",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-reasoning-tune/manifest.json"
+        },
+        {
+          "hash": "fa8929412b237d9b2f42d59905e67af8b3358b88f8909c8f6baa08c420f42d4c",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-reasoning-tune/metrics.json"
+        },
+        {
+          "hash": "79acd29e20ddb47b68034f020d30aa402c9de2560f0f3c6df402dc1af23d6b39",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-reasoning-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "ffc47286db3488dfa6daf171482dc0b402d18bf5b20e29ccc6f7be3940d9a192",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-grounded-tune/manifest.json"
+        },
+        {
+          "hash": "01bc712586010fb582aebce67cfd0cb48a7c9ffeaf6f072f162a25edf8b4d52c",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-grounded-tune/metrics.json"
+        },
+        {
+          "hash": "81f21c71a4eefe2ecb8b511dabb647f989154d6868ec39c7688272f4c02b1af8",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-grounded-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "efdb2054a08aa28f3054b0bda133f63299cd08824ba04e279e63c76062508130",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-reasoning-tune/manifest.json"
+        },
+        {
+          "hash": "822c243bd89abaaedd11b2f958dee3cb5a46644946db149e44d9159b861cf353",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-reasoning-tune/metrics.json"
+        },
+        {
+          "hash": "e088143ce1ac535ba90677889ee316545df4e0d02042e3c1cf7691a985fec4b9",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-reasoning-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "4984c5a175df40c5ffc4ba9c9e3c12c18d246707a4ab117c37d3c3ed553517b9",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-grounded-tune/manifest.json"
+        },
+        {
+          "hash": "26856776f22e2542d1a0676e68658d5ef8e692649e1dd138a166fa9df08118a3",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-grounded-tune/metrics.json"
+        },
+        {
+          "hash": "4f67749752179b7c0cc93059e1481641ae38c23f5d7b84cb9b802a6bdcbdf29f",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-grounded-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "db50e842fff9265ce9e456658a20733a528a7f6eb7341d7b479b17e5736283ee",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-reasoning-tune/manifest.json"
+        },
+        {
+          "hash": "a1b4704c94c0b02e1d0183dc3c16e17dd1fde5352ffec4f6da8b85584d2df4ec",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-reasoning-tune/metrics.json"
+        },
+        {
+          "hash": "971d342886a98f83a0bc7b5310f8291112ae4d7125b8db3b70b5d464b422e469",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-reasoning-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "cc077819f50b3dc89b17a528ab754a5979b8713e044ede40660e4df17c8c7a84",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-grounded-tune/manifest.json"
+        },
+        {
+          "hash": "0619ee55f5b92c99ca765c4e1cad16deabf36e0248d2ad831ed5738e829f9fc0",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-grounded-tune/metrics.json"
+        },
+        {
+          "hash": "d3a3860861a5ce49f499df5ea99cd2886a93429b0ee89d4c4f129f4b0c9440df",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-grounded-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "a800a1c0c2433fdd0be68b4908254493fe2ace104a29d196fb1c0262b84307b4",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-reasoning-tune/manifest.json"
+        },
+        {
+          "hash": "1c62f7c728f0588835efacfff40f4f0908a27c84721a81a9777c686306aaf0cb",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-reasoning-tune/metrics.json"
+        },
+        {
+          "hash": "322173a113d6bad267eb09332ace7681db3e71864765ef11f60af7e5decc7393",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-reasoning-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "997f1fe9eae390a2259e71972c2121ac1e797ff07bd68f2cb687078e5f936fe3",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-grounded-tune/manifest.json"
+        },
+        {
+          "hash": "e27ba6c35a144e957d08cfaa8083847736671ba9194de86d5694c3484fc39e42",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-grounded-tune/metrics.json"
+        },
+        {
+          "hash": "b61fede54c92eef2d555012f9d8953f7bf8f2c043b89df7688b664eee6237634",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-grounded-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "db67e6a376d186caf7e3cffe7791f991b3eb74b50bad2ddbd0fa4deac1a4b3ec",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-reasoning-tune/manifest.json"
+        },
+        {
+          "hash": "fe44fa6a4a50bb3e72b76c74d51480a935f5249e4ef56e83bb331760c5d3c7e2",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-reasoning-tune/metrics.json"
+        },
+        {
+          "hash": "599156bc98f4604fe29c85c6e79a39f9567b884a4780e0eb75d31db742a88b01",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-reasoning-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "44aa17c6dfcc5bfd43794f7ace951001e6aae8927b0b8a460372376fb653c0dd",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-grounded-tune/manifest.json"
+        },
+        {
+          "hash": "278db079c2b9d329fc223c213900c9f323fe6ed0186e90bfd863677383883300",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-grounded-tune/metrics.json"
+        },
+        {
+          "hash": "51b7dbb55f9b1bb593c055ff907dddc153d4ceef813f7d47b768ba8aae911464",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-grounded-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "8dd9f8b18cfb7ba295d4c3e05a1d8b705be21764862d5a297a75df665cc73f4f",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-reasoning-tune/manifest.json"
+        },
+        {
+          "hash": "c30be46ff833263f3a9c7ad79fc69f3c57149b272e3977cbbbfa228368830407",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-reasoning-tune/metrics.json"
+        },
+        {
+          "hash": "c060487e4aab732729f8f60cd4ff99fff846ae7063b5367310b11321bf774844",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-reasoning-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "bb123caff55c9060bd4a207f6e1c7d993eee2e9eaf2d3b3c003c6bb2d28e4a42",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/chain-1-llama3.1_8b.log"
+        },
+        {
+          "hash": "12d392f1499a7a2b5d0a8682196e63662148b6c5aa6b070c404ac45fe081fe5e",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/chain-2-qwen3_8b.log"
+        },
+        {
+          "hash": "f0c9f971d0f863f8317e5370305d16e75f19edc4d630acc69091c483e11d4590",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/chain-3-qwen3_14b.log"
+        },
+        {
+          "hash": "effba4335a37d33e9268210846cc033b61b00b1dc025ca2a9ad57e232536439a",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/chain-4-mistral-small_24b.log"
+        },
+        {
+          "hash": "49a6dca5bf3892c8ab597e22814693d42994ec01c73865ec8034a589eac36664",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/chain-4b-mistral-resume.log"
+        },
+        {
+          "hash": "7838f8ee51cd994cc900f18a7444a73ae7a6e532a13bf66aa64d48021d6ca80a",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/chain-5-granite4.1_30b.log"
+        },
+        {
+          "hash": "ecf68fe214183f59a0b3952323657ba25521a5aa10e91e0277835e928adb3384",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/chain-6-gemma4_31b-low.log"
+        },
+        {
+          "hash": "b746f9d721f34da2a46ecd1bbae6a4e8219ae231ec27bfb19ab77ec569ccc745",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/chain-6-gemma4_31b.log"
+        },
+        {
+          "hash": "0ea1be2c5b4d04bda05b63dbf6dff93a3dac161bde7698dc1263823c49af13f0",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/difficulty-report.txt"
+        },
+        {
+          "hash": "1a3ed2157b9d2e915530ccde081627d7af74bb4d4f689440a5a71362226fcd98",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/error-lean-posthoc.txt"
+        },
+        {
+          "hash": "f1d665a7cde7b1d6296c3db3d009bd0bf4385ebf80d18794c9b3a0616c4eca7e",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/quote-match-posthoc.txt"
+        },
+        {
+          "hash": "f283705f880618e76f973e7e9a3bf8232a2fe737eaaeae61a8e4b91550c4add4",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-grounded-tune/manifest.json"
+        },
+        {
+          "hash": "d18f72e6d8dff0b5a6bfc2fde068897094e6277955ae12d0cbcec936d65d9d62",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-grounded-tune/metrics.json"
+        },
+        {
+          "hash": "6d23ed0bf5652e2bdced17e24d063da5e68919b3a2fbf1c135ce7febe05cf4ee",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-grounded-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "6960fd58ba8f91dd15fc7fe6a129127a2fbad2a6a0a1a8af6617add4b48f1a23",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-heldout/manifest.json"
+        },
+        {
+          "hash": "020f6e4e94a1dafc83437662e2c1d23228ca4be549fe96299baff7fdab58f3dc",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-heldout/metrics.json"
+        },
+        {
+          "hash": "bfb3077786ff7aebd30e59b5aa3054977bed603d30c936664f19c932cc38f38f",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-heldout/verdicts.jsonl"
+        },
+        {
+          "hash": "f61c62deec4f7a7804510f4a6aefa0e051ba61b290bbcfeb6ed30324a6b90a96",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-tune/manifest.json"
+        },
+        {
+          "hash": "7005979df453682fb902915a86c83d69216fd7e2e483c40b3d391e74a09bd23b",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-tune/metrics.json"
+        },
+        {
+          "hash": "edbe9eb17897b3f9056043d58a1fecc7a361a8b80c0a628e9d64331d48b6ba27",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "5a8598b5a17e38095f35a18c9802c510117af67a6ba227a5af5270299a0c18d8",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/loop-repeats.txt"
+        },
+        {
+          "hash": "cc3dfe4617b76e3eab3465c62e23edc26cd7c8cd9b882c907980cf6bf8239968",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/run-heldout.log"
+        },
+        {
+          "hash": "7edd937654dfd1225b90263508565d5acea52d8d6cac84ec2a701eec2088d9c9",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/run.log"
         },
         {
           "hash": "729303fb968bf7e2403bf1f635a1d74995e34d411b8520924b13a00ab32993c8",
           "path": "experiments/verifier-gold/calibration/results/2026-10-09-smoke.log"
         },
         {
-          "hash": "ddd7a79225cb8fe2cbd4bb9d3f02722468842fd340f0a3975cebc5594f6cb6b2",
+          "hash": "19e14e32228834da0fbd5a2cd0fb352db38dad36c5cf102cd04aaad0133c7afd",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-grounded-tune/manifest.json"
+        },
+        {
+          "hash": "a02cd582d45875bd9ac363b186ddd850f860ca682ef9f2bd8fb4cf205576ca9f",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-grounded-tune/metrics.json"
+        },
+        {
+          "hash": "3c5071367581103392ed0019782c1dbc22840770cead911020ce596ba4662302",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-grounded-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "7fe238e437f534e2646185cff6e794850e8e8d48ce44ecd4c0d40d77a9a28e75",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-reasoning-tune/manifest.json"
+        },
+        {
+          "hash": "2fe56771ad6803ccc1bf8699297257236910fd7b0ee497dac9bebe83b5d9ab98",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-reasoning-tune/metrics.json"
+        },
+        {
+          "hash": "f452c99f18bdb92c7a0603eed46ab71e08cbf692b6c85253bc69d1efc18e669c",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-reasoning-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "22e7135521dd02086a50f174b7a4f74a757a12147183c316b4c651462413cba0",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-grounded-tune/manifest.json"
+        },
+        {
+          "hash": "c5af6db917b7a38a9f022342047b2e30007596f96ce362383491267bf95bd41d",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-grounded-tune/metrics.json"
+        },
+        {
+          "hash": "b2b4345a8d07a64082f6183fc2680be07933ded531e5d42d0e935bb1f9c017d1",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-grounded-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "a7c266d9931e9b06b37dfcb54a8f5cac78408d1685789b3331d7463c534fddbd",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-reasoning-tune/manifest.json"
+        },
+        {
+          "hash": "22ed857a3c7590a973a9a09e5144baf18e6aed4729382399eab89dba34b93474",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-reasoning-tune/metrics.json"
+        },
+        {
+          "hash": "d4f5143b57182b135805897282e51743755e3fffddf4d52635d9ec104026ea0d",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-reasoning-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "cc5e2d7f3751fe88c10147b2b2e140699123a299dd5c4968b6cc129a81834afc",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-grounded-tune/manifest.json"
+        },
+        {
+          "hash": "6b49afbe0a134561912cd63645d7d58f2fcc52008556a3e65c2fd69755bf65c5",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-grounded-tune/metrics.json"
+        },
+        {
+          "hash": "b49647d65a196ebb70f5ba4488d0a4ad38b148d8fd0418e64d86499e5cd6a6ff",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-grounded-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "398c085cad6163139b34005be4445cc35211ecbaaef8aefefa7e9408dba08557",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-reasoning-tune/manifest.json"
+        },
+        {
+          "hash": "21b70d3e5d2cdfd0072a35be4e8900ae20ddbfe7af69e23b1e71f0e7c41efb97",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-reasoning-tune/metrics.json"
+        },
+        {
+          "hash": "beaca1ac9070acd6b46664b4013b80ca9db40f899dd5c6db70e1f475cdaab47a",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-reasoning-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "b2a974cb2c6a5008c07716d4e352e97d7b236d821905c4910cf047bbddf4d290",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/step-1-qwen3_8b.log"
+        },
+        {
+          "hash": "78dcfd467089e7fc0cad21f6244181b8864b2d3550c3e8320c63ddca7169834b",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/step-2-qwen3_14b.log"
+        },
+        {
+          "hash": "2ca08484b3b7ddb2de5a0466030921274cff1c1fc786aa37e67f9ce566c52532",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/step-3-gemma4_31b.log"
+        },
+        {
+          "hash": "3a2c60d2fd828df9c99d3c5e84468ea99aaf698608e93ee4db360b7210ba3d64",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/step-3b-gemma4_31b-resume.log"
+        },
+        {
+          "hash": "2bb59be3edddec3553a5344954c87df33af8f2863d0840f24c7c97772acf4318",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/thinking-policy-replay.txt"
+        },
+        {
+          "hash": "9c0aeceb7a7e714886136151ee342f6b42d194ccaaf35db01d69b54f67ac21a5",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/off-cal-nemotron-3.5-lightning_latest-grounded-tune/manifest.json"
+        },
+        {
+          "hash": "9fc738246e2c010c1130655941b310eac4c95803542680323d5a7f51f78452fb",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/off-cal-nemotron-3.5-lightning_latest-grounded-tune/metrics.json"
+        },
+        {
+          "hash": "e6d43ffedbfcd723575f68dc9cc8047b9e3c1aa139fdf96d72e9be1964461b40",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/off-cal-nemotron-3.5-lightning_latest-grounded-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "75a3bb627fbba200cdf3819d0496505e22b2184d1d1673f62b02844cb86af9e3",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/off-cal-nemotron-3.5-lightning_latest-reasoning-tune/manifest.json"
+        },
+        {
+          "hash": "988f84b5344d6f6709752517f320b4711583199169ae3c6e9fd45dbe889cb45e",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/off-cal-nemotron-3.5-lightning_latest-reasoning-tune/metrics.json"
+        },
+        {
+          "hash": "960cbf0b42891e9e986354ce784bfd97187cbafdc3bcddae9de377a30160079b",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/off-cal-nemotron-3.5-lightning_latest-reasoning-tune/verdicts.jsonl"
+        },
+        {
+          "hash": "de130c0b1f485703e82328b199097d187f07b2b59b54b5454eabe33aa895112d",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/step-1-off.log"
+        },
+        {
+          "hash": "37d87c1e52b596abca2ac409ce7670fc454eecdb56658fb67ff8f03eb6dec2f3",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/step-1b-off-resume.log"
+        },
+        {
+          "hash": "1609de653cc0a2d17f9c95fc1e5514f74e1d82cff2af79ab8b470aa094f6a400",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/step-2-on-STOPPED.log"
+        },
+        {
+          "hash": "48caa97e9f10d22482d27a70999d376bccb9c8de17b906eaf94f86dd593b263f",
+          "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/step-2-on.log"
+        },
+        {
+          "hash": "e9d499cc0aaf21dae8e6fdfd4f12368c777c721f87404d110ef0993d3ad565db",
           "path": "experiments/verifier-gold/calibration/run_model.sh"
         },
         {
@@ -1356,6 +2172,17 @@
         {
           "hash": "546fcce223d455c7d9ba225a248558d3197017183135f2e284d98321bf270001",
           "path": "experiments/verifier-gold/calibration/smoke_all.sh"
+        },
+        {
+          "exports": [
+            "load",
+            "main",
+            "score",
+            "think_before_accepting",
+            "upper"
+          ],
+          "hash": "8be59a5930d26fc7b1080f12c979eb7c21b1e41e8553276267190948279f5dab",
+          "path": "experiments/verifier-gold/calibration/thinking_policy_replay.py"
         },
         {
           "hash": "ee8bf0f3f0a2d54846c1ab3eec9ad00574a6f85161281643d3eb91fd8a5ac9a6",
@@ -1527,8 +2354,40 @@
           "path": "experiments/verifier-gold/grounded.jsonl"
         },
         {
-          "hash": "f66bd3e3a09d904fd19032e4fd9b77a62be20ddfc8a327562a6aec9ba292c1f4",
+          "exports": [
+            "best_jaccard",
+            "check",
+            "check_against",
+            "fields",
+            "grams",
+            "lines_of",
+            "load",
+            "main",
+            "norm",
+            "sentences",
+            "text_of"
+          ],
+          "hash": "5b06742746bea382a3c80a09660d0dd3f5068bfb988ec33dfc5f284a9ca5cf80",
+          "path": "experiments/verifier-gold/leakage_check.py"
+        },
+        {
+          "hash": "caf2744abca7a8b0d9578d691792962981af241857c3032ef6bb0d17957d9624",
           "path": "experiments/verifier-gold/math-ladder/README.md"
+        },
+        {
+          "exports": [
+            "fmt",
+            "nums"
+          ],
+          "failurePaths": [
+            {
+              "in": "nums",
+              "kind": "except",
+              "line": 18
+            }
+          ],
+          "hash": "792dcea4d8450305d3d87d88c521f8f93ccc0f8de51f3714d9bbe332bd6efe17",
+          "path": "experiments/verifier-gold/math-ladder/arith_floor_posthoc.py"
         },
         {
           "exports": [
@@ -1564,7 +2423,7 @@
           "path": "experiments/verifier-gold/math-ladder/ladder.jsonl"
         },
         {
-          "hash": "944582becdc68688635a01b60bf0e1c85d01fd93798e298a8fc3db67508fb568",
+          "hash": "b7c65fe7346550aef701740c7721db91a14779ee1b566d7867f9a3e9fba60a04",
           "path": "experiments/verifier-gold/math-ladder/ladder_step.sh"
         },
         {
@@ -1573,8 +2432,120 @@
             "tally",
             "wilson"
           ],
-          "hash": "156c50174edc1ccdea1e660310c3fe1636baa2fcc5cb6df8d0ca32bd331b9e83",
+          "hash": "69c30ce7e99e8cc70de26551a432a2076b3d2046422b8fcfa03421ba2fad23f2",
           "path": "experiments/verifier-gold/math-ladder/report.py"
+        },
+        {
+          "hash": "0b84195e67c5d4302467ecff32ac53c917de25999f6d424e0f4cf18985d4d25f",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/arith-floor-posthoc.txt"
+        },
+        {
+          "hash": "60c7d45713cd3bf10c8ae7f9c0e3071b233d474eb79290f95bacf16f2ec61796",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-gemma4_31b/manifest.json"
+        },
+        {
+          "hash": "6820fa1c8329e461bf9830b83bf75250a1e13ddf688e56557cfaa1936619f290",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-gemma4_31b/metrics.json"
+        },
+        {
+          "hash": "b0a53a2ef686ef5edfcbce902e8b1c519709a046e5c2d83b3fd4e70a5f4dfeb9",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-gemma4_31b/verdicts.jsonl"
+        },
+        {
+          "hash": "dd1bf5691376fe47377bab01cfa65a1ee2e37ae311f44ef51086e02df7eaccc3",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-granite4.1_30b/manifest.json"
+        },
+        {
+          "hash": "27f8694d1251052800254b8b55e60be6e8244b70b35c334165625fac4dc70e6c",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-granite4.1_30b/metrics.json"
+        },
+        {
+          "hash": "6e090dd138fb84ca814b26092a4a62ef66b3bf818d6c3cee13b01d6fba00bf1d",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-granite4.1_30b/verdicts.jsonl"
+        },
+        {
+          "hash": "03dfb3464bfe2d753d18fb7fcd0ea69017b59aec2e0bfe6dc8c1ff2009786c32",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-llama3.1_8b/manifest.json"
+        },
+        {
+          "hash": "293a588e466ef65d9d86f6988683bf0c5d68f2854acf73540104bf6f956e15f4",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-llama3.1_8b/metrics.json"
+        },
+        {
+          "hash": "c2ad74f5016064074f83bce39109d17997ffdba6412882ff26cc4e43ff84c2ac",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-llama3.1_8b/verdicts.jsonl"
+        },
+        {
+          "hash": "c2ad04fd67665cf858322d15a15b945298a65595d972f5e0063bacf3ee1b65a6",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-mistral-small_24b/manifest.json"
+        },
+        {
+          "hash": "266e4b6b031672fbe80bc48ade95b3c371ffc00f6953d0db52ba3f18482f81af",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-mistral-small_24b/metrics.json"
+        },
+        {
+          "hash": "2f716b6733164796cdf5585a2b0cb05d22b7664d87166623caabe26cd8522c61",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-mistral-small_24b/verdicts.jsonl"
+        },
+        {
+          "hash": "296b3161652f3b7dd39121186f833a49b06c2f3ecfca108afcb6742a961ea3d0",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_14b/manifest.json"
+        },
+        {
+          "hash": "fef55da1c51faf8210526f3888cd3a19355cee5477b68b1dba6b08c885eb5838",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_14b/metrics.json"
+        },
+        {
+          "hash": "c7d2a19087ae35a1dfbcf09b3315597426812c68ffef1bd0f067a6c99f4ef889",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_14b/verdicts.jsonl"
+        },
+        {
+          "hash": "5215800b5275699bcd92216762cc4b74568d6ae40897520f2cd73f70fe050e0a",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_8b/manifest.json"
+        },
+        {
+          "hash": "385d63499e3eec0e3386d250a1dd91707c6f5c8b21129e1f712c20743e6f3660",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_8b/metrics.json"
+        },
+        {
+          "hash": "248281b64992bd802eca7f692797f6ecb47edeb57e973c8e7ea0e11f36fa1f98",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_8b/verdicts.jsonl"
+        },
+        {
+          "hash": "c853b6d58826c0b582a6e14dafe88ce6e7f098080d4500954ab8cdf002dcf3f3",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/report-final-verdict.txt"
+        },
+        {
+          "hash": "e03e216604c05795f4623123f59b6f73f60d0721a30f43f11c469f9a9038e79d",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/report-model-verdict.txt"
+        },
+        {
+          "hash": "8020e524e1201b85a4ec80cbd17d5b9adab7b0517e5bbf8d32d2d2643ddc20b8",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/rnd-ladder-1-llama3.1_8b.log"
+        },
+        {
+          "hash": "cb24c5a6f195d95e0be13d067d49e77cc36a8284e14908a7d7576b4011afe915",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/rnd-ladder-2-qwen3_8b.log"
+        },
+        {
+          "hash": "e5b781f4080c6d3db92f0408c96069b1d3192ac42357d8dccf9cfed580b0c505",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/rnd-ladder-3-qwen3_14b.log"
+        },
+        {
+          "hash": "49d277c643b3cab4d33a49a4cbcaff592e9074713079d9d2af2c1c16ec5d9c81",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/rnd-ladder-4-mistral-small_24b.log"
+        },
+        {
+          "hash": "50bc134c5f0baa92d2d150abb70a74cf6c7021fc9eb37d6a6868d4cd01ac7a9b",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/rnd-ladder-4b-mistral-resume.log"
+        },
+        {
+          "hash": "d378f24500c600583103dc808b00f8f94bfb911621a8de12c95b9da3cc6e41a6",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/rnd-ladder-5-granite4.1_30b.log"
+        },
+        {
+          "hash": "e8b21badf832697f7f75a5c2a5b50b583da04e5ff2376f69746b0bfca18caba0",
+          "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/rnd-ladder-6-gemma4_31b.log"
         },
         {
           "hash": "3d954ce2d65f7412b4a0eb490c5e1f9c3ad01c69db0974326d7349b2d4f55f6d",
@@ -1633,7 +2604,7 @@
       "origin": "mixed",
       "outsidePlaces": [
         {
-          "reads": 8,
+          "reads": 16,
           "where": [
             "caller"
           ],
@@ -1648,13 +2619,13 @@
           "writes": 0
         }
       ],
-      "outsideReads": 9,
+      "outsideReads": 17,
       "outsideWrites": 4,
       "role": "code",
       "testRunners": [
         "unittest"
       ],
-      "testedBy": 2,
+      "testedBy": 3,
       "unresolvedNamed": [
         {
           "path": "experiments/data-designer/tests/test_lockdown.py",
@@ -1691,6 +2662,10 @@
           "path": "instruments/aspire-si.md"
         },
         {
+          "hash": "b6512d59b76ee65b286dc3b23ca47cf62a017484017cf45813398d60410ccb90",
+          "path": "instruments/atlas.md"
+        },
+        {
           "hash": "8cfebda3013bb420a9d81899afbd36b866e6f0a4f9de60170bf809b1563f403d",
           "path": "instruments/cross-family-rerate.md"
         },
@@ -1699,7 +2674,7 @@
           "path": "instruments/engine-room.md"
         },
         {
-          "hash": "cbb79c274bc016fb49ddcffac37fbfc7ea6fac0078c0124a19c1ac686165760b",
+          "hash": "e3f2b3d84a73b12b6a68f317facda578445d26142c8f94387e190fd56bbf7d8f",
           "path": "instruments/intel-npu.md"
         },
         {
@@ -1707,7 +2682,7 @@
           "path": "instruments/nvidia-skill-finder.md"
         },
         {
-          "hash": "241751148b452a005b9551758f90124caf59a67e85c62b0f109cfea0ba3ab450",
+          "hash": "3903e6a26afd2a9804a80aa186e48f07eb252fc7a2569beadf5c2d4cc9a670f1",
           "path": "instruments/offrig.md"
         },
         {
@@ -1735,12 +2710,24 @@
           "path": "instruments/research-packs.md"
         },
         {
+          "hash": "0a14bfecd1a182e8a1660098431b68913043a5a9e8fef17f641621181307dc43",
+          "path": "instruments/role-set.md"
+        },
+        {
           "hash": "cf47c99f6b265af9a0c29c0d4d3b3b8156196d1d2fc8761a924c57dee25c98aa",
           "path": "instruments/study-swarm.md"
         },
         {
           "hash": "1152d37e13572b661817a20338c99a4824f74deed01c8e5160ab798417d105ee",
           "path": "instruments/sung-exemplar-method.md"
+        },
+        {
+          "hash": "7705cc97bbde843c17fa0186e55a2f2a388c15b44f540d71f345dfcafc971fe1",
+          "path": "instruments/switchyard.md"
+        },
+        {
+          "hash": "6630ca834c9a392f33d99b8eb746659eb091394e77c34db3eb5072777f1454b6",
+          "path": "instruments/testing-os.md"
         },
         {
           "hash": "a59530cf9bf31af9680b3808d703ddc63cd5c59b18de3aac3dda0927c37952b1",
@@ -1769,7 +2756,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "bc8a9b5d39f53563713bfd53e8687ac409c71086974b0e223d159ac9909a670a",
+          "hash": "8e32ac2e2ca1d5b2bf8835903f56ccfba243d7fa1e7ed90dc62ef6075de2fa45",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -2619,7 +3606,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "c062890e68813410c11a3ea4840ecc8291e3d09db69b0cf0927f8301c6f8cfc4",
+          "hash": "b32b66c86d2da7862ef770b134a27fe9986cce0b42d8b86aa2d3c04bda43f48e",
           "path": "CHANGELOG.md"
         },
         {
@@ -2647,7 +3634,7 @@
           "path": "README.ja.md"
         },
         {
-          "hash": "a79f45d92f39b833fd150bdba8a07dbc3ffd4b5ac305c2a816446abc3225d549",
+          "hash": "16c5ed971a72ace2d50c2673b30ac3bd4d4d30f4b09c6c9f84b68755f4ea600f",
           "path": "README.md"
         },
         {
@@ -2714,7 +3701,7 @@
       "externals": 0,
       "files": [
         {
-          "hash": "d07b30860a5b04dc7f0b8fb6bbd1f9e5ef68e1eeb567fe949a8dbda1a7ebb3a3",
+          "hash": "790ac461e89666b9cb788b6413b66177ce867294232c24dcbacd75d416e5726b",
           "path": "site/astro.config.mjs"
         },
         {
@@ -2726,6 +3713,74 @@
           "path": "site/package.json"
         },
         {
+          "hash": "4cf201aac16382ad422bb978b1d231ba284bee45857281585a7c7d7e86264813",
+          "path": "site/public/charts/calibration-grounded.svg"
+        },
+        {
+          "hash": "632dfead0cbc95cb68b0b07721ed359c3e6ab206846e460212bc6ee23527305e",
+          "path": "site/public/charts/calibration-reasoning.svg"
+        },
+        {
+          "hash": "e247acd6efeccc978ecf589368299b351c560ac73a65a07c84f40728f3d81df6",
+          "path": "site/public/charts/cuda-graphs.svg"
+        },
+        {
+          "hash": "cf26a1f6e2bad29d33d0c3ef1d22506075801bb3fc262019c149bc090085cbbe",
+          "path": "site/public/charts/cuda-kev-band.svg"
+        },
+        {
+          "hash": "adb038b29668684f73885dd88bf2ea77f99318957d1c9404378a6d9113b5ab4c",
+          "path": "site/public/charts/cuda-probe.svg"
+        },
+        {
+          "hash": "9e728527daf81b6590071441b0c136579bf941c0dea2ae6eb6411b34ead6c326",
+          "path": "site/public/charts/e4b-igpu-latency.svg"
+        },
+        {
+          "hash": "f16a98f31a37d4b4b939b97266d28f3fa0d5ba511d9c4cb7f546ed29c38625ae",
+          "path": "site/public/charts/e4b-pilot-clock.svg"
+        },
+        {
+          "hash": "1ad7620c2e657da7339ab996752a5ac8be65388661dadc2ef3d3aee5db0a8d2b",
+          "path": "site/public/charts/e4b-triplet-effects.svg"
+        },
+        {
+          "hash": "9eac5848dcd2af87a0ff2a23d15216d9298d935a0a9e94411f383d1d1b77a3ea",
+          "path": "site/public/charts/e4b-verdict.svg"
+        },
+        {
+          "hash": "62da7d5aaa530001e06e45619a0830ba52b30136960ea489a8ad870a3853bb92",
+          "path": "site/public/charts/error-lean.svg"
+        },
+        {
+          "hash": "42faeeee21377286ae0afc0bcc7f4a55f902bfbe05a9d41042bfcff6ee54d0f7",
+          "path": "site/public/charts/loop-repeats.svg"
+        },
+        {
+          "hash": "a37469574167e77310139fe648a0815056c8e1be6fb53dceb71771e7d92a0657",
+          "path": "site/public/charts/math-ladder.svg"
+        },
+        {
+          "hash": "719322220fe7796e5174c0229b20f99677403104b93fff598b77bf1420a161c3",
+          "path": "site/public/charts/npu-vs-cpu.svg"
+        },
+        {
+          "hash": "8135efa8483a0544562c094aa6ffe937b5dad7277bb11633f2cb6f908ace8ba5",
+          "path": "site/public/charts/reasoning-default.svg"
+        },
+        {
+          "hash": "4f81e4436e37fd793f1b07ae5a81ccd151c77efde1b6939002c90a4ad2848e21",
+          "path": "site/public/charts/thinking-off-vs-on.svg"
+        },
+        {
+          "hash": "750269f8921527796fa86f28b8484beaf58de1226c458eaea168a647bbdc46ef",
+          "path": "site/public/charts/vocal-pitch.svg"
+        },
+        {
+          "hash": "916d59af421b45c34cb293ce9fc2265dcaebb9f1693b6f90519a1e7978370698",
+          "path": "site/public/charts/vocal-timing.svg"
+        },
+        {
           "hash": "7c0493f268a2eef0ac8c3d3209e45dd6836c644dc78164b0e24b66114ff5f8e0",
           "path": "site/public/favicon.svg"
         },
@@ -2735,8 +3790,52 @@
         },
         {
           "constantOnly": true,
-          "hash": "ee756dfba4122d2acc94a39b2555d9f200fff56a87a8c0b10f9cd01df26a8b62",
+          "hash": "536acb0779d44c58de4b4f23283ab10e6f262bce7be1e03ff8c368c3f5bd4b8b",
           "path": "site/src/content.config.ts"
+        },
+        {
+          "hash": "161133f10d6bbd7e956f09fb803dc2f5db8fc17adc4b650e496f1354760ddfb5",
+          "path": "site/src/content/docs/briefs/arrangement-costs.md"
+        },
+        {
+          "hash": "db1b291b42a500df1f4229d6612e2b3e428b95607aa90ce3420be91bf0dfa0a3",
+          "path": "site/src/content/docs/briefs/cuda-13-4.md"
+        },
+        {
+          "hash": "de885e44f238c6ad445d2f5772a5b54853689cb31b44f4d1dc0528f1b00eaaec",
+          "path": "site/src/content/docs/briefs/index.md"
+        },
+        {
+          "hash": "475207c2b37970a78435b5f0e4633fde52d18dbd3355d8c12e8bef8461fbff0a",
+          "path": "site/src/content/docs/briefs/intel-npu.md"
+        },
+        {
+          "hash": "5d43e9c5e327f825b8be53823d65b40f8db68a560edbd4b028a0665f02106c89",
+          "path": "site/src/content/docs/briefs/local-translation-quality.md"
+        },
+        {
+          "hash": "7bb02fb80e06c1e298caf8af330bb72f0204d8281833fa6c263ac575af9bb653",
+          "path": "site/src/content/docs/briefs/making-thinking-cheaper.md"
+        },
+        {
+          "hash": "40537be7fab53d40413ed821978c8c644c4933fd2f3f7d944e201d7e14203648",
+          "path": "site/src/content/docs/briefs/math-ladder.md"
+        },
+        {
+          "hash": "ae9d7d1499277b6dff6107d99835c0bea8081670b45df4943b510884c46b2b20",
+          "path": "site/src/content/docs/briefs/reading-training-geometry.md"
+        },
+        {
+          "hash": "ad216da8651a29c0de86e51365c7753861466fc336efdd3eb2d738cfecad5ec4",
+          "path": "site/src/content/docs/briefs/sung-vocal-timing-and-pitch.md"
+        },
+        {
+          "hash": "b696c036b39e0af7d42af5b6de20294bd031ce09e759c3199a2f512372dcbe84",
+          "path": "site/src/content/docs/briefs/verifier-calibration.md"
+        },
+        {
+          "hash": "ad3db58c31b09fe658937909b173ba2295206a78a379dd5a1fc2fe76401ce87a",
+          "path": "site/src/content/docs/briefs/verifier-training-data.md"
         },
         {
           "hash": "e1233d36de2bdd75dde301739a533831a3ffdd0fbf0e42a7b047e01165cc907f",
@@ -2767,7 +3866,23 @@
           "path": "site/src/content/docs/handbook/security.md"
         },
         {
-          "hash": "4fb84a646c4d833c33f4058e1ed1775849e855c65e5adb7e45d2a633674bd603",
+          "hash": "739f7eeac3dc427c356118e656172d970856dfcf47ae7393d51614513a496e52",
+          "path": "site/src/content/docs/newsletter/issue-01.md"
+        },
+        {
+          "hash": "32932dff0fd6543bd1beac77687499ed6ef9782c9ccb3fd024db62216159b3c4",
+          "path": "site/src/content/docs/newsletter/issue-02.md"
+        },
+        {
+          "hash": "1bfcf8e5cd1155a81f95efbff6bcf88737e06e3e2dc878d66b1d578d4970c425",
+          "path": "site/src/content/docs/newsletter/issue-03.md"
+        },
+        {
+          "hash": "e6c37c66f681b5d2eab637d02c670e3cc506852b0101c61de3ed458686cd4f56",
+          "path": "site/src/content/docs/newsletter/issue-04.md"
+        },
+        {
+          "hash": "fae20c2d26c08c2d6ad8f8ad43ec0e47977c8c1b1f322177792085de911896e4",
           "importOrder": [
             "site/src/styles/global.css",
             "site/src/site-config.ts"
@@ -2801,7 +3916,7 @@
       ],
       "importConfidence": "full",
       "name": "site",
-      "origin": "authored",
+      "origin": "mixed",
       "role": "docs",
       "testedBy": 0,
       "unresolvedSites": 0
@@ -2860,6 +3975,17 @@
             "experiments/verifier-gold/math-ladder/report.py"
           ],
           "path": "tests/test_distill_step0_properties.py",
+          "testFramework": "unittest"
+        },
+        {
+          "exports": [
+            "load_charts"
+          ],
+          "hash": "63062a069e764d82f74c866dff0029785300ca3009ab09362f4b71c9db692b61",
+          "importsFiles": [
+            "experiments/charts/make_charts.py"
+          ],
+          "path": "tests/test_e4b_charts.py",
           "testFramework": "unittest"
         },
         {
@@ -3042,7 +4168,9 @@
       ],
       "landings": [
         "entries",
-        "instruments"
+        "experiments/charts",
+        "instruments",
+        "site/public/charts"
       ],
       "mentions": [],
       "name": "CI",
@@ -3070,16 +4198,16 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 7
+          "files": 8
         },
         {
           "boundary": "experiments",
           "depth": 1,
           "enters": {
-            "file": "experiments/verifier-gold/math-ladder/generate.py",
-            "from": "tests/test_math_ladder_properties.py"
+            "file": "experiments/charts/make_charts.py",
+            "from": "tests/test_e4b_charts.py"
           },
-          "files": 1
+          "files": 2
         }
       ],
       "readers": [
@@ -3160,7 +4288,7 @@
         },
         {
           "coverage": true,
-          "files": 7,
+          "files": 8,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -3590,8 +4718,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "4abb0ee7e2a36fa1097fd38281e8e97fcdbb8957",
-    "tracked": 318
+    "commit": "e594570277592e85d0b2cf17be0f45b7b2741c0f",
+    "tracked": 525
   },
   "landings": [
     {
@@ -3705,6 +4833,124 @@
       "writers": []
     },
     {
+      "readers": [],
+      "target": "experiments/charts",
+      "writers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "confidence": "ast"
+        }
+      ]
+    },
+    {
+      "readers": [],
+      "target": "experiments/charts/manifest.json",
+      "writers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "confidence": "ast",
+          "unless": [
+            "main"
+          ]
+        }
+      ]
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/cloud-cu134/results",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/cloud-cu134/results/2026-10-08-a100-compat.log",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/cloud-cu134/results/2026-10-08-a100-probe.log",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/cloud-cu134/results/2026-10-08-b200-compat.log",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/cuda-graphs/results/2026-10-08-llama.json",
+      "writers": []
+    },
+    {
       "readers": [
         {
           "by": "experiments/data-designer/studio_lock.py",
@@ -3780,6 +5026,109 @@
         }
       ],
       "target": "experiments/distill-ladder/dedupe.py",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "glob",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/e4b/results",
+      "writers": [
+        {
+          "by": "experiments/e4b/extract.py",
+          "confidence": "ast"
+        }
+      ]
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        },
+        {
+          "by": "tests/test_e4b_charts.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/e4b/results/block-2.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        },
+        {
+          "by": "tests/test_e4b_charts.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/e4b/results/block-3.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        },
+        {
+          "by": "tests/test_e4b_charts.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/e4b/results/pilot.json",
+      "writers": [
+        {
+          "by": "experiments/e4b/extract.py",
+          "confidence": "ast"
+        }
+      ]
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/kev-judge-finetune/env/README.md",
       "writers": []
     },
     {
@@ -4047,6 +5396,59 @@
     {
       "readers": [
         {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/npu-probe/results",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/npu-probe/results/2026-10-09-health-after-e1-loss.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/npu-probe/results/2026-10-09-probe.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "experiments/verifier-gold/calibration/difficulty.py",
           "call": "read_text",
           "confidence": "ast"
@@ -4070,6 +5472,545 @@
         }
       ],
       "target": "experiments/verifier-gold/calibration/difficulty.py",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/verifier-gold/calibration/thinking_policy_replay.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/verifier-gold/calibration/thinking_policy_replay.py",
+          "call": "read_text",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "glob",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "weak"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/verifier-gold/calibration/error_lean_posthoc.py",
+          "call": "glob.glob",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-*/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-grounded-tune/metrics.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-grounded-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-reasoning-tune/metrics.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-reasoning-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-grounded-tune/metrics.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-grounded-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-reasoning-tune/metrics.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-reasoning-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-grounded-tune/metrics.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-grounded-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-reasoning-tune/metrics.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-reasoning-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-grounded-tune/metrics.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-grounded-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-reasoning-tune/metrics.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-reasoning-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-grounded-tune/metrics.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-grounded-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-reasoning-tune/metrics.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-reasoning-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-grounded-tune/metrics.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-grounded-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-reasoning-tune/metrics.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-reasoning-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "weak"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-grounded-tune",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-grounded-tune/metrics.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-grounded-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-heldout",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-heldout/metrics.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-tune",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-tune/metrics.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/loop-repeats.txt",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "weak"
+        },
+        {
+          "by": "experiments/verifier-gold/calibration/thinking_policy_replay.py",
+          "call": "read_text",
+          "confidence": "weak"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-grounded-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-reasoning-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-grounded-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-reasoning-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-grounded-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-reasoning-tune/verdicts.jsonl",
       "writers": []
     },
     {
@@ -4127,6 +6068,49 @@
     {
       "readers": [
         {
+          "by": "experiments/verifier-gold/calibration/quote_match_posthoc.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/verifier-gold/leakage_check.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/reasoning-diffs.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/verifier-gold/calibration/quote_match_posthoc.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/verifier-gold/leakage_check.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/verifier-gold/grounded.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "tests/test_math_ladder_properties.py",
           "call": "literal",
           "confidence": "ast",
@@ -4138,6 +6122,26 @@
     },
     {
       "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        },
+        {
+          "by": "experiments/verifier-gold/math-ladder/arith_floor_posthoc.py",
+          "call": "open",
+          "confidence": "ast"
+        },
         {
           "by": "experiments/verifier-gold/math-ladder/report.py",
           "call": "read_text",
@@ -4163,6 +6167,165 @@
         }
       ],
       "target": "experiments/verifier-gold/math-ladder/report.py",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "weak"
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-gemma4_31b/manifest.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-gemma4_31b/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-granite4.1_30b/manifest.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-granite4.1_30b/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-llama3.1_8b/manifest.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-llama3.1_8b/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-mistral-small_24b/manifest.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-mistral-small_24b/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_14b/manifest.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_14b/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_8b/manifest.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_8b/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/verifier-gold/calibration/quote_match_posthoc.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/verifier-gold/leakage_check.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/verifier-gold/prs/grounded-prs.jsonl",
       "writers": []
     },
     {
@@ -4206,6 +6369,16 @@
       "writers": []
     },
     {
+      "readers": [],
+      "target": "site/public/charts",
+      "writers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "confidence": "ast"
+        }
+      ]
+    },
+    {
       "readers": [
         {
           "by": "site/astro.config.mjs",
@@ -4224,46 +6397,39 @@
           "confidence": "ast"
         }
       ],
+      "target": "site/src/content/docs/briefs",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/astro.config.mjs",
+          "call": "autogenerate",
+          "confidence": "ast"
+        }
+      ],
       "target": "site/src/content/docs/handbook",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/astro.config.mjs",
+          "call": "autogenerate",
+          "confidence": "ast"
+        }
+      ],
+      "target": "site/src/content/docs/newsletter",
       "writers": []
     }
   ],
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 9,
+  "testFiles": 10,
   "testsNotRun": [
     "experiments/cuda-graphs/test_graphed_heads.py",
     "experiments/data-designer/tests/test_lockdown.py"
   ],
-  "unassigned": [
-    {
-      "hash": "c88d17bd3628d954610d2250bbbf674a9b69f19847b6bdbf80a04980379ab025",
-      "path": "datapacks/hymn-arrangements/datapack.json"
-    },
-    {
-      "hash": "cab4f09c4ee44b30fc8a019798ec94a655de017868b99139777aa05f90a4dff2",
-      "path": "datapacks/hymn-arrangements/hosted.json"
-    },
-    {
-      "hash": "d3f9fee884f3adfa8cac63249bf98bde66e65a6048c7ab67ad1d450b52a7b9b4",
-      "path": "datapacks/hymn-arrangements/spec.json"
-    },
-    {
-      "hash": "be1859e9a9d41d63b0d5a908673e95e21e7091255b0b01876f5a95e0c3eda61f",
-      "path": "datapacks/natural-errors/CARD.md"
-    },
-    {
-      "hash": "84ac75f84534f2cf8c741ffeab96fc41396e6e81a0522e08191f27e5cdcbc5a9",
-      "path": "datapacks/natural-errors/datapack.json"
-    },
-    {
-      "hash": "0007219aade5cf68d37cdca1adeac8f65347fa4dc72e3592c0ce9bd32e168b9a",
-      "path": "datapacks/natural-errors/hosted.json"
-    },
-    {
-      "hash": "beddc69850a713e4d2e031f8063fee9cf0c1f9365bd40c9fff84a5738d68bc1d",
-      "path": "datapacks/natural-errors/spec.json"
-    }
-  ]
+  "unassigned": []
 }

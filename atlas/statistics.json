@@ -64,6 +64,22 @@
       "cohesionDropped": false,
       "confidence": "low",
       "highWater": null,
+      "name": "datapacks",
+      "qualifyingSourceCommits": 0,
+      "rebaseline": null
+    },
+    {
+      "breakage": {
+        "coChangesOnly": [],
+        "collapsed": false,
+        "confidence": "low",
+        "importsAndCoChanges": [],
+        "importsOnly": []
+      },
+      "cohesion": null,
+      "cohesionDropped": false,
+      "confidence": "low",
+      "highWater": null,
       "name": "docs",
       "qualifyingSourceCommits": 0,
       "rebaseline": null
@@ -96,10 +112,10 @@
       },
       "cohesion": null,
       "cohesionDropped": false,
-      "confidence": "low",
+      "confidence": "full",
       "highWater": null,
       "name": "experiments",
-      "qualifyingSourceCommits": 28,
+      "qualifyingSourceCommits": 42,
       "rebaseline": null
     },
     {
@@ -134,7 +150,7 @@
       "confidence": "full",
       "highWater": null,
       "name": "mcptoolshop_rnd",
-      "qualifyingSourceCommits": 76,
+      "qualifyingSourceCommits": 284,
       "rebaseline": null
     },
     {
@@ -200,7 +216,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "tests",
-      "qualifyingSourceCommits": 9,
+      "qualifyingSourceCommits": 11,
       "rebaseline": null
     }
   ],
@@ -243,8 +259,8 @@
         "path": ".gitignore"
       },
       {
-        "commits": 104,
-        "lines": 642,
+        "commits": 315,
+        "lines": 1731,
         "path": "CHANGELOG.md"
       },
       {
@@ -278,8 +294,8 @@
         "path": "README.ja.md"
       },
       {
-        "commits": 7,
-        "lines": 294,
+        "commits": 8,
+        "lines": 300,
         "path": "README.md"
       },
       {
@@ -308,28 +324,28 @@
         "path": "SHIP_GATE.md"
       },
       {
-        "commits": 10,
-        "lines": 334,
+        "commits": 11,
+        "lines": 354,
         "path": "atlas/README.md"
       },
       {
-        "commits": 2,
-        "lines": 50,
+        "commits": 3,
+        "lines": 54,
         "path": "atlas/boundaries.yaml"
       },
       {
-        "commits": 10,
-        "lines": 1136,
+        "commits": 11,
+        "lines": 1193,
         "path": "atlas/page.json"
       },
       {
-        "commits": 10,
-        "lines": 2818,
+        "commits": 11,
+        "lines": 2886,
         "path": "atlas/statistics.json"
       },
       {
-        "commits": 10,
-        "lines": 4827,
+        "commits": 11,
+        "lines": 4919,
         "path": "atlas/structure.json"
       },
       {
@@ -629,8 +645,158 @@
       },
       {
         "commits": 1,
+        "lines": 160,
+        "path": "entries/2026/2026-10-09-making-thinking-cheaper-study-swarm.md"
+      },
+      {
+        "commits": 1,
+        "lines": 38,
+        "path": "entries/2026/2026-10-12-device-runs-from-clean-worktree.md"
+      },
+      {
+        "commits": 1,
+        "lines": 60,
+        "path": "entries/2026/2026-10-12-e4-co-scheduling-inconclusive.md"
+      },
+      {
+        "commits": 1,
+        "lines": 41,
+        "path": "entries/2026/2026-10-12-e4-npu-static-shape.md"
+      },
+      {
+        "commits": 2,
+        "lines": 99,
+        "path": "entries/2026/2026-10-12-e4b-block-2.md"
+      },
+      {
+        "commits": 2,
+        "lines": 55,
+        "path": "entries/2026/2026-10-12-ollama-num-predict-zero-is-no-limit.md"
+      },
+      {
+        "commits": 1,
+        "lines": 51,
+        "path": "entries/2026/2026-10-12-prefix-fit-count-cost.md"
+      },
+      {
+        "commits": 2,
+        "lines": 63,
+        "path": "entries/2026/2026-10-12-test-fakes-hide-the-platform.md"
+      },
+      {
+        "commits": 1,
+        "lines": 38,
+        "path": "entries/2026/2026-10-12-windows-26340-listener-state-closed.md"
+      },
+      {
+        "commits": 1,
+        "lines": 52,
+        "path": "entries/2026/2026-10-13-atlas-testing-os-rnd-buildup.md"
+      },
+      {
+        "commits": 1,
+        "lines": 72,
+        "path": "entries/2026/2026-10-13-e5-fill-card.md"
+      },
+      {
+        "commits": 1,
         "lines": 30,
         "path": "entries/_template.md"
+      },
+      {
+        "commits": 2,
+        "lines": 133,
+        "path": "experiments/charts/calibration-grounded.svg"
+      },
+      {
+        "commits": 2,
+        "lines": 133,
+        "path": "experiments/charts/calibration-reasoning.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 47,
+        "path": "experiments/charts/cuda-graphs.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 42,
+        "path": "experiments/charts/cuda-kev-band.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 65,
+        "path": "experiments/charts/cuda-probe.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 58,
+        "path": "experiments/charts/e4b-igpu-latency.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 66,
+        "path": "experiments/charts/e4b-pilot-clock.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 95,
+        "path": "experiments/charts/e4b-triplet-effects.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 52,
+        "path": "experiments/charts/e4b-verdict.svg"
+      },
+      {
+        "commits": 2,
+        "lines": 174,
+        "path": "experiments/charts/error-lean.svg"
+      },
+      {
+        "commits": 2,
+        "lines": 69,
+        "path": "experiments/charts/loop-repeats.svg"
+      },
+      {
+        "commits": 3,
+        "lines": 1087,
+        "path": "experiments/charts/make_charts.py"
+      },
+      {
+        "commits": 3,
+        "lines": 281,
+        "path": "experiments/charts/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 91,
+        "path": "experiments/charts/math-ladder.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 57,
+        "path": "experiments/charts/npu-vs-cpu.svg"
+      },
+      {
+        "commits": 2,
+        "lines": 96,
+        "path": "experiments/charts/reasoning-default.svg"
+      },
+      {
+        "commits": 2,
+        "lines": 135,
+        "path": "experiments/charts/thinking-off-vs-on.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 812,
+        "path": "experiments/charts/vocal-pitch.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 108,
+        "path": "experiments/charts/vocal-timing.svg"
       },
       {
         "commits": 3,
@@ -683,8 +849,8 @@
         "path": "experiments/cloud-cu134/setup_compat.sh"
       },
       {
-        "commits": 5,
-        "lines": 129,
+        "commits": 6,
+        "lines": 137,
         "path": "experiments/cuda-graphs/README.md"
       },
       {
@@ -788,9 +954,39 @@
         "path": "experiments/data-designer/tests/test_lockdown.py"
       },
       {
-        "commits": 5,
-        "lines": 381,
+        "commits": 8,
+        "lines": 401,
         "path": "experiments/distill-ladder/PLAN.md"
+      },
+      {
+        "commits": 1,
+        "lines": 77,
+        "path": "experiments/distill-ladder/dedupe.py"
+      },
+      {
+        "commits": 1,
+        "lines": 72,
+        "path": "experiments/e4b/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 297,
+        "path": "experiments/e4b/extract.py"
+      },
+      {
+        "commits": 1,
+        "lines": 494,
+        "path": "experiments/e4b/results/block-2.json"
+      },
+      {
+        "commits": 1,
+        "lines": 308,
+        "path": "experiments/e4b/results/block-3.json"
+      },
+      {
+        "commits": 1,
+        "lines": 32,
+        "path": "experiments/e4b/results/pilot.json"
       },
       {
         "commits": 5,
@@ -1059,6 +1255,21 @@
       },
       {
         "commits": 1,
+        "lines": 80,
+        "path": "experiments/npu-probe/results/2026-10-09-health-after-e1-loss.json"
+      },
+      {
+        "commits": 1,
+        "lines": 80,
+        "path": "experiments/npu-probe/results/2026-10-09-health-after-e1-rerun2.json"
+      },
+      {
+        "commits": 1,
+        "lines": 80,
+        "path": "experiments/npu-probe/results/2026-10-09-health-before-e1-rerun.json"
+      },
+      {
+        "commits": 1,
         "lines": 68,
         "path": "experiments/npu-probe/results/2026-10-09-mac-chain.json"
       },
@@ -1178,8 +1389,38 @@
         "path": "experiments/openjev-vs-jev/run_openjev.py"
       },
       {
-        "commits": 7,
-        "lines": 174,
+        "commits": 62,
+        "lines": 486,
+        "path": "experiments/stage1-role-eval/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 74,
+        "path": "experiments/stage1-role-eval/power.py"
+      },
+      {
+        "commits": 1,
+        "lines": 53,
+        "path": "experiments/stage1-role-eval/power_empirical.py"
+      },
+      {
+        "commits": 1,
+        "lines": 9,
+        "path": "experiments/stage1-role-eval/results/2026-10-10-power-empirical.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 34,
+        "path": "experiments/stage1-role-eval/results/2026-10-10-power.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/stage1-role-eval/results/2026-10-10-sealed-baseline-k.json"
+      },
+      {
+        "commits": 9,
+        "lines": 253,
         "path": "experiments/verifier-gold/README.md"
       },
       {
@@ -1233,8 +1474,8 @@
         "path": "experiments/verifier-gold/build_grounded.py"
       },
       {
-        "commits": 8,
-        "lines": 124,
+        "commits": 29,
+        "lines": 743,
         "path": "experiments/verifier-gold/calibration/README.md"
       },
       {
@@ -1243,14 +1484,324 @@
         "path": "experiments/verifier-gold/calibration/candidates.txt"
       },
       {
-        "commits": 3,
-        "lines": 51,
+        "commits": 6,
+        "lines": 68,
         "path": "experiments/verifier-gold/calibration/chain_step.sh"
       },
       {
-        "commits": 2,
-        "lines": 130,
+        "commits": 4,
+        "lines": 149,
         "path": "experiments/verifier-gold/calibration/difficulty.py"
+      },
+      {
+        "commits": 1,
+        "lines": 27,
+        "path": "experiments/verifier-gold/calibration/error_lean_posthoc.py"
+      },
+      {
+        "commits": 1,
+        "lines": 27,
+        "path": "experiments/verifier-gold/calibration/loop_repeats_posthoc.py"
+      },
+      {
+        "commits": 1,
+        "lines": 64,
+        "path": "experiments/verifier-gold/calibration/quote_match_posthoc.py"
+      },
+      {
+        "commits": 1,
+        "lines": 2468,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-grounded-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 576,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-grounded-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 270,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-grounded-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2040,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-reasoning-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 454,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-reasoning-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 223,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-reasoning-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2468,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-grounded-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 576,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-grounded-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 270,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-grounded-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2040,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-reasoning-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 452,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-reasoning-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 223,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-granite4.1_30b-reasoning-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2468,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-grounded-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 574,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-grounded-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 270,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-grounded-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2040,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-reasoning-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 454,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-reasoning-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 223,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-llama3.1_8b-reasoning-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2471,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-grounded-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 574,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-grounded-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 269,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-grounded-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2042,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-reasoning-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 452,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-reasoning-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 223,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-mistral-small_24b-reasoning-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2468,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-grounded-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 574,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-grounded-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 270,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-grounded-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2040,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-reasoning-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 452,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-reasoning-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 223,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_14b-reasoning-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2468,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-grounded-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 576,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-grounded-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 270,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-grounded-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2040,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-reasoning-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 454,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-reasoning-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 223,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-qwen3_8b-reasoning-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 55,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/chain-1-llama3.1_8b.log"
+      },
+      {
+        "commits": 1,
+        "lines": 56,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/chain-2-qwen3_8b.log"
+      },
+      {
+        "commits": 1,
+        "lines": 56,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/chain-3-qwen3_14b.log"
+      },
+      {
+        "commits": 1,
+        "lines": 56,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/chain-4-mistral-small_24b.log"
+      },
+      {
+        "commits": 1,
+        "lines": 55,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/chain-4b-mistral-resume.log"
+      },
+      {
+        "commits": 1,
+        "lines": 56,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/chain-5-granite4.1_30b.log"
+      },
+      {
+        "commits": 1,
+        "lines": 2,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/chain-6-gemma4_31b-low.log"
+      },
+      {
+        "commits": 1,
+        "lines": 56,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/chain-6-gemma4_31b.log"
+      },
+      {
+        "commits": 1,
+        "lines": 90,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/difficulty-report.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 26,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/error-lean-posthoc.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 37,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-chain/quote-match-posthoc.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 2469,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-grounded-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 577,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-grounded-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 270,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-grounded-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2158,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-heldout/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 453,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-heldout/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 236,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-heldout/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2041,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 453,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 223,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 4,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/loop-repeats.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 29,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/run-heldout.log"
+      },
+      {
+        "commits": 1,
+        "lines": 55,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/run.log"
       },
       {
         "commits": 1,
@@ -1258,8 +1809,173 @@
         "path": "experiments/verifier-gold/calibration/results/2026-10-09-smoke.log"
       },
       {
-        "commits": 2,
+        "commits": 1,
+        "lines": 2489,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-grounded-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 594,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-grounded-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 270,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-grounded-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2061,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-reasoning-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 474,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-reasoning-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 223,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-gemma4_31b-reasoning-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2487,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-grounded-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 594,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-grounded-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 270,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-grounded-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2059,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-reasoning-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 472,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-reasoning-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 223,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_14b-reasoning-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2487,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-grounded-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 594,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-grounded-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 270,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-grounded-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2059,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-reasoning-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 474,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-reasoning-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 223,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-reasoning-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 55,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/step-1-qwen3_8b.log"
+      },
+      {
+        "commits": 1,
+        "lines": 56,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/step-2-qwen3_14b.log"
+      },
+      {
+        "commits": 1,
+        "lines": 56,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/step-3-gemma4_31b.log"
+      },
+      {
+        "commits": 1,
         "lines": 30,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/step-3b-gemma4_31b-resume.log"
+      },
+      {
+        "commits": 1,
+        "lines": 8,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/thinking-policy-replay.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 2487,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/off-cal-nemotron-3.5-lightning_latest-grounded-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 594,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/off-cal-nemotron-3.5-lightning_latest-grounded-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 270,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/off-cal-nemotron-3.5-lightning_latest-grounded-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 2063,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/off-cal-nemotron-3.5-lightning_latest-reasoning-tune/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 474,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/off-cal-nemotron-3.5-lightning_latest-reasoning-tune/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 223,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/off-cal-nemotron-3.5-lightning_latest-reasoning-tune/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 55,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/step-1-off.log"
+      },
+      {
+        "commits": 1,
+        "lines": 29,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/step-1b-off-resume.log"
+      },
+      {
+        "commits": 1,
+        "lines": 27,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/step-2-on-STOPPED.log"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/step-2-on.log"
+      },
+      {
+        "commits": 5,
+        "lines": 49,
         "path": "experiments/verifier-gold/calibration/run_model.sh"
       },
       {
@@ -1271,6 +1987,11 @@
         "commits": 3,
         "lines": 21,
         "path": "experiments/verifier-gold/calibration/smoke_all.sh"
+      },
+      {
+        "commits": 1,
+        "lines": 78,
+        "path": "experiments/verifier-gold/calibration/thinking_policy_replay.py"
       },
       {
         "commits": 1,
@@ -1448,9 +2169,19 @@
         "path": "experiments/verifier-gold/grounded.jsonl"
       },
       {
-        "commits": 1,
-        "lines": 58,
+        "commits": 3,
+        "lines": 189,
+        "path": "experiments/verifier-gold/leakage_check.py"
+      },
+      {
+        "commits": 2,
+        "lines": 116,
         "path": "experiments/verifier-gold/math-ladder/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 43,
+        "path": "experiments/verifier-gold/math-ladder/arith_floor_posthoc.py"
       },
       {
         "commits": 2,
@@ -1463,14 +2194,154 @@
         "path": "experiments/verifier-gold/math-ladder/ladder.jsonl"
       },
       {
-        "commits": 1,
-        "lines": 28,
+        "commits": 2,
+        "lines": 37,
         "path": "experiments/verifier-gold/math-ladder/ladder_step.sh"
       },
       {
-        "commits": 1,
-        "lines": 70,
+        "commits": 3,
+        "lines": 136,
         "path": "experiments/verifier-gold/math-ladder/report.py"
+      },
+      {
+        "commits": 1,
+        "lines": 34,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/arith-floor-posthoc.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 7053,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-gemma4_31b/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 210,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-gemma4_31b/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 780,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-gemma4_31b/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 7053,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-granite4.1_30b/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 208,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-granite4.1_30b/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 780,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-granite4.1_30b/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 7053,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-llama3.1_8b/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 210,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-llama3.1_8b/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 780,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-llama3.1_8b/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 7055,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-mistral-small_24b/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 210,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-mistral-small_24b/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 779,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-mistral-small_24b/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 7053,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_14b/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 210,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_14b/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 780,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_14b/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 7053,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_8b/manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 210,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_8b/metrics.json"
+      },
+      {
+        "commits": 1,
+        "lines": 780,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/ladder-qwen3_8b/verdicts.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 174,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/report-final-verdict.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 174,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/report-model-verdict.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 44,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/rnd-ladder-1-llama3.1_8b.log"
+      },
+      {
+        "commits": 1,
+        "lines": 45,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/rnd-ladder-2-qwen3_8b.log"
+      },
+      {
+        "commits": 1,
+        "lines": 45,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/rnd-ladder-3-qwen3_14b.log"
+      },
+      {
+        "commits": 1,
+        "lines": 17,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/rnd-ladder-4-mistral-small_24b.log"
+      },
+      {
+        "commits": 1,
+        "lines": 25,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/rnd-ladder-4b-mistral-resume.log"
+      },
+      {
+        "commits": 1,
+        "lines": 45,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/rnd-ladder-5-granite4.1_30b.log"
+      },
+      {
+        "commits": 1,
+        "lines": 45,
+        "path": "experiments/verifier-gold/math-ladder/results/2026-10-09-ladder/rnd-ladder-6-gemma4_31b.log"
       },
       {
         "commits": 1,
@@ -1543,6 +2414,11 @@
         "path": "instruments/aspire-si.md"
       },
       {
+        "commits": 3,
+        "lines": 55,
+        "path": "instruments/atlas.md"
+      },
+      {
         "commits": 1,
         "lines": 21,
         "path": "instruments/cross-family-rerate.md"
@@ -1553,8 +2429,8 @@
         "path": "instruments/engine-room.md"
       },
       {
-        "commits": 2,
-        "lines": 40,
+        "commits": 8,
+        "lines": 101,
         "path": "instruments/intel-npu.md"
       },
       {
@@ -1563,8 +2439,8 @@
         "path": "instruments/nvidia-skill-finder.md"
       },
       {
-        "commits": 1,
-        "lines": 21,
+        "commits": 8,
+        "lines": 99,
         "path": "instruments/offrig.md"
       },
       {
@@ -1598,6 +2474,11 @@
         "path": "instruments/research-packs.md"
       },
       {
+        "commits": 44,
+        "lines": 408,
+        "path": "instruments/role-set.md"
+      },
+      {
         "commits": 1,
         "lines": 21,
         "path": "instruments/study-swarm.md"
@@ -1608,13 +2489,23 @@
         "path": "instruments/sung-exemplar-method.md"
       },
       {
+        "commits": 73,
+        "lines": 442,
+        "path": "instruments/switchyard.md"
+      },
+      {
+        "commits": 1,
+        "lines": 50,
+        "path": "instruments/testing-os.md"
+      },
+      {
         "commits": 1,
         "lines": 21,
         "path": "instruments/web-research.md"
       },
       {
-        "commits": 76,
-        "lines": 153,
+        "commits": 285,
+        "lines": 571,
         "path": "mcptoolshop_rnd/__init__.py"
       },
       {
@@ -1728,8 +2619,8 @@
         "path": "rnd/store.py"
       },
       {
-        "commits": 1,
-        "lines": 36,
+        "commits": 2,
+        "lines": 46,
         "path": "site/astro.config.mjs"
       },
       {
@@ -1744,6 +2635,91 @@
       },
       {
         "commits": 2,
+        "lines": 133,
+        "path": "site/public/charts/calibration-grounded.svg"
+      },
+      {
+        "commits": 2,
+        "lines": 133,
+        "path": "site/public/charts/calibration-reasoning.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 47,
+        "path": "site/public/charts/cuda-graphs.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 42,
+        "path": "site/public/charts/cuda-kev-band.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 65,
+        "path": "site/public/charts/cuda-probe.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 58,
+        "path": "site/public/charts/e4b-igpu-latency.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 66,
+        "path": "site/public/charts/e4b-pilot-clock.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 95,
+        "path": "site/public/charts/e4b-triplet-effects.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 52,
+        "path": "site/public/charts/e4b-verdict.svg"
+      },
+      {
+        "commits": 2,
+        "lines": 174,
+        "path": "site/public/charts/error-lean.svg"
+      },
+      {
+        "commits": 2,
+        "lines": 69,
+        "path": "site/public/charts/loop-repeats.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 91,
+        "path": "site/public/charts/math-ladder.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 57,
+        "path": "site/public/charts/npu-vs-cpu.svg"
+      },
+      {
+        "commits": 2,
+        "lines": 96,
+        "path": "site/public/charts/reasoning-default.svg"
+      },
+      {
+        "commits": 2,
+        "lines": 135,
+        "path": "site/public/charts/thinking-off-vs-on.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 812,
+        "path": "site/public/charts/vocal-pitch.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 108,
+        "path": "site/public/charts/vocal-timing.svg"
+      },
+      {
+        "commits": 2,
         "lines": 12,
         "path": "site/public/favicon.svg"
       },
@@ -1753,9 +2729,64 @@
         "path": "site/src/assets/logo.png"
       },
       {
-        "commits": 1,
-        "lines": 7,
+        "commits": 2,
+        "lines": 26,
         "path": "site/src/content.config.ts"
+      },
+      {
+        "commits": 1,
+        "lines": 39,
+        "path": "site/src/content/docs/briefs/arrangement-costs.md"
+      },
+      {
+        "commits": 1,
+        "lines": 67,
+        "path": "site/src/content/docs/briefs/cuda-13-4.md"
+      },
+      {
+        "commits": 1,
+        "lines": 31,
+        "path": "site/src/content/docs/briefs/index.md"
+      },
+      {
+        "commits": 2,
+        "lines": 54,
+        "path": "site/src/content/docs/briefs/intel-npu.md"
+      },
+      {
+        "commits": 1,
+        "lines": 36,
+        "path": "site/src/content/docs/briefs/local-translation-quality.md"
+      },
+      {
+        "commits": 2,
+        "lines": 58,
+        "path": "site/src/content/docs/briefs/making-thinking-cheaper.md"
+      },
+      {
+        "commits": 1,
+        "lines": 40,
+        "path": "site/src/content/docs/briefs/math-ladder.md"
+      },
+      {
+        "commits": 1,
+        "lines": 40,
+        "path": "site/src/content/docs/briefs/reading-training-geometry.md"
+      },
+      {
+        "commits": 1,
+        "lines": 63,
+        "path": "site/src/content/docs/briefs/sung-vocal-timing-and-pitch.md"
+      },
+      {
+        "commits": 2,
+        "lines": 84,
+        "path": "site/src/content/docs/briefs/verifier-calibration.md"
+      },
+      {
+        "commits": 3,
+        "lines": 79,
+        "path": "site/src/content/docs/briefs/verifier-training-data.md"
       },
       {
         "commits": 2,
@@ -1793,8 +2824,28 @@
         "path": "site/src/content/docs/handbook/security.md"
       },
       {
+        "commits": 2,
+        "lines": 83,
+        "path": "site/src/content/docs/newsletter/issue-01.md"
+      },
+      {
         "commits": 1,
-        "lines": 35,
+        "lines": 50,
+        "path": "site/src/content/docs/newsletter/issue-02.md"
+      },
+      {
+        "commits": 1,
+        "lines": 82,
+        "path": "site/src/content/docs/newsletter/issue-03.md"
+      },
+      {
+        "commits": 1,
+        "lines": 100,
+        "path": "site/src/content/docs/newsletter/issue-04.md"
+      },
+      {
+        "commits": 2,
+        "lines": 119,
         "path": "site/src/pages/index.astro"
       },
       {
@@ -1834,6 +2885,16 @@
       },
       {
         "commits": 1,
+        "lines": 207,
+        "path": "tests/test_distill_step0_properties.py"
+      },
+      {
+        "commits": 1,
+        "lines": 84,
+        "path": "tests/test_e4b_charts.py"
+      },
+      {
+        "commits": 1,
         "lines": 123,
         "path": "tests/test_math_ladder_properties.py"
       },
@@ -1863,17 +2924,17 @@
     "level": "low",
     "reason": "fewer than 25 source files reach 10 revisions in the window"
   },
-  "generatedAt": "2026-10-09T07:45:13.518Z",
+  "generatedAt": "2026-10-13T14:39:47.490Z",
   "generatedFrom": {
-    "commit": "4abb0ee7e2a36fa1097fd38281e8e97fcdbb8957"
+    "commit": "e594570277592e85d0b2cf17be0f45b7b2741c0f"
   },
   "pairs": [
     {
       "a": "CHANGELOG.md",
       "b": "mcptoolshop_rnd/__init__.py",
-      "either": 104,
-      "shared": 76,
-      "strength": 0.730769
+      "either": 314,
+      "shared": 284,
+      "strength": 0.904459
     },
     {
       "a": "README.md",
@@ -1892,43 +2953,43 @@
     {
       "a": "atlas/README.md",
       "b": "atlas/page.json",
-      "either": 10,
-      "shared": 10,
+      "either": 11,
+      "shared": 11,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/statistics.json",
-      "either": 10,
-      "shared": 10,
+      "either": 11,
+      "shared": 11,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/structure.json",
-      "either": 10,
-      "shared": 10,
+      "either": 11,
+      "shared": 11,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/statistics.json",
-      "either": 10,
-      "shared": 10,
+      "either": 11,
+      "shared": 11,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/structure.json",
-      "either": 10,
-      "shared": 10,
+      "either": 11,
+      "shared": 11,
       "strength": 1
     },
     {
       "a": "atlas/statistics.json",
       "b": "atlas/structure.json",
-      "either": 10,
-      "shared": 10,
+      "either": 11,
+      "shared": 11,
       "strength": 1
     },
     {
@@ -1949,16 +3010,16 @@
     "floor": "fallen",
     "floorHeld": false,
     "floorTrigger": "revision-depth",
-    "headDate": "2026-10-09T03:40:03-04:00",
-    "inScopeFiles": 323,
+    "headDate": "2026-10-13T10:39:34-04:00",
+    "inScopeFiles": 530,
     "pinnedStart": null,
     "priorFloor": "fallen",
-    "qualifyingCommits": 122,
+    "qualifyingCommits": 335,
     "qualifyingMinimum": 30,
     "revisions": 5,
     "shared": 10,
     "sharedFloorUsed": 3,
-    "since": "2026-04-12T07:40:03.000Z",
+    "since": "2026-04-16T14:39:34.000Z",
     "sourceExtensions": [
       ".js",
       ".mjs",

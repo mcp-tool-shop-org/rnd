@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.13] - 2026-10-13
+
+- atlas-mcp-utility amendment 7 (medium effort; the runs move into the local sandbox atlas-pilot; permission-mode and key-source checks); Docker Sandboxes entry and brief
+- Added `2026-10-13-docker-sandboxes-on-the-rig-from-signup-to-a-pinned-pilot-wo`: Docker Sandboxes on the rig: from signup to a pinned pilot workspace
+- Updated `docker-sandboxes`: docker-sandboxes — isolated machines for agent experiments (Docker Sandboxes, sbx)
+- Updated experiment `atlas-mcp-utility`
+
 ## [1.1.8.0.12] - 2026-10-13
 
 - docker-sandboxes: the Director's ruling, no paid model API; models local or RunPod only

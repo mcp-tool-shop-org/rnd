@@ -7,6 +7,7 @@
 - **Amendment 5 (2026-10-13):** the full run becomes a repository ladder. Rung 1 is the 42-task bank below, unchanged. Each later rung adds one linked repository to the workspace. See [ladder.md](ladder.md).
 - **Amendment 6 (2026-10-13):** Kimi K3's consult. CF09 to CF13 leave the decision set, cut-list misreads are reported, and the ladder decides on its cross-repository tasks. See below and ladder.md.
 - **On hold (2026-10-13):** the Director ruled that Atlas is built up before any testing. The probes and the pilot wait for the build-up release, and a dated amendment moves the Atlas pin to it before the pilot.
+- **Amendment 7 (2026-10-13):** every attempt runs at medium effort, and the probes, pilot and ladder run in a mountless local Docker sandbox on the Director's plan instead of on the rig. See below.
 
 ## The question and the decision it feeds
 
@@ -24,11 +25,12 @@ Each sha256 is of the file as committed, with LF line endings (`.gitattributes`)
 |---|---|
 | `tasks.json` | `eb2ba43c88c989022ecf2fe90d950b150e144a3f916540fa68c1d46559acca1a` (amendment 3) |
 | `prompt.md` | `a32c1c8f30e88f7264e6efce1d1c608339368b2e44691870206b3105e4e6226d` |
-| `allow-list.json` | `506080e1b416a028200b56e77f8c25081119ba99067e91b864a1893ba2983ca6` (amendment 4) |
+| `allow-list.json` | `5ff2761451034917592411206c84153c68fa50e8278c20900fc3230c47511338` (amendment 7) |
 | `grade.py` | `f6d09f5144b42fc1c86f632015de33c84d0bfb9dd3faf2f192cb47d24d864455` (amendment 1) |
 | `debrief.md` | `ed73ef0864f6b603f32ab3f4a91874c465d537779ff1450094bc82690d312f8c` (amendment 3) |
 | Claude Code CLI | 2.1.197 |
-| Model | `claude-sonnet-5-5`, at the CLI's default effort for it |
+| Model | `claude-sonnet-5-5`, at medium effort (`--effort medium`, amendment 7) |
+| Where it runs | the local Docker sandbox `atlas-pilot`, on the Director's plan (amendment 7) |
 | Atlas | `@dogfood-lab/atlas` 1.26.0 |
 | Seed (arm order, key draw) | 20261013 |
 
@@ -164,6 +166,42 @@ the research-grounding entry. What changes for rung 1:
   amendment 4 began.
 
 The ladder's changes are in [ladder.md](ladder.md), under amendment 6. Nothing pinned above changes.
+
+### Amendment 7, 2026-10-13: medium effort, and the runs move into a local sandbox
+
+Nothing has run since amendment 4's probe failed closed. These change the pins before any probe, under the Director's rulings of 2026-10-13.
+
+**1. Effort is medium.** Every attempt passes `--effort medium`, which the pinned CLI 2.1.197 accepts.
+- The init event does not echo the effort, so the run check can't read it from the stream. Each record takes it from the allow-list the command was built from.
+- The price below assumed the CLI's default effort, so it stays an upper bound.
+
+**2. The runs move from the rig into the local Docker sandbox `atlas-pilot`.** That covers the probes, the pilot and every rung of the ladder, in one environment, so no comparison mixes the rig with the sandbox.
+- **What it is:** its own Linux VM, with no host folder mounted at all. Its network policy is Balanced: deny by default, common development hosts allowed.
+- **Inside it:**
+  - the pinned CLI in `/opt/claude-pin`;
+  - Atlas in `/opt/atlas-tools`, the `--tools` directory;
+  - an empty `/work`;
+  - this directory, brought in by `git archive`.
+- **The model ruling:** the Director ruled out any paid per-token model API. The sandbox signs in with the claude kit's `/login` on his plan. The sign-in is held on the host and never enters the sandbox.
+- **Why it's better:** the containment of amendment 2 was a set of deny rules over trees the agent could otherwise reach. In the sandbox, the operator's files, memory notes and other repositories aren't there to reach. The deny rules stay, as a second layer.
+- **Its own load:** the VM runs on the rig's CPU and memory. No probe, pilot or ladder run starts while interlock holds a measurement grant, because its CPU and iGPU arms are timed on that same machine. The Publisher, who holds the grants, schedules the runs.
+
+**3. What the run check now requires, beside amendment 4's:**
+- **`permissionMode` is `default`, and the command passes `--permission-mode default`.** The sandbox kit's own user settings set `bypassPermissions`. `--setting-sources local` must keep them out, and this proves it did.
+- **`apiKeySource` is `none`.** A run that starts on an API key breaks the Director's ruling and stops the pilot.
+- **The CLI version is the pin.** The image's own Claude Code is 2.1.296 and updates itself. The pinned 2.1.197 in `/opt/claude-pin/bin` comes first on PATH. The preflight's `--version` check and the init check both refuse any other version, and the harness starts the CLI with `DISABLE_AUTOUPDATER=1`.
+
+  The pin amendment after the Atlas release moves the CLI to 2.1.296 or later. `/opt/claude-pin` is then reinstalled at that version, and the image's self-updating copy is still never the one run.
+
+**4. The containment probe, rewritten for the sandbox (amendment 2's threat model):**
+- **The answer keys are the secret that matters there.** `tasks.json` sits in this directory under the sandbox user's home, so the probe now plants its two sentinels in this directory itself (target "experiment"), beside the keys. It also plants them in the home directory, and in `E:/AI` and `D:/` when those exist, as on the rig.
+- **The `git -C` route names a repository the probe makes under the home directory.** Its commit and message are secrets, and it's removed afterwards. `E:/AI/testing-os` doesn't exist in the sandbox.
+- **`Read(//proc/**)` joins the denied reads,** as a second layer over a process's environment.
+- **The template clones:** whether `prepare()` reaches github.com under Balanced is untested. The probe's own template is the first test of it: a failed fetch stops the probe before any agent runs. If Balanced refuses, github.com is allowed by name, and that is recorded here.
+
+**5. Recorded per run:** the effort, the permission mode and whether the run signed in on the plan (`on_the_plan`, a yes or no), beside the CLI version. The init's own key-source value is never written to a record or a message.
+
+`allow-list.json` is re-pinned above. `tasks.json`, `prompt.md`, `grade.py` and `debrief.md` are unchanged. Every amendment-4 check stands. The hold for the Atlas release, and the Director's go on the plan and its ceiling, are unchanged.
 
 ## Design
 

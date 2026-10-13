@@ -14,7 +14,7 @@ where: "E:/AI/testing-os/packages/atlas · github.com/dogfood-lab/testing-os"
 
 ## Summary
 
-Atlas reads a git repository and writes `atlas/`: a page (`README.md`), the same sections as data (`page.json`), every tracked file in its part with the edges between parts (`structure.json`), and what changes together over 180 days (`statistics.json`). Nothing on the page is written by a person except the one-line summary. `atlas check` runs in CI and fails when the committed map no longer matches the tree. `atlas mcp` serves the committed map to an agent over stdio with seven read-only tools, and each answer names the map's commit and engine.
+Atlas reads a git repository and writes `atlas/`: a page (`README.md`), the same sections as data (`page.json`), every tracked file in its part with the edges between parts (`structure.json`), and what changes together over 180 days (`statistics.json`). Nothing on the page is written by a person except the one-line summary. `atlas check` runs in CI and fails when the committed map no longer matches the tree. `atlas mcp` answers an agent over stdio with seven tools that never write to the repository, and each answer names the snapshot it used. It starts from the committed map. `atlas_refresh` maps the working checkout anew in a background process, into a cache outside the repository (`%LOCALAPPDATA%\atlas` on Windows), and swaps that snapshot in when it finishes. From then on, answers describe the checkout as it was refreshed, not the committed map. A refresh is a full map run, CPU and disk, so it waits while a measurement holds a GPU grant.
 
 ## Studio relevance
 

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.7] - 2026-10-13
+
+- consult verdicts: Grok Build and Kimi K3 on Atlas slice AN, with R&D's rulings
+- Added experiment `atlas-mcp-utility`
+
 ## [1.1.8.0.6] - 2026-10-13
 
 - consult brief: the outside-family security review of Atlas slice AN (testing-os #169)

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.50] - 2026-10-13
+
+- test-fakes entry: E5 instances
+- Updated `2026-10-12-test-fakes-hide-the-platform`: Test fakes that hide the platform, a recurring defect class
+
 ## [1.1.4.6.49] - 2026-10-13
 
 - interlock #99 rulings; E4b flash-attention correction

@@ -20,6 +20,9 @@ not the way the real platform does. The unit tests passed, and the live run stop
 - the live command runner that captured no output (#84);
 - E4b's pilot counting tokens before its own server started (#85);
 - the live seams left as stubs (#85's review).
+- E5's adapter match, which required WDDM dedicated usage to equal nvidia-smi exactly (2026-10-12 run c; the fakes fed equal numbers);
+- the driver 617.42 header, "CUDA UMD Version", which the old pattern missed;
+- fill.py's listener lookups calling a bare `subprocess.run`, the #84 defect again (#99, caught by the live preflight before any run).
 
 ## Key points
 
@@ -40,6 +43,8 @@ not the way the real platform does. The unit tests passed, and the live run stop
   3. reads that fail closed, so a missing value refuses instead of passing.
 - **Cost so far:** three pilot attempts stopped at start with the card idle. No device time was lost, because each
   check ran before the server or a device started.
+
+**Review practice since 2026-10-13:** R&D takes one read-only live reading of every platform value a PR reads before passing it.
 
 ## Studio relevance
 

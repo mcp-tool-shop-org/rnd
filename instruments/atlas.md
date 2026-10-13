@@ -39,7 +39,7 @@ Every org repository that runs workflows keeps a map, made by one pinned engine 
 
 ## Known friction
 
-A folder with no part in `atlas/boundaries.yaml` reddens main on every new file in it (`ATLAS_UNASSIGNED_NEW`). Between 2026-09-30 and 2026-10-13 it hit at least six repositories, among them interlock's `receipts/` (twice). rnd's `datapacks/` had the same gap. The local fix is one boundary per folder.
+A folder with no part in `atlas/boundaries.yaml` reddens main on every new file in it (`ATLAS_UNASSIGNED_NEW`). Between 2026-09-30 and 2026-10-13 it hit at least five repositories, among them interlock's `receipts/` (twice). rnd's `datapacks/` had the same gap. The local fix is one boundary per folder.
 
 ## In build (R&D rulings, 2026-10-13)
 

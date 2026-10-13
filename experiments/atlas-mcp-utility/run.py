@@ -206,10 +206,20 @@ def isolation_problems(init, arm, model):
 
 QUOTED = re.compile(r"'[^']*'|\"[^\"]*\"")
 # Forms that turn an allowed `git log` or `git show` into something else.
-# Redirection and chaining are read outside quotes, where the shell acts on
-# them; command substitution runs inside double quotes too, so it is read
-# everywhere.
-UNQUOTED_FORMS = (("--output", re.compile(r"(?:^|\s)--output(?:=|\s|$)")), (">", re.compile(r">")), ("|", re.compile(r"\|")), (";", re.compile(r";")), ("&&", re.compile(r"&&")))
+# Redirection, chaining and a line break (a second command) are read outside
+# quotes, where the shell acts on them; `<` also feeds a file's text to git,
+# whose error echoes a bad revision back. Command substitution runs inside
+# double quotes too, so it is read everywhere.
+UNQUOTED_FORMS = (
+    ("--output", re.compile(r"(?:^|\s)--output(?:=|\s|$)")),
+    (">", re.compile(r">")),
+    ("<", re.compile(r"<")),
+    ("|", re.compile(r"\|")),
+    (";", re.compile(r";")),
+    ("&&", re.compile(r"&&")),
+    ("&", re.compile(r"(?<!&)&(?!&)")),
+    ("newline", re.compile(r"[\r\n]")),
+)
 ANYWHERE_FORMS = (("$(", re.compile(r"\$\(")), ("`", re.compile(r"`")))
 
 

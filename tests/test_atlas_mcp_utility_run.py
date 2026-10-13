@@ -192,13 +192,19 @@ class BashDetector(unittest.TestCase):
             "git log $(cat ~/secret)": ["$("],
             "git log \"$(cat ~/secret)\"": ["$("],
             "git log `cat ~/secret`": ["`"],
+            # R&D's bypasses on #7: a second command on a new line, a
+            # background `&`, and a file fed to git on stdin.
+            "git log -1\ncat ~/secret": ["newline"],
+            "git log -1\r\ncat ~/secret": ["newline"],
+            "git log -1 & cat x": ["&"],
+            "git log -1 --stdin < ~/x": ["<"],
         }
         for command, forms in cases.items():
             with self.subTest(command=command):
                 self.assertEqual(run.bash_violations(command), forms)
 
     def test_plain_history_reads_pass(self):
-        for command in ("git log --oneline -20", "git show HEAD:src/route.ts", "git log --format='%H|%s' -5", 'git log --grep="a > b"', "git log -- src/server.ts"):
+        for command in ("git log --oneline -20", "git show HEAD:src/route.ts", "git log --format='%H|%s' -5", 'git log --grep="a > b"', "git log -- src/server.ts", "git log --format='%H\n%s' -3", 'git log --grep="a < b & c"'):
             with self.subTest(command=command):
                 self.assertEqual(run.bash_violations(command), [])
 

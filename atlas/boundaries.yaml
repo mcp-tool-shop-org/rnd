@@ -12,6 +12,10 @@ boundaries:
     globs:
       - catalogs/**
     role: data
+  - name: datapacks
+    globs:
+      - datapacks/**
+    role: data
   - name: docs
     globs:
       - docs/**

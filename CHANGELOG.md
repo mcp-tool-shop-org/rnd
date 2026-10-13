@@ -11,6 +11,9 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+- Atlas: a `datapacks` part in `atlas/boundaries.yaml`, so a new datapack no longer fails `atlas check`
+- New instruments: `atlas` and `testing-os` (the testing-os session, for R&D's review)
+
 ## [1.1.4.6.59] - 2026-10-13
 
 - decision: Atlas, testing-os, housekeeping and rnd build-up program

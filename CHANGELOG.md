@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.2] - 2026-10-13
+
+- piano-arrangement entry: two corrections from the receipts; promoted to vocology-knowledge wave 14
+- Updated `2026-10-08-llm-piano-arrangement-from-a-generated-brief`: Piano arrangements by an LLM from a brief generated from the score
+
 ## [1.1.8.0.1] - 2026-10-13
 
 - entry: test_fake_hides_platform, the E5 settle-wait instance (interlock #107 review)

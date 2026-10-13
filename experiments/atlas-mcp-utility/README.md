@@ -4,6 +4,7 @@
 - R&D approved the design on 2026-10-13, with seven additions that are folded in below.
 - The Director approved pricing it and chose to run it on his Claude plan.
 - The pilot runs once the key check below is done. The full run needs his go after he has seen what the pilot measured.
+- **Amendment 5 (2026-10-13):** the full run becomes a repository ladder. Rung 1 is the 42-task bank below, unchanged. Each later rung adds one linked repository to the workspace. See [ladder.md](ladder.md).
 
 ## The question and the decision it feeds
 

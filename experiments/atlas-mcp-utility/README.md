@@ -19,7 +19,7 @@ Each sha256 is of the file as committed, with LF line endings (`.gitattributes`)
 
 | What | Pin |
 |---|---|
-| `tasks.json` | `d320f38cf5344e7cefe667eae81f3f41912f42d4428498975257b5a3d34a2d7b` (amendment 3) |
+| `tasks.json` | `eb2ba43c88c989022ecf2fe90d950b150e144a3f916540fa68c1d46559acca1a` (amendment 3) |
 | `prompt.md` | `a32c1c8f30e88f7264e6efce1d1c608339368b2e44691870206b3105e4e6226d` |
 | `allow-list.json` | `ff2500444a24a9f859c081869fe62448fa44006a601c94b0545136ef1184b3b4` (amendment 2) |
 | `grade.py` | `f6d09f5144b42fc1c86f632015de33c84d0bfb9dd3faf2f192cb47d24d864455` (amendment 1) |
@@ -105,7 +105,7 @@ Every Bash command a run makes is in its stream. During the pilot, a run that ma
 
 **Two conventions the keys assume, now stated in the questions.** The key auditors' own debriefs found that the keys assumed two conventions the questions did not state. Unstated, they let a correct agent disagree with the key for reasons that have nothing to do with Atlas.
 - **The reach and import questions (RC*, WR02)** now say that in Python, an import inside a function body counts, and that `from pkg import module` imports that module's file. RC09's key depends on a lazy import.
-- **TG02** now says that `test_*` covers every extension, `.py` and `.mjs` alike.
+- **TG02** now says that `test_*` is "of any file extension". It names no extension: naming `.mjs` would give away two of the four answers, and would mask the possible Atlas `.mjs` test-gap defect this task can measure (R&D's review).
 
 **The failure kind is recorded per CI-failure task** (`failure_kind`: `code` or `setting`), with CF01's defect noted as intermittent.
 

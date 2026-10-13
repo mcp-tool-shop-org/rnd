@@ -1116,7 +1116,7 @@
     "repo": "mcp-tool-shop-org/role-os",
     "commit": "fc5222ae783ea95e3b1bc38c0576245eaf6fa7fe",
     "type": "test_gap",
-    "question": "Besides `npm test` (which runs `node --test test/*.test.mjs`), some test scripts named `test_*` (any extension: .py and .mjs alike) live elsewhere in the repo. Which of them does NO workflow run, and which one does a workflow run (with the workflow file and the directory the step runs in)? Answer as JSON: {\"not_run_by_any_workflow\": [\"path\", ...], \"run_by_workflow\": {\"file\": \"path\", \"workflow\": \"name.yml\", \"working_directory\": \"dir\"}}.",
+    "question": "Besides `npm test` (which runs `node --test test/*.test.mjs`), some test scripts named `test_*` (of any file extension) live elsewhere in the repo. Which of them does NO workflow run, and which one does a workflow run (with the workflow file and the directory the step runs in)? Answer as JSON: {\"not_run_by_any_workflow\": [\"path\", ...], \"run_by_workflow\": {\"file\": \"path\", \"workflow\": \"name.yml\", \"working_directory\": \"dir\"}}.",
     "answer_key": {
       "not_run_by_any_workflow": [
         "tools/conformance-dataset/live-tools/test_prep_inputs_empty.mjs",

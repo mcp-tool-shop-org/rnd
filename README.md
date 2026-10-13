@@ -60,7 +60,9 @@ Requires Python 3.10 or later and nothing else (standard library only). Runs on
 Windows, macOS and Linux. From the repo root:
 
 ```bash
-python -m rnd search cuda graphs            # full-text over entries + catalogues
+python -m rnd search cuda graphs            # full-text over entries + catalogues (stemmed: pair finds pairs)
+python -m rnd search --exact PAIR           # whole words, same case: the product, not the word
+python -m rnd probe https://github.com/NVIDIA/NeMo-Relay   # licence, release, telemetry hits, already in rnd?
 python -m rnd show 2026-10-07-cuda-graphs   # one entry, with backlinks
 python -m rnd list --relevance act          # what needs doing
 python -m rnd tools                         # instruments this seat can use
@@ -195,6 +197,20 @@ rnd collect e4b --check     # recompute every output; exit 1 if any differs from
 - **Every output is public-safe before it is written.** No machine path, home directory or
   environment field survives, and an experiment's module can add a stricter guard. Nothing is
   written on any refusal.
+
+## Probing a tool before a trial
+
+`rnd probe <url> …` answers the first questions about a tool or model from each source's own API,
+not from a summary of a web page:
+
+- **GitHub** (through `gh api`, so it uses your GitHub CLI login): the licence, whether it's archived, the
+  last push, the latest release, and a code search for "telemetry". A hit is a lead to read, never proof;
+  zero hits isn't proof either.
+- **Hugging Face:** the licence tag, or for "other" the card's licence name and link; gating; the last change.
+- **PyPI and npm:** the licence, the latest version and when it was published.
+- **rnd itself:** an exact-word search for the name, so you know whether the library already holds it.
+
+A source that can't be reached is reported as unknown, with the reason.
 
 ## Relation to other studio tools
 

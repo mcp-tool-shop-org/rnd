@@ -1,0 +1,11 @@
+{
+ "archived": false,
+ "description": "Multi-language agent runtime and library for execution scope management, lifecycle events, and middleware on tool and LLM calls.",
+ "full_name": "NVIDIA/NeMo-Relay",
+ "html_url": "https://github.com/NVIDIA/NeMo-Relay",
+ "license": {
+  "name": "Apache License 2.0",
+  "spdx_id": "Apache-2.0"
+ },
+ "pushed_at": "2026-10-13T16:37:01Z"
+}

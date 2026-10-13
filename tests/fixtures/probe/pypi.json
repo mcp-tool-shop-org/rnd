@@ -1,0 +1,17 @@
+{
+ "info": {
+  "classifiers": [],
+  "license": null,
+  "license_expression": "Apache-2.0",
+  "name": "nemo-relay",
+  "project_url": "https://pypi.org/project/nemo-relay/",
+  "version": "0.10.0"
+ },
+ "releases": {
+  "0.10.0": [
+   {
+    "upload_time_iso_8601": "2026-10-08T22:01:08.459538Z"
+   }
+  ]
+ }
+}

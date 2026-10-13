@@ -1,0 +1,15 @@
+{
+ "cardData": {
+  "license": "other",
+  "license_link": "https://openmdw.ai/license/1-1/",
+  "license_name": "openmdw-1.1"
+ },
+ "disabled": false,
+ "gated": false,
+ "id": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4",
+ "lastModified": "2026-09-10T14:41:52.000Z",
+ "private": false,
+ "tags": [
+  "license:other"
+ ]
+}

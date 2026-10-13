@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.6.0.0] - 2026-10-13
+
+- rnd probe: licence, latest release, gating, telemetry hits and library hits for GitHub, Hugging Face, PyPI and npm sources, from each API
+- rnd search --exact: whole words in the same case, no stemming (PAIR the product, not pair)
+
 ## [1.1.5.0.6] - 2026-10-13
 
 - brief: Where should this request run? NVIDIA PAIR and interlock

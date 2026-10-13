@@ -330,6 +330,47 @@ A chain, a pipe, a line break and `<` no longer stop a run. The CLI refuses any 
 
 **What follows:** the shakedown runs again from the start, with all its runs on the new rule. The four RC03 runs above are kept as the first price signal. Nothing pinned changes.
 
+### Amendment 10, 2026-10-13: a local route first, refused calls stop nothing, and recorded streams replay
+
+**What stopped the second shakedown (19:22–19:24 EDT, 515,852 tokens).**
+- The four RC03 runs answered correctly again, with no shell reads:
+  - arm A: $0.0804 and $0.0802 at API rates, 11.0 s and 10.6 s;
+  - arm B: $0.1176 and $0.1145, 13.1 s and 11.7 s, with `atlas` pending at the start.
+  - That is about 60,000 to 71,000 tokens a run, against the price table's 0.43 million for the stratum.
+- CF09-A1 answered too, in 7 turns ($0.1235). One of its calls held `sed -n "$((n-12)),${n}p"`.
+  - That is arithmetic expansion, not command substitution. The detector read its `$(` as a substitution and stopped the shakedown.
+  - The CLI had refused that call anyway, and one other for its `sort -u -k3` part. Nothing was written.
+- The report named the halt but not the call that caused it. Only the per-attempt record did.
+
+**The Director's ruling:** a detector bug is not to be found on the plan again. The harness is shaken down on the local model first, which costs GPU time, not the plan. Sonnet runs again only after a clean local pass, and with the Director's go.
+
+**R&D's rulings on the detector:**
+1. **Arithmetic expansion stops nothing.** `$((…))` runs no command, and its `<` and `>` compare. One that holds a `$(` still counts as a substitution.
+2. **Only a call that ran can stop a run.** Amendment 9's "a run that makes any of these calls" becomes "a run in which any of these calls ran".
+   - A call the CLI refused, as listed in its result's `permission_denials`, wrote nothing and ran nothing.
+   - Every refused call, of any tool, is kept in the record's `refused_calls`. It is the agent's own behaviour, reported and never a stop.
+   - `is_error` alone never proves a refusal: a command that ran and exited non-zero carries it too. A run with no result lists no refusals, so every stopping form in it counts as run.
+3. **A halt names its cause.** The report's `halt_error` carries the stopped run's isolation problems.
+
+**The local route** (`--route local`, accepted only with `--pilot --label shakedown`):
+- **What changes is the model alone.** The CLI (2.1.197), tasks, prompt, tools and permission rules are the same.
+  - The model is `nemotron-3.5-lightning:latest`, served by Ollama on the host at `http://host.docker.internal:11434` with Ollama's placeholder token.
+  - Every model alias and the subagent model point to it. There is no `--effort`, which means nothing to it.
+- **The plan is out of reach.** No sign-in file is installed. A run whose result names a Claude model in `modelUsage` stops.
+- **The start check:** the local model (with or without a `[1m]` suffix), `apiKeySource` none, and the default permission mode.
+  - The pinned CLI's start on this route was captured against a closed port, so no model loaded: the model as passed, `apiKeySource: none`, and the four built-ins. It is a test fixture.
+- **The records:** `route` is `local`, and the effort, `on_the_plan` and `total_cost_usd` are null, meaning not applicable.
+  - Each run also records `started_at` and `ended_at`, so its GPU time can be read from the host's Ollama log for that window.
+  - The price unit is wall time plus GPU time.
+- **Results** go to `results/shakedown-local/`. They never count toward the decision.
+
+**Replay.** `run.py --replay <run>.jsonl …` puts recorded streams through the same checks a live run gets (`run_checks`), with no CLI.
+- Shakedown 2's five streams are test fixtures, with the plan's rate-limit events dropped.
+- Under these rulings, CF09-A1 answers with its two refused calls reported, and the four RC03 runs pass.
+- Shakedown 1 kept only its records. Its first stopping call passes under amendment 9; the others were cut at 120 characters inside a quote, so they can't be replayed.
+
+**Order:** the local shakedown, then a clean local pass, then the Director's go, then Sonnet. Nothing pinned changes.
+
 ## Design
 
 **Pairs.** Each task runs twice:
@@ -499,6 +540,6 @@ The token ceiling (stop rule 3) is set at the volume $150 would buy at the rates
 - `allow-list.json`: the CLI, the model, the tools, and the two arms' MCP servers.
 - `grade.py`: the grader. Its tests are in `tests/test_atlas_mcp_utility_grade.py`.
 - `key-audit.json`: R&D's blind key audit, the answers and verdicts behind amendment 1.
-- `run.py`: the harness (amendment 2). Its tests are in `tests/test_atlas_mcp_utility_run.py`, with the CLI's real starts in `tests/fixtures/atlas_mcp_utility/` (amendment 4).
+- `run.py`: the harness (amendment 2). Its tests are in `tests/test_atlas_mcp_utility_run.py`, with the CLI's real starts in `tests/fixtures/atlas_mcp_utility/` (amendment 4) and shakedown 2's recorded streams in its `shakedown-2/` (amendment 10).
 - `debrief.md`: the debrief each graded run is asked after its answer is recorded (amendment 3).
 - `results/`: written by the run, one record per run with its usage, answer and grade.

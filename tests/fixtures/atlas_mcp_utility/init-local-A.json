@@ -1,0 +1,35 @@
+{
+ "type": "system",
+ "subtype": "init",
+ "cwd": "/tmp/initcap",
+ "session_id": "ce4139c3-d4cd-4ed0-bd63-941a4521ab85",
+ "tools": [
+  "Bash",
+  "Glob",
+  "Grep",
+  "Read"
+ ],
+ "mcp_servers": [],
+ "model": "nemotron-3.5-lightning:latest",
+ "permissionMode": "default",
+ "slash_commands": [],
+ "apiKeySource": "none",
+ "claude_code_version": "2.1.197",
+ "output_style": "default",
+ "agents": [
+  "claude",
+  "Explore",
+  "general-purpose",
+  "Plan",
+  "statusline-setup"
+ ],
+ "skills": [],
+ "plugins": [],
+ "analytics_disabled": true,
+ "product_feedback_disabled": true,
+ "uuid": "f393a377-4de3-4d93-a7f8-c2fa3963ed4c",
+ "memory_paths": {
+  "auto": "/tmp/initcap/.claude/projects/-tmp-initcap/memory/"
+ },
+ "fast_mode_state": "off"
+}

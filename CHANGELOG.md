@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.5.0.2] - 2026-10-13
+
+- atlas-mcp-utility pre-registered (#5); the Director's go on the pilot only
+- Updated `atlas`: atlas — a repository's map, checked in CI and served to agents
+- Added experiment `atlas-mcp-utility`
+
 ## [1.1.5.0.1] - 2026-10-13
 
 - E5 smoke 3 under the new gates; rnd collect tagged

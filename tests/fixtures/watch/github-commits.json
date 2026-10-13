@@ -1,0 +1,22 @@
+[
+ {
+  "sha": "14a98ae278cec7e867695189d0f4003c08e4f765",
+  "html_url": "https://github.com/NVIDIA/skills/commit/14a98ae278cec7e867695189d0f4003c08e4f765",
+  "commit": {
+   "message": "chore(metadata): regenerate metadata.json, skills.sh.json, benchmarks.json, and versions.json",
+   "committer": {
+    "date": "2026-10-09T15:27:17Z"
+   }
+  }
+ },
+ {
+  "sha": "329cfc63d21bcd6294fa2c4d6ed8b73bbab98df7",
+  "html_url": "https://github.com/NVIDIA/skills/commit/329cfc63d21bcd6294fa2c4d6ed8b73bbab98df7",
+  "commit": {
+   "message": "chore: sync skills (BioNeMo Open Models,NeMo Fabric)",
+   "committer": {
+    "date": "2026-10-09T15:14:32Z"
+   }
+  }
+ }
+]

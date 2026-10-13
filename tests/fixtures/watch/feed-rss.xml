@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>PyPI recent updates for nemo-relay</title>
+    <link>https://pypi.org/project/nemo-relay/</link>
+    <description>Recent updates to the Python Package Index for nemo-relay</description>
+    <language>en</language>
+<item>
+      <title>0.10.0</title>
+      <link>https://pypi.org/project/nemo-relay/0.10.0/</link>
+      <description>Python bindings for the NeMo Relay agent runtime.</description>
+      <pubDate>Thu, 08 Oct 2026 22:01:08 GMT</pubDate>
+    </item>
+<item>
+      <title>0.10.0rc4</title>
+      <link>https://pypi.org/project/nemo-relay/0.10.0rc4/</link>
+      <description>Python bindings for the NeMo Relay agent runtime.</description>
+      <pubDate>Thu, 08 Oct 2026 00:34:06 GMT</pubDate>
+    </item>
+<item>
+      <title>0.10.0rc3</title>
+      <link>https://pypi.org/project/nemo-relay/0.10.0rc3/</link>
+      <description>Python bindings for the NeMo Relay agent runtime.</description>
+      <pubDate>Wed, 07 Oct 2026 01:02:26 GMT</pubDate>
+    </item>
+</channel>
+</rss>

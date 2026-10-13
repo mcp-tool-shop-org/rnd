@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.7.0.0] - 2026-10-13
+
+- rnd watch: what's new on the watchlist's sources since the last check (releases, commits, Hugging Face models, Atom/RSS feeds, release-notes pages)
+- docs/watchlist.json: twelve sources for the weekly watch ritual
+
 ## [1.1.6.0.0] - 2026-10-13
 
 - rnd probe: licence, latest release, gating, telemetry hits and library hits for GitHub, Hugging Face, PyPI and npm sources, from each API

@@ -14,7 +14,7 @@ import traceback
 from datetime import date
 from pathlib import Path
 
-from . import __version__, catalog, collect, datapack, model, probe, readouts, release, store
+from . import __version__, catalog, collect, datapack, model, probe, readouts, release, store, watch
 
 SOURCE_ROOT = Path(__file__).resolve().parent.parent
 
@@ -407,6 +407,47 @@ def cmd_probe(args):
     return 0
 
 
+def cmd_watch(args):
+    listing = Path(args.list) if args.list else ROOT / "docs" / "watchlist.json"
+    state_path = Path(args.state or os.environ.get("RND_WATCH_STATE") or Path.home() / ".rnd" / "watch-state.json")
+    try:
+        sources = watch.load_watchlist(listing)
+        known = {s["id"] for s in sources}
+        unknown_ids = sorted(set(args.only or ()) - known)
+        if unknown_ids:
+            return fail("WATCH_UNKNOWN_SOURCE", f"not in the watchlist: {', '.join(unknown_ids)}",
+                        "the ids are in docs/watchlist.json")
+        state = watch.load_state(state_path)
+    except watch.WatchError as exc:
+        return fail(exc.code, str(exc), exc.hint)
+    rep, new_state = watch.check(sources, state, only=set(args.only or ()))
+    if not args.no_save:
+        watch.save_state(state_path, new_state)
+    rep["state"] = "not saved (--no-save)" if args.no_save else "saved"
+
+    def text(r):
+        for row in r["sources"]:
+            latest = row["latest"] or {}
+            head = f"{row['id']:<20}"
+            if row["unknown"]:
+                print(f"{head} unknown: {row['unknown']}")
+                continue
+            tail = f"latest {latest.get('title') or latest.get('key') or '-'}" + (
+                f" ({str(latest['date'])[:10]})" if latest.get("date") else "")
+            if row["baseline"]:
+                print(f"{head} baseline recorded; {tail}")
+            elif not row["new"]:
+                print(f"{head} nothing new; {tail}")
+            else:
+                print(f"{head} {len(row['new'])} new")
+                for item in row["new"]:
+                    when = f"  {str(item['date'])[:10]}" if item.get("date") else ""
+                    print(f"  {item['title'] or item['key']}{when}  {item['url'] or ''}".rstrip())
+        print(f"{r['new_total']} new item(s); {len(r['unknown'])} source(s) unknown; state {r['state']}")
+    emit(args, rep, text)
+    return 0
+
+
 def cmd_collect(args):
     try:
         if not args.name:
@@ -603,6 +644,13 @@ def build_parser():
     s.add_argument("--clone", help="the source repository's clone (default: ../<sibling> next to the library)")
     s.add_argument("--check", action="store_true",
                    help="recompute every output and exit 1 if any differs from the committed file")
+
+    s = add("watch", cmd_watch,
+            "check the watchlist's sources (releases, commits, models, feeds, pages) for items new since the last check")
+    s.add_argument("--list", help="the watchlist (default: docs/watchlist.json in the library)")
+    s.add_argument("--state", help="the state file (default: $RND_WATCH_STATE, else ~/.rnd/watch-state.json)")
+    s.add_argument("--only", action="append", metavar="ID", help="check one source (repeatable)")
+    s.add_argument("--no-save", action="store_true", help="report without recording what was seen")
 
     s = add("sql", cmd_sql, "run a read-only SQL query against the index")
     s.add_argument("query")

@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.5.0.0] - 2026-10-13
+
+- rnd collect: copy an experiment's trimmed records from a tool repository at pinned commits, with a byte-for-byte --check (build-up item 3)
+- E4b's results now come from experiments/e4b/collect.json; rnd collect e4b --check reproduces them byte for byte
+- Updated experiment `e4b`
+
 ## [1.1.4.6.60] - 2026-10-13
 
 - charts write LF and the chart test draws into a temporary directory (a test run leaves the tree clean)

@@ -109,6 +109,7 @@ code, a message and a hint; `--debug` adds the traceback.
 |------|------|-----------|
 | `entries/YYYY/*.md` | Research entries: the source of truth | people and agents |
 | `experiments/<name>/` | Harnesses, pinned inputs and result receipts for rig measurements | people and agents |
+| `experiments/<name>/collect.json` | Records collected from a tool repository at pinned commits (`rnd collect`) | people |
 | `instruments/*.md` | Studio tools and protocols the seat can call (`kind: instrument`) | people and agents |
 | `catalogs/<name>/source.json` | Where a catalogue comes from | people |
 | `catalogs/<name>/catalog.json` | Pinned snapshot from `rnd catalog sync` | generated; never hand-edit |
@@ -172,6 +173,28 @@ rnd datapack verify natural-errors --copy ne/files                      # PASS w
 - **`rnd check` validates every manifest** and fails on one edited by hand.
 - The upload carries `datapack.json` beside the files, so anyone can verify without this repo:
   `pip install mcptoolshop-rnd`.
+
+## Collected experiment records
+
+A tool repository commits its own pre-registered specs and run records (interlock's receipts),
+the way every repository commits its Atlas map. The library publishes only a trimmed copy of the
+numbers, made by `rnd collect` from the tool repository at pinned commits:
+
+```bash
+rnd collect                 # list the experiments that collect records
+rnd collect e4b             # read each source with git show, trim it, write experiments/e4b/results/
+rnd collect e4b --check     # recompute every output; exit 1 if any differs from the committed file
+```
+
+- **`experiments/<name>/collect.json`** names the repository, the sibling clone it's read from
+  (`--clone` overrides), and each source: its path, the commit, the SHA-256 of its bytes, the
+  output and the trim function in the experiment's `extract.py`.
+- **A pinned source never changes.** Bytes that no longer hash to the pin are refused.
+- **Every record carries provenance:** the repository, the source path and the SHA-256 of the
+  bytes trimmed.
+- **Every output is public-safe before it is written.** No machine path, home directory or
+  environment field survives, and an experiment's module can add a stricter guard. Nothing is
+  written on any refusal.
 
 ## Relation to other studio tools
 

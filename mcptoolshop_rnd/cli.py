@@ -14,7 +14,7 @@ import traceback
 from datetime import date
 from pathlib import Path
 
-from . import __version__, catalog, datapack, model, readouts, release, store
+from . import __version__, catalog, collect, datapack, model, readouts, release, store
 
 SOURCE_ROOT = Path(__file__).resolve().parent.parent
 
@@ -372,6 +372,39 @@ def _git_head():
         return None
 
 
+def cmd_collect(args):
+    try:
+        if not args.name:
+            rows = []
+            for exp_dir in collect.experiments(ROOT):
+                spec = collect.load_spec(exp_dir)
+                rows.append({"experiment": exp_dir.name, "repo": spec["repo"], "sources": len(spec["sources"])})
+
+            def text(rs):
+                if not rs:
+                    print("no collected experiments (experiments/<name>/collect.json)")
+                for r in rs:
+                    print(f"{r['experiment']:<24} {r['repo']}  {r['sources']} source(s)")
+            emit(args, rows, text)
+            return 0
+        rep = collect.run(ROOT, args.name, clone=Path(args.clone) if args.clone else None, check=args.check)
+
+        def text(r):
+            verb = "checked" if args.check else "wrote"
+            for f in r["files"]:
+                mark = "DRIFT " if f in r["drift"] else ""
+                print(f"{mark}{verb} experiments/{r['experiment']}/{f}")
+            if r["drift"]:
+                print(f"{len(r['drift'])} file(s) differ from what {r['repo']} at the pinned commits gives; "
+                      f"run `rnd collect {r['experiment']}` and commit")
+            elif not args.check:
+                print("rebuild the charts if any read these files: python experiments/charts/make_charts.py")
+        emit(args, rep, text)
+        return 0 if rep["ok"] else 1
+    except collect.CollectError as exc:
+        return fail(exc.code, str(exc), exc.hint)
+
+
 def cmd_datapack(args):
     try:
         if args.action == "list":
@@ -521,6 +554,13 @@ def build_parser():
     s.add_argument("target", nargs="?", help="pack name (folder under datapacks/)")
     s.add_argument("--source", help="build: the folder the files come from, relative to the library")
     s.add_argument("--copy", help="verify: a downloaded copy of the pack")
+
+    s = add("collect", cmd_collect,
+            "copy an experiment's trimmed records from a tool repository at pinned commits (experiments/<name>/collect.json)")
+    s.add_argument("name", nargs="?", help="experiment folder; omit to list the collected experiments")
+    s.add_argument("--clone", help="the source repository's clone (default: ../<sibling> next to the library)")
+    s.add_argument("--check", action="store_true",
+                   help="recompute every output and exit 1 if any differs from the committed file")
 
     s = add("sql", cmd_sql, "run a read-only SQL query against the index")
     s.add_argument("query")

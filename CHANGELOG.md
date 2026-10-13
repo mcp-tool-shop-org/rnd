@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.7.1.1] - 2026-10-13
+
+- atlas-mcp-utility amendment 5: the full run becomes a repository ladder (ladder.md)
+- Updated experiment `atlas-mcp-utility`
+
 ## [1.1.7.1.0] - 2026-10-13
 
 - experiment: e5, collected from interlock (run-b at 6e8cab6, run-c at cc91aed)

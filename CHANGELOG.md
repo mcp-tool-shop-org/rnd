@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.7.1.2] - 2026-10-13
+
+- entry: multi-repository Atlas, research grounding for the build-up (study-swarm, four questions)
+- Added `2026-10-13-multi-repository-atlas-research-grounding-for-the-build-up`: Multi-repository Atlas: research grounding for the build-up
+
 ## [1.1.7.1.1] - 2026-10-13
 
 - atlas-mcp-utility amendment 5: the full run becomes a repository ladder (ladder.md)

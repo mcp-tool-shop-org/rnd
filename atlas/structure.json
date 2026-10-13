@@ -469,7 +469,7 @@
           "path": "experiments/atlas-mcp-utility/key-audit.json"
         },
         {
-          "hash": "bb04df14b84e18ab52a5bbd68853cda5b948befab5049f0cc7984648523ae1e6",
+          "hash": "e30d65de29f89ba10206a67dec135e4affd4199a358045a93568833a2a3a0702",
           "path": "experiments/atlas-mcp-utility/ladder.md"
         },
         {
@@ -5430,7 +5430,7 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "de3be22ed3a3a385ff7e100598462599bd7814ca",
+    "commit": "ce0f81c41202002f0595d078fd3426d77ef77913",
     "tracked": 567
   },
   "landings": [

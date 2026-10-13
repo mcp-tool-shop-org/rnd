@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.52] - 2026-10-13
+
+- E5 spill-baseline ruling
+- Updated `switchyard`: interlock (formerly switchyard) — the local AI device router (in build)
+
 ## [1.1.4.6.51] - 2026-10-13
 
 - interlock #99 pass (live-read)

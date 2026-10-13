@@ -402,3 +402,11 @@ receipts, not guesses. The brief lives in R&D's memory (`switchyard-router-build
   - **New:** the 0.35.1 runner is llama-server.exe, so `_runner_pid` misses it.
 - **Correction to E4b, 2026-10-13:** the block-2 and block-3 receipt headers record `flash_attention: "false"` (from the env line), but both run logs show `--flash-attn auto` and Flash Attention enabled, with an f16 KV cache. The verdicts are unaffected, because every arm ran on the same server. The recorded field is wrong, and the E4b harness follow-up reads the load lines.
   - **#99 re-check at 9e3ecd5, with R&D's own live reads: pass, and E5 can re-run.** The log comes from the listener parent and the exe from the listener. The pin is unique at 512 (2175 vs 2156). CUDA reads 13.4 from the UMD header, the ggml sha is 6d3128e9, the config is recorded as is, and the load lines read flash attention auto/enabled and KV f16. Per-window reads go through the pinned instance.
+- **E5 run e5-2026-10-13a died after 70 min on gemma4:31b:** the row was refused at write time for a home path in backend_library, with no receipt and the card safe. The fix (branch fix/e5-backend-path) records the path from lib\ollama\ onward and checks every server fact for home paths before any load. A new e5-smoke spec proves the path to a written receipt in minutes.
+- **E5 smoke (e5-smoke-1), R&D ruling on spill measurement, 2026-10-13.**
+  - **The data:** every confirm spilled because shared rose about 430–460 MiB over idle on any load.
+  - **The cause, from the 11434 log:** llama.cpp's pinned host buffers (CUDA_Host model 333.84 MiB, compute 18–20 MiB, output 0.58 MiB) count as WDDM shared usage. That's by design, not a spill. Shared across the windows went 505 → 507 → 531 → 534 MiB from 2048 to 8192.
+  - **Ruling (a dated amendment before the full run):** the spill baseline is the model's lowest resident window. The 256 MiB growth threshold and the prompt-rate rule are unchanged, and a missing reading is still a spill.
+  - **The baseline is checked:** if lowest-window shared minus idle exceeds the CUDA_Host sum by more than 256 MiB, the model's row is inconclusive.
+  - **Recorded on the receipt:** idle shared, baseline shared, the CUDA_Host sum and each window's delta.
+  - **Tests** include a fixture from the real smoke numbers.

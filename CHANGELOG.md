@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.1] - 2026-10-13
+
+- entry: test_fake_hides_platform, the E5 settle-wait instance (interlock #107 review)
+- Updated `2026-10-12-test-fakes-hide-the-platform`: Test fakes that hide the platform, a recurring defect class
+
 ## [1.1.8.0.0] - 2026-10-13
 
 - rnd watch: latest is the newest stable release (a newer pre-release is shown apart); release notes and commit messages kept in the JSON (first watch run, 2026-10-13)

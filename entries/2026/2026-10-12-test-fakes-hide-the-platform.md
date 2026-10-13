@@ -23,6 +23,7 @@ not the way the real platform does. The unit tests passed, and the live run stop
 - E5's adapter match, which required WDDM dedicated usage to equal nvidia-smi exactly (2026-10-12 run c; the fakes fed equal numbers);
 - the driver 617.42 header, "CUDA UMD Version", which the old pattern missed;
 - fill.py's listener lookups calling a bare `subprocess.run`, the #84 defect again (#99, caught by the live preflight before any run).
+- E5's settle wait (interlock #107, 2026-10-13, caught in review before merge). Its granite test passed the confirm call's own peak (27329 MiB) to the wait as if it were a reading taken before the call. But the publisher's live smoke showed that, within a model, the card before a call holds the previous window's runner, resident and still (8864 MiB before confirm 4096). So the wait passes, and the runner swap happens inside the measured call. The fix unloads and waits for idle before any call that changes `num_ctx`.
 
 ## Key points
 
@@ -44,7 +45,7 @@ not the way the real platform does. The unit tests passed, and the live run stop
 - **Cost so far:** three pilot attempts stopped at start with the card idle. No device time was lost, because each
   check ran before the server or a device started.
 
-**Review practice since 2026-10-13:** R&D takes one read-only live reading of every platform value a PR reads before passing it.
+**Review practice since 2026-10-13:** R&D takes one read-only live reading of every platform value a PR reads before passing it. For #107, reading the PR's own smoke receipt was enough: one row showed the pre-call state the test had assumed away.
 
 ## Studio relevance
 

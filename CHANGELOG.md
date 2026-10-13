@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.18] - 2026-10-13
+
+- atlas-mcp-utility amendment 10: a local route first, refused calls stop nothing, recorded streams replay
+- Updated experiment `atlas-mcp-utility`
+
 ## [1.1.8.0.17] - 2026-10-13
 
 - atlas-mcp-utility amendment 9: read-only shell in the checkout is part of the measured surface; the detector stops only writes, background commands and substitution; temp files cleared between attempts

@@ -28,9 +28,14 @@ drops its pair. A run that reaches the turn cap is graded incorrect. It
 grades with grade.py and writes one record per attempt and a report. Only
 the pilot has the Director's go.
 
-Standard library only. Usage:
-  python run.py --probe --work <dir> --tools <dir> --ceiling 30000000
-  python run.py --pilot --work <dir> --tools <dir> --ceiling 30000000
+`--route local` runs the shakedown on the local model served by Ollama on
+the host, and `--replay` puts recorded streams through the same checks with
+no CLI (amendment 10).
+
+Standard library only. Usage (in the sandbox, as root):
+  python run.py --probe --work <dir> --tools <dir> --ceiling 30000000 --run-as amu
+  python run.py --pilot --work <dir> --tools <dir> --ceiling 30000000 --run-as amu [--label shakedown [--route local]]
+  python run.py --replay <run>.jsonl ... [--route local]
 """
 import argparse
 import hashlib
@@ -255,6 +260,38 @@ def on_the_plan(init, allow):
 # above the denied tree (the sandbox probe, 2026-10-13), so file permissions
 # and ownership are the containment.
 CLI_ENV = {"DISABLE_AUTOUPDATER": "1", "DISABLE_TELEMETRY": "1", "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"}
+# Amendment 10. The shakedown's local route: the same harness, tasks and
+# CLI, with the model served by Ollama on the host. A harness bug found
+# there costs GPU time, not the plan, so a local pass comes before any
+# further run on the plan. The pinned CLI's start names the model as passed
+# (2.1.197, captured 2026-10-13 against a closed port); 2.1.280's added
+# "[1m]", which is accepted too. The local route takes no sign-in file, so
+# a run that ignored the base URL could not reach the plan either.
+ROUTES = ("plan", "local")
+LOCAL_MODEL = "nemotron-3.5-lightning:latest"
+LOCAL_ENV = {
+    "ANTHROPIC_BASE_URL": "http://host.docker.internal:11434",
+    "ANTHROPIC_AUTH_TOKEN": "ollama",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": LOCAL_MODEL,
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": LOCAL_MODEL,
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": LOCAL_MODEL,
+    "CLAUDE_CODE_SUBAGENT_MODEL": LOCAL_MODEL,
+}
+
+
+def for_route(allow, route):
+    """The allow-list as a route runs it. The local route swaps in the local
+    model and drops the effort, which means nothing to it (amendment 10)."""
+    if route == "plan":
+        return {**allow, "route": "plan"}
+    return {**allow, "route": "local", "model": LOCAL_MODEL, "effort": None}
+
+
+def model_names(allow):
+    """The names a run's start may give its model."""
+    return {allow["model"], allow["model"] + "[1m]"} if allow.get("route") == "local" else {allow["model"]}
+
+
 # Groups that would let the run user act as root or reach the host.
 PRIVILEGED_GROUPS = ("sudo", "wheel", "admin", "adm", "docker", "root")
 
@@ -353,6 +390,18 @@ def tool_use_problems(stream, allow, arm):
     return [f"called a tool its arm does not have: {name}" for name in used]
 
 
+def model_use_problems(stream, allow):
+    """On the local route, any Claude model that answered (each result's
+    modelUsage): a run that ignored its base URL (amendment 10). Only a
+    Claude name counts, so Ollama's own spelling of the local model never
+    stops a run."""
+    if allow.get("route") != "local":
+        return []
+    used = sorted({name for event in stream.result_events for name in event.get("modelUsage") or {}
+                   if name.lower().startswith("claude")})
+    return [f"a Claude model answered on the local route: {name}" for name in used]
+
+
 def isolation_problems(init, arm, allow):
     """Why a run's start does not match its arm, or [].
 
@@ -393,7 +442,7 @@ def isolation_problems(init, arm, allow):
     wanted = ({"atlas": "pending"} if late_atlas else {"atlas": "connected"}) if arm == "B" else {}
     if servers != wanted:
         problems.append(f"MCP servers are {servers or 'none'}, the arm needs {wanted or 'none'}")
-    if init.get("model") != allow["model"]:
+    if init.get("model") not in model_names(allow):
         problems.append(f"the model is {init.get('model')}, pinned {allow['model']}")
     # Amendment 7. The sandbox's kit sets bypassPermissions in its user
     # settings; --setting-sources local must keep it out, and this proves it
@@ -403,8 +452,11 @@ def isolation_problems(init, arm, allow):
         problems.append(f"the permission mode is {init.get('permissionMode')}, pinned {allow['permission_mode']}")
     if not on_the_plan(init, allow):
         # The source's value stays out of the message and every record: only
-        # the fact that it was not the plan is kept (CodeQL, PR #16).
-        problems.append("the run does not sign in on the plan: the Director's ruling allows no API key")
+        # the fact that it was not the plan is kept (CodeQL, PR #16). The
+        # local route's token is Ollama's placeholder, never an API key.
+        problems.append("the run does not sign in on the plan: the Director's ruling allows no API key"
+                        if allow.get("route", "plan") == "plan" else
+                        "the local run holds an API key: the Director's ruling allows none")
     if init.get("claude_code_version") != allow["cli_version"]:
         problems.append(f"the CLI is {init.get('claude_code_version')}, pinned {allow['cli_version']}")
     return problems
@@ -431,15 +483,28 @@ UNQUOTED_FORMS = (
     ("-exec", re.compile(r"(?:^|\s)-exec(?:dir)?(?:\s|$)")),
 )
 ANYWHERE_FORMS = (("$(", re.compile(r"\$\(")), ("`", re.compile(r"`")))
+# Amendment 10. Arithmetic expansion, $(( … )), opens with the same two
+# characters as a command substitution but runs no command, and its `<` and
+# `>` compare. Shakedown 2 (2026-10-13) stopped on `sed -n "$((n-12)),${n}p"`.
+# One holding a `$(` is not matched, so the substitution inside still counts.
+_ARITH_PART = r"(?:[^()$]|\$(?!\())"
+ARITHMETIC = re.compile(r"\$\(\((?:" + _ARITH_PART + r"|\(" + _ARITH_PART + r"*\))*\)\)")
 
 
 def bash_violations(command_text):
     """The forms in a Bash command that could write a file, leave a command
     running or substitute another command's output (amendment 9)."""
-    unquoted = HARMLESS_REDIRECTS.sub(" ", QUOTED.sub(" ", command_text))
+    text = ARITHMETIC.sub(" ", command_text)
+    unquoted = HARMLESS_REDIRECTS.sub(" ", QUOTED.sub(" ", text))
     found = [name for name, pattern in UNQUOTED_FORMS if pattern.search(unquoted)]
-    found += [name for name, pattern in ANYWHERE_FORMS if pattern.search(command_text)]
+    found += [name for name, pattern in ANYWHERE_FORMS if pattern.search(text)]
     return found
+
+
+def refused_ids(stream):
+    """The tool calls the CLI refused, by id. Each result event lists its
+    turn's permission denials; a refused call never ran."""
+    return {d.get("tool_use_id") for event in stream.result_events for d in event.get("permission_denials") or []}
 
 
 def shell_reads(stream):
@@ -450,17 +515,72 @@ def shell_reads(stream):
                and not str(use["input"].get("command") or "").lstrip().startswith("git "))
 
 
+def _call_text(use):
+    return str(use["input"].get("command") or "") if use["name"] == "Bash" else json.dumps(use["input"], sort_keys=True)
+
+
 def bash_problems(stream):
-    """Every Bash call in a run that carries a violating form."""
+    """Every Bash call in a run that carries a violating form and ran.
+
+    Amendment 10: a call the CLI refused, by its result's permission
+    denials, wrote nothing and ran nothing, so it stops nothing; it is
+    reported with refused_calls. A run with no result lists no denials, so
+    every violating call in it counts as run.
+    """
+    refused = refused_ids(stream)
     problems = []
-    for use in stream.uses.values():
-        if use["name"] != "Bash":
+    for use_id, use in stream.uses.items():
+        if use["name"] != "Bash" or use_id in refused:
             continue
-        text = str(use["input"].get("command") or "")
+        text = _call_text(use)
         forms = bash_violations(text)
         if forms:
             problems.append(f"Bash {' '.join(forms)} in: {text[:120]}")
     return problems
+
+
+def refused_calls(stream):
+    """Every call the CLI refused, with any stopping form a Bash call
+    carried: the agent's own behaviour, reported and never a stop (amendment 10)."""
+    refused = refused_ids(stream)
+    found = []
+    for use_id, use in stream.uses.items():
+        if use_id in refused:
+            text = _call_text(use)
+            forms = bash_violations(text) if use["name"] == "Bash" else []
+            found.append(" ".join([use["name"], *forms]) + f" in: {text[:120]}")
+    return found
+
+
+def run_checks(stream, arm, allow, stopped=None, wrote=()):
+    """What a run is held to once it has ended, live or replayed: its start,
+    the tools and models it used, any hook, what it wrote, and the Bash
+    forms that ran. Returns its isolation problems, the calls the CLI
+    refused and its outcome (amendment 10)."""
+    isolation = (isolation_problems(stream.init(), arm, allow) + tool_use_problems(stream, allow, arm)
+                 + model_use_problems(stream, allow) + [f"hook ran: {t}" for t in stream.hook_traces()]
+                 + [f"wrote {w}" for w in wrote] + bash_problems(stream))
+    return isolation, refused_calls(stream), outcome_of(stopped, stream.result(), isolation)
+
+
+def replay(path, allow, arm=None):
+    """A recorded stream (`<run>.jsonl`) put through run_checks, with no CLI.
+    The arm is read from the run's name unless given."""
+    path = Path(path)
+    if arm is None:
+        found = re.search(r"-([AB])\d*$", path.stem)
+        if not found:
+            raise ValueError(f"no arm in the run name {path.stem}; pass it")
+        arm = found.group(1)
+    stream = Stream()
+    for line in path.read_text(encoding="utf-8").splitlines():
+        stream.add(line)
+    isolation, refused, outcome = run_checks(stream, arm, allow)
+    init = stream.init() or {}
+    return {"run": path.stem, "arm": arm, "route": allow.get("route", "plan"), "outcome": outcome,
+            "isolation": isolation, "refused_calls": refused, "shell_reads": shell_reads(stream),
+            "tool_calls": len(stream.calls), "model": init.get("model"),
+            "atlas_status_at_init": {s.get("name"): s.get("status") for s in init.get("mcp_servers") or []}.get("atlas")}
 
 
 def digest(value):
@@ -531,7 +651,11 @@ def error_text(record, sentinels=()):
     """What a run's error said, for the report, its planted values masked."""
     if record["outcome"] in ("answered", "turn_cap"):
         return None
-    text = record.get("error") or record.get("stderr") or ""
+    # Shakedown 2's report named its halt but not the call that caused it.
+    if record["outcome"] == "isolation_failed" and record.get("isolation"):
+        text = "; ".join(record["isolation"])
+    else:
+        text = record.get("error") or record.get("stderr") or ""
     return masked(text, sentinels)[:500] or None
 
 
@@ -613,7 +737,7 @@ def probe_prompt(targets, repo, grep_roots=()):
 PROBE_ROUTES = ("Read", "Grep", "Glob", "Bash")
 # What each run's start showed, carried into the probe and pilot summaries too
 # (the per-attempt records hold them already): amendments 7 and 8.
-START_FIELDS = ("effort", "permission_mode", "on_the_plan", "atlas_status_at_init")
+START_FIELDS = ("route", "effort", "permission_mode", "on_the_plan", "atlas_status_at_init")
 PROBE_B_PROMPT = "Call the atlas_overview tool once, then name this repository's parts in one line.\n"
 
 
@@ -756,7 +880,7 @@ def command(cli, allow, arm, mcp_config):
     return [
         cli, "-p",
         "--model", allow["model"],
-        "--effort", allow["effort"],
+        *(["--effort", allow["effort"]] if allow.get("effort") else []),
         "--permission-mode", allow["permission_mode"],
         "--max-turns", str(allow["max_turns"]),
         "--input-format", "stream-json",
@@ -794,13 +918,18 @@ def harness_home():
     return Path.home()
 
 
-def run_env(run_as):
-    """The CLI's whole environment: nothing of the harness's own beyond PATH."""
+def run_env(run_as, route="plan"):
+    """The CLI's whole environment: nothing of the harness's own beyond PATH,
+    and on the local route Ollama's address and model (amendment 10)."""
+    local = LOCAL_ENV if route == "local" else {}
     if run_as is None:
-        return {**os.environ, **CLI_ENV}
+        env = {**os.environ, **CLI_ENV, **local}
+        if local:
+            env.pop("ANTHROPIC_API_KEY", None)
+        return env
     proxy = {key: os.environ[key] for key in PROXY_ENV if key in os.environ}
     return {"HOME": run_as["home"], "USER": run_as["name"], "LOGNAME": run_as["name"],
-            "PATH": os.environ.get("PATH", "/usr/bin:/bin"), "LANG": "C.UTF-8", **proxy, **CLI_ENV}
+            "PATH": os.environ.get("PATH", "/usr/bin:/bin"), "LANG": "C.UTF-8", **proxy, **CLI_ENV, **local}
 
 
 def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, run_as=None):
@@ -828,7 +957,9 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, ru
         os.chmod(work / "runs", 0o711)
         reset_home(run_as["home"])
         clear_user_files(run_as["uid"])
-        install_credentials(run_as["home"], run_as["credentials"], run_as["uid"], run_as["gid"])
+        # The local route never signs in: no plan is in reach (amendment 10).
+        if allow.get("route", "plan") == "plan":
+            install_credentials(run_as["home"], run_as["credentials"], run_as["uid"], run_as["gid"])
         for path in (run_dir, cache, mcp_config):
             chown_tree(path, run_as["uid"], run_as["gid"])
     # If the override did not take, a refresh lands in the shared cache; the
@@ -844,9 +975,10 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, ru
     argv = command(cli, allow, arm, mcp_config)
     if run_as is not None:
         argv = ["runuser", "-u", run_as["name"], "--", *argv]
+    route = allow.get("route", "plan")
     proc = subprocess.Popen(argv, cwd=run_dir, stdin=subprocess.PIPE,
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding="utf-8",
-                            env=run_env(run_as))
+                            env=run_env(run_as, route))
     # A session that never returns a result would hold the harness forever.
     watchdog = threading.Timer(RUN_TIMEOUT_S, proc.kill)
     watchdog.start()
@@ -886,12 +1018,19 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, ru
             os.chmod(path, mode)
         clear_user_files(run_as["uid"])
     result = stream.result()
+    isolation, refused, outcome = run_checks(stream, arm, allow, stopped, wrote)
     record = {
         "run": run_id, "arm": arm,
         "cli_version": (stream.init() or {}).get("claude_code_version"),
+        # The local route has no effort, no plan and no price; its unit is
+        # wall time plus the GPU's load window, read from the host's Ollama
+        # log between started_at and ended_at (amendment 10).
+        "route": route,
         "effort": allow["effort"],
         "permission_mode": (stream.init() or {}).get("permissionMode"),
-        "on_the_plan": on_the_plan(stream.init() or {}, allow),
+        "on_the_plan": on_the_plan(stream.init() or {}, allow) if route == "plan" else None,
+        "started_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(started)),
+        "ended_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         # How often arm B's first turn began before Atlas's tools had
         # registered: the shakedown measures it (amendment 8).
         "atlas_status_at_init": {s.get("name"): s.get("status") for s in (stream.init() or {}).get("mcp_servers") or []}.get("atlas"),
@@ -901,12 +1040,12 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, ru
         "tokens": {**stream.tokens, "total": sum(stream.tokens.values())},
         "result_usage": (result or {}).get("usage"),
         "num_turns": (result or {}).get("num_turns"),
-        "total_cost_usd": (result or {}).get("total_cost_usd"),
+        "total_cost_usd": (result or {}).get("total_cost_usd") if route == "plan" else None,
         "tool_calls": len(stream.calls),
         "atlas_calls": sum(1 for name in stream.calls if name.startswith(ATLAS_PREFIX)),
         "shell_reads": shell_reads(stream),
-        "isolation": isolation_problems(stream.init(), arm, allow) + tool_use_problems(stream, allow, arm)
-                     + [f"hook ran: {t}" for t in stream.hook_traces()] + [f"wrote {w}" for w in wrote],
+        "isolation": isolation,
+        "refused_calls": refused,
         "stderr": proc.stderr.read()[-2000:],
         "final_text": (result or {}).get("result"),
         "error": ("; ".join(result.get("errors") or []) or result.get("result")) if result and result.get("is_error") else None,
@@ -916,8 +1055,8 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, ru
             "tool_calls": stream.debrief_calls,
             "text": (stream.debrief_result() or {}).get("result"),
         } if len(prompts) > 1 else None,
+        "outcome": outcome,
     }
-    record["outcome"] = outcome_of(stopped, result, record["isolation"])
     return record, stream
 
 
@@ -940,7 +1079,7 @@ KNOWN_DEFECTS = (
 
 def preflight(args):
     """The CLI, the allow-list and the problems that stop any run."""
-    allow = json.loads((HERE / "allow-list.json").read_text(encoding="utf-8"))
+    allow = for_route(json.loads((HERE / "allow-list.json").read_text(encoding="utf-8")), args.route)
     cli = resolve_cli(allow["cli"])
     problems = pin_problems() + work_problems(args.work)
     version = subprocess.run([cli, "--version"], capture_output=True, text=True).stdout
@@ -1058,9 +1197,14 @@ def probe(args, cli, allow, tasks):
     return 0 if report["passed"] else 1
 
 
+def results_dir(label, route):
+    """Where a pilot's records go: the local route's apart (amendment 10)."""
+    return HERE / "results" / (label if route == "plan" else f"{label}-{route}")
+
+
 def pilot(args, cli, allow, tasks):
     probe_report = PROBE_REPORT
-    out = HERE / "results" / args.label
+    out = results_dir(args.label, allow["route"])
     out.mkdir(parents=True, exist_ok=True)
     if not probe_report.exists() or not json.loads(probe_report.read_text(encoding="utf-8")).get("passed"):
         print("refusing to run the pilot: no passed probe report", file=sys.stderr)
@@ -1086,13 +1230,8 @@ def pilot(args, cli, allow, tasks):
                                           [prompt, debrief], budget, run_as=args.run_as_user)
                 record.update({"task": task["id"], "rep": pair["rep"], "attempt": attempt})
                 budget["used"] += record["spent"]
-                # An allowed git log or git show with a redirection, a chain,
-                # --output or a substitution could write outside the checkout
-                # or run another command; the permission rules cannot see it.
-                bash = bash_problems(stream)
-                if bash and record["outcome"] not in ("ceiling", "plan_limit"):
-                    record["isolation"] = record["isolation"] + bash
-                    record["outcome"] = "isolation_failed"
+                # The Bash forms that ran are in the record's isolation already
+                # (run_checks); the refused calls are kept apart (amendment 10).
                 if record["outcome"] == "answered":
                     graded = grader.grade(task, record["final_text"] or "")
                     record["correct"], record["grade"] = graded["correct"], graded
@@ -1127,8 +1266,10 @@ def pilot(args, cli, allow, tasks):
             break
     report = {
         "label": args.label,
+        "route": allow["route"],
+        "model": allow["model"],
         # A shakedown never enters the decision and freezes no pin (amendment 8).
-        "counts_toward_decision": args.label == "pilot",
+        "counts_toward_decision": args.label == "pilot" and allow["route"] == "plan",
         "halted": halted,
         "halt_error": halt_error,
         "known_defects_at_the_pin": list(KNOWN_DEFECTS),
@@ -1136,7 +1277,8 @@ def pilot(args, cli, allow, tasks):
         "ceiling": budget["ceiling"],
         "plan": plan,
         "runs": [{k: r.get(k) for k in ("run", "task", "arm", "rep", "outcome", "correct", "tokens", "tool_calls", "atlas_calls",
-                                         "num_turns", "wall_ms", "total_cost_usd", "cli_version", "shell_reads", *START_FIELDS)} for r in records],
+                                         "num_turns", "wall_ms", "started_at", "ended_at", "total_cost_usd", "cli_version",
+                                         "shell_reads", "refused_calls", *START_FIELDS)} for r in records],
         "dropped_pairs": dropped,
         "harness_failures": failures,
         "attempts": attempts,
@@ -1148,7 +1290,7 @@ def pilot(args, cli, allow, tasks):
     }
     (out / "report.json").write_text(scrub(json.dumps(report, indent=1)), encoding="utf-8")
     (out / "debriefs.jsonl").write_text("".join(scrub(json.dumps(d)) + "\n" for d in debriefs), encoding="utf-8")
-    print(json.dumps({"label": args.label, "halted": halted, "tokens_used": budget["used"], "runs": len(records), "dropped_pairs": len(dropped)}))
+    print(json.dumps({"label": args.label, "route": allow["route"], "halted": halted, "tokens_used": budget["used"], "runs": len(records), "dropped_pairs": len(dropped)}))
     return 1 if halted else 0
 
 
@@ -1157,16 +1299,31 @@ def main(argv):
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--probe", action="store_true")
     mode.add_argument("--pilot", action="store_true")
-    parser.add_argument("--work", required=True, type=Path)
-    parser.add_argument("--tools", required=True, type=Path)
-    parser.add_argument("--ceiling", required=True, type=int)
-    parser.add_argument("--run-as", required=True,
+    mode.add_argument("--replay", nargs="+", type=Path, metavar="STREAM",
+                      help="recorded streams (<run>.jsonl) put through a run's checks with no CLI (amendment 10)")
+    parser.add_argument("--work", type=Path)
+    parser.add_argument("--tools", type=Path)
+    parser.add_argument("--ceiling", type=int)
+    parser.add_argument("--run-as",
                         help="the unprivileged user each attempt's CLI runs as; the harness itself runs as root (amendment 8)")
     parser.add_argument("--run-as-credentials", default="/root/amu-credentials.placeholder.json",
                         help="a root-only copy of the run user's placeholder sign-in file, installed before every attempt")
     parser.add_argument("--label", choices=LABELS, default="pilot",
                         help="pilot (the pre-registered run) or shakedown (amendment 8: outside the decision)")
+    parser.add_argument("--route", choices=ROUTES, default="plan",
+                        help="plan (Claude Code on the plan) or local (Ollama on the host, shakedown only: amendment 10)")
     args = parser.parse_args(argv)
+    if args.replay:
+        allow = for_route(json.loads((HERE / "allow-list.json").read_text(encoding="utf-8")), args.route)
+        checked = [replay(path, allow) for path in args.replay]
+        for result in checked:
+            print(json.dumps(result))
+        return 1 if any(r["outcome"] in HALTING for r in checked) else 0
+    missing = [f"--{name.replace('_', '-')}" for name in ("work", "tools", "ceiling", "run_as") if getattr(args, name) is None]
+    if missing:
+        parser.error(f"--probe and --pilot need {', '.join(missing)}")
+    if args.route == "local" and not (args.pilot and args.label == "shakedown"):
+        parser.error("the local route runs only the shakedown: --pilot --label shakedown (amendment 10)")
     # Everything the harness writes is its own: records, streams, templates.
     os.umask(0o077)
     cli, allow, problems = preflight(args)

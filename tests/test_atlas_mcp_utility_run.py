@@ -8,13 +8,15 @@ was carried out at all, when a plan limit stops the run, how a run's end
 becomes its outcome, where Atlas would cache, and the flip rate. The CLI's
 real behaviour is proven by the probes the spec records before the pilot,
 not here; the init events under fixtures/atlas_mcp_utility are its real
-starts, captured on 2026-10-13.
+starts, captured on 2026-10-13, and its shakedown-2/ holds whole recorded
+runs that the checks replay with no CLI (amendment 10).
 """
 import importlib.util
 import json
 import shutil
 import tempfile
 import unittest
+import unittest.mock
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -276,12 +278,13 @@ class Probe(unittest.TestCase):
     def test_the_probe_report_carries_each_runs_start(self):
         # The third sandbox probe's report showed on_the_plan and
         # atlas_status_at_init as missing: the summary left them out.
-        started = {**self.CLEAN, "effort": "medium", "permission_mode": "default", "on_the_plan": True,
+        started = {**self.CLEAN, "route": "plan", "effort": "medium", "permission_mode": "default", "on_the_plan": True,
                    "atlas_status_at_init": "pending"}
         verdict = run.probe_verdict(self.probe_a(), self.probe_b(), started, started, self.TARGETS, self.SENTINELS)
         for record in verdict["records"]:
             self.assertEqual({k: record[k] for k in run.START_FIELDS},
-                             {"effort": "medium", "permission_mode": "default", "on_the_plan": True, "atlas_status_at_init": "pending"})
+                             {"route": "plan", "effort": "medium", "permission_mode": "default", "on_the_plan": True,
+                              "atlas_status_at_init": "pending"})
 
     def test_a_sentinel_in_any_result_fails_the_probe(self):
         verdict = run.probe_verdict(self.probe_a(leak="found amu-sentinel-0a1b2c3d"), self.probe_b(), self.CLEAN, self.CLEAN, self.TARGETS, self.SENTINELS)
@@ -708,3 +711,165 @@ class ProbeGrepRoots(unittest.TestCase):
         short = run.probe_verdict(stream, b, clean, clean, targets, [], ("/", "/work", "/home"))
         self.assertEqual(short["calls_expected"], 14)
         self.assertFalse(short["passed"])
+
+
+class Amendment10Detector(unittest.TestCase):
+    """Amendment 10: arithmetic expansion substitutes no command, a call the
+    CLI refused stops nothing, and a halt names the call that caused it."""
+
+    def test_arithmetic_expansion_is_not_a_substitution(self):
+        # Shakedown 2's stopping call (2026-10-13), and its neighbours.
+        for command in (
+            'cd /work/runs/CF09-A1; for n in 478 491 603; do sed -n "$((n-12)),${n}p" package-lock.json | grep -n node; done',
+            "echo $((1+2))", "echo $(( (n - 1) * 2 ))", "test $((a>b)) -eq 1",
+        ):
+            with self.subTest(command=command):
+                self.assertEqual(run.bash_violations(command), [])
+
+    def test_a_substitution_inside_or_beside_arithmetic_still_counts(self):
+        cases = {
+            "echo $(( $(cat ~/secret) + 1 ))": ["$("],
+            "echo $((1+2)) > out": [">"],
+            "echo $( (cat x) )": ["$("],
+            "echo $((1)) $(id)": ["$("],
+        }
+        for command, forms in cases.items():
+            with self.subTest(command=command):
+                self.assertEqual(run.bash_violations(command), forms)
+
+    def refused_run(self, with_result=True):
+        stream = run.Stream()
+        stream.add(assistant("m1", {}, [use("t1", "Bash", command="ls > /tmp/x"), use("t2", "Bash", command="git log > out"),
+                                        use("t3", "Read", file_path="/root/x")]))
+        stream.add(tool_result("t1", "requires approval", is_error=True))
+        stream.add(tool_result("t2", "", is_error=True))
+        stream.add(tool_result("t3", "denied", is_error=True))
+        if with_result:
+            denials = [{"tool_name": "Bash", "tool_use_id": "t1", "tool_input": {}},
+                       {"tool_name": "Read", "tool_use_id": "t3", "tool_input": {}}]
+            stream.add(json.dumps({"type": "result", "subtype": "success", "is_error": False, "result": "x",
+                                   "permission_denials": denials}))
+        return stream
+
+    def test_a_refused_call_is_reported_and_stops_nothing(self):
+        stream = self.refused_run()
+        problems = run.bash_problems(stream)
+        self.assertEqual(len(problems), 1)
+        self.assertIn("git log > out", problems[0])
+        self.assertEqual(run.refused_calls(stream), ["Bash > in: ls > /tmp/x", 'Read in: {"file_path": "/root/x"}'])
+
+    def test_with_no_result_every_violating_call_counts_as_run(self):
+        # is_error alone never proves a refusal: a command that ran and
+        # exited non-zero carries it too.
+        stream = self.refused_run(with_result=False)
+        self.assertEqual(len(run.bash_problems(stream)), 2)
+        self.assertEqual(run.refused_calls(stream), [])
+
+    def test_the_halt_names_the_call(self):
+        record = {"outcome": "isolation_failed", "isolation": ["Bash > in: git log > out"], "error": None, "stderr": ""}
+        self.assertEqual(run.error_text(record), "Bash > in: git log > out")
+
+
+class Replay(unittest.TestCase):
+    """Shakedown 2's recorded streams (2026-10-13, CLI 2.1.197, Sonnet on the
+    plan), put through the checks a live run gets, with no CLI (amendment 10)."""
+    STREAMS = FIXTURES / "shakedown-2"
+
+    def setUp(self):
+        self.allow = run.for_route(json.loads((HERE / "allow-list.json").read_text(encoding="utf-8")), "plan")
+
+    def test_cf09_answers_and_its_two_refused_calls_are_reported(self):
+        checked = run.replay(self.STREAMS / "CF09-A1.jsonl", self.allow)
+        self.assertEqual(checked["outcome"], "answered", checked)
+        self.assertEqual(checked["isolation"], [])
+        self.assertEqual(checked["shell_reads"], 6)
+        refused = checked["refused_calls"]
+        self.assertEqual(len(refused), 2)
+        # The first was refused for its `sort -u -k3` part, past the 120 characters kept.
+        self.assertIn("sed -n 166,222p .github/workflows/ci.yml", refused[0])
+        self.assertIn("$((n-12))", refused[1])
+        self.assertTrue(all(r.startswith("Bash in: ") for r in refused), refused)
+
+    def test_the_rc03_runs_pass(self):
+        for name, status in (("RC03-A1", None), ("RC03-A2", None), ("RC03-B1", "pending"), ("RC03-B2", "pending")):
+            with self.subTest(run=name):
+                checked = run.replay(self.STREAMS / f"{name}.jsonl", self.allow)
+                self.assertEqual((checked["outcome"], checked["isolation"], checked["refused_calls"]), ("answered", [], []))
+                self.assertEqual(checked["atlas_status_at_init"], status)
+                self.assertEqual(checked["shell_reads"], 0)
+
+    def test_the_replay_mode_exits_clean_on_shakedown_2(self):
+        streams = sorted(str(p) for p in self.STREAMS.glob("*.jsonl"))
+        self.assertEqual(len(streams), 5)
+        with unittest.mock.patch("sys.stdout"):
+            self.assertEqual(run.main(["--replay", *streams]), 0)
+
+    def test_the_same_streams_fail_the_local_route(self):
+        # A Sonnet stream on the local route is a run that reached the plan.
+        checked = run.replay(self.STREAMS / "RC03-A1.jsonl", run.for_route(self.allow, "local"))
+        self.assertEqual(checked["outcome"], "isolation_failed")
+        self.assertIn("a Claude model answered on the local route: claude-sonnet-5-5", checked["isolation"])
+        stream = run.Stream()
+        stream.add(json.dumps({"type": "result", "subtype": "success", "is_error": False, "result": "x",
+                               "modelUsage": {"nemotron-3.5-lightning": {}, run.LOCAL_MODEL: {}}}))
+        self.assertEqual(run.model_use_problems(stream, run.for_route(self.allow, "local")), [])
+
+    def test_shakedown_1s_first_stopping_call_now_passes(self):
+        # Shakedown 1 kept only its records; its first stopping call is whole
+        # there. The others were cut at 120 characters inside a quote.
+        self.assertEqual(run.bash_violations(
+            'cd /work/runs/CF09-A1; ls .github/workflows; grep -n "node\\|run:\\|^  [a-z-]*:$" .github/workflows/*.yml | head -100'), [])
+
+
+class LocalRoute(unittest.TestCase):
+    """Amendment 10: the shakedown on the local model served by Ollama on the host."""
+
+    def setUp(self):
+        self.plan = json.loads((HERE / "allow-list.json").read_text(encoding="utf-8"))
+        self.allow = run.for_route(self.plan, "local")
+
+    def test_the_pinned_clis_local_start_matches_arm_a(self):
+        # Captured 2026-10-13 from CLI 2.1.197 against a closed port: no model loaded.
+        init = init_event("local-A")
+        self.assertEqual(init["model"], run.LOCAL_MODEL)
+        self.assertEqual(run.isolation_problems(init, "A", self.allow), [])
+        self.assertIn("the model is nemotron-3.5-lightning:latest, pinned claude-sonnet-5-5",
+                      run.isolation_problems(init, "A", run.for_route(self.plan, "plan")))
+
+    def test_the_1m_suffix_is_accepted_and_an_api_key_is_not(self):
+        init = {**init_event("local-A"), "model": run.LOCAL_MODEL + "[1m]"}
+        self.assertEqual(run.isolation_problems(init, "A", self.allow), [])
+        problems = run.isolation_problems({**init, "apiKeySource": "ANTHROPIC_API_KEY"}, "A", self.allow)
+        self.assertEqual(problems, ["the local run holds an API key: the Director's ruling allows none"])
+
+    def test_the_command_has_the_local_model_and_no_effort(self):
+        for arm in ("A", "B"):
+            cmd = run.command("claude", self.allow, arm, Path("x.mcp.json"))
+            self.assertEqual(cmd[cmd.index("--model") + 1], run.LOCAL_MODEL)
+            self.assertNotIn("--effort", cmd)
+            self.assertEqual(cmd[cmd.index("--permission-mode") + 1], "default")
+        self.assertIsNone(self.allow["effort"])
+        self.assertEqual(self.plan["model"], "claude-sonnet-5-5")
+
+    def test_the_cli_gets_ollama_and_no_api_key(self):
+        env = run.run_env({"name": "amu", "uid": 1001, "gid": 1001, "home": "/home/amu"}, "local")
+        self.assertEqual(env["ANTHROPIC_BASE_URL"], "http://host.docker.internal:11434")
+        self.assertEqual(env["ANTHROPIC_AUTH_TOKEN"], "ollama")
+        for key in ("ANTHROPIC_DEFAULT_OPUS_MODEL", "ANTHROPIC_DEFAULT_SONNET_MODEL", "ANTHROPIC_DEFAULT_HAIKU_MODEL",
+                    "CLAUDE_CODE_SUBAGENT_MODEL"):
+            self.assertEqual(env[key], run.LOCAL_MODEL)
+        self.assertNotIn("ANTHROPIC_API_KEY", env)
+        self.assertNotIn("ANTHROPIC_BASE_URL", run.run_env({"name": "amu", "uid": 1001, "gid": 1001, "home": "/home/amu"}))
+        with unittest.mock.patch.dict(run.os.environ, {"ANTHROPIC_API_KEY": "sk-test-not-a-key"}):
+            self.assertNotIn("ANTHROPIC_API_KEY", run.run_env(None, "local"))
+
+    def test_local_results_go_apart_and_never_count(self):
+        self.assertEqual(run.results_dir("shakedown", "local"), HERE / "results" / "shakedown-local")
+        self.assertEqual(run.results_dir("shakedown", "plan"), HERE / "results" / "shakedown")
+        self.assertEqual(run.results_dir("pilot", "plan"), HERE / "results" / "pilot")
+
+    def test_the_local_route_runs_only_the_shakedown(self):
+        base = ["--work", "/w", "--tools", "/t", "--ceiling", "1", "--run-as", "amu", "--route", "local"]
+        for argv in (["--pilot", *base], ["--probe", *base], ["--pilot", "--label", "pilot", *base]):
+            with self.subTest(argv=argv), self.assertRaises(SystemExit), unittest.mock.patch("sys.stderr"):
+                run.main(argv)

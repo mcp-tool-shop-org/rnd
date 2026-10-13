@@ -5,15 +5,26 @@
   "max_turns": 40,
   "output_format": "stream-json",
   "strict_mcp_config": true,
+  "setting_sources": "local",
+  "session_persistence": false,
   "allowed_tools": [
-    "Read",
+    "Read(./**)",
     "Grep",
     "Glob",
     "Bash(git log:*)",
-    "Bash(git show:*)",
-    "Bash(git grep:*)",
-    "Bash(git ls-files:*)",
-    "Bash(ls:*)"
+    "Bash(git show:*)"
+  ],
+  "disallowed_tools": [
+    "Read(~/**)",
+    "Read(//c/Users/**)",
+    "Read(//d/**)",
+    "Read(//e/AI/**)",
+    "Edit",
+    "Write",
+    "NotebookEdit",
+    "WebFetch",
+    "WebSearch",
+    "Task"
   ],
   "atlas": {
     "package": "@dogfood-lab/atlas",

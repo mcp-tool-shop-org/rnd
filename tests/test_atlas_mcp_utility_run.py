@@ -830,10 +830,12 @@ class LocalRoute(unittest.TestCase):
 
     def test_the_pinned_clis_local_start_matches_arm_a(self):
         # Captured 2026-10-13 from CLI 2.1.197 against a closed port: no model loaded.
+        # It named the base model; amendment 11's derived model starts the same way.
         init = init_event("local-A")
-        self.assertEqual(init["model"], run.LOCAL_MODEL)
+        self.assertEqual(init["model"], run.LOCAL_BASE_MODEL)
+        init = {**init, "model": run.LOCAL_MODEL}
         self.assertEqual(run.isolation_problems(init, "A", self.allow), [])
-        self.assertIn("the model is nemotron-3.5-lightning:latest, pinned claude-sonnet-5-5",
+        self.assertIn(f"the model is {run.LOCAL_MODEL}, pinned claude-sonnet-5-5",
                       run.isolation_problems(init, "A", run.for_route(self.plan, "plan")))
 
     def test_the_1m_suffix_is_accepted_and_an_api_key_is_not(self):
@@ -873,3 +875,65 @@ class LocalRoute(unittest.TestCase):
         for argv in (["--pilot", *base], ["--probe", *base], ["--pilot", "--label", "pilot", *base]):
             with self.subTest(argv=argv), self.assertRaises(SystemExit), unittest.mock.patch("sys.stderr"):
                 run.main(argv)
+
+
+class Amendment11(unittest.TestCase):
+    """Amendment 11: an out-of-set call the CLI refused stops nothing, Haiku is
+    the plan-side partner for the local model, and the local model runs at a
+    pinned context."""
+
+    def setUp(self):
+        self.plan = json.loads((HERE / "allow-list.json").read_text(encoding="utf-8"))
+
+    def edit_run(self, answer):
+        stream = run.Stream()
+        stream.add(assistant("m1", {}, [use("t1", "Edit", file_path="ci.yml"), use("t2", "Read", file_path="ci.yml")]))
+        stream.add(tool_result("t1", answer, is_error=True))
+        stream.add(tool_result("t2", "name: CI"))
+        stream.add(json.dumps({"type": "result", "subtype": "success", "is_error": False, "result": "x"}))
+        return stream
+
+    def test_a_refused_out_of_set_call_is_reported_and_stops_nothing(self):
+        # The CLI's own answer in the first local shakedown (2026-10-13).
+        stream = self.edit_run("<tool_use_error>Error: No such tool available: Edit. Edit exists but is not enabled "
+                               "in this context. Use one of the available tools instead.</tool_use_error>")
+        self.assertEqual(run.tool_use_problems(stream, self.plan, "A"), [])
+        self.assertEqual(run.refused_calls(stream), ['Edit in: {"file_path": "ci.yml"}'])
+
+    def test_an_out_of_set_call_that_ran_still_stops(self):
+        stream = self.edit_run("The file ci.yml has been updated.")
+        self.assertEqual(run.tool_use_problems(stream, self.plan, "A"), ["called a tool its arm does not have: Edit"])
+
+    def test_the_haiku_route_is_on_the_plan_with_no_effort(self):
+        haiku = run.for_route(self.plan, "haiku")
+        self.assertEqual(haiku["model"], "claude-haiku-5-5")
+        self.assertIsNone(haiku["effort"])
+        cmd = run.command("claude", haiku, "B", Path("x.mcp.json"))
+        self.assertEqual(cmd[cmd.index("--model") + 1], "claude-haiku-5-5")
+        self.assertNotIn("--effort", cmd)
+        init = {**init_event("restricted-A"), "model": "claude-haiku-5-5"}
+        self.assertEqual(run.isolation_problems(init, "A", haiku), [])
+        self.assertNotIn("ANTHROPIC_BASE_URL", run.run_env({"name": "amu", "uid": 1, "gid": 1, "home": "/home/amu"}, "haiku"))
+        self.assertEqual(run.results_dir("shakedown", "haiku"), HERE / "results" / "shakedown-haiku")
+
+    def test_only_the_shakedown_takes_the_haiku_route(self):
+        base = ["--work", "/w", "--tools", "/t", "--ceiling", "1", "--run-as", "amu", "--route", "haiku"]
+        for argv in (["--pilot", *base], ["--probe", *base]):
+            with self.subTest(argv=argv), self.assertRaises(SystemExit), unittest.mock.patch("sys.stderr"):
+                run.main(argv)
+
+    def test_the_local_model_must_show_the_pinned_context(self):
+        show = {"parameters": f"num_ctx                        {run.LOCAL_NUM_CTX}\nstop \"<|im_end|>\""}
+        self.assertEqual(run.num_ctx_of(show), run.LOCAL_NUM_CTX)
+        self.assertEqual(run.local_model_problems(show), [])
+        self.assertEqual(run.local_model_problems({"parameters": "stop x"}),
+                         [f"{run.LOCAL_MODEL} sets num_ctx None, pinned {run.LOCAL_NUM_CTX}"])
+        self.assertIn("does not show", run.local_model_problems(None)[0])
+
+    def test_each_local_run_records_its_loaded_context(self):
+        # The first local shakedown's /api/ps showed 32768 for the base model.
+        ps = {"models": [{"name": run.LOCAL_BASE_MODEL, "model": run.LOCAL_BASE_MODEL, "context_length": 32768},
+                         {"name": run.LOCAL_MODEL, "model": run.LOCAL_MODEL, "context_length": 131072}]}
+        self.assertEqual(run.loaded_context(ps), 131072)
+        self.assertEqual(run.loaded_context(ps, run.LOCAL_BASE_MODEL), 32768)
+        self.assertIsNone(run.loaded_context(None))

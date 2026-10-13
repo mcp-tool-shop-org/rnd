@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.19] - 2026-10-13
+
+- atlas-mcp-utility amendment 11: Haiku partners the local model, nemotron at a pinned 131k context, refused out-of-set calls stop nothing
+- Updated experiment `atlas-mcp-utility`
+
 ## [1.1.8.0.18] - 2026-10-13
 
 - atlas-mcp-utility amendment 10: a local route first, refused calls stop nothing, recorded streams replay

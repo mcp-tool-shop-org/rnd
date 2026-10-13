@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.7.1.3] - 2026-10-13
+
+- atlas-mcp-utility amendment 6: Kimi K3's consult (ladder decides on cross-repo tasks; blind tasks; release-commit pins; CF09-CF13 out of rung 1's decision set)
+- entry: Kimi K3's consult and R&D's rulings on the multi-repository Atlas design
+- Updated `2026-10-13-multi-repository-atlas-research-grounding-for-the-build-up`: Multi-repository Atlas: research grounding for the build-up
+- Updated experiment `atlas-mcp-utility`
+
 ## [1.1.7.1.2] - 2026-10-13
 
 - entry: multi-repository Atlas, research grounding for the build-up (study-swarm, four questions)

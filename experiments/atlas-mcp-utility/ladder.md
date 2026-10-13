@@ -22,6 +22,35 @@ This file pre-registers the ladder's structure before the pilot runs. The task b
 yet. Each is written, key-checked and pinned by its own dated amendment before its rung runs. Nothing pinned for
 rung 1 changes.
 
+## Amendment 6, 2026-10-13: changes from Kimi K3's consult
+
+The Director asked for an outside model's view before anything was built. Kimi K3 wrote its own design first, blind
+to ours, then critiqued the ruling and this ladder. Its blind design landed on the same structure as R&D's:
+- one server with a `repo` argument;
+- import edges recorded in the consumer's map and joined at query time;
+- counted, tiered reach;
+- a seeded precision check.
+
+R&D's rulings are in the research-grounding entry. What changed here:
+- **The decision rests on the cross-repository tasks, not the anchors** (Kimi 6.1, accepted). The anchors don't need
+  the added repository, so a falling anchor ratio can come from arm A re-searching a larger workspace while arm B
+  answers from one repository's map. That is a real cost saving, but it isn't cross-repository help. The anchors'
+  trend is now a reported distraction-cost curve. See "Metrics" and "Decision rule".
+- **A third of each cross-repository bank is written blind to Atlas, or mined from fleet history** (6.2, accepted),
+  and reported apart.
+- **The anchors run twice per rung,** with a rank correlation reported beside Page's L (6.3, accepted).
+- **Later repositories are pinned to their release commits.** A fallback is a declared skew fact, never a silent
+  substitute (6.4, accepted).
+- **Also reported:**
+  - the anchors' answer-format error rate (6.5);
+  - a drift sentinel after rung 4 (6.6);
+  - arm-B runs that act on a cut list as if it were whole (section 7).
+- **One server per checkout is measured, not assumed** (9, accepted). If the pinned release consolidates the
+  servers, arm N runs the cross-repository tasks on one server per checkout.
+- **The pinned release carries only validated reach tiers** (5.2, accepted with a change). A tier that hasn't passed
+  the seeded precision and recall check is switched off in the pinned build, instead of left on and excluded
+  afterwards.
+
 ## The rungs
 
 | Rung | Repositories in the workspace | Task bank |
@@ -43,9 +72,12 @@ together. Their links are in the code:
 - **R4 is proposed by the Atlas session** from an edge survey and approved by R&D. One candidate is shipcheck: it is
   in the 42-task bank, it is a node in RepoMesh's registry, and RepoMesh's verify action runs it. Another is
   repomesh-license-verifier, which consumes RepoMesh's ledger.
-- **Each later repository is pinned to match R1.** Its pin is the commit whose published version is the one Cognate's
-  lockfile resolves at `0f8e850ba8`, or the nearest commit before 2026-10-01 if none matches exactly. The workspace is
-  then one consistent state, so a question about a dependency bump has one right answer.
+- **Each later repository is pinned to match R1.** Its pin is the commit that published the version Cognate's
+  lockfile resolves at `0f8e850ba8`, found from its release tag, release workflow run or CHANGELOG (amendment 6).
+  - If that commit can't be found, the nearest commit before 2026-10-01 is used. That fallback is recorded as a
+    declared skew fact in the rung's provenance, never as a silent substitute.
+  - The workspace is then one stated state, so a question about a dependency bump has one right answer, or a
+    declared reason why it might not.
 
 Rung k's workspace is rung k−1's plus one repository, so each rung adds exactly one.
 
@@ -77,6 +109,20 @@ answers alone.
   Keys come from the code, workflow files, lockfiles, fix commits or run logs, **never from Atlas's output**, as in
   rung 1. R&D blind-audits a sample of each bank, at least a third of it including every medium-confidence key,
   before that rung's pin.
+- **Four of each rung's twelve cross-repository tasks are written blind to Atlas** (amendment 6). Each comes from
+  one of two sources:
+  - an agent that never sees Atlas, its maps, its documents or its tools, given only the repositories and the task
+    types;
+  - real cross-repository history in the fleet, such as a fix in one repository driven by a change in another.
+
+  They count in the results like any task, and they are also reported apart. The Atlas session writes the other
+  eight, and authors who know what a tool sees can shape tasks it handles well.
+- **Every task is tagged** (the research grounding):
+  - its hop count;
+  - the number of files in its key;
+  - whether it needs a fact first seen in the newest repository.
+
+  A no-workspace probe drops any task a model answers correctly without tools.
 
 ## What each arm gets
 
@@ -115,8 +161,11 @@ answers alone.
 **One Atlas release for the whole ladder,** the build-up release, so the rungs compare with each other. It is never
 a pin bump partway up.
 - **If that release serves several repositories from one server,** or joins a package one repository publishes to
-  the repositories that import it, arm B uses that mode. One server per checkout, as described above, may then run as
-  a comparison arm, by the pin amendment.
+  the repositories that import it, arm B uses that mode.
+  - **Arm N,** one server per checkout as described above, then runs each rung's twelve cross-repository tasks once.
+  - So the effect of consolidating is measured, not asserted (amendment 6).
+- **Every reach tier in the pinned build has passed the seeded precision and recall check.** A tier that hasn't is
+  switched off in the pinned build, so no rung measures an unvalidated label (amendment 6).
 - **If it doesn't,** arm B is one server per checkout, as above.
 
 The pin amendment states which, and re-states the exact-set check and the tool names to match. Wherever this file
@@ -141,18 +190,29 @@ The ladder may stop at any rung. A shorter ladder is still a result. The curve i
 - tokens as the Hodges–Lehmann estimate of the per-pair log ratio B/A, with its exact interval;
 - tool calls, Atlas calls and wall time.
 
-Anchors and cross-repository tasks are reported apart.
+Anchors, cross-repository tasks and the blind-written subset are reported apart.
 
-**Across the rungs: the ladder test.** The hypothesis is directional: the sidecar's relative advantage grows as
-repositories are added.
-- **Primary trend: tokens on the anchors.** For each anchor pair at each rung, take log(B/A) in tokens. Rung 1's
-  runs of the same five tasks are included.
+**Primary: the cross-repository tasks, pooled over rungs 2 to 4** (amendment 6). The 36 pairs are treated as in
+rung 1:
+- correctness by exact two-sided McNemar, α = 0.05;
+- tokens as the Hodges–Lehmann estimate of log(B/A), with its exact interval;
+- pairs clustered by task where a task repeats.
+
+Each rung's own figures are reported beside the pooled ones.
+
+**Secondary: the distraction-cost curve on the anchors.** It is reported and never decides by itself. The hypothesis
+is directional: B gets relatively cheaper as repositories are added around a question that doesn't need them.
+- **Each anchor runs twice per rung,** and a pair's tokens are the mean of its two runs.
+- **The curve's test: tokens on the anchors.** For each anchor at each rung, take log(B/A) in tokens. Rung 1's runs
+  of the same five tasks are included.
   - **The test** is Page's L test for an ordered trend. Each anchor task is a block, the rungs 1 to 4 are the
     treatments, and the ordered alternative is that log(B/A) falls as the rung rises: B gets relatively cheaper as
     the workspace grows.
   - **Why this test:** comparing each task with itself keeps differences between tasks out of the trend.
   - **The p-value** is one-sided, from 10,000 permutations of the rung labels within each task, with the seed below.
     α = 0.05.
+  - **A robustness figure:** Spearman's correlation between the rung and the median anchor log ratio is reported
+    beside it.
 - **Arm B's fixed cost, reported beside the trend.** Every turn carries seven tool schemas per repository: 28 at
   rung 4. That cost pushes the trend toward the null, for a reason a single multi-repository server (arm C) would
   remove. So each run's first-turn input tokens are reported per arm and rung, as that fixed overhead. A flat trend
@@ -160,33 +220,52 @@ repositories are added.
 - **Secondary trend: correctness.** Per rung, B's correct share minus A's, with exact intervals, across all of that
   rung's pairs. It is reported as a curve. There is no trend test: with 17 pairs per rung, correctness can only
   show a large effect.
+- **Also reported** (amendment 6):
+  - the anchors' answer-format error rate, per arm and rung, so a format slip can't pass for a rung effect;
+  - every arm-B run where an Atlas answer said `complete: false`, the agent didn't follow its cursor, and the answer
+    graded wrong;
+  - a **drift sentinel:** after rung 4, two rung-1 anchors run again in both arms. A shift beyond rung 1's flip rate
+    flags model or service drift across the ladder.
 - **Seed:** 20261013, as in rung 1.
 
 ## Decision rule
 
 - **Rung 1 decides single-repository kickoffs,** by the README's rule, unchanged.
-- **The ladder decides multi-repository kickoffs.** For work that spans several repositories, include one Atlas
-  server per repository in the kickoff if either holds:
-  - the primary trend test is significant; or
-  - at rung 3 or above, a rung's correctness favours B and its token interval lies wholly below 1.
-
-  Otherwise, multi-repository kickoffs follow rung 1's decision. A ladder that stops before rung 3 is reported and
-  decides nothing beyond rung 1's rule.
+- **The ladder decides multi-repository kickoffs** (amendment 6), on the pooled cross-repository tasks. They need
+  at least rungs 2 and 3, so 24 pairs.
+  - **Include Atlas** in kickoffs for work that spans several repositories, in the mode arm B ran, if either holds:
+    - correctness is significantly better in arm B; or
+    - correctness is not significantly different, B's point estimate is not lower, and the token interval lies
+      wholly below 1.
+  - **Don't include it** if correctness is significantly worse, or the token interval lies wholly above 1 with no
+    gain in correctness.
+  - **Otherwise it's inconclusive,** and multi-repository kickoffs follow rung 1's decision.
+  - **A ladder that stops before rung 3** is reported and decides nothing beyond rung 1's rule.
+  - **The anchors' curve never decides by itself.** A cheaper B on anchors with no cross-repository gain is reported
+    as a distraction-cost saving.
 - **Either result goes to the Atlas build-up.** The cross-repository tasks where arm B was wrong, or never called
   Atlas, are the evidence for what multi-repository Atlas should do next.
 
 ## Price
 
-Priced at the API rates in README.md (Sonnet 5.5, cached 2026-10-06), so the figures compare with rung 1. Each rung
-has 17 pairs, so 34 runs. Tokens per run are assumed to grow with the workspace, because more files and more Atlas
-answers are read. Each rung's mini-pilot measures that growth before the rung is approved.
+Priced at the API rates in README.md (Sonnet 5.5, cached 2026-10-06), so the figures compare with rung 1. Tokens
+per run are assumed to grow with the workspace, because more files and more Atlas answers are read. Each rung's
+mini-pilot measures that growth before the rung is approved.
+
+Each rung runs (amendment 6):
+- 17 pairs: 34 runs;
+- the anchors' second runs: 10 runs;
+- arm N on the 12 cross-repository tasks: 12 runs, only if the pinned release consolidates the servers;
+- a 4-run mini-pilot.
+
+That's 60 runs a rung, or 48 without arm N.
 
 | Rung | Runs | Assumed tokens per run | Tokens | At API rates |
 |---|---|---|---|---|
-| 2 | 34 + 4 mini-pilot | ~1.5M | ~57M | ~$29 |
-| 3 | 34 + 4 | ~2.0M | ~76M | ~$38 |
-| 4 | 34 + 4 | ~2.5M | ~95M | ~$48 |
-| **Rungs 2–4** | 114 | | **~228M** | **~$115** (range ~$57 to ~$340) |
+| 2 | 60 | ~1.5M | ~90M | ~$45 |
+| 3 | 60 | ~2.0M | ~120M | ~$60 |
+| 4 | 60, plus 4 for the drift sentinel | ~2.5M | ~152M | ~$76 |
+| **Rungs 2–4** | 184 | | **~362M** | **~$181** (range ~$90 to ~$540) |
 
 Rung 1 is priced in README.md (~105M tokens, ~$52).
 
@@ -196,7 +275,7 @@ allowance, not on dollars. Each rung's report states what share of that allowanc
 
 **Ceilings,** enforced in tokens whichever way a run is billed:
 - each rung stops at 1.5 times its re-priced estimate;
-- rungs 2 to 4 together stop at 340M tokens.
+- rungs 2 to 4 together stop at 540M tokens.
 
 ## What the ladder does not measure
 

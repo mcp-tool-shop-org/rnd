@@ -140,6 +140,8 @@ class CollectTests(unittest.TestCase):
 
         (self.lib / "entries").mkdir()
         (self.lib / "instruments").mkdir()
+        # --library sets the module's ROOT; put it back so later tests see the real library.
+        self.addCleanup(setattr, cli, "ROOT", cli.ROOT)
         base = ["--library", str(self.lib)]
         out = io.StringIO()
         with contextlib.redirect_stdout(out):

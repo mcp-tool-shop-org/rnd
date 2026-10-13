@@ -1,8 +1,16 @@
 # Amendment 5, 2026-10-13: the full run becomes a repository ladder
 
 **The decision.** The Director ruled on 2026-10-13:
-- **The pilot runs as pre-registered.** Four pairs, one repository per run, every pin unchanged.
+- **The pilot runs as pre-registered.** Four pairs, one repository per run.
 - **The full run becomes a ladder.** It starts with one repository per run and adds one repository per rung.
+- **Atlas is built up before any testing.** Nothing runs (probes, pilot or any rung) until the build-up release
+  ships:
+  - AM's CI annotations;
+  - the test-file rule fix (testing-os#158);
+  - multi-repository Atlas.
+
+  Then one dated amendment moves the Atlas pin to that release, before the pilot, as the README allows. The pilot,
+  rung 1 and every later rung all run on that one release.
 
 **Why.** Every task in the 42-task bank can be answered from inside one checkout. That is probably where a map helps
 least, since one repository is easy to search with grep. The Director expects Atlas to matter most when an agent has
@@ -51,7 +59,7 @@ Rung k's workspace is rung k−1's plus one repository, so each rung adds exactl
 - **No map records an import of another repository's package as an edge.** So "Attestia publishes X, Cognate
   imports X" can't be joined from the maps today; the agent has to join it.
 
-Each cross-repository task is therefore labelled by whether Atlas 1.26.0 could see its edge (`atlas_sees_edge`: yes
+Each cross-repository task is therefore labelled by whether the pinned Atlas release can see its edge (`atlas_sees_edge`: yes
 or no), and results are reported for both labels. A gain on edges Atlas can't see would come from the single-repository
 answers alone.
 
@@ -104,11 +112,15 @@ answers alone.
   - The anchors' keys are prefixed mechanically, never re-keyed by hand.
   - The grader is tested on both forms, so a format slip can't show up as a rung effect.
 
-**Atlas stays at 1.26.0 for the whole ladder,** so the rungs compare with each other. Atlas may ship a mode that
-serves several maps from one server, or that joins a package one repository publishes to the repositories that import it
-(the build-up item the Atlas session named on 2026-10-13). If it does, that is measured as
-**arm C** on the same ladder banks, by its own amendment. It is never a pin bump partway up. The banks are built to
-be reused for that.
+**One Atlas release for the whole ladder,** the build-up release, so the rungs compare with each other. It is never
+a pin bump partway up.
+- **If that release serves several repositories from one server,** or joins a package one repository publishes to
+  the repositories that import it, arm B uses that mode. One server per checkout, as described above, may then run as
+  a comparison arm, by the pin amendment.
+- **If it doesn't,** arm B is one server per checkout, as above.
+
+The pin amendment states which, and re-states the exact-set check and the tool names to match. Wherever this file
+says 1.26.0, it describes the release Atlas was at when the ladder was designed. The pin amendment replaces it.
 
 ## Climbing: one rung at a time
 

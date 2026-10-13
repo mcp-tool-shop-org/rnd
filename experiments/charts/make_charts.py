@@ -135,9 +135,9 @@ class Svg:
         body = "\n".join(self.parts)
         svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {self.w} {self.h}" width="{self.w}" '
                f'height="{self.h}" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">\n{body}\n</svg>\n')
-        (HERE / name).write_text(svg, encoding="utf-8")
+        (HERE / name).write_text(svg, encoding="utf-8", newline="\n")  # LF on every OS, so a rebuild is byte-stable
         SITE_CHARTS.mkdir(parents=True, exist_ok=True)
-        (SITE_CHARTS / name).write_text(svg, encoding="utf-8")  # the site serves its copy at /rnd/charts/
+        (SITE_CHARTS / name).write_text(svg, encoding="utf-8", newline="\n")  # the site serves its copy at /rnd/charts/
 
 
 def panel_axis(svg, x0, x1, y0, y1, lo, hi, ticks, label, rule=None, rule_label=None, rule_side="lt"):

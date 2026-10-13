@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.4.6.60] - 2026-10-13
+
+- charts write LF and the chart test draws into a temporary directory (a test run leaves the tree clean)
+- Added `atlas`: atlas — a repository's map, checked in CI and served to agents
+- Added `testing-os`: testing-os — dogfood records, findings and the swarm control plane
+- Updated experiment `charts`
+
 - Atlas: a `datapacks` part in `atlas/boundaries.yaml`, so a new datapack no longer fails `atlas check`
 - New instruments: `atlas` and `testing-os` (the testing-os session, for R&D's review)
 

@@ -3,6 +3,7 @@
 import hashlib
 import importlib.util
 import json
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -28,14 +29,32 @@ def load_charts():
 class E4bChartTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        # Draw into a temporary directory, never over the tracked charts: a test run must leave the tree clean.
+        cls.tmp = tempfile.TemporaryDirectory()
+        out = Path(cls.tmp.name)
         cls.mod = load_charts()
+        cls.mod.HERE = out / "charts"
+        cls.mod.SITE_CHARTS = out / "site"
+        cls.mod.HERE.mkdir()
         cls.mod.chart_e4b()
-        cls.svg = {name: (CHARTS / name).read_text(encoding="utf-8") for name in NAMES}
+        cls.raw = {name: (cls.mod.HERE / name).read_bytes() for name in NAMES}
+        cls.svg = {name: data.decode("utf-8") for name, data in cls.raw.items()}
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.tmp.cleanup()
 
     def test_four_charts_are_copied_to_the_site(self):
         for name, text in self.svg.items():
             self.assertIn("<svg", text)
-            self.assertEqual(text, (SITE / name).read_text(encoding="utf-8"))
+            self.assertEqual(self.raw[name], (self.mod.SITE_CHARTS / name).read_bytes())
+
+    def test_a_rebuild_matches_the_committed_charts_byte_for_byte(self):
+        # LF on every OS, and no drift between the committed SVGs and what the results draw.
+        for name, data in self.raw.items():
+            self.assertNotIn(b"\r\n", data, name)
+            self.assertEqual(data, (CHARTS / name).read_bytes(), name)
+            self.assertEqual(data, (SITE / name).read_bytes(), name)
 
     def test_manifest_sha256_matches_the_result_bytes(self):
         manifest = json.loads((CHARTS / "manifest.json").read_text(encoding="utf-8"))

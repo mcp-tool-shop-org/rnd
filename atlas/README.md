@@ -1,17 +1,16 @@
 # rnd: how it works
 
-Mapped at 2026-10-13 from commit f9b2638 by Atlas 1.24.0.
+Mapped at 2026-10-13 from commit 681d503 by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-13 parts, mostly Python (78 files), shell (14), CSS (2), HTML (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
+13 parts, mostly Python (79 files), shell (14), CSS (2), HTML (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-13 (6a89bb3)
+## What changed since 2026-10-13 (f9b2638)
 
-- docs/watchlist.json is now read by mcptoolshop_rnd/cli.py and tests/test_watch.py.
-- 9 files added and 4 changed content, across 4 parts.
+Nothing structural changed since 2026-10-13; 6 files added and 4 changed content.
 
 ## What comes in
 

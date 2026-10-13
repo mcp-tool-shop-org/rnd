@@ -392,7 +392,7 @@
           "path": "entries/2026/2026-10-13-atlas-testing-os-rnd-buildup.md"
         },
         {
-          "hash": "a68ebef7ae013b574e8371aa3efa8e5e644dd6cf2b7055b8e8fbd513de292810",
+          "hash": "bb45a09553c51407991594bd8fcae4748e6e923f3b861d08644f61ff863fc61e",
           "path": "entries/2026/2026-10-13-e5-fill-card.md"
         },
         {
@@ -1207,6 +1207,93 @@
         {
           "hash": "a65f5945acb1de8a7147ce0a4cfd7c8bfb52c3b9392216ebae79cc5ac9a6d912",
           "path": "experiments/e4b/results/pilot.json"
+        },
+        {
+          "hash": "3126e1f81cc6e1e88e9e43324b699f6b83f1e80236164ee6294812559b45e456",
+          "path": "experiments/e5/README.md"
+        },
+        {
+          "hash": "cc755b344c56874880124dcb5fab6bf5498851015c708036d0574bdf17e58342",
+          "path": "experiments/e5/collect.json"
+        },
+        {
+          "exports": [
+            "assert_public",
+            "call",
+            "collect_receipt",
+            "number",
+            "optional",
+            "spec_rule",
+            "text",
+            "trim_model"
+          ],
+          "failurePaths": [
+            {
+              "in": "text",
+              "kind": "raise",
+              "line": 32
+            },
+            {
+              "in": "number",
+              "kind": "raise",
+              "line": 38
+            },
+            {
+              "in": "spec_rule",
+              "kind": "raise",
+              "line": 49
+            },
+            {
+              "in": "spec_rule",
+              "kind": "raise",
+              "line": 56
+            },
+            {
+              "in": "call",
+              "kind": "raise",
+              "line": 62
+            },
+            {
+              "in": "trim_model",
+              "kind": "raise",
+              "line": 74
+            },
+            {
+              "in": "collect_receipt",
+              "kind": "raise",
+              "line": 117
+            },
+            {
+              "in": "collect_receipt",
+              "kind": "raise",
+              "line": 121
+            },
+            {
+              "in": "collect_receipt",
+              "kind": "raise",
+              "line": 126
+            },
+            {
+              "in": "assert_public",
+              "kind": "raise",
+              "line": 142
+            },
+            {
+              "in": "assert_public",
+              "kind": "raise",
+              "line": 144
+            }
+          ],
+          "hash": "aead720dd9c2208bb93dc5f79af9b6beb3a4852040c4d3fe6cc5cdc5d114fa80",
+          "path": "experiments/e5/extract.py"
+        },
+        {
+          "hash": "0fd4a4f2f7d843df4fbed1b9095228cab9f0f0728f097d69154e1041874c1160",
+          "path": "experiments/e5/results/run-b.json"
+        },
+        {
+          "hash": "6904d0f1dccb7386084be01ed19e867d63ed8f4fec4ac7713b8d291dfa53123a",
+          "path": "experiments/e5/results/run-c.json"
         },
         {
           "hash": "204acb78c4a52b40b79ae6eaaea4da6eb1db759f43c7923b851bf65df305c5fe",
@@ -2887,7 +2974,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "c6cbf6fe0cc71e5ca0fabe086af990564e7e1ac6517e3cc4faf2de43e3556b17",
+          "hash": "b2f59b628b71c545acc1be3a649c48c725bcd07011fd319332bf217682ccc879",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -4084,7 +4171,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "e8a5bdc5ecf4ba70298ea5fb90d9029467e09b0e5a8ad923a9c84f3a31016511",
+          "hash": "23763b7cc290fd17ec39b12a9f2d8324585811d96bd3d9894659a48c6de32bd4",
           "path": "CHANGELOG.md"
         },
         {
@@ -4304,7 +4391,7 @@
           "path": "site/src/content/docs/briefs/math-ladder.md"
         },
         {
-          "hash": "770d0bfd5e7993d3c77558c880b1f8879396b0c6008c18b3901e867ab0fb06dc",
+          "hash": "225df893cdcce9a9aabd66ccefbc1fd2d3787a1e56120bbf9a3e00895e96aef3",
           "path": "site/src/content/docs/briefs/pair-and-interlock.md"
         },
         {
@@ -4366,6 +4453,10 @@
         {
           "hash": "e6c37c66f681b5d2eab637d02c670e3cc506852b0101c61de3ed458686cd4f56",
           "path": "site/src/content/docs/newsletter/issue-04.md"
+        },
+        {
+          "hash": "3b6d7013322f5df8cf8cb36f06c99af4ad1474fccf035e1ba4e2a1042e3efbef",
+          "path": "site/src/content/docs/newsletter/issue-05.md"
         },
         {
           "hash": "fae20c2d26c08c2d6ad8f8ad43ec0e47977c8c1b1f322177792085de911896e4",
@@ -4529,9 +4620,6 @@
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/cli.py",
             "mcptoolshop_rnd/collect.py"
-          ],
-          "names": [
-            "experiments/e4b/extract.py"
           ],
           "path": "tests/test_collect.py",
           "testFramework": "unittest"
@@ -5338,8 +5426,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "f9b2638d2f64b0bc8ffc392e79d0886308ff3c25",
-    "tracked": 560
+    "commit": "681d50399505187d6d5fe38619dcc581435a04f9",
+    "tracked": 566
   },
   "landings": [
     {

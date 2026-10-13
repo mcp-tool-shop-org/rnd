@@ -71,33 +71,24 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 9,
+      "added": 6,
       "changed": 4,
       "moved": 0,
-      "parts": 4,
+      "parts": 5,
       "removed": 0
     },
     "items": [
       {
-        "kind": "landing",
-        "sentence": "docs/watchlist.json is now read by mcptoolshop_rnd/cli.py and tests/test_watch.py.",
-        "subjects": [
-          "docs/watchlist.json",
-          "mcptoolshop_rnd/cli.py",
-          "tests/test_watch.py"
-        ]
-      },
-      {
         "kind": "counts",
-        "sentence": "9 files added and 4 changed content, across 4 parts.",
+        "sentence": "Nothing structural changed since 2026-10-13; 6 files added and 4 changed content.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "6a89bb3ad5c39c6786ae61f0815fc3ff9457f3b7",
-      "generatedAt": "2026-10-13T16:45:51.430Z"
+      "commit": "f9b2638d2f64b0bc8ffc392e79d0886308ff3c25",
+      "generatedAt": "2026-10-13T16:55:01.349Z"
     },
-    "unchanged": false
+    "unchanged": true
   },
   "changesTogether": [
     {
@@ -121,9 +112,9 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 2 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "f9b2638d2f64b0bc8ffc392e79d0886308ff3c25",
+  "commit": "681d50399505187d6d5fe38619dcc581435a04f9",
   "defaultBranch": "main",
-  "derived": "13 parts, mostly Python (78 files), shell (14), CSS (2), HTML (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "13 parts, mostly Python (79 files), shell (14), CSS (2), HTML (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -398,7 +389,7 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-13T16:55:01.349Z",
+  "generatedAt": "2026-10-13T17:34:14.734Z",
   "limits": [
     "9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.",
     "9 writes and 11 reads use paths built at run time and are not named here.",

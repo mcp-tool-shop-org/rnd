@@ -136,14 +136,40 @@ def fts_query(text, raw=False):
     return " ".join('"' + w.replace('"', '') + '"' for w in words)
 
 
-def search(con, text, limit=10, raw=False, kind=None, field=None, catalogs=True, entries=True):
+def exact_words(text):
+    """The query's words, for --exact: case kept, as typed."""
+    return re.findall(r"[\w.+#]+", text, flags=re.UNICODE)
+
+
+def exact_match(words, text):
+    """True when every word appears as a whole word, same case, in `text` (no stemming)."""
+    return all(re.search(r"(?<![\w])" + re.escape(w) + r"(?![\w])", text or "") for w in words)
+
+
+def exact_snippet(words, text, width=60):
+    """A short excerpt around the first exact hit, the hit in brackets."""
+    for w in words:
+        m = re.search(r"(?<![\w])" + re.escape(w) + r"(?![\w])", text or "")
+        if m:
+            lo, hi = max(0, m.start() - width), min(len(text), m.end() + width)
+            return ("… " if lo else "") + text[lo:m.start()] + "[" + m.group(0) + "]" + text[m.end():hi] + (" …" if hi < len(text) else "")
+    return ""
+
+
+def search(con, text, limit=10, raw=False, kind=None, field=None, catalogs=True, entries=True, exact=False):
+    """Full-text search. The index stems words (`pair` finds `pairs`, `paired`); with `exact`, results are
+    narrowed to rows holding every query word whole and in the same case, so `PAIR` finds the product,
+    not the word."""
     q = fts_query(text, raw)
     if not q:
         return [], []
+    words = exact_words(text) if exact and not raw else []
+    fetch = min(max(limit * 20, 200), 2000) if words else limit
     found_entries, found_items = [], []
     if entries:
         sql = ("SELECT e.id, e.title, e.kind, e.relevance, e.date, e.path, "
-               "snippet(entries_fts, 3, '[', ']', ' … ', 12) AS snip, bm25(entries_fts, 0, 8, 4, 1) AS rank "
+               "snippet(entries_fts, 3, '[', ']', ' … ', 12) AS snip, bm25(entries_fts, 0, 8, 4, 1) AS rank, "
+               "entries_fts.title AS ft, entries_fts.tags AS fg, entries_fts.body AS fb "
                "FROM entries_fts JOIN entries e ON e.id = entries_fts.id WHERE entries_fts MATCH ?")
         args = [q]
         if kind:
@@ -153,12 +179,30 @@ def search(con, text, limit=10, raw=False, kind=None, field=None, catalogs=True,
             sql += " AND e.id IN (SELECT entry_id FROM entry_fields WHERE field = ?)"
             args.append(field)
         sql += " ORDER BY rank LIMIT ?"
-        args.append(limit)
-        found_entries = [dict(r) for r in con.execute(sql, args)]
+        args.append(fetch)
+        found_entries = _narrow([dict(r) for r in con.execute(sql, args)], words, ("ft", "fg", "fb"), "fb", limit)
     if catalogs and not kind and not field:
         sql = ("SELECT c.catalog, c.name, c.family, c.lanes, c.fit, c.url, "
-               "snippet(catalog_fts, 3, '[', ']', ' … ', 14) AS snip, bm25(catalog_fts, 0, 6, 3, 1, 2, 2) AS rank "
+               "snippet(catalog_fts, 3, '[', ']', ' … ', 14) AS snip, bm25(catalog_fts, 0, 6, 3, 1, 2, 2) AS rank, "
+               "catalog_fts.name AS fn, catalog_fts.family AS ff, catalog_fts.description AS fd, catalog_fts.note AS fo "
                "FROM catalog_fts JOIN catalog_items c ON c.catalog = catalog_fts.catalog AND c.name = catalog_fts.name "
                "WHERE catalog_fts MATCH ? ORDER BY rank LIMIT ?")
-        found_items = [dict(r) for r in con.execute(sql, [q, limit])]
+        found_items = _narrow([dict(r) for r in con.execute(sql, [q, fetch])], words, ("fn", "ff", "fd", "fo"), "fd", limit)
     return found_entries, found_items
+
+
+def _narrow(rows, words, text_keys, snip_key, limit):
+    """Drop the full-text columns; with exact words, keep only rows that hold them whole and re-snip."""
+    out = []
+    for r in rows:
+        full = "\n".join(str(r.get(k) or "") for k in text_keys)
+        if words:
+            if not exact_match(words, full):
+                continue
+            r["snip"] = exact_snippet(words, str(r.get(snip_key) or "")) or exact_snippet(words, full)
+        for k in text_keys:
+            r.pop(k, None)
+        out.append(r)
+        if len(out) >= limit:
+            break
+    return out

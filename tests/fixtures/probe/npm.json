@@ -1,0 +1,10 @@
+{
+ "dist-tags": {
+  "latest": "0.10.0"
+ },
+ "license": "Apache-2.0",
+ "name": "nemo-relay-node",
+ "time": {
+  "0.10.0": "2026-10-08T22:02:55.507Z"
+ }
+}

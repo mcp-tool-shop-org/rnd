@@ -392,6 +392,14 @@
           "path": "entries/2026/2026-10-13-e5-fill-card.md"
         },
         {
+          "hash": "a54a838fff1c2c1f2fc62c9102e4f6409223215c397772bfae97d4ec9e2064d2",
+          "path": "entries/2026/2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ.md"
+        },
+        {
+          "hash": "76fb16a15d632a13779e41f1cb2f123722fdf5e423a9e6b8384c51ed27b1f096",
+          "path": "entries/2026/2026-10-13-nvidia-pair-a-lan-inference-router-and-how-it-compares-with-.md"
+        },
+        {
           "hash": "db30b519986800741a2a98c91fc19246ee9fffb64e3b69e08bc907b102a06aaa",
           "path": "entries/_template.md"
         }
@@ -410,17 +418,21 @@
       "dynamicReads": 9,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
-      "dynamicWrites": 4,
+      "dynamicWrites": 5,
       "entryPoints": [],
       "externals": 0,
       "files": [
         {
-          "hash": "37fc5fdb5745e4bf881803c5ec697b55e03389a52b602fc9c8b7ffb3ae97d2d5",
+          "hash": "58259580cbd2e4e545627fee7e318548b8720529e19ec1350bce79425fe4417e",
           "path": "experiments/atlas-mcp-utility/README.md"
         },
         {
-          "hash": "d1ffe5045ed157942151961c76a649a754e72f4589df87a98e13e7869414bae5",
+          "hash": "ff2500444a24a9f859c081869fe62448fa44006a601c94b0545136ef1184b3b4",
           "path": "experiments/atlas-mcp-utility/allow-list.json"
+        },
+        {
+          "hash": "ed73ef0864f6b603f32ab3f4a91874c465d537779ff1450094bc82690d312f8c",
+          "path": "experiments/atlas-mcp-utility/debrief.md"
         },
         {
           "exports": [
@@ -437,23 +449,87 @@
             {
               "in": "extract_answer",
               "kind": "except",
-              "line": 40
+              "line": 41
             },
             {
               "in": "check",
               "kind": "raise",
-              "line": 105
+              "line": 106
             }
           ],
-          "hash": "ab006b0bf0b227a63bff53126e6a8881de52d321d2af75b713464ea7ca478538",
+          "hash": "f6d09f5144b42fc1c86f632015de33c84d0bfb9dd3faf2f192cb47d24d864455",
           "path": "experiments/atlas-mcp-utility/grade.py"
+        },
+        {
+          "hash": "818e0530f3a768df2fbf343a1f9d3dd23669278c7428959a81df2c0ed3955f1f",
+          "path": "experiments/atlas-mcp-utility/key-audit.json"
         },
         {
           "hash": "a32c1c8f30e88f7264e6efce1d1c608339368b2e44691870206b3105e4e6226d",
           "path": "experiments/atlas-mcp-utility/prompt.md"
         },
         {
-          "hash": "cedfb958e51ee1ef9548727c5e5e10e9118fc8e21459b8adfe41c7a9d63d5af8",
+          "exports": [
+            "atlas_cli",
+            "bash_problems",
+            "bash_violations",
+            "command",
+            "debrief_items",
+            "digest",
+            "flip_rate",
+            "git",
+            "inside",
+            "isolation_problems",
+            "leaks",
+            "main",
+            "masked",
+            "pilot",
+            "pin_problems",
+            "plan_limit_hit",
+            "preflight",
+            "prepare",
+            "probe",
+            "probe_prompt",
+            "probe_verdict",
+            "readme_pins",
+            "resolve_cli",
+            "run_once",
+            "run_plan",
+            "scrub",
+            "sha256_lf",
+            "user_message",
+            "work_problems"
+          ],
+          "failurePaths": [
+            {
+              "in": "inside",
+              "kind": "except",
+              "line": 96
+            },
+            {
+              "in": "add",
+              "kind": "except",
+              "line": 157
+            },
+            {
+              "in": "git",
+              "kind": "raise",
+              "line": 431
+            },
+            {
+              "in": "prepare",
+              "kind": "raise",
+              "line": 450
+            }
+          ],
+          "hash": "016e91ab3ee307eac71a2977fa34b17ae093befa7968289af4f33b56cfa324ca",
+          "importsFiles": [
+            "experiments/atlas-mcp-utility/grade.py"
+          ],
+          "path": "experiments/atlas-mcp-utility/run.py"
+        },
+        {
+          "hash": "eb2ba43c88c989022ecf2fe90d950b150e144a3f916540fa68c1d46559acca1a",
           "path": "experiments/atlas-mcp-utility/tasks.json"
         },
         {
@@ -2651,11 +2727,11 @@
       "origin": "mixed",
       "outsidePlaces": [
         {
-          "reads": 18,
+          "reads": 21,
           "where": [
             "caller"
           ],
-          "writes": 4
+          "writes": 5
         },
         {
           "reads": 1,
@@ -2666,13 +2742,13 @@
           "writes": 0
         }
       ],
-      "outsideReads": 19,
-      "outsideWrites": 4,
+      "outsideReads": 22,
+      "outsideWrites": 5,
       "role": "code",
       "testRunners": [
         "unittest"
       ],
-      "testedBy": 3,
+      "testedBy": 5,
       "unresolvedNamed": [
         {
           "path": "experiments/data-designer/tests/test_lockdown.py",
@@ -2709,7 +2785,7 @@
           "path": "instruments/aspire-si.md"
         },
         {
-          "hash": "b6512d59b76ee65b286dc3b23ca47cf62a017484017cf45813398d60410ccb90",
+          "hash": "e103c030459e38f7145ae643803aff36f4495a5ab855b29213723c7cff188318",
           "path": "instruments/atlas.md"
         },
         {
@@ -2723,6 +2799,10 @@
         {
           "hash": "e3f2b3d84a73b12b6a68f317facda578445d26142c8f94387e190fd56bbf7d8f",
           "path": "instruments/intel-npu.md"
+        },
+        {
+          "hash": "9630877c1d50199cde4970845a2ef7517060763a27addb687fed6ee5a0441c9b",
+          "path": "instruments/nemo-relay.md"
         },
         {
           "hash": "e8fcb145fe591ffb2359055d451f8685f0e7c4d2d106bc6aefb294d1022c390d",
@@ -2803,7 +2883,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "8c269bafe2505b712855e8c06ca1de120fb30154151ba33d4e89bbcbefec852f",
+          "hash": "524e8c5a3d442b2b1f3a2192250dd07c5d2c221a3c5db57555166d1c7ed4bdcb",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -2867,6 +2947,7 @@
             "cmd_datapack",
             "cmd_list",
             "cmd_new",
+            "cmd_probe",
             "cmd_readouts",
             "cmd_search",
             "cmd_show",
@@ -2886,66 +2967,72 @@
             {
               "in": "cmd_search",
               "kind": "except",
-              "line": 107
+              "line": 108
             },
             {
               "in": "cmd_catalog",
               "kind": "except",
-              "line": 263
+              "line": 264
             },
             {
               "in": "cmd_readouts",
               "kind": "except",
-              "line": 316
+              "line": 317
             },
             {
               "in": "cmd_bump",
               "kind": "except",
-              "line": 344
+              "line": 345
             },
             {
               "in": "cmd_sql",
               "kind": "except",
-              "line": 358
+              "line": 359
             },
             {
               "in": "_git_head",
               "kind": "except",
-              "line": 371
+              "line": 372
+            },
+            {
+              "in": "cmd_probe",
+              "kind": "except",
+              "line": 387
             },
             {
               "in": "cmd_collect",
               "kind": "except",
-              "line": 404
+              "line": 439
             },
             {
               "in": "cmd_datapack",
               "kind": "except",
-              "line": 441
+              "line": 476
             },
             {
               "in": "cmd_datapack",
               "kind": "except",
-              "line": 471
+              "line": 506
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 583
+              "line": 625
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 585
+              "line": 627
             }
           ],
-          "hash": "547bb8dcc88fe8b02e53f21c93d50115da8195f3c95510f9a1c217e0ccc7da16",
+          "hash": "8b7c083999727190c1b1fbe0a6020d27720380b30f5dc8defe89fee0d454dc93",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/catalog.py",
             "mcptoolshop_rnd/collect.py",
             "mcptoolshop_rnd/datapack.py",
             "mcptoolshop_rnd/model.py",
+            "mcptoolshop_rnd/probe.py",
             "mcptoolshop_rnd/readouts.py",
             "mcptoolshop_rnd/release.py",
             "mcptoolshop_rnd/store.py"
@@ -3123,7 +3210,7 @@
               "calls": [
                 {
                   "branch": "args.action == \"sync\"",
-                  "line": 262,
+                  "line": 263,
                   "name": "sync",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3155,7 +3242,7 @@
             {
               "calls": [
                 {
-                  "line": 303,
+                  "line": 304,
                   "name": "root_dir",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3163,14 +3250,14 @@
                 },
                 {
                   "branch": "args.list or not args.query",
-                  "line": 306,
+                  "line": 307,
                   "name": "knowledge_bases",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 314,
+                  "line": 315,
                   "name": "search",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3185,49 +3272,49 @@
             {
               "calls": [
                 {
-                  "line": 337,
+                  "line": 338,
                   "name": "read_version",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 338,
+                  "line": 339,
                   "name": "bump",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 339,
+                  "line": 340,
                   "name": "last_tag",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 340,
+                  "line": 341,
                   "name": "changes",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 340,
+                  "line": 341,
                   "name": "changelog_section",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 342,
+                  "line": 343,
                   "name": "write_version",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 343,
+                  "line": 344,
                   "name": "insert_changelog",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3258,8 +3345,31 @@
             {
               "calls": [
                 {
+                  "line": 56,
+                  "name": "connect",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  },
+                  "via": "open_db"
+                },
+                {
+                  "line": 386,
+                  "name": "probe",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_probe"
+            },
+            {
+              "calls": [
+                {
                   "branch": "not args.name",
-                  "line": 379,
+                  "line": 414,
                   "name": "experiments",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3267,14 +3377,14 @@
                 },
                 {
                   "branch": "not args.name",
-                  "line": 380,
+                  "line": 415,
                   "name": "load_spec",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 390,
+                  "line": 425,
                   "name": "run",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3290,7 +3400,7 @@
               "calls": [
                 {
                   "branch": "args.action == \"list\"",
-                  "line": 412,
+                  "line": 447,
                   "name": "manifests",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3298,7 +3408,7 @@
                 },
                 {
                   "branch": "args.action == \"list\"",
-                  "line": 413,
+                  "line": 448,
                   "name": "load",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3306,7 +3416,7 @@
                 },
                 {
                   "branch": "args.action == \"build\"",
-                  "line": 437,
+                  "line": 472,
                   "name": "load",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3314,7 +3424,7 @@
                 },
                 {
                   "branch": "args.action == \"build\"",
-                  "line": 445,
+                  "line": 480,
                   "name": "build",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3322,7 +3432,7 @@
                 },
                 {
                   "branch": "args.action == \"build\"",
-                  "line": 450,
+                  "line": 485,
                   "name": "write",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3330,7 +3440,7 @@
                 },
                 {
                   "branch": "args.action == \"verify\"",
-                  "line": 458,
+                  "line": 493,
                   "name": "load",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3338,7 +3448,7 @@
                 },
                 {
                   "branch": "args.action == \"verify\"",
-                  "line": 459,
+                  "line": 494,
                   "name": "verify",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -3575,6 +3685,42 @@
         },
         {
           "exports": [
+            "from_github",
+            "from_huggingface",
+            "from_npm",
+            "from_pypi",
+            "gh_json",
+            "http_json",
+            "kind_of",
+            "probe"
+          ],
+          "failurePaths": [
+            {
+              "in": "kind_of",
+              "kind": "raise",
+              "line": 45
+            },
+            {
+              "in": "gh_json",
+              "kind": "raise",
+              "line": 64
+            },
+            {
+              "in": "_safe",
+              "kind": "except",
+              "line": 73
+            },
+            {
+              "in": "_safe",
+              "kind": "except",
+              "line": 75
+            }
+          ],
+          "hash": "b4d4d5c16bb49fefcf394dc30974c42c453f35a1304b49198ad7259f7154a143",
+          "path": "mcptoolshop_rnd/probe.py"
+        },
+        {
+          "exports": [
             "knowledge_bases",
             "prefix_query",
             "root_dir",
@@ -3675,6 +3821,9 @@
             "build",
             "connect",
             "default_db",
+            "exact_match",
+            "exact_snippet",
+            "exact_words",
             "fingerprint",
             "fts_query",
             "search"
@@ -3686,7 +3835,7 @@
               "line": 120
             }
           ],
-          "hash": "8cb7abc97cda290cb0a930c19929d7e3523f36462383640bfef546fca406c1d0",
+          "hash": "620c5a71717456ae88d8c52fe6aecfecc3d005b75670cb322d2562815c1ab223",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/catalog.py",
@@ -3730,7 +3879,7 @@
       "testRunners": [
         "unittest"
       ],
-      "testedBy": 5,
+      "testedBy": 6,
       "unresolvedNamed": [
         {
           "path": "mcptoolshop_rnd/collect.py",
@@ -3806,7 +3955,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "07a0e93bc82ce8025ba520d060d42cace29594846a0827524436b812907f7575",
+          "hash": "86a3bc485b5ccebbcb65483dd51a7f2e78920bed8cf9a73c98c21a65c3c52816",
           "path": "CHANGELOG.md"
         },
         {
@@ -3834,7 +3983,7 @@
           "path": "README.ja.md"
         },
         {
-          "hash": "3fb2525fa63264ba0d516e12665a39c84d15e590c5fade80cd8cd6e1a4ab0f88",
+          "hash": "d88854ba573ecc1e48b89724bd503b023729e2f30c146b662897a7c4cc773a39",
           "path": "README.md"
         },
         {
@@ -3994,6 +4143,10 @@
           "path": "site/src/content.config.ts"
         },
         {
+          "hash": "a73c5da57f3793abe75a08108cc020c792bdb6560554e9a386edee45b362ffdb",
+          "path": "site/src/content/docs/briefs/agent-tracing-nemo-relay.md"
+        },
+        {
           "hash": "161133f10d6bbd7e956f09fb803dc2f5db8fc17adc4b650e496f1354760ddfb5",
           "path": "site/src/content/docs/briefs/arrangement-costs.md"
         },
@@ -4020,6 +4173,10 @@
         {
           "hash": "40537be7fab53d40413ed821978c8c644c4933fd2f3f7d944e201d7e14203648",
           "path": "site/src/content/docs/briefs/math-ladder.md"
+        },
+        {
+          "hash": "770d0bfd5e7993d3c77558c880b1f8879396b0c6008c18b3901e867ab0fb06dc",
+          "path": "site/src/content/docs/briefs/pair-and-interlock.md"
         },
         {
           "hash": "ae9d7d1499277b6dff6107d99835c0bea8081670b45df4943b510884c46b2b20",
@@ -4135,16 +4292,58 @@
           "path": "tests/__init__.py"
         },
         {
+          "hash": "8c9c1fc133c0f098796154a0a80e9e20ecf00cf20d202c6808560da88dc7fba4",
+          "path": "tests/fixtures/probe/github-code.json"
+        },
+        {
+          "hash": "16b536beeae43efa74cf65c16bafb8f0feb53ef76b4e0929227b246a7fbe1f56",
+          "path": "tests/fixtures/probe/github-release.json"
+        },
+        {
+          "hash": "1c3f89c6d32abd70392be108a0b0446e1c135a1d03424a1ad6025b280fd77557",
+          "path": "tests/fixtures/probe/github-repo.json"
+        },
+        {
+          "hash": "003da5f936e628e45386452cc789e4a50fdf807353dddccf9d0bbf2ee2f940be",
+          "path": "tests/fixtures/probe/hf-model.json"
+        },
+        {
+          "hash": "28a17947ad9bcb0b7098e610c5099f7e08a27828490aafff76d649608c694d5f",
+          "path": "tests/fixtures/probe/npm.json"
+        },
+        {
+          "hash": "4a6ba91c98bd113cc3d9b8ae6165ef96903a6323abafacb2c90323816938a590",
+          "path": "tests/fixtures/probe/pypi.json"
+        },
+        {
           "exports": [
             "as_text",
             "perturbed",
             "set_field"
           ],
-          "hash": "fb48bc3f01abe9b710bd6b83a599d2140ceba6e68414164d0058491c38916b8b",
+          "hash": "e48e40ce7af74e70c84d3f7c7af228eb0af11ddafef85db4c770d46fc9bc93e8",
           "names": [
             "experiments/atlas-mcp-utility/grade.py"
           ],
           "path": "tests/test_atlas_mcp_utility_grade.py",
+          "testFramework": "unittest"
+        },
+        {
+          "exports": [
+            "assistant",
+            "tool_result",
+            "use"
+          ],
+          "hash": "5f1b9e4a2d454c071183ce7cfe550d5da3c02ac1a22655a0550d4b5f39def463",
+          "importOrder": [
+            "experiments/atlas-mcp-utility/run.py",
+            "experiments/atlas-mcp-utility/grade.py"
+          ],
+          "importsFiles": [
+            "experiments/atlas-mcp-utility/grade.py",
+            "experiments/atlas-mcp-utility/run.py"
+          ],
+          "path": "tests/test_atlas_mcp_utility_run.py",
           "testFramework": "unittest"
         },
         {
@@ -4243,6 +4442,26 @@
             "rnd/__init__.py"
           ],
           "path": "tests/test_packaging.py",
+          "testFramework": "unittest"
+        },
+        {
+          "exports": [
+            "fixture"
+          ],
+          "hash": "8c4f0d1cb5655390541df4fa1c358e48a51fe46349945cb8137d04f079159f15",
+          "importOrder": [
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/probe.py",
+            "mcptoolshop_rnd/store.py",
+            "mcptoolshop_rnd/cli.py"
+          ],
+          "importsFiles": [
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/cli.py",
+            "mcptoolshop_rnd/probe.py",
+            "mcptoolshop_rnd/store.py"
+          ],
+          "path": "tests/test_probe.py",
           "testFramework": "unittest"
         },
         {
@@ -4417,7 +4636,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 11
+          "files": 12
         },
         {
           "boundary": "rnd",
@@ -4432,16 +4651,16 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 10
+          "files": 12
         },
         {
           "boundary": "experiments",
           "depth": 1,
           "enters": {
-            "file": "experiments/charts/make_charts.py",
-            "from": "tests/test_e4b_charts.py"
+            "file": "experiments/atlas-mcp-utility/run.py",
+            "from": "tests/test_atlas_mcp_utility_run.py"
           },
-          "files": 2
+          "files": 4
         }
       ],
       "readers": [
@@ -4522,7 +4741,7 @@
         },
         {
           "coverage": true,
-          "files": 10,
+          "files": 12,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -4788,7 +5007,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 11
+          "files": 12
         },
         {
           "boundary": "rnd",
@@ -4876,7 +5095,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 10
+          "files": 11
         }
       ],
       "readers": [
@@ -4952,8 +5171,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "4d034507932153cb5b5dca0d5d5023eae343b7ba",
-    "tracked": 534
+    "commit": "6a89bb3ad5c39c6786ae61f0815fc3ff9457f3b7",
+    "tracked": 551
   },
   "landings": [
     {
@@ -5035,6 +5254,12 @@
           "confidence": "config"
         },
         {
+          "by": "tests/test_atlas_mcp_utility_run.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        },
+        {
           "by": "tests/test_cli.py",
           "call": "literal",
           "confidence": "ast",
@@ -5097,7 +5322,52 @@
     {
       "readers": [
         {
+          "by": "experiments/atlas-mcp-utility/run.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "tests/test_atlas_mcp_utility_run.py",
+          "call": "read_text",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/atlas-mcp-utility/allow-list.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/atlas-mcp-utility/run.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "tests/test_atlas_mcp_utility_run.py",
+          "call": "read_text",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/atlas-mcp-utility/debrief.md",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/atlas-mcp-utility/run.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
           "by": "tests/test_atlas_mcp_utility_grade.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        },
+        {
+          "by": "tests/test_atlas_mcp_utility_run.py",
           "call": "literal",
           "confidence": "ast",
           "fromTests": true
@@ -5108,6 +5378,108 @@
     },
     {
       "readers": [
+        {
+          "by": "tests/test_atlas_mcp_utility_grade.py",
+          "call": "read_text",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/atlas-mcp-utility/key-audit.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/atlas-mcp-utility/run.py",
+          "call": "read_text",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/atlas-mcp-utility/prompt.md",
+      "writers": []
+    },
+    {
+      "readers": [],
+      "target": "experiments/atlas-mcp-utility/results/pilot",
+      "tracked": false,
+      "writers": [
+        {
+          "by": "experiments/atlas-mcp-utility/run.py",
+          "confidence": "ast",
+          "unless": [
+            "main"
+          ]
+        }
+      ]
+    },
+    {
+      "readers": [],
+      "target": "experiments/atlas-mcp-utility/results/pilot/debriefs.jsonl",
+      "tracked": false,
+      "writers": [
+        {
+          "by": "experiments/atlas-mcp-utility/run.py",
+          "confidence": "ast",
+          "unless": [
+            "main"
+          ]
+        }
+      ]
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/atlas-mcp-utility/run.py",
+          "call": "read_text",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/atlas-mcp-utility/results/pilot/probe-report.json",
+      "tracked": false,
+      "writers": [
+        {
+          "by": "experiments/atlas-mcp-utility/run.py",
+          "confidence": "ast",
+          "unless": [
+            "main"
+          ]
+        }
+      ]
+    },
+    {
+      "readers": [],
+      "target": "experiments/atlas-mcp-utility/results/pilot/report.json",
+      "tracked": false,
+      "writers": [
+        {
+          "by": "experiments/atlas-mcp-utility/run.py",
+          "confidence": "ast",
+          "unless": [
+            "main"
+          ]
+        }
+      ]
+    },
+    {
+      "readers": [
+        {
+          "by": "tests/test_atlas_mcp_utility_run.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/atlas-mcp-utility/run.py",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/atlas-mcp-utility/run.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
         {
           "by": "tests/test_atlas_mcp_utility_grade.py",
           "call": "read_text",
@@ -6723,7 +7095,7 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 12,
+  "testFiles": 20,
   "testsNotRun": [
     "experiments/cuda-graphs/test_graphed_heads.py",
     "experiments/data-designer/tests/test_lockdown.py"

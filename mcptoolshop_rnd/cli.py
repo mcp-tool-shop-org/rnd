@@ -14,7 +14,7 @@ import traceback
 from datetime import date
 from pathlib import Path
 
-from . import __version__, catalog, collect, datapack, model, readouts, release, store
+from . import __version__, catalog, collect, datapack, model, probe, readouts, release, store
 
 SOURCE_ROOT = Path(__file__).resolve().parent.parent
 
@@ -103,7 +103,8 @@ def cmd_search(args):
     try:
         ents, items = store.search(con, " ".join(args.query), limit=args.limit, raw=args.raw,
                                    kind=args.kind, field=args.field,
-                                   catalogs=not args.entries_only, entries=not args.catalog_only)
+                                   catalogs=not args.entries_only, entries=not args.catalog_only,
+                                   exact=args.exact)
     except sqlite3.OperationalError as exc:
         return fail("QUERY_INVALID", str(exc), "drop --raw to search plain words")
 
@@ -372,6 +373,40 @@ def _git_head():
         return None
 
 
+def cmd_probe(args):
+    con = open_db(args)
+
+    def library(name):
+        ents, items = store.search(con, name, limit=5, exact=True)
+        return [r["id"] for r in ents] + [f"{r['catalog']}:{r['name']}" for r in items]
+
+    reports = []
+    for url in args.urls:
+        try:
+            reports.append(probe.probe(url, library=library))
+        except probe.ProbeError as exc:
+            return fail(exc.code, str(exc), exc.hint)
+
+    def text(rs):
+        for r in rs:
+            print(f"{r['name']}  ({r['kind']})")
+            for key, label in (("licence", "licence"), ("licence_link", "licence link"), ("latest", "latest"),
+                               ("released", "released"), ("updated", "last change"), ("archived", "archived"),
+                               ("gated", "gated")):
+                if r.get(key) not in (None, ""):
+                    print(f"  {label:<13} {r[key]}")
+            if "telemetry_hits" in r:
+                paths = ", ".join(r.get("telemetry_paths") or [])
+                print(f"  {'telemetry':<13} {r['telemetry_hits']} code hit(s) for 'telemetry' — a lead to read, not proof"
+                      + (f": {paths}" if paths else ""))
+            hits = r.get("library_hits") or []
+            print(f"  {'in rnd':<13} {', '.join(hits) if hits else 'nothing yet'}")
+            for what, why in r["unknown"].items():
+                print(f"  unknown {what}: {why}")
+    emit(args, reports, text)
+    return 0
+
+
 def cmd_collect(args):
     try:
         if not args.name:
@@ -502,6 +537,8 @@ def build_parser():
     s.add_argument("--entries-only", action="store_true")
     s.add_argument("--catalog-only", action="store_true")
     s.add_argument("--raw", action="store_true", help="pass the query to FTS5 unquoted (AND/OR/NEAR, prefix*)")
+    s.add_argument("--exact", action="store_true",
+                   help="whole words in the same case, no stemming: `PAIR` finds the product, not 'pairs'")
 
     s = add("show", cmd_show, "show one entry (or <catalog>:<item>)")
     s.add_argument("id")
@@ -554,6 +591,11 @@ def build_parser():
     s.add_argument("target", nargs="?", help="pack name (folder under datapacks/)")
     s.add_argument("--source", help="build: the folder the files come from, relative to the library")
     s.add_argument("--copy", help="verify: a downloaded copy of the pack")
+
+    s = add("probe", cmd_probe,
+            "licence, latest release, gating, telemetry hits and library hits for a GitHub repo, "
+            "Hugging Face model, PyPI project or npm package")
+    s.add_argument("urls", nargs="+", metavar="url")
 
     s = add("collect", cmd_collect,
             "copy an experiment's trimmed records from a tool repository at pinned commits (experiments/<name>/collect.json)")

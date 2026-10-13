@@ -1,0 +1,21 @@
+{
+ "incomplete_results": false,
+ "items": [
+  {
+   "path": "crates/adaptive/src/acg/telemetry.rs"
+  },
+  {
+   "path": "README.md"
+  },
+  {
+   "path": "crates/adaptive/README.md"
+  },
+  {
+   "path": "integrations/openclaw/README.md"
+  },
+  {
+   "path": "crates/node/adaptive.js"
+  }
+ ],
+ "total_count": 252
+}

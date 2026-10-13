@@ -5,6 +5,7 @@
 - The Director approved pricing it and chose to run it on his Claude plan.
 - The pilot runs once the key check below is done. The full run needs his go after he has seen what the pilot measured.
 - **Amendment 5 (2026-10-13):** the full run becomes a repository ladder. Rung 1 is the 42-task bank below, unchanged. Each later rung adds one linked repository to the workspace. See [ladder.md](ladder.md).
+- **Amendment 6 (2026-10-13):** Kimi K3's consult. CF09 to CF13 leave the decision set, cut-list misreads are reported, and the ladder decides on its cross-repository tasks. See below and ladder.md.
 - **On hold (2026-10-13):** the Director ruled that Atlas is built up before any testing. The probes and the pilot wait for the build-up release, and a dated amendment moves the Atlas pin to it before the pilot.
 
 ## The question and the decision it feeds
@@ -145,6 +146,25 @@ Every Bash command a run makes is in its stream. During the pilot, a run that ma
 
 `allow-list.json` is re-pinned above. `tasks.json`, `prompt.md`, `grade.py` and `debrief.md` are unchanged.
 
+### Amendment 6, 2026-10-13: an outside model's consult
+
+The Director asked for an outside model's view before Atlas is built up and anything runs. Kimi K3 wrote its own
+design blind, then critiqued this experiment, the ladder and R&D's design ruling. R&D's rulings on each point are in
+the research-grounding entry. What changes for rung 1:
+- **CF09 to CF13 leave the decision set.** They exist because Atlas's D1 rule found them, so they favour Atlas by
+  construction. Keeping them only as a sensitivity result still let them drive the decision.
+  - The primary analysis now runs on the other 37 pairs.
+  - The five are reported apart.
+  - The old sensitivity result "without CF09 to CF13" becomes "with them".
+- **A pattern is named and reported:** an arm-B run that acts on a cut Atlas list (`complete: false`) as if it were
+  whole, without following its cursor, and grades wrong. A tool that answers confidently but incompletely can do
+  worse than an honest "can't tell", and that should be visible, not buried in the totals.
+- **A threat is named, not fixed:** one pinned engine for every run means a map defect lands on every arm-B run at
+  once, as the `test_*.mjs` gap does for TG02 at 1.26.0. Known defects at the pin are listed in every report, as
+  amendment 4 began.
+
+The ladder's changes are in [ladder.md](ladder.md), under amendment 6. Nothing pinned above changes.
+
 ## Design
 
 **Pairs.** Each task runs twice:
@@ -169,7 +189,7 @@ The 2026-09-30 triage found eight default branches red from five causes, and Atl
 
 **Known correlations, reported rather than hidden:**
 - CF02 and CF03 share one cause, and so do CF05 and CF06.
-- CF09 to CF13 share one fix pattern. They exist because Atlas's D1 rule found them, so they favour Atlas by construction.
+- CF09 to CF13 share one fix pattern. They exist because Atlas's D1 rule found them, so they favour Atlas by construction. Since amendment 6 they are outside the decision set and reported apart.
 
 **The key check, before the pilot.** R&D re-derives 15 keys from the pinned trees:
 - the 9 medium-confidence ones: CF01, CF05, CF06, CF07, RC09, TG02, TG03, WR01, WR02;
@@ -213,7 +233,7 @@ A key R&D cannot confirm is fixed or dropped, by a dated amendment.
 
 ## Metrics, pre-registered
 
-**Primary: correctness.** Each pair is correct or incorrect in each arm. The test is an exact two-sided McNemar on the discordant pairs, α = 0.05.
+**Primary: correctness.** Each pair is correct or incorrect in each arm. The test is an exact two-sided McNemar on the discordant pairs, α = 0.05, over the 37 pairs other than CF09 to CF13 (amendment 6). The token estimate below uses the same 37.
 
 **Secondary: tokens.**
 - "Tokens" means the sum of `input_tokens`, `cache_creation_input_tokens`, `cache_read_input_tokens` and `output_tokens` over every turn of a run, from the run's own usage records.
@@ -226,13 +246,14 @@ A key R&D cannot confirm is fixed or dropped, by a dated amendment.
 - **Wall time,** recorded but not gated.
 - **Precision and recall** on set-valued keys.
 - **Each stratum** on its own.
+- **Cut-list misreads** (amendment 6): arm-B runs where an Atlas answer said `complete: false`, the agent didn't follow its cursor, and the run graded wrong.
 
 **Sensitivity results.** They are read beside the primary result and never drive the decision:
 1. without the 9 medium-confidence keys;
-2. without CF09 to CF13;
+2. with CF09 to CF13 included (amendment 6 took them out of the primary set);
 3. with one task per correlated cause.
 
-**Power, said plainly.** With 42 pairs, McNemar detects only a large difference in correctness (about ten discordant pairs against two). The token ratio is the more sensitive measure.
+**Power, said plainly.** With 37 pairs, McNemar detects only a large difference in correctness (about ten discordant pairs against two). The token ratio is the more sensitive measure.
 
 ## Decision rule
 

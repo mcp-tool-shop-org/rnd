@@ -102,18 +102,70 @@ decision that depends on it.
   even at temperature 0.
 - **Pairs clustered by task** (Miller 2024).
 
+**5. An outside model's consult (Kimi K3, 2026-10-13), and R&D's rulings.**
+
+The Director asked for an outside model's view. Kimi K3 wrote its own design first, before reading ours. It landed
+on the same structure:
+- one server with a `repo` argument and a listing tool;
+- edges recorded in the consumer's map, with the declared range and the resolved version kept apart;
+- a join at query time;
+- counted, tiered reach;
+- a seeded precision check.
+
+Two independent routes reaching one design is some evidence the design is sound.
+
+R&D checked its two load-bearing claims about Atlas's code at testing-os main:
+- **The repository allow-list:** the production spec's Part 1 item 6 already plans it, as Kimi said. It takes roots
+  fixed at start, compares real paths after links resolve, and refuses with `ATLAS_SIDECAR_REPO_NOT_ALLOWED`.
+- **`--ref`:** it exists, but only for `explain` and `gaps`, not for reach or the sidecar. Kimi's "already does
+  exactly this" overstates it.
+
+| Point | Ruling |
+|---|---|
+| 5.1 Join to the locked version's map, not the producer checkout (high) | **Accepted, with a change.** The join walks the producer's map at the commit that published the locked version, when that commit is known and holds a map. Otherwise it uses the checkout's map and states the skew. Extending `--ref` reading to reach and the sidecar is build work. |
+| 5.2 Gate the decision on the seeded check (medium-high) | **Accepted, with a change.** A reach tier that hasn't passed the check is switched off in the pinned build, rather than left on and its tasks excluded later. |
+| 5.3 A skew state of unknown (medium) | **Accepted.** States are match, ahead, behind and unknown. Unknown is the default and is never read as match. |
+| 5.4 TypeScript's type-level breaks (medium) | **Accepted, with a change.** For TS edges, three tiers: declared dependency (certain); a value import of the changed export (inferred, runtime consequence); a type-only import (inferred, build consequence). Kimi's "deterministically breaks" overstates it, because a type change can be compatible. Reach reports use, not breakage. |
+| 5.5 Adopt the production spec's allow-list (low) | **Accepted,** including its one security review. |
+| 6.1 The anchors' trend measures distraction cost (high) | **Accepted.** The ladder decides on the cross-repository tasks pooled over rungs 2 to 4. The anchors become a reported distraction-cost curve. |
+| 6.2 Authors who know Atlas shape the tasks (medium-high) | **Accepted.** Four of each rung's twelve cross-repository tasks are written blind to Atlas, or mined from fleet history, and reported apart. |
+| 6.3 Page's L is thin (medium) | **Accepted.** Anchors run twice per rung, with Spearman's correlation reported beside the test. |
+| 6.4 "Nearest commit before" can invent a state (medium) | **Accepted.** Pins are the release commit, and a fallback is a declared skew fact. |
+| 6.5, 6.6 Format errors; drift sentinel (low) | **Accepted,** both reported. |
+| 7 CF09 to CF13; cut lists read as whole; correlated map defects | **The first two are accepted:** CF09 to CF13 leave rung 1's decision set, and cut-list misreads are reported. **The third is named as a threat and not fixed;** known defects at the pin are listed in every report. |
+| 8 Evidence | **No misreading found.** The Anthropic figure is already marked vendor, and no decision rests on it. Three missed npm sources are recorded below as recalled and unverified, to be read before any decision uses them. |
+| 9 Build order and scope | **Accepted.** The seeded check is built alongside reach, and it blocks the labels, not reach. Skew and orphan states show in the repository listing. One server per checkout runs as arm N on rungs 2 to 4. |
+
+**Sources Kimi says we missed** (recalled by Kimi, not yet read by R&D):
+- Bogart, Kästner, Herbsleb and Thung 2016, on how ecosystems negotiate breaking changes. Our own researcher dropped
+  it because it couldn't confirm the venue.
+- Decan and Mens, on npm's semantic-versioning compliance and range-versus-lock behaviour.
+- Mirhosseini and Parnin 2017, on how npm projects respond to automated dependency-update pull requests.
+
 ## Studio relevance
 
-**The decision for the Atlas session's build-up** (R&D's ruling), in this order:
+**The decision for the Atlas session's build-up** (R&D's ruling, amended after Kimi K3's consult), in this order:
 1. AM and testing-os#158, already under way.
-2. **The surface:** `repo` arguments and a repository-listing tool on one server.
+2. **The surface:**
+   - `repo` arguments, under the production spec's allow-list (start-time roots, real paths,
+     `ATLAS_SIDECAR_REPO_NOT_ALLOWED`, one security review);
+   - a repository-listing tool that reports each map's commit and engine version, and the skew or orphan state of
+     each link.
 3. **The edge:** `package-import` in each map, npm and pnpm lockfiles first because the ladder's chain is TypeScript,
    with uv later. This changes every map, so it ships with the fleet's next engine pin wave.
-4. **Two-tier cross-repository reach,** joined at query time.
-5. **A seeded precision and recall check** in testing-os, before any reach label is called reliable.
+   - A link can have two publishers of one name. When it does, every candidate is reported, never one picked.
+   - `workspace:` and `file:` links are a kind of their own.
+4. **Cross-repository reach, joined at query time,** to the locked version's map where it is known:
+   - tier 1, the declared dependency, is certain;
+   - the inferred tiers are value imports and type-only imports;
+   - skew is match, ahead, behind or unknown.
+5. **A seeded precision and recall check** in testing-os, built alongside reach. A tier that hasn't passed it is off
+   in the pinned build.
+
+**The smallest version worth testing** is points 2 to 4 with tier 1 only, then the inferred tiers once they pass.
 
 **Then one pin amendment,** and the pilot and the ladder run on that release. The ladder's arm B becomes this
-server, and one-server-per-checkout stays as a comparison arm.
+server, and one server per checkout runs as arm N (experiment amendment 6).
 
 **The ladder's rung banks adopt the four measurement points in Key points 4,** by the bank amendments.
 
@@ -122,6 +174,10 @@ Atlas, not context files. One finding is worth a later look: tools a context fil
 belongs in a kickoff-wording experiment, not this one.
 
 ## Claims
+
+- [unverified] Bogart et al. 2016, Decan and Mens, and Mirhosseini and Parnin 2017 bear on npm breaking-change and update behaviour (recalled by Kimi K3, 2026-10-13; not yet read)
+- [verified] Atlas's production spec plans a `repo` argument honoured only under start-time roots by real path, refused as `ATLAS_SIDECAR_REPO_NOT_ALLOWED` (via: R&D's read of docs/atlas-production.spec.md at testing-os main, 2026-10-13)
+- [verified] Atlas 1.26.0's `--ref` reads a map at a ref for `explain` and `gaps` only (via: R&D's read of packages/atlas README and adapter at testing-os main, 2026-10-13)
 
 - [unverified] Context files (AGENTS.md) gave no significant resolve-rate gain and raised agent cost by about 20% (Gloaguen et al. 2026, read by a researcher through a summarising fetch)
 - [unverified] Tool-selection accuracy falls as the tool set grows, and retrieving only relevant tool descriptions raises it (RAG-MCP 2025; MCPVerse 2025, abstract level)

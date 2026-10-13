@@ -176,6 +176,40 @@ class Probe(unittest.TestCase):
         self.assertFalse(verdict["passed"])
 
 
+class BashDetector(unittest.TestCase):
+    """R&D's review: git log stays allowed, so any form that could write
+    outside the checkout or run another command stops the pilot."""
+
+    def test_each_form_is_caught(self):
+        cases = {
+            "git log --output=/c/Users/x/out.txt": ["--output"],
+            "git log --output /tmp/out.txt": ["--output"],
+            "git log > out.txt": [">"],
+            "git log >> out.txt": [">"],
+            "git log | head": ["|"],
+            "git log; cat ~/secret": [";"],
+            "git log && cat ~/secret": ["&&"],
+            "git log $(cat ~/secret)": ["$("],
+            "git log \"$(cat ~/secret)\"": ["$("],
+            "git log `cat ~/secret`": ["`"],
+        }
+        for command, forms in cases.items():
+            with self.subTest(command=command):
+                self.assertEqual(run.bash_violations(command), forms)
+
+    def test_plain_history_reads_pass(self):
+        for command in ("git log --oneline -20", "git show HEAD:src/route.ts", "git log --format='%H|%s' -5", 'git log --grep="a > b"', "git log -- src/server.ts"):
+            with self.subTest(command=command):
+                self.assertEqual(run.bash_violations(command), [])
+
+    def test_a_run_with_a_violating_call_is_named(self):
+        stream = run.Stream()
+        stream.add(assistant("m1", {}, [use("t1", "Bash", command="git log --oneline -3"), use("t2", "Bash", command="git log > /c/out.txt")]))
+        problems = run.bash_problems(stream)
+        self.assertEqual(len(problems), 1)
+        self.assertIn("git log > /c/out.txt", problems[0])
+
+
 class Stops(unittest.TestCase):
     def test_a_spent_plan_stops_the_run(self):
         self.assertTrue(run.plan_limit_hit({"type": "result", "is_error": True, "result": "Claude usage limit reached. Your limit will reset at 5pm"}))

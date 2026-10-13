@@ -204,6 +204,36 @@ def isolation_problems(init, arm, model):
     return problems
 
 
+QUOTED = re.compile(r"'[^']*'|\"[^\"]*\"")
+# Forms that turn an allowed `git log` or `git show` into something else.
+# Redirection and chaining are read outside quotes, where the shell acts on
+# them; command substitution runs inside double quotes too, so it is read
+# everywhere.
+UNQUOTED_FORMS = (("--output", re.compile(r"(?:^|\s)--output(?:=|\s|$)")), (">", re.compile(r">")), ("|", re.compile(r"\|")), (";", re.compile(r";")), ("&&", re.compile(r"&&")))
+ANYWHERE_FORMS = (("$(", re.compile(r"\$\(")), ("`", re.compile(r"`")))
+
+
+def bash_violations(command_text):
+    """The forms in a Bash command that could write a file or run another command."""
+    unquoted = QUOTED.sub(" ", command_text)
+    found = [name for name, pattern in UNQUOTED_FORMS if pattern.search(unquoted)]
+    found += [name for name, pattern in ANYWHERE_FORMS if pattern.search(command_text)]
+    return found
+
+
+def bash_problems(stream):
+    """Every Bash call in a run that carries a violating form."""
+    problems = []
+    for use in stream.uses.values():
+        if use["name"] != "Bash":
+            continue
+        text = str(use["input"].get("command") or "")
+        forms = bash_violations(text)
+        if forms:
+            problems.append(f"Bash {' '.join(forms)} in: {text[:120]}")
+    return problems
+
+
 def leaks(stream, secrets_):
     """Each secret that came back in a tool result, with the call that fetched it."""
     found = []
@@ -410,7 +440,7 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompt, budget):
     return record, stream
 
 
-HALTING = {"ceiling": "the token ceiling", "plan_limit": "the plan usage limit", "isolation_failed": "a run whose start did not match its arm, ran a hook or wrote a file"}
+HALTING = {"ceiling": "the token ceiling", "plan_limit": "the plan usage limit", "isolation_failed": "a run whose start did not match its arm, ran a hook, wrote a file or ran a Bash form that could"}
 
 
 def preflight(args):
@@ -486,9 +516,16 @@ def pilot(args, cli, allow, tasks):
         for arm in pair["order"]:
             for attempt in (1, 2):
                 attempts += 1
-                record, _ = run_once(cli, f"{task['id']}-{arm}{pair['rep']}", arm, template, args.work, args.tools, allow, prompt, budget)
+                record, stream = run_once(cli, f"{task['id']}-{arm}{pair['rep']}", arm, template, args.work, args.tools, allow, prompt, budget)
                 record.update({"task": task["id"], "rep": pair["rep"], "attempt": attempt})
                 budget["used"] += record["tokens"]["total"]
+                # An allowed git log or git show with a redirection, a chain,
+                # --output or a substitution could write outside the checkout
+                # or run another command; the permission rules cannot see it.
+                bash = bash_problems(stream)
+                if bash and record["outcome"] not in ("ceiling", "plan_limit"):
+                    record["isolation"] = record["isolation"] + bash
+                    record["outcome"] = "isolation_failed"
                 if record["outcome"] == "answered":
                     graded = grader.grade(task, record["final_text"] or "")
                     record["correct"], record["grade"] = graded["correct"], graded

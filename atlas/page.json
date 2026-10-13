@@ -3,8 +3,8 @@
     ".claude/",
     ".github/",
     "catalogs/",
-    "docs/",
-    "site/"
+    "datapacks/",
+    "docs/"
   ],
   "breaks": [
     {
@@ -62,7 +62,8 @@
       "readers": [
         "experiments"
       ],
-      "target": "experiments/natural-errors/data/split.json",
+      "target": "experiments/e4b/results/",
+      "tests": 1,
       "writers": [
         "experiments"
       ]
@@ -70,46 +71,65 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 2,
-      "changed": 4,
-      "moved": 0,
-      "parts": 4,
+      "added": 207,
+      "changed": 18,
+      "moved": 7,
+      "parts": 8,
       "removed": 0
     },
     "items": [
       {
         "kind": "landing",
-        "sentence": "experiments/distill-ladder/dedupe.py is now read by tests/test_distill_step0_properties.py.",
+        "sentence": "experiments/charts/ is now written by experiments/charts/make_charts.py.",
         "subjects": [
-          "experiments/distill-ladder/dedupe.py",
-          "tests/test_distill_step0_properties.py"
+          "experiments/charts/",
+          "experiments/charts/make_charts.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "experiments/verifier-gold/calibration/difficulty.py is now read by tests/test_distill_step0_properties.py.",
+        "sentence": "experiments/charts/manifest.json is now written by experiments/charts/make_charts.py.",
         "subjects": [
-          "experiments/verifier-gold/calibration/difficulty.py",
-          "tests/test_distill_step0_properties.py"
+          "experiments/charts/manifest.json",
+          "experiments/charts/make_charts.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "experiments/verifier-gold/math-ladder/report.py is now read by tests/test_distill_step0_properties.py.",
+        "sentence": "experiments/e4b/results/ is now written by experiments/e4b/extract.py.",
         "subjects": [
-          "experiments/verifier-gold/math-ladder/report.py",
-          "tests/test_distill_step0_properties.py"
+          "experiments/e4b/results/",
+          "experiments/e4b/extract.py"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "And 78 more new writers and readers of places.",
+        "subjects": []
+      },
+      {
+        "kind": "origin",
+        "sentence": "site was authored and is now mixed.",
+        "subjects": [
+          "site"
+        ]
+      },
+      {
+        "kind": "part",
+        "sentence": "datapacks is a new part, drawn from `datapacks/**`.",
+        "subjects": [
+          "datapacks"
         ]
       },
       {
         "kind": "counts",
-        "sentence": "2 files added and 4 changed content, across 4 parts.",
+        "sentence": "207 files added, 7 moved and 18 changed content, across 8 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "0cfaf268c244b982442bdd93c7c5350e6a079b3d",
-      "generatedAt": "2026-10-09T07:39:49.785Z"
+      "commit": "4abb0ee7e2a36fa1097fd38281e8e97fcdbb8957",
+      "generatedAt": "2026-10-09T07:45:13.518Z"
     },
     "unchanged": false
   },
@@ -135,9 +155,9 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 2 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "4abb0ee7e2a36fa1097fd38281e8e97fcdbb8957",
+  "commit": "e594570277592e85d0b2cf17be0f45b7b2741c0f",
   "defaultBranch": "main",
-  "derived": "12 parts, mostly Python (57 files), shell (14), CSS (2), TypeScript (2), Astro (1), HTML (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "13 parts, mostly Python (68 files), shell (14), CSS (2), TypeScript (2), Astro (1), HTML (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -150,7 +170,9 @@
       "id": ".github/workflows/ci.yml",
       "landings": [
         "entries/",
-        "instruments/"
+        "experiments/charts/",
+        "instruments/",
+        "site/public/charts/"
       ],
       "name": "CI",
       "pushes": false,
@@ -173,12 +195,12 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 7
+          "files": 8
         },
         {
           "boundary": "experiments",
           "depth": 1,
-          "files": 1
+          "files": 2
         }
       ],
       "runs": [
@@ -323,6 +345,18 @@
       ]
     },
     {
+      "place": "experiments/charts/",
+      "writers": [
+        "experiments/charts/make_charts.py"
+      ]
+    },
+    {
+      "place": "experiments/e4b/results/",
+      "writers": [
+        "experiments/e4b/extract.py"
+      ]
+    },
+    {
       "place": "experiments/kev-judge-finetune/results/summary.json",
       "writers": [
         "experiments/kev-judge-finetune/summarise.py"
@@ -390,17 +424,22 @@
       "writers": [
         "mcptoolshop_rnd/cli.py"
       ]
+    },
+    {
+      "place": "site/public/charts/",
+      "writers": [
+        "experiments/charts/make_charts.py"
+      ]
     }
   ],
-  "generatedAt": "2026-10-09T07:45:13.518Z",
+  "generatedAt": "2026-10-13T14:39:47.490Z",
   "limits": [
     "7 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 4 more.",
-    "7 writes and 7 reads use paths built at run time and are not named here.",
+    "7 writes and 11 reads use paths built at run time and are not named here.",
     "1 write goes to places this repository does not track, so it is not listed as generated.",
-    "11 writes and 22 reads go to a path their caller passes, not to this repository.",
+    "11 writes and 30 reads go to a path their caller passes, not to this repository.",
     "3 reads go to the directory the command is run in (entries and instruments), not to this repository.",
     "1 read goes to the directory the command is run in or a path its caller passes, not to this repository.",
-    "7 files belong to no part: datapacks/hymn-arrangements/datapack.json, datapacks/hymn-arrangements/hosted.json, datapacks/hymn-arrangements/spec.json and 4 more.",
     "Statistics confidence is low: fewer than 25 source files reach 10 revisions in the window."
   ],
   "mainDoor": ".github/workflows/ci.yml",
@@ -408,6 +447,7 @@
     ".claude": ".claude",
     ".github": ".github",
     "catalogs": "catalogs",
+    "datapacks": "datapacks",
     "docs": "docs",
     "entries": "entries",
     "experiments": "experiments",
@@ -418,7 +458,7 @@
     "site": "site",
     "tests": "tests"
   },
-  "parts": 12,
+  "parts": 13,
   "readers": [
     {
       "readers": [],
@@ -427,7 +467,15 @@
     },
     {
       "readers": [],
+      "target": "experiments/charts/"
+    },
+    {
+      "readers": [],
       "target": "instruments/"
+    },
+    {
+      "readers": [],
+      "target": "site/public/charts/"
     }
   ],
   "repo": "mcp-tool-shop-org/rnd",
@@ -441,14 +489,20 @@
   "startReason": "This path follows rnd (a command people run) from its entry, since CI runs only tests and checks.",
   "summary": "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only).",
   "summaryFrom": "person",
-  "testFiles": 9,
+  "testFiles": 10,
   "testedBy": {
-    "experiments": 2,
+    "experiments": 3,
     "mcptoolshop_rnd": 4,
     "rnd": 1
   },
   "unnamedWrites": 7,
   "unread": [
+    {
+      "place": "experiments/charts/",
+      "writers": [
+        "experiments/charts/make_charts.py"
+      ]
+    },
     {
       "place": "experiments/natural-errors/data/baselines_p1.json",
       "writers": [
@@ -484,6 +538,12 @@
       "writers": [
         "mcptoolshop_rnd/cli.py"
       ]
+    },
+    {
+      "place": "site/public/charts/",
+      "writers": [
+        "experiments/charts/make_charts.py"
+      ]
     }
   ],
   "unreadCode": [
@@ -497,5 +557,5 @@
     "the repository root holds only shell files, which this map does not read, so whether a test touches it cannot be seen.",
     "2 test files run in no workflow: experiments/cuda-graphs/test_graphed_heads.py and experiments/data-designer/tests/test_lockdown.py."
   ],
-  "written": 11
+  "written": 14
 }

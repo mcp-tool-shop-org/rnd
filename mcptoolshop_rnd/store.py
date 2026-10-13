@@ -137,8 +137,10 @@ def fts_query(text, raw=False):
 
 
 def exact_words(text):
-    """The query's words, for --exact: case kept, as typed."""
-    return re.findall(r"[\w.+#]+", text, flags=re.UNICODE)
+    """The query's terms, for --exact: split on spaces, case kept, inner punctuation kept, so `Run:ai` and
+    `NeMo-Relay` are each one term and never match `Run` or `NeMo` alone. Quotes and trailing commas are dropped."""
+    terms = (t.strip("\"'`,;()[]{}") for t in text.split())
+    return [t for t in terms if re.search(r"\w", t)]
 
 
 def exact_match(words, text):

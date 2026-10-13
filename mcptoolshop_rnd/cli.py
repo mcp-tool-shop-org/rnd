@@ -434,15 +434,18 @@ def cmd_watch(args):
                 continue
             tail = f"latest {latest.get('title') or latest.get('key') or '-'}" + (
                 f" ({str(latest['date'])[:10]})" if latest.get("date") else "")
+            if row.get("latest_prerelease"):
+                tail += f"; pre-release {row['latest_prerelease']['key']}"
             if row["baseline"]:
                 print(f"{head} baseline recorded; {tail}")
             elif not row["new"]:
                 print(f"{head} nothing new; {tail}")
             else:
-                print(f"{head} {len(row['new'])} new")
+                print(f"{head} {len(row['new'])} new; {tail}")
                 for item in row["new"]:
                     when = f"  {str(item['date'])[:10]}" if item.get("date") else ""
-                    print(f"  {item['title'] or item['key']}{when}  {item['url'] or ''}".rstrip())
+                    pre = " (pre-release)" if item.get("prerelease") else ""
+                    print(f"  {item['title'] or item['key']}{pre}{when}  {item['url'] or ''}".rstrip())
         print(f"{r['new_total']} new item(s); {len(r['unknown'])} source(s) unknown; state {r['state']}")
     emit(args, rep, text)
     return 0

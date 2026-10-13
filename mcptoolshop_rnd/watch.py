@@ -5,7 +5,9 @@ finds with the items seen before, and reports only the new ones. Reading and ran
 
 Source kinds:
 
-- github-releases: the repository's latest releases (drafts skipped), through `gh api`.
+- github-releases: the repository's latest releases (drafts skipped), through `gh api`. A pre-release is never
+  reported as the latest version; a newer one is reported apart. Each item keeps its release notes (`body`), so the
+  scout reads them locally instead of fetching the page.
 - github-commits: the default branch's latest commits, through `gh api`.
 - huggingface: a Hugging Face model listing URL (the API's JSON); a model is new the first time it is listed.
 - feed: an Atom or RSS feed.
@@ -31,6 +33,7 @@ from .probe import TIMEOUT, UA, ProbeError, gh_json
 
 KINDS = ("github-releases", "github-commits", "huggingface", "feed", "page")
 KEEP = 300  # keys remembered per source; enough to outlast any one source's listing
+BODY_CAP = 6000  # characters of a release body or commit message kept for the scout to read locally
 GITHUB_RE = re.compile(r"^https?://github\.com/([\w.-]+/[\w.-]+?)/?$")
 ATOM = "{http://www.w3.org/2005/Atom}"
 
@@ -93,14 +96,21 @@ def save_state(path: Path, state: dict) -> None:
 
 def from_releases(rows: list) -> list[dict]:
     return [{"key": r.get("tag_name"), "title": r.get("name") or r.get("tag_name"), "date": r.get("published_at"),
-             "url": r.get("html_url"), "prerelease": bool(r.get("prerelease"))}
+             "url": r.get("html_url"), "prerelease": bool(r.get("prerelease")),
+             "body": (r.get("body") or "")[:BODY_CAP]}
             for r in rows or [] if not r.get("draft") and r.get("tag_name")]
 
 
 def from_commits(rows: list) -> list[dict]:
-    return [{"key": r["sha"][:12], "title": (((r.get("commit") or {}).get("message") or "").splitlines() or [""])[0][:200],
-             "date": ((r.get("commit") or {}).get("committer") or {}).get("date"), "url": r.get("html_url")}
-            for r in rows or [] if r.get("sha")]
+    out = []
+    for r in rows or []:
+        if not r.get("sha"):
+            continue
+        message = (r.get("commit") or {}).get("message") or ""
+        out.append({"key": r["sha"][:12], "title": (message.splitlines() or [""])[0][:200],
+                    "date": ((r.get("commit") or {}).get("committer") or {}).get("date"), "url": r.get("html_url"),
+                    "body": message[:BODY_CAP]})
+    return out
 
 
 def from_hf_list(rows: list) -> list[dict]:
@@ -158,7 +168,7 @@ def check(sources: list[dict], state: dict, *, github=None, fetch=None, only=Non
         if only and s["id"] not in only:
             continue
         row = {"id": s["id"], "kind": s["kind"], "url": s["url"], "why": s.get("why", ""),
-               "latest": None, "new": [], "baseline": False, "unknown": None}
+               "latest": None, "latest_prerelease": None, "new": [], "baseline": False, "unknown": None}
         try:
             items = fetch_items(s, github=github, fetch=fetch)
         except (ProbeError, urllib.error.URLError, TimeoutError, OSError, subprocess.TimeoutExpired,
@@ -167,7 +177,11 @@ def check(sources: list[dict], state: dict, *, github=None, fetch=None, only=Non
             rows.append(row)
             continue
         if items:
-            row["latest"] = {k: items[0][k] for k in ("key", "title", "date", "url")}
+            # A pre-release is not the latest version: report the newest stable item, and a newer pre-release apart.
+            stable = next((i for i in items if not i.get("prerelease")), items[0])
+            row["latest"] = {k: stable[k] for k in ("key", "title", "date", "url")}
+            if items[0] is not stable and items[0].get("prerelease"):
+                row["latest_prerelease"] = {k: items[0][k] for k in ("key", "title", "date", "url")}
         prior = state.get(s["id"])
         if prior is None:
             row["baseline"] = True

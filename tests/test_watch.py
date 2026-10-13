@@ -35,6 +35,15 @@ class ParserTests(unittest.TestCase):
         self.assertTrue(items[0]["key"].startswith("v0.40"))
         self.assertTrue(items[0]["url"].startswith("https://github.com/ollama/ollama/releases/tag/"))
 
+    def test_release_bodies_are_kept_and_capped(self):
+        rows = [{"tag_name": "v1", "body": "x" * (watch.BODY_CAP + 50)}, {"tag_name": "v0"}]
+        items = watch.from_releases(rows)
+        self.assertEqual(len(items[0]["body"]), watch.BODY_CAP)
+        self.assertEqual(items[1]["body"], "")
+        message = "title" + "\n\n" + "more detail"
+        commits = watch.from_commits([{"sha": "b" * 40, "commit": {"message": message}}])
+        self.assertEqual((commits[0]["title"], commits[0]["body"]), ("title", message))
+
     def test_drafts_are_skipped(self):
         rows = [{"tag_name": "v2", "draft": True}, {"tag_name": "v1", "published_at": "2026-10-01T00:00:00Z"}]
         self.assertEqual([i["key"] for i in watch.from_releases(rows)], ["v1"])
@@ -156,6 +165,18 @@ class CheckTests(unittest.TestCase):
         self.assertEqual(rep["new_total"], 1)
         self.assertEqual(state["rel"]["seen"], ["v2", "v1"], "the state passed in is not changed")
 
+    def test_latest_is_the_newest_stable_release_and_a_newer_prerelease_is_reported_apart(self):
+        # The first watch run reported Ollama's v0.40.4-rc1 as the latest version; the stable release was v0.40.3.
+        self.releases.insert(0, {"tag_name": "v3-rc1", "prerelease": True, "published_at": "2026-10-03T00:00:00Z"})
+        rep, _ = watch.check(SOURCES[:1], {}, github=self.github, fetch=self.fetch, now="t1")
+        row = rep["sources"][0]
+        self.assertEqual(row["latest"]["key"], "v2")
+        self.assertEqual(row["latest_prerelease"]["key"], "v3-rc1")
+        rep, _ = watch.check(SOURCES[:1], {}, github=lambda *a: [{"tag_name": "v9-rc1", "prerelease": True}],
+                             fetch=self.fetch, now="t1")
+        self.assertEqual(rep["sources"][0]["latest"]["key"], "v9-rc1")
+        self.assertIsNone(rep["sources"][0]["latest_prerelease"])
+
     def test_unreachable_source_is_unknown_and_its_state_is_kept(self):
         _, state = watch.check(SOURCES, {}, github=self.github, fetch=self.fetch, now="t1")
         self.feed = urllib.error.URLError("down")
@@ -230,6 +251,10 @@ class CliTests(unittest.TestCase):
             code, out = self.run_cli("watch", "--list", str(wl), "--state", str(state))
             self.assertIn("1 new", out)
             self.assertIn("v2  2026-10-13  u", out)
+            canned["rel"].insert(0, {"key": "v3-rc1", "title": "v3-rc1", "date": None, "url": None, "prerelease": True})
+            code, out = self.run_cli("watch", "--list", str(wl), "--state", str(state), "--no-save")
+            self.assertIn("latest v2", out)
+            self.assertIn("pre-release v3-rc1", out)
 
     def test_unknown_source_and_quiet_source_text(self):
         listing = [{"id": "down", "kind": "feed", "url": "https://example.test/feed", "why": "w"},

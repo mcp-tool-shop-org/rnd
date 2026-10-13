@@ -400,34 +400,41 @@ class AtlasCache(unittest.TestCase):
 
 
 class BashDetector(unittest.TestCase):
-    """R&D's review: git log stays allowed, so any form that could write
-    outside the checkout or run another command stops the pilot."""
+    """Amendment 9: the pinned CLI allows read-only shell in the working
+    directory, chained or piped, and refuses any other part; file permissions
+    are the containment. A form that writes a file, leaves a command running
+    or substitutes a command's output still stops the run."""
 
-    def test_each_form_is_caught(self):
+    def test_each_stopping_form_is_caught(self):
         cases = {
             "git log --output=../out.txt": ["--output"],
             "git log --output /tmp/out.txt": ["--output"],
             "git log > out.txt": [">"],
             "git log >> out.txt": [">"],
-            "git log | head": ["|"],
-            "git log; cat ~/secret": [";"],
-            "git log && cat ~/secret": ["&&"],
+            "ls > /tmp/notes": [">"],
             "git log $(cat ~/secret)": ["$("],
             "git log \"$(cat ~/secret)\"": ["$("],
             "git log `cat ~/secret`": ["`"],
-            # R&D's bypasses on #7: a second command on a new line, a
-            # background `&`, and a file fed to git on stdin.
-            "git log -1\ncat ~/secret": ["newline"],
-            "git log -1\r\ncat ~/secret": ["newline"],
             "git log -1 & cat x": ["&"],
-            "git log -1 --stdin < ~/x": ["<"],
+            "grep -r x . | tee /tmp/notes": ["tee"],
+            "find . -name '*.tmp' -delete": ["-delete"],
+            "find . -exec cat {} +": ["-exec"],
         }
         for command, forms in cases.items():
             with self.subTest(command=command):
                 self.assertEqual(run.bash_violations(command), forms)
 
-    def test_plain_history_reads_pass(self):
-        for command in ("git log --oneline -20", "git show HEAD:src/route.ts", "git log --format='%H|%s' -5", 'git log --grep="a > b"', "git log -- src/server.ts", "git log --format='%H\n%s' -3", 'git log --grep="a < b & c"'):
+    def test_read_only_chains_and_pipes_pass(self):
+        # The shakedown's own stopping calls (2026-10-13), now part of the
+        # measured surface, and the idioms an agent reaches for.
+        for command in (
+            "cd /work/runs/CF09-A1; ls .github/workflows; grep -n node .github/workflows/*.yml | head -100",
+            "cd /work/runs/CF09-A1; sed -n 166,222p .github/workflows/ci.yml; grep -n -A12 engines package-lock.json | head -40",
+            "git log --oneline -20", "git show HEAD:src/route.ts", "git log --format='%H|%s' -5",
+            "git log -1 && git show HEAD --stat", "grep -c x file 2>/dev/null", "grep -rn x . 2>&1 | head",
+            "ls src &>/dev/null || echo none", "git log --grep=\"a > b\"", "git log -1\ngit show HEAD",
+            "grep x < notes.txt",
+        ):
             with self.subTest(command=command):
                 self.assertEqual(run.bash_violations(command), [])
 
@@ -437,6 +444,25 @@ class BashDetector(unittest.TestCase):
         problems = run.bash_problems(stream)
         self.assertEqual(len(problems), 1)
         self.assertIn("git log > /c/out.txt", problems[0])
+
+    def test_shell_reads_count_the_calls_that_are_not_git(self):
+        stream = run.Stream()
+        stream.add(assistant("m1", {}, [use("t1", "Bash", command="git log -3"), use("t2", "Bash", command="ls src"),
+                                        use("t3", "Bash", command="  grep -n x a.yml"), use("t4", "Read", file_path="a")]))
+        self.assertEqual(run.shell_reads(stream), 2)
+
+
+class TempCleanup(unittest.TestCase):
+    def test_the_run_users_files_go_from_the_shared_temporary_trees(self):
+        root = Path(tempfile.mkdtemp())
+        (root / "notes").mkdir()
+        (root / "notes" / "left.txt").write_text("for the next attempt", encoding="utf-8")
+        (root / "mine.txt").write_text("x", encoding="utf-8")
+        uid = run.os.lstat(root / "mine.txt").st_uid
+        run.clear_user_files(uid, roots=(str(root),))
+        self.assertEqual(list(root.iterdir()), [])
+        run.clear_user_files(uid, roots=(str(root / "absent"),))
+        shutil.rmtree(root)
 
 
 class Debrief(unittest.TestCase):

@@ -303,6 +303,33 @@ The deny rules stay as a second layer that counts for nothing on its own.
 
 Nothing in the shakedown is graded into the decision, and nothing it runs freezes a pin. Nothing pinned changes in this amendment.
 
+### Amendment 9, 2026-10-13: read-only shell in the checkout is part of the measured surface
+
+**What stopped the first shakedown (19:12–19:14 EDT, 500,465 tokens).**
+- Four RC03 runs answered correctly:
+  - arm A: 59,769 and 60,143 tokens;
+  - arm B: 71,683 and 71,142, with `atlas` pending at the start.
+- The fifth, CF09-A1, made chained shell reads of its own checkout (`cd …; ls …; grep … | head`, then `sed -n …`), and the pinned CLI ran them. That CLI auto-approves its own read-only commands inside the working directory, though the allow-list names only `git log` and `git show`.
+- Its next two calls (`awk`, and `node -e`) were refused as needing approval.
+- Nothing was written: `git status` was empty.
+- Amendment 2's Bash detector stopped the run on the `;` and `|`, as written.
+
+**The ruling.**
+- **Reach:** these reads reach nothing the run's Read, Grep and Glob don't already reach. The run user's file permissions are the containment (amendment 8), and they hold.
+- **Behaviour:** it's what the pinned CLI does, and what an agent kickoff runs with.
+- **So the in-checkout read-only shell is part of the measured surface, in both arms.** Each run records `shell_reads`, its Bash calls that weren't git, so the analysis shows how much each arm leaned on it.
+
+**The detector now stops a run only on a form that:**
+- **writes a file:** `>` or `>>` (but not to `/dev/null`, and not a descriptor duplication such as `2>&1`), `--output`, `tee`, or `find -delete`;
+- **runs a command the shell doesn't wait for:** a background `&`, or `find -exec`;
+- **substitutes a command's output:** `$(…)` or backticks.
+
+A chain, a pipe, a line break and `<` no longer stop a run. The CLI refuses any part of a chain that isn't one of its read-only commands, as the shakedown showed with `awk` and `node`.
+
+**One more guard:** before and after every attempt, the harness removes everything the run user owns under `/tmp`, `/var/tmp` and `/dev/shm`. A read-only chain can't write there, but nothing an attempt leaves behind should survive to the next.
+
+**What follows:** the shakedown runs again from the start, with all its runs on the new rule. The four RC03 runs above are kept as the first price signal. Nothing pinned changes.
+
 ## Design
 
 **Pairs.** Each task runs twice:

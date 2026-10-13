@@ -427,7 +427,7 @@
       "externals": 0,
       "files": [
         {
-          "hash": "58259580cbd2e4e545627fee7e318548b8720529e19ec1350bce79425fe4417e",
+          "hash": "586a6ce863aa65f3313ddb8de7f6df7f6a51e6c50127cc275179383d4e31face",
           "path": "experiments/atlas-mcp-utility/README.md"
         },
         {
@@ -467,6 +467,10 @@
         {
           "hash": "818e0530f3a768df2fbf343a1f9d3dd23669278c7428959a81df2c0ed3955f1f",
           "path": "experiments/atlas-mcp-utility/key-audit.json"
+        },
+        {
+          "hash": "bb04df14b84e18ab52a5bbd68853cda5b948befab5049f0cc7984648523ae1e6",
+          "path": "experiments/atlas-mcp-utility/ladder.md"
         },
         {
           "hash": "a32c1c8f30e88f7264e6efce1d1c608339368b2e44691870206b3105e4e6226d",
@@ -2974,7 +2978,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "b2f59b628b71c545acc1be3a649c48c725bcd07011fd319332bf217682ccc879",
+          "hash": "2f516b79eb27d1bd7146e3f7d404b019d93e48dfc71e5e63fac502b0ce2320b6",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -4171,7 +4175,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "23763b7cc290fd17ec39b12a9f2d8324585811d96bd3d9894659a48c6de32bd4",
+          "hash": "5908b4a794253951750509263ee3fd5b56e6d9dea544995639f1ce54e57d9277",
           "path": "CHANGELOG.md"
         },
         {
@@ -5426,8 +5430,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "681d50399505187d6d5fe38619dcc581435a04f9",
-    "tracked": 566
+    "commit": "de3be22ed3a3a385ff7e100598462599bd7814ca",
+    "tracked": 567
   },
   "landings": [
     {

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.14] - 2026-10-13
+
+- atlas-mcp-utility amendment 8: the shakedown (Sonnet and local legs) and containment by permission (harness as root, the CLI as an unprivileged user)
+- Updated experiment `atlas-mcp-utility`
+
 ## [1.1.8.0.13] - 2026-10-13
 
 - atlas-mcp-utility amendment 7 (medium effort; the runs move into the local sandbox atlas-pilot; permission-mode and key-source checks); Docker Sandboxes entry and brief

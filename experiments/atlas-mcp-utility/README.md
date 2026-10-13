@@ -244,9 +244,38 @@ So deny rules can't be the guarantee. And more than `tasks.json` is at stake:
 2. **No other run's stream, record or debrief is readable by a run.**
 3. **The probe proves both.** It adds Grep routes at `/`, `/work` and the home directory, and plants sentinels in a fake earlier run under `/work/runs` and beside the results. Every one must be unreachable.
 
-The deny rules stay as a second layer that counts for nothing on its own. The mechanism is one of two, chosen on the sandbox's facts and recorded here before the re-probe:
-- **(A)** the harness runs as root with everything above root-owned 0700, and the CLI runs as a dedicated unprivileged user who owns only the attempt's checkout;
-- **(B)** the harness runs on the host and drives one throwaway sandbox per attempt, holding only that checkout and the tools.
+The deny rules stay as a second layer that counts for nothing on its own.
+
+**The mechanism: one sandbox, two users** (chosen on the sandbox's facts, measured by the Publisher on 2026-10-13).
+- **The facts behind the choice:**
+  - The kit's own user, `agent`, has passwordless sudo, so it can't be the user an attempt runs as.
+  - A second user can run the pinned CLI on the plan, given one file copied from `agent`: `~/.claude/.credentials.json`. It holds placeholders only, since the real sign-in is injected at the sandbox's proxy. `~/.claude.json` holds the account's identity, and is never copied.
+  - A fresh sandbox per attempt would also work (4.6 s to create, no `/login`). But it would mean rebuilding the image and driving every attempt through `sbx exec` from Windows, so one sandbox with two users keeps the tested harness.
+- **The harness runs as root** (`sudo … run.py --run-as amu`). Everything it writes is private: it sets umask 077, and its git calls read the run user's checkout with `safe.directory=*`.
+- **Each attempt's CLI runs as `amu`** (`runuser -u amu`):
+  - a user with no sudo and no privileged group;
+  - its environment holds only `HOME`, `USER`, `LOGNAME`, `PATH`, `LANG`, and `DISABLE_AUTOUPDATER`, `DISABLE_TELEMETRY` and `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`;
+  - before each attempt its home is emptied, except the placeholder sign-in file;
+  - its checkout, Atlas cache and MCP config are given to it for that attempt alone, then handed back to root and closed (0700 and 0600). No later attempt can read them.
+- **The preflight refuses to start unless all of these hold:**
+  - the harness is root;
+  - the run user has no sudo and no privileged group;
+  - this directory is root-owned 0700, which means it lives outside every home (`/srv/atlas-mcp-utility` in the sandbox);
+  - the work directory is root-owned, with others allowed only to pass through (0711);
+  - root's home and every other home are closed to others.
+- **The probe:**
+  - plants sentinels in this directory, root's home, every other home, and a fake earlier run under `/work/runs`;
+  - asks for Grep at `/`, at the work directory and at `/home`, beside every earlier route;
+  - passes only if nothing comes back.
+
+**Recorded for the pin amendment:**
+- On the image's 2.1.296, `--model claude-sonnet-5-5` prints `unrecognized_model` but still answers.
+- A 4-token reply carried about 27,700 cached tokens (3,436 written, 24,274 read): the system prompt and tools. It belongs in every run's price.
+
+**For the local leg:**
+- It runs on the same pinned CLI (2.1.197), not the kit image's own 2.1.280, so the two legs differ only in the model.
+- The egress rule that works is `localhost:11434`. The kit's `host.docker.internal:11434` didn't match the filter.
+- The kit's init reported its model with a `[1m]` suffix, so the first real call confirms that Ollama loads `nemotron-3.5-lightning` by its own name.
 
 **Two checks added to the harness:**
 - **Every tool a run calls, task and debrief, must be one its arm starts with** (`tool_use_problems`). The init alone can't show tools that 2.1.197 registers later.

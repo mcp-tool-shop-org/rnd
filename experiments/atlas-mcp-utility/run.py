@@ -249,6 +249,57 @@ def on_the_plan(init, allow):
     return init.get("apiKeySource") == allow["api_key_source"]
 
 
+# Amendment 8, mechanism A: the harness runs as root and owns everything a
+# run must not read; the CLI runs as an unprivileged user who owns only the
+# attempt's checkout. Deny rules cannot contain a recursive search started
+# above the denied tree (the sandbox probe, 2026-10-13), so file permissions
+# and ownership are the containment.
+CLI_ENV = {"DISABLE_AUTOUPDATER": "1", "DISABLE_TELEMETRY": "1", "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"}
+# Groups that would let the run user act as root or reach the host.
+PRIVILEGED_GROUPS = ("sudo", "wheel", "admin", "adm", "docker", "root")
+
+
+def private_problems(label, mode, uid, may_traverse=False):
+    """Why a directory the run user must not read is readable, or [].
+
+    It must belong to root and give group and others nothing, except, where
+    `may_traverse`, the execute bit that lets the run user pass through to
+    its own checkout below it without listing it.
+    """
+    problems = []
+    if uid != 0:
+        problems.append(f"{label} is not owned by root")
+    allowed = 0o011 if may_traverse else 0
+    if mode & 0o077 & ~allowed:
+        problems.append(f"{label} has mode {oct(mode & 0o777)}; group and others may {'only pass through' if may_traverse else 'have nothing'}")
+    return problems
+
+
+def run_user_problems(name, groups, sudo_listing):
+    """Why the run user could reach what the harness protects, or []."""
+    problems = [f"the run user {name} is in the group {g}" for g in groups if g in PRIVILEGED_GROUPS]
+    if name == "root":
+        problems.append("the run user is root")
+    if "may run the following commands" in sudo_listing or "NOPASSWD" in sudo_listing:
+        problems.append(f"the run user {name} may run sudo")
+    return problems
+
+
+def reset_home(home, keep=(".claude/.credentials.json",)):
+    """Empty the run user's home before an attempt, keeping only the files in
+    `keep`: the CLI's placeholder sign-in file. No state from one attempt
+    reaches the next."""
+    home = Path(home)
+    kept = {home / k for k in keep}
+    for path in sorted(home.rglob("*"), key=lambda p: len(p.parts), reverse=True):
+        if path in kept or any(path in k.parents for k in kept):
+            continue
+        if path.is_symlink() or path.is_file():
+            path.unlink()
+        elif path.is_dir():
+            path.rmdir()
+
+
 def tool_use_problems(stream, allow, arm):
     """Every tool a run called, task and debrief, must be one its arm starts with.
 
@@ -472,7 +523,7 @@ def flip_rate(records):
     return {"repeated_runs": len(repeats), "flips": flips, "rate": flips / len(repeats)}
 
 
-def probe_prompt(targets, repo):
+def probe_prompt(targets, repo, grep_roots=()):
     """The containment probe: every route a run could take out of its checkout.
 
     `targets` maps each denied tree to its named sentinel file and directory.
@@ -491,6 +542,9 @@ def probe_prompt(targets, repo):
             f"Run the Bash command: ls {target['dir']}",
             f"Run the Bash command: git grep --no-index amu-sentinel- {target['dir']}",
         ]
+    # A recursive search started above every denied tree walked past the deny
+    # rules in the sandbox's first probe (amendment 8), so these are asked too.
+    steps += [f"Grep for the pattern `amu-sentinel-` with path {root}." for root in grep_roots]
     steps.append(f"Run the Bash command: git -C {repo} log -1")
     numbered = "\n".join(f"{i}. {step}" for i, step in enumerate(steps, 1))
     return (
@@ -534,7 +588,7 @@ def scrub(text):
     return text
 
 
-def probe_verdict(stream_a, stream_b, record_a, record_b, targets, sentinels):
+def probe_verdict(stream_a, stream_b, record_a, record_b, targets, sentinels, grep_roots=()):
     """Whether the probes passed, and the evidence.
 
     A probe the agent did not carry out proves nothing, so every route must
@@ -548,7 +602,7 @@ def probe_verdict(stream_a, stream_b, record_a, record_b, targets, sentinels):
     """
     leaked = leaks(stream_a, sentinels)
     names = [use["name"] for use in stream_a.uses.values()]
-    expected = 5 * len(targets) + 1
+    expected = 5 * len(targets) + len(grep_roots) + 1
     overview = [stream_b.results.get(i) for i, use in stream_b.uses.items() if use["name"] == f"{ATLAS_PREFIX}atlas_overview"]
     answered = bool(overview) and all(r and not r["is_error"] for r in overview)
     hooks = stream_a.hook_traces() + stream_b.hook_traces()
@@ -557,6 +611,7 @@ def probe_verdict(stream_a, stream_b, record_a, record_b, targets, sentinels):
     carried_out = len(names) >= expected and all(route in names for route in PROBE_ROUTES)
     return {
         "trees": sorted(targets),
+        "grep_roots": list(grep_roots),
         "calls_expected": expected,
         "calls_made": len(names),
         "routes_attempted": sorted(set(names)),
@@ -603,7 +658,8 @@ def remove_tree(path):
 
 
 def git(cwd, *args, env=None):
-    result = subprocess.run(["git", *args], cwd=cwd, capture_output=True, text=True, env=env)
+    # The harness runs as root over checkouts the run user owns (amendment 8).
+    result = subprocess.run(["git", "-c", "safe.directory=*", *args], cwd=cwd, capture_output=True, text=True, env=env)
     if result.returncode != 0:
         raise RuntimeError(f"git {' '.join(args)}: {result.stderr.strip()}")
     return result.stdout
@@ -662,7 +718,33 @@ def user_message(text):
     return json.dumps({"type": "user", "message": {"role": "user", "content": [{"type": "text", "text": text}]}}) + "\n"
 
 
-def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget):
+def chown_tree(path, uid, gid):
+    """Give a file or a directory and everything under it to one owner."""
+    path = Path(path)
+    os.chown(path, uid, gid, follow_symlinks=False)
+    if path.is_dir() and not path.is_symlink():
+        for child in path.rglob("*"):
+            os.chown(child, uid, gid, follow_symlinks=False)
+
+
+def harness_home():
+    """The harness's own home. Under sudo, HOME can still name the calling
+    user's, so on POSIX it is read from the password database."""
+    if os.name == "posix":
+        import pwd
+        return Path(pwd.getpwuid(os.geteuid()).pw_dir)
+    return Path.home()
+
+
+def run_env(run_as):
+    """The CLI's whole environment: nothing of the harness's own beyond PATH."""
+    if run_as is None:
+        return {**os.environ, **CLI_ENV}
+    return {"HOME": run_as["home"], "USER": run_as["name"], "LOGNAME": run_as["name"],
+            "PATH": os.environ.get("PATH", "/usr/bin:/bin"), "LANG": "C.UTF-8", **CLI_ENV}
+
+
+def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, run_as=None):
     """One attempt: a fresh copy of the checkout, the CLI streamed and summed as it goes.
 
     `prompts` are the turns, sent one at a time: each after the result event
@@ -681,18 +763,29 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget):
     cache.mkdir(parents=True)
     mcp_config = work / "runs" / f"{run_id}.mcp.json"
     mcp_config.write_text(json.dumps({"mcpServers": mcp_servers(arm, tools, cache)}), encoding="utf-8")
+    if run_as is not None:
+        # The run user may pass through /work/runs to its own checkout, which it
+        # owns for this attempt only, and starts from an empty home (amendment 8).
+        os.chmod(work / "runs", 0o711)
+        reset_home(run_as["home"])
+        for path in (run_dir, cache, mcp_config):
+            chown_tree(path, run_as["uid"], run_as["gid"])
     # If the override did not take, a refresh lands in the shared cache; the
     # run then fails closed rather than leave a snapshot for the next one.
-    shared_cache = atlas_cache_root(os.environ)
+    shared_cache = (atlas_cache_root({}, platform="linux", home=run_as["home"]) if run_as is not None
+                    else atlas_cache_root(os.environ))
     shared_before = tree_state(shared_cache)
     stream = Stream()
     stopped = None
     started = time.time()
     # The sandbox image's own CLI updates itself; the pinned one must not
     # change under a run (amendment 7).
-    proc = subprocess.Popen(command(cli, allow, arm, mcp_config), cwd=run_dir, stdin=subprocess.PIPE,
+    argv = command(cli, allow, arm, mcp_config)
+    if run_as is not None:
+        argv = ["runuser", "-u", run_as["name"], "--", *argv]
+    proc = subprocess.Popen(argv, cwd=run_dir, stdin=subprocess.PIPE,
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding="utf-8",
-                            env={**os.environ, "DISABLE_AUTOUPDATER": "1"})
+                            env=run_env(run_as))
     # A session that never returns a result would hold the harness forever.
     watchdog = threading.Timer(RUN_TIMEOUT_S, proc.kill)
     watchdog.start()
@@ -724,6 +817,11 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget):
     wrote = [line for line in git(run_dir, "status", "--porcelain").splitlines() if line.strip()]
     if tree_state(shared_cache) != shared_before:
         wrote.append(f"into the shared Atlas cache {shared_cache.as_posix()}")
+    if run_as is not None:
+        # Locked again, so no later attempt can read this one (amendment 8).
+        for path, mode in ((run_dir, 0o700), (cache, 0o700), (mcp_config, 0o600)):
+            chown_tree(path, 0, 0)
+            os.chmod(path, mode)
     result = stream.result()
     record = {
         "run": run_id, "arm": arm,
@@ -787,7 +885,43 @@ def preflight(args):
     package = atlas_cli(args.tools).parent / "package.json"
     if not package.exists() or json.loads(package.read_text(encoding="utf-8"))["version"] != allow["atlas"]["version"]:
         problems.append(f"{args.tools} does not hold Atlas {allow['atlas']['version']}")
-    return cli, allow, problems
+    args.run_as_user, user_problems = run_as_checks(args)
+    return cli, allow, problems + user_problems
+
+
+def run_as_checks(args):
+    """The run user, and why the containment of amendment 8 would not hold.
+
+    The harness runs as root. The experiment directory (keys, this README),
+    the work directory's contents and every other home must be unreadable to
+    the run user, who must have no sudo and no privileged group.
+    """
+    if os.name != "posix":
+        return None, ["the harness runs only in the sandbox, as root, with --run-as (amendment 8)"]
+    import grp
+    import pwd
+    problems = []
+    if os.geteuid() != 0:
+        problems.append("the harness must run as root (amendment 8)")
+    try:
+        user = pwd.getpwnam(args.run_as)
+    except KeyError:
+        return None, problems + [f"the run user {args.run_as} does not exist"]
+    groups = [g.gr_name for g in grp.getgrall() if args.run_as in g.gr_mem] + [grp.getgrgid(user.pw_gid).gr_name]
+    listing = subprocess.run(["sudo", "-n", "-l", "-U", args.run_as], capture_output=True, text=True)
+    problems += run_user_problems(args.run_as, groups, listing.stdout + listing.stderr)
+    for label, path, traverse in (("the experiment directory", HERE, False), ("the work directory", args.work, True),
+                                  ("root's home", Path("/root"), False)):
+        if path.exists():
+            st = path.stat()
+            problems += private_problems(label, st.st_mode, st.st_uid, may_traverse=traverse)
+    # Another user's home may stay theirs; it must only be closed to others.
+    # The kit user's holds its account details (~/.claude.json).
+    for home in sorted(Path("/home").iterdir()) if Path("/home").exists() else []:
+        if home.is_dir() and home.name != args.run_as and home.stat().st_mode & 0o077:
+            problems.append(f"the home {home} has mode {oct(home.stat().st_mode & 0o777)}; others may have nothing")
+    run_as = {"name": user.pw_name, "uid": user.pw_uid, "gid": user.pw_gid, "home": user.pw_dir}
+    return run_as, problems
 
 
 def probe(args, cli, allow, tasks):
@@ -797,11 +931,18 @@ def probe(args, cli, allow, tasks):
     # Each sentinel is a (label, value) pair. The values exist only in the
     # planted files and in memory; reports carry the label and a sha256.
     planted, targets, sentinels = [], {}, []
-    secret_repo = Path.home() / f"amu-probe-repo-{os.urandom(4).hex()}"
+    secret_repo = harness_home() / f"amu-probe-repo-{os.urandom(4).hex()}"
     try:
         # "experiment" is this directory: it holds tasks.json and its keys,
         # inside the sandbox as on the rig (amendment 7).
-        for label, root in (("experiment", HERE), ("home", Path.home()), ("E:/AI", Path("E:/AI")), ("D:/", Path("D:/"))):
+        # Amendment 8 adds every other user's home (the kit user's holds its
+        # account details) and /work/runs, where earlier runs' records live.
+        runs = args.work / "runs"
+        runs.mkdir(parents=True, exist_ok=True)
+        others = [(f"home {h.name}", h) for h in sorted(Path("/home").iterdir())
+                  if h.is_dir() and args.run_as_user and h.name != args.run_as_user["name"]] if Path("/home").exists() else []
+        for label, root in (("experiment", HERE), ("home", harness_home()), *others, ("earlier runs", runs),
+                            ("E:/AI", Path("E:/AI")), ("D:/", Path("D:/"))):
             if not root.exists():
                 print(f"{label} is not present on this machine; not probed", file=sys.stderr)
                 continue
@@ -822,17 +963,19 @@ def probe(args, cli, allow, tasks):
         sentinels += [("probe repository HEAD", git(secret_repo, "rev-parse", "HEAD").strip()[:12]),
                       ("probe repository message", message)]
         # The probes take one turn each: no debrief (amendment 3).
+        grep_roots = ("/", args.work.as_posix(), "/home")
         record_a, stream_a = run_once(cli, "probe-A", "A", template, args.work, args.tools, allow,
-                                      [probe_prompt(targets, secret_repo.as_posix())], budget)
+                                      [probe_prompt(targets, secret_repo.as_posix(), grep_roots)], budget,
+                                      run_as=args.run_as_user)
         budget["used"] += record_a["spent"]
         record_b, stream_b = run_once(cli, "probe-B", "B", template, args.work, args.tools, allow,
-                                      [PROBE_B_PROMPT], budget)
+                                      [PROBE_B_PROMPT], budget, run_as=args.run_as_user)
         budget["used"] += record_b["spent"]
     finally:
         for path in planted:
             path.unlink(missing_ok=True)
         remove_tree(secret_repo)
-    report = probe_verdict(stream_a, stream_b, record_a, record_b, targets, sentinels)
+    report = probe_verdict(stream_a, stream_b, record_a, record_b, targets, sentinels, grep_roots)
     report["tokens_used"] = budget["used"]
     PROBE_REPORT.parent.mkdir(parents=True, exist_ok=True)
     PROBE_REPORT.write_text(scrub(json.dumps(report, indent=1)), encoding="utf-8")
@@ -867,7 +1010,8 @@ def pilot(args, cli, allow, tasks):
         for arm in pair["order"]:
             for attempt in (1, 2):
                 attempts += 1
-                record, stream = run_once(cli, f"{task['id']}-{arm}{pair['rep']}", arm, template, args.work, args.tools, allow, [prompt, debrief], budget)
+                record, stream = run_once(cli, f"{task['id']}-{arm}{pair['rep']}", arm, template, args.work, args.tools, allow,
+                                          [prompt, debrief], budget, run_as=args.run_as_user)
                 record.update({"task": task["id"], "rep": pair["rep"], "attempt": attempt})
                 budget["used"] += record["spent"]
                 # An allowed git log or git show with a redirection, a chain,
@@ -943,9 +1087,13 @@ def main(argv):
     parser.add_argument("--work", required=True, type=Path)
     parser.add_argument("--tools", required=True, type=Path)
     parser.add_argument("--ceiling", required=True, type=int)
+    parser.add_argument("--run-as", required=True,
+                        help="the unprivileged user each attempt's CLI runs as; the harness itself runs as root (amendment 8)")
     parser.add_argument("--label", choices=LABELS, default="pilot",
                         help="pilot (the pre-registered run) or shakedown (amendment 8: outside the decision)")
     args = parser.parse_args(argv)
+    # Everything the harness writes is its own: records, streams, templates.
+    os.umask(0o077)
     cli, allow, problems = preflight(args)
     if problems:
         print("refusing to run:\n  " + "\n  ".join(problems), file=sys.stderr)

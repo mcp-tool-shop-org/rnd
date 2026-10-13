@@ -1,0 +1,1984 @@
+[
+  {
+    "id": "RC01",
+    "repo": "mcp-tool-shop-org/registry-stats",
+    "commit": "94103b578067f525300ed24393df179f9a768a0a",
+    "type": "reach_direct",
+    "question": "In the repository, which files directly import `src/server.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
+    "answer_key": {
+      "files": [
+        "src/cli.ts",
+        "src/index.ts",
+        "test/server-spacing.test.ts",
+        "test/server.test.ts"
+      ]
+    },
+    "check_method": "Exact set equality on answer.files (order ignored). Partial credit is not scored; report precision and recall as secondary.",
+    "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output.",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Comment-only mentions exist (src/backend-fixes.test.ts and src/cli.cover.test.ts name the file without importing it).",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "src/cli.ts",
+            "src/index.ts",
+            "test/server-spacing.test.ts",
+            "test/server.test.ts"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "src/cli.ts",
+          "src/index.ts",
+          "test/server-spacing.test.ts",
+          "test/server.test.ts"
+        ]
+      }
+    }
+  },
+  {
+    "id": "RC02",
+    "repo": "mcp-tool-shop-org/registry-stats",
+    "commit": "94103b578067f525300ed24393df179f9a768a0a",
+    "type": "reach_direct",
+    "question": "In the repository, which files directly import `src/providers/npm.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
+    "answer_key": {
+      "files": [
+        "src/backend-fixes.test.ts",
+        "src/contract.test.ts",
+        "src/index.ts",
+        "test/contract.test.ts",
+        "test/npm.test.ts"
+      ]
+    },
+    "check_method": "Exact set equality on answer.files (order ignored). Partial credit is not scored; report precision and recall as secondary.",
+    "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output.",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "src/backend-fixes.test.ts",
+            "src/contract.test.ts",
+            "src/index.ts",
+            "test/contract.test.ts",
+            "test/npm.test.ts"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "src/backend-fixes.test.ts",
+          "src/contract.test.ts",
+          "src/index.ts",
+          "test/contract.test.ts",
+          "test/npm.test.ts"
+        ]
+      }
+    }
+  },
+  {
+    "id": "RC03",
+    "repo": "mcp-tool-shop-org/brand",
+    "commit": "2e3dcd83c69ca94394334e19be41a0e33cd41b34",
+    "type": "reach_direct",
+    "question": "In the repository, which files directly import `src/commands/add-gallery.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
+    "answer_key": {
+      "files": [
+        "src/cli.ts",
+        "src/commands/add-model.ts",
+        "src/commands/history.ts",
+        "src/commands/remove.ts",
+        "src/commands/sync.ts",
+        "tests/add-gallery.test.ts"
+      ]
+    },
+    "check_method": "Exact set equality on answer.files (order ignored). Partial credit is not scored; report precision and recall as secondary.",
+    "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output.",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Trap for grep-based agents: src/manifest.ts names add-gallery.ts only in comments, and does not import it.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "src/cli.ts",
+            "src/commands/add-model.ts",
+            "src/commands/history.ts",
+            "src/commands/remove.ts",
+            "src/commands/sync.ts",
+            "tests/add-gallery.test.ts"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "src/cli.ts",
+          "src/commands/add-model.ts",
+          "src/commands/history.ts",
+          "src/commands/remove.ts",
+          "src/commands/sync.ts",
+          "tests/add-gallery.test.ts"
+        ]
+      }
+    }
+  },
+  {
+    "id": "RC04",
+    "repo": "mcp-tool-shop-org/brand",
+    "commit": "2e3dcd83c69ca94394334e19be41a0e33cd41b34",
+    "type": "reach_direct",
+    "question": "In the repository, which files directly import `src/utils/readme-parser.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
+    "answer_key": {
+      "files": [
+        "src/commands/audit.ts",
+        "src/commands/migrate.ts",
+        "tests/readme-parser.test.ts"
+      ]
+    },
+    "check_method": "Exact set equality on answer.files (order ignored). Partial credit is not scored; report precision and recall as secondary.",
+    "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output.",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "src/commands/audit.ts",
+            "src/commands/migrate.ts",
+            "tests/readme-parser.test.ts"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "src/commands/audit.ts",
+          "src/commands/migrate.ts",
+          "tests/readme-parser.test.ts"
+        ]
+      }
+    }
+  },
+  {
+    "id": "RC05",
+    "repo": "mcp-tool-shop-org/cognate",
+    "commit": "0f8e850ba8be5f2eb6b490e9ef8d461b7c34f8b1",
+    "type": "reach_direct",
+    "question": "In the repository, which files directly import `packages/model-registry/src/types.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
+    "answer_key": {
+      "files": [
+        "packages/model-registry/src/attestation.ts",
+        "packages/model-registry/src/index.ts",
+        "packages/model-registry/src/registry.ts",
+        "packages/model-registry/tests/attestation.test.ts",
+        "packages/model-registry/tests/registry.test.ts"
+      ]
+    },
+    "check_method": "Exact set equality on answer.files (order ignored). Partial credit is not scored; report precision and recall as secondary.",
+    "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output.",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Several other packages import their own types.ts or the @cognate/types package; only same-package relative imports of this file count.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "packages/model-registry/src/attestation.ts",
+            "packages/model-registry/src/index.ts",
+            "packages/model-registry/src/registry.ts",
+            "packages/model-registry/tests/attestation.test.ts",
+            "packages/model-registry/tests/registry.test.ts"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "packages/model-registry/src/attestation.ts",
+          "packages/model-registry/src/index.ts",
+          "packages/model-registry/src/registry.ts",
+          "packages/model-registry/tests/attestation.test.ts",
+          "packages/model-registry/tests/registry.test.ts"
+        ]
+      }
+    }
+  },
+  {
+    "id": "RC06",
+    "repo": "mcp-tool-shop-org/cognate",
+    "commit": "0f8e850ba8be5f2eb6b490e9ef8d461b7c34f8b1",
+    "type": "reach_direct",
+    "question": "In the repository, which files directly import `packages/node/src/release-gate.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
+    "answer_key": {
+      "files": [
+        "packages/node/src/index.ts",
+        "packages/node/src/server.ts",
+        "packages/node/tests/deploy-gate.test.ts"
+      ]
+    },
+    "check_method": "Exact set equality on answer.files (order ignored). Partial credit is not scored; report precision and recall as secondary.",
+    "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output.",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "packages/node/src/index.ts",
+            "packages/node/src/server.ts",
+            "packages/node/tests/deploy-gate.test.ts"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "packages/node/src/index.ts",
+          "packages/node/src/server.ts",
+          "packages/node/tests/deploy-gate.test.ts"
+        ]
+      }
+    }
+  },
+  {
+    "id": "RC07",
+    "repo": "mcp-tool-shop-org/escape-the-valley",
+    "commit": "9bb3327a1d4a66e84920674d2307b66e2ac54c24",
+    "type": "reach_direct",
+    "question": "In the repository, which files directly import `src/escape_the_valley/ui.py`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
+    "answer_key": {
+      "files": [
+        "src/escape_the_valley/adapter.py",
+        "src/escape_the_valley/cli.py",
+        "src/escape_the_valley/engine.py",
+        "src/escape_the_valley/tui_app.py",
+        "tests/test_adapter.py",
+        "tests/test_tui_smoke.py"
+      ]
+    },
+    "check_method": "Exact set equality on answer.files (order ignored). Partial credit is not scored; report precision and recall as secondary.",
+    "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output.",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Python modules also named ui exist as substrings (backpack_ui.py); the key counts only imports of escape_the_valley.ui. Verified against rg of the import forms.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "src/escape_the_valley/adapter.py",
+            "src/escape_the_valley/cli.py",
+            "src/escape_the_valley/engine.py",
+            "src/escape_the_valley/tui_app.py",
+            "tests/test_adapter.py",
+            "tests/test_tui_smoke.py"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "src/escape_the_valley/adapter.py",
+          "src/escape_the_valley/cli.py",
+          "src/escape_the_valley/engine.py",
+          "src/escape_the_valley/tui_app.py",
+          "tests/test_adapter.py",
+          "tests/test_tui_smoke.py"
+        ]
+      }
+    }
+  },
+  {
+    "id": "RC08",
+    "repo": "mcp-tool-shop-org/role-os",
+    "commit": "fc5222ae783ea95e3b1bc38c0576245eaf6fa7fe",
+    "type": "reach_direct",
+    "question": "In the repository, which files directly import `src/route.mjs`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
+    "answer_key": {
+      "files": [
+        "bin/roleos.mjs",
+        "src/entry.mjs",
+        "src/mission.mjs",
+        "src/run.mjs",
+        "src/session.mjs",
+        "src/trial.mjs",
+        "test/audit-p5.test.mjs",
+        "test/conflicts.test.mjs",
+        "test/dispatch.test.mjs",
+        "test/packs.test.mjs",
+        "test/regression-pack-steps.test.mjs",
+        "test/route.test.mjs",
+        "test/swarm.test.mjs"
+      ]
+    },
+    "check_method": "Exact set equality on answer.files (order ignored). Partial credit is not scored; report precision and recall as secondary.",
+    "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output.",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Largest direct set in the bank (13); verified against rg of the import forms. src/entry-cmd.mjs and others mention routing without importing this module.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "bin/roleos.mjs",
+            "src/entry.mjs",
+            "src/mission.mjs",
+            "src/run.mjs",
+            "src/session.mjs",
+            "src/trial.mjs",
+            "test/audit-p5.test.mjs",
+            "test/conflicts.test.mjs",
+            "test/dispatch.test.mjs",
+            "test/packs.test.mjs",
+            "test/regression-pack-steps.test.mjs",
+            "test/route.test.mjs",
+            "test/swarm.test.mjs"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "bin/roleos.mjs",
+          "src/entry.mjs",
+          "src/mission.mjs",
+          "src/run.mjs",
+          "src/session.mjs",
+          "src/trial.mjs",
+          "test/audit-p5.test.mjs",
+          "test/conflicts.test.mjs",
+          "test/dispatch.test.mjs",
+          "test/packs.test.mjs",
+          "test/regression-pack-steps.test.mjs",
+          "test/route.test.mjs",
+          "test/swarm.test.mjs"
+        ]
+      }
+    }
+  },
+  {
+    "id": "RC09",
+    "repo": "mcp-tool-shop-org/escape-the-valley",
+    "commit": "9bb3327a1d4a66e84920674d2307b66e2ac54c24",
+    "type": "reach_transitive",
+    "question": "What would a change to `src/escape_the_valley/engine.py` reach? List every file that depends on it, directly or through a chain of imports (static import, re-export, dynamic import or require; include tests). Answer as JSON: {\"files\": [\"path\", ...]}.",
+    "answer_key": {
+      "files": [
+        "src/escape_the_valley/__main__.py",
+        "src/escape_the_valley/adapter.py",
+        "src/escape_the_valley/cli.py",
+        "src/escape_the_valley/tui_app.py",
+        "tests/test_adapter.py",
+        "tests/test_backpack_ledger.py",
+        "tests/test_cli_stats.py",
+        "tests/test_save.py",
+        "tests/test_step_engine.py",
+        "tests/test_tui_smoke.py"
+      ]
+    },
+    "check_method": "Exact set equality on answer.files (order ignored); report precision/recall as secondary.",
+    "key_source": "Computed by a regex import-resolver written for this bank (TS/JS relative specifiers with .js->.ts mapping and index resolution; Python absolute, relative and from-package-import-submodule forms) over the extracted tree, then cross-checked with ripgrep on the module specifier; not from any Atlas output. Transitive closure over the importer graph.",
+    "needs_network": false,
+    "confidence": "medium",
+    "notes": "Transitive; Python import resolution is heuristic (suffix match of dotted module names), so a handful of edges may differ. Checked: direct importers match rg exactly (cli.py, tests/test_save.py, tests/test_step_engine.py). Atlas reach also follows spawns and tests-as-readers, which this key does not; expect Atlas to name extra files.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "files",
+          "expect": [
+            "src/escape_the_valley/__main__.py",
+            "src/escape_the_valley/adapter.py",
+            "src/escape_the_valley/cli.py",
+            "src/escape_the_valley/tui_app.py",
+            "tests/test_adapter.py",
+            "tests/test_backpack_ledger.py",
+            "tests/test_cli_stats.py",
+            "tests/test_save.py",
+            "tests/test_step_engine.py",
+            "tests/test_tui_smoke.py"
+          ]
+        }
+      ],
+      "example": {
+        "files": [
+          "src/escape_the_valley/__main__.py",
+          "src/escape_the_valley/adapter.py",
+          "src/escape_the_valley/cli.py",
+          "src/escape_the_valley/tui_app.py",
+          "tests/test_adapter.py",
+          "tests/test_backpack_ledger.py",
+          "tests/test_cli_stats.py",
+          "tests/test_save.py",
+          "tests/test_step_engine.py",
+          "tests/test_tui_smoke.py"
+        ]
+      }
+    }
+  },
+  {
+    "id": "DR01",
+    "repo": "mcp-tool-shop-org/registry-stats",
+    "commit": "94103b578067f525300ed24393df179f9a768a0a",
+    "type": "door_workflow",
+    "question": "Which workflow files run `npm run fetch-stats`? Answer as JSON: {\"workflows\": [\"file.yml\", ...]} using file names under .github/workflows/.",
+    "answer_key": {
+      "workflows": [
+        "daily-refresh.yml",
+        "desktop-ci.yml",
+        "pages.yml"
+      ]
+    },
+    "check_method": "Exact set equality on answer.workflows.",
+    "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "daily-refresh.yml",
+            "desktop-ci.yml",
+            "pages.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "daily-refresh.yml",
+          "desktop-ci.yml",
+          "pages.yml"
+        ]
+      }
+    }
+  },
+  {
+    "id": "DR02",
+    "repo": "mcp-tool-shop-org/registry-stats",
+    "commit": "94103b578067f525300ed24393df179f9a768a0a",
+    "type": "door_workflow",
+    "question": "Which workflow files are triggered on a cron schedule? Answer as JSON: {\"workflows\": [\"file.yml\", ...]} using file names under .github/workflows/.",
+    "answer_key": {
+      "workflows": [
+        "daily-refresh.yml",
+        "pages.yml"
+      ]
+    },
+    "check_method": "Exact set equality on answer.workflows.",
+    "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "daily-refresh.yml",
+            "pages.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "daily-refresh.yml",
+          "pages.yml"
+        ]
+      }
+    }
+  },
+  {
+    "id": "DR03",
+    "repo": "mcp-tool-shop-org/registry-stats",
+    "commit": "94103b578067f525300ed24393df179f9a768a0a",
+    "type": "door_workflow",
+    "question": "Which workflow file runs the .NET desktop tests (`dotnet test`)? Answer as JSON: {\"workflows\": [\"file.yml\", ...]} using file names under .github/workflows/.",
+    "answer_key": {
+      "workflows": [
+        "desktop-ci.yml"
+      ]
+    },
+    "check_method": "Exact set equality on answer.workflows.",
+    "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Also asks the runner implicitly; key runner is windows-latest (job build-msix).",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "desktop-ci.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "desktop-ci.yml"
+        ]
+      }
+    }
+  },
+  {
+    "id": "DR04",
+    "repo": "mcp-tool-shop-org/brand",
+    "commit": "2e3dcd83c69ca94394334e19be41a0e33cd41b34",
+    "type": "door_workflow",
+    "question": "Which workflow files run `node dist/cli.js manifest` (with or without extra flags)? Answer as JSON: {\"workflows\": [\"file.yml\", ...]} using file names under .github/workflows/.",
+    "answer_key": {
+      "workflows": [
+        "ci.yml",
+        "sync.yml"
+      ]
+    },
+    "check_method": "Exact set equality on answer.workflows.",
+    "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "ci.yml",
+            "sync.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "ci.yml",
+          "sync.yml"
+        ]
+      }
+    }
+  },
+  {
+    "id": "DR05",
+    "repo": "mcp-tool-shop-org/escape-the-valley",
+    "commit": "9bb3327a1d4a66e84920674d2307b66e2ac54c24",
+    "type": "door_workflow",
+    "question": "Which workflow files are triggered by a `workflow_run` event (a trigger key, not a mention in a comment)? Answer as JSON: {\"workflows\": [\"file.yml\", ...]} using file names under .github/workflows/.",
+    "answer_key": {
+      "workflows": [
+        "publish.yml",
+        "release-binaries.yml"
+      ]
+    },
+    "check_method": "Exact set equality on answer.workflows.",
+    "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Trap: release.yml mentions workflow_run three times in comments but does not use the trigger.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "publish.yml",
+            "release-binaries.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "publish.yml",
+          "release-binaries.yml"
+        ]
+      }
+    }
+  },
+  {
+    "id": "DR06",
+    "repo": "mcp-tool-shop-org/cognate",
+    "commit": "0f8e850ba8be5f2eb6b490e9ef8d461b7c34f8b1",
+    "type": "door_workflow",
+    "question": "Which workflow file builds and pushes a container image when a version tag (`v*`) is pushed? Answer as JSON: {\"workflows\": [\"file.yml\", ...]} using file names under .github/workflows/.",
+    "answer_key": {
+      "workflows": [
+        "docker-publish.yml"
+      ]
+    },
+    "check_method": "Exact set equality on answer.workflows.",
+    "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "A second workflow (docker.yml) also publishes to GHCR but on release:published. Key checked by reading both files.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "docker-publish.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "docker-publish.yml"
+        ]
+      }
+    }
+  },
+  {
+    "id": "DR07",
+    "repo": "mcp-tool-shop-org/backpropagate",
+    "commit": "d662bb6fe18e2a4bef9b81c51cb29ddfd84afda2",
+    "type": "door_workflow",
+    "question": "Which workflow files are triggered on a cron schedule? Answer as JSON: {\"workflows\": [\"file.yml\", ...]} using file names under .github/workflows/.",
+    "answer_key": {
+      "workflows": [
+        "nightly-train-smoke.yml",
+        "scorecard.yml"
+      ]
+    },
+    "check_method": "Exact set equality on answer.workflows.",
+    "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Map at this pin was made from an older commit (dd2ed98404); the workflow files named were unchanged between that commit and the pin (checked with git diff).",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "nightly-train-smoke.yml",
+            "scorecard.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "nightly-train-smoke.yml",
+          "scorecard.yml"
+        ]
+      }
+    }
+  },
+  {
+    "id": "DR08",
+    "repo": "mcp-tool-shop-org/backpropagate",
+    "commit": "d662bb6fe18e2a4bef9b81c51cb29ddfd84afda2",
+    "type": "door_workflow",
+    "question": "Which workflow files run `scripts/check_doc_drift.py`? Answer as JSON: {\"workflows\": [\"file.yml\", ...]} using file names under .github/workflows/.",
+    "answer_key": {
+      "workflows": [
+        "doc-drift.yml"
+      ]
+    },
+    "check_method": "Exact set equality on answer.workflows.",
+    "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Single-file answer; easy. Map lags the pin by several commits (see DR07).",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "doc-drift.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "doc-drift.yml"
+        ]
+      }
+    }
+  },
+  {
+    "id": "DR09",
+    "repo": "mcp-tool-shop-org/offrig",
+    "commit": "751fb1d06e600536f91b72e18ce15a8faa4f075e",
+    "type": "door_workflow",
+    "question": "Which workflow files run `cargo build --release --locked`? Answer as JSON: {\"workflows\": [\"file.yml\", ...]} using file names under .github/workflows/.",
+    "answer_key": {
+      "workflows": [
+        "release.yml"
+      ]
+    },
+    "check_method": "Exact set equality on answer.workflows.",
+    "key_source": "Direct read of .github/workflows/*.yml in the pinned tree (YAML parsed with PyYAML; run-line search with comment lines excluded).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Map at this pin was made from d56f4584da, 10 commits before the pin; the cargo build lines in .github/workflows are identical at both commits (checked with git grep), so the key holds for both. Later offrig trees add a cargo build line to ci.yml; do not re-pin forward without recomputing.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "workflow_set",
+          "field": "workflows",
+          "expect": [
+            "release.yml"
+          ]
+        }
+      ],
+      "example": {
+        "workflows": [
+          "release.yml"
+        ]
+      }
+    }
+  },
+  {
+    "id": "FP01",
+    "repo": "mcp-tool-shop-org/registry-stats",
+    "commit": "94103b578067f525300ed24393df179f9a768a0a",
+    "type": "part_identity",
+    "question": "The npm package declares a `bin` named `registry-stats` pointing at `dist/cli.js`. Which source file is built into `dist/cli.js`? Answer as JSON: {\"file\": \"path\"}.",
+    "answer_key": {
+      "file": "src/cli.ts"
+    },
+    "check_method": "Exact match on answer.file.",
+    "key_source": "package.json bin field plus tsup.config.ts (entry list of the second build config: entry [src/cli.ts], banner shebang).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Two-hop answer (package.json then tsup config). tsup config comments are the only place the CLI build is described.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": "src/cli.ts"
+        }
+      ],
+      "example": {
+        "file": "src/cli.ts"
+      }
+    }
+  },
+  {
+    "id": "FP02",
+    "repo": "mcp-tool-shop-org/escape-the-valley",
+    "commit": "9bb3327a1d4a66e84920674d2307b66e2ac54c24",
+    "type": "part_identity",
+    "question": "Which source file implements the `trail` console script declared in pyproject.toml, and what is the callable name? Answer as JSON: {\"file\": \"path\", \"callable\": \"name\"}.",
+    "answer_key": {
+      "file": "src/escape_the_valley/cli.py",
+      "callable": "app"
+    },
+    "check_method": "Exact match on both fields.",
+    "key_source": "pyproject.toml [project.scripts] trail = \"escape_the_valley.cli:app\".",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Trap: __main__.py also exists and starts the program; it is not the console-script target.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": "src/escape_the_valley/cli.py"
+        },
+        {
+          "kind": "exact",
+          "field": "callable",
+          "expect": "app"
+        }
+      ],
+      "example": {
+        "file": "src/escape_the_valley/cli.py",
+        "callable": "app"
+      }
+    }
+  },
+  {
+    "id": "FP03",
+    "repo": "mcp-tool-shop-org/role-os",
+    "commit": "fc5222ae783ea95e3b1bc38c0576245eaf6fa7fe",
+    "type": "part_identity",
+    "question": "Which source file handles the `roleos swarm` subcommand (the module the bin script dispatches to)? Answer as JSON: {\"file\": \"path\"}.",
+    "answer_key": {
+      "file": "src/swarm-cmd.mjs"
+    },
+    "check_method": "Exact match on answer.file.",
+    "key_source": "bin/roleos.mjs: import { swarmCommand } from \"../src/swarm-cmd.mjs\"; case \"swarm\": await swarmCommand(args).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": "src/swarm-cmd.mjs"
+        }
+      ],
+      "example": {
+        "file": "src/swarm-cmd.mjs"
+      }
+    }
+  },
+  {
+    "id": "FP04",
+    "repo": "mcp-tool-shop-org/backpropagate",
+    "commit": "d662bb6fe18e2a4bef9b81c51cb29ddfd84afda2",
+    "type": "part_identity",
+    "question": "Which file implements the `backprop` console script declared in pyproject.toml? Answer as JSON: {\"file\": \"path\", \"callable\": \"name\"}.",
+    "answer_key": {
+      "file": "backpropagate/cli.py",
+      "callable": "main"
+    },
+    "check_method": "Exact match on both fields.",
+    "key_source": "pyproject.toml [project.scripts]: backprop = \"backpropagate.cli:main\" (also backpropagate = same target).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Map lags the pin; pyproject unchanged across the lag (checked).",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": "backpropagate/cli.py"
+        },
+        {
+          "kind": "exact",
+          "field": "callable",
+          "expect": "main"
+        }
+      ],
+      "example": {
+        "file": "backpropagate/cli.py",
+        "callable": "main"
+      }
+    }
+  },
+  {
+    "id": "FP05",
+    "repo": "mcp-tool-shop-org/cognate",
+    "commit": "0f8e850ba8be5f2eb6b490e9ef8d461b7c34f8b1",
+    "type": "part_identity",
+    "question": "Which workspace packages under `packages/` list `@cognate/prompt-store` in their dependencies, devDependencies or peerDependencies? Answer as JSON: {\"packages\": [\"packages/<dir>\", ...]}.",
+    "answer_key": {
+      "packages": [
+        "packages/cognate",
+        "packages/node"
+      ]
+    },
+    "check_method": "Exact set equality on answer.packages.",
+    "key_source": "Each packages/*/package.json in the pinned tree (parsed as JSON).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "The cognate package lists it as a devDependency (bundled by tsup); node lists it as a dependency.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "packages",
+          "expect": [
+            "packages/cognate",
+            "packages/node"
+          ]
+        }
+      ],
+      "example": {
+        "packages": [
+          "packages/cognate",
+          "packages/node"
+        ]
+      }
+    }
+  },
+  {
+    "id": "FP06",
+    "repo": "mcp-tool-shop-org/offrig",
+    "commit": "751fb1d06e600536f91b72e18ce15a8faa4f075e",
+    "type": "part_identity",
+    "question": "Which crates in the Cargo workspace produce a binary, and what is each binary called? Answer as JSON: {\"binaries\": {\"<crate dir name>\": \"<binary name>\"}}.",
+    "answer_key": {
+      "binaries": {
+        "offrig-app": "offrig-app",
+        "offrig-cli": "offrig",
+        "offrig-mcp": "offrig-mcp"
+      }
+    },
+    "check_method": "Exact dict equality (the library crate must not appear).",
+    "key_source": "crates/*/Cargo.toml [[bin]] tables in the pinned tree.",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "The cli crate offrig-cli produces a binary named offrig, not offrig-cli. Map lags the pin by 10 commits; Cargo manifests checked unchanged for the bin tables.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "dict",
+          "field": "binaries",
+          "expect": {
+            "offrig-app": "offrig-app",
+            "offrig-cli": "offrig",
+            "offrig-mcp": "offrig-mcp"
+          }
+        }
+      ],
+      "example": {
+        "binaries": {
+          "offrig-app": "offrig-app",
+          "offrig-cli": "offrig",
+          "offrig-mcp": "offrig-mcp"
+        }
+      }
+    }
+  },
+  {
+    "id": "WR01",
+    "repo": "mcp-tool-shop-org/registry-stats",
+    "commit": "94103b578067f525300ed24393df179f9a768a0a",
+    "type": "write_read",
+    "question": "The Astro site imports a build-time snapshot at `site/src/data/stats.json`. Which script writes that file, and which Astro pages (under site/src/pages) import it? Answer as JSON: {\"writer\": \"path\", \"readers\": [\"path\", ...]}.",
+    "answer_key": {
+      "writer": "site/scripts/fetch-stats.mjs",
+      "readers": [
+        "site/src/pages/dashboard.astro",
+        "site/src/pages/privacy.astro",
+        "site/src/pages/setup.astro"
+      ]
+    },
+    "check_method": "Exact match on writer; exact set equality on readers.",
+    "key_source": "rg over the pinned tree: OUT_PATH in site/scripts/fetch-stats.mjs; `import('../data/stats.json')` in the three pages. Excludes the desktop app, which reads a downloaded copy of a different file.",
+    "needs_network": false,
+    "confidence": "medium",
+    "notes": "fetch-stats.mjs also writes site/public/data/stats.json (a second output); the desktop app and docs mention stats.json too. A page that only fetch()es /data/stats.json at run time (dashboard.astro also does) is counted by its import.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "writer",
+          "expect": "site/scripts/fetch-stats.mjs"
+        },
+        {
+          "kind": "path_set",
+          "field": "readers",
+          "expect": [
+            "site/src/pages/dashboard.astro",
+            "site/src/pages/privacy.astro",
+            "site/src/pages/setup.astro"
+          ]
+        }
+      ],
+      "example": {
+        "writer": "site/scripts/fetch-stats.mjs",
+        "readers": [
+          "site/src/pages/dashboard.astro",
+          "site/src/pages/privacy.astro",
+          "site/src/pages/setup.astro"
+        ]
+      }
+    }
+  },
+  {
+    "id": "WR02",
+    "repo": "mcp-tool-shop-org/escape-the-valley",
+    "commit": "9bb3327a1d4a66e84920674d2307b66e2ac54c24",
+    "type": "write_read",
+    "question": "The game autosaves to `.trail/run.json`. Which function saves the game to that file (the function that builds the save path and saves; give file and function name), and which non-test modules under src/ import the save module (`escape_the_valley.save`)? Answer as JSON: {\"writer\": {\"file\": \"path\", \"function\": \"name\"}, \"importers\": [\"path\", ...]}.",
+    "answer_key": {
+      "writer": {
+        "file": "src/escape_the_valley/save.py",
+        "function": "save_game"
+      },
+      "importers": [
+        "src/escape_the_valley/adapter.py",
+        "src/escape_the_valley/cli.py",
+        "src/escape_the_valley/engine.py",
+        "src/escape_the_valley/step_engine.py",
+        "src/escape_the_valley/tui_app.py"
+      ]
+    },
+    "check_method": "Exact match on writer.file and writer.function; exact set equality on importers.",
+    "key_source": "save.py: SAVE_FILE = \"run.json\", save_game writes via _atomic_write_text; importers from the regex import resolver cross-checked with rg for `.save import`.",
+    "needs_network": false,
+    "confidence": "medium",
+    "notes": "save_game is wrapped by _atomic_write_text; a model may name that helper instead. cli.py imports has_save/load_game, not save_game, at module level but imports save_game inside functions. Question reworded 2026-10-13 (R&D's audit): _atomic_write_text does the physical write, so \"writes\" had two fair readings.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "writer.file",
+          "expect": "src/escape_the_valley/save.py"
+        },
+        {
+          "kind": "exact",
+          "field": "writer.function",
+          "expect": "save_game"
+        },
+        {
+          "kind": "path_set",
+          "field": "importers",
+          "expect": [
+            "src/escape_the_valley/adapter.py",
+            "src/escape_the_valley/cli.py",
+            "src/escape_the_valley/engine.py",
+            "src/escape_the_valley/step_engine.py",
+            "src/escape_the_valley/tui_app.py"
+          ]
+        }
+      ],
+      "example": {
+        "writer": {
+          "file": "src/escape_the_valley/save.py",
+          "function": "save_game"
+        },
+        "importers": [
+          "src/escape_the_valley/adapter.py",
+          "src/escape_the_valley/cli.py",
+          "src/escape_the_valley/engine.py",
+          "src/escape_the_valley/step_engine.py",
+          "src/escape_the_valley/tui_app.py"
+        ]
+      }
+    }
+  },
+  {
+    "id": "TG01",
+    "repo": "mcp-tool-shop-org/cognate",
+    "commit": "0f8e850ba8be5f2eb6b490e9ef8d461b7c34f8b1",
+    "type": "test_gap",
+    "question": "Which directories directly under `packages/` contain no test file (no `*.test.ts` anywhere inside them)? And which CI command in ci.yml runs the test suites? Answer as JSON: {\"packages_without_tests\": [\"packages/<dir>\", ...], \"ci_test_command\": \"text\"}.",
+    "answer_key": {
+      "packages_without_tests": [
+        "packages/types"
+      ],
+      "ci_test_command": "pnpm test:coverage"
+    },
+    "check_method": "Exact set equality on packages_without_tests; ci_test_command must contain `pnpm test:coverage`.",
+    "key_source": "find over packages/*; ci.yml run line \"pnpm test:coverage\" (release.yml runs `pnpm test`).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "packages_without_tests",
+          "expect": [
+            "packages/types"
+          ]
+        },
+        {
+          "kind": "text",
+          "field": "ci_test_command",
+          "require": [
+            "pnpm test:coverage"
+          ],
+          "reject": [
+            "\\bor\\b",
+            "[,;/]",
+            "&&",
+            "\\bpnpm test\\b(?!:)"
+          ]
+        }
+      ],
+      "example": {
+        "packages_without_tests": [
+          "packages/types"
+        ],
+        "ci_test_command": "pnpm test:coverage"
+      },
+      "scattershot": [
+        {
+          "packages_without_tests": [
+            "packages/types"
+          ],
+          "ci_test_command": "pnpm test, pnpm test:coverage or npm test"
+        }
+      ]
+    }
+  },
+  {
+    "id": "TG02",
+    "repo": "mcp-tool-shop-org/role-os",
+    "commit": "fc5222ae783ea95e3b1bc38c0576245eaf6fa7fe",
+    "type": "test_gap",
+    "question": "Besides `npm test` (which runs `node --test test/*.test.mjs`), some test scripts named `test_*` live elsewhere in the repo. Which of them does NO workflow run, and which one does a workflow run (with the workflow file and the directory the step runs in)? Answer as JSON: {\"not_run_by_any_workflow\": [\"path\", ...], \"run_by_workflow\": {\"file\": \"path\", \"workflow\": \"name.yml\", \"working_directory\": \"dir\"}}.",
+    "answer_key": {
+      "not_run_by_any_workflow": [
+        "tools/conformance-dataset/live-tools/test_prep_inputs_empty.mjs",
+        "tools/conformance-dataset/test_certify_ship_stamp.py",
+        "tools/conformance-dataset/test_empty_write_gate.py",
+        "tools/conformance-dataset/test_ood_floor_gate.mjs"
+      ],
+      "run_by_workflow": {
+        "file": "tools/token-budget-dataset/test_harvester.py",
+        "workflow": "ci.yml",
+        "working_directory": "tools/token-budget-dataset"
+      }
+    },
+    "check_method": "Exact set equality on not_run_by_any_workflow; exact match on run_by_workflow.file, workflow and working_directory.",
+    "key_source": "find for test_*/ *.test.* / *_test.* files outside test/*.test.mjs (excluding node_modules, atlas, site); rg over .github and package.json for each file name; ci.yml step \"Token-budget harvester tests\" (Node-22 leg only).",
+    "needs_network": false,
+    "confidence": "medium",
+    "notes": "\"Run by no workflow\" is mechanical here, but the files are runnable by hand (their docstrings say how), so a model may call them not-gaps. Corresponds to the G2 rule in the test-gap fleet check.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "not_run_by_any_workflow",
+          "expect": [
+            "tools/conformance-dataset/live-tools/test_prep_inputs_empty.mjs",
+            "tools/conformance-dataset/test_certify_ship_stamp.py",
+            "tools/conformance-dataset/test_empty_write_gate.py",
+            "tools/conformance-dataset/test_ood_floor_gate.mjs"
+          ]
+        },
+        {
+          "kind": "path",
+          "field": "run_by_workflow.file",
+          "expect": "tools/token-budget-dataset/test_harvester.py"
+        },
+        {
+          "kind": "workflow",
+          "field": "run_by_workflow.workflow",
+          "expect": "ci.yml"
+        },
+        {
+          "kind": "path",
+          "field": "run_by_workflow.working_directory",
+          "expect": "tools/token-budget-dataset"
+        }
+      ],
+      "example": {
+        "not_run_by_any_workflow": [
+          "tools/conformance-dataset/live-tools/test_prep_inputs_empty.mjs",
+          "tools/conformance-dataset/test_certify_ship_stamp.py",
+          "tools/conformance-dataset/test_empty_write_gate.py",
+          "tools/conformance-dataset/test_ood_floor_gate.mjs"
+        ],
+        "run_by_workflow": {
+          "file": "tools/token-budget-dataset/test_harvester.py",
+          "workflow": "ci.yml",
+          "working_directory": "tools/token-budget-dataset"
+        }
+      }
+    }
+  },
+  {
+    "id": "TG03",
+    "repo": "mcp-tool-shop-org/brand",
+    "commit": "2e3dcd83c69ca94394334e19be41a0e33cd41b34",
+    "type": "test_gap",
+    "question": "Which files under the repo-root `src/` directory are not imported, directly or through a chain of static imports, by any file under `tests/`? For each of them, say which test files exercise it some other way. Answer as JSON: {\"unimported_by_tests\": [\"path\", ...], \"exercised_via\": [\"tests/<file>\", ...]}.",
+    "answer_key": {
+      "unimported_by_tests": [
+        "src/cli.ts",
+        "src/commands/manifest-cmd.ts",
+        "src/commands/verify.ts"
+      ],
+      "exercised_via": [
+        "tests/exit-codes.test.ts",
+        "tests/json-output.test.ts",
+        "tests/manifest-cmd.test.ts",
+        "tests/manifest.test.ts",
+        "tests/verify.test.ts"
+      ]
+    },
+    "check_method": "Exact set equality on unimported_by_tests; exercised_via must contain at least tests/manifest-cmd.test.ts and tests/verify.test.ts and nothing outside the five spawning tests.",
+    "key_source": "Forward import closure from tests/**/*.ts (own resolver) gives the three files; rg for `spawnSync('node', [BIN` / dist/cli.js in tests/ gives the four spawning tests; vitest.config.ts comments confirm.",
+    "needs_network": false,
+    "confidence": "medium",
+    "notes": "Known-corner for Atlas: a test that spawns a built binary. The answer is also written in vitest.config.ts comments inside the repo (contamination). The `exercised_via` list is my reading of which tests spawn the CLI; verify before pinning the grader. Amended 2026-10-13 after R&D's blind audit: tests/manifest.test.ts also spawns dist/cli.js (BIN at line 935, runCli(['manifest', ...]) at line 985), so the spawning tests are five.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path_set",
+          "field": "unimported_by_tests",
+          "expect": [
+            "src/cli.ts",
+            "src/commands/manifest-cmd.ts",
+            "src/commands/verify.ts"
+          ]
+        },
+        {
+          "kind": "path_subset_between",
+          "field": "exercised_via",
+          "must": [
+            "tests/manifest-cmd.test.ts",
+            "tests/verify.test.ts"
+          ],
+          "within": [
+            "tests/exit-codes.test.ts",
+            "tests/json-output.test.ts",
+            "tests/manifest-cmd.test.ts",
+            "tests/manifest.test.ts",
+            "tests/verify.test.ts"
+          ]
+        }
+      ],
+      "example": {
+        "unimported_by_tests": [
+          "src/cli.ts",
+          "src/commands/manifest-cmd.ts",
+          "src/commands/verify.ts"
+        ],
+        "exercised_via": [
+          "tests/exit-codes.test.ts",
+          "tests/json-output.test.ts",
+          "tests/manifest-cmd.test.ts",
+          "tests/manifest.test.ts",
+          "tests/verify.test.ts"
+        ]
+      }
+    }
+  },
+  {
+    "id": "WB01",
+    "repo": "mcp-tool-shop-org/shipcheck",
+    "commit": "2e5a656e55a73a5a6e9bf4ef3c19aef5edc48b8b",
+    "type": "workflow_break",
+    "question": "Look at the workflow `.github/workflows/pages.yml` (\"Deploy site to GitHub Pages\"). Is there any Node-version or lockfile-binding problem in the repository that would make its `npm ci` and `npm run build` steps fail on ubuntu-latest? Answer as JSON: {\"will_break\": true|false, \"evidence\": \"text\"}. If true, name the file and line.",
+    "answer_key": {
+      "will_break": false
+    },
+    "check_method": "answer.will_break must be false. (A true answer is wrong regardless of evidence.)",
+    "key_source": "pages.yml pins setup-node node-version 22; site/package.json astro ^7.3.3 resolves to astro 7.3.3 (engines.node >=22.12.0, satisfied by Node 22); site/package-lock.json holds a linux-x64 binding for every parent that lists one (own check: script lockbind.cjs finds no parent with a missing linux-x64 binding).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Negative control: the same-shaped door was red until 2026-09-30 15:37Z and is fixed at this pin (fix commits cd9c0defa1 and bb23a6472c). The pinned commit has an Atlas map (engine 1.24.0, made from 8561c6d79d; map-to-pin lag of a few commits, none touching pages.yml or site/package-lock.json beyond the devalue lockfile bump f5427c34c0, which changes no binding entry; unverified in detail). Tests whether Atlas D1/D2 notices cause false alarms. Answer is known only from a lockfile scan and engines fields, never from Atlas.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "bool",
+          "field": "will_break",
+          "expect": false
+        }
+      ],
+      "example": {
+        "will_break": false,
+        "evidence": "pages.yml pins Node 22, which astro 7.3.3 accepts, and the lock holds every linux-x64 binding."
+      }
+    }
+  },
+  {
+    "id": "CF01",
+    "repo": "mcp-tool-shop-org/portlight",
+    "commit": "9b02494cca9cd8f58c4531c41f75be02c9720e43",
+    "type": "ci_failure",
+    "question": "The CI workflow on `main` failed (run 36289402818, job \"test (3.11)\"). Output:\n___ TestScenarioExecution.test_no_invariant_violations[legitimization_pivot] ___\ntests/stress/test_scenarios.py:61: in test_no_invariant_violations\nE   Failed: Scenario legitimization_pivot had 5 invariant violations:\nE     - cargo_within_capacity (economy): Cargo 31 exceeds capacity 30   (twice, then \"Cargo 33 exceeds capacity 30\" three times)\n1 failed, 99 passed in 442.73s (0:07:22)\nWhich source file and function contain the defect, and what is wrong with it? Answer: {\"file\": \"path\", \"function\": \"name\", \"defect\": \"one sentence\"}. Answer as JSON as described. The failure text above is what the run printed; the repository is checked out at the stated commit with no later history.",
+    "answer_key": {
+      "file": "src/portlight/stress/invariants.py",
+      "function": "_check_cargo_within_capacity",
+      "defect_must_mention": "weight (the check sums item quantity instead of hold weight; buy() enforces weight)"
+    },
+    "check_method": "answer.file and answer.function exact match; answer.defect must match /weight/i (and not blame the scenario or the test).",
+    "key_source": "Fix commit b6ae8be4aa (PR #7) on mcp-tool-shop-org/portlight: diff of src/portlight/stress/invariants.py replaces sum(c.quantity) with cargo_weight(); commit message states the failure was intermittent.",
+    "needs_network": false,
+    "confidence": "medium",
+    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). Failing run commit is 9b02494cca (a CI-config-only merge); the cause is a flaky invariant, not the commit. Map at the pin was made from 7c76f54ff4 (engine stamp absent, i.e. pre-1.24). Hard task: needs reasoning over a game-rules function, not config. Atlas can at most name tests that reach the file; the experiment should expect no benefit. The fix commit message (future history) contains the answer: hide later history.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": "src/portlight/stress/invariants.py"
+        },
+        {
+          "kind": "exact",
+          "field": "function",
+          "expect": "_check_cargo_within_capacity"
+        },
+        {
+          "kind": "text",
+          "field": "defect",
+          "require": [
+            "weight"
+          ],
+          "reject": [
+            "\\b(the test|the scenario|the seed)\\b[^.]{0,30}\\b(is|was) (wrong|at fault|buggy)",
+            "\\bor\\b[^.]{0,60}\\b(scenario|test|seed|flak)"
+          ]
+        }
+      ],
+      "example": {
+        "file": "src/portlight/stress/invariants.py",
+        "function": "_check_cargo_within_capacity",
+        "defect": "It sums cargo quantity instead of cargo weight, so it disagrees with buy(), which enforces the hold's weight capacity."
+      },
+      "scattershot": [
+        {
+          "file": "src/portlight/stress/invariants.py",
+          "function": "_check_cargo_within_capacity",
+          "defect": "Either the check compares quantity against weight, or the scenario's random seed or the test itself is wrong."
+        }
+      ]
+    }
+  },
+  {
+    "id": "CF02",
+    "repo": "mcp-tool-shop-org/runforge-vscode",
+    "commit": "c9c6406333bdc9b45df57da437115dce4aba0f2e",
+    "type": "ci_failure",
+    "question": "The workflow \"Deploy site to GitHub Pages\" fails on `main` (run 35294167384, job build, step \"Build site\"). Output:\nNode.js v20.20.2 is not supported by Astro!\nPlease upgrade Node.js to a supported version: \">=22.12.0\"\nWhich file and line should change, and to what? Answer: {\"file\": \"path\", \"line\": N, \"change\": \"text\"}. Answer as JSON as described. The failure text above is what the run printed; the repository is checked out at the stated commit with no later history.",
+    "answer_key": {
+      "file": ".github/workflows/pages.yml",
+      "line": 28,
+      "change_must_mention": "node-version 20 -> 22 (or any version satisfying >=22.12.0)"
+    },
+    "check_method": "answer.file exact; answer.line == 28; answer.change must name a Node version whose major is >= 22.",
+    "key_source": "Fix PR #14 (merge 6c5ebe83b8) changes one line of .github/workflows/pages.yml; pinned tree line 28 reads `node-version: 20` and site/package.json declares astro ^7.3.3 (engines.node >=22.12.0 from the lockfile).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). D1 class (toolchain). Map at the pin was made from d4f816a715 and carries no engine stamp, so the committed map holds no D1 finding; Atlas 1.24+ would raise it only if the map is regenerated or `atlas_check_change` recomputes it from the tree (verify). Commit title of the fix names the answer in later history.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": ".github/workflows/pages.yml"
+        },
+        {
+          "kind": "line",
+          "field": "line",
+          "expect": 28,
+          "tolerance": 0
+        },
+        {
+          "kind": "text",
+          "field": "change",
+          "require": [
+            "\\b(2[2-9]|[3-9]\\d)(\\.\\d+)*\\b"
+          ],
+          "reject": [
+            "\\b\\d+(\\.\\d+)*\\s*(or|/|and)\\s*\\d+(\\.\\d+)*\\b",
+            "(?<![\\d.])(18|19|21)(?![\\d])",
+            "\\b(downgrade|older astro|astro@?\\s*[1-6]\\b)"
+          ]
+        }
+      ],
+      "example": {
+        "file": ".github/workflows/pages.yml",
+        "line": 28,
+        "change": "node-version: 20 -> 22"
+      },
+      "scattershot": [
+        {
+          "file": ".github/workflows/pages.yml",
+          "line": 28,
+          "change": "set node-version to 22 or 24, or downgrade astro"
+        }
+      ]
+    }
+  },
+  {
+    "id": "CF03",
+    "repo": "mcp-tool-shop-org/vocal-synth-engine",
+    "commit": "984669a4ca1a385a79400795325604f03fb6dd20",
+    "type": "ci_failure",
+    "question": "The workflow \"Deploy site to GitHub Pages\" fails on `main` (run 35296622722, job build). Output:\nNode.js v20.20.2 is not supported by Astro!\nPlease upgrade Node.js to a supported version: \">=22.12.0\"\nWhich file and line should change, and to what? Answer: {\"file\": \"path\", \"line\": N, \"change\": \"text\"}. Answer as JSON as described. The failure text above is what the run printed; the repository is checked out at the stated commit with no later history.",
+    "answer_key": {
+      "file": ".github/workflows/pages.yml",
+      "line": 28,
+      "change_must_mention": "node-version 20 -> 22 (or any version satisfying >=22.12.0)"
+    },
+    "check_method": "answer.file exact; answer.line == 28; answer.change must name a Node version whose major is >= 22.",
+    "key_source": "Fix commit bf56168083 (PR #33) changes one line of .github/workflows/pages.yml; pinned tree line 28 `node-version: 20`; site astro ^7.3.3.",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). Same cause and same shape as CF02 (correlated pair; consider keeping only one in the primary analysis). Map made from f8fe895f7a, no engine stamp.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": ".github/workflows/pages.yml"
+        },
+        {
+          "kind": "line",
+          "field": "line",
+          "expect": 28,
+          "tolerance": 0
+        },
+        {
+          "kind": "text",
+          "field": "change",
+          "require": [
+            "\\b(2[2-9]|[3-9]\\d)(\\.\\d+)*\\b"
+          ],
+          "reject": [
+            "\\b\\d+(\\.\\d+)*\\s*(or|/|and)\\s*\\d+(\\.\\d+)*\\b",
+            "(?<![\\d.])(18|19|21)(?![\\d])",
+            "\\b(downgrade|older astro|astro@?\\s*[1-6]\\b)"
+          ]
+        }
+      ],
+      "example": {
+        "file": ".github/workflows/pages.yml",
+        "line": 28,
+        "change": "node-version: 20 -> 22"
+      },
+      "scattershot": [
+        {
+          "file": ".github/workflows/pages.yml",
+          "line": 28,
+          "change": "set node-version to 22 or 24, or downgrade astro"
+        }
+      ]
+    }
+  },
+  {
+    "id": "CF04",
+    "repo": "mcp-tool-shop-org/shipcheck",
+    "commit": "663e7cc0520e68b4f0f62b1cf8144228e554b82a",
+    "type": "ci_failure",
+    "question": "The workflow \"Deploy site to GitHub Pages\" fails on `main` (run 35298180279, step \"Build site\"). Output:\nError: Cannot find native binding. npm has a bug related to optional dependencies (https://github.com/npm/cli/issues/4828). Please try `npm i` again after removing both package-lock.json and node_modules directory.\n  cause: Error: Cannot find module '@bruits/satteri-linux-x64-gnu'\nWhich file is at fault, why does it fail on ubuntu-latest, and which packages are affected (the complete set)? Answer: {\"file\": \"path\", \"cause\": \"text\", \"packages\": [\"name\", ...]}. Answer as JSON as described. The failure text above is what the run printed; the repository is checked out at the stated commit with no later history.",
+    "answer_key": {
+      "file": "site/package-lock.json",
+      "cause_must_mention": "optional native bindings missing from the lockfile for linux-x64 (written on Windows; npm/cli#4828); `npm ci` installs the lock as written",
+      "packages": [
+        "@astrojs/compiler-binding",
+        "@tailwindcss/oxide",
+        "esbuild",
+        "pagefind",
+        "satteri",
+        "sharp"
+      ]
+    },
+    "check_method": "Primary: answer.file exact and answer.cause matches /(linux|binding|optional|windows)/i. Secondary: answer.packages compared as a set with the six (recall and precision reported).",
+    "key_source": "Own scan of site/package-lock.json at the pin (lockbind.cjs: parents whose optionalDependencies name a linux-x64 binding absent from the lock) finds exactly these six; fix commits cd9c0defa1 (satteri only) and bb23a6472c (\"restore every missing native binding\") on shipcheck confirm.",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). D2 class. The run named in the question executed at 875a8ae4a0 (no map yet); the pin is main at triage time, same lockfile. Two-stage history: the first fix covered only satteri and main stayed red (run 36736674786), so a model that stops at the named package gets the secondary set wrong. Map made from 875a8ae4a0, no engine stamp.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": "site/package-lock.json"
+        },
+        {
+          "kind": "text",
+          "field": "cause",
+          "require": [
+            "(linux|binding|optional)"
+          ],
+          "reject": [
+            "\\bor\\b[^.]{0,60}\\b(node(\\.js)? version|network|cache|registry)"
+          ]
+        }
+      ],
+      "secondary": [
+        {
+          "kind": "set_recall_precision",
+          "field": "packages",
+          "expect": [
+            "@astrojs/compiler-binding",
+            "@tailwindcss/oxide",
+            "esbuild",
+            "pagefind",
+            "satteri",
+            "sharp"
+          ]
+        }
+      ],
+      "example": {
+        "file": "site/package-lock.json",
+        "cause": "The lockfile was written on Windows and lacks the optional linux-x64 native bindings, and npm ci installs it as written.",
+        "packages": [
+          "@astrojs/compiler-binding",
+          "@tailwindcss/oxide",
+          "esbuild",
+          "pagefind",
+          "satteri",
+          "sharp"
+        ]
+      },
+      "scattershot": [
+        {
+          "file": "site/package-lock.json",
+          "cause": "A missing linux binding, or the Node version is unsupported, or the npm cache or registry failed.",
+          "packages": [
+            "satteri"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "CF05",
+    "repo": "mcp-tool-shop-org/storyboard-os",
+    "commit": "736766f1f17065fe64a4f3813db0d86d52ee8c72",
+    "type": "ci_failure",
+    "question": "The workflow \"Deploy site to GitHub Pages\" fails on `main` (run 36647142714). The `build` job succeeds; the `deploy` job fails before running any step, with these annotations:\nBranch \"main\" is not allowed to deploy to github-pages due to environment protection rules.\nThe deployment was rejected or didn't satisfy other protection rules.\nWhat is the cause, and can it be fixed by changing a file in the repository? Answer: {\"cause\": \"text\", \"fixable_in_repo_files\": true|false}. Answer as JSON as described. The failure text above is what the run printed; the repository is checked out at the stated commit with no later history.",
+    "answer_key": {
+      "fixable_in_repo_files": false,
+      "cause_must_mention": "the github-pages environment deployment-branch policy (repository setting) does not allow main; the default branch moved from master to main"
+    },
+    "check_method": "answer.fixable_in_repo_files must be false AND answer.cause must match /environment/i and /(branch|polic|protection)/i.",
+    "key_source": "Run annotations (gh api .../check-runs/<id>/annotations); the repo commit 8228b7d631 \"drop master from workflow triggers now that the default is main\"; the run on the same commit passed after the Director changed the environment setting (run 36735255854, workflow_dispatch, 2026-09-30).",
+    "needs_network": false,
+    "confidence": "medium",
+    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). NEGATIVE CONTROL for Atlas: the cause is a GitHub setting, not in any file; Atlas is offline by design. Tests whether the MCP arm wastes tokens or overclaims. Correct answer is \"not fixable in files\". The settings fix has no commit; evidence is the annotation text and the passing re-run.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "bool",
+          "field": "fixable_in_repo_files",
+          "expect": false
+        },
+        {
+          "kind": "text",
+          "field": "cause",
+          "require": [
+            "environment",
+            "(branch|polic|protection)"
+          ],
+          "reject": [
+            "\\bor\\b[^.]{0,60}\\b(not enabled|token|permission)"
+          ]
+        }
+      ],
+      "example": {
+        "cause": "The github-pages environment's deployment branch policy does not allow main, a repository setting.",
+        "fixable_in_repo_files": false
+      },
+      "scattershot": [
+        {
+          "cause": "The github-pages environment protection rules, or Pages not enabled, or the workflow's token permissions.",
+          "fixable_in_repo_files": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "CF06",
+    "repo": "mcp-tool-shop-org/research-os",
+    "commit": "4bc808e3760ecfe1424b531bbbb68750597e8546",
+    "type": "ci_failure",
+    "question": "The workflow \"Deploy site to GitHub Pages\" fails on `main` (run 35260155076). The `build` job succeeds; the `deploy` job fails before running any step, with these annotations:\nBranch \"main\" is not allowed to deploy to github-pages due to environment protection rules.\nThe deployment was rejected or didn't satisfy other protection rules.\nWhat is the cause, and can it be fixed by changing a file in the repository? Answer: {\"cause\": \"text\", \"fixable_in_repo_files\": true|false}. Answer as JSON as described. The failure text above is what the run printed; the repository is checked out at the stated commit with no later history.",
+    "answer_key": {
+      "fixable_in_repo_files": false,
+      "cause_must_mention": "the github-pages environment deployment-branch policy (repository setting) does not allow main"
+    },
+    "check_method": "answer.fixable_in_repo_files must be false AND answer.cause must match /environment/i and /(branch|polic|protection)/i.",
+    "key_source": "Run annotations (check-runs API) for job `deploy` of run 35260155076; same environment-policy cause as CF05, confirmed in the triage table.",
+    "needs_network": false,
+    "confidence": "medium",
+    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). Same cause and same answer as CF05 (correlated twin: count as one if the analysis assumes independence). The failing run executed at d888f86c72, earlier than the pin; log text is gone (gh run view --log-failed answers \"log not found\"), only annotations survive. Pin kept at 4bc808e376 after R&D's audit asked for d888f86c72, the failing run's head: d888f86c72 has no Atlas map (research-os adopted Atlas three commits later), so arm B would have no map for this task alone. The three commits between change only .github/workflows/ci.yml, codecov.yml and atlas/; the Pages workflow and the cause, a repository setting, are the same at both. CF07 likewise pins the first commit with a map, the child of its failing run's commit.",
+    "grade": {
+      "checks": [
+        {
+          "kind": "bool",
+          "field": "fixable_in_repo_files",
+          "expect": false
+        },
+        {
+          "kind": "text",
+          "field": "cause",
+          "require": [
+            "environment",
+            "(branch|polic|protection)"
+          ],
+          "reject": [
+            "\\bor\\b[^.]{0,60}\\b(not enabled|token|permission)"
+          ]
+        }
+      ],
+      "example": {
+        "cause": "The github-pages environment's deployment branch policy does not allow main, a repository setting.",
+        "fixable_in_repo_files": false
+      },
+      "scattershot": [
+        {
+          "cause": "The github-pages environment protection rules, or Pages not enabled, or the workflow's token permissions.",
+          "fixable_in_repo_files": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "CF07",
+    "repo": "mcp-tool-shop-org/mcp-tool-registry",
+    "commit": "2bb195fa484d4e572d28ef756d371624b1efac32",
+    "type": "ci_failure",
+    "question": "The workflow \"Deploy site to GitHub Pages\" fails on `main` (run 36085870892, job deploy, which ran on the parent commit 9b0bd69beb). Output:\nCreating Pages deployment failed\nHttpError: Not Found\nError: Failed to create deployment (status: 404) with build version 9b0bd69beb... Ensure GitHub Pages has been enabled\nWhat is the cause, and can it be fixed by changing a file in the repository? Answer: {\"cause\": \"text\", \"fixable_in_repo_files\": true|false}. Answer as JSON as described. The failure text above is what the run printed; the repository is checked out at the stated commit with no later history.",
+    "answer_key": {
+      "fixable_in_repo_files": false,
+      "cause_must_mention": "GitHub Pages is not enabled for the repository (Settings > Pages, source GitHub Actions); the workflow itself is fine"
+    },
+    "check_method": "answer.fixable_in_repo_files must be false AND answer.cause must match /pages/i and /(not enabled|enable|404)/i.",
+    "key_source": "Run log (gh run view 36085870892 --log-failed) says status 404 and \"Ensure GitHub Pages has been enabled\"; triage table row for mcp-tool-registry; the Pages API answered 404 at triage time.",
+    "needs_network": false,
+    "confidence": "medium",
+    "notes": "Part of the 2026-09-30 triage replay (8 red default branches, 5 causes; source: the \"Atlas production quality gameplan\" session table, docs/atlas-production.spec.md intro). NEGATIVE CONTROL for Atlas (a repository setting). The pin is the child of the failing run commit and is the commit that first added the Atlas map (engine stamp absent).",
+    "grade": {
+      "checks": [
+        {
+          "kind": "bool",
+          "field": "fixable_in_repo_files",
+          "expect": false
+        },
+        {
+          "kind": "text",
+          "field": "cause",
+          "require": [
+            "pages",
+            "(not enabled|enable|404)"
+          ],
+          "reject": [
+            "\\bor\\b[^.]{0,60}\\b(environment|branch polic|protection|token|permission)"
+          ]
+        }
+      ],
+      "example": {
+        "cause": "GitHub Pages is not enabled for the repository, so creating the deployment returns 404.",
+        "fixable_in_repo_files": false
+      },
+      "scattershot": [
+        {
+          "cause": "Pages is not enabled, or the environment protection rules, or the token lacks permissions.",
+          "fixable_in_repo_files": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "CF09",
+    "repo": "mcp-tool-shop-org/brand",
+    "commit": "f3d1a792cd6dfcd12592c0b9d74e96a6b47d59e2",
+    "type": "workflow_break",
+    "question": "Which job and which Node version in the repository's CI workflow does not satisfy the `engines.node` range that package-lock.json declares for a test tool the job runs? Name the workflow file, the job, the line, the Node version pinned, and the tool with its declared range. Answer as JSON: {\"file\": \"path\", \"job\": \"id\", \"line\": N, \"node\": \"version\", \"tool\": \"name\", \"requires\": \"range\"}.",
+    "answer_key": {
+      "file": ".github/workflows/ci.yml",
+      "job": "lint-test-build",
+      "line": 80,
+      "node": "20",
+      "tool": "vitest",
+      "requires": "^22.12.0 || ^24.0.0 || >=26.0.0"
+    },
+    "check_method": "answer.file, answer.job and answer.node exact; answer.line within +/-1 of the key; answer.tool exact; answer.requires scored as informational.",
+    "key_source": "Workflow file and package-lock.json at the pin; fix PR diff (the PR removes exactly this leg or pin). brand#87 changes `node-version: [20, 22, 24]` to [22, 24].",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Found by Atlas 1.24.0 D1, then repaired by the Director's call (the fix PR bodies say so): selection bias toward Atlas-favourable tasks, and the committed map at the pin ALREADY RECORDS the D1 finding (atlas/structure.json doors[0].findings, rule D1), so the answer is in the checkout for any arm that reads atlas/. Key independently verified from package-lock.json engines.node (vitest 5.0.0: ^22.12.0 || ^24.0.0 || >=26.0.0; c8 12.0.0: ^20.19.0 || ^22.12.0 || >=23) and the fix PR diff. CI stayed green on these doors (the tool declares the range but does not refuse to start), so there is no failing run: the task is \"what will break/ is mismatched\", not \"why did it fail\".",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": ".github/workflows/ci.yml"
+        },
+        {
+          "kind": "exact",
+          "field": "job",
+          "expect": "lint-test-build"
+        },
+        {
+          "kind": "line",
+          "field": "line",
+          "expect": 80,
+          "tolerance": 1
+        },
+        {
+          "kind": "node_version",
+          "field": "node",
+          "expect": "20"
+        },
+        {
+          "kind": "exact",
+          "field": "tool",
+          "expect": "vitest"
+        }
+      ],
+      "secondary": [
+        {
+          "kind": "exact",
+          "field": "requires",
+          "expect": "^22.12.0 || ^24.0.0 || >=26.0.0"
+        }
+      ],
+      "example": {
+        "file": ".github/workflows/ci.yml",
+        "job": "lint-test-build",
+        "line": 80,
+        "node": "20",
+        "tool": "vitest",
+        "requires": "^22.12.0 || ^24.0.0 || >=26.0.0"
+      }
+    }
+  },
+  {
+    "id": "CF10",
+    "repo": "mcp-tool-shop-org/research-os",
+    "commit": "d3cd0a884719f7c4d6f9b26fdb9f4fb08bf7f807",
+    "type": "workflow_break",
+    "question": "Which job and which Node version in the repository's CI workflow does not satisfy the `engines.node` range that package-lock.json declares for a test tool the job runs? Name the workflow file, the job, the line, the Node version pinned, and the tool with its declared range. Answer as JSON: {\"file\": \"path\", \"job\": \"id\", \"line\": N, \"node\": \"version\", \"tool\": \"name\", \"requires\": \"range\"}.",
+    "answer_key": {
+      "file": ".github/workflows/ci.yml",
+      "job": "verify",
+      "line": 22,
+      "node": "20",
+      "tool": "vitest",
+      "requires": "^22.12.0 || ^24.0.0 || >=26.0.0"
+    },
+    "check_method": "answer.file, answer.job and answer.node exact; answer.line within +/-1 of the key; answer.tool exact; answer.requires scored as informational.",
+    "key_source": "Workflow file and package-lock.json at the pin; fix PR diff (the PR removes exactly this leg or pin). research-os#35 changes `node-version: [20, 22]` to [22].",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Found by Atlas 1.24.0 D1, then repaired by the Director's call (the fix PR bodies say so): selection bias toward Atlas-favourable tasks, and the committed map at the pin ALREADY RECORDS the D1 finding (atlas/structure.json doors[0].findings, rule D1), so the answer is in the checkout for any arm that reads atlas/. Key independently verified from package-lock.json engines.node (vitest 5.0.0: ^22.12.0 || ^24.0.0 || >=26.0.0; c8 12.0.0: ^20.19.0 || ^22.12.0 || >=23) and the fix PR diff. CI stayed green on these doors (the tool declares the range but does not refuse to start), so there is no failing run: the task is \"what will break/ is mismatched\", not \"why did it fail\".",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": ".github/workflows/ci.yml"
+        },
+        {
+          "kind": "exact",
+          "field": "job",
+          "expect": "verify"
+        },
+        {
+          "kind": "line",
+          "field": "line",
+          "expect": 22,
+          "tolerance": 1
+        },
+        {
+          "kind": "node_version",
+          "field": "node",
+          "expect": "20"
+        },
+        {
+          "kind": "exact",
+          "field": "tool",
+          "expect": "vitest"
+        }
+      ],
+      "secondary": [
+        {
+          "kind": "exact",
+          "field": "requires",
+          "expect": "^22.12.0 || ^24.0.0 || >=26.0.0"
+        }
+      ],
+      "example": {
+        "file": ".github/workflows/ci.yml",
+        "job": "verify",
+        "line": 22,
+        "node": "20",
+        "tool": "vitest",
+        "requires": "^22.12.0 || ^24.0.0 || >=26.0.0"
+      }
+    }
+  },
+  {
+    "id": "CF11",
+    "repo": "mcp-tool-shop-org/research-packs",
+    "commit": "3330a26cea0c57089755ea6e7201685630dfa744",
+    "type": "workflow_break",
+    "question": "Which job and which Node version in the repository's CI workflow does not satisfy the `engines.node` range that package-lock.json declares for a test tool the job runs? Name the workflow file, the job, the line, the Node version pinned, and the tool with its declared range. Answer as JSON: {\"file\": \"path\", \"job\": \"id\", \"line\": N, \"node\": \"version\", \"tool\": \"name\", \"requires\": \"range\"}.",
+    "answer_key": {
+      "file": ".github/workflows/verify.yml",
+      "job": "verify",
+      "line": 37,
+      "node": "20",
+      "tool": "vitest",
+      "requires": "^22.12.0 || ^24.0.0 || >=26.0.0"
+    },
+    "check_method": "answer.file, answer.job and answer.node exact; answer.line within +/-1 of the key; answer.tool exact; answer.requires scored as informational.",
+    "key_source": "Workflow file and package-lock.json at the pin; fix PR diff (the PR removes exactly this leg or pin). research-packs#15 removes the second setup-node (node-version 20) and keeps the Node 22 one.",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Found by Atlas 1.24.0 D1, then repaired by the Director's call (the fix PR bodies say so): selection bias toward Atlas-favourable tasks, and the committed map at the pin ALREADY RECORDS the D1 finding (atlas/structure.json doors[0].findings, rule D1), so the answer is in the checkout for any arm that reads atlas/. Key independently verified from package-lock.json engines.node (vitest 5.0.0: ^22.12.0 || ^24.0.0 || >=26.0.0; c8 12.0.0: ^20.19.0 || ^22.12.0 || >=23) and the fix PR diff. CI stayed green on these doors (the tool declares the range but does not refuse to start), so there is no failing run: the task is \"what will break/ is mismatched\", not \"why did it fail\".",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": ".github/workflows/verify.yml"
+        },
+        {
+          "kind": "exact",
+          "field": "job",
+          "expect": "verify"
+        },
+        {
+          "kind": "line",
+          "field": "line",
+          "expect": 37,
+          "tolerance": 1
+        },
+        {
+          "kind": "node_version",
+          "field": "node",
+          "expect": "20"
+        },
+        {
+          "kind": "exact",
+          "field": "tool",
+          "expect": "vitest"
+        }
+      ],
+      "secondary": [
+        {
+          "kind": "exact",
+          "field": "requires",
+          "expect": "^22.12.0 || ^24.0.0 || >=26.0.0"
+        }
+      ],
+      "example": {
+        "file": ".github/workflows/verify.yml",
+        "job": "verify",
+        "line": 37,
+        "node": "20",
+        "tool": "vitest",
+        "requires": "^22.12.0 || ^24.0.0 || >=26.0.0"
+      }
+    }
+  },
+  {
+    "id": "CF12",
+    "repo": "mcp-tool-shop-org/rig-bridge",
+    "commit": "dfb7dd05662767b92cf6b3d320dc0234430a18ed",
+    "type": "workflow_break",
+    "question": "Which job and which Node version in the repository's CI workflow does not satisfy the `engines.node` range that package-lock.json declares for a test tool the job runs? Name the workflow file, the job, the line, the Node version pinned, and the tool with its declared range. Answer as JSON: {\"file\": \"path\", \"job\": \"id\", \"line\": N, \"node\": \"version\", \"tool\": \"name\", \"requires\": \"range\"}.",
+    "answer_key": {
+      "file": ".github/workflows/ci.yml",
+      "job": "build-and-test",
+      "line": 54,
+      "node": "20.11.0",
+      "tool": "vitest",
+      "requires": "^22.12.0 || ^24.0.0 || >=26.0.0"
+    },
+    "check_method": "answer.file, answer.job and answer.node exact; answer.line within +/-1 of the key; answer.tool exact; answer.requires scored as informational.",
+    "key_source": "Workflow file and package-lock.json at the pin; fix PR diff (the PR removes exactly this leg or pin). rig-bridge#22 moves the CI job from 20.11.0 to 22 (release.yml too).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Found by Atlas 1.24.0 D1, then repaired by the Director's call (the fix PR bodies say so): selection bias toward Atlas-favourable tasks, and the committed map at the pin ALREADY RECORDS the D1 finding (atlas/structure.json doors[0].findings, rule D1), so the answer is in the checkout for any arm that reads atlas/. Key independently verified from package-lock.json engines.node (vitest 5.0.0: ^22.12.0 || ^24.0.0 || >=26.0.0; c8 12.0.0: ^20.19.0 || ^22.12.0 || >=23) and the fix PR diff. CI stayed green on these doors (the tool declares the range but does not refuse to start), so there is no failing run: the task is \"what will break/ is mismatched\", not \"why did it fail\".",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": ".github/workflows/ci.yml"
+        },
+        {
+          "kind": "exact",
+          "field": "job",
+          "expect": "build-and-test"
+        },
+        {
+          "kind": "line",
+          "field": "line",
+          "expect": 54,
+          "tolerance": 1
+        },
+        {
+          "kind": "node_version",
+          "field": "node",
+          "expect": "20.11.0"
+        },
+        {
+          "kind": "exact",
+          "field": "tool",
+          "expect": "vitest"
+        }
+      ],
+      "secondary": [
+        {
+          "kind": "exact",
+          "field": "requires",
+          "expect": "^22.12.0 || ^24.0.0 || >=26.0.0"
+        }
+      ],
+      "example": {
+        "file": ".github/workflows/ci.yml",
+        "job": "build-and-test",
+        "line": 54,
+        "node": "20.11.0",
+        "tool": "vitest",
+        "requires": "^22.12.0 || ^24.0.0 || >=26.0.0"
+      }
+    }
+  },
+  {
+    "id": "CF13",
+    "repo": "mcp-tool-shop-org/sovereign",
+    "commit": "d5f96a1de906ab7c234ca25c06c2fc562a56cd16",
+    "type": "workflow_break",
+    "question": "Which job and which Node version in the repository's CI workflow does not satisfy the `engines.node` range that package-lock.json declares for a test tool the job runs? Name the workflow file, the job, the line, the Node version pinned, and the tool with its declared range. Answer as JSON: {\"file\": \"path\", \"job\": \"id\", \"line\": N, \"node\": \"version\", \"tool\": \"name\", \"requires\": \"range\"}.",
+    "answer_key": {
+      "file": ".github/workflows/ci.yml",
+      "job": "test",
+      "line": 44,
+      "node": "18",
+      "tool": "c8",
+      "requires": "^20.19.0 || ^22.12.0 || >=23"
+    },
+    "check_method": "answer.file, answer.job and answer.node exact; answer.line within +/-1 of the key; answer.tool exact; answer.requires scored as informational.",
+    "key_source": "Workflow file and package-lock.json at the pin; fix PR diff (the PR removes exactly this leg or pin). sovereign#55 changes `node: [18, 20]` to [20, 22]; only the 18 leg is excluded by c8 12 (setup-node 20 resolves to a 20.x that c8 accepts).",
+    "needs_network": false,
+    "confidence": "high",
+    "notes": "Found by Atlas 1.24.0 D1, then repaired by the Director's call (the fix PR bodies say so): selection bias toward Atlas-favourable tasks, and the committed map at the pin ALREADY RECORDS the D1 finding (atlas/structure.json doors[0].findings, rule D1), so the answer is in the checkout for any arm that reads atlas/. Key independently verified from package-lock.json engines.node (vitest 5.0.0: ^22.12.0 || ^24.0.0 || >=26.0.0; c8 12.0.0: ^20.19.0 || ^22.12.0 || >=23) and the fix PR diff. CI stayed green on these doors (the tool declares the range but does not refuse to start), so there is no failing run: the task is \"what will break/ is mismatched\", not \"why did it fail\".",
+    "grade": {
+      "checks": [
+        {
+          "kind": "path",
+          "field": "file",
+          "expect": ".github/workflows/ci.yml"
+        },
+        {
+          "kind": "exact",
+          "field": "job",
+          "expect": "test"
+        },
+        {
+          "kind": "line",
+          "field": "line",
+          "expect": 44,
+          "tolerance": 1
+        },
+        {
+          "kind": "node_version",
+          "field": "node",
+          "expect": "18"
+        },
+        {
+          "kind": "exact",
+          "field": "tool",
+          "expect": "c8"
+        }
+      ],
+      "secondary": [
+        {
+          "kind": "exact",
+          "field": "requires",
+          "expect": "^20.19.0 || ^22.12.0 || >=23"
+        }
+      ],
+      "example": {
+        "file": ".github/workflows/ci.yml",
+        "job": "test",
+        "line": 44,
+        "node": "18",
+        "tool": "c8",
+        "requires": "^20.19.0 || ^22.12.0 || >=23"
+      }
+    }
+  }
+]

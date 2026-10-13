@@ -308,6 +308,26 @@ def reset_home(home):
             path.rmdir()
 
 
+def clear_user_files(uid, roots=("/tmp", "/var/tmp", "/dev/shm")):
+    """Remove every file and directory the run user owns under the shared
+    temporary trees, so no attempt can leave notes for the next (amendment 9)."""
+    for root in roots:
+        if not os.path.isdir(root):
+            continue
+        for current, dirs, files in os.walk(root, topdown=False):
+            for name in files + dirs:
+                path = os.path.join(current, name)
+                try:
+                    if os.lstat(path).st_uid != uid:
+                        continue
+                    if os.path.isdir(path) and not os.path.islink(path):
+                        shutil.rmtree(path, ignore_errors=True)
+                    else:
+                        os.unlink(path)
+                except FileNotFoundError:
+                    continue
+
+
 def install_credentials(home, source, uid=None, gid=None):
     """Put a fresh copy of the placeholder sign-in file in the run user's home,
     readable by that user alone."""
@@ -391,30 +411,43 @@ def isolation_problems(init, arm, allow):
 
 
 QUOTED = re.compile(r"'[^']*'|\"[^\"]*\"")
-# Forms that turn an allowed `git log` or `git show` into something else.
-# Redirection, chaining and a line break (a second command) are read outside
-# quotes, where the shell acts on them; `<` also feeds a file's text to git,
-# whose error echoes a bad revision back. Command substitution runs inside
-# double quotes too, so it is read everywhere.
+# Amendment 9. The pinned CLI auto-approves its own read-only shell commands
+# (ls, grep, sed -n, head) inside the working directory, chained or piped, and
+# refuses any part outside that set (the shakedown, 2026-10-13: awk and node
+# were refused). The run user's file permissions are the containment
+# (amendment 8). So a chain or a pipe is part of the measured surface, in both
+# arms, and only the forms that write a file, start a command the shell does
+# not wait for, or substitute a command's output stop a run. Redirection to
+# /dev/null and descriptor duplication (2>&1) are not writes. Forms are read
+# outside quotes; command substitution runs inside double quotes too, so it is
+# read everywhere.
+HARMLESS_REDIRECTS = re.compile(r"\d*&?>>?\s*/dev/null|\d*>&\d")
 UNQUOTED_FORMS = (
     ("--output", re.compile(r"(?:^|\s)--output(?:=|\s|$)")),
     (">", re.compile(r">")),
-    ("<", re.compile(r"<")),
-    ("|", re.compile(r"\|")),
-    (";", re.compile(r";")),
-    ("&&", re.compile(r"&&")),
     ("&", re.compile(r"(?<!&)&(?!&)")),
-    ("newline", re.compile(r"[\r\n]")),
+    ("tee", re.compile(r"(?:^|[\s|;&])tee(?:\s|$)")),
+    ("-delete", re.compile(r"(?:^|\s)-delete(?:\s|$)")),
+    ("-exec", re.compile(r"(?:^|\s)-exec(?:dir)?(?:\s|$)")),
 )
 ANYWHERE_FORMS = (("$(", re.compile(r"\$\(")), ("`", re.compile(r"`")))
 
 
 def bash_violations(command_text):
-    """The forms in a Bash command that could write a file or run another command."""
-    unquoted = QUOTED.sub(" ", command_text)
+    """The forms in a Bash command that could write a file, leave a command
+    running or substitute another command's output (amendment 9)."""
+    unquoted = HARMLESS_REDIRECTS.sub(" ", QUOTED.sub(" ", command_text))
     found = [name for name, pattern in UNQUOTED_FORMS if pattern.search(unquoted)]
     found += [name for name, pattern in ANYWHERE_FORMS if pattern.search(command_text)]
     return found
+
+
+def shell_reads(stream):
+    """How many of a run's Bash calls were not git: the read-only shell the
+    pinned CLI allows in the working directory (amendment 9). Reported per
+    run, so the analysis can see how much each arm leaned on it."""
+    return sum(1 for use in stream.uses.values() if use["name"] == "Bash"
+               and not str(use["input"].get("command") or "").lstrip().startswith("git "))
 
 
 def bash_problems(stream):
@@ -794,6 +827,7 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, ru
         # owns for this attempt only, and starts from an empty home (amendment 8).
         os.chmod(work / "runs", 0o711)
         reset_home(run_as["home"])
+        clear_user_files(run_as["uid"])
         install_credentials(run_as["home"], run_as["credentials"], run_as["uid"], run_as["gid"])
         for path in (run_dir, cache, mcp_config):
             chown_tree(path, run_as["uid"], run_as["gid"])
@@ -845,10 +879,12 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, ru
     if tree_state(shared_cache) != shared_before:
         wrote.append(f"into the shared Atlas cache {shared_cache.as_posix()}")
     if run_as is not None:
-        # Locked again, so no later attempt can read this one (amendment 8).
+        # Locked again, so no later attempt can read this one (amendment 8),
+        # and nothing it left in a shared temporary tree survives (amendment 9).
         for path, mode in ((run_dir, 0o700), (cache, 0o700), (mcp_config, 0o600)):
             chown_tree(path, 0, 0)
             os.chmod(path, mode)
+        clear_user_files(run_as["uid"])
     result = stream.result()
     record = {
         "run": run_id, "arm": arm,
@@ -868,6 +904,7 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, ru
         "total_cost_usd": (result or {}).get("total_cost_usd"),
         "tool_calls": len(stream.calls),
         "atlas_calls": sum(1 for name in stream.calls if name.startswith(ATLAS_PREFIX)),
+        "shell_reads": shell_reads(stream),
         "isolation": isolation_problems(stream.init(), arm, allow) + tool_use_problems(stream, allow, arm)
                      + [f"hook ran: {t}" for t in stream.hook_traces()] + [f"wrote {w}" for w in wrote],
         "stderr": proc.stderr.read()[-2000:],
@@ -1099,7 +1136,7 @@ def pilot(args, cli, allow, tasks):
         "ceiling": budget["ceiling"],
         "plan": plan,
         "runs": [{k: r.get(k) for k in ("run", "task", "arm", "rep", "outcome", "correct", "tokens", "tool_calls", "atlas_calls",
-                                         "num_turns", "wall_ms", "total_cost_usd", "cli_version", *START_FIELDS)} for r in records],
+                                         "num_turns", "wall_ms", "total_cost_usd", "cli_version", "shell_reads", *START_FIELDS)} for r in records],
         "dropped_pairs": dropped,
         "harness_failures": failures,
         "attempts": attempts,

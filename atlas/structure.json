@@ -2989,7 +2989,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "7c0b6cccc00b056850a036c9dbda13cb1013e549177cf5ef5df07afa30a4f088",
+          "hash": "e9ebdab2bd50893ac1a3e16f9c53261d57c7f9729fe4f9e879bed66ac445e2ed",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -4186,7 +4186,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "82bc6ef509f5b709e659012210b2446481111ab8eb7baa87c6ff9d3b430dd510",
+          "hash": "ede2bdabb178eae121611a0fa0e4a5fe09a8587692ddde287d955a2ddc22bcc6",
           "path": "CHANGELOG.md"
         },
         {
@@ -4281,7 +4281,7 @@
       "externals": 0,
       "files": [
         {
-          "hash": "790ac461e89666b9cb788b6413b66177ce867294232c24dcbacd75d416e5726b",
+          "hash": "299f6b2283240d895101c540b7157b748c083f49d6c6be3b82f89eecf9ada5b5",
           "path": "site/astro.config.mjs"
         },
         {
@@ -4470,11 +4470,15 @@
           "path": "site/src/content/docs/newsletter/issue-04.md"
         },
         {
-          "hash": "3b6d7013322f5df8cf8cb36f06c99af4ad1474fccf035e1ba4e2a1042e3efbef",
+          "hash": "81b823756723a5acbfb53eb66148a17d4b5364624b383d03ecde51334812e150",
           "path": "site/src/content/docs/newsletter/issue-05.md"
         },
         {
-          "hash": "fae20c2d26c08c2d6ad8f8ad43ec0e47977c8c1b1f322177792085de911896e4",
+          "hash": "09d63407b33cdc1cb5dc744124c63995eb5d86ca5fd221d2a27c9e17a7b2f338",
+          "path": "site/src/content/docs/watch/2026-10-13.md"
+        },
+        {
+          "hash": "027fd1be4e41d78c087d36c683985cb3417ad113813dc6bd8aa74cb9d461dbfe",
           "importOrder": [
             "site/src/styles/global.css",
             "site/src/site-config.ts"
@@ -5458,8 +5462,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "22d64e4f9ca43d16bad48d80673aaa1eea9e944a",
-    "tracked": 572
+    "commit": "d0d33d45a7911114de0e03889f481e84691b2382",
+    "tracked": 573
   },
   "landings": [
     {
@@ -7393,6 +7397,17 @@
         }
       ],
       "target": "site/src/content/docs/newsletter",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/astro.config.mjs",
+          "call": "autogenerate",
+          "confidence": "ast"
+        }
+      ],
+      "target": "site/src/content/docs/watch",
       "writers": []
     }
   ],

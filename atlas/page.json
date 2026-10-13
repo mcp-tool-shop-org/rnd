@@ -71,24 +71,32 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 0,
-      "changed": 6,
+      "added": 1,
+      "changed": 5,
       "moved": 0,
-      "parts": 6,
+      "parts": 3,
       "removed": 0
     },
     "items": [
       {
+        "kind": "landing",
+        "sentence": "site/src/content/docs/watch/ is now read by site/astro.config.mjs.",
+        "subjects": [
+          "site/src/content/docs/watch/",
+          "site/astro.config.mjs"
+        ]
+      },
+      {
         "kind": "counts",
-        "sentence": "Nothing structural changed since 2026-10-13; 6 files changed content.",
+        "sentence": "1 file added and 5 changed content, across 3 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "097bbbb122874453bde0374faefad773c83563d9",
-      "generatedAt": "2026-10-13T18:14:15.648Z"
+      "commit": "22d64e4f9ca43d16bad48d80673aaa1eea9e944a",
+      "generatedAt": "2026-10-13T18:24:20.994Z"
     },
-    "unchanged": true
+    "unchanged": false
   },
   "changesTogether": [
     {
@@ -112,7 +120,7 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 2 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "22d64e4f9ca43d16bad48d80673aaa1eea9e944a",
+  "commit": "d0d33d45a7911114de0e03889f481e84691b2382",
   "defaultBranch": "main",
   "derived": "13 parts, mostly Python (79 files), shell (14), CSS (2), HTML (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
@@ -389,7 +397,7 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-13T18:24:20.994Z",
+  "generatedAt": "2026-10-13T18:26:27.584Z",
   "limits": [
     "9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.",
     "9 writes and 11 reads use paths built at run time and are not named here.",

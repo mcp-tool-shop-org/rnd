@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.11] - 2026-10-13
+
+- docker-sandboxes: which model a sandboxed agent uses (rig and plan for Claude; RunPod or local for open models)
+- Updated `docker-sandboxes`: docker-sandboxes — isolated machines for agent experiments (Docker Sandboxes, sbx)
+
 ## [1.1.8.0.10] - 2026-10-13
 
 - docker-sandboxes: what the console showed at signup (API-key claude kit, $0.28/hr medium, 1-hour stop)

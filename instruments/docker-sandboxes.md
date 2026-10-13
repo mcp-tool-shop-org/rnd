@@ -60,6 +60,20 @@ The Director signed up on 2026-10-13, inside the offer window. The account's Doc
 - **Repository access** is through a GitHub token. Use a fine-grained, read-only token scoped to the experiment's repositories.
 - **The credit should run until about 2027-04-13,** six months from the claim. That needs confirming on the console's Usage & billing page.
 
+## Which model a sandboxed agent uses (Director and R&D, 2026-10-13)
+
+The sandbox only hosts the agent. The model comes from wherever the experiment's question points.
+
+| The experiment | The agent runs in | The model |
+|---|---|---|
+| Claude is the subject (the atlas-mcp-utility ladder) | the rig, as designed | Claude, on the Director's plan. The cloud claude kit needs an API key, so it would pay per token. Use it only if the kit accepts a plan login. |
+| Open-model agent runs, such as Atlas with a local coder model, or dataset generation | a cloud sandbox, on the credit | a RunPod pod serving the model through offrig, priced first. The agent kit (opencode, hermes-agent or shell) points at the pod's endpoint, and the 5090 stays free. |
+| Small, quick checks | a local sandbox on the rig, free | local Ollama on the 5090, when no grant is held |
+
+- **Never expose the rig's Ollama to a cloud sandbox.** That would open the rig to the internet.
+- **No Ollama Cloud,** per Standing Rule 1.
+- **offrig's project cap ($5, $1.96 left on 2026-10-13)** covers verification batches, not a sustained open-model experiment. That needs a priced plan and the Director's go to raise the cap.
+
 ## Status and conditions (R&D, 2026-10-13)
 
 - **Planned.** The Director raised it on 2026-10-13, to pair with RunPod.

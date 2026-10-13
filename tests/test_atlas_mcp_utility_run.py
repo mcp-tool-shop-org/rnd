@@ -188,6 +188,46 @@ class Isolation(unittest.TestCase):
         # The source's own value is never written: PR #16's CodeQL alert.
         self.assertNotIn("ANTHROPIC_API_KEY", " ".join(run.isolation_problems(keyed, "A", self.allow)))
 
+    def test_a_call_to_a_tool_outside_the_arm_is_refused_in_either_turn(self):
+        # Amendment 8: 2.1.197 can register built-ins after the init that
+        # --tools does not restrict, so the calls are checked, not only the start.
+        stream = run.Stream()
+        stream.add(assistant("m1", {}, [use("t1", "Read"), use("t2", "Bash", command="git log -1")]))
+        self.assertEqual(run.tool_use_problems(stream, self.allow, "A"), [])
+        stream.add(assistant("m2", {}, [use("t3", "SendMessage")]))
+        self.assertEqual(run.tool_use_problems(stream, self.allow, "A"),
+                         ["called a tool its arm does not have: SendMessage"])
+        b_in_a = run.Stream()
+        b_in_a.add(assistant("m1", {}, [use("t1", "mcp__atlas__atlas_reach")]))
+        self.assertEqual(run.tool_use_problems(b_in_a, self.allow, "A"),
+                         ["called a tool its arm does not have: mcp__atlas__atlas_reach"])
+        self.assertEqual(run.tool_use_problems(b_in_a, self.allow, "B"), [])
+        # The debrief's calls are held to the same rule (amendment 3).
+        debrief = run.Stream()
+        debrief.add(json.dumps({"type": "result", "result": "answer"}))
+        debrief.add(assistant("d1", {}, [use("d2", "WebFetch")]))
+        self.assertEqual(run.tool_use_problems(debrief, self.allow, "B"),
+                         ["called a tool its arm does not have: WebFetch"])
+
+    def test_arm_b_may_start_with_atlas_pending_and_no_atlas_tools(self):
+        # Amendment 8: the sandbox probe's arm B started this way (2.1.197
+        # registers MCP tools late) and its atlas_overview call answered.
+        a, b = init_event("restricted-A"), init_event("restricted-B")
+        late = {**b, "tools": a["tools"], "mcp_servers": [{"name": "atlas", "status": "pending"}]}
+        self.assertEqual(run.isolation_problems(late, "B", self.allow), [])
+        # Pending with some Atlas tools, or pending in arm A, is still refused.
+        partial = {**late, "tools": a["tools"] + ["mcp__atlas__atlas_reach"]}
+        self.assertTrue(run.isolation_problems(partial, "B", self.allow))
+        self.assertEqual(run.isolation_problems({**a, "mcp_servers": [{"name": "atlas", "status": "pending"}]}, "A", self.allow),
+                         ["MCP servers are {'atlas': 'pending'}, the arm needs none"])
+        # A failed server is no late start.
+        failed = {**late, "mcp_servers": [{"name": "atlas", "status": "failed"}]}
+        self.assertIn("arm B has no Atlas tools", run.isolation_problems(failed, "B", self.allow))
+
+    def test_the_labels_are_the_pilot_and_the_shakedown(self):
+        self.assertEqual(run.LABELS, ("pilot", "shakedown"))
+        self.assertEqual(run.PROBE_REPORT, run.HERE / "results" / "pilot" / "probe-report.json")
+
     def test_a_hook_is_seen_by_its_event_or_its_marker(self):
         stream = run.Stream()
         stream.add(json.dumps({"type": "system", "subtype": "hook_response"}))

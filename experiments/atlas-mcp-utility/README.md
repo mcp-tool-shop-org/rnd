@@ -203,6 +203,64 @@ Nothing has run since amendment 4's probe failed closed. These change the pins b
 
 `allow-list.json` is re-pinned above. `tasks.json`, `prompt.md`, `grade.py` and `debrief.md` are unchanged. Every amendment-4 check stands. The hold for the Atlas release, and the Director's go on the plan and its ceiling, are unchanged.
 
+### Amendment 8, 2026-10-13: a shakedown to price the runs, and containment by permission, not by rule
+
+**Why there's a shakedown, not a pilot.** The Director gave his go for the pilot. But a pre-registered pilot freezes every pin at its first run, and today that would freeze the ladder at Atlas 1.26.0 and CLI 2.1.197. 1.26.0 has none of the multi-repository surface the ladder tests, and the release changes the tools' output (the Atlas session's facts, 2026-10-13). 2.1.197 has the `--tools` gap 2.1.295 fixed. So the graded pilot still waits for the release and the pin amendment. What runs now is a **shakedown**:
+- the pilot's tasks and harness, run with `--label shakedown`;
+- written to `results/shakedown/`;
+- never part of the decision, and freezing no pin.
+
+**Its purpose (the Director's).** Price the Sonnet runs, and judge whether a local model is the more feasible route for the ladder. It has two legs on identical tasks:
+- **The Sonnet leg,** in `atlas-pilot` on the plan, as amendment 7 set up. Per run, by stratum:
+  - tokens;
+  - the CLI's own `total_cost_usd`: the API-rate dollar figure, the common unit, though the plan covers it;
+  - wall time;
+  - correctness, by the pinned grader;
+  - turn-cap hits.
+
+  The Director reads his plan's usage before and after, for the share the shakedown took.
+- **The local leg,** through the studio's `claude-ollama-local` kit. That's real Claude Code, with every model alias mapped to `nemotron-3.5-lightning` on the rig's Ollama: tools, a 131k context, about 24 GiB. Per run:
+  - wall time;
+  - GPU time, from the host's Ollama log over the run's window, gathered by the Publisher;
+  - tokens;
+  - correctness, by the same grader;
+  - turn-cap hits;
+  - tool-use failures.
+
+  Its cost unit is GPU-hours, with a dollar equivalent at the price offrig quotes for a comparable rented card, labelled as an equivalent.
+
+  It runs only after a one-call check that a local sandbox reaches the host's Ollama. Each run needs a 5090 grant from the Publisher, and none overlaps an interlock measurement. Its start check is a local variant: the base URL is `host.docker.internal`, the key source is the kit's placeholder, and no Anthropic key is present. It's written once that leg's real start has been captured.
+- **If the ladder moves to a local model,** its question changes from Claude Code with Sonnet to Claude Code driven by that model. A dated amendment says so before the graded pilot.
+
+**What the sandbox probe found (2026-10-13, 96,139 tokens, failed closed).** One leak in containment: a Grep with its path at the home directory itself returned files under it, both hidden sentinels among them. `Read(~/**)` matches paths under the home directory, not the directory, and a recursive search started there is not filtered file by file. A Grep at `/` or `/home` would do the same. The rig's plan had this shape too, and was never probed past its sign-in.
+
+So deny rules can't be the guarantee. And more than `tasks.json` is at stake:
+- **This README names answer keys.** Amendment 1 discusses WR02's key and CF06's cause.
+- **`key-audit.json` holds answers.**
+- **`/work/runs` keeps every earlier run's stream and record.** Arm B could read arm A's answer to the same task.
+
+**The containment, by permission or absence, not by rule:**
+1. **No key material is readable by the agent's process.** That means this whole directory.
+2. **No other run's stream, record or debrief is readable by a run.**
+3. **The probe proves both.** It adds Grep routes at `/`, `/work` and the home directory, and plants sentinels in a fake earlier run under `/work/runs` and beside the results. Every one must be unreachable.
+
+The deny rules stay as a second layer that counts for nothing on its own. The mechanism is one of two, chosen on the sandbox's facts and recorded here before the re-probe:
+- **(A)** the harness runs as root with everything above root-owned 0700, and the CLI runs as a dedicated unprivileged user who owns only the attempt's checkout;
+- **(B)** the harness runs on the host and drives one throwaway sandbox per attempt, holding only that checkout and the tools.
+
+**Two checks added to the harness:**
+- **Every tool a run calls, task and debrief, must be one its arm starts with** (`tool_use_problems`). The init alone can't show tools that 2.1.197 registers later.
+- **Arm B may start with `atlas` pending and no Atlas tools.** The probe's arm B did, then called `atlas_overview` and got its answer. Each record keeps `atlas_status_at_init`, so the shakedown shows how often a first turn begins without Atlas.
+
+**Order:**
+1. The containment fix.
+2. A passed re-probe.
+3. The Sonnet leg.
+4. The reachability check.
+5. The local leg.
+
+Nothing in the shakedown is graded into the decision, and nothing it runs freezes a pin. Nothing pinned changes in this amendment.
+
 ## Design
 
 **Pairs.** Each task runs twice:

@@ -49,6 +49,11 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 RESULTS = HERE / "results" / "pilot"
+# The one current probe report, whatever the pilot's label (amendment 8).
+PROBE_REPORT = RESULTS / "probe-report.json"
+# A shakedown runs the pilot's tasks into its own directory, outside the
+# decision and freezing no pin (amendment 8).
+LABELS = ("pilot", "shakedown")
 PINNED_FILES = ("tasks.json", "prompt.md", "allow-list.json", "grade.py", "debrief.md")
 # Far above any expected run (about 2 to 6 minutes); only a hung session reaches it.
 RUN_TIMEOUT_S = 30 * 60
@@ -244,6 +249,18 @@ def on_the_plan(init, allow):
     return init.get("apiKeySource") == allow["api_key_source"]
 
 
+def tool_use_problems(stream, allow, arm):
+    """Every tool a run called, task and debrief, must be one its arm starts with.
+
+    The init lists the tools at the start; the pinned CLI 2.1.197 can register
+    built-ins later that `--tools` does not restrict (fixed in 2.1.295), so the
+    calls themselves are checked too (amendment 8).
+    """
+    allowed = set(expected_tools(allow, arm))
+    used = sorted({use["name"] for use in stream.uses.values()} - allowed)
+    return [f"called a tool its arm does not have: {name}" for name in used]
+
+
 def isolation_problems(init, arm, allow):
     """Why a run's start does not match its arm, or [].
 
@@ -258,24 +275,30 @@ def isolation_problems(init, arm, allow):
     atlas = sorted(t for t in tools if t.startswith(ATLAS_PREFIX))
     foreign = sorted(t for t in tools if t.startswith("mcp__") and not t.startswith(ATLAS_PREFIX))
     expected = set(expected_tools(allow, arm))
+    servers = {s.get("name"): s.get("status") for s in init.get("mcp_servers") or []}
+    # The pinned CLI 2.1.197 registers an MCP server's tools after the init:
+    # arm B's first probe in the sandbox started with atlas "pending" and no
+    # Atlas tools, then called atlas_overview and got its answer. That start
+    # is accepted; tool_use_problems then holds every call to the arm's set
+    # (amendment 8).
+    late_atlas = arm == "B" and servers == {"atlas": "pending"} and not atlas
     problems = []
     if foreign:
         problems.append(f"MCP tools from another server: {foreign[:3]}")
     if arm == "A" and atlas:
         problems.append("arm A has Atlas tools")
-    if arm == "B" and not atlas:
+    if arm == "B" and not atlas and not late_atlas:
         problems.append("arm B has no Atlas tools")
     extra = sorted(tools - expected - set(foreign) - (set(atlas) if arm == "A" else set()))
     if extra:
         problems.append(f"tools the arm does not have: {_listed(extra)}")
-    missing = sorted(expected - tools)
-    if missing and not (arm == "B" and not atlas):
+    missing = sorted(expected - tools - (set(allow["arms"]["B"]["expected_mcp_tools"]) if late_atlas else set()))
+    if missing and not (arm == "B" and not atlas and not late_atlas):
         problems.append(f"tools missing: {_listed(missing)}")
     for kind in ("skills", "slash_commands"):
         if init.get(kind):
             problems.append(f"{len(init[kind])} {kind.replace('_', ' ')} loaded: {_listed(init[kind], 3)}")
-    servers = {s.get("name"): s.get("status") for s in init.get("mcp_servers") or []}
-    wanted = {"atlas": "connected"} if arm == "B" else {}
+    wanted = ({"atlas": "pending"} if late_atlas else {"atlas": "connected"}) if arm == "B" else {}
     if servers != wanted:
         problems.append(f"MCP servers are {servers or 'none'}, the arm needs {wanted or 'none'}")
     if init.get("model") != allow["model"]:
@@ -708,6 +731,9 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget):
         "effort": allow["effort"],
         "permission_mode": (stream.init() or {}).get("permissionMode"),
         "on_the_plan": on_the_plan(stream.init() or {}, allow),
+        # How often arm B's first turn began before Atlas's tools had
+        # registered: the shakedown measures it (amendment 8).
+        "atlas_status_at_init": {s.get("name"): s.get("status") for s in (stream.init() or {}).get("mcp_servers") or []}.get("atlas"),
         "exit_code": proc.returncode, "wall_ms": int((time.time() - started) * 1000), "timed_out": timed_out,
         "spent": stream.total,
         "limit_in_debrief": plan_limit_hit(stream.debrief_result()),
@@ -717,7 +743,8 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget):
         "total_cost_usd": (result or {}).get("total_cost_usd"),
         "tool_calls": len(stream.calls),
         "atlas_calls": sum(1 for name in stream.calls if name.startswith(ATLAS_PREFIX)),
-        "isolation": isolation_problems(stream.init(), arm, allow) + [f"hook ran: {t}" for t in stream.hook_traces()] + [f"wrote {w}" for w in wrote],
+        "isolation": isolation_problems(stream.init(), arm, allow) + tool_use_problems(stream, allow, arm)
+                     + [f"hook ran: {t}" for t in stream.hook_traces()] + [f"wrote {w}" for w in wrote],
         "stderr": proc.stderr.read()[-2000:],
         "final_text": (result or {}).get("result"),
         "error": ("; ".join(result.get("errors") or []) or result.get("result")) if result and result.get("is_error") else None,
@@ -807,8 +834,8 @@ def probe(args, cli, allow, tasks):
         remove_tree(secret_repo)
     report = probe_verdict(stream_a, stream_b, record_a, record_b, targets, sentinels)
     report["tokens_used"] = budget["used"]
-    RESULTS.mkdir(parents=True, exist_ok=True)
-    (RESULTS / "probe-report.json").write_text(scrub(json.dumps(report, indent=1)), encoding="utf-8")
+    PROBE_REPORT.parent.mkdir(parents=True, exist_ok=True)
+    PROBE_REPORT.write_text(scrub(json.dumps(report, indent=1)), encoding="utf-8")
     if any(r["outcome"] == "auth_failed" for r in (record_a, record_b)):
         print(HALTING["auth_failed"], file=sys.stderr)
     print(json.dumps({"passed": report["passed"], "tokens_used": budget["used"], "leaks": len(report["leaks"]),
@@ -817,7 +844,9 @@ def probe(args, cli, allow, tasks):
 
 
 def pilot(args, cli, allow, tasks):
-    probe_report = RESULTS / "probe-report.json"
+    probe_report = PROBE_REPORT
+    out = HERE / "results" / args.label
+    out.mkdir(parents=True, exist_ok=True)
     if not probe_report.exists() or not json.loads(probe_report.read_text(encoding="utf-8")).get("passed"):
         print("refusing to run the pilot: no passed probe report", file=sys.stderr)
         return 2
@@ -853,7 +882,7 @@ def pilot(args, cli, allow, tasks):
                     record["correct"], record["grade"] = graded["correct"], graded
                 elif record["outcome"] == "turn_cap":
                     record["correct"], record["grade"] = False, {"correct": False, "reason": "the turn cap, with no answer"}
-                (RESULTS / f"{record['run']}-attempt{attempt}.json").write_text(json.dumps(record, indent=1), encoding="utf-8")
+                (out / f"{record['run']}-attempt{attempt}.json").write_text(json.dumps(record, indent=1), encoding="utf-8")
                 if record["outcome"] == "harness_failure":
                     failures += 1
                     continue
@@ -881,6 +910,9 @@ def pilot(args, cli, allow, tasks):
         if halted:
             break
     report = {
+        "label": args.label,
+        # A shakedown never enters the decision and freezes no pin (amendment 8).
+        "counts_toward_decision": args.label == "pilot",
         "halted": halted,
         "halt_error": halt_error,
         "known_defects_at_the_pin": list(KNOWN_DEFECTS),
@@ -897,9 +929,9 @@ def pilot(args, cli, allow, tasks):
         "debriefs": {"count": len(debriefs), "tokens": sum(d["tokens"] for d in debriefs),
                      "tool_calls": sum(len(d["tool_calls"]) for d in debriefs)},
     }
-    (RESULTS / "report.json").write_text(scrub(json.dumps(report, indent=1)), encoding="utf-8")
-    (RESULTS / "debriefs.jsonl").write_text("".join(scrub(json.dumps(d)) + "\n" for d in debriefs), encoding="utf-8")
-    print(json.dumps({"halted": halted, "tokens_used": budget["used"], "runs": len(records), "dropped_pairs": len(dropped)}))
+    (out / "report.json").write_text(scrub(json.dumps(report, indent=1)), encoding="utf-8")
+    (out / "debriefs.jsonl").write_text("".join(scrub(json.dumps(d)) + "\n" for d in debriefs), encoding="utf-8")
+    print(json.dumps({"label": args.label, "halted": halted, "tokens_used": budget["used"], "runs": len(records), "dropped_pairs": len(dropped)}))
     return 1 if halted else 0
 
 
@@ -911,6 +943,8 @@ def main(argv):
     parser.add_argument("--work", required=True, type=Path)
     parser.add_argument("--tools", required=True, type=Path)
     parser.add_argument("--ceiling", required=True, type=int)
+    parser.add_argument("--label", choices=LABELS, default="pilot",
+                        help="pilot (the pre-registered run) or shakedown (amendment 8: outside the decision)")
     args = parser.parse_args(argv)
     cli, allow, problems = preflight(args)
     if problems:

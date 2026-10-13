@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.6] - 2026-10-13
+
+- consult brief: the outside-family security review of Atlas slice AN (testing-os #169)
+- Added experiment `atlas-mcp-utility`
+
 ## [1.1.8.0.5] - 2026-10-13
 
 - multi-repo Atlas entry: slices AN-AQ as ruled; probe entry: interlock #109

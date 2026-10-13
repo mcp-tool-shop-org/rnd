@@ -602,17 +602,43 @@ class Containment(unittest.TestCase):
                           "the run user agent may run sudo"])
         self.assertIn("the run user is root", run.run_user_problems("root", ["root"], ""))
 
-    def test_the_run_users_home_is_emptied_but_its_sign_in_file(self):
+    def test_the_run_users_home_is_emptied_and_its_sign_in_file_installed_fresh(self):
+        # The first mechanism-A probe: a failed sign-in blanked the file, and
+        # every later attempt would have failed the same way (amendment 8).
         home = Path(tempfile.mkdtemp())
         (home / ".claude" / "projects" / "x").mkdir(parents=True)
         (home / ".claude" / "projects" / "x" / "session.jsonl").write_text("an earlier run", encoding="utf-8")
-        (home / ".claude" / ".credentials.json").write_text("{}", encoding="utf-8")
+        (home / ".claude" / ".credentials.json").write_text('{"accessToken": ""}', encoding="utf-8")
         (home / ".cache" / "atlas").mkdir(parents=True)
         (home / "notes.txt").write_text("left by an earlier run", encoding="utf-8")
         run.reset_home(home)
+        self.assertEqual(list(home.iterdir()), [])
+        pristine = Path(tempfile.mkdtemp()) / "pristine.json"
+        pristine.write_text('{"accessToken": "placeholder"}', encoding="utf-8")
+        run.install_credentials(home, pristine)
         left = sorted(p.relative_to(home).as_posix() for p in home.rglob("*"))
         self.assertEqual(left, [".claude", ".claude/.credentials.json"])
+        self.assertEqual((home / ".claude" / ".credentials.json").read_text(encoding="utf-8"), '{"accessToken": "placeholder"}')
         shutil.rmtree(home)
+        shutil.rmtree(pristine.parent)
+
+    def test_the_cli_gets_the_sandbox_proxy_and_nothing_else_of_the_harness(self):
+        # Without the proxy the placeholder sign-in goes direct and fails; the
+        # GitHub placeholder, the MCP gateway and the sandbox's own variables stay out.
+        saved = dict(run.os.environ)
+        try:
+            run.os.environ.update({"HTTPS_PROXY": "http://gateway.docker.internal:3128", "no_proxy": "localhost",
+                                   "NODE_EXTRA_CA_CERTS": "/etc/ssl/certs/ca-certificates.crt",
+                                   "GH_TOKEN": "gho_sbxproxymanaged", "MCP_GATEWAY_URL": "http://x", "SBX_NAME": "atlas-pilot"})
+            env = run.run_env({"name": "amu", "uid": 1001, "gid": 1001, "home": "/home/amu"})
+        finally:
+            run.os.environ.clear()
+            run.os.environ.update(saved)
+        self.assertEqual(env["HTTPS_PROXY"], "http://gateway.docker.internal:3128")
+        self.assertEqual(env["no_proxy"], "localhost")
+        self.assertEqual(env["NODE_EXTRA_CA_CERTS"], "/etc/ssl/certs/ca-certificates.crt")
+        for kept_out in ("GH_TOKEN", "MCP_GATEWAY_URL", "SBX_NAME"):
+            self.assertNotIn(kept_out, env)
 
     def test_the_cli_gets_only_its_own_environment(self):
         env = run.run_env({"name": "amu", "uid": 1001, "gid": 1001, "home": "/home/amu"})
@@ -620,7 +646,7 @@ class Containment(unittest.TestCase):
         self.assertEqual(env["USER"], "amu")
         for key, value in run.CLI_ENV.items():
             self.assertEqual(env[key], value)
-        self.assertLessEqual(set(env), {"HOME", "USER", "LOGNAME", "PATH", "LANG", *run.CLI_ENV})
+        self.assertLessEqual(set(env), {"HOME", "USER", "LOGNAME", "PATH", "LANG", *run.CLI_ENV, *run.PROXY_ENV})
 
     def test_the_probe_greps_from_above_every_denied_tree(self):
         targets = {"home": {"file": "H/amu-probe-1.txt", "dir": "H"}}

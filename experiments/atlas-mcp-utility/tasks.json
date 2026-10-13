@@ -4,7 +4,7 @@
     "repo": "mcp-tool-shop-org/registry-stats",
     "commit": "94103b578067f525300ed24393df179f9a768a0a",
     "type": "reach_direct",
-    "question": "In the repository, which files directly import `src/server.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
+    "question": "In the repository, which files directly import `src/server.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. In Python, an import inside a function body counts, and `from pkg import module` counts as importing that module's file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
     "answer_key": {
       "files": [
         "src/cli.ts",
@@ -46,7 +46,7 @@
     "repo": "mcp-tool-shop-org/registry-stats",
     "commit": "94103b578067f525300ed24393df179f9a768a0a",
     "type": "reach_direct",
-    "question": "In the repository, which files directly import `src/providers/npm.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
+    "question": "In the repository, which files directly import `src/providers/npm.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. In Python, an import inside a function body counts, and `from pkg import module` counts as importing that module's file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
     "answer_key": {
       "files": [
         "src/backend-fixes.test.ts",
@@ -91,7 +91,7 @@
     "repo": "mcp-tool-shop-org/brand",
     "commit": "2e3dcd83c69ca94394334e19be41a0e33cd41b34",
     "type": "reach_direct",
-    "question": "In the repository, which files directly import `src/commands/add-gallery.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
+    "question": "In the repository, which files directly import `src/commands/add-gallery.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. In Python, an import inside a function body counts, and `from pkg import module` counts as importing that module's file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
     "answer_key": {
       "files": [
         "src/cli.ts",
@@ -139,7 +139,7 @@
     "repo": "mcp-tool-shop-org/brand",
     "commit": "2e3dcd83c69ca94394334e19be41a0e33cd41b34",
     "type": "reach_direct",
-    "question": "In the repository, which files directly import `src/utils/readme-parser.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
+    "question": "In the repository, which files directly import `src/utils/readme-parser.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. In Python, an import inside a function body counts, and `from pkg import module` counts as importing that module's file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
     "answer_key": {
       "files": [
         "src/commands/audit.ts",
@@ -178,7 +178,7 @@
     "repo": "mcp-tool-shop-org/cognate",
     "commit": "0f8e850ba8be5f2eb6b490e9ef8d461b7c34f8b1",
     "type": "reach_direct",
-    "question": "In the repository, which files directly import `packages/model-registry/src/types.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
+    "question": "In the repository, which files directly import `packages/model-registry/src/types.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. In Python, an import inside a function body counts, and `from pkg import module` counts as importing that module's file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
     "answer_key": {
       "files": [
         "packages/model-registry/src/attestation.ts",
@@ -223,7 +223,7 @@
     "repo": "mcp-tool-shop-org/cognate",
     "commit": "0f8e850ba8be5f2eb6b490e9ef8d461b7c34f8b1",
     "type": "reach_direct",
-    "question": "In the repository, which files directly import `packages/node/src/release-gate.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
+    "question": "In the repository, which files directly import `packages/node/src/release-gate.ts`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. In Python, an import inside a function body counts, and `from pkg import module` counts as importing that module's file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
     "answer_key": {
       "files": [
         "packages/node/src/index.ts",
@@ -262,7 +262,7 @@
     "repo": "mcp-tool-shop-org/escape-the-valley",
     "commit": "9bb3327a1d4a66e84920674d2307b66e2ac54c24",
     "type": "reach_direct",
-    "question": "In the repository, which files directly import `src/escape_the_valley/ui.py`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
+    "question": "In the repository, which files directly import `src/escape_the_valley/ui.py`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. In Python, an import inside a function body counts, and `from pkg import module` counts as importing that module's file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
     "answer_key": {
       "files": [
         "src/escape_the_valley/adapter.py",
@@ -310,7 +310,7 @@
     "repo": "mcp-tool-shop-org/role-os",
     "commit": "fc5222ae783ea95e3b1bc38c0576245eaf6fa7fe",
     "type": "reach_direct",
-    "question": "In the repository, which files directly import `src/route.mjs`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
+    "question": "In the repository, which files directly import `src/route.mjs`? Count a file as importing the target when it has a static import, re-export (export ... from), dynamic import() or require() that resolves to the target. Include test files. Do not count comments or strings that merely name the file. In Python, an import inside a function body counts, and `from pkg import module` counts as importing that module's file. Answer as JSON: {\"files\": [\"path\", ...]} with repo-relative forward-slash paths.",
     "answer_key": {
       "files": [
         "bin/roleos.mjs",
@@ -379,7 +379,7 @@
     "repo": "mcp-tool-shop-org/escape-the-valley",
     "commit": "9bb3327a1d4a66e84920674d2307b66e2ac54c24",
     "type": "reach_transitive",
-    "question": "What would a change to `src/escape_the_valley/engine.py` reach? List every file that depends on it, directly or through a chain of imports (static import, re-export, dynamic import or require; include tests). Answer as JSON: {\"files\": [\"path\", ...]}.",
+    "question": "What would a change to `src/escape_the_valley/engine.py` reach? List every file that depends on it, directly or through a chain of imports (static import, re-export, dynamic import or require; include tests). In Python, an import inside a function body counts, and `from pkg import module` counts as importing that module's file. Answer as JSON: {\"files\": [\"path\", ...]}.",
     "answer_key": {
       "files": [
         "src/escape_the_valley/__main__.py",
@@ -997,7 +997,7 @@
     "repo": "mcp-tool-shop-org/escape-the-valley",
     "commit": "9bb3327a1d4a66e84920674d2307b66e2ac54c24",
     "type": "write_read",
-    "question": "The game autosaves to `.trail/run.json`. Which function saves the game to that file (the function that builds the save path and saves; give file and function name), and which non-test modules under src/ import the save module (`escape_the_valley.save`)? Answer as JSON: {\"writer\": {\"file\": \"path\", \"function\": \"name\"}, \"importers\": [\"path\", ...]}.",
+    "question": "The game autosaves to `.trail/run.json`. Which function saves the game to that file (the function that builds the save path and saves; give file and function name), and which non-test modules under src/ import the save module (`escape_the_valley.save`)? In Python, an import inside a function body counts, and `from pkg import module` counts as importing that module's file. Answer as JSON: {\"writer\": {\"file\": \"path\", \"function\": \"name\"}, \"importers\": [\"path\", ...]}.",
     "answer_key": {
       "writer": {
         "file": "src/escape_the_valley/save.py",
@@ -1116,7 +1116,7 @@
     "repo": "mcp-tool-shop-org/role-os",
     "commit": "fc5222ae783ea95e3b1bc38c0576245eaf6fa7fe",
     "type": "test_gap",
-    "question": "Besides `npm test` (which runs `node --test test/*.test.mjs`), some test scripts named `test_*` live elsewhere in the repo. Which of them does NO workflow run, and which one does a workflow run (with the workflow file and the directory the step runs in)? Answer as JSON: {\"not_run_by_any_workflow\": [\"path\", ...], \"run_by_workflow\": {\"file\": \"path\", \"workflow\": \"name.yml\", \"working_directory\": \"dir\"}}.",
+    "question": "Besides `npm test` (which runs `node --test test/*.test.mjs`), some test scripts named `test_*` (of any file extension) live elsewhere in the repo. Which of them does NO workflow run, and which one does a workflow run (with the workflow file and the directory the step runs in)? Answer as JSON: {\"not_run_by_any_workflow\": [\"path\", ...], \"run_by_workflow\": {\"file\": \"path\", \"workflow\": \"name.yml\", \"working_directory\": \"dir\"}}.",
     "answer_key": {
       "not_run_by_any_workflow": [
         "tools/conformance-dataset/live-tools/test_prep_inputs_empty.mjs",
@@ -1326,7 +1326,9 @@
           "defect": "Either the check compares quantity against weight, or the scenario's random seed or the test itself is wrong."
         }
       ]
-    }
+    },
+    "failure_kind": "code",
+    "failure_kind_note": "the invariant's defect fired intermittently; the 3.12 job passed in the same run"
   },
   {
     "id": "CF02",
@@ -1382,7 +1384,8 @@
           "change": "set node-version to 22 or 24, or downgrade astro"
         }
       ]
-    }
+    },
+    "failure_kind": "code"
   },
   {
     "id": "CF03",
@@ -1438,7 +1441,8 @@
           "change": "set node-version to 22 or 24, or downgrade astro"
         }
       ]
-    }
+    },
+    "failure_kind": "code"
   },
   {
     "id": "CF04",
@@ -1516,7 +1520,8 @@
           ]
         }
       ]
-    }
+    },
+    "failure_kind": "code"
   },
   {
     "id": "CF05",
@@ -1562,7 +1567,8 @@
           "fixable_in_repo_files": false
         }
       ]
-    }
+    },
+    "failure_kind": "setting"
   },
   {
     "id": "CF06",
@@ -1608,7 +1614,8 @@
           "fixable_in_repo_files": false
         }
       ]
-    }
+    },
+    "failure_kind": "setting"
   },
   {
     "id": "CF07",
@@ -1654,7 +1661,8 @@
           "fixable_in_repo_files": false
         }
       ]
-    }
+    },
+    "failure_kind": "setting"
   },
   {
     "id": "CF09",

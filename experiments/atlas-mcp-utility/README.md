@@ -19,10 +19,11 @@ Each sha256 is of the file as committed, with LF line endings (`.gitattributes`)
 
 | What | Pin |
 |---|---|
-| `tasks.json` | `6a0b4c3fc1446b73ef78138b8bd1ba6b8d2d72b67e183b7d34db954e937f10ee` (amendment 1) |
+| `tasks.json` | `eb2ba43c88c989022ecf2fe90d950b150e144a3f916540fa68c1d46559acca1a` (amendment 3) |
 | `prompt.md` | `a32c1c8f30e88f7264e6efce1d1c608339368b2e44691870206b3105e4e6226d` |
 | `allow-list.json` | `ff2500444a24a9f859c081869fe62448fa44006a601c94b0545136ef1184b3b4` (amendment 2) |
 | `grade.py` | `f6d09f5144b42fc1c86f632015de33c84d0bfb9dd3faf2f192cb47d24d864455` (amendment 1) |
+| `debrief.md` | `ed73ef0864f6b603f32ab3f4a91874c465d537779ff1450094bc82690d312f8c` (amendment 3) |
 | Claude Code CLI | 2.1.197 |
 | Model | `claude-sonnet-5-5`, at the CLI's default effort for it |
 | Atlas | `@dogfood-lab/atlas` 1.26.0 |
@@ -75,6 +76,7 @@ The Director gave his go for the pilot only, on his Claude plan, with a ceiling 
   - Arm A is asked to reach them by every route: Read the named file; Grep with `path=` set to the tree; Glob rooted in the tree; `ls` the tree; `git grep --no-index`; and `git -C E:/AI/testing-os log -1`, whose commit is also a secret.
   - It passes only if every route was attempted, no token, hidden file name or commit comes back in any tool result, and no hook ran.
   - The files are removed afterwards.
+  - The report names each planted value by a label and its sha256, never the value. A leaked value in a tool result is replaced by its label (R&D's review of #8, after CodeQL flagged clear-text storage).
 - **(b) The sidecar:** arm B is asked for `atlas_overview`, which must answer.
 - **(c) CLAUDE.md:** whether the user-level CLAUDE.md loaded.
 
@@ -89,6 +91,26 @@ If a deny rule does not hold on Windows, the pilot waits for a corrected rule an
 Every Bash command a run makes is in its stream. During the pilot, a run that makes any of these calls stops the pilot, and the report names the call. Redirection, chaining and line breaks are read outside quotes, so `--format='%H|%s'` and a quoted newline in `--format` pass. Substitution is read everywhere. Each form has a test, R&D's bypasses on #7 among them.
 
 **The harness** is `run.py`. Its logic (pins, run order, token and call counting, the isolation check, the plan-limit stop, the flip rate) is tested in `tests/test_atlas_mcp_utility_run.py`. `allow-list.json` is re-pinned above.
+
+### Amendment 3, 2026-10-13: a debrief after each graded run, and two stated conventions
+
+**The debrief.** The Director asked to hear from each agent after its task: what cost the most, what was unclear, which tools helped or misled, how sure it was, and what to build next. R&D ruled on how.
+- **Same process, a second turn.** Sessions are not persisted, so the harness talks to the CLI with `--input-format stream-json`. It sends the task, waits for its result event, and only then sends the debrief.
+- **Graded from the first result only.** The answer is taken from the task's own result. The debrief cannot change it, and a test proves that a debrief naming another answer leaves the grade as it was.
+- **One fixed prompt, pinned** (`debrief.md`), the same in both arms. It asks six numbered questions to be answered in plain text without tools: time and cost, clarity, tools, confidence, future development, and anything else. It carries no grade, no key and no hint of the other arm.
+- **Not a metric.** A debrief's tokens and tool calls count against the ceiling, but they are reported apart and never enter a run's figures or its grade. A tool call during a debrief is recorded and held to the same isolation checks.
+- **Output.** `results/pilot/debriefs.jsonl` holds one record per run: task, arm, rep, each numbered answer as its own field, and the whole text. Home paths are scrubbed, and the identity scan gates the commit. R&D summarises them for the Director, by item and by arm.
+  - Item 4, confidence, is a self-report and no metric.
+  - Nothing in the decision rule reads the debriefs.
+- **Probes take no debrief.** A run whose task failed, or whose plan ran out, gets none. A plan limit reached during a debrief still stops the pilot.
+
+**Two conventions the keys assume, now stated in the questions.** The key auditors' own debriefs found that the keys assumed two conventions the questions did not state. Unstated, they let a correct agent disagree with the key for reasons that have nothing to do with Atlas.
+- **The reach and import questions (RC*, WR02)** now say that in Python, an import inside a function body counts, and that `from pkg import module` imports that module's file. RC09's key depends on a lazy import.
+- **TG02** now says that `test_*` is "of any file extension". It names no extension: naming `.mjs` would give away two of the four answers, and would mask the possible Atlas `.mjs` test-gap defect this task can measure (R&D's review).
+
+**The failure kind is recorded per CI-failure task** (`failure_kind`: `code` or `setting`), with CF01's defect noted as intermittent.
+
+`tasks.json` is re-pinned and `debrief.md` pinned above. `prompt.md`, `allow-list.json` and `grade.py` are unchanged.
 
 ## Design
 
@@ -255,4 +277,5 @@ The token ceiling (stop rule 3) is set at the volume $150 would buy at the rates
 - `grade.py`: the grader. Its tests are in `tests/test_atlas_mcp_utility_grade.py`.
 - `key-audit.json`: R&D's blind key audit, the answers and verdicts behind amendment 1.
 - `run.py`: the harness (amendment 2). Its tests are in `tests/test_atlas_mcp_utility_run.py`.
+- `debrief.md`: the debrief each graded run is asked after its answer is recorded (amendment 3).
 - `results/`: written by the run, one record per run with its usage, answer and grade.

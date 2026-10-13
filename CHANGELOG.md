@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.8] - 2026-10-13
+
+- corrected from the #107 live check: the sampler window caught the old runner's teardown; the card was idle at the call
+- Updated `2026-10-12-test-fakes-hide-the-platform`: Test fakes that hide the platform, a recurring defect class
+- Updated `2026-10-13-e5-fill-card`: E5 — how much context each local model holds on the 5090
+
 ## [1.1.8.0.7] - 2026-10-13
 
 - consult verdicts: Grok Build and Kimi K3 on Atlas slice AN, with R&D's rulings

@@ -24,7 +24,13 @@ not the way the real platform does. The unit tests passed, and the live run stop
 - the driver 617.42 header, "CUDA UMD Version", which the old pattern missed;
 - fill.py's listener lookups calling a bare `subprocess.run`, the #84 defect again (#99, caught by the live preflight before any run).
 - E5's settle wait (interlock #107, 2026-10-13, caught in review before merge). Its granite test passed the confirm call's own peak (27329 MiB) to the wait as if it were a reading taken before the call. But the publisher's live smoke showed that, within a model, the card before a call holds the previous window's runner, resident and still (8864 MiB before confirm 4096). So the wait passes, and the runner swap happens inside the measured call. The fix unloads and waits for idle before any call that changes `num_ctx`.
+  - **Corrected by the live check** (the Publisher, 2026-10-13, granite4.1:30b, load 40960 then confirm 4096, five runs).
+    - On every run, main and #107, the card was idle when the measured request went out. R&D's explanation, an unsettled card at the call, was wrong.
+    - **The real mechanism:** the sampler window opens at the start of the probe, before the confirm's token counts. The first count at 4096 tears down the resident 40960 runner (about 0.6 s), and the window can catch that.
+    - **Main is a race:** one valid run caught it (confirm-4096 peak 29339 MiB), and one didn't (21162). An earlier first sample would read the full 30.7 GB and abort a 4096 confirm falsely.
+    - **#107 unloads and settles before the window opens.** Its two runs peaked at 21149 and 21199 MiB, the 4096 runner's own. #107 merged as 45f34d7.
 - The same PR's re-review (interlock #107 at ce7b31e, 2026-10-13). The new fake reports idle memory the instant an unload returns, but on the card memory frees after Ollama reports the unload, and that lag is what the PR was written for. So no test could see that a confirm's token count reloads the runner and unloads it again just before the measured request, with no wait between. Changes requested: wait just before the request, and give the fake an unload lag so a test fails first.
+  - **The live check:** each count's unload reached idle within about 0.2 s, and the request followed about 2.8 s later. The gap was real in the code, but it didn't show on the card. The fix stays as insurance. The fake was still blind to it, which is the class.
 
 ## Key points
 
@@ -57,6 +63,7 @@ should fail closed. A green suite says nothing about seams the tests always repl
 
 - [verified] The fakes' stdout hid an uncaptured live runner, which gave an empty pin and a clean-tree result with no sha (via: switchyard #84 and the Publisher's live check, 2026-10-12)
 - [verified] E4b's live seams defaulted GPU sampling to (None, None), and the CPU counter and burn to no-ops (via: R&D's read of #85 at its head, 2026-10-12)
+- [verified] On main, a 4096 confirm after a resident 40960 granite4.1:30b runner peaked at 29339 MiB in one valid run and 21162 in another, with the card idle at the measured request both times. #107's two runs peaked at 21149 and 21199. (via: the Publisher's live check under a grant, raw JSON in interlock-raw/granite-check-107, 2026-10-13)
 
 ## Sources
 

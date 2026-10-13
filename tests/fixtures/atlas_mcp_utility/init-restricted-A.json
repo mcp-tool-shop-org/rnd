@@ -1,0 +1,27 @@
+{
+ "type": "system",
+ "subtype": "init",
+ "tools": [
+  "Bash",
+  "Glob",
+  "Grep",
+  "Read"
+ ],
+ "mcp_servers": [],
+ "model": "claude-sonnet-5-5",
+ "permissionMode": "default",
+ "slash_commands": [],
+ "skills": [],
+ "plugins": [],
+ "agents": [
+  "claude",
+  "claude-code-guide",
+  "Explore",
+  "general-purpose",
+  "Plan",
+  "statusline-setup"
+ ],
+ "apiKeySource": "none",
+ "claude_code_version": "2.1.197",
+ "output_style": "default"
+}

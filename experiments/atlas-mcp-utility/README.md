@@ -21,7 +21,7 @@ Each sha256 is of the file as committed, with LF line endings (`.gitattributes`)
 |---|---|
 | `tasks.json` | `eb2ba43c88c989022ecf2fe90d950b150e144a3f916540fa68c1d46559acca1a` (amendment 3) |
 | `prompt.md` | `a32c1c8f30e88f7264e6efce1d1c608339368b2e44691870206b3105e4e6226d` |
-| `allow-list.json` | `ff2500444a24a9f859c081869fe62448fa44006a601c94b0545136ef1184b3b4` (amendment 2) |
+| `allow-list.json` | `506080e1b416a028200b56e77f8c25081119ba99067e91b864a1893ba2983ca6` (amendment 4) |
 | `grade.py` | `f6d09f5144b42fc1c86f632015de33c84d0bfb9dd3faf2f192cb47d24d864455` (amendment 1) |
 | `debrief.md` | `ed73ef0864f6b603f32ab3f4a91874c465d537779ff1450094bc82690d312f8c` (amendment 3) |
 | Claude Code CLI | 2.1.197 |
@@ -112,6 +112,37 @@ Every Bash command a run makes is in its stream. During the pilot, a run that ma
 
 `tasks.json` is re-pinned and `debrief.md` pinned above. `prompt.md`, `allow-list.json` and `grade.py` are unchanged.
 
+### Amendment 4, 2026-10-13: each run starts with exactly its arm's tools
+
+**What the first probe found.** The probes ran at 13:24 and failed closed with 0 tokens spent. The CLI's sign-in had gone stale, so every call answered 401, and the Director signed in again. But the init events recorded before the 401 showed something the isolation in amendment 2 had missed:
+- Arm A's start offered 27 built-in tools, 15 skills and 30 slash commands. Among the tools were SendMessage, PushNotification, PowerShell, Workflow, CronCreate, RemoteTrigger and Skill.
+- `--allowedTools` only pre-approves. It removes nothing, so any tool that runs without a permission prompt was open to the model. SendMessage could have reached the other Claude sessions live on the rig.
+- The isolation check read only MCP tools and the model, so it passed.
+- Nothing ran past the init, so nothing leaked.
+
+**The isolation now** (R&D's ruling, with its five conditions):
+1. **`--tools "Read,Grep,Glob,Bash"` and `--disable-slash-commands`.** These decide which built-ins exist at all. The allow and deny rules of amendment 2 stay, and still gate the four that remain. Both flags exist in the pinned CLI 2.1.197.
+2. **The start must match its arm exactly.** A run fails the isolation check, and stops the pilot, if any of these differ from its arm:
+   - the init's tool list: the four built-ins, plus the seven Atlas tools named in `allow-list.json` in arm B;
+   - skills or slash commands, of which there must be none;
+   - the MCP servers: none in arm A, and `atlas`, connected, in arm B;
+   - the model or the CLI version.
+
+   Each direction, a tool too many and a tool missing, is tested on the real starts captured on 2026-10-13 (`tests/fixtures/atlas_mcp_utility/`). The first probe's starts must be refused; the restricted ones must pass.
+3. **Arm B's Atlas caches inside the attempt.** `atlas_refresh` writes its snapshots to `%LOCALAPPDATA%\atlas`, outside the checkout, where the wrote-a-file check cannot see them, and every run shared that cache.
+   - The server now starts with `LOCALAPPDATA` and `XDG_CACHE_HOME` set to `<work>/runs/<run>.cache`, created empty before each attempt, retries included.
+   - A guard fails the run if the shared cache changed while it ran, in case the override ever does not take. The guard fails closed: no other session may call `atlas_refresh` while the pilot runs.
+4. **Any error result stops the pilot,** with its text in the report. A stale sign-in is named as such, with the command that fixes it.
+   - **The turn cap is not an error.** The CLI ends a capped run with an error result (`error_max_turns`), but the cap is the agent's own outcome. As "Grading" says, such a run is incorrect and reported apart. The harness had been retrying it as a harness failure; now it grades it.
+   - **Only a run with no result at all is retried once:** a crash, or the watchdog. This narrows stop rule 2.
+5. **The probe report names each run's outcome, exit code and CLI version, and any error,** with planted values masked. Arm B's probe passes only if its `atlas_overview` call returns a result that is not an error: with no ToolSearch, that call proves the Atlas tools work as they start.
+
+**Unchanged.** The start still lists the agent types, but with no Task tool none can be started. It also still names an auto-memory path under `C:/Users`, the same in both arms; Write and Edit are denied, and so is Read under `C:/Users`.
+
+**A known defect at the pin.** At 1.26.0, Atlas's test-gap rule does not take `test_*.mjs` for a test file. At role-os `fc5222ae78`, `atlas gaps` names the two `.py` scripts no workflow runs, and not the two `.mjs` ones. TG02's key holds all four, so arm B is handed half an answer there. The pin stays, as pre-registered. The defect is filed as dogfood-lab/testing-os#158, and the pilot's report names it under `known_defects_at_the_pin`.
+
+`allow-list.json` is re-pinned above. `tasks.json`, `prompt.md`, `grade.py` and `debrief.md` are unchanged.
+
 ## Design
 
 **Pairs.** Each task runs twice:
@@ -153,7 +184,11 @@ A key R&D cannot confirm is fixed or dropped, by a dated amendment.
 - Claude Code in print mode, model Sonnet 5.5. Subagents run on Sonnet 5.5 under the standing rules.
 - `--max-turns 40`, and `stream-json` output recorded whole.
 - The same prompt in both arms (`prompt.md`).
-- Tools are an allow-list: Read, Grep, Glob, and Bash limited to read-only `git log`, `git show`, `git grep`, `git ls-files` and `ls`. Arm B adds the `atlas` MCP server, started in the checkout from the pinned package.
+- **Tools.** `--tools "Read,Grep,Glob,Bash"` makes those four the only built-ins (amendment 4). The allow-list then gates them:
+  - Read is held to the checkout, and Grep and Glob search under the same Read rules;
+  - Bash is limited to read-only `git log` and `git show` (amendment 2).
+
+  Arm B adds the `atlas` MCP server, started in the checkout from the pinned package, and no other tool.
 - There is no Edit, Write, web search, web fetch, `gh` or network.
 - `--strict-mcp-config` makes sure arm A has no MCP server at all.
 
@@ -224,7 +259,7 @@ Four pairs, before the full run:
 ## Stop rules (andon)
 
 1. **The pilot re-prices.** If its measured tokens per run are over 1.5 times the table's for its stratum, stop and re-price before the full run.
-2. **A run that fails in the harness or the service** (not a wrong answer) is retried once. If it fails again, its pair is dropped and reported. If more than 20% of runs fail this way, stop.
+2. **A run that fails in the harness** (not a wrong answer) is retried once. If it fails again, its pair is dropped and reported. If more than 20% of runs fail this way, stop. Since amendment 4, that means a run with no result at all: a crash, or the watchdog. A run that ends in an error result from the service stops the pilot. The turn cap is not one; it is graded incorrect.
 3. **The token ceiling.** The harness sums each run's tokens as it goes and stops at **300 million**, reporting what ran. The ceiling holds whichever way the run is billed.
 4. **A plan usage limit.** If the plan's usage limit is reached, the run stops and is reported with what ran. It is never retried in a loop. A pair the limit interrupts is dropped and re-run whole later.
 5. **Rig load.** The sidecar's refresh is a full map run, so runs happen only while no measurement holds a GPU grant (The Publisher's grant-start and grant-end messages).
@@ -276,6 +311,6 @@ The token ceiling (stop rule 3) is set at the volume $150 would buy at the rates
 - `allow-list.json`: the CLI, the model, the tools, and the two arms' MCP servers.
 - `grade.py`: the grader. Its tests are in `tests/test_atlas_mcp_utility_grade.py`.
 - `key-audit.json`: R&D's blind key audit, the answers and verdicts behind amendment 1.
-- `run.py`: the harness (amendment 2). Its tests are in `tests/test_atlas_mcp_utility_run.py`.
+- `run.py`: the harness (amendment 2). Its tests are in `tests/test_atlas_mcp_utility_run.py`, with the CLI's real starts in `tests/fixtures/atlas_mcp_utility/` (amendment 4).
 - `debrief.md`: the debrief each graded run is asked after its answer is recorded (amendment 3).
 - `results/`: written by the run, one record per run with its usage, answer and grade.

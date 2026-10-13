@@ -7,6 +7,8 @@
   "strict_mcp_config": true,
   "setting_sources": "local",
   "session_persistence": false,
+  "builtin_tools": ["Read", "Grep", "Glob", "Bash"],
+  "disable_slash_commands": true,
   "allowed_tools": [
     "Read(./**)",
     "Grep",
@@ -29,18 +31,29 @@
   "atlas": {
     "package": "@dogfood-lab/atlas",
     "version": "1.26.0",
-    "start": "node <tools>/node_modules/@dogfood-lab/atlas/cli.js mcp, from the run's checkout; installed once into <tools> before the pilot"
+    "start": "node <tools>/node_modules/@dogfood-lab/atlas/cli.js mcp, from the run's checkout; installed once into <tools> before the pilot",
+    "cache": "LOCALAPPDATA and XDG_CACHE_HOME set to <work>/runs/<run>.cache for the server alone, emptied before each attempt"
   },
   "arms": {
     "A": {
       "mcp_servers": {},
-      "extra_allowed_tools": []
+      "extra_allowed_tools": [],
+      "expected_mcp_tools": []
     },
     "B": {
       "mcp_servers": {
         "atlas": "the atlas start command above"
       },
-      "extra_allowed_tools": ["mcp__atlas"]
+      "extra_allowed_tools": ["mcp__atlas"],
+      "expected_mcp_tools": [
+        "mcp__atlas__atlas_changes",
+        "mcp__atlas__atlas_check_change",
+        "mcp__atlas__atlas_explain",
+        "mcp__atlas__atlas_overview",
+        "mcp__atlas__atlas_reach",
+        "mcp__atlas__atlas_refresh",
+        "mcp__atlas__atlas_test_gaps"
+      ]
     }
   }
 }

@@ -4,9 +4,11 @@ What the harness decides without the CLI or the network: whether the pins
 hold, whether the work directory is readable, the run order, how a run's
 tokens, tool calls and tool results are counted from its stream, whether a
 run's start matches its arm, whether a hook ran, whether a probe leaked or
-was carried out at all, when a plan limit stops the run, and the flip rate.
-The CLI's real behaviour is proven by the probes the spec records before the
-pilot, not here.
+was carried out at all, when a plan limit stops the run, how a run's end
+becomes its outcome, where Atlas would cache, and the flip rate. The CLI's
+real behaviour is proven by the probes the spec records before the pilot,
+not here; the init events under fixtures/atlas_mcp_utility are its real
+starts, captured on 2026-10-13.
 """
 import importlib.util
 import json
@@ -106,21 +108,69 @@ class Counting(unittest.TestCase):
         self.assertEqual(stream.result()["result"], "{\"file\": \"x\"}")
 
 
-class Isolation(unittest.TestCase):
-    MODEL = "claude-sonnet-5-5"
+FIXTURES = ROOT / "tests" / "fixtures" / "atlas_mcp_utility"
 
-    def test_each_arm_has_the_tools_it_should(self):
-        a = {"tools": ["Read", "Grep"], "model": self.MODEL}
-        b = {"tools": ["Read", "mcp__atlas__atlas_overview"], "model": self.MODEL}
-        self.assertEqual(run.isolation_problems(a, "A", self.MODEL), [])
-        self.assertEqual(run.isolation_problems(b, "B", self.MODEL), [])
+
+def init_event(name):
+    return json.loads((FIXTURES / f"init-{name}.json").read_text(encoding="utf-8"))
+
+
+class Isolation(unittest.TestCase):
+    # Amendment 4. The "wide" starts are the first probe's, before --tools:
+    # 27 built-ins in arm A, SendMessage and PushNotification among them,
+    # with 15 skills and 30 slash commands. The "restricted" starts are
+    # run.py's own command with --tools and --disable-slash-commands.
+    def setUp(self):
+        self.allow = json.loads((HERE / "allow-list.json").read_text(encoding="utf-8"))
+
+    def test_the_restricted_starts_match_their_arms_exactly(self):
+        for arm in ("A", "B"):
+            init = init_event(f"restricted-{arm}")
+            self.assertEqual(sorted(init["tools"]), run.expected_tools(self.allow, arm))
+            self.assertEqual(run.isolation_problems(init, arm, self.allow), [])
+
+    def test_the_first_probes_wide_starts_are_refused(self):
+        for arm in ("A", "B"):
+            init = init_event(f"wide-{arm}")
+            self.assertIn("SendMessage", init["tools"])
+            problems = run.isolation_problems(init, arm, self.allow)
+            self.assertTrue(any(p.startswith("tools the arm does not have: ") for p in problems), problems)
+            self.assertIn("15 skills loaded", " ".join(problems))
+            self.assertIn("30 slash commands loaded", " ".join(problems))
+
+    def test_one_tool_too_many_or_too_few_is_refused(self):
+        a = init_event("restricted-A")
+        self.assertEqual(run.isolation_problems({**a, "tools": a["tools"] + ["SendMessage"]}, "A", self.allow),
+                         ["tools the arm does not have: SendMessage"])
+        self.assertEqual(run.isolation_problems({**a, "tools": [t for t in a["tools"] if t != "Grep"]}, "A", self.allow),
+                         ["tools missing: Grep"])
+        b = init_event("restricted-B")
+        self.assertEqual(run.isolation_problems({**b, "tools": [t for t in b["tools"] if t != "mcp__atlas__atlas_reach"]}, "B", self.allow),
+                         ["tools missing: mcp__atlas__atlas_reach"])
+        self.assertEqual(run.isolation_problems({**b, "tools": b["tools"] + ["mcp__atlas__atlas_new"]}, "B", self.allow),
+                         ["tools the arm does not have: mcp__atlas__atlas_new"])
+
+    def test_a_skill_or_a_slash_command_is_refused(self):
+        a = init_event("restricted-A")
+        self.assertEqual(run.isolation_problems({**a, "skills": ["verify"]}, "A", self.allow), ["1 skills loaded: verify"])
+        self.assertEqual(run.isolation_problems({**a, "slash_commands": ["loop"]}, "A", self.allow), ["1 slash commands loaded: loop"])
+
+    def test_arm_b_needs_atlas_connected_and_arm_a_no_server(self):
+        b = init_event("restricted-B")
+        self.assertEqual(run.isolation_problems({**b, "mcp_servers": [{"name": "atlas", "status": "failed"}]}, "B", self.allow),
+                         ["MCP servers are {'atlas': 'failed'}, the arm needs {'atlas': 'connected'}"])
+        a = init_event("restricted-A")
+        self.assertEqual(run.isolation_problems({**a, "mcp_servers": [{"name": "atlas", "status": "connected"}]}, "A", self.allow),
+                         ["MCP servers are {'atlas': 'connected'}, the arm needs none"])
 
     def test_a_run_whose_start_does_not_match_its_arm_is_refused(self):
-        self.assertEqual(run.isolation_problems({"tools": ["mcp__atlas__atlas_reach"], "model": self.MODEL}, "A", self.MODEL), ["arm A has Atlas tools"])
-        self.assertEqual(run.isolation_problems({"tools": ["Read"], "model": self.MODEL}, "B", self.MODEL), ["arm B has no Atlas tools"])
-        self.assertIn("MCP tools from another server", run.isolation_problems({"tools": ["mcp__ollama__x", "mcp__atlas__y"], "model": self.MODEL}, "B", self.MODEL)[0])
-        self.assertEqual(run.isolation_problems(None, "A", self.MODEL), ["no init event"])
-        self.assertEqual(run.isolation_problems({"tools": [], "model": "claude-opus-5-5"}, "A", self.MODEL), ["the model is claude-opus-5-5, pinned claude-sonnet-5-5"])
+        a, b = init_event("restricted-A"), init_event("restricted-B")
+        self.assertIn("arm A has Atlas tools", run.isolation_problems({**a, "tools": a["tools"] + ["mcp__atlas__atlas_reach"]}, "A", self.allow))
+        self.assertIn("arm B has no Atlas tools", run.isolation_problems({**b, "tools": a["tools"]}, "B", self.allow))
+        self.assertIn("MCP tools from another server", run.isolation_problems({**b, "tools": b["tools"] + ["mcp__ollama__x"]}, "B", self.allow)[0])
+        self.assertEqual(run.isolation_problems(None, "A", self.allow), ["no init event"])
+        self.assertEqual(run.isolation_problems({**a, "model": "claude-opus-5-5"}, "A", self.allow), ["the model is claude-opus-5-5, pinned claude-sonnet-5-5"])
+        self.assertEqual(run.isolation_problems({**a, "claude_code_version": "2.1.198"}, "A", self.allow), ["the CLI is 2.1.198, pinned 2.1.197"])
 
     def test_a_hook_is_seen_by_its_event_or_its_marker(self):
         stream = run.Stream()
@@ -148,7 +198,7 @@ class Probe(unittest.TestCase):
         stream.add(tool_result("o1", "parts: src, tests"))
         return stream
 
-    CLEAN = {"isolation": []}
+    CLEAN = {"run": "probe", "outcome": "answered", "exit_code": 0, "isolation": [], "error": None, "stderr": ""}
 
     def test_the_prompt_asks_for_every_route_in_every_tree(self):
         prompt = run.probe_prompt(self.TARGETS)
@@ -185,8 +235,99 @@ class Probe(unittest.TestCase):
         self.assertFalse(verdict["passed"])
 
     def test_an_isolation_problem_fails_the_probe(self):
-        verdict = run.probe_verdict(self.probe_a(), self.probe_b(), {"isolation": ["hook ran: x"]}, self.CLEAN, self.TARGETS, self.SENTINELS)
+        verdict = run.probe_verdict(self.probe_a(), self.probe_b(), {**self.CLEAN, "isolation": ["hook ran: x"]}, self.CLEAN, self.TARGETS, self.SENTINELS)
         self.assertFalse(verdict["passed"])
+
+    def test_a_probe_that_ended_in_an_error_fails_and_says_why(self):
+        # The first probe, 2026-10-13: both runs met a stale sign-in, and the
+        # report said only passed: false. Now each run's outcome and error are in it.
+        failed = {**self.CLEAN, "outcome": "auth_failed", "error": "Failed to authenticate. API Error: 401 OAuth access token is invalid."}
+        verdict = run.probe_verdict(self.probe_a(), self.probe_b(), failed, self.CLEAN, self.TARGETS, self.SENTINELS)
+        self.assertFalse(verdict["passed"])
+        self.assertEqual(verdict["records"][0]["outcome"], "auth_failed")
+        self.assertIn("401", verdict["records"][0]["error"])
+        self.assertIsNone(verdict["records"][1]["error"])
+
+    def test_an_error_in_the_report_holds_no_planted_value(self):
+        errored = {**self.CLEAN, "outcome": "errored", "error": "could not read amu-sentinel-0a1b2c3d"}
+        verdict = run.probe_verdict(self.probe_a(), self.probe_b(), errored, self.CLEAN, self.TARGETS, self.SENTINELS)
+        self.assertEqual(verdict["records"][0]["error"], "could not read <home content>")
+
+    def test_an_atlas_overview_that_errs_fails_the_probe(self):
+        # With --tools there is no ToolSearch: the call must work as the tool starts.
+        stream = run.Stream()
+        stream.add(assistant("b1", {}, [use("o1", "mcp__atlas__atlas_overview")]))
+        stream.add(tool_result("o1", "tool not available", is_error=True))
+        verdict = run.probe_verdict(self.probe_a(), stream, self.CLEAN, self.CLEAN, self.TARGETS, self.SENTINELS)
+        self.assertFalse(verdict["atlas_overview_answered"])
+        self.assertFalse(verdict["passed"])
+
+
+class Outcomes(unittest.TestCase):
+    # The result events as the CLI 2.1.197 wrote them on 2026-10-13.
+    AUTH = {"type": "result", "subtype": "success", "is_error": True, "result": "Failed to authenticate. API Error: 401 OAuth access token is invalid."}
+    TURN_CAP = {"type": "result", "subtype": "error_max_turns", "is_error": True, "result": None, "errors": ["Reached maximum number of turns (1)"]}
+    ANSWER = {"type": "result", "subtype": "success", "is_error": False, "result": "{\"file\": \"x\"}"}
+
+    def test_each_end_has_its_outcome(self):
+        self.assertEqual(run.outcome_of("ceiling", self.ANSWER, []), "ceiling")
+        self.assertEqual(run.outcome_of(None, self.AUTH, []), "auth_failed")
+        self.assertEqual(run.outcome_of(None, {**self.AUTH, "result": "Claude usage limit reached"}, []), "plan_limit")
+        self.assertEqual(run.outcome_of(None, self.ANSWER, ["hook ran: x"]), "isolation_failed")
+        self.assertEqual(run.outcome_of(None, None, []), "harness_failure")
+        self.assertEqual(run.outcome_of(None, self.TURN_CAP, []), "turn_cap")
+        self.assertEqual(run.outcome_of(None, {**self.ANSWER, "is_error": True, "result": "API Error: 529 overloaded"}, []), "errored")
+        self.assertEqual(run.outcome_of(None, self.ANSWER, []), "answered")
+
+    def test_an_error_result_stops_the_pilot_and_the_turn_cap_is_graded(self):
+        # Amendment 4: any error result is an andon; the turn cap is the
+        # agent's outcome, graded incorrect (README, "Grading").
+        self.assertIn("auth_failed", run.HALTING)
+        self.assertIn("errored", run.HALTING)
+        self.assertNotIn("turn_cap", run.HALTING)
+        self.assertIn("turn_cap", run.GRADED)
+        self.assertNotIn("harness_failure", run.HALTING)
+
+    def test_the_error_text_is_kept_only_for_a_run_that_did_not_end_in_its_own_outcome(self):
+        self.assertIsNone(run.error_text({"outcome": "answered", "error": None}))
+        self.assertIsNone(run.error_text({"outcome": "turn_cap", "error": "Reached maximum number of turns (40)"}))
+        self.assertEqual(run.error_text({"outcome": "harness_failure", "error": None, "stderr": "spawn failed"}), "spawn failed")
+
+
+class AtlasCache(unittest.TestCase):
+    def test_the_cache_root_follows_atlas_rule(self):
+        # packages/atlas/sidecar/refresh.js, cacheRoot(), at Atlas 1.26.0.
+        home = Path("/h")
+        self.assertEqual(run.atlas_cache_root({"LOCALAPPDATA": "X:/L"}, "win32", home), Path("X:/L/atlas"))
+        self.assertEqual(run.atlas_cache_root({}, "win32", home), home / "AppData" / "Local" / "atlas")
+        self.assertEqual(run.atlas_cache_root({"XDG_CACHE_HOME": "/xdg"}, "linux", home), Path("/xdg/atlas"))
+        self.assertEqual(run.atlas_cache_root({"XDG_CACHE_HOME": "rel"}, "linux", home), home / ".cache" / "atlas")
+
+    def test_arm_b_caches_in_its_own_directory_and_arm_a_runs_no_server(self):
+        cache = Path("w/runs/RC03-B1.cache")
+        servers = run.mcp_servers("B", Path("t"), cache)
+        self.assertEqual(servers["atlas"]["env"], {"LOCALAPPDATA": str(cache), "XDG_CACHE_HOME": str(cache)})
+        self.assertEqual(servers["atlas"]["args"][-1], "mcp")
+        self.assertEqual(run.mcp_servers("A", Path("t"), cache), {})
+        # The override lands where Atlas looks, on either platform.
+        self.assertEqual(run.atlas_cache_root(servers["atlas"]["env"], "win32"), cache / "atlas")
+
+    def test_the_guard_sees_any_change_in_the_shared_cache(self):
+        root = Path(tempfile.mkdtemp())
+        try:
+            cache = root / "atlas"
+            self.assertIsNone(run.tree_state(cache))
+            cache.mkdir()
+            empty = run.tree_state(cache)
+            self.assertEqual(empty, [])
+            (cache / "snap").mkdir()
+            (cache / "snap" / "page.json").write_text("{}", encoding="utf-8")
+            written = run.tree_state(cache)
+            self.assertNotEqual(written, empty)
+            (cache / "snap" / "page.json").write_text("{\"x\": 1}", encoding="utf-8")
+            self.assertNotEqual(run.tree_state(cache), written)
+        finally:
+            shutil.rmtree(root)
 
 
 class BashDetector(unittest.TestCase):
@@ -338,6 +479,16 @@ class Allowlist(unittest.TestCase):
         self.assertEqual(cmd[cmd.index("--setting-sources") + 1], "local")
         self.assertIn("mcp__atlas", cmd)
         self.assertNotIn("mcp__atlas", run.command("claude", self.allow, "A", Path("a.mcp.json")))
+
+    def test_the_command_offers_only_four_built_ins_and_no_slash_command(self):
+        # Amendment 4: --allowedTools only pre-approves; --tools decides which
+        # built-ins exist. The allow and deny rules still gate those four.
+        for arm in ("A", "B"):
+            cmd = run.command("claude", self.allow, arm, Path("x.mcp.json"))
+            self.assertEqual(cmd[cmd.index("--tools") + 1], "Read,Grep,Glob,Bash")
+            self.assertIn("--disable-slash-commands", cmd)
+            self.assertIn("Read(//e/AI/**)", cmd)
+            self.assertIn("Bash(git log:*)", cmd)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,39 @@
+{
+ "type": "system",
+ "subtype": "init",
+ "tools": [
+  "Bash",
+  "Glob",
+  "Grep",
+  "Read",
+  "mcp__atlas__atlas_changes",
+  "mcp__atlas__atlas_check_change",
+  "mcp__atlas__atlas_explain",
+  "mcp__atlas__atlas_overview",
+  "mcp__atlas__atlas_reach",
+  "mcp__atlas__atlas_refresh",
+  "mcp__atlas__atlas_test_gaps"
+ ],
+ "mcp_servers": [
+  {
+   "name": "atlas",
+   "status": "connected"
+  }
+ ],
+ "model": "claude-sonnet-5-5",
+ "permissionMode": "default",
+ "slash_commands": [],
+ "skills": [],
+ "plugins": [],
+ "agents": [
+  "claude",
+  "claude-code-guide",
+  "Explore",
+  "general-purpose",
+  "Plan",
+  "statusline-setup"
+ ],
+ "apiKeySource": "none",
+ "claude_code_version": "2.1.197",
+ "output_style": "default"
+}

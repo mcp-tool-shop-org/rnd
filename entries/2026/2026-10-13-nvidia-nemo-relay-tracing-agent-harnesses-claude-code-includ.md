@@ -8,6 +8,8 @@ fields: [agent-tooling]
 tags: [nemo-relay, tracing, atlas-mcp-utility]
 ---
 
+> **Note (2026-10-13):** the atlas-mcp-utility experiment this entry refers to was withdrawn as badly designed. Only its harness remains, and it is unvalidated. No result from that experiment should be cited.
+
 ## Summary
 
 NeMo Relay is NVIDIA's instrumentation layer for agents. It wraps an agent's model and tool calls in nested scopes (session, turn, model call, tool call) and emits three kinds of output:

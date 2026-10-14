@@ -8,6 +8,8 @@ fields: [studio-tooling]
 tags: [atlas, testing-os, housekeeping, interlock, ci]
 ---
 
+> **Note (2026-10-13):** the atlas-mcp-utility experiment this entry refers to was withdrawn as badly designed. Only its harness remains, and it is unvalidated. No result from that experiment should be cited.
+
 ## Summary
 
 On 2026-10-13 the Director approved a program to build up Atlas and testing-os, make CI failure output say what broke and how to fix it, and connect rnd to the fleet the way housekeeping connects to Atlas. R&D rules on each item and reviews it. The testing-os session builds Atlas and testing-os. R&D builds rnd's own parts. The housekeeping side goes through the Publisher.

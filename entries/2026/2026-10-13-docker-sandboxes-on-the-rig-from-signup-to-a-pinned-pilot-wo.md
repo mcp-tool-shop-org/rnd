@@ -8,6 +8,8 @@ fields: [agent-tooling, studio-tooling]
 tags: [docker, sandboxes, sbx, isolation, claude-code, ollama, atlas-mcp-utility, windows]
 ---
 
+> **Note (2026-10-13):** the atlas-mcp-utility experiment this entry refers to was withdrawn as badly designed. Only its harness remains, and it is unvalidated. No result from that experiment should be cited.
+
 ## Summary
 
 In one afternoon on 2026-10-13, the studio went from a Docker signup to a mountless, pinned Linux workspace where the
@@ -76,11 +78,19 @@ kit that turns permission prompts off.
 
 ## Studio relevance
 
-**A mountless local sandbox is stronger containment than the deny rules it replaces.** The atlas-mcp-utility harness
-had kept its agents out of the operator's files with permission rules over trees they could otherwise reach. In the
-sandbox those trees don't exist. Amendment 7 moves the experiment's probes, pilot and ladder there, keeps the deny rules
-as a second layer, and adds two checks to every start: the permission mode is `default`, and the key source is `none`.
-So a run on an API key, or one with prompts turned off, stops the pilot. (`experiments/atlas-mcp-utility`, amendment 7.)
+**A mountless local sandbox is stronger containment than deny rules.** Permission rules over trees an agent could
+otherwise reach leak (see [[2026-10-13-claude-code-read-deny-rules-do-not-stop-a-grep-walk]]). In a mountless sandbox the
+operator's trees don't exist. Inside it, what held on the rig on 2026-10-13:
+- **Containment by OS permission.** The harness runs as root. Each agent runs as an unprivileged user (`amu`) with no
+  sudo, an emptied home and a fresh placeholder sign-in file per attempt. Everything else (the experiment files, other
+  runs, other homes) is root-only.
+- **The plan route:** the claude kit's `/login`, with the real token swapped in at the sandbox proxy. Every run's start
+  is checked for `apiKeySource: none` and permission mode `default`.
+- **The local-model route:** the network policy rule that works is `localhost:11434`. The kit's own
+  `host.docker.internal:11434` didn't match the filter. The CLI still uses `http://host.docker.internal:11434` as its
+  base URL.
+- **Prices:** local sandboxes are free, and cloud sandboxes cost $0.28/hr at medium. Short Claude Code runs on the plan
+  cost cents each at API rates, and a dozen of them didn't move the plan's weekly usage panel.
 
 **What to watch:**
 - The image's self-updating CLI. Pin it separately, and check the version at every start.

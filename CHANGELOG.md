@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.1] - 2026-10-14
+
+- advocate-dataset brief revised to the Director's definition and sequenced (batch 1 first)
+- Updated experiment `advocate-dataset`
+- Added experiment `agent-ab-harness`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.8.2.0] - 2026-10-14
 
 - advocate-dataset: role-set's second role (the Advocate) brief for the Grok seat; handbook template Dataset builds

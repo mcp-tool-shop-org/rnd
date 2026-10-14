@@ -397,6 +397,27 @@ A chain, a pipe, a line break and `<` no longer stop a run. The CLI refuses any 
 
 Nothing pinned changes.
 
+### Shakedown results, 2026-10-13: Haiku against the local model, and arm B never had Atlas
+
+Both legs ran the same six pairs (RC03 ×2, CF09, CF02, CF04 ×2) on CLI 2.1.197 with no halt, no dropped pair and no harness failure.
+
+| | Haiku 5.5 (plan, `haiku-1`) | nemotron-3.5-lightning, 131k context (local, `local-2`) |
+|---|---|---|
+| Correct | 12 of 12 | 11 of 12 (CF02-A1 wrong) |
+| Flips on repeats | 0 of 4 | 0 of 4 |
+| Wall time per run | 15–77 s (408 s in all) | 17–42 s (319 s in all) |
+| Price | $3.10 at API rates for the 12 task turns, about $0.26 a run; the plan covers it | no plan use; about 6 minutes of GPU time at a peak near 28 GB |
+| Tokens | 2.41 million, mostly cache reads | 2.80 million input, uncached |
+| Tool calls per run | 2–18 | 7–41, more shell reads and refused calls |
+
+**What it says.** On these four read-and-answer tasks, the local model at 131k context nearly matches Haiku. It is faster per run and costs no plan use, but it makes several times as many tool calls. At 32k context it got 1 of 4 RC03 runs right (local-1), so the context setting decides it. Four distinct tasks is far too few to rank the two; this is a shakedown, not a measurement.
+
+**The finding that matters more: arm B never had Atlas during its task.** Every arm B run in every leg made 0 Atlas calls: Sonnet, nemotron and Haiku alike.
+- The streams show why. The task turn's start has `atlas` pending and no Atlas tools. The Atlas tools first appear in the debrief turn's start.
+- So on the pinned CLI 2.1.197, the server connects too late for the task, and arm B ran as arm A. The only difference was B's larger prompt, which made it cost more (Haiku RC03: $0.13 to $0.28 against $0.10 to $0.11).
+- The probe's arm B was asked by name to call `atlas_overview`, and it did. A task prompt doesn't name the tool, so the model never reaches for one it wasn't offered at the start.
+- **No arm comparison is possible until Atlas's tools are in the task turn's start.** The pin amendment (CLI 2.1.296 or later) must show that in a re-captured init before any graded run. If it doesn't, the harness must wait for the connection before sending the task.
+
 ## Design
 
 **Pairs.** Each task runs twice:

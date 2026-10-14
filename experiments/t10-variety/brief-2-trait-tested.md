@@ -1,6 +1,6 @@
 # Brief 2: T10 tests the trait clue's own size word (`trait_not_tested`), for a seat
 
-**Status:** written 2026-10-14 on the Director's go. Goes to the Publisher for review and seat assignment.
+**Status:** written 2026-10-14 on the Director's go. Goes to the Publisher for review and seat assignment. **Landed** in role-set (#53, then folded into #49, merged 2026-10-14 at `787ccf8`): claims carry only `=`; `trait_not_tested` refuses the rest.
 **Repository:** mcp-tool-shop-org/role-set. Start from main after #53 merges; this brief builds on its cell table.
 **Template:** [diagnose-then-fix](../../site/src/content/docs/handbook/diagnose-then-fix.md) (prototype). It follows [brief 1](brief.md).
 **Design input:** Argon (Gemini, by hand, 2026-10-14), checked by R&D against #53's builds. The consult is [argon-brief-claims.md](argon-brief-claims.md).

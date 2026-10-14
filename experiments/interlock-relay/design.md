@@ -1,6 +1,6 @@
 # NeMo Relay inside interlock, on local models — design v3.1
 
-**Status:** v3.1, approved by the Director on 2026-10-13 after Argon's round 4 raised no structural issues. Stage 0 resumed 2026-10-14 on the Director's word, on fakes only: H4a and H4b hold, and H1 and H3 hold on the interleaved path. The E4b and fill-card hooks are still to wire. Record and amendments A1–A7: [stage0/README.md](stage0/README.md). No device run yet. The order is Argon audits until nothing structural remains, then the Director's approval, then stage 0 (code and tests on fakes), then device runs under the Publisher's grants. Template: [A/B experiments](https://mcp-tool-shop-org.github.io/rnd/handbook/ab-experiments/). Change log at the end, with a table of how each round-1 finding was handled.
+**Status:** v3.2, 2026-10-14. Stage 1 ran on the 5090 (`relay-s1-20261014b`) and the frozen analysis gave `stage1_holds = false`: H1 failed by a counting-window artifact, and H2's client-time gate failed for real. By the tree that is reject. The Director chose **debug-only tracing** instead, as amendment v3.2 below, his call. Stage 2 is cancelled for Relay. Result note: [stage1/result-note.md](stage1/result-note.md). Stage 0's record and amendments A1–A8: [stage0/README.md](stage0/README.md). Template: [A/B experiments](https://mcp-tool-shop-org.github.io/rnd/handbook/ab-experiments/). Change log at the end.
 
 **Scope:** local models only. No Claude in any arm. The subject is interlock (repository `mcp-tool-shop-org/interlock`, formerly switchyard), the studio's measurement and routing harness:
 - Ollama on the RTX 5090 (127.0.0.1:11434, and the run-owned 11441 in e4b);
@@ -236,3 +236,18 @@ Under H4: if H4a holds but H4b fails, Relay is rejected in stage 0 with no devic
 | M1 | `embed` is missing from the counter's kinds | Added |
 - **v3.1, 2026-10-13:** Argon's round 4: all round-3 findings resolved, no structural issues, ready for the Director. Its two minor notes are folded in: `artifacts.trace.span` always names the measured call's span, and the native-log fallback keeps the same `{file, span}` shape, using a per-line `call_id`.
 - **Stage 0 amendments A1–A7, 2026-10-14:** recorded with the stage 0 results in [stage0/README.md](stage0/README.md).
+- **Stage 1, 2026-10-14:** run `relay-s1-20261014b` at interlock `a43cc31`. The analysis, frozen at rnd `cbaed82`, gave `stage1_holds = false`.
+  - **H1 failed in every step by exactly one request:** the empty-card guard's `GET /api/ps` runs before the tracer is attached. The companion's three stray spans come from its stop running after `end_slot()`.
+  - **H2's client-time gate failed for real:** medians of 0.548 ms (decode) and 0.682 ms (long) against 0.5 ms. Relay's per-call work, on a CPU waking from the barrier's rest, reproduces this on a CPU-only bench.
+  - **H3 held.**
+  - Details are in [stage1/result-note.md](stage1/result-note.md).
+- **v3.2, 2026-10-14, the Director's call:** Relay is adopted for **debugging runs only**.
+  - **A departure, recorded as one:** the pre-registered tree says that H1 failing means reject. The Director ruled instead that H1's failure is a harness counting-window defect, with every request accounted for, and that H2's branch applies: `--trace` for debugging runs only.
+  - **The verdict for `relay-s1-20261014b` stays `stage1_holds = false`.**
+  - **Conditions before adoption,** built from an Argon build brief, applied and verified by R&D, then reviewed separately by Argon:
+    - the tracer is attached before the card guard;
+    - the companion stops before `end_slot()`, and `end_slot()` ends per-arm emission;
+    - requests are sized from the transport's byte count;
+    - "debug only" is enforced, so no traced run's rows reach the routing table;
+    - a deterministic H1 test runs against a fake Ollama.
+  - **No more 5090 or NPU time for Relay. Stage 2 is cancelled.**

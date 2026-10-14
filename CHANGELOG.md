@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.1.9] - 2026-10-14
+
+- interlock-relay stage 1 result: frozen verdict, diagnosis, Argon consult, amendment v3.2 (debug-only)
+- Added experiment `agent-ab-harness`
+- Updated experiment `interlock-relay`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.8.1.8] - 2026-10-14
 
 - interlock-relay stage 1: post-Argon preflight corrections recorded, with the CPU-quiet check

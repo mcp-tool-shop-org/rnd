@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.5] - 2026-10-14
+
+- advocate-dataset: Argon consult round 2 (adversarial pass on the folded design, brief inline), on the Director's ask for several passes before a seat
+- Added experiment `advocate-dataset`
+- Added experiment `agent-ab-harness`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.8.2.4] - 2026-10-14
 
 - T10 brief 3 amendment 4: if_shape stop; capacity weights split by stratum; fresh locked 101-120

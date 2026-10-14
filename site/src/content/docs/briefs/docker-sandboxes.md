@@ -8,7 +8,7 @@ shelf: stays in rnd (studio tooling)
 
 ## The question
 
-The atlas-mcp-utility experiment (withdrawn on 2026-10-13 as badly designed; only its harness remains, unvalidated) asked whether Atlas's MCP sidecar helps coding agents answer questions about
+The atlas-mcp-utility experiment (withdrawn on 2026-10-13 as badly designed; its harness is now the reusable agent A/B harness) asked whether Atlas's MCP sidecar helps coding agents answer questions about
 repositories. Its agents must not see anything but the repository in front of them: not the operator's files, not
 memory notes, not other repositories that discuss the answers.
 
@@ -64,7 +64,7 @@ the only brake.
 
 ## Receipts
 
-- The harness, `experiments/atlas-mcp-utility/run.py` (unvalidated), tested in `tests/test_atlas_mcp_utility_run.py`.
+- The harness, `experiments/agent-ab-harness/run.py`, tested in `tests/test_agent_ab_harness_run.py`, documented as the agent-ab-harness instrument.
 - The entry, with each claim's source: `entries/2026/2026-10-13-docker-sandboxes-on-the-rig-from-signup-to-a-pinned-pilot-wo.md`.
 - The instrument page: `instruments/docker-sandboxes.md`.
 

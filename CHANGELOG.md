@@ -11,6 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.31] - 2026-10-13
+
+- interlock-relay design v3.1 (Director-approved after four Argon audits)
+- Added experiment `agent-ab-harness`
+- Added experiment `interlock-relay`
+- Added experiment `local-agent-relay`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.8.0.30] - 2026-10-13
 
 - local-agent-relay design v0 (prototype, Director-approved); diagnose-then-fix page marked prototype

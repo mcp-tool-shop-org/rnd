@@ -79,5 +79,6 @@ must reproduce the record exactly. A cap on build attempts was refused twice: it
 
 - role-set `787ccf8` (#49): the allocator, the record `src/role_set/generate/t10_record.json`, and the CI gate.
 - role-set `549a619` (#55): the `if_shape` axis, the per-stratum capacity weights, the record over seeds 1–20, 61–80, 81–100 and 101–120.
+- role-set [v0.2.0](https://github.com/mcp-tool-shop-org/role-set/releases/tag/v0.2.0) (`891b364`, 2026-10-14): the release that ships all of the above, with the generator written up end to end in the handbook's [T10 generator page](https://mcp-tool-shop-org.github.io/role-set/handbook/generator/).
 - rnd `experiments/t10-variety/`: the three briefs, the outside reviewer's input, and the outcome.
 - The proof that claims can test only "exactly": brief 2, section 3.

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.20] - 2026-10-14
+
+- role-set v0.2.0 released: outcome recorded on the treatment brief; issue 8 and the T10 brief link the release
+
 ## [1.1.8.2.19] - 2026-10-14
 
 - role-set 0.2.0 treatment reviewed: pass with one required change (the Advocate's approval state on three surfaces); five code follow-ups filed

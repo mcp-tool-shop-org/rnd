@@ -61,4 +61,8 @@ All 1,280 builds across four seed files build inside the try limit; the one that
 - **Refuse the easy fixes that change what gets built.** A try cap and a dropped cell both passed the floors by changing the population; both were refused, twice.
 - **Keep the hash closed.** The record's hash list missed two files at first; an import-closure test written by the builder caught them, and it's the better instrument.
 
+## Released
+
+All of it shipped as role-set [v0.2.0](https://github.com/mcp-tool-shop-org/role-set/releases/tag/v0.2.0) on 2026-10-14, after a full treatment: a README rewritten for the generator, two new handbook pages ([the T10 generator](https://mcp-tool-shop-org.github.io/role-set/handbook/generator/) end to end, and [the role packs](https://mcp-tool-shop-org.github.io/role-set/handbook/roles/)), the README in seven more languages, and a ship-gate scorecard of 35 of 50, up from 31, with every gate now passing (the scorecard's projected 37 counts the translations, which landed after it was written). It stays 0.x: role-set is a prototype, and nothing it writes is training data until a person checks it.
+
 → [The T10 brief](/rnd/briefs/taking-size-words-literally/), updated with these figures.

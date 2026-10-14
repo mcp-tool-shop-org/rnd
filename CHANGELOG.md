@@ -14,6 +14,7 @@ NANO an ordinary library update (entries filed or revised, results added).
 ## [1.1.8.2.17] - 2026-10-14
 
 - Argon consult round 4 filed: the pilot brief after the three fixes, inline, with the 5% reconciliation as the question
+- Argon round 4 answered: green light; the slot 3 ledger tag and the 9/10 critic rule folded into the pilot brief; disposition filed
 
 ## [1.1.8.2.16] - 2026-10-14
 

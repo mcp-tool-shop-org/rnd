@@ -11,6 +11,19 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.26] - 2026-10-13
+
+- atlas-mcp-utility harness fixes: token totals, task wall time, write detection, process cleanup, grading
+- Updated `2026-10-13-atlas-testing-os-rnd-buildup`: Atlas, testing-os, housekeeping and rnd — the build-up program
+- Added `2026-10-13-claude-code-read-deny-rules-do-not-stop-a-grep-walk`: Claude Code: a Read deny rule doesn't stop a Grep walk over the denied tree
+- Added `2026-10-13-claude-code-starts-a-turn-before-mcp-servers-connect`: Claude Code starts a print-mode turn before its MCP servers connect, on Anthropic's endpoint
+- Updated `2026-10-13-docker-sandboxes-on-the-rig-from-signup-to-a-pinned-pilot-wo`: Docker Sandboxes on the rig: from signup to a pinned pilot workspace
+- Updated `2026-10-13-multi-repository-atlas-research-grounding-for-the-build-up`: Multi-repository Atlas: research grounding for the build-up
+- Added `2026-10-13-nemotron-lightning-needs-its-context-set-for-claude-code`: nemotron-3.5-lightning under Claude Code needs a 131k context; Ollama's default 32k cripples it
+- Updated `2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ`: NVIDIA NeMo Relay: tracing agent harnesses, Claude Code included
+- Updated `atlas`: atlas — a repository's map, checked in CI and served to agents
+- Updated experiment `atlas-mcp-utility`
+
 ## [1.1.8.0.25] - 2026-10-13
 
 - atlas-mcp-utility withdrawn as badly designed; write-ups removed, harness kept and marked unvalidated

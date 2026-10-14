@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.14] - 2026-10-14
+
+- issue 8 and the T10 brief: the floors are checked in seconds inside a CI job of about seven minutes, not 'four minutes'
+- Added experiment `advocate-dataset`
+- Added experiment `agent-ab-harness`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.8.2.13] - 2026-10-14
 
 - T10 Phase 1 (if_shape) landed in role-set #55: brief 3 outcome, the T10 brief page, newsletter issue 8; the seat brief for role-set's full treatment and 0.2.0

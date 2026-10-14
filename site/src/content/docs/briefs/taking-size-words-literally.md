@@ -63,7 +63,7 @@ limit.
 **The floors are enforced in CI, from a committed record.** The full measurement is 640 proven builds and takes
 too long for a 15-minute job under coverage. So the measurement is committed, with a hash over every file that
 decides a build. The normal job recomputes the hash, fails on a mismatch by naming the regenerate command, and
-computes the floors from the stored skeletons in about four minutes. The exhaustive rebuild runs on demand and
+computes the floors from the stored skeletons in seconds, inside a CI job that finishes in about seven minutes. The exhaustive rebuild runs on demand and
 must reproduce the record exactly. A cap on build attempts was refused twice: it changes which puzzles get built.
 
 ## Caveats

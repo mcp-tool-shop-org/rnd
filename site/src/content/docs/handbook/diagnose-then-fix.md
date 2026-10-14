@@ -4,7 +4,7 @@ description: A design template for using a diagnostic tool to find why a system 
 sidebar:
   order: 4
 ---
-Approved by the Director, 2026-10-13.
+**Prototype:** approved by the Director on 2026-10-13 as a starting point to build on. It changes as studies use it.
 
 A diagnose-then-fix study has two parts. It uses a diagnostic tool to find why a system wastes work or fails, then changes the system and checks that the change helped. It inherits every check in the [A/B experiments](../ab-experiments/) template, and adds these.
 

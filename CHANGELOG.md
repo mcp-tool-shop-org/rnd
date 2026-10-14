@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.30] - 2026-10-13
+
+- local-agent-relay design v0 (prototype, Director-approved); diagnose-then-fix page marked prototype
+- Added experiment `agent-ab-harness`
+- Added experiment `local-agent-relay`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.8.0.29] - 2026-10-13
 
 - handbook: diagnose-then-fix study template (Director-approved)

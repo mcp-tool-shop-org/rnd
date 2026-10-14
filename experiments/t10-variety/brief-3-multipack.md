@@ -196,3 +196,13 @@ The Director wants more three-value packs, so `if_shape` goes ahead now, built b
 
 **Unchanged and confirmed:** the zero-`if` cap returns to 2 for three-value claims (amendment 2's 3 was the stopgap; if 2 doesn't fit, Seat A stops); the floors; set cells; no try cap and no dropped cells; two-`if` shapes chain and shared consequent, with shared antecedent and disjoint added, any of which Argon may merge or drop with reasons; tuning on seeds 1–60; fresh locked seeds 81–100 after a named freeze, with 61–80 kept in the record as a regression file; the normal CI job at 10 minutes or less with the dispatch reproducing the record; the hash list closed under imports. Attribution (claim three's top repeat falling and leaving a zero-`if` cell) is reported, not claimed.
 
+## Amendment 4, 2026-10-14 (R&D, on Seat A's stop in the `if_shape` build)
+
+**The stop.** At the freeze `4c3f75e`, the claim strata clear every floor on fresh locked seeds 81–100 (claim three 120/120, top 1, zero-`if` demand 0, against the baseline's 108/120, top 4), and the cap of 2 holds. Set three is 118/119: `cups` at seed 84 on set cell 4|<=|3|1 fails `MAX_TRIES` (400) and builds on try 435. The baseline `787ccf8` fails the same build, so the defect predates this round; #49's record held on 1–20 and 61–80 only because that cell's visits there built in 45–397 tries.
+
+**The cause.** `t10_cell_capacity.py` pooled two- and three-value packs into one weight per set cell. That cell's distinct count of 8 comes mostly from the two-value packs, where it builds in 7–10 tries; its three-value capacity is 2. The inflated weight put `cups` on it in every file. Brief 3 §5.1 said capacity is measured for each cell in each three-value stratum; one pooled weight was a drift from the brief.
+
+**Ruling: option A.** Split the capacity weights by value-count stratum; re-probe; a new named freeze; the verdict on fresh locked seeds 101–120 with `787ccf8` as the baseline. The record covers 1–20, 61–80, 81–100 and 101–120, every entry built within 400 tries, every file clearing every floor per stratum; 81–100 stays as a regression file and its claim result is a note, not the verdict, because the allocation changed after those seeds were seen. No floor, cell table or try count changes.
+
+**Not option B** (a probe that must pass on several seeds or across every pack of the stratum): it drops cells from the table, which the T10 rules forbid for the same reason they forbid a try cap. Either changes which puzzles get built.
+

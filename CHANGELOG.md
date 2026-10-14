@@ -11,6 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.4] - 2026-10-14
+
+- T10 brief 3 amendment 4: if_shape stop; capacity weights split by stratum; fresh locked 101-120
+- Updated experiment `advocate-dataset`
+- Added experiment `agent-ab-harness`
+- Added experiment `nemo-relay-trial`
+- Updated experiment `t10-variety`
+
 ## [1.1.8.2.3] - 2026-10-14
 
 - advocate-dataset: Argon round 1 folded in (fact ledger, canonical block, independent negatives, isomorphic synthesis, local writers), R&D's three additions, the disposition record

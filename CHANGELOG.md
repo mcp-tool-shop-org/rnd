@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.20] - 2026-10-13
+
+- atlas-mcp-utility shakedown results: Haiku 12/12, nemotron-131k 11/12; arm B never had Atlas in its task turn
+- Updated experiment `atlas-mcp-utility`
+
 ## [1.1.8.0.19] - 2026-10-13
 
 - atlas-mcp-utility amendment 11: Haiku partners the local model, nemotron at a pinned 131k context, refused out-of-set calls stop nothing

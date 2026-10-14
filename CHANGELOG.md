@@ -11,6 +11,18 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.27] - 2026-10-13
+
+- agent-ab-harness: the harness becomes a reusable instrument; A/B experiment design template in the handbook
+- Updated `2026-10-13-atlas-testing-os-rnd-buildup`: Atlas, testing-os, housekeeping and rnd — the build-up program
+- Updated `2026-10-13-docker-sandboxes-on-the-rig-from-signup-to-a-pinned-pilot-wo`: Docker Sandboxes on the rig: from signup to a pinned pilot workspace
+- Updated `2026-10-13-multi-repository-atlas-research-grounding-for-the-build-up`: Multi-repository Atlas: research grounding for the build-up
+- Updated `2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ`: NVIDIA NeMo Relay: tracing agent harnesses, Claude Code included
+- Added `agent-ab-harness`: agent-ab-harness — paired A/B runs of a coding agent in a sandbox
+- Updated `atlas`: atlas — a repository's map, checked in CI and served to agents
+- Added experiment `agent-ab-harness`
+- Updated experiment `atlas-mcp-utility`
+
 ## [1.1.8.0.26] - 2026-10-13
 
 - atlas-mcp-utility harness fixes: token totals, task wall time, write detection, process cleanup, grading

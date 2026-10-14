@@ -1,4 +1,4 @@
-"""The atlas-mcp-utility harness's own logic (experiments/atlas-mcp-utility/run.py).
+"""The agent A/B harness's own logic (experiments/agent-ab-harness/run.py).
 
 What the harness decides without the CLI or the network: whether the pins
 hold, whether the work directory is readable, the run order, how a run's
@@ -7,7 +7,7 @@ run's start matches its arm, whether a hook ran, whether a probe leaked or
 was carried out at all, when a plan limit stops the run, how a run's end
 becomes its outcome, where Atlas would cache, and the flip rate. The CLI's
 real behaviour is proven by the probes the spec records before the pilot,
-not here; the init events under fixtures/atlas_mcp_utility are its real
+not here; the init events under fixtures/agent_ab_harness are its real
 starts, captured on 2026-10-13, and its shakedown-2/ holds whole recorded
 runs that the checks replay with no CLI (amendment 10).
 """
@@ -20,9 +20,9 @@ import unittest.mock
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-HERE = ROOT / "experiments" / "atlas-mcp-utility"
+HERE = ROOT / "experiments" / "agent-ab-harness"
 
-spec = importlib.util.spec_from_file_location("atlas_mcp_utility_run", HERE / "run.py")
+spec = importlib.util.spec_from_file_location("agent_ab_harness_run", HERE / "run.py")
 run = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(run)
 
@@ -110,7 +110,7 @@ class Counting(unittest.TestCase):
         self.assertEqual(stream.result()["result"], "{\"file\": \"x\"}")
 
 
-FIXTURES = ROOT / "tests" / "fixtures" / "atlas_mcp_utility"
+FIXTURES = ROOT / "tests" / "fixtures" / "agent_ab_harness"
 
 
 def init_event(name):

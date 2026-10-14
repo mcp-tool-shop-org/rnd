@@ -8,7 +8,7 @@ fields: [studio-tooling]
 tags: [atlas, multi-repo, study-swarm, mcp]
 ---
 
-> **Note (2026-10-13):** the atlas-mcp-utility experiment this entry refers to was withdrawn as badly designed. Only its harness remains, and it is unvalidated. No result from that experiment should be cited.
+> **Note (2026-10-13):** the atlas-mcp-utility experiment this entry refers to was withdrawn as badly designed. No result from it should be cited. Its harness is now the reusable [[agent-ab-harness]] instrument.
 
 ## Summary
 

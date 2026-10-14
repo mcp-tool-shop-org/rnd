@@ -1,4 +1,4 @@
-"""The atlas-mcp-utility grader, pinned before any run (experiments/atlas-mcp-utility).
+"""The agent A/B harness grader, pinned before any run (experiments/agent-ab-harness).
 
 Every task's example answer grades correct, a perturbed one grades wrong,
 and every free-text check has a scattershot answer that grades wrong, so a
@@ -11,7 +11,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-HERE = ROOT / "experiments" / "atlas-mcp-utility"
+HERE = ROOT / "experiments" / "agent-ab-harness"
 
 
 def _load(name, path):
@@ -21,7 +21,7 @@ def _load(name, path):
     return mod
 
 
-grade = _load("atlas_mcp_utility_grade", HERE / "grade.py")
+grade = _load("agent_ab_harness_grade", HERE / "grade.py")
 TASKS = json.loads((HERE / "tasks.json").read_text(encoding="utf-8"))
 
 

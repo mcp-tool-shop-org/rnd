@@ -11,6 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.1.2] - 2026-10-14
+
+- interlock-relay stage 0 on fakes: H4a and H4b hold; amendments A1-A7. T10 brief 3 (multi-pack variety)
+- Added experiment `agent-ab-harness`
+- Updated experiment `interlock-relay`
+- Added experiment `nemo-relay-trial`
+- Added experiment `t10-variety`
+
 ## [1.1.8.1.1] - 2026-10-14
 
 - newsletter issue 6: Atlas and testing-os, the library's collector, interlock 0.1.0, and what a T10 claim can test

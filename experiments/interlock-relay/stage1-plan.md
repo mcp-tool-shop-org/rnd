@@ -56,8 +56,11 @@ From E5's committed receipts (Ollama 0.35.1, Q4_K_M, f16 KV cache, flash attenti
   - So the driver reads the card once a second during every step. Over 30,500 MiB it writes the step's stop
     file, the run's own watcher ends it cleanly, and the driver stops the whole run.
   - Each step's VRAM peak is recorded.
-- **Idle baseline before every step:** at or under 2,400 MiB. Before each step the driver unloads the card and
+- **Idle baseline:** the desktop alone uses about 2.8 GB on this rig, so the first preflight allows at most
+  3,500 MiB. Every later step must be back within 512 MiB of the first reading: the driver unloads the card and
   waits up to 90 s for it to settle.
+- **Time:** the driver enforces the grant's 90-minute cap. No step starts after it, and a running step is stopped
+  at it through its stop file.
 
 ## Preflight (every item refuses before any model call)
 

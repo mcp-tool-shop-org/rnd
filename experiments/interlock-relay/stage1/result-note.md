@@ -186,3 +186,5 @@ The Director chose (b), debug only, recorded as design amendment v3.2 ([design.m
 - The receipts stay as the record.
 - Enforcing "debug only" in the table is one of the brief's items.
 
+**The build round closed the same day.** Argon's build was applied with six recorded departures, then reviewed by Argon on the branch and approved as is. The record, with the verdict and the disposition: [../argon-code-review-v32.md](../argon-code-review-v32.md). Interlock `relay-stage0` at `ca4aa8e` goes to the Publisher for merge.
+

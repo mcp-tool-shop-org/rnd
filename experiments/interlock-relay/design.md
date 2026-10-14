@@ -251,3 +251,6 @@ Under H4: if H4a holds but H4b fails, Relay is rejected in stage 0 with no devic
     - "debug only" is enforced, so no traced run's rows reach the routing table;
     - a deterministic H1 test runs against a fake Ollama.
   - **No more 5090 or NPU time for Relay. Stage 2 is cancelled.**
+- **The v3.2 build round, 2026-10-14, closed by the Director:** Argon's build (written against excerpts), applied by R&D with six recorded departures, reviewed by Argon on the branch: **approved as is**, departures kept. Interlock `relay-stage0` at `ca4aa8e`: `a43cc31` the interpreter preflight, `64d0801` the five items, `ca4aa8e` the review's three optional items. 790 tests, coverage 93.31%. Record: [argon-code-review-v32.md](argon-code-review-v32.md).
+  - **The Director accepts the requirement-3 note, his call:** "`--trace off` byte-for-byte unchanged" holds for every speed field and route, and for every untraced run off the 5090. On untraced 5090 and companion runs the artifacts shift: call ids move by one because the card guard's request is now counted, and a companion's unload sits in its slot's call ids and counts under the arm. That is the price of counting every request. No speed field or route changes.
+  - No Argon re-check of `ca4aa8e`. The Publisher takes the branch from here: identity scan, push, PR, CI, merge.

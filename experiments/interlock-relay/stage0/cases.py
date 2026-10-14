@@ -181,7 +181,8 @@ def safety(out: Path) -> dict:
     needles = {"host": socket.gethostname(), "user": os.environ.get("USERNAME") or os.environ.get("USER") or "",
                "home": str(Path.home())}
     for line in text.splitlines():
-        json.loads(line)  # every line parses
+        if line.strip():  # the join puts an empty line between files
+            json.loads(line)  # every line parses
     return {"canary": text.count(CANARY), **{k: (v.lower() in text.lower()) if v else None for k, v in needles.items()}}
 
 

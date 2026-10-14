@@ -119,5 +119,24 @@ class H1H3(unittest.TestCase):
             self.assertTrue(result["checks"]["no_host"])
 
 
+class Whole(unittest.TestCase):
+    def test_a_stop_run_that_was_not_stopped_does_not_hold_and_missing_steps_are_marked(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "logs").mkdir()
+            (root / "logs" / "p.driver.json").write_text(json.dumps(
+                {"needles": {}, "check_passed": True, "steps": {"stop": {"stopped": False, "exit": 0}}}),
+                encoding="utf-8")
+            events = [{"category": "agent", "scope_category": "start"}, {"category": "agent", "scope_category": "end"}]
+            (root / "logs" / "p-stop.atof.jsonl").write_text("\n".join(json.dumps(e) for e in events) + "\n",
+                                                            encoding="utf-8")
+            result = an.analyze(root, "p")
+            self.assertFalse(result["h3"]["stop"]["checks"]["stopped_mid_run"])
+            self.assertFalse(result["h3"]["stop"]["holds"])
+            self.assertEqual(result["h2"]["decode"]["reason"], "not run")
+            self.assertEqual(result["h3"]["long"]["reason"], "not run")
+            self.assertFalse(result["stage1_holds"])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.1.6] - 2026-10-14
+
+- interlock-relay stage 1: Argon round 1 folded in, analysis re-frozen (cbaed82), round 2 brief
+- Added experiment `agent-ab-harness`
+- Updated experiment `interlock-relay`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.8.1.5] - 2026-10-14
 
 - interlock-relay stage 1: the harness analysis frozen (43643bc) and the Argon review brief

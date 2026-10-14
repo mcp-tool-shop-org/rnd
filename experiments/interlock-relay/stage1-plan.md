@@ -37,7 +37,7 @@ R&D recommends an Argon review of the harness and the frozen analysis before the
 | 1. Short decode | qwen3:8b, warm, 256-token prompt, 128 tokens (E4's shape: about 0.45 s a call) | 30 triples, plus 3 warm-up calls | ~2 min |
 | 2. Long prompt (fill-card-sized prefill) | qwen3:8b, about 32k-token prompt. Each call gets a distinct prefix so Ollama's prompt cache can't skip the prefill. About 4 s a call at E5's 8,700 tokens/s | 30 triples (the floor is 15, sized by the power rule) | ~8 min |
 | 3. Unload and companion | one explicit unload-and-reload cycle and one companion load (llama3.1:8b at a 4,096 context), each in a traced and an untraced slot | about 12 | ~4 min |
-| 4. Stop file | one short traced run stopped through `<run_id>.stop` | — | ~2 min |
+| 4. Stop file | the decode spec, stopped through `<run_id>.stop` once its trace holds 10 calls; passes only on exit 77 | — | ~1 min |
 | 5. Process import check | 15 process triples, each with a process start, 1 warm-up and 3 calls | 180 calls | ~6 min |
 
 - **Measured time:** about 22 minutes.
@@ -47,12 +47,17 @@ R&D recommends an Argon review of the harness and the frozen analysis before the
 ## Peak VRAM
 
 From E5's committed receipts (Ollama 0.35.1, Q4_K_M, f16 KV cache, flash attention):
-- **qwen3:8b** at its full 40,960 context: **13,587 MiB** peak. Steps 1, 2, 4 and 5 stay at or under this.
-- **Step 3's companion** adds llama3.1:8b at a 4,096 context next to qwen3:8b.
-  - The estimate is under 21 GiB in total. That's unmeasured: E5 measured llama3.1:8b only at 53,248 tokens (14,247 MiB).
-  - The run's own guard aborts at 30,500 MiB, as in E5.
-  - If the companion's first load measures over 21 GiB, step 3 drops the companion and keeps the unload-and-reload cycle alone.
-- **Idle baseline before the run:** at or under about 2.2 GiB (E5 saw 2,008–2,169 MiB).
+- **The long-prompt step is the peak:** qwen3:8b at its full 40,960 context is **13,587 MiB**.
+- **The decode, unload, stop and import steps** use Ollama's default context, so they sit well below that.
+- **The companion step** loads llama3.1:8b at a 4,096 context next to qwen3:8b, both at small contexts. It's
+  unmeasured as a pair, but expected under the long step's peak.
+- **The VRAM watch** (corrected after Argon's stage 1 review):
+  - Interleaved runs have no VRAM ceiling of their own; the 30,500 MiB abort is fill-card's.
+  - So the driver reads the card once a second during every step. Over 30,500 MiB it writes the step's stop
+    file, the run's own watcher ends it cleanly, and the driver stops the whole run.
+  - Each step's VRAM peak is recorded.
+- **Idle baseline before every step:** at or under 2,400 MiB. Before each step the driver unloads the card and
+  waits up to 90 s for it to settle.
 
 ## Preflight (every item refuses before any model call)
 

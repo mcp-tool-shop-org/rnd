@@ -47,13 +47,16 @@ Argon found **no blocking issues: stage 1 can run.**
   - the import check stops between children.
 - Tests: no step after the cap, and a step stopped at its limit.
 
-**The preflight, corrected against the live rig** (read-only readings, no model call):
+**Post-Argon preflight corrections** (after round 2, before any run; read-only readings of the live rig, no model call). They make the checks match the rig and are part of the run record:
 - **Listeners:** a psutil count of listeners on 11434 read 0 while Ollama answered there. Windows build 26340 reports a listening socket as state 0, and interlock's supervisor already works around that. The driver now uses interlock's own `listening_pids`, which finds Ollama's listener.
 - **GPU processes:** on Windows (WDDM), `nvidia-smi` lists every desktop app that draws on the GPU (27 of them: the shell, browsers, the Claude app), with no memory figures. "No process on the GPU" could never hold.
   - The check now refuses on a **compute workload**: a process whose name says it runs models (python, Ollama's runner, llama.cpp, ComfyUI, vLLM, LM Studio and similar). An empty `/api/ps` still catches a loaded model.
 - **Idle VRAM:** the desktop alone read 2,751–2,811 MiB, over the plan's 2,400.
   - The first preflight allows at most 3,500 MiB, which any loaded model would exceed.
   - Later steps must come back within 512 MiB of the first reading.
+- **A quiet CPU** (the Publisher's hold): H2 measures client-side time, so a busy CPU adds noise right where
+  equivalence is tested, and the ABA order controls drift but not this. Before every step the system CPU,
+  averaged over 5 s, must be at most 25%. That's interlock `6ed29a2`; it read 8% with the rig quiet.
 - **The whole preflight now passes read-only on the rig at interlock `bfc484a`:** heartbeat 2 s, nemo-relay 0.10.1, Ollama 0.35.1, one listener, no compute workload, idle 2,811 MiB, logs/ ignored, a clean tree.
 
 The analysis is unchanged since its freeze at rnd `cbaed82`.

@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.1.11] - 2026-10-14
+
+- NeMo Relay brief measured; newsletter issue 7: the interlock-relay experiment end to end
+- Added experiment `agent-ab-harness`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.8.1.10] - 2026-10-14
 
 - interlock-relay v3.2 build round: Argon's build applied, reviewed, approved; closed by the Director

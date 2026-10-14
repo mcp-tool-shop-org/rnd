@@ -6,8 +6,8 @@ kind: instrument
 relevance: watch
 fields: [agent-tooling, studio-tooling]
 tags: [instrument, tracing, nemo-relay]
-instrument_status: planned
-invoke: "Not installed yet. Planned trial: `nemo-relay claude …` (transparent mode, a per-run gateway on 127.0.0.1) or `nemo-relay codex|pi`; Python/Node/Rust/Go APIs for our own harnesses (pip nemo-relay, nemo-relay-cli-bin). Never the persistent install, which rewrites Claude Code's settings for every session."
+instrument_status: shipped
+invoke: "Installed in the Docker sandbox `atlas-pilot` at /opt/nemo-relay (0.10.1, by uv). Run as the run user: `nemo-relay run --agent claude -- -p … < prompt` with `~/.config/nemo-relay/config.toml` (upstream, the pinned CLI path) and `plugins.toml` (observability v4, ATOF and ATIF file sinks, OpenTelemetry off). Transparent mode only; never `nemo-relay install`, which rewrites Claude Code's settings for every session. Python/Node/Rust/Go APIs for our own harnesses (pip nemo-relay)."
 when: "A run passed or failed and the question is how it got there: which model and tool calls it made, where it retried, recovered, gave up or wasted work, and whether a harness change actually reduced that."
 where: "github.com/NVIDIA/NeMo-Relay (Apache-2.0) · docs.nvidia.com/nemo/relay · skills mirrored in catalogs/nvidia-skills (family nemo-relay)"
 ---
@@ -37,9 +37,9 @@ The CLI wraps Claude Code, Codex and pi directly. Hermes and OpenClaw have their
 
 ## Status and conditions (R&D, 2026-10-13)
 
-Planned, not installed. The Director approved adding it to the toolset.
+Installed in the sandbox on 2026-10-13, and the setup conditions below were checked there: see [[2026-10-13-nemo-relay-first-trial-in-the-sandbox]]. The Director approved adding it to the toolset.
 
-**First trial:** a small pre-registered one, after the atlas-mcp-utility pilot. Run it on harnesses where wasted work has already cost us:
+**First trial (next):** a small pre-registered one, designed from a template. Run it on harnesses where wasted work has already cost us:
 - E5's prefix-fit search, which once made thousands of count calls;
 - a dogfood-swarm wave;
 - the role-set generators.

@@ -25,7 +25,7 @@ Each sha256 is of the file as committed, with LF line endings (`.gitattributes`)
 |---|---|
 | `tasks.json` | `eb2ba43c88c989022ecf2fe90d950b150e144a3f916540fa68c1d46559acca1a` (amendment 3) |
 | `prompt.md` | `a32c1c8f30e88f7264e6efce1d1c608339368b2e44691870206b3105e4e6226d` |
-| `allow-list.json` | `5ff2761451034917592411206c84153c68fa50e8278c20900fc3230c47511338` (amendment 7) |
+| `allow-list.json` | `0565bc92a969a1225ac2f2442da09de3d3b3a71fa77834267d4960b5e7468836` (amendment 13) |
 | `grade.py` | `f6d09f5144b42fc1c86f632015de33c84d0bfb9dd3faf2f192cb47d24d864455` (amendment 1) |
 | `debrief.md` | `ed73ef0864f6b603f32ab3f4a91874c465d537779ff1450094bc82690d312f8c` (amendment 3) |
 | Claude Code CLI | 2.1.197 |
@@ -434,6 +434,22 @@ Both legs ran the same six pairs (RC03 ×2, CF09, CF02, CF04 ×2) on CLI 2.1.197
 
 Nothing pinned changes.
 
+### Amendment 13, 2026-10-13: arm B's prompt names the Atlas tools
+
+**Round 3 (21:05–21:21 EDT, on the hold of amendment 12).** Probe 4 passed (82,000 tokens, 0 leaks), and every arm B run started with Atlas connected and its tools offered.
+- **Haiku:** 11 of 12 correct, flips 0 of 4, $2.20 at API rates. It made 0 Atlas calls in all six arm B runs.
+- **nemotron-131k:** 9 of 12 correct, flips 2 of 4, and 1 Atlas call in six arm B runs.
+- Both models' misses on CF09 were in arm B.
+
+**The finding: a tool on offer is not a tool in use.** Unprompted, neither model reaches for Atlas on these tasks. That is recorded as the shakedown's own result.
+
+**R&D's ruling.**
+- The decision this experiment feeds is whether agent kickoffs include `atlas mcp`. A kickoff that includes it says so, so arm B now runs the way such a kickoff would.
+- Arm B's prompt ends with one neutral line, `prompt_note` in `allow-list.json`: "This session has the atlas MCP tools. They answer questions about this repository from its committed Atlas map: its parts, its workflows, what a change reaches and what changed."
+- The line doesn't tell the agent to use the tools, and it gives no hint about any task. Arm A's note is empty, because a kickoff without the sidecar wouldn't mention it.
+- Each run already records `atlas_calls`. Uptake, the share of arm B runs with at least one Atlas call, is reported beside correctness and tokens. It is not part of the decision rule.
+- `allow-list.json` is re-pinned for this. "What this does not measure" changes accordingly: arm B is now told the tools exist, but never told to use them.
+
 ## Design
 
 **Pairs.** Each task runs twice:
@@ -594,7 +610,7 @@ The token ceiling (stop rule 3) is set at the volume $150 would buy at the rates
 - Agents that write code. Every task is a read-and-answer question, because fixes would need a hidden test per task, which this bank does not have.
 - Whether a person is helped by the page.
 - Models other than Sonnet 5.5.
-- Kickoff text that tells the agent to use the sidecar. Arm B only makes it available.
+- Kickoff text that tells the agent to use the sidecar. Arm B is told the tools exist (amendment 13), never to use them.
 
 ## Files
 

@@ -1281,6 +1281,13 @@ def probe(args, cli, allow, tasks):
     return 0 if report["passed"] else 1
 
 
+def arm_prompt(prompt, allow, arm):
+    """The task's prompt as the arm gets it: arm B's ends with its note naming
+    the Atlas tools, the way a kickoff that includes them would (amendment 13)."""
+    note = allow["arms"][arm].get("prompt_note") or ""
+    return prompt.rstrip("\n") + "\n\n" + note + "\n" if note else prompt
+
+
 def results_dir(label, route):
     """Where a pilot's records go: the local route's apart (amendment 10)."""
     return HERE / "results" / (label if route == "plan" else f"{label}-{route}")
@@ -1311,7 +1318,7 @@ def pilot(args, cli, allow, tasks):
             for attempt in (1, 2):
                 attempts += 1
                 record, stream = run_once(cli, f"{task['id']}-{arm}{pair['rep']}", arm, template, args.work, args.tools, allow,
-                                          [prompt, debrief], budget, run_as=args.run_as_user)
+                                          [arm_prompt(prompt, allow, arm), debrief], budget, run_as=args.run_as_user)
                 record.update({"task": task["id"], "rep": pair["rep"], "attempt": attempt})
                 budget["used"] += record["spent"]
                 # The Bash forms that ran are in the record's isolation already

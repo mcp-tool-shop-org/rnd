@@ -412,11 +412,12 @@ Both legs ran the same six pairs (RC03 ×2, CF09, CF02, CF04 ×2) on CLI 2.1.197
 
 **What it says.** On these four read-and-answer tasks, the local model at 131k context nearly matches Haiku. It is faster per run and costs no plan use, but it makes several times as many tool calls. At 32k context it got 1 of 4 RC03 runs right (local-1), so the context setting decides it. Four distinct tasks is far too few to rank the two; this is a shakedown, not a measurement.
 
-**The finding that matters more: arm B never had Atlas during its task.** Every arm B run in every leg made 0 Atlas calls: Sonnet, nemotron and Haiku alike.
-- The streams show why. The task turn's start has `atlas` pending and no Atlas tools. The Atlas tools first appear in the debrief turn's start.
-- So on the pinned CLI 2.1.197, the server connects too late for the task, and arm B ran as arm A. The only difference was B's larger prompt, which made it cost more (Haiku RC03: $0.13 to $0.28 against $0.10 to $0.11).
-- The probe's arm B was asked by name to call `atlas_overview`, and it did. A task prompt doesn't name the tool, so the model never reaches for one it wasn't offered at the start.
-- **No arm comparison is possible until Atlas's tools are in the task turn's start.** The pin amendment (CLI 2.1.296 or later) must show that in a re-captured init before any graded run. If it doesn't, the harness must wait for the connection before sending the task.
+**The finding that matters more: no arm B run used Atlas.** Every arm B run in every leg made 0 Atlas calls: Sonnet, nemotron and Haiku alike. There are two causes. (Corrected the same evening: the first version of this note said no leg had the tools at the start.)
+- **On the plan route (Sonnet, Haiku), Atlas wasn't there at the start.** The task turn's start shows `atlas` pending and no Atlas tools; they first appear in the debrief turn's start. So arm B ran as arm A, plus a larger prompt, and cost more for it (Haiku RC03: $0.13 to $0.28 against $0.10 to $0.11).
+- **On the local route, Atlas was there and went unused.** All six local-2 arm B runs started with `atlas` connected and its tools offered. Nemotron never called one; it read the files instead.
+- **The pending start belongs to the plan sign-in path, not to the CLI version.** Arm B's start was captured in the sandbox against a closed port, as both root and `amu`, with the harness's MCP configuration. CLI 2.1.197 and the image's 2.1.280 both start with `atlas` connected and 7 Atlas tools, with or without a 15-second wait before the task. The plan route differs from those captures in its sign-in: the placeholder credentials and the proxy.
+- **Before any graded run:** one short start on the plan route must show the Atlas tools in the task turn's start. If they're missing, the harness must hold the task until Atlas has connected. That start costs a few cents of plan, so it waits for the Director's go.
+- **A model that is offered Atlas and ignores it is itself a result.** The prompt only makes Atlas available (README, "What this does not measure"). The local leg's zero calls are recorded as that, not as a defect.
 
 ## Design
 

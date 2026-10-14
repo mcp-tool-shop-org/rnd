@@ -174,3 +174,31 @@ class NormalForm(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class GraderFixes(unittest.TestCase):
+    def test_a_workflow_file_matches_by_its_name(self):
+        rule = {"kind": "path", "field": "file", "expect": ".github/workflows/ci.yml"}
+        for given in ("ci.yml", ".github/workflows/ci.yml", "./.github/workflows/ci.yml"):
+            with self.subTest(given=given):
+                self.assertTrue(grade.check(rule, {"file": given})[0])
+        self.assertFalse(grade.check(rule, {"file": "pages.yml"})[0])
+        self.assertFalse(grade.check({"kind": "path", "field": "file", "expect": "src/cli.ts"}, {"file": "cli.ts"})[0])
+
+    def test_a_line_number_in_any_plain_form(self):
+        rule = {"kind": "line", "field": "line", "expect": 80, "tolerance": 1}
+        for given in (80, 80.0, "80", "L80", "line 81"):
+            with self.subTest(given=given):
+                self.assertTrue(grade.check(rule, {"line": given})[0])
+        for given in (True, 80.5, "eighty", 83):
+            with self.subTest(given=given):
+                self.assertFalse(grade.check(rule, {"line": given})[0])
+
+    def test_path_sets_report_precision_and_recall_with_normalised_paths(self):
+        task = {"id": "T", "grade": {"checks": [{"kind": "path_set", "field": "files", "expect": ["src/a.ts", "src/b.ts"]}]}}
+        graded = grade.grade(task, '{"files": ["./src/a.ts", "src\\\\b.ts", "src/c.ts"]}')
+        self.assertEqual(graded["secondary"], [{"field": "files", "recall": 1.0, "precision": 2 / 3}])
+
+    def test_an_empty_key_gives_no_recall_rather_than_a_crash(self):
+        rule = {"kind": "set_recall_precision", "field": "files", "expect": []}
+        self.assertIsNone(grade.secondary(rule, {"files": ["a"]})["recall"])

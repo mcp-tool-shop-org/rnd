@@ -7,8 +7,9 @@ write-ups, amendments and results have been removed from this file. No result fr
 
 **What's left is the harness: `run.py` and its inputs.** It runs Claude Code agents in a Docker sandbox, two arms
 per task, and records each run. It ran end to end in a few shakedown rounds, but that shows only that it runs. It
-does not show that it measures correctly, and it was designed around the same flawed experiment. Treat it as
-untrusted code. Any future experiment reviews it line by line before relying on it.
+does not show that it measures correctly, and it was designed around the same flawed experiment. It was revised on 2026-10-13
+(token totals, task wall time, write detection, process cleanup, grading), but no run has validated it yet.
+Any future experiment validates it before relying on it.
 
 The pins below are kept only because `run.py` refuses to start without them.
 
@@ -19,7 +20,7 @@ Each sha256 is of the file as committed, with LF line endings (`.gitattributes`)
 | `tasks.json` | `eb2ba43c88c989022ecf2fe90d950b150e144a3f916540fa68c1d46559acca1a` (amendment 3) |
 | `prompt.md` | `a32c1c8f30e88f7264e6efce1d1c608339368b2e44691870206b3105e4e6226d` |
 | `allow-list.json` | `975d32721641482ec7681937cb28753c6d9a42879594304b6f18e8951fa51dd5` (amendment 13) |
-| `grade.py` | `f6d09f5144b42fc1c86f632015de33c84d0bfb9dd3faf2f192cb47d24d864455` (amendment 1) |
+| `grade.py` | `0d63c6c7e200a4c239a3d8a873d1a8a6f05434033716ee8600745b6cdff947e7` (amendment 1) |
 | `debrief.md` | `ed73ef0864f6b603f32ab3f4a91874c465d537779ff1450094bc82690d312f8c` (amendment 3) |
 | Claude Code CLI | 2.1.197 |
 | Model | `claude-sonnet-5-5`, at medium effort (`--effort medium`, amendment 7) |

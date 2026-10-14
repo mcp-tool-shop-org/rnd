@@ -79,7 +79,12 @@ def check(rule, answer):
         return False, f"{rule['field']} is missing"
     expect = rule.get("expect")
     if kind == "path":
-        ok = isinstance(value, str) and normal_path(value) == normal_path(expect)
+        # A workflow file is the same answer by its file name alone, as for
+        # the workflow kinds: the prompts ask to name the workflow file.
+        if str(expect).startswith(".github/workflows/"):
+            ok = isinstance(value, str) and workflow_name(value) == workflow_name(expect)
+        else:
+            ok = isinstance(value, str) and normal_path(value) == normal_path(expect)
     elif kind == "workflow":
         ok = isinstance(value, str) and workflow_name(value) == workflow_name(expect)
     elif kind == "path_set":
@@ -96,7 +101,7 @@ def check(rule, answer):
     elif kind == "bool":
         ok = value is expect
     elif kind == "line":
-        number = value if isinstance(value, int) and not isinstance(value, bool) else (int(value) if isinstance(value, str) and value.strip().isdigit() else None)
+        number = _line_number(value)
         ok = number is not None and abs(number - expect) <= rule.get("tolerance", 0)
     elif kind == "node_version":
         ok = isinstance(value, (str, int)) and not isinstance(value, bool) and _node(value) == _node(expect)
@@ -105,6 +110,21 @@ def check(rule, answer):
     else:
         raise ValueError(f"unknown check kind {kind}")
     return ok, "" if ok else f"{rule['field']} does not match ({kind})"
+
+
+def _line_number(value):
+    """A line number given as an int, a whole float (80.0), or a string such as
+    "80", "L80" or "line 80"; None otherwise."""
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, int):
+        return value
+    if isinstance(value, float) and value.is_integer():
+        return int(value)
+    if isinstance(value, str):
+        text = re.sub(r"^\s*(?:line\s*|l)", "", value.strip(), flags=re.IGNORECASE)
+        return int(text) if text.isdigit() else None
+    return None
 
 
 def _node(value):
@@ -123,12 +143,25 @@ def _text_ok(rule, value):
 def secondary(rule, answer):
     value = field_value(answer, rule["field"])
     if rule["kind"] == "set_recall_precision":
-        given = set(value) if _strings(value) else set()
-        expect = set(rule["expect"])
+        # The same path normalisation the primary check uses.
+        given = {normal_path(v) for v in value} if _strings(value) else set()
+        expect = {normal_path(v) for v in rule["expect"]}
         hit = len(given & expect)
-        return {"field": rule["field"], "recall": hit / len(expect), "precision": hit / len(given) if given else 0.0}
+        return {"field": rule["field"], "recall": hit / len(expect) if expect else None,
+                "precision": hit / len(given) if given else 0.0}
     ok, _ = check(rule, answer) if value is not None else (False, "")
     return {"field": rule["field"], "match": ok}
+
+
+def _secondary_rules(task):
+    """The task's secondary rules, plus precision and recall for every set of
+    paths it grades exactly, which those tasks' methods promise."""
+    rules = list(task["grade"].get("secondary", []))
+    named = {r["field"] for r in rules if r["kind"] == "set_recall_precision"}
+    for rule in task["grade"]["checks"]:
+        if rule["kind"] == "path_set" and rule["field"] not in named:
+            rules.append({"kind": "set_recall_precision", "field": rule["field"], "expect": rule["expect"]})
+    return rules
 
 
 def grade(task, text):
@@ -145,7 +178,7 @@ def grade(task, text):
         "correct": all(r["pass"] for r in results),
         "reason": "" if all(r["pass"] for r in results) else "; ".join(r["why"] for r in results if not r["pass"]),
         "checks": results,
-        "secondary": [secondary(rule, answer) for rule in task["grade"].get("secondary", [])],
+        "secondary": [secondary(rule, answer) for rule in _secondary_rules(task)],
     }
 
 

@@ -963,3 +963,154 @@ class Amendment13(unittest.TestCase):
         b = run.arm_prompt(prompt, self.allow, "B")
         self.assertTrue(b.startswith("Answer the question.\n\n"))
         self.assertIn("Answer with the atlas MCP tools", b)
+
+
+class Accounting(unittest.TestCase):
+    """A turn's tokens come from its result event: streamed events carry partial
+    output counts (CF09-A1, 2026-10-13: 129 streamed against 1,310 reported)."""
+
+    def test_the_task_turn_takes_the_results_totals(self):
+        stream = run.Stream()
+        for line in (FIXTURES / "shakedown-2" / "CF09-A1.jsonl").read_text(encoding="utf-8").splitlines():
+            stream.add(line)
+        self.assertEqual(stream.tokens["output_tokens"], 1310)
+        self.assertEqual(stream.tokens["cache_read_input_tokens"], 121807)
+        self.assertEqual(stream.debrief_tokens["output_tokens"], 891)
+
+    def test_mid_turn_estimate_keeps_the_largest_count_per_message(self):
+        stream = run.Stream()
+        stream.add(assistant("m1", {"output_tokens": 3, "input_tokens": 10}))
+        stream.add(assistant("m1", {"output_tokens": 40, "input_tokens": 10}))
+        self.assertEqual(stream.tokens["output_tokens"], 40)
+        self.assertEqual(stream.tokens["input_tokens"], 10)
+
+    def test_a_reply_with_no_id_is_counted_once_per_reply(self):
+        # A proxy that names no message: the events of one reply repeat its
+        # usage, and a tool result starts the next reply.
+        stream = run.Stream()
+        for _ in range(3):
+            stream.add(json.dumps({"type": "assistant", "message": {"usage": {"input_tokens": 5}, "content": []}}))
+        self.assertEqual(stream.tokens["input_tokens"], 5)
+        stream.add(tool_result("t1", "x"))
+        stream.add(json.dumps({"type": "assistant", "message": {"usage": {"input_tokens": 7}, "content": []}}))
+        self.assertEqual(stream.tokens["input_tokens"], 12)
+
+    def test_the_debriefs_cost_is_the_difference_of_running_totals(self):
+        self.assertEqual(run.debrief_cost({"total_cost_usd": 0.12}, {"total_cost_usd": 0.15}), 0.03)
+        self.assertIsNone(run.debrief_cost({"total_cost_usd": 0.12}, None))
+
+
+class CheckoutWrites(unittest.TestCase):
+    def test_a_write_into_git_or_an_ignored_file_is_seen(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / ".git").mkdir()
+            (root / ".git" / "config").write_text("a", encoding="utf-8")
+            (root / ".git" / "index").write_text("i", encoding="utf-8")
+            (root / "src.py").write_text("x", encoding="utf-8")
+            before = run.checkout_state(root)
+            (root / ".git" / "config").write_text("changed", encoding="utf-8")
+            (root / "node_modules").mkdir()
+            (root / "node_modules" / "x.js").write_text("y", encoding="utf-8")
+            (root / ".git" / "index").write_text("rewritten by a read", encoding="utf-8")
+            self.assertEqual(run.changed_files(before, run.checkout_state(root)), [".git/config", "node_modules/x.js"])
+
+    def test_no_run_user_processes_outlive_an_attempt_without_proc(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.assertEqual(run.kill_user_processes(1001, proc_root=str(Path(tmp) / "absent")), [])
+
+
+class Amendment14Detector(unittest.TestCase):
+    def test_an_escaped_quote_does_not_hide_a_redirect(self):
+        self.assertEqual(run.bash_violations('git log -1 --format="a\\"b" > /tmp/x'), [">"])
+
+    def test_an_escaped_quote_does_not_fake_a_redirect(self):
+        self.assertEqual(run.bash_violations('git log --grep="foo \\"bar\\" -> baz"'), [])
+
+    def test_process_substitution_counts(self):
+        self.assertEqual(run.bash_violations("diff <(git show HEAD:a) b"), ["<("])
+
+
+class ErrorWords(unittest.TestCase):
+    def test_the_turn_cap_is_never_a_limit_or_a_sign_in_failure(self):
+        cap = {"type": "result", "subtype": "error_max_turns", "is_error": True,
+               "errors": ["Reached maximum number of turns (40)"], "result": "hit the rate limit handler"}
+        self.assertEqual(run.outcome_of(None, cap, []), "turn_cap")
+
+    def test_only_the_clis_error_text_counts(self):
+        answer = {"type": "result", "subtype": "success", "is_error": True, "result": "API Error: 529 overloaded",
+                  "usage": {"note": "usage limit"}}
+        self.assertEqual(run.outcome_of(None, answer, []), "errored")
+        limit = {"type": "result", "subtype": "success", "is_error": True, "result": "Claude usage limit reached"}
+        self.assertEqual(run.outcome_of(None, limit, []), "plan_limit")
+
+
+class Retries(unittest.TestCase):
+    def test_a_retry_keeps_its_own_name_and_its_arm(self):
+        allow = run.for_route(json.loads((HERE / "allow-list.json").read_text(encoding="utf-8")), "plan")
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = Path(tmp) / "RC03-A1-attempt2.jsonl"
+            shutil.copy(FIXTURES / "shakedown-2" / "RC03-A1.jsonl", copy)
+            self.assertEqual(run.replay(copy, allow)["arm"], "A")
+
+    def test_a_probe_made_with_other_pins_does_not_cover_the_pilot(self):
+        allow = json.loads((HERE / "allow-list.json").read_text(encoding="utf-8"))
+        proved = run.probe_identity(allow)
+        self.assertEqual(proved, run.probe_identity(allow))
+        self.assertNotEqual(proved, run.probe_identity({**allow, "cli_version": "2.1.296"}))
+        self.assertEqual(set(proved["pins"]), set(run.PINNED_FILES))
+
+
+class SecondAudit(unittest.TestCase):
+    def test_a_write_to_an_exited_cli_does_not_crash_the_harness(self):
+        class Closed:
+            def write(self, text):
+                raise BrokenPipeError
+
+            def flush(self):
+                raise BrokenPipeError
+
+            def close(self):
+                raise BrokenPipeError
+
+        class Proc:
+            stdin = Closed()
+
+        run.send(Proc(), "a turn")
+        run.send(Proc(), None)
+
+    def test_a_symlink_made_in_the_checkout_is_seen(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "a.txt").write_text("a", encoding="utf-8")
+            before = run.checkout_state(root)
+            try:
+                (root / "link").symlink_to("/etc/passwd")
+            except (OSError, NotImplementedError):
+                self.skipTest("symlinks need privileges here")
+            self.assertEqual(run.changed_files(before, run.checkout_state(root)), ["link"])
+
+    def test_output_process_substitution_counts(self):
+        self.assertIn(">(", run.bash_violations('git log "x" | tee >(cat)'))
+
+    def test_an_ollama_name_without_its_tag_still_matches(self):
+        ps = {"models": [{"name": "nemotron-3.5-lightning-131k", "model": "nemotron-3.5-lightning-131k",
+                          "context_length": 131072}]}
+        self.assertEqual(run.loaded_context(ps), 131072)
+
+    def test_a_numbered_list_inside_an_answer_stays_in_its_item(self):
+        text = "1. fast\n2. clear\n3. I used:\n1. Read\n2. Grep\n4. sure\n5. none\n6. no"
+        items = run.debrief_items(text)
+        self.assertIn("1. Read", items["tools"])
+        self.assertEqual(items["confidence"], "sure")
+
+    def test_the_probe_covers_the_installed_atlas(self):
+        allow = json.loads((HERE / "allow-list.json").read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as tmp:
+            tools = Path(tmp)
+            package = run.atlas_cli(tools).parent / "package.json"
+            package.parent.mkdir(parents=True)
+            package.write_text('{"version": "1.26.0"}', encoding="utf-8")
+            first = run.probe_identity(allow, tools)
+            package.write_text('{"version": "1.26.0", "rebuilt": true}', encoding="utf-8")
+            self.assertNotEqual(first, run.probe_identity(allow, tools))

@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.1.4] - 2026-10-14
+
+- interlock-relay: Argon round 2 folded in, stage 0 complete; the stage 1 plan
+- Added experiment `agent-ab-harness`
+- Updated experiment `interlock-relay`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.8.1.3] - 2026-10-14
 
 - interlock-relay stage 0: Argon round 1 folded in (runs 3-5, three further defects fixed), round 1 and round 2 code-review briefs; T10 brief 3 amendments 1 and 2

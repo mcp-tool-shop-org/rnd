@@ -156,3 +156,34 @@ Argon (Gemini, run by hand from [the brief](../argon-code-review-stage0.md)) rev
 - Argon's round 2 review of this code;
 - the per-slot barrier (M3), which is stage 1 harness work;
 - the Director's go, and the Publisher's grant.
+
+## Argon round 2, 2026-10-14, and stage 0 complete
+
+Argon (run by hand from [the round 2 brief](../argon-code-review-stage0-round2.md)) found **no blocking issues: stage 0 can finish.**
+- **B2:** R&D's ruling was judged sound.
+- **B3:** the single live `RelaySink` was judged better than Argon's own round 1 suggestion.
+- Every round 1 finding is resolved, or accepted as deferred (I4, M3).
+- The three further defects R&D found were judged properly fixed.
+
+| # | Round 2 finding | Disposition |
+|---|---|---|
+| M-New-1 | `Tracer.start` can race the watcher's `Tracer.close`: a start logged with no end, or state changed after the close | **Adopted.** `Tracer` has its own closed flag, and every sink call happens under `Tracer._lock`, with the lock order tracer then sink. A call after the close is neither counted nor logged, and a second close does nothing. Tests: a late call after the close, and a close racing three calling threads, which leaves every logged start with its end |
+| M-New-2 | `release()` doesn't unwrap the Ollama transport, so a reused adapter counts into the previous run's closed tracer | **Adopted.** `release()` restores `adapter.transport` from `__wrapped__`. Test: one adapter through two runs, each counting its own call |
+
+**Run 6,** at interlock `95d6844`, with the evaluation frozen since `37db35d` ([run-6.json](results/run-6.json)):
+- Relay 5 of 5, the native log 5 of 5, the counter 1 of 5.
+- 1,130 bytes per call.
+- Added time per call: a 0.027 ms median and a 0.089 ms 99th percentile.
+- 0.024 ms over the native log.
+- The safety scan is clean.
+
+**The suites at `95d6844`:**
+- With the `relay` extra: 732 passed, 6 skipped, coverage 93.3% (`calltrace.py` 100%, `relay_sink.py` 91%).
+- Without it: 722 passed, 16 skipped, coverage 92.5%.
+- `ruff` is clean.
+
+**Stage 0 is complete.**
+- H4a and H4b hold, and H1 and H3 hold on fakes for the interleaved and fill-card paths.
+- E4b is excluded by amendment A8.
+- The interlock code is on the local branch `relay-stage0` at `95d6844`, not pushed.
+- Next is [the stage 1 plan](../stage1-plan.md): the stage 1 harness on fakes, then the Director's go and the Publisher's grant.

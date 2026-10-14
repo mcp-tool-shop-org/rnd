@@ -171,7 +171,6 @@ class Stream:
         # are only the running estimate the ceiling reads mid-turn; a turn's
         # result event replaces them with the CLI's own totals.
         self._usage = [{}]
-        self._unnamed = 0
 
     def add(self, line):
         self.raw.append(line)
@@ -187,9 +186,9 @@ class Stream:
         if event.get("type") == "assistant":
             key = message.get("id")
             if key is None:
-                # A proxy that names no message: count each event as its own.
-                self._unnamed += 1
-                key = ("unnamed", self._unnamed)
+                # A proxy that names no message: the events between two tool
+                # results belong to one reply, so they share one key.
+                key = ("unnamed", self.turn, len(self.results))
             usage = message.get("usage") or {}
             seen = self._usage[self.turn].setdefault(key, dict.fromkeys(self.FIELDS, 0))
             for field in self.FIELDS:
@@ -335,8 +334,10 @@ def num_ctx_of(show):
 
 def loaded_context(ps, model=LOCAL_MODEL):
     """The context the model was loaded with, from an Ollama /api/ps answer, or None."""
+    def bare(name):
+        return name[:-len(":latest")] if isinstance(name, str) and name.endswith(":latest") else name
     for entry in (ps or {}).get("models") or []:
-        if model in (entry.get("name"), entry.get("model")):
+        if bare(model) in (bare(entry.get("name")), bare(entry.get("model"))):
             return entry.get("context_length")
     return None
 
@@ -422,7 +423,7 @@ def reset_home(home):
             path.rmdir()
 
 
-def clear_user_files(uid, roots=("/tmp", "/var/tmp", "/dev/shm")):
+def clear_user_files(uid, roots=("/tmp", "/var/tmp", "/dev/shm", "/run/lock", "/var/lock", "/dev/mqueue")):
     """Remove every file and directory the run user owns under the shared
     temporary trees, so no attempt can leave notes for the next (amendment 9)."""
     for root in roots:
@@ -438,7 +439,7 @@ def clear_user_files(uid, roots=("/tmp", "/var/tmp", "/dev/shm")):
                         shutil.rmtree(path, ignore_errors=True)
                     else:
                         os.unlink(path)
-                except FileNotFoundError:
+                except OSError:
                     continue
 
 
@@ -563,7 +564,7 @@ UNQUOTED_FORMS = (
     ("-delete", re.compile(r"(?:^|\s)-delete(?:\s|$)")),
     ("-exec", re.compile(r"(?:^|\s)-exec(?:dir)?(?:\s|$)")),
 )
-ANYWHERE_FORMS = (("$(", re.compile(r"\$\(")), ("`", re.compile(r"`")), ("<(", re.compile(r"<\(")))
+ANYWHERE_FORMS = (("$(", re.compile(r"\$\(")), ("`", re.compile(r"`")), ("<(", re.compile(r"<\(")), (">(", re.compile(r">\(")))
 # Amendment 10. Arithmetic expansion, $(( … )), opens with the same two
 # characters as a command substitution but runs no command, and its `<` and
 # `>` compare. Shakedown 2 (2026-10-13) stopped on `sed -n "$((n-12)),${n}p"`.
@@ -783,8 +784,8 @@ def tree_state(root):
     root = Path(root)
     if not root.exists():
         return None
-    return sorted((p.relative_to(root).as_posix(), p.stat().st_size, p.stat().st_mtime_ns)
-                  for p in root.rglob("*") if p.is_file())
+    return sorted((p.relative_to(root).as_posix(), *_entry(p))
+                  for p in root.rglob("*") if p.is_symlink() or p.is_file())
 
 
 def flip_rate(records):
@@ -847,7 +848,12 @@ def debrief_items(text):
     items = dict.fromkeys(DEBRIEF_ITEMS)
     if not text:
         return items
-    starts = [(int(m.group(1)), m.start(), m.end()) for m in ITEM_START.finditer(text)]
+    starts, expected = [], 1
+    for m in ITEM_START.finditer(text):
+        # A numbered list inside an answer restarts at 1; only the next item number starts an item.
+        if int(m.group(1)) == expected:
+            starts.append((expected, m.start(), m.end()))
+            expected += 1
     for i, (number, _, end) in enumerate(starts):
         stop = starts[i + 1][1] if i + 1 < len(starts) else len(text)
         key = DEBRIEF_ITEMS[number - 1]
@@ -859,9 +865,9 @@ def debrief_items(text):
 def scrub(text):
     """Text for a public results file: the operator's home path says which
     tree, not where it is. The identity scan still gates the commit."""
-    home = Path.home()
-    for spelling in {home.as_posix(), str(home), str(home).replace("\\", "\\\\")}:
-        text = text.replace(spelling, "~")
+    for home in {Path.home(), harness_home()}:
+        for spelling in {home.as_posix(), str(home), str(home).replace("\\", "\\\\")}:
+            text = text.replace(spelling, "~")
     return text
 
 
@@ -1028,14 +1034,33 @@ def run_env(run_as, route="plan"):
             "PATH": os.environ.get("PATH", "/usr/bin:/bin"), "LANG": "C.UTF-8", **proxy, **CLI_ENV, **local}
 
 
+def send(proc, text):
+    """Write one turn to the CLI, or close its input when text is None. A CLI
+    that has already exited (its turn cap, a crash) ends the run, not the harness."""
+    try:
+        if text is None:
+            proc.stdin.close()
+        else:
+            proc.stdin.write(text)
+            proc.stdin.flush()
+    except (BrokenPipeError, OSError, ValueError):
+        pass
+
+
 def checkout_state(root):
     """Every file under a checkout with its size and modification time, .git
     and ignored files included. Git rewrites .git/index on a plain read, so
     that one file is left out."""
     root = Path(root)
-    return {p.relative_to(root).as_posix(): (p.stat().st_size, p.stat().st_mtime_ns)
-            for p in root.rglob("*") if p.is_file() and not p.is_symlink()
+    return {p.relative_to(root).as_posix(): _entry(p)
+            for p in root.rglob("*") if (p.is_symlink() or p.is_file())
             and p.relative_to(root).as_posix() not in (".git/index", ".git/index.lock")}
+
+
+def _entry(path):
+    """A file's size and time, or a symlink's target, read without following it."""
+    st = path.lstat()
+    return ("link", os.readlink(path)) if path.is_symlink() else (st.st_size, st.st_mtime_ns)
 
 
 def changed_files(before, after):
@@ -1154,8 +1179,7 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, ru
     # The wall time starts with the task, so the hold is not in it.
     started = time.time()
     task_ended = None
-    proc.stdin.write(user_message(pending.pop(0)))
-    proc.stdin.flush()
+    send(proc, user_message(pending.pop(0)))
     with (work / "runs" / f"{run_id}.jsonl").open("w", encoding="utf-8") as log:
         for line in proc.stdout:
             log.write(line)
@@ -1174,10 +1198,9 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, ru
                 # a spent plan or a failed run gets no debrief.
                 last = stream.result_events[-1]
                 if pending and not last.get("is_error"):
-                    proc.stdin.write(user_message(pending.pop(0)))
-                    proc.stdin.flush()
+                    send(proc, user_message(pending.pop(0)))
                 else:
-                    proc.stdin.close()
+                    send(proc, None)
     proc.wait()
     ended = time.time()
     timed_out = not watchdog.is_alive() and not stopped and len(stream.result_events) < len(prompts)
@@ -1382,7 +1405,7 @@ def probe(args, cli, allow, tasks):
         remove_tree(secret_repo)
     report = probe_verdict(stream_a, stream_b, record_a, record_b, targets, sentinels, grep_roots)
     report["tokens_used"] = budget["used"]
-    report["proved_for"] = probe_identity(allow)
+    report["proved_for"] = probe_identity(allow, args.tools)
     PROBE_REPORT.parent.mkdir(parents=True, exist_ok=True)
     PROBE_REPORT.write_text(scrub(json.dumps(report, indent=1)), encoding="utf-8")
     if any(r["outcome"] == "auth_failed" for r in (record_a, record_b)):
@@ -1399,11 +1422,13 @@ def arm_prompt(prompt, allow, arm):
     return prompt.rstrip("\n") + "\n\n" + note + "\n" if note else prompt
 
 
-def probe_identity(allow):
-    """What a probe's pass covers: the pinned files and the CLI. A pilot runs
-    only on a probe made with the same."""
+def probe_identity(allow, tools=None):
+    """What a probe's pass covers: the pinned files, the CLI and the installed
+    Atlas. A pilot runs only on a probe made with the same."""
+    package = atlas_cli(tools).parent / "package.json" if tools is not None else None
     return {"pins": readme_pins((HERE / "README.md").read_text(encoding="utf-8")),
-            "cli_version": allow["cli_version"]}
+            "cli_version": allow["cli_version"],
+            "atlas_package_sha256": sha256_lf(package) if package is not None and package.exists() else None}
 
 
 def results_dir(label, route):
@@ -1419,7 +1444,7 @@ def pilot(args, cli, allow, tasks):
         print("refusing to run the pilot: no passed probe report", file=sys.stderr)
         return 2
     proved = json.loads(probe_report.read_text(encoding="utf-8")).get("proved_for")
-    if proved != probe_identity(allow):
+    if proved != probe_identity(allow, args.tools):
         print("refusing to run the pilot: the passed probe report was made with other pins or another CLI",
               file=sys.stderr)
         return 2
@@ -1461,7 +1486,7 @@ def pilot(args, cli, allow, tasks):
                 if arm == "B" and record["outcome"] in GRADED and not record["atlas_calls"]:
                     record["outcome"] = "untreated"
                     untreated += 1
-                (out / f"{record['run']}-attempt{attempt}.json").write_text(json.dumps(record, indent=1), encoding="utf-8")
+                (out / f"{task['id']}-{arm}{pair['rep']}-attempt{attempt}.json").write_text(json.dumps(record, indent=1), encoding="utf-8")
                 if record["outcome"] == "harness_failure":
                     failures += 1
                     continue

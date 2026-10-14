@@ -984,11 +984,16 @@ class Accounting(unittest.TestCase):
         self.assertEqual(stream.tokens["output_tokens"], 40)
         self.assertEqual(stream.tokens["input_tokens"], 10)
 
-    def test_a_message_with_no_id_is_still_counted(self):
+    def test_a_reply_with_no_id_is_counted_once_per_reply(self):
+        # A proxy that names no message: the events of one reply repeat its
+        # usage, and a tool result starts the next reply.
         stream = run.Stream()
         for _ in range(3):
             stream.add(json.dumps({"type": "assistant", "message": {"usage": {"input_tokens": 5}, "content": []}}))
-        self.assertEqual(stream.tokens["input_tokens"], 15)
+        self.assertEqual(stream.tokens["input_tokens"], 5)
+        stream.add(tool_result("t1", "x"))
+        stream.add(json.dumps({"type": "assistant", "message": {"usage": {"input_tokens": 7}, "content": []}}))
+        self.assertEqual(stream.tokens["input_tokens"], 12)
 
     def test_the_debriefs_cost_is_the_difference_of_running_totals(self):
         self.assertEqual(run.debrief_cost({"total_cost_usd": 0.12}, {"total_cost_usd": 0.15}), 0.03)
@@ -1054,3 +1059,58 @@ class Retries(unittest.TestCase):
         self.assertEqual(proved, run.probe_identity(allow))
         self.assertNotEqual(proved, run.probe_identity({**allow, "cli_version": "2.1.296"}))
         self.assertEqual(set(proved["pins"]), set(run.PINNED_FILES))
+
+
+class SecondAudit(unittest.TestCase):
+    def test_a_write_to_an_exited_cli_does_not_crash_the_harness(self):
+        class Closed:
+            def write(self, text):
+                raise BrokenPipeError
+
+            def flush(self):
+                raise BrokenPipeError
+
+            def close(self):
+                raise BrokenPipeError
+
+        class Proc:
+            stdin = Closed()
+
+        run.send(Proc(), "a turn")
+        run.send(Proc(), None)
+
+    def test_a_symlink_made_in_the_checkout_is_seen(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "a.txt").write_text("a", encoding="utf-8")
+            before = run.checkout_state(root)
+            try:
+                (root / "link").symlink_to("/etc/passwd")
+            except (OSError, NotImplementedError):
+                self.skipTest("symlinks need privileges here")
+            self.assertEqual(run.changed_files(before, run.checkout_state(root)), ["link"])
+
+    def test_output_process_substitution_counts(self):
+        self.assertIn(">(", run.bash_violations('git log "x" | tee >(cat)'))
+
+    def test_an_ollama_name_without_its_tag_still_matches(self):
+        ps = {"models": [{"name": "nemotron-3.5-lightning-131k", "model": "nemotron-3.5-lightning-131k",
+                          "context_length": 131072}]}
+        self.assertEqual(run.loaded_context(ps), 131072)
+
+    def test_a_numbered_list_inside_an_answer_stays_in_its_item(self):
+        text = "1. fast\n2. clear\n3. I used:\n1. Read\n2. Grep\n4. sure\n5. none\n6. no"
+        items = run.debrief_items(text)
+        self.assertIn("1. Read", items["tools"])
+        self.assertEqual(items["confidence"], "sure")
+
+    def test_the_probe_covers_the_installed_atlas(self):
+        allow = json.loads((HERE / "allow-list.json").read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as tmp:
+            tools = Path(tmp)
+            package = run.atlas_cli(tools).parent / "package.json"
+            package.parent.mkdir(parents=True)
+            package.write_text('{"version": "1.26.0"}', encoding="utf-8")
+            first = run.probe_identity(allow, tools)
+            package.write_text('{"version": "1.26.0", "rebuilt": true}', encoding="utf-8")
+            self.assertNotEqual(first, run.probe_identity(allow, tools))

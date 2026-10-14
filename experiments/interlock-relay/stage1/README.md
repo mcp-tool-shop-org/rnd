@@ -27,3 +27,33 @@ statistics.
 | I2 | The barrier check compares spaced calls with back-to-back calls in fresh processes. With a 1% band floor it could fail stage 1 for a reason that has nothing to do with Relay | **Adopted as S1-A6.** The barrier check is reported, not gated. Both arms of every triple take the same barrier, so it can't bias Δ. The check describes the measurement protocol, and it stays in the output beside H2 |
 | I3 | B alone computes the request size | **No change.** Argon agrees it's a genuine cost of tracing, charged to B's hook time |
 | M1 | A step that didn't run left h2 and h3 entries missing | **Adopted.** "not run" in every section |
+
+## Argon's review, round 2 (2026-10-14), and what R&D did with it
+
+Argon found **no blocking issues: stage 1 can run.**
+- Round 1's B1, B2, I1, I2, I3 and M1 are resolved, and B3 is partly resolved.
+- Both of R&D's rulings were judged sound: the barrier check is reported, and each step runs as a child process.
+
+| # | Finding | Disposition |
+|---|---|---|
+| I1-R2 | `run_stop` recorded a stop after its 300 s timeout with fewer than 10 spans, and didn't return or check a VRAM breach | **Adopted.** A stop counts only with at least 10 spans, no breach and exit 77. The breach is returned, and `drive()` refuses on it. Tests: a stop after the timeout with too few spans, and a breach-written stop |
+| I2-R2 | `wait_idle` didn't wait for the GPU's processes to clear, so the preflight would refuse after the stop step | **Adopted, then corrected on the live rig** (below). The idle wait and the preflight apply the same card condition. Tests: a busy card refuses after the timeout, and a draining card settles |
+| M1-R2 | During the import check a VRAM breach went unseen until all 45 children had run | **Adopted.** The watch is created before the re-check, and the re-check refuses at once on a breach. Test: a breach stops the check before the next child |
+
+**One addition, not from Argon: the grant's cap.**
+- The driver enforces `--max-minutes` (default 90):
+  - no step starts after the cap;
+  - a running step gets its remaining time, and at that limit its stop file, so the run's watcher ends it cleanly. A step that still hasn't ended after a 120 s grace is killed;
+  - the import check stops between children.
+- Tests: no step after the cap, and a step stopped at its limit.
+
+**The preflight, corrected against the live rig** (read-only readings, no model call):
+- **Listeners:** a psutil count of listeners on 11434 read 0 while Ollama answered there. Windows build 26340 reports a listening socket as state 0, and interlock's supervisor already works around that. The driver now uses interlock's own `listening_pids`, which finds Ollama's listener.
+- **GPU processes:** on Windows (WDDM), `nvidia-smi` lists every desktop app that draws on the GPU (27 of them: the shell, browsers, the Claude app), with no memory figures. "No process on the GPU" could never hold.
+  - The check now refuses on a **compute workload**: a process whose name says it runs models (python, Ollama's runner, llama.cpp, ComfyUI, vLLM, LM Studio and similar). An empty `/api/ps` still catches a loaded model.
+- **Idle VRAM:** the desktop alone read 2,751–2,811 MiB, over the plan's 2,400.
+  - The first preflight allows at most 3,500 MiB, which any loaded model would exceed.
+  - Later steps must come back within 512 MiB of the first reading.
+- **The whole preflight now passes read-only on the rig at interlock `bfc484a`:** heartbeat 2 s, nemo-relay 0.10.1, Ollama 0.35.1, one listener, no compute workload, idle 2,811 MiB, logs/ ignored, a clean tree.
+
+The analysis is unchanged since its freeze at rnd `cbaed82`.

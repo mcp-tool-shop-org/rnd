@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.7] - 2026-10-14
+
+- advocate-dataset: Argon consult round 3 (the revised brief checked for the six changes, quota-skeleton consistency, the role scope table, the pilot's 16 items)
+- Added experiment `advocate-dataset`
+- Added experiment `agent-ab-harness`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.8.2.6] - 2026-10-14
 
 - advocate-dataset: Argon round 2 folded in (prose-to-block verifier, counterfactual negatives with parity, affine ceiling, two rule tiers, precedence table, recombinatorial harvesting, natural exam, critic legs); disposition record

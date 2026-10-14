@@ -1,6 +1,6 @@
-# Brief: the Advocate, role-set's second role (its pack, recipe and first batch), for the Grok seat
+# Brief: the Advocate, batch 1 (lean), for a seat
 
-**Status:** written 2026-10-14 on the Director's request for the next role-set dataset after the verifier. Revised the same day to the Director's own definition of the role, with the build sequenced on his approval: batch 1 first, as below. Goes to the Publisher for review and seat assignment. Template: [Dataset builds](https://mcp-tool-shop-org.github.io/rnd/handbook/dataset-builds/). Nothing is written or paid for until the Director has read section 1, an outside review (the Publisher's Argon consult, round 1) has been folded in, and he has approved the design.
+**Status:** 2026-10-14. The Director approved the lean batch-1 plan after Argon judged the hardened design (`brief-v1-hardened.md`) over-built for batch 1. This brief supersedes that one for building, and the hardened design stays as the reference for the deferred list in section 5.
 
 ## 0. The role, and why it is next
 
@@ -65,151 +65,129 @@ The key: the brief names every tripwire present and invents none. A planted nega
 
 `escalate` is the key exactly when a point would cross a tripwire on the relay's own authority. For example: a seat asks to force-push, to spend, to publish, or to skip a gate, or an approval arrives second-hand.
 
-**Names are role titles only:** the Director, the Publisher, R&D, Seat A, the reviewer, the builder. No person's name, account, path or address appears in material or output. Real-record material passes the identity scan, as section 3 already requires.
+**Names are role titles only:** the Director, the Publisher, R&D, Seat A, the reviewer, the builder. No person's name, account, path or address appears in material or output. Batch 1 uses synthetic records only; everything committed passes the identity scan.
 
 **What can't be keyed is read, not graded:** plain language, short sentences, and jargon explained the first time it's used. These go in the human read (section 6) as a checklist line. They aren't a trait, and nothing is scored on them.
 
-## 1. The check, in three sentences (for the Director)
+## 1. The check, in three sentences (approved by the Director, 2026-10-14)
 
-1. **The role is taught trait by trait, as the verifier was:** the Director approves the Advocate's traits and their counterweights first; each trait has its lesson, items in kinds A–D apply that one lesson (a decision-ready brief from a record, a relay in the studio's directions, a comparative pair, a two-turn pushback), and a quiz in the role's own words checks it was absorbed; batch 1 runs three traits, in this order: **the failed gate is the headline** (and when everything passes, say so plainly), **every figure as the receipt has it** (and no figure the receipt doesn't have), and **relay without loss** (and without addition: a point that needs a decision is escalated, never decided).
-2. **Every item's key is known without a model's opinion:** a brief's claims trace line by line to the record it summarises (each figure matches, each failed gate appears, no claim without a line), the prose is checked against a canonical block by a deterministic verifier (section-pinned, no unbound figure, no negation or minimiser beside a gate, a tripwire or the verdict), the recommendation follows a precedence table with the standing rules applied whether or not the record restates them, a relay's propositions carry unique lexical anchors so what was carried, dropped or added is checked in code, planted negatives (a hidden failed gate, an altered figure, an invented claim, a dropped ask or point, an added instruction) are located, and `cannot_tell` is the key when the record holds no conclusion or no rule; the hidden-key critic must re-derive each key from the material alone.
-3. **We would know it taught the role and not the fingerprint** because a probe reading the brief without its record sits at chance on faithful-or-not, a relational probe on six input-to-output surface features (word and line counts, number counts, shared numbers and words) sits at chance, every record carries immaterial figures so a count difference can't tell, shuffled labels sit at chance, the two writer families are split evenly within every verdict and planted-class stratum and a classifier can't tell them apart, planted negatives are spread evenly across their classes so no class is a tell, `cannot_tell` and `escalate` are quota'd so neither becomes a reflex, one planter family is held out for the transfer number, the comparative pairs are written independently and appear in both orders with one verdict, and a hand-written natural exam with no generator code sits beside the generated one and both must pass.
+1. **What it teaches:** batch 1 teaches the Advocate three habits, one at a time:
+   - put any failed check or rule violation in the headline, and say clearly when everything passes;
+   - copy every number and unit exactly as the receipt has it;
+   - pass messages between the Director and the crew without dropping key points or adding instructions of its own.
+2. **How we know the answers are right:** every training example is built from a synthetic studio receipt where the right answer is fixed before the model writes a word.
+   - Every number in the summary must match the receipt.
+   - Every failed check and studio rule it touches must be named, in the right order.
+   - If a receipt is missing a key number or rule, the only right answer is "can't tell".
+3. **How we know it isn't cheating:**
+   - two different local models write the examples;
+   - safe lookalikes keep words like "cost" or "scan" from being automatic red flags;
+   - every comparison is tested in both orders;
+   - role-set's standard shortcut checks run;
+   - we read the batch ourselves before anything is used for training.
 
-## 2. Phase 0: the role pack (drafted by the seat, approved by the Director)
+## 2. The role pack: `roles/advocate/`, the same shape as `roles/verifier/`
 
-The pack is human text. The seat drafts it in the verifier pack's form, from the Director's definition (section 0), his standing rules, and the Publisher's Argon consult; the Director approves or rewrites it before any slot is planned. Nothing the generator writes enters the pack.
+The seat drafts it and the Director approves it before any item is built. **Nothing a model generates goes into the pack.**
+- **`README.md`:**
+  - the role in plain words: section 0's four responsibilities, with batch 1 as the assistant's daily job;
+  - section 0a, the studio shape, carried over as it is;
+  - the three batch-1 traits, each with its lesson and counterweight;
+  - the standing rules, written as conditions with a green light (for example: "default to local models; a paid run is right when the local option misses a required check, a free pilot has passed, the data is clean, and the cost is within the cap"), never as flat bans.
+- **`behaviours.jsonl`:** the defect and tripwire classes a planted negative can carry, one per line, like the verifier's `defects.jsonl`.
+- **`sources.json`:** the material allow-list. Batch 1 is synthetic only, so it lists the record templates and no real records.
+- **`exemplar-exclude.json`:** carried over from the verifier, so sealed and DEV items never become exemplars.
 
-- `role.md`: lessons 1–3: the role (the four responsibilities), how it thinks (fidelity before fluency; a decision is a claim that traces; conceding is part of advocating), what is expected (the brief's required parts; the relay's).
-- `rules.md`: the Director's standing rules as the role's own rules, in the pack's words, not his, and written as **conditional gates with a green-light clause**, never as flat imperatives, so a rule teaches when to proceed as well as when to stop. For example: recommend the paid pod when, and only when, the local option misses a required gate, a free pilot has passed, the data is clear, and the cost is inside the cap. A flat "never use the cloud" teaches a refusal reflex.
-- `traits/`: one lesson per trait, with its counterweight named in the lesson, as the verifier's T01–T18 are. The seat proposes **9 traits for batch 1's responsibilities**, numbered, for the Director to keep, cut or reorder; the first three are batch 1's, and the rest wait for later batches of responsibilities 1 and 2:
-  1. **The failed gate is the headline,** never the footnote. Counterweight: when everything passes, say so without manufacturing a risk.
-  2. **Every figure as the receipt has it.** Counterweight: no figure the receipt doesn't have, and `cannot_tell` when a decisive one is missing.
-  3. **Relay without loss:** the point reaches the reader intact, in every direction. Counterweight: relay without addition, and a point that needs a decision is escalated, not decided.
-  4. **The ask is named:** what the reader must decide, with its options, by when. Counterweight: `asks: none` is a complete answer.
-  5. **`cannot_tell` when the record holds no conclusion or no rule.** Counterweight: never as a dodge when the record decides.
-  6. **Clear to proceed:** the green light given plainly when every gate and rule is met. Counterweight: the tripwires present are still reported.
-  7. **The honest case for the weaker side,** with its one true advantage. Counterweight: the deciding line still decides.
-  8. **Hold under pressure:** the stance kept when a pushback brings no new line. Counterweight: changed the moment one does.
-  9. **The alternative named:** what the reader would expect, and why the record supports something else. Counterweight: one recommendation, not a menu.
-  Cut from the earlier list: "the longer brief is not the better brief" (the ceiling makes it mechanical) and "the confident brief" (it is trait 5's counterweight). Batches 2 and 3 add the governance and integration traits.
-- `kinds.md`: batch 1's kinds with required parts (section 3).
-- `scope.json`: the **role scope table** for relay, a strict matrix (Argon's pass 3, taken over R&D's draft, which left two directions with nothing to filter). Every proposition carries **exactly one primary category**, assigned by precedence: tripwire > ask > gate result > instruction > figure > routine cost > schedule note > low-level trace > background narrative. The Publisher and R&D map onto the directional archetypes (the Director, the Publisher or R&D to a seat is a downward brief; a seat to any of them is an upward hand-back). Every direction has at least two categories that are relevant to no one, so the relay always has something to strip:
+**Batch 1's three traits,** built and judged one at a time, in this order:
 
-  | Category | Downward (a brief to a seat) | Upward (a hand-back) | Reviewer → builder (required changes) | Generator rule |
-  |---|---|---|---|---|
-  | tripwire (touches a standing rule) | relevant | relevant | relevant | overrides every other category; crossing authority → `escalate` |
-  | ask (a decision with options) | relevant | relevant | not applicable | never generated reviewer → builder |
-  | gate result (a pass, a fail, a floor) | not applicable | relevant | relevant | never generated downward |
-  | instruction (a concrete step) | relevant | not applicable | relevant | never generated upward |
-  | figure (a measured value or a threshold) | relevant | relevant | relevant | a numeric value with its unit; never a date or a cost |
-  | routine cost (a $0 line, a pre-approved budget line) | relevant | relevant | not relevant | over the cap or unapproved is a tripwire, not a cost |
-  | schedule note (roadmap, meeting or queue timing outside the task's gate) | not relevant | not relevant | not relevant | a deadline that gates an ask stays inside the ask |
-  | low-level trace (a stack line, a temp path, a debug step) | not applicable | not relevant | relevant | the realistic thing an upward summary strips |
-  | background narrative (why an old PR was closed) | not relevant | not relevant | not relevant | the realistic thing a downward brief strips |
+| Trait | Lesson | Counterweight | Main kinds |
+|---|---|---|---|
+| `failed-gate-first` | A failed check or a tripwire is the headline, before any figure. | When everything passes, give the green light plainly. Don't manufacture risks. | A, C |
+| `exact-figures` | Every figure as its receipt has it: the same number, the same unit, nothing rounded. | No figure the receipt doesn't have, and no padding with immaterial lines. | A, C |
+| `faithful-relay` | Carry every point the recipient needs, and add no instruction of your own. | A point that needs a decision the relay can't make is escalated, never decided. Points outside the recipient's scope are dropped, not forwarded as noise. | B, D |
 
-  Every cell is a lookup, never a judgement that a role "might care". The `not applicable` cells are categories the generator doesn't place in that direction; the `not relevant` cells are what a planted addition injects as a distractor and what a faithful relay must drop.
+Traits 4–6 (`name-the-ask`, `say-cant-tell`, `hold-under-pushback`) come after batch 1 passes, each with its own short brief.
 
-## 3. Phase 1: role-set's second role
+## 3. The build: role-set's second role, reusing what the verifier has
 
-role-set's design said the gates package moves when a second role exists. This phase is that, plus batch 1's kinds.
+**The kinds:**
+- **A, brief from a record:** a synthetic record in one of section 0a's nine shapes, and the brief in section 0a's five-part order.
+- **B, relay:** a message in one of 0a's directions, relayed with every needed point and nothing added, or `escalate`.
+- **C, comparative pair:** two briefs or options for one record, written independently, appearing in both orders with one verdict.
+- **D, two-turn:** a brief, then a pushback. It holds when the pushback brings nothing new, and updates when it brings a new receipt line.
+- **E, quiz:** two per trait, in the role's own words, taken from the lesson.
 
-**The trait file.** The plan is trait × kind, as the verifier's is. One trait's file is: 20 kind A pairs, 8 kind B items, 6 kind C pairs, 4 kind D items and 2 kind E quizzes, every item recording its trait, its kind and the pack hash; the trait's lesson is what the writer gets, never "write a brief"; exemplars shown to the writer come from approved items of a *different* trait, so form transfers and text can't. Every floor, quota and control below is counted on the trait's file, and the verdict is per trait (section 6). The 20-pair Kind A file in the quotas is this file's A part.
+**Records are built from a short ledger:**
+- figures, the material ones plus one or two immaterial lines;
+- check results (pass or fail);
+- asks;
+- tripwires;
+- the decision rule.
 
-**Kinds, with the key by construction** (each kind applies the trait's lesson; the trait decides which planted classes and verdicts dominate its file):
-- **A, brief from a record.** Material: a record in a studio format (section 0a's kinds), built by the generator from a **fact ledger**: every fact has an id, a category (figure, gate, ask, tripwire, note), a value, a polarity, a materiality flag and a line; failed gates, cost overruns, scan hits and missing decisive values are `material` by rule. Every record carries **immaterial figures** too (a timing, a count that decides nothing), so the number of figures never separates faithful from defective briefs. Rules come in **two tiers**: the standing studio rules (section 0a's tripwires and the floors) always apply and are never restated as a condition, and an inline note never overrides them; **task-local thresholds** (a cap, a floor for this run, a tie-break) are stated in the record on about 60% of solvable records, and at least 30% of records restate no rule at all, so the model learns that the standing rules hold whether or not the record repeats them. The recommendation's action and status are solver-derived by a **precedence table**, read top down: (1) a present gate fails, a **disqualifying** tripwire fires, or the printed cost is over the cap or names a paid model API → `hold`, status `supported`, even if another figure is pending (a build that leaked personal data isn't waiting on a latency number); (2) otherwise, a decisive figure is `pending`, its unit is uncalibrated, or a required task-local threshold or tie-break is missing → status `cannot_tell`, with the baseline expectation named as the alternative; (3) otherwise, a paid batch or rollout is requested with no passed local pilot attached → `pilot_first`; (4) requested with a passed pilot attached → `proceed`; (5) nothing requested → `proceed`. **Disqualifying tripwires** are personal data or a scan hit, verbatim text attributed to the Director in a file, device use without a grant, a merge without review, a floor missed, a frozen analysis changed after its run, an irreversible act that is unauthorised or whose checks fail (a force-push, a history rewrite, a release with a failed provenance check), and a second-hand approval that the record treats as authorising execution. A gated public act whose checks all pass and which asks the Director for the final go (a release record with provenance and the published-file check clean) carries its tripwire in section 4 and takes `proceed`; a second-hand approval that the record merely reports, while asking the Director first-hand, is a tripwire reported and not a `hold`. `pilot_first` appears only on record kinds that propose execution (a paid-run plan, a device grant, a hand-back proposing a batch). Output: the brief in the fixed order of section 0a, plus a **canonical summary block** (cited fact ids, reported values, failed gates, the asks, the tripwires, the recommendation's action and status), so the key is checked in code on the block and the prose must agree with the block. Key: **forward trace** (every claim in the brief binds to a fact id with the exact value and polarity; an unbound claim fails), **backward completeness** (every `material` fact appears; a missing one fails), the asks and tripwires equal the record's constructed lists (`asks: none` and `tripwires: none` are real answers), the order holds, the recommendation equals the solver's (`proceed | hold | pilot_first`, with status `supported | cannot_tell`, naming the alternative), a **word ceiling** of max(75, 45 + 14 × the material-fact count), which is the size of a concise five-section brief for that many facts (an earlier form capped it by the record's length too, and that starved dense short records), plus a **ban on any run of eight or more non-identifier words copied from the record's prose**, and a generator rule that every record's prose is at least 15 words longer than its brief's ceiling (its headers and immaterial lines make the length), so the brief is always shorter than what it summarises. The prose is checked against the block by a **deterministic verifier**, not by taste: **section-pinned containment** (the asks in section 1; every failed gate in section 2, before section 3 begins; every figure as its exact string with its unit in sections 2 or 3; the tripwires in section 4; the action, the status and the alternative in section 5); **no unbound number or gate name** in the prose that the block doesn't carry; and a two-part **negation and spin rule**: (a) a **section-wide ban** in sections 2, 4 and 5 on minimiser and override words (ignore, non-blocking, harmless, technically, override, anyway, minor, acceptable, negligible, cosmetic, nominal, waive, bypass, greenlight), none of which belongs in an honest headline, tripwire list or recommendation; (b) a **clause-scoped rule** for not, no, never, neither and nor: in sections 2 and 4 they are allowed when stating a failure ("did not meet the 0.75 floor", "no grant id attached") and banned directly before the existence of a failure or tripwire ("not a failed gate", "no failed gates" when the list is not empty); in section 5 the recommendation opens with an **atomic verdict prefix**, the action and its status before the first semicolon or full stop ("Recommendation: hold (supported); you'd expect proceed, which was not chosen because …"), and the negations are banned inside that prefix only, so "not chosen" in the explanation is legal and "not hold" in the verdict is not. A flat token window was tried first and refused honest briefs ("did not meet" four tokens from the gate). A brief that carries every block string in the right place and still writes "minor variance, acceptable" beside the failed gate, or "I'd greenlight this" beside `hold`, fails here. The critic's first leg (section 3, the checks) re-derives the block from the prose alone and must match it. Negatives are **independently written**, never edited from a good brief, and the mask must not change the world the writer sees. `figure_altered` and `claim_invented` come from a **counterfactual ledger**: the writer gets a record with one value substituted, so the brief is faithful to a record that isn't the key's. `gate_hidden`, `ask_dropped` and `tripwire_hidden` mask one material fact from the writer's prompt **with parity**: the masked fact is replaced by a promoted immaterial note, or an immaterial note is masked on positives at the same rate, so positive and negative writers see the same number of facts and lines, and a brief that is one clause shorter is no tell. A failed gate or a tripwire is masked only where the record carries two or more, or the plan matches the positives' rate of `none`, so `tripwires: none` never appears only on negatives. `order_broken` is written, not edited: the writer gets a permuted section order in its instruction (the figures before the failed-gate headline), so the negative is as fluent as a positive and wrong only in its order. Each negative is a located class. `cannot_tell` by construction: a decisive value is `pending`, its unit is uncalibrated, or a required task-local threshold or tie-break is missing, with the record otherwise the same length and shape as a solvable one, so length never leaks the verdict. Half the failed gates are expressed as a figure against its floor (0.68 against 0.75), not as the word `fail`, so a keyword can't stand in for reading.
-- **B, relay.** Material: a message built from a list of tagged propositions, each with the roles it is relevant to (from a **role scope table** in the pack, so relevance is decided by rule, not by taste), a flag for the Director's own words, and a tripwire class or none; in one of section 0a's directions. Output: the relayed message and its included-proposition ids, with the action `relay | escalate`. Key: the included ids equal the propositions relevant to the target role; none added; a planted omission, distortion or addition is located; `escalate` by construction exactly when a proposition would cross a tripwire on the relay's own authority (section 0a's list, a second-hand approval included), in every direction, so a downward message that asks a seat to skip a gate escalates as surely as an upward ask to spend; no lemmatised four-word run, and no ten-word window with 60% or more non-stopword overlap, from a proposition flagged as verbatim from the Director appears in the relay (the same function as the commit gate in the material section). Whether a proposition was relayed is **checked in code, not by taste**: every proposition carries a unique **lexical anchor** (a token the proposition's content needs and nothing else in the message uses); the relay must contain the anchors of every relevant proposition and none of the irrelevant ones; a planted addition injects a distractor anchor; a planted distortion flips a proposition's polarity next to its anchor. Relay items include **safe lookalikes** (a cost of $0.00 from an aborted dry run; a scan that passed with 0 hits; a quoted CLI command), so a word like "spend", "scan" or a quotation mark is never the trigger.
-- **C, comparative pair** (the component): two option records for one decision (for example a local quantised model against a rented batch), written independently (two seeds, or two writer families; never one edited from the other), with the same field schema and lengths within 10%, plus a **constraint block** with hard gates and a tie-break order, so the verdict is solver-derived. Output: the strongest evidence-backed case for each side (at least one true advantage cited for the loser), the deciding constraint line, and `option_1 | option_2 | cannot_tell`. Exactly one option passes every hard gate and leads on the tie-break, or a required cell is `pending` and the key is `cannot_tell`. The swap twin is made by the plan, not the writer; the twins share a pair id and count once for variety; the batch check refuses a verdict that doesn't map.
-- **D, two-turn.** Turn 1 is a brief fixed in the material (correct, or carrying a planted defect); turn 2 is a pushback on a 2×2 grid: (turn 1 correct, or defective) × (blunt, or polite), with or without a new record line. Output: `hold_ground | concede_and_update | escalate_ambiguity`, the record line that resolves it, and the revised statement. Key by construction: no new line and turn 1 correct → hold; a valid new line or a located turn-1 defect → concede and update; a gap in the record itself → escalate. Tone is crossed with correctness, so neither bluntness nor politeness predicts the answer.
-- **E, quiz** in the role's own words, as the verifier's: two per trait, built from the lesson's own framing (identity, purpose before rule), checked for no eight-word span shared with the pack, so the lesson is absorbed and not copied.
+**The answer comes from one fixed table:**
+- a failed check, or a tripwire other than paid spend → `hold`;
+- over the cost cap, or a paid model API → `hold`;
+- a paid run or rollout with no passed local pilot → `pilot_first`;
+- otherwise → `proceed`;
+- a missing decisive figure or threshold → `cannot_tell`.
 
-**Material and privacy: isomorphic synthesis, no real text.** Every record is synthetic, rendered from a fact ledger in a studio format. What is harvested from real studio records (rnd briefs and result notes, interlock and role-set hand-backs) is **structure only, recombined**: the record kinds, the metric types, the failure modes and tripwire patterns seen, the decision logic, as **marginal distributions and pairwise compatibilities of fields**, never one incident's whole tuple carried over one to one, so no synthetic record retells a real sequence of failures with the numbers changed; every string, number, date, name and path is discarded at harvest, and the harvester is a local script whose output is distributions, not text. The ledger is then filled with fresh numbers, fictional module and experiment names from a curated lexicon, and prose from a local writer. Why not scrubbed real text: a real thread's combination of dates, counts and histories cross-references against public GitHub even with names removed; a paraphrase of a ruling leaks its idioms; and a real record rarely has one clean key. Gates before any item is committed: the identity scan (zero hits); a PII pass (addresses, handles, keys, paths); and an overlap check against a **private, local index** of the Director's messages, which never enters a repository or CI: both texts lowercased, punctuation stripped and lemmatised, then any four-word run in common, or 60% or more non-stopword overlap in any ten-word window, refuses the item (role titles and schema terms are allow-listed); the seat and R&D run it locally before commit, and CI runs the scan and the PII pass. Names are role titles only (section 0a).
+Standing rules apply whether or not the record restates them. The table goes into the code as it is written here.
 
-**The plan.** The unit of counting for kinds A and C is the **pair** (an A positive with its counterfactual negative; a C pair in both orders), with one pair id; quotas and variety floors count pairs, and a Kind A file is 20 pairs (40 lines). Coarse quotas hold per file; the marginal quotas marked "per batch" hold across the batch (120–160 pairs over three traits), because a 20-pair file can't split every joint cell evenly. Floors per trait as the verifier's, plus batch 1's quotas, each by construction:
-- at least 25% `cannot_tell` across A and C, on records of every shape and length, and at least half of that (12.5% of A and C) on records where every figure is present and clean and no standing tripwire fires, but the task-local threshold or tie-break is missing, so the model learns that a recommendation without a rule is not supported;
-- the **execution-proposing record kinds** (a paid-run plan, a device-grant log, a hand-back proposing a batch) make up at least 50% of A's solvable records in every file, and within them `proceed`, `hold` and `pilot_first` are each at least 25%, so the record kind never predicts the action; across A as a whole `proceed` and `hold` are each at least 20% and `pilot_first` at least 12.5%, within every length stratum; the other record kinds split `proceed` and `hold` and never carry `pilot_first`; at least 30% of the records that mention a paid or cloud option have `proceed` as the solver's answer, with the reason in the record (the local option failed a gate, the pilot is attached and passed, the data is public, the cost is inside the stated cap); at least 20% of the records already carry a passed pilot, so "pilot first" is never a reflex;
-- at least 25% of A's records touch no tripwire (`tripwires: none`), and every tripwire class appears at least once per file; `asks: none` on at least 15% of records;
-- planted negatives at most 50% of A and B, spread evenly across their classes (gate hidden, figure altered, claim invented, ask dropped, tripwire hidden, order broken; point omitted, distorted, added); the fields of records and the propositions of messages are permuted across items, so position is never a tell;
-- B: at least 15% `escalate`, balanced across section 0a's directions; the role scope table decides relevance;
-- C: both orders of every pair; length parity within 10%; the constraint block in every item;
-- D: the 2×2 grid filled evenly;
-- every record kind of section 0a at least once per Kind A file and at least four times per batch; the floors are per kind (A, B, C, D), not per record kind;
-- **writers split evenly, per batch:** the two families at 50/50, at most 55% from one family, within every (kind, verdict) stratum and every (kind, planted class) marginal, with even counts per stratum (the joint cells are too small in one file to split); after five failed attempts the same family retries with a new seed, and the plan never fails over to the other family, so survivors don't correlate writer with difficulty;
-- **a prose-surface gate:** each section's most common opening four-word run appears in at most 15% of a file's items, so template collapse fails the floors even when the skeletons differ.
+**Negatives are written, not edited:**
+- a separate writer prompt whose ledger hides one failed check or tripwire, or alters one figure;
+- never a model editing a good brief into a bad one;
+- pairs in kind C are written independently.
 
-**The checks.** The forward trace, backward completeness, order, compression and solver checks (A), the scope and tripwire checks (B), the constraint solver and twin check (C) and the grid check (D) are code, run on every item against the canonical blocks. The hidden-key critic runs **two stripped legs**, so it can neither solve from the ledger nor copy the block: **leg 1** sees the prose brief alone, no block and no record, and extracts the block from it, which must match the writer's block exactly; **leg 2** sees the record's prose and the brief's prose, no ledgers and no blocks, aligns every sentence of the brief to a record line (or `unbound`) with its polarity, and gives a verdict with the defect class. The critic is a **different model family from the writer**, local or through offrig and never a paid API, at temperature 0 with JSON-constrained output. Before any critic verdict refuses an item, it is **calibrated on 64 items** (32 clean, 32 planted, 8 of them split-brain briefs that carry every block string and still mislead): re-derivation at least 95%, false refusals at most 5%, false passes 0% on missed gates and tripwires and at most 5% overall, and at most 5 points of difference between writer families. Its trait leg stays advisory until `critic-control` passes the bars. **One item envelope** carries every kind: `responsibility`, `kind`, `record_schema_version`, the tripwire registry reference, the key and its derivation; tripwire and defect ids are namespaced (`VAL-`, `REL-`, `CMP-`, `TURN-`), so batches 2 and 3 (`GOV-`, `INT-`) plug into the same checks and the same verdict vocabulary without a new parser.
+**Three code checks on every item:**
+1. **Trace:** every material figure string, every failed check and every tripwire in the ledger appears in the brief, and no other number does.
+2. **Order:** the five sections come in order, failed checks sit in section 2, and the table's verdict sits in section 5.
+3. **Length:** shorter than the record and at most 130 words, with no run of 8 or more words copied from the record.
 
-**The controls script** (`role-set controls`): on a frozen batch, with no model, a cheap classifier (bag of words plus length) runs: the positive marker; shuffled labels (chance within 3 points); the partial-input probes (the record without its decision rule; the brief without its record; one option alone for C; the pushback without the record for D), each within the binomial interval of chance; writer identity against the verdict (reported as mutual information with a bootstrap interval that must include zero; at 100–200 items the interval is wide, so the gate is "no detectable dependence", and the point estimate is reported); planter identity; a **relational-control probe** (logistic regression on six surface features of the record-to-brief pair: the word-count ratio, the number-count difference, the shared-number ratio, the line-count ratio, the character-length difference, the shared-unigram Jaccard), which must sit at chance, because a model can learn "fewer numbers than the record means a hidden fact" while every single-side probe sits at chance; order and permutation invariance (flipping a C pair flips the verdict every time; permuting a record's fields keeps A's and B's keys every time). At least 20% of the planter and tripwire templates are held out for the exam split and never seen in training. Results print and are written beside the batch.
+**Reused as they are from `src/role_set/`:**
+- the variety skeleton and its floors: at least 75% distinct, top repeat at most 3, none twice in a file, CI-gated from a committed record the way T10 is;
+- the hidden-key critic, from a different local model family from the writer;
+- the standard controls: shuffled labels at chance, a single-side probe at chance, writers split 50/50.
 
-**Variety.** Skeletons, the counterpart of T10's, with every name, number and string removed: A is (record kind, the **material** figure count (immaterial figures are padding and never vary the skeleton), the gate pass/fail vector, the cost-to-cap relation, the failed-gate positions, the missing-field mask, the ask count, the sorted tripwire set or `none`, the **rule tier** (`inline_rule_present | standing_rule_only | task_rule_omitted`), the **pilot state** (`pilot_passed | pilot_none | not_applicable`), the planted class or `none`, the action), so two items with different solver derivations never share a skeleton; B is (direction, source role, target role, proposition count, the relevant indices, the tripwire class or `none`, whether a flagged proposition is present, the action); C is (decision domain, the constraint axes, each option's dominance pattern, the deciding axis, the order flag, the verdict), counted once per pair id; an A positive and its counterfactual negative form a preference pair with a shared pair id and are likewise counted once (the negative's skeleton carries its planted class, so the two are distinct items for the checks, and a file never holds two pairs with the same positive skeleton); D is (turn-1 kind, turn-1 correct or defective, the pushback type, new-evidence validity, the resolving line's position, the resolution). Floors as the verifier's (distinct ≥ 75%, top repeat ≤ 3, none twice in a file, no stem shared), enforced in CI the way T10's are: a committed record with a hash over everything that decides a build, and an on-demand rebuild that must reproduce it.
+**Writers are local.** Two families on the rig, under a Publisher grant. No paid API, and no pod unless the Director approves the printed cost.
 
-## 4. Symptom-to-fix table, fixed in advance
+**Per trait:**
+- `failed-gate-first` and `exact-figures`: 16 A pairs, 4 C pairs and 2 quizzes each;
+- `faithful-relay`: 16 B items, 4 D items and 2 quizzes.
 
-| Symptom at the controls or the floors | Fix | Not the fix |
-|---|---|---|
-| The brief-only probe predicts faithful-or-not | A planted class shows on the surface (length, hedging, a phrase); rebalance the classes or change the plant | Lowering the probe's bar |
-| Writer- or planter-identity probe above chance | Rotate seeds per side; strip the avoid-list phrases; re-check | Dropping the probe |
-| Shuffled labels off chance | Stop the batch; find the leak (an id, a position, a length) | Any reading |
-| `cannot_tell` or `escalate` predicted by the record's shape | The plan's quota puts them on records of every shape | Telling the writer to vary |
-| The longer brief wins C pairs | The length-ratio cap; a trait on it | Trimming by hand |
-| A trait's items read as another's (the critic's trait leg) | Exclude the item from exemplars; fix the lesson's counterweight | Editing the item |
-| A real-material item fails the scan or names a person | Drop it; the scrub step is amended | Redacting by hand in the item |
-| Floor miss on locked seeds | A dated amendment and a fresh locked run | Re-rolling the seed |
+Every item records its trait.
 
-## 5. Phase 2: the free pilot, then the paid batch
+## 4. The pilot, then the batch
 
-- **Writers are local first.** Batch 1's text is short and structured (a brief, a relay, a case), not the long creative writing the verifier's items needed, so the writers are the rig's own models under a grant, from **two families** (for example qwen3 and gemma or granite), which gives the writer-identity control real meaning. The paid pod writer through offrig is the fallback only if the local writers fail the human read, and it waits for the Director's go at the cost the plan prints.
-- **Free pilot:** the local writers on the first trait (the failed gate is the headline), kinds A and B only, 16 slots: **10 Kind A pairs** (positive plus counterfactual negative) and **6 Kind B items**, writer families 8 and 8, built to the pilot matrix Argon specified in pass 3: the A slots cover an ultra-short identity scan (the 75-word floor, standing rule only), a paid-run plan with no pilot (`pilot_first`), a paid-run plan with a failed local gate and a passed pilot (`proceed` on the paid option, the gate as a figure), a long hand-back with two failed gates and one masked, a device-grant log with the threshold omitted (`cannot_tell`), a CI run with `asks: none` and the order broken, a release record with passing checks (`proceed` with its tripwire reported), a frozen analysis with a pending value, a clean reviewer's verdict (`tripwires: none`), and a security export with a scan hit and a second-hand approval; the B slots cover a downward brief with a narrative distractor and a flagged proposition to paraphrase, a downward ask to skip a gate (`escalate`), an upward hand-back with a trace distractor and a $0.00 lookalike (`relay`), an upward request for an unapproved paid batch with a peer's go (`escalate`), reviewer → builder with cost and schedule distractors and a planted polarity flip, and reviewer → builder instructing a force-push (`escalate`). The purpose is the records: the plan, the keys, the ledgers and blocks, the refusals and the controls read correctly. **What a failure looks like in 16:** the ceiling fails if a short-record slot exceeds its budget more than twice or passes by dropping the section 5 clause; the verifier fails if a clean slot is refused for "did not meet" or "was not chosen", or the critic's leg 1 extracts a different action or gate set than the verifier passed; template collapse is any section sharing one opening four-word run on three or more of the ten briefs; retry bias is one family averaging two and a half times the other's attempts on the `cannot_tell` or multi-constraint slots, or hitting the five-attempt reset while the other passes first time. Its output is marked rehearsal and is not data. Argon reads the 16 items, the refusal and retry log per slot and family, and the critic's calibration scorecard with its leg 1 and leg 2 outputs.
-- **The critic's controls** (`critic-control` on the brief and relay legs) must pass before a critic verdict refuses anything.
-- **The batch:** one trait at a time, the local writers inside a grant; batch 1's three traits in section 1's order, each trait's file complete and read before the next starts. If the pod writer is needed, the Director sees the plan and the figure first.
-- **Locked seeds:** tuning seeds 1–40, locked seeds 41–60 for the verdict. The seat never runs the locked seeds before the code is frozen in a named commit.
+- **The free pilot:** 16 items on `failed-gate-first` (10 kind A, 6 kind B), local writers under a grant, split 8 and 8 by writer.
+  - Print the items, the three checks' results, the critic's agreement and the controls.
+  - R&D and the Director read all 16.
+- **The batch:** the three traits in order. Each trait's file is complete, checked and read before the next one starts.
+- **The verdict per trait:** the checks and floors pass, the controls sit at chance, the critic agrees with the key, and the read is clean. Any miss holds that trait's items.
 
-## 6. The measurement
+## 5. Deferred: built only if the pilot or training shows the need
 
-Per trait and per kind, on the locked seeds:
-- the variety floors and the batch-1 floors (section 3);
-- the controls, with intervals, and which passed;
-- the critic's agreement with the key, key hidden, per kind;
-- the human read: R&D and the Director read every item of the first batch before it nears a training set, as for the verifier.
+| Deferred | Brought back when |
+|---|---|
+| A canonical summary block with a prose-to-block verifier and a negation word-window | The pilot read finds a brief with the right numbers that still spins or reverses a failed check |
+| A two-leg stripped critic and its 64-item calibration set | The critic misses more than 5% of planted negatives in the pilot |
+| A relational surface-feature probe, with parity masking | Training in aspire-si shows a number-counting shortcut while the single-side probes sit at chance |
+| Lexical anchors per relay point, with a scope matrix | The critic and the human read disagree on whether a relay dropped a point |
+| A lemmatised overlap index against the Director's messages | Material moves from synthetic ledgers to real messages |
+| A 48-item hand-written natural exam, and traits 4–6 | Batch 1's three traits pass and go to aspire-si |
 
-**The verdict per trait:** floors met, controls passed, critic agreement at or above the verifier's bar, human read clean. Any one missed means the trait's items are held, not merged.
+The full hardened design is kept as `brief-v1-hardened.md`, with its three Argon rounds and dispositions, so any deferred piece can be lifted from it as specified.
 
-**The exam (the never-tuned final set), built with the batch and read once by aspire-si after training:** a poisoned-record suite (five figures excellent, one material gate failing by a hair; gate recall must be 100%); an implicit-gap suite (every field filled, but a unit mismatch or a sample of two; the answer is `cannot_tell`); a benign high-risk-lexicon suite (valid records that mention spend, scraping, rulings and scans with every gate cleared; the false-escalation rate must be under 2%); a hostile-bluff suite for D (a senior role orders a failed gate dropped with no new line; the stance must hold). These are the human read's checklist too: plain language, short sentences, jargon explained once.
+## 6. Out of scope
 
-**A generated exam shares the generator's grammar,** so a learned fingerprint would pass it. Beside it, R&D hand-writes a **natural exam** of 48 items, `exam-natural.jsonl`: 12 per kind A–D, covering all four suites, with no generator code and no model-written prose. R&D writes the items and their keys; the Director signs off on a sample. Both exams must pass after training, and neither is ever tuned against.
+- Training the adapter: that's aspire-si's work.
+- Batches 2 (governance) and 3 (safe integration).
+- Real-record material.
+- Any change to the verifier pack, the verifier's rules or the T10 generator. If one is needed, stop and ask.
 
-## 7. Attribution
+## 7. What the PR reports
 
-If the batch passes, what made it pass is the construction: the trace tables, the point lists, the independent sides and the quotas. The seat reports, for the first batch, how many items each check refused and why, so the next batch's plan can lower the attempt count.
-
-## 8. What the PR reports
-
-- The pack as approved (its hash), the recipe card (section 8 of the template), the plan and its cost, the split file, the scrub step as approved.
-- Per trait: the floors, the controls, the critic agreement and the human-read count.
-- Lines of code added to role-set, the suite time, and the CI budget held (10 minutes, as T10's).
-- No change to the verifier pack, the gates package's verifier rules, or the T10 generator. If one is needed, stop and ask.
-
-## 9. Not in scope
-
-- Batches 2 and 3 (governance; safe integration): their own briefs after batch 1's locked verdict.
-- Training the adapter. That is aspire-si's, on the Director's go, after R&D's key-check and the second read.
-- A standalone brief-audit kind (faithful or defective, with the located line). It is the verifier's pointwise job; A's independently written negatives serve as the rejected side of preference pairs instead, and the data carries them as pairs for aspire-si to use as it sees fit.
-- A `hold_for_clarification` action in B. A point that can't be relayed without a decision is `escalate`; a third action would split one answer in two.
-- Tone and persuasiveness. Not keyable; the human read samples them, and they never decide a verdict.
-
-## 10. Standards compliance
-
-- **PIN_PER_STEP: 2.** The pack hash, the writer and critic pins, the plan seed and the code hash are in every item.
-- **ANDON_AUTHORITY: 2.** A failed control or a floor miss stops the batch; a contested item is cut; a real-material item that fails the scan is dropped.
-- **NAMED_COMPENSATORS: 2.** A paid batch is one pod rental through offrig, shut down by the human; an item is held, never deleted; no publish.
-- **DECOMPOSE_BY_SECRETS: 2.** The pack (human), the plan (role-set), the writer (pod), the checks (code), the read (human).
-- **UNCERTAINTY_GATED_HUMANS: 2.** The Director sees the three sentences, the plan and the cost before any spend; the human read covers what the checks can't.
-- **EXTERNAL_VERIFIER: 2.** The Publisher's Argon consult (round 1) before the seat starts; a round-2 consult for anything it leaves open; a harness review before the free pilot.
-
-## 11. Argon's consult, round 1 (2026-10-14), and R&D's disposition
-
-The Publisher's consult (written to the Director's definition and section 0a) went to Argon without repository access. Its answer is summarised, with what R&D kept and didn't, in [argon-consult-round1.md](argon-consult-round1.md). Folded in above: the fact ledger and the canonical block that make a prose brief checkable in code; negatives written independently by masking a fact from the writer's prompt; the compression ceiling; `cannot_tell` records that keep the solvable records' length; the role scope table and safe lookalikes for relay; the constraint block for pairs; the 2×2 grid for two-turn items; isomorphic synthesis instead of scrubbed real text; local writers from two families; the unified item envelope; the exam suites; the role pack outline. Not taken: a standalone brief-audit kind; a third relay action; an index of the Director's messages anywhere but a private local file. R&D's three additions after section 0a are in section 3's plan and skeletons.
-
-**Round 2** (R&D's adversarial consult, `argon-consult-round2.md`; the Publisher's summary of the answer; disposition in [argon-consult-round2-disposition.md](argon-consult-round2-disposition.md)) returned **hold, for six changes**, all taken: the deterministic prose-to-block verifier; masked negatives by counterfactual substitution with immaterial-fact parity; the affine word ceiling with the copy ban; two tiers of rules and `cannot_tell` from a missing task-local threshold; the precedence table for the action; recombinatorial harvesting with the lemmatised overlap gate. Also taken: the writer split and no-failover rule; the prose-surface gate; rules as conditional gates; the trait changes; the hand-written natural exam; the critic's two stripped legs and its calibration; lexical anchors for relay; the relational-control probe. Section 0a's peer-approval line was reworded in this fold-in so it can't read as the Director's phrasing. Pass 3 reviewed the revised brief.
-
-**Round 3** (`argon-consult-round3.md`; disposition in [argon-consult-round3-disposition.md](argon-consult-round3-disposition.md)) returned **ready for the Director and the seat after five surgical edits, with no fourth pre-pilot pass**. All five are in: the ceiling is max(75, 45 + 14 × material facts) with the copy ban and a generator length floor; the quotas count pairs, every record kind once per file and four times per batch, and the writer split holds on marginals per batch; `order_broken` is written by a permuted instruction, `cannot_tell` includes a missing threshold, and kind B's overlap check matches the commit gate; the scope table is Argon's nine-category matrix with single-category tagging and something to strip in every direction; the precedence table orders `hold` over `cannot_tell` over `pilot_first` and `proceed`, names the disqualifying tripwires, and lets a gated release with passing checks proceed; the negation check is a section-wide spin ban plus a clause-scoped rule with an atomic verdict prefix. Argon's 16-slot pilot matrix is section 5's pilot. Argon's next read is the pilot output.
-
+- **The pack** as approved, with its hash.
+- **The pilot's 16 items,** with the check results, critic agreement and controls.
+- **Per trait:** the floors, controls, critic agreement and read count.
+- **CI time,** which must hold 10 minutes or less as T10's does.
+- **What the checks refused, and why.**

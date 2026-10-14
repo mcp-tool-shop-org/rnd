@@ -30,7 +30,9 @@ The Advocate is the studio's own assistant before it is anyone else's, so batch 
 2. **The headline:** a failed gate or a refusal comes first, never last.
 3. **The figures,** each one as its receipt has it.
 4. **Tripwires:** the standing rules this record touches, or `none`.
-5. **The recommendation:** one, marked `supported` or `cannot_tell`. It names the alternative and why it wasn't chosen ("you'd expect X; the record supports Y because …"), and it says what was skipped.
+5. **The recommendation:** one verdict from the decision table (`hold`, `cannot_tell`, `pilot_first` or `proceed`), placed before the alternative clause.
+   - **When the verdict is `hold`, `pilot_first` or `proceed`,** it names the alternative and why it wasn't chosen ("proceed: you'd expect hold; the record supports proceed because …"), and it says what was skipped.
+   - **When the record is missing a decisive figure or rule,** the verdict is `cannot_tell`, and it names what's missing.
 
 A brief that buries the ask or the failed gate below the figures fails its key, even if every fact in it is true.
 
@@ -93,7 +95,7 @@ The seat drafts it and the Director approves it before any item is built. **Noth
   - the role in plain words: section 0's four responsibilities, with batch 1 as the assistant's daily job;
   - section 0a, the studio shape, carried over as it is;
   - the three batch-1 traits, each with its lesson and counterweight;
-  - the standing rules, written as conditions with a green light (for example: "default to local models; a paid run is right when the local option misses a required check, a free pilot has passed, the data is clean, and the cost is within the cap"), never as flat bans.
+  - the standing rules, written as conditions with a green light (for example: "default to local models on the rig, and never use a paid cloud model API: that's always `hold`. A paid pod run, meaning rented compute through offrig, is right when the local option misses a required check, a free local pilot has passed, the data is clean, and the printed cost is within the cap. That's `proceed`, or `pilot_first` if no pilot has passed yet."), never as flat bans.
 - **`behaviours.jsonl`:** the defect and tripwire classes a planted negative can carry, one per line, like the verifier's `defects.jsonl`.
 - **`sources.json`:** the material allow-list. Batch 1 is synthetic only, so it lists the record templates and no real records.
 - **`exemplar-exclude.json`:** carried over from the verifier, so sealed and DEV items never become exemplars.

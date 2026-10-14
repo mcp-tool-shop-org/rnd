@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.12] - 2026-10-14
+
+- Advocate lean brief: one verdict vocabulary (the table's hold/cannot_tell/pilot_first/proceed; supported retired), and paid model API (always hold) told apart from a paid offrig pod run (green-light conditions). Argon's resolution of the seat's Phase 0 question.
+- Updated experiment `advocate-dataset`
+
 ## [1.1.8.2.11] - 2026-10-14
 
 - Advocate lean brief: Argon's five structural fixes (pilot kinds match traits; checks scoped to kind A, trace on positives, section numbers exempt; cannot_tell ordered in the table, verdict before the alternative; relay points tagged in or out of scope).

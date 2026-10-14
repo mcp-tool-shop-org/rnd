@@ -24,8 +24,9 @@ The pre-registered rules, in the design's words where it has them (design v3.1, 
 
 **H2, the process import check.**
 - The same Δ, band and gates, on per-process medians of the measured calls: N1, I and N2 per triple.
-- **The barrier check:** the median of the in-process decode A calls (with the barrier) and the median of the N
-  processes' calls (no barrier) differ by at most the decode band for that metric.
+- **The barrier check (reported, not gated; S1-A6):** the median of the in-process decode A calls (with the
+  barrier) against the median of the N processes' calls (no barrier), and whether they differ by at most the
+  decode band for that metric.
 
 **H1, per traced run:**
 - **Request count:** the driver's count of HTTP requests the adapter sent (below the hook) = the sum of the run's
@@ -34,7 +35,8 @@ The pre-registered rules, in the design's words where it has them (design v3.1, 
 
 **H3:**
 - The trace parses, with no canary, host name, user name or home path, and the run scope opens and closes.
-- The stop run's trace parses and is closed.
+- The stop run's trace parses and is closed, and the driver recorded a real stop: the stop file was written
+  mid-run and the run exited 77 (S1-A5).
 - `interlock check` passes, as reported by the driver.
 
 **Amendments made before any run:**
@@ -57,6 +59,15 @@ The pre-registered rules, in the design's words where it has them (design v3.1, 
   - with one call in twenty from a four-times-wider spread, 1.8% fail too;
   - a 1% shift passes 93% of the time;
   - a 3% shift fails 96% of the time.
+- **S1-A5 (after Argon's stage 1 review, before any run):** a stop run that finished before its stop file was written
+  would leave a normally closed trace and pass H3. H3 now also needs the driver's own record that the stop
+  landed mid-run (exit 77). The driver waits for the trace to hold 10 model calls before it writes the stop file.
+- **S1-A6 (after Argon's stage 1 review, before any run):** the barrier check is reported, not gated.
+  - Both arms of every in-process triple take the same barrier, so a barrier-induced shift in the baseline
+    can't bias Δ, and H2's verdict on Relay stands without it.
+  - What the check measures is the protocol's own effect: the card's clocks after a 250 ms rest against
+    back-to-back calls in a fresh process. Gating on it could reject Relay for a property of the measurement.
+  - It's reported beside H2, so a reader knows the conditions the equivalence was shown under.
 """
 
 from __future__ import annotations
@@ -288,9 +299,8 @@ def h2_import(record: dict, decode_rows: list[dict]) -> dict:
         else:
             barrier[name] = {"holds": None, "reason": "no data"}
     measured = {k: v for k, v in metrics.items() if v["verdict"] != "not measured"}
-    holds = bool(measured) and all(v["verdict"] == "holds" for v in measured.values()) and all(
-        b["holds"] is True for b in barrier.values())
-    return {"triples": len(trips), "metrics": metrics, "barrier": barrier, "holds": holds}
+    holds = bool(measured) and all(v["verdict"] == "holds" for v in measured.values())
+    return {"triples": len(trips), "metrics": metrics, "barrier_reported": barrier, "holds": holds}
 
 
 def h1_run(trace_path: Path, calls_path: Path, http_path: Path, rows: list[dict]) -> dict:
@@ -348,7 +358,9 @@ def analyze(root: Path, prefix: str) -> dict:
         rows = _rows(root, run_id)
         trace = root / "logs" / f"{run_id}.atof.jsonl"
         if not rows or not trace.is_file():
-            out["h1"][step] = {"holds": None, "reason": "not run"}
+            out["h1"][step] = out["h3"][step] = {"holds": None, "reason": "not run"}
+            if step in ("decode", "long"):
+                out["h2"][step] = {"holds": None, "reason": "not run"}
             continue
         out["h1"][step] = h1_run(trace, root / "logs" / f"{run_id}.calls.json", root / "logs" / f"{run_id}.http.json",
                                  rows)
@@ -356,7 +368,14 @@ def analyze(root: Path, prefix: str) -> dict:
         if step in ("decode", "long"):
             out["h2"][step] = h2_run(rows, step)
     stop_trace = root / "logs" / f"{prefix}-stop.atof.jsonl"
-    out["h3"]["stop"] = h3_trace(stop_trace, needles) if stop_trace.is_file() else {"holds": None, "reason": "not run"}
+    stopped = (driver.get("steps", {}).get("stop") or {}).get("stopped") is True
+    if stop_trace.is_file():
+        result = h3_trace(stop_trace, needles)
+        result["checks"]["stopped_mid_run"] = stopped
+        result["holds"] = all(result["checks"].values())
+        out["h3"]["stop"] = result
+    else:
+        out["h3"]["stop"] = {"holds": None, "reason": "not run"}
     out["h3"]["receipts_check"] = {"holds": driver.get("check_passed")}
     imports = root / "logs" / f"{prefix}-import.json"
     out["h2"]["import"] = (h2_import(json.loads(imports.read_text(encoding="utf-8")), _rows(root, f"{prefix}-decode"))

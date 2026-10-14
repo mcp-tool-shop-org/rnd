@@ -11,19 +11,17 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.15] - 2026-10-14
+
+- Advocate: Seat C turn 2 (pack fix-up, phase 1) and turn 3 (the free pilot, 16 slots) briefs filed; the pilot brief goes to Argon before Seat C
+
 ## [1.1.8.2.14] - 2026-10-14
 
 - issue 8 and the T10 brief: the floors are checked in seconds inside a CI job of about seven minutes, not 'four minutes'
-- Added experiment `advocate-dataset`
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.2.13] - 2026-10-14
 
 - T10 Phase 1 (if_shape) landed in role-set #55: brief 3 outcome, the T10 brief page, newsletter issue 8; the seat brief for role-set's full treatment and 0.2.0
-- Added experiment `advocate-dataset`
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 - Updated experiment `t10-variety`
 
 ## [1.1.8.2.12] - 2026-10-14
@@ -39,57 +37,40 @@ NANO an ordinary library update (entries filed or revised, results added).
 ## [1.1.8.2.10] - 2026-10-14
 
 - Advocate: lean batch-1 brief (Director-approved after Argon's shape check); the hardened design kept as brief-v1-hardened.md, its machinery deferred with triggers.
-- Added experiment `advocate-dataset`
 
 ## [1.1.8.2.9] - 2026-10-14
 
 - advocate-dataset: section 1's three sentences carry the round-2 and round-3 fixes (the verifier, the precedence table, lexical anchors, the relational probe, immaterial figures, the writer split, the natural exam)
 - Updated experiment `advocate-dataset`
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.2.8] - 2026-10-14
 
 - advocate-dataset: Argon round 3 folded in (the ceiling, quota collisions, the scope matrix, the precedence order, the negation rule, the 16-slot pilot); ready for the Director's section 1
 - Updated experiment `advocate-dataset`
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.2.7] - 2026-10-14
 
 - advocate-dataset: Argon consult round 3 (the revised brief checked for the six changes, quota-skeleton consistency, the role scope table, the pilot's 16 items)
-- Added experiment `advocate-dataset`
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.2.6] - 2026-10-14
 
 - advocate-dataset: Argon round 2 folded in (prose-to-block verifier, counterfactual negatives with parity, affine ceiling, two rule tiers, precedence table, recombinatorial harvesting, natural exam, critic legs); disposition record
 - Updated experiment `advocate-dataset`
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.2.5] - 2026-10-14
 
 - advocate-dataset: Argon consult round 2 (adversarial pass on the folded design, brief inline), on the Director's ask for several passes before a seat
-- Added experiment `advocate-dataset`
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.2.4] - 2026-10-14
 
 - T10 brief 3 amendment 4: if_shape stop; capacity weights split by stratum; fresh locked 101-120
 - Updated experiment `advocate-dataset`
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 - Updated experiment `t10-variety`
 
 ## [1.1.8.2.3] - 2026-10-14
 
 - advocate-dataset: Argon round 1 folded in (fact ledger, canonical block, independent negatives, isomorphic synthesis, local writers), R&D's three additions, the disposition record
 - Updated experiment `advocate-dataset`
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.2.2] - 2026-10-14
 
@@ -100,136 +81,97 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 - advocate-dataset brief revised to the Director's definition and sequenced (batch 1 first)
 - Updated experiment `advocate-dataset`
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.2.0] - 2026-10-14
 
 - advocate-dataset: role-set's second role (the Advocate) brief for the Grok seat; handbook template Dataset builds
-- Added experiment `advocate-dataset`
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.1.14] - 2026-10-14
 
 - T10 brief 3 amendment 3: if_shape goes ahead; one-if shape is consequent polarity + touches; guard on touches
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 - Updated experiment `t10-variety`
 
 ## [1.1.8.1.13] - 2026-10-14
 
 - T10 variety landed in role-set #49: outcome in briefs 2 and 3; public brief page
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 - Updated experiment `t10-variety`
 
 ## [1.1.8.1.12] - 2026-10-14
 
 - interlock-relay stage 1 raw records archived (receipts, traces, call tables, driver records), needles redacted
-- Added experiment `agent-ab-harness`
 - Added experiment `interlock-relay`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.1.11] - 2026-10-14
 
 - NeMo Relay brief measured; newsletter issue 7: the interlock-relay experiment end to end
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.1.10] - 2026-10-14
 
 - interlock-relay v3.2 build round: Argon's build applied, reviewed, approved; closed by the Director
-- Added experiment `agent-ab-harness`
 - Updated experiment `interlock-relay`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.1.9] - 2026-10-14
 
 - interlock-relay stage 1 result: frozen verdict, diagnosis, Argon consult, amendment v3.2 (debug-only)
-- Added experiment `agent-ab-harness`
 - Updated experiment `interlock-relay`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.1.8] - 2026-10-14
 
 - interlock-relay stage 1: post-Argon preflight corrections recorded, with the CPU-quiet check
-- Added experiment `agent-ab-harness`
 - Updated experiment `interlock-relay`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.1.7] - 2026-10-14
 
 - interlock-relay stage 1: Argon round 2 folded in, the grant cap, the preflight corrected on the live rig; ready for the grant
-- Added experiment `agent-ab-harness`
 - Updated experiment `interlock-relay`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.1.6] - 2026-10-14
 
 - interlock-relay stage 1: Argon round 1 folded in, analysis re-frozen (cbaed82), round 2 brief
-- Added experiment `agent-ab-harness`
 - Updated experiment `interlock-relay`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.1.5] - 2026-10-14
 
 - interlock-relay stage 1: the harness analysis frozen (43643bc) and the Argon review brief
-- Added experiment `agent-ab-harness`
 - Added experiment `interlock-relay`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.1.4] - 2026-10-14
 
 - interlock-relay: Argon round 2 folded in, stage 0 complete; the stage 1 plan
-- Added experiment `agent-ab-harness`
 - Updated experiment `interlock-relay`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.1.3] - 2026-10-14
 
 - interlock-relay stage 0: Argon round 1 folded in (runs 3-5, three further defects fixed), round 1 and round 2 code-review briefs; T10 brief 3 amendments 1 and 2
-- Added experiment `agent-ab-harness`
 - Updated experiment `interlock-relay`
-- Added experiment `nemo-relay-trial`
 - Updated experiment `t10-variety`
 
 ## [1.1.8.1.2] - 2026-10-14
 
 - interlock-relay stage 0 on fakes: H4a and H4b hold; amendments A1-A7. T10 brief 3 (multi-pack variety)
-- Added experiment `agent-ab-harness`
 - Updated experiment `interlock-relay`
-- Added experiment `nemo-relay-trial`
 - Added experiment `t10-variety`
 
 ## [1.1.8.1.1] - 2026-10-14
 
 - newsletter issue 6: Atlas and testing-os, the library's collector, interlock 0.1.0, and what a T10 claim can test
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.1.0] - 2026-10-14
 
 - t10-variety: two seat briefs and an Argon consult on what a claim item can test (role-set #53, #54); interlock-relay audit briefs, rounds 1-4; interlock-relay design marked approved and on hold
-- Added experiment `agent-ab-harness`
 - Updated experiment `interlock-relay`
-- Added experiment `nemo-relay-trial`
 - Added experiment `t10-variety`
 
 ## [1.1.8.0.31] - 2026-10-13
 
 - interlock-relay design v3.1 (Director-approved after four Argon audits)
-- Added experiment `agent-ab-harness`
 - Added experiment `interlock-relay`
 - Added experiment `local-agent-relay`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.0.30] - 2026-10-13
 
 - local-agent-relay design v0 (prototype, Director-approved); diagnose-then-fix page marked prototype
-- Added experiment `agent-ab-harness`
 - Added experiment `local-agent-relay`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.0.29] - 2026-10-13
 
@@ -242,10 +184,8 @@ NANO an ordinary library update (entries filed or revised, results added).
 - Added `agent-ab-harness`: agent-ab-harness — paired A/B runs of a coding agent in a sandbox
 - Updated `atlas`: atlas — a repository's map, checked in CI and served to agents
 - Updated `nemo-relay`: nemo-relay — tracing what an agent actually did (NVIDIA NeMo Relay)
-- Added experiment `agent-ab-harness`
 - Updated experiment `atlas-mcp-utility`
 - Added experiment `local-agent-relay`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.8.0.28] - 2026-10-13
 
@@ -258,7 +198,6 @@ NANO an ordinary library update (entries filed or revised, results added).
 - Added `agent-ab-harness`: agent-ab-harness — paired A/B runs of a coding agent in a sandbox
 - Updated `atlas`: atlas — a repository's map, checked in CI and served to agents
 - Updated `nemo-relay`: nemo-relay — tracing what an agent actually did (NVIDIA NeMo Relay)
-- Added experiment `agent-ab-harness`
 - Updated experiment `atlas-mcp-utility`
 
 ## [1.1.8.0.27] - 2026-10-13
@@ -270,7 +209,6 @@ NANO an ordinary library update (entries filed or revised, results added).
 - Updated `2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ`: NVIDIA NeMo Relay: tracing agent harnesses, Claude Code included
 - Added `agent-ab-harness`: agent-ab-harness — paired A/B runs of a coding agent in a sandbox
 - Updated `atlas`: atlas — a repository's map, checked in CI and served to agents
-- Added experiment `agent-ab-harness`
 - Updated experiment `atlas-mcp-utility`
 
 ## [1.1.8.0.26] - 2026-10-13

@@ -11,10 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.17] - 2026-10-14
+
+- Argon consult round 4 filed: the pilot brief after the three fixes, inline, with the 5% reconciliation as the question
+
 ## [1.1.8.2.16] - 2026-10-14
 
 - Advocate pilot brief: Argon's three alignment fixes applied (registered negative classes only, 26 texts, the fourth row, the critic's two counts); review and disposition filed
-- Updated experiment `advocate-dataset`
 
 ## [1.1.8.2.15] - 2026-10-14
 
@@ -32,12 +35,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 ## [1.1.8.2.12] - 2026-10-14
 
 - Advocate lean brief: one verdict vocabulary (the table's hold/cannot_tell/pilot_first/proceed; supported retired), and paid model API (always hold) told apart from a paid offrig pod run (green-light conditions). Argon's resolution of the seat's Phase 0 question.
-- Updated experiment `advocate-dataset`
 
 ## [1.1.8.2.11] - 2026-10-14
 
 - Advocate lean brief: Argon's five structural fixes (pilot kinds match traits; checks scoped to kind A, trace on positives, section numbers exempt; cannot_tell ordered in the table, verdict before the alternative; relay points tagged in or out of scope).
-- Updated experiment `advocate-dataset`
 
 ## [1.1.8.2.10] - 2026-10-14
 
@@ -46,12 +47,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 ## [1.1.8.2.9] - 2026-10-14
 
 - advocate-dataset: section 1's three sentences carry the round-2 and round-3 fixes (the verifier, the precedence table, lexical anchors, the relational probe, immaterial figures, the writer split, the natural exam)
-- Updated experiment `advocate-dataset`
 
 ## [1.1.8.2.8] - 2026-10-14
 
 - advocate-dataset: Argon round 3 folded in (the ceiling, quota collisions, the scope matrix, the precedence order, the negation rule, the 16-slot pilot); ready for the Director's section 1
-- Updated experiment `advocate-dataset`
 
 ## [1.1.8.2.7] - 2026-10-14
 
@@ -60,7 +59,6 @@ NANO an ordinary library update (entries filed or revised, results added).
 ## [1.1.8.2.6] - 2026-10-14
 
 - advocate-dataset: Argon round 2 folded in (prose-to-block verifier, counterfactual negatives with parity, affine ceiling, two rule tiers, precedence table, recombinatorial harvesting, natural exam, critic legs); disposition record
-- Updated experiment `advocate-dataset`
 
 ## [1.1.8.2.5] - 2026-10-14
 
@@ -69,23 +67,19 @@ NANO an ordinary library update (entries filed or revised, results added).
 ## [1.1.8.2.4] - 2026-10-14
 
 - T10 brief 3 amendment 4: if_shape stop; capacity weights split by stratum; fresh locked 101-120
-- Updated experiment `advocate-dataset`
 - Updated experiment `t10-variety`
 
 ## [1.1.8.2.3] - 2026-10-14
 
 - advocate-dataset: Argon round 1 folded in (fact ledger, canonical block, independent negatives, isomorphic synthesis, local writers), R&D's three additions, the disposition record
-- Updated experiment `advocate-dataset`
 
 ## [1.1.8.2.2] - 2026-10-14
 
 - Advocate brief: the studio shape (section 0a): the brief's fixed order (asks, headline, figures, tripwires, recommendation), the studio record kinds, tripwires as a constructed and keyable list (a relayed approval included), relay in the studio's directions, role titles only. The Publisher, on the Director's authority to align the build.
-- Updated experiment `advocate-dataset`
 
 ## [1.1.8.2.1] - 2026-10-14
 
 - advocate-dataset brief revised to the Director's definition and sequenced (batch 1 first)
-- Updated experiment `advocate-dataset`
 
 ## [1.1.8.2.0] - 2026-10-14
 

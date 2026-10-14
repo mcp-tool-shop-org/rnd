@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.2] - 2026-10-14
+
+- Advocate brief: the studio shape (section 0a): the brief's fixed order (asks, headline, figures, tripwires, recommendation), the studio record kinds, tripwires as a constructed and keyable list (a relayed approval included), relay in the studio's directions, role titles only. The Publisher, on the Director's authority to align the build.
+- Updated experiment `advocate-dataset`
+
 ## [1.1.8.2.1] - 2026-10-14
 
 - advocate-dataset brief revised to the Director's definition and sequenced (batch 1 first)

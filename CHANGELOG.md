@@ -11,6 +11,20 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.28] - 2026-10-13
+
+- nemo-relay first trial in the sandbox; instrument installed
+- Updated `2026-10-13-atlas-testing-os-rnd-buildup`: Atlas, testing-os, housekeeping and rnd — the build-up program
+- Updated `2026-10-13-docker-sandboxes-on-the-rig-from-signup-to-a-pinned-pilot-wo`: Docker Sandboxes on the rig: from signup to a pinned pilot workspace
+- Updated `2026-10-13-multi-repository-atlas-research-grounding-for-the-build-up`: Multi-repository Atlas: research grounding for the build-up
+- Added `2026-10-13-nemo-relay-first-trial-in-the-sandbox`: NeMo Relay's first trial: it traces Claude Code in the sandbox at no measurable cost, and sends nothing of its own
+- Updated `2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ`: NVIDIA NeMo Relay: tracing agent harnesses, Claude Code included
+- Added `agent-ab-harness`: agent-ab-harness — paired A/B runs of a coding agent in a sandbox
+- Updated `atlas`: atlas — a repository's map, checked in CI and served to agents
+- Updated `nemo-relay`: nemo-relay — tracing what an agent actually did (NVIDIA NeMo Relay)
+- Added experiment `agent-ab-harness`
+- Updated experiment `atlas-mcp-utility`
+
 ## [1.1.8.0.27] - 2026-10-13
 
 - agent-ab-harness: the harness becomes a reusable instrument; A/B experiment design template in the handbook

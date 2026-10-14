@@ -1,0 +1,176 @@
+{
+  "cost": {
+    "added_over_counter_ms": {
+      "events": {
+        "median": 0.0031000000000000003,
+        "p99": 0.0665
+      },
+      "relay": {
+        "median": 0.0256,
+        "p99": 0.0822
+      }
+    },
+    "bytes_per_call": {
+      "events": 257.433,
+      "relay": 1130.1785
+    },
+    "calls": 2000,
+    "per_call_ms": {
+      "bare": {
+        "median": 0.0001,
+        "p99": 0.0002
+      },
+      "events": {
+        "median": 0.0061,
+        "p99": 0.0695
+      },
+      "off": {
+        "median": 0.003,
+        "p99": 0.0052
+      },
+      "relay": {
+        "median": 0.0286,
+        "p99": 0.0852
+      }
+    },
+    "relay_byte_gate": true,
+    "relay_time_gate": true,
+    "relay_vs_native_gate": true,
+    "relay_vs_native_median_ms": 0.0225
+  },
+  "h4": {
+    "cases": {
+      "q1_count_growth": {
+        "call_counts": {
+          "count": {
+            "errors": 0,
+            "ms": 21.182,
+            "n": 4,
+            "timeouts": 0
+          },
+          "generate": {
+            "errors": 0,
+            "ms": 3.268,
+            "n": 1,
+            "timeouts": 0
+          }
+        },
+        "from_events": "grew",
+        "from_receipt": "can't tell",
+        "from_relay": "grew"
+      },
+      "q2_companion": {
+        "call_counts": {
+          "companion": {
+            "errors": 0,
+            "ms": 30.241,
+            "n": 1,
+            "timeouts": 0
+          },
+          "generate": {
+            "errors": 0,
+            "ms": 10.284,
+            "n": 1,
+            "timeouts": 0
+          }
+        },
+        "from_events": "overlapped",
+        "from_receipt": "can't tell",
+        "from_relay": "overlapped"
+      },
+      "q3_unload_order": {
+        "call_counts": {
+          "generate": {
+            "errors": 0,
+            "ms": 3.064,
+            "n": 1,
+            "timeouts": 0
+          },
+          "unload": {
+            "errors": 0,
+            "ms": 3.062,
+            "n": 2,
+            "timeouts": 0
+          }
+        },
+        "from_events": "unload-generate-unload",
+        "from_receipt": "unload-generate-unload",
+        "from_relay": "unload-generate-unload"
+      },
+      "q4_count_timeout": {
+        "call_counts": {
+          "count": {
+            "errors": 0,
+            "ms": 7.718,
+            "n": 2,
+            "timeouts": 1
+          },
+          "generate": {
+            "errors": 0,
+            "ms": 3.181,
+            "n": 1,
+            "timeouts": 0
+          }
+        },
+        "from_events": "retried and succeeded before",
+        "from_receipt": "can't tell",
+        "from_relay": "retried and succeeded before"
+      },
+      "q5_openvino_runaway": {
+        "call_counts": {
+          "generate": {
+            "errors": 0,
+            "ms": 62.084,
+            "n": 3,
+            "timeouts": 1
+          }
+        },
+        "from_events": "call 2; later calls ran: yes",
+        "from_receipt": "can't tell",
+        "from_relay": "can't tell"
+      }
+    },
+    "from_events_correct": 5,
+    "from_receipt_correct": 1,
+    "from_relay_correct": 4,
+    "h4a_holds": false,
+    "information_parity": false,
+    "key": {
+      "q1_count_growth": "grew",
+      "q2_companion": "overlapped",
+      "q3_unload_order": "unload-generate-unload",
+      "q4_count_timeout": "retried and succeeded before",
+      "q5_openvino_runaway": "call 2; later calls ran: yes"
+    }
+  },
+  "safety": {
+    "canary": 0,
+    "home": false,
+    "host": false,
+    "user": false
+  },
+  "shared_reader": {
+    "fixture_calls": 7,
+    "fixture_filled": {
+      "completion_tokens": 0,
+      "end_ns": 7,
+      "model": 7,
+      "parent_id": 7,
+      "prompt_tokens": 0,
+      "span_id": 7,
+      "start_ns": 7,
+      "status": 7
+    },
+    "interlock_calls": 5,
+    "interlock_filled": {
+      "completion_tokens": 5,
+      "end_ns": 5,
+      "model": 5,
+      "parent_id": 5,
+      "prompt_tokens": 5,
+      "span_id": 5,
+      "start_ns": 5,
+      "status": 5
+    }
+  }
+}

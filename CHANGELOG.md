@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.19] - 2026-10-14
+
+- role-set 0.2.0 treatment reviewed: pass with one required change (the Advocate's approval state on three surfaces); five code follow-ups filed
+
 ## [1.1.8.2.18] - 2026-10-14
 
 - Argon round 4 answered: green light; the slot 3 ledger tag and the 9/10 critic rule folded into the pilot brief; disposition filed
@@ -34,7 +38,6 @@ NANO an ordinary library update (entries filed or revised, results added).
 ## [1.1.8.2.13] - 2026-10-14
 
 - T10 Phase 1 (if_shape) landed in role-set #55: brief 3 outcome, the T10 brief page, newsletter issue 8; the seat brief for role-set's full treatment and 0.2.0
-- Updated experiment `t10-variety`
 
 ## [1.1.8.2.12] - 2026-10-14
 
@@ -71,7 +74,6 @@ NANO an ordinary library update (entries filed or revised, results added).
 ## [1.1.8.2.4] - 2026-10-14
 
 - T10 brief 3 amendment 4: if_shape stop; capacity weights split by stratum; fresh locked 101-120
-- Updated experiment `t10-variety`
 
 ## [1.1.8.2.3] - 2026-10-14
 
@@ -92,12 +94,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 ## [1.1.8.1.14] - 2026-10-14
 
 - T10 brief 3 amendment 3: if_shape goes ahead; one-if shape is consequent polarity + touches; guard on touches
-- Updated experiment `t10-variety`
 
 ## [1.1.8.1.13] - 2026-10-14
 
 - T10 variety landed in role-set #49: outcome in briefs 2 and 3; public brief page
-- Updated experiment `t10-variety`
 
 ## [1.1.8.1.12] - 2026-10-14
 
@@ -147,13 +147,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 - interlock-relay stage 0: Argon round 1 folded in (runs 3-5, three further defects fixed), round 1 and round 2 code-review briefs; T10 brief 3 amendments 1 and 2
 - Updated experiment `interlock-relay`
-- Updated experiment `t10-variety`
 
 ## [1.1.8.1.2] - 2026-10-14
 
 - interlock-relay stage 0 on fakes: H4a and H4b hold; amendments A1-A7. T10 brief 3 (multi-pack variety)
 - Updated experiment `interlock-relay`
-- Added experiment `t10-variety`
 
 ## [1.1.8.1.1] - 2026-10-14
 
@@ -163,7 +161,6 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 - t10-variety: two seat briefs and an Argon consult on what a claim item can test (role-set #53, #54); interlock-relay audit briefs, rounds 1-4; interlock-relay design marked approved and on hold
 - Updated experiment `interlock-relay`
-- Added experiment `t10-variety`
 
 ## [1.1.8.0.31] - 2026-10-13
 

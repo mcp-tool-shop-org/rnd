@@ -76,3 +76,13 @@ The Publisher scans the tag tree, tags `v0.2.0`, creates the GitHub release with
 ## Hand-back
 
 A `[<Seat> → Publisher]` comment on the PR: the head SHA; the shipcheck audit result and the SCORECARD scores; the identity scan result; the site build output (the three paths); the knowledge entry's `show` output; the proposed `gh repo edit` strings; the translation command handed over; the CHANGELOG section for the release notes; anything the surfaces revealed about the code. Then stop. R&D reviews every public surface; the Publisher merges and releases.
+
+## Outcome: R&D review of role-set #57 at `d92dbaf` (2026-10-14)
+
+Seat A handed back the same day: one commit on `549a619`, 23 files, docs and version only; CI green (test 6m33s, sweep skipped with the record unchanged); shipcheck 15 checked, 23 skipped with reasons, one open (translations, the Publisher's); identity scan CLEAN (R&D re-ran it on the head tree); SCORECARD 35/50 from 31; the knowledge entry rewritten with six notes and three relationships.
+
+**Verdict: pass with one required change.** R&D spot-checked the generator claims against the code (15 hashed files; 1,280 builds over four seed ranges; the `MAX_TRIES // 10` probe rule; the coprime walk; 61 three-value claim cells with the nine zero-`if` cells inside, so 52 with an `if`; the pack's traits, kinds and counterweights at ffb9546) and every one held. The one defect is R&D's own timing: the treatment brief said to call the Advocate pack a draft awaiting approval, and the Director approved it at ffb9546 the same day with phase 1 building on #56; three surfaces (README, handbook index, `roles.md`) now say so and must change before the tag. The seat's three deviations were ruled: the `uv.lock` root version line and `__version__` accepted; the "not on `main`" sentence stays.
+
+**Follow-ups the surfaces found in the code** (one-line fixes for a later PR, none touching the record): `generate/__init__.py` docstring names a T11 recipe that doesn't exist; `load_record()` and the record script docstring omit seeds 101–120; `scripts/verify` runs the sweep; `ci.yml`'s header names an identity-scan step the workflow lacks; repo-knowledge detects `Frames: mcp` and `Deploy: pypi`, both wrong.
+
+**What this treatment taught:** a treatment brief that describes the state of a sibling PR goes stale the moment that PR moves. Next time, the brief points the seat at the live PR and says "describe it as it stands at hand-back", not as it stood at writing.

@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.0] - 2026-10-14
+
+- advocate-dataset: role-set's second role (the Advocate) brief for the Grok seat; handbook template Dataset builds
+- Added experiment `advocate-dataset`
+- Added experiment `agent-ab-harness`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.8.1.14] - 2026-10-14
 
 - T10 brief 3 amendment 3: if_shape goes ahead; one-if shape is consequent polarity + touches; guard on touches

@@ -186,3 +186,13 @@ Every stratum clears the floors. claim three sits exactly on the top-repeat floo
 
 **Scheduling view sent to the Publisher:** Phase 2 waits for the next three-value pack request; the two-value claim gap is structural (brief 2) and needs no work.
 
+## Amendment 3, 2026-10-14 (R&D, on the Publisher's `if_shape` build brief)
+
+The Director wants more three-value packs, so `if_shape` goes ahead now, built by Seat A (Argon) from the Publisher's brief. The Publisher calls it **T10 growth Phase 1**; it is this brief's Phase 2 (amendment 1's definition). The two numberings name the same work.
+
+**Ruling change, one-`if` shapes:** amendment 1 defined the one-`if` shape as antecedent polarity (`is` / `is_not`). The brief uses **consequent polarity** (`then … is v` / `then … is not v`) and **whether the `if` touches the claimed entity**, with antecedents staying `is`. R&D adopts that: `candidates()` builds positive antecedents only, so a negative antecedent would be a new clue form with wording in every pack, while consequent polarity already occurs. The cheaper axis inside the existing forms wins.
+
+**Guard on `touches`:** it is a structural coordinate (where the `if` sits), never a change to what the claim says. The claim, the one count clue, #54's hard assertion and `trait_not_tested = 0` are unchanged on every item. That keeps the claim-role axis out, as section 3 ruled. Argon reports `trait_not_tested` per shape.
+
+**Unchanged and confirmed:** the zero-`if` cap returns to 2 for three-value claims (amendment 2's 3 was the stopgap; if 2 doesn't fit, Seat A stops); the floors; set cells; no try cap and no dropped cells; two-`if` shapes chain and shared consequent, with shared antecedent and disjoint added, any of which Argon may merge or drop with reasons; tuning on seeds 1–60; fresh locked seeds 81–100 after a named freeze, with 61–80 kept in the record as a regression file; the normal CI job at 10 minutes or less with the dispatch reproducing the record; the hash list closed under imports. Attribution (claim three's top repeat falling and leaving a zero-`if` cell) is reported, not claimed.
+

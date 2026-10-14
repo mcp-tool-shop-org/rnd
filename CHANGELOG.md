@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.1.14] - 2026-10-14
+
+- T10 brief 3 amendment 3: if_shape goes ahead; one-if shape is consequent polarity + touches; guard on touches
+- Added experiment `agent-ab-harness`
+- Added experiment `nemo-relay-trial`
+- Updated experiment `t10-variety`
+
 ## [1.1.8.1.13] - 2026-10-14
 
 - T10 variety landed in role-set #49: outcome in briefs 2 and 3; public brief page

@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.1.1] - 2026-10-14
+
+- newsletter issue 6: Atlas and testing-os, the library's collector, interlock 0.1.0, and what a T10 claim can test
+- Added experiment `agent-ab-harness`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.8.1.0] - 2026-10-14
 
 - t10-variety: two seat briefs and an Argon consult on what a claim item can test (role-set #53, #54); interlock-relay audit briefs, rounds 1-4; interlock-relay design marked approved and on hold

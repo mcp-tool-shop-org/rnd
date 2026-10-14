@@ -83,3 +83,76 @@ Two runs, both kept: [run-1.json](results/run-1.json) and [run-2.json](results/r
   - the E4b and fill-card hooks (A3), with their H1 and H3 tests;
   - the stop file through interlock's real stop mechanism (the test interrupts with `KeyboardInterrupt`).
 - Then stage 1 on the 5090, under the Publisher's grant.
+
+## Argon's code review, 2026-10-14, and what R&D did with it
+
+Argon (Gemini, run by hand from [the brief](../argon-code-review-stage0.md)) reviewed the stage 0 code and the evaluation. Its verdict was "blocking issues remain": B1–B3, plus I1.
+
+- **The evaluation:** Argon found it fair. The counter's 1 of 5 is honest, the planted cases are realistic enough for stage 0, and H4a and H4b are supported.
+- **The amendments:** all seven were judged legitimate. A3 must be closed before stage 0 finishes.
+- **Where the code is right,** in Argon's view: the single clock offset, OpenVINO spans kept on the calling thread, the refusal of layered configs, and the lazy import of Relay.
+
+| # | Finding | Disposition |
+|---|---|---|
+| B1 | `RelaySink` has no lock, and calls arrive from worker threads (unloads; OpenVINO companions run on a background thread across a slot) | **Adopted.** One lock around every Relay call. New test: two threads × 50 calls, giving 100 whole spans with ids 1–100 |
+| B2 | `_timed_call` could label a non-`ok`, non-`hang` result as `ok` | **Not a defect today:** `_bounded_call` returns only `("ok", value)` or `("hang", None)`, or re-raises. **A defensive mapping was added anyway** (`ok` → ok, `hang` → timeout, anything else → exception), so a future third value can't be called ok. New test: a worker fault counts as an error |
+| B3 | A failed `RelaySink` start leaks the event loop and the sanitizers. Two live sinks could deregister each other's sanitizers | **Adopted, differently.** A start that fails releases everything it acquired. A second live sink in the process is refused, rather than given per-instance names, because Relay's plugin activation is process-wide. Test: refusal, then a failed start, then a clean start |
+| I1 | A failed slot never calls `end_slot`, so calls between slots are charged to it | **Adopted.** The slot ends in the slot's `finally`, after the companion stops. The test fails without the fix |
+| I2 | A companion's calls are charged to the foreground slot | **Documented, not changed.** A companion session starts and stops inside its slot, so its calls belong to that slot by construction, under their own kind (`companion`). Measured-kind counts stay clean |
+| I3 | `json.dumps(body)` on every call, even with tracing off | **Adopted.** The request size is computed only for Relay. A second serialisation of a long prompt would sit inside measured time |
+| I4 | `_ns` assumes a `+00:00` zone suffix | **Declined for now.** `diagnose.py` is frozen. ATOF timestamps are RFC 3339 UTC, and both producers write `+00:00`. Revisit when a producer differs |
+| M1 | `/api/embed` and `/api/embeddings` classified as `other` | **Adopted** |
+| M2 | A `TimeoutError` with an empty message is counted as `http_error` | **Adopted** (an `isinstance` check) |
+| M3 | The cost loop has no per-slot flush | **Noted for stage 1.** The design's barrier after every slot (flush, `gc.collect`, a 250 ms rest) belongs to the stage 1 harness and must exist before stage 1 |
+| Add | Widen the socket guard to `connect_ex` and `sendto` | **Adopted** |
+| Eval | Q3's two options differ in their call counts, which is why the counter gets Q3 | **Agreed, and left as frozen.** A sharper Q3 would compare the same kinds in opposite order. Recorded for any future round |
+
+**Run 3**, on the fixed code with the frozen evaluation unchanged ([run-3.json](results/run-3.json)):
+- Relay 5 of 5, the native log 5 of 5, the counter 1 of 5.
+- 1,130 bytes per call.
+- Added time per call: a 0.028 ms median and a 0.093 ms 99th percentile. The new lock adds about 0.002 ms against run 2.
+- 0.025 ms over the native log.
+- The safety scan is clean.
+
+**Then the rest of the round 1 list:**
+- **The real stop file:** a new test through interlock's own operator stop found a defect the `KeyboardInterrupt` test couldn't.
+  - The watcher writes the receipt, then ends the process with `os._exit`, so the tracer never closed. The end of the trace, the in-flight call and the run scope were lost.
+  - **Fixed:** the halt now marks `halt` and closes the tracer before the exit, and both sinks drop calls that arrive after the close.
+  - Relay keeps its scope stack in a context variable, so the run scope is popped in the context it was pushed in. That works from the watcher's thread too.
+  - The test passes in both modes: the finished call is `ok`, the in-flight call is `abandoned`, and the run scope is closed.
+- **Fill-card (A3):** traced. Each roster model is one slot, its unload included, and its row carries its counts and the trace pointer.
+  - H1 holds: the trace holds exactly the requests the fake transport received.
+  - Calls outside a model's slot, such as the card-empty check, count to the run.
+- **E4b (A3, narrowed by amendment A8):** still refused.
+- **A defect the fill-card tests found,** which round 1 missed: the traced transport was a plain function, so it hid the transport's own methods.
+  - `OllamaAdapter.cancel()` looks for `transport.cancel` to end an in-flight request before an unload, and three fill-card tests failed (a hanging unload waited its full deadline).
+  - The interleaved path has had the same wrapper since round 1.
+  - **Fixed:** the wrapper is now a callable that passes every other attribute through to the transport. New test: `cancel` reaches the wrapped transport.
+
+| # | What changed | Why |
+|---|---|---|
+| A8 | `--trace` stays refused for E4b, and stage 0 finishes without it | E4b's model calls go through its own injected seams (a run-owned server and an Intel lane), not through the hook points. Its block is complete, and stages 1 and 2 don't run it. Wiring it faithfully means passing the tracer through its live seams, with E4b's own step boundaries as slots. That waits until an E4b-family run needs a trace |
+
+**Run 4,** on the final round 1 code with the frozen evaluation ([run-4.json](results/run-4.json)):
+- Relay 5 of 5, the native log 5 of 5, the counter 1 of 5.
+- 1,130 bytes per call.
+- Added time per call: a 0.028 ms median and a 0.094 ms 99th percentile.
+- 0.025 ms over the native log.
+- The safety scan is clean.
+
+**Run 5,** after the transport fix, at interlock `88b8eeb` ([run-5.json](results/run-5.json)):
+- Relay 5 of 5, the native log 5 of 5, the counter 1 of 5.
+- 1,130 bytes per call.
+- Added time per call: a 0.026 ms median and a 0.10 ms 99th percentile.
+- 0.023 ms over the native log.
+- The safety scan is clean.
+
+**The suites at `88b8eeb`:**
+- With the `relay` extra: 729 passed, 6 skipped, coverage 93.3% (`calltrace.py` 100%, `relay_sink.py` 91%).
+- Without it: 719 passed, 16 skipped, coverage 92.5%.
+- `ruff` is clean.
+
+**Before stage 1:**
+- Argon's round 2 review of this code;
+- the per-slot barrier (M3), which is stage 1 harness work;
+- the Director's go, and the Publisher's grant.

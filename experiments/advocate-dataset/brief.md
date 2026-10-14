@@ -112,7 +112,7 @@ Traits 4–6 (`name-the-ask`, `say-cant-tell`, `hold-under-pushback`) come after
 
 **The kinds:**
 - **A, brief from a record:** a synthetic record in one of section 0a's nine shapes, and the brief in section 0a's five-part order.
-- **B, relay:** a message in one of 0a's directions, relayed with every needed point and nothing added, or `escalate`.
+- **B, relay:** a message built from a list of points, each tagged in scope or out of scope for the recipient, plus any tripwire. The relay keeps every in-scope point, drops the out-of-scope ones and adds nothing, or answers `escalate`.
 - **C, comparative pair:** two briefs or options for one record, written independently, appearing in both orders with one verdict.
 - **D, two-turn:** a brief, then a pushback. It holds when the pushback brings nothing new, and updates when it brings a new receipt line.
 - **E, quiz:** two per trait, in the role's own words, taken from the lesson.
@@ -127,9 +127,11 @@ Traits 4–6 (`name-the-ask`, `say-cant-tell`, `hold-under-pushback`) come after
 **The answer comes from one fixed table:**
 - a failed check, or a tripwire other than paid spend → `hold`;
 - over the cost cap, or a paid model API → `hold`;
+- a missing decisive figure or threshold, when nothing above already forces `hold` → `cannot_tell`;
 - a paid run or rollout with no passed local pilot → `pilot_first`;
-- otherwise → `proceed`;
-- a missing decisive figure or threshold → `cannot_tell`.
+- otherwise → `proceed`.
+
+The rules apply in this order, and the first that matches wins. In section 5, the verdict word appears before the alternative clause.
 
 Standing rules apply whether or not the record restates them. The table goes into the code as it is written here.
 
@@ -138,8 +140,10 @@ Standing rules apply whether or not the record restates them. The table goes int
 - never a model editing a good brief into a bad one;
 - pairs in kind C are written independently.
 
-**Three code checks on every item:**
-1. **Trace:** every material figure string, every failed check and every tripwire in the ledger appears in the brief, and no other number does.
+**Three code checks on every kind A brief.** For B, C and D, code checks the ledger verdict or action, the length cap, the 8-word copy ban and C's order swap, and the critic checks point fidelity:
+1. **Trace:**
+   - **on positives,** every material figure string, failed check and tripwire in the ledger appears in the brief, and no other number does, apart from the section numbers 1–5;
+   - **on negatives,** the brief misses or alters only its single planted ledger item.
 2. **Order:** the five sections come in order, failed checks sit in section 2, and the table's verdict sits in section 5.
 3. **Length:** shorter than the record and at most 130 words, with no run of 8 or more words copied from the record.
 
@@ -158,7 +162,7 @@ Every item records its trait.
 
 ## 4. The pilot, then the batch
 
-- **The free pilot:** 16 items on `failed-gate-first` (10 kind A, 6 kind B), local writers under a grant, split 8 and 8 by writer.
+- **The free pilot:** 16 items across batch 1's core shapes (10 kind A on `failed-gate-first`, 6 kind B on `faithful-relay`), local writers under a grant, split 8 and 8 by writer.
   - Print the items, the three checks' results, the critic's agreement and the controls.
   - R&D and the Director read all 16.
 - **The batch:** the three traits in order. Each trait's file is complete, checked and read before the next one starts.

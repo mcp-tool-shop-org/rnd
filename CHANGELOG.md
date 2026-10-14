@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.11] - 2026-10-14
+
+- Advocate lean brief: Argon's five structural fixes (pilot kinds match traits; checks scoped to kind A, trace on positives, section numbers exempt; cannot_tell ordered in the table, verdict before the alternative; relay points tagged in or out of scope).
+- Updated experiment `advocate-dataset`
+
 ## [1.1.8.2.10] - 2026-10-14
 
 - Advocate: lean batch-1 brief (Director-approved after Argon's shape check); the hardened design kept as brief-v1-hardened.md, its machinery deferred with triggers.

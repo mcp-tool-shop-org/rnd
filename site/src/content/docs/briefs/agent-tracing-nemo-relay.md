@@ -86,8 +86,9 @@ our own. It passed.
   before tracing starts. Every request was accounted for. The companion arm also showed three stray spans, for the
   same kind of reason: a teardown call ran after its measurement window closed.
 
-**The decision:** Relay stays in interlock as an **opt-in debugging tracer**, never on counted runs. Traced runs
-are marked and kept out of the routing table. The pre-registered rule said an off-count means reject. This
+**The decision:** Relay stays in interlock as an **opt-in debugging tracer**, never on counted runs. Once the
+debug-only build lands, traced runs will be marked and kept out of the routing table. In the trial they weren't yet,
+and that gap is one of the fixes. The pre-registered rule said an off-count means reject. This
 decision departs from it on purpose, because the off-count was our harness's fault. It is recorded as a dated
 amendment, not a re-reading. Before adoption, the harness fixes and a deterministic counting test have to land
 and pass review. No further GPU or NPU time is planned for Relay.

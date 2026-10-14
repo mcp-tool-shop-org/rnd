@@ -1,0 +1,10 @@
+{
+ "adapter_requests": 204,
+ "by_path": {
+  "/api/generate": 102,
+  "/api/ps": 1,
+  "/api/show": 101
+ },
+ "exit": 0,
+ "run_id": "relay-s1-20261014b-decode"
+}

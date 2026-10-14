@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.1.12] - 2026-10-14
+
+- interlock-relay stage 1 raw records archived (receipts, traces, call tables, driver records), needles redacted
+- Added experiment `agent-ab-harness`
+- Added experiment `interlock-relay`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.8.1.11] - 2026-10-14
 
 - NeMo Relay brief measured; newsletter issue 7: the interlock-relay experiment end to end

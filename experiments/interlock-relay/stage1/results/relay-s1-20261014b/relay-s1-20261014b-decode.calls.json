@@ -1,0 +1,42 @@
+{
+ "counts": {
+  "_run": {
+   "unload": {
+    "errors": 0,
+    "ms": 17.511,
+    "n": 1,
+    "timeouts": 0
+   }
+  },
+  "decode-off": {
+   "generate": {
+    "errors": 0,
+    "ms": 38309.591,
+    "n": 67,
+    "timeouts": 0
+   },
+   "show": {
+    "errors": 0,
+    "ms": 15413.742,
+    "n": 67,
+    "timeouts": 0
+   }
+  },
+  "decode-on": {
+   "generate": {
+    "errors": 0,
+    "ms": 14466.847,
+    "n": 34,
+    "timeouts": 0
+   },
+   "show": {
+    "errors": 0,
+    "ms": 469.253,
+    "n": 34,
+    "timeouts": 0
+   }
+  }
+ },
+ "mode": "relay",
+ "run_id": "relay-s1-20261014b-decode"
+}

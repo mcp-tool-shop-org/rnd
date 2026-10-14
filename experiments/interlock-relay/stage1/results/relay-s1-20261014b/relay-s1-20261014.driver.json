@@ -1,0 +1,24 @@
+{
+ "cap_min": 90.0,
+ "check_passed": true,
+ "needles_redacted": "the driver's H3 search strings (the home path, host and user names) are removed from this public copy",
+ "prefix": "relay-s1-20261014",
+ "preflight": {
+  "cpu_pct": 4.3,
+  "git_sha": "6ed29a2d649c8fbf06f94c1a269ec45589d32aa9",
+  "heartbeat_age_s": 1.3,
+  "idle_vram_mib": 2063,
+  "nemo_relay": "0.10.1",
+  "ollama_version": "0.35.1"
+ },
+ "steps": {
+  "decode": {
+   "exit": 1,
+   "run_id": "relay-s1-20261014-decode",
+   "timed_out": false,
+   "vram_breach": false,
+   "vram_peak_mib": 1952
+  }
+ },
+ "unloaded_at_end": []
+}

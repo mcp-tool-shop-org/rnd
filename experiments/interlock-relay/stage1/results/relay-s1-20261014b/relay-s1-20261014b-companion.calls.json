@@ -1,0 +1,68 @@
+{
+ "counts": {
+  "_run": {
+   "companion": {
+    "errors": 0,
+    "ms": 17494.892,
+    "n": 6,
+    "timeouts": 0
+   },
+   "show": {
+    "errors": 0,
+    "ms": 161.874,
+    "n": 6,
+    "timeouts": 0
+   },
+   "unload": {
+    "errors": 0,
+    "ms": 188.734,
+    "n": 8,
+    "timeouts": 0
+   }
+  },
+  "solo": {
+   "generate": {
+    "errors": 0,
+    "ms": 4535.02,
+    "n": 13,
+    "timeouts": 0
+   },
+   "show": {
+    "errors": 0,
+    "ms": 171.84,
+    "n": 13,
+    "timeouts": 0
+   }
+  },
+  "with-companion-off": {
+   "generate": {
+    "errors": 0,
+    "ms": 616.798,
+    "n": 4,
+    "timeouts": 0
+   },
+   "show": {
+    "errors": 0,
+    "ms": 54.761,
+    "n": 4,
+    "timeouts": 0
+   }
+  },
+  "with-companion-on": {
+   "generate": {
+    "errors": 0,
+    "ms": 616.204,
+    "n": 4,
+    "timeouts": 0
+   },
+   "show": {
+    "errors": 0,
+    "ms": 55.868,
+    "n": 4,
+    "timeouts": 0
+   }
+  }
+ },
+ "mode": "relay",
+ "run_id": "relay-s1-20261014b-companion"
+}

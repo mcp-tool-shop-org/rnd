@@ -1,0 +1,10 @@
+{
+ "adapter_requests": 63,
+ "by_path": {
+  "/api/generate": 35,
+  "/api/ps": 1,
+  "/api/show": 27
+ },
+ "exit": 0,
+ "run_id": "relay-s1-20261014b-companion"
+}

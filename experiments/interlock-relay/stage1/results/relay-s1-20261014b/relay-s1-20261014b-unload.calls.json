@@ -1,0 +1,42 @@
+{
+ "counts": {
+  "_run": {
+   "unload": {
+    "errors": 0,
+    "ms": 33.316,
+    "n": 1,
+    "timeouts": 0
+   }
+  },
+  "unload-off": {
+   "generate": {
+    "errors": 0,
+    "ms": 21261.622,
+    "n": 7,
+    "timeouts": 0
+   },
+   "show": {
+    "errors": 0,
+    "ms": 95.676,
+    "n": 7,
+    "timeouts": 0
+   }
+  },
+  "unload-on": {
+   "generate": {
+    "errors": 0,
+    "ms": 12094.217,
+    "n": 4,
+    "timeouts": 0
+   },
+   "show": {
+    "errors": 0,
+    "ms": 53.826,
+    "n": 4,
+    "timeouts": 0
+   }
+  }
+ },
+ "mode": "relay",
+ "run_id": "relay-s1-20261014b-unload"
+}

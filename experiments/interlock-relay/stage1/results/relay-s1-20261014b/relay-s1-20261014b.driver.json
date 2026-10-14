@@ -1,0 +1,62 @@
+{
+ "cap_min": 90.0,
+ "check_passed": true,
+ "needles_redacted": "the driver's H3 search strings (the home path, host and user names) are removed from this public copy",
+ "prefix": "relay-s1-20261014b",
+ "preflight": {
+  "cpu_pct": 2.5,
+  "git_sha": "a43cc31ff735472a04bea85616d96985a9425279",
+  "heartbeat_age_s": 0.2,
+  "idle_vram_mib": 1790,
+  "nemo_relay": "0.10.1",
+  "ollama_version": "0.35.1",
+  "python": "E:\\AI\\envs\\interlock\\Scripts\\python.exe"
+ },
+ "steps": {
+  "companion": {
+   "exit": 0,
+   "run_id": "relay-s1-20261014b-companion",
+   "timed_out": false,
+   "vram_breach": false,
+   "vram_peak_mib": 18909
+  },
+  "decode": {
+   "exit": 0,
+   "run_id": "relay-s1-20261014b-decode",
+   "timed_out": false,
+   "vram_breach": false,
+   "vram_peak_mib": 13379
+  },
+  "import": {
+   "triples": 15,
+   "vram_peak_mib": 13373
+  },
+  "long": {
+   "exit": 0,
+   "run_id": "relay-s1-20261014b-long",
+   "timed_out": false,
+   "vram_breach": false,
+   "vram_peak_mib": 13399
+  },
+  "stop": {
+   "exit": 77,
+   "expected_exit": 77,
+   "run_id": "relay-s1-20261014b-stop",
+   "spans_before_stop": 10,
+   "stop_written": true,
+   "stopped": true,
+   "vram_breach": false,
+   "vram_peak_mib": 13373
+  },
+  "unload": {
+   "exit": 0,
+   "run_id": "relay-s1-20261014b-unload",
+   "timed_out": false,
+   "vram_breach": false,
+   "vram_peak_mib": 13373
+  }
+ },
+ "unloaded_at_end": [
+  "qwen3:8b"
+ ]
+}

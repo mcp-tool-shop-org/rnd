@@ -1,0 +1,60 @@
+{
+ "counts": {
+  "_run": {
+   "unload": {
+    "errors": 0,
+    "ms": 30.164,
+    "n": 1,
+    "timeouts": 0
+   }
+  },
+  "long-off": {
+   "count": {
+    "errors": 0,
+    "ms": 20559.465,
+    "n": 16,
+    "timeouts": 0
+   },
+   "generate": {
+    "errors": 0,
+    "ms": 351859.554,
+    "n": 65,
+    "timeouts": 0
+   },
+   "show": {
+    "errors": 0,
+    "ms": 911.057,
+    "n": 65,
+    "timeouts": 0
+   },
+   "tags": {
+    "errors": 0,
+    "ms": 487.708,
+    "n": 1,
+    "timeouts": 0
+   },
+   "unload": {
+    "errors": 0,
+    "ms": 36.847,
+    "n": 2,
+    "timeouts": 0
+   }
+  },
+  "long-on": {
+   "generate": {
+    "errors": 0,
+    "ms": 178442.005,
+    "n": 33,
+    "timeouts": 0
+   },
+   "show": {
+    "errors": 0,
+    "ms": 469.392,
+    "n": 33,
+    "timeouts": 0
+   }
+  }
+ },
+ "mode": "relay",
+ "run_id": "relay-s1-20261014b-long"
+}

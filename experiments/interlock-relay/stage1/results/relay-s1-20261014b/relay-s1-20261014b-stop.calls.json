@@ -1,0 +1,34 @@
+{
+ "counts": {
+  "decode-off": {
+   "generate": {
+    "errors": 0,
+    "ms": 6587.831,
+    "n": 9,
+    "timeouts": 0
+   },
+   "show": {
+    "errors": 1,
+    "ms": 135.994,
+    "n": 10,
+    "timeouts": 0
+   }
+  },
+  "decode-on": {
+   "generate": {
+    "errors": 0,
+    "ms": 2106.747,
+    "n": 5,
+    "timeouts": 0
+   },
+   "show": {
+    "errors": 0,
+    "ms": 67.526,
+    "n": 5,
+    "timeouts": 0
+   }
+  }
+ },
+ "mode": "relay",
+ "run_id": "relay-s1-20261014b-stop"
+}

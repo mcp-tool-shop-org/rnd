@@ -1,0 +1,11 @@
+{
+ "adapter_requests": 217,
+ "by_path": {
+  "/api/generate": 117,
+  "/api/ps": 1,
+  "/api/show": 98,
+  "/api/tags": 1
+ },
+ "exit": 0,
+ "run_id": "relay-s1-20261014b-long"
+}

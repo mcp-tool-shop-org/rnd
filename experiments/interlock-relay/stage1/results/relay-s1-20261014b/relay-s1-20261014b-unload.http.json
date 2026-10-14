@@ -1,0 +1,10 @@
+{
+ "adapter_requests": 24,
+ "by_path": {
+  "/api/generate": 12,
+  "/api/ps": 1,
+  "/api/show": 11
+ },
+ "exit": 0,
+ "run_id": "relay-s1-20261014b-unload"
+}

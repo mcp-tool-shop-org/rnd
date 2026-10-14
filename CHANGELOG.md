@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.3] - 2026-10-14
+
+- advocate-dataset: Argon round 1 folded in (fact ledger, canonical block, independent negatives, isomorphic synthesis, local writers), R&D's three additions, the disposition record
+- Updated experiment `advocate-dataset`
+- Added experiment `agent-ab-harness`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.8.2.2] - 2026-10-14
 
 - Advocate brief: the studio shape (section 0a): the brief's fixed order (asks, headline, figures, tripwires, recommendation), the studio record kinds, tripwires as a constructed and keyable list (a relayed approval included), relay in the studio's directions, role titles only. The Publisher, on the Director's authority to align the build.

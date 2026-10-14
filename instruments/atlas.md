@@ -46,6 +46,6 @@ A folder with no part in `atlas/boundaries.yaml` reddens main on every new file 
 - `check` prints the exact boundary lines to add.
 - `map` warns about a top-level folder with no part.
 - `check` says when the map predates staged files.
-- A pre-registered experiment, `experiments/atlas-mcp-utility/`, measuring agents with and without `atlas mcp`. It was pre-registered on main on 2026-10-13 (rnd #5), after R&D's blind key audit: 15 of 15 keys confirmed after amendment 1. The Director approved the pilot only (4 pairs plus 2 repeats, run on his Claude plan, with a 30M-token ceiling). The full run waits for his go on the pilot report.
+- An experiment measuring agents with and without `atlas mcp` (`experiments/atlas-mcp-utility/`), withdrawn on 2026-10-13 as badly designed. Only its harness remains, unvalidated.
 - The exit test: a replay of the 2026-09-30 triage.
 - Cross-repository queries through the `repo` argument, after one security review.

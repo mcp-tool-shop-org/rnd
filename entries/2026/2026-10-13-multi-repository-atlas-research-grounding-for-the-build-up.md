@@ -8,6 +8,8 @@ fields: [studio-tooling]
 tags: [atlas, multi-repo, study-swarm, mcp]
 ---
 
+> **Note (2026-10-13):** the atlas-mcp-utility experiment this entry refers to was withdrawn as badly designed. Only its harness remains, and it is unvalidated. No result from that experiment should be cited.
+
 ## Summary
 
 On 2026-10-13 the Director ruled that Atlas is built up before any testing. Testing means the atlas-mcp-utility

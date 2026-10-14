@@ -8,6 +8,8 @@ fields: [agent-tooling, studio-tooling]
 tags: [docker, sandboxes, sbx, isolation, claude-code, ollama, atlas-mcp-utility, windows]
 ---
 
+> **Note (2026-10-13):** the atlas-mcp-utility experiment this entry refers to was withdrawn as badly designed. Only its harness remains, and it is unvalidated. No result from that experiment should be cited.
+
 ## Summary
 
 In one afternoon on 2026-10-13, the studio went from a Docker signup to a mountless, pinned Linux workspace where the

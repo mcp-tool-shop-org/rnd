@@ -11,6 +11,16 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.25] - 2026-10-13
+
+- atlas-mcp-utility withdrawn as badly designed; write-ups removed, harness kept and marked unvalidated
+- Updated `2026-10-13-atlas-testing-os-rnd-buildup`: Atlas, testing-os, housekeeping and rnd — the build-up program
+- Updated `2026-10-13-docker-sandboxes-on-the-rig-from-signup-to-a-pinned-pilot-wo`: Docker Sandboxes on the rig: from signup to a pinned pilot workspace
+- Updated `2026-10-13-multi-repository-atlas-research-grounding-for-the-build-up`: Multi-repository Atlas: research grounding for the build-up
+- Updated `2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ`: NVIDIA NeMo Relay: tracing agent harnesses, Claude Code included
+- Updated `atlas`: atlas — a repository's map, checked in CI and served to agents
+- Updated experiment `atlas-mcp-utility`
+
 ## [1.1.8.0.24] - 2026-10-13
 
 - atlas-mcp-utility amendment 13 rewritten: arm B is told to use Atlas; speed primary

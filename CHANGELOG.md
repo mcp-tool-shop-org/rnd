@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.16] - 2026-10-14
+
+- Advocate pilot brief: Argon's three alignment fixes applied (registered negative classes only, 26 texts, the fourth row, the critic's two counts); review and disposition filed
+- Updated experiment `advocate-dataset`
+
 ## [1.1.8.2.15] - 2026-10-14
 
 - Advocate: Seat C turn 2 (pack fix-up, phase 1) and turn 3 (the free pilot, 16 slots) briefs filed; the pilot brief goes to Argon before Seat C

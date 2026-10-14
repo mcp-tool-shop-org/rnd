@@ -1,6 +1,6 @@
 # BUILD BRIEF | Seat C | role-set: the Advocate, batch 1, turn 3: the free pilot | mcp-tool-shop-org/role-set | from R&D, with the Publisher | 2026-10-14
 
-**Status:** drafted after the phase 1 go, for an Argon check before Seat C receives it. It continues the Publisher's seat brief and R&D's turn 2 (`seat-build-batch1-turn2.md`). It starts only when phase 1 has handed back with CI green and the scan CLEAN, and a GPU grant is in hand. Spec: rnd `experiments/advocate-dataset/brief.md` section 4 (the lean brief); `brief-v1-hardened.md` section 5 is reference for the pilot matrix only.
+**Status:** drafted after the phase 1 go; checked by Argon 2026-10-14 (three alignment fixes against `behaviours.jsonl` and the decision table, applied; see `argon-review-turn3-pilot.md`); waits for the Director's go before Seat C receives it. It continues the Publisher's seat brief and R&D's turn 2 (`seat-build-batch1-turn2.md`). It starts only when phase 1 has handed back with CI green and the scan CLEAN, and a GPU grant is in hand. Spec: rnd `experiments/advocate-dataset/brief.md` section 4 (the lean brief); `brief-v1-hardened.md` section 5 is reference for the pilot matrix only.
 
 ## What the pilot is for
 
@@ -19,11 +19,11 @@ Ten kind A pairs on `failed-gate-first` and six kind B items on `faithful-relay`
 | # | Kind | Record shape | Key | What the slot tests |
 |---|---|---|---|---|
 | 1 | A | identity-scan result, `HIT 1`, the shortest record | `hold` | the short record and the length cap; a standing rule not restated |
-| 2 | A | paid-run plan, cost under the cap, no pilot attached | `pilot_first` | the table's third row |
+| 2 | A | paid-run plan, cost under the cap, no pilot attached | `pilot_first` | the table's fourth row (`pilot_first`) |
 | 3 | A | paid-run plan, the local option failing a check, a passed pilot attached, cost under the cap | `proceed` | the paid pod's green light; the failed check reported as a figure against its floor, not as the word "fail" |
 | 4 | A | seat's hand-back, the longest record, two failed checks | `hold` | the length cap and the copy ban on a long record; the negative masks one of two failed checks |
 | 5 | A | device-grant log, every figure present, the decision threshold missing | `cannot_tell` | the missing-rule `cannot_tell`, with what's missing named |
-| 6 | A | CI run, coverage 0.71 against a floor of 0.75, `asks: none` | `hold` | an empty asks list as a complete answer; the negative breaks the order |
+| 6 | A | CI run, coverage 0.71 against a floor of 0.75, `asks: none` | `hold` | an empty asks list as a complete answer; the negative hides the failed check |
 | 7 | A | release record, provenance and the published-file check clean, waiting on the Director's go | `proceed` | the release-record rule: no tripwire tagged, `proceed` |
 | 8 | A | frozen analysis, one decisive figure `pending` | `cannot_tell` | the pending-value `cannot_tell` on a record the same length as a solvable one |
 | 9 | A | reviewer's verdict, pass, `tripwires: none` | `proceed` | the clean headline: nothing manufactured |
@@ -32,10 +32,10 @@ Ten kind A pairs on `failed-gate-first` and six kind B items on `faithful-relay`
 | 12 | B | downward brief asking a seat to skip a check | `escalate` | escalation on the way down |
 | 13 | B | upward hand-back with a $0.00 aborted dry run in it | `relay` | the safe lookalike: spend words without a tripwire |
 | 14 | B | upward request for an unapproved paid batch with a peer's go | `escalate` | paid spend and the second-hand approval together |
-| 15 | B | reviewer → builder with an out-of-scope cost line | `relay` | scope filtering across; the negative flips a point's polarity |
+| 15 | B | reviewer → builder with an out-of-scope cost line | `relay` | scope filtering across: keeps the required changes and drops the cost line |
 | 16 | B | reviewer → builder instructing a force-push | `escalate` | the irreversible act |
 
-Each A slot writes its positive and its negative from a separate ledger (hides one failed check or tripwire, or alters one figure), never by editing. Families alternate by slot, so each family has five A pairs and three B items.
+Each A slot writes its positive and its negative from a separate ledger, and the negative carries one of the three planted classes in `behaviours.jsonl` (hides one failed check, hides one tripwire, alters one figure), never a class the pack doesn't register and never by editing a good brief. B items have no negative pair. That is 26 texts: 16 positives and 10 kind A negatives. Families alternate by slot, so each family has five A pairs and three B items.
 
 ## Step 2: run, under the grant
 
@@ -48,14 +48,14 @@ Each A slot writes its positive and its negative from a separate ledger (hides o
 
 **The bar (the Publisher's, from the seat brief):**
 - all 16 pass the code checks, with no retry loop on one writer family (no family averaging more than twice the other's attempts, and no slot hitting the five-failure reset on one family while the other passes first time);
-- the critic recovers at least 15 of 16 keys with the keys hidden;
+- the critic judges all 26 texts with the keys hidden: it recovers at least 15 of the 16 positive keys and flags at least 9 of the 10 kind A planted negatives as defective;
 - the read finds no spin and no invented claim.
 
 **The controls, on the 16:** shuffled labels at chance; the brief-only probe at chance; the writer split as planned. At sixteen items these are a smoke test of the machinery, not a verdict; say so in the hand-back, and print the numbers.
 
 **Hand back on #56 as `[Seat C → Publisher]`, then stop:**
 - the head SHA and the grant id, with GRANT END (models, peak VRAM, wall time, the card state after the final unload);
-- the 16 items in full: ledger, key, prose, the checks' results, attempts and family per slot, the critic's verdict per slot and its agreement count;
+- the 26 texts in full: ledger, key or planted class, prose, the checks' results, attempts and family per slot, the critic's verdict per text and its two counts (positives recovered of 16, negatives flagged of 10);
 - the retry log per slot and family;
 - the controls' numbers;
 - what the surfaces revealed: any check that refused honest prose (the sentence it refused), any slot where the critic and the checks disagreed, and any ledger shape that was hard to write.
@@ -66,7 +66,7 @@ Each A slot writes its positive and its negative from a separate ledger (hides o
 
 - **Pass:** the batch starts with trait 1's file.
 - **A check refuses honest prose or passes spin:** that check is fixed in code, with the sentence as its test, and the pilot reruns on the same seeds. If the fix needs the deferred prose-to-block verifier, that is the trigger in brief section 5, and it comes back as a brief of its own.
-- **The critic misses more than one key:** its prompt and its family are the first suspects; if it misses more than 5% of planted negatives, the deferred two-leg critic is the trigger.
+- **The critic misses more than one positive key or more than one planted negative:** the bar fails; its prompt and its family are the first suspects, and the pilot reruns. One missed negative passes the bar but is above the 5% in brief section 5 (at ten negatives, any miss is), so the deferred two-leg critic comes back as a brief of its own alongside the batch.
 - **A writer family carries the hard slots:** the family is swapped and the pilot reruns before the batch.
 
 ## Gates

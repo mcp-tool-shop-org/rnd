@@ -50,7 +50,7 @@
         "atlas": "the atlas start command above"
       },
       "extra_allowed_tools": ["mcp__atlas"],
-      "prompt_note": "This session has the atlas MCP tools. They answer questions about this repository from its committed Atlas map: its parts, its workflows, what a change reaches and what changed.",
+      "prompt_note": "Answer with the atlas MCP tools: start with them, and read files only to confirm or fill in what they do not give you.",
       "expected_mcp_tools": [
         "mcp__atlas__atlas_changes",
         "mcp__atlas__atlas_check_change",

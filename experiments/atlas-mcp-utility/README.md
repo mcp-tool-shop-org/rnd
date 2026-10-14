@@ -25,7 +25,7 @@ Each sha256 is of the file as committed, with LF line endings (`.gitattributes`)
 |---|---|
 | `tasks.json` | `eb2ba43c88c989022ecf2fe90d950b150e144a3f916540fa68c1d46559acca1a` (amendment 3) |
 | `prompt.md` | `a32c1c8f30e88f7264e6efce1d1c608339368b2e44691870206b3105e4e6226d` |
-| `allow-list.json` | `0565bc92a969a1225ac2f2442da09de3d3b3a71fa77834267d4960b5e7468836` (amendment 13) |
+| `allow-list.json` | `975d32721641482ec7681937cb28753c6d9a42879594304b6f18e8951fa51dd5` (amendment 13) |
 | `grade.py` | `f6d09f5144b42fc1c86f632015de33c84d0bfb9dd3faf2f192cb47d24d864455` (amendment 1) |
 | `debrief.md` | `ed73ef0864f6b603f32ab3f4a91874c465d537779ff1450094bc82690d312f8c` (amendment 3) |
 | Claude Code CLI | 2.1.197 |
@@ -434,21 +434,24 @@ Both legs ran the same six pairs (RC03 ×2, CF09, CF02, CF04 ×2) on CLI 2.1.197
 
 Nothing pinned changes.
 
-### Amendment 13, 2026-10-13: arm B's prompt names the Atlas tools
+### Amendment 13, 2026-10-13: the question is speed with Atlas, so arm B uses Atlas
 
 **Round 3 (21:05–21:21 EDT, on the hold of amendment 12).** Probe 4 passed (82,000 tokens, 0 leaks), and every arm B run started with Atlas connected and its tools offered.
-- **Haiku:** 11 of 12 correct, flips 0 of 4, $2.20 at API rates. It made 0 Atlas calls in all six arm B runs.
+- **Haiku:** 11 of 12 correct, flips 0 of 4, $2.20 at API rates. It made 0 Atlas calls in its six arm B runs.
 - **nemotron-131k:** 9 of 12 correct, flips 2 of 4, and 1 Atlas call in six arm B runs.
-- Both models' misses on CF09 were in arm B.
 
-**The finding: a tool on offer is not a tool in use.** Unprompted, neither model reaches for Atlas on these tasks. That is recorded as the shakedown's own result.
+**The design error (the Director's correction).** The question was never whether a model chooses Atlas. It is whether a model answers faster using Atlas than reading the files. Since amendment 2, arm B only made Atlas available, so no run so far measured Atlas at all: arm B was arm A with a larger prompt. The shakedowns tested the harness, and nothing else in them bears on the question.
 
-**R&D's ruling.**
-- The decision this experiment feeds is whether agent kickoffs include `atlas mcp`. A kickoff that includes it says so, so arm B now runs the way such a kickoff would.
-- Arm B's prompt ends with one neutral line, `prompt_note` in `allow-list.json`: "This session has the atlas MCP tools. They answer questions about this repository from its committed Atlas map: its parts, its workflows, what a change reaches and what changed."
-- The line doesn't tell the agent to use the tools, and it gives no hint about any task. Arm A's note is empty, because a kickoff without the sidecar wouldn't mention it.
-- Each run already records `atlas_calls`. Uptake, the share of arm B runs with at least one Atlas call, is reported beside correctness and tokens. It is not part of the decision rule.
-- `allow-list.json` is re-pinned for this. "What this does not measure" changes accordingly: arm B is now told the tools exist, but never told to use them.
+**The redesign:**
+- **The treatment:** arm B's prompt ends with an instruction, `prompt_note` in `allow-list.json`: "Answer with the atlas MCP tools: start with them, and read files only to confirm or fill in what they do not give you." Arm A is unchanged.
+- **Taking it:** an arm B run that answers without calling Atlas did not take the treatment. Its outcome is `untreated`, its pair is dropped, and two such runs stop the pilot.
+- **Primary: speed.** Wall time per pair, as the Hodges–Lehmann estimate of the log ratio B/A with its exact interval. The pairs run back to back in a seeded order, so they meet the same service conditions. Tokens get the same treatment, as the second speed measure.
+- **Guard: correctness.** The McNemar test as before. A faster arm that is significantly less correct doesn't win.
+- **Decision rule:**
+  - include `atlas mcp` in kickoffs, with an instruction to use it, if the wall-time interval lies wholly below 1 and correctness is not significantly worse;
+  - don't include it if the interval lies wholly above 1, or correctness is significantly worse;
+  - otherwise, inconclusive.
+- `allow-list.json` is re-pinned. The sections below keep their earlier wording, and where they conflict, this amendment governs.
 
 ## Design
 
@@ -610,7 +613,7 @@ The token ceiling (stop rule 3) is set at the volume $150 would buy at the rates
 - Agents that write code. Every task is a read-and-answer question, because fixes would need a hidden test per task, which this bank does not have.
 - Whether a person is helped by the page.
 - Models other than Sonnet 5.5.
-- Kickoff text that tells the agent to use the sidecar. Arm B is told the tools exist (amendment 13), never to use them.
+- Whether an agent chooses the sidecar unprompted. Arm B is told to use it (amendment 13).
 
 ## Files
 

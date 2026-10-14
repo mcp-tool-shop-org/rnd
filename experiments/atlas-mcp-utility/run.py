@@ -1282,8 +1282,8 @@ def probe(args, cli, allow, tasks):
 
 
 def arm_prompt(prompt, allow, arm):
-    """The task's prompt as the arm gets it: arm B's ends with its note naming
-    the Atlas tools, the way a kickoff that includes them would (amendment 13)."""
+    """The task's prompt as the arm gets it: arm B's ends with its instruction
+    to answer with the Atlas tools (amendment 13)."""
     note = allow["arms"][arm].get("prompt_note") or ""
     return prompt.rstrip("\n") + "\n\n" + note + "\n" if note else prompt
 
@@ -1308,6 +1308,7 @@ def pilot(args, cli, allow, tasks):
     budget = {"used": json.loads(probe_report.read_text(encoding="utf-8"))["tokens_used"], "ceiling": args.ceiling}
     plan = run_plan(PILOT, PILOT_REPEATS)
     records, dropped, attempts, failures, halted, debriefs = [], [], 0, 0, None, []
+    untreated, b_answered = 0, 0
     halt_error = None
     for pair in plan:
         task = tasks[pair["task"]]
@@ -1328,6 +1329,13 @@ def pilot(args, cli, allow, tasks):
                     record["correct"], record["grade"] = graded["correct"], graded
                 elif record["outcome"] == "turn_cap":
                     record["correct"], record["grade"] = False, {"correct": False, "reason": "the turn cap, with no answer"}
+                # Amendment 13: arm B measures a model using Atlas. A B run with
+                # no Atlas call did not take the treatment; its pair is dropped.
+                if arm == "B" and record["outcome"] in GRADED:
+                    b_answered += 1
+                if arm == "B" and record["outcome"] in GRADED and not record["atlas_calls"]:
+                    record["outcome"] = "untreated"
+                    untreated += 1
                 (out / f"{record['run']}-attempt{attempt}.json").write_text(json.dumps(record, indent=1), encoding="utf-8")
                 if record["outcome"] == "harness_failure":
                     failures += 1
@@ -1347,6 +1355,9 @@ def pilot(args, cli, allow, tasks):
                 halted = HALTING["plan_limit"]
             elif attempts >= 5 and failures / attempts > 0.2:
                 halted = "more than a fifth of attempts failed in the harness"
+            elif untreated >= 2:
+                # The instruction is not taking: stop rather than spend runs on it.
+                halted = "two arm B runs answered without calling Atlas (amendment 13)"
             if halted or record["outcome"] == "harness_failure":
                 break
         if len(pair_records) == 2 and all(r["outcome"] in GRADED for r in pair_records):
@@ -1372,6 +1383,9 @@ def pilot(args, cli, allow, tasks):
                                          "shell_reads", "refused_calls", *START_FIELDS)} for r in records],
         "dropped_pairs": dropped,
         "harness_failures": failures,
+        "untreated_b_runs": untreated,
+        # The share of answered arm B runs that called Atlas at least once.
+        "uptake": {"b_runs": b_answered, "with_atlas": b_answered - untreated},
         "attempts": attempts,
         "flip_rate": flip_rate(records),
         # The debriefs are counted against the ceiling and reported here alone,

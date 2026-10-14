@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.24] - 2026-10-13
+
+- atlas-mcp-utility amendment 13 rewritten: arm B is told to use Atlas; speed primary
+- Updated experiment `atlas-mcp-utility`
+
 ## [1.1.8.0.23] - 2026-10-13
 
 - atlas-mcp-utility amendment 13: arm B's prompt names the Atlas tools

@@ -949,3 +949,22 @@ class Amendment11(unittest.TestCase):
         self.assertEqual(run.loaded_context(ps), 131072)
         self.assertEqual(run.loaded_context(ps, run.LOCAL_BASE_MODEL), 32768)
         self.assertIsNone(run.loaded_context(None))
+
+
+class Amendment13(unittest.TestCase):
+    """Amendment 13: arm B's prompt names the Atlas tools, and never tells the agent to use them."""
+
+    def setUp(self):
+        self.allow = json.loads((HERE / "allow-list.json").read_text(encoding="utf-8"))
+
+    def test_only_arm_b_gets_the_note(self):
+        prompt = "Answer the question.\n"
+        self.assertEqual(run.arm_prompt(prompt, self.allow, "A"), prompt)
+        b = run.arm_prompt(prompt, self.allow, "B")
+        self.assertTrue(b.startswith("Answer the question.\n\n"))
+        self.assertIn("This session has the atlas MCP tools.", b)
+
+    def test_the_note_names_the_tools_and_asks_nothing(self):
+        note = self.allow["arms"]["B"]["prompt_note"].lower()
+        for word in ("use ", "call ", "should", "must", "try "):
+            self.assertNotIn(word, note)

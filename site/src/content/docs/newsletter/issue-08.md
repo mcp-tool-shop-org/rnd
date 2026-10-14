@@ -5,7 +5,7 @@ issue: 8
 date: 2026-10-14
 highlights:
   - "<strong>A claim puzzle can only test \"exactly\":</strong> a short proof settled which size words a claim can catch a careless reader on, and the generator now refuses what can't be tested."
-  - "<strong>The floors are enforced in CI from a committed record:</strong> every build's skeleton, keyed by a hash over every file that decides a build, checked in four minutes; the exhaustive rebuild runs on demand and must reproduce it."
+  - "<strong>The floors are enforced in CI from a committed record:</strong> every build's skeleton, keyed by a hash over every file that decides a build, checked in seconds inside the normal CI job; the exhaustive rebuild runs on demand and must reproduce it."
   - "<strong>The build stopped itself on a pre-existing defect</strong> and the fix was the one the rules allowed: split the capacity weights by stratum, not cap the tries or drop the cell."
   - "<strong>Three-value claims went from 27 usable cells to 61,</strong> from a top repeat of 4 (a fail) to 2 on fresh locked seeds, and the allocation test places twelve packs where six fit before."
 ---
@@ -32,7 +32,7 @@ Brief 3 made the packs of one kind share their skeleton space, with an allocator
 
 ## The floors in CI, from a committed record
 
-Proving 640 puzzles under coverage took 46 minutes against a 15-minute job. The ruling, after a cross-family consult: the measurement is committed. A record holds every build's cell, try count and skeleton, keyed by a hash over every file that decides a build, closed under the package's imports. The normal job recomputes the hash, fails a mismatch by naming the regenerate command, and computes the floors from the stored skeletons in about four minutes. The exhaustive rebuild runs on demand and must reproduce the record exactly. A cap on build attempts was refused twice: it changes which puzzles get built. → [role-set #49](https://github.com/mcp-tool-shop-org/role-set/pull/49)
+Proving 640 puzzles under coverage took 46 minutes against a 15-minute job. The ruling, after a cross-family consult: the measurement is committed. A record holds every build's cell, try count and skeleton, keyed by a hash over every file that decides a build, closed under the package's imports. The normal job recomputes the hash, fails a mismatch by naming the regenerate command, and computes the floors from the stored skeletons in seconds, inside a CI job that finishes in about seven minutes. The exhaustive rebuild runs on demand and must reproduce the record exactly. A cap on build attempts was refused twice: it changes which puzzles get built. → [role-set #49](https://github.com/mcp-tool-shop-org/role-set/pull/49)
 
 ## The new axis, and the second stop
 

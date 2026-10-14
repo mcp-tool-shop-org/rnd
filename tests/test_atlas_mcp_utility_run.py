@@ -211,12 +211,15 @@ class Isolation(unittest.TestCase):
         self.assertEqual(run.tool_use_problems(debrief, self.allow, "B"),
                          ["called a tool its arm does not have: WebFetch"])
 
-    def test_arm_b_may_start_with_atlas_pending_and_no_atlas_tools(self):
-        # Amendment 8: the sandbox probe's arm B started this way (2.1.197
-        # registers MCP tools late) and its atlas_overview call answered.
+    def test_arm_b_may_not_start_with_atlas_pending(self):
+        # Amendment 8 accepted this start; amendment 12 refuses it: on the plan
+        # route such a task turn never offered the Atlas tools.
         a, b = init_event("restricted-A"), init_event("restricted-B")
         late = {**b, "tools": a["tools"], "mcp_servers": [{"name": "atlas", "status": "pending"}]}
-        self.assertEqual(run.isolation_problems(late, "B", self.allow), [])
+        problems = run.isolation_problems(late, "B", self.allow)
+        self.assertIn("arm B has no Atlas tools", problems)
+        self.assertIn("MCP servers are {'atlas': 'pending'}, the arm needs {'atlas': 'connected'}", problems)
+        self.assertEqual(run.ATLAS_HOLD_S, 10)
         # Pending with some Atlas tools, or pending in arm A, is still refused.
         partial = {**late, "tools": a["tools"] + ["mcp__atlas__atlas_reach"]}
         self.assertTrue(run.isolation_problems(partial, "B", self.allow))
@@ -790,19 +793,28 @@ class Replay(unittest.TestCase):
         self.assertIn("$((n-12))", refused[1])
         self.assertTrue(all(r.startswith("Bash in: ") for r in refused), refused)
 
-    def test_the_rc03_runs_pass(self):
-        for name, status in (("RC03-A1", None), ("RC03-A2", None), ("RC03-B1", "pending"), ("RC03-B2", "pending")):
+    def test_the_rc03_runs_pass_and_arm_b_without_atlas_is_refused(self):
+        for name in ("RC03-A1", "RC03-A2"):
             with self.subTest(run=name):
                 checked = run.replay(self.STREAMS / f"{name}.jsonl", self.allow)
                 self.assertEqual((checked["outcome"], checked["isolation"], checked["refused_calls"]), ("answered", [], []))
-                self.assertEqual(checked["atlas_status_at_init"], status)
                 self.assertEqual(checked["shell_reads"], 0)
+        # Amendment 12: these arm B runs started with atlas pending and never
+        # had its tools, so they were arm A in effect.
+        for name in ("RC03-B1", "RC03-B2"):
+            with self.subTest(run=name):
+                checked = run.replay(self.STREAMS / f"{name}.jsonl", self.allow)
+                self.assertEqual(checked["atlas_status_at_init"], "pending")
+                self.assertEqual(checked["outcome"], "isolation_failed")
+                self.assertIn("arm B has no Atlas tools", checked["isolation"])
 
-    def test_the_replay_mode_exits_clean_on_shakedown_2(self):
+    def test_the_replay_mode_exits_clean_only_where_atlas_was_there(self):
         streams = sorted(str(p) for p in self.STREAMS.glob("*.jsonl"))
         self.assertEqual(len(streams), 5)
+        arm_a = [s for s in streams if "-A" in Path(s).stem]
         with unittest.mock.patch("sys.stdout"):
-            self.assertEqual(run.main(["--replay", *streams]), 0)
+            self.assertEqual(run.main(["--replay", *arm_a]), 0)
+            self.assertEqual(run.main(["--replay", *streams]), 1)
 
     def test_the_same_streams_fail_the_local_route(self):
         # A Sonnet stream on the local route is a run that reached the plan.

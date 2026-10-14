@@ -11,6 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.13] - 2026-10-14
+
+- T10 Phase 1 (if_shape) landed in role-set #55: brief 3 outcome, the T10 brief page, newsletter issue 8; the seat brief for role-set's full treatment and 0.2.0
+- Added experiment `advocate-dataset`
+- Added experiment `agent-ab-harness`
+- Added experiment `nemo-relay-trial`
+- Updated experiment `t10-variety`
+
 ## [1.1.8.2.12] - 2026-10-14
 
 - Advocate lean brief: one verdict vocabulary (the table's hold/cannot_tell/pilot_first/proceed; supported retired), and paid model API (always hold) told apart from a paid offrig pod run (green-light conditions). Argon's resolution of the seat's Phase 0 question.

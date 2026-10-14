@@ -46,10 +46,19 @@ narrower by construction; that's a property of the puzzle, not a defect.
 | claim, two values | 40/40 | 1 | 38/40, top 2 |
 | claim, three values | 108/120 | 3 | 106/120, top 4 |
 
-Three-value claims sit exactly on the top-repeat floor. With "exactly" the only size word, those cells are the
-scarcest, and a cap of 3 visits on the barest ones is what fits six packs. A seventh three-value pack needs the
-next design step, a shape axis for the conditional clues, and the capacity check fails loudly if one is added
-first.
+**Then the shape axis landed, and the floor is no longer the ceiling.** The conditional clues gained a shape
+coordinate (for one `if`, the consequent's polarity; for two, chain, shared consequent, shared antecedent or
+disjoint), and the capacity weights were split by stratum after the build stopped itself on a pre-existing
+defect. On fresh locked seeds 101–120, beside the earlier code run on the same seeds:
+
+| Stratum | Before | After |
+|---|---|---|
+| claim, three values | 112/120, top 4 (fail), 26 zero-`if` visits | 118/120, top 2, none |
+| set, three values | 118/120, top 2 | 118/120, top 2 |
+
+Three-value claims have 61 usable cells against 27; the cap on the barest cells is back to 2; an allocation test
+places twelve three-value packs where six fit before. All 1,280 builds across four seed files build inside the try
+limit.
 
 **The floors are enforced in CI, from a committed record.** The full measurement is 640 proven builds and takes
 too long for a 15-minute job under coverage. So the measurement is committed, with a hash over every file that
@@ -69,5 +78,6 @@ must reproduce the record exactly. A cap on build attempts was refused twice: it
 ## Receipts
 
 - role-set `787ccf8` (#49): the allocator, the record `src/role_set/generate/t10_record.json`, and the CI gate.
+- role-set `549a619` (#55): the `if_shape` axis, the per-stratum capacity weights, the record over seeds 1–20, 61–80, 81–100 and 101–120.
 - rnd `experiments/t10-variety/`: the three briefs, the outside reviewer's input, and the outcome.
 - The proof that claims can test only "exactly": brief 2, section 3.

@@ -1,6 +1,6 @@
 # NeMo Relay inside interlock, on local models — design v3.1
 
-**Status:** v3.1. Argon's round 4 raised no structural issues, so it's ready for the Director's approval. Paper only: no GPU, no NPU, no installs, and nothing runs. The order is Argon audits until nothing structural remains, then the Director's approval, then stage 0 (code and tests on fakes), then device runs under the Publisher's grants. Template: [A/B experiments](https://mcp-tool-shop-org.github.io/rnd/handbook/ab-experiments/). Change log at the end, with a table of how each round-1 finding was handled.
+**Status:** v3.1, approved by the Director on 2026-10-13 after Argon's round 4 raised no structural issues. On hold until interlock is stable: stage 0 code exists on a local branch and is not pushed. Paper only: no GPU, no NPU, no installs, and nothing runs. The order is Argon audits until nothing structural remains, then the Director's approval, then stage 0 (code and tests on fakes), then device runs under the Publisher's grants. Template: [A/B experiments](https://mcp-tool-shop-org.github.io/rnd/handbook/ab-experiments/). Change log at the end, with a table of how each round-1 finding was handled.
 
 **Scope:** local models only. No Claude in any arm. The subject is interlock (repository `mcp-tool-shop-org/interlock`, formerly switchyard), the studio's measurement and routing harness:
 - Ollama on the RTX 5090 (127.0.0.1:11434, and the run-owned 11441 in e4b);

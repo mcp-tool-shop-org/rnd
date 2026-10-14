@@ -11,6 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.1.0] - 2026-10-14
+
+- t10-variety: two seat briefs and an Argon consult on what a claim item can test (role-set #53, #54); interlock-relay audit briefs, rounds 1-4; interlock-relay design marked approved and on hold
+- Added experiment `agent-ab-harness`
+- Updated experiment `interlock-relay`
+- Added experiment `nemo-relay-trial`
+- Added experiment `t10-variety`
+
 ## [1.1.8.0.31] - 2026-10-13
 
 - interlock-relay design v3.1 (Director-approved after four Argon audits)

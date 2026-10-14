@@ -164,3 +164,25 @@ Amendment 1 chose `if_shape` now. Argon, consulted by the Director on the same s
 - **Phase 2 is `if_shape` for claim cells,** as amendment 1 described it. It runs only if a claim stratum misses a floor on the locked seeds 61–80, or before another three-value pack is added.
 - **`polarity_mode` and the claim-role axis stay out of scope.**
 - **#54's hard assertion,** the allocator's other rules, and the locked seeds 61–80 are unchanged.
+
+## Outcome, 2026-10-14: landed in role-set `787ccf8` (#49)
+
+Seat A (Grok, then Argon from the CI round) built brief 3 with amendment 2. R&D reproduced the locked-seed table independently in clean worktrees, then passed #49 at `68a0f0d`.
+
+| Stratum (locked seeds 61–80) | Distinct | Top repeat | Before the allocator |
+|---|---|---|---|
+| set two | 40/40 | 1 | 40/40 |
+| set three | 120/120 | 1 | 110/119, one seed refused to build |
+| claim two | 40/40 | 1 | 38/40, top 2 |
+| claim three | 108/120 | 3, on cell (3, =, 1, 1) | 106/120, top 4 |
+
+Every stratum clears the floors. claim three sits exactly on the top-repeat floor, the known limit of the zero-`if` cap of 3; Phase 2 `if_shape` is the relief before a seventh three-value pack, and the capacity gate fails loudly if one arrives first.
+
+**How the floors are enforced in CI** (R&D's ruling after the suite outgrew the 15-minute job; the committed-record fallback applied once Argon's plan missed the 10-minute budget):
+- A committed record, `src/role_set/generate/t10_record.json`, holds every build on seeds 1–20 and 61–80 for every pack and both questions: built, cell, tries, canonical skeleton. It carries a sha256 over every file that decides a build, closed under the package's imports.
+- The normal job recomputes the hash, fails a mismatch by naming the regenerate command, asserts every entry built, and computes the floors from the stored skeletons. It runs in about four minutes.
+- The exhaustive rebuild runs only on `workflow_dispatch`, without coverage, and must reproduce the record exactly. Any PR that changes the record needs a green dispatch run on its head before an R&D pass.
+- A try cap, or dropping costly cells, stays refused: either changes which puzzles get built.
+
+**Scheduling view sent to the Publisher:** Phase 2 waits for the next three-value pack request; the two-value claim gap is structural (brief 2) and needs no work.
+

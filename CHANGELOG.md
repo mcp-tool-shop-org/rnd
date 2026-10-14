@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.1.13] - 2026-10-14
+
+- T10 variety landed in role-set #49: outcome in briefs 2 and 3; public brief page
+- Added experiment `agent-ab-harness`
+- Added experiment `nemo-relay-trial`
+- Updated experiment `t10-variety`
+
 ## [1.1.8.1.12] - 2026-10-14
 
 - interlock-relay stage 1 raw records archived (receipts, traces, call tables, driver records), needles redacted

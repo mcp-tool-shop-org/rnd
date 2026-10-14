@@ -1,0 +1,367 @@
+{
+ "h1": {
+  "companion": {
+   "checks": {
+    "every_span_closed": true,
+    "requests_counted_once": false,
+    "spans_are_the_traced_slots_calls": false
+   },
+   "counted": 62,
+   "holds": false,
+   "sent": 63,
+   "spans": 11
+  },
+  "decode": {
+   "checks": {
+    "every_span_closed": true,
+    "requests_counted_once": false,
+    "spans_are_the_traced_slots_calls": true
+   },
+   "counted": 203,
+   "holds": false,
+   "sent": 204,
+   "spans": 68
+  },
+  "long": {
+   "checks": {
+    "every_span_closed": true,
+    "requests_counted_once": false,
+    "spans_are_the_traced_slots_calls": true
+   },
+   "counted": 216,
+   "holds": false,
+   "sent": 217,
+   "spans": 66
+  },
+  "unload": {
+   "checks": {
+    "every_span_closed": true,
+    "requests_counted_once": false,
+    "spans_are_the_traced_slots_calls": true
+   },
+   "counted": 23,
+   "holds": false,
+   "sent": 24,
+   "spans": 8
+  }
+ },
+ "h2": {
+  "decode": {
+   "client_time": {
+    "median_ms": 0.547525,
+    "p99_ms": 0.6500585000000001,
+    "triples": 30,
+    "verdict": "fails"
+   },
+   "holds": false,
+   "metrics": {
+    "decode_tok_s": {
+     "aa_excursions": 2,
+     "b_excursions": 1,
+     "band": 0.10453267833027288,
+     "delta": 0.05226633916513644,
+     "excursions_allowed": 4,
+     "half_width": 0.008346609516955096,
+     "interval": [
+      0.0003993577518074838,
+      0.017092576785717677
+     ],
+     "mean": 0.00874596726876258,
+     "primary": true,
+     "tail": true,
+     "tail_p95": 0.05982636522906584,
+     "triples": 30,
+     "verdict": "holds"
+    },
+    "latency_ms": {
+     "aa_excursions": 2,
+     "b_excursions": 1,
+     "band": 0.15218272279518164,
+     "delta": 0.07609136139759082,
+     "excursions_allowed": 4,
+     "half_width": 0.012165575709421719,
+     "interval": [
+      -0.02613244512405765,
+      -0.0018012937052142106
+     ],
+     "mean": -0.01396686941463593,
+     "primary": true,
+     "tail": true,
+     "tail_p95": 0.09855123733946229,
+     "triples": 30,
+     "verdict": "holds"
+    },
+    "prompt_tok_s": {
+     "aa_excursions": 1,
+     "b_excursions": 1,
+     "band": 0.6942060301591598,
+     "delta": 0.3471030150795799,
+     "excursions_allowed": 4,
+     "half_width": 0.05560560447573358,
+     "interval": [
+      -0.000848733242406606,
+      0.11036247570906055
+     ],
+     "mean": 0.054756871233326974,
+     "primary": true,
+     "tail": true,
+     "tail_p95": 0.20266847270203303,
+     "triples": 30,
+     "verdict": "holds"
+    },
+    "system_cpu_pct": {
+     "aa_excursions": 2,
+     "b_excursions": 3,
+     "band": 1.11252422289316,
+     "delta": 0.55626211144658,
+     "excursions_allowed": 4,
+     "half_width": 0.2560008740433087,
+     "interval": [
+      0.024434205395365227,
+      0.5364359534819826
+     ],
+     "mean": 0.2804350794386739,
+     "primary": true,
+     "tail": true,
+     "tail_p95": 1.8346938775510204,
+     "triples": 30,
+     "verdict": "holds"
+    },
+    "vram_mib": {
+     "triples": 0,
+     "verdict": "not measured"
+    }
+   },
+   "pair": "decode",
+   "triples": 30
+  },
+  "import": {
+   "barrier_reported": {
+    "decode_tok_s": {
+     "band": 0.10453267833027288,
+     "gap": 0.0062782877706495975,
+     "holds": true,
+     "with_barrier": 228.7043654701909,
+     "without": 230.14475889322296
+    },
+    "latency_ms": {
+     "band": 0.15218272279518164,
+     "gap": 0.006882506946643528,
+     "holds": true,
+     "with_barrier": 421.83855,
+     "without": 418.9452
+    }
+   },
+   "holds": false,
+   "metrics": {
+    "decode_tok_s": {
+     "aa_excursions": 1,
+     "b_excursions": 0,
+     "band": 0.014341045078130143,
+     "delta": 0.007170522539065072,
+     "excursions_allowed": 3,
+     "half_width": 0.002173466264205379,
+     "interval": [
+      -0.002437347099932136,
+      0.001909585428478622
+     ],
+     "mean": -0.0002638808357267571,
+     "primary": true,
+     "tail": true,
+     "tail_p95": 0.007947444705237386,
+     "triples": 15,
+     "verdict": "holds"
+    },
+    "latency_ms": {
+     "aa_excursions": 1,
+     "b_excursions": 0,
+     "band": 0.014320673762023332,
+     "delta": 0.007160336881011666,
+     "excursions_allowed": 3,
+     "half_width": 0.002197255243822727,
+     "interval": [
+      -0.001765269758018545,
+      0.0026292407296269094
+     ],
+     "mean": 0.00043198548580418217,
+     "primary": true,
+     "tail": true,
+     "tail_p95": 0.008082822217033167,
+     "triples": 15,
+     "verdict": "holds"
+    },
+    "prompt_tok_s": {
+     "aa_excursions": 1,
+     "b_excursions": 4,
+     "band": 0.0387420081804987,
+     "delta": 0.01937100409024935,
+     "excursions_allowed": 3,
+     "half_width": 0.0132055294749631,
+     "interval": [
+      -0.007810047766960448,
+      0.018601011182965754
+     ],
+     "mean": 0.005395481708002653,
+     "primary": true,
+     "tail": false,
+     "tail_p95": 0.04347930319944875,
+     "triples": 15,
+     "verdict": "fails"
+    }
+   },
+   "triples": 15
+  },
+  "long": {
+   "client_time": {
+    "median_ms": 0.681725,
+    "p99_ms": 0.7806004999999999,
+    "triples": 30,
+    "verdict": "fails"
+   },
+   "holds": false,
+   "metrics": {
+    "decode_tok_s": {
+     "aa_excursions": 1,
+     "b_excursions": 0,
+     "band": 0.021330359000668393,
+     "delta": 0.010665179500334196,
+     "excursions_allowed": 4,
+     "half_width": 0.002577847158008921,
+     "interval": [
+      -0.0006174602664361086,
+      0.004538234049581733
+     ],
+     "mean": 0.0019603868915728123,
+     "primary": true,
+     "tail": true,
+     "tail_p95": 0.016996962791856588,
+     "triples": 30,
+     "verdict": "holds"
+    },
+    "latency_ms": {
+     "aa_excursions": 1,
+     "b_excursions": 0,
+     "band": 0.024415776213174673,
+     "delta": 0.012207888106587336,
+     "excursions_allowed": 4,
+     "half_width": 0.003109367870564103,
+     "interval": [
+      -0.002751049756474681,
+      0.0034676859846535252
+     ],
+     "mean": 0.00035831811408942236,
+     "primary": true,
+     "tail": true,
+     "tail_p95": 0.018576992962482847,
+     "triples": 30,
+     "verdict": "holds"
+    },
+    "prompt_tok_s": {
+     "aa_excursions": 0,
+     "b_excursions": 0,
+     "band": 0.01,
+     "delta": 0.005,
+     "excursions_allowed": 4,
+     "half_width": 0.0003557151334934279,
+     "interval": [
+      -0.0003038210072840412,
+      0.00040760925970281456
+     ],
+     "mean": 5.1894126209386646e-05,
+     "primary": true,
+     "tail": true,
+     "tail_p95": 0.0020963264301543136,
+     "triples": 30,
+     "verdict": "holds"
+    },
+    "system_cpu_pct": {
+     "aa_excursions": 2,
+     "b_excursions": 3,
+     "band": 0.8722261241774741,
+     "delta": 0.43611306208873707,
+     "excursions_allowed": 4,
+     "half_width": 0.31214074986284274,
+     "interval": [
+      -0.13655259809433598,
+      0.4877289016313495
+     ],
+     "mean": 0.17558815176850676,
+     "primary": false,
+     "tail": true,
+     "tail_p95": 1.7281250000000006,
+     "triples": 30,
+     "verdict": "inconclusive"
+    },
+    "vram_mib": {
+     "triples": 0,
+     "verdict": "not measured"
+    }
+   },
+   "pair": "long",
+   "triples": 30
+  }
+ },
+ "h3": {
+  "companion": {
+   "checks": {
+    "no_canary": true,
+    "no_home": true,
+    "no_host": true,
+    "no_user": true,
+    "parses": true,
+    "run_scope_closed": true
+   },
+   "holds": true
+  },
+  "decode": {
+   "checks": {
+    "no_canary": true,
+    "no_home": true,
+    "no_host": true,
+    "no_user": true,
+    "parses": true,
+    "run_scope_closed": true
+   },
+   "holds": true
+  },
+  "long": {
+   "checks": {
+    "no_canary": true,
+    "no_home": true,
+    "no_host": true,
+    "no_user": true,
+    "parses": true,
+    "run_scope_closed": true
+   },
+   "holds": true
+  },
+  "receipts_check": {
+   "holds": true
+  },
+  "stop": {
+   "checks": {
+    "no_canary": true,
+    "no_home": true,
+    "no_host": true,
+    "no_user": true,
+    "parses": true,
+    "run_scope_closed": true,
+    "stopped_mid_run": true
+   },
+   "holds": true
+  },
+  "unload": {
+   "checks": {
+    "no_canary": true,
+    "no_home": true,
+    "no_host": true,
+    "no_user": true,
+    "parses": true,
+    "run_scope_closed": true
+   },
+   "holds": true
+  }
+ },
+ "prefix": "relay-s1-20261014b",
+ "stage1_holds": false
+}

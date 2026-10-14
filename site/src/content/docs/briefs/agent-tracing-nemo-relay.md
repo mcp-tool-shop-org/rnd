@@ -1,9 +1,9 @@
 ---
 title: How do we see what an agent actually did?
-description: A passing check says an agent got the right answer, not how it got there. NVIDIA's NeMo Relay traces every model and tool call. Here's what it offers the studio, where it doesn't fit yet, and the trial we've planned.
-date: 2026-10-13
-status: research
-shelf: not yet measured here
+description: A passing check says an agent got the right answer, not how it got there. NVIDIA's NeMo Relay traces every model and tool call. We measured it inside our local-model harness. It records everything faithfully but costs too much client time per call for counted runs, so it stays a debugging tool.
+date: 2026-10-14
+status: interim
+shelf: not yet (the debug-only build is still to land)
 ---
 
 ## The question
@@ -64,7 +64,35 @@ the retries is a real improvement, and only a trace shows it.
   for every session. We'll only use its per-run mode, which starts a private gateway for one run and leaves
   nothing behind.
 
-## The trial we've planned
+## What we measured: Relay inside interlock (October 2026)
+
+interlock is our harness for measuring local models: it drives them through Ollama on the RTX 5090 and writes a
+receipt for every measurement. The first trial asked whether Relay could trace interlock's model calls **without
+changing what interlock measures**. It was pre-registered, with its analysis frozen before any run, and reviewed by
+an outside model from a different family at each step.
+
+**Stage 0 (code and tests on fakes):** Relay's trace answered five diagnostic questions about a run that our
+receipts couldn't. It also stayed within a per-call size and time budget, set against a native event log of
+our own. It passed.
+
+**Stage 1 (the 5090, 30 traced-against-untraced triples per call pattern):** the frozen analysis said **no**.
+- **The model's numbers didn't move.** Decode speed, prompt speed and latency all tested equivalent with tracing on.
+  The traces leaked nothing: no prompt text, no paths, no names.
+- **The client-side cost failed its gate.** Each traced call costs about 0.27 ms more on our side. That is Relay's
+  own per-call work, run on a CPU waking from the rest between measurements. Per two-call measurement that is
+  0.55–0.68 ms, against a hard budget of 0.5 ms. A CPU-only bench with the same rests reproduces the live figure,
+  so a rerun wouldn't change it.
+- **The request count was off by exactly one in every step.** We traced it to our own harness: a card check runs
+  before tracing starts. Every request was accounted for. The companion arm also showed three stray spans, for the
+  same kind of reason: a teardown call ran after its measurement window closed.
+
+**The decision:** Relay stays in interlock as an **opt-in debugging tracer**, never on counted runs. Traced runs
+are marked and kept out of the routing table. The pre-registered rule said an off-count means reject. This
+decision departs from it on purpose, because the off-count was our harness's fault. It is recorded as a dated
+amendment, not a re-reading. Before adoption, the harness fixes and a deterministic counting test have to land
+and pass review. No further GPU or NPU time is planned for Relay.
+
+## The trial we'd still like
 
 A small, pre-registered trial after the current experiment's pilot, on harnesses where waste has already cost
 us:
@@ -82,8 +110,11 @@ setting it up cost?
 
 ## Caveats
 
-- **Read, not measured.** Everything here comes from NVIDIA's documentation, repository and tutorial. Nothing
-  has run on our machines yet, so the status is *research*.
+- **Measured on one rig, with one model, through one harness.** The client-time cost is specific to Relay's
+  per-call work on this CPU and this measurement design. It says nothing about Relay's value for tracing whole
+  agents, where a fraction of a millisecond per call doesn't matter.
+- **The agent-tracing trial below hasn't run.** Its parts of this page still come from NVIDIA's documentation,
+  repository and tutorial.
 - **The tutorial's example task uses an NVIDIA-hosted model with an API key.** Relay itself doesn't need one.
   Our trial would trace local models or agents already covered by our Claude plan.
 
@@ -92,4 +123,6 @@ setting it up cost?
 - [NVIDIA/NeMo-Relay](https://github.com/NVIDIA/NeMo-Relay): the repository (Apache-2.0)
 - [NeMo Relay CLI: basic usage](https://docs.nvidia.com/nemo/relay/nemo-relay-cli/basic-usage): the agents it wraps, and its per-run and persistent modes
 - [Instrumenting applications](https://docs.nvidia.com/nemo/relay/instrument-applications/about)
+- The interlock trial: `experiments/interlock-relay/` in this repository: the design (with amendment v3.2), stage
+  0's record, and stage 1's frozen analysis, its output, and the result note
 - rnd's library entry and its instrument file: `entries/2026/2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ.md` and `instruments/nemo-relay.md`

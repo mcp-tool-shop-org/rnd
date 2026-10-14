@@ -58,5 +58,6 @@ Argon found **no blocking issues: stage 1 can run.**
   equivalence is tested, and the ABA order controls drift but not this. Before every step the system CPU,
   averaged over 5 s, must be at most 25%. That's interlock `6ed29a2`; it read 8% with the rig quiet.
 - **The whole preflight now passes read-only on the rig at interlock `bfc484a`:** heartbeat 2 s, nemo-relay 0.10.1, Ollama 0.35.1, one listener, no compute workload, idle 2,811 MiB, logs/ ignored, a clean tree.
+- **The interpreter** (2026-10-14, under the grant): the first attempt, prefix `relay-s1-20261014`, ran from the checkout's `.venv`. interlock's runner refuses a device run from an in-repo interpreter, and it did so in the first step after 8 s, with nothing loaded. The pinned environment the interlock README names, `E:/AI/envs/interlock`, didn't exist on the rig. It was built from `uv.lock` alone (Python 3.12.13, nemo-relay 0.10.1). The driver's preflight now refuses an interpreter inside the checkout before any step and records its path (interlock `a43cc31`). The refused prefix stays as the record; the run is `relay-s1-20261014b`.
 
 The analysis is unchanged since its freeze at rnd `cbaed82`.

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.10] - 2026-10-14
+
+- Advocate: lean batch-1 brief (Director-approved after Argon's shape check); the hardened design kept as brief-v1-hardened.md, its machinery deferred with triggers.
+- Added experiment `advocate-dataset`
+
 ## [1.1.8.2.9] - 2026-10-14
 
 - advocate-dataset: section 1's three sentences carry the round-2 and round-3 fixes (the verifier, the precedence table, lexical anchors, the relational probe, immaterial figures, the writer split, the natural exam)

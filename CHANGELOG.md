@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.0.22] - 2026-10-13
+
+- atlas-mcp-utility amendment 12: arm B holds its task until Atlas connects
+- Updated experiment `atlas-mcp-utility`
+
 ## [1.1.8.0.21] - 2026-10-13
 
 - atlas-mcp-utility: arm B correction, Atlas pending only on the plan route

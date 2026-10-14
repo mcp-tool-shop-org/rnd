@@ -62,6 +62,9 @@ LABELS = ("pilot", "shakedown")
 PINNED_FILES = ("tasks.json", "prompt.md", "allow-list.json", "grade.py", "debrief.md")
 # Far above any expected run (about 2 to 6 minutes); only a hung session reaches it.
 RUN_TIMEOUT_S = 30 * 60
+# How long arm B's task waits after the CLI starts, so Atlas has connected
+# before the first turn (amendment 12).
+ATLAS_HOLD_S = 10
 SEED = 20261013
 PILOT = ("RC03", "CF09", "CF02", "CF04")
 PILOT_REPEATS = ("RC03", "CF04")
@@ -479,12 +482,12 @@ def isolation_problems(init, arm, allow):
     foreign = sorted(t for t in tools if t.startswith("mcp__") and not t.startswith(ATLAS_PREFIX))
     expected = set(expected_tools(allow, arm))
     servers = {s.get("name"): s.get("status") for s in init.get("mcp_servers") or []}
-    # The pinned CLI 2.1.197 registers an MCP server's tools after the init:
-    # arm B's first probe in the sandbox started with atlas "pending" and no
-    # Atlas tools, then called atlas_overview and got its answer. That start
-    # is accepted; tool_use_problems then holds every call to the arm's set
-    # (amendment 8).
-    late_atlas = arm == "B" and servers == {"atlas": "pending"} and not atlas
+    # Amendment 8 accepted arm B starting with atlas "pending" and no Atlas
+    # tools. Amendment 12 withdraws that: on Anthropic's endpoint such a task
+    # turn never offers the tools (every plan-route arm B run, 2026-10-13), so
+    # the run holds its task until Atlas connects (ATLAS_HOLD_S) and a pending
+    # start is refused.
+    late_atlas = False
     problems = []
     if foreign:
         problems.append(f"MCP tools from another server: {foreign[:3]}")
@@ -1039,7 +1042,6 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, ru
     shared_before = tree_state(shared_cache)
     stream = Stream()
     stopped = None
-    started = time.time()
     # The sandbox image's own CLI updates itself; the pinned one must not
     # change under a run (amendment 7).
     argv = command(cli, allow, arm, mcp_config)
@@ -1053,6 +1055,13 @@ def run_once(cli, run_id, arm, template, work, tools, allow, prompts, budget, ru
     watchdog = threading.Timer(RUN_TIMEOUT_S, proc.kill)
     watchdog.start()
     pending = list(prompts)
+    if arm == "B":
+        # Amendment 12: the CLI starts the task's turn as the message arrives;
+        # on Anthropic's endpoint it does not wait for Atlas to connect. Atlas
+        # connects within 3 s in the sandbox; the hold gives it ten.
+        time.sleep(ATLAS_HOLD_S)
+    # The wall time starts with the task, so the hold is not in it.
+    started = time.time()
     proc.stdin.write(user_message(pending.pop(0)))
     proc.stdin.flush()
     with (work / "runs" / f"{run_id}.jsonl").open("w", encoding="utf-8") as log:

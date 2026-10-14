@@ -419,6 +419,21 @@ Both legs ran the same six pairs (RC03 ×2, CF09, CF02, CF04 ×2) on CLI 2.1.197
 - **Before any graded run:** one short start on the plan route must show the Atlas tools in the task turn's start. If they're missing, the harness must hold the task until Atlas has connected. That start costs a few cents of plan, so it waits for the Director's go.
 - **A model that is offered Atlas and ignores it is itself a result.** The prompt only makes Atlas available (README, "What this does not measure"). The local leg's zero calls are recorded as that, not as a defect.
 
+### Amendment 12, 2026-10-13: arm B holds its task until Atlas connects
+
+**The check (the Director's go, relayed by the Publisher).** One arm B start on the plan route, Haiku, run as `amu` with the placeholder sign-in and the proxy: one turn, $0.036 at API rates.
+- Atlas was `pending` at the start with 0 Atlas tools, and Haiku named only Bash, Glob, Grep and Read.
+- The same start against a closed port, proxy included, had Atlas connected. Against Anthropic's endpoint with no sign-in at all, it was pending again.
+- **So the pending start comes with Anthropic's endpoint:** the CLI begins the turn without waiting for the server. The plan's credentials and the proxy are not the cause.
+- With the task held 3 s or 10 s after the CLI starts, the start had Atlas connected with all 7 tools, on Anthropic's endpoint too.
+
+**The change.**
+- Arm B's task is written to the CLI `ATLAS_HOLD_S` (10) seconds after it starts. The wall time starts when the task is sent, so the hold isn't counted.
+- Amendment 8's acceptance of a pending start is withdrawn. Arm B must start with `atlas` connected and its tools offered, or the run is refused.
+- Replayed under this rule, shakedown 2's arm B streams are refused, as they should be: they never had Atlas.
+
+Nothing pinned changes.
+
 ## Design
 
 **Pairs.** Each task runs twice:

@@ -206,3 +206,14 @@ The Director wants more three-value packs, so `if_shape` goes ahead now, built b
 
 **Not option B** (a probe that must pass on several seeds or across every pack of the stratum): it drops cells from the table, which the T10 rules forbid for the same reason they forbid a try cap. Either changes which puzzles get built.
 
+**Outcome of amendment 4, 2026-10-14: landed in role-set `549a619` (#55).** Seat A split the weights, re-probed, froze at `d38d929` (the last code change before the locked run; `965ff9a` and `1d26bca` were its steps) and ran locked seeds 101–120. R&D reproduced the baseline and the record figures independently and passed it.
+
+| Stratum (locked 101–120) | `787ccf8` baseline | Phase 1 |
+|---|---|---|
+| set two | 40/40, top 1 | 40/40, top 1 |
+| set three | 118/120, top 2 | 118/120, top 2 |
+| claim two | 40/40, top 1 | 40/40, top 1 |
+| claim three | 112/120, top 4 (fail), zero-`if` 26 | 118/120, top 2, zero-`if` 0 |
+
+All 1,280 builds in the record (seeds 1–20, 61–80, 81–100, 101–120) build within 400 tries; `cups` seed 84 now takes 8. The shape list is seven (none, pos, neg, chain, shared consequent, shared antecedent, disjoint); `trait_not_tested` is 0 for every shape. Three-value claims have 61 usable cells against 27; the zero-`if` cap is 2; the scaling test places twelve three-value packs. The hash list gained `critic.py` and `gates.py` through Seat A's import-closure test, which caught what R&D's top-level check at #49 had missed. CI's test job runs in about 7 minutes at 97.19% coverage; the dispatch sweep reproduces the record. The Director has ordered role-set's full treatment and a 0.2.0 release on this; the seat brief is `seat-build-roleset-0.2.0.md`.
+

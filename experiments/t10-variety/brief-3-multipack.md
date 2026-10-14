@@ -109,3 +109,58 @@ It adds:
 - Cell capacity per stratum, visits per cell, and the headroom in packs.
 - Lines of code added, and the change in build time and suite time.
 - No pack or check changes. If one was needed, stop and ask.
+
+## Amendment 1, 2026-10-14 (R&D, after Seat A's stop on role-set#49)
+
+**What Seat A found.** Brief 3's rules can't be met on the committed table for three-value claims. That was measured, not projected:
+- a pack's 20 seeds need 20 different cells, and a zero-`if` cell takes at most 2 visits;
+- clinics has 14 claim cells with an `if`, so it needs 6 zero-`if` visits, and the other five packs need 4 each;
+- that's 26 zero-`if` visits, against 9 cells × 2 = 18. A max-flow check places 112 of 120.
+
+The other three strata place every build. The shortfall is in how many claim cells have an `if`, not in the cap. Brief 3 said it would be found as a projection; it was found as a fact.
+
+**Ruling: option 3.**
+- **`if_shape` moves from Phase 2 into Phase 1, for claim cells only:**
+  - for one `if`, the antecedent is positive (`is`) or negative (`is_not`);
+  - for two `if`s, the shape is a chain (one consequent's entity is the other's antecedent) or a shared consequent;
+  - a shape that won't build at a given n is simply absent from the probe list.
+- **The zero-`if` cap stays at 2,** and the floors are unchanged.
+- **Set cells are unchanged.**
+- **`polarity_mode` and the claim-role axis stay out of scope.**
+
+**Why not the alternatives:**
+- **A cap of 3 on zero-`if` cells (option 2)** passes only at the floor, by construction. Those cells hold about one skeleton each, so the stratum would carry three copies of several skeletons permanently, with no headroom for another pack.
+- **Allowing repeated cells within a file** for packs short of `if` cells would bring back within-file repeats. That's a floor brief 3 keeps.
+
+**What this changes in the work:**
+- `scripts/t10_usable_cells.py` probes claim cells with the `if_shape` axis. The builder honours the shape:
+  - `_addition_order` offers only `if` clues of the cell's shape;
+  - a build whose reduced puzzle doesn't keep the shape retries inside the seed, as the `if` count already does.
+- **Before the freeze,** the capacity gate must pass on the regenerated table for every stratum: zero-`if` demand at or under the cap, and every pack with at least 20 claim cells. Report each pack's cells with an `if`, and the zero-`if` demand.
+- **#54's hard assertion still applies to every item:** the trait's own reading differs. The `if_shape` axis changes how the `if` clues connect, not the count.
+- **The locked seeds stay 61–80,** not yet run. #49's verdict is read there. Section 9's Phase 2 is now `in` and `not_in` for three-value claims, only if a claim stratum still misses a floor.
+
+## Amendment 2, 2026-10-14 (R&D): option 2. This supersedes amendment 1
+
+Amendment 1 chose `if_shape` now. Argon, consulted by the Director on the same stop, chose option 2. R&D has weighed the two and changes its ruling to **option 2**. Amendment 1 stays above as the record.
+
+**The ruling:**
+- In the **three-value claim stratum only,** the zero-`if` cap is **3** visits per file. Supply is 9 × 3 = 27, against a demand of 26.
+- **Every other stratum keeps the cap at 2.**
+- **The floors are unchanged.**
+- **No new cell axis:** set and claim cells are as committed.
+
+**Why:**
+- **Brief 3 defers new cell axes until a measured need.** At a cap of 3 the table fits, so the need isn't there yet.
+- **A cell's skeletons can't outnumber its visits.** A skeleton fixes its cell (n, k, the count word and the number of `if`s are all in it). With at most 3 visits, no zero-`if` claim skeleton can pass 3 copies by construction.
+- **These cells aren't one-skeleton cells.** On seeds 41–60 the busiest zero-`if` claim cells took 6 visits each and topped out at 3 copies of one skeleton. So 3 visits will usually give fewer than 3 copies, not exactly 3. The locked run will show it.
+- **It's the smaller change before #49 merges.**
+
+**What stays from amendment 1 and brief 3:**
+- **The capacity gate** still runs in `scripts/t10_usable_cells.py` and the test, with the per-stratum caps above.
+  - It reports, per stratum, supply, demand and headroom: each pack's `if` cells and its zero-`if` demand.
+  - It fails loudly, with the numbers, when a stratum can't be placed. A seventh three-value pack will fail it.
+  - It's a check on the table, not a raise inside `cell_for`.
+- **Phase 2 is `if_shape` for claim cells,** as amendment 1 described it. It runs only if a claim stratum misses a floor on the locked seeds 61–80, or before another three-value pack is added.
+- **`polarity_mode` and the claim-role axis stay out of scope.**
+- **#54's hard assertion,** the allocator's other rules, and the locked seeds 61–80 are unchanged.

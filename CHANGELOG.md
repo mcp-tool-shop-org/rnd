@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.9] - 2026-10-14
+
+- advocate-dataset: section 1's three sentences carry the round-2 and round-3 fixes (the verifier, the precedence table, lexical anchors, the relational probe, immaterial figures, the writer split, the natural exam)
+- Updated experiment `advocate-dataset`
+- Added experiment `agent-ab-harness`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.8.2.8] - 2026-10-14
 
 - advocate-dataset: Argon round 3 folded in (the ceiling, quota collisions, the scope matrix, the precedence order, the negation rule, the 16-slot pilot); ready for the Director's section 1

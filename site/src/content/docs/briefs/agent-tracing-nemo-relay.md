@@ -2,8 +2,8 @@
 title: How do we see what an agent actually did?
 description: A passing check says an agent got the right answer, not how it got there. NVIDIA's NeMo Relay traces every model and tool call. We measured it inside our local-model harness. It records everything faithfully but costs too much client time per call for counted runs, so it stays a debugging tool.
 date: 2026-10-14
-status: interim
-shelf: not yet (the debug-only build is still to land)
+status: measured
+shelf: stays in rnd (studio tooling)
 ---
 
 ## The question
@@ -86,12 +86,18 @@ our own. It passed.
   before tracing starts. Every request was accounted for. The companion arm also showed three stray spans, for the
   same kind of reason: a teardown call ran after its measurement window closed.
 
-**The decision:** Relay stays in interlock as an **opt-in debugging tracer**, never on counted runs. Once the
-debug-only build lands, traced runs will be marked and kept out of the routing table. In the trial they weren't yet,
-and that gap is one of the fixes. The pre-registered rule said an off-count means reject. This
-decision departs from it on purpose, because the off-count was our harness's fault. It is recorded as a dated
-amendment, not a re-reading. Before adoption, the harness fixes and a deterministic counting test have to land
-and pass review. No further GPU or NPU time is planned for Relay.
+**The decision:** Relay stays in interlock as an **opt-in debugging tracer**, never on counted runs. The
+pre-registered rule said an off-count means reject. This decision departs from it on purpose, because the
+off-count was our harness's fault. It is recorded as a dated amendment (v3.2), not a re-reading.
+
+**The build landed the same day,** in interlock on main. The card check now runs inside the tracing window, the
+companion's teardown stays inside its measurement, request sizes come from the bytes actually sent, and every
+row of a traced run is marked and kept out of the routing table. In the trial they weren't yet: the run's rows
+had reached the working copy of the table, and that gap was one of the fixes. A deterministic test now drives the
+real adapter and real HTTP client against a fake server and checks that every request is counted, every span is
+matched and closed, and nothing leaks. The build was written by the outside reviewer from our result note,
+applied by us with six recorded departures, then reviewed by the same reviewer on the branch and approved. No
+further GPU or NPU time is planned for Relay.
 
 ## The trial we'd still like
 

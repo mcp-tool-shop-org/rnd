@@ -1,6 +1,6 @@
 # EmbeddingGemma 2 against nomic-embed-text, for the studio's retrieval
 
-**Status:** design v2, 2026-10-15, after Argon's round 1 (`argon-consult-round1.md`, disposition in `argon-consult-round1-disposition.md`). Template: [A/B experiments](https://mcp-tool-shop-org.github.io/rnd/handbook/ab-experiments/). Nothing is counted until the Director approves this design. Every run is on the CPU, with no card grant. The model and its env are installed (`entries/2026/embeddinggemma-2.md`).
+**Status:** design v3, 2026-10-15, after Argon's rounds 1 and 2 (`argon-consult-round1.md`, `argon-consult-round2.md`, with dispositions). Round 2 found it ready, with three line edits, all taken. Template: [A/B experiments](https://mcp-tool-shop-org.github.io/rnd/handbook/ab-experiments/). Nothing is counted until the Director approves this design. Every run is on the CPU, with no card grant. The model and its env are installed (`entries/2026/embeddinggemma-2.md`).
 
 ## 1. The check in three sentences
 
@@ -32,7 +32,7 @@
 - **Chunks:** offrig's own chunker (`MAX_CHARS` 2000, about 500 tokens), run once, with the chunks frozen as a file.
 - **Context:** Ollama's nomic build reports a context length of 2048 (`ollama show`, 2026-10-15), and EmbeddingGemma 2 takes 8,192. The validation run tokenizes every frozen chunk with both tokenizers (WordPiece and Gemma's) and records the longest. It stops if any chunk exceeds 2,048 in either. At 2,000 characters none is expected to.
 - **Batching:** both arms embed in batches of 32, offrig's `BATCH`.
-- **Storage:** offrig stores int8-quantized vectors and scores `cosine_q`. Both arms are scored after the same int8 quantization, as deployed. Float scoring is a diagnostic.
+- **Storage:** offrig stores int8-quantized vectors, each with its own scale, and scores `cosine_q`. Both arms are scored after the same int8 quantization, as deployed. Float scoring is a diagnostic. B256 works in float first: cut the 768-dimension float vector to 256, re-normalize it, then compute its own int8 scale. It never cuts an already-quantized 768-dimension vector. Stage 2 reads int8, with float logged to separate the Matryoshka loss from the rounding loss.
 - **Ranking, two readings:**
   - **dense:** cosine top-k alone. This isolates the embedder, and it's what the decision rule reads.
   - **hybrid:** offrig's ranker as shipped (BM25 top 50 and cosine top 50 fused by RRF, top 20). This is what users get, and it's a guard in the rule.
@@ -56,7 +56,7 @@
   - Deduplicated by stem. No two queries share a template. Frozen before any arm runs.
 - **Keys, by blinded pooling:**
   1. Freeze the queries.
-  2. Run A and B to get each query's top 10 chunk ids. Dense and hybrid are pooled together.
+  2. Run A, B and B256 to get each query's top 10 chunk ids, plus the code-prefix diagnostic on the 50 code queries. Dense and hybrid are pooled together, so Stage 2 and the diagnostic never score an unjudged chunk as 0.
   3. Merge and deduplicate them into one pool per query. Strip model identities and ranks, and shuffle the order.
   4. R&D grades every pooled chunk 0, 1 or 2: no, on topic, answers it.
   5. A second reviewer, who didn't grade, audits the grades.
@@ -82,7 +82,7 @@
     - mean dense ΔnDCG@10 (B − A) is at least +0.03;
     - its one-sided 95% bootstrap lower bound is above 0;
     - neither group's point estimate is below −0.015;
-    - mean hybrid nDCG@10 for B is not below A's by more than 0.015.
+    - the mean hybrid ΔnDCG@10 (B − A) is at least 0.00, and its one-sided 95% bootstrap lower bound is above −0.015.
     
     Otherwise keep nomic-embed-text.
   - **Stage 2, compression (B256 against B, run only if Stage 1 passes).** Adopt B256 when both hold:

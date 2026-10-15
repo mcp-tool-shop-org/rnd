@@ -1,0 +1,23 @@
+{
+  "tokens": {
+    "nomic_max": 1231,
+    "eg2_max": 1528,
+    "nomic_p99": 835,
+    "eg2_p99": 834,
+    "over_limit": 0
+  },
+  "dtype_gate": {
+    "float32_seconds": 20.888,
+    "bfloat16_seconds": 17.0,
+    "cosine_min": 0.9967528581619263,
+    "cosine_mean": 1.0005263090133667,
+    "parity_ok": false,
+    "chosen": "float32"
+  },
+  "http_throughput": {
+    "sample": 1024,
+    "A_chunks_per_second": 5.1,
+    "B_chunks_per_second": 2.02,
+    "B_over_A": 0.395
+  }
+}

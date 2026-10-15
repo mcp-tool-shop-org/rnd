@@ -109,6 +109,24 @@
    - both throughput readings.
 3. **The Director approves the design.** No card and no paid service is used: Ollama's calls carry `num_gpu: 0`, and B's torch build has no CUDA.
 
+## Amendment 1, 2026-10-15, before any counted run
+
+- **The queries as frozen.** The log mining found 29 distinct first queries. Discarding shell placeholders, generic or self-referential ones (`experiment`, `embeddinggemma`), and one near-duplicate (`npu` beside `openvino npu`) left 19, all short keyword searches and all prose. The other 81 were written by a Sonnet agent from commit messages, PR text and review threads, with the corpus closed: it ran no reads, greps or file shows on the four repos. That was done because R&D had read parts of offrig's and role-set's code during reviews. The split is 50 code and 50 prose (31 written, 19 logged). The frozen file's sha256 is `8430973c…7ce87`.
+- **A query whose pool holds no chunk graded 1 or 2 is dropped** and reported by id. It carries no information about either arm, since every arm scores 0. The rule's thresholds stay as written. If the drop takes either group below 40 queries, that is reported beside the result, because the power statement assumed 50 per group.
+- **Arm A's server:** offrig's documented start line hides CUDA only. On Ollama 0.40.4, Vulkan then exposes the RTX 5090, and the log shows it as inference compute. So arm A's server runs with `GGML_VK_VISIBLE_DEVICES=-1 OLLAMA_VULKAN=0 OLLAMA_IGPU_ENABLE=0` as well. Its log reports CPU-only compute, and `embed.py` stops if `/api/ps` shows any VRAM. offrig #64 fixes the documented line.
+
+## Amendment 2, 2026-10-15, before any counted run
+
+- **Grading follows the [relevance grading](https://mcp-tool-shop-org.github.io/rnd/handbook/relevance-grading/) template.** Argon drafted it at the Director's request, and R&D adapted it for the studio.
+  - R&D writes a locked intent line for each query, without opening the corpus, and Argon reviews the 100 lines before grading starts.
+  - Sonnet agents grade on the Claude Code plan: a fresh agent per query, at most five chunks at a time, `reason` before `grade`.
+  - Argon audits blind.
+- **The audit:** 16 queries (8 code, 8 prose), chosen for a high share of chunks found by only one or two arms. Measured on the dry run, the pool averages about 27 chunks per query, so that's about 430 chunks in five pastes.
+  - **Gates:** quadratic weighted κ ≥ 0.75, binary κ (0 against 1–2) ≥ 0.80, raw disagreement ≤ 10% and two-step ≤ 2%.
+  - A pass freezes the Sonnet grades for the whole pool. A fail means revising and regrading the whole pool.
+- **The corpus was rebuilt before any counted run, with project-relative paths.** The first build indexed it by absolute path, so every chunk header read `E:/AI/eg2-bench/corpus/…` where offrig writes a project-relative path in production. The rebuild indexes `corpus/` from inside the project. The count is unchanged at 11,525. The first build is kept aside, not deleted. The pins are in `results/corpus-manifest.json`; offrig's `main` had moved to `0600904` by the rebuild.
+- **The pool is the 8 decision runs:** A, B and B256 in dense-int8 and hybrid, plus the code-prefix dense reading for B and B256. The float readings and the code-prefix hybrids are diagnostics. A chunk that only they surface counts 0, and that is stated beside them.
+
 ## 7. While running and after
 
 - **Stop rules:**

@@ -1,0 +1,44 @@
+{
+  "offrig": "offrig 1.1.1",
+  "offrig_exe_sha256": "491602715e185b8601ec4d9b8ae1695e070e1fe1cc895efefb537ae613ee2ba4",
+  "pins": [
+    {
+      "name": "rnd",
+      "ref": "origin/main",
+      "commit": "59180754260ac0bacf54a6bfd62fa8c70a085688",
+      "files": 154
+    },
+    {
+      "name": "readouts",
+      "ref": "origin/main",
+      "commit": "75b222527ff624fcff0deba571295bfc688bbfa7",
+      "files": 659
+    },
+    {
+      "name": "role-set",
+      "ref": "origin/main",
+      "commit": "e38feef85a67196f5dbc837f20a1a25ff98058dc",
+      "files": 34
+    },
+    {
+      "name": "offrig",
+      "ref": "origin/main",
+      "commit": "060090461adcc8efd3b5e675770338b6423f1c05",
+      "files": 47
+    }
+  ],
+  "chunks": 11525,
+  "by_kind": {
+    "code": 1453,
+    "doc": 10072
+  },
+  "by_source": {
+    "offrig": 1125,
+    "readouts": 8695,
+    "rnd": 1377,
+    "role-set": 328
+  },
+  "max_body_chars": 2175,
+  "chunks_sha256": "95dad37608db3f5f81f6a8ce78b8ff757f650f199af673fa8f4b369867a36e0c",
+  "db_sha256": "9aabed70942f62787a624b3986649a2525a5bf4a991c000f7ef522a0193df1b3"
+}

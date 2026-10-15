@@ -58,3 +58,5 @@ Ask before taking the GPU, and release it as soon as the run ends.
 For an A/B experiment, start from the [A/B experiments](../ab-experiments/) design template. Every design passes its checks before anything is built or run.
 
 To find why something wastes work with a diagnostic tool, change it, and check the change helped, start from the [diagnose-then-fix](../diagnose-then-fix/) template.
+
+To grade the pooled results of a retrieval experiment into an answer key, before any retrieval metric is computed, use the [relevance grading](../relevance-grading/) template.

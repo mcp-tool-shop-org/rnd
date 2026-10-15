@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.5] - 2026-10-15
+
+- EmbeddingGemma 2: Argon's harness review and intent review answered (amendment 3: Stage 2 reads the one-sided bound; stop rules, key completeness and key hash, intents in the pool, tokenizer pin; the titled diagnostic dropped; 23 intents revised and frozen); grading.py and the grader brief; the counted embedding run started
+
 ## [1.1.8.3.4] - 2026-10-14
 
 - Handbook: the relevance-grading template (drafted by Argon at the Director's request, adapted by R&D): the 0/1/2 scale with query-form rules and boundary cases, blindness, locked intents, reason-before-grade, weighted and binary kappa gates, freezing and publication

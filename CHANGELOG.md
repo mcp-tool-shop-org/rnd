@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.9] - 2026-10-15
+
+- Advocate: the writer swap passed; the grant posted (publisher-5090-advocate-pilot-2026-10-15); the pilot run brief filed for Seat C, pointing at the grant note for the run line, heartbeat, run directory, caps and the grant hand-back
+
 ## [1.1.8.3.8] - 2026-10-15
 
 - EmbeddingGemma 2 multimodal design drafted (the Director: don't stop at text): description-to-image and image-to-description search over style-dataset-lab's art against SigLIP2 (ai-eyes), keys by construction from 385 human-described approved images among ~2,900; audio deferred for lack of a labelled clip library; Argon consult filed

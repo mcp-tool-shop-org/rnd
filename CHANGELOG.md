@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.22] - 2026-10-15
+
+- Newsletter issue 9, "The backend that changed under us": an Ollama update replaced the studio's CUDA 13.4 backend, and the backend was rebuilt from Ollama 0.40.4's llama.cpp pin. It covers the CPU rules set after an uncapped job (efficiency-core affinity, below-normal priority, every thread pool capped), three rounds of outside review of the sandbox test, CUDA 13.4's version numbering, and a new weekly check
+- `experiments/ollama-cuda-backend/`: the build records. 0.35.1 on CUDA 13.4.1; 0.40.4 on 13.4.1 (343.8 s); 0.40.4 to the studio standard on 13.4 Update 2 (nvcc V13.4.92, sm_120a SASS only, 374.0 s, ggml-cuda.dll 0ebc0e61…); the capped launcher; the sandbox plan; and the sandbox test v3 with its diff from v2. Nothing is activated, and the sandbox test waits for review and a GPU grant
+
 ## [1.1.8.3.21] - 2026-10-15
 
 - EmbeddingGemma 2: Argon's resource review of offrig's embed-serve, and its disposition. Argon held it for seven changes, and all were applied in offrig: every thread pool capped before torch loads, below-normal priority, request bounds and HTTP hardening. The capped rerun's figures: 201 chunks in 162.6 s on 6 E-cores at about 20% of the machine, peaking at 2.8 GiB. The brief records that Argon read its first version

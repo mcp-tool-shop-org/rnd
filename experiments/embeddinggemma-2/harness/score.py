@@ -23,6 +23,10 @@ import numpy as np
 from common import BENCH, QUERIES, RESULTS, RUNS, ndcg_at, read_jsonl, sha256_file, write_jsonl
 
 SEED = 7
+# Round 2 (design amendment 4): the key is the round 2 regrade under grader-brief-v2.md, and the queries dropped
+# for having no relevant chunk must equal the lock committed before any score (results/zero-relevance-lock.json).
+KEYS = BENCH / "keys-r2.jsonl"
+LOCK = RESULTS / "zero-relevance-lock.json"
 RESAMPLES = 10_000
 
 
@@ -48,7 +52,7 @@ def main() -> None:
     queries = read_jsonl(QUERIES)
     group = {q["id"]: q["group"] for q in queries}
     grades: dict[str, dict[int, int]] = defaultdict(dict)
-    for k in read_jsonl(BENCH / "keys.jsonl"):
+    for k in read_jsonl(KEYS):
         grades[k["qid"]][int(k["chunk_id"])] = int(k["grade"])
     missing = [q["id"] for q in queries if not grades.get(q["id"])]
     if missing:
@@ -56,9 +60,14 @@ def main() -> None:
     pool_pairs = {(r["qid"], int(r["chunk_id"])) for r in read_jsonl(BENCH / "pool.jsonl")}
     graded_pairs = {(q, c) for q, d in grades.items() for c in d}
     if pool_pairs - graded_pairs:
-        raise SystemExit(f"STOP: {len(pool_pairs - graded_pairs)} pooled chunks have no grade in keys.jsonl")
+        raise SystemExit(f"STOP: {len(pool_pairs - graded_pairs)} pooled chunks have no grade in {KEYS.name}")
     # Amendment 1: a query whose pool holds nothing graded 1 or 2 carries no information about either arm.
     dropped = [q["id"] for q in queries if max(grades[q["id"]].values()) < 1]
+    lock = json.loads(LOCK.read_text(encoding="utf-8"))
+    if lock["keys_sha256"] != sha256_file(KEYS):
+        raise SystemExit("STOP: the key does not match the one the lock was made from")
+    if sorted(dropped) != sorted(lock["excluded"]):
+        raise SystemExit(f"STOP: dropped {sorted(dropped)} differs from the lock {sorted(lock['excluded'])}")
     queries = [q for q in queries if q["id"] not in dropped]
     kept_groups = {g: sum(1 for q in queries if q["group"] == g) for g in ("prose", "code")}
     names = {p.stem for p in RUNS.glob("*.json") if "-limit" not in p.stem}
@@ -92,7 +101,7 @@ def main() -> None:
     decision = "adopt B256" if stage2 else ("adopt B at 768" if stage1 else "keep nomic-embed-text")
     out = {
         "decision": decision,
-        "keys_sha256": sha256_file(BENCH / "keys.jsonl"),
+        "keys_sha256": sha256_file(KEYS), "key_round": 2,
         "queries": {"kept": len(queries), "by_group": kept_groups, "dropped": dropped,
                     "below_40_in_a_group": any(n < 40 for n in kept_groups.values())},
         "stage1": {"dense": s1, "groups": s1_groups, "hybrid": s1_hybrid, "passed": stage1},

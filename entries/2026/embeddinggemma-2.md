@@ -37,7 +37,8 @@ offrig's current embedder, nomic-embed-text.
 
 ## Studio relevance
 
-- **act: benchmark it against offrig's embedder.** offrig's index embeds with nomic-embed-text on a CPU-only Ollama.
+- **act: adopt it as offrig's text embedder, at 768 dimensions.** The pre-registered CPU benchmark against nomic-embed-text passed (`experiments/embeddinggemma-2/results.md`). The 256-dimension cut lost too much to adopt. Adoption is a separate change the Publisher reviews.
+- **The benchmark design** was offrig's embedder against it. offrig's index embeds with nomic-embed-text on a CPU-only Ollama.
   The design is `experiments/embeddinggemma-2/design.md`, and it runs on the CPU with no card grant. If
   EmbeddingGemma 2 wins, adopting it needs an Ollama-compatible embedding endpoint on the CPU, the way npu-serve
   serves the NPU, because Ollama can't serve it on Windows.
@@ -53,6 +54,9 @@ offrig's current embedder, nomic-embed-text.
 - [verified] The text-only model loads on the rig's CPU in float32, with 271M parameters, and returns 768-dimension vectors without NaN. Four short texts encode in 0.21 s after a 2.5 s load. (via: R&D smoke run, sentence-transformers 6.1.0, transformers 5.19.0, torch 2.14.1+cpu, 2026-10-15)
 - [verified] `model.safetensors` (1,488,915,288 bytes) matches its blob sha256 `197a3296…3d79` in the HF cache. (via: R&D sha256 check, 2026-10-15)
 - [verified] Ollama 0.40.4 on Windows refuses `embeddinggemma-2:270m-bf16-text` with "this model requires MLX support", and every library tag is a tensor build. (via: R&D `ollama pull` and the registry manifests, 2026-10-15)
+- [verified] On 93 studio queries over offrig's 11,525-chunk corpus, it beats nomic-embed-text by +0.112 dense nDCG@10 (one-sided 95% lower bound +0.065), +0.174 on code and +0.041 on prose. (via: R&D pre-registered benchmark, round 2 key audited blind by Argon, 2026-10-15)
+- [verified] Cut to 256 dimensions it loses 0.043 nDCG@10 against 768 (one-sided lower bound -0.062) on the same queries. (via: R&D pre-registered benchmark, 2026-10-15)
+- [verified] On the rig's CPU in float32 it embeds 2.6 chunks a second in process, against nomic-embed-text's 5.6 on CPU Ollama. (via: R&D benchmark, 11,525 chunks, 2026-10-15)
 - [unverified] MTEB multilingual v2 61.36, MTEB English v2 68.46 and MTEB code v1 78.68 at 768d. EmbeddingGemma 1 scores 61.15 and 68.76 on the multilingual and code sets. (model card)
 - [unverified] At 256d: MTEB English v2 67.78, code 76.18. (model card)
 - [unverified] Activations exceed float16's range, giving NaN or silent degradation in float16. (model card)

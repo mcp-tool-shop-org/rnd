@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.18] - 2026-10-15
+
+- Atlas slice AP (testing-os #179): the security consult for the by-hand, different-family review before merge, with the code from 4904cf90 inline and seven questions on what an attacker who controls one root can reach
+- EmbeddingGemma 2 grader brief v2: the format example's chunk id is now 99999, which no chunk has (1234 was a real chunk, though in no pool)
+
 ## [1.1.8.3.17] - 2026-10-15
 
 - EmbeddingGemma 2: Argon adjudicated the 63 audit disagreements (56 resolved to the Sonnet grade, 7 to the auditor's). Grader brief version 2 carries the adjudicated boundary rules, with no example ids, so nothing leaks into the regrade. The grading tool gains a round 2 that never overwrites round 1, and the fresh 16-query audit is drawn before any regrading. The round 3 consult asks Argon to approve the brief and grade the fresh audit

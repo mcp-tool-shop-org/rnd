@@ -77,7 +77,7 @@ You are grading retrieval results for one query, under the studio's relevance-gr
 Write `E:/AI/eg2-bench/grades-r2/<QID>.jsonl` **with the Write tool, not a shell heredoc**. One line per chunk, every chunk in the file, with `reason` before `grade`:
 
 ```json
-{"query_id": "<QID>", "chunk_id": 1234, "reason": "Shows the RRF fusion of BM25 and cosine top 50.", "grade": 2}
+{"query_id": "<QID>", "chunk_id": 99999, "reason": "Shows the RRF fusion of BM25 and cosine top 50.", "grade": 2}
 ```
 
 `reason` is 3 to 15 words. **Count them:** 16 words is refused at the merge. It says **what the chunk says about the target**, not just that a word appears. Give a reason for 0s too ("about pod pricing, not the watchdog"). When a boundary rule decides the grade, start the reason with its number, such as "R5: signature only, cut off before the check."

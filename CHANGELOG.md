@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.25] - 2026-10-14
+
+- Argon round 6 answered: hold for a second fix-up; fix-up 2 brief filed (relay messages rendered, the live path returns text, a prompt-completeness gate, the flag sheet dropped, the 0.2.0 follow-ups in CI's idle minutes); R&D verdict on role-set #56
+
 ## [1.1.8.2.24] - 2026-10-14
 
 - Advocate fix-up reviewed by R&D: the relay messages never reach the writer or critic, no prompt-sufficiency test, the headline ignores tripwires, the B critic gets A's rules, three slot contradictions, the fake probe still in; Argon consult round 6 filed with the code inline; the grant held

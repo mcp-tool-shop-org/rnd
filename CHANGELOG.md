@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.8] - 2026-10-15
+
+- EmbeddingGemma 2 multimodal design drafted (the Director: don't stop at text): description-to-image and image-to-description search over style-dataset-lab's art against SigLIP2 (ai-eyes), keys by construction from 385 human-described approved images among ~2,900; audio deferred for lack of a labelled clip library; Argon consult filed
+
 ## [1.1.8.3.7] - 2026-10-15
 
 - Advocate: Argon round 8 settled, fix-up 3 passed to the pilot grant; the Llama 3.1 licence clause 1.b.i verified by R&D from Meta's llama-models repo; the Director chose to swap writer 2 before the pilot; granite3.3:8b (Apache-2.0, GGUF, pulled) chosen; the swap brief filed

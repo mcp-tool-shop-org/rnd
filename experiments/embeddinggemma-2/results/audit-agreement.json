@@ -1,0 +1,10 @@
+{
+  "chunks": 481,
+  "queries": 16,
+  "kappa_weighted_quadratic": 0.8969517047193487,
+  "kappa_binary": 0.8686607918580117,
+  "raw_disagreement": 0.08731808731808732,
+  "two_step_disagreement": 0.0,
+  "keys_sha256": "5747ac59d9a23be8b432bdf723c2a46e8291dc06ff19bfe19f79fb5ac4f26365",
+  "passed": true
+}

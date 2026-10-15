@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.19] - 2026-10-15
+
+- EmbeddingGemma 2: the round 2 regrade (all 100 queries, grader brief v2) passed its fresh blind audit on all four bars (quadratic kappa 0.897, binary kappa 0.869, raw disagreement 8.7%, two-step 0%). The seven queries with no relevant chunk are locked before any score, as amendment 4 requires; 93 queries are scored. The pre-registered score: adopt EmbeddingGemma 2 at 768 dimensions. Stage 1 passed (dense nDCG@10 +0.112 over nomic-embed-text, one-sided lower bound +0.065; prose +0.041, code +0.174; hybrid +0.065, lower bound +0.029). Stage 2 failed (256 dimensions cost 0.043, lower bound -0.062), so the cut isn't adopted. Results in `experiments/embeddinggemma-2/results.md`, ids and numbers only
+
 ## [1.1.8.3.18] - 2026-10-15
 
 - Atlas slice AP (testing-os #179): the security consult for the by-hand, different-family review before merge, with the code from 4904cf90 inline and seven questions on what an attacker who controls one root can reach

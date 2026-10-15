@@ -1,0 +1,29 @@
+{
+  "arm": "B",
+  "dtype": "float32",
+  "params": 271002624,
+  "batch": 32,
+  "model": "google/embeddinggemma-2@914f7f89142e33e77833254d9c9b90c3cef7303b",
+  "manipulation": {
+    "first_doc_prefix": "title: none | text: ",
+    "first_query_prefix": "task: search result | query: ",
+    "first_query_sha256": "70af59b4eac33dcf18bcee0c62f35dd2d052b9bd2f52871f228085413357f68c",
+    "docs": {
+      "rows": 11525,
+      "dim": 768,
+      "dim_ok": true,
+      "norm_min": 0.9999998211860657,
+      "norm_max": 1.0000001192092896
+    },
+    "queries": {
+      "rows": 100,
+      "dim": 768,
+      "dim_ok": true,
+      "norm_min": 0.9999998807907104,
+      "norm_max": 1.0000001192092896
+    }
+  },
+  "chunks": 11525,
+  "seconds_docs_in_process": 4425.38,
+  "chunks_per_second": 2.6
+}

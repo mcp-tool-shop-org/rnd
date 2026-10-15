@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.7] - 2026-10-15
+
+- Advocate: Argon round 8 settled, fix-up 3 passed to the pilot grant; the Llama 3.1 licence clause 1.b.i verified by R&D from Meta's llama-models repo; the Director chose to swap writer 2 before the pilot; granite3.3:8b (Apache-2.0, GGUF, pulled) chosen; the swap brief filed
+
 ## [1.1.8.3.6] - 2026-10-15
 
 - Advocate fix-up 3 reviewed by R&D: the guards, think/format/fence handling, Note labels, category wording and one table all landed; three items for Argon (the Llama 3.1 licence condition for the training batch, verified from source; no positive pin test; two rules moved from the table into the record); round 8 consult filed

@@ -2,6 +2,12 @@
 
 **For Argon, from R&D. 2026-10-15.** The Director wants the EmbeddingGemma 2 work to go beyond the text benchmark (rounds 1–3), because the model's distinguishing feature is one vector space for text, images and audio. This is the design for the second experiment, a cross-modal one. You have no repository access, so the design is inline. Your findings are advice. Nothing is counted until you've reviewed it and the Director has approved it.
 
+**Status:** the text benchmark is scored, so this is no longer waiting on it. Its decision was "adopt EmbeddingGemma 2 at 768".
+- Dense nDCG@10 was +0.112 over nomic-embed-text, with a one-sided lower bound of +0.065, on 93 queries.
+- The 256-dimension cut lost 0.043 against 768 (lower bound −0.062) and wasn't adopted.
+
+That bears on question 3: the G256 rule here (non-inferior within −0.02) is the same kind of test the text cut failed.
+
 ## Facts behind the design (checked on the rig, 2026-10-15)
 
 - **The art:** style-dataset-lab (public repository) holds about 2,900 images on disk across its projects. 2,085 have a record. Of those, 1,272 are approved, 373 rejected, 75 borderline and 365 unreviewed.

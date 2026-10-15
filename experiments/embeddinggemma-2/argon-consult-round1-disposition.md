@@ -1,0 +1,17 @@
+# Argon consult, round 1: the answer and the disposition | 2026-10-15
+
+Argon's verdict on the design v1: **hold for four named changes** before the Director. He confirmed both of R&D's corrections to his earlier answer: the NPU shares memory on the package, and the host-pinned vocabulary came from gemma4 on the 5090. The NPU skip stands on precision alone. All four changes are taken in design v2. R&D checked every rig claim before taking it.
+
+| # | Finding | Disposition |
+|---|---|---|
+| 1 | **The rule was unreachable.** At σΔ 0.25 and 80 queries the 95% half-width is ±0.055, not ±0.05, and ±0.09 on the 30 code queries, not ±0.08. So "≥ +0.03 and lower bound > 0" really needs +0.055. Its power at a true +0.03 is 18.8%. B256 was made to beat A outright instead of being tested against B. A 30-query group floor at −0.03 trips 25% of the time by chance. | **Taken.** R&D's arithmetic was wrong on both half-widths. v2 has 100 queries (50/50) and a two-stage rule: superiority of B over A with a one-sided bound and group floors at −0.015, then non-inferiority of B256 against B. v2 also states its power plainly: about 80% at a true +0.05–0.06, about a third at +0.03. That's accepted, because switching has a cost. |
+| 2 | **Circular keys:** R&D wrote 40 queries from the corpus and the unpooled keys, so wording echoes the target and equally good chunks go unjudged. | **Taken.** Written queries come from commit messages, PRs and hand-backs, with the corpus closed. Session-log queries keep only the first query per need. The keys come from blinded depth-10 pooling of both arms, graded and audited before any metric. The experiment's own folder is excluded from the corpus. |
+| 3 | **The model's own guidance:** the code prefix; the `title: none` trap and title parity; pinning the 270M text-only load; B256 in the manipulation check. | **Taken,** with the rig fact that decides title parity: offrig opens every chunk with a `[source · kind · title]` header that is embedded with it. So both arms get the same in-chunk title, and B uses `title: none \| text: {chunk}`. The titled form is a diagnostic. The code prefix is a zero-re-index diagnostic, because offrig emits one query prefix per search today. |
+| 4 | **Ollama's nomic build has a 2,048-token context, not 8,192.** And batching and transport must match for timing. | **Taken, and checked.** `ollama show nomic-embed-text` reports context length 2048 (with `num_ctx` 8192 set). offrig's chunks are at most 2,000 characters, so no truncation is expected. The validation run tokenizes every chunk in both tokenizers and stops on any chunk over 2,048. Batches are 32, offrig's `BATCH`. B's throughput is also timed behind a minimal HTTP wrapper. |
+| 5 | **Arms:** bge-base isn't an arm (512-token limit). bf16 on the 285K's CPU (AVX-NE-CONVERT) is a validation gate, not an arm. | **Taken.** bge-base is a footnote at most. The validation run checks float32 against bfloat16 for cosine ≥ 0.999 and fixes the faster dtype. |
+
+**Added by R&D from the code, beyond the review:**
+- offrig's search is **hybrid**: BM25 top 50 and cosine top 50, fused by RRF. So v2 reads dense nDCG@10 for the decision and adds a hybrid guard: B mustn't lose more than 0.015 in hybrid.
+- offrig stores **int8-quantized** vectors, so both arms are scored after the same int8 quantization, as deployed.
+
+**Next:** design v2 goes to the Director for approval. Then the harness is written and reviewed, and the 5-query validation run follows.

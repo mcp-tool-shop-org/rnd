@@ -76,6 +76,19 @@ python -m rnd sql "SELECT confidence, count(*) FROM claims GROUP BY confidence"
 python -m rnd sql "SELECT entry_id, text FROM claims WHERE confidence = 'disputed'"
 ```
 
+### `abmine analyze <record>`
+
+ab_dataminer: where and how much the arms of an A/B run of one model differ, from a JSON-lines record of greedy generations with top-K logprobs. No GPU, no server, and no library needed. See [Mining an A/B run](/rnd/handbook/ab-dataminer/).
+
+| Flag | Meaning |
+|---|---|
+| `--arm A` | limit to these arms, in this order (repeatable); the first is the reference of each pair |
+| `--reference R` | an arm to break ties at the other arms' forks, and the chosen-token MAE against it |
+| `--log ARM=PATH` | an arm's `OLLAMA_DEBUG` server log (repeatable) |
+| `--json` | machine-readable output |
+
+Errors: `ABMINE_RECORD` (unreadable or not JSON lines), `ABMINE_EMPTY` (no result rows), `ABMINE_LOG`, `ABMINE_ARM` (an arm not in the record).
+
 ## Writing
 
 ### `new "<title>"`

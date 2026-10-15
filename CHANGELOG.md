@@ -11,6 +11,23 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.9.0.0] - 2026-10-15
+
+### Added
+
+- **`rnd abmine analyze`** (ab_dataminer), the analysis half of the A/B template for runs that compare backends, builds or settings of one model. It reads a JSON-lines record of greedy generations with top-K logprobs and reports, with no GPU and no server:
+  - per pair of arms and prompt: the fork, Δz = (ℓR(t1) − ℓR(t2)) − (ℓT(t1) − ℓT(t2)) at every matched-prefix step (censored and flagged when a reference candidate is outside the test arm's top-K), the step-0 Δz, the mean, p95 and max |Δz|, a drift slope, pre-fork spikes, fork detail and the chosen-token MAE;
+  - a pairwise matrix and, with `--reference`, tie-breaks at the other arms' forks and each arm's MAE against the reference;
+  - from `OLLAMA_DEBUG` logs: the backend DLLs loaded, the device, the FlashAttention resolution, KV types and graph reuse.
+- `abmine.probe` (a library function for GPU grants, not a command): prefill-replay of a generation in raw mode with the model's exact template, ending inside the assistant turn. It must reproduce the recorded prompt token count and step-0 candidates before any later position is trusted. The qwen3 rendering is pinned to its template's sha256.
+- 39 tests at 100% line coverage of the module, including the 2026-10-15 cu1343 sandbox record as a fixture. It reproduces the outside reviewer's hand figures: Δz 0.770 and 1.345 at the forks, and a step-14 runner-up shift of 1.294 (the hand figure, 1.30, was rounded).
+- The handbook page "Mining an A/B run", linked from the A/B template, and the command reference.
+
+### Library
+
+- `experiments/ollama-cuda-backend/abmine-cu1343.txt` and `.json`: the analysis of the cu1343 sandbox record. The two builds disagree at step 0 on every prompt (Δz −0.163, 0.117 and −0.373), so the shift starts at prefill and isn't accumulated decode drift. The prompt that matched token for token still shows |Δz| up to 1.67.
+- `diag_test-v4-draft.py` and `diag_test-v3-to-v4.diff`: the N-arm diagnosis harness for the outside review, not run. Its arms are S0, S1, S2, S0_cb1343, S0_nofa, S2_nofa, a reference arm and S0′. It has 15 prompts with task checks, and the pre-registered activation rule written into its verdict block. It refuses to run until the reference arm is chosen and its hash is frozen
+
 ## [1.1.8.3.23] - 2026-10-15
 
 - The Ollama CUDA backend's sandbox test failed criterion 2, so nothing is activated. The 13.4 Update 2 build loaded (the log names its path, compute 12.0) and kept pace with stock (mean rate ratio 1.194 against stock A). But its outputs diverged from stock on 2 of 3 prompts, at token 15 and token 6, where stock's top two were 0.70 and 0.81 apart, not the near-tie the rule allows. Stock matched itself exactly. `experiments/ollama-cuda-backend/sandbox-result-cu1343.md` holds the verdict, with the run's record minus one log line's PATH values. Newsletter issue 9 gains the update, and both build records now explain the `0x0` affinity reading (an elevated process a non-elevated shell can't open)

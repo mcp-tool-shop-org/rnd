@@ -9,6 +9,8 @@ An A/B experiment compares two setups that differ in one thing, on the same task
 
 For agent experiments, the [agent-ab-harness instrument](https://github.com/mcp-tool-shop-org/rnd/blob/main/instruments/agent-ab-harness.md) runs the arms.
 
+For runs that compare backends, builds or settings of one model, [`rnd abmine`](/rnd/handbook/ab-dataminer/) mines the record: where the arms fork, Δz per step, drift and tie-breaks.
+
 ## 1. The check in three sentences
 
 Write these first. Nothing else proceeds until the Director has read them.

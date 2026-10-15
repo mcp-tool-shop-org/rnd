@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.22] - 2026-10-14
+
+- Argon round 5 answered: hold the grant; phase 1 fix-up brief filed (ten defects, the C1 ruling, Q1–Q5 answers, the pilot planner and mock runner); turn 3 amended; R&D verdict on role-set #56
+
 ## [1.1.8.2.21] - 2026-10-14
 
 - Advocate phase 1 reviewed by R&D: six required findings, one turn-3 conflict, five questions; Argon consult round 5 filed with the code inline; the pilot grant held

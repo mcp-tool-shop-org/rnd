@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.24] - 2026-10-14
+
+- Advocate fix-up reviewed by R&D: the relay messages never reach the writer or critic, no prompt-sufficiency test, the headline ignores tripwires, the B critic gets A's rules, three slot contradictions, the fake probe still in; Argon consult round 6 filed with the code inline; the grant held
+
 ## [1.1.8.2.23] - 2026-10-14
 
 - Advocate fix-up brief: Argon's read folded in (unit-suffixed numbers; threshold-crossing figure plants flip the hidden flags; the turn 3 negative allocation fixed)

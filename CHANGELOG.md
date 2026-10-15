@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.21] - 2026-10-14
+
+- Advocate phase 1 reviewed by R&D: six required findings, one turn-3 conflict, five questions; Argon consult round 5 filed with the code inline; the pilot grant held
+- Newsletter issue 8: the role-set scorecard reads 37 of 50, as measured after the translations (role-set #58)
+
 ## [1.1.8.2.20] - 2026-10-14
 
 - role-set v0.2.0 released: outcome recorded on the treatment brief; issue 8 and the T10 brief link the release

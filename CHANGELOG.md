@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.10] - 2026-10-15
+
+- Advocate: the live pilot stopped at the 24 GiB cap when the critic loaded (the pilot sent no num_ctx, so the 16K default doubled the writers and pushed gemma4:31b over; R&D sized the grant on weights and missed it); fix-up 4 brief filed: a sized context, truncation detection, an incremental record, a measuring preflight, the granite checked_by
+
 ## [1.1.8.3.9] - 2026-10-15
 
 - Advocate: the writer swap passed; the grant posted (publisher-5090-advocate-pilot-2026-10-15); the pilot run brief filed for Seat C, pointing at the grant note for the run line, heartbeat, run directory, caps and the grant hand-back

@@ -4,7 +4,7 @@
 - This is the second EmbeddingGemma 2 experiment. The first (`design.md`) tests text and code retrieval, and adopted EmbeddingGemma 2 at 768 dimensions (`results.md`). This one tests what makes the model distinct: text, images and audio in one vector space. The Director asked that the work not stop at text.
 - Template: [A/B experiments](https://mcp-tool-shop-org.github.io/rnd/handbook/ab-experiments/).
 - Revision 2 takes Argon's round 1 review (`argon-consult-multimodal-round1-disposition.md`) and corrects two facts revision 1 got wrong. It said about 2,900 images were on disk, and that records name a lineage.
-- Argon approved revision 2 as written (round 2, 2026-10-15) and added two harness guards, now in step 6. Nothing is counted until the Director approves the design.
+- Argon approved revision 2 as written (round 2, 2026-10-15) and added two harness guards, now in step 6. The Director approved the design on 2026-10-15. Next: the harness, its outside review, and the free validation run, which is CPU work under the rig's preflight (a thread cap, the expected load told before it starts).
 
 ## 1. The check in three sentences
 

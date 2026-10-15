@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.20] - 2026-10-15
+
+- EmbeddingGemma 2, multimodal: design revision 2 after Argon's round 1 (pool = generation outputs, byte-deduplicated, near-duplicates masked; strict key; T2 document prefix; per-project upper-bound rule; G256 out of the rule), approved by Argon as written in round 2. Two round 1 facts corrected: 2,104 image files in the query projects, not about 2,900, and no record names a lineage. Waits on the Director's approval
+- EmbeddingGemma 2: the offrig adoption plan (models, server, re-index, rollback); the Publisher placed the server in offrig as tools/embed-serve, release 1.2.0
+
 ## [1.1.8.3.19] - 2026-10-15
 
 - EmbeddingGemma 2: the round 2 regrade (all 100 queries, grader brief v2) passed its fresh blind audit on all four bars (quadratic kappa 0.897, binary kappa 0.869, raw disagreement 8.7%, two-step 0%). The seven queries with no relevant chunk are locked before any score, as amendment 4 requires; 93 queries are scored. The pre-registered score: adopt EmbeddingGemma 2 at 768 dimensions. Stage 1 passed (dense nDCG@10 +0.112 over nomic-embed-text, one-sided lower bound +0.065; prose +0.041, code +0.174; hybrid +0.065, lower bound +0.029). Stage 2 failed (256 dimensions cost 0.043, lower bound -0.062), so the cut isn't adopted. Results in `experiments/embeddinggemma-2/results.md`, ids and numbers only

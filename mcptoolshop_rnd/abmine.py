@@ -281,6 +281,10 @@ def parse_log(text: str) -> dict:
             out["inference_compute"] = {"library": m.group(1), "compute": m.group(2), "description": m.group(3)}
         elif m := _LOG_PATTERNS["flash_attn_setting"].search(line):
             out["flash_attn_setting"] = m.group(1)
+            # A forced setting is its own resolution: with --flash-attn off (or on), llama.cpp logs
+            # "flash_attn = disabled" (or "enabled") and skips resolve_fused_ops, which only resolves "auto".
+            if m.group(1) in ("enabled", "disabled"):
+                out["flash_attn_resolved"] = m.group(1)
         elif m := _LOG_PATTERNS["flash_attn_resolved"].search(line):
             out["flash_attn_resolved"] = m.group(1)
         elif m := _LOG_PATTERNS["kv_types"].search(line):

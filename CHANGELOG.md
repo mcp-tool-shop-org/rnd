@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.1] - 2026-10-15
+
+- stage1-role-eval: R&D's ruling raises the closed-form `distractor_margin` from 0.15 to 0.20. The batch 5 and 6
+  re-measure (24 items, at aspire-si 0c181e4) put the minimum gap at 0.214 and the median at 0.437. The gap is
+  re-measured at the batch 8 freeze.
+
 ## [1.1.10.0.0] - 2026-10-15
 
 - Fixed `rnd abmine` (`parse_log`): a forced FlashAttention setting is now its own resolution. With

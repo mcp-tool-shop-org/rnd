@@ -421,8 +421,21 @@ results in a Leitner ledger (`ledger.py`, aspire-si #102). R&D's rulings:
       - top distractor share 0–0.33;
       - the gap between them: minimum 0.21, median 0.50.
 
-      `distractor_margin` is **0.15**: a real separation, with headroom for new writers. Re-measure after batch 6,
-      and raise it if the minimum gap stays above 0.2.
+      `distractor_margin` was set at **0.15**: a real separation, with headroom for new writers. Re-measure after
+      batch 6, and raise it if the minimum gap stays above 0.2.
+    - **The margin, raised to 0.20 after batch 6** (R&D ruling, 2026-10-15).
+      - **The re-measure:** at 0c181e4, over 24 closed-form written-E items (batches 5 and 6; batches 1–4 are
+        excluded, as ruled).
+        - The minimum gap is 0.214 (T09-E-07: keyed 0.5, top distractor 0.286); batch 6's minimum is 0.223, and the
+          median is 0.437.
+        - The keyed share's minimum is exactly the 0.5 floor, on that same item. The top distractor's maximum is 0.571,
+          under the 0.8 cap.
+      - **Why 0.20, not 0.21:** 0.20 is the line the condition tested, and it keeps headroom under the weakest good
+        item. 0.21 would sit 0.004 under that one item: fitted to the sample, with no room for batch 7's and batch 8's
+        writers.
+      - **What follows:** the minimum gap is re-measured at the batch 8 freeze. A good item that fails at 0.20 comes to
+        R&D with its shares; the margin isn't lowered, and the item isn't dropped, to get it through. The key-check
+        decides whether it has a weak distractor or a real second answer.
     - **A distractor at share 0.0 is not off-topic by that alone.** The four such items have on-topic near-misses
       that reach the point through the trait's moves. Share doesn't detect off-topic options, so there's no floor;
       that stays a key-check judgement.

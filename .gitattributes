@@ -1,2 +1,7 @@
 * text=auto eol=lf
 *.cmd text eol=crlf
+
+# The frozen diagnosis harness and its diffs keep their exact bytes (CRLF), so sha256 matches the freeze file.
+experiments/ollama-cuda-backend/diag/diag_test.py -text
+experiments/ollama-cuda-backend/diag_test-v4-to-v5.diff -text
+experiments/ollama-cuda-backend/diag_test-v5-to-v6.diff -text

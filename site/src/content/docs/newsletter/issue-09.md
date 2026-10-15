@@ -8,6 +8,7 @@ highlights:
   - "<strong>Copying the old build back was never an option:</strong> 0.40.4 pins a different llama.cpp (b11521, against b11232), so the backend had to be rebuilt from the new pin."
   - "<strong>An uncapped CPU job took the whole machine</strong>, and every heavy job since runs pinned to efficiency cores at below-normal priority, with its load stated before it starts."
   - "<strong>Nothing is activated until a sandbox test passes</strong>, and the first one didn't: the new build loaded and kept pace, but its outputs diverged from stock on 2 of 3 prompts, so the stock backend stays. A weekly Argon check now asks what the newest setup should be."
+  - "<strong>Update: the cause is cuBLAS.</strong> Stock Ollama with only CUDA 13.4's cuBLAS swapped in matches the studio build bit for bit, and the studio's own kernels change nothing. By the rule set before the run, the build is eligible. Activation is a separate decision."
 ---
 
 Every claim below links to the record it came from. The build records are in rnd, under [`experiments/ollama-cuda-backend/`](https://github.com/mcp-tool-shop-org/rnd/tree/main/experiments/ollama-cuda-backend).
@@ -70,6 +71,24 @@ Argon gave round 3 a green light, and the test ran under a GPU grant: 46 seconds
 - **It failed the output check on 2 of 3 prompts.** Stock matched itself token for token. The sandbox matched stock exactly on the coding prompt, but diverged at token 15 of one prompt and token 6 of another. At both points it ranked stock's top two candidates the other way round, by margins of about 0.7 and 0.8 in log-probability. That's not the near-tie the rule allows.
 
 So by the rule set before the run, nothing is activated and the stock backend stays. The difference is larger than reordered sums usually give, and the cause isn't identified: build options or toolkit. Neither answer is wrong, but the bar was identity with stock, and identity isn't quality. Finding the cause is its own decision, with its own review. → [the result](https://github.com/mcp-tool-shop-org/rnd/blob/main/experiments/ollama-cuda-backend/sandbox-result-cu1343.md)
+
+## Update, later the same day: the cause is cuBLAS
+
+A diagnosis harness, frozen after outside review, ran eight arms of qwen3:8b on 15 prompts, one arm at a time under one
+GPU grant:
+- **Stock repeats itself bit for bit** across server starts.
+- **Stock with only CUDA 13.4.3's cuBLAS** matches the studio build bit for bit: every token and every top-10
+  log-probability. Three different `ggml-cuda.dll` builds with the same cuBLAS change nothing.
+- **Where cuBLAS runs.** The model keeps one weight in f16, the attention V projection. While the prompt is read, that
+  matmul goes to cuBLAS with f16 accumulation, and everything else runs in ggml's own kernels. That's why the builds
+  disagree from the first token.
+- **Neither build is closer to a q8_0 reference,** and the studio build had no task failures.
+
+By the rule set before the run, the build is eligible. Activation is a separate decision, with stock CUDA 13.0 kept as a
+fallback.
+
+The harness's first run crashed at its first arm, before anything loaded, on a bug every review had missed. The fix
+came with an offline dry run of the whole harness, which now runs in CI. → [the result](https://github.com/mcp-tool-shop-org/rnd/blob/main/experiments/ollama-cuda-backend/diag-result-v6.md) and [the brief](https://mcp-tool-shop-org.github.io/rnd/briefs/ollama-cuda-backend/)
 
 ## So it can't happen silently again
 

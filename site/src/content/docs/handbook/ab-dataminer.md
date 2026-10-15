@@ -48,7 +48,7 @@ At each step where both arms saw the same context (the matched prefix, and the f
 - at each fork between two other arms, which way the reference went, where it saw the same context;
 - each arm's chosen-token MAE against the reference.
 
-**With `--log`,** what each arm's `OLLAMA_DEBUG` server log says it actually ran: the backend DLLs loaded, the device and compute capability, the FlashAttention setting and how it resolved, the KV cache types, CUDA graph reuse and each prompt's token count.
+**With `--log`,** what each arm's `OLLAMA_DEBUG` server log says it actually ran: the backend DLLs loaded, the device and compute capability, the FlashAttention setting and how it resolved (a forced `on` or `off` counts as its own resolution, since llama.cpp prints no separate resolution line for it), the KV cache types, CUDA graph reuse and each prompt's token count.
 
 ## Replay, for a GPU grant: `probe`
 
@@ -65,3 +65,8 @@ It's a library function for a harness, not a command, because it needs a server,
 The 2026-10-15 sandbox test of the studio's CUDA 13.4 Update 2 backend for Ollama: the record and its analysis are in [experiments/ollama-cuda-backend](https://github.com/mcp-tool-shop-org/rnd/tree/main/experiments/ollama-cuda-backend).
 - It reproduced the outside reviewer's hand figures: Δz 0.770 and 1.345 at the two forks, and 1.294 for the step-14 runner-up shift.
 - It showed the two builds disagreeing at step 0 on every prompt, which points at prefill numerics, not accumulated drift.
+
+The diagnosis that followed ran eight arms through the same analysis.
+- Stock Ollama with only CUDA 13.4.3's cuBLAS swapped in matched the studio build bit for bit: every token and every top-10 log-probability. So the cause was cuBLAS, not the studio's kernels.
+- The analysis also showed that neither build sat closer to a q8_0 reference.
+- [The result](https://github.com/mcp-tool-shop-org/rnd/blob/main/experiments/ollama-cuda-backend/diag-result-v6.md)

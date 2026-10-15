@@ -1,0 +1,30 @@
+{
+ "what": "design amendment 4: queries with no relevant chunk, locked after the round 2 regrade and its audit, before any score",
+ "key": "round 2 (grader-brief-v2.md)",
+ "keys_sha256": "5747ac59d9a23be8b432bdf723c2a46e8291dc06ff19bfe19f79fb5ac4f26365",
+ "audit_round2": {
+  "auditor": "Argon, blind, 16 queries drawn from the 84 round 1 did not audit, 481 chunks",
+  "kappa_weighted_quadratic": 0.897,
+  "kappa_binary": 0.8687,
+  "raw_disagreement": 0.0873,
+  "two_step_disagreement": 0.0,
+  "passed": true
+ },
+ "excluded": {
+  "l006": "logged one-word search; the term appears nowhere in the corpus",
+  "l008": "logged search for a tool name that appears nowhere in the corpus",
+  "l016": "asks for one tool's own VRAM measurements; no chunk carries them (other tools' figures are graded 0 under R1)",
+  "w059": "an event no file in the corpus's sources records",
+  "w060": "an event no file in the corpus's sources records",
+  "w061": "a script's gates that no file in the corpus's sources lists",
+  "w068": "a design document in offrig docs/, which the corpus excludes by design"
+ },
+ "check": "a term search over all 11,525 chunks found no answering chunk for any of the seven (a term search, not a full read)",
+ "scored_queries": 93,
+ "round1_excluded_for_comparison": [
+  "l006",
+  "w059",
+  "w060",
+  "w068"
+ ]
+}

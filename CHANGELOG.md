@@ -11,6 +11,21 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.0] - 2026-10-15
+
+- Fixed `rnd abmine` (`parse_log`): a forced FlashAttention setting is now its own resolution. With
+  `--flash-attn off` (or `on`), llama.cpp logs `flash_attn = disabled` (or `enabled`) and prints no
+  `resolve_fused_ops` line, so 1.1.9.0.0 left the resolution empty for FA-off arms.
+- Updated experiment `ollama-cuda-backend` with the diagnosis of the CUDA 13.4 Update 2 backend:
+  - the frozen harness v6 (byte for byte), its diffs, the run record, and the analysis;
+  - the result: the difference from stock is cuBLAS, and the build is ELIGIBLE;
+  - the record of v5's aborted run.
+- Added `tests/test_diag_harness.py`. It runs the diagnosis harness's tests in the suite, including an offline dry run
+  of the harness's `main()` through all eight arms to the verdict.
+- Site: the brief "Can Ollama run the studio's CUDA 13.4 backend?", an update to newsletter issue 9, and the
+  ab_dataminer handbook page.
+- Tests: abmine stays at 100% coverage. The package floor stays at 90.
+
 ## [1.1.9.0.1] - 2026-10-15
 
 ### Fixed

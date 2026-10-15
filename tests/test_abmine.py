@@ -196,6 +196,17 @@ class Logs(unittest.TestCase):
         self.assertEqual(lg["graphs_reused"], [11])
         self.assertEqual(lg["prompt_tokens"], [19])
 
+    def test_a_forced_flash_attention_setting_is_its_own_resolution(self):
+        # With OLLAMA_FLASH_ATTENTION=0, Ollama passes --flash-attn off; llama.cpp logs the setting as "disabled"
+        # and never prints a "Flash Attention ..." resolution line (resolve_fused_ops runs only for "auto").
+        lg = abmine.parse_log("llama_context: flash_attn            = disabled")
+        self.assertEqual((lg["flash_attn_setting"], lg["flash_attn_resolved"]), ("disabled", "disabled"))
+        lg = abmine.parse_log("llama_context: flash_attn            = enabled")
+        self.assertEqual(lg["flash_attn_resolved"], "enabled")
+        lg = abmine.parse_log("\n".join(["llama_context: flash_attn            = auto",
+                                         "resolve_fused_ops: Flash Attention disabled"]))
+        self.assertEqual((lg["flash_attn_setting"], lg["flash_attn_resolved"]), ("auto", "disabled"))
+
     def test_an_empty_log(self):
         lg = abmine.parse_log("")
         self.assertIsNone(lg["flash_attn_resolved"])

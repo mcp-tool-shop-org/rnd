@@ -1,0 +1,53 @@
+--- diag_test.py@v5
++++ diag_test.py@v6
+@@ -1,4 +1,4 @@
+-"""Diagnosis harness v5: why the CUDA 13.4 Update 2 backend's outputs differ from stock (Ollama 0.40.4, qwen3:8b).
++"""Diagnosis harness v6: why the CUDA 13.4 Update 2 backend's outputs differ from stock (Ollama 0.40.4, qwen3:8b).
+ 
+ It generalises the reviewed sandbox test v3 to N arms. Every GPU arm runs as a sandbox on 11500 from its own tree
+ under E:\\AI\\ollama-diag-0404\\<arm>\\run, one arm and one model at a time. The environment is identical across arms
+@@ -268,7 +268,7 @@
+     env = arm_env(run_dir, fa, kind)
+     log_path = os.path.join(HERE, f"{name}-11500.log")
+     state["arm_dir"] = run_dir
+-    record("arm_start", arm=name, tree=tree, fa=fa, kind=kind, model=model, options=options, cap_mib=CAP_MIB,
++    record("arm_start", arm=name, tree=tree, fa=fa, arm_kind=kind, model=model, options=options, cap_mib=CAP_MIB,
+            env={k: env.get(k) for k in ("CUDA_VISIBLE_DEVICES", "OLLAMA_LLM_LIBRARY", "OLLAMA_FLASH_ATTENTION", "OLLAMA_DEBUG", "USERPROFILE")})
+     exe = os.path.join(run_dir, "ollama.exe")
+     if cpu_ref:  # E-cores 2-7 at below-normal priority, inherited by the runner
+@@ -395,7 +395,8 @@
+     for tag in tags:
+         man_path = os.path.join(MODELS, "manifests", "registry.ollama.ai", "library", "qwen3", tag)
+         try:
+-            man = json.load(open(man_path, encoding="utf-8"))
++            with open(man_path, encoding="utf-8") as f:
++                man = json.load(f)
+         except OSError as e:
+             raise SystemExit(f"REFUSED: qwen3:{tag} is not in the store ({e})")
+         layers = {l["mediaType"].rsplit(".", 1)[-1]: l for l in man["layers"]}
+@@ -413,7 +414,8 @@
+ 
+ def self_check():
+     try:
+-        want = dict(line.split()[::-1][:2] for line in open(FROZEN, encoding="utf-8") if line.strip())
++        with open(FROZEN, encoding="utf-8") as f:
++            want = dict(line.split()[::-1][:2] for line in f if line.strip())
+     except OSError:
+         raise SystemExit(f"REFUSED: {FROZEN} does not exist; the script and abmine.py are frozen only after review")
+     have = {"diag_test.py": sha_file(os.path.abspath(__file__)),
+@@ -468,10 +470,11 @@
+ 
+     recs = abmine.load_record_file(RECORD)
+     task_ok = {}
+-    for line in open(RECORD, encoding="utf-8"):
+-        r = json.loads(line)
+-        if r["kind"] == "result":
+-            task_ok.setdefault(r["arm"], {})[r["prompt"]] = r["task_ok"]
++    with open(RECORD, encoding="utf-8") as f:
++        for line in f:
++            r = json.loads(line)
++            if r["kind"] == "result":
++                task_ok.setdefault(r["arm"], {})[r["prompt"]] = r["task_ok"]
+     crit1 = {a[0]: evidence(a[0], a[1], a[2], a[3], a[5]) for a in ARMS}
+     v = verdict(recs, task_ok)
+     report = abmine.analyze(recs, reference="REF", arms=[a[0] for a in ARMS if a[0] in recs])

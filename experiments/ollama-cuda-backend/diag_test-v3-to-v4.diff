@@ -1,0 +1,667 @@
+--- /e/AI/ollama-cu134-0404/sandbox_test.py	2026-10-15 13:52:28.974439000 -0400
++++ /e/AI/ollama-diag-0404/diag_test.py	2026-10-15 14:34:43.686567800 -0400
+@@ -1,79 +1,134 @@
+-"""Sandbox test of the 0.40.4 CUDA 13.4 backend, as SANDBOX-PLAN.md sets it out, v3 after Argon's review.
+-Stock A and stock B on 11434, then the sandbox on 11500; one model loaded at a time, checked before every prompt; card
+-memory.used sampled every 1 s against a 9,216 MiB cap, a breach killing the sandbox tree and unloading 11434 at once;
+-every record flushed as it is written; both servers unloaded and the sandbox stopped on every exit path. The script
+-refuses to run unless its own sha256 matches sandbox_test.FROZEN.sha256. Stdlib only."""
++"""Diagnosis harness v4: why the CUDA 13.4 Update 2 backend's outputs differ from stock (Ollama 0.40.4, qwen3:8b).
++
++It generalises the reviewed sandbox test v3 to N arms. Every GPU arm runs as a sandbox on 11500 from its own tree
++under E:\\AI\\ollama-diag-0404\\<arm>\\run, one arm and one model at a time. The environment is identical across arms
++except the tree's cuda_v13 folder, and OLLAMA_FLASH_ATTENTION=0 on the two FA-off arms. The installed Ollama on
++11434 isn't used, and must answer empty before every generation. Card memory.used is sampled every 1 s against the
++cap; a breach kills the running arm's process tree and unloads 11434. Total CPU is sampled during the CPU reference
++arm, which stops if it holds above 60% for 10 s. Every record is flushed as it is written. Analysis uses rnd's
++ab_dataminer (mcptoolshop_rnd/abmine.py), whose sha256 is frozen with this script's.
++
++Nothing runs unless this script's sha256 and abmine.py's both match diag_test.FROZEN.sha256, every arm's DLL hashes
++match ARMS below, and REFERENCE has been chosen. Stdlib only.
++"""
+ 
+ import hashlib
+ import json
+ import os
++import re
+ import subprocess
++import sys
+ import threading
+ import time
+ import urllib.request
+ 
+ HERE = os.path.dirname(os.path.abspath(__file__))
+-# The build under test is the CUDA 13.4 Update 2 (13.4.3) rebuild to the studio standard; its sandbox tree and DLL hash live in its folder.
+-BUILD = r"E:\AI\ollama-cu1343-0404"
+-RUN = os.path.join(BUILD, "run")
+-RECORD = os.path.join(BUILD, "sandbox-record.jsonl")
+-SANDBOX_LOG = os.path.join(BUILD, "sandbox-11500.log")
+-FROZEN = os.path.join(HERE, "sandbox_test.FROZEN.sha256")
++RND = r"E:\AI\Research and Development"
++sys.path.insert(0, RND)
++from mcptoolshop_rnd import abmine  # noqa: E402
++
++RECORD = os.path.join(HERE, "diag-record.jsonl")
++FROZEN = os.path.join(HERE, "diag_test.FROZEN.sha256")
++MODELS = r"E:\AI-Models\Ollama"
+ STOCK, SANDBOX = "http://127.0.0.1:11434", "http://127.0.0.1:11500"
+-CAP_MIB = 9216
+-MODEL = "qwen3:8b"
+-# top_k 1 is kept. In 0.40.4, top_logprobs come from the full pre-sampling logits, so the sampler's truncation cannot
+-# leave fewer than two candidates. Ollama sets only n_probs = max(top_logprobs, 1) (llm/llama_server.go:1697-1699),
+-# never post_sampling_probs, whose default is false (llama.cpp b11521 tools/server/server-task.h:77). With it false,
+-# populate_token_probs takes get_token_probabilities over llama_get_logits_ith, with backend sampling off for pre-sample
+-# logits (server-context.cpp:1923-1927, 2095-2127; server-common.cpp:1594-1625).
+-OPTIONS = {"num_ctx": 2048, "num_predict": 128, "temperature": 0, "top_k": 1, "seed": 42}
+-WARMUP_OPTIONS = {**OPTIONS, "num_predict": 16}
+-TOP_LOGPROBS = 2
+-NEAR_TIE = 1e-3  # Argon: a divergence passes only where the top two candidates are within this log-probability
++CAP_MIB = 9216  # raised to 14336 if REFERENCE is "q8_0"
++OPTIONS = {"num_ctx": 2048, "num_predict": 64, "temperature": 0, "top_k": 1, "seed": 42}
++TOP_LOGPROBS = 10
++WARMUP = ("Say hello.", {**OPTIONS, "num_predict": 16})
++NEAR_TIE = 1e-3
++MAE_MARGIN = 0.005  # activation rule (c): S2's chosen-token MAE against the reference within this of S0's
++
++# The reference arm is the Director's choice: "cpu" (stock tree, CUDA hidden, Q4_K_M on 6 E-cores) or "q8_0"
++# (stock tree on the GPU, qwen3:8b-q8_0, downloaded beforehand under its own approval). None refuses to run.
++REFERENCE = None
++
++STOCK_DLL = ("2f7f959a70c6f8a7ccc4f59d9bdf6dbaa60e40266179d36a738c70f7e448b2bf",
++             "f0acb41173e8d9214b043156d2b3944f1f9183164c3f691518da4231e1b8d302",
++             "a755763c497315caabade7f04b69dfea2a138be5f5d53907d8531e1cf9d0b157")
++B1341 = ("ab9bef88f8bf016b95e2d39a57ae2a1e140305b7d6f1e365a49e78ec37b4cb2c",
++         "1119dbca0a808e0c8850bb4221e330daf0b5ddb348d62d37b6ac533854723df9",
++         "0f5bc315fef706b5626248ebd74e8a48a9e82fa2f0cad38330f5f70984913107")
++B1343 = ("0ebc0e61c7288e6a7367f21c1fbd9a8501e423927e55902c0f0476cdd8608c6a",
++         "60bbba8868290311e9c1657b2193ddec667744eb555ff843f87acb7c039f9efa",
++         "cad63434448e7141629e240ea093ad596a7ef6a0f67b468ba9bc1df6e1eeee33")
++CB1343 = (STOCK_DLL[0], B1343[1], B1343[2])
++
++# name, tree, expected (ggml-cuda, cublas64_13, cublasLt64_13), flash attention ("auto" or "off"), prompts, kind
++ARMS = [
++    ("S0", "S0", STOCK_DLL, "auto", "all", "gpu"),
++    ("S1", "S1", B1341, "auto", "all", "gpu"),
++    ("S2", "S2", B1343, "auto", "all", "gpu"),
++    ("S0_cb1343", "S0_cb1343", CB1343, "auto", "all", "gpu"),
++    ("S0_nofa", "S0", STOCK_DLL, "off", "original", "gpu"),
++    ("S2_nofa", "S2", B1343, "off", "original", "gpu"),
++    ("REF", "S0", STOCK_DLL, "auto", "all", "reference"),
++    ("S0p", "S0", STOCK_DLL, "auto", "all", "gpu"),  # S0′, last
++]
++
++# The prompts, fixed before the run. A check that fails is a task failure for activation rule (c).
+ PROMPTS = [
+-    "Explain in three sentences why the sky is blue.",
+-    "Write a Python function that returns the n-th Fibonacci number iteratively.",
+-    "List five uses of a hammer, one per line.",
++    {"id": "orig_sky", "set": "original", "prompt": "Explain in three sentences why the sky is blue.", "check": None},
++    {"id": "orig_fib", "set": "original", "prompt": "Write a Python function that returns the n-th Fibonacci number iteratively.", "check": None},
++    {"id": "orig_hammer", "set": "original", "prompt": "List five uses of a hammer, one per line.", "check": None},
++    {"id": "prose_rainbow", "set": "prose", "prompt": "Explain in two sentences what a rainbow is.", "check": {"contains_any": ["light", "sun", "refract", "water"]}},
++    {"id": "prose_library", "set": "prose", "prompt": "Describe a quiet library in three sentences.", "check": {"contains_any": ["book", "quiet", "silen"]}},
++    {"id": "prose_advice", "set": "prose", "prompt": "Give one piece of advice to a new programmer, in two sentences.", "check": {"contains_any": ["code", "learn", "practice", "program"]}},
++    {"id": "prose_romeo", "set": "prose", "prompt": "Summarise the plot of Romeo and Juliet in two sentences.", "check": {"contains_any": ["Romeo", "Juliet"]}},
++    {"id": "math_mul", "set": "code_math", "prompt": "What is 17 multiplied by 23? Answer with the number only.", "check": {"contains_any": ["391"]}},
++    {"id": "math_sum", "set": "code_math", "prompt": "What is the sum of the integers from 1 to 20? Answer with the number only.", "check": {"contains_any": ["210"]}},
++    {"id": "code_reverse", "set": "code_math", "prompt": "Write a Python expression that reverses a string s. Answer with the expression only.", "check": {"contains_any": ["[::-1]", "reversed("]}},
++    {"id": "code_len", "set": "code_math", "prompt": "In Python, what does len([1, 2, 3]) return? Answer with the number only.", "check": {"contains_any": ["3"]}},
++    {"id": "json_person", "set": "extraction", "prompt": 'Return only JSON with keys "name" and "age" for this sentence: "Maria is 34 years old."', "check": {"json": {"name": "Maria", "age": 34}}},
++    {"id": "json_place", "set": "extraction", "prompt": 'Return only JSON with keys "city" and "country" for this sentence: "The Louvre is in Paris, France."', "check": {"json": {"city": "Paris", "country": "France"}}},
++    {"id": "json_price", "set": "extraction", "prompt": 'Return only JSON with keys "item" and "price" for this sentence: "A coffee costs 4 dollars."', "check": {"json": {"item": None, "price": 4}}},
++    {"id": "json_colors", "set": "extraction", "prompt": 'Return only JSON with the key "colors" as a list, for this sentence: "The flag is red, white and blue."', "check": {"json": {"colors": ["red", "white", "blue"]}}},
+ ]
+-WARMUP_PROMPT = "Say hello."
+-def new_dll():
+-    """The build's own recorded ggml-cuda.dll hash; the run refuses if the build has not recorded one."""
+-    try:
+-        with open(os.path.join(BUILD, "sha256.txt"), encoding="utf-8") as f:
+-            return next(ln.split()[0] for ln in f if ln.split() and ln.split()[-1] == "ggml-cuda.dll")
+-    except (OSError, StopIteration):
+-        raise SystemExit(f"REFUSED: no ggml-cuda.dll hash in {BUILD}\sha256.txt; the build is not assembled")
+ 
+-state = {"peak": 0, "breach": None, "stop": False, "sandbox_pid": None}
++state = {"peak": 0, "breach": None, "stop": False, "arm_dir": None, "cpu_watch": False, "cpu_over": 0, "cpu_stop": None}
+ 
+ 
+ def record(kind, **data):
+     with open(RECORD, "a", encoding="utf-8") as f:
+-        f.write(json.dumps({"t": time.strftime("%H:%M:%S"), "kind": kind, **data}) + "\n")
++        f.write(json.dumps({"t": time.strftime("%H:%M:%S"), "kind": kind, **data}, ensure_ascii=False) + "\n")
+         f.flush()
+         os.fsync(f.fileno())
+ 
+ 
+-def http(base, path, body=None, timeout=300):
++def http(base, path, body=None, timeout=600):
+     req = urllib.request.Request(base + path, data=None if body is None else json.dumps(body).encode(),
+                                  headers={"Content-Type": "application/json"})
+     with urllib.request.urlopen(req, timeout=timeout) as r:
+         return json.load(r)
+ 
+ 
++def sha_file(path):
++    with open(path, "rb") as f:
++        return hashlib.sha256(f.read()).hexdigest()
++
++
+ def memory_used():
+     return int(subprocess.run(["nvidia-smi", "--query-gpu=memory.used", "--format=csv,noheader,nounits"],
+                               capture_output=True, text=True, timeout=10).stdout.strip().splitlines()[0])
+ 
+ 
+-def kill_sandbox():
+-    pid = state["sandbox_pid"]
+-    if pid:
+-        subprocess.run(["taskkill", "/PID", str(pid), "/T", "/F"], capture_output=True, timeout=30)
++def total_cpu():
++    out = subprocess.run(["typeperf", r"\Processor(_Total)\% Processor Time", "-sc", "1"],
++                         capture_output=True, text=True, timeout=15).stdout
++    vals = re.findall(r'"[^"]*","([\d.]+)"', out)
++    return float(vals[-1]) if vals else None
++
++
++def kill_arm():
++    """Kill every ollama.exe and llama-server.exe started from the running arm's tree."""
++    d = state["arm_dir"]
++    if not d:
++        return
++    ps = ("Get-CimInstance Win32_Process | Where-Object { ($_.Name -eq 'ollama.exe' -or $_.Name -eq 'llama-server.exe') "
++          f"-and $_.ExecutablePath -like '{d}*' }} | ForEach-Object {{ taskkill /PID $_.ProcessId /T /F | Out-Null }}")
++    subprocess.run(["powershell", "-NoProfile", "-Command", ps], capture_output=True, timeout=60)
+ 
+ 
+-def vram_sampler():
++def sampler():
+     while not state["stop"]:
+         try:
+             used = memory_used()
+@@ -81,27 +136,35 @@
+             if used > CAP_MIB and not state["breach"]:
+                 state["breach"] = used
+                 record("BREACH", memory_used_mib=used, cap_mib=CAP_MIB)
+-                # At once, not after the request in flight: the sandbox tree is killed and 11434 unloaded.
+-                threading.Thread(target=kill_sandbox, daemon=True).start()
++                threading.Thread(target=kill_arm, daemon=True).start()
+                 threading.Thread(target=unload, args=(STOCK,), daemon=True).start()
+-        except Exception as e:  # a failed read is recorded, never ignored silently
+-            record("vram_read_error", error=str(e))
++        except Exception as e:
++            record("vram_read_error", error=repr(e))
++        if state["cpu_watch"]:
++            try:
++                c = total_cpu()
++                state["cpu_over"] = state["cpu_over"] + 1 if c is not None and c > 60 else 0
++                if state["cpu_over"] >= 4 and not state["cpu_stop"]:  # about 10 s at one sample per ~2.5 s
++                    state["cpu_stop"] = c
++                    record("CPU_STOP", total_cpu_pct=c)
++                    threading.Thread(target=kill_arm, daemon=True).start()
++            except Exception as e:
++                record("cpu_read_error", error=repr(e))
+         time.sleep(1)
+ 
+ 
+ def loaded(base):
+-    """The models a server has loaded, or None when it does not answer: unreachable is never read as empty."""
+     try:
+         return [m["name"] for m in http(base, "/api/ps", timeout=10)["models"]]
+     except Exception:
+         return None
+ 
+ 
+-def unload(base):
++def unload(base, model="qwen3:8b"):
+     try:
+-        http(base, "/api/generate", {"model": MODEL, "keep_alive": 0}, timeout=60)
++        http(base, "/api/generate", {"model": model, "keep_alive": 0}, timeout=60)
+     except Exception as e:
+-        record("unload_error", server=base, error=str(e))
++        record("unload_error", server=base, error=repr(e))
+     for _ in range(30):
+         if loaded(base) == []:
+             return True
+@@ -109,219 +172,268 @@
+     return False
+ 
+ 
+-def check_breach():
++def check_stops():
+     if state["breach"]:
+         raise SystemExit(f"STOP: memory.used {state['breach']} MiB passed the {CAP_MIB} MiB cap")
++    if state["cpu_stop"]:
++        raise SystemExit(f"STOP: total CPU held above 60% ({state['cpu_stop']}%) during the reference arm")
+ 
+ 
+-def check_exclusive(base, other, other_may_be_down):
+-    """Before every generation: the other server answers with nothing loaded (11500 before launch excepted)."""
+-    other_state = loaded(other)
+-    if other_state is None and not other_may_be_down:
+-        raise SystemExit(f"STOP: {other} does not answer, so it cannot be shown empty")
+-    if other_state:
+-        raise SystemExit(f"STOP: {other} has a model loaded; never two at once")
++def stock_empty():
++    if loaded(STOCK) != []:
++        raise SystemExit("STOP: the installed Ollama on 11434 does not answer empty; never two models at once")
+ 
+ 
+-def generate(base, prompt, options):
+-    body = {"model": MODEL, "prompt": prompt, "think": False, "stream": False, "options": options,
+-            "keep_alive": "30s", "logprobs": True, "top_logprobs": TOP_LOGPROBS}
+-    return body, http(base, "/api/generate", body)
++def task_check(spec, text):
++    if not spec:
++        return True
++    if "contains_any" in spec:
++        return any(s in text for s in spec["contains_any"])
++    m = re.search(r"\{.*\}", text, re.S)
++    if not m:
++        return False
++    try:
++        obj = json.loads(m.group(0))
++    except json.JSONDecodeError:
++        return False
++    for k, v in spec["json"].items():
++        if k not in obj:
++            return False
++        if v is None:
++            continue
++        got = obj[k]
++        if isinstance(v, list):
++            if [str(x).lower() for x in got] != [str(x).lower() for x in v]:
++                return False
++        elif str(got).lower() != str(v).lower():
++            return False
++    return True
+ 
+ 
+-def run_block(name, base, other, other_may_be_down=False):
+-    check_exclusive(base, other, other_may_be_down)
+-    if loaded(base) != []:
+-        raise SystemExit(f"STOP: {base} is not answering empty before the load")
+-    # One warm-up after the load, before the timed prompts; it is recorded as having run, its output is not used.
+-    check_breach()
+-    body, r = generate(base, WARMUP_PROMPT, WARMUP_OPTIONS)
+-    record("warmup", block=name, body={k: v for k, v in body.items() if k != "prompt"},
+-           load_duration_ns=r.get("load_duration"), peak_mib_so_far=state["peak"])
+-    out = []
+-    for i, prompt in enumerate(PROMPTS):
+-        check_breach()
+-        check_exclusive(base, other, other_may_be_down)
+-        body, r = generate(base, prompt, OPTIONS)
+-        record("sent", block=name, prompt=i, body={k: v for k, v in body.items() if k != "prompt"})
+-        lps = r.get("logprobs") or []
+-        res = {"block": name, "prompt": i, "response": r.get("response", ""),
+-               "tokens": [t.get("token") for t in lps],
+-               "top": [[(c.get("token"), c.get("logprob")) for c in (t.get("top_logprobs") or [])] for t in lps],
+-               "eval_count": r.get("eval_count"), "eval_duration_ns": r.get("eval_duration"),
+-               "tok_per_s": round(r["eval_count"] / (r["eval_duration"] / 1e9), 2) if r.get("eval_duration") else None,
+-               "load_duration_ns": r.get("load_duration"), "prompt_eval_count": r.get("prompt_eval_count"),
+-               "prompt_eval_duration_ns": r.get("prompt_eval_duration"), "done_reason": r.get("done_reason"),
+-               "peak_mib_so_far": state["peak"]}
+-        record("result", **res)
+-        out.append(res)
+-    check_breach()
+-    ok = unload(base)
+-    record("unloaded", block=name, server=base, empty=ok, peak_mib_so_far=state["peak"])
+-    if not ok:
+-        raise SystemExit(f"STOP: {base} did not unload")
+-    return out
++def arm_env(arm_dir, fa, kind):
++    env = dict(os.environ)
++    for k in ("CUDA_VISIBLE_DEVICES", "GGML_VK_VISIBLE_DEVICES", "OLLAMA_VULKAN", "OLLAMA_IGPU_ENABLE", "OLLAMA_NUM_GPU",
++              "OMP_NUM_THREADS", "OLLAMA_LLM_LIBRARY", "OLLAMA_MODELS", "OLLAMA_FLASH_ATTENTION", "OLLAMA_KV_CACHE_TYPE"):
++        env.pop(k, None)
++    parts = env.get("PATH", "").split(os.pathsep)
++    env["PATH"] = os.pathsep.join(p for p in parts if "\\programs\\ollama" not in p.lower().replace("/", "\\"))
++    env.update(USERPROFILE=arm_dir, HOME=arm_dir, OLLAMA_HOST="127.0.0.1:11500", OLLAMA_MODELS=MODELS,
++               OLLAMA_NOPRUNE="1", OLLAMA_KEEP_ALIVE="30s", OLLAMA_DEBUG="1")
++    if kind == "reference" and REFERENCE == "cpu":
++        env.update(CUDA_VISIBLE_DEVICES="-1", GGML_VK_VISIBLE_DEVICES="-1", OLLAMA_VULKAN="0", OLLAMA_IGPU_ENABLE="0")
++    else:
++        env.update(CUDA_VISIBLE_DEVICES="0", OLLAMA_LLM_LIBRARY="cuda_v13")
++    if fa == "off":
++        env["OLLAMA_FLASH_ATTENTION"] = "0"
++    return env
+ 
+ 
+-def first_divergence(a, b):
+-    for i, (x, y) in enumerate(zip(a, b)):
+-        if x != y:
+-            return i
+-    return None if len(a) == len(b) else min(len(a), len(b))
++def generate(model, prompt, options):
++    body = {"model": model, "prompt": prompt, "think": False, "stream": False, "options": options,
++            "keep_alive": "30s", "logprobs": True, "top_logprobs": TOP_LOGPROBS}
++    return body, http(SANDBOX, "/api/generate", body)
+ 
+ 
+-def compare(ref, other):
+-    """Exact match, or (Argon's rule, made exact) a divergence at a near-tie: at the first differing position i,
+-    abs(top_a[0].logprob - top_a[1].logprob) < NEAR_TIE AND the other run's token at i is the reference's second
+-    candidate top_a[1].token. Otherwise it fails. With no top_logprobs at i, the rule is exact match only, and that is
+-    said."""
+-    if ref["tokens"] and other["tokens"]:
+-        unit, a, b = "token", ref["tokens"], other["tokens"]
++def run_arm(name, tree, expected, fa, which, kind):
++    run_dir = os.path.join(HERE, tree, "run")
++    cuda = os.path.join(run_dir, "lib", "ollama", "cuda_v13")
++    got = tuple(sha_file(os.path.join(cuda, f)) for f in ("ggml-cuda.dll", "cublas64_13.dll", "cublasLt64_13.dll"))
++    if got != expected:
++        raise SystemExit(f"STOP: arm {name}'s tree {tree} does not hold its expected DLLs: {got}")
++    stock_empty()
++    if loaded(SANDBOX) is not None:
++        raise SystemExit("STOP: something already answers on 11500")
++    cpu_ref = kind == "reference" and REFERENCE == "cpu"
++    model = "qwen3:8b-q8_0" if kind == "reference" and REFERENCE == "q8_0" else "qwen3:8b"
++    options = {**OPTIONS, **({"num_gpu": 0, "num_thread": 6} if cpu_ref else {})}
++    env = arm_env(run_dir, fa, kind)
++    log_path = os.path.join(HERE, f"{name}-11500.log")
++    state["arm_dir"] = run_dir
++    record("arm_start", arm=name, tree=tree, fa=fa, kind=kind, model=model, options=options,
++           env={k: env.get(k) for k in ("CUDA_VISIBLE_DEVICES", "OLLAMA_LLM_LIBRARY", "OLLAMA_FLASH_ATTENTION", "OLLAMA_DEBUG", "USERPROFILE")})
++    exe = os.path.join(run_dir, "ollama.exe")
++    if cpu_ref:  # E-cores 2-7 at below-normal priority, inherited by the runner
++        cmd = f'start "" /B /BELOWNORMAL /AFFINITY FC "{exe}" serve > "{log_path}" 2>&1'
++        subprocess.Popen(["cmd.exe", "/c", cmd], env=env, cwd=run_dir)
++        state["cpu_watch"] = True
+     else:
+-        unit, a, b = "character", ref["response"], other["response"]
+-    i = first_divergence(b, a)
+-    out = {"unit": unit, "exact": i is None, "first_divergence": i}
+-    if i is None:
+-        out["pass"] = True
+-        return out
+-    have_top = unit == "token" and i < len(ref["top"]) and len(ref["top"][i]) >= 2
+-    if not have_top:
+-        out.update(rule="exact match only (no top_logprobs at the divergence)", **{"pass": False})
+-        return out
+-    (t1, l1), (t2, l2) = ref["top"][i][0], ref["top"][i][1]
+-    chosen = b[i] if i < len(b) else None
+-    gap = abs(l1 - l2)
+-    out.update(rule="near-tie", ref_top2=[[t1, l1], [t2, l2]], gap=gap, chosen=chosen,
+-               **{"pass": gap < NEAR_TIE and chosen == t2})
++        with open(log_path, "w", encoding="utf-8") as log:
++            subprocess.Popen([exe, "serve"], env=env, stdout=log, stderr=log, cwd=run_dir)
++    for _ in range(90):
++        check_stops()
++        if loaded(SANDBOX) is not None:
++            break
++        time.sleep(1)
++    else:
++        raise SystemExit(f"STOP: arm {name}'s server did not come up")
++    prompts = [p for p in PROMPTS if which == "all" or p["set"] == "original"]
++    try:
++        stock_empty()
++        _, r = generate(model, WARMUP[0], WARMUP[1])
++        record("warmup", arm=name, load_duration_ns=r.get("load_duration"), peak_mib_so_far=state["peak"])
++        for i, p in enumerate(PROMPTS):
++            if p not in prompts:
++                continue
++            check_stops()
++            stock_empty()
++            body, r = generate(model, p["prompt"], options)
++            lps = r.get("logprobs") or []
++            text = r.get("response", "")
++            record("result", arm=name, prompt=i, prompt_id=p["id"], response=text,
++                   tokens=[t.get("token") for t in lps],
++                   top=[[[c.get("token"), c.get("logprob")] for c in (t.get("top_logprobs") or [])] for t in lps],
++                   eval_count=r.get("eval_count"), eval_duration_ns=r.get("eval_duration"),
++                   prompt_eval_count=r.get("prompt_eval_count"), done_reason=r.get("done_reason"),
++                   task_ok=task_check(p["check"], text), peak_mib_so_far=state["peak"],
++                   body={k: v for k, v in body.items() if k != "prompt"})
++        check_stops()
++        ok = unload(SANDBOX, model)
++        record("arm_unloaded", arm=name, empty=ok, peak_mib_so_far=state["peak"])
++        if not ok:
++            raise SystemExit(f"STOP: arm {name} did not unload")
++    finally:
++        kill_arm()
++        state["cpu_watch"] = False
++        time.sleep(3)
++        record("arm_stopped", arm=name, sandbox_answering=loaded(SANDBOX) is not None)
++        state["arm_dir"] = None
++
++
++def evidence(name, tree, expected, fa, kind):
++    """Criterion 1 for a GPU arm: the log names this tree's cuda_v13 DLL, CUDA, compute 12.0, and the expected
++    FlashAttention resolution. Skipped on the CPU reference arm, where CUDA is hidden on purpose."""
++    try:
++        text = open(os.path.join(HERE, f"{name}-11500.log"), encoding="utf-8", errors="replace").read()
++    except OSError as e:
++        return {"ok": False, "error": repr(e)}
++    lg = abmine.parse_log(text)
++    if kind == "reference" and REFERENCE == "cpu":
++        return {"skipped": "CPU reference arm", "no_cuda_backend": not any(b["kind"] == "CUDA" for b in lg["backends"]),
++                "flash_attn": lg["flash_attn_resolved"], "kv": lg["kv_types"]}
++    want = os.path.join(HERE, tree, "run", "lib", "ollama", "cuda_v13").lower()
++    cuda = [b for b in lg["backends"] if b["kind"] == "CUDA"]
++    ok = (bool(cuda) and want in cuda[-1]["path"].lower() and (lg["device"] or {}).get("compute") == "12.0"
++          and (lg["inference_compute"] or {}).get("library") == "CUDA"
++          and (fa != "off" or lg["flash_attn_resolved"] == "disabled"))
++    return {"ok": ok, "backend": cuda[-1]["path"] if cuda else None, "device": lg["device"],
++            "flash_attn": [lg["flash_attn_setting"], lg["flash_attn_resolved"]], "kv": lg["kv_types"],
++            "dll_ok": expected[0] == sha_file(os.path.join(HERE, tree, "run", "lib", "ollama", "cuda_v13", "ggml-cuda.dll"))}
++
++
++def same(recs, a, b, prompts=None):
++    """Token for token on every prompt both arms ran (or the given ones)."""
++    ps = sorted(set(recs.get(a, {})) & set(recs.get(b, {})))
++    if prompts is not None:
++        ps = [p for p in ps if p in prompts]
++    return bool(ps) and all(recs[a][p].tokens == recs[b][p].tokens for p in ps)
++
++
++def verdict(recs, task_ok):
++    """The pre-registered activation rule (Argon's change 3, the Director's direction), computed exactly:
++    activate S2 only if
++      (a) S2 = S1 token for token on all prompts, AND
++      (b) the S0 vs S2 shift isolates to native sm_120a kernels (fattn or MMQ/MMVQ) or the cuBLAS 13.0 to 13.4
++          change, by the arm matrix, AND
++      (c) S2 has zero task failures and its matched-prefix logprob MAE against the reference is within 0.005 nats
++          of S0's.
++    S0 must equal S0′ token for token, or the run can't decide. A pass makes S2 eligible; activation is still the
++    Director's separate go."""
++    orig = {i for i, p in enumerate(PROMPTS) if p["set"] == "original"}
++    out = {"S0_equals_S0p": same(recs, "S0", "S0p")}
++    a = same(recs, "S2", "S1")
++    shift = not same(recs, "S0", "S2")
++    attrib = []
++    if same(recs, "S0_cb1343", "S2"):
++        attrib.append("cuBLAS 13.0 to 13.4: stock ggml-cuda with 13.4.3's cuBLAS reproduces S2")
++    if same(recs, "S0_nofa", "S2_nofa", orig) and not same(recs, "S0", "S2", orig):
++        attrib.append("fattn: with FlashAttention off, S0 and S2 agree on the original prompts")
++    if (same(recs, "S0_cb1343", "S0") and not same(recs, "S0_nofa", "S2_nofa", orig)
++            and not same(recs, "S1", "S0")):
++        attrib.append("native sm_120a MMQ/MMVQ: cuBLAS alone changes nothing, FA off doesn't remove it, and the 13.4.1 native build also differs")
++    b = (not shift) or bool(attrib)
++    s2_failures = sum(1 for p, ok in task_ok.get("S2", {}).items() if not ok)
++    mae = abmine.analyze(recs, reference="REF", arms=[a_ for a_ in ("S0", "S2", "REF") if a_ in recs]).get("mae_vs_reference", {})
++    m_s0, m_s2 = mae.get("S0"), mae.get("S2")
++    c = s2_failures == 0 and m_s0 is not None and m_s2 is not None and (m_s2 - m_s0) <= MAE_MARGIN
++    out.update({"a_S2_equals_S1": a, "b_shift_present": shift, "b_attribution": attrib, "b": b,
++                "c_S2_task_failures": s2_failures, "c_mae_vs_ref": {"S0": m_s0, "S2": m_s2}, "c": c,
++                "task_failures_by_arm": {arm: [PROMPTS[p]["id"] for p, ok in t.items() if not ok] for arm, t in task_ok.items()}})
++    if not out["S0_equals_S0p"]:
++        out["decision"] = "INCONCLUSIVE: S0 and S0′ differ, so stock is not repeatable across server starts"
++    elif a and b and c:
++        out["decision"] = "S2 ELIGIBLE for activation (the Director's go still required)"
++    else:
++        failed = [k for k, v in (("a", a), ("b", b), ("c", c)) if not v]
++        out["decision"] = f"DO NOT ACTIVATE S2: rule part(s) {', '.join(failed)} not met"
+     return out
+ 
+ 
+ def self_check():
+-    want = open(FROZEN, encoding="utf-8").read().split()[0]
+-    have = hashlib.sha256(open(os.path.abspath(__file__), "rb").read()).hexdigest()
+-    if have != want:
+-        raise SystemExit(f"REFUSED: this script's sha256 {have} is not the frozen {want}")
++    want = dict(line.split()[::-1][:2] for line in open(FROZEN, encoding="utf-8") if line.strip())
++    have = {"diag_test.py": sha_file(os.path.abspath(__file__)),
++            "abmine.py": sha_file(os.path.join(RND, "mcptoolshop_rnd", "abmine.py"))}
++    for name, h in have.items():
++        if want.get(name) != h:
++            raise SystemExit(f"REFUSED: {name} sha256 {h} is not the frozen {want.get(name)}")
+     return have
+ 
+ 
+-def sandbox_env():
+-    env = dict(os.environ)
+-    for k in ("CUDA_VISIBLE_DEVICES", "GGML_VK_VISIBLE_DEVICES", "OLLAMA_VULKAN", "OLLAMA_IGPU_ENABLE",
+-              "OLLAMA_NUM_GPU", "OMP_NUM_THREADS", "OLLAMA_LLM_LIBRARY", "OLLAMA_MODELS"):
+-        env.pop(k, None)  # the CPU-only switches from the embed work must not reach the GPU sandbox
+-    # No stock Ollama DLL may resolve from PATH: 13.4's cuBLAS needs cublasLt symbols 13.0 lacks.
+-    parts = env.get("PATH", "").split(os.pathsep)
+-    kept = [p for p in parts if "\\programs\\ollama" not in p.lower().replace("/", "\\")]
+-    env.update(PATH=os.pathsep.join(kept), USERPROFILE=RUN, HOME=RUN, CUDA_VISIBLE_DEVICES="0",
+-               OLLAMA_HOST="127.0.0.1:11500", OLLAMA_LLM_LIBRARY="cuda_v13", OLLAMA_MODELS=r"E:\AI-Models\Ollama",
+-               OLLAMA_NOPRUNE="1", OLLAMA_KEEP_ALIVE="30s", OLLAMA_DEBUG="1")
+-    return env, len(parts) - len(kept)
+-
+-
+-def log_evidence():
+-    try:
+-        text = open(SANDBOX_LOG, encoding="utf-8", errors="replace").read()
+-    except OSError as e:
+-        return {"log_error": repr(e)}
+-    want = os.path.join(RUN, "lib", "ollama", "cuda_v13").lower()
+-    lines = [ln.strip() for ln in text.splitlines()
+-             if want in ln.lower() or "compute=12.0" in ln or "library=cuda" in ln.lower()]
+-    dll = os.path.join(RUN, "lib", "ollama", "cuda_v13", "ggml-cuda.dll")
+-    return {"path_named": any(want in ln.lower() for ln in lines), "compute_12_0": any("compute=12.0" in ln for ln in lines),
+-            "library_cuda": any("library=cuda" in ln.lower() for ln in lines), "lines": lines[:12],
+-            "dll_sha256": hashlib.sha256(open(dll, "rb").read()).hexdigest(),
+-            "dll_is_new_build": hashlib.sha256(open(dll, "rb").read()).hexdigest() == new_dll()}
+-
+-
+ def main():
++    global CAP_MIB
++    for stream in (sys.stdout, sys.stderr):  # the verdict prints S0′; a cp1252 console would crash at the very end
++        if hasattr(stream, "reconfigure"):
++            stream.reconfigure(encoding="utf-8", errors="replace")
+     t0 = time.time()
+-    script_sha = self_check()
+-    new_dll()  # refuse before anything starts if the build under test has no recorded DLL hash
++    if REFERENCE not in ("cpu", "q8_0"):
++        raise SystemExit("REFUSED: REFERENCE is not chosen ('cpu' or 'q8_0'); it is the Director's choice")
++    if REFERENCE == "q8_0":
++        CAP_MIB = 14336
++    shas = self_check()
+     open(RECORD, "w").close()
+     baseline = memory_used()
+-    record("start", script_sha256=script_sha, baseline_mib=baseline, cap_mib=CAP_MIB, model=MODEL, options=OPTIONS)
+-    threading.Thread(target=vram_sampler, daemon=True).start()
+-    sandbox = None
+-    log = None
+-    results = {}
++    record("start", script_sha256=shas, baseline_mib=baseline, cap_mib=CAP_MIB, reference=REFERENCE, options=OPTIONS,
++           top_logprobs=TOP_LOGPROBS, prompts=[p["id"] for p in PROMPTS])
++    threading.Thread(target=sampler, daemon=True).start()
+     try:
+-        results["A"] = run_block("stock A", STOCK, SANDBOX, other_may_be_down=True)
+-        results["B"] = run_block("stock B", STOCK, SANDBOX, other_may_be_down=True)
+-        env, stripped = sandbox_env()
+-        record("sandbox_env", path_entries_stripped=stripped,
+-               **{k: env[k] for k in ("OLLAMA_HOST", "OLLAMA_LLM_LIBRARY", "OLLAMA_MODELS", "OLLAMA_NOPRUNE",
+-                                      "OLLAMA_KEEP_ALIVE", "OLLAMA_DEBUG", "CUDA_VISIBLE_DEVICES", "USERPROFILE", "HOME")})
+-        log = open(SANDBOX_LOG, "w", encoding="utf-8")
+-        sandbox = subprocess.Popen([os.path.join(RUN, "ollama.exe"), "serve"], env=env, stdout=log, stderr=log, cwd=RUN)
+-        state["sandbox_pid"] = sandbox.pid
+-        record("sandbox_started", pid=sandbox.pid)
+-        for _ in range(60):
+-            check_breach()
+-            try:
+-                v = http(SANDBOX, "/api/version", timeout=3)
+-                record("sandbox_up", version=v.get("version"))
+-                break
+-            except Exception:
+-                time.sleep(1)
+-        else:
+-            raise SystemExit("STOP: the sandbox server did not come up")
+-        results["S"] = run_block("sandbox", SANDBOX, STOCK)
++        for arm in ARMS:
++            run_arm(*arm)
+     finally:
+         cleanup = {}
+-        for base in (STOCK, SANDBOX):
+-            try:
+-                if loaded(base):
+-                    cleanup[f"unloaded_{base[-5:]}"] = unload(base)
+-            except Exception as e:
+-                cleanup[f"unload_error_{base[-5:]}"] = repr(e)
+-        if sandbox is not None:
+-            try:
+-                kill_sandbox()
+-                sandbox.wait(timeout=30)
+-            except Exception as e:  # TimeoutExpired included: the checks below still run
+-                cleanup["sandbox_stop_error"] = repr(e)
+-        if log is not None:
+-            try:
+-                log.close()
+-            except Exception as e:
+-                cleanup["log_close_error"] = repr(e)
++        try:
++            if loaded(STOCK):
++                cleanup["stock_unloaded"] = unload(STOCK)
++        except Exception as e:
++            cleanup["stock_unload_error"] = repr(e)
++        kill_arm()
+         time.sleep(3)
+         state["stop"] = True
+         try:
++            cleanup["memory_used_end_mib"] = memory_used()
++        except Exception as e:
++            cleanup["end_read_error"] = repr(e)
++        try:
+             cleanup["sandbox_runner_left"] = subprocess.run(
+                 ["powershell", "-NoProfile", "-Command",
+-                 "(Get-CimInstance Win32_Process -Filter \"Name='llama-server.exe'\" | "
+-                 "Where-Object { $_.ExecutablePath -like '*ollama-cu1343-0404*' }).ProcessId"],
++                 "(Get-CimInstance Win32_Process | Where-Object { $_.ExecutablePath -like '*ollama-diag-0404*' }).ProcessId"],
+                 capture_output=True, text=True, timeout=60).stdout.strip() or None
+         except Exception as e:
+             cleanup["runner_check_error"] = repr(e)
+-        try:
+-            cleanup["memory_used_end_mib"] = memory_used()
+-        except Exception as e:
+-            cleanup["end_read_error"] = repr(e)
+-        record("cleanup", stock_ps=loaded(STOCK), sandbox_answering=_answers(SANDBOX), baseline_mib=baseline,
++        record("cleanup", stock_ps=loaded(STOCK), sandbox_answering=loaded(SANDBOX) is not None, baseline_mib=baseline,
+                peak_mib=state["peak"], wall_s=round(time.time() - t0, 1), **cleanup)
+ 
+-    comp = []
+-    for i in range(len(PROMPTS)):
+-        a, b, s = results["A"][i], results["B"][i], results["S"][i]
+-        comp.append({"prompt": i, "S_vs_A": compare(a, s), "B_vs_A": compare(a, b),
+-                     "tok_per_s": {"A": a["tok_per_s"], "B": b["tok_per_s"], "S": s["tok_per_s"]}})
+-    ratios = [c["tok_per_s"]["S"] / c["tok_per_s"]["A"] for c in comp if c["tok_per_s"]["A"] and c["tok_per_s"]["S"]]
+-    verdict = {"criterion_1_dll_loaded": log_evidence(),
+-               "criterion_2_outputs": all(c["S_vs_A"]["pass"] for c in comp),
+-               "criterion_3_speed_ratio_mean": round(sum(ratios) / len(ratios), 3) if ratios else None,
+-               "criterion_3_pass": bool(ratios) and sum(ratios) / len(ratios) >= 0.95}
+-    record("comparison", prompts=comp, **verdict)
+-    print(json.dumps({"comparison": comp, **verdict, "peak_mib": state["peak"], "baseline_mib": baseline}, indent=1))
+-
+-
+-def _answers(base):
+-    try:
+-        http(base, "/api/version", timeout=3)
+-        return True
+-    except Exception:
+-        return False
++    recs = abmine.load_record_file(RECORD)
++    task_ok = {}
++    for line in open(RECORD, encoding="utf-8"):
++        r = json.loads(line)
++        if r["kind"] == "result":
++            task_ok.setdefault(r["arm"], {})[r["prompt"]] = r["task_ok"]
++    crit1 = {a[0]: evidence(a[0], a[1], a[2], a[3], a[5]) for a in ARMS}
++    v = verdict(recs, task_ok)
++    report = abmine.analyze(recs, reference="REF", arms=[a[0] for a in ARMS if a[0] in recs])
++    record("verdict", criterion_1=crit1, **v)
++    with open(os.path.join(HERE, "diag-analysis.json"), "w", encoding="utf-8") as f:
++        json.dump(report, f, indent=1, ensure_ascii=False, default=str)
++    print(json.dumps({"criterion_1": crit1, **v, "peak_mib": state["peak"]}, indent=1, ensure_ascii=False))
+ 
+ 
+ if __name__ == "__main__":

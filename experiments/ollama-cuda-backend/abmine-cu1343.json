@@ -1,0 +1,443 @@
+{
+ "arms": [
+  "stock A",
+  "stock B",
+  "sandbox"
+ ],
+ "prompts": {
+  "stock A": [
+   0,
+   1,
+   2
+  ],
+  "stock B": [
+   0,
+   1,
+   2
+  ],
+  "sandbox": [
+   0,
+   1,
+   2
+  ]
+ },
+ "matrix": {
+  "stock A vs stock B": {
+   "prompts": 3,
+   "identical": 3,
+   "forks": {},
+   "mean_abs_step0_dz": 0.0,
+   "mean_chosen_token_mae": 0.0,
+   "per_prompt": {
+    "0": {
+     "identical": true,
+     "fork": null,
+     "steps_read": 74,
+     "censored": [],
+     "step0_dz": 0.0,
+     "prefix_abs_dz": {
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0.0,
+      "n": 74
+     },
+     "drift_slope_per_token": 0.0,
+     "spikes": [],
+     "chosen_token_mae": 0.0,
+     "chosen_token_n": 74
+    },
+    "1": {
+     "identical": true,
+     "fork": null,
+     "steps_read": 128,
+     "censored": [],
+     "step0_dz": 0.0,
+     "prefix_abs_dz": {
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0.0,
+      "n": 128
+     },
+     "drift_slope_per_token": 0.0,
+     "spikes": [],
+     "chosen_token_mae": 0.0,
+     "chosen_token_n": 128
+    },
+    "2": {
+     "identical": true,
+     "fork": null,
+     "steps_read": 45,
+     "censored": [],
+     "step0_dz": 0.0,
+     "prefix_abs_dz": {
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0.0,
+      "n": 45
+     },
+     "drift_slope_per_token": 0.0,
+     "spikes": [],
+     "chosen_token_mae": 0.0,
+     "chosen_token_n": 45
+    }
+   }
+  },
+  "stock A vs sandbox": {
+   "prompts": 3,
+   "identical": 1,
+   "forks": {
+    "0": 15,
+    "2": 6
+   },
+   "mean_abs_step0_dz": 0.2176959320580257,
+   "mean_chosen_token_mae": 0.003203455492712765,
+   "per_prompt": {
+    "0": {
+     "identical": false,
+     "fork": 15,
+     "steps_read": 16,
+     "censored": [],
+     "step0_dz": -0.1627349853515625,
+     "prefix_abs_dz": {
+      "mean": 0.280857135629095,
+      "p95": 0.9091405797415057,
+      "max": 1.294154841089039,
+      "n": 15
+     },
+     "drift_slope_per_token": 0.03506178124141585,
+     "spikes": [
+      {
+       "step": 14,
+       "abs_dz": 1.294154841089039
+      }
+     ],
+     "chosen_token_mae": 0.005681234375076846,
+     "chosen_token_n": 15,
+     "fork_detail": {
+      "step": 15,
+      "ref_token": " When",
+      "test_token": " Short",
+      "ref_top": [
+       [
+        " When",
+        -0.4790480434894562
+       ],
+       [
+        " Short",
+        -1.177400827407837
+       ]
+      ],
+      "test_top": [
+       [
+        " Short",
+        -0.7044182419776917
+       ],
+       [
+        " When",
+        -0.7760658264160156
+       ]
+      ],
+      "dz": 0.7700003683567047,
+      "censored": false
+     }
+    },
+    "1": {
+     "identical": true,
+     "fork": null,
+     "steps_read": 124,
+     "censored": [
+      {
+       "step": 16,
+       "reason": "censored: a reference candidate is outside the test arm's top-K"
+      },
+      {
+       "step": 53,
+       "reason": "censored: a reference candidate is outside the test arm's top-K"
+      },
+      {
+       "step": 63,
+       "reason": "censored: a reference candidate is outside the test arm's top-K"
+      },
+      {
+       "step": 111,
+       "reason": "censored: a reference candidate is outside the test arm's top-K"
+      }
+     ],
+     "step0_dz": 0.11695104837417603,
+     "prefix_abs_dz": {
+      "mean": 0.17233529151206925,
+      "p95": 0.48818703893093673,
+      "max": 1.6670841053983168,
+      "n": 124
+     },
+     "drift_slope_per_token": -9.019373225664029e-05,
+     "spikes": [
+      {
+       "step": 82,
+       "abs_dz": 1.6670841053983168
+      },
+      {
+       "step": 46,
+       "abs_dz": 0.9037895202636719
+      },
+      {
+       "step": 85,
+       "abs_dz": 0.8707735538483519
+      }
+     ],
+     "chosen_token_mae": 0.003294405648724963,
+     "chosen_token_n": 128
+    },
+    "2": {
+     "identical": false,
+     "fork": 6,
+     "steps_read": 6,
+     "censored": [
+      {
+       "step": 5,
+       "reason": "censored: a reference candidate is outside the test arm's top-K"
+      }
+     ],
+     "step0_dz": -0.37340176244833856,
+     "prefix_abs_dz": {
+      "mean": 0.1922264385033486,
+      "p95": 0.43995592622013646,
+      "max": 0.45659446716308594,
+      "n": 5
+     },
+     "drift_slope_per_token": -0.11451512602998264,
+     "spikes": [],
+     "chosen_token_mae": 0.0006347264543364872,
+     "chosen_token_n": 6,
+     "fork_detail": {
+      "step": 6,
+      "ref_token": "  \n",
+      "test_token": " or",
+      "ref_top": [
+       [
+        "  \n",
+        -0.3686952590942383
+       ],
+       [
+        " or",
+        -1.181290626525879
+       ]
+      ],
+      "test_top": [
+       [
+        " or",
+        -0.46228867769241333
+       ],
+       [
+        "  \n",
+        -0.9949500560760498
+       ]
+      ],
+      "dz": 1.345256745815277,
+      "censored": false
+     }
+    }
+   }
+  },
+  "stock B vs sandbox": {
+   "prompts": 3,
+   "identical": 1,
+   "forks": {
+    "0": 15,
+    "2": 6
+   },
+   "mean_abs_step0_dz": 0.2176959320580257,
+   "mean_chosen_token_mae": 0.003203455492712765,
+   "per_prompt": {
+    "0": {
+     "identical": false,
+     "fork": 15,
+     "steps_read": 16,
+     "censored": [],
+     "step0_dz": -0.1627349853515625,
+     "prefix_abs_dz": {
+      "mean": 0.280857135629095,
+      "p95": 0.9091405797415057,
+      "max": 1.294154841089039,
+      "n": 15
+     },
+     "drift_slope_per_token": 0.03506178124141585,
+     "spikes": [
+      {
+       "step": 14,
+       "abs_dz": 1.294154841089039
+      }
+     ],
+     "chosen_token_mae": 0.005681234375076846,
+     "chosen_token_n": 15,
+     "fork_detail": {
+      "step": 15,
+      "ref_token": " When",
+      "test_token": " Short",
+      "ref_top": [
+       [
+        " When",
+        -0.4790480434894562
+       ],
+       [
+        " Short",
+        -1.177400827407837
+       ]
+      ],
+      "test_top": [
+       [
+        " Short",
+        -0.7044182419776917
+       ],
+       [
+        " When",
+        -0.7760658264160156
+       ]
+      ],
+      "dz": 0.7700003683567047,
+      "censored": false
+     }
+    },
+    "1": {
+     "identical": true,
+     "fork": null,
+     "steps_read": 124,
+     "censored": [
+      {
+       "step": 16,
+       "reason": "censored: a reference candidate is outside the test arm's top-K"
+      },
+      {
+       "step": 53,
+       "reason": "censored: a reference candidate is outside the test arm's top-K"
+      },
+      {
+       "step": 63,
+       "reason": "censored: a reference candidate is outside the test arm's top-K"
+      },
+      {
+       "step": 111,
+       "reason": "censored: a reference candidate is outside the test arm's top-K"
+      }
+     ],
+     "step0_dz": 0.11695104837417603,
+     "prefix_abs_dz": {
+      "mean": 0.17233529151206925,
+      "p95": 0.48818703893093673,
+      "max": 1.6670841053983168,
+      "n": 124
+     },
+     "drift_slope_per_token": -9.019373225664029e-05,
+     "spikes": [
+      {
+       "step": 82,
+       "abs_dz": 1.6670841053983168
+      },
+      {
+       "step": 46,
+       "abs_dz": 0.9037895202636719
+      },
+      {
+       "step": 85,
+       "abs_dz": 0.8707735538483519
+      }
+     ],
+     "chosen_token_mae": 0.003294405648724963,
+     "chosen_token_n": 128
+    },
+    "2": {
+     "identical": false,
+     "fork": 6,
+     "steps_read": 6,
+     "censored": [
+      {
+       "step": 5,
+       "reason": "censored: a reference candidate is outside the test arm's top-K"
+      }
+     ],
+     "step0_dz": -0.37340176244833856,
+     "prefix_abs_dz": {
+      "mean": 0.1922264385033486,
+      "p95": 0.43995592622013646,
+      "max": 0.45659446716308594,
+      "n": 5
+     },
+     "drift_slope_per_token": -0.11451512602998264,
+     "spikes": [],
+     "chosen_token_mae": 0.0006347264543364872,
+     "chosen_token_n": 6,
+     "fork_detail": {
+      "step": 6,
+      "ref_token": "  \n",
+      "test_token": " or",
+      "ref_top": [
+       [
+        "  \n",
+        -0.3686952590942383
+       ],
+       [
+        " or",
+        -1.181290626525879
+       ]
+      ],
+      "test_top": [
+       [
+        " or",
+        -0.46228867769241333
+       ],
+       [
+        "  \n",
+        -0.9949500560760498
+       ]
+      ],
+      "dz": 1.345256745815277,
+      "censored": false
+     }
+    }
+   }
+  }
+ },
+ "logs": {
+  "sandbox": {
+   "backends": [
+    {
+     "kind": "CPU",
+     "path": "E:\\AI\\ollama-cu1343-0404\\run\\lib\\ollama\\ggml-cpu-alderlake.dll"
+    },
+    {
+     "kind": "CUDA",
+     "path": "E:\\AI\\ollama-cu1343-0404\\run\\lib\\ollama\\cuda_v13\\ggml-cuda.dll"
+    }
+   ],
+   "device": {
+    "name": "NVIDIA GeForce RTX 5090",
+    "compute": "12.0",
+    "vmm": "yes"
+   },
+   "inference_compute": {
+    "library": "CUDA",
+    "compute": "12.0",
+    "description": "NVIDIA GeForce RTX 5090"
+   },
+   "flash_attn_setting": "auto",
+   "flash_attn_resolved": "enabled",
+   "kv_types": {
+    "k": "f16",
+    "v": "f16"
+   },
+   "graphs_reused": [
+    11,
+    75,
+    201,
+    265
+   ],
+   "prompt_tokens": [
+    19,
+    27,
+    30,
+    27
+   ],
+   "n_ctx": 2048
+  }
+ }
+}

@@ -10,6 +10,7 @@
     {
       "doors": 3,
       "importedBy": [
+        "experiments",
         "rnd"
       ],
       "importedByTests": [
@@ -60,37 +61,90 @@
     {
       "kind": "place",
       "readers": [
-        "experiments"
+        "experiments",
+        "mcptoolshop_rnd"
       ],
-      "target": "experiments/e4b/results/",
-      "tests": 1,
+      "target": "entries/",
+      "tests": 2,
       "writers": [
-        "experiments"
+        "mcptoolshop_rnd"
       ]
     }
   ],
   "changes": {
     "fileCounts": {
-      "added": 0,
-      "changed": 3,
-      "moved": 0,
-      "parts": 3,
-      "removed": 0
+      "added": 187,
+      "changed": 16,
+      "moved": 8,
+      "parts": 8,
+      "removed": 7
     },
     "items": [
       {
+        "kind": "import-added",
+        "sentence": "experiments now imports mcptoolshop_rnd.",
+        "subjects": [
+          "experiments",
+          "mcptoolshop_rnd"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "experiments/agent-ab-harness/results is now written by experiments/agent-ab-harness/run.py.",
+        "subjects": [
+          "experiments/agent-ab-harness/results",
+          "experiments/agent-ab-harness/run.py"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "experiments/agent-ab-harness/results/pilot/probe-report.json is now written by experiments/agent-ab-harness/run.py.",
+        "subjects": [
+          "experiments/agent-ab-harness/results/pilot/probe-report.json",
+          "experiments/agent-ab-harness/run.py"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "experiments/ollama-cuda-backend/ is now written by experiments/ollama-cuda-backend/diag_test-v4-draft.py.",
+        "subjects": [
+          "experiments/ollama-cuda-backend/",
+          "experiments/ollama-cuda-backend/diag_test-v4-draft.py"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "And 34 more new writers and readers of places.",
+        "subjects": []
+      },
+      {
         "kind": "counts",
-        "sentence": "Nothing structural changed since 2026-10-13; 3 files changed content.",
+        "sentence": "187 files added, 7 removed, 8 moved and 16 changed content, across 8 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "0865b8883f27db952011f0d4bd153e1ce8735500",
-      "generatedAt": "2026-10-13T18:29:03.761Z"
+      "commit": "c719cef9967f4c00852073b6e1c5b5efdcdf0de8",
+      "generatedAt": "2026-10-13T18:38:14.298Z"
     },
-    "unchanged": true
+    "unchanged": false
   },
   "changesTogether": [
+    {
+      "a": "experiments/atlas-mcp-utility/run.py",
+      "b": "tests/test_atlas_mcp_utility_run.py",
+      "either": 15,
+      "partLabels": [
+        null,
+        null
+      ],
+      "parts": [
+        null,
+        null
+      ],
+      "relation": "unassigned",
+      "shared": 15
+    },
     {
       "a": "rnd/cli.py",
       "b": "tests/test_rnd.py",
@@ -109,12 +163,12 @@
   ],
   "changesTogetherNote": [
     "Confidence is low: fewer than 25 source files reach 10 revisions in the window.",
-    "Window: 180 days; a pair counts from 3 shared commits, since 2 source files reach 10 revisions; the floor rises to 10 when 25 do."
+    "Window: 180 days; a pair counts from 3 shared commits, since 4 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "c719cef9967f4c00852073b6e1c5b5efdcdf0de8",
+  "commit": "f579aa3956b7d63b77f05309bd925376deabbcbe",
   "defaultBranch": "main",
-  "derived": "13 parts, mostly Python (79 files), shell (14), CSS (2), HTML (2), TypeScript (2), Astro (1) and JavaScript (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "13 parts, mostly Python (100 files), shell (14), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -137,7 +191,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 13
+          "files": 14
         },
         {
           "boundary": "rnd",
@@ -152,7 +206,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 13
+          "files": 14
         },
         {
           "boundary": "experiments",
@@ -192,7 +246,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 13
+          "files": 14
         },
         {
           "boundary": "rnd",
@@ -267,7 +321,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 12
+          "files": 13
         }
       ],
       "runs": [
@@ -284,6 +338,11 @@
   "duplicatesLead": null,
   "duplicatesNote": [],
   "edges": [
+    {
+      "from": "experiments",
+      "fromTests": false,
+      "to": "mcptoolshop_rnd"
+    },
     {
       "from": "rnd",
       "fromTests": false,
@@ -353,6 +412,15 @@
       ]
     },
     {
+      "place": "experiments/ollama-cuda-backend/",
+      "sources": [
+        "experiments/ollama-cuda-backend/diag_test-v4-draft.py"
+      ],
+      "writers": [
+        "experiments/ollama-cuda-backend/diag_test-v4-draft.py"
+      ]
+    },
+    {
       "place": "experiments/verifier-gold/crossfamily/",
       "writers": [
         "experiments/verifier-gold/crossfamily/run_labeller.py"
@@ -389,14 +457,15 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-13T18:38:14.298Z",
+  "generatedAt": "2026-10-15T18:37:17.467Z",
   "limits": [
     "9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.",
-    "9 writes and 11 reads use paths built at run time and are not named here.",
+    "13 writes and 20 reads use paths built at run time and are not named here.",
     "5 writes go to places this repository does not track, so they are not listed as generated.",
-    "13 writes and 41 reads go to a path their caller passes, not to this repository.",
+    "19 writes and 72 reads go to a path their caller passes, not to this repository.",
     "3 reads go to the directory the command is run in (entries and instruments), not to this repository.",
     "1 read goes to the directory the command is run in or a path its caller passes, not to this repository.",
+    "1 read goes to the home directory (.claude/), not to this repository.",
     "Statistics confidence is low: fewer than 25 source files reach 10 revisions in the window."
   ],
   "mainDoor": ".github/workflows/ci.yml",
@@ -418,7 +487,9 @@
   "parts": 13,
   "readers": [
     {
-      "readers": [],
+      "readers": [
+        "experiments/embeddinggemma-2/harness/build_corpus.py"
+      ],
       "target": "entries/",
       "tests": 2
     },
@@ -427,7 +498,9 @@
       "target": "experiments/charts/"
     },
     {
-      "readers": [],
+      "readers": [
+        "experiments/embeddinggemma-2/harness/build_corpus.py"
+      ],
       "target": "instruments/"
     },
     {
@@ -440,19 +513,19 @@
   "startDoor": "pyproject.toml#rnd",
   "startHere": [
     "mcptoolshop_rnd/cli.py",
-    "mcptoolshop_rnd/catalog.py",
-    "mcptoolshop_rnd/frontmatter.py"
+    "entries/",
+    "experiments/embeddinggemma-2/harness/build_corpus.py"
   ],
   "startReason": "This path follows rnd (a command people run) from its entry, since CI runs only tests and checks.",
   "summary": "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only).",
   "summaryFrom": "person",
-  "testFiles": 31,
+  "testFiles": 41,
   "testedBy": {
-    "experiments": 5,
-    "mcptoolshop_rnd": 7,
+    "experiments": 6,
+    "mcptoolshop_rnd": 8,
     "rnd": 1
   },
-  "unnamedWrites": 9,
+  "unnamedWrites": 13,
   "unread": [
     {
       "place": "experiments/charts/",
@@ -470,6 +543,12 @@
       "place": "experiments/natural-errors/data/corrections.json",
       "writers": [
         "experiments/natural-errors/build_corrections.py"
+      ]
+    },
+    {
+      "place": "experiments/ollama-cuda-backend/",
+      "writers": [
+        "experiments/ollama-cuda-backend/diag_test-v4-draft.py"
       ]
     },
     {
@@ -491,12 +570,6 @@
       ]
     },
     {
-      "place": "instruments/",
-      "writers": [
-        "mcptoolshop_rnd/cli.py"
-      ]
-    },
-    {
       "place": "site/public/charts/",
       "writers": [
         "experiments/charts/make_charts.py"
@@ -512,7 +585,7 @@
   "untested": [],
   "untestedNote": [
     "the repository root holds only shell files, which this map does not read, so whether a test touches it cannot be seen.",
-    "2 test files run in no workflow: experiments/cuda-graphs/test_graphed_heads.py and experiments/data-designer/tests/test_lockdown.py."
+    "3 test files run in no workflow: experiments/cuda-graphs/test_graphed_heads.py, experiments/data-designer/tests/test_lockdown.py and experiments/interlock-relay/stage1/test_analyze.py."
   ],
-  "written": 14
+  "written": 15
 }

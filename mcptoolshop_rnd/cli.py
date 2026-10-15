@@ -14,7 +14,7 @@ import traceback
 from datetime import date
 from pathlib import Path
 
-from . import __version__, catalog, collect, datapack, model, probe, readouts, release, store, watch
+from . import __version__, abmine, catalog, collect, datapack, model, probe, readouts, release, store, watch
 
 SOURCE_ROOT = Path(__file__).resolve().parent.parent
 
@@ -552,6 +552,32 @@ def cmd_datapack(args):
     return 0
 
 
+def cmd_abmine(args):
+    """Analyse an A/B record of greedy generations with top-K logprobs (no GPU, no server)."""
+    try:
+        records = abmine.load_record_file(args.record)
+    except (OSError, abmine.AbmineError) as exc:
+        return fail("ABMINE_RECORD", str(exc), "the record is JSON lines with kind \"result\" rows (arm or block, prompt, tokens, top)")
+    if not records:
+        return fail("ABMINE_EMPTY", f"no result rows in {args.record}", "the record needs rows with kind \"result\"")
+    logs = {}
+    for spec in args.log or ():
+        arm, sep, path = spec.partition("=")
+        if not sep or not arm or not path:
+            return fail("ABMINE_LOG", f"--log {spec!r} is not ARM=PATH", "for example --log sandbox=E:/runs/sandbox-11500.log")
+        try:
+            logs[arm] = Path(path).read_text(encoding="utf-8", errors="replace")
+        except OSError as exc:
+            return fail("ABMINE_LOG", str(exc), "check the log path")
+    arms = args.arm or None
+    unknown = sorted(set((arms or []) + ([args.reference] if args.reference else [])) - set(records))
+    if unknown:
+        return fail("ABMINE_ARM", f"not in the record: {', '.join(unknown)}", f"the record's arms are {', '.join(sorted(records))}")
+    rep = abmine.analyze(records, logs, reference=args.reference, arms=arms)
+    emit(args, rep, lambda r: print(abmine.render(r)))
+    return 0
+
+
 # ---------------------------------------------------------------- parser
 
 def build_parser():
@@ -655,6 +681,15 @@ def build_parser():
     s.add_argument("--only", action="append", metavar="ID", help="check one source (repeatable)")
     s.add_argument("--no-save", action="store_true", help="report without recording what was seen")
 
+    s = add("abmine", cmd_abmine,
+            "ab_dataminer: where and how much the arms of an A/B run differ, from a record of greedy generations "
+            "with top-K logprobs (Δz per step, forks, drift, tie-breaks, OLLAMA_DEBUG logs); no GPU")
+    s.add_argument("action", choices=("analyze",))
+    s.add_argument("record", help="the run's JSON-lines record")
+    s.add_argument("--log", action="append", metavar="ARM=PATH", help="an arm's OLLAMA_DEBUG server log (repeatable)")
+    s.add_argument("--arm", action="append", help="limit to these arms, in this order; the first is the reference of each pair")
+    s.add_argument("--reference", help="an arm to break ties at the other arms' forks")
+
     s = add("sql", cmd_sql, "run a read-only SQL query against the index")
     s.add_argument("query")
     return p
@@ -668,7 +703,7 @@ def main(argv=None):
     global ROOT
     if args.library:
         ROOT = find_root(args.library)
-    if args.cmd != "readouts" and (ROOT is None or not is_library(ROOT)):
+    if args.cmd not in ("readouts", "abmine") and (ROOT is None or not is_library(ROOT)):
         return fail("NO_LIBRARY", "no rnd library here (a folder with entries/ and instruments/)",
                     "run inside a clone of mcp-tool-shop-org/rnd, or pass --library / set RND_ROOT")
     try:

@@ -1,0 +1,16 @@
+time=2026-10-15T14:09:15.021-04:00 level=INFO source=types.go:32 msg="inference compute" id=0 filter_id=0 library=CUDA compute=12.0 name=CUDA0 description="NVIDIA GeForce RTX 5090" libdirs=ollama,cuda_v13 driver=13.4 pci_id=0000:02:00.0 type=discrete total="31.8 GiB" available="30.3 GiB"
+load_backend: loaded CPU backend from E:\AI\ollama-cu1343-0404\run\lib\ollama\ggml-cpu-alderlake.dll
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 32579 MiB):
+  Device 0: NVIDIA GeForce RTX 5090, compute capability 12.0, VMM: yes, VRAM: 32579 MiB
+load_backend: loaded CUDA backend from E:\AI\ollama-cu1343-0404\run\lib\ollama\cuda_v13\ggml-cuda.dll
+llama_context: n_ctx                 = 2048
+llama_context: n_ctx_seq             = 2048
+llama_context: n_batch               = 512
+llama_context: n_ubatch              = 512
+llama_context: causal_attn           = 1
+llama_context: flash_attn            = auto
+llama_kv_cache:      CUDA0 KV buffer size =   288.00 MiB
+llama_kv_cache: size =  288.00 MiB (  2048 cells,  36 layers,  1/1 seqs), K (f16):  144.00 MiB, V (f16):  144.00 MiB
+resolve_fused_ops: Flash Attention enabled
+slot   operator(): id  0 | task 0 | new prompt, n_ctx_slot = 2048, n_keep = 4, task.n_tokens = 19
+slot print_timing: id  0 | task 0 |    graphs reused =         11

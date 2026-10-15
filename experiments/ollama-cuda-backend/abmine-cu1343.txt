@@ -1,0 +1,38 @@
+arms: stock A, stock B, sandbox
+
+stock A vs stock B: 3 of 3 prompts identical; mean |step-0 Δz| 0.0000; mean chosen-token MAE 0.0000
+  prompt 0: identical; step-0 Δz 0.0000; prefix |Δz| mean 0.0000 p95 0.0000 max 0.0000 (n 74); slope 0.00000/token; censored 0
+  prompt 1: identical; step-0 Δz 0.0000; prefix |Δz| mean 0.0000 p95 0.0000 max 0.0000 (n 128); slope 0.00000/token; censored 0
+  prompt 2: identical; step-0 Δz 0.0000; prefix |Δz| mean 0.0000 p95 0.0000 max 0.0000 (n 45); slope 0.00000/token; censored 0
+
+stock A vs sandbox: 1 of 3 prompts identical; mean |step-0 Δz| 0.2177; mean chosen-token MAE 0.0032
+  prompt 0: fork at step 15; step-0 Δz -0.1627; prefix |Δz| mean 0.2809 p95 0.9091 max 1.2942 (n 15); slope 0.03506/token; censored 0
+    spike at step 14: |Δz| 1.294
+    fork: reference chose ' When', test chose ' Short'; Δz 0.770
+      reference top: [(' When', -0.4790480434894562), (' Short', -1.177400827407837)]
+      test top:      [(' Short', -0.7044182419776917), (' When', -0.7760658264160156)]
+  prompt 1: identical; step-0 Δz 0.1170; prefix |Δz| mean 0.1723 p95 0.4882 max 1.6671 (n 124); slope -0.00009/token; censored 4
+    spike at step 82: |Δz| 1.667
+    spike at step 46: |Δz| 0.904
+    spike at step 85: |Δz| 0.871
+  prompt 2: fork at step 6; step-0 Δz -0.3734; prefix |Δz| mean 0.1922 p95 0.4400 max 0.4566 (n 5); slope -0.11452/token; censored 1
+    fork: reference chose '  \n', test chose ' or'; Δz 1.345
+      reference top: [('  \n', -0.3686952590942383), (' or', -1.181290626525879)]
+      test top:      [(' or', -0.46228867769241333), ('  \n', -0.9949500560760498)]
+
+stock B vs sandbox: 1 of 3 prompts identical; mean |step-0 Δz| 0.2177; mean chosen-token MAE 0.0032
+  prompt 0: fork at step 15; step-0 Δz -0.1627; prefix |Δz| mean 0.2809 p95 0.9091 max 1.2942 (n 15); slope 0.03506/token; censored 0
+    spike at step 14: |Δz| 1.294
+    fork: reference chose ' When', test chose ' Short'; Δz 0.770
+      reference top: [(' When', -0.4790480434894562), (' Short', -1.177400827407837)]
+      test top:      [(' Short', -0.7044182419776917), (' When', -0.7760658264160156)]
+  prompt 1: identical; step-0 Δz 0.1170; prefix |Δz| mean 0.1723 p95 0.4882 max 1.6671 (n 124); slope -0.00009/token; censored 4
+    spike at step 82: |Δz| 1.667
+    spike at step 46: |Δz| 0.904
+    spike at step 85: |Δz| 0.871
+  prompt 2: fork at step 6; step-0 Δz -0.3734; prefix |Δz| mean 0.1922 p95 0.4400 max 0.4566 (n 5); slope -0.11452/token; censored 1
+    fork: reference chose '  \n', test chose ' or'; Δz 1.345
+      reference top: [('  \n', -0.3686952590942383), (' or', -1.181290626525879)]
+      test top:      [(' or', -0.46228867769241333), ('  \n', -0.9949500560760498)]
+
+log sandbox: backends ['CPU E:\\AI\\ollama-cu1343-0404\\run\\lib\\ollama\\ggml-cpu-alderlake.dll', 'CUDA E:\\AI\\ollama-cu1343-0404\\run\\lib\\ollama\\cuda_v13\\ggml-cuda.dll']; device {'name': 'NVIDIA GeForce RTX 5090', 'compute': '12.0', 'vmm': 'yes'}; flash_attn auto -> enabled; KV {'k': 'f16', 'v': 'f16'}; graphs reused [11, 75, 201, 265]; prompt tokens [19, 27, 30, 27]

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.16] - 2026-10-15
+
+- EmbeddingGemma 2: the round 1 grading audit failed two of its four bars (binary kappa 0.747, raw disagreement 12.6%); every disagreement has the auditor one step higher. Design amendment 4 records the result and Argon's ruling to drop queries with no relevant chunk. The adjudication consult (round 2) is filed, and the whole pool is regraded under a revised brief, as amendment 2 requires. No score was computed
+
 ## [1.1.8.3.15] - 2026-10-15
 
 - EmbeddingGemma 2 text benchmark: all 100 queries graded (2,470 chunks, one fresh Sonnet grader each, 100 of 100 complete); the merged key is frozen; four queries have no relevant chunk in the corpus. Scores stay sealed. The audit consult to Argon (blind regrade of 16 queries, and a scoring rule for queries with no relevant chunk) is filed, with the grading record, the run records and the grading harness's completeness check

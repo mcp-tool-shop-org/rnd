@@ -140,6 +140,26 @@ Argon's round 3 harness review (`argon-consult-round3.md`, disposition in `argon
 - **The titled-document diagnostic is dropped.** offrig's header already puts the source and title inside every chunk's text, so a `title: {source}` prefix would only repeat it. It would also have cost a second full embedding, about 70 minutes on the CPU. It isn't run, and its absence from the scores is intended.
 - **Intents locked:** 100 lines. The auditor changed 23: 21 were narrowed to one question, or re-read for keyword queries, and three carry a split-answer note for graders. The frozen table's sha256 is `67e4936d…6e186`, kept private with the queries.
 
+## Amendment 4, 2026-10-15, after grading, before any score
+
+- **Queries with no relevant chunk are dropped** (Argon's ruling, `argon-consult-audit.md` Part B):
+  - from every mean, paired difference, bootstrap and group floor;
+  - they are reported with their count, ids and why the corpus can't answer each;
+  - the excluded ids are locked after the audit's adjudication and any regrade, before the arms are unsealed;
+  - the stage 1 thresholds stand at the N that remains.
+
+  The reason: nDCG is undefined when no chunk is relevant, and scoring it 0.0 adds a synthetic tie that pulls the mean difference toward 0. In round 1 the four were l006, w059, w060 and w068. A term search over all 11,525 chunks found no answer to any of them.
+- **The round 1 audit failed two bars:**
+
+  | Measure | Result | Bar | |
+  |---|---|---|---|
+  | Quadratic weighted κ | 0.821 | ≥ 0.75 | pass |
+  | Binary κ | 0.747 | ≥ 0.80 | miss |
+  | Raw disagreement | 12.6% (63 of 501) | ≤ 10% | miss |
+  | Two-step (0 against 2) | 0% | ≤ 2% | pass |
+
+  All 63 disagreements have the auditor one step higher. As amendment 2 requires, the brief is revised and the whole pool is regraded. The 63 go to Argon first to adjudicate (`argon-consult-audit-round2.md`). The round 1 key (sha256 `c4c35891…`) and the audit are kept as the record, never overwritten.
+
 ## 7. While running and after
 
 - **Stop rules:**

@@ -1,0 +1,29 @@
+{
+  "arm": "A",
+  "dtype": "F16 GGUF (Ollama)",
+  "params": 137000000,
+  "batch": 32,
+  "model": "nomic-embed-text@0a109f422b47",
+  "manipulation": {
+    "first_doc_prefix": "search_document: ",
+    "docs": {
+      "rows": 512,
+      "dim": 768,
+      "dim_ok": true,
+      "norm_min": 0.9999994039535522,
+      "norm_max": 1.0000007152557373
+    },
+    "queries": {
+      "rows": 100,
+      "dim": 768,
+      "dim_ok": true,
+      "norm_min": 0.9999995231628418,
+      "norm_max": 1.0000004768371582
+    },
+    "first_query_prefix": "search_query: ",
+    "first_query_sha256": "01cad94ebb0b3e83a7121dfc815e6a49af17417ee3d3393511cf40cc535e4183"
+  },
+  "chunks": 512,
+  "seconds_docs_in_process": 103.91,
+  "chunks_per_second": 4.93
+}

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.4] - 2026-10-14
+
+- Handbook: the relevance-grading template (drafted by Argon at the Director's request, adapted by R&D): the 0/1/2 scale with query-form rules and boundary cases, blindness, locked intents, reason-before-grade, weighted and binary kappa gates, freezing and publication
+- EmbeddingGemma 2: the harness (corpus frozen with offrig's own chunker, 11,525 chunks; 100 queries; embed, rank, pool, score, validate); validation (tokens under 2,048, bf16 fails parity so float32, B at 0.395 of A behind HTTP); dry run on 512 chunks; amendments 1 and 2; Argon harness consult round 3; rubric disposition
+
 ## [1.1.8.3.3] - 2026-10-14
 
 - EmbeddingGemma 2 design v3: Argon round 2 found it ready; three line edits taken (B256 and the code-prefix diagnostic in the blind pool; float slice and re-normalize before int8; a tighter hybrid guard). Awaiting the Director's approval

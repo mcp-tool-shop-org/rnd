@@ -73,59 +73,29 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 187,
-      "changed": 16,
-      "moved": 8,
-      "parts": 8,
-      "removed": 7
+      "added": 0,
+      "changed": 3,
+      "moved": 0,
+      "parts": 3,
+      "removed": 0
     },
     "items": [
       {
-        "kind": "import-added",
-        "sentence": "experiments now imports mcptoolshop_rnd.",
+        "kind": "door",
+        "sentence": "Release now also starts by hand.",
         "subjects": [
-          "experiments",
-          "mcptoolshop_rnd"
+          ".github/workflows/release.yml"
         ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "experiments/agent-ab-harness/results is now written by experiments/agent-ab-harness/run.py.",
-        "subjects": [
-          "experiments/agent-ab-harness/results",
-          "experiments/agent-ab-harness/run.py"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "experiments/agent-ab-harness/results/pilot/probe-report.json is now written by experiments/agent-ab-harness/run.py.",
-        "subjects": [
-          "experiments/agent-ab-harness/results/pilot/probe-report.json",
-          "experiments/agent-ab-harness/run.py"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "experiments/ollama-cuda-backend/ is now written by experiments/ollama-cuda-backend/diag_test-v4-draft.py.",
-        "subjects": [
-          "experiments/ollama-cuda-backend/",
-          "experiments/ollama-cuda-backend/diag_test-v4-draft.py"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "And 34 more new writers and readers of places.",
-        "subjects": []
       },
       {
         "kind": "counts",
-        "sentence": "187 files added, 7 removed, 8 moved and 16 changed content, across 8 parts.",
+        "sentence": "3 files changed content, across 3 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "c719cef9967f4c00852073b6e1c5b5efdcdf0de8",
-      "generatedAt": "2026-10-13T18:38:14.298Z"
+      "commit": "f579aa3956b7d63b77f05309bd925376deabbcbe",
+      "generatedAt": "2026-10-15T18:37:17.467Z"
     },
     "unchanged": false
   },
@@ -166,7 +136,7 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 4 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "f579aa3956b7d63b77f05309bd925376deabbcbe",
+  "commit": "47860ef1e62b6b9536876fb54b67275508c9d874",
   "defaultBranch": "main",
   "derived": "13 parts, mostly Python (100 files), shell (14), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
@@ -270,7 +240,8 @@
       ],
       "stages": [],
       "triggers": [
-        "when a release is published"
+        "when a release is published",
+        "or by hand"
       ]
     },
     {
@@ -457,7 +428,7 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-15T18:37:17.467Z",
+  "generatedAt": "2026-10-15T18:47:44.350Z",
   "limits": [
     "9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.",
     "13 writes and 20 reads use paths built at run time and are not named here.",

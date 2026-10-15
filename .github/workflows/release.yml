@@ -8,13 +8,27 @@ name: Release
 # Compensator: a PyPI upload cannot be deleted and re-used. If a release is
 # wrong, yank it on pypi.org (Manage -> Releases -> Yank), fix, and publish the
 # next patch version. Owner: the Director.
+#
+# workflow_dispatch publishes an existing, already-released tag with this
+# (fixed) workflow from main, without a new version. It exists because
+# v1.1.4.0.0 to v1.1.9.0.0 were released while this file ran verify.sh without
+# the hypothesis package the property tests import, so Verify failed and
+# nothing reached PyPI. The tag input reaches shell steps only through env,
+# must look like vMAJOR.MINOR.PATCH.MICRO.NANO, and must have a published,
+# non-draft GitHub release.
 
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "an existing release tag to publish, e.g. v1.1.9.0.0"
+        required: true
+        type: string
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ inputs.tag || github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -26,12 +40,27 @@ jobs:
       contents: read
       id-token: write  # PyPI trusted publishing
 
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
     steps:
+      - name: The tag is a released version tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "not a version tag: $TAG"; exit 1; }
+          draft=$(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json isDraft --jq .isDraft) || { echo "no GitHub release for $TAG"; exit 1; }
+          test "$draft" = "false" || { echo "the release for $TAG is a draft"; exit 1; }
+
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.tag || github.ref }}
 
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
+
+      - name: Install test dependencies (property tests; the same pin as ci.yml)
+        run: python -m pip install hypothesis==6.131.9
 
       - name: Verify
         run: bash verify.sh
@@ -39,7 +68,7 @@ jobs:
       - name: Version matches the tag
         run: |
           v=$(python -c "import mcptoolshop_rnd; print(mcptoolshop_rnd.__version__)")
-          test "v$v" = "${GITHUB_REF_NAME}" || { echo "tag ${GITHUB_REF_NAME} != package v$v"; exit 1; }
+          test "v$v" = "$TAG" || { echo "tag $TAG != package v$v"; exit 1; }
 
       - name: Build and check
         run: |

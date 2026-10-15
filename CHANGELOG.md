@@ -11,6 +11,18 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.9.0.1] - 2026-10-15
+
+### Fixed
+
+- **The release workflow installs `hypothesis` before `verify.sh`,** with the same pin as ci.yml (6.131.9). Without it, the property tests failed to import, Verify failed, and nothing reached PyPI from v1.1.4.0.0 to v1.1.9.0.0. PyPI's latest stayed 1.1.3.0.0.
+- **`release.yml` gains a `workflow_dispatch` trigger** with a required `tag` input, so the fixed workflow on main can publish an existing released tag (v1.1.9.0.0) without a new version.
+  - The tag reaches shell steps only through env, never interpolated into a script.
+  - It must match vMAJOR.MINOR.PATCH.MICRO.NANO, and have a published, non-draft GitHub release.
+  - The version-equals-tag check reads it.
+  - Trusted publishing is unchanged: the same file name and `pypi` environment.
+- This is a workflow-only change, so this nano version isn't itself released.
+
 ## [1.1.9.0.0] - 2026-10-15
 
 ### Added

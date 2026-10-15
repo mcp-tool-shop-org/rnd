@@ -40,7 +40,7 @@
           "path": ".github/workflows/pages.yml"
         },
         {
-          "hash": "cb48015c496ca78b01da31fd182d467713331ab7b7d54f93fa142d7eb786a531",
+          "hash": "c15b1438c2903a27db305ac6c710607dfe70d462eba4aa417bafea0dc620a799",
           "path": ".github/workflows/release.yml"
         }
       ],
@@ -4243,7 +4243,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "2e3e845e0e8bbb95d7f20449e745e96c6cb1d0dc6ee1fe166898000d0d8d103d",
+          "hash": "f67e4e3e18b69c004a51901b763bbb7d91a2ff656cdc7dedbc7aa55e67582dbb",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -5542,7 +5542,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "1371ef68284e4cbe2a67a1d013efe7bb464febd0fd4cd6b85d99d87780284a46",
+          "hash": "0166d2fe844d167dc6a0ebd51b19d60ef3082dd2a7f0f681b847c4cee997c5fe",
           "path": "CHANGELOG.md"
         },
         {
@@ -6685,6 +6685,24 @@
           "dir": "",
           "job": "pypi",
           "programs": [
+            "echo",
+            "gh",
+            "test"
+          ],
+          "step": "The tag is a released version tag"
+        },
+        {
+          "dir": "",
+          "job": "pypi",
+          "programs": [
+            "python"
+          ],
+          "step": "Install test dependencies (property tests; the same pin as ci.yml)"
+        },
+        {
+          "dir": "",
+          "job": "pypi",
+          "programs": [
             "bash"
           ],
           "step": "Verify"
@@ -6737,7 +6755,7 @@
                   "range": ">=3.12.0 <3.13.0-0"
                 }
               ],
-              "step": "1",
+              "step": "2",
               "uses": "actions/setup-python",
               "version": "3.12"
             }
@@ -6817,6 +6835,9 @@
           "types": [
             "published"
           ]
+        },
+        {
+          "event": "workflow_dispatch"
         }
       ],
       "uses": [
@@ -6824,7 +6845,7 @@
         "actions/setup-python",
         "pypa/gh-action-pypi-publish"
       ],
-      "usesWorkflowToken": false
+      "usesWorkflowToken": true
     },
     {
       "checksCount": 0,
@@ -6937,7 +6958,7 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "f579aa3956b7d63b77f05309bd925376deabbcbe",
+    "commit": "47860ef1e62b6b9536876fb54b67275508c9d874",
     "tracked": 753
   },
   "landings": [

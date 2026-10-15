@@ -11,6 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.3] - 2026-10-15
+
+- embeddinggemma-2: the multimodal design, revision 3, approved (desk-checked queries, Path A, the acceptance tests)
+- Added experiment `agent-ab-harness`
+- Added experiment `dataset-desk`
+- Updated experiment `embeddinggemma-2`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.10.0.2] - 2026-10-15
 
 - stage1-role-eval: the maintainer's amendments of 2026-10-15, recorded. A: STaR matched across the arms (each

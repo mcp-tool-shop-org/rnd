@@ -1,6 +1,6 @@
 # rnd: how it works
 
-Mapped at 2026-10-15 from commit f579aa3 by Atlas 1.24.0.
+Mapped at 2026-10-15 from commit 47860ef by Atlas 1.24.0.
 
 ## What this is
 
@@ -8,19 +8,15 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 
 13 parts, mostly Python (100 files), shell (14), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-13 (c719cef)
+## What changed since 2026-10-15 (f579aa3)
 
-- experiments now imports mcptoolshop_rnd.
-- experiments/agent-ab-harness/results is now written by experiments/agent-ab-harness/run.py.
-- experiments/agent-ab-harness/results/pilot/probe-report.json is now written by experiments/agent-ab-harness/run.py.
-- experiments/ollama-cuda-backend/ is now written by experiments/ollama-cuda-backend/diag_test-v4-draft.py.
-- And 34 more new writers and readers of places.
-- 187 files added, 7 removed, 8 moved and 16 changed content, across 8 parts.
+- Release now also starts by hand.
+- 3 files changed content, across 3 parts.
 
 ## What comes in
 
 1. **CI.** On a pull request to main; on a push to main touching 13 paths; or by hand. Runs verify.sh and tests/; checks mcptoolshop_rnd/ and rnd/.
-2. **Release.** When a release is published. Runs mcptoolshop_rnd/__init__.py and verify.sh; checks mcptoolshop_rnd/ and rnd/.
+2. **Release.** When a release is published; or by hand. Runs mcptoolshop_rnd/__init__.py and verify.sh; checks mcptoolshop_rnd/ and rnd/.
 3. **Deploy site to GitHub Pages.** On a push to main touching 2 paths; or by hand. Runs site/astro.config.mjs and site/src/.
 4. **rnd** (a command people run). Runs mcptoolshop_rnd/cli.py.
 

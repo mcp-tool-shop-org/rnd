@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.14] - 2026-10-15
+
+- Advocate fix-up 5 amended after Argon's read: the preflight reads the card while the model is loaded, the card-clear wait compares against the run's starting baseline, the shutdown path never waits or raises twice, and the preflight keeps its prompt check
+
 ## [1.1.8.3.13] - 2026-10-15
 
 - Advocate fix-up 5: a preflight that can finish. A one-token call ends with done_reason "length" (measured on a CPU-only Ollama 0.40.4), so the preflight accepts that; keep_alive 60s re-sent; the preflight counts the card baseline; the run waits for the card to clear between models

@@ -9,6 +9,14 @@
 
 Three things block a grant. A fourth is a risk R&D infers but hasn't measured. **No grant until this turn passes.**
 
+**Amended after Argon's read (2026-10-15).** Items 1, 3 and 4 below are tightened on four points:
+- the preflight reads the card while the model is loaded;
+- the card-clear wait compares against the run's starting baseline;
+- the shutdown path never waits or raises a second time;
+- the preflight keeps its prompt check.
+
+**Build from this amended copy.** If you started from the earlier one, apply these items before handing back.
+
 ## What R&D found
 
 Each finding is labelled with how it is known.
@@ -22,19 +30,25 @@ Each finding is labelled with how it is known.
 
 1. **The preflight measurement call.**
    - Keep a one-token generation, so the model loads at the run's `num_ctx`.
-   - In the preflight only, accept `done_reason` `"length"` or `"stop"` when `eval_count` is at most 1. Refuse anything else.
+   - In the preflight only, accept `done_reason` `"length"` or `"stop"` when `eval_count` is at most 1 **and** `prompt_eval_count` is below `num_ctx`. A `"length"` is accepted only because `num_predict` is 1, never because the prompt filled the window. Refuse anything else.
    - The pilot's own check stays exactly as it is.
    - Test it through the loopback server, not a fake `complete`. The server answers `done_reason: "length"`, `eval_count: 1`, and the preflight must record a row. A second case answers `"length"` with `eval_count` 2, and the preflight must refuse.
 2. **`keep_alive: "60s"` on every pilot and preflight call** (item 5). A loopback test asserts it on a writer request, a critic request and a preflight request.
 3. **Count the baseline.**
-   - Before each preflight load, read the card's `memory.used` with `nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits`.
-   - Refuse when baseline plus `size_vram` exceeds the cap minus 1 GiB.
-   - Print the baseline, `size_vram` and their sum for each model.
+   - Before each preflight load, read the card's `memory.used` with `nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits`. That reading is the baseline.
+   - Read `memory.used` again **while the model is loaded**: right after its one-token reply, before the unload. This is `loaded_mib`. The watchdog stops on `memory.used`, and `size_vram` leaves out the CUDA context and workspaces.
+   - Refuse when the larger of `loaded_mib` and baseline plus `size_vram` exceeds the cap minus 1 GiB.
+   - Print the baseline, `size_vram`, `loaded_mib` and the larger figure for each model.
    - A test feeds the parser real `nvidia-smi` CSV text.
 4. **Wait for the card to clear between models,** in the pilot and in the preflight. After each unload:
-   - wait until `/api/ps` no longer lists the model **and** `memory.used` is within 512 MiB of the reading taken before that model loaded;
+   - wait until `/api/ps` no longer lists the model **and** `memory.used` is within 512 MiB of `initial_baseline_mib`. That reading is taken once, before the first model loads, in `preflight()` and in `run_pilot()`, never re-taken per load, so the floor can't creep up across 52 loads. A rise from another process also stops the run, and that is the safe direction;
    - poll each second, for at most 60 seconds;
-   - if the card hasn't cleared by then, stop the run as a refusal and record it in `pilot.jsonl`.
+   - if the card hasn't cleared by then, stop the run as a refusal. In this order:
+     1. clear `loaded`;
+     2. write the refusal to `pilot.jsonl` and flush it;
+     3. raise.
+   - The `finally` path sends `keep_alive: 0` for whatever is still loaded. It never runs the 60-second wait and never raises, so it can't block again or hide the first error.
+   - A test makes the card fail to clear. It asserts the refusal line is in `pilot.jsonl`, the unload was sent once, and the run ended within one wait.
 
    Test the wait with an `nvidia-smi` fake that returns CSV text the way the real tool does.
 

@@ -16,6 +16,16 @@
  ],
  "zero_relevance_check": "term search over all 11,525 chunks found no answer for any of them (a term search, not a full read)",
  "completeness": "check_grades.py: every pooled chunk graded once, grade in 0/1/2, reason 1-15 words; 100 of 100 OK",
- "audit": "16 queries to Argon, blind; agreement not yet measured",
- "scores": "not computed; sealed until the audit consult is answered"
+ "audit": {
+  "auditor": "Argon, blind, 16 queries, 501 chunks",
+  "three rows repaired": "unescaped quotes in a reason; grades unaffected (all 2)",
+  "kappa_weighted_quadratic": 0.8208,
+  "kappa_binary": 0.7475,
+  "raw_disagreement": 0.1257,
+  "two_step_disagreement": 0.0,
+  "passed": false,
+  "direction": "all 63 disagreements have the auditor one step higher: 41 of 0 vs 1, 22 of 1 vs 2",
+  "next": "adjudication by Argon, then the whole pool regraded under a revised brief (amendment 2), and a fresh 16-query audit"
+ },
+ "scores": "not computed; sealed until the regrade passes its audit"
 }

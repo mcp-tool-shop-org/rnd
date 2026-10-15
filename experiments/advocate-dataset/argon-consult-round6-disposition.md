@@ -24,3 +24,12 @@ Argon read Seat C's fix-up at role-set `c10d0fd`, with the hand-back, the code a
 - the `--mock` table with the leave-one-slot-out probe beside its permutation null.
 
 **What R&D takes from it:** three rounds running, a test passed for the wrong reason: round 5's A1 and A3, then this round's F1 and A8. Each time a fake stood in for the real interface: the RNG for the prose, the template for the prompt, the ledger for the prompt, a string for the `Completion`. The rule for every review from here on: a fake must stand where the real thing stands. A fake writer reads the prompt. A fake transport speaks HTTP.
+
+## Argon's read of the second fix-up brief (the same day)
+
+**Verdict: ready to hand to Seat C,** with two consistency points. Both are taken.
+
+| # | Finding | Disposition |
+|---|---|---|
+| C1 | Step 1 puts a failed check's numbers on its check line, but `allowed_numbers()` reads only the figures, so a brief reporting `0.71` and `0.75` would trip `stray_numbers`. | **Taken.** Step 1: `allowed_numbers()` also takes the check lines' numbers. |
+| C2 | A prompt-only mock writer (and an 8B model) can't apply step 2's scope rule unless the out-of-scope lines read as the notes the rule names. | **Taken.** Step 2: out-of-scope points are phrased as budget, cost or runner notes. `check_scoped` verifies kept and dropped points against `ledger.points`. The checks may read the ledger; the writer and the mock writer may not. |

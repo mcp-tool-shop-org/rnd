@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.13] - 2026-10-15
+
+- Advocate fix-up 5: a preflight that can finish. A one-token call ends with done_reason "length" (measured on a CPU-only Ollama 0.40.4), so the preflight accepts that; keep_alive 60s re-sent; the preflight counts the card baseline; the run waits for the card to clear between models
+
 ## [1.1.8.3.12] - 2026-10-15
 
 - Advocate fix-up 4: a short keep_alive (60s) on every live and preflight call, so a hard-killed pilot can't pin the critic in VRAM for 30 minutes (Argon's second read)

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.11] - 2026-10-15
+
+- Advocate fix-up 4 amended after Argon's read: num_predict caps (512 writer, 256 critic); truncation checked before and after each call; the record flushed before the critic loads, with every attempt's prose and failing checks; Argon's family-fallback inference corrected (the writer is per slot, no fallback)
+
 ## [1.1.8.3.10] - 2026-10-15
 
 - Advocate: the live pilot stopped at the 24 GiB cap when the critic loaded (the pilot sent no num_ctx, so the 16K default doubled the writers and pushed gemma4:31b over; R&D sized the grant on weights and missed it); fix-up 4 brief filed: a sized context, truncation detection, an incremental record, a measuring preflight, the granite checked_by

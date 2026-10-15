@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.2] - 2026-10-15
+
+- stage1-role-eval: the maintainer's amendments of 2026-10-15, recorded. A: STaR matched across the arms (each
+  arm keeps its own right apply answers, downsampled to equal counts per lesson and kind, with identical steps, a
+  near-duplicate filter and a cap of 8). B: the panel stops a round on a drop of more than 2.0 points that is also
+  significant (p <= 0.05, paired McNemar). C: the panel keeps the card's sampling settings, not greedy decoding.
+
 ## [1.1.10.0.1] - 2026-10-15
 
 - stage1-role-eval: R&D's ruling raises the closed-form `distractor_margin` from 0.15 to 0.20. The batch 5 and 6

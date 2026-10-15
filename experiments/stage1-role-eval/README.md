@@ -442,6 +442,34 @@ results in a Leitner ledger (`ledger.py`, aspire-si #102). R&D's rulings:
     - **The authoring check and the quiz now share one definition** of the spent rule (`variant_checked_spans`), over
       the whole variant, verdict and closed-form alike (#105).
 
+## Amendments, 2026-10-15 (the maintainer's decisions, on R&D's recommendation after Argon's round-1 review)
+
+**A. STaR, matched across the arms.**
+- Both arms keep their own right apply answers under the keep rule: all three lines pass the pinned scorer, the
+  lesson's pass rule is met, and the trace isn't stuck under `716dc251`.
+- Per (lesson, kind), the arm with more kept answers is downsampled to the other arm's count, so both arms inject the
+  same number of STaR examples.
+- Each seed runs the same number of optimizer steps in both arms.
+- Near-duplicate kept answers are dropped first, by the gates' 8-word span check.
+- There's a cumulative cap of 8 kept answers per (lesson, kind), the curriculum's count per kind.
+- This replaces "right answers are kept" with "kept up to the matched count", so the arm comparison stays
+  compute- and composition-matched.
+
+**B. The general-capability panel's stop rule.**
+- Round progression stops for the maintainer when the panel drops more than 2.0 points below its baseline **and** the
+  drop is significant at p ≤ 0.05 (paired McNemar). This replaces the plain 2-point guard.
+- **Disclosed sensitivity:** at about 300 items, with roughly 15% discordant pairs, it reliably stops only on drops of
+  about 4–5 points. Smaller drops are reported, not acted on.
+
+**C. The panel's decoding.**
+- The panel keeps the card's sampling settings, with one sampled pass per item, reproducible through the batched
+  path's per-item seeds. It doesn't use greedy decoding, which Qwen3's card warns against in thinking mode.
+- The rest of the panel's shape comes from the review:
+  - 250–300 independent items;
+  - generated through the batched path once its parity check passes;
+  - about 12–15 minutes a sitting;
+  - G1 run as three per-seed grants, each with both arms, with 15-minute rests.
+
 ## The leakage tool
 
 `experiments/verifier-gold/leakage_check.py` (rnd 1.1.4.4.8–1.1.4.4.10) checks a new set against the gold

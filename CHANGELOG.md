@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.2.23] - 2026-10-14
+
+- Advocate fix-up brief: Argon's read folded in (unit-suffixed numbers; threshold-crossing figure plants flip the hidden flags; the turn 3 negative allocation fixed)
+
 ## [1.1.8.2.22] - 2026-10-14
 
 - Argon round 5 answered: hold the grant; phase 1 fix-up brief filed (ten defects, the C1 ruling, Q1–Q5 answers, the pilot planner and mock runner); turn 3 amended; R&D verdict on role-set #56

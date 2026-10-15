@@ -1,6 +1,6 @@
 # BUILD BRIEF | Seat C | role-set: the Advocate, batch 1, the phase 1 fix-up | mcp-tool-shop-org/role-set | from R&D, with the Publisher | 2026-10-14
 
-**Status:** R&D's verdict on phase 1 (#56 at `3141e2d`), settled with Argon's round 5 answer (`argon-consult-round5.md` and its disposition). Phase 1 is well tested and CI is green, but it can't carry the pilot yet. This turn fixes it. It comes **before** the turn 3 pilot. The amendments to turn 3 are at the end. The Publisher holds the GPU grant until R&D passes this turn. Load no model.
+**Status:** R&D's verdict on phase 1 (#56 at `3141e2d`), settled with Argon's round 5 answer (`argon-consult-round5.md` and its disposition). Argon read this brief too, and found it ready with two edge cases, both folded in: numbers with unit suffixes, and threshold-crossing figure plants. Phase 1 is well tested and CI is green, but it can't carry the pilot yet. This turn fixes it. It comes **before** the turn 3 pilot. The amendments to turn 3 are at the end. The Publisher holds the GPU grant until R&D passes this turn. Load no model.
 
 ## Where to work
 
@@ -16,13 +16,13 @@ The same worktree and branch, `feat/advocate-batch1`, on #56. Normal commits, no
 
 **2. Kind B in the studio's directions (R5).** A point carries a direction (the Director to a seat, a seat to the Director, a reviewer to a builder), a category (figure, instruction, ask, cost or act), and whether it's in scope for that direction. Escalation text comes from the point's own tripwire class, never "a paid step". The `$0.00` aborted dry run is a cost point with spend words and no tripwire, and it relays.
 
-**3. Verdict-changing plants (C1).** Drop the `decide(hidden) == decide(ledger)` filter. A negative's order check runs against the hidden ledger's verdict. `plant_exact` lets the headline and the verdict follow the hidden ledger, and still refuses any other dropped or altered item.
+**3. Verdict-changing plants (C1).** Drop the `decide(hidden) == decide(ledger)` filter. When a B003 figure plant moves a figure across its stated floor or cost cap, `plant()` also flips the matching check result or `over_cap` on the hidden ledger, so `decide(hidden)` follows the crossed threshold. The table reads the flags, not the numbers. A negative's order check runs against the hidden ledger's verdict. `plant_exact` lets the headline and the verdict follow the hidden ledger, and still refuses any other dropped or altered item.
 
 **4. The writer's prompt, and the checks (R3, A2, A3, A4, Q3).**
 - `PROCEDURES["A"]` names the five headings exactly as `sections()` reads them, the four verdict tokens, and the section 5 form ("`<verdict>`: you'd expect `<alternative>`; the record supports `<verdict>` because …", or "cannot_tell: the record is missing …"). `PROCEDURES["B"]` names `relay:` and `escalate:`.
 - **Order:** match the four verdict tokens on word boundaries in the body of section 5. The first one must equal the key, and it must come before "you'd expect" when that clause is there.
 - **Trace:** each material figure's number and unit token appears verbatim, and its metric name appears in the same line or sentence. A verb between them is allowed. No other number appears.
-- **Numbers:** a digit inside an alphanumeric token (a SHA, a grant id, `B004`) is not a number. `plant_exact` compares sets of numbers, not lists.
+- **Numbers:** a digit inside an identifier or hash token is not a number (a SHA, a grant id, `B004`, `v0.2.0`). Synthetic SHAs always contain at least one hex letter a–f, so an all-digit SHA can't occur. A number attached to a unit suffix (`GB`, `MB`, `min`, `s`, `ms`, `%`) or to `$` is extracted as a number, so `19GB` and `19 GB` both carry `19`. `plant_exact` compares sets of numbers, not lists.
 - **Length:** at most 130 words, and at most `max(65, record words − 1)`. The 8-word copy ban against the record stays.
 
 **5. The critic, the probe and the hash (R4, A1, R6).**
@@ -53,7 +53,7 @@ Post `[Seat C → Publisher]` on #56 with:
 
 These replace the matching lines in `seat-build-batch1-turn3-pilot.md` (rnd 1.1.8.2.18):
 - **Step 0's `--mock` run** is the runner from step 6 above. It already exists when turn 3 starts.
-- **The ten negatives:** five change the verdict and five don't. Slots 1 and 6 change it. Slots 4 and 10 keep it. The planner assigns the other six so that each plant class (B001, B002, B003) appears at least twice, and the run record says which slots changed the verdict. A figure plant that crosses a threshold or cap counts as verdict-changing.
+- **The ten negatives:** five change the verdict and five don't. Slots 1 and 6 change it. Slots 4 and 10 keep it. Slots 5 and 8 (`cannot_tell`) keep it, since no plant can change a missing-figure verdict. Three of slots 2, 3, 7 and 9 change it with a B003 plant across a floor or cap (step 3), and the fourth keeps it. Each plant class (B001, B002, B003) appears at least twice, and the run record says which slots changed the verdict.
 - **The critic** reads the record and the prose, with the table, never the key (step 5 above). The bar is unchanged: at least 15 of 16 positives recovered, at least 9 of 10 negatives flagged.
 - **Length:** at most 130 words, and at most `max(65, record words − 1)`.
 

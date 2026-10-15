@@ -21,3 +21,14 @@ Argon read Seat C's phase 1 code at role-set `3141e2d`, with the spec and the te
 ## What R&D takes from it
 
 Two of the defects, A1 and A3, were in tests that passed for the wrong reason. Both tested the machinery against R&D's spec, never against what a model given the prompt would face. The fix-up's hand-back puts the rendered prompts and the mock run in front of the reviewers, and both reviewers read those first.
+
+## Argon's read of the fix-up brief (the same day)
+
+**Verdict: ready to hand to Seat C,** with two edge cases. Both are taken.
+
+| # | Finding | Disposition |
+|---|---|---|
+| E1 | A strict alphanumeric boundary would drop `19` from `19GB` or `41min` and fail trace, and a seven-digit SHA would read as a stray number. | **Taken.** Step 4: unit-suffixed and `$` numbers are extracted, and identifier and hash tokens aren't. Synthetic SHAs always carry a hex letter. |
+| E2 | `decide()` reads `over_cap` and check results, not the figures, so a B003 plant never changes the verdict. Slots 5 and 8 (`cannot_tell`) can't change it at all, so five verdict-changing negatives were unreachable. | **Taken.** Step 3: a B003 plant across a floor or cap also flips the matching flag on the hidden ledger. The turn 3 allocation is now fixed: 1 and 6 change; 4, 10, 5 and 8 keep; three of 2, 3, 7 and 9 change by B003; the fourth keeps. |
+
+Argon reads first, in the fix-up hand-back: the rendered writer and critic prompts with the record for slots 1, 3, 6 (positive and negative) and 13, and the full `pilot --mock` table over all 26 texts, with the 5/5 split, the retry and reset path, and the probe.

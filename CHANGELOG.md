@@ -11,6 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.4] - 2026-10-15
+
+- dataset-desk: the design record filed (design, Argon passes 2-3 and the follow-up); the code moved to mcp-tool-shop-org/dataset-desk v0.1.0; instrument file
+- Added `dataset-desk`: dataset-desk — review a visual dataset before it trains or tests anything
+- Added experiment `agent-ab-harness`
+- Added experiment `dataset-desk`
+- Added experiment `nemo-relay-trial`
+
 ## [1.1.10.0.3] - 2026-10-15
 
 - embeddinggemma-2: the multimodal design, revision 3, approved (desk-checked queries, Path A, the acceptance tests)

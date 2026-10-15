@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.6] - 2026-10-15
+
+- Advocate fix-up 3 reviewed by R&D: the guards, think/format/fence handling, Note labels, category wording and one table all landed; three items for Argon (the Llama 3.1 licence condition for the training batch, verified from source; no positive pin test; two rules moved from the table into the record); round 8 consult filed
+
 ## [1.1.8.3.5] - 2026-10-15
 
 - EmbeddingGemma 2: Argon's harness review and intent review answered (amendment 3: Stage 2 reads the one-sided bound; stop rules, key completeness and key hash, intents in the pool, tokenizer pin; the titled diagnostic dropped; 23 intents revised and frozen); grading.py and the grader brief; the counted embedding run started

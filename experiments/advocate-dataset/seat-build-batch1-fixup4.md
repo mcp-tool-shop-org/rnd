@@ -9,7 +9,7 @@
 
 This turn fixes all of it. Load no model. The next grant's preflight measures the critic once.
 
-**Amended after Argon's read (2026-10-15):** items 1–3 are tightened below: an output cap, checks before and after each call, and a record saved before the critic loads. One of his inferences is corrected. The code picks the writer by slot (`WRITERS[slot.family]`) and never falls back to the other family. So the run's alternation of qwen3 and granite was consecutive slots, and several texts may have finished in those 786 seconds. They were lost only because the record was written at the end.
+**Amended twice after Argon's reads (2026-10-15):** the second adds item 5, a short `keep_alive`. The first: items 1–3 are tightened below: an output cap, checks before and after each call, and a record saved before the critic loads. One of his inferences is corrected. The code picks the writer by slot (`WRITERS[slot.family]`) and never falls back to the other family. So the run's alternation of qwen3 and granite was consecutive slots, and several texts may have finished in those 786 seconds. They were lost only because the record was written at the end.
 
 ## The fix-up, in this order
 
@@ -39,7 +39,8 @@ This turn fixes all of it. Load no model. The next grant's preflight measures th
    - unloads it.
 
    It prints the three sizes and refuses if any is above the grant's VRAM cap minus 1 GiB. The Publisher sizes the next grant from those measured numbers, not from weights.
-5. **The granite `checked_by`,** now, since there's no run record to wait for: `"the Publisher, 2026-10-15 (digest fd429f23…, bundled Apache-2.0; card ibm-granite/granite-3.3-8b-instruct@51dd4bc, apache-2.0)"`.
+5. **A dead-man's switch on every live call** (Argon's second read). `transport.ollama_chat` defaults `keep_alive` to `"30m"`. `_unload_all()` runs only if Python reaches its `finally`, so a hard kill would leave the critic pinned in VRAM for half an hour. Pass `keep_alive="60s"` on every pilot and preflight call. A test asserts it on the writer's and the critic's request through the loopback server.
+6. **The granite `checked_by`,** now, since there's no run record to wait for: `"the Publisher, 2026-10-15 (digest fd429f23…, bundled Apache-2.0; card ibm-granite/granite-3.3-8b-instruct@51dd4bc, apache-2.0)"`.
 
 ## Hand back on #56, then stop
 

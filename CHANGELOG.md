@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.12] - 2026-10-15
+
+- Advocate fix-up 4: a short keep_alive (60s) on every live and preflight call, so a hard-killed pilot can't pin the critic in VRAM for 30 minutes (Argon's second read)
+
 ## [1.1.8.3.11] - 2026-10-15
 
 - Advocate fix-up 4 amended after Argon's read: num_predict caps (512 writer, 256 critic); truncation checked before and after each call; the record flushed before the critic loads, with every attempt's prose and failing checks; Argon's family-fallback inference corrected (the writer is per slot, no fallback)

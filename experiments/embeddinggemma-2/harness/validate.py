@@ -23,7 +23,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 import numpy as np
 
-from common import A_DOC, B_DOC, BATCH, CHUNKS, RESULTS, read_jsonl
+from common import A_DOC, B_DOC, BATCH, CHUNKS, EG2_REVISION, RESULTS, read_jsonl
 from embed import embed_a, embed_b, load_b
 
 LIMIT_TOKENS = 2048
@@ -36,7 +36,7 @@ def tokenizer_check(chunks: list[dict]) -> dict:
     from transformers import AutoTokenizer
 
     nomic = Tokenizer.from_file(hf_hub_download("nomic-ai/nomic-embed-text-v1.5", "tokenizer.json"))
-    eg2 = AutoTokenizer.from_pretrained("google/embeddinggemma-2")
+    eg2 = AutoTokenizer.from_pretrained("google/embeddinggemma-2", revision=EG2_REVISION)
     a = [len(nomic.encode(A_DOC + c["body"]).ids) for c in chunks]
     b = [len(eg2(B_DOC + c["body"])["input_ids"]) for c in chunks]
     out = {"nomic_max": max(a), "eg2_max": max(b), "nomic_p99": int(np.percentile(a, 99)), "eg2_p99": int(np.percentile(b, 99)),

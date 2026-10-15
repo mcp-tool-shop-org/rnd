@@ -5,7 +5,7 @@ Comparisons are paired by query with 10,000 bootstrap resamples (seed fixed).
 
 Stage 1 (B against A, dense-int8): mean delta >= +0.03, one-sided 95% lower bound > 0, neither group's mean
 delta below -0.015, hybrid mean delta >= 0.00 with its one-sided 95% lower bound > -0.015.
-Stage 2 (only if Stage 1 passes; B256 against B, dense-int8): two-sided 95% lower bound > -0.015 and mean
+Stage 2 (only if Stage 1 passes; B256 against B, dense-int8): one-sided 95% lower bound > -0.015 and mean
 (B256 - A) >= +0.02. Otherwise B at 768.
 
 Writes results/scores.json and results/per-query.jsonl (ids and numbers only).
@@ -20,7 +20,7 @@ from collections import defaultdict
 
 import numpy as np
 
-from common import BENCH, QUERIES, RESULTS, RUNS, ndcg_at, read_jsonl, write_jsonl
+from common import BENCH, QUERIES, RESULTS, RUNS, ndcg_at, read_jsonl, sha256_file, write_jsonl
 
 SEED = 7
 RESAMPLES = 10_000
@@ -53,6 +53,10 @@ def main() -> None:
     missing = [q["id"] for q in queries if not grades.get(q["id"])]
     if missing:
         raise SystemExit(f"STOP: no grades for {missing[:5]}")
+    pool_pairs = {(r["qid"], int(r["chunk_id"])) for r in read_jsonl(BENCH / "pool.jsonl")}
+    graded_pairs = {(q, c) for q, d in grades.items() for c in d}
+    if pool_pairs - graded_pairs:
+        raise SystemExit(f"STOP: {len(pool_pairs - graded_pairs)} pooled chunks have no grade in keys.jsonl")
     # Amendment 1: a query whose pool holds nothing graded 1 or 2 carries no information about either arm.
     dropped = [q["id"] for q in queries if max(grades[q["id"]].values()) < 1]
     queries = [q for q in queries if q["id"] not in dropped]
@@ -84,10 +88,11 @@ def main() -> None:
               and s1_hybrid["mean"] >= 0.0 and s1_hybrid["lo_one_sided_95"] > -0.015)
     s2 = boot(delta("B256-dense-int8", "B-dense-int8"), rng)
     s2_vs_a = float(delta("B256-dense-int8", "A-dense-int8").mean())
-    stage2 = stage1 and s2["lo_95"] > -0.015 and s2_vs_a >= 0.02
+    stage2 = stage1 and s2["lo_one_sided_95"] > -0.015 and s2_vs_a >= 0.02
     decision = "adopt B256" if stage2 else ("adopt B at 768" if stage1 else "keep nomic-embed-text")
     out = {
         "decision": decision,
+        "keys_sha256": sha256_file(BENCH / "keys.jsonl"),
         "queries": {"kept": len(queries), "by_group": kept_groups, "dropped": dropped,
                     "below_40_in_a_group": any(n < 40 for n in kept_groups.values())},
         "stage1": {"dense": s1, "groups": s1_groups, "hybrid": s1_hybrid, "passed": stage1},
@@ -97,6 +102,8 @@ def main() -> None:
         "diagnostics": {
             "code_prefix_B_minus_B_on_code": float(np.mean([per[q]["Bcode-dense-int8"]["ndcg10"] - per[q]["B-dense-int8"]["ndcg10"]
                                                             for q in qids if group[q] == "code"])) if "Bcode-dense-int8" in names else None,
+            "code_prefix_B256_minus_B256_on_code": float(np.mean([per[q]["B256code-dense-int8"]["ndcg10"] - per[q]["B256-dense-int8"]["ndcg10"]
+                                                                  for q in qids if group[q] == "code"])) if "B256code-dense-int8" in names else None,
             "int8_minus_float_B256": float(delta("B256-dense-int8", "B256-dense-float").mean()),
             "int8_minus_float_B": float(delta("B-dense-int8", "B-dense-float").mean()),
             "recall5_B_minus_A": float(delta("B-dense-int8", "A-dense-int8", "recall5").mean()),

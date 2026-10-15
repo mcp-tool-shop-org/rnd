@@ -83,6 +83,8 @@ def check(name: str, m: np.ndarray, dim: int) -> dict:
     if np.isnan(m).any():
         raise SystemExit(f"STOP: NaN in {name}")
     norms = np.linalg.norm(m, axis=1)
+    if m.shape[1] != dim or abs(norms.min() - 1.0) > 1e-3 or abs(norms.max() - 1.0) > 1e-3:
+        raise SystemExit(f"STOP: {name} failed the manipulation check (dim {m.shape[1]}, norms {norms.min()}..{norms.max()})")
     return {"rows": int(m.shape[0]), "dim": int(m.shape[1]), "dim_ok": m.shape[1] == dim,
             "norm_min": float(norms.min()), "norm_max": float(norms.max())}
 

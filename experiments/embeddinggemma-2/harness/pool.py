@@ -28,6 +28,9 @@ def main() -> None:
     args = ap.parse_args()
     body = {c["id"]: c for c in read_jsonl(CHUNKS)}
     queries = read_jsonl(QUERIES)
+    locked = {r["query_id"]: r for r in read_jsonl(BENCH / "intents.jsonl")}
+    if set(locked) != {q["id"] for q in queries}:
+        raise SystemExit("STOP: the locked intent table does not cover exactly the frozen queries")
     # The decision readings of A, B and B256, plus the code-prefix diagnostic's dense reading (design v3, keys
     # step 2). The float readings and the code-prefix hybrids are diagnostics read against these grades; a chunk
     # only they surface counts 0, which is stated beside those diagnostics.
@@ -46,7 +49,8 @@ def main() -> None:
         sizes.append(len(pool))
         for n, cid in enumerate(pool, start=1):
             c = body[cid]
-            rows.append({"qid": q["id"], "group": q["group"], "query": q["query"], "n": n, "chunk_id": cid,
+            rows.append({"qid": q["id"], "group": q["group"], "query": q["query"], "intent": locked[q["id"]]["intent"],
+                         "note": locked[q["id"]].get("note", ""), "n": n, "chunk_id": cid,
                          "source": c["source"], "text": c["body"]})
     write_jsonl(BENCH / f"pool{args.tag_suffix}.jsonl", rows)
     manifest = {"seed": SEED, "depth": DEPTH, "runs": len(runs), "queries": len(queries), "pooled": len(rows),

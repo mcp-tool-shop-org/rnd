@@ -127,6 +127,19 @@
 - **The corpus was rebuilt before any counted run, with project-relative paths.** The first build indexed it by absolute path, so every chunk header read `E:/AI/eg2-bench/corpus/…` where offrig writes a project-relative path in production. The rebuild indexes `corpus/` from inside the project. The count is unchanged at 11,525. The first build is kept aside, not deleted. The pins are in `results/corpus-manifest.json`; offrig's `main` had moved to `0600904` by the rebuild.
 - **The pool is the 8 decision runs:** A, B and B256 in dense-int8 and hybrid, plus the code-prefix dense reading for B and B256. The float readings and the code-prefix hybrids are diagnostics. A chunk that only they surface counts 0, and that is stated beside them.
 
+## Amendment 3, 2026-10-15, before any counted run
+
+Argon's round 3 harness review (`argon-consult-round3.md`, disposition in `argon-consult-round3-disposition.md`) and his intent review are both answered. Changes:
+
+- **Stage 2's bound is the one-sided 95% lower bound, the 5th bootstrap percentile.** The text said "the paired 95% bootstrap lower bound", which came from round 1's "95% CI" and could be read as the 2.5th percentile. Every other gate in this design is one-sided 95%, so the 5th percentile is the reading. This is settled before any run.
+- **Harness fixes:**
+  - `embed.py` stops on a wrong dimension or a norm off by more than 1e-3, as section 7 says.
+  - `score.py` refuses a key that misses any pooled chunk, writes `keys_sha256` into the scores, and reports both code-prefix diagnostics explicitly.
+  - `pool.py` carries each query's locked intent, and any grading note, into every pooled row.
+  - `validate.py` pins the tokenizer to the model revision.
+- **The titled-document diagnostic is dropped.** offrig's header already puts the source and title inside every chunk's text, so a `title: {source}` prefix would only repeat it. It would also have cost a second full embedding, about 70 minutes on the CPU. It isn't run, and its absence from the scores is intended.
+- **Intents locked:** 100 lines. The auditor changed 23: 21 were narrowed to one question, or re-read for keyword queries, and three carry a split-answer note for graders. The frozen table's sha256 is `67e4936d…6e186`, kept private with the queries.
+
 ## 7. While running and after
 
 - **Stop rules:**

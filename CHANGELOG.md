@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.2] - 2026-10-14
+
+- Advocate fix-up 2 reviewed by R&D: the live pilot skips the writers.json and digest guards (no cloud-tag refusal), procedures name Note lines the records no longer mark, the relay acts list hands over the slots' exact strings, the critic's think flag is implicit, the critic's table is the old abstract one; Argon consult round 7 filed with code inline; role-set #59 reviewed (pass, one handbook sentence)
+
 ## [1.1.8.3.1] - 2026-10-14
 
 - EmbeddingGemma 2 design v2 after Argon round 1 (100 queries, two-stage rule, blinded pooled keys, prefix and title parity, 2,048-token pre-check, bf16 gate; R&D adds the hybrid guard and int8 scoring from offrig's code); round 2 consult filed

@@ -39,4 +39,4 @@ It asked for two guards in the harness, now in step 6 of the design:
 - mid-rank reciprocal rank, so file order never breaks a tie;
 - a token gate that logs the offending ids and halts before any embedding.
 
-Next: the Director's approval of the design. Then the harness, its outside review, and the free validation run.
+The Director approved the design on 2026-10-15. Next: the harness, its outside review, and the free validation run.

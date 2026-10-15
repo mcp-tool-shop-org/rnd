@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.21] - 2026-10-15
+
+- EmbeddingGemma 2: Argon's resource review of offrig's embed-serve, and its disposition. Argon held it for seven changes, and all were applied in offrig: every thread pool capped before torch loads, below-normal priority, request bounds and HTTP hardening. The capped rerun's figures: 201 chunks in 162.6 s on 6 E-cores at about 20% of the machine, peaking at 2.8 GiB. The brief records that Argon read its first version
+- EmbeddingGemma 2, multimodal: the Director approved design revision 2
+
 ## [1.1.8.3.20] - 2026-10-15
 
 - EmbeddingGemma 2, multimodal: design revision 2 after Argon's round 1 (pool = generation outputs, byte-deduplicated, near-duplicates masked; strict key; T2 document prefix; per-project upper-bound rule; G256 out of the rule), approved by Argon as written in round 2. Two round 1 facts corrected: 2,104 image files in the query projects, not about 2,900, and no record names a lineage. Waits on the Director's approval

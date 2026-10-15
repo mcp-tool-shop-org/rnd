@@ -5,7 +5,7 @@ The studio runs its own `ggml-cuda.dll` for Ollama on the RTX 5090: Ollama's own
 **Status, 2026-10-15:**
 - **The 0.40.4 build to the studio standard,** on CUDA 13.4 Update 2, is built (see `build-0.40.4-cuda-13.4.3.md`).
 - **Nothing is activated.** The installed Ollama runs the stock backend until a sandbox test passes and activation is decided separately.
-- **The sandbox test** waits for the outside reviewer's green light and a GPU grant.
+- **The sandbox test** ran on the same day and **failed criterion 2:** outputs diverged from stock on 2 of 3 prompts, at positions that weren't near-ties. Nothing is activated (see `sandbox-result-cu1343.md`).
 
 | File | What it is |
 |---|---|
@@ -15,6 +15,7 @@ The studio runs its own `ggml-cuda.dll` for Ollama on the RTX 5090: Ollama's own
 | `run-build.ps1` | The capped launcher: E-core affinity, below-normal priority, typeperf, a stop rule |
 | `sandbox-plan-v1.md` | The sandbox test plan as first written |
 | `sandbox_test-v3.py`, `sandbox_test-v2-to-v3.diff` | The test after two review rounds: isolation, per-prompt exclusivity, breach handling, the near-tie rule |
+| `sandbox-result-cu1343.md`, `sandbox-record-cu1343.jsonl` | The test's result (FAIL on criterion 2) and its record, with one log line's PATH removed |
 
 The build folders themselves (the DLLs, logs and monitor CSVs) stay on the rig. Every DLL is recorded here by sha256.
 

@@ -35,7 +35,7 @@ Built 2026-10-15. The 0.35.1 build (E:\AI\ollama-cu134) and the installed Ollama
 - the watched build processes carried affinity `0x3FC`.
 
 Two caveats on those figures:
-- One watched process name kept reading affinity `0x0`. It wasn't identified before the build ended. It's possibly a process the monitor couldn't read, or one that had just exited.
+- One watched process name kept reading affinity `0x0`. It's a process a non-elevated shell can't open, an elevated or system process, which per-process reads show as `0x0` (explained after the build).
 - The build-process CPU figure (peak 22%, average 7%) undercounts, because compiler processes start and finish inside a 5 s sample. The per-core reading is the reliable one.
 
 ## lib/ollama/cuda_v13 contents (sha256)

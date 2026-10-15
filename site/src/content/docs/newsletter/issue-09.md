@@ -7,7 +7,7 @@ highlights:
   - "<strong>A one-line hash check caught it:</strong> the Ollama 0.40.4 install replaced the studio's CUDA 13.4 <code>ggml-cuda.dll</code> with the stock build, and the start script refused to call it the studio's."
   - "<strong>Copying the old build back was never an option:</strong> 0.40.4 pins a different llama.cpp (b11521, against b11232), so the backend had to be rebuilt from the new pin."
   - "<strong>An uncapped CPU job took the whole machine</strong>, and every heavy job since runs pinned to efficiency cores at below-normal priority, with its load stated before it starts."
-  - "<strong>Nothing is activated until a sandbox test passes</strong>, with exact-match outputs or a pre-registered near-tie rule, and a weekly Argon check now asks what the newest setup should be."
+  - "<strong>Nothing is activated until a sandbox test passes</strong>, and the first one didn't: the new build loaded and kept pace, but its outputs diverged from stock on 2 of 3 prompts, so the stock backend stays. A weekly Argon check now asks what the newest setup should be."
 ---
 
 Every claim below links to the record it came from. The build records are in rnd, under [`experiments/ollama-cuda-backend/`](https://github.com/mcp-tool-shop-org/rnd/tree/main/experiments/ollama-cuda-backend).
@@ -63,9 +63,13 @@ CUDA 13.4's first release is 13.4.1 (nvcc V13.4.59). "13.4 Update 2" is `version
 
 It built in 374.0 s: 201 steps and 189 CUDA objects, each compiled as `arch=compute_120a,code=[sm_120a]`, which is machine code for this card only, with no PTX. The DLL is 217 MB, against 56 MB for the first rebuild; the extra FlashAttention kernels and the speed-first compression account for it. It ran under the same cap: 8 efficiency cores, total CPU averaging 37.5%, and one 5-second sample above 50%. Every dependency resolved. → [the 13.4.3 build record](https://github.com/mcp-tool-shop-org/rnd/blob/main/experiments/ollama-cuda-backend/build-0.40.4-cuda-13.4.3.md)
 
-## What's not done
+## Update, the same afternoon: the sandbox test failed
 
-Nothing is activated. The sandbox test hasn't run: it waits for Argon's green light on round 3 and for a GPU grant. Activation (swapping the folder in, with Ollama stopped, and moving the start script's expected hash) is a separate decision after that.
+Argon gave round 3 a green light, and the test ran under a GPU grant: 46 seconds, peaking at 7.4 GB of card memory against a 9.2 GB cap, and cleaned up completely.
+- **The new DLL loaded,** and the log names its path. It's at least as fast as stock.
+- **It failed the output check on 2 of 3 prompts.** Stock matched itself token for token. The sandbox matched stock exactly on the coding prompt, but diverged at token 15 of one prompt and token 6 of another. At both points it ranked stock's top two candidates the other way round, by margins of about 0.7 and 0.8 in log-probability. That's not the near-tie the rule allows.
+
+So by the rule set before the run, nothing is activated and the stock backend stays. The difference is larger than reordered sums usually give, and the cause isn't identified: build options or toolkit. Neither answer is wrong, but the bar was identity with stock, and identity isn't quality. Finding the cause is its own decision, with its own review. → [the result](https://github.com/mcp-tool-shop-org/rnd/blob/main/experiments/ollama-cuda-backend/sandbox-result-cu1343.md)
 
 ## So it can't happen silently again
 

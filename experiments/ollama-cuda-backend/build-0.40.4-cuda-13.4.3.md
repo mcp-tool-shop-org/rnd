@@ -38,7 +38,7 @@ Every CMake option above exists in the pinned llama.cpp (b11521): `ggml/CMakeLis
 - **BUILD_OK** in **374.0 s**, 201 ninja steps (189 CUDA objects). The 13.4.1 build took 343.8 s and 156 steps.
 - **nvcc as used:** V13.4.92. Every CUDA object was compiled with `--generate-code=arch=compute_120a,code=[sm_120a]`, which is sm_120a SASS only, with no `compute_` PTX in the binary (read from `build.ninja`).
 - **`ggml-cuda.dll`:** 217,096,704 bytes, sha256 `0ebc0e61c7288e6a7367f21c1fbd9a8501e423927e55902c0f0476cdd8608c6a`. The 13.4.1 build's was 56 MB; FA_ALL_QUANTS and speed compression account for the difference.
-- **CPU** (total machine, 5 s samples): peak 54.1% in one sample, average 37.5%. 1 of 62 samples was above 50%, never 6 in a row, so the stop didn't fire. The build processes carried affinity `0x3FC`. One watched process name read `0x0`, as in the 13.4.1 build, and wasn't identified. The per-process build CPU figure (peak 19.3%) undercounts the short-lived compiler processes.
+- **CPU** (total machine, 5 s samples): peak 54.1% in one sample, average 37.5%. 1 of 62 samples was above 50%, never 6 in a row, so the stop didn't fire. The build processes carried affinity `0x3FC`. One watched process name read `0x0`, as in the 13.4.1 build: an elevated or system process a non-elevated shell can't open, as was worked out after the build. The per-process build CPU figure (peak 19.3%) undercounts the short-lived compiler processes.
 - **dumpbin /dependents ggml-cuda.dll:** ggml-base.dll (from the installed `lib\ollama` parent), cublas64_13.dll (this folder), KERNEL32, MSVCP140, VCRUNTIME140, VCRUNTIME140_1 (this folder) and api-ms-win-crt-*. All resolve. Machine x64.
 
 ## lib/ollama/cuda_v13 contents (sha256, also in `sha256.txt`)

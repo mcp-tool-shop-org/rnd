@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.23] - 2026-10-15
+
+- The Ollama CUDA backend's sandbox test failed criterion 2, so nothing is activated. The 13.4 Update 2 build loaded (the log names its path, compute 12.0) and kept pace with stock (mean rate ratio 1.194 against stock A). But its outputs diverged from stock on 2 of 3 prompts, at token 15 and token 6, where stock's top two were 0.70 and 0.81 apart, not the near-tie the rule allows. Stock matched itself exactly. `experiments/ollama-cuda-backend/sandbox-result-cu1343.md` holds the verdict, with the run's record minus one log line's PATH values. Newsletter issue 9 gains the update, and both build records now explain the `0x0` affinity reading (an elevated process a non-elevated shell can't open)
+
 ## [1.1.8.3.22] - 2026-10-15
 
 - Newsletter issue 9, "The backend that changed under us": an Ollama update replaced the studio's CUDA 13.4 backend, and the backend was rebuilt from Ollama 0.40.4's llama.cpp pin. It covers the CPU rules set after an uncapped job (efficiency-core affinity, below-normal priority, every thread pool capped), three rounds of outside review of the sandbox test, CUDA 13.4's version numbering, and a new weekly check

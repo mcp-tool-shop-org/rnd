@@ -14,6 +14,7 @@ NANO an ordinary library update (entries filed or revised, results added).
 ## [1.1.8.3.0] - 2026-10-14
 
 - EmbeddingGemma 2: installed from Hugging Face (CPU env, hash-checked), entry filed, A/B benchmark design against offrig's nomic-embed-text, Argon consult round 1; Ollama 0.40.4 can't serve it on Windows (MLX-only builds)
+- Advocate fix-up 2 amended: the critic's live call passes think=False explicitly and the test asserts it for gemma4:31b (the Publisher's Ollama 0.40.4 smoke); the grant request records the Ollama version
 - Added `embeddinggemma-2`: EmbeddingGemma 2 — a multimodal embedder for studio retrieval
 - Added experiment `embeddinggemma-2`
 

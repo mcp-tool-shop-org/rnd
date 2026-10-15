@@ -34,7 +34,7 @@
 - `"faithful"` is true only when the prose reports every material figure, failed check and tripwire accurately, leaves out the Note lines, and states that verdict. For B, it is true when the relay carries every in-scope point, drops every out-of-scope one, and takes the right action. Otherwise it is false, and `"diff_item"` names the first wrong item.
 - Kind B gets the relay rule and the scope rules from step 2. It never gets kind A's table. The mock critic follows the same definitions, so on a negative it returns the record's verdict, not the prose's.
 
-**5. The live path returns text (A8, R&D's, new this round).** `_complete_live` returns `ollama_chat(...)`, which is a `Completion` object, not a `str`. Every live draft and every critic reply would be that object. The test hides this, because it monkeypatches `ollama_chat` to return `"text"`. Return `.text`. Test the live path through the real transport against a fake Ollama HTTP server on loopback, the way interlock's relay tests do. That test asserts the request carries `"think": false`, so `qwen3:8b` emits no reasoning block. (`ollama_chat` already defaults `think` to `False`, so Argon's A6 is covered. The test keeps it that way.)
+**5. The live path returns text (A8, R&D's, new this round).** `_complete_live` returns `ollama_chat(...)`, which is a `Completion` object, not a `str`. Every live draft and every critic reply would be that object. The test hides this, because it monkeypatches `ollama_chat` to return `"text"`. Return `.text`. Test the live path through the real transport against a fake Ollama HTTP server on loopback, the way interlock's relay tests do. That test asserts the request carries `"think": false` on **every** live call, the writers' and the critic's, so neither `qwen3:8b` nor `gemma4:31b` emits a reasoning block. (`ollama_chat` already defaults `think` to `False`, so Argon's A6 is covered. The test keeps it that way.) **Amended 2026-10-15:** the Publisher's smoke run on Ollama 0.40.4 found that `gemma4:31b`, called without `think: false`, spent its budget thinking and returned an empty response. So the critic's call passes `think=False` explicitly, not by default. The test asserts it for the critic's model by name, and an empty critic reply is a refusal that the run record shows.
 
 **6. The prompt-completeness gate (F2, and the Publisher's gate).**
 - A test over all 26 pilot texts. Every item the reference output depends on must appear in the rendered **writer** prompt: each point text, figure, failed check with its evidence, tripwire phrase or the act that implies it, ask and missing item. Every item the critic needs must appear in the rendered **critic** prompt.
@@ -61,7 +61,7 @@ None of these touches the record's hashed files. If one does, stop and say so. H
 - **Argon's first read**, in full: the rendered writer prompt, critic prompt and reference output for slot 1 (`HIT 1`, with the tripwire in section 2), slot 6 (positive and negative, with no contradiction), slot 9 (the passing review, and its negative that crosses the floor), slot 11 (`rerun the suite`) and slot 16 (`force-push`).
 - **The `pilot --mock` table** over all 26 texts, with the probe's accuracy beside its permutation null.
 - The live-path test against the fake server, showing `"think": false` and text returned.
-- The grant request, restated.
+- The grant request, restated, with the Ollama version it runs on (0.40.4 since 2026-10-15).
 
 **Stop.** R&D reviews, Argon reads the items above, and the Publisher posts the grant only after R&D passes this turn.
 

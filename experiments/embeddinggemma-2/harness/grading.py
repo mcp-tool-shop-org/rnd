@@ -23,7 +23,16 @@ import numpy as np
 
 from common import BENCH, RESULTS, RUNS, read_jsonl, sha256_file, write_jsonl
 
-GRADING, GRADES, AUDIT = BENCH / "grading", BENCH / "grades", BENCH / "audit"
+import os
+
+# Round 2 (design amendment 4) regrades the whole pool under grader-brief-v2.md. Its grades, key and audit go to new
+# folders, so round 1's are kept as the record and never overwritten. Its audit is drawn from the queries round 1 did
+# not audit, by the same criterion.
+ROUND = int(os.environ.get("EG2_ROUND", "1"))
+SUFFIX = "" if ROUND == 1 else f"-r{ROUND}"
+GRADING, GRADES, AUDIT = BENCH / "grading", BENCH / f"grades{SUFFIX}", BENCH / f"audit{SUFFIX}"
+KEYS = BENCH / f"keys{SUFFIX}.jsonl"
+EXCLUDE_FROM_AUDIT = set() if ROUND == 1 else set(json.loads((BENCH / "audit" / "chosen.json").read_text(encoding="utf-8"))["queries"])
 DECISION_RUNS = [f"{a}-{r}" for a in ("A", "B", "B256") for r in ("dense-int8", "hybrid")]
 AUDIT_PER_GROUP = 8
 PER_PACKET = 4  # queries per auditor paste
@@ -52,7 +61,7 @@ def audit() -> None:
         share[qid] = sum(1 for r in rows if found.get(int(r["chunk_id"]), 0) <= 2) / len(rows)
     chosen = []
     for group in ("code", "prose"):
-        qs = sorted({r["qid"] for rows in pool.values() for r in rows if r["group"] == group}, key=lambda q: (-share[q], q))
+        qs = sorted({r["qid"] for rows in pool.values() for r in rows if r["group"] == group and r["qid"] not in EXCLUDE_FROM_AUDIT}, key=lambda q: (-share[q], q))
         chosen += qs[:AUDIT_PER_GROUP]
     AUDIT.mkdir(parents=True, exist_ok=True)
     (AUDIT / "chosen.json").write_text(json.dumps({"queries": chosen, "unique_share": {q: share[q] for q in chosen}}, indent=1), encoding="utf-8")
@@ -94,8 +103,8 @@ def merge() -> None:
     if problems:
         raise SystemExit("STOP:\n" + "\n".join(problems[:40]))
     rows = [{"qid": q, "chunk_id": c, "grade": keys[(q, c)]["grade"], "grader": "sonnet"} for q, c in sorted(keys)]
-    write_jsonl(BENCH / "keys.jsonl", rows)
-    print(f"keys: {len(rows)} grades, sha256 {sha256_file(BENCH / 'keys.jsonl')}")
+    write_jsonl(KEYS, rows)
+    print(f"keys: {len(rows)} grades, sha256 {sha256_file(KEYS)}")
 
 
 def kappa(a: list[int], b: list[int], levels: list[int], weights: str | None) -> float:
@@ -112,7 +121,7 @@ def kappa(a: list[int], b: list[int], levels: list[int], weights: str | None) ->
 
 
 def agree() -> None:
-    key = {(r["qid"], int(r["chunk_id"])): r["grade"] for r in read_jsonl(BENCH / "keys.jsonl")}
+    key = {(r["qid"], int(r["chunk_id"])): r["grade"] for r in read_jsonl(KEYS)}
     aud = {(r["query_id"], int(r["chunk_id"])): int(r["grade"]) for r in read_jsonl(AUDIT / "auditor.jsonl")}
     chosen = json.loads((AUDIT / "chosen.json").read_text(encoding="utf-8"))["queries"]
     expected = {k for k in key if k[0] in chosen}
@@ -126,7 +135,7 @@ def agree() -> None:
         "kappa_binary": kappa([int(x >= 1) for x in s], [int(x >= 1) for x in a], [0, 1], None),
         "raw_disagreement": float(np.mean([x != y for x, y in zip(s, a)])),
         "two_step_disagreement": float(np.mean([abs(x - y) == 2 for x, y in zip(s, a)])),
-        "keys_sha256": sha256_file(BENCH / "keys.jsonl"),
+        "keys_sha256": sha256_file(KEYS),
     }
     out["passed"] = (out["kappa_weighted_quadratic"] >= 0.75 and out["kappa_binary"] >= 0.80
                      and out["raw_disagreement"] <= 0.10 and out["two_step_disagreement"] <= 0.02)

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.17] - 2026-10-15
+
+- EmbeddingGemma 2: Argon adjudicated the 63 audit disagreements (56 resolved to the Sonnet grade, 7 to the auditor's). Grader brief version 2 carries the adjudicated boundary rules, with no example ids, so nothing leaks into the regrade. The grading tool gains a round 2 that never overwrites round 1, and the fresh 16-query audit is drawn before any regrading. The round 3 consult asks Argon to approve the brief and grade the fresh audit
+
 ## [1.1.8.3.16] - 2026-10-15
 
 - EmbeddingGemma 2: the round 1 grading audit failed two of its four bars (binary kappa 0.747, raw disagreement 12.6%); every disagreement has the auditor one step higher. Design amendment 4 records the result and Argon's ruling to drop queries with no relevant chunk. The adjudication consult (round 2) is filed, and the whole pool is regraded under a revised brief, as amendment 2 requires. No score was computed

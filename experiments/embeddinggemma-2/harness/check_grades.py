@@ -10,7 +10,10 @@ import sys
 
 from common import BENCH
 
-GRADING, GRADES = BENCH / "grading", BENCH / "grades"
+import os
+
+ROUND = int(os.environ.get("EG2_ROUND", "1"))
+GRADING, GRADES = BENCH / "grading", BENCH / ("grades" if ROUND == 1 else f"grades-r{ROUND}")
 
 
 def check(qid: str) -> str:

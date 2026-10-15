@@ -27,5 +27,12 @@
   "direction": "all 63 disagreements have the auditor one step higher: 41 of 0 vs 1, 22 of 1 vs 2",
   "next": "adjudication by Argon, then the whole pool regraded under a revised brief (amendment 2), and a fresh 16-query audit"
  },
- "scores": "not computed; sealed until the regrade passes its audit"
+ "scores": "not computed; sealed until the regrade passes its audit",
+ "adjudication": {
+  "by": "Argon, all 63 disagreements",
+  "final_equals_sonnet": 56,
+  "final_equals_auditor_part_a": 7,
+  "note": "the 7 are a Sonnet 1 raised to 2 (split implementation; research findings). Under the adjudicated rule set the round 1 key differs on 12 of 501 audited chunks, 7 too low and 5 too high",
+  "next": "whole pool regraded under grader-brief-v2.md (round 2, grades-r2); fresh 16-query audit drawn from the 84 not audited in round 1, before any regrading"
+ }
 }

@@ -115,7 +115,7 @@
       "confidence": "full",
       "highWater": null,
       "name": "experiments",
-      "qualifyingSourceCommits": 50,
+      "qualifyingSourceCommits": 56,
       "rebaseline": null
     },
     {
@@ -141,6 +141,7 @@
         "confidence": "low",
         "importsAndCoChanges": [],
         "importsOnly": [
+          "experiments",
           "rnd",
           "tests"
         ]
@@ -150,7 +151,7 @@
       "confidence": "full",
       "highWater": null,
       "name": "mcptoolshop_rnd",
-      "qualifyingSourceCommits": 302,
+      "qualifyingSourceCommits": 399,
       "rebaseline": null
     },
     {
@@ -216,7 +217,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "tests",
-      "qualifyingSourceCommits": 21,
+      "qualifyingSourceCommits": 17,
       "rebaseline": null
     }
   ],
@@ -259,8 +260,8 @@
         "path": ".gitignore"
       },
       {
-        "commits": 333,
-        "lines": 1842,
+        "commits": 430,
+        "lines": 2502,
         "path": "CHANGELOG.md"
       },
       {
@@ -324,8 +325,93 @@
         "path": "SHIP_GATE.md"
       },
       {
-        "commits": 23,
-        "lines": 511,
+        "commits": 1,
+        "lines": 0,
+        "path": "agent-ab-harness}/allow-list.json"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "agent-ab-harness}/debrief.md"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "agent-ab-harness}/grade.py"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "agent-ab-harness}/key-audit.json"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "agent-ab-harness}/prompt.md"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "agent-ab-harness}/run.py"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "agent-ab-harness}/tasks.json"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "agent_ab_harness}/init-local-A.json"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "agent_ab_harness}/init-restricted-A.json"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "agent_ab_harness}/init-restricted-B.json"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "agent_ab_harness}/init-wide-A.json"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "agent_ab_harness}/init-wide-B.json"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "agent_ab_harness}/shakedown-2/CF09-A1.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "agent_ab_harness}/shakedown-2/RC03-A1.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "agent_ab_harness}/shakedown-2/RC03-A2.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "agent_ab_harness}/shakedown-2/RC03-B1.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "agent_ab_harness}/shakedown-2/RC03-B2.jsonl"
+      },
+      {
+        "commits": 24,
+        "lines": 517,
         "path": "atlas/README.md"
       },
       {
@@ -334,18 +420,18 @@
         "path": "atlas/boundaries.yaml"
       },
       {
-        "commits": 23,
-        "lines": 1720,
+        "commits": 24,
+        "lines": 1732,
         "path": "atlas/page.json"
       },
       {
-        "commits": 23,
-        "lines": 5408,
+        "commits": 24,
+        "lines": 5478,
         "path": "atlas/statistics.json"
       },
       {
-        "commits": 23,
-        "lines": 9035,
+        "commits": 24,
+        "lines": 9043,
         "path": "atlas/structure.json"
       },
       {
@@ -414,8 +500,8 @@
         "path": "docs/standards.md"
       },
       {
-        "commits": 1,
-        "lines": 17,
+        "commits": 2,
+        "lines": 24,
         "path": "docs/watchlist.json"
       },
       {
@@ -614,8 +700,8 @@
         "path": "entries/2026/2026-10-08-gated-model-scouting-what-to-request-for-the-critic-audio-an.md"
       },
       {
-        "commits": 2,
-        "lines": 68,
+        "commits": 3,
+        "lines": 85,
         "path": "entries/2026/2026-10-08-llm-piano-arrangement-from-a-generated-brief.md"
       },
       {
@@ -684,8 +770,8 @@
         "path": "entries/2026/2026-10-12-prefix-fit-count-cost.md"
       },
       {
-        "commits": 3,
-        "lines": 66,
+        "commits": 5,
+        "lines": 74,
         "path": "entries/2026/2026-10-12-test-fakes-hide-the-platform.md"
       },
       {
@@ -694,23 +780,48 @@
         "path": "entries/2026/2026-10-12-windows-26340-listener-state-closed.md"
       },
       {
-        "commits": 1,
-        "lines": 52,
+        "commits": 3,
+        "lines": 56,
         "path": "entries/2026/2026-10-13-atlas-testing-os-rnd-buildup.md"
       },
       {
-        "commits": 2,
-        "lines": 187,
+        "commits": 1,
+        "lines": 39,
+        "path": "entries/2026/2026-10-13-claude-code-read-deny-rules-do-not-stop-a-grep-walk.md"
+      },
+      {
+        "commits": 1,
+        "lines": 41,
+        "path": "entries/2026/2026-10-13-claude-code-starts-a-turn-before-mcp-servers-connect.md"
+      },
+      {
+        "commits": 3,
+        "lines": 131,
+        "path": "entries/2026/2026-10-13-docker-sandboxes-on-the-rig-from-signup-to-a-pinned-pilot-wo.md"
+      },
+      {
+        "commits": 3,
+        "lines": 193,
         "path": "entries/2026/2026-10-13-e5-fill-card.md"
       },
       {
-        "commits": 2,
-        "lines": 235,
+        "commits": 5,
+        "lines": 259,
         "path": "entries/2026/2026-10-13-multi-repository-atlas-research-grounding-for-the-build-up.md"
       },
       {
-        "commits": 2,
-        "lines": 71,
+        "commits": 1,
+        "lines": 51,
+        "path": "entries/2026/2026-10-13-nemo-relay-first-trial-in-the-sandbox.md"
+      },
+      {
+        "commits": 1,
+        "lines": 42,
+        "path": "entries/2026/2026-10-13-nemotron-lightning-needs-its-context-set-for-claude-code.md"
+      },
+      {
+        "commits": 4,
+        "lines": 75,
         "path": "entries/2026/2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ.md"
       },
       {
@@ -719,19 +830,174 @@
         "path": "entries/2026/2026-10-13-nvidia-pair-a-lan-inference-router-and-how-it-compares-with-.md"
       },
       {
+        "commits": 2,
+        "lines": 64,
+        "path": "entries/2026/2026-10-13-the-probe-was-the-contention-a-process-walk-inside-the-measu.md"
+      },
+      {
+        "commits": 2,
+        "lines": 74,
+        "path": "entries/2026/embeddinggemma-2.md"
+      },
+      {
         "commits": 1,
         "lines": 30,
         "path": "entries/_template.md"
       },
       {
-        "commits": 7,
-        "lines": 359,
-        "path": "experiments/atlas-mcp-utility/README.md"
+        "commits": 1,
+        "lines": 40,
+        "path": "experiments/advocate-dataset/argon-consult-round1.md"
+      },
+      {
+        "commits": 1,
+        "lines": 35,
+        "path": "experiments/advocate-dataset/argon-consult-round2-disposition.md"
+      },
+      {
+        "commits": 1,
+        "lines": 209,
+        "path": "experiments/advocate-dataset/argon-consult-round2.md"
+      },
+      {
+        "commits": 1,
+        "lines": 34,
+        "path": "experiments/advocate-dataset/argon-consult-round3-disposition.md"
+      },
+      {
+        "commits": 1,
+        "lines": 223,
+        "path": "experiments/advocate-dataset/argon-consult-round3.md"
+      },
+      {
+        "commits": 1,
+        "lines": 19,
+        "path": "experiments/advocate-dataset/argon-consult-round4-disposition.md"
+      },
+      {
+        "commits": 1,
+        "lines": 101,
+        "path": "experiments/advocate-dataset/argon-consult-round4.md"
+      },
+      {
+        "commits": 2,
+        "lines": 34,
+        "path": "experiments/advocate-dataset/argon-consult-round5-disposition.md"
+      },
+      {
+        "commits": 1,
+        "lines": 2124,
+        "path": "experiments/advocate-dataset/argon-consult-round5.md"
+      },
+      {
+        "commits": 2,
+        "lines": 35,
+        "path": "experiments/advocate-dataset/argon-consult-round6-disposition.md"
+      },
+      {
+        "commits": 1,
+        "lines": 3448,
+        "path": "experiments/advocate-dataset/argon-consult-round6.md"
+      },
+      {
+        "commits": 1,
+        "lines": 20,
+        "path": "experiments/advocate-dataset/argon-consult-round7-disposition.md"
+      },
+      {
+        "commits": 1,
+        "lines": 4114,
+        "path": "experiments/advocate-dataset/argon-consult-round7.md"
+      },
+      {
+        "commits": 1,
+        "lines": 1088,
+        "path": "experiments/advocate-dataset/argon-consult-round8.md"
+      },
+      {
+        "commits": 1,
+        "lines": 15,
+        "path": "experiments/advocate-dataset/argon-review-turn3-pilot.md"
+      },
+      {
+        "commits": 1,
+        "lines": 215,
+        "path": "experiments/advocate-dataset/brief-v1-hardened.md"
+      },
+      {
+        "commits": 11,
+        "lines": 721,
+        "path": "experiments/advocate-dataset/brief.md"
       },
       {
         "commits": 3,
-        "lines": 75,
+        "lines": 74,
+        "path": "experiments/advocate-dataset/seat-build-batch1-fixup4.md"
+      },
+      {
+        "commits": 2,
+        "lines": 79,
+        "path": "experiments/advocate-dataset/seat-build-batch1-fixup5.md"
+      },
+      {
+        "commits": 1,
+        "lines": 51,
+        "path": "experiments/advocate-dataset/seat-build-batch1-pilot-run.md"
+      },
+      {
+        "commits": 2,
+        "lines": 79,
+        "path": "experiments/advocate-dataset/seat-build-batch1-turn2-fixup.md"
+      },
+      {
+        "commits": 3,
+        "lines": 88,
+        "path": "experiments/advocate-dataset/seat-build-batch1-turn2-fixup2.md"
+      },
+      {
+        "commits": 1,
+        "lines": 74,
+        "path": "experiments/advocate-dataset/seat-build-batch1-turn2-fixup3.md"
+      },
+      {
+        "commits": 1,
+        "lines": 58,
+        "path": "experiments/advocate-dataset/seat-build-batch1-turn2.md"
+      },
+      {
+        "commits": 4,
+        "lines": 110,
+        "path": "experiments/advocate-dataset/seat-build-batch1-turn3-pilot.md"
+      },
+      {
+        "commits": 1,
+        "lines": 37,
+        "path": "experiments/advocate-dataset/seat-build-batch1-writer-swap.md"
+      },
+      {
+        "commits": 1,
+        "lines": 71,
+        "path": "experiments/agent-ab-harness/README.md"
+      },
+      {
+        "commits": 21,
+        "lines": 1356,
+        "path": "experiments/atlas-mcp-utility/README.md"
+      },
+      {
+        "commits": 6,
+        "lines": 83,
         "path": "experiments/atlas-mcp-utility/allow-list.json"
+      },
+      {
+        "commits": 2,
+        "lines": 1700,
+        "path": "experiments/atlas-mcp-utility/consults/2026-10-13-an-security-brief.md"
+      },
+      {
+        "commits": 2,
+        "lines": 94,
+        "path": "experiments/atlas-mcp-utility/consults/2026-10-13-an-security-verdicts.md"
       },
       {
         "commits": 1,
@@ -739,8 +1005,8 @@
         "path": "experiments/atlas-mcp-utility/debrief.md"
       },
       {
-        "commits": 1,
-        "lines": 165,
+        "commits": 2,
+        "lines": 210,
         "path": "experiments/atlas-mcp-utility/grade.py"
       },
       {
@@ -749,8 +1015,8 @@
         "path": "experiments/atlas-mcp-utility/key-audit.json"
       },
       {
-        "commits": 2,
-        "lines": 350,
+        "commits": 3,
+        "lines": 650,
         "path": "experiments/atlas-mcp-utility/ladder.md"
       },
       {
@@ -759,14 +1025,19 @@
         "path": "experiments/atlas-mcp-utility/prompt.md"
       },
       {
-        "commits": 4,
-        "lines": 1039,
+        "commits": 15,
+        "lines": 2109,
         "path": "experiments/atlas-mcp-utility/run.py"
       },
       {
         "commits": 2,
         "lines": 2028,
         "path": "experiments/atlas-mcp-utility/tasks.json"
+      },
+      {
+        "commits": 1,
+        "lines": 899,
+        "path": "experiments/atlas-multirepo/security-consult-ap.md"
       },
       {
         "commits": 2,
@@ -1084,6 +1355,516 @@
         "path": "experiments/e5/results/run-c.json"
       },
       {
+        "commits": 1,
+        "lines": 112,
+        "path": "experiments/embeddinggemma-2/adoption-plan.md"
+      },
+      {
+        "commits": 1,
+        "lines": 39,
+        "path": "experiments/embeddinggemma-2/argon-consult-audit-round2.md"
+      },
+      {
+        "commits": 1,
+        "lines": 34,
+        "path": "experiments/embeddinggemma-2/argon-consult-audit-round3.md"
+      },
+      {
+        "commits": 1,
+        "lines": 66,
+        "path": "experiments/embeddinggemma-2/argon-consult-audit.md"
+      },
+      {
+        "commits": 1,
+        "lines": 33,
+        "path": "experiments/embeddinggemma-2/argon-consult-embed-serve-resources-disposition.md"
+      },
+      {
+        "commits": 1,
+        "lines": 336,
+        "path": "experiments/embeddinggemma-2/argon-consult-embed-serve-resources.md"
+      },
+      {
+        "commits": 2,
+        "lines": 44,
+        "path": "experiments/embeddinggemma-2/argon-consult-multimodal-round1-disposition.md"
+      },
+      {
+        "commits": 2,
+        "lines": 97,
+        "path": "experiments/embeddinggemma-2/argon-consult-multimodal-round1.md"
+      },
+      {
+        "commits": 1,
+        "lines": 140,
+        "path": "experiments/embeddinggemma-2/argon-consult-multimodal-round2.md"
+      },
+      {
+        "commits": 1,
+        "lines": 17,
+        "path": "experiments/embeddinggemma-2/argon-consult-round1-disposition.md"
+      },
+      {
+        "commits": 1,
+        "lines": 112,
+        "path": "experiments/embeddinggemma-2/argon-consult-round1.md"
+      },
+      {
+        "commits": 1,
+        "lines": 16,
+        "path": "experiments/embeddinggemma-2/argon-consult-round2-disposition.md"
+      },
+      {
+        "commits": 1,
+        "lines": 159,
+        "path": "experiments/embeddinggemma-2/argon-consult-round2.md"
+      },
+      {
+        "commits": 1,
+        "lines": 22,
+        "path": "experiments/embeddinggemma-2/argon-consult-round3-disposition.md"
+      },
+      {
+        "commits": 1,
+        "lines": 1152,
+        "path": "experiments/embeddinggemma-2/argon-consult-round3.md"
+      },
+      {
+        "commits": 1,
+        "lines": 48,
+        "path": "experiments/embeddinggemma-2/argon-consult-rubric-disposition.md"
+      },
+      {
+        "commits": 1,
+        "lines": 51,
+        "path": "experiments/embeddinggemma-2/argon-consult-rubric.md"
+      },
+      {
+        "commits": 3,
+        "lines": 157,
+        "path": "experiments/embeddinggemma-2/design-multimodal.md"
+      },
+      {
+        "commits": 6,
+        "lines": 300,
+        "path": "experiments/embeddinggemma-2/design.md"
+      },
+      {
+        "commits": 1,
+        "lines": 114,
+        "path": "experiments/embeddinggemma-2/harness/build_corpus.py"
+      },
+      {
+        "commits": 2,
+        "lines": 39,
+        "path": "experiments/embeddinggemma-2/harness/check_grades.py"
+      },
+      {
+        "commits": 1,
+        "lines": 92,
+        "path": "experiments/embeddinggemma-2/harness/collect_queries.py"
+      },
+      {
+        "commits": 1,
+        "lines": 126,
+        "path": "experiments/embeddinggemma-2/harness/common.py"
+      },
+      {
+        "commits": 2,
+        "lines": 142,
+        "path": "experiments/embeddinggemma-2/harness/embed.py"
+      },
+      {
+        "commits": 2,
+        "lines": 96,
+        "path": "experiments/embeddinggemma-2/harness/grader-brief-v2.md"
+      },
+      {
+        "commits": 2,
+        "lines": 62,
+        "path": "experiments/embeddinggemma-2/harness/grader-brief.md"
+      },
+      {
+        "commits": 2,
+        "lines": 160,
+        "path": "experiments/embeddinggemma-2/harness/grading.py"
+      },
+      {
+        "commits": 2,
+        "lines": 66,
+        "path": "experiments/embeddinggemma-2/harness/pool.py"
+      },
+      {
+        "commits": 1,
+        "lines": 104,
+        "path": "experiments/embeddinggemma-2/harness/rank.py"
+      },
+      {
+        "commits": 3,
+        "lines": 140,
+        "path": "experiments/embeddinggemma-2/harness/score.py"
+      },
+      {
+        "commits": 2,
+        "lines": 127,
+        "path": "experiments/embeddinggemma-2/harness/validate.py"
+      },
+      {
+        "commits": 1,
+        "lines": 93,
+        "path": "experiments/embeddinggemma-2/results.md"
+      },
+      {
+        "commits": 1,
+        "lines": 10,
+        "path": "experiments/embeddinggemma-2/results/audit-agreement.json"
+      },
+      {
+        "commits": 1,
+        "lines": 44,
+        "path": "experiments/embeddinggemma-2/results/corpus-manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 29,
+        "path": "experiments/embeddinggemma-2/results/embed-A-limit512.json"
+      },
+      {
+        "commits": 1,
+        "lines": 29,
+        "path": "experiments/embeddinggemma-2/results/embed-A.json"
+      },
+      {
+        "commits": 1,
+        "lines": 29,
+        "path": "experiments/embeddinggemma-2/results/embed-B-limit512.json"
+      },
+      {
+        "commits": 1,
+        "lines": 29,
+        "path": "experiments/embeddinggemma-2/results/embed-B.json"
+      },
+      {
+        "commits": 1,
+        "lines": 9,
+        "path": "experiments/embeddinggemma-2/results/embed-B256-limit512.json"
+      },
+      {
+        "commits": 1,
+        "lines": 9,
+        "path": "experiments/embeddinggemma-2/results/embed-B256.json"
+      },
+      {
+        "commits": 3,
+        "lines": 44,
+        "path": "experiments/embeddinggemma-2/results/grading.json"
+      },
+      {
+        "commits": 1,
+        "lines": 93,
+        "path": "experiments/embeddinggemma-2/results/per-query.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 9,
+        "path": "experiments/embeddinggemma-2/results/pool-manifest-limit512.json"
+      },
+      {
+        "commits": 1,
+        "lines": 9,
+        "path": "experiments/embeddinggemma-2/results/pool-manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 113,
+        "path": "experiments/embeddinggemma-2/results/scores.json"
+      },
+      {
+        "commits": 1,
+        "lines": 23,
+        "path": "experiments/embeddinggemma-2/results/validation.json"
+      },
+      {
+        "commits": 1,
+        "lines": 30,
+        "path": "experiments/embeddinggemma-2/results/zero-relevance-lock.json"
+      },
+      {
+        "commits": 1,
+        "lines": 197,
+        "path": "experiments/interlock-relay/argon-audit-brief-round2.md"
+      },
+      {
+        "commits": 1,
+        "lines": 232,
+        "path": "experiments/interlock-relay/argon-audit-brief-round3.md"
+      },
+      {
+        "commits": 1,
+        "lines": 253,
+        "path": "experiments/interlock-relay/argon-audit-brief-round4.md"
+      },
+      {
+        "commits": 1,
+        "lines": 169,
+        "path": "experiments/interlock-relay/argon-audit-brief.md"
+      },
+      {
+        "commits": 1,
+        "lines": 1567,
+        "path": "experiments/interlock-relay/argon-code-review-stage0-round2.md"
+      },
+      {
+        "commits": 1,
+        "lines": 1858,
+        "path": "experiments/interlock-relay/argon-code-review-stage0.md"
+      },
+      {
+        "commits": 1,
+        "lines": 73,
+        "path": "experiments/interlock-relay/argon-code-review-v32.md"
+      },
+      {
+        "commits": 1,
+        "lines": 187,
+        "path": "experiments/interlock-relay/argon-consult-stage1-result.md"
+      },
+      {
+        "commits": 1,
+        "lines": 1274,
+        "path": "experiments/interlock-relay/argon-review-stage1-round2.md"
+      },
+      {
+        "commits": 1,
+        "lines": 1888,
+        "path": "experiments/interlock-relay/argon-review-stage1.md"
+      },
+      {
+        "commits": 5,
+        "lines": 262,
+        "path": "experiments/interlock-relay/design.md"
+      },
+      {
+        "commits": 3,
+        "lines": 189,
+        "path": "experiments/interlock-relay/stage0/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 245,
+        "path": "experiments/interlock-relay/stage0/cases.py"
+      },
+      {
+        "commits": 1,
+        "lines": 244,
+        "path": "experiments/interlock-relay/stage0/diagnose.py"
+      },
+      {
+        "commits": 1,
+        "lines": 16,
+        "path": "experiments/interlock-relay/stage0/fixtures/claude-code-wrapper.atof.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 176,
+        "path": "experiments/interlock-relay/stage0/results/run-1.json"
+      },
+      {
+        "commits": 1,
+        "lines": 176,
+        "path": "experiments/interlock-relay/stage0/results/run-2.json"
+      },
+      {
+        "commits": 1,
+        "lines": 176,
+        "path": "experiments/interlock-relay/stage0/results/run-3.json"
+      },
+      {
+        "commits": 1,
+        "lines": 176,
+        "path": "experiments/interlock-relay/stage0/results/run-4.json"
+      },
+      {
+        "commits": 1,
+        "lines": 176,
+        "path": "experiments/interlock-relay/stage0/results/run-5.json"
+      },
+      {
+        "commits": 1,
+        "lines": 176,
+        "path": "experiments/interlock-relay/stage0/results/run-6.json"
+      },
+      {
+        "commits": 3,
+        "lines": 103,
+        "path": "experiments/interlock-relay/stage1-plan.md"
+      },
+      {
+        "commits": 4,
+        "lines": 65,
+        "path": "experiments/interlock-relay/stage1/README.md"
+      },
+      {
+        "commits": 2,
+        "lines": 412,
+        "path": "experiments/interlock-relay/stage1/analyze.py"
+      },
+      {
+        "commits": 1,
+        "lines": 52,
+        "path": "experiments/interlock-relay/stage1/coldbench.py"
+      },
+      {
+        "commits": 1,
+        "lines": 57,
+        "path": "experiments/interlock-relay/stage1/hookbench.py"
+      },
+      {
+        "commits": 2,
+        "lines": 190,
+        "path": "experiments/interlock-relay/stage1/result-note.md"
+      },
+      {
+        "commits": 1,
+        "lines": 367,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b.analysis.json"
+      },
+      {
+        "commits": 1,
+        "lines": 10,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 6,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014-decode.http.json"
+      },
+      {
+        "commits": 1,
+        "lines": 24,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014.driver.json"
+      },
+      {
+        "commits": 1,
+        "lines": 24,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-companion.atof.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 68,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-companion.calls.json"
+      },
+      {
+        "commits": 1,
+        "lines": 10,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-companion.http.json"
+      },
+      {
+        "commits": 1,
+        "lines": 3,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-companion.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 138,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-decode.atof.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 42,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-decode.calls.json"
+      },
+      {
+        "commits": 1,
+        "lines": 10,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-decode.http.json"
+      },
+      {
+        "commits": 1,
+        "lines": 2,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-decode.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 979,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-import.json"
+      },
+      {
+        "commits": 1,
+        "lines": 134,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-long.atof.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 60,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-long.calls.json"
+      },
+      {
+        "commits": 1,
+        "lines": 11,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-long.http.json"
+      },
+      {
+        "commits": 1,
+        "lines": 2,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-long.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 23,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-stop.atof.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 34,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-stop.calls.json"
+      },
+      {
+        "commits": 1,
+        "lines": 2,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-stop.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 18,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-unload.atof.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 42,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-unload.calls.json"
+      },
+      {
+        "commits": 1,
+        "lines": 10,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-unload.http.json"
+      },
+      {
+        "commits": 1,
+        "lines": 2,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b-unload.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 62,
+        "path": "experiments/interlock-relay/stage1/results/relay-s1-20261014b/relay-s1-20261014b.driver.json"
+      },
+      {
+        "commits": 1,
+        "lines": 50,
+        "path": "experiments/interlock-relay/stage1/simulate.py"
+      },
+      {
+        "commits": 1,
+        "lines": 58,
+        "path": "experiments/interlock-relay/stage1/simulation.json"
+      },
+      {
+        "commits": 2,
+        "lines": 142,
+        "path": "experiments/interlock-relay/stage1/test_analyze.py"
+      },
+      {
         "commits": 5,
         "lines": 143,
         "path": "experiments/kev-judge-finetune/README.md"
@@ -1227,6 +2008,11 @@
         "commits": 4,
         "lines": 45,
         "path": "experiments/kev-judge-finetune/train.sh"
+      },
+      {
+        "commits": 1,
+        "lines": 127,
+        "path": "experiments/local-agent-relay/design.md"
       },
       {
         "commits": 1,
@@ -1384,6 +2170,86 @@
         "path": "experiments/npu-probe/retrieval-benchmark.md"
       },
       {
+        "commits": 2,
+        "lines": 24,
+        "path": "experiments/ollama-cuda-backend/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 443,
+        "path": "experiments/ollama-cuda-backend/abmine-cu1343.json"
+      },
+      {
+        "commits": 1,
+        "lines": 38,
+        "path": "experiments/ollama-cuda-backend/abmine-cu1343.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 59,
+        "path": "experiments/ollama-cuda-backend/build-0.35.1-cuda-13.4.1.md"
+      },
+      {
+        "commits": 1,
+        "lines": 11,
+        "path": "experiments/ollama-cuda-backend/build-0.40.4-cuda-13.4.1.cmd"
+      },
+      {
+        "commits": 2,
+        "lines": 80,
+        "path": "experiments/ollama-cuda-backend/build-0.40.4-cuda-13.4.1.md"
+      },
+      {
+        "commits": 1,
+        "lines": 17,
+        "path": "experiments/ollama-cuda-backend/build-0.40.4-cuda-13.4.3.cmd"
+      },
+      {
+        "commits": 2,
+        "lines": 69,
+        "path": "experiments/ollama-cuda-backend/build-0.40.4-cuda-13.4.3.md"
+      },
+      {
+        "commits": 1,
+        "lines": 667,
+        "path": "experiments/ollama-cuda-backend/diag_test-v3-to-v4.diff"
+      },
+      {
+        "commits": 1,
+        "lines": 440,
+        "path": "experiments/ollama-cuda-backend/diag_test-v4-draft.py"
+      },
+      {
+        "commits": 1,
+        "lines": 44,
+        "path": "experiments/ollama-cuda-backend/run-build.ps1"
+      },
+      {
+        "commits": 1,
+        "lines": 73,
+        "path": "experiments/ollama-cuda-backend/sandbox-plan-v1.md"
+      },
+      {
+        "commits": 1,
+        "lines": 30,
+        "path": "experiments/ollama-cuda-backend/sandbox-record-cu1343.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 60,
+        "path": "experiments/ollama-cuda-backend/sandbox-result-cu1343.md"
+      },
+      {
+        "commits": 1,
+        "lines": 312,
+        "path": "experiments/ollama-cuda-backend/sandbox_test-v2-to-v3.diff"
+      },
+      {
+        "commits": 1,
+        "lines": 328,
+        "path": "experiments/ollama-cuda-backend/sandbox_test-v3.py"
+      },
+      {
         "commits": 3,
         "lines": 192,
         "path": "experiments/openjev-vs-jev/README.md"
@@ -1512,6 +2378,31 @@
         "commits": 1,
         "lines": 1,
         "path": "experiments/stage1-role-eval/results/2026-10-10-sealed-baseline-k.json"
+      },
+      {
+        "commits": 1,
+        "lines": 62,
+        "path": "experiments/t10-variety/argon-brief-claims.md"
+      },
+      {
+        "commits": 2,
+        "lines": 104,
+        "path": "experiments/t10-variety/brief-2-trait-tested.md"
+      },
+      {
+        "commits": 6,
+        "lines": 219,
+        "path": "experiments/t10-variety/brief-3-multipack.md"
+      },
+      {
+        "commits": 1,
+        "lines": 123,
+        "path": "experiments/t10-variety/brief.md"
+      },
+      {
+        "commits": 3,
+        "lines": 90,
+        "path": "experiments/t10-variety/seat-build-roleset-0.2.0.md"
       },
       {
         "commits": 9,
@@ -2500,6 +3391,11 @@
       },
       {
         "commits": 1,
+        "lines": 35,
+        "path": "instruments/agent-ab-harness.md"
+      },
+      {
+        "commits": 1,
         "lines": 31,
         "path": "instruments/aspire-sft-experiment.md"
       },
@@ -2509,14 +3405,19 @@
         "path": "instruments/aspire-si.md"
       },
       {
-        "commits": 2,
-        "lines": 53,
+        "commits": 4,
+        "lines": 57,
         "path": "instruments/atlas.md"
       },
       {
         "commits": 1,
         "lines": 21,
         "path": "instruments/cross-family-rerate.md"
+      },
+      {
+        "commits": 5,
+        "lines": 134,
+        "path": "instruments/docker-sandboxes.md"
       },
       {
         "commits": 1,
@@ -2529,8 +3430,8 @@
         "path": "instruments/intel-npu.md"
       },
       {
-        "commits": 2,
-        "lines": 76,
+        "commits": 3,
+        "lines": 84,
         "path": "instruments/nemo-relay.md"
       },
       {
@@ -2604,8 +3505,8 @@
         "path": "instruments/web-research.md"
       },
       {
-        "commits": 303,
-        "lines": 607,
+        "commits": 400,
+        "lines": 801,
         "path": "mcptoolshop_rnd/__init__.py"
       },
       {
@@ -2614,8 +3515,13 @@
         "path": "mcptoolshop_rnd/__main__.py"
       },
       {
-        "commits": 5,
-        "lines": 234,
+        "commits": 1,
+        "lines": 430,
+        "path": "mcptoolshop_rnd/abmine.py"
+      },
+      {
+        "commits": 6,
+        "lines": 273,
         "path": "mcptoolshop_rnd/cli.py"
       },
       {
@@ -2854,8 +3760,8 @@
         "path": "site/src/content.config.ts"
       },
       {
-        "commits": 1,
-        "lines": 95,
+        "commits": 3,
+        "lines": 165,
         "path": "site/src/content/docs/briefs/agent-tracing-nemo-relay.md"
       },
       {
@@ -2867,6 +3773,11 @@
         "commits": 1,
         "lines": 67,
         "path": "site/src/content/docs/briefs/cuda-13-4.md"
+      },
+      {
+        "commits": 3,
+        "lines": 81,
+        "path": "site/src/content/docs/briefs/docker-sandboxes.md"
       },
       {
         "commits": 1,
@@ -2909,6 +3820,11 @@
         "path": "site/src/content/docs/briefs/sung-vocal-timing-and-pitch.md"
       },
       {
+        "commits": 4,
+        "lines": 94,
+        "path": "site/src/content/docs/briefs/taking-size-words-literally.md"
+      },
+      {
         "commits": 2,
         "lines": 84,
         "path": "site/src/content/docs/briefs/verifier-calibration.md"
@@ -2919,13 +3835,33 @@
         "path": "site/src/content/docs/briefs/verifier-training-data.md"
       },
       {
+        "commits": 1,
+        "lines": 67,
+        "path": "site/src/content/docs/handbook/ab-dataminer.md"
+      },
+      {
+        "commits": 2,
+        "lines": 70,
+        "path": "site/src/content/docs/handbook/ab-experiments.md"
+      },
+      {
         "commits": 2,
         "lines": 95,
         "path": "site/src/content/docs/handbook/architecture.md"
       },
       {
         "commits": 1,
-        "lines": 54,
+        "lines": 93,
+        "path": "site/src/content/docs/handbook/dataset-builds.md"
+      },
+      {
+        "commits": 2,
+        "lines": 63,
+        "path": "site/src/content/docs/handbook/diagnose-then-fix.md"
+      },
+      {
+        "commits": 4,
+        "lines": 62,
         "path": "site/src/content/docs/handbook/experiments.md"
       },
       {
@@ -2944,9 +3880,14 @@
         "path": "site/src/content/docs/handbook/index.md"
       },
       {
-        "commits": 3,
-        "lines": 164,
+        "commits": 4,
+        "lines": 177,
         "path": "site/src/content/docs/handbook/reference.md"
+      },
+      {
+        "commits": 1,
+        "lines": 120,
+        "path": "site/src/content/docs/handbook/relevance-grading.md"
       },
       {
         "commits": 1,
@@ -2980,7 +3921,27 @@
       },
       {
         "commits": 1,
-        "lines": 118,
+        "lines": 83,
+        "path": "site/src/content/docs/newsletter/issue-06.md"
+      },
+      {
+        "commits": 1,
+        "lines": 62,
+        "path": "site/src/content/docs/newsletter/issue-07.md"
+      },
+      {
+        "commits": 4,
+        "lines": 74,
+        "path": "site/src/content/docs/newsletter/issue-08.md"
+      },
+      {
+        "commits": 2,
+        "lines": 89,
+        "path": "site/src/content/docs/newsletter/issue-09.md"
+      },
+      {
+        "commits": 2,
+        "lines": 129,
         "path": "site/src/content/docs/watch/2026-10-13.md"
       },
       {
@@ -3010,8 +3971,33 @@
       },
       {
         "commits": 1,
+        "lines": 6,
+        "path": "test_agent_ab_harness_grade.py}"
+      },
+      {
+        "commits": 1,
+        "lines": 10,
+        "path": "test_agent_ab_harness_run.py}"
+      },
+      {
+        "commits": 1,
         "lines": 0,
         "path": "tests/__init__.py"
+      },
+      {
+        "commits": 1,
+        "lines": 16,
+        "path": "tests/fixtures/abmine/cu1343-11500-excerpt.log"
+      },
+      {
+        "commits": 1,
+        "lines": 30,
+        "path": "tests/fixtures/abmine/cu1343-record.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 35,
+        "path": "tests/fixtures/atlas_mcp_utility/init-local-A.json"
       },
       {
         "commits": 1,
@@ -3032,6 +4018,31 @@
         "commits": 1,
         "lines": 109,
         "path": "tests/fixtures/atlas_mcp_utility/init-wide-B.json"
+      },
+      {
+        "commits": 1,
+        "lines": 25,
+        "path": "tests/fixtures/atlas_mcp_utility/shakedown-2/CF09-A1.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 8,
+        "path": "tests/fixtures/atlas_mcp_utility/shakedown-2/RC03-A1.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 8,
+        "path": "tests/fixtures/atlas_mcp_utility/shakedown-2/RC03-A2.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 8,
+        "path": "tests/fixtures/atlas_mcp_utility/shakedown-2/RC03-B1.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 8,
+        "path": "tests/fixtures/atlas_mcp_utility/shakedown-2/RC03-B2.jsonl"
       },
       {
         "commits": 1,
@@ -3095,12 +4106,17 @@
       },
       {
         "commits": 1,
-        "lines": 176,
+        "lines": 358,
+        "path": "tests/test_abmine.py"
+      },
+      {
+        "commits": 2,
+        "lines": 204,
         "path": "tests/test_atlas_mcp_utility_grade.py"
       },
       {
-        "commits": 4,
-        "lines": 539,
+        "commits": 15,
+        "lines": 1240,
         "path": "tests/test_atlas_mcp_utility_run.py"
       },
       {
@@ -3169,58 +4185,79 @@
     "level": "low",
     "reason": "fewer than 25 source files reach 10 revisions in the window"
   },
-  "generatedAt": "2026-10-13T18:38:14.298Z",
+  "generatedAt": "2026-10-15T18:37:17.467Z",
   "generatedFrom": {
-    "commit": "c719cef9967f4c00852073b6e1c5b5efdcdf0de8"
+    "commit": "f579aa3956b7d63b77f05309bd925376deabbcbe"
   },
   "pairs": [
     {
       "a": "CHANGELOG.md",
       "b": "mcptoolshop_rnd/__init__.py",
-      "either": 332,
-      "shared": 302,
-      "strength": 0.909639
+      "either": 429,
+      "shared": 399,
+      "strength": 0.93007
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/page.json",
-      "either": 23,
-      "shared": 23,
+      "either": 24,
+      "shared": 24,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/statistics.json",
-      "either": 23,
-      "shared": 23,
+      "either": 24,
+      "shared": 24,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/structure.json",
-      "either": 23,
-      "shared": 23,
+      "either": 24,
+      "shared": 24,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/statistics.json",
-      "either": 23,
-      "shared": 23,
+      "either": 24,
+      "shared": 24,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/structure.json",
-      "either": 23,
-      "shared": 23,
+      "either": 24,
+      "shared": 24,
       "strength": 1
     },
     {
       "a": "atlas/statistics.json",
       "b": "atlas/structure.json",
-      "either": 23,
-      "shared": 23,
+      "either": 24,
+      "shared": 24,
+      "strength": 1
+    },
+    {
+      "a": "experiments/atlas-mcp-utility/README.md",
+      "b": "experiments/atlas-mcp-utility/run.py",
+      "either": 22,
+      "shared": 14,
+      "strength": 0.636364
+    },
+    {
+      "a": "experiments/atlas-mcp-utility/README.md",
+      "b": "tests/test_atlas_mcp_utility_run.py",
+      "either": 22,
+      "shared": 14,
+      "strength": 0.636364
+    },
+    {
+      "a": "experiments/atlas-mcp-utility/run.py",
+      "b": "tests/test_atlas_mcp_utility_run.py",
+      "either": 15,
+      "shared": 15,
       "strength": 1
     },
     {
@@ -3241,16 +4278,16 @@
     "floor": "fallen",
     "floorHeld": false,
     "floorTrigger": "revision-depth",
-    "headDate": "2026-10-13T14:38:08-04:00",
-    "inScopeFiles": 578,
+    "headDate": "2026-10-15T14:37:02-04:00",
+    "inScopeFiles": 758,
     "pinnedStart": null,
     "priorFloor": "fallen",
-    "qualifyingCommits": 360,
+    "qualifyingCommits": 458,
     "qualifyingMinimum": 30,
     "revisions": 5,
     "shared": 10,
     "sharedFloorUsed": 3,
-    "since": "2026-04-16T18:38:08.000Z",
+    "since": "2026-04-18T18:37:02.000Z",
     "sourceExtensions": [
       ".js",
       ".mjs",
@@ -3266,7 +4303,7 @@
     ],
     "sourceFileReach": 20,
     "sourceFileRise": 25,
-    "sourceFilesReachingStrongFloor": 2,
+    "sourceFilesReachingStrongFloor": 4,
     "strength": 0.5,
     "windowDays": 180
   },

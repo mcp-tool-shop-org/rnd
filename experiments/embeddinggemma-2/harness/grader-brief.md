@@ -11,7 +11,9 @@ You are grading retrieval results for one query, under the studio's relevance-gr
 - `n`, `chunk_id`;
 - `text`, the chunk itself. Its first line is a header `[path · kind · title]`.
 
-**Read the file at most five lines at a time** (Read with `offset` and `limit: 5`). Grade those five, then read the next five. Don't read the whole file at once.
+**First count the packet's lines:** `grep -c . E:/AI/eg2-bench/grading/<QID>.jsonl` (Bash). Call that N. Every one of the N chunks gets a grade.
+
+**Then read it five lines at a time** with Read, `limit: 5` and `offset` 1, 6, 11, 16 … (offset is the 1-based line number to start from). Grade those five, then read the next five, until you have read line N. Don't read the whole file at once.
 
 ## The scale
 
@@ -42,7 +44,9 @@ Write `E:/AI/eg2-bench/grades/<QID>.jsonl`, one line per chunk, every chunk in t
 {"query_id": "<QID>", "chunk_id": 1234, "reason": "Shows the RRF fusion of BM25 and cosine top 50.", "grade": 2}
 ```
 
-`reason` is 3 to 15 words. It says **what the chunk says about the target**, not just that a word appears. Give a reason for 0s too ("about pod pricing, not the watchdog").
+`reason` is 3 to 15 words. **Count them:** 16 words is refused at the merge. It says **what the chunk says about the target**, not just that a word appears. Give a reason for 0s too ("about pod pricing, not the watchdog").
+
+**Before you reply, check your output:** `grep -c . E:/AI/eg2-bench/grades/<QID>.jsonl` must equal N. If it's short, find the missing chunk ids, grade them, and check again. A pool where every chunk is 0 is a valid result: grade them all.
 
 ## Rules
 

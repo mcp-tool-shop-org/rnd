@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.8.3.15] - 2026-10-15
+
+- EmbeddingGemma 2 text benchmark: all 100 queries graded (2,470 chunks, one fresh Sonnet grader each, 100 of 100 complete); the merged key is frozen; four queries have no relevant chunk in the corpus. Scores stay sealed. The audit consult to Argon (blind regrade of 16 queries, and a scoring rule for queries with no relevant chunk) is filed, with the grading record, the run records and the grading harness's completeness check
+
 ## [1.1.8.3.14] - 2026-10-15
 
 - Advocate fix-up 5 amended after Argon's read: the preflight reads the card while the model is loaded, the card-clear wait compares against the run's starting baseline, the shutdown path never waits or raises twice, and the preflight keeps its prompt check

@@ -1,0 +1,21 @@
+{
+ "graders": "one fresh Sonnet 5.5 agent per query. The brief's scale and rules sections are identical to the copy committed before grading (checked by git diff) and did not change during the run. Its procedure lines (count the packet, read five lines at a time, a word-count reminder, an output-count check) were tightened during wave 1, after 8 grade files had been written (l006, w001, w003-w007, w010). From wave 6 the per-query prompt also said to write the file with the Write tool.",
+ "queries": 100,
+ "chunks_graded": 2470,
+ "grade_counts": {
+  "0": 1696,
+  "1": 566,
+  "2": 208
+ },
+ "keys_sha256": "c4c35891eb588329b50166e86e559b4045d6be7d7f4a5cac4eef5d4b49417280",
+ "zero_relevance_queries": [
+  "l006",
+  "w059",
+  "w060",
+  "w068"
+ ],
+ "zero_relevance_check": "term search over all 11,525 chunks found no answer for any of them (a term search, not a full read)",
+ "completeness": "check_grades.py: every pooled chunk graded once, grade in 0/1/2, reason 1-15 words; 100 of 100 OK",
+ "audit": "16 queries to Argon, blind; agreement not yet measured",
+ "scores": "not computed; sealed until the audit consult is answered"
+}

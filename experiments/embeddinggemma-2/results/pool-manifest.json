@@ -1,0 +1,9 @@
+{
+  "seed": 20261015,
+  "depth": 10,
+  "runs": 8,
+  "queries": 100,
+  "pooled": 2470,
+  "per_query_mean": 24.7,
+  "per_query_max": 37
+}

@@ -9,19 +9,27 @@
 
 This turn fixes all of it. Load no model. The next grant's preflight measures the critic once.
 
+**Amended after Argon's read (2026-10-15):** items 1–3 are tightened below: an output cap, checks before and after each call, and a record saved before the critic loads. One of his inferences is corrected. The code picks the writer by slot (`WRITERS[slot.family]`) and never falls back to the other family. So the run's alternation of qwen3 and granite was consecutive slots, and several texts may have finished in those 786 seconds. They were lost only because the record was written at the end.
+
 ## The fix-up, in this order
 
 1. **Size the context to the prompts.**
    - Add `num_ctx` to `_complete_live` and pass it on every call.
    - Compute it from the pilot, not by guessing. Take the longest rendered writer prompt and the longest rendered critic prompt over all 26 texts, at a conservative 3 characters per token. Add each call's output budget: a brief of at most 130 words, or a critic JSON reply. Round up to a power of two, at least 2,048.
-   - Record the two values (writer, critic) in the run record.
+   - Also cap the output with `num_predict`: 512 for a writer, 256 for the critic. A writer stuck in a repetition loop then stops early instead of running to the window.
+   - Record the values (`num_ctx` and `num_predict`, for writer and critic) in the run record.
    - A test asserts that every pilot prompt plus its output budget fits its `num_ctx` by that estimate.
 2. **Catch silent truncation.**
-   - Ollama cuts a prompt longer than `num_ctx` without an error. After every live call, compare the reply's `prompt_tokens` with `num_ctx`.
-   - If the prompt filled the window (at least `num_ctx` minus the output budget), stop the run and record it as a truncation, never as a draft.
-   - Test it through the loopback server, with a reply that reports a full window.
+   - Ollama cuts a prompt longer than `num_ctx` without an error. Check on both sides of the call:
+     - **before:** refuse a prompt whose estimated tokens plus `num_predict` don't fit `num_ctx`;
+     - **after:** refuse a reply whose `done_reason` isn't `"stop"`, or whose `prompt_eval_count` plus `eval_count` reaches `num_ctx`.
+   - A refusal stops the run and is recorded as a truncation, never as a draft.
+   - Test it through the loopback server. Its fake replies carry `prompt_eval_count`, `eval_count` and `done_reason`, one of them a full window and one `"length"`.
 3. **Keep the record as you go.**
-   - Append each finished text's full record (ledger, prose, checks, attempts, critic payload) to `pilot.jsonl` in the run directory, flushed, as soon as it's done.
+   - Append to `pilot.jsonl` in the run directory, flushed, at two points for every text:
+     - **after its writer attempts and before the critic loads:** the ledger, every attempt's prose, and each attempt's failing check names and reasons;
+     - **after the critic replies:** the critic's payload.
+   - Wrap both in `try/finally`, so a stop while the critic loads still leaves the drafts on disk.
    - `pilot.json` and `read.md` are still written at the end, from that file.
    - `pilot --report <run dir>` works from `pilot.jsonl` alone, so a stopped run can still be read.
    - Test it: a run made to stop partway leaves a readable `pilot.jsonl` and a `read.md` built from it.

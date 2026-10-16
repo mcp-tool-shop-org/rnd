@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.1.3] - 2026-10-16
+
+- stage1-regeneration: decisions recorded; regenerate all rows under the proof rule
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.10.1.2] - 2026-10-16
 
 - stage1-regeneration: the Kimi seat ran through Ollama Cloud, not the Kimi app

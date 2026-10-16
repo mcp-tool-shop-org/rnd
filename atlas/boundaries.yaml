@@ -32,6 +32,10 @@ boundaries:
     globs:
       - instruments/**
     role: docs
+  - name: licences
+    globs:
+      - licences/**
+    role: data
   - name: mcptoolshop_rnd
     globs:
       - mcptoolshop_rnd/**

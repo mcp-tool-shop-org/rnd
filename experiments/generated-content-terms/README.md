@@ -95,6 +95,7 @@ load-bearing clause at its live URL. A claim counts only where R&D's re-read con
 | Anthropic | **"Consumer (Pro/Max) bars all commercial use"** | **wrong.** The consumer terms (effective 8 October 2025) say "Use of our Services for evaluation purposes are for your personal, non-commercial use only", which applies to evaluation access only. The terms do bar using the Services "to develop any products or services that compete with our Services", including to "develop or train any artificial intelligence or machine learning algorithms or models". | consumer terms, sections 2 and 3 |
 
 **What the confirmed clauses mean under the proof rule:**
+- **(Superseded for Anthropic, 2026-10-16:** Help Center 12326764 allows Claude outputs to train non-competing specialized tools, never as targets. The current verdicts for every page are in [`licences/registry.json`](../../licences/registry.json).)
 - **Training data, U2, is barred for all four providers.** No AI-written text from Google, xAI, Moonshot or
   Anthropic may train a studio model. Stage 1's frozen training set (written by Grok and Kimi) and its apply items
   (written by Argon) can't train the student as things stand.

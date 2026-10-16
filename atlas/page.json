@@ -73,29 +73,65 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 0,
-      "changed": 3,
+      "added": 29,
+      "changed": 11,
       "moved": 0,
-      "parts": 3,
+      "parts": 6,
       "removed": 0
     },
     "items": [
       {
-        "kind": "door",
-        "sentence": "Release now also starts by hand.",
+        "kind": "landing",
+        "sentence": "experiments/ollama-cuda-backend/diag/ is now written by experiments/ollama-cuda-backend/diag/diag_test.py.",
         "subjects": [
-          ".github/workflows/release.yml"
+          "experiments/ollama-cuda-backend/diag/",
+          "experiments/ollama-cuda-backend/diag/diag_test.py"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "experiments/ollama-cuda-backend/diag/ is now read by tests/test_diag_harness.py.",
+        "subjects": [
+          "experiments/ollama-cuda-backend/diag/",
+          "tests/test_diag_harness.py"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "experiments/ollama-cuda-backend/diag/diag-record.jsonl is now read by experiments/ollama-cuda-backend/diag/diag_test.py.",
+        "subjects": [
+          "experiments/ollama-cuda-backend/diag/diag-record.jsonl",
+          "experiments/ollama-cuda-backend/diag/diag_test.py"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "And 3 more new writers and readers of places.",
+        "subjects": []
+      },
+      {
+        "kind": "unassigned",
+        "sentence": "scripts/colab/probe.py is new and belongs to no part, so atlas check fails on it against the previous map.",
+        "subjects": [
+          "scripts/colab/probe.py"
+        ]
+      },
+      {
+        "kind": "unassigned",
+        "sentence": "scripts/colab/rates.sh is new and belongs to no part, so atlas check fails on it against the previous map.",
+        "subjects": [
+          "scripts/colab/rates.sh"
         ]
       },
       {
         "kind": "counts",
-        "sentence": "3 files changed content, across 3 parts.",
+        "sentence": "29 files added and 11 changed content, across 6 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "f579aa3956b7d63b77f05309bd925376deabbcbe",
-      "generatedAt": "2026-10-15T18:37:17.467Z"
+      "commit": "47860ef1e62b6b9536876fb54b67275508c9d874",
+      "generatedAt": "2026-10-15T18:47:44.350Z"
     },
     "unchanged": false
   },
@@ -136,9 +172,9 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 4 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "47860ef1e62b6b9536876fb54b67275508c9d874",
+  "commit": "ac6167721f2bfbc799ef36fd109fae3f1a3f1e14",
   "defaultBranch": "main",
-  "derived": "13 parts, mostly Python (100 files), shell (14), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "13 parts, mostly Python (104 files), shell (15), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -176,12 +212,12 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 14
+          "files": 15
         },
         {
           "boundary": "experiments",
           "depth": 1,
-          "files": 4
+          "files": 6
         }
       ],
       "runs": [
@@ -392,6 +428,16 @@
       ]
     },
     {
+      "place": "experiments/ollama-cuda-backend/diag/",
+      "sources": [
+        "experiments/ollama-cuda-backend/diag/diag_test.FROZEN.sha256",
+        "experiments/ollama-cuda-backend/diag/diag_test.py"
+      ],
+      "writers": [
+        "experiments/ollama-cuda-backend/diag/diag_test.py (a test)"
+      ]
+    },
+    {
       "place": "experiments/verifier-gold/crossfamily/",
       "writers": [
         "experiments/verifier-gold/crossfamily/run_labeller.py"
@@ -428,7 +474,7 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-15T18:47:44.350Z",
+  "generatedAt": "2026-10-16T19:25:25.361Z",
   "limits": [
     "9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.",
     "13 writes and 20 reads use paths built at run time and are not named here.",
@@ -437,6 +483,7 @@
     "3 reads go to the directory the command is run in (entries and instruments), not to this repository.",
     "1 read goes to the directory the command is run in or a path its caller passes, not to this repository.",
     "1 read goes to the home directory (.claude/), not to this repository.",
+    "2 files belong to no part: scripts/colab/probe.py and scripts/colab/rates.sh.",
     "Statistics confidence is low: fewer than 25 source files reach 10 revisions in the window."
   ],
   "mainDoor": ".github/workflows/ci.yml",
@@ -490,10 +537,10 @@
   "startReason": "This path follows rnd (a command people run) from its entry, since CI runs only tests and checks.",
   "summary": "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only).",
   "summaryFrom": "person",
-  "testFiles": 41,
+  "testFiles": 44,
   "testedBy": {
     "experiments": 6,
-    "mcptoolshop_rnd": 8,
+    "mcptoolshop_rnd": 11,
     "rnd": 1
   },
   "unnamedWrites": 13,
@@ -556,7 +603,7 @@
   "untested": [],
   "untestedNote": [
     "the repository root holds only shell files, which this map does not read, so whether a test touches it cannot be seen.",
-    "3 test files run in no workflow: experiments/cuda-graphs/test_graphed_heads.py, experiments/data-designer/tests/test_lockdown.py and experiments/interlock-relay/stage1/test_analyze.py."
+    "5 test files run in no workflow: experiments/cuda-graphs/test_graphed_heads.py, experiments/data-designer/tests/test_lockdown.py, experiments/interlock-relay/stage1/test_analyze.py and 2 more."
   ],
-  "written": 15
+  "written": 16
 }

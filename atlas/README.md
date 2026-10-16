@@ -1,17 +1,22 @@
 # rnd: how it works
 
-Mapped at 2026-10-15 from commit 47860ef by Atlas 1.24.0.
+Mapped at 2026-10-16 from commit ac61677 by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-13 parts, mostly Python (100 files), shell (14), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
+13 parts, mostly Python (104 files), shell (15), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-15 (f579aa3)
+## What changed since 2026-10-15 (47860ef)
 
-- Release now also starts by hand.
-- 3 files changed content, across 3 parts.
+- experiments/ollama-cuda-backend/diag/ is now written by experiments/ollama-cuda-backend/diag/diag_test.py.
+- experiments/ollama-cuda-backend/diag/ is now read by tests/test_diag_harness.py.
+- experiments/ollama-cuda-backend/diag/diag-record.jsonl is now read by experiments/ollama-cuda-backend/diag/diag_test.py.
+- And 3 more new writers and readers of places.
+- scripts/colab/probe.py is new and belongs to no part, so atlas check fails on it against the previous map.
+- scripts/colab/rates.sh is new and belongs to no part, so atlas check fails on it against the previous map.
+- 29 files added and 11 changed content, across 6 parts.
 
 ## What comes in
 
@@ -23,7 +28,7 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 ## What happens through CI
 
 1. The workflow runs verify.sh in the repository root and tests/ in tests; it checks mcptoolshop_rnd/ in mcptoolshop_rnd and rnd/ in rnd.
-2. That reaches experiments (4 files).
+2. That reaches experiments (6 files).
 3. It writes to entries/, experiments/charts/, instruments/ and site/public/charts/.
 4. It uploads coverage to Codecov.
 
@@ -68,7 +73,7 @@ Every code part this map reads is imported by at least one test.
 
 the repository root holds only shell files, which this map does not read, so whether a test touches it cannot be seen.
 
-3 test files run in no workflow: experiments/cuda-graphs/test_graphed_heads.py, experiments/data-designer/tests/test_lockdown.py and experiments/interlock-relay/stage1/test_analyze.py.
+5 test files run in no workflow: experiments/cuda-graphs/test_graphed_heads.py, experiments/data-designer/tests/test_lockdown.py, experiments/interlock-relay/stage1/test_analyze.py and 2 more.
 
 ## Written but never read
 
@@ -96,6 +101,7 @@ No two parts export a helper that looks alike.
 - **experiments/natural-errors/data/corrections.json** is written by experiments/natural-errors/build_corrections.py.
 - **experiments/natural-errors/data/split.json** is written once by experiments/natural-errors/make_split.py when absent.
 - **experiments/ollama-cuda-backend/** is written by experiments/ollama-cuda-backend/diag_test-v4-draft.py, except experiments/ollama-cuda-backend/diag_test-v4-draft.py, which it reads and people write.
+- **experiments/ollama-cuda-backend/diag/** is written by experiments/ollama-cuda-backend/diag/diag_test.py (a test), except experiments/ollama-cuda-backend/diag/diag_test.FROZEN.sha256 and experiments/ollama-cuda-backend/diag/diag_test.py, which it reads and people write.
 - **experiments/verifier-gold/crossfamily/** is written by experiments/verifier-gold/crossfamily/run_labeller.py.
 - **experiments/verifier-gold/crossfamily/blind_in.json** is written by experiments/verifier-gold/crossfamily/make_sample.py.
 - **experiments/verifier-gold/crossfamily/blind_key.json** is written by experiments/verifier-gold/crossfamily/make_sample.py.
@@ -122,6 +128,7 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 - 3 reads go to the directory the command is run in (entries and instruments), not to this repository.
 - 1 read goes to the directory the command is run in or a path its caller passes, not to this repository.
 - 1 read goes to the home directory (.claude/), not to this repository.
+- 2 files belong to no part: scripts/colab/probe.py and scripts/colab/rates.sh.
 - Statistics confidence is low: fewer than 25 source files reach 10 revisions in the window.
 
 Regenerate with `npx --yes @dogfood-lab/atlas map`.

@@ -11,49 +11,42 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.9] - 2026-10-16
+
+- stage1-role-eval note: amendment B disclosure corrected (5.0 / 6.4), per-seed hold (aspire-si#150)
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.10.0.8] - 2026-10-15
 
 - stage1-role-eval: note on the NO-ROLE token gap (0.624) and exposure, pre-freeze
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 - Updated experiment `stage1-role-eval`
 
 ## [1.1.10.0.7] - 2026-10-15
 
 - stage1-role-eval: note on NO-ROLE's closed-form E quiz (Argon's finding 5a)
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 - Updated experiment `stage1-role-eval`
 
 ## [1.1.10.0.6] - 2026-10-15
 
 - stage1-role-eval amendment D: wording fix (A_0 from all of DEV's decided items; T14 cannot_tell items need no twin)
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 - Updated experiment `stage1-role-eval`
 
 ## [1.1.10.0.5] - 2026-10-15
 
 - stage1-role-eval: amendment D, the keep rule's lesson clause for T14 and T16 (the maintainer's decision after Argon's review)
-- Added experiment `agent-ab-harness`
-- Added experiment `nemo-relay-trial`
 - Updated experiment `stage1-role-eval`
 
 ## [1.1.10.0.4] - 2026-10-15
 
 - dataset-desk: the design record filed (design, Argon passes 2-3 and the follow-up); the code moved to mcp-tool-shop-org/dataset-desk v0.1.0; instrument file
 - Added `dataset-desk`: dataset-desk — review a visual dataset before it trains or tests anything
-- Added experiment `agent-ab-harness`
 - Added experiment `dataset-desk`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.10.0.3] - 2026-10-15
 
 - embeddinggemma-2: the multimodal design, revision 3, approved (desk-checked queries, Path A, the acceptance tests)
-- Added experiment `agent-ab-harness`
 - Added experiment `dataset-desk`
 - Updated experiment `embeddinggemma-2`
-- Added experiment `nemo-relay-trial`
 
 ## [1.1.10.0.2] - 2026-10-15
 

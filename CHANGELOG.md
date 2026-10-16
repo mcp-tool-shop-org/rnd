@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.2.2] - 2026-10-16
+
+- stage1-regeneration: BUILD-SPEC B2 amended with R&D's domain, ESCALATE-mapping and frame rulings
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.10.2.1] - 2026-10-16
 
 - licences: the Census NAICS 2022 entry for role-set's domain table; PDF policies read; archive links kept

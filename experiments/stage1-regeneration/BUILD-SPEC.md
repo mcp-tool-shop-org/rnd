@@ -178,6 +178,20 @@ critic must therefore be loaded at the same moment, and both behind `127.0.0.1` 
 - Anything else the inventory finds is fixed the same way: provider text that reaches a prompt or a row is removed,
   replaced from an allowed source, or rewritten by the maintainer.
 
+### B9. Provenance on every text-bearing source
+
+- **Every human-language constant, template, pack, catalogue entry and role-pack file** that reaches a prompt or a
+  row gets a `provenance` record: the writer's family (maintainer, a named proven model, Claude, or a code
+  derivation) and the PR that added it. That covers render.py's TEMPLATES and CLAUSES, recipes.py's PACKS, the
+  prompts.py constants, trait_steps, critic.py, and the pack's lessons and amendments. The record sits beside the
+  text, or in a manifest keyed by name and hash.
+- **`role-set check` refuses** any such source with no provenance record, or whose writer is on the deny list
+  (Kimi, Grok, Argon, or any provider not proven for that use). A Claude-written source is refused wherever it
+  would fill a target field.
+- **Seat commits carry a `Seat:` trailer** (for example `Seat: Grok`), so authorship can be read from git, not
+  inferred from PR tags.
+- *Source: the role-set inventory agent's debrief, 2026-10-16.*
+
 ### B8. Tests and coverage
 
 - **A unit test for each item above,** including the refusals: a same-family critic, an entry without proof, a

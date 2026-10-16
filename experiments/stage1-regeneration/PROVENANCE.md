@@ -100,6 +100,28 @@ means Argon's findings were design input and Claude wrote the code. That's not A
 - **Google.** The consumer ToS's "using AI-generated content from our services to develop machine learning models or
   related AI technology" has no competition qualifier. Antigravity's terms incorporate it. Argon-written pipeline
   code is barred on the literal text.
-- **xAI.** The AUP bars distilling Outputs outright. Its "develop … machine learning models or any products or
-  services that compete" turns on whether "that compete" reaches "machine learning models". **Not proven.**
-- **Kimi** (consumer app): "non-commercial, personal research, and study" only. **Not proven** for studio tooling.
+- **xAI.** Re-read by R&D at the live page (consumer terms, last updated 2026-10-12; they cover Grok Build). Input
+  and Output are "User Content", and "you retain your ownership rights to the User Content". **One condition:**
+  "When using Output … you are required to … attribute your generation of the Output to the Service, as detailed
+  in our Brand Guidelines". Those ask for "Written with Grok" or "Created with Grok" "wherever the
+  Grok-generated material is published or distributed". The AUP bars distilling Outputs, and "develop … machine
+  learning models or any products or services that compete".
+  - **Interlock** (inference and measurement tooling): it develops no model and doesn't compete, so Grok's code
+    there is **proven, on condition of attribution.** A "Written with Grok" notice in the repo (README or NOTICE)
+    meets it. The same applies to other published Grok work, such as role-set's README (#35).
+  - **role-set's generator** (#49, #53, #54) is code for developing an ML model, so the AUP's reach is the
+    question. **Not proven:** rewrite it, as the spec's fix table says.
+- **Kimi** (corrected 2026-10-16). Interlock's Kimi seat ran in **Zed through Ollama Cloud** (`kimi-k3:cloud`,
+  earlier `kimi-k2.6:cloud`; read from Zed's settings), **not the Kimi app.** So the app's non-commercial clause
+  doesn't apply. What applies:
+  - **Ollama's terms** (last updated May 2026): "You retain ownership of content you create using our services"
+    and "We claim no ownership over your inputs or outputs". The only restriction is "Use our services to develop
+    competing products". Interlock supervises local Ollama and doesn't compete with it.
+  - **The Kimi K3 License** (MoonshotAI/Kimi-K3, 2026): MIT-style, commercial use allowed. Its thresholds (a Model
+    as a Service business over $20M in revenue, a product over 100M monthly users or $20M a month) exempt
+    internal use. It's silent on outputs.
+  - **The Kimi K2.6 licence** ("Modified MIT License", 2026; it covers the earlier interlock PRs): MIT. Its only
+    modification is to display "Kimi K2.6" on a commercial product with over 100M monthly users or $20M a month
+    in revenue. No output clause.
+  - **R&D's reading:** proven for code use. Ollama's ownership sentence is the affirmative text, and no clause
+    restricts interlock's use.

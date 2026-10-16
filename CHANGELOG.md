@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.8] - 2026-10-15
+
+- stage1-role-eval: note on the NO-ROLE token gap (0.624) and exposure, pre-freeze
+- Added experiment `agent-ab-harness`
+- Added experiment `nemo-relay-trial`
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.10.0.7] - 2026-10-15
 
 - stage1-role-eval: note on NO-ROLE's closed-form E quiz (Argon's finding 5a)

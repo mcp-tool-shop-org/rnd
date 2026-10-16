@@ -11,9 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
-## [1.1.10.2.2] - 2026-10-16
+## [1.1.10.2.3] - 2026-10-16
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output
+
+## [1.1.10.2.2] - 2026-10-16
+
+- stage1-regeneration: BUILD-SPEC B2 amended with R&D's domain, ESCALATE-mapping and frame rulings
+- Updated experiment `stage1-regeneration`
 
 ## [1.1.10.2.1] - 2026-10-16
 

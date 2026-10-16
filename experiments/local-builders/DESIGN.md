@@ -5,7 +5,7 @@
 
 **Status:** drafted by the Publisher, 2026-10-16; reviewed and filed by R&D the same day with the changes below.
 **Nothing runs** until Argon has reviewed the design and the maintainer has approved it. The maintainer has read
-section 1's first draft. Change 2 below alters its second sentence.
+section 1's first draft. Change 2 below altered its second sentence, and **amendment A supersedes change 2.**
 
 **R&D's review changes** (2026-10-16):
 1. **The screen runs on Colab, on one pinned A100-40GB,** not the 5090 (section 6). This corrects R&D's earlier
@@ -37,6 +37,47 @@ section 1's first draft. Change 2 below alters its second sentence.
    between blocks. A local runtime has no service drift, so blocks are acceptable; the A/B template's
    interleaving rule is about hosted services.
 
+**Amendment A (2026-10-16): J1's control is role-set itself.** The proof rule
+(`experiments/generated-content-terms`) leaves no provider-written or Claude-written control: evaluation use isn't
+proven for any provider. The maintainer proposed the replacement and left the call to the Publisher, who ruled it;
+R&D settles the details:
+1. **Incumbent:** role-set's full pipeline (plan → write → critic → assemble → gates), served through interlock,
+   with the writer and critic pair the Stage 1 regeneration uses (`experiments/stage1-regeneration/PLAN.md`): today
+   Muse-Glimmer-30B writing and Nemotron-3.5-Lightning-30B-A3B critiquing, or a bigger proven pair if Argon's
+   answer and R&D's re-read establish one. Its outputs come only from licence-proven models.
+2. **Challengers:** the same pipeline, prompts (pinned hashes), slot plans, gates, retry cap and critic. **Only the
+   writer model changes.** The harness is fixed, so the writer is the variable (A/B template, section 3).
+3. **Writer eligibility:** J1 now selects the regeneration's writer, so a challenger must itself be licence-proven.
+   The Apache-2.0-only models (Qwen, Gemma 4, Granite) enter J1 only if the maintainer rules that Apache-2.0's grant
+   is proof enough. That ruling bears on J2 too, which uses model-written code.
+4. **The critic differs from every writer it judges.** The critic is held fixed across arms. A challenger from the
+   critic's family (Nemotron, today) is scored only on the measures the critic can't touch: its **first drafts**
+   through the gates, and the blind key check of those first drafts, against the incumbent's first drafts. Its
+   after-retry rate and cost per accepted item are reported, marked "same-family critic", and never ranked. Wave 2
+   gives it a different-family critic if a third proven family exists.
+5. **Placement:** J1 runs on the regeneration's card, serving stack and pins (set after Argon's answer and the
+   pilot), at the card's full memory. The 26 GB rig-matched cap (change 1) now applies to J2 only. A writer is
+   selected for where it will actually write.
+6. **Blinding stays.**
+   - A script strips the writer, critic, model and arm fields and assigns item ids from a seed recorded in the
+     receipts.
+   - The fresh grader keys the shuffled pool: the incumbent's 30 plus each challenger's 30. It sees final items
+     only, never critic feedback or retry transcripts.
+   - The id map stays sealed until the grader's keys are committed. Then R&D audits every disagreement and a 10%
+     sample, as before.
+   - The grader's keys are pass/fail judgements on study data, and no grader text enters a row.
+7. **The self-learning split.**
+   - Every record in role-set's `defects.jsonl` and the observation store carries a required `partition` field.
+   - **`production`** holds the regeneration's own runs, by the proven pair. Their failures may inform the
+     generator's gates, lessons and prompts.
+   - **`trial:j1-wave1`** holds every J1 run, the incumbent's included, so the arms are symmetric. Trial records
+     are for analysis. A defect class seen there may motivate a code fix to a gate, but no trial text is ever
+     copied into prompts, lessons, examples or rows.
+   - **Promotion** from trial to production is an R&D ruling per batch, and only for records written by proven
+     models. Never for an unproven model's records.
+8. **The incumbent meets the same floor.** If its J1 rate falls below 50%, the regeneration halts (andon) and the
+   report goes to the maintainer before any full run.
+
 **Sources:**
 - the maintainer's goal (2026-10-16);
 - Browser Argon rounds 1–2;
@@ -57,14 +98,14 @@ section 1's first draft. Change 2 below alters its second sentence.
 ## 1. The check in three sentences (for the maintainer first)
 
 1. **Job kinds and decisions:**
-   - **J1:** which local model, if any, can write Stage 1-style apply items (schema-bound data with honest flags) well enough to sit beside a cloud-built control.
+   - **J1:** which licence-proven local model writes Stage 1-style apply items (schema-bound data with honest flags) best inside role-set, against role-set's own incumbent pair (amendment A). The winner writes the regeneration.
    - **J2:** which local models can fix a small real bug in our repos (make a red test pass without breaking the suite).
    - Wave 1 is a **screen**. It decides which models go on to Wave 2, not which model wins.
 2. **Candidates:**
-   - six local models, each through Ollama in its own chat template and tool format;
-   - J1 runs through a thin Python driver on Ollama's native chat API, J2 through Aider;
-   - the bar for J1 is Antigravity Argon's first-round 30 items on the same slots (aspire-si #162 at `ff20f44`).
-   - There is no local incumbent yet. Wave 1's top model becomes Wave 2's incumbent.
+   - local models, each in its own chat template and tool format;
+   - J1 runs through role-set's own pipeline, served through interlock; J2 runs through Aider on Ollama;
+   - the bar for J1 is role-set's incumbent pair on the same slots (amendment A).
+   - J2 has no local incumbent yet. Its top model in Wave 1 becomes its Wave 2 incumbent.
 3. **Why the measure answers the decision:**
    - **J1's measure:** the share of items that pass the repo's own gates **and** the fresh grader's blind key-check (R&D audited), flags included. That's exactly what makes an item usable.
    - **J2's measure:** the share of tasks where the target test passes, the full suite stays green and only allowed paths changed. That's exactly what makes a fix mergeable before review.
@@ -101,10 +142,13 @@ section 1's first draft. Change 2 below alters its second sentence.
 
 ## 3. Native runtimes, guest arms and containment
 
-- **J1 driver:**
-  - it calls Ollama `/api/chat` directly, so the model's own template, tool format and system prompt apply;
-  - every candidate gets the same task prompt, a pinned hash;
-  - each slot's output goes through `role_set.assemble.assemble` and the gates. A gate refusal goes back to the model, up to 3 times.
+- **J1 harness** (amendment A): `role-set write`, pointed through interlock at the model's server. The server
+  applies the model's own chat template.
+  - Every arm gets the same prompts, pinned by hash, and the same critic.
+  - Each slot's output goes through `role_set.assemble.assemble` and the gates. A refusal goes back to the writer,
+    up to the retry cap, which is the same for every arm and recorded.
+  - Every arm runs on one serving stack. If a challenger needs the fallback stack, the incumbent is rerun on it
+    for that pairing.
 - **J2 harness:**
   - Aider, at one pinned version, `--model ollama_chat/<tag>`, with the same edit format for every model unless a model's documented format differs (recorded);
   - flags: `--yes-always --no-check-update --analytics-disable`, plus `--llm-history-file` and `--analytics-log` for the record.
@@ -119,19 +163,20 @@ section 1's first draft. Change 2 below alters its second sentence.
 ## 4. Tasks and keys
 
 **J1: 30 slots** (lessons T04, T09, T10; 5 C and 5 D each).
-- These are the same `role-set plan --apply` slots as Argon's build, so **J1 waits for Argon's apply-items branch.**
+- These are the `role-set plan --apply` slots (code, merged in aspire-si #162). **J1 waits for the regeneration
+  pilot,** which stands the incumbent pair up on its card.
 - **The key:**
   - the slot's planned verdict;
   - the repo's gates;
   - R&D's blind check of every authored flag (`silent_without_deciding`, `order_free`, `r10_twin`).
 - **Blinding:** a fresh grader, an R&D subagent that has seen none of the items, keys all of them in a shuffled pool
-  with the source labels removed: Argon's first-round 30 plus each model's 30. It works from a written rubric
-  (the gates, the slot's verdict, and the handoff's rules for DECIDING, ESCALATE and the flags). R&D audits every
-  disagreement and a 10% sample.
+  with the source labels removed: the incumbent's 30 plus each challenger's 30 (amendment A, item 6). It works from
+  a written rubric (the gates, the slot's verdict, and the handoff's rules for DECIDING, ESCALATE and the flags).
+  R&D audits every disagreement and a 10% sample.
 - **Leakage and training:**
-  - the slots are never in any prompt as finished items, and the driver never shows Argon's items;
-  - local-built items are study data only, kept in their own partition;
-  - they never enter Stage 1 training and never feed the generator.
+  - the slots are never in any prompt as finished items;
+  - J1 items are study data, kept in the `trial:j1-wave1` partition (amendment A, item 7);
+  - they never enter Stage 1 training. The regeneration writes its own rows afresh with the selected writer.
 
 **J2: 20 tasks** from real merged fixes in aspire-si, role-set and interlock, merged **after every candidate's
 stated training cutoff** (or its release date where none is stated; R&D change 4). That way a fix can't be
@@ -159,7 +204,7 @@ recalled from pretraining. 2026-09-01 is the provisional floor until the cutoffs
 - **Report:**
   - each model's rate with a 95% interval;
   - P(best) by bootstrap over slots and tasks;
-  - for J1, each model's rate beside Argon's control rate from the same blind key-check.
+  - for J1, each challenger's rate beside the incumbent's rate from the same blind key-check.
 - **Pairwise tests:** none in Wave 1, because it's a screen. Wave 2 pre-names each challenger against Wave 1's top model: exact McNemar, with Holm across job kinds and pairs.
 - **Sizing,** stated now:
   - **J1, 30 slots:** a paired difference smaller than about 23 points can't be shown.
@@ -254,8 +299,9 @@ Each halts the wave until it's explained.
 
 ## Order of work
 
-1. Antigravity Argon: the apply items (Stage 1 critical path; brief ready).
-2. The J2 task bank, the J1 driver and the fresh grader's rubric: a builder brief, with R&D auditing the keys.
+1. The Stage 1 regeneration pilot, which stands up the incumbent pair (amendment A).
+2. The J2 task bank, the J1 blinding script and the fresh grader's rubric: a builder brief, with R&D auditing the
+   keys.
 3. Section 8's preflight on Colab, then Wave 1 on Colab on the maintainer's go (the unit cap approved).
 4. Antigravity Argon: the governor in interlock, plus its fault tests, with a Linux sampler path. R&D reviews.
    Needed before Wave 2.

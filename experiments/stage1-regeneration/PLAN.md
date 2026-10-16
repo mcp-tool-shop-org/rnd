@@ -230,11 +230,27 @@ that):
 8. **Retire the provider-written data** when the regeneration lands. The maintainer decides the public-history
    question separately.
 
-## Open for the maintainer
+## Decisions (2026-10-16)
 
-- **Muse-Spark's conditions** ("Built with Muse Spark Open", plus the licence carried with the student): accept or
-  not. It only matters if the frontier tier is ever funded.
-- **R1-Distill-Qwen-32B:** count its maker's grant, or wait on the Apache-2.0 question for its Qwen base.
-- **The Colab cap** of 30 units after the pilot.
-- **The RunPod probe and pilot** (about $5–6, within the balance), and later a **top-up** if the big writer wins.
-  The full big-writer run, at $22–28, doesn't fit the $29.55 balance with any margin.
+The maintainer's own rulings, plus those he delegated to the Publisher or R&D:
+- **Regenerate everything under the proof rule:** all 810 training rows and the 210 apply items. The maintainer
+  made no exception for the Grok-written batches: xAI's AUP lists "distilling model data or Outputs" among the
+  uses you agree not to make, and his rule doesn't read it narrowly.
+- **The student verifier is a specialized tool** in the sense of Anthropic's Help Center article 12326764. So
+  Claude-written code, prompts, lessons, evaluation sets and row inputs may be used. **No Claude text is a training
+  target.** Claude Code builds role-set's changes from BUILD-SPEC.md.
+- **Argon- and Grok-written generator code is rewritten** (R&D, delegated): aspire-si #144 and #145 (gates 1.7.3),
+  role-set #55, and role-set #49, #53 and #54, with #49's clue templates and packs replaced.
+- **Interlock keeps its Grok and Kimi code** (R&D, delegated). Kimi ran through Ollama Cloud. Grok's work is
+  credited "Written with Grok" in CONTRIBUTORS.md (interlock#130, role-set#69).
+- **R1-Distill-Qwen-32B is not used** (the Publisher, delegated). **The Colab critic is Muse-Glimmer** for
+  Nemotron writers, and Lightning critiques Glimmer writers.
+- **The Colab cap is 30 units** for the full Colab share (the Publisher, delegated). **The RunPod probe and writer
+  pilot are approved** (about $5–6). **A top-up for a full big-writer run stays the maintainer's call.**
+
+## Still open
+
+- **Muse-Spark's conditions:** moot unless the frontier tier is ever funded.
+- **The Kimi pilot's 40 T04 rows:** they stay in the regeneration unless the maintainer confirms the Ollama Cloud
+  route **and** accepts ownership with no restriction as proof.
+- **Apache-2.0 alone as proof:** unruled. No model in the plan depends on it.

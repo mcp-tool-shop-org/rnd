@@ -97,6 +97,13 @@ means Argon's findings were design input and Claude wrote the code. That's not A
     - evaluation sets (owned outputs, a lesser use than training);
     - the *inputs* of training rows.
   - **It is never proven as a training target.**
+  - **Anthropic's support reply (2026-10-16), supporting evidence only.** Asked about this use, Anthropic's support
+    channel answered that it "appears to be permitted under our Consumer Terms and Usage Policy". It named Claude
+    Code writing "data-generation scripts, validators, and training code" for "a non-competing specialized
+    classifier that runs locally for your own studio's internal work", and said the three-line verifier "fits
+    this category". The reply is signed "This answer was composed by Fin AI Agent, Anthropic's AI Agent". Under
+    the proof rule a model's answer isn't proof, so **the Help Center article stays the proof.** The reply confirms
+    the reading from Anthropic's own channel. A human confirmation is available on request.
 - **Google.** The consumer ToS's "using AI-generated content from our services to develop machine learning models or
   related AI technology" has no competition qualifier. Antigravity's terms incorporate it. Argon-written pipeline
   code is barred on the literal text.

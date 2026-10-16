@@ -7,7 +7,7 @@ models.
 
 **Status (2026-10-16):** the plan is drafted and revised after Argon's consult ([PLAN.md](PLAN.md)). R&D has
 re-read every licence clause Argon cited ([argon-answer.md](argon-answer.md)). The provenance inventory is done
-([PROVENANCE.md](PROVENANCE.md)), and the role-set build spec is drafted ([BUILD-SPEC.md](BUILD-SPEC.md)). **Nothing has run.**
+([PROVENANCE.md](PROVENANCE.md)), and the role-set build spec is drafted ([BUILD-SPEC.md](BUILD-SPEC.md)). **Decided 2026-10-16:** regenerate all of it under the proof rule ([PLAN.md](PLAN.md#decisions-2026-10-16)). The role-set build has started. **Nothing has run.**
 
 **In short:**
 - **Seven models are proven,** biggest first:

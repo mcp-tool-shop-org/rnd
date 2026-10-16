@@ -477,16 +477,24 @@ Argon's review; [the brief and Argon's answer](argon-t14-t16-keep-rule-brief.md)
 - **T14:** an answer is kept on:
   - the three lines and not stuck;
   - the any-item rules: DECIDING verbatim, no loop, no truncation;
-  - on decided items, the deciding-line-removal twin answering cannot_tell. Where no twin can be made, the item is
-    held.
+  - on decided items, the deciding-line-removal twin answering cannot_tell. A decided item whose twin can't be made
+    is held. An item keyed cannot_tell needs no twin: clause 1 already requires DECIDING NONE for it.
 
   Every readout discloses that H2 is tested by R4's twin.
 - **T16:** a set rule per arm per session over T16's decided items. The set passes when both hold:
   - abstain (cannot_tell) ≤ max(A_0 + 0.10, 1/n_decided);
   - false-reject (the opposite decided verdict) ≤ max(A_0 + 0.15, 2/n_decided).
 
-  A_0's rates are measured with the same definitions on DEV's tier-1 items, pooled over its 3 seeds, and their small
-  n is disclosed. With zero tolerance, chance alone would fail about 26% of sets at a true rate of 0.10.
+  A_0's rates are measured with the same definitions on all of DEV's decided items, pooled over its 3 seeds. They
+  come from the base model's DEV run (`pilot-30-s0..s2`), with n disclosed. With zero tolerance, chance alone would
+  fail about 26% of sets at a true rate of 0.10.
+- **Wording fix (R&D, 2026-10-15, keeping the decision's substance):**
+  - The decision first named "DEV's tier-1 items", but DEV has no tier 1 (its tiers are 3–6).
+  - Measured on the rig, A_0 on all of DEV's decided items (n = 78): abstain 3 of 78 (0.038), false-reject 2 of
+    78 (0.026).
+  - For every n_decided from 1 to 10, the lines allow the same counts under this source, DEV's lowest tier
+    (n = 6, 0 of 6 each) or A_0 = 0: at most 1 abstention and at most 2 false-rejects.
+  - The outcome is unchanged.
 
 ## The leakage tool
 

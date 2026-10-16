@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.16] - 2026-10-16
+
+- experiment colab-bottlenecks: Argon's consult, checked against the CLI source; instrument colab rules updated
+- Updated `colab`: Colab Pro+ — prepaid cloud GPUs for experiments
+- Added experiment `colab-bottlenecks`
+
 ## [1.1.10.0.15] - 2026-10-16
 
 - scripts/colab: the Colab rate probe and runner (probe.py, rates.sh), linked from instrument colab

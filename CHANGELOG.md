@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.21] - 2026-10-16
+
+- local-builders amendment A: J1's control is role-set itself; Antigravity Section 6 note
+- Updated experiment `generated-content-terms`
+- Updated experiment `local-builders`
+
 ## [1.1.10.0.20] - 2026-10-16
 
 - experiment generated-content-terms: provider terms for generated content, checked under the proof rule

@@ -108,6 +108,12 @@ load-bearing clause at its live URL. A claim counts only where R&D's re-read con
   was an inference, and the rule excludes inferences.
 - **Publishing:** Argon flags that public repos carrying provider-written training data, with training scripts,
   may also count as "assisting" others under xAI's and Anthropic's clauses.
+- **Antigravity, Section 6** (re-read 2026-10-16): "Using third party software, tools, or services to access the
+  Service (e.g. using OpenClaw with Antigravity OAuth) is a breach of this Agreement." It's listed with "using the
+  Service in connection with products not provided by us", and may lead to suspension of the Antigravity and Gemini
+  CLI accounts. The Publisher's bridge is clear (the Gemini app by hand, the Workspace Drive connector, Google's own
+  Colab CLI). The boundary: no script, agent or third-party tool ever reaches Antigravity or Gemini CLI through the
+  maintainer's OAuth.
 - **What escapes:** data generated locally by open-weight models whose licences put no restriction on outputs.
   Each model's licence still needs its own documented check before use.
 

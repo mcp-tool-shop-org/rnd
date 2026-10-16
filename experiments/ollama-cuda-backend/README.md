@@ -8,6 +8,17 @@ The studio runs its own `ggml-cuda.dll` for Ollama on the RTX 5090: Ollama's own
 - **The sandbox test** ran on the same day and **failed criterion 2:** outputs diverged from stock on 2 of 3 prompts, at positions that weren't near-ties. Nothing is activated (see `sandbox-result-cu1343.md`).
 - **The diagnosis** (harness v6, the same day) found the cause: the cuBLAS library. Putting only CUDA 13.4.3's cuBLAS into stock Ollama reproduces the studio build bit for bit, and the studio's own kernels change nothing. By the rule set before the run, the build is **eligible** for activation. Activation is a separate go, with stock CUDA 13.0 kept as a switchable fallback (see `diag-result-v6.md`).
 
+**Note, 2026-10-16: the harness's record can drop a line under concurrent writes.** Harness v6's `record()` opens
+the record file in append mode on every call, and four threads call it: main, the sampler, and the kill and unload
+threads.
+- **The defect:** on Windows, concurrent appends from separate handles can overwrite one another. A stress test
+  on the rig lost 2 lines in 1,200 with three writers, and none with a lock.
+- **How it showed up:** this made the offline dry run's breach test flaky. Under full-suite load the BREACH line
+  was occasionally lost. The test fixture now serialises `record()` behind a lock, and `diag_test.py` stays frozen.
+- **The v6 result is unaffected.** `diag-record-v6.jsonl` parses in full: 8 arms, 120 results, every start
+  matched. No breach or CPU stop fired, so the sampler wrote nothing during the run.
+- **Any future version** of the harness takes a lock in `record()` before it's frozen.
+
 | File | What it is |
 |---|---|
 | `build-0.35.1-cuda-13.4.1.md` | The first studio build (Ollama 0.35.1, llama.cpp b11232) and its activation method |

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.17] - 2026-10-16
+
+- experiment local-builders: Wave 1 design filed with R&D's review changes
+- Added experiment `local-builders`
+
 ## [1.1.10.0.16] - 2026-10-16
 
 - experiment colab-bottlenecks: Argon's consult, checked against the CLI source; instrument colab rules updated

@@ -511,6 +511,17 @@ Argon's review; [the brief and Argon's answer](argon-t14-t16-keep-rule-brief.md)
 - **For the readouts:** NO-ROLE answers these trait questions without having been taught the role lessons. Its
   E-quiz correctness is reported as a steering reading only, never as an arm comparison.
 
+**Note, 2026-10-16 (R&D, on the pre-freeze NO-ROLE composition check, aspire-si#141): the token gap and exposure.**
+- **The composition gate:** all 690 count cells are equal over the 640 rows (code `034a3d2`, builder `ac795e2b`).
+- **Target tokens:** 0.624 of ROLE's (by kind: E 0.49, A 0.53, B 0.60, D 0.64, C 0.77). This is the limitation
+  named above, measured as 0.644 at approval. It moved as the builder and the data changed, under the same rule:
+  no filler and no lengthened materials. The frozen run's figure replaces this one when batches 7 and 8 land.
+- **"Compute-matched"** (amendment A) means matched steps, examples and composition per arm. It doesn't mean matched
+  target tokens: NO-ROLE gets about 62% of ROLE's per step.
+- **Exposure:** in 205 of 306 materials, NO-ROLE sees the material more often than ROLE, because A and written E
+  become recall items spread evenly over the lesson's materials. Training materials are disjoint from DEV, sealed
+  and the interview, so no outcome measure is touched. This is disclosed, not corrected.
+
 ## The leakage tool
 
 `experiments/verifier-gold/leakage_check.py` (rnd 1.1.4.4.8–1.1.4.4.10) checks a new set against the gold

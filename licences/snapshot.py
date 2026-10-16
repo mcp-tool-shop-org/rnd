@@ -12,12 +12,12 @@ from __future__ import annotations
 
 import gzip
 import hashlib
-import html
 import json
 import re
 import sys
 import urllib.parse
 import urllib.request
+from html.parser import HTMLParser
 from pathlib import Path
 
 REGISTRY = Path(__file__).with_name("registry.json")
@@ -33,10 +33,36 @@ def fetch(url: str) -> str:
     return body.decode("utf-8", errors="replace")
 
 
+class _Text(HTMLParser):
+    """The page's visible text: every text node outside script, style and noscript, entities decoded."""
+
+    SKIP = {"script", "style", "noscript", "template"}
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.parts: list[str] = []
+        self.depth = 0
+
+    def handle_starttag(self, tag, attrs):
+        if tag in self.SKIP:
+            self.depth += 1
+
+    def handle_endtag(self, tag):
+        if tag in self.SKIP and self.depth:
+            self.depth -= 1
+
+    def handle_data(self, data):
+        if not self.depth:
+            self.parts.append(data)
+
+
 def page_text(raw: str) -> str:
-    t = re.sub(r"<script.*?</script>|<style.*?</style>", " ", raw, flags=re.S | re.I)
-    t = html.unescape(re.sub(r"<[^>]+>", " ", t))
-    return re.sub(r"\s+", " ", t).strip()
+    if "<" not in raw:  # a plain-text licence file
+        return re.sub(r"\s+", " ", raw).strip()
+    p = _Text()
+    p.feed(raw)
+    p.close()
+    return re.sub(r"\s+", " ", " ".join(p.parts)).strip()
 
 
 def norm(s: str) -> str:

@@ -1,22 +1,19 @@
 # rnd: how it works
 
-Mapped at 2026-10-16 from commit ac61677 by Atlas 1.24.0.
+Mapped at 2026-10-16 from commit 745ccdb by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-13 parts, mostly Python (104 files), shell (15), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
+14 parts, mostly Python (106 files), shell (15), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-15 (47860ef)
+## What changed since 2026-10-16 (ac61677)
 
-- experiments/ollama-cuda-backend/diag/ is now written by experiments/ollama-cuda-backend/diag/diag_test.py.
-- experiments/ollama-cuda-backend/diag/ is now read by tests/test_diag_harness.py.
-- experiments/ollama-cuda-backend/diag/diag-record.jsonl is now read by experiments/ollama-cuda-backend/diag/diag_test.py.
-- And 3 more new writers and readers of places.
-- scripts/colab/probe.py is new and belongs to no part, so atlas check fails on it against the previous map.
-- scripts/colab/rates.sh is new and belongs to no part, so atlas check fails on it against the previous map.
-- 29 files added and 11 changed content, across 6 parts.
+- licences/registry.json is now written by licences/snapshot.py.
+- licences/registry.json is now read by licences/snapshot.py.
+- licences is a new part, drawn from `licences/**`.
+- 17 files added and 5 changed content, across 6 parts.
 
 ## What comes in
 
@@ -107,6 +104,7 @@ No two parts export a helper that looks alike.
 - **experiments/verifier-gold/crossfamily/blind_key.json** is written by experiments/verifier-gold/crossfamily/make_sample.py.
 - **experiments/verifier-gold/crossfamily/sample.jsonl** is written by experiments/verifier-gold/crossfamily/make_sample.py.
 - **instruments/** is written by mcptoolshop_rnd/cli.py.
+- **licences/registry.json** has a block written by licences/snapshot.py.
 - **site/public/charts/** is written by experiments/charts/make_charts.py.
 
 ## Hand-authored
@@ -124,8 +122,8 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 - 9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.
 - 13 writes and 20 reads use paths built at run time and are not named here.
 - 5 writes go to places this repository does not track, so they are not listed as generated.
-- 19 writes and 72 reads go to a path their caller passes, not to this repository.
-- 3 reads go to the directory the command is run in (entries and instruments), not to this repository.
+- 20 writes and 72 reads go to a path their caller passes, not to this repository.
+- 5 reads go to the directory the command is run in (entries, instruments and licences), not to this repository.
 - 1 read goes to the directory the command is run in or a path its caller passes, not to this repository.
 - 1 read goes to the home directory (.claude/), not to this repository.
 - 2 files belong to no part: scripts/colab/probe.py and scripts/colab/rates.sh.

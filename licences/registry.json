@@ -51,7 +51,7 @@
         "code": "n/a"
       },
       "notes": "Proven for Flow Music only. Flow and Project Genie have no comparable grant (the Flow help page defers to the ToS).",
-      "snapshot_sha256": "31c60b496edd8589f7986fc1ad7660f482b3d87f6b80ec2e8083ed50e58162c4",
+      "snapshot_sha256": "a92edecb6112d6a7eadfb8e9ee334e789562b2767deefb0bfa9f8136a3c5e075",
       "snapshot_file": "2026-10-16/google-ultra-benefits.txt",
       "archive_url": null
     },
@@ -107,7 +107,7 @@
       "notes": "Training is barred by xai-aup. Our Use of User Content grants xAI a perpetual licence over what is sent; it limits nothing on the user's side.",
       "snapshot_sha256": "0afec3601b4f8f8ed544c1b7fb785de637483476891ec43c12aed0640af4f960",
       "snapshot_file": "2026-10-16/xai-consumer-terms.txt",
-      "archive_url": null
+      "archive_url": "http://web.archive.org/web/20261016171554/https://x.ai/legal/terms-of-service"
     },
     {
       "id": "xai-aup",
@@ -245,7 +245,7 @@
       "notes": "The non-commercial line applies to evaluation access only.",
       "snapshot_sha256": "d9d650a0f8eef517a0512e5280b8f544297f418b4b208e7d1702506802e0e386",
       "snapshot_file": "2026-10-16/anthropic-consumer-terms.txt",
-      "archive_url": null
+      "archive_url": "http://web.archive.org/web/20261016204948/https://www.anthropic.com/legal/consumer-terms"
     },
     {
       "id": "anthropic-commercial-terms",
@@ -300,7 +300,7 @@
       "notes": "",
       "snapshot_sha256": "8d7011d64c21c74789c099ae4ef07f6c2a1972fe8deafaeb079cf496d505c3aa",
       "snapshot_file": "2026-10-16/anthropic-usage-policy.txt",
-      "archive_url": null
+      "archive_url": "http://web.archive.org/web/20261016151954/https://www.anthropic.com/legal/aup"
     },
     {
       "id": "kimi-app-agreement",
@@ -324,7 +324,7 @@
       "notes": "Did not apply to the studio's Kimi seat, which ran through Ollama Cloud (ollama-terms, kimi-k3-licence, kimi-k2.6-licence).",
       "snapshot_sha256": "d985dc8514bf4c659bdd4646de29ed704fc382b096dc66390901ed8bde41d31a",
       "snapshot_file": "2026-10-16/kimi-app-agreement.txt",
-      "archive_url": null
+      "archive_url": "http://web.archive.org/web/20250929160236/https://www.kimi.com/user/agreement/en/modelUse"
     },
     {
       "id": "ollama-terms",
@@ -351,7 +351,7 @@
       "notes": "The model's own licence also applies. Training stays not proven unless the maintainer rules that ownership with no restriction is proof.",
       "snapshot_sha256": "0f31d86a6f9d0cecdc84c2224000904a59ff0309b30528465f6f42dfa743f2b9",
       "snapshot_file": "2026-10-16/ollama-terms.txt",
-      "archive_url": null
+      "archive_url": "http://web.archive.org/web/20261011233708/https://ollama.com/terms"
     },
     {
       "id": "openmdw-1.1",
@@ -403,7 +403,7 @@
         "code": "proven"
       },
       "notes": "Ultra: https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16 . Pin the card revision read when a model is used. Bolt-74B-A9B-24GB: 'Governing Terms: Use of the models is governed by the OpenMDW License Agreement, version 1.1', released 2026-10-15 (https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB).",
-      "snapshot_sha256": "6508d4dc73954df9a6fbff35331dff1652fbedb9e0428f66fd53c8e9ff98fbc1",
+      "snapshot_sha256": "06962053aa862852b096a1547c58bfab80cd381ae3a27d73cc4c800859068bb1",
       "snapshot_file": "2026-10-16/nemotron-model-cards.txt",
       "archive_url": null
     },
@@ -428,9 +428,9 @@
         "code": "proven"
       },
       "notes": "Licence Apache-2.0; the card's intended use is the grant. Its Usage Policy has no clause on outputs or training.",
-      "snapshot_sha256": "7bf463f3a3191a3e8a64b696d4fc0e60e9b2da7def5f76cd1c83158acb64ef1a",
+      "snapshot_sha256": "6367b679f0d51feda1e955c4588e59086052c4352a41ca232f8eefccd2cedeb6",
       "snapshot_file": "2026-10-16/muse-glimmer-30b-card.txt",
-      "archive_url": null
+      "archive_url": "http://web.archive.org/web/20261010025638/https://huggingface.co/meta-models/Muse-Glimmer-30B"
     },
     {
       "id": "muse-model-license-spark",
@@ -459,7 +459,7 @@
         "Gated repo: access request in the maintainer's legal name"
       ],
       "notes": "Not in use (the frontier tier is out of reach).",
-      "snapshot_sha256": "8b9c78d59085cf3a9deb17acdbb166d5d4019114046413b3c79422520badde4f",
+      "snapshot_sha256": "128704d9d100e2f8661076fa8c034b428e1fc1b3161aeaa8df0e758d3a46b103",
       "snapshot_file": "2026-10-16/muse-model-license-spark.txt",
       "archive_url": null
     },
@@ -484,7 +484,7 @@
         "code": "proven"
       },
       "notes": "MIT. R1-Distill-Qwen-32B is not used: its Qwen2.5 base is plain Apache-2.0 (the Publisher's ruling).",
-      "snapshot_sha256": "c18e9472f7440514b3d6a470fe4845b1ade31d227a735d1b3711acc9cae1f677",
+      "snapshot_sha256": "b20b17e9911d646b4adefde3a1f14ad46f823064cd987b14d858d6142da09411",
       "snapshot_file": "2026-10-16/deepseek-r1-card.txt",
       "archive_url": null
     },
@@ -508,7 +508,7 @@
         "code": "proven"
       },
       "notes": "MIT.",
-      "snapshot_sha256": "a5540071f779ece4b3a6d165d4c88743119a26dc86236a8e9e326d675a4d3f66",
+      "snapshot_sha256": "924a114f7779cc2179c2da56f21dda2c3072ab541a98da37a26187bdf54e9842",
       "snapshot_file": "2026-10-16/deepseek-r1-0528-card.txt",
       "archive_url": "http://web.archive.org/web/20261015183426/https://huggingface.co/deepseek-ai/DeepSeek-R1-0528"
     },
@@ -564,7 +564,7 @@
         "Separate agreement only for a Model as a Service business above $20M revenue; internal use exempt"
       ],
       "notes": "Silent on outputs. Assets, evaluation and code rest on ollama-terms ownership for the Ollama Cloud route.",
-      "snapshot_sha256": "a9aa3a9b8043038429f28343b0daf42965704143d56c670716467f5e932a190f",
+      "snapshot_sha256": "d4de1d14edd7bfa695c7b7b8ce8e8ff4eab625e4b61b3e5f6af5d88841ee9691",
       "snapshot_file": "2026-10-16/kimi-k3-licence.txt",
       "archive_url": "http://web.archive.org/web/20260808211815/https://github.com/MoonshotAI/Kimi-K3/blob/main/LICENSE"
     },
@@ -615,9 +615,9 @@
         "code": "not_proven"
       },
       "notes": "A disclaimer of ownership is not a grant.",
-      "snapshot_sha256": "0fbcb670606978c5681bbf44e0f29c9217121eac8acc03eac1912c586818b2e1",
+      "snapshot_sha256": "25afb28cff985c67f62a8eb3c800f240eb355bac62edae6241eba0670638ef0a",
       "snapshot_file": "2026-10-16/nvidia-open-model-license.txt",
-      "archive_url": null
+      "archive_url": "http://web.archive.org/web/20261005213244/https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/"
     },
     {
       "id": "apache-2.0",

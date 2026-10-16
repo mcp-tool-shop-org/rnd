@@ -562,6 +562,22 @@ rule itself is unchanged: a drop of more than 2.0 points **and** p ≤ 0.05 (exa
 - **What the panel is:** a change detector against P0 on public items (GSM8K and WinoGrande), not a capability
   score. The base model has likely seen those items in pretraining. That's accepted for this guard and disclosed
   in the design's §3.3.
+**Note, 2026-10-16 (R&D): the freeze, and the registered composition rerun.**
+- **The frozen data:** `FROZEN.md` sha256 `e7b69464…` (aspire-si #163). Its contents:
+  - 21 training files, 810 items, in training order (pilot first, batch 8 last);
+  - the 210 apply items (#162, after a full key check over three rounds);
+  - the NO-ROLE pin, `docs/runs/stage1-no-role/round1.jsonl`, `3cc3dc47…`.
+
+  R&D checked every row's sha256 and item count at the PR head.
+- **The composition rerun** (the registered gate) passes. `no_role.py` on FROZEN.md's files reproduces the pinned
+  NO-ROLE file byte for byte, and **0 of 909 count cells differ** between the arms.
+- **Target tokens:** NO-ROLE gets 0.656 of ROLE's (55,575 / 84,759). This frozen figure replaces the pre-freeze
+  0.624 above. The limitation is the same in kind: no filler, and no lengthened material.
+- **The apply set's T10 verdict mix** is 5/5/0, not the plan's 4/3/3. R&D's rule-8 fix (complete-universe material
+  for three T10 items) turned its cannot_tell slots into decided items. It's accepted and recorded in the run
+  sheet. The stage keeps 60 cannot_tell apply items.
+- **Leakage:** 0, including the new 8-word sealed and DEV span check (digits kept), across training, NO-ROLE and
+  apply. One stock changelog line shared with the sealed set (T12-C-05) was removed before the freeze.
 
 ## The leakage tool
 

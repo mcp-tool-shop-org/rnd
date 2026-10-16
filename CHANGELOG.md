@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.1.1] - 2026-10-16
+
+- stage1-regeneration: provenance inventory, role-set build spec, Anthropic Help Center re-read
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.10.1.0] - 2026-10-16
 
 - stage1-regeneration: plan, revised after Argon's consult; every licence clause re-read

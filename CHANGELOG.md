@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.15] - 2026-10-16
+
+- scripts/colab: the Colab rate probe and runner (probe.py, rates.sh), linked from instrument colab
+- Updated `colab`: Colab Pro+ — prepaid cloud GPUs for experiments
+
 ## [1.1.10.0.14] - 2026-10-16
 
 - instrument colab: installed (0.7.4), measured unit rates, rules of use

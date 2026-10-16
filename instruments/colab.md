@@ -50,6 +50,10 @@ units.
 - **All three VMs:** driver 580.82.07, CUDA 13.0, Python 3.13.15, a 236 GB overlay disk.
 - **Cost of the measurement:** 0.41 units (1,208.12 → 1,207.71). Most of it was one L4 session that hung for about
   16 minutes before it was stopped.
+- **Re-measure with** [`scripts/colab/rates.sh`](https://github.com/mcp-tool-shop-org/rnd/blob/main/scripts/colab/rates.sh)
+  (`GPUS="T4 L4 A100" ./rates.sh`, in WSL). It runs
+  [`probe.py`](https://github.com/mcp-tool-shop-org/rnd/blob/main/scripts/colab/probe.py) on each card under an outer
+  `timeout`, stops every session, and ends by listing any session still alive.
 - **Cards were available on request** at that hour. A100s come as 40 or 80 GB, so a design that pins 80 GB
   must expect "card not available".
 

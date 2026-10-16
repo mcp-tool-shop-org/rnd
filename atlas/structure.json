@@ -1262,6 +1262,34 @@
           "testFramework": "unittest"
         },
         {
+          "hash": "98caefdf11b214495b9d28102e9b092d706c7e8f9d51e052da15decf6894beb3",
+          "path": "experiments/dataset-desk/README.md"
+        },
+        {
+          "hash": "a633eb490479dc5786828903bd6c464854d4af0d2854b17dcde6b00241da9e57",
+          "path": "experiments/dataset-desk/argon-pass-2-addendum.md"
+        },
+        {
+          "hash": "f42fb67c26caad1bf5b87c74cf7042e658c449df288146d4437c1f62c39bf82f",
+          "path": "experiments/dataset-desk/argon-pass-2-brief.md"
+        },
+        {
+          "hash": "3195b938ac88a8bab6034158951be95d8c54d1f9bafb0ff945b9615b00336018",
+          "path": "experiments/dataset-desk/argon-pass-3-addendum.md"
+        },
+        {
+          "hash": "7137efa0cc357b4779952323bc182e84a47b3ea6973bfb426337182ba294acae",
+          "path": "experiments/dataset-desk/argon-pass-3-brief.md"
+        },
+        {
+          "hash": "25b37f4276ea8babab26c66eed0a2d7e194a7857469d88df01d49e7a9464058e",
+          "path": "experiments/dataset-desk/argon-pass-3-followup-brief.md"
+        },
+        {
+          "hash": "d013cbcd746cdbd83d567ebedd74725dd683b889c8e4e24e3883e7cc716ffcc8",
+          "path": "experiments/dataset-desk/design.md"
+        },
+        {
           "hash": "5faa4247fbfe27f4ffac4d1baa4f51bdc706add1d1aefd8a26ce6d03411f1551",
           "path": "experiments/distill-ladder/PLAN.md"
         },
@@ -1547,6 +1575,10 @@
           "path": "experiments/embeddinggemma-2/argon-consult-multimodal-round2.md"
         },
         {
+          "hash": "f5dfe3a7fb1b073ec3edfd0a58c48805eebac778a0a4da2752897c276d2f7bbf",
+          "path": "experiments/embeddinggemma-2/argon-consult-multimodal-round3.md"
+        },
+        {
           "hash": "e5943d152fe35d2b86758563e3c81876f3c23398b252ac9ae3ab0ac2cfc2cd25",
           "path": "experiments/embeddinggemma-2/argon-consult-round1-disposition.md"
         },
@@ -1579,7 +1611,7 @@
           "path": "experiments/embeddinggemma-2/argon-consult-rubric.md"
         },
         {
-          "hash": "ebd4af6da9a501fcc231ad89899ef0c7c10369712673cad5252b3b4a8f78faef",
+          "hash": "294fb0b88bca4f5863500137a41fd52ffadaa75f17e8b6e0b2155f6a1ef750de",
           "path": "experiments/embeddinggemma-2/design-multimodal.md"
         },
         {
@@ -2672,7 +2704,7 @@
           "path": "experiments/npu-probe/retrieval-benchmark.md"
         },
         {
-          "hash": "71124a1768372b1f6bf703b71768b5664cbd8045935285a9f442c54f192daa03",
+          "hash": "cda82cfe2f1c036e9b714bff10ba1e33b54ff850823464fc2ba04a5f76943bf5",
           "path": "experiments/ollama-cuda-backend/README.md"
         },
         {
@@ -2682,6 +2714,18 @@
         {
           "hash": "52fd36677d7ca70f9fdf2533aff2d8e074d81c832f0848e1b75ddbf601ae523f",
           "path": "experiments/ollama-cuda-backend/abmine-cu1343.txt"
+        },
+        {
+          "hash": "2d09d8c840736edbfcff838204f0e2dc5dd0fbbff077692948bdb27be8149f19",
+          "path": "experiments/ollama-cuda-backend/argon-review-diag-v6-round2-additions.md"
+        },
+        {
+          "hash": "f51bedc1ae1b103e354affc4d05417ee44d25363178ef3a28f0833bb937ad697",
+          "path": "experiments/ollama-cuda-backend/argon-review-diag-v6-round2.md"
+        },
+        {
+          "hash": "7f026548240b67b9f694a8f5dcbd19cc040454c7ea3fee2393a8fb6357301bd5",
+          "path": "experiments/ollama-cuda-backend/argon-review-diag-v6.md"
         },
         {
           "hash": "451c7157b97cf343c51992adff4ea0e4e7cf51542752b1722a40cfdda6f93014",
@@ -2702,6 +2746,79 @@
         {
           "hash": "050e1aa898564a66719bbe68b3719e76ffc8ac3deabb2ee39841cb00188d81eb",
           "path": "experiments/ollama-cuda-backend/build-0.40.4-cuda-13.4.3.md"
+        },
+        {
+          "hash": "a0338c7fd65311ee7d8b45fe800fff538455000189b9c3f7883cb14dc9caa917",
+          "path": "experiments/ollama-cuda-backend/diag-analysis-v6.json"
+        },
+        {
+          "hash": "beb8398ef671efe8e821c438d9f3e3b38efac513a837628e2f84721f9da972ec",
+          "path": "experiments/ollama-cuda-backend/diag-record-v5-aborted.jsonl"
+        },
+        {
+          "hash": "fd1e8efff98d081b0e31c4ce24328a0dab294c69513366821893ef1307a832dc",
+          "path": "experiments/ollama-cuda-backend/diag-record-v6.jsonl"
+        },
+        {
+          "hash": "0a781f4b57b7f72dfcd5a17ea47a9eeb7db5bb1a6bd46fe537399b82b8f67be0",
+          "path": "experiments/ollama-cuda-backend/diag-result-v6.md"
+        },
+        {
+          "hash": "e593e8ea57f823ebeb784d05ebfc6ec8b0ad43b505e4db08fbf249be7c1d6d0a",
+          "path": "experiments/ollama-cuda-backend/diag-v6-pre-run-notes.md"
+        },
+        {
+          "hash": "b07d0753abe849ec079f94f8cf6b2b520fd9a15de846f507cc3e6e80a811dfc0",
+          "path": "experiments/ollama-cuda-backend/diag/diag_test.FROZEN.sha256"
+        },
+        {
+          "exports": [
+            "arm_cap",
+            "arm_env",
+            "check_memory",
+            "check_models",
+            "check_stops",
+            "evidence",
+            "generate",
+            "http",
+            "kill_arm",
+            "loaded",
+            "main",
+            "memory_used",
+            "record",
+            "run_arm",
+            "same",
+            "sampler",
+            "self_check",
+            "sha_file",
+            "stock_empty",
+            "task_check",
+            "total_cpu",
+            "unload",
+            "verdict"
+          ],
+          "hash": "18a5f75780ed6c4d8fd9682ccddfa343626728b315c1ecf66643a0f251823c6c",
+          "importsFiles": [
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/abmine.py"
+          ],
+          "path": "experiments/ollama-cuda-backend/diag/diag_test.py"
+        },
+        {
+          "exports": [
+            "arms",
+            "gen",
+            "ok_all",
+            "text_for"
+          ],
+          "hash": "205b5729a062ad3329e67c03afbee13b99f160044a7bc83c35a9c00284543cc9",
+          "importsFiles": [
+            "experiments/ollama-cuda-backend/diag/diag_test.py",
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/abmine.py"
+          ],
+          "path": "experiments/ollama-cuda-backend/diag/test_diag_test.py",
+          "testFramework": "unittest"
         },
         {
           "hash": "3291ff859ac416a3b74d8b20c802d7c80920f0fd248c984d1c42a3ef36de7faa",
@@ -2828,6 +2945,14 @@
             "mcptoolshop_rnd/abmine.py"
           ],
           "path": "experiments/ollama-cuda-backend/diag_test-v4-draft.py"
+        },
+        {
+          "hash": "6a80fa91a9fe8a89e624815cfce43d910e730cca2b044475c26c4238e1eef0c5",
+          "path": "experiments/ollama-cuda-backend/diag_test-v4-to-v5.diff"
+        },
+        {
+          "hash": "b87c8c7c6ff4d8af35b3f66cafcf32ca4bed376c75cd9bf62d5f3018198ea4c9",
+          "path": "experiments/ollama-cuda-backend/diag_test-v5-to-v6.diff"
         },
         {
           "hash": "394227fc3f76271adb216c3dab3d55e5d3c88ec636a46e5da1e0593478792e74",
@@ -3093,8 +3218,12 @@
           "path": "experiments/openjev-vs-jev/run_openjev.py"
         },
         {
-          "hash": "56416567257e8c9567679a7be0022b5e3af11a233e6fb46d4a22913ada6aa8cd",
+          "hash": "df1d1bea89b430187348ad6462a67237d449521d82c9a6c2fe992dc1ce1188e9",
           "path": "experiments/stage1-role-eval/README.md"
+        },
+        {
+          "hash": "ce7536a76995214ba0b38585cb0d30971f691ad278093801f19a65e123ad2027",
+          "path": "experiments/stage1-role-eval/argon-t14-t16-keep-rule-brief.md"
         },
         {
           "exports": [
@@ -4145,8 +4274,16 @@
           "path": "instruments/atlas.md"
         },
         {
+          "hash": "6b3e69190c62e96fd0191d5bbe40e010f1549f3014109587740fd99bafe7e3fd",
+          "path": "instruments/colab.md"
+        },
+        {
           "hash": "8cfebda3013bb420a9d81899afbd36b866e6f0a4f9de60170bf809b1563f403d",
           "path": "instruments/cross-family-rerate.md"
+        },
+        {
+          "hash": "3a7be68f2fefd4ba15661b3fb479f6967cbe10dcc27d9338fadf5ef5049fa0e4",
+          "path": "instruments/dataset-desk.md"
         },
         {
           "hash": "88b5a6ed092a4013bc1ddd360b53378e80b0ebef77eaee0e4142d4c66020b335",
@@ -4243,7 +4380,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "f67e4e3e18b69c004a51901b763bbb7d91a2ff656cdc7dedbc7aa55e67582dbb",
+          "hash": "7f133d7e03b852fec9d1c34c4f4d942276a8e3d725dcd4a0c8f6ddd29f0b30c1",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -4293,25 +4430,25 @@
             {
               "in": "template_from_store",
               "kind": "raise",
-              "line": 367
+              "line": 371
             },
             {
               "in": "render_qwen3",
               "kind": "raise",
-              "line": 378
+              "line": 382
             },
             {
               "in": "probe",
               "kind": "raise",
-              "line": 401
+              "line": 405
             },
             {
               "in": "probe",
               "kind": "raise",
-              "line": 413
+              "line": 417
             }
           ],
-          "hash": "3ef569f3b98da62602896869e86db777203739cd68a1b1c48d8bab0c29a0cc99",
+          "hash": "f87f0daf0736fe2131e87820b1a3696ee7e1457ce8697352157763443f7b0778",
           "path": "mcptoolshop_rnd/abmine.py"
         },
         {
@@ -5466,7 +5603,7 @@
       "testRunners": [
         "unittest"
       ],
-      "testedBy": 8,
+      "testedBy": 11,
       "unresolvedNamed": [
         {
           "path": "mcptoolshop_rnd/collect.py",
@@ -5534,7 +5671,7 @@
           "path": ".coveragerc"
         },
         {
-          "hash": "61ed2c4effbbe5060e2a745e9e8416080aa5cc7bc0e3eda2cd1bc7feefc994ff",
+          "hash": "660270983b95ea5e5dbe413927644d8f929b3ab2e49b6c3e27a1b939d6d2fc10",
           "path": ".gitattributes"
         },
         {
@@ -5542,7 +5679,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "0166d2fe844d167dc6a0ebd51b19d60ef3082dd2a7f0f681b847c4cee997c5fe",
+          "hash": "60bcf638d7bf6dfb409ca34844f69aa67512d2fde1aef5f2967f8a44ac074848",
           "path": "CHANGELOG.md"
         },
         {
@@ -5766,6 +5903,10 @@
           "path": "site/src/content/docs/briefs/math-ladder.md"
         },
         {
+          "hash": "dde1105abc71ebedf189c53e34c15f88069ab5287c236493136856caebce6864",
+          "path": "site/src/content/docs/briefs/ollama-cuda-backend.md"
+        },
+        {
           "hash": "ebc71037432a8691abb25fb3ddca389f1e5c0aeba8c586a60a3f5ff9d0c27672",
           "path": "site/src/content/docs/briefs/pair-and-interlock.md"
         },
@@ -5790,7 +5931,7 @@
           "path": "site/src/content/docs/briefs/verifier-training-data.md"
         },
         {
-          "hash": "e52a6caa5a1eaeeacbfe189a955541f9eb46032c67a3111b9220a28052f1e887",
+          "hash": "5f24dc143506980f5df19273ac376f824faef7cf0fafe94c077d01bb8c7700bf",
           "path": "site/src/content/docs/handbook/ab-dataminer.md"
         },
         {
@@ -5810,7 +5951,7 @@
           "path": "site/src/content/docs/handbook/diagnose-then-fix.md"
         },
         {
-          "hash": "23e736860b9f80e0a04065291430871e3c0048ca768483136f8797ff9e70248d",
+          "hash": "5393d626cab4cfe48d88e215491945ec87fd6cf69146bcc9971d60c8c5531552",
           "path": "site/src/content/docs/handbook/experiments.md"
         },
         {
@@ -5824,6 +5965,10 @@
         {
           "hash": "74ff641a4551f80a89833f523787942a0d7a9fd78bdf358e5a681cd7d101c8b3",
           "path": "site/src/content/docs/handbook/index.md"
+        },
+        {
+          "hash": "bfd44d8b9c7aebab35ff20b5965475d5e257df8293d482d434a5ee1f14d58488",
+          "path": "site/src/content/docs/handbook/model-comparisons.md"
         },
         {
           "hash": "20436c3bb64f561adac0e717023687ee088e5ecb9f786f3cf66deb0f466fccb1",
@@ -5870,7 +6015,7 @@
           "path": "site/src/content/docs/newsletter/issue-08.md"
         },
         {
-          "hash": "174701b4056a3be3a3f919f4d518ce0a85ef39641c11d0df5d3122cf74b46a7e",
+          "hash": "eb16df8facd7629f608fc1752467575be37f9a242cb0d2d37d0e404794650127",
           "path": "site/src/content/docs/newsletter/issue-09.md"
         },
         {
@@ -6031,7 +6176,7 @@
             "gen",
             "row"
           ],
-          "hash": "4d0caa929fb2ae9dd0912998cdd26fd02d7c7a38877c5eaf4b5f6be2ba7d4111",
+          "hash": "f9b5f6175105872bf59db8e66d1dd595bceda372680dd11d6d3d27ba57170f1f",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/abmine.py",
@@ -6117,6 +6262,17 @@
             "tests/test_cli.py"
           ],
           "path": "tests/test_datapack.py",
+          "testFramework": "unittest"
+        },
+        {
+          "exports": [
+            "load_tests"
+          ],
+          "hash": "980c763538215f03458eec4dcd593bd5857d8935c08c2412283d94d0a36f1705",
+          "importsFiles": [
+            "experiments/ollama-cuda-backend/diag/test_diag_test.py"
+          ],
+          "path": "tests/test_diag_harness.py",
           "testFramework": "unittest"
         },
         {
@@ -6388,7 +6544,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 14
+          "files": 15
         },
         {
           "boundary": "experiments",
@@ -6397,7 +6553,7 @@
             "file": "experiments/agent-ab-harness/run.py",
             "from": "tests/test_agent_ab_harness_run.py"
           },
-          "files": 4
+          "files": 6
         }
       ],
       "readers": [
@@ -6490,7 +6646,7 @@
         },
         {
           "coverage": true,
-          "files": 14,
+          "files": 15,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -6958,8 +7114,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "47860ef1e62b6b9536876fb54b67275508c9d874",
-    "tracked": 753
+    "commit": "ac6167721f2bfbc799ef36fd109fae3f1a3f1e14",
+    "tracked": 782
   },
   "landings": [
     {
@@ -7985,6 +8141,26 @@
       "writers": []
     },
     {
+      "readers": [
+        {
+          "by": "tests/test_diag_harness.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/ollama-cuda-backend/diag",
+      "writers": [
+        {
+          "by": "experiments/ollama-cuda-backend/diag/diag_test.py",
+          "confidence": "ast",
+          "unless": [
+            "main"
+          ]
+        }
+      ]
+    },
+    {
       "readers": [],
       "target": "experiments/ollama-cuda-backend/diag-analysis.json",
       "tracked": false,
@@ -8011,6 +8187,42 @@
           "confidence": "ast"
         }
       ]
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/ollama-cuda-backend/diag/diag_test.py",
+          "call": "open",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/ollama-cuda-backend/diag/diag-record.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/ollama-cuda-backend/diag/diag_test.py",
+          "call": "open",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/ollama-cuda-backend/diag/diag_test.FROZEN.sha256",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/ollama-cuda-backend/diag/diag_test.py",
+          "call": "open",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/ollama-cuda-backend/diag/diag_test.py",
+      "writers": []
     },
     {
       "readers": [
@@ -9063,6 +9275,17 @@
     {
       "readers": [
         {
+          "by": "experiments/embeddinggemma-2/argon-consult-multimodal-round3.md",
+          "call": ".",
+          "confidence": "text"
+        }
+      ],
+      "target": "tests",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "tests/test_abmine.py",
           "call": "read_text",
           "confidence": "ast",
@@ -9124,11 +9347,32 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 41,
+  "testFiles": 44,
   "testsNotRun": [
     "experiments/cuda-graphs/test_graphed_heads.py",
     "experiments/data-designer/tests/test_lockdown.py",
-    "experiments/interlock-relay/stage1/test_analyze.py"
+    "experiments/interlock-relay/stage1/test_analyze.py",
+    "experiments/ollama-cuda-backend/diag/diag_test.py",
+    "experiments/ollama-cuda-backend/diag/test_diag_test.py"
   ],
-  "unassigned": []
+  "unassigned": [
+    {
+      "exports": [
+        "sh"
+      ],
+      "failurePaths": [
+        {
+          "in": "sh",
+          "kind": "except",
+          "line": 17
+        }
+      ],
+      "hash": "82e4f12019c37ce351066bed883520da5a665772a763560decdf99db27b611a3",
+      "path": "scripts/colab/probe.py"
+    },
+    {
+      "hash": "f893548264012ef498e1205c240560e3c2d76c18066679a7300045fae8f51ee1",
+      "path": "scripts/colab/rates.sh"
+    }
+  ]
 }

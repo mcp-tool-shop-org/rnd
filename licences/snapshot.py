@@ -30,7 +30,22 @@ def fetch(url: str) -> str:
         body = resp.read()
     if body[:2] == bytes((0x1F, 0x8B)):  # gzip magic: some servers compress regardless of the request
         body = gzip.decompress(body)
+    if body[:5] == b"%PDF-":
+        return pdf_text(body)
     return body.decode("utf-8", errors="replace")
+
+
+def pdf_text(body: bytes) -> str:
+    """A policy published as a PDF. pypdf is optional (the rnd package itself stays standard-library only)."""
+
+    try:
+        import io
+
+        import pypdf
+    except ImportError as e:
+        raise RuntimeError("this entry is a PDF; install pypdf to read it") from e
+    reader = pypdf.PdfReader(io.BytesIO(body))
+    return " ".join(p.extract_text() or "" for p in reader.pages)
 
 
 class _Text(HTMLParser):
@@ -111,7 +126,7 @@ def main(argv: list[str]) -> int:
         if write:
             e["snapshot_sha256"] = digest
             e["snapshot_file"] = f"{out_dir.name}/{name}"
-            e["archive_url"] = arch
+            e["archive_url"] = arch or e.get("archive_url")  # the archive API is flaky: never drop a copy already found
     if write:
         REGISTRY.write_text(json.dumps(reg, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return 1 if bad else 0

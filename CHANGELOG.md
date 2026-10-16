@@ -11,9 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
-## [1.1.10.2.1] - 2026-10-16
+## [1.1.10.2.2] - 2026-10-16
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output
+
+## [1.1.10.2.1] - 2026-10-16
+
+- licences: the Census NAICS 2022 entry for role-set's domain table; PDF policies read; archive links kept
 
 ## [1.1.10.2.0] - 2026-10-16
 

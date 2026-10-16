@@ -129,3 +129,17 @@ B200 probe measures under compat:
 - Compile and LoRA wall times on the B200 were slower than on the A100: 78 s vs 5 s, and 85 s.
   The job dir sits on RunPod's network filesystem, and these are first-run times with a cold cache.
   They are not a speed comparison.
+
+## Colab T4 and L4 (2026-10-16)
+
+The same nightly (torch 2.16.0.dev20261008+cu134, CUDA 13.4, cuDNN 9.26, Triton 3.9.0) in a uv venv on Python 3.12,
+on Colab Pro+ VMs with driver 580.82.07 (CUDA 13.0). The Publisher ran it (`instruments/colab.md`).
+
+| Card | Arch | Result |
+|---|---|---|
+| L4 | sm_89 | **all pass**, including flash SDPA |
+| T4 | sm_75 | all pass except **flash SDPA** ("No available kernel"). FlashAttention needs sm_80+, a hardware limit, not CUDA's |
+
+Both cards passed raw Triton JIT, `torch.compile` (training and reduce-overhead) and CUDA graph capture. So
+minor-version compatibility now covers sm_75, sm_80, sm_89 and sm_100 for the studio's GPU paths, on drivers
+580.82 and 580.159.

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.19] - 2026-10-16
+
+- stage1-role-eval note: the freeze (e7b69464) and the composition rerun (0 of 909 cells differ; ratio 0.656)
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.10.0.18] - 2026-10-16
 
 - instrument colab: second probe session (timeout measured, in-VM unassign unproven, T4 high-mem, H100 unavailable); cloud-cu134: Colab T4 and L4

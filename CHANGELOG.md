@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.1.4] - 2026-10-16
+
+- newsletter issue 10 and a brief: what the terms let you do with AI output
+
 ## [1.1.10.1.3] - 2026-10-16
 
 - stage1-regeneration: decisions recorded; regenerate all rows under the proof rule

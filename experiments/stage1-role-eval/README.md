@@ -496,6 +496,21 @@ Argon's review; [the brief and Argon's answer](argon-t14-t16-keep-rule-brief.md)
     (n = 6, 0 of 6 each) or A_0 = 0: at most 1 abstention and at most 2 false-rejects.
   - The outcome is unchanged.
 
+**Note, 2026-10-15 (R&D, on Argon's code review, finding 5a): NO-ROLE's quiz on written E items.**
+- **The gap:** `no_role.py` turns each written E item into a recall item. That's this table's design, and it's how
+  NO-ROLE trains. But it also replaced the item's closed-form quiz with a recall question. The quiz then excluded
+  all of them as free text, so NO-ROLE's quiz sitting wrote no closed-form E steering readings.
+- **The fix:** NO-ROLE trains on its recall turns, unchanged, and is asked the item's original closed-form quiz and
+  variant.
+- **Why this keeps the approved design:**
+  - The run sheet gives NO-ROLE "training plus the two sittings that write its steering readings (quiz and
+    apply)", and the steering rule above is pooled over both arms. Without these readings, the pooled E cells
+    would hold ROLE's readings alone.
+  - NO-ROLE's training targets don't change.
+  - No Phase A outcome measure uses NO-ROLE's quiz: DEV, sealed and the panel are ROLE's.
+- **For the readouts:** NO-ROLE answers these trait questions without having been taught the role lessons. Its
+  E-quiz correctness is reported as a steering reading only, never as an arm comparison.
+
 ## The leakage tool
 
 `experiments/verifier-gold/leakage_check.py` (rnd 1.1.4.4.8–1.1.4.4.10) checks a new set against the gold

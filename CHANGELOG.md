@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.7] - 2026-10-15
+
+- stage1-role-eval: note on NO-ROLE's closed-form E quiz (Argon's finding 5a)
+- Added experiment `agent-ab-harness`
+- Added experiment `nemo-relay-trial`
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.10.0.6] - 2026-10-15
 
 - stage1-role-eval amendment D: wording fix (A_0 from all of DEV's decided items; T14 cannot_tell items need no twin)

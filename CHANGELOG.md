@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.20] - 2026-10-16
+
+- experiment generated-content-terms: provider terms for generated content, checked under the proof rule
+- Added experiment `generated-content-terms`
+
 ## [1.1.10.0.19] - 2026-10-16
 
 - stage1-role-eval note: the freeze (e7b69464) and the composition rerun (0 of 909 cells differ; ratio 0.656)

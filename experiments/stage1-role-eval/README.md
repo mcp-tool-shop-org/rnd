@@ -470,6 +470,24 @@ results in a Leitner ledger (`ledger.py`, aspire-si #102). R&D's rulings:
   - about 12–15 minutes a sitting;
   - G1 run as three per-seed grants, each with both arms, with 15-minute rests.
 
+**D. The keep rule's lesson clause for T14 and T16** (the maintainer's decision, on R&D's recommendation after
+Argon's review; [the brief and Argon's answer](argon-t14-t16-keep-rule-brief.md)).
+- **The gap:** the lesson plan gives T14 (H2) no pass rule, and leaves T16's (H4) "fixed lines" unset. The other
+  lessons' clauses are tested as R&D ruled on aspire-si#128.
+- **T14:** an answer is kept on:
+  - the three lines and not stuck;
+  - the any-item rules: DECIDING verbatim, no loop, no truncation;
+  - on decided items, the deciding-line-removal twin answering cannot_tell. Where no twin can be made, the item is
+    held.
+
+  Every readout discloses that H2 is tested by R4's twin.
+- **T16:** a set rule per arm per session over T16's decided items. The set passes when both hold:
+  - abstain (cannot_tell) ≤ max(A_0 + 0.10, 1/n_decided);
+  - false-reject (the opposite decided verdict) ≤ max(A_0 + 0.15, 2/n_decided).
+
+  A_0's rates are measured with the same definitions on DEV's tier-1 items, pooled over its 3 seeds, and their small
+  n is disclosed. With zero tolerance, chance alone would fail about 26% of sets at a true rate of 0.10.
+
 ## The leakage tool
 
 `experiments/verifier-gold/leakage_check.py` (rnd 1.1.4.4.8–1.1.4.4.10) checks a new set against the gold

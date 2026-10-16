@@ -86,23 +86,40 @@ critic must therefore be loaded at the same moment, and both behind `127.0.0.1` 
 
 ### B2. A pre-assigned domain and frame per slot
 
-- `role-set plan` assigns each slot a **domain** and an **opening frame**, by seed, with no model call:
-  - no two slots in a lesson share a domain;
-  - no frame is used more than twice per lesson;
-  - frames rotate across lessons.
-- **Domains come from a public taxonomy, not a model:** the US Census NAICS 2022 sector and subsector titles. Its
-  terms of use are confirmed by R&D at the Census source before use. The table is pinned by its source file's hash. ESCALATE slots draw only from domains mapped
-  to their escalation domain (medical, legal, safety, money).
-- **Frames are structural ids**, for example:
-  - the material first, then the claim;
-  - the claim first;
-  - a question about a line;
-  - a two-part request.
+*Amended 2026-10-16 by R&D's rulings on the Publisher's design questions.*
 
-  Each has a one-line instruction. **Those instruction strings are prompt text,** so they're listed in the
-  provenance table and must come from an allowed author (section 4).
-- The writer prompt names the slot's domain and frame. A new gate refuses a draft whose `turns[0].user` doesn't
-  open in the assigned frame (a structural check, not a model's taste).
+**Domains:**
+- `role-set plan` assigns a **domain** by seed, with no model call. It goes to every slot that carries material or
+  a passage: kinds A, C and D, every E type with material, and the C and D apply slots. Kind B takes its domains
+  from the packs (B3).
+- **No two slots in a lesson share a domain.** Ordinary slots use NAICS 2022 subsectors (3-digit).
+- **The source is a public taxonomy, not a model:** the US Census NAICS 2022 titles (registry
+  `census-naics-2022`). The source file is pinned by sha256 and URL, with titles verbatim.
+- **ESCALATE slots draw only from mapped codes:**
+  - medical: 621–623;
+  - legal: 5411;
+  - money: 52 and 5412;
+  - safety: 23, 2211, 325, 481, 482, 5413 and 9221.
+
+  A mapped code may also appear in a non-ESCALATE slot. Whether a slot is ESCALATE is set by the plan, not by its
+  domain.
+- **Each receipt records** the slot's NAICS code and title.
+
+**Frames:**
+- **A frame shapes the framing only;** the layout stays (framing, `Material:`, material, `Statement:`), as the
+  student meets it at evaluation.
+- **Frames go to** C, D, verdict E, and the C and D apply slots. Kind A has no frame.
+- **The four frames,** each checked structurally (sentence count, final punctuation, one keyword), never by taste:
+  - `ask`: one sentence, not a question;
+  - `question`: ends in "?";
+  - `situation_then_ask`: two or more sentences, the first setting the scene;
+  - `line_question`: asks which line decides. It may not cite a line number, or share a 4-gram with the material,
+    so it can't point at the answer.
+- **Rotation:** within a lesson, frame counts differ by at most 1. Across the batch, each frame stays within ±10% of
+  its share.
+- **The framing still passes the existing gates** (`framing_repeats`, the opener share). A frame fixes structure,
+  not wording.
+- **The frame instruction lines are prompt text,** recorded under B9 provenance.
 
 ### B3. Solve-first kind B
 

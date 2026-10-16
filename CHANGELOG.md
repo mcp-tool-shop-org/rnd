@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.11] - 2026-10-16
+
+- stage1-role-eval amendment E: no twin for cannot_tell items in T01, T03, T04 (as D for T14)
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.10.0.10] - 2026-10-16
 
 - instrument: colab (Colab Pro+ units approved for experiments)

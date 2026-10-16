@@ -496,6 +496,21 @@ Argon's review; [the brief and Argon's answer](argon-t14-t16-keep-rule-brief.md)
     (n = 6, 0 of 6 each) or A_0 = 0: at most 1 abstention and at most 2 false-rejects.
   - The outcome is unchanged.
 
+**E. The keep rule's twin clause for T01, T03 and T04** (2026-10-16; the maintainer's decision, on R&D's ruling
+after Argon's review of the freeze tool, aspire-si#151).
+- **The rule:** as amendment D gave T14, an apply item keyed cannot_tell in a drop_deciding lesson (T01, T03, T04,
+  T14) needs no twin. It's kept on the other clauses. R1, R3 and R4's twins are tested on decided items only, and
+  every readout discloses that.
+- **Why:**
+  - A cannot_tell item has no deciding line to drop, so its twin can never be made.
+  - Under the old rule those items were held, which shut cannot_tell out of STaR in those lessons. That was
+    worst for T04, whose habit is abstaining.
+  - The narrower fix (the cannot_tell-twin lessons T01, T04 and T14) was rejected, because it would still hold
+    T03's cannot_tell items. R3's twin test is "the verdict changes with the deciding line removed", which has
+    nothing to remove on such an item.
+- **In code:** `twin_applies` returns false for a drop_deciding lesson's item not keyed supported or unsupported.
+  The freeze dry run then counts any None from that branch as an unexpected hold.
+
 **Note, 2026-10-15 (R&D, on Argon's code review, finding 5a): NO-ROLE's quiz on written E items.**
 - **The gap:** `no_role.py` turns each written E item into a recall item. That's this table's design, and it's how
   NO-ROLE trains. But it also replaced the item's closed-form quiz with a recall question. The quiz then excluded

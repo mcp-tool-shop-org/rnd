@@ -102,4 +102,15 @@ means Argon's findings were design input and Claude wrote the code. That's not A
   code is barred on the literal text.
 - **xAI.** The AUP bars distilling Outputs outright. Its "develop … machine learning models or any products or
   services that compete" turns on whether "that compete" reaches "machine learning models". **Not proven.**
-- **Kimi** (consumer app): "non-commercial, personal research, and study" only. **Not proven** for studio tooling.
+- **Kimi** (corrected 2026-10-16). Interlock's Kimi seat ran in **Zed through Ollama Cloud** (`kimi-k3:cloud`,
+  earlier `kimi-k2.6:cloud`; read from Zed's settings), **not the Kimi app.** So the app's non-commercial clause
+  doesn't apply. What applies:
+  - **Ollama's terms** (last updated May 2026): "You retain ownership of content you create using our services"
+    and "We claim no ownership over your inputs or outputs". The only restriction is "Use our services to develop
+    competing products". Interlock supervises local Ollama and doesn't compete with it.
+  - **The Kimi K3 License** (MoonshotAI/Kimi-K3, 2026): MIT-style, commercial use allowed. Its thresholds (a Model
+    as a Service business over $20M in revenue, a product over 100M monthly users or $20M a month) exempt
+    internal use. It's silent on outputs.
+  - **The K2.6 licence** isn't read yet. It covers the earlier interlock PRs.
+  - **R&D's reading:** proven for code use. Ollama's ownership sentence is the affirmative text, and no clause
+    restricts interlock's use.

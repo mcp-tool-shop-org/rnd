@@ -11,9 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
-## [1.1.10.1.4] - 2026-10-16
+## [1.1.10.2.1] - 2026-10-16
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output
+
+## [1.1.10.2.0] - 2026-10-16
+
+- licences/: the registry of every licence and terms page the studio relies on, with clauses, verdicts per use and snapshot hashes
+- Updated experiment `generated-content-terms`
 
 ## [1.1.10.1.3] - 2026-10-16
 

@@ -1,0 +1,649 @@
+{
+  "_about": "The studio's path to every licence and terms page it relies on for AI-generated content: the page, the exact clause, its date, and R&D's verdict per use. Uses: assets (shipping output commercially), training (output as training data), evaluation (output in tests or controls), code (AI-written code in studio tools). Verdicts: proven, conditions (proven with the conditions listed), barred, not_proven, n/a. snapshot_sha256 is the sha256 of the page text as fetched on read_date; full-text snapshots are kept off the repo (see README). This is a reading of published terms, not legal advice.",
+  "schema_version": 1,
+  "entries": [
+    {
+      "id": "google-tos",
+      "owner": "Google",
+      "kind": "service-terms",
+      "covers": [
+        "Gemini app (Browser Argon)",
+        "Antigravity (Argon builds)",
+        "Flow",
+        "Flow Music",
+        "Project Genie"
+      ],
+      "url": "https://policies.google.com/terms",
+      "page_date": "2026-07-30 (effective)",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "using AI-generated content from our services to develop machine learning models or related AI technology",
+        "Google won't claim ownership over that content"
+      ],
+      "uses": {
+        "assets": "not_proven",
+        "training": "barred",
+        "evaluation": "not_proven",
+        "code": "barred"
+      },
+      "notes": "Code is barred for AI-pipeline code only; the clause has no competition qualifier. Service-specific terms govern where they conflict.",
+      "snapshot_sha256": "2def678586392e0e143d5948b3915530175522258e0d11fa20ce5933a4559dd0",
+      "snapshot_file": "2026-10-16/google-tos.txt",
+      "archive_url": null
+    },
+    {
+      "id": "google-ultra-benefits",
+      "owner": "Google",
+      "kind": "service-page",
+      "covers": [
+        "Flow Music (Member plan, via Google AI Ultra)"
+      ],
+      "url": "https://support.google.com/googleone/answer/16286513?hl=en",
+      "page_date": "unknown (help page)",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "Commercial use rights"
+      ],
+      "uses": {
+        "assets": "proven",
+        "training": "barred",
+        "evaluation": "not_proven",
+        "code": "n/a"
+      },
+      "notes": "Proven for Flow Music only. Flow and Project Genie have no comparable grant (the Flow help page defers to the ToS).",
+      "snapshot_sha256": "a92edecb6112d6a7eadfb8e9ee334e789562b2767deefb0bfa9f8136a3c5e075",
+      "snapshot_file": "2026-10-16/google-ultra-benefits.txt",
+      "archive_url": null
+    },
+    {
+      "id": "antigravity-terms",
+      "owner": "Google",
+      "kind": "service-terms",
+      "covers": [
+        "Antigravity"
+      ],
+      "url": "https://antigravity.google/terms",
+      "page_date": "live 2026-10-16",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "Using third party software, tools, or services to access the Service (e.g. using OpenClaw with Antigravity OAuth) is a breach of this Agreement."
+      ],
+      "uses": {
+        "assets": "not_proven",
+        "training": "barred",
+        "evaluation": "not_proven",
+        "code": "barred"
+      },
+      "notes": "Incorporates the Google ToS (google-tos). Section 6 bars third-party tools reaching Antigravity through the maintainer's OAuth.",
+      "snapshot_sha256": "04d5f6ee21200e1af59059bb83a83e1e108fbf888927f67c6b58e2a343e66f4f",
+      "snapshot_file": "2026-10-16/antigravity-terms.txt",
+      "archive_url": "http://web.archive.org/web/20261015094837/https://antigravity.google/terms"
+    },
+    {
+      "id": "xai-consumer-terms",
+      "owner": "xAI (SpaceXAI LLC)",
+      "kind": "service-terms",
+      "covers": [
+        "Grok",
+        "Grok Build"
+      ],
+      "url": "https://x.ai/legal/terms-of-service",
+      "page_date": "2026-10-12 (last updated)",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "you retain your ownership rights to the User Content",
+        "When using Output or SpaceXSI's name, logos, trademarks, or other brand elements, you are required to obtain our permission and attribute your generation of the Output to the Service"
+      ],
+      "uses": {
+        "assets": "conditions",
+        "training": "barred",
+        "evaluation": "not_proven",
+        "code": "conditions"
+      },
+      "conditions": [
+        "Attribute Output: 'Written with Grok' or 'Created with Grok' (xai-brand-guidelines)",
+        "Code only where it develops no ML model and doesn't compete (xai-aup)"
+      ],
+      "notes": "Training is barred by xai-aup. Our Use of User Content grants xAI a perpetual licence over what is sent; it limits nothing on the user's side.",
+      "snapshot_sha256": "0afec3601b4f8f8ed544c1b7fb785de637483476891ec43c12aed0640af4f960",
+      "snapshot_file": "2026-10-16/xai-consumer-terms.txt",
+      "archive_url": "http://web.archive.org/web/20261016171554/https://x.ai/legal/terms-of-service"
+    },
+    {
+      "id": "xai-aup",
+      "owner": "xAI (SpaceXAI LLC)",
+      "kind": "usage-policy",
+      "covers": [
+        "Grok",
+        "Grok Build",
+        "xAI API"
+      ],
+      "url": "https://x.ai/legal/acceptable-use-policy",
+      "page_date": "2026-08-14 (effective)",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "Scraping, harvesting or reselling any Input or Output, or distilling model data or Outputs",
+        "Using the Service or any Output to develop (or assist anyone in developing) machine learning models or any products or services that compete with SpaceXSI, whether directly or indirectly"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "barred",
+        "evaluation": "not_proven",
+        "code": "conditions"
+      },
+      "conditions": [
+        "Code that develops an ML model is not proven (the 'that compete' reach is ambiguous)"
+      ],
+      "notes": "Applies to consumers, developers and businesses.",
+      "snapshot_sha256": "686a4bc1e0fbf0142a89ef8355b8c733f149017733af3c798d4eb341c271230f",
+      "snapshot_file": "2026-10-16/xai-aup.txt",
+      "archive_url": "http://web.archive.org/web/20261014165045/https://x.ai/legal/acceptable-use-policy"
+    },
+    {
+      "id": "xai-enterprise-terms",
+      "owner": "xAI (SpaceXAI LLC)",
+      "kind": "service-terms",
+      "covers": [
+        "xAI enterprise and API"
+      ],
+      "url": "https://x.ai/legal/terms-of-service-enterprise",
+      "page_date": "see page",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "use any Output to train any foundation models, large language models, or other artificial intelligence systems except as may be expressly permitted in an Order Form"
+      ],
+      "uses": {
+        "assets": "proven",
+        "training": "barred",
+        "evaluation": "not_proven",
+        "code": "proven"
+      },
+      "notes": "Training only with an Order Form permission.",
+      "snapshot_sha256": "66e3dc46a14de289f5295f01e2d09ca5ed069ec5ecca3c513985c4ef6a6e57de",
+      "snapshot_file": "2026-10-16/xai-enterprise-terms.txt",
+      "archive_url": "http://web.archive.org/web/20261010013935/https://x.ai/legal/terms-of-service-enterprise"
+    },
+    {
+      "id": "xai-brand-guidelines",
+      "owner": "xAI (SpaceXAI LLC)",
+      "kind": "attribution",
+      "covers": [
+        "Grok output"
+      ],
+      "url": "https://x.ai/legal/brand-guidelines",
+      "page_date": "unknown",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "please attribute them to SpaceXSI and Grok by displaying one of the following phrases in a legible and noticeable manner wherever the Grok-generated material is published or distributed: Written with Grok Created with Grok"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "n/a",
+        "code": "n/a"
+      },
+      "notes": "Met in interlock and role-set by a README line plus CONTRIBUTORS.md (interlock#130, role-set#69).",
+      "snapshot_sha256": "e3a09b401e5853b6b831c2e05c8096d797eae5bdae92651ae09e980848bd8de1",
+      "snapshot_file": "2026-10-16/xai-brand-guidelines.txt",
+      "archive_url": "http://web.archive.org/web/20261014165026/https://x.ai/legal/brand-guidelines"
+    },
+    {
+      "id": "anthropic-help-12326764",
+      "owner": "Anthropic",
+      "kind": "help-center",
+      "covers": [
+        "Claude (all plans)",
+        "Claude Code"
+      ],
+      "url": "https://support.claude.com/en/articles/12326764-can-i-use-my-outputs-to-train-an-ai-model",
+      "page_date": "2026-03-16",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "You can use Claude's Outputs to train models that don't compete with Anthropic's own models. This includes creating specialized classifiers and tools",
+        "Using Outputs as training targets for models",
+        "Models designed for open-ended text generation"
+      ],
+      "uses": {
+        "assets": "proven",
+        "training": "conditions",
+        "evaluation": "proven",
+        "code": "proven"
+      },
+      "conditions": [
+        "Only for a non-competing specialized classifier or tool (the maintainer ruled the Stage 1 verifier is one)",
+        "Never as training targets",
+        "Never for general chatbots or open-ended text generation"
+      ],
+      "notes": "Anthropic's support channel agreed for this use on 2026-10-16; that reply came from an AI agent, so it supports but doesn't prove.",
+      "snapshot_sha256": "cca7d7fd734a6be43df8381660e22fcce9f452e16b184d95dcb8b427a2776a97",
+      "snapshot_file": "2026-10-16/anthropic-help-12326764.txt",
+      "archive_url": "http://web.archive.org/web/20261012155740/https://support.claude.com/en/articles/12326764-can-i-use-my-outputs-to-train-an-ai-model"
+    },
+    {
+      "id": "anthropic-consumer-terms",
+      "owner": "Anthropic",
+      "kind": "service-terms",
+      "covers": [
+        "Claude Pro and Max",
+        "Claude Code on a consumer plan"
+      ],
+      "url": "https://www.anthropic.com/legal/consumer-terms",
+      "page_date": "2025-10-08 (effective)",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "To develop any products or services that compete with our Services, including to develop or train any artificial intelligence or machine learning algorithms or models or resell the Services."
+      ],
+      "uses": {
+        "assets": "proven",
+        "training": "conditions",
+        "evaluation": "proven",
+        "code": "proven"
+      },
+      "conditions": [
+        "Read with anthropic-help-12326764 for what counts as competing"
+      ],
+      "notes": "The non-commercial line applies to evaluation access only.",
+      "snapshot_sha256": "d9d650a0f8eef517a0512e5280b8f544297f418b4b208e7d1702506802e0e386",
+      "snapshot_file": "2026-10-16/anthropic-consumer-terms.txt",
+      "archive_url": "http://web.archive.org/web/20261016204948/https://www.anthropic.com/legal/consumer-terms"
+    },
+    {
+      "id": "anthropic-commercial-terms",
+      "owner": "Anthropic",
+      "kind": "service-terms",
+      "covers": [
+        "Claude API",
+        "Commercial plans"
+      ],
+      "url": "https://www.anthropic.com/legal/commercial-terms",
+      "page_date": "2025-06-17 (effective)",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "access the Services to build a competing product or service, including to train competing AI models or resell the Services except as expressly approved by Anthropic"
+      ],
+      "uses": {
+        "assets": "proven",
+        "training": "conditions",
+        "evaluation": "proven",
+        "code": "proven"
+      },
+      "conditions": [
+        "Non-competing models only"
+      ],
+      "notes": "Not the terms the studio's plan runs under; recorded for comparison.",
+      "snapshot_sha256": "8d37664d7ee4ed441cc65991811812dd2607cd0e99601d4343d1f1133479422e",
+      "snapshot_file": "2026-10-16/anthropic-commercial-terms.txt",
+      "archive_url": "http://web.archive.org/web/20261016152019/https://www.anthropic.com/legal/commercial-terms"
+    },
+    {
+      "id": "anthropic-usage-policy",
+      "owner": "Anthropic",
+      "kind": "usage-policy",
+      "covers": [
+        "All Anthropic services"
+      ],
+      "url": "https://www.anthropic.com/legal/aup",
+      "page_date": "2026-11-12 (effective)",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "Use outputs to train an AI model (e.g., \"model scraping\" or \"model distillation\") without prior authorization from Anthropic"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "conditions",
+        "evaluation": "n/a",
+        "code": "n/a"
+      },
+      "conditions": [
+        "Authorized uses are as published in anthropic-help-12326764"
+      ],
+      "notes": "",
+      "snapshot_sha256": "8d7011d64c21c74789c099ae4ef07f6c2a1972fe8deafaeb079cf496d505c3aa",
+      "snapshot_file": "2026-10-16/anthropic-usage-policy.txt",
+      "archive_url": "http://web.archive.org/web/20261016151954/https://www.anthropic.com/legal/aup"
+    },
+    {
+      "id": "kimi-app-agreement",
+      "owner": "Moonshot AI",
+      "kind": "service-terms",
+      "covers": [
+        "Kimi app (consumer)"
+      ],
+      "url": "https://www.kimi.com/user/agreement/en/modelUse",
+      "page_date": "2024-01-05 (effective)",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "you may only use Kimi in a non-commercial, personal research, and study manner"
+      ],
+      "uses": {
+        "assets": "barred",
+        "training": "not_proven",
+        "evaluation": "not_proven",
+        "code": "barred"
+      },
+      "notes": "Did not apply to the studio's Kimi seat, which ran through Ollama Cloud (ollama-terms, kimi-k3-licence, kimi-k2.6-licence).",
+      "snapshot_sha256": "d985dc8514bf4c659bdd4646de29ed704fc382b096dc66390901ed8bde41d31a",
+      "snapshot_file": "2026-10-16/kimi-app-agreement.txt",
+      "archive_url": "http://web.archive.org/web/20250929160236/https://www.kimi.com/user/agreement/en/modelUse"
+    },
+    {
+      "id": "ollama-terms",
+      "owner": "Ollama",
+      "kind": "service-terms",
+      "covers": [
+        "Ollama Cloud models (for example kimi-k3:cloud, kimi-k2.6:cloud)"
+      ],
+      "url": "https://ollama.com/terms",
+      "page_date": "2026-05 (last updated)",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "You retain ownership of content you create using our services.",
+        "We claim no ownership over your inputs or outputs.",
+        "Use our services to develop competing products"
+      ],
+      "uses": {
+        "assets": "proven",
+        "training": "not_proven",
+        "evaluation": "proven",
+        "code": "proven"
+      },
+      "conditions": [],
+      "notes": "The model's own licence also applies. Training stays not proven unless the maintainer rules that ownership with no restriction is proof.",
+      "snapshot_sha256": "0f31d86a6f9d0cecdc84c2224000904a59ff0309b30528465f6f42dfa743f2b9",
+      "snapshot_file": "2026-10-16/ollama-terms.txt",
+      "archive_url": "http://web.archive.org/web/20261011233708/https://ollama.com/terms"
+    },
+    {
+      "id": "openmdw-1.1",
+      "owner": "Linux Foundation (OpenMDW)",
+      "kind": "model-licence",
+      "covers": [
+        "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+        "nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16",
+        "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+        "nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB (and -GGUF, -BF16)"
+      ],
+      "url": "https://openmdw.ai/license/1-1/",
+      "page_date": "version 1.1",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "This agreement does not impose any restrictions or obligations with respect to any use, modification, or sharing of any outputs generated by using the Model Materials."
+      ],
+      "uses": {
+        "assets": "proven",
+        "training": "proven",
+        "evaluation": "proven",
+        "code": "proven"
+      },
+      "notes": "Each model card names OpenMDW-1.1 as its governing terms (nemotron-model-cards). The Ollama tag for Lightning bundles a different NVIDIA licence; the card governs.",
+      "snapshot_sha256": "c709632b442a6da23660cc64546b1d02a3a5ba1c26b19cb658d2a4ccd1cf4ab6",
+      "snapshot_file": "2026-10-16/openmdw-1.1.txt",
+      "archive_url": null
+    },
+    {
+      "id": "nemotron-model-cards",
+      "owner": "NVIDIA",
+      "kind": "model-card",
+      "covers": [
+        "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+        "nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16",
+        "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+        "nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB (and -GGUF, -BF16)"
+      ],
+      "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16",
+      "page_date": "Super-VL released 2026-10-15; Ultra released 2026-06-04",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "Governing Download Terms: Use of this model is governed by the OpenMDW License Agreement, version 1.1"
+      ],
+      "uses": {
+        "assets": "proven",
+        "training": "proven",
+        "evaluation": "proven",
+        "code": "proven"
+      },
+      "notes": "Ultra: https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16 . Pin the card revision read when a model is used. Bolt-74B-A9B-24GB: 'Governing Terms: Use of the models is governed by the OpenMDW License Agreement, version 1.1', released 2026-10-15 (https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB).",
+      "snapshot_sha256": "06962053aa862852b096a1547c58bfab80cd381ae3a27d73cc4c800859068bb1",
+      "snapshot_file": "2026-10-16/nemotron-model-cards.txt",
+      "archive_url": null
+    },
+    {
+      "id": "muse-glimmer-30b-card",
+      "owner": "Meta (meta-models)",
+      "kind": "model-card",
+      "covers": [
+        "meta-models/Muse-Glimmer-30B",
+        "meta-models/Muse-Glimmer-30B-GGUF"
+      ],
+      "url": "https://huggingface.co/meta-models/Muse-Glimmer-30B",
+      "page_date": "unknown (card)",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "Synthetic data generation: Generating high-quality training data for downstream model development."
+      ],
+      "uses": {
+        "assets": "proven",
+        "training": "proven",
+        "evaluation": "proven",
+        "code": "proven"
+      },
+      "notes": "Licence Apache-2.0; the card's intended use is the grant. Its Usage Policy has no clause on outputs or training.",
+      "snapshot_sha256": "6367b679f0d51feda1e955c4588e59086052c4352a41ca232f8eefccd2cedeb6",
+      "snapshot_file": "2026-10-16/muse-glimmer-30b-card.txt",
+      "archive_url": "http://web.archive.org/web/20261010025638/https://huggingface.co/meta-models/Muse-Glimmer-30B"
+    },
+    {
+      "id": "muse-model-license-spark",
+      "owner": "Meta (meta-models)",
+      "kind": "model-licence",
+      "covers": [
+        "meta-models/Muse-Spark-Open-816B-A42B"
+      ],
+      "url": "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B",
+      "page_date": "2026-10-15 (release)",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "Synthetic Data Generation - generating high-quality training data for downstream model development.",
+        "\"Derivatives\" means any AI model created, trained, modified (including fine-tuned), distilled, or otherwise improved using the Software or any outputs or results thereof.",
+        "Licensee shall prominently display \"Built with Muse Spark Open\""
+      ],
+      "uses": {
+        "assets": "conditions",
+        "training": "conditions",
+        "evaluation": "proven",
+        "code": "conditions"
+      },
+      "conditions": [
+        "A model trained on its outputs carries the notice, licence and Usage Policy",
+        "Display 'Built with Muse Spark Open'",
+        "Gated repo: access request in the maintainer's legal name"
+      ],
+      "notes": "Not in use (the frontier tier is out of reach).",
+      "snapshot_sha256": "128704d9d100e2f8661076fa8c034b428e1fc1b3161aeaa8df0e758d3a46b103",
+      "snapshot_file": "2026-10-16/muse-model-license-spark.txt",
+      "archive_url": null
+    },
+    {
+      "id": "deepseek-r1-card",
+      "owner": "DeepSeek",
+      "kind": "model-card",
+      "covers": [
+        "deepseek-ai/DeepSeek-R1",
+        "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+      ],
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1",
+      "page_date": "2025-01-20",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "DeepSeek-R1 series support commercial use, allow for any modifications and derivative works, including, but not limited to, distillation for training other LLMs."
+      ],
+      "uses": {
+        "assets": "proven",
+        "training": "proven",
+        "evaluation": "proven",
+        "code": "proven"
+      },
+      "notes": "MIT. R1-Distill-Qwen-32B is not used: its Qwen2.5 base is plain Apache-2.0 (the Publisher's ruling).",
+      "snapshot_sha256": "b20b17e9911d646b4adefde3a1f14ad46f823064cd987b14d858d6142da09411",
+      "snapshot_file": "2026-10-16/deepseek-r1-card.txt",
+      "archive_url": null
+    },
+    {
+      "id": "deepseek-r1-0528-card",
+      "owner": "DeepSeek",
+      "kind": "model-card",
+      "covers": [
+        "deepseek-ai/DeepSeek-R1-0528"
+      ],
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-0528",
+      "page_date": "2025-05-28",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "DeepSeek-R1 series (including Base and Chat) supports commercial use and distillation."
+      ],
+      "uses": {
+        "assets": "proven",
+        "training": "proven",
+        "evaluation": "proven",
+        "code": "proven"
+      },
+      "notes": "MIT.",
+      "snapshot_sha256": "924a114f7779cc2179c2da56f21dda2c3072ab541a98da37a26187bdf54e9842",
+      "snapshot_file": "2026-10-16/deepseek-r1-0528-card.txt",
+      "archive_url": "http://web.archive.org/web/20261015183426/https://huggingface.co/deepseek-ai/DeepSeek-R1-0528"
+    },
+    {
+      "id": "llama-3.3-licence",
+      "owner": "Meta (Llama)",
+      "kind": "model-licence",
+      "covers": [
+        "Llama 3.3 and models built on it (for example R1-Distill-Llama-70B)"
+      ],
+      "url": "https://raw.githubusercontent.com/meta-llama/llama-models/main/models/llama3_3/LICENSE",
+      "page_date": "2024-12-06 (version release)",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "any outputs or results of the Llama Materials to create, train, fine tune, or otherwise improve an AI model"
+      ],
+      "uses": {
+        "assets": "conditions",
+        "training": "conditions",
+        "evaluation": "proven",
+        "code": "conditions"
+      },
+      "conditions": [
+        "A model so trained, if distributed, must have a name beginning with 'Llama' (Section 1.b.i)"
+      ],
+      "notes": "Not in use: the naming condition would fall on the studio's student.",
+      "snapshot_sha256": "1beaed4a9925af5f6d4d07eebcc351c2c59b00bbb3cdeac59d780adffadcfcdb",
+      "snapshot_file": "2026-10-16/llama-3.3-licence.txt",
+      "archive_url": null
+    },
+    {
+      "id": "kimi-k3-licence",
+      "owner": "Moonshot AI",
+      "kind": "model-licence",
+      "covers": [
+        "moonshotai/Kimi-K3",
+        "kimi-k3:cloud"
+      ],
+      "url": "https://github.com/MoonshotAI/Kimi-K3/blob/main/LICENSE",
+      "page_date": "2026",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "to deal in the Software without restriction"
+      ],
+      "uses": {
+        "assets": "proven",
+        "training": "not_proven",
+        "evaluation": "proven",
+        "code": "proven"
+      },
+      "conditions": [
+        "Display 'Kimi K3' only above 100M monthly users or $20M monthly revenue",
+        "Separate agreement only for a Model as a Service business above $20M revenue; internal use exempt"
+      ],
+      "notes": "Silent on outputs. Assets, evaluation and code rest on ollama-terms ownership for the Ollama Cloud route.",
+      "snapshot_sha256": "d4de1d14edd7bfa695c7b7b8ce8e8ff4eab625e4b61b3e5f6af5d88841ee9691",
+      "snapshot_file": "2026-10-16/kimi-k3-licence.txt",
+      "archive_url": "http://web.archive.org/web/20260808211815/https://github.com/MoonshotAI/Kimi-K3/blob/main/LICENSE"
+    },
+    {
+      "id": "kimi-k2.6-licence",
+      "owner": "Moonshot AI",
+      "kind": "model-licence",
+      "covers": [
+        "moonshotai/Kimi-K2.6",
+        "kimi-k2.6:cloud"
+      ],
+      "url": "https://huggingface.co/moonshotai/Kimi-K2.6/raw/main/LICENSE",
+      "page_date": "2026",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "Our only modification part is that, if the Software (or any derivative works thereof) is used for any of your commercial products or services that have more than 100 million monthly active users"
+      ],
+      "uses": {
+        "assets": "proven",
+        "training": "not_proven",
+        "evaluation": "proven",
+        "code": "proven"
+      },
+      "notes": "Modified MIT; silent on outputs. Same reading as kimi-k3-licence.",
+      "snapshot_sha256": "941ddde5de6c074eac890c67856db540e48bd4653e34d4d9e38d1a9fae4344b8",
+      "snapshot_file": "2026-10-16/kimi-k2.6-licence.txt",
+      "archive_url": null
+    },
+    {
+      "id": "nvidia-open-model-license",
+      "owner": "NVIDIA",
+      "kind": "model-licence",
+      "covers": [
+        "Nemotron-4-340B",
+        "NVIDIA-Nemotron-3-Super-120B (Dec 2025)",
+        "the licence bundled in the Ollama nemotron-3.5-lightning tag"
+      ],
+      "url": "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/",
+      "page_date": "2025-10-24",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "NVIDIA does not claim ownership to any outputs generated using the Models or Derivative Models"
+      ],
+      "uses": {
+        "assets": "not_proven",
+        "training": "not_proven",
+        "evaluation": "not_proven",
+        "code": "not_proven"
+      },
+      "notes": "A disclaimer of ownership is not a grant.",
+      "snapshot_sha256": "25afb28cff985c67f62a8eb3c800f240eb355bac62edae6241eba0670638ef0a",
+      "snapshot_file": "2026-10-16/nvidia-open-model-license.txt",
+      "archive_url": "http://web.archive.org/web/20261005213244/https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/"
+    },
+    {
+      "id": "apache-2.0",
+      "owner": "Apache Software Foundation",
+      "kind": "model-licence",
+      "covers": [
+        "Qwen3.8-27B",
+        "Qwen3.6-35B-A3B",
+        "Gemma 4 31B",
+        "Granite 4.2",
+        "Qwen2.5-32B"
+      ],
+      "url": "https://www.apache.org/licenses/LICENSE-2.0",
+      "page_date": "2004-01",
+      "read_date": "2026-10-16",
+      "clauses": [],
+      "uses": {
+        "assets": "not_proven",
+        "training": "not_proven",
+        "evaluation": "not_proven",
+        "code": "not_proven"
+      },
+      "notes": "Grants rights in the Work; says nothing about outputs. The Linux Foundation's OpenMDW launch post (https://huggingface.co/blog/linuxfoundation/openmdw) names the ambiguity. Unruled by the maintainer; no current plan depends on it.",
+      "snapshot_sha256": "0ffddef9e48f8a09aed5caf2d44f7ba1c1be2d9b8e0a6f693b1635b2d5566645",
+      "snapshot_file": "2026-10-16/apache-2.0.txt",
+      "archive_url": "http://web.archive.org/web/20261012114733/https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ]
+}

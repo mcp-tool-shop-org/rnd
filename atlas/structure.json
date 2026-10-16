@@ -896,7 +896,7 @@
           "path": "experiments/charts/vocal-timing.svg"
         },
         {
-          "hash": "c71fd60e8bf8ed673ad55ffcb5860263924fdc115ed8bec9a8342e1700e5f5d4",
+          "hash": "ce42233728eb9296dd68572a75340952965da0085be8d7e718d4f90876519c55",
           "path": "experiments/cloud-cu134/README.md"
         },
         {
@@ -945,6 +945,18 @@
         {
           "hash": "767006ba6c06035f96a1ef6baf8f5fe20966fdbfab3874e8a7f34da70f25746a",
           "path": "experiments/cloud-cu134/setup_compat.sh"
+        },
+        {
+          "hash": "81df1dded13c5bea5a57b85b895e38724cd1e18312fd121a33a6a958058ece03",
+          "path": "experiments/colab-bottlenecks/README.md"
+        },
+        {
+          "hash": "9f4104ba7198c5b5d8ecc4c5ab5059d58a7ff6c4a7b17936495e0491d81e2b88",
+          "path": "experiments/colab-bottlenecks/argon-answer.md"
+        },
+        {
+          "hash": "781ddc2eba63cd4878d458e1d34f128929bc01f32192ce98e7da1850d9a29581",
+          "path": "experiments/colab-bottlenecks/argon-brief.md"
         },
         {
           "hash": "d92b8189e6c769e56fb5d57bf2feaa723433761cccce80b11c7f49684a5670d4",
@@ -1949,6 +1961,18 @@
           "path": "experiments/embeddinggemma-2/results/zero-relevance-lock.json"
         },
         {
+          "hash": "14b24e444ae2aa2eede3ee608d4c1c35559112aac7d364d0a5389fed0532aed1",
+          "path": "experiments/generated-content-terms/README.md"
+        },
+        {
+          "hash": "2237808d3f0d64356045c8a66519caed5779a6a6cde88912d5d2857fae900ef0",
+          "path": "experiments/generated-content-terms/argon-answer.md"
+        },
+        {
+          "hash": "32bdb47da848fd4b033bd574438a7d8bfaee43e47e88018a6d2387edaf244ed5",
+          "path": "experiments/generated-content-terms/argon-brief.md"
+        },
+        {
           "hash": "4fc3090ae9fc0c4849b13d032a53f7bed9cd2ece51637d409ae04e2aa585e40e",
           "path": "experiments/interlock-relay/argon-audit-brief-round2.md"
         },
@@ -2402,6 +2426,14 @@
         {
           "hash": "ac9a91e4fedb1d52658d42f95ef53a9cca0b2a317d089b0ac460da02bd6756ae",
           "path": "experiments/local-agent-relay/design.md"
+        },
+        {
+          "hash": "3942a5aac32b910b89f5db395659d22b4859cceddd58f417244e978061f636c4",
+          "path": "experiments/local-builders/DESIGN.md"
+        },
+        {
+          "hash": "1b4e204aed370dab767691c084dd868f976f742192ce59d9d5c60f6fbddb4658",
+          "path": "experiments/local-builders/README.md"
         },
         {
           "hash": "1692ff5a29c968ad2a24711d1dc229cdb35fce859dd6eb706f7dae829a39bfad",
@@ -3218,7 +3250,27 @@
           "path": "experiments/openjev-vs-jev/run_openjev.py"
         },
         {
-          "hash": "df1d1bea89b430187348ad6462a67237d449521d82c9a6c2fe992dc1ce1188e9",
+          "hash": "0149542ec43ea858d03e76659eb0403c458daf1f58a15956140fb7e3d6dc235a",
+          "path": "experiments/stage1-regeneration/BUILD-SPEC.md"
+        },
+        {
+          "hash": "51a20ca905bc205d3afc87509ec985b48becf2bea7ba8506acf84d28ce3032be",
+          "path": "experiments/stage1-regeneration/PLAN.md"
+        },
+        {
+          "hash": "04f3946dc448ab5fe9b70e6a58c418a7e724c7f18c64e8f55e234fa6bb54d7a6",
+          "path": "experiments/stage1-regeneration/PROVENANCE.md"
+        },
+        {
+          "hash": "c5abc4be7ba54b59be1afdf1e1e7e44da33949315b897c02ee7071186a2979ed",
+          "path": "experiments/stage1-regeneration/README.md"
+        },
+        {
+          "hash": "435f57118255105c4aeed80b697ea31ef2c2c7726ce3f5f7903967575045c1de",
+          "path": "experiments/stage1-regeneration/argon-answer.md"
+        },
+        {
+          "hash": "bc84c4b6b1dead31a83df8b93e8540465d01592b7c18040a5e96f412b025a20a",
           "path": "experiments/stage1-role-eval/README.md"
         },
         {
@@ -4274,7 +4326,7 @@
           "path": "instruments/atlas.md"
         },
         {
-          "hash": "6b3e69190c62e96fd0191d5bbe40e010f1549f3014109587740fd99bafe7e3fd",
+          "hash": "7abf4d886480b790a21a7ca76751d36f6772871a11cc0e5e2d3c28285ea61821",
           "path": "instruments/colab.md"
         },
         {
@@ -4369,6 +4421,70 @@
       "unresolvedSites": 0
     },
     {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "e98378bb64e390bae8210a4d1051aad6af2ae1d869615cd2c009f3934c496297",
+          "path": "licences/README.md"
+        },
+        {
+          "hash": "8409321ed0b9739f3ba56694bc25b46a28e0f71a6a456716b879ed9cd16eea14",
+          "path": "licences/registry.json"
+        },
+        {
+          "exports": [
+            "fetch",
+            "main",
+            "norm",
+            "page_text",
+            "wayback"
+          ],
+          "failurePaths": [
+            {
+              "in": "wayback",
+              "kind": "except",
+              "line": 79
+            },
+            {
+              "in": "main",
+              "kind": "except",
+              "line": 97
+            },
+            {
+              "kind": "raise",
+              "line": 121
+            }
+          ],
+          "hash": "64819f9892c45d0529e797532f640db3082741549f45746cf740943d8d0a4b91",
+          "path": "licences/snapshot.py"
+        }
+      ],
+      "globs": [
+        "licences/**"
+      ],
+      "importConfidence": "full",
+      "name": "licences",
+      "origin": "mixed",
+      "outsidePlaces": [
+        {
+          "reads": 0,
+          "where": [
+            "caller"
+          ],
+          "writes": 1
+        }
+      ],
+      "outsideWrites": 1,
+      "role": "data",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
       "dynamicReads": 3,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
@@ -4380,7 +4496,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "7f133d7e03b852fec9d1c34c4f4d942276a8e3d725dcd4a0c8f6ddd29f0b30c1",
+          "hash": "e1a9127d72663d7881b7742fd906e4f7fdae877df256ee5d3553c8f4c87002f9",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -5595,9 +5711,16 @@
             "cwd:instruments"
           ],
           "writes": 0
+        },
+        {
+          "reads": 2,
+          "where": [
+            "cwd:licences"
+          ],
+          "writes": 0
         }
       ],
-      "outsideReads": 28,
+      "outsideReads": 30,
       "outsideWrites": 8,
       "role": "code",
       "testRunners": [
@@ -5679,7 +5802,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "60bcf638d7bf6dfb409ca34844f69aa67512d2fde1aef5f2967f8a44ac074848",
+          "hash": "bf28a0e691cd55bba2ac5c2e45f0a0304c6063e1164d628e7a32d50bdf2f4c8d",
           "path": "CHANGELOG.md"
         },
         {
@@ -6301,6 +6424,11 @@
           "testFramework": "unittest"
         },
         {
+          "hash": "bf411af86783679541a16245c625d7ca594b0d8a05e2bb2fc8af924306b579fc",
+          "path": "tests/test_licence_registry.py",
+          "testFramework": "unittest"
+        },
+        {
           "exports": [
             "execute"
           ],
@@ -6544,7 +6672,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 15
+          "files": 16
         },
         {
           "boundary": "experiments",
@@ -6646,7 +6774,7 @@
         },
         {
           "coverage": true,
-          "files": 15,
+          "files": 16,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -7114,8 +7242,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "ac6167721f2bfbc799ef36fd109fae3f1a3f1e14",
-    "tracked": 782
+    "commit": "745ccdbe9f126883edddf7c6b9e4b30e210b1bfb",
+    "tracked": 799
   },
   "landings": [
     {
@@ -9169,6 +9297,23 @@
     {
       "readers": [
         {
+          "by": "licences/snapshot.py",
+          "call": "read_text",
+          "confidence": "ast"
+        }
+      ],
+      "target": "licences/registry.json",
+      "writers": [
+        {
+          "by": "licences/snapshot.py",
+          "confidence": "ast",
+          "stamps": true
+        }
+      ]
+    },
+    {
+      "readers": [
+        {
           "by": "tests/test_cli.py",
           "call": "literal",
           "confidence": "ast",
@@ -9347,7 +9492,7 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 44,
+  "testFiles": 45,
   "testsNotRun": [
     "experiments/cuda-graphs/test_graphed_heads.py",
     "experiments/data-designer/tests/test_lockdown.py",

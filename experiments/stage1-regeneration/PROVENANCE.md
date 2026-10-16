@@ -111,6 +111,8 @@ means Argon's findings were design input and Claude wrote the code. That's not A
   - **The Kimi K3 License** (MoonshotAI/Kimi-K3, 2026): MIT-style, commercial use allowed. Its thresholds (a Model
     as a Service business over $20M in revenue, a product over 100M monthly users or $20M a month) exempt
     internal use. It's silent on outputs.
-  - **The K2.6 licence** isn't read yet. It covers the earlier interlock PRs.
+  - **The Kimi K2.6 licence** ("Modified MIT License", 2026; it covers the earlier interlock PRs): MIT. Its only
+    modification is to display "Kimi K2.6" on a commercial product with over 100M monthly users or $20M a month
+    in revenue. No output clause.
   - **R&D's reading:** proven for code use. Ollama's ownership sentence is the affirmative text, and no clause
     restricts interlock's use.

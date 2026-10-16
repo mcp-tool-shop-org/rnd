@@ -44,6 +44,7 @@ units.
   | Card | Units/hour | GPU memory | Host |
   |---|---|---|---|
   | T4 | 1.07 | 15,360 MiB | 2 cores, 12.7 GB RAM |
+| T4 `--high-mem` | 1.27 | 15,360 MiB | 8 cores, 51.0 GB RAM |
   | L4 | 1.54 | 23,034 MiB | 12 cores, 53.0 GB RAM |
   | A100 (40 GB as assigned) | 5.30 | 40,960 MiB | 12 cores, 83.5 GB RAM |
 
@@ -56,12 +57,29 @@ units.
   `timeout`, stops every session, and ends by listing any session still alive.
 - **Cards were available on request** at that hour. The A100 came as 40 GB, and Pro+ likely never assigns
   80 GB (see the rules below).
+- **The second probe session** (2026-10-16, 19:41–19:51Z, about 0.25 units by rate):
+  - **The image:** `COLAB_RELEASE_TAG` = `release-colab-external-images_20261014-060047_RC00`.
+  - **The T4's idle GPU:** 44 C and 9.57 W.
+  - **cgroup v2 with `memory.max = max`,** so there's no container limit. RAM guards must read `/proc/meminfo`.
+  - **`colab run --timeout 30`:** a 45 s silent script and a 45 s chatty one both returned exit 0, in 51 and 52 s.
+    The flag doesn't cut a run off.
+  - **In-VM `runtime.unassign()` didn't release the assignment.** It was called from a `colab exec`: the exec ended
+    with "Connection was lost", but the server still showed one active assignment 15 s later. `colab stop`
+    released it.
+  - **H100:** `Service Unavailable`, and nothing was assigned. Retry before any design depends on it.
+  - **The cu134 nightly** (torch 2.16.0.dev20261008+cu134, Triton 3.9.0, uv venv on Python 3.12):
+    - every check passes on an L4 (sm_89);
+    - every check passes on a T4 (sm_75) except flash SDPA, a hardware limit (sm_80+ needed);
+    - details in `experiments/cloud-cu134`;
+    - torch installs in 63 s on the T4 and 29 s on the L4.
+  - **The balance lags:** it hadn't moved about a minute after the last session ended. Cost by rate × time.
 
 ## Rules of use
 
 - **Teardown, three layers** (see `experiments/colab-bottlenecks`):
-  1. **In the VM:** a watchdog thread with a hard deadline calls `google.colab.runtime.unassign()`, as does the
-     script's top-level `finally`.
+  1. **In the VM (unproven):** a watchdog thread with a hard deadline calls `google.colab.runtime.unassign()`.
+     In the 2026-10-16 probe, an in-VM unassign did **not** release the assignment within 15 s. Keep it as a
+     belt, but never count on it: layers 2 and 3 are what released the session.
   2. **On the host:** `timeout --signal=SIGINT --kill-after=15s <secs> colab run …`.
   3. **Afterwards:** check that `colab sessions` is empty, and `colab stop` until it is. `colab run` swallows its
      own teardown errors, so its exit isn't proof of release.
@@ -69,8 +87,10 @@ units.
   An idle session still spends units (a CPU session was seen at about 0.08 units an hour).
 - **`--timeout` isn't a hang guard.** In 0.7.4 it sets one deadline at the call's start (not an inactivity
   timer), and the client never raises on it while output is pending. A kernel that never goes idle hangs the
-  client forever, and a run that outlives the deadline may still fail its final reply fetch. Set it above the
-  expected run time plus a margin on every `colab run`, and rely on the three layers for hangs.
+  client forever.
+  - **Measured:** 45 s runs, silent or chatty, finished normally past a 30 s `--timeout`.
+  - Set it above the expected run time anyway, and rely on the outer `timeout` and the sessions/stop loop for
+    hangs.
 - **Read the rate during a session, and the balance after it.** The balance only moved after the session ended.
 - **Each card type is its own machine line.**
   - Record the card and memory from nvidia-smi, the driver, CUDA, `COLAB_RELEASE_TAG` (the image), Python, the
@@ -79,14 +99,22 @@ units.
     available".
   - The image can't be pinned from the CLI, so a change in `COLAB_RELEASE_TAG` mid-study is a recorded machine
     line change.
-  - An A100 comes as 40 GB. For 80 GB, request `--gpu H100` (its rate isn't measured yet).
-- **T4:** request `--high-mem`. The default shape's 12.7 GB of host RAM can fail shard loading.
+  - An A100 comes as 40 GB. For 80 GB, request `--gpu H100`. It returned `Service Unavailable` on 2026-10-16, so
+    check that it's available before a design pins it.
+- **T4:** request `--high-mem`: 1.27 units/hour for 8 cores and 51 GB, against the default's 2 cores and 12.7 GB,
+  which can fail shard loading. Flash SDPA isn't available on a T4 (sm_75). Use an L4 or better for
+  flash-attention work.
+- **RAM guards** read `/proc/meminfo`. The cgroup limit is `max`.
 - **Python:** build the stack in a `uv venv`. Never pip into the image's system Python.
 - **Weights:** pull from Hugging Face or the Ollama registry to `/content`. Never run Ollama's model store from the
   Drive mount.
-- **CUDA:** the driver is 580.82 (CUDA 13.0). Our `experiments/cloud-cu134` record ran the 13.4 nightly on a 13.0
-  driver (580.159) and passed Triton JIT, `torch.compile` and CUDA graphs on sm_80 and sm_100. Run
-  `cu134_probe.py` once per Colab card type (T4 sm_75 and L4 sm_89 are untested) before relying on it.
+- **CUDA:** the driver is 580.82 (CUDA 13.0). The CUDA 13.4 nightly works under minor-version compatibility, as
+  measured in `experiments/cloud-cu134`:
+  - an L4 passes every check;
+  - a T4 passes every check but flash SDPA, a hardware limit;
+  - Triton JIT and `torch.compile` pass on both.
+
+  A new card type gets `cu134_probe.py` first.
 - **`google.colab.ai` doesn't work from the CLI.** It needs a secret that only the browser front end serves.
   - It works from a notebook in the Colab UI.
   - The official `googlecolab/colab-mcp` drives a notebook in a browser tab, so it's a likely route for scripted

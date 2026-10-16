@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.18] - 2026-10-16
+
+- instrument colab: second probe session (timeout measured, in-VM unassign unproven, T4 high-mem, H100 unavailable); cloud-cu134: Colab T4 and L4
+- Updated `colab`: Colab Pro+ — prepaid cloud GPUs for experiments
+- Updated experiment `cloud-cu134`
+
 ## [1.1.10.0.17] - 2026-10-16
 
 - experiment local-builders: Wave 1 design filed with R&D's review changes

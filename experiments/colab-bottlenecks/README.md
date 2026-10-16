@@ -35,6 +35,8 @@ timeout". One is superseded by our own measurement (Q2). The rest are adopted as
 | Weights: pull from HF or the Ollama registry to `/content`, never run Ollama's store from Drive | adopted as **likely** | measure the pull rate on first use |
 | Host OOM kills the worker, not the VM, so a parent supervisor survives | adopted as **likely** | the governor's fault-injection tests check it |
 | No server-side spend cap exists | adopted | consistent with the FAQ. The host-side cap stands. |
+| "`runtime.unassign()` from inside the kernel releases the VM" (Argon: `checked`) | **not borne out, measured** | 2026-10-16 probe: called inside a `colab exec`, the exec ended with "Connection was lost", but the server still showed one active assignment 15 s later. `colab stop` released it. Layer 1 of the teardown is kept as a belt and never counted on. |
+| `--timeout` behaviour, measured | **confirms R&D's reading** | 2026-10-16 probe: with `--timeout 30`, a 45 s silent run and a 45 s chatty run both finished with exit 0 (51 and 52 s). The flag doesn't cut a run off. |
 
 ## What changes
 

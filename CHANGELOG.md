@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.10] - 2026-10-16
+
+- instrument: colab (Colab Pro+ units approved for experiments)
+- Added `colab`: Colab Pro+ — prepaid cloud GPUs for experiments
+
 ## [1.1.10.0.9] - 2026-10-16
 
 - stage1-role-eval note: amendment B disclosure corrected (5.0 / 6.4), per-seed hold (aspire-si#150)

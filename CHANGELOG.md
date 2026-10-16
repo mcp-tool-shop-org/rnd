@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.5] - 2026-10-15
+
+- stage1-role-eval: amendment D, the keep rule's lesson clause for T14 and T16 (the maintainer's decision after Argon's review)
+- Added experiment `agent-ab-harness`
+- Added experiment `nemo-relay-trial`
+- Updated experiment `stage1-role-eval`
+
 ## [1.1.10.0.4] - 2026-10-15
 
 - dataset-desk: the design record filed (design, Argon passes 2-3 and the follow-up); the code moved to mcp-tool-shop-org/dataset-desk v0.1.0; instrument file

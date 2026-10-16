@@ -23,9 +23,14 @@ section 1's first draft. Change 2 below alters its second sentence.
    setting, not a property of the model.
 4. **J2's recall guard:** record each candidate's release date and stated training cutoff. A task counts only if its
    fix merged after every candidate's cutoff, or after its release date where no cutoff is stated.
-5. **The machine line is the live one:** the rig runs Ollama 0.40.4's **stock** CUDA backend (`ggml-cuda.dll`
-   `2f7f959a…`, read on 2026-10-16), not the studio 13.4 build (`0ebc0e61…`). That build was never activated. Pin
-   the stock backend, or activate the studio build by its own go first, and say which.
+5. **Read the machine line from the serving process, not the install folder.** Two Ollama trees exist side by side:
+   - the studio CUDA 13.4.3 build serves port 11434, activated 2026-10-16 13:18 under `ACTIVATION-PLAN.md`
+     (`ggml-cuda.dll` `0ebc0e61…`; its start script pins all five hashes and refuses on drift);
+   - the untouched install keeps the stock backend (`2f7f959a…`) as the `USE_STOCK=1` fallback.
+
+   The run-time check reads the listening process's path and the hash of the module it loaded.
+   (R&D's first filing hashed the install folder and called the studio build inactive. The Publisher corrected
+   that, and R&D confirmed it on the rig.)
 6. **The card sub-study uses real cards** (T4 16 GB, L4 24 GB, A100 40 GB on Colab). Only 8 and 12 GB stay
    simulated, and are labelled so.
 7. **Run order:** each model runs as a block, in a seeded order recorded in the receipts, with the model unloaded
@@ -183,8 +188,9 @@ recalled from pretraining. 2026-09-01 is the provisional floor until the cutoffs
   **Unit budget:** about 13 GPU-hours at 5.30 units an hour, roughly 70 units. Cap: 90 units, the maintainer's to
   approve. Its wall time, VRAM and energy are reported for the A100, and aren't the 5090's cost.
 - **Wave 2's confirmatory runs: the 5090.** The machine line is the RTX 5090 32 GB, driver 617.42, Ollama 0.40.4
-  with its **stock** CUDA backend (`ggml-cuda.dll` `2f7f959a…`). Or the studio 13.4 build (`0ebc0e61…`), if it's
-  activated by its own go before Wave 2 (R&D change 5). The line is recorded with every run.
+  with the studio CUDA 13.4.3 backend (`ggml-cuda.dll` `0ebc0e61…`, active since 2026-10-16), read from the serving
+  process (R&D change 5) and recorded with every run. A run under the stock fallback (`USE_STOCK=1`) is a different
+  machine line, recorded as such.
 - **The card sub-study ("what works on your card")** is Wave 2. There the profile is the treatment.
   - **Real cards on Colab:** T4 16 GB (with `--high-mem`), L4 24 GB and A100 40 GB, each its own machine line.
   - **Simulated 8 and 12 GB** come from `OLLAMA_GPU_OVERHEAD`, labelled "simulated: fit only, not bandwidth,

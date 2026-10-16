@@ -337,9 +337,18 @@ class DryRun(unittest.TestCase):
             finally:
                 self.sampler_done.set()
 
+        # The frozen harness appends to the record from several threads (main, sampler, kill and unload). On
+        # Windows, concurrent appends from separate handles can overwrite one another, which dropped the BREACH
+        # line under full-suite load. Serialise the writes here; diag_test.py stays frozen.
+        record_lock, real_record = threading.Lock(), dt.record
+
+        def record(kind, **data):
+            with record_lock:
+                real_record(kind, **data)
+
         patches = {"HERE": self.here, "RECORD": os.path.join(self.here, "diag-record.jsonl"), "FROZEN": frozen,
                    "MODELS": store, "MODEL_PINS": pins, "RND": os.path.dirname(os.path.dirname(abmine_path)),
-                   "ARMS": arms, "sampler": sampler,
+                   "ARMS": arms, "sampler": sampler, "record": record,
                    "time": types.SimpleNamespace(sleep=lambda s: REAL_SLEEP(0.001), time=time.time, strftime=time.strftime)}
         for name, value in patches.items():
             p = mock.patch.object(dt, name, value)

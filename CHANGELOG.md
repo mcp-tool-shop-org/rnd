@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.0.13] - 2026-10-16
+
+- handbook: the model-comparisons design template
+
 ## [1.1.10.0.12] - 2026-10-16
 
 - ollama-cuda-backend: fix the flaky diag breach test (record writes serialised in the fixture); the harness's concurrent-append defect noted

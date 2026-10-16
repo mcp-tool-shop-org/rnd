@@ -29,8 +29,10 @@ used. This folder is where that proof lives, one entry per page the studio relie
 
 The full page texts aren't committed. Provider terms are their authors' copyrighted text. They're kept on the
 studio's machine under `E:/AI/licence-snapshots/<read-date>/<id>.txt`, and the hash in the registry ties each one
-to the reading. Re-run `snapshot.py` into a new dated folder whenever a page's verdict is relied on again. A changed
-hash means the page changed, and its entry is re-read.
+to the reading. The hash identifies the copy we hold; it isn't a sign the terms changed. Pages with live counters
+(model cards, some help pages) hash differently on every fetch. **The clause check is the signal:** a quoted clause
+that no longer appears is reported `MISSING`, and its entry is re-read. Re-run `snapshot.py` into a new dated folder
+whenever a verdict is relied on again.
 
 ## How to use it
 

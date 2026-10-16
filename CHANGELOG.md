@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.2.1] - 2026-10-16
+
+- licences: the Census NAICS 2022 entry for role-set's domain table; PDF policies read; archive links kept
+
 ## [1.1.10.2.0] - 2026-10-16
 
 - licences/: the registry of every licence and terms page the studio relies on, with clauses, verdicts per use and snapshot hashes

@@ -29,7 +29,7 @@
       "notes": "Code is barred for AI-pipeline code only; the clause has no competition qualifier. Service-specific terms govern where they conflict.",
       "snapshot_sha256": "2def678586392e0e143d5948b3915530175522258e0d11fa20ce5933a4559dd0",
       "snapshot_file": "2026-10-16/google-tos.txt",
-      "archive_url": null
+      "archive_url": "http://web.archive.org/web/20261016165204/https://policies.google.com/terms"
     },
     {
       "id": "google-ultra-benefits",
@@ -51,9 +51,9 @@
         "code": "n/a"
       },
       "notes": "Proven for Flow Music only. Flow and Project Genie have no comparable grant (the Flow help page defers to the ToS).",
-      "snapshot_sha256": "a92edecb6112d6a7eadfb8e9ee334e789562b2767deefb0bfa9f8136a3c5e075",
+      "snapshot_sha256": "3ea4baa46d8917c874cf4e4ec097707d42806ff9a3cfbd87202960a4382ded8f",
       "snapshot_file": "2026-10-16/google-ultra-benefits.txt",
-      "archive_url": null
+      "archive_url": "http://web.archive.org/web/20261007090922/https://support.google.com/googleone/answer/16286513?hl=en"
     },
     {
       "id": "antigravity-terms",
@@ -378,7 +378,7 @@
       "notes": "Each model card names OpenMDW-1.1 as its governing terms (nemotron-model-cards). The Ollama tag for Lightning bundles a different NVIDIA licence; the card governs.",
       "snapshot_sha256": "c709632b442a6da23660cc64546b1d02a3a5ba1c26b19cb658d2a4ccd1cf4ab6",
       "snapshot_file": "2026-10-16/openmdw-1.1.txt",
-      "archive_url": null
+      "archive_url": "http://web.archive.org/web/20261011054331/https://openmdw.ai/license/1-1/"
     },
     {
       "id": "nemotron-model-cards",
@@ -405,7 +405,7 @@
       "notes": "Ultra: https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16 . Pin the card revision read when a model is used. Bolt-74B-A9B-24GB: 'Governing Terms: Use of the models is governed by the OpenMDW License Agreement, version 1.1', released 2026-10-15 (https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB).",
       "snapshot_sha256": "06962053aa862852b096a1547c58bfab80cd381ae3a27d73cc4c800859068bb1",
       "snapshot_file": "2026-10-16/nemotron-model-cards.txt",
-      "archive_url": null
+      "archive_url": "http://web.archive.org/web/20261016004133/https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16"
     },
     {
       "id": "muse-glimmer-30b-card",
@@ -428,7 +428,7 @@
         "code": "proven"
       },
       "notes": "Licence Apache-2.0; the card's intended use is the grant. Its Usage Policy has no clause on outputs or training.",
-      "snapshot_sha256": "6367b679f0d51feda1e955c4588e59086052c4352a41ca232f8eefccd2cedeb6",
+      "snapshot_sha256": "bf651447ad3878a3aeef436d6cc02cd31a7d3a8966a455c921b4f6f79d727d9a",
       "snapshot_file": "2026-10-16/muse-glimmer-30b-card.txt",
       "archive_url": "http://web.archive.org/web/20261010025638/https://huggingface.co/meta-models/Muse-Glimmer-30B"
     },
@@ -459,9 +459,9 @@
         "Gated repo: access request in the maintainer's legal name"
       ],
       "notes": "Not in use (the frontier tier is out of reach).",
-      "snapshot_sha256": "128704d9d100e2f8661076fa8c034b428e1fc1b3161aeaa8df0e758d3a46b103",
+      "snapshot_sha256": "e5112047daf7972e411cd912d8fd2778563002fa365ecfd8a6756dd2493571d1",
       "snapshot_file": "2026-10-16/muse-model-license-spark.txt",
-      "archive_url": null
+      "archive_url": "http://web.archive.org/web/20261015170519/https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B"
     },
     {
       "id": "deepseek-r1-card",
@@ -486,7 +486,7 @@
       "notes": "MIT. R1-Distill-Qwen-32B is not used: its Qwen2.5 base is plain Apache-2.0 (the Publisher's ruling).",
       "snapshot_sha256": "b20b17e9911d646b4adefde3a1f14ad46f823064cd987b14d858d6142da09411",
       "snapshot_file": "2026-10-16/deepseek-r1-card.txt",
-      "archive_url": null
+      "archive_url": "http://web.archive.org/web/20261011122822/https://huggingface.co/deepseek-ai/DeepSeek-R1"
     },
     {
       "id": "deepseek-r1-0528-card",
@@ -644,6 +644,31 @@
       "snapshot_sha256": "0ffddef9e48f8a09aed5caf2d44f7ba1c1be2d9b8e0a6f693b1635b2d5566645",
       "snapshot_file": "2026-10-16/apache-2.0.txt",
       "archive_url": "http://web.archive.org/web/20261012114733/https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    {
+      "id": "census-naics-2022",
+      "owner": "US Census Bureau",
+      "kind": "public-data-policy",
+      "covers": [
+        "NAICS 2022 sector and subsector titles (US edition), used by role-set's domain table (BUILD-SPEC B2)"
+      ],
+      "url": "https://www2.census.gov/foia/ds_policies/ds027.pdf",
+      "page_date": "unknown (DS027, Data Stewardship Program)",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "Data/works created by Census Bureau employees generally are not subject to copyright protection within the United States."
+      ],
+      "uses": {
+        "assets": "proven",
+        "training": "proven",
+        "evaluation": "proven",
+        "code": "n/a"
+      },
+      "conditions": [],
+      "notes": "Human-written public data, not AI output; listed so the domain table's source has a path. The same page notes foreign copyright may apply. Pin the NAICS source file by sha256 with its census.gov URL in role-set.",
+      "snapshot_sha256": "f66c4341e8f240b9b868e683d7a814f1b861c6d73ecaf1f363cffb41973868c1",
+      "snapshot_file": "2026-10-16/census-naics-2022.txt",
+      "archive_url": null
     }
   ]
 }

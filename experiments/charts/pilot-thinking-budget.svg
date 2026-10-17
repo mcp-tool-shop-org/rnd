@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 594" width="1140" height="594" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="1140" height="594" fill="#ffffff"/>
+<text x="24.0" y="34.0" font-size="17" fill="#1f2430" text-anchor="start" font-weight="600">Where a thinking model&#x27;s reply budget goes: Qwen3.8-27B, first pilot wave</text>
+<text x="24.0" y="56.0" font-size="12" fill="#5b6272" text-anchor="start" font-weight="400">13 calls, 85,752 output tokens, 95% of them thinking. No call was cut off, but the longest used 15,264 of 16,384.</text>
+<rect x="24.0" y="72.0" width="12.0" height="12.0" fill="#7c3aed" stroke="none"/>
+<text x="42.0" y="82.0" font-size="11" fill="#1f2430" text-anchor="start" font-weight="400">thinking (never shown to the reader)</text>
+<rect x="290.0" y="72.0" width="12.0" height="12.0" fill="#0f766e" stroke="none"/>
+<text x="308.0" y="82.0" font-size="11" fill="#1f2430" text-anchor="start" font-weight="400">the draft itself</text>
+<line x1="170.0" y1="106.0" x2="170.0" y2="502.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="170.0" y="518.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0</text>
+<line x1="380.0" y1="106.0" x2="380.0" y2="502.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="380.0" y="518.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">4,096</text>
+<line x1="590.0" y1="106.0" x2="590.0" y2="502.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="590.0" y="518.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">8,192</text>
+<line x1="800.0" y1="106.0" x2="800.0" y2="502.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="800.0" y="518.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">12,288</text>
+<line x1="1010.0" y1="106.0" x2="1010.0" y2="502.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="1010.0" y="518.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">16,384</text>
+<rect x="24.0" y="112.0" width="1086.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="131.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">call 1</text>
+<text x="92.0" y="131.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">573 in</text>
+<rect x="170.0" y="119.0" width="61.0" height="16.0" fill="#7c3aed" stroke="none"/>
+<rect x="231.0" y="119.0" width="8.1" height="16.0" fill="#0f766e" stroke="none"/>
+<text x="1024.0" y="131.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">0.7 min</text>
+<text x="28.0" y="161.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">call 2</text>
+<text x="92.0" y="161.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">6,370 in</text>
+<rect x="170.0" y="149.0" width="206.9" height="16.0" fill="#7c3aed" stroke="none"/>
+<rect x="376.9" y="149.0" width="16.9" height="16.0" fill="#0f766e" stroke="none"/>
+<text x="1024.0" y="161.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">2.4 min</text>
+<rect x="24.0" y="172.0" width="1086.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="191.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">call 3</text>
+<text x="92.0" y="191.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">145 in</text>
+<rect x="170.0" y="179.0" width="18.0" height="16.0" fill="#7c3aed" stroke="none"/>
+<rect x="188.0" y="179.0" width="2.8" height="16.0" fill="#0f766e" stroke="none"/>
+<text x="1024.0" y="191.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">0.2 min</text>
+<text x="28.0" y="221.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">call 4</text>
+<text x="92.0" y="221.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">6,577 in</text>
+<rect x="170.0" y="209.0" width="643.9" height="16.0" fill="#7c3aed" stroke="none"/>
+<rect x="813.9" y="209.0" width="25.3" height="16.0" fill="#0f766e" stroke="none"/>
+<text x="1024.0" y="221.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">6.9 min</text>
+<rect x="24.0" y="232.0" width="1086.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="251.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">call 5</text>
+<text x="92.0" y="251.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">145 in</text>
+<rect x="170.0" y="239.0" width="100.8" height="16.0" fill="#7c3aed" stroke="none"/>
+<rect x="270.8" y="239.0" width="3.2" height="16.0" fill="#0f766e" stroke="none"/>
+<text x="1024.0" y="251.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">1.1 min</text>
+<text x="28.0" y="281.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">call 6</text>
+<text x="92.0" y="281.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">6,564 in</text>
+<rect x="170.0" y="269.0" width="619.0" height="16.0" fill="#7c3aed" stroke="none"/>
+<rect x="789.0" y="269.0" width="31.5" height="16.0" fill="#0f766e" stroke="none"/>
+<text x="1024.0" y="281.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">6.8 min</text>
+<rect x="24.0" y="292.0" width="1086.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="311.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">call 7</text>
+<text x="92.0" y="311.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">6,421 in</text>
+<rect x="170.0" y="299.0" width="499.8" height="16.0" fill="#7c3aed" stroke="none"/>
+<rect x="669.8" y="299.0" width="18.7" height="16.0" fill="#0f766e" stroke="none"/>
+<text x="1024.0" y="311.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">5.4 min</text>
+<text x="28.0" y="341.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">call 8</text>
+<text x="92.0" y="341.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">6,849 in</text>
+<rect x="170.0" y="329.0" width="742.3" height="16.0" fill="#7c3aed" stroke="none"/>
+<rect x="912.3" y="329.0" width="40.2" height="16.0" fill="#0f766e" stroke="none"/>
+<text x="1024.0" y="341.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">8.1 min</text>
+<rect x="24.0" y="352.0" width="1086.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="371.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">call 9</text>
+<text x="92.0" y="371.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">7,643 in</text>
+<rect x="170.0" y="359.0" width="288.2" height="16.0" fill="#7c3aed" stroke="none"/>
+<rect x="458.2" y="359.0" width="34.8" height="16.0" fill="#0f766e" stroke="none"/>
+<text x="1024.0" y="371.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">3.3 min</text>
+<text x="28.0" y="401.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">call 10</text>
+<text x="92.0" y="401.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">6,370 in</text>
+<rect x="170.0" y="389.0" width="344.8" height="16.0" fill="#7c3aed" stroke="none"/>
+<rect x="514.8" y="389.0" width="16.8" height="16.0" fill="#0f766e" stroke="none"/>
+<text x="1024.0" y="401.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">3.8 min</text>
+<rect x="24.0" y="412.0" width="1086.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="431.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">call 11</text>
+<text x="92.0" y="431.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">144 in</text>
+<rect x="170.0" y="419.0" width="74.4" height="16.0" fill="#7c3aed" stroke="none"/>
+<rect x="244.4" y="419.0" width="3.2" height="16.0" fill="#0f766e" stroke="none"/>
+<text x="1024.0" y="431.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">0.8 min</text>
+<text x="28.0" y="461.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">call 12</text>
+<text x="92.0" y="461.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">6,492 in</text>
+<rect x="170.0" y="449.0" width="543.3" height="16.0" fill="#7c3aed" stroke="none"/>
+<rect x="713.3" y="449.0" width="21.6" height="16.0" fill="#0f766e" stroke="none"/>
+<text x="1024.0" y="461.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">5.9 min</text>
+<rect x="24.0" y="472.0" width="1086.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="491.0" font-size="11.5" fill="#1f2430" text-anchor="start" font-weight="600">call 13</text>
+<text x="92.0" y="491.0" font-size="10" fill="#5b6272" text-anchor="start" font-weight="400">145 in</text>
+<rect x="170.0" y="479.0" width="29.5" height="16.0" fill="#7c3aed" stroke="none"/>
+<rect x="199.5" y="479.0" width="1.4" height="16.0" fill="#0f766e" stroke="none"/>
+<text x="1024.0" y="491.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">0.3 min</text>
+<text x="590.0" y="536.0" font-size="11" fill="#1f2430" text-anchor="middle" font-weight="400">output tokens per call</text>
+<line x1="1010.0" y1="102.0" x2="1010.0" y2="502.0" stroke="#b91c1c" stroke-width="1.6" stroke-dasharray="4 3"/>
+<text x="1010.0" y="98.0" font-size="10.5" fill="#b91c1c" text-anchor="end" font-weight="400">reply budget 16,384</text>
+<text x="24.0" y="565.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">A100-40GB, Q8_0, thinking at the model card&#x27;s setting, about 31 tokens a second. Short calls carry 144–573 prompt tokens; long calls carry 6,370–7,643.</text>
+<text x="24.0" y="580.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Source: mcp-tool-shop-org/rnd experiments/stage1-regeneration/pilot/qwen3.8-w0-calls.json (counts from the logging proxy, sha256 14aa34ad3332…).</text>
+</svg>

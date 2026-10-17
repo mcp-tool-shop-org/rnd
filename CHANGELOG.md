@@ -11,9 +11,15 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
-## [1.1.15.0.2] - 2026-10-17
+## [1.1.15.0.3] - 2026-10-17
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output
+
+## [1.1.15.0.2] - 2026-10-17
+
+- newsletter issue 11: picking a writer model on rented GPUs (critic test, thinking cost, the window method), with Qwen3.8's per-call counts and a chart
+- Updated experiment `charts`
+- Updated experiment `stage1-regeneration`
 
 ## [1.1.15.0.1] - 2026-10-17
 

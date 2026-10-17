@@ -16,18 +16,18 @@ is the maintainer's.
 - **A model's say-so isn't proof,** including Argon's, R&D's or any model's.
 - **R&D re-reads every cited clause at its source** before anything relies on it.
 
-**Split by what the output touches (the maintainer's decision, 2026-10-17, on Argon's analysis):**
-- **Strict: explicit permission needed** for anything that shapes model weights or benchmark scores. That covers
-  training data, evaluation and apply items, base models, and canon or images that train a style model.
-- **The plain reading for code:** code the studio owns, that no model trains on and that builds no rival to the
-  provider, is ordinary software, whoever wrote it. Google's "related AI technology" is read by its purpose
-  (stopping extraction and distillation into a rival model), not at its widest. Antigravity-written AI tooling is
-  allowed. An undefined phrase is never read at its widest to bar ordinary work.
-- **Claude in the strict tier:** Anthropic's Help Center (12326764) is the explicit permission. Claude-written text
-  may be used as training inputs, evaluation items and prompts for the non-competing specialized verifier, **never
-  as training targets.** Gemini (including Antigravity) and Grok output stays out of training data and evaluation
-  items entirely, by their explicit clauses.
-- The split follows Argon's analysis of 2026-10-17, adapted by R&D and ruled by the maintainer.
+**The bars, each from an explicit clause (the maintainer, 2026-10-17; the earlier "strict tier" is withdrawn):**
+- **Google** (consumer, Gemini, Antigravity): AI-generated content used "to develop machine learning models or
+  related AI technology", read by its purpose: training data and distillation into a rival model. Code the studio
+  owns is ordinary software, whoever wrote it. Antigravity-written AI tooling is allowed.
+- **xAI** (Grok): distilling Outputs, and its Enterprise ban on training.
+- **Anthropic** (Claude): training models that compete with Anthropic's own. The Help Center (12326764) lists
+  "General purpose chatbots", "Models designed for open-ended text generation" and "Using Outputs as training
+  targets for models" under that heading, and allows "specialized classifiers and tools". Whether the training-target
+  item bars a narrow, non-competing verifier, or is only an example of competitive training, is the maintainer's
+  call. Inputs, prompts and evaluation items are allowed.
+- **The Kimi app:** non-commercial only.
+- **Everything else is allowed.** An undefined phrase is read by its purpose, never at its widest.
 
 *Revised the same day.* The first wording ("allowed only when the provider's documentation proves it; a missing
 restriction proves nothing") counted silence as a bar. The maintainer judged that too strict. Only a contract the
@@ -35,6 +35,23 @@ studio agreed to, or copyright in the output, can restrict a use. A licence that
 signed contract that is silent, leaves the use free. The verdicts below that rested on silence were revised
 (`licences/registry.json`). The ones that rest on explicit clauses (Google's ML clause, xAI's distillation ban,
 Anthropic's training-target rule, the Kimi app's non-commercial clause) stand.
+
+## Current verdicts (2026-10-17)
+
+| Use | Allowed | Barred (clause) |
+|---|---|---|
+| **Commercial assets** | Flow, Flow Music, Genie (Google claims no ownership; no commercial bar); Grok (credit "Written with Grok"); Claude; open models | the Kimi app (non-commercial) |
+| **Code** | everyone's, whoever wrote it (Antigravity included) | code that builds a model or product competing with the provider (xAI AUP; Google read by purpose) |
+| **Evaluation items** | everyone's (no clause bars evaluation) | the Kimi app (non-commercial) |
+| **Training data** | Apache-2.0 and MIT open models; DeepSeek; Nemotron (OpenMDW); Muse (its licence's conditions); Kimi through Ollama Cloud (K3/K2.6 MIT-style; Ollama claims no ownership) | Google (ML clause); xAI (AUP "distilling ... Outputs"; Enterprise ban); Claude as targets is open (see above); the Kimi app |
+
+**Stage 1:** Grok's and Argon's rows stay out of training on the Google and xAI clauses. Kimi's rows are allowed if
+they came through Ollama Cloud and barred if through the Kimi app; which route wrote them is not recorded (an open
+fact for the maintainer).
+
+> **The sections below are the 2026-10-16 record,** written under a proof rule ("not proven = don't use") that the
+> maintainer withdrew the same day and finally on 2026-10-17. Their clause quotes stand. Their "not proven" verdicts
+> and recommendations don't: the table above replaces them.
 
 **Status (2026-10-16): Google checked by R&D at the primary source; Argon's blanket check is back, and R&D
 has re-read every load-bearing clause (below).**

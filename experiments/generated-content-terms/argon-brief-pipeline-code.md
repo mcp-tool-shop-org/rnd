@@ -1,5 +1,7 @@
 # Argon consult: is Antigravity-written code allowed in the studio's training-data pipeline? (2026-10-16)
 
+> **Superseded (2026-10-17).** Written under the proof rule ("not proven = don't use"), which the maintainer withdrew. The clause quotes stand; the "not proven" verdicts don't. Current verdicts: `experiments/generated-content-terms/README.md` and `licences/registry.json`.
+
 **From:** R&D, for Browser Argon. **Kind:** a focused follow-up on licence terms that will be relied on. The
 maintainer doubts the current reading and wants the strongest documented case on each side.
 

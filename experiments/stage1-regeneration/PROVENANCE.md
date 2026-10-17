@@ -1,5 +1,7 @@
 # Stage 1 provenance inventory (step 0)
 
+> **Revised 2026-10-17.** The "proven" / "not proven" verdicts below were written under the withdrawn proof rule. A use is barred only by a quoted clause: Grok and Argon text that enters training rows (xAI distillation, Google ML clause), the Kimi app (non-commercial), and Claude as training targets (the maintainer's ruling pending). Code is allowed whoever wrote it. Current verdicts: `licences/registry.json`.
+
 **Date:** 2026-10-16. **By:** R&D, with two read-only Sonnet inventories (role-set at `d4e4d18`; aspire-si
 records and PRs). Authorship comes from PR bodies, seat tags and commit trailers. Every commit is under the
 maintainer's account, so the account name is no evidence. "Co-Authored-By: Claude" trailers and "Generated with
@@ -33,7 +35,7 @@ printed one line of it. It was disclosed to the Publisher the same day.
 | `prompts.py` house rules, B model rule and worked example, structure notes, slot brief, warm-up | Claude |
 | `trait_steps.py`, `critic.py` FLAW_DEFINITIONS | Claude |
 | **Exemplars:** up to 3 finished rows from other lessons | **Kimi and Grok rows**, with Claude fixes. No span gate exists against them (`exemplars.spans_of` has no caller) |
-| Writer-drafted material (`material_messages`) | The run's own writer: clean with a proven writer |
+| Writer-drafted material (`material_messages`) | The run's own writer: clean with a licence-cleared writer |
 
 ## What reaches the critic only
 

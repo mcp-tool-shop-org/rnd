@@ -49,12 +49,12 @@
         "Commercial use rights"
       ],
       "uses": {
-        "assets": "proven",
+        "assets": "allowed",
         "training": "barred",
-        "evaluation": "not_proven",
+        "evaluation": "allowed",
         "code": "n/a"
       },
-      "notes": "Proven for Flow Music only. Flow and Project Genie have no comparable grant (the Flow help page defers to the ToS). Flow and Genie output for non-AI use is allowed under google-tos (revised 2026-10-16).",
+      "notes": "Proven for Flow Music only. Flow and Project Genie have no comparable grant (the Flow help page defers to the ToS). Flow and Genie output for non-AI use is allowed under google-tos (revised 2026-10-16). Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "bae7a849fbc4fabd1748f6805cf8d10a8f45e68452bf18f8f40ec9c06b8c19a8",
       "snapshot_file": "2026-10-17/google-ultra-benefits.txt",
       "archive_url": "http://web.archive.org/web/20261007090922/https://support.google.com/googleone/answer/16286513?hl=en"
@@ -105,14 +105,14 @@
       "uses": {
         "assets": "conditions",
         "training": "barred",
-        "evaluation": "not_proven",
+        "evaluation": "allowed",
         "code": "conditions"
       },
       "conditions": [
         "Attribute Output: 'Written with Grok' or 'Created with Grok' (xai-brand-guidelines)",
-        "Code only where it develops no ML model and doesn't compete (xai-aup)"
+        "Code is barred only when it develops a model or product that competes with xAI (xai-aup)"
       ],
-      "notes": "Training is barred by xai-aup. Our Use of User Content grants xAI a perpetual licence over what is sent; it limits nothing on the user's side.",
+      "notes": "Training is barred by xai-aup. Our Use of User Content grants xAI a perpetual licence over what is sent; it limits nothing on the user's side. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "0afec3601b4f8f8ed544c1b7fb785de637483476891ec43c12aed0640af4f960",
       "snapshot_file": "2026-10-17/xai-consumer-terms.txt",
       "archive_url": "http://web.archive.org/web/20261016171554/https://x.ai/legal/terms-of-service"
@@ -136,13 +136,13 @@
       "uses": {
         "assets": "n/a",
         "training": "barred",
-        "evaluation": "not_proven",
+        "evaluation": "allowed",
         "code": "conditions"
       },
       "conditions": [
-        "Code that develops an ML model is not proven (the 'that compete' reach is ambiguous)"
+        "Code is barred only when it develops a model or product that competes with xAI"
       ],
-      "notes": "Applies to consumers, developers and businesses.",
+      "notes": "Applies to consumers, developers and businesses. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "686a4bc1e0fbf0142a89ef8355b8c733f149017733af3c798d4eb341c271230f",
       "snapshot_file": "2026-10-17/xai-aup.txt",
       "archive_url": "http://web.archive.org/web/20261014165045/https://x.ai/legal/acceptable-use-policy"
@@ -161,12 +161,12 @@
         "use any Output to train any foundation models, large language models, or other artificial intelligence systems except as may be expressly permitted in an Order Form"
       ],
       "uses": {
-        "assets": "proven",
+        "assets": "allowed",
         "training": "barred",
-        "evaluation": "not_proven",
-        "code": "proven"
+        "evaluation": "allowed",
+        "code": "allowed"
       },
-      "notes": "Training only with an Order Form permission.",
+      "notes": "Training only with an Order Form permission. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "66e3dc46a14de289f5295f01e2d09ca5ed069ec5ecca3c513985c4ef6a6e57de",
       "snapshot_file": "2026-10-17/xai-enterprise-terms.txt",
       "archive_url": "http://web.archive.org/web/20261010013935/https://x.ai/legal/terms-of-service-enterprise"
@@ -212,17 +212,17 @@
         "Models designed for open-ended text generation"
       ],
       "uses": {
-        "assets": "proven",
+        "assets": "allowed",
         "training": "conditions",
-        "evaluation": "proven",
-        "code": "proven"
+        "evaluation": "allowed",
+        "code": "allowed"
       },
       "conditions": [
         "Only for a non-competing specialized classifier or tool (the maintainer ruled the Stage 1 verifier is one)",
-        "Never as training targets",
+        "Training targets: listed among prohibited uses under the competing-models heading; whether it bars a narrow non-competing verifier is the maintainer's call",
         "Never for general chatbots or open-ended text generation"
       ],
-      "notes": "Anthropic's support channel agreed for this use on 2026-10-16; that reply came from an AI agent, so it supports but doesn't prove.",
+      "notes": "Anthropic's support channel agreed for this use on 2026-10-16; that reply came from an AI agent, so it supports but doesn't prove. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "cca7d7fd734a6be43df8381660e22fcce9f452e16b184d95dcb8b427a2776a97",
       "snapshot_file": "2026-10-17/anthropic-help-12326764.txt",
       "archive_url": "http://web.archive.org/web/20261012155740/https://support.claude.com/en/articles/12326764-can-i-use-my-outputs-to-train-an-ai-model"
@@ -242,15 +242,15 @@
         "To develop any products or services that compete with our Services, including to develop or train any artificial intelligence or machine learning algorithms or models or resell the Services."
       ],
       "uses": {
-        "assets": "proven",
+        "assets": "allowed",
         "training": "conditions",
-        "evaluation": "proven",
-        "code": "proven"
+        "evaluation": "allowed",
+        "code": "allowed"
       },
       "conditions": [
         "Read with anthropic-help-12326764 for what counts as competing"
       ],
-      "notes": "The non-commercial line applies to evaluation access only.",
+      "notes": "The non-commercial line applies to evaluation access only. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "d9d650a0f8eef517a0512e5280b8f544297f418b4b208e7d1702506802e0e386",
       "snapshot_file": "2026-10-17/anthropic-consumer-terms.txt",
       "archive_url": "http://web.archive.org/web/20261016204948/https://www.anthropic.com/legal/consumer-terms"
@@ -270,15 +270,15 @@
         "access the Services to build a competing product or service, including to train competing AI models or resell the Services except as expressly approved by Anthropic"
       ],
       "uses": {
-        "assets": "proven",
+        "assets": "allowed",
         "training": "conditions",
-        "evaluation": "proven",
-        "code": "proven"
+        "evaluation": "allowed",
+        "code": "allowed"
       },
       "conditions": [
         "Non-competing models only"
       ],
-      "notes": "Not the terms the studio's plan runs under; recorded for comparison.",
+      "notes": "Not the terms the studio's plan runs under; recorded for comparison. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "8d37664d7ee4ed441cc65991811812dd2607cd0e99601d4343d1f1133479422e",
       "snapshot_file": "2026-10-17/anthropic-commercial-terms.txt",
       "archive_url": "http://web.archive.org/web/20261016152019/https://www.anthropic.com/legal/commercial-terms"
@@ -325,11 +325,11 @@
       ],
       "uses": {
         "assets": "barred",
-        "training": "not_proven",
-        "evaluation": "not_proven",
+        "training": "barred",
+        "evaluation": "barred",
         "code": "barred"
       },
-      "notes": "Did not apply to the studio's Kimi seat, which ran through Ollama Cloud (ollama-terms, kimi-k3-licence, kimi-k2.6-licence).",
+      "notes": "Did not apply to the studio's Kimi seat, which ran through Ollama Cloud (ollama-terms, kimi-k3-licence, kimi-k2.6-licence). Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "d985dc8514bf4c659bdd4646de29ed704fc382b096dc66390901ed8bde41d31a",
       "snapshot_file": "2026-10-17/kimi-app-agreement.txt",
       "archive_url": "http://web.archive.org/web/20250929160236/https://www.kimi.com/user/agreement/en/modelUse"
@@ -350,13 +350,13 @@
         "Use our services to develop competing products"
       ],
       "uses": {
-        "assets": "proven",
-        "training": "proven",
-        "evaluation": "proven",
-        "code": "proven"
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
       },
       "conditions": [],
-      "notes": "The model's own licence also applies; neither restricts training on outputs. Only building products that compete with Ollama is barred. Revised 2026-10-16 under the reworded rule: silence no longer counts as a bar.",
+      "notes": "The model's own licence also applies; neither restricts training on outputs. Only building products that compete with Ollama is barred. Revised 2026-10-16 under the reworded rule: silence no longer counts as a bar. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "0f31d86a6f9d0cecdc84c2224000904a59ff0309b30528465f6f42dfa743f2b9",
       "snapshot_file": "2026-10-17/ollama-terms.txt",
       "archive_url": "http://web.archive.org/web/20261011233708/https://ollama.com/terms"
@@ -378,12 +378,12 @@
         "This agreement does not impose any restrictions or obligations with respect to any use, modification, or sharing of any outputs generated by using the Model Materials."
       ],
       "uses": {
-        "assets": "proven",
-        "training": "proven",
-        "evaluation": "proven",
-        "code": "proven"
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
       },
-      "notes": "Each model card names OpenMDW-1.1 as its governing terms (nemotron-model-cards). The Ollama tag for Lightning bundles a different NVIDIA licence; the card governs.",
+      "notes": "Each model card names OpenMDW-1.1 as its governing terms (nemotron-model-cards). The Ollama tag for Lightning bundles a different NVIDIA licence; the card governs. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "c709632b442a6da23660cc64546b1d02a3a5ba1c26b19cb658d2a4ccd1cf4ab6",
       "snapshot_file": "2026-10-17/openmdw-1.1.txt",
       "archive_url": "http://web.archive.org/web/20261011054331/https://openmdw.ai/license/1-1/"
@@ -405,12 +405,12 @@
         "Governing Download Terms: Use of this model is governed by the OpenMDW License Agreement, version 1.1"
       ],
       "uses": {
-        "assets": "proven",
-        "training": "proven",
-        "evaluation": "proven",
-        "code": "proven"
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
       },
-      "notes": "Ultra: https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16 . Pin the card revision read when a model is used. Bolt-74B-A9B-24GB: 'Governing Terms: Use of the models is governed by the OpenMDW License Agreement, version 1.1', released 2026-10-15 (https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB).",
+      "notes": "Ultra: https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16 . Pin the card revision read when a model is used. Bolt-74B-A9B-24GB: 'Governing Terms: Use of the models is governed by the OpenMDW License Agreement, version 1.1', released 2026-10-15 (https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB). Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "dd5eefc7db106f3d038089eb5fe7bdaeee1d557046e41726d25e2b23f5593a10",
       "snapshot_file": "2026-10-17/nemotron-model-cards.txt",
       "archive_url": "http://web.archive.org/web/20261016004133/https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16"
@@ -430,12 +430,12 @@
         "Synthetic data generation: Generating high-quality training data for downstream model development."
       ],
       "uses": {
-        "assets": "proven",
-        "training": "proven",
-        "evaluation": "proven",
-        "code": "proven"
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
       },
-      "notes": "Licence Apache-2.0; the card's intended use is the grant. Its Usage Policy has no clause on outputs or training.",
+      "notes": "Licence Apache-2.0; the card's intended use is the grant. Its Usage Policy has no clause on outputs or training. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "d1e893e0f418dfa66a960a7a85344bc647e915b12a119a73a0c19bbe629b9db8",
       "snapshot_file": "2026-10-17/muse-glimmer-30b-card.txt",
       "archive_url": "http://web.archive.org/web/20261010025638/https://huggingface.co/meta-models/Muse-Glimmer-30B"
@@ -458,7 +458,7 @@
       "uses": {
         "assets": "conditions",
         "training": "conditions",
-        "evaluation": "proven",
+        "evaluation": "allowed",
         "code": "conditions"
       },
       "conditions": [
@@ -466,7 +466,7 @@
         "Display 'Built with Muse Spark Open'",
         "Gated repo: access request in the maintainer's legal name"
       ],
-      "notes": "Not in use (the frontier tier is out of reach).",
+      "notes": "Not in use (the frontier tier is out of reach). Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "a47210b2ac41bac2b8955b2862d8304ab41d773fa401990f3007e02fcc554ff7",
       "snapshot_file": "2026-10-17/muse-model-license-spark.txt",
       "archive_url": "http://web.archive.org/web/20261015170519/https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B"
@@ -486,12 +486,12 @@
         "DeepSeek-R1 series support commercial use, allow for any modifications and derivative works, including, but not limited to, distillation for training other LLMs."
       ],
       "uses": {
-        "assets": "proven",
-        "training": "proven",
-        "evaluation": "proven",
-        "code": "proven"
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
       },
-      "notes": "MIT. R1-Distill-Qwen-32B is not used: its Qwen2.5 base is plain Apache-2.0 (the Publisher's ruling).",
+      "notes": "MIT. R1-Distill-Qwen-32B is not used: its Qwen2.5 base is plain Apache-2.0 (the Publisher's ruling). Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "b20b17e9911d646b4adefde3a1f14ad46f823064cd987b14d858d6142da09411",
       "snapshot_file": "2026-10-17/deepseek-r1-card.txt",
       "archive_url": "http://web.archive.org/web/20261012140521/https://huggingface.co/deepseek-ai/DeepSeek-R1"
@@ -510,12 +510,12 @@
         "DeepSeek-R1 series (including Base and Chat) supports commercial use and distillation."
       ],
       "uses": {
-        "assets": "proven",
-        "training": "proven",
-        "evaluation": "proven",
-        "code": "proven"
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
       },
-      "notes": "MIT.",
+      "notes": "MIT. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "924a114f7779cc2179c2da56f21dda2c3072ab541a98da37a26187bdf54e9842",
       "snapshot_file": "2026-10-17/deepseek-r1-0528-card.txt",
       "archive_url": "http://web.archive.org/web/20261015183426/https://huggingface.co/deepseek-ai/DeepSeek-R1-0528"
@@ -536,13 +536,13 @@
       "uses": {
         "assets": "conditions",
         "training": "conditions",
-        "evaluation": "proven",
+        "evaluation": "allowed",
         "code": "conditions"
       },
       "conditions": [
         "A model so trained, if distributed, must have a name beginning with 'Llama' (Section 1.b.i)"
       ],
-      "notes": "Not in use: the naming condition would fall on the studio's student.",
+      "notes": "Not in use: the naming condition would fall on the studio's student. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "1beaed4a9925af5f6d4d07eebcc351c2c59b00bbb3cdeac59d780adffadcfcdb",
       "snapshot_file": "2026-10-17/llama-3.3-licence.txt",
       "archive_url": null
@@ -562,16 +562,16 @@
         "to deal in the Software without restriction"
       ],
       "uses": {
-        "assets": "proven",
-        "training": "proven",
-        "evaluation": "proven",
-        "code": "proven"
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
       },
       "conditions": [
         "Display 'Kimi K3' only above 100M monthly users or $20M monthly revenue",
         "Separate agreement only for a Model as a Service business above $20M revenue; internal use exempt"
       ],
-      "notes": "Silent on outputs. Assets, evaluation and code rest on ollama-terms ownership for the Ollama Cloud route. Revised 2026-10-16 under the reworded rule: silence no longer counts as a bar.",
+      "notes": "Silent on outputs. Assets, evaluation and code rest on ollama-terms ownership for the Ollama Cloud route. Revised 2026-10-16 under the reworded rule: silence no longer counts as a bar. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "d4de1d14edd7bfa695c7b7b8ce8e8ff4eab625e4b61b3e5f6af5d88841ee9691",
       "snapshot_file": "2026-10-17/kimi-k3-licence.txt",
       "archive_url": "http://web.archive.org/web/20260808211815/https://github.com/MoonshotAI/Kimi-K3/blob/main/LICENSE"
@@ -591,12 +591,12 @@
         "Our only modification part is that, if the Software (or any derivative works thereof) is used for any of your commercial products or services that have more than 100 million monthly active users"
       ],
       "uses": {
-        "assets": "proven",
-        "training": "proven",
-        "evaluation": "proven",
-        "code": "proven"
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
       },
-      "notes": "Modified MIT; silent on outputs. Same reading as kimi-k3-licence. Revised 2026-10-16 under the reworded rule: silence no longer counts as a bar.",
+      "notes": "Modified MIT; silent on outputs. Same reading as kimi-k3-licence. Revised 2026-10-16 under the reworded rule: silence no longer counts as a bar. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "941ddde5de6c074eac890c67856db540e48bd4653e34d4d9e38d1a9fae4344b8",
       "snapshot_file": "2026-10-17/kimi-k2.6-licence.txt",
       "archive_url": null
@@ -617,12 +617,12 @@
         "NVIDIA does not claim ownership to any outputs generated using the Models or Derivative Models"
       ],
       "uses": {
-        "assets": "proven",
-        "training": "proven",
-        "evaluation": "proven",
-        "code": "proven"
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
       },
-      "notes": "Disclaims ownership of outputs and places no restriction on them; the licence's other conditions (on the models themselves) still apply. Revised 2026-10-16 under the reworded rule: silence no longer counts as a bar.",
+      "notes": "Disclaims ownership of outputs and places no restriction on them; the licence's other conditions (on the models themselves) still apply. Revised 2026-10-16 under the reworded rule: silence no longer counts as a bar. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "25afb28cff985c67f62a8eb3c800f240eb355bac62edae6241eba0670638ef0a",
       "snapshot_file": "2026-10-17/nvidia-open-model-license.txt",
       "archive_url": "http://web.archive.org/web/20261005213244/https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/"
@@ -643,12 +643,12 @@
       "read_date": "2026-10-16",
       "clauses": [],
       "uses": {
-        "assets": "proven",
-        "training": "proven",
-        "evaluation": "proven",
-        "code": "proven"
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
       },
-      "notes": "Grants rights in the Work and makes no claim on, or restriction of, outputs; no contract binds a local run. Allowed under the reworded rule (no restriction found). Check any model-specific use policy as well (for example Gemma's). Revised 2026-10-16 under the reworded rule: silence no longer counts as a bar.",
+      "notes": "Grants rights in the Work and makes no claim on, or restriction of, outputs; no contract binds a local run. Allowed under the reworded rule (no restriction found). Check any model-specific use policy as well (for example Gemma's). Revised 2026-10-16 under the reworded rule: silence no longer counts as a bar. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "0ffddef9e48f8a09aed5caf2d44f7ba1c1be2d9b8e0a6f693b1635b2d5566645",
       "snapshot_file": "2026-10-17/apache-2.0.txt",
       "archive_url": "http://web.archive.org/web/20261012114733/https://www.apache.org/licenses/LICENSE-2.0",
@@ -668,13 +668,13 @@
         "Data/works created by Census Bureau employees generally are not subject to copyright protection within the United States."
       ],
       "uses": {
-        "assets": "proven",
-        "training": "proven",
-        "evaluation": "proven",
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
         "code": "n/a"
       },
       "conditions": [],
-      "notes": "Human-written public data, not AI output; listed so the domain table's source has a path. The same page notes foreign copyright may apply. Pin the NAICS source file by sha256 with its census.gov URL in role-set.",
+      "notes": "Human-written public data, not AI output; listed so the domain table's source has a path. The same page notes foreign copyright may apply. Pin the NAICS source file by sha256 with its census.gov URL in role-set. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "f66c4341e8f240b9b868e683d7a814f1b861c6d73ecaf1f363cffb41973868c1",
       "snapshot_file": "2026-10-17/census-naics-2022.txt",
       "archive_url": null
@@ -694,16 +694,16 @@
         "You may not use the Services to develop models that compete with the Services (e.g., Gemini API or Google AI Studio)."
       ],
       "uses": {
-        "assets": "proven",
+        "assets": "allowed",
         "training": "conditions",
-        "evaluation": "proven",
+        "evaluation": "allowed",
         "code": "conditions"
       },
       "conditions": [
         "Only models or products that don't compete with the Gemini API or AI Studio",
         "Prospective: covers only output generated through the API, not earlier consumer-plan output"
       ],
-      "notes": "The clean route for future Google-written ML tooling (a paid API key, the maintainer's decision). The consumer ToS clause (google-tos) does not apply here.",
+      "notes": "The clean route for future Google-written ML tooling (a paid API key, the maintainer's decision). The consumer ToS clause (google-tos) does not apply here. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "296d96034f56cc95ddbf4be680e92510a4fd38d651d6499dff2fcfc079305cec",
       "snapshot_file": "2026-10-17/gemini-api-terms.txt",
       "archive_url": null
@@ -723,16 +723,16 @@
         "Customer will not, and will not allow End Users to use an AI/ML Service or Generated Output to develop a similar or competing product or service."
       ],
       "uses": {
-        "assets": "proven",
+        "assets": "allowed",
         "training": "conditions",
-        "evaluation": "proven",
+        "evaluation": "allowed",
         "code": "conditions"
       },
       "conditions": [
         "Only products that aren't similar to or competing with the service",
         "Prospective: covers only Generated Output of Google Cloud services"
       ],
-      "notes": "Section 17 (Generative AI Services). Generated Output is Customer Data.",
+      "notes": "Section 17 (Generative AI Services). Generated Output is Customer Data. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
       "snapshot_sha256": "754883b257a7d5422bbb4f8a9ea627532e629c065dfd522c7542395ebd1a2bc9",
       "snapshot_file": "2026-10-17/google-cloud-service-terms.txt",
       "archive_url": "http://web.archive.org/web/20261015131600/https://cloud.google.com/terms/service-terms"

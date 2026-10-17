@@ -41,12 +41,13 @@ replaces the unit cap with a ledger. It goes to Argon with this design.
 
 **Amendment A (2026-10-16): J1's control is role-set itself.** The proof rule
 (`experiments/generated-content-terms`) leaves no provider-written or Claude-written control: evaluation use isn't
-proven for any provider. The maintainer proposed the replacement and left the call to the Publisher, who ruled it;
-R&D settles the details:
+proven for any provider. *(2026-10-17: that rule is withdrawn, and evaluation use is allowed wherever no clause
+bars it. The design below stands on its own merits as the regeneration pilot.)* The maintainer proposed the
+replacement and left the call to the Publisher, who ruled it; R&D settles the details:
 1. **Incumbent:** role-set's full pipeline (plan → write → critic → assemble → gates), served through interlock,
    with the writer and critic pair the Stage 1 regeneration uses (`experiments/stage1-regeneration/PLAN.md`): today
-   Muse-Glimmer-30B writing and Nemotron-3.5-Lightning-30B-A3B critiquing, or a bigger proven pair if Argon's
-   answer and R&D's re-read establish one. Its outputs come only from licence-proven models.
+   Muse-Glimmer-30B writing and Nemotron-3.5-Lightning-30B-A3B critiquing, or a bigger licence-cleared pair if Argon's
+   answer and R&D's re-read establish one. Its outputs come only from models whose licences allow training on them.
 2. **Challengers:** the same pipeline, prompts (pinned hashes), slot plans, gates, retry cap and critic. **Only the
    writer model changes.** The harness is fixed, so the writer is the variable (A/B template, section 3).
 3. **Writer eligibility:** J1 selects the regeneration's writer, so a challenger's licence must not restrict
@@ -56,7 +57,7 @@ R&D settles the details:
    critic's family (Nemotron, today) is scored only on the measures the critic can't touch: its **first drafts**
    through the gates, and the blind key check of those first drafts, against the incumbent's first drafts. Its
    after-retry rate and cost per accepted item are reported, marked "same-family critic", and never ranked. Wave 2
-   gives it a different-family critic if a third proven family exists.
+   gives it a different-family critic if a third licence-cleared family exists.
 5. **Placement:** J1 runs on the regeneration's card, serving stack and pins (set after Argon's answer and the
    pilot), at the card's full memory. The 26 GB rig-matched cap (change 1) now applies to J2 only. A writer is
    selected for where it will actually write.
@@ -70,12 +71,12 @@ R&D settles the details:
    - The grader's keys are pass/fail judgements on study data, and no grader text enters a row.
 7. **The self-learning split.**
    - Every record in role-set's `defects.jsonl` and the observation store carries a required `partition` field.
-   - **`production`** holds the regeneration's own runs, by the proven pair. Their failures may inform the
+   - **`production`** holds the regeneration's own runs, by the cleared pair. Their failures may inform the
      generator's gates, lessons and prompts.
    - **`trial:j1-wave1`** holds every J1 run, the incumbent's included, so the arms are symmetric. Trial records
      are for analysis. A defect class seen there may motivate a code fix to a gate, but no trial text is ever
      copied into prompts, lessons, examples or rows.
-   - **Promotion** from trial to production is an R&D ruling per batch, and only for records written by proven
+   - **Promotion** from trial to production is an R&D ruling per batch, and only for records written by licence-cleared
      models. Never for an unproven model's records.
 8. **The incumbent meets the same floor.** If its J1 rate falls below 50%, the regeneration halts (andon) and the
    report goes to the maintainer before any full run.
@@ -203,7 +204,7 @@ governs. Argon re-reviews the fixed version before Wave 1.
 only harmful-content categories and doesn't restrict code fixing, evaluation or training on outputs. The registry
 entry is `gemma-prohibited-use-policy`. Gemma 4 is eligible.
 
-**Amendment D (2026-10-17): the card values, two proxy transforms, and the bank's floor and authorship.** The
+**Amendment D (2026-10-17): the card values, two proxy transforms, and the bank's floor.** The
 maintainer approved D1–D3. All of D goes to Argon before any run.
 
 - **D1. The card values (F3).** `card-values.json`, read by R&D from each maker's card and chat template at a
@@ -231,12 +232,12 @@ maintainer approved D1–D3. All of D goes to Argon before any run.
     `reasoning_content`. On each later call, it re-attaches the reasoning to any assistant turn whose content
     matches. A turn that doesn't match (if Aider edited it) is sent without reasoning and counted.
   - Every other candidate has `transforms: []`, so the comparison varies only what each card documents.
-- **D3. The bank's floor and authorship (F7; strict tier of the generated-content rule).**
+- **D3. The bank's floor (F7).**
   - **The recall floor is 2026-09-04.** Muse (January 2026), Lightning and Bolt (May 2026) and Gemma (January
     2025) state cutoffs. Qwen3.8, Qwen3.6, Granite and R1 don't, so their pinned revision's date stands in.
     Granite's, 2026-09-04, is the latest. A task's fix must merge after it.
-  - **The bank's tasks are eval items,** so only fixes whose commits carry a Claude co-author trailer qualify.
-    Commits with no trailer, or with another seat's, are left out.
+  - Authorship isn't a criterion. The tasks are built from studio code, which is ordinary software whoever wrote
+    it.
   - The held-out twins are written by R&D, as amendment C says.
 
 **Builder (2026-10-17):** the maintainer may put Antigravity Argon on the J2 build after Browser Argon confirms the design. Code is read plainly under the split rule (`experiments/generated-content-terms`), and R&D reviews the build.
@@ -261,7 +262,7 @@ maintainer approved D1–D3. All of D goes to Argon before any run.
 ## 1. The check in three sentences (for the maintainer first)
 
 1. **Job kinds and decisions:**
-   - **J1:** which licence-proven local model writes Stage 1-style apply items (schema-bound data with honest flags) best inside role-set, against role-set's own incumbent pair (amendment A). The winner writes the regeneration.
+   - **J1:** which licence-cleared local model writes Stage 1-style apply items (schema-bound data with honest flags) best inside role-set, against role-set's own incumbent pair (amendment A). The winner writes the regeneration.
    - **J2:** which local models can fix a small real bug in our repos (make a red test pass without breaking the suite).
    - Wave 1 is a **screen**. It decides which models go on to Wave 2, not which model wins.
 2. **Candidates:**

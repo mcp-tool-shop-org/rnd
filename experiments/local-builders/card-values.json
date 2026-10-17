@@ -99,7 +99,7 @@
         "enable_thinking": true
       },
       "card_section": "1. Sampling Parameters; 2. Thinking Mode Configuration; 3. Multi-Turn Conversations",
-      "notes": "This template defaults enable_thinking to false; it is set true under the harness rule (thinking on for every candidate). The card says history keeps no thinking, which the proxy's stripping already gives. The run still waits on the prohibited-use policy entry (F14).",
+      "notes": "This template defaults enable_thinking to false; it is set true under the harness rule (thinking on for every candidate). The card says history keeps no thinking, which the proxy's stripping already gives. Gemma's prohibited-use policy was checked (F14): eligible.",
       "transforms": []
     },
     {

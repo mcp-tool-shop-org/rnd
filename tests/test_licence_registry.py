@@ -1,4 +1,4 @@
-"""The licence registry stays well formed: every entry can be followed back to its proof."""
+"""The licence registry stays well formed: every bar can be followed back to the clause it rests on."""
 
 import json
 import re
@@ -7,7 +7,7 @@ from pathlib import Path
 
 REGISTRY = Path(__file__).resolve().parents[1] / "licences" / "registry.json"
 USES = {"assets", "training", "evaluation", "code"}
-VERDICTS = {"proven", "conditions", "barred", "not_proven", "n/a"}
+VERDICTS = {"allowed", "conditions", "barred", "n/a"}
 REQUIRED = ("id", "owner", "kind", "covers", "url", "page_date", "read_date", "clauses", "uses")
 
 
@@ -35,14 +35,12 @@ class LicenceRegistry(unittest.TestCase):
             for use, v in e["uses"].items():
                 self.assertIn(v, VERDICTS, f"{e['id']}.{use}")
 
-    def test_a_grant_rests_on_a_clause(self):
-        # proven or conditions needs quoted text to rest on; only an entry that grants nothing may have none
+    def test_a_bar_rests_on_a_clause(self):
+        # a use is allowed unless a clause restricts it (2026-10-17): a bar needs quoted text; an allowed use needs none
         for e in self.entries:
-            grants = [u for u, v in e["uses"].items() if v in ("proven", "conditions")]
-            if grants:
-                # a grant rests on a quoted clause, or on a documented search that found no restriction (the rule as
-                # reworded on 2026-10-16)
-                self.assertTrue(e["clauses"] or e.get("restriction_search"), f"{e['id']}: {grants} with no clause or search")
+            bars = [u for u, v in e["uses"].items() if v == "barred"]
+            if bars:
+                self.assertTrue(e["clauses"], f"{e['id']}: {bars} barred with no quoted clause")
 
     def test_conditions_are_listed(self):
         for e in self.entries:

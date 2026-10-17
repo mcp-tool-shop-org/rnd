@@ -25,7 +25,7 @@ images or audio, datasets, and the code tools that build it.
 - **A missing entry blocks the design.** Read the terms at the source, add the entry, then go on. A model's summary
   of the terms is never the check.
 - **The design lists each item with its registry id and verdict,** for example "writer: Muse-Glimmer-30B
-  (`muse-glimmer-30b-card`, training: proven)".
+  (`muse-glimmer-30b-card`, training: allowed)".
 - **The reviewer's verdict carries a licence line.** A pass without one doesn't count.
 
 Why this comes first: Stage 1's training data was built by three services whose terms turned out to bar training on

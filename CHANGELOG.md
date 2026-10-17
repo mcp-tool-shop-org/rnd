@@ -10,6 +10,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 `python -m rnd bump` writes each section; `1.0.0` reads as `1.0.0.0.0`.
 
 ## [Unreleased]
+
+## [1.1.10.2.10] - 2026-10-17
+
+- The maintainer's ruling: Claude text may be training targets for the non-competing verifier (Anthropic's list bars competitive training)
+- Updated experiment `generated-content-terms`
+- Updated experiment `local-builders`
+- Updated experiment `stage1-regeneration`
+
 - The licence-rule cleanup (2026-10-17): a use is barred only by a quoted clause. Registry verdicts `proven`/`not_proven` become `allowed`/`barred`, and the test now requires a clause for every bar, not for every grant. BUILD-SPEC, PLAN, the generated-content README and DESIGN drop the proof rule and the strict tier; Argon's 2026-10-16 answers are marked superseded; amendment D3 drops the authorship filter.
 
 

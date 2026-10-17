@@ -1,6 +1,6 @@
 # Stage 1 provenance inventory (step 0)
 
-> **Revised 2026-10-17.** The "proven" / "not proven" verdicts below were written under the withdrawn proof rule. A use is barred only by a quoted clause: Grok and Argon text that enters training rows (xAI distillation, Google ML clause), the Kimi app (non-commercial), and Claude as training targets (the maintainer's ruling pending). Code is allowed whoever wrote it. Current verdicts: `licences/registry.json`.
+> **Revised 2026-10-17.** The "proven" / "not proven" verdicts below were written under the withdrawn proof rule. A use is barred only by a quoted clause: Grok and Argon text that enters training rows (xAI distillation, Google ML clause), the Kimi app (non-commercial), Claude text is allowed anywhere for the non-competing verifier, training targets included (ruled 2026-10-17). Code is allowed whoever wrote it. Current verdicts: `licences/registry.json`.
 
 **Date:** 2026-10-16. **By:** R&D, with two read-only Sonnet inventories (role-set at `d4e4d18`; aspire-si
 records and PRs). Authorship comes from PR bodies, seat tags and commit trailers. Every commit is under the

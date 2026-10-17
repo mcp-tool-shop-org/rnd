@@ -22,10 +22,10 @@ is the maintainer's.
   owns is ordinary software, whoever wrote it. Antigravity-written AI tooling is allowed.
 - **xAI** (Grok): distilling Outputs (AUP), and, under Enterprise terms, its training ban.
 - **Anthropic** (Claude): training models that compete with Anthropic's own. The Help Center (12326764) lists
-  "General purpose chatbots", "Models designed for open-ended text generation" and "Using Outputs as training
-  targets for models" under that heading, and allows "specialized classifiers and tools". Whether the training-target
-  item bars a narrow, non-competing verifier, or is only an example of competitive training, is the maintainer's
-  call. Inputs, prompts and evaluation items are allowed.
+  general chatbots, open-ended text generation and training targets under that heading, and allows
+  "specialized classifiers and tools". **Ruled 2026-10-17:** the list describes competitive training, so Claude
+  text may be anything for a non-competing model, training targets included. Anthropic's support agent
+  confirmed the verifier is a non-competing specialized tool (2026-10-16).
 - **The Kimi app:** non-commercial only.
 - **Everything else is allowed.** An undefined phrase is read by its purpose, never at its widest.
 
@@ -43,7 +43,7 @@ Anthropic's training-target rule, the Kimi app's non-commercial clause) stand.
 | **Commercial assets** | Flow, Flow Music, Genie (Google claims no ownership; no commercial bar); Grok (credit "Written with Grok"); Claude; open models | the Kimi app (non-commercial) |
 | **Code** | everyone's, whoever wrote it (Antigravity included) | code that builds a model or product competing with the provider (xAI AUP; Google read by purpose) |
 | **Evaluation items** | everyone's (no clause bars evaluation) | the Kimi app (non-commercial) |
-| **Training data** | Apache-2.0 and MIT open models; DeepSeek; Nemotron (OpenMDW); Muse-Glimmer; Muse Spark (with its conditions); Kimi through Ollama Cloud (K3/K2.6 MIT-style; Ollama claims no ownership) | Google (ML clause); xAI (AUP "distilling ... Outputs"; and, under Enterprise terms, its training ban); Claude as targets is open (see above); the Kimi app |
+| **Training data** | Claude (for a non-competing model); Apache-2.0 and MIT open models; DeepSeek; Nemotron (OpenMDW); Muse-Glimmer; Muse Spark (with its conditions); Kimi through Ollama Cloud (K3/K2.6 MIT-style; Ollama claims no ownership) | Google (ML clause); xAI (AUP "distilling ... Outputs"; and, under Enterprise terms, its training ban); Claude for a competing model; the Kimi app |
 
 **Stage 1:** Grok's and Argon's rows stay out of training on the Google and xAI clauses. Kimi's rows are allowed if
 they came through Ollama Cloud and barred if through the Kimi app; which route wrote them is not recorded (an open

@@ -219,10 +219,10 @@
       },
       "conditions": [
         "Only for a non-competing specialized classifier or tool (the maintainer ruled the Stage 1 verifier is one)",
-        "Training targets: listed among prohibited uses under the competing-models heading; whether it bars a narrow non-competing verifier is the maintainer's call",
+        "Training targets allowed for a non-competing model (the maintainer ruled 2026-10-17: Anthropic's prohibited list sits under training models that compete with Anthropic's own, and the narrow verifier doesn't compete, so Claude text may be its training targets)",
         "Never for general chatbots or open-ended text generation"
       ],
-      "notes": "Anthropic's support channel agreed for this use on 2026-10-16; that reply came from an AI agent, so it supports but doesn't prove. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
+      "notes": "Anthropic's support channel agreed for this use on 2026-10-16; that reply came from an AI agent, so it supports but doesn't prove. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'. Ruling on training targets: the maintainer ruled 2026-10-17: Anthropic's prohibited list sits under training models that compete with Anthropic's own, and the narrow verifier doesn't compete, so Claude text may be its training targets.",
       "snapshot_sha256": "cca7d7fd734a6be43df8381660e22fcce9f452e16b184d95dcb8b427a2776a97",
       "snapshot_file": "2026-10-17/anthropic-help-12326764.txt",
       "archive_url": "http://web.archive.org/web/20261012155740/https://support.claude.com/en/articles/12326764-can-i-use-my-outputs-to-train-an-ai-model"

@@ -45,9 +45,8 @@ Anthropic's Help Center (article 12326764, dated 2026-03-16) allows Claude's out
 "specialized classifiers and tools". It bars general chatbots, open-ended text generation models, and outputs as
 training targets. Claude Code may build this. **Revised 2026-10-17:** Argon may build it too, because code the
 studio owns is ordinary software under the generated-content rule, and Google's clause is read by its purpose
-(training data and distillation into a rival model). Whether the training-target item bars Claude text in a target
-field of this narrow verifier is the maintainer's call (both readings are in `experiments/generated-content-terms`);
-until he rules, writers fill every target field.
+(training data and distillation into a rival model). Claude text may fill target fields too: the maintainer ruled
+2026-10-17 that Anthropic's list bars competitive training only, and the verifier doesn't compete.
 
 ## 3. The build items
 
@@ -206,9 +205,9 @@ critic must therefore be loaded at the same moment, and both behind `127.0.0.1` 
   text, or in a manifest keyed by name and hash.
 - **`role-set check` refuses** any such source with no provenance record, or whose writer's use there is barred by a
   clause: Grok or Argon text that would enter a training row (the xAI distillation and Google ML clauses), and Kimi
-  text only if it came through the Kimi app. Text that reaches only a prompt is allowed. Claude-written text in a
-  target field waits on the maintainer's training-target ruling (revised 2026-10-17; the earlier deny list barred
-  Kimi outright and anything "not proven").
+  text only if it came through the Kimi app. Text that reaches only a prompt is allowed. Claude-written text is allowed
+  anywhere, target fields included (ruled 2026-10-17; the earlier deny list barred Kimi outright and anything "not
+  proven").
 - **Seat commits carry a `Seat:` trailer** (for example `Seat: Grok`), so authorship can be read from git, not
   inferred from PR tags.
 - *Source: the role-set inventory agent's debrief, 2026-10-16.*
@@ -235,7 +234,7 @@ See [PROVENANCE.md](PROVENANCE.md) for the sources. The build fixes these:
 | aspire-si gates 1.7.3 and det_run NF1–NF3 (#144, #145), pinned by role-set | Argon | Code: allowed (revised 2026-10-17). Already rewritten; it stays as it is |
 | Exemplars (finished Kimi and Grok rows in the writer prompt) | Kimi, Grok | Prompt text, not training rows. B7 keeps regenerated rows only, for variety; batch 1 runs without exemplars |
 | Lessons, house rules, trait steps, flaw definitions, critic prompts | Claude | Keep (prompts and inputs are allowed) |
-| Real-source excerpts from studio repos | mostly Claude | Keep as row inputs. In target fields: the maintainer's training-target ruling |
+| Real-source excerpts from studio repos | mostly Claude | Keep, as inputs or targets (ruled 2026-10-17) |
 | Claude fix rounds in batch files | Claude | Moot: the rows are regenerated |
 | Writer-claimed twin and order flags (`assemble._apply_fields`) | the writer | Compute them in code (B5) |
 

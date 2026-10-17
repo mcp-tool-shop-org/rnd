@@ -2,7 +2,7 @@
   "_note": "J2 per-candidate sampling and chat_template_kwargs (DESIGN.md amendment C, F3), read by R&D on 2026-10-17 from each maker's card and chat template at the revision named. Every key is a llama-server /v1/chat/completions field at 620d2225 (tools/server/server-task.cpp). Keys the card doesn't name are set to their disabled value, never left at llama-server's defaults (top_k 40, min_p 0.05, common.h). The revision must be the one the GGUF was converted from; if it differs, R&D re-reads the card there.",
   "read_date": "2026-10-17",
   "harness_rules": [
-    "thinking on, at full effort, for every candidate that has a thinking mode",
+    "thinking on for every candidate that has a thinking mode, at the card's recommended effort or the template's default inside the card's recommended range",
     "where the card leaves a range or names no value, the template's default inside that range"
   ],
   "open_questions": {
@@ -34,7 +34,8 @@
       "notes": "All three kwargs are the template's defaults, pinned explicitly. preserve_thinking only has an effect if the history carries the thinking: see open question Q2.",
       "transforms": [
         "reattach_thinking"
-      ]
+      ],
+      "reattach_max_turns": null
     },
     {
       "candidate": "qwen3.6-35b-a3b",
@@ -190,5 +191,13 @@
         "fold_system"
       ]
     }
-  ]
+  ],
+  "proxy_rules": {
+    "aider_model_settings": {
+      "examples_as_sys_msg": true
+    },
+    "reattach_thinking": "map content sha256 -> list of reasoning (first in, first out); stripped-content fallback; a turn equal to one of Aider's fixed acknowledgements at the pinned version is counted 'synthetic', any other unmatched turn 'mismatch'; reattach_max_turns (null = all) set only if E3's run requires it",
+    "fold_system": "leading system messages to the head of the first user turn; later ones to the tail of the preceding user turn; assert none reach the model",
+    "preflight_thinking": "non-empty reasoning_content and no <think> or <|channel>thought tag in content, for every thinking candidate"
+  }
 }

@@ -214,8 +214,8 @@ maintainer approved D1–D3. All of D goes to Argon before any run.
     40, `min_p` 0.05; `common/common.h` at 620d2225) would reach the four cards that name only temperature and
     top_p.
   - Harness rules:
-    - thinking is on, at full effort, for every candidate that has a thinking mode (Gemma's template defaults it
-      off);
+    - thinking is on for every candidate that has a thinking mode, at the card's recommended effort, or the
+      template's default inside the card's recommended range (Gemma's template defaults thinking off);
     - where a card gives a range, or no value, the template's default inside that range is used (Muse: reasoning
       strength `high`).
   - Each revision must be the one the GGUF was converted from. Lightning and Muse match. The other six become the
@@ -239,6 +239,30 @@ maintainer approved D1–D3. All of D goes to Argon before any run.
   - Authorship isn't a criterion. The tasks are built from studio code, which is ordinary software whoever wrote
     it.
   - The held-out twins are written by R&D, as amendment C says.
+
+**Amendment E (2026-10-17): R&D's disposition of Browser Argon's review of amendment D** (at `3d793bd`: approved
+with D-F1 to D-F3 blocking, D-F4 and D-F5 not blocking). All are accepted except D-F5, which is moot.
+
+- **E1 (D-F1), `reattach_thinking` guards:**
+  - Aider's model-settings file pins `examples_as_sys_msg: true` for every candidate, so Aider's few-shot examples
+    aren't sent as user and assistant turns.
+  - Assistant turns the model never wrote (Aider's fixed acknowledgements at the pinned version, for example "Ok."
+    after a repo map) are counted `synthetic`, not `mismatch`. Both counts go on the receipt.
+  - The map is `content sha256 -> list of reasoning`, consumed oldest first, so identical replies keep their own
+    thinking. If the raw hash misses, the proxy tries the hash of the stripped content.
+  - **A new preflight check, for every thinking candidate:** a thinking reply gives a non-empty
+    `reasoning_content`, and its `content` holds no `<think>` and no Gemma `<|channel>thought` tag.
+- **E2 (D-F2), `fold_system`:** with `examples_as_sys_msg: true`, the proxy folds every leading system message into
+  the head of the first user turn, and every later system message (Aider's format reminder) into the tail of the user
+  turn before it, each separated by a blank line. It asserts that no system message reaches R1-Distill.
+- **E3 (D-F3), context sizing:** F13's validation run is made on Qwen3.8 with `reattach_thinking` on, and J2's
+  context is the larger of that run and a run on another candidate. If 30 calls of kept thinking don't fit at the
+  pinned quant, the proxy keeps only the last K assistant turns' thinking. K is set from the run and pinned in
+  `card-values.json` as `reattach_max_turns`, and the report says Qwen3.8 ran with a cap.
+- **E4 (D-F4):** the harness rule is reworded (above, and in `card-values.json`). The Gemma note was fixed in
+  #139.
+- **D-F5 is moot:** authorship isn't a criterion for the bank (D3, revised 2026-10-17). The floor is read as a merge
+  time after 2026-09-04T23:59:59Z.
 
 **Builder (2026-10-17):** the maintainer may put Antigravity Argon on the J2 build after Browser Argon confirms the design. Code is read plainly under the split rule (`experiments/generated-content-terms`), and R&D reviews the build.
 

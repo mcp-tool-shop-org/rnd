@@ -46,6 +46,11 @@ class ThinkingCountTests(unittest.TestCase):
         # A harmony end token in a reply with no reasoning isn't read as thinking.
         self.assertEqual(proxy._thinking_count(_reply("x", "", "stop"), ["x", "<|end|>"], None, 2), (0, "none"))
 
+    def test_a_channel_end_as_the_last_token_is_not_the_end_of_thinking(self):
+        resp = _reply("answer", "some reasoning", "stop")
+        self.assertEqual(proxy._thinking_count(resp, ["a", "b", "c", "<|end|>"], "some reasoning", 4), (None, None))
+        self.assertEqual(proxy._thinking_count(resp, ["a", "<|end|>", "c", "<|end|>"], "some reasoning", 4), (2, "marker"))
+
     def test_recount_fills_the_nulls_and_never_touches_its_input(self):
         with tempfile.TemporaryDirectory() as d:
             src, dest = Path(d) / "g.jsonl", Path(d) / "g.recount.jsonl"

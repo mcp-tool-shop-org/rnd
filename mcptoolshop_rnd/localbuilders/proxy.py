@@ -496,7 +496,9 @@ def _thinking_count(resp: dict, tokens: list[str], reasoning: str | None, output
         return tokens.index(THINK_END) + 1, "marker"
     if not reasoning:
         return 0, "none"
-    ends = [tokens.index(m) for m in CHANNEL_ENDS if m in tokens]
+    # A channel end counts only with tokens after it: some templates close every assistant turn with <|end|>, and as the
+    # last token it would make the whole reply thinking (R&D on #150).
+    ends = [tokens.index(m) for m in CHANNEL_ENDS if m in tokens[:-1]]
     if ends:
         return min(ends) + 1, "marker"
     content, _ = _extract_reasoning_and_content(resp)

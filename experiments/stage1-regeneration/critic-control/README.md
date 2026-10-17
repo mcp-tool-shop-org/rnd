@@ -1,4 +1,4 @@
-# The critic's known-answer set, v1
+# The critic's known-answer set (v2; v1 kept for its runs)
 
 **What:** 40 keyed items for role-set's `critic-control`. They calibrate a critic before its verdicts may refuse
 anything.
@@ -32,4 +32,14 @@ by their lesson.
 It runs at its card's values, with thinking on, at a 32768 context and `max_tokens` 16384, against one
 `llama-server` slot. A critic that misses any part of the bar goes back to R&D before the pilot.
 
-**Rebuild:** `python -I build_known_answer.py known-answer-v1.jsonl`
+**v2 errata (2026-10-17):** in window 7b's critic-control, both critics disagreed with two of R&D's keys, and the
+critics were right:
+- **KA1-D-11:** "Retries the upload up to 3 times" allows 4 attempts, so "tried at most 3 times" is unsupported,
+  not supported. Muse said unsupported in both runs; Lightning agreed with the wrong key.
+- **KA1-D-04:** "Apply every four weeks from March to September" fairly rules out January. The key said
+  cannot_tell; both critics said unsupported.
+
+v2 replaces both statements with clear-cut ones of the same verdict and changes nothing else. Window 7b was scored
+on v1, and both critics passed as keyed. Later calibrations use v2.
+
+**Rebuild:** `python -I build_known_answer.py known-answer-v2.jsonl`

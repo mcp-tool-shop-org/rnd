@@ -1,12 +1,12 @@
 ---
 title: Picking a writer model on rented GPUs
-description: We're choosing which open-weight model should write training data for a small local verifier. Night one tested the judge before trusting it, found that thinking is most of the bill, and lost about half of its first 71 compute units to failures in our tooling and in the machines it ran on. Here's the data, and the method that came out of it.
+description: We're choosing which open-weight model should write training data for a small local verifier. Night one tested the judge before trusting it, found that thinking is most of the bill, and spent about half of its first 71 compute units on windows that failed, through faults in our tooling and in the machines it ran on, before giving the results they were opened for. Here's the data, and the method that came out of it.
 issue: 11
 date: 2026-10-17
 highlights:
   - "<strong>Test the judge before it judges anything.</strong> Both critic models passed a bar set before their results, and the test also caught two mistakes in our own answer key."
   - "<strong>Thinking is most of the bill.</strong> 95% of one model's output was reasoning the reader never sees: about 12,000 tokens and 6½ minutes per practice row. The pilot as designed would have cost 147–175 compute units, so it became a smaller screen."
-  - "<strong>About 38 of the first 71 units bought nothing usable,</strong> mostly from windows that ended with no results saved. The fixes: the job writes its own log, the rig reads that file, every finished model call is saved, and every way a window can end downloads the results first."
+  - "<strong>About 38 of the first 71 units bought none of the results their windows were opened for,</strong> mostly from windows that ended with no results saved. The fixes: the job writes its own log, the rig reads that file, every finished model call is saved, and every way a window can end downloads the results first."
   - "<strong>A blind second opinion on the budget.</strong> We sealed our own allocation before asking an outside reviewer for theirs, then took the parts of it that were better."
 ---
 
@@ -99,7 +99,7 @@ on every row of the full dataset later, so cost is part of the choice, not just 
 ## Step 3: long paid jobs fail, so design for it
 
 This is where most of the money went. By the time the budget was raised at 19:44 UTC, 70.66 units had been spent, and
-**about 38 of the first 71 bought nothing we could use**:
+**about 38 of the first 71 didn't buy the results their windows were opened for**:
 
 | What happened | Units |
 |---|---|

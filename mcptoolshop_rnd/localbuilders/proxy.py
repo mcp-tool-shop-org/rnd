@@ -43,11 +43,18 @@ TOP_LOGPROBS_K = 5
 PINNED_AIDER_VERSION = "0.86.1"
 
 # Fixed assistant acknowledgement strings emitted by Aider at PINNED_AIDER_VERSION
-# (in `aider/prompts.py` and `aider/coders/base_coder.py`: after repo map, read-only files,
-# editable files, and history summaries when `examples_as_sys_msg: true` is pinned).
+# (in `aider/coders/base_prompts.py`, `aider/coders/editblock_prompts.py`, `aider/coders/base_coder.py`,
+# and `aider/history.py`: after repo map, read-only files, editable files, and history summaries
+# when `examples_as_sys_msg: true` is pinned).
 AIDER_SYNTHETIC_ASSISTANT_STRINGS: tuple[str, ...] = (
     "Ok.",
+    "Ok",
     "Ok, any changes I propose will be to those files.",
+    "Ok, based on your requests I will suggest which files need to be edited and then stop and wait for your approval.",
+    "Ok, I won't try and edit those files without asking first.",
+    "Ok, I will use these files as references.",
+    "Ok, I will use these images as references.",
+    "I see that you interrupted my previous reply.",
     "I understand.",
 )
 
@@ -85,16 +92,29 @@ def verify_aider_synthetic_strings(
     *,
     aider_version: str = PINNED_AIDER_VERSION,
 ) -> bool:
-    """Verify that an Aider prompts/coder object at `PINNED_AIDER_VERSION` uses only named synthetic replies."""
+    """Verify that an Aider prompts/coder object (or tuple of prompt classes) at `PINNED_AIDER_VERSION` uses only named synthetic replies."""
     if str(aider_version).strip() != PINNED_AIDER_VERSION:
         raise ProxyConfigError(
             f"Aider version {aider_version!r} does not match PINNED_AIDER_VERSION {PINNED_AIDER_VERSION!r}"
         )
-    attrs = (
+    if isinstance(prompts_obj, (list, tuple)):
+        if not prompts_obj:
+            raise ProxyConfigError("prompts_obj sequence must not be empty")
+        for item in prompts_obj:
+            verify_aider_synthetic_strings(item, aider_version=aider_version)
+        return True
+
+    base_attrs = (
         "files_content_assistant_reply",
         "files_no_full_files_with_repo_map_reply",
         "repo_content_assistant_reply",
     )
+    dynamic_attrs = tuple(
+        name
+        for name in dir(prompts_obj)
+        if not name.startswith("_") and (name.endswith("_assistant_reply") or name.endswith("_map_reply"))
+    )
+    attrs = tuple(dict.fromkeys((*base_attrs, *dynamic_attrs)))
     found_any = False
     for attr in attrs:
         val = getattr(prompts_obj, attr, None)

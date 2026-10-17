@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.12.0.0] - 2026-10-17
+
+- mcptoolshop_rnd.localbuilders: verify installed Aider 0.86.1 version gate and synthetic assistant strings against real CoderPrompts and EditBlockPrompts in preflight and runner; record aider_version and synthetic_strings_verified on receipts
+- mcptoolshop_rnd.localbuilders: create per-task chat-history.md and input-history owned by builder (0600) in an unlistable directory (0711) before launching Aider, and allow only those two outside-workspace writes in probe
+- mcptoolshop_rnd.localbuilders: set CUDA_VISIBLE_DEVICES='' in builder_env for Aider --auto-test runs and scoring pytest so builder tests see no GPU
+
 ## [1.1.11.0.0] - 2026-10-17
 
 - mcptoolshop_rnd.localbuilders: J2 logging proxy, task runner, clean git-archive workspace, JUnit XML and twin scorer, VM containment and probe, and fit/template/thinking-split preflight (amendments C, D, E: NB1, NB2, F1-F7, F9, F10, F13, D1, D2, D-F1 to D-F3)

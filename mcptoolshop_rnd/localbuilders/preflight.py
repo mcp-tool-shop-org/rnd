@@ -27,9 +27,16 @@ import re
 import struct
 import sys
 from pathlib import Path
-from typing import BinaryIO
+from typing import Any, BinaryIO
 
-from .proxy import TOP_LOGPROBS_K, _extract_reasoning_and_content, extract_abmine_logprobs
+from .proxy import (
+    PINNED_AIDER_VERSION,
+    TOP_LOGPROBS_K,
+    ProxyConfigError,
+    _extract_reasoning_and_content,
+    extract_abmine_logprobs,
+    verify_aider_synthetic_strings,
+)
 
 J2_CONTEXT_FLOOR = 32768
 VALIDATION_CALL_CAP = 30
@@ -70,7 +77,73 @@ _GGUF_TYPE_ARRAY = 9
 
 
 class PreflightError(Exception):
-    """Raised when a preflight invariant (such as top-5 logprobs or 30-call validation) fails."""
+    """Raised when a preflight invariant (such as Aider version/synthetic strings, top-5 logprobs, or 30-call validation) fails."""
+
+
+def get_installed_aider_version() -> str:
+    """Import the installed `aider` package and return `aider.__version__`."""
+    try:
+        import aider  # type: ignore[import-not-found]
+    except ImportError as exc:
+        raise PreflightError(f"installed Aider package is required: {exc}") from exc
+    return str(getattr(aider, "__version__", "")).strip()
+
+
+def check_aider_version_gate(aider_version: str | None = None) -> str:
+    """Refuse unless the installed Aider version is `PINNED_AIDER_VERSION` (`0.86.1`)."""
+    ver = str(aider_version).strip() if aider_version is not None else get_installed_aider_version()
+    if ver != PINNED_AIDER_VERSION:
+        raise PreflightError(
+            f"installed Aider version {ver!r} does not match pinned {PINNED_AIDER_VERSION!r}"
+        )
+    return ver
+
+
+def load_installed_aider_prompts() -> tuple[Any, Any]:
+    """Import and return `(CoderPrompts, EditBlockPrompts)` from the installed Aider."""
+    try:
+        from aider.coders.base_prompts import CoderPrompts  # type: ignore[import-not-found]
+        from aider.coders.editblock_prompts import EditBlockPrompts  # type: ignore[import-not-found]
+    except ImportError as exc:
+        raise PreflightError(
+            f"failed to import CoderPrompts and EditBlockPrompts from installed Aider: {exc}"
+        ) from exc
+    return CoderPrompts, EditBlockPrompts
+
+
+def verify_installed_aider(
+    *,
+    aider_version: str | None = None,
+    coder_prompts_cls: Any = None,
+    editblock_prompts_cls: Any = None,
+) -> dict[str, Any]:
+    """Import the installed Aider, refuse unless its version is `0.86.1`, and verify `CoderPrompts` and `EditBlockPrompts`.
+
+    A version mismatch or an unrecognised synthetic assistant reply string refuses the run
+    (`PreflightError`). Returns `{"aider_version": "0.86.1", "synthetic_strings_verified": True}`.
+    """
+    ver = check_aider_version_gate(aider_version)
+    if coder_prompts_cls is None or editblock_prompts_cls is None:
+        real_coder_prompts, real_editblock_prompts = load_installed_aider_prompts()
+        coder_prompts_cls = coder_prompts_cls or real_coder_prompts
+        editblock_prompts_cls = editblock_prompts_cls or real_editblock_prompts
+
+    try:
+        verify_aider_synthetic_strings(
+            (coder_prompts_cls, editblock_prompts_cls),
+            aider_version=ver,
+        )
+        if isinstance(coder_prompts_cls, type):
+            verify_aider_synthetic_strings(coder_prompts_cls(), aider_version=ver)
+        if isinstance(editblock_prompts_cls, type):
+            verify_aider_synthetic_strings(editblock_prompts_cls(), aider_version=ver)
+    except ProxyConfigError as exc:
+        raise PreflightError(str(exc)) from exc
+
+    return {
+        "aider_version": ver,
+        "synthetic_strings_verified": True,
+    }
 
 
 class ContextSizingResult(dict):
@@ -493,6 +566,7 @@ def evaluate_candidate_fit(
             f"J2 context_length must be a power of two >= {J2_CONTEXT_FLOOR}; got {ctx_int}"
         )
 
+    aider_check = verify_installed_aider()
     verified_steps = assert_top_logprobs(top_or_response, k=TOP_LOGPROBS_K)
 
     if gguf_size_bytes is None and gguf_path is not None:
@@ -558,6 +632,8 @@ def evaluate_candidate_fit(
     return {
         "arm": arm,
         "quant": norm_quant,
+        "aider_version": aider_check["aider_version"],
+        "synthetic_strings_verified": bool(aider_check["synthetic_strings_verified"]),
         "context_length": ctx_int,
         "context_runs_used": runs_used,
         "reattach_max_turns": reattach_max_turns,

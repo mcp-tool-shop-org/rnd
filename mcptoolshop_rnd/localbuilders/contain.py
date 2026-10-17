@@ -76,6 +76,7 @@ def builder_env(
             "HTTP_PROXY": DEAD_PROXY,
             "HTTPS_PROXY": DEAD_PROXY,
             "NO_PROXY": "127.0.0.1,localhost",
+            "CUDA_VISIBLE_DEVICES": "",
         }
     )
     return env

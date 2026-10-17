@@ -467,6 +467,46 @@ def _extract_reasoning_and_content(resp: dict) -> tuple[str, str | None]:
     return str(content or ""), (str(reasoning) if reasoning is not None else None)
 
 
+# Tokens that close a reply's thinking. `</think>` for the DeepSeek-style templates; `<|eom|>` and `<|end|>` close the
+# analysis message in harmony-style templates (Muse-Glimmer's ends its thinking with `<|eom|>`, window 12d), and count
+# only when the reply carries reasoning.
+THINK_END = "</think>"
+CHANNEL_ENDS = ("<|eom|>", "<|end|>")
+
+
+def _thinking_count(resp: dict, tokens: list[str], reasoning: str | None, output_tokens: int) -> tuple[int | None, str | None]:
+    """The reply's thinking tokens and where the count came from: `usage`, `timings`, `marker` (the token that closes the
+    thinking, in the logprob stream), or `length` (a reply cut off at the limit with no answer yet, so all of it was
+    thinking). `(None, None)` when none of these can say: the caller keeps a word estimate instead.
+
+    Before 2026-10-17 two cases came back None and were summed as 0 downstream: every reply that stopped at the length
+    limit (its thinking never closed), and every reply from a harmony-style template (no `</think>`). Those are exactly
+    the longest thinkers."""
+
+    usage = resp.get("usage") if isinstance(resp.get("usage"), dict) else {}
+    timings = resp.get("timings") if isinstance(resp.get("timings"), dict) else {}
+    details = usage.get("completion_tokens_details")
+    if isinstance(details, dict) and details.get("reasoning_tokens") is not None:
+        return int(details["reasoning_tokens"]), "usage"
+    if usage.get("reasoning_tokens") is not None:
+        return int(usage["reasoning_tokens"]), "usage"
+    if timings.get("reasoning_n") is not None:
+        return int(timings["reasoning_n"]), "timings"
+    if THINK_END in tokens:
+        return tokens.index(THINK_END) + 1, "marker"
+    if not reasoning:
+        return 0, "none"
+    ends = [tokens.index(m) for m in CHANNEL_ENDS if m in tokens]
+    if ends:
+        return min(ends) + 1, "marker"
+    content, _ = _extract_reasoning_and_content(resp)
+    choices = resp.get("choices") or []
+    finish = choices[0].get("finish_reason") if choices and isinstance(choices[0], dict) else resp.get("done_reason")
+    if finish == "length" and not content.strip():
+        return output_tokens, "length"
+    return None, None
+
+
 def _count_tokens(
     resp: dict,
     tokens: list[str],
@@ -497,25 +537,8 @@ def _count_tokens(
         output_tokens = len(tokens)
     output_tokens = int(output_tokens or 0)
 
-    details = usage.get("completion_tokens_details")
-    thinking_tokens: int | None = None
-    thinking_words_estimate: int | None = None
-
-    if isinstance(details, dict) and details.get("reasoning_tokens") is not None:
-        thinking_tokens = int(details["reasoning_tokens"])
-    elif usage.get("reasoning_tokens") is not None:
-        thinking_tokens = int(usage["reasoning_tokens"])
-    elif timings.get("reasoning_n") is not None:
-        thinking_tokens = int(timings["reasoning_n"])
-    elif "</think>" in tokens:
-        idx = tokens.index("</think>")
-        thinking_tokens = idx + 1
-    elif reasoning:
-        thinking_tokens = None
-        thinking_words_estimate = len(reasoning.split())
-    else:
-        thinking_tokens = 0
-
+    thinking_tokens, _ = _thinking_count(resp, tokens, reasoning, output_tokens)
+    thinking_words_estimate = len(reasoning.split()) if thinking_tokens is None and reasoning else None
     return prompt_tokens, thinking_tokens, thinking_words_estimate, output_tokens
 
 
@@ -876,6 +899,7 @@ class ProxyState:
                 "usage": upstream_json.get("usage"),
                 "wall_time_s": round(call_wall_s, 6),
                 "thinking_tokens": thinking_tokens,
+                "thinking_tokens_source": _thinking_count(upstream_json, tokens, reasoning_content, output_tokens)[1],
                 "thinking_words_estimate": thinking_words_estimate,
                 "output_tokens": output_tokens,
                 "prompt_tokens": prompt_tokens,

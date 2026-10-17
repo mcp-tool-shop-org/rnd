@@ -5,6 +5,31 @@ call now writes, in `rnd abmine`'s format (tokens plus top-5 log-probabilities p
 record"). **Owner:** R&D for the analysis in `rnd abmine`; the Publisher for the role-set wiring. **Start:** after the
 Colab pilot, which produces the first records.
 
+## Where it lives: inside role-set, beside its self-learning store
+
+Added 2026-10-16, at the maintainer's suggestion. The dataminer becomes part of role-set, so its signals sit next to
+the defects and observations role-set already learns from.
+
+- **The code isn't copied.** role-set depends on `mcptoolshop-rnd` at a pinned version and imports
+  `mcptoolshop_rnd.abmine`, which is standard-library only. The analysis stays one implementation, maintained in
+  rnd.
+- **`role-set mine ingest <run dir>`** adds each wave's `generations.jsonl` to the store through ingest, the store's
+  single write path, as a schema migration with new tables:
+  - `generations`: the call id, slot, wave, attempt, model, partition, record sha256, and the per-call signals
+    (margins at the keyed tokens, mean entropy, the longest near-certain span);
+  - `host_checks`: the host, reference host, Δz summary and verdict.
+
+  The store stays append-only, and **the trainer never reads these tables.** The firewall holds. Records keep their
+  `partition`, so `trial:*` signals never feed the generator's teaching data unless R&D promotes them (local-builders
+  amendment A, item 7).
+- **`role-set mine report`** joins the signals to what role-set already keeps:
+  - accepted rows: the uncertain-first key-check list (priority 1);
+  - `defects.jsonl` classes: the margin evidence on refusals (use 6);
+  - critic-control results: the margin threshold for advisory refusals (use 3);
+  - host checks: the andon (priority 2).
+- **The self-learning loop, made concrete:** each batch's defect classes and margin patterns are read before the
+  next batch's prompts and gates are ruled on. **Changes still go through R&D's rulings,** never automatically.
+
 ## Priority 1: point the key check at uncertain items
 
 - **Signal:** the writer's margin at the keyed decision tokens. That's the verdict word (supported, unsupported or

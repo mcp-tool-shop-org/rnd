@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.0.1] - 2026-10-17
+
+- The dataminer counts thinking on every reply: a reply cut off at the length limit with no answer counts all its output as thinking, and a harmony-style template's thinking ends at <|eom|> or <|end|> (Muse-Glimmer). Each call records thinking_tokens_source (usage, timings, marker, length, none). Before this, both cases were null and summaries summed them as 0. New: python -m mcptoolshop_rnd.localbuilders.recount re-measures a generations file into a new one.
+
 ## [1.1.15.0.0] - 2026-10-17
 
 - J2 pre-run round 5: skip pre-creating venv when install names {venv}, enforce Python 3.12 interpreter check, and refuse empty or non-{venv} install commands.

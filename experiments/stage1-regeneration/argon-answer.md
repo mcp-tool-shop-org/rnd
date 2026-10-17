@@ -1,5 +1,7 @@
 # Argon's answer, summarised (2026-10-16)
 
+> **Superseded (2026-10-17).** Written under the proof rule ("not proven = don't use"), which the maintainer withdrew. The clause quotes stand; the "not proven" verdicts don't. Current verdicts: `experiments/generated-content-terms/README.md` and `licences/registry.json`.
+
 Browser Argon's reply to the Publisher's consult brief on the regeneration, pasted by the maintainer. It's
 **summarised here, not reproduced:** it quotes licence text at length. The clauses that count are the ones R&D
 re-read, in [PLAN.md](PLAN.md) section 1.

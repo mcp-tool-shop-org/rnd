@@ -1,15 +1,18 @@
 # Stage 1 data regeneration: plan
 
-**Why.** The maintainer's ruling (2026-10-16): regenerate Stage 1's training data, under the generated-content
-proof rule (`experiments/generated-content-terms`). The frozen set (aspire-si `FROZEN.md` `e7b69464`) has these
-writers, none of whose terms prove training use:
+**Why.** The maintainer's ruling (2026-10-16): regenerate Stage 1's training data (`experiments/generated-content-terms`).
+*Revised 2026-10-17:* the proof rule this plan was first written under is withdrawn; a use is barred only by a clause.
+Grok's and Argon's rows still can't train (the xAI distillation and Google ML clauses). Kimi's rows may train: Kimi's
+weights are open and permissive (K3 MIT-style, K2.6 modified MIT), and its seat ran through Ollama Cloud, not the
+Kimi app (PROVENANCE.md). The frozen set
+(aspire-si `FROZEN.md` `e7b69464`) has these writers:
 - Kimi wrote the pilot;
 - Grok wrote batches 2–8;
 - Antigravity Argon wrote the 210 apply items;
 - Claude sessions made fix rounds.
 
 **The maintainer's direction:**
-- use the biggest licence-proven models for the whole process, writer and critic alike;
+- use the biggest models whose licences allow it for the whole process, writer and critic alike;
 - **Colab for everything it can do; RunPod only for the roles that need bigger, multi-card models;**
 - the RunPod tier and any dollars are the maintainer's to approve.
 
@@ -17,19 +20,19 @@ writers, none of whose terms prove training use:
 cites at the primary source (section 1). **Nothing runs** until the maintainer approves this plan, and each Colab
 or RunPod window is told to him first.
 
-## 1. Licence-proven models, re-read by R&D at the primary source (2026-10-16)
+## 1. Licence-cleared models, re-read by R&D at the primary source (2026-10-16)
 
-The rule requires the model maker's own text allowing the use of outputs. Biggest first:
+Each licence was read for any clause on outputs (the proof column is the 2026-10-16 record; a grant isn't required). Biggest first:
 
 | Model | Size (total / active) | Licence | Proof, as R&D read it | Verdict |
 |---|---|---|---|---|
-| meta-models/Muse-Spark-Open-816B-A42B | 816B / 42B MoE | **Muse Model License** (released 2026-10-15) | The card's intended uses include "Synthetic Data Generation - generating high-quality training data for downstream model development." **The licence attaches conditions:** a model "trained … distilled, or otherwise improved using the Software or any outputs or results thereof" is a **Derivative**. Copies of a Derivative must carry the copyright notice, the licence and the Usage Policy, and each product using it must display "Built with Muse Spark Open". The repo is gated (legal name, date of birth, organisation). | **proven, with conditions** (the maintainer's call) |
-| deepseek-ai/DeepSeek-R1 and R1-0528 | 671B / 37B MoE | MIT | R1: "DeepSeek-R1 series support commercial use, allow for any modifications and derivative works, including, but not limited to, distillation for training other LLMs." R1-0528 words it differently: "DeepSeek-R1 series (including Base and Chat) supports commercial use and distillation." | **proven** |
-| nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B | 550B / 55B hybrid MoE | OpenMDW-1.1 (card: "Governing Download Terms: Use of this model is governed by the OpenMDW License Agreement, version 1.1"; released 2026-06-04) | OpenMDW-1.1: "does not impose any restrictions or obligations with respect to any use, modification, or sharing of any outputs" | **proven** |
-| nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B | 120B / 12B hybrid MoE | OpenMDW-1.1 (same governing line; released 2026-10-15) | as above | **proven** |
-| deepseek-ai/DeepSeek-R1-Distill-Qwen-32B | 32.8B dense | MIT (tag), with the R1 card's clause repeated on its own card | DeepSeek's distillation grant. The card notes the model is "derived from Qwen-2.5 series, which are originally licensed under Apache 2.0 License". Qwen2.5-32B's own card is plain Apache-2.0, silent on outputs. | **proven by its maker** (see the note below) |
-| meta-models/Muse-Glimmer-30B | 30B dense | Apache-2.0 | the card's intended uses include "Synthetic data generation: Generating high-quality training data for downstream model development." | **proven** |
-| nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B | 30B / 3B MoE | OpenMDW-1.1 (the card governs, not the licence the Ollama tag bundles) | as for the Nemotrons above | **proven** |
+| meta-models/Muse-Spark-Open-816B-A42B | 816B / 42B MoE | **Muse Model License** (released 2026-10-15) | The card's intended uses include "Synthetic Data Generation - generating high-quality training data for downstream model development." **The licence attaches conditions:** a model "trained … distilled, or otherwise improved using the Software or any outputs or results thereof" is a **Derivative**. Copies of a Derivative must carry the copyright notice, the licence and the Usage Policy, and each product using it must display "Built with Muse Spark Open". The repo is gated (legal name, date of birth, organisation). | **allowed, with conditions** (the maintainer's call) |
+| deepseek-ai/DeepSeek-R1 and R1-0528 | 671B / 37B MoE | MIT | R1: "DeepSeek-R1 series support commercial use, allow for any modifications and derivative works, including, but not limited to, distillation for training other LLMs." R1-0528 words it differently: "DeepSeek-R1 series (including Base and Chat) supports commercial use and distillation." | **allowed** |
+| nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B | 550B / 55B hybrid MoE | OpenMDW-1.1 (card: "Governing Download Terms: Use of this model is governed by the OpenMDW License Agreement, version 1.1"; released 2026-06-04) | OpenMDW-1.1: "does not impose any restrictions or obligations with respect to any use, modification, or sharing of any outputs" | **allowed** |
+| nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B | 120B / 12B hybrid MoE | OpenMDW-1.1 (same governing line; released 2026-10-15) | as above | **allowed** |
+| deepseek-ai/DeepSeek-R1-Distill-Qwen-32B | 32.8B dense | MIT (tag), with the R1 card's clause repeated on its own card | DeepSeek's distillation grant. The card notes the model is "derived from Qwen-2.5 series, which are originally licensed under Apache 2.0 License". Qwen2.5-32B's own card is plain Apache-2.0, silent on outputs. | **allowed; its maker grants it** (see the note below) |
+| meta-models/Muse-Glimmer-30B | 30B dense | Apache-2.0 | the card's intended uses include "Synthetic data generation: Generating high-quality training data for downstream model development." | **allowed** |
+| nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B | 30B / 3B MoE | OpenMDW-1.1 (the card governs, not the licence the Ollama tag bundles) | as for the Nemotrons above | **allowed** |
 
 **Revised 2026-10-16 under the reworded rule** (allowed unless a contract or licence restricts it):
 - **Plain Apache-2.0 models** (Qwen3.8 and 3.6, Gemma 4, Granite 4.2) **are eligible.** Their licence makes no claim
@@ -64,7 +67,7 @@ The rule requires the model maker's own text allowing the use of outputs. Bigges
   - They're different families.
 - **RunPod tier, only if the pilot earns it:**
   - **writer:** Nemotron-3.5-Super-VL-120B, Q8_0, on a pod;
-  - **critic:** stays on Colab, a non-Nemotron proven model (Muse-Glimmer or R1-Distill-Qwen-32B).
+  - **critic:** stays on Colab, a non-Nemotron model (Muse-Glimmer or R1-Distill-Qwen-32B).
   - Only the writer's hours are paid.
 - **The critic differs from every writer it judges** (local-builders amendment A).
 - Every row passes `role_set.assemble` and the aspire-si gates, unchanged.
@@ -72,7 +75,7 @@ The rule requires the model maker's own text allowing the use of outputs. Bigges
 ## 3. The provenance inventory (step 0, before any generation)
 
 Every field of every Stage 1 row is traced to its writer. Only these sources may reach the new rows:
-- proven models;
+- models whose licences allow the use;
 - deterministic code: gates, assemble, slot plans, puzzle generators;
 - the maintainer's own writing.
 
@@ -83,8 +86,7 @@ Every field of every Stage 1 row is traced to its writer. Only these sources may
   maintainer or reduced to structural specs.
 - **The puzzle generators and their catalogues** (`puzzle.py`, `t10_*`, `t11_*`, `t12_*` JSON).
 - **DEV (review-10 and pilot-20), sealed (130) and interview.QUESTIONS (12):** their writers are recorded next to
-  `FROZEN.md`. Evaluation use isn't proven for any provider, so a provider-written evaluation set needs the
-  maintainer's decision too.
+  `FROZEN.md`. Evaluation use is allowed wherever no clause bars it (revised 2026-10-17; it was "not proven").
 - **The real-source quotes** (pinned open-source repo lines): human-written, under their own licences, recorded
   per row. Reusable.
 
@@ -166,7 +168,7 @@ folder.
 | Card | VRAM | $/hr | Super-VL-120B at Q8_0 (~127 GB) | CUDA 13.4 forward compatibility |
 |---|---|---|---|---|
 | 1× H200 NVL (Hopper) | 143 GB | 3.79 | fits, about 16 GB for KV (the hybrid Mamba design keeps KV small) | **not yet probed:** Hopper isn't covered (`cloud-cu134`) |
-| 1× B200 (Blackwell) | 180 GB | 7.99 | fits with room | **proven** |
+| 1× B200 (Blackwell) | 180 GB | 7.99 | fits with room | **allowed** |
 | 2× RTX PRO 6000 Blackwell Server Edition | 192 GB | 4.98 | fits, split across two cards | **not proven.** NVIDIA's forward-compatibility page (updated 2026-09-09) covers "NVIDIA Data Center GPUs", "Select NGC Server Ready SKUs of RTX cards" and Jetson, and names no models |
 | 2× H100 80GB (Hopper) | 160 GB | 7.98 | fits, split | not yet probed |
 
@@ -236,7 +238,8 @@ that):
 ## Decisions (2026-10-16)
 
 The maintainer's own rulings, plus those he delegated to the Publisher or R&D:
-- **Regenerate everything under the proof rule:** all 810 training rows and the 210 apply items. The maintainer
+- **Regenerate everything:** all 810 training rows and the 210 apply items (*revised 2026-10-17:* Kimi's rows may
+  be kept). The maintainer
   made no exception for the Grok-written batches: xAI's AUP lists "distilling model data or Outputs" among the
   uses you agree not to make, and his rule doesn't read it narrowly.
 - **The student verifier is a specialized tool** in the sense of Anthropic's Help Center article 12326764. So

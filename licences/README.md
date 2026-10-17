@@ -26,9 +26,9 @@ This folder is the documented search: one entry per page the studio relies on.
   - `url`, `page_date` (the page's own date) and `read_date` (when R&D read it);
   - `clauses`: the exact words the verdict rests on;
   - `uses`: the verdict for each of the four uses (`assets`, `training`, `evaluation`, `code`). The verdicts are
-    `proven` (an explicit grant, or no restriction found in a documented search), `conditions` (allowed with the
-    `conditions` listed), `barred` (an explicit clause forbids it), `not_proven` (wording the maintainer hasn't ruled
-    on), and `n/a`;
+    `allowed` (no clause restricts it), `conditions` (allowed with the `conditions` listed), `barred` (a quoted
+    clause forbids it), and `n/a`. A use is barred only by a clause (2026-10-17); the earlier `proven` and
+    `not_proven` labels belonged to the withdrawn proof rule;
   - `covers`: the models or services it governs;
   - `snapshot_sha256`: the hash of the page text as fetched on the read date;
   - `archive_url`: the Wayback Machine's closest copy, where one exists.

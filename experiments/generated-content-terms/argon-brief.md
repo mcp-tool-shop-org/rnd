@@ -1,5 +1,7 @@
 # Argon consult: what AI providers' terms allow the studio to do with generated content (2026-10-16)
 
+> **Superseded (2026-10-17).** Written under the proof rule ("not proven = don't use"), which the maintainer withdrew. The clause quotes stand; the "not proven" verdicts don't. Current verdicts: `experiments/generated-content-terms/README.md` and `licences/registry.json`.
+
 **From:** R&D, for Browser Argon. **Kind:** a consult on published terms. It's a different-family check of
 licence terms that will be relied on. No bundle: R&D's reading so far is in `README.md` in this folder.
 

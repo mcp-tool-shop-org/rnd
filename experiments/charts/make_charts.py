@@ -1048,6 +1048,52 @@ def chart_e4b():
     chart_e4b_latency(blocks)
 
 
+# --- Stage 1 writer pilot. Numbers come from experiments/stage1-regeneration/pilot/, never typed in. ---
+
+PILOT = REPO / "experiments" / "stage1-regeneration" / "pilot"
+THINK_C, ANSWER_C = "#7c3aed", "#0f766e"
+
+
+def chart_pilot_thinking():
+    """Qwen3.8's first-wave calls: thinking vs answer tokens per call, against the 16,384-token reply budget."""
+    d = load(PILOT / "qwen3.8-w0-calls.json")
+    calls = d["calls"]
+    budget = d["reply_budget_tokens"]
+    left, right, top, step = 170, 1010, 112, 30
+    y1 = top + step * len(calls)
+    svg = Svg(1140, y1 + 92, "Where a thinking model's reply budget goes: Qwen3.8-27B, first pilot wave")
+    think = sum(c["thinking_tokens"] for c in calls)
+    total = sum(c["output_tokens"] for c in calls)
+    svg.text(24, 56, f"{len(calls)} calls, {total:,} output tokens, {think / total:.0%} of them thinking. "
+             f"No call was cut off, but the longest used {max(c['output_tokens'] for c in calls):,} of {budget:,}.",
+             size=12, color=MUTED)
+    svg.rect(24, 72, 12, 12, THINK_C)
+    svg.text(42, 82, "thinking (never shown to the reader)", size=11)
+    svg.rect(290, 72, 12, 12, ANSWER_C)
+    svg.text(308, 82, "the draft itself", size=11)
+    sx = lambda v: left + (right - left) * v / budget  # noqa: E731
+    for t in range(0, budget + 1, 4096):
+        svg.line(sx(t), top - 6, sx(t), y1, GRID)
+        svg.text(sx(t), y1 + 16, f"{t:,}", size=10, color=MUTED, anchor="middle")
+    for i, c in enumerate(calls):
+        y = top + step * i
+        if i % 2 == 0:
+            svg.rect(24, y, right - 24 + 100, step, BAND)
+        svg.text(28, y + 19, f"call {c['call']}", size=11.5, weight=600)
+        svg.text(92, y + 19, f"{c['prompt_tokens']:,} in", size=10, color=MUTED)
+        svg.rect(sx(0), y + 7, sx(c["thinking_tokens"]) - sx(0), step - 14, THINK_C)
+        svg.rect(sx(c["thinking_tokens"]), y + 7, sx(c["output_tokens"]) - sx(c["thinking_tokens"]), step - 14, ANSWER_C)
+        svg.text(right + 14, y + 19, f"{c['wall_s'] / 60:.1f} min", size=10.5, color=MUTED)
+    svg.text(sx(budget / 2), y1 + 34, "output tokens per call", size=11, anchor="middle")
+    svg.line(sx(budget), top - 10, sx(budget), y1, RULE, 1.6, dash="4 3")
+    svg.text(sx(budget), top - 14, f"reply budget {budget:,}", size=10.5, color=RULE, anchor="end")
+    svg.footer(["A100-40GB, Q8_0, thinking at the model card's setting, about 31 tokens a second. Short calls carry a ~145-token "
+                "prompt; long calls carry 6,370–7,643.",
+                f"Source: mcp-tool-shop-org/rnd experiments/stage1-regeneration/pilot/qwen3.8-w0-calls.json (counts from the "
+                f"logging proxy, sha256 {d['source']['sha256'][:12]}…)."])
+    svg.save("pilot-thinking-budget.svg")
+
+
 def manifest():
     out = {}
     for rel, p in sorted(INPUTS.items()):
@@ -1072,6 +1118,7 @@ def main():
     chart_vocal()
     chart_thinking()
     chart_e4b()
+    chart_pilot_thinking()
     manifest()
 
 

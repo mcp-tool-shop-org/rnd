@@ -91,6 +91,20 @@ Each run records:
 
 Records go to the study's own store with a shared schema, never into another study's frozen store. Shape them so a later study can reuse them: for example, effort against difficulty for each model.
 
+**The generation record (provenance evidence).** Every model call that produces text the experiment keeps
+(writer, critic, judge or candidate) is also logged in the [dataminer](/rnd/handbook/ab-dataminer/)'s record format,
+`generations.jsonl`, with:
+- one `result` row per call: `arm` (the model's registry name), `prompt` (the call id), `tokens`, and the top-K
+  log-probabilities per step (`top`, K = 5 by default);
+- the run's pins (the model file's sha256, the server binary and its libraries) and the record's own sha256 on the
+  receipt.
+
+**Why:** the record fingerprints the model. Replaying a kept output through the pinned model on the pinned stack
+must reproduce its per-token log-probabilities, within the tolerance the replay check sets. A different model, or
+an edited text, can't. A sample of every release is replayed by `rnd abmine` (its replay today drives Ollama; a llama-server path is being added for the pinned stacks) and the result goes on the
+recipe card or the report. A call made with sampling still records the log-probabilities of the tokens it chose;
+the replay checks those.
+
 ## 8. Before the first counted run
 
 The A/B template's section 6 applies. In addition:

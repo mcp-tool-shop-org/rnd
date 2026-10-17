@@ -16,7 +16,8 @@ search for restrictions is documented.
 ## What we found
 
 - **Google (consumer terms, 2026-07-30)** bars using AI-generated content "to develop machine learning models or
-  related AI technology". That covers training data and AI-pipeline code. Outside that, Google disclaims ownership and
+  related AI technology". Read by its anti-distillation purpose, that covers training data and evaluation items,
+  not ordinary code no model trains on. Outside that, Google disclaims ownership and
   restricts nothing that applies, so commercial use is allowed. Flow Music's terms grant it outright.
 - **xAI** leaves output with you ("you retain your ownership rights") and requires "Written with Grok" attribution.
   Its Acceptable Use Policy bars "distilling model data or Outputs", so no training on Grok output.
@@ -38,6 +39,8 @@ written by Antigravity or Grok is being rewritten. Interlock's Grok and Kimi cod
 - This is a reading of published terms, not legal advice. Terms change, so every clause carries its page date.
 - The student verifier counts as a "specialized tool" by the maintainer's judgement. An AI support agent at
   Anthropic agreed, but that isn't a human review.
+- The rule has two tiers (2026-10-17): strict for what shapes model weights or scores, and plain for code that no
+  model trains on.
 - The rule was first worded so that silence counted as a bar. It was reworded the same day, and these verdicts
   follow the reworded rule.
 

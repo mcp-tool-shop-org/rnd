@@ -6,6 +6,7 @@ date: 2026-10-16
 highlights:
   - "<strong>Ask per use, not per provider.</strong> Shipping an asset, training a model, evaluating one and running code are four different questions, and each provider answers them differently."
   - "<strong>Owning the output isn't permission for every use.</strong> xAI leaves Grok's output with you and also bars distilling it. Both clauses hold at once."
+  - "<strong>Be strict where it shapes the model, plain where it's just code.</strong> Anything that trains a model or scores one needs explicit permission. Code you own that no model trains on is ordinary software, whoever wrote it."
   - "<strong>Silence isn't a ban.</strong> Only a contract you agreed to, or a licence, can restrict what you do with output. Plain Apache-2.0 and MIT make no claim on outputs, so they're free. Look hard for the clauses that do restrict, and record the search."
   - "<strong>The account changes the terms.</strong> The same Kimi model is non-commercial in Moonshot's app and unrestricted through Ollama Cloud. Google's API terms are narrower than its consumer terms."
   - "<strong>Stage 1's training rows are being regenerated</strong> by licence-proven open models. The method, the gates, the lessons and the evaluation sets carry over."
@@ -31,6 +32,16 @@ The first version of the rule went further: it treated anything not expressly pe
 silence a ban, which it isn't. Only a contract you agreed to, or a licence, can restrict a use. The rule was
 reworded the same day, and the verdicts below follow the reworded version.
 
+A second correction followed the next day. The studio had read Google's "related AI technology" at its widest, so it
+covered even small pieces of pipeline code. The outside reviewer pointed out that the clause sits under "Don't abuse
+our services", and that its purpose is stopping people distilling Gemini into a rival model. The rule now has two
+tiers:
+- **Strict, needing explicit permission:** anything that shapes model weights or benchmark scores. That covers
+  training data, evaluation items and base models. A bad ingredient there can't be taken out of a trained model
+  afterwards.
+- **The plain reading:** code the studio owns, that no model trains on and that builds no rival to the provider, is
+  ordinary software whoever wrote it. The worst case there is rewriting a script, not a tainted model.
+
 The rule earned its keep. The outside model's first pass got two things wrong:
 - it said Claude's consumer terms bar all commercial use, when that clause covers evaluation access only;
 - it said the Llama licence bars training non-Llama models, when Llama 3.3 permits it if the new model's name
@@ -45,7 +56,7 @@ Both were caught by re-reading the source.
 | **Commercial assets** | Allowed. Flow Music grants "Commercial use rights" outright; for the rest, Google disclaims ownership and restricts nothing that applies | Allowed, with attribution ("Written with Grok") | Allowed: you own the outputs | Barred: non-commercial use only |
 | **Training data** | Barred | Barred: no distilling outputs | Allowed for non-competing specialized classifiers and tools, **never as training targets** | Barred for a business: non-commercial use only |
 | **Evaluation only** | Barred where it serves developing a model; allowed otherwise | Unclear: the AUP's "develop … machine learning models" clause | Allowed on the same reading | Barred for a business |
-| **Code** | Allowed, except AI-pipeline code | Allowed for tooling that develops no model and doesn't compete, with attribution | Allowed for non-competing specialized tools | Barred for commercial use |
+| **Code** | Allowed when no model trains on it and it builds no rival (the clause is read by its anti-distillation purpose) | Allowed for tooling that develops no model and doesn't compete, with attribution | Allowed for non-competing specialized tools | Barred for commercial use |
 
 **The clauses behind the table:**
 - **Google** (Terms of Service, effective 2026-07-30) bars "using AI-generated content from our services to develop
@@ -101,10 +112,10 @@ An inventory traced every piece of text in the Stage 1 pipeline to whoever wrote
   come from different families.
 - **The method carries over:** the lessons, the gates, the defect catalogue and the evaluation sets. Claude wrote
   those, and Anthropic's terms allow that use for a specialized verifier. No Claude text becomes a training target.
-- **Code that Antigravity wrote for the training pipeline is being re-implemented,** because Google's ML clause
-  has no exception, and the outside reviewer confirmed that on a focused re-check. Whether Grok's generator logic
-  stays is the maintainer's call. The tooling Grok and Kimi wrote for interlock stays, credited in a
-  `CONTRIBUTORS.md` that says "Written with Grok".
+- **The code stays, whoever wrote it.** Under the two-tier rule, pipeline code that no model trains on is ordinary
+  software. Three small Antigravity-written pieces had already been re-implemented under the earlier, stricter
+  reading; they stay as they are. Grok's generator logic stays too, with its text replaced. The tooling Grok and Kimi
+  wrote is credited in `CONTRIBUTORS.md` files that say "Written with Grok".
 - **Provenance is now recorded at the source.** Every text-bearing template and pack in the generator gets a
   record of who wrote it, and the generator's own check refuses one without it. Seat commits carry a trailer naming
   the seat.
@@ -122,3 +133,6 @@ An inventory traced every piece of text in the Stage 1 pipeline to whoever wrote
 6. **Record who wrote what when it's written.** An inventory after the fact needed two agents reading PR threads
    and commit trailers, and still left gaps.
 7. **Mind the attribution clauses:** "Written with Grok", "Built with Muse Spark Open", and Llama's naming rule.
+8. **Split the rule by what the output touches.** Be strict about anything that trains or scores a model. Read
+   the terms plainly for code no model learns from. Never read an undefined phrase at its widest just to be safe:
+   that ratchet ends up banning a temperature monitor.

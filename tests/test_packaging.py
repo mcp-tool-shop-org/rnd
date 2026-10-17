@@ -75,7 +75,7 @@ class WithoutTheShimTests(unittest.TestCase):
 
 class ManifestTests(unittest.TestCase):
     def test_manifest_points_at_the_real_package(self):
-        self.assertIn('packages = ["mcptoolshop_rnd", "rnd"]', PYPROJECT)
+        self.assertIn('include = ["mcptoolshop_rnd*", "rnd*"]', PYPROJECT)
         self.assertIn('version = { attr = "mcptoolshop_rnd.__version__" }', PYPROJECT)
         self.assertRegex(PYPROJECT, r'(?m)^rnd = "mcptoolshop_rnd\.cli:main"$')
 

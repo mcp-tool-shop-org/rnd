@@ -11,9 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
-## [1.1.12.0.3] - 2026-10-17
+## [1.1.13.0.1] - 2026-10-17
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output
+
+## [1.1.13.0.0] - 2026-10-17
+
+- packaging: mcptoolshop_rnd.localbuilders (and setup_vm.sh) now ship in the wheel; a test checks every subpackage is included
 
 ## [1.1.12.0.2] - 2026-10-17
 

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.0.1] - 2026-10-17
+
+- newsletter issue 10 and a brief: what the terms let you do with AI output
+
 ## [1.1.15.0.0] - 2026-10-17
 
 - J2 pre-run round 5: skip pre-creating venv when install names {venv}, enforce Python 3.12 interpreter check, and refuse empty or non-{venv} install commands.
@@ -160,7 +164,6 @@ NANO an ordinary library update (entries filed or revised, results added).
 ## [1.1.10.0.17] - 2026-10-16
 
 - experiment local-builders: Wave 1 design filed with R&D's review changes
-- Added experiment `local-builders`
 
 ## [1.1.10.0.16] - 2026-10-16
 

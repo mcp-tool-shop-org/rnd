@@ -52,6 +52,17 @@ do we keep a wrong key, a puzzle with two answers, or a lazy habit out of it?
 | Pilot 2, 235B writer | 49 | 15 | 15 | 19 |
 | Batch 5, hand-built | 120 | 91 | 7 | 22 |
 
+## Update, 2026-10-17: choosing the writer
+
+The next batches are written by open-weight models and checked by a critic model. A pilot is screening eight
+candidate writers on rented A100s.
+- **The critic was tested first.** Both critics passed a known-answer bar set before their results. The test also
+  found two faulty keys in the set itself, and both were replaced.
+- **Thinking is most of the cost.** One writer spent 95% of its output on reasoning, about 12,000 tokens per practice row. So
+  the pilot became an 8-row screen, and cost per accepted row is now part of the readout.
+
+→ [Issue 11](/rnd/newsletter/issue-11/) has the data and the method.
+
 ## Caveats
 
 - **None of this data has trained a model yet.** Whether careful data beats rough data at this size is the

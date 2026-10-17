@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.2.7] - 2026-10-17
+
+- generated-content rule split: strict for what shapes weights or scores, code read plainly (Antigravity may build studio code, AI tooling included)
+- Updated experiment `generated-content-terms`
+- Updated experiment `local-builders`
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.10.2.6] - 2026-10-17
 
 - local-builders: amendment B (J2 on the pinned CUDA 13.4 stack, licences first, generation records, open units) and the Argon design-review brief

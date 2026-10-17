@@ -6,6 +6,8 @@
 **Status:** drafted by the Publisher, 2026-10-16; reviewed and filed by R&D the same day with the changes below.
 **Nothing runs** until Argon has reviewed the design and the maintainer has approved it. The maintainer has read
 section 1's first draft. Change 2 below altered its second sentence, and **amendment A supersedes change 2.**
+**Amendment B** (2026-10-17) moves J2 onto the pinned CUDA 13.4 stack, adds licences first and generation records, and
+replaces the unit cap with a ledger. It goes to Argon with this design.
 
 **R&D's review changes** (2026-10-16):
 1. **The screen runs on Colab, on one pinned A100-40GB,** not the 5090 (section 6). This corrects R&D's earlier
@@ -77,6 +79,50 @@ R&D settles the details:
      models. Never for an unproven model's records.
 8. **The incumbent meets the same floor.** If its J1 rate falls below 50%, the regeneration halts (andon) and the
    report goes to the maintainer before any full run.
+
+**Amendment B (2026-10-17): J2 on the pinned Colab stack, licences first, and generation records.** This follows
+the reworded licence rule, the maintainer's CUDA 13.4 rule, the dataminer requirement and his open Colab budget.
+1. **J1 is now the Stage 1 regeneration pilot** (`role-set plan --pilot`, with every eligible writer arm on the same
+   slots). It runs under the regeneration plan, so what remains of Wave 1 here is **J2**.
+2. **Licences first** (template section 0). J2's output is model-written code for studio repos, so each candidate
+   needs a `licences/registry.json` entry allowing code use:
+
+   | Candidate | Registry id | Code use | Notes |
+   |---|---|---|---|
+   | Qwen3.8-27B, Qwen3.6-35B-A3B | `apache-2.0` | allowed (no restriction found) | |
+   | Granite 4.2 30B | `apache-2.0` | allowed | |
+   | Gemma 4 31B | `apache-2.0` | allowed, **after** a check of Gemma's prohibited-use policy | the check gets its own registry entry before the run |
+   | Muse-Glimmer-30B | `muse-glimmer-30b-card` | allowed | |
+   | Nemotron-3.5-Lightning-30B-A3B | `nemotron-model-cards`, `openmdw-1.1` | allowed | the card governs, not the licence the Ollama tag bundles |
+   | Nemotron-3.5-Bolt-74B-A9B (24 GB, maker QAT) | `nemotron-model-cards`, `openmdw-1.1` | allowed | new candidate |
+   | DeepSeek-R1-Distill-Qwen-32B | `deepseek-r1-card` | allowed | eligible under the reworded rule |
+
+3. **The stack: the pinned regeneration stack, not stock Ollama.** Stock Linux Ollama ships CUDA 13.0 libraries,
+   which breaks the 13.4 rule. Wave 1 serves every candidate with:
+   - `llama-server` at the window-1 binary (sha256 `b4659b3f…`), with the CUDA 13.4.2 toolkit's libraries (cudart
+     13.4.92, cuBLAS 13.8.0.4) pinned by hash;
+   - each model's chat template embedded in its GGUF (`--jinja`), so each model still runs in its own format;
+   - GGUFs converted by us from the maker's weights at a pinned revision to Q8_0, or the maker's own GGUF where it
+     ships one (Bolt's 24 GB build is NVIDIA's own quantisation-aware build);
+   - Aider at one pinned version, as `--model openai/<served_as>` with `OPENAI_API_BASE` on the loopback.
+
+   **Wave 2 on the 5090** serves the same GGUF files through the studio's CUDA 13.4 Ollama build (imported by
+   file), so the model weights are identical across waves.
+4. **Fit is a report, not an exit.** Colab is now a production host, so a model that runs on the A100 40 GB is
+   screened there at full memory. Its peak VRAM at the pinned context is recorded. Above 26 GB, it's reported as
+   "doesn't fit the rig's plan cap", which matters for Wave 2 and doesn't remove it from Wave 1.
+5. **Generation records (the dataminer).** Aider doesn't ask for log-probabilities. So a loopback logging proxy
+   between Aider and `llama-server`:
+   - adds `logprobs: true, top_logprobs: 5` to each request;
+   - writes every call to `generations.jsonl` in `rnd abmine`'s format;
+   - passes the reply through unchanged.
+
+   The record's sha256 goes on each run's receipt. Containment: the builder reaches only the proxy's loopback port,
+   and the proxy reaches only `llama-server`.
+6. **Units:** the maintainer has opened the Colab budget. Wave 1 runs its candidates in parallel, on as many
+   A100 sessions as Colab assigns. Every window has a generous safety cap (25 units), one stop trap, and a units
+   ledger (start and end balance, cards, wall time, work done). The 70-unit estimate and the 90-unit cap in
+   section 6 are superseded by the ledger.
 
 **Sources:**
 - the maintainer's goal (2026-10-16);

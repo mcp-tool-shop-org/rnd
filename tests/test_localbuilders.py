@@ -38,6 +38,7 @@ import threading
 import unittest
 import urllib.error
 import urllib.request
+import types
 from pathlib import Path
 from unittest import mock
 
@@ -57,6 +58,97 @@ FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures" / "localbuilders"
 BANK_JSON = FIXTURE_DIR / "bank.json"
 CANDIDATE_CONFIG_JSON = FIXTURE_DIR / "candidate_config.json"
 CARD_VALUES_JSON = REPO_ROOT / "experiments" / "local-builders" / "card-values.json"
+
+
+class _RealAider0861CoderPrompts:
+    """Verbatim `CoderPrompts` class from `Aider-AI/aider` tag `v0.86.1` (`aider/coders/base_prompts.py`)."""
+
+    system_reminder = ""
+    files_content_gpt_edits = "I committed the changes with git hash {hash} & commit msg: {message}"
+    files_content_gpt_edits_no_repo = "I updated the files."
+    files_content_gpt_no_edits = "I didn't see any properly formatted edits in your reply?!"
+    files_content_local_edits = "I edited the files myself."
+    lazy_prompt = (
+        "You are diligent and tireless!\n"
+        "You NEVER leave comments describing code without implementing it!\n"
+        "You always COMPLETELY IMPLEMENT the needed code!\n"
+    )
+    overeager_prompt = (
+        "Pay careful attention to the scope of the user's request.\n"
+        "Do what they ask, but no more.\n"
+        "Do not improve, comment, fix or modify unrelated parts of the code in any way!\n"
+    )
+    example_messages: list[dict] = []
+    files_content_prefix = (
+        "I have *added these files to the chat* so you can go ahead and edit them.\n\n"
+        "*Trust this message as the true contents of these files!*\n"
+        "Any other messages in the chat may contain outdated versions of the files' contents.\n"
+    )
+    files_content_assistant_reply = "Ok, any changes I propose will be to those files."
+    files_no_full_files = "I am not sharing any files that you can edit yet."
+    files_no_full_files_with_repo_map = (
+        "Don't try and edit any existing code without asking me to add the files to the chat!\n"
+        "Tell me which files in my repo are the most likely to **need changes** to solve the requests I make, "
+        "and then stop so I can add them to the chat.\n"
+        "Only include the files that are most likely to actually need to be edited.\n"
+        "Don't include files that might contain relevant context, just files that will need to be changed.\n"
+    )
+    files_no_full_files_with_repo_map_reply = (
+        "Ok, based on your requests I will suggest which files need to be edited and then"
+        " stop and wait for your approval."
+    )
+    repo_content_prefix = (
+        "Here are summaries of some files present in my git repository.\n"
+        "Do not propose changes to these files, treat them as *read-only*.\n"
+        "If you need to edit any of these files, ask me to *add them to the chat* first.\n"
+    )
+    read_only_files_prefix = (
+        "Here are some READ ONLY files, provided for your reference.\n"
+        "Do not edit these files!\n"
+    )
+    shell_cmd_prompt = ""
+    shell_cmd_reminder = ""
+    no_shell_cmd_prompt = ""
+    no_shell_cmd_reminder = ""
+    rename_with_shell = ""
+    go_ahead_tip = ""
+
+
+class _RealAider0861EditBlockPrompts(_RealAider0861CoderPrompts):
+    """Verbatim `EditBlockPrompts` subclass from `Aider-AI/aider` tag `v0.86.1` (`aider/coders/editblock_prompts.py`)."""
+
+    main_system = "Act as an expert software developer.\n"
+    system_reminder = "# *SEARCH/REPLACE block* Rules:\n"
+
+
+@contextlib.contextmanager
+def _mock_installed_aider(
+    version: str = proxy.PINNED_AIDER_VERSION,
+    coder_prompts_cls: type = _RealAider0861CoderPrompts,
+    editblock_prompts_cls: type = _RealAider0861EditBlockPrompts,
+):
+    """Provide `aider`, `aider.coders.base_prompts`, and `aider.coders.editblock_prompts` with the version gate mocked."""
+    aider_mod = types.ModuleType("aider")
+    aider_mod.__version__ = version  # type: ignore[attr-defined]
+    coders_mod = types.ModuleType("aider.coders")
+    base_prompts_mod = types.ModuleType("aider.coders.base_prompts")
+    base_prompts_mod.CoderPrompts = coder_prompts_cls  # type: ignore[attr-defined]
+    editblock_prompts_mod = types.ModuleType("aider.coders.editblock_prompts")
+    editblock_prompts_mod.EditBlockPrompts = editblock_prompts_cls  # type: ignore[attr-defined]
+
+    with (
+        mock.patch.dict(
+            sys.modules,
+            {
+                "aider": aider_mod,
+                "aider.coders": coders_mod,
+                "aider.coders.base_prompts": base_prompts_mod,
+                "aider.coders.editblock_prompts": editblock_prompts_mod,
+            },
+        ),
+        mock.patch.object(preflight, "get_installed_aider_version", return_value=version),
+    ):
+        yield
 
 
 def _make_five_top(prefix: str, step: int) -> list[dict]:
@@ -494,25 +586,22 @@ class ProxyTests(unittest.TestCase):
         self.assertEqual(capped_stats["reattach_max_turns"], 2)
 
     def test_aider_synthetic_strings_verified_against_pinned_version(self):
-        class PinnedAiderPrompts:
-            files_content_assistant_reply = "Ok."
-            files_no_full_files_with_repo_map_reply = "Ok."
-            repo_content_assistant_reply = "Ok."
-
         self.assertTrue(
             proxy.verify_aider_synthetic_strings(
-                PinnedAiderPrompts(),
+                (_RealAider0861CoderPrompts, _RealAider0861EditBlockPrompts),
                 aider_version=proxy.PINNED_AIDER_VERSION,
             )
         )
         with self.assertRaises(proxy.ProxyConfigError):
-            proxy.verify_aider_synthetic_strings(PinnedAiderPrompts(), aider_version="0.0.1")
+            proxy.verify_aider_synthetic_strings((), aider_version=proxy.PINNED_AIDER_VERSION)
+        with self.assertRaises(proxy.ProxyConfigError):
+            proxy.verify_aider_synthetic_strings(_RealAider0861CoderPrompts, aider_version="0.0.1")
 
-        class DriftedPrompts:
+        class DriftedPrompts(_RealAider0861CoderPrompts):
             files_content_assistant_reply = "Brand new unexpected ack."
 
         with self.assertRaises(proxy.ProxyConfigError):
-            proxy.verify_aider_synthetic_strings(DriftedPrompts(), aider_version=proxy.PINNED_AIDER_VERSION)
+            proxy.verify_aider_synthetic_strings(DriftedPrompts, aider_version=proxy.PINNED_AIDER_VERSION)
 
         with self.assertRaises(proxy.ProxyConfigError):
             proxy.verify_aider_synthetic_strings(object(), aider_version=proxy.PINNED_AIDER_VERSION)
@@ -1324,6 +1413,95 @@ class ContainmentAndProbeTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             probe.run_probe(self.paths, injected_attempts={"not_a_check": False})
 
+    def test_probe_allows_only_the_two_task_history_files_and_refuses_all_other_outside_writes(self):
+        """Item 2: Probe allows writes to work_root/.../chat-history.md and input-history in an un-listable dir, and refuses every other write outside the workspace."""
+        history_dir = self.tmp / "work" / "history-task1"
+        chat_hist, input_hist = runner.prepare_task_history_files(history_dir)
+
+        paths_with_history = probe.ProbePaths(
+            workspace_dir=self.paths.workspace_dir,
+            outside_dir=self.paths.outside_dir,
+            bank_dir=self.paths.bank_dir,
+            twins_dir=self.paths.twins_dir,
+            receipts_dir=self.paths.receipts_dir,
+            chat_history_file=chat_hist,
+            input_history_file=input_hist,
+            llama_port=18081,
+        )
+
+        # Exactly those two paths are allowed outside the workspace
+        self.assertTrue(probe.is_allowed_outside_write(paths_with_history, chat_hist))
+        self.assertTrue(probe.is_allowed_outside_write(paths_with_history, input_hist))
+        self.assertFalse(probe.is_allowed_outside_write(paths_with_history, history_dir / "other.txt"))
+        self.assertFalse(probe.is_allowed_outside_write(paths_with_history, self.paths.outside_dir / "breach.txt"))
+
+        # Outcome 1 (Pass): writes to chat-history.md and input-history succeed, listing history_dir is refused,
+        # and writing any other file in history_dir or outside_dir is refused -> probe passes.
+        with (
+            mock.patch.object(probe.os, "listdir", side_effect=PermissionError("0711 dir not listable")),
+            mock.patch.object(Path, "write_text", side_effect=PermissionError("outside writes refused")),
+        ):
+            # Direct target checks on the two allowed history files succeed (refused=True / no breach)
+            breach_chat, _ = probe._attempt_write_outside_workspace(paths_with_history, target_path=chat_hist)
+            breach_input, _ = probe._attempt_write_outside_workspace(paths_with_history, target_path=input_hist)
+            self.assertFalse(breach_chat)
+            self.assertFalse(breach_input)
+
+            # Direct target check on another file outside workspace is refused -> no breach
+            breach_other, _ = probe._attempt_write_outside_workspace(
+                paths_with_history, target_path=history_dir / "other.txt"
+            )
+            self.assertFalse(breach_other)
+
+            # Full run_probe with write_outside_workspace using real _attempt_write_outside_workspace passes
+            other_checks_refused = {name: False for name in probe.CHECK_NAMES if name != "write_outside_workspace"}
+            rep_pass = probe.run_probe(paths_with_history, injected_attempts=other_checks_refused)
+            self.assertTrue(rep_pass["passed"], rep_pass)
+            self.assertEqual(rep_pass["breaches"], [])
+
+        # Outcome 2a (Breach): write to a non-history path outside workspace succeeds -> probe fails
+        breach_target, detail_target = probe._attempt_write_outside_workspace(
+            paths_with_history, target_path=self.paths.outside_dir / "rogue.txt"
+        )
+        self.assertTrue(breach_target)
+        self.assertIn("wrote outside workspace", detail_target)
+
+        # Outcome 2b (Breach): sibling file write inside history_dir succeeds -> probe fails
+        with mock.patch.object(probe.os, "listdir", side_effect=PermissionError("0711 dir not listable")):
+            other_checks_refused = {name: False for name in probe.CHECK_NAMES if name != "write_outside_workspace"}
+            rep_sibling_breach = probe.run_probe(paths_with_history, injected_attempts=other_checks_refused)
+            self.assertFalse(rep_sibling_breach["passed"])
+            self.assertEqual(rep_sibling_breach["breaches"], ["write_outside_workspace"])
+            self.assertIn("wrote non-history file", rep_sibling_breach["checks"]["write_outside_workspace"]["detail"])
+
+        # Outcome 2c (Breach): history_dir is listable by builder -> probe fails
+        other_checks_refused = {name: False for name in probe.CHECK_NAMES if name != "write_outside_workspace"}
+        rep_listable_breach = probe.run_probe(paths_with_history, injected_attempts=other_checks_refused)
+        self.assertFalse(rep_listable_breach["passed"])
+        self.assertEqual(rep_listable_breach["breaches"], ["write_outside_workspace"])
+        self.assertIn("listed history directory", rep_listable_breach["checks"]["write_outside_workspace"]["detail"])
+
+        # Outcome 2d (Failure): builder cannot write to chat-history.md -> probe fails
+        with mock.patch("builtins.open", side_effect=PermissionError("0600 not owned by builder")):
+            rep_unwritable = probe.run_probe(paths_with_history, injected_attempts=other_checks_refused)
+            self.assertFalse(rep_unwritable["passed"])
+            self.assertEqual(rep_unwritable["breaches"], ["write_outside_workspace"])
+            self.assertIn("not writable by builder", rep_unwritable["checks"]["write_outside_workspace"]["detail"])
+
+        # Outcome 2e (Failure): only one history file or wrong filename configured -> probe fails
+        incomplete_paths = probe.ProbePaths(
+            workspace_dir=self.paths.workspace_dir,
+            outside_dir=self.paths.outside_dir,
+            bank_dir=self.paths.bank_dir,
+            twins_dir=self.paths.twins_dir,
+            receipts_dir=self.paths.receipts_dir,
+            chat_history_file=chat_hist,
+            input_history_file=None,
+        )
+        rep_incomplete = probe.run_probe(incomplete_paths, injected_attempts=other_checks_refused)
+        self.assertFalse(rep_incomplete["passed"])
+        self.assertEqual(rep_incomplete["breaches"], ["write_outside_workspace"])
+
     def test_contain_iptables_insert_order_sudo_env_and_process_group_kill(self):
         """R&D Blocking 2 & Item 9: wrap_as_builder preserves builder_env via env -i, and iptables inserts at -I OUTPUT 1 in reverse order."""
         rules = contain.iptables_commands(builder_user="builder", proxy_port=18080, llama_port=18081)
@@ -1598,12 +1776,47 @@ class PreflightTests(unittest.TestCase):
         with self.assertRaises(preflight.PreflightError):
             preflight.assert_top_logprobs(bad_resp)
 
+    def test_verify_installed_aider_with_version_gate_mocked_and_real_prompts(self):
+        """Item 1: preflight.verify_installed_aider imports Aider, enforces version == 0.86.1, and checks CoderPrompts and EditBlockPrompts."""
+        # Missing aider package refuses
+        with mock.patch.dict(sys.modules, {"aider": None, "aider.coders.base_prompts": None}):
+            with self.assertRaises(preflight.PreflightError):
+                preflight.get_installed_aider_version()
+            with self.assertRaises(preflight.PreflightError):
+                preflight.load_installed_aider_prompts()
+
+        # Version gate mocked to 0.86.1 with real 0.86.1 CoderPrompts and EditBlockPrompts -> passes
+        with _mock_installed_aider(version="0.86.1"):
+            self.assertEqual(preflight.get_installed_aider_version(), "0.86.1")
+            res = preflight.verify_installed_aider()
+            self.assertEqual(
+                res,
+                {
+                    "aider_version": "0.86.1",
+                    "synthetic_strings_verified": True,
+                },
+            )
+
+        # Version gate mismatch (e.g. 0.85.0 or 0.86.1+import) refuses the run
+        for bad_ver in ("0.85.0", "0.86.1+import", "0.87.0"):
+            with _mock_installed_aider(version=bad_ver):
+                with self.assertRaises(preflight.PreflightError):
+                    preflight.verify_installed_aider()
+
+        # Synthetic string mismatch on EditBlockPrompts refuses the run
+        class MismatchedEditBlockPrompts(_RealAider0861EditBlockPrompts):
+            files_no_full_files_with_repo_map_reply = "New unrecognised Aider synthetic reply."
+
+        with _mock_installed_aider(version="0.86.1", editblock_prompts_cls=MismatchedEditBlockPrompts):
+            with self.assertRaises(preflight.PreflightError):
+                preflight.verify_installed_aider()
+
     def test_f6_and_amendment_b_fit_report_and_cli(self):
         log_pair_only = "llama_kv_cache_init: K (f16): 1600.00 MiB, V (f16): 1600.00 MiB\n"
         tpl = "{{ messages }}"
         tpl_sha = hashlib.sha256(tpl.encode("utf-8")).hexdigest()
 
-        with tempfile.TemporaryDirectory() as d:
+        with tempfile.TemporaryDirectory() as d, _mock_installed_aider(version="0.86.1"):
             tmp = Path(d)
             gguf_file = tmp / "model.gguf"
             gguf_file.write_bytes(preflight.build_minimal_gguf_with_template(tpl))
@@ -1619,6 +1832,8 @@ class PreflightTests(unittest.TestCase):
                 expected_template_sha256=tpl_sha,
                 reattach_max_turns=10,
             )
+            self.assertEqual(rep["aider_version"], "0.86.1")
+            self.assertIs(rep["synthetic_strings_verified"], True)
             self.assertFalse(rep["fits_a100"])
             self.assertTrue(rep["flagged_for_q6_k"])
             self.assertEqual(rep["arm_label"], "[Q6_K: A100 fit]")
@@ -1654,6 +1869,8 @@ class PreflightTests(unittest.TestCase):
             self.assertTrue(out_json.is_file())
             written = json.loads(out_json.read_text(encoding="utf-8"))
             self.assertEqual(written["context_runs_used"], ["qwen3.8-27b", "granite-4.2-30b"])
+            self.assertEqual(written["aider_version"], "0.86.1")
+            self.assertIs(written["synthetic_strings_verified"], True)
             self.assertFalse(written["template_check"]["matches"])
 
             with self.assertRaises(preflight.PreflightError):
@@ -1712,6 +1929,25 @@ class RunnerAndReceiptTests(unittest.TestCase):
                 llm_history_file="h",
                 analytics_log="a",
             )
+
+        # Item 2: prepare_task_history_files creates chat-history.md and input-history owned by builder (0600) in a 0711 directory
+        chmod_calls: list[tuple[Path, int]] = []
+        chown_calls: list[tuple[Path, str]] = []
+        hdir = self.tmp / "work" / "history-t1"
+        c_file, i_file = runner.prepare_task_history_files(
+            hdir,
+            builder_user="builder",
+            chmod_fn=lambda p, m: chmod_calls.append((p, m)),
+            chown_fn=lambda p, u: chown_calls.append((p, u)),
+        )
+        self.assertEqual(c_file.name, "chat-history.md")
+        self.assertEqual(i_file.name, "input-history")
+        self.assertTrue(c_file.is_file())
+        self.assertTrue(i_file.is_file())
+        self.assertIn((hdir.resolve(), 0o711), chmod_calls)
+        self.assertIn((c_file, 0o600), chmod_calls)
+        self.assertIn((i_file, 0o600), chmod_calls)
+        self.assertEqual(chown_calls, [(c_file, "builder"), (i_file, "builder")])
 
         # Publisher Item 2 (D-F1, D-F2): model-settings file pins examples_as_sys_msg: true for every candidate
         cards = json.loads(CARD_VALUES_JSON.read_text(encoding="utf-8"))["candidates"]
@@ -1880,7 +2116,7 @@ class RunnerAndReceiptTests(unittest.TestCase):
             }
         )
 
-        with _StubLlamaServer() as stub:
+        with _StubLlamaServer() as stub, _mock_installed_aider(version="0.86.1"):
             receipt_path = self.tmp / "receipts" / "r1.json"
             settings_file = self.tmp / "model-settings.yml"
 
@@ -1920,8 +2156,35 @@ class RunnerAndReceiptTests(unittest.TestCase):
             with self.assertRaises(runner.RunnerError):
                 runner.run_single_task(uncontained_cfg)
 
+            # Wrong Aider version in config or installed Aider refuses the run
+            bad_ver_cfg = runner.RunTaskConfig(
+                source_repo=mini_repo,
+                task=task,
+                candidate_config_path=CARD_VALUES_JSON,
+                candidate="qwen3.8-27b",
+                model_settings_file=settings_file,
+                served_as="qwen3.8-27b",
+                model_tag="qwen3.8:27b-q8_0",
+                model_digest="sha256:aaee06c39dcf",
+                aider_version="0.85.0",
+                upstream_url=stub.url,
+                work_root=self.tmp / "work-bad-ver",
+                receipt_path=self.tmp / "receipts" / "bad_ver.json",
+                machine_line={"gpu": "NVIDIA A100-SXM4-40GB"},
+            )
+            with self.assertRaises(runner.RunnerError):
+                runner.run_single_task(bad_ver_cfg)
+
+            with _mock_installed_aider(version="0.85.0"):
+                with self.assertRaises(runner.RunnerError):
+                    runner.run_single_task(run_cfg)
+
             def fake_aider_runner(cmd: list[str], ws_dir: Path, run_env: dict[str, str]) -> int:
                 self.assertEqual(cmd[:7], ["sudo", "-u", "builder", "-n", "--", "env", "-i"])
+                # Item 2: Verify the two history files were created before launching Aider
+                expected_hdir = run_cfg.work_root / f"history-{task.id}"
+                self.assertTrue((expected_hdir / "chat-history.md").is_file())
+                self.assertTrue((expected_hdir / "input-history").is_file())
                 api_base = run_env["OPENAI_API_BASE"]
                 _post_json(f"{api_base}/chat/completions", {"messages": [{"role": "user", "content": "turn 1"}]})
                 _post_json(
@@ -1959,6 +2222,8 @@ class RunnerAndReceiptTests(unittest.TestCase):
                 scorer_fn=lambda t, p: {"task_id": t.id, "passed": True, "correct": True, "reasons": []},
             )
 
+            self.assertEqual(receipt["aider_version"], "0.86.1")
+            self.assertIs(receipt["synthetic_strings_verified"], True)
             self.assertEqual(receipt["tool_calls"], {"total": 2, "malformed": 1, "failed": 1})
             self.assertEqual(receipt["retries"], 1)
             self.assertEqual(receipt["transforms"], ["reattach_thinking"])
@@ -2022,6 +2287,8 @@ class RunnerAndReceiptTests(unittest.TestCase):
         # Receipt validation errors
         for bad_mod in (
             lambda r: r.pop("task_id"),
+            lambda r: r.update({"aider_version": "0.85.0"}),
+            lambda r: r.update({"synthetic_strings_verified": False}),
             lambda r: r.update({"generations_sha256": "short"}),
             lambda r: r.update({"injected": "not-dict"}),
             lambda r: r.update({"injected": {"sampling": {}}}),

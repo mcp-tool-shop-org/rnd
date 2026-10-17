@@ -51,7 +51,7 @@
         "code": "n/a"
       },
       "notes": "Proven for Flow Music only. Flow and Project Genie have no comparable grant (the Flow help page defers to the ToS).",
-      "snapshot_sha256": "3ea4baa46d8917c874cf4e4ec097707d42806ff9a3cfbd87202960a4382ded8f",
+      "snapshot_sha256": "e5d8c00a9cd967e22708cae660dbc15dc17461343239dd74543bfa3666562517",
       "snapshot_file": "2026-10-16/google-ultra-benefits.txt",
       "archive_url": "http://web.archive.org/web/20261007090922/https://support.google.com/googleone/answer/16286513?hl=en"
     },
@@ -75,7 +75,7 @@
         "code": "barred"
       },
       "notes": "Incorporates the Google ToS (google-tos). Section 6 bars third-party tools reaching Antigravity through the maintainer's OAuth.",
-      "snapshot_sha256": "04d5f6ee21200e1af59059bb83a83e1e108fbf888927f67c6b58e2a343e66f4f",
+      "snapshot_sha256": "db9652829d03dad9d541706a3bff5a12ecca8c6f8f71565e1766b8066aa4737b",
       "snapshot_file": "2026-10-16/antigravity-terms.txt",
       "archive_url": "http://web.archive.org/web/20261015094837/https://antigravity.google/terms"
     },
@@ -403,7 +403,7 @@
         "code": "proven"
       },
       "notes": "Ultra: https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16 . Pin the card revision read when a model is used. Bolt-74B-A9B-24GB: 'Governing Terms: Use of the models is governed by the OpenMDW License Agreement, version 1.1', released 2026-10-15 (https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB).",
-      "snapshot_sha256": "06962053aa862852b096a1547c58bfab80cd381ae3a27d73cc4c800859068bb1",
+      "snapshot_sha256": "0c4768b150e4254c4a556fb54a77bb3c556db6c7a955b8e94d185ebb5b4b8963",
       "snapshot_file": "2026-10-16/nemotron-model-cards.txt",
       "archive_url": "http://web.archive.org/web/20261016004133/https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16"
     },
@@ -428,7 +428,7 @@
         "code": "proven"
       },
       "notes": "Licence Apache-2.0; the card's intended use is the grant. Its Usage Policy has no clause on outputs or training.",
-      "snapshot_sha256": "bf651447ad3878a3aeef436d6cc02cd31a7d3a8966a455c921b4f6f79d727d9a",
+      "snapshot_sha256": "07781b961a0d1b8457612da2f32654093ccaccab2d6c175f8d84ee2865b13795",
       "snapshot_file": "2026-10-16/muse-glimmer-30b-card.txt",
       "archive_url": "http://web.archive.org/web/20261010025638/https://huggingface.co/meta-models/Muse-Glimmer-30B"
     },
@@ -459,7 +459,7 @@
         "Gated repo: access request in the maintainer's legal name"
       ],
       "notes": "Not in use (the frontier tier is out of reach).",
-      "snapshot_sha256": "e5112047daf7972e411cd912d8fd2778563002fa365ecfd8a6756dd2493571d1",
+      "snapshot_sha256": "83eb4590ee65af37d82ca3ce1c0c880cfb3bfd4f8f586ebfa5fb32d6bdd28c48",
       "snapshot_file": "2026-10-16/muse-model-license-spark.txt",
       "archive_url": "http://web.archive.org/web/20261015170519/https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B"
     },
@@ -669,6 +669,64 @@
       "snapshot_sha256": "f66c4341e8f240b9b868e683d7a814f1b861c6d73ecaf1f363cffb41973868c1",
       "snapshot_file": "2026-10-16/census-naics-2022.txt",
       "archive_url": null
+    },
+    {
+      "id": "gemini-api-terms",
+      "owner": "Google",
+      "kind": "service-terms",
+      "covers": [
+        "Gemini API",
+        "Google AI Studio"
+      ],
+      "url": "https://ai.google.dev/gemini-api/terms",
+      "page_date": "2026-04-28 (last updated)",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "You may not use the Services to develop models that compete with the Services (e.g., Gemini API or Google AI Studio)."
+      ],
+      "uses": {
+        "assets": "proven",
+        "training": "conditions",
+        "evaluation": "proven",
+        "code": "conditions"
+      },
+      "conditions": [
+        "Only models or products that don't compete with the Gemini API or AI Studio",
+        "Prospective: covers only output generated through the API, not earlier consumer-plan output"
+      ],
+      "notes": "The clean route for future Google-written ML tooling (a paid API key, the maintainer's decision). The consumer ToS clause (google-tos) does not apply here.",
+      "snapshot_sha256": "296d96034f56cc95ddbf4be680e92510a4fd38d651d6499dff2fcfc079305cec",
+      "snapshot_file": "2026-10-16/gemini-api-terms.txt",
+      "archive_url": null
+    },
+    {
+      "id": "google-cloud-service-terms",
+      "owner": "Google",
+      "kind": "service-terms",
+      "covers": [
+        "Vertex AI",
+        "Google Cloud Generative AI Services"
+      ],
+      "url": "https://cloud.google.com/terms/service-terms",
+      "page_date": "2026-10-12 (last modified)",
+      "read_date": "2026-10-16",
+      "clauses": [
+        "Customer will not, and will not allow End Users to use an AI/ML Service or Generated Output to develop a similar or competing product or service."
+      ],
+      "uses": {
+        "assets": "proven",
+        "training": "conditions",
+        "evaluation": "proven",
+        "code": "conditions"
+      },
+      "conditions": [
+        "Only products that aren't similar to or competing with the service",
+        "Prospective: covers only Generated Output of Google Cloud services"
+      ],
+      "notes": "Section 17 (Generative AI Services). Generated Output is Customer Data.",
+      "snapshot_sha256": "754883b257a7d5422bbb4f8a9ea627532e629c065dfd522c7542395ebd1a2bc9",
+      "snapshot_file": "2026-10-16/google-cloud-service-terms.txt",
+      "archive_url": "http://web.archive.org/web/20261015131600/https://cloud.google.com/terms/service-terms"
     }
   ]
 }

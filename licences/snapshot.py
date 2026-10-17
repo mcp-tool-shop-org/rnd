@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import gzip
 import hashlib
+import http.cookiejar
 import json
 import re
 import sys
@@ -26,7 +27,8 @@ UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like 
 
 def fetch(url: str) -> str:
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Encoding": "gzip, identity"})
-    with urllib.request.urlopen(req, timeout=60) as resp:  # noqa: S310 - fixed https URLs from the registry
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
+    with opener.open(req, timeout=60) as resp:  # noqa: S310 - fixed https URLs from the registry; cookies for consent redirects
         body = resp.read()
     if body[:2] == bytes((0x1F, 0x8B)):  # gzip magic: some servers compress regardless of the request
         body = gzip.decompress(body)

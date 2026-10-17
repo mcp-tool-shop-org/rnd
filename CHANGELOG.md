@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.2.3] - 2026-10-16
+
+- generated-content-terms: Argon's answer on pipeline code (barred on the literal consumer text); registry adds the Gemini API and Google Cloud terms
+- Added experiment `generated-content-terms`
+
 ## [1.1.10.2.2] - 2026-10-16
 
 - stage1-regeneration: BUILD-SPEC B2 amended with R&D's domain, ESCALATE-mapping and frame rulings

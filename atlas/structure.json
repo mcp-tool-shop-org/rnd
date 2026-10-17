@@ -5497,55 +5497,55 @@
             {
               "in": "iptables_commands",
               "kind": "raise",
-              "line": 103
+              "line": 104
             },
             {
               "in": "kill_process_group",
               "kind": "except",
-              "line": 271
+              "line": 272
             },
             {
               "in": "kill_process_group",
               "kind": "except",
-              "line": 274
+              "line": 275
             },
             {
               "in": "kill_process_group",
               "kind": "except",
-              "line": 278
+              "line": 279
             },
             {
               "in": "run_bounded_subprocess",
               "kind": "except",
-              "line": 305
+              "line": 306
             },
             {
               "in": "run_bounded_subprocess",
               "kind": "raise",
-              "line": 307
+              "line": 308
             },
             {
               "in": "apply_vm_containment",
               "kind": "raise",
-              "line": 321
+              "line": 322
             },
             {
               "in": "apply_vm_containment",
               "kind": "raise",
-              "line": 332
+              "line": 333
             },
             {
               "in": "apply_vm_containment",
               "kind": "raise",
-              "line": 344
+              "line": 345
             },
             {
               "in": "apply_vm_containment",
               "kind": "raise",
-              "line": 348
+              "line": 349
             }
           ],
-          "hash": "80bc357056e1c97c1c4aeced8ef5c788a83d1271e72d6b21968b0b9b29ae3e7a",
+          "hash": "95f84f84e90940d05432e52ef5ef2d4b8f733818a2c8739a139cb3fedda696f1",
           "path": "mcptoolshop_rnd/localbuilders/contain.py"
         },
         {
@@ -6106,15 +6106,15 @@
             {
               "in": "run_pytest_and_score",
               "kind": "except",
-              "line": 494
+              "line": 495
             },
             {
               "in": "run_pytest_and_score",
               "kind": "raise",
-              "line": 508
+              "line": 509
             }
           ],
-          "hash": "2310e0eb640a73eea5db1b5cbdb60ee8ac1bce38e99170ffe69ff1404dcde517",
+          "hash": "e3f2a8de0ef82fc1abf2908711e71cca894cb90cf3f575dffd22332e06243d7e",
           "importsFiles": [
             "mcptoolshop_rnd/localbuilders/contain.py",
             "mcptoolshop_rnd/localbuilders/workspace.py"
@@ -6597,7 +6597,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "aa3a95b7bda02232177ed6c10fce32619e5e47fe266515f16e645c8829e22fe9",
+          "hash": "eb9fb677356772af439d7bb12ac227431e9f8c89bee88e868d3b06db755f5ba3",
           "path": "CHANGELOG.md"
         },
         {
@@ -7268,7 +7268,7 @@
           "testFramework": "unittest"
         },
         {
-          "hash": "9a03eb21abcb576c6fd86f4c6349df76995c174efbc8dabc3f68c822ed65c3d0",
+          "hash": "ddd57c02e79ead85799f58595e79da6bcdbac6c95c6505d5cb8d14fca1e38f99",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/abmine.py",
@@ -8102,7 +8102,7 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "c11e5868b0515810e6b2270a2d83da2d2f754b2f",
+    "commit": "fd128b82b339971a7c4dba10a17e191ec81f79d2",
     "tracked": 824
   },
   "landings": [

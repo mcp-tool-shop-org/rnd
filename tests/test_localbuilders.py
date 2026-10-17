@@ -1073,6 +1073,7 @@ class ScorerTests(unittest.TestCase):
         self.assertEqual(captured_cmds[0][:6], ["sudo", "-u", "builder", "-n", "--", "env"])
         self.assertEqual(captured_cmds[0][6], "-i")
         self.assertTrue(any(a.startswith("PIP_NO_INDEX=1") for a in captured_cmds[0]))
+        self.assertIn("CUDA_VISIBLE_DEVICES=", captured_cmds[0])
         self.assertFalse((self.ws / "tests" / "test_abmine_fa_twin.py").exists())
 
         # R&D Blocking 6: TimeoutExpired in run_pytest_and_score returns score_timeout and cleans up staged twin
@@ -1520,6 +1521,7 @@ class ContainmentAndProbeTests(unittest.TestCase):
 
         self.assertEqual(contain.wrap_as_builder(["echo"], use_sudo=False), ["echo"])
         env = contain.builder_env(proxy_port=18080, home_dir=self.tmp / "home")
+        self.assertEqual(env["CUDA_VISIBLE_DEVICES"], "")
         wrapped = contain.wrap_as_builder(["aider", "--no-stream"], env=env, use_sudo=True)
         self.assertEqual(wrapped[:7], ["sudo", "-u", "builder", "-n", "--", "env", "-i"])
         for expected_kv in (
@@ -1533,6 +1535,7 @@ class ContainmentAndProbeTests(unittest.TestCase):
             "HTTP_PROXY=http://127.0.0.1:9",
             "HTTPS_PROXY=http://127.0.0.1:9",
             "NO_PROXY=127.0.0.1,localhost",
+            "CUDA_VISIBLE_DEVICES=",
         ):
             self.assertIn(expected_kv, wrapped)
         self.assertEqual(wrapped[-2:], ["aider", "--no-stream"])
@@ -2032,6 +2035,7 @@ class RunnerAndReceiptTests(unittest.TestCase):
 
         # Default use_sudo=True wraps with sudo -u builder -n -- env -i K=V ...
         env = contain.builder_env(proxy_port=18080, home_dir=self.tmp / "home")
+        self.assertEqual(env["CUDA_VISIBLE_DEVICES"], "")
         full_cmd = runner.build_aider_command(
             served_as="qwen3.8-27b",
             model_settings_file=good_settings,
@@ -2045,6 +2049,7 @@ class RunnerAndReceiptTests(unittest.TestCase):
         )
         self.assertEqual(full_cmd[:7], ["sudo", "-u", "builder", "-n", "--", "env", "-i"])
         self.assertIn("OPENAI_API_BASE=http://127.0.0.1:18080/v1", full_cmd)
+        self.assertIn("CUDA_VISIBLE_DEVICES=", full_cmd)
         self.assertIn("--aider-entrypoint", full_cmd)
         idx_mr = full_cmd.index("--max-reflections")
         self.assertEqual(full_cmd[idx_mr + 1], "29")

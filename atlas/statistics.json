@@ -167,7 +167,7 @@
       "confidence": "full",
       "highWater": null,
       "name": "mcptoolshop_rnd",
-      "qualifyingSourceCommits": 439,
+      "qualifyingSourceCommits": 440,
       "rebaseline": null
     },
     {
@@ -233,7 +233,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "tests",
-      "qualifyingSourceCommits": 22,
+      "qualifyingSourceCommits": 23,
       "rebaseline": null
     }
   ],
@@ -276,8 +276,8 @@
         "path": ".gitignore"
       },
       {
-        "commits": 470,
-        "lines": 2761,
+        "commits": 471,
+        "lines": 2766,
         "path": "CHANGELOG.md"
       },
       {
@@ -426,8 +426,8 @@
         "path": "agent_ab_harness}/shakedown-2/RC03-B2.jsonl"
       },
       {
-        "commits": 29,
-        "lines": 637,
+        "commits": 30,
+        "lines": 653,
         "path": "atlas/README.md"
       },
       {
@@ -436,18 +436,18 @@
         "path": "atlas/boundaries.yaml"
       },
       {
-        "commits": 29,
-        "lines": 2173,
+        "commits": 30,
+        "lines": 2226,
         "path": "atlas/page.json"
       },
       {
-        "commits": 29,
-        "lines": 7513,
+        "commits": 30,
+        "lines": 7621,
         "path": "atlas/statistics.json"
       },
       {
-        "commits": 29,
-        "lines": 12960,
+        "commits": 30,
+        "lines": 13227,
         "path": "atlas/structure.json"
       },
       {
@@ -3766,8 +3766,8 @@
         "path": "licences/snapshot.py"
       },
       {
-        "commits": 440,
-        "lines": 881,
+        "commits": 441,
+        "lines": 883,
         "path": "mcptoolshop_rnd/__init__.py"
       },
       {
@@ -3806,23 +3806,23 @@
         "path": "mcptoolshop_rnd/localbuilders/contain.py"
       },
       {
-        "commits": 1,
-        "lines": 630,
+        "commits": 2,
+        "lines": 714,
         "path": "mcptoolshop_rnd/localbuilders/preflight.py"
       },
       {
-        "commits": 1,
-        "lines": 273,
+        "commits": 2,
+        "lines": 367,
         "path": "mcptoolshop_rnd/localbuilders/probe.py"
       },
       {
-        "commits": 1,
-        "lines": 975,
+        "commits": 2,
+        "lines": 1003,
         "path": "mcptoolshop_rnd/localbuilders/proxy.py"
       },
       {
-        "commits": 1,
-        "lines": 666,
+        "commits": 2,
+        "lines": 748,
         "path": "mcptoolshop_rnd/localbuilders/runner.py"
       },
       {
@@ -4511,8 +4511,8 @@
         "path": "tests/test_licence_registry.py"
       },
       {
-        "commits": 1,
-        "lines": 2037,
+        "commits": 2,
+        "lines": 2326,
         "path": "tests/test_localbuilders.py"
       },
       {
@@ -4556,58 +4556,58 @@
     "level": "low",
     "reason": "fewer than 25 source files reach 10 revisions in the window"
   },
-  "generatedAt": "2026-10-17T08:49:25.856Z",
+  "generatedAt": "2026-10-17T08:55:09.388Z",
   "generatedFrom": {
-    "commit": "c11e5868b0515810e6b2270a2d83da2d2f754b2f"
+    "commit": "fd128b82b339971a7c4dba10a17e191ec81f79d2"
   },
   "pairs": [
     {
       "a": "CHANGELOG.md",
       "b": "mcptoolshop_rnd/__init__.py",
-      "either": 469,
-      "shared": 439,
-      "strength": 0.936034
+      "either": 470,
+      "shared": 440,
+      "strength": 0.93617
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/page.json",
-      "either": 29,
-      "shared": 29,
+      "either": 30,
+      "shared": 30,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/statistics.json",
-      "either": 29,
-      "shared": 29,
+      "either": 30,
+      "shared": 30,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/structure.json",
-      "either": 29,
-      "shared": 29,
+      "either": 30,
+      "shared": 30,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/statistics.json",
-      "either": 29,
-      "shared": 29,
+      "either": 30,
+      "shared": 30,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/structure.json",
-      "either": 29,
-      "shared": 29,
+      "either": 30,
+      "shared": 30,
       "strength": 1
     },
     {
       "a": "atlas/statistics.json",
       "b": "atlas/structure.json",
-      "either": 29,
-      "shared": 29,
+      "either": 30,
+      "shared": 30,
       "strength": 1
     },
     {
@@ -4656,16 +4656,16 @@
     "floor": "fallen",
     "floorHeld": false,
     "floorTrigger": "revision-depth",
-    "headDate": "2026-10-17T01:24:32-07:00",
+    "headDate": "2026-10-17T04:50:22-04:00",
     "inScopeFiles": 829,
     "pinnedStart": null,
     "priorFloor": "fallen",
-    "qualifyingCommits": 498,
+    "qualifyingCommits": 499,
     "qualifyingMinimum": 30,
     "revisions": 5,
     "shared": 10,
     "sharedFloorUsed": 3,
-    "since": "2026-04-20T08:24:32.000Z",
+    "since": "2026-04-20T08:50:22.000Z",
     "sourceExtensions": [
       ".js",
       ".mjs",

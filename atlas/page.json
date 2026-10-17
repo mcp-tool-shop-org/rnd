@@ -74,7 +74,7 @@
   "changes": {
     "fileCounts": {
       "added": 0,
-      "changed": 7,
+      "changed": 4,
       "moved": 0,
       "parts": 3,
       "removed": 0
@@ -82,13 +82,13 @@
     "items": [
       {
         "kind": "counts",
-        "sentence": "Nothing structural changed since 2026-10-17; 7 files changed content.",
+        "sentence": "Nothing structural changed since 2026-10-17; 4 files changed content.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "e7255b5bf7fef3904a188c231fd807d1bfabe24e",
-      "generatedAt": "2026-10-17T08:06:54.474Z"
+      "commit": "c11e5868b0515810e6b2270a2d83da2d2f754b2f",
+      "generatedAt": "2026-10-17T08:49:25.856Z"
     },
     "unchanged": true
   },
@@ -129,7 +129,7 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 4 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "c11e5868b0515810e6b2270a2d83da2d2f754b2f",
+  "commit": "fd128b82b339971a7c4dba10a17e191ec81f79d2",
   "defaultBranch": "main",
   "derived": "14 parts, mostly Python (120 files), shell (16), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
@@ -454,7 +454,7 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-17T08:49:25.856Z",
+  "generatedAt": "2026-10-17T08:55:09.388Z",
   "limits": [
     "9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.",
     "18 writes and 30 reads use paths built at run time and are not named here.",

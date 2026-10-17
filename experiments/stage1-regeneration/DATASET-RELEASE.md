@@ -25,7 +25,7 @@ A dataset release reuses all of it.
    - for each writer and critic: its `licences/registry.json` id, model revision and GGUF sha256;
    - the role-set and gates versions, and the plan seeds;
    - the exclusion-state sha256.
-2. **A thin npm package** (for example `@mcptoolshop/stage1-data`) pins that release's version and tag, plus the
+2. **A thin npm package** under the dataset org (for example `@<dataset-org>/stage1-data`) pins that release's version and tag, plus the
    manifest's sha256. It's published by the repo's `release.yml` with `--provenance`, bound as a trusted publisher
    to that workflow file.
 3. **The maintainer's approval is the human step.** `release.yml`'s publish job runs in a protected GitHub
@@ -33,6 +33,21 @@ A dataset release reuses all of it.
    - GitHub records his approval: who and when.
    - No seat can approve it.
    - The workflow writes the approval's run id into the release notes.
+
+## The npm org and a new dataset's first publish
+
+- **A dedicated npm org for datasets** (the maintainer creates it; name to be decided) holds every dataset package,
+  apart from the `@mcptoolshop` tools.
+- **Each new dataset package follows the studio's placeholder bootstrap** (memory: npm-placeholder-bootstrap):
+  1. The maintainer publishes a `0.0.0` placeholder under the org, to create the name. npm needs the package to
+     exist before a trusted publisher can be set. A placeholder only reserves the name; the first real release
+     ships the data package.
+  2. He configures the trusted publisher on npmjs.com: the data repo, `release.yml`, **and the environment
+     `dataset-release`.** Because the publish job declares that environment, GitHub's OIDC subject includes it, and
+     npm's trusted publisher must name the same one.
+  3. From then on, a tag fires `release.yml`. It waits for his approval, then publishes with `--provenance`.
+- **Never read a fresh registry 404 as "unpublished".** The registry lags a publish by a few minutes; check
+  `npm view <pkg> time --json`.
 
 ## What npm-launcher needs
 
@@ -67,6 +82,7 @@ It's a small addition beside `ensureBinary`, with tests. It's a minor version, b
 
 ## Open for the maintainer
 
+- The dataset org's name (he creates it on npm).
 - Which repo holds the data, and whether it's public.
 - Whether the release also goes to Hugging Face, with its dataset card linking the npm provenance.
 - The data's licence, for anyone outside the studio.

@@ -244,6 +244,7 @@ The maintainer's own rulings, plus those he delegated to the Publisher or R&D:
   target.** Claude Code builds role-set's changes from BUILD-SPEC.md.
 - **Argon- and Grok-written generator code is rewritten** (R&D, delegated): aspire-si #144 and #145 (gates 1.7.3),
   role-set #55, and role-set #49, #53 and #54, with #49's clue templates and packs replaced.
+- **Code is read plainly (the maintainer, 2026-10-17):** studio code that no model trains on is allowed whoever wrote it, Antigravity included. The clean-room re-implementations of aspire-si #144 and #145 and role-set #55 stay as they are (no churn back). Training data from consumer services stays out.
 - **Grok's generator logic stays; only its text is replaced** (the maintainer, 2026-10-16). role-set #49, #53 and #54 keep their logic and tests, credited "Written with Grok". Their clue templates and packs, which reach rows, are replaced. Argon's #55 is still re-implemented under Google's ML clause.
 - **Interlock keeps its Grok and Kimi code** (R&D, delegated). Kimi ran through Ollama Cloud. Grok's work is
   credited "Written with Grok" in CONTRIBUTORS.md (interlock#130, role-set#69).

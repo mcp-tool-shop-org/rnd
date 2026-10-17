@@ -11,9 +11,16 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
-## [1.1.10.2.7] - 2026-10-17
+## [1.1.10.2.8] - 2026-10-17
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output
+
+## [1.1.10.2.7] - 2026-10-17
+
+- generated-content rule split: strict for what shapes weights or scores, code read plainly (Antigravity may build studio code, AI tooling included)
+- Updated experiment `generated-content-terms`
+- Updated experiment `local-builders`
+- Updated experiment `stage1-regeneration`
 
 ## [1.1.10.2.6] - 2026-10-17
 

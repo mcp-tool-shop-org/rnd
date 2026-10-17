@@ -1,12 +1,12 @@
 ---
 title: Picking a writer model on rented GPUs
-description: We're choosing which open-weight model should write training data for a small local verifier. Night one tested the judge before trusting it, found that thinking is most of the bill, and lost about half of its first 71 compute units to machines and connections that failed mid-job. Here's the data, and the method that came out of it.
+description: We're choosing which open-weight model should write training data for a small local verifier. Night one tested the judge before trusting it, found that thinking is most of the bill, and lost about half of its first 71 compute units to failures in our tooling and in the machines it ran on. Here's the data, and the method that came out of it.
 issue: 11
 date: 2026-10-17
 highlights:
   - "<strong>Test the judge before it judges anything.</strong> Both critic models passed a bar set before their results, and the test also caught two mistakes in our own answer key."
   - "<strong>Thinking is most of the bill.</strong> 95% of one model's output was reasoning the reader never sees: about 12,000 tokens and 6½ minutes per practice row. The pilot as designed would have cost 147–175 compute units, so it became a smaller screen."
-  - "<strong>About 38 of the first 71 units bought nothing usable,</strong> mostly from machines lost mid-job with no results saved. The fixes: the job writes its own log, the rig reads that file, every finished model call is saved, and every way a window can end downloads the results first."
+  - "<strong>About 38 of the first 71 units bought nothing usable,</strong> mostly from windows that ended with no results saved. The fixes: the job writes its own log, the rig reads that file, every finished model call is saved, and every way a window can end downloads the results first."
   - "<strong>A blind second opinion on the budget.</strong> We sealed our own allocation before asking an outside reviewer for theirs, then took the parts of it that were better."
 ---
 
@@ -52,7 +52,7 @@ planted in them. The bar was written down before any result came in:
 Both passed. Muse agreed with the key on 38 and 37 of 40 across its two runs, caught all 10 planted errors, and its two
 runs disagreed on just 1 item. Lightning agreed on 38 of 40 and caught all 10.
 
-The more useful finding was in the misses. On two items, the critics disagreed with *our* key, and the critics were right:
+The more useful finding was in the misses. On two items, a critic disagreed with *our* key and was right: both critics on one, Muse alone on the other.
 
 - "Retries the upload up to 3 times" means up to 4 attempts in all, so "tried at most 3 times" isn't supported. Our key
   said it was. Muse flagged it in both runs.
@@ -96,7 +96,7 @@ So the pilot became a **screen**:
 And one number joined the readout: **cost per accepted row.** A writer that thinks for 12,000 tokens per row pays that
 on every row of the full dataset later, so cost is part of the choice, not just a budget line.
 
-## Step 3: paid machines fail mid-job, so design for it
+## Step 3: long paid jobs fail, so design for it
 
 This is where most of the money went. By the time the budget was raised at 19:44 UTC, 70.66 units had been spent, and
 **about 38 of the first 71 bought nothing we could use**:
@@ -104,9 +104,9 @@ This is where most of the money went. By the time the budget was raised at 19:44
 | What happened | Units |
 |---|---|
 | A long pilot window: the rig stopped receiving the job's output, the job ran on unseen, and the window hit its cap without downloading anything | 14.03 |
-| Colab reclaimed a machine 77 minutes into setup, with nothing saved off it | 12.81 |
+| Colab reclaimed a machine 77 minutes into the job, with nothing saved off it | 12.81 |
 | A connection hung at the first command with nothing running, and the session sat open for 35 minutes | about 3.2 |
-| A check read an empty log and stopped the window, because the line it looked for sits at a log level the default setting drops | 3.00 |
+| A check looked for a log line the server doesn't print at its default log level, and stopped the window | 3.00 |
 | Three failed starts: a missing setting, a machine dropped mid-download, and a module missing from a package | 5.29 |
 
 None of these were the writers' fault. They were our tooling, and how it dealt with machines and connections that
@@ -114,7 +114,7 @@ failed. The method that came out of it, in the order we'd build it again:
 
 1. **The job writes its own log, and the rig reads that file, never the live output stream.**
    - The stream between the rig and a Colab session can stop while the job keeps running. That's how the long pilot
-     window ran on unseen. It was the full 20-row design, couldn't finish its first wave inside its cap, and stopped
+     window ran on unseen. It was the full 20-row design; by our projection it couldn't have finished its first wave inside its cap, and it stopped
      without downloading, so its work was lost.
    - So the job appends everything to a file on the machine, and the rig downloads that file every 2 minutes.
    - Progress, stalls and "finished" are all judged from it.
@@ -136,7 +136,8 @@ failed. The method that came out of it, in the order we'd build it again:
    - Each cap now counts its own rate times its own runtime, which fixed the first. The rate is read under a lock, so
      two windows can't open at the same moment, which fixed the second.
 5. **Set up each model just before it's needed,** not all at the start.
-   - The reclaimed window had spent 77 minutes setting up three of its four models before writing a word.
+   - The reclaimed window's log showed 49 minutes setting up three of its four models; its last 28 minutes were never
+     seen.
    - Now a writer is set up right before its own drafts and the critic right before the first critique. A loss costs
      at most one setup.
 6. **Test each new kind of window on the cheapest machine first.**
@@ -207,5 +208,7 @@ from them are listed here so they can be traced.
 - **Units** (70.66 spent at 19:44 UTC; 14.03, 12.81, about 3.2, 3.00 and 5.29 lost): the units ledger, windows 10d, 12a,
   11c, 7, and 10, 10b and 10c. The balance is the measure. Per-window figures for windows that overlapped are estimates
   from their own runtimes.
+- **The 77 and 49 minutes, and the long window running on unseen** (stream lost at 15:46, last read at 16:38, cap at
+  17:57): windows 12a's and 10d's logs and Colab's session history.
 - **The CPU tests** (0.03 units, a 2-second fetch): windows 12p and 12q.
 - **The resume test:** role-set's `tests/test_callcache.py`, with a mock model.

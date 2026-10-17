@@ -1,26 +1,36 @@
-"""Unit tests for `mcptoolshop_rnd.localbuilders` (J2 harness and logging proxy, amendment C).
+"""Unit tests for `mcptoolshop_rnd.localbuilders` (J2 harness and logging proxy, amendments C, D, E).
 
 All tests are `unittest.TestCase` classes with no GPU and no external network:
-- ProxyTests: against a local `http.server` stub llama-server returning canned responses (F1, F3, F4, F5)
-- ScorerTests: canned JUnit XML and workspace fixtures for pass and every refusal kind (F10, NB2)
+- ProxyTests: against a local `http.server` stub llama-server returning canned responses
+  (F1, F3, F4, F5, D1 every sampling key on every call, D2/E1-E3 `fold_system` and `reattach_thinking`
+  transforms, late wall-cap result-before-refusal logging, `thinking_words_estimate`)
+- ScorerTests: canned JUnit XML and workspace fixtures for pass and every refusal kind, exact
+  `file::name` node matching, `SCORER_IGNORED_PATTERNS`, builder containment in `run_pytest_and_score`,
+  and `score_timeout` handling (F9, F10, NB2)
 - WorkspaceTests: 2-task fixture bank from repo history; no git history reaches the fix;
   `docs/runs/`, `CHANGELOG.md`, and design notes removed; `GIT_CONFIG_NOSYSTEM=1` (F7, F9)
-- ContainmentAndProbeTests: iptables owner rules, Drive mount refusal, and injected success/failure
-  for every one of the 10 containment probe checks (F9, section 8)
-- PreflightTests: F13 context sizing from 30-call validation run, F5 top-5 logprobs check from
-  index 1 on, F6 Q6_K flagging and non-exiting fit report
-- RunnerAndReceiptTests: exact Aider command line flags, `Coder.create` `max_reflections=29`
-  wrapper, and section-7 receipt completeness (NB1, F2, F4, F7, F9, F10, section 7)
+- ContainmentAndProbeTests: iptables `-I OUTPUT 1` reverse-order rules, `iptables -S OUTPUT`,
+  `wrap_as_builder` `env -i K=V ...`, Drive mount refusal, process-group timeout kill, and injected
+  success/failure for every one of the 10 containment probe checks (F9, section 8)
+- PreflightTests: D-F3/E3 multi-run `compute_j2_context_length`, F5 top-5 logprobs check from
+  index 1 on, D1 GGUF embedded template sha256 check, D-F1/E1 thinking split check (`<think>` and
+  `<|channel>thought`), F6 Q6_K flagging and non-exiting report
+- RunnerAndReceiptTests: exact Aider command line flags (`--no-gitignore`, history files under
+  `work_root`), `examples_as_sys_msg: true` model-settings pin, `use_sudo_builder=True` default and
+  refusal when disabled, `aider_timeout` and `score_timeout` receipts, `Coder.create`
+  `max_reflections=29` wrapper, and section-7 receipt completeness (NB1, F2, F4, F7, F9, F10, D/E)
 """
 from __future__ import annotations
 
 import contextlib
+import hashlib
 import http.server
 import io
 import json
 import os
 import shutil
 import socket
+import struct
 import subprocess
 import sys
 import tempfile
@@ -46,6 +56,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures" / "localbuilders"
 BANK_JSON = FIXTURE_DIR / "bank.json"
 CANDIDATE_CONFIG_JSON = FIXTURE_DIR / "candidate_config.json"
+CARD_VALUES_JSON = REPO_ROOT / "experiments" / "local-builders" / "card-values.json"
 
 
 def _make_five_top(prefix: str, step: int) -> list[dict]:
@@ -58,12 +69,12 @@ def _make_five_top(prefix: str, step: int) -> list[dict]:
 def _canned_llama_response(
     *,
     content: str = "Fixed the bug.",
-    reasoning_content: str = "Let me inspect the function first.",
+    reasoning_content: str | None = "Let me inspect the function first.",
     finish_reason: str = "stop",
     steps: int = 4,
     prompt_tokens: int = 120,
     completion_tokens: int = 18,
-    reasoning_tokens: int = 10,
+    reasoning_tokens: int | None = 10,
 ) -> dict:
     lp_content = []
     for s in range(steps):
@@ -75,6 +86,13 @@ def _canned_llama_response(
                 "top_logprobs": top5,
             }
         )
+    usage: dict = {
+        "prompt_tokens": prompt_tokens,
+        "completion_tokens": completion_tokens,
+        "total_tokens": prompt_tokens + completion_tokens,
+    }
+    if reasoning_tokens is not None:
+        usage["completion_tokens_details"] = {"reasoning_tokens": reasoning_tokens}
     return {
         "id": "chatcmpl-stub-1",
         "object": "chat.completion",
@@ -93,14 +111,7 @@ def _canned_llama_response(
                 },
             }
         ],
-        "usage": {
-            "prompt_tokens": prompt_tokens,
-            "completion_tokens": completion_tokens,
-            "total_tokens": prompt_tokens + completion_tokens,
-            "completion_tokens_details": {
-                "reasoning_tokens": reasoning_tokens,
-            },
-        },
+        "usage": usage,
         "timings": {
             "prompt_n": prompt_tokens,
             "prompt_ms": 14.5,
@@ -168,7 +179,7 @@ def _post_json(url: str, payload: dict) -> tuple[int, dict]:
 
 
 class ProxyTests(unittest.TestCase):
-    """Tests for `mcptoolshop_rnd.localbuilders.proxy` (F1, F3, F4, F5)."""
+    """Tests for `mcptoolshop_rnd.localbuilders.proxy` (F1, F3, F4, F5, D1, D2, E1-E3)."""
 
     def setUp(self):
         self.tmp = Path(tempfile.mkdtemp())
@@ -188,8 +199,8 @@ class ProxyTests(unittest.TestCase):
                     f"{srv.openai_base_url}/chat/completions",
                     {
                         "model": "fixture-candidate-q8_0",
-                        "stream": True,  # Aider might ask to stream; F1 must force stream: false
-                        "temperature": 0.0,  # Aider's default; F3 must override with card config
+                        "stream": True,
+                        "temperature": 0.0,
                         "top_p": 1.0,
                         "top_k": 1,
                         "min_p": 0.5,
@@ -222,19 +233,15 @@ class ProxyTests(unittest.TestCase):
         self.assertEqual(len(stub.received_requests), 1)
         sent_up = stub.received_requests[0]["body"]
 
-        # F1: stream is forced to False upstream
         self.assertIs(sent_up["stream"], False)
-        # F3: sampling overridden from candidate_config.json and chat_template_kwargs injected
         self.assertEqual(sent_up["temperature"], 0.6)
         self.assertEqual(sent_up["top_p"], 0.95)
         self.assertEqual(sent_up["top_k"], 20)
         self.assertEqual(sent_up["min_p"], 0.0)
         self.assertEqual(sent_up["chat_template_kwargs"], {"enable_thinking": True})
-        # F5: logprobs requested upstream
         self.assertIs(sent_up["logprobs"], True)
         self.assertEqual(sent_up["top_logprobs"], 5)
 
-        # F5: logprobs and reasoning_content stripped from the reply returned to Aider
         choice0 = reply["choices"][0]
         self.assertNotIn("logprobs", choice0)
         self.assertNotIn("reasoning_content", choice0)
@@ -242,7 +249,6 @@ class ProxyTests(unittest.TestCase):
         self.assertNotIn("logprobs", choice0["message"])
         self.assertEqual(choice0["message"]["content"], "Fixed the bug.")
 
-        # F5 & F3: generations.jsonl has abmine-loadable result with reasoning_content, logprobs, timings, injected
         lines = self.gen_path.read_text(encoding="utf-8").splitlines()
         self.assertEqual(len(lines), 1)
         rec = json.loads(lines[0])
@@ -255,27 +261,261 @@ class ProxyTests(unittest.TestCase):
         self.assertEqual(len(rec["top"]), 4)
         self.assertEqual(len(rec["top"][1]), 5)
         self.assertEqual(rec["thinking_tokens"], 10)
+        self.assertIsNone(rec["thinking_words_estimate"])
         self.assertEqual(rec["output_tokens"], 18)
         self.assertEqual(rec["prompt_tokens"], 120)
         self.assertFalse(rec["truncated"])
-        self.assertIn("predicted_ms", rec["timings"])
-        self.assertGreaterEqual(rec["wall_time_s"], 0.0)
+        self.assertEqual(rec["transforms"], [])
+        self.assertIsNone(rec["reattach_max_turns"])
         self.assertEqual(
             rec["injected"],
             {
                 "sampling": {"temperature": 0.6, "top_p": 0.95, "top_k": 20, "min_p": 0.0},
                 "chat_template_kwargs": {"enable_thinking": True},
+                "transforms": [],
+                "reattach_max_turns": None,
             },
         )
 
-        # Verify `mcptoolshop_rnd.abmine.load_record_file` loads `generations.jsonl` directly
         loaded = abmine.load_record_file(self.gen_path)
         self.assertIn("fixture-candidate-q8_0", loaded)
         gen0 = loaded["fixture-candidate-q8_0"][0]
         self.assertEqual(gen0.tokens, ["tok0_c0", "tok1_c0", "tok2_c0", "tok3_c0"])
         self.assertEqual(len(gen0.top[1]), 5)
-        self.assertEqual(gen0.prompt_eval_count, 120)
-        self.assertEqual(gen0.eval_count, 18)
+
+    def test_d1_every_sampling_key_sent_on_every_call_from_card_values_json(self):
+        """D1: Stub upstream receives every key and value from card-values.json on call 1 and later calls."""
+        raw_cards = json.loads(CARD_VALUES_JSON.read_text(encoding="utf-8"))
+        granite_entry = next(c for c in raw_cards["candidates"] if c["candidate"] == "granite-4.2-30b")
+        expected_sampling = granite_entry["sampling"]
+
+        cfg = proxy.load_candidate_config(CARD_VALUES_JSON, candidate="granite-4.2-30b")
+        self.assertEqual(cfg.sampling, expected_sampling)
+
+        with _StubLlamaServer() as stub:
+            state = proxy.ProxyState(
+                upstream_url=stub.url,
+                config=cfg,
+                generations_path=self.gen_path,
+            )
+            with proxy.LoggingProxyServer(state) as srv:
+                url = f"{srv.openai_base_url}/chat/completions"
+                # First call (Aider sends its own temperature)
+                c1, _ = _post_json(
+                    url,
+                    {
+                        "model": "granite-4.2-30b",
+                        "temperature": 0.0,
+                        "top_k": 99,
+                        "min_p": 0.2,
+                        "repeat_penalty": 1.2,
+                        "presence_penalty": 0.5,
+                        "messages": [{"role": "user", "content": "call 1"}],
+                    },
+                )
+                # Later call (Aider omits or changes sampling keys)
+                c2, _ = _post_json(
+                    url,
+                    {
+                        "model": "granite-4.2-30b",
+                        "temperature": 0.3,
+                        "messages": [
+                            {"role": "user", "content": "call 1"},
+                            {"role": "assistant", "content": "Fixed the bug."},
+                            {"role": "user", "content": "call 2"},
+                        ],
+                    },
+                )
+                self.assertEqual(c1, 200)
+                self.assertEqual(c2, 200)
+
+        self.assertEqual(len(stub.received_requests), 2)
+        for call_idx in (0, 1):
+            sent = stub.received_requests[call_idx]["body"]
+            for k, expected_val in expected_sampling.items():
+                self.assertIn(k, sent, f"sampling key {k!r} missing on call {call_idx + 1}")
+                self.assertEqual(sent[k], expected_val, f"sampling key {k!r} mismatch on call {call_idx + 1}")
+                self.assertIs(type(sent[k]), type(expected_val))
+
+    def test_d2_fold_system_transform_and_empty_transforms(self):
+        """D2 & D-F2 / E2: fold_system folds leading system msgs to head of first user and later reminders to tail of preceding user."""
+        r1_cfg = proxy.load_candidate_config(CARD_VALUES_JSON, candidate="deepseek-r1-distill-qwen-32b")
+        self.assertEqual(r1_cfg.transforms, ("fold_system",))
+
+        canned_messages = [
+            {"role": "system", "content": "System prompt part 1."},
+            {"role": "system", "content": "Few-shot examples as sys msg."},
+            {"role": "user", "content": "Here is the repo map."},
+            {"role": "assistant", "content": "Ok."},
+            {"role": "user", "content": "The test fails. Make it pass."},
+            {"role": "system", "content": "Reminder: format edits as SEARCH/REPLACE."},
+        ]
+
+        with _StubLlamaServer() as stub:
+            state = proxy.ProxyState(
+                upstream_url=stub.url,
+                config=r1_cfg,
+                generations_path=self.gen_path,
+            )
+            with proxy.LoggingProxyServer(state) as srv:
+                code, _ = _post_json(
+                    f"{srv.openai_base_url}/chat/completions",
+                    {"messages": canned_messages},
+                )
+                self.assertEqual(code, 200)
+
+        forwarded = stub.received_requests[0]["body"]["messages"]
+        self.assertTrue(all(m["role"] != "system" for m in forwarded))
+        self.assertEqual(len(forwarded), 3)
+        self.assertEqual(
+            forwarded[0],
+            {
+                "role": "user",
+                "content": "System prompt part 1.\n\nFew-shot examples as sys msg.\n\nHere is the repo map.",
+            },
+        )
+        self.assertEqual(forwarded[1], {"role": "assistant", "content": "Ok."})
+        self.assertEqual(
+            forwarded[2],
+            {
+                "role": "user",
+                "content": "The test fails. Make it pass.\n\nReminder: format edits as SEARCH/REPLACE.",
+            },
+        )
+
+        # Edge cases for fold_system: system-only messages and empty user content
+        only_sys = proxy.apply_fold_system([{"role": "system", "content": "Only sys"}])
+        self.assertEqual(only_sys, [{"role": "user", "content": "Only sys"}])
+        empty_u = proxy.apply_fold_system(
+            [
+                {"role": "assistant", "content": "pre"},
+                {"role": "system", "content": "sys before user"},
+                {"role": "user", "content": ""},
+                {"role": "system", "content": "tail"},
+            ]
+        )
+        self.assertTrue(all(m["role"] != "system" for m in empty_u))
+
+        # Empty transforms list leaves messages untouched
+        granite_cfg = proxy.load_candidate_config(CARD_VALUES_JSON, candidate="granite-4.2-30b")
+        self.assertEqual(granite_cfg.transforms, ())
+        untouched_out = proxy.transform_request_body({"messages": canned_messages}, granite_cfg)
+        self.assertEqual(untouched_out["messages"], canned_messages)
+
+    def test_d2_reattach_thinking_fifo_stripped_synthetic_mismatch_and_max_turns(self):
+        """D2, D-F1, D-F3, E1, E3: reattach_thinking handles repeated replies FIFO, stripped fallback, synthetic 'Ok.', edited mismatch, and reattach_max_turns."""
+        qwen_cfg = proxy.load_candidate_config(CARD_VALUES_JSON, candidate="qwen3.8-27b")
+        self.assertEqual(qwen_cfg.transforms, ("reattach_thinking",))
+        self.assertIsNone(qwen_cfg.reattach_max_turns)
+
+        replies = [
+            _canned_llama_response(content="Reply A", reasoning_content="Thinking 1 for A"),
+            _canned_llama_response(content="Reply A", reasoning_content="Thinking 2 for A (repeated)"),
+            _canned_llama_response(content="Reply B  \n", reasoning_content="Thinking 3 for B"),
+            _canned_llama_response(content="Final answer", reasoning_content="Thinking 4"),
+        ]
+
+        with _StubLlamaServer(response_fn=lambda _b, idx: replies[idx]) as stub:
+            state = proxy.ProxyState(
+                upstream_url=stub.url,
+                config=qwen_cfg,
+                generations_path=self.gen_path,
+            )
+            with proxy.LoggingProxyServer(state) as srv:
+                url = f"{srv.openai_base_url}/chat/completions"
+                # Calls 1, 2, 3 populate the proxy's logged reasoning map
+                _post_json(url, {"messages": [{"role": "user", "content": "u1"}]})
+                _post_json(url, {"messages": [{"role": "user", "content": "u2"}]})
+                _post_json(url, {"messages": [{"role": "user", "content": "u3"}]})
+
+                # Call 4 sends:
+                # - a synthetic "Ok." turn (counted as synthetic, no reasoning)
+                # - first "Reply A" (gets "Thinking 1 for A")
+                # - second "Reply A" (gets "Thinking 2 for A (repeated)" in FIFO order)
+                # - stripped "Reply B" without trailing whitespace (matches via sha256(content.strip()))
+                # - an edited assistant turn "Reply edited by Aider" (counted as mismatch, no reasoning)
+                c4, _ = _post_json(
+                    url,
+                    {
+                        "messages": [
+                            {"role": "user", "content": "Repo map"},
+                            {"role": "assistant", "content": "Ok."},
+                            {"role": "user", "content": "u1"},
+                            {"role": "assistant", "content": "Reply A"},
+                            {"role": "user", "content": "u2"},
+                            {"role": "assistant", "content": "Reply A"},
+                            {"role": "user", "content": "u3"},
+                            {"role": "assistant", "content": "Reply B"},
+                            {"role": "user", "content": "u4"},
+                            {"role": "assistant", "content": "Reply edited by Aider"},
+                            {"role": "user", "content": "u5"},
+                        ]
+                    },
+                )
+                self.assertEqual(c4, 200)
+
+        sent4 = stub.received_requests[3]["body"]["messages"]
+        assistant_msgs = [m for m in sent4 if m["role"] == "assistant"]
+        self.assertEqual(len(assistant_msgs), 5)
+        # 0: synthetic "Ok." -> no reasoning_content
+        self.assertNotIn("reasoning_content", assistant_msgs[0])
+        # 1 & 2: repeated "Reply A" -> FIFO thinking 1 then thinking 2
+        self.assertEqual(assistant_msgs[1]["reasoning_content"], "Thinking 1 for A")
+        self.assertEqual(assistant_msgs[2]["reasoning_content"], "Thinking 2 for A (repeated)")
+        # 3: stripped match "Reply B" -> thinking 3
+        self.assertEqual(assistant_msgs[3]["reasoning_content"], "Thinking 3 for B")
+        # 4: edited turn -> no reasoning_content
+        self.assertNotIn("reasoning_content", assistant_msgs[4])
+
+        summary = state.summary()
+        self.assertEqual(summary["reattach_thinking"]["reattached"], 3)
+        self.assertEqual(summary["reattach_thinking"]["synthetic"], 1)
+        self.assertEqual(summary["reattach_thinking"]["mismatch"], 1)
+
+        # Now test reattach_max_turns=2: only the last 2 non-synthetic assistant turns get reasoning attached
+        logged = list(state._logged_replies)
+        capped_msgs, capped_stats = proxy.apply_reattach_thinking(
+            [
+                {"role": "assistant", "content": "Ok."},
+                {"role": "assistant", "content": "Reply A"},
+                {"role": "assistant", "content": "Reply A"},
+                {"role": "assistant", "content": "Reply B"},
+            ],
+            logged,
+            reattach_max_turns=2,
+        )
+        self.assertNotIn("reasoning_content", capped_msgs[0])
+        self.assertNotIn("reasoning_content", capped_msgs[1])  # dropped by reattach_max_turns=2
+        self.assertEqual(capped_msgs[2]["reasoning_content"], "Thinking 2 for A (repeated)")
+        self.assertEqual(capped_msgs[3]["reasoning_content"], "Thinking 3 for B")
+        self.assertEqual(capped_stats["reattached"], 2)
+        self.assertEqual(capped_stats["synthetic"], 1)
+        self.assertEqual(capped_stats["mismatch"], 0)
+        self.assertEqual(capped_stats["reattach_max_turns"], 2)
+
+    def test_aider_synthetic_strings_verified_against_pinned_version(self):
+        class PinnedAiderPrompts:
+            files_content_assistant_reply = "Ok."
+            files_no_full_files_with_repo_map_reply = "Ok."
+            repo_content_assistant_reply = "Ok."
+
+        self.assertTrue(
+            proxy.verify_aider_synthetic_strings(
+                PinnedAiderPrompts(),
+                aider_version=proxy.PINNED_AIDER_VERSION,
+            )
+        )
+        with self.assertRaises(proxy.ProxyConfigError):
+            proxy.verify_aider_synthetic_strings(PinnedAiderPrompts(), aider_version="0.0.1")
+
+        class DriftedPrompts:
+            files_content_assistant_reply = "Brand new unexpected ack."
+
+        with self.assertRaises(proxy.ProxyConfigError):
+            proxy.verify_aider_synthetic_strings(DriftedPrompts(), aider_version=proxy.PINNED_AIDER_VERSION)
+
+        with self.assertRaises(proxy.ProxyConfigError):
+            proxy.verify_aider_synthetic_strings(object(), aider_version=proxy.PINNED_AIDER_VERSION)
 
     def test_f4_refuses_31st_call_with_http_429_and_records_it(self):
         with _StubLlamaServer() as stub:
@@ -291,7 +531,6 @@ class ProxyTests(unittest.TestCase):
                     code, _ = _post_json(url, {"messages": [{"role": "user", "content": f"turn {i}"}]})
                     self.assertEqual(code, 200)
 
-                # 31st call must be refused with 429 and never sent to stub llama-server
                 code31, body31 = _post_json(url, {"messages": [{"role": "user", "content": "turn 30"}]})
                 self.assertEqual(code31, 429)
                 self.assertEqual(body31["error"]["type"], "call_cap_exceeded")
@@ -309,7 +548,8 @@ class ProxyTests(unittest.TestCase):
         self.assertEqual(rows[-1]["status"], 429)
         self.assertEqual(rows[-1]["call_index"], 31)
 
-    def test_f4_wall_cap_and_truncation_recorded(self):
+    def test_f4_late_wall_cap_logs_result_row_before_refusal_row(self):
+        """Item 7: When a call returns after the wall, log the result row first, then the refusal."""
         fake_now = [100.0]
 
         def clock():
@@ -319,7 +559,7 @@ class ProxyTests(unittest.TestCase):
             if idx == 0:
                 return _canned_llama_response(finish_reason="length")
             fake_now[0] += 905.0
-            return _canned_llama_response(finish_reason="stop")
+            return _canned_llama_response(content="Late reply tokens", finish_reason="stop")
 
         with _StubLlamaServer(response_fn=resp_fn) as stub:
             state = proxy.ProxyState(
@@ -341,35 +581,63 @@ class ProxyTests(unittest.TestCase):
                 self.assertEqual(b3["error"]["type"], "wall_cap_exceeded")
 
         self.assertEqual(len(stub.received_requests), 2)
+        rows = [json.loads(line) for line in self.gen_path.read_text(encoding="utf-8").splitlines()]
+        # Row 0: call 1 result; Row 1: call 2 completed result; Row 2: call 2 late wall_cap refusal; Row 3: call 3 pre-call wall_cap refusal
+        self.assertEqual([r["kind"] for r in rows], ["result", "result", "refused", "refused"])
+        self.assertEqual(rows[1]["response"], "Late reply tokens")
+        self.assertEqual(rows[2]["reason"], "wall_cap")
+        self.assertEqual(rows[2]["call_index"], 2)
+
         summary = state.summary()
         self.assertTrue(summary["truncated"])
         self.assertEqual(summary["truncated_calls"], 1)
         self.assertEqual(summary["wall_cap_hits"], 2)
         self.assertTrue(summary["cap_hits"]["wall_cap"])
 
-    def test_config_validation_and_token_fallbacks(self):
+    def test_config_validation_unknown_transform_and_thinking_words_estimate(self):
         with self.assertRaises(proxy.ProxyConfigError):
             proxy.load_candidate_config(self.tmp / "missing.json")
-
-        bad_json = self.tmp / "bad.json"
-        bad_json.write_text("{bad", encoding="utf-8")
+        # Multi-candidate file requires candidate id
         with self.assertRaises(proxy.ProxyConfigError):
-            proxy.load_candidate_config(bad_json)
-
-        not_obj = self.tmp / "list.json"
-        not_obj.write_text("[]", encoding="utf-8")
+            proxy.load_candidate_config(CARD_VALUES_JSON)
         with self.assertRaises(proxy.ProxyConfigError):
-            proxy.load_candidate_config(not_obj)
-
-        no_sampling = self.tmp / "no_sampling.json"
-        no_sampling.write_text('{"chat_template_kwargs": {}}', encoding="utf-8")
+            proxy.load_candidate_config(CARD_VALUES_JSON, candidate="nonexistent-model")
+        # Single-entry config with wrong candidate id
         with self.assertRaises(proxy.ProxyConfigError):
-            proxy.load_candidate_config(no_sampling)
+            proxy.load_candidate_config(CANDIDATE_CONFIG_JSON, candidate="wrong-id")
 
-        no_kwargs = self.tmp / "no_kwargs.json"
-        no_kwargs.write_text('{"sampling": {"temperature": 0.2}}', encoding="utf-8")
-        with self.assertRaises(proxy.ProxyConfigError):
-            proxy.load_candidate_config(no_kwargs)
+        single_in_list = self.tmp / "single_in_list.json"
+        single_in_list.write_text(
+            json.dumps(
+                {
+                    "candidates": [
+                        {
+                            "candidate": "only-one",
+                            "sampling": {"temperature": 0.5},
+                            "chat_template_kwargs": {},
+                        }
+                    ]
+                }
+            ),
+            encoding="utf-8",
+        )
+        self.assertEqual(proxy.load_candidate_config(single_in_list).candidate, "only-one")
+
+        for bad_text in (
+            "{bad",
+            "[]",
+            '{"candidates": []}',
+            '{"chat_template_kwargs": {}}',
+            '{"sampling": {"temperature": null}, "chat_template_kwargs": {}}',
+            '{"sampling": {"temperature": 0.2}}',
+            '{"sampling": {"temperature": 0.2}, "chat_template_kwargs": {}, "transforms": "not-list"}',
+            '{"sampling": {"temperature": 0.2}, "chat_template_kwargs": {}, "transforms": ["unknown_transform"]}',
+            '{"sampling": {"temperature": 0.2}, "chat_template_kwargs": {}, "reattach_max_turns": 0}',
+        ):
+            p = self.tmp / "bad_cfg.json"
+            p.write_text(bad_text, encoding="utf-8")
+            with self.assertRaises(proxy.ProxyConfigError):
+                proxy.load_candidate_config(p)
 
         # Fallback logprobs and reasoning shapes
         toks, top = proxy.extract_abmine_logprobs(
@@ -379,27 +647,37 @@ class ProxyTests(unittest.TestCase):
         self.assertEqual(top, [[["a", -0.1], ["b", -1.2]]])
         self.assertEqual(proxy._extract_reasoning_and_content({"response": "hi", "reasoning_content": "r"}), ("hi", "r"))
         self.assertEqual(
-            proxy._extract_reasoning_and_content(
-                {"choices": [{"text": "t", "reasoning_content": "r2"}]}
-            ),
+            proxy._extract_reasoning_and_content({"choices": [{"text": "t", "reasoning_content": "r2"}]}),
             ("t", "r2"),
         )
         self.assertEqual(
-            proxy._extract_reasoning_and_content(
-                {"choices": [{"message": {"content": "c"}}], "reasoning_content": "r3"}
-            ),
+            proxy._extract_reasoning_and_content({"choices": [{"message": {"content": "c"}}], "reasoning_content": "r3"}),
             ("c", "r3"),
         )
 
-        p_tok, th_tok, out_tok = proxy._count_tokens(
+        p_tok, th_tok, th_words, out_tok = proxy._count_tokens(
             {"timings": {"prompt_n": 15}},
             ["<think>", "step", "</think>", "ans"],
             None,
         )
-        self.assertEqual((p_tok, th_tok, out_tok), (15, 3, 4))
+        self.assertEqual((p_tok, th_tok, th_words, out_tok), (15, 3, None, 4))
 
-        p_tok2, th_tok2, out_tok2 = proxy._count_tokens({}, ["ans"], "one two three")
-        self.assertEqual((p_tok2, th_tok2, out_tok2), (0, 3, 1))
+        # Item 11: When no token count is available for reasoning_content, thinking_tokens is None and thinking_words_estimate is set
+        p_tok2, th_tok2, th_words2, out_tok2 = proxy._count_tokens({}, ["ans"], "one two three")
+        self.assertEqual((p_tok2, th_tok2, th_words2, out_tok2), (0, None, 3, 1))
+
+        p_tok3, th_tok3, th_words3, out_tok3 = proxy._count_tokens(
+            {"usage": {"reasoning_tokens": 7}}, ["ans"], "one two"
+        )
+        self.assertEqual((p_tok3, th_tok3, th_words3, out_tok3), (0, 7, None, 1))
+
+        p_tok4, th_tok4, th_words4, out_tok4 = proxy._count_tokens(
+            {"timings": {"reasoning_n": 9}}, ["ans"], "one two"
+        )
+        self.assertEqual((p_tok4, th_tok4, th_words4, out_tok4), (0, 9, None, 1))
+
+        p_tok5, th_tok5, th_words5, out_tok5 = proxy._count_tokens({}, ["ans"], None)
+        self.assertEqual((p_tok5, th_tok5, th_words5, out_tok5), (0, 0, None, 1))
 
         # Upstream connection error returns 502; TimeoutError returns 429 wall_cap
         state = proxy.ProxyState(
@@ -418,7 +696,7 @@ class ProxyTests(unittest.TestCase):
 
 
 class ScorerTests(unittest.TestCase):
-    """Tests for `mcptoolshop_rnd.localbuilders.score` on canned JUnit XML and workspace fixtures (F10, NB2)."""
+    """Tests for `mcptoolshop_rnd.localbuilders.score` on canned JUnit XML and workspace fixtures (F9, F10, NB2)."""
 
     def setUp(self):
         self.tmp = Path(tempfile.mkdtemp())
@@ -441,6 +719,8 @@ class ScorerTests(unittest.TestCase):
         twin_status: str = "passed",
         suite_failures: int = 0,
         suite_errors: int = 0,
+        include_target: bool = True,
+        extra_cases: list[str] | None = None,
     ) -> str:
         cases: list[str] = []
         for i in range(passed_extra):
@@ -465,6 +745,8 @@ class ScorerTests(unittest.TestCase):
                 f'<testcase classname="tests.test_suite.Suite" name="test_err_{i}">'
                 f'<error message="err"/></testcase>'
             )
+        for extra in extra_cases or []:
+            cases.append(extra)
 
         def render_node(node_id: str, status: str) -> str:
             inner = ""
@@ -476,7 +758,8 @@ class ScorerTests(unittest.TestCase):
                 inner = '<skipped type="pytest.skip" message="skipped in prod"/>'
             return f'<testcase nodeid="{node_id}" name="{node_id.split("::")[-1]}">{inner}</testcase>'
 
-        cases.append(render_node(self.task.target_nodes[0], target_status))
+        if include_target:
+            cases.append(render_node(self.task.target_nodes[0], target_status))
         cases.append(render_node(self.task.twin_nodes[0], twin_status))
         return f'<testsuite name="pytest">{"".join(cases)}</testsuite>'
 
@@ -493,6 +776,73 @@ class ScorerTests(unittest.TestCase):
         self.assertTrue(res["passed"], res["reasons"])
         self.assertTrue(res["correct"])
         self.assertEqual(res["reasons"], [])
+
+    def test_scorer_ignores_fixed_named_cache_list_and_nothing_else(self):
+        """R&D Blocking 1: Scorer ignores only __pycache__/, *.pyc, .pytest_cache/, .aider.tags.cache.v4/."""
+        # Create pycache inside tests/ to verify snapshot_test_hashes also ignores it
+        (self.ws / "tests" / "__pycache__").mkdir(parents=True)
+        (self.ws / "tests" / "__pycache__" / "test_abmine_fa.cpython-310.pyc").write_bytes(b"pyc")
+
+        porcelain_with_ignored_caches = "\n".join(
+            [
+                " M mcptoolshop_rnd/abmine.py",
+                "!! __pycache__/abmine.cpython-310.pyc",
+                "!! mcptoolshop_rnd/__pycache__/",
+                "!! tests/__pycache__/test_abmine_fa.cpython-310.pyc",
+                "!! stray.pyc",
+                "!! .pytest_cache/v/cache/nodeids",
+                "!! .pytest_cache/",
+                "!! .aider.tags.cache.v4/cache.db",
+                "!! .aider.tags.cache.v4/",
+            ]
+        )
+        res = score.score_task(
+            self.task,
+            self.ws,
+            self.pre_hashes,
+            junit_xml=self._canned_xml(),
+            git_status_output=porcelain_with_ignored_caches,
+        )
+        self.assertTrue(res["passed"], res["reasons"])
+
+        # Any other Aider file left in the repo (.aider.chat.history.md, .gitignore) is NOT ignored
+        res_unignored = score.score_task(
+            self.task,
+            self.ws,
+            self.pre_hashes,
+            junit_xml=self._canned_xml(),
+            git_status_output=porcelain_with_ignored_caches + "\n?? .aider.chat.history.md\n M .gitignore\n",
+        )
+        self.assertFalse(res_unignored["passed"])
+        self.assertTrue(
+            any("changed path outside allowed_paths: .aider.chat.history.md" in r for r in res_unignored["reasons"])
+        )
+        self.assertTrue(
+            any("changed path outside allowed_paths: .gitignore" in r for r in res_unignored["reasons"])
+        )
+
+    def test_exact_node_matching_refuses_same_named_test_in_second_file(self):
+        """R&D Blocking 5: A same-named test in another file or class must never count as the target passing."""
+        target_fn_name = self.task.target_nodes[0].split("::")[-1]
+        same_named_other_file = (
+            f'<testcase file="tests/test_other_file.py" classname="tests.test_other_file" name="{target_fn_name}"/>'
+        )
+        xml_missing_target = self._canned_xml(
+            include_target=False,
+            extra_cases=[same_named_other_file],
+        )
+        res = score.score_task(
+            self.task,
+            self.ws,
+            self.pre_hashes,
+            junit_xml=xml_missing_target,
+            git_status_output=" M mcptoolshop_rnd/abmine.py\n",
+        )
+        self.assertFalse(res["passed"])
+        self.assertTrue(
+            any(f"target test did not pass: {self.task.target_nodes[0]}" in r for r in res["reasons"]),
+            res["reasons"],
+        )
 
     def test_refuses_edited_test_file(self):
         (self.ws / "tests" / "test_abmine_fa.py").write_text("def test_target(): assert True\n", encoding="utf-8")
@@ -569,48 +919,87 @@ class ScorerTests(unittest.TestCase):
             res["reasons"],
         )
 
-    def test_junit_edge_cases_and_twin_runner(self):
-        # Test outcome_for suffix matching and None fallback, <xfail/> tag, and empty/short status lines
+    def test_junit_edge_cases_builder_containment_and_score_timeout(self):
         s = score.parse_junitxml(
-            '<testsuite><testcase classname="tests.test_m.Cls" name="test_one"/><testcase name="test_xf"><xfail/></testcase></testsuite>'
+            '<testsuite>'
+            '<testcase classname="tests.test_m.Cls" name="test_one"/>'
+            '<testcase file="tests/test_f.py" classname="OtherPkg.Cls2" name="test_two"/>'
+            '<testcase file="tests/test_f.py" classname="test_f" name="test_three"/>'
+            '<testcase classname="pkg.Mod.SubCls" name="test_four"/>'
+            '<testcase classname="pkg.mod" name="test_five"><xfail/></testcase>'
+            '</testsuite>'
         )
         self.assertEqual(s.outcome_for("tests/test_m.py::Cls::test_one"), "passed")
-        self.assertEqual(s.outcome_for("other/path.py::Cls::test_one"), "passed")
+        self.assertIsNone(s.outcome_for("other/path.py::Cls::test_one"))
+        self.assertIsNone(s.outcome_for("tests/test_m.py::OtherCls::test_one"))
+        self.assertEqual(s.outcome_for("tests/test_f.py::Cls2::test_two"), "passed")
+        self.assertEqual(s.outcome_for("tests/test_f.py::test_three"), "passed")
+        self.assertEqual(s.outcome_for("pkg/Mod.py::SubCls::test_four"), "passed")
+        self.assertEqual(s.outcome_for("pkg/mod.py::test_five"), "xfail")
         self.assertIsNone(s.outcome_for("nonexistent_node"))
         self.assertEqual(s.xfail, 1)
         self.assertEqual(score.parse_git_status_porcelain("\nxx\n M a.py\n"), [(" M", "a.py")])
         self.assertFalse(score.path_is_allowed("", ["mcptoolshop_rnd/abmine.py"]))
+        self.assertFalse(workspace.is_scorer_ignored(""))
         self.assertEqual(
             score.check_workspace_integrity(self.ws, self.pre_hashes, ["tests/test_x.py"]),
             ["tests/** is never permitted in allowed_paths: 'tests/test_x.py'"],
         )
 
-        # Exercise run_pytest_and_score with a stub command that writes canned XML (no pytest subprocess needed)
-        canned_xml_text = self._canned_xml()
-        stub_writer = self.tmp / "write_xml.py"
-        stub_writer.write_text(
-            "import sys, pathlib\n"
-            f"xml = {canned_xml_text!r}\n"
-            "for arg in sys.argv[1:]:\n"
-            "    if arg.startswith('--junitxml='):\n"
-            "        pathlib.Path(arg.split('=', 1)[1]).write_text(xml, encoding='utf-8')\n",
-            encoding="utf-8",
-        )
-        subprocess.run(["git", "init", "-q"], cwd=str(self.ws), check=True)
-        subprocess.run(["git", "config", "user.name", "t"], cwd=str(self.ws), check=True)
-        subprocess.run(["git", "config", "user.email", "t@localhost"], cwd=str(self.ws), check=True)
-        subprocess.run(["git", "add", "-A"], cwd=str(self.ws), check=True)
-        subprocess.run(["git", "commit", "-q", "-m", "init"], cwd=str(self.ws), check=True)
+        g_env = workspace.git_env(self.tmp / "ghome")
+        subprocess.run(["git", "init", "-q"], cwd=str(self.ws), env=g_env, check=True)
+        subprocess.run(["git", "config", "user.name", "t"], cwd=str(self.ws), env=g_env, check=True)
+        subprocess.run(["git", "config", "user.email", "t@localhost"], cwd=str(self.ws), env=g_env, check=True)
+        subprocess.run(["git", "add", "-A"], cwd=str(self.ws), env=g_env, check=True)
+        subprocess.run(["git", "commit", "-q", "-m", "init"], cwd=str(self.ws), env=g_env, check=True)
 
-        res_live = score.run_pytest_and_score(
-            self.task,
-            self.ws,
-            self.pre_hashes,
-            pytest_cmd=[sys.executable, str(stub_writer)],
-            aider_running=False,
-        )
-        self.assertTrue(res_live["passed"], res_live["reasons"])
-        # Staged twin file is cleaned up after scoring
+        # R&D Blocking 4: run_pytest_and_score refuses use_sudo_builder=False unless _test_allow_uncontained=True
+        with self.assertRaises(score.ScoreError):
+            score.run_pytest_and_score(
+                self.task,
+                self.ws,
+                self.pre_hashes,
+                use_sudo_builder=False,
+            )
+
+        # Verify that with default use_sudo_builder=True, run_pytest_and_score wraps the command via sudo -u builder -n -- env -i ...
+        captured_cmds: list[list[str]] = []
+        canned_xml_text = self._canned_xml()
+
+        def fake_bounded_subproc(cmd, *, cwd, env, timeout):
+            captured_cmds.append(cmd)
+            for arg in cmd:
+                if arg.startswith("--junitxml="):
+                    Path(arg.split("=", 1)[1]).write_text(canned_xml_text, encoding="utf-8")
+            return subprocess.CompletedProcess(cmd, 0, "", "")
+
+        with mock.patch.object(score, "run_bounded_subprocess", side_effect=fake_bounded_subproc):
+            res_contained = score.run_pytest_and_score(
+                self.task,
+                self.ws,
+                self.pre_hashes,
+                aider_running=False,
+            )
+        self.assertTrue(res_contained["passed"], res_contained["reasons"])
+        self.assertEqual(captured_cmds[0][:6], ["sudo", "-u", "builder", "-n", "--", "env"])
+        self.assertEqual(captured_cmds[0][6], "-i")
+        self.assertTrue(any(a.startswith("PIP_NO_INDEX=1") for a in captured_cmds[0]))
+        self.assertFalse((self.ws / "tests" / "test_abmine_fa_twin.py").exists())
+
+        # R&D Blocking 6: TimeoutExpired in run_pytest_and_score returns score_timeout and cleans up staged twin
+        with mock.patch.object(
+            score,
+            "run_bounded_subprocess",
+            side_effect=subprocess.TimeoutExpired(cmd=["pytest"], timeout=300),
+        ):
+            res_timeout = score.run_pytest_and_score(
+                self.task,
+                self.ws,
+                self.pre_hashes,
+                aider_running=False,
+            )
+        self.assertFalse(res_timeout["passed"])
+        self.assertIn("score_timeout", res_timeout["reasons"])
         self.assertFalse((self.ws / "tests" / "test_abmine_fa_twin.py").exists())
 
         # Missing --junitxml output raises ScoreError
@@ -620,6 +1009,8 @@ class ScorerTests(unittest.TestCase):
                 self.ws,
                 self.pre_hashes,
                 pytest_cmd=[sys.executable, "-c", "pass"],
+                use_sudo_builder=False,
+                _test_allow_uncontained=True,
                 aider_running=False,
             )
 
@@ -657,7 +1048,6 @@ class WorkspaceTests(unittest.TestCase):
         self.addCleanup(shutil.rmtree, self.tmp, True)
         self.tasks = workspace.load_task_bank(BANK_JSON)
 
-        # Build a lightweight mirror git repo with two parent->fix commit pairs plus leaking files
         self.src_repo = self.tmp / "src_repo"
         (self.src_repo / "mcptoolshop_rnd").mkdir(parents=True)
         (self.src_repo / "tests").mkdir(parents=True)
@@ -716,21 +1106,17 @@ class WorkspaceTests(unittest.TestCase):
             ws_dir = self.tmp / f"ws-{task.id}"
             prep = workspace.build_workspace(self.src_repo, task, ws_dir)
 
-            # GIT_CONFIG_NOSYSTEM=1 and isolated temporary HOME
             self.assertEqual(prep.env["GIT_CONFIG_NOSYSTEM"], "1")
             self.assertTrue(prep.home_dir.is_dir())
 
-            # CHANGELOG.md, docs/runs/, and design notes are absent
             self.assertFalse((ws_dir / "CHANGELOG.md").exists())
             self.assertFalse((ws_dir / "CHANGELOG.old").exists())
             self.assertFalse((ws_dir / "docs" / "runs").exists())
             self.assertFalse((ws_dir / "experiments" / "local-builders" / "DESIGN.md").exists())
 
-            # Scrubbed test is present and hashed in pre_test_hashes
             self.assertTrue((ws_dir / task.test_file).is_file())
             self.assertIn(task.test_file, prep.pre_test_hashes)
 
-            # Only a single commit ("baseline") exists in git log --all, and the fix commit is unreachable
             log_proc = subprocess.run(
                 ["git", "log", "--all", "--oneline"],
                 cwd=str(ws_dir),
@@ -823,7 +1209,6 @@ class WorkspaceTests(unittest.TestCase):
         with self.assertRaises(workspace.WorkspaceError):
             workspace.load_task_bank(empty_bank)
 
-        # Non-empty dest_dir and bad commit errors
         non_empty = self.tmp / "non_empty"
         non_empty.mkdir()
         (non_empty / "f").write_text("x", encoding="utf-8")
@@ -887,7 +1272,6 @@ class ContainmentAndProbeTests(unittest.TestCase):
                 self.assertFalse(report["checks"][breaching_check]["refused"])
 
     def test_probe_default_attempts_both_refused_and_breached(self):
-        # 1. All refused via mocked primitives
         with (
             mock.patch.dict(
                 os.environ,
@@ -921,7 +1305,6 @@ class ContainmentAndProbeTests(unittest.TestCase):
                 )
             self.assertEqual(rc, 0)
 
-        # 2. All breached via mocked primitives to cover every breach branch
         with (
             mock.patch.object(
                 probe.subprocess,
@@ -935,34 +1318,60 @@ class ContainmentAndProbeTests(unittest.TestCase):
             self.assertFalse(rep_breach["passed"])
             self.assertEqual(len(rep_breach["breaches"]), 10)
 
-        # Callable variations in _evaluate_attempt and unknown check error
         self.assertEqual(probe._evaluate_attempt(lambda p: (_ for _ in ()).throw(OSError("no")), self.paths)[0], True)
         self.assertEqual(probe._evaluate_attempt(lambda p: False, self.paths)[0], True)
         self.assertEqual(probe._evaluate_attempt(lambda p: None, self.paths)[0], False)
         with self.assertRaises(ValueError):
             probe.run_probe(self.paths, injected_attempts={"not_a_check": False})
 
-    def test_contain_iptables_rules_env_and_drive_mount_check(self):
+    def test_contain_iptables_insert_order_sudo_env_and_process_group_kill(self):
+        """R&D Blocking 2 & Item 9: wrap_as_builder preserves builder_env via env -i, and iptables inserts at -I OUTPUT 1 in reverse order."""
         rules = contain.iptables_commands(builder_user="builder", proxy_port=18080, llama_port=18081)
         flat = [" ".join(r) for r in rules]
-        self.assertTrue(any("--dport 18080 -m owner --uid-owner builder -j ACCEPT" in r for r in flat))
-        self.assertTrue(any("--dport 18081 -m owner --uid-owner builder -j REJECT" in r for r in flat))
-        self.assertTrue(any("--dport 53 -m owner --uid-owner builder -j REJECT" in r for r in flat))
-        self.assertTrue(any("ip6tables -A OUTPUT -m owner --uid-owner builder -j REJECT" in r for r in flat))
+        # Inserted in reverse order with -I OUTPUT 1:
+        # First inserted is the catch-all IPv4 REJECT, last IPv4 inserted is llama_port REJECT (ending up at rule 1)
+        self.assertTrue(all("-I OUTPUT 1" in r for r in flat))
+        self.assertIn("-j REJECT", flat[0])
+        self.assertIn("--dport 18080 -m owner --uid-owner builder -j ACCEPT", flat[1])
+        self.assertIn("--dport 18081 -m owner --uid-owner builder -j REJECT", flat[4])
+        self.assertIn("ip6tables -I OUTPUT 1 -m owner --uid-owner builder -j REJECT", flat[5])
+
+        script = contain.render_setup_script()
+        self.assertIn("iptables -I OUTPUT 1", script)
+        self.assertIn("iptables -S OUTPUT", script)
+
         self.assertEqual(contain.wrap_as_builder(["echo"], use_sudo=False), ["echo"])
+        env = contain.builder_env(proxy_port=18080, home_dir=self.tmp / "home")
+        wrapped = contain.wrap_as_builder(["aider", "--no-stream"], env=env, use_sudo=True)
+        self.assertEqual(wrapped[:7], ["sudo", "-u", "builder", "-n", "--", "env", "-i"])
+        for expected_kv in (
+            "OPENAI_API_BASE=http://127.0.0.1:18080/v1",
+            "OPENAI_API_KEY=local",
+            f"HOME={env['HOME']}",
+            "LITELLM_LOCAL_MODEL_COST_MAP=True",
+            "PIP_NO_INDEX=1",
+            "NPM_CONFIG_OFFLINE=true",
+            "GIT_CONFIG_NOSYSTEM=1",
+            "HTTP_PROXY=http://127.0.0.1:9",
+            "HTTPS_PROXY=http://127.0.0.1:9",
+            "NO_PROXY=127.0.0.1,localhost",
+        ):
+            self.assertIn(expected_kv, wrapped)
+        self.assertEqual(wrapped[-2:], ["aider", "--no-stream"])
 
         with self.assertRaises(contain.ContainmentError):
             contain.iptables_commands(proxy_port=18080, llama_port=18080)
 
-        env = contain.builder_env(proxy_port=18080, home_dir=self.tmp / "home")
-        self.assertEqual(env["OPENAI_API_BASE"], "http://127.0.0.1:18080/v1")
-        self.assertEqual(env["OPENAI_API_KEY"], "local")
-        self.assertEqual(env["LITELLM_LOCAL_MODEL_COST_MAP"], "True")
-        self.assertEqual(env["PIP_NO_INDEX"], "1")
-        self.assertEqual(env["NPM_CONFIG_OFFLINE"], "true")
-        self.assertEqual(env["GIT_CONFIG_NOSYSTEM"], "1")
+        # Process-group bounded subprocess timeout and kill
+        with self.assertRaises(subprocess.TimeoutExpired):
+            contain.run_bounded_subprocess(
+                [sys.executable, "-c", "import time; time.sleep(10)"],
+                cwd=self.tmp,
+                env=os.environ.copy(),
+                timeout=0.1,
+            )
 
-        # Drive mount checks (both /proc/mounts and non-empty directory)
+        # Drive mount checks
         ok, _ = contain.check_no_drive_mount(mounts_text=None, drive_paths=())
         self.assertTrue(ok)
         fake_drive = self.tmp / "drive"
@@ -980,14 +1389,16 @@ class ContainmentAndProbeTests(unittest.TestCase):
         with self.assertRaises(contain.ContainmentError):
             contain.apply_vm_containment(cfg, mounts_text="drive /content/drive fuse.drive rw 0 0\n")
 
-        # Useradd path when `id -u` returns non-zero
         def run_need_useradd(c):
             if c[0] == "id":
                 return subprocess.CompletedProcess(c, 1, "", "no user")
+            if c[:2] == ["iptables", "-S"]:
+                return subprocess.CompletedProcess(c, 0, "-P OUTPUT ACCEPT\n", "")
             return subprocess.CompletedProcess(c, 0, "", "")
 
         applied = contain.apply_vm_containment(cfg, run_cmd=run_need_useradd, mounts_text="", drive_paths=())
         self.assertEqual(applied["iptables_rules_applied"], 6)
+        self.assertEqual(applied["iptables_s_output"], "-P OUTPUT ACCEPT")
 
         with self.assertRaises(contain.ContainmentError):
             contain.apply_vm_containment(
@@ -1003,12 +1414,19 @@ class ContainmentAndProbeTests(unittest.TestCase):
                 mounts_text="",
                 drive_paths=(),
             )
+        with self.assertRaises(contain.ContainmentError):
+            contain.apply_vm_containment(
+                cfg,
+                run_cmd=lambda c: subprocess.CompletedProcess(c, 1 if c[:2] == ["iptables", "-S"] else 0, "", "s err"),
+                mounts_text="",
+                drive_paths=(),
+            )
 
 
 class PreflightTests(unittest.TestCase):
-    """Tests for `mcptoolshop_rnd.localbuilders.preflight` (F5, F6, F13, amendment B item 4)."""
+    """Tests for `mcptoolshop_rnd.localbuilders.preflight` (F5, F6, F13, D1, D-F1, D-F3, E1, E3)."""
 
-    def test_f13_context_computation_from_30_call_validation_run(self):
+    def test_f13_and_df3_multi_run_context_length_computation(self):
         self.assertEqual(preflight.next_power_of_two(0), 1)
         with self.assertRaises(preflight.PreflightError):
             preflight.compute_j2_context([{"kind": "result", "prompt_tokens": 1000, "output_tokens": 500}] * 10)
@@ -1017,12 +1435,142 @@ class PreflightTests(unittest.TestCase):
         with self.assertRaises(preflight.PreflightError):
             preflight.compute_j2_context([{"kind": "result", "prompt_eval_count": 0, "eval_count": 0}], require_full_cap=False)
 
-        calls_small = [{"kind": "result", "prompt_eval_count": 8000, "eval_count": 2000}] * 30
-        self.assertEqual(preflight.compute_j2_context(calls_small), 32768)
+        # D-F3 / E3: compute_j2_context_length requires at least 2 validation runs by default
+        run_other = [{"kind": "result", "prompt_eval_count": 8000, "eval_count": 2000}] * 30
+        run_qwen_reattach = list(run_other)
+        run_qwen_reattach[-1] = {"kind": "result", "prompt_tokens": 24000, "output_tokens": 4000}
 
-        calls_large = list(calls_small)
-        calls_large[-1] = {"kind": "result", "prompt_tokens": 24000, "output_tokens": 4000}
-        self.assertEqual(preflight.compute_j2_context(calls_large), 65536)
+        with self.assertRaises(preflight.PreflightError):
+            preflight.compute_j2_context_length({"only_one": run_other})
+
+        sizing = preflight.compute_j2_context_length(
+            {
+                "granite-4.2-30b": run_other,
+                "qwen3.8-27b-reattach": run_qwen_reattach,
+            }
+        )
+        self.assertEqual(sizing, 65536)
+        self.assertEqual(int(sizing), 65536)
+        self.assertEqual(sizing["context_length"], 65536)
+        self.assertEqual(sizing["runs_used"], ["granite-4.2-30b", "qwen3.8-27b-reattach"])
+        self.assertEqual(sizing["winning_run"], "qwen3.8-27b-reattach")
+        self.assertEqual(
+            sizing["per_run_max_tokens"],
+            {"granite-4.2-30b": 10000, "qwen3.8-27b-reattach": 28000},
+        )
+
+        # List-of-run-dicts input form
+        sizing_list = preflight.compute_j2_context_length(
+            [
+                {"run_id": "qwen3.8-27b", "calls": run_qwen_reattach},
+                {"run_id": "granite-4.2-30b", "calls": run_other},
+            ]
+        )
+        self.assertEqual(sizing_list["context_length"], 65536)
+        self.assertEqual(sizing_list["runs_used"], ["qwen3.8-27b", "granite-4.2-30b"])
+
+        with self.assertRaises(preflight.PreflightError):
+            preflight.compute_j2_context_length("bad-type")  # type: ignore[arg-type]
+        with self.assertRaises(preflight.PreflightError):
+            preflight.compute_j2_context_length({})
+        with self.assertRaises(preflight.PreflightError):
+            preflight.compute_j2_context_length({"r1": "not-list", "r2": []})  # type: ignore[dict-item]
+
+    def test_d1_gguf_template_check_both_outcomes(self):
+        """D1: Read chat template embedded in GGUF and report whether its sha256 equals template_sha256."""
+        template_str = "{% for message in messages %}{{ message.content }}{% endfor %}"
+        expected_sha = hashlib.sha256(template_str.encode("utf-8")).hexdigest()
+
+        with tempfile.TemporaryDirectory() as d:
+            tmp = Path(d)
+            gguf_match = tmp / "match.gguf"
+            gguf_match.write_bytes(
+                preflight.build_minimal_gguf_with_template(
+                    template_str,
+                    extra_int_key=("general.alignment", 32),
+                )
+            )
+
+            # Outcome 1: Template sha256 matches
+            res_match = preflight.check_gguf_template(
+                expected_template_sha256=expected_sha,
+                gguf_path=gguf_match,
+            )
+            self.assertTrue(res_match["matches"])
+            self.assertEqual(res_match["status"], "match")
+            self.assertEqual(res_match["embedded_sha256"], expected_sha)
+
+            # Outcome 2: Template sha256 mismatches (reports mismatch and never exits)
+            res_mismatch = preflight.check_gguf_template(
+                expected_template_sha256="0" * 64,
+                gguf_path=gguf_match,
+            )
+            self.assertFalse(res_mismatch["matches"])
+            self.assertEqual(res_mismatch["status"], "mismatch")
+            self.assertIn("mismatch", res_mismatch["report"])
+
+            # Missing template in GGUF or non-GGUF file
+            gguf_no_tpl = tmp / "no_tpl.gguf"
+            gguf_no_tpl.write_bytes(preflight.build_minimal_gguf_with_template(None))
+            res_none = preflight.check_gguf_template(
+                expected_template_sha256=expected_sha,
+                gguf_path=gguf_no_tpl,
+            )
+            self.assertFalse(res_none["matches"])
+            self.assertEqual(res_none["status"], "missing_template")
+
+            # Array metadata skipping in GGUF header
+            arr_key = b"tokenizer.ggml.tokens"
+            elem = b"tok"
+            arr_kv = (
+                struct.pack("<Q", len(arr_key))
+                + arr_key
+                + struct.pack("<IIQ", 9, 8, 1)
+                + struct.pack("<Q", len(elem))
+                + elem
+            )
+            tpl_key = b"tokenizer.chat_template"
+            tpl_b = template_str.encode("utf-8")
+            tpl_kv = struct.pack("<Q", len(tpl_key)) + tpl_key + struct.pack("<IQ", 8, len(tpl_b)) + tpl_b
+            gguf_arr = tmp / "arr.gguf"
+            gguf_arr.write_bytes(b"GGUF" + struct.pack("<IQQ", 3, 0, 2) + arr_kv + tpl_kv)
+            self.assertEqual(preflight.read_gguf_chat_template(gguf_arr), template_str)
+
+    def test_df1_thinking_split_check_both_outcomes(self):
+        """D-F1 / E1: Thinking reply must have non-empty reasoning_content and no <think> or <|channel>thought tag in content."""
+        # Outcome 1: Clean split passes
+        clean_resp = _canned_llama_response(
+            content="Here is the diff.",
+            reasoning_content="Step 1: check the caller.",
+        )
+        ok_split = preflight.check_thinking_split(clean_resp, thinking_enabled=True)
+        self.assertTrue(ok_split["passed"])
+        self.assertTrue(ok_split["has_nonempty_reasoning"])
+        self.assertEqual(ok_split["leaked_tags"], [])
+
+        # Outcome 2a: Empty reasoning_content fails check
+        empty_reasoning = _canned_llama_response(content="Here is the diff.", reasoning_content="")
+        fail_empty = preflight.check_thinking_split(empty_reasoning, thinking_enabled=True)
+        self.assertFalse(fail_empty["passed"])
+        self.assertIn("empty reasoning_content", fail_empty["report"])
+
+        # Outcome 2b: Leaked <think> tag in content fails check
+        leaked_think = _canned_llama_response(
+            content="<think>still in content</think>\nFixed.",
+            reasoning_content="Some reasoning",
+        )
+        fail_think = preflight.check_thinking_split(leaked_think, thinking_enabled=True)
+        self.assertFalse(fail_think["passed"])
+        self.assertIn("<think>", fail_think["leaked_tags"])
+
+        # Outcome 2c: Leaked Gemma 4 <|channel>thought tag in content fails check
+        leaked_gemma = _canned_llama_response(
+            content="<|channel>thought\nGemma internal reasoning\nFixed.",
+            reasoning_content="Some reasoning",
+        )
+        fail_gemma = preflight.check_thinking_split(leaked_gemma, thinking_enabled=True)
+        self.assertFalse(fail_gemma["passed"])
+        self.assertIn("<|channel>thought", fail_gemma["leaked_tags"])
 
     def test_f5_top_5_logprobs_assertion_from_index_1_on(self):
         resp = _canned_llama_response(steps=5)
@@ -1052,11 +1600,13 @@ class PreflightTests(unittest.TestCase):
 
     def test_f6_and_amendment_b_fit_report_and_cli(self):
         log_pair_only = "llama_kv_cache_init: K (f16): 1600.00 MiB, V (f16): 1600.00 MiB\n"
+        tpl = "{{ messages }}"
+        tpl_sha = hashlib.sha256(tpl.encode("utf-8")).hexdigest()
 
         with tempfile.TemporaryDirectory() as d:
             tmp = Path(d)
             gguf_file = tmp / "model.gguf"
-            gguf_file.write_bytes(b"0" * 1024)
+            gguf_file.write_bytes(preflight.build_minimal_gguf_with_template(tpl))
 
             rep = preflight.evaluate_candidate_fit(
                 arm="nemotron-3.5-lightning-30b-a3b",
@@ -1066,12 +1616,17 @@ class PreflightTests(unittest.TestCase):
                 gguf_path=gguf_file,
                 server_log=log_pair_only,
                 peak_vram_mib=42500.0,
+                expected_template_sha256=tpl_sha,
+                reattach_max_turns=10,
             )
             self.assertFalse(rep["fits_a100"])
             self.assertTrue(rep["flagged_for_q6_k"])
             self.assertEqual(rep["arm_label"], "[Q6_K: A100 fit]")
+            self.assertTrue(rep["template_check"]["matches"])
+            self.assertTrue(rep["thinking_split_check"]["passed"])
+            self.assertIn("ran with a cap", rep["reattach_cap_report"])
 
-            # CLI main test (never exits non-zero on fit)
+            # CLI main test with multi-run validation_runs (never exits non-zero on fit/template/thinking)
             in_json = tmp / "in.json"
             out_json = tmp / "out.json"
             in_json.write_text(
@@ -1079,9 +1634,13 @@ class PreflightTests(unittest.TestCase):
                     {
                         "arm": "qwen3.8-27b",
                         "quant": "Q8_0",
-                        "validation_calls": [{"kind": "result", "prompt_tokens": 5000, "output_tokens": 1000}] * 30,
+                        "validation_runs": {
+                            "qwen3.8-27b": [{"kind": "result", "prompt_tokens": 5000, "output_tokens": 1000}] * 30,
+                            "granite-4.2-30b": [{"kind": "result", "prompt_tokens": 4000, "output_tokens": 800}] * 30,
+                        },
                         "probe_response": _canned_llama_response(steps=3),
-                        "gguf_size_mib": 27200.0,
+                        "gguf_path": str(gguf_file),
+                        "expected_template_sha256": "0" * 64,  # mismatch reported without exiting
                         "kv_cache_mib": 3200.0,
                         "peak_vram_mib": 31000.0,
                     }
@@ -1093,8 +1652,10 @@ class PreflightTests(unittest.TestCase):
                 rc = preflight.main(["--input", str(in_json), "--output", str(out_json)])
             self.assertEqual(rc, 0)
             self.assertTrue(out_json.is_file())
+            written = json.loads(out_json.read_text(encoding="utf-8"))
+            self.assertEqual(written["context_runs_used"], ["qwen3.8-27b", "granite-4.2-30b"])
+            self.assertFalse(written["template_check"]["matches"])
 
-            # Validation error branches
             with self.assertRaises(preflight.PreflightError):
                 preflight.evaluate_candidate_fit(
                     arm="m", quant="Q8_0", context_length=16384, top_or_response=_canned_llama_response(steps=3)
@@ -1131,14 +1692,14 @@ class PreflightTests(unittest.TestCase):
 
 
 class RunnerAndReceiptTests(unittest.TestCase):
-    """Tests for `mcptoolshop_rnd.localbuilders.runner` (NB1, F2, F4, F7, F9, F10, section 7)."""
+    """Tests for `mcptoolshop_rnd.localbuilders.runner` (NB1, F2, F4, F7, F9, F10, D/E, section 7)."""
 
     def setUp(self):
         self.tmp = Path(tempfile.mkdtemp())
         self.addCleanup(shutil.rmtree, self.tmp, True)
         self.task = workspace.load_task_bank(BANK_JSON)[0]
 
-    def test_builds_exact_aider_command_line_and_refuses_editable_test_files(self):
+    def test_builds_exact_aider_command_line_and_pins_examples_as_sys_msg(self):
         with self.assertRaises(runner.RunnerError):
             runner.format_task_prompt("  ")
         with self.assertRaises(runner.RunnerError):
@@ -1152,13 +1713,41 @@ class RunnerAndReceiptTests(unittest.TestCase):
                 analytics_log="a",
             )
 
+        # Publisher Item 2 (D-F1, D-F2): model-settings file pins examples_as_sys_msg: true for every candidate
+        cards = json.loads(CARD_VALUES_JSON.read_text(encoding="utf-8"))["candidates"]
+        for cand in cards:
+            cid = cand["candidate"]
+            s_path = runner.write_model_settings_file(self.tmp / f"settings-{cid}.yml", cid)
+            runner.validate_model_settings_file(s_path)
+            self.assertIn("examples_as_sys_msg: true", s_path.read_text(encoding="utf-8"))
+
+        bad_settings = self.tmp / "bad-settings.yml"
+        bad_settings.write_text("- name: openai/qwen3.8-27b\n  streaming: false\n", encoding="utf-8")
+        with self.assertRaises(runner.RunnerError):
+            runner.validate_model_settings_file(bad_settings)
+        with self.assertRaises(runner.RunnerError):
+            runner.validate_model_settings_file(self.tmp / "nonexistent-settings.yml")
+        with self.assertRaises(runner.RunnerError):
+            runner.build_aider_argv(
+                served_as="qwen3.8-27b",
+                model_settings_file=bad_settings,
+                test_cmd=self.task.test_cmd,
+                test_file=self.task.test_file,
+                node_id=self.task.target_node_id,
+                llm_history_file="/work/llm-history.md",
+                analytics_log="/work/analytics.jsonl",
+            )
+
+        good_settings = runner.write_model_settings_file(self.tmp / "good-settings.yml", "qwen3.8-27b")
         argv = runner.build_aider_argv(
             served_as="qwen3.8-27b",
-            model_settings_file="/pins/aider-settings.yml",
+            model_settings_file=good_settings,
             test_cmd=self.task.test_cmd,
             test_file=self.task.test_file,
             node_id=self.task.target_node_id,
             llm_history_file="/work/llm-history.md",
+            chat_history_file="/work/chat-history.md",
+            input_history_file="/work/input-history",
             analytics_log="/work/analytics.jsonl",
             editable_files=["", "mcptoolshop_rnd/abmine.py"],
         )
@@ -1166,6 +1755,7 @@ class RunnerAndReceiptTests(unittest.TestCase):
             "--no-stream",
             "--auto-test",
             "--no-auto-commits",
+            "--no-gitignore",
             "--yes-always",
             "--no-check-update",
             "--analytics-disable",
@@ -1179,8 +1769,10 @@ class RunnerAndReceiptTests(unittest.TestCase):
 
         self.assertEqual(flag_value("--model"), "openai/qwen3.8-27b")
         self.assertEqual(flag_value("--edit-format"), "diff")
-        self.assertEqual(flag_value("--model-settings-file"), "/pins/aider-settings.yml")
+        self.assertEqual(flag_value("--model-settings-file"), str(good_settings))
         self.assertEqual(flag_value("--test-cmd"), self.task.test_cmd)
+        self.assertEqual(Path(flag_value("--chat-history-file")).as_posix(), "/work/chat-history.md")
+        self.assertEqual(Path(flag_value("--input-history-file")).as_posix(), "/work/input-history")
         self.assertEqual(flag_value("--llm-history-file"), "/work/llm-history.md")
         self.assertEqual(flag_value("--analytics-log"), "/work/analytics.jsonl")
         self.assertEqual(flag_value("--read"), "tests/test_abmine_fa.py")
@@ -1193,7 +1785,7 @@ class RunnerAndReceiptTests(unittest.TestCase):
         with self.assertRaises(runner.RunnerError):
             runner.build_aider_argv(
                 served_as="qwen3.8-27b",
-                model_settings_file="/pins/aider-settings.yml",
+                model_settings_file=good_settings,
                 test_cmd=self.task.test_cmd,
                 test_file=self.task.test_file,
                 node_id=self.task.target_node_id,
@@ -1202,18 +1794,21 @@ class RunnerAndReceiptTests(unittest.TestCase):
                 editable_files=["tests/test_abmine_fa.py"],
             )
 
+        # Default use_sudo=True wraps with sudo -u builder -n -- env -i K=V ...
+        env = contain.builder_env(proxy_port=18080, home_dir=self.tmp / "home")
         full_cmd = runner.build_aider_command(
             served_as="qwen3.8-27b",
-            model_settings_file="/pins/aider-settings.yml",
+            model_settings_file=good_settings,
             test_cmd=self.task.test_cmd,
             test_file=self.task.test_file,
             node_id=self.task.target_node_id,
             llm_history_file="/work/llm-history.md",
             analytics_log="/work/analytics.jsonl",
             editable_files=["mcptoolshop_rnd/abmine.py"],
-            use_sudo=True,
+            env=env,
         )
-        self.assertEqual(full_cmd[:4], ["sudo", "-u", "builder", "-n"])
+        self.assertEqual(full_cmd[:7], ["sudo", "-u", "builder", "-n", "--", "env", "-i"])
+        self.assertIn("OPENAI_API_BASE=http://127.0.0.1:18080/v1", full_cmd)
         self.assertIn("--aider-entrypoint", full_cmd)
         idx_mr = full_cmd.index("--max-reflections")
         self.assertEqual(full_cmd[idx_mr + 1], "29")
@@ -1244,6 +1839,7 @@ class RunnerAndReceiptTests(unittest.TestCase):
         self.assertEqual(rc, 0)
         self.assertEqual(len(created_coders), 1)
         self.assertEqual(created_coders[0].max_reflections, 29)
+        self.assertEqual(runner.create_coder_with_reflections(FakeCoder, max_reflections=29).max_reflections, 29)
 
         with mock.patch.object(runner, "run_aider_entrypoint", return_value=0) as mocked_ep:
             self.assertEqual(
@@ -1255,8 +1851,7 @@ class RunnerAndReceiptTests(unittest.TestCase):
         with self.assertRaises(runner.RunnerError):
             runner.main([])
 
-    def test_analytics_log_and_end_to_end_single_task_receipt(self):
-        # Build a small local git repo so run_single_task is fast
+    def test_default_sudo_builder_refusal_timeouts_and_end_to_end_receipt(self):
         mini_repo = self.tmp / "mini_repo"
         (mini_repo / "mcptoolshop_rnd").mkdir(parents=True)
         (mini_repo / "mcptoolshop_rnd" / "abmine.py").write_text("x = 1\n", encoding="utf-8")
@@ -1288,28 +1883,59 @@ class RunnerAndReceiptTests(unittest.TestCase):
         with _StubLlamaServer() as stub:
             receipt_path = self.tmp / "receipts" / "r1.json"
             settings_file = self.tmp / "model-settings.yml"
-            settings_file.write_text("- name: openai/fixture-candidate-q8_0\n  streaming: false\n", encoding="utf-8")
 
             run_cfg = runner.RunTaskConfig(
                 source_repo=mini_repo,
                 task=task,
-                candidate_config_path=CANDIDATE_CONFIG_JSON,
+                candidate_config_path=CARD_VALUES_JSON,
+                candidate="qwen3.8-27b",
                 model_settings_file=settings_file,
-                served_as="fixture-candidate-q8_0",
+                served_as="qwen3.8-27b",
                 model_tag="qwen3.8:27b-q8_0",
                 model_digest="sha256:aaee06c39dcf",
-                aider_version="0.82.0",
+                aider_version=proxy.PINNED_AIDER_VERSION,
                 upstream_url=stub.url,
                 work_root=self.tmp / "work",
                 receipt_path=receipt_path,
                 machine_line={"gpu": "NVIDIA A100-SXM4-40GB"},
             )
+            # R&D Blocking 3: use_sudo_builder defaults to True, and non-test run with False is refused
+            self.assertTrue(run_cfg.use_sudo_builder)
+            uncontained_cfg = runner.RunTaskConfig(
+                source_repo=mini_repo,
+                task=task,
+                candidate_config_path=CARD_VALUES_JSON,
+                candidate="qwen3.8-27b",
+                model_settings_file=settings_file,
+                served_as="qwen3.8-27b",
+                model_tag="qwen3.8:27b-q8_0",
+                model_digest="sha256:aaee06c39dcf",
+                aider_version=proxy.PINNED_AIDER_VERSION,
+                upstream_url=stub.url,
+                work_root=self.tmp / "work-uncontained",
+                receipt_path=self.tmp / "receipts" / "uncontained.json",
+                machine_line={"gpu": "NVIDIA A100-SXM4-40GB"},
+                use_sudo_builder=False,
+            )
+            with self.assertRaises(runner.RunnerError):
+                runner.run_single_task(uncontained_cfg)
 
             def fake_aider_runner(cmd: list[str], ws_dir: Path, run_env: dict[str, str]) -> int:
+                self.assertEqual(cmd[:7], ["sudo", "-u", "builder", "-n", "--", "env", "-i"])
                 api_base = run_env["OPENAI_API_BASE"]
                 _post_json(f"{api_base}/chat/completions", {"messages": [{"role": "user", "content": "turn 1"}]})
-                _post_json(f"{api_base}/chat/completions", {"messages": [{"role": "user", "content": "turn 2"}]})
-                # Write analytics events to cover parse_analytics_log
+                _post_json(
+                    f"{api_base}/chat/completions",
+                    {
+                        "messages": [
+                            {"role": "user", "content": "repo"},
+                            {"role": "assistant", "content": "Ok."},
+                            {"role": "user", "content": "turn 1"},
+                            {"role": "assistant", "content": "Fixed the bug."},
+                            {"role": "user", "content": "turn 2"},
+                        ]
+                    },
+                )
                 alog = run_cfg.work_root / f"analytics-{task.id}.jsonl"
                 alog.write_text(
                     "\n".join(
@@ -1333,15 +1959,72 @@ class RunnerAndReceiptTests(unittest.TestCase):
                 scorer_fn=lambda t, p: {"task_id": t.id, "passed": True, "correct": True, "reasons": []},
             )
 
-        self.assertEqual(receipt["tool_calls"], {"total": 2, "malformed": 1, "failed": 1})
-        self.assertEqual(receipt["retries"], 1)
+            self.assertEqual(receipt["tool_calls"], {"total": 2, "malformed": 1, "failed": 1})
+            self.assertEqual(receipt["retries"], 1)
+            self.assertEqual(receipt["transforms"], ["reattach_thinking"])
+            self.assertEqual(receipt["reattach_thinking"]["reattached"], 1)
+            self.assertEqual(receipt["reattach_thinking"]["synthetic"], 1)
+            self.assertEqual(receipt["reattach_thinking"]["mismatch"], 0)
+
+            # R&D Blocking 6: Aider timeout writes failed receipt with reason 'aider_timeout'
+            timeout_aider_cfg = runner.RunTaskConfig(
+                source_repo=mini_repo,
+                task=task,
+                candidate_config_path=CARD_VALUES_JSON,
+                candidate="qwen3.8-27b",
+                model_settings_file=settings_file,
+                served_as="qwen3.8-27b",
+                model_tag="qwen3.8:27b-q8_0",
+                model_digest="sha256:aaee06c39dcf",
+                aider_version=proxy.PINNED_AIDER_VERSION,
+                upstream_url=stub.url,
+                work_root=self.tmp / "work-aider-to",
+                receipt_path=self.tmp / "receipts" / "r_aider_to.json",
+                machine_line={"gpu": "NVIDIA A100-SXM4-40GB"},
+            )
+            r_aider_to = runner.run_single_task(
+                timeout_aider_cfg,
+                aider_runner=lambda c, w, e: (_ for _ in ()).throw(
+                    subprocess.TimeoutExpired(cmd=c, timeout=930)
+                ),
+            )
+            self.assertFalse(r_aider_to["correct"])
+            self.assertEqual(r_aider_to["grade"]["reasons"], ["aider_timeout"])
+            self.assertTrue(timeout_aider_cfg.receipt_path.is_file())
+
+            # R&D Blocking 6: Score timeout writes failed receipt with reason 'score_timeout'
+            timeout_score_cfg = runner.RunTaskConfig(
+                source_repo=mini_repo,
+                task=task,
+                candidate_config_path=CARD_VALUES_JSON,
+                candidate="qwen3.8-27b",
+                model_settings_file=settings_file,
+                served_as="qwen3.8-27b",
+                model_tag="qwen3.8:27b-q8_0",
+                model_digest="sha256:aaee06c39dcf",
+                aider_version=proxy.PINNED_AIDER_VERSION,
+                upstream_url=stub.url,
+                work_root=self.tmp / "work-score-to",
+                receipt_path=self.tmp / "receipts" / "r_score_to.json",
+                machine_line={"gpu": "NVIDIA A100-SXM4-40GB"},
+            )
+            r_score_to = runner.run_single_task(
+                timeout_score_cfg,
+                aider_runner=lambda c, w, e: 0,
+                scorer_fn=lambda t, p: (_ for _ in ()).throw(
+                    subprocess.TimeoutExpired(cmd=["pytest"], timeout=300)
+                ),
+            )
+            self.assertFalse(r_score_to["correct"])
+            self.assertEqual(r_score_to["grade"]["reasons"], ["score_timeout"])
+            self.assertTrue(timeout_score_cfg.receipt_path.is_file())
 
         # Receipt validation errors
         for bad_mod in (
             lambda r: r.pop("task_id"),
             lambda r: r.update({"generations_sha256": "short"}),
             lambda r: r.update({"injected": "not-dict"}),
-            lambda r: r.update({"injected": {"sampling": {}}} ),
+            lambda r: r.update({"injected": {"sampling": {}}}),
             lambda r: r.update({"cap_hits": "not-dict"}),
         ):
             copy_r = json.loads(json.dumps(receipt))

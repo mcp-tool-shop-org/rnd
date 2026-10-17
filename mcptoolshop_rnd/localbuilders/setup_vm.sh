@@ -29,14 +29,16 @@ mkdir -p "$BANK_DIR" "$TWINS_DIR" "$RECEIPTS_DIR"
 chown root:root "$BANK_DIR" "$TWINS_DIR" "$RECEIPTS_DIR"
 chmod 0700 "$BANK_DIR" "$TWINS_DIR" "$RECEIPTS_DIR"
 
-# 4. Apply iptables and ip6tables owner rules for builder:
-#    allow TCP only to 127.0.0.1:$PROXY_PORT; reject llama-server, DNS, and internet.
-iptables -A OUTPUT -p tcp -d 127.0.0.1 --dport "$LLAMA_PORT" -m owner --uid-owner "$BUILDER_USER" -j REJECT --reject-with tcp-reset
-iptables -A OUTPUT -p udp --dport 53 -m owner --uid-owner "$BUILDER_USER" -j REJECT
-iptables -A OUTPUT -p tcp --dport 53 -m owner --uid-owner "$BUILDER_USER" -j REJECT --reject-with tcp-reset
-iptables -A OUTPUT -p tcp -d 127.0.0.1 --dport "$PROXY_PORT" -m owner --uid-owner "$BUILDER_USER" -j ACCEPT
-iptables -A OUTPUT -m owner --uid-owner "$BUILDER_USER" -j REJECT
-ip6tables -A OUTPUT -m owner --uid-owner "$BUILDER_USER" -j REJECT
+# 4. Insert iptables and ip6tables owner rules at the top of OUTPUT (-I OUTPUT 1, reverse order):
+#    resulting top-down order: reject llama-server -> reject DNS (UDP/TCP 53) -> accept proxy -> reject all else.
+iptables -I OUTPUT 1 -m owner --uid-owner "$BUILDER_USER" -j REJECT
+iptables -I OUTPUT 1 -p tcp -d 127.0.0.1 --dport "$PROXY_PORT" -m owner --uid-owner "$BUILDER_USER" -j ACCEPT
+iptables -I OUTPUT 1 -p tcp --dport 53 -m owner --uid-owner "$BUILDER_USER" -j REJECT --reject-with tcp-reset
+iptables -I OUTPUT 1 -p udp --dport 53 -m owner --uid-owner "$BUILDER_USER" -j REJECT
+iptables -I OUTPUT 1 -p tcp -d 127.0.0.1 --dport "$LLAMA_PORT" -m owner --uid-owner "$BUILDER_USER" -j REJECT --reject-with tcp-reset
+ip6tables -I OUTPUT 1 -m owner --uid-owner "$BUILDER_USER" -j REJECT
+iptables -S OUTPUT
+ip6tables -S OUTPUT
 
 # 5. Export offline environment defaults.
 export LITELLM_LOCAL_MODEL_COST_MAP=True

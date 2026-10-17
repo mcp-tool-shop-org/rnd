@@ -1,16 +1,20 @@
 # rnd: how it works
 
-Mapped at 2026-10-17 from commit 49542f0 by Atlas 1.24.0.
+Mapped at 2026-10-17 from commit e7255b5 by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-14 parts, mostly Python (107 files), shell (15), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
+14 parts, mostly Python (120 files), shell (16), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-16 (745ccdb)
+## What changed since 2026-10-17 (49542f0)
 
-Nothing structural changed since 2026-10-16; 8 files added and 14 changed content.
+- CHANGELOG.md is now also read by mcptoolshop_rnd/localbuilders/workspace.py.
+- experiments/local-builders/card-values.json is now read by tests/test_localbuilders.py.
+- mcptoolshop_rnd/abmine.py is now read by tests/test_localbuilders.py.
+- And 5 more new writers and readers of places.
+- 17 files added and 17 changed content, across 6 parts.
 
 ## What comes in
 
@@ -82,7 +86,9 @@ the repository root holds only shell files, which this map does not read, so whe
 
 ## Helpers that look duplicated
 
-No two parts export a helper that looks alike.
+These are candidates from names and call order, not a judgement.
+
+- **main** is exported by experiments/npu-probe/probe.py (experiments) and mcptoolshop_rnd/localbuilders/probe.py (mcptoolshop_rnd); the two look alike.
 
 ## Generated, never hand-edited
 
@@ -106,7 +112,7 @@ No two parts export a helper that looks alike.
 
 ## Hand-authored
 
-People write .claude/, .github/, catalogs/, datapacks/ and docs/; 13 writes with paths built at run time may land here.
+People write .claude/, .github/, catalogs/, datapacks/ and docs/; 17 writes with paths built at run time may land here.
 
 ## Where to start
 
@@ -117,9 +123,9 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 ## What this map cannot see
 
 - 9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.
-- 13 writes and 20 reads use paths built at run time and are not named here.
+- 17 writes and 30 reads use paths built at run time and are not named here.
 - 5 writes go to places this repository does not track, so they are not listed as generated.
-- 21 writes and 72 reads go to a path their caller passes, not to this repository.
+- 25 writes and 84 reads go to a path their caller passes, not to this repository.
 - 5 reads go to the directory the command is run in (entries, instruments and licences), not to this repository.
 - 1 read goes to the directory the command is run in or a path its caller passes, not to this repository.
 - 1 read goes to the home directory (.claude/), not to this repository.

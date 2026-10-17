@@ -32,6 +32,13 @@ DESIGN_NOTE_GLOBS = (
     "docs/**/*design*.md",
 )
 
+SCORER_IGNORED_PATTERNS = (
+    "__pycache__/",
+    "*.pyc",
+    ".pytest_cache/",
+    ".aider.tags.cache.v4/",
+)
+
 
 class WorkspaceError(Exception):
     """Raised when workspace creation or task bank validation fails."""
@@ -47,10 +54,31 @@ def normal_rel_path(path: str | Path) -> str:
     return text.rstrip("/")
 
 
+def is_scorer_ignored(rel_path: str | Path) -> bool:
+    """Return True iff `rel_path` matches the fixed scorer ignore list (`SCORER_IGNORED_PATTERNS`).
+
+    The scorer ignores only: `__pycache__/`, `*.pyc`, `.pytest_cache/`, `.aider.tags.cache.v4/`.
+    Nothing else is ignored.
+    """
+    norm = normal_rel_path(rel_path)
+    if not norm:
+        return False
+    parts = norm.split("/")
+    if "__pycache__" in parts:
+        return True
+    if norm.endswith(".pyc"):
+        return True
+    if ".pytest_cache" in parts:
+        return True
+    if ".aider.tags.cache.v4" in parts:
+        return True
+    return False
+
+
 def is_test_path(rel_path: str | Path) -> bool:
     """Return True if `rel_path` is inside `tests/**`, is `conftest.py`, or is a `test_*.py` file."""
     norm = normal_rel_path(rel_path)
-    if not norm:
+    if not norm or is_scorer_ignored(norm):
         return False
     parts = norm.split("/")
     if parts[0] == "tests" or "tests" in parts:
@@ -91,7 +119,7 @@ def snapshot_test_hashes(workspace_dir: str | Path) -> dict[str, str]:
         if not file_path.is_file():
             continue
         rel = normal_rel_path(file_path.relative_to(root))
-        if rel.startswith(".git/") or rel == ".git":
+        if rel.startswith(".git/") or rel == ".git" or is_scorer_ignored(rel):
             continue
         if is_test_path(rel):
             hashes[rel] = sha256_file(file_path)

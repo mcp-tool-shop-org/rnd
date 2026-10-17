@@ -1,20 +1,24 @@
-"""Mergeability scorer for J2 runs (F10, NB2).
+"""Mergeability scorer for J2 runs (F10, NB2, F9).
 
 Responsibilities:
 - Verifies `tests/**` is never in `allowed_paths`, and every test file's sha256 equals its pre-run value.
-- Verifies `git status --porcelain --ignored` shows nothing outside `allowed_paths` (untracked files count,
-  including an untracked `conftest.py`).
+- Verifies `git status --porcelain -uall --ignored` shows nothing outside `allowed_paths` (untracked files count,
+  including an untracked `conftest.py`), ignoring only the fixed list:
+  `__pycache__/`, `*.pyc`, `.pytest_cache/`, `.aider.tags.cache.v4/`.
 - Parses `pytest --junitxml` output over the full suite, the target test and the held-out twin:
-  - the target node(s) and twin node(s) pass explicitly;
+  - matches target and twin nodes strictly on exact `file::name` (with the class part `file::Class::name` when
+    inside a class), treating any missing node as not passed;
   - `errors == 0` and `failures == 0`;
   - `skipped` and `xfail` equal the parent's baseline;
   - `passed >= baseline_passed + len(target_nodes) + len(twin_nodes)`.
-- On the VM, executes the held-out twin only at scoring time after Aider exits, from a path the
-  `builder` user cannot read.
+- On the VM, executes the scoring pytest inside builder containment (`wrap_as_builder` + `builder_env`),
+  staging the held-out twin only for that run and removing it afterwards, and catches `TimeoutExpired`
+  (killing the process group and reporting `score_timeout`).
 """
 from __future__ import annotations
 
 import fnmatch
+import os
 import subprocess
 import sys
 import tempfile
@@ -22,14 +26,19 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from .contain import BUILDER_USER, builder_env, run_bounded_subprocess, wrap_as_builder
 from .workspace import (
+    SCORER_IGNORED_PATTERNS,
     TaskSpec,
     WorkspaceError,
+    is_scorer_ignored,
     is_test_path,
     normal_rel_path,
     snapshot_test_hashes,
     validate_allowed_paths,
 )
+
+DEFAULT_SCORE_TIMEOUT_S = 300
 
 
 class ScoreError(Exception):
@@ -38,7 +47,7 @@ class ScoreError(Exception):
 
 @dataclass(frozen=True)
 class JUnitSummary:
-    """Aggregated counts and per-node outcomes parsed from JUnit XML."""
+    """Aggregated counts and exact per-node outcomes parsed from JUnit XML."""
 
     passed: int
     failed: int
@@ -48,22 +57,23 @@ class JUnitSummary:
     node_outcomes: dict[str, str] = field(default_factory=dict)
 
     def outcome_for(self, node_id: str) -> str | None:
+        """Return the outcome for `node_id` matching strictly on exact `file::name` (with class part)."""
         norm = normal_rel_path(node_id)
-        if norm in self.node_outcomes:
-            return self.node_outcomes[norm]
-        # Fallback: match by suffix `::Class::test` or `::test` if unambiguous
-        for key, status in self.node_outcomes.items():
-            if key.endswith(norm) or ("::" in norm and key.endswith("::" + norm.split("::", 1)[1])):
-                return status
-        return None
+        return self.node_outcomes.get(norm)
 
 
 def _candidate_node_ids(testcase: ET.Element) -> list[str]:
-    """Derive canonical and shorthand pytest node IDs from a `<testcase>` element."""
+    """Derive exact `file::name` (or `file::Class::name`) pytest node IDs from a `<testcase>` element.
+
+    Never emits bare test names or file-less suffixes so a same-named test in another file or class
+    can never satisfy a missing target or twin node.
+    """
     ids: list[str] = []
     explicit = testcase.attrib.get("nodeid")
     if explicit:
-        ids.append(normal_rel_path(explicit))
+        norm_exp = normal_rel_path(explicit)
+        if "::" in norm_exp:
+            ids.append(norm_exp)
 
     name = testcase.attrib.get("name", "").strip()
     classname = testcase.attrib.get("classname", "").strip()
@@ -71,30 +81,40 @@ def _candidate_node_ids(testcase: ET.Element) -> list[str]:
 
     if file_attr and name:
         norm_file = normal_rel_path(file_attr)
-        if classname:
+        mod_dotted = norm_file[:-3].replace("/", ".") if norm_file.endswith(".py") else norm_file.replace("/", ".")
+        mod_stem = Path(norm_file).stem
+        if not classname or classname == mod_dotted or classname == mod_stem:
+            ids.append(f"{norm_file}::{name}")
+        elif classname.startswith(mod_dotted + "."):
+            cls_part = classname[len(mod_dotted) + 1 :].replace(".", "::")
+            ids.append(f"{norm_file}::{cls_part}::{name}")
+        else:
             cls_tail = classname.split(".")[-1]
-            mod_stem = Path(norm_file).stem
             if cls_tail and cls_tail != mod_stem:
                 ids.append(f"{norm_file}::{cls_tail}::{name}")
-        ids.append(f"{norm_file}::{name}")
-
-    if classname and name:
+            else:
+                ids.append(f"{norm_file}::{name}")
+    elif classname and name:
         parts = classname.split(".")
-        # Try interpreting classname as `pkg.sub.test_mod.ClassName` or `tests.test_mod`
+        mod_idx: int | None = None
         for idx, part in enumerate(parts):
-            if part.startswith("test_") or part.endswith("_test") or part == "tests":
-                if idx == len(parts) - 1:
-                    file_guess = "/".join(parts) + ".py"
-                    ids.append(f"{file_guess}::{name}")
-                elif parts[idx].startswith("test_") or parts[idx].endswith("_test"):
-                    file_guess = "/".join(parts[: idx + 1]) + ".py"
-                    cls_part = "::".join(parts[idx + 1 :])
-                    ids.append(f"{file_guess}::{cls_part}::{name}")
-                    break
-        ids.append(f"{classname}::{name}")
+            if part.startswith("test_") or part.endswith("_test"):
+                mod_idx = idx
+                break
+        if mod_idx is not None:
+            file_guess = "/".join(parts[: mod_idx + 1]) + ".py"
+            cls_parts = parts[mod_idx + 1 :]
+        elif len(parts) >= 2 and parts[-1][:1].isupper():
+            file_guess = "/".join(parts[:-1]) + ".py"
+            cls_parts = [parts[-1]]
+        else:
+            file_guess = "/".join(parts) + ".py"
+            cls_parts = []
+        if cls_parts:
+            ids.append(f"{file_guess}::{'::'.join(cls_parts)}::{name}")
+        else:
+            ids.append(f"{file_guess}::{name}")
 
-    if name:
-        ids.append(name)
     return list(dict.fromkeys(ids))
 
 
@@ -154,7 +174,6 @@ def parse_junitxml(xml_source: str | Path) -> JUnitSummary:
         elif status == "skipped":
             skipped += 1
         for nid in _candidate_node_ids(tc):
-            # Keep failure/error if a duplicate shorthand collides
             if nid not in outcomes or outcomes[nid] == "passed":
                 outcomes[nid] = status
 
@@ -228,7 +247,11 @@ def check_workspace_integrity(
     git_status_output: str | None = None,
     env: dict[str, str] | None = None,
 ) -> list[str]:
-    """Check F10 workspace integrity: allowed_paths, test sha256s, and `git status --porcelain --ignored`."""
+    """Check F10 workspace integrity: allowed_paths, test sha256s, and `git status --porcelain --ignored`.
+
+    Ignores only the fixed named list in `SCORER_IGNORED_PATTERNS`:
+    `__pycache__/`, `*.pyc`, `.pytest_cache/`, `.aider.tags.cache.v4/`.
+    """
     reasons: list[str] = []
     try:
         norm_allowed = validate_allowed_paths(allowed_paths)
@@ -241,6 +264,8 @@ def check_workspace_integrity(
     # 1. Every pre-run test file's sha256 must equal its pre-run value.
     for test_rel, expected_sha in sorted(pre_test_hashes.items()):
         norm_rel = normal_rel_path(test_rel)
+        if is_scorer_ignored(norm_rel):
+            continue
         actual_sha = post_hashes.get(norm_rel)
         if actual_sha is None:
             reasons.append(f"deleted test file: {norm_rel}")
@@ -249,6 +274,8 @@ def check_workspace_integrity(
 
     # 2. Any newly added test or conftest.py file found on disk is refused.
     for post_rel in sorted(post_hashes):
+        if is_scorer_ignored(post_rel):
+            continue
         if post_rel not in {normal_rel_path(k) for k in pre_test_hashes}:
             if post_rel == "conftest.py" or post_rel.endswith("/conftest.py"):
                 reasons.append(f"untracked conftest.py: {post_rel}")
@@ -272,7 +299,7 @@ def check_workspace_integrity(
         git_status_output = proc.stdout
 
     for code, rel_path in parse_git_status_porcelain(git_status_output):
-        if not rel_path:
+        if not rel_path or is_scorer_ignored(rel_path):
             continue
         if rel_path == "conftest.py" or rel_path.endswith("/conftest.py"):
             msg = f"untracked conftest.py: {rel_path}" if "?" in code else f"modified conftest.py: {rel_path}"
@@ -395,23 +422,39 @@ def run_pytest_and_score(
     pytest_cmd: list[str] | None = None,
     env: dict[str, str] | None = None,
     aider_running: bool = False,
+    use_sudo_builder: bool = True,
+    builder_user: str = BUILDER_USER,
+    proxy_port: int = 18080,
+    timeout: float = DEFAULT_SCORE_TIMEOUT_S,
+    _test_allow_uncontained: bool = False,
 ) -> dict:
-    """Execute pytest over the full suite, target test, and held-out twin after Aider exits (F10).
+    """Execute pytest as `builder` over the full suite, target test, and held-out twin after Aider exits (F9, F10).
 
     The twin is read from `twin_source_path` (or `task.twin_test_path`, unreadable by `builder`)
-    only at scoring time after Aider has exited.
+    only at scoring time after Aider has exited, and is removed in `finally:`.
+    If pytest exceeds `timeout`, its process group is killed and the run is scored as failed
+    with reason `'score_timeout'`.
     """
     if aider_running:
         raise ScoreError("refusing to run held-out twin while Aider is still running")
+    if not use_sudo_builder and not _test_allow_uncontained:
+        raise ScoreError("refusing to run scoring pytest outside builder containment (F9)")
+
     spec = task if isinstance(task, TaskSpec) else TaskSpec.from_dict(task)
     root = Path(workspace_dir).resolve()
+
+    run_env = (
+        dict(env)
+        if env is not None and "PIP_NO_INDEX" in env
+        else builder_env(proxy_port=proxy_port, home_dir=root.parent / f".score-home-{spec.id}", base_env=env)
+    )
 
     # Check workspace integrity BEFORE staging the held-out twin
     integrity_reasons = check_workspace_integrity(
         root,
         pre_test_hashes,
         spec.allowed_paths,
-        env=env,
+        env=run_env,
     )
 
     twin_text: str
@@ -428,20 +471,39 @@ def run_pytest_and_score(
     prior_bytes = staged_twin.read_bytes() if staged_twin.exists() else None
 
     with tempfile.TemporaryDirectory() as tmp:
+        os.chmod(tmp, 0o777)
         xml_path = Path(tmp) / "junit.xml"
         try:
             staged_twin.write_text(twin_text, encoding="utf-8", newline="\n")
+            os.chmod(staged_twin, 0o644)
             base_cmd = list(pytest_cmd) if pytest_cmd is not None else [sys.executable, "-m", "pytest"]
-            cmd = [*base_cmd, f"--junitxml={xml_path}"]
-            subprocess.run(
-                cmd,
-                cwd=str(root),
-                env=env,
-                capture_output=True,
-                text=True,
-                check=False,
-                timeout=300,
+            raw_cmd = [*base_cmd, f"--junitxml={xml_path}"]
+            full_cmd = wrap_as_builder(
+                raw_cmd,
+                env=run_env,
+                builder_user=builder_user,
+                use_sudo=use_sudo_builder,
             )
+            try:
+                run_bounded_subprocess(
+                    full_cmd,
+                    cwd=root,
+                    env=run_env,
+                    timeout=timeout,
+                )
+            except subprocess.TimeoutExpired:
+                reasons = [*integrity_reasons, "score_timeout"]
+                return {
+                    "task_id": spec.id,
+                    "passed": False,
+                    "correct": False,
+                    "reasons": reasons,
+                    "reason": "; ".join(reasons),
+                    "counts": {"passed": 0, "failed": 0, "errors": 0, "skipped": 0, "xfail": 0},
+                    "baseline": dict(spec.baseline),
+                    "target_nodes": list(spec.target_nodes),
+                    "twin_nodes": list(spec.twin_nodes),
+                }
             if not xml_path.is_file():
                 raise ScoreError("pytest did not produce a --junitxml report")
             summary = parse_junitxml(xml_path)

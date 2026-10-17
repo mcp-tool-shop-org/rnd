@@ -1,25 +1,29 @@
-"""Single-task J2 runner and section-7 receipt writer (NB1, F2, F4, F7, F9, F10).
+"""Single-task J2 runner and section-7 receipt writer (NB1, F2, F4, F7, F9, F10, D1, D2, E1-E3).
 
 Responsibilities:
 - NB1: Runs Aider with `--no-stream`, `--model openai/<served_as>`, `OPENAI_API_BASE` pointing at the
   loopback logging proxy, and `OPENAI_API_KEY=local`. Wraps Aider's `Coder.create` so
   `coder.max_reflections = 29`, lifting Aider's default `max_reflections=3` so the proxy's 30-call
   cap is the real limit. Records Aider's pinned version.
-- F2: Enforces `--edit-format diff` for every model with no exceptions, and a pinned
-  `--model-settings-file`.
+- F2 & D-F1/D-F2: Enforces `--edit-format diff` for every model with no exceptions, and a pinned
+  `--model-settings-file` with `examples_as_sys_msg: true`.
 - F4: Passes `--auto-test --test-cmd "<target test command>" --no-auto-commits`.
 - F7: Uses the fixed prompt template:
   `The test <node id> fails. Make it pass. Don't change any test file.`
-- F9: Passes `--yes-always --no-check-update --analytics-disable --no-suggest-shell-commands`, plus
-  `--llm-history-file` and `--analytics-log`. Executes Aider as the unprivileged `builder` user.
+- F9: Passes `--yes-always --no-check-update --analytics-disable --no-suggest-shell-commands --no-gitignore`,
+  plus `--llm-history-file`, `--chat-history-file`, `--input-history-file`, and `--analytics-log`
+  under `work_root` (outside the workspace). Executes Aider and scoring pytest as the unprivileged
+  `builder` user by default (`use_sudo_builder=True`), refusing non-test runs without it.
 - F10: Passes the target test file via `--read <test file>`, never as an editable file.
-- Section 7: Writes one receipt per run with every required field, including `generations_sha256`,
-  the injected sampling and `chat_template_kwargs`, `call_count`, and `cap_hits`.
+- Section 7 & Amendment E: Writes one receipt per run (including on `aider_timeout` or `score_timeout`),
+  recording `generations_sha256`, injected sampling/kwargs, `transforms`, `reattach_thinking`
+  (`synthetic` and `mismatch` counts, `reattach_max_turns`), `call_count`, and `cap_hits`.
 """
 from __future__ import annotations
 
 import hashlib
 import json
+import re
 import subprocess
 import sys
 import time
@@ -27,9 +31,16 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable
 
-from .contain import BUILDER_USER, builder_env, wrap_as_builder
-from .proxy import DEFAULT_MAX_CALLS, DEFAULT_WALL_LIMIT_S, LoggingProxyServer, ProxyState, load_candidate_config
-from .score import run_pytest_and_score, score_task
+from .contain import BUILDER_USER, builder_env, run_bounded_subprocess, wrap_as_builder
+from .proxy import (
+    DEFAULT_MAX_CALLS,
+    DEFAULT_WALL_LIMIT_S,
+    PINNED_AIDER_VERSION,
+    LoggingProxyServer,
+    ProxyState,
+    load_candidate_config,
+)
+from .score import DEFAULT_SCORE_TIMEOUT_S, run_pytest_and_score
 from .workspace import PreparedWorkspace, TaskSpec, build_workspace, is_test_path, normal_rel_path
 
 MAX_REFLECTIONS = 29
@@ -52,8 +63,12 @@ REQUIRED_RECEIPT_FIELDS = (
     "injected",
     "injected_sampling",
     "injected_kwargs",
+    "transforms",
+    "reattach_max_turns",
+    "reattach_thinking",
     "effort",
     "thinking_tokens",
+    "thinking_words_estimate",
     "output_tokens",
     "prompt_tokens",
     "truncation",
@@ -73,9 +88,11 @@ REQUIRED_RECEIPT_FIELDS = (
     "generations_sha256",
 )
 
+_EXAMPLES_SYS_MSG_TRUE_RE = re.compile(r"^\s*examples_as_sys_msg\s*:\s*true\s*(?:#.*)?$", re.IGNORECASE | re.MULTILINE)
+
 
 class RunnerError(Exception):
-    """Raised when runner inputs, editable files, or receipt fields are invalid."""
+    """Raised when runner inputs, editable files, model settings, or receipt fields are invalid."""
 
 
 def format_task_prompt(node_id: str) -> str:
@@ -91,6 +108,43 @@ def prompt_sha256(prompt_text: str) -> str:
     return hashlib.sha256(prompt_text.encode("utf-8")).hexdigest()
 
 
+def render_model_settings_yaml(served_as: str) -> str:
+    """Render the pinned Aider model-settings YAML for `served_as` (F2, NB1, D-F1, D-F2).
+
+    Pins `examples_as_sys_msg: true` so Aider's few-shot examples arrive as system text rather
+    than fake user/assistant turns across every candidate arm.
+    """
+    model_name = served_as.strip()
+    if not model_name.startswith("openai/"):
+        model_name = f"openai/{model_name}"
+    return (
+        f"- name: {model_name}\n"
+        f"  edit_format: {EDIT_FORMAT}\n"
+        f"  streaming: false\n"
+        f"  examples_as_sys_msg: true\n"
+    )
+
+
+def write_model_settings_file(path: str | Path, served_as: str) -> Path:
+    """Write the pinned Aider model-settings file with `examples_as_sys_msg: true` and return its Path."""
+    p = Path(path)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(render_model_settings_yaml(served_as), encoding="utf-8", newline="\n")
+    return p
+
+
+def validate_model_settings_file(path: str | Path) -> None:
+    """Assert that Aider's model-settings file pins `examples_as_sys_msg: true` (D-F1, D-F2)."""
+    p = Path(path)
+    if not p.is_file():
+        raise RunnerError(f"model_settings_file not found: {p}")
+    text = p.read_text(encoding="utf-8")
+    if not _EXAMPLES_SYS_MSG_TRUE_RE.search(text):
+        raise RunnerError(
+            f"model_settings_file {p} must pin 'examples_as_sys_msg: true' for every candidate (D-F1, D-F2)"
+        )
+
+
 def build_aider_argv(
     *,
     served_as: str,
@@ -100,13 +154,22 @@ def build_aider_argv(
     node_id: str,
     llm_history_file: str | Path,
     analytics_log: str | Path,
+    chat_history_file: str | Path | None = None,
+    input_history_file: str | Path | None = None,
     editable_files: list[str | Path] | None = None,
 ) -> list[str]:
-    """Build the exact Aider CLI argument list (NB1, F2, F4, F7, F9, F10).
+    """Build the exact Aider CLI argument list (NB1, F2, F4, F7, F9, F10, D-F1, D-F2).
 
-    Never passes any test file as an editable file; the target test file is always passed
-    via `--read <test_file>`.
+    - Never passes any test file as an editable file; the target test file is always passed
+      via `--read <test_file>`.
+    - Passes `--no-gitignore` and places `--chat-history-file` and `--input-history-file`
+      outside the workspace (under `work_root`) so Aider's own files never dirty the workspace.
+    - If `model_settings_file` exists on disk, validates that it pins `examples_as_sys_msg: true`.
     """
+    settings_path = Path(model_settings_file)
+    if settings_path.is_file():
+        validate_model_settings_file(settings_path)
+
     norm_test = normal_rel_path(test_file)
     if not norm_test or not is_test_path(norm_test):
         raise RunnerError(f"target test_file must be a test path: {test_file!r}")
@@ -122,6 +185,10 @@ def build_aider_argv(
             )
         edit_list.append(norm_f)
 
+    llm_hist_path = Path(llm_history_file)
+    chat_hist = Path(chat_history_file) if chat_history_file is not None else llm_hist_path.parent / "chat-history.md"
+    input_hist = Path(input_history_file) if input_history_file is not None else llm_hist_path.parent / "input-history"
+
     prompt = format_task_prompt(node_id)
     argv = [
         "--model",
@@ -135,10 +202,15 @@ def build_aider_argv(
         "--test-cmd",
         str(test_cmd),
         "--no-auto-commits",
+        "--no-gitignore",
         "--yes-always",
         "--no-check-update",
         "--analytics-disable",
         "--no-suggest-shell-commands",
+        "--chat-history-file",
+        str(chat_hist),
+        "--input-history-file",
+        str(input_hist),
         "--llm-history-file",
         str(llm_history_file),
         "--analytics-log",
@@ -157,7 +229,8 @@ def build_aider_command(
     python_executable: str = sys.executable,
     max_reflections: int = MAX_REFLECTIONS,
     builder_user: str | None = BUILDER_USER,
-    use_sudo: bool = False,
+    use_sudo: bool = True,
+    env: dict[str, str] | None = None,
     **aider_kwargs: Any,
 ) -> list[str]:
     """Build the full subprocess command invoking our `Coder.create` wrapper with `max_reflections=29`."""
@@ -173,7 +246,7 @@ def build_aider_command(
         *aider_argv,
     ]
     if use_sudo and builder_user:
-        return wrap_as_builder(cmd, builder_user=builder_user, use_sudo=True)
+        return wrap_as_builder(cmd, env=env, builder_user=builder_user, use_sudo=True)
     return cmd
 
 
@@ -225,7 +298,13 @@ def run_aider_entrypoint(
 
 
 def parse_analytics_log(analytics_path: str | Path) -> dict[str, int]:
-    """Read Aider's `--analytics-log` JSONL file for malformed/failed edit and tool counts."""
+    """Read Aider's `--analytics-log` JSONL file for malformed/failed edit and tool counts.
+
+    Note on Aider's `aider/analytics.py`: `Analytics.event()` writes the JSONL entry to
+    `self.logfile` (`--analytics-log`) unconditionally before checking `if not self.ph: return`
+    (which `--analytics-disable` sets to `None`), so local JSONL event logging works even when
+    PostHog telemetry is disabled.
+    """
     p = Path(analytics_path)
     total = malformed = failed = retries = 0
     if not p.is_file():
@@ -255,6 +334,21 @@ def parse_analytics_log(analytics_path: str | Path) -> dict[str, int]:
         "malformed": malformed,
         "failed": failed,
         "retries": retries,
+    }
+
+
+def _failed_grade_for_reason(task: TaskSpec, reason: str) -> dict[str, Any]:
+    """Build a failed grade_result dictionary when Aider or scoring times out."""
+    return {
+        "task_id": task.id,
+        "passed": False,
+        "correct": False,
+        "reasons": [reason],
+        "reason": reason,
+        "counts": {"passed": 0, "failed": 0, "errors": 0, "skipped": 0, "xfail": 0},
+        "baseline": dict(task.baseline),
+        "target_nodes": list(task.target_nodes),
+        "twin_nodes": list(task.twin_nodes),
     }
 
 
@@ -288,13 +382,31 @@ def build_receipt(
     calc_retries = retries if retries is not None else max(0, call_count - 1)
     tc = tool_calls or {"total": call_count, "malformed": 0, "failed": 0}
 
+    transforms = list(proxy_summary.get("transforms") or injected.get("transforms") or [])
+    reattach_max_turns = proxy_summary.get("reattach_max_turns", injected.get("reattach_max_turns"))
+    raw_reattach = proxy_summary.get("reattach_thinking") or {}
+    reattach_thinking = {
+        "reattached": int(raw_reattach.get("reattached", 0)),
+        "synthetic": int(raw_reattach.get("synthetic", 0)),
+        "mismatch": int(raw_reattach.get("mismatch", 0)),
+        "reattach_max_turns": reattach_max_turns,
+    }
+
+    thinking_tokens_raw = proxy_summary.get("thinking_tokens")
+    thinking_tokens: int | None = int(thinking_tokens_raw) if thinking_tokens_raw is not None else None
+    thinking_words_raw = proxy_summary.get("thinking_words_estimate")
+    thinking_words_estimate: int | None = int(thinking_words_raw) if thinking_words_raw is not None else None
+
     full_pins = {
         "parent_commit": task.parent_commit,
         "model_digest": model_digest,
         "candidate_config_sha256": proxy_summary.get("config_sha256", ""),
         "edit_format": EDIT_FORMAT,
+        "examples_as_sys_msg": True,
         "max_reflections": MAX_REFLECTIONS,
         "max_calls": proxy_summary.get("max_calls", DEFAULT_MAX_CALLS),
+        "transforms": transforms,
+        "reattach_max_turns": reattach_max_turns,
         **pins,
     }
 
@@ -314,6 +426,7 @@ def build_receipt(
             "name": "aider",
             "version": aider_version,
             "edit_format": EDIT_FORMAT,
+            "examples_as_sys_msg": True,
             "max_reflections": MAX_REFLECTIONS,
         },
         "harness_version": aider_version,
@@ -322,11 +435,17 @@ def build_receipt(
         "injected": injected,
         "injected_sampling": injected["sampling"],
         "injected_kwargs": injected["chat_template_kwargs"],
+        "transforms": transforms,
+        "reattach_max_turns": reattach_max_turns,
+        "reattach_thinking": reattach_thinking,
+        "synthetic_turns": reattach_thinking["synthetic"],
+        "mismatch_turns": reattach_thinking["mismatch"],
         "effort": {
             "raw_parameter": effort_raw if effort_raw is not None else injected["chat_template_kwargs"],
             "graded": effort_graded,
         },
-        "thinking_tokens": int(proxy_summary["thinking_tokens"]),
+        "thinking_tokens": thinking_tokens,
+        "thinking_words_estimate": thinking_words_estimate,
         "output_tokens": int(proxy_summary["output_tokens"]),
         "prompt_tokens": int(proxy_summary["prompt_tokens"]),
         "truncation": {
@@ -387,11 +506,14 @@ class RunTaskConfig:
     work_root: Path
     receipt_path: Path
     machine_line: dict[str, Any]
+    candidate: str | None = None
     pins: dict[str, Any] = field(default_factory=dict)
     editable_files: list[str] | None = None
     max_calls: int = DEFAULT_MAX_CALLS
     wall_limit_s: float = DEFAULT_WALL_LIMIT_S
-    use_sudo_builder: bool = False
+    score_timeout_s: float = DEFAULT_SCORE_TIMEOUT_S
+    use_sudo_builder: bool = True
+    _test_allow_uncontained: bool = False
     peak_vram_mib: float | None = None
     energy_joules: float | None = None
 
@@ -402,12 +524,27 @@ def run_single_task(
     aider_runner: Callable[[list[str], Path, dict[str, str]], int] | None = None,
     scorer_fn: Callable[[TaskSpec, PreparedWorkspace], dict] | None = None,
 ) -> dict[str, Any]:
-    """Run one J2 task end-to-end: workspace -> proxy -> Aider -> score -> receipt."""
+    """Run one J2 task end-to-end: workspace -> proxy -> Aider -> score -> receipt.
+
+    - Refuses non-test runs when `cfg.use_sudo_builder` is False (F9).
+    - Validates that `cfg.model_settings_file` pins `examples_as_sys_msg: true` (D-F1, D-F2).
+    - Catches `subprocess.TimeoutExpired` from Aider (`aider_timeout`) or scoring (`score_timeout`),
+      killing the process group and always writing a failed receipt.
+    """
+    if not cfg.use_sudo_builder and not cfg._test_allow_uncontained:
+        raise RunnerError("refusing non-test run with use_sudo_builder=False (F9 containment required)")
+
     cfg.work_root.mkdir(parents=True, exist_ok=True)
+    if not cfg.model_settings_file.exists():
+        write_model_settings_file(cfg.model_settings_file, cfg.served_as)
+    validate_model_settings_file(cfg.model_settings_file)
+
     ws_dir = cfg.work_root / f"ws-{cfg.task.id}"
     home_dir = cfg.work_root / f"home-{cfg.task.id}"
     gen_path = cfg.work_root / f"generations-{cfg.task.id}.jsonl"
     llm_history = cfg.work_root / f"llm-history-{cfg.task.id}.md"
+    chat_history = cfg.work_root / f"chat-history-{cfg.task.id}.md"
+    input_history = cfg.work_root / f"input-history-{cfg.task.id}"
     analytics_log = cfg.work_root / f"analytics-{cfg.task.id}.jsonl"
 
     prepared = build_workspace(
@@ -417,7 +554,7 @@ def run_single_task(
         home_dir=home_dir,
     )
 
-    cand_cfg = load_candidate_config(cfg.candidate_config_path)
+    cand_cfg = load_candidate_config(cfg.candidate_config_path, candidate=cfg.candidate or cfg.served_as)
     state = ProxyState(
         upstream_url=cfg.upstream_url,
         config=cand_cfg,
@@ -426,6 +563,7 @@ def run_single_task(
         wall_limit_s=cfg.wall_limit_s,
     )
 
+    aider_timed_out = False
     t0 = time.monotonic()
     with LoggingProxyServer(state) as proxy_srv:
         env = builder_env(proxy_port=proxy_srv.port, home_dir=prepared.home_dir)
@@ -437,35 +575,48 @@ def run_single_task(
             test_file=cfg.task.test_file,
             node_id=cfg.task.target_node_id,
             llm_history_file=llm_history,
+            chat_history_file=chat_history,
+            input_history_file=input_history,
             analytics_log=analytics_log,
             editable_files=edit_files,
             use_sudo=cfg.use_sudo_builder,
+            env=env,
         )
-        if aider_runner is not None:
-            aider_runner(cmd, prepared.workspace_dir, env)
-        else:  # pragma: no cover (external VM execution)
-            subprocess.run(
-                cmd,
-                cwd=str(prepared.workspace_dir),
-                env=env,
-                capture_output=True,
-                text=True,
-                check=False,
-                timeout=int(cfg.wall_limit_s) + 30,
-            )
+        try:
+            if aider_runner is not None:
+                aider_runner(cmd, prepared.workspace_dir, env)
+            else:
+                run_bounded_subprocess(
+                    cmd,
+                    cwd=prepared.workspace_dir,
+                    env=env,
+                    timeout=float(cfg.wall_limit_s) + 30.0,
+                )
+        except subprocess.TimeoutExpired:
+            aider_timed_out = True
     wall_s = time.monotonic() - t0
 
     # Score ONLY after Aider has exited and the proxy has closed.
-    if scorer_fn is not None:
-        grade_res = scorer_fn(cfg.task, prepared)
-    else:  # pragma: no cover (VM pytest execution)
-        grade_res = run_pytest_and_score(
-            cfg.task,
-            prepared.workspace_dir,
-            prepared.pre_test_hashes,
-            env=prepared.env,
-            aider_running=False,
-        )
+    if aider_timed_out:
+        grade_res = _failed_grade_for_reason(cfg.task, "aider_timeout")
+    else:
+        try:
+            if scorer_fn is not None:
+                grade_res = scorer_fn(cfg.task, prepared)
+            else:
+                grade_res = run_pytest_and_score(
+                    cfg.task,
+                    prepared.workspace_dir,
+                    prepared.pre_test_hashes,
+                    env=env,
+                    aider_running=False,
+                    use_sudo_builder=cfg.use_sudo_builder,
+                    proxy_port=proxy_srv.port,
+                    timeout=cfg.score_timeout_s,
+                    _test_allow_uncontained=cfg._test_allow_uncontained,
+                )
+        except subprocess.TimeoutExpired:
+            grade_res = _failed_grade_for_reason(cfg.task, "score_timeout")
 
     analytics = parse_analytics_log(analytics_log)
     summary = state.summary()
@@ -506,7 +657,9 @@ def main(argv: list[str] | None = None) -> int:
                 idx += 1
         aider_args = args[idx:]
         return run_aider_entrypoint(aider_args, max_reflections=max_refl)
-    raise RunnerError("usage: python -m mcptoolshop_rnd.localbuilders.runner --aider-entrypoint [--max-reflections 29] -- <aider args>")
+    raise RunnerError(
+        "usage: python -m mcptoolshop_rnd.localbuilders.runner --aider-entrypoint [--max-reflections 29] -- <aider args>"
+    )
 
 
 if __name__ == "__main__":

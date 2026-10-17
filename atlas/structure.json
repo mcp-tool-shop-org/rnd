@@ -4538,7 +4538,7 @@
       "dynamicReads": 13,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
-      "dynamicWrites": 8,
+      "dynamicWrites": 9,
       "entryPoints": [
         "mcptoolshop_rnd/cli.py"
       ],
@@ -4546,7 +4546,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "8e8784834a5c9906ef04c9f9648e3ffa8ef045222665c2d52fbcd07c1095b0bc",
+          "hash": "ac268c0e5997065d66a3e05e0a5a46e3ef100ad887382f63fb2178d0cfefc1cc",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -5497,184 +5497,223 @@
             {
               "in": "iptables_commands",
               "kind": "raise",
-              "line": 103
+              "line": 104
             },
             {
               "in": "kill_process_group",
               "kind": "except",
-              "line": 271
+              "line": 272
             },
             {
               "in": "kill_process_group",
               "kind": "except",
-              "line": 274
+              "line": 275
             },
             {
               "in": "kill_process_group",
               "kind": "except",
-              "line": 278
+              "line": 279
             },
             {
               "in": "run_bounded_subprocess",
               "kind": "except",
-              "line": 305
+              "line": 306
             },
             {
               "in": "run_bounded_subprocess",
               "kind": "raise",
-              "line": 307
+              "line": 308
             },
             {
               "in": "apply_vm_containment",
               "kind": "raise",
-              "line": 321
+              "line": 322
             },
             {
               "in": "apply_vm_containment",
               "kind": "raise",
-              "line": 332
+              "line": 333
             },
             {
               "in": "apply_vm_containment",
               "kind": "raise",
-              "line": 344
+              "line": 345
             },
             {
               "in": "apply_vm_containment",
               "kind": "raise",
-              "line": 348
+              "line": 349
             }
           ],
-          "hash": "80bc357056e1c97c1c4aeced8ef5c788a83d1271e72d6b21968b0b9b29ae3e7a",
+          "hash": "95f84f84e90940d05432e52ef5ef2d4b8f733818a2c8739a139cb3fedda696f1",
           "path": "mcptoolshop_rnd/localbuilders/contain.py"
         },
         {
           "exports": [
             "assert_top_logprobs",
             "build_minimal_gguf_with_template",
+            "check_aider_version_gate",
             "check_gguf_template",
             "check_thinking_split",
             "compute_j2_context",
             "compute_j2_context_length",
             "evaluate_candidate_fit",
+            "get_installed_aider_version",
+            "load_installed_aider_prompts",
             "main",
             "next_power_of_two",
             "parse_kv_cache_log",
-            "read_gguf_chat_template"
+            "read_gguf_chat_template",
+            "verify_installed_aider"
           ],
           "failurePaths": [
             {
-              "in": "_max_tokens_for_single_run",
+              "in": "get_installed_aider_version",
+              "kind": "except",
+              "line": 87
+            },
+            {
+              "in": "get_installed_aider_version",
               "kind": "raise",
-              "line": 106
+              "line": 88
+            },
+            {
+              "in": "check_aider_version_gate",
+              "kind": "raise",
+              "line": 96
+            },
+            {
+              "in": "load_installed_aider_prompts",
+              "kind": "except",
+              "line": 107
+            },
+            {
+              "in": "load_installed_aider_prompts",
+              "kind": "raise",
+              "line": 108
+            },
+            {
+              "in": "verify_installed_aider",
+              "kind": "except",
+              "line": 140
+            },
+            {
+              "in": "verify_installed_aider",
+              "kind": "raise",
+              "line": 141
             },
             {
               "in": "_max_tokens_for_single_run",
               "kind": "raise",
-              "line": 111
+              "line": 179
             },
             {
               "in": "_max_tokens_for_single_run",
               "kind": "raise",
-              "line": 126
+              "line": 184
+            },
+            {
+              "in": "_max_tokens_for_single_run",
+              "kind": "raise",
+              "line": 199
             },
             {
               "in": "compute_j2_context_length",
               "kind": "raise",
-              "line": 151
+              "line": 224
             },
             {
               "in": "compute_j2_context_length",
               "kind": "raise",
-              "line": 159
+              "line": 232
             },
             {
               "in": "compute_j2_context_length",
               "kind": "raise",
-              "line": 163
+              "line": 236
             },
             {
               "in": "compute_j2_context_length",
               "kind": "raise",
-              "line": 168
+              "line": 241
             },
             {
               "in": "compute_j2_context_length",
               "kind": "raise",
-              "line": 171
+              "line": 244
             },
             {
               "in": "compute_j2_context_length",
               "kind": "raise",
-              "line": 173
+              "line": 246
             },
             {
               "in": "_read_exact",
               "kind": "raise",
-              "line": 250
+              "line": 323
             },
             {
               "in": "_skip_gguf_value",
               "kind": "raise",
-              "line": 277
+              "line": 350
             },
             {
               "in": "check_gguf_template",
               "kind": "except",
-              "line": 315
+              "line": 388
             },
             {
               "in": "assert_top_logprobs",
               "kind": "raise",
-              "line": 405
+              "line": 478
             },
             {
               "in": "assert_top_logprobs",
               "kind": "raise",
-              "line": 408
+              "line": 481
             },
             {
               "in": "assert_top_logprobs",
               "kind": "raise",
-              "line": 416
+              "line": 489
             },
             {
               "in": "assert_top_logprobs",
               "kind": "raise",
-              "line": 425
+              "line": 498
             },
             {
               "in": "assert_top_logprobs",
               "kind": "raise",
-              "line": 427
+              "line": 500
             },
             {
               "in": "evaluate_candidate_fit",
               "kind": "raise",
-              "line": 492
+              "line": 565
             },
             {
               "in": "evaluate_candidate_fit",
               "kind": "raise",
-              "line": 501
+              "line": 575
             },
             {
               "in": "evaluate_candidate_fit",
               "kind": "raise",
-              "line": 510
+              "line": 584
             },
             {
               "in": "evaluate_candidate_fit",
               "kind": "raise",
-              "line": 516
+              "line": 590
             },
             {
               "in": "evaluate_candidate_fit",
               "kind": "raise",
-              "line": 519
+              "line": 593
             }
           ],
-          "hash": "86e016310398ac64c2a734a523ab47b71820f750d6bb379ba111f4846df51b75",
+          "hash": "5cc15cd226be86b33a3e4e7677c762b6ab8efca956b90f6b4b6371fc9c3be419",
           "importsFiles": [
             "mcptoolshop_rnd/localbuilders/proxy.py"
           ],
@@ -5682,6 +5721,7 @@
         },
         {
           "exports": [
+            "is_allowed_outside_write",
             "main",
             "run_probe"
           ],
@@ -5689,45 +5729,75 @@
             {
               "in": "_attempt_raw_socket_external",
               "kind": "except",
-              "line": 77
+              "line": 99
             },
             {
               "in": "_attempt_dns_resolution",
               "kind": "except",
-              "line": 86
+              "line": 108
             },
             {
               "in": "_attempt_direct_llama_server",
               "kind": "except",
-              "line": 132
+              "line": 154
             },
             {
               "in": "_attempt_read_dir",
               "kind": "except",
-              "line": 154
+              "line": 176
+            },
+            {
+              "in": "_check_single_history_file_access",
+              "kind": "except",
+              "line": 188
+            },
+            {
+              "in": "_check_single_history_file_access",
+              "kind": "except",
+              "line": 195
+            },
+            {
+              "in": "_check_single_history_file_access",
+              "kind": "except",
+              "line": 203
+            },
+            {
+              "in": "_check_single_history_file_access",
+              "kind": "except",
+              "line": 206
             },
             {
               "in": "_attempt_write_outside_workspace",
               "kind": "except",
-              "line": 165
+              "line": 228
             },
             {
               "in": "_attempt_write_outside_workspace",
               "kind": "except",
-              "line": 168
+              "line": 231
+            },
+            {
+              "in": "_attempt_write_outside_workspace",
+              "kind": "except",
+              "line": 251
+            },
+            {
+              "in": "_attempt_write_outside_workspace",
+              "kind": "except",
+              "line": 254
             },
             {
               "in": "_evaluate_attempt",
               "kind": "except",
-              "line": 200
+              "line": 286
             },
             {
               "in": "run_probe",
               "kind": "raise",
-              "line": 225
+              "line": 311
             }
           ],
-          "hash": "af80c41686dc44b41e883eaa017ce8554ccb35f56a3ba2cf2e83880108c61079",
+          "hash": "770574724b905707a55a1e035d43ae183348ecb314b055d301498f6a64f278c4",
           "path": "mcptoolshop_rnd/localbuilders/probe.py"
         },
         {
@@ -5745,110 +5815,115 @@
             {
               "in": "verify_aider_synthetic_strings",
               "kind": "raise",
-              "line": 90
+              "line": 97
             },
             {
               "in": "verify_aider_synthetic_strings",
               "kind": "raise",
-              "line": 104
+              "line": 102
             },
             {
               "in": "verify_aider_synthetic_strings",
               "kind": "raise",
-              "line": 108
+              "line": 124
             },
             {
-              "in": "__post_init__",
+              "in": "verify_aider_synthetic_strings",
               "kind": "raise",
               "line": 128
             },
             {
               "in": "__post_init__",
               "kind": "raise",
-              "line": 134
+              "line": 148
+            },
+            {
+              "in": "__post_init__",
+              "kind": "raise",
+              "line": 154
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 166
+              "line": 186
             },
             {
               "in": "load_candidate_config",
               "kind": "except",
-              "line": 171
+              "line": 191
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 172
+              "line": 192
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 174
+              "line": 194
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 180
+              "line": 200
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 185
+              "line": 205
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 198
+              "line": 218
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 207
+              "line": 227
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 213
+              "line": 233
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 216
+              "line": 236
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 220
+              "line": 240
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 224
+              "line": 244
             },
             {
               "in": "apply_fold_system",
               "kind": "raise",
-              "line": 312
+              "line": 332
             },
             {
               "in": "transform_request_body",
               "kind": "raise",
-              "line": 556
+              "line": 576
             },
             {
               "in": "handle_completion",
               "kind": "except",
-              "line": 746
+              "line": 766
             },
             {
               "in": "do_POST",
               "kind": "except",
-              "line": 929
+              "line": 949
             }
           ],
-          "hash": "15424413bae15f990891df185fc6be94e49730f2ccec20ac45a5804307a2f325",
+          "hash": "cfe7f08bbd3206e191b401b1cc7da1e5906239157b280e40dd2bab3f8b5e755a",
           "path": "mcptoolshop_rnd/localbuilders/proxy.py"
         },
         {
@@ -5860,6 +5935,7 @@
             "format_task_prompt",
             "main",
             "parse_analytics_log",
+            "prepare_task_history_files",
             "prompt_sha256",
             "render_model_settings_yaml",
             "run_aider_entrypoint",
@@ -5870,84 +5946,115 @@
           ],
           "failurePaths": [
             {
+              "in": "_default_chown_builder",
+              "kind": "except",
+              "line": 112
+            },
+            {
               "in": "format_task_prompt",
               "kind": "raise",
-              "line": 102
+              "line": 153
             },
             {
               "in": "validate_model_settings_file",
               "kind": "raise",
-              "line": 140
+              "line": 191
             },
             {
               "in": "validate_model_settings_file",
               "kind": "raise",
-              "line": 143
+              "line": 194
             },
             {
               "in": "build_aider_argv",
               "kind": "raise",
-              "line": 175
+              "line": 226
             },
             {
               "in": "build_aider_argv",
               "kind": "raise",
-              "line": 183
+              "line": 234
             },
             {
               "in": "parse_analytics_log",
               "kind": "except",
-              "line": 318
+              "line": 369
             },
             {
               "in": "validate_receipt",
               "kind": "raise",
-              "line": 482
+              "line": 539
             },
             {
               "in": "validate_receipt",
               "kind": "raise",
-              "line": 484
+              "line": 541
             },
             {
               "in": "validate_receipt",
               "kind": "raise",
-              "line": 486
+              "line": 545
             },
             {
               "in": "validate_receipt",
               "kind": "raise",
-              "line": 488
+              "line": 547
             },
             {
               "in": "validate_receipt",
               "kind": "raise",
-              "line": 490
+              "line": 549
+            },
+            {
+              "in": "validate_receipt",
+              "kind": "raise",
+              "line": 551
+            },
+            {
+              "in": "validate_receipt",
+              "kind": "raise",
+              "line": 553
             },
             {
               "in": "run_single_task",
               "kind": "raise",
-              "line": 535
+              "line": 602
+            },
+            {
+              "in": "run_single_task",
+              "kind": "raise",
+              "line": 604
             },
             {
               "in": "run_single_task",
               "kind": "except",
-              "line": 595
+              "line": 609
+            },
+            {
+              "in": "run_single_task",
+              "kind": "raise",
+              "line": 610
             },
             {
               "in": "run_single_task",
               "kind": "except",
-              "line": 618
+              "line": 670
+            },
+            {
+              "in": "run_single_task",
+              "kind": "except",
+              "line": 693
             },
             {
               "in": "main",
               "kind": "raise",
-              "line": 660
+              "line": 736
             }
           ],
-          "hash": "b98689bd2c73c88f3346a724b8938a5a597cbe2065b36b2ae32f3c48e9d15abe",
+          "hash": "5c7055de57c828d7f78e4294506f244e026ed7fc369f5064a5a329d1d9f009dc",
           "importsFiles": [
             "mcptoolshop_rnd/localbuilders/contain.py",
+            "mcptoolshop_rnd/localbuilders/preflight.py",
             "mcptoolshop_rnd/localbuilders/proxy.py",
             "mcptoolshop_rnd/localbuilders/score.py",
             "mcptoolshop_rnd/localbuilders/workspace.py"
@@ -5999,15 +6106,15 @@
             {
               "in": "run_pytest_and_score",
               "kind": "except",
-              "line": 494
+              "line": 495
             },
             {
               "in": "run_pytest_and_score",
               "kind": "raise",
-              "line": 508
+              "line": 509
             }
           ],
-          "hash": "2310e0eb640a73eea5db1b5cbdb60ee8ac1bce38e99170ffe69ff1404dcde517",
+          "hash": "e3f2a8de0ef82fc1abf2908711e71cca894cb90cf3f575dffd22332e06243d7e",
           "importsFiles": [
             "mcptoolshop_rnd/localbuilders/contain.py",
             "mcptoolshop_rnd/localbuilders/workspace.py"
@@ -6380,11 +6487,11 @@
       "origin": "authored",
       "outsidePlaces": [
         {
-          "reads": 37,
+          "reads": 38,
           "where": [
             "caller"
           ],
-          "writes": 12
+          "writes": 15
         },
         {
           "reads": 2,
@@ -6408,8 +6515,8 @@
           "writes": 0
         }
       ],
-      "outsideReads": 42,
-      "outsideWrites": 12,
+      "outsideReads": 43,
+      "outsideWrites": 15,
       "role": "code",
       "testRunners": [
         "unittest"
@@ -6490,7 +6597,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "e969550727d8aef017aa9798bfba4c65a0b9373e8394c47c9e1941b1e3233af6",
+          "hash": "eb9fb677356772af439d7bb12ac227431e9f8c89bee88e868d3b06db755f5ba3",
           "path": "CHANGELOG.md"
         },
         {
@@ -7161,7 +7268,7 @@
           "testFramework": "unittest"
         },
         {
-          "hash": "5c4d27cac77fb55910d61715e562ed26df9a4931b5c910327ca85b32b0efe518",
+          "hash": "ddd57c02e79ead85799f58595e79da6bcdbac6c95c6505d5cb8d14fca1e38f99",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/abmine.py",
@@ -7995,7 +8102,7 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "e7255b5bf7fef3904a188c231fd807d1bfabe24e",
+    "commit": "fd128b82b339971a7c4dba10a17e191ec81f79d2",
     "tracked": 824
   },
   "landings": [

@@ -23,7 +23,9 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -32,6 +34,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 from .contain import BUILDER_USER, builder_env, run_bounded_subprocess, wrap_as_builder
+from .preflight import PreflightError, verify_installed_aider
 from .proxy import (
     DEFAULT_MAX_CALLS,
     DEFAULT_WALL_LIMIT_S,
@@ -48,6 +51,11 @@ EDIT_FORMAT = "diff"
 TASK_PROMPT_TEMPLATE = "The test {node_id} fails. Make it pass. Don't change any test file."
 DEFAULT_PARTITION = "trial:j2-wave1"
 
+HISTORY_DIR_MODE = 0o711
+HISTORY_FILE_MODE = 0o600
+CHAT_HISTORY_FILENAME = "chat-history.md"
+INPUT_HISTORY_FILENAME = "input-history"
+
 REQUIRED_RECEIPT_FIELDS = (
     "partition",
     "task_id",
@@ -58,6 +66,8 @@ REQUIRED_RECEIPT_FIELDS = (
     "model_digest",
     "harness",
     "harness_version",
+    "aider_version",
+    "synthetic_strings_verified",
     "prompt_hash",
     "pins",
     "injected",
@@ -93,6 +103,47 @@ _EXAMPLES_SYS_MSG_TRUE_RE = re.compile(r"^\s*examples_as_sys_msg\s*:\s*true\s*(?
 
 class RunnerError(Exception):
     """Raised when runner inputs, editable files, model settings, or receipt fields are invalid."""
+
+
+def _default_chown_builder(path: Path, builder_user: str) -> None:
+    """Chown `path` to `builder_user` when supported by the OS and user table."""
+    try:
+        shutil.chown(path, user=builder_user)
+    except (LookupError, PermissionError, AttributeError, NotImplementedError, OSError):
+        pass
+
+
+def prepare_task_history_files(
+    history_dir: str | Path,
+    *,
+    builder_user: str = BUILDER_USER,
+    chown_fn: Callable[[Path, str], None] | None = None,
+    chmod_fn: Callable[[Path, int], None] | None = None,
+) -> tuple[Path, Path]:
+    """Create per-task `chat-history.md` and `input-history` owned by `builder` (`0600`) in an un-listable directory (`0711`).
+
+    The parent directory is set to mode `0711` (`rwx--x--x`) so `builder` can traverse into it to open
+    the two known filenames (`chat-history.md` and `input-history`, mode `0600`, owned by `builder`),
+    while `os.listdir(history_dir)` and creating any other file in `history_dir` are refused.
+    """
+    hdir = Path(history_dir).resolve()
+    hdir.mkdir(parents=True, exist_ok=True)
+    do_chmod = chmod_fn or os.chmod
+    do_chown = chown_fn or _default_chown_builder
+
+    if hdir.parent.exists():
+        do_chmod(hdir.parent, HISTORY_DIR_MODE)
+    do_chmod(hdir, HISTORY_DIR_MODE)
+
+    chat_history = hdir / CHAT_HISTORY_FILENAME
+    input_history = hdir / INPUT_HISTORY_FILENAME
+    for fpath in (chat_history, input_history):
+        if not fpath.exists():
+            fpath.write_text("", encoding="utf-8")
+        do_chmod(fpath, HISTORY_FILE_MODE)
+        do_chown(fpath, builder_user)
+
+    return chat_history, input_history
 
 
 def format_task_prompt(node_id: str) -> str:
@@ -363,6 +414,7 @@ def build_receipt(
     grade_result: dict[str, Any],
     wall_time_s: float,
     machine_line: dict[str, Any],
+    synthetic_strings_verified: bool = True,
     effort_raw: Any = None,
     effort_graded: str = "unsupported",
     peak_vram_mib: float | None = None,
@@ -401,6 +453,8 @@ def build_receipt(
         "parent_commit": task.parent_commit,
         "model_digest": model_digest,
         "candidate_config_sha256": proxy_summary.get("config_sha256", ""),
+        "aider_version": aider_version,
+        "synthetic_strings_verified": bool(synthetic_strings_verified),
         "edit_format": EDIT_FORMAT,
         "examples_as_sys_msg": True,
         "max_reflections": MAX_REFLECTIONS,
@@ -425,11 +479,14 @@ def build_receipt(
         "harness": {
             "name": "aider",
             "version": aider_version,
+            "synthetic_strings_verified": bool(synthetic_strings_verified),
             "edit_format": EDIT_FORMAT,
             "examples_as_sys_msg": True,
             "max_reflections": MAX_REFLECTIONS,
         },
         "harness_version": aider_version,
+        "aider_version": aider_version,
+        "synthetic_strings_verified": bool(synthetic_strings_verified),
         "prompt_hash": p_hash,
         "pins": full_pins,
         "injected": injected,
@@ -480,6 +537,12 @@ def validate_receipt(receipt: dict[str, Any]) -> None:
     missing = [field for field in REQUIRED_RECEIPT_FIELDS if field not in receipt]
     if missing:
         raise RunnerError(f"receipt missing required section-7 field(s): {missing}")
+    if str(receipt.get("aider_version", "")).strip() != PINNED_AIDER_VERSION:
+        raise RunnerError(
+            f"receipt aider_version must be {PINNED_AIDER_VERSION!r}; got {receipt.get('aider_version')!r}"
+        )
+    if receipt.get("synthetic_strings_verified") is not True:
+        raise RunnerError("receipt synthetic_strings_verified must be True")
     if not receipt.get("generations_sha256") or len(str(receipt["generations_sha256"])) != 64:
         raise RunnerError("receipt generations_sha256 must be a 64-character sha256 hex digest")
     if not isinstance(receipt.get("injected"), dict):
@@ -527,12 +590,24 @@ def run_single_task(
     """Run one J2 task end-to-end: workspace -> proxy -> Aider -> score -> receipt.
 
     - Refuses non-test runs when `cfg.use_sudo_builder` is False (F9).
+    - Verifies the installed Aider version (`0.86.1`) and synthetic reply strings on `CoderPrompts`
+      and `EditBlockPrompts` before launching Aider.
+    - Creates the two per-task history files (`work_root/history-<task>/chat-history.md` and
+      `input-history`) owned by `builder` (`0600`) inside a `0711` directory `builder` cannot list.
     - Validates that `cfg.model_settings_file` pins `examples_as_sys_msg: true` (D-F1, D-F2).
     - Catches `subprocess.TimeoutExpired` from Aider (`aider_timeout`) or scoring (`score_timeout`),
       killing the process group and always writing a failed receipt.
     """
     if not cfg.use_sudo_builder and not cfg._test_allow_uncontained:
         raise RunnerError("refusing non-test run with use_sudo_builder=False (F9 containment required)")
+    if str(cfg.aider_version).strip() != PINNED_AIDER_VERSION:
+        raise RunnerError(
+            f"cfg.aider_version {cfg.aider_version!r} does not match pinned {PINNED_AIDER_VERSION!r}"
+        )
+    try:
+        aider_check = verify_installed_aider()
+    except PreflightError as exc:
+        raise RunnerError(str(exc)) from exc
 
     cfg.work_root.mkdir(parents=True, exist_ok=True)
     if not cfg.model_settings_file.exists():
@@ -541,10 +616,10 @@ def run_single_task(
 
     ws_dir = cfg.work_root / f"ws-{cfg.task.id}"
     home_dir = cfg.work_root / f"home-{cfg.task.id}"
+    history_dir = cfg.work_root / f"history-{cfg.task.id}"
+    chat_history, input_history = prepare_task_history_files(history_dir)
     gen_path = cfg.work_root / f"generations-{cfg.task.id}.jsonl"
     llm_history = cfg.work_root / f"llm-history-{cfg.task.id}.md"
-    chat_history = cfg.work_root / f"chat-history-{cfg.task.id}.md"
-    input_history = cfg.work_root / f"input-history-{cfg.task.id}"
     analytics_log = cfg.work_root / f"analytics-{cfg.task.id}.jsonl"
 
     prepared = build_workspace(
@@ -624,7 +699,8 @@ def run_single_task(
         task=cfg.task,
         model_tag=cfg.model_tag,
         model_digest=cfg.model_digest,
-        aider_version=cfg.aider_version,
+        aider_version=aider_check["aider_version"],
+        synthetic_strings_verified=bool(aider_check["synthetic_strings_verified"]),
         pins=cfg.pins,
         proxy_summary=summary,
         grade_result=grade_res,

@@ -48,10 +48,32 @@ class ProbePaths:
     bank_dir: Path
     twins_dir: Path
     receipts_dir: Path
+    chat_history_file: Path | None = None
+    input_history_file: Path | None = None
     llama_port: int = 18081
     external_ip: str = "93.184.216.34"
     external_port: int = 443
     dns_host: str = "example.com"
+
+    def allowed_outside_write_paths(self) -> tuple[Path, ...]:
+        """Return the exact two history file paths (`chat-history.md` and `input-history`) allowed outside `workspace_dir`."""
+        ws_resolved = Path(self.workspace_dir).resolve()
+        allowed: list[Path] = []
+        if self.chat_history_file is not None:
+            p_chat = Path(self.chat_history_file).resolve()
+            if p_chat.name == "chat-history.md" and not p_chat.is_relative_to(ws_resolved):
+                allowed.append(p_chat)
+        if self.input_history_file is not None:
+            p_inp = Path(self.input_history_file).resolve()
+            if p_inp.name == "input-history" and not p_inp.is_relative_to(ws_resolved):
+                allowed.append(p_inp)
+        return tuple(allowed)
+
+
+def is_allowed_outside_write(paths: ProbePaths, target_path: str | Path) -> bool:
+    """Return True if `target_path` is one of the two allowed per-task history files (`chat-history.md` or `input-history`)."""
+    resolved_target = Path(target_path).resolve()
+    return resolved_target in paths.allowed_outside_write_paths()
 
 
 def _attempt_curl_https(paths: ProbePaths) -> tuple[bool, str]:
@@ -155,8 +177,72 @@ def _attempt_read_dir(target: Path, label: str) -> tuple[bool, str]:
         return False, f"refused ({exc})"
 
 
-def _attempt_write_outside_workspace(paths: ProbePaths) -> tuple[bool, str]:
-    """Attempt to write a file outside the task workspace."""
+def _check_single_history_file_access(hist_file: Path) -> tuple[bool, str]:
+    """Verify `builder` can append to `hist_file`, cannot list `hist_file.parent`, and cannot write any other file there.
+
+    Returns `(breach_occurred, detail)`.
+    """
+    try:
+        with open(hist_file, "a", encoding="utf-8") as f:
+            f.write("")
+    except OSError as exc:
+        return True, f"history file not writable by builder: {hist_file} ({exc})"
+
+    parent_dir = hist_file.parent
+    try:
+        _ = list(os.listdir(parent_dir))
+        return True, f"listed history directory {parent_dir} (must not be listable by builder)"
+    except OSError:
+        pass
+
+    sibling_probe = parent_dir / ".j2-containment-probe-write"
+    try:
+        sibling_probe.write_text("breach\n", encoding="utf-8")
+        try:
+            sibling_probe.unlink()
+        except OSError:  # pragma: no cover
+            pass
+        return True, f"wrote non-history file inside history directory at {sibling_probe}"
+    except OSError:
+        return False, f"allowed history file writable and parent directory locked at {hist_file}"
+
+
+def _attempt_write_outside_workspace(
+    paths: ProbePaths,
+    target_path: str | Path | None = None,
+) -> tuple[bool, str]:
+    """Attempt to write outside the task workspace, allowing ONLY the two per-task history files (`chat-history.md` and `input-history`).
+
+    Returns `(action_succeeded_breach, detail)` where `False` means containment held (allowed history
+    writes succeeded while all other outside writes and history-directory listing were refused) and
+    `True` means a breach or misconfigured history permission occurred.
+    """
+    if target_path is not None:
+        target = Path(target_path).resolve()
+        if is_allowed_outside_write(paths, target):
+            return _check_single_history_file_access(target)
+        try:
+            target.write_text("breach\n", encoding="utf-8")
+            try:
+                target.unlink()
+            except OSError:  # pragma: no cover
+                pass
+            return True, f"wrote outside workspace at {target}"
+        except OSError as exc:
+            return False, f"refused ({exc})"
+
+    if paths.chat_history_file is not None or paths.input_history_file is not None:
+        allowed = paths.allowed_outside_write_paths()
+        if len(allowed) != 2:
+            return (
+                True,
+                "both chat-history.md and input-history outside the workspace are required when history files are configured",
+            )
+        for hist_file in allowed:
+            breach, detail = _check_single_history_file_access(hist_file)
+            if breach:
+                return True, detail
+
     probe_file = Path(paths.outside_dir) / ".j2-containment-probe-write"
     try:
         probe_file.write_text("breach\n", encoding="utf-8")
@@ -253,6 +339,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--bank", default="/root/j2/bank", help="Protected task bank directory")
     parser.add_argument("--twins", default="/root/j2/twins", help="Protected held-out twins directory")
     parser.add_argument("--receipts", default="/root/j2/receipts", help="Protected receipts directory")
+    parser.add_argument("--chat-history-file", default=None, help="Per-task chat-history.md path allowed for builder")
+    parser.add_argument("--input-history-file", default=None, help="Per-task input-history path allowed for builder")
     parser.add_argument("--llama-port", type=int, default=18081, help="llama-server loopback port")
     args = parser.parse_args(argv)
 
@@ -262,6 +350,8 @@ def main(argv: list[str] | None = None) -> int:
         bank_dir=Path(args.bank),
         twins_dir=Path(args.twins),
         receipts_dir=Path(args.receipts),
+        chat_history_file=Path(args.chat_history_file) if args.chat_history_file else None,
+        input_history_file=Path(args.input_history_file) if args.input_history_file else None,
         llama_port=args.llama_port,
     )
     report = run_probe(paths)

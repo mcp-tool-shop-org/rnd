@@ -448,6 +448,7 @@ def run_pytest_and_score(
         if env is not None and "PIP_NO_INDEX" in env
         else builder_env(proxy_port=proxy_port, home_dir=root.parent / f".score-home-{spec.id}", base_env=env)
     )
+    run_env["CUDA_VISIBLE_DEVICES"] = ""
 
     # Check workspace integrity BEFORE staging the held-out twin
     integrity_reasons = check_workspace_integrity(

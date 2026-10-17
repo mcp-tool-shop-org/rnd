@@ -11,12 +11,18 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
-## [1.1.11.0.1] - 2026-10-17
+## [1.1.12.0.1] - 2026-10-17
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output
 - Added experiment `agent-ab-harness`
 - Added experiment `local-builders`
 - Added experiment `nemo-relay-trial`
+
+## [1.1.12.0.0] - 2026-10-17
+
+- mcptoolshop_rnd.localbuilders: verify installed Aider 0.86.1 version gate and synthetic assistant strings against real CoderPrompts and EditBlockPrompts in preflight and runner; record aider_version and synthetic_strings_verified on receipts
+- mcptoolshop_rnd.localbuilders: create per-task chat-history.md and input-history owned by builder (0600) in an unlistable directory (0711) before launching Aider, and allow only those two outside-workspace writes in probe
+- mcptoolshop_rnd.localbuilders: set CUDA_VISIBLE_DEVICES='' in builder_env for Aider --auto-test runs and scoring pytest so builder tests see no GPU
 
 ## [1.1.11.0.0] - 2026-10-17
 

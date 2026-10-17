@@ -14,10 +14,6 @@ NANO an ordinary library update (entries filed or revised, results added).
 ## [1.1.12.0.2] - 2026-10-17
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output
-- Added experiment `agent-ab-harness`
-- Added experiment `local-builders`
-- Added experiment `nemo-relay-trial`
-- Updated experiment `stage1-regeneration`
 
 ## [1.1.12.0.1] - 2026-10-17
 

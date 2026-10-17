@@ -47,9 +47,9 @@ R&D settles the details:
    answer and R&D's re-read establish one. Its outputs come only from licence-proven models.
 2. **Challengers:** the same pipeline, prompts (pinned hashes), slot plans, gates, retry cap and critic. **Only the
    writer model changes.** The harness is fixed, so the writer is the variable (A/B template, section 3).
-3. **Writer eligibility:** J1 now selects the regeneration's writer, so a challenger must itself be licence-proven.
-   The Apache-2.0-only models (Qwen, Gemma 4, Granite) enter J1 only if the maintainer rules that Apache-2.0's grant
-   is proof enough. That ruling bears on J2 too, which uses model-written code.
+3. **Writer eligibility:** J1 selects the regeneration's writer, so a challenger's licence must not restrict
+   training on its outputs. Under the reworded rule (2026-10-16), the Apache-2.0 models (Qwen, Gemma 4 subject to
+   its use policy, Granite) are eligible, as is R1-Distill-Qwen-32B. The same holds for J2's model-written code.
 4. **The critic differs from every writer it judges.** The critic is held fixed across arms. A challenger from the
    critic's family (Nemotron, today) is scored only on the measures the critic can't touch: its **first drafts**
    through the gates, and the blind key check of those first drafts, against the incumbent's first drafts. Its

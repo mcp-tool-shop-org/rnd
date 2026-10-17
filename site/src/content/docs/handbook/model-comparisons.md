@@ -12,6 +12,25 @@ A model comparison runs several models on the same tasks and decides which one g
 
 Fill in every section below, have an outside model review the design, and get the Director's approval. Then build. The A/B template's sections 3, 6 and 7 apply here too. This page adds what many arms need.
 
+## 0. Licences first
+
+Before section 1 is written, every model, service, data source and tool the design puts to work is checked against
+the studio's licence registry ([`licences/registry.json`](https://github.com/mcp-tool-shop-org/rnd/blob/main/licences/registry.json))
+**for the use this design makes of it.** That covers writers, critics, judges, graders, embedders, generators of
+images or audio, datasets, and the code tools that build it.
+
+- **A use is allowed unless the provider's contract or licence restricts it.** The search is recorded in the
+  registry: the page, the clause, its date. Uses that providers commonly ban (training on outputs, distillation,
+  competing models) need the explicit clause check, and the registry entry must say which way it reads.
+- **A missing entry blocks the design.** Read the terms at the source, add the entry, then go on. A model's summary
+  of the terms is never the check.
+- **The design lists each item with its registry id and verdict,** for example "writer: Muse-Glimmer-30B
+  (`muse-glimmer-30b-card`, training: proven)".
+- **The reviewer's verdict carries a licence line.** A pass without one doesn't count.
+
+Why this comes first: Stage 1's training data was built by three services whose terms turned out to bar training on
+their outputs, and it had to be regenerated. Checking afterwards costs the work; checking first costs an hour.
+
 ## 1. The check in three sentences
 
 Write these first. Nothing else proceeds until the Director has read them.
@@ -25,7 +44,7 @@ If sentence 3 is hard to write, the measure is wrong.
 ## 2. Candidates and pins
 
 For each model, record before any run:
-- **the model digest** (or the Hugging Face revision), the quant and the licence, checked at the primary source;
+- **the model digest** (or the Hugging Face revision), the quant and the licence, with its registry id and verdict for this use (section 0);
 - **the context length, sampling and a stop cap,** the same for every model in a job kind, or each model's documented production values. Say which.
 - **Effort:** the raw parameter actually sent, and whether the model supports graded levels. A level the model can't take is a label, not a setting. Record it as unsupported, and don't count it as a level.
 

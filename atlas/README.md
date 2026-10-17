@@ -1,19 +1,16 @@
 # rnd: how it works
 
-Mapped at 2026-10-16 from commit 745ccdb by Atlas 1.24.0.
+Mapped at 2026-10-17 from commit 49542f0 by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-14 parts, mostly Python (106 files), shell (15), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
+14 parts, mostly Python (107 files), shell (15), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-16 (ac61677)
+## What changed since 2026-10-16 (745ccdb)
 
-- licences/registry.json is now written by licences/snapshot.py.
-- licences/registry.json is now read by licences/snapshot.py.
-- licences is a new part, drawn from `licences/**`.
-- 17 files added and 5 changed content, across 6 parts.
+Nothing structural changed since 2026-10-16; 8 files added and 14 changed content.
 
 ## What comes in
 
@@ -122,7 +119,7 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 - 9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.
 - 13 writes and 20 reads use paths built at run time and are not named here.
 - 5 writes go to places this repository does not track, so they are not listed as generated.
-- 20 writes and 72 reads go to a path their caller passes, not to this repository.
+- 21 writes and 72 reads go to a path their caller passes, not to this repository.
 - 5 reads go to the directory the command is run in (entries, instruments and licences), not to this repository.
 - 1 read goes to the directory the command is run in or a path its caller passes, not to this repository.
 - 1 read goes to the home directory (.claude/), not to this repository.

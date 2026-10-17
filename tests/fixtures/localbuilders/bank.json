@@ -1,0 +1,58 @@
+{
+  "tasks": [
+    {
+      "id": "rnd-abmine-forced-fa",
+      "repo": "mcp-tool-shop-org/rnd",
+      "parent_commit": "ed35319b27a9ce07edbcdd4bfd3d28ae56d0bf6e",
+      "test_file": "tests/test_abmine_fa.py",
+      "scrubbed_test_path": "scrubbed/test_abmine_fa.py",
+      "twin_test_path": "twins/test_abmine_fa_twin.py",
+      "target_nodes": [
+        "tests/test_abmine_fa.py::ForcedFlashAttentionTests::test_forced_setting_resolves_itself"
+      ],
+      "twin_nodes": [
+        "tests/test_abmine_fa_twin.py::ForcedFlashAttentionTwinTests::test_forced_enabled_and_disabled_resolve"
+      ],
+      "test_cmd": "pytest tests/test_abmine_fa.py -k test_forced_setting_resolves_itself",
+      "allowed_paths": [
+        "mcptoolshop_rnd/abmine.py"
+      ],
+      "baseline": {
+        "passed": 200,
+        "skipped": 1,
+        "xfail": 0
+      },
+      "difficulty": "easy",
+      "design_notes": [
+        "experiments/local-builders/DESIGN.md"
+      ]
+    },
+    {
+      "id": "rnd-watch-stable-latest",
+      "repo": "mcp-tool-shop-org/rnd",
+      "parent_commit": "18d6f568948dbd345a6b5d60fd245039fbd48dc0",
+      "test_file": "tests/test_watch_stable.py",
+      "scrubbed_test_path": "scrubbed/test_watch_stable.py",
+      "twin_test_path": "twins/test_watch_stable_twin.py",
+      "target_nodes": [
+        "tests/test_watch_stable.py::StableLatestTests::test_latest_skips_prerelease"
+      ],
+      "twin_nodes": [
+        "tests/test_watch_stable_twin.py::StableLatestTwinTests::test_latest_prefers_stable_and_reports_prerelease"
+      ],
+      "test_cmd": "pytest tests/test_watch_stable.py -k test_latest_skips_prerelease",
+      "allowed_paths": [
+        "mcptoolshop_rnd/watch.py"
+      ],
+      "baseline": {
+        "passed": 180,
+        "skipped": 1,
+        "xfail": 0
+      },
+      "difficulty": "medium",
+      "design_notes": [
+        "experiments/local-builders/DESIGN.md"
+      ]
+    }
+  ]
+}

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.11.0.0] - 2026-10-17
+
+- mcptoolshop_rnd.localbuilders: J2 logging proxy, task runner, clean git-archive workspace, JUnit XML and twin scorer, VM containment and probe, and fit preflight (amendment C: NB1, NB2, F1-F7, F9, F10, F13)
+- tests: unittest suite and 2-task fixture bank for mcptoolshop_rnd.localbuilders
+
 ## [1.1.10.2.8] - 2026-10-17
 
 - local-builders: amendment C, the disposition of Argon's J2 design review (F1-F14); registry adds Gemma's prohibited-use policy

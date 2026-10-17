@@ -1961,12 +1961,20 @@
           "path": "experiments/embeddinggemma-2/results/zero-relevance-lock.json"
         },
         {
-          "hash": "14b24e444ae2aa2eede3ee608d4c1c35559112aac7d364d0a5389fed0532aed1",
+          "hash": "7f9e5cb514d0746ebf75cdc405806fa35063e38741efa9ce084d4a292001a8a5",
           "path": "experiments/generated-content-terms/README.md"
+        },
+        {
+          "hash": "6fdf98a03601d8654c3d046d644b16b37e644c6bafd3fd05c45ad22e3417a234",
+          "path": "experiments/generated-content-terms/argon-answer-pipeline-code.md"
         },
         {
           "hash": "2237808d3f0d64356045c8a66519caed5779a6a6cde88912d5d2857fae900ef0",
           "path": "experiments/generated-content-terms/argon-answer.md"
+        },
+        {
+          "hash": "bac5a5cd72b5135514205dd1ad307440490a7d1a4276da31627710a117976d43",
+          "path": "experiments/generated-content-terms/argon-brief-pipeline-code.md"
         },
         {
           "hash": "32bdb47da848fd4b033bd574438a7d8bfaee43e47e88018a6d2387edaf244ed5",
@@ -2428,12 +2436,16 @@
           "path": "experiments/local-agent-relay/design.md"
         },
         {
-          "hash": "3942a5aac32b910b89f5db395659d22b4859cceddd58f417244e978061f636c4",
+          "hash": "f6c9388c5a4365cd60f562b1e9d7ebe55543fdc719b0765a13b2256a5d912ee6",
           "path": "experiments/local-builders/DESIGN.md"
         },
         {
-          "hash": "1b4e204aed370dab767691c084dd868f976f742192ce59d9d5c60f6fbddb4658",
+          "hash": "844584cfdd511e6e40571156402b6b7d09a137297b48f349c7bcb4ef9957fc14",
           "path": "experiments/local-builders/README.md"
+        },
+        {
+          "hash": "784f74f233cc3c939c57e5d6f8e66de9084256cab48ab41bbbcaf609af0ca99c",
+          "path": "experiments/local-builders/argon-brief-design-review.md"
         },
         {
           "hash": "1692ff5a29c968ad2a24711d1dc229cdb35fce859dd6eb706f7dae829a39bfad",
@@ -3250,11 +3262,19 @@
           "path": "experiments/openjev-vs-jev/run_openjev.py"
         },
         {
-          "hash": "0149542ec43ea858d03e76659eb0403c458daf1f58a15956140fb7e3d6dc235a",
+          "hash": "37631eb6fc801611d5c70cfcc8b1ddbc05b7a218facb58f926438b90fbfaf276",
           "path": "experiments/stage1-regeneration/BUILD-SPEC.md"
         },
         {
-          "hash": "51a20ca905bc205d3afc87509ec985b48becf2bea7ba8506acf84d28ce3032be",
+          "hash": "5bc0cec3668c212e05a1866ebe7b3f93961486a2f6a62fba49091c3636699890",
+          "path": "experiments/stage1-regeneration/DATAMINER-USES.md"
+        },
+        {
+          "hash": "e1bf2a5f71d176e890e0c71a1e593a1b211ba7a76e266eb2ab4195781a99236f",
+          "path": "experiments/stage1-regeneration/DATASET-RELEASE.md"
+        },
+        {
+          "hash": "db9ad46cabef26ed2d3c73df7e763dee535609dad3b78788285e21070c9ce4fc",
           "path": "experiments/stage1-regeneration/PLAN.md"
         },
         {
@@ -3268,6 +3288,21 @@
         {
           "hash": "435f57118255105c4aeed80b697ea31ef2c2c7726ce3f5f7903967575045c1de",
           "path": "experiments/stage1-regeneration/argon-answer.md"
+        },
+        {
+          "hash": "b64a387122e309a2c62df4435a07d116a169fd6a50a15d81760722219e6ae4df",
+          "path": "experiments/stage1-regeneration/critic-control/README.md"
+        },
+        {
+          "exports": [
+            "add"
+          ],
+          "hash": "2c3ded84fa6aad0cae58d687ab54b299f3f963deff8ee3f5175cc3c1e94a0cf4",
+          "path": "experiments/stage1-regeneration/critic-control/build_known_answer.py"
+        },
+        {
+          "hash": "09ddc3e608599dee24441f4a6ede448fe4de6da02b5376c9369b6945cc257b7a",
+          "path": "experiments/stage1-regeneration/critic-control/known-answer-v1.jsonl"
         },
         {
           "hash": "bc84c4b6b1dead31a83df8b93e8540465d01592b7c18040a5e96f412b025a20a",
@@ -4257,7 +4292,7 @@
           "where": [
             "caller"
           ],
-          "writes": 11
+          "writes": 12
         },
         {
           "reads": 1,
@@ -4276,7 +4311,7 @@
         }
       ],
       "outsideReads": 49,
-      "outsideWrites": 11,
+      "outsideWrites": 12,
       "role": "code",
       "testRunners": [
         "unittest"
@@ -4429,11 +4464,11 @@
       "externals": 0,
       "files": [
         {
-          "hash": "e98378bb64e390bae8210a4d1051aad6af2ae1d869615cd2c009f3934c496297",
+          "hash": "315a93f6ecc5706a06946765aabc8c0938bd4451b53913f80b5ef33b80ef0b00",
           "path": "licences/README.md"
         },
         {
-          "hash": "8409321ed0b9739f3ba56694bc25b46a28e0f71a6a456716b879ed9cd16eea14",
+          "hash": "9f309f5ca00e2e0b75e468f2a8d06a791eb469e6214cc8b743ebd3442c636c7a",
           "path": "licences/registry.json"
         },
         {
@@ -4442,25 +4477,36 @@
             "main",
             "norm",
             "page_text",
+            "pdf_text",
             "wayback"
           ],
           "failurePaths": [
             {
+              "in": "pdf_text",
+              "kind": "except",
+              "line": 47
+            },
+            {
+              "in": "pdf_text",
+              "kind": "raise",
+              "line": 48
+            },
+            {
               "in": "wayback",
               "kind": "except",
-              "line": 79
+              "line": 96
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 97
+              "line": 114
             },
             {
               "kind": "raise",
-              "line": 121
+              "line": 138
             }
           ],
-          "hash": "64819f9892c45d0529e797532f640db3082741549f45746cf740943d8d0a4b91",
+          "hash": "db9841e3e616c23b32bb012f2e8f4710cc5db73cb99faae34a67ccbab2d87a7c",
           "path": "licences/snapshot.py"
         }
       ],
@@ -4496,7 +4542,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "e1a9127d72663d7881b7742fd906e4f7fdae877df256ee5d3553c8f4c87002f9",
+          "hash": "8e8784834a5c9906ef04c9f9648e3ffa8ef045222665c2d52fbcd07c1095b0bc",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -5802,7 +5848,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "bf28a0e691cd55bba2ac5c2e45f0a0304c6063e1164d628e7a32d50bdf2f4c8d",
+          "hash": "869ac01556eaaf3ed25b15a440a91d0807b5bceda3584a593f5fb8498448d5b9",
           "path": "CHANGELOG.md"
         },
         {
@@ -6058,7 +6104,7 @@
           "path": "site/src/content/docs/handbook/ab-dataminer.md"
         },
         {
-          "hash": "f82492f99d6febb4b02e5e4e0f53b06a042ea0ab216522a91f8aebe1a04cb622",
+          "hash": "1e8518e23f404582e312c951bfee428523cb2b88e51c6261f6ae3dc1adcc1b6b",
           "path": "site/src/content/docs/handbook/ab-experiments.md"
         },
         {
@@ -6066,7 +6112,7 @@
           "path": "site/src/content/docs/handbook/architecture.md"
         },
         {
-          "hash": "8694c917082512c3493448c1fba95f7d762a1293c9c664dafb9f316b88bbf7fc",
+          "hash": "2cf79de1a2179bd1c5064329fe26925cdf85d94087092a5d5f75bad5ee12a222",
           "path": "site/src/content/docs/handbook/dataset-builds.md"
         },
         {
@@ -6090,7 +6136,7 @@
           "path": "site/src/content/docs/handbook/index.md"
         },
         {
-          "hash": "bfd44d8b9c7aebab35ff20b5965475d5e257df8293d482d434a5ee1f14d58488",
+          "hash": "ab8a6448a18fca20a1a9670962c33dcd3c91ce275db8ce26af91ee036e81c311",
           "path": "site/src/content/docs/handbook/model-comparisons.md"
         },
         {
@@ -6424,7 +6470,7 @@
           "testFramework": "unittest"
         },
         {
-          "hash": "bf411af86783679541a16245c625d7ca594b0d8a05e2bb2fc8af924306b579fc",
+          "hash": "4999a8e512f449fa5ca7739119f3678c52c0ecf4acacae8a6d3bf2d313f136f6",
           "path": "tests/test_licence_registry.py",
           "testFramework": "unittest"
         },
@@ -7242,8 +7288,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "745ccdbe9f126883edddf7c6b9e4b30e210b1bfb",
-    "tracked": 799
+    "commit": "49542f0a467e36dad8f84ac1cd7a60ced33f6f22",
+    "tracked": 807
   },
   "landings": [
     {

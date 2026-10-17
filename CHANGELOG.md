@@ -11,9 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
-## [1.1.15.0.1] - 2026-10-17
+## [1.1.15.0.2] - 2026-10-17
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output
+
+## [1.1.15.0.1] - 2026-10-17
+
+- The dataminer counts thinking on every reply: a reply cut off at the length limit with no answer counts all its output as thinking, and a harmony-style template's thinking ends at <|eom|> or <|end|> (Muse-Glimmer). Each call records thinking_tokens_source (usage, timings, marker, length, none). Before this, both cases were null and summaries summed them as 0. New: python -m mcptoolshop_rnd.localbuilders.recount re-measures a generations file into a new one.
 
 ## [1.1.15.0.0] - 2026-10-17
 
@@ -164,6 +168,7 @@ NANO an ordinary library update (entries filed or revised, results added).
 ## [1.1.10.0.17] - 2026-10-16
 
 - experiment local-builders: Wave 1 design filed with R&D's review changes
+- Added experiment `local-builders`
 
 ## [1.1.10.0.16] - 2026-10-16
 

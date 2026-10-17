@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.2.11] - 2026-10-17
+
+- local-builders amendment E: R&D's disposition of Argon's review of amendment D (D-F1 to D-F4)
+- Updated experiment `generated-content-terms`
+- Updated experiment `local-builders`
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.10.2.10] - 2026-10-17
 
 - The maintainer's ruling: Claude text may be training targets for the non-competing verifier (Anthropic's list bars competitive training)

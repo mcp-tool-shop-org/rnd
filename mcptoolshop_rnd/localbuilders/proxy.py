@@ -28,6 +28,7 @@ import copy
 import hashlib
 import http.server
 import json
+import os
 import threading
 import time
 import urllib.error
@@ -39,6 +40,7 @@ from typing import Any, Callable
 DEFAULT_MAX_CALLS = 30
 DEFAULT_WALL_LIMIT_S = 15 * 60.0  # 15 minutes
 TOP_LOGPROBS_K = 5
+PROXY_FILE_MODE = 0o600
 
 PINNED_AIDER_VERSION = "0.86.1"
 
@@ -603,9 +605,10 @@ class ProxyState:
         )
         self.generations_path = Path(generations_path)
         self.generations_path.parent.mkdir(parents=True, exist_ok=True)
-        # Ensure generations.jsonl exists even if 0 calls occur
+        # Ensure generations.jsonl exists even if 0 calls occur, with mode 0600
         if not self.generations_path.exists():
             self.generations_path.write_text("", encoding="utf-8")
+        os.chmod(self.generations_path, PROXY_FILE_MODE)
         self.max_calls = int(max_calls)
         self.wall_limit_s = float(wall_limit_s)
         self.clock = clock
@@ -635,6 +638,7 @@ class ProxyState:
         line = json.dumps(row, ensure_ascii=False) + "\n"
         with open(self.generations_path, "a", encoding="utf-8", newline="\n") as f:
             f.write(line)
+        os.chmod(self.generations_path, PROXY_FILE_MODE)
         self.records.append(row)
 
     def remaining_wall_s(self) -> float:

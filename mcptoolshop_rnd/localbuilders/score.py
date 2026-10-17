@@ -19,8 +19,8 @@ from __future__ import annotations
 
 import fnmatch
 import os
+import shlex
 import subprocess
-import sys
 import tempfile
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
@@ -31,6 +31,7 @@ from .workspace import (
     SCORER_IGNORED_PATTERNS,
     TaskSpec,
     WorkspaceError,
+    fill_command_placeholders,
     is_scorer_ignored,
     is_test_path,
     normal_rel_path,
@@ -413,13 +414,65 @@ def score_task(
     }
 
 
+def _split_command_preserving_paths(cmd_str: str) -> list[str]:
+    """Split a command string into argv tokens without stripping backslashes on Windows."""
+    raw_tokens = shlex.split(cmd_str, posix=False)
+    tokens: list[str] = []
+    for tok in raw_tokens:
+        if len(tok) >= 2 and tok[0] == tok[-1] and tok[0] in ('"', "'"):
+            tok = tok[1:-1]
+        tokens.append(tok)
+    return tokens
+
+
+def build_suite_command(
+    task_or_cmd: TaskSpec | str | list[str],
+    junitxml_path: str | Path,
+    *,
+    venv_dir: str | Path | None = None,
+    bank_dir: str | Path | None = None,
+) -> list[str]:
+    """Fill `{venv}` and `{bank}` in `suite_cmd` and append `--junitxml=<junitxml_path>`."""
+    if isinstance(task_or_cmd, list):
+        if not task_or_cmd:
+            raise ScoreError("suite_cmd must not be empty")
+        try:
+            tokens = [
+                fill_command_placeholders(str(tok), venv_dir=venv_dir, bank_dir=bank_dir)
+                for tok in task_or_cmd
+            ]
+        except WorkspaceError as exc:
+            raise ScoreError(str(exc)) from exc
+        return [*tokens, f"--junitxml={junitxml_path}"]
+
+    if isinstance(task_or_cmd, TaskSpec):
+        raw_suite = task_or_cmd.suite_cmd
+        eff_bank = bank_dir if bank_dir is not None else task_or_cmd.bank_dir
+    else:
+        raw_suite = str(task_or_cmd)
+        eff_bank = bank_dir
+    if not raw_suite or not str(raw_suite).strip():
+        raise ScoreError("suite_cmd must not be empty")
+    try:
+        filled = fill_command_placeholders(raw_suite, venv_dir=venv_dir, bank_dir=eff_bank)
+    except WorkspaceError as exc:
+        raise ScoreError(str(exc)) from exc
+    tokens = _split_command_preserving_paths(filled)
+    return [*tokens, f"--junitxml={junitxml_path}"]
+
+
+build_score_command = build_suite_command
+
+
 def run_pytest_and_score(
     task: TaskSpec | dict,
     workspace_dir: str | Path,
     pre_test_hashes: dict[str, str],
     *,
+    venv_dir: str | Path | None = None,
+    bank_dir: str | Path | None = None,
     twin_source_path: str | Path | None = None,
-    pytest_cmd: list[str] | None = None,
+    pytest_cmd: list[str] | str | None = None,
     env: dict[str, str] | None = None,
     aider_running: bool = False,
     use_sudo_builder: bool = True,
@@ -428,7 +481,7 @@ def run_pytest_and_score(
     timeout: float = DEFAULT_SCORE_TIMEOUT_S,
     _test_allow_uncontained: bool = False,
 ) -> dict:
-    """Execute pytest as `builder` over the full suite, target test, and held-out twin after Aider exits (F9, F10).
+    """Execute `suite_cmd` with `--junitxml=<path>` appended as `builder` after Aider exits (F9, F10).
 
     The twin is read from `twin_source_path` (or `task.twin_test_path`, unreadable by `builder`)
     only at scoring time after Aider has exited, and is removed in `finally:`.
@@ -440,13 +493,20 @@ def run_pytest_and_score(
     if not use_sudo_builder and not _test_allow_uncontained:
         raise ScoreError("refusing to run scoring pytest outside builder containment (F9)")
 
-    spec = task if isinstance(task, TaskSpec) else TaskSpec.from_dict(task)
+    spec = task if isinstance(task, TaskSpec) else TaskSpec.from_dict(task, bank_dir=bank_dir)
     root = Path(workspace_dir).resolve()
+    eff_venv_dir = Path(venv_dir) if venv_dir is not None else (root.parent / f"venv-{spec.id}")
+    eff_bank_dir = bank_dir if bank_dir is not None else spec.bank_dir
 
     run_env = (
         dict(env)
         if env is not None and "PIP_NO_INDEX" in env
-        else builder_env(proxy_port=proxy_port, home_dir=root.parent / f".score-home-{spec.id}", base_env=env)
+        else builder_env(
+            proxy_port=proxy_port,
+            home_dir=root.parent / f".score-home-{spec.id}",
+            base_env=env,
+            venv_dir=eff_venv_dir,
+        )
     )
     run_env["CUDA_VISIBLE_DEVICES"] = ""
 
@@ -477,8 +537,12 @@ def run_pytest_and_score(
         try:
             staged_twin.write_text(twin_text, encoding="utf-8", newline="\n")
             os.chmod(staged_twin, 0o644)
-            base_cmd = list(pytest_cmd) if pytest_cmd is not None else [sys.executable, "-m", "pytest"]
-            raw_cmd = [*base_cmd, f"--junitxml={xml_path}"]
+            raw_cmd = build_suite_command(
+                pytest_cmd if pytest_cmd is not None else spec,
+                xml_path,
+                venv_dir=eff_venv_dir,
+                bank_dir=eff_bank_dir,
+            )
             full_cmd = wrap_as_builder(
                 raw_cmd,
                 env=run_env,

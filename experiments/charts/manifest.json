@@ -41,6 +41,10 @@
    "commit": "f3f2b92",
    "sha256": "f9bc5ffdab9f5fcb61b9dd37dc25e4bb6dfca5e644f265ebc468232371497884"
   },
+  "experiments/stage1-regeneration/pilot/qwen3.8-w0-calls.json": {
+   "commit": "uncommitted",
+   "sha256": "4f56434df0728d4c3bb0398a1a7fb44737f2c8eb53223315efc0971db1fb1bd7"
+  },
   "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-grounded-tune/metrics.json": {
    "commit": "8602fb7",
    "sha256": "2588523b27c5125b4010397d3aeb96235d28a267fe15a5d07031205e97892e17"

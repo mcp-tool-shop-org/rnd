@@ -1,0 +1,130 @@
+{
+ "what": "Per-call token counts for Qwen3.8-27B's first pilot wave (window 10d, A100-40GB, Q8_0, thinking at the card's xhigh), read at the window's midpoint from the logging proxy's records. Counts only: no prompts or text.",
+ "window": "10d",
+ "date": "2026-10-17",
+ "model": "qwen3.8-27b",
+ "reply_budget_tokens": 16384,
+ "source": {
+  "file": "generations-w0.jsonl (Publisher receipts, window10d-20261017/midpoint)",
+  "sha256": "14aa34ad3332f0afbec345b6f813c442c5d9127cc9be763b1afe013cc87e5472"
+ },
+ "calls": [
+  {
+   "call": 1,
+   "prompt_tokens": 573,
+   "output_tokens": 1347,
+   "thinking_tokens": 1189,
+   "wall_s": 42.4,
+   "finish": "stop",
+   "truncated": false
+  },
+  {
+   "call": 2,
+   "prompt_tokens": 6370,
+   "output_tokens": 4364,
+   "thinking_tokens": 4035,
+   "wall_s": 141.9,
+   "finish": "stop",
+   "truncated": false
+  },
+  {
+   "call": 3,
+   "prompt_tokens": 145,
+   "output_tokens": 405,
+   "thinking_tokens": 351,
+   "wall_s": 13.8,
+   "finish": "stop",
+   "truncated": false
+  },
+  {
+   "call": 4,
+   "prompt_tokens": 6577,
+   "output_tokens": 13053,
+   "thinking_tokens": 12559,
+   "wall_s": 416.5,
+   "finish": "stop",
+   "truncated": false
+  },
+  {
+   "call": 5,
+   "prompt_tokens": 145,
+   "output_tokens": 2030,
+   "thinking_tokens": 1967,
+   "wall_s": 64.4,
+   "finish": "stop",
+   "truncated": false
+  },
+  {
+   "call": 6,
+   "prompt_tokens": 6564,
+   "output_tokens": 12689,
+   "thinking_tokens": 12074,
+   "wall_s": 405.0,
+   "finish": "stop",
+   "truncated": false
+  },
+  {
+   "call": 7,
+   "prompt_tokens": 6421,
+   "output_tokens": 10114,
+   "thinking_tokens": 9749,
+   "wall_s": 324.1,
+   "finish": "stop",
+   "truncated": false
+  },
+  {
+   "call": 8,
+   "prompt_tokens": 6849,
+   "output_tokens": 15264,
+   "thinking_tokens": 14479,
+   "wall_s": 488.2,
+   "finish": "stop",
+   "truncated": false
+  },
+  {
+   "call": 9,
+   "prompt_tokens": 7643,
+   "output_tokens": 6300,
+   "thinking_tokens": 5621,
+   "wall_s": 200.2,
+   "finish": "stop",
+   "truncated": false
+  },
+  {
+   "call": 10,
+   "prompt_tokens": 6370,
+   "output_tokens": 7053,
+   "thinking_tokens": 6725,
+   "wall_s": 227.5,
+   "finish": "stop",
+   "truncated": false
+  },
+  {
+   "call": 11,
+   "prompt_tokens": 144,
+   "output_tokens": 1514,
+   "thinking_tokens": 1452,
+   "wall_s": 48.3,
+   "finish": "stop",
+   "truncated": false
+  },
+  {
+   "call": 12,
+   "prompt_tokens": 6492,
+   "output_tokens": 11017,
+   "thinking_tokens": 10596,
+   "wall_s": 351.8,
+   "finish": "stop",
+   "truncated": false
+  },
+  {
+   "call": 13,
+   "prompt_tokens": 145,
+   "output_tokens": 602,
+   "thinking_tokens": 575,
+   "wall_s": 20.3,
+   "finish": "stop",
+   "truncated": false
+  }
+ ]
+}

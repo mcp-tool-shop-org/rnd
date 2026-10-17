@@ -39,8 +39,8 @@ written by Antigravity or Grok is being rewritten. Interlock's Grok and Kimi cod
 - This is a reading of published terms, not legal advice. Terms change, so every clause carries its page date.
 - The student verifier counts as a "specialized tool" by the maintainer's judgement. An AI support agent at
   Anthropic agreed, but that isn't a human review.
-- The rule has two tiers (2026-10-17): strict for what shapes model weights or scores, and plain for code that no
-  model trains on.
+- A use is barred only by a clause that can be named (2026-10-17). A two-tier "strict" version was withdrawn the
+  same day.
 - The rule was first worded so that silence counted as a bar. It was reworded the same day, and these verdicts
   follow the reworded rule.
 

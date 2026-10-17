@@ -6,7 +6,7 @@ date: 2026-10-16
 highlights:
   - "<strong>Ask per use, not per provider.</strong> Shipping an asset, training a model, evaluating one and running code are four different questions, and each provider answers them differently."
   - "<strong>Owning the output isn't permission for every use.</strong> xAI leaves Grok's output with you and also bars distilling it. Both clauses hold at once."
-  - "<strong>Be strict where it shapes the model, plain where it's just code.</strong> Anything that trains a model or scores one needs explicit permission. Code you own that no model trains on is ordinary software, whoever wrote it."
+  - "<strong>Name the clause.</strong> A use is barred only by a clause you can point to. Code you own is ordinary software, whoever wrote it."
   - "<strong>Silence isn't a ban.</strong> Only a contract you agreed to, or a licence, can restrict what you do with output. Plain Apache-2.0 and MIT make no claim on outputs, so they're free. Look hard for the clauses that do restrict, and record the search."
   - "<strong>The account changes the terms.</strong> The same Kimi model is non-commercial in Moonshot's app and unrestricted through Ollama Cloud. Google's API terms are narrower than its consumer terms."
   - "<strong>Stage 1's training rows are being regenerated</strong> by licence-proven open models. The method, the gates, the lessons and the evaluation sets carry over."
@@ -34,13 +34,10 @@ reworded the same day, and the verdicts below follow the reworded version.
 
 A second correction followed the next day. The studio had read Google's "related AI technology" at its widest, so it
 covered even small pieces of pipeline code. The outside reviewer pointed out that the clause sits under "Don't abuse
-our services", and that its purpose is stopping people distilling Gemini into a rival model. The rule now has two
-tiers:
-- **Strict, needing explicit permission:** anything that shapes model weights or benchmark scores. That covers
-  training data, evaluation items and base models. A bad ingredient there can't be taken out of a trained model
-  afterwards.
-- **The plain reading:** code the studio owns, that no model trains on and that builds no rival to the provider, is
-  ordinary software whoever wrote it. The worst case there is rewriting a script, not a tainted model.
+our services", and that its purpose is stopping people distilling Gemini into a rival model. So the clause bars
+training data and distillation, and code the studio owns is ordinary software whoever wrote it. A two-tier version
+that made anything touching a model "strict" was tried the same day and withdrawn: it kept producing bars no clause
+contained. The rule is now simply that a use is barred only by a clause you can name.
 
 The rule earned its keep. The outside model's first pass got two things wrong:
 - it said Claude's consumer terms bar all commercial use, when that clause covers evaluation access only;
@@ -133,6 +130,5 @@ An inventory traced every piece of text in the Stage 1 pipeline to whoever wrote
 6. **Record who wrote what when it's written.** An inventory after the fact needed two agents reading PR threads
    and commit trailers, and still left gaps.
 7. **Mind the attribution clauses:** "Written with Grok", "Built with Muse Spark Open", and Llama's naming rule.
-8. **Split the rule by what the output touches.** Be strict about anything that trains or scores a model. Read
-   the terms plainly for code no model learns from. Never read an undefined phrase at its widest just to be safe:
-   that ratchet ends up banning a temperature monitor.
+8. **Name the clause, or it's allowed.** Never read an undefined phrase at its widest just to be safe, and never
+   add a tier or a filter the terms don't contain: that ratchet ends up banning a temperature monitor.

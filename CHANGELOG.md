@@ -13,7 +13,7 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [1.1.14.0.0] - 2026-10-17
 
-- J2 pre-run round 4: companion_tests, per-task venv setup, strict history chown, and 0600 proxy files.
+- J2 pre-run round 4: companion_tests (`file` key), per-task venv setup (`{venv}`/`{bank}` placeholders, `suite_cmd` scorer contract, `venv_python_version`), strict history chown, and 0600 proxy files.
 
 ## [1.1.13.0.0] - 2026-10-17
 

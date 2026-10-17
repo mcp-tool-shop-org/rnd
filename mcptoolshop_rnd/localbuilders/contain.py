@@ -305,19 +305,30 @@ def run_bounded_subprocess(
     timeout: float,
 ) -> subprocess.CompletedProcess:
     """Run `cmd` in its own process group and kill the entire process group on `TimeoutExpired`."""
+    exec_cmd = list(cmd)
+    exec_env = env
+    if os.name == "nt" and exec_cmd and exec_cmd[0] == "env":
+        exec_env = dict(env if env is not None else os.environ)
+        idx = 1
+        while idx < len(exec_cmd) and "=" in exec_cmd[idx] and not exec_cmd[idx].startswith("-"):
+            k, v = exec_cmd[idx].split("=", 1)
+            exec_env[k] = v
+            idx += 1
+        exec_cmd = exec_cmd[idx:]
+
     popen_kwargs: dict = {
         "cwd": str(cwd),
-        "env": env,
+        "env": exec_env,
         "stdout": subprocess.PIPE,
         "stderr": subprocess.PIPE,
         "text": True,
     }
-    if os.name != "nt":
+    if os.name != "nt":  # pragma: no cover (POSIX process group session)
         popen_kwargs["start_new_session"] = True
     elif hasattr(subprocess, "CREATE_NEW_PROCESS_GROUP"):
         popen_kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP
 
-    proc = subprocess.Popen(cmd, **popen_kwargs)
+    proc = subprocess.Popen(exec_cmd, **popen_kwargs)
     try:
         stdout, stderr = proc.communicate(timeout=timeout)
     except subprocess.TimeoutExpired:

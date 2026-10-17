@@ -46,7 +46,15 @@ from .proxy import (
     load_candidate_config,
 )
 from .score import DEFAULT_SCORE_TIMEOUT_S, run_pytest_and_score
-from .workspace import PreparedWorkspace, TaskSpec, build_workspace, is_test_path, normal_rel_path
+from .workspace import (
+    PreparedWorkspace,
+    TaskSpec,
+    WorkspaceError,
+    build_workspace,
+    fill_command_placeholders,
+    is_test_path,
+    normal_rel_path,
+)
 
 MAX_REFLECTIONS = 29
 EDIT_FORMAT = "diff"
@@ -77,6 +85,8 @@ REQUIRED_RECEIPT_FIELDS = (
     "install_cmd",
     "install_exit_code",
     "pip_freeze_sha256",
+    "venv_python_version",
+    "python_version",
     "prompt_hash",
     "pins",
     "injected",
@@ -200,8 +210,13 @@ class TaskEnvSetupResult:
     install_cmd: str
     install_exit_code: int
     pip_freeze_sha256: str | None
+    venv_python_version: str | None = None
     stdout: str = ""
     stderr: str = ""
+
+    @property
+    def python_version(self) -> str | None:
+        return self.venv_python_version
 
 
 def venv_python_path(venv_dir: str | Path) -> Path:
@@ -214,23 +229,17 @@ def venv_python_path(venv_dir: str | Path) -> Path:
     return vbin / ("python.exe" if os.name == "nt" else "python")
 
 
-def resolve_test_cmd_for_venv(test_cmd: str, venv_python: str | Path) -> str:
-    """Rewrite `test_cmd` so it executes using the per-task venv's `python`."""
-    raw = str(test_cmd).strip()
-    py = str(Path(venv_python))
-    if not raw:
-        return f"{py} -m pytest"
-    if raw.startswith(py):
-        return raw
-    for prefix in ("uv run pytest", "pytest"):
-        if raw == prefix or raw.startswith(prefix + " "):
-            rest = raw[len(prefix) :].strip()
-            return f"{py} -m pytest {rest}".strip()
-    for prefix in ("uv run python3", "uv run python", "python3", "python"):
-        if raw == prefix or raw.startswith(prefix + " "):
-            rest = raw[len(prefix) :].strip()
-            return f"{py} {rest}".strip()
-    return raw
+def resolve_test_cmd_for_venv(
+    test_cmd: str,
+    venv_dir: str | Path | None = None,
+    *,
+    bank_dir: str | Path | None = None,
+) -> str:
+    """Fill `{venv}` and `{bank}` placeholders in a command without rewriting any command prefix."""
+    try:
+        return fill_command_placeholders(test_cmd, venv_dir=venv_dir, bank_dir=bank_dir)
+    except WorkspaceError as exc:
+        raise RunnerError(str(exc)) from exc
 
 
 def root_install_env(
@@ -325,19 +334,50 @@ def freeze_venv_sha256(
     return hashlib.sha256(norm.encode("utf-8")).hexdigest()
 
 
+def venv_python_version(
+    venv_dir: str | Path,
+    venv_python: str | Path | None = None,
+    *,
+    env: dict[str, str] | None = None,
+    run_cmd: Callable[..., subprocess.CompletedProcess] | None = None,
+) -> str:
+    """Return the `<venv python> --version` string (e.g. `'Python 3.12.8'`) for `venv_dir`."""
+    vdir = Path(venv_dir).resolve()
+    vpy = Path(venv_python) if venv_python is not None else venv_python_path(vdir)
+    run_env = env if env is not None else root_install_env(vdir)
+    runner_fn = run_cmd or (
+        lambda cmd, **kw: subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=30,
+            **kw,
+        )
+    )
+    res = runner_fn([str(vpy), "--version"], cwd=str(vdir), env=run_env)
+    if res.returncode != 0:
+        raise RunnerError(f"failed to read python --version for venv {vdir}: {(res.stderr or '').strip()}")
+    raw_ver = (res.stdout or "").strip() or (res.stderr or "").strip()
+    if raw_ver:
+        return raw_ver.splitlines()[0].strip()
+    return f"Python {sys.version.split()[0]}"
+
+
 def setup_task_venv(
     task: TaskSpec | dict,
     workspace_dir: str | Path,
     work_root: str | Path,
     *,
+    bank_dir: str | Path | None = None,
     base_python: str | Path = sys.executable,
     base_env: dict[str, str] | None = None,
     timeout: float = DEFAULT_SETUP_TIMEOUT_S,
     with_pip: bool | None = None,
     run_cmd: Callable[..., subprocess.CompletedProcess] | None = None,
 ) -> TaskEnvSetupResult:
-    """Create `work_root/venv-<task>`, run the task's `install` command as `root` with network allowed, and lock permissions."""
-    spec = task if isinstance(task, TaskSpec) else TaskSpec.from_dict(task)
+    """Create `work_root/venv-<task>`, fill `{venv}`/`{bank}` and run `install` as `root` with network allowed, and lock permissions."""
+    spec = task if isinstance(task, TaskSpec) else TaskSpec.from_dict(task, bank_dir=bank_dir)
     wroot = Path(work_root).resolve()
     ws_dir = Path(workspace_dir).resolve()
     venv_dir = wroot / f"venv-{spec.id}"
@@ -347,8 +387,15 @@ def setup_task_venv(
     except ValueError:
         pass
 
+    eff_bank_dir = bank_dir if bank_dir is not None else spec.bank_dir
+    filled_install_cmd = (
+        resolve_test_cmd_for_venv(spec.install_cmd, venv_dir, bank_dir=eff_bank_dir)
+        if spec.install_cmd.strip()
+        else ""
+    )
+
     wroot.mkdir(parents=True, exist_ok=True)
-    need_pip = bool(with_pip) if with_pip is not None else ("pip" in spec.install_cmd)
+    need_pip = bool(with_pip) if with_pip is not None else ("pip" in filled_install_cmd)
 
     vpy = venv_python_path(venv_dir)
     if not vpy.is_file():
@@ -373,9 +420,10 @@ def setup_task_venv(
                 ok=False,
                 venv_dir=venv_dir,
                 python_executable=vpy,
-                install_cmd=spec.install_cmd,
+                install_cmd=filled_install_cmd,
                 install_exit_code=int(venv_res.returncode or 1),
                 pip_freeze_sha256=None,
+                venv_python_version=None,
                 stdout=venv_res.stdout or "",
                 stderr=venv_res.stderr or "",
             )
@@ -386,13 +434,13 @@ def setup_task_venv(
     err_str = ""
     install_rc = 0
 
-    if spec.install_cmd.strip():
+    if filled_install_cmd:
         try:
             if run_cmd is not None:
-                res = run_cmd(spec.install_cmd, cwd=str(ws_dir), env=install_env, shell=True)
+                res = run_cmd(filled_install_cmd, cwd=str(ws_dir), env=install_env, shell=True)
             else:
                 res = subprocess.run(
-                    spec.install_cmd,
+                    filled_install_cmd,
                     shell=True,
                     cwd=str(ws_dir),
                     env=install_env,
@@ -410,9 +458,10 @@ def setup_task_venv(
                 ok=False,
                 venv_dir=venv_dir,
                 python_executable=vpy,
-                install_cmd=spec.install_cmd,
+                install_cmd=filled_install_cmd,
                 install_exit_code=-1,
                 pip_freeze_sha256=None,
+                venv_python_version=None,
                 stdout="",
                 stderr="install_timeout",
             )
@@ -423,22 +472,26 @@ def setup_task_venv(
             ok=False,
             venv_dir=venv_dir,
             python_executable=vpy,
-            install_cmd=spec.install_cmd,
+            install_cmd=filled_install_cmd,
             install_exit_code=install_rc,
             pip_freeze_sha256=None,
+            venv_python_version=None,
             stdout=out_str,
             stderr=err_str,
         )
 
+    vpy = venv_python_path(venv_dir)
     freeze_sha = freeze_venv_sha256(venv_dir, vpy, env=install_env, run_cmd=run_cmd)
+    py_ver = venv_python_version(venv_dir, vpy, env=install_env, run_cmd=run_cmd)
     lock_venv_for_builder(venv_dir)
     return TaskEnvSetupResult(
         ok=True,
         venv_dir=venv_dir,
         python_executable=vpy,
-        install_cmd=spec.install_cmd,
+        install_cmd=filled_install_cmd,
         install_exit_code=0,
         pip_freeze_sha256=freeze_sha,
+        venv_python_version=py_ver,
         stdout=out_str,
         stderr=err_str,
     )
@@ -717,6 +770,7 @@ def build_receipt(
     install_cmd: str | None = None,
     install_exit_code: int = 0,
     pip_freeze_sha256: str | None = None,
+    venv_python_version: str | None = None,
     effort_raw: Any = None,
     effort_graded: str = "unsupported",
     peak_vram_mib: float | None = None,
@@ -734,6 +788,7 @@ def build_receipt(
     effective_install_cmd = task.install_cmd if install_cmd is None else str(install_cmd)
     effective_install_rc = int(install_exit_code)
     effective_freeze_sha = str(pip_freeze_sha256) if pip_freeze_sha256 is not None else None
+    effective_py_ver = str(venv_python_version).strip() if venv_python_version is not None else None
 
     injected = proxy_summary["injected"]
     call_count = int(proxy_summary["call_count"])
@@ -764,6 +819,8 @@ def build_receipt(
         "install_cmd": effective_install_cmd,
         "install_exit_code": effective_install_rc,
         "pip_freeze_sha256": effective_freeze_sha,
+        "venv_python_version": effective_py_ver,
+        "python_version": effective_py_ver,
         "edit_format": EDIT_FORMAT,
         "examples_as_sys_msg": True,
         "max_reflections": MAX_REFLECTIONS,
@@ -807,6 +864,8 @@ def build_receipt(
         "install_cmd": effective_install_cmd,
         "install_exit_code": effective_install_rc,
         "pip_freeze_sha256": effective_freeze_sha,
+        "venv_python_version": effective_py_ver,
+        "python_version": effective_py_ver,
         "prompt_hash": p_hash,
         "pins": full_pins,
         "injected": injected,
@@ -870,6 +929,9 @@ def validate_receipt(receipt: dict[str, Any]) -> None:
     freeze_sha = receipt.get("pip_freeze_sha256")
     if freeze_sha is not None and (not isinstance(freeze_sha, str) or len(freeze_sha) != 64):
         raise RunnerError("receipt pip_freeze_sha256 must be None or a 64-character sha256 hex digest")
+    py_ver = receipt.get("venv_python_version")
+    if py_ver is not None and (not isinstance(py_ver, str) or not py_ver.strip()):
+        raise RunnerError("receipt venv_python_version must be None or a non-empty string")
     if not receipt.get("generations_sha256") or len(str(receipt["generations_sha256"])) != 64:
         raise RunnerError("receipt generations_sha256 must be a 64-character sha256 hex digest")
     if not isinstance(receipt.get("injected"), dict):
@@ -896,6 +958,7 @@ class RunTaskConfig:
     work_root: Path
     receipt_path: Path
     machine_line: dict[str, Any]
+    bank_dir: Path | str | None = None
     candidate: str | None = None
     pins: dict[str, Any] = field(default_factory=dict)
     editable_files: list[str] | None = None
@@ -961,17 +1024,19 @@ def run_single_task(
         allow_uncontained=cfg._test_allow_uncontained,
     )
 
+    eff_bank_dir = cfg.bank_dir if cfg.bank_dir is not None else cfg.task.bank_dir
     prepared = build_workspace(
         cfg.source_repo,
         cfg.task,
         ws_dir,
         home_dir=home_dir,
+        bank_dir=eff_bank_dir,
     )
 
     setup_res = (
         setup_runner(cfg.task, prepared.workspace_dir, cfg.work_root)
         if setup_runner is not None
-        else setup_task_venv(cfg.task, prepared.workspace_dir, cfg.work_root)
+        else setup_task_venv(cfg.task, prepared.workspace_dir, cfg.work_root, bank_dir=eff_bank_dir)
     )
 
     cand_cfg = load_candidate_config(cfg.candidate_config_path, candidate=cfg.candidate or cfg.served_as)
@@ -988,7 +1053,11 @@ def run_single_task(
         wall_s = 0.0
     else:
         aider_timed_out = False
-        resolved_test_cmd = resolve_test_cmd_for_venv(cfg.task.test_cmd, setup_res.python_executable)
+        resolved_test_cmd = resolve_test_cmd_for_venv(
+            cfg.task.test_cmd,
+            setup_res.venv_dir,
+            bank_dir=eff_bank_dir,
+        )
         t0 = time.monotonic()
         with LoggingProxyServer(state) as proxy_srv:
             env = builder_env(
@@ -1037,7 +1106,8 @@ def run_single_task(
                         cfg.task,
                         prepared.workspace_dir,
                         prepared.pre_test_hashes,
-                        python_executable=setup_res.python_executable,
+                        venv_dir=setup_res.venv_dir,
+                        bank_dir=eff_bank_dir,
                         env=env,
                         aider_running=False,
                         use_sudo_builder=cfg.use_sudo_builder,
@@ -1059,6 +1129,7 @@ def run_single_task(
         install_cmd=setup_res.install_cmd,
         install_exit_code=setup_res.install_exit_code,
         pip_freeze_sha256=setup_res.pip_freeze_sha256,
+        venv_python_version=setup_res.venv_python_version,
         pins=cfg.pins,
         proxy_summary=summary,
         grade_result=grade_res,

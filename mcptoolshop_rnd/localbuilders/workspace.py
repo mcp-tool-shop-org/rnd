@@ -126,6 +126,25 @@ def snapshot_test_hashes(workspace_dir: str | Path) -> dict[str, str]:
     return hashes
 
 
+def fill_command_placeholders(
+    cmd: str,
+    *,
+    venv_dir: str | Path | None = None,
+    bank_dir: str | Path | None = None,
+) -> str:
+    """Fill `{venv}` and `{bank}` placeholders in a task command without altering anything else."""
+    out = str(cmd)
+    if "{venv}" in out:
+        if venv_dir is None or not str(venv_dir).strip():
+            raise WorkspaceError(f"command contains {{venv}} placeholder but venv_dir is not set: {cmd!r}")
+        out = out.replace("{venv}", str(venv_dir))
+    if "{bank}" in out:
+        if bank_dir is None or not str(bank_dir).strip():
+            raise WorkspaceError(f"command contains {{bank}} placeholder but bank_dir is not set: {cmd!r}")
+        out = out.replace("{bank}", str(bank_dir))
+    return out
+
+
 @dataclass(frozen=True)
 class TaskSpec:
     """One task entry from R&D's J2 task bank."""
@@ -138,6 +157,7 @@ class TaskSpec:
     test_cmd: str
     allowed_paths: list[str]
     baseline: dict
+    suite_cmd: str = "{venv}/bin/python -m pytest"
     scrubbed_test_path: str | None = None
     scrubbed_test_content: str | None = None
     twin_test_path: str | None = None
@@ -150,6 +170,8 @@ class TaskSpec:
     difficulty: str = "medium"
     design_notes: list[str] = field(default_factory=list)
     repo: str = ""
+    repo_url: str = ""
+    fix_commit: str = ""
 
     @property
     def target_node_id(self) -> str:
@@ -158,6 +180,33 @@ class TaskSpec:
     @property
     def install(self) -> str:
         return self.install_cmd
+
+    def render_install_cmd(
+        self,
+        venv_dir: str | Path | None = None,
+        *,
+        bank_dir: str | Path | None = None,
+    ) -> str:
+        eff_bank = bank_dir if bank_dir is not None else self.bank_dir
+        return fill_command_placeholders(self.install_cmd, venv_dir=venv_dir, bank_dir=eff_bank)
+
+    def render_test_cmd(
+        self,
+        venv_dir: str | Path | None = None,
+        *,
+        bank_dir: str | Path | None = None,
+    ) -> str:
+        eff_bank = bank_dir if bank_dir is not None else self.bank_dir
+        return fill_command_placeholders(self.test_cmd, venv_dir=venv_dir, bank_dir=eff_bank)
+
+    def render_suite_cmd(
+        self,
+        venv_dir: str | Path | None = None,
+        *,
+        bank_dir: str | Path | None = None,
+    ) -> str:
+        eff_bank = bank_dir if bank_dir is not None else self.bank_dir
+        return fill_command_placeholders(self.suite_cmd, venv_dir=venv_dir, bank_dir=eff_bank)
 
     @classmethod
     def from_dict(
@@ -193,7 +242,13 @@ class TaskSpec:
         twin_nodes = [str(n) for n in raw_twins]
 
         allowed_paths = validate_allowed_paths(list(data.get("allowed_paths") or []))
-        test_cmd = str(data.get("test_cmd") or f"pytest {target_nodes[0]}")
+        test_cmd = str(data.get("test_cmd") or f"pytest {target_nodes[0]}").strip()
+        raw_suite = data.get("suite_cmd")
+        suite_cmd = (
+            str(raw_suite).strip()
+            if raw_suite is not None and str(raw_suite).strip()
+            else "{venv}/bin/python -m pytest"
+        )
         baseline = dict(data.get("baseline") or {})
         for req_key in ("passed", "skipped", "xfail"):
             if req_key not in baseline:
@@ -227,7 +282,7 @@ class TaskSpec:
                 for item in raw_companions:
                     if isinstance(item, dict):
                         raw_rel = item.get("path") or item.get("test_file") or ""
-                        raw_src = item.get("source") or item.get("companion_path")
+                        raw_src = item.get("file") or item.get("source") or item.get("companion_path")
                     else:
                         raw_rel = str(item)
                         raw_src = None
@@ -252,7 +307,7 @@ class TaskSpec:
 
         raw_install = data.get("install_cmd") if "install_cmd" in data else data.get("install")
         install_cmd = str(raw_install).strip() if raw_install is not None else ""
-        resolved_bank_dir = str(Path(eff_dir).resolve()) if eff_dir is not None else None
+        resolved_bank_dir = str(Path(eff_dir)) if eff_dir is not None else None
 
         return cls(
             id=task_id,
@@ -261,6 +316,7 @@ class TaskSpec:
             target_nodes=target_nodes,
             twin_nodes=twin_nodes,
             test_cmd=test_cmd,
+            suite_cmd=suite_cmd,
             allowed_paths=allowed_paths,
             baseline={
                 "passed": int(baseline["passed"]),
@@ -279,6 +335,8 @@ class TaskSpec:
             difficulty=str(data.get("difficulty") or "medium"),
             design_notes=[normal_rel_path(p) for p in (data.get("design_notes") or [])],
             repo=str(data.get("repo") or ""),
+            repo_url=str(data.get("repo_url") or ""),
+            fix_commit=str(data.get("fix_commit") or "").strip(),
         )
 
     def read_scrubbed_test(self) -> str:
@@ -313,9 +371,12 @@ class TaskSpec:
         candidates: list[Path] = []
         if norm in self.companion_test_sources:
             src_p = Path(self.companion_test_sources[norm])
+            if not src_p.is_absolute():
+                if bank_dir is not None:
+                    candidates.append(Path(bank_dir) / src_p)
+                if self.bank_dir is not None:
+                    candidates.append(Path(self.bank_dir) / src_p)
             candidates.append(src_p)
-            if bank_dir is not None and not src_p.is_absolute():
-                candidates.append(Path(bank_dir) / src_p)
 
         base_dirs: list[Path] = []
         for raw_base in (

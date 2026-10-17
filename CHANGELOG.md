@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.12.0.2] - 2026-10-17
+
+- critic-control known-answer v2: two faulty keys replaced (D-04, D-11), found by both critics in window 7b
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.12.0.1] - 2026-10-17
 
 - critic-control's bar, set before the first result

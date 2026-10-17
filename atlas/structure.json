@@ -1961,15 +1961,23 @@
           "path": "experiments/embeddinggemma-2/results/zero-relevance-lock.json"
         },
         {
-          "hash": "14b24e444ae2aa2eede3ee608d4c1c35559112aac7d364d0a5389fed0532aed1",
+          "hash": "fc2dbcf66f3b2b0988585ea9c47644e3277418c4bf3b5c0127b5953d32cac723",
           "path": "experiments/generated-content-terms/README.md"
         },
         {
-          "hash": "2237808d3f0d64356045c8a66519caed5779a6a6cde88912d5d2857fae900ef0",
+          "hash": "5d444f2d89802da86bf9f5f730a5bee0fc85bcac0201da201dc704b49ac2a0a1",
+          "path": "experiments/generated-content-terms/argon-answer-pipeline-code.md"
+        },
+        {
+          "hash": "dd3732ab7eb4541d473b560194cc46023bcbe5068bc94e2fc53128efde8bf2de",
           "path": "experiments/generated-content-terms/argon-answer.md"
         },
         {
-          "hash": "32bdb47da848fd4b033bd574438a7d8bfaee43e47e88018a6d2387edaf244ed5",
+          "hash": "c871d6a9f7e2465ead9f7b7b5a2ccee962122085aed0552e65ba6981364ea263",
+          "path": "experiments/generated-content-terms/argon-brief-pipeline-code.md"
+        },
+        {
+          "hash": "cc11fd89d0c1555a74c5afe6674ff909c548a485dc4c7ee7ef40dc723bde9f9c",
           "path": "experiments/generated-content-terms/argon-brief.md"
         },
         {
@@ -2428,12 +2436,20 @@
           "path": "experiments/local-agent-relay/design.md"
         },
         {
-          "hash": "3942a5aac32b910b89f5db395659d22b4859cceddd58f417244e978061f636c4",
+          "hash": "851c4e4a098fabe1277a713d04c2831d17d9b749e0abd0a6d70647eeaad0fc58",
           "path": "experiments/local-builders/DESIGN.md"
         },
         {
-          "hash": "1b4e204aed370dab767691c084dd868f976f742192ce59d9d5c60f6fbddb4658",
+          "hash": "844584cfdd511e6e40571156402b6b7d09a137297b48f349c7bcb4ef9957fc14",
           "path": "experiments/local-builders/README.md"
+        },
+        {
+          "hash": "784f74f233cc3c939c57e5d6f8e66de9084256cab48ab41bbbcaf609af0ca99c",
+          "path": "experiments/local-builders/argon-brief-design-review.md"
+        },
+        {
+          "hash": "36cd89bbd95f2918528ae40b6ebfc1b91c3f17daccc0db708f36251b0bc9e207",
+          "path": "experiments/local-builders/card-values.json"
         },
         {
           "hash": "1692ff5a29c968ad2a24711d1dc229cdb35fce859dd6eb706f7dae829a39bfad",
@@ -3250,15 +3266,23 @@
           "path": "experiments/openjev-vs-jev/run_openjev.py"
         },
         {
-          "hash": "0149542ec43ea858d03e76659eb0403c458daf1f58a15956140fb7e3d6dc235a",
+          "hash": "47513112b2d41d6c117eca535f6efb9b6ff5674631cac28fdc3ef06e0c2b930f",
           "path": "experiments/stage1-regeneration/BUILD-SPEC.md"
         },
         {
-          "hash": "51a20ca905bc205d3afc87509ec985b48becf2bea7ba8506acf84d28ce3032be",
+          "hash": "5bc0cec3668c212e05a1866ebe7b3f93961486a2f6a62fba49091c3636699890",
+          "path": "experiments/stage1-regeneration/DATAMINER-USES.md"
+        },
+        {
+          "hash": "e1bf2a5f71d176e890e0c71a1e593a1b211ba7a76e266eb2ab4195781a99236f",
+          "path": "experiments/stage1-regeneration/DATASET-RELEASE.md"
+        },
+        {
+          "hash": "195421542f14788ac7876d0fd0e70e105926de71d7241447a8f108b301620345",
           "path": "experiments/stage1-regeneration/PLAN.md"
         },
         {
-          "hash": "04f3946dc448ab5fe9b70e6a58c418a7e724c7f18c64e8f55e234fa6bb54d7a6",
+          "hash": "f8aab7cb47c1d40cd8b8936a382f25e15737720bacc9f0edb6babddcfc306bc8",
           "path": "experiments/stage1-regeneration/PROVENANCE.md"
         },
         {
@@ -3266,8 +3290,23 @@
           "path": "experiments/stage1-regeneration/README.md"
         },
         {
-          "hash": "435f57118255105c4aeed80b697ea31ef2c2c7726ce3f5f7903967575045c1de",
+          "hash": "39de197654210cffcc4627e0deda08ba1851345d863928d1f2859e79712c6510",
           "path": "experiments/stage1-regeneration/argon-answer.md"
+        },
+        {
+          "hash": "b64a387122e309a2c62df4435a07d116a169fd6a50a15d81760722219e6ae4df",
+          "path": "experiments/stage1-regeneration/critic-control/README.md"
+        },
+        {
+          "exports": [
+            "add"
+          ],
+          "hash": "2c3ded84fa6aad0cae58d687ab54b299f3f963deff8ee3f5175cc3c1e94a0cf4",
+          "path": "experiments/stage1-regeneration/critic-control/build_known_answer.py"
+        },
+        {
+          "hash": "09ddc3e608599dee24441f4a6ede448fe4de6da02b5376c9369b6945cc257b7a",
+          "path": "experiments/stage1-regeneration/critic-control/known-answer-v1.jsonl"
         },
         {
           "hash": "bc84c4b6b1dead31a83df8b93e8540465d01592b7c18040a5e96f412b025a20a",
@@ -4257,7 +4296,7 @@
           "where": [
             "caller"
           ],
-          "writes": 11
+          "writes": 12
         },
         {
           "reads": 1,
@@ -4276,7 +4315,7 @@
         }
       ],
       "outsideReads": 49,
-      "outsideWrites": 11,
+      "outsideWrites": 12,
       "role": "code",
       "testRunners": [
         "unittest"
@@ -4429,11 +4468,11 @@
       "externals": 0,
       "files": [
         {
-          "hash": "e98378bb64e390bae8210a4d1051aad6af2ae1d869615cd2c009f3934c496297",
+          "hash": "613919758a93dfe4eeee4499c61f0af1c8b1058405abaccd82ad1c9ed84490c4",
           "path": "licences/README.md"
         },
         {
-          "hash": "8409321ed0b9739f3ba56694bc25b46a28e0f71a6a456716b879ed9cd16eea14",
+          "hash": "ad9b569580000301febd679e3b8744b26260d934a33d4d9626d78f85131d7960",
           "path": "licences/registry.json"
         },
         {
@@ -4442,25 +4481,36 @@
             "main",
             "norm",
             "page_text",
+            "pdf_text",
             "wayback"
           ],
           "failurePaths": [
             {
+              "in": "pdf_text",
+              "kind": "except",
+              "line": 47
+            },
+            {
+              "in": "pdf_text",
+              "kind": "raise",
+              "line": 48
+            },
+            {
               "in": "wayback",
               "kind": "except",
-              "line": 79
+              "line": 96
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 97
+              "line": 114
             },
             {
               "kind": "raise",
-              "line": 121
+              "line": 138
             }
           ],
-          "hash": "64819f9892c45d0529e797532f640db3082741549f45746cf740943d8d0a4b91",
+          "hash": "db9841e3e616c23b32bb012f2e8f4710cc5db73cb99faae34a67ccbab2d87a7c",
           "path": "licences/snapshot.py"
         }
       ],
@@ -4485,10 +4535,10 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 3,
+      "dynamicReads": 13,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
-      "dynamicWrites": 4,
+      "dynamicWrites": 8,
       "entryPoints": [
         "mcptoolshop_rnd/cli.py"
       ],
@@ -4496,7 +4546,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "e1a9127d72663d7881b7742fd906e4f7fdae877df256ee5d3553c8f4c87002f9",
+          "hash": "8e8784834a5c9906ef04c9f9648e3ffa8ef045222665c2d52fbcd07c1095b0bc",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -5419,6 +5469,644 @@
           "path": "mcptoolshop_rnd/frontmatter.py"
         },
         {
+          "hash": "db6db9862fa048ed0bd6092df80e42a57e22ac83fce3bfa252a60a5a926999c0",
+          "importsFiles": [
+            "mcptoolshop_rnd/localbuilders/contain.py",
+            "mcptoolshop_rnd/localbuilders/preflight.py",
+            "mcptoolshop_rnd/localbuilders/probe.py",
+            "mcptoolshop_rnd/localbuilders/proxy.py",
+            "mcptoolshop_rnd/localbuilders/runner.py",
+            "mcptoolshop_rnd/localbuilders/score.py",
+            "mcptoolshop_rnd/localbuilders/workspace.py"
+          ],
+          "path": "mcptoolshop_rnd/localbuilders/__init__.py"
+        },
+        {
+          "exports": [
+            "apply_vm_containment",
+            "builder_env",
+            "check_no_drive_mount",
+            "iptables_commands",
+            "kill_process_group",
+            "lock_secret_directories",
+            "render_setup_script",
+            "run_bounded_subprocess",
+            "wrap_as_builder"
+          ],
+          "failurePaths": [
+            {
+              "in": "iptables_commands",
+              "kind": "raise",
+              "line": 103
+            },
+            {
+              "in": "kill_process_group",
+              "kind": "except",
+              "line": 271
+            },
+            {
+              "in": "kill_process_group",
+              "kind": "except",
+              "line": 274
+            },
+            {
+              "in": "kill_process_group",
+              "kind": "except",
+              "line": 278
+            },
+            {
+              "in": "run_bounded_subprocess",
+              "kind": "except",
+              "line": 305
+            },
+            {
+              "in": "run_bounded_subprocess",
+              "kind": "raise",
+              "line": 307
+            },
+            {
+              "in": "apply_vm_containment",
+              "kind": "raise",
+              "line": 321
+            },
+            {
+              "in": "apply_vm_containment",
+              "kind": "raise",
+              "line": 332
+            },
+            {
+              "in": "apply_vm_containment",
+              "kind": "raise",
+              "line": 344
+            },
+            {
+              "in": "apply_vm_containment",
+              "kind": "raise",
+              "line": 348
+            }
+          ],
+          "hash": "80bc357056e1c97c1c4aeced8ef5c788a83d1271e72d6b21968b0b9b29ae3e7a",
+          "path": "mcptoolshop_rnd/localbuilders/contain.py"
+        },
+        {
+          "exports": [
+            "assert_top_logprobs",
+            "build_minimal_gguf_with_template",
+            "check_gguf_template",
+            "check_thinking_split",
+            "compute_j2_context",
+            "compute_j2_context_length",
+            "evaluate_candidate_fit",
+            "main",
+            "next_power_of_two",
+            "parse_kv_cache_log",
+            "read_gguf_chat_template"
+          ],
+          "failurePaths": [
+            {
+              "in": "_max_tokens_for_single_run",
+              "kind": "raise",
+              "line": 106
+            },
+            {
+              "in": "_max_tokens_for_single_run",
+              "kind": "raise",
+              "line": 111
+            },
+            {
+              "in": "_max_tokens_for_single_run",
+              "kind": "raise",
+              "line": 126
+            },
+            {
+              "in": "compute_j2_context_length",
+              "kind": "raise",
+              "line": 151
+            },
+            {
+              "in": "compute_j2_context_length",
+              "kind": "raise",
+              "line": 159
+            },
+            {
+              "in": "compute_j2_context_length",
+              "kind": "raise",
+              "line": 163
+            },
+            {
+              "in": "compute_j2_context_length",
+              "kind": "raise",
+              "line": 168
+            },
+            {
+              "in": "compute_j2_context_length",
+              "kind": "raise",
+              "line": 171
+            },
+            {
+              "in": "compute_j2_context_length",
+              "kind": "raise",
+              "line": 173
+            },
+            {
+              "in": "_read_exact",
+              "kind": "raise",
+              "line": 250
+            },
+            {
+              "in": "_skip_gguf_value",
+              "kind": "raise",
+              "line": 277
+            },
+            {
+              "in": "check_gguf_template",
+              "kind": "except",
+              "line": 315
+            },
+            {
+              "in": "assert_top_logprobs",
+              "kind": "raise",
+              "line": 405
+            },
+            {
+              "in": "assert_top_logprobs",
+              "kind": "raise",
+              "line": 408
+            },
+            {
+              "in": "assert_top_logprobs",
+              "kind": "raise",
+              "line": 416
+            },
+            {
+              "in": "assert_top_logprobs",
+              "kind": "raise",
+              "line": 425
+            },
+            {
+              "in": "assert_top_logprobs",
+              "kind": "raise",
+              "line": 427
+            },
+            {
+              "in": "evaluate_candidate_fit",
+              "kind": "raise",
+              "line": 492
+            },
+            {
+              "in": "evaluate_candidate_fit",
+              "kind": "raise",
+              "line": 501
+            },
+            {
+              "in": "evaluate_candidate_fit",
+              "kind": "raise",
+              "line": 510
+            },
+            {
+              "in": "evaluate_candidate_fit",
+              "kind": "raise",
+              "line": 516
+            },
+            {
+              "in": "evaluate_candidate_fit",
+              "kind": "raise",
+              "line": 519
+            }
+          ],
+          "hash": "86e016310398ac64c2a734a523ab47b71820f750d6bb379ba111f4846df51b75",
+          "importsFiles": [
+            "mcptoolshop_rnd/localbuilders/proxy.py"
+          ],
+          "path": "mcptoolshop_rnd/localbuilders/preflight.py"
+        },
+        {
+          "exports": [
+            "main",
+            "run_probe"
+          ],
+          "failurePaths": [
+            {
+              "in": "_attempt_raw_socket_external",
+              "kind": "except",
+              "line": 77
+            },
+            {
+              "in": "_attempt_dns_resolution",
+              "kind": "except",
+              "line": 86
+            },
+            {
+              "in": "_attempt_direct_llama_server",
+              "kind": "except",
+              "line": 132
+            },
+            {
+              "in": "_attempt_read_dir",
+              "kind": "except",
+              "line": 154
+            },
+            {
+              "in": "_attempt_write_outside_workspace",
+              "kind": "except",
+              "line": 165
+            },
+            {
+              "in": "_attempt_write_outside_workspace",
+              "kind": "except",
+              "line": 168
+            },
+            {
+              "in": "_evaluate_attempt",
+              "kind": "except",
+              "line": 200
+            },
+            {
+              "in": "run_probe",
+              "kind": "raise",
+              "line": 225
+            }
+          ],
+          "hash": "af80c41686dc44b41e883eaa017ce8554ccb35f56a3ba2cf2e83880108c61079",
+          "path": "mcptoolshop_rnd/localbuilders/probe.py"
+        },
+        {
+          "exports": [
+            "apply_fold_system",
+            "apply_reattach_thinking",
+            "extract_abmine_logprobs",
+            "load_candidate_config",
+            "sha256_text",
+            "strip_for_aider",
+            "transform_request_body",
+            "verify_aider_synthetic_strings"
+          ],
+          "failurePaths": [
+            {
+              "in": "verify_aider_synthetic_strings",
+              "kind": "raise",
+              "line": 90
+            },
+            {
+              "in": "verify_aider_synthetic_strings",
+              "kind": "raise",
+              "line": 104
+            },
+            {
+              "in": "verify_aider_synthetic_strings",
+              "kind": "raise",
+              "line": 108
+            },
+            {
+              "in": "__post_init__",
+              "kind": "raise",
+              "line": 128
+            },
+            {
+              "in": "__post_init__",
+              "kind": "raise",
+              "line": 134
+            },
+            {
+              "in": "load_candidate_config",
+              "kind": "raise",
+              "line": 166
+            },
+            {
+              "in": "load_candidate_config",
+              "kind": "except",
+              "line": 171
+            },
+            {
+              "in": "load_candidate_config",
+              "kind": "raise",
+              "line": 172
+            },
+            {
+              "in": "load_candidate_config",
+              "kind": "raise",
+              "line": 174
+            },
+            {
+              "in": "load_candidate_config",
+              "kind": "raise",
+              "line": 180
+            },
+            {
+              "in": "load_candidate_config",
+              "kind": "raise",
+              "line": 185
+            },
+            {
+              "in": "load_candidate_config",
+              "kind": "raise",
+              "line": 198
+            },
+            {
+              "in": "load_candidate_config",
+              "kind": "raise",
+              "line": 207
+            },
+            {
+              "in": "load_candidate_config",
+              "kind": "raise",
+              "line": 213
+            },
+            {
+              "in": "load_candidate_config",
+              "kind": "raise",
+              "line": 216
+            },
+            {
+              "in": "load_candidate_config",
+              "kind": "raise",
+              "line": 220
+            },
+            {
+              "in": "load_candidate_config",
+              "kind": "raise",
+              "line": 224
+            },
+            {
+              "in": "apply_fold_system",
+              "kind": "raise",
+              "line": 312
+            },
+            {
+              "in": "transform_request_body",
+              "kind": "raise",
+              "line": 556
+            },
+            {
+              "in": "handle_completion",
+              "kind": "except",
+              "line": 746
+            },
+            {
+              "in": "do_POST",
+              "kind": "except",
+              "line": 929
+            }
+          ],
+          "hash": "15424413bae15f990891df185fc6be94e49730f2ccec20ac45a5804307a2f325",
+          "path": "mcptoolshop_rnd/localbuilders/proxy.py"
+        },
+        {
+          "exports": [
+            "build_aider_argv",
+            "build_aider_command",
+            "build_receipt",
+            "create_coder_with_reflections",
+            "format_task_prompt",
+            "main",
+            "parse_analytics_log",
+            "prompt_sha256",
+            "render_model_settings_yaml",
+            "run_aider_entrypoint",
+            "run_single_task",
+            "validate_model_settings_file",
+            "validate_receipt",
+            "write_model_settings_file"
+          ],
+          "failurePaths": [
+            {
+              "in": "format_task_prompt",
+              "kind": "raise",
+              "line": 102
+            },
+            {
+              "in": "validate_model_settings_file",
+              "kind": "raise",
+              "line": 140
+            },
+            {
+              "in": "validate_model_settings_file",
+              "kind": "raise",
+              "line": 143
+            },
+            {
+              "in": "build_aider_argv",
+              "kind": "raise",
+              "line": 175
+            },
+            {
+              "in": "build_aider_argv",
+              "kind": "raise",
+              "line": 183
+            },
+            {
+              "in": "parse_analytics_log",
+              "kind": "except",
+              "line": 318
+            },
+            {
+              "in": "validate_receipt",
+              "kind": "raise",
+              "line": 482
+            },
+            {
+              "in": "validate_receipt",
+              "kind": "raise",
+              "line": 484
+            },
+            {
+              "in": "validate_receipt",
+              "kind": "raise",
+              "line": 486
+            },
+            {
+              "in": "validate_receipt",
+              "kind": "raise",
+              "line": 488
+            },
+            {
+              "in": "validate_receipt",
+              "kind": "raise",
+              "line": 490
+            },
+            {
+              "in": "run_single_task",
+              "kind": "raise",
+              "line": 535
+            },
+            {
+              "in": "run_single_task",
+              "kind": "except",
+              "line": 595
+            },
+            {
+              "in": "run_single_task",
+              "kind": "except",
+              "line": 618
+            },
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 660
+            }
+          ],
+          "hash": "b98689bd2c73c88f3346a724b8938a5a597cbe2065b36b2ae32f3c48e9d15abe",
+          "importsFiles": [
+            "mcptoolshop_rnd/localbuilders/contain.py",
+            "mcptoolshop_rnd/localbuilders/proxy.py",
+            "mcptoolshop_rnd/localbuilders/score.py",
+            "mcptoolshop_rnd/localbuilders/workspace.py"
+          ],
+          "path": "mcptoolshop_rnd/localbuilders/runner.py"
+        },
+        {
+          "exports": [
+            "check_workspace_integrity",
+            "evaluate_junit_parity",
+            "merge_junit_summaries",
+            "parse_git_status_porcelain",
+            "parse_junitxml",
+            "path_is_allowed",
+            "run_pytest_and_score",
+            "score_task"
+          ],
+          "failurePaths": [
+            {
+              "in": "parse_junitxml",
+              "kind": "raise",
+              "line": 153
+            },
+            {
+              "in": "parse_junitxml",
+              "kind": "except",
+              "line": 157
+            },
+            {
+              "in": "parse_junitxml",
+              "kind": "raise",
+              "line": 158
+            },
+            {
+              "in": "check_workspace_integrity",
+              "kind": "except",
+              "line": 258
+            },
+            {
+              "in": "run_pytest_and_score",
+              "kind": "raise",
+              "line": 439
+            },
+            {
+              "in": "run_pytest_and_score",
+              "kind": "raise",
+              "line": 441
+            },
+            {
+              "in": "run_pytest_and_score",
+              "kind": "except",
+              "line": 494
+            },
+            {
+              "in": "run_pytest_and_score",
+              "kind": "raise",
+              "line": 508
+            }
+          ],
+          "hash": "2310e0eb640a73eea5db1b5cbdb60ee8ac1bce38e99170ffe69ff1404dcde517",
+          "importsFiles": [
+            "mcptoolshop_rnd/localbuilders/contain.py",
+            "mcptoolshop_rnd/localbuilders/workspace.py"
+          ],
+          "path": "mcptoolshop_rnd/localbuilders/score.py"
+        },
+        {
+          "hash": "03c93fdcbec6de84eb5a4ebef0c8c976d4d5a9d1602ed0be0ee4d373de4a3769",
+          "path": "mcptoolshop_rnd/localbuilders/setup_vm.sh"
+        },
+        {
+          "exports": [
+            "build_workspace",
+            "git_env",
+            "is_scorer_ignored",
+            "is_test_path",
+            "load_task_bank",
+            "normal_rel_path",
+            "sha256_file",
+            "snapshot_test_hashes",
+            "strip_leaking_files",
+            "validate_allowed_paths"
+          ],
+          "failurePaths": [
+            {
+              "in": "validate_allowed_paths",
+              "kind": "raise",
+              "line": 99
+            },
+            {
+              "in": "validate_allowed_paths",
+              "kind": "raise",
+              "line": 104
+            },
+            {
+              "in": "from_dict",
+              "kind": "raise",
+              "line": 156
+            },
+            {
+              "in": "from_dict",
+              "kind": "raise",
+              "line": 160
+            },
+            {
+              "in": "from_dict",
+              "kind": "raise",
+              "line": 163
+            },
+            {
+              "in": "from_dict",
+              "kind": "raise",
+              "line": 169
+            },
+            {
+              "in": "from_dict",
+              "kind": "raise",
+              "line": 176
+            },
+            {
+              "in": "from_dict",
+              "kind": "raise",
+              "line": 184
+            },
+            {
+              "in": "read_scrubbed_test",
+              "kind": "raise",
+              "line": 222
+            },
+            {
+              "in": "read_twin_test",
+              "kind": "raise",
+              "line": 231
+            },
+            {
+              "in": "load_task_bank",
+              "kind": "raise",
+              "line": 240
+            },
+            {
+              "in": "_run_git",
+              "kind": "raise",
+              "line": 332
+            },
+            {
+              "in": "build_workspace",
+              "kind": "raise",
+              "line": 351
+            },
+            {
+              "in": "build_workspace",
+              "kind": "except",
+              "line": 370
+            }
+          ],
+          "hash": "67ee65253858d76c7c77ec6e4b0e6fcdeebebcbae83bad95783acaf7f107648b",
+          "path": "mcptoolshop_rnd/localbuilders/workspace.py"
+        },
+        {
           "exports": [
             "entry_paths",
             "load",
@@ -5692,11 +6380,11 @@
       "origin": "authored",
       "outsidePlaces": [
         {
-          "reads": 25,
+          "reads": 37,
           "where": [
             "caller"
           ],
-          "writes": 8
+          "writes": 12
         },
         {
           "reads": 2,
@@ -5720,13 +6408,13 @@
           "writes": 0
         }
       ],
-      "outsideReads": 30,
-      "outsideWrites": 8,
+      "outsideReads": 42,
+      "outsideWrites": 12,
       "role": "code",
       "testRunners": [
         "unittest"
       ],
-      "testedBy": 11,
+      "testedBy": 16,
       "unresolvedNamed": [
         {
           "path": "mcptoolshop_rnd/collect.py",
@@ -5802,7 +6490,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "bf28a0e691cd55bba2ac5c2e45f0a0304c6063e1164d628e7a32d50bdf2f4c8d",
+          "hash": "e969550727d8aef017aa9798bfba4c65a0b9373e8394c47c9e1941b1e3233af6",
           "path": "CHANGELOG.md"
         },
         {
@@ -6058,7 +6746,7 @@
           "path": "site/src/content/docs/handbook/ab-dataminer.md"
         },
         {
-          "hash": "f82492f99d6febb4b02e5e4e0f53b06a042ea0ab216522a91f8aebe1a04cb622",
+          "hash": "d8a7ae0e77d366b7234434bd9e747525c3358c57ac89eca64473623daf500632",
           "path": "site/src/content/docs/handbook/ab-experiments.md"
         },
         {
@@ -6066,7 +6754,7 @@
           "path": "site/src/content/docs/handbook/architecture.md"
         },
         {
-          "hash": "8694c917082512c3493448c1fba95f7d762a1293c9c664dafb9f316b88bbf7fc",
+          "hash": "092d05827f47fc254e1cc53bcfc2c89ce7a274d21ee1a3073b3480bc3bbbac51",
           "path": "site/src/content/docs/handbook/dataset-builds.md"
         },
         {
@@ -6090,7 +6778,7 @@
           "path": "site/src/content/docs/handbook/index.md"
         },
         {
-          "hash": "bfd44d8b9c7aebab35ff20b5965475d5e257df8293d482d434a5ee1f14d58488",
+          "hash": "0527c1428fb2c1ded99a9f0c68f5939b620cf484cba749561d60841e3ae4bf09",
           "path": "site/src/content/docs/handbook/model-comparisons.md"
         },
         {
@@ -6245,6 +6933,50 @@
         {
           "hash": "057cc9dcabcea8e6a744fcce65f032d4783792967ab190a498988ebdf97462a1",
           "path": "tests/fixtures/agent_ab_harness/shakedown-2/RC03-B2.jsonl"
+        },
+        {
+          "hash": "820e32ce02c54e2a89ec4a03d9f2d980b876504fa08190e16a1edbe69e35f19c",
+          "path": "tests/fixtures/localbuilders/bank.json"
+        },
+        {
+          "hash": "ed6054a398ccaa5102beb14bc3965b0591ee99ef3a5d28a6832c2813406b94bc",
+          "path": "tests/fixtures/localbuilders/candidate_config.json"
+        },
+        {
+          "hash": "62bc5bdf73650e1ff0fd3fad7e0fecadb08402f4d8bb3c06b2abbf6df633e373",
+          "importsFiles": [
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/abmine.py"
+          ],
+          "path": "tests/fixtures/localbuilders/scrubbed/test_abmine_fa.py",
+          "testFramework": "unittest"
+        },
+        {
+          "hash": "e8dbac63a73ebeb1b224dc715e59dac9101ad8e80a4e8970f252415591c3ef55",
+          "importsFiles": [
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/watch.py"
+          ],
+          "path": "tests/fixtures/localbuilders/scrubbed/test_watch_stable.py",
+          "testFramework": "unittest"
+        },
+        {
+          "hash": "062bf4e6eec28ef115ae96401ee06c29cf936c7a3402215294a7753f4232a3bc",
+          "importsFiles": [
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/abmine.py"
+          ],
+          "path": "tests/fixtures/localbuilders/twins/test_abmine_fa_twin.py",
+          "testFramework": "unittest"
+        },
+        {
+          "hash": "056a93645b1d6ba554864dd929701b26b06a419716cc7349602948a48f030e0a",
+          "importsFiles": [
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/watch.py"
+          ],
+          "path": "tests/fixtures/localbuilders/twins/test_watch_stable_twin.py",
+          "testFramework": "unittest"
         },
         {
           "hash": "8c9c1fc133c0f098796154a0a80e9e20ecf00cf20d202c6808560da88dc7fba4",
@@ -6424,8 +7156,29 @@
           "testFramework": "unittest"
         },
         {
-          "hash": "bf411af86783679541a16245c625d7ca594b0d8a05e2bb2fc8af924306b579fc",
+          "hash": "136f2f41d755e3630695021ddc11532e5d031efa7b1d53c1d2b0fc8abd561740",
           "path": "tests/test_licence_registry.py",
+          "testFramework": "unittest"
+        },
+        {
+          "hash": "5c4d27cac77fb55910d61715e562ed26df9a4931b5c910327ca85b32b0efe518",
+          "importsFiles": [
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/abmine.py",
+            "mcptoolshop_rnd/localbuilders/__init__.py",
+            "mcptoolshop_rnd/localbuilders/contain.py",
+            "mcptoolshop_rnd/localbuilders/preflight.py",
+            "mcptoolshop_rnd/localbuilders/probe.py",
+            "mcptoolshop_rnd/localbuilders/proxy.py",
+            "mcptoolshop_rnd/localbuilders/runner.py",
+            "mcptoolshop_rnd/localbuilders/score.py",
+            "mcptoolshop_rnd/localbuilders/workspace.py"
+          ],
+          "names": [
+            "mcptoolshop_rnd/cli.py",
+            "mcptoolshop_rnd/watch.py"
+          ],
+          "path": "tests/test_localbuilders.py",
           "testFramework": "unittest"
         },
         {
@@ -6657,7 +7410,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 14
+          "files": 22
         },
         {
           "boundary": "rnd",
@@ -6672,7 +7425,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 16
+          "files": 21
         },
         {
           "boundary": "experiments",
@@ -6774,7 +7527,7 @@
         },
         {
           "coverage": true,
-          "files": 16,
+          "files": 21,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -7058,7 +7811,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 14
+          "files": 22
         },
         {
           "boundary": "rnd",
@@ -7242,8 +7995,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "745ccdbe9f126883edddf7c6b9e4b30e210b1bfb",
-    "tracked": 799
+    "commit": "e7255b5bf7fef3904a188c231fd807d1bfabe24e",
+    "tracked": 824
   },
   "landings": [
     {
@@ -7287,6 +8040,11 @@
     },
     {
       "readers": [
+        {
+          "by": "mcptoolshop_rnd/localbuilders/workspace.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
         {
           "by": "tests/test_cli.py",
           "call": "literal",
@@ -7957,6 +8715,18 @@
           "confidence": "ast"
         }
       ]
+    },
+    {
+      "readers": [
+        {
+          "by": "tests/test_localbuilders.py",
+          "call": "read_text",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/local-builders/card-values.json",
+      "writers": []
     },
     {
       "readers": [
@@ -9332,6 +10102,29 @@
     {
       "readers": [
         {
+          "by": "tests/test_localbuilders.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "mcptoolshop_rnd/abmine.py",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "mcptoolshop_rnd/localbuilders/contain.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "mcptoolshop_rnd/localbuilders/setup_vm.sh",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "tests/test_packaging.py",
           "call": "read_text",
           "confidence": "ast",
@@ -9487,12 +10280,60 @@
       ],
       "target": "tests/fixtures/agent_ab_harness/shakedown-2/RC03-A1.jsonl",
       "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "tests/test_localbuilders.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "tests/fixtures/localbuilders",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "tests/test_localbuilders.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "tests/fixtures/localbuilders/bank.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "tests/test_localbuilders.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "tests/fixtures/localbuilders/candidate_config.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "tests/test_localbuilders.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "tests/test_abmine.py",
+      "writers": []
     }
   ],
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 45,
+  "testFiles": 52,
   "testsNotRun": [
     "experiments/cuda-graphs/test_graphed_heads.py",
     "experiments/data-designer/tests/test_lockdown.py",

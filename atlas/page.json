@@ -74,7 +74,7 @@
   "changes": {
     "fileCounts": {
       "added": 17,
-      "changed": 5,
+      "changed": 17,
       "moved": 0,
       "parts": 6,
       "removed": 0
@@ -82,36 +82,42 @@
     "items": [
       {
         "kind": "landing",
-        "sentence": "licences/registry.json is now written by licences/snapshot.py.",
+        "sentence": "CHANGELOG.md is now also read by mcptoolshop_rnd/localbuilders/workspace.py.",
         "subjects": [
-          "licences/registry.json",
-          "licences/snapshot.py"
+          "CHANGELOG.md",
+          "mcptoolshop_rnd/localbuilders/workspace.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "licences/registry.json is now read by licences/snapshot.py.",
+        "sentence": "experiments/local-builders/card-values.json is now read by tests/test_localbuilders.py.",
         "subjects": [
-          "licences/registry.json",
-          "licences/snapshot.py"
+          "experiments/local-builders/card-values.json",
+          "tests/test_localbuilders.py"
         ]
       },
       {
-        "kind": "part",
-        "sentence": "licences is a new part, drawn from `licences/**`.",
+        "kind": "landing",
+        "sentence": "mcptoolshop_rnd/abmine.py is now read by tests/test_localbuilders.py.",
         "subjects": [
-          "licences"
+          "mcptoolshop_rnd/abmine.py",
+          "tests/test_localbuilders.py"
         ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "And 5 more new writers and readers of places.",
+        "subjects": []
       },
       {
         "kind": "counts",
-        "sentence": "17 files added and 5 changed content, across 6 parts.",
+        "sentence": "17 files added and 17 changed content, across 6 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "ac6167721f2bfbc799ef36fd109fae3f1a3f1e14",
-      "generatedAt": "2026-10-16T19:25:25.361Z"
+      "commit": "49542f0a467e36dad8f84ac1cd7a60ced33f6f22",
+      "generatedAt": "2026-10-17T06:35:40.028Z"
     },
     "unchanged": false
   },
@@ -152,9 +158,9 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 4 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "745ccdbe9f126883edddf7c6b9e4b30e210b1bfb",
+  "commit": "e7255b5bf7fef3904a188c231fd807d1bfabe24e",
   "defaultBranch": "main",
-  "derived": "14 parts, mostly Python (106 files), shell (15), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "14 parts, mostly Python (120 files), shell (16), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -177,7 +183,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 14
+          "files": 22
         },
         {
           "boundary": "rnd",
@@ -192,7 +198,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 16
+          "files": 21
         },
         {
           "boundary": "experiments",
@@ -232,7 +238,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 14
+          "files": 22
         },
         {
           "boundary": "rnd",
@@ -321,8 +327,24 @@
       "triggers": []
     }
   ],
-  "duplicates": [],
-  "duplicatesLead": null,
+  "duplicates": [
+    {
+      "files": [
+        "experiments/npu-probe/probe.py",
+        "mcptoolshop_rnd/localbuilders/probe.py"
+      ],
+      "name": "main",
+      "partLabels": [
+        "experiments",
+        "mcptoolshop_rnd"
+      ],
+      "parts": [
+        "experiments",
+        "mcptoolshop_rnd"
+      ]
+    }
+  ],
+  "duplicatesLead": "These are candidates from names and call order, not a judgement.",
   "duplicatesNote": [],
   "edges": [
     {
@@ -461,12 +483,12 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-16T22:28:21.671Z",
+  "generatedAt": "2026-10-17T08:06:54.474Z",
   "limits": [
     "9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.",
-    "13 writes and 20 reads use paths built at run time and are not named here.",
+    "17 writes and 30 reads use paths built at run time and are not named here.",
     "5 writes go to places this repository does not track, so they are not listed as generated.",
-    "20 writes and 72 reads go to a path their caller passes, not to this repository.",
+    "25 writes and 84 reads go to a path their caller passes, not to this repository.",
     "5 reads go to the directory the command is run in (entries, instruments and licences), not to this repository.",
     "1 read goes to the directory the command is run in or a path its caller passes, not to this repository.",
     "1 read goes to the home directory (.claude/), not to this repository.",
@@ -525,13 +547,13 @@
   "startReason": "This path follows rnd (a command people run) from its entry, since CI runs only tests and checks.",
   "summary": "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only).",
   "summaryFrom": "person",
-  "testFiles": 45,
+  "testFiles": 52,
   "testedBy": {
     "experiments": 6,
-    "mcptoolshop_rnd": 11,
+    "mcptoolshop_rnd": 16,
     "rnd": 1
   },
-  "unnamedWrites": 13,
+  "unnamedWrites": 17,
   "unread": [
     {
       "place": "experiments/charts/",

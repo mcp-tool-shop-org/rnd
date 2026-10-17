@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.2.8] - 2026-10-17
+
+- local-builders: amendment C, the disposition of Argon's J2 design review (F1-F14); registry adds Gemma's prohibited-use policy
+- Updated experiment `local-builders`
+
 ## [1.1.10.2.7] - 2026-10-17
 
 - generated-content rule split: strict for what shapes weights or scores, code read plainly (Antigravity may build studio code, AI tooling included)

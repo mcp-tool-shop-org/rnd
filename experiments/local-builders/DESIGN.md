@@ -124,6 +124,85 @@ the reworded licence rule, the maintainer's CUDA 13.4 rule, the dataminer requir
    ledger (start and end balance, cards, wall time, work done). The 70-unit estimate and the 90-unit cap in
    section 6 are superseded by the ledger.
 
+**Amendment C (2026-10-17): R&D's disposition of Browser Argon's review of 8685238** (verdict HOLD: F1–F10 blocking,
+F11–F13 before Wave 2, F14 not blocking). Where this amendment and an older section disagree, this amendment
+governs. Argon re-reviews the fixed version before Wave 1.
+
+*The harness (F1–F5), all accepted:*
+- **F1. No streaming.** The logging proxy sends `stream: false` to `llama-server`, so `--reasoning-format deepseek`
+  separates the thinking. Aider never sees `<think>` text as edits.
+- **F2. One edit format.** `--edit-format diff` for every model, with no exceptions. Also a pinned Aider
+  model-settings file, and `OPENAI_API_KEY=local`.
+- **F3. Card sampling and template arguments.** The proxy overrides Aider's temperature and other sampling with each
+  model's documented card values, and injects each card's `chat_template_kwargs`. Every value is read from the
+  card at the pinned revision by R&D during the build, and recorded. None is copied from a review.
+- **F4. The loop is defined.**
+  - `--auto-test --test-cmd "<the task's target test command>" --no-auto-commits`.
+  - The 30-turn cap is **30 model calls, enforced by the proxy**, which refuses the 31st, plus the 15-minute wall.
+- **F5. No speculative decoding** (no `-md` or draft model; the dflash variants are out).
+  - The proxy writes the full log-probabilities and `reasoning_content` to `generations.jsonl`, and strips both
+    before replying to Aider.
+  - A preflight asserts five `top_logprobs` at every step from index 1 on.
+
+*The candidates and their fit (F6):*
+- **Bolt's arm** is labelled `[maker-QAT-IQ2 / 74B-A9B]`, and P(best) is reported with Bolt and without it.
+- **Fit on the A100-40GB** is decided in a preflight at J2's context: the GGUF plus the KV cache, measured. (Our own
+  window 3: Lightning's Q8_0 is 35.0 GB and served at `-c 4096`.)
+  - A Q8_0 that doesn't fit at J2's context runs as a **Q6_K arm**, converted by us from the same BF16 and labelled
+    `[Q6_K: A100 fit]`.
+  - Nothing is stepped down silently, and no model is dropped for fit.
+- **Wave 2 can't reuse the Q8_0 files on the 5090** (26 GB plan cap). Wave 2 runs **a rig-fit quant (Q4_K_M or
+  Q5_K_M) as its own labelled arm**, converted by us from the same BF16. Amendment B's "the model weights are
+  identical across waves" is withdrawn.
+
+*The tasks and the key (F7, F10):*
+- **F7. Leakage.**
+  - The PR's added test is scrubbed: comments, docstrings, issue and PR numbers, and version-bump assertions are
+    removed, and new private names are kept only where the fix's interface needs them.
+  - The parent tree loses `docs/runs/`, `CHANGELOG.md` and any design notes.
+  - The task prompt is one fixed template: "The test `<node id>` fails. Make it pass. Don't change any test file."
+  - The recall floor is the **latest** stated cutoff or release date across all candidates, replacing the
+    provisional 2026-09-01.
+- **F10. The key means mergeable.**
+  - `tests/**` is never in `allowed_paths`. The target test file goes to Aider with `--read`, and its sha256 is
+    checked before scoring.
+  - `git status --porcelain --ignored` must show nothing outside `allowed_paths`.
+  - `pytest --junitxml`: the target node ID passes explicitly, and the skipped and xfail counts equal the parent's
+    baseline.
+  - **A held-out twin:** a second test of the same behaviour with different literals, which the builder never sees,
+    must pass too. That catches hard-coding. The twin is written by R&D (Claude) and keyed against the PR's real
+    fix, under Anthropic's grant for evaluation items.
+
+*The decision rule (F8):*
+- **The bank grows to 36 tasks**, at most 2 per module, within the open unit budget.
+- **Advancing:** the top 3 by resolve rate, **plus any model within one paired SE of the leader.**
+- **Ties** split 1/m in P(best).
+- **The exits are decoupled:**
+  - J2 exits on J2's own criteria only (2 or fewer resolved, or harness crashes above 20%);
+  - fit is a report (amendment B);
+  - J1 lives in the regeneration.
+- Section 5's line that makes "doesn't fit" an exit is superseded.
+
+*Containment (F9):*
+- `--no-suggest-shell-commands`.
+- `git archive` plus `git init`, never a worktree, with `GIT_CONFIG_NOSYSTEM=1`.
+- **Aider and the test runs execute as an unprivileged `builder` user.** iptables owner rules let `builder` reach
+  only the proxy's loopback port: not `llama-server`'s port, and not the internet.
+- No Drive mount on the VM. The task bank isn't readable by `builder`.
+- The probe (section 8) proves every one of these refusals.
+
+*Before Wave 2 (F11–F13), all accepted:*
+- **F11.** The pre-amendment-B Ollama and 26 GB clauses in sections 2, 3, 6 and 8 are superseded. The section 8
+  validation compares token counts with `llama-server`'s `usage`, not Ollama's.
+- **F12.** Wave 2 serves through `llama-server --jinja` on the rig (a CUDA 13.4 build), not Ollama, so the chat
+  template path is the same as Wave 1's.
+- **F13.** The context is set from a full validation task run to its 30-call cap (largest prompt plus output, times
+  1.5), not from one short run, and is checked in the fit preflight.
+
+*F14 (not blocking), done:* R&D read Gemma's prohibited-use policy at its source (last modified 2024-02-21). It bars
+only harmful-content categories and doesn't restrict code fixing, evaluation or training on outputs. The registry
+entry is . Gemma 4 is eligible.
+
 **Builder (2026-10-17):** the maintainer may put Antigravity Argon on the J2 build after Browser Argon confirms the design. Code is read plainly under the split rule (`experiments/generated-content-terms`), and R&D reviews the build.
 
 **Sources:**

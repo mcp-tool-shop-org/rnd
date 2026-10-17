@@ -201,7 +201,7 @@ governs. Argon re-reviews the fixed version before Wave 1.
 
 *F14 (not blocking), done:* R&D read Gemma's prohibited-use policy at its source (last modified 2024-02-21). It bars
 only harmful-content categories and doesn't restrict code fixing, evaluation or training on outputs. The registry
-entry is . Gemma 4 is eligible.
+entry is `gemma-prohibited-use-policy`. Gemma 4 is eligible.
 
 **Builder (2026-10-17):** the maintainer may put Antigravity Argon on the J2 build after Browser Argon confirms the design. Code is read plainly under the split rule (`experiments/generated-content-terms`), and R&D reviews the build.
 

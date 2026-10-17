@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.2.5] - 2026-10-16
+
+- stage1-regeneration: DATAMINER-USES.md, using the generation records in role-set (uncertain-first key check, host agreement, and four later uses)
+- handbook: the dataminer's generation record as provenance evidence in every experiment template
+
 ## [1.1.10.2.4] - 2026-10-16
 
 - stage1-regeneration: the critic's known-answer set v1 (40 Claude-written keyed items for critic-control)

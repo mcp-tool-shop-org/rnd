@@ -45,9 +45,9 @@ Anthropic's training-target rule, the Kimi app's non-commercial clause) stand.
 | **Evaluation items** | everyone's (no clause bars evaluation) | the Kimi app (non-commercial) |
 | **Training data** | Claude (for a non-competing model); Apache-2.0 and MIT open models; DeepSeek; Nemotron (OpenMDW); Muse-Glimmer; Muse Spark (with its conditions); Kimi through Ollama Cloud (K3/K2.6 MIT-style; Ollama claims no ownership) | Google (ML clause); xAI (AUP "distilling ... Outputs"; and, under Enterprise terms, its training ban); Claude for a competing model; the Kimi app |
 
-**Stage 1:** Grok's and Argon's rows stay out of training on the Google and xAI clauses. Kimi's rows are allowed if
-they came through Ollama Cloud and barred if through the Kimi app; which route wrote them is not recorded (an open
-fact for the maintainer).
+**Stage 1:** Grok's and Argon's rows stay out of training on the Google and xAI clauses. Kimi's rows may train: its
+weights are open and permissive (K3 MIT-style, K2.6 modified MIT), and the seat ran through Ollama Cloud, not the Kimi
+app.
 
 > **The sections below are the 2026-10-16 record,** written under a proof rule ("not proven = don't use") that the
 > maintainer withdrew the same day and finally on 2026-10-17. Their clause quotes stand. Their "not proven" verdicts

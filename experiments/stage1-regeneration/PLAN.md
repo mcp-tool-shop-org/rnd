@@ -2,8 +2,9 @@
 
 **Why.** The maintainer's ruling (2026-10-16): regenerate Stage 1's training data (`experiments/generated-content-terms`).
 *Revised 2026-10-17:* the proof rule this plan was first written under is withdrawn; a use is barred only by a clause.
-Grok's and Argon's rows still can't train (the xAI distillation and Google ML clauses). Kimi's rows are allowed if
-they came through Ollama Cloud, and which route wrote them is an open fact for the maintainer. The frozen set
+Grok's and Argon's rows still can't train (the xAI distillation and Google ML clauses). Kimi's rows may train: Kimi's
+weights are open and permissive (K3 MIT-style, K2.6 modified MIT), and its seat ran through Ollama Cloud, not the
+Kimi app (PROVENANCE.md). The frozen set
 (aspire-si `FROZEN.md` `e7b69464`) has these writers:
 - Kimi wrote the pilot;
 - Grok wrote batches 2–8;
@@ -238,7 +239,7 @@ that):
 
 The maintainer's own rulings, plus those he delegated to the Publisher or R&D:
 - **Regenerate everything:** all 810 training rows and the 210 apply items (*revised 2026-10-17:* Kimi's rows may
-  be kept if they came through Ollama Cloud; the maintainer decides). The maintainer
+  be kept). The maintainer
   made no exception for the Grok-written batches: xAI's AUP lists "distilling model data or Outputs" among the
   uses you agree not to make, and his rule doesn't read it narrowly.
 - **The student verifier is a specialized tool** in the sense of Anthropic's Help Center article 12326764. So

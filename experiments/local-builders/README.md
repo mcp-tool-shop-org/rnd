@@ -13,8 +13,8 @@ has run.** Next: Argon reviews the design, then the maintainer approves it, incl
 - **Two job kinds:** J1 (Stage 1-style apply items written inside role-set, against role-set's incumbent
   licence-proven writer and critic pair; it selects the Stage 1 regeneration's writer) and J2 (real bug fixes,
   through Aider).
-- **Candidates:** six for J2. J1 takes licence-proven writers only, which is two today, pending the maintainer's
-  Apache-2.0 ruling.
+- **Candidates:** six for J2. J1 takes writers whose licences don't restrict training on outputs. Under the
+  reworded rule (2026-10-16) that includes the Apache-2.0 models.
 - **Wave 1 is a screen** on one pinned Colab A100-40GB. J2 runs with the usable budget set to the 5090's 26 GB plan
   cap. J1 runs at the regeneration's own placement. It crowns no winner.
 - **Wave 2** runs the confirmatory comparisons on the 5090, and the card sub-study on real Colab cards.

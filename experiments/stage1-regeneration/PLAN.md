@@ -31,11 +31,14 @@ The rule requires the model maker's own text allowing the use of outputs. Bigges
 | meta-models/Muse-Glimmer-30B | 30B dense | Apache-2.0 | the card's intended uses include "Synthetic data generation: Generating high-quality training data for downstream model development." | **proven** |
 | nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B | 30B / 3B MoE | OpenMDW-1.1 (the card governs, not the licence the Ollama tag bundles) | as for the Nemotrons above | **proven** |
 
-**Not proven, or out:**
-- **Nemotron-4-340B, and Nemotron-3-Super (Dec 2025):** NVIDIA Open Model License. "Does not claim ownership" of
-  outputs isn't a grant.
-- **Plain Apache-2.0 models** (Qwen3.8 and 3.6, Gemma 4, Granite 4.2): Argon checked and found **no documentation
-  that settles it**. The Linux Foundation's OpenMDW launch post names that exact ambiguity, so they stay not proven.
+**Revised 2026-10-16 under the reworded rule** (allowed unless a contract or licence restricts it):
+- **Plain Apache-2.0 models** (Qwen3.8 and 3.6, Gemma 4, Granite 4.2) **are eligible.** Their licence makes no claim
+  on outputs, and no contract binds a local run. Gemma 4 is checked against Gemma's own use policy before it's used.
+  (The earlier "not proven" counted silence as a bar.)
+- **Nemotron-4-340B and Nemotron-3-Super (Dec 2025)** (NVIDIA Open Model License) are likewise unrestricted on
+  outputs. They're out on size and placement, not licence.
+
+**Out:**
 - **Llama-based distills** (R1-Distill-Llama-70B, Llama-3.1-Nemotron-Ultra-253B): out, but **Argon's reason was
   wrong.** The Llama 3.3 licence (2024-12-06) doesn't bar training non-Llama models. Its Section 1.b.i permits using
   outputs "to create, train, fine tune, or otherwise improve an AI model", on condition that the model's name begins
@@ -47,8 +50,8 @@ The rule requires the model maker's own text allowing the use of outputs. Bigges
   and Usage Policy, and display "Built with Muse Spark Open". It also needs a gated-access request in the
   maintainer's legal name, and only the frontier tier can run it (section 5). Out of reach at today's balance either
   way.
-- **R1-Distill-Qwen-32B** stands on its maker's explicit grant. If the maintainer wants the base model's maker to
-  grant it too, it falls with the Apache-2.0 question.
+- **R1-Distill-Qwen-32B** stands on its maker's explicit grant, and its Apache-2.0 base adds no restriction, so
+  it's eligible under the reworded rule. The Publisher's earlier "not used" rested on the base's silence.
 
 ## 2. Writer and critic
 
@@ -251,6 +254,7 @@ The maintainer's own rulings, plus those he delegated to the Publisher or R&D:
 ## Still open
 
 - **Muse-Spark's conditions:** moot unless the frontier tier is ever funded.
-- **The Kimi pilot's 40 T04 rows:** they stay in the regeneration unless the maintainer confirms the Ollama Cloud
-  route **and** accepts ownership with no restriction as proof.
-- **Apache-2.0 alone as proof:** unruled. No model in the plan depends on it.
+- **The Kimi pilot's 40 T04 rows:** usable under the reworded rule if they were written through Ollama Cloud (the
+  route needs the maintainer's confirmation). They're regenerated anyway unless he says otherwise, for a uniform
+  set.
+- **Apache-2.0:** ruled 2026-10-16 under the reworded rule: eligible.

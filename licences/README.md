@@ -1,8 +1,22 @@
 # Licences and terms: the studio's path to the proof
 
-**The rule (the maintainer's decision, 2026-10-16):** a use of AI-generated content is allowed only when the
-provider's own documentation proves it: the live URL, the exact clause, and its date. If it isn't proven, it isn't
-used. This folder is where that proof lives, one entry per page the studio relies on.
+**The rule (the maintainer's decision, 2026-10-16, revised the same day):**
+
+- **A use is allowed unless the provider's contract or licence restricts it.** The restriction search is
+  documented: the pages, clauses and dates checked (`licences/registry.json`).
+- **Commonly banned uses get the explicit clause check before they're relied on:** training on outputs,
+  distillation, competing models.
+- **A model's say-so isn't proof,** including Argon's, R&D's or any model's.
+- **R&D re-reads every cited clause at its source** before anything relies on it.
+
+*Revised the same day.* The first wording ("allowed only when the provider's documentation proves it; a missing
+restriction proves nothing") counted silence as a bar. The maintainer judged that too strict. Only a contract the
+studio agreed to, or copyright in the output, can restrict a use. A licence that makes no claim on outputs, or a
+signed contract that is silent, leaves the use free. The verdicts below that rested on silence were revised
+(`licences/registry.json`). The ones that rest on explicit clauses (Google's ML clause, xAI's distillation ban,
+Anthropic's training-target rule, the Kimi app's non-commercial clause) stand.
+
+This folder is the documented search: one entry per page the studio relies on.
 
 **This is a reading of published terms, not legal advice.**
 
@@ -12,7 +26,9 @@ used. This folder is where that proof lives, one entry per page the studio relie
   - `url`, `page_date` (the page's own date) and `read_date` (when R&D read it);
   - `clauses`: the exact words the verdict rests on;
   - `uses`: the verdict for each of the four uses (`assets`, `training`, `evaluation`, `code`). The verdicts are
-    `proven`, `conditions` (proven with the `conditions` listed), `barred`, `not_proven` and `n/a`;
+    `proven` (an explicit grant, or no restriction found in a documented search), `conditions` (allowed with the
+    `conditions` listed), `barred` (an explicit clause forbids it), `not_proven` (wording the maintainer hasn't ruled
+    on), and `n/a`;
   - `covers`: the models or services it governs;
   - `snapshot_sha256`: the hash of the page text as fetched on the read date;
   - `archive_url`: the Wayback Machine's closest copy, where one exists.

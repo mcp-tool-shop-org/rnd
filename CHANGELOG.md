@@ -13,6 +13,7 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [1.1.10.2.3] - 2026-10-16
 
+- The generated-content rule reworded (the maintainer, 2026-10-16): allowed unless a contract or licence restricts it, with the search documented; silence-based verdicts revised (Apache/MIT outputs, Kimi via Ollama Cloud, Google non-AI output, R1-Distill-Qwen-32B)
 - generated-content-terms: Argon's answer on pipeline code (barred on the literal consumer text); registry adds the Gemini API and Google Cloud terms
 - Added experiment `generated-content-terms`
 

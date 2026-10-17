@@ -40,7 +40,9 @@ class LicenceRegistry(unittest.TestCase):
         for e in self.entries:
             grants = [u for u, v in e["uses"].items() if v in ("proven", "conditions")]
             if grants:
-                self.assertTrue(e["clauses"], f"{e['id']}: {grants} with no clause")
+                # a grant rests on a quoted clause, or on a documented search that found no restriction (the rule as
+                # reworded on 2026-10-16)
+                self.assertTrue(e["clauses"] or e.get("restriction_search"), f"{e['id']}: {grants} with no clause or search")
 
     def test_conditions_are_listed(self):
         for e in self.entries:

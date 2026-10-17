@@ -6,7 +6,7 @@ date: 2026-10-16
 highlights:
   - "<strong>Ask per use, not per provider.</strong> Shipping an asset, training a model, evaluating one and running code are four different questions, and each provider answers them differently."
   - "<strong>Owning the output isn't permission for every use.</strong> xAI leaves Grok's output with you and also bars distilling it. Both clauses hold at once."
-  - "<strong>Silence isn't permission.</strong> A licence that never mentions outputs, like plain Apache-2.0 or MIT, grants nothing on them. OpenMDW-1.1 was written to close that gap."
+  - "<strong>Silence isn't a ban.</strong> Only a contract you agreed to, or a licence, can restrict what you do with output. Plain Apache-2.0 and MIT make no claim on outputs, so they're free. Look hard for the clauses that do restrict, and record the search."
   - "<strong>The account changes the terms.</strong> The same Kimi model is non-commercial in Moonshot's app and unrestricted through Ollama Cloud. Google's API terms are narrower than its consumer terms."
   - "<strong>Stage 1's training rows are being regenerated</strong> by licence-proven open models. The method, the gates, the lessons and the evaluation sets carry over."
 ---
@@ -22,10 +22,14 @@ The studio has Google AI Ultra, which comes with Flow, Flow Music and Project Ge
 could ship, the maintainer asked for a licence check. Reading Google's terms raised a bigger question, because the
 studio trains its own small models. Could AI-written text from any provider be used as training data?
 
-The maintainer set the rule for answering it. **A use of AI-generated content is allowed only when the provider's
-own documentation proves it:** the live URL, the exact clause, and its date. If it isn't proven, it isn't used. A
-missing restriction proves nothing, and neither does a model's reading of the terms, including the studio's own
-outside reviewer's.
+The maintainer set the rule for answering it. **A use is allowed unless the provider's contract or licence
+restricts it,** and the search for restrictions is documented: the page, the exact clause, and its date. Uses that
+providers commonly ban (training on outputs, distillation, competing models) get that explicit check before anything
+relies on them. A model's reading of the terms proves nothing, including the studio's own outside reviewer's.
+
+The first version of the rule went further: it treated anything not expressly permitted as off limits. That made
+silence a ban, which it isn't. Only a contract you agreed to, or a licence, can restrict a use. The rule was
+reworded the same day, and the verdicts below follow the reworded version.
 
 The rule earned its keep. The outside model's first pass got two things wrong:
 - it said Claude's consumer terms bar all commercial use, when that clause covers evaluation access only;
@@ -38,10 +42,10 @@ Both were caught by re-reading the source.
 
 | Use | Google (consumer) | xAI (Grok) | Anthropic (Claude) | Moonshot (Kimi app) |
 |---|---|---|---|---|
-| **Commercial assets** | Flow Music: proven ("Commercial use rights"). Flow and Genie: not proven | Proven, with attribution ("Written with Grok") | Proven: you own the outputs | Barred: non-commercial use only |
-| **Training data** | Barred | Barred: no distilling outputs | Allowed for non-competing specialized classifiers and tools, **never as training targets** | Not proven |
-| **Evaluation only** | Not proven | Not proven | Allowed on the same reading | Not proven |
-| **Code** | Barred for AI-pipeline code | Allowed for tooling that develops no model and doesn't compete, with attribution | Allowed for non-competing specialized tools | Barred for commercial use |
+| **Commercial assets** | Allowed. Flow Music grants "Commercial use rights" outright; for the rest, Google disclaims ownership and restricts nothing that applies | Allowed, with attribution ("Written with Grok") | Allowed: you own the outputs | Barred: non-commercial use only |
+| **Training data** | Barred | Barred: no distilling outputs | Allowed for non-competing specialized classifiers and tools, **never as training targets** | Barred for a business: non-commercial use only |
+| **Evaluation only** | Barred where it serves developing a model; allowed otherwise | Unclear: the AUP's "develop … machine learning models" clause | Allowed on the same reading | Barred for a business |
+| **Code** | Allowed, except AI-pipeline code | Allowed for tooling that develops no model and doesn't compete, with attribution | Allowed for non-competing specialized tools | Barred for commercial use |
 
 **The clauses behind the table:**
 - **Google** (Terms of Service, effective 2026-07-30) bars "using AI-generated content from our services to develop
@@ -68,11 +72,12 @@ grant rights in the weights and say nothing about what the model writes.
 | **DeepSeek-R1** (MIT) | "including, but not limited to, distillation for training other LLMs" | Proven |
 | **Muse Model License** (Muse-Spark-816B) | Synthetic data is an intended use, but a model trained on its outputs is a "Derivative" that must carry the licence and display "Built with Muse Spark Open" | Proven, with conditions |
 | **Llama 3.3** | Permits training on outputs if the new model's name begins with "Llama" | Proven, with a naming condition |
-| **NVIDIA Open Model License** | "does not claim ownership" of outputs | Not a grant, so not proven |
-| **Plain Apache-2.0 or MIT** (Qwen, Gemma 4, Granite, Kimi K3) | Nothing on outputs | Not proven |
+| **NVIDIA Open Model License** | "does not claim ownership" of outputs, and no restriction on them | Allowed |
+| **Plain Apache-2.0 or MIT** (Qwen, Gemma 4, Granite, Kimi K3) | Nothing on outputs | Allowed: the licence makes no claim and no contract binds a local run. Check any model-specific use policy too (Gemma has one) |
 
-On the last row, the Linux Foundation's OpenMDW launch post names the problem directly: Apache-2.0 and MIT were
-written for code and leave rights over generated outputs ambiguous. That's the gap OpenMDW-1.1 closes.
+On the last two rows, the Linux Foundation's OpenMDW launch post notes that Apache-2.0 and MIT were written for code
+and are silent on generated outputs. OpenMDW-1.1 says outright that outputs are unrestricted. Silence and an
+explicit grant reach the same place: nothing restricts the use.
 
 **The route matters too.** The studio's Kimi seat turned out to run in the Zed editor through Ollama Cloud, not
 Moonshot's app. Ollama's terms (May 2026) say "You retain ownership of content you create using our services", and
@@ -96,8 +101,10 @@ An inventory traced every piece of text in the Stage 1 pipeline to whoever wrote
   come from different families.
 - **The method carries over:** the lessons, the gates, the defect catalogue and the evaluation sets. Claude wrote
   those, and Anthropic's terms allow that use for a specialized verifier. No Claude text becomes a training target.
-- **Code that Antigravity or Grok wrote for the training pipeline is being rewritten.** The tooling Grok and Kimi
-  wrote for interlock stays, credited in a `CONTRIBUTORS.md` that says "Written with Grok".
+- **Code that Antigravity wrote for the training pipeline is being re-implemented,** because Google's ML clause
+  has no exception, and the outside reviewer confirmed that on a focused re-check. Whether Grok's generator logic
+  stays is the maintainer's call. The tooling Grok and Kimi wrote for interlock stays, credited in a
+  `CONTRIBUTORS.md` that says "Written with Grok".
 - **Provenance is now recorded at the source.** Every text-bearing template and pack in the generator gets a
   record of who wrote it, and the generator's own check refuses one without it. Seat commits carry a trailer naming
   the seat.
@@ -106,8 +113,9 @@ An inventory traced every piece of text in the Stage 1 pipeline to whoever wrote
 
 1. **Ask per use.** Shipping, training, evaluating and code are separate questions.
 2. **Read the use limits, not just ownership.** Acceptable-use policies are where the training bans live.
-3. **Treat silence as unproven.** Look for a clause that names outputs: OpenMDW, a model card's intended uses, an
-   explicit distillation grant.
+3. **Don't mistake silence for a ban, or a ban for silence.** Only a contract you agreed to, or a licence, can
+   restrict a use. Find the clauses that do (training, distillation and competing-model bans), and record where you
+   looked.
 4. **Check which account you used.** Consumer, API and enterprise terms differ, and so do apps and hosts serving
    the same model.
 5. **Re-read every clause yourself.** A model's summary of the terms, ours included, got things wrong.

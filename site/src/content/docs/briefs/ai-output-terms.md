@@ -1,6 +1,6 @@
 ---
 title: What may the studio do with AI-written content?
-description: It depends on the use and the account. Training on Grok or Google output is barred, Claude output may train a non-competing specialized tool but never as targets, and open-weight models count only when their licence names outputs.
+description: It depends on the use and the account. Training on Grok or Google output is barred, Claude output may train a non-competing specialized tool but never as targets, and open-weight outputs are free unless their licence restricts them.
 date: 2026-10-16
 status: research
 shelf: pending
@@ -10,22 +10,23 @@ shelf: pending
 
 The studio uses several AI services, and trains small models of its own. For each provider, which of four uses do
 the published terms allow: shipping output as a commercial asset, training on it, evaluating with it, and running
-code it wrote? The maintainer's rule applies: a use counts only when the provider's own documentation proves it.
+code it wrote? The maintainer's rule applies: a use is allowed unless the provider's contract or licence restricts it, and the
+search for restrictions is documented.
 
 ## What we found
 
 - **Google (consumer terms, 2026-07-30)** bars using AI-generated content "to develop machine learning models or
-  related AI technology". That covers training data and AI-pipeline code. Flow Music's commercial use is proven;
-  Flow's and Genie's aren't.
+  related AI technology". That covers training data and AI-pipeline code. Outside that, Google disclaims ownership and
+  restricts nothing that applies, so commercial use is allowed. Flow Music's terms grant it outright.
 - **xAI** leaves output with you ("you retain your ownership rights") and requires "Written with Grok" attribution.
   Its Acceptable Use Policy bars "distilling model data or Outputs", so no training on Grok output.
 - **Anthropic** (Help Center 12326764, 2026-03-16) allows Claude's outputs to train non-competing "specialized
   classifiers and tools". It bars general chatbots, open-ended text generation, and outputs as training targets.
 - **Moonshot's Kimi app** is non-commercial only. Through Ollama Cloud, Ollama's terms leave content with you, and
   the Kimi K3 and K2.6 licences are MIT-style.
-- **Open weights:** proven only when the licence or card names outputs. That's OpenMDW-1.1, Muse-Glimmer's
-  synthetic-data intended use, and DeepSeek-R1's distillation grant. Muse-Spark and Llama 3.3 add conditions. Plain
-  Apache-2.0 or MIT, and NVIDIA's "does not claim ownership", are not proven.
+- **Open weights:** free unless the licence restricts outputs. OpenMDW-1.1, Muse-Glimmer's synthetic-data intended
+  use and DeepSeek-R1's distillation grant say so outright. Plain Apache-2.0, MIT and NVIDIA's Open Model License
+  are silent, so they're free too. Muse-Spark and Llama 3.3 add conditions.
 
 ## What it changed
 
@@ -37,7 +38,8 @@ written by Antigravity or Grok is being rewritten. Interlock's Grok and Kimi cod
 - This is a reading of published terms, not legal advice. Terms change, so every clause carries its page date.
 - The student verifier counts as a "specialized tool" by the maintainer's judgement. An AI support agent at
   Anthropic agreed, but that isn't a human review.
-- The Apache-2.0 question is unruled. No current plan depends on it.
+- The rule was first worded so that silence counted as a bar. It was reworded the same day, and these verdicts
+  follow the reworded rule.
 
 ## Receipts
 

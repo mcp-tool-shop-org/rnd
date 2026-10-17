@@ -1,4 +1,9 @@
-"""Build the critic's known-answer set v1 (R&D, Claude-written, 2026-10-16).
+"""Build the critic's known-answer set (R&D, Claude-written; v1 2026-10-16, v2 2026-10-17).
+
+v2 errata: D-04 and D-11 were faulty keys, found when both critics disagreed with them in critic-control
+(window 7b). D-11's "Retries ... up to 3 times" allows 4 attempts, so "tried at most 3 times" was unsupported, not
+supported. D-04's season line arguably ruled out January. Each statement is replaced with a clear-cut one of the
+same verdict, so the counts stay the same. Every other item is unchanged.
 
 Fresh items for role-set's critic-control, so that calibrating a critic uses no provider-barred text and no
 student evaluation (DEV) items. Keys are by construction: R&D wrote each material, statement and key together.
@@ -9,6 +14,7 @@ import json
 import sys
 
 ITEMS = []
+VERSION = 2
 
 
 def add(kind, iid, framing, material, statement, verdict, deciding, *, trace=None, checker=None, flaw=None):
@@ -18,7 +24,7 @@ def add(kind, iid, framing, material, statement, verdict, deciding, *, trace=Non
     if verdict == "cannot_tell":
         assert not deciding, iid
     user = "\n".join([framing, "Material:", "\n".join(lines), f"Statement: {statement}"])
-    row = {"id": f"KA1-{kind}-{iid}", "kind": kind, "lesson": None, "material": "\n".join(lines),
+    row = {"id": f"KA{VERSION}-{kind}-{iid}", "kind": kind, "lesson": None, "material": "\n".join(lines),
            "verdict": verdict, "deciding": deciding, "escalate": "no",
            "provenance": {"writer": "Claude (R&D session), 2026-10-16", "key_basis": "construction"}}
     if kind == "C":
@@ -138,7 +144,7 @@ add("D", "03", "Is the claim backed by this changelog?",
     "Release 2.4.0 added an XML importer.", "unsupported", ["Removed the legacy XML importer."])
 add("D", "04", "Read the label and judge the statement.",
     "Garden Fertiliser 5 kg\nApply every four weeks from March to September.\nKeep out of reach of children.",
-    "The fertiliser should be applied in January.", "cannot_tell", [])
+    "The fertiliser contains nitrogen.", "cannot_tell", [])
 add("D", "05", "Does the policy support this statement?",
     "Brightside Dental cancellations\nCancel at least 24 hours ahead to avoid a fee.\nThe late-cancellation fee is 20 pounds.",
     "Cancelling 48 hours ahead avoids the fee.", "supported", ["Cancel at least 24 hours ahead to avoid a fee."])
@@ -160,7 +166,7 @@ add("D", "10", "Judge this against the order record.",
     "Order 7781 has been delivered.", "cannot_tell", [])
 add("D", "11", "Does the code comment back the claim?",
     "# Retries the upload up to 3 times.\n# Waits 2 seconds between attempts.\n# Gives up and logs an error after the last attempt.",
-    "The upload is tried at most 3 times.", "supported", ["# Retries the upload up to 3 times."])
+    "The upload waits 2 seconds between attempts.", "supported", ["# Waits 2 seconds between attempts."])
 add("D", "12", "Check the statement against the rota.",
     "Kitchen rota, week 18\nMonday: Priya\nTuesday: Owen\nWednesday: Priya\nThursday: Sam",
     "Owen is on the rota for Friday.", "cannot_tell", [])

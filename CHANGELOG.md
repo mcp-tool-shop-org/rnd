@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.2.4] - 2026-10-16
+
+- stage1-regeneration: the critic's known-answer set v1 (40 Claude-written keyed items for critic-control)
+- Added experiment `stage1-regeneration`
+
 ## [1.1.10.2.3] - 2026-10-16
 
 - stage1-regeneration: DATASET-RELEASE.md, a design note for releases with verifiable provenance through npm-launcher, OIDC trusted publishing and the maintainer's approval

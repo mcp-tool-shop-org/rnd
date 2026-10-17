@@ -203,6 +203,42 @@ governs. Argon re-reviews the fixed version before Wave 1.
 only harmful-content categories and doesn't restrict code fixing, evaluation or training on outputs. The registry
 entry is `gemma-prohibited-use-policy`. Gemma 4 is eligible.
 
+**Amendment D (2026-10-17): the card values, two proxy transforms, and the bank's floor and authorship.** The
+maintainer approved D1–D3. All of D goes to Argon before any run.
+
+- **D1. The card values (F3).** `card-values.json`, read by R&D from each maker's card and chat template at a
+  pinned revision, is the proxy's per-candidate config.
+  - The proxy sends **every** sampling key in it on every call, including the disabled values (`top_k: 0`,
+    `min_p: 0.0`, `repeat_penalty: 1.0`, `presence_penalty: 0.0`). Otherwise `llama-server`'s defaults (`top_k`
+    40, `min_p` 0.05; `common/common.h` at 620d2225) would reach the four cards that name only temperature and
+    top_p.
+  - Harness rules:
+    - thinking is on, at full effort, for every candidate that has a thinking mode (Gemma's template defaults it
+      off);
+    - where a card gives a range, or no value, the template's default inside that range is used (Muse: reasoning
+      strength `high`).
+  - Each revision must be the one the GGUF was converted from. Lightning and Muse match. The other six become the
+    pins when they're converted.
+  - For Bolt (NVIDIA's own GGUF), the fit preflight checks that the template embedded in the GGUF matches the
+    source repo's.
+- **D2. Two message transforms**, each named in the candidate's `transforms` list, applied by the proxy, and
+  recorded on every `generations.jsonl` line and on the receipt:
+  - **`fold_system` (R1-Distill only).** Its card says to use no system prompt. The proxy moves Aider's system
+    message to the head of the first user turn, separated by a blank line.
+  - **`reattach_thinking` (Qwen3.8 only).** Its template keeps earlier turns' thinking by default (and
+    `preserve_thinking` is pinned on). The proxy strips `reasoning_content` from Aider's replies, so without this
+    the history would never carry the thinking. The proxy keeps a map from each reply's content sha256 to its logged
+    `reasoning_content`. On each later call, it re-attaches the reasoning to any assistant turn whose content
+    matches. A turn that doesn't match (if Aider edited it) is sent without reasoning and counted.
+  - Every other candidate has `transforms: []`, so the comparison varies only what each card documents.
+- **D3. The bank's floor and authorship (F7; strict tier of the generated-content rule).**
+  - **The recall floor is 2026-09-04.** Muse (January 2026), Lightning and Bolt (May 2026) and Gemma (January
+    2025) state cutoffs. Qwen3.8, Qwen3.6, Granite and R1 don't, so their pinned revision's date stands in.
+    Granite's, 2026-09-04, is the latest. A task's fix must merge after it.
+  - **The bank's tasks are eval items,** so only fixes whose commits carry a Claude co-author trailer qualify.
+    Commits with no trailer, or with another seat's, are left out.
+  - The held-out twins are written by R&D, as amendment C says.
+
 **Builder (2026-10-17):** the maintainer may put Antigravity Argon on the J2 build after Browser Argon confirms the design. Code is read plainly under the split rule (`experiments/generated-content-terms`), and R&D reviews the build.
 
 **Sources:**

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.2.9] - 2026-10-17
+
+- local-builders: amendment D (card values, the fold_system and reattach_thinking transforms, the bank's 2026-09-04 floor and Claude-only authorship) and card-values.json
+- Updated experiment `local-builders`
+
 ## [1.1.10.2.8] - 2026-10-17
 
 - local-builders: amendment C, the disposition of Argon's J2 design review (F1-F14); registry adds Gemma's prohibited-use policy

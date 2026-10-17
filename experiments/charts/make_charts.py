@@ -1087,8 +1087,8 @@ def chart_pilot_thinking():
     svg.text(sx(budget / 2), y1 + 34, "output tokens per call", size=11, anchor="middle")
     svg.line(sx(budget), top - 10, sx(budget), y1, RULE, 1.6, dash="4 3")
     svg.text(sx(budget), top - 14, f"reply budget {budget:,}", size=10.5, color=RULE, anchor="end")
-    svg.footer(["A100-40GB, Q8_0, thinking at the model card's setting, about 31 tokens a second. Short calls carry a ~145-token "
-                "prompt; long calls carry 6,370–7,643.",
+    svg.footer(["A100-40GB, Q8_0, thinking at the model card's setting, about 31 tokens a second. Short calls carry 144–573 prompt tokens; "
+                "long calls carry 6,370–7,643.",
                 f"Source: mcp-tool-shop-org/rnd experiments/stage1-regeneration/pilot/qwen3.8-w0-calls.json (counts from the "
                 f"logging proxy, sha256 {d['source']['sha256'][:12]}…)."])
     svg.save("pilot-thinking-budget.svg")

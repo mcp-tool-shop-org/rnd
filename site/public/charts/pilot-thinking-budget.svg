@@ -91,6 +91,6 @@
 <text x="590.0" y="536.0" font-size="11" fill="#1f2430" text-anchor="middle" font-weight="400">output tokens per call</text>
 <line x1="1010.0" y1="102.0" x2="1010.0" y2="502.0" stroke="#b91c1c" stroke-width="1.6" stroke-dasharray="4 3"/>
 <text x="1010.0" y="98.0" font-size="10.5" fill="#b91c1c" text-anchor="end" font-weight="400">reply budget 16,384</text>
-<text x="24.0" y="565.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">A100-40GB, Q8_0, thinking at the model card&#x27;s setting, about 31 tokens a second. Short calls carry a ~145-token prompt; long calls carry 6,370–7,643.</text>
+<text x="24.0" y="565.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">A100-40GB, Q8_0, thinking at the model card&#x27;s setting, about 31 tokens a second. Short calls carry 144–573 prompt tokens; long calls carry 6,370–7,643.</text>
 <text x="24.0" y="580.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Source: mcp-tool-shop-org/rnd experiments/stage1-regeneration/pilot/qwen3.8-w0-calls.json (counts from the logging proxy, sha256 14aa34ad3332…).</text>
 </svg>

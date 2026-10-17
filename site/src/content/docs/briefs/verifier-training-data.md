@@ -58,7 +58,7 @@ The next batches are written by open-weight models and checked by a critic model
 candidate writers on rented A100s.
 - **The critic was tested first.** Both critics passed a known-answer bar set before their results. The test also
   found two faulty keys in the set itself, and both were replaced.
-- **Thinking is most of the cost.** One writer spent 95% of its output on reasoning, about 12,000 tokens per draft. So
+- **Thinking is most of the cost.** One writer spent 95% of its output on reasoning, about 12,000 tokens per practice row. So
   the pilot became an 8-row screen, and cost per accepted row is now part of the readout.
 
 → [Issue 11](/rnd/newsletter/issue-11/) has the data and the method.

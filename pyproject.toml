@@ -35,8 +35,11 @@ Issues = "https://github.com/mcp-tool-shop-org/rnd/issues"
 [project.scripts]
 rnd = "mcptoolshop_rnd.cli:main"
 
-[tool.setuptools]
-packages = ["mcptoolshop_rnd", "rnd"]
+[tool.setuptools.packages.find]
+include = ["mcptoolshop_rnd*", "rnd*"]
+
+[tool.setuptools.package-data]
+"mcptoolshop_rnd.localbuilders" = ["*.sh"]
 
 [tool.setuptools.dynamic]
 version = { attr = "mcptoolshop_rnd.__version__" }

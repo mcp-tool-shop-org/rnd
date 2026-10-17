@@ -126,6 +126,25 @@ def snapshot_test_hashes(workspace_dir: str | Path) -> dict[str, str]:
     return hashes
 
 
+def fill_command_placeholders(
+    cmd: str,
+    *,
+    venv_dir: str | Path | None = None,
+    bank_dir: str | Path | None = None,
+) -> str:
+    """Fill `{venv}` and `{bank}` placeholders in a task command without altering anything else."""
+    out = str(cmd)
+    if "{venv}" in out:
+        if venv_dir is None or not str(venv_dir).strip():
+            raise WorkspaceError(f"command contains {{venv}} placeholder but venv_dir is not set: {cmd!r}")
+        out = out.replace("{venv}", str(venv_dir))
+    if "{bank}" in out:
+        if bank_dir is None or not str(bank_dir).strip():
+            raise WorkspaceError(f"command contains {{bank}} placeholder but bank_dir is not set: {cmd!r}")
+        out = out.replace("{bank}", str(bank_dir))
+    return out
+
+
 @dataclass(frozen=True)
 class TaskSpec:
     """One task entry from R&D's J2 task bank."""
@@ -138,22 +157,68 @@ class TaskSpec:
     test_cmd: str
     allowed_paths: list[str]
     baseline: dict
+    suite_cmd: str = "{venv}/bin/python -m pytest"
     scrubbed_test_path: str | None = None
     scrubbed_test_content: str | None = None
     twin_test_path: str | None = None
     twin_test_content: str | None = None
+    companion_tests: list[str] = field(default_factory=list)
+    companion_test_sources: dict[str, str] = field(default_factory=dict)
+    companion_test_contents: dict[str, str] = field(default_factory=dict)
+    install_cmd: str = ""
+    bank_dir: str | None = None
     difficulty: str = "medium"
     design_notes: list[str] = field(default_factory=list)
     repo: str = ""
+    repo_url: str = ""
+    fix_commit: str = ""
 
     @property
     def target_node_id(self) -> str:
         return self.target_nodes[0]
 
+    @property
+    def install(self) -> str:
+        return self.install_cmd
+
+    def render_install_cmd(
+        self,
+        venv_dir: str | Path | None = None,
+        *,
+        bank_dir: str | Path | None = None,
+    ) -> str:
+        eff_bank = bank_dir if bank_dir is not None else self.bank_dir
+        return fill_command_placeholders(self.install_cmd, venv_dir=venv_dir, bank_dir=eff_bank)
+
+    def render_test_cmd(
+        self,
+        venv_dir: str | Path | None = None,
+        *,
+        bank_dir: str | Path | None = None,
+    ) -> str:
+        eff_bank = bank_dir if bank_dir is not None else self.bank_dir
+        return fill_command_placeholders(self.test_cmd, venv_dir=venv_dir, bank_dir=eff_bank)
+
+    def render_suite_cmd(
+        self,
+        venv_dir: str | Path | None = None,
+        *,
+        bank_dir: str | Path | None = None,
+    ) -> str:
+        eff_bank = bank_dir if bank_dir is not None else self.bank_dir
+        return fill_command_placeholders(self.suite_cmd, venv_dir=venv_dir, bank_dir=eff_bank)
+
     @classmethod
-    def from_dict(cls, data: dict, bank_dir: str | Path | None = None) -> TaskSpec:
+    def from_dict(
+        cls,
+        data: dict,
+        bank_dir: str | Path | None = None,
+        *,
+        base_dir: str | Path | None = None,
+    ) -> TaskSpec:
         if not isinstance(data, dict) or not data.get("id"):
             raise WorkspaceError("task entry must be a dict with an 'id'")
+        eff_dir = bank_dir if bank_dir is not None else base_dir
         task_id = str(data["id"])
         parent_commit = str(data.get("parent_commit") or "").strip()
         if not parent_commit:
@@ -177,18 +242,72 @@ class TaskSpec:
         twin_nodes = [str(n) for n in raw_twins]
 
         allowed_paths = validate_allowed_paths(list(data.get("allowed_paths") or []))
-        test_cmd = str(data.get("test_cmd") or f"pytest {target_nodes[0]}")
+        test_cmd = str(data.get("test_cmd") or f"pytest {target_nodes[0]}").strip()
+        raw_suite = data.get("suite_cmd")
+        suite_cmd = (
+            str(raw_suite).strip()
+            if raw_suite is not None and str(raw_suite).strip()
+            else "{venv}/bin/python -m pytest"
+        )
         baseline = dict(data.get("baseline") or {})
         for req_key in ("passed", "skipped", "xfail"):
             if req_key not in baseline:
                 raise WorkspaceError(f"task {task_id}: baseline missing {req_key!r}")
 
         scrubbed_path = data.get("scrubbed_test_path") or data.get("scrubbed_test")
-        if scrubbed_path and bank_dir is not None and not Path(scrubbed_path).is_absolute():
-            scrubbed_path = str(Path(bank_dir) / scrubbed_path)
+        if scrubbed_path and eff_dir is not None and not Path(scrubbed_path).is_absolute():
+            scrubbed_path = str(Path(eff_dir) / scrubbed_path)
         twin_path = data.get("twin_test_path") or data.get("twin_test")
-        if twin_path and bank_dir is not None and not Path(twin_path).is_absolute():
-            twin_path = str(Path(bank_dir) / twin_path)
+        if twin_path and eff_dir is not None and not Path(twin_path).is_absolute():
+            twin_path = str(Path(eff_dir) / twin_path)
+
+        companion_tests: list[str] = []
+        companion_sources: dict[str, str] = {}
+        raw_companions = data.get("companion_tests")
+        if raw_companions is not None:
+            if isinstance(raw_companions, dict):
+                for raw_rel, raw_src in raw_companions.items():
+                    norm_c = normal_rel_path(raw_rel)
+                    if not norm_c or not is_test_path(norm_c):
+                        raise WorkspaceError(
+                            f"task {task_id}: companion_tests path {raw_rel!r} must be a test file"
+                        )
+                    companion_tests.append(norm_c)
+                    if raw_src:
+                        src_str = str(raw_src)
+                        if eff_dir is not None and not Path(src_str).is_absolute():
+                            src_str = str(Path(eff_dir) / src_str)
+                        companion_sources[norm_c] = src_str
+            elif isinstance(raw_companions, list):
+                for item in raw_companions:
+                    if isinstance(item, dict):
+                        raw_rel = item.get("path") or item.get("test_file") or ""
+                        raw_src = item.get("file") or item.get("source") or item.get("companion_path")
+                    else:
+                        raw_rel = str(item)
+                        raw_src = None
+                    norm_c = normal_rel_path(raw_rel)
+                    if not norm_c or not is_test_path(norm_c):
+                        raise WorkspaceError(
+                            f"task {task_id}: companion_tests path {raw_rel!r} must be a test file"
+                        )
+                    companion_tests.append(norm_c)
+                    if raw_src:
+                        src_str = str(raw_src)
+                        if eff_dir is not None and not Path(src_str).is_absolute():
+                            src_str = str(Path(eff_dir) / src_str)
+                        companion_sources[norm_c] = src_str
+            else:
+                raise WorkspaceError(f"task {task_id}: companion_tests must be a list or dict")
+
+        raw_comp_contents = data.get("companion_test_contents") or {}
+        companion_contents = {
+            normal_rel_path(k): str(v) for k, v in raw_comp_contents.items() if k and v is not None
+        }
+
+        raw_install = data.get("install_cmd") if "install_cmd" in data else data.get("install")
+        install_cmd = str(raw_install).strip() if raw_install is not None else ""
+        resolved_bank_dir = str(Path(eff_dir)) if eff_dir is not None else None
 
         return cls(
             id=task_id,
@@ -197,6 +316,7 @@ class TaskSpec:
             target_nodes=target_nodes,
             twin_nodes=twin_nodes,
             test_cmd=test_cmd,
+            suite_cmd=suite_cmd,
             allowed_paths=allowed_paths,
             baseline={
                 "passed": int(baseline["passed"]),
@@ -207,9 +327,16 @@ class TaskSpec:
             scrubbed_test_content=data.get("scrubbed_test_content"),
             twin_test_path=str(twin_path) if twin_path else None,
             twin_test_content=data.get("twin_test_content"),
+            companion_tests=companion_tests,
+            companion_test_sources=companion_sources,
+            companion_test_contents=companion_contents,
+            install_cmd=install_cmd,
+            bank_dir=resolved_bank_dir,
             difficulty=str(data.get("difficulty") or "medium"),
             design_notes=[normal_rel_path(p) for p in (data.get("design_notes") or [])],
             repo=str(data.get("repo") or ""),
+            repo_url=str(data.get("repo_url") or ""),
+            fix_commit=str(data.get("fix_commit") or "").strip(),
         )
 
     def read_scrubbed_test(self) -> str:
@@ -229,6 +356,56 @@ class TaskSpec:
             if p.is_file():
                 return p.read_text(encoding="utf-8")
         raise WorkspaceError(f"task {self.id}: no readable held-out twin test")
+
+    def read_companion_test(
+        self,
+        rel_path: str,
+        *,
+        bank_dir: str | Path | None = None,
+    ) -> str:
+        """Read a companion test file from `companion/` in the task directory."""
+        norm = normal_rel_path(rel_path)
+        if norm in self.companion_test_contents:
+            return self.companion_test_contents[norm]
+
+        candidates: list[Path] = []
+        if norm in self.companion_test_sources:
+            src_p = Path(self.companion_test_sources[norm])
+            if not src_p.is_absolute():
+                if bank_dir is not None:
+                    candidates.append(Path(bank_dir) / src_p)
+                if self.bank_dir is not None:
+                    candidates.append(Path(self.bank_dir) / src_p)
+            candidates.append(src_p)
+
+        base_dirs: list[Path] = []
+        for raw_base in (
+            bank_dir,
+            self.bank_dir,
+            Path(self.scrubbed_test_path).parent if self.scrubbed_test_path else None,
+            Path(self.scrubbed_test_path).parent.parent if self.scrubbed_test_path else None,
+        ):
+            if raw_base is not None:
+                bp = Path(raw_base)
+                if bp not in base_dirs:
+                    base_dirs.append(bp)
+
+        fname = Path(norm).name
+        for base in base_dirs:
+            candidates.extend(
+                [
+                    base / "companion" / norm,
+                    base / "companion" / fname,
+                    base / self.id / "companion" / norm,
+                    base / self.id / "companion" / fname,
+                ]
+            )
+
+        for cand in candidates:
+            if cand.is_file():
+                return cand.read_text(encoding="utf-8")
+
+        raise WorkspaceError(f"task {self.id}: no readable companion test for {norm!r}")
 
 
 def load_task_bank(bank_path: str | Path) -> list[TaskSpec]:
@@ -379,6 +556,18 @@ def build_workspace(
     target_test_path.parent.mkdir(parents=True, exist_ok=True)
     target_test_path.write_text(scrubbed_text, encoding="utf-8", newline="\n")
 
+    # Write any companion_tests over the parent's copies before the baseline commit
+    for comp_rel in spec.companion_tests:
+        comp_norm = normal_rel_path(comp_rel)
+        if not comp_norm or not is_test_path(comp_norm):
+            raise WorkspaceError(
+                f"task {spec.id}: companion_tests path {comp_rel!r} must be a test file"
+            )
+        comp_text = spec.read_companion_test(comp_norm, bank_dir=bank_dir)
+        comp_dest = dest / comp_norm
+        comp_dest.parent.mkdir(parents=True, exist_ok=True)
+        comp_dest.write_text(comp_text, encoding="utf-8", newline="\n")
+
     # F9: Initialize a fresh git repository (never a worktree, no remotes, single commit)
     _run_git(dest, env, "init", "-q")
     _run_git(dest, env, "config", "user.name", "builder")
@@ -388,6 +577,10 @@ def build_workspace(
     head = str(_run_git(dest, env, "rev-parse", "HEAD")).strip()
 
     pre_hashes = snapshot_test_hashes(dest)
+    for comp_rel in spec.companion_tests:
+        comp_norm = normal_rel_path(comp_rel)
+        pre_hashes[comp_norm] = sha256_file(dest / comp_norm)
+
     return PreparedWorkspace(
         task_id=spec.id,
         workspace_dir=dest,

@@ -147,6 +147,7 @@ def _mock_installed_aider(
             },
         ),
         mock.patch.object(preflight, "get_installed_aider_version", return_value=version),
+        mock.patch.object(runner.shutil, "chown", return_value=None),
     ):
         yield
 
@@ -1320,6 +1321,172 @@ class WorkspaceTests(unittest.TestCase):
         with self.assertRaises(workspace.WorkspaceError):
             workspace.build_workspace(self.src_repo, bad_commit_spec, self.tmp / "ws_bad")
 
+    def test_companion_tests_written_before_baseline_commit_and_hashed(self):
+        """Item 1: companion_tests in task.json (under companion/) overwrite parent copies before baseline commit and join pre_test_hashes."""
+        git_env = workspace.git_env(self.tmp / "git_home")
+        base_task = self.tasks[0]
+
+        # Parent commit has an older copy of tests/test_companion_interlock.py
+        comp_rel = "tests/test_companion_interlock.py"
+        parent_comp_file = self.src_repo / comp_rel
+        parent_comp_file.write_text("def test_interlock():\n    assert 1 == 2  # parent copy\n", encoding="utf-8")
+        subprocess.run(["git", "add", "-A"], cwd=str(self.src_repo), env=git_env, check=True)
+        subprocess.run(
+            ["git", "commit", "-q", "-m", "parent with companion test"],
+            cwd=str(self.src_repo),
+            env=git_env,
+            check=True,
+        )
+        parent_with_comp = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=str(self.src_repo),
+            env=git_env,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+
+        # Task dir with companion/tests/test_companion_interlock.py
+        task_dir = self.tmp / "task_5488ec7c70"
+        companion_content = "def test_interlock():\n    assert 1 == 1  # updated companion test\n"
+        companion_file = task_dir / "companion" / comp_rel
+        companion_file.parent.mkdir(parents=True, exist_ok=True)
+        companion_file.write_text(companion_content, encoding="utf-8", newline="\n")
+        expected_comp_sha = hashlib.sha256(companion_content.encode("utf-8")).hexdigest()
+
+        spec_comp = workspace.TaskSpec.from_dict(
+            {
+                "id": "5488ec7c70",
+                "parent_commit": parent_with_comp,
+                "test_file": base_task.test_file,
+                "target_node_id": base_task.target_node_id,
+                "twin_node_id": base_task.twin_nodes[0],
+                "test_cmd": base_task.test_cmd,
+                "install": "uv sync --frozen",
+                "allowed_paths": ["mcptoolshop_rnd/abmine.py"],
+                "baseline": base_task.baseline,
+                "scrubbed_test_path": base_task.scrubbed_test_path,
+                "twin_test_path": base_task.twin_test_path,
+                "companion_tests": [comp_rel],
+            },
+            base_dir=task_dir,
+        )
+        self.assertEqual(spec_comp.companion_tests, [comp_rel])
+        self.assertEqual(spec_comp.install_cmd, "uv sync --frozen")
+        self.assertEqual(spec_comp.install, "uv sync --frozen")
+        self.assertEqual(spec_comp.read_companion_test(comp_rel), companion_content)
+
+        ws_comp = self.tmp / "ws_companion"
+        prepared = workspace.build_workspace(
+            self.src_repo,
+            spec_comp,
+            ws_comp,
+            home_dir=self.tmp / "home_comp",
+        )
+
+        # 1. Written over parent's copy BEFORE baseline commit (working tree is clean on single baseline commit)
+        self.assertEqual((ws_comp / comp_rel).read_text(encoding="utf-8"), companion_content)
+        rev_count = subprocess.run(
+            ["git", "rev-list", "--count", "HEAD"],
+            cwd=str(ws_comp),
+            env=git_env,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+        self.assertEqual(rev_count, "1")
+        status_out = subprocess.run(
+            ["git", "status", "--porcelain", "-uall", "--ignored"],
+            cwd=str(ws_comp),
+            env=git_env,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+        self.assertEqual(status_out, "")
+
+        # 2. Companion test sha256 joined pre_test_hashes
+        self.assertIn(comp_rel, prepared.pre_test_hashes)
+        self.assertEqual(prepared.pre_test_hashes[comp_rel], expected_comp_sha)
+
+        # 3. Scorer integrity check passes untouched and catches any edit to the companion test
+        self.assertEqual(
+            score.check_workspace_integrity(ws_comp, prepared.pre_test_hashes, spec_comp.allowed_paths, env=git_env),
+            [],
+        )
+        (ws_comp / comp_rel).write_text("def test_interlock(): pass\n", encoding="utf-8")
+        reasons = score.check_workspace_integrity(
+            ws_comp, prepared.pre_test_hashes, spec_comp.allowed_paths, env=git_env
+        )
+        self.assertTrue(any(f"edited test file: {comp_rel}" in r for r in reasons), reasons)
+
+        # Dict and list-of-dict companion_tests forms and inline companion_test_contents
+        spec_dict_comp = workspace.TaskSpec.from_dict(
+            {
+                "id": "56e0f9c72d",
+                "parent_commit": parent_with_comp,
+                "test_file": base_task.test_file,
+                "target_node_id": base_task.target_node_id,
+                "twin_node_id": base_task.twin_nodes[0],
+                "allowed_paths": ["mcptoolshop_rnd/abmine.py"],
+                "baseline": base_task.baseline,
+                "companion_tests": {comp_rel: f"companion/{comp_rel}"},
+            },
+            bank_dir=task_dir,
+        )
+        self.assertEqual(spec_dict_comp.read_companion_test(comp_rel), companion_content)
+
+        spec_list_dict_comp = workspace.TaskSpec.from_dict(
+            {
+                "id": "56e0f9c72d-b",
+                "parent_commit": parent_with_comp,
+                "test_file": base_task.test_file,
+                "target_node_id": base_task.target_node_id,
+                "twin_node_id": base_task.twin_nodes[0],
+                "allowed_paths": ["mcptoolshop_rnd/abmine.py"],
+                "baseline": base_task.baseline,
+                "companion_tests": [{"path": comp_rel, "source": f"companion/{comp_rel}"}],
+                "companion_test_contents": {comp_rel: "def test_inline(): pass\n"},
+            },
+            bank_dir=task_dir,
+        )
+        self.assertEqual(spec_list_dict_comp.read_companion_test(comp_rel), "def test_inline(): pass\n")
+
+        # Validation of bad companion_tests entries and missing companion files
+        for bad_companions in (
+            ["mcptoolshop_rnd/abmine.py"],
+            {"mcptoolshop_rnd/abmine.py": "companion/abmine.py"},
+            "not-a-list-or-dict",
+        ):
+            with self.assertRaises(workspace.WorkspaceError):
+                workspace.TaskSpec.from_dict(
+                    {
+                        "id": "bad_comp",
+                        "parent_commit": parent_with_comp,
+                        "test_file": base_task.test_file,
+                        "target_node_id": base_task.target_node_id,
+                        "twin_node_id": base_task.twin_nodes[0],
+                        "allowed_paths": ["mcptoolshop_rnd/abmine.py"],
+                        "baseline": base_task.baseline,
+                        "companion_tests": bad_companions,
+                    }
+                )
+        spec_missing_comp = workspace.TaskSpec.from_dict(
+            {
+                "id": "missing_comp",
+                "parent_commit": parent_with_comp,
+                "test_file": base_task.test_file,
+                "target_node_id": base_task.target_node_id,
+                "twin_node_id": base_task.twin_nodes[0],
+                "allowed_paths": ["mcptoolshop_rnd/abmine.py"],
+                "baseline": base_task.baseline,
+                "companion_tests": ["tests/test_missing_comp.py"],
+            },
+            base_dir=self.tmp / "empty_task_dir",
+        )
+        with self.assertRaises(workspace.WorkspaceError):
+            spec_missing_comp.read_companion_test("tests/test_missing_comp.py")
+
 
 class ContainmentAndProbeTests(unittest.TestCase):
     """Tests for `contain.py` and `probe.py` with injected success and failure for every check (F9, section 8)."""
@@ -1417,7 +1584,7 @@ class ContainmentAndProbeTests(unittest.TestCase):
     def test_probe_allows_only_the_two_task_history_files_and_refuses_all_other_outside_writes(self):
         """Item 2: Probe allows writes to work_root/.../chat-history.md and input-history in an un-listable dir, and refuses every other write outside the workspace."""
         history_dir = self.tmp / "work" / "history-task1"
-        chat_hist, input_hist = runner.prepare_task_history_files(history_dir)
+        chat_hist, input_hist = runner.prepare_task_history_files(history_dir, allow_uncontained=True)
 
         paths_with_history = probe.ProbePaths(
             workspace_dir=self.paths.workspace_dir,
@@ -2294,6 +2461,9 @@ class RunnerAndReceiptTests(unittest.TestCase):
             lambda r: r.pop("task_id"),
             lambda r: r.update({"aider_version": "0.85.0"}),
             lambda r: r.update({"synthetic_strings_verified": False}),
+            lambda r: r.update({"install_cmd": 123}),
+            lambda r: r.update({"install_exit_code": "0"}),
+            lambda r: r.update({"pip_freeze_sha256": "short"}),
             lambda r: r.update({"generations_sha256": "short"}),
             lambda r: r.update({"injected": "not-dict"}),
             lambda r: r.update({"injected": {"sampling": {}}}),
@@ -2304,6 +2474,551 @@ class RunnerAndReceiptTests(unittest.TestCase):
             with self.assertRaises(runner.RunnerError):
                 runner.validate_receipt(copy_r)
 
+    def test_chown_fallback_raises_on_vm_and_proxy_files_are_0600(self):
+        """Items 2 & 3: prepare_task_history_files raises on VM when chown fails, and proxy files in work_root are written 0600."""
+        # Item 2: On the VM (allow_uncontained=False), any chown failure in prepare_task_history_files raises RunnerError
+        for exc in (LookupError("unknown user: builder"), PermissionError("operation not permitted"), OSError("failed")):
+            with mock.patch.object(runner.shutil, "chown", side_effect=exc):
+                with self.assertRaises(runner.RunnerError):
+                    runner.prepare_task_history_files(self.tmp / "vm-history")
+
+        # Item 3: ProxyState writes generations.jsonl with mode 0600 on init and on append
+        chmod_records: list[tuple[Path, int]] = []
+        orig_chmod = os.chmod
+
+        def tracking_chmod(p, mode, *args, **kwargs):
+            chmod_records.append((Path(p).resolve(), mode))
+            return orig_chmod(p, mode, *args, **kwargs)
+
+        gen_file = self.tmp / "work" / "generations-t1.jsonl"
+        with _StubLlamaServer() as stub, mock.patch.object(proxy.os, "chmod", side_effect=tracking_chmod):
+            st = proxy.ProxyState(
+                upstream_url=stub.url,
+                config=CANDIDATE_CONFIG_JSON,
+                generations_path=gen_file,
+            )
+            self.assertIn((gen_file.resolve(), 0o600), chmod_records)
+            chmod_records.clear()
+            status, _ = st.handle_completion(
+                "/v1/chat/completions",
+                {"messages": [{"role": "user", "content": "hi"}]},
+            )
+            self.assertEqual(status, 200)
+            self.assertIn((gen_file.resolve(), 0o600), chmod_records)
+
+    def test_per_task_environment_setup_with_stub_install_command_and_setup_failed(self):
+        """Item 4: Per-task venv setup at work_root/venv-<task>, {venv} & {bank} filled, receipt records install & python_version fields, and failed install ends as setup_failed."""
+        mini_repo = self.tmp / "mini_repo_venv"
+        (mini_repo / "mcptoolshop_rnd").mkdir(parents=True)
+        (mini_repo / "mcptoolshop_rnd" / "abmine.py").write_text("x = 1\n", encoding="utf-8")
+        env = workspace.git_env(self.tmp / "ghome_venv")
+        subprocess.run(["git", "init", "-q"], cwd=str(mini_repo), env=env, check=True)
+        subprocess.run(["git", "config", "user.name", "t"], cwd=str(mini_repo), env=env, check=True)
+        subprocess.run(["git", "config", "user.email", "t@localhost"], cwd=str(mini_repo), env=env, check=True)
+        subprocess.run(["git", "add", "-A"], cwd=str(mini_repo), env=env, check=True)
+        subprocess.run(["git", "commit", "-q", "-m", "p"], cwd=str(mini_repo), env=env, check=True)
+        parent_sha = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=str(mini_repo), env=env, capture_output=True, text=True, check=True
+        ).stdout.strip()
+
+        fake_bank_dir = self.tmp / "locked_bank"
+        fake_bank_dir.mkdir(parents=True, exist_ok=True)
+        (fake_bank_dir / "aspire-si-freeze.txt").write_text("pytest==8.3.3\n", encoding="utf-8")
+
+        # Stub install command uses both {venv} and {bank} placeholders and verifies:
+        # 1) UV_PROJECT_ENVIRONMENT and VIRTUAL_ENV point at work_root/venv-<task>
+        # 2) network/index restrictions (PIP_NO_INDEX, HTTP_PROXY) are NOT set for root setup
+        stub_install_template = (
+            f'"{sys.executable}" -c '
+            '"import os, pathlib, sys; '
+            "vdir = pathlib.Path(r'{venv}'); "
+            "bdir = pathlib.Path(r'{bank}'); "
+            "assert str(vdir) == os.environ['UV_PROJECT_ENVIRONMENT']; "
+            "assert str(vdir) == os.environ['VIRTUAL_ENV']; "
+            "assert (bdir / 'aspire-si-freeze.txt').is_file(); "
+            "assert 'PIP_NO_INDEX' not in os.environ and 'HTTP_PROXY' not in os.environ; "
+            "(vdir / 'stub_installed.txt').write_text('ok', encoding='utf-8'); "
+            'sys.exit(0)"'
+        )
+        task_ok = workspace.TaskSpec.from_dict(
+            {
+                "id": "venv-ok",
+                "parent_commit": parent_sha,
+                "test_file": self.task.test_file,
+                "target_node_id": self.task.target_node_id,
+                "twin_node_id": self.task.twin_nodes[0],
+                "test_cmd": "env PYTHONPATH=src {venv}/bin/python -m pytest -p no:xdist -q -o addopts= tests/test_abmine_fa.py",
+                "suite_cmd": "env PYTHONPATH=src {venv}/bin/python -m pytest -p no:xdist -q -o addopts=",
+                "install": stub_install_template,
+                "allowed_paths": ["mcptoolshop_rnd/abmine.py"],
+                "baseline": self.task.baseline,
+                "scrubbed_test_path": self.task.scrubbed_test_path,
+                "twin_test_path": self.task.twin_test_path,
+            },
+            bank_dir=fake_bank_dir,
+        )
+
+        work_ok = self.tmp / "work-venv-ok"
+        receipt_ok_path = self.tmp / "receipts" / "r_venv_ok.json"
+        settings_file = self.tmp / "model-settings-venv.yml"
+
+        captured_aider_cmd: list[str] = []
+        captured_aider_env: dict[str, str] = {}
+        captured_score_venv: list[str] = []
+
+        with _StubLlamaServer() as stub, _mock_installed_aider(version="0.86.1"):
+            cfg_ok = runner.RunTaskConfig(
+                source_repo=mini_repo,
+                task=task_ok,
+                candidate_config_path=CARD_VALUES_JSON,
+                candidate="qwen3.8-27b",
+                model_settings_file=settings_file,
+                served_as="qwen3.8-27b",
+                model_tag="qwen3.8:27b-q8_0",
+                model_digest="sha256:aaee06c39dcf",
+                aider_version=proxy.PINNED_AIDER_VERSION,
+                upstream_url=stub.url,
+                work_root=work_ok,
+                receipt_path=receipt_ok_path,
+                machine_line={"gpu": "NVIDIA A100-SXM4-40GB"},
+            )
+
+            def fake_aider_ok(cmd: list[str], ws_dir: Path, run_env: dict[str, str]) -> int:
+                captured_aider_cmd.extend(cmd)
+                captured_aider_env.update(run_env)
+                # Stub install ran BEFORE Aider and created work_root/venv-venv-ok
+                expected_venv = work_ok.resolve() / "venv-venv-ok"
+                self.assertTrue((expected_venv / "stub_installed.txt").is_file())
+                return 0
+
+            def fake_run_pytest_and_score(task_arg, ws_dir_arg, pre_hashes_arg, **kwargs):
+                captured_score_venv.append(str(kwargs.get("venv_dir")))
+                # Workspace git status is completely clean (venv is outside workspace)
+                reasons = score.check_workspace_integrity(
+                    ws_dir_arg,
+                    pre_hashes_arg,
+                    task_arg.allowed_paths,
+                    env=kwargs.get("env"),
+                )
+                self.assertEqual(reasons, [])
+                return {
+                    "task_id": task_arg.id,
+                    "passed": True,
+                    "correct": True,
+                    "reasons": [],
+                    "reason": "",
+                    "counts": {"passed": 10, "failed": 0, "errors": 0, "skipped": 0, "xfail": 0},
+                    "baseline": dict(task_arg.baseline),
+                    "target_nodes": list(task_arg.target_nodes),
+                    "twin_nodes": list(task_arg.twin_nodes),
+                }
+
+            chmod_calls: list[tuple[Path, int]] = []
+            orig_chmod = os.chmod
+
+            def record_chmod(p, mode, *args, **kwargs):
+                chmod_calls.append((Path(p).resolve(), mode))
+                return orig_chmod(p, mode, *args, **kwargs)
+
+            with (
+                mock.patch.object(runner, "run_pytest_and_score", side_effect=fake_run_pytest_and_score),
+                mock.patch.object(runner.os, "chmod", side_effect=record_chmod),
+            ):
+                receipt_ok = runner.run_single_task(cfg_ok, aider_runner=fake_aider_ok)
+
+            expected_venv_dir = work_ok.resolve() / "venv-venv-ok"
+            expected_venv_py = str(runner.venv_python_path(expected_venv_dir))
+            self.assertTrue(expected_venv_dir.is_dir())
+            self.assertTrue(Path(expected_venv_py).is_file())
+
+            # Venv is outside workspace, readable/executable by builder (0755/0644), and not group/world writable
+            self.assertIn((expected_venv_dir, 0o755), chmod_calls)
+            self.assertIn(((expected_venv_dir / "stub_installed.txt").resolve(), 0o644), chmod_calls)
+            self.assertIn((receipt_ok_path.resolve(), 0o600), chmod_calls)
+
+            # Aider's --test-cmd has {venv} filled and preserves env PYTHONPATH=src ... -o addopts= byte for byte
+            idx_tc = captured_aider_cmd.index("--test-cmd")
+            self.assertEqual(
+                captured_aider_cmd[idx_tc + 1],
+                f"env PYTHONPATH=src {expected_venv_dir}/bin/python -m pytest -p no:xdist -q -o addopts= tests/test_abmine_fa.py",
+            )
+            self.assertEqual(captured_aider_env["VIRTUAL_ENV"], str(expected_venv_dir))
+            self.assertTrue(captured_aider_env["PATH"].startswith(str(contain.venv_bin_dir(expected_venv_dir))))
+            self.assertEqual(captured_score_venv, [str(expected_venv_dir)])
+
+            # Receipt records filled install_cmd, install_exit_code == 0, 64-char pip_freeze_sha256, and venv_python_version
+            expected_filled_install = stub_install_template.replace("{venv}", str(expected_venv_dir)).replace(
+                "{bank}", str(fake_bank_dir)
+            )
+            self.assertEqual(receipt_ok["install_cmd"], expected_filled_install)
+            self.assertEqual(receipt_ok["install_exit_code"], 0)
+            self.assertIsInstance(receipt_ok["pip_freeze_sha256"], str)
+            self.assertEqual(len(receipt_ok["pip_freeze_sha256"]), 64)
+            self.assertIsInstance(receipt_ok["venv_python_version"], str)
+            self.assertTrue(receipt_ok["venv_python_version"].startswith("Python 3."))
+            self.assertEqual(receipt_ok["python_version"], receipt_ok["venv_python_version"])
+            self.assertEqual(receipt_ok["pins"]["install_cmd"], expected_filled_install)
+            self.assertEqual(receipt_ok["pins"]["install_exit_code"], 0)
+            self.assertEqual(receipt_ok["pins"]["pip_freeze_sha256"], receipt_ok["pip_freeze_sha256"])
+            self.assertEqual(receipt_ok["pins"]["venv_python_version"], receipt_ok["venv_python_version"])
+
+            # Failing stub install command ends the task as setup_failed, with no Aider run and no score
+            stub_install_fail = f'"{sys.executable}" -c "import sys; sys.stderr.write(\'broken lockfile\\n\'); sys.exit(17)"'
+            task_fail = workspace.TaskSpec.from_dict(
+                {
+                    "id": "venv-fail",
+                    "parent_commit": parent_sha,
+                    "test_file": self.task.test_file,
+                    "target_node_id": self.task.target_node_id,
+                    "twin_node_id": self.task.twin_nodes[0],
+                    "test_cmd": "pytest tests/test_abmine_fa.py",
+                    "install": stub_install_fail,
+                    "allowed_paths": ["mcptoolshop_rnd/abmine.py"],
+                    "baseline": self.task.baseline,
+                    "scrubbed_test_path": self.task.scrubbed_test_path,
+                    "twin_test_path": self.task.twin_test_path,
+                }
+            )
+            work_fail = self.tmp / "work-venv-fail"
+            receipt_fail_path = self.tmp / "receipts" / "r_venv_fail.json"
+            cfg_fail = runner.RunTaskConfig(
+                source_repo=mini_repo,
+                task=task_fail,
+                candidate_config_path=CARD_VALUES_JSON,
+                candidate="qwen3.8-27b",
+                model_settings_file=settings_file,
+                served_as="qwen3.8-27b",
+                model_tag="qwen3.8:27b-q8_0",
+                model_digest="sha256:aaee06c39dcf",
+                aider_version=proxy.PINNED_AIDER_VERSION,
+                upstream_url=stub.url,
+                work_root=work_fail,
+                receipt_path=receipt_fail_path,
+                machine_line={"gpu": "NVIDIA A100-SXM4-40GB"},
+            )
+
+            aider_called = False
+            scorer_called = False
+
+            def should_not_run_aider(*args, **kwargs):
+                nonlocal aider_called
+                aider_called = True
+                return 0
+
+            def should_not_run_scorer(*args, **kwargs):
+                nonlocal scorer_called
+                scorer_called = True
+                return {}
+
+            receipt_fail = runner.run_single_task(
+                cfg_fail,
+                aider_runner=should_not_run_aider,
+                scorer_fn=should_not_run_scorer,
+            )
+            self.assertFalse(aider_called)
+            self.assertFalse(scorer_called)
+            self.assertFalse(receipt_fail["correct"])
+            self.assertEqual(receipt_fail["status"], "setup_failed")
+            self.assertEqual(receipt_fail["grade"]["status"], "setup_failed")
+            self.assertEqual(receipt_fail["grade"]["reason"], "setup_failed")
+            self.assertEqual(receipt_fail["grade"]["reasons"], ["setup_failed"])
+            self.assertEqual(receipt_fail["call_count"], 0)
+            self.assertEqual(receipt_fail["install_cmd"], stub_install_fail)
+            self.assertEqual(receipt_fail["install_exit_code"], 17)
+            self.assertIsNone(receipt_fail["pip_freeze_sha256"])
+            self.assertIsNone(receipt_fail["venv_python_version"])
+
+            with self.assertRaises(runner.RunnerError):
+                runner.setup_task_venv(task_ok, work_ok, work_ok)
+
+    def test_bank_command_contract_placeholders_suite_cmd_and_exported_entry_end_to_end(self):
+        """Bank command contract: {venv} & {bank} filling with zero rewriting, suite_cmd + --junitxml with stub, and exported bank entry end-to-end."""
+        # 1. Placeholder filling for both {venv} and {bank} across aspire-si, interlock, and role-set commands
+        venv_str = "/root/j2/work/venv-aspire-si-1294984713"
+        bank_str = "/root/j2/bank"
+
+        aspire_install = "python3.12 -m venv {venv} && {venv}/bin/pip install -q -r {bank}/aspire-si-freeze.txt"
+        aspire_test = (
+            "env OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 {venv}/bin/python -m pytest "
+            "-p no:xdist -q -p no:randomly "
+            "tests/test_critic_heads.py::TestTraining::test_a_head_does_not_depend_on_the_heads_trained_before_it"
+        )
+        aspire_suite = "env OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 {venv}/bin/python -m pytest -p no:xdist -q -p no:randomly"
+
+        self.assertEqual(
+            runner.resolve_test_cmd_for_venv(aspire_install, venv_str, bank_dir=bank_str),
+            f"python3.12 -m venv {venv_str} && {venv_str}/bin/pip install -q -r {bank_str}/aspire-si-freeze.txt",
+        )
+        self.assertEqual(
+            runner.resolve_test_cmd_for_venv(aspire_test, venv_str, bank_dir=bank_str),
+            f"env OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 {venv_str}/bin/python -m pytest "
+            "-p no:xdist -q -p no:randomly "
+            "tests/test_critic_heads.py::TestTraining::test_a_head_does_not_depend_on_the_heads_trained_before_it",
+        )
+        self.assertEqual(
+            runner.resolve_test_cmd_for_venv(aspire_suite, venv_str, bank_dir=bank_str),
+            f"env OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 {venv_str}/bin/python -m pytest -p no:xdist -q -p no:randomly",
+        )
+
+        interlock_venv = "/root/j2/work/venv-interlock-5488ec7c70"
+        interlock_install = "UV_PROJECT_ENVIRONMENT={venv} uv sync --frozen --python 3.12"
+        interlock_test = (
+            "env PYTHONPATH=src {venv}/bin/python -m pytest -p no:xdist -q -o addopts= "
+            "tests/test_target.py::test_the_live_runner_returns_the_child_stdout"
+        )
+        interlock_suite = "env PYTHONPATH=src {venv}/bin/python -m pytest -p no:xdist -q -o addopts="
+
+        self.assertEqual(
+            runner.resolve_test_cmd_for_venv(interlock_install, interlock_venv, bank_dir=bank_str),
+            f"UV_PROJECT_ENVIRONMENT={interlock_venv} uv sync --frozen --python 3.12",
+        )
+        self.assertEqual(
+            runner.resolve_test_cmd_for_venv(interlock_test, interlock_venv, bank_dir=bank_str),
+            f"env PYTHONPATH=src {interlock_venv}/bin/python -m pytest -p no:xdist -q -o addopts= "
+            "tests/test_target.py::test_the_live_runner_returns_the_child_stdout",
+        )
+        self.assertEqual(
+            runner.resolve_test_cmd_for_venv(interlock_suite, interlock_venv, bank_dir=bank_str),
+            f"env PYTHONPATH=src {interlock_venv}/bin/python -m pytest -p no:xdist -q -o addopts=",
+        )
+
+        # Commands without placeholders are never rewritten (no pytest/python prefix rewriting)
+        self.assertEqual(runner.resolve_test_cmd_for_venv("pytest -q", interlock_venv), "pytest -q")
+        self.assertEqual(runner.resolve_test_cmd_for_venv("python -m pytest -q", interlock_venv), "python -m pytest -q")
+        with self.assertRaises(runner.RunnerError):
+            runner.resolve_test_cmd_for_venv("{venv}/bin/python -m pytest", None)
+        with self.assertRaises(runner.RunnerError):
+            runner.resolve_test_cmd_for_venv("pip install -r {bank}/freeze.txt", interlock_venv, bank_dir=None)
+
+        # 2. End-to-end test loading one task entry in the bank's exact shape (interlock-5488ec7c70, with companion)
+        #    and running it through TaskSpec, build_workspace, setup_task_venv, and scorer's suite_cmd + --junitxml
+        src_repo = self.tmp / "interlock_repo"
+        (src_repo / "src" / "switchyard" / "harness").mkdir(parents=True)
+        (src_repo / "tests").mkdir(parents=True)
+        (src_repo / "src" / "switchyard" / "harness" / "e4b.py").write_text("x = 1\n", encoding="utf-8")
+        (src_repo / "src" / "switchyard" / "harness" / "ollama_serve.py").write_text("y = 2\n", encoding="utf-8")
+        (src_repo / "tests" / "test_e4b.py").write_text(
+            "def test_old_parent_companion():\n    assert False\n", encoding="utf-8"
+        )
+        g_env = workspace.git_env(self.tmp / "ghome_bank")
+        subprocess.run(["git", "init", "-q"], cwd=str(src_repo), env=g_env, check=True)
+        subprocess.run(["git", "config", "user.name", "t"], cwd=str(src_repo), env=g_env, check=True)
+        subprocess.run(["git", "config", "user.email", "t@localhost"], cwd=str(src_repo), env=g_env, check=True)
+        subprocess.run(["git", "add", "-A"], cwd=str(src_repo), env=g_env, check=True)
+        subprocess.run(["git", "commit", "-q", "-m", "parent"], cwd=str(src_repo), env=g_env, check=True)
+        parent_sha = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=str(src_repo), env=g_env, capture_output=True, text=True, check=True
+        ).stdout.strip()
+
+        export_bank_dir = self.tmp / "j2-bank-export"
+        task_subdir = export_bank_dir / "interlock-5488ec7c70"
+        (task_subdir / "companion" / "tests").mkdir(parents=True)
+        scrubbed_content = (
+            "def test_the_live_runner_returns_the_child_stdout():\n    assert True\n\n"
+            "def test_read_git_refuses_a_runner_that_captured_nothing():\n    assert True\n"
+        )
+        twin_content = "def test_capture_run_returns_text_stdout_and_exit_code():\n    assert True\n"
+        companion_content = "def test_companion_from_bank():\n    assert 2 + 2 == 4\n"
+
+        (task_subdir / "test_target.py").write_text(scrubbed_content, encoding="utf-8", newline="\n")
+        (task_subdir / "test_twin.py").write_text(twin_content, encoding="utf-8", newline="\n")
+        (task_subdir / "companion" / "tests" / "test_e4b.py").write_text(
+            companion_content, encoding="utf-8", newline="\n"
+        )
+
+        # Stub runner script that verifies suite_cmd flags + --junitxml=<path> and writes the JUnit XML
+        stub_suite_script = self.tmp / "stub_suite_runner.py"
+        stub_argv_record = self.tmp / "stub_suite_argv.json"
+        stub_suite_script.write_text(
+            "import json, os, pathlib, sys\n"
+            f"record_path = pathlib.Path({str(stub_argv_record)!r})\n"
+            "xml_arg = next((a for a in sys.argv[1:] if a.startswith('--junitxml=')), None)\n"
+            "assert xml_arg is not None, f'missing --junitxml in {sys.argv}'\n"
+            "assert sys.argv[-1] == xml_arg, f'--junitxml must be appended last: {sys.argv}'\n"
+            "record_path.write_text(json.dumps({\n"
+            "    'argv': sys.argv[1:],\n"
+            "    'pythonpath': os.environ.get('PYTHONPATH'),\n"
+            "}), encoding='utf-8')\n"
+            "xml_path = pathlib.Path(xml_arg.split('=', 1)[1])\n"
+            "cases = [\n"
+            "    f'<testcase file=\"tests/test_suite.py\" classname=\"tests.test_suite\" name=\"test_base_{i}\"/>'\n"
+            "    for i in range(543)\n"
+            "] + [\n"
+            "    f'<testcase file=\"tests/test_suite.py\" classname=\"tests.test_suite\" name=\"test_skip_{i}\"><skipped type=\"pytest.skip\"/></testcase>'\n"
+            "    for i in range(6)\n"
+            "] + [\n"
+            "    '<testcase nodeid=\"tests/test_target.py::test_the_live_runner_returns_the_child_stdout\" name=\"test_the_live_runner_returns_the_child_stdout\"/>',\n"
+            "    '<testcase nodeid=\"tests/test_target.py::test_read_git_refuses_a_runner_that_captured_nothing\" name=\"test_read_git_refuses_a_runner_that_captured_nothing\"/>',\n"
+            "    '<testcase nodeid=\"tests/test_twin.py::test_capture_run_returns_text_stdout_and_exit_code\" name=\"test_capture_run_returns_text_stdout_and_exit_code\"/>',\n"
+            "]\n"
+            "xml_path.write_text('<testsuite name=\"pytest\">' + ''.join(cases) + '</testsuite>', encoding='utf-8')\n",
+            encoding="utf-8",
+        )
+
+        exported_entry = {
+            "id": "interlock-5488ec7c70",
+            "repo": "interlock",
+            "repo_url": "https://github.com/mcp-tool-shop-org/interlock",
+            "parent_commit": parent_sha,
+            "fix_commit": "5488ec7c70d9ee9ddfb19e95be7397412b07238b",
+            "test_file": "tests/test_target.py",
+            "target_nodes": [
+                "tests/test_target.py::test_the_live_runner_returns_the_child_stdout",
+                "tests/test_target.py::test_read_git_refuses_a_runner_that_captured_nothing",
+            ],
+            "twin_nodes": [
+                "tests/test_twin.py::test_capture_run_returns_text_stdout_and_exit_code",
+            ],
+            "scrubbed_test_path": "interlock-5488ec7c70/test_target.py",
+            "twin_test_path": "interlock-5488ec7c70/test_twin.py",
+            "companion_tests": [
+                {
+                    "path": "tests/test_e4b.py",
+                    "file": "interlock-5488ec7c70/companion/tests/test_e4b.py",
+                }
+            ],
+            "allowed_paths": [
+                "src/switchyard/harness/e4b.py",
+                "src/switchyard/harness/ollama_serve.py",
+            ],
+            "baseline": {
+                "passed": 543,
+                "skipped": 6,
+                "xfail": 0,
+            },
+            "install": "UV_PROJECT_ENVIRONMENT={venv} uv sync --frozen --python 3.12",
+            "test_cmd": (
+                "env PYTHONPATH=src {venv}/bin/python -m pytest -p no:xdist -q -o addopts= "
+                "tests/test_target.py::test_the_live_runner_returns_the_child_stdout "
+                "tests/test_target.py::test_read_git_refuses_a_runner_that_captured_nothing"
+            ),
+            "suite_cmd": "env PYTHONPATH=src {venv}/bin/python -m pytest -p no:xdist -q -o addopts=",
+            "difficulty": "multi_file",
+        }
+        bank_file = export_bank_dir / "bank.json"
+        bank_file.write_text(json.dumps({"tasks": [exported_entry]}, indent=2), encoding="utf-8")
+
+        loaded_tasks = workspace.load_task_bank(bank_file)
+        self.assertEqual(len(loaded_tasks), 1)
+        spec = loaded_tasks[0]
+        self.assertEqual(spec.id, "interlock-5488ec7c70")
+        self.assertEqual(spec.repo, "interlock")
+        self.assertEqual(spec.repo_url, "https://github.com/mcp-tool-shop-org/interlock")
+        self.assertEqual(spec.fix_commit, "5488ec7c70d9ee9ddfb19e95be7397412b07238b")
+        self.assertEqual(spec.install_cmd, "UV_PROJECT_ENVIRONMENT={venv} uv sync --frozen --python 3.12")
+        self.assertEqual(spec.install, "UV_PROJECT_ENVIRONMENT={venv} uv sync --frozen --python 3.12")
+        self.assertEqual(spec.suite_cmd, "env PYTHONPATH=src {venv}/bin/python -m pytest -p no:xdist -q -o addopts=")
+        self.assertEqual(spec.companion_tests, ["tests/test_e4b.py"])
+        self.assertEqual(
+            Path(spec.companion_test_sources["tests/test_e4b.py"]),
+            export_bank_dir / "interlock-5488ec7c70" / "companion" / "tests" / "test_e4b.py",
+        )
+        self.assertEqual(spec.read_companion_test("tests/test_e4b.py"), companion_content)
+
+        # Build workspace from exported bank entry: companion written before baseline commit and hashed
+        ws_dir = self.tmp / "ws-interlock-5488ec7c70"
+        prepared = workspace.build_workspace(src_repo, spec, ws_dir)
+        self.assertEqual((ws_dir / "tests" / "test_target.py").read_text(encoding="utf-8"), scrubbed_content)
+        self.assertEqual((ws_dir / "tests" / "test_e4b.py").read_text(encoding="utf-8"), companion_content)
+        self.assertEqual(
+            prepared.pre_test_hashes["tests/test_e4b.py"],
+            hashlib.sha256(companion_content.encode("utf-8")).hexdigest(),
+        )
+
+        # Verify TaskSpec render helpers and scorer's build_suite_command
+        target_venv = self.tmp / "work" / "venv-interlock-5488ec7c70"
+        self.assertEqual(
+            spec.render_install_cmd(target_venv),
+            f"UV_PROJECT_ENVIRONMENT={target_venv} uv sync --frozen --python 3.12",
+        )
+        self.assertEqual(
+            spec.render_test_cmd(target_venv),
+            f"env PYTHONPATH=src {target_venv}/bin/python -m pytest -p no:xdist -q -o addopts= "
+            "tests/test_target.py::test_the_live_runner_returns_the_child_stdout "
+            "tests/test_target.py::test_read_git_refuses_a_runner_that_captured_nothing",
+        )
+        self.assertEqual(
+            spec.render_suite_cmd(target_venv),
+            f"env PYTHONPATH=src {target_venv}/bin/python -m pytest -p no:xdist -q -o addopts=",
+        )
+        built_suite_argv = score.build_suite_command(spec, "/tmp/junit.xml", venv_dir=target_venv)
+        self.assertEqual(
+            built_suite_argv,
+            [
+                "env",
+                "PYTHONPATH=src",
+                f"{target_venv}/bin/python",
+                "-m",
+                "pytest",
+                "-p",
+                "no:xdist",
+                "-q",
+                "-o",
+                "addopts=",
+                "--junitxml=/tmp/junit.xml",
+            ],
+        )
+
+        # 3. Scorer invoking suite_cmd with --junitxml appended using the real stub script
+        #    Create a real venv at target_venv so {venv} points to a real interpreter for the stub
+        setup_res = runner.setup_task_venv(
+            workspace.TaskSpec.from_dict({**exported_entry, "install": ""}, bank_dir=export_bank_dir),
+            ws_dir,
+            self.tmp / "work",
+        )
+        self.assertTrue(setup_res.ok)
+        self.assertTrue(setup_res.python_version.startswith("Python 3."))
+
+        py_rel = setup_res.python_executable.relative_to(setup_res.venv_dir).as_posix()
+        stub_suite_cmd = (
+            f'env PYTHONPATH=src "{{venv}}/{py_rel}" "{stub_suite_script}" -p no:xdist -q -o addopts='
+        )
+        spec_with_stub_suite = workspace.TaskSpec.from_dict(
+            {**exported_entry, "suite_cmd": stub_suite_cmd},
+            bank_dir=export_bank_dir,
+        )
+        score_res = score.run_pytest_and_score(
+            spec_with_stub_suite,
+            ws_dir,
+            prepared.pre_test_hashes,
+            venv_dir=setup_res.venv_dir,
+            use_sudo_builder=False,
+            _test_allow_uncontained=True,
+        )
+        self.assertTrue(score_res["passed"], score_res["reasons"])
+        self.assertTrue(stub_argv_record.is_file())
+        recorded_stub = json.loads(stub_argv_record.read_text(encoding="utf-8"))
+        self.assertEqual(recorded_stub["pythonpath"], "src")
+        self.assertEqual(recorded_stub["argv"][:-1], ["-p", "no:xdist", "-q", "-o", "addopts="])
+        self.assertTrue(recorded_stub["argv"][-1].startswith("--junitxml="))
+
+        # Edge cases for placeholder filling, suite command building, and venv_python_version
+        self.assertEqual(workspace.fill_command_placeholders("", venv_dir="/v"), "")
+        self.assertEqual(
+            score.build_suite_command(["{venv}/bin/python", "-m", "pytest", "-q"], "/tmp/x.xml", venv_dir="/v"),
+            ["/v/bin/python", "-m", "pytest", "-q", "--junitxml=/tmp/x.xml"],
+        )
+        with self.assertRaises(score.ScoreError):
+            score.build_suite_command("", "/tmp/x.xml")
+        with self.assertRaises(score.ScoreError):
+            score.build_suite_command([], "/tmp/x.xml")
+        with self.assertRaises(score.ScoreError):
+            score.build_suite_command("{venv}/bin/python -m pytest", "/tmp/x.xml", venv_dir=None)
+        with self.assertRaises(score.ScoreError):
+            score.build_suite_command(["{venv}/bin/python"], "/tmp/x.xml", venv_dir=None)
+        with self.assertRaises(runner.RunnerError):
+            runner.venv_python_version(
+                self.tmp,
+                run_cmd=lambda cmd, **kw: subprocess.CompletedProcess(cmd, 1, "", "err"),
+            )
+        self.assertTrue(
+            runner.venv_python_version(
+                self.tmp,
+                run_cmd=lambda cmd, **kw: subprocess.CompletedProcess(cmd, 0, "", ""),
+            ).startswith("Python ")
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
+

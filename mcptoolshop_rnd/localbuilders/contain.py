@@ -46,11 +46,22 @@ class ContainmentConfig:
     receipts_dir: Path = Path("/root/j2/receipts")
 
 
+def venv_bin_dir(venv_dir: str | Path) -> Path:
+    """Return the `bin` (POSIX) or `Scripts` (Windows) directory for `venv_dir`."""
+    vdir = Path(venv_dir).resolve()
+    if (vdir / "bin").is_dir():
+        return vdir / "bin"
+    if (vdir / "Scripts").is_dir():
+        return vdir / "Scripts"
+    return vdir / ("Scripts" if os.name == "nt" else "bin")
+
+
 def builder_env(
     *,
     proxy_port: int,
     home_dir: str | Path,
     base_env: dict[str, str] | None = None,
+    venv_dir: str | Path | None = None,
 ) -> dict[str, str]:
     """Return the locked-down environment dictionary for `builder` processes (F2, F9, NB1)."""
     source = base_env if base_env is not None else os.environ
@@ -79,6 +90,12 @@ def builder_env(
             "CUDA_VISIBLE_DEVICES": "",
         }
     )
+    if venv_dir is not None:
+        vdir = Path(venv_dir).resolve()
+        vbin = str(venv_bin_dir(vdir))
+        existing_path = env.get("PATH", "")
+        env["PATH"] = f"{vbin}{os.pathsep}{existing_path}" if existing_path else vbin
+        env["VIRTUAL_ENV"] = str(vdir)
     return env
 
 
@@ -288,19 +305,30 @@ def run_bounded_subprocess(
     timeout: float,
 ) -> subprocess.CompletedProcess:
     """Run `cmd` in its own process group and kill the entire process group on `TimeoutExpired`."""
+    exec_cmd = list(cmd)
+    exec_env = env
+    if os.name == "nt" and exec_cmd and exec_cmd[0] == "env":
+        exec_env = dict(env if env is not None else os.environ)
+        idx = 1
+        while idx < len(exec_cmd) and "=" in exec_cmd[idx] and not exec_cmd[idx].startswith("-"):
+            k, v = exec_cmd[idx].split("=", 1)
+            exec_env[k] = v
+            idx += 1
+        exec_cmd = exec_cmd[idx:]
+
     popen_kwargs: dict = {
         "cwd": str(cwd),
-        "env": env,
+        "env": exec_env,
         "stdout": subprocess.PIPE,
         "stderr": subprocess.PIPE,
         "text": True,
     }
-    if os.name != "nt":
+    if os.name != "nt":  # pragma: no cover (POSIX process group session)
         popen_kwargs["start_new_session"] = True
     elif hasattr(subprocess, "CREATE_NEW_PROCESS_GROUP"):
         popen_kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP
 
-    proc = subprocess.Popen(cmd, **popen_kwargs)
+    proc = subprocess.Popen(exec_cmd, **popen_kwargs)
     try:
         stdout, stderr = proc.communicate(timeout=timeout)
     except subprocess.TimeoutExpired:

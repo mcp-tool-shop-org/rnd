@@ -11,9 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
-## [1.1.13.0.1] - 2026-10-17
+## [1.1.14.0.1] - 2026-10-17
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output
+
+## [1.1.14.0.0] - 2026-10-17
+
+- J2 pre-run round 4: companion_tests (`file` key), per-task venv setup (`{venv}`/`{bank}` placeholders, `suite_cmd` scorer contract, `venv_python_version`), strict history chown, and 0600 proxy files.
 
 ## [1.1.13.0.0] - 2026-10-17
 
@@ -156,7 +160,6 @@ NANO an ordinary library update (entries filed or revised, results added).
 ## [1.1.10.0.17] - 2026-10-16
 
 - experiment local-builders: Wave 1 design filed with R&D's review changes
-- Added experiment `local-builders`
 
 ## [1.1.10.0.16] - 2026-10-16
 

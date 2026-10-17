@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.13.0.0] - 2026-10-17
+
+- packaging: mcptoolshop_rnd.localbuilders (and setup_vm.sh) now ship in the wheel; a test checks every subpackage is included
+
 ## [1.1.12.0.2] - 2026-10-17
 
 - critic-control known-answer v2: two faulty keys replaced (D-04, D-11), found by both critics in window 7b

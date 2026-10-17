@@ -28,7 +28,7 @@
 ## 1. The check in three sentences
 
 1. **What it teaches:** the same Stage 1 verifier lessons as the frozen set (the role pack is unchanged except where
-   provenance forces a change), written now by licence-proven models only.
+   provenance forces a change), written now by models whose licences allow training on their outputs (no clause bars it).
 2. **How an item is known to be right:**
    - by construction: the slot fixes the verdict, deciding line, escalation and flaw;
    - kind B's constraint model and solution are made in code before the writer sees the slot (B3);
@@ -43,10 +43,10 @@
 
 Anthropic's Help Center (article 12326764, dated 2026-03-16) allows Claude's outputs to train non-competing
 "specialized classifiers and tools". It bars general chatbots, open-ended text generation models, and outputs as
-training targets. **If the maintainer accepts that the student verifier is such a tool, Claude Code may build
-this.** Argon may not: Google's consumer terms reach "related AI technology", with no competition qualifier. Grok's
-and Kimi's terms aren't proven either. Whoever builds, **no Claude text becomes a training target:** writers fill
-every target field.
+training targets. Claude Code may build this. **Revised 2026-10-17:** Argon may build it too, because code the
+studio owns is ordinary software under the generated-content rule, and Google's clause is read by its purpose
+(training data and distillation into a rival model). Claude text may fill target fields too: the maintainer ruled
+2026-10-17 that Anthropic's list bars competitive training only, and the verifier doesn't compete.
 
 ## 3. The build items
 
@@ -169,11 +169,12 @@ critic must therefore be loaded at the same moment, and both behind `127.0.0.1` 
 - the CUDA machine line: driver, compat loaded or not, runtime, card and `COLAB_RELEASE_TAG` or the pod id;
 - the wave and the drafts file's sha256.
 
-**`writers.json` becomes the proven list:**
-- each entry needs `family`, `licence`, `proof_url`, `proof_clause`, `proof_date` and `checked_by`;
-- the guard refuses an entry missing any of them;
-- **the current Apache-only entries** (Qwen3-235B, qwen3:8b, gemma4:31b, granite4.1:30b) **are removed.** They're
-  not proven under the rule.
+**`writers.json` records each writer's licence (revised 2026-10-17):**
+- each entry names `family`, `licence` and its `registry_id`;
+- the guard refuses an entry only when the registry marks training on that writer's outputs `barred`, citing the
+  clause. A licence that is silent on outputs, such as Apache-2.0 or MIT, is allowed.
+- *Superseded:* the 2026-10-16 version required a quoted proof clause for every entry and removed the Apache-only
+  entries (Qwen3-235B, qwen3:8b, gemma4:31b, granite4.1:30b) as "not proven". They're eligible again.
 
 **Llama-server pinning:**
 - the wave script hashes the GGUF and the binary before launch and passes them in;
@@ -187,7 +188,7 @@ critic must therefore be loaded at the same moment, and both behind `127.0.0.1` 
 - **Today:** `run_slot` shows up to 3 exemplars from other lessons, loaded from the aspire-si training files at a
   commit. That's the frozen set: Kimi and Grok rows. **They must not reach a writer prompt.**
 - **New:**
-  - the exemplar loader accepts only rows whose receipts name a writer in the proven list, with partition
+  - the exemplar loader accepts only rows whose receipts name a writer that `writers.json` allows, with partition
     `production`;
   - **batch 1 runs with no exemplars;**
   - later batches may use earlier regenerated batches' rows;
@@ -198,20 +199,22 @@ critic must therefore be loaded at the same moment, and both behind `127.0.0.1` 
 ### B9. Provenance on every text-bearing source
 
 - **Every human-language constant, template, pack, catalogue entry and role-pack file** that reaches a prompt or a
-  row gets a `provenance` record: the writer's family (maintainer, a named proven model, Claude, or a code
+  row gets a `provenance` record: the writer's family (maintainer, a named model, Claude, or a code
   derivation) and the PR that added it. That covers render.py's TEMPLATES and CLAUSES, recipes.py's PACKS, the
   prompts.py constants, trait_steps, critic.py, and the pack's lessons and amendments. The record sits beside the
   text, or in a manifest keyed by name and hash.
-- **`role-set check` refuses** any such source with no provenance record, or whose writer is on the deny list
-  (Kimi, Grok, Argon, or any provider not proven for that use). A Claude-written source is refused wherever it
-  would fill a target field.
+- **`role-set check` refuses** any such source with no provenance record, or whose writer's use there is barred by a
+  clause: Grok or Argon text that would enter a training row (the xAI distillation and Google ML clauses), and Kimi
+  text only if it came through the Kimi app. Text that reaches only a prompt is allowed. Claude-written text is allowed
+  anywhere, target fields included (ruled 2026-10-17; the earlier deny list barred Kimi outright and anything "not
+  proven").
 - **Seat commits carry a `Seat:` trailer** (for example `Seat: Grok`), so authorship can be read from git, not
   inferred from PR tags.
 - *Source: the role-set inventory agent's debrief, 2026-10-16.*
 
 ### B8. Tests and coverage
 
-- **A unit test for each item above,** including the refusals: a same-family critic, an entry without proof, a
+- **A unit test for each item above,** including the refusals: a same-family critic, a writer whose training use is barred, a
   pin drift between waves, an exemplar without receipts, a frame mismatch, and a locked-model mismatch.
 - **The mock three-wave equivalence test** (B1).
 - **Coverage:** measure role-set's current coverage first and ratchet the floor to it (the coverage-bar rule). New
@@ -224,14 +227,14 @@ See [PROVENANCE.md](PROVENANCE.md) for the sources. The build fixes these:
 
 | Source | Writer | Fix |
 |---|---|---|
-| Kind-B clue templates (`generate/render.py` TEMPLATES, CLAUSES), 31 of 48 | Grok | Rewrite all 48 (they enter rows). The 17 Claude-written ones may stay as inputs if the maintainer accepts the specialized-tool reading |
+| Kind-B clue templates (`generate/render.py` TEMPLATES, CLAUSES), 31 of 48 | Grok | Rewrite the 31 Grok-written ones (they enter training rows: xAI's distillation clause). The 17 Claude-written ones stay as inputs |
 | Puzzle packs (`generate/recipes.py` PACKS: pans, machines, trains, beds, clinics) | Grok | Replace (they enter rows) |
-| T10 cell table and tiered deletion (`generate/t10_variety.py`, `t10_*.json`; role-set #53, #54) | Grok | Rewrite, or the maintainer rules on xAI's "compete" |
-| T10 if-shape axis (role-set #55) | Argon | Rewrite |
-| aspire-si gates 1.7.3 and det_run NF1–NF3 (#144, #145), pinned by role-set | Argon | Rewrite, then re-pin the gates |
-| Exemplars (finished Kimi and Grok rows in the writer prompt) | Kimi, Grok | B7: regenerated rows only. Batch 1 runs without exemplars |
-| Lessons, house rules, trait steps, flaw definitions, critic prompts | Claude | Keep, if the maintainer accepts the specialized-tool reading (prompts, not targets) |
-| Real-source excerpts from studio repos | mostly Claude | Keep as row inputs on the same reading. Never as targets |
+| T10 cell table and tiered deletion (`generate/t10_variety.py`, `t10_*.json`; role-set #53, #54) | Grok | Keep: generator logic is code (revised 2026-10-17); only text that enters rows is replaced |
+| T10 if-shape axis (role-set #55) | Argon | Code: allowed (revised 2026-10-17). Already rewritten; it stays as it is |
+| aspire-si gates 1.7.3 and det_run NF1–NF3 (#144, #145), pinned by role-set | Argon | Code: allowed (revised 2026-10-17). Already rewritten; it stays as it is |
+| Exemplars (finished Kimi and Grok rows in the writer prompt) | Kimi, Grok | Prompt text, not training rows. B7 keeps regenerated rows only, for variety; batch 1 runs without exemplars |
+| Lessons, house rules, trait steps, flaw definitions, critic prompts | Claude | Keep (prompts and inputs are allowed) |
+| Real-source excerpts from studio repos | mostly Claude | Keep, as inputs or targets (ruled 2026-10-17) |
 | Claude fix rounds in batch files | Claude | Moot: the rows are regenerated |
 | Writer-claimed twin and order flags (`assemble._apply_fields`) | the writer | Compute them in code (B5) |
 
@@ -263,7 +266,7 @@ Unchanged: the frozen exam and the sealed set are untouched. **The sealed set is
 
 The regenerated set's card gives:
 - the writers and critics, with family, revision and GGUF sha256;
-- the proof clause for each model (PLAN.md §1);
+- each model's licence and registry id (PLAN.md §1);
 - the pack hash, the plan seed, the NAICS table hash, the code hash, and the counts per kind, trait and writer.
 
 ## 9. Before the first counted batch

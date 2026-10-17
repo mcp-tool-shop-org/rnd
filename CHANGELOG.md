@@ -11,9 +11,36 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
-## [1.1.10.2.9] - 2026-10-17
+## [1.1.10.2.12] - 2026-10-17
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output
+- Added experiment `agent-ab-harness`
+- Updated experiment `generated-content-terms`
+- Updated experiment `local-builders`
+- Added experiment `nemo-relay-trial`
+- Updated experiment `stage1-regeneration`
+
+## [1.1.10.2.11] - 2026-10-17
+
+- local-builders amendment E: R&D's disposition of Argon's review of amendment D (D-F1 to D-F4)
+- Updated experiment `generated-content-terms`
+- Updated experiment `local-builders`
+- Updated experiment `stage1-regeneration`
+
+## [1.1.10.2.10] - 2026-10-17
+
+- The maintainer's ruling: Claude text may be training targets for the non-competing verifier (Anthropic's list bars competitive training)
+- Updated experiment `generated-content-terms`
+- Updated experiment `local-builders`
+- Updated experiment `stage1-regeneration`
+
+- The licence-rule cleanup (2026-10-17): a use is barred only by a quoted clause. Registry verdicts `proven`/`not_proven` become `allowed`/`barred`, and the test now requires a clause for every bar, not for every grant. BUILD-SPEC, PLAN, the generated-content README and DESIGN drop the proof rule and the strict tier; Argon's 2026-10-16 answers are marked superseded; amendment D3 drops the authorship filter.
+
+
+## [1.1.10.2.9] - 2026-10-17
+
+- local-builders: amendment D (card values, the fold_system and reattach_thinking transforms, the bank's 2026-09-04 floor and Claude-only authorship) and card-values.json
+- Updated experiment `local-builders`
 
 ## [1.1.10.2.8] - 2026-10-17
 

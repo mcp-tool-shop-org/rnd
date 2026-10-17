@@ -11,11 +11,15 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
-## [1.1.15.0.1] - 2026-10-17
+## [1.1.15.0.2] - 2026-10-17
 
 - newsletter issue 11: picking a writer model on rented GPUs (critic test, thinking cost, the window method), with Qwen3.8's per-call counts and a chart
 - Updated experiment `charts`
 - Updated experiment `stage1-regeneration`
+
+## [1.1.15.0.1] - 2026-10-17
+
+- The dataminer counts thinking on every reply: a reply cut off at the length limit with no answer counts all its output as thinking, and a harmony-style template's thinking ends at <|eom|> or <|end|> (Muse-Glimmer). Each call records thinking_tokens_source (usage, timings, marker, length, none). Before this, both cases were null and summaries summed them as 0. New: python -m mcptoolshop_rnd.localbuilders.recount re-measures a generations file into a new one.
 
 ## [1.1.15.0.0] - 2026-10-17
 

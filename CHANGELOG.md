@@ -11,9 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
-## [1.1.10.2.6] - 2026-10-16
+## [1.1.10.2.7] - 2026-10-17
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output
+
+## [1.1.10.2.6] - 2026-10-17
+
+- local-builders: amendment B (J2 on the pinned CUDA 13.4 stack, licences first, generation records, open units) and the Argon design-review brief
+- Updated experiment `local-builders`
 
 ## [1.1.10.2.5] - 2026-10-16
 

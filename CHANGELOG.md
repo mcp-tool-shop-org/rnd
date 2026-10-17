@@ -11,9 +11,17 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
-## [1.1.10.2.3] - 2026-10-16
+## [1.1.10.2.4] - 2026-10-16
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output
+
+## [1.1.10.2.3] - 2026-10-16
+
+- stage1-regeneration: DATASET-RELEASE.md, a design note for releases with verifiable provenance through npm-launcher, OIDC trusted publishing and the maintainer's approval
+- handbook: 'Licences first' (section 0) in the dataset-builds, model-comparisons and A/B templates
+- The generated-content rule reworded (the maintainer, 2026-10-16): allowed unless a contract or licence restricts it, with the search documented; silence-based verdicts revised (Apache/MIT outputs, Kimi via Ollama Cloud, Google non-AI output, R1-Distill-Qwen-32B)
+- generated-content-terms: Argon's answer on pipeline code (barred on the literal consumer text); registry adds the Gemini API and Google Cloud terms
+- Added experiment `generated-content-terms`
 
 ## [1.1.10.2.2] - 2026-10-16
 

@@ -8,13 +8,20 @@ use any provider's AI output as **training data** for its own models.
 for one different-family check ([argon-brief.md](argon-brief.md)), and any decision with commercial or legal weight
 is the maintainer's.
 
-**The rule for using generated content (the maintainer's decision, 2026-10-16):**
-- **Proven allowed only:** a use of AI-generated content (commercial assets, training data, evaluation or code)
-  is allowed only when the provider's own documentation proves it: the live URL, the exact clause quoted, and its
-  date.
-- **Otherwise, don't use it:** not proven means not used. A missing restriction proves nothing.
+**The rule for using generated content (the maintainer's decision, 2026-10-16, revised the same day):**
+- **A use is allowed unless the provider's contract or licence restricts it.** The restriction search is
+  documented: the pages, clauses and dates checked (`licences/registry.json`).
+- **Commonly banned uses get the explicit clause check before they're relied on:** training on outputs,
+  distillation, competing models.
 - **A model's say-so isn't proof,** including Argon's, R&D's or any model's.
 - **R&D re-reads every cited clause at its source** before anything relies on it.
+
+*Revised the same day.* The first wording ("allowed only when the provider's documentation proves it; a missing
+restriction proves nothing") counted silence as a bar. The maintainer judged that too strict. Only a contract the
+studio agreed to, or copyright in the output, can restrict a use. A licence that makes no claim on outputs, or a
+signed contract that is silent, leaves the use free. The verdicts below that rested on silence were revised
+(`licences/registry.json`). The ones that rest on explicit clauses (Google's ML clause, xAI's distillation ban,
+Anthropic's training-target rule, the Kimi app's non-commercial clause) stand.
 
 **Status (2026-10-16): Google checked by R&D at the primary source; Argon's blanket check is back, and R&D
 has re-read every load-bearing clause (below).**

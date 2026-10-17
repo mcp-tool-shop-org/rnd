@@ -11,6 +11,25 @@ For agent experiments, the [agent-ab-harness instrument](https://github.com/mcp-
 
 For runs that compare backends, builds or settings of one model, [`rnd abmine`](/rnd/handbook/ab-dataminer/) mines the record: where the arms fork, Δz per step, drift and tie-breaks.
 
+## 0. Licences first
+
+Before section 1 is written, every model, service, data source and tool the design puts to work is checked against
+the studio's licence registry ([`licences/registry.json`](https://github.com/mcp-tool-shop-org/rnd/blob/main/licences/registry.json))
+**for the use this design makes of it.** That covers writers, critics, judges, graders, embedders, generators of
+images or audio, datasets, and the code tools that build it.
+
+- **A use is allowed unless the provider's contract or licence restricts it.** The search is recorded in the
+  registry: the page, the clause, its date. Uses that providers commonly ban (training on outputs, distillation,
+  competing models) need the explicit clause check, and the registry entry must say which way it reads.
+- **A missing entry blocks the design.** Read the terms at the source, add the entry, then go on. A model's summary
+  of the terms is never the check.
+- **The design lists each item with its registry id and verdict,** for example "writer: Muse-Glimmer-30B
+  (`muse-glimmer-30b-card`, training: proven)".
+- **The reviewer's verdict carries a licence line.** A pass without one doesn't count.
+
+Why this comes first: Stage 1's training data was built by three services whose terms turned out to bar training on
+their outputs, and it had to be regenerated. Checking afterwards costs the work; checking first costs an hour.
+
 ## 1. The check in three sentences
 
 Write these first. Nothing else proceeds until the Director has read them.

@@ -25,7 +25,7 @@ A dataset release reuses all of it.
    - for each writer and critic: its `licences/registry.json` id, model revision and GGUF sha256;
    - the role-set and gates versions, and the plan seeds;
    - the exclusion-state sha256.
-2. **A thin npm package** under the dataset org (for example `@<dataset-org>/stage1-data`) pins that release's version and tag, plus the
+2. **A thin npm package** under the dataset org (for example `@mcptoolshop-data/stage1-verifier`) pins that release's version and tag, plus the
    manifest's sha256. It's published by the repo's `release.yml` with `--provenance`, bound as a trusted publisher
    to that workflow file.
 3. **The maintainer's approval is the human step.** `release.yml`'s publish job runs in a protected GitHub
@@ -36,8 +36,8 @@ A dataset release reuses all of it.
 
 ## The npm org and a new dataset's first publish
 
-- **A dedicated npm org for datasets** (the maintainer creates it; name to be decided) holds every dataset package,
-  apart from the `@mcptoolshop` tools.
+- **The npm org `@mcptoolshop-data`** (created by the maintainer, 2026-10-16) holds every dataset package, apart
+  from the `@mcptoolshop` tools. Its data repos default to the `mcp-tool-shop-org` GitHub org.
 - **Each new dataset package follows the studio's placeholder bootstrap** (memory: npm-placeholder-bootstrap):
   1. The maintainer publishes a `0.0.0` placeholder under the org, to create the name. npm needs the package to
      exist before a trusted publisher can be set. A placeholder only reserves the name; the first real release
@@ -82,7 +82,6 @@ It's a small addition beside `ensureBinary`, with tests. It's a minor version, b
 
 ## Open for the maintainer
 
-- The dataset org's name (he creates it on npm).
 - Which repo holds the data, and whether it's public.
 - Whether the release also goes to Hugging Face, with its dataset card linking the npm provenance.
 - The data's licence, for anyone outside the studio.

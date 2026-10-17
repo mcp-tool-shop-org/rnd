@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.0.0] - 2026-10-17
+
+- J2 pre-run round 5: skip pre-creating venv when install names {venv}, enforce Python 3.12 interpreter check, and refuse empty or non-{venv} install commands.
+
 ## [1.1.14.0.0] - 2026-10-17
 
 - J2 pre-run round 4: companion_tests (`file` key), per-task venv setup (`{venv}`/`{bank}` placeholders, `suite_cmd` scorer contract, `venv_python_version`), strict history chown, and 0600 proxy files.

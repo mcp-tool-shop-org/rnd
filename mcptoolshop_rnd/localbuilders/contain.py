@@ -297,6 +297,23 @@ def kill_process_group(proc: subprocess.Popen) -> None:
         pass
 
 
+def _normalize_windows_shebang_cmd(cmd: list[str]) -> list[str]:
+    """On Windows, if `cmd[0]` is a `#!` script (e.g. `{venv}/bin/python` stub), prepend its interpreter."""
+    if os.name != "nt" or not cmd:
+        return list(cmd)
+    exe = Path(cmd[0])  # pragma: no cover (Windows shebang compatibility)
+    if exe.suffix.lower() in (".exe", ".cmd", ".bat", ".com") or not exe.is_file():  # pragma: no cover
+        return list(cmd)
+    try:  # pragma: no cover
+        first_line = exe.read_bytes().splitlines()[0].decode("utf-8", errors="replace").strip()
+    except (OSError, IndexError):  # pragma: no cover
+        return list(cmd)
+    if first_line.startswith("#!"):  # pragma: no cover
+        interp = first_line[2:].strip()
+        return [interp, *[str(c) for c in cmd]] if interp else list(cmd)
+    return list(cmd)  # pragma: no cover
+
+
 def run_bounded_subprocess(
     cmd: list[str],
     *,
@@ -307,14 +324,16 @@ def run_bounded_subprocess(
     """Run `cmd` in its own process group and kill the entire process group on `TimeoutExpired`."""
     exec_cmd = list(cmd)
     exec_env = env
-    if os.name == "nt" and exec_cmd and exec_cmd[0] == "env":
-        exec_env = dict(env if env is not None else os.environ)
-        idx = 1
-        while idx < len(exec_cmd) and "=" in exec_cmd[idx] and not exec_cmd[idx].startswith("-"):
-            k, v = exec_cmd[idx].split("=", 1)
-            exec_env[k] = v
-            idx += 1
-        exec_cmd = exec_cmd[idx:]
+    if os.name == "nt":  # pragma: no cover (Windows env & shebang compatibility)
+        if exec_cmd and exec_cmd[0] == "env":
+            exec_env = dict(env if env is not None else os.environ)
+            idx = 1
+            while idx < len(exec_cmd) and "=" in exec_cmd[idx] and not exec_cmd[idx].startswith("-"):
+                k, v = exec_cmd[idx].split("=", 1)
+                exec_env[k] = v
+                idx += 1
+            exec_cmd = exec_cmd[idx:]
+        exec_cmd = _normalize_windows_shebang_cmd(exec_cmd)
 
     popen_kwargs: dict = {
         "cwd": str(cwd),
@@ -325,7 +344,7 @@ def run_bounded_subprocess(
     }
     if os.name != "nt":  # pragma: no cover (POSIX process group session)
         popen_kwargs["start_new_session"] = True
-    elif hasattr(subprocess, "CREATE_NEW_PROCESS_GROUP"):
+    elif hasattr(subprocess, "CREATE_NEW_PROCESS_GROUP"):  # pragma: no cover
         popen_kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP
 
     proc = subprocess.Popen(exec_cmd, **popen_kwargs)

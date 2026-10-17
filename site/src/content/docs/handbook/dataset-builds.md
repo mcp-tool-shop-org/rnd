@@ -83,6 +83,20 @@ Pairs built by editing one side from the other carry the edit as a label. Prefer
 
 Train, validation, a frozen exam, a never-tuned final set, the held-out family, the natural set. The split is a file, committed before the batch, and an item moves between splits only by a dated amendment that says why.
 
+**The generation record (provenance evidence).** Every model call that produces text the experiment keeps
+(writer, critic, judge or candidate) is also logged in the [dataminer](/rnd/handbook/ab-dataminer/)'s record format,
+`generations.jsonl`, with:
+- one `result` row per call: `arm` (the model's registry name), `prompt` (the call id), `tokens`, and the top-K
+  log-probabilities per step (`top`, K = 5 by default);
+- the run's pins (the model file's sha256, the server binary and its libraries) and the record's own sha256 on the
+  receipt.
+
+**Why:** the record fingerprints the model. Replaying a kept output through the pinned model on the pinned stack
+must reproduce its per-token log-probabilities, within the tolerance the replay check sets. A different model, or
+an edited text, can't. A sample of every release is replayed by `rnd abmine` (its replay today drives Ollama; a llama-server path is being added for the pinned stacks) and the result goes on the
+recipe card or the report. A call made with sampling still records the log-probabilities of the tokens it chose;
+the replay checks those.
+
 ## 8. The recipe card ships with the set
 
 | field | contents |
@@ -97,6 +111,7 @@ Train, validation, a frozen exam, a never-tuned final set, the held-out family, 
 | controls | the list in section 6, with each result |
 | results | per stratum, against chance and the best single reference, with intervals |
 | pins | every model, prompt and tool version |
+| provenance evidence | the generation record's sha256, and the replay sample's result (rows replayed, matched, tolerance) |
 
 ## 9. Before the first paid batch
 

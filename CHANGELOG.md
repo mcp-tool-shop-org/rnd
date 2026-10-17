@@ -11,9 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
-## [1.1.10.2.5] - 2026-10-16
+## [1.1.10.2.6] - 2026-10-16
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output
+
+## [1.1.10.2.5] - 2026-10-16
+
+- stage1-regeneration: DATAMINER-USES.md, using the generation records in role-set (uncertain-first key check, host agreement, and four later uses)
+- handbook: the dataminer's generation record as provenance evidence in every experiment template
 
 ## [1.1.10.2.4] - 2026-10-16
 

@@ -2259,6 +2259,50 @@ class RunnerAndReceiptTests(unittest.TestCase):
         with self.assertRaises(runner.RunnerError):
             runner.main([])
 
+    def _make_stub_venv_install_cmd(
+        self,
+        *,
+        python_version: str = "Python 3.12.8",
+        assert_not_precreated: bool = True,
+        require_bank_freeze: bool = False,
+        tag: str = "default",
+    ) -> str:
+        """Build a stub `install` command that names `{venv}`, verifies `{venv}` was NOT pre-created, and builds `{venv}/bin/python` itself."""
+        safe_tag = f"{tag}_{python_version}".replace(" ", "_")
+        helper_script = self.tmp / f"make_stub_venv_{safe_tag}.py"
+        py_posix = Path(sys.executable).as_posix()
+        vpy_code = (
+            f"#!{py_posix}\n"
+            "import subprocess, sys\n"
+            "if sys.argv[1:] in (['--version'], ['-V']):\n"
+            f"    sys.stdout.write({python_version!r} + '\\n')\n"
+            "    sys.exit(0)\n"
+            f"sys.exit(subprocess.call([{py_posix!r}, *sys.argv[1:]]))\n"
+        )
+        helper_script.write_text(
+            "import os, pathlib, sys\n"
+            "vdir = pathlib.Path(sys.argv[1])\n"
+            f"if {assert_not_precreated!r}:\n"
+            "    assert not vdir.exists(), f'venv was pre-created before install: {vdir}'\n"
+            "assert str(vdir.resolve()) == os.environ['UV_PROJECT_ENVIRONMENT']\n"
+            "assert str(vdir.resolve()) == os.environ['VIRTUAL_ENV']\n"
+            "assert 'PIP_NO_INDEX' not in os.environ and 'HTTP_PROXY' not in os.environ\n"
+            f"if {require_bank_freeze!r}:\n"
+            "    bdir = pathlib.Path(sys.argv[2])\n"
+            "    assert (bdir / 'aspire-si-freeze.txt').is_file()\n"
+            "vbin = vdir / 'bin'\n"
+            "vbin.mkdir(parents=True, exist_ok=True)\n"
+            "(vdir / 'stub_installed.txt').write_text('ok', encoding='utf-8')\n"
+            "vpy = vbin / 'python'\n"
+            f"vpy.write_text({vpy_code!r}, encoding='utf-8', newline='\\n')\n"
+            "os.chmod(vpy, 0o755)\n",
+            encoding="utf-8",
+            newline="\n",
+        )
+        if require_bank_freeze:
+            return f'"{sys.executable}" "{helper_script}" "{{venv}}" "{{bank}}"'
+        return f'"{sys.executable}" "{helper_script}" "{{venv}}"'
+
     def test_default_sudo_builder_refusal_timeouts_and_end_to_end_receipt(self):
         mini_repo = self.tmp / "mini_repo"
         (mini_repo / "mcptoolshop_rnd").mkdir(parents=True)
@@ -2281,6 +2325,7 @@ class RunnerAndReceiptTests(unittest.TestCase):
                 "target_node_id": self.task.target_node_id,
                 "twin_node_id": self.task.twin_nodes[0],
                 "test_cmd": self.task.test_cmd,
+                "install": self._make_stub_venv_install_cmd(tag="mini"),
                 "allowed_paths": ["mcptoolshop_rnd/abmine.py"],
                 "baseline": self.task.baseline,
                 "scrubbed_test_path": self.task.scrubbed_test_path,
@@ -2525,20 +2570,15 @@ class RunnerAndReceiptTests(unittest.TestCase):
         fake_bank_dir.mkdir(parents=True, exist_ok=True)
         (fake_bank_dir / "aspire-si-freeze.txt").write_text("pytest==8.3.3\n", encoding="utf-8")
 
-        # Stub install command uses both {venv} and {bank} placeholders and verifies:
+        # Stub install command uses both {venv} and {bank} placeholders, verifies {venv} was NOT pre-created,
+        # builds {venv}/bin/python (reporting Python 3.12.8), and verifies:
         # 1) UV_PROJECT_ENVIRONMENT and VIRTUAL_ENV point at work_root/venv-<task>
         # 2) network/index restrictions (PIP_NO_INDEX, HTTP_PROXY) are NOT set for root setup
-        stub_install_template = (
-            f'"{sys.executable}" -c '
-            '"import os, pathlib, sys; '
-            "vdir = pathlib.Path(r'{venv}'); "
-            "bdir = pathlib.Path(r'{bank}'); "
-            "assert str(vdir) == os.environ['UV_PROJECT_ENVIRONMENT']; "
-            "assert str(vdir) == os.environ['VIRTUAL_ENV']; "
-            "assert (bdir / 'aspire-si-freeze.txt').is_file(); "
-            "assert 'PIP_NO_INDEX' not in os.environ and 'HTTP_PROXY' not in os.environ; "
-            "(vdir / 'stub_installed.txt').write_text('ok', encoding='utf-8'); "
-            'sys.exit(0)"'
+        stub_install_template = self._make_stub_venv_install_cmd(
+            python_version="Python 3.12.8",
+            assert_not_precreated=True,
+            require_bank_freeze=True,
+            tag="venv-ok",
         )
         task_ok = workspace.TaskSpec.from_dict(
             {
@@ -2654,16 +2694,17 @@ class RunnerAndReceiptTests(unittest.TestCase):
             self.assertEqual(receipt_ok["install_exit_code"], 0)
             self.assertIsInstance(receipt_ok["pip_freeze_sha256"], str)
             self.assertEqual(len(receipt_ok["pip_freeze_sha256"]), 64)
-            self.assertIsInstance(receipt_ok["venv_python_version"], str)
-            self.assertTrue(receipt_ok["venv_python_version"].startswith("Python 3."))
-            self.assertEqual(receipt_ok["python_version"], receipt_ok["venv_python_version"])
+            self.assertEqual(receipt_ok["venv_python_version"], "Python 3.12.8")
+            self.assertEqual(receipt_ok["python_version"], "Python 3.12.8")
             self.assertEqual(receipt_ok["pins"]["install_cmd"], expected_filled_install)
             self.assertEqual(receipt_ok["pins"]["install_exit_code"], 0)
             self.assertEqual(receipt_ok["pins"]["pip_freeze_sha256"], receipt_ok["pip_freeze_sha256"])
-            self.assertEqual(receipt_ok["pins"]["venv_python_version"], receipt_ok["venv_python_version"])
+            self.assertEqual(receipt_ok["pins"]["venv_python_version"], "Python 3.12.8")
 
             # Failing stub install command ends the task as setup_failed, with no Aider run and no score
-            stub_install_fail = f'"{sys.executable}" -c "import sys; sys.stderr.write(\'broken lockfile\\n\'); sys.exit(17)"'
+            stub_install_fail = (
+                f'"{sys.executable}" -c "import sys; _ = r\'{{venv}}\'; sys.stderr.write(\'broken lockfile\\n\'); sys.exit(17)"'
+            )
             task_fail = workspace.TaskSpec.from_dict(
                 {
                     "id": "venv-fail",
@@ -2723,7 +2764,10 @@ class RunnerAndReceiptTests(unittest.TestCase):
             self.assertEqual(receipt_fail["grade"]["reason"], "setup_failed")
             self.assertEqual(receipt_fail["grade"]["reasons"], ["setup_failed"])
             self.assertEqual(receipt_fail["call_count"], 0)
-            self.assertEqual(receipt_fail["install_cmd"], stub_install_fail)
+            self.assertEqual(
+                receipt_fail["install_cmd"],
+                stub_install_fail.replace("{venv}", str(work_fail.resolve() / "venv-venv-fail")),
+            )
             self.assertEqual(receipt_fail["install_exit_code"], 17)
             self.assertIsNone(receipt_fail["pip_freeze_sha256"])
             self.assertIsNone(receipt_fail["venv_python_version"])
@@ -2960,14 +3004,17 @@ class RunnerAndReceiptTests(unittest.TestCase):
         )
 
         # 3. Scorer invoking suite_cmd with --junitxml appended using the real stub script
-        #    Create a real venv at target_venv so {venv} points to a real interpreter for the stub
+        #    Run setup_task_venv with a stub install that creates {venv}/bin/python (reporting Python 3.12.8)
         setup_res = runner.setup_task_venv(
-            workspace.TaskSpec.from_dict({**exported_entry, "install": ""}, bank_dir=export_bank_dir),
+            workspace.TaskSpec.from_dict(
+                {**exported_entry, "install": self._make_stub_venv_install_cmd(tag="e2e")},
+                bank_dir=export_bank_dir,
+            ),
             ws_dir,
             self.tmp / "work",
         )
-        self.assertTrue(setup_res.ok)
-        self.assertTrue(setup_res.python_version.startswith("Python 3."))
+        self.assertTrue(setup_res.ok, setup_res.reason)
+        self.assertEqual(setup_res.python_version, "Python 3.12.8")
 
         py_rel = setup_res.python_executable.relative_to(setup_res.venv_dir).as_posix()
         stub_suite_cmd = (
@@ -3018,7 +3065,213 @@ class RunnerAndReceiptTests(unittest.TestCase):
             ).startswith("Python ")
         )
 
+    def test_round5_no_precreated_venv_python312_check_and_unusable_install_refused(self):
+        """Round 5: (1) install naming {venv} runs without pre-created venv and requires Python 3.12; (2) empty or non-{venv} install ends as setup_failed before Aider runs."""
+        mini_repo = self.tmp / "mini_repo_r5"
+        (mini_repo / "mcptoolshop_rnd").mkdir(parents=True)
+        (mini_repo / "mcptoolshop_rnd" / "abmine.py").write_text("x = 1\n", encoding="utf-8")
+        env = workspace.git_env(self.tmp / "ghome_r5")
+        subprocess.run(["git", "init", "-q"], cwd=str(mini_repo), env=env, check=True)
+        subprocess.run(["git", "config", "user.name", "t"], cwd=str(mini_repo), env=env, check=True)
+        subprocess.run(["git", "config", "user.email", "t@localhost"], cwd=str(mini_repo), env=env, check=True)
+        subprocess.run(["git", "add", "-A"], cwd=str(mini_repo), env=env, check=True)
+        subprocess.run(["git", "commit", "-q", "-m", "p"], cwd=str(mini_repo), env=env, check=True)
+        parent_sha = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=str(mini_repo), env=env, capture_output=True, text=True, check=True
+        ).stdout.strip()
+
+        def make_task(tid: str, install_str: str) -> workspace.TaskSpec:
+            return workspace.TaskSpec.from_dict(
+                {
+                    "id": tid,
+                    "parent_commit": parent_sha,
+                    "test_file": self.task.test_file,
+                    "target_node_id": self.task.target_node_id,
+                    "twin_node_id": self.task.twin_nodes[0],
+                    "test_cmd": "{venv}/bin/python -m pytest -q tests/test_abmine_fa.py",
+                    "suite_cmd": "{venv}/bin/python -m pytest -q",
+                    "install": install_str,
+                    "allowed_paths": ["mcptoolshop_rnd/abmine.py"],
+                    "baseline": self.task.baseline,
+                    "scrubbed_test_path": self.task.scrubbed_test_path,
+                    "twin_test_path": self.task.twin_test_path,
+                }
+            )
+
+        # Unit check on is_python_312
+        self.assertTrue(runner.is_python_312("Python 3.12.8"))
+        self.assertTrue(runner.is_python_312("Python 3.12"))
+        self.assertFalse(runner.is_python_312("Python 3.10.11"))
+        self.assertFalse(runner.is_python_312("Python 3.11.9"))
+        self.assertFalse(runner.is_python_312("Python 3.13.1"))
+        self.assertFalse(runner.is_python_312("Python 3.120.0"))
+        self.assertFalse(runner.is_python_312(""))
+        self.assertFalse(runner.is_python_312(None))
+
+        # 1. An install that names {venv} runs without a pre-created venv (stub asserts not vdir.exists() and builds venv itself)
+        task_self_venv = make_task(
+            "r5-self-venv",
+            self._make_stub_venv_install_cmd(
+                python_version="Python 3.12.8",
+                assert_not_precreated=True,
+                tag="r5-self",
+            ),
+        )
+        ws_self = self.tmp / "ws-r5-self"
+        ws_self.mkdir(parents=True, exist_ok=True)
+        work_self = self.tmp / "work-r5-self"
+        res_self = runner.setup_task_venv(task_self_venv, ws_self, work_self)
+        self.assertTrue(res_self.ok, res_self.reason)
+        self.assertEqual(res_self.venv_python_version, "Python 3.12.8")
+        self.assertEqual(res_self.reason, "")
+        self.assertTrue((work_self / "venv-r5-self-venv" / "bin" / "python").is_file())
+
+        settings_file = self.tmp / "model-settings-r5.yml"
+        with _StubLlamaServer() as stub, _mock_installed_aider(version="0.86.1"):
+            # 2. A venv that reports another Python version ends the task as setup_failed, with the version on the receipt
+            task_wrong_py = make_task(
+                "r5-wrong-py",
+                self._make_stub_venv_install_cmd(
+                    python_version="Python 3.11.9",
+                    assert_not_precreated=True,
+                    tag="r5-wrong-py",
+                ),
+            )
+            aider_called = False
+            scorer_called = False
+
+            def forbid_aider(*args, **kwargs):
+                nonlocal aider_called
+                aider_called = True
+                return 0
+
+            def forbid_scorer(*args, **kwargs):
+                nonlocal scorer_called
+                scorer_called = True
+                return {}
+
+            cfg_wrong_py = runner.RunTaskConfig(
+                source_repo=mini_repo,
+                task=task_wrong_py,
+                candidate_config_path=CARD_VALUES_JSON,
+                candidate="qwen3.8-27b",
+                model_settings_file=settings_file,
+                served_as="qwen3.8-27b",
+                model_tag="qwen3.8:27b-q8_0",
+                model_digest="sha256:aaee06c39dcf",
+                aider_version=proxy.PINNED_AIDER_VERSION,
+                upstream_url=stub.url,
+                work_root=self.tmp / "work-r5-wrong-py",
+                receipt_path=self.tmp / "receipts" / "r5_wrong_py.json",
+                machine_line={"gpu": "NVIDIA A100-SXM4-40GB"},
+            )
+            receipt_wrong_py = runner.run_single_task(
+                cfg_wrong_py,
+                aider_runner=forbid_aider,
+                scorer_fn=forbid_scorer,
+            )
+            self.assertFalse(aider_called)
+            self.assertFalse(scorer_called)
+            self.assertFalse(receipt_wrong_py["correct"])
+            self.assertEqual(receipt_wrong_py["status"], "setup_failed")
+            self.assertEqual(receipt_wrong_py["grade"]["status"], "setup_failed")
+            self.assertEqual(receipt_wrong_py["venv_python_version"], "Python 3.11.9")
+            self.assertEqual(receipt_wrong_py["python_version"], "Python 3.11.9")
+            self.assertEqual(receipt_wrong_py["pins"]["venv_python_version"], "Python 3.11.9")
+            self.assertIn("Python 3.12", receipt_wrong_py["reason"])
+            self.assertIn("Python 3.11.9", receipt_wrong_py["reason"])
+            self.assertEqual(receipt_wrong_py["grade"]["reason"], receipt_wrong_py["reason"])
+            self.assertIn(receipt_wrong_py["reason"], receipt_wrong_py["grade"]["reasons"])
+
+            # 3. An empty install ends the task as setup_failed with reason 'install is empty', no Aider call, and no score
+            task_empty = make_task("r5-empty-install", "")
+            cfg_empty = runner.RunTaskConfig(
+                source_repo=mini_repo,
+                task=task_empty,
+                candidate_config_path=CARD_VALUES_JSON,
+                candidate="qwen3.8-27b",
+                model_settings_file=settings_file,
+                served_as="qwen3.8-27b",
+                model_tag="qwen3.8:27b-q8_0",
+                model_digest="sha256:aaee06c39dcf",
+                aider_version=proxy.PINNED_AIDER_VERSION,
+                upstream_url=stub.url,
+                work_root=self.tmp / "work-r5-empty",
+                receipt_path=self.tmp / "receipts" / "r5_empty.json",
+                machine_line={"gpu": "NVIDIA A100-SXM4-40GB"},
+            )
+            receipt_empty = runner.run_single_task(
+                cfg_empty,
+                aider_runner=forbid_aider,
+                scorer_fn=forbid_scorer,
+            )
+            self.assertFalse(aider_called)
+            self.assertFalse(scorer_called)
+            self.assertFalse(receipt_empty["correct"])
+            self.assertEqual(receipt_empty["status"], "setup_failed")
+            self.assertEqual(receipt_empty["grade"]["status"], "setup_failed")
+            self.assertEqual(receipt_empty["reason"], "install is empty")
+            self.assertEqual(receipt_empty["grade"]["reason"], "install is empty")
+            self.assertIn("install is empty", receipt_empty["grade"]["reasons"])
+            self.assertIsNone(receipt_empty["venv_python_version"])
+            self.assertFalse((self.tmp / "work-r5-empty" / "venv-r5-empty-install").exists())
+
+            # 4. An install without {venv} ends the task as setup_failed with reason 'install does not name {venv}', no Aider call, and no score
+            task_no_venv = make_task("r5-no-venv-install", "uv sync --frozen --python 3.12")
+            cfg_no_venv = runner.RunTaskConfig(
+                source_repo=mini_repo,
+                task=task_no_venv,
+                candidate_config_path=CARD_VALUES_JSON,
+                candidate="qwen3.8-27b",
+                model_settings_file=settings_file,
+                served_as="qwen3.8-27b",
+                model_tag="qwen3.8:27b-q8_0",
+                model_digest="sha256:aaee06c39dcf",
+                aider_version=proxy.PINNED_AIDER_VERSION,
+                upstream_url=stub.url,
+                work_root=self.tmp / "work-r5-no-venv",
+                receipt_path=self.tmp / "receipts" / "r5_no_venv.json",
+                machine_line={"gpu": "NVIDIA A100-SXM4-40GB"},
+            )
+            receipt_no_venv = runner.run_single_task(
+                cfg_no_venv,
+                aider_runner=forbid_aider,
+                scorer_fn=forbid_scorer,
+            )
+            self.assertFalse(aider_called)
+            self.assertFalse(scorer_called)
+            self.assertFalse(receipt_no_venv["correct"])
+            self.assertEqual(receipt_no_venv["status"], "setup_failed")
+            self.assertEqual(receipt_no_venv["grade"]["status"], "setup_failed")
+            self.assertEqual(receipt_no_venv["reason"], "install does not name {venv}")
+            self.assertEqual(receipt_no_venv["grade"]["reason"], "install does not name {venv}")
+            self.assertIn("install does not name {venv}", receipt_no_venv["grade"]["reasons"])
+            self.assertIsNone(receipt_no_venv["venv_python_version"])
+            self.assertFalse((self.tmp / "work-r5-no-venv" / "venv-r5-no-venv-install").exists())
+
+        # Edge cases: install exits 0 without creating {venv}/bin/python, and install timeout
+        task_no_py = make_task("r5-no-py", 'echo "{venv}"')
+        res_no_py = runner.setup_task_venv(
+            task_no_py,
+            ws_self,
+            self.tmp / "work-r5-no-py",
+            run_cmd=lambda cmd, **kw: subprocess.CompletedProcess(cmd, 0 if kw.get("shell") else 1, "", "missing py"),
+        )
+        self.assertFalse(res_no_py.ok)
+        self.assertIn("venv python check failed", res_no_py.reason)
+
+        res_to = runner.setup_task_venv(
+            task_no_py,
+            ws_self,
+            self.tmp / "work-r5-to",
+            run_cmd=lambda cmd, **kw: (_ for _ in ()).throw(subprocess.TimeoutExpired(cmd=cmd, timeout=1)),
+        )
+        self.assertFalse(res_to.ok)
+        self.assertEqual(res_to.install_exit_code, -1)
+        self.assertEqual(res_to.reason, "install_timeout")
+
 
 if __name__ == "__main__":
     unittest.main()
+
 

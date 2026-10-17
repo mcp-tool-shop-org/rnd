@@ -34,7 +34,14 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable
 
-from .contain import BUILDER_USER, builder_env, run_bounded_subprocess, venv_bin_dir, wrap_as_builder
+from .contain import (
+    BUILDER_USER,
+    _normalize_windows_shebang_cmd,
+    builder_env,
+    run_bounded_subprocess,
+    venv_bin_dir,
+    wrap_as_builder,
+)
 from .preflight import PreflightError, verify_installed_aider
 from .proxy import (
     DEFAULT_MAX_CALLS,
@@ -118,6 +125,7 @@ REQUIRED_RECEIPT_FIELDS = (
 )
 
 _EXAMPLES_SYS_MSG_TRUE_RE = re.compile(r"^\s*examples_as_sys_msg\s*:\s*true\s*(?:#.*)?$", re.IGNORECASE | re.MULTILINE)
+_PYTHON_312_RE = re.compile(r"^Python\s+3\.12(?:\.|$|\s)")
 
 
 class RunnerError(Exception):
@@ -211,12 +219,20 @@ class TaskEnvSetupResult:
     install_exit_code: int
     pip_freeze_sha256: str | None
     venv_python_version: str | None = None
+    reason: str = ""
     stdout: str = ""
     stderr: str = ""
 
     @property
     def python_version(self) -> str | None:
         return self.venv_python_version
+
+
+def is_python_312(version_str: str | None) -> bool:
+    """Return True iff `version_str` (`python --version` output) reports Python 3.12."""
+    if not version_str:
+        return False
+    return bool(_PYTHON_312_RE.match(str(version_str).strip()))
 
 
 def venv_python_path(venv_dir: str | Path) -> Path:
@@ -291,6 +307,23 @@ def lock_venv_for_builder(venv_dir: str | Path) -> None:
                 os.chmod(fp, VENV_FILE_MODE)
 
 
+def _default_venv_subproc_run(
+    cmd: list[str],
+    *,
+    timeout: float = 60.0,
+    **kw: Any,
+) -> subprocess.CompletedProcess:
+    """Run a venv interpreter command, normalizing `#!` stub scripts on Windows."""
+    return subprocess.run(
+        _normalize_windows_shebang_cmd(cmd),
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=timeout,
+        **kw,
+    )
+
+
 def freeze_venv_sha256(
     venv_dir: str | Path,
     venv_python: str | Path | None = None,
@@ -302,16 +335,7 @@ def freeze_venv_sha256(
     vdir = Path(venv_dir).resolve()
     vpy = Path(venv_python) if venv_python is not None else venv_python_path(vdir)
     run_env = env if env is not None else root_install_env(vdir)
-    runner_fn = run_cmd or (
-        lambda cmd, **kw: subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            check=False,
-            timeout=60,
-            **kw,
-        )
-    )
+    runner_fn = run_cmd or (lambda cmd, **kw: _default_venv_subproc_run(cmd, timeout=60, **kw))
 
     vbin = venv_bin_dir(vdir)
     has_pip = (vbin / "pip").is_file() or (vbin / "pip.exe").is_file()
@@ -345,16 +369,7 @@ def venv_python_version(
     vdir = Path(venv_dir).resolve()
     vpy = Path(venv_python) if venv_python is not None else venv_python_path(vdir)
     run_env = env if env is not None else root_install_env(vdir)
-    runner_fn = run_cmd or (
-        lambda cmd, **kw: subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            check=False,
-            timeout=30,
-            **kw,
-        )
-    )
+    runner_fn = run_cmd or (lambda cmd, **kw: _default_venv_subproc_run(cmd, timeout=30, **kw))
     res = runner_fn([str(vpy), "--version"], cwd=str(vdir), env=run_env)
     if res.returncode != 0:
         raise RunnerError(f"failed to read python --version for venv {vdir}: {(res.stderr or '').strip()}")
@@ -370,13 +385,18 @@ def setup_task_venv(
     work_root: str | Path,
     *,
     bank_dir: str | Path | None = None,
-    base_python: str | Path = sys.executable,
     base_env: dict[str, str] | None = None,
     timeout: float = DEFAULT_SETUP_TIMEOUT_S,
-    with_pip: bool | None = None,
     run_cmd: Callable[..., subprocess.CompletedProcess] | None = None,
 ) -> TaskEnvSetupResult:
-    """Create `work_root/venv-<task>`, fill `{venv}`/`{bank}` and run `install` as `root` with network allowed, and lock permissions."""
+    """Run `install` as `root` with network allowed to build `work_root/venv-<task>`, verify Python 3.12, and lock permissions.
+
+    - Refuses tasks whose `install` is empty (`reason='install is empty'`) or does not name `{venv}`
+      (`reason='install does not name {venv}'`).
+    - Does not pre-create `venv-<task>` with the harness interpreter; `install` builds `{venv}` itself.
+    - Checks `{venv}/bin/python --version` after `install`: anything other than Python 3.12 fails setup
+      with the reported version recorded on the receipt.
+    """
     spec = task if isinstance(task, TaskSpec) else TaskSpec.from_dict(task, bank_dir=bank_dir)
     wroot = Path(work_root).resolve()
     ws_dir = Path(workspace_dir).resolve()
@@ -387,85 +407,80 @@ def setup_task_venv(
     except ValueError:
         pass
 
-    eff_bank_dir = bank_dir if bank_dir is not None else spec.bank_dir
-    filled_install_cmd = (
-        resolve_test_cmd_for_venv(spec.install_cmd, venv_dir, bank_dir=eff_bank_dir)
-        if spec.install_cmd.strip()
-        else ""
-    )
-
     wroot.mkdir(parents=True, exist_ok=True)
-    need_pip = bool(with_pip) if with_pip is not None else ("pip" in filled_install_cmd)
-
+    raw_install = spec.install_cmd.strip()
     vpy = venv_python_path(venv_dir)
-    if not vpy.is_file():
-        venv_args = [str(base_python), "-m", "venv", *([] if need_pip else ["--without-pip"]), str(venv_dir)]
-        venv_res = subprocess.run(
-            venv_args,
-            capture_output=True,
-            text=True,
-            check=False,
-            timeout=timeout,
+
+    if not raw_install:
+        return TaskEnvSetupResult(
+            ok=False,
+            venv_dir=venv_dir,
+            python_executable=vpy,
+            install_cmd="",
+            install_exit_code=1,
+            pip_freeze_sha256=None,
+            venv_python_version=None,
+            reason="install is empty",
+            stdout="",
+            stderr="install is empty",
         )
-        if venv_res.returncode != 0 and need_pip:
-            venv_res = subprocess.run(
-                [str(base_python), "-m", "venv", "--without-pip", str(venv_dir)],
+
+    eff_bank_dir = bank_dir if bank_dir is not None else spec.bank_dir
+    if "{venv}" not in raw_install:
+        filled_no_venv = (
+            resolve_test_cmd_for_venv(raw_install, venv_dir, bank_dir=eff_bank_dir)
+            if ("{bank}" not in raw_install or eff_bank_dir is not None)
+            else raw_install
+        )
+        return TaskEnvSetupResult(
+            ok=False,
+            venv_dir=venv_dir,
+            python_executable=vpy,
+            install_cmd=filled_no_venv,
+            install_exit_code=1,
+            pip_freeze_sha256=None,
+            venv_python_version=None,
+            reason="install does not name {venv}",
+            stdout="",
+            stderr="install does not name {venv}",
+        )
+
+    filled_install_cmd = resolve_test_cmd_for_venv(raw_install, venv_dir, bank_dir=eff_bank_dir)
+    install_env = root_install_env(venv_dir, base_env=base_env)
+
+    try:
+        if run_cmd is not None:
+            res = run_cmd(filled_install_cmd, cwd=str(ws_dir), env=install_env, shell=True)
+        else:
+            res = subprocess.run(
+                filled_install_cmd,
+                shell=True,
+                cwd=str(ws_dir),
+                env=install_env,
                 capture_output=True,
                 text=True,
                 check=False,
                 timeout=timeout,
             )
-        if venv_res.returncode != 0:
-            return TaskEnvSetupResult(
-                ok=False,
-                venv_dir=venv_dir,
-                python_executable=vpy,
-                install_cmd=filled_install_cmd,
-                install_exit_code=int(venv_res.returncode or 1),
-                pip_freeze_sha256=None,
-                venv_python_version=None,
-                stdout=venv_res.stdout or "",
-                stderr=venv_res.stderr or "",
-            )
-        vpy = venv_python_path(venv_dir)
+        install_rc = int(res.returncode)
+        out_str = res.stdout or ""
+        err_str = res.stderr or ""
+    except subprocess.TimeoutExpired:
+        lock_venv_for_builder(venv_dir)
+        return TaskEnvSetupResult(
+            ok=False,
+            venv_dir=venv_dir,
+            python_executable=venv_python_path(venv_dir),
+            install_cmd=filled_install_cmd,
+            install_exit_code=-1,
+            pip_freeze_sha256=None,
+            venv_python_version=None,
+            reason="install_timeout",
+            stdout="",
+            stderr="install_timeout",
+        )
 
-    install_env = root_install_env(venv_dir, base_env=base_env)
-    out_str = ""
-    err_str = ""
-    install_rc = 0
-
-    if filled_install_cmd:
-        try:
-            if run_cmd is not None:
-                res = run_cmd(filled_install_cmd, cwd=str(ws_dir), env=install_env, shell=True)
-            else:
-                res = subprocess.run(
-                    filled_install_cmd,
-                    shell=True,
-                    cwd=str(ws_dir),
-                    env=install_env,
-                    capture_output=True,
-                    text=True,
-                    check=False,
-                    timeout=timeout,
-                )
-            install_rc = int(res.returncode)
-            out_str = res.stdout or ""
-            err_str = res.stderr or ""
-        except subprocess.TimeoutExpired:
-            lock_venv_for_builder(venv_dir)
-            return TaskEnvSetupResult(
-                ok=False,
-                venv_dir=venv_dir,
-                python_executable=vpy,
-                install_cmd=filled_install_cmd,
-                install_exit_code=-1,
-                pip_freeze_sha256=None,
-                venv_python_version=None,
-                stdout="",
-                stderr="install_timeout",
-            )
-
+    vpy = venv_python_path(venv_dir)
     if install_rc != 0:
         lock_venv_for_builder(venv_dir)
         return TaskEnvSetupResult(
@@ -476,13 +491,44 @@ def setup_task_venv(
             install_exit_code=install_rc,
             pip_freeze_sha256=None,
             venv_python_version=None,
+            reason="setup_failed",
             stdout=out_str,
             stderr=err_str,
         )
 
-    vpy = venv_python_path(venv_dir)
+    try:
+        py_ver = venv_python_version(venv_dir, vpy, env=install_env, run_cmd=run_cmd)
+    except (RunnerError, OSError) as exc:
+        lock_venv_for_builder(venv_dir)
+        return TaskEnvSetupResult(
+            ok=False,
+            venv_dir=venv_dir,
+            python_executable=vpy,
+            install_cmd=filled_install_cmd,
+            install_exit_code=install_rc,
+            pip_freeze_sha256=None,
+            venv_python_version=None,
+            reason=f"venv python check failed: {exc}",
+            stdout=out_str,
+            stderr=err_str,
+        )
+
+    if not is_python_312(py_ver):
+        lock_venv_for_builder(venv_dir)
+        return TaskEnvSetupResult(
+            ok=False,
+            venv_dir=venv_dir,
+            python_executable=vpy,
+            install_cmd=filled_install_cmd,
+            install_exit_code=install_rc,
+            pip_freeze_sha256=None,
+            venv_python_version=py_ver,
+            reason=f"venv python must be Python 3.12, got {py_ver}",
+            stdout=out_str,
+            stderr=err_str,
+        )
+
     freeze_sha = freeze_venv_sha256(venv_dir, vpy, env=install_env, run_cmd=run_cmd)
-    py_ver = venv_python_version(venv_dir, vpy, env=install_env, run_cmd=run_cmd)
     lock_venv_for_builder(venv_dir)
     return TaskEnvSetupResult(
         ok=True,
@@ -492,6 +538,7 @@ def setup_task_venv(
         install_exit_code=0,
         pip_freeze_sha256=freeze_sha,
         venv_python_version=py_ver,
+        reason="",
         stdout=out_str,
         stderr=err_str,
     )
@@ -739,15 +786,22 @@ def parse_analytics_log(analytics_path: str | Path) -> dict[str, int]:
     }
 
 
-def _failed_grade_for_reason(task: TaskSpec, reason: str) -> dict[str, Any]:
+def _failed_grade_for_reason(
+    task: TaskSpec,
+    reason: str,
+    *,
+    detail_reason: str | None = None,
+) -> dict[str, Any]:
     """Build a failed grade_result dictionary when setup fails or Aider/scoring times out."""
+    eff_reason = (detail_reason or "").strip() or reason
+    reasons_list = [reason] if eff_reason == reason else [reason, eff_reason]
     return {
         "task_id": task.id,
         "status": reason,
         "passed": False,
         "correct": False,
-        "reasons": [reason],
-        "reason": reason,
+        "reasons": reasons_list,
+        "reason": eff_reason,
         "counts": {"passed": 0, "failed": 0, "errors": 0, "skipped": 0, "xfail": 0},
         "baseline": dict(task.baseline),
         "target_nodes": list(task.target_nodes),
@@ -830,10 +884,11 @@ def build_receipt(
         **pins,
     }
 
+    grade_status = str(grade_result.get("status") or "")
     grade_reason = str(grade_result.get("reason") or "")
     status_str = (
         "setup_failed"
-        if grade_reason == "setup_failed"
+        if (grade_status == "setup_failed" or grade_reason == "setup_failed")
         else ("passed" if grade_result.get("correct") else "failed")
     )
 
@@ -843,6 +898,7 @@ def build_receipt(
         "slot_id": task.id,
         "difficulty": task.difficulty,
         "status": status_str,
+        "reason": grade_reason,
         "model": {
             "tag": model_tag,
             "digest": model_digest,
@@ -1049,7 +1105,11 @@ def run_single_task(
     )
 
     if not setup_res.ok or setup_res.install_exit_code != 0:
-        grade_res = _failed_grade_for_reason(cfg.task, "setup_failed")
+        grade_res = _failed_grade_for_reason(
+            cfg.task,
+            "setup_failed",
+            detail_reason=setup_res.reason or None,
+        )
         wall_s = 0.0
     else:
         aider_timed_out = False

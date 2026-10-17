@@ -147,6 +147,7 @@ def _mock_installed_aider(
             },
         ),
         mock.patch.object(preflight, "get_installed_aider_version", return_value=version),
+        mock.patch.object(runner.shutil, "chown", return_value=None),
     ):
         yield
 
@@ -1320,6 +1321,172 @@ class WorkspaceTests(unittest.TestCase):
         with self.assertRaises(workspace.WorkspaceError):
             workspace.build_workspace(self.src_repo, bad_commit_spec, self.tmp / "ws_bad")
 
+    def test_companion_tests_written_before_baseline_commit_and_hashed(self):
+        """Item 1: companion_tests in task.json (under companion/) overwrite parent copies before baseline commit and join pre_test_hashes."""
+        git_env = workspace.git_env(self.tmp / "git_home")
+        base_task = self.tasks[0]
+
+        # Parent commit has an older copy of tests/test_companion_interlock.py
+        comp_rel = "tests/test_companion_interlock.py"
+        parent_comp_file = self.src_repo / comp_rel
+        parent_comp_file.write_text("def test_interlock():\n    assert 1 == 2  # parent copy\n", encoding="utf-8")
+        subprocess.run(["git", "add", "-A"], cwd=str(self.src_repo), env=git_env, check=True)
+        subprocess.run(
+            ["git", "commit", "-q", "-m", "parent with companion test"],
+            cwd=str(self.src_repo),
+            env=git_env,
+            check=True,
+        )
+        parent_with_comp = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=str(self.src_repo),
+            env=git_env,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+
+        # Task dir with companion/tests/test_companion_interlock.py
+        task_dir = self.tmp / "task_5488ec7c70"
+        companion_content = "def test_interlock():\n    assert 1 == 1  # updated companion test\n"
+        companion_file = task_dir / "companion" / comp_rel
+        companion_file.parent.mkdir(parents=True, exist_ok=True)
+        companion_file.write_text(companion_content, encoding="utf-8", newline="\n")
+        expected_comp_sha = hashlib.sha256(companion_content.encode("utf-8")).hexdigest()
+
+        spec_comp = workspace.TaskSpec.from_dict(
+            {
+                "id": "5488ec7c70",
+                "parent_commit": parent_with_comp,
+                "test_file": base_task.test_file,
+                "target_node_id": base_task.target_node_id,
+                "twin_node_id": base_task.twin_nodes[0],
+                "test_cmd": base_task.test_cmd,
+                "install": "uv sync --frozen",
+                "allowed_paths": ["mcptoolshop_rnd/abmine.py"],
+                "baseline": base_task.baseline,
+                "scrubbed_test_path": base_task.scrubbed_test_path,
+                "twin_test_path": base_task.twin_test_path,
+                "companion_tests": [comp_rel],
+            },
+            base_dir=task_dir,
+        )
+        self.assertEqual(spec_comp.companion_tests, [comp_rel])
+        self.assertEqual(spec_comp.install_cmd, "uv sync --frozen")
+        self.assertEqual(spec_comp.install, "uv sync --frozen")
+        self.assertEqual(spec_comp.read_companion_test(comp_rel), companion_content)
+
+        ws_comp = self.tmp / "ws_companion"
+        prepared = workspace.build_workspace(
+            self.src_repo,
+            spec_comp,
+            ws_comp,
+            home_dir=self.tmp / "home_comp",
+        )
+
+        # 1. Written over parent's copy BEFORE baseline commit (working tree is clean on single baseline commit)
+        self.assertEqual((ws_comp / comp_rel).read_text(encoding="utf-8"), companion_content)
+        rev_count = subprocess.run(
+            ["git", "rev-list", "--count", "HEAD"],
+            cwd=str(ws_comp),
+            env=git_env,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+        self.assertEqual(rev_count, "1")
+        status_out = subprocess.run(
+            ["git", "status", "--porcelain", "-uall", "--ignored"],
+            cwd=str(ws_comp),
+            env=git_env,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+        self.assertEqual(status_out, "")
+
+        # 2. Companion test sha256 joined pre_test_hashes
+        self.assertIn(comp_rel, prepared.pre_test_hashes)
+        self.assertEqual(prepared.pre_test_hashes[comp_rel], expected_comp_sha)
+
+        # 3. Scorer integrity check passes untouched and catches any edit to the companion test
+        self.assertEqual(
+            score.check_workspace_integrity(ws_comp, prepared.pre_test_hashes, spec_comp.allowed_paths, env=git_env),
+            [],
+        )
+        (ws_comp / comp_rel).write_text("def test_interlock(): pass\n", encoding="utf-8")
+        reasons = score.check_workspace_integrity(
+            ws_comp, prepared.pre_test_hashes, spec_comp.allowed_paths, env=git_env
+        )
+        self.assertTrue(any(f"edited test file: {comp_rel}" in r for r in reasons), reasons)
+
+        # Dict and list-of-dict companion_tests forms and inline companion_test_contents
+        spec_dict_comp = workspace.TaskSpec.from_dict(
+            {
+                "id": "56e0f9c72d",
+                "parent_commit": parent_with_comp,
+                "test_file": base_task.test_file,
+                "target_node_id": base_task.target_node_id,
+                "twin_node_id": base_task.twin_nodes[0],
+                "allowed_paths": ["mcptoolshop_rnd/abmine.py"],
+                "baseline": base_task.baseline,
+                "companion_tests": {comp_rel: f"companion/{comp_rel}"},
+            },
+            bank_dir=task_dir,
+        )
+        self.assertEqual(spec_dict_comp.read_companion_test(comp_rel), companion_content)
+
+        spec_list_dict_comp = workspace.TaskSpec.from_dict(
+            {
+                "id": "56e0f9c72d-b",
+                "parent_commit": parent_with_comp,
+                "test_file": base_task.test_file,
+                "target_node_id": base_task.target_node_id,
+                "twin_node_id": base_task.twin_nodes[0],
+                "allowed_paths": ["mcptoolshop_rnd/abmine.py"],
+                "baseline": base_task.baseline,
+                "companion_tests": [{"path": comp_rel, "source": f"companion/{comp_rel}"}],
+                "companion_test_contents": {comp_rel: "def test_inline(): pass\n"},
+            },
+            bank_dir=task_dir,
+        )
+        self.assertEqual(spec_list_dict_comp.read_companion_test(comp_rel), "def test_inline(): pass\n")
+
+        # Validation of bad companion_tests entries and missing companion files
+        for bad_companions in (
+            ["mcptoolshop_rnd/abmine.py"],
+            {"mcptoolshop_rnd/abmine.py": "companion/abmine.py"},
+            "not-a-list-or-dict",
+        ):
+            with self.assertRaises(workspace.WorkspaceError):
+                workspace.TaskSpec.from_dict(
+                    {
+                        "id": "bad_comp",
+                        "parent_commit": parent_with_comp,
+                        "test_file": base_task.test_file,
+                        "target_node_id": base_task.target_node_id,
+                        "twin_node_id": base_task.twin_nodes[0],
+                        "allowed_paths": ["mcptoolshop_rnd/abmine.py"],
+                        "baseline": base_task.baseline,
+                        "companion_tests": bad_companions,
+                    }
+                )
+        spec_missing_comp = workspace.TaskSpec.from_dict(
+            {
+                "id": "missing_comp",
+                "parent_commit": parent_with_comp,
+                "test_file": base_task.test_file,
+                "target_node_id": base_task.target_node_id,
+                "twin_node_id": base_task.twin_nodes[0],
+                "allowed_paths": ["mcptoolshop_rnd/abmine.py"],
+                "baseline": base_task.baseline,
+                "companion_tests": ["tests/test_missing_comp.py"],
+            },
+            base_dir=self.tmp / "empty_task_dir",
+        )
+        with self.assertRaises(workspace.WorkspaceError):
+            spec_missing_comp.read_companion_test("tests/test_missing_comp.py")
+
 
 class ContainmentAndProbeTests(unittest.TestCase):
     """Tests for `contain.py` and `probe.py` with injected success and failure for every check (F9, section 8)."""
@@ -1417,7 +1584,7 @@ class ContainmentAndProbeTests(unittest.TestCase):
     def test_probe_allows_only_the_two_task_history_files_and_refuses_all_other_outside_writes(self):
         """Item 2: Probe allows writes to work_root/.../chat-history.md and input-history in an un-listable dir, and refuses every other write outside the workspace."""
         history_dir = self.tmp / "work" / "history-task1"
-        chat_hist, input_hist = runner.prepare_task_history_files(history_dir)
+        chat_hist, input_hist = runner.prepare_task_history_files(history_dir, allow_uncontained=True)
 
         paths_with_history = probe.ProbePaths(
             workspace_dir=self.paths.workspace_dir,
@@ -2294,6 +2461,9 @@ class RunnerAndReceiptTests(unittest.TestCase):
             lambda r: r.pop("task_id"),
             lambda r: r.update({"aider_version": "0.85.0"}),
             lambda r: r.update({"synthetic_strings_verified": False}),
+            lambda r: r.update({"install_cmd": 123}),
+            lambda r: r.update({"install_exit_code": "0"}),
+            lambda r: r.update({"pip_freeze_sha256": "short"}),
             lambda r: r.update({"generations_sha256": "short"}),
             lambda r: r.update({"injected": "not-dict"}),
             lambda r: r.update({"injected": {"sampling": {}}}),
@@ -2303,6 +2473,264 @@ class RunnerAndReceiptTests(unittest.TestCase):
             bad_mod(copy_r)
             with self.assertRaises(runner.RunnerError):
                 runner.validate_receipt(copy_r)
+
+    def test_chown_fallback_raises_on_vm_and_proxy_files_are_0600(self):
+        """Items 2 & 3: prepare_task_history_files raises on VM when chown fails, and proxy files in work_root are written 0600."""
+        # Item 2: On the VM (allow_uncontained=False), any chown failure in prepare_task_history_files raises RunnerError
+        for exc in (LookupError("unknown user: builder"), PermissionError("operation not permitted"), OSError("failed")):
+            with mock.patch.object(runner.shutil, "chown", side_effect=exc):
+                with self.assertRaises(runner.RunnerError):
+                    runner.prepare_task_history_files(self.tmp / "vm-history")
+
+        # Item 3: ProxyState writes generations.jsonl with mode 0600 on init and on append
+        chmod_records: list[tuple[Path, int]] = []
+        orig_chmod = os.chmod
+
+        def tracking_chmod(p, mode, *args, **kwargs):
+            chmod_records.append((Path(p).resolve(), mode))
+            return orig_chmod(p, mode, *args, **kwargs)
+
+        gen_file = self.tmp / "work" / "generations-t1.jsonl"
+        with _StubLlamaServer() as stub, mock.patch.object(proxy.os, "chmod", side_effect=tracking_chmod):
+            st = proxy.ProxyState(
+                upstream_url=stub.url,
+                config=CANDIDATE_CONFIG_JSON,
+                generations_path=gen_file,
+            )
+            self.assertIn((gen_file.resolve(), 0o600), chmod_records)
+            chmod_records.clear()
+            status, _ = st.handle_completion(
+                "/v1/chat/completions",
+                {"messages": [{"role": "user", "content": "hi"}]},
+            )
+            self.assertEqual(status, 200)
+            self.assertIn((gen_file.resolve(), 0o600), chmod_records)
+
+    def test_per_task_environment_setup_with_stub_install_command_and_setup_failed(self):
+        """Item 4: Per-task venv setup at work_root/venv-<task>, test_cmd & scoring pytest use venv python, receipt records install fields, and failed install ends as setup_failed."""
+        mini_repo = self.tmp / "mini_repo_venv"
+        (mini_repo / "mcptoolshop_rnd").mkdir(parents=True)
+        (mini_repo / "mcptoolshop_rnd" / "abmine.py").write_text("x = 1\n", encoding="utf-8")
+        env = workspace.git_env(self.tmp / "ghome_venv")
+        subprocess.run(["git", "init", "-q"], cwd=str(mini_repo), env=env, check=True)
+        subprocess.run(["git", "config", "user.name", "t"], cwd=str(mini_repo), env=env, check=True)
+        subprocess.run(["git", "config", "user.email", "t@localhost"], cwd=str(mini_repo), env=env, check=True)
+        subprocess.run(["git", "add", "-A"], cwd=str(mini_repo), env=env, check=True)
+        subprocess.run(["git", "commit", "-q", "-m", "p"], cwd=str(mini_repo), env=env, check=True)
+        parent_sha = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=str(mini_repo), env=env, capture_output=True, text=True, check=True
+        ).stdout.strip()
+
+        # Stub install command verifies:
+        # 1) UV_PROJECT_ENVIRONMENT and VIRTUAL_ENV point at work_root/venv-<task>
+        # 2) network/index restrictions (PIP_NO_INDEX, HTTP_PROXY) are NOT set for root setup
+        stub_install_ok = (
+            f'"{sys.executable}" -c '
+            '"import os, pathlib, sys; '
+            "vdir = pathlib.Path(os.environ['UV_PROJECT_ENVIRONMENT']); "
+            "assert str(vdir) == os.environ['VIRTUAL_ENV']; "
+            "assert 'PIP_NO_INDEX' not in os.environ and 'HTTP_PROXY' not in os.environ; "
+            "(vdir / 'stub_installed.txt').write_text('ok', encoding='utf-8'); "
+            'sys.exit(0)"'
+        )
+        task_ok = workspace.TaskSpec.from_dict(
+            {
+                "id": "venv-ok",
+                "parent_commit": parent_sha,
+                "test_file": self.task.test_file,
+                "target_node_id": self.task.target_node_id,
+                "twin_node_id": self.task.twin_nodes[0],
+                "test_cmd": "pytest tests/test_abmine_fa.py",
+                "install": stub_install_ok,
+                "allowed_paths": ["mcptoolshop_rnd/abmine.py"],
+                "baseline": self.task.baseline,
+                "scrubbed_test_path": self.task.scrubbed_test_path,
+                "twin_test_path": self.task.twin_test_path,
+            }
+        )
+
+        work_ok = self.tmp / "work-venv-ok"
+        receipt_ok_path = self.tmp / "receipts" / "r_venv_ok.json"
+        settings_file = self.tmp / "model-settings-venv.yml"
+
+        captured_aider_cmd: list[str] = []
+        captured_aider_env: dict[str, str] = {}
+        captured_score_py: list[str] = []
+
+        with _StubLlamaServer() as stub, _mock_installed_aider(version="0.86.1"):
+            cfg_ok = runner.RunTaskConfig(
+                source_repo=mini_repo,
+                task=task_ok,
+                candidate_config_path=CARD_VALUES_JSON,
+                candidate="qwen3.8-27b",
+                model_settings_file=settings_file,
+                served_as="qwen3.8-27b",
+                model_tag="qwen3.8:27b-q8_0",
+                model_digest="sha256:aaee06c39dcf",
+                aider_version=proxy.PINNED_AIDER_VERSION,
+                upstream_url=stub.url,
+                work_root=work_ok,
+                receipt_path=receipt_ok_path,
+                machine_line={"gpu": "NVIDIA A100-SXM4-40GB"},
+            )
+
+            def fake_aider_ok(cmd: list[str], ws_dir: Path, run_env: dict[str, str]) -> int:
+                captured_aider_cmd.extend(cmd)
+                captured_aider_env.update(run_env)
+                # Stub install ran BEFORE Aider and created work_root/venv-venv-ok
+                expected_venv = work_ok.resolve() / "venv-venv-ok"
+                self.assertTrue((expected_venv / "stub_installed.txt").is_file())
+                return 0
+
+            def fake_run_pytest_and_score(task_arg, ws_dir_arg, pre_hashes_arg, **kwargs):
+                captured_score_py.append(str(kwargs.get("python_executable")))
+                # Workspace git status is completely clean (venv is outside workspace)
+                reasons = score.check_workspace_integrity(
+                    ws_dir_arg,
+                    pre_hashes_arg,
+                    task_arg.allowed_paths,
+                    env=kwargs.get("env"),
+                )
+                self.assertEqual(reasons, [])
+                return {
+                    "task_id": task_arg.id,
+                    "passed": True,
+                    "correct": True,
+                    "reasons": [],
+                    "reason": "",
+                    "counts": {"passed": 10, "failed": 0, "errors": 0, "skipped": 0, "xfail": 0},
+                    "baseline": dict(task_arg.baseline),
+                    "target_nodes": list(task_arg.target_nodes),
+                    "twin_nodes": list(task_arg.twin_nodes),
+                }
+
+            chmod_calls: list[tuple[Path, int]] = []
+            orig_chmod = os.chmod
+
+            def record_chmod(p, mode, *args, **kwargs):
+                chmod_calls.append((Path(p).resolve(), mode))
+                return orig_chmod(p, mode, *args, **kwargs)
+
+            with (
+                mock.patch.object(runner, "run_pytest_and_score", side_effect=fake_run_pytest_and_score),
+                mock.patch.object(runner.os, "chmod", side_effect=record_chmod),
+            ):
+                receipt_ok = runner.run_single_task(cfg_ok, aider_runner=fake_aider_ok)
+
+            expected_venv_dir = work_ok.resolve() / "venv-venv-ok"
+            expected_venv_py = str(runner.venv_python_path(expected_venv_dir))
+            self.assertTrue(expected_venv_dir.is_dir())
+            self.assertTrue(Path(expected_venv_py).is_file())
+
+            # Venv is outside workspace, readable/executable by builder (0755/0644), and not group/world writable
+            self.assertIn((expected_venv_dir, 0o755), chmod_calls)
+            self.assertIn(( (expected_venv_dir / "stub_installed.txt").resolve(), 0o644), chmod_calls)
+            self.assertIn((receipt_ok_path.resolve(), 0o600), chmod_calls)
+
+            # Both Aider's --test-cmd and scoring pytest use that venv's python
+            idx_tc = captured_aider_cmd.index("--test-cmd")
+            self.assertEqual(
+                captured_aider_cmd[idx_tc + 1],
+                f"{expected_venv_py} -m pytest tests/test_abmine_fa.py",
+            )
+            self.assertEqual(captured_aider_env["VIRTUAL_ENV"], str(expected_venv_dir))
+            self.assertTrue(captured_aider_env["PATH"].startswith(str(contain.venv_bin_dir(expected_venv_dir))))
+            self.assertEqual(captured_score_py, [expected_venv_py])
+
+            # Receipt records install_cmd, install_exit_code == 0, and 64-char pip_freeze_sha256
+            self.assertEqual(receipt_ok["install_cmd"], stub_install_ok)
+            self.assertEqual(receipt_ok["install_exit_code"], 0)
+            self.assertIsInstance(receipt_ok["pip_freeze_sha256"], str)
+            self.assertEqual(len(receipt_ok["pip_freeze_sha256"]), 64)
+            self.assertEqual(receipt_ok["pins"]["install_cmd"], stub_install_ok)
+            self.assertEqual(receipt_ok["pins"]["install_exit_code"], 0)
+            self.assertEqual(receipt_ok["pins"]["pip_freeze_sha256"], receipt_ok["pip_freeze_sha256"])
+
+            # Failing stub install command ends the task as setup_failed, with no Aider run and no score
+            stub_install_fail = f'"{sys.executable}" -c "import sys; sys.stderr.write(\'broken lockfile\\n\'); sys.exit(17)"'
+            task_fail = workspace.TaskSpec.from_dict(
+                {
+                    "id": "venv-fail",
+                    "parent_commit": parent_sha,
+                    "test_file": self.task.test_file,
+                    "target_node_id": self.task.target_node_id,
+                    "twin_node_id": self.task.twin_nodes[0],
+                    "test_cmd": "pytest tests/test_abmine_fa.py",
+                    "install": stub_install_fail,
+                    "allowed_paths": ["mcptoolshop_rnd/abmine.py"],
+                    "baseline": self.task.baseline,
+                    "scrubbed_test_path": self.task.scrubbed_test_path,
+                    "twin_test_path": self.task.twin_test_path,
+                }
+            )
+            work_fail = self.tmp / "work-venv-fail"
+            receipt_fail_path = self.tmp / "receipts" / "r_venv_fail.json"
+            cfg_fail = runner.RunTaskConfig(
+                source_repo=mini_repo,
+                task=task_fail,
+                candidate_config_path=CARD_VALUES_JSON,
+                candidate="qwen3.8-27b",
+                model_settings_file=settings_file,
+                served_as="qwen3.8-27b",
+                model_tag="qwen3.8:27b-q8_0",
+                model_digest="sha256:aaee06c39dcf",
+                aider_version=proxy.PINNED_AIDER_VERSION,
+                upstream_url=stub.url,
+                work_root=work_fail,
+                receipt_path=receipt_fail_path,
+                machine_line={"gpu": "NVIDIA A100-SXM4-40GB"},
+            )
+
+            aider_called = False
+            scorer_called = False
+
+            def should_not_run_aider(*args, **kwargs):
+                nonlocal aider_called
+                aider_called = True
+                return 0
+
+            def should_not_run_scorer(*args, **kwargs):
+                nonlocal scorer_called
+                scorer_called = True
+                return {}
+
+            receipt_fail = runner.run_single_task(
+                cfg_fail,
+                aider_runner=should_not_run_aider,
+                scorer_fn=should_not_run_scorer,
+            )
+            self.assertFalse(aider_called)
+            self.assertFalse(scorer_called)
+            self.assertFalse(receipt_fail["correct"])
+            self.assertEqual(receipt_fail["status"], "setup_failed")
+            self.assertEqual(receipt_fail["grade"]["status"], "setup_failed")
+            self.assertEqual(receipt_fail["grade"]["reason"], "setup_failed")
+            self.assertEqual(receipt_fail["grade"]["reasons"], ["setup_failed"])
+            self.assertEqual(receipt_fail["call_count"], 0)
+            self.assertEqual(receipt_fail["install_cmd"], stub_install_fail)
+            self.assertEqual(receipt_fail["install_exit_code"], 17)
+            self.assertIsNone(receipt_fail["pip_freeze_sha256"])
+
+            # resolve_test_cmd_for_venv variants and setup_task_venv edge cases
+            self.assertEqual(runner.resolve_test_cmd_for_venv("", "/v/bin/python"), f"{Path('/v/bin/python')} -m pytest")
+            self.assertEqual(
+                runner.resolve_test_cmd_for_venv(f"{Path('/v/bin/python')} -m pytest", "/v/bin/python"),
+                f"{Path('/v/bin/python')} -m pytest",
+            )
+            self.assertEqual(
+                runner.resolve_test_cmd_for_venv("uv run pytest -q", "/v/bin/python"),
+                f"{Path('/v/bin/python')} -m pytest -q",
+            )
+            self.assertEqual(
+                runner.resolve_test_cmd_for_venv("python -m pytest -q", "/v/bin/python"),
+                f"{Path('/v/bin/python')} -m pytest -q",
+            )
+            self.assertEqual(
+                runner.resolve_test_cmd_for_venv("custom-runner --flag", "/v/bin/python"),
+                "custom-runner --flag",
+            )
+            with self.assertRaises(runner.RunnerError):
+                runner.setup_task_venv(task_ok, work_ok, work_ok)
 
 
 if __name__ == "__main__":

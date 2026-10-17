@@ -26,6 +26,7 @@ import json
 import os
 import re
 import shutil
+import stat
 import subprocess
 import sys
 import time
@@ -33,12 +34,13 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable
 
-from .contain import BUILDER_USER, builder_env, run_bounded_subprocess, wrap_as_builder
+from .contain import BUILDER_USER, builder_env, run_bounded_subprocess, venv_bin_dir, wrap_as_builder
 from .preflight import PreflightError, verify_installed_aider
 from .proxy import (
     DEFAULT_MAX_CALLS,
     DEFAULT_WALL_LIMIT_S,
     PINNED_AIDER_VERSION,
+    PROXY_FILE_MODE,
     LoggingProxyServer,
     ProxyState,
     load_candidate_config,
@@ -53,6 +55,10 @@ DEFAULT_PARTITION = "trial:j2-wave1"
 
 HISTORY_DIR_MODE = 0o711
 HISTORY_FILE_MODE = 0o600
+VENV_DIR_MODE = 0o755
+VENV_EXEC_MODE = 0o755
+VENV_FILE_MODE = 0o644
+DEFAULT_SETUP_TIMEOUT_S = 600.0
 CHAT_HISTORY_FILENAME = "chat-history.md"
 INPUT_HISTORY_FILENAME = "input-history"
 
@@ -68,6 +74,9 @@ REQUIRED_RECEIPT_FIELDS = (
     "harness_version",
     "aider_version",
     "synthetic_strings_verified",
+    "install_cmd",
+    "install_exit_code",
+    "pip_freeze_sha256",
     "prompt_hash",
     "pins",
     "injected",
@@ -105,18 +114,27 @@ class RunnerError(Exception):
     """Raised when runner inputs, editable files, model settings, or receipt fields are invalid."""
 
 
-def _default_chown_builder(path: Path, builder_user: str) -> None:
-    """Chown `path` to `builder_user` when supported by the OS and user table."""
+def _default_chown_builder(
+    path: Path,
+    builder_user: str,
+    *,
+    allow_uncontained: bool = False,
+) -> None:
+    """Chown `path` to `builder_user`, raising `RunnerError` on the VM if `chown` fails."""
     try:
         shutil.chown(path, user=builder_user)
-    except (LookupError, PermissionError, AttributeError, NotImplementedError, OSError):
-        pass
+    except (LookupError, PermissionError, AttributeError, NotImplementedError, OSError) as exc:
+        if not allow_uncontained:
+            raise RunnerError(
+                f"failed to chown {path} to {builder_user!r} on VM: {exc}"
+            ) from exc
 
 
 def prepare_task_history_files(
     history_dir: str | Path,
     *,
     builder_user: str = BUILDER_USER,
+    allow_uncontained: bool = False,
     chown_fn: Callable[[Path, str], None] | None = None,
     chmod_fn: Callable[[Path, int], None] | None = None,
 ) -> tuple[Path, Path]:
@@ -129,7 +147,9 @@ def prepare_task_history_files(
     hdir = Path(history_dir).resolve()
     hdir.mkdir(parents=True, exist_ok=True)
     do_chmod = chmod_fn or os.chmod
-    do_chown = chown_fn or _default_chown_builder
+    do_chown = chown_fn or (
+        lambda p, u: _default_chown_builder(p, u, allow_uncontained=allow_uncontained)
+    )
 
     if hdir.parent.exists():
         do_chmod(hdir.parent, HISTORY_DIR_MODE)
@@ -144,6 +164,284 @@ def prepare_task_history_files(
         do_chown(fpath, builder_user)
 
     return chat_history, input_history
+
+
+def prepare_builder_log_files(
+    *paths: str | Path,
+    builder_user: str = BUILDER_USER,
+    allow_uncontained: bool = False,
+    chown_fn: Callable[[Path, str], None] | None = None,
+    chmod_fn: Callable[[Path, int], None] | None = None,
+) -> list[Path]:
+    """Pre-create Aider log files in `work_root` with mode `0600` owned by `builder_user`."""
+    do_chmod = chmod_fn or os.chmod
+    do_chown = chown_fn or (
+        lambda p, u: _default_chown_builder(p, u, allow_uncontained=allow_uncontained)
+    )
+    out: list[Path] = []
+    for raw_p in paths:
+        fpath = Path(raw_p).resolve()
+        fpath.parent.mkdir(parents=True, exist_ok=True)
+        if not fpath.exists():
+            fpath.write_text("", encoding="utf-8")
+        do_chmod(fpath, PROXY_FILE_MODE)
+        do_chown(fpath, builder_user)
+        out.append(fpath)
+    return out
+
+
+@dataclass(frozen=True)
+class TaskEnvSetupResult:
+    """Result of per-task environment setup (`work_root/venv-<task>`) run as `root` before Aider."""
+
+    ok: bool
+    venv_dir: Path
+    python_executable: Path
+    install_cmd: str
+    install_exit_code: int
+    pip_freeze_sha256: str | None
+    stdout: str = ""
+    stderr: str = ""
+
+
+def venv_python_path(venv_dir: str | Path) -> Path:
+    """Return the path to the `python` interpreter inside `venv_dir`."""
+    vbin = venv_bin_dir(venv_dir)
+    if (vbin / "python").is_file():
+        return vbin / "python"
+    if (vbin / "python.exe").is_file():
+        return vbin / "python.exe"
+    return vbin / ("python.exe" if os.name == "nt" else "python")
+
+
+def resolve_test_cmd_for_venv(test_cmd: str, venv_python: str | Path) -> str:
+    """Rewrite `test_cmd` so it executes using the per-task venv's `python`."""
+    raw = str(test_cmd).strip()
+    py = str(Path(venv_python))
+    if not raw:
+        return f"{py} -m pytest"
+    if raw.startswith(py):
+        return raw
+    for prefix in ("uv run pytest", "pytest"):
+        if raw == prefix or raw.startswith(prefix + " "):
+            rest = raw[len(prefix) :].strip()
+            return f"{py} -m pytest {rest}".strip()
+    for prefix in ("uv run python3", "uv run python", "python3", "python"):
+        if raw == prefix or raw.startswith(prefix + " "):
+            rest = raw[len(prefix) :].strip()
+            return f"{py} {rest}".strip()
+    return raw
+
+
+def root_install_env(
+    venv_dir: str | Path,
+    *,
+    base_env: dict[str, str] | None = None,
+) -> dict[str, str]:
+    """Build the environment for `root` task setup with network allowed and `UV_PROJECT_ENVIRONMENT` pointed at `venv_dir`."""
+    vdir = Path(venv_dir).resolve()
+    vbin = str(venv_bin_dir(vdir))
+    env = dict(base_env if base_env is not None else os.environ)
+    for blocked_key in (
+        "PIP_NO_INDEX",
+        "NPM_CONFIG_OFFLINE",
+        "HTTP_PROXY",
+        "HTTPS_PROXY",
+        "http_proxy",
+        "https_proxy",
+    ):
+        env.pop(blocked_key, None)
+    existing_path = env.get("PATH", "")
+    env["PATH"] = f"{vbin}{os.pathsep}{existing_path}" if existing_path else vbin
+    env["VIRTUAL_ENV"] = str(vdir)
+    env["UV_PROJECT_ENVIRONMENT"] = str(vdir)
+    return env
+
+
+def lock_venv_for_builder(venv_dir: str | Path) -> None:
+    """Ensure `venv_dir` (`work_root/venv-<task>`) is readable and executable by `builder` (`0755`/`0644`), never writable."""
+    vdir = Path(venv_dir).resolve()
+    if not vdir.exists():
+        return
+    os.chmod(vdir, VENV_DIR_MODE)
+    for root_str, dirnames, filenames in os.walk(vdir):
+        root_p = Path(root_str)
+        for dname in dirnames:
+            dp = root_p / dname
+            if not dp.is_symlink():
+                os.chmod(dp, VENV_DIR_MODE)
+        in_bin = root_p.name in ("bin", "Scripts")
+        for fname in filenames:
+            fp = root_p / fname
+            if fp.is_symlink():
+                continue
+            cur_mode = stat.S_IMODE(fp.stat().st_mode)
+            if in_bin or (cur_mode & stat.S_IXUSR):
+                os.chmod(fp, VENV_EXEC_MODE)
+            else:
+                os.chmod(fp, VENV_FILE_MODE)
+
+
+def freeze_venv_sha256(
+    venv_dir: str | Path,
+    venv_python: str | Path | None = None,
+    *,
+    env: dict[str, str] | None = None,
+    run_cmd: Callable[..., subprocess.CompletedProcess] | None = None,
+) -> str:
+    """Return the sha256 hex digest of `pip freeze` for `venv_dir`."""
+    vdir = Path(venv_dir).resolve()
+    vpy = Path(venv_python) if venv_python is not None else venv_python_path(vdir)
+    run_env = env if env is not None else root_install_env(vdir)
+    runner_fn = run_cmd or (
+        lambda cmd, **kw: subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=60,
+            **kw,
+        )
+    )
+
+    vbin = venv_bin_dir(vdir)
+    has_pip = (vbin / "pip").is_file() or (vbin / "pip.exe").is_file()
+    if has_pip or run_cmd is not None:
+        res = runner_fn([str(vpy), "-m", "pip", "freeze"], cwd=str(vdir), env=run_env)
+        if res.returncode == 0:
+            norm = (res.stdout or "").replace("\r\n", "\n")
+            return hashlib.sha256(norm.encode("utf-8")).hexdigest()
+
+    # Fallback when `uv sync --frozen` or `--without-pip` produced a venv without `pip` installed inside it
+    metadata_code = (
+        "import importlib.metadata as m, sys; "
+        "dists = sorted({f'{d.metadata[\"Name\"]}=={d.version}' for d in m.distributions() if d.metadata.get('Name')}, key=str.lower); "
+        "sys.stdout.write('\\n'.join(dists) + ('\\n' if dists else ''))"
+    )
+    res_meta = runner_fn([str(vpy), "-c", metadata_code], cwd=str(vdir), env=run_env)
+    if res_meta.returncode != 0:
+        raise RunnerError(f"failed to freeze venv {vdir}: {res_meta.stderr.strip()}")
+    norm = (res_meta.stdout or "").replace("\r\n", "\n")
+    return hashlib.sha256(norm.encode("utf-8")).hexdigest()
+
+
+def setup_task_venv(
+    task: TaskSpec | dict,
+    workspace_dir: str | Path,
+    work_root: str | Path,
+    *,
+    base_python: str | Path = sys.executable,
+    base_env: dict[str, str] | None = None,
+    timeout: float = DEFAULT_SETUP_TIMEOUT_S,
+    with_pip: bool | None = None,
+    run_cmd: Callable[..., subprocess.CompletedProcess] | None = None,
+) -> TaskEnvSetupResult:
+    """Create `work_root/venv-<task>`, run the task's `install` command as `root` with network allowed, and lock permissions."""
+    spec = task if isinstance(task, TaskSpec) else TaskSpec.from_dict(task)
+    wroot = Path(work_root).resolve()
+    ws_dir = Path(workspace_dir).resolve()
+    venv_dir = wroot / f"venv-{spec.id}"
+    try:
+        venv_dir.relative_to(ws_dir)
+        raise RunnerError(f"per-task venv {venv_dir} must be outside workspace {ws_dir}")
+    except ValueError:
+        pass
+
+    wroot.mkdir(parents=True, exist_ok=True)
+    need_pip = bool(with_pip) if with_pip is not None else ("pip" in spec.install_cmd)
+
+    vpy = venv_python_path(venv_dir)
+    if not vpy.is_file():
+        venv_args = [str(base_python), "-m", "venv", *([] if need_pip else ["--without-pip"]), str(venv_dir)]
+        venv_res = subprocess.run(
+            venv_args,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=timeout,
+        )
+        if venv_res.returncode != 0 and need_pip:
+            venv_res = subprocess.run(
+                [str(base_python), "-m", "venv", "--without-pip", str(venv_dir)],
+                capture_output=True,
+                text=True,
+                check=False,
+                timeout=timeout,
+            )
+        if venv_res.returncode != 0:
+            return TaskEnvSetupResult(
+                ok=False,
+                venv_dir=venv_dir,
+                python_executable=vpy,
+                install_cmd=spec.install_cmd,
+                install_exit_code=int(venv_res.returncode or 1),
+                pip_freeze_sha256=None,
+                stdout=venv_res.stdout or "",
+                stderr=venv_res.stderr or "",
+            )
+        vpy = venv_python_path(venv_dir)
+
+    install_env = root_install_env(venv_dir, base_env=base_env)
+    out_str = ""
+    err_str = ""
+    install_rc = 0
+
+    if spec.install_cmd.strip():
+        try:
+            if run_cmd is not None:
+                res = run_cmd(spec.install_cmd, cwd=str(ws_dir), env=install_env, shell=True)
+            else:
+                res = subprocess.run(
+                    spec.install_cmd,
+                    shell=True,
+                    cwd=str(ws_dir),
+                    env=install_env,
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                    timeout=timeout,
+                )
+            install_rc = int(res.returncode)
+            out_str = res.stdout or ""
+            err_str = res.stderr or ""
+        except subprocess.TimeoutExpired:
+            lock_venv_for_builder(venv_dir)
+            return TaskEnvSetupResult(
+                ok=False,
+                venv_dir=venv_dir,
+                python_executable=vpy,
+                install_cmd=spec.install_cmd,
+                install_exit_code=-1,
+                pip_freeze_sha256=None,
+                stdout="",
+                stderr="install_timeout",
+            )
+
+    if install_rc != 0:
+        lock_venv_for_builder(venv_dir)
+        return TaskEnvSetupResult(
+            ok=False,
+            venv_dir=venv_dir,
+            python_executable=vpy,
+            install_cmd=spec.install_cmd,
+            install_exit_code=install_rc,
+            pip_freeze_sha256=None,
+            stdout=out_str,
+            stderr=err_str,
+        )
+
+    freeze_sha = freeze_venv_sha256(venv_dir, vpy, env=install_env, run_cmd=run_cmd)
+    lock_venv_for_builder(venv_dir)
+    return TaskEnvSetupResult(
+        ok=True,
+        venv_dir=venv_dir,
+        python_executable=vpy,
+        install_cmd=spec.install_cmd,
+        install_exit_code=0,
+        pip_freeze_sha256=freeze_sha,
+        stdout=out_str,
+        stderr=err_str,
+    )
 
 
 def format_task_prompt(node_id: str) -> str:
@@ -389,9 +687,10 @@ def parse_analytics_log(analytics_path: str | Path) -> dict[str, int]:
 
 
 def _failed_grade_for_reason(task: TaskSpec, reason: str) -> dict[str, Any]:
-    """Build a failed grade_result dictionary when Aider or scoring times out."""
+    """Build a failed grade_result dictionary when setup fails or Aider/scoring times out."""
     return {
         "task_id": task.id,
+        "status": reason,
         "passed": False,
         "correct": False,
         "reasons": [reason],
@@ -415,6 +714,9 @@ def build_receipt(
     wall_time_s: float,
     machine_line: dict[str, Any],
     synthetic_strings_verified: bool = True,
+    install_cmd: str | None = None,
+    install_exit_code: int = 0,
+    pip_freeze_sha256: str | None = None,
     effort_raw: Any = None,
     effort_graded: str = "unsupported",
     peak_vram_mib: float | None = None,
@@ -428,6 +730,10 @@ def build_receipt(
     """Construct a section-7 receipt and validate that every required field is present."""
     prompt_text = format_task_prompt(task.target_node_id)
     p_hash = prompt_sha256(prompt_text)
+
+    effective_install_cmd = task.install_cmd if install_cmd is None else str(install_cmd)
+    effective_install_rc = int(install_exit_code)
+    effective_freeze_sha = str(pip_freeze_sha256) if pip_freeze_sha256 is not None else None
 
     injected = proxy_summary["injected"]
     call_count = int(proxy_summary["call_count"])
@@ -455,6 +761,9 @@ def build_receipt(
         "candidate_config_sha256": proxy_summary.get("config_sha256", ""),
         "aider_version": aider_version,
         "synthetic_strings_verified": bool(synthetic_strings_verified),
+        "install_cmd": effective_install_cmd,
+        "install_exit_code": effective_install_rc,
+        "pip_freeze_sha256": effective_freeze_sha,
         "edit_format": EDIT_FORMAT,
         "examples_as_sys_msg": True,
         "max_reflections": MAX_REFLECTIONS,
@@ -464,11 +773,19 @@ def build_receipt(
         **pins,
     }
 
+    grade_reason = str(grade_result.get("reason") or "")
+    status_str = (
+        "setup_failed"
+        if grade_reason == "setup_failed"
+        else ("passed" if grade_result.get("correct") else "failed")
+    )
+
     receipt: dict[str, Any] = {
         "partition": partition,
         "task_id": task.id,
         "slot_id": task.id,
         "difficulty": task.difficulty,
+        "status": status_str,
         "model": {
             "tag": model_tag,
             "digest": model_digest,
@@ -487,6 +804,9 @@ def build_receipt(
         "harness_version": aider_version,
         "aider_version": aider_version,
         "synthetic_strings_verified": bool(synthetic_strings_verified),
+        "install_cmd": effective_install_cmd,
+        "install_exit_code": effective_install_rc,
+        "pip_freeze_sha256": effective_freeze_sha,
         "prompt_hash": p_hash,
         "pins": full_pins,
         "injected": injected,
@@ -543,6 +863,13 @@ def validate_receipt(receipt: dict[str, Any]) -> None:
         )
     if receipt.get("synthetic_strings_verified") is not True:
         raise RunnerError("receipt synthetic_strings_verified must be True")
+    if not isinstance(receipt.get("install_cmd"), str):
+        raise RunnerError("receipt install_cmd must be a string")
+    if not isinstance(receipt.get("install_exit_code"), int) or isinstance(receipt.get("install_exit_code"), bool):
+        raise RunnerError("receipt install_exit_code must be an integer")
+    freeze_sha = receipt.get("pip_freeze_sha256")
+    if freeze_sha is not None and (not isinstance(freeze_sha, str) or len(freeze_sha) != 64):
+        raise RunnerError("receipt pip_freeze_sha256 must be None or a 64-character sha256 hex digest")
     if not receipt.get("generations_sha256") or len(str(receipt["generations_sha256"])) != 64:
         raise RunnerError("receipt generations_sha256 must be a 64-character sha256 hex digest")
     if not isinstance(receipt.get("injected"), dict):
@@ -584,16 +911,20 @@ class RunTaskConfig:
 def run_single_task(
     cfg: RunTaskConfig,
     *,
+    setup_runner: Callable[[TaskSpec, Path, Path], TaskEnvSetupResult] | None = None,
     aider_runner: Callable[[list[str], Path, dict[str, str]], int] | None = None,
     scorer_fn: Callable[[TaskSpec, PreparedWorkspace], dict] | None = None,
 ) -> dict[str, Any]:
-    """Run one J2 task end-to-end: workspace -> proxy -> Aider -> score -> receipt.
+    """Run one J2 task end-to-end: workspace -> setup_task_venv -> proxy -> Aider -> score -> receipt.
 
     - Refuses non-test runs when `cfg.use_sudo_builder` is False (F9).
     - Verifies the installed Aider version (`0.86.1`) and synthetic reply strings on `CoderPrompts`
       and `EditBlockPrompts` before launching Aider.
     - Creates the two per-task history files (`work_root/history-<task>/chat-history.md` and
       `input-history`) owned by `builder` (`0600`) inside a `0711` directory `builder` cannot list.
+    - Runs per-task environment setup as `root` with network allowed into `work_root/venv-<task>`
+      (`0755`/`0644`, readable and executable by `builder`, not writable). If the install fails,
+      ends the task as `setup_failed` with no Aider run and no score.
     - Validates that `cfg.model_settings_file` pins `examples_as_sys_msg: true` (D-F1, D-F2).
     - Catches `subprocess.TimeoutExpired` from Aider (`aider_timeout`) or scoring (`score_timeout`),
       killing the process group and always writing a failed receipt.
@@ -617,16 +948,30 @@ def run_single_task(
     ws_dir = cfg.work_root / f"ws-{cfg.task.id}"
     home_dir = cfg.work_root / f"home-{cfg.task.id}"
     history_dir = cfg.work_root / f"history-{cfg.task.id}"
-    chat_history, input_history = prepare_task_history_files(history_dir)
+    chat_history, input_history = prepare_task_history_files(
+        history_dir,
+        allow_uncontained=cfg._test_allow_uncontained,
+    )
     gen_path = cfg.work_root / f"generations-{cfg.task.id}.jsonl"
     llm_history = cfg.work_root / f"llm-history-{cfg.task.id}.md"
     analytics_log = cfg.work_root / f"analytics-{cfg.task.id}.jsonl"
+    prepare_builder_log_files(
+        llm_history,
+        analytics_log,
+        allow_uncontained=cfg._test_allow_uncontained,
+    )
 
     prepared = build_workspace(
         cfg.source_repo,
         cfg.task,
         ws_dir,
         home_dir=home_dir,
+    )
+
+    setup_res = (
+        setup_runner(cfg.task, prepared.workspace_dir, cfg.work_root)
+        if setup_runner is not None
+        else setup_task_venv(cfg.task, prepared.workspace_dir, cfg.work_root)
     )
 
     cand_cfg = load_candidate_config(cfg.candidate_config_path, candidate=cfg.candidate or cfg.served_as)
@@ -638,60 +983,70 @@ def run_single_task(
         wall_limit_s=cfg.wall_limit_s,
     )
 
-    aider_timed_out = False
-    t0 = time.monotonic()
-    with LoggingProxyServer(state) as proxy_srv:
-        env = builder_env(proxy_port=proxy_srv.port, home_dir=prepared.home_dir)
-        edit_files = cfg.editable_files if cfg.editable_files is not None else cfg.task.allowed_paths
-        cmd = build_aider_command(
-            served_as=cfg.served_as,
-            model_settings_file=cfg.model_settings_file,
-            test_cmd=cfg.task.test_cmd,
-            test_file=cfg.task.test_file,
-            node_id=cfg.task.target_node_id,
-            llm_history_file=llm_history,
-            chat_history_file=chat_history,
-            input_history_file=input_history,
-            analytics_log=analytics_log,
-            editable_files=edit_files,
-            use_sudo=cfg.use_sudo_builder,
-            env=env,
-        )
-        try:
-            if aider_runner is not None:
-                aider_runner(cmd, prepared.workspace_dir, env)
-            else:
-                run_bounded_subprocess(
-                    cmd,
-                    cwd=prepared.workspace_dir,
-                    env=env,
-                    timeout=float(cfg.wall_limit_s) + 30.0,
-                )
-        except subprocess.TimeoutExpired:
-            aider_timed_out = True
-    wall_s = time.monotonic() - t0
-
-    # Score ONLY after Aider has exited and the proxy has closed.
-    if aider_timed_out:
-        grade_res = _failed_grade_for_reason(cfg.task, "aider_timeout")
+    if not setup_res.ok or setup_res.install_exit_code != 0:
+        grade_res = _failed_grade_for_reason(cfg.task, "setup_failed")
+        wall_s = 0.0
     else:
-        try:
-            if scorer_fn is not None:
-                grade_res = scorer_fn(cfg.task, prepared)
-            else:
-                grade_res = run_pytest_and_score(
-                    cfg.task,
-                    prepared.workspace_dir,
-                    prepared.pre_test_hashes,
-                    env=env,
-                    aider_running=False,
-                    use_sudo_builder=cfg.use_sudo_builder,
-                    proxy_port=proxy_srv.port,
-                    timeout=cfg.score_timeout_s,
-                    _test_allow_uncontained=cfg._test_allow_uncontained,
-                )
-        except subprocess.TimeoutExpired:
-            grade_res = _failed_grade_for_reason(cfg.task, "score_timeout")
+        aider_timed_out = False
+        resolved_test_cmd = resolve_test_cmd_for_venv(cfg.task.test_cmd, setup_res.python_executable)
+        t0 = time.monotonic()
+        with LoggingProxyServer(state) as proxy_srv:
+            env = builder_env(
+                proxy_port=proxy_srv.port,
+                home_dir=prepared.home_dir,
+                venv_dir=setup_res.venv_dir,
+            )
+            edit_files = cfg.editable_files if cfg.editable_files is not None else cfg.task.allowed_paths
+            cmd = build_aider_command(
+                served_as=cfg.served_as,
+                model_settings_file=cfg.model_settings_file,
+                test_cmd=resolved_test_cmd,
+                test_file=cfg.task.test_file,
+                node_id=cfg.task.target_node_id,
+                llm_history_file=llm_history,
+                chat_history_file=chat_history,
+                input_history_file=input_history,
+                analytics_log=analytics_log,
+                editable_files=edit_files,
+                use_sudo=cfg.use_sudo_builder,
+                env=env,
+            )
+            try:
+                if aider_runner is not None:
+                    aider_runner(cmd, prepared.workspace_dir, env)
+                else:
+                    run_bounded_subprocess(
+                        cmd,
+                        cwd=prepared.workspace_dir,
+                        env=env,
+                        timeout=float(cfg.wall_limit_s) + 30.0,
+                    )
+            except subprocess.TimeoutExpired:
+                aider_timed_out = True
+        wall_s = time.monotonic() - t0
+
+        # Score ONLY after Aider has exited and the proxy has closed.
+        if aider_timed_out:
+            grade_res = _failed_grade_for_reason(cfg.task, "aider_timeout")
+        else:
+            try:
+                if scorer_fn is not None:
+                    grade_res = scorer_fn(cfg.task, prepared)
+                else:
+                    grade_res = run_pytest_and_score(
+                        cfg.task,
+                        prepared.workspace_dir,
+                        prepared.pre_test_hashes,
+                        python_executable=setup_res.python_executable,
+                        env=env,
+                        aider_running=False,
+                        use_sudo_builder=cfg.use_sudo_builder,
+                        proxy_port=proxy_srv.port,
+                        timeout=cfg.score_timeout_s,
+                        _test_allow_uncontained=cfg._test_allow_uncontained,
+                    )
+            except subprocess.TimeoutExpired:
+                grade_res = _failed_grade_for_reason(cfg.task, "score_timeout")
 
     analytics = parse_analytics_log(analytics_log)
     summary = state.summary()
@@ -701,6 +1056,9 @@ def run_single_task(
         model_digest=cfg.model_digest,
         aider_version=aider_check["aider_version"],
         synthetic_strings_verified=bool(aider_check["synthetic_strings_verified"]),
+        install_cmd=setup_res.install_cmd,
+        install_exit_code=setup_res.install_exit_code,
+        pip_freeze_sha256=setup_res.pip_freeze_sha256,
         pins=cfg.pins,
         proxy_summary=summary,
         grade_result=grade_res,
@@ -713,6 +1071,7 @@ def run_single_task(
     )
     cfg.receipt_path.parent.mkdir(parents=True, exist_ok=True)
     cfg.receipt_path.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
+    os.chmod(cfg.receipt_path, PROXY_FILE_MODE)
     return receipt
 
 

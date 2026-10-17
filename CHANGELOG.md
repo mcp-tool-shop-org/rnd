@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.14.0.0] - 2026-10-17
+
+- J2 pre-run round 4: companion_tests, per-task venv setup, strict history chown, and 0600 proxy files.
+
 ## [1.1.13.0.0] - 2026-10-17
 
 - packaging: mcptoolshop_rnd.localbuilders (and setup_vm.sh) now ship in the wheel; a test checks every subpackage is included

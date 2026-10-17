@@ -420,6 +420,7 @@ def run_pytest_and_score(
     *,
     twin_source_path: str | Path | None = None,
     pytest_cmd: list[str] | None = None,
+    python_executable: str | Path | None = None,
     env: dict[str, str] | None = None,
     aider_running: bool = False,
     use_sudo_builder: bool = True,
@@ -471,13 +472,14 @@ def run_pytest_and_score(
     staged_twin.parent.mkdir(parents=True, exist_ok=True)
     prior_bytes = staged_twin.read_bytes() if staged_twin.exists() else None
 
+    py_exe = str(python_executable) if python_executable is not None else sys.executable
     with tempfile.TemporaryDirectory() as tmp:
         os.chmod(tmp, 0o777)
         xml_path = Path(tmp) / "junit.xml"
         try:
             staged_twin.write_text(twin_text, encoding="utf-8", newline="\n")
             os.chmod(staged_twin, 0o644)
-            base_cmd = list(pytest_cmd) if pytest_cmd is not None else [sys.executable, "-m", "pytest"]
+            base_cmd = list(pytest_cmd) if pytest_cmd is not None else [py_exe, "-m", "pytest"]
             raw_cmd = [*base_cmd, f"--junitxml={xml_path}"]
             full_cmd = wrap_as_builder(
                 raw_cmd,

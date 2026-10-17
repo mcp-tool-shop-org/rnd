@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.10.2.6] - 2026-10-17
+
+- local-builders: amendment B (J2 on the pinned CUDA 13.4 stack, licences first, generation records, open units) and the Argon design-review brief
+- Updated experiment `local-builders`
+
 ## [1.1.10.2.5] - 2026-10-16
 
 - stage1-regeneration: DATAMINER-USES.md, using the generation records in role-set (uncertain-first key check, host agreement, and four later uses)

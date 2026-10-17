@@ -1,5 +1,7 @@
 # Argon's answer on pipeline code, summarised (2026-10-16)
 
+> **Superseded (2026-10-17).** Written under the proof rule ("not proven = don't use"), which the maintainer withdrew. The clause quotes stand; the "not proven" verdicts don't. Current verdicts: `experiments/generated-content-terms/README.md` and `licences/registry.json`.
+
 Browser Argon's reply to [the brief](argon-brief-pipeline-code.md), pasted by the maintainer. It's summarised here,
 not reproduced. The clauses that count are the ones R&D re-read, recorded in `licences/registry.json`.
 

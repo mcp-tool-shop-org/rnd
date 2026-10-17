@@ -10,6 +10,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 `python -m rnd bump` writes each section; `1.0.0` reads as `1.0.0.0.0`.
 
 ## [Unreleased]
+- The licence-rule cleanup (2026-10-17): a use is barred only by a quoted clause. Registry verdicts `proven`/`not_proven` become `allowed`/`barred`, and the test now requires a clause for every bar, not for every grant. BUILD-SPEC, PLAN, the generated-content README and DESIGN drop the proof rule and the strict tier; Argon's 2026-10-16 answers are marked superseded; amendment D3 drops the authorship filter.
+
+
+## [1.1.10.2.9] - 2026-10-17
+
+- local-builders: amendment D (card values, the fold_system and reattach_thinking transforms, the bank's 2026-09-04 floor and Claude-only authorship) and card-values.json
+- Updated experiment `local-builders`
 
 ## [1.1.10.2.8] - 2026-10-17
 

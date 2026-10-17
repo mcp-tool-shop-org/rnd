@@ -11,14 +11,17 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
-## [1.1.10.2.12] - 2026-10-17
+## [1.1.11.0.1] - 2026-10-17
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output
 - Added experiment `agent-ab-harness`
-- Updated experiment `generated-content-terms`
-- Updated experiment `local-builders`
+- Added experiment `local-builders`
 - Added experiment `nemo-relay-trial`
-- Updated experiment `stage1-regeneration`
+
+## [1.1.11.0.0] - 2026-10-17
+
+- mcptoolshop_rnd.localbuilders: J2 logging proxy, task runner, clean git-archive workspace, JUnit XML and twin scorer, VM containment and probe, and fit/template/thinking-split preflight (amendments C, D, E: NB1, NB2, F1-F7, F9, F10, F13, D1, D2, D-F1 to D-F3)
+- tests: unittest suite and 2-task fixture bank for mcptoolshop_rnd.localbuilders
 
 ## [1.1.10.2.11] - 2026-10-17
 

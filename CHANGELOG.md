@@ -11,9 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
-## [1.1.10.2.4] - 2026-10-16
+## [1.1.10.2.5] - 2026-10-16
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output
+
+## [1.1.10.2.4] - 2026-10-16
+
+- stage1-regeneration: the critic's known-answer set v1 (40 Claude-written keyed items for critic-control)
+- Added experiment `stage1-regeneration`
 
 ## [1.1.10.2.3] - 2026-10-16
 

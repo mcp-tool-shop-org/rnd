@@ -124,6 +124,8 @@ the reworded licence rule, the maintainer's CUDA 13.4 rule, the dataminer requir
    ledger (start and end balance, cards, wall time, work done). The 70-unit estimate and the 90-unit cap in
    section 6 are superseded by the ledger.
 
+**Builder (2026-10-17):** the maintainer may put Antigravity Argon on the J2 build after Browser Argon confirms the design. Code is read plainly under the split rule (`experiments/generated-content-terms`), and R&D reviews the build.
+
 **Sources:**
 - the maintainer's goal (2026-10-16);
 - Browser Argon rounds 1–2;

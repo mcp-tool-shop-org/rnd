@@ -16,6 +16,19 @@ is the maintainer's.
 - **A model's say-so isn't proof,** including Argon's, R&D's or any model's.
 - **R&D re-reads every cited clause at its source** before anything relies on it.
 
+**Split by what the output touches (the maintainer's decision, 2026-10-17, on Argon's analysis):**
+- **Strict: explicit permission needed** for anything that shapes model weights or benchmark scores. That covers
+  training data, evaluation and apply items, base models, and canon or images that train a style model.
+- **The plain reading for code:** code the studio owns, that no model trains on and that builds no rival to the
+  provider, is ordinary software, whoever wrote it. Google's "related AI technology" is read by its purpose
+  (stopping extraction and distillation into a rival model), not at its widest. Antigravity-written AI tooling is
+  allowed. An undefined phrase is never read at its widest to bar ordinary work.
+- **Claude in the strict tier:** Anthropic's Help Center (12326764) is the explicit permission. Claude-written text
+  may be used as training inputs, evaluation items and prompts for the non-competing specialized verifier, **never
+  as training targets.** Gemini (including Antigravity) and Grok output stays out of training data and evaluation
+  items entirely, by their explicit clauses.
+- The split follows Argon's analysis of 2026-10-17, adapted by R&D and ruled by the maintainer.
+
 *Revised the same day.* The first wording ("allowed only when the provider's documentation proves it; a missing
 restriction proves nothing") counted silence as a bar. The maintainer judged that too strict. Only a contract the
 studio agreed to, or copyright in the output, can restrict a use. A licence that makes no claim on outputs, or a

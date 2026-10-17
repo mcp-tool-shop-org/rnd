@@ -244,6 +244,7 @@ The maintainer's own rulings, plus those he delegated to the Publisher or R&D:
   target.** Claude Code builds role-set's changes from BUILD-SPEC.md.
 - **Argon- and Grok-written generator code is rewritten** (R&D, delegated): aspire-si #144 and #145 (gates 1.7.3),
   role-set #55, and role-set #49, #53 and #54, with #49's clue templates and packs replaced.
+- **Grok's generator logic stays; only its text is replaced** (the maintainer, 2026-10-16). role-set #49, #53 and #54 keep their logic and tests, credited "Written with Grok". Their clue templates and packs, which reach rows, are replaced. Argon's #55 is still re-implemented under Google's ML clause.
 - **Interlock keeps its Grok and Kimi code** (R&D, delegated). Kimi ran through Ollama Cloud. Grok's work is
   credited "Written with Grok" in CONTRIBUTORS.md (interlock#130, role-set#69).
 - **R1-Distill-Qwen-32B is not used** (the Publisher, delegated). **The Colab critic is Muse-Glimmer** for

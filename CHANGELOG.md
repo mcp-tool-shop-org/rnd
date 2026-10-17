@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.12.0.1] - 2026-10-17
+
+- critic-control's bar, set before the first result
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.12.0.0] - 2026-10-17
 
 - mcptoolshop_rnd.localbuilders: verify installed Aider 0.86.1 version gate and synthetic assistant strings against real CoderPrompts and EditBlockPrompts in preflight and runner; record aider_version and synthetic_strings_verified on receipts

@@ -1,0 +1,1 @@
+{"try": 1, "gpu": "CPU", "gate": {"at": "2026-10-18T06:20:07Z", "disk_free_gb": 220.5, "hf_mbps": 72.2, "hf_reads_mbps": [72.2], "limits": {"gpu": false, "hf": true, "hf_bytes": 200000000, "max_used_mib": 500, "min_disk_gb": 0, "min_hf_mbps": 60.0, "min_ram_gb": 8.0, "min_vram_mib": 39000, "name_has": "A100"}, "ok": true, "ram_available_gb": 12.4, "why": []}}

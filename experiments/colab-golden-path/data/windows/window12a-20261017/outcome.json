@@ -1,0 +1,1 @@
+{"window": "12a", "card": "A100", "cap": 17, "spent": 12.81, "basis": "balance", "outcome": "lost-vm", "why": "w0 screen around Muse: the exec's output stopped reaching the rig while hashing Lightning, and Colab pruned the session; nothing came back (mistakes #31)"}

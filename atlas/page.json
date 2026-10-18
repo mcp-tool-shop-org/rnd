@@ -23,16 +23,6 @@
     {
       "doors": 2,
       "importedBy": [],
-      "importedByTests": [
-        "tests"
-      ],
-      "kind": "part",
-      "name": "rnd",
-      "partLabel": "rnd"
-    },
-    {
-      "doors": 2,
-      "importedBy": [],
       "importedByTests": [],
       "kind": "part",
       "name": "root",
@@ -47,6 +37,16 @@
       "kind": "part",
       "name": "experiments",
       "partLabel": "experiments"
+    },
+    {
+      "doors": 1,
+      "importedBy": [],
+      "importedByTests": [
+        "tests"
+      ],
+      "kind": "part",
+      "name": "rnd",
+      "partLabel": "rnd"
     },
     {
       "kind": "place",
@@ -73,24 +73,76 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 0,
-      "changed": 4,
+      "added": 94,
+      "changed": 16,
       "moved": 0,
-      "parts": 3,
+      "parts": 5,
       "removed": 0
     },
     "items": [
       {
+        "kind": "door",
+        "sentence": "CI no longer checks rnd/.",
+        "subjects": [
+          ".github/workflows/ci.yml",
+          "rnd/"
+        ]
+      },
+      {
+        "kind": "door",
+        "sentence": "Release no longer checks rnd/.",
+        "subjects": [
+          ".github/workflows/release.yml",
+          "rnd/"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "windows is now written by scripts/colab/collect_windows.py.",
+        "subjects": [
+          "windows",
+          "scripts/colab/collect_windows.py"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "windows/_top is now written by scripts/colab/collect_windows.py.",
+        "subjects": [
+          "windows/_top",
+          "scripts/colab/collect_windows.py"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "experiments/stage1-regeneration/pilot/ is now read by experiments/charts/make_charts.py.",
+        "subjects": [
+          "experiments/stage1-regeneration/pilot/",
+          "experiments/charts/make_charts.py"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "And 3 more new writers and readers of places.",
+        "subjects": []
+      },
+      {
+        "kind": "unassigned",
+        "sentence": "scripts/colab/collect_windows.py is new and belongs to no part, so atlas check fails on it against the previous map.",
+        "subjects": [
+          "scripts/colab/collect_windows.py"
+        ]
+      },
+      {
         "kind": "counts",
-        "sentence": "Nothing structural changed since 2026-10-17; 4 files changed content.",
+        "sentence": "94 files added and 16 changed content, across 5 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "c11e5868b0515810e6b2270a2d83da2d2f754b2f",
-      "generatedAt": "2026-10-17T08:49:25.856Z"
+      "commit": "fd128b82b339971a7c4dba10a17e191ec81f79d2",
+      "generatedAt": "2026-10-17T08:55:09.388Z"
     },
-    "unchanged": true
+    "unchanged": false
   },
   "changesTogether": [
     {
@@ -129,16 +181,15 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 4 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "fd128b82b339971a7c4dba10a17e191ec81f79d2",
+  "commit": "01646c0141f685fd42f2cd297fd1c1aad1dc8910",
   "defaultBranch": "main",
-  "derived": "14 parts, mostly Python (120 files), shell (16), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "14 parts, mostly Python (124 files), shell (21), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
-        "mcptoolshop_rnd/",
-        "rnd/"
+        "mcptoolshop_rnd/"
       ],
-      "checksCount": 2,
+      "checksCount": 1,
       "checksMore": 0,
       "file": ".github/workflows/ci.yml",
       "id": ".github/workflows/ci.yml",
@@ -154,12 +205,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 22
-        },
-        {
-          "boundary": "rnd",
-          "depth": 0,
-          "files": 2
+          "files": 23
         },
         {
           "boundary": "root",
@@ -169,12 +215,17 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 21
+          "files": 23
         },
         {
           "boundary": "experiments",
           "depth": 1,
           "files": 6
+        },
+        {
+          "boundary": "rnd",
+          "depth": 1,
+          "files": 1
         }
       ],
       "runs": [
@@ -195,10 +246,9 @@
     },
     {
       "checks": [
-        "mcptoolshop_rnd/",
-        "rnd/"
+        "mcptoolshop_rnd/"
       ],
-      "checksCount": 2,
+      "checksCount": 1,
       "checksMore": 0,
       "file": ".github/workflows/release.yml",
       "id": ".github/workflows/release.yml",
@@ -209,12 +259,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 22
-        },
-        {
-          "boundary": "rnd",
-          "depth": 0,
-          "files": 2
+          "files": 23
         },
         {
           "boundary": "root",
@@ -454,16 +499,16 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-17T08:55:09.388Z",
+  "generatedAt": "2026-10-18T06:55:00.158Z",
   "limits": [
     "9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.",
-    "18 writes and 30 reads use paths built at run time and are not named here.",
-    "5 writes go to places this repository does not track, so they are not listed as generated.",
-    "28 writes and 85 reads go to a path their caller passes, not to this repository.",
+    "20 writes and 33 reads use paths built at run time and are not named here.",
+    "7 writes go to places this repository does not track, so they are not listed as generated.",
+    "29 writes and 85 reads go to a path their caller passes, not to this repository.",
     "5 reads go to the directory the command is run in (entries, instruments and licences), not to this repository.",
     "1 read goes to the directory the command is run in or a path its caller passes, not to this repository.",
     "1 read goes to the home directory (.claude/), not to this repository.",
-    "2 files belong to no part: scripts/colab/probe.py and scripts/colab/rates.sh.",
+    "3 files belong to no part: scripts/colab/collect_windows.py, scripts/colab/probe.py and scripts/colab/rates.sh.",
     "Statistics confidence is low: fewer than 25 source files reach 10 revisions in the window."
   ],
   "mainDoor": ".github/workflows/ci.yml",
@@ -518,13 +563,13 @@
   "startReason": "This path follows rnd (a command people run) from its entry, since CI runs only tests and checks.",
   "summary": "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only).",
   "summaryFrom": "person",
-  "testFiles": 52,
+  "testFiles": 56,
   "testedBy": {
     "experiments": 6,
-    "mcptoolshop_rnd": 16,
+    "mcptoolshop_rnd": 17,
     "rnd": 1
   },
-  "unnamedWrites": 18,
+  "unnamedWrites": 20,
   "unread": [
     {
       "place": "experiments/charts/",

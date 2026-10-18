@@ -1,28 +1,35 @@
 # rnd: how it works
 
-Mapped at 2026-10-17 from commit fd128b8 by Atlas 1.24.0.
+Mapped at 2026-10-18 from commit 01646c0 by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-14 parts, mostly Python (120 files), shell (16), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
+14 parts, mostly Python (124 files), shell (21), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-17 (c11e586)
+## What changed since 2026-10-17 (fd128b8)
 
-Nothing structural changed since 2026-10-17; 4 files changed content.
+- CI no longer checks rnd/.
+- Release no longer checks rnd/.
+- windows is now written by scripts/colab/collect_windows.py.
+- windows/_top is now written by scripts/colab/collect_windows.py.
+- experiments/stage1-regeneration/pilot/ is now read by experiments/charts/make_charts.py.
+- And 3 more new writers and readers of places.
+- scripts/colab/collect_windows.py is new and belongs to no part, so atlas check fails on it against the previous map.
+- 94 files added and 16 changed content, across 5 parts.
 
 ## What comes in
 
-1. **CI.** On a pull request to main; on a push to main touching 13 paths; or by hand. Runs verify.sh and tests/; checks mcptoolshop_rnd/ and rnd/.
-2. **Release.** When a release is published; or by hand. Runs mcptoolshop_rnd/__init__.py and verify.sh; checks mcptoolshop_rnd/ and rnd/.
+1. **CI.** On a pull request to main; on a push to main touching 13 paths; or by hand. Runs verify.sh and tests/; checks mcptoolshop_rnd/.
+2. **Release.** When a release is published; or by hand. Runs mcptoolshop_rnd/__init__.py and verify.sh; checks mcptoolshop_rnd/.
 3. **Deploy site to GitHub Pages.** On a push to main touching 2 paths; or by hand. Runs site/astro.config.mjs and site/src/.
 4. **rnd** (a command people run). Runs mcptoolshop_rnd/cli.py.
 
 ## What happens through CI
 
-1. The workflow runs verify.sh in the repository root and tests/ in tests; it checks mcptoolshop_rnd/ in mcptoolshop_rnd and rnd/ in rnd.
-2. That reaches experiments (6 files).
+1. The workflow runs verify.sh in the repository root and tests/ in tests; it checks mcptoolshop_rnd/ in mcptoolshop_rnd.
+2. That reaches experiments (6 files) and rnd (1 file).
 3. It writes to entries/, experiments/charts/, instruments/ and site/public/charts/.
 4. It uploads coverage to Codecov.
 
@@ -35,7 +42,7 @@ Nothing structural changed since 2026-10-17; 4 files changed content.
 
 ## The other doors
 
-**Release** runs mcptoolshop_rnd/__init__.py and verify.sh, checks mcptoolshop_rnd/ and rnd/, and publishes to PyPI.
+**Release** runs mcptoolshop_rnd/__init__.py and verify.sh, checks mcptoolshop_rnd/, and publishes to PyPI.
 
 **Deploy site to GitHub Pages** runs site/astro.config.mjs and site/src/, and deploys the site.
 
@@ -44,9 +51,9 @@ Nothing structural changed since 2026-10-17; 4 files changed content.
 ## What breaks what
 
 - **mcptoolshop_rnd** is imported by 2 parts (experiments, rnd), and by 1 more only from tests; it sits on the path of 3 doors.
-- **rnd** is imported only from tests, by 1 part (tests), and sits on the path of 2 doors.
 - **the repository root** is imported by no other part and sits on the path of 2 doors.
 - **experiments** is imported only from tests, by 1 part (tests), and sits on the path of 1 door.
+- **rnd** is imported only from tests, by 1 part (tests), and sits on the path of 1 door.
 - **experiments/natural-errors/data/** is written by experiments and read by experiments; a hand edit reaches every reader.
 - **entries/** is written by mcptoolshop_rnd and read by experiments and mcptoolshop_rnd, and by 2 tests; a hand edit reaches every reader.
 
@@ -108,7 +115,7 @@ These are candidates from names and call order, not a judgement.
 
 ## Hand-authored
 
-People write .claude/, .github/, catalogs/, datapacks/ and docs/; 18 writes with paths built at run time may land here.
+People write .claude/, .github/, catalogs/, datapacks/ and docs/; 20 writes with paths built at run time may land here.
 
 ## Where to start
 
@@ -119,13 +126,13 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 ## What this map cannot see
 
 - 9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.
-- 18 writes and 30 reads use paths built at run time and are not named here.
-- 5 writes go to places this repository does not track, so they are not listed as generated.
-- 28 writes and 85 reads go to a path their caller passes, not to this repository.
+- 20 writes and 33 reads use paths built at run time and are not named here.
+- 7 writes go to places this repository does not track, so they are not listed as generated.
+- 29 writes and 85 reads go to a path their caller passes, not to this repository.
 - 5 reads go to the directory the command is run in (entries, instruments and licences), not to this repository.
 - 1 read goes to the directory the command is run in or a path its caller passes, not to this repository.
 - 1 read goes to the home directory (.claude/), not to this repository.
-- 2 files belong to no part: scripts/colab/probe.py and scripts/colab/rates.sh.
+- 3 files belong to no part: scripts/colab/collect_windows.py, scripts/colab/probe.py and scripts/colab/rates.sh.
 - Statistics confidence is low: fewer than 25 source files reach 10 revisions in the window.
 
 Regenerate with `npx --yes @dogfood-lab/atlas map`.

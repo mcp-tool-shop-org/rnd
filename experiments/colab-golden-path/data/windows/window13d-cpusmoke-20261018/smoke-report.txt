@@ -1,0 +1,13 @@
+window exit 0
+VM gate passed (try 1)
+uploaded the token file (owner-only, deleted on the rig)
+exec exit=0 wall=62s end=exec
+end balance 1163.72 (start 1163.72)
+sessions after stop:
+TOKEN FILE READ (42 chars) and deleted
+== search for the dummy (literal, then the hf_ shape)
+<path>: literal hits [none] shape hits [none]
+window13d-cpusmoke-20261018: literal hits [none] shape hits [none]
+== history file for this session: -rw-r--r-- 15989 <path>
+== permissions before: 755 <path>       1 644 600 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 644 600 644 644  
+== permissions after: 700 <path> 700       1 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600  

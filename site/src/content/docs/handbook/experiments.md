@@ -62,3 +62,5 @@ To rank several models on a kind of job, start from the [model comparisons](../m
 To find why something wastes work with a diagnostic tool, change it, and check the change helped, start from the [diagnose-then-fix](../diagnose-then-fix/) template.
 
 To grade the pooled results of a retrieval experiment into an answer key, before any retrieval metric is computed, use the [relevance grading](../relevance-grading/) template.
+
+To run model work on rented Colab GPUs from Claude Code, follow the [rented GPU windows](../rented-gpu-windows/) path. It covers the budget rules, the window script, tokens, the test ladder and the review loop, with templates.

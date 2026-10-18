@@ -1,0 +1,1 @@
+{"window": "10c", "card": "A100", "cap": null, "spent": 2.59, "basis": "balance", "outcome": "tooling-fault", "why": "both conversions reproduced, then the first wave failed: rnd's package lacked the proxy module"}

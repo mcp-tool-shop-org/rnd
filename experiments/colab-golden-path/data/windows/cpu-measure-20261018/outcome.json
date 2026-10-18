@@ -1,0 +1,1 @@
+{"window": "cpu-measure", "card": "CPU", "cap": null, "spent": 0.0, "basis": "balance", "outcome": "test", "why": "two CPU shapes read by the VM gate: default 2 cores 12.4 GB, high-mem 8 cores 52.2 GB; 220.5 GB free"}

@@ -1,0 +1,1 @@
+{"window": "3", "card": "A100", "cap": null, "spent": 1.93, "basis": "balance", "outcome": "partial", "why": "smoke: Lightning served ok; Muse's env failed (python -m venv: the Colab image has no ensurepip), fixed with virtualenv. Outside the budget"}

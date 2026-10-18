@@ -1,0 +1,18 @@
+{
+ "started": "2026-10-17T04:20:20Z",
+ "machine": {
+  "card": "NVIDIA A100-SXM4-40GB",
+  "memory": "40960 MiB",
+  "driver": "580.82.07",
+  "compat": false,
+  "driver_cuda": "13.0",
+  "colab_release_tag": "release-colab-external-images_20261014-060047_RC00",
+  "cores": 12,
+  "disk_free_gb": 193.3,
+  "runtime": "13.4"
+ },
+ "role": "smoke",
+ "ok": false,
+ "error": "RuntimeError: upload window 1's llama-server to /content/llama-server first",
+ "ended": "2026-10-17T04:20:38Z"
+}

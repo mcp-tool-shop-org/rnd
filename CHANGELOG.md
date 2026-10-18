@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.1.0] - 2026-10-18
+
+- the Claude + Colab golden path: the rented-GPU-windows handbook page and the pilot's raw window data
+- Added experiment `colab-golden-path`
+
 ## [1.1.15.0.4] - 2026-10-17
 
 - newsletter issue 10 and a brief: what the terms let you do with AI output

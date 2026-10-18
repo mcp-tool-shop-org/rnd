@@ -1,0 +1,1 @@
+{"window": "11a", "card": "A100", "cap": 6, "spent": 3.0, "basis": "estimate", "outcome": "tooling-fault", "why": "R1-Distill BF16 -> Q6_K: stopped after the BF16 conversion; the cap counted both 11a's and 11b's sessions (mistakes #29, fixed in role-set 9402a8e)"}

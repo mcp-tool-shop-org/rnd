@@ -1,0 +1,1 @@
+{"window": "10b", "card": "A100", "cap": null, "spent": 2.26, "basis": "balance", "outcome": "lost-vm", "why": "Colab dropped the VM mid-download of Muse; the exec hung until killed"}

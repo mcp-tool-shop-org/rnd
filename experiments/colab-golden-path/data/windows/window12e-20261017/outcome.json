@@ -1,0 +1,1 @@
+{"window": "12e", "card": "A100", "cap": null, "spent": 1.29, "basis": "rate_x_runtime", "outcome": "lost-vm", "why": "job.log empty 10 minutes after the exec started (stall at 21:16:03): the exec never reached the kernel"}

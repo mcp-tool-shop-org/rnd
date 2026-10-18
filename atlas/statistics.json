@@ -115,7 +115,7 @@
       "confidence": "full",
       "highWater": null,
       "name": "experiments",
-      "qualifyingSourceCommits": 59,
+      "qualifyingSourceCommits": 61,
       "rebaseline": null
     },
     {
@@ -167,7 +167,7 @@
       "confidence": "full",
       "highWater": null,
       "name": "mcptoolshop_rnd",
-      "qualifyingSourceCommits": 440,
+      "qualifyingSourceCommits": 449,
       "rebaseline": null
     },
     {
@@ -233,7 +233,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "tests",
-      "qualifyingSourceCommits": 23,
+      "qualifyingSourceCommits": 28,
       "rebaseline": null
     }
   ],
@@ -276,8 +276,8 @@
         "path": ".gitignore"
       },
       {
-        "commits": 471,
-        "lines": 2766,
+        "commits": 503,
+        "lines": 2990,
         "path": "CHANGELOG.md"
       },
       {
@@ -426,28 +426,28 @@
         "path": "agent_ab_harness}/shakedown-2/RC03-B2.jsonl"
       },
       {
-        "commits": 30,
-        "lines": 653,
+        "commits": 33,
+        "lines": 716,
         "path": "atlas/README.md"
       },
       {
-        "commits": 4,
-        "lines": 58,
+        "commits": 5,
+        "lines": 62,
         "path": "atlas/boundaries.yaml"
       },
       {
-        "commits": 30,
-        "lines": 2226,
+        "commits": 33,
+        "lines": 2427,
         "path": "atlas/page.json"
       },
       {
-        "commits": 30,
-        "lines": 7621,
+        "commits": 33,
+        "lines": 8294,
         "path": "atlas/statistics.json"
       },
       {
-        "commits": 30,
-        "lines": 13227,
+        "commits": 33,
+        "lines": 14818,
         "path": "atlas/structure.json"
       },
       {
@@ -1111,13 +1111,13 @@
         "path": "experiments/charts/loop-repeats.svg"
       },
       {
-        "commits": 4,
-        "lines": 1091,
+        "commits": 6,
+        "lines": 1185,
         "path": "experiments/charts/make_charts.py"
       },
       {
-        "commits": 3,
-        "lines": 281,
+        "commits": 5,
+        "lines": 289,
         "path": "experiments/charts/manifest.json"
       },
       {
@@ -1129,6 +1129,11 @@
         "commits": 1,
         "lines": 57,
         "path": "experiments/charts/npu-vs-cpu.svg"
+      },
+      {
+        "commits": 2,
+        "lines": 192,
+        "path": "experiments/charts/pilot-thinking-budget.svg"
       },
       {
         "commits": 2,
@@ -1214,6 +1219,406 @@
         "commits": 1,
         "lines": 85,
         "path": "experiments/colab-bottlenecks/argon-brief.md"
+      },
+      {
+        "commits": 1,
+        "lines": 17,
+        "path": "experiments/colab-golden-path/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 619,
+        "path": "experiments/colab-golden-path/data/MANIFEST.tsv"
+      },
+      {
+        "commits": 1,
+        "lines": 59,
+        "path": "experiments/colab-golden-path/data/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 64,
+        "path": "experiments/colab-golden-path/data/units-ledger.md"
+      },
+      {
+        "commits": 1,
+        "lines": 45,
+        "path": "experiments/colab-golden-path/data/windows.csv"
+      },
+      {
+        "commits": 1,
+        "lines": 6,
+        "path": "experiments/colab-golden-path/data/windows/_top/highmem-rate-probe.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 2,
+        "path": "experiments/colab-golden-path/data/windows/cpu-measure-20261018/gate.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/cpu-measure-20261018/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window1-20261016/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window10-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 87,
+        "path": "experiments/colab-golden-path/data/windows/window10-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window10b-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window10c-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 926,
+        "path": "experiments/colab-golden-path/data/windows/window10c-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window10d-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window11a-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window11b-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1918,
+        "path": "experiments/colab-golden-path/data/windows/window11b-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window11c-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window11d-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 669,
+        "path": "experiments/colab-golden-path/data/windows/window11d-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window12a-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window12b-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1083,
+        "path": "experiments/colab-golden-path/data/windows/window12b-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window12c-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1185,
+        "path": "experiments/colab-golden-path/data/windows/window12c-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window12d-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1191,
+        "path": "experiments/colab-golden-path/data/windows/window12d-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window12e-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window12f-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1330,
+        "path": "experiments/colab-golden-path/data/windows/window12f-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window12g-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window12h-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1136,
+        "path": "experiments/colab-golden-path/data/windows/window12h-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 7,
+        "path": "experiments/colab-golden-path/data/windows/window12p-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 7,
+        "path": "experiments/colab-golden-path/data/windows/window12q-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 33,
+        "path": "experiments/colab-golden-path/data/windows/window12s-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 93,
+        "path": "experiments/colab-golden-path/data/windows/window12s2-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 414,
+        "path": "experiments/colab-golden-path/data/windows/window12s3-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 415,
+        "path": "experiments/colab-golden-path/data/windows/window12s4-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window12s5a-20261018/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 673,
+        "path": "experiments/colab-golden-path/data/windows/window12s5a-20261018/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window12s5b-20261018/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 316,
+        "path": "experiments/colab-golden-path/data/windows/window12s5b-20261018/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window12s6a-20261018/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 900,
+        "path": "experiments/colab-golden-path/data/windows/window12s6a-20261018/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window12s6b-20261018/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 543,
+        "path": "experiments/colab-golden-path/data/windows/window12s6b-20261018/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 26,
+        "path": "experiments/colab-golden-path/data/windows/window13b-20261018/launch.sh"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window13b-20261018/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1382,
+        "path": "experiments/colab-golden-path/data/windows/window13b-20261018/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window13c-survival-20261018/gate.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 12,
+        "path": "experiments/colab-golden-path/data/windows/window13c-survival-20261018/launch.sh"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window13d-cpusmoke-20261018/gate.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 30,
+        "path": "experiments/colab-golden-path/data/windows/window13d-cpusmoke-20261018/launch.sh"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window13d-cpusmoke-20261018/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 8,
+        "path": "experiments/colab-golden-path/data/windows/window13d-cpusmoke-20261018/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 13,
+        "path": "experiments/colab-golden-path/data/windows/window13d-cpusmoke-20261018/smoke-report.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 16,
+        "path": "experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/launch.sh"
+      },
+      {
+        "commits": 1,
+        "lines": 6,
+        "path": "experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/run.sh"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window2-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 18,
+        "path": "experiments/colab-golden-path/data/windows/window2-20261017/pin-result-attempt1.json"
+      },
+      {
+        "commits": 1,
+        "lines": 839,
+        "path": "experiments/colab-golden-path/data/windows/window2-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window3-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 839,
+        "path": "experiments/colab-golden-path/data/windows/window3-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window4-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window4-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window5-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 4734,
+        "path": "experiments/colab-golden-path/data/windows/window5-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window6-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window6b-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window6c-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window7-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 914,
+        "path": "experiments/colab-golden-path/data/windows/window7-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window7b-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 2954,
+        "path": "experiments/colab-golden-path/data/windows/window7b-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window8-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "experiments/colab-golden-path/data/windows/window8-20261017/pin-result.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1,
+        "path": "experiments/colab-golden-path/data/windows/window9-20261017/outcome.json"
+      },
+      {
+        "commits": 1,
+        "lines": 2008,
+        "path": "experiments/colab-golden-path/data/windows/window9-20261017/pin-result.json"
       },
       {
         "commits": 6,
@@ -1661,28 +2066,28 @@
         "path": "experiments/embeddinggemma-2/results/zero-relevance-lock.json"
       },
       {
-        "commits": 7,
-        "lines": 224,
+        "commits": 11,
+        "lines": 296,
         "path": "experiments/generated-content-terms/README.md"
       },
       {
-        "commits": 2,
-        "lines": 35,
+        "commits": 4,
+        "lines": 70,
         "path": "experiments/generated-content-terms/argon-answer-pipeline-code.md"
       },
       {
-        "commits": 2,
-        "lines": 35,
+        "commits": 3,
+        "lines": 37,
         "path": "experiments/generated-content-terms/argon-answer.md"
       },
       {
-        "commits": 2,
-        "lines": 56,
+        "commits": 4,
+        "lines": 112,
         "path": "experiments/generated-content-terms/argon-brief-pipeline-code.md"
       },
       {
-        "commits": 2,
-        "lines": 79,
+        "commits": 3,
+        "lines": 81,
         "path": "experiments/generated-content-terms/argon-brief.md"
       },
       {
@@ -2111,23 +2516,23 @@
         "path": "experiments/local-agent-relay/design.md"
       },
       {
-        "commits": 8,
-        "lines": 562,
+        "commits": 13,
+        "lines": 772,
         "path": "experiments/local-builders/DESIGN.md"
       },
       {
-        "commits": 3,
-        "lines": 42,
+        "commits": 4,
+        "lines": 46,
         "path": "experiments/local-builders/README.md"
       },
       {
-        "commits": 1,
-        "lines": 70,
+        "commits": 2,
+        "lines": 140,
         "path": "experiments/local-builders/argon-brief-design-review.md"
       },
       {
-        "commits": 2,
-        "lines": 209,
+        "commits": 3,
+        "lines": 412,
         "path": "experiments/local-builders/card-values.json"
       },
       {
@@ -2531,28 +2936,28 @@
         "path": "experiments/openjev-vs-jev/run_openjev.py"
       },
       {
-        "commits": 4,
-        "lines": 382,
+        "commits": 6,
+        "lines": 484,
         "path": "experiments/stage1-regeneration/BUILD-SPEC.md"
       },
       {
-        "commits": 1,
-        "lines": 70,
+        "commits": 2,
+        "lines": 140,
         "path": "experiments/stage1-regeneration/DATAMINER-USES.md"
       },
       {
-        "commits": 1,
-        "lines": 87,
+        "commits": 2,
+        "lines": 174,
         "path": "experiments/stage1-regeneration/DATASET-RELEASE.md"
       },
       {
-        "commits": 6,
-        "lines": 345,
+        "commits": 9,
+        "lines": 412,
         "path": "experiments/stage1-regeneration/PLAN.md"
       },
       {
-        "commits": 5,
-        "lines": 146,
+        "commits": 6,
+        "lines": 150,
         "path": "experiments/stage1-regeneration/PROVENANCE.md"
       },
       {
@@ -2561,24 +2966,34 @@
         "path": "experiments/stage1-regeneration/README.md"
       },
       {
-        "commits": 2,
-        "lines": 42,
+        "commits": 3,
+        "lines": 44,
         "path": "experiments/stage1-regeneration/argon-answer.md"
       },
       {
-        "commits": 1,
-        "lines": 25,
+        "commits": 6,
+        "lines": 98,
         "path": "experiments/stage1-regeneration/critic-control/README.md"
       },
       {
-        "commits": 1,
-        "lines": 213,
+        "commits": 4,
+        "lines": 454,
         "path": "experiments/stage1-regeneration/critic-control/build_known_answer.py"
       },
       {
-        "commits": 1,
-        "lines": 40,
+        "commits": 2,
+        "lines": 80,
         "path": "experiments/stage1-regeneration/critic-control/known-answer-v1.jsonl"
+      },
+      {
+        "commits": 2,
+        "lines": 80,
+        "path": "experiments/stage1-regeneration/critic-control/known-answer-v2.jsonl"
+      },
+      {
+        "commits": 2,
+        "lines": 260,
+        "path": "experiments/stage1-regeneration/pilot/qwen3.8-w0-calls.json"
       },
       {
         "commits": 71,
@@ -3751,23 +4166,23 @@
         "path": "instruments/web-research.md"
       },
       {
-        "commits": 4,
-        "lines": 83,
+        "commits": 8,
+        "lines": 166,
         "path": "licences/README.md"
       },
       {
-        "commits": 7,
-        "lines": 1114,
+        "commits": 13,
+        "lines": 2224,
         "path": "licences/registry.json"
       },
       {
-        "commits": 3,
-        "lines": 142,
+        "commits": 6,
+        "lines": 284,
         "path": "licences/snapshot.py"
       },
       {
-        "commits": 441,
-        "lines": 883,
+        "commits": 472,
+        "lines": 945,
         "path": "mcptoolshop_rnd/__init__.py"
       },
       {
@@ -3796,48 +4211,53 @@
         "path": "mcptoolshop_rnd/datapack.py"
       },
       {
-        "commits": 1,
-        "lines": 24,
+        "commits": 2,
+        "lines": 48,
         "path": "mcptoolshop_rnd/localbuilders/__init__.py"
       },
       {
-        "commits": 1,
-        "lines": 412,
+        "commits": 8,
+        "lines": 968,
         "path": "mcptoolshop_rnd/localbuilders/contain.py"
       },
       {
-        "commits": 2,
-        "lines": 714,
+        "commits": 4,
+        "lines": 1428,
         "path": "mcptoolshop_rnd/localbuilders/preflight.py"
       },
       {
-        "commits": 2,
-        "lines": 367,
+        "commits": 4,
+        "lines": 734,
         "path": "mcptoolshop_rnd/localbuilders/probe.py"
       },
       {
-        "commits": 2,
-        "lines": 1003,
+        "commits": 10,
+        "lines": 2150,
         "path": "mcptoolshop_rnd/localbuilders/proxy.py"
       },
       {
         "commits": 2,
-        "lines": 748,
+        "lines": 110,
+        "path": "mcptoolshop_rnd/localbuilders/recount.py"
+      },
+      {
+        "commits": 8,
+        "lines": 3132,
         "path": "mcptoolshop_rnd/localbuilders/runner.py"
       },
       {
-        "commits": 1,
-        "lines": 541,
+        "commits": 6,
+        "lines": 1240,
         "path": "mcptoolshop_rnd/localbuilders/score.py"
       },
       {
-        "commits": 1,
-        "lines": 47,
+        "commits": 2,
+        "lines": 94,
         "path": "mcptoolshop_rnd/localbuilders/setup_vm.sh"
       },
       {
-        "commits": 1,
-        "lines": 400,
+        "commits": 4,
+        "lines": 1210,
         "path": "mcptoolshop_rnd/localbuilders/workspace.py"
       },
       {
@@ -3891,8 +4311,8 @@
         "path": "mcptoolshop_rnd}/store.py"
       },
       {
-        "commits": 2,
-        "lines": 48,
+        "commits": 4,
+        "lines": 62,
         "path": "pyproject.toml"
       },
       {
@@ -3949,6 +4369,11 @@
         "commits": 1,
         "lines": 164,
         "path": "rnd/store.py"
+      },
+      {
+        "commits": 1,
+        "lines": 449,
+        "path": "scripts/colab/collect_windows.py"
       },
       {
         "commits": 1,
@@ -4042,6 +4467,11 @@
       },
       {
         "commits": 2,
+        "lines": 192,
+        "path": "site/public/charts/pilot-thinking-budget.svg"
+      },
+      {
+        "commits": 2,
         "lines": 96,
         "path": "site/public/charts/reasoning-default.svg"
       },
@@ -4079,6 +4509,11 @@
         "commits": 3,
         "lines": 165,
         "path": "site/src/content/docs/briefs/agent-tracing-nemo-relay.md"
+      },
+      {
+        "commits": 5,
+        "lines": 126,
+        "path": "site/src/content/docs/briefs/ai-output-terms.md"
       },
       {
         "commits": 1,
@@ -4151,8 +4586,8 @@
         "path": "site/src/content/docs/briefs/verifier-calibration.md"
       },
       {
-        "commits": 3,
-        "lines": 79,
+        "commits": 5,
+        "lines": 101,
         "path": "site/src/content/docs/briefs/verifier-training-data.md"
       },
       {
@@ -4161,8 +4596,8 @@
         "path": "site/src/content/docs/handbook/ab-dataminer.md"
       },
       {
-        "commits": 5,
-        "lines": 105,
+        "commits": 8,
+        "lines": 140,
         "path": "site/src/content/docs/handbook/ab-experiments.md"
       },
       {
@@ -4171,8 +4606,8 @@
         "path": "site/src/content/docs/handbook/architecture.md"
       },
       {
-        "commits": 4,
-        "lines": 129,
+        "commits": 7,
+        "lines": 165,
         "path": "site/src/content/docs/handbook/dataset-builds.md"
       },
       {
@@ -4181,8 +4616,8 @@
         "path": "site/src/content/docs/handbook/diagnose-then-fix.md"
       },
       {
-        "commits": 5,
-        "lines": 64,
+        "commits": 6,
+        "lines": 66,
         "path": "site/src/content/docs/handbook/experiments.md"
       },
       {
@@ -4201,8 +4636,8 @@
         "path": "site/src/content/docs/handbook/index.md"
       },
       {
-        "commits": 4,
-        "lines": 117,
+        "commits": 7,
+        "lines": 154,
         "path": "site/src/content/docs/handbook/model-comparisons.md"
       },
       {
@@ -4214,6 +4649,11 @@
         "commits": 1,
         "lines": 120,
         "path": "site/src/content/docs/handbook/relevance-grading.md"
+      },
+      {
+        "commits": 1,
+        "lines": 184,
+        "path": "site/src/content/docs/handbook/rented-gpu-windows.md"
       },
       {
         "commits": 1,
@@ -4264,6 +4704,16 @@
         "commits": 3,
         "lines": 108,
         "path": "site/src/content/docs/newsletter/issue-09.md"
+      },
+      {
+        "commits": 5,
+        "lines": 334,
+        "path": "site/src/content/docs/newsletter/issue-10.md"
+      },
+      {
+        "commits": 2,
+        "lines": 428,
+        "path": "site/src/content/docs/newsletter/issue-11.md"
       },
       {
         "commits": 2,
@@ -4371,34 +4821,44 @@
         "path": "tests/fixtures/atlas_mcp_utility/shakedown-2/RC03-B2.jsonl"
       },
       {
-        "commits": 1,
-        "lines": 58,
+        "commits": 2,
+        "lines": 2,
+        "path": "tests/fixtures/gemma-4-w0-call-redacted.json"
+      },
+      {
+        "commits": 2,
+        "lines": 116,
         "path": "tests/fixtures/localbuilders/bank.json"
       },
       {
-        "commits": 1,
-        "lines": 12,
+        "commits": 2,
+        "lines": 24,
         "path": "tests/fixtures/localbuilders/candidate_config.json"
       },
       {
-        "commits": 1,
-        "lines": 10,
+        "commits": 2,
+        "lines": 20,
         "path": "tests/fixtures/localbuilders/scrubbed/test_abmine_fa.py"
       },
       {
-        "commits": 1,
-        "lines": 14,
+        "commits": 2,
+        "lines": 28,
         "path": "tests/fixtures/localbuilders/scrubbed/test_watch_stable.py"
       },
       {
-        "commits": 1,
-        "lines": 10,
+        "commits": 2,
+        "lines": 20,
         "path": "tests/fixtures/localbuilders/twins/test_abmine_fa_twin.py"
       },
       {
-        "commits": 1,
-        "lines": 14,
+        "commits": 2,
+        "lines": 28,
         "path": "tests/fixtures/localbuilders/twins/test_watch_stable_twin.py"
+      },
+      {
+        "commits": 2,
+        "lines": 2,
+        "path": "tests/fixtures/muse-glimmer-w0-call-redacted.json"
       },
       {
         "commits": 1,
@@ -4506,13 +4966,13 @@
         "path": "tests/test_e4b_charts.py"
       },
       {
-        "commits": 3,
-        "lines": 82,
+        "commits": 6,
+        "lines": 164,
         "path": "tests/test_licence_registry.py"
       },
       {
-        "commits": 2,
-        "lines": 2326,
+        "commits": 8,
+        "lines": 6690,
         "path": "tests/test_localbuilders.py"
       },
       {
@@ -4521,9 +4981,14 @@
         "path": "tests/test_math_ladder_properties.py"
       },
       {
-        "commits": 1,
-        "lines": 98,
+        "commits": 3,
+        "lines": 102,
         "path": "tests/test_packaging.py"
+      },
+      {
+        "commits": 2,
+        "lines": 58,
+        "path": "tests/test_packaging_wheel.py"
       },
       {
         "commits": 2,
@@ -4534,6 +4999,11 @@
         "commits": 6,
         "lines": 328,
         "path": "tests/test_rnd.py"
+      },
+      {
+        "commits": 4,
+        "lines": 172,
+        "path": "tests/test_thinking_count.py"
       },
       {
         "commits": 2,
@@ -4556,17 +5026,17 @@
     "level": "low",
     "reason": "fewer than 25 source files reach 10 revisions in the window"
   },
-  "generatedAt": "2026-10-17T08:55:09.388Z",
+  "generatedAt": "2026-10-18T06:55:00.158Z",
   "generatedFrom": {
-    "commit": "fd128b82b339971a7c4dba10a17e191ec81f79d2"
+    "commit": "01646c0141f685fd42f2cd297fd1c1aad1dc8910"
   },
   "pairs": [
     {
       "a": "CHANGELOG.md",
       "b": "mcptoolshop_rnd/__init__.py",
-      "either": 470,
-      "shared": 440,
-      "strength": 0.93617
+      "either": 480,
+      "shared": 449,
+      "strength": 0.935417
     },
     {
       "a": "atlas/README.md",
@@ -4656,16 +5126,16 @@
     "floor": "fallen",
     "floorHeld": false,
     "floorTrigger": "revision-depth",
-    "headDate": "2026-10-17T04:50:22-04:00",
-    "inScopeFiles": 829,
+    "headDate": "2026-10-18T02:51:46-04:00",
+    "inScopeFiles": 923,
     "pinnedStart": null,
     "priorFloor": "fallen",
-    "qualifyingCommits": 499,
+    "qualifyingCommits": 512,
     "qualifyingMinimum": 30,
     "revisions": 5,
     "shared": 10,
     "sharedFloorUsed": 3,
-    "since": "2026-04-20T08:50:22.000Z",
+    "since": "2026-04-21T06:51:46.000Z",
     "sourceExtensions": [
       ".js",
       ".mjs",

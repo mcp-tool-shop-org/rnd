@@ -41,7 +41,10 @@ Measured on our account (`colab usage`, 2026-10-16 to 2026-10-18):
   count each by its own rate × runtime and reconcile with the balance afterwards.
 - **Projections from measured rates only.** Each rate cites the receipt it came from. Night one's critique step was
   projected from a one-shot test at 20 s an item; real waves took 29 minutes per 8 drafts.
-- **Cap = projection + 15%.** The window script stops the session at the cap.
+- **Cap = projection + 15%** for steps measured on real hardware, **+30%** for any kind of wave with fewer than
+  four measured slots. The window script stops the session at the cap.
+- **Show savings and overruns separately.** Our W-A came in 19% under its projection, but only because faster model
+  downloads saved 4,461 s while the twin waves ran 2,997 s over. One net figure would have hidden the overrun.
 - **Open only if the cap + 2 units is left** in the study's budget. A top-up on the account doesn't raise the
   study's budget unless the person who set it says so.
 - **Measure the unknown first, on the smallest window.** When one cost is a guess (our twin waves had never run on
@@ -69,10 +72,14 @@ Measured on our account (`colab usage`, 2026-10-16 to 2026-10-18):
    output stream: in our windows it stopped reaching the rig while the job ran on. The rig follows the job's own
    `job.log` instead, with a stall limit (10 minutes before the first line, then 20).
 6. **The cap watcher.** It counts this window's spend as its own rate × runtime, not the account balance, which
-   would include a neighbour's spend. It keeps 0.3 units back so `job.log`, with its checkpoints, can still be
-   fetched. A job stopped at the cap hasn't reached the end that writes its result files, so what comes back is the
-   log and what `checkpoints.py extract` can rebuild from it. (Signalling the job first, so it can write them, is on
-   our list.)
+   would include a neighbour's spend.
+   - **The job gets a deadline:** the moment its window's spend will reach the cap less a margin. Past it, nothing
+     new starts; a wave under way is stopped (SIGTERM, then SIGKILL), and the job writes its result files. The call
+     journal keeps every finished call, so a cut wave loses only the call in flight, and a resume replays the rest.
+   - **Measured:** the cut took under a second on a stub run, and a real exit fetch took 56 s. So the job gets 60 s
+     past the deadline and the fetch 120 s, which is 0.265 units at the A100's 5.3 an hour, inside a 0.3 margin. The
+     script refuses to open a window whose grace and fetch allowance don't fit its margin.
+   - Before the deadline existed, a cap stop returned only `job.log` and what `checkpoints.py extract` could rebuild.
 7. **Every way out fetches what the job has written first** (always `job.log`; the result files when the job got
    that far), then stops the session in an `EXIT` trap and checks the session
    list is empty. Read the balance after.
@@ -84,9 +91,11 @@ Measured on our account (`colab usage`, 2026-10-16 to 2026-10-18):
   line, so a killed window's work can be extracted from the log (`checkpoints.py extract`).
 - **It can resume.** A window can start from another window's sealed drafts (`resume.tar`). Every file carries a
   sha256 seal, and a file that doesn't match its seal is refused.
-- **A job that is killed outright leaves no log line.** If the host runs out of memory, the job dies without writing
-  its result, and the window keeps billing until the stall limit fires (20 minutes). Watching the job's process as
-  well as its log is on our list.
+- **A job that is killed outright leaves no log line, and Colab won't tell you.** We killed a test job's kernel on
+  purpose: `colab status` kept reading BUSY for 22 minutes and the exec never returned, because the status follows the
+  command-line tool's exec, not the kernel. Only the stall limit (20 minutes without a new log line) ended the window.
+  A rule we had built on the status passed against our fake CLI and could never fire on real Colab, so we removed it.
+  Shortening the stall, with a heartbeat on every long step, is next.
 - **One job per VM.** The job takes a lock and carries a token for its window, so a late duplicate exec waits, then
   stops if the first job finished.
 - **It writes `pin-result.json`** with everything it pinned and measured, and `ok` true or false.
@@ -117,6 +126,11 @@ Measured on our account (`colab usage`, 2026-10-16 to 2026-10-18):
     ran on one image; a new one can change the system Python's packages and so the bytes of a system-Python
     conversion.
 - **Download everything before the first wave,** after checking that the whole set plus 20 GB fits the free disk.
+  One file at a time ran at about 179 MB/s on the A100; parallel snapshot downloads reached about 305.
+  `HF_HUB_ENABLE_HF_TRANSFER` does nothing in current `huggingface_hub`; the Xet backend's high-performance setting is
+  what we'll try next, clearing its chunk cache after each file so it can't eat the disk margin. Not yet tested.
+- **Pin the hub version per process.** Colab's kernel carried `huggingface_hub` 1.33.0, while llama.cpp's conversion
+  requirements installed 0.36.2 for the converter. Record both.
 
 ## 6. Tokens
 
@@ -127,10 +141,15 @@ Measured on our account (`colab usage`, 2026-10-16 to 2026-10-18):
   uploads it to the VM's RAM-backed `/dev/shm`, and deletes its own copy at once and again in the exit trap.
 - **Read once.** The job reads the file at its very start, deletes it, drops the Hub's environment variables and
   passes the value only as a `token=` argument.
-- **Watch for a silent fallback.** When a download had no token, `huggingface_hub` asked Colab's secrets vault for
-  one. In a command-line session that request times out (google-colab-cli
-  [issue #48](https://github.com/googlecolab/google-colab-cli/issues/48)), so the download went ahead without
-  one. Make public downloads explicitly anonymous so nothing reaches for a stored secret.
+- **Turn off the implicit token.** With no token given, `huggingface_hub` looks in the environment, its own cache
+  and, inside Colab, the account's secrets vault. In a command-line session the vault lookup timed out after about
+  10 s (google-colab-cli [issue #48](https://github.com/googlecolab/google-colab-cli/issues/48)); with a notebook
+  attached it could succeed and use whatever token the account stores. Set `HF_HUB_DISABLE_IMPLICIT_TOKEN=1` before
+  anything imports the hub, and pass `token=False` on every public call. On our probe the 11 s wait went to 0 and the
+  vault was never asked.
+- **Prove the token is gone.** After the downloads, the job checks five places: the token file, its own variable, the
+  Hub's environment variables, the Hub's token cache, and the vault secret the hub caches. Any one still set stops the
+  window before the models start.
 - **Test the leak paths.** A test pushes a fake token in a real token's shape through the real window script and
   checks that it appears in no file the window keeps or returns. Check the CLI's own history once with a real run.
   The push scan refuses anything in the `hf_` token shape.
@@ -154,6 +173,9 @@ mocks the failure modes you expect from real models. A checklist for the stand-i
 - a reply cut off at the token limit;
 - a refusal;
 - a window stopped mid-wave and resumed from its checkpoints.
+
+**A fake encodes what you believe about the real system.** Check its behaviour against one real run before trusting
+a rule that only the fake has passed.
 
 ## 8. The review loop
 

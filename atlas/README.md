@@ -1,23 +1,20 @@
 # rnd: how it works
 
-Mapped at 2026-10-18 from commit 01646c0 by Atlas 1.24.0.
+Mapped at 2026-10-18 from commit d3db539 by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-14 parts, mostly Python (124 files), shell (21), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
+14 parts, mostly Python (125 files), shell (28), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-17 (fd128b8)
+## What changed since 2026-10-18 (01646c0)
 
-- CI no longer checks rnd/.
-- Release no longer checks rnd/.
-- windows is now written by scripts/colab/collect_windows.py.
-- windows/_top is now written by scripts/colab/collect_windows.py.
-- experiments/stage1-regeneration/pilot/ is now read by experiments/charts/make_charts.py.
-- And 3 more new writers and readers of places.
-- scripts/colab/collect_windows.py is new and belongs to no part, so atlas check fails on it against the previous map.
-- 94 files added and 16 changed content, across 5 parts.
+- experiments/colab-golden-path/figures.json is now written by experiments/colab-golden-path/figures.py.
+- LICENSE is now also read by experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/pin-result.json, experiments/colab-golden-path/data/windows/window13g-prebuild-gemma-20261018/pin-result.json, experiments/colab-golden-path/data/windows/window13j-prebuild-qwen3.8-a100-20261018/pin-result.json and experiments/colab-golden-path/data/windows/window13k-prebuild-granite-a100-20261018/pin-result.json.
+- README.md is now also read by experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/pin-result.json, experiments/colab-golden-path/data/windows/window13g-prebuild-gemma-20261018/pin-result.json, experiments/colab-golden-path/data/windows/window13j-prebuild-qwen3.8-a100-20261018/pin-result.json and experiments/colab-golden-path/data/windows/window13k-prebuild-granite-a100-20261018/pin-result.json.
+- And 2 more new writers and readers of places.
+- 39 files added and 8 changed content, across 4 parts.
 
 ## What comes in
 
@@ -79,13 +76,15 @@ the repository root holds only shell files, which this map does not read, so whe
 ## Written but never read
 
 - **experiments/charts/** is written by experiments/charts/make_charts.py and read by nothing else in this repository.
+- **experiments/colab-golden-path/figures.json** is written by experiments/colab-golden-path/figures.py and read by nothing else in this repository.
 - **experiments/natural-errors/data/baselines_p1.json** is written by experiments/natural-errors/baselines_p1.py and read by nothing else in this repository.
 - **experiments/natural-errors/data/corrections.json** is written by experiments/natural-errors/build_corrections.py and read by nothing else in this repository.
 - **experiments/ollama-cuda-backend/** is written by experiments/ollama-cuda-backend/diag_test-v4-draft.py and read by nothing else in this repository.
 - **experiments/verifier-gold/crossfamily/** is written by experiments/verifier-gold/crossfamily/run_labeller.py and read by nothing else in this repository.
 - **experiments/verifier-gold/crossfamily/blind_key.json** is written by experiments/verifier-gold/crossfamily/make_sample.py and read by nothing else in this repository.
 - **experiments/verifier-gold/crossfamily/sample.jsonl** is written by experiments/verifier-gold/crossfamily/make_sample.py and read by nothing else in this repository.
-- **site/public/charts/** is written by experiments/charts/make_charts.py and read by nothing else in this repository.
+
+And 1 more place.
 
 ## Helpers that look duplicated
 
@@ -97,6 +96,7 @@ These are candidates from names and call order, not a judgement.
 
 - **entries/** is written by mcptoolshop_rnd/cli.py, except entries/_template.md, which it reads and people write.
 - **experiments/charts/** is written by experiments/charts/make_charts.py.
+- **experiments/colab-golden-path/figures.json** is written by experiments/colab-golden-path/figures.py.
 - **experiments/e4b/results/** is written by experiments/e4b/extract.py.
 - **experiments/kev-judge-finetune/results/summary.json** is written by experiments/kev-judge-finetune/summarise.py.
 - **experiments/natural-errors/data/** is written by experiments/natural-errors/build.py, except experiments/natural-errors/data/answers.json, experiments/natural-errors/data/questions.json, experiments/natural-errors/data/screen.json, experiments/natural-errors/data/screen_ctx_pilot.json, experiments/natural-errors/data/screen_extra.json and experiments/natural-errors/data/selection.json, which it reads and people write.
@@ -126,7 +126,7 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 ## What this map cannot see
 
 - 9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.
-- 20 writes and 33 reads use paths built at run time and are not named here.
+- 20 writes and 34 reads use paths built at run time and are not named here.
 - 7 writes go to places this repository does not track, so they are not listed as generated.
 - 29 writes and 85 reads go to a path their caller passes, not to this repository.
 - 5 reads go to the directory the command is run in (entries, instruments and licences), not to this repository.

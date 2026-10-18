@@ -1,0 +1,1 @@
+{"window": "13g-prebuild-gemma", "card": "CPU high-mem", "cap": 1, "spent": 0.07, "basis": "rate_x_runtime", "outcome": "results", "why": "Gemma 4 Q8_0 byte-matched e357a450 (own venv, torch +cpu as on its pin's host) and was uploaded (commit ed13a8ac); the VM gate rejected try 1 at 45.4 MB/s"}

@@ -6,13 +6,24 @@ fake-colab-cli.sh	1455	b79a9c4be1c7b86564e940ee2ee1356dd837577e5814cc983eb0416e6
 fake-colab-tests-192d1a8-plus.txt	1290	4cd71217f2353d8b2ecc3f5005bb192bb458738905991641f4fd6ff1561044c1	no	top-level file, hash only
 highmem-rate-probe.sh	511	f2d062727872db74b2ea45b4451eb7cbceb0f2b5a20e4036924f2201eebb9e49	no	top-level file, hash only
 highmem-rate-probe.txt	291	be9e7faf347acc22c41df13af5194990158b638652012654a502127220776f9e	yes	top-level small record
-stub-rung-5b-README.md	13656	b75337dce22e71101bbc66a5e99c112e1e5b94ffa5596c0d22af81cdd54d9d55	no	top-level file, hash only
+prebuild_chain.log	164	f3d177eea63e6b0fd427f981488dc36ffadacf8fd11c86b34db7a2211bf6b534	no	top-level file, hash only
+prebuild_chain.sh	2673	21786ec78a4fccf6e3329ac379b430e1fe681dfb5fcc6df97f960e59cd342b76	no	top-level file, hash only
+prebuild_chain2.log	826	9bc278142443d99b7466b98ac58a72e68936975a0219d140bbfe64343822c748	no	top-level file, hash only
+prebuild_chain2.sh	3215	11156df3ebeb506b78987262438b553e0abcfb1c3944dbfa4e4019b8dd10d357	no	top-level file, hash only
+prebuild_chain3.log	764	e4eef14a32f73ed1e54da72454207ca138e46729357e5ebee14b91cf90ea6b85	no	top-level file, hash only
+prebuild_chain3.sh	3234	e80256b583c70278d4a75a39bcbab04a07b3802cc72f8774acbe785885938def	no	top-level file, hash only
+stub-rung-5b-README.md	15708	aa24dc4be730cbd9664702c63826fcf9ef1dcb8221c6f96777e37909d4b2e437	no	top-level file, hash only
 stub_rung.sh	2715	42181f47315abcd8ab3ade26d8c398fb63146f0dfda3dec51dded9d6c249a7b4	no	top-level file, hash only
 stub_rung_launch.sh	1899	fec89031df1f8ae77fad293a924567798a8dd4b9d86c0824aa32842f7472e393	no	top-level file, hash only
-units-ledger.md	8698	187724d2711d8144c6cfbb0bc18241a652c05f662508e0bdae20bf91fb25da7d	yes	scrubbed copy at units-ledger.md
+units-ledger.md	11983	02c20b79a11ff6aded6c6b2174de4e431869fccd26eace50d164fc7feedea99c	yes	scrubbed copy at units-ledger.md
 cpu-measure-20261018/cores.txt	188	fc5f6579161ee3113dae585cdf4608d585b08d76fcc119d1355e494d395fd07c	no	not on copy list
 cpu-measure-20261018/gate.jsonl	730	03d1fb3d36da32797a2fa44f1395976d93b18a3454de147ab6ba64b4d018a132	yes	small text record
 cpu-measure-20261018/outcome.json	219	7f20771a71d4e54b849b8123e87d3b9b970f33db0a5ad9c330c83454bf19e872	yes	small text record
+scripts-430285a/COMMIT	41	d237028b878d631aa6be37e767110f3d66a06cebcadd2db0ea1aed107dbabdf8	no	not on copy list
+scripts-430285a/apache-2.0.txt	11358	cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30	no	not on copy list
+scripts-430285a/pin_window.py	119384	3b6dbb5b477fc48963bdbbb842b80ab68a1004c073ad6294bdb15be84ab738bc	no	not on copy list
+scripts-430285a/smoke_window.sh	16009	4ed04741ce13677379921347e48a0f4a8338e2c327d9e0ce6b551ef1dfc32ca2	no	not on copy list
+scripts-430285a/vm_gate.py	6116	2c5a02b7de78929de12312d2dcb10ef11505a06a1bc38c5f29f699a5622858c0	no	not on copy list
 token-scope-check/result-scopes.json	673	993bf46b43337a1955cb1e5b075018f9c7b7592f47c7fa955df2407677876b60	no	token-scope-check: hash only
 token-scope-check/result.json	1013	a1cbcb254b167c73093b8f6fb4e1114a9662723677aa16d65d8fbc21ff376082	no	token-scope-check: hash only
 token-scope-check/run.sh	895	cf8c0e11a0a2d61ca46f6e55e9fb048cf683abca073f2e3a9b04fd891884d72c	no	token-scope-check: hash only
@@ -447,16 +458,19 @@ window13b-20261018/upload/llama-server.gz.part00	41943040	0746213cc44db5388bae38
 window13b-20261018/upload/llama-server.gz.part01	41943040	78b51dbe9cb1dd574cffbbb8f4d3582624a96d3d0a06a6a5b462c0c20d8e4ece	no	under upload/
 window13b-20261018/upload/llama-server.gz.part02	41943040	57797381332d24aee754d1cf6e34316ba673b0e276fffe11e372cda6fd271036	no	under upload/
 window13b-20261018/upload/llama-server.gz.part03	1627365	1325ab9fb19e58aaf882c9be839e11c7e05d4f9bb6fa3d69fe7e552e26d59ca8	no	under upload/
+window13c-survival-20261018/.end	5	bac650d34a7638bb0aeb5342646d24e3b9ad6b44c9b383621faa482b990a367d	no	not on copy list
 window13c-survival-20261018/.exec.pid	6	e0a13b394ab56e93b69fcd5666d01e68b80cf540b176c19a03d875ca8d773e04	no	not on copy list
-window13c-survival-20261018/.fetch.out	131	af360bb6c038460350ff9677031cdaab7dc676cd69f98da43fccb956b390e0c7	no	not on copy list
+window13c-survival-20261018/.fetch.out	129	0fbb18e39e1a58d185bf3d872734612a7d00d81d7387260ffed584bc5b9dfc25	no	not on copy list
 window13c-survival-20261018/gate.jsonl	364	f2eab020cda657a68cd16241e9278b665de5aae5de0c3065759939c21adfcc07	yes	small text record
-window13c-survival-20261018/job.log	2055	cb3f3929f599ba1c5f8f5d4eb8ac4920febf04c7f5594dd2a51b1ffeafe61f4f	no	log, hash only
+window13c-survival-20261018/job.log	6764	a9d12774a728bdb7544a3bba4dc1e9a4d7e711130374b65c9dba1b3ec3281f80	no	log, hash only
 window13c-survival-20261018/launch.sh	900	ea283fb5aa4cf7960f1d257808e425438a240bc3e35e6a74868b36717e325c80	yes	small text record
 window13c-survival-20261018/mock_job.py	6542	f5b445e4b559568f3ccdf20d9ac635f1b0e0c93719ce1193b9f605be4fda4a61	no	not on copy list
-window13c-survival-20261018/rig.log	284	58ba5eeefcf39344b89f658cec847a3e180857c08d4dbd65268cc123244a00f0	no	log, hash only
-window13c-survival-20261018/smoke-window.log	2079	1e98db253dfc28e73f75952b670055b3fdff13e7bed30132aacda9d26a3e7f8c	no	log, hash only
+window13c-survival-20261018/outcome.json	276	5f8e291d3dc588df442498e51d82e9c86a64d02eba6fee7a9bcd12a59690e662	yes	small text record
+window13c-survival-20261018/pin-result.json	118	ef175911070e29c79a46d89551f62eef754553e1c0e238c731e8754aa6ae8a44	yes	small text record
+window13c-survival-20261018/rig.log	767	5d001b5b5cd863076962ef01e4515140e4eda4154f26a8564ed1a5858a8df8d2	no	log, hash only
+window13c-survival-20261018/smoke-window.log	6764	a9d12774a728bdb7544a3bba4dc1e9a4d7e711130374b65c9dba1b3ec3281f80	no	log, hash only
 window13c-survival-20261018/smoke_window.sh	15792	1e9b36d9f065b51a508ae914d1153e217229cfc5ace6190c0c2a27dc9887e324	no	not on copy list
-window13c-survival-20261018/status.log	13020	97ec4b55e160b872df4c9ad6603f8553888556566a8d343c30464f7d3866404d	no	log, hash only
+window13c-survival-20261018/status.log	40920	9f723d8798212bc1b72bc5ea03938f814c190c371340ef7d0182029e06c7f57e	no	log, hash only
 window13c-survival-20261018/vm_gate.py	6116	2c5a02b7de78929de12312d2dcb10ef11505a06a1bc38c5f29f699a5622858c0	no	not on copy list
 window13d-cpusmoke-20261018/.end	5	bac650d34a7638bb0aeb5342646d24e3b9ad6b44c9b383621faa482b990a367d	no	not on copy list
 window13d-cpusmoke-20261018/.exec.pid	6	bf5072785bf4ead2aa9fa86ad0f639684ff1e1b55f92c2a0c7586a772850d853	no	not on copy list
@@ -472,12 +486,146 @@ window13d-cpusmoke-20261018/smoke-report.txt	1118	1b6bccfdda31ffa3d2cce52782850a
 window13d-cpusmoke-20261018/smoke-window.log	256	23d7cb4350b08dd544851756933014893a6955590e706b33d854221cbf3e31f8	no	log, hash only
 window13d-cpusmoke-20261018/smoke_window.sh	15792	1e9b36d9f065b51a508ae914d1153e217229cfc5ace6190c0c2a27dc9887e324	no	not on copy list
 window13d-cpusmoke-20261018/vm_gate.py	6116	2c5a02b7de78929de12312d2dcb10ef11505a06a1bc38c5f29f699a5622858c0	no	not on copy list
+window13e-prebuild-muse-20261018/.end	5	bac650d34a7638bb0aeb5342646d24e3b9ad6b44c9b383621faa482b990a367d	no	not on copy list
+window13e-prebuild-muse-20261018/.exec.pid	6	c936262ea9a6b17e89d27b7d81671d410ae60a8d30e07ced0c443490a91da3be	no	not on copy list
+window13e-prebuild-muse-20261018/.fetch.out	134	5a4b20a6f33a775f07d5c0d2debad7ddf54627eff6a1e1f96b7768d3f29a0a52	no	not on copy list
 window13e-prebuild-muse-20261018/apache-2.0.txt	11358	cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30	no	not on copy list
+window13e-prebuild-muse-20261018/gate.jsonl	367	e7734c5cc7cf1c6cabd741bfab5e16da793b3b3445dadc8942f80e4a6d8f2b0f	yes	small text record
+window13e-prebuild-muse-20261018/job.log	6525	0f9a92337034ed4c115e51276e63b79aba996f43a31aaedb698e94b38dac705c	no	log, hash only
 window13e-prebuild-muse-20261018/launch.sh	1266	bfe9af8de8b4c48afc999dbffb38a1479f4b8f8d1d11accc2b21a7295647434f	yes	small text record
+window13e-prebuild-muse-20261018/outcome.json	312	b42b9434cce6c27a9ea7c161059bfbd55b256e373718106381bf0d2f6b8a0aac	yes	small text record
+window13e-prebuild-muse-20261018/pin-result.json	6656	4c2dd82600c3b737a04171dcb12a40d4bd4c9bb6872adc0df8ec0e7d342c58ac	yes	small text record
 window13e-prebuild-muse-20261018/pin_window.py	117022	059e3ec9b0ce70225456f746a6a89859456338434d4a7cbac246f99f4d014505	no	not on copy list
+window13e-prebuild-muse-20261018/rig.log	1395	dc65a689af6819f408cc2080a595e45926a23744301b6f6cb561530d1236f81c	no	log, hash only
 window13e-prebuild-muse-20261018/run.sh	471	46c820e2a449e513bb53a679309c00f03b16d7c624d24ec1947a526afa5da2bc	yes	small text record
+window13e-prebuild-muse-20261018/smoke-window.log	7287	2fdc14ffc99cb8d2b7235ac8d34b332304f66f323ef69a255551308c0ef5d3f2	no	log, hash only
 window13e-prebuild-muse-20261018/smoke_window.sh	16009	4ed04741ce13677379921347e48a0f4a8338e2c327d9e0ce6b551ef1dfc32ca2	no	not on copy list
+window13e-prebuild-muse-20261018/status.log	1860	6ea60d033bebf7abe760b1547f67b0b5554bf11e0e64fa17d618ee2f8da68b4b	no	log, hash only
 window13e-prebuild-muse-20261018/vm_gate.py	6116	2c5a02b7de78929de12312d2dcb10ef11505a06a1bc38c5f29f699a5622858c0	no	not on copy list
+window13f-prebuild-qwen3.8-20261018/.end	5	bac650d34a7638bb0aeb5342646d24e3b9ad6b44c9b383621faa482b990a367d	no	not on copy list
+window13f-prebuild-qwen3.8-20261018/.exec.pid	6	31345b0d17130aeadc48e657e25fa9c5519802db06c593430ec911dcae7d1d7d	no	not on copy list
+window13f-prebuild-qwen3.8-20261018/.fetch.out	137	8634b4b298652da7cc9e48da455d49979974f3974eab59d0cec8dee78f225184	no	not on copy list
+window13f-prebuild-qwen3.8-20261018/README.md	1293	421d0d476e3f5410e152d31f63df0e1119dc8dd7786c38eb32daab584a696719	yes	small text record
+window13f-prebuild-qwen3.8-20261018/apache-2.0.txt	11358	cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30	no	not on copy list
+window13f-prebuild-qwen3.8-20261018/argon-reply-torch-gguf-2026-10-18.md	4362	3f9d922e23acfdd9ba39b97e447cd900a83e073be7c03be7f790508c877c368d	yes	small text record
+window13f-prebuild-qwen3.8-20261018/gate.jsonl	369	cdef8630c26d5f79e2661217b0efd337e1a541f7ae7c466801c0690dac29d7e5	yes	small text record
+window13f-prebuild-qwen3.8-20261018/job.log	19805	cf09bbf583ed558b025abf0245a9b5430d477ef0ce5a316e66fd970b99a32600	no	log, hash only
+window13f-prebuild-qwen3.8-20261018/launch.sh	1271	e72d6c8f4f7972797736121fe09c97f3122e43376c9452000a24817fa5bcc8c9	yes	small text record
+window13f-prebuild-qwen3.8-20261018/outcome.json	383	df8e67e14892cf64d773f14354e782a8fc9ce424881c0d69727b726581d11485	yes	small text record
+window13f-prebuild-qwen3.8-20261018/pin-result.json	23392	cf3d875b186b4578a298f30cd63568d4ef350e058b94bf77efe3a5447d46d0f2	yes	small text record
+window13f-prebuild-qwen3.8-20261018/pin_window.py	117022	059e3ec9b0ce70225456f746a6a89859456338434d4a7cbac246f99f4d014505	no	not on copy list
+window13f-prebuild-qwen3.8-20261018/rig.log	1405	9ddce28750b6a0bc2ef77ac8d1192fb27dd5b5fe9d05b492557409f0180096d0	no	log, hash only
+window13f-prebuild-qwen3.8-20261018/smoke-window.log	20461	7d3bbad38e6cc67bc7d370d017840498c2f3c681f70b89ccb4b03ec12a7b3546	no	log, hash only
+window13f-prebuild-qwen3.8-20261018/smoke_window.sh	16009	4ed04741ce13677379921347e48a0f4a8338e2c327d9e0ce6b551ef1dfc32ca2	no	not on copy list
+window13f-prebuild-qwen3.8-20261018/status.log	1550	92a261fdcee2575de904eb71b9b456d8fe6f8f460496396bbba52587228bf11a	no	log, hash only
+window13f-prebuild-qwen3.8-20261018/vm_gate.py	6116	2c5a02b7de78929de12312d2dcb10ef11505a06a1bc38c5f29f699a5622858c0	no	not on copy list
+window13g-prebuild-gemma-20261018/.end	5	bac650d34a7638bb0aeb5342646d24e3b9ad6b44c9b383621faa482b990a367d	no	not on copy list
+window13g-prebuild-gemma-20261018/.exec.pid	6	4b97032db133b375bdac72b18387b77f7ae9c792d83b5000e795f1c445e1a198	no	not on copy list
+window13g-prebuild-gemma-20261018/.fetch.out	135	13d8250b0100aeebb1c04093795784e6cc34909dfc68b818b7115fe4714f5f91	no	not on copy list
+window13g-prebuild-gemma-20261018/apache-2.0.txt	11358	cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30	no	not on copy list
+window13g-prebuild-gemma-20261018/gate.jsonl	774	30315d34026259c1ff43af0c07c92bdc86e08dc0ac827e30d1a4572ed3d6aef0	yes	small text record
+window13g-prebuild-gemma-20261018/job.log	7106	345f987aeec37d64848163ddf5ab5d5b9fe4a4556375da11d8ef141e89ecb5ac	no	log, hash only
+window13g-prebuild-gemma-20261018/launch.sh	1282	556d2ad34de61973622f7d12eaca6709d96837b03ba9efb90b0dd1c62e1a71fd	yes	small text record
+window13g-prebuild-gemma-20261018/outcome.json	297	849f703b577177ae69b58d8e5462f901ea29c86dff72759391d7262546b0a3f7	yes	small text record
+window13g-prebuild-gemma-20261018/pin-result.json	7468	f1e4f289893e4da8d8ebe34db64d72fe28212a4225016024f3b9e84b6d985f72	yes	small text record
+window13g-prebuild-gemma-20261018/pin_window.py	117022	059e3ec9b0ce70225456f746a6a89859456338434d4a7cbac246f99f4d014505	no	not on copy list
+window13g-prebuild-gemma-20261018/rig.log	1565	7c111c64ed76fe7b4ebf890a76c3d56394d55c6f978a1fbc9a127a6a2d8d9ead	no	log, hash only
+window13g-prebuild-gemma-20261018/smoke-window.log	7815	ba303bb5016c05b74e516c92c94bee356ecaf3354b88b5b702b83548bec526fe	no	log, hash only
+window13g-prebuild-gemma-20261018/smoke_window.sh	16009	4ed04741ce13677379921347e48a0f4a8338e2c327d9e0ce6b551ef1dfc32ca2	no	not on copy list
+window13g-prebuild-gemma-20261018/status.log	2170	2e5f28e46de874d36d27f37bb2c970e2f07d375c8c4ae45e9d5584ac39a5fb43	no	log, hash only
+window13g-prebuild-gemma-20261018/vm_gate.py	6116	2c5a02b7de78929de12312d2dcb10ef11505a06a1bc38c5f29f699a5622858c0	no	not on copy list
+window13i-prebuild-qwen3.8-a100-20261018/.end	5	bac650d34a7638bb0aeb5342646d24e3b9ad6b44c9b383621faa482b990a367d	no	not on copy list
+window13i-prebuild-qwen3.8-a100-20261018/.exec.pid	6	bda8f51e707f1a284e4bae22d334ee8cadc126b5032e72eb16ad639f2ec1cdba	no	not on copy list
+window13i-prebuild-qwen3.8-a100-20261018/.fetch.out	142	a44f9979f3dd7c48557f0c7899f260b091209246a92e7d3c40aa80d84a4ec10c	no	not on copy list
+window13i-prebuild-qwen3.8-a100-20261018/apache-2.0.txt	11358	cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30	no	not on copy list
+window13i-prebuild-qwen3.8-a100-20261018/gate.jsonl	467	6340eef15443f2348b449a249296ca55b0d26bc6536d2c342fe8e60cdd960134	yes	small text record
+window13i-prebuild-qwen3.8-a100-20261018/job.log	2626	e016eaddcddd940a6f381af479c37b7202abb09b7bf747f741f3857c5fbd2a45	no	log, hash only
+window13i-prebuild-qwen3.8-a100-20261018/launch.sh	1295	d15c52aa750a71815393c243722cdf124cc05c7c6954453bbca9026a4632ae51	yes	small text record
+window13i-prebuild-qwen3.8-a100-20261018/outcome.json	411	128dfd1c58a8d61ad06c06fbdbd505335f0c63702be9603e2c5b9c67eae89599	yes	small text record
+window13i-prebuild-qwen3.8-a100-20261018/pin-result.json	1138	29c946af1f4f137354c02a65f98feab56c5e2e984bb16e593ec18371de9695b9	yes	small text record
+window13i-prebuild-qwen3.8-a100-20261018/pin_window.py	117022	059e3ec9b0ce70225456f746a6a89859456338434d4a7cbac246f99f4d014505	no	not on copy list
+window13i-prebuild-qwen3.8-a100-20261018/rig.log	1418	058ac6d009b28626c5d2d419092b00f49e3efdbd23e4639aae1f9445d91a8b2f	no	log, hash only
+window13i-prebuild-qwen3.8-a100-20261018/smoke-window.log	3390	eecb77fad477fd4c9c49483af84a33a0b6412c25e76fb08ca95e42316ddbfe85	no	log, hash only
+window13i-prebuild-qwen3.8-a100-20261018/smoke_window.sh	16009	4ed04741ce13677379921347e48a0f4a8338e2c327d9e0ce6b551ef1dfc32ca2	no	not on copy list
+window13i-prebuild-qwen3.8-a100-20261018/status.log	1860	ba5201346ae3c24be079a0d4f7495ba18e924a6a801a8aa729b6a57a4efc2251	no	log, hash only
+window13i-prebuild-qwen3.8-a100-20261018/vm_gate.py	6116	2c5a02b7de78929de12312d2dcb10ef11505a06a1bc38c5f29f699a5622858c0	no	not on copy list
+window13j-prebuild-qwen3.8-a100-20261018/.end	5	bac650d34a7638bb0aeb5342646d24e3b9ad6b44c9b383621faa482b990a367d	no	not on copy list
+window13j-prebuild-qwen3.8-a100-20261018/.exec.pid	7	be65458cd5911f564f862402585bb106db2865a6c058684868d4bc69d6744326	no	not on copy list
+window13j-prebuild-qwen3.8-a100-20261018/.fetch.out	142	61845ec1d0103fa00e31fe82cf5437fc270d993471ecbc7fa10dda41f7b1dd6a	no	not on copy list
+window13j-prebuild-qwen3.8-a100-20261018/apache-2.0.txt	11358	cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30	no	not on copy list
+window13j-prebuild-qwen3.8-a100-20261018/gate.jsonl	578	8f60939771f9144e4aea86bb0718d0781c5193a6f1e3b98635a029f1c4092d83	yes	small text record
+window13j-prebuild-qwen3.8-a100-20261018/job.log	21772	a6635764b6ff4a99afce5223d1e3551df2c6d9d65b1e6896e80120d2e7aad4ea	no	log, hash only
+window13j-prebuild-qwen3.8-a100-20261018/launch.sh	1295	4ad04bd4b249aa939116f48b870092413eb28aa4ba0a91facc574a8ef84ac252	yes	small text record
+window13j-prebuild-qwen3.8-a100-20261018/outcome.json	421	8c382c7416b9c4c7ccd12e98ba12539d64b91a8f55f098b037e8a0da97456a30	yes	small text record
+window13j-prebuild-qwen3.8-a100-20261018/pin-result.json	25735	a69e9f3198c8403947bd5333ee044ea572bc314ac98d147fa5d49e82f6a54b79	yes	small text record
+window13j-prebuild-qwen3.8-a100-20261018/pin_window.py	119384	3b6dbb5b477fc48963bdbbb842b80ab68a1004c073ad6294bdb15be84ab738bc	no	not on copy list
+window13j-prebuild-qwen3.8-a100-20261018/rig.log	1602	c57a40b6c2b736ea7eb3fcb76182b005a52809f9cc0a5accf8c716614b7f503d	no	log, hash only
+window13j-prebuild-qwen3.8-a100-20261018/smoke-window.log	22428	0dd2363181a603f3d053c8a1d153ee9e9a10d191cb7a0fe85681cd12fcd7b56b	no	log, hash only
+window13j-prebuild-qwen3.8-a100-20261018/smoke_window.sh	16009	4ed04741ce13677379921347e48a0f4a8338e2c327d9e0ce6b551ef1dfc32ca2	no	not on copy list
+window13j-prebuild-qwen3.8-a100-20261018/status.log	2790	732da0ae7819606d5642d3891d342a6a661c628d41948ed75b41cf7e661c451e	no	log, hash only
+window13j-prebuild-qwen3.8-a100-20261018/vm_gate.py	6116	2c5a02b7de78929de12312d2dcb10ef11505a06a1bc38c5f29f699a5622858c0	no	not on copy list
+window13k-prebuild-granite-a100-20261018/.end	5	bac650d34a7638bb0aeb5342646d24e3b9ad6b44c9b383621faa482b990a367d	no	not on copy list
+window13k-prebuild-granite-a100-20261018/.exec.pid	7	9bdb4e34580088bd3098fa737e12b270f8fff0ff5e9e754be366d7d9339ff7ba	no	not on copy list
+window13k-prebuild-granite-a100-20261018/.fetch.out	142	182c7c03303b433cfa5c80e7c4477e989be1742e9ae7febb181b1c920781acd7	no	not on copy list
+window13k-prebuild-granite-a100-20261018/apache-2.0.txt	11358	cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30	no	not on copy list
+window13k-prebuild-granite-a100-20261018/gate.jsonl	467	a9bd6ba911304b226dd43af2a4cf19413605a82f20b22281805f0001450e7172	yes	small text record
+window13k-prebuild-granite-a100-20261018/job.log	22035	cca11a003fe3f28f6780273ce12fad393aecc8f0c1e1c8b670e8cb7e14192a6c	no	log, hash only
+window13k-prebuild-granite-a100-20261018/launch.sh	1303	31963670c0c15eff9c468e64ea5dd20a10c272fdd25aa152c095d0021ddf81e0	yes	small text record
+window13k-prebuild-granite-a100-20261018/outcome.json	368	85dadfb430e093c958fbbd1c7a1491c7b31178bdbec7934c16b1f22049cd3f68	yes	small text record
+window13k-prebuild-granite-a100-20261018/pin-result.json	26089	b3b3c59f7d8d1dcb02e62c6d9ae4ae8b45c1e08345ded1270fd339c8161333ad	yes	small text record
+window13k-prebuild-granite-a100-20261018/pin_window.py	119384	3b6dbb5b477fc48963bdbbb842b80ab68a1004c073ad6294bdb15be84ab738bc	no	not on copy list
+window13k-prebuild-granite-a100-20261018/rig.log	1420	c2e891a7244e58503a86dd55e859788c03113287747e0c89f19671a8b36453c2	no	log, hash only
+window13k-prebuild-granite-a100-20261018/smoke-window.log	22691	d9f5f327232bea89f64c5c4a14643a0f6cc1d058656ec8ba19e2c10efd3c926f	no	log, hash only
+window13k-prebuild-granite-a100-20261018/smoke_window.sh	16009	4ed04741ce13677379921347e48a0f4a8338e2c327d9e0ce6b551ef1dfc32ca2	no	not on copy list
+window13k-prebuild-granite-a100-20261018/status.log	3100	b5985647c1f0f3748f8810c73ecb71d0ba581aa49660b2ae3f5e589ee69e70fe	no	log, hash only
+window13k-prebuild-granite-a100-20261018/vm_gate.py	6116	2c5a02b7de78929de12312d2dcb10ef11505a06a1bc38c5f29f699a5622858c0	no	not on copy list
+window13l-20261018/.end	5	bac650d34a7638bb0aeb5342646d24e3b9ad6b44c9b383621faa482b990a367d	no	not on copy list
+window13l-20261018/.exec.pid	4	42bb2035610aa72f2ae45674ebda0ad487f30af900cbfae10f072870d63e0175	no	not on copy list
+window13l-20261018/.fetch.out	120	ac57fbf3faf7b5be3de19cb25522baee2f2243515ec45f395c84445635ff188d	no	not on copy list
+window13l-20261018/README.md	4458	1ca8dda6101fd455c08733813371efa9cebafe5648f9cdef23c44ca1bf7ef027	yes	small text record
+window13l-20261018/card-values.json	11011	36cd89bbd95f2918528ae40b6ebfc1b91c3f17daccc0db708f36251b0bc9e207	no	not on copy list
+window13l-20261018/gate.jsonl	467	69d177caa60aeafce27a168ddf5e2cfe9bbd39fc284f8129aa7973d1d030dbd9	yes	small text record
+window13l-20261018/job.log	575188	67b2bb36c9548b74e900b3758c5e495433aeb382c5fc058856578d4d766559d4	no	log, hash only
+window13l-20261018/launch.out	1951	15f0e01722714a6816b7847a214156b5af49577a69aef5542fbb9ea7b36cc8d0	no	not on copy list
+window13l-20261018/launch.sh	3739	dbd7d54071ab55a104fde293a61de5bd53344eab80d54f60091880fb536ddf7c	yes	small text record
+window13l-20261018/lib.tar	603934720	80572a5c377930bf69affd0523b29947ea7aa4897639953b32abd464a824ba32	no	archive/binary
+window13l-20261018/outcome.json	496	57ce55ba8aacf30a3a7a3e30d389c13ee581bf94009c88cb2f0294ef64502c68	yes	small text record
+window13l-20261018/pack.tar	163840	aa11101c9d47e45f3d5626342906090f5360dc2809da80c8318e6bdc21f90fbb	no	archive/binary
+window13l-20261018/pilot-out.tar	407080960	2f3c1bfa6f5851e990672ca8507c61960523fb416bca419d79a1854ca7ffbd72	no	archive/binary
+window13l-20261018/pin-result.json	26210	cf6ac6d72505d0400d3a19d7b856eb6fff8a8e86a683f2fa71f2550a2c524d7d	yes	small text record
+window13l-20261018/pin_window.py	119384	3b6dbb5b477fc48963bdbbb842b80ab68a1004c073ad6294bdb15be84ab738bc	no	not on copy list
+window13l-20261018/prior.tar	512000	ed8263776dc09b7e64688b37bcd097b415740895aafdc83beb2abc6bf23efc50	no	archive/binary
+window13l-20261018/resume.tar	1208320	3d8b7ed583a3d23ace92c9263a7d59e006f06dc246adabf27e5d66dbdd7f15c1	no	archive/binary
+window13l-20261018/rig.log	1951	15f0e01722714a6816b7847a214156b5af49577a69aef5542fbb9ea7b36cc8d0	no	log, hash only
+window13l-20261018/smoke-window.log	576671	9958f812fa049b2ed596a975154bd3eab4b39bc6324d71933ee0ab95df6dc665	no	log, hash only
+window13l-20261018/smoke_window.sh	16009	4ed04741ce13677379921347e48a0f4a8338e2c327d9e0ce6b551ef1dfc32ca2	no	not on copy list
+window13l-20261018/status.log	29088	074ab85d1e69eba2332718dcf58222fc647f345821133cfb2e2a17f04206affa	no	log, hash only
+window13l-20261018/vm_gate.py	6116	2c5a02b7de78929de12312d2dcb10ef11505a06a1bc38c5f29f699a5622858c0	no	not on copy list
+window13l-20261018/upload/llama-server.gz	127456485	b35cb0bb3d0a5c28d31d5b4cd88c1068e72d8ad0571d8d87b3fdcf3adf4a0729	no	under upload/
+window13l-20261018/upload/llama-server.gz.part00	41943040	0746213cc44db5388bae3827fee0fab0defcb5ceb2983d8614c9ddf3b364a2b2	no	under upload/
+window13l-20261018/upload/llama-server.gz.part01	41943040	78b51dbe9cb1dd574cffbbb8f4d3582624a96d3d0a06a6a5b462c0c20d8e4ece	no	under upload/
+window13l-20261018/upload/llama-server.gz.part02	41943040	57797381332d24aee754d1cf6e34316ba673b0e276fffe11e372cda6fd271036	no	under upload/
+window13l-20261018/upload/llama-server.gz.part03	1627365	1325ab9fb19e58aaf882c9be839e11c7e05d4f9bb6fa3d69fe7e552e26d59ca8	no	under upload/
+window13m-rung-wa-20261018/.end	5	bac650d34a7638bb0aeb5342646d24e3b9ad6b44c9b383621faa482b990a367d	no	not on copy list
+window13m-rung-wa-20261018/.exec.pid	4	09251a7129c487da904b002c20337dd8550166f964629000a848b4da2f7b0541	no	not on copy list
+window13m-rung-wa-20261018/.fetch.out	128	22455787e7e3a17e8a155dcff53f51b43821d333d1d9de39793a8f53e2c7643a	no	not on copy list
+window13m-rung-wa-20261018/card-values.json	11011	36cd89bbd95f2918528ae40b6ebfc1b91c3f17daccc0db708f36251b0bc9e207	no	not on copy list
+window13m-rung-wa-20261018/gate.jsonl	369	d1fb680eb93b7e291123717bab4a23a09aedd549bfa4aefb0b097ad8634e5efe	yes	small text record
+window13m-rung-wa-20261018/job.log	505189	d6483b5b97379604d6cb20130355f833bb5cc7b83ce8065e84fdbfe9c5fc0a44	no	log, hash only
+window13m-rung-wa-20261018/launch.out	1743	a1511edd4e58fda43fe3d818bd9ef6418cbcaef0cd435cae3ad062b8188d9711	no	not on copy list
+window13m-rung-wa-20261018/launch.sh	3192	a280895034eaba44d2d1deb06bf69f68df8bedb4b77d59aa07198329e6add0bc	yes	small text record
+window13m-rung-wa-20261018/outcome.json	431	5bd0599e412ea194cf02038168a34fdd3ca45de04af04178801c0a6b7a96a8d7	yes	small text record
+window13m-rung-wa-20261018/pack.tar	163840	aa11101c9d47e45f3d5626342906090f5360dc2809da80c8318e6bdc21f90fbb	no	archive/binary
+window13m-rung-wa-20261018/pilot-out.tar	2734080	4965cde5ad630b8e4323313607acb73d1b0c1635c76df41f778b53e85b8c70a3	no	archive/binary
+window13m-rung-wa-20261018/pin-result.json	23561	7fb55457828b1cb5b31838bc55c997415631c10b70c6f218355b5d62cddda927	yes	small text record
+window13m-rung-wa-20261018/pin_window.py	119384	3b6dbb5b477fc48963bdbbb842b80ab68a1004c073ad6294bdb15be84ab738bc	no	not on copy list
+window13m-rung-wa-20261018/prior.tar	512000	ed8263776dc09b7e64688b37bcd097b415740895aafdc83beb2abc6bf23efc50	no	archive/binary
+window13m-rung-wa-20261018/resume.tar	1208320	3d8b7ed583a3d23ace92c9263a7d59e006f06dc246adabf27e5d66dbdd7f15c1	no	archive/binary
+window13m-rung-wa-20261018/rig.log	1743	a1511edd4e58fda43fe3d818bd9ef6418cbcaef0cd435cae3ad062b8188d9711	no	log, hash only
+window13m-rung-wa-20261018/smoke-window.log	506288	7c0ddc58bfe3b667b373a5ef3650cc8362680420df083108041956477817f9d1	no	log, hash only
+window13m-rung-wa-20261018/smoke_window.sh	16009	4ed04741ce13677379921347e48a0f4a8338e2c327d9e0ce6b551ef1dfc32ca2	no	not on copy list
+window13m-rung-wa-20261018/status.log	2170	5b55ab05d3a9faf976e22b226943a050091b4c4839e9c8b34c71a46cbfbf08c2	no	log, hash only
+window13m-rung-wa-20261018/vm_gate.py	6116	2c5a02b7de78929de12312d2dcb10ef11505a06a1bc38c5f29f699a5622858c0	no	not on copy list
 window2-20261017/generations.jsonl	43379	457a42f2da9a18a855f8ab478bef24dc9952113a99b097c513e87e28f0c1969a	no	draft jsonl
 window2-20261017/lib.tar	700211200	a0837e6a640e05664fa459e2a1e4ca39bec252d3cc71d1ee15ccc3c080877528	no	archive/binary
 window2-20261017/outcome.json	279	c1c3706606ed772b185755c787c59f5bf53f8fa6f1cc6114fd23ca898e76774a	yes	small text record

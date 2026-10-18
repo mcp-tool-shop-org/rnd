@@ -1,0 +1,1 @@
+{"window": "13e-prebuild-muse", "card": "CPU high-mem", "cap": 1, "spent": 0.07, "basis": "rate_x_runtime", "outcome": "results", "why": "Muse Q8_0 byte-matched c321320a and was uploaded to the private GGUF repo (commit 71fab4f8): download 230 s, convert 354 s, hash 101 s, upload ~138 s; 0.26/hr x ~14.7 min"}

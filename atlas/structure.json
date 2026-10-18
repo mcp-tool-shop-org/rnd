@@ -451,7 +451,7 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 17,
+      "dynamicReads": 18,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
       "dynamicWrites": 9,
@@ -964,11 +964,11 @@
           "path": "experiments/colab-bottlenecks/argon-brief.md"
         },
         {
-          "hash": "e7d0441139f61274e94ac2c207b2e3409928104bb9b1387fe99e99c05bd91b92",
+          "hash": "ffe5c976f99177dbed63a898b4b9898cc6a64d9d23ed12b5c39592334f839c8e",
           "path": "experiments/colab-golden-path/README.md"
         },
         {
-          "hash": "c82783b7d791b2c9e3f6b21bce2c9806f3d0a4b1185b0fb55a6d08c95e123f97",
+          "hash": "1adb0bca1548ef73d422ac125fa88532df07b08649a396e42fa19f174b580bcc",
           "path": "experiments/colab-golden-path/data/MANIFEST.tsv"
         },
         {
@@ -976,11 +976,11 @@
           "path": "experiments/colab-golden-path/data/README.md"
         },
         {
-          "hash": "187724d2711d8144c6cfbb0bc18241a652c05f662508e0bdae20bf91fb25da7d",
+          "hash": "02c20b79a11ff6aded6c6b2174de4e431869fccd26eace50d164fc7feedea99c",
           "path": "experiments/colab-golden-path/data/units-ledger.md"
         },
         {
-          "hash": "6e791bcffc342094b1412e670bc92db9f41fe489051f60ff9770029ec9e8ec84",
+          "hash": "2acf4c062a0ed76f2f213e909224647a125185f87845137fa4365fbc74b14e0c",
           "path": "experiments/colab-golden-path/data/windows.csv"
         },
         {
@@ -1176,6 +1176,14 @@
           "path": "experiments/colab-golden-path/data/windows/window13c-survival-20261018/launch.sh"
         },
         {
+          "hash": "43ba448fbc3153e2431c821a4e0e0cca17a76e8c4c85bb33948481a8eef9aece",
+          "path": "experiments/colab-golden-path/data/windows/window13c-survival-20261018/outcome.json"
+        },
+        {
+          "hash": "ef175911070e29c79a46d89551f62eef754553e1c0e238c731e8754aa6ae8a44",
+          "path": "experiments/colab-golden-path/data/windows/window13c-survival-20261018/pin-result.json"
+        },
+        {
           "hash": "70f7392244564767671b31562f6b8e1bc1c436f85d438670a8970a3c046498af",
           "path": "experiments/colab-golden-path/data/windows/window13d-cpusmoke-20261018/gate.jsonl"
         },
@@ -1196,12 +1204,148 @@
           "path": "experiments/colab-golden-path/data/windows/window13d-cpusmoke-20261018/smoke-report.txt"
         },
         {
+          "hash": "e7734c5cc7cf1c6cabd741bfab5e16da793b3b3445dadc8942f80e4a6d8f2b0f",
+          "path": "experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/gate.jsonl"
+        },
+        {
           "hash": "6cdbe90c6388a3b712fb6f44bd6dbf2e3b6d98b3706fe6b96ce3eaff7ae3e04e",
           "path": "experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/launch.sh"
         },
         {
+          "hash": "f9d6f3b5a3b251d5b0e38de31f0b474f1914d67e5f21f278373f7b9887ea7a20",
+          "path": "experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/outcome.json"
+        },
+        {
+          "hash": "8a6f83617010e7430fe2307db69ea542bc1c083afcc18f8f688fa1653065d481",
+          "path": "experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/pin-result.json"
+        },
+        {
           "hash": "04636a617a34927109174c63c4d15ecc460667947442004203fdacfdb25bfa74",
           "path": "experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/run.sh"
+        },
+        {
+          "hash": "421d0d476e3f5410e152d31f63df0e1119dc8dd7786c38eb32daab584a696719",
+          "path": "experiments/colab-golden-path/data/windows/window13f-prebuild-qwen3.8-20261018/README.md"
+        },
+        {
+          "hash": "3f9d922e23acfdd9ba39b97e447cd900a83e073be7c03be7f790508c877c368d",
+          "path": "experiments/colab-golden-path/data/windows/window13f-prebuild-qwen3.8-20261018/argon-reply-torch-gguf-2026-10-18.md"
+        },
+        {
+          "hash": "cdef8630c26d5f79e2661217b0efd337e1a541f7ae7c466801c0690dac29d7e5",
+          "path": "experiments/colab-golden-path/data/windows/window13f-prebuild-qwen3.8-20261018/gate.jsonl"
+        },
+        {
+          "hash": "ddd9b1728ad9557ff322a3d8a9a856cf492a62868e2d2b959027637f5d8c01b0",
+          "path": "experiments/colab-golden-path/data/windows/window13f-prebuild-qwen3.8-20261018/launch.sh"
+        },
+        {
+          "hash": "df8e67e14892cf64d773f14354e782a8fc9ce424881c0d69727b726581d11485",
+          "path": "experiments/colab-golden-path/data/windows/window13f-prebuild-qwen3.8-20261018/outcome.json"
+        },
+        {
+          "hash": "cf3d875b186b4578a298f30cd63568d4ef350e058b94bf77efe3a5447d46d0f2",
+          "path": "experiments/colab-golden-path/data/windows/window13f-prebuild-qwen3.8-20261018/pin-result.json"
+        },
+        {
+          "hash": "30315d34026259c1ff43af0c07c92bdc86e08dc0ac827e30d1a4572ed3d6aef0",
+          "path": "experiments/colab-golden-path/data/windows/window13g-prebuild-gemma-20261018/gate.jsonl"
+        },
+        {
+          "hash": "60c06df62308968dd8aef6984a36dde8ed7d2d0b1aa45e4746d0745012607dd2",
+          "path": "experiments/colab-golden-path/data/windows/window13g-prebuild-gemma-20261018/launch.sh"
+        },
+        {
+          "hash": "888dcbc73872ab2a073a79a64ae19e41025b5d17cc1da9c6ea72c567d001b9b0",
+          "path": "experiments/colab-golden-path/data/windows/window13g-prebuild-gemma-20261018/outcome.json"
+        },
+        {
+          "hash": "9f84f066625e10aa295d66ad980dce8093438aa4732b021a63f087654450803f",
+          "path": "experiments/colab-golden-path/data/windows/window13g-prebuild-gemma-20261018/pin-result.json"
+        },
+        {
+          "hash": "6340eef15443f2348b449a249296ca55b0d26bc6536d2c342fe8e60cdd960134",
+          "path": "experiments/colab-golden-path/data/windows/window13i-prebuild-qwen3.8-a100-20261018/gate.jsonl"
+        },
+        {
+          "hash": "4258c09f5746c7861ecfaefcf25ae5b81ea6df89f874cae6bb106a6090204eee",
+          "path": "experiments/colab-golden-path/data/windows/window13i-prebuild-qwen3.8-a100-20261018/launch.sh"
+        },
+        {
+          "hash": "47beec1eb316126f37a70a318caa8b3b948ff4cb54abbddc5e9a842dd295fc73",
+          "path": "experiments/colab-golden-path/data/windows/window13i-prebuild-qwen3.8-a100-20261018/outcome.json"
+        },
+        {
+          "hash": "29c946af1f4f137354c02a65f98feab56c5e2e984bb16e593ec18371de9695b9",
+          "path": "experiments/colab-golden-path/data/windows/window13i-prebuild-qwen3.8-a100-20261018/pin-result.json"
+        },
+        {
+          "hash": "8f60939771f9144e4aea86bb0718d0781c5193a6f1e3b98635a029f1c4092d83",
+          "path": "experiments/colab-golden-path/data/windows/window13j-prebuild-qwen3.8-a100-20261018/gate.jsonl"
+        },
+        {
+          "hash": "2c499cad445bf2f2de3bca0d0f25d4fada45d7cad0c9c01922e4587f4ec5b3f7",
+          "path": "experiments/colab-golden-path/data/windows/window13j-prebuild-qwen3.8-a100-20261018/launch.sh"
+        },
+        {
+          "hash": "1bdcd08e288bd5f27cab491a1a64d86f28373a1859373ed7da2f0dca1fb29cb8",
+          "path": "experiments/colab-golden-path/data/windows/window13j-prebuild-qwen3.8-a100-20261018/outcome.json"
+        },
+        {
+          "hash": "9b6bb2d70cc1eb2b48b75fcf4d5ade8bbb580109390bc7f6754f37de21cfe40f",
+          "path": "experiments/colab-golden-path/data/windows/window13j-prebuild-qwen3.8-a100-20261018/pin-result.json"
+        },
+        {
+          "hash": "a9bd6ba911304b226dd43af2a4cf19413605a82f20b22281805f0001450e7172",
+          "path": "experiments/colab-golden-path/data/windows/window13k-prebuild-granite-a100-20261018/gate.jsonl"
+        },
+        {
+          "hash": "4ee0d3658a7410bcc50be668d87b52e545f6d1520a753cd4c6cad31482cb1e6d",
+          "path": "experiments/colab-golden-path/data/windows/window13k-prebuild-granite-a100-20261018/launch.sh"
+        },
+        {
+          "hash": "b7315e8e271c3534f452b772661d6701dafd15a950335668190d0c4b1ab3ba90",
+          "path": "experiments/colab-golden-path/data/windows/window13k-prebuild-granite-a100-20261018/outcome.json"
+        },
+        {
+          "hash": "929b3cb1bef53a60192d55b652dbf722723bed5697c8957884a1b46193beefd1",
+          "path": "experiments/colab-golden-path/data/windows/window13k-prebuild-granite-a100-20261018/pin-result.json"
+        },
+        {
+          "hash": "1ca8dda6101fd455c08733813371efa9cebafe5648f9cdef23c44ca1bf7ef027",
+          "path": "experiments/colab-golden-path/data/windows/window13l-20261018/README.md"
+        },
+        {
+          "hash": "69d177caa60aeafce27a168ddf5e2cfe9bbd39fc284f8129aa7973d1d030dbd9",
+          "path": "experiments/colab-golden-path/data/windows/window13l-20261018/gate.jsonl"
+        },
+        {
+          "hash": "f996bdec97f518366a8d123de3ee11f24f17dc86e3349af22df22a6e8198ff82",
+          "path": "experiments/colab-golden-path/data/windows/window13l-20261018/launch.sh"
+        },
+        {
+          "hash": "f84dc9548cb89fe34ba2ecaefb166c77b5bc4120d6bce5ed469bd8fdf6c0ac15",
+          "path": "experiments/colab-golden-path/data/windows/window13l-20261018/outcome.json"
+        },
+        {
+          "hash": "4c6892cb845903883581f86d39879023d54e1095e533203f1f88efce72403105",
+          "path": "experiments/colab-golden-path/data/windows/window13l-20261018/pin-result.json"
+        },
+        {
+          "hash": "d1fb680eb93b7e291123717bab4a23a09aedd549bfa4aefb0b097ad8634e5efe",
+          "path": "experiments/colab-golden-path/data/windows/window13m-rung-wa-20261018/gate.jsonl"
+        },
+        {
+          "hash": "fd706985cb0f1e619be1658ffcb93e4bfb775c8a7f5ba5b0d68241e273bec685",
+          "path": "experiments/colab-golden-path/data/windows/window13m-rung-wa-20261018/launch.sh"
+        },
+        {
+          "hash": "5a22728e8d06ec68db9f32b48e9e29ef95259344727922700cb65c768b4d7cc0",
+          "path": "experiments/colab-golden-path/data/windows/window13m-rung-wa-20261018/outcome.json"
+        },
+        {
+          "hash": "feea71e297e1b8eae33f4ebbd3d1c74d62c5f50241b3cf95f5b37a624442c9da",
+          "path": "experiments/colab-golden-path/data/windows/window13m-rung-wa-20261018/pin-result.json"
         },
         {
           "hash": "d8caa793b4913604f930a90bc47f5f46c90e4b49d537bfb3dabaa42d55a7e835",
@@ -1282,6 +1426,18 @@
         {
           "hash": "e13501acad88fef317e701be39626a87c278d0b01a7a2b4adc83e0cb1e55a415",
           "path": "experiments/colab-golden-path/data/windows/window9-20261017/pin-result.json"
+        },
+        {
+          "hash": "ac8a383b8fc24bbbd14cc86a42ca66b16507c0842d4ad3285d0f0a8acd314e40",
+          "path": "experiments/colab-golden-path/figures.json"
+        },
+        {
+          "exports": [
+            "f",
+            "main"
+          ],
+          "hash": "269468126e4ecfce611618d5a66859c4f0a0930bee3b273f1184be0fcb8180ef",
+          "path": "experiments/colab-golden-path/figures.py"
         },
         {
           "hash": "d92b8189e6c769e56fb5d57bf2feaa723433761cccce80b11c7f49684a5670d4",
@@ -4879,7 +5035,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "1db7a23d3b10e120bad04bee93233b21554198fcaf4f5f5cc1a5e88c0ee88bab",
+          "hash": "47e4503f90b284788c44b5bb2614021a2b8aec54ca216a0cd832e31629442a96",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -7103,7 +7259,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "28b3f9a544912f32d5964c2c3e3bac4482f9307a30f5e26dc2991624ec36120c",
+          "hash": "5eea0c7cb7920b94b5499037db7e53a116a71dc337625a83d0fff484f7ad6564",
           "path": "CHANGELOG.md"
         },
         {
@@ -7411,7 +7567,7 @@
           "path": "site/src/content/docs/handbook/relevance-grading.md"
         },
         {
-          "hash": "d197667211a94e730ddc514a21f0701ed0865097f1fe31a689f5c432fadd573c",
+          "hash": "c751bdf9b01b8b4c430d0e93fc24ef9b8527588a60bfad7dc64c514ce4cfce39",
           "path": "site/src/content/docs/handbook/rented-gpu-windows.md"
         },
         {
@@ -7461,6 +7617,10 @@
         {
           "hash": "747d7879a6200edcde283c3f23496655f04f55bc5882ef3173737818e2b572cf",
           "path": "site/src/content/docs/newsletter/issue-11.md"
+        },
+        {
+          "hash": "caaf42816c56fdf1a17b8983ef9658ca4eb9eb49d5670bcfd1861fb9770e2a6e",
+          "path": "site/src/content/docs/newsletter/issue-13.md"
         },
         {
           "hash": "15e52b4b677090a1b5123840efa4fa14447c28189b60b2d851389352c81db4cc",
@@ -8636,8 +8796,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "01646c0141f685fd42f2cd297fd1c1aad1dc8910",
-    "tracked": 918
+    "commit": "d3db5396d47a4e5202a2bd5c8a91e3b75e0a1ce4",
+    "tracked": 957
   },
   "landings": [
     {
@@ -8699,6 +8859,26 @@
     {
       "readers": [
         {
+          "by": "experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/pin-result.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
+          "by": "experiments/colab-golden-path/data/windows/window13g-prebuild-gemma-20261018/pin-result.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
+          "by": "experiments/colab-golden-path/data/windows/window13j-prebuild-qwen3.8-a100-20261018/pin-result.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
+          "by": "experiments/colab-golden-path/data/windows/window13k-prebuild-granite-a100-20261018/pin-result.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "pyproject.toml",
           "call": "configuration",
           "confidence": "config"
@@ -8726,6 +8906,26 @@
         },
         {
           "by": "datapacks/natural-errors/spec.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
+          "by": "experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/pin-result.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
+          "by": "experiments/colab-golden-path/data/windows/window13g-prebuild-gemma-20261018/pin-result.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
+          "by": "experiments/colab-golden-path/data/windows/window13j-prebuild-qwen3.8-a100-20261018/pin-result.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
+          "by": "experiments/colab-golden-path/data/windows/window13k-prebuild-granite-a100-20261018/pin-result.json",
           "call": "literal",
           "confidence": "text"
         },
@@ -9084,6 +9284,38 @@
       ],
       "target": "experiments/cloud-cu134/results/2026-10-08-b200-compat.log",
       "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/colab-golden-path/figures.py",
+          "call": "glob",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/colab-golden-path/data/windows",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/colab-golden-path/figures.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/colab-golden-path/data/windows.csv",
+      "writers": []
+    },
+    {
+      "readers": [],
+      "target": "experiments/colab-golden-path/figures.json",
+      "writers": [
+        {
+          "by": "experiments/colab-golden-path/figures.py",
+          "confidence": "ast"
+        }
+      ]
     },
     {
       "readers": [
@@ -11083,15 +11315,15 @@
         {
           "in": "load_json",
           "kind": "except",
-          "line": 177
+          "line": 178
         },
         {
           "in": "main",
           "kind": "except",
-          "line": 352
+          "line": 354
         }
       ],
-      "hash": "ebe5cc63a1a81c456bc33f8e804a67bbd1d81c88173ac95e26193f2a49befc93",
+      "hash": "af00396f8bf4d7fd3f6c27fa5c0ede46554b9d21369dc2e71bf3ee2a750c6eca",
       "path": "scripts/colab/collect_windows.py"
     },
     {

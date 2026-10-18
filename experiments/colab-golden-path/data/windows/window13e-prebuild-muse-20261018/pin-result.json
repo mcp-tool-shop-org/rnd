@@ -1,0 +1,479 @@
+{
+ "started": "2026-10-18T07:03:14Z",
+ "job_token": "pb-muse-1792306989",
+ "machine": {
+  "card": "CPU",
+  "memory": "0 MiB",
+  "driver": "none",
+  "compat": false,
+  "driver_cuda": "none",
+  "colab_release_tag": "release-colab-external-images_20261014-060047_RC00",
+  "cores": 8,
+  "disk_free_gb": 205.3,
+  "runtime": "none",
+  "cpu": true
+ },
+ "role": "prebuild",
+ "only": [
+  "muse-glimmer-30b"
+ ],
+ "models": [
+  {
+   "served_as": "muse-glimmer-30b",
+   "repo": "meta-models/Muse-Glimmer-30B",
+   "revision": "a4e59da52a7bc87ae7251dd5545c0dd437c44b68",
+   "card": null,
+   "tokenizer_hf": [
+    [
+     25681
+    ],
+    [
+     19873,
+     24,
+     3817,
+     13
+    ],
+    [
+     954,
+     7202,
+     27756,
+     92637,
+     67072,
+     1278,
+     290,
+     37463,
+     10877,
+     26
+    ],
+    [
+     220,
+     10855,
+     15174
+    ],
+    [
+     12173,
+     10646,
+     15174,
+     277
+    ],
+    [
+     6743,
+     192699,
+     61628,
+     129868
+    ],
+    [
+     1255,
+     1085,
+     198,
+     1255,
+     1472
+    ],
+    [
+     1255,
+     1085,
+     13266,
+     1255,
+     1472
+    ],
+    [
+     2946,
+     31876,
+     736,
+     12073
+    ],
+    [
+     173598,
+     173598,
+     84715
+    ],
+    [
+     7235,
+     2127
+    ],
+    [
+     31,
+     26,
+     13944,
+     3933
+    ],
+    [
+     25,
+     3763
+    ],
+    [
+     29,
+     24,
+     1052,
+     24,
+     1052
+    ],
+    [
+     837,
+     34,
+     25,
+     580,
+     25,
+     1087
+    ],
+    [
+     580,
+     38,
+     1028,
+     7810
+    ],
+    [
+     16,
+     13007,
+     26,
+     412
+    ],
+    [
+     1175,
+     17
+    ],
+    [
+     15,
+     29
+    ],
+    [
+     98,
+     29,
+     26,
+     30,
+     26,
+     31
+    ],
+    [
+     30559,
+     50997,
+     21,
+     612,
+     78,
+     124560,
+     73,
+     367,
+     4527,
+     1483,
+     105
+    ],
+    [
+     126936,
+     392,
+     7224,
+     14,
+     341,
+     481,
+     30399,
+     19
+    ],
+    [
+     156239,
+     39,
+     18069,
+     38,
+     31575,
+     24,
+     4336,
+     26
+    ],
+    [
+     77,
+     4790,
+     181430,
+     104,
+     80
+    ],
+    [
+     4799,
+     76494,
+     1127
+    ],
+    [
+     2271,
+     1050,
+     15860,
+     1127,
+     101692,
+     92495,
+     41,
+     29,
+     121953,
+     41,
+     30
+    ],
+    [
+     160940,
+     49163,
+     341,
+     103666,
+     7508
+    ],
+    [
+     5537,
+     18543,
+     5981,
+     55190
+    ],
+    [
+     127161,
+     21094,
+     12337
+    ],
+    [
+     81,
+     2071,
+     26,
+     597,
+     2699,
+     26,
+     6541,
+     26
+    ],
+    [
+     1499,
+     164301,
+     49652,
+     143987
+    ],
+    [
+     94553,
+     15746,
+     52641
+    ],
+    [
+     19957,
+     73696,
+     28484
+    ],
+    [
+     112330,
+     6341,
+     58026
+    ],
+    [
+     21764,
+     16728,
+     1169,
+     169866
+    ],
+    [
+     54350,
+     54106
+    ],
+    [
+     40832,
+     3824,
+     180515
+    ],
+    [
+     189521,
+     60177
+    ],
+    [
+     2471,
+     9028,
+     98999
+    ],
+    [
+     80484,
+     72951,
+     65906,
+     235
+    ],
+    [
+     2689,
+     38,
+     831,
+     6111,
+     584,
+     386,
+     6111,
+     319,
+     568,
+     6111
+    ],
+    [
+     281,
+     6434,
+     8295,
+     77716,
+     38857
+    ],
+    [
+     1251,
+     288,
+     2595,
+     1960,
+     277,
+     677,
+     831,
+     584,
+     220,
+     29
+    ],
+    [
+     7564,
+     1991,
+     1217,
+     612,
+     29,
+     24,
+     220,
+     30,
+     24,
+     220,
+     31,
+     10343
+    ],
+    [
+     62071,
+     42,
+     26694,
+     695,
+     78,
+     42
+    ],
+    [
+     9145,
+     492,
+     9344,
+     260,
+     39
+    ],
+    [
+     4100,
+     220,
+     31,
+     8080,
+     290,
+     37778,
+     29248,
+     552,
+     220,
+     37,
+     26
+    ],
+    [
+     4198,
+     38,
+     10146,
+     14727,
+     2406,
+     88222,
+     847,
+     43
+    ],
+    [
+     4984,
+     38,
+     290,
+     26409,
+     7374
+    ],
+    []
+   ],
+   "gguf_source": "converted at llama.cpp 620d2225cc43 from meta-models/Muse-Glimmer-30B@a4e59da52a7b",
+   "gguf_file": "muse-glimmer-30b-Q8_0.gguf",
+   "converter": {
+    "pip_freeze_sha256": "2f745375b3d8b4193e08fad4077a9ac5d40826d0c64804f03d447d9397de1818",
+    "pip_freeze": [
+     "annotated-doc==0.0.5",
+     "anyio==4.15.1",
+     "certifi==2026.7.22",
+     "charset-normalizer==3.5.2",
+     "click==8.5.0",
+     "filelock==4.2.1",
+     "fsspec==2026.9.0",
+     "gguf==0.19.0",
+     "h11==0.16.0",
+     "hf-xet==1.7.0",
+     "httpcore2==2.13.1",
+     "httpx2==2.13.1",
+     "huggingface_hub==2.2.0",
+     "idna==3.20",
+     "Jinja2==3.1.6",
+     "markdown-it-py==4.2.0",
+     "MarkupSafe==3.0.4",
+     "mdurl==0.1.2",
+     "mpmath==1.3.0",
+     "networkx==3.7",
+     "numpy==2.2.6",
+     "packaging==26.3",
+     "protobuf==4.25.9",
+     "Pygments==2.21.0",
+     "PyYAML==6.0.3",
+     "regex==2026.9.29",
+     "requests==2.34.2",
+     "rich==15.0.0",
+     "safetensors==0.8.0",
+     "sentencepiece==0.2.2",
+     "setuptools==81.0.0",
+     "shellingham==1.5.4",
+     "sympy==1.14.0",
+     "tokenizers==0.23.3",
+     "torch==2.11.0+cpu",
+     "tqdm==4.70.1",
+     "transformers==5.20.1",
+     "truststore==0.10.5",
+     "typer==0.27.3",
+     "typing_extensions==4.16.0",
+     "urllib3==2.8.0"
+    ],
+    "gguf_module": "/content/pin/env-muse-glimmer-30b/lib/python3.13/site-packages/gguf/__init__.py",
+    "python": "/content/pin/env-muse-glimmer-30b/bin/python",
+    "env": {
+     "transformers": "5.20.1"
+    }
+   },
+   "gguf_sha256": "c321320a81f177362f3ddf3c199edff097ab88d10b19a13eab7f606f5ffc4e74",
+   "gguf_bytes": 29612961056,
+   "reproduced": true
+  }
+ ],
+ "uploaded": {
+  "repo": "<private-gguf-repo>",
+  "path": "muse-glimmer-30b/muse-glimmer-30b-Q8_0.gguf",
+  "sha256": "c321320a81f177362f3ddf3c199edff097ab88d10b19a13eab7f606f5ffc4e74",
+  "commit": "71fab4f819dc2fbb3ef2be4de4d27158f4ce6d44",
+  "licence": "apache-2.0",
+  "files": [
+   "LICENSE",
+   "README.md",
+   "UPSTREAM-CARD.md",
+   "muse-glimmer-30b-Q8_0.gguf"
+  ]
+ },
+ "ok": true,
+ "resources": [
+  {
+   "at": "muse-glimmer-30b: before download",
+   "time": "07:03:37",
+   "disk_free_gb": 219.8,
+   "ram_available_mb": 50832,
+   "ram_total_mb": 52214
+  },
+  {
+   "at": "muse-glimmer-30b: after conversion",
+   "time": "07:13:21",
+   "disk_free_gb": 129.1,
+   "ram_available_mb": 49972,
+   "ram_total_mb": 52214
+  },
+  {
+   "at": "muse-glimmer-30b: after dropping snapshot",
+   "time": "07:13:23",
+   "disk_free_gb": 188.7,
+   "ram_available_mb": 50007,
+   "ram_total_mb": 52214
+  },
+  {
+   "at": "muse-glimmer-30b: after unlinking muse-glimmer-30b-Q8_0.gguf",
+   "time": "07:17:22",
+   "disk_free_gb": 218.2,
+   "ram_available_mb": 49982,
+   "ram_total_mb": 52214
+  }
+ ],
+ "ended": "2026-10-18T07:17:22Z"
+}

@@ -1,0 +1,1 @@
+{"window": "13f-prebuild-qwen3.8", "card": "CPU high-mem", "cap": 1, "spent": 0.05, "basis": "rate_x_runtime", "outcome": "partial", "why": "Qwen3.8 converted on CPU gave 6beabf07, not the pinned 2ab268e0: the system python's torch is 2.11.0+cpu on the CPU image and 2.11.0+cu130 on the A100 image where the pin was made; not uploaded (byte-match or don't host); the chain stopped"}

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.2.0] - 2026-10-18
+
+- newsletter issue 13: Claude + Colab, the path we'd use again; the window data through W-A
+- Updated experiment `colab-golden-path`
+
 ## [1.1.15.1.1] - 2026-10-18
 
 - the golden path: gate floors on the gate's own metric, the converter's environment as part of the pin, mocks with real failure modes

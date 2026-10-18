@@ -1,0 +1,46 @@
+{
+ "started": "2026-10-18T07:51:10Z",
+ "job_token": "pb-qwen3.8-a100-1792309863",
+ "machine": {
+  "card": "NVIDIA A100-SXM4-40GB",
+  "memory": "40960 MiB",
+  "driver": "580.82.07",
+  "compat": false,
+  "driver_cuda": "13.0",
+  "colab_release_tag": "release-colab-external-images_20261014-060047_RC00",
+  "cores": 12,
+  "disk_free_gb": 193.3,
+  "runtime": "13.4"
+ },
+ "role": "prebuild",
+ "only": [
+  "qwen3.8-27b"
+ ],
+ "models": [],
+ "ok": false,
+ "error": "ImportError: cannot import name 'XetAuthorizationError' from 'huggingface_hub.errors' (/usr/local/lib/python3.13/dist-packages/huggingface_hub/errors.py)",
+ "resources": [
+  {
+   "at": "qwen3.8-27b: before download",
+   "time": "07:51:48",
+   "disk_free_gb": 206.9,
+   "ram_available_mb": 83645,
+   "ram_total_mb": 85477
+  },
+  {
+   "at": "qwen3.8-27b: after conversion",
+   "time": "08:03:11",
+   "disk_free_gb": 122.0,
+   "ram_available_mb": 82722,
+   "ram_total_mb": 85477
+  },
+  {
+   "at": "qwen3.8-27b: after dropping snapshot",
+   "time": "08:03:14",
+   "disk_free_gb": 177.6,
+   "ram_available_mb": 82754,
+   "ram_total_mb": 85477
+  }
+ ],
+ "ended": "2026-10-18T08:05:16Z"
+}

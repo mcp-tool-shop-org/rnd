@@ -24,6 +24,7 @@ COPY_NAME = re.compile(
     r"|result[\w.-]*\.json|outcome\.json|[\w.-]+\.md)$")
 # R&D's classification where the keyword rules can't see the cause (2026-10-18). A window's own outcome.json, written
 # at close-out by the Publisher, wins over both.
+OUTCOMES = ("results", "partial", "lost-vm", "cap-stop", "tooling-fault", "not-assigned", "test")
 OUTCOME_OVERRIDES = {
     "10c": ("tooling-fault", "conversions reproduced, then the first wave failed: rnd's package lacked the proxy module"),
     "11a": ("tooling-fault", "the cap watcher counted both 11a's and 11b's sessions and stopped it early"),
@@ -266,15 +267,16 @@ def main():
     highmem_rate = round(float(m_open.group(1)) - float(m_after.group(1)), 2) if m_open and m_after else None
 
     folders = sorted(d for d in os.listdir(src) if os.path.isdir(os.path.join(src, d))
-                     and (re.match(r"^window\w*-(?:[a-z0-9-]+-)?\d{8}$", d) or d == "token-scope-check"
+                     and (re.match(r"^window\w*-(?:[a-z0-9.-]+-)?\d{8}$", d) or d == "token-scope-check"
                           or d.startswith("cpu-measure")))
     cols = ["window", "date", "card", "role", "purpose", "cap_units", "spent_units", "spent_basis", "exec_wall_s",
             "ok", "outcome_class", "outcome_source", "outcome_why", "rate_units_per_hr", "ledger_text"]
     rows = []
+    bad_outcomes = []
     reasons = []
     for d in folders:
         dp = os.path.join(src, d)
-        m = re.match(r"^window(\w+?)(?:-[a-z0-9-]+?)?-(\d{8})$", d)
+        m = re.match(r"^window(\w+?)(?:-[a-z0-9.-]+?)?-(\d{8})$", d)
         if m:
             key, date8 = m.group(1), m.group(2)
         elif d.startswith("cpu-measure"):
@@ -384,6 +386,9 @@ def main():
         oc = load_json(os.path.join(dp, "outcome.json")) or {}
         if oc.get("outcome"):
             cls, owhy, source = oc["outcome"], oc.get("why", ""), "outcome.json"
+            if cls not in OUTCOMES:  # a label outside the vocabulary is kept, flagged, and fails the run at the end
+                print(f"OFF-VOCABULARY outcome {cls!r} in {d}/outcome.json", file=sys.stderr)
+                bad_outcomes.append(d)
             if spent is None and isinstance(oc.get("spent"), (int, float)):
                 spent, basis = oc["spent"], oc.get("basis", "")
             if not cap and oc.get("cap") is not None:
@@ -443,6 +448,9 @@ def main():
     print("BLANK SPENT:", ", ".join(blanks))
     print("\nwindows rows=%d copied=%d hashed_only=%d (files=%d) bytes_hashed=%d"
           % (len(rows), ncopied, nhash, len(files), total))
+    if bad_outcomes:
+        print("REFUSED: outcome.json labels outside the vocabulary in " + ", ".join(bad_outcomes), file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

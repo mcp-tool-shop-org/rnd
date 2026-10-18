@@ -73,74 +73,57 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 94,
-      "changed": 16,
+      "added": 39,
+      "changed": 8,
       "moved": 0,
-      "parts": 5,
+      "parts": 4,
       "removed": 0
     },
     "items": [
       {
-        "kind": "door",
-        "sentence": "CI no longer checks rnd/.",
+        "kind": "landing",
+        "sentence": "experiments/colab-golden-path/figures.json is now written by experiments/colab-golden-path/figures.py.",
         "subjects": [
-          ".github/workflows/ci.yml",
-          "rnd/"
-        ]
-      },
-      {
-        "kind": "door",
-        "sentence": "Release no longer checks rnd/.",
-        "subjects": [
-          ".github/workflows/release.yml",
-          "rnd/"
+          "experiments/colab-golden-path/figures.json",
+          "experiments/colab-golden-path/figures.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "windows is now written by scripts/colab/collect_windows.py.",
+        "sentence": "LICENSE is now also read by experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/pin-result.json, experiments/colab-golden-path/data/windows/window13g-prebuild-gemma-20261018/pin-result.json, experiments/colab-golden-path/data/windows/window13j-prebuild-qwen3.8-a100-20261018/pin-result.json and experiments/colab-golden-path/data/windows/window13k-prebuild-granite-a100-20261018/pin-result.json.",
         "subjects": [
-          "windows",
-          "scripts/colab/collect_windows.py"
+          "LICENSE",
+          "experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/pin-result.json",
+          "experiments/colab-golden-path/data/windows/window13g-prebuild-gemma-20261018/pin-result.json",
+          "experiments/colab-golden-path/data/windows/window13j-prebuild-qwen3.8-a100-20261018/pin-result.json",
+          "experiments/colab-golden-path/data/windows/window13k-prebuild-granite-a100-20261018/pin-result.json"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "windows/_top is now written by scripts/colab/collect_windows.py.",
+        "sentence": "README.md is now also read by experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/pin-result.json, experiments/colab-golden-path/data/windows/window13g-prebuild-gemma-20261018/pin-result.json, experiments/colab-golden-path/data/windows/window13j-prebuild-qwen3.8-a100-20261018/pin-result.json and experiments/colab-golden-path/data/windows/window13k-prebuild-granite-a100-20261018/pin-result.json.",
         "subjects": [
-          "windows/_top",
-          "scripts/colab/collect_windows.py"
+          "README.md",
+          "experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/pin-result.json",
+          "experiments/colab-golden-path/data/windows/window13g-prebuild-gemma-20261018/pin-result.json",
+          "experiments/colab-golden-path/data/windows/window13j-prebuild-qwen3.8-a100-20261018/pin-result.json",
+          "experiments/colab-golden-path/data/windows/window13k-prebuild-granite-a100-20261018/pin-result.json"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "experiments/stage1-regeneration/pilot/ is now read by experiments/charts/make_charts.py.",
-        "subjects": [
-          "experiments/stage1-regeneration/pilot/",
-          "experiments/charts/make_charts.py"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "And 3 more new writers and readers of places.",
+        "sentence": "And 2 more new writers and readers of places.",
         "subjects": []
       },
       {
-        "kind": "unassigned",
-        "sentence": "scripts/colab/collect_windows.py is new and belongs to no part, so atlas check fails on it against the previous map.",
-        "subjects": [
-          "scripts/colab/collect_windows.py"
-        ]
-      },
-      {
         "kind": "counts",
-        "sentence": "94 files added and 16 changed content, across 5 parts.",
+        "sentence": "39 files added and 8 changed content, across 4 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "fd128b82b339971a7c4dba10a17e191ec81f79d2",
-      "generatedAt": "2026-10-17T08:55:09.388Z"
+      "commit": "01646c0141f685fd42f2cd297fd1c1aad1dc8910",
+      "generatedAt": "2026-10-18T06:55:00.158Z"
     },
     "unchanged": false
   },
@@ -181,9 +164,9 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 4 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "01646c0141f685fd42f2cd297fd1c1aad1dc8910",
+  "commit": "d3db5396d47a4e5202a2bd5c8a91e3b75e0a1ce4",
   "defaultBranch": "main",
-  "derived": "14 parts, mostly Python (124 files), shell (21), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "14 parts, mostly Python (125 files), shell (28), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -392,6 +375,12 @@
       ]
     },
     {
+      "place": "experiments/colab-golden-path/figures.json",
+      "writers": [
+        "experiments/colab-golden-path/figures.py"
+      ]
+    },
+    {
       "place": "experiments/e4b/results/",
       "writers": [
         "experiments/e4b/extract.py"
@@ -499,10 +488,10 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-18T06:55:00.158Z",
+  "generatedAt": "2026-10-18T13:46:52.237Z",
   "limits": [
     "9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.",
-    "20 writes and 33 reads use paths built at run time and are not named here.",
+    "20 writes and 34 reads use paths built at run time and are not named here.",
     "7 writes go to places this repository does not track, so they are not listed as generated.",
     "29 writes and 85 reads go to a path their caller passes, not to this repository.",
     "5 reads go to the directory the command is run in (entries, instruments and licences), not to this repository.",
@@ -578,6 +567,12 @@
       ]
     },
     {
+      "place": "experiments/colab-golden-path/figures.json",
+      "writers": [
+        "experiments/colab-golden-path/figures.py"
+      ]
+    },
+    {
       "place": "experiments/natural-errors/data/baselines_p1.json",
       "writers": [
         "experiments/natural-errors/baselines_p1.py"
@@ -612,12 +607,6 @@
       "writers": [
         "experiments/verifier-gold/crossfamily/make_sample.py"
       ]
-    },
-    {
-      "place": "site/public/charts/",
-      "writers": [
-        "experiments/charts/make_charts.py"
-      ]
     }
   ],
   "unreadCode": [
@@ -625,11 +614,13 @@
   ],
   "unreadCodeUses": "the repository root holds only shell files, which this map does not read, so what uses it cannot be seen.",
   "unreadFiles": 0,
-  "unreadNote": [],
+  "unreadNote": [
+    "And 1 more place."
+  ],
   "untested": [],
   "untestedNote": [
     "the repository root holds only shell files, which this map does not read, so whether a test touches it cannot be seen.",
     "5 test files run in no workflow: experiments/cuda-graphs/test_graphed_heads.py, experiments/data-designer/tests/test_lockdown.py, experiments/interlock-relay/stage1/test_analyze.py and 2 more."
   ],
-  "written": 17
+  "written": 18
 }

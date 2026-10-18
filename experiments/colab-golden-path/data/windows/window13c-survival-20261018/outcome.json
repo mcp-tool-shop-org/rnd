@@ -1,0 +1,1 @@
+{"window": "13c-survival", "card": "CPU", "cap": 1, "spent": 0.36, "basis": "rate_x_runtime", "outcome": "test", "why": "a busy command-line session lasted 4.5 h on the Pro plan: mock_job wrote all 270 lines at 60-61 s gaps (16200 s), exec exited 0, no silence, no reclaim"}

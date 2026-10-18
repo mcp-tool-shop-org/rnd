@@ -1,0 +1,91 @@
+{
+ "windows": 49,
+ "by_class": {
+  "cap-stop": {
+   "windows": 2,
+   "units": 20.75
+  },
+  "lost-vm": {
+   "windows": 4,
+   "units": 19.56
+  },
+  "not-assigned": {
+   "windows": 3,
+   "units": 0.0
+  },
+  "partial": {
+   "windows": 9,
+   "units": 49.1
+  },
+  "results": {
+   "windows": 11,
+   "units": 65.18
+  },
+  "test": {
+   "windows": 13,
+   "units": 0.46
+  },
+  "tooling-fault": {
+   "windows": 7,
+   "units": 17.67
+  }
+ },
+ "units_all_windows": 172.72,
+ "2026-10-16": {
+  "windows": 1,
+  "units": 0,
+  "by_class": {
+   "partial": 0
+  }
+ },
+ "2026-10-17": {
+  "windows": 33,
+  "units": 141.08,
+  "by_class": {
+   "cap-stop": 20.75,
+   "lost-vm": 19.56,
+   "not-assigned": 0,
+   "partial": 41.1,
+   "results": 43.31,
+   "test": 0.03,
+   "tooling-fault": 16.33
+  }
+ },
+ "2026-10-18": {
+  "windows": 15,
+  "units": 31.64,
+  "by_class": {
+   "partial": 8.0,
+   "results": 21.87,
+   "test": 0.43,
+   "tooling-fault": 1.34
+  }
+ },
+ "paid_windows": 32,
+ "paid_units": 172.26,
+ "results_units": 65.18,
+ "results_share": 0.378,
+ "lost_units": 57.98,
+ "test_windows": 13,
+ "test_units": 0.46,
+ "gate": {
+  "tries": 12,
+  "rejected": 2,
+  "rejections": [
+   {
+    "window": "window13g-prebuild-gemma-20261018",
+    "try": 1,
+    "why": [
+     "Hugging Face 45.4 MB/s < 60.0"
+    ]
+   },
+   {
+    "window": "window13j-prebuild-qwen3.8-a100-20261018",
+    "try": 1,
+    "why": [
+     "the gate exec died or timed out before it printed"
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,1 @@
+{"window": "13k-prebuild-granite-a100", "card": "A100", "cap": 3, "spent": 2.01, "basis": "rate_x_runtime", "outcome": "results", "why": "Granite 4.2 on A100, role-set 430285a: gate passed try 1; the Q8_0 reproduced its pin 1b5c4783 and was uploaded (commit d847f5b8, hub 0.36.2 in the child), with the vendored Apache text (sha cfc7749b), upstream card and README"}

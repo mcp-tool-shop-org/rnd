@@ -1,0 +1,1003 @@
+{
+ "started": "2026-10-18T10:20:49Z",
+ "job_token": "pinw13l-1792318771",
+ "machine": {
+  "card": "NVIDIA A100-SXM4-40GB",
+  "memory": "40960 MiB",
+  "driver": "580.82.07",
+  "compat": false,
+  "driver_cuda": "13.0",
+  "colab_release_tag": "release-colab-external-images_20261014-060047_RC00",
+  "cores": 12,
+  "disk_free_gb": 193.2,
+  "runtime": "13.4"
+ },
+ "role": "pilot",
+ "llama_server": {
+  "commit": "620d2225cc436ab0b001e3200e590e3b286ef9ab",
+  "sha256": "b4659b3fc74037deb96b2148c455753121fa21dde174d7124547e2bf9ffd37c3",
+  "path": "/content/pin/llama-server",
+  "src": "/content/pin/llama.cpp",
+  "cuda_wheels": [
+   "nvidia-cublas==13.8.0.4",
+   "nvidia-cublas-cu12==12.9.2.10",
+   "nvidia-cuda-cccl==13.0.85",
+   "nvidia-cuda-crt==13.4.92",
+   "nvidia-cuda-cupti==13.0.85",
+   "nvidia-cuda-cupti-cu12==12.9.79",
+   "nvidia-cuda-nvcc==13.0.88",
+   "nvidia-cuda-nvcc-cu12==12.9.86",
+   "nvidia-cuda-nvrtc==13.0.88",
+   "nvidia-cuda-nvrtc-cu12==12.9.86",
+   "nvidia-cuda-runtime==13.4.92",
+   "nvidia-cuda-runtime-cu12==12.9.79",
+   "nvidia-cudnn-cu12==9.27.0.42",
+   "nvidia-cudnn-cu13==9.19.0.56",
+   "nvidia-cufft==12.0.0.61",
+   "nvidia-cufft-cu12==11.4.1.4",
+   "nvidia-cufile==1.15.1.6",
+   "nvidia-curand==10.4.0.35",
+   "nvidia-curand-cu12==10.3.10.19",
+   "nvidia-cusolver==12.0.4.66",
+   "nvidia-cusolver-cu12==11.7.5.82",
+   "nvidia-cusparse==12.6.3.3",
+   "nvidia-cusparse-cu12==12.5.10.65",
+   "nvidia-cusparselt-cu13==0.8.0",
+   "nvidia-libnvcomp-cu13==5.2.0.13",
+   "nvidia-ml-py==13.615.71",
+   "nvidia-nccl-cu12==2.32.3",
+   "nvidia-nccl-cu13==2.28.9",
+   "nvidia-nvimgcodec-cu13==0.8.0.22",
+   "nvidia-nvjitlink==13.0.88",
+   "nvidia-nvjitlink-cu12==12.9.86",
+   "nvidia-nvshmem-cu13==3.4.5",
+   "nvidia-nvtx==13.0.85",
+   "nvidia-nvvm==13.0.88"
+  ],
+  "cuda_toolkit": "13.4.2 (redistrib 2026-09-16)",
+  "libs": [
+   {
+    "name": "libcudart.so.13",
+    "source": "/usr/local/lib/python3.13/dist-packages/nvidia/cu13/lib/libcudart.so.13",
+    "sha256": "7fb00519a24512bf677b59e87921e5c05aac8246ceb6a57435c0d9dfeef364f6",
+    "bytes": 798496
+   },
+   {
+    "name": "libcublas.so.13",
+    "source": "/usr/local/lib/python3.13/dist-packages/nvidia/cu13/lib/libcublas.so.13",
+    "sha256": "59dd485de6657bc8e1ff5f0f73de74c15f5a3e4648747e2288e342da1f60866c",
+    "bytes": 57594520
+   },
+   {
+    "name": "libcublasLt.so.13",
+    "source": "/usr/local/lib/python3.13/dist-packages/nvidia/cu13/lib/libcublasLt.so.13",
+    "sha256": "a1821093b6b29ff871a07532071f3eaf6996d549d54f53235763abc12b8ad19f",
+    "bytes": 545528240
+   }
+  ]
+ },
+ "role_set": {
+  "commit": "430285a379aa8d6f452e730830d6e765b3c389e0",
+  "src": "/content/role-set",
+  "role_set": "/content/rs-venv/bin/role-set",
+  "python": "3.12.3"
+ },
+ "rnd": {
+  "commit": "018b6cf677aab0e41363d826b589be342d38d8b9",
+  "src": "/content/rnd",
+  "proxy_import": "ok"
+ },
+ "disk_free_gb_before": 204.3,
+ "pack_verify": "{\"role\": \"verifier\", \"commit\": \"b141cf687619f2ed28489729031c7b845afb18ea\", \"pack_sha256\": \"de2c7ed0bdfa945aefec9745b5ac0a3514a15ca98f63211929b09561fe38dcae\"}",
+ "resume_unpacked": "/content/resume",
+ "prior_unpacked": "/content/prior",
+ "screen": {
+  "pilot": [
+   "T02-A-01",
+   "T02-C-01",
+   "T02-D-01",
+   "T02-E-01",
+   "T02-B-01",
+   "T02-A-02",
+   "T02-C-08",
+   "T02-D-05"
+  ],
+  "twins": [
+   "T04-C-AP-01",
+   "T04-D-AP-02"
+  ],
+  "waves": 4
+ },
+ "plans": {
+  "pilot_sha256": "a443e56642fa1c28c2c7f1aaaee903057b55f2759c1850f6b0d4d3efb476a232",
+  "twins_sha256": "efb8d739036d7c901fcaee25aba595f9b3a45a00f4199ee0808585a08a7b0451",
+  "exclusion_state_sha256": "ff0ca53795b81d44de750447cfb4c5d789033eca1deff19805c3add99bf71f5a"
+ },
+ "critic_for": {
+  "qwen3.8-27b": "muse-glimmer-30b",
+  "gemma-4-31b-it": "muse-glimmer-30b",
+  "granite-4.2-30b": "muse-glimmer-30b",
+  "nemotron-3.5-bolt-74b-a9b": "muse-glimmer-30b"
+ },
+ "hosted_disk": {
+  "need_gb": 122.4,
+  "free_gb": 204.3,
+  "margin_gb": 20
+ },
+ "hosted": {
+  "repo": "<private-gguf-repo>",
+  "revision": "d847f5b87a6b0f8cb9ae3ff5c6330bafb0364670",
+  "models": {
+   "qwen3.8-27b": "2ab268e0bd3f8e5daf1280e2243ac19abd5e3bb34e8444f5cfff5147fab977d4",
+   "gemma-4-31b-it": "e357a45071c2cbbc44b97506dfadc34bac0d5f6592f1d500edfaa9647f01e7bf",
+   "granite-4.2-30b": "1b5c47835f6f8b8732550541dc432d0a351e3f706961ff3c750d3ee1987b9b4c",
+   "muse-glimmer-30b": "c321320a81f177362f3ddf3c199edff097ab88d10b19a13eab7f606f5ffc4e74"
+  }
+ },
+ "arms": {
+  "qwen3.8-27b": {
+   "pilot": {
+    "waves": [],
+    "last": "/content/pin/pilot/pilot/qwen3.8-27b/w1-resumed"
+   },
+   "twins": {
+    "waves": [
+     {
+      "wave": "write",
+      "out": "/content/pin/pilot/twins/qwen3.8-27b/w0",
+      "exit": 0,
+      "seconds": 1841,
+      "stderr": "",
+      "generations": {
+       "path": "/content/pin/pilot/twins/qwen3.8-27b/generations-w0-qwen3.8-27b.jsonl",
+       "calls": 8,
+       "refused": 0,
+       "truncated": 1,
+       "thinking_tokens": 54895,
+       "output_tokens": 57238,
+       "wall_s": 1831.2,
+       "sha256": "a35a19b481d8e57cbd87b4a02bcbe3dea9e9b2b08ef705a7ee23184cf0eb6fee"
+      },
+      "result": {
+       "exclusion_state": null,
+       "out_dir": "w0",
+       "wave": "write",
+       "drafts": "wave-drafts.jsonl",
+       "drafts_sha256": "431d7776bcd0088fd5e077563f9dbaec79a81ca598ca254afd0e16f0ba1bafd6",
+       "states": {
+        "awaiting_critique": 2,
+        "needs_rewrite": 0,
+        "accepted": 0,
+        "dropped": 0,
+        "skipped": 0
+       },
+       "accepted": 0,
+       "dropped": 0,
+       "attempted": 2,
+       "halted": null,
+       "lesson_halts": {},
+       "skipped": {},
+       "batch_check": null,
+       "rehearsal": false,
+       "mock": false,
+       "slots": 2,
+       "outcomes": 2,
+       "calls": {
+        "journal": "calls-w0-qwen3.8-27b.jsonl",
+        "reused": 0,
+        "called": 8,
+        "unused_from_reuse": 0
+       }
+      }
+     },
+     {
+      "wave": "critique",
+      "out": "/content/pin/pilot/twins/qwen3.8-27b/w1",
+      "exit": 0,
+      "seconds": 929,
+      "stderr": "",
+      "generations": {
+       "path": "/content/pin/pilot/twins/qwen3.8-27b/generations-w1-muse-glimmer-30b.jsonl",
+       "calls": 9,
+       "refused": 0,
+       "truncated": 0,
+       "thinking_tokens": 30424,
+       "output_tokens": 30638,
+       "wall_s": 923.4,
+       "sha256": "ef6f315133b425b0c390d8d1a9e5f2e958876adcdba286256de55429577d91a6"
+      },
+      "result": {
+       "exclusion_state": null,
+       "out_dir": "w1",
+       "wave": "critique",
+       "drafts": "wave-drafts.jsonl",
+       "drafts_sha256": "4b9da24484f847c39bfd2d308dfd10e7de70d2afe89f69448735c053c75bf7ff",
+       "states": {
+        "awaiting_critique": 0,
+        "needs_rewrite": 0,
+        "accepted": 2,
+        "dropped": 0,
+        "skipped": 0
+       },
+       "accepted": 2,
+       "dropped": 0,
+       "attempted": 0,
+       "halted": null,
+       "lesson_halts": {},
+       "skipped": {},
+       "batch_check": "clean",
+       "rehearsal": false,
+       "mock": false,
+       "slots": 2,
+       "outcomes": 2,
+       "calls": {
+        "journal": "calls-w1-muse-glimmer-30b.jsonl",
+        "reused": 0,
+        "called": 9,
+        "unused_from_reuse": 0
+       }
+      }
+     }
+    ],
+    "last": "/content/pin/pilot/twins/qwen3.8-27b/w1",
+    "readout_exit": 1,
+    "readout_tail": ""
+   }
+  },
+  "gemma-4-31b-it": {
+   "pilot": {
+    "waves": [],
+    "last": "/content/pin/pilot/pilot/gemma-4-31b-it/w1-resumed"
+   },
+   "twins": {
+    "waves": [
+     {
+      "wave": "write",
+      "out": "/content/pin/pilot/twins/gemma-4-31b-it/w0",
+      "exit": 0,
+      "seconds": 467,
+      "stderr": "",
+      "generations": {
+       "path": "/content/pin/pilot/twins/gemma-4-31b-it/generations-w0-gemma-4-31b-it.jsonl",
+       "calls": 7,
+       "refused": 0,
+       "truncated": 0,
+       "thinking_tokens": 10227,
+       "output_tokens": 11911,
+       "wall_s": 464.9,
+       "sha256": "05296f503ff816082264ce90f432bb8ed32a59106e12b392af446a89d61b9344"
+      },
+      "result": {
+       "exclusion_state": null,
+       "out_dir": "w0",
+       "wave": "write",
+       "drafts": "wave-drafts.jsonl",
+       "drafts_sha256": "be30e904a1f8bd6e726fc74332d3f9b8ca7909610fddfeb3d09d3ff47a7a04d0",
+       "states": {
+        "awaiting_critique": 2,
+        "needs_rewrite": 0,
+        "accepted": 0,
+        "dropped": 0,
+        "skipped": 0
+       },
+       "accepted": 0,
+       "dropped": 0,
+       "attempted": 2,
+       "halted": null,
+       "lesson_halts": {},
+       "skipped": {},
+       "batch_check": null,
+       "rehearsal": false,
+       "mock": false,
+       "slots": 2,
+       "outcomes": 2,
+       "calls": {
+        "journal": "calls-w0-gemma-4-31b-it.jsonl",
+        "reused": 0,
+        "called": 7,
+        "unused_from_reuse": 0
+       }
+      }
+     },
+     {
+      "wave": "critique",
+      "out": "/content/pin/pilot/twins/gemma-4-31b-it/w1",
+      "exit": 0,
+      "seconds": 560,
+      "stderr": "",
+      "generations": {
+       "path": "/content/pin/pilot/twins/gemma-4-31b-it/generations-w1-muse-glimmer-30b.jsonl",
+       "calls": 9,
+       "refused": 0,
+       "truncated": 0,
+       "thinking_tokens": 18214,
+       "output_tokens": 18434,
+       "wall_s": 556.4,
+       "sha256": "fbe4e71fa3677459c3999dda4d631a72e9c89fe4533fbff5a8e5e5e0df9c1939"
+      },
+      "result": {
+       "exclusion_state": null,
+       "out_dir": "w1",
+       "wave": "critique",
+       "drafts": "wave-drafts.jsonl",
+       "drafts_sha256": "a4c09fb84b2a2fdac261de6362f4af4e244307a25aef8648e00fe460b2f20777",
+       "states": {
+        "awaiting_critique": 0,
+        "needs_rewrite": 0,
+        "accepted": 2,
+        "dropped": 0,
+        "skipped": 0
+       },
+       "accepted": 2,
+       "dropped": 0,
+       "attempted": 0,
+       "halted": null,
+       "lesson_halts": {},
+       "skipped": {},
+       "batch_check": "clean",
+       "rehearsal": false,
+       "mock": false,
+       "slots": 2,
+       "outcomes": 2,
+       "calls": {
+        "journal": "calls-w1-muse-glimmer-30b.jsonl",
+        "reused": 0,
+        "called": 9,
+        "unused_from_reuse": 0
+       }
+      }
+     }
+    ],
+    "last": "/content/pin/pilot/twins/gemma-4-31b-it/w1",
+    "readout_exit": 1,
+    "readout_tail": ""
+   }
+  },
+  "granite-4.2-30b": {
+   "pilot": {
+    "waves": [
+     {
+      "wave": "rewrite",
+      "out": "/content/pin/pilot/pilot/granite-4.2-30b/w2",
+      "exit": 0,
+      "seconds": 62,
+      "stderr": "",
+      "generations": {
+       "path": "/content/pin/pilot/pilot/granite-4.2-30b/generations-w2-granite-4.2-30b.jsonl",
+       "calls": 1,
+       "refused": 0,
+       "truncated": 0,
+       "thinking_tokens": 1384,
+       "output_tokens": 1713,
+       "wall_s": 61.7,
+       "sha256": "ad4b62ede09bbe9cff2688799d9187167b91375d6a88e0692821567a1c6c8b04"
+      },
+      "result": {
+       "exclusion_state": null,
+       "out_dir": "w2",
+       "wave": "rewrite",
+       "drafts": "wave-drafts.jsonl",
+       "drafts_sha256": "e057c08a7062b8c1a09713ba121bb37f9bbd5583486f26644006dcdae194055e",
+       "states": {
+        "awaiting_critique": 1,
+        "needs_rewrite": 0,
+        "accepted": 7,
+        "dropped": 0,
+        "skipped": 0
+       },
+       "accepted": 7,
+       "dropped": 0,
+       "attempted": 0,
+       "halted": null,
+       "lesson_halts": {},
+       "skipped": {},
+       "batch_check": null,
+       "rehearsal": false,
+       "mock": false,
+       "slots": 8,
+       "outcomes": 8,
+       "calls": {
+        "journal": "calls-w2-granite-4.2-30b.jsonl",
+        "reused": 0,
+        "called": 1,
+        "unused_from_reuse": 0
+       }
+      }
+     },
+     {
+      "wave": "critique",
+      "out": "/content/pin/pilot/pilot/granite-4.2-30b/w3",
+      "exit": 0,
+      "seconds": 347,
+      "stderr": "",
+      "generations": {
+       "path": "/content/pin/pilot/pilot/granite-4.2-30b/generations-w3-muse-glimmer-30b.jsonl",
+       "calls": 5,
+       "refused": 0,
+       "truncated": 0,
+       "thinking_tokens": 11276,
+       "output_tokens": 11387,
+       "wall_s": 344.8,
+       "sha256": "a5d021097c10300e9b99a5a851f0be1793c78441c9a125403d1e8b177cbefb5d"
+      },
+      "result": {
+       "exclusion_state": null,
+       "out_dir": "w3",
+       "wave": "critique",
+       "drafts": "wave-drafts.jsonl",
+       "drafts_sha256": "276a15980c011bedccb0b83880e5757b74366229a03859ba7ddc688411607eb4",
+       "states": {
+        "awaiting_critique": 0,
+        "needs_rewrite": 0,
+        "accepted": 8,
+        "dropped": 0,
+        "skipped": 0
+       },
+       "accepted": 8,
+       "dropped": 0,
+       "attempted": 0,
+       "halted": null,
+       "lesson_halts": {},
+       "skipped": {},
+       "batch_check": "REFUSED: T02: 0 of 4 verdict-bearing items (0%) are keyed cannot_tell; at least 25% are needed",
+       "rehearsal": false,
+       "mock": false,
+       "slots": 8,
+       "outcomes": 8,
+       "calls": {
+        "journal": "calls-w3-muse-glimmer-30b.jsonl",
+        "reused": 0,
+        "called": 5,
+        "unused_from_reuse": 0
+       }
+      }
+     }
+    ],
+    "last": "/content/pin/pilot/pilot/granite-4.2-30b/w3",
+    "readout_exit": 1,
+    "readout_tail": ""
+   },
+   "twins": {
+    "waves": [
+     {
+      "wave": "write",
+      "out": "/content/pin/pilot/twins/granite-4.2-30b/w0",
+      "exit": 0,
+      "seconds": 2256,
+      "stderr": "",
+      "generations": {
+       "path": "/content/pin/pilot/twins/granite-4.2-30b/generations-w0-granite-4.2-30b.jsonl",
+       "calls": 8,
+       "refused": 0,
+       "truncated": 1,
+       "thinking_tokens": 65904,
+       "output_tokens": 67502,
+       "wall_s": 2245.1,
+       "sha256": "2b2c9c08783fde468e2a90efe63f0627194533fd864b67df77a2cc437bd12dee"
+      },
+      "result": {
+       "exclusion_state": null,
+       "out_dir": "w0",
+       "wave": "write",
+       "drafts": "wave-drafts.jsonl",
+       "drafts_sha256": "6b0b7ab8ca537e8d61f62a88c4934c37c3226d75b74a7f756c724169db18d7ed",
+       "states": {
+        "awaiting_critique": 1,
+        "needs_rewrite": 0,
+        "accepted": 0,
+        "dropped": 1,
+        "skipped": 0
+       },
+       "accepted": 0,
+       "dropped": 1,
+       "attempted": 2,
+       "halted": null,
+       "lesson_halts": {},
+       "skipped": {},
+       "batch_check": null,
+       "rehearsal": false,
+       "mock": false,
+       "slots": 2,
+       "outcomes": 2,
+       "calls": {
+        "journal": "calls-w0-granite-4.2-30b.jsonl",
+        "reused": 0,
+        "called": 8,
+        "unused_from_reuse": 0
+       }
+      }
+     },
+     {
+      "wave": "critique",
+      "out": "/content/pin/pilot/twins/granite-4.2-30b/w1",
+      "exit": 0,
+      "seconds": 439,
+      "stderr": "",
+      "generations": {
+       "path": "/content/pin/pilot/twins/granite-4.2-30b/generations-w1-muse-glimmer-30b.jsonl",
+       "calls": 5,
+       "refused": 0,
+       "truncated": 0,
+       "thinking_tokens": 14368,
+       "output_tokens": 14465,
+       "wall_s": 436.4,
+       "sha256": "83ac321e6d9e3883de8149a4c77666a9406f40f9e494cbd6d0e3fb134ce2910e"
+      },
+      "result": {
+       "exclusion_state": null,
+       "out_dir": "w1",
+       "wave": "critique",
+       "drafts": "wave-drafts.jsonl",
+       "drafts_sha256": "b6bf50286fd3064f61989bc1819c2e4de77dd2f8de7de040a130a92b3bd88c78",
+       "states": {
+        "awaiting_critique": 0,
+        "needs_rewrite": 0,
+        "accepted": 1,
+        "dropped": 1,
+        "skipped": 0
+       },
+       "accepted": 1,
+       "dropped": 1,
+       "attempted": 0,
+       "halted": null,
+       "lesson_halts": {},
+       "skipped": {},
+       "batch_check": "clean",
+       "rehearsal": false,
+       "mock": false,
+       "slots": 2,
+       "outcomes": 2,
+       "calls": {
+        "journal": "calls-w1-muse-glimmer-30b.jsonl",
+        "reused": 0,
+        "called": 5,
+        "unused_from_reuse": 0
+       }
+      }
+     }
+    ],
+    "last": "/content/pin/pilot/twins/granite-4.2-30b/w1",
+    "readout_exit": 1,
+    "readout_tail": ""
+   }
+  },
+  "nemotron-3.5-bolt-74b-a9b": {
+   "pilot": {
+    "waves": [],
+    "last": "/content/pin/pilot/pilot/nemotron-3.5-bolt-74b-a9b/w1-resumed"
+   },
+   "twins": {
+    "waves": [
+     {
+      "wave": "write",
+      "out": "/content/pin/pilot/twins/nemotron-3.5-bolt-74b-a9b/w0",
+      "exit": 0,
+      "seconds": 891,
+      "stderr": "",
+      "generations": {
+       "path": "/content/pin/pilot/twins/nemotron-3.5-bolt-74b-a9b/generations-w0-nemotron-3.5-bolt-74b-a9b.jsonl",
+       "calls": 8,
+       "refused": 0,
+       "truncated": 0,
+       "thinking_tokens": 52155,
+       "output_tokens": 54530,
+       "wall_s": 880.8,
+       "sha256": "bc06e689d0fb54de108a11c5c91711b619d84e70b971c2c0db91829f6ae860fb"
+      },
+      "result": {
+       "exclusion_state": null,
+       "out_dir": "w0",
+       "wave": "write",
+       "drafts": "wave-drafts.jsonl",
+       "drafts_sha256": "1784a325d95fc40749cfea5284e797a97391512672f773f3fee9d48c6ba090a2",
+       "states": {
+        "awaiting_critique": 2,
+        "needs_rewrite": 0,
+        "accepted": 0,
+        "dropped": 0,
+        "skipped": 0
+       },
+       "accepted": 0,
+       "dropped": 0,
+       "attempted": 2,
+       "halted": null,
+       "lesson_halts": {},
+       "skipped": {},
+       "batch_check": null,
+       "rehearsal": false,
+       "mock": false,
+       "slots": 2,
+       "outcomes": 2,
+       "calls": {
+        "journal": "calls-w0-nemotron-3.5-bolt-74b-a9b.jsonl",
+        "reused": 0,
+        "called": 8,
+        "unused_from_reuse": 0
+       }
+      }
+     },
+     {
+      "wave": "critique",
+      "out": "/content/pin/pilot/twins/nemotron-3.5-bolt-74b-a9b/w1",
+      "exit": 0,
+      "seconds": 922,
+      "stderr": "",
+      "generations": {
+       "path": "/content/pin/pilot/twins/nemotron-3.5-bolt-74b-a9b/generations-w1-muse-glimmer-30b.jsonl",
+       "calls": 9,
+       "refused": 0,
+       "truncated": 0,
+       "thinking_tokens": 30147,
+       "output_tokens": 30328,
+       "wall_s": 916.1,
+       "sha256": "a539f9e4b89246a2344e2ec1fef856fa5aa877ba65d653da313b15ff88dc5d80"
+      },
+      "result": {
+       "exclusion_state": null,
+       "out_dir": "w1",
+       "wave": "critique",
+       "drafts": "wave-drafts.jsonl",
+       "drafts_sha256": "45fc9d0067a235624f907b914650c7786913d928df680b6eb7df46a725b074c6",
+       "states": {
+        "awaiting_critique": 0,
+        "needs_rewrite": 0,
+        "accepted": 1,
+        "dropped": 1,
+        "skipped": 0
+       },
+       "accepted": 1,
+       "dropped": 1,
+       "attempted": 0,
+       "halted": null,
+       "lesson_halts": {},
+       "skipped": {},
+       "batch_check": "clean",
+       "rehearsal": false,
+       "mock": false,
+       "slots": 2,
+       "outcomes": 2,
+       "calls": {
+        "journal": "calls-w1-muse-glimmer-30b.jsonl",
+        "reused": 0,
+        "called": 9,
+        "unused_from_reuse": 0
+       }
+      }
+     }
+    ],
+    "last": "/content/pin/pilot/twins/nemotron-3.5-bolt-74b-a9b/w1",
+    "readout_exit": 1,
+    "readout_tail": ""
+   }
+  }
+ },
+ "models": [
+  {
+   "served_as": "granite-4.2-30b",
+   "repo": "ibm-granite/granite-4.2-30b",
+   "revision": "9e668ce1c538387ef24d3644e9b0606647762636",
+   "card": null,
+   "gguf_source": "pre-built, <private-gguf-repo>@d847f5b87a6b",
+   "gguf_file": "granite-4.2-30b-Q8_0.gguf",
+   "gguf_sha256": "1b5c47835f6f8b8732550541dc432d0a351e3f706961ff3c750d3ee1987b9b4c",
+   "gguf_bytes": 31111704704
+  },
+  {
+   "served_as": "muse-glimmer-30b",
+   "repo": "meta-models/Muse-Glimmer-30B",
+   "revision": "a4e59da52a7bc87ae7251dd5545c0dd437c44b68",
+   "card": null,
+   "gguf_source": "pre-built, <private-gguf-repo>@d847f5b87a6b",
+   "gguf_file": "muse-glimmer-30b-Q8_0.gguf",
+   "gguf_sha256": "c321320a81f177362f3ddf3c199edff097ab88d10b19a13eab7f606f5ffc4e74",
+   "gguf_bytes": 29612961056
+  },
+  {
+   "served_as": "qwen3.8-27b",
+   "repo": "Qwen/Qwen3.8-27B",
+   "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+   "card": null,
+   "gguf_source": "pre-built, <private-gguf-repo>@d847f5b87a6b",
+   "gguf_file": "qwen3.8-27b-Q8_0.gguf",
+   "gguf_sha256": "2ab268e0bd3f8e5daf1280e2243ac19abd5e3bb34e8444f5cfff5147fab977d4",
+   "gguf_bytes": 29047084448
+  },
+  {
+   "served_as": "gemma-4-31b-it",
+   "repo": "google/gemma-4-31B-it",
+   "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+   "card": null,
+   "gguf_source": "pre-built, <private-gguf-repo>@d847f5b87a6b",
+   "gguf_file": "gemma-4-31b-it-Q8_0.gguf",
+   "gguf_sha256": "e357a45071c2cbbc44b97506dfadc34bac0d5f6592f1d500edfaa9647f01e7bf",
+   "gguf_bytes": 32635676544
+  },
+  {
+   "served_as": "nemotron-3.5-bolt-74b-a9b",
+   "repo": "nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB-GGUF",
+   "revision": "e0fecb69cb3e5e4c5e8a056fa2aec98c78e91246",
+   "card": "nemotron-3.5-bolt-74b-a9b-24gb",
+   "gguf_source": "maker",
+   "gguf_file": "NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB.gguf",
+   "gguf_sha256": "91d63363e782c8a3d5f4be42816eba8e0d42dd2530bd07a7d0d2dc440599af75",
+   "gguf_bytes": 22018326528
+  }
+ ],
+ "quant": {
+  "granite-4.2-30b": {
+   "policy": "q8",
+   "ran": "Q8_0"
+  },
+  "muse-glimmer-30b": {
+   "policy": "q8",
+   "ran": "Q8_0"
+  },
+  "qwen3.8-27b": {
+   "policy": "q8",
+   "ran": "Q8_0"
+  },
+  "gemma-4-31b-it": {
+   "policy": "q8",
+   "ran": "Q8_0"
+  },
+  "nemotron-3.5-bolt-74b-a9b": {
+   "policy": "q8",
+   "ran": "Q8_0"
+  }
+ },
+ "proxy_configs": {
+  "granite-4.2-30b": {
+   "candidate": "granite-4.2-30b",
+   "removed": [],
+   "sha256": "7e71b156ee29f9d153672284d90ea8f0d7e49cdc2617cbb1ea85b44353b7aae4"
+  },
+  "muse-glimmer-30b": {
+   "candidate": "muse-glimmer-30b",
+   "removed": [],
+   "sha256": "999b5e1d9b2fd484d910cfbb2a1efed0ecb21561e354c3d4fe5407f6bb2497dd"
+  },
+  "qwen3.8-27b": {
+   "candidate": "qwen3.8-27b",
+   "removed": [
+    "reattach_thinking"
+   ],
+   "sha256": "05c613a3812c9f8c33e5caef7a14e139c869eaa8552daa48dbb968f207756e63"
+  },
+  "gemma-4-31b-it": {
+   "candidate": "gemma-4-31b-it",
+   "removed": [],
+   "sha256": "66ab82799592ea23a3a5d79e4b48fffd45f2295981192c4d5820f3db34116297"
+  },
+  "nemotron-3.5-bolt-74b-a9b": {
+   "candidate": "nemotron-3.5-bolt-74b-a9b-24gb",
+   "removed": [],
+   "sha256": "6f80edc7eed592fb7921a5950c86750098269a3dfaba544349f7068abf796aba"
+  }
+ },
+ "pilot_seconds": 845,
+ "twins_seconds": 10153,
+ "serves": {
+  "granite-4.2-30b": [
+   {
+    "seconds": 15,
+    "fit": {
+     "offloaded": 65,
+     "layers": 65,
+     "ok": true
+    },
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true
+    }
+   },
+   {
+    "seconds": 100,
+    "fit": {
+     "offloaded": 65,
+     "layers": 65,
+     "ok": true
+    },
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true
+    }
+   }
+  ],
+  "muse-glimmer-30b": [
+   {
+    "seconds": 95,
+    "fit": {
+     "offloaded": 53,
+     "layers": 53,
+     "ok": true
+    },
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true
+    }
+   },
+   {
+    "seconds": 20,
+    "fit": {
+     "offloaded": 53,
+     "layers": 53,
+     "ok": true
+    },
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true
+    }
+   },
+   {
+    "seconds": 45,
+    "fit": {
+     "offloaded": 53,
+     "layers": 53,
+     "ok": true
+    },
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true
+    }
+   },
+   {
+    "seconds": 65,
+    "fit": {
+     "offloaded": 53,
+     "layers": 53,
+     "ok": true
+    },
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true
+    }
+   },
+   {
+    "seconds": 15,
+    "fit": {
+     "offloaded": 53,
+     "layers": 53,
+     "ok": true
+    },
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true
+    }
+   }
+  ],
+  "qwen3.8-27b": [
+   {
+    "seconds": 90,
+    "fit": {
+     "offloaded": 66,
+     "layers": 66,
+     "ok": true
+    },
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true
+    }
+   }
+  ],
+  "gemma-4-31b-it": [
+   {
+    "seconds": 105,
+    "fit": {
+     "offloaded": 61,
+     "layers": 61,
+     "ok": true
+    },
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true
+    }
+   }
+  ],
+  "nemotron-3.5-bolt-74b-a9b": [
+   {
+    "seconds": 10,
+    "fit": {
+     "offloaded": 89,
+     "layers": 89,
+     "ok": true
+    },
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true
+    }
+   }
+  ]
+ },
+ "model_errors": 0,
+ "ok": true,
+ "resources": [
+  {
+   "at": "qwen3.8-27b: before hosted download",
+   "time": "10:21:48",
+   "disk_free_gb": 204.3,
+   "ram_available_mb": 83382,
+   "ram_total_mb": 85477
+  },
+  {
+   "at": "gemma-4-31b-it: before hosted download",
+   "time": "10:24:30",
+   "disk_free_gb": 175.2,
+   "ram_available_mb": 82023,
+   "ram_total_mb": 85477
+  },
+  {
+   "at": "granite-4.2-30b: before hosted download",
+   "time": "10:27:33",
+   "disk_free_gb": 142.6,
+   "ram_available_mb": 81343,
+   "ram_total_mb": 85477
+  },
+  {
+   "at": "muse-glimmer-30b: before hosted download",
+   "time": "10:30:26",
+   "disk_free_gb": 111.5,
+   "ram_available_mb": 81466,
+   "ram_total_mb": 85477
+  },
+  {
+   "at": "after hosted downloads",
+   "time": "10:33:12",
+   "disk_free_gb": 81.8,
+   "ram_available_mb": 81317,
+   "ram_total_mb": 85477
+  },
+  {
+   "at": "qwen3.8-27b: after deleting GGUF",
+   "time": "11:40:37",
+   "disk_free_gb": 110.8,
+   "ram_available_mb": 81446,
+   "ram_total_mb": 85477
+  },
+  {
+   "at": "gemma-4-31b-it: after deleting GGUF",
+   "time": "12:05:44",
+   "disk_free_gb": 143.3,
+   "ram_available_mb": 81469,
+   "ram_total_mb": 85477
+  },
+  {
+   "at": "granite-4.2-30b: after deleting GGUF",
+   "time": "12:58:53",
+   "disk_free_gb": 174.3,
+   "ram_available_mb": 81320,
+   "ram_total_mb": 85477
+  },
+  {
+   "at": "nemotron-3.5-bolt-74b-a9b: before download",
+   "time": "12:58:53",
+   "disk_free_gb": 174.3,
+   "ram_available_mb": 81326,
+   "ram_total_mb": 85477
+  },
+  {
+   "at": "muse-glimmer-30b: after deleting GGUF",
+   "time": "13:36:30",
+   "disk_free_gb": 181.8,
+   "ram_available_mb": 81331,
+   "ram_total_mb": 85477
+  },
+  {
+   "at": "nemotron-3.5-bolt-74b-a9b: after deleting GGUF",
+   "time": "13:36:31",
+   "disk_free_gb": 203.8,
+   "ram_available_mb": 81337,
+   "ram_total_mb": 85477
+  }
+ ],
+ "ended": "2026-10-18T13:36:37Z"
+}

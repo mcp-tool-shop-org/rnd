@@ -471,7 +471,7 @@ def _extract_reasoning_and_content(resp: dict) -> tuple[str, str | None]:
 # analysis message in harmony-style templates (Muse-Glimmer's ends its thinking with `<|eom|>`, window 12d), and count
 # only when the reply carries reasoning.
 THINK_END = "</think>"
-CHANNEL_ENDS = ("<|eom|>", "<|end|>")
+CHANNEL_ENDS = ("<|eom|>", "<|end|>", "<channel|>")  # <channel|>: Gemma 4 closes `<|channel>thought ...` (window 12f)
 
 
 def _thinking_count(resp: dict, tokens: list[str], reasoning: str | None, output_tokens: int) -> tuple[int | None, str | None]:

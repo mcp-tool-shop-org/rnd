@@ -9,6 +9,7 @@ from pathlib import Path
 from mcptoolshop_rnd.localbuilders import proxy
 from mcptoolshop_rnd.localbuilders.recount import recount
 
+GEMMA = json.loads((Path(__file__).parent / "fixtures" / "gemma-4-w0-call-redacted.json").read_text(encoding="utf-8"))
 FIXTURE = json.loads((Path(__file__).parent / "fixtures" / "muse-glimmer-w0-call-redacted.json").read_text(encoding="utf-8"))
 
 
@@ -45,6 +46,15 @@ class ThinkingCountTests(unittest.TestCase):
         self.assertEqual(proxy._thinking_count(_reply("x", "", "stop"), ["x"], None, 1), (0, "none"))
         # A harmony end token in a reply with no reasoning isn't read as thinking.
         self.assertEqual(proxy._thinking_count(_reply("x", "", "stop"), ["x", "<|end|>"], None, 2), (0, "none"))
+
+    def test_a_gemma_reply_counts_its_thinking_to_the_channel_close(self):
+        g = GEMMA
+        self.assertIsNone(g["thinking_tokens_recorded"])  # what window 12f's proxy wrote
+        n, source = proxy._thinking_count(g["upstream_response"], g["tokens"], g["reasoning_content"], g["output_tokens"])
+        self.assertEqual((n, source), (g["tokens"].index("<channel|>") + 1, "marker"))
+        self.assertLess(n, g["output_tokens"])
+        resp = _reply("answer", "thinking", "stop")
+        self.assertEqual(proxy._thinking_count(resp, ["<|channel>", "thought", "x", "<channel|>"], "thinking", 4), (None, None))
 
     def test_a_channel_end_as_the_last_token_is_not_the_end_of_thinking(self):
         resp = _reply("answer", "some reasoning", "stop")

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.0.3] - 2026-10-17
+
+- The dataminer counts Gemma 4's thinking: its template closes <|channel>thought with <channel|>, now one of the channel ends (counted only with tokens after it, as before). Window 12f's Gemma calls recount from 17 nulls to 80.9% thinking.
+
 ## [1.1.15.0.2] - 2026-10-17
 
 - newsletter issue 11: picking a writer model on rented GPUs (critic test, thinking cost, the window method), with Qwen3.8's per-call counts and a chart

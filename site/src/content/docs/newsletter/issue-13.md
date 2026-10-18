@@ -7,7 +7,7 @@ highlights:
   - "<strong>From 31% to 69%.</strong> On night one, 31% of the units bought the results their windows were opened for, and 40% were lost to dropped VMs, cap stops and our own faults. On day two, 69% bought results, and 4% were lost."
   - "<strong>Test for free first.</strong> 13 test windows on CPU runtimes cost 0.46 units in all. One caught a refused step two review rounds had missed, before it could fail on paid time."
   - "<strong>Do the preparation on CPU.</strong> Converting a model on a CPU runtime cost 0.07 units. Downloading the finished files on the A100 took 684 seconds against 5,145 projected for converting them there."
-  - "<strong>Byte-match or don't use it.</strong> Requiring every rebuilt model file to equal its earlier checksum caught a difference nobody expected: the same conversion gave different bytes under the GPU and CPU builds of the same PyTorch version."
+  - "<strong>Byte-match or don't use it.</strong> Requiring every rebuilt model file to equal its earlier checksum caught a surprise: the same conversion gave different bytes on a CPU runtime than on the A100. The recorded environments differed in their PyTorch build; the host CPU's instruction set is still to be ruled out."
 ---
 
 The studio runs its model work on rented GPUs. Claude Code drives Google's Colab from the command line: it asks for a
@@ -52,8 +52,8 @@ normal slot, not the same.
 
 **3. One script runs a window,** and it trusts nothing it hasn't checked. It refuses bad inputs before asking for a
 machine, checks the machine before uploading anything, follows the job's own log file rather than the command's
-output stream (which went quiet on us mid-run), counts only its own spend against the cap, and saves the results
-first on every way out.
+output stream (which went quiet on us mid-run), counts only its own spend against the cap, and fetches the
+job's log, and its results when the job got that far, on every way out.
 
 **4. A health check on every new machine.** Before anything is uploaded, one short command reads the card, the disk,
 the memory and the download speed. A bad machine is stopped and a fresh one requested. On day two it ran 12 times and

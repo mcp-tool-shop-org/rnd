@@ -69,8 +69,12 @@ Measured on our account (`colab usage`, 2026-10-16 to 2026-10-18):
    output stream: in our windows it stopped reaching the rig while the job ran on. The rig follows the job's own
    `job.log` instead, with a stall limit (10 minutes before the first line, then 20).
 6. **The cap watcher.** It counts this window's spend as its own rate × runtime, not the account balance, which
-   would include a neighbour's spend. It keeps 0.3 units back so the results can still be fetched.
-7. **Every way out fetches the results first,** then stops the session in an `EXIT` trap and checks the session
+   would include a neighbour's spend. It keeps 0.3 units back so `job.log`, with its checkpoints, can still be
+   fetched. A job stopped at the cap hasn't reached the end that writes its result files, so what comes back is the
+   log and what `checkpoints.py extract` can rebuild from it. (Signalling the job first, so it can write them, is on
+   our list.)
+7. **Every way out fetches what the job has written first** (always `job.log`; the result files when the job got
+   that far), then stops the session in an `EXIT` trap and checks the session
    list is empty. Read the balance after.
 
 ## 4. The job, on the VM
@@ -80,6 +84,9 @@ Measured on our account (`colab usage`, 2026-10-16 to 2026-10-18):
   line, so a killed window's work can be extracted from the log (`checkpoints.py extract`).
 - **It can resume.** A window can start from another window's sealed drafts (`resume.tar`). Every file carries a
   sha256 seal, and a file that doesn't match its seal is refused.
+- **A job that is killed outright leaves no log line.** If the host runs out of memory, the job dies without writing
+  its result, and the window keeps billing until the stall limit fires (20 minutes). Watching the job's process as
+  well as its log is on our list.
 - **One job per VM.** The job takes a lock and carries a token for its window, so a late duplicate exec waits, then
   stops if the first job finished.
 - **It writes `pin-result.json`** with everything it pinned and measured, and `ok` true or false.
@@ -106,6 +113,9 @@ Measured on our account (`colab usage`, 2026-10-16 to 2026-10-18):
     Python. Record the CPU model and `torch.backends.cpu.get_cpu_capability()` with the pin.
   - **For pins made with a system Python:** pre-build them on the same card and image that made them. Ours did.
   - **Record `pip freeze` with every conversion.** Comparing the freezes is how we found the cause in minutes.
+  - **Record the image too.** Colab's runtime image (`COLAB_RELEASE_TAG`) can change between days. All our windows
+    ran on one image; a new one can change the system Python's packages and so the bytes of a system-Python
+    conversion.
 - **Download everything before the first wave,** after checking that the whole set plus 20 GB fits the free disk.
 
 ## 6. Tokens
@@ -117,6 +127,10 @@ Measured on our account (`colab usage`, 2026-10-16 to 2026-10-18):
   uploads it to the VM's RAM-backed `/dev/shm`, and deletes its own copy at once and again in the exit trap.
 - **Read once.** The job reads the file at its very start, deletes it, drops the Hub's environment variables and
   passes the value only as a `token=` argument.
+- **Watch for a silent fallback.** When a download had no token, `huggingface_hub` asked Colab's secrets vault for
+  one. In a command-line session that request times out (google-colab-cli
+  [issue #48](https://github.com/googlecolab/google-colab-cli/issues/48)), so the download went ahead without
+  one. Make public downloads explicitly anonymous so nothing reaches for a stored secret.
 - **Test the leak paths.** A test pushes a fake token in a real token's shape through the real window script and
   checks that it appears in no file the window keeps or returns. Check the CLI's own history once with a real run.
   The push scan refuses anything in the `hf_` token shape.
@@ -134,7 +148,12 @@ No paid window runs on new code until it has climbed the ladder:
 
 A stub can only test the paths its mock models take. Our first paid window after the ladder found one more defect:
 an arm whose slots all failed was still sent to a critique, because no mock model ever failed every slot. Give the
-mocks the failure modes you expect from real models: every slot dropped, a reply cut off, a refusal.
+mocks the failure modes you expect from real models. A checklist for the stand-ins:
+
+- every slot of an arm dropped;
+- a reply cut off at the token limit;
+- a refusal;
+- a window stopped mid-wave and resumed from its checkpoints.
 
 ## 8. The review loop
 
@@ -158,6 +177,7 @@ check() { [ "$(sha256sum "$1" | cut -d' ' -f1)" = "$2" ] || { echo "REFUSED: $1 
 check <input file> <full sha256>
 export PIN_GPU=A100 PIN_SESSION=<id> PIN_CAP_UNITS=<projection x 1.15> PIN_WALL_S=<above the cap in seconds>
 export PIN_ROLE=<role> PIN_ROLESET_COMMIT=<full sha>
+export PIN_GGUF_REPO=<org/repo> PIN_GGUF_REVISION=<full sha> PIN_HF_TOKEN_FROM=<read token variable>
 export PIN_GATE_MIN_DISK_GB=<peak + 20>
 export PIN_UPLOADS="$D/<input file>"
 bash "$D/smoke_window.sh" <server binary> "$D" 2>&1 | tee "$D/rig.log"
@@ -186,7 +206,7 @@ bash "$D/smoke_window.sh" <server binary> "$D" 2>&1 | tee "$D/rig.log"
 `outcome.json` written when the window closes:
 
 ```json
-{"window": "<id>", "card": "A100", "cap": 8.8, "spent": 7.95, "basis": "rate_x_runtime", "outcome": "results | partial | lost-vm | cap-stop | tooling-fault | not-assigned | test", "why": "<one line>"}
+{"window": "<id>", "date": "YYYY-MM-DD", "commit": "<sha>", "card": "A100", "cap": 8.8, "spent": 7.95, "basis": "rate_x_runtime", "outcome": "results | partial | lost-vm | cap-stop | tooling-fault | not-assigned | test", "why": "<one line>"}
 ```
 
 Hash the tar into the README; keep drafts and logs out of public repos. Our own receipts lacked `outcome.json`, and

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.2.1] - 2026-10-18
+
+- the golden path and issue 13 after Argon's consult: what a cap stop returns, the vault fallback, image drift, OOM, stand-in checklist, template fields
+
 ## [1.1.15.2.0] - 2026-10-18
 
 - newsletter issue 13: Claude + Colab, the path we'd use again; the window data through W-A

@@ -810,6 +810,7 @@
             "chart_ladder",
             "chart_loops",
             "chart_npu",
+            "chart_pilot_thinking",
             "chart_reasoning_default",
             "chart_thinking",
             "chart_vocal",
@@ -861,14 +862,14 @@
             {
               "in": "manifest",
               "kind": "except",
-              "line": 1057
+              "line": 1103
             }
           ],
-          "hash": "5ac698040545456617935df378b576d40147784b99716faa79e5ddeb7eb54983",
+          "hash": "77feaf9e5dfda40055b2fcf7584dc0a8e90a0970305616c1b6926b630d9c65df",
           "path": "experiments/charts/make_charts.py"
         },
         {
-          "hash": "500c4b8368b2d4c81ff546df2ae25424ca3358367664e1a4b9744e5f6fdb4c07",
+          "hash": "1f0e959dc8bcde4e86ef23995e0e27f7bb29c95b11de93484d15ad6790e1111e",
           "path": "experiments/charts/manifest.json"
         },
         {
@@ -878,6 +879,10 @@
         {
           "hash": "719322220fe7796e5174c0229b20f99677403104b93fff598b77bf1420a161c3",
           "path": "experiments/charts/npu-vs-cpu.svg"
+        },
+        {
+          "hash": "d03b18f61713c18593ca29dbfdc201d4953576cf364ed41e8cebece4b502e49d",
+          "path": "experiments/charts/pilot-thinking-budget.svg"
         },
         {
           "hash": "8135efa8483a0544562c094aa6ffe937b5dad7277bb11633f2cb6f908ace8ba5",
@@ -957,6 +962,326 @@
         {
           "hash": "781ddc2eba63cd4878d458e1d34f128929bc01f32192ce98e7da1850d9a29581",
           "path": "experiments/colab-bottlenecks/argon-brief.md"
+        },
+        {
+          "hash": "e7d0441139f61274e94ac2c207b2e3409928104bb9b1387fe99e99c05bd91b92",
+          "path": "experiments/colab-golden-path/README.md"
+        },
+        {
+          "hash": "c82783b7d791b2c9e3f6b21bce2c9806f3d0a4b1185b0fb55a6d08c95e123f97",
+          "path": "experiments/colab-golden-path/data/MANIFEST.tsv"
+        },
+        {
+          "hash": "ebc16f073ac2ad04ada7e276b35a52d7ddcb17fdee56b4c5805bcf4374648aef",
+          "path": "experiments/colab-golden-path/data/README.md"
+        },
+        {
+          "hash": "187724d2711d8144c6cfbb0bc18241a652c05f662508e0bdae20bf91fb25da7d",
+          "path": "experiments/colab-golden-path/data/units-ledger.md"
+        },
+        {
+          "hash": "6e791bcffc342094b1412e670bc92db9f41fe489051f60ff9770029ec9e8ec84",
+          "path": "experiments/colab-golden-path/data/windows.csv"
+        },
+        {
+          "hash": "9d4c2d72def8a4b84479853ec7c9125db19a9e9865a912294a829237088f5e8d",
+          "path": "experiments/colab-golden-path/data/windows/_top/highmem-rate-probe.txt"
+        },
+        {
+          "hash": "03d1fb3d36da32797a2fa44f1395976d93b18a3454de147ab6ba64b4d018a132",
+          "path": "experiments/colab-golden-path/data/windows/cpu-measure-20261018/gate.jsonl"
+        },
+        {
+          "hash": "2d615d2afccc4a2acce6d13559fa82ec32ee56325b4322ad03265d43036171ea",
+          "path": "experiments/colab-golden-path/data/windows/cpu-measure-20261018/outcome.json"
+        },
+        {
+          "hash": "63efd1c781bd646fefc9a15d6cce9fab0412f831e4dbf732fd7d60dee1be9ffe",
+          "path": "experiments/colab-golden-path/data/windows/window1-20261016/outcome.json"
+        },
+        {
+          "hash": "3ac98d43ea2206bdf2703d8bec37c3c180119d9c0d09ba693c0d7836d012c2ed",
+          "path": "experiments/colab-golden-path/data/windows/window10-20261017/outcome.json"
+        },
+        {
+          "hash": "8f3d875f27287c987180b2c42ba02ea816822c87814a8a1a2d09434b0b096773",
+          "path": "experiments/colab-golden-path/data/windows/window10-20261017/pin-result.json"
+        },
+        {
+          "hash": "a8993199a5b90752f20d87b1729b16c21662398757bf10afe5e90f67c5ca9895",
+          "path": "experiments/colab-golden-path/data/windows/window10b-20261017/outcome.json"
+        },
+        {
+          "hash": "6be0d4ae0ea291e43d5c7d2592c878dd70dee347b37faeb2f9f16a5e886a39d3",
+          "path": "experiments/colab-golden-path/data/windows/window10c-20261017/outcome.json"
+        },
+        {
+          "hash": "5dc975116722fdd835844cc704b8233cd23447e1dc45d80fc0670af25fc7b12b",
+          "path": "experiments/colab-golden-path/data/windows/window10c-20261017/pin-result.json"
+        },
+        {
+          "hash": "0e8178c94493a413a6d3827087a76d5d8aa5706b2d0f6692ec95cbf979dd8e9d",
+          "path": "experiments/colab-golden-path/data/windows/window10d-20261017/outcome.json"
+        },
+        {
+          "hash": "f5b1b34f72d6ac7e2cf3c6a2380742c5108d0574914dfb5e22b1a3af870cedec",
+          "path": "experiments/colab-golden-path/data/windows/window11a-20261017/outcome.json"
+        },
+        {
+          "hash": "786ff206fa3f8ea92748628c498ac9a79811d1af9cb4cd3a603e3263f8553803",
+          "path": "experiments/colab-golden-path/data/windows/window11b-20261017/outcome.json"
+        },
+        {
+          "hash": "9a6b0e8bf4e63ecf32ea1a0412f8a74d5e7954799568dddf400ce1aefc4cc808",
+          "path": "experiments/colab-golden-path/data/windows/window11b-20261017/pin-result.json"
+        },
+        {
+          "hash": "718e7407f40f0ff8faa00b0a57e8cdaf7c7628bdc8a78d5f04499643b690123f",
+          "path": "experiments/colab-golden-path/data/windows/window11c-20261017/outcome.json"
+        },
+        {
+          "hash": "1d3abd2986008c9e136be0ca418fe782d4733deb89264a4d40a905d1d443e389",
+          "path": "experiments/colab-golden-path/data/windows/window11d-20261017/outcome.json"
+        },
+        {
+          "hash": "795d0757678ac58d0d4b111c3cc41bf3b895089d7f7d15f3b833bd21ae2f0ebc",
+          "path": "experiments/colab-golden-path/data/windows/window11d-20261017/pin-result.json"
+        },
+        {
+          "hash": "84de6449d01a380b28ad5adbbc4608a6a863183656926e4a7dbd29143858646a",
+          "path": "experiments/colab-golden-path/data/windows/window12a-20261017/outcome.json"
+        },
+        {
+          "hash": "f2f7898f241b03f30afcfa0b9ffa5d78167b422d2d5f802c87e5e0ab1a5db05b",
+          "path": "experiments/colab-golden-path/data/windows/window12b-20261017/outcome.json"
+        },
+        {
+          "hash": "149b82d2735e4ed4fe070a3f0c9347848c425a4313941104bd1cb336bfdcc463",
+          "path": "experiments/colab-golden-path/data/windows/window12b-20261017/pin-result.json"
+        },
+        {
+          "hash": "e5eacd042fd9cad82fe3f89e863d05b5a03ae92e7b2577707a407f1b1bc8d778",
+          "path": "experiments/colab-golden-path/data/windows/window12c-20261017/outcome.json"
+        },
+        {
+          "hash": "379d25ab51b07114a4e1cf34edb64997bc712e47ac815ec1b04fa6448cf9a6f3",
+          "path": "experiments/colab-golden-path/data/windows/window12c-20261017/pin-result.json"
+        },
+        {
+          "hash": "68b4e209e89a130cd657662ea851a55544bbb9ccc1124fcb889933f8d451378f",
+          "path": "experiments/colab-golden-path/data/windows/window12d-20261017/outcome.json"
+        },
+        {
+          "hash": "43a86000509facc786890c1ba7a84b40b915e06785e8ba21c37b80270d1fce87",
+          "path": "experiments/colab-golden-path/data/windows/window12d-20261017/pin-result.json"
+        },
+        {
+          "hash": "030a5e3576e08de9035908c9a297a0638ef8cbe5e55b3207630597e435473f0a",
+          "path": "experiments/colab-golden-path/data/windows/window12e-20261017/outcome.json"
+        },
+        {
+          "hash": "1037dfa29edc22d1c7e2a071c567f52d38bb70bd4975e65ab78db9c2e3916648",
+          "path": "experiments/colab-golden-path/data/windows/window12f-20261017/outcome.json"
+        },
+        {
+          "hash": "5845acb5034b4cb1403354aba11734ce1ecf7d878f304d63deda2b57c90fde0c",
+          "path": "experiments/colab-golden-path/data/windows/window12f-20261017/pin-result.json"
+        },
+        {
+          "hash": "3e03a614b5672b6870303656839610500e21b864b26262d7901c21419e796157",
+          "path": "experiments/colab-golden-path/data/windows/window12g-20261017/outcome.json"
+        },
+        {
+          "hash": "71f97a49aca5ae03ace8d1f0ac95453b8bc054aa9766c09150951a7696a0a1c7",
+          "path": "experiments/colab-golden-path/data/windows/window12h-20261017/outcome.json"
+        },
+        {
+          "hash": "d97e8afd364e6d93dd1e63f52927618dee97a49b43a6edcc35f085a20e265df1",
+          "path": "experiments/colab-golden-path/data/windows/window12h-20261017/pin-result.json"
+        },
+        {
+          "hash": "57b20e6dda2aa7203898c5c2ca151252fbc216173089deae2f4df3b5e9bf9ab4",
+          "path": "experiments/colab-golden-path/data/windows/window12p-20261017/pin-result.json"
+        },
+        {
+          "hash": "8e752b23da516faf231c4b0f318d95cabecf95875791e4c94142e30b01f8df91",
+          "path": "experiments/colab-golden-path/data/windows/window12q-20261017/pin-result.json"
+        },
+        {
+          "hash": "dd0833c5b7f6df1a944e9efbaba7e2895260059007572cde8edddf2a35d17278",
+          "path": "experiments/colab-golden-path/data/windows/window12s-20261017/pin-result.json"
+        },
+        {
+          "hash": "9b4fa617875ba16d0a03d534bdc64363aa55e56329a8fe974434a4803e7cc0e1",
+          "path": "experiments/colab-golden-path/data/windows/window12s2-20261017/pin-result.json"
+        },
+        {
+          "hash": "6dcc436cf096c0b19703c4d5beb5d571ab0c4ff85aab9c461e460b6157f2e675",
+          "path": "experiments/colab-golden-path/data/windows/window12s3-20261017/pin-result.json"
+        },
+        {
+          "hash": "6a3de837d16c3e55d1a6272765482f673a91118b6d76ff421a9e1dbf90bd38ad",
+          "path": "experiments/colab-golden-path/data/windows/window12s4-20261017/pin-result.json"
+        },
+        {
+          "hash": "2121f131fe5d180f1cdd6f67ae04b9ebb840c0bfb791801f883b0c321925b49c",
+          "path": "experiments/colab-golden-path/data/windows/window12s5a-20261018/outcome.json"
+        },
+        {
+          "hash": "76bd9913c3445aab4a4217cd9dc9405a6bf052920b84106e0785f01f2d7ed58c",
+          "path": "experiments/colab-golden-path/data/windows/window12s5a-20261018/pin-result.json"
+        },
+        {
+          "hash": "db9feaeb38268cb08598a0a5c4d2eacea6bd95940e71a85ca02c129e251e2e70",
+          "path": "experiments/colab-golden-path/data/windows/window12s5b-20261018/outcome.json"
+        },
+        {
+          "hash": "a896f7d73bb8cad180160eeed98dd1922c5f6b20836b2769ab4f930f7bba4e23",
+          "path": "experiments/colab-golden-path/data/windows/window12s5b-20261018/pin-result.json"
+        },
+        {
+          "hash": "7f1ce7fea65fa93b8772959cf8721b11f1dcea30861b12740eae2d93eed6e474",
+          "path": "experiments/colab-golden-path/data/windows/window12s6a-20261018/outcome.json"
+        },
+        {
+          "hash": "9c7c1dede6364e195a5f595088c88c18d318b41b2ddeceedda432535415bee9f",
+          "path": "experiments/colab-golden-path/data/windows/window12s6a-20261018/pin-result.json"
+        },
+        {
+          "hash": "11ae982f000e1aa775cb1b7d37e1fccfc402882af34b69c0e86a74d993e2949d",
+          "path": "experiments/colab-golden-path/data/windows/window12s6b-20261018/outcome.json"
+        },
+        {
+          "hash": "b3c952c2e599828a8fd5828c7c56b44efe2fd99eb0d34c1ef2b2285e431c3a44",
+          "path": "experiments/colab-golden-path/data/windows/window12s6b-20261018/pin-result.json"
+        },
+        {
+          "hash": "e314628631a7acf71e7b1cd4e705e8729813c25ec6018184d9f6b919d57529a2",
+          "path": "experiments/colab-golden-path/data/windows/window13b-20261018/launch.sh"
+        },
+        {
+          "hash": "8ef2f93e7d99a3470e36c3673890f493742386321de664024ccdb771be75db06",
+          "path": "experiments/colab-golden-path/data/windows/window13b-20261018/outcome.json"
+        },
+        {
+          "hash": "453f1e6c0baa14c8787646802e4da78eeb9abacc4c20380678354f15ddfb52e8",
+          "path": "experiments/colab-golden-path/data/windows/window13b-20261018/pin-result.json"
+        },
+        {
+          "hash": "f2eab020cda657a68cd16241e9278b665de5aae5de0c3065759939c21adfcc07",
+          "path": "experiments/colab-golden-path/data/windows/window13c-survival-20261018/gate.jsonl"
+        },
+        {
+          "hash": "e52d1308eda11979e6075f5561d32a40af74d8bb7047755c666b39978eb97a93",
+          "path": "experiments/colab-golden-path/data/windows/window13c-survival-20261018/launch.sh"
+        },
+        {
+          "hash": "70f7392244564767671b31562f6b8e1bc1c436f85d438670a8970a3c046498af",
+          "path": "experiments/colab-golden-path/data/windows/window13d-cpusmoke-20261018/gate.jsonl"
+        },
+        {
+          "hash": "fcacd7cbeb0cdda0282a9270c180d3586ed1063730b36a139074ad87cded9da2",
+          "path": "experiments/colab-golden-path/data/windows/window13d-cpusmoke-20261018/launch.sh"
+        },
+        {
+          "hash": "48fb0dfb52a26781d9453195cac267840cdb5be2d71ae2d9711da961ba1962c1",
+          "path": "experiments/colab-golden-path/data/windows/window13d-cpusmoke-20261018/outcome.json"
+        },
+        {
+          "hash": "7d8b079fd13325df1133f91d911546eb6e7b15b1c93c0120c0cdb0fad363b308",
+          "path": "experiments/colab-golden-path/data/windows/window13d-cpusmoke-20261018/pin-result.json"
+        },
+        {
+          "hash": "666686fdc2a868ff0074d06963d8a5119644dfd0d6e4c8fcb314c9941bc56edd",
+          "path": "experiments/colab-golden-path/data/windows/window13d-cpusmoke-20261018/smoke-report.txt"
+        },
+        {
+          "hash": "6cdbe90c6388a3b712fb6f44bd6dbf2e3b6d98b3706fe6b96ce3eaff7ae3e04e",
+          "path": "experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/launch.sh"
+        },
+        {
+          "hash": "04636a617a34927109174c63c4d15ecc460667947442004203fdacfdb25bfa74",
+          "path": "experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/run.sh"
+        },
+        {
+          "hash": "d8caa793b4913604f930a90bc47f5f46c90e4b49d537bfb3dabaa42d55a7e835",
+          "path": "experiments/colab-golden-path/data/windows/window2-20261017/outcome.json"
+        },
+        {
+          "hash": "6c665ddac0fba78898085082a790b5c94759b3e7c612a96c0691e70e40210203",
+          "path": "experiments/colab-golden-path/data/windows/window2-20261017/pin-result-attempt1.json"
+        },
+        {
+          "hash": "e91f004e06aa62401549832cd9f164c3327bf93db68e35bf0e55d53ea408989e",
+          "path": "experiments/colab-golden-path/data/windows/window2-20261017/pin-result.json"
+        },
+        {
+          "hash": "3b163d1831eb803829069341d969cc0a21cafe1088b1766176acaebddc978ee1",
+          "path": "experiments/colab-golden-path/data/windows/window3-20261017/outcome.json"
+        },
+        {
+          "hash": "234611040504fcba9532058ca550c16af89e1de7be2fbb024e7dbfe4d286e9a7",
+          "path": "experiments/colab-golden-path/data/windows/window3-20261017/pin-result.json"
+        },
+        {
+          "hash": "b324d1a64e7ed1aa2d208bbd591e62e5a7bc5d2a8c5552c1c7da0d89137ca43f",
+          "path": "experiments/colab-golden-path/data/windows/window4-20261017/outcome.json"
+        },
+        {
+          "hash": "f243b1f7bf946ca9241d16027138d293533ca2cb224c262ef280986afe061b25",
+          "path": "experiments/colab-golden-path/data/windows/window4-20261017/pin-result.json"
+        },
+        {
+          "hash": "9831e25539a3c227dc7c0f6ea42e87e3c7ae2a0a4d646d72b0489a43665b81d2",
+          "path": "experiments/colab-golden-path/data/windows/window5-20261017/outcome.json"
+        },
+        {
+          "hash": "5560dc269134d38c6c98717facceff5df4f0fb32d07bf9d5c1962ee9ba5dae80",
+          "path": "experiments/colab-golden-path/data/windows/window5-20261017/pin-result.json"
+        },
+        {
+          "hash": "3a11067b492e30a4adbe73df36bb645fae43e87e42aea7516ded09b231dffa34",
+          "path": "experiments/colab-golden-path/data/windows/window6-20261017/outcome.json"
+        },
+        {
+          "hash": "d105975911555d528f3802a52a586ea5b4a0331d1b18c968c00a59dd9ec0d7e3",
+          "path": "experiments/colab-golden-path/data/windows/window6b-20261017/outcome.json"
+        },
+        {
+          "hash": "d824b90a132793e55c4ec2f082be366d34e04bdaa4ede6e22999620b49c0e320",
+          "path": "experiments/colab-golden-path/data/windows/window6c-20261017/outcome.json"
+        },
+        {
+          "hash": "fcb36bf9e99b5d9fc6d709e2458816b69b8c6d509f260d2d3740a60b299fa326",
+          "path": "experiments/colab-golden-path/data/windows/window7-20261017/outcome.json"
+        },
+        {
+          "hash": "a1b0736722aaf86aea6a07e33a4f3b714bcd24b52f6bde14fd6fb266cdb7c51d",
+          "path": "experiments/colab-golden-path/data/windows/window7-20261017/pin-result.json"
+        },
+        {
+          "hash": "42056f5b6fd47e74997a3e1d04f8a5673907030e6e43d1a41d3e4cb2f3c53b6d",
+          "path": "experiments/colab-golden-path/data/windows/window7b-20261017/outcome.json"
+        },
+        {
+          "hash": "46ba7cb5ba81a2df308564d7e6eb9a9c6f370f59bc43f7c4c81142f69c733091",
+          "path": "experiments/colab-golden-path/data/windows/window7b-20261017/pin-result.json"
+        },
+        {
+          "hash": "52bda49f3c092f9fc6d521aa2ceadfd11e0e29ad6caf51d9f79f0e2440ee097e",
+          "path": "experiments/colab-golden-path/data/windows/window8-20261017/outcome.json"
+        },
+        {
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "path": "experiments/colab-golden-path/data/windows/window8-20261017/pin-result.json"
+        },
+        {
+          "hash": "cda0d65d85971e865def20f2ad1d946ecd4f7f82f5cf9f3ff2bf4ca8c45149fc",
+          "path": "experiments/colab-golden-path/data/windows/window9-20261017/outcome.json"
+        },
+        {
+          "hash": "e13501acad88fef317e701be39626a87c278d0b01a7a2b4adc83e0cb1e55a415",
+          "path": "experiments/colab-golden-path/data/windows/window9-20261017/pin-result.json"
         },
         {
           "hash": "d92b8189e6c769e56fb5d57bf2feaa723433761cccce80b11c7f49684a5670d4",
@@ -3294,19 +3619,27 @@
           "path": "experiments/stage1-regeneration/argon-answer.md"
         },
         {
-          "hash": "b64a387122e309a2c62df4435a07d116a169fd6a50a15d81760722219e6ae4df",
+          "hash": "511a50c50dd4e186e86d86eaa53d112a017d02d07de8752e9cc02dbb060e5d6e",
           "path": "experiments/stage1-regeneration/critic-control/README.md"
         },
         {
           "exports": [
             "add"
           ],
-          "hash": "2c3ded84fa6aad0cae58d687ab54b299f3f963deff8ee3f5175cc3c1e94a0cf4",
+          "hash": "0f9fbc39777db2fa1f977b730d1542da814ad47ae2511a751b1382a89e79ea0f",
           "path": "experiments/stage1-regeneration/critic-control/build_known_answer.py"
         },
         {
           "hash": "09ddc3e608599dee24441f4a6ede448fe4de6da02b5376c9369b6945cc257b7a",
           "path": "experiments/stage1-regeneration/critic-control/known-answer-v1.jsonl"
+        },
+        {
+          "hash": "a67c2afadd747dfe9a0c2846e6defd016f09cb85a0395e9b0a0c273984485fbe",
+          "path": "experiments/stage1-regeneration/critic-control/known-answer-v2.jsonl"
+        },
+        {
+          "hash": "4f56434df0728d4c3bb0398a1a7fb44737f2c8eb53223315efc0971db1fb1bd7",
+          "path": "experiments/stage1-regeneration/pilot/qwen3.8-w0-calls.json"
         },
         {
           "hash": "bc84c4b6b1dead31a83df8b93e8540465d01592b7c18040a5e96f412b025a20a",
@@ -4535,10 +4868,10 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 13,
+      "dynamicReads": 16,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
-      "dynamicWrites": 9,
+      "dynamicWrites": 11,
       "entryPoints": [
         "mcptoolshop_rnd/cli.py"
       ],
@@ -4546,7 +4879,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "ac268c0e5997065d66a3e05e0a5a46e3ef100ad887382f63fb2178d0cfefc1cc",
+          "hash": "1db7a23d3b10e120bad04bee93233b21554198fcaf4f5f5cc1a5e88c0ee88bab",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -5491,61 +5824,67 @@
             "lock_secret_directories",
             "render_setup_script",
             "run_bounded_subprocess",
+            "venv_bin_dir",
             "wrap_as_builder"
           ],
           "failurePaths": [
             {
               "in": "iptables_commands",
               "kind": "raise",
-              "line": 104
+              "line": 121
             },
             {
               "in": "kill_process_group",
               "kind": "except",
-              "line": 272
+              "line": 289
             },
             {
               "in": "kill_process_group",
               "kind": "except",
-              "line": 275
+              "line": 292
             },
             {
               "in": "kill_process_group",
               "kind": "except",
-              "line": 279
+              "line": 296
+            },
+            {
+              "in": "_normalize_windows_shebang_cmd",
+              "kind": "except",
+              "line": 309
             },
             {
               "in": "run_bounded_subprocess",
               "kind": "except",
-              "line": 306
+              "line": 353
             },
             {
               "in": "run_bounded_subprocess",
               "kind": "raise",
-              "line": 308
+              "line": 355
             },
             {
               "in": "apply_vm_containment",
               "kind": "raise",
-              "line": 322
+              "line": 369
             },
             {
               "in": "apply_vm_containment",
               "kind": "raise",
-              "line": 333
+              "line": 380
             },
             {
               "in": "apply_vm_containment",
               "kind": "raise",
-              "line": 345
+              "line": 392
             },
             {
               "in": "apply_vm_containment",
               "kind": "raise",
-              "line": 349
+              "line": 396
             }
           ],
-          "hash": "95f84f84e90940d05432e52ef5ef2d4b8f733818a2c8739a139cb3fedda696f1",
+          "hash": "c94797a63cb11c7ce25f6936cad1c28a2237b8934c7a9de0cd9f4b32efeb165a",
           "path": "mcptoolshop_rnd/localbuilders/contain.py"
         },
         {
@@ -5815,47 +6154,42 @@
             {
               "in": "verify_aider_synthetic_strings",
               "kind": "raise",
-              "line": 97
+              "line": 99
             },
             {
               "in": "verify_aider_synthetic_strings",
               "kind": "raise",
-              "line": 102
+              "line": 104
             },
             {
               "in": "verify_aider_synthetic_strings",
               "kind": "raise",
-              "line": 124
+              "line": 126
             },
             {
               "in": "verify_aider_synthetic_strings",
               "kind": "raise",
-              "line": 128
+              "line": 130
             },
             {
               "in": "__post_init__",
               "kind": "raise",
-              "line": 148
+              "line": 150
             },
             {
               "in": "__post_init__",
               "kind": "raise",
-              "line": 154
+              "line": 156
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 186
+              "line": 188
             },
             {
               "in": "load_candidate_config",
               "kind": "except",
-              "line": 191
-            },
-            {
-              "in": "load_candidate_config",
-              "kind": "raise",
-              "line": 192
+              "line": 193
             },
             {
               "in": "load_candidate_config",
@@ -5865,66 +6199,97 @@
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 200
+              "line": 196
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 205
+              "line": 202
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 218
+              "line": 207
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 227
+              "line": 220
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 233
+              "line": 229
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 236
+              "line": 235
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 240
+              "line": 238
             },
             {
               "in": "load_candidate_config",
               "kind": "raise",
-              "line": 244
+              "line": 242
+            },
+            {
+              "in": "load_candidate_config",
+              "kind": "raise",
+              "line": 246
             },
             {
               "in": "apply_fold_system",
               "kind": "raise",
-              "line": 332
+              "line": 334
             },
             {
               "in": "transform_request_body",
               "kind": "raise",
-              "line": 576
+              "line": 603
             },
             {
               "in": "handle_completion",
               "kind": "except",
-              "line": 766
+              "line": 795
             },
             {
               "in": "do_POST",
               "kind": "except",
-              "line": 949
+              "line": 979
             }
           ],
-          "hash": "cfe7f08bbd3206e191b401b1cc7da1e5906239157b280e40dd2bab3f8b5e755a",
+          "hash": "1680d2a0a2d2a8ecbde6d3075dc1f24d8150b27cb815138e503caf2bcf67fd96",
           "path": "mcptoolshop_rnd/localbuilders/proxy.py"
+        },
+        {
+          "exports": [
+            "recount"
+          ],
+          "failurePaths": [
+            {
+              "in": "recount",
+              "kind": "raise",
+              "line": 23
+            },
+            {
+              "in": "recount",
+              "kind": "raise",
+              "line": 25
+            },
+            {
+              "kind": "raise",
+              "line": 54
+            }
+          ],
+          "hash": "99438273a652f315470ba949d68ab3f934749696dd941c7bae46528d1fc52bfa",
+          "importsFiles": [
+            "mcptoolshop_rnd/localbuilders/proxy.py"
+          ],
+          "path": "mcptoolshop_rnd/localbuilders/recount.py"
         },
         {
           "exports": [
@@ -5933,125 +6298,199 @@
             "build_receipt",
             "create_coder_with_reflections",
             "format_task_prompt",
+            "freeze_venv_sha256",
+            "is_python_312",
+            "lock_venv_for_builder",
             "main",
             "parse_analytics_log",
+            "prepare_builder_log_files",
             "prepare_task_history_files",
             "prompt_sha256",
             "render_model_settings_yaml",
+            "resolve_test_cmd_for_venv",
+            "root_install_env",
             "run_aider_entrypoint",
             "run_single_task",
+            "setup_task_venv",
             "validate_model_settings_file",
             "validate_receipt",
+            "venv_python_path",
+            "venv_python_version",
             "write_model_settings_file"
           ],
           "failurePaths": [
             {
               "in": "_default_chown_builder",
               "kind": "except",
-              "line": 112
+              "line": 144
+            },
+            {
+              "in": "_default_chown_builder",
+              "kind": "raise",
+              "line": 146
+            },
+            {
+              "in": "resolve_test_cmd_for_venv",
+              "kind": "except",
+              "line": 257
+            },
+            {
+              "in": "resolve_test_cmd_for_venv",
+              "kind": "raise",
+              "line": 258
+            },
+            {
+              "in": "freeze_venv_sha256",
+              "kind": "raise",
+              "line": 356
+            },
+            {
+              "in": "venv_python_version",
+              "kind": "raise",
+              "line": 375
+            },
+            {
+              "in": "setup_task_venv",
+              "kind": "raise",
+              "line": 406
+            },
+            {
+              "in": "setup_task_venv",
+              "kind": "except",
+              "line": 407
+            },
+            {
+              "in": "setup_task_venv",
+              "kind": "except",
+              "line": 468
+            },
+            {
+              "in": "setup_task_venv",
+              "kind": "except",
+              "line": 501
             },
             {
               "in": "format_task_prompt",
               "kind": "raise",
-              "line": 153
+              "line": 551
             },
             {
               "in": "validate_model_settings_file",
               "kind": "raise",
-              "line": 191
+              "line": 589
             },
             {
               "in": "validate_model_settings_file",
               "kind": "raise",
-              "line": 194
+              "line": 592
             },
             {
               "in": "build_aider_argv",
               "kind": "raise",
-              "line": 226
+              "line": 624
             },
             {
               "in": "build_aider_argv",
               "kind": "raise",
-              "line": 234
+              "line": 632
             },
             {
               "in": "parse_analytics_log",
               "kind": "except",
-              "line": 369
+              "line": 767
             },
             {
               "in": "validate_receipt",
               "kind": "raise",
-              "line": 539
+              "line": 974
             },
             {
               "in": "validate_receipt",
               "kind": "raise",
-              "line": 541
+              "line": 976
             },
             {
               "in": "validate_receipt",
               "kind": "raise",
-              "line": 545
+              "line": 980
             },
             {
               "in": "validate_receipt",
               "kind": "raise",
-              "line": 547
+              "line": 982
             },
             {
               "in": "validate_receipt",
               "kind": "raise",
-              "line": 549
+              "line": 984
             },
             {
               "in": "validate_receipt",
               "kind": "raise",
-              "line": 551
+              "line": 987
             },
             {
               "in": "validate_receipt",
               "kind": "raise",
-              "line": 553
+              "line": 990
+            },
+            {
+              "in": "validate_receipt",
+              "kind": "raise",
+              "line": 992
+            },
+            {
+              "in": "validate_receipt",
+              "kind": "raise",
+              "line": 994
+            },
+            {
+              "in": "validate_receipt",
+              "kind": "raise",
+              "line": 996
+            },
+            {
+              "in": "validate_receipt",
+              "kind": "raise",
+              "line": 998
             },
             {
               "in": "run_single_task",
               "kind": "raise",
-              "line": 602
+              "line": 1052
             },
             {
               "in": "run_single_task",
               "kind": "raise",
-              "line": 604
+              "line": 1054
             },
             {
               "in": "run_single_task",
               "kind": "except",
-              "line": 609
+              "line": 1059
             },
             {
               "in": "run_single_task",
               "kind": "raise",
-              "line": 610
+              "line": 1060
             },
             {
               "in": "run_single_task",
               "kind": "except",
-              "line": 670
+              "line": 1153
             },
             {
               "in": "run_single_task",
               "kind": "except",
-              "line": 693
+              "line": 1178
             },
             {
               "in": "main",
               "kind": "raise",
-              "line": 736
+              "line": 1226
             }
           ],
-          "hash": "5c7055de57c828d7f78e4294506f244e026ed7fc369f5064a5a329d1d9f009dc",
+          "hash": "b196dcc405ef3c4d112f2d40168f5dc01d5aca37be4e19330aa7ccf384d36c1b",
           "importsFiles": [
             "mcptoolshop_rnd/localbuilders/contain.py",
             "mcptoolshop_rnd/localbuilders/preflight.py",
@@ -6063,6 +6502,7 @@
         },
         {
           "exports": [
+            "build_suite_command",
             "check_workspace_integrity",
             "evaluate_junit_parity",
             "merge_junit_summaries",
@@ -6076,45 +6516,75 @@
             {
               "in": "parse_junitxml",
               "kind": "raise",
-              "line": 153
+              "line": 154
             },
             {
               "in": "parse_junitxml",
               "kind": "except",
-              "line": 157
+              "line": 158
             },
             {
               "in": "parse_junitxml",
               "kind": "raise",
-              "line": 158
+              "line": 159
             },
             {
               "in": "check_workspace_integrity",
               "kind": "except",
-              "line": 258
+              "line": 259
+            },
+            {
+              "in": "build_suite_command",
+              "kind": "raise",
+              "line": 438
+            },
+            {
+              "in": "build_suite_command",
+              "kind": "except",
+              "line": 444
+            },
+            {
+              "in": "build_suite_command",
+              "kind": "raise",
+              "line": 445
+            },
+            {
+              "in": "build_suite_command",
+              "kind": "raise",
+              "line": 455
+            },
+            {
+              "in": "build_suite_command",
+              "kind": "except",
+              "line": 458
+            },
+            {
+              "in": "build_suite_command",
+              "kind": "raise",
+              "line": 459
             },
             {
               "in": "run_pytest_and_score",
               "kind": "raise",
-              "line": 439
+              "line": 492
             },
             {
               "in": "run_pytest_and_score",
               "kind": "raise",
-              "line": 441
+              "line": 494
             },
             {
               "in": "run_pytest_and_score",
               "kind": "except",
-              "line": 495
+              "line": 559
             },
             {
               "in": "run_pytest_and_score",
               "kind": "raise",
-              "line": 509
+              "line": 573
             }
           ],
-          "hash": "e3f2a8de0ef82fc1abf2908711e71cca894cb90cf3f575dffd22332e06243d7e",
+          "hash": "13bfb3a54c49b515a2da3d94228c76c0b7151f9e30f4f98a0a58230fc161b12b",
           "importsFiles": [
             "mcptoolshop_rnd/localbuilders/contain.py",
             "mcptoolshop_rnd/localbuilders/workspace.py"
@@ -6128,6 +6598,7 @@
         {
           "exports": [
             "build_workspace",
+            "fill_command_placeholders",
             "git_env",
             "is_scorer_ignored",
             "is_test_path",
@@ -6150,67 +6621,102 @@
               "line": 104
             },
             {
-              "in": "from_dict",
+              "in": "fill_command_placeholders",
               "kind": "raise",
-              "line": 156
+              "line": 139
+            },
+            {
+              "in": "fill_command_placeholders",
+              "kind": "raise",
+              "line": 143
             },
             {
               "in": "from_dict",
               "kind": "raise",
-              "line": 160
+              "line": 220
             },
             {
               "in": "from_dict",
               "kind": "raise",
-              "line": 163
+              "line": 225
             },
             {
               "in": "from_dict",
               "kind": "raise",
-              "line": 169
+              "line": 228
             },
             {
               "in": "from_dict",
               "kind": "raise",
-              "line": 176
+              "line": 234
             },
             {
               "in": "from_dict",
               "kind": "raise",
-              "line": 184
+              "line": 241
+            },
+            {
+              "in": "from_dict",
+              "kind": "raise",
+              "line": 255
+            },
+            {
+              "in": "from_dict",
+              "kind": "raise",
+              "line": 272
+            },
+            {
+              "in": "from_dict",
+              "kind": "raise",
+              "line": 291
+            },
+            {
+              "in": "from_dict",
+              "kind": "raise",
+              "line": 301
             },
             {
               "in": "read_scrubbed_test",
               "kind": "raise",
-              "line": 222
+              "line": 349
             },
             {
               "in": "read_twin_test",
               "kind": "raise",
-              "line": 231
+              "line": 358
+            },
+            {
+              "in": "read_companion_test",
+              "kind": "raise",
+              "line": 408
             },
             {
               "in": "load_task_bank",
               "kind": "raise",
-              "line": 240
+              "line": 417
             },
             {
               "in": "_run_git",
               "kind": "raise",
-              "line": 332
+              "line": 509
             },
             {
               "in": "build_workspace",
               "kind": "raise",
-              "line": 351
+              "line": 528
             },
             {
               "in": "build_workspace",
               "kind": "except",
-              "line": 370
+              "line": 547
+            },
+            {
+              "in": "build_workspace",
+              "kind": "raise",
+              "line": 563
             }
           ],
-          "hash": "67ee65253858d76c7c77ec6e4b0e6fcdeebebcbae83bad95783acaf7f107648b",
+          "hash": "efcd92082fef8ca0febc17bb309261db10f1ac14228f0c358ad4e76a68f85c43",
           "path": "mcptoolshop_rnd/localbuilders/workspace.py"
         },
         {
@@ -6491,7 +6997,7 @@
           "where": [
             "caller"
           ],
-          "writes": 15
+          "writes": 16
         },
         {
           "reads": 2,
@@ -6516,12 +7022,12 @@
         }
       ],
       "outsideReads": 43,
-      "outsideWrites": 15,
+      "outsideWrites": 16,
       "role": "code",
       "testRunners": [
         "unittest"
       ],
-      "testedBy": 16,
+      "testedBy": 17,
       "unresolvedNamed": [
         {
           "path": "mcptoolshop_rnd/collect.py",
@@ -6597,7 +7103,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "eb9fb677356772af439d7bb12ac227431e9f8c89bee88e868d3b06db755f5ba3",
+          "hash": "28b3f9a544912f32d5964c2c3e3bac4482f9307a30f5e26dc2991624ec36120c",
           "path": "CHANGELOG.md"
         },
         {
@@ -6653,7 +7159,7 @@
           "path": "codecov.yml"
         },
         {
-          "hash": "b03fad04c6db29461f20c0a815e116fc7c405a30cec7677c2c16dac2077b2ba0",
+          "hash": "f5d37e9d621a8b092e22f8cb7d6c95624bfa2c7e314ef181bd1f444c4611277c",
           "path": "pyproject.toml"
         },
         {
@@ -6756,6 +7262,10 @@
           "path": "site/public/charts/npu-vs-cpu.svg"
         },
         {
+          "hash": "d03b18f61713c18593ca29dbfdc201d4953576cf364ed41e8cebece4b502e49d",
+          "path": "site/public/charts/pilot-thinking-budget.svg"
+        },
+        {
           "hash": "8135efa8483a0544562c094aa6ffe937b5dad7277bb11633f2cb6f908ace8ba5",
           "path": "site/public/charts/reasoning-default.svg"
         },
@@ -6787,6 +7297,10 @@
         {
           "hash": "72c7991a4ad626171e690b534efa6d582d485b059d0ecf47f991d6b58bd413a8",
           "path": "site/src/content/docs/briefs/agent-tracing-nemo-relay.md"
+        },
+        {
+          "hash": "3e66b53cace3bd87d9f4000a05d3f2b89a5df874547a1d1db67d23fac2c404be",
+          "path": "site/src/content/docs/briefs/ai-output-terms.md"
         },
         {
           "hash": "161133f10d6bbd7e956f09fb803dc2f5db8fc17adc4b650e496f1354760ddfb5",
@@ -6845,7 +7359,7 @@
           "path": "site/src/content/docs/briefs/verifier-calibration.md"
         },
         {
-          "hash": "ad3db58c31b09fe658937909b173ba2295206a78a379dd5a1fc2fe76401ce87a",
+          "hash": "10ad82cd9e5d3a5a764eaf38bd57564e3749490ce9a1ae539d6f32b9fda88283",
           "path": "site/src/content/docs/briefs/verifier-training-data.md"
         },
         {
@@ -6869,7 +7383,7 @@
           "path": "site/src/content/docs/handbook/diagnose-then-fix.md"
         },
         {
-          "hash": "5393d626cab4cfe48d88e215491945ec87fd6cf69146bcc9971d60c8c5531552",
+          "hash": "b253f53bd35bbc3a714c546cf81251c8aefa6e6eba4b62134b992b212d51aa62",
           "path": "site/src/content/docs/handbook/experiments.md"
         },
         {
@@ -6895,6 +7409,10 @@
         {
           "hash": "a0583cba5401270b0c21454ae4183128d7740a7b5e575169ab6555d6884aa199",
           "path": "site/src/content/docs/handbook/relevance-grading.md"
+        },
+        {
+          "hash": "d197667211a94e730ddc514a21f0701ed0865097f1fe31a689f5c432fadd573c",
+          "path": "site/src/content/docs/handbook/rented-gpu-windows.md"
         },
         {
           "hash": "c29e1d27d903ac8bc660d1e954edf915583d75a5b3ce333a2c36669ebed471f2",
@@ -6935,6 +7453,14 @@
         {
           "hash": "eb16df8facd7629f608fc1752467575be37f9a242cb0d2d37d0e404794650127",
           "path": "site/src/content/docs/newsletter/issue-09.md"
+        },
+        {
+          "hash": "1bf08b6a74dc60c635c7bb119a016911c732722d080ff986fd184c2968ebf965",
+          "path": "site/src/content/docs/newsletter/issue-10.md"
+        },
+        {
+          "hash": "747d7879a6200edcde283c3f23496655f04f55bc5882ef3173737818e2b572cf",
+          "path": "site/src/content/docs/newsletter/issue-11.md"
         },
         {
           "hash": "15e52b4b677090a1b5123840efa4fa14447c28189b60b2d851389352c81db4cc",
@@ -7042,6 +7568,10 @@
           "path": "tests/fixtures/agent_ab_harness/shakedown-2/RC03-B2.jsonl"
         },
         {
+          "hash": "91ba862e5a7ed6ce1e683965b285c6f57bfce5fb74cd90042dc490d8c085e0e0",
+          "path": "tests/fixtures/gemma-4-w0-call-redacted.json"
+        },
+        {
           "hash": "820e32ce02c54e2a89ec4a03d9f2d980b876504fa08190e16a1edbe69e35f19c",
           "path": "tests/fixtures/localbuilders/bank.json"
         },
@@ -7084,6 +7614,10 @@
           ],
           "path": "tests/fixtures/localbuilders/twins/test_watch_stable_twin.py",
           "testFramework": "unittest"
+        },
+        {
+          "hash": "e77be6cb3b058773d3fc5d11172311863badcf6b2a005f094c0f047a8b27f244",
+          "path": "tests/fixtures/muse-glimmer-w0-call-redacted.json"
         },
         {
           "hash": "8c9c1fc133c0f098796154a0a80e9e20ecf00cf20d202c6808560da88dc7fba4",
@@ -7268,7 +7802,7 @@
           "testFramework": "unittest"
         },
         {
-          "hash": "ddd57c02e79ead85799f58595e79da6bcdbac6c95c6505d5cb8d14fca1e38f99",
+          "hash": "04236715ca8fd35dd97b93facbc307d01e9e3d2c0f6e2980120c724e358cc8a2",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/abmine.py",
@@ -7303,12 +7837,17 @@
           "exports": [
             "run_py"
           ],
-          "hash": "d08ce27d3610d9d595db0065dfe810affe26adf22e40ec370b3c2218fd01b284",
+          "hash": "ce5c68d2762b73f144e3421165118dc173113c224b5d04df57ec4baef760411c",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "rnd/__init__.py"
           ],
           "path": "tests/test_packaging.py",
+          "testFramework": "unittest"
+        },
+        {
+          "hash": "734f37be2b4f362967cc44c3d471444f1bec4d610fe60e34d11a19f3d30cbc45",
+          "path": "tests/test_packaging_wheel.py",
           "testFramework": "unittest"
         },
         {
@@ -7360,6 +7899,16 @@
           "testFramework": "unittest"
         },
         {
+          "hash": "26893b450f3c71579d39f41ad419298bd72ed09065221517bcbba33540c294b9",
+          "importsFiles": [
+            "mcptoolshop_rnd/localbuilders/__init__.py",
+            "mcptoolshop_rnd/localbuilders/proxy.py",
+            "mcptoolshop_rnd/localbuilders/recount.py"
+          ],
+          "path": "tests/test_thinking_count.py",
+          "testFramework": "unittest"
+        },
+        {
           "exports": [
             "fixture",
             "text"
@@ -7407,7 +7956,7 @@
   ],
   "doors": [
     {
-      "checksCount": 2,
+      "checksCount": 1,
       "commands": [
         {
           "dir": "",
@@ -7517,12 +8066,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 22
-        },
-        {
-          "boundary": "rnd",
-          "depth": 0,
-          "files": 2
+          "files": 23
         },
         {
           "boundary": "root",
@@ -7532,7 +8076,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 21
+          "files": 23
         },
         {
           "boundary": "experiments",
@@ -7542,6 +8086,15 @@
             "from": "tests/test_agent_ab_harness_run.py"
           },
           "files": 6
+        },
+        {
+          "boundary": "rnd",
+          "depth": 1,
+          "enters": {
+            "file": "rnd/__init__.py",
+            "from": "tests/test_packaging.py"
+          },
+          "files": 1
         }
       ],
       "readers": [
@@ -7589,13 +8142,6 @@
         {
           "directory": true,
           "job": "ci",
-          "path": "rnd/",
-          "runKind": "checks",
-          "via": "build pyproject.toml"
-        },
-        {
-          "directory": true,
-          "job": "ci",
           "matched": true,
           "path": "tests/",
           "runKind": "executes",
@@ -7607,7 +8153,7 @@
           "runKind": "executes"
         }
       ],
-      "runsCount": 4,
+      "runsCount": 3,
       "secrets": [],
       "sends": {
         "deploysPages": false,
@@ -7634,7 +8180,7 @@
         },
         {
           "coverage": true,
-          "files": 21,
+          "files": 23,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -7823,7 +8369,7 @@
       "usesWorkflowToken": false
     },
     {
-      "checksCount": 2,
+      "checksCount": 1,
       "commands": [
         {
           "dir": "",
@@ -7918,12 +8464,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 22
-        },
-        {
-          "boundary": "rnd",
-          "depth": 0,
-          "files": 2
+          "files": 23
         },
         {
           "boundary": "root",
@@ -7946,19 +8487,12 @@
           "runKind": "executes"
         },
         {
-          "directory": true,
-          "job": "pypi",
-          "path": "rnd/",
-          "runKind": "checks",
-          "via": "build pyproject.toml"
-        },
-        {
           "job": "pypi",
           "path": "verify.sh",
           "runKind": "executes"
         }
       ],
-      "runsCount": 4,
+      "runsCount": 3,
       "secrets": [],
       "sends": {
         "deploysPages": false,
@@ -8102,8 +8636,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "fd128b82b339971a7c4dba10a17e191ec81f79d2",
-    "tracked": 824
+    "commit": "01646c0141f685fd42f2cd297fd1c1aad1dc8910",
+    "tracked": 918
   },
   "landings": [
     {
@@ -9276,6 +9810,38 @@
     {
       "readers": [
         {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/stage1-regeneration/pilot",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/stage1-regeneration/pilot/qwen3.8-w0-calls.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "experiments/verifier-gold/calibration/difficulty.py",
           "call": "read_text",
           "confidence": "ast"
@@ -10391,6 +10957,18 @@
     {
       "readers": [
         {
+          "by": "tests/test_thinking_count.py",
+          "call": "read_text",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "tests/fixtures/gemma-4-w0-call-redacted.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "tests/test_localbuilders.py",
           "call": "literal",
           "confidence": "ast",
@@ -10427,6 +11005,18 @@
     {
       "readers": [
         {
+          "by": "tests/test_thinking_count.py",
+          "call": "read_text",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "tests/fixtures/muse-glimmer-w0-call-redacted.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "tests/test_localbuilders.py",
           "call": "literal",
           "confidence": "ast",
@@ -10435,12 +11025,34 @@
       ],
       "target": "tests/test_abmine.py",
       "writers": []
+    },
+    {
+      "readers": [],
+      "target": "windows",
+      "tracked": false,
+      "writers": [
+        {
+          "by": "scripts/colab/collect_windows.py",
+          "confidence": "ast"
+        }
+      ]
+    },
+    {
+      "readers": [],
+      "target": "windows/_top",
+      "tracked": false,
+      "writers": [
+        {
+          "by": "scripts/colab/collect_windows.py",
+          "confidence": "ast"
+        }
+      ]
     }
   ],
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 52,
+  "testFiles": 56,
   "testsNotRun": [
     "experiments/cuda-graphs/test_graphed_heads.py",
     "experiments/data-designer/tests/test_lockdown.py",
@@ -10449,6 +11061,39 @@
     "experiments/ollama-cuda-backend/diag/test_diag_test.py"
   ],
   "unassigned": [
+    {
+      "exports": [
+        "classify",
+        "copy_decision",
+        "expand_keys",
+        "fnum",
+        "hash_file",
+        "load_json",
+        "load_private_terms",
+        "main",
+        "parse_ledger",
+        "read_text",
+        "scrub",
+        "segment_for",
+        "short_purpose",
+        "spent_for",
+        "token_hit"
+      ],
+      "failurePaths": [
+        {
+          "in": "load_json",
+          "kind": "except",
+          "line": 177
+        },
+        {
+          "in": "main",
+          "kind": "except",
+          "line": 352
+        }
+      ],
+      "hash": "ebe5cc63a1a81c456bc33f8e804a67bbd1d81c88173ac95e26193f2a49befc93",
+      "path": "scripts/colab/collect_windows.py"
+    },
     {
       "exports": [
         "sh"

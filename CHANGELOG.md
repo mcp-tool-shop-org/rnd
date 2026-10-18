@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.2.2] - 2026-10-18
+
+- the golden path: deadline stops with measured margins, no implicit Hub token, the token-clean check, Colab can't see a dead kernel
+
 ## [1.1.15.2.1] - 2026-10-18
 
 - the golden path and issue 13 after Argon's consult: what a cap stop returns, the vault fallback, image drift, OOM, stand-in checklist, template fields

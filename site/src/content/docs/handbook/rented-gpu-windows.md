@@ -31,7 +31,7 @@ Measured on our account (`colab usage`, 2026-10-16 to 2026-10-18):
 | A100 40 GB | 5.30 | serving models: writing and critique waves |
 
 - **Never do CPU work on the A100.** Download and conversion took 15–21 minutes per model on night one, about 40% of
-  the projected time for our five-model window. Convert once on CPU, host the file privately, and let the A100 download a finished file.
+  the projected time for our five-model window. Convert once on CPU, host the file privately, and let the A100 download a finished file. The one exception is a pin that only reproduces on the A100's image (section 5).
 - **One card type per study.** Seconds and units per result are part of what you measure, so don't mix cards
   inside one study. Choose the card before the study starts.
 
@@ -59,6 +59,11 @@ Measured on our account (`colab usage`, 2026-10-16 to 2026-10-18):
    fails, or whose first exec dies, is stopped and a fresh one requested, up to 3 tries. One row per try goes into
    `gate.jsonl`. The gate only catches VMs that are bad at the start; drops later in the run are the resume path's
    job (step 5).
+   - **Set each floor on the metric the gate measures.** A 200 MB read never gets past ramp-up: one VM read 96 MB/s
+     on the gate and then downloaded at 259 MB/s. Our first A100 floor (129, half the sustained median) would have
+     rejected good VMs. We now use 60 on the short read, on CPU and GPU alike, and log every read so the floor can be
+     recalibrated against real downloads.
+   - **It does reject bad VMs.** Its first catch was a CPU VM reading 45 MB/s; the next VM passed.
 4. **Uploads,** each checked by sha256. Then the token, if the job needs one (section 6).
 5. **The job,** started with `colab exec`. Every `PIN_*` setting goes over as `--env`. Never rely on the exec's
    output stream: in our windows it stopped reaching the rig while the job ran on. The rig follows the job's own
@@ -78,13 +83,29 @@ Measured on our account (`colab usage`, 2026-10-16 to 2026-10-18):
 - **One job per VM.** The job takes a lock and carries a token for its window, so a late duplicate exec waits, then
   stops if the first job finished.
 - **It writes `pin-result.json`** with everything it pinned and measured, and `ok` true or false.
+- **It never pip-installs into its own interpreter.** One of our jobs installed the converter's requirements into
+  the Python it was running in, partway through. That swapped `huggingface_hub` on disk under modules already
+  loaded, and the upload at the end failed on an import error, after a 15-minute conversion had matched its pin.
+  Install into a separate venv, or run the later step in a fresh interpreter.
 
 ## 5. Models
 
 - **Pin everything:** the model's Hugging Face revision, the GGUF's sha256, the llama-server binary's sha256, the
   sampling settings. A model that doesn't reproduce its pin is never served.
-- **Pre-build on CPU, byte for byte.** A CPU window converts one model and uploads it to a private repo only if the
-  file's sha256 equals the pin from the earlier conversion. That proves it is the same file.
+- **Pre-build once, byte for byte.** A prebuild window converts one model and uploads it to a private repo only if
+  the file's sha256 equals the pin from the earlier conversion. That proves it is the same file. Never re-pin to make
+  a file fit. On the high-mem CPU runtime one 30B model took about 15 minutes and 0.07 units: download 230 s, convert
+  354 s, hash 101 s, upload 138 s.
+- **The converter's environment is part of the pin.** The same conversion, at the same model revision, llama.cpp
+  commit and library versions, gave different bytes on a CPU VM. The one material difference in the recorded
+  `pip freeze` was the torch build: `2.11.0+cu130`, preinstalled in the GPU image's system Python, against
+  `2.11.0+cpu` on the CPU image. llama.cpp's conversion requirements point pip at PyTorch's CPU index, so a fresh
+  venv always gets `+cpu`, and the two models we had converted in their own venv matched on both hosts. The host
+  CPU's instruction set is a second possible cause, not yet ruled out.
+  - **For new pins:** convert in a venv with the exact torch wheel pinned by URL or hash, never the image's system
+    Python. Record the CPU model and `torch.backends.cpu.get_cpu_capability()` with the pin.
+  - **For pins made with a system Python:** pre-build them on the same card and image that made them. Ours did.
+  - **Record `pip freeze` with every conversion.** Comparing the freezes is how we found the cause in minutes.
 - **Download everything before the first wave,** after checking that the whole set plus 20 GB fits the free disk.
 
 ## 6. Tokens
@@ -110,6 +131,10 @@ No paid window runs on new code until it has climbed the ladder:
    ones. Run it from the same inputs the paid window will use. Ours caught a refused rewrite that two review rounds
    had missed, which would otherwise have failed on paid units.
 4. **The paid window.**
+
+A stub can only test the paths its mock models take. Our first paid window after the ladder found one more defect:
+an arm whose slots all failed was still sent to a critique, because no mock model ever failed every slot. Give the
+mocks the failure modes you expect from real models: every slot dropped, a reply cut off, a refusal.
 
 ## 8. The review loop
 

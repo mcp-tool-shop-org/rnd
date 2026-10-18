@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.1.1] - 2026-10-18
+
+- the golden path: gate floors on the gate's own metric, the converter's environment as part of the pin, mocks with real failure modes
+
 ## [1.1.15.1.0] - 2026-10-18
 
 - the Claude + Colab golden path: the rented-GPU-windows handbook page and the pilot's raw window data

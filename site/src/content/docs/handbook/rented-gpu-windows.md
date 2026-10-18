@@ -83,6 +83,10 @@ Measured on our account (`colab usage`, 2026-10-16 to 2026-10-18):
 - **One job per VM.** The job takes a lock and carries a token for its window, so a late duplicate exec waits, then
   stops if the first job finished.
 - **It writes `pin-result.json`** with everything it pinned and measured, and `ok` true or false.
+- **It never pip-installs into its own interpreter.** One of our jobs installed the converter's requirements into
+  the Python it was running in, partway through. That swapped `huggingface_hub` on disk under modules already
+  loaded, and the upload at the end failed on an import error, after a 15-minute conversion had matched its pin.
+  Install into a separate venv, or run the later step in a fresh interpreter.
 
 ## 5. Models
 

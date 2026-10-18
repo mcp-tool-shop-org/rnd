@@ -1,0 +1,1 @@
+{"window": "10d", "card": "A100", "cap": 14, "spent": 14.03, "basis": "rate_x_runtime", "outcome": "cap-stop", "why": "pilot arm 1, Qwen3.8 + Muse: hit its cap with w0 unfinished and no checkpoint; the rig log stopped receiving the exec's output while the job ran on (mistakes #31)"}

@@ -1,0 +1,1 @@
+{"window": "1", "card": "A100", "cap": null, "spent": null, "basis": "estimate", "outcome": "partial", "why": "build: llama-server built (b4659b3f, the binary every later window runs) after three tries; Muse's maker GGUF repo had no Q8_0 (fixed by converting); convert: Lightning converted and pinned. Outside the 200-unit budget"}

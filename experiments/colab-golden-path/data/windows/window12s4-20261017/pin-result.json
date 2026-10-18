@@ -1,0 +1,415 @@
+{
+ "started": "2026-10-17T23:53:28Z",
+ "job_token": "pinw12s4-1792281197",
+ "stub": true,
+ "machine": {
+  "card": "STUB (CPU)",
+  "memory": "0 MiB",
+  "driver": "stub",
+  "compat": false,
+  "driver_cuda": "stub",
+  "colab_release_tag": "release-colab-external-images_20261014-060047_RC00",
+  "cores": 2,
+  "disk_free_gb": 205.3,
+  "runtime": "13.4",
+  "stub": true
+ },
+ "role": "pilot",
+ "llama_server": {
+  "commit": "620d2225cc436ab0b001e3200e590e3b286ef9ab",
+  "sha256": "b4659b3fc74037deb96b2148c455753121fa21dde174d7124547e2bf9ffd37c3",
+  "path": "stub",
+  "stub": true
+ },
+ "role_set": {
+  "commit": "f04a181b1ee808c884a4d1672423117c332f7f16",
+  "src": "/content/role-set",
+  "role_set": "/content/rs-venv/bin/role-set",
+  "python": "3.12.3"
+ },
+ "rnd": {
+  "commit": "d90d04360a248fd6f39b5c815afe211552f12652",
+  "src": "/content/rnd",
+  "proxy_import": "ok"
+ },
+ "disk_free_gb_before": 220.4,
+ "pack_verify": "{\"role\": \"verifier\", \"commit\": \"b141cf687619f2ed28489729031c7b845afb18ea\", \"pack_sha256\": \"de2c7ed0bdfa945aefec9745b5ac0a3514a15ca98f63211929b09561fe38dcae\"}",
+ "resume_unpacked": "",
+ "screen": {
+  "pilot": [
+   "T02-A-01",
+   "T02-C-01",
+   "T02-D-01",
+   "T02-E-01",
+   "T02-B-01",
+   "T02-A-02",
+   "T02-C-08",
+   "T02-D-05"
+  ],
+  "twins": [
+   "T04-C-AP-01",
+   "T04-D-AP-02"
+  ],
+  "waves": 2
+ },
+ "plans": {
+  "pilot_sha256": "a443e56642fa1c28c2c7f1aaaee903057b55f2759c1850f6b0d4d3efb476a232",
+  "twins_sha256": "efb8d739036d7c901fcaee25aba595f9b3a45a00f4199ee0808585a08a7b0451",
+  "exclusion_state_sha256": "ff0ca53795b81d44de750447cfb4c5d789033eca1deff19805c3add99bf71f5a"
+ },
+ "critic_for": {
+  "granite-4.2-30b": "muse-glimmer-30b",
+  "nemotron-3.5-lightning-30b-a3b": "muse-glimmer-30b"
+ },
+ "arms": {
+  "granite-4.2-30b": {
+   "pilot": {
+    "waves": [
+     {
+      "wave": "write",
+      "out": "/content/pin/pilot/pilot/granite-4.2-30b/w0",
+      "exit": 0,
+      "seconds": 1,
+      "stderr": "",
+      "generations": {
+       "path": "/content/pin/pilot/pilot/granite-4.2-30b/generations-w0-granite-4.2-30b.jsonl",
+       "calls": 13,
+       "refused": 0,
+       "truncated": 0,
+       "thinking_tokens": 0,
+       "output_tokens": 790,
+       "wall_s": 0.1,
+       "sha256": "da0a44eb2415546c74679d63470cfcb369d36e71824ea1d8f11793f06f03d3a1"
+      },
+      "result": {
+       "exclusion_state": null,
+       "out_dir": "w0",
+       "wave": "write",
+       "drafts": "wave-drafts.jsonl",
+       "drafts_sha256": "b061de73dbb74a664f23dbaeed72ddcd9ea45cb4a8c96e1a86eb13fc55b199d2",
+       "states": {
+        "awaiting_critique": 8,
+        "needs_rewrite": 0,
+        "accepted": 0,
+        "dropped": 0,
+        "skipped": 0
+       },
+       "accepted": 0,
+       "dropped": 0,
+       "attempted": 8,
+       "halted": null,
+       "lesson_halts": {},
+       "skipped": {},
+       "batch_check": null,
+       "rehearsal": false,
+       "mock": false,
+       "slots": 8,
+       "outcomes": 8,
+       "calls": {
+        "journal": "calls-w0-granite-4.2-30b.jsonl",
+        "reused": 0,
+        "called": 13,
+        "unused_from_reuse": 0
+       }
+      }
+     },
+     {
+      "wave": "critique",
+      "out": "/content/pin/pilot/pilot/granite-4.2-30b/w1",
+      "exit": 0,
+      "seconds": 1,
+      "stderr": "",
+      "generations": {
+       "path": "/content/pin/pilot/pilot/granite-4.2-30b/generations-w1-muse-glimmer-30b.jsonl",
+       "calls": 32,
+       "refused": 0,
+       "truncated": 0,
+       "thinking_tokens": 0,
+       "output_tokens": 2072,
+       "wall_s": 0.0,
+       "sha256": "4d35f445057057fc61d6f4ee34b5e8bee267c4c72b3b0e0cae571e4491a5617e"
+      },
+      "result": {
+       "exclusion_state": null,
+       "out_dir": "w1",
+       "wave": "critique",
+       "drafts": "wave-drafts.jsonl",
+       "drafts_sha256": "8419cc3af7cbe44f8db357a8be94fde72f97d8af3d765ca65cc0b0c099139ce0",
+       "states": {
+        "awaiting_critique": 0,
+        "needs_rewrite": 0,
+        "accepted": 8,
+        "dropped": 0,
+        "skipped": 0
+       },
+       "accepted": 8,
+       "dropped": 0,
+       "attempted": 0,
+       "halted": null,
+       "lesson_halts": {},
+       "skipped": {},
+       "batch_check": "REFUSED: T02: 0 of 4 verdict-bearing items (0%) are keyed cannot_tell; at least 25% are needed",
+       "rehearsal": false,
+       "mock": false,
+       "slots": 8,
+       "outcomes": 8,
+       "calls": {
+        "journal": "calls-w1-muse-glimmer-30b.jsonl",
+        "reused": 0,
+        "called": 32,
+        "unused_from_reuse": 0
+       }
+      }
+     }
+    ],
+    "last": "/content/pin/pilot/pilot/granite-4.2-30b/w1",
+    "stub": true,
+    "readout_exit": 1,
+    "readout_tail": "# STUB RUN (PIN_STUB=1)\n"
+   },
+   "twins": {
+    "skipped": "PIN_PILOT_TWINS=0: twins wait for the arms that go on",
+    "stub": true,
+    "readout_tail": "# STUB RUN (PIN_STUB=1)"
+   },
+   "stub": true
+  },
+  "nemotron-3.5-lightning-30b-a3b": {
+   "pilot": {
+    "waves": [
+     {
+      "wave": "write",
+      "out": "/content/pin/pilot/pilot/nemotron-3.5-lightning-30b-a3b/w0",
+      "exit": 0,
+      "seconds": 1,
+      "stderr": "",
+      "generations": {
+       "path": "/content/pin/pilot/pilot/nemotron-3.5-lightning-30b-a3b/generations-w0-nemotron-3.5-lightning-30b-a3b.jsonl",
+       "calls": 13,
+       "refused": 0,
+       "truncated": 0,
+       "thinking_tokens": 0,
+       "output_tokens": 796,
+       "wall_s": 0.0,
+       "sha256": "bd431989685cdd9bc8fab378f8ee4d685c2966354b3b22ad72bdd28e20aaf3e2"
+      },
+      "result": {
+       "exclusion_state": null,
+       "out_dir": "w0",
+       "wave": "write",
+       "drafts": "wave-drafts.jsonl",
+       "drafts_sha256": "e7b590636837a682f239b7c55b6848419778a68b30c4bc46dfcd7de82900747a",
+       "states": {
+        "awaiting_critique": 8,
+        "needs_rewrite": 0,
+        "accepted": 0,
+        "dropped": 0,
+        "skipped": 0
+       },
+       "accepted": 0,
+       "dropped": 0,
+       "attempted": 8,
+       "halted": null,
+       "lesson_halts": {},
+       "skipped": {},
+       "batch_check": null,
+       "rehearsal": false,
+       "mock": false,
+       "slots": 8,
+       "outcomes": 8,
+       "calls": {
+        "journal": "calls-w0-nemotron-3.5-lightning-30b-a3b.jsonl",
+        "reused": 0,
+        "called": 13,
+        "unused_from_reuse": 0
+       }
+      }
+     },
+     {
+      "wave": "critique",
+      "out": "/content/pin/pilot/pilot/nemotron-3.5-lightning-30b-a3b/w1",
+      "exit": 0,
+      "seconds": 1,
+      "stderr": "",
+      "generations": {
+       "path": "/content/pin/pilot/pilot/nemotron-3.5-lightning-30b-a3b/generations-w1-muse-glimmer-30b.jsonl",
+       "calls": 32,
+       "refused": 0,
+       "truncated": 0,
+       "thinking_tokens": 0,
+       "output_tokens": 2072,
+       "wall_s": 0.1,
+       "sha256": "d99a497a939658ef000495797cf777b90268ec4df5fe70ad46a73040f8e40238"
+      },
+      "result": {
+       "exclusion_state": null,
+       "out_dir": "w1",
+       "wave": "critique",
+       "drafts": "wave-drafts.jsonl",
+       "drafts_sha256": "cb6e8ef2a000ab9b2dafdad98fb82725b55dec31b087017b251a2456bb640cef",
+       "states": {
+        "awaiting_critique": 0,
+        "needs_rewrite": 0,
+        "accepted": 8,
+        "dropped": 0,
+        "skipped": 0
+       },
+       "accepted": 8,
+       "dropped": 0,
+       "attempted": 0,
+       "halted": null,
+       "lesson_halts": {},
+       "skipped": {},
+       "batch_check": "REFUSED: T02: 0 of 4 verdict-bearing items (0%) are keyed cannot_tell; at least 25% are needed",
+       "rehearsal": false,
+       "mock": false,
+       "slots": 8,
+       "outcomes": 8,
+       "calls": {
+        "journal": "calls-w1-muse-glimmer-30b.jsonl",
+        "reused": 0,
+        "called": 32,
+        "unused_from_reuse": 0
+       }
+      }
+     }
+    ],
+    "last": "/content/pin/pilot/pilot/nemotron-3.5-lightning-30b-a3b/w1",
+    "stub": true,
+    "readout_exit": 1,
+    "readout_tail": "# STUB RUN (PIN_STUB=1)\n"
+   },
+   "twins": {
+    "skipped": "PIN_PILOT_TWINS=0: twins wait for the arms that go on",
+    "stub": true,
+    "readout_tail": "# STUB RUN (PIN_STUB=1)"
+   },
+   "stub": true
+  }
+ },
+ "models": [
+  {
+   "served_as": "granite-4.2-30b",
+   "card": "granite-4.2-30b",
+   "repo": "ibm-granite/granite-4.2-30b",
+   "how": "stub",
+   "gguf_sha256": "1b5c47835f6f8b8732550541dc432d0a351e3f706961ff3c750d3ee1987b9b4c",
+   "quant": "Q8_0",
+   "stub": true
+  },
+  {
+   "served_as": "nemotron-3.5-lightning-30b-a3b",
+   "card": "nemotron-3.5-lightning-30b-a3b",
+   "repo": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+   "how": "stub",
+   "gguf_sha256": "5bea2069f4a8067659ed8bfb4bce58761f37d308e9689818ef77915d3b446832",
+   "quant": "Q8_0",
+   "stub": true
+  },
+  {
+   "served_as": "muse-glimmer-30b",
+   "card": "muse-glimmer-30b",
+   "repo": "meta-models/Muse-Glimmer-30B",
+   "how": "stub",
+   "gguf_sha256": "c321320a81f177362f3ddf3c199edff097ab88d10b19a13eab7f606f5ffc4e74",
+   "quant": "Q8_0",
+   "stub": true
+  }
+ ],
+ "quant": {
+  "granite-4.2-30b": {
+   "policy": "q8",
+   "ran": "Q8_0",
+   "stub": true
+  },
+  "nemotron-3.5-lightning-30b-a3b": {
+   "policy": "q8",
+   "ran": "Q8_0",
+   "stub": true
+  },
+  "muse-glimmer-30b": {
+   "policy": "q8",
+   "ran": "Q8_0",
+   "stub": true
+  }
+ },
+ "proxy_configs": {
+  "granite-4.2-30b": {
+   "candidate": "granite-4.2-30b",
+   "removed": [],
+   "sha256": "7e71b156ee29f9d153672284d90ea8f0d7e49cdc2617cbb1ea85b44353b7aae4"
+  },
+  "nemotron-3.5-lightning-30b-a3b": {
+   "candidate": "nemotron-3.5-lightning-30b-a3b",
+   "removed": [],
+   "sha256": "4bac0ee75abfd8920b39e1b42e7dd797638b4734a94074a621a484a26919321f"
+  },
+  "muse-glimmer-30b": {
+   "candidate": "muse-glimmer-30b",
+   "removed": [],
+   "sha256": "999b5e1d9b2fd484d910cfbb2a1efed0ecb21561e354c3d4fe5407f6bb2497dd"
+  }
+ },
+ "pilot_seconds": 5,
+ "twins_seconds": 0,
+ "serves": {
+  "granite-4.2-30b": [
+   {
+    "seconds": 0,
+    "fit": {
+     "offloaded": 1,
+     "layers": 1,
+     "ok": true,
+     "stub": true
+    },
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true,
+     "stub": true
+    },
+    "stub": true
+   }
+  ],
+  "nemotron-3.5-lightning-30b-a3b": [
+   {
+    "seconds": 0,
+    "fit": {
+     "offloaded": 1,
+     "layers": 1,
+     "ok": true,
+     "stub": true
+    },
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true,
+     "stub": true
+    },
+    "stub": true
+   }
+  ],
+  "muse-glimmer-30b": [
+   {
+    "seconds": 0,
+    "fit": {
+     "offloaded": 1,
+     "layers": 1,
+     "ok": true,
+     "stub": true
+    },
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true,
+     "stub": true
+    },
+    "stub": true
+   }
+  ]
+ },
+ "model_errors": 0,
+ "ok": true,
+ "resources": [],
+ "ended": "2026-10-17T23:53:43Z"
+}

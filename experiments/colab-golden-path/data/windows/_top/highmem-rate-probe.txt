@@ -1,0 +1,6 @@
+before: Current balance: 1163.71 compute units Usage rate: 0.08/hr 
+[colab] Session READY.
+open:   Usage rate: 0.34/hr Active assignments: 2 
+[colab] Session terminated.
+after:  Usage rate: 0.08/hr 
+[cpusurv] <session> | Hardware: CPU | Shape: Standard | Variant: DEFAULT

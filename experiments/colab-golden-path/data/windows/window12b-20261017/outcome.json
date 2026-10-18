@@ -1,0 +1,1 @@
+{"window": "12b", "card": "A100", "cap": 11, "spent": 10.04, "basis": "rate_x_runtime", "outcome": "partial", "why": "Granite's w0 written (8 awaiting); its critique wave refused on card pins counted as batch pins (fixed in 765eb76)"}

@@ -1,0 +1,1 @@
+{"window": "11d", "card": "A100", "cap": 3.5, "spent": 1.6, "basis": "estimate", "outcome": "results", "why": "Gemma Q8_0 fits at 32768: 61/61 layers, reproduces e357a450"}

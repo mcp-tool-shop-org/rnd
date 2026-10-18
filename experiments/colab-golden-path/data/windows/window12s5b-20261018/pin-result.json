@@ -1,0 +1,316 @@
+{
+ "started": "2026-10-18T02:30:45Z",
+ "job_token": "pinw12s5b-1792290639",
+ "stub": true,
+ "machine": {
+  "card": "STUB (CPU)",
+  "memory": "0 MiB",
+  "driver": "stub",
+  "compat": false,
+  "driver_cuda": "stub",
+  "colab_release_tag": "release-colab-external-images_20261014-060047_RC00",
+  "cores": 2,
+  "disk_free_gb": 205.3,
+  "runtime": "13.4",
+  "stub": true
+ },
+ "role": "pilot",
+ "llama_server": {
+  "commit": "620d2225cc436ab0b001e3200e590e3b286ef9ab",
+  "sha256": "b4659b3fc74037deb96b2148c455753121fa21dde174d7124547e2bf9ffd37c3",
+  "path": "stub",
+  "stub": true
+ },
+ "role_set": {
+  "commit": "718e511309e08f433cb43719adef35fe91ba7376",
+  "src": "/content/role-set",
+  "role_set": "/content/rs-venv/bin/role-set",
+  "python": "3.12.3"
+ },
+ "rnd": {
+  "commit": "018b6cf677aab0e41363d826b589be342d38d8b9",
+  "src": "/content/rnd",
+  "proxy_import": "ok"
+ },
+ "disk_free_gb_before": 220.4,
+ "pack_verify": "{\"role\": \"verifier\", \"commit\": \"b141cf687619f2ed28489729031c7b845afb18ea\", \"pack_sha256\": \"de2c7ed0bdfa945aefec9745b5ac0a3514a15ca98f63211929b09561fe38dcae\"}",
+ "resume_unpacked": "/content/resume",
+ "screen": {
+  "pilot": [
+   "T02-A-01",
+   "T02-C-01",
+   "T02-D-01",
+   "T02-E-01",
+   "T02-B-01",
+   "T02-A-02",
+   "T02-C-08",
+   "T02-D-05"
+  ],
+  "twins": [
+   "T04-C-AP-01",
+   "T04-D-AP-02"
+  ],
+  "waves": 4
+ },
+ "plans": {
+  "pilot_sha256": "a443e56642fa1c28c2c7f1aaaee903057b55f2759c1850f6b0d4d3efb476a232",
+  "twins_sha256": "efb8d739036d7c901fcaee25aba595f9b3a45a00f4199ee0808585a08a7b0451",
+  "exclusion_state_sha256": "ff0ca53795b81d44de750447cfb4c5d789033eca1deff19805c3add99bf71f5a"
+ },
+ "critic_for": {
+  "nemotron-3.5-lightning-30b-a3b": "muse-glimmer-30b",
+  "muse-glimmer-30b": "nemotron-3.5-lightning-30b-a3b"
+ },
+ "arms": {
+  "nemotron-3.5-lightning-30b-a3b": {
+   "pilot": {
+    "waves": [],
+    "last": "/content/pin/pilot/pilot/nemotron-3.5-lightning-30b-a3b/w1-resumed",
+    "stub": true,
+    "readout_tail": "# STUB RUN (PIN_STUB=1)"
+   },
+   "twins": {
+    "waves": [
+     {
+      "wave": "write",
+      "out": "/content/pin/pilot/twins/nemotron-3.5-lightning-30b-a3b/w0",
+      "exit": 0,
+      "seconds": 1,
+      "stderr": "",
+      "generations": {
+       "path": "/content/pin/pilot/twins/nemotron-3.5-lightning-30b-a3b/generations-w0-nemotron-3.5-lightning-30b-a3b.jsonl",
+       "calls": 5,
+       "refused": 0,
+       "truncated": 0,
+       "thinking_tokens": 0,
+       "output_tokens": 236,
+       "wall_s": 0.0,
+       "sha256": "b6166ca408f48c7eab3bc119178b81691c7b224368009742acd2914672f98b12"
+      },
+      "result": {
+       "exclusion_state": null,
+       "out_dir": "w0",
+       "wave": "write",
+       "drafts": "wave-drafts.jsonl",
+       "drafts_sha256": "8c0dac379236bb88ec9b666831da86a4085a4c5189efd42ea892da4b04a2b386",
+       "states": {
+        "awaiting_critique": 2,
+        "needs_rewrite": 0,
+        "accepted": 0,
+        "dropped": 0,
+        "skipped": 0
+       },
+       "accepted": 0,
+       "dropped": 0,
+       "attempted": 2,
+       "halted": null,
+       "lesson_halts": {},
+       "skipped": {},
+       "batch_check": null,
+       "rehearsal": false,
+       "mock": false,
+       "slots": 2,
+       "outcomes": 2,
+       "calls": {
+        "journal": "calls-w0-nemotron-3.5-lightning-30b-a3b.jsonl",
+        "reused": 0,
+        "called": 5,
+        "unused_from_reuse": 0
+       }
+      }
+     },
+     {
+      "wave": "critique",
+      "out": "/content/pin/pilot/twins/nemotron-3.5-lightning-30b-a3b/w1",
+      "exit": 0,
+      "seconds": 1,
+      "stderr": "",
+      "generations": {
+       "path": "/content/pin/pilot/twins/nemotron-3.5-lightning-30b-a3b/generations-w1-muse-glimmer-30b.jsonl",
+       "calls": 9,
+       "refused": 0,
+       "truncated": 0,
+       "thinking_tokens": 0,
+       "output_tokens": 532,
+       "wall_s": 0.0,
+       "sha256": "fadbca6875d8f834b52be229e0461810f66fe4779572df47c0648b6648e2fc97"
+      },
+      "result": {
+       "exclusion_state": null,
+       "out_dir": "w1",
+       "wave": "critique",
+       "drafts": "wave-drafts.jsonl",
+       "drafts_sha256": "4b9eb58ab11117d33d74abfc966127e0f62d2bb05c2abb6849b1dc73630eea60",
+       "states": {
+        "awaiting_critique": 0,
+        "needs_rewrite": 0,
+        "accepted": 2,
+        "dropped": 0,
+        "skipped": 0
+       },
+       "accepted": 2,
+       "dropped": 0,
+       "attempted": 0,
+       "halted": null,
+       "lesson_halts": {},
+       "skipped": {},
+       "batch_check": "clean",
+       "rehearsal": false,
+       "mock": false,
+       "slots": 2,
+       "outcomes": 2,
+       "calls": {
+        "journal": "calls-w1-muse-glimmer-30b.jsonl",
+        "reused": 0,
+        "called": 9,
+        "unused_from_reuse": 0
+       }
+      }
+     }
+    ],
+    "last": "/content/pin/pilot/twins/nemotron-3.5-lightning-30b-a3b/w1",
+    "stub": true,
+    "readout_exit": 1,
+    "readout_tail": "# STUB RUN (PIN_STUB=1)\n"
+   },
+   "stub": true
+  },
+  "muse-glimmer-30b": {
+   "pilot": {
+    "waves": [
+     {
+      "wave": "rewrite",
+      "out": "/content/pin/pilot/pilot/muse-glimmer-30b/w2",
+      "exit": 2,
+      "seconds": 1,
+      "stderr": "REFUSED: a rewrite continues the drafts' own writer; these pins differ: card_candidate, card_chat_template_kwargs, card_revision, card_sampling, card_transforms, card_transforms_applied, cards_sha256\n",
+      "generations": {
+       "path": "/content/pin/pilot/pilot/muse-glimmer-30b/generations-w2-muse-glimmer-30b.jsonl",
+       "calls": 0,
+       "refused": 0,
+       "truncated": 0,
+       "thinking_tokens": 0,
+       "output_tokens": 0,
+       "wall_s": 0,
+       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": ""
+     }
+    ],
+    "last": "/content/pin/pilot/pilot/muse-glimmer-30b/w2",
+    "stub": true,
+    "readout_tail": "# STUB RUN (PIN_STUB=1)"
+   },
+   "twins": {
+    "skipped": "a pilot wave exited non-zero",
+    "stub": true,
+    "readout_tail": "# STUB RUN (PIN_STUB=1)"
+   },
+   "stub": true
+  }
+ },
+ "models": [
+  {
+   "served_as": "muse-glimmer-30b",
+   "card": "muse-glimmer-30b",
+   "repo": "meta-models/Muse-Glimmer-30B",
+   "how": "stub",
+   "gguf_sha256": "c321320a81f177362f3ddf3c199edff097ab88d10b19a13eab7f606f5ffc4e74",
+   "quant": "Q8_0",
+   "stub": true
+  },
+  {
+   "served_as": "nemotron-3.5-lightning-30b-a3b",
+   "card": "nemotron-3.5-lightning-30b-a3b",
+   "repo": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+   "how": "stub",
+   "gguf_sha256": "5bea2069f4a8067659ed8bfb4bce58761f37d308e9689818ef77915d3b446832",
+   "quant": "Q8_0",
+   "stub": true
+  }
+ ],
+ "quant": {
+  "muse-glimmer-30b": {
+   "policy": "q8",
+   "ran": "Q8_0",
+   "stub": true
+  },
+  "nemotron-3.5-lightning-30b-a3b": {
+   "policy": "q8",
+   "ran": "Q8_0",
+   "stub": true
+  }
+ },
+ "proxy_configs": {
+  "muse-glimmer-30b": {
+   "candidate": "muse-glimmer-30b",
+   "removed": [],
+   "sha256": "999b5e1d9b2fd484d910cfbb2a1efed0ecb21561e354c3d4fe5407f6bb2497dd"
+  },
+  "nemotron-3.5-lightning-30b-a3b": {
+   "candidate": "nemotron-3.5-lightning-30b-a3b",
+   "removed": [],
+   "sha256": "4bac0ee75abfd8920b39e1b42e7dd797638b4734a94074a621a484a26919321f"
+  }
+ },
+ "pilot_seconds": 1,
+ "twins_seconds": 2,
+ "serves": {
+  "muse-glimmer-30b": [
+   {
+    "seconds": 0,
+    "fit": {
+     "offloaded": 1,
+     "layers": 1,
+     "ok": true,
+     "stub": true
+    },
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true,
+     "stub": true
+    },
+    "stub": true
+   },
+   {
+    "seconds": 0,
+    "fit": {
+     "offloaded": 1,
+     "layers": 1,
+     "ok": true,
+     "stub": true
+    },
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true,
+     "stub": true
+    },
+    "stub": true
+   }
+  ],
+  "nemotron-3.5-lightning-30b-a3b": [
+   {
+    "seconds": 0,
+    "fit": {
+     "offloaded": 1,
+     "layers": 1,
+     "ok": true,
+     "stub": true
+    },
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true,
+     "stub": true
+    },
+    "stub": true
+   }
+  ]
+ },
+ "model_errors": 1,
+ "ok": false,
+ "resources": [],
+ "ended": "2026-10-18T02:30:58Z"
+}

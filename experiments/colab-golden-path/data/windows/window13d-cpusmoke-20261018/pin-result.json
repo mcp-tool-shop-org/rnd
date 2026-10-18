@@ -1,0 +1,8 @@
+{
+ "ok": true,
+ "mock": true,
+ "job_token": "cpusmoke-1792304411",
+ "steps": 6,
+ "seconds": 60,
+ "silent": false
+}

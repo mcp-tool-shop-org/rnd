@@ -1,0 +1,1 @@
+{"window": "8", "card": "A100", "cap": null, "spent": 3.8, "basis": "estimate", "outcome": "tooling-fault", "why": "q6k: cut off by the shared cap watcher mid-Gemma (a neighbour's spend counted against this window)"}

@@ -1,0 +1,669 @@
+{
+ "started": "2026-10-17T16:14:28Z",
+ "machine": {
+  "card": "NVIDIA A100-SXM4-40GB",
+  "memory": "40960 MiB",
+  "driver": "580.82.07",
+  "compat": false,
+  "driver_cuda": "13.0",
+  "colab_release_tag": "release-colab-external-images_20261014-060047_RC00",
+  "cores": 12,
+  "disk_free_gb": 193.2,
+  "runtime": "13.4"
+ },
+ "role": "smoke",
+ "llama_server": {
+  "commit": "620d2225cc436ab0b001e3200e590e3b286ef9ab",
+  "sha256": "b4659b3fc74037deb96b2148c455753121fa21dde174d7124547e2bf9ffd37c3",
+  "path": "/content/pin/llama-server",
+  "src": "/content/pin/llama.cpp",
+  "cuda_wheels": [
+   "nvidia-cublas==13.8.0.4",
+   "nvidia-cublas-cu12==12.9.2.10",
+   "nvidia-cuda-cccl==13.0.85",
+   "nvidia-cuda-crt==13.4.92",
+   "nvidia-cuda-cupti==13.0.85",
+   "nvidia-cuda-cupti-cu12==12.9.79",
+   "nvidia-cuda-nvcc==13.0.88",
+   "nvidia-cuda-nvcc-cu12==12.9.86",
+   "nvidia-cuda-nvrtc==13.0.88",
+   "nvidia-cuda-nvrtc-cu12==12.9.86",
+   "nvidia-cuda-runtime==13.4.92",
+   "nvidia-cuda-runtime-cu12==12.9.79",
+   "nvidia-cudnn-cu12==9.27.0.42",
+   "nvidia-cudnn-cu13==9.19.0.56",
+   "nvidia-cufft==12.0.0.61",
+   "nvidia-cufft-cu12==11.4.1.4",
+   "nvidia-cufile==1.15.1.6",
+   "nvidia-curand==10.4.0.35",
+   "nvidia-curand-cu12==10.3.10.19",
+   "nvidia-cusolver==12.0.4.66",
+   "nvidia-cusolver-cu12==11.7.5.82",
+   "nvidia-cusparse==12.6.3.3",
+   "nvidia-cusparse-cu12==12.5.10.65",
+   "nvidia-cusparselt-cu13==0.8.0",
+   "nvidia-libnvcomp-cu13==5.2.0.13",
+   "nvidia-ml-py==13.615.71",
+   "nvidia-nccl-cu12==2.32.3",
+   "nvidia-nccl-cu13==2.28.9",
+   "nvidia-nvimgcodec-cu13==0.8.0.22",
+   "nvidia-nvjitlink==13.0.88",
+   "nvidia-nvjitlink-cu12==12.9.86",
+   "nvidia-nvshmem-cu13==3.4.5",
+   "nvidia-nvtx==13.0.85",
+   "nvidia-nvvm==13.0.88"
+  ],
+  "cuda_toolkit": "13.4.2 (redistrib 2026-09-16)",
+  "libs": [
+   {
+    "name": "libcudart.so.13",
+    "source": "/usr/local/lib/python3.13/dist-packages/nvidia/cu13/lib/libcudart.so.13",
+    "sha256": "7fb00519a24512bf677b59e87921e5c05aac8246ceb6a57435c0d9dfeef364f6",
+    "bytes": 798496
+   },
+   {
+    "name": "libcublas.so.13",
+    "source": "/usr/local/lib/python3.13/dist-packages/nvidia/cu13/lib/libcublas.so.13",
+    "sha256": "59dd485de6657bc8e1ff5f0f73de74c15f5a3e4648747e2288e342da1f60866c",
+    "bytes": 57594520
+   },
+   {
+    "name": "libcublasLt.so.13",
+    "source": "/usr/local/lib/python3.13/dist-packages/nvidia/cu13/lib/libcublasLt.so.13",
+    "sha256": "a1821093b6b29ff871a07532071f3eaf6996d549d54f53235763abc12b8ad19f",
+    "bytes": 545528240
+   }
+  ]
+ },
+ "only": [
+  "gemma-4-31b-it"
+ ],
+ "models": [
+  {
+   "served_as": "gemma-4-31b-it",
+   "repo": "google/gemma-4-31B-it",
+   "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+   "card": null,
+   "tokenizer_hf": [
+    [
+     23391
+    ],
+    [
+     9259,
+     236764,
+     1902,
+     236888
+    ],
+    [
+     818,
+     3823,
+     8864,
+     37423,
+     38167,
+     1024,
+     506,
+     31770,
+     4799,
+     236761
+    ],
+    [
+     138,
+     26016,
+     9952
+    ],
+    [
+     136697,
+     9952,
+     139
+    ],
+    [
+     4823,
+     255968,
+     74010,
+     255968,
+     7558
+    ],
+    [
+     1257,
+     886,
+     107,
+     1257,
+     1156
+    ],
+    [
+     1257,
+     886,
+     251,
+     107,
+     1257,
+     1156
+    ],
+    [
+     109,
+     19891,
+     861,
+     8721
+    ],
+    [
+     128820,
+     128820,
+     128820,
+     128820,
+     128820
+    ],
+    [
+     236770,
+     236778,
+     236800,
+     236812,
+     236810
+    ],
+    [
+     236800,
+     236761,
+     236770,
+     236812,
+     236770,
+     236810,
+     236819
+    ],
+    [
+     236772,
+     236812,
+     236778
+    ],
+    [
+     236770,
+     236764,
+     236771,
+     236771,
+     236771,
+     236764,
+     236771,
+     236771,
+     236771
+    ],
+    [
+     236778,
+     236771,
+     236778,
+     236825,
+     236772,
+     236770,
+     236771,
+     236772,
+     236770,
+     236832
+    ],
+    [
+     236770,
+     236771,
+     236787,
+     236800,
+     236771,
+     8151
+    ],
+    [
+     236795,
+     236812,
+     236810,
+     236771,
+     236761,
+     236771,
+     236771
+    ],
+    [
+     236810,
+     236771,
+     236908
+    ],
+    [
+     236865,
+     236770
+    ],
+    [
+     236766,
+     236770,
+     236761,
+     236778,
+     236761,
+     236800
+    ],
+    [
+     236769,
+     5432,
+     48251,
+     236768,
+     870,
+     212439,
+     236842,
+     642,
+     1457,
+     2620,
+     236783
+    ],
+    [
+     52231,
+     623,
+     7902,
+     236775,
+     532,
+     756,
+     18999,
+     236789
+    ],
+    [
+     69807,
+     236793,
+     11850,
+     236787,
+     55348,
+     236764,
+     2846,
+     236761
+    ],
+    [
+     236746,
+     236786,
+     236763,
+     236785,
+     236755,
+     236909,
+     236753
+    ],
+    [
+     6774,
+     236940,
+     8358,
+     236761,
+     854
+    ],
+    [
+     2574,
+     1411,
+     8358,
+     236761,
+     854,
+     236786,
+     2337,
+     236881,
+     236809,
+     236784,
+     236770,
+     236880,
+     236750,
+     236784,
+     236778
+    ],
+    [
+     37942,
+     236779,
+     4925,
+     532,
+     51657,
+     9818
+    ],
+    [
+     6507,
+     10890,
+     3718,
+     65371
+    ],
+    [
+     13246,
+     236789,
+     236745,
+     2810,
+     236789,
+     236745,
+     740,
+     236789,
+     236745
+    ],
+    [
+     236744,
+     236761,
+     236759,
+     236761,
+     858,
+     236761,
+     236744,
+     236761,
+     4044,
+     236761
+    ],
+    [
+     1789,
+     238527,
+     560,
+     33443,
+     118515
+    ],
+    [
+     223305,
+     67772
+    ],
+    [
+     238600,
+     109959,
+     42220
+    ],
+    [
+     193805,
+     12973,
+     94831
+    ],
+    [
+     94951,
+     236945,
+     95830
+    ],
+    [
+     55041,
+     57489
+    ],
+    [
+     114216,
+     237430,
+     236743,
+     243007,
+     34718
+    ],
+    [
+     56734,
+     175899
+    ],
+    [
+     16017,
+     70249
+    ],
+    [
+     67906,
+     57235,
+     240493
+    ],
+    [
+     747,
+     236787,
+     1123,
+     238131,
+     900,
+     570,
+     238131,
+     578,
+     904,
+     238131
+    ],
+    [
+     81577,
+     16130,
+     119458,
+     4413
+    ],
+    [
+     2063,
+     517,
+     236769,
+     236781,
+     1473,
+     107,
+     140,
+     2060,
+     1123,
+     900,
+     236743,
+     236770
+    ],
+    [
+     14937,
+     2478,
+     1083,
+     870,
+     236770,
+     236764,
+     236743,
+     236778,
+     236764,
+     236743,
+     236800,
+     21111
+    ],
+    [
+     236820,
+     236763,
+     236813,
+     15640,
+     954,
+     236763,
+     236813
+    ],
+    [
+     12874,
+     808,
+     10912,
+     494,
+     236793
+    ],
+    [
+     4539,
+     236743,
+     236800,
+     3189,
+     506,
+     15348,
+     19015,
+     657,
+     236743,
+     236819,
+     236761
+    ],
+    [
+     14977,
+     236787,
+     15311,
+     10855,
+     1677,
+     57618,
+     735,
+     236881
+    ],
+    [
+     7925,
+     236787,
+     506,
+     13512,
+     2978
+    ],
+    []
+   ],
+   "gguf_source": "converted at llama.cpp 620d2225cc43 from google/gemma-4-31B-it@842da3794eaa",
+   "gguf_file": "gemma-4-31b-it-Q8_0.gguf",
+   "converter": {
+    "pip_freeze_sha256": "eacdacd922fe775d3236112094185edc7b2b85cc2505528b50f414983d4fd7d4",
+    "pip_freeze": [
+     "annotated-doc==0.0.5",
+     "anyio==4.15.1",
+     "certifi==2026.7.22",
+     "charset-normalizer==3.5.2",
+     "click==8.5.0",
+     "filelock==4.2.0",
+     "fsspec==2026.9.0",
+     "gguf==0.19.0",
+     "h11==0.16.0",
+     "hf-xet==1.7.0",
+     "httpcore2==2.13.1",
+     "httpx2==2.13.1",
+     "huggingface_hub==2.2.0",
+     "idna==3.20",
+     "Jinja2==3.1.6",
+     "markdown-it-py==4.2.0",
+     "MarkupSafe==3.0.4",
+     "mdurl==0.1.2",
+     "mpmath==1.3.0",
+     "networkx==3.7",
+     "numpy==2.2.6",
+     "packaging==26.3",
+     "protobuf==4.25.9",
+     "Pygments==2.21.0",
+     "PyYAML==6.0.3",
+     "regex==2026.9.29",
+     "requests==2.34.2",
+     "rich==15.0.0",
+     "safetensors==0.8.0",
+     "sentencepiece==0.2.2",
+     "setuptools==81.0.0",
+     "shellingham==1.5.4",
+     "sympy==1.14.0",
+     "tokenizers==0.23.3",
+     "torch==2.11.0+cpu",
+     "tqdm==4.70.1",
+     "transformers==5.20.1",
+     "truststore==0.10.5",
+     "typer==0.27.3",
+     "typing_extensions==4.16.0",
+     "urllib3==2.8.0"
+    ],
+    "gguf_module": "/content/pin/env-gemma-4-31b-it/lib/python3.13/site-packages/gguf/__init__.py",
+    "python": "/content/pin/env-gemma-4-31b-it/bin/python",
+    "env": {
+     "transformers": "5.20.1"
+    }
+   },
+   "gguf_sha256": "e357a45071c2cbbc44b97506dfadc34bac0d5f6592f1d500edfaa9647f01e7bf",
+   "gguf_bytes": 32635676544,
+   "reproduced": true,
+   "smoke": {
+    "ok": true,
+    "tokens_per_s": 27.8,
+    "completion_tokens": 311,
+    "finish_reason": "stop",
+    "tokenizer": {
+     "strings": 50,
+     "match": true,
+     "mismatches": []
+    },
+    "reasoning_content": true,
+    "content_head": "A changelog is a chronological record of all notable changes made to a project, such as software updates, bug fixes, and",
+    "logprob_steps": 311,
+    "top5_ok": true,
+    "ctx": 32768,
+    "peak_vram_mib": 35572,
+    "total_vram_mib": 40960,
+    "max_tokens": 8192,
+    "offload_lines": [
+     "0.00.911.342 I cmn  common_init_: fitting params to device memory ...",
+     "0.00.911.343 I cmn  common_init_: (for bugs during this step try to reproduce them with -fit off, or provide --verbose logs if the bug only occurs with -fit on)",
+     "0.00.911.528 I common_params_fit_impl: getting device memory data for initial parameters:",
+     "0.01.943.382 I common_params_fit_impl: projected to use 35070 MiB of device memory vs. 40013 MiB of free device memory",
+     "0.01.943.393 I common_params_fit_impl: will leave 4943 >= 1024 MiB of free device memory, no changes needed",
+     "0.01.943.403 I common_fit_params: successfully fit params to free device memory",
+     "0.01.943.407 I common_fit_params: fitting params to free memory took 1.03 seconds",
+     "0.02.058.123 I llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.",
+     "0.06.729.018 I load_tensors: offloading output layer to GPU",
+     "0.06.729.026 I load_tensors: offloading 59 repeating layers to GPU",
+     "0.06.729.026 I load_tensors: offloaded 61/61 layers to GPU",
+     "0.06.729.032 I load_tensors:   CPU_Mapped model buffer size =  1428.00 MiB",
+     "0.06.729.035 I load_tensors:        CUDA0 model buffer size = 31108.82 MiB"
+    ],
+    "fit": {
+     "offloaded": 61,
+     "layers": 61,
+     "ok": true
+    },
+    "server_log_tail": [
+     "0.14.535.812 I sched_reserve:  CUDA_Host compute buffer size =    75.53 MiB",
+     "0.14.535.814 I sched_reserve: graph: nodes = 2463, splits = 2, input objects = 4, input tensors = 13",
+     "0.14.535.816 I sched_reserve: reserve took 47.66 ms, sched copies = 1",
+     "0.14.536.019 I cmn          init: llama threadpool init, n_threads = 6",
+     "0.14.536.091 I cmn  common_init_: warming up the model with an empty run - please wait ... (--no-warmup to disable)",
+     "0.14.737.872 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 32768, kv_unified = 'false'",
+     "0.14.737.980 I spec common_specu: no implementations specified for speculative decoding",
+     "0.14.737.985 I slot   load_model: id  0 | task -1 | new slot, n_ctx = 32768",
+     "0.14.738.017 I srv    load_model: prompt cache is enabled, size limit: 8192 MiB",
+     "0.14.738.021 I srv    load_model: use `--cache-ram 0` to disable the prompt cache",
+     "0.14.738.021 I srv    load_model: for more info see https://github.com/ggml-org/llama.cpp/pull/16391",
+     "0.14.738.022 I srv    load_model: context checkpoints enabled, max = 32, min spacing = 8192",
+     "0.14.738.069 I srv          init: idle slots will be saved to prompt cache upon starting a new task",
+     "0.14.753.431 I srv          init: init: chat template, example_format: '<|turn>system",
+     "<|think|>",
+     "You are a helpful assistant<turn|>",
+     "<|turn>user",
+     "Hello<turn|>",
+     "<|turn>model",
+     "Hi there<turn|>",
+     "<|turn>user",
+     "How are you?<turn|>",
+     "<|turn>model",
+     "'",
+     "0.14.754.688 I srv          init: init: chat template, thinking = 1",
+     "0.14.754.700 I srv          init: preserve_reasoning kwarg: not supported by template",
+     "0.14.754.730 I srv  llama_server: model loaded",
+     "0.14.754.736 I srv  llama_server: listening on http://127.0.0.1:8091",
+     "0.14.754.859 I srv  update_slots: all slots are idle",
+     "0.19.479.786 I srv  server_strea: conv_id= (empty=1)",
+     "0.19.480.359 I slot get_availabl: id  0 | task -1 |  - skipping, slot is empty",
+     "0.19.480.374 I slot get_availabl: id  0 | task -1 | selected slot by LRU, n_tokens = 0, t_last = -1",
+     "0.19.480.375 I srv  get_availabl: updating prompt cache",
+     "0.19.480.387 I srv          load:  - looking for better prompt, base f_keep = -1.000, f_sim = 0.000",
+     "0.19.480.401 I srv        update:  - cache state: 0 prompts, 0.000 MiB (limits: 8192.000 MiB, 32768 tokens, 8589934592 est)",
+     "0.19.480.406 I srv  get_availabl: prompt cache update took 0.03 ms",
+     "0.19.480.470 I slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist ",
+     "0.19.480.505 I slot launch_slot_: id  0 | task -1 | sampler params: ",
+     "\trepeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000",
+     "\tdry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = 64",
+     "\ttop_k = 64, top_p = 0.950, min_p = 0.050, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.000",
+     "\tmirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900",
+     "0.19.480.506 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0",
+     "0.19.480.542 I slot   operator(): id  0 | task 0 | new prompt, n_ctx_slot = 32768, n_keep = 0, task.n_tokens = 28",
+     "0.19.480.549 I slot   operator(): id  0 | task 0 | cached n_tokens = 0, memory_seq_rm [0, end)",
+     "0.19.527.512 I slot   operator(): id  0 | task 0 | cached n_tokens = 8, memory_seq_rm [8, end)",
+     "0.19.565.244 I slot create_check: id  0 | task 0 | created context checkpoint 1 of 32 (pos_min = 0, pos_max = 7, n_tokens = 8, size = 6.251 MiB)",
+     "0.19.629.054 I slot   operator(): id  0 | task 0 | cached n_tokens = 24, memory_seq_rm [24, end)",
+     "0.19.629.110 I slot init_sampler: id  0 | task 0 | init sampler, took 0.01 ms, tokens: text = 28, total = 28",
+     "0.19.663.215 I slot create_check: id  0 | task 0 | created context checkpoint 2 of 32 (pos_min = 0, pos_max = 23, n_tokens = 24, size = 18.751 MiB)",
+     "0.23.229.297 I slot print_timing: id  0 | task 0 | n_gen =    100, tg =  28.28 t/s, tg_3s =  28.55 t/s",
+     "0.26.242.716 I slot print_timing: id  0 | task 0 | n_gen =    186, tg =  28.40 t/s, tg_3s =  28.54 t/s",
+     "0.29.273.834 I slot print_timing: id  0 | task 0 | n_gen =    272, tg =  28.39 t/s, tg_3s =  28.37 t/s",
+     "0.30.650.822 I slot print_timing: id  0 | task 0 | prompt eval time =     245.84 ms /    28 tokens (    8.78 ms per token,   113.89 tokens per second)",
+     "0.30.650.833 I slot print_timing: id  0 | task 0 |        eval time =   10921.94 ms /   311 tokens (   35.23 ms per token,    28.38 tokens per second)",
+     "0.30.650.834 I slot print_timing: id  0 | task 0 |       total time =   11167.79 ms /   339 tokens",
+     "0.30.650.835 I slot print_timing: id  0 | task 0 |    graphs reused =        309",
+     "0.30.650.836 I slot print_timing: id  0 | task 0 |   graph reallocs =          0    /     0        (same size) / (changed size)",
+     "0.30.650.908 I slot      release: id  0 | task 0 | stop processing: n_tokens = 338, truncated = 0",
+     "0.30.650.929 I srv  update_slots: all slots are idle"
+    ],
+    "slots": {
+     "total_slots": 1,
+     "n_ctx_per_slot": 32768,
+     "ok": true
+    },
+    "chat_template_kwargs": {
+     "enable_thinking": true
+    },
+    "thinking_split": {
+     "reasoning_nonempty": true,
+     "tags_in_content": [],
+     "ok": true
+    }
+   }
+  }
+ ],
+ "ok": true,
+ "resources": [
+  {
+   "at": "gemma-4-31b-it: before download",
+   "time": "16:15:25",
+   "disk_free_gb": 204.4,
+   "ram_available_mb": 83371,
+   "ram_total_mb": 85477
+  },
+  {
+   "at": "gemma-4-31b-it: after conversion",
+   "time": "16:28:54",
+   "disk_free_gb": 107.6,
+   "ram_available_mb": 82418,
+   "ram_total_mb": 85477
+  }
+ ],
+ "ended": "2026-10-17T16:32:05Z"
+}

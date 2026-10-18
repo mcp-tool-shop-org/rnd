@@ -1,0 +1,1 @@
+{"window": "11c", "card": "A100", "cap": 6, "spent": 3.2, "basis": "estimate", "outcome": "lost-vm", "why": "the exec lost its connection at its first command; nothing ran on the VM, and the hung exec held the session about 35 min until killed (mistakes #30)"}

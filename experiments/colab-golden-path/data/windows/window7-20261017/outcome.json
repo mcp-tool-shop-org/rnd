@@ -1,0 +1,1 @@
+{"window": "7", "card": "A100", "cap": 14, "spent": 3.0, "basis": "balance", "outcome": "tooling-fault", "why": "critic-control: both critics reproduced their pins, then stopped at the fit check (log buffered, no offload line read)"}

@@ -1,0 +1,1 @@
+{"window": "12c", "card": "A100", "cap": 14, "spent": 10.88, "basis": "rate_x_runtime", "outcome": "partial", "why": "Qwen3.6 and Bolt w0 written; Bolt's critique refused on card pins as batch pins (fixed in 765eb76)"}

@@ -1,0 +1,1 @@
+{"window": "13d-cpusmoke", "card": "CPU", "cap": 1, "spent": 0.0, "basis": "balance", "outcome": "test", "why": "0-unit smoke of the new smoke_window with a dummy token: gate passed, token file read and deleted, no trace in any kept file or the CLI's history"}

@@ -1,0 +1,1 @@
+{"window": "10", "card": "A100", "cap": null, "spent": 0.44, "basis": "balance", "outcome": "tooling-fault", "why": "pilot arm 1 failed at start: PIN_RND_COMMIT not forwarded to the VM"}

@@ -1,0 +1,7 @@
+{
+ "ok": true,
+ "mock": true,
+ "steps": 10,
+ "seconds": 300,
+ "silent": true
+}

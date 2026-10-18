@@ -1,0 +1,1 @@
+{"window": "11b", "card": "A100", "cap": 7, "spent": 3.5, "basis": "estimate", "outcome": "tooling-fault", "why": "Qwen3.6 fit at 32768 shown (42/42 layers), then stopped while hashing Gemma by the same shared-cap fault (mistakes #29)"}

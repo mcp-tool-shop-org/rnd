@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.2.15] - 2026-10-19
+
+- critic-signal SYNTHESIS.md: what phases 0–4 and the parked step 1 have shown, the cost, the method lessons, and the options for T10
+- Added experiment `stage1-regeneration`
+
 ## [1.1.15.2.14] - 2026-10-19
 
 - handbook: briefing an outside model (template), with the critic-signal AI Studio brief as the worked example

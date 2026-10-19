@@ -257,7 +257,10 @@ isn't run.
     - The draft's list of 38 slots held only 12 eligible; the Publisher confirmed this with role-set's own
       `slot_flaw`.
   - **11 even-numbered decided C slots as natural controls**, planted "none". They are the first 11 in lesson order
-    (T02, T03, T06, T07, T08, T09, T10, T11, T15, T18) and then id order.
+    (T02, T03, T06, T07, T08, T09, T10, T11, T15, T18) and then id order, with T02-C-01 and -08 left out.
+    - The slots: T02-C-06, T03-C-02, T03-C-04, T03-C-08, T06-C-02, T06-C-06, T06-C-08, T07-C-02, T07-C-04, T07-C-08,
+      T08-C-04.
+    - 5 are supported and 6 unsupported. The Publisher computed them at role-set `47a5882`.
   - Each lesson is planned on its own, because `plan --lessons` refuses three or more lessons in one batch. The
     plans are merged before the slots are filtered. That's the `PIN_PILOT_LESSONS` change, which gets a CPU stub
     rung before any paid window.
@@ -311,9 +314,13 @@ the label: a perturbed item should be refused.
   - The Gemma-only control refusal rate, next to phase 3's 1 of 44.
   - Phase 3 is never pooled with this test.
 
-**Cost.** The writing is write-only now (no critic calls), so it costs less than the draft's 23–40 units. The
-Publisher re-projects it from Gemma's measured write time per slot, plus critic-eval at about 3–4 units (cap 15.2).
-The figures go here before any window opens, and A3 applies to each window. The ledger stands at 176.96 of 300.
+**Cost** (the Publisher's projection from measured rates; A3 applies to each window):
+- **Writing:** write-only, 38 slots, one A100 window.
+  - It's projected from Gemma's measured write wave: 118 s a slot in 12f and 234 s a slot in 13l, plus lesson warmups
+    and setup.
+  - That's 7.78–14.27 units, with a cap of 18.55 and a wall of 12,600 s.
+- **critic-eval:** about 3–4 units, cap 15.2.
+- **Ledger:** 176.96 of 300.
 
 ## What carries into the T10 writer run
 

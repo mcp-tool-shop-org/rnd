@@ -32,6 +32,10 @@ def make_source(root: Path) -> Path:
     (src / "data" / "labels.json").write_bytes(b'{"b": 2}\n')
     (src / "data" / "skip-me.json").write_text("{}", encoding="utf-8")
     (src / "README.md").write_text("not in the pack", encoding="utf-8")
+    # Every experiment folder carries its record (the layout rule, rnd 1.1.16).
+    (src / "experiment.json").write_text(json.dumps({
+        "schema": "rnd-experiment/v1", "name": "demo", "status": "running", "design": "README.md",
+        "template": None, "budgets": [], "licences": [], "runs": []}), encoding="utf-8")
     return src
 
 

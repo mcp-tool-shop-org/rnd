@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.2.13] - 2026-10-19
+
+- pod-cost-to-done: design draft
+- Added experiment `pod-cost-to-done`
+
 ## [1.1.15.2.12] - 2026-10-19
 
 - offrig instrument: measured pod choice for conversions

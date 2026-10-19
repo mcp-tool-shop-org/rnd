@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.2.12] - 2026-10-19
+
+- offrig instrument: measured pod choice for conversions
+- Updated `offrig`: offrig — big models on rented RunPod GPUs
+
 ## [1.1.15.2.11] - 2026-10-19
 
 - offrig instrument: operating facts read from its source

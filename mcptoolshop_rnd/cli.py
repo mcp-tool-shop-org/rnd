@@ -14,7 +14,7 @@ import traceback
 from datetime import date
 from pathlib import Path
 
-from . import __version__, abmine, catalog, collect, datapack, model, probe, readouts, release, store, watch
+from . import __version__, abmine, catalog, collect, datapack, layout, model, probe, readouts, release, store, watch
 
 SOURCE_ROOT = Path(__file__).resolve().parent.parent
 
@@ -90,6 +90,8 @@ def cmd_check(args):
         problems.extend(model.Problem("warning" if "no catalog.json" in p else "error", d.name, p)
                         for p in cat_problems)
     problems.extend(model.Problem("error", f"datapacks/{name}", msg) for name, msg in datapack.check_all(ROOT))
+    problems.extend(model.Problem(level, where, msg)
+                    for level, where, msg in layout.check(ROOT, registry_ids=layout.registry_ids(ROOT)))
     report(problems)
     errors = sum(p.level == "error" for p in problems)
     warnings = len(problems) - errors
@@ -254,6 +256,43 @@ def cmd_new(args):
     folder.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8")
     print(path.relative_to(ROOT).as_posix())
+    return 0
+
+
+def cmd_new_experiment(args):
+    try:
+        written = layout.new_experiment(ROOT, args.name, args.title or args.name, args.template)
+    except ValueError as exc:
+        return fail("NEW_EXPERIMENT", str(exc), "pick another name, or a template from `ls site/src/content/docs/handbook`")
+    for path in written:
+        print(path)
+    print(f"experiments/{args.name}/staging/ (gitignored: build data packs from here)")
+    return 0
+
+
+def cmd_layout(args):
+    """Write the baseline: every file and folder over the limits today, every folder without a record, and every
+    published file whose name looks private. Reasons already given in private_allow are kept."""
+    old, problems = layout.load_baseline(ROOT)
+    if problems:
+        report([model.Problem("error", layout.BASELINE, m) for m in problems])
+        return fail("BASELINE_INVALID", f"{layout.BASELINE} can't be read", "fix or remove it, then rerun", 1)
+    new = layout.baseline(ROOT)
+    for path in new["private_allow"]:
+        new["private_allow"][path] = old["private_allow"].get(path, "")
+    grew = [p for p, n in new["files"].items() if p not in old["files"] or n > old["files"][p]]
+    grew += [e for e, n in new["experiments"].items() if e not in old["experiments"] or n > old["experiments"][e]]
+    if old["files"] or old["experiments"]:
+        if grew and not args.allow_growth:
+            return fail("BASELINE_GROWS", f"the baseline would grow: {', '.join(grew[:5])}{' ...' if len(grew) > 5 else ''}",
+                        "move the data out, or pass --allow-growth and give the reason in the PR", 1)
+    target = ROOT / layout.BASELINE
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps(new, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+    unreasoned = [p for p, why in new["private_allow"].items() if not why]
+    print(f"wrote {layout.BASELINE}: {len(new['files'])} files and {len(new['experiments'])} experiments over the "
+          f"limits, {len(new['no_record'])} experiments without a record, {len(new['private_allow'])} private-looking "
+          f"names ({len(unreasoned)} still need a reason)")
     return 0
 
 
@@ -633,6 +672,20 @@ def build_parser():
     s.add_argument("--tag", action="append")
     s.add_argument("--id")
     s.add_argument("--date")
+
+    s = add("new-experiment", cmd_new_experiment,
+            "scaffold experiments/<name>/ with experiment.json, data/, results/, scripts/ and a gitignored staging/",
+            json_flag=False)
+    s.add_argument("name")
+    s.add_argument("--title", help="the README's title (default: the name)")
+    s.add_argument("--template", help="the handbook page the design follows, e.g. model-comparisons")
+
+    s = add("layout", cmd_layout,
+            "write docs/layout.json, the baseline of files and folders that predate the size and record rules",
+            json_flag=False)
+    s.add_argument("action", choices=("baseline",))
+    s.add_argument("--allow-growth", action="store_true",
+                   help="let the baseline grow (a reviewed change: say why in the PR)")
 
     s = add("catalog", cmd_catalog, "work with external catalogues")
     s.add_argument("action", choices=("list", "lanes", "families", "sync"))

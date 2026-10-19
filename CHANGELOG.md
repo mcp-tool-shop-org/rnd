@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.16.0.0] - 2026-10-19
+
+- rnd check: the layout rules: a 256 KB file and 2 MB experiment limit under experiments/ with a no-growth baseline (docs/layout.json), the private-file rule (tag, names, rnd-data's private manifest), and experiment.json (rnd-experiment/v1)
+- rnd new-experiment and rnd layout baseline; a gitignored staging/ for data-pack builds
+- run_vocabulary.json: the run outcomes, cost bases, units, venues and id rule shared with the Publisher's outcome.json
+- handbook: Where data lives
+
 ## [1.1.15.2.16] - 2026-10-19
 
 - critic-signal PLAN-ROUND4.md: the plan after phase 4, passed by Argon (round 4b); SYNTHESIS.md's last recommendation corrected (the coarse gate's errors are at the none boundary)

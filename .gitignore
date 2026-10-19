@@ -19,3 +19,6 @@ dist/
 
 # Hypothesis example database (property tests); never committed
 .hypothesis/
+
+# Experiment staging: bulk files built into data packs, never committed
+experiments/*/staging/

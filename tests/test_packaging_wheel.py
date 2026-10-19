@@ -24,6 +24,10 @@ class Packaging(unittest.TestCase):
         self.assertRegex(PYPROJECT, r'(?m)^"mcptoolshop_rnd\.localbuilders" = \["\*\.sh"\]$')
         self.assertTrue((ROOT / "mcptoolshop_rnd" / "localbuilders" / "setup_vm.sh").is_file())
 
+    def test_the_run_vocabulary_ships(self):
+        self.assertRegex(PYPROJECT, r'(?m)^"mcptoolshop_rnd" = \["run_vocabulary\.json"\]$')
+        self.assertTrue((ROOT / "mcptoolshop_rnd" / "run_vocabulary.json").is_file())
+
 
 if __name__ == "__main__":
     unittest.main()

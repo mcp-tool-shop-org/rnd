@@ -39,6 +39,7 @@ rnd = "mcptoolshop_rnd.cli:main"
 include = ["mcptoolshop_rnd*", "rnd*"]
 
 [tool.setuptools.package-data]
+"mcptoolshop_rnd" = ["run_vocabulary.json"]
 "mcptoolshop_rnd.localbuilders" = ["*.sh"]
 
 [tool.setuptools.dynamic]

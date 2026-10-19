@@ -1,0 +1,35 @@
+{
+ "schema": "rnd-run-vocabulary/v1",
+ "about": "The shared vocabulary of a run record: rnd's experiment.json runs and the Publisher's outcome.json. Co-owned by R&D (experiment.json and the mapping) and the Publisher (outcome.json and its writer); either side changes it only by agreement. Other repositories vendor this file at a pinned rnd commit.",
+ "outcomes": {
+  "results": "the run finished and its results are usable",
+  "partial": "the run stopped early but kept usable results",
+  "test": "a test or probe, not a counted run",
+  "tooling-fault": "our tooling failed after the run started",
+  "lost-vm": "a working VM or pod was lost mid-run",
+  "cap-stop": "the run hit its cost cap",
+  "not-assigned": "no machine was assigned",
+  "boot-fail": "a pod or VM was rented and billed but never became reachable",
+  "gate-reject": "every VM failed the gate, so nothing ran",
+  "refused": "our own preflight refused before any VM or pod",
+  "no-capacity": "nothing could be rented; no cost",
+  "stopped": "stopped on purpose before any result"
+ },
+ "why_required_unless": ["results"],
+ "cost_bases": {
+  "rate_x_runtime": "the rate times the measured runtime",
+  "balance": "the provider's balance before and after (offrig's measured ledger)",
+  "estimate": "an estimate, when nothing was measured"
+ },
+ "cost_units": {
+  "colab_units": "Colab compute units",
+  "usd": "US dollars",
+  "rig_hours": "hours on the studio rig"
+ },
+ "venues": {
+  "rig": "the studio rig",
+  "colab": "a Colab window",
+  "runpod": "a RunPod pod, through offrig"
+ },
+ "id_rule": "The window name as the Publisher writes it (14b, cpu-measure). A retry adds its try (14e-try4), since each try is a separate billed run. An offrig plan names its lane (publisher-plan4), since plan numbers repeat per project. Unique within an experiment."
+}

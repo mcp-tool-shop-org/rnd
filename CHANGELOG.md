@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.2.11] - 2026-10-19
+
+- offrig instrument: operating facts read from its source
+- Updated `offrig`: offrig — big models on rented RunPod GPUs
+
 ## [1.1.15.2.10] - 2026-10-19
 
 - card-values: Nemotron-3.5-Super-VL-120B critic card (critic-signal §10)

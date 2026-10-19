@@ -86,6 +86,24 @@ R&D's calibration work, together with the Publisher's PRs reviewed by R&D, shape
   - **On the rig:** installed, with the 1.1.0 binaries kept beside it as a fallback. `writer-qwen235` stays pinned to
     host CUDA 13.0.
 
+**Operating facts, read from the source (2026-10-19, offrig 1.2.0 at 8f0b59c, README and `%APPDATA%\offrig\config.toml`).**
+Read these before planning a pod; earlier same-day claims made without reading them were wrong.
+- **Profiles:** `config.toml` is read once per process. A fresh `offrig-mcp` process (the README's stdio shell driver)
+  reads a changed config, and plans and pods live in the project DB, so no app restart is needed.
+- **One lane, one live pod:** `offrig_launch` refuses while the lane has an open plan or a live pod. Pods run in
+  sequence.
+- **Container disk:** `offrig_plan` takes `container_disk_gb` (1–2000) per plan. It overrides the profile's size,
+  so a small-disk profile can still convert a large model.
+- **Profiles on this rig** (2026-10-19):
+  - small, medium, frontier, frontier-mini, frontier-mini-awq;
+  - job (RTX PRO 6000 first, then A100/H100);
+  - jam (A40 first, then A6000/A5000/3090/L4/4090, about $0.49/hr);
+  - probe-blackwell, writer-qwen235;
+  - convert-cheap and critic-h200 (added 2026-10-19).
+- **Network volumes:** a profile can carry `network_volume_id`, and `offrig stage` stages weights on one. It bills
+  monthly, so only a human stages; no agent tool can.
+- **GPU pods only:** `gpu_count` is 1–8.
+
 **Calibrate what is served:** a model's calibration holds for one engine and one set of settings (model digest,
 think, `num_predict`, `num_ctx`, quote rule). A served engine or settings change means a new calibration, never
 a rescore. Results and protocols are in `experiments/verifier-gold/calibration/`.

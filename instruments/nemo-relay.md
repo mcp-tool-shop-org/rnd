@@ -73,4 +73,27 @@ The trial asks whether a Relay trace finds waste that our receipts and stream lo
   A trial starts on 0.10.0's format, so none of these needs a migration. A token-cost reader must use the new
   field name.
 
+## 0.10.1 and 0.10.2 (read 2026-10-19 from the GitHub release notes and docs/about-nemo-relay/release-notes; flagged by the weekly watch)
+
+- **The sandbox already runs 0.10.1** (the invoke line above). The weekly watch's summary put 0.10.1's changes under
+  0.10.2. The primary notes place them as follows.
+- **0.10.1** (2026-10-14):
+  - daemon workers run the full LLM middleware;
+  - fail-closed hooks now block (exit `2`) when delivery fails or no credential is available;
+  - Anthropic streaming content-block storage is bounded;
+  - dynamic plugins that fail trust verification are skipped;
+  - plugin and remote HTTP error statuses are preserved.
+  - Its compatibility notes concern hook credentials (`NEMO_RELAY_CLIENT_TOKEN`), refreshing installed hooks,
+    responses rewritten by daemon middleware, Pi upstreams, and error handling that relies on generic statuses.
+- **0.10.2** (2026-10-14), fixes only:
+  - layered configuration restored for daemon workers;
+  - upstream URLs validated;
+  - managed daemon hooks delivered without the system proxy;
+  - PII trajectory metadata preserved;
+  - rustls bumped.
+- **What touches us:** nothing yet. The trial uses `nemo-relay run` in transparent mode with file sinks. It installs
+  no hooks, runs no daemon and has no fail-closed policy, which is where every behaviour change above lives.
+  - Stay on 0.10.1.
+  - Bump to 0.10.2 only with a daemon or hooks in use, and re-read the migration guide then.
+
 See [[2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ]].

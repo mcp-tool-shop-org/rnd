@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 540" width="1140" height="540" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="1140" height="540" fill="#ffffff"/>
+<text x="24.0" y="34.0" font-size="17" fill="#1f2430" text-anchor="start" font-weight="600">The confirmation test&#x27;s 38 slots, chosen by what they can test</text>
+<text x="24.0" y="56.0" font-size="11.5" fill="#5b6272" text-anchor="start" font-weight="400">Each lesson has eight reasoning (kind C) slots. The pipeline plants a mistake in odd-numbered slots and &quot;no mistake&quot; in even ones; a clean-trace copy needs a planted mistake and a decided answer.</text>
+<rect x="24.0" y="74.0" width="14.0" height="14.0" fill="#1d4ed8" stroke="#9ca3af"/>
+<text x="44.0" y="85.0" font-size="10.5" fill="#1f2430" text-anchor="start" font-weight="400">clean-trace eligible, used (27)</text>
+<rect x="227.6" y="74.0" width="14.0" height="14.0" fill="#15803d" stroke="#9ca3af"/>
+<text x="247.6" y="85.0" font-size="10.5" fill="#1f2430" text-anchor="start" font-weight="400">natural control, used (11)</text>
+<rect x="403.2" y="74.0" width="14.0" height="14.0" fill="#9ca3af" stroke="#9ca3af"/>
+<text x="423.2" y="85.0" font-size="10.5" fill="#1f2430" text-anchor="start" font-weight="400">used in phases 1–3</text>
+<rect x="534.0" y="74.0" width="14.0" height="14.0" fill="#f1f3f7" stroke="#9ca3af"/>
+<text x="554.0" y="85.0" font-size="10.5" fill="#1f2430" text-anchor="start" font-weight="400">odd, answer is can&#x27;t-tell (no clean trace possible)</text>
+<rect x="849.6" y="74.0" width="14.0" height="14.0" fill="#ffffff" stroke="#9ca3af"/>
+<text x="869.6" y="85.0" font-size="10.5" fill="#1f2430" text-anchor="start" font-weight="400">even, not needed</text>
+<text x="161.0" y="120.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">slot 1</text>
+<text x="223.0" y="120.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">slot 2</text>
+<text x="285.0" y="120.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">slot 3</text>
+<text x="347.0" y="120.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">slot 4</text>
+<text x="409.0" y="120.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">slot 5</text>
+<text x="471.0" y="120.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">slot 6</text>
+<text x="533.0" y="120.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">slot 7</text>
+<text x="595.0" y="120.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">slot 8</text>
+<text x="116.0" y="147.0" font-size="12" fill="#1f2430" text-anchor="end" font-weight="600">T02</text>
+<rect x="132.0" y="130.0" width="58.0" height="26.0" fill="#9ca3af" stroke="#d1d5db"/>
+<rect x="194.0" y="130.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="256.0" y="130.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="318.0" y="130.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="380.0" y="130.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="442.0" y="130.0" width="58.0" height="26.0" fill="#15803d" stroke="#d1d5db"/>
+<rect x="504.0" y="130.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="566.0" y="130.0" width="58.0" height="26.0" fill="#9ca3af" stroke="#d1d5db"/>
+<text x="116.0" y="177.0" font-size="12" fill="#1f2430" text-anchor="end" font-weight="600">T03</text>
+<rect x="132.0" y="160.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="194.0" y="160.0" width="58.0" height="26.0" fill="#15803d" stroke="#d1d5db"/>
+<rect x="256.0" y="160.0" width="58.0" height="26.0" fill="#f1f3f7" stroke="#d1d5db"/>
+<rect x="318.0" y="160.0" width="58.0" height="26.0" fill="#15803d" stroke="#d1d5db"/>
+<rect x="380.0" y="160.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="442.0" y="160.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="504.0" y="160.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="566.0" y="160.0" width="58.0" height="26.0" fill="#15803d" stroke="#d1d5db"/>
+<text x="116.0" y="207.0" font-size="12" fill="#1f2430" text-anchor="end" font-weight="600">T06</text>
+<rect x="132.0" y="190.0" width="58.0" height="26.0" fill="#f1f3f7" stroke="#d1d5db"/>
+<rect x="194.0" y="190.0" width="58.0" height="26.0" fill="#15803d" stroke="#d1d5db"/>
+<rect x="256.0" y="190.0" width="58.0" height="26.0" fill="#f1f3f7" stroke="#d1d5db"/>
+<rect x="318.0" y="190.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="380.0" y="190.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="442.0" y="190.0" width="58.0" height="26.0" fill="#15803d" stroke="#d1d5db"/>
+<rect x="504.0" y="190.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="566.0" y="190.0" width="58.0" height="26.0" fill="#15803d" stroke="#d1d5db"/>
+<text x="116.0" y="237.0" font-size="12" fill="#1f2430" text-anchor="end" font-weight="600">T07</text>
+<rect x="132.0" y="220.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="194.0" y="220.0" width="58.0" height="26.0" fill="#15803d" stroke="#d1d5db"/>
+<rect x="256.0" y="220.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="318.0" y="220.0" width="58.0" height="26.0" fill="#15803d" stroke="#d1d5db"/>
+<rect x="380.0" y="220.0" width="58.0" height="26.0" fill="#f1f3f7" stroke="#d1d5db"/>
+<rect x="442.0" y="220.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="504.0" y="220.0" width="58.0" height="26.0" fill="#f1f3f7" stroke="#d1d5db"/>
+<rect x="566.0" y="220.0" width="58.0" height="26.0" fill="#15803d" stroke="#d1d5db"/>
+<text x="116.0" y="267.0" font-size="12" fill="#1f2430" text-anchor="end" font-weight="600">T08</text>
+<rect x="132.0" y="250.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="194.0" y="250.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="256.0" y="250.0" width="58.0" height="26.0" fill="#f1f3f7" stroke="#d1d5db"/>
+<rect x="318.0" y="250.0" width="58.0" height="26.0" fill="#15803d" stroke="#d1d5db"/>
+<rect x="380.0" y="250.0" width="58.0" height="26.0" fill="#f1f3f7" stroke="#d1d5db"/>
+<rect x="442.0" y="250.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="504.0" y="250.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="566.0" y="250.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<text x="116.0" y="297.0" font-size="12" fill="#1f2430" text-anchor="end" font-weight="600">T09</text>
+<rect x="132.0" y="280.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="194.0" y="280.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="256.0" y="280.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="318.0" y="280.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="380.0" y="280.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="442.0" y="280.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="504.0" y="280.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="566.0" y="280.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<text x="116.0" y="327.0" font-size="12" fill="#1f2430" text-anchor="end" font-weight="600">T10</text>
+<rect x="132.0" y="310.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="194.0" y="310.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="256.0" y="310.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="318.0" y="310.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="380.0" y="310.0" width="58.0" height="26.0" fill="#f1f3f7" stroke="#d1d5db"/>
+<rect x="442.0" y="310.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="504.0" y="310.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="566.0" y="310.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<text x="116.0" y="357.0" font-size="12" fill="#1f2430" text-anchor="end" font-weight="600">T11</text>
+<rect x="132.0" y="340.0" width="58.0" height="26.0" fill="#f1f3f7" stroke="#d1d5db"/>
+<rect x="194.0" y="340.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="256.0" y="340.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="318.0" y="340.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="380.0" y="340.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="442.0" y="340.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="504.0" y="340.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="566.0" y="340.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<text x="116.0" y="387.0" font-size="12" fill="#1f2430" text-anchor="end" font-weight="600">T15</text>
+<rect x="132.0" y="370.0" width="58.0" height="26.0" fill="#f1f3f7" stroke="#d1d5db"/>
+<rect x="194.0" y="370.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="256.0" y="370.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="318.0" y="370.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="380.0" y="370.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="442.0" y="370.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="504.0" y="370.0" width="58.0" height="26.0" fill="#f1f3f7" stroke="#d1d5db"/>
+<rect x="566.0" y="370.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<text x="116.0" y="417.0" font-size="12" fill="#1f2430" text-anchor="end" font-weight="600">T18</text>
+<rect x="132.0" y="400.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="194.0" y="400.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="256.0" y="400.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="318.0" y="400.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="380.0" y="400.0" width="58.0" height="26.0" fill="#1d4ed8" stroke="#d1d5db"/>
+<rect x="442.0" y="400.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<rect x="504.0" y="400.0" width="58.0" height="26.0" fill="#f1f3f7" stroke="#d1d5db"/>
+<rect x="566.0" y="400.0" width="58.0" height="26.0" fill="#ffffff" stroke="#d1d5db"/>
+<text x="656.0" y="142.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">How the review changed it</text>
+<text x="656.0" y="164.0" font-size="11" fill="#1f2430" text-anchor="start" font-weight="400">The first draft took 38 slots by lesson (T02, T03,</text>
+<text x="656.0" y="180.0" font-size="11" fill="#1f2430" text-anchor="start" font-weight="400">T06, T07, T08). Only 12 of them could make a clean-trace</text>
+<text x="656.0" y="196.0" font-size="11" fill="#1f2430" text-anchor="start" font-weight="400">copy. Argon, the outside reviewer, caught it.</text>
+<text x="656.0" y="212.0" font-size="11" fill="#1f2430" text-anchor="start" font-weight="400">The fix takes every eligible slot there is</text>
+<text x="656.0" y="228.0" font-size="11" fill="#1f2430" text-anchor="start" font-weight="400">in ten lessons, plus 11 even slots as</text>
+<text x="656.0" y="244.0" font-size="11" fill="#1f2430" text-anchor="start" font-weight="400">controls: still 38 slots.</text>
+<text x="24.0" y="511.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Pre-registered: the slot list was frozen before any row was written.</text>
+<text x="24.0" y="526.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Source: mcp-tool-shop-org/rnd experiments/stage1-regeneration/critic-signal/data/confirmation-slots.json (DESIGN.md §9).</text>
+</svg>

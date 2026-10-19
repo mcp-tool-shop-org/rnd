@@ -327,6 +327,33 @@ the label: a perturbed item should be refused.
 - **critic-eval:** about 3–4 units, cap 15.2.
 - **Ledger:** 176.96 of 300.
 
+## 10. A larger critic on the same items (pre-registered 2026-10-19, before any call)
+
+After phase 4 (P2 caught 22 : 0 more on Muse but refused 12 of 32 good rows), the Director decided to test whether a
+larger critic reads the flaw labels well enough to gate on them before T10.
+
+- **Critic:** Nemotron-3.5-Super-VL-120B-A12B, used text-only, at Q8_0.
+  - Licence: OpenMDW-1.1, read 2026-10-16, outputs unrestricted.
+  - It's a different family from Gemma, so there are no family skips on these items.
+- **Conversion:** our own, BF16 to Q8_0. Its sha256 is pinned in role-set's critics list before the critic is
+  served.
+- **Serving:** one H200 on RunPod, with the studio's pinned llama.cpp build at the card's values, behind the rnd
+  proxy.
+  - Every layer must sit on the GPU, or the run stops; a partly offloaded run isn't the measured setup.
+  - A one-item smoke runs before the 80.
+- **Items:** the frozen confirmation items, unchanged: sha256 `3a5939dc…`, with the same keys and the same
+  hand-check drops (`data/confirmation-prereg.json`). The critic is at seed 0.
+- **The rule:** the same as §9 for this critic. Adopt P2 with this critic if both hold:
+  - exact McNemar on the primary pool (b, e, f, g after drops) gives p < 0.05 in P2's favour, after Holm across the
+    critics run on these items (Muse in phase 4, this critic);
+  - P2's control refusal is at most 10%.
+- **Reported beside it:**
+  - the critic's flaw agreement per planted label, against Muse's in PHASE-4;
+  - its "none" agreement on the 10 natural controls.
+- **If it fails,** step 2 (a still larger critic) is re-planned from live offers at Q8_0, and only on the
+  Director's go. Its earlier cost estimate was withdrawn as wrong: it didn't fit at Q8_0.
+- **Cost:** an A4500 converts it, then the H200 serves. Expected about $8, high about $13, cap $16.55.
+
 ## What carries into the T10 writer run
 
 Fixed here for the T10 design that follows:

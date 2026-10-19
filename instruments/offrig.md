@@ -97,7 +97,9 @@ Read these before planning a pod; earlier same-day claims made without reading t
 - **Profiles on this rig** (2026-10-19):
   - small, medium, frontier, frontier-mini, frontier-mini-awq;
   - job (RTX PRO 6000 first, then A100/H100);
-  - jam (A40 first, then A6000/A5000/3090/L4/4090, about $0.49/hr);
+  - jam (A40 first, then A6000/A5000/3090/L4/4090). Prices: the README's table says $0.49/hr; offrig_offers listed
+    the A40 at $0.59/hr on 2026-10-19. Prices move, so read offrig_offers live. Its `wait_for_gpu_minutes` is 0, so with
+    no capacity it fails at once unless the plan sets `wait_minutes` (job and convert-cheap wait 20);
   - probe-blackwell, writer-qwen235;
   - convert-cheap and critic-h200 (added 2026-10-19).
 - **Network volumes:** a profile can carry `network_volume_id`, and `offrig stage` stages weights on one. It bills

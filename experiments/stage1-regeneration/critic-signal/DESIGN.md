@@ -1,6 +1,6 @@
 # Stage 1, part 2: a critic that can tell writers apart (design draft)
 
-**Status: v2, passed by Argon's short-form review (2026-10-19, two rounds). Phases 0 and 1 done (`PHASE-0-1.md`); nothing else runs until the tooling below is reviewed and laddered.** Template: the rnd
+**Status: v2, passed by Argon's short-form review (2026-10-19, two rounds). Phases 0–3 done (`PHASE-0-1.md`, `PHASE-2-3.md`): no protocol adopted under §5 (Holm 0.0625). The confirmation test in §9 is the Director's decision; it is a draft for Argon's review, and nothing in it runs before that review passes.** Template: the rnd
 [model comparisons](../../../site/src/content/docs/handbook/model-comparisons.md) design, sections 0–8, with a
 phase 0 added in front. It comes before the T10 lesson's writer run, which waits on its outcome.
 
@@ -233,6 +233,50 @@ committed before any perturbed item is scored.
 - One free CPU stub run passes with the scoring mode, the offline scorer and two seeds wired.
 - The Xet download probe has run (window 13u: no heartbeat change needed).
 - An outside review of this design has passed.
+
+## 9. The confirmation test (draft, 2026-10-19)
+
+The Director decided this after phase 3. P2 beat P0 13 : 0 across the two critics, but missed §5's Holm bar
+(0.0625). The pool held only 6–7 clean-trace items per critic, because the pilot had no more gold kind C rows. This
+section is written and committed **before any of its rows exist**.
+
+**The one comparison.** P2 against P0 on Muse, by exact McNemar on the paired outcomes (two-sided, α = 0.05). It is
+the only test, so there's no multiplicity adjustment. P3 isn't tested: at phase 3 it never differed from P2. Lightning
+isn't run.
+
+**Fresh items.**
+- New kind C rows, written for this test by Gemma 4 31B, critiqued by Muse in the screen's pilot path with twins
+  off. Gemma's family differs from Muse's, so no family skips.
+  - New rows are needed because the pilot has no unused C rows: each arm carries the same 2 C rows through every
+    wave, and Phase 1 used them all.
+- **The gold set:** R&D keys every accepted new row blind, under phase 1's protocol (the verdict, the deciding lines
+  and the planted flaw).
+  - Wrong rows, unclear rows and trace-leaks-label rows are excluded.
+  - The gold set is fixed, and its file sealed, before perturb.py runs.
+- **The items:** perturb.py at role-set `47a5882`, seed 0, as in phase 2: d, b, e and f on the GPU, g offline.
+  - R&D hand-checks every b, e and g item, and lists the invalid ones before the critic window opens. They stay in
+    the sealed file and are dropped at analysis.
+  - perturb.py isn't changed between phase 2 and this test, so the items are made the same way.
+
+**The primary pool and the outcome.** b, e, f and g pooled, as in §4. The outcome per item is right or wrong against
+the label: a perturbed item should be refused.
+
+**Size and the stopping rule.**
+- Target: at least 30 gold C rows, which gives about 18 clean-trace (f) items at the pilot's planted-flaw rate.
+- If the gold set gives fewer than 12 f items, more rows are written and gold-checked before the critic runs.
+- The critic window runs once, on the final sealed items. Nothing is scored before that, and nothing is re-run on
+  the result.
+
+**Decision.**
+- **Adopt P2** (the flaw gate on, plus P2's two comparison rules) if both hold:
+  - p < 0.05 with the discordance favouring P2;
+  - P2's control refusal is at most 10%.
+- **Otherwise,** R&D brings the Director the options §5 names.
+- Each P2 rule's contribution is reported descriptively. At phase 3, every difference came from the flaw gate.
+
+**Cost.** One writer window and one critic-eval window. The Publisher is projecting both from measured rates
+(W-A's Gemma and Muse times, and 13w's per-call times), and the figures are added here before any window opens.
+A3 applies to each.
 
 ## What carries into the T10 writer run
 

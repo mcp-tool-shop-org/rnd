@@ -69,3 +69,13 @@ Each sha256 is of the file as committed, with LF line endings (`.gitattributes`)
 | `debrief.md` | `ed73ef0864f6b603f32ab3f4a91874c465d537779ff1450094bc82690d312f8c` |
 
 Tests: `tests/test_agent_ab_harness_run.py` and `tests/test_agent_ab_harness_grade.py`. Recorded streams for replay are in `tests/fixtures/agent_ab_harness/`.
+
+## Claude Code idle compaction (weekly watch, 2026-10-19)
+
+Claude Code 2.1.299 and later compacts a conversation over 200K tokens that has sat idle for about 54 minutes
+(`idleCompaction`, on by default). It doesn't apply here yet: the harness pins CLI 2.1.197 and refuses any other
+version (`run.py`, `cli_version`).
+
+When the pin moves past 2.1.299, set `idleCompaction: false` in the harness's local settings in the same change.
+Otherwise a long run's context could change underneath it.
+

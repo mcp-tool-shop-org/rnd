@@ -6,8 +6,8 @@ date: 2026-10-19
 highlights:
   - "<strong>The critics catch most planted errors already.</strong> On the three kinds of broken copy the critic reads for the verdict (a changed number, a can't-tell trap, a decoy deciding line), the two critics refused 82 of 83."
   - "<strong>One gap, one rule.</strong> When we swapped a checker's flawed reasoning for sound reasoning but left the flaw label on, both critics said \"no flaw\" every time, 13 of 13. Today's rules ignore that answer. Counting it catches every one, at the cost of 1 wrongly refused good row in 44."
-  - "<strong>A clear result that didn't pass its own test.</strong> The stricter rules won 13 to 0, but the multiple-test correction we committed to in advance put the result at 0.0625, short of 0.05. So nothing changes yet."
-  - "<strong>Cheaper than planned.</strong> A critic call took a median of 12 to 21 seconds, against our projection of about 120 seconds an item. The three paid windows cost 11 units, against about 23 projected for one."
+  - "<strong>A clear result that didn't pass its own test.</strong> The stricter rules won 6 to 0 with Muse and 7 to 0 with Lightning, but the multiple-test correction we committed to in advance put the result at 0.0625, short of 0.05. So nothing changes yet."
+  - "<strong>Cheaper than planned.</strong> A critic call took a median of 12 to 21 seconds, against our projection of about 120 seconds an item. The three paid windows cost 10.79 units, plus 0.24 for a failed first launch, against about 23 projected for one."
 ---
 
 The studio builds training data with a pipeline of local models. One model, the **writer**, drafts each row. A
@@ -126,12 +126,12 @@ The study runs on Colab A100s, paid in compute units: about 5.3 units an hour.
 
 | Window | What | Units | Projected |
 |---|---|---|---|
-| 13v (a, b, c) | the free test ladder on a CPU runtime: a forced cut, two resumes | 0.05 | – |
+| 13v (a, b, c) | the low-cost test ladder on a CPU runtime: a forced cut, two resumes | 0.05 | – |
 | 13w | Muse, seed 0 | 3.10, plus 0.24 for a launch mistake | 2.83–10.43 |
 | 13x | Muse, seed 1 | 3.17 | about 2.69 |
 | 13y | Lightning, seed 0, converted on the GPU | 4.52 | 3.82–8.83 |
 
-The design had projected about 23 units for each critic run. That projection used Lightning's earlier timings,
+The design had projected about 23 units for each critic run, at about 120 seconds an item. That projection used Lightning's earlier timings,
 which included three extra calls per item. Measured, a critic call is short:
 
 ![How long one critic call takes](/rnd/charts/critic-calls.svg)

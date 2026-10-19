@@ -42,7 +42,7 @@
     "class": "flaw-label-ambiguous"
    }
   ],
-  "gold_input_sha256": "d20a3196f64e58a15eeee0052305f9788440fdf8b9d8b896c46d632efbe650a3"
+  "gold_input_sha256": "36d755236c85ed552b5e85b36728418a620c7da8847e8c258ebde2edf53fa216"
  },
  "perturb": {
   "tool": "role-set 47a5882 scripts/critic_signal/perturb.py",
@@ -58,13 +58,15 @@
    "gpu_total": 80,
    "skipped": 59
   },
-  "items_sha256": "2cc20cd8eaf9e6f0aeb20b05316b03cec50e6e0ade4b1fb0cabbd0a42e595a6e",
+  "items_sha256": "3a5939dc44546d5408f4029de5e56a6e4991705286d08d37eaf791bf96faafca",
   "keys_sha256": {
-   "a": "5e0643222245fdb0f5249a0a2eecd3ce2e85843bb875956044c48f1ee82cf930",
-   "c": "daf67d7ff209efa163135d03763f4fc22368bd87c7946c2ac548f98693b21eef",
-   "g": "0f3fabc602d0d64f267f8948fc282d76737f8e55ff2635c2c9d7618d82cd980f"
+   "a": "4e9ea7ccaf171df5dbc2afe9f4a11da3b0186fdea9762aec1ae8b30074acdced",
+   "c": "3b61f46b8c11eeeef43401feb95f7ad8e1da7071d8dbf439eb7e77e8f5601718",
+   "g": "34f01da3924f6b2983b7d62827ec1fcde1817b9d0e82226e34143bc5f66d001f"
   },
-  "manifest_sha256": "9f8e67540558ce0e26d25d22f4f7e5834b98631bd3d9e6c3b77a3431402831ea"
+  "manifest_sha256": "12e0f75c0f4f50f713c09c69e7001b783bb405e1872f6f919265e6c05293fc67",
+  "gates": "1.7.5 (sha256 b78d7757\u2026), closed_form as in phases 2-3, carried from window 14a's header",
+  "writer": "gemma-4-31b-it (family gemma), from 14a's writer pins"
  },
  "hand_check_drops": [
   {
@@ -92,5 +94,6 @@
   "f": 22,
   "g": 19,
   "d": 32
- }
+ },
+ "revision": "2026-10-19, before any critic call: the first freeze (items 2cc20cd8) had mock gates and no writer, because perturb ran outside role-set's environment and the builder dropped the window's header. The Publisher's non-mock probe refused it before any window opened. Rebuilt from the same drafts, keys and seed; the gold rows, exclusions, items and hand-check drops are unchanged, only the header and writer field differ."
 }

@@ -203,13 +203,9 @@ def check(root: Path, files: list[str] | None = None, registry_ids: set[str] | N
                                     "baseline's private_allow with a reason"))
             continue
         full = root / p
-        if sizes[p] <= TAG_SCAN_LIMIT:
-            try:
-                if tag in full.read_bytes():
-                    out.append(("error", p, "carries the private tag; private files live in rnd-data/private/"))
-                    continue
-            except OSError:
-                pass
+        if sizes[p] <= TAG_SCAN_LIMIT and tag in full.read_bytes():
+            out.append(("error", p, "carries the private tag; private files live in rnd-data/private/"))
+            continue
         if hashes and sha256(full) in hashes:
             out.append(("error", p, "matches a file in rnd-data's private manifest"))
 

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.2.7] - 2026-10-19
+
+- critic-signal confirmation: gold set, items sha and hand-check drops frozen before the critic run
+- Added experiment `stage1-regeneration`
+
 ## [1.1.15.2.6] - 2026-10-19
 
 - newsletter issue 14: testing the tester (critic-signal)

@@ -92,7 +92,18 @@ Read these before planning a pod; earlier same-day claims made without reading t
   reads a changed config, and plans and pods live in the project DB, so no app restart is needed.
 - **One lane, one live pod:** `offrig_launch` refuses while the lane has an open plan or a live pod. Pods run in
   sequence.
-- **Choosing a pod:** choose on the job's bottleneck, not $/hr: CPU cores and RAM for conversions, network for downloads, disk, VRAM headroom, stock and the cost of a redo. On 2026-10-19 the A100 converter pod had 128 cores and 2 TB RAM, and downloaded 249 GB at about 211 MB/s.
+- **Choosing a pod:** price as hours-to-done × $/hr, and choose on the job's bottleneck, not the hourly rate.
+  - **What matters:** CPU cores and clock, and RAM, for conversions; network for downloads; disk; VRAM headroom;
+    stock; and the cost of a redo.
+  - **Record each pod's host at boot** (`lscpu`/`nproc`, `free`, `df`). Hosts vary within one card type.
+  - **Measured on 2026-10-19,** downloading Super-VL-120B (249 GB):
+    - an A100-SXM4 job pod ($1.79/hr; 128 cores, 2 TB RAM) took 19 min to download. Its single-threaded Python
+      Q8_0 conversion ran at 0.9 GB/min and timed out after an hour: $3.05 for nothing;
+    - an RTX PRO 6000 Blackwell Server pod ($2.49/hr; 2× EPYC 9575F, 256 threads, 1.5 TB RAM, EU) took 3.4 min to
+      download and wrote BF16 at about 11.9 GB/min.
+  - **For CPU-bound conversions and big downloads,** try the RTX PRO 6000 Server first.
+  - **For large models,** convert to BF16, then quantize with the multithreaded `llama-quantize` (role-set
+    `via_bf16`).
 - **Container disk:** `offrig_plan` takes `container_disk_gb` (1–2000) per plan. It overrides the profile's size,
   so a small-disk profile can still convert a large model.
 - **Profiles on this rig** (2026-10-19):

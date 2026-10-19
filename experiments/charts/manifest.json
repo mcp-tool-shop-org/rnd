@@ -18,15 +18,15 @@
    "sha256": "7509d67dfd96777fa69742cd8a771e397edbe4330e63fd0689681ccaf6503908"
   },
   "experiments/e4b/results/block-2.json": {
-   "commit": "1669518",
+   "commit": "d760b0c",
    "sha256": "9b00fb532c6481808677c7783970adfef7084a12eb6d3326fb74478d9ab889e5"
   },
   "experiments/e4b/results/block-3.json": {
-   "commit": "1669518",
+   "commit": "d760b0c",
    "sha256": "d1637da65d1205e4b35464a81536ab7e60468f46bb0c80f6fe6749a5fdbbdaf9"
   },
   "experiments/e4b/results/pilot.json": {
-   "commit": "1669518",
+   "commit": "d760b0c",
    "sha256": "a65f5945acb1de8a7147ce0a4cfd7c8bfb52c3b9392216ebae79cc5ac9a6d912"
   },
   "experiments/kev-judge-finetune/env/README.md": {
@@ -41,8 +41,20 @@
    "commit": "f3f2b92",
    "sha256": "f9bc5ffdab9f5fcb61b9dd37dc25e4bb6dfca5e644f265ebc468232371497884"
   },
-  "experiments/stage1-regeneration/pilot/qwen3.8-w0-calls.json": {
+  "experiments/stage1-regeneration/critic-signal/data/calls.csv": {
    "commit": "uncommitted",
+   "sha256": "f34981f88535c99776f8c7bb138beac09bcb6e4fe199701deaf78e57a8ce3efd"
+  },
+  "experiments/stage1-regeneration/critic-signal/data/confirmation-slots.json": {
+   "commit": "uncommitted",
+   "sha256": "3e8ef3e32f8ee87d1d7faf2441fd45cd3b6ec7cb87d4d86b872520e3b19ffb54"
+  },
+  "experiments/stage1-regeneration/critic-signal/data/outcomes.csv": {
+   "commit": "uncommitted",
+   "sha256": "012017174bd0e5ff07a921bcacf0e21730c138720d486950513af7d83d0b5e4c"
+  },
+  "experiments/stage1-regeneration/pilot/qwen3.8-w0-calls.json": {
+   "commit": "d90d043",
    "sha256": "4f56434df0728d4c3bb0398a1a7fb44737f2c8eb53223315efc0971db1fb1bd7"
   },
   "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-gemma4_31b-grounded-tune/metrics.json": {

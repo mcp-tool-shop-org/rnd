@@ -1094,6 +1094,158 @@ def chart_pilot_thinking():
     svg.save("pilot-thinking-budget.svg")
 
 
+# --- critic-signal (stage 1, part 2) ---------------------------------------------------------------------------
+
+CS = REPO / "experiments" / "stage1-regeneration" / "critic-signal" / "data"
+CRITICS = [("muse-glimmer-30b", "Muse-Glimmer-30B (13w, seed 0)"),
+           ("nemotron-3.5-lightning-30b-a3b", "Nemotron-3.5-Lightning (13y, seed 0)")]
+P0_C, P2_C = "#9ca3af", "#1d4ed8"
+CS_TYPES = [("d", "controls: good rows", "refused (should be low)"),
+            ("b", "material flip", "caught"),
+            ("e", "cannot_tell trap", "caught"),
+            ("f", "clean trace, flaw label kept", "caught"),
+            ("g", "decoy deciding line (offline)", "caught")]
+CS_DROPS = {"P1-046:b"}  # pre-registered drop: the hand-check found the flip didn't change the verdict
+
+
+def cs_rows(name: str) -> list[dict]:
+    import csv as _csv
+    return list(_csv.DictReader(load(CS / name).splitlines()))
+
+
+def chart_critic_catch():
+    rows = [r for r in cs_rows("outcomes.csv") if r["item_id"] not in CS_DROPS]
+    step, top, pw, gap = 34, 120, 470, 60
+    left = 300
+    svg = Svg(1140, top + step * len(CS_TYPES) + 120, "What a critic catches, today's rules (P0) against stricter ones (P2)")
+    svg.text(24, 56, "Each row is a kind of deliberately broken copy of a checked-good row; a good critic refuses it. "
+             "The top row is the unchanged good rows, where a refusal is a mistake.", size=11.5, color=MUTED)
+    svg.dot(30, 80, P0_C, hollow=True)
+    svg.text(42, 84, "P0: today's rules (the flaw check is advisory)", size=11)
+    svg.dot(370, 80, P2_C, hollow=True)
+    svg.text(382, 84, "P2: the flaw check counts, plus two quote rules", size=11)
+    svg.text(720, 84, "hollow = fewer than 30 items, tentative · bars = Wilson 95% interval", size=10.5, color=MUTED)
+    y1 = top + step * len(CS_TYPES)
+    for i, (t, label, sub) in enumerate(CS_TYPES):
+        y = top + step * i + step / 2
+        if i % 2 == 0:
+            svg.rect(24, y - step / 2, 1092, step, BAND)
+        svg.text(28, y - 1, label, size=12, weight=600)
+        svg.text(28, y + 12, sub, size=9.5, color=MUTED)
+    for c, (critic, title) in enumerate(CRITICS):
+        x0 = 290 + c * 420
+        x1 = x0 + 300
+        sx = panel_axis(svg, x0, x1, top, y1, 0, 1, [0, 0.25, 0.5, 0.75, 1], title)
+        for i, (t, _, _) in enumerate(CS_TYPES):
+            y = top + step * i + step / 2
+            for j, (rs, col) in enumerate((("P0", P0_C), ("P2", P2_C))):
+                sel = [r for r in rows if r["critic"] == critic and r["rule_set"] == rs and r["perturbation_type"] == t]
+                n = len(sel)
+                k = sum(1 for r in sel if r["accepted"] == "0")
+                lo, hi = wilson(k, n)
+                yy = y - 6 + 12 * j
+                svg.line(sx(lo), yy, sx(hi), yy, col, 1.6)
+                svg.dot(sx(k / n), yy, col, hollow=n < 30, r=4)
+                if j == 1:
+                    k0 = sum(1 for r in rows if r["critic"] == critic and r["rule_set"] == "P0"
+                             and r["perturbation_type"] == t and r["accepted"] == "0")
+                    svg.text(x1 + 10, y + 4, f"P0 {k0} · P2 {k} of {n}", size=10, color=MUTED)
+    svg.footer(["Pre-registered design (DESIGN.md §4–5, Argon-reviewed). Same critic replies scored under both rule sets. "
+                "Muse skips the 14 items from rows it wrote, Lightning the 11 from its own family.",
+                "P1-046:b dropped as pre-registered (the hand-check found its edit didn't flip the verdict). P3 (two seeds) equals P2 "
+                "on every type and isn't drawn.",
+                "Source: mcp-tool-shop-org/rnd experiments/stage1-regeneration/critic-signal/data/outcomes.csv (from critic-rescore-offline)."])
+    svg.save("critic-catch.svg")
+
+
+def cs_median_prompt(rows, check):
+    import statistics as st
+    return st.median(int(r["prompt_tokens"]) for r in rows if r["check"] == check)
+
+
+def chart_critic_calls():
+    rows = cs_rows("calls.csv")
+    groups = [("13w", "verdict", "Muse, seed 0", "verdict check"), ("13w", "flaw", "Muse, seed 0", "flaw check"),
+              ("13x", "verdict", "Muse, seed 1", "verdict check"), ("13x", "flaw", "Muse, seed 1", "flaw check"),
+              ("13y", "verdict", "Lightning, seed 0", "verdict check"), ("13y", "flaw", "Lightning, seed 0", "flaw check")]
+    step, top, x0, x1 = 40, 104, 250, 900
+    lo, hi = 2, 200
+    sx = lambda v: x0 + (math.log10(v) - math.log10(lo)) / (math.log10(hi) - math.log10(lo)) * (x1 - x0)  # noqa: E731
+    y1 = top + step * len(groups)
+    svg = Svg(1140, y1 + 110, "How long one critic call takes, and how much of it is thinking")
+    svg.text(24, 56, "Every critic call in the three paid windows, one dot each, on an A100 at the critic's card values. "
+             "Thinking tokens are counted by the logging proxy.", size=11.5, color=MUTED)
+    for t in (2, 5, 10, 20, 50, 100, 200):
+        svg.line(sx(t), top - 6, sx(t), y1, GRID)
+        svg.text(sx(t), y1 + 16, f"{t} s", size=10, color=MUTED, anchor="middle")
+    svg.text((x0 + x1) / 2, y1 + 34, "seconds per call (log scale)", size=11, anchor="middle")
+    svg.text(x1 + 20, top - 12, "median: seconds · thinking tokens", size=10.5, color=MUTED)
+    import statistics as st
+    for i, (win, chk, who, what) in enumerate(groups):
+        y = top + step * i + step / 2
+        if i % 2 == 0:
+            svg.rect(24, y - step / 2, 1092, step, BAND)
+        svg.text(28, y - 1, who, size=12, weight=600)
+        svg.text(28, y + 12, f"{what}, window {win}", size=9.5, color=MUTED)
+        sel = [r for r in rows if r["window"] == win and r["check"] == chk]
+        col = "#7c3aed" if win == "13y" else "#0f766e"
+        for k, r in enumerate(sel):
+            v = max(lo, min(hi, float(r["wall_time_s"])))
+            svg.dot(sx(v), y - 8 + (k % 5) * 4, col, r=2.2)
+        secs = [float(r["wall_time_s"]) for r in sel]
+        th = [int(r["thinking_tokens"]) for r in sel if r["thinking_tokens"]]
+        svg.line(sx(st.median(secs)), y - 13, sx(st.median(secs)), y + 13, INK, 2)
+        svg.text(x1 + 20, y + 4, f"{len(sel)} calls · {st.median(secs):.1f} s · {st.median(th):,.0f} thinking", size=10.5)
+    empty = [r for r in rows if r["check"] == "empty"]
+    notes = [f"Not drawn: {len(empty)} empty reply (Lightning, {float(empty[0]['wall_time_s']):.0f} s, thinking ran to the "
+             f"{int(empty[0]['thinking_tokens']):,}-token cap; retried)." if empty else "No empty replies.",
+             f"Median prompt: {cs_median_prompt(rows, 'verdict'):,.0f} tokens for a verdict check, {cs_median_prompt(rows, 'flaw'):,.0f} "
+             "for a flaw check (it also carries a checker's reasoning).",
+             "Source: mcp-tool-shop-org/rnd experiments/stage1-regeneration/critic-signal/data/calls.csv (the logging proxy's generations.jsonl)."]
+    svg.footer(notes)
+    svg.save("critic-calls.svg")
+
+
+def chart_confirmation_slots():
+    d = load(CS / "confirmation-slots.json")
+    f, ctrl, used = set(d["f_eligible"]), set(d["controls"]), set(d["used_before"])
+    cols = {"f": "#1d4ed8", "c": "#15803d", "u": "#9ca3af", "odd": "#f1f3f7", "even": "#ffffff"}
+    left, top, cw, ch = 130, 128, 62, 30
+    svg = Svg(1140, top + ch * len(d["lessons"]) + 112, "The confirmation test's 38 slots, chosen by what they can test")
+    svg.text(24, 56, "Each lesson has eight reasoning (kind C) slots. The pipeline plants a mistake in odd-numbered slots and "
+             "\"no mistake\" in even ones; a clean-trace copy needs a planted mistake and a decided answer.",
+             size=11.5, color=MUTED)
+    legend = [(cols["f"], f"clean-trace eligible, used ({len(f)})"), (cols["c"], f"natural control, used ({len(ctrl)})"),
+              (cols["u"], "used in phases 1–3"), (cols["odd"], "odd, answer is can't-tell (no clean trace possible)"),
+              (cols["even"], "even, not needed")]
+    x = 24
+    for col, lab in legend:
+        svg.rect(x, 74, 14, 14, col, stroke="#9ca3af")
+        svg.text(x + 20, 85, lab, size=10.5)
+        x += 30 + len(lab) * 5.6
+    for j in range(d["slots_per_lesson"]):
+        svg.text(left + cw * j + cw / 2, top - 8, f"slot {j + 1}", size=10, color=MUTED, anchor="middle")
+    for i, les in enumerate(d["lessons"]):
+        y = top + ch * i
+        svg.text(left - 14, y + ch / 2 + 4, les, size=12, weight=600, anchor="end")
+        for j in range(d["slots_per_lesson"]):
+            sid = f"{les}-C-{j + 1:02d}"
+            kind = "f" if sid in f else "c" if sid in ctrl else "u" if sid in used else ("odd" if (j + 1) % 2 else "even")
+            svg.rect(left + cw * j + 2, y + 2, cw - 4, ch - 4, cols[kind], stroke="#d1d5db")
+    nx = left + cw * d["slots_per_lesson"] + 30
+    svg.text(nx, top + 14, "How the review changed it", size=12, weight=600)
+    for k, ln in enumerate([f"The first draft took {d['draft_slot_count']} slots by lesson (T02, T03,",
+                            f"T06, T07, T08). Only {d['draft_eligible_count']} of them could make a clean-trace",
+                            "copy. Argon, the outside reviewer, caught it.",
+                            "The fix takes every eligible slot there is",
+                            "in ten lessons, plus 11 even slots as",
+                            "controls: still 38 slots."]):
+        svg.text(nx, top + 36 + 16 * k, ln, size=11, color=INK)
+    svg.footer(["Pre-registered: the slot list was frozen before any row was written.",
+                "Source: mcp-tool-shop-org/rnd experiments/stage1-regeneration/critic-signal/data/confirmation-slots.json (DESIGN.md §9)."])
+    svg.save("critic-confirmation-slots.svg")
+
+
 def manifest():
     out = {}
     for rel, p in sorted(INPUTS.items()):
@@ -1119,6 +1271,9 @@ def main():
     chart_thinking()
     chart_e4b()
     chart_pilot_thinking()
+    chart_critic_catch()
+    chart_critic_calls()
+    chart_confirmation_slots()
     manifest()
 
 

@@ -79,7 +79,6 @@
   "npu-probe",
   "ollama-cuda-backend",
   "openjev-vs-jev",
-  "stage1-regeneration",
   "stage1-role-eval",
   "t10-variety",
   "verifier-gold"

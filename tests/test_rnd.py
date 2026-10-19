@@ -158,7 +158,8 @@ class StoreTests(unittest.TestCase):
 
     def test_build_and_search(self):
         counts, problems = store.build(self.root, self.db)
-        self.assertEqual(counts, {"entries": 1, "catalogs": 1, "catalog_items": 2})
+        self.assertEqual(counts, {"entries": 1, "catalogs": 1, "catalog_items": 2,
+                                  "experiments": 0, "runs": 0, "files": 0})
         con, _ = store.connect(self.root, self.db)
         ents, items = store.search(con, "cuda-graphs launch")  # the hyphen must not break FTS5
         self.assertEqual([e["id"] for e in ents], ["2026-01-02-sample"])

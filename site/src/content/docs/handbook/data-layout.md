@@ -61,7 +61,15 @@ That makes `README.md`, `experiment.json`, `data/`, `results/`, `scripts/` and a
 - `name` (the folder), `status` (`designing`, `running`, `parked`, `closed`) and `design`, the design file;
 - `template`: the handbook page the design follows, or null;
 - `budgets`: one per cost unit, each with its `cap` and who set it. Spending is computed from the runs, never typed,
-  and never added across units;
+  and never added across units. A budget can also say two more things, each naming recorded runs in its unit, a run
+  at most once:
+  - `excludes`, with an `excludes_why`: runs that fall outside the cap, such as runs made before the budget began.
+    The ledger shows them on their own line.
+  - `reconciled`: groups of overlapping runs whose own estimates overcount, each with the total that was actually
+    `measured` (a provider balance) and `why`. The ledger counts the measured total, and shows the estimates beside
+    it.
+    - stage1-regeneration's night one is the example: 29 windows whose estimates sum to 136.90 units, against a
+      measured 129.48.
 - `licences`: the licence registry ids the experiment relies on.
 
 **Written by tools, never typed: `runs`.**
@@ -84,3 +92,49 @@ That makes `README.md`, `experiment.json`, `data/`, `results/`, `scripts/` and a
 
 **No machine paths.** The record is public, so `rnd check` refuses a drive letter, a share or a home folder
 anywhere in it.
+
+## Recording runs, and asking where things are
+
+Every run reaches its experiment record through one command, from the window's own record:
+
+```bash
+rnd runs record --experiment stage1-regeneration --from <window>/outcome.json --venue colab --cost-unit colab_units
+```
+
+- **A `run` object is read as written.** The Publisher's `publisher outcome write` puts one in each new
+  `outcome.json`, in exactly the run fields, and it's recorded with no mapping.
+- **The mapping, for older files.** An older file without a `run` object maps one to one: `window` to `id`, `card` to `hardware`, `spent` to `cost`,
+  `basis` to `cost_basis`, and `cap`, `outcome` and `why` to themselves. A `commit` becomes a pin.
+- **What the options do.** They fill only what `outcome.json` lacks. A value given both ways must agree; nothing is
+  silently overridden.
+- **Checked before writing.** The whole record is validated first, and nothing is written if any check fails.
+- **No silent overwrites.** A run already recorded is replaced only with `--replace`.
+
+The index (`rnd.db`) is rebuilt from the records, the data-pack manifests and, where it's checked out, rnd-data's
+manifests:
+
+| Command | What it answers |
+|---|---|
+| `rnd runs [--experiment] [--venue] [--outcome] [--cost-unit] [--pin TEXT]` | which runs match, across every experiment |
+| `rnd ledger <experiment>` | spending per cost unit against each budget, computed from the runs and split by cost basis |
+| `rnd where <sha256 or path>` | every name a file goes by and every copy: in git, on Hugging Face, in rnd-data |
+
+The index also has the tables `experiments`, `runs`, `budgets`, `files`, `manifest_files` and `copies`, for
+`rnd sql`. The schema's hash is part of the index's change detector, so an rnd upgrade rebuilds it.
+
+## rnd-data's manifests
+
+The private raw-data repository describes each run in `runs/<id>/manifest.json`, and its private files in
+`private/manifest.json`:
+
+```json
+{"schema": "rnd-data-run/v1", "id": "14b",
+ "files": [{"path": "out/pilot-out.tar", "sha256": "…", "bytes": 123, "tier": "T4", "licence": "…"}],
+ "copies": [{"sha256": "…", "store": "d", "location": "…"}]}
+```
+
+- **The private manifest** uses the schema `rnd-data-private/v1`, and its files have no tier field.
+- **Locations stay out of public files.** A location may be a machine path. It lives only in the private manifest and
+  the local `rnd.db`, never in a public file.
+- **A bad manifest is skipped.** An unreadable manifest, or one with the wrong schema, is skipped with a warning,
+  since rnd-data is a separate checkout.

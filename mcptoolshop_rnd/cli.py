@@ -14,7 +14,7 @@ import traceback
 from datetime import date
 from pathlib import Path
 
-from . import __version__, abmine, catalog, collect, datapack, layout, model, probe, readouts, release, store, watch
+from . import __version__, abmine, catalog, collect, datapack, layout, model, probe, readouts, release, runs, store, watch
 
 SOURCE_ROOT = Path(__file__).resolve().parent.parent
 
@@ -79,7 +79,8 @@ def cmd_build(args):
                     "fix the files named above, then rebuild", 1)
     warnings = sum(p.level == "warning" for p in problems)
     print(f"built rnd.db: {counts['entries']} entries, {counts['catalogs']} catalogues "
-          f"({counts['catalog_items']} items), {warnings} warnings")
+          f"({counts['catalog_items']} items), {counts['experiments']} experiment records, {counts['runs']} runs, "
+          f"{counts['files']} files, {warnings} warnings")
     return 0
 
 
@@ -406,6 +407,144 @@ def cmd_sql(args):
     cols = [c[0] for c in cur.description or []]
     rows = [dict(zip(cols, r)) for r in cur.fetchall()]
     emit(args, rows, lambda rs: [print(" | ".join(str(v) for v in r.values())) for r in rs])
+    return 0
+
+
+def cmd_runs(args):
+    if args.action == "record":
+        if not args.experiment or not args.source:
+            return fail("RUNS_USAGE", "record needs --experiment and --from", "rnd runs record --experiment NAME --from outcome.json")
+        try:
+            outcome = json.loads(Path(args.source).read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            return fail("OUTCOME_UNREADABLE", f"{args.source}: {exc}", "point --from at a window's outcome.json")
+        pins = {}
+        for spec in args.pin or ():
+            key, sep, value = spec.partition("=")
+            if not sep or not key or not value:
+                return fail("RUNS_USAGE", f"--pin {spec!r} is not KEY=VALUE", "for example --pin role-set=47a5882")
+            pins[key] = value
+        try:
+            run = runs.from_outcome(outcome, id=args.id, venue=args.venue, cost_unit=args.cost_unit, date=args.date,
+                                    projected_cost=args.projected_cost, raw_manifest_id=args.raw_manifest,
+                                    pins=pins or None)
+            action = runs.record(ROOT, args.experiment, run, replace=args.replace)
+        except runs.RecordError as exc:
+            return fail(exc.code, str(exc), exc.hint, 1)
+        print(f"{action} run {run['id']} in experiments/{args.experiment}/experiment.json "
+              f"({run['outcome']}, {run['cost']} {run['cost_unit']})")
+        return 0
+    con = open_db(args)
+    sql, params = "SELECT * FROM runs WHERE 1=1", []
+    for col, val in (("experiment", args.experiment), ("venue", args.venue), ("outcome", args.outcome),
+                     ("cost_unit", args.cost_unit)):
+        if val:
+            sql += f" AND {col} = ?"
+            params.append(val)
+    if args.pin:
+        for spec in args.pin:
+            sql += " AND pins LIKE ?"
+            params.append(f"%{spec}%")
+    rows = [dict(r) for r in con.execute(sql + " ORDER BY experiment, date, id", params)]
+    for r in rows:
+        r["pins"] = json.loads(r["pins"] or "{}")
+
+    def text(rs):
+        for r in rs:
+            print(f"{r['experiment']:<22} {r['id']:<26} {r['date']} {r['venue']:<6} {r['hardware']:<14} "
+                  f"{r['cost']:>8} {r['cost_unit']:<11} {r['outcome']}")
+        if not rs:
+            print("no runs")
+    emit(args, rows, text)
+    return 0
+
+
+def cmd_ledger(args):
+    con = open_db(args)
+    if not con.execute("SELECT 1 FROM experiments WHERE name = ?", (args.experiment,)).fetchone():
+        return fail("NO_EXPERIMENT", f"no experiment record named {args.experiment!r}", "list them: rnd sql \"SELECT name FROM experiments\"")
+    budgets = {r["cost_unit"]: dict(r) for r in con.execute("SELECT * FROM budgets WHERE experiment = ?", (args.experiment,))}
+    excluded = {unit: set(json.loads(b["excludes"] or "[]")) for unit, b in budgets.items()}
+    groups = {unit: json.loads(b["reconciled"] or "[]") for unit, b in budgets.items()}
+    in_group = {unit: {rid for g in gs for rid in g["runs"]} for unit, gs in groups.items()}
+    spent, cost_of = {}, {}
+    for r in con.execute("SELECT id, cost_unit, cost_basis, cost FROM runs WHERE experiment = ?", (args.experiment,)):
+        u = spent.setdefault(r["cost_unit"], {"runs": 0, "spent": 0.0, "by_basis": {}, "outside": [], "outside_cost": 0.0})
+        cost_of[r["id"]] = r["cost"]
+        if r["id"] in excluded.get(r["cost_unit"], ()):
+            u["outside"].append(r["id"])
+            u["outside_cost"] = round(u["outside_cost"] + r["cost"], 4)
+            continue
+        u["runs"] += 1
+        if r["id"] in in_group.get(r["cost_unit"], ()):
+            continue  # counted below, by its group's measured total
+        u["spent"] = round(u["spent"] + r["cost"], 4)
+        u["by_basis"][r["cost_basis"]] = round(u["by_basis"].get(r["cost_basis"], 0) + r["cost"], 4)
+    rows = []
+    for unit in sorted(set(budgets) | set(spent)):
+        b = budgets.get(unit)
+        s = spent.setdefault(unit, {"runs": 0, "spent": 0.0, "by_basis": {}, "outside": [], "outside_cost": 0.0})
+        recs = []
+        for g in groups.get(unit, []):
+            estimated = round(sum(cost_of.get(rid, 0) for rid in g["runs"]), 4)
+            s["spent"] = round(s["spent"] + g["measured"], 4)
+            s["by_basis"]["reconciled"] = round(s["by_basis"].get("reconciled", 0) + g["measured"], 4)
+            recs.append({"runs": len(g["runs"]), "measured": g["measured"], "runs_estimated": estimated,
+                         "why": g["why"]})
+        rows.append({"cost_unit": unit, "cap": b["cap"] if b else None, "set_by": b["set_by"] if b else None,
+                     "spent": s["spent"], "left": round(b["cap"] - s["spent"], 4) if b else None,
+                     "runs": s["runs"], "by_basis": s["by_basis"], "reconciled": recs,
+                     "outside_cap": {"runs": sorted(s["outside"]), "cost": s["outside_cost"],
+                                     "why": b["excludes_why"] if b else None}})
+
+    def text(data):
+        rs = data["units"]
+        print(f"{args.experiment}: spending per cost unit, computed from its runs (never added across units)")
+        for r in rs:
+            cap = f"cap {r['cap']} (set by {r['set_by']}), left {r['left']}" if r["cap"] is not None else "no budget"
+            basis = ", ".join(f"{k} {v}" for k, v in sorted(r["by_basis"].items()))
+            print(f"  {r['cost_unit']:<11} spent {r['spent']} over {r['runs']} runs; {cap}")
+            if basis:
+                print(f"              by basis: {basis}")
+            for g in r["reconciled"]:
+                print(f"              reconciled: {g['runs']} overlapping runs count as their measured {g['measured']} "
+                      f"(their own estimates sum to {g['runs_estimated']}): {g['why']}")
+            out = r["outside_cap"]
+            if out["runs"]:
+                print(f"              outside the cap: {out['cost']} over {', '.join(out['runs'])} ({out['why']})")
+        if not rs:
+            print("  no budgets and no runs")
+    emit(args, {"experiment": args.experiment, "units": rows}, text)
+    return 0
+
+
+def cmd_where(args):
+    con = open_db(args)
+    key = args.key.strip()
+    if len(key) >= 8 and all(c in "0123456789abcdef" for c in key.lower()):
+        shas = [r[0] for r in con.execute("SELECT sha256 FROM files WHERE sha256 LIKE ?", (key.lower() + "%",))]
+    else:
+        shas = [r[0] for r in con.execute("SELECT DISTINCT sha256 FROM manifest_files WHERE path = ? OR path LIKE ?",
+                                          (key, f"%/{key}"))]
+    if not shas:
+        return fail("NOT_FOUND", f"no file matches {key!r}", "give a SHA-256 (8+ hex) or a path inside a manifest or experiments/")
+    out = []
+    for sha in shas:
+        f = dict(con.execute("SELECT * FROM files WHERE sha256 = ?", (sha,)).fetchone())
+        f["names"] = [dict(r) for r in con.execute("SELECT manifest_id, path FROM manifest_files WHERE sha256 = ? "
+                                                    "ORDER BY manifest_id, path", (sha,))]
+        f["copies"] = [dict(r) for r in con.execute("SELECT store, location FROM copies WHERE sha256 = ? "
+                                                     "ORDER BY store, location", (sha,))]
+        out.append(f)
+
+    def text(fs):
+        for f in fs:
+            print(f"{f['sha256']}  {f['bytes']} bytes  tier {f['tier']}  licence {f['licence'] or '-'}")
+            for n in f["names"]:
+                print(f"  as {n['manifest_id']}:{n['path']}")
+            for c in f["copies"]:
+                print(f"  copy {c['store']}: {c['location']}")
+    emit(args, out, text)
     return 0
 
 
@@ -748,6 +887,27 @@ def build_parser():
     s.add_argument("--log", action="append", metavar="ARM=PATH", help="an arm's OLLAMA_DEBUG server log (repeatable)")
     s.add_argument("--arm", action="append", help="limit to these arms, in this order; the first is the reference of each pair")
     s.add_argument("--reference", help="an arm to break ties at the other arms' forks")
+
+    s = add("runs", cmd_runs, "list recorded runs, or record one from a window's outcome.json into experiment.json")
+    s.add_argument("action", nargs="?", default="list", choices=("list", "record"))
+    s.add_argument("--experiment", help="list: filter; record: the experiment folder to write to")
+    s.add_argument("--from", dest="source", metavar="OUTCOME_JSON", help="record: the window's outcome.json")
+    s.add_argument("--venue", choices=layout.VENUES, help="list: filter; record: when outcome.json lacks it")
+    s.add_argument("--cost-unit", choices=layout.COST_UNITS, help="list: filter; record: when outcome.json lacks it")
+    s.add_argument("--outcome", choices=layout.OUTCOMES, help="list: filter")
+    s.add_argument("--date", help="record: YYYY-MM-DD, when outcome.json lacks it")
+    s.add_argument("--id", help="record: the run id, when outcome.json has no window")
+    s.add_argument("--projected-cost", type=float, help="record: the projection made before the run")
+    s.add_argument("--raw-manifest", help="record: the run's manifest id in rnd-data")
+    s.add_argument("--pin", action="append", metavar="KEY=VALUE",
+                   help="record: a pin (repeatable); list: a substring of the pins to filter on")
+    s.add_argument("--replace", action="store_true", help="record: overwrite a run already recorded with this id")
+
+    s = add("ledger", cmd_ledger, "an experiment's spending per cost unit against its budgets, computed from its runs")
+    s.add_argument("experiment")
+
+    s = add("where", cmd_where, "where a file's bytes are: every name and copy, by SHA-256 or path")
+    s.add_argument("key", metavar="SHA256_OR_PATH")
 
     s = add("sql", cmd_sql, "run a read-only SQL query against the index")
     s.add_argument("query")

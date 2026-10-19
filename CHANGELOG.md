@@ -11,6 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.17.0.0] - 2026-10-19
+
+- rnd.db: six record tables (experiments, runs, budgets, files, manifest_files, copies) rebuilt from experiment records, data-pack manifests and rnd-data's manifests; the schema's hash joins the index fingerprint
+- rnd runs record --from outcome.json (a run object as written, or an older file mapped), rnd runs, rnd ledger, rnd where
+- budgets: excludes (runs outside the cap) and reconciled (overlapping runs counted at their measured total)
+- stage1-regeneration: its experiment record, 74 runs backfilled from the Publisher's records; the ledger matches theirs (196.93 of 300 units, $8.05 of $22)
+- Added experiment `stage1-regeneration`
+
 ## [1.1.16.0.0] - 2026-10-19
 
 - rnd check: the layout rules: a 256 KB file and 2 MB experiment limit under experiments/ with a no-growth baseline (docs/layout.json), the private-file rule (tag, names, rnd-data's private manifest), and experiment.json (rnd-experiment/v1)

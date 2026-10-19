@@ -44,7 +44,11 @@ ZERO_COST = tuple(VOCABULARY["zero_cost"])
 # Older words the recorder maps to a current outcome; a record always holds the current word.
 ALIASES = dict(VOCABULARY["aliases"])
 TOP_KEYS = {"schema", "name", "status", "design", "template", "budgets", "licences", "runs"}
-BUDGET_KEYS = {"cost_unit", "cap", "set_by"}
+# excludes: runs of the experiment that fall outside this cap (e.g. made before the budget began), with the reason.
+# reconciled: groups of runs that overlapped and share one measured total (a provider balance), with the reason. The
+# ledger counts the measured total for the group instead of adding the runs' own estimates, which overcount.
+BUDGET_KEYS = {"cost_unit", "cap", "set_by", "excludes", "excludes_why", "reconciled"}
+RECONCILED_KEYS = {"runs", "measured", "why"}
 RUN_KEYS = {"id", "venue", "hardware", "date", "cost", "cost_unit", "cost_basis", "cap", "projected_cost", "outcome",
             "why", "raw_manifest_id", "pins"}
 NAME_RE = re.compile(r"^[a-z0-9][a-z0-9._-]*$")
@@ -248,6 +252,11 @@ def validate_record(root: Path, exp: str, registry_ids: set[str] | None = None) 
         data = json.loads((root / "experiments" / exp / "experiment.json").read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         return [f"not valid JSON ({exc})"]
+    return validate_data(root, exp, data, registry_ids)
+
+
+def validate_data(root: Path, exp: str, data, registry_ids: set[str] | None = None) -> list[str]:
+    """Problems in an experiment record held in memory (what `rnd runs record` checks before it writes)."""
     if not isinstance(data, dict):
         return ["must be a JSON object"]
     p = []
@@ -291,6 +300,32 @@ def validate_record(root: Path, exp: str, registry_ids: set[str] | None = None) 
             p.append(f"budgets[{i}].cap must be a positive number")
         if not isinstance(b.get("set_by"), str) or not b["set_by"].strip():
             p.append(f"budgets[{i}].set_by must say who set the cap")
+        if "excludes" in b:
+            if not isinstance(b["excludes"], list) or not all(isinstance(x, str) and x for x in b["excludes"]):
+                p.append(f"budgets[{i}].excludes must be a list of run ids")
+            elif not (isinstance(b.get("excludes_why"), str) and b["excludes_why"].strip()):
+                p.append(f"budgets[{i}].excludes needs an excludes_why: which runs fall outside the cap, and why")
+        elif "excludes_why" in b:
+            p.append(f"budgets[{i}].excludes_why without excludes")
+        if "reconciled" in b:
+            groups = b["reconciled"]
+            if not isinstance(groups, list):
+                p.append(f"budgets[{i}].reconciled must be a list of groups")
+                groups = []
+            for j, g in enumerate(groups):
+                where = f"budgets[{i}].reconciled[{j}]"
+                if not isinstance(g, dict):
+                    p.append(f"{where} must be an object")
+                    continue
+                if set(g) != RECONCILED_KEYS:
+                    p.append(f"{where} needs exactly {', '.join(sorted(RECONCILED_KEYS))}")
+                if not isinstance(g.get("runs"), list) or len(g.get("runs") or []) < 2 or \
+                        not all(isinstance(x, str) and x for x in g["runs"]):
+                    p.append(f"{where}.runs must list two or more run ids")
+                if not _number(g.get("measured")) or g["measured"] < 0:
+                    p.append(f"{where}.measured must be a number, 0 or more")
+                if not (isinstance(g.get("why"), str) and g["why"].strip()):
+                    p.append(f"{where}.why must say what was measured and why the runs share it")
 
     licences = data.get("licences", [])
     if not isinstance(licences, list) or not all(isinstance(x, str) for x in licences):
@@ -348,6 +383,30 @@ def validate_record(root: Path, exp: str, registry_ids: set[str] | None = None) 
             p.append(f"runs[{i}].raw_manifest_id must be a string or null")
         if not isinstance(r.get("pins", {}), dict):
             p.append(f"runs[{i}].pins must be an object")
+
+    # An excluded run must be a recorded run in the budget's unit, so a typo can't hide spending.
+    unit_of = {r.get("id"): r.get("cost_unit") for r in runs if isinstance(r, dict)}
+    for i, b in enumerate(budgets):
+        if not isinstance(b, dict):
+            continue
+        named = []
+        if isinstance(b.get("excludes"), list):
+            named += [("excludes", rid) for rid in b["excludes"]]
+        for j, g in enumerate(b.get("reconciled") or [] if isinstance(b.get("reconciled"), list) else []):
+            if isinstance(g, dict) and isinstance(g.get("runs"), list):
+                named += [(f"reconciled[{j}]", rid) for rid in g["runs"]]
+        seen_once = {}
+        for where, rid in named:
+            if not isinstance(rid, str):
+                continue
+            if rid not in unit_of:
+                p.append(f"budgets[{i}].{where} names {rid!r}, which is not a recorded run")
+            elif unit_of[rid] != b.get("cost_unit"):
+                p.append(f"budgets[{i}].{where} names {rid!r}, a run in {unit_of[rid]}, not {b.get('cost_unit')}")
+            if rid in seen_once:
+                p.append(f"budgets[{i}]: {rid!r} is named in both {seen_once[rid]} and {where}; a run counts once")
+            else:
+                seen_once[rid] = where
 
     for where in _machine_paths(data):
         p.append(f"{where} holds a machine path; experiment.json is public, so keep paths relative or in rnd-data")

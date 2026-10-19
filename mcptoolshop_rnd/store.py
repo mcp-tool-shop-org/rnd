@@ -1,5 +1,6 @@
 """The SQLite index (rnd.db). Always rebuildable from the files; never edited."""
 
+import hashlib
 import json
 import os
 import re
@@ -7,7 +8,7 @@ import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import catalog, model
+from . import catalog, model, runs
 
 SCHEMA = """
 CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT);
@@ -28,6 +29,17 @@ CREATE TABLE catalog_items (catalog TEXT, name TEXT, family TEXT, lanes TEXT, de
 CREATE VIRTUAL TABLE entries_fts USING fts5(id UNINDEXED, title, tags, body, tokenize='porter unicode61');
 CREATE VIRTUAL TABLE catalog_fts USING fts5(catalog UNINDEXED, name, family, description, note, lanes,
   tokenize='porter unicode61');
+CREATE TABLE experiments (name TEXT PRIMARY KEY, status TEXT, template TEXT, design TEXT);
+CREATE TABLE runs (experiment TEXT, id TEXT, venue TEXT, hardware TEXT, date TEXT, cost REAL, cost_unit TEXT,
+  cost_basis TEXT, cap REAL, projected_cost REAL, outcome TEXT, why TEXT, raw_manifest_id TEXT, pins TEXT,
+  PRIMARY KEY (experiment, id));
+CREATE TABLE budgets (experiment TEXT, cost_unit TEXT, cap REAL, set_by TEXT, excludes TEXT, excludes_why TEXT,
+  reconciled TEXT, PRIMARY KEY (experiment, cost_unit));
+CREATE TABLE files (sha256 TEXT PRIMARY KEY, bytes INTEGER, tier TEXT, licence TEXT);
+CREATE TABLE manifest_files (manifest_id TEXT, path TEXT, sha256 TEXT, PRIMARY KEY (manifest_id, path));
+CREATE TABLE copies (sha256 TEXT, store TEXT, location TEXT);
+CREATE INDEX idx_copies ON copies(sha256);
+CREATE INDEX idx_manifest_sha ON manifest_files(sha256);
 CREATE INDEX idx_fields ON entry_fields(field);
 CREATE INDEX idx_tags ON entry_tags(tag);
 """
@@ -37,13 +49,18 @@ def default_db(root):
     return Path(os.environ.get("RND_DB") or Path(root) / "rnd.db")
 
 
+SCHEMA_ID = hashlib.sha256(SCHEMA.encode("utf-8")).hexdigest()[:12]
+
+
 def fingerprint(root):
-    """Cheap change detector over every file the index is built from."""
+    """Cheap change detector over every file the index is built from, and the schema it's built with: an rnd
+    upgrade that changes the tables rebuilds the index instead of serving the old one."""
     paths = list(model.entry_paths(root))
     for d in catalog.catalog_dirs(root):
         paths.extend(p for p in d.glob("*.json"))
+    paths.extend(runs.source_paths(root))
     stamp = max((p.stat().st_mtime_ns for p in paths), default=0)
-    return f"{len(paths)}:{stamp}"
+    return f"{SCHEMA_ID}:{len(paths)}:{stamp}"
 
 
 def build(root, db_path=None):
@@ -57,6 +74,8 @@ def build(root, db_path=None):
         problems.extend(model.Problem("warning", d.name, p) for p in cat_problems if "no catalog.json" in p)
         if meta:
             cats.append((meta, items))
+    record_rows, record_problems = runs.index_rows(root)
+    problems.extend(model.Problem(level, where, msg) for level, where, msg in record_problems)
     if any(p.level == "error" for p in problems):
         return None, problems
 
@@ -95,6 +114,10 @@ def build(root, db_path=None):
                     " ".join(filter(None, [it["note"], it["family_note"]])),
                     " ".join(it.get("lanes", []))))
                 n_items += 1
+        for table, values in record_rows.items():
+            if values:
+                marks = ",".join("?" * len(values[0]))
+                con.executemany(f"INSERT INTO {table} VALUES ({marks})", values)
         built = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
         con.executemany("INSERT INTO meta VALUES (?,?)", [
             ("built_at", built), ("fingerprint", fingerprint(root))])
@@ -102,7 +125,9 @@ def build(root, db_path=None):
     finally:
         con.close()
     os.replace(tmp, db_path)
-    return {"entries": len(entries), "catalogs": len(cats), "catalog_items": n_items}, problems
+    return {"entries": len(entries), "catalogs": len(cats), "catalog_items": n_items,
+            "experiments": len(record_rows["experiments"]), "runs": len(record_rows["runs"]),
+            "files": len(record_rows["files"])}, problems
 
 
 def connect(root, db_path=None, rebuild=True):

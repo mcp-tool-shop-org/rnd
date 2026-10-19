@@ -137,8 +137,11 @@ rnd raw verify [--run ID] [--deep]                                 # re-hash eve
   path with `/` written as `--`.
 - **Files.**
   - Files of 256 KB or less go into git.
-  - Larger ones go once, by content, into the blob store (`blobs/<sha[:2]>/<sha>`). From a source on the same NTFS
-    volume they're hard-linked: the same bytes under a second name, never counted as a second copy.
+  - Larger ones go once, by content, into the blob store (`blobs/<sha[:2]>/<sha>`). They're copied and hash-checked,
+    and every blob is read-only.
+  - **`--link` hard-links instead.** It's only for a read-only snapshot, such as the backup, on the store's volume. The
+    blob is then the same bytes under a second name, never counted as a second copy. A live tree is always copied:
+    an append to a linked working file would change the stored blob.
 - **Reasons.**
   - A reasons file maps paths or `folder/` prefixes to a reason: `sealed`, `blind`, `item-text`, `unapproved`,
     `private-project` or `identity`.

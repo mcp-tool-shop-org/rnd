@@ -3,6 +3,7 @@
 import json
 import os
 import shutil
+import stat
 import tempfile
 import unittest
 from pathlib import Path
@@ -14,6 +15,14 @@ from .test_cli import CliBase
 from .test_rnd import write
 
 TAG = "T5-PRIVATE-" + "DO-NOT-PUBLISH"
+
+
+def rmtree_force(path):
+    """Blobs are read-only, and Windows won't delete a read-only file: clear the flag, then delete."""
+    def unlock(func, p, _exc):
+        os.chmod(p, stat.S_IWRITE)
+        func(p)
+    shutil.rmtree(path, onerror=unlock)
 
 
 def make_stores(base: Path):
@@ -43,7 +52,7 @@ def make_receipts(base: Path) -> Path:
 class IngestTests(unittest.TestCase):
     def setUp(self):
         self.base = Path(tempfile.mkdtemp())
-        self.addCleanup(shutil.rmtree, self.base, True)
+        self.addCleanup(rmtree_force, self.base)
         self.public, self.private, self.blobs = make_stores(self.base)
         self.src = make_receipts(self.base)
         env = mock.patch.dict(os.environ, {"RND_DATA_STORE_D": str(self.blobs)})
@@ -84,10 +93,24 @@ class IngestTests(unittest.TestCase):
         self.assertEqual({f["reason"] for f in pm["files"]}, {"identity", "blind"})
         self.assertEqual(rawdata.verify(self.public, self.private, deep=True), [])
 
-    def test_hardlink_is_the_same_file(self):
+    def test_hardlink_is_the_same_file_and_read_only(self):
+        self.ingest(link=True)
+        sha = rawdata.sha256_file(self.src / "colab/window1-20261016/big.bin")
+        blob = self.blobs / rawdata.blob_rel(sha)
+        self.assertTrue(os.path.samefile(blob, self.src / "colab/window1-20261016/big.bin"))
+        with self.assertRaises(PermissionError):
+            blob.open("ab").write(b"an append through either name")  # the Publisher's case: it must not land
+
+    def test_a_live_tree_is_copied_by_default(self):
         self.ingest()
         sha = rawdata.sha256_file(self.src / "colab/window1-20261016/big.bin")
-        self.assertTrue(os.path.samefile(self.blobs / rawdata.blob_rel(sha), self.src / "colab/window1-20261016/big.bin"))
+        blob = self.blobs / rawdata.blob_rel(sha)
+        self.assertFalse(os.path.samefile(blob, self.src / "colab/window1-20261016/big.bin"))
+        with open(self.src / "colab/window1-20261016/big.bin", "ab") as f:
+            f.write(b"appended to the live file")                      # the source keeps working...
+        self.assertEqual(rawdata.sha256_file(blob), sha)                 # ...and the blob is untouched
+        with self.assertRaises(PermissionError):
+            blob.open("ab").write(b"x")
 
     def test_rerun_is_unchanged_and_a_changed_source_is_refused(self):
         self.ingest(link=False)
@@ -122,6 +145,7 @@ class IngestTests(unittest.TestCase):
         self.ingest(link=False)
         (self.public / "runs/receipts--colab--window1-20261016/files/job.log").write_text("tampered")
         sha = rawdata.sha256_file(self.src / "colab/window1-20261016/big.bin")
+        os.chmod(self.blobs / rawdata.blob_rel(sha), stat.S_IWRITE)  # damage it on purpose
         (self.blobs / rawdata.blob_rel(sha)).write_bytes(b"short")
         mp = self.public / "runs/receipts/manifest.json"
         m = json.loads(mp.read_text())
@@ -152,7 +176,7 @@ class IngestTests(unittest.TestCase):
 class PrivateSourceTests(unittest.TestCase):
     def setUp(self):
         self.base = Path(tempfile.mkdtemp())
-        self.addCleanup(shutil.rmtree, self.base, True)
+        self.addCleanup(rmtree_force, self.base)
         _, self.private, _ = make_stores(self.base)
         self.src = self.base / "rnd-local"
         write(self.src, "critic-signal/notes.md", "# notes\n")
@@ -210,11 +234,10 @@ class RawCommandTests(CliBase):
         reasons = write(self.root, "reasons.json", json.dumps({"colab/window1-20261016/launch.out": "identity",
                                                                "commandui/": "unapproved"}))
         code, out, err = self.run_cli("raw", "ingest", str(self.src), "--prefix", "receipts", "--reasons", str(reasons),
-                                      "--copy", "--dry-run")
+                                      "--dry-run")
         self.assertEqual(code, 0, err)
         self.assertIn("would ingest: runs 6", out)
-        code, out, err = self.run_cli("raw", "ingest", str(self.src), "--prefix", "receipts", "--reasons", str(reasons),
-                                      "--copy")
+        code, out, err = self.run_cli("raw", "ingest", str(self.src), "--prefix", "receipts", "--reasons", str(reasons))
         self.assertEqual(code, 0, err)
         m = json.loads((self.public / "runs/receipts--commandui/manifest.json").read_text())
         self.assertEqual((m["files"], m["private_files"]), ([], {"unapproved": 1}))
@@ -249,7 +272,7 @@ class ReceiptRulesTests(unittest.TestCase):
 
     def setUp(self):
         self.base = Path(tempfile.mkdtemp())
-        self.addCleanup(shutil.rmtree, self.base, True)
+        self.addCleanup(rmtree_force, self.base)
         self.src = self.base / "receipts"
         w = "colab/window14b-x-20261019"
         self.files = {

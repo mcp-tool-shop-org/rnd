@@ -400,3 +400,20 @@ R&D reviews its design, its gates and its reserve pool through the same key-chec
 
 - github.com/mcp-tool-shop-org/role-set — README and docs/role-set-design.md [primary]
 - rnd `experiments/stage1-role-eval/` — the Stage 1 statistics, the stuck rule and the DEV ruling [primary]
+
+## Finding: Muse's tokenizer diverges on one Devanagari string (recorded 2026-10-19)
+
+- **The divergence:** pin_window's tokenizer check compares 50 strings' token ids, from the GGUF (llama.cpp 620d2225)
+  against Hugging Face (transformers 5.20.1, tokenizers 0.23.3). For Muse-Glimmer-30B, string 38 ("हिन्दी") gives:
+  - Hugging Face `[2471, 9028, 98999]`;
+  - the GGUF `[2471, 9028, 26129, 1070]`.
+- **History:** the same ids were logged at Muse's conversion (window 4, 2026-10-17) and in window 7b, unruled until
+  the pre-step rung stopped on it.
+- **Ruling (R&D):**
+  - Accepted for the critic-signal runs that used Muse (13w, 13x, 14b). Every critic item is English, and the only
+    mismatch is Devanagari.
+  - From now on, the pre-step allows mismatches only on strings with letters and no Latin letter (indices 32–38:
+    Greek, Cyrillic, Japanese, Chinese, Korean, Arabic, Devanagari).
+  - Any other mismatch stops the run. Ten or more mismatches also stop it, because the check keeps only ten.
+- **Open, not blocking:** the cause, probably a pre-tokenizer or normalizer difference on Devanagari between the two
+  stacks.

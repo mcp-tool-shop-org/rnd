@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.2.16] - 2026-10-19
+
+- critic-signal PLAN-ROUND4.md: the plan after phase 4, passed by Argon (round 4b); SYNTHESIS.md's last recommendation corrected (the coarse gate's errors are at the none boundary)
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.15.2.15] - 2026-10-19
 
 - critic-signal SYNTHESIS.md: what phases 0–4 and the parked step 1 have shown, the cost, the method lessons, and the options for T10

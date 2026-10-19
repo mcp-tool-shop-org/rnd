@@ -1,7 +1,7 @@
 # Critic-signal, round 4: the plan after phase 4 (v2, after Argon's audit, 2026-10-19)
 
-**Status: v2, waiting on Argon's re-check.**
-- Nothing here has run, and nothing runs until Argon passes it and the Director gives the go.
+**Status: v2, passed by Argon's re-check (round 4b, 2026-10-19, at `85c81a1`): no open findings at any severity.**
+- Nothing here has run. Track A's paid windows wait on the Director's go, and the plan is parked until then.
 - **v1** (`4452274`) got a CONDITIONAL PASS from Argon on 2026-10-19: 3 blocking findings, 4 to settle before the
   write window, 2 not blocking. All nine are taken in. Where one changed on checking against the data, §8 says how.
 - It extends `DESIGN.md` in the same template: the rnd model-comparisons design, sections 0–8.

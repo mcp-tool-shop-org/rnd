@@ -1,6 +1,6 @@
 # Stage 1, part 2: a critic that can tell writers apart (design draft)
 
-**Status: v2, passed by Argon's short-form review (2026-10-19, two rounds). Phases 0–3 done (`PHASE-0-1.md`, `PHASE-2-3.md`): no protocol adopted under §5 (Holm 0.0625). The confirmation test in §9 is the Director's decision; it is a draft for Argon's review, and nothing in it runs before that review passes.** Template: the rnd
+**Status: v2, passed by Argon's short-form review (2026-10-19, two rounds). Phases 0–3 done (`PHASE-0-1.md`, `PHASE-2-3.md`): no protocol adopted under §5 (Holm 0.0625). The confirmation test in §9 is the Director's decision, passed by Argon in rounds 3 and 3b (2026-10-19) and frozen.** Template: the rnd
 [model comparisons](../../../site/src/content/docs/handbook/model-comparisons.md) design, sections 0–8, with a
 phase 0 added in front. It comes before the T10 lesson's writer run, which waits on its outcome.
 
@@ -234,7 +234,7 @@ committed before any perturbed item is scored.
 - The Xet download probe has run (window 13u: no heartbeat change needed).
 - An outside review of this design has passed.
 
-## 9. The confirmation test (draft, 2026-10-19)
+## 9. The confirmation test (frozen 2026-10-19, Argon PASS round 3b)
 
 The Director decided this after phase 3. P2 beat P0 13 : 0 across the two critics, but missed §5's Holm bar
 (0.0625). The pool held only 6–7 clean-trace items per critic, because the pilot had no more gold kind C rows. This
@@ -284,6 +284,11 @@ isn't run.
     - The final call is R&D's reading for meaning. P1-035, which said "that assumption is not in the material",
       leaked by meaning, not by stem.
   - The gold set is fixed, and its file sealed, before perturb.py runs.
+  - **The gold record (Argon 3b, note 2).** A write-only draft has `row: null`, and its candidate text doesn't carry
+    the planted flaw. So each gold record carries a `key` block on the draft record, as perturb.py's input contract
+    asks:
+    - `verdict` and `deciding`, from R&D's blind keying (where it agrees with the draft);
+    - `planted_flaw`, from role-set's `slot_flaw` for the slot.
 - **The items:** perturb.py at role-set `47a5882`, seed 0, as in phase 2: d, b, e and f on the GPU, g offline.
   - perturb.py isn't changed between phase 2 and this test.
   - R&D hand-checks every b, e and g item before the critic window. **The exclusion list and `items.jsonl.sha256`

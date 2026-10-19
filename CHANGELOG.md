@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.19.0.1] - 2026-10-19
+
+- The site's header logo and favicon become the rnd badge's centre mark (brand repo logos/rnd, new in brand#105); the accent moves from teal to the badge's navy blue
+
 ## [1.1.19.0.0] - 2026-10-19
 
 - rnd raw ingest copies blobs by default; --link (hard-link) only for a read-only snapshot; every blob is read-only (the Publisher's P3 follow-up: an append to a linked live file would change the blob)

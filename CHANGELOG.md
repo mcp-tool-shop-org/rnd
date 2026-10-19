@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.2.3] - 2026-10-18
+
+- Stage 1 part 2 design: a critic that can tell writers apart (passed by Argon, two rounds)
+- Added experiment `stage1-regeneration`
+
 ## [1.1.15.2.2] - 2026-10-18
 
 - the golden path: deadline stops with measured margins, no implicit Hub token, the token-clean check, Colab can't see a dead kernel

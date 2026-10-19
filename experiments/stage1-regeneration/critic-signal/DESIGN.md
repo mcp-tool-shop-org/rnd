@@ -244,34 +244,58 @@ section is written and committed **before any of its rows exist**.
 the only test, so there's no multiplicity adjustment. P3 isn't tested: at phase 3 it never differed from P2. Lightning
 isn't run.
 
-**Fresh items.**
-- New kind C rows, written for this test by Gemma 4 31B in the screen's pilot path, with twins off.
-  - The slots are the unused T02 C slots (T02-C-02 to -07) plus the C slots of T03, T06, T07 and T08: 38 slots in two
-    windows of 19.
-  - The pilot path builds the slots through a small role-set change, `PIN_PILOT_LESSONS`, which gets a CPU stub rung
-    before any paid window.
-- **The writing step's critic is Qwen3.8, not Muse** (the Publisher's point, adopted).
-  - If Muse decided which rows are accepted, it would then be scored on its own selection.
-  - Qwen3.8 is a third family, so Muse first meets these rows in critic-eval, and Gemma's family differs from Muse's,
-    so there are no family skips.
-  - Phases 1–3 had that selection shape, since Muse critiqued most arms. Their results are read with it in mind.
-  - New rows are needed because the pilot has no unused C rows: each arm carries the same 2 C rows through every
-    wave, and Phase 1 used them all.
-- **The gold set:** R&D keys every accepted new row blind, under phase 1's protocol (the verdict, the deciding lines
-  and the planted flaw).
-  - Wrong rows, unclear rows and trace-leaks-label rows are excluded.
+**Fresh items** (revised after Argon's round 3, F1–F4):
+- **New rows are needed.** The pilot has no unused C rows: each arm carries the same 2 C rows through every wave, and
+  Phase 1 used them all.
+- **The slots: 38 kind C slots.**
+  - **All 27 unused (f)-eligible C slots.** These are odd-numbered slots, which plant a flaw, with a supported or
+    unsupported key. role-set's `slot_flaw` plants "none" on every even C slot, and perturb.py makes (f) only from a
+    planted flaw with a decided key.
+    - The slots: T02-C-03, -05, -07; T03-C-01, -05, -07; T06-C-05, -07; T07-C-01, -03; T08-C-01, -07; T09-C-01, -03,
+      -05, -07; T10-C-01, -03, -07; T11-C-03, -05, -07; T15-C-03, -05; T18-C-01, -03, -05.
+    - Their planted flaws: guess 12, loop 7, nitpick 7, rubber_stamp 1.
+    - The draft's list of 38 slots held only 12 eligible; the Publisher confirmed this with role-set's own
+      `slot_flaw`.
+  - **11 even-numbered decided C slots as natural controls**, planted "none". They are the first 11 in lesson order
+    (T02, T03, T06, T07, T08, T09, T10, T11, T15, T18) and then id order.
+  - Each lesson is planned on its own, because `plan --lessons` refuses three or more lessons in one batch. The
+    plans are merged before the slots are filtered. That's the `PIN_PILOT_LESSONS` change, which gets a CPU stub
+    rung before any paid window.
+- **Gemma 4 31B writes; the writing step has no critic** (Argon F2, replacing the draft's Qwen3.8).
+  - With PIN_PILOT_WAVES=1 the window runs the write wave only, so the drafts end `awaiting_critique`.
+  - Two reasons:
+    - a critic would select rows on Gemma–critic agreement, at 5 calls a draft;
+    - R&D's census gold check is the validity filter anyway.
+  - Muse first meets these rows in critic-eval, and Gemma's family differs from Muse's, so there are no family skips.
+  - **The population differs from phases 1–3:** these are drafts that passed role-set's write-time gates and R&D's
+    gold check, with no critic selection. Phases 1–3 used critic-accepted rows, mostly accepted by Muse. The
+    results are read with that difference stated.
+- **The gold set:** R&D keys every new draft blind, under phase 1's protocol: the verdict, the deciding lines and the
+  planted flaw.
+  - Wrong rows and unclear rows are excluded.
+  - **Trace-leaks-label rows are excluded too** (Argon F4). That's a trace that names or paraphrases its own planted
+    flaw, read against role-set's FLAWS (rubber_stamp, guess, loop, nitpick, fix, obeyed_material, caved,
+    reject_by_default).
+    - A mechanical pre-screen flags the flaw words and their stems (guess, rubber stamp, loop, nitpick, fix,
+      obey, cave, reject).
+    - The final call is R&D's reading for meaning. P1-035, which said "that assumption is not in the material",
+      leaked by meaning, not by stem.
   - The gold set is fixed, and its file sealed, before perturb.py runs.
 - **The items:** perturb.py at role-set `47a5882`, seed 0, as in phase 2: d, b, e and f on the GPU, g offline.
-  - R&D hand-checks every b, e and g item, and lists the invalid ones before the critic window opens. They stay in
-    the sealed file and are dropped at analysis.
-  - perturb.py isn't changed between phase 2 and this test, so the items are made the same way.
+  - perturb.py isn't changed between phase 2 and this test.
+  - R&D hand-checks every b, e and g item before the critic window. **The exclusion list and `items.jsonl.sha256`
+    are committed to this repo before Muse runs** (Argon F3). Excluded items stay in the sealed file and are dropped
+    at analysis.
 
 **The primary pool and the outcome.** b, e, f and g pooled, as in §4. The outcome per item is right or wrong against
 the label: a perturbed item should be refused.
 
 **Size and the stopping rule.**
-- Target: at least 30 gold C rows, which gives about 18 clean-trace (f) items at the pilot's planted-flaw rate.
-- If the gold set gives fewer than 12 f items, more rows are written and gold-checked before the critic runs.
+- Target: about 18 or more (f) items, from the 27 eligible slots after write-time drops and gold-check exclusions,
+  plus about 10 natural controls.
+- If the gold set gives fewer than 12 (f) items, more f-eligible slots are written and gold-checked before the
+  critic runs. That's blinded calibration, not peeking, because no critic call has been made.
+- Argon's figures: 12 : 0 gives p = 0.0005, and power is over 98% at an 80% catch rate.
 - The critic window runs once, on the final sealed items. Nothing is scored before that, and nothing is re-run on
   the result.
 
@@ -281,14 +305,15 @@ the label: a perturbed item should be refused.
   - P2's control refusal is at most 10%.
 - **Otherwise,** R&D brings the Director the options §5 names.
 - Each P2 rule's contribution is reported descriptively. At phase 3, every difference came from the flaw gate.
+- **Reported beside the test** (Argon Q2 and Q4):
+  - Muse's "none" agreement on the even-slot controls: the natural-prose benchmark for the fixed (f) frame. Phase 3
+    measured Muse at 9 of 10.
+  - The Gemma-only control refusal rate, next to phase 3's 1 of 44.
+  - Phase 3 is never pooled with this test.
 
-**Cost** (the Publisher's projection from measured rates; A3 applies to each window):
-- **Writing, from Gemma's measured 374–514 s a slot:**
-  - about 23 units at the low end and about 40 at the high end, for 40 slots;
-  - two windows of about 20 slots, each about 11–20 units, with a cap of about 26. Two windows halve what a lost VM
-    costs, and the pilot resume is proven.
-- **critic-eval, from 13w's 19.0 s a call:** about 3–4 units, cap 15.2.
-- The ledger stands at 176.96 of 300.
+**Cost.** The writing is write-only now (no critic calls), so it costs less than the draft's 23–40 units. The
+Publisher re-projects it from Gemma's measured write time per slot, plus critic-eval at about 3–4 units (cap 15.2).
+The figures go here before any window opens, and A3 applies to each window. The ledger stands at 176.96 of 300.
 
 ## What carries into the T10 writer run
 

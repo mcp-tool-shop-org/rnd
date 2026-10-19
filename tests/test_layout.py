@@ -28,7 +28,8 @@ RUN = {"id": "14b", "venue": "colab", "hardware": "A100", "date": "2026-10-19", 
 class LayoutBase(CliBase):
     def setUp(self):
         super().setUp()
-        env = mock.patch.dict(os.environ, {"RND_DATA": str(self.root / "no-rnd-data")})
+        env = mock.patch.dict(os.environ, {"RND_DATA": str(self.root / "no-rnd-data"),
+                                           "RND_DATA_PRIVATE": str(self.root / "no-rnd-data-private")})
         env.start()
         self.addCleanup(env.stop)
 
@@ -122,14 +123,17 @@ class PrivateTests(LayoutBase):
         errs = self.errors()
         self.assertEqual([w for w, m in errs if "private tag" in m], ["entries/notes.md"])
 
-    def test_a_file_in_the_private_manifest_fails_where_rnd_data_is_present(self):
-        path = write(self.root, "entries/copied.json", '{"label": "a"}')
-        rnd_data = self.root / "rnd-data"
-        write(rnd_data, "private/manifest.json",
-              json.dumps({"files": [{"path": "x", "sha256": layout.sha256(path)}]}))
-        with mock.patch.dict(os.environ, {"RND_DATA": str(rnd_data)}):
-            self.assertIn(("entries/copied.json", "matches a file in rnd-data's private manifest"), self.errors())
-            write(rnd_data, "private/manifest.json", "{broken")
+    def test_a_file_in_the_private_manifest_fails_where_the_companion_is_present(self):
+        path = write(self.root, "entries/copied.json", '{"label": "a sealed answer key, long enough to mean it"}')
+        companion = self.root / "rnd-data-private"
+        write(companion, "manifest.json", json.dumps({"files": [{"path": "x", "sha256": layout.sha256(path)}]}))
+        empty = write(self.root, "entries/empty.json", "")
+        write(companion, "manifest.json", json.dumps({"files": [{"path": "x", "sha256": layout.sha256(path)},
+                                                               {"path": "y", "sha256": layout.sha256(empty)}]}))
+        with mock.patch.dict(os.environ, {"RND_DATA_PRIVATE": str(companion)}):
+            self.assertIn(("entries/copied.json", "matches a file in rnd-data-private's manifest"), self.errors())
+            self.assertNotIn("entries/empty.json", [w for w, _ in self.errors()])  # too short to mean anything
+            write(companion, "manifest.json", "{broken")
             self.assertTrue(any(l == "warning" and "did not run" in m for l, _, m in self.problems()))
 
 

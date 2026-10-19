@@ -1,0 +1,470 @@
+SHA256: 6ce3076e81f4b534ec266f0e1b7b46af502b6bdf9218e70ad70bb7f5ab4e954e
+LINES: 468
+===== FILE: rnd-local/projects/repo-scale/PLAN.md (plan v1) =====
+   1  # rnd at scale: where each kind of data lives, and the databases that find it (plan v1, 2026-10-19)
+   2
+   3  **Status: draft for Argon's review.**
+   4  - **Kept private** until the Director approves it (brainstorms stay out of public rnd).
+   5  - **Nothing here has been done.** Creating a repository or uploading data needs the Director's go.
+   6  - **The ask:** the Director wants rnd built up so it scales without becoming a mess, with databases, and possibly
+   7    another repository, outside readouts, for raw and bulk data.
+   8
+   9  ## Standards compliance (workflow standards, 0–3)
+  10
+  11  - **PIN_PER_STEP — 2.**
+  12    - Every move is made by a script at a pinned rnd commit, and every byte moved carries its SHA-256 in a manifest.
+  13    - The datapack format already does this (`rnd-datapack/v1`).
+  14  - **ANDON_AUTHORITY — 2.**
+  15    - `rnd check` gains the size and tier rules (§4) and exits 1 on a breach, so CI stops a bad commit.
+  16    - A migration stops on the first hash mismatch.
+  17  - **NAMED_COMPENSATORS — 2.** See the table in §8. Owner: R&D for the rnd side, the Publisher for uploads and repo
+  18    settings.
+  19  - **DECOMPOSE_BY_SECRETS — 2.** Four parts change for different reasons, and each gets its own home:
+  20    - text (entries, designs);
+  21    - small public data;
+  22    - bulk public data;
+  23    - private data.
+  24  - **UNCERTAINTY_GATED_HUMANS — 2.** The irreversible steps each wait on the Director's go: a new repository, a public
+  25    upload, deleting a local copy. Each is asked contrastively in §9.
+  26  - **EXTERNAL_VERIFIER — n/a.** No specialized claims. Argon reviews the design as normal practice.
+  27
+  28  ## 1. What's there now (measured 2026-10-19)
+  29
+  30  **rnd** (`mcp-tool-shop-org/rnd`, main `c04ab4e`):
+  31
+  32  | Part | Files | Size | Notes |
+  33  |---|---|---|---|
+  34  | `experiments/` | 697 | 33.7 MB | 24.4 MB of it is `verifier-gold/` (197 files) |
+  35  | `site/` | 78 | 1.9 MB | the newsletter and handbook |
+  36  | `tests/` | 51 | 0.65 MB | |
+  37  | `entries/` | 67 | 0.36 MB | the library's source of truth |
+  38  | the rest | | about 1.5 MB | code, catalogues, instruments, licences, data-pack manifests |
+  39
+  40  - **The git pack is 8.8 MB.** History is small, and no rewrite is needed.
+  41  - **Largest tracked files:** model verdict JSONL files of 0.9–1.3 MB each, mostly under
+  42    `verifier-gold/math-ladder/results/` and `verifier-gold/diffs/`, and `ollama-cuda-backend/diag-record-v6.jsonl`
+  43    at 1.3 MB.
+  44  - **By type:** 312 JSON, 309 Markdown, 126 Python, 78 JSONL, 43 SVG and 33 log files.
+  45  - **Nothing limits what goes in.** Any size, any file in any folder. There's no rule on raw against processed data.
+  46
+  47  **Outside rnd, on this rig:**
+  48
+  49  | Store | Size | Files | What | Copies |
+  50  |---|---|---|---|---|
+  51  | `E:/AI/rnd-local` | 22 MB | 363 | private: blind and gold keys, item text, sealed items, project notes | **one; none found on D:** |
+  52  | `E:/AI/Publisher/receipts` | 20 GB | 1,474 | Colab and RunPod window receipts: tars, generations, logs; 19.9 GB of it is `colab/` | **one; none found on D:** |
+  53  | `E:/AI/rnd-watch` | 43 MB | 998 | the weekly watch's runs and reports | one |
+  54  | `E:/AI/readouts` (readouts-internal) | 12 GB on disk, 102 MB git | 12,749 | the shelf; 10.8 GB is `model-knowledge/generated/`, untracked | the git part on GitHub |
+  55
+  56  - **The receipts' one copy is on E:, the USB workspace drive** (the Publisher measured this on 2026-10-19). D:
+  57    (AI-BACKUP) holds none.
+  58    - 58 receipt files are tracked in the Publisher's git repo, but that repo has no remote, so they aren't off the
+  59      drive either.
+  60    - The bulk isn't in git at all: GGUF parts, llama-server builds, pod logs.
+  61  - **The data packs** (`natural-errors`, `hymn-arrangements`) are on Hugging Face as **`mcp-tool-shop/rnd-*`**, the
+  62    personal namespace, with manifests in rnd.
+  63  - **In the receipts:** the same 122 MB `llama-server.gz` build is uploaded in four windows (10, 10b, 10c, 10d). A
+  64    159 MB build sits in window 1. Single generation logs reach 112 MB.
+  65
+  66  **The index (`rnd.db`):**
+  67  - A generated SQLite file, not in git, rebuilt from the text.
+  68  - It covers entries, fields, tags, sources, claims, links and catalogues, with two FTS5 tables (`store.py`).
+  69  - **It knows nothing about experiments, runs, costs, data packs or where bytes live.**
+  70  - Costs and ledgers ("195.17 of 300 units") are prose in each experiment's README.
+  71
+  72  ## 2. The problems this solves
+  73
+  74  1. **Bulk data in the clone grows without bound.** Every run adds megabytes of verdict JSONL to git, forever.
+  75  2. **Single copies.** The private gold keys and 20 GB of window receipts exist only on E:, a USB drive. A fault on
+  76     that one drive loses the studio's evidence for results already published.
+  77  3. **No map of where bytes live.** Finding a run's raw output means knowing which disk, folder and tar it's in.
+  78  4. **No machine-readable record of experiments.** A question like "which runs used Muse at Q8_0, and what did they
+  79     cost?" means reading prose READMEs.
+  80  5. **Duplicated binaries** in the receipts, re-uploaded per window.
+  81  6. **The data packs sit in the personal namespace,** while the org rule puts tool data under the org.
+  82
+  83  ## 3. The design: five tiers, each with one home
+  84
+  85  Every file belongs to exactly one tier. The tier decides where it lives, how it's backed up, and who may see it.
+  86
+  87  | Tier | What | Home | Public? | Backed up by |
+  88  |---|---|---|---|---|
+  89  | **T1 text** | entries, instruments, designs, results write-ups, briefs, code | rnd git | yes | GitHub |
+  90  | **T2 small data** | per-experiment data a reader needs to check a result: CSVs, trimmed records, prereg files; each file at most 256 KB, at most 2 MB per experiment | rnd git | yes | GitHub |
+  91  | **T3 bulk data** | processed data too big for T2: verdict JSONL, diffs, screens | data packs on Hugging Face, manifest in rnd | private until a publish go | HF + D: |
+  92  | **T4 raw** | window outputs: tars, generations, logs, journals, pod receipts | **new repo `rnd-data`** (manifests, small raw files) + D: (the bytes) | never public | D: + an off-site copy (§6) |
+  93  | **T5 private** | gold keys, item text, sealed items, blind files | **new private repo `rnd-private`**, or a private folder of `rnd-data` (§9 Q2) | never | GitHub (private) + D: |
+  94
+  95  - **Not stored at all:** anything rebuilt from a pin. Binaries built from a pinned source (llama-server), and model
+  96    weights already hosted. Their pins and SHA-256s go in the manifest; one copy of each build stays in T4, not one per
+  97    window.
+  98  - **readouts is unchanged.** It stays the shelf of verified knowledge bases. Its 10.8 GB of generated media is
+  99    readouts' own matter, listed here only so nobody puts it in rnd-data by accident.
+ 100
+ 101  ## 4. rnd itself: conventions that `rnd check` enforces
+ 102
+ 103  **The size rule (T2).**
+ 104  - A tracked file over 256 KB under `experiments/` fails `rnd check`, unless it's listed in a short allow-list with a
+ 105    reason.
+ 106  - An experiment over 2 MB in total fails the same way.
+ 107  - **Existing files are grandfathered** by a list generated once, so nothing turns red on day one.
+ 108  - **The ratchet:** the allow-list may shrink, never grow, without an R&D review line.
+ 109
+ 110  **The experiment layout.** Every new experiment folder gets:
+ 111  - `README.md`: the design, result and promotion line, as now;
+ 112  - `experiment.json`: its machine-readable record (below);
+ 113  - `data/`: T2 only;
+ 114  - `scripts/`;
+ 115  - no raw output. A raw file is referenced by its manifest id in rnd-data.
+ 116
+ 117  `rnd new-experiment <name>` scaffolds it from the handbook template.
+ 118
+ 119  **`experiment.json`** (schema `rnd-experiment/v1`), written by people and checked by `rnd check`:
+ 120  - **The basics:** name, status (`designing`, `running`, `parked`, `closed`), the design doc, the template used.
+ 121  - **Runs:** one row per window or session.
+ 122    - Its id (13w, 14b, …), where it ran (rig, Colab, RunPod), the hardware, the date.
+ 123    - Its pins: tool commits, model and quant with SHA-256, seed.
+ 124    - Its cost: units or dollars, measured, with the projection beside it.
+ 125    - Its outcome: ok, cut or failed, with the reason.
+ 126    - Its raw manifest id in rnd-data.
+ 127  - **Ledgers:** the budget, its cap and who set it. The total spent is computed from the runs, never typed.
+ 128  - **Data:** the T2 files, the data packs (T3) and the raw manifests (T4) it uses.
+ 129  - **Licences:** the registry ids it relies on.
+ 130
+ 131  ## 5. The databases
+ 132
+ 133  The text stays the source of truth, and every database is rebuilt from it. That's how `rnd.db` works today, and it
+ 134  works.
+ 135
+ 136  **`rnd.db` gains five tables,** built from `experiment.json` files and data-pack manifests:
+ 137  - `experiments` (name, status, template, design path);
+ 138  - `runs` (experiment, id, venue, hardware, date, cost, projected cost, outcome, pins as JSON);
+ 139  - `ledgers` (experiment, budget, cap, spent: computed);
+ 140  - `artifacts` (id, tier, sha256, bytes, licence, location: `git:<path>`, `hf:<repo>@<rev>/<path>`,
+ 141    `data:<manifest>/<path>`, `d:<path>`);
+ 142  - `uses` (experiment, artifact).
+ 143
+ 144  It gains these commands:
+ 145  - `rnd runs [--model …] [--venue …]`;
+ 146  - `rnd ledger <experiment>`;
+ 147  - `rnd where <artifact or path>`: where the bytes are, and every copy.
+ 148
+ 149  `rnd sql` already gives read-only SQL.
+ 150
+ 151  **rnd-data keeps its own manifest index** (`rnd-data.db`, generated, not in git): every raw file's SHA-256, size,
+ 152  the window it came from, and each copy's location (D:, off-site).
+ 153  - `rnd where` reads both databases.
+ 154
+ 155  **What doesn't change:** readouts' knowledge-base databases.
+ 156
+ 157  ## 6. rnd-data, the new repository
+ 158
+ 159  - **Name and owner:** `mcp-tool-shop-org/rnd-data`, private.
+ 160  - **What's in git:**
+ 161    - one manifest per window (`windows/<id>/manifest.json`: every file's path, SHA-256, size, tier, licence and
+ 162      copies);
+ 163    - raw files under 256 KB that matter: logs, journals, receipts JSON, `outcome.json`;
+ 164    - a README.
+ 165  - **What's not in git:**
+ 166    - the tars, generations and binaries. They live on D: under `D:/rnd-data/windows/<id>/`, with an off-site copy.
+ 167    - **The off-site copy is an open choice** (§9 Q3): a private Hugging Face dataset repo, or another store. Its
+ 168      cost and limits are read from the vendor's page before choosing (rung 0). This plan doesn't assume either.
+ 169  - **Tooling:** `rnd raw ingest <receipts-dir> --window <id>`. It hashes every file and writes the manifest. It copies
+ 170    to D: and verifies by hash. It drops a file whose SHA-256 is already stored, and records a pointer to it instead.
+ 171    - It never deletes the source. Deleting the local copy is a separate step after verification, on the Director's
+ 172      go.
+ 173  - **Per org standards:** the Atlas map and `atlas check` if it runs workflows; the coverage bar for its code (the
+ 174    ingest code lives in rnd, so rnd-data may have no code at all); the repo-first rule before any coding.
+ 175
+ 176  ## 7. Migration, in phases (each one small, reversible and checked)
+ 177
+ 178  | Phase | What | Paid? | Irreversible? |
+ 179  |---|---|---|---|
+ 180  | **P0 inventory** | A script classifies every file in rnd, rnd-local and the receipts by tier, size, licence and copies. It writes `inventory.csv` locally. | free | no |
+ 181  | **P1 conventions** | The `experiment.json` schema, the size rule with a grandfather list, `rnd new-experiment`, and the handbook page. No files move. | free | no |
+ 182  | **P2 index** | The five new tables and `rnd runs`, `rnd ledger`, `rnd where`. Backfill `experiment.json` for live experiments first (critic-signal, stage1-regeneration), then the rest as they're touched (the coverage bar's gradual rule). | free | no |
+ 183  | **P3 backups first** | Copy rnd-local and the receipts to D: with hash verification. The single-copy risk is the most urgent thing here, and it needs no new repository. | free | no |
+ 184  | **P4 rnd-data** | Create the repo, ingest the receipts window by window, deduplicate the binaries. | free (GitHub private) | creating a repo |
+ 185  | **P5 T3 moves** | Move `verifier-gold`'s bulk JSONL into a data pack; the files in git are replaced by the manifest. Git history keeps the old bytes, with no rewrite. | free | upload |
+ 186  | **P6 T5** | The private store: `rnd-private`, or a folder of `rnd-data` (Q2). | free | creating a repo |
+ 187  | **P7 namespace** | Move the data packs from `mcp-tool-shop/` to the org namespace on Hugging Face, if the Director wants it (Q4). | free | rename |
+ 188
+ 189  - **P3 comes before the rest** because it closes the only risk that can lose data. P0–P3 can run this week with no
+ 190    go beyond the plan's approval.
+ 191
+ 192  ## 8. Compensators (irreversible steps)
+ 193
+ 194  | Step | Undo | State after the undo | Owner |
+ 195  |---|---|---|---|
+ 196  | Create `rnd-data` (or `rnd-private`) | archive or delete the repo (`gh repo delete`, Director's go) | as before; local copies untouched | Publisher |
+ 197  | Upload a data pack or raw files to Hugging Face | delete the revision or the repo (private, so nothing has leaked) | manifest in rnd reverted by PR | Publisher |
+ 198  | Replace T3 files in rnd with a manifest | revert the PR; the bytes are in git history | as before | R&D |
+ 199  | Delete a local copy after ingest | none once the bin is emptied, so it's done only after two verified copies, on the Director's go | the two copies remain | Publisher |
+ 200  | Rename the HF namespace | rename back; old URLs in `hosted.json` are kept as aliases | as before | Publisher |
+ 201
+ 202  ## 9. Questions for Argon
+ 203
+ 204  1. **Tier boundaries.** Is 256 KB a file and 2 MB an experiment the right T2 line? Should a hard cap be by type
+ 205     (JSONL always T3) rather than by size?
+ 206  2. **T5's home.** Is a separate private repo better than a private folder of rnd-data, for access, accident risk
+ 207     and backup?
+ 208  3. **The off-site copy** for 20 GB and growing. What should the choice be judged on: cost, limits, integrity checks,
+ 209     and how a restore is tested?
+ 210  4. **The namespace.** Should the existing packs move to the org on Hugging Face, given that their URLs are cited in
+ 211     published pages?
+ 212  5. **Text as the source of truth.** Is rebuilding every database from text and manifests still right once there
+ 213     are hundreds of runs? Or should `runs` be written once by the tools that run them (the Publisher's windows) and
+ 214     read by R&D?
+ 215  6. **What's missing.** Retention (how long raw window data is kept), licences on raw outputs, and how readouts
+ 216     reads from T3 when it promotes.
+ 217
+ 218  **Severity levels:** `blocking`, `before P4` (anything that must be settled before a repository is created),
+ 219  `not blocking`.
+ 220
+ 221  ## Licences
+ 222
+ 223  No model or new source is used. Any third-party data already carries its licence in the data-pack manifests, and
+ 224  raw outputs keep their model's terms, recorded per file in the rnd-data manifest.
+
+===== FILE: rnd/README.md lines 108-200 (rnd c04ab4e): Layout, Data packs, Collected records =====
+ 108  ## Layout
+ 109
+ 110  | Path | What | Who edits |
+ 111  |------|------|-----------|
+ 112  | `entries/YYYY/*.md` | Research entries: the source of truth | people and agents |
+ 113  | `experiments/<name>/` | Harnesses, pinned inputs and result receipts for rig measurements | people and agents |
+ 114  | `experiments/<name>/collect.json` | Records collected from a tool repository at pinned commits (`rnd collect`) | people |
+ 115  | `instruments/*.md` | Studio tools and protocols the seat can call (`kind: instrument`) | people and agents |
+ 116  | `catalogs/<name>/source.json` | Where a catalogue comes from | people |
+ 117  | `catalogs/<name>/catalog.json` | Pinned snapshot from `rnd catalog sync` | generated; never hand-edit |
+ 118  | `catalogs/<name>/review.json` | Studio fit and notes per family and item | people |
+ 119  | `datapacks/<name>/spec.json` | What a data pack holds: include globs, licences, generators, host | people |
+ 120  | `datapacks/<name>/datapack.json` | Manifest from `rnd datapack build`: every file's SHA-256, licences, pins | generated; never hand-edit |
+ 121  | `datapacks/<name>/hosted.json` | Where the upload landed (repo revision) | after an upload |
+ 122  | `mcptoolshop_rnd/` | The CLI | code |
+ 123  | `rnd/` | Compatibility alias for `mcptoolshop_rnd` | code |
+ 124  | `rnd.db` | SQLite FTS5 index, rebuilt automatically when files change | generated; not in git |
+ 125
+ 126  ## Entry format
+ 127
+ 128  ```markdown
+ 129  ---
+ 130  id: 2026-10-07-cuda-graphs        # defaults to the file name
+ 131  title: CUDA Graphs
+ 132  date: 2026-10-07
+ 133  kind: concept                     # finding concept release paper tool catalog rig-fact event question decision instrument
+ 134  relevance: reference              # act | watch | reference
+ 135  fields: [gpu-computing]           # any research field, open vocabulary
+ 136  tags: [cuda-graphs, pytorch]
+ 137  ---
+ 138
+ 139  ## Summary
+ 140  ## Key points
+ 141  ## Studio relevance
+ 142  ## Claims
+ 143  - [unverified] A checkable statement.
+ 144  - [verified] A checked statement. (via: what checked it, date)
+ 145  ## Sources
+ 146  - [primary] https://… — publisher
+ 147  ```
+ 148
+ 149  - **Source tiers:** `primary` (vendor docs, papers, repos), `secondary`
+ 150    (reputable write-ups), `aggregator` (summary sites, AI search output),
+ 151    `user` (supplied by a person: slides, notes), `rig` (measured on our machines).
+ 152  - **Claim confidence:** `unverified`, `verified`, `disputed`, `wrong`. A
+ 153    `verified` or `wrong` claim must say what checked it with `(via: …)`.
+ 154  - `[[entry-id]]` links entries; `rnd show` lists backlinks.
+ 155
+ 156  ## Data packs
+ 157
+ 158  Processed data too big or too bulky for the clone is offered as a **data pack**: the bytes live
+ 159  on a Hugging Face dataset repo (private until published), and the library keeps only a small
+ 160  manifest. The integrity model comes from
+ 161  [research-packs](https://github.com/mcp-tool-shop-org/research-packs): a manifest, a SHA-256 for
+ 162  every file, a one-command verify, and a listing.
+ 163
+ 164  ```bash
+ 165  rnd datapack build natural-errors --source experiments/natural-errors  # reads datapacks/natural-errors/spec.json
+ 166  rnd datapack list
+ 167  hf download mcp-tool-shop/rnd-natural-errors --repo-type dataset --local-dir ne
+ 168  rnd datapack verify natural-errors --copy ne/files                      # PASS when every byte matches
+ 169  ```
+ 170
+ 171  - **Every file needs a licence** in the spec. Model outputs carry their model's terms (for
+ 172    example "Built with Llama" for Llama 3.1 outputs). `rnd datapack build` refuses a pack that
+ 173    leaves a file uncovered.
+ 174  - **Every generating model is pinned** (Ollama digest, HF revision or API model id), with its role.
+ 175  - **`rnd check` validates every manifest** and fails on one edited by hand.
+ 176  - The upload carries `datapack.json` beside the files, so anyone can verify without this repo:
+ 177    `pip install mcptoolshop-rnd`.
+ 178
+ 179  ## Collected experiment records
+ 180
+ 181  A tool repository commits its own pre-registered specs and run records (interlock's receipts),
+ 182  the way every repository commits its Atlas map. The library publishes only a trimmed copy of the
+ 183  numbers, made by `rnd collect` from the tool repository at pinned commits:
+ 184
+ 185  ```bash
+ 186  rnd collect                 # list the experiments that collect records
+ 187  rnd collect e4b             # read each source with git show, trim it, write experiments/e4b/results/
+ 188  rnd collect e4b --check     # recompute every output; exit 1 if any differs from the committed file
+ 189  ```
+ 190
+ 191  - **`experiments/<name>/collect.json`** names the repository, the sibling clone it's read from
+ 192    (`--clone` overrides), and each source: its path, the commit, the SHA-256 of its bytes, the
+ 193    output and the trim function in the experiment's `extract.py`.
+ 194  - **A pinned source never changes.** Bytes that no longer hash to the pin are refused.
+ 195  - **Every record carries provenance:** the repository, the source path and the SHA-256 of the
+ 196    bytes trimmed.
+ 197  - **Every output is public-safe before it is written.** No machine path, home directory or
+ 198    environment field survives, and an experiment's module can add a stricter guard. Nothing is
+ 199    written on any refusal.
+ 200
+
+===== FILE: rnd/mcptoolshop_rnd/store.py lines 1-40 (rnd c04ab4e): the index schema =====
+   1  """The SQLite index (rnd.db). Always rebuildable from the files; never edited."""
+   2
+   3  import json
+   4  import os
+   5  import re
+   6  import sqlite3
+   7  from datetime import datetime, timezone
+   8  from pathlib import Path
+   9
+  10  from . import catalog, model
+  11
+  12  SCHEMA = """
+  13  CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT);
+  14  CREATE TABLE entries (
+  15    id TEXT PRIMARY KEY, path TEXT, title TEXT, date TEXT, kind TEXT,
+  16    relevance TEXT, status TEXT, fields TEXT, tags TEXT, body TEXT,
+  17    relevance_note TEXT, extra TEXT);
+  18  CREATE TABLE entry_fields (entry_id TEXT, field TEXT);
+  19  CREATE TABLE entry_tags (entry_id TEXT, tag TEXT);
+  20  CREATE TABLE sources (entry_id TEXT, ord INTEGER, tier TEXT, url TEXT, label TEXT);
+  21  CREATE TABLE claims (entry_id TEXT, ord INTEGER, confidence TEXT, text TEXT, via TEXT);
+  22  CREATE TABLE links (src TEXT, dst TEXT);
+  23  CREATE TABLE catalogs (name TEXT PRIMARY KEY, title TEXT, upstream TEXT, ref TEXT,
+  24    synced_at TEXT, license TEXT, count INTEGER, lanes TEXT);
+  25  CREATE TABLE catalog_items (catalog TEXT, name TEXT, family TEXT, lanes TEXT, description TEXT,
+  26    license TEXT, path TEXT, url TEXT, bytes INTEGER, fit TEXT, note TEXT, family_note TEXT,
+  27    PRIMARY KEY (catalog, name));
+  28  CREATE VIRTUAL TABLE entries_fts USING fts5(id UNINDEXED, title, tags, body, tokenize='porter unicode61');
+  29  CREATE VIRTUAL TABLE catalog_fts USING fts5(catalog UNINDEXED, name, family, description, note, lanes,
+  30    tokenize='porter unicode61');
+  31  CREATE INDEX idx_fields ON entry_fields(field);
+  32  CREATE INDEX idx_tags ON entry_tags(tag);
+  33  """
+  34
+  35
+  36  def default_db(root):
+  37      return Path(os.environ.get("RND_DB") or Path(root) / "rnd.db")
+  38
+  39
+  40  def fingerprint(root):
+
+===== FILE: rnd/datapacks/natural-errors/spec.json (rnd c04ab4e) =====
+   1  {
+   2   "title": "Natural-error yardstick for critics (v1)",
+   3   "description": "95 answers by llama3.1:8b to in-domain questions, each labelled for factual, numeric and reasoning errors by two blind Claude passes (Opus, Sonnet) and adjudicated: 59 with an error, 36 clean, 84 error sentences marked by both. Includes 31 correction pairs (the original answer, and a copy with its agreed errors rewritten), and the flags of five local screen judges. Labels are model-made, not human-verified. In the v1 screens a failed reply is stored as an empty list: muse-glimmer had 1 such reply, nemotron-3.5-lightning 39 (its v1 run is unreliable; a context-rich re-screen with failure reasons will replace these). See README.md.",
+   4   "version": "1",
+   5   "include": [
+   6    "README.md",
+   7    "build.py",
+   8    "build_corrections.py",
+   9    "data/*.json"
+  10   ],
+  11   "exclude": [
+  12    "data/screen_ctx*",
+  13    "data/review_items.json"
+  14   ],
+  15   "licences": [
+  16    {
+  17     "applies_to": "data/answers.json",
+  18     "licence": "Llama 3.1 Community License (outputs of Llama 3.1 8B)",
+  19     "notice": "Built with Llama. Llama 3.1 is licensed under the Llama 3.1 Community License, Copyright (c) Meta Platforms, Inc. All Rights Reserved. Use is subject to the Llama 3.1 Acceptable Use Policy."
+  20    },
+  21    {
+  22     "applies_to": "data/corrections.json",
+  23     "licence": "Llama 3.1 Community License (contains Llama 3.1 8B answers) + MIT (the replacement sentences)",
+  24     "notice": "Built with Llama."
+  25    },
+  26    {
+  27     "applies_to": "data/screen*.json",
+  28     "licence": "Llama 3.1 Community License (quoted answer sentences) + judge outputs of Apache-2.0 models (gemma4, mistral-small, granite4.1, muse-glimmer) and the NVIDIA Open Model License (nemotron-3.5-lightning)",
+  29     "notice": "Built with Llama."
+  30    },
+  31    {
+  32     "applies_to": "data/questions.json",
+  33     "licence": "Outputs of mistral-small:24b (Apache-2.0 model); no added terms"
+  34    },
+  35    {
+  36     "applies_to": "data/labels_*.json",
+  37     "licence": "MIT (mcp-tool-shop)"
+  38    },
+  39    {
+  40     "applies_to": "data/gold.json",
+  41     "licence": "MIT (mcp-tool-shop)"
+  42    },
+  43    {
+  44     "applies_to": "data/selection.json",
+  45     "licence": "MIT (mcp-tool-shop)"
+  46    },
+  47    {
+  48     "applies_to": "*.py",
+  49     "licence": "MIT (mcp-tool-shop)"
+  50    },
+  51    {
+  52     "applies_to": "README.md",
+  53     "licence": "MIT (mcp-tool-shop)"
+  54    }
+  55   ],
+  56   "generators": [
+  57    {
+  58     "model": "mistral-small:24b",
+  59     "pin": "ollama 8039dd90c113",
+  60     "role": "questions; screen judge"
+  61    },
+  62    {
+  63     "model": "llama3.1:8b",
+  64     "pin": "ollama 46e0c10c039e",
+  65     "role": "answers (temperature 0.7)"
+  66    },
+  67    {
+  68     "model": "gemma4:31b",
+  69     "pin": "ollama 6316f0629137",
+  70     "role": "screen judge"
+  71    },
+  72    {
+  73     "model": "granite4.1:30b",
+  74     "pin": "ollama 3f3e5df8a021",
+  75     "role": "screen judge"
+  76    },
+  77    {
+  78     "model": "muse-glimmer:latest",
+  79     "pin": "ollama de878ce33ad8",
+  80     "role": "screen judge (added after the labels)"
+  81    },
+  82    {
+  83     "model": "nemotron-3.5-lightning:latest",
+  84     "pin": "ollama e7a64ff15fb1",
+  85     "role": "screen judge (v1 run unreliable, see description)"
+  86    },
+  87    {
+  88     "model": "claude-opus-5-5",
+  89     "pin": "anthropic model id",
+  90     "role": "labels pass 1, adjudication, correction sentences"
+  91    },
+  92    {
+  93     "model": "claude-sonnet-5-5",
+  94     "pin": "anthropic model id",
+  95     "role": "labels pass 2 (four blind agents)"
+  96    }
+  97   ],
+  98   "host": {
+  99    "kind": "huggingface",
+ 100    "repo": "mcp-tool-shop/rnd-natural-errors",
+ 101    "type": "dataset",
+ 102    "visibility": "private"
+ 103   }
+ 104  }

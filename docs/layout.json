@@ -84,6 +84,10 @@
   "verifier-gold"
  ],
  "private_allow": {
+  "docs/scale-plan/PLAN.md": "the data-scaling plan, which documents the private tag; it names the tag but holds no private data",
+  "docs/scale-plan/history/argon-brief-round3b.md": "the data-scaling plan's review history, which documents the private tag; it names the tag but holds no private data",
+  "docs/scale-plan/history/plan-v3-to-v3.1.diff": "the data-scaling plan's review history, which documents the private tag; it names the tag but holds no private data",
+  "docs/scale-plan/history/rnd-scale-plan-v3.1-code.txt": "the data-scaling plan's review history, which documents the private tag; it names the tag but holds no private data",
   "experiments/natural-errors/data/review_items.json": "public in git since 2026-10-08; the natural-errors review queue, left out of the data pack as a working file, not as private data",
   "experiments/stage1-role-eval/results/2026-10-10-sealed-baseline-k.json": "public in git since 2026-10-10; per-task k-of-3 counts only, with no task text (experiments/stage1-role-eval/README.md)",
   "experiments/verifier-gold/blind_pass2_docs_input.json": "public in git since 2026-10-08; part of a completed blind label or relabel pass reported in experiments/verifier-gold, not a held-out test key",

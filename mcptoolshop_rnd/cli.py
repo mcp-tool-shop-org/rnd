@@ -14,7 +14,7 @@ import traceback
 from datetime import date
 from pathlib import Path
 
-from . import __version__, abmine, catalog, collect, datapack, layout, model, probe, readouts, release, runs, store, watch
+from . import __version__, abmine, catalog, collect, datapack, layout, model, probe, rawdata, readouts, release, runs, store, watch
 
 SOURCE_ROOT = Path(__file__).resolve().parent.parent
 
@@ -518,6 +518,74 @@ def cmd_ledger(args):
     return 0
 
 
+def _reasons(path):
+    """A reasons file: {"<path or folder/>": "<reason>"}; the longest matching key wins."""
+    if not path:
+        return {}
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise rawdata.RawError("REASONS_SHAPE", "the reasons file must map paths to reasons")
+    return data
+
+
+def _classifier(reasons, auto_names):
+    keys = sorted(reasons, key=len, reverse=True)
+
+    def classify(rel):
+        for k in keys:
+            if rel == k or (k.endswith("/") and rel.startswith(k)):
+                return reasons[k]
+        if auto_names and layout.private_name(rel):
+            return "sealed" if "sealed" in rel.lower() else "blind"
+        return None
+    return classify
+
+
+def _pinned_text():
+    """Every text the library holds, to tell whether a private file's hash is pinned anywhere public."""
+    parts = []
+    for p in layout.library_files(ROOT):
+        full = ROOT / p
+        if full.stat().st_size <= 4 * 1024 * 1024:
+            parts.append(full.read_bytes().decode("utf-8", errors="ignore"))
+    return "\n".join(parts)
+
+
+def cmd_raw(args):
+    public = Path(args.public) if args.public else runs.rnd_data_root(ROOT)
+    private = Path(args.private) if args.private else layout.private_root(ROOT)
+    try:
+        if args.action == "verify":
+            problems = rawdata.verify(public, private if private.is_dir() else None, deep=args.deep, run=args.run)
+            for line in problems:
+                print(f"error: {line}", file=sys.stderr)
+            print(f"verified rnd-data{' and rnd-data-private' if private.is_dir() else ''}: {len(problems)} problems"
+                  f"{' (blobs re-hashed)' if args.deep else ''}")
+            return 1 if problems else 0
+        if not args.source:
+            return fail("RAW_USAGE", f"{args.action} needs a source folder", "rnd raw ingest <folder> --prefix receipts")
+        source = Path(args.source)
+        reasons = _reasons(args.reasons)
+        if args.action == "ingest":
+            if not args.prefix:
+                return fail("RAW_USAGE", "ingest needs --prefix (the run ids' first part, e.g. receipts)")
+            st = rawdata.ingest_tree(source, public, private, args.prefix, _classifier(reasons, True),
+                                     exclude=tuple(args.exclude or ()), link=not args.copy, dry_run=args.dry_run,
+                                     commit=_git_head(), update=args.update)
+        else:
+            if not args.name:
+                return fail("RAW_USAGE", "private needs --as NAME (the folder under private/)")
+            st = rawdata.ingest_private(source, private, args.name, _classifier(reasons, True),
+                                        pinned_text=_pinned_text(), exclude=tuple(args.exclude or ()),
+                                        dry_run=args.dry_run)
+    except rawdata.RawError as exc:
+        return fail(exc.code, str(exc), exc.hint, 1)
+    except (OSError, json.JSONDecodeError) as exc:
+        return fail("RAW_IO", str(exc), "check the paths and the reasons file", 1)
+    print(("would ingest: " if args.dry_run else "ingested: ") + ", ".join(f"{k} {v}" for k, v in st.items()))
+    return 0
+
+
 def cmd_where(args):
     con = open_db(args)
     key = args.key.strip()
@@ -905,6 +973,23 @@ def build_parser():
 
     s = add("ledger", cmd_ledger, "an experiment's spending per cost unit against its budgets, computed from its runs")
     s.add_argument("experiment")
+
+    s = add("raw", cmd_raw, "ingest raw run outputs into rnd-data (public) and rnd-data-private, or verify them",
+            json_flag=False)
+    s.add_argument("action", choices=("ingest", "private", "verify"))
+    s.add_argument("source", nargs="?", help="ingest/private: the folder to read (never changed)")
+    s.add_argument("--prefix", help="ingest: the run ids' first part, e.g. receipts")
+    s.add_argument("--as", dest="name", help="private: the folder under private/ in rnd-data-private")
+    s.add_argument("--reasons", help="a JSON file mapping paths or folder/ prefixes to a private reason")
+    s.add_argument("--exclude", action="append", help="a path or folder to leave out (repeatable)")
+    s.add_argument("--copy", action="store_true", help="ingest: copy blobs instead of hard-linking them")
+    s.add_argument("--update", action="store_true",
+                   help="ingest: replace a run whose source changed since it was ingested (git keeps the old manifest)")
+    s.add_argument("--dry-run", action="store_true", help="plan and count; write nothing")
+    s.add_argument("--public", help="the rnd-data checkout (default: $RND_DATA, else ../rnd-data)")
+    s.add_argument("--private", help="the rnd-data-private checkout (default: $RND_DATA_PRIVATE, else ../rnd-data-private)")
+    s.add_argument("--run", help="verify: one run id")
+    s.add_argument("--deep", action="store_true", help="verify: re-hash every blob, not only check its size")
 
     s = add("where", cmd_where, "where a file's bytes are: every name and copy, by SHA-256 or path")
     s.add_argument("key", metavar="SHA256_OR_PATH")

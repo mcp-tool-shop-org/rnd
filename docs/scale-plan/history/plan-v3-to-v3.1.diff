@@ -1,0 +1,82 @@
+--- PLAN-v3.md	2026-10-19 16:44:43.063705400 -0400
++++ PLAN.md	2026-10-19 16:44:43.112681400 -0400
+@@ -1,9 +1,11 @@
+-# rnd at scale: where each kind of data lives, and the database that finds it (plan v3, 2026-10-19)
++# rnd at scale: where each kind of data lives, and the database that finds it (plan v3.1, 2026-10-19)
+ 
+-**Status: v3, after Argon's round 2. A draft for Argon's re-check.**
++**Status: v3.1. Argon PASSED v3 at round 3 (bundle b7e71e6e): no blocking or before-P3 findings. v3.1 takes in
++round 3's not-blocking F10 and its Q2 answer. Ready for the Director's go on P0–P3; P4 waits on a price.**
+ - **Round 1:** CONDITIONAL PASS on v1 (bundle 6ce3076e), with findings F1–F7. All seven are taken in.
+ - **Round 2:** CONDITIONAL PASS on v2 (bundle c8c4df2f): F1–F7 resolved, no blocking findings, and two new ones (F8
+   before P4, F9 not blocking). Both are taken in, with the round-2 answers; §10 says where.
++- **Round 3:** PASS on v3. F10 (a table count) and the Q2 answer (no raw hash list in public rnd) are taken in.
+ - **Kept private** until the Director approves it (brainstorms stay out of public rnd).
+ - **Nothing here has been done.** Creating a repository, uploading data or deleting a local copy needs the
+   Director's go.
+@@ -119,13 +121,17 @@
+ - has a SHA-256 listed in `rnd-data/private/manifest.json`, when a local rnd-data checkout is present;
+ - or matches the private name patterns below;
+ 
+-- or has a SHA-256 in `private-hashes.txt`, a list of T5 SHA-256s kept in rnd (hashes only, no names or paths),
+-  regenerated whenever `rnd-data/private/` changes. This makes the exact check work in CI, where rnd-data isn't
+-  checked out (round 2 Q3).
++- or carries the private tag `T5-PRIVATE-DO-NOT-PUBLISH`.
++  - Every T5 text file carries the tag: as a `"tier": "T5-PRIVATE-DO-NOT-PUBLISH"` field in JSON, and as a first-line
++    comment elsewhere.
++  - This works in CI, where rnd-data isn't checked out.
++  - **No list of private files' hashes is published** (round 3 Q2). A sealed key is a short label file, so its raw
++    SHA-256 could be matched by guessing label sets.
++- **The exact SHA-256 check** against `rnd-data/private/manifest.json` runs where rnd-data is checked out: in `rnd
++  check` on the rig, and in a local pre-push hook.
+ 
+ **The name patterns,** matching hyphens and underscores alike (round 2 Q3): `*blind*`, `*sealed*`,
+-`*gold[-_]key*`, `*item[-_]?text*`, `*review[-_]items*`. They're the backstop for a new private file not yet
+-hashed. A false hit goes on a short, reviewed allow-list.
++`*gold[-_]key*`, `*item[-_]?text*`, `*review[-_]items*`. They're the backstop for a file that can't carry the tag (a binary). A false hit goes on a short, reviewed allow-list.
+ 
+ **The experiment layout** (round 1 F5):
+ - `README.md`: the design, result and promotion line, as now;
+@@ -216,8 +222,8 @@
+ |---|---|---|---|
+ | **P0 backups** | Copy `rnd-local`, `Publisher/receipts` and `rnd-watch` to `D:/backup-2026-10/`, verify every file by SHA-256, and write the hash list beside it. Check whether D: holds the two data packs, and copy them from HF if not. No new repo, no code beyond a copy-and-hash script. | free | no |
+ | **P1 conventions** | The size, layout and private-file rules with the grandfather list, the `experiment.json` schema, `rnd new-experiment`, and a handbook page. No files move. | free | no |
+-| **P2 database** | The five tables, `rnd runs record`, `rnd runs`, `rnd ledger`, `rnd where`. Backfill the live experiments first (critic-signal, stage1-regeneration); the rest as they're touched. | free | no |
+-| **P3 rnd-data** | Create the repo. Ingest from P0's backup on D:, run by run, by hardlink: the receipts and the rig's raw outputs. Move `rnd-local` into `private/` and write `private-hashes.txt`. Builds go into the blob store, once each. | free | creating a repo |
++| **P2 database** | The six tables, `rnd runs record`, `rnd runs`, `rnd ledger`, `rnd where`. Backfill the live experiments first (critic-signal, stage1-regeneration); the rest as they're touched. | free | no |
++| **P3 rnd-data** | Create the repo. Ingest from P0's backup on D:, run by run, by hardlink: the receipts and the rig's raw outputs. Move `rnd-local` into `private/` and check every private text file carries the tag. Builds go into the blob store, once each. | free | creating a repo |
+ | **P4 off-site** | Choose the off-site store on §6's criteria, upload `D:/rnd-data/` (the deduplicated layout, once), and pass `rnd raw verify --run <id> --remote` on at least one run. | **needs a price, and the Director's go** | no (deletable) |
+ | **P5 tidy** | After P3 and P4 are verified, remove the 58 receipts from the Publisher's git (`git rm`, with a pointer to rnd-data) and point rnd-watch's archive at rnd-data. | free | no (git history keeps them) |
+ | **P6 local deletion** | Delete an E: copy only when three things hold: D: and off-site both verify by hash, a restore test has passed, and the Director gives the go. | free | **yes** |
+@@ -243,17 +249,13 @@
+ | `git rm` the Publisher's 58 receipts | `git revert` | as before | Publisher |
+ | Delete a local E: copy (P6) | restore from D: or off-site, tested first | as before | Publisher |
+ 
+-## 9. Questions for Argon (round 3)
++## 9. Questions for Argon (round 3b, a short confirmation)
+ 
+-1. **Round 2's findings.** Are F8 and F9 resolved as §10 lists?
+-2. **The hash list in public rnd.** `private-hashes.txt` publishes the SHA-256 of each private file, but no name or
+-   content. Is there any risk in that, for example for a very short file whose content could be guessed and
+-   hashed? If so, what's the smallest fix?
+-3. **Is the plan ready** for the Director to approve P0–P3, with P4 waiting on a price?
++1. **Round 3's F10 and Q2.** Are both resolved as §10 lists?
+ 
+ **Severity levels:** `blocking`, `before P3` (before the repository is created), `not blocking`.
+ 
+-## 10. What changed from v1 and v2
++## 10. What changed from v1, v2 and v3
+ 
+ | Argon round 1 | Where v2 takes it |
+ |---|---|
+@@ -267,7 +269,9 @@
+ | **Round 2** F8: off-site upload before ingest | §7: P3 is now rnd-data (ingest by hardlink from P0's backup), P4 the off-site upload of the deduplicated layout and the remote restore test |
+ | **Round 2** F9: no logical path for `rnd where` | §5: `manifest_files` (manifest_id, path, sha256) |
+ | **Round 2** Q2: P0 stays a plain copy | kept; ingest hardlinks from it (§6) |
+-| **Round 2** Q3: CI can't see rnd-data | §4: `private-hashes.txt` in rnd, and wider name patterns |
++| **Round 2** Q3: CI can't see rnd-data | §4: wider name patterns (the hash list it led to was withdrawn in v3.1) |
++| **Round 3** F10: "five tables" in P2 | §7: six |
++| **Round 3** Q2: a raw hash list is an oracle for short files | §4: the private tag in every T5 text file, checked in CI; the exact hash check only where rnd-data is checked out, and in a pre-push hook; no hash list published |
+ 
+ ## Licences
+ 

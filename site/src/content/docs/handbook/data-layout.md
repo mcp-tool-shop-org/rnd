@@ -16,8 +16,8 @@ live in this repository.
 | **Text** | entries, instruments, designs, write-ups, briefs, code | this repository |
 | **Small data** | what a reader needs to check a result: CSVs, trimmed collected records, pre-registrations, small structured inputs | this repository, within the size limits |
 | **Bulk data** | processed data a reader may want but the clone needn't carry: verdict dumps, diffs, screens | a [data pack](https://github.com/mcp-tool-shop-org/rnd#data-packs) on Hugging Face; only its manifest is here |
-| **Raw data** | run outputs from the rig, Colab or RunPod: tars, generations, logs, journals, receipts, our own builds | the studio's private raw-data repository and its backups, never public |
-| **Private data** | sealed keys for blind tests, item text, blind files, private notes | the private raw-data repository, never public |
+| **Raw data** | run outputs from the rig, Colab or RunPod: tars, generations, logs, journals, receipts, our own builds | [rnd-data](https://github.com/mcp-tool-shop-org/rnd-data), public: manifests and small files in git, larger files once by content in a blob store (public on Hugging Face from the next phase) |
+| **Private data** | only the named exceptions: sealed or held-out keys, blind files, item text, unapproved plans, private projects, files the identity scan flags | rnd-data-private, the private companion |
 
 **What a file is comes first.** Per-item raw generations, raw verdict dumps and raw run logs are bulk or raw data at
 any size. A small structured file is small data. A published benchmark's labels (a pack's `gold.json`) are public;
@@ -122,19 +122,35 @@ manifests:
 The index also has the tables `experiments`, `runs`, `budgets`, `files`, `manifest_files` and `copies`, for
 `rnd sql`. The schema's hash is part of the index's change detector, so an rnd upgrade rebuilds it.
 
-## rnd-data's manifests
+## rnd-data and its private companion
 
-The private raw-data repository describes each run in `runs/<id>/manifest.json`, and its private files in
-`private/manifest.json`:
+The studio's research is open by default, so its raw data is public: [rnd-data](https://github.com/mcp-tool-shop-org/rnd-data)
+holds every run's manifest and small files. Its companion, rnd-data-private, holds only the files with a named reason.
 
-```json
-{"schema": "rnd-data-run/v1", "id": "14b",
- "files": [{"path": "out/pilot-out.tar", "sha256": "…", "bytes": 123, "tier": "T4", "licence": "…"}],
- "copies": [{"sha256": "…", "store": "d", "location": "…"}]}
+```bash
+rnd raw ingest <folder> --prefix receipts --reasons reasons.json   # runs into rnd-data, exceptions into rnd-data-private
+rnd raw private <folder> --as rnd-local --reasons reasons.json     # a private source's exceptions
+rnd raw verify [--run ID] [--deep]                                 # re-hash every git copy; check (or re-hash) every blob
 ```
 
-- **The private manifest** uses the schema `rnd-data-private/v1`, and its files have no tier field.
-- **Locations stay out of public files.** A location may be a machine path. It lives only in the private manifest and
-  the local `rnd.db`, never in a public file.
-- **A bad manifest is skipped.** An unreadable manifest, or one with the wrong schema, is skipped with a warning,
-  since rnd-data is a separate checkout.
+- **Runs.** A run is the nearest folder holding an `outcome.json`, so each retry is its own run. Its id is the folder
+  path with `/` written as `--`.
+- **Files.**
+  - Files of 256 KB or less go into git.
+  - Larger ones go once, by content, into the blob store (`blobs/<sha[:2]>/<sha>`). From a source on the same NTFS
+    volume they're hard-linked: the same bytes under a second name, never counted as a second copy.
+- **Reasons.**
+  - A reasons file maps paths or `folder/` prefixes to a reason: `sealed`, `blind`, `item-text`, `unapproved`,
+    `private-project` or `identity`.
+  - A file whose name looks private is held back even if the reasons file misses it.
+- **What a public manifest says about a private file:**
+  - A file private only for `identity` is listed by path and size, with no hash.
+  - A file private for its content is left out, and counted by reason in `private_files`.
+  - No private file's hash is ever published, since a short label file's hash could be matched by guessing.
+- **Tagging.** A note-type private text file (`.md`, `.txt`, `.py`, `.sh`) gets the private tag as its first line,
+  unless its hash is pinned anywhere in the library. Data files stay byte-exact.
+- **Both repositories store every file byte-exact** (`* -text`), since manifests pin each file by SHA-256.
+- **Where rnd finds them.** `rnd check` and the index read them beside the library (`../rnd-data`,
+  `../rnd-data-private`), or through `$RND_DATA` and `$RND_DATA_PRIVATE`. A bad manifest is skipped with a warning.
+- **The pre-push hook.** `scripts/hooks/pre-push` runs `rnd check` before every push, including the exact private
+  match CI can't run. Install it once per clone with `git config core.hooksPath scripts/hooks`.

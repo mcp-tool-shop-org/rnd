@@ -139,8 +139,8 @@ def source_paths(root: Path) -> list[Path]:
     data = rnd_data_root(root)
     if data.is_dir():
         paths += sorted(data.glob("runs/*/manifest.json"))
-        if (data / "private" / "manifest.json").exists():
-            paths.append(data / "private" / "manifest.json")
+    if (layout.private_root(root) / "manifest.json").exists():
+        paths.append(layout.private_root(root) / "manifest.json")
     return paths
 
 
@@ -203,29 +203,29 @@ def index_rows(root: Path) -> tuple[dict, list[tuple[str, str, str]]]:
             add_file(f["sha256"], f.get("bytes"), "T3", _licence_for(f["path"], m.get("licences")),
                      f"datapack:{name}", f["path"], "hf" if loc else "unhosted", loc or "")
 
-    # rnd-data, when a checkout is present.
-    data_root = rnd_data_root(root)
-    manifests = sorted(data_root.glob("runs/*/manifest.json")) if data_root.is_dir() else []
-    if (data_root / "private" / "manifest.json").exists():
-        manifests.append(data_root / "private" / "manifest.json")
-    for mpath in manifests:
-        where = f"rnd-data/{mpath.relative_to(data_root).as_posix()}"
+    # rnd-data (public) and rnd-data-private, when their checkouts are present. Copies come only from each
+    # manifest's own `copies`. A private file a public manifest lists has no hash there, so it's indexed from the
+    # private manifest, which only a machine with that checkout can read.
+    data_root, priv_root = rnd_data_root(root), layout.private_root(root)
+    manifests = [(m, False) for m in sorted(data_root.glob("runs/*/manifest.json"))] if data_root.is_dir() else []
+    if (priv_root / "manifest.json").exists():
+        manifests.append((priv_root / "manifest.json", True))
+    for mpath, private in manifests:
+        where = ("rnd-data-private/manifest.json" if private
+                 else f"rnd-data/{mpath.relative_to(data_root).as_posix()}")
         try:
             m = json.loads(mpath.read_text(encoding="utf-8"))
-            private = mpath.parent.name == "private"
             if m.get("schema") != (RNDDATA_PRIVATE_SCHEMA if private else RNDDATA_RUN_SCHEMA):
                 raise ValueError(f"schema must be {RNDDATA_PRIVATE_SCHEMA if private else RNDDATA_RUN_SCHEMA}")
-            mid = "rnd-data:private" if private else f"rnd-data:{m['id']}"
-            copies = {}
-            for c in m.get("copies", []):
-                copies.setdefault(c["sha256"], []).append((c["store"], c["location"]))
+            mid = "rnd-data-private" if private else f"rnd-data:{m['id']}"
             for f in m["files"]:
-                sha = f["sha256"]
+                sha = f.get("sha256")
+                if not sha:
+                    continue  # listed private, without its hash
                 rows["manifest_files"].append((mid, f["path"], sha))
                 if sha not in files:
                     files[sha] = (sha, f.get("bytes"), "T5" if private else f.get("tier", "T4"), f.get("licence"))
-                rows["copies"].append((sha, "rnd-data", f"{mpath.parent.relative_to(data_root).as_posix()}/{f['path']}"))
-                rows["copies"] += [(sha, s, loc) for s, loc in copies.get(sha, [])]
+            rows["copies"] += [(c["sha256"], c["store"], c["location"]) for c in m.get("copies", [])]
         except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as exc:
             problems.append(("warning", where, f"skipped: {type(exc).__name__}: {exc}"))
     # Every file under experiments/ that git would commit: one copy, in the repository. Indexed last, so a file a

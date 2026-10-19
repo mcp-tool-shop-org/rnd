@@ -73,57 +73,61 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 39,
-      "changed": 8,
+      "added": 42,
+      "changed": 19,
       "moved": 0,
-      "parts": 4,
+      "parts": 7,
       "removed": 0
     },
     "items": [
       {
         "kind": "landing",
-        "sentence": "experiments/colab-golden-path/figures.json is now written by experiments/colab-golden-path/figures.py.",
-        "subjects": [
-          "experiments/colab-golden-path/figures.json",
-          "experiments/colab-golden-path/figures.py"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "LICENSE is now also read by experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/pin-result.json, experiments/colab-golden-path/data/windows/window13g-prebuild-gemma-20261018/pin-result.json, experiments/colab-golden-path/data/windows/window13j-prebuild-qwen3.8-a100-20261018/pin-result.json and experiments/colab-golden-path/data/windows/window13k-prebuild-granite-a100-20261018/pin-result.json.",
-        "subjects": [
-          "LICENSE",
-          "experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/pin-result.json",
-          "experiments/colab-golden-path/data/windows/window13g-prebuild-gemma-20261018/pin-result.json",
-          "experiments/colab-golden-path/data/windows/window13j-prebuild-qwen3.8-a100-20261018/pin-result.json",
-          "experiments/colab-golden-path/data/windows/window13k-prebuild-granite-a100-20261018/pin-result.json"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "README.md is now also read by experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/pin-result.json, experiments/colab-golden-path/data/windows/window13g-prebuild-gemma-20261018/pin-result.json, experiments/colab-golden-path/data/windows/window13j-prebuild-qwen3.8-a100-20261018/pin-result.json and experiments/colab-golden-path/data/windows/window13k-prebuild-granite-a100-20261018/pin-result.json.",
+        "sentence": "README.md is now also read by experiments/stage1-regeneration/experiment.json, tests/test_datapack.py, tests/test_layout.py and tests/test_runs.py.",
         "subjects": [
           "README.md",
-          "experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/pin-result.json",
-          "experiments/colab-golden-path/data/windows/window13g-prebuild-gemma-20261018/pin-result.json",
-          "experiments/colab-golden-path/data/windows/window13j-prebuild-qwen3.8-a100-20261018/pin-result.json",
-          "experiments/colab-golden-path/data/windows/window13k-prebuild-granite-a100-20261018/pin-result.json"
+          "experiments/stage1-regeneration/experiment.json",
+          "tests/test_datapack.py",
+          "tests/test_layout.py",
+          "tests/test_runs.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "And 2 more new writers and readers of places.",
+        "sentence": "docs/tag-page.md is now read by tests/test_layout.py.",
+        "subjects": [
+          "docs/tag-page.md",
+          "tests/test_layout.py"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "experiments/natural-errors/data/answers.json is now also read by docs/layout.json.",
+        "subjects": [
+          "experiments/natural-errors/data/answers.json",
+          "docs/layout.json"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "And 86 more new writers and readers of places.",
         "subjects": []
       },
       {
+        "kind": "unassigned",
+        "sentence": "scripts/hooks/pre-push is new and belongs to no part, so atlas check fails on it against the previous map.",
+        "subjects": [
+          "scripts/hooks/pre-push"
+        ]
+      },
+      {
         "kind": "counts",
-        "sentence": "39 files added and 8 changed content, across 4 parts.",
+        "sentence": "42 files added and 19 changed content, across 7 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "01646c0141f685fd42f2cd297fd1c1aad1dc8910",
-      "generatedAt": "2026-10-18T06:55:00.158Z"
+      "commit": "d3db5396d47a4e5202a2bd5c8a91e3b75e0a1ce4",
+      "generatedAt": "2026-10-18T13:46:52.237Z"
     },
     "unchanged": false
   },
@@ -146,7 +150,7 @@
     {
       "a": "rnd/cli.py",
       "b": "tests/test_rnd.py",
-      "either": 7,
+      "either": 8,
       "partLabels": [
         null,
         "tests"
@@ -164,9 +168,9 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 4 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 0,
-  "commit": "d3db5396d47a4e5202a2bd5c8a91e3b75e0a1ce4",
+  "commit": "96f1277c83728b5b78b849304c0a16e043161d40",
   "defaultBranch": "main",
-  "derived": "14 parts, mostly Python (125 files), shell (28), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "14 parts, mostly Python (131 files), shell (28), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -188,7 +192,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 23
+          "files": 25
         },
         {
           "boundary": "root",
@@ -198,7 +202,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 23
+          "files": 25
         },
         {
           "boundary": "experiments",
@@ -242,7 +246,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 23
+          "files": 25
         },
         {
           "boundary": "root",
@@ -313,7 +317,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 13
+          "files": 15
         }
       ],
       "runs": [
@@ -488,16 +492,16 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-18T13:46:52.237Z",
+  "generatedAt": "2026-10-19T21:53:30.410Z",
   "limits": [
     "9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.",
-    "20 writes and 34 reads use paths built at run time and are not named here.",
+    "20 writes and 36 reads use paths built at run time and are not named here.",
     "7 writes go to places this repository does not track, so they are not listed as generated.",
-    "29 writes and 85 reads go to a path their caller passes, not to this repository.",
-    "5 reads go to the directory the command is run in (entries, instruments and licences), not to this repository.",
+    "32 writes and 100 reads go to a path their caller passes, not to this repository.",
+    "9 reads go to the directory the command is run in (README.md, entries, experiments and 2 more places), not to this repository.",
     "1 read goes to the directory the command is run in or a path its caller passes, not to this repository.",
     "1 read goes to the home directory (.claude/), not to this repository.",
-    "3 files belong to no part: scripts/colab/collect_windows.py, scripts/colab/probe.py and scripts/colab/rates.sh.",
+    "4 files belong to no part: scripts/colab/collect_windows.py, scripts/colab/probe.py, scripts/colab/rates.sh and 1 more.",
     "Statistics confidence is low: fewer than 25 source files reach 10 revisions in the window."
   ],
   "mainDoor": ".github/workflows/ci.yml",
@@ -552,10 +556,10 @@
   "startReason": "This path follows rnd (a command people run) from its entry, since CI runs only tests and checks.",
   "summary": "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only).",
   "summaryFrom": "person",
-  "testFiles": 56,
+  "testFiles": 58,
   "testedBy": {
     "experiments": 6,
-    "mcptoolshop_rnd": 17,
+    "mcptoolshop_rnd": 19,
     "rnd": 1
   },
   "unnamedWrites": 20,

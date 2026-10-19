@@ -25,7 +25,8 @@ def record(name, **over):
 class RunsBase(CliBase):
     def setUp(self):
         super().setUp()
-        env = mock.patch.dict(os.environ, {"RND_DATA": str(self.root / "rnd-data")})
+        env = mock.patch.dict(os.environ, {"RND_DATA": str(self.root / "rnd-data"),
+                                           "RND_DATA_PRIVATE": str(self.root / "rnd-data-private")})
         env.start()
         self.addCleanup(env.stop)
         write(self.root, "experiments/demo/README.md", "# demo\n")
@@ -180,14 +181,15 @@ class IndexTests(RunsBase):
                                                                       "bytes": 8, "tier": "T4"}],
             "copies": [{"sha256": sha, "store": "d", "location": "runs/w0/out/a.json"}]}))
         write(self.root, "rnd-data/runs/bad/manifest.json", "{broken")
-        write(self.root, "rnd-data/private/manifest.json", json.dumps({
-            "schema": runs.RNDDATA_PRIVATE_SCHEMA, "files": [{"path": "k.json", "sha256": "f" * 64, "bytes": 3}]}))
+        write(self.root, "rnd-data-private/manifest.json", json.dumps({
+            "schema": runs.RNDDATA_PRIVATE_SCHEMA, "files": [{"path": "k.json", "sha256": "f" * 64, "bytes": 3}],
+            "copies": [{"sha256": "f" * 64, "store": "rnd-data-private", "location": "private/k.json"}]}))
         code, out, _ = self.run_cli("where", sha[:10], "--json")
         self.assertEqual(code, 0)
         f = json.loads(out)[0]
         self.assertEqual((f["tier"], f["licence"]), ("T3", "MIT"))
         stores = {c["store"] for c in f["copies"]}
-        self.assertEqual(stores, {"git", "hf", "rnd-data", "d"})
+        self.assertEqual(stores, {"git", "hf", "d"})  # copies come only from each manifest's own list
         self.assertIn("https://hf.example/d@abc/data/a.json", {c["location"] for c in f["copies"]})
         self.assertIn("as datapack:demo:data/a.json", self.run_cli("where", "data/a.json")[1])
         self.assertEqual(json.loads(self.run_cli("where", "k.json", "--json")[1])[0]["tier"], "T5")

@@ -4,7 +4,7 @@ description: Renting GPUs by the hour invites one question, which card is cheape
 issue: 15
 date: 2026-10-19
 highlights:
-  - "<strong>Price the job, not the hour.</strong> This week the same 249 GB download took 19 minutes on a $1.79/hr pod and 3.4 minutes on a $2.49/hr pod. The cheaper pod then spent $3.05 and produced nothing. The dearer one was on track to finish the whole job for about $2–2.50."
+  - "<strong>Price the job, not the hour.</strong> This week the same 249 GB download took 19 minutes on a $1.79/hr pod and 3.4 minutes on a $2.49/hr pod. The cheaper pod then spent $3.05 and produced nothing. The dearer one finished the whole job for $2.34."
   - "<strong>Failures are paid in time.</strong> Across 45 RunPod plans, three never got a pod at all, for lack of capacity. Across our Colab A100 windows, three VMs were lost mid-run and six windows were lost to our own tooling."
   - "<strong>Find the bottleneck before you pick the card.</strong> The slow conversion wasn't the card's fault: it was single-threaded Python on a 128-core machine. Changing the method made the same work about 13 times faster per byte written."
 ---
@@ -29,11 +29,12 @@ This week we converted a 120-billion-parameter model, Nemotron-3.5-Super-VL, for
 | Host | 128 cores, 2 TB RAM | 2 × EPYC 9575F (256 threads), 1.5 TB RAM |
 | Download, 249 GB | 19 min | 3.4 min |
 | Conversion method | direct 8-bit, in Python | 16-bit first, then a multithreaded quantizer |
-| Conversion rate | 0.9 GB/min of output | about 12 GB/min (16-bit write) |
-| Outcome | stopped by our one-hour limit at 55 of 127 GB | finishing (final figures to come) |
-| Spent | $3.05, nothing usable | about $2–2.50 projected for the whole job |
+| Conversion rate | 0.9 GB/min of output | 11.6 GB/min (16-bit write), then about 2 min to quantize |
+| Outcome | stopped by our one-hour limit at 55 of 127 GB | finished |
+| Spent | $3.05, nothing usable | $2.34 for the whole job, measured (about $1.29 to the first usable file) |
 
-Two things changed at once, so this isn't a clean comparison:
+Both pods ran the same pinned code apart from the conversion route. Even so, two things changed at once, so this isn't a
+clean comparison:
 - **The card and host changed.** The second pod downloaded nearly six times faster.
 - **The method changed too.** The first pod spent its hour in single-threaded Python while 127 of its 128 cores sat
   idle. The quantizer we switched to uses every core.
@@ -45,7 +46,7 @@ We can't say how much of the gain came from the host and how much from the metho
 offrig keeps a record of every pod it plans. Across the studio's projects that's 45 plans, $59.60 measured in total.
 
 offrig records the cards a plan *allowed*, not the one it got. So the classes below are inferred from each pod's
-measured cost per hour.
+measured cost per hour, and rows near a class boundary could move.
 
 | Inferred class | Plans | Wall hours | Spent |
 |---|---|---|---|
@@ -94,20 +95,20 @@ cap stops and our own tooling. It didn't come from the price of the hour. [Issue
 - **Record the host.** Two pods with the same card can have very different processors. We now record the CPU, RAM and
   disk of every pod at boot.
 - **Count time as the scarce resource.** A failed cheap run costs a little money and a lot of time: the wait for
-  capacity, the re-download, the redo, and a person's attention. Money can be topped up; the afternoon can't.
-- **When a strong host is free, take it for heavy jobs.** This week's RTX PRO 6000 Server pod is finishing a job for
-  less than the cheaper pod spent failing at it. One pod is one data point, not a law, but it matches what we've seen.
+  capacity, the re-download, the redo, and a person's attention. A failed cheap run costs the money and the time.
+- **When a strong host is free, take it for heavy jobs.** This week's RTX PRO 6000 Server pod finished the job for
+  $2.34, less than the $3.05 the cheaper pod spent failing at it. One pod is one data point, not a law, but it matches what we've seen.
 
 ## What we haven't tested
 
 We drafted a controlled comparison: the same job on four card types, every attempt and failure recorded. We parked it
-for now; it costs about $12, and the records above already settle the practical question. If we run it, it'll be its
+for now; it costs about $12, and the records above answer the practical question well enough for now. If we run it, it'll be its
 own issue.
 
 ## Where the figures come from
 
 - **The two Super-VL pods:** the Publisher's run receipts. The host specs are from `lscpu`, `free` and `df` at boot.
-  The rates are from the conversion's own log and its disk readings. The second pod's final cost is projected.
+  The rates are from the conversion's own log and its disk readings. Both pods' spend is measured.
 - **The 45 RunPod plans:** offrig's own plan database, exported read-only. The aggregate is
   [`experiments/pod-records/offrig-plans-by-class.csv`](https://github.com/mcp-tool-shop-org/rnd/blob/main/experiments/pod-records/offrig-plans-by-class.csv).
   The card classes are inferred from cost per hour; offrig doesn't record the card it rented.

@@ -17,8 +17,10 @@ The stores (scale plan P3; the Director made rnd-data public on 2026-10-19, open
 
 No hash of a private file is ever published: a short label file's hash could be matched by guessing (Argon, round 3).
 
-Ingest never deletes or changes its source. From a source on the same volume as the blob store, a blob is
-hard-linked: the same bytes under a second name, which is not a second copy and is never counted as one.
+Ingest never deletes or changes its source. Blobs are copied and hash-checked by default. With `link` (only for a
+read-only snapshot, such as the P0 backup, on the same volume as the store), a blob is hard-linked instead: the same
+bytes under a second name, never counted as a second copy, and marked read-only so no in-place write can change it.
+A live tree (the Publisher's working receipts) is always copied: an append to a linked log would change the blob.
 """
 
 import fnmatch
@@ -26,6 +28,7 @@ import hashlib
 import json
 import os
 import shutil
+import stat
 from datetime import date
 from pathlib import Path
 
@@ -192,17 +195,21 @@ def _place_blob(src: Path, sha: str, root: Path, link: bool) -> str:
     if tmp.exists():
         tmp.unlink()
     if link:
+        # Only for a read-only snapshot (the P0 backup): a hard link shares the file, so an in-place write through
+        # either name would change the blob. The shared file is marked read-only, so such a write fails instead.
         try:
             os.link(src, tmp)
         except OSError as exc:
             raise RawError("NO_HARDLINK", f"can't hard-link {src.name} into the blob store ({exc})",
-                           "a hard link needs the source and the store on one NTFS volume; pass --copy to copy instead")
+                           "a hard link needs the source and the store on one NTFS volume; drop --link to copy")
+        os.chmod(tmp, stat.S_IREAD)
         os.replace(tmp, target)
         return "linked"
     shutil.copy2(src, tmp)
     if sha256_file(tmp) != sha:
         tmp.unlink()
         raise RawError("COPY_HASH", f"the copy of {src.name} doesn't hash to {sha[:12]}")
+    os.chmod(tmp, stat.S_IREAD)
     os.replace(tmp, target)
     return "copied"
 
@@ -229,7 +236,7 @@ def _copy_checked(src: Path, dst: Path, sha: str) -> None:
 
 
 def ingest_tree(source: Path, public: Path, private: Path, prefix: str, classify, *, exclude: tuple = (),
-                link: bool = True, dry_run: bool = False, commit: str | None = None, update: bool = False,
+                link: bool = False, dry_run: bool = False, commit: str | None = None, update: bool = False,
                 licence_for=None) -> dict:
     """Ingest every file under `source` as runs `<prefix>--<group>`. `classify(rel)` returns None for a public file
     or a reason from REASONS. Idempotent: a run whose manifest exists and matches is left alone; one that differs is

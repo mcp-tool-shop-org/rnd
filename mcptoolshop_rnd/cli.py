@@ -574,7 +574,7 @@ def cmd_raw(args):
             else:
                 classify, licence_for = _classifier(reasons, True), None
             st = rawdata.ingest_tree(source, public, private, args.prefix, classify,
-                                     exclude=tuple(args.exclude or ()), link=not args.copy, dry_run=args.dry_run,
+                                     exclude=tuple(args.exclude or ()), link=args.link, dry_run=args.dry_run,
                                      commit=_git_head(), update=args.update, licence_for=licence_for)
         else:
             if not args.name:
@@ -987,7 +987,8 @@ def build_parser():
     s.add_argument("--reasons", help="a JSON file mapping paths or folder/ prefixes to a private reason")
     s.add_argument("--rules", help="ingest: a rules file (deny by default for content), e.g. docs/raw-data-rules/receipts.json")
     s.add_argument("--exclude", action="append", help="a path or folder to leave out (repeatable)")
-    s.add_argument("--copy", action="store_true", help="ingest: copy blobs instead of hard-linking them")
+    s.add_argument("--link", action="store_true",
+                   help="ingest: hard-link blobs instead of copying, only from a read-only snapshot on the store's volume")
     s.add_argument("--update", action="store_true",
                    help="ingest: replace a run whose source changed since it was ingested (git keeps the old manifest)")
     s.add_argument("--dry-run", action="store_true", help="plan and count; write nothing")

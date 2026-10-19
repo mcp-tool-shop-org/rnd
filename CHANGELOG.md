@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.19.0.0] - 2026-10-19
+
+- rnd raw ingest copies blobs by default; --link (hard-link) only for a read-only snapshot; every blob is read-only (the Publisher's P3 follow-up: an append to a linked live file would change the blob)
+
 ## [1.1.18.0.0] - 2026-10-19
 
 - rnd raw ingest/private/verify: rnd-data (public) and rnd-data-private (only the named exceptions), files over 256 KB once by content in a blob store, --update for a changed source

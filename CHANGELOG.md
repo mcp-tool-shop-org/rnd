@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.2.4] - 2026-10-18
+
+- critic-signal phases 0 and 1: the critic's per-check record and a blind gold check of 51 accepted rows
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.15.2.3] - 2026-10-18
 
 - Stage 1 part 2 design: a critic that can tell writers apart (passed by Argon, two rounds)

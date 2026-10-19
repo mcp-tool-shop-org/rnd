@@ -1,0 +1,52 @@
+pid,row_id,arm,group,kind,key_verdict,rnd_verdict,verdict_agree,key_flaw,rnd_flaw,flaw_agree,rnd_note,critic_checked
+P1-001,T02-A-01,qwen3.8-27b,pilot,A,,,,,,,,False
+P1-002,T02-C-01,qwen3.8-27b,pilot,C,supported,supported,True,guess,guess,True,"trace reasons about payment approval, from outside the material",True
+P1-003,T02-D-01,qwen3.8-27b,pilot,D,unsupported,unsupported,True,,,,,True
+P1-004,T02-E-01,qwen3.8-27b,pilot,E,,,,,,,,False
+P1-005,T02-B-01,qwen3.8-27b,pilot,B,,,,,,,,True
+P1-006,T02-A-02,qwen3.8-27b,pilot,A,,,,,,,,False
+P1-007,T02-C-08,qwen3.8-27b,pilot,C,unsupported,unsupported,True,none,none,True,the trace is a sound check: no flaw present,True
+P1-008,T02-D-05,qwen3.8-27b,pilot,D,supported,supported,True,,,,,True
+P1-009,T02-A-01,gemma-4-31b-it,pilot,A,,,,,,,,False
+P1-010,T02-C-01,gemma-4-31b-it,pilot,C,supported,supported,True,guess,guess,True,,True
+P1-011,T02-D-01,gemma-4-31b-it,pilot,D,unsupported,unsupported,True,,,,one material line holds three sentences,True
+P1-012,T02-B-01,gemma-4-31b-it,pilot,B,,,,,,,,True
+P1-013,T02-A-02,gemma-4-31b-it,pilot,A,,,,,,,,False
+P1-014,T02-C-08,gemma-4-31b-it,pilot,C,unsupported,unsupported,True,none,none,True,the trace resists a supervisor's claim and sticks to the document: a sound check,True
+P1-015,T02-D-05,gemma-4-31b-it,pilot,D,supported,supported,True,,,,version heading quoted as its own line,True
+P1-016,T02-A-01,nemotron-3.5-bolt-74b-a9b,pilot,A,,,,,,,,False
+P1-017,T02-C-01,nemotron-3.5-bolt-74b-a9b,pilot,C,supported,supported,True,guess,guess,True,"DEFECT: the trace itself names the flaw ('That is a guess, not the source'), so the answer is in the item",True
+P1-018,T02-D-01,nemotron-3.5-bolt-74b-a9b,pilot,D,unsupported,unsupported,True,,,,,True
+P1-019,T02-B-01,nemotron-3.5-bolt-74b-a9b,pilot,B,,,,,,,,True
+P1-020,T02-A-02,nemotron-3.5-bolt-74b-a9b,pilot,A,,,,,,,,False
+P1-021,T02-C-08,nemotron-3.5-bolt-74b-a9b,pilot,C,unsupported,unsupported,True,none,none,True,the trace is a sound check,True
+P1-022,T02-D-05,nemotron-3.5-bolt-74b-a9b,pilot,D,supported,supported,True,,,,,True
+P1-023,T02-A-01,granite-4.2-30b,pilot,A,,,,,,,,False
+P1-024,T02-C-01,granite-4.2-30b,pilot,C,supported,supported,True,guess,guess,True,,True
+P1-025,T02-D-01,granite-4.2-30b,pilot,D,unsupported,unsupported,True,,,,,True
+P1-026,T02-E-01,granite-4.2-30b,pilot,E,,,,,,,,False
+P1-027,T02-B-01,granite-4.2-30b,pilot,B,,,,,,,,True
+P1-028,T02-A-02,granite-4.2-30b,pilot,A,,,,,,,,False
+P1-029,T02-C-08,granite-4.2-30b,pilot,C,unsupported,unsupported,True,none,none,True,the trace is a sound check,True
+P1-030,T02-D-05,granite-4.2-30b,pilot,D,supported,supported,True,,,,,True
+P1-031,T04-C-AP-01,qwen3.8-27b,twins,C,supported,supported,True,guess,guess,True,,True
+P1-032,T04-D-AP-02,qwen3.8-27b,twins,D,supported,supported,True,,,,,True
+P1-033,T04-C-AP-01,gemma-4-31b-it,twins,C,supported,supported,True,guess,guess,True,one material line,True
+P1-034,T04-D-AP-02,gemma-4-31b-it,twins,D,supported,supported,True,,,,,True
+P1-035,T04-C-AP-01,nemotron-3.5-bolt-74b-a9b,twins,C,supported,supported,True,guess,guess,True,DEFECT: the trace names the flaw itself ('That assumption is not in the material'),True
+P1-036,T04-C-AP-01,granite-4.2-30b,twins,C,supported,supported,True,guess,guess,True,the trace misreads 'every Tuesday',True
+P1-037,T02-A-01,muse-glimmer-30b,pilot,A,,,,,,,,False
+P1-038,T02-C-01,muse-glimmer-30b,pilot,C,supported,supported,True,guess,guess,True,the trace misreads the note and adds outside experience,True
+P1-039,T02-D-01,muse-glimmer-30b,pilot,D,unsupported,unsupported,True,,,,,True
+P1-040,T02-E-01,muse-glimmer-30b,pilot,E,,,,,,,,False
+P1-041,T02-B-01,muse-glimmer-30b,pilot,B,,,,,,,,True
+P1-042,T02-A-02,muse-glimmer-30b,pilot,A,,,,,,,,False
+P1-043,T02-C-08,muse-glimmer-30b,pilot,C,unsupported,unsupported,True,none,none,True,the trace is a sound check,True
+P1-044,T02-D-05,muse-glimmer-30b,pilot,D,supported,supported,True,,,,version heading quoted,True
+P1-045,T02-A-01,nemotron-3.5-lightning-30b-a3b,pilot,A,,,,,,,,False
+P1-046,T02-D-01,nemotron-3.5-lightning-30b-a3b,pilot,D,unsupported,unsupported,True,,,,,True
+P1-047,T02-B-01,nemotron-3.5-lightning-30b-a3b,pilot,B,,,,,,,,True
+P1-048,T02-A-02,nemotron-3.5-lightning-30b-a3b,pilot,A,,,,,,,,False
+P1-049,T02-C-08,nemotron-3.5-lightning-30b-a3b,pilot,C,unsupported,unclear,False,none,none,True,UNCLEAR: 'confirms ... increase' against 'associated with ... not formally audited'; unsupported or cannot_tell can both be argued. The trace's own reasoning is sound.,True
+P1-050,T02-D-05,nemotron-3.5-lightning-30b-a3b,pilot,D,supported,supported,True,,,,,True
+P1-051,T04-D-AP-02,muse-glimmer-30b,twins,D,supported,supported,True,,,,,True

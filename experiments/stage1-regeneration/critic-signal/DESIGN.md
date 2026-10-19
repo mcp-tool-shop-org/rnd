@@ -1,6 +1,6 @@
 # Stage 1, part 2: a critic that can tell writers apart (design draft)
 
-**Status: v2, passed by Argon's short-form review (2026-10-19, two rounds). Nothing is built until the tooling below is reviewed and laddered.** Template: the rnd
+**Status: v2, passed by Argon's short-form review (2026-10-19, two rounds). Phases 0 and 1 done (`PHASE-0-1.md`); nothing else runs until the tooling below is reviewed and laddered.** Template: the rnd
 [model comparisons](../../../site/src/content/docs/handbook/model-comparisons.md) design, sections 0–8, with a
 phase 0 added in front. It comes before the T10 lesson's writer run, which waits on its outcome.
 
@@ -200,7 +200,9 @@ Written before anything runs:
   - **Without the trait votes,** an item is one or two verdict calls plus one flaw call on C items, against about
     five calls with traits. A verdict-and-flaw item hasn't been timed, so it takes the +30% rule: estimate 296 s ×
     2/5 ≈ 120 s per item for Muse.
-  - **Step 1, Muse, seed 0 (P0 and P2):** about 100 items at 120 s is 3.3 hours, about 18 units, about 23 with +30%.
+  - **Step 1, Muse, seed 0 (P0 and P2):** about 100 items at 120 s is 3.3 hours, about 18 units, about 23 with +30%
+    (all figures here are per seed; at the 156 s ceiling a seed is about 4.3 hours, so each seed is its own window,
+    and a cut window resumes from its call journal).
   - **Step 2, Muse, seed 1 (P3):** the same again, about 23 units, run only if step 1 shows P2 short of the bar.
   - **Lightning** repeats steps 1 and 2 only if Muse's results leave the decision open: about 46 units more.
   - The whole study at its largest is about 92 units, inside the 134.15 left of 300. Each step is projected again
@@ -213,8 +215,8 @@ Written before anything runs:
 - an offline scorer that applies P0's and P2's comparison rules to recorded replies, against any key, for the
   key-only types and for P2;
 - the perturbation script (types a–g), with its seed recorded and its output sealed;
-- the download heartbeat fixed to whatever signal the Publisher's Xet probe shows moves, since the critic windows
-  prefetch Muse through it.
+- (the download heartbeat needs no change: probe window 13u measured a Xet download growing steadily inside the
+  download directory, with no preallocation and nothing held in the Xet cache.)
 
 ## 7. Receipts
 
@@ -229,7 +231,7 @@ committed before any perturbed item is scored.
 - Phase 1 is done, and its result recorded under the decision rule.
 - The perturbation script is reviewed, and its output spot-read (every type, five items each).
 - One free CPU stub run passes with the scoring mode, the offline scorer and two seeds wired.
-- The Xet download probe has run and the heartbeat has been fixed to its measured signal.
+- The Xet download probe has run (window 13u: no heartbeat change needed).
 - An outside review of this design has passed.
 
 ## What carries into the T10 writer run
@@ -248,6 +250,5 @@ Fixed here for the T10 design that follows:
   in the converter's environment), and new conversions in their own environment with torch, numpy, gguf and
   safetensors pinned exactly;
 - if P3 wins, the T10 critic projection doubles;
-- the download heartbeat's progress signal for Xet downloads, which may assemble chunks outside the download
-  directory (the gate also watches free disk);
+- the download heartbeat as it stands, which probe 13u showed reads Xet downloads correctly;
 - the critic protocol this study adopts.

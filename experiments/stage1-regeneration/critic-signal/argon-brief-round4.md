@@ -10,7 +10,7 @@
 
 ## What to audit
 
-`PLAN-ROUND4.md` at the commit named in the bundle file, in the bundle `rnd-critic-signal-<commit>-round4-code.txt`.
+`PLAN-ROUND4.md` at the commit named in the bundle file, in the bundle `rnd-critic-signal-4452274-round4-code.txt`, in two parts (`.part1of2.txt`, `.part2of2.txt`). Each part starts with `SHA256:` over its body and `LINES:`.
 
 The bundle also holds, for reference:
 - `SYNTHESIS.md`, `PHASE-4.md` and `DESIGN.md`;

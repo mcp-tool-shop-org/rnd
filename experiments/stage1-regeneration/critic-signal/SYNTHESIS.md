@@ -102,9 +102,14 @@ A synthesis of phases 0–4 and the parked step 1 of §10, drawn from `PHASE-0-1
     and the gold keys, not the critic.
   - **The larger critic (§10),** resumed when RunPod spending resumes. It tests whether size reads the labels better.
     Finding 4 suggests size alone may not fix boundary cases. The run is still the direct test of that.
-- **R&D's recommendation:** run T10 on P0 with the phase-1 fixes, and draft the tighter labels now. When RunPod
-  resumes, run §10 on the frozen items as planned. Then pre-register the coarse gate against the better labels on
-  fresh rows, rather than testing either alone.
+- **R&D's recommendation:** run T10 on P0 with the phase-1 fixes. When RunPod resumes, run §10 on the frozen items
+  as planned. Test the coarse gate on fresh rows, with a fuller definition of "none", as `PLAN-ROUND4.md` sets out.
+- **Corrected 2026-10-19, after this file was first merged.**
+  - This recommendation first said to test the coarse gate against tighter flaw labels.
+  - Phase 4's data say otherwise. All 4 of the coarse gate's false refusals were on planted-none rows (4 of 10),
+    and none was on the 22 planted-flaw rows.
+  - Pc treats every flaw label as one class, so the loop/guess boundary can't cause its refusals. Its errors are at
+    the none boundary, which is a different lever. See `PLAN-ROUND4.md` §1.
 
 ## Licences
 

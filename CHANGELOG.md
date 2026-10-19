@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.2.6] - 2026-10-19
+
+- newsletter issue 14: testing the tester (critic-signal)
+- Updated experiment `charts`
+- Added experiment `stage1-regeneration`
+
 ## [1.1.15.2.5] - 2026-10-19
 
 - critic-signal phases 2-3 results and the confirmation design (§9, Argon PASS r3b)

@@ -1,0 +1,278 @@
+SHA256: b7e71e6e14fcf7454dff079abd7a7aa6f7558dbfb1da4e41c70302c82332ecab
+LINES: 276
+===== FILE: rnd-local/projects/repo-scale/PLAN.md (plan v3) =====
+   1  # rnd at scale: where each kind of data lives, and the database that finds it (plan v3, 2026-10-19)
+   2
+   3  **Status: v3, after Argon's round 2. A draft for Argon's re-check.**
+   4  - **Round 1:** CONDITIONAL PASS on v1 (bundle 6ce3076e), with findings F1–F7. All seven are taken in.
+   5  - **Round 2:** CONDITIONAL PASS on v2 (bundle c8c4df2f): F1–F7 resolved, no blocking findings, and two new ones (F8
+   6    before P4, F9 not blocking). Both are taken in, with the round-2 answers; §10 says where.
+   7  - **Kept private** until the Director approves it (brainstorms stay out of public rnd).
+   8  - **Nothing here has been done.** Creating a repository, uploading data or deleting a local copy needs the
+   9    Director's go.
+  10  - **The ask:** the Director wants rnd built up so it scales without becoming a mess, with databases, and possibly
+  11    another repository, outside readouts, for raw and bulk data.
+  12
+  13  ## Standards compliance (workflow standards, 0–3)
+  14
+  15  - **PIN_PER_STEP — 2.**
+  16    - Every move is made by a script at a pinned rnd commit, and every byte moved carries its SHA-256 in a manifest.
+  17    - The datapack format already does this (`rnd-datapack/v1`).
+  18  - **ANDON_AUTHORITY — 2.**
+  19    - `rnd check` gains the size, layout and private-file rules (§4) and exits 1 on a breach, so CI stops a bad
+  20      commit.
+  21    - A backup or ingest stops on the first hash mismatch.
+  22  - **NAMED_COMPENSATORS — 2.** See §8. Owner: R&D for the rnd side, the Publisher for uploads and repo settings.
+  23  - **DECOMPOSE_BY_SECRETS — 2.** Text, small public data, bulk public data, raw data and private data change for
+  24    different reasons, and each has its own home.
+  25  - **UNCERTAINTY_GATED_HUMANS — 2.** The irreversible steps each wait on the Director's go: a new repository, a public
+  26    upload, deleting a local copy. Each is asked contrastively in §9.
+  27  - **EXTERNAL_VERIFIER — n/a.** No specialized claims. Argon reviews the design as normal practice.
+  28
+  29  ## 1. What's there now (measured 2026-10-19)
+  30
+  31  **rnd** (`mcp-tool-shop-org/rnd`, main `c04ab4e`):
+  32
+  33  | Part | Files | Size | Notes |
+  34  |---|---|---|---|
+  35  | `experiments/` | 697 | 33.7 MB | 24.4 MB of it is `verifier-gold/` (197 files) |
+  36  | `site/` | 78 | 1.9 MB | the newsletter and handbook |
+  37  | `tests/` | 51 | 0.65 MB | |
+  38  | `entries/` | 67 | 0.36 MB | the library's source of truth |
+  39  | the rest | | about 1.5 MB | code, catalogues, instruments, licences, data-pack manifests |
+  40
+  41  - **The git pack is 8.8 MB.** History is small, and no rewrite is needed.
+  42  - **Largest tracked files:** model verdict JSONL files of 0.9–1.3 MB each, mostly under
+  43    `verifier-gold/math-ladder/results/` and `verifier-gold/diffs/`, and `ollama-cuda-backend/diag-record-v6.jsonl`
+  44    at 1.3 MB.
+  45  - **Nothing limits what goes in.** Any size, any file in any folder.
+  46
+  47  **Outside rnd, on this rig:**
+  48
+  49  | Store | Size | Files | What | Copies |
+  50  |---|---|---|---|---|
+  51  | `E:/AI/rnd-local` | 22 MB | 363 | private: sealed gold keys, item text, blind files, private project notes | **one, on E:** |
+  52  | `E:/AI/Publisher/receipts` | 20 GB | 1,474 | Colab and RunPod window receipts: tars, generations, logs, builds | **one, on E:** |
+  53  | `E:/AI/rnd-watch` | 43 MB | 998 | the weekly watch's runs, reports and public-page drafts | **one, on E:** |
+  54  | `E:/AI/readouts` (readouts-internal) | 12 GB on disk, 102 MB git | 12,749 | the shelf; 10.8 GB is `model-knowledge/generated/`, untracked | the git part on GitHub |
+  55
+  56  - **E: is the USB workspace drive.** D: (AI-BACKUP, external, 3.7 TB) holds no copy of the first three stores (the
+  57    Publisher's check and mine, 2026-10-19).
+  58  - **58 receipt files are tracked in the Publisher's git repo.** That repo has no remote, so they aren't off E:
+  59    either.
+  60  - **The data packs** (`natural-errors`, `hymn-arrangements`) are on Hugging Face as `mcp-tool-shop/rnd-*`, the
+  61    personal namespace, and published pages cite those URLs.
+  62    - Whether D: holds a verified copy of them isn't known; the backup step (P0) checks it.
+  63  - **Duplicate builds in the receipts:** the same 122 MB `llama-server.gz` sits in four windows (10, 10b, 10c, 10d).
+  64
+  65  **The index (`rnd.db`):**
+  66  - A generated SQLite file, not in git, rebuilt from the text.
+  67  - It covers entries, fields, tags, sources, claims, links and catalogues, with two FTS5 tables (`store.py`).
+  68  - **It knows nothing about experiments, runs, costs, data packs or where bytes live.**
+  69  - Costs and ledgers are prose in each experiment's README.
+  70
+  71  ## 2. The problems this solves
+  72
+  73  1. **Single copies on one USB drive.** The sealed gold keys, 20 GB of window receipts and the watch's history.
+  74     A fault on E: loses the evidence behind published results. **This is the only problem here that can lose data,
+  75     so it's solved first (P0).**
+  76  2. **Bulk data in the clone grows without bound.** Every run can add megabytes of verdict JSONL to git, forever.
+  77  3. **No map of where bytes live.** Finding a run's raw output means knowing which disk, folder and tar it's in.
+  78  4. **No machine-readable record of experiments.** A question like "which runs used Muse at Q8_0, and what did they
+  79     cost?" means reading prose READMEs.
+  80  5. **Duplicated builds** in the receipts.
+  81
+  82  ## 3. The design: five tiers, each with one home
+  83
+  84  Every file belongs to exactly one tier. The tier decides where it lives, how it's backed up, and who may see it.
+  85
+  86  | Tier | What | Home | Public? | Copies |
+  87  |---|---|---|---|---|
+  88  | **T1 text** | entries, instruments, designs, results write-ups, briefs, code | rnd git | yes | GitHub |
+  89  | **T2 small data** | data a reader needs to check a result: CSVs, trimmed collected records, prereg files, small structured inputs | rnd git | yes | GitHub |
+  90  | **T3 bulk data** | processed data a reader may want but rnd needn't carry: verdict dumps, diffs, screens | data packs on Hugging Face, manifest in rnd | private until a publish go | HF + D: |
+  91  | **T4 raw** | run outputs from any venue (rig, Colab, RunPod): tars, generations, logs, journals, receipts, custom builds | **new private repo `rnd-data`** (manifests + small files in git), bytes on D: and off-site | never | git (manifests) + D: + off-site |
+  92  | **T5 private** | sealed gold keys (held-out keys for blind tests), item text, blind files, private project notes, the watch's history | `rnd-data/private/` in git | never | GitHub (private) + D: |
+  93
+  94  **The content rule** (round 1 Q1): what a file is decides its tier first, and size second.
+  95  - **Per-item raw generations, raw verdict dumps and raw run logs** are T3 or T4, whatever their size.
+  96  - **Small structured files** stay in T2 under the size limits: a prompt list, a trimmed collected record, a prereg.
+  97  - **"Gold" in a public pack** (for example `data/gold.json`, a published benchmark's labels) is T3 and public. Only
+  98    **sealed** gold keys, held out for a blind test, are T5.
+  99
+ 100  **Not stored by us:** model weights already hosted upstream. Their pin and SHA-256 go in the manifest.
+ 101
+ 102  **Stored once, by content (round 1 F3):** builds we made ourselves, such as llama-server.
+ 103  - They live once in `D:/rnd-data/blobs/<sha256>/` and off-site.
+ 104  - Each window's manifest lists them by SHA-256.
+ 105  - No window points inside another window's folder, so archiving one window can't break another.
+ 106
+ 107  **readouts is unchanged.** It stays the shelf of verified knowledge bases. Its 10.8 GB of generated media is
+ 108  readouts' own matter, listed here only so nobody puts it in rnd-data by accident.
+ 109
+ 110  ## 4. rnd itself: conventions that `rnd check` enforces
+ 111
+ 112  **The size rule (T2).**
+ 113  - A tracked file over 256 KB under `experiments/` fails `rnd check`, unless it's on the grandfather list.
+ 114  - An experiment over 2 MB in total fails the same way.
+ 115  - **The grandfather list** is generated once from today's files, so nothing turns red on day one. It may shrink,
+ 116    never grow, without an R&D review line.
+ 117
+ 118  **The private-file rule (round 1 F5).** `rnd check` fails on any tracked file that:
+ 119  - has a SHA-256 listed in `rnd-data/private/manifest.json`, when a local rnd-data checkout is present;
+ 120  - or matches the private name patterns below;
+ 121
+ 122  - or has a SHA-256 in `private-hashes.txt`, a list of T5 SHA-256s kept in rnd (hashes only, no names or paths),
+ 123    regenerated whenever `rnd-data/private/` changes. This makes the exact check work in CI, where rnd-data isn't
+ 124    checked out (round 2 Q3).
+ 125
+ 126  **The name patterns,** matching hyphens and underscores alike (round 2 Q3): `*blind*`, `*sealed*`,
+ 127  `*gold[-_]key*`, `*item[-_]?text*`, `*review[-_]items*`. They're the backstop for a new private file not yet
+ 128  hashed. A false hit goes on a short, reviewed allow-list.
+ 129
+ 130  **The experiment layout** (round 1 F5):
+ 131  - `README.md`: the design, result and promotion line, as now;
+ 132  - `experiment.json`: its machine-readable record (below);
+ 133  - `data/` and `results/`: T2 only (`results/` is where `rnd collect` writes, and `collect.json` stays at the top);
+ 134  - `scripts/`;
+ 135  - `staging/`: gitignored, the `--source` for `rnd datapack build`, so bulk files can be built into a pack without
+ 136    ever being committed.
+ 137
+ 138  `rnd new-experiment <name>` scaffolds it from the handbook template.
+ 139
+ 140  **`experiment.json`** (schema `rnd-experiment/v1`):
+ 141  - **Written by people:** name, status (`designing`, `running`, `parked`, `closed`), the design doc, the template
+ 142    used, budgets, the licences relied on.
+ 143  - **Written by tools, never typed (round 1 Q5):** the runs.
+ 144    - The window runner writes `outcome.json` for each run.
+ 145    - `rnd runs record --from <outcome.json>` adds or updates the run in `experiment.json`: its id, venue, hardware,
+ 146      date, pins, measured cost, cost unit, projected cost, outcome and raw manifest id.
+ 147    - It writes no machine paths, the same public-safe rule `rnd collect` already enforces.
+ 148  - **Budgets:** one per cost unit (`colab_units`, `usd`, `rig_hours`), each with its cap and who set it. Spending is
+ 149    computed from the runs in that unit, never typed, and never summed across units (round 1 F2).
+ 150
+ 151  ## 5. The database
+ 152
+ 153  The text stays the source of truth, and the database is rebuilt from it. That's how `rnd.db` works today, and at
+ 154  thousands of rows a rebuild still takes well under a second.
+ 155
+ 156  **`rnd.db` gains six tables:**
+ 157  - `experiments` (name PK, status, template, design path);
+ 158  - `runs` (experiment, id, venue, hardware, date, cost, cost_unit, projected_cost, outcome, raw_manifest_id, pins
+ 159    JSON; PK experiment and id);
+ 160  - `budgets` (experiment, cost_unit, cap, set_by; spent is computed in the query; PK experiment and cost_unit);
+ 161  - `files` (sha256 PK, bytes, tier, licence);
+ 162  - `manifest_files` (manifest_id, path, sha256; PK manifest_id and path): a file's logical path inside a run
+ 163    manifest or data pack, so `rnd where` finds it by path as well as by hash (round 2 F9);
+ 164  - `copies` (sha256, store, location; one row per copy).
+ 165
+ 166  **Where the rows come from:**
+ 167  - `experiment.json` files and data-pack manifests, always;
+ 168  - `rnd-data`'s window and run manifests, when a local rnd-data checkout is present.
+ 169
+ 170  **Machine locations stay out of public rnd.** The `copies` rows for D: and off-site come only from rnd-data's
+ 171  private manifests, never from anything committed to rnd.
+ 172
+ 173  **It gains these commands:**
+ 174  - `rnd runs [--model …] [--venue …]`;
+ 175  - `rnd ledger <experiment>`: per cost unit;
+ 176  - `rnd where <sha256 or manifest path>`: every copy.
+ 177
+ 178  `rnd sql` already gives read-only SQL. There is one database, not two (round 1 F7).
+ 179
+ 180  ## 6. rnd-data, the new repository
+ 181
+ 182  - **Name and owner:** `mcp-tool-shop-org/rnd-data`, private.
+ 183  - **What's in git:**
+ 184    - `runs/<id>/manifest.json` for every run from any venue. It lists every file's path, SHA-256, size, tier and
+ 185      licence, and where each copy is. A `models` list at the top gives every generating model with its pin, licence
+ 186      and required notice, and each raw file inherits from it (round 1 Q6).
+ 187    - Raw files under 256 KB that matter: logs, journals, receipts JSON, `outcome.json`.
+ 188    - `private/`: the T5 files and their manifest.
+ 189    - A README.
+ 190  - **What's not in git:**
+ 191    - large raw files, on D: under `D:/rnd-data/runs/<id>/`;
+ 192    - custom builds, under `D:/rnd-data/blobs/<sha256>/`;
+ 193    - and the off-site copy of both.
+ 194  - **The off-site copy:** chosen and filled at P4 (§7) on four criteria, from the vendor's own pages read at the time (round 1
+ 195    Q3):
+ 196    - its file-size and total limits: files reach 159 MB, and the total is 20 GB and growing;
+ 197    - its monthly cost at 20–100 GB, and the egress cost of a full restore;
+ 198    - whether upload and restore can be checked against the manifest's SHA-256s;
+ 199    - a scripted restore test.
+ 200  - **Tooling, in rnd:**
+ 201    - `rnd raw ingest <dir> --run <id>`: it hashes every file, writes the manifest, places each file on D: and verifies
+ 202      it by hash, and puts custom builds in the blob store. It never deletes the source.
+ 203      - **When the source is P0's verified backup on D:,** it hardlinks the files into `D:/rnd-data/` instead of
+ 204        copying them. D: is NTFS, with 3.37 TB free (measured 2026-10-19), so the 20 GB isn't copied over USB again
+ 205        (round 2 Q2).
+ 206      - A hardlink is the same bytes under a second name, not a second copy. D: still counts as one copy in P6's
+ 207        rule.
+ 208    - `rnd raw verify --run <id> [--remote]`: it re-hashes every copy, and with `--remote` it restores one run from
+ 209      off-site into a temporary folder and checks every SHA-256.
+ 210  - **Per org standards:** the repo-first rule before any coding. rnd-data holds no code, so the Atlas map and the
+ 211    coverage bar apply only if it ever gains workflows or code.
+ 212
+ 213  ## 7. The phases, backups first
+ 214
+ 215  | Phase | What | Paid? | Irreversible? |
+ 216  |---|---|---|---|
+ 217  | **P0 backups** | Copy `rnd-local`, `Publisher/receipts` and `rnd-watch` to `D:/backup-2026-10/`, verify every file by SHA-256, and write the hash list beside it. Check whether D: holds the two data packs, and copy them from HF if not. No new repo, no code beyond a copy-and-hash script. | free | no |
+ 218  | **P1 conventions** | The size, layout and private-file rules with the grandfather list, the `experiment.json` schema, `rnd new-experiment`, and a handbook page. No files move. | free | no |
+ 219  | **P2 database** | The five tables, `rnd runs record`, `rnd runs`, `rnd ledger`, `rnd where`. Backfill the live experiments first (critic-signal, stage1-regeneration); the rest as they're touched. | free | no |
+ 220  | **P3 rnd-data** | Create the repo. Ingest from P0's backup on D:, run by run, by hardlink: the receipts and the rig's raw outputs. Move `rnd-local` into `private/` and write `private-hashes.txt`. Builds go into the blob store, once each. | free | creating a repo |
+ 221  | **P4 off-site** | Choose the off-site store on §6's criteria, upload `D:/rnd-data/` (the deduplicated layout, once), and pass `rnd raw verify --run <id> --remote` on at least one run. | **needs a price, and the Director's go** | no (deletable) |
+ 222  | **P5 tidy** | After P3 and P4 are verified, remove the 58 receipts from the Publisher's git (`git rm`, with a pointer to rnd-data) and point rnd-watch's archive at rnd-data. | free | no (git history keeps them) |
+ 223  | **P6 local deletion** | Delete an E: copy only when three things hold: D: and off-site both verify by hash, a restore test has passed, and the Director gives the go. | free | **yes** |
+ 224
+ 225  **Cut from v1 (round 1 F7):**
+ 226  - the separate `rnd-private` repo, since T5 lives in `rnd-data/private/`;
+ 227  - the second database, `rnd-data.db`;
+ 228  - the standalone inventory script, since §1 is measured and ingest hashes as it goes;
+ 229  - moving `verifier-gold`'s bulk out of rnd: without a history rewrite it shrinks the clone by 0 bytes, so it stays.
+ 230    The size rule stops new growth.
+ 231  - moving the existing packs to the org namespace (round 1 F6): they stay at `mcp-tool-shop/rnd-*` because
+ 232    published pages cite them. New packs go under the org.
+ 233
+ 234  ## 8. Compensators (irreversible and outward-facing steps)
+ 235
+ 236  | Step | Undo | State after the undo | Owner |
+ 237  |---|---|---|---|
+ 238  | Create `rnd-data` | archive or delete the repo (Director's go) | as before; local copies untouched | Publisher |
+ 239  | Set up the off-site store and upload | delete the bucket or repo (private, so nothing has leaked) | D: and E: copies remain | Publisher |
+ 240  | Upload a T3 pack to HF (private) | delete the revision or repo; revert the manifest PR | as before | Publisher |
+ 241  | **Flip a T3 pack from private to public** | **none once it's public: copies may exist.** Gated on `rnd datapack verify`, a licence check, a check that no file is in the T5 manifest, and the Director's go. | the pack can be made private again; outside copies remain | Publisher |
+ 242  | **A T5 file pushed to public rnd** | **none once pushed: forks and scrapes may hold it.** Prevented by the private-file rule in `rnd check` and the identity scan before every push. If it happens: remove it, rotate anything secret, and tell the Director. | the file is gone from the tip; history and copies may hold it | R&D |
+ 243  | `git rm` the Publisher's 58 receipts | `git revert` | as before | Publisher |
+ 244  | Delete a local E: copy (P6) | restore from D: or off-site, tested first | as before | Publisher |
+ 245
+ 246  ## 9. Questions for Argon (round 3)
+ 247
+ 248  1. **Round 2's findings.** Are F8 and F9 resolved as §10 lists?
+ 249  2. **The hash list in public rnd.** `private-hashes.txt` publishes the SHA-256 of each private file, but no name or
+ 250     content. Is there any risk in that, for example for a very short file whose content could be guessed and
+ 251     hashed? If so, what's the smallest fix?
+ 252  3. **Is the plan ready** for the Director to approve P0–P3, with P4 waiting on a price?
+ 253
+ 254  **Severity levels:** `blocking`, `before P3` (before the repository is created), `not blocking`.
+ 255
+ 256  ## 10. What changed from v1 and v2
+ 257
+ 258  | Argon round 1 | Where v2 takes it |
+ 259  |---|---|
+ 260  | F1: backups behind the coding; rnd-watch dropped | P0 is now backups, including rnd-watch; rnd-watch's history is T5 (§3) |
+ 261  | F2: costs in mixed units; no raw manifest id | §4 budgets per unit; §5 `runs` has cost_unit and raw_manifest_id; `budgets` keyed by unit |
+ 262  | F3: builds "not stored" yet kept once | §3: hosted weights not stored; our builds stored once by SHA-256 in a blob store |
+ 263  | F4: no off-site phase; the Publisher's 58 tracked receipts | off-site with a restore test (P4 since v3); P5 `git rm` with a pointer; P6 deletion gated on both |
+ 264  | F5: rig runs, staging, collect's results/, gold vs sealed gold | §3 runs from any venue; §4 `staging/`, `results/`, the private-file rule; §3 public gold against sealed keys |
+ 265  | F6: public flips and cited URLs | §8 rows for the public flip and a T5 leak; existing packs stay at their cited URLs |
+ 266  | F7: over-built pieces | cut: rnd-private, rnd-data.db, the inventory script, the verifier-gold move; artifacts/uses replaced by files and copies |
+ 267  | **Round 2** F8: off-site upload before ingest | §7: P3 is now rnd-data (ingest by hardlink from P0's backup), P4 the off-site upload of the deduplicated layout and the remote restore test |
+ 268  | **Round 2** F9: no logical path for `rnd where` | §5: `manifest_files` (manifest_id, path, sha256) |
+ 269  | **Round 2** Q2: P0 stays a plain copy | kept; ingest hardlinks from it (§6) |
+ 270  | **Round 2** Q3: CI can't see rnd-data | §4: `private-hashes.txt` in rnd, and wider name patterns |
+ 271
+ 272  ## Licences
+ 273
+ 274  No model or new source is used. Raw outputs keep their model's terms, recorded once per run in the manifest's
+ 275  `models` list and inherited by each file.

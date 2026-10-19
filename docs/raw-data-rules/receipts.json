@@ -1,0 +1,150 @@
+{
+ "schema": "rnd-data-rules/v1",
+ "about": "What of the Publisher's receipts may be public in rnd-data. Deny by default for content: a file is public only when a public rule names it, it carries no content marker, and the identity scan passed it. Rules are checked in order: identity (from the reasons file), then private, then content markers, then public; anything left is private as 'unapproved'. Agreed with the Publisher on 2026-10-19 after their P3 review; either side changes it only by agreement. Patterns: 'name' matches the file name, 'path' the path under receipts/ (fnmatch; * crosses folders).",
+ "default": "unapproved",
+ "private": [
+  {
+   "name": "items.jsonl*",
+   "reason": "item-text",
+   "why": "items with their answer keys, and the hashes of item files"
+  },
+  {
+   "name": "*.tar",
+   "reason": "item-text",
+   "why": "window outputs and inputs pack items, drafts and generations"
+  },
+  {
+   "name": "*.tar.gz",
+   "reason": "item-text",
+   "why": "the same, compressed"
+  },
+  {
+   "name": "*drafts*",
+   "reason": "item-text",
+   "why": "writer drafts are item text"
+  },
+  {
+   "name": "*generations*",
+   "reason": "item-text",
+   "why": "model generations of items"
+  },
+  {
+   "path": "*/pilot/lesson-*-plan.json",
+   "reason": "item-text",
+   "why": "lesson plans carry the slots' item specs"
+  },
+  {
+   "path": "*rescore*",
+   "reason": "item-text",
+   "why": "rescore inputs, outputs and logs carry items and critic replies"
+  },
+  {
+   "path": "*critic-eval*.json*",
+   "reason": "item-text",
+   "why": "critic-eval inputs and outputs carry items and replies"
+  }
+ ],
+ "content_markers": [
+  {
+   "marker": "CALL_CHECKPOINT",
+   "reason": "item-text",
+   "why": "gzip+base64 call-journal checkpoints carry drafts in an encoding no scan reads"
+  }
+ ],
+ "public": [
+  {
+   "name": "outcome.json",
+   "why": "the window record and its run object"
+  },
+  {
+   "name": "outcome.draft.json",
+   "why": "the Publisher's working copy of the window record"
+  },
+  {
+   "name": "summary.json",
+   "why": "a plan summary"
+  },
+  {
+   "name": "gate.jsonl",
+   "why": "the VM gate's readings"
+  },
+  {
+   "name": "pin-result.json",
+   "why": "model pin checks: hashes of public weights"
+  },
+  {
+   "name": "card-values.json",
+   "why": "a model card's serving values"
+  },
+  {
+   "path": "colab/units-ledger.md",
+   "why": "the spending ledger"
+  },
+  {
+   "name": "*.sh",
+   "why": "launch and job scripts"
+  },
+  {
+   "name": "*.py",
+   "why": "scripts"
+  },
+  {
+   "name": "*.log",
+   "why": "status, window and rig logs, public only without a content marker"
+  },
+  {
+   "name": "*.out",
+   "why": "launch and fetch output, public only without a content marker"
+  },
+  {
+   "name": "*.pid",
+   "why": "process ids"
+  },
+  {
+   "name": "*.end",
+   "why": "end stamps"
+  },
+  {
+   "name": "*.retried",
+   "why": "retry stamps"
+  },
+  {
+   "name": "COMMIT",
+   "why": "a commit id"
+  },
+  {
+   "name": "*.sha256",
+   "why": "hashes of builds and weights (item-file hashes are private above)"
+  },
+  {
+   "name": "llama-server*",
+   "why": "the llama.cpp build and its split pieces"
+  },
+  {
+   "path": "colab/*/README.md",
+   "why": "a window's README (several already published in rnd's colab-golden-path experiment)"
+  },
+  {
+   "path": "colab/*argon-reply-*.md",
+   "why": "Argon's reviews of code (published in rnd's experiments)"
+  },
+  {
+   "name": "pin-result*.json",
+   "why": "model pin checks, every attempt: hashes of public weights"
+  },
+  {
+   "path": "verifier-gold/*",
+   "why": "verifier-gold's sources and README: R&D's published benchmark data: held-out there is a calibration split, not a sealed blind test (the Director's ruling, 2026-10-19)"
+  },
+  {
+   "name": "known-answer-v1.jsonl",
+   "why": "the critic's known-answer set v1 (public in rnd since #134): R&D's published benchmark data: held-out there is a calibration split, not a sealed blind test (the Director's ruling, 2026-10-19)"
+  }
+ ],
+ "licences": [
+  {
+   "name": "llama-server*",
+   "licence": "MIT (llama.cpp, commit 620d2225)"
+  }
+ ]
+}

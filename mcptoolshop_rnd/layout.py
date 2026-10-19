@@ -30,6 +30,9 @@ BASELINE_SCHEMA = "rnd-layout/v1"
 PRIVATE_TAG = "T5-PRIVATE-" + "DO-NOT-PUBLISH"
 PRIVATE_NAMES = ("*blind*", "*sealed*", "*gold[-_]key*", "*item[-_]text*", "*itemtext*", "*review[-_]items*")
 TAG_SCAN_LIMIT = 8 * 1024 * 1024  # files larger than this are bulk data and fail the size rule anyway
+# The exact private match skips files shorter than this: an empty file, `[]` or `{}` hashes the same everywhere, so
+# a match says nothing about where it came from (measured 2026-10-19: 3 such false hits, all 0 or 2 bytes).
+MIN_PRIVATE_MATCH_BYTES = 16
 
 SCHEMA = "rnd-experiment/v1"
 STATUSES = ("designing", "running", "parked", "closed")
@@ -142,17 +145,22 @@ def private_name(path: str) -> bool:
     return any(fnmatch.fnmatchcase(name, g) for g in PRIVATE_NAMES)
 
 
+def private_root(root: Path) -> Path:
+    """The private companion's checkout: $RND_DATA_PRIVATE, else ../rnd-data-private beside the library."""
+    return Path(os.environ["RND_DATA_PRIVATE"]) if os.environ.get("RND_DATA_PRIVATE") else root.parent / "rnd-data-private"
+
+
 def private_manifest(root: Path) -> tuple[set[str], str | None]:
-    """SHA-256s from rnd-data's private manifest, when a checkout is present ($RND_DATA, else ../rnd-data)."""
-    base = Path(os.environ["RND_DATA"]) if os.environ.get("RND_DATA") else root.parent / "rnd-data"
-    p = base / "private" / "manifest.json"
+    """SHA-256s from rnd-data-private's manifest, when a checkout is present. A tagged file's source_sha256 (the
+    original's hash) is included, since a leak of the untagged original would match it."""
+    p = private_root(root) / "manifest.json"
     if not p.exists():
         return set(), None
     try:
         data = json.loads(p.read_text(encoding="utf-8"))
-        return {f["sha256"] for f in data["files"]}, None
+        return {h for f in data["files"] for h in (f["sha256"], f.get("source_sha256")) if h}, None
     except (OSError, json.JSONDecodeError, KeyError, TypeError) as exc:
-        return set(), f"rnd-data private manifest unreadable ({type(exc).__name__}); the exact private check did not run"
+        return set(), f"rnd-data-private's manifest unreadable ({type(exc).__name__}); the exact private check did not run"
 
 
 def sha256(path: Path) -> str:
@@ -208,15 +216,15 @@ def check(root: Path, files: list[str] | None = None, registry_ids: set[str] | N
             continue
         if private_name(p):
             out.append(("error", p, "the name looks private (blind, sealed, gold key, item text, review items); "
-                                    "private files live in rnd-data/private/, or list a published one in the "
+                                    "private files live in rnd-data-private, or list a published one in the "
                                     "baseline's private_allow with a reason"))
             continue
         full = root / p
         if sizes[p] <= TAG_SCAN_LIMIT and tag in full.read_bytes():
-            out.append(("error", p, "carries the private tag; private files live in rnd-data/private/"))
+            out.append(("error", p, "carries the private tag; private files live in rnd-data-private"))
             continue
-        if hashes and sha256(full) in hashes:
-            out.append(("error", p, "matches a file in rnd-data's private manifest"))
+        if hashes and sizes[p] >= MIN_PRIVATE_MATCH_BYTES and sha256(full) in hashes:
+            out.append(("error", p, "matches a file in rnd-data-private's manifest"))
 
     # Experiment records.
     exps = sorted({experiment_of(p) for p in files if experiment_of(p)})

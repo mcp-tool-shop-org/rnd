@@ -145,6 +145,10 @@
       "externals": 0,
       "files": [
         {
+          "hash": "69319fa780c870549dab68102c4728ebfc7e3ecdd2739ea73ffccbb7e8a3d270",
+          "path": "docs/layout.json"
+        },
+        {
           "hash": "d1041b9d7b299b3f305020952c93a8119f83d3d2592bdd30f8ecf0173161a308",
           "path": "docs/standards.md"
         },
@@ -563,7 +567,7 @@
           "path": "experiments/advocate-dataset/seat-build-batch1-writer-swap.md"
         },
         {
-          "hash": "d4d96234faed976a223682dbeecb30914a1016695c1b2c47036ff86aeca0db7e",
+          "hash": "15ef9c1de34e4dbcacd38d847a721c9ca3a8d1b6d7c3de62361160ed6747b4b6",
           "path": "experiments/agent-ab-harness/README.md"
         },
         {
@@ -760,6 +764,18 @@
           "path": "experiments/charts/calibration-reasoning.svg"
         },
         {
+          "hash": "54a98963bc6cb1771523d524fd2f0fea45152d9e30c0816e7bd066026b4bc483",
+          "path": "experiments/charts/critic-calls.svg"
+        },
+        {
+          "hash": "358041a4337578dc4cb4d7de0b86007456a15b7e3001a8f17e4be9c8e698147b",
+          "path": "experiments/charts/critic-catch.svg"
+        },
+        {
+          "hash": "ad6a42f8641e285efb604705deb0e36c15ccd3c9aeae867e06dfc11d20daf850",
+          "path": "experiments/charts/critic-confirmation-slots.svg"
+        },
+        {
           "hash": "e247acd6efeccc978ecf589368299b351c560ac73a65a07c84f40728f3d81df6",
           "path": "experiments/charts/cuda-graphs.svg"
         },
@@ -800,6 +816,9 @@
             "cal_row",
             "cal_rows_chart",
             "chart_calibration",
+            "chart_confirmation_slots",
+            "chart_critic_calls",
+            "chart_critic_catch",
             "chart_cuda",
             "chart_e4b",
             "chart_e4b_latency",
@@ -814,6 +833,8 @@
             "chart_reasoning_default",
             "chart_thinking",
             "chart_vocal",
+            "cs_median_prompt",
+            "cs_rows",
             "e4b_block_paths",
             "e4b_coverage",
             "e4b_fmt_mhz",
@@ -862,14 +883,14 @@
             {
               "in": "manifest",
               "kind": "except",
-              "line": 1103
+              "line": 1255
             }
           ],
-          "hash": "77feaf9e5dfda40055b2fcf7584dc0a8e90a0970305616c1b6926b630d9c65df",
+          "hash": "b8b7809c3e92c241c2c070bed091742c09843c965c069fb0b463995ec31b3281",
           "path": "experiments/charts/make_charts.py"
         },
         {
-          "hash": "1f0e959dc8bcde4e86ef23995e0e27f7bb29c95b11de93484d15ad6790e1111e",
+          "hash": "8bf680c272966c1d3587becefc698c712e3d096a49c1f774f4a31ed2a44ccb87",
           "path": "experiments/charts/manifest.json"
         },
         {
@@ -2929,7 +2950,7 @@
           "path": "experiments/local-builders/argon-brief-design-review.md"
         },
         {
-          "hash": "36cd89bbd95f2918528ae40b6ebfc1b91c3f17daccc0db708f36251b0bc9e207",
+          "hash": "ebb459e5ba6942a106a3e64b9e3f612545752f1cd606dc3df8c86ae123bedf70",
           "path": "experiments/local-builders/card-values.json"
         },
         {
@@ -3794,8 +3815,128 @@
           "path": "experiments/stage1-regeneration/critic-control/known-answer-v2.jsonl"
         },
         {
+          "hash": "51f80f4f9f259bd8c2c82d7c20d7a891b32d1eb55661d449aa0bd837bfddac12",
+          "path": "experiments/stage1-regeneration/critic-signal/DESIGN.md"
+        },
+        {
+          "hash": "e8f2265c852e62ec491c726dc87f8632bf7e53ac8582bd99bb2fdd7be61025ca",
+          "path": "experiments/stage1-regeneration/critic-signal/PHASE-0-1.md"
+        },
+        {
+          "hash": "d9f47415cc682d7812ea7f7079ad3bc49776464fa69a66adc4b472cd2160e412",
+          "path": "experiments/stage1-regeneration/critic-signal/PHASE-2-3.md"
+        },
+        {
+          "hash": "10c475a3a0f2005277c1a3900913d98783226abac6f7c3dbbadd5d35f54410f9",
+          "path": "experiments/stage1-regeneration/critic-signal/PHASE-4.md"
+        },
+        {
+          "hash": "5b7ef1aea55ef2f8c205aca46cc25cfad102e8f354db09705ba91538f75dc38d",
+          "path": "experiments/stage1-regeneration/critic-signal/PLAN-ROUND4.md"
+        },
+        {
+          "hash": "f1dfbf695e3775327b4760e1c5446acdd3d96a6fe5474fb0ac638c9d7bba9002",
+          "path": "experiments/stage1-regeneration/critic-signal/SYNTHESIS.md"
+        },
+        {
+          "hash": "d8c2b838d2a616e3f435bb3a851cce931b5c8e4c4b868bfa79a60d0cc84d0ecc",
+          "path": "experiments/stage1-regeneration/critic-signal/ai-studio-visuals-brief.md"
+        },
+        {
+          "hash": "9c1cee6bfbfe74646ac67b617b14265c288e6b71eb504883897d09df6f3b6eae",
+          "path": "experiments/stage1-regeneration/critic-signal/argon-brief-round1.md"
+        },
+        {
+          "hash": "8658c405ef974e2f213b7fc00fa7c58bfb18186f8579141cc0b060f77f0fa708",
+          "path": "experiments/stage1-regeneration/critic-signal/argon-brief-round2.md"
+        },
+        {
+          "hash": "36ecc2b0a66e71824dfba503084967218e67e3712ffeab195953b7e416893d91",
+          "path": "experiments/stage1-regeneration/critic-signal/argon-brief-round3.md"
+        },
+        {
+          "hash": "5cf556572ffaaef9f401083974536df70ea305221332125d5c074c84e7210454",
+          "path": "experiments/stage1-regeneration/critic-signal/argon-brief-round3b.md"
+        },
+        {
+          "hash": "bad77b20f8377349e30145c201e80fe0ce7ff9a01f91dacdda2d9d908e7bb28b",
+          "path": "experiments/stage1-regeneration/critic-signal/argon-brief-round4.md"
+        },
+        {
+          "hash": "31393d0b192599705efd7c8b7993687a6d0261abbac1614a8a6bc4b812f16d5a",
+          "path": "experiments/stage1-regeneration/critic-signal/argon-brief-round4b.md"
+        },
+        {
+          "hash": "f3fa191243c3844cbd78716e2a064f45ccd02f75e9cebd6a61abd5a47eaebc56",
+          "path": "experiments/stage1-regeneration/critic-signal/argon-reply-round1.md"
+        },
+        {
+          "hash": "dae9f791bb8f81ad9d626b29e77244c28aab2af1e6b549e2a39ea68b1512c789",
+          "path": "experiments/stage1-regeneration/critic-signal/argon-reply-round2.md"
+        },
+        {
+          "hash": "f34981f88535c99776f8c7bb138beac09bcb6e4fe199701deaf78e57a8ce3efd",
+          "path": "experiments/stage1-regeneration/critic-signal/data/calls.csv"
+        },
+        {
+          "hash": "9c9f33b0068d4ba990a9f9887dd1852074e5f69a6c2bebaa4785605d838b4b82",
+          "path": "experiments/stage1-regeneration/critic-signal/data/confirm-calls.csv"
+        },
+        {
+          "hash": "000896a02d02f9ab2d61bdecac730ff2e23e294be749ddc22e143d6ee18d03ab",
+          "path": "experiments/stage1-regeneration/critic-signal/data/confirm-outcomes.csv"
+        },
+        {
+          "hash": "d5848c0cf7b045cdbe33e6fdb89b16e3ec29c0d53216b35d1f91784d080da861",
+          "path": "experiments/stage1-regeneration/critic-signal/data/confirmation-prereg.json"
+        },
+        {
+          "hash": "3e8ef3e32f8ee87d1d7faf2441fd45cd3b6ec7cb87d4d86b872520e3b19ffb54",
+          "path": "experiments/stage1-regeneration/critic-signal/data/confirmation-slots.json"
+        },
+        {
+          "hash": "012017174bd0e5ff07a921bcacf0e21730c138720d486950513af7d83d0b5e4c",
+          "path": "experiments/stage1-regeneration/critic-signal/data/outcomes.csv"
+        },
+        {
+          "hash": "6d3d74d2a667fe498d2873d32e4e76071662d4807de12a25f8771148b818858d",
+          "path": "experiments/stage1-regeneration/critic-signal/phase1-results.csv"
+        },
+        {
+          "hash": "fcecff0ecce9df48216f6a04b6fe48e5eb667fcb98e691d0c8cd3962b461b805",
+          "path": "experiments/stage1-regeneration/critic-signal/research-2026-10-19.md"
+        },
+        {
+          "hash": "87b2d0126d9bfb963a0aaf7106e6c45fc1c1ae1565212f75c70387b397563b27",
+          "path": "experiments/stage1-regeneration/critic-signal/scripts/extract_data.py"
+        },
+        {
+          "hash": "7e36b426e3db27e7fe2c801730f2b6b021f7340ba9ca931168cb9e8c4c2419de",
+          "path": "experiments/stage1-regeneration/experiment.json"
+        },
+        {
           "hash": "4f56434df0728d4c3bb0398a1a7fb44737f2c8eb53223315efc0971db1fb1bd7",
           "path": "experiments/stage1-regeneration/pilot/qwen3.8-w0-calls.json"
+        },
+        {
+          "exports": [
+            "main",
+            "run_from"
+          ],
+          "failurePaths": [
+            {
+              "in": "main",
+              "kind": "except",
+              "line": 107
+            }
+          ],
+          "hash": "786cb5c26e3365285c652c8538256da5ee6d0d265408f369163cc82d9be09624",
+          "importsFiles": [
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/layout.py",
+            "mcptoolshop_rnd/runs.py"
+          ],
+          "path": "experiments/stage1-regeneration/scripts/backfill_runs.py"
         },
         {
           "hash": "bc84c4b6b1dead31a83df8b93e8540465d01592b7c18040a5e96f412b025a20a",
@@ -4781,7 +4922,7 @@
       "origin": "mixed",
       "outsidePlaces": [
         {
-          "reads": 47,
+          "reads": 48,
           "where": [
             "caller"
           ],
@@ -4803,7 +4944,7 @@
           "writes": 0
         }
       ],
-      "outsideReads": 49,
+      "outsideReads": 50,
       "outsideWrites": 12,
       "role": "code",
       "testRunners": [
@@ -4878,7 +5019,7 @@
           "path": "instruments/intel-npu.md"
         },
         {
-          "hash": "00cb28a6d18bcce9f586f3152036dc2e96998ed61ec7ed2ccb2b5ba8bde3d1cb",
+          "hash": "d683c60b3d5268d88507bcc55f8386ad5eec39e8294fed3eaff845b90e7baad0",
           "path": "instruments/nemo-relay.md"
         },
         {
@@ -4886,7 +5027,7 @@
           "path": "instruments/nvidia-skill-finder.md"
         },
         {
-          "hash": "3903e6a26afd2a9804a80aa186e48f07eb252fc7a2569beadf5c2d4cc9a670f1",
+          "hash": "a7c8be5e774478cd8e1477ba5c53777752bda76d6bdf9483526da5b90699a3d4",
           "path": "instruments/offrig.md"
         },
         {
@@ -4914,7 +5055,7 @@
           "path": "instruments/research-packs.md"
         },
         {
-          "hash": "0a14bfecd1a182e8a1660098431b68913043a5a9e8fef17f641621181307dc43",
+          "hash": "eadecfd146df61ab8c8d1ed6587e119b4cf2ade7d1b85858b784eff09d73a157",
           "path": "instruments/role-set.md"
         },
         {
@@ -5024,7 +5165,7 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 16,
+      "dynamicReads": 18,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
       "dynamicWrites": 11,
@@ -5035,7 +5176,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "47e4503f90b284788c44b5bb2614021a2b8aec54ca216a0cd832e31629442a96",
+          "hash": "375fe17062809425d8abc9d571eb29c21b69b4e5b5db287db015c7e7e59efd05",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -5159,16 +5300,22 @@
             "cmd_check",
             "cmd_collect",
             "cmd_datapack",
+            "cmd_layout",
+            "cmd_ledger",
             "cmd_list",
             "cmd_new",
+            "cmd_new_experiment",
             "cmd_probe",
+            "cmd_raw",
             "cmd_readouts",
+            "cmd_runs",
             "cmd_search",
             "cmd_show",
             "cmd_sql",
             "cmd_stats",
             "cmd_tools",
             "cmd_watch",
+            "cmd_where",
             "emit",
             "fail",
             "find_root",
@@ -5182,90 +5329,122 @@
             {
               "in": "cmd_search",
               "kind": "except",
-              "line": 108
+              "line": 111
+            },
+            {
+              "in": "cmd_new_experiment",
+              "kind": "except",
+              "line": 266
             },
             {
               "in": "cmd_catalog",
               "kind": "except",
-              "line": 264
+              "line": 310
             },
             {
               "in": "cmd_readouts",
               "kind": "except",
-              "line": 317
+              "line": 363
             },
             {
               "in": "cmd_bump",
               "kind": "except",
-              "line": 345
+              "line": 391
             },
             {
               "in": "cmd_sql",
               "kind": "except",
-              "line": 359
+              "line": 405
+            },
+            {
+              "in": "cmd_runs",
+              "kind": "except",
+              "line": 419
+            },
+            {
+              "in": "cmd_runs",
+              "kind": "except",
+              "line": 432
+            },
+            {
+              "in": "_reasons",
+              "kind": "raise",
+              "line": 527
+            },
+            {
+              "in": "cmd_raw",
+              "kind": "except",
+              "line": 581
+            },
+            {
+              "in": "cmd_raw",
+              "kind": "except",
+              "line": 583
             },
             {
               "in": "_git_head",
               "kind": "except",
-              "line": 372
+              "line": 624
             },
             {
               "in": "cmd_probe",
               "kind": "except",
-              "line": 387
+              "line": 639
             },
             {
               "in": "cmd_watch",
               "kind": "except",
-              "line": 421
+              "line": 673
             },
             {
               "in": "cmd_collect",
               "kind": "except",
-              "line": 483
+              "line": 735
             },
             {
               "in": "cmd_datapack",
               "kind": "except",
-              "line": 520
+              "line": 772
             },
             {
               "in": "cmd_datapack",
               "kind": "except",
-              "line": 550
+              "line": 802
             },
             {
               "in": "cmd_abmine",
               "kind": "except",
-              "line": 559
+              "line": 811
             },
             {
               "in": "cmd_abmine",
               "kind": "except",
-              "line": 570
+              "line": 822
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 711
+              "line": 1013
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 713
+              "line": 1015
             }
           ],
-          "hash": "7786055a83cd4ea505483c47267aa2f97efe83913ef6bb0dea7d521215d3f037",
+          "hash": "11c7df83828652bf6d376dde616e2d72f2adf97d2cd109a568ebf76196a53c62",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/abmine.py",
             "mcptoolshop_rnd/catalog.py",
             "mcptoolshop_rnd/collect.py",
             "mcptoolshop_rnd/datapack.py",
+            "mcptoolshop_rnd/layout.py",
             "mcptoolshop_rnd/model.py",
             "mcptoolshop_rnd/probe.py",
             "mcptoolshop_rnd/readouts.py",
             "mcptoolshop_rnd/release.py",
+            "mcptoolshop_rnd/runs.py",
             "mcptoolshop_rnd/store.py",
             "mcptoolshop_rnd/watch.py"
           ],
@@ -5304,42 +5483,63 @@
             {
               "calls": [
                 {
-                  "line": 87,
+                  "line": 88,
                   "name": "load_all",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 88,
+                  "line": 89,
                   "name": "catalog_dirs",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 89,
+                  "line": 90,
                   "name": "load",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 90,
+                  "line": 91,
                   "name": "Problem",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 92,
+                  "line": 93,
                   "name": "check_all",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 96,
+                  "line": 94,
+                  "name": "Problem",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 95,
+                  "name": "registry_ids",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 95,
+                  "name": "check",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 99,
                   "name": "manifests",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5362,7 +5562,7 @@
                   "via": "open_db"
                 },
                 {
-                  "line": 104,
+                  "line": 107,
                   "name": "search",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5441,8 +5641,53 @@
             {
               "calls": [
                 {
+                  "line": 265,
+                  "name": "new_experiment",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_new_experiment"
+            },
+            {
+              "calls": [
+                {
+                  "line": 277,
+                  "name": "load_baseline",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "branch": "problems",
+                  "line": 280,
+                  "name": "Problem",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 282,
+                  "name": "baseline",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_layout"
+            },
+            {
+              "calls": [
+                {
                   "branch": "args.action == \"sync\"",
-                  "line": 263,
+                  "line": 309,
                   "name": "sync",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5474,7 +5719,7 @@
             {
               "calls": [
                 {
-                  "line": 304,
+                  "line": 350,
                   "name": "root_dir",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5482,14 +5727,14 @@
                 },
                 {
                   "branch": "args.list or not args.query",
-                  "line": 307,
+                  "line": 353,
                   "name": "knowledge_bases",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 315,
+                  "line": 361,
                   "name": "search",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5504,49 +5749,49 @@
             {
               "calls": [
                 {
-                  "line": 338,
+                  "line": 384,
                   "name": "read_version",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 339,
+                  "line": 385,
                   "name": "bump",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 340,
+                  "line": 386,
                   "name": "last_tag",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 341,
+                  "line": 387,
                   "name": "changes",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 341,
+                  "line": 387,
                   "name": "changelog_section",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 343,
+                  "line": 389,
                   "name": "write_version",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 344,
+                  "line": 390,
                   "name": "insert_changelog",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5577,6 +5822,162 @@
             {
               "calls": [
                 {
+                  "branch": "args.action == \"record\"",
+                  "line": 428,
+                  "name": "from_outcome",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "branch": "args.action == \"record\"",
+                  "line": 431,
+                  "name": "record",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 56,
+                  "name": "connect",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  },
+                  "via": "open_db"
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_runs"
+            },
+            {
+              "calls": [
+                {
+                  "line": 56,
+                  "name": "connect",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  },
+                  "via": "open_db"
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_ledger"
+            },
+            {
+              "calls": [
+                {
+                  "branch": "not isinstance(data, dict)",
+                  "line": 527,
+                  "name": "RawError",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                }
+              ],
+              "exported": false,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "_reasons"
+            },
+            {
+              "calls": [
+                {
+                  "line": 547,
+                  "name": "library_files",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                }
+              ],
+              "exported": false,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "_pinned_text"
+            },
+            {
+              "calls": [
+                {
+                  "line": 555,
+                  "name": "rnd_data_root",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 556,
+                  "name": "private_root",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "branch": "args.action == \"verify\"",
+                  "line": 559,
+                  "name": "verify",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "branch": "not isinstance(data, dict)",
+                  "line": 527,
+                  "name": "RawError",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  },
+                  "via": "_reasons"
+                },
+                {
+                  "line": 572,
+                  "name": "ingest_tree",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 547,
+                  "name": "library_files",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  },
+                  "via": "_pinned_text"
+                },
+                {
+                  "line": 578,
+                  "name": "ingest_private",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_raw"
+            },
+            {
+              "calls": [
+                {
+                  "line": 56,
+                  "name": "connect",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  },
+                  "via": "open_db"
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "cmd_where"
+            },
+            {
+              "calls": [
+                {
                   "line": 56,
                   "name": "connect",
                   "target": {
@@ -5585,7 +5986,7 @@
                   "via": "open_db"
                 },
                 {
-                  "line": 386,
+                  "line": 638,
                   "name": "probe",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5600,28 +6001,28 @@
             {
               "calls": [
                 {
-                  "line": 414,
+                  "line": 666,
                   "name": "load_watchlist",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 420,
+                  "line": 672,
                   "name": "load_state",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 423,
+                  "line": 675,
                   "name": "check",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 425,
+                  "line": 677,
                   "name": "save_state",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5637,7 +6038,7 @@
               "calls": [
                 {
                   "branch": "not args.name",
-                  "line": 458,
+                  "line": 710,
                   "name": "experiments",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5645,14 +6046,14 @@
                 },
                 {
                   "branch": "not args.name",
-                  "line": 459,
+                  "line": 711,
                   "name": "load_spec",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 469,
+                  "line": 721,
                   "name": "run",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5668,7 +6069,7 @@
               "calls": [
                 {
                   "branch": "args.action == \"list\"",
-                  "line": 491,
+                  "line": 743,
                   "name": "manifests",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5676,7 +6077,7 @@
                 },
                 {
                   "branch": "args.action == \"list\"",
-                  "line": 492,
+                  "line": 744,
                   "name": "load",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5684,7 +6085,7 @@
                 },
                 {
                   "branch": "args.action == \"build\"",
-                  "line": 516,
+                  "line": 768,
                   "name": "load",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5692,7 +6093,7 @@
                 },
                 {
                   "branch": "args.action == \"build\"",
-                  "line": 524,
+                  "line": 776,
                   "name": "build",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5700,7 +6101,7 @@
                 },
                 {
                   "branch": "args.action == \"build\"",
-                  "line": 529,
+                  "line": 781,
                   "name": "write",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5708,7 +6109,7 @@
                 },
                 {
                   "branch": "args.action == \"verify\"",
-                  "line": 537,
+                  "line": 789,
                   "name": "load",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5716,7 +6117,7 @@
                 },
                 {
                   "branch": "args.action == \"verify\"",
-                  "line": 538,
+                  "line": 790,
                   "name": "verify",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5731,21 +6132,21 @@
             {
               "calls": [
                 {
-                  "line": 558,
+                  "line": 810,
                   "name": "load_record_file",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 576,
+                  "line": 828,
                   "name": "analyze",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 577,
+                  "line": 829,
                   "name": "render",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5956,6 +6357,68 @@
           ],
           "hash": "073af2ad10eff4b171cd8372ae111b94cd9fa013e7fb6c71f3a26e5dd883232a",
           "path": "mcptoolshop_rnd/frontmatter.py"
+        },
+        {
+          "exports": [
+            "baseline",
+            "check",
+            "experiment_of",
+            "library_files",
+            "load_baseline",
+            "new_experiment",
+            "private_manifest",
+            "private_name",
+            "private_root",
+            "registry_ids",
+            "sha256",
+            "size_of",
+            "validate_data",
+            "validate_record"
+          ],
+          "failurePaths": [
+            {
+              "in": "library_files",
+              "kind": "except",
+              "line": 74
+            },
+            {
+              "in": "load_baseline",
+              "kind": "except",
+              "line": 103
+            },
+            {
+              "in": "private_manifest",
+              "kind": "except",
+              "line": 162
+            },
+            {
+              "in": "validate_record",
+              "kind": "except",
+              "line": 261
+            },
+            {
+              "in": "registry_ids",
+              "kind": "except",
+              "line": 430
+            },
+            {
+              "in": "new_experiment",
+              "kind": "raise",
+              "line": 457
+            },
+            {
+              "in": "new_experiment",
+              "kind": "raise",
+              "line": 460
+            },
+            {
+              "in": "new_experiment",
+              "kind": "raise",
+              "line": 464
+            }
+          ],
+          "hash": "98950a1232e0990f43ddd58c2e618eccf60915e995670055a80fea04c4b4db4b",
+          "path": "mcptoolshop_rnd/layout.py"
         },
         {
           "hash": "db6db9862fa048ed0bd6092df80e42a57e22ac83fce3bfa252a60a5a926999c0",
@@ -7032,6 +7495,98 @@
           "path": "mcptoolshop_rnd/release.py"
         },
         {
+          "hash": "4d252900eecc8ed6904211007ef4ed9fe28686e6aa491ffeae203048fce348ca",
+          "path": "mcptoolshop_rnd/run_vocabulary.json"
+        },
+        {
+          "exports": [
+            "from_outcome",
+            "index_rows",
+            "record",
+            "rnd_data_root",
+            "source_paths"
+          ],
+          "failurePaths": [
+            {
+              "in": "from_outcome",
+              "kind": "raise",
+              "line": 44
+            },
+            {
+              "in": "from_outcome",
+              "kind": "raise",
+              "line": 47
+            },
+            {
+              "in": "from_outcome",
+              "kind": "raise",
+              "line": 67
+            },
+            {
+              "in": "from_outcome",
+              "kind": "raise",
+              "line": 71
+            },
+            {
+              "in": "from_outcome",
+              "kind": "raise",
+              "line": 82
+            },
+            {
+              "in": "record",
+              "kind": "raise",
+              "line": 92
+            },
+            {
+              "in": "record",
+              "kind": "except",
+              "line": 96
+            },
+            {
+              "in": "record",
+              "kind": "raise",
+              "line": 97
+            },
+            {
+              "in": "record",
+              "kind": "raise",
+              "line": 101
+            },
+            {
+              "in": "record",
+              "kind": "raise",
+              "line": 110
+            },
+            {
+              "in": "index_rows",
+              "kind": "except",
+              "line": 192
+            },
+            {
+              "in": "index_rows",
+              "kind": "except",
+              "line": 199
+            },
+            {
+              "in": "index_rows",
+              "kind": "raise",
+              "line": 219
+            },
+            {
+              "in": "index_rows",
+              "kind": "except",
+              "line": 229
+            }
+          ],
+          "hash": "31581fe868908b55f8c431642b635f4642f16cb613779eec6a1504f40e090b14",
+          "importsFiles": [
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/datapack.py",
+            "mcptoolshop_rnd/layout.py"
+          ],
+          "path": "mcptoolshop_rnd/runs.py"
+        },
+        {
           "exports": [
             "build",
             "connect",
@@ -7047,14 +7602,15 @@
             {
               "in": "connect",
               "kind": "except",
-              "line": 120
+              "line": 145
             }
           ],
-          "hash": "a4a277a42f04a08efefaf7b14bf438c136a53de5ef59ae7c3949da1b037f407d",
+          "hash": "9edad41b14c52756a60c90168661b517508182b3caf8ab5480bc50f1c8f9b8d0",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/catalog.py",
-            "mcptoolshop_rnd/model.py"
+            "mcptoolshop_rnd/model.py",
+            "mcptoolshop_rnd/runs.py"
           ],
           "path": "mcptoolshop_rnd/store.py"
         },
@@ -7149,11 +7705,18 @@
       "origin": "authored",
       "outsidePlaces": [
         {
-          "reads": 38,
+          "reads": 52,
           "where": [
             "caller"
           ],
-          "writes": 16
+          "writes": 19
+        },
+        {
+          "reads": 1,
+          "where": [
+            "cwd:README.md"
+          ],
+          "writes": 0
         },
         {
           "reads": 2,
@@ -7165,25 +7728,32 @@
         {
           "reads": 1,
           "where": [
+            "cwd:experiments"
+          ],
+          "writes": 0
+        },
+        {
+          "reads": 1,
+          "where": [
             "cwd:instruments"
           ],
           "writes": 0
         },
         {
-          "reads": 2,
+          "reads": 4,
           "where": [
             "cwd:licences"
           ],
           "writes": 0
         }
       ],
-      "outsideReads": 43,
-      "outsideWrites": 16,
+      "outsideReads": 61,
+      "outsideWrites": 19,
       "role": "code",
       "testRunners": [
         "unittest"
       ],
-      "testedBy": 17,
+      "testedBy": 19,
       "unresolvedNamed": [
         {
           "path": "mcptoolshop_rnd/collect.py",
@@ -7255,11 +7825,11 @@
           "path": ".gitattributes"
         },
         {
-          "hash": "23b484da18d545d0f1b540e255952c6bbbc4ff0ab6c398b6d6339aaf6325d81f",
+          "hash": "44f370f946abe689d95d98e7b16900ca99cbeee52dec6f7e7ff6057315fa9cda",
           "path": ".gitignore"
         },
         {
-          "hash": "5eea0c7cb7920b94b5499037db7e53a116a71dc337625a83d0fff484f7ad6564",
+          "hash": "f16823a8af8495935992b89bfa167a5acb433385bf72e8ed675c25db4911f84a",
           "path": "CHANGELOG.md"
         },
         {
@@ -7315,7 +7885,7 @@
           "path": "codecov.yml"
         },
         {
-          "hash": "f5d37e9d621a8b092e22f8cb7d6c95624bfa2c7e314ef181bd1f444c4611277c",
+          "hash": "eab891598d430fc9d71ae44e020c968e9455aae769a2d1c4f33a602655b481b2",
           "path": "pyproject.toml"
         },
         {
@@ -7372,6 +7942,18 @@
         {
           "hash": "632dfead0cbc95cb68b0b07721ed359c3e6ab206846e460212bc6ee23527305e",
           "path": "site/public/charts/calibration-reasoning.svg"
+        },
+        {
+          "hash": "54a98963bc6cb1771523d524fd2f0fea45152d9e30c0816e7bd066026b4bc483",
+          "path": "site/public/charts/critic-calls.svg"
+        },
+        {
+          "hash": "358041a4337578dc4cb4d7de0b86007456a15b7e3001a8f17e4be9c8e698147b",
+          "path": "site/public/charts/critic-catch.svg"
+        },
+        {
+          "hash": "ad6a42f8641e285efb604705deb0e36c15ccd3c9aeae867e06dfc11d20daf850",
+          "path": "site/public/charts/critic-confirmation-slots.svg"
         },
         {
           "hash": "e247acd6efeccc978ecf589368299b351c560ac73a65a07c84f40728f3d81df6",
@@ -7515,7 +8097,7 @@
           "path": "site/src/content/docs/briefs/verifier-calibration.md"
         },
         {
-          "hash": "10ad82cd9e5d3a5a764eaf38bd57564e3749490ce9a1ae539d6f32b9fda88283",
+          "hash": "cceca71195b234a287844f5cad52a5d22d2290be4baef822a2f5942ae68464b5",
           "path": "site/src/content/docs/briefs/verifier-training-data.md"
         },
         {
@@ -7529,6 +8111,10 @@
         {
           "hash": "e1233d36de2bdd75dde301739a533831a3ffdd0fbf0e42a7b047e01165cc907f",
           "path": "site/src/content/docs/handbook/architecture.md"
+        },
+        {
+          "hash": "a9a7fe4fa34f781e936d50bf22934d417091b3250a61df051e007840b16f8842",
+          "path": "site/src/content/docs/handbook/data-layout.md"
         },
         {
           "hash": "092d05827f47fc254e1cc53bcfc2c89ce7a274d21ee1a3073b3480bc3bbbac51",
@@ -7559,6 +8145,10 @@
           "path": "site/src/content/docs/handbook/model-comparisons.md"
         },
         {
+          "hash": "6a51f1ab5d4d3d63e68b79738880b79fd205d95bbe042918db0db9d4de0f7ae1",
+          "path": "site/src/content/docs/handbook/outside-model-briefs.md"
+        },
+        {
           "hash": "20436c3bb64f561adac0e717023687ee088e5ecb9f786f3cf66deb0f466fccb1",
           "path": "site/src/content/docs/handbook/reference.md"
         },
@@ -7567,7 +8157,7 @@
           "path": "site/src/content/docs/handbook/relevance-grading.md"
         },
         {
-          "hash": "c751bdf9b01b8b4c430d0e93fc24ef9b8527588a60bfad7dc64c514ce4cfce39",
+          "hash": "f036c20b00cab2f630e534566a41b67e8021b0e6606d30541f2454a75f9ead52",
           "path": "site/src/content/docs/handbook/rented-gpu-windows.md"
         },
         {
@@ -7619,8 +8209,12 @@
           "path": "site/src/content/docs/newsletter/issue-11.md"
         },
         {
-          "hash": "caaf42816c56fdf1a17b8983ef9658ca4eb9eb49d5670bcfd1861fb9770e2a6e",
+          "hash": "6ea1f474c44b654f7e2ddc859d6b4693bf6179de78bb69de086b0138be0200c7",
           "path": "site/src/content/docs/newsletter/issue-13.md"
+        },
+        {
+          "hash": "01fde7b57ff3f9da666c1972eaf29fc4fe8df5e8d9241a8bfcbb410d28ad8379",
+          "path": "site/src/content/docs/newsletter/issue-14.md"
         },
         {
           "hash": "15e52b4b677090a1b5123840efa4fa14447c28189b60b2d851389352c81db4cc",
@@ -7911,7 +8505,7 @@
           "exports": [
             "make_source"
           ],
-          "hash": "fc6a44b1f0adce626c5130d13e03a53f0dc00a48020d3d00d8b56ea6609edacd",
+          "hash": "9781069ca15a247083bc24ec2df87ea849e90cbfd68c1ca5490c2740548bd92e",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/datapack.py",
@@ -7954,6 +8548,20 @@
             "experiments/charts/make_charts.py"
           ],
           "path": "tests/test_e4b_charts.py",
+          "testFramework": "unittest"
+        },
+        {
+          "exports": [
+            "record"
+          ],
+          "hash": "8257e70400721013b35cc3f172155a80048af26a29a8167ea1e278f55f198fc3",
+          "importsFiles": [
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/layout.py",
+            "tests/test_cli.py",
+            "tests/test_rnd.py"
+          ],
+          "path": "tests/test_layout.py",
           "testFramework": "unittest"
         },
         {
@@ -8006,7 +8614,7 @@
           "testFramework": "unittest"
         },
         {
-          "hash": "734f37be2b4f362967cc44c3d471444f1bec4d610fe60e34d11a19f3d30cbc45",
+          "hash": "ba3e3ab93b415736d67100e626806a684dc4811afbb6f6bfd458f86996983c13",
           "path": "tests/test_packaging_wheel.py",
           "testFramework": "unittest"
         },
@@ -8034,7 +8642,7 @@
           "exports": [
             "write"
           ],
-          "hash": "e1e5ca0921f31c1482f27360dcd90361edc7b91ab8bc133a2100e4643e2a2da3",
+          "hash": "c4cefb71edfdfd5492ef43aa00bcde16dbac829b2d380357df9b26be58b00ca8",
           "importOrder": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/catalog.py",
@@ -8056,6 +8664,22 @@
             "mcptoolshop_rnd/store.py"
           ],
           "path": "tests/test_rnd.py",
+          "testFramework": "unittest"
+        },
+        {
+          "exports": [
+            "record"
+          ],
+          "hash": "ee476a10f77adefdc3d29663b04b4388340b892d94690deedd7506dc29fa92e9",
+          "importsFiles": [
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/layout.py",
+            "mcptoolshop_rnd/runs.py",
+            "mcptoolshop_rnd/store.py",
+            "tests/test_cli.py",
+            "tests/test_rnd.py"
+          ],
+          "path": "tests/test_runs.py",
           "testFramework": "unittest"
         },
         {
@@ -8226,7 +8850,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 23
+          "files": 25
         },
         {
           "boundary": "root",
@@ -8236,7 +8860,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 23
+          "files": 25
         },
         {
           "boundary": "experiments",
@@ -8340,7 +8964,7 @@
         },
         {
           "coverage": true,
-          "files": 23,
+          "files": 25,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -8624,7 +9248,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 23
+          "files": 25
         },
         {
           "boundary": "root",
@@ -8703,7 +9327,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 13
+          "files": 15
         }
       ],
       "readers": [
@@ -8796,8 +9420,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "d3db5396d47a4e5202a2bd5c8a91e3b75e0a1ce4",
-    "tracked": 957
+    "commit": "96f1277c83728b5b78b849304c0a16e043161d40",
+    "tracked": 999
   },
   "landings": [
     {
@@ -8930,6 +9554,11 @@
           "confidence": "text"
         },
         {
+          "by": "experiments/stage1-regeneration/experiment.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "pyproject.toml",
           "call": "configuration",
           "confidence": "config"
@@ -8942,6 +9571,24 @@
         },
         {
           "by": "tests/test_cli.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        },
+        {
+          "by": "tests/test_datapack.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        },
+        {
+          "by": "tests/test_layout.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        },
+        {
+          "by": "tests/test_runs.py",
           "call": "literal",
           "confidence": "ast",
           "fromTests": true
@@ -8965,6 +9612,18 @@
         }
       ],
       "target": "catalogs",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "tests/test_layout.py",
+          "call": "get",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "docs/tag-page.md",
       "writers": []
     },
     {
@@ -9646,6 +10305,11 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/natural-errors/build.py",
           "call": "literal",
           "confidence": "ast"
@@ -9725,6 +10389,22 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/natural-errors/data/review_items.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/natural-errors/build.py",
           "call": "literal",
           "confidence": "ast"
@@ -9772,6 +10452,11 @@
     },
     {
       "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
         {
           "by": "experiments/natural-errors/build.py",
           "call": "literal",
@@ -9932,6 +10617,17 @@
       ]
     },
     {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/ollama-cuda-backend/diag-analysis-v6.json",
+      "writers": []
+    },
+    {
       "readers": [],
       "target": "experiments/ollama-cuda-backend/diag-analysis.json",
       "tracked": false,
@@ -9941,6 +10637,17 @@
           "confidence": "ast"
         }
       ]
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/ollama-cuda-backend/diag-record-v6.jsonl",
+      "writers": []
     },
     {
       "readers": [
@@ -10045,6 +10752,76 @@
           "by": "experiments/charts/make_charts.py",
           "call": "literal",
           "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/stage1-regeneration/critic-signal/data",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/stage1-regeneration/critic-signal/data/calls.csv",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/stage1-regeneration/critic-signal/data/confirmation-slots.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/stage1-regeneration/critic-signal/data/outcomes.csv",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/stage1-regeneration/scripts/backfill_runs.py",
+          "call": "read_text",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/stage1-regeneration/experiment.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
         }
       ],
       "target": "experiments/stage1-regeneration/pilot",
@@ -10074,6 +10851,17 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/stage1-role-eval/results/2026-10-10-sealed-baseline-k.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "experiments/verifier-gold/calibration/difficulty.py",
           "call": "read_text",
           "confidence": "ast"
@@ -10085,6 +10873,105 @@
         }
       ],
       "target": "experiments/verifier-gold",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/blind_pass2_docs_input.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/blind_pass2_docs_key.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/blind_pass2_docs_output.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/blind_pass2_input.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/blind_pass2_key.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/blind_pass2_offrig_input.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/blind_pass2_offrig_key.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/blind_pass2_offrig_output.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/blind_pass2_output.json",
       "writers": []
     },
     {
@@ -10161,6 +11048,11 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
           "confidence": "config"
@@ -10182,6 +11074,11 @@
     },
     {
       "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
         {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
@@ -10205,6 +11102,11 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
           "confidence": "config"
@@ -10226,6 +11128,11 @@
     },
     {
       "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
         {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
@@ -10249,6 +11156,11 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
           "confidence": "config"
@@ -10270,6 +11182,11 @@
     },
     {
       "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
         {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
@@ -10293,6 +11210,11 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
           "confidence": "config"
@@ -10314,6 +11236,11 @@
     },
     {
       "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
         {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
@@ -10337,6 +11264,11 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
           "confidence": "config"
@@ -10358,6 +11290,11 @@
     },
     {
       "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
         {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
@@ -10381,6 +11318,11 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
           "confidence": "config"
@@ -10402,6 +11344,11 @@
     },
     {
       "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
         {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
@@ -10457,6 +11404,11 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
           "confidence": "config"
@@ -10495,6 +11447,17 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-gemma-r2/cal-gemma4_31b-reasoning-heldout/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "experiments/charts/make_charts.py",
           "call": "literal",
           "confidence": "ast"
@@ -10521,6 +11484,11 @@
     },
     {
       "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
         {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
@@ -10575,6 +11543,11 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
           "confidence": "config"
@@ -10585,6 +11558,11 @@
     },
     {
       "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
         {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
@@ -10597,6 +11575,11 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
           "confidence": "config"
@@ -10607,6 +11590,11 @@
     },
     {
       "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
         {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
@@ -10619,6 +11607,11 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
           "confidence": "config"
@@ -10630,12 +11623,39 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
           "confidence": "config"
         }
       ],
       "target": "experiments/verifier-gold/calibration/results/2026-10-09-thinking-off/cal-qwen3_8b-reasoning-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/off-cal-nemotron-3.5-lightning_latest-grounded-tune/verdicts.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-10-nemotron/off-cal-nemotron-3.5-lightning_latest-reasoning-tune/verdicts.jsonl",
       "writers": []
     },
     {
@@ -10657,6 +11677,11 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/verifier-gold/crossfamily/run_labeller.py",
           "call": "read_text",
           "confidence": "ast"
@@ -10671,7 +11696,13 @@
       ]
     },
     {
-      "readers": [],
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
       "target": "experiments/verifier-gold/crossfamily/blind_key.json",
       "writers": [
         {
@@ -10679,6 +11710,17 @@
           "confidence": "ast"
         }
       ]
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/crossfamily/blind_out_gemma4-31b.json",
+      "writers": []
     },
     {
       "readers": [],
@@ -10693,6 +11735,176 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/b2-adjudicated.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/b2_blind_in_1.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/b2_blind_in_2.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/b2_blind_key.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/b2_blind_out_1.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/b2_blind_out_2.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/blind_in_1.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/blind_in_2.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/blind_key.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/blind_out_1.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/blind_out_2.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/hard_blind_in.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/hard_blind_key.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/hard_blind_out_A.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/hard_blind_out_B.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/verifier-gold/calibration/quote_match_posthoc.py",
           "call": "literal",
           "confidence": "ast"
@@ -10704,6 +11916,28 @@
         }
       ],
       "target": "experiments/verifier-gold/diffs/reasoning-diffs.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/source-publisher-b2.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/source-publisher-f3f3f66.jsonl",
       "writers": []
     },
     {
@@ -10747,6 +11981,11 @@
     },
     {
       "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
         {
           "by": "experiments/charts/make_charts.py",
           "call": "literal",
@@ -10819,6 +12058,11 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
           "confidence": "config"
@@ -10840,6 +12084,11 @@
     },
     {
       "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
         {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
@@ -10863,6 +12112,11 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
           "confidence": "config"
@@ -10884,6 +12138,11 @@
     },
     {
       "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
         {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
@@ -10907,6 +12166,11 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
           "confidence": "config"
@@ -10929,6 +12193,11 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/charts/manifest.json",
           "call": "configuration",
           "confidence": "config"
@@ -10939,6 +12208,110 @@
     },
     {
       "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/prs/blind_in_1.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/prs/blind_in_2.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/prs/blind_in_3.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/prs/blind_in_4.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/prs/blind_key.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/prs/blind_out_1.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/prs/blind_out_2.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/prs/blind_out_3.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/prs/blind_out_4.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        },
         {
           "by": "experiments/verifier-gold/calibration/quote_match_posthoc.py",
           "call": "literal",
@@ -10951,6 +12324,17 @@
         }
       ],
       "target": "experiments/verifier-gold/prs/grounded-prs.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/prs/source-publisher-5894788.jsonl",
       "writers": []
     },
     {
@@ -10975,6 +12359,12 @@
           "by": "licences/snapshot.py",
           "call": "read_text",
           "confidence": "ast"
+        },
+        {
+          "by": "tests/test_layout.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
         }
       ],
       "target": "licences/registry.json",
@@ -11025,6 +12415,17 @@
         }
       ],
       "target": "mcptoolshop_rnd/localbuilders/setup_vm.sh",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "mcptoolshop_rnd/layout.py",
+          "call": "read_text",
+          "confidence": "ast"
+        }
+      ],
+      "target": "mcptoolshop_rnd/run_vocabulary.json",
       "writers": []
     },
     {
@@ -11091,6 +12492,29 @@
         }
       ],
       "target": "site/src/content/docs/handbook",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "site/src/content/docs/handbook/data-layout.md",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "tests/test_layout.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "site/src/content/docs/handbook/model-comparisons.md",
       "writers": []
     },
     {
@@ -11284,7 +12708,7 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 56,
+  "testFiles": 58,
   "testsNotRun": [
     "experiments/cuda-graphs/test_graphed_heads.py",
     "experiments/data-designer/tests/test_lockdown.py",
@@ -11343,6 +12767,10 @@
     {
       "hash": "f893548264012ef498e1205c240560e3c2d76c18066679a7300045fae8f51ee1",
       "path": "scripts/colab/rates.sh"
+    },
+    {
+      "hash": "4dccfc07386949a5cf524bb467497b65bfa272ff8022ca8016f4882705ee764e",
+      "path": "scripts/hooks/pre-push"
     }
   ]
 }

@@ -86,6 +86,9 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("receipts", help="the Publisher's receipts folder")
     ap.add_argument("--dry-run", action="store_true", help="map and validate every run, write nothing")
+    ap.add_argument("--link-raw", metavar="RND_DATA",
+                    help="re-record every run with raw_manifest_id, the id of its run in this rnd-data checkout "
+                         "(scale plan P3); a run whose manifest isn't there fails")
     args = ap.parse_args(argv)
     receipts = Path(args.receipts)
     written, kept, failed = 0, 0, []
@@ -98,11 +101,18 @@ def main(argv=None):
             continue
         try:
             run = run_from(path, rel)
+            if args.link_raw:
+                # The run's folder is the one holding its outcome.json; its rnd-data id is that path under receipts.
+                raw_id = "receipts--" + rel.rsplit("/", 1)[0].replace("/", "--")
+                if not (Path(args.link_raw) / "runs" / raw_id / "manifest.json").is_file():
+                    failed.append(f"{rel}: no rnd-data run {raw_id}")
+                    continue
+                run["raw_manifest_id"] = raw_id
             if args.dry_run:
                 candidate["runs"].append(run)
                 print(f"would record {run['id']}: {run['outcome']}, {run['cost']} {run['cost_unit']}")
                 continue
-            runs.record(ROOT, EXPERIMENT, run)
+            runs.record(ROOT, EXPERIMENT, run, replace=bool(args.link_raw))
             written += 1
         except runs.RecordError as exc:
             if exc.code == "RUN_EXISTS":

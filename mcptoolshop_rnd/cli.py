@@ -569,9 +569,13 @@ def cmd_raw(args):
         if args.action == "ingest":
             if not args.prefix:
                 return fail("RAW_USAGE", "ingest needs --prefix (the run ids' first part, e.g. receipts)")
-            st = rawdata.ingest_tree(source, public, private, args.prefix, _classifier(reasons, True),
+            if args.rules:
+                classify, licence_for = rawdata.rules_classifier(rawdata.load_rules(Path(args.rules)), source, reasons)
+            else:
+                classify, licence_for = _classifier(reasons, True), None
+            st = rawdata.ingest_tree(source, public, private, args.prefix, classify,
                                      exclude=tuple(args.exclude or ()), link=not args.copy, dry_run=args.dry_run,
-                                     commit=_git_head(), update=args.update)
+                                     commit=_git_head(), update=args.update, licence_for=licence_for)
         else:
             if not args.name:
                 return fail("RAW_USAGE", "private needs --as NAME (the folder under private/)")
@@ -981,6 +985,7 @@ def build_parser():
     s.add_argument("--prefix", help="ingest: the run ids' first part, e.g. receipts")
     s.add_argument("--as", dest="name", help="private: the folder under private/ in rnd-data-private")
     s.add_argument("--reasons", help="a JSON file mapping paths or folder/ prefixes to a private reason")
+    s.add_argument("--rules", help="ingest: a rules file (deny by default for content), e.g. docs/raw-data-rules/receipts.json")
     s.add_argument("--exclude", action="append", help="a path or folder to leave out (repeatable)")
     s.add_argument("--copy", action="store_true", help="ingest: copy blobs instead of hard-linking them")
     s.add_argument("--update", action="store_true",

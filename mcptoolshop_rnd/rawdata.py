@@ -21,6 +21,7 @@ Ingest never deletes or changes its source. From a source on the same volume as 
 hard-linked: the same bytes under a second name, which is not a second copy and is never counted as one.
 """
 
+import fnmatch
 import hashlib
 import json
 import os
@@ -102,6 +103,84 @@ def plan_runs(source: Path, exclude: tuple = ()) -> dict[str, list[str]]:
     return groups
 
 
+def run_dirs_of(groups: dict[str, list[str]]) -> set[str]:
+    """The groups that are runs (their folder holds an outcome.json); every other group is a collection."""
+    return {g for g, files in groups.items()
+            if any(f == f"{g}/outcome.json" or (g == "." and f == "outcome.json") for f in files)}
+
+
+# ------------------------------------------------------------------ rules (what may be public)
+
+RULES_SCHEMA = "rnd-data-rules/v1"
+
+
+def load_rules(path: Path) -> dict:
+    """A rules file: deny by default for content (see docs/raw-data-rules/)."""
+    try:
+        rules = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise RawError("RULES_UNREADABLE", f"{path}: {exc}")
+    if rules.get("schema") != RULES_SCHEMA:
+        raise RawError("RULES_SCHEMA", f"{path}: schema must be {RULES_SCHEMA!r}")
+    for r in rules.get("private", []) + rules.get("content_markers", []) + [{"reason": rules.get("default")}]:
+        if r.get("reason") not in REASONS:
+            raise RawError("RULES_REASON", f"{path}: {r.get('reason')!r} is not one of {', '.join(REASONS)}")
+    for r in rules.get("private", []) + rules.get("public", []) + rules.get("licences", []):
+        if not (r.get("name") or r.get("path")):
+            raise RawError("RULES_PATTERN", f"{path}: every rule needs a 'name' or 'path' pattern")
+    return rules
+
+
+def _rule_matches(rule: dict, rel: str) -> bool:
+    name = rel.rsplit("/", 1)[-1]
+    if rule.get("name") and not fnmatch.fnmatchcase(name, rule["name"]):
+        return False
+    if rule.get("path") and not fnmatch.fnmatchcase(rel, rule["path"]):
+        return False
+    return True
+
+
+def _has_marker(path: Path, marker: bytes) -> bool:
+    tail = b""
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(8 << 20), b""):
+            if marker in tail + chunk:
+                return True
+            tail = chunk[-(len(marker) - 1):] if len(marker) > 1 else b""
+    return False
+
+
+def rules_classifier(rules: dict, source: Path, reasons: dict):
+    """(classify, licence_for) for ingest_tree. classify(rel) -> None (public) or a reason, in the rules' order:
+    the reasons file (identity), a private-looking name, the private rules, the content markers, the public rules,
+    then the default."""
+    keys = sorted(reasons, key=len, reverse=True)
+
+    def classify(rel):
+        for k in keys:
+            if rel == k or (k.endswith("/") and rel.startswith(k)):
+                return reasons[k]
+        if layout.private_name(rel):
+            return "sealed" if "sealed" in rel.lower() else "blind"
+        for r in rules.get("private", []):
+            if _rule_matches(r, rel):
+                return r["reason"]
+        for m in rules.get("content_markers", []):
+            if _has_marker(source / rel, m["marker"].encode()):
+                return m["reason"]
+        for r in rules.get("public", []):
+            if _rule_matches(r, rel):
+                return None
+        return rules["default"]
+
+    def licence_for(rel):
+        for r in rules.get("licences", []):
+            if _rule_matches(r, rel):
+                return r["licence"]
+        return None
+    return classify, licence_for
+
+
 def _place_blob(src: Path, sha: str, root: Path, link: bool) -> str:
     target = root / blob_rel(sha)
     if target.exists():
@@ -150,7 +229,8 @@ def _copy_checked(src: Path, dst: Path, sha: str) -> None:
 
 
 def ingest_tree(source: Path, public: Path, private: Path, prefix: str, classify, *, exclude: tuple = (),
-                link: bool = True, dry_run: bool = False, commit: str | None = None, update: bool = False) -> dict:
+                link: bool = True, dry_run: bool = False, commit: str | None = None, update: bool = False,
+                licence_for=None) -> dict:
     """Ingest every file under `source` as runs `<prefix>--<group>`. `classify(rel)` returns None for a public file
     or a reason from REASONS. Idempotent: a run whose manifest exists and matches is left alone; one that differs is
     refused, since its source changed after it was ingested, unless `update` replaces it."""
@@ -162,7 +242,10 @@ def ingest_tree(source: Path, public: Path, private: Path, prefix: str, classify
     known_private = {f["path"] for f in pm["files"]}
     stats = {"runs": 0, "unchanged": 0, "public": 0, "private": 0, "blobs_linked": 0, "blobs_copied": 0,
              "blobs_present": 0, "bytes": 0}
-    for group, files in sorted(plan_runs(source, exclude).items()):
+    groups = plan_runs(source, exclude)
+    is_run = run_dirs_of(groups)
+    licence_for = licence_for or (lambda rel: None)
+    for group, files in sorted(groups.items()):
         rid = run_id(f"{prefix}/{group}" if group != "." else prefix)
         entries, copies, counted, private_rows = [], [], {}, []
         for rel in files:
@@ -173,8 +256,8 @@ def ingest_tree(source: Path, public: Path, private: Path, prefix: str, classify
             if reason is not None and reason not in REASONS:
                 raise RawError("BAD_REASON", f"{rel}: {reason!r} is not one of {', '.join(REASONS)}")
             if reason is None:
-                entries.append({"path": inner, "sha256": sha, "bytes": size, "tier": "T4", "licence": None,
-                                "visibility": "public"})
+                entries.append({"path": inner, "sha256": sha, "bytes": size, "tier": "T4",
+                                "licence": licence_for(rel), "visibility": "public"})
                 store_, loc = ("rnd-data", f"runs/{rid}/files/{inner}") if size <= SMALL_LIMIT else ("d", blob_rel(sha))
                 copies.append({"sha256": sha, "store": store_, "location": loc})
             else:
@@ -187,14 +270,15 @@ def ingest_tree(source: Path, public: Path, private: Path, prefix: str, classify
                 store_, loc = ("rnd-data-private", ppath) if size <= SMALL_LIMIT else ("d", blob_rel(sha))
                 private_rows.append(({"path": ppath, "sha256": sha, "bytes": size, "reason": reason, "tagged": False},
                                      {"sha256": sha, "store": store_, "location": loc}, src, size))
-        manifest = {"schema": RUN_SCHEMA, "id": rid, "source": f"{prefix}/{group}" if group != "." else prefix,
+        manifest = {"schema": RUN_SCHEMA, "id": rid, "kind": "run" if group in is_run else "collection",
+                    "source": f"{prefix}/{group}" if group != "." else prefix,
                     "models": [], "licence_note": "generating models not yet recorded for this run",
                     "files": entries, "copies": copies, "private_files": dict(sorted(counted.items()))}
         mpath = public / "runs" / rid / "manifest.json"
         updating = False
         if mpath.exists():
             old = json.loads(mpath.read_text(encoding="utf-8"))
-            if all(old.get(k) == manifest[k] for k in ("files", "copies", "private_files")):
+            if all(old.get(k) == manifest[k] for k in ("kind", "files", "copies", "private_files")):
                 stats["unchanged"] += 1
                 continue
             if not update:

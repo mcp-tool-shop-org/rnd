@@ -239,3 +239,90 @@ class RawCommandTests(CliBase):
         bad = write(self.root, "bad.json", "[1]")
         self.assertEqual(self.run_cli("raw", "ingest", str(self.src), "--prefix", "r", "--reasons", str(bad))[0], 1)
         self.assertEqual(self.run_cli("raw", "ingest", str(self.src), "--prefix", "r", "--reasons", "missing.json")[0], 1)
+
+
+RULES = Path(__file__).resolve().parent.parent / "docs" / "raw-data-rules" / "receipts.json"
+
+
+class ReceiptRulesTests(unittest.TestCase):
+    """The Publisher's P3 review classes, against the real rules file: each lands where it must."""
+
+    def setUp(self):
+        self.base = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, self.base, True)
+        self.src = self.base / "receipts"
+        w = "colab/window14b-x-20261019"
+        self.files = {
+            # must be private
+            f"{w}/critic-eval-inputs.tar.gz": "item-text",
+            f"{w}/out/items.jsonl": "item-text",
+            f"{w}/out/items.jsonl.sha256": "item-text",
+            f"{w}/pilot-out.tar": "item-text",
+            f"{w}/timing/gw/drafts.jsonl": "item-text",
+            f"{w}/midpoint/generations-w0.jsonl": "item-text",
+            f"{w}/out/pilot/lesson-T02-plan.json": "item-text",
+            "colab/window13t-rescore-20261018/out/rescore/rescore.log": "item-text",
+            "colab/window13t-rescore-20261018/rescore-out.tar": "item-text",
+            f"{w}/critic-eval-out.json": "item-text",
+            f"{w}/job-with-checkpoints.log": "item-text",
+            "verifier-gold/README.md": "sealed",
+            "verifier-gold/reasoning-prs-2026-10-08.jsonl": "sealed",
+            f"{w}/blind_key.json": "blind",
+            "commandui/wack-report.xml": "unapproved",
+            f"{w}/notes.md": "unapproved",
+            f"{w}/launch.out": "identity",
+            # public
+            f"{w}/outcome.json": None,
+            f"{w}/gate.jsonl": None,
+            f"{w}/job.log": None,
+            f"{w}/launch.sh": None,
+            f"{w}/upload/llama-server.gz.part00": None,
+            "colab/units-ledger.md": None,
+        }
+        for rel in self.files:
+            body = "plain\n"
+            if rel.endswith("job-with-checkpoints.log"):
+                body = "step 1\nCALL_CHECKPOINT H4sIAAAA...\n"
+            write(self.src, rel, body)
+        self.rules = rawdata.load_rules(RULES)
+        self.classify, self.licence_for = rawdata.rules_classifier(self.rules, self.src,
+                                                                   {f"{w}/launch.out": "identity"})
+
+    def test_every_class_lands_where_it_must(self):
+        got = {rel: self.classify(rel) for rel in self.files}
+        self.assertEqual(got, self.files)
+
+    def test_licences_and_run_kinds(self):
+        self.assertEqual(self.licence_for("colab/w/upload/llama-server.gz"), "MIT (llama.cpp, commit 620d2225)")
+        self.assertIsNone(self.licence_for("colab/w/job.log"))
+        public, private, blobs = make_stores(self.base)
+        with mock.patch.dict(os.environ, {"RND_DATA_STORE_D": str(blobs)}):
+            rawdata.ingest_tree(self.src, public, private, "receipts", self.classify, licence_for=self.licence_for,
+                                link=False)
+        kinds = {p.parent.name: json.loads(p.read_text())["kind"] for p in (public / "runs").glob("*/manifest.json")}
+        self.assertEqual(kinds["receipts--colab--window14b-x-20261019"], "run")
+        self.assertEqual(kinds["receipts--verifier-gold"], "collection")
+        m = json.loads((public / "runs/receipts--colab--window14b-x-20261019/manifest.json").read_text())
+        public_paths = {f["path"] for f in m["files"] if f["visibility"] == "public"}
+        self.assertEqual(public_paths, {"outcome.json", "gate.jsonl", "job.log", "launch.sh",
+                                        "upload/llama-server.gz.part00"})
+        self.assertEqual({f["path"]: f["licence"] for f in m["files"]}["upload/llama-server.gz.part00"],
+                         "MIT (llama.cpp, commit 620d2225)")
+        self.assertEqual(rawdata.verify(public, private), [])
+
+    def test_bad_rules_are_refused(self):
+        for bad in ({"schema": "x"}, {"schema": rawdata.RULES_SCHEMA, "default": "nope"},
+                    {"schema": rawdata.RULES_SCHEMA, "default": "unapproved", "public": [{"why": "no pattern"}]}):
+            p = write(self.base, "r.json", json.dumps(bad))
+            with self.assertRaises(rawdata.RawError):
+                rawdata.load_rules(p)
+        with self.assertRaises(rawdata.RawError):
+            rawdata.load_rules(self.base / "missing.json")
+
+    def test_a_marker_split_across_chunks_is_found(self):
+        p = self.base / "big.log"
+        with mock.patch.object(rawdata, "_has_marker", wraps=rawdata._has_marker):
+            p.write_bytes(b"x" * ((8 << 20) - 5) + b"CALL_CHECKPOINT")
+            self.assertTrue(rawdata._has_marker(p, b"CALL_CHECKPOINT"))
+            p.write_bytes(b"x" * ((8 << 20) + 10))
+            self.assertFalse(rawdata._has_marker(p, b"CALL_CHECKPOINT"))

@@ -11,6 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.18.0.0] - 2026-10-19
+
+- rnd raw ingest/private/verify: rnd-data (public) and rnd-data-private (only the named exceptions), files over 256 KB once by content in a blob store, --update for a changed source
+- docs/raw-data-rules/receipts.json: deny by default for content, co-owned with the Publisher; a public manifest never carries a private file's hash
+- rnd check and the index read the companion; the exact private match skips files under 16 bytes; scripts/hooks/pre-push runs rnd check
+- stage1-regeneration: all 74 runs carry raw_manifest_id; docs/: the approved scale plan, its review history, the Argon system instructions
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.17.0.0] - 2026-10-19
 
 - rnd.db: six record tables (experiments, runs, budgets, files, manifest_files, copies) rebuilt from experiment records, data-pack manifests and rnd-data's manifests; the schema's hash joins the index fingerprint

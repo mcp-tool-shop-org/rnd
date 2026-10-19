@@ -4,11 +4,6 @@
  "default": "unapproved",
  "private": [
   {
-   "path": "verifier-gold/*",
-   "reason": "sealed",
-   "why": "a held-out gold set with labels (its README's heldout split)"
-  },
-  {
    "name": "items.jsonl*",
    "reason": "item-text",
    "why": "items with their answer keys, and the hashes of item files"
@@ -136,6 +131,14 @@
   {
    "name": "pin-result*.json",
    "why": "model pin checks, every attempt: hashes of public weights"
+  },
+  {
+   "path": "verifier-gold/*",
+   "why": "verifier-gold's sources and README: R&D's published benchmark data: held-out there is a calibration split, not a sealed blind test (the Director's ruling, 2026-10-19)"
+  },
+  {
+   "name": "known-answer-v1.jsonl",
+   "why": "the critic's known-answer set v1 (public in rnd since #134): R&D's published benchmark data: held-out there is a calibration split, not a sealed blind test (the Director's ruling, 2026-10-19)"
   }
  ],
  "licences": [

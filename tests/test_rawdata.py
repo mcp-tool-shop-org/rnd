@@ -265,8 +265,10 @@ class ReceiptRulesTests(unittest.TestCase):
             "colab/window13t-rescore-20261018/rescore-out.tar": "item-text",
             f"{w}/critic-eval-out.json": "item-text",
             f"{w}/job-with-checkpoints.log": "item-text",
-            "verifier-gold/README.md": "sealed",
-            "verifier-gold/reasoning-prs-2026-10-08.jsonl": "sealed",
+            # public by the Director's ruling (2026-10-19): R&D's benchmark data; held-out there is a calibration split
+            "verifier-gold/README.md": None,
+            "verifier-gold/reasoning-prs-2026-10-08.jsonl": None,
+            "colab/window7b-20261017/known-answer-v1.jsonl": None,
             f"{w}/blind_key.json": "blind",
             "commandui/wack-report.xml": "unapproved",
             f"{w}/notes.md": "unapproved",

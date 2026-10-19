@@ -245,8 +245,16 @@ the only test, so there's no multiplicity adjustment. P3 isn't tested: at phase 
 isn't run.
 
 **Fresh items.**
-- New kind C rows, written for this test by Gemma 4 31B, critiqued by Muse in the screen's pilot path with twins
-  off. Gemma's family differs from Muse's, so no family skips.
+- New kind C rows, written for this test by Gemma 4 31B in the screen's pilot path, with twins off.
+  - The slots are the unused T02 C slots (T02-C-02 to -07) plus the C slots of T03, T06, T07 and T08: 38 slots in two
+    windows of 19.
+  - The pilot path builds the slots through a small role-set change, `PIN_PILOT_LESSONS`, which gets a CPU stub rung
+    before any paid window.
+- **The writing step's critic is Qwen3.8, not Muse** (the Publisher's point, adopted).
+  - If Muse decided which rows are accepted, it would then be scored on its own selection.
+  - Qwen3.8 is a third family, so Muse first meets these rows in critic-eval, and Gemma's family differs from Muse's,
+    so there are no family skips.
+  - Phases 1–3 had that selection shape, since Muse critiqued most arms. Their results are read with it in mind.
   - New rows are needed because the pilot has no unused C rows: each arm carries the same 2 C rows through every
     wave, and Phase 1 used them all.
 - **The gold set:** R&D keys every accepted new row blind, under phase 1's protocol (the verdict, the deciding lines
@@ -274,9 +282,13 @@ the label: a perturbed item should be refused.
 - **Otherwise,** R&D brings the Director the options §5 names.
 - Each P2 rule's contribution is reported descriptively. At phase 3, every difference came from the flaw gate.
 
-**Cost.** One writer window and one critic-eval window. The Publisher is projecting both from measured rates
-(W-A's Gemma and Muse times, and 13w's per-call times), and the figures are added here before any window opens.
-A3 applies to each.
+**Cost** (the Publisher's projection from measured rates; A3 applies to each window):
+- **Writing, from Gemma's measured 374–514 s a slot:**
+  - about 23 units at the low end and about 40 at the high end, for 40 slots;
+  - two windows of about 20 slots, each about 11–20 units, with a cap of about 26. Two windows halve what a lost VM
+    costs, and the pilot resume is proven.
+- **critic-eval, from 13w's 19.0 s a call:** about 3–4 units, cap 15.2.
+- The ledger stands at 176.96 of 300.
 
 ## What carries into the T10 writer run
 

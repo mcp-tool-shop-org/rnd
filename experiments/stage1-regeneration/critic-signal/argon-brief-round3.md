@@ -37,7 +37,8 @@ writer window), `not blocking`.
 - **The one comparison:** P2 against P0 on Muse, exact McNemar, two-sided, α 0.05, with no multiplicity
   adjustment.
 - **Fresh items:**
-  - new kind C rows written by Gemma 4 and critiqued by Muse in the pilot path;
+  - new kind C rows written by Gemma 4 (38 slots: the unused T02 C slots plus T03, T06, T07 and T08) and
+    critiqued in the pilot path by Qwen3.8, a third family;
   - a blind gold check by R&D, with wrong, unclear and trace-leaks-label rows excluded;
   - the set sealed, then perturb.py run unchanged (role-set `47a5882`, seed 0).
 - **Size:** at least 30 gold C rows, about 18 f items. With fewer than 12 f items, more rows are written before the
@@ -54,9 +55,10 @@ writer window), `not blocking`.
    fixed frame inflate the catch rate compared with a real sound trace in a checker's own style? If it does:
    - Should the confirmation use sound traces written another way, such as a writer asked for a correct trace?
    - Or is a template the right instrument, because it isolates the flaw gate?
-3. **The population.** The new rows are the critic-accepted rows that pass the gold check, as in phases 1–2.
-   Should rows the critic refused but that pass the gold check also enter, so the pool isn't filtered by the
-   critic's own judgement?
+3. **The population.** In the writing step a third-family critic, Qwen3.8, decides which rows are accepted, so Muse
+   isn't scored on its own selection. Phases 1–3 didn't have that separation. Two questions:
+   - Should rows Qwen3.8 refused but that pass R&D's gold check also enter?
+   - Should the writing step run with no critic at all, leaving the gold check as the only filter?
 4. **One writer.** Gemma alone writes the new rows. Is that a validity problem for the claim "the flaw gate catches
    clean traces mislabeled as flawed", given the traces in f are replaced anyway?
 5. **Size and the stopping rule.** At least 12 f items, a target of about 18, and one critic run. Adequate, given

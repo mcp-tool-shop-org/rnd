@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.15.2.14] - 2026-10-19
+
+- handbook: briefing an outside model (template), with the critic-signal AI Studio brief as the worked example
+- Added experiment `stage1-regeneration`
+
 ## [1.1.15.2.13] - 2026-10-19
 
 - weekly watch 2026-10-19: NeMo Relay 0.10.1/0.10.2 notes (primary-read), Claude Code idle compaction vs the harness pin

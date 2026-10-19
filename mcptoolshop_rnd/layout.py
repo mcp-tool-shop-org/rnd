@@ -40,14 +40,19 @@ VENUES = tuple(VOCABULARY["venues"])
 OUTCOMES = tuple(VOCABULARY["outcomes"])
 COST_BASES = tuple(VOCABULARY["cost_bases"])
 WHY_NOT_NEEDED = tuple(VOCABULARY["why_required_unless"])
+ZERO_COST = tuple(VOCABULARY["zero_cost"])
+# Older words the recorder maps to a current outcome; a record always holds the current word.
+ALIASES = dict(VOCABULARY["aliases"])
 TOP_KEYS = {"schema", "name", "status", "design", "template", "budgets", "licences", "runs"}
 BUDGET_KEYS = {"cost_unit", "cap", "set_by"}
 RUN_KEYS = {"id", "venue", "hardware", "date", "cost", "cost_unit", "cost_basis", "cap", "projected_cost", "outcome",
             "why", "raw_manifest_id", "pins"}
 NAME_RE = re.compile(r"^[a-z0-9][a-z0-9._-]*$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-# A machine path: a drive letter, a UNC share, or a home directory.
-MACHINE_PATH_RE = re.compile(r"(?i)(?:^|[\s\"'(=])(?:[a-z]:[\\/]|\\\\[^\\]+\\|/home/|/users/|~[\\/])")
+# A machine path: a drive letter (C:/, E:\), a Git Bash or WSL drive mount (/c/, /mnt/c/), a UNC share, or a home
+# directory. Pod and VM paths (/root/, /content/, /workspace/) carry no identity and are allowed.
+MACHINE_PATH_RE = re.compile(
+    r"(?i)(?:^|[\s\"'(=])(?:[a-z]:[\\/]|(?:/mnt)?/[a-z]/|\\\\[^\\]+\\|/home/|/users/|~[\\/])")
 
 
 def library_files(root: Path) -> list[str]:
@@ -326,10 +331,15 @@ def validate_record(root: Path, exp: str, registry_ids: set[str] | None = None) 
             p.append(f"runs[{i}].cost_unit must be one of {', '.join(COST_UNITS)}")
         if r.get("projected_cost") is not None and not _number(r["projected_cost"]):
             p.append(f"runs[{i}].projected_cost must be a number or null")
-        if r.get("outcome") not in OUTCOMES:
+        if r.get("outcome") in ALIASES:
+            p.append(f"runs[{i}].outcome {r['outcome']!r} is an alias; record it as {ALIASES[r['outcome']]!r}")
+        elif r.get("outcome") not in OUTCOMES:
             p.append(f"runs[{i}].outcome must be one of {', '.join(OUTCOMES)}")
-        elif r["outcome"] not in WHY_NOT_NEEDED and not (isinstance(r.get("why"), str) and r["why"].strip()):
-            p.append(f"runs[{i}]: a {r['outcome']} run needs a why")
+        else:
+            if r["outcome"] not in WHY_NOT_NEEDED and not (isinstance(r.get("why"), str) and r["why"].strip()):
+                p.append(f"runs[{i}]: a {r['outcome']} run needs a why")
+            if r["outcome"] in ZERO_COST and r.get("cost") != 0:
+                p.append(f"runs[{i}]: a {r['outcome']} run costs nothing; its cost must be 0")
         if r.get("cost_basis") not in COST_BASES:
             p.append(f"runs[{i}].cost_basis must be one of {', '.join(COST_BASES)}")
         if r.get("cap") is not None and (not _number(r["cap"]) or r["cap"] <= 0):

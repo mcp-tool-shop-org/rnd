@@ -8,17 +8,20 @@
   "tooling-fault": "our tooling failed after the run started",
   "lost-vm": "a working VM or pod was lost mid-run",
   "cap-stop": "the run hit its cost cap",
-  "not-assigned": "no machine was assigned",
   "boot-fail": "a pod or VM was rented and billed but never became reachable",
   "gate-reject": "every VM failed the gate, so nothing ran",
   "refused": "our own preflight refused before any VM or pod",
-  "no-capacity": "nothing could be rented; no cost",
+  "no-capacity": "nothing could be rented or assigned (Colab gave no card; RunPod had no offer); no cost",
   "stopped": "stopped on purpose before any result"
  },
+ "aliases": {
+  "not-assigned": "no-capacity"
+ },
  "why_required_unless": ["results"],
+ "zero_cost": ["no-capacity"],
  "cost_bases": {
   "rate_x_runtime": "the rate times the measured runtime",
-  "balance": "the provider's balance before and after (offrig's measured ledger)",
+  "balance": "the provider's balance before and after (Colab's usage balance, offrig's measured ledger)",
   "estimate": "an estimate, when nothing was measured"
  },
  "cost_units": {

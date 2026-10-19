@@ -182,12 +182,18 @@ class RecordTests(LayoutBase):
         self.assertTrue(any("not valid JSON" in m for _, m in self.errors()))
 
     def test_machine_paths_are_refused(self):
-        for value in ("E:/AI/rnd-local/x", "D:\\backup\\y", "see /home/me/z", "~/notes", "\\\\server\\share\\f"):
+        for value in ("E:/AI/rnd-local/x", "D:\\backup\\y", "see /home/me/z", "~/notes", "\\\\server\\share\\f",
+                      # Built in parts so this file carries no home path for the identity scan to flag.
+                      "/c/" + "Users/someone/run.sh", "/mnt/c/" + "Users/someone/x", "see /c/" + "Users/someone",
+                      "/e/AI/Publisher/receipts"):
             rec = record("demo", runs=[{**RUN, "pins": {"where": value}}])
             self.experiment("demo", rec)
             self.assertTrue(any("machine path" in m for _, m in self.errors()), value)
-        self.experiment("demo", record("demo", runs=[{**RUN, "pins": {"script": "scripts/run.py"}}]))
-        self.assertEqual(self.errors(), [])
+        # Pod and VM paths carry no identity, and URLs and relative paths aren't machine paths.
+        for ok in ("scripts/run.py", "/root/llama.cpp/build", "/content/drive", "/workspace/out",
+                   "https://github.com/a/b/c"):
+            self.experiment("demo", record("demo", runs=[{**RUN, "pins": {"where": ok}}]))
+            self.assertEqual(self.errors(), [], ok)
 
     def test_registry_ids_are_read_from_the_library(self):
         self.assertIsNone(layout.registry_ids(self.root))
@@ -200,10 +206,24 @@ class RecordTests(LayoutBase):
 class VocabularyTests(LayoutBase):
     def test_the_shared_vocabulary_covers_the_publishers_outcomes(self):
         # The Publisher's outcome.json values on 2026-10-19, plus the five agreed the same day.
-        for v in ("results", "partial", "test", "tooling-fault", "lost-vm", "cap-stop", "not-assigned",
+        for v in ("results", "partial", "test", "tooling-fault", "lost-vm", "cap-stop",
                   "boot-fail", "gate-reject", "refused", "no-capacity", "stopped"):
             self.assertIn(v, layout.OUTCOMES)
+        self.assertEqual(layout.ALIASES, {"not-assigned": "no-capacity"})  # merged with the Publisher, 2026-10-19
+        self.assertNotIn("not-assigned", layout.OUTCOMES)
         self.assertEqual(layout.WHY_NOT_NEEDED, ("results",))
+        self.assertEqual(layout.ZERO_COST, ("no-capacity",))
+
+    def test_an_alias_is_refused_and_no_capacity_must_cost_nothing(self):
+        self.experiment("demo", record("demo", runs=[{**RUN, "outcome": "not-assigned", "why": "no card"},
+                                                     {**RUN, "id": "x2", "outcome": "no-capacity", "why": "no offer",
+                                                      "cost": 1.33},
+                                                     {**RUN, "id": "x3", "outcome": "no-capacity", "why": "no offer",
+                                                      "cost": 0}]))
+        msgs = [m for _, m in self.errors()]
+        self.assertTrue(any("is an alias; record it as 'no-capacity'" in m for m in msgs))
+        self.assertTrue(any("runs[1]: a no-capacity run costs nothing" in m for m in msgs))
+        self.assertFalse(any(m.startswith("runs[2]") for m in msgs))
         self.assertEqual(set(layout.COST_BASES), {"rate_x_runtime", "balance", "estimate"})
         self.assertEqual(layout.VOCABULARY["schema"], "rnd-run-vocabulary/v1")
 

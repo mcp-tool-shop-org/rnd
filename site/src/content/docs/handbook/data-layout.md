@@ -79,7 +79,8 @@ That makes `README.md`, `experiment.json`, `data/`, `results/`, `scripts/` and a
   - A run's id is the window's name (`14b`).
   - A retry adds its try (`14e-try4`).
   - A RunPod plan names its lane (`publisher-plan4`).
-- `why` is required unless the outcome is `results`.
+- `why` is required unless the outcome is `results`. A `no-capacity` run costs nothing, so its `cost` is 0. An
+  older word listed under `aliases` (`not-assigned`) is mapped by the recorder and never stored.
 
 **No machine paths.** The record is public, so `rnd check` refuses a drive letter, a share or a home folder
 anywhere in it.

@@ -1,0 +1,7 @@
+inferred_class,plans,no_capacity,not_launched,live_at_export,plans_with_nonzero_job_run,wall_hours,spent_usd
+jam-class,14,0,0,0,0,3.9,1.97
+a100-class,7,0,0,0,1,4.5,8.08
+rtx-pro-6000-server,14,0,0,0,2,19.3,40.07
+writer-2gpu-or-other,2,0,0,0,0,1.4,7.13
+b200,1,0,0,0,0,0.3,2.35
+none,7,3,3,1,0,0.0,0.0

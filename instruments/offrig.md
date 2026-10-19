@@ -92,6 +92,7 @@ Read these before planning a pod; earlier same-day claims made without reading t
   reads a changed config, and plans and pods live in the project DB, so no app restart is needed.
 - **One lane, one live pod:** `offrig_launch` refuses while the lane has an open plan or a live pod. Pods run in
   sequence.
+- **Choosing a pod:** choose on the job's bottleneck, not $/hr: CPU cores and RAM for conversions, network for downloads, disk, VRAM headroom, stock and the cost of a redo. On 2026-10-19 the A100 converter pod had 128 cores and 2 TB RAM, and downloaded 249 GB at about 211 MB/s.
 - **Container disk:** `offrig_plan` takes `container_disk_gb` (1–2000) per plan. It overrides the profile's size,
   so a small-disk profile can still convert a large model.
 - **Profiles on this rig** (2026-10-19):

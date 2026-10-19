@@ -1,6 +1,6 @@
 # Stage 1, part 2: a critic that can tell writers apart (design draft)
 
-**Status: v2, passed by Argon's short-form review (2026-10-19, two rounds). Phases 0–3 done (`PHASE-0-1.md`, `PHASE-2-3.md`): no protocol adopted under §5 (Holm 0.0625). The confirmation test in §9 is the Director's decision, passed by Argon in rounds 3 and 3b (2026-10-19) and frozen.** Template: the rnd
+**Status: v2, passed by Argon's short-form review (2026-10-19, two rounds). Phases 0–3 done (`PHASE-0-1.md`, `PHASE-2-3.md`): no protocol adopted under §5 (Holm 0.0625). The confirmation test in §9 ran (`PHASE-4.md`): P2 catches 22 : 0 more errors than P0 (p ≈ 5 × 10⁻⁷) but refuses 12 of 32 good rows, so under §5 it is not adopted, and the options go to the Director.** Template: the rnd
 [model comparisons](../../../site/src/content/docs/handbook/model-comparisons.md) design, sections 0–8, with a
 phase 0 added in front. It comes before the T10 lesson's writer run, which waits on its outcome.
 

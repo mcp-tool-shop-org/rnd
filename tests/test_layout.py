@@ -81,6 +81,14 @@ class SizeTests(LayoutBase):
         write(self.root, "experiments/demo/data/more.txt", "x" * 100)
         self.assertTrue(any(w == "experiments/demo" and "may not grow" in m for w, m in self.errors()))
 
+    def test_crlf_counts_as_one_byte_so_both_platforms_agree(self):
+        path = write(self.root, "experiments/demo/data/x.txt", "")
+        path.write_bytes(b"a\r\nb\r\n")
+        self.assertEqual(layout.size_of(path), 4)
+        big = write(self.root, "experiments/demo/data/big.bin", "")
+        big.write_bytes(b"\r\n" * (layout.TAG_SCAN_LIMIT // 2 + 1))
+        self.assertEqual(layout.size_of(big), big.stat().st_size)
+
     def test_staging_is_skipped_without_git(self):
         self.experiment("demo", files={"staging/huge.jsonl": "x" * (layout.FILE_LIMIT * 2)})
         with mock.patch.object(layout.subprocess, "run", side_effect=OSError("no git")):
@@ -230,8 +238,13 @@ class CommandTests(LayoutBase):
         code, out, _ = self.run_cli("layout", "baseline")
         self.assertEqual(code, 0)
         self.assertIn("1 still need a reason", out)
+        code, out, _ = self.run_cli("layout", "baseline")  # a rerun with reasons still blank is fine
+        self.assertEqual(code, 0)
         base = json.loads((self.root / layout.BASELINE).read_text())
         base["private_allow"]["experiments/demo/data/blind_in.json"] = "published"
+        write(self.root, "docs/tag-page.md", f"the tag is {TAG}\n")
+        base["private_allow"]["docs/tag-page.md"] = "documents the tag"
+        base["private_allow"]["docs/gone.md"] = "a page since deleted"
         write(self.root, layout.BASELINE, json.dumps(base))
         write(self.root, "experiments/demo/data/big.jsonl", "x" * (layout.FILE_LIMIT + 50))
         code, _, err = self.run_cli("layout", "baseline")
@@ -240,6 +253,9 @@ class CommandTests(LayoutBase):
         code, out, _ = self.run_cli("layout", "baseline", "--allow-growth")
         self.assertEqual(code, 0)
         self.assertIn("0 still need a reason", out)
+        allow = json.loads((self.root / layout.BASELINE).read_text())["private_allow"]
+        self.assertEqual(allow.get("docs/tag-page.md"), "documents the tag")
+        self.assertNotIn("docs/gone.md", allow)
         write(self.root, layout.BASELINE, "{bad")
         code, _, err = self.run_cli("layout", "baseline")
         self.assertEqual(code, 1)

@@ -274,12 +274,18 @@ def cmd_layout(args):
     """Write the baseline: every file and folder over the limits today, every folder without a record, and every
     published file whose name looks private. Reasons already given in private_allow are kept."""
     old, problems = layout.load_baseline(ROOT)
+    problems = [m for m in problems if "needs a reason" not in m]  # filling reasons in is what a rerun is for
     if problems:
         report([model.Problem("error", layout.BASELINE, m) for m in problems])
         return fail("BASELINE_INVALID", f"{layout.BASELINE} can't be read", "fix or remove it, then rerun", 1)
     new = layout.baseline(ROOT)
     for path in new["private_allow"]:
         new["private_allow"][path] = old["private_allow"].get(path, "")
+    # Entries added by hand (a page that documents the tag) stay while their file exists.
+    for path, why in old["private_allow"].items():
+        if path not in new["private_allow"] and (ROOT / path).is_file():
+            new["private_allow"][path] = why
+    new["private_allow"] = dict(sorted(new["private_allow"].items()))
     grew = [p for p, n in new["files"].items() if p not in old["files"] or n > old["files"][p]]
     grew += [e for e, n in new["experiments"].items() if e not in old["experiments"] or n > old["experiments"][e]]
     if old["files"] or old["experiments"]:

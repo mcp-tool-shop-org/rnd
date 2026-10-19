@@ -4,7 +4,7 @@ Paste this whole brief in. Everything you need is in it. You have no other knowl
 
 ## 1. Who you're working for
 
-You're building for the R&D seat of a small game studio that runs its own AI research and publishes the results as a
+You're building for the R&D seat of an AI/SI research studio that also makes tooling for games. It publishes its results as a
 public newsletter. Readers are curious non-specialists. Every figure we publish has to be traceable to a committed data
 file. Being wrong in public costs us more than a missing chart.
 

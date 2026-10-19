@@ -67,6 +67,15 @@ def library_files(root: Path) -> list[str]:
         return sorted(found)
 
 
+def size_of(path: Path) -> int:
+    """A file's size with each CRLF counted as one byte, so a Windows checkout (CRLF) and a Linux one (LF) measure
+    the same; files over the scan limit are bulk anyway and are measured as they stand."""
+    n = path.stat().st_size
+    if n > TAG_SCAN_LIMIT:
+        return n
+    return n - path.read_bytes().count(b"\r\n")
+
+
 def experiment_of(path: str) -> str | None:
     parts = path.split("/")
     return parts[1] if len(parts) > 2 and parts[0] == "experiments" else None
@@ -98,7 +107,7 @@ def baseline(root: Path, files: list[str] | None = None) -> dict:
     """The baseline as the library stands: every oversize file and folder, every folder without a record, and every
     file whose name looks private (each needs a reason added by hand before it passes)."""
     files = library_files(root) if files is None else files
-    sizes = {p: (root / p).stat().st_size for p in files}
+    sizes = {p: size_of(root / p) for p in files}
     big_files, per_exp = {}, {}
     for p, n in sizes.items():
         exp = experiment_of(p)
@@ -150,7 +159,7 @@ def check(root: Path, files: list[str] | None = None, registry_ids: set[str] | N
     files = library_files(root) if files is None else files
     base, base_problems = load_baseline(root)
     out = [("error", BASELINE, m) for m in base_problems]
-    sizes = {p: (root / p).stat().st_size for p in files}
+    sizes = {p: size_of(root / p) for p in files}
 
     # Size.
     per_exp = {}

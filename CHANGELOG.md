@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.21.0.0] - 2026-10-19
+
+- rnd raw runs without an rnd library when the store is named (--public or $RND_DATA), as in rnd-data's CI; the companion's default is then beside the store. Found by running rnd-data's verify.sh against the 1.1.20.0.0 pin from a clean install, where it stopped with NO_LIBRARY
+
 ## [1.1.20.0.0] - 2026-10-19
 
 - rnd raw verify --public-only: what a public clone can check (rnd-data's CI): git copies re-hashed, the blob store and the companion skipped and counted, plus a file under runs/ no manifest names or carrying the private tag, a private-looking name anywhere, and a machine path in a manifest

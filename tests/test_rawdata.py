@@ -1,5 +1,7 @@
 """rnd-data: ingest into the public store and its private companion, the blob store, tagging, and verify."""
 
+import contextlib
+import io
 import json
 import os
 import shutil
@@ -475,3 +477,43 @@ class RawPublicOnlyCommandTests(CliBase):
         self.assertIn("relicensed: manifests 6", out)
         self.assertEqual(self.run_cli("raw", "relicense", "--prefix", "receipts")[0], 2)
         self.assertEqual(self.run_cli("raw", "relicense", "--rules", str(RULES), "--prefix", "none")[0], 1)
+
+
+class RawWithoutLibraryTests(unittest.TestCase):
+    """rnd-data's CI installs rnd and runs `rnd raw verify --public-only` in an rnd-data checkout, with no library."""
+
+    def setUp(self):
+        self.base = Path(tempfile.mkdtemp())
+        self.addCleanup(rmtree_force, self.base)
+        self.public, self.private, self.blobs = make_stores(self.base)
+        src = make_receipts(self.base)
+        with mock.patch.dict(os.environ, {"RND_DATA_STORE_D": str(self.blobs)}):
+            rawdata.ingest_tree(src, self.public, self.private, "receipts",
+                                lambda rel: "blind" if layout.private_name(rel) else None)
+
+    def main(self, *argv, env=None):
+        from mcptoolshop_rnd import cli
+        out, err = io.StringIO(), io.StringIO()
+        clean = {k: v for k, v in os.environ.items()
+                 if k not in ("RND_ROOT", "RND_DATA", "RND_DATA_PRIVATE", "RND_DATA_STORE_D")}
+        with mock.patch.object(cli, "ROOT", None), mock.patch.dict(os.environ, {**clean, **(env or {})}, clear=True), \
+                contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+            code = cli.main(list(argv))
+        return code, out.getvalue(), err.getvalue()
+
+    def test_raw_runs_on_rnd_data_alone(self):
+        code, out, err = self.main("raw", "verify", "--public-only", env={"RND_DATA": str(self.public)})
+        self.assertEqual(code, 0, err)
+        self.assertIn("public only (copies skipped: 2 in store d): 0 problems", out)
+        code, out, err = self.main("raw", "verify", "--public-only", "--public", str(self.public))
+        self.assertEqual(code, 0, err)
+        # The full check finds the companion beside the store, and still needs the blob store's root.
+        code, out, err = self.main("raw", "verify", env={"RND_DATA": str(self.public), "RND_DATA_STORE_D": str(self.blobs)})
+        self.assertEqual(code, 0, err)
+        self.assertIn("verified rnd-data and rnd-data-private: 0 problems", out)
+
+    def test_without_a_named_store_it_still_needs_a_library(self):
+        code, _, err = self.main("raw", "verify", "--public-only")
+        self.assertEqual(code, 2)
+        self.assertIn("NO_LIBRARY", err)
+        self.assertEqual(self.main("stats", env={"RND_DATA": str(self.public)})[0], 2)  # only raw is exempt

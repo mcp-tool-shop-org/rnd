@@ -553,7 +553,12 @@ def _pinned_text():
 
 def cmd_raw(args):
     public = Path(args.public) if args.public else runs.rnd_data_root(ROOT)
-    private = Path(args.private) if args.private else layout.private_root(ROOT)
+    if args.private:
+        private = Path(args.private)
+    elif ROOT is not None and is_library(ROOT):
+        private = layout.private_root(ROOT)
+    else:  # no library: the companion's default is beside the store
+        private = Path(os.environ["RND_DATA_PRIVATE"]) if os.environ.get("RND_DATA_PRIVATE") else public.parent / "rnd-data-private"
     try:
         if args.action == "verify":
             if args.public_only and args.deep:
@@ -1033,7 +1038,9 @@ def main(argv=None):
     global ROOT
     if args.library:
         ROOT = find_root(args.library)
-    if args.cmd not in ("readouts", "abmine") and (ROOT is None or not is_library(ROOT)):
+    # `rnd raw` works on rnd-data alone, such as in rnd-data's CI, when the store is named.
+    raw_alone = args.cmd == "raw" and (getattr(args, "public", None) or os.environ.get("RND_DATA"))
+    if args.cmd not in ("readouts", "abmine") and not raw_alone and (ROOT is None or not is_library(ROOT)):
         return fail("NO_LIBRARY", "no rnd library here (a folder with entries/ and instruments/)",
                     "run inside a clone of mcp-tool-shop-org/rnd, or pass --library / set RND_ROOT")
     try:

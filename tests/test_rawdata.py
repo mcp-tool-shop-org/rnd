@@ -711,7 +711,7 @@ class VerifyJsonTests(CliBase):
 
     def test_every_damage_class_has_its_rule(self):
         blobs = sorted(self.blobs.glob("blobs/*/*"))
-        os.chmod(blobs[0], stat.S_IWRITE)
+        os.chmod(blobs[0], stat.S_IREAD | stat.S_IWRITE)  # Linux: write-only would make --deep unable to read it
         blobs[0].write_bytes(b"y" * blobs[0].stat().st_size)          # same size, wrong bytes: only --deep sees it
         mp = self.public / "runs/receipts--colab--window2-20261017/manifest.json"
         m = json.loads(mp.read_text(encoding="utf-8"))

@@ -25,7 +25,7 @@ definition of an agentic transaction.
 
 - **x402 on XRPL is in the standard itself, not an add-on.**
   - The x402 Foundation's repository (Apache-2.0) has `specs/schemes/exact/scheme_exact_xrpl.md`, added 2026-07-03,
-    beside 17 other chains' `exact` schemes.
+    beside 16 other chains' `exact` schemes.
   - The payer signs an ordinary XRPL `Payment` for an exact amount of XRP or an issued currency, and a facilitator
     submits it. The payer pays the network fee, so the XRPL scheme can't offer fee sponsorship.
   - Ripple credits t54 with the contribution, and t54 runs a hosted facilitator.

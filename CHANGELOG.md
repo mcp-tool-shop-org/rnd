@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.11] - 2026-10-20
+
+- entry: XRPL agentic payments (x402, AI Starter Kit, MPP)
+- Added `2026-10-20-xrpl-agentic-payments-x402-the-ai-starter-kit-and-mpp`: XRPL agentic payments: x402, the AI Starter Kit and MPP
+
 ## [1.1.23.1.10] - 2026-10-20
 
 - tonight's promotions, bench side: PAIR telemetry, the published voice-gate levels, the aligner tempo range

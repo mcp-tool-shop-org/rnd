@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.8] - 2026-10-20
+
+- open-jev: three corrections from the promotion re-read (Laya MPS hardware, Nimble metric, Kev token range); Kev-4B 124/127 settled
+- Updated `2026-10-07-open-jev-style-decision-models`: Open Jev-style decision models — the landscape, checked against primary sources
+- Updated experiment `cuda-python-5090-rung`
+
 ## [1.1.23.1.7] - 2026-10-20
 
 - cuda-python rung: the CUDA EULA reading marked [unverified], awaiting the outside check

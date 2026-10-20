@@ -49,8 +49,9 @@ task: Kev and Bespoke Nimble. SemIf's raw logits make a no-training baseline.
     sets read once per release, and an admission that Jev's training data is
     unknown. Kev-27B scores 0.851 dev / 0.889 test vs Jev 0.857 (dev only);
     Kev-9B 0.820 / 0.852; held-out index 52.3 vs 54.0.
-  - **Nimble** reports about 90% agreement with Jev on 324 held-out examples. The
-    exact metric was not confirmed.
+  - **Nimble** reports 90.12% (292 of 324) agreement with synthetic reference labels
+    on 324 held-out examples, where Jev scores 93.21%. It is agreement with the labels,
+    not with Jev's answers.
   - **Laya**'s Jev comparison uses Jev numbers it never measured. Its fine-tuned
     typed-decisions 0.766 vs 0.727 has no committed result file. The base checkpoint
     scores 0.362, below the 0.461 majority rate, and Jev wins clearly past about
@@ -185,7 +186,7 @@ Kev-9B ran on the same 124 phrase-clean records as hosted Jev and OpenJev, both
     fine-tune below).
   - Under WSL, Triton makes Kev's fused flash-linear-attention kernels available.
     That should cut the 30+ GB activation memory seen with the reference kernels
-    at 3–5k-token states.
+    at 1.6–4.7k-token states.
   - So: a short WSL smoke run under the memory cap first; the rented-H100 route
     (about $1 a run) is the fallback.
 - **Measured: a judge fine-tune on the 5090 removes the position bias**
@@ -226,18 +227,19 @@ wrong repo. Always resolve by GitHub or Hugging Face handle.
 
 - [verified] "OpenJev" names at least four unrelated projects: openjev/openjev (Loop AI, CC BY-NC), razorback16/openjev (a DiffusionGemma server), TheoLeeCJ/SemIf-OpenJev (renamed to SemIf) and AlexWortega/openjev (an NLI cross-encoder). (via: research agent reading each GitHub README / HF card, 2026-10-07)
 - [verified] Kev ships 0.8B/4B/9B adapters with a pointer head on Qwen3.5 Base and a full-weight 27B on Qwen3.8-27B, serves /v1/systemone, is Apache-2.0, and states no Jev outputs were used for training. (via: jaredpalmer/kev README and HF cards, read by research agent 2026-10-07)
-- [verified] Laya is a 421M ModernBERT-large model from Convai Innovations, Apache-2.0, at about 33–40 ms per decision on a T4 or Apple MPS. (via: NandhaKishorM/laya README, read by research agent 2026-10-07)
+- [verified] Laya is a 421M ModernBERT-large model from Convai Innovations, Apache-2.0, at about 33–40 ms per question on a T4, and 36–37 ms with PyTorch MPS on an AMD Radeon Pro Vega II in an Intel Mac Pro (not Apple Silicon). (via: NandhaKishorM/laya README lines 353-359, 657 and 1801, read by research agent 2026-10-07; MPS hardware corrected, re-read by R&D's subagent and spot-checked by R&D, 2026-10-20)
 - [wrong] Laya runs under 10 ms on an M5 Max. (via: Laya README gives Apple MPS about 33 ms, read by research agent 2026-10-07; claim came from Gemini)
 - [wrong] SemIf is a separate project from OpenJev. (via: TheoLeeCJ/SemIf-OpenJev README, renamed from OpenJev, read by research agent 2026-10-07; claim came from Gemini)
 - [unverified] Kev-27B scores 0.851 dev / 0.889 test against Jev's 0.857 (dev) on sources it never trained on (self-reported).
-- [unverified] Bespoke-Nimble-9B matches about 90% of Jev's answers on 324 held-out examples (self-reported; exact metric not confirmed).
+- [wrong] Bespoke-Nimble-9B matches about 90% of Jev's answers on 324 held-out examples. (via: Nimble README lines 476-486: the 90.12% is agreement with reference labels, re-read by R&D's subagent and spot-checked by R&D, 2026-10-20)
+- [verified] Bespoke-Nimble-9B agrees with synthetic reference labels on 292 of 324 held-out examples (90.12%), where Jev 1.13.0 scores 302 of 324 (93.21%); self-reported. (via: Nimble README lines 476-486, re-read by R&D's subagent and spot-checked by R&D, 2026-10-20)
 - [unverified] Laya's typed-decisions checkpoint scores 0.766 against Jev's 0.727 (self-reported, no committed result file; Jev figure not measured by the authors).
 - [verified] On sense-si's 124 phrase-clean records, Kev-4B and Kev-9B (v1.0, bf16, reference kernels) scored a sense-si-calibrated Brier of 0.240 and 0.242 against a 0.242 base rate and Jev's 0.252, with pooled AUC 0.54 [0.44, 0.64] and 0.52 [0.42, 0.63]; correlation with hosted Jev r = 0.67 and 0.66. (via: experiments/openjev-vs-jev/results/compare-all.json, Robot rig run 2026-10-07)
 - [verified] Adding join evidence, a rubric and four leave-one-mix-out examples did not improve Kev on phrase-clean; Kev-9B's pooled AUC fell to 0.42 [0.32, 0.52]. (via: experiments/openjev-vs-jev/results/compare-all.json, 2026-10-07)
-- [verified] On the RTX 5090 with reference PyTorch kernels, Kev-4B answered in a median 0.43 s per 3–5k-token request and Kev-9B in 0.51 s, deterministically; Kev-9B peaked at 27.8 GB on the card under a 0.82 PyTorch memory cap, and uncapped Kev-4B's allocator reached 31.9 GB. (via: experiments/openjev-vs-jev logs and receipts, 2026-10-07)
+- [verified] On the RTX 5090 with reference PyTorch kernels, Kev-4B answered in a median 0.43 s per request of 1,562–4,721 tokens and Kev-9B in 0.51 s, deterministically; Kev-9B peaked at 27.8 GB on the card under a 0.82 PyTorch memory cap, and uncapped Kev-4B's allocator reached 31.9 GB. (via: experiments/openjev-vs-jev logs and receipts, 2026-10-07)
 - [verified] As a two-option judge of single planted errors in long answers (aspire-si's 127 pairs, both orders), Kev-4B scored 0.547 picking A 95% of the time and Kev-9B 0.598 picking A 87%, below aspire-si's 0.75 bar and as position-biased as Qwen2.5-32B. (via: aspire-si examples/sft-experiment/judge_kev.py, PR #33, rig run reported by session A 2026-10-07)
 - [verified] On 149 fresh planted-error pairs under a pre-registered rule, order-averaged accuracy was 0.973 [0.946, 0.993] for Kev-4B, 0.859 for Kev-9B and 0.886 for Qwen2.5-32B Q4, against single-choice accuracy of 0.547 / 0.638 / 0.685 with option A chosen 95% / 85% / 82%. (via: aspire-si PR #36 confirmation run, c94fc93, reported by session A 2026-10-07)
-- [unverified] Averaging p(strong) over both orders (the two-option equivalent of /permute), Kev-4B favoured the strong answer on 124 of 127 aspire-si judge pairs (0.976, prompt-clustered CI [0.945, 1.0]) and Kev-9B on 102 of 127 (0.803). Exploratory: the statistic was chosen after the pre-registered one read 'not useful'; the method was then confirmed on fresh pairs under a rule written first (the [verified] claim above); these 127-pair figures stay exploratory (aspire-si, from step 1's recorded probabilities, session A 2026-10-07).
+- [verified] Averaging p(strong) over both orders (the two-option equivalent of /permute), Kev-4B favoured the strong answer on 124 of 127 aspire-si judge pairs (0.976, prompt-clustered CI [0.945, 1.0]) and Kev-9B on 102 of 127 (0.803). Exploratory: the statistic was chosen after the pre-registered one read 'not useful'; the method was then confirmed on fresh pairs under a rule written first (the [verified] claim above); these 127-pair figures stay exploratory (aspire-si, from step 1's recorded probabilities, session A 2026-10-07). (via: aspire-si docs/runs/2026-10-08-kev-confirmation.md lines 40-41 at b8ab54d, a committed figure from recorded probabilities; re-read by R&D's subagent and spot-checked by R&D, 2026-10-20)
 - [verified] Fine-tuning Kev-4B v1.0 on aspire-si's fresh planted pairs (both orders, --perm_kl 1.0, --max_state 1536; about 22 minutes and a 10.5 GB PyTorch peak per seed on the RTX 5090 under WSL) passed a pre-registered rule on three of three seeds: 0.956–0.963 single-choice accuracy with A picked 49–50% on 149 confirmation pairs, against 0.547 and 95% frozen; order-averaged 0.980–0.987 against 0.973 frozen (CIs overlap); 0.992–1.000 order-averaged on the 127 bf16-planted judge pairs. (via: experiments/kev-judge-finetune/results, judge_kev.py at aspire-si ca5b915, 2026-10-07)
 - [verified] The Kev-4B judge fine-tune, trained only on Qwen-planted pairs, scored 0.989 single-choice (A picked 51%) on 47 pairs planted by gemma4:31b, against 0.521 (A 98%) for the frozen model, whose order-averaged score was 1.000. (via: experiments/kev-judge-finetune/results/*-second.json, 2026-10-08)
 - [verified] Kev's trainer (kev/train.py @ 5e42a7a) imports the Unix-only `resource` module, so `python -m kev.train` fails on native Windows with ModuleNotFoundError. (via: running it in E:/AI/envs/kev on the Robot rig, 2026-10-07)

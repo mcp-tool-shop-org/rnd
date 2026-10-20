@@ -10,7 +10,8 @@
   "multi_chunk_files": 70,
   "peak_vram_mb": 7488,
   "seconds": 45.9,
-  "desk": "25d9cdd5"
+  "desk": "25d9cdd5",
+  "batch": 8
  },
  "eg2": {
   "model": "eg2",
@@ -23,7 +24,8 @@
   "multi_chunk_files": 78,
   "peak_vram_mb": 8426,
   "seconds": 142.2,
-  "desk": "25d9cdd5"
+  "desk": "25d9cdd5",
+  "batch": 4
  },
  "gte-modernbert": {
   "model": "gte-modernbert",
@@ -36,7 +38,8 @@
   "multi_chunk_files": 71,
   "peak_vram_mb": 6544,
   "seconds": 37.8,
-  "desk": "25d9cdd5"
+  "desk": "25d9cdd5",
+  "batch": 8
  },
  "qwen3-emb-0.6b": {
   "model": "qwen3-emb-0.6b",
@@ -49,6 +52,7 @@
   "multi_chunk_files": 73,
   "peak_vram_mb": 14470,
   "seconds": 94.1,
-  "desk": "25d9cdd5"
+  "desk": "25d9cdd5",
+  "batch": 8
  }
 }

@@ -1257,7 +1257,7 @@ def chart_desk_vram():
     rows = []
     for name in ("bge-m3", "qwen3-emb-0.6b", "gte-modernbert", "eg2"):
         r = runs[name]
-        sub = f"batch {8 if name != 'eg2' else 4} · {r['max_tokens']:,}-token chunks · {r['dtype']}"
+        sub = f"batch {r['batch']} · {r['max_tokens']:,}-token chunks · {r['dtype']}"
         if name == "eg2":
             sub += " · text-only"
         rows.append((name, "registered in the desk", reg[name], "#6b7280", f"{reg[name]:,} MiB"))

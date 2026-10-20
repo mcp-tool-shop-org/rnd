@@ -1,13 +1,13 @@
 ---
 title: "What counts as a duplicate? Calibrating the dataset desk"
-description: The studio's dataset desk flags duplicate images and files before they reach training data. Its thresholds were guesses. We planted copies among known originals, measured what four models and a simple image hash catch, and found that a different view of the same ship looks like a duplicate to most of them. We also found that the desk's memory figures were short by up to seven times.
+description: The studio's dataset desk flags duplicate images and files before they reach training data. Its thresholds were guesses. We planted copies among known originals, measured what six models and a simple image hash catch, and found that a different view of the same ship looks like a duplicate to most of them. We also found that the desk's memory figures were short by up to seven times.
 issue: 16
 date: 2026-10-20
 highlights:
   - "<strong>The old image rule flagged three in four views of the same object as duplicates.</strong> SigLIP2 at the desk's 0.95 caught 95% of planted copies, but also 77% of same-object, different-angle pairs. A two-signal rule with DINOv2 and a mirror-aware image hash keeps 91% of the copies and flags no images from other projects."
   - "<strong>Views are settled by the records, not by a threshold.</strong> The studio's turntable records already say which object and which camera angle each image is. Two angles of one object are never duplicates, whatever their score."
   - "<strong>One embedding model doesn't fit every job.</strong> Used the way its model card says, EmbeddingGemma 2 separates copied scripts cleanly. On logs and JSON from different runs it can't tell copies from look-alikes, so bge-m3 stays the default for text."
-  - "<strong>The desk's memory figures were short by up to seven times.</strong> Measured at long inputs, the three text models needed 3.8× to 6.9× the VRAM the desk had registered for them."
+  - "<strong>The desk's memory figures were short by up to seven times.</strong> Measured at long inputs, three of the four text models needed 3.8× to 6.9× the VRAM the desk had registered for them."
 ---
 
 The studio builds training data from its own art and run records. Before anything is trained on, a tool called the
@@ -43,7 +43,7 @@ and rung 2b ran the text side again through the desk itself.
 | Rule | Copies caught | Other-project images flagged | Views flagged |
 |---|---|---|---|
 | SigLIP2, cosine ≥ 0.95 (the desk's old default) | 95% | **20%** | **77%** |
-| image hash only, the old setting | 71% | 0% | 0.6% |
+| mirror-aware image hash at the old threshold (≥ 246 bits agreeing) | 71% | 0% | 0.6% |
 | image hash only, mirror-aware, ≥ 230 of 256 bits agreeing | 81% | 0% | 4.9% |
 | DINOv2, cosine ≥ 0.97 | 82% | 0% | 4.4% |
 | **DINOv2 + mirror-aware hash, two signals** | **91%** | **0%** | 4.3% |
@@ -54,7 +54,7 @@ ship close together: they show the same thing. That's right for search, but wron
 **DINOv2** is trained on images alone, and it's more literal about what it sees.
 
 **The image hash** (dHash) compares 256 brightness steps between neighbouring pixels. It's cheap, needs no model, and
-survives resizing and JPEG. It breaks on a mirror image: only about 155 of 256 bits agree. Comparing each image with its
+survives resizing and JPEG. It breaks on a mirror image: in rung 1, a flipped copy agreed with its original on 155 of 256 bits on average. Comparing each image with its
 mirror as well brings flipped copies up to about 249.
 
 **The two-signal rule** flags a pair when DINOv2 and the hash agree, or when DINOv2 alone is very sure:
@@ -82,7 +82,7 @@ For files, we compared four text embedding models. Rung 2 ran **EmbeddingGemma 2
 asks for. It got the wrong task prefix, it loaded its image and audio encoders for text it didn't need, and it read
 inputs in short pieces. So rung 2b ran every model through the desk itself, after the desk was rebuilt to follow each
 model's card: a task prefix where the model wants one, text-only loading, and inputs split by the model's own tokenizer
-into chunks of up to 8,000 tokens.
+into chunks up to the model's own limit: 8,000 tokens for EmbeddingGemma 2, 8,192 for the others.
 
 | Pool | Model | Threshold that flags ≤ 1% of non-copies | Copies caught there |
 |---|---|---|---|
@@ -134,8 +134,8 @@ Two other points came out differently once they were tested:
 Every threshold ships marked provisional, with the rung that measured it.
 
 **Not settled yet:**
-- **About 9% of planted image copies escape every rule.** They probably have near-identical siblings in the same
-  set, but nobody has checked: a person will look at those 45.
+- **The two-signal rule misses 46 of the 500 planted image copies.** They probably have near-identical siblings in
+  the same set, but nobody has checked: a person will look at them.
 - **Code thresholds rest on 17 copies.**
 - **Copied sections inside long files** aren't tested. The desk compares the average of a file's chunks, which
   dilutes a shared section.
@@ -144,7 +144,8 @@ Every threshold ships marked provisional, with the rung that measured it.
 
 ## Where the figures come from
 
-- **Images and the first text pass (rung 2):** `experiments/dataset-desk/calibration/data/rung2.json`.
+- **Images and the first text pass (rung 2):** `experiments/dataset-desk/calibration/data/rung2.json`. The plain
+  hash on flipped copies (rung 1) is `data/rung1-dhash.json`.
 - **Text through the desk (rung 2b):** `data/rung2b.json`, the curves and picks, and `data/rung2b-runs.json`, each run's
   model revision, settings, peak VRAM and time.
 - **The mirror test:** `data/mirror-dhash.json`.

@@ -8,7 +8,8 @@ numbers only. The art and the text of the run files aren't published.
 |---|---|
 | `data/rung2.json` | Rung 2: text picks for bge-m3 and EmbeddingGemma 2 run off-card, and image rules (SigLIP2, DINOv2, the mirror-aware dHash) on 500 planted copies, 986 other-project images and 1,381 same-object view pairs. Also each model's revision, peak VRAM and time. |
 | `data/rung2b.json` | Rung 2b: text curves and picks for four models run through dataset-desk 25d9cdd5, all files and scripts only, with EmbeddingGemma 2 also at 512 and 256 dimensions. |
-| `data/rung2b-runs.json` | Each rung 2b run: model revision, role, dimension, dtype, `max_tokens`, peak VRAM, seconds, and files over one chunk. |
+| `data/rung2b-runs.json` | Each rung 2b run: model revision, role, dimension, dtype, `max_tokens`, batch, peak VRAM, seconds, and files over one chunk. The batch is the desk's default at 25d9cdd5, which rung 2b didn't override. |
+| `data/rung1-dhash.json` | Rung 1: the plain dHash sweep, and its mean agreeing bits per variant type (a flip: 154.5 of 256). |
 | `data/mirror-dhash.json` | How far the bit-reversal shortcut for a mirror's dHash is from the real flipped image's dHash, on 300 images. |
 | `data/registry-25d9cdd5.json` | The VRAM figures registered in dataset-desk's `registry.py` at 25d9cdd5. |
 

@@ -1,0 +1,6 @@
+{"lib": "cuda.core", "device": "NVIDIA GeForce RTX 5090", "cc": "12.0", "ok": true, "note": "cubin sm_120", "seconds": 0.92}
+{"lib": "cupy", "device": "NVIDIA GeForce RTX 5090", "cc": "12.0", "ok": true, "note": "cuda runtime 13020", "seconds": 0.89}
+{"lib": "numba-cuda", "device": "NVIDIA GeForce RTX 5090", "cc": "12.0", "ok": true, "note": "numba.cuda.jit", "seconds": 2.43}
+{"lib": "cuda.compute", "device": "NVIDIA GeForce RTX 5090", "cc": "12.0", "ok": true, "note": "reduce_into PLUS", "seconds": 2.99}
+{"lib": "nvmath", "device": "NVIDIA GeForce RTX 5090", "cc": "12.0", "ok": true, "note": "linalg.advanced.matmul 512x512 fp32", "seconds": 1.22}
+{"lib": "cuda.tile", "device": "NVIDIA GeForce RTX 5090", "cc": "12.0", "ok": true, "note": "cuTile vadd", "seconds": 1.24}

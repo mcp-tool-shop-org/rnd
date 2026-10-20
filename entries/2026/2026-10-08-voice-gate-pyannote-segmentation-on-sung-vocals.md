@@ -52,7 +52,8 @@ is in [[2026-10-07-singing-quality-assessment]].
 
 ## Claims
 
-- [verified] On the placed Battle Hymn vocal, mean voice probability is 0.98 in sung frames and 0.08 in rests. (via: ai-jam-sessions voice_gate.py on the RTX 5090 rig, 2026-10-08)
+- [verified] On the placed Battle Hymn vocal, mean voice probability is 0.98 in sung frames and 0.08 in rests. (via: ai-jam-sessions voice_gate.py on the RTX 5090 rig, 2026-10-08; this was a pre-fix mix whose receipt isn't committed)
+- [verified] On the published Battle Hymn vocal (after the onset fix), mean voice probability is 0.984 in sung frames and 0.09 in rests. (via: ai-jam-sessions scores/receipts/battle-hymn-of-the-republic/sung-2026-10-08/voice-gate.json, re-read for the readouts promotion, R&D, 2026-10-20)
 - [verified] It raised no flags on the four vocals the Director had passed by ear. (via: ai-jam-sessions evaluation against the 2026-10-07 listening marks, 2026-10-08)
 - [verified] All three of its voice-in-rest flags fell on the Director's honk marks. (via: same evaluation, 2026-10-08)
 - [verified] It caught 3 of the 20 marked honks; the 17 it missed sat in short phrase gaps. (via: same evaluation, 2026-10-08)

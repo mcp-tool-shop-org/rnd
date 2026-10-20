@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.10] - 2026-10-20
+
+- tonight's promotions, bench side: PAIR telemetry, the published voice-gate levels, the aligner tempo range
+- Updated `2026-10-08-aligner-misdates-cause-sung-dropouts`: Misdated syllable onsets cause dropouts in phrase-picked singing
+- Updated `2026-10-08-voice-gate-pyannote-segmentation-on-sung-vocals`: A one-voice gate for synthesised singing with pyannote segmentation
+- Updated `2026-10-13-nvidia-pair-a-lan-inference-router-and-how-it-compares-with-`: NVIDIA PAIR: a LAN inference router, and how it compares with interlock
+
 ## [1.1.23.1.9] - 2026-10-20
 
 - two critic-design entries: miss range, Kim's 60% scope and PoLL's best single judge corrected at the source

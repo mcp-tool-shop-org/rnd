@@ -37,6 +37,9 @@ definition of an agentic transaction.
   - x402 support, paying in XRP or RLUSD.
 
   The post gives no transaction counts.
+- **The kit has grown since launch.** xrpl.org's AI-tools page now lists the docs MCP server at `mcp.xrpledger.ai`
+  (Ripple's post links context7.com/websites/xrpl), a second server at `xrpl.org/mcp`, and a third skill for trading,
+  beside the wallet and payments skills.
 - **MPP:**
   - Stripe announced it on 2026-03-18, co-authored with Tempo. The post names Tempo as the chain in its example and
     doesn't mention XRPL or Ripple.
@@ -66,6 +69,7 @@ definition of an agentic transaction.
 
 - [verified] The x402 Foundation's repository (x402-foundation/x402, Apache-2.0) holds an `exact` payment scheme for XRPL, added 2026-07-03, in which the payer signs an XRPL Payment and a facilitator submits it; the scheme can't sponsor fees (via: GitHub API and the spec file read at source, Editor, 2026-10-20)
 - [verified] Ripple's post of 2026-06-09 lists the Starter Kit as a docs MCP server, two Claude skills in XRPLF/xrpl-dev-portal, two xrpl.org pages and x402 support in XRP or RLUSD, credits t54 for the x402 contribution, and gives no transaction counts (via: the post read at source, Editor, 2026-10-20)
+- [verified] xrpl.org's AI-tools page lists the XRPL Docs MCP server at mcp.xrpledger.ai, an xrpl.org MCP server at xrpl.org/mcp, and wallet, payments and trading skills (via: the page read at source, Editor, 2026-10-20)
 - [verified] Stripe announced MPP on 2026-03-18, co-authored with Tempo, without mentioning XRPL or Ripple (via: Stripe's post read at source, Editor, 2026-10-20)
 - [verified] MPP's specs in tempoxyz/mpp-specs are CC0 1.0 (via: its LICENSE.md, Editor, 2026-10-20)
 - [verified] Ripple's xrpl-mpp-sdk is Apache-2.0, created 2026-08-14, latest tag 0.1.0-beta.4 (via: GitHub API, Editor, 2026-10-20)
@@ -80,6 +84,7 @@ definition of an agentic transaction.
 - [primary] https://github.com/x402-foundation/x402 — x402 Foundation (Apache-2.0; `specs/schemes/exact/scheme_exact_xrpl.md`)
 - [primary] https://ripple.com/insights/xrpl-ai-starter-kit/ — Ripple, 2026-06-09
 - [primary] https://github.com/XRPLF/xrpl-dev-portal — XRP Ledger Foundation (`.claude/skills/xrpl-skills/`)
+- [primary] https://xrpl.org/resources/dev-tools/ai-tools — xrpl.org (the current list of MCP servers and skills)
 - [primary] https://xrpl.org/docs/agents/agentic-payments-x402 — xrpl.org (via the research agent; not re-read)
 - [primary] https://stripe.com/blog/machine-payments-protocol — Stripe, 2026-03-18
 - [primary] https://github.com/tempoxyz/mpp-specs — Tempo and Stripe (specs CC0)

@@ -1,0 +1,10 @@
+{
+ "schema": "rnd-experiment/v1",
+ "name": "cuda-python-5090-rung",
+ "status": "closed",
+ "design": "README.md",
+ "template": null,
+ "budgets": [],
+ "licences": [],
+ "runs": []
+}

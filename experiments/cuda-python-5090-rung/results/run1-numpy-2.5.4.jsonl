@@ -1,0 +1,6 @@
+{"lib": "cuda.core", "device": "NVIDIA GeForce RTX 5090", "cc": "12.0", "ok": true, "note": "cubin sm_120", "seconds": 3.13}
+{"lib": "cupy", "device": "NVIDIA GeForce RTX 5090", "cc": "12.0", "ok": true, "note": "cuda runtime 13020", "seconds": 3.29}
+{"lib": "numba-cuda", "device": "NVIDIA GeForce RTX 5090", "cc": "12.0", "ok": false, "error": "AttributeError: module 'numpy' has no attribute 'row_stack'", "where": ["  File \"<rung env>\\Lib\\site-packages\\numpy\\__init__.py\", line 782, in __getattr__", "    raise AttributeError(f\"module {__name__!r} has no attribute {attr!r}\")"], "seconds": 2.04}
+{"lib": "cuda.compute", "device": "NVIDIA GeForce RTX 5090", "cc": "12.0", "ok": false, "error": "TypeError: reduce_into() takes 0 positional arguments but 5 were given", "where": ["  File \"<local path>\\smoke_rung.py\", line 73, in t_compute", "    cc_.reduce_into(d_in, d_out, cc_.OpKind.PLUS, N, h_init)"], "seconds": 1.06}
+{"lib": "nvmath", "device": "NVIDIA GeForce RTX 5090", "cc": "12.0", "ok": true, "note": "linalg.advanced.matmul 512x512 fp32", "seconds": 2.02}
+{"lib": "cuda.tile", "device": "NVIDIA GeForce RTX 5090", "cc": "12.0", "ok": true, "note": "cuTile vadd", "seconds": 2.69}

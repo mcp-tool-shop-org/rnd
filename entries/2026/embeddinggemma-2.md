@@ -14,7 +14,8 @@ EmbeddingGemma 2 is Google DeepMind's open embedding model. It maps text and cod
 one 768-dimension space, and the vectors can be cut to 512, 256 or 128 dimensions. The text model is 270M
 parameters. A vision encoder (170M) and an audio encoder (300M) load only when asked for. It reads 8,192 tokens,
 takes short task prefixes, and must run in bfloat16 or float32: in float16 its activations overflow, and it returns
-NaN or silently degraded vectors. Apache-2.0, not gated. The studio has it installed for a CPU benchmark against
+NaN or silently degraded vectors. Apache-2.0, not gated; the card asks deployments to follow the Gemma Prohibited
+Use Policy. The studio has it installed for a CPU benchmark against
 offrig's current embedder, nomic-embed-text.
 
 ## Key points
@@ -57,9 +58,10 @@ offrig's current embedder, nomic-embed-text.
 - [verified] On 93 studio queries over offrig's 11,525-chunk corpus, it beats nomic-embed-text by +0.112 dense nDCG@10 (one-sided 95% lower bound +0.065), +0.174 on code and +0.041 on prose. (via: R&D pre-registered benchmark, round 2 key audited blind by Argon, 2026-10-15)
 - [verified] Cut to 256 dimensions it loses 0.043 nDCG@10 against 768 (one-sided lower bound -0.062) on the same queries. (via: R&D pre-registered benchmark, 2026-10-15)
 - [verified] On the rig's CPU in float32 it embeds 2.6 chunks a second in process, against nomic-embed-text's 5.6 on CPU Ollama. (via: R&D benchmark, 11,525 chunks, 2026-10-15)
-- [unverified] MTEB multilingual v2 61.36, MTEB English v2 68.46 and MTEB code v1 78.68 at 768d. EmbeddingGemma 1 scores 61.15 and 68.76 on the multilingual and code sets. (model card)
-- [unverified] At 256d: MTEB English v2 67.78, code 76.18. (model card)
-- [unverified] Activations exceed float16's range, giving NaN or silent degradation in float16. (model card)
+- [verified] MTEB multilingual v2 61.36, MTEB English v2 68.46 and MTEB code v1 78.68 at 768d. EmbeddingGemma 1 scores 61.15 and 68.76 on the multilingual and code sets. (via: the Hugging Face model card at rev 914f7f89, lines 80-81 and 96, re-read by R&D 2026-10-20)
+- [verified] At 256d: MTEB English v2 67.78, code 76.18. (via: the Hugging Face model card at rev 914f7f89, lines 98, re-read by R&D 2026-10-20)
+- [verified] Activations exceed float16's range, giving NaN or silent degradation in float16. (via: the Hugging Face model card at rev 914f7f89, lines 189-191, re-read by R&D 2026-10-20)
+- [verified] Apache-2.0 and not gated; the card asks deployments to follow the Gemma Prohibited Use Policy. (via: the Hugging Face model card at rev 914f7f89, lines 2, 32 and 282, and the Hub API's gated: false, re-read by R&D 2026-10-20)
 
 ## Sources
 

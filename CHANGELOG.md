@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.6] - 2026-10-20
+
+- embeddinggemma-2: model-card claims verified against the card; the Gemma use-policy term
+- Updated `embeddinggemma-2`: EmbeddingGemma 2 — a multimodal embedder for studio retrieval
+
 ## [1.1.23.1.5] - 2026-10-20
 
 - CuPy runtime check: 13.2 runtime built in, the cudart wheel never loaded

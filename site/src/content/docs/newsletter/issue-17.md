@@ -32,7 +32,7 @@ at the folder's root and one in a subfolder:
 |---|---|---|---|---|
 | `Read(~/**)` (2 runs) | 2.1.197 | **listed both** | **listed both** | refused |
 | `Read(//home/agent/b2probe/**)` | 2.1.197 | refused | **listed both** | refused |
-| `Read(/home/agent/b2probe/**)`, one slash | 2.1.197 | **listed both** | **listed both** | **listed both** |
+| `Read(/home/agent/b2probe/**)`, one slash | 2.1.197 | **listed both** | **listed both** | **listed the sentinel in it** |
 | `Read(//home/agent/b2probe/**)` | 2.1.280 | refused | "No files found" | refused |
 
 Three things stand out:
@@ -41,7 +41,7 @@ Three things stand out:
 - **`~/**` and an absolute path aren't the same rule.** With the home form, even a search started *at* the home folder
   leaked. With the absolute form, a search at the folder itself was refused.
 - **One slash protects nothing.** In Claude Code's permission rules, a path with a single leading `/` is read relative
-  to the settings file, not the root of the disk. So `Read(/home/…)` never matched the real folder, and every search
+  to the settings source, not the root of the disk. So `Read(/home/…)` never matched the real folder, and every search
   listed everything. An absolute path is written with two slashes: `//home/…`.
 
 **On 2.1.280, the search from above came back empty.** The newer CLI filters it. We only had turns to test the absolute
@@ -91,7 +91,8 @@ The lesson we took: don't narrow or widen a measured claim until a probe separat
 ## Where the figures come from
 
 - **The probes:** Claude Code in the studio's `atlas-pilot` Docker sandbox, Grep as the only tool, on the Claude plan
-  with claude-haiku-5-5. 13 short turns in all, on 2026-10-20, plus the original probe on 2026-10-13.
+  with claude-haiku-5-5. 13 short turns in all on 2026-10-20: 6 for the deny-rule searches, 6 for the MCP start and 1
+  for a tracing run. The original probe ran on 2026-10-13.
 - **The entries:**
   [Claude Code: a Read deny rule doesn't stop a Grep walk over the denied tree](https://github.com/mcp-tool-shop-org/rnd/blob/main/entries/2026/2026-10-13-claude-code-read-deny-rules-do-not-stop-a-grep-walk.md)
   and

@@ -637,3 +637,90 @@ class ProtectionRoundOneTests(unittest.TestCase):
 
     def test_an_unreadable_file_has_no_lines(self):
         self.assertEqual(rawdata._lines_matching(self.base / "gone.log", layout.HOME_PATH_RE), [])
+
+
+class VerifyJsonTests(CliBase):
+    """`rnd raw verify --json`: the shape rnd-data's verifier shares (counts, the checked list, {rule, where})."""
+
+    def setUp(self):
+        super().setUp()
+        self.public, self.private, self.blobs = make_stores(self.root / "stores")
+        src = make_receipts(self.root / "in")
+        with mock.patch.dict(os.environ, {"RND_DATA_STORE_D": str(self.blobs)}):
+            rawdata.ingest_tree(src, self.public, self.private, "receipts",
+                                lambda rel: "identity" if rel.endswith("launch.out")
+                                else ("blind" if layout.private_name(rel) else None))
+        env = mock.patch.dict(os.environ, {"RND_DATA": str(self.public), "RND_DATA_PRIVATE": str(self.private)})
+        env.start()
+        self.addCleanup(env.stop)
+
+    def json_run(self, *extra):
+        with mock.patch.dict(os.environ, {}):
+            os.environ.pop("RND_DATA_STORE_D", None)
+            code, out, err = self.run_cli("raw", "verify", "--public-only", "--json", *extra)
+        return code, json.loads(out)
+
+    def test_a_clean_store(self):
+        code, d = self.json_run()
+        self.assertEqual(code, 0)
+        self.assertEqual((d["schema"], d["ok"], d["public_only"]), ("rnd-data-verify/v1", True, True))
+        self.assertEqual(d["counts"]["manifests"], 6)
+        self.assertEqual(d["counts"]["public_git_files"], len(d["checked"]))
+        self.assertEqual(d["checked"], sorted(d["checked"]))
+        self.assertEqual(d["counts"]["declared_blobs_checked"], 0)
+        self.assertEqual(d["skipped"], {"d": 2})
+        self.assertEqual(d["problems"], [])
+
+    def test_problems_carry_rule_and_redacted_place(self):
+        (self.public / "runs/receipts--colab--window1-20261016/files/job.log").write_text("tampered")
+        write(self.public, "runs/receipts/files/stray.txt", "x\n")
+        mp = self.public / "runs/receipts/manifest.json"
+        m = json.loads(mp.read_text(encoding="utf-8"))
+        m["files"].append({"path": "secret-name.json", "sha256": "e" * 64, "bytes": 1, "visibility": "private"})
+        mp.write_text(json.dumps(m), encoding="utf-8")
+        code, d = self.json_run()
+        self.assertEqual(code, 1)
+        got = {(p["rule"], p["where"]) for p in d["problems"]}
+        self.assertIn(("HASH_DIFFERS", "runs/receipts--colab--window1-20261016/files/job.log"), got)
+        self.assertIn(("UNNAMED_FILE", "runs/receipts/files/stray.txt"), got)
+        self.assertIn(("PRIVATE_HASH", f"receipts/files[{len(m['files']) - 1}]"), got)
+        text = json.dumps(d["problems"])
+        self.assertNotIn("e" * 64, text)            # never a hash
+        self.assertNotIn("secret-name", text)       # never a private entry's name
+
+    def test_the_full_check_counts_blobs(self):
+        with mock.patch.dict(os.environ, {"RND_DATA_STORE_D": str(self.blobs)}):
+            code, out, err = self.run_cli("raw", "verify", "--json")
+        d = json.loads(out)
+        self.assertEqual(code, 0, err)
+        self.assertEqual(d["counts"]["declared_blobs_checked"], 2)
+        self.assertFalse(d["public_only"])
+
+    def test_a_missing_store_root_is_a_coded_problem(self):
+        with mock.patch.dict(os.environ, {}):
+            os.environ.pop("RND_DATA_STORE_D", None)
+            code, out, _ = self.run_cli("raw", "verify", "--json")
+        d = json.loads(out)
+        self.assertEqual(code, 1)
+        self.assertIn("NO_STORE_ROOT", {p["rule"] for p in d["problems"]})
+        self.assertIn("counts", d)
+
+    def test_one_missing_run(self):
+        code, d = self.json_run("--run", "nope")
+        self.assertEqual((code, d["problems"]), (1, [{"rule": "NO_RUN", "where": "nope"}]))
+
+    def test_every_damage_class_has_its_rule(self):
+        blobs = sorted(self.blobs.glob("blobs/*/*"))
+        os.chmod(blobs[0], stat.S_IREAD | stat.S_IWRITE)  # Linux: write-only would make --deep unable to read it
+        blobs[0].write_bytes(b"y" * blobs[0].stat().st_size)          # same size, wrong bytes: only --deep sees it
+        mp = self.public / "runs/receipts--colab--window2-20261017/manifest.json"
+        m = json.loads(mp.read_text(encoding="utf-8"))
+        m["copies"].append({"sha256": m["copies"][0]["sha256"], "store": "d", "location": "blobs/00/" + "0" * 64})
+        mp.write_text(json.dumps(m), encoding="utf-8")
+        (self.public / "runs/receipts--colab--window1-20261016/files/job.log").unlink()
+        (self.public / "runs/receipts--commandui/manifest.json").write_text("{broken")
+        with mock.patch.dict(os.environ, {"RND_DATA_STORE_D": str(self.blobs)}):
+            code, out, _ = self.run_cli("raw", "verify", "--json", "--deep")
+        rules = {p["rule"] for p in json.loads(out)["problems"]}
+        self.assertEqual(code, 1)
+        self.assertTrue({"BAD_MANIFEST", "MISSING", "BLOB_MISSING", "HASH_DIFFERS"} <= rules, rules)

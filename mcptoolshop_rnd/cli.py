@@ -564,9 +564,13 @@ def cmd_raw(args):
             if args.public_only and args.deep:
                 return fail("RAW_USAGE", "--deep re-hashes blobs, which --public-only skips",
                             "use one: --public-only (a public clone) or --deep (the rig)")
-            skipped = {}
+            skipped, report = {}, {}
             problems = rawdata.verify(public, None if args.public_only or not private.is_dir() else private,
-                                      deep=args.deep, run=args.run, public_only=args.public_only, skipped=skipped)
+                                      deep=args.deep, run=args.run, public_only=args.public_only, skipped=skipped,
+                                      report=report)
+            if args.json:
+                print(json.dumps(rawdata.as_json(problems, report, skipped, public_only=args.public_only), indent=1))
+                return 1 if problems else 0
             for line in problems:
                 print(f"error: {line}", file=sys.stderr)
             if args.public_only:
@@ -1018,6 +1022,8 @@ def build_parser():
     s.add_argument("--private", help="the rnd-data-private checkout (default: $RND_DATA_PRIVATE, else ../rnd-data-private)")
     s.add_argument("--run", help="verify: one run id")
     s.add_argument("--deep", action="store_true", help="verify: re-hash every blob, not only check its size")
+    s.add_argument("--json", action="store_true",
+                   help="verify: the result as JSON (counts, the checked public git files, problems as {rule, where})")
     s.add_argument("--public-only", action="store_true",
                    help="verify: only what a public clone can check (CI): git copies, plus files no manifest names, the "
                         "private tag, private-looking names and machine paths; skips the blob store and the companion")

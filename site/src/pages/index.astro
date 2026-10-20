@@ -112,6 +112,9 @@ const useIt = config.sections.find((s) => s.id === 'use-it');
         ))}
       </ul>
     )}
+    {back.length > 0 && (
+      <p class="mt-4 text-sm text-dim">There's no issue 12: the number was skipped.</p>
+    )}
   </Section>
 
   {useIt && useIt.kind === 'code-cards' && (

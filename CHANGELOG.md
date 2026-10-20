@@ -13,7 +13,7 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [1.1.19.0.1] - 2026-10-19
 
-- The site's header logo and favicon become the rnd badge's centre mark (brand repo logos/rnd, new in brand#105); the accent moves from teal to the badge's navy blue
+- The site's header logo and favicon become the rnd badge's centre mark (brand repo logos/rnd, polished in brand#107, sha256 335c2947); the accent moves from teal to the badge's navy blue
 
 ## [1.1.19.0.0] - 2026-10-19
 

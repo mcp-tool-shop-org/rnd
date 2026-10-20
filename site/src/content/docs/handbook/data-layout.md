@@ -132,6 +132,7 @@ rnd raw ingest <folder> --prefix receipts --reasons reasons.json   # runs into r
 rnd raw private <folder> --as rnd-local --reasons reasons.json     # a private source's exceptions
 rnd raw verify [--run ID] [--deep]                                 # re-hash every git copy; check (or re-hash) every blob
 rnd raw verify --public-only                                       # what a public clone can check (rnd-data's CI)
+rnd raw verify --public-only --json                                # the same, as counts, the checked files and {rule, where}
 rnd raw relicense --rules <rules.json> --prefix receipts          # reapply a rules file's licences to its manifests
 ```
 

@@ -394,6 +394,17 @@ def ingest_private(source: Path, private: Path, name: str, classify, *, pinned_t
     return stats
 
 
+class Problem(str):
+    """A verify problem: its text (what `rnd raw verify` prints), plus a stable rule code and a redacted place for
+    `--json`. The place is a public path (with a line), or a manifest id with an index: never a hash, the matched text
+    or a content-private file's name. It is a str, so every caller that printed problems still works."""
+
+    def __new__(cls, rule: str, where: str, text: str):
+        p = super().__new__(cls, text)
+        p.rule, p.where = rule, where
+        return p
+
+
 # rnd-data's own pages that name the private tag to explain it (README, SECURITY.md, the handbook). Exact paths.
 TAG_DOCS = ("README.md", "SECURITY.md", "site/src/content/docs/handbook/private-files.md",
             "site/src/content/docs/handbook/verifying.md")
@@ -428,23 +439,25 @@ def _public_tree_problems(public: Path, manifests: list[dict]) -> list[str]:
         p = public / rel
         in_runs = rel.startswith("runs/")
         if in_runs and rel not in named:
-            problems.append(f"{rel}: under runs/ but named by no manifest")
+            problems.append(Problem("UNNAMED_FILE", rel, f"{rel}: under runs/ but named by no manifest"))
         if in_runs and not rel.endswith("/manifest.json") and p.stat().st_size > SMALL_LIMIT:
-            problems.append(f"{rel}: over {SMALL_LIMIT // 1024} KB in git; a larger file belongs in the blob store")
+            problems.append(Problem("OVERSIZE_GIT_FILE", rel,
+                                    f"{rel}: over {SMALL_LIMIT // 1024} KB in git; a larger file belongs in the blob store"))
         if layout.private_name(rel):
-            problems.append(f"{rel}: the name looks private (blind, sealed, gold key, item text, review items)")
+            problems.append(Problem("PRIVATE_NAME", rel,
+                                    f"{rel}: the name looks private (blind, sealed, gold key, item text, review items)"))
         if rel not in TAG_DOCS and _has_marker(p, tag):
-            problems.append(f"{rel}: carries the private tag")
+            problems.append(Problem("PRIVATE_TAG", rel, f"{rel}: carries the private tag"))
         if in_runs:
             for mk, name in zip(markers, layout.CONTENT_MARKERS):
                 if _has_marker(p, mk):
-                    problems.append(f"{rel}: carries a content marker ({name})")
+                    problems.append(Problem("CONTENT_MARKER", rel, f"{rel}: carries a content marker ({name})"))
         for n in _lines_matching(p, layout.HOME_PATH_RE):
-            problems.append(f"{rel}:{n}: a home-directory path")
+            problems.append(Problem("HOME_PATH", f"{rel}:{n}", f"{rel}:{n}: a home-directory path"))
         raw_run_file = in_runs and not rel.endswith("/manifest.json")
         if not raw_run_file and (rel == "store.json" or rel.endswith("/manifest.json") or rel.endswith(DOC_SUFFIXES)):
             for n in _lines_matching(p, layout.MACHINE_PATH_RE):
-                problems.append(f"{rel}:{n}: a drive or machine path")
+                problems.append(Problem("MACHINE_PATH", f"{rel}:{n}", f"{rel}:{n}: a drive or machine path"))
     return problems
 
 
@@ -457,29 +470,37 @@ def _public_copy_problems(m: dict) -> list[str]:
     out = []
     for i, c in enumerate(m.get("copies", [])):
         if c.get("store") == "rnd-data-private":
-            out.append(f"{rid}: copies[{i}] names the private companion")
+            out.append(Problem("COPY_NAMES_COMPANION", f"{rid}/copies[{i}]", f"{rid}: copies[{i}] names the private companion"))
         elif c.get("sha256") not in public_hashes:
-            out.append(f"{rid}: copies[{i}] carries a hash that isn't a public file's")
+            out.append(Problem("COPY_HASH_NOT_PUBLIC", f"{rid}/copies[{i}]",
+                               f"{rid}: copies[{i}] carries a hash that isn't a public file's"))
         if c.get("location") in private_locs:
-            out.append(f"{rid}: copies[{i}] points at a private entry's path")
+            out.append(Problem("COPY_AT_PRIVATE_PATH", f"{rid}/copies[{i}]",
+                               f"{rid}: copies[{i}] points at a private entry's path"))
     return out
 
 
 def verify(public: Path, private: Path | None = None, *, deep: bool = False, run: str | None = None,
-           public_only: bool = False, skipped: dict | None = None) -> list[str]:
+           public_only: bool = False, skipped: dict | None = None, report: dict | None = None) -> list[str]:
     """Problems with the stores. Every git copy is re-hashed; a blob is checked by size, and re-hashed with `deep`.
 
     With `public_only` (what a public clone such as CI can check), the blob store and the private companion are
     skipped, and counted per store into `skipped`; the public tree's own rules are checked instead (see
-    _public_tree_problems)."""
+    _public_tree_problems).
+
+    With `report`, the dict is filled with what was checked: counts (manifests, public git files, declared blobs
+    checked) and the sorted list of public git files re-hashed. That, with the problems' rule codes, is `--json`'s
+    shape, shared with rnd-data's own verifier so the two can be compared file for file."""
     problems, roots = [], {}
+    report = {} if report is None else report
+    checked, blobs_checked, n_manifests = set(), 0, 0
     skipped = {} if skipped is None else skipped
     targets = []
     manifests = sorted((public / "runs").glob("*/manifest.json")) if (public / "runs").is_dir() else []
     if run:
         manifests = [m for m in manifests if m.parent.name == run]
         if not manifests:
-            return [f"no run {run!r} in this store"]
+            return [Problem("NO_RUN", run, f"no run {run!r} in this store")]
     targets += [(m, public) for m in manifests]
     if public_only:
         private = None
@@ -497,12 +518,15 @@ def verify(public: Path, private: Path | None = None, *, deep: bool = False, run
         try:
             m = json.loads(mpath.read_text(encoding="utf-8"))
         except json.JSONDecodeError as exc:
-            problems.append(f"{mpath.name}: not valid JSON ({exc})")
+            problems.append(Problem("BAD_MANIFEST", mpath.parent.name, f"{mpath.name}: not valid JSON ({exc})"))
             continue
+        if base == public:
+            n_manifests += 1
         sizes = {f["sha256"]: f["bytes"] for f in m.get("files", []) if f.get("sha256")}
-        for e in m.get("files", []):
+        for i, e in enumerate(m.get("files", [])):
             if e.get("visibility") == "private" and e.get("sha256"):
-                problems.append(f"{m.get('id')}: {e['path']} is private but its hash is published")
+                problems.append(Problem("PRIVATE_HASH", f"{m.get('id')}/files[{i}]",
+                                        f"{m.get('id')}: {e['path']} is private but its hash is published"))
         if base == public:
             problems += _public_copy_problems(m)
         for c in m.get("copies", []):
@@ -512,23 +536,42 @@ def verify(public: Path, private: Path | None = None, *, deep: bool = False, run
                 continue
             if c["store"] in ("rnd-data", "rnd-data-private"):
                 p = (public if c["store"] == "rnd-data" else (private or base)) / c["location"]
+                if c["store"] == "rnd-data" and base == public:
+                    checked.add(c["location"])
                 if not p.is_file():
-                    problems.append(f"{where}: missing")
+                    problems.append(Problem("MISSING", c["location"], f"{where}: missing"))
                 elif sha256_file(p) != c["sha256"]:
-                    problems.append(f"{where}: hash differs")
+                    problems.append(Problem("HASH_DIFFERS", c["location"], f"{where}: hash differs"))
                 continue
             try:
                 roots.setdefault(c["store"], store_root(public, c["store"]))
             except RawError as exc:
-                return problems + [str(exc)]
+                report.update(_report(n_manifests, checked, blobs_checked))
+                return problems + [Problem(exc.code, c["store"], str(exc))]
             p = roots[c["store"]] / c["location"]
+            blobs_checked += 1
             if not p.is_file():
-                problems.append(f"{where}: missing from store {c['store']}")
+                problems.append(Problem("BLOB_MISSING", c["location"], f"{where}: missing from store {c['store']}"))
             elif p.stat().st_size != sizes.get(c["sha256"], p.stat().st_size):
-                problems.append(f"{where}: size differs")
+                problems.append(Problem("SIZE_DIFFERS", c["location"], f"{where}: size differs"))
             elif deep and sha256_file(p) != c["sha256"]:
-                problems.append(f"{where}: hash differs")
+                problems.append(Problem("HASH_DIFFERS", c["location"], f"{where}: hash differs"))
+    report.update(_report(n_manifests, checked, blobs_checked))
     return problems
+
+
+def _report(n_manifests: int, checked: set, blobs_checked: int) -> dict:
+    return {"counts": {"manifests": n_manifests, "public_git_files": len(checked),
+                       "declared_blobs_checked": blobs_checked},
+            "checked": sorted(checked)}
+
+
+def as_json(problems: list, report: dict, skipped: dict, *, public_only: bool) -> dict:
+    """`rnd raw verify --json`: the shape rnd-data's verifier defines (counts, the checked list, problems as
+    {rule, where}), plus what was skipped and the verdict."""
+    return {"schema": "rnd-data-verify/v1", "public_only": public_only, "ok": not problems,
+            **report, "skipped": dict(sorted(skipped.items())),
+            "problems": [{"rule": getattr(p, "rule", "UNKNOWN"), "where": getattr(p, "where", "")} for p in problems]}
 
 
 def relicense(public: Path, rules: dict, prefix: str, *, dry_run: bool = False) -> dict:

@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.7] - 2026-10-20
+
+- cuda-python rung: the CUDA EULA reading marked [unverified], awaiting the outside check
+- Updated `embeddinggemma-2`: EmbeddingGemma 2 — a multimodal embedder for studio retrieval
+- Updated experiment `cuda-python-5090-rung`
+
 ## [1.1.23.1.6] - 2026-10-20
 
 - embeddinggemma-2: model-card claims verified against the card; the Gemma use-policy term

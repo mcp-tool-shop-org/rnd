@@ -59,18 +59,20 @@ faucet's grant, ledger reserves.
   - a faucet response treated as proof of funding.
 
   xrpl-lab#20 lists 11 more handlers with the same funding race.
-- **The release outcome stays with xrpl-lab #19.** A run 4 on the final head follows Argon's second review. This
-  entry records the layering, not the release.
+- **The release:** a fourth run, on the code Argon passed in its second review, also passed (9 of 9 tesSUCCESS, pool
+  deleted, exit 0). xrpl-lab v2.6.0 was tagged on #19's merge commit (036c187) on 2026-10-20.
 
 ## Claims
 
-- [verified] Module #30's first live run on XRPL Testnet (xrpl-lab 7acc67c) created no AMM: the wallet was funded three times (300 XRP) while each funding was reported as failed, the issuer's AccountSet never validated, and AMMCreate, AMMDeposit and AMMWithdraw hit the 60 s client timeout with no hash recorded (terNO_RIPPLE / terNO_AMM by simulate afterwards); the report said "2 successful, 0 failed". (via: xrpl-lab PR #19 docs/receipts/2.6.0-amm-live-fire/run-1-f9-20261020T2056Z and its README, read by R&D, 2026-10-20)
+- [verified] Module #30's first live run on XRPL Testnet (xrpl-lab 7acc67c) created no AMM: the wallet was funded three times (300 XRP) while each funding was reported as failed, the issuer's AccountSet never validated, and AMMCreate, AMMDeposit and AMMWithdraw hit the 60 s client timeout with no hash recorded (terNO_RIPPLE / terNO_AMM by simulate afterwards); the report said "2 successful, 0 failed". (via: xrpl-lab main docs/receipts/2.6.0-amm-live-fire/run-1-f9-20261020T2056Z and its README, read by R&D, 2026-10-20)
 - [verified] The second run (f803a49), with funding and hash handling fixed, validated AMMCreate as tecUNFUNDED_AMM (1C14C1C3…08A1F5, ledger 21692864, fee 200000 = reserve_inc) because the module pooled 100 XRP from a single 100 XRP faucet grant; the report said "16 passed, 2 failed" and "3 successful, 0 failed", and the process exited 0. (via: the run-2 receipt folder and README, read by R&D, 2026-10-20)
 - [verified] The third run (453d361) passed: 9 of 9 transactions tesSUCCESS, AMMCreate 25/25 at a fee of reserve_inc, AMMDeposit with tfTwoAsset and AMMWithdraw with tfWithdrawAll accepted, and after the sole LP's full withdraw the AMM was deleted and amm_info returned actNotFound. (via: the run-3 receipt folder and README, read by R&D, 2026-10-20)
+- [verified] A fourth run (9630389, code identical to the 35de678 Argon passed) also passed: 9 of 9 transactions tesSUCCESS, the pool deleted after the full withdraw with amm_info actNotFound after, exit 0, 18 of 18 steps passed. (via: the run-4 receipt folder and README on xrpl-lab main, read by R&D, 2026-10-20)
 - [verified] xrpl-py's submit_and_wait waits on a held (ter) result until the transaction's LastLedgerSequence passes, about 20 ledgers; a shorter client timeout loses the hash and the preliminary result. (via: the run-1 receipt and xrpl-lab's fix in f803a49, reviewed by R&D, 2026-10-20)
 
 ## Sources
 
-- [primary] https://github.com/mcp-tool-shop-org/xrpl-lab/pull/19 — xrpl-lab PR #19 (2.6.0), receipts under `docs/receipts/2.6.0-amm-live-fire/` (run 1, run 2, run 3; head 9630389 at the time of writing)
-- [rig] The three live runs, executed by the Book Keeper seat on the Robot rig against XRPL Testnet, 2026-10-20
+- [primary] https://github.com/mcp-tool-shop-org/xrpl-lab/tree/main/docs/receipts/2.6.0-amm-live-fire — the four run receipts and their README, on xrpl-lab main (merged in #19, tagged v2.6.0)
+- [primary] https://github.com/mcp-tool-shop-org/xrpl-lab/pull/19 — xrpl-lab PR #19 (2.6.0), the fixes between runs
+- [rig] The four live runs, executed by the Book Keeper seat on the Robot rig against XRPL Testnet, 2026-10-20
 - [primary] https://github.com/mcp-tool-shop-org/xrpl-lab/issues/20 — the remaining handlers with the same funding race

@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.2] - 2026-10-20
+
+- bench corrections from the readouts promotions: qwen32b's 127-pair baseline is 0.701, cuda-13-4 re-sourced to NVIDIA's 13.4 release notes and nvcc docs, the deny-grep finding narrowed to the denied root itself
+- Updated `2026-10-07-cuda-13-4-developer-experience`: CUDA 13.4 developer-experience changes (compiler, runtime, packaging)
+- Updated `2026-10-07-qwen32b-judge-position-bias`: Qwen2.5-32B as a judge of planted errors — ties, total position bias, and how to plant errors
+- Updated `2026-10-13-claude-code-read-deny-rules-do-not-stop-a-grep-walk`: Claude Code: a Read deny rule doesn't stop a Grep walk over the denied tree
+
 ## [1.1.23.1.1] - 2026-10-20
 
 - newsletter issue 16: calibrating the dataset desk's duplicate rules; the CUDA rung's licence check recorded

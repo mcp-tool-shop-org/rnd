@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.1] - 2026-10-20
+
+- newsletter issue 16: calibrating the dataset desk's duplicate rules; the CUDA rung's licence check recorded
+- Updated experiment `charts`
+- Updated experiment `dataset-desk`: the calibration data for rungs 1, 2 and 2b
+
 ## [1.1.23.1.0] - 2026-10-19
 
 - New experiment cuda-python-5090-rung and rig-fact entry 2026-10-20-cuda-python-on-5090: six CUDA Python libraries (cuda.core, CuPy, numba-cuda, cuda.compute, nvmath-python, cuTile) run a checked kernel on the RTX 5090 at compute capability 12.0, pinned, once NumPy is held below 2.5; the cuTile-on-sm_120 question is answered
@@ -393,12 +399,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 - dataset-desk: the design record filed (design, Argon passes 2-3 and the follow-up); the code moved to mcp-tool-shop-org/dataset-desk v0.1.0; instrument file
 - Added `dataset-desk`: dataset-desk — review a visual dataset before it trains or tests anything
-- Added experiment `dataset-desk`
+- Updated experiment `dataset-desk`: the calibration data for rungs 1, 2 and 2b
 
 ## [1.1.10.0.3] - 2026-10-15
 
 - embeddinggemma-2: the multimodal design, revision 3, approved (desk-checked queries, Path A, the acceptance tests)
-- Added experiment `dataset-desk`
+- Updated experiment `dataset-desk`: the calibration data for rungs 1, 2 and 2b
 - Updated experiment `embeddinggemma-2`
 
 ## [1.1.10.0.2] - 2026-10-15

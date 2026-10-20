@@ -54,8 +54,14 @@ The raw rows are in [`results/`](results/). In run 1's tracebacks, local paths a
 - **cuTile runs on consumer Blackwell.** That answers [[2026-10-07-cutile-on-sm120]].
 - **NumPy is the shared pin to watch.** A `[gpu]` extra needs `numpy>=2.4,<2.5` until numba supports 2.5. Left
   alone, the resolver picks 2.5.
-- **CuPy reports a CUDA 13.2 runtime** (`runtimeGetVersion` 13020) though the 13.4.92 runtime wheel is installed.
-  It ran correctly. Why it reports 13.2 isn't established; it may load its own runtime. [unverified]
+- **CuPy uses its own built-in CUDA 13.2 runtime** (`runtimeGetVersion` 13020), though the 13.4.92 runtime wheel is
+  installed. It ran correctly.
+  - A follow-up on 2026-10-20 ran [`scripts/cupy_runtime_check.py`](scripts/cupy_runtime_check.py) under the
+    Publisher's grant. It brings a CuPy context up and lists the CUDA DLLs in the process.
+  - No cudart DLL is loaded, although the env's 13.4 wheel ships `cudart64_13.dll`.
+  - CuPy does load `nvrtc64_130_0.dll` and `cublasLt64_13.dll` from the 13.x wheels, and `nvrtc-builtins64_134.dll`
+    from the system's CUDA 13.4 toolkit.
+  - The output is in [`results/cupy-runtime-2026-10-20.txt`](results/cupy-runtime-2026-10-20.txt).
 - **A smoke rung shows each library installs and runs a kernel here.** It says nothing yet about speed or about
   features for rnd-data. That comes from the design, after Argon's exploration.
 

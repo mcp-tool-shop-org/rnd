@@ -1,0 +1,13 @@
+# scripts/cupy_runtime_check.py, run once under the Publisher's grant, 2026-10-20 ~19:40Z.
+# Env: the rung's environment (cupy-cuda13x 14.2.0, CUDA 13.4.92 runtime wheels), driver 617.42.
+# Output as printed, with numpy's modules and CuPy's own .pyd extension modules left out,
+# and site-packages paths shortened. 136 modules were loaded in all.
+cupy 14.2.0 | sum 6.0
+runtimeGetVersion 13020 | driverGetVersion 13040
+loaded site-packages/nvidia/cu13/bin/x86_64/nvrtc64_130_0.dll
+loaded site-packages/nvidia/cu13/bin/x86_64/cublasLt64_13.dll
+loaded C:/WINDOWS/SYSTEM32/nvcuda.dll
+loaded site-packages/cutensor/bin/cutensor.dll
+loaded C:/WINDOWS/system32/DriverStore/FileRepository/nvhdci.inf_amd64_<id>/nvcuda64.dll
+loaded C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.4/bin/x64/nvrtc-builtins64_134.dll
+# No cudart DLL was loaded, though the env holds site-packages/nvidia/cu13/bin/x86_64/cudart64_13.dll.

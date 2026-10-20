@@ -11,6 +11,15 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.3] - 2026-10-20
+
+- Job B live re-probes in atlas-pilot: the Read-deny Grep leak depends on the rule form (~ or //) and is filtered on 2.1.280; MCP pending reproduced on 2.1.197, not on 2.1.280; sandbox credentials and host-Ollama reach verified; NeMo Relay's ATOF carries account identity
+- Updated `2026-10-13-claude-code-read-deny-rules-do-not-stop-a-grep-walk`: Claude Code: a Read deny rule doesn't stop a Grep walk over the denied tree
+- Updated `2026-10-13-claude-code-starts-a-turn-before-mcp-servers-connect`: Claude Code starts a print-mode turn before its MCP servers connect, on Anthropic's endpoint
+- Updated `2026-10-13-docker-sandboxes-on-the-rig-from-signup-to-a-pinned-pilot-wo`: Docker Sandboxes on the rig: from signup to a pinned pilot workspace
+- Updated `2026-10-13-nemo-relay-first-trial-in-the-sandbox`: NeMo Relay's first trial: it traces Claude Code in the sandbox at no measurable cost, and sends nothing of its own
+- Updated `2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ`: NVIDIA NeMo Relay: tracing agent harnesses, Claude Code included
+
 ## [1.1.23.1.2] - 2026-10-20
 
 - bench corrections from the readouts promotions: qwen32b's 127-pair baseline is 0.701, cuda-13-4 re-sourced to NVIDIA's 13.4 release notes and nvcc docs, the deny-grep finding narrowed to the denied root itself

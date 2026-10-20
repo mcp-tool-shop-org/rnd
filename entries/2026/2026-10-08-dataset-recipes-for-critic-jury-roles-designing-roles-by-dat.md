@@ -83,9 +83,10 @@ A sixth surveyed role-os. In brief, the evidence supports the direction:
     (Gardner 2020; Swayamdipta 2020; Le Bras 2020), though counterfactual data
     is not a guaranteed fix (Huang 2020).
 - **Juries add little unless their errors differ.**
-  - Across 350+ LLMs, two models that are both wrong agree on the wrong answer
-    about 60% of the time, and more so for larger models and the same
-    developer (Kim et al. 2025).
+  - Across 350+ LLMs, on one leaderboard dataset (HELM), two models that are both
+    wrong agree on the wrong answer about 60% of the time; shared architectures and
+    providers raise it, and larger, more accurate models are highly correlated even
+    across providers (Kim et al. 2025).
   - LLM judges favour models like themselves, and errors grow more similar with
     capability. CAPA is a chance-adjusted measure of mistake overlap (Goel et
     al. 2025).
@@ -205,9 +206,10 @@ once A's second-planter tooling exists.
 - [verified] Self-Taught Evaluators lifted Llama-3-70B-Instruct from 75.4 to 88.3 on RewardBench; modified-instruction negatives scored 83.8 against 80.7 for directly prompted bad responses. (via: research agent reading arXiv 2408.02666 HTML, 2026-10-08)
 - [verified] Prometheus 2: separately trained pointwise and pairwise judges merged by weight reached 0.670 Pearson and 79.15% pairwise accuracy, against 0.595 and 75.29% for joint training. (via: research agent reading arXiv 2405.01535 HTML, 2026-10-08)
 - [verified] JudgeLM: swap augmentation raised order consistency from 73.45% to 78.89% (7B); going from 3.5K to 100K training examples raised agreement 75.9→83.7 (7B) and 85.4→90.1 (33B). (via: research agent reading arXiv 2310.17631 HTML, 2026-10-08)
-- [verified] Across 350+ LLMs, when two models both err they choose the same wrong answer on about 60% of items, more so for larger models and the same developer. (via: research agent web-checking Kim et al. 2025, arXiv 2506.07962, 2026-10-08)
+- [verified] Across 350+ LLMs, on one leaderboard dataset (HELM), when two models both err they choose the same wrong answer about 60% of the time; shared architectures and providers raise it, and larger, more accurate models have highly correlated errors even across architectures and providers. (via: arXiv 2506.07962 abstract, scope corrected to HELM, re-read at the source for the readouts promotion, R&D, 2026-10-20)
 - [verified] LLM judges favour models similar to themselves, and model mistakes grow more similar with capability; CAPA measures chance-adjusted mistake overlap. (via: research agent web-checking Goel et al. 2025, arXiv 2502.04313, 2026-10-08)
-- [verified] PoLL reached Cohen's kappa 0.763 / 0.906 / 0.867 on NQ / TriviaQA / HotpotQA, against best single judges at 0.749 / 0.894 / 0.873. (via: research agent web-checking Verga et al. 2024, arXiv 2404.18796, 2026-10-08)
+- [wrong] PoLL's best single-judge comparators were 0.749 / 0.894 / 0.873 on NQ / TriviaQA / HotpotQA. (via: arXiv 2404.18796 Table 1, re-read at the source for the readouts promotion, R&D, 2026-10-20: the best on TriviaQA is CMD-R 0.902)
+- [verified] PoLL reached Cohen's kappa 0.763 / 0.906 / 0.867 on NQ / TriviaQA / HotpotQA; the best single judges were Haiku 0.749, CMD-R 0.902 and Haiku 0.873, so PoLL leads on NQ and TriviaQA and trails Haiku on HotpotQA. (via: arXiv 2404.18796 Table 1, re-read at the source for the readouts promotion, R&D, 2026-10-20)
 - [verified] role-os has a specialists layer (registry, L0–L5 certification, shadow probes with andon halt, drift detection) that lets a role point at a trained non-Claude model; its outcome-ledger calibration (src/calibration.mjs) is not called from routing. (via: survey agent reading E:/AI/role-os source at c0f8614, 2026-10-08)
 - [unverified] Nine LLM judges from 7 families behaved like 2.3–3.1 independent votes, and the best single judge matched or beat the panel (arXiv 2605.29800; single preprint, search summary only).
 - [unverified] A classifier distinguishes text from five major LLMs at about 97%, and the signal survives rewriting (Sun et al. 2025, arXiv 2502.12150; from memory).

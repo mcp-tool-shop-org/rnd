@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.9] - 2026-10-20
+
+- two critic-design entries: miss range, Kim's 60% scope and PoLL's best single judge corrected at the source
+- Updated `2026-10-08-dataset-recipes-for-critic-jury-roles-designing-roles-by-dat`: Dataset recipes for critic jury roles — designing roles by data and choosing the panel
+- Updated `2026-10-08-three-follow-up-studies-for-critic-recipes-hard-pairs-two-pl`: Three follow-up studies for critic recipes — hard pairs, two planter families, natural errors
+
 ## [1.1.23.1.8] - 2026-10-20
 
 - open-jev: three corrections from the promotion re-read (Laya MPS hardware, Nimble metric, Kev token range); Kev-4B 124/127 settled

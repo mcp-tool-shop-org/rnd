@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.20.0.0] - 2026-10-19
+
+- rnd raw verify --public-only: what a public clone can check (rnd-data's CI): git copies re-hashed, the blob store and the companion skipped and counted, plus a file under runs/ no manifest names or carrying the private tag, a private-looking name anywhere, and a machine path in a manifest
+- rnd raw relicense: reapplies a rules file's licences to written manifests, changing only the licence field; receipts.json gains the licence rules from the Director's ruling (data CC BY 4.0, scripts MIT, llama.cpp MIT) and the Publisher's verifier-gold rule
+
 ## [1.1.19.0.1] - 2026-10-19
 
 - The site's header logo and favicon become the rnd badge's centre mark (brand repo logos/rnd, polished in brand#107, sha256 335c2947); the accent moves from teal to the badge's navy blue

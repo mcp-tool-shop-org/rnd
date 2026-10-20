@@ -394,9 +394,38 @@ def ingest_private(source: Path, private: Path, name: str, classify, *, pinned_t
     return stats
 
 
-def verify(public: Path, private: Path | None = None, *, deep: bool = False, run: str | None = None) -> list[str]:
-    """Problems with the stores. Every git copy is re-hashed; a blob is checked by size, and re-hashed with `deep`."""
+def _public_tree_problems(public: Path, manifests: list[dict]) -> list[str]:
+    """What only the public tree can show: a file under runs/ that no manifest names or that carries the private tag,
+    a file anywhere with a private-looking name, and a machine path in a manifest.
+
+    The tag is checked under runs/ only: data reaches rnd-data through ingest, and the hand-written pages beside it
+    (README, SECURITY, the handbook) name the tag to explain it."""
+    problems = []
+    named = {c["location"] for m in manifests for c in m.get("copies", []) if c.get("store") == "rnd-data"}
+    named |= {f"runs/{m.get('id')}/manifest.json" for m in manifests}
+    tag = layout.PRIVATE_TAG.encode()
+    for rel in layout.library_files(public):
+        if rel.startswith("runs/") and rel not in named:
+            problems.append(f"{rel}: under runs/ but named by no manifest")
+        if layout.private_name(rel):
+            problems.append(f"{rel}: the name looks private (blind, sealed, gold key, item text, review items)")
+        p = public / rel
+        if rel.startswith("runs/") and p.stat().st_size <= layout.TAG_SCAN_LIMIT and tag in p.read_bytes():
+            problems.append(f"{rel}: carries the private tag")
+    for m in manifests:
+        problems += [f"{m.get('id')}: a machine path at {w}" for w in layout._machine_paths(m)]
+    return problems
+
+
+def verify(public: Path, private: Path | None = None, *, deep: bool = False, run: str | None = None,
+           public_only: bool = False, skipped: dict | None = None) -> list[str]:
+    """Problems with the stores. Every git copy is re-hashed; a blob is checked by size, and re-hashed with `deep`.
+
+    With `public_only` (what a public clone such as CI can check), the blob store and the private companion are
+    skipped, and counted per store into `skipped`; the public tree's own rules are checked instead (see
+    _public_tree_problems)."""
     problems, roots = [], {}
+    skipped = {} if skipped is None else skipped
     targets = []
     manifests = sorted((public / "runs").glob("*/manifest.json")) if (public / "runs").is_dir() else []
     if run:
@@ -404,6 +433,16 @@ def verify(public: Path, private: Path | None = None, *, deep: bool = False, run
         if not manifests:
             return [f"no run {run!r} in this store"]
     targets += [(m, public) for m in manifests]
+    if public_only:
+        private = None
+        loaded = []
+        for mpath in manifests:
+            try:
+                loaded.append(json.loads(mpath.read_text(encoding="utf-8")))
+            except json.JSONDecodeError:
+                pass  # reported below, with the other manifest problems
+        if not run:
+            problems += _public_tree_problems(public, loaded)
     if private is not None and not run and (private / "manifest.json").exists():
         targets.append((private / "manifest.json", private))
     for mpath, base in targets:
@@ -418,6 +457,9 @@ def verify(public: Path, private: Path | None = None, *, deep: bool = False, run
                 problems.append(f"{m.get('id')}: {e['path']} is private but its hash is published")
         for c in m.get("copies", []):
             where = f"{m.get('id', 'private')}: {c['location']}"
+            if public_only and c["store"] != "rnd-data":
+                skipped[c["store"]] = skipped.get(c["store"], 0) + 1
+                continue
             if c["store"] in ("rnd-data", "rnd-data-private"):
                 p = (public if c["store"] == "rnd-data" else (private or base)) / c["location"]
                 if not p.is_file():
@@ -437,3 +479,37 @@ def verify(public: Path, private: Path | None = None, *, deep: bool = False, run
             elif deep and sha256_file(p) != c["sha256"]:
                 problems.append(f"{where}: hash differs")
     return problems
+
+
+def relicense(public: Path, rules: dict, prefix: str, *, dry_run: bool = False) -> dict:
+    """Reapply a rules file's `licences` to the manifests of runs ingested under `prefix`, in place.
+
+    Only the `licence` field of public entries changes; every other field, and every file, stays as it is. A file is
+    matched by its path under the ingest's source root, as `rnd raw ingest` matched it. Idempotent."""
+    _, licence_for = rules_classifier(rules, Path("."), {})
+    stats = {"manifests": 0, "changed_manifests": 0, "files_changed": 0, "files_public": 0}
+    for mpath in sorted((public / "runs").glob("*/manifest.json")) if (public / "runs").is_dir() else []:
+        m = json.loads(mpath.read_text(encoding="utf-8"))
+        source = m.get("source", "")
+        if source != prefix and not source.startswith(prefix + "/"):
+            continue
+        stats["manifests"] += 1
+        base = source[len(prefix) + 1:]
+        changed = 0
+        for e in m.get("files", []):
+            if e.get("visibility") != "public":
+                continue
+            stats["files_public"] += 1
+            new = licence_for(f"{base}/{e['path']}" if base else e["path"])
+            if new != e.get("licence"):
+                e["licence"] = new
+                changed += 1
+        if changed:
+            stats["changed_manifests"] += 1
+            stats["files_changed"] += changed
+            if not dry_run:
+                mpath.write_text(json.dumps(m, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+    if not stats["manifests"]:
+        raise RawError("NO_RUNS", f"no manifest in {public / 'runs'} came from {prefix!r}",
+                       "the prefix is the first part of a manifest's source, e.g. receipts or rnd-watch")
+    return stats

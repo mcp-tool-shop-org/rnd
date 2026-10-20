@@ -131,6 +131,8 @@ holds every run's manifest and small files. Its companion, rnd-data-private, hol
 rnd raw ingest <folder> --prefix receipts --reasons reasons.json   # runs into rnd-data, exceptions into rnd-data-private
 rnd raw private <folder> --as rnd-local --reasons reasons.json     # a private source's exceptions
 rnd raw verify [--run ID] [--deep]                                 # re-hash every git copy; check (or re-hash) every blob
+rnd raw verify --public-only                                       # what a public clone can check (rnd-data's CI)
+rnd raw relicense --rules <rules.json> --prefix receipts          # reapply a rules file's licences to its manifests
 ```
 
 - **Runs.** A run is the nearest folder holding an `outcome.json`, so each retry is its own run. Its id is the folder
@@ -150,6 +152,18 @@ rnd raw verify [--run ID] [--deep]                                 # re-hash eve
   - A file private only for `identity` is listed by path and size, with no hash.
   - A file private for its content is left out, and counted by reason in `private_files`.
   - No private file's hash is ever published, since a short label file's hash could be matched by guessing.
+- **The public check.** `--public-only` is what rnd-data's CI runs, with no blob store or companion to hand. It
+  re-hashes every git copy, counts the copies it skips per store, and fails on:
+  - a file under `runs/` that no manifest names, or that carries the private tag;
+  - a file anywhere with a private-looking name;
+  - a private entry with a hash;
+  - a machine path in a manifest.
+
+  The tag is checked under `runs/` only, since rnd-data's own pages name it to explain it.
+- **Licences.** rnd-data is licensed like rnd: the data is CC BY 4.0, scripts (`*.sh`, `*.py`) are MIT, and a
+  third-party file keeps the licence its manifest names. A rules file's `licences` set each public file's
+  `licence` at ingest, first match wins. `rnd raw relicense` reapplies them to manifests already written, and
+  changes nothing but that field.
 - **Tagging.** A note-type private text file (`.md`, `.txt`, `.py`, `.sh`) gets the private tag as its first line,
   unless its hash is pinned anywhere in the library. Data files stay byte-exact.
 - **Both repositories store every file byte-exact** (`* -text`), since manifests pin each file by SHA-256.

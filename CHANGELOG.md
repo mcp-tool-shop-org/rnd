@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.5] - 2026-10-20
+
+- CuPy runtime check: 13.2 runtime built in, the cudart wheel never loaded
+- Updated `2026-10-20-cuda-python-on-5090`: CUDA Python libraries on the RTX 5090 (smoke rung)
+- Updated experiment `cuda-python-5090-rung`
+
 ## [1.1.23.1.4] - 2026-10-20
 
 - newsletter issue 17: what a Claude Code deny rule actually hides; a note for the skipped issue 12

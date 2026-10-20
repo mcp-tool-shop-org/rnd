@@ -43,9 +43,12 @@ The trial's setup conditions are met: transparent mode only, nothing leaving the
 - [verified] NeMo Relay 0.10.1 in transparent mode wraps Claude Code 2.1.197 in the sandbox and writes ATOF and ATIF to local files with OpenTelemetry off. (via: the trial run, 2026-10-13)
 - [verified] During Relay runs, the sandbox proxy saw no outbound host other than Anthropic's. (via: `sbx policy log` before and after each run, 2026-10-13)
 - [unverified] Relay adds no meaningful cost or time to a Claude Code run. One pair only.
+- [verified] Re-run once on 2026-10-20 (Relay 0.10.1, Claude Code 2.1.197, OpenTelemetry off), Relay wrote ATOF events and an ATIF trajectory to local files, and under sbx's Balanced policy the before-and-after `sbx policy log` showed no host other than Anthropic's (api.anthropic.com, mcp-proxy.anthropic.com, platform.claude.com). This is what one run did, not what the policy forbids: Balanced allows other AI-service hosts. (via: R&D's re-run, b4-policylog-before/after.json and b4-start.txt, 2026-10-20)
+- [verified] Relay's local ATOF event file carries account identity (the signed-in account's email address) even with `enable_full_payloads = false`. Treat ATOF files as private. (via: the identity scan of R&D's re-run output, 2026-10-20; the value is not recorded here)
 
 ## Sources
 
 - [rig] Trial runs in the Docker sandbox `atlas-pilot`, 2026-10-13
+- [rig] R&D's re-run in `atlas-pilot`, 2026-10-20 (receipts hashed in jobB/SHA256SUMS.txt)
 - [primary] https://docs.nvidia.com/nemo/relay/latest/nemo-relay-cli/claude-code — transparent mode, hooks, gateway, outbound calls
 - [primary] https://docs.nvidia.com/nemo/relay/configure-plugins/observability/configuration — the plugins.toml shape

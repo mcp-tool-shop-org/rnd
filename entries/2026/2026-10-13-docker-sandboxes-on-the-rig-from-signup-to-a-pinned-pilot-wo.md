@@ -108,12 +108,14 @@ operator's trees don't exist. Inside it, what held on the rig on 2026-10-13:
 - [verified] The kit seeds `~/.claude/settings.json` with `defaultMode: bypassPermissions`. (via: the Publisher's read of the sandbox, 2026-10-13)
 - [verified] Ollama 0.35.1 answers `/v1/messages`. (via: a request with a missing model, so nothing loaded; the Publisher, 2026-10-13)
 - [verified] Claude Code 2.1.197 accepts `--effort medium`, and its init event does not report the effort. (via: the check call in `atlas-pilot`, 2026-10-13)
-- [unverified] The OAuth token is held on the host and never enters the sandbox. (Docker's credentials documentation; consistent with `apiKeySource: none`, not inspected directly)
-- [unverified] A local sandbox can reach an Ollama bound to 127.0.0.1 on the host. (untested)
+- [verified] The real OAuth token stays on the host: inside `atlas-pilot`, `~/.claude/.credentials.json` holds two 26-character placeholder tokens (checked by shape only, no values read out), and every start reports `apiKeySource: none`. (via: R&D's read-only check b3-credentials.txt and the init events of 13 plan-route starts, 2026-10-20)
+- [verified] A local sandbox reaches an Ollama bound to 127.0.0.1 on the host, at `host.docker.internal:11434`, given a sandbox rule for `localhost:11434`: Ollama 0.40.4, listening on 127.0.0.1 only with `OLLAMA_HOST` unset, answered `/api/version` from `atlas-pilot`. (via: R&D's check, b3-ollama-binding.txt, 2026-10-20)
+- [disputed] The `atlas-pilot` image ships Claude Code 2.1.296. On 2026-10-20 its `claude` (`~/.local/bin/claude`) reported 2.1.280. (via: R&D's recon in `atlas-pilot`, recon.txt, 2026-10-20)
 
 ## Sources
 
 - [primary] https://docs.docker.com/ai/sandboxes/ — Docker Sandboxes documentation (local and cloud, the `sbx` CLI, agents)
 - [primary] https://docs.docker.com/reference/cli/sbx/ — the `sbx` CLI reference
 - [rig] the Publisher's setup of `sbx` and `atlas-pilot` on the rig, with one check call, 2026-10-13
+- [rig] R&D's re-probe jobs in `atlas-pilot`, 2026-10-20 (receipts hashed in jobB/SHA256SUMS.txt). Run every `sbx` command from a C: working directory: a daemon launched from E: fails to start sandboxes ("failed to connect to console socket", measured 2026-10-20).
 - [user] The Director's rulings of 2026-10-13: no paid per-token model API; medium effort for the pilot

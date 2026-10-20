@@ -57,12 +57,13 @@ The Relay CLI wraps Claude Code, Codex and pi directly (`nemo-relay claude`). He
 - [verified] The NeMo Relay CLI's documented transparent runs include `nemo-relay claude` (Claude Code), `nemo-relay codex` and `nemo-relay pi`, each with a gateway on a dynamic 127.0.0.1 port; persistent installs share a native gateway on 127.0.0.1:47632 (via: docs.nvidia.com/nemo/relay/nemo-relay-cli/basic-usage, read 2026-10-13)
 - [unverified] Relay emits ATOF events, ATIF trajectories and OpenTelemetry spans; Hermes integrates it natively (aggregator summaries of NVIDIA's tracing tutorial)
 - [verified] NeMo Relay and NeMo Relay Plugins are licensed Apache-2.0 (via: GitHub API, repos NVIDIA/NeMo-Relay and NVIDIA/NeMo-Relay-Plugins, 2026-10-13)
-- [unverified] Relay sends no telemetry to NVIDIA when run locally
+- [unverified] Relay sends no telemetry to NVIDIA when run locally. Observed in one run only: in R&D's 2026-10-20 re-run under sbx's Balanced policy, the policy log showed no host other than Anthropic's (see the first-trial entry). One observation is not a guarantee.
+- [verified] Relay 0.10.1's transparent `nemo-relay claude` writes ATOF events and ATIF trajectories to local files when its observability plugin enables them. (via: R&D's re-run in `atlas-pilot`, 2026-10-20)
 
 ## Sources
 
 - [primary] https://docs.nvidia.com/nemo/relay/nemo-relay-cli/basic-usage — the CLI's integrations and gateway modes
-- [primary] https://docs.nvidia.com/nemo/relay/nemo-relay-cli/hermes — the Hermes integration
+- [primary] https://docs.nvidia.com/nemo/relay/nemo-relay-cli/hermes — the Hermes integration (returned "page does not exist" on 2026-10-20)
 - [primary] https://docs.nvidia.com/nemo/relay/instrument-applications/about — instrumenting applications
 - [aggregator] https://prismix.dev/news/cd3206004eeb — summary of "Tracing Agent Harness Behavior with NVIDIA NeMo Relay"
 - [aggregator] https://quantumzeitgeist.com/?p=357425 — news summary

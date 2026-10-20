@@ -39,7 +39,7 @@ Verdicts:
 - **The hard pool, measured** (Kev-4B judge fine-tune, 3 seeds, 149
   confirmation pairs):
   - order-averaged misses: 2–3 pairs per seed, 2 missed by all three;
-  - single-choice misses: 9–12 per seed, 9 shared by all three. Hardness is a
+  - single-choice misses: 10–12 pairs per seed (11–13 presentations), 9 shared by all three. Hardness is a
     stable property of the pairs, not seed noise;
   - scaled to the 603 training pairs, that is about 15–50 hard pairs, too few
     to train on alone;
@@ -204,7 +204,8 @@ second-planter tooling).
 
 ## Claims
 
-- [verified] On the 149 confirmation pairs, the Kev-4B judge fine-tune misses 2–3 pairs per seed order-averaged (2 shared by all three seeds) and 9–12 on single choices (9 shared by all three). (via: experiments/kev-judge-finetune/results per-pair rows, 2026-10-08)
+- [wrong] On the 149 confirmation pairs, the Kev-4B judge fine-tune misses 9–12 pairs per seed on single choices. (via: recount of experiments/kev-judge-finetune/results/judge-4b-full-s{0,1,2}-confirm.json, re-read at the source for the readouts promotion, R&D, 2026-10-20: the range is 10–12)
+- [verified] On the 149 confirmation pairs, the Kev-4B judge fine-tune misses 2–3 pairs per seed order-averaged (2 shared by all three seeds) and 10–12 pairs on single choices (11–13 presentations; 9 pairs shared by all three). (via: recount of experiments/kev-judge-finetune/results/judge-4b-full-s{0,1,2}-confirm.json, re-read at the source for the readouts promotion, R&D, 2026-10-20)
 - [verified] The three hardest confirmation pairs are genuine errors: reachable→unreachable nodes, −18 °C (0 °F)→(32 °F), where Kev confidently prefers the flawed answer, and "must be"→"is usually" known at compile time. (via: R&D reading the difflib spans of those pairs, 2026-10-08)
 - [verified] aspire-si's pair filters check truncation, similarity, length change and self-flag markers only; no step verifies that a plant is an error. (via: reading examples/sft-experiment/clean_dataset.py and fresh_pairs.py, 2026-10-08)
 - [verified] JTT closed 75% of the worst-group gap between ERM and group-DRO averaged over 4 tasks. (via: research agent reading arXiv 2107.09044 abstract, 2026-10-08)

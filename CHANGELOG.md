@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.4] - 2026-10-20
+
+- newsletter issue 17: what a Claude Code deny rule actually hides; a note for the skipped issue 12
+
 ## [1.1.23.1.3] - 2026-10-20
 
 - Job B live re-probes in atlas-pilot: the Read-deny Grep leak depends on the rule form (~ or //) and is filtered on 2.1.280; MCP pending reproduced on 2.1.197, not on 2.1.280; sandbox credentials and host-Ollama reach verified; NeMo Relay's ATOF carries account identity

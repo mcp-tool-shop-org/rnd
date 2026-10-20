@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.12] - 2026-10-20
+
+- entry: live testnet runs surface defects in layers (xrpl-lab 2.6.0, module #30)
+- Added `2026-10-20-live-testnet-runs-surface-defects-in-layers-each-fix-exposed`: Live testnet runs surface defects in layers: each fix exposed the next
+
 ## [1.1.23.1.11] - 2026-10-20
 
 - entry: XRPL agentic payments (x402, AI Starter Kit, MPP)

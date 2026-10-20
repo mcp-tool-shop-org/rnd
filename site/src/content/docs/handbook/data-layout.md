@@ -154,12 +154,16 @@ rnd raw relicense --rules <rules.json> --prefix receipts          # reapply a ru
   - No private file's hash is ever published, since a short label file's hash could be matched by guessing.
 - **The public check.** `--public-only` is what rnd-data's CI runs, with no blob store or companion to hand. It
   re-hashes every git copy, counts the copies it skips per store, and fails on:
-  - a file under `runs/` that no manifest names, or that carries the private tag;
-  - a file anywhere with a private-looking name;
-  - a private entry with a hash;
-  - a machine path in a manifest.
+  - under `runs/`: a file no manifest names, a git file over 256 KB, or a content marker (`CALL_CHECKPOINT`);
+  - anywhere: the private tag (except the four pages that explain it), a private-looking name, or a home-directory
+    path in any OS's form (Windows, macOS, Linux or WSL);
+  - in manifests, `store.json`, the docs and the workflows: a drive or machine path;
+  - in a public manifest: a private entry with a hash, or a copy naming the private companion, a hash that isn't a
+    public file's, or a private entry's path.
 
-  The tag is checked under `runs/` only, since rnd-data's own pages name it to explain it.
+  Raw run files may show drive and WSL mount paths (`/mnt/e/...`): a folder layout, not a person. A problem names the
+  file and line, never the text it matched. The markers and patterns live inside the package, so a bare
+  `pip install` checks the same rules as the rig.
 - **Licences.** rnd-data is licensed like rnd: the data is CC BY 4.0, scripts (`*.sh`, `*.py`) are MIT, and a
   third-party file keeps the licence its manifest names. A rules file's `licences` set each public file's
   `licence` at ingest, first match wins. `rnd raw relicense` reapplies them to manifests already written, and

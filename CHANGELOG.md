@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.0] - 2026-10-19
+
+- New experiment cuda-python-5090-rung and rig-fact entry 2026-10-20-cuda-python-on-5090: six CUDA Python libraries (cuda.core, CuPy, numba-cuda, cuda.compute, nvmath-python, cuTile) run a checked kernel on the RTX 5090 at compute capability 12.0, pinned, once NumPy is held below 2.5; the cuTile-on-sm_120 question is answered
+- Updated `2026-10-07-cutile-on-sm120`: Does cuTile run on compute capability 12.0 (RTX 5090)?
+- Added `2026-10-20-cuda-python-on-5090`: CUDA Python libraries on the RTX 5090 (smoke rung)
+- Added experiment `cuda-python-5090-rung`
+
 ## [1.1.23.0.0] - 2026-10-19
 
 - rnd raw verify --json: counts (manifests, public git files, declared blobs checked), the sorted list of public git files re-hashed, what was skipped, and problems as {rule, where} with stable rule codes and redacted places (never a hash, the matched text or a content-private name). The shape rnd-data's own verifier defines, so the two can be compared file for file until rnd imports it (tooling plan R2, R4)

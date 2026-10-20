@@ -60,5 +60,11 @@ The raw rows are in [`results/`](results/). In run 1's tracebacks, local paths a
   features for rnd-data. That comes from the design, after Argon's exploration.
 
 **Licences:** the libraries are Apache-2.0, MIT and BSD-2-Clause. The CUDA runtime wheels they pull carry NVIDIA's
-proprietary licence (the CUDA EULA). The studio would depend on them as optional extras, never vendored. The
-Publisher's reading of what that asks is due one targeted check before any publish.
+proprietary licence (the CUDA EULA). The studio would depend on them as optional extras, never vendored.
+- **Checked:** by the Publisher, 2026-10-20, against the CUDA EULA at docs.nvidia.com/cuda/eula.
+- **What it doesn't restrict:** publishing test or benchmark results. This folder commits only package names and
+  versions, results and our own script.
+- **What it does restrict:**
+  - implying NVIDIA sponsors or endorses the work (§1.2(3));
+  - redistributing SDK files beyond Attachment A's list (§1.1.2(4), §1.2(2), §2.6).
+- **A future `[gpu]` extra** depends on NVIDIA's wheels from PyPI and never vendors them.

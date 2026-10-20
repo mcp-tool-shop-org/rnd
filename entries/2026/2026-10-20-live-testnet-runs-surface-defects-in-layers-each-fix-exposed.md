@@ -60,7 +60,7 @@ faucet's grant, ledger reserves.
 
   xrpl-lab#20 lists 11 more handlers with the same funding race.
 - **The release:** a fourth run, on the code Argon passed in its second review, also passed (9 of 9 tesSUCCESS, pool
-  deleted, exit 0). xrpl-lab v2.6.0 was tagged on #19's merge commit (036c187) on 2026-10-20.
+  deleted, exit 0). xrpl-lab 2.6.0 was released from #19's merge commit (036c187) on 2026-10-20, to PyPI, npm and GitHub with binaries.
 
 ## Claims
 
@@ -72,7 +72,7 @@ faucet's grant, ledger reserves.
 
 ## Sources
 
-- [primary] https://github.com/mcp-tool-shop-org/xrpl-lab/tree/main/docs/receipts/2.6.0-amm-live-fire — the four run receipts and their README, on xrpl-lab main (merged in #19, tagged v2.6.0)
+- [primary] https://github.com/mcp-tool-shop-org/xrpl-lab/tree/main/docs/receipts/2.6.0-amm-live-fire — the four run receipts and their README, on xrpl-lab main (merged in #19, released as 2.6.0)
 - [primary] https://github.com/mcp-tool-shop-org/xrpl-lab/pull/19 — xrpl-lab PR #19 (2.6.0), the fixes between runs
 - [rig] The four live runs, executed by the Book Keeper seat on the Robot rig against XRPL Testnet, 2026-10-20
 - [primary] https://github.com/mcp-tool-shop-org/xrpl-lab/issues/20 — the remaining handlers with the same funding race

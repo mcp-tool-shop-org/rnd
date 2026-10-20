@@ -40,7 +40,7 @@ cause. Re-picking a finished song after a rule change needs no new takes and no 
 
 - [verified] The Battle Hymn's silent "jah" at 0:52 came from an aligner date 0.7 s late. With the rule, the re-picked syllable is audible, and the Director called the result "much better". (via: ai-jam-sessions re-pick and listening, 2026-10-08)
 - [verified] The rule changed America the Beautiful's pick in two phrases and left Amazing Grace unchanged. (via: ai-jam-sessions re-pick of all three hymns, 2026-10-08)
-- [unverified] 0.3 s and 4 neighbours were tuned on three hymns at 72–95 bpm; faster music may need a tighter threshold.
+- [unverified] 0.3 s and 4 neighbours were tuned on three hymns at 72–92 bpm (score clocks 76, 92 and 72; corrected from 72–95, re-read for the readouts promotion, R&D, 2026-10-20); faster music may need a tighter threshold.
 
 ## Sources
 

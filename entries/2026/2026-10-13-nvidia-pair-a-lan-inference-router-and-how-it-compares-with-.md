@@ -21,7 +21,7 @@ Its scheduler is model-blind: pending jobs plus coarse GPU pressure (0–3 units
 ## Key points
 
 - **The ports:** the Ollama-compatible proxy takes port 11434 and moves Ollama to 11435 or above. The plaintext side answers only loopback. The same port serves mutual TLS to paired nodes, chosen by the connection's first byte (0x16).
-- **Telemetry:** the probe's "telemetry" code hits are host and GPU telemetry exchanged between paired nodes, by the architecture's account. Nothing read shows it sent off the network. That's unverified until it's tried.
+- **Telemetry:** the probe's "telemetry" code hits are host and GPU telemetry exchanged between paired nodes, by the architecture's account. Nothing read shows it sent off the network, but the architecture document at v1.0.0 says the telemetry is plaintext, not authenticated, and readable by anything on the same subnet (architecture.mdx lines 172-185), and SECURITY.md (lines 87-89) says local-first doesn't prove no data leaves the machine or LAN.
 - **The 1.0.0 release notes** (read 2026-10-13, flagged by the weekly watch) add:
   - llama.cpp management;
   - per-engine launch options, including context size;
@@ -47,7 +47,8 @@ Its scheduler is model-blind: pending jobs plus coarse GPU pressure (0–3 units
 - [verified] PAIR's scheduler ranks nodes by pending work plus coarse GPU pressure, is model-blind, and doesn't consider VRAM, latency or whether the model is loaded (via: docs/architecture.mdx at v1.0.0, read 2026-10-13)
 - [verified] PAIR's Ollama-compatible proxy uses port 11434 and moves Ollama to 11435 or above (via: docs/architecture.mdx port map at v1.0.0, read 2026-10-13)
 - [verified] PAIR 1.0.0 adds per-engine launch options including context size, llama.cpp management, and Anthropic Messages API routing through Ollama and LM Studio (via: gh release view v1.0.0 --repo NVIDIA/Personal-AI-Router, 2026-10-13)
-- [unverified] PAIR sends no telemetry beyond the paired nodes
+- [wrong] PAIR sends no telemetry beyond the paired nodes. (via: architecture.mdx lines 172-185 at v1.0.0: host and GPU telemetry is plaintext, unauthenticated and readable by anything on the subnet, re-read for the readouts promotion, R&D, 2026-10-20)
+- [verified] PAIR's host and GPU telemetry is plaintext HTTP, not authenticated, and readable by anything on the same subnet; NVIDIA advises against running PAIR where that is unacceptable. (via: NVIDIA/Personal-AI-Router architecture.mdx lines 172-185 and SECURITY.md lines 87-89 at v1.0.0, re-read for the readouts promotion, R&D, 2026-10-20)
 
 ## Sources
 

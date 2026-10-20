@@ -90,8 +90,8 @@ The lesson we took: don't narrow or widen a measured claim until a probe separat
 
 ## Where the figures come from
 
-- **The probes:** Claude Code in the studio's `atlas-pilot` Docker sandbox, Grep as the only tool, on the Claude plan
-  with claude-haiku-5-5. 13 short turns in all on 2026-10-20: 6 for the deny-rule searches, 6 for the MCP start and 1
+- **The probes:** Claude Code in the studio's `atlas-pilot` Docker sandbox, on the Claude plan
+  with claude-haiku-5-5. 13 short turns in all on 2026-10-20: 6 for the deny-rule searches (Grep the only tool), 6 for the MCP start and 1
   for a tracing run. The original probe ran on 2026-10-13.
 - **The entries:**
   [Claude Code: a Read deny rule doesn't stop a Grep walk over the denied tree](https://github.com/mcp-tool-shop-org/rnd/blob/main/entries/2026/2026-10-13-claude-code-read-deny-rules-do-not-stop-a-grep-walk.md)

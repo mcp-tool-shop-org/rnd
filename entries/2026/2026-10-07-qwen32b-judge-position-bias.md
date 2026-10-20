@@ -49,7 +49,9 @@ rater proposed in [[2026-10-07-single-rater-labels-and-ai-listener]]:
 **Confirmed (aspire-si PR #36):** score both orders and average the option
 probabilities.
 - On 149 fresh pairs, Qwen2.5-32B Q4 went from 0.685 on single choices (A chosen
-  82%) to 0.886 averaged over both orders, and 0.898 on the 127 pairs here.
+  82%) to 0.886 averaged over both orders. On the 127 pairs here it went from 0.701
+  (A chosen 80%) to 0.898. (Corrected 2026-10-20: the single-choice baseline on the
+  127 was recorded as 0.685, which is the 149's.)
 - Kev-4B went from 0.547 to 0.973.
 - The bias sits on top of a real, consistent preference; averaging over both
   orders recovers it ([[2026-10-07-open-jev-style-decision-models]]).
@@ -61,9 +63,11 @@ readouts' training KB holds the AlpacaEval `is_randomize_output_order` protocol
 
 - [verified] Qwen2.5-32B-Instruct picked position A for all 127 pairs when the strong answer was A, and the strong answer only 49/127 times when it was B. (via: aspire-si judge measurement, reported by session A 2026-10-07)
 - [verified] Whole-number 0–10 absolute scores tied 89 of 127 strong/flawed pairs. (via: aspire-si judge measurement, 2026-10-07)
-- [verified] Averaging the A/B log-probabilities over both orders lifted Qwen2.5-32B Q4 to 0.886 on 149 fresh planted pairs and 0.898 on the 127 here, from 0.685 on single choices. (via: aspire-si PR #36 confirmation run, reported by session A 2026-10-07)
+- [wrong] Averaging the A/B log-probabilities over both orders lifted Qwen2.5-32B Q4 to 0.886 on 149 fresh planted pairs and 0.898 on the 127 here, from 0.685 on single choices. (via: R&D's re-read of aspire-si docs/runs/2026-10-08-kev-confirmation.md lines 34 and 42 at b8ab54d, 2026-10-20: 0.685 is the baseline for the 149 only)
+- [verified] Averaging the A/B log-probabilities over both orders lifted Qwen2.5-32B Q4 from 0.685 to 0.886 on 149 fresh planted pairs, and from 0.701 to 0.898 on the 127 here. (via: aspire-si docs/runs/2026-10-08-kev-confirmation.md lines 34 and 42 at b8ab54d, re-read by R&D 2026-10-20)
 
 ## Sources
 
 - [rig] aspire-si judge measurements on 2026-10-07, measured by session A
 - [primary] https://github.com/mcp-tool-shop-org/aspire-si/blob/main/docs/runs/2026-10-07-sft-then-aspire.md — run report
+- [primary] https://github.com/mcp-tool-shop-org/aspire-si/blob/b8ab54d/docs/runs/2026-10-08-kev-confirmation.md — the Kev confirmation run (the order-averaged figures, and its Corrections section)

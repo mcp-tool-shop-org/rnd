@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.22.0.0] - 2026-10-19
+
+- rnd raw verify --public-only, Argon's rnd-data protection round 1 (F1-F4): CALL_CHECKPOINT and the other content markers, packaged in mcptoolshop_rnd, under runs/; a git file over 256 KB under runs/; the private tag anywhere except the four pages that explain it; a home-directory path in any OS's form anywhere (the identity scan's Windows-only patterns missed four WSL /home/<account> paths on 2026-10-19); drive paths in manifests, store.json, docs and workflows; a public manifest's copies naming the companion, a non-public hash or a private entry's path. Problems print file and line, never the match. MACHINE_PATH_RE's share name is tightened so escaped backslashes in code aren't taken for one
+
 ## [1.1.21.0.0] - 2026-10-19
 
 - rnd raw runs without an rnd library when the store is named (--public or $RND_DATA), as in rnd-data's CI; the companion's default is then beside the store. Found by running rnd-data's verify.sh against the 1.1.20.0.0 pin from a clean install, where it stopped with NO_LIBRARY

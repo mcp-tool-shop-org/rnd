@@ -56,10 +56,22 @@ RUN_KEYS = {"id", "venue", "hardware", "date", "cost", "cost_unit", "cost_basis"
             "why", "raw_manifest_id", "pins"}
 NAME_RE = re.compile(r"^[a-z0-9][a-z0-9._-]*$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+# A home directory in any OS's form: Windows (a drive, then Users, then the account, with either slash), Git Bash and
+# WSL mounts of the same, macOS (Users at the root) and Linux or WSL (home at the root), as the tests spell out. Written
+# out here, those forms would trip the studio's own identity scan. Needle-free: it names no account, so it can run in public
+# CI. The studio's identity scan has the needles; this is the floor under it (rnd-data, 2026-10-20: four public logs
+# carried a /home/<account> path the scan's Windows-only patterns missed).
+HOME_PATH_RE = re.compile(
+    r"(?i)(?:[a-z]:[\\/]+users[\\/]+[^\\/\s\"'*<>|]+|(?:/mnt)?/[a-z]/users/[^/\s\"']+|(?<![\w.])/users/[^/\s\"']+"
+    r"|(?<![\w.])/home/[^/\s\"']+)")
+# Content markers the public tree must never carry, whatever the rules files say (they're checked against this list).
+# CALL_CHECKPOINT lines hold gzip+base64 call-journal checkpoints: drafts in an encoding no scan reads.
+CONTENT_MARKERS = ("CALL_CHECKPOINT",)
 # A machine path: a drive letter (C:/, E:\), a Git Bash or WSL drive mount (/c/, /mnt/c/), a UNC share, or a home
-# directory. Pod and VM paths (/root/, /content/, /workspace/) carry no identity and are allowed.
+# directory. Pod and VM paths (/root/, /content/, /workspace/) carry no identity and are allowed. A share's name is word
+# characters, dots, dollars and hyphens, so an escaped backslash in code, such as jq's "\\(.sha256)", isn't one.
 MACHINE_PATH_RE = re.compile(
-    r"(?i)(?:^|[\s\"'(=])(?:[a-z]:[\\/]|(?:/mnt)?/[a-z]/|\\\\[^\\]+\\|/home/|/users/|~[\\/])")
+    r"(?i)(?:^|[\s\"'(=])(?:[a-z]:[\\/]|(?:/mnt)?/[a-z]/|\\\\[\w.$-]+\\|/home/|/users/|~[\\/])")
 
 
 def library_files(root: Path) -> list[str]:

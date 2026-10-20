@@ -394,27 +394,75 @@ def ingest_private(source: Path, private: Path, name: str, classify, *, pinned_t
     return stats
 
 
-def _public_tree_problems(public: Path, manifests: list[dict]) -> list[str]:
-    """What only the public tree can show: a file under runs/ that no manifest names or that carries the private tag,
-    a file anywhere with a private-looking name, and a machine path in a manifest.
+# rnd-data's own pages that name the private tag to explain it (README, SECURITY.md, the handbook). Exact paths.
+TAG_DOCS = ("README.md", "SECURITY.md", "site/src/content/docs/handbook/private-files.md",
+            "site/src/content/docs/handbook/verifying.md")
+DOC_SUFFIXES = (".md", ".mdx", ".txt", ".yml", ".yaml", ".toml", ".ts", ".mjs", ".js", ".astro", ".css", ".html", ".sh",
+                ".py")
 
-    The tag is checked under runs/ only: data reaches rnd-data through ingest, and the hand-written pages beside it
-    (README, SECURITY, the handbook) name the tag to explain it."""
+
+def _lines_matching(path: Path, pattern) -> list[int]:
+    """Line numbers where `pattern` matches. Only the numbers are reported, never the text: it may be the leak."""
+    try:
+        text = path.read_bytes().decode("utf-8", errors="replace")
+    except OSError:
+        return []
+    return [i for i, line in enumerate(text.splitlines(), 1) if pattern.search(line)]
+
+
+def _public_tree_problems(public: Path, manifests: list[dict]) -> list[str]:
+    """What only the public tree can show (rnd-data protection, Argon round 1, F1-F4):
+    - under runs/: a file no manifest names, a git file over SMALL_LIMIT, a content marker;
+    - anywhere: the private tag (except the pages that explain it), a private-looking name, a home-directory path;
+    - outside raw run files: a drive or mount path, in manifests, store.json, the docs and the workflows.
+
+    Raw run files (logs, scripts) may carry drive and WSL mount paths (`/mnt/e/...`): they show a folder layout, not a
+    person, and the receipts rules publish them. A home-directory path names a person, so it fails everywhere.
+    Problems name the file and line, never the matched text."""
     problems = []
     named = {c["location"] for m in manifests for c in m.get("copies", []) if c.get("store") == "rnd-data"}
     named |= {f"runs/{m.get('id')}/manifest.json" for m in manifests}
     tag = layout.PRIVATE_TAG.encode()
+    markers = [x.encode() for x in layout.CONTENT_MARKERS]
     for rel in layout.library_files(public):
-        if rel.startswith("runs/") and rel not in named:
+        p = public / rel
+        in_runs = rel.startswith("runs/")
+        if in_runs and rel not in named:
             problems.append(f"{rel}: under runs/ but named by no manifest")
+        if in_runs and not rel.endswith("/manifest.json") and p.stat().st_size > SMALL_LIMIT:
+            problems.append(f"{rel}: over {SMALL_LIMIT // 1024} KB in git; a larger file belongs in the blob store")
         if layout.private_name(rel):
             problems.append(f"{rel}: the name looks private (blind, sealed, gold key, item text, review items)")
-        p = public / rel
-        if rel.startswith("runs/") and p.stat().st_size <= layout.TAG_SCAN_LIMIT and tag in p.read_bytes():
+        if rel not in TAG_DOCS and _has_marker(p, tag):
             problems.append(f"{rel}: carries the private tag")
-    for m in manifests:
-        problems += [f"{m.get('id')}: a machine path at {w}" for w in layout._machine_paths(m)]
+        if in_runs:
+            for mk, name in zip(markers, layout.CONTENT_MARKERS):
+                if _has_marker(p, mk):
+                    problems.append(f"{rel}: carries a content marker ({name})")
+        for n in _lines_matching(p, layout.HOME_PATH_RE):
+            problems.append(f"{rel}:{n}: a home-directory path")
+        raw_run_file = in_runs and not rel.endswith("/manifest.json")
+        if not raw_run_file and (rel == "store.json" or rel.endswith("/manifest.json") or rel.endswith(DOC_SUFFIXES)):
+            for n in _lines_matching(p, layout.MACHINE_PATH_RE):
+                problems.append(f"{rel}:{n}: a drive or machine path")
     return problems
+
+
+def _public_copy_problems(m: dict) -> list[str]:
+    """F2: a public manifest's copies may name only its public files' hashes, never the private companion or a private
+    entry's path. Ingest never writes such a copy; a hand-edited or damaged manifest could."""
+    rid = m.get("id")
+    public_hashes = {f["sha256"] for f in m.get("files", []) if f.get("visibility") == "public" and f.get("sha256")}
+    private_locs = {f"runs/{rid}/files/{f['path']}" for f in m.get("files", []) if f.get("visibility") == "private"}
+    out = []
+    for i, c in enumerate(m.get("copies", [])):
+        if c.get("store") == "rnd-data-private":
+            out.append(f"{rid}: copies[{i}] names the private companion")
+        elif c.get("sha256") not in public_hashes:
+            out.append(f"{rid}: copies[{i}] carries a hash that isn't a public file's")
+        if c.get("location") in private_locs:
+            out.append(f"{rid}: copies[{i}] points at a private entry's path")
+    return out
 
 
 def verify(public: Path, private: Path | None = None, *, deep: bool = False, run: str | None = None,
@@ -455,6 +503,8 @@ def verify(public: Path, private: Path | None = None, *, deep: bool = False, run
         for e in m.get("files", []):
             if e.get("visibility") == "private" and e.get("sha256"):
                 problems.append(f"{m.get('id')}: {e['path']} is private but its hash is published")
+        if base == public:
+            problems += _public_copy_problems(m)
         for c in m.get("copies", []):
             where = f"{m.get('id', 'private')}: {c['location']}"
             if public_only and c["store"] != "rnd-data":

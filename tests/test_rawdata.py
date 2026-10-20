@@ -407,7 +407,8 @@ class PublicOnlyAndRelicenseTests(unittest.TestCase):
         self.assertIn("runs/receipts/files/stray.txt: under runs/ but named by no manifest", problems)
         self.assertIn("runs/receipts--colab/files/note.md: carries the private tag", problems)
         self.assertIn("site/sealed_answers.json: the name looks private", problems)
-        self.assertIn("receipts: a machine path at licence_note", problems)
+        self.assertIn("runs/receipts/manifest.json:1: a drive or machine path", problems)
+        self.assertIn("runs/receipts/manifest.json:1: a home-directory path", problems)
         self.assertNotIn("SECURITY.md", problems)
 
     def test_one_run_skips_the_tree_rules(self):
@@ -459,7 +460,8 @@ class RawPublicOnlyCommandTests(CliBase):
         src = make_receipts(self.root / "in")
         with mock.patch.dict(os.environ, {"RND_DATA_STORE_D": str(self.blobs)}):
             rawdata.ingest_tree(src, self.public, self.private, "receipts",
-                                lambda rel: "blind" if layout.private_name(rel) else None)
+                                lambda rel: "identity" if rel.endswith("launch.out")  # it holds a home path
+                                else ("blind" if layout.private_name(rel) else None))
         env = mock.patch.dict(os.environ, {"RND_DATA": str(self.public), "RND_DATA_PRIVATE": str(self.private)})
         env.start()
         self.addCleanup(env.stop)
@@ -489,7 +491,8 @@ class RawWithoutLibraryTests(unittest.TestCase):
         src = make_receipts(self.base)
         with mock.patch.dict(os.environ, {"RND_DATA_STORE_D": str(self.blobs)}):
             rawdata.ingest_tree(src, self.public, self.private, "receipts",
-                                lambda rel: "blind" if layout.private_name(rel) else None)
+                                lambda rel: "identity" if rel.endswith("launch.out")  # it holds a home path
+                                else ("blind" if layout.private_name(rel) else None))
 
     def main(self, *argv, env=None):
         from mcptoolshop_rnd import cli
@@ -531,3 +534,106 @@ class RawWithoutLibraryTests(unittest.TestCase):
         self.assertEqual(code, 2)
         self.assertIn("NO_LIBRARY", err)
         self.assertEqual(self.main("stats", env={"RND_DATA": str(self.public)})[0], 2)  # only raw is exempt
+
+
+class ProtectionRoundOneTests(unittest.TestCase):
+    """Argon's rnd-data protection audit, round 1 (F1-F4): each rule fails on its planted defect, and only there."""
+
+    def setUp(self):
+        self.base = Path(tempfile.mkdtemp())
+        self.addCleanup(rmtree_force, self.base)
+        self.public, self.private, self.blobs = make_stores(self.base)
+        src = make_receipts(self.base)
+        with mock.patch.dict(os.environ, {"RND_DATA_STORE_D": str(self.blobs)}):
+            rawdata.ingest_tree(src, self.public, self.private, "receipts",
+                                lambda rel: "identity" if rel.endswith("launch.out")  # it holds a home path
+                                else ("blind" if layout.private_name(rel) else None))
+        self.run_dir = self.public / "runs/receipts--colab--window1-20261016"
+
+    def problems(self):
+        with mock.patch.dict(os.environ, {}):
+            os.environ.pop("RND_DATA_STORE_D", None)
+            return " | ".join(rawdata.verify(self.public, self.private, public_only=True))
+
+    def plant_named(self, inner, body):
+        """A file under runs/ that its manifest names, so only the planted rule can fire."""
+        data = body if isinstance(body, bytes) else body.encode()
+        p = self.run_dir / "files" / inner
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_bytes(data)
+        mp = self.run_dir / "manifest.json"
+        m = json.loads(mp.read_text(encoding="utf-8"))
+        sha = rawdata.sha256_file(p)
+        m["files"].append({"path": inner, "sha256": sha, "bytes": len(data), "tier": "T4", "licence": None,
+                           "visibility": "public"})
+        m["copies"].append({"sha256": sha, "store": "rnd-data", "location": f"runs/{m['id']}/files/{inner}"})
+        mp.write_text(json.dumps(m), encoding="utf-8")
+        return f"runs/{m['id']}/files/{inner}"
+
+    def test_clean_store_passes(self):
+        self.assertEqual(self.problems(), "")
+
+    def test_home_path_patterns(self):
+        u = "Users"  # built in parts, so the studio's identity scan doesn't take these probes for a leak
+        hit = ["C:\\" + u + "\\bob\\x", "C:/" + u + "/bob/x", "c:\\\\" + u.lower() + "\\\\bob", "/c/" + u + "/bob/x",
+               "/mnt/c/" + u + "/bob/x", "/" + u + "/bob/x", "/home/bob/x", "cd /home/bob && ls"]
+        miss = ["/root/x", "/content/x", "/workspace/x", "E:/AI/x", "/mnt/e/AI/Publisher/x",
+                "https://github.com/users/bob", "https://site.org/home/page", "a home/bob note", "see /home/ alone"]
+        for t in hit:
+            self.assertTrue(layout.HOME_PATH_RE.search(t), t)
+        for t in miss:
+            self.assertFalse(layout.HOME_PATH_RE.search(t), t)
+
+    def test_f1_a_content_marker_under_runs(self):
+        rel = self.plant_named("job2.log", "step\nCALL_CHECKPOINT H4sIAAAA...\n")
+        self.assertIn(f"{rel}: carries a content marker (CALL_CHECKPOINT)", self.problems())
+
+    def test_f1_the_rules_files_markers_are_all_in_the_package(self):
+        rules = rawdata.load_rules(RULES)
+        self.assertTrue({m["marker"] for m in rules.get("content_markers", [])} <= set(layout.CONTENT_MARKERS))
+
+    def test_f2_copies_may_not_carry_a_private_hash_or_place(self):
+        mp = self.run_dir / "manifest.json"
+        m = json.loads(mp.read_text(encoding="utf-8"))
+        m["copies"].append({"sha256": "b" * 64, "store": "rnd-data-private", "location": "runs/x/launch.out"})
+        m["copies"].append({"sha256": "c" * 64, "store": "d", "location": "blobs/cc/" + "c" * 64})
+        m["copies"].append({"sha256": m["copies"][0]["sha256"], "store": "d",
+                            "location": f"runs/{m['id']}/files/launch.out"})  # the identity entry's path
+        mp.write_text(json.dumps(m), encoding="utf-8")
+        got = self.problems()
+        self.assertIn("names the private companion", got)
+        self.assertIn("carries a hash that isn't a public file's", got)
+        self.assertIn("points at a private entry's path", got)
+        self.assertNotIn("b" * 64, got)  # never print a hash
+
+    def test_f3_an_oversized_git_file_and_the_tag_anywhere(self):
+        rel = self.plant_named("big.json", b"x" * (rawdata.SMALL_LIMIT + 1))
+        write(self.public, "notes.json", '{"tier": "' + TAG + '"}')           # outside runs/, innocent name
+        write(self.public, "README.md", "Files carrying " + TAG + " are refused.\n")  # an explaining page
+        got = self.problems()
+        self.assertIn(f"{rel}: over 256 KB in git", got)
+        self.assertIn("notes.json: carries the private tag", got)
+        self.assertNotIn("README.md", got)
+
+    def test_f4_home_paths_everywhere_drive_paths_outside_raw_files(self):
+        home = self.plant_named("smoke.log", "ok\ncd /home/someone/run\n")
+        drive_raw = self.plant_named("launch2.out", "copied to /mnt/e/AI/receipts/x\n")
+        write(self.public, "site/src/content/docs/handbook/x.md", "see E:/AI/rnd-data\n")
+        sp = self.public / "store.json"
+        sp.write_text(json.dumps({"schema": "rnd-data-store/v1", "root": "D:/rnd-data"}), encoding="utf-8")
+        got = self.problems()
+        self.assertIn(f"{home}:2: a home-directory path", got)
+        self.assertNotIn("someone", got)                                    # never print the match
+        self.assertNotIn(drive_raw, got)                                     # a raw log may show a drive path
+        self.assertIn("site/src/content/docs/handbook/x.md:1: a drive or machine path", got)
+        self.assertIn("store.json:1: a drive or machine path", got)
+
+    def test_share_paths_and_escaped_backslashes(self):
+        bs = "\\"
+        share = " " + bs * 2 + "fs01.corp" + bs + "data$" + bs + "x"
+        jq = '"' + bs * 2 + "(.sha256)  " + bs * 2 + '(.location)"'
+        self.assertTrue(layout.MACHINE_PATH_RE.search(share))
+        self.assertFalse(layout.MACHINE_PATH_RE.search(jq))  # rnd-data's site-config jq example, a false positive before
+
+    def test_an_unreadable_file_has_no_lines(self):
+        self.assertEqual(rawdata._lines_matching(self.base / "gone.log", layout.HOME_PATH_RE), [])

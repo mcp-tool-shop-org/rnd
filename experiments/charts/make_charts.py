@@ -34,6 +34,7 @@ CU134 = REPO / "experiments" / "cloud-cu134" / "results"
 KEV = REPO / "experiments" / "kev-judge-finetune" / "env" / "README.md"
 GRAPHS = REPO / "experiments" / "cuda-graphs" / "results" / "2026-10-08-llama.json"
 E4B = REPO / "experiments" / "e4b" / "results"
+DESK_CAL = REPO / "experiments" / "dataset-desk" / "calibration" / "data"
 E4B_PLAIN = {"5090-npu": "5090, with the NPU busy", "5090-igpu": "5090, with the iGPU busy",
              "npu-5090": "NPU, with the 5090 busy", "igpu-5090": "iGPU, with the 5090 busy"}
 E4B_ROLES = {"alone-before": "alone, before the paired call", "paired": "paired, with the 5090 busy",
@@ -1246,6 +1247,33 @@ def chart_confirmation_slots():
     svg.save("critic-confirmation-slots.svg")
 
 
+# --- dataset-desk calibration: registered vs measured VRAM ------------------------------------------------------
+
+def chart_desk_vram():
+    """Each text embedder's VRAM figure in the desk's registry against its peak measured through the desk at
+    8,192-token chunks (rung 2b)."""
+    reg = load(DESK_CAL / "registry-25d9cdd5.json")["vram_mib"]
+    runs = load(DESK_CAL / "rung2b-runs.json")
+    rows = []
+    for name in ("bge-m3", "qwen3-emb-0.6b", "gte-modernbert", "eg2"):
+        r = runs[name]
+        sub = f"batch {8 if name != 'eg2' else 4} · {r['max_tokens']:,}-token chunks · {r['dtype']}"
+        if name == "eg2":
+            sub += " · text-only"
+        rows.append((name, "registered in the desk", reg[name], "#6b7280", f"{reg[name]:,} MiB"))
+        ratio = r["peak_vram_mb"] / reg[name]
+        rows.append(("", "measured peak, " + sub, r["peak_vram_mb"], HOLD if ratio > 1 else FREE,
+                     f"{r['peak_vram_mb']:,} MiB" + (f" · {ratio:.1f}× the registered figure" if ratio > 1 else
+                                                    " · inside the registered figure")))
+    _hbar_chart("desk-vram.svg", "dataset-desk text embedders: registered VRAM against the measured peak (RTX 5090)",
+                "The governor reserves the registered figure plus 1,024 MiB. Measured: one run per model, through the desk, "
+                "2026-10-20.",
+                rows, 0, 16000, [0, 4000, 8000, 12000, 16000], "",
+                footer=["The registered figures were measured at short inputs. At 8,192-token chunks three of the four need far more.",
+                        "Sources: mcp-tool-shop-org/rnd experiments/dataset-desk/calibration/data/ (rung2b-runs.json, registry-25d9cdd5.json). "
+                        "Inputs pinned in experiments/charts/manifest.json."])
+
+
 def manifest():
     out = {}
     for rel, p in sorted(INPUTS.items()):
@@ -1274,6 +1302,7 @@ def main():
     chart_critic_catch()
     chart_critic_calls()
     chart_confirmation_slots()
+    chart_desk_vram()
     manifest()
 
 

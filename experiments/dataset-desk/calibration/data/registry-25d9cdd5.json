@@ -1,0 +1,11 @@
+{
+ "source": "mcp-tool-shop-org/dataset-desk dataset_desk/registry.py at 25d9cdd5",
+ "vram_mib": {
+  "eg2": 12550,
+  "siglip2": 5340,
+  "bge-m3": 1674,
+  "qwen3-emb-0.6b": 3814,
+  "gte-modernbert": 954,
+  "dinov2": 636
+ }
+}

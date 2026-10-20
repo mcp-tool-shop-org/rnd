@@ -1,0 +1,54 @@
+{
+ "bge-m3": {
+  "model": "bge-m3",
+  "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+  "role": "document",
+  "dim": 1024,
+  "dtype": "bfloat16",
+  "max_tokens": 8192,
+  "text_only": null,
+  "multi_chunk_files": 70,
+  "peak_vram_mb": 7488,
+  "seconds": 45.9,
+  "desk": "25d9cdd5"
+ },
+ "eg2": {
+  "model": "eg2",
+  "revision": "914f7f89142e33e77833254d9c9b90c3cef7303b",
+  "role": "symmetric",
+  "dim": 768,
+  "dtype": "bfloat16",
+  "max_tokens": 8000,
+  "text_only": true,
+  "multi_chunk_files": 78,
+  "peak_vram_mb": 8426,
+  "seconds": 142.2,
+  "desk": "25d9cdd5"
+ },
+ "gte-modernbert": {
+  "model": "gte-modernbert",
+  "revision": "e7f32e3c00f91d699e8c43b53106206bcc72bb22",
+  "role": "document",
+  "dim": 768,
+  "dtype": "bfloat16",
+  "max_tokens": 8192,
+  "text_only": null,
+  "multi_chunk_files": 71,
+  "peak_vram_mb": 6544,
+  "seconds": 37.8,
+  "desk": "25d9cdd5"
+ },
+ "qwen3-emb-0.6b": {
+  "model": "qwen3-emb-0.6b",
+  "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "role": "document",
+  "dim": 1024,
+  "dtype": "bfloat16",
+  "max_tokens": 8192,
+  "text_only": null,
+  "multi_chunk_files": 73,
+  "peak_vram_mb": 14470,
+  "seconds": 94.1,
+  "desk": "25d9cdd5"
+ }
+}

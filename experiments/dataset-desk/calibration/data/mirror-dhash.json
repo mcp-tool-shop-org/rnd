@@ -1,0 +1,23 @@
+{
+ "what": "bits (of 256) by which the bit-reversed, inverted stored dHash differs from the dHash of the really flipped image",
+ "desk": "dataset-desk 25d9cdd5 _dhash",
+ "sample": "random.seed(0), 300 of facet-assets + rustline outputs",
+ "projects": {
+  "facet-assets": {
+   "n": 45,
+   "mean": 110.29,
+   "median": 112,
+   "p95": 151,
+   "max": 154,
+   "share_over_10": 1.0
+  },
+  "rustline": {
+   "n": 255,
+   "mean": 9.83,
+   "median": 6,
+   "p95": 37,
+   "max": 74,
+   "share_over_10": 0.18
+  }
+ }
+}

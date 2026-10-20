@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 456" width="1140" height="456" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="1140" height="456" fill="#ffffff"/>
+<text x="24.0" y="34.0" font-size="17" fill="#1f2430" text-anchor="start" font-weight="600">dataset-desk text embedders: registered VRAM against the measured peak (RTX 5090)</text>
+<text x="24.0" y="54.0" font-size="11.5" fill="#5b6272" text-anchor="start" font-weight="400">The governor reserves the registered figure plus 1,024 MiB. Measured: one run per model, through the desk, 2026-10-20.</text>
+<line x1="380.0" y1="96.0" x2="380.0" y2="336.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="380.0" y="351.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">0</text>
+<line x1="535.0" y1="96.0" x2="535.0" y2="336.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="535.0" y="351.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">4000</text>
+<line x1="690.0" y1="96.0" x2="690.0" y2="336.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="690.0" y="351.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">8000</text>
+<line x1="845.0" y1="96.0" x2="845.0" y2="336.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="845.0" y="351.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">12000</text>
+<line x1="1000.0" y1="96.0" x2="1000.0" y2="336.0" stroke="#e3e6ec" stroke-width="1.0"/>
+<text x="1000.0" y="351.0" font-size="10" fill="#5b6272" text-anchor="middle" font-weight="400">16000</text>
+<rect x="24.0" y="96.0" width="1086.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="110.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">bge-m3</text>
+<text x="28.0" y="122.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">registered in the desk</text>
+<line x1="380.0" y1="111.0" x2="444.9" y2="111.0" stroke="#6b7280" stroke-width="2.0"/>
+<circle cx="444.9" cy="111.0" r="4.5" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<text x="454.9" y="115.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">1,674 MiB</text>
+<text x="28.0" y="140.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600"></text>
+<text x="28.0" y="152.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">measured peak, batch 8 · 8,192-token chunks · bfloat16</text>
+<line x1="380.0" y1="141.0" x2="670.2" y2="141.0" stroke="#b45309" stroke-width="2.0"/>
+<circle cx="670.2" cy="141.0" r="4.5" fill="#b45309" stroke="#b45309" stroke-width="1.6"/>
+<text x="680.2" y="145.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">7,488 MiB · 4.5× the registered figure</text>
+<rect x="24.0" y="156.0" width="1086.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="170.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">qwen3-emb-0.6b</text>
+<text x="28.0" y="182.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">registered in the desk</text>
+<line x1="380.0" y1="171.0" x2="527.8" y2="171.0" stroke="#6b7280" stroke-width="2.0"/>
+<circle cx="527.8" cy="171.0" r="4.5" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<text x="537.8" y="175.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">3,814 MiB</text>
+<text x="28.0" y="200.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600"></text>
+<text x="28.0" y="212.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">measured peak, batch 8 · 8,192-token chunks · bfloat16</text>
+<line x1="380.0" y1="201.0" x2="940.7" y2="201.0" stroke="#b45309" stroke-width="2.0"/>
+<circle cx="940.7" cy="201.0" r="4.5" fill="#b45309" stroke="#b45309" stroke-width="1.6"/>
+<text x="950.7" y="205.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">14,470 MiB · 3.8× the registered figure</text>
+<rect x="24.0" y="216.0" width="1086.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="230.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">gte-modernbert</text>
+<text x="28.0" y="242.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">registered in the desk</text>
+<line x1="380.0" y1="231.0" x2="417.0" y2="231.0" stroke="#6b7280" stroke-width="2.0"/>
+<circle cx="417.0" cy="231.0" r="4.5" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<text x="427.0" y="235.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">954 MiB</text>
+<text x="28.0" y="260.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600"></text>
+<text x="28.0" y="272.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">measured peak, batch 8 · 8,192-token chunks · bfloat16</text>
+<line x1="380.0" y1="261.0" x2="633.6" y2="261.0" stroke="#b45309" stroke-width="2.0"/>
+<circle cx="633.6" cy="261.0" r="4.5" fill="#b45309" stroke="#b45309" stroke-width="1.6"/>
+<text x="643.6" y="265.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">6,544 MiB · 6.9× the registered figure</text>
+<rect x="24.0" y="276.0" width="1086.0" height="30.0" fill="#f1f3f7" stroke="none"/>
+<text x="28.0" y="290.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600">eg2</text>
+<text x="28.0" y="302.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">registered in the desk</text>
+<line x1="380.0" y1="291.0" x2="866.3" y2="291.0" stroke="#6b7280" stroke-width="2.0"/>
+<circle cx="866.3" cy="291.0" r="4.5" fill="#6b7280" stroke="#6b7280" stroke-width="1.6"/>
+<text x="876.3" y="295.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">12,550 MiB</text>
+<text x="28.0" y="320.0" font-size="12" fill="#1f2430" text-anchor="start" font-weight="600"></text>
+<text x="28.0" y="332.0" font-size="9.5" fill="#5b6272" text-anchor="start" font-weight="400">measured peak, batch 4 · 8,000-token chunks · bfloat16 · text-only</text>
+<line x1="380.0" y1="321.0" x2="706.5" y2="321.0" stroke="#15803d" stroke-width="2.0"/>
+<circle cx="706.5" cy="321.0" r="4.5" fill="#15803d" stroke="#15803d" stroke-width="1.6"/>
+<text x="716.5" y="325.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">8,426 MiB · inside the registered figure</text>
+<text x="24.0" y="427.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">The registered figures were measured at short inputs. At 8,192-token chunks three of the four need far more.</text>
+<text x="24.0" y="442.0" font-size="10.5" fill="#5b6272" text-anchor="start" font-weight="400">Sources: mcp-tool-shop-org/rnd experiments/dataset-desk/calibration/data/ (rung2b-runs.json, registry-25d9cdd5.json). Inputs pinned in experiments/charts/manifest.json.</text>
+</svg>

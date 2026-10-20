@@ -17,6 +17,14 @@
    "commit": "00f57b4",
    "sha256": "7509d67dfd96777fa69742cd8a771e397edbe4330e63fd0689681ccaf6503908"
   },
+  "experiments/dataset-desk/calibration/data/registry-25d9cdd5.json": {
+   "commit": "uncommitted",
+   "sha256": "67e23c407da98a9e6a7b225fbe5d2ef04657a224e76baa3a9c3814045d7cc540"
+  },
+  "experiments/dataset-desk/calibration/data/rung2b-runs.json": {
+   "commit": "uncommitted",
+   "sha256": "631f47eff981749fcfcd6a22cc3d5df46f0bccf96eccc5ab47ce2394a4ce1351"
+  },
   "experiments/e4b/results/block-2.json": {
    "commit": "d760b0c",
    "sha256": "9b00fb532c6481808677c7783970adfef7084a12eb6d3326fb74478d9ab889e5"
@@ -42,15 +50,15 @@
    "sha256": "f9bc5ffdab9f5fcb61b9dd37dc25e4bb6dfca5e644f265ebc468232371497884"
   },
   "experiments/stage1-regeneration/critic-signal/data/calls.csv": {
-   "commit": "uncommitted",
+   "commit": "2c1a577",
    "sha256": "f34981f88535c99776f8c7bb138beac09bcb6e4fe199701deaf78e57a8ce3efd"
   },
   "experiments/stage1-regeneration/critic-signal/data/confirmation-slots.json": {
-   "commit": "uncommitted",
+   "commit": "2c1a577",
    "sha256": "3e8ef3e32f8ee87d1d7faf2441fd45cd3b6ec7cb87d4d86b872520e3b19ffb54"
   },
   "experiments/stage1-regeneration/critic-signal/data/outcomes.csv": {
-   "commit": "uncommitted",
+   "commit": "2c1a577",
    "sha256": "012017174bd0e5ff07a921bcacf0e21730c138720d486950513af7d83d0b5e4c"
   },
   "experiments/stage1-regeneration/pilot/qwen3.8-w0-calls.json": {

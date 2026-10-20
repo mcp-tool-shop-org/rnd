@@ -512,6 +512,20 @@ class RawWithoutLibraryTests(unittest.TestCase):
         self.assertEqual(code, 0, err)
         self.assertIn("verified rnd-data and rnd-data-private: 0 problems", out)
 
+    def test_the_companion_can_be_named_without_a_library(self):
+        moved = self.base / "elsewhere" / "rnd-data-private"
+        shutil.move(str(self.private), str(moved))                       # no longer beside the store
+        env = {"RND_DATA": str(self.public), "RND_DATA_STORE_D": str(self.blobs)}
+        code, out, err = self.main("raw", "verify", env={**env, "RND_DATA_PRIVATE": str(moved)})
+        self.assertEqual(code, 0, err)
+        self.assertIn("verified rnd-data and rnd-data-private: 0 problems", out)
+        code, out, err = self.main("raw", "verify", "--private", str(moved), env=env)
+        self.assertEqual(code, 0, err)
+        self.assertIn("and rnd-data-private", out)
+        code, out, err = self.main("raw", "verify", env=env)              # beside the store: not there now
+        self.assertEqual(code, 0, err)
+        self.assertIn("verified rnd-data: 0 problems", out)
+
     def test_without_a_named_store_it_still_needs_a_library(self):
         code, _, err = self.main("raw", "verify", "--public-only")
         self.assertEqual(code, 2)

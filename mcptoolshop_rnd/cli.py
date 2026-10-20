@@ -556,12 +556,28 @@ def cmd_raw(args):
     private = Path(args.private) if args.private else layout.private_root(ROOT)
     try:
         if args.action == "verify":
-            problems = rawdata.verify(public, private if private.is_dir() else None, deep=args.deep, run=args.run)
+            if args.public_only and args.deep:
+                return fail("RAW_USAGE", "--deep re-hashes blobs, which --public-only skips",
+                            "use one: --public-only (a public clone) or --deep (the rig)")
+            skipped = {}
+            problems = rawdata.verify(public, None if args.public_only or not private.is_dir() else private,
+                                      deep=args.deep, run=args.run, public_only=args.public_only, skipped=skipped)
             for line in problems:
                 print(f"error: {line}", file=sys.stderr)
-            print(f"verified rnd-data{' and rnd-data-private' if private.is_dir() else ''}: {len(problems)} problems"
-                  f"{' (blobs re-hashed)' if args.deep else ''}")
+            if args.public_only:
+                skip = ", ".join(f"{n} in store {s}" for s, n in sorted(skipped.items())) or "none"
+                print(f"verified rnd-data, public only (copies skipped: {skip}): {len(problems)} problems")
+            else:
+                print(f"verified rnd-data{' and rnd-data-private' if private.is_dir() else ''}: {len(problems)} problems"
+                      f"{' (blobs re-hashed)' if args.deep else ''}")
             return 1 if problems else 0
+        if args.action == "relicense":
+            if not (args.rules and args.prefix):
+                return fail("RAW_USAGE", "relicense needs --rules and --prefix",
+                            "rnd raw relicense --rules docs/raw-data-rules/receipts.json --prefix receipts")
+            st = rawdata.relicense(public, rawdata.load_rules(Path(args.rules)), args.prefix, dry_run=args.dry_run)
+            print(("would relicense: " if args.dry_run else "relicensed: ") + ", ".join(f"{k} {v}" for k, v in st.items()))
+            return 0
         if not args.source:
             return fail("RAW_USAGE", f"{args.action} needs a source folder", "rnd raw ingest <folder> --prefix receipts")
         source = Path(args.source)
@@ -978,14 +994,15 @@ def build_parser():
     s = add("ledger", cmd_ledger, "an experiment's spending per cost unit against its budgets, computed from its runs")
     s.add_argument("experiment")
 
-    s = add("raw", cmd_raw, "ingest raw run outputs into rnd-data (public) and rnd-data-private, or verify them",
-            json_flag=False)
-    s.add_argument("action", choices=("ingest", "private", "verify"))
+    s = add("raw", cmd_raw, "ingest raw run outputs into rnd-data (public) and rnd-data-private, verify them, or "
+            "reapply a rules file's licences", json_flag=False)
+    s.add_argument("action", choices=("ingest", "private", "verify", "relicense"))
     s.add_argument("source", nargs="?", help="ingest/private: the folder to read (never changed)")
-    s.add_argument("--prefix", help="ingest: the run ids' first part, e.g. receipts")
+    s.add_argument("--prefix", help="ingest, relicense: the run ids' first part, e.g. receipts")
     s.add_argument("--as", dest="name", help="private: the folder under private/ in rnd-data-private")
     s.add_argument("--reasons", help="a JSON file mapping paths or folder/ prefixes to a private reason")
-    s.add_argument("--rules", help="ingest: a rules file (deny by default for content), e.g. docs/raw-data-rules/receipts.json")
+    s.add_argument("--rules", help="ingest: a rules file (deny by default for content), e.g. docs/raw-data-rules/receipts.json; "
+                   "relicense: the file whose licences to reapply")
     s.add_argument("--exclude", action="append", help="a path or folder to leave out (repeatable)")
     s.add_argument("--link", action="store_true",
                    help="ingest: hard-link blobs instead of copying, only from a read-only snapshot on the store's volume")
@@ -996,6 +1013,9 @@ def build_parser():
     s.add_argument("--private", help="the rnd-data-private checkout (default: $RND_DATA_PRIVATE, else ../rnd-data-private)")
     s.add_argument("--run", help="verify: one run id")
     s.add_argument("--deep", action="store_true", help="verify: re-hash every blob, not only check its size")
+    s.add_argument("--public-only", action="store_true",
+                   help="verify: only what a public clone can check (CI): git copies, plus files no manifest names, the "
+                        "private tag, private-looking names and machine paths; skips the blob store and the companion")
 
     s = add("where", cmd_where, "where a file's bytes are: every name and copy, by SHA-256 or path")
     s.add_argument("key", metavar="SHA256_OR_PATH")

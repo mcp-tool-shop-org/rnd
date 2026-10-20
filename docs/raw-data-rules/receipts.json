@@ -1,6 +1,6 @@
 {
  "schema": "rnd-data-rules/v1",
- "about": "What of the Publisher's receipts may be public in rnd-data. Deny by default for content: a file is public only when a public rule names it, it carries no content marker, and the identity scan passed it. Rules are checked in order: identity (from the reasons file), then private, then content markers, then public; anything left is private as 'unapproved'. Agreed with the Publisher on 2026-10-19 after their P3 review; either side changes it only by agreement. Patterns: 'name' matches the file name, 'path' the path under receipts/ (fnmatch; * crosses folders).",
+ "about": "What of the Publisher's receipts may be public in rnd-data. Deny by default for content: a file is public only when a public rule names it, it carries no content marker, and the identity scan passed it. Rules are checked in order: identity (from the reasons file), then private, then content markers, then public; anything left is private as 'unapproved'. Agreed with the Publisher on 2026-10-19 after their P3 review; either side changes it only by agreement. Patterns: 'name' matches the file name, 'path' the path under receipts/ (fnmatch; * crosses folders). Licences (the Director's ruling, 2026-10-19: rnd-data is licensed like rnd) are checked in order, first match wins, for public files only: the llama.cpp build keeps MIT, scripts are MIT, data is CC BY 4.0; the verifier-gold rule (the Publisher's, agreed the same day) names the MIT code its items quote.",
  "default": "unapproved",
  "private": [
   {
@@ -145,6 +145,22 @@
   {
    "name": "llama-server*",
    "licence": "MIT (llama.cpp, commit 620d2225)"
+  },
+  {
+   "name": "*.sh",
+   "licence": "MIT"
+  },
+  {
+   "name": "*.py",
+   "licence": "MIT"
+  },
+  {
+   "path": "verifier-gold/*",
+   "licence": "CC-BY-4.0 (the code excerpts in `context` are MIT, from offrig, aspire-si and role-os)"
+  },
+  {
+   "name": "*",
+   "licence": "CC-BY-4.0"
   }
  ]
 }

@@ -319,7 +319,12 @@ class ReceiptRulesTests(unittest.TestCase):
 
     def test_licences_and_run_kinds(self):
         self.assertEqual(self.licence_for("colab/w/upload/llama-server.gz"), "MIT (llama.cpp, commit 620d2225)")
-        self.assertIsNone(self.licence_for("colab/w/job.log"))
+        # The Director's ruling (2026-10-19): rnd-data is licensed like rnd. First match wins.
+        self.assertEqual(self.licence_for("colab/w/job.log"), "CC-BY-4.0")
+        self.assertEqual(self.licence_for("colab/w/launch.sh"), "MIT")
+        self.assertEqual(self.licence_for("colab/w/scripts/collect.py"), "MIT")
+        self.assertTrue(self.licence_for("verifier-gold/reasoning-prs-2026-10-08.jsonl").startswith("CC-BY-4.0 (the code"))
+        self.assertEqual(self.licence_for("verifier-gold/build.py"), "MIT")  # a script stays MIT, above the gold rule
         public, private, blobs = make_stores(self.base)
         with mock.patch.dict(os.environ, {"RND_DATA_STORE_D": str(blobs)}):
             rawdata.ingest_tree(self.src, public, private, "receipts", self.classify, licence_for=self.licence_for,
@@ -351,3 +356,122 @@ class ReceiptRulesTests(unittest.TestCase):
             self.assertTrue(rawdata._has_marker(p, b"CALL_CHECKPOINT"))
             p.write_bytes(b"x" * ((8 << 20) + 10))
             self.assertFalse(rawdata._has_marker(p, b"CALL_CHECKPOINT"))
+
+
+class PublicOnlyAndRelicenseTests(unittest.TestCase):
+    """What a public clone (CI) can check, and reapplying a rules file's licences in place."""
+
+    def setUp(self):
+        self.base = Path(tempfile.mkdtemp())
+        self.addCleanup(rmtree_force, self.base)
+        self.public, self.private, self.blobs = make_stores(self.base)
+        self.src = make_receipts(self.base)
+        self.reasons = {"colab/window1-20261016/launch.out": "identity"}
+        with mock.patch.dict(os.environ, {"RND_DATA_STORE_D": str(self.blobs)}):
+            rawdata.ingest_tree(self.src, self.public, self.private, "receipts", self.classify)
+
+    def classify(self, rel):
+        return self.reasons.get(rel) or ("blind" if layout.private_name(rel) else None)
+
+    def verify(self, **kw):
+        """As a public clone sees it: no blob store configured."""
+        skipped = {}
+        with mock.patch.dict(os.environ, {}):
+            os.environ.pop("RND_DATA_STORE_D", None)
+            return rawdata.verify(self.public, self.private, public_only=True, skipped=skipped, **kw), skipped
+
+    def test_a_clean_clone_passes_and_counts_what_it_skipped(self):
+        problems, skipped = self.verify()
+        self.assertEqual(problems, [])
+        self.assertEqual(skipped, {"d": 2})  # the two big files, both blobs
+        with mock.patch.dict(os.environ, {}):
+            os.environ.pop("RND_DATA_STORE_D", None)
+            self.assertIn("no root for store 'd'", " ".join(rawdata.verify(self.public, self.private)))
+
+    def test_it_still_rehashes_git_copies(self):
+        (self.public / "runs/receipts--colab--window1-20261016/files/job.log").write_text("tampered")
+        self.assertIn("hash differs", " ".join(self.verify()[0]))
+
+    def test_the_tree_rules(self):
+        write(self.public, "runs/receipts/files/stray.txt", "named by no manifest\n")
+        write(self.public, "runs/receipts--colab/files/note.md", "<!-- " + TAG + " -->\nprivate\n")
+        write(self.public, "site/sealed_answers.json", "{}")
+        write(self.public, "SECURITY.md", "Report a file carrying " + TAG + ".\n")  # a page naming the tag is fine
+        mp = self.public / "runs/receipts/manifest.json"
+        m = json.loads(mp.read_text(encoding="utf-8"))
+        m["licence_note"] = "copied from C:/" + "Users/someone/run"
+        mp.write_text(json.dumps(m), encoding="utf-8")
+        problems = " | ".join(self.verify()[0])
+        self.assertIn("runs/receipts/files/stray.txt: under runs/ but named by no manifest", problems)
+        self.assertIn("runs/receipts--colab/files/note.md: carries the private tag", problems)
+        self.assertIn("site/sealed_answers.json: the name looks private", problems)
+        self.assertIn("receipts: a machine path at licence_note", problems)
+        self.assertNotIn("SECURITY.md", problems)
+
+    def test_one_run_skips_the_tree_rules(self):
+        write(self.public, "runs/receipts/files/stray.txt", "x\n")
+        self.assertEqual(self.verify(run="receipts")[0], [])
+
+    def test_relicense_changes_only_the_licence_field(self):
+        before = {p: p.read_bytes() for p in (self.public / "runs").rglob("*") if p.is_file()}
+        rules = rawdata.load_rules(RULES)
+        dry = rawdata.relicense(self.public, rules, "receipts", dry_run=True)
+        self.assertEqual({p: p.read_bytes() for p in before}, before)  # a dry run writes nothing
+        st = rawdata.relicense(self.public, rules, "receipts")
+        self.assertEqual(st, dry)
+        self.assertGreater(st["files_changed"], 0)
+        for p, old in before.items():
+            if p.name != "manifest.json":
+                self.assertEqual(p.read_bytes(), old)  # no data file is touched
+                continue
+            a, b = json.loads(old), json.loads(p.read_bytes())
+            for e in b["files"]:
+                if e["visibility"] != "public":
+                    self.assertIsNone(e["licence"])  # a private entry stays null
+            for e in a["files"] + b["files"]:
+                if e["visibility"] == "public":
+                    e["licence"] = None
+            self.assertEqual(a, b)  # nothing else changed
+        m = json.loads((self.public / "runs/receipts--colab--window1-20261016/manifest.json").read_text())
+        self.assertEqual({f["path"]: f["licence"] for f in m["files"]}["job.log"], "CC-BY-4.0")
+        self.assertEqual(rawdata.relicense(self.public, rules, "receipts")["files_changed"], 0)  # idempotent
+        self.assertEqual(self.verify()[0], [])
+        with self.assertRaises(rawdata.RawError) as ctx:
+            rawdata.relicense(self.public, rules, "nothing-here")
+        self.assertEqual(ctx.exception.code, "NO_RUNS")
+
+    def test_an_ingest_after_relicense_is_unchanged(self):
+        rules = rawdata.load_rules(RULES)
+        rawdata.relicense(self.public, rules, "receipts")
+        _, licence_for = rawdata.rules_classifier(rules, self.src, {})
+        with mock.patch.dict(os.environ, {"RND_DATA_STORE_D": str(self.blobs)}):
+            st = rawdata.ingest_tree(self.src, self.public, self.private, "receipts", self.classify,
+                                     licence_for=licence_for)
+        self.assertEqual(st["unchanged"], 6)
+
+
+class RawPublicOnlyCommandTests(CliBase):
+    def setUp(self):
+        super().setUp()
+        self.public, self.private, self.blobs = make_stores(self.root / "stores")
+        src = make_receipts(self.root / "in")
+        with mock.patch.dict(os.environ, {"RND_DATA_STORE_D": str(self.blobs)}):
+            rawdata.ingest_tree(src, self.public, self.private, "receipts",
+                                lambda rel: "blind" if layout.private_name(rel) else None)
+        env = mock.patch.dict(os.environ, {"RND_DATA": str(self.public), "RND_DATA_PRIVATE": str(self.private)})
+        env.start()
+        self.addCleanup(env.stop)
+
+    def test_verify_public_only_and_relicense(self):
+        code, out, err = self.run_cli("raw", "verify", "--public-only")
+        self.assertEqual(code, 0, err)
+        self.assertIn("verified rnd-data, public only (copies skipped: 2 in store d): 0 problems", out)
+        self.assertEqual(self.run_cli("raw", "verify", "--public-only", "--deep")[0], 2)
+        code, out, err = self.run_cli("raw", "relicense", "--rules", str(RULES), "--prefix", "receipts", "--dry-run")
+        self.assertEqual(code, 0, err)
+        self.assertIn("would relicense: manifests 6", out)
+        code, out, err = self.run_cli("raw", "relicense", "--rules", str(RULES), "--prefix", "receipts")
+        self.assertEqual(code, 0, err)
+        self.assertIn("relicensed: manifests 6", out)
+        self.assertEqual(self.run_cli("raw", "relicense", "--prefix", "receipts")[0], 2)
+        self.assertEqual(self.run_cli("raw", "relicense", "--rules", str(RULES), "--prefix", "none")[0], 1)

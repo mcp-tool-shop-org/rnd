@@ -67,12 +67,29 @@ The raw rows are in [`results/`](results/). In run 1's tracebacks, local paths a
 
 **Licences:** the libraries are Apache-2.0, MIT and BSD-2-Clause. The CUDA runtime wheels they pull carry NVIDIA's
 proprietary licence (the CUDA EULA). The studio would depend on them as optional extras, never vendored.
-- **Read by the Publisher, 2026-10-20; outside check pending.** The reading below is from the CUDA EULA at
-  docs.nvidia.com/cuda/eula. It is [unverified], awaiting the outside check, and nothing should depend on it until that
-  check lands.
-- **What it doesn't restrict** [unverified]: publishing test or benchmark results. This folder commits only package
-  names and versions, results and our own script.
-- **What it does restrict** [unverified]:
-  - implying NVIDIA sponsors or endorses the work (§1.2(3));
-  - redistributing SDK files beyond Attachment A's list (§1.1.2(4), §1.2(2), §2.6).
-- **A future `[gpu]` extra** depends on NVIDIA's wheels from PyPI and never vendors them.
+- **How it was checked:** the Publisher read the EULA first. Then came an outside check by a different model family,
+  Gemini, run by hand on 2026-10-20. Gemini checked the CUDA Toolkit EULA, v13.4, whose text is dated "Last updated:
+  January 26, 2026". It read the page through Google's index, not a live browser.
+- **Not restricted:** publishing test or benchmark results. The EULA has no benchmark-publication or confidentiality
+  term. This folder commits only package names and versions, results and our own script. [verified] (via: Gemini by
+  hand, 2026-10-20, EULA §1.1.6 and §1.2)
+- **Restricted:**
+  - Implying that an application made with the SDK is sponsored or endorsed by NVIDIA. [verified] (via: Gemini by
+    hand, 2026-10-20, §1.2(3))
+  - Redistributing SDK files, beyond the portions listed as distributable in Attachment A and under the distribution
+    requirements. The rule is the one first read, but the outside check corrected its section numbers: the grant is
+    §1.1.1(3), the requirements are §1.1.2(1)–(6), and §2.2 limits what's distributable to Attachment A (§2.6). The
+    general bar is §1.2(2). The earlier citation of §1.1.2(4) was wrong: that item covers internal-only developer
+    tools. [verified] (via: Gemini by hand, 2026-10-20)
+- **A future `[gpu]` extra** only declares NVIDIA's PyPI wheels as dependencies; pip fetches them from PyPI. That
+  isn't redistribution by us, and §1.1.6 permits using the SDK to build applications released under an open-source
+  licence such as MIT or Apache-2.0. [verified] (via: Gemini by hand, 2026-10-20, §1.1.6, §1.1.1(3), §1.2(2))
+- **Terms that still apply to any tool built on these libraries.** [verified] (via: Gemini by hand, 2026-10-20)
+  - Applications are licensed for systems with NVIDIA GPUs only (§2.1).
+  - No reverse-engineering the SDK's output to target a non-NVIDIA platform (§1.2(8)).
+  - Don't use the SDK in a way that subjects it to open-source licence terms (§1.2(5)).
+  - Not for "Critical Applications", and an indemnity for that use (§1.2(6)–(7)).
+  - Export control (§1.7).
+- **Not checked yet:** the licence files inside the PyPI wheels themselves (`nvidia-cuda-runtime`, `cuda-toolkit`,
+  and any math libraries `nvmath-python` pulls). Under §1.1.6, separate notices on components can control. Read them
+  before a `[gpu]` extra ships. [unverified]

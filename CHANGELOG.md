@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.14] - 2026-10-20
+
+- CUDA EULA outside check (Gemini) recorded on the 5090 rung
+- Updated experiment `cuda-python-5090-rung`
+
 ## [1.1.23.1.13] - 2026-10-20
 
 - live-fire entry: links to the receipts on xrpl-lab main; run 4 and the 2.6.0 release

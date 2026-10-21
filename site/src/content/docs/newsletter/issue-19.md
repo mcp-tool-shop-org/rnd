@@ -107,8 +107,8 @@ releases. We now check that each run reached its end, not just its exit code.
 
 ## Where it landed
 
-2.6.2 is released, and 2.7.0 has passed four rounds of outside review and a live rerun of every fix. The course's
-tests stand at 3,440, with coverage at 97%. The course now treats a refusal, an interruption or a missing record as
+Both releases are out. 2.7.0 shipped after four rounds of outside review and a live rerun of every fix, and it's on
+PyPI and npm. The course's tests stand at 3,440, with coverage at 97%. The course now treats a refusal, an interruption or a missing record as
 the failure it is, not a quiet pass.
 
 ## Method and limits

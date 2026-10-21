@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.16] - 2026-10-20
+
+- Raw-data rules for the xrpl-lab live-testnet runs: `docs/raw-data-rules/xrpl-lab-runs.json` (deny by default; wallet and seed files private, the Argon log unapproved; harness scripts MIT, the rest CC BY 4.0). Written by the Book Keeper on R&D's brief, reviewed by R&D; the Publisher's merge is their agreement.
+
 ## [1.1.23.1.15] - 2026-10-20
 
 - newsletter issue 18: testing the course we'd already shipped (xrpl-lab 2.6.0 to 2.6.1)

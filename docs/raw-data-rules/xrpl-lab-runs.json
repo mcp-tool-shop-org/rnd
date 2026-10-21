@@ -1,0 +1,83 @@
+{
+ "schema": "rnd-data-rules/v1",
+ "about": "What of the xrpl-lab live-testnet runs (the Robot rig's xrpl-lab-runs folder: the 2.6.0 AMM live-fire runs, the 2.6.1 helper-wallet sweeps and the 2.6.1 release sweep, 2026-10-20/21) may be public in rnd-data. Deny by default for content: a file is public only when a public rule names it, it carries no content marker, and the identity scan passed it. Rules are checked in order: identity (from the reasons file), then private, then content markers, then public; anything left is private as 'unapproved'. Written by the Book Keeper on R&D's brief and reviewed by R&D (2026-10-21); the Publisher's merge of this file is their agreement, as with receipts.json, and either side changes it only by agreement. The curated, redacted receipts are already public in xrpl-lab under docs/receipts/. Patterns: 'name' matches the file name, 'path' the path under xrpl-lab-runs/ (fnmatch; * crosses folders). Licences, first match wins, for public files only: the harness scripts are MIT; everything else, including the XRPL Testnet ledger records, is CC BY 4.0 (rnd-data's data licence).",
+ "default": "unapproved",
+ "private": [
+  {
+   "name": "wallet*.json",
+   "reason": "unapproved",
+   "why": "secrets: a wallet file holds a seed. None was ever written into a run folder (wallets stayed in the scratch home); this rule keeps one out if it ever is. rnd's reasons have no 'secrets', so it is 'unapproved'"
+  },
+  {
+   "name": "*seed*",
+   "reason": "unapproved",
+   "why": "secrets: anything named for a seed. None exists; the rule is a floor"
+  },
+  {
+   "path": "argon/*",
+   "reason": "unapproved",
+   "why": "the logged Argon consult: not needed for the runs' provenance, and publishing it is a separate call"
+  }
+ ],
+ "content_markers": [],
+ "public": [
+  {
+   "name": "command.txt",
+   "why": "the command, the code sha, the redacted env lines and the exit code from PIPESTATUS"
+  },
+  {
+   "name": "preflight.txt",
+   "why": "the testnet-only preflight: env unset, classify_network, network guard"
+  },
+  {
+   "name": "stdout.txt",
+   "why": "the module's own output, unredacted (a file carrying a home path is private for identity first)"
+  },
+  {
+   "name": "stderr.txt",
+   "why": "the module's warnings and errors"
+  },
+  {
+   "name": "module_report.md",
+   "why": "xrpl-lab's own module report"
+  },
+  {
+   "name": "state.json",
+   "why": "xrpl-lab's state: wallet address, completed modules, tx index (public testnet data; a file carrying a home path is private for identity first)"
+  },
+  {
+   "path": "*/ledger/*.json",
+   "why": "the read-only ledger capture after each run: tx lookups, account_info, account_tx, server_state, amm_info, simulate; public XRPL Testnet records"
+  },
+  {
+   "name": "env.txt",
+   "why": "the AMM runs' env record: placeholders for the scratch home, unset RPC/faucet vars, Python/xrpl-py/xrpl-lab versions"
+  },
+  {
+   "name": "exit_code",
+   "why": "the sweeps' per-module exit code"
+  },
+  {
+   "name": "capture.log",
+   "why": "the sweeps' capture summary: hash lookups and account balances, public testnet data"
+  },
+  {
+   "path": "_harness/*",
+   "why": "the sweep scripts and their README"
+  }
+ ],
+ "licences": [
+  {
+   "path": "_harness/*.py",
+   "licence": "MIT"
+  },
+  {
+   "path": "_harness/*.sh",
+   "licence": "MIT"
+  },
+  {
+   "name": "*",
+   "licence": "CC-BY-4.0"
+  }
+ ]
+}

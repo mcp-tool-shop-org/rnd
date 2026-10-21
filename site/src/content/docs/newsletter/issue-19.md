@@ -29,9 +29,10 @@ as taught, but the step never wrote it into the course's record of transactions.
 
 A receipt couldn't show by itself that the failure was the one the lesson wanted.
 
-2.6.2 records every one of them and marks it `expected`. The live run passed 14 of 14 lessons. In every lesson the
-summary's "N failed" was exactly its expected rejections, and 12 of them were confirmed on the ledger with the codes
-the lessons teach.
+2.6.2 records every one of them and marks it `expected`. Its release run passed all 14 lessons: 13 live on testnet
+and one offline. In every lesson the summary's "N failed" was exactly its expected rejections. Of those 19
+rejections, 17 were confirmed on the ledger with the codes the lessons teach. The other two, a malformed
+transaction and a multisig quorum failure, never reach a ledger by design.
 
 ## The simulator gave out ten times the money
 

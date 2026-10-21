@@ -49,11 +49,12 @@ broke run 1. We ran all ten on testnet.
   ledger. Only the way the result was read made it look like the lesson's outcome.
 - **Plain bugs, invisible offline.** Payment-channel claims always failed, because the code read the channel's key in
   the wrong format. Credential-gated payments couldn't be signed, because of a field-name bug in the XRPL library we
-  use. And two NFT lessons priced an item at a buyer's entire faucet grant.
+  use. And two lessons with an NFT sale priced the item at a buyer's entire faucet grant.
 
-A second sweep, after the fixes, passed nine of ten. The tenth had been passing for the wrong reason all along: its
-"unfunded" account was a well-known example address that is funded on testnet. Only the stricter status from the first
-round's fixes caught it.
+A second sweep, after the fixes, passed nine of ten. The tenth, the credentials lesson, finished unverified in both
+sweeps, and the second showed why: one of its steps had been passing for the wrong reason all along. Its "unfunded"
+account was a well-known example address that is funded on testnet. Only the stricter status from the first round's
+fixes caught it.
 
 ## The offline simulator had its own blind spots
 
@@ -74,13 +75,13 @@ behaviour, not just that code runs, and none touches the network. Writing them f
 `send` command that reported success after a failed payment.
 
 Two review passes caught what we'd missed:
-- **An internal review** found seven lessons that would accept any rejection as their lesson, so an unrelated failure
-  could pass. Each now accepts only the code it teaches.
+- **An internal review** found seven lesson steps, across six lessons, that would accept any rejection as their
+  lesson, so an unrelated failure could pass. Each now accepts only the code it teaches.
 - **An outside model's review** (Google's Gemini, over two rounds) found that one kind of expected failure could still
   hide a real one, and that the "validated" flag was set by default where it should have been earned.
 
-One of the defects was ours. Our first fix for run 1 decided a step had failed by looking at a field only 2 of the 66
-transaction steps set. It passed its own test, because the test was built to match it, and it marked the failure lesson's
+One defect came from a fix of our own. Our first fix for run 1 decided a step had failed by looking at a field that
+only 2 of the 66 handlers that submit transactions set. It passed its own test, because the test was built to match it, and it marked the failure lesson's
 deliberate rejection as a failure.
 
 ## Where 2.6.1 landed

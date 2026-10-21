@@ -4,7 +4,7 @@ description: Two more xrpl-lab releases, 2.6.2 and 2.7.0, and the same lesson fr
 issue: 19
 date: 2026-10-21
 highlights:
-  - "<strong>A correct lesson, missing from its own record.</strong> Twelve lesson steps that teach a rejected transaction got the rejection right on the ledger, but left it out of the course's record. A receipt couldn't show that the failure was the expected one."
+  - "<strong>A correct lesson, missing from its own record.</strong> Twelve lesson steps that teach a rejected transaction got the rejection right, but left it out of the course's record. A receipt couldn't show that the failure was the expected one."
   - "<strong>The simulator gave out ten times the money.</strong> Offline wallets started with 1,000 XRP; testnet gives 100. One lesson's pool needed all of a real wallet's 100, and only the live network could say so."
   - "<strong>An upgrade that changes who signs.</strong> The XRPL library's new major version reads some keys differently. The course's own wallets were unaffected, but an imported one would have signed as a different account. 2.7.0 keeps it on its account, or refuses."
   - "<strong>Our own sweep passed after one step.</strong> Our offline check of all 32 lessons ran with no keyboard attached. Every lesson stopped at its first \"Press Enter\" and still reported success. A fix in 2.7.0 is what exposed it."

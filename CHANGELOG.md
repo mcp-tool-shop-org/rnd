@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.15] - 2026-10-20
+
+- newsletter issue 18: testing the course we'd already shipped (xrpl-lab 2.6.0 to 2.6.1)
+
 ## [1.1.23.1.14] - 2026-10-20
 
 - CUDA EULA outside check (Gemini) recorded on the 5090 rung

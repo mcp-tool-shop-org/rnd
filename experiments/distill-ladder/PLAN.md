@@ -273,11 +273,52 @@ ASPIRE, after R&D has read the scores.
 ## Open choices before this becomes the pre-registration
 
 1. ~~The student's pinned revision and verified licence~~ done: Qwen3-1.7B @ 70d244cc, apache-2.0.
-2. The teacher, by the ladder v1 rule above, once tonight's ladder runs.
-3. Ladder v2's knob combinations and per-cell n, then generate and seal it.
-4. ASPIRE's mechanics are written (the Training section). The aspire-si PR (#72) has the four code changes and
-   tests, plus prefix and multi-turn label guards. R&D approved it at 045423d; it merges on green CI.
-5. The thinking setting for the student, recorded the same way as the calibration candidates.
+2. ~~The teacher~~ done (R&D, 2026-10-22): **gemma4:31b** (Ollama digest `6316f0629137…`, the digest ladder v1 ran).
+   - **Ladder v1 overall accuracy** (usable claims, both scorings; `math-ladder/results/2026-10-09-ladder/`):
+
+     | Candidate | Licence | final_verdict | model_verdict | False accepts |
+     |---|---|---|---|---|
+     | **gemma4:31b** | Apache-2.0 | **0.971** (n=765) | **0.992** | 6/375 |
+     | qwen3:8b | Apache-2.0 | 0.969 (n=766) | 0.984 | 8/381 |
+     | qwen3:14b | Apache-2.0 | 0.915 (n=772) | 0.986 | 8/383 |
+     | mistral-small:24b | Apache-2.0 | 0.298 (n=778) | 0.752 | 52/388 |
+     | granite4.1:30b | Apache-2.0 | 0.194 (n=780) | 0.917 | 0/390 |
+
+     llama3.1:8b (Llama licence) is excluded by the rule. No post-hoc candidate ran on ladder v1, so none is in
+     the pool.
+   - **The T3 hard-tier note** (`verifier-gold/calibration/results/2026-10-09-chain/difficulty-report.txt`):
+     gemma4:31b false-accepted 1 of 34 false T3 claims (0.03, CI [0.01, 0.15]), under the 0.25 flag. The other
+     candidates' upper bounds are all above it: qwen3:8b 0.26, qwen3:14b 0.39, mistral-small 0.42, granite 0.45.
+     So the rule's pick is also the safest on the hard tier.
+   - **Where gemma4:31b errs on ladder v1:** level L6, with 6 of 15 false claims accepted (0.40). Arm C keeps only
+     exactly-right traces, so those errors are filtered out of training. The drop count and abstain rate are
+     reported before training, as the Data section says.
+   - **Licence:** Gemma 4 is Apache-2.0 on its own page; the rnd registry's `gemma-prohibited-use-policy` entry
+     (read 2026-10-17) bars only harmful-content categories, so a teacher for a math verifier is allowed.
+   - **Cost:** the slow end of the teacher leg (up to ~4 h) and of its VRAM (~25 GB), as the card plan says.
+   - **The teacher's setting:** gemma4:31b scored 0.971 with thinking **on** and `num_predict` 4096 (its run
+     manifest), so it writes arm C's traces in that same setting. Only its contract output (`reasoning`,
+     `verdict`) is kept; its hidden thinking is never used (the Thinking mode section).
+   - **A caveat on the table:** granite4.1:30b and mistral-small:24b ran with thinking off, and gemma4:31b and the
+     two Qwen3 models with it on, each at its run's own setting. Their low final_verdict scores are mostly
+     abstains. The pick doesn't depend on that: gemma4:31b leads on both scorings.
+3. ~~Ladder v2~~ generated and sealed (R&D, 2026-10-22): `make_ladder_v2.py`, seed 20261022, **24 cells × 30 =
+   720 claims** (360 supported, 360 unsupported). **sha256 `48c5ad3f9ade2204101dc0c44cbda672b6e9be05f5dc8dea351ec67ca4197d08`.**
+   - Cells: ladder L1–L8 again (the same knobs as v1, at the new seed, so the curves compare); every pair of
+     precedence, traps, control and units at level 2 and at level 3 (12); every triple at level 2 (4). Cross
+     cells hold steps=4 and nearmiss=3, the other knobs at 0.
+   - In 64 of the 240 unsupported cross claims the naive twin agreed with the truth, so the near-miss fell back
+     to off-by-one (the generator's rule). Reported, not hidden.
+   - The file is outside every working directory (rnd-local). Only its sha256 and counts are committed. Generation
+     is deterministic: a second run gave the same bytes.
+4. ~~ASPIRE's mechanics~~ done: aspire-si #72 merged 2026-10-09.
+5. ~~The student's thinking setting~~ done: **thinking off**, trained and served with
+   `--chat-template-kwargs '{"enable_thinking": false}'` (the Thinking mode section), so the reasoning lives in the
+   contract's `reasoning` field. The calibration candidates were recorded the same way (their thinking flag per
+   model in each run's manifest).
+
+**Before any card time:** an Argon review of this plan, its verdict recorded here, then the Director's go. Each
+leg after that is its own grant request to the Publisher, naming peak VRAM and duration.
 
 ## What the Director will see, step by step
 

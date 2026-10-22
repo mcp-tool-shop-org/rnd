@@ -317,6 +317,18 @@ ASPIRE, after R&D has read the scores.
    contract's `reasoning` field. The calibration candidates were recorded the same way (their thinking flag per
    model in each run's manifest).
 
+6. **The training items, generated and deduped** (R&D, 2026-10-22): `make_train.py`, seed 70010, ladder v1's
+   26 cells × 78 claims = 2,028; dedupe against ladder v1 and the sealed v2 dropped 381 (19%), leaving **1,647
+   (819 supported, 828 unsupported), seal `f68127eacdb13faebc6356fb679f88bad53c68ce94e40fab71d13816dad644c8`**.
+   Deterministic (a second run gave the same bytes); the file is in rnd-local.
+   - **The drop isn't even:** the easiest cells have few distinct function sources, so v1 and v2 had already used
+     much of their space. Kept per cell: L2 13, L1 15, traps=1 20, traps=2 21, units=1–3 42–47, traps=3 57,
+     control=1–2 70–72; every other cell 77–78. B and C train on the same items, so the arm comparison holds; the
+     easy cells are under-represented in training, which is reported, not topped up (their space is nearly spent).
+   - **The teacher leg, re-estimated from the measured ladder v1 rate:** gemma4:31b took 11.9 s a claim with thinking
+     on (not the 7.4 s gold smoke), so 1,647 items is about **5.4 h**, not "0.6–4 h". The card total becomes about
+     7–10 h plus rests.
+
 **Before any card time:** an Argon review of this plan, its verdict recorded here, then the Director's go. Each
 leg after that is its own grant request to the Publisher, naming peak VRAM and duration.
 

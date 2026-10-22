@@ -327,7 +327,7 @@ ASPIRE, after R&D has read the scores.
      easy cells are under-represented in training, which is reported, not topped up (their space is nearly spent).
    - **The teacher leg, re-estimated from the measured ladder v1 rate:** gemma4:31b took 11.9 s a claim with thinking
      on (not the 7.4 s gold smoke), so 1,647 items is about **5.4 h**, not "0.6–4 h". The card total becomes about
-     7–10 h plus rests.
+     9–10 h plus rests (5 min smoke, 5.4 h teacher, 0.5 h training, 1 h template and drift, 2–3 h scoring).
 
 **Before any card time:** an Argon review of this plan, its verdict recorded here, then the Director's go. Each
 leg after that is its own grant request to the Publisher, naming peak VRAM and duration.

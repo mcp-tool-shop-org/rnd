@@ -179,7 +179,8 @@ def index_rows(root: Path) -> tuple[dict, list[tuple[str, str, str]]]:
         rows["experiments"].append((exp, data["status"], data.get("template"), data["design"]))
         for b in data.get("budgets", []):
             rows["budgets"].append((exp, b["cost_unit"], b["cap"], b["set_by"], json.dumps(b.get("excludes", [])),
-                                    b.get("excludes_why"), json.dumps(b.get("reconciled", []))))
+                                    b.get("excludes_why"), json.dumps(b.get("reconciled", [])),
+                                    json.dumps(b.get("phases", []))))
         for r in data.get("runs", []):
             rows["runs"].append((exp, r["id"], r["venue"], r["hardware"], r["date"], r["cost"], r["cost_unit"],
                                  r["cost_basis"], r.get("cap"), r.get("projected_cost"), r["outcome"], r.get("why"),

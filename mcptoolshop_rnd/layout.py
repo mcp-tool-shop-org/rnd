@@ -50,7 +50,8 @@ TOP_KEYS = {"schema", "name", "status", "design", "template", "budgets", "licenc
 # excludes: runs of the experiment that fall outside this cap (e.g. made before the budget began), with the reason.
 # reconciled: groups of runs that overlapped and share one measured total (a provider balance), with the reason. The
 # ledger counts the measured total for the group instead of adding the runs' own estimates, which overcount.
-BUDGET_KEYS = {"cost_unit", "cap", "set_by", "excludes", "excludes_why", "reconciled"}
+BUDGET_KEYS = {"cost_unit", "cap", "set_by", "excludes", "excludes_why", "reconciled", "phases"}
+PHASE_KEYS = {"name", "cap", "set_by", "from"}  # plus an optional "closed"
 RECONCILED_KEYS = {"runs", "measured", "why"}
 RUN_KEYS = {"id", "venue", "hardware", "date", "cost", "cost_unit", "cost_basis", "cap", "projected_cost", "outcome",
             "why", "raw_manifest_id", "pins"}
@@ -346,6 +347,8 @@ def validate_data(root: Path, exp: str, data, registry_ids: set[str] | None = No
                     p.append(f"{where}.measured must be a number, 0 or more")
                 if not (isinstance(g.get("why"), str) and g["why"].strip()):
                     p.append(f"{where}.why must say what was measured and why the runs share it")
+        if "phases" in b:
+            p += _phase_problems(b, i)
 
     licences = data.get("licences", [])
     if not isinstance(licences, list) or not all(isinstance(x, str) for x in licences):
@@ -427,10 +430,67 @@ def validate_data(root: Path, exp: str, data, registry_ids: set[str] | None = No
                 p.append(f"budgets[{i}]: {rid!r} is named in both {seen_once[rid]} and {where}; a run counts once")
             else:
                 seen_once[rid] = where
+        # A reconciled group's measured total is one figure, so all its runs must fall in one phase.
+        phases = b.get("phases") if isinstance(b.get("phases"), list) and not _phase_problems(b, i) else None
+        if phases:
+            date_of = {r.get("id"): r.get("date") for r in runs if isinstance(r, dict)}
+            for j, g in enumerate(b.get("reconciled") or [] if isinstance(b.get("reconciled"), list) else []):
+                if not (isinstance(g, dict) and isinstance(g.get("runs"), list)):
+                    continue
+                spans = {phase_of(phases, date_of.get(rid)) for rid in g["runs"] if isinstance(date_of.get(rid), str)}
+                if len(spans) > 1:
+                    p.append(f"budgets[{i}].reconciled[{j}] spans phases {', '.join(sorted(str(s) for s in spans))}; "
+                             "a measured group must fall in one phase")
 
     for where in _machine_paths(data):
         p.append(f"{where} holds a machine path; experiment.json is public, so keep paths relative or in rnd-data")
     return p
+
+
+def _phase_problems(b: dict, i: int) -> list[str]:
+    """What is wrong with a budget's phases: each names its cap, who set it and the date it starts; dates rise, and
+    the budget's own cap is the current (last) phase's cap, so it always means the cap in force."""
+
+    p = []
+    phases = b["phases"]
+    if not isinstance(phases, list) or not phases:
+        return [f"budgets[{i}].phases must be a non-empty list"]
+    names, last = set(), None
+    for j, ph in enumerate(phases):
+        where = f"budgets[{i}].phases[{j}]"
+        if not isinstance(ph, dict):
+            p.append(f"{where} must be an object")
+            continue
+        if not PHASE_KEYS <= set(ph) or set(ph) - PHASE_KEYS - {"closed"}:
+            p.append(f"{where} needs {', '.join(sorted(PHASE_KEYS))}, and may add closed (spending is computed, never typed)")
+        if not (isinstance(ph.get("name"), str) and ph["name"].strip()) or ph.get("name") in names:
+            p.append(f"{where}.name must be a non-empty name of its own")
+        names.add(ph.get("name"))
+        if not _number(ph.get("cap")) or ph["cap"] <= 0:
+            p.append(f"{where}.cap must be a positive number")
+        if not (isinstance(ph.get("set_by"), str) and ph["set_by"].strip()):
+            p.append(f"{where}.set_by must say who set the cap")
+        if not (isinstance(ph.get("from"), str) and DATE_RE.match(ph["from"])):
+            p.append(f"{where}.from must be YYYY-MM-DD, the first date the phase covers")
+        elif last is not None and ph["from"] <= last:
+            p.append(f"{where}.from must come after the phase before it")
+        else:
+            last = ph["from"]
+        if "closed" in ph and not isinstance(ph["closed"], bool):
+            p.append(f"{where}.closed must be true or false")
+    if not p and isinstance(phases[-1], dict) and b.get("cap") != phases[-1].get("cap"):
+        p.append(f"budgets[{i}].cap must equal its current phase's cap ({phases[-1].get('cap')})")
+    return p
+
+
+def phase_of(phases: list[dict], date: str | None) -> str | None:
+    """The phase a run dated `date` falls in: the last one starting on or before it; None if it predates them all."""
+
+    found = None
+    for ph in phases:
+        if date is not None and ph["from"] <= date:
+            found = ph["name"]
+    return found
 
 
 def registry_ids(root: Path) -> set[str] | None:

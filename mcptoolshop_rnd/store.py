@@ -34,7 +34,7 @@ CREATE TABLE runs (experiment TEXT, id TEXT, venue TEXT, hardware TEXT, date TEX
   cost_basis TEXT, cap REAL, projected_cost REAL, outcome TEXT, why TEXT, raw_manifest_id TEXT, pins TEXT,
   PRIMARY KEY (experiment, id));
 CREATE TABLE budgets (experiment TEXT, cost_unit TEXT, cap REAL, set_by TEXT, excludes TEXT, excludes_why TEXT,
-  reconciled TEXT, PRIMARY KEY (experiment, cost_unit));
+  reconciled TEXT, phases TEXT, PRIMARY KEY (experiment, cost_unit));
 CREATE TABLE files (sha256 TEXT PRIMARY KEY, bytes INTEGER, tier TEXT, licence TEXT);
 CREATE TABLE manifest_files (manifest_id TEXT, path TEXT, sha256 TEXT, PRIMARY KEY (manifest_id, path));
 CREATE TABLE copies (sha256 TEXT, store TEXT, location TEXT);

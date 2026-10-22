@@ -283,3 +283,59 @@ class BudgetRuleTests(RunsBase):
                        "budgets[1].reconciled must be a list", "a run in colab_units, not rig_hours",
                        "excludes_why without excludes"):
             self.assertIn(needle, msgs)
+
+
+class PhaseBudgetTests(RunsBase):
+    """A budget split into phases, each with its own cap (the Director's phase budgets, 2026-10-22)."""
+
+    def runs_(self):
+        base = dict(RunObjectTests.RUN)
+        rows = (("0", 1.0, "2026-10-15"), ("1", 2.37, "2026-10-16"), ("4", 1.39, "2026-10-17"),
+                ("5", 7.58, "2026-10-17"), ("6", 0.5, "2026-10-19"), ("15a", 3.0, "2026-10-21"), ("15b", 2.0, "2026-10-22"))
+        return [{**base, "id": i, "cost": c, "date": d} for i, c, d in rows]
+
+    def budget(self, **over):
+        b = {"cost_unit": "colab_units", "cap": 400, "set_by": "the Director",
+             "excludes": ["1"], "excludes_why": "before the budget began",
+             "reconciled": [{"runs": ["4", "5"], "measured": 8.5, "why": "overlapped; balance read 8.5"}],
+             "phases": [{"name": "0-4", "cap": 300, "set_by": "the Director, 2026-10-18", "from": "2026-10-16", "closed": True},
+                        {"name": "5", "cap": 400, "set_by": "the Director, 2026-10-22", "from": "2026-10-21"}]}
+        b.update(over)
+        return b
+
+    def test_the_ledger_reports_each_phase_against_its_own_cap(self):
+        rec = record("demo", runs=self.runs_(), budgets=[self.budget()])
+        write(self.root, "experiments/demo/experiment.json", json.dumps(rec))
+        self.assertEqual(layout.validate_data(self.root, "demo", rec), [])
+        unit = json.loads(self.run_cli("ledger", "demo", "--json")[1])["units"][0]
+        first, current = unit["phases"]
+        self.assertEqual((first["name"], first["spent"], first["runs"], first["closed"]), ("0-4", 9.0, 3, True))
+        self.assertEqual(first["left"], 291.0)  # 4+5 at their measured 8.5, plus 6's 0.5; 1 is excluded
+        self.assertEqual((current["spent"], current["runs"], current["left"]), (5.0, 2, 395.0))
+        self.assertEqual(unit["left"], 395.0)  # the cap in force is the current phase's
+        self.assertEqual(unit["before_phases"], {"spent": 1.0, "runs": 1})  # run 0 predates both phases
+        self.assertAlmostEqual(unit["spent"], 15.0)
+        out = self.run_cli("ledger", "demo")[1]
+        self.assertIn("current phase 5: cap 400, left 395.0", out)
+        self.assertIn("phase 0-4 (from 2026-10-16, closed): spent 9.0 over 3 runs; cap 300", out)
+        self.assertIn("before the first phase: 1.0 over 1 runs", out)
+
+    def test_the_phase_rules_are_checked(self):
+        bad_phases = [{"name": "a", "cap": 0, "set_by": "", "from": "2026-10-20", "closed": "yes", "spent": 1},
+                      {"name": "a", "cap": 5, "set_by": "x", "from": "2026-10-19"},
+                      "x"]
+        msgs = " | ".join(layout.validate_data(self.root, "demo", record(
+            "demo", runs=self.runs_(), budgets=[self.budget(phases=bad_phases)])))
+        for needle in ("phases[0] needs", "phases[0].cap must be a positive number", "phases[0].set_by must say",
+                       "phases[0].closed must be true or false", "phases[1].name must be a non-empty name of its own",
+                       "phases[1].from must come after", "phases[2] must be an object"):
+            self.assertIn(needle, msgs)
+        cap_off = " | ".join(layout.validate_data(self.root, "demo", record(
+            "demo", runs=self.runs_(), budgets=[self.budget(cap=300)])))
+        self.assertIn("cap must equal its current phase's cap (400)", cap_off)
+        spans = self.budget(reconciled=[{"runs": ["6", "15a"], "measured": 3.0, "why": "overlapped"}])
+        span_msgs = " | ".join(layout.validate_data(self.root, "demo", record("demo", runs=self.runs_(), budgets=[spans])))
+        self.assertIn("reconciled[0] spans phases 0-4, 5", span_msgs)
+        empty = " | ".join(layout.validate_data(self.root, "demo", record(
+            "demo", runs=self.runs_(), budgets=[self.budget(phases=[])])))
+        self.assertIn("phases must be a non-empty list", empty)

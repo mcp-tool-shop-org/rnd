@@ -90,8 +90,10 @@ sessions. It changed little that mattered: under P0,
 is part of why the two instruction sets can't be told apart.
 
 When the premise failed, the reviewer ruled on how to analyse the result, without seeing any outcome figures. One
-analysis was the pre-registered one; the other scored both arms from one shared set of verdicts. The two agree:
-neither arm qualifies.
+caveat: R&D's analysis script had already computed the figures in the same pass, before the ruling arrived, so R&D
+had seen them. They were held unreported, and the reviewer chose the analysis without them. One analysis was the
+pre-registered one; the other scored both arms from one shared set of verdicts. The two agree: neither arm
+qualifies.
 
 ## Next: rewrite the labels
 

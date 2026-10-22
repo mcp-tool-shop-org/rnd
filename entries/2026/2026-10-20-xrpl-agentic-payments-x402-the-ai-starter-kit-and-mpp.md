@@ -65,6 +65,8 @@ definition of an agentic transaction.
 - **Watch for:** a published definition and method behind the hub's counts, MPP's XRPL SDK leaving beta, and x402's
   XRPL scheme gaining fee sponsorship.
 
+- **Promoted:** readouts-internal `xrpl-knowledge` wave 12, 2026-10-22 (readouts-internal #69): three new rows (x402's exact XRPL scheme, the AI Starter Kit's MCP servers and skills, Ripple's xrpl-mpp-sdk), from the verified claims only. Every adoption count stays here, unverified.
+
 ## Claims
 
 - [verified] The x402 Foundation's repository (x402-foundation/x402, Apache-2.0) holds an `exact` payment scheme for XRPL, added 2026-07-03, in which the payer signs an XRPL Payment and a facilitator submits it; the scheme can't sponsor fees (via: GitHub API and the spec file read at source, Editor, 2026-10-20)

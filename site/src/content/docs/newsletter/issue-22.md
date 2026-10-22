@@ -52,7 +52,8 @@ turns each, saved and resumed partway, with the whole game state compared turn b
 
 The game's "Ledger Backpack" issues five supplies as tokens on the XRP Ledger's test network, settles them at towns
 with transaction memos, sends parcels between players, and proves a run by reading the memos back. The research found
-one maintained Rust library, `xrpl-rust` (version 1.3.0, ISC licence, now hosted under the XRPL Foundation's GitHub),
+one maintained Rust library, `xrpl-rust` on crates.io (version 1.3.0, ISC licence; its source now lives at
+XRPLF/xrpl-rust, the XRPL Foundation's GitHub),
 that claimed to cover all of it.
 
 The spike tested that claim on the live test network:
@@ -74,23 +75,26 @@ All of it passed, in 35.7 seconds. Two details the game's Rust code will need:
 ## 3. Can it speak, without GPL code?
 
 The game can read its narration aloud with Kokoro, an open text-to-speech model (Apache-2.0). A speech model needs a
-**phonemizer**, which turns words into sounds. The usual one, espeak-ng, is licensed GPL-3.0. Linking it into the
-game's binary would put the whole binary under the GPL, which the game's MIT licence can't allow.
+**phonemizer**, which turns words into sounds. The usual one, espeak-ng, is licensed GPL-3.0. Linking it in would mean
+distributing the game's binary under GPL terms, and the game is released under MIT.
 
 The research suggested sherpa-onnx, a speech toolkit with a Kokoro mode that uses a word list instead of espeak-ng.
 Checking the code changed that:
 - **Trap 1:** the released sherpa-onnx (1.13.8) builds espeak-ng and piper-phonemize, both GPL, into every build that
-  includes speech, whichever mode you use. We read this in its build files at that release. Only the unreleased next
-  version removes them.
+  includes speech, whichever mode you use. We read this in its build files at that release. Code on the main branch
+  marks espeak-ng as unused from version 2.0.0, which isn't released; we haven't checked a build of it.
 - **Trap 2:** the spike reported that another Rust Kokoro crate compiles espeak-derived C code even when its pure-Rust
   word list is switched on. We haven't confirmed this one at the source; the route below avoids the crate either way.
-- **Trap 3:** sherpa-onnx's English word list was itself generated from espeak-ng's dictionary, so it inherits the
-  question.
+- **Trap 3:** the spike reported that sherpa-onnx's English word list was generated from espeak-ng's dictionary. We
+  haven't confirmed this at the source either.
 
 The route that passed drives the Kokoro model directly through ONNX Runtime, with these parts:
 
 | Part | Licence |
 |---|---|
+| The Kokoro-82M model weights | Apache-2.0 |
+| ONNX Runtime, which runs the model | MIT |
+| `ort`, the Rust bindings to ONNX Runtime | MIT or Apache-2.0 |
 | Kokoro's own pronunciation dictionaries (misaki) | Apache-2.0 |
 | The CMU Pronouncing Dictionary as a fallback | BSD-style |
 | rodio, for playback only | MIT or Apache-2.0 |

@@ -1,0 +1,82 @@
+{
+ "what": "Track B bank V gold check (TRACK-B-DESIGN v2 §8), window 15q drafts, keyed blind by R&D before any critic call",
+ "date": "2026-10-22",
+ "window": "15q",
+ "role_set": "bd17c93",
+ "written": 48,
+ "dropped_at_write": [],
+ "drafts": 48,
+ "write": {
+  "calls": 115,
+  "refused_calls": 0,
+  "accepted_at_attempt": {
+   "1": 32,
+   "2": 13,
+   "3": 3
+  },
+  "refusals": {
+   "ASSEMBLY": 8,
+   "FRAME": 7,
+   "GATE": 3,
+   "TRUTH_NUMBER": 1
+  },
+  "spent_units": 14.35
+ },
+ "excluded": [
+  {
+   "slot": "T03-C-05",
+   "why": "UNCLEAR"
+  },
+  {
+   "slot": "T08-C-02",
+   "why": "UNCLEAR"
+  },
+  {
+   "slot": "T06-C-03",
+   "why": "FLAW LABEL (trace-contradicts-planted-flaw)"
+  },
+  {
+   "slot": "T07-C-03",
+   "why": "FLAW LABEL (flaw-label-ambiguous)"
+  },
+  {
+   "slot": "T11-C-07",
+   "why": "WRONG KEY (wrong-verdict-key)"
+  }
+ ],
+ "kept": 43,
+ "kept_by_stratum": {
+  "planted_flaw": 20,
+  "planted_none": 23
+ },
+ "stopping_rule": "at least 20 kept per stratum: met, no top-up",
+ "agreement": {
+  "verdict": "46 of 48 (T03-C-05 and T11-C-07 excluded)",
+  "planted_flaw": "46 of 48 (T06-C-03 and T07-C-03 excluded)"
+ },
+ "private": "item text, keys and the writer keys stay in rnd-local (sealed shas: writer keys 340dd87c, R&D blind keys b0084ba3, R&D keys 68494cf7, gold input b5677cfa)",
+ "procedure": "role-set confirm/build_confirm_gold.py copied with TV- ids: blind, R&D keys sealed, then the writer keys opened; the four disagreements and one UNCLEAR set keep=False with notes and defect classes; no other key changed; then seal",
+ "gold_input_sha256": "b5677cfa2b32b4d4e7e3655486e3099b13aa6f14cdacf4593a782cbca0a3917d",
+ "leak_prescreen_flags": 2,
+ "leak_prescreen_note": "two slots flagged on one word each in the trace; both kept, the word read in context",
+ "perturb": {
+  "tool": "role-set scripts/critic_signal/perturb.py at bd17c93",
+  "seed": 0,
+  "counts": {
+   "d": 43,
+   "b": 12,
+   "e": 31,
+   "f": 20,
+   "a": 43,
+   "c": 43,
+   "g": 31,
+   "gpu_total": 106
+  },
+  "items_sha256": "80a101f1ce0aa994ce0cd282c597f18ec6ef6d0380ae5bc75841cdc30eecce21",
+  "keys_sha256": {
+   "a": "732a65cf3ed274ab38460019b04f0570153585416eb342967e756dfae0640ade",
+   "c": "e1aee24710d7059b123732aaab0aa6a8cf8f4992e7fa11e17945ca7ccd3f4bd1",
+   "g": "982a96fd94ddee78afffbddd171c1812e0ad61835a42cf1701d0cfaa1b7f4176"
+  }
+ }
+}

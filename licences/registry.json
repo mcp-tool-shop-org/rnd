@@ -763,6 +763,96 @@
       "snapshot_sha256": "e4200773b1ec74148dec9738744a3a9a07465d9819a2dc23b831e9695fbd978f",
       "snapshot_file": "2026-10-17/gemma-prohibited-use-policy.txt",
       "archive_url": "http://web.archive.org/web/20261008155755/https://ai.google.dev/gemma/prohibited_use_policy"
+    },
+    {
+      "id": "kokoro-82m-model-card",
+      "owner": "hexgrad (Kokoro)",
+      "kind": "model-card",
+      "covers": [
+        "Kokoro-82M (hexgrad/Kokoro-82M) weights and its voices, e.g. bm_george, bm_lewis, am_fenrir (VOICES.md)"
+      ],
+      "url": "https://huggingface.co/hexgrad/Kokoro-82M/raw/main/README.md",
+      "page_date": "undated (Hub README at main)",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "license: apache-2.0",
+        "With Apache-licensed weights, Kokoro can be deployed anywhere from production environments to personal projects.",
+        "Kokoro was trained exclusively on **permissive/non-copyrighted audio data** and IPA phoneme labels.",
+        "TTS models from large providers",
+        "base_model:",
+        "yl4579/StyleTTS2-LJSpeech"
+      ],
+      "uses": {
+        "assets": "conditions",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "n/a"
+      },
+      "conditions": [
+        "Apache-2.0: shipping the weights carries the licence text and any NOTICE; synthesized speech is not claimed by the licence",
+        "Kokoro names StyleTTS2-LJSpeech as its base model, whose pre-trained-model terms ask that listeners be told the speech is synthesized unless the speakers gave permission (entry styletts2-pretrained-model-terms); a credit saying the voices are synthesized by Kokoro meets it"
+      ],
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 2.0's native voice, at the Editor's request; every clause re-read at the raw README. Provenance note, not a bar: the card says its training data includes synthetic audio from closed TTS providers' models, and CC BY audio (Koniwa CC BY 3.0, SIWIS CC BY 4.0) credited on the card. The studio agreed to none of those providers' terms and uses only Kokoro's outputs, so no clause the studio is bound by restricts the use; for the full-provenance aim the voice is not a clean-room asset.",
+      "snapshot_sha256": "18a866b4ce76ab391df6731f36a69e88b3c216971b45632c647d171c9e090379",
+      "snapshot_file": "2026-10-22/kokoro-82m-model-card.txt"
+    },
+    {
+      "id": "styletts2-pretrained-model-terms",
+      "owner": "Yinghao Aaron Li (StyleTTS 2)",
+      "kind": "model-terms",
+      "covers": [
+        "StyleTTS 2 pre-trained models (yl4579/StyleTTS2, including StyleTTS2-LJSpeech, Kokoro-82M's base model); the code is MIT"
+      ],
+      "url": "https://raw.githubusercontent.com/yl4579/StyleTTS2/main/README.md",
+      "page_date": "undated (README at main)",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "Code: MIT License",
+        "Before using these pre-trained models, you agree to inform the listeners that the speech samples are synthesized by the pre-trained models, unless you have the permission to use the voice you synthesize.",
+        "You only need to abide by the above rules if you use **the pre-trained models** and the voices are **NOT** in the training set"
+      ],
+      "uses": {
+        "assets": "conditions",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Synthesized speech made public is disclosed as synthesized (a credit is enough), unless the voice's speaker gave permission",
+        "R&D's reading, conservative: the terms bind StyleTTS 2's own pre-trained models; whether they carry into Kokoro's separately licensed weights is not stated, so the disclosure is kept"
+      ],
+      "notes": "Read by R&D on 2026-10-22 while tracing Kokoro-82M's base model (the StyleTTS2-LJSpeech Hub repo has no card or licence tag). The HF repo yl4579/StyleTTS2-LJSpeech holds only the checkpoint and config.",
+      "snapshot_sha256": "5db2279acf8214ebe6aac9f38304173165615b5cfe9807c77eacad1eeaacbbd4",
+      "snapshot_file": "2026-10-22/styletts2-pretrained-model-terms.txt"
+    },
+    {
+      "id": "sherpa-onnx-licence",
+      "owner": "k2-fsa (sherpa-onnx)",
+      "kind": "licence",
+      "covers": [
+        "sherpa-onnx, the runtime that serves Kokoro-82M; from v2.0.0 its Kokoro path uses lexicon files, not espeak-ng"
+      ],
+      "url": "https://raw.githubusercontent.com/k2-fsa/sherpa-onnx/master/LICENSE",
+      "page_date": "Apache License Version 2.0, January 2004",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "Apache License",
+        "Version 2.0, January 2004"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "Apache-2.0: shipping the runtime carries the licence text and any NOTICE",
+        "Pin sherpa-onnx 2.0.0 or later: its Kokoro config says espeak-ng (GPL-3.0) is no longer used from v2.0.0 (sherpa-onnx/csrc/offline-tts-kokoro-model-config.h, read 2026-10-22); earlier versions phonemized through espeak-ng, which would bring GPL code into the game",
+        "The lexicon files shipped with sherpa-onnx's Kokoro packages were not read; check their licence before bundling them"
+      ],
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 2.0's native voice, at the Editor's request.",
+      "snapshot_sha256": "0ffddef9e48f8a09aed5caf2d44f7ba1c1be2d9b8e0a6f693b1635b2d5566645",
+      "snapshot_file": "2026-10-22/sherpa-onnx-licence.txt"
     }
   ]
 }

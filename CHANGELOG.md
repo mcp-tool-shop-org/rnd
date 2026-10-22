@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.20] - 2026-10-22
+
+- newsletter issue 21: a critic that catches more, and refuses too much (critic-signal phase 4 and Track A)
+
 ## [1.1.23.1.19] - 2026-10-22
 
 - newsletter issue 20: the course, end to end (xrpl-lab 2.7.1 to 2.7.5)

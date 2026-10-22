@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.24] - 2026-10-22
+
+- rnd ledger: phase budgets; stage1-regeneration run records for 15a-15n and probes, phases 0-4 and 5; licences: Kokoro-82M, StyleTTS 2 pre-trained terms, sherpa-onnx
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.23.1.23] - 2026-10-22
 
 - Track B bank V write, gold check and run 1; T10 B gap closed (write 15w); distill-ladder prep and Argon rounds 1-2; x402/MPP claims checked; xrpl-knowledge waves 11-12 promoted; run records

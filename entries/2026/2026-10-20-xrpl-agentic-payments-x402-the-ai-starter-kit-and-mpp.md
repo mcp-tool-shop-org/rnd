@@ -74,10 +74,10 @@ definition of an agentic transaction.
 - [verified] MPP's specs in tempoxyz/mpp-specs are CC0 1.0 (via: its LICENSE.md, Editor, 2026-10-20)
 - [verified] Ripple's xrpl-mpp-sdk is Apache-2.0, created 2026-08-14, latest tag 0.1.0-beta.4 (via: GitHub API, Editor, 2026-10-20)
 - [verified] The Block (2026-07-21) quotes RippleX's head of engineering on passing 1 million agentic transactions and names no counter or method (via: the article read at source, Editor, 2026-10-20)
-- [unverified] The XRP Ledger Foundation reported more than one million agentic x402 payments at the XRPL AI Hub's launch on 2026-07-08 (via: crypto.news; the Foundation's own post not read)
-- [unverified] The XRPL AI Hub counted about 13.9 million agentic transactions by 2026-10-12 (via: Coin-Turk; the hub itself not reached)
-- [unverified] The x402 Foundation was announced on 2026-04-02 and became operational on 2026-07-14 under the Linux Foundation (via: a research agent's reading of search summaries; the press pages not read directly)
-- [unverified] XRPL agents have made millions of agentic transactions, through the AI Starter Kit, x402 and MPP support (via: an XRPL marketing guide supplied by the Director, 2026-10-20)
+- [unverified] The XRP Ledger Foundation announced more than one million agentic x402 payments on 2026-07-08, the week t54.ai launched the XRPL AI Hub; the Hub was t54's, not the Foundation's (via: coingape and KuCoin, both secondary, agree on the date and figure; the Foundation's own X post could not be read (HTTP 402), R&D's research agent, 2026-10-22)
+- [unverified] The XRPL AI Hub counted about 13.9 million agentic transactions by 2026-10-12. Not found at a primary source: the nearest figure is 13,417,943 x402 payments at 2026-10-10 (KuCoin, citing t54's on-chain data as posted by RippleX), and the Hub site could not be reached (via: Coin-Turk; R&D's research agent, 2026-10-22)
+- [verified] The Linux Foundation announced on 2026-04-02 that it was launching the x402 Foundation, and announced its operational launch on 2026-07-14; corrected from "announced 2026-04-02, operational 2026-07-14", since the April release announced the launch and did not make the Foundation operational (via: both Linux Foundation press releases read at source by R&D's research agent, 2026-10-22)
+- [unverified] XRPL agents have made millions of agentic transactions, through the AI Starter Kit, x402 and MPP support. No primary XRPL page gives such a count: Ripple's Starter Kit post and xrpl.org's x402 page give none, and xrpl.org lists an XRPL MPP SDK as beta; the millions figures come from t54, the Foundation and RippleX through secondary outlets (via: an XRPL marketing guide supplied by the Director, 2026-10-20; checked by R&D's research agent, 2026-10-22)
 
 ## Sources
 
@@ -89,6 +89,10 @@ definition of an agentic transaction.
 - [primary] https://stripe.com/blog/machine-payments-protocol — Stripe, 2026-03-18
 - [primary] https://github.com/tempoxyz/mpp-specs — Tempo and Stripe (specs CC0)
 - [primary] https://github.com/ripple/xrpl-mpp-sdk — Ripple (Apache-2.0, beta)
+- [primary] https://www.linuxfoundation.org/press/linux-foundation-is-launching-the-x402-foundation-and-welcoming-the-contribution-of-the-x402-protocol — Linux Foundation, 2026-04-02
+- [primary] https://www.linuxfoundation.org/press/linux-foundation-announces-operational-launch-of-x402-foundation-to-standardize-internet-native-payments-for-ai-agents-and-applications — Linux Foundation, 2026-07-14
+- [aggregator] https://coingape.com/xrp-ledger-ai-hub-launches-as-network-surpasses-1m-agentic-payments/ — coingape, 2026-07-08
+- [aggregator] https://www.kucoin.com/news/flash/xrp-ledger-surpasses-13-4-million-agentic-payments-milestone — KuCoin, 2026-10-10
 - [aggregator] https://theblock.co/post/408987/ripplex-sees-xrp-ledger-agentic-transactions-hitting-10-million-mark-soon — The Block, 2026-07-21
 - [aggregator] https://crypto.news/xrp-ledger-hits-1m-ai-payments-as-t54-ai-launches-hub/ — crypto.news
 - [aggregator] https://en.coin-turk.com/xrpl-ai-agents-process-13-9-million-transactions-in-october-as-value-stays-modest/ — Coin-Turk, 2026-10-12

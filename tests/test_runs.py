@@ -353,6 +353,14 @@ class PhaseBudgetTests(RunsBase):
             "demo", runs=weird, budgets=[self.budget(excludes=[[], "1"])])))
         self.assertIn("excludes must be a list of run ids", weird_msgs)
         self.assertNotIn("'bad-date' (10/20/2026) comes before the first phase", weird_msgs)
+        # A phase whose start isn't a date, and a group that isn't an object, are reported one by one.
+        bad_from = self.budget(phases=[{"name": "0-4", "cap": 300, "set_by": "x", "from": "October", "closed": True},
+                                       {"name": "5", "cap": 400, "set_by": "the Director, 2026-10-22", "from": "2026-10-21"}])
+        self.assertIn("phases[0].from must be YYYY-MM-DD", " | ".join(
+            layout.validate_data(self.root, "demo", record("demo", runs=self.runs_(), budgets=[bad_from]))))
+        not_a_group = self.budget(reconciled=["x"])
+        self.assertIn("reconciled[0] must be an object", " | ".join(
+            layout.validate_data(self.root, "demo", record("demo", runs=self.runs_(), budgets=[not_a_group]))))
         spans = self.budget(reconciled=[{"runs": ["6", "15a"], "measured": 3.0, "why": "overlapped"}])
         span_msgs = " | ".join(layout.validate_data(self.root, "demo", record("demo", runs=self.runs_(), budgets=[spans])))
         self.assertIn("reconciled[0] spans phases 0-4, 5", span_msgs)

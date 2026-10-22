@@ -358,3 +358,10 @@ Argon answered all six on 2026-10-19. Each answer is folded into the section nam
     under step 5.
   - **The noise floor is reported beside the result:** run 1 against run 2 on identical prompts, by call (raw, deciding
     and verdict), by type, on the primary pool, and by d-control stratum.
+- **Track A's result** (`data/track-a-result-2026-10-22.json`):
+  - (a) and (b) are concordant: neither arm qualifies.
+  - Both beat P0 on the primary pool, but both fail the planted-none control bar (9/22 and 10/22 against at most 10%).
+    Muse names "guess" on sound traces.
+  - So it's step 5. **The Director chose option 1, with Track B next, 2026-10-22.** P0 stays the gate (T10 carries on
+    unchanged), and Track B (exact labels) is designed next: from the experiment template, reviewed by Argon before any
+    slot, key or label changes, with no spend until the design is approved.

@@ -1,0 +1,122 @@
+{
+ "what": "Track A result (PLAN-ROUND4 §3), analysed under Argon's 2026-10-22 ruling (rnd 535444a)",
+ "role_set": "e7abbcd",
+ "gates": "1.7.6",
+ "runs": {
+  "15f": "old flaw prompt",
+  "15g": "new flaw prompt"
+ },
+ "items": {
+  "sha256": "b00f45d09d226f5cc0ed0fae6393d298ef6e256d835f00729d802952d7f1d449",
+  "scored": 219,
+  "primary_pool_befg": 90,
+  "d_controls": {
+   "planted_none": 22,
+   "planted_flaw": 21
+  }
+ },
+ "P0_1": {
+  "caught_primary": "63/90",
+  "d_false_refusals": {
+   "none": "2/22",
+   "flaw": "0/21"
+  }
+ },
+ "a_preregistered": [
+  {
+   "arm": "Pc-old vs P0_1",
+   "arm_only": 14,
+   "P0_only": 0,
+   "p": 0.000122,
+   "p_holm": 0.000244,
+   "caught": "77/90",
+   "d_fr_none": "9/22",
+   "d_fr_flaw": "0/21",
+   "qualifies": false
+  },
+  {
+   "arm": "Pc-new vs P0_1",
+   "arm_only": 14,
+   "P0_only": 1,
+   "p": 0.000977,
+   "p_holm": 0.000977,
+   "caught": "76/90",
+   "d_fr_none": "10/22",
+   "d_fr_flaw": "1/21",
+   "qualifies": false
+  }
+ ],
+ "b_common_verdict": [
+  {
+   "arm": "Pc-old vs P0_1",
+   "as_in_a": true
+  },
+  {
+   "arm": "Pc-new' vs P0_1",
+   "arm_only": 12,
+   "P0_only": 0,
+   "p": 0.000488,
+   "p_holm": 0.000488,
+   "caught": "75/90",
+   "d_fr_none": "10/22",
+   "d_fr_flaw": "1/21",
+   "qualifies": false
+  },
+  {
+   "arm": "Pc-new' vs Pc-old (primary)",
+   "new_only": 0,
+   "old_only": 2,
+   "p": 0.5,
+   "d_fr_none": "10 vs 9",
+   "d_fr_flaw": "1 vs 0"
+  },
+  {
+   "arm": "Pc-new vs P0_2 (within run 2)",
+   "arm_only": 12,
+   "P0_only": 0,
+   "p": 0.000488,
+   "caught": "76/90",
+   "P0_2_caught": "64/90"
+  }
+ ],
+ "concordance": "(a) and (b) agree: neither arm qualifies (both fail the planted-none control bar, 9/22 and 10/22 against at most 10%)",
+ "decision": "step 5: nothing adopted; R&D brings the Director the options",
+ "driver": {
+  "planted_none_false_refusals_flaw_named": {
+   "15f": {
+    "guess": 8,
+    "reject_by_default": 1
+   },
+   "15g": {
+    "guess": 9,
+    "rubber_stamp": 1
+   }
+  }
+ },
+ "noise_floor": {
+  "call_level_102": {
+   "raw_reply_differs": 22,
+   "critic_deciding_differs": 19,
+   "critic_verdict_differs": 7
+  },
+  "P0_outcome_flips_by_type": {
+   "d (GPU)": "1 accept->refuse, 1 refuse->accept of 43",
+   "b (GPU)": "0 of 7",
+   "e (GPU)": "0 of 31",
+   "f (GPU)": "0 of 21",
+   "a (key-only)": "1, 0 of 43",
+   "c (key-only)": "1, 1 of 43",
+   "g (key-only)": "2, 1 of 31"
+  },
+  "primary_pool": "2 accept->refuse, 1 refuse->accept of 90",
+  "d_strata": {
+   "planted_none": [
+    "C9-001:d",
+    "C9-004:d"
+   ],
+   "planted_flaw": []
+  },
+  "F2_boundary": "6 of the 7 critic_verdict flips cross unsupported/cannot_tell"
+ },
+ "disclosure": "R&D saw the (a) figures before the Publisher's stop; the analysis choice was Argon's, made without sight of any outcome figure"
+}

@@ -1,0 +1,6 @@
+{
+ "guess": "relied on a claim the material doesn't state: an assumption, what usually happens, general knowledge, or a misreading of what a line says. A conclusion drawn only from stated lines (by quote, faithful restatement, comparison against a stated time, date, number or range, direct consequence, or plain synonym) is never a guess",
+ "none": "reasoned only from what the material states and reached its verdict: it quoted or faithfully restated the deciding lines, and any step it took (comparing a stated time, date, number or range; a direct consequence; a plain synonym; or a stated rule that contradicts the statement) follows from those lines alone",
+ "reject_by_default": "treated silence as a denial: called the claim unsupported because the material doesn't mention it. A stated time, date, range or rule that contradicts the statement is not silence; using it is none",
+ "rubber_stamp": "approved without checking: cited or restated no line of the material and gave no reason beyond agreement (restated the statement, deferred, or said it looks right)"
+}

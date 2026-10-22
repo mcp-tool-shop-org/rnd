@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.18] - 2026-10-22
+
+- T10 design and free rungs; Track A plan, gold check, near-duplicate rung and analysis hold; Track B design (approved), stage 1 and frozen labels
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.23.1.17] - 2026-10-21
 
 - newsletter issue 19: passes that weren't (xrpl-lab 2.6.2 and 2.7.0)

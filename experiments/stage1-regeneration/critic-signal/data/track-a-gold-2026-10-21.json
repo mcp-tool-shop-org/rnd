@@ -1,0 +1,69 @@
+{
+ "what": "Track A gold check (PLAN-ROUND4 §3), window 15e drafts, keyed blind by R&D before any critic call",
+ "date": "2026-10-21",
+ "window": "15e",
+ "written": 48,
+ "dropped_at_write": [
+  "T12-C-02 (DECIDING not verbatim twice: markdown backticks dropped; then a parse failure)"
+ ],
+ "drafts": 47,
+ "excluded": [
+  {
+   "slot": "T12-C-07",
+   "why": "UNCLEAR"
+  },
+  {
+   "slot": "T06-C-01",
+   "why": "UNCLEAR"
+  },
+  {
+   "slot": "T09-C-03",
+   "why": "FLAW LABEL"
+  },
+  {
+   "slot": "T18-C-02",
+   "why": "DEFECT (missing-checker-verdict, new class)"
+  }
+ ],
+ "kept": 43,
+ "kept_by_stratum": {
+  "odd": 21,
+  "even": 22
+ },
+ "stopping_rule": "at least 20 kept per stratum: met, no top-up",
+ "agreement": {
+  "verdict": "47 of 47",
+  "planted_flaw": "46 of 47 (T09-C-03 excluded)"
+ },
+ "rewrites_kept": [
+  "T02-C-05",
+  "T02-C-06",
+  "T03-C-01",
+  "T03-C-05",
+  "T03-C-07",
+  "T06-C-05",
+  "T06-C-07",
+  "T07-C-03",
+  "T08-C-01"
+ ],
+ "private": "item text, keys and the writer keys stay in rnd-local (sealed shas: writer keys 3ca6e683 LF, R&D keys d38eb415, gold input 60735e60)",
+ "correction": "T18-C-02 stays excluded. Its draft carries no checker_verdict: role-set's assemble fills a planted-none slot's blank in the built row, and the blind tool fills it in blind.jsonl, but perturb.py reads the draft record and refuses it. Sealed with confirm/build_confirm_gold.py (blind, then seal) at role-set e7abbcd, as phase 4 was; R&D's blind keys (d38eb415) translated to the tool's ids slot by slot.",
+ "gold_input_sha256": "90b50b58459d4d70fe525fcfe86151dbdc237a370e7268081485651b02d837dd",
+ "leak_prescreen_flags": 0,
+ "perturb": {
+  "tool": "role-set scripts/critic_signal/perturb.py (unchanged from phase 4 pin 47a5882), at e7abbcd",
+  "seed": 0,
+  "counts": {
+   "d": 43,
+   "b": 7,
+   "e": 31,
+   "f": 21,
+   "a": 43,
+   "c": 43,
+   "g": 31,
+   "gpu_total": 102
+  },
+  "items_sha256": "b00f45d09d226f5cc0ed0fae6393d298ef6e256d835f00729d802952d7f1d449"
+ },
+ "rung4": "non-mock probe passed: header gates aspire-si-gates 1.7.6 (ff67dc9c), every one of 102 items resolves writer gemma-4-31b-it (family gemma) through critic_eval._writer_for_item with mock=False, role-set venv -I"
+}

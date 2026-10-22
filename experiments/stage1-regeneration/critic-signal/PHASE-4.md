@@ -71,3 +71,25 @@ refuse 4 of 32 controls (12.5%). That's still above the 10% bar, and it was foun
 
 - 18.18 units for the confirmation: 11.78 for writing and 6.40 for the critic.
 - The ledger stands at 195.17 of 300.
+
+## Known limit: "real-source" rows carry invented material (found 2026-10-21)
+
+**What happened.** Phase 4's write window (Colab, through `pin_window.py`) never passed role-set an excerpt pool. So
+the 16 of the 32 kind C drafts whose slots are marked `real_source` got invented material, drafted by the writer,
+not a real excerpt. Their slot metadata still says `real_source: true`. Every Colab write window before the pool fix
+ran the same way: no window passed a pool.
+
+**What depends on it:**
+- **No committed result.** The phase-4 decision, `data/confirm-outcomes.csv`, the critic-signal analyses, Track A's
+  rung 1 and the near-duplicate calibration never read the `real_source` label or split by it. Their numbers stand.
+- **No training or eval set.** Phase 4's rows are the critic-signal confirmation items only. The frozen Stage 1 set
+  (810 rows) was written outside the Colab windows with a pool, and its 103 real-source rows carry real excerpts
+  (see `../PROVENANCE.md`).
+- **What it does limit:**
+  - phase 4's items are not a sample of the production material mix, since none of their material is a real
+    excerpt;
+  - any later use that treats these rows' `real_source` flag as true would be wrong. Read their material's `source`
+    field (`invented`) instead.
+
+**The fix** is a role-set change (the excerpt pool built and pinned into every window, with a refusal before warmup
+if it's missing or short), settled with Argon on 2026-10-21. T10 and Track A run only after it merges.

@@ -1612,6 +1612,35 @@
    "pins": {},
    "projected_cost": null,
    "raw_manifest_id": null
+  },
+  {
+   "id": "15u",
+   "venue": "colab",
+   "hardware": "A100",
+   "date": "2026-10-22",
+   "cost": 16.16,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 28,
+   "outcome": "results",
+   "why": "Track B flaw run 2: trackb prompt, 3 votes, 106 of 106 scored on run 1's verdicts (318 flaw calls, 0 verdict calls)",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "p5",
+   "venue": "colab",
+   "hardware": "CPU",
+   "date": "2026-10-22",
+   "cost": 2.03,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "outcome": "test",
+   "why": "Session-ceiling probe: 3 each of A100, G4, L4, T4 and 5 CPU at once (17 sessions); H100 unavailable",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
   }
  ]
 }

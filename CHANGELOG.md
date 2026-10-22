@@ -11,6 +11,17 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.26] - 2026-10-22
+
+- Licences: fourteen entries for Escape the Valley, each read at a pinned ref and checked with WebFetch.
+  - The 2.0 native route: misaki, CMUdict, kokoro-onnx, taylorchu's ONNX conversion, ort, ONNX Runtime, xrpl-rust,
+    secp256k1, webpki-root-certs, rodio.
+  - 1.3.1's third-party notices: certifi, MPL-2.0 §3.2, PyInstaller's bootloader exception, CPython's PSF licence.
+- Runs: 15u (Track B flaw run 2, results, 16.16), 15x (T10 critique, tooling-fault, 12.52), p4 and p5 (card and
+  session-ceiling probes). Phase 5 is at 112.77 of 400.
+- distill-ladder: teacher window 1's per-level figures, and the truncation finding that holds window 2.
+- An unhashable run `outcome` is reported as a problem instead of raising TypeError (layout.py and runs.py).
+
 ## [1.1.23.1.25] - 2026-10-22
 
 - newsletter issues 22-24: ETV Rust spikes, the camp reserve demo, the launcher fix and the treatment gate

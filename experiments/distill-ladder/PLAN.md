@@ -385,6 +385,32 @@ these easy L1 items.
   style with reasoning. The oracle now quotes the whole function; offrig's replay re-checked all 1,647: final verdict
   equal to the label and the quote found on every one. Must be in before the training legs, not before the teacher leg.
 
+**Teacher window 1 (5090, 2026-10-22, under the Publisher's grant):** items 1–473 of the 1,647 in file order, from
+18:36:11Z to a clean stop at 21:42:35Z for a card slot (exit 3, INCOMPLETE; it resumes from 474). 442 of 473 (93.4%) have
+`final_verdict` equal to the label, 23.6 s a claim on average:
+
+| Level | n | Mean s | final_verdict == label | unusable (all `truncated`) |
+|---|---|---|---|---|
+| L1 | 15 | 4.3 | 15 | 0 |
+| L2 | 13 | 4.4 | 13 | 0 |
+| L3 | 78 | 8.0 | 78 | 0 |
+| L4 | 77 | 7.7 | 77 | 0 |
+| L5 | 78 | 17.1 | 78 | 0 |
+| L6 | 78 | 30.2 | 68 | 0 |
+| L7 | 78 | 43.9 | 69 | 9 |
+| L8 | 56 | 48.1 | 44 | 12 |
+
+- **A finding the plan didn't foresee:** from L7, gemma4:31b's thinking runs past `num_predict` 4096 on 21 of 134 items
+  (16%), and offrig records `unusable:truncated` ("stopped at its token limit after 4096 tokens"). The note on the stub
+  above ("nothing is truncated") was about the context window, not the reply limit.
+- These items give arm C no target, and B-matched drops them too, so the comparison holds. But the hardest cells thin
+  out, and a kept hard item becomes one the teacher can finish within 4,096 tokens.
+- `num_predict` is part of offrig's resume identity, so changing it means a new run directory.
+- **Window 2 is held** until a consult settles the options and their prices: keep 4096 and accept the drops, raise the
+  limit for a fresh run, re-ask only the truncated items in a second directory, or use offrig's think escalation.
+- The 11.9 s a claim used to price the leg came from ladder v1's mix, not the training file's order, so window 2 is
+  re-priced from this table.
+
 **Argon's review (recorded here, as the plan requires before any leg):**
 - **Round 1** (3bfd3e8): CONDITIONAL PASS. Blocking B1 (the target builder, and C's filter on `final_verdict`) and B2
   (the false-accept gate); before scoring S1–S5; not blocking N1–N3. All were fixed in eb95322.

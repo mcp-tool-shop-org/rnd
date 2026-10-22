@@ -71,7 +71,7 @@ def from_outcome(outcome: dict, **given) -> dict:
             raise RecordError("OUTCOME_CONFLICT", f"{key} is {run[key]!r} in outcome.json but {value!r} was given",
                               "drop the option, or fix outcome.json with its owner")
         run[key] = value
-    if run.get("outcome") in layout.ALIASES:
+    if isinstance(run.get("outcome"), str) and run["outcome"] in layout.ALIASES:
         run["outcome"] = layout.ALIASES[run["outcome"]]
     run["pins"] = pins
     run.setdefault("projected_cost", None)

@@ -1583,6 +1583,35 @@
    "pins": {},
    "projected_cost": null,
    "raw_manifest_id": null
+  },
+  {
+   "id": "p4",
+   "venue": "colab",
+   "hardware": "G4",
+   "date": "2026-10-22",
+   "cost": 0.13,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "outcome": "test",
+   "why": "Card probe after the plan upgrade: H100 refused; G4 is an RTX PRO 6000 Blackwell 96 GB (about 8.90/hr); A100 --high-mem is the 80 GB A100 (about 6.77/hr)",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "15x",
+   "venue": "colab",
+   "hardware": "A100",
+   "date": "2026-10-22",
+   "cost": 12.52,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 23,
+   "outcome": "tooling-fault",
+   "why": "T10 critique stopped after 118 critic calls: role-set _need_models demands a sidecar model for every kind-B training row, stricter than the gates (verification items carry none); hit on the first accepted apply slot. Journal kept for a resume",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
   }
  ]
 }

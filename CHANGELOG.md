@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.25] - 2026-10-22
+
+- newsletter issues 22-24: ETV Rust spikes, the camp reserve demo, the launcher fix and the treatment gate
+
 ## [1.1.23.1.24] - 2026-10-22
 
 - rnd ledger: phase budgets; stage1-regeneration run records for 15a-15n and probes, phases 0-4 and 5; licences: Kokoro-82M, StyleTTS 2 pre-trained terms, sherpa-onnx

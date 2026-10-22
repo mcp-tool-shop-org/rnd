@@ -71,6 +71,16 @@ Bank D's planted-flaw items (guess, loop, nitpick, rubber_stamp) stand as the pl
   - **[v2, F2] The item families:** V's base rows are expanded into the a–g families by perturb.py at seed 0, exactly
     as Track A was. That gives the d controls plus the b, e, f, g primary pool, and the offline a and c types.
   - The plan seed and slots are frozen before stage 1 ends. V isn't written until the fixes are frozen in git.
+  - **[2026-10-22] Frozen, with a disclosure.**
+    - **The list:** `data/track-b-vslots-bd17c93.json`, built by role-set's `scripts/critic_signal/track_b_slots.py`
+      (#106, merged `bd17c93`) at plan seed 2: 48 slots, 24 planted-flaw (odd) and 24 planted-none (even).
+    - **Excluded:** T10, the pilot's two slots, and any real-source slot whose excerpt D already used. That's 3 by
+      reused id (T02-C-05, T07-C-07, T18-C-07) and 2 by the same pool excerpt under another id: T07-C-05 shares one
+      with D's T12-C-02, and T09-C-08 with D's T18-C-06.
+    - **The check:** `--check-material` re-checks V's written materials against D's after the write window.
+    - **The disclosure:** the line above required the freeze before stage 1 ended, and it came after. The list is fully
+      mechanical (fixed seed, fixed priority buckets, fixed order and fixed skip rules, with no hand choice), so the
+      stage-1 reading couldn't steer it. Argon's code round 2 on role-set #106 concurred.
 - **No re-scoring of D** as evidence.
 
 ## 6. The symptom-to-fix table, fixed before stage 1 reads

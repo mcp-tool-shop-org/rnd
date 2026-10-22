@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.22] - 2026-10-22
+
+- Track B bank V slot list frozen
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.23.1.21] - 2026-10-22
 
 - T10 write window 15l and the kind B gap

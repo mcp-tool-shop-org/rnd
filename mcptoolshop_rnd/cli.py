@@ -467,8 +467,13 @@ def cmd_ledger(args):
     excluded = {unit: set(json.loads(b["excludes"] or "[]")) for unit, b in budgets.items()}
     groups = {unit: json.loads(b["reconciled"] or "[]") for unit, b in budgets.items()}
     in_group = {unit: {rid for g in gs for rid in g["runs"]} for unit, gs in groups.items()}
-    spent, cost_of = {}, {}
-    for r in con.execute("SELECT id, cost_unit, cost_basis, cost FROM runs WHERE experiment = ?", (args.experiment,)):
+    phases = {unit: json.loads(b["phases"] or "[]") for unit, b in budgets.items()}
+    spent, cost_of, date_of = {}, {}, {}
+    # Per phase: what each phase's own runs cost (excluded runs never count; a reconciled group counts its measured
+    # total in the phase its runs fall in, which validation keeps to one).
+    by_phase = {unit: {} for unit in phases}
+    for r in con.execute("SELECT id, cost_unit, cost_basis, cost, date FROM runs WHERE experiment = ?", (args.experiment,)):
+        date_of[r["id"]] = r["date"]
         u = spent.setdefault(r["cost_unit"], {"runs": 0, "spent": 0.0, "by_basis": {}, "outside": [], "outside_cost": 0.0})
         cost_of[r["id"]] = r["cost"]
         if r["id"] in excluded.get(r["cost_unit"], ()):
@@ -476,6 +481,12 @@ def cmd_ledger(args):
             u["outside_cost"] = round(u["outside_cost"] + r["cost"], 4)
             continue
         u["runs"] += 1
+        if phases.get(r["cost_unit"]):
+            ph = by_phase[r["cost_unit"]].setdefault(layout.phase_of(phases[r["cost_unit"]], r["date"]),
+                                                      {"spent": 0.0, "runs": 0})
+            ph["runs"] += 1
+            if r["id"] not in in_group.get(r["cost_unit"], ()):
+                ph["spent"] = round(ph["spent"] + r["cost"], 4)
         if r["id"] in in_group.get(r["cost_unit"], ()):
             continue  # counted below, by its group's measured total
         u["spent"] = round(u["spent"] + r["cost"], 4)
@@ -491,17 +502,33 @@ def cmd_ledger(args):
             s["by_basis"]["reconciled"] = round(s["by_basis"].get("reconciled", 0) + g["measured"], 4)
             recs.append({"runs": len(g["runs"]), "measured": g["measured"], "runs_estimated": estimated,
                          "why": g["why"]})
+            if phases.get(unit) and g["runs"]:
+                ph = by_phase[unit].setdefault(layout.phase_of(phases[unit], date_of.get(g["runs"][0])),
+                                               {"spent": 0.0, "runs": 0})
+                ph["spent"] = round(ph["spent"] + g["measured"], 4)
+        phase_rows = []
+        for ph in phases.get(unit, []):
+            got = by_phase[unit].get(ph["name"], {"spent": 0.0, "runs": 0})
+            phase_rows.append({"name": ph["name"], "from": ph["from"], "closed": bool(ph.get("closed")),
+                               "cap": ph["cap"], "set_by": ph["set_by"], "spent": got["spent"], "runs": got["runs"],
+                               "left": round(ph["cap"] - got["spent"], 4)})
         rows.append({"cost_unit": unit, "cap": b["cap"] if b else None, "set_by": b["set_by"] if b else None,
-                     "spent": s["spent"], "left": round(b["cap"] - s["spent"], 4) if b else None,
+                     # With phases, the budget's cap is the current phase's, so "left" is that phase's.
+                     "spent": s["spent"],
+                     "left": phase_rows[-1]["left"] if phase_rows else (round(b["cap"] - s["spent"], 4) if b else None),
                      "runs": s["runs"], "by_basis": s["by_basis"], "reconciled": recs,
                      "outside_cap": {"runs": sorted(s["outside"]), "cost": s["outside_cost"],
-                                     "why": b["excludes_why"] if b else None}})
+                                     "why": b["excludes_why"] if b else None},
+                     "phases": phase_rows})
 
     def text(data):
         rs = data["units"]
         print(f"{args.experiment}: spending per cost unit, computed from its runs (never added across units)")
         for r in rs:
-            cap = f"cap {r['cap']} (set by {r['set_by']}), left {r['left']}" if r["cap"] is not None else "no budget"
+            if r["phases"]:
+                cap = f"current phase {r['phases'][-1]['name']}: cap {r['phases'][-1]['cap']}, left {r['left']}"
+            else:
+                cap = f"cap {r['cap']} (set by {r['set_by']}), left {r['left']}" if r["cap"] is not None else "no budget"
             basis = ", ".join(f"{k} {v}" for k, v in sorted(r["by_basis"].items()))
             print(f"  {r['cost_unit']:<11} spent {r['spent']} over {r['runs']} runs; {cap}")
             if basis:
@@ -512,6 +539,10 @@ def cmd_ledger(args):
             out = r["outside_cap"]
             if out["runs"]:
                 print(f"              outside the cap: {out['cost']} over {', '.join(out['runs'])} ({out['why']})")
+            for ph in r["phases"]:
+                state = "closed" if ph["closed"] else "open"
+                print(f"              phase {ph['name']} (from {ph['from']}, {state}): spent {ph['spent']} over "
+                      f"{ph['runs']} runs; cap {ph['cap']} (set by {ph['set_by']}), left {ph['left']}")
         if not rs:
             print("  no budgets and no runs")
     emit(args, {"experiment": args.experiment, "units": rows}, text)

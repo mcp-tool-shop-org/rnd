@@ -92,7 +92,8 @@ property failure is fixed and recorded here, never skipped.
 - **Arm B targets (the oracle):** the function is run line by line with its input; `reasoning` names each executed
   line and `v` after it, then what f returns and what the claim says (e.g. "x is 5. v = x gives v = 5. v = v + 16
   gives v = 21. f returns 21; the claim says 21, so it matches."); `verdict` is the label; `evidence_quote` is the
-  last executed line before `return v`; `evidence_source` is `ctx1`. A trace that disagrees with the generator's
+  function's whole source (amended 2026-10-22 from the last executed line; see the teacher stub below); `evidence_source`
+  is `ctx1`. A trace that disagrees with the generator's
   truth, or a verdict that disagrees with the label, stops the build.
   - **Checked by offrig itself:** the B targets are replayed through `fake_ollama.py --replies` and scored by
     `offrig verify calibrate`. Measured 2026-10-22: **1,647 of 1,647 have `final_verdict` equal to the label**
@@ -372,6 +373,17 @@ ASPIRE, after R&D has read the scores.
    - **The teacher leg, re-estimated from the measured ladder v1 rate:** gemma4:31b took 11.9 s a claim with thinking
      on (not the 7.4 s gold smoke), so 1,647 items is about **5.4 h**, not "0.6–4 h". The card total becomes about
      9–10 h plus rests (5 min smoke, 5.4 h teacher, 0.5 h training, 1 h template and drift, 2–3 h scoring).
+
+**The teacher stub (5090, 2026-10-22, under the Publisher's grant):** gemma4:31b on 5 training items, stopped at 3,
+resumed to 5. 5 verdicts, 5 unique, all equal to gold; `make_targets.py c` gave 5 rows, 0 dropped; 6.4 s a claim on
+these easy L1 items.
+- **A deviation from ladder v1's settings:** offrig now chooses `num_ctx` 8192 itself (ladder v1, an older offrig,
+  ran at 16384). The longest prompt (1,818 tokens) plus `num_predict` 4,096 fits with margin, so nothing is truncated,
+  and the context size doesn't change a forward pass that fits.
+- **The evidence quote, aligned (for Argon round 3):** the teacher quotes the whole function (ladder v1: 623 of 780,
+  141 empty, 16 one line). The oracle quoted only the last executed line, so B-matched minus C would have mixed quote
+  style with reasoning. The oracle now quotes the whole function; offrig's replay re-checked all 1,647: final verdict
+  equal to the label and the quote found on every one. Must be in before the training legs, not before the teacher leg.
 
 **Argon's review (recorded here, as the plan requires before any leg):**
 - **Round 1** (3bfd3e8): CONDITIONAL PASS. Blocking B1 (the target builder, and C's filter on `final_verdict`) and B2

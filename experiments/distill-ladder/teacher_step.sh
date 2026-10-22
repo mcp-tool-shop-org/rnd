@@ -22,7 +22,7 @@ echo "== $MODEL teacher on $GOLD ${WHERE[*]} start $(date +%T)"
 PID=$!
 if [ -n "${STOP_AFTER:-}" ]; then
   while kill -0 "$PID" 2>/dev/null; do
-    n=$(grep -c . "$OUT/verdicts.jsonl" 2>/dev/null || echo 0)
+    n=0; [ -f "$OUT/verdicts.jsonl" ] && n=$(grep -c . "$OUT/verdicts.jsonl")
     if [ "$n" -ge "$STOP_AFTER" ]; then echo "== stub stop at $n verdicts"; kill "$PID"; break; fi
     sleep 5
   done

@@ -10,7 +10,7 @@ The target is offrig's reply contract, keys in its order (reasoning, verdict, ev
 compact JSON:
 - **B (the oracle):** the function is run line by line with its input; `reasoning` names each executed line and the
   value of `v` after it, then what f returns and what the claim says; `verdict` is the item's label; `evidence_quote`
-  is the last executed line before `return v` (a whole line, as offrig's quote rule wants); `evidence_source` is
+  is the function's whole source (as the teacher quotes it); `evidence_source` is
   `ctx1`.
 - **C (the teacher):** the teacher's own `reasoning` and `evidence_quote` from its offrig verdicts, kept only where its
   `final_verdict` (after offrig's quote rule) equals the label; `verdict` is that final verdict; `evidence_source` is
@@ -95,7 +95,9 @@ def oracle(row: dict) -> dict:
     verdict = "supported" if match else "unsupported"
     if verdict != row["label"]:
         raise SystemExit(f"{row['id']}: the oracle reads {verdict}, the label is {row['label']}")
-    return {"reasoning": " ".join(parts), "verdict": verdict, "evidence_quote": steps[-1][0], "evidence_source": "ctx1"}
+    # The whole function, as the teacher quotes it (gemma4:31b on ladder v1: 623 of 780 quotes were the whole
+    # function), so B-matched and C differ in their reasoning, not in their quote (2026-10-22, for Argon round 3).
+    return {"reasoning": " ".join(parts), "verdict": verdict, "evidence_quote": src, "evidence_source": "ctx1"}
 
 
 def sft_row(rid: str, msgs: list[dict], contract: dict) -> dict:

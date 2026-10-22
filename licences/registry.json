@@ -830,7 +830,7 @@
       "owner": "k2-fsa (sherpa-onnx)",
       "kind": "licence",
       "covers": [
-        "sherpa-onnx, the runtime that serves Kokoro-82M; from v2.0.0 its Kokoro path uses lexicon files, not espeak-ng"
+        "sherpa-onnx, the runtime that serves Kokoro-82M"
       ],
       "url": "https://raw.githubusercontent.com/k2-fsa/sherpa-onnx/master/LICENSE",
       "page_date": "Apache License Version 2.0, January 2004",
@@ -847,7 +847,8 @@
       },
       "conditions": [
         "Apache-2.0: shipping the runtime carries the licence text and any NOTICE",
-        "Pin sherpa-onnx 2.0.0 or later: its Kokoro config says espeak-ng (GPL-3.0) is no longer used from v2.0.0 (sherpa-onnx/csrc/offline-tts-kokoro-model-config.h, read 2026-10-22); earlier versions phonemized through espeak-ng, which would bring GPL code into the game",
+        "Corrected 2026-10-22 (the Editor's check, re-read by R&D): no release drops espeak-ng (GPL-3.0). The latest release, v1.13.8 (crates.io and GitHub), includes espeak-ng-for-piper and piper-phonemize in CMakeLists.txt whenever TTS is built, and sherpa-onnx-static.pc.in links -lespeak-ng, so any TTS build of a released version links GPL code even if only the lexicon path runs. Only master's Kokoro config says espeak-ng is ignored from v2.0.0, which is unreleased",
+        "So a game binary may use sherpa-onnx TTS only from a pinned master commit whose build is shown to link no espeak-ng or piper_phonemize symbols or libraries; otherwise not",
         "The lexicon files shipped with sherpa-onnx's Kokoro packages were not read; check their licence before bundling them"
       ],
       "notes": "Read by R&D on 2026-10-22 for Escape the Valley 2.0's native voice, at the Editor's request.",

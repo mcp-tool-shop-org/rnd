@@ -373,6 +373,14 @@ ASPIRE, after R&D has read the scores.
      on (not the 7.4 s gold smoke), so 1,647 items is about **5.4 h**, not "0.6–4 h". The card total becomes about
      9–10 h plus rests (5 min smoke, 5.4 h teacher, 0.5 h training, 1 h template and drift, 2–3 h scoring).
 
+**Argon's review (recorded here, as the plan requires before any leg):**
+- **Round 1** (3bfd3e8): CONDITIONAL PASS. Blocking B1 (the target builder, and C's filter on `final_verdict`) and B2
+  (the false-accept gate); before scoring S1–S5; not blocking N1–N3. All were fixed in eb95322.
+- **Round 2** (eb95322): **PASS**, with 0 blocking and 0 before-scoring findings. Its not-blocking N1, that C's rows
+  plus its drops equal 1,647 across the two resumed teacher windows, is now enforced in `make_targets.py c`, which
+  stops on a missing or repeated item. Argon confirmed the first card step: a 3-item teacher run, interrupted and
+  resumed to 5, then `make_targets.py c` on its verdicts, before window 1.
+
 **Before any card time:** an Argon review of this plan, its verdict recorded here, then the Director's go. Each
 leg after that is its own grant request to the Publisher, naming peak VRAM and duration.
 

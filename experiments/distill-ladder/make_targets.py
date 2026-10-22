@@ -138,10 +138,14 @@ def main() -> None:
             rows.append(sft_row(r["id"], msgs[r["id"]], oracle(r)))
     else:
         by_id = {r["id"]: r for r in train}
-        for v in read(a.verdicts):
-            r = by_id.get(v["claim_id"])
-            if r is None:
-                continue
+        verdicts = [v for v in read(a.verdicts) if v["claim_id"] in by_id]
+        seen = [v["claim_id"] for v in verdicts]
+        if len(seen) != len(set(seen)) or set(seen) != set(by_id):
+            # Every training item once, across the resumed teacher windows (Argon round 2, N1).
+            raise SystemExit(f"the verdicts cover {len(set(seen))} of {len(by_id)} training items, "
+                             f"with {len(seen) - len(set(seen))} repeated")
+        for v in verdicts:
+            r = by_id[v["claim_id"]]
             fv = v.get("final_verdict")
             if fv != r["label"]:
                 dropped[str(fv)] = dropped.get(str(fv), 0) + 1

@@ -3,7 +3,7 @@
 # contract, in the settings it was scored at on ladder v1 (think on, structured on; offrig's own num_ctx and
 # num_predict), in its own scratch project. Same guards as math-ladder/ladder_step.sh: rests first, a fresh watchdog
 # heartbeat and an empty card, then the run, then an unload (keep_alive 0), and exit 3 if the run is incomplete.
-# Rerunning the same line resumes on the same output directory.
+# Rerunning the same line resumes on the same output directory, and appends to its log.
 # STOP_AFTER=<n> (the stub only): stop offrig once its verdicts file has n lines, to prove the resume.
 #   bash teacher_step.sh <gold.jsonl> <out-dir> <rest-seconds> [project]
 set -uo pipefail
@@ -18,7 +18,7 @@ age=$(( $(date +%s) - $(stat -c %Y "$HB" 2>/dev/null || echo 0) )); [ "$age" -le
 [ "$(loaded)" = 0 ] || { echo "REFUSED: a model is on the card"; exit 4; }
 if [ -f "$OUT/manifest.json" ]; then WHERE=(--resume "$OUT"); else WHERE=(--out "$OUT"); fi
 echo "== $MODEL teacher on $GOLD ${WHERE[*]} start $(date +%T)"
-"$OFFRIG" verify calibrate "$GOLD" --model "$MODEL" --think on --structured on --split tune --project "$PROJ" "${WHERE[@]}" > "$OUT.log" 2>&1 &
+"$OFFRIG" verify calibrate "$GOLD" --model "$MODEL" --think on --structured on --split tune --project "$PROJ" "${WHERE[@]}" >> "$OUT.log" 2>&1 &
 PID=$!
 if [ -n "${STOP_AFTER:-}" ]; then
   while kill -0 "$PID" 2>/dev/null; do

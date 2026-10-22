@@ -406,10 +406,37 @@ these easy L1 items.
 - These items give arm C no target, and B-matched drops them too, so the comparison holds. But the hardest cells thin
   out, and a kept hard item becomes one the teacher can finish within 4,096 tokens.
 - `num_predict` is part of offrig's resume identity, so changing it means a new run directory.
-- **Window 2 is held** until a consult settles the options and their prices: keep 4096 and accept the drops, raise the
+- **Window 2 was held** until a consult settled the options and their prices: keep 4096 and accept the drops, raise the
   limit for a fresh run, re-ask only the truncated items in a second directory, or use offrig's think escalation.
 - The 11.9 s a claim used to price the leg came from ladder v1's mix, not the training file's order, so window 2 is
   re-priced from this table.
+
+**The truncation consult (Antigravity, 2026-10-22, at 148e6aa): option A, keep `num_predict` 4096.** R&D checked its key
+facts at source.
+- **It reproduces the pick's own baseline.** Ladder v1's gemma4:31b run (the 0.971 that picked it, n = 765 of 780) had
+  15 `unusable:truncated`, all at L7–L8 and all on unsupported claims. Window 1's 21 truncations are the same behaviour
+  at the pinned operating point.
+- **The comparison is unbiased.** B-matched trains on exactly C's kept items, so B-matched minus C is unaffected. B-full
+  minus B-matched measures the cost of the teacher's drops.
+  - 17 of window 1's 21 truncations are unsupported claims.
+  - Kept L6–L8 so far: 99 supported, 82 unsupported.
+- **The other options change what the study tests:**
+  - B (raise to 8192, fresh) departs from the pick's setting and raises `num_ctx` to 12288.
+  - C (re-ask only the truncated items) mixes two budgets, mostly on unsupported items.
+  - offrig's `--think-policy` escalation re-asks every supported claim (`verify.rs` 1384–1409), or with think off first
+    keeps unthought unsupported replies.
+- **Price (5090), measured on ladder v1:** 22 L8 items at 48.1 s plus 1,152 sweep items at 8.7 s, about 3.1 h left, about
+  6.2 h in total.
+  - Expected truncations: about 26 of 1,647, none in the sweep cells (ladder v1's longest sweep reply was 1,791 tokens).
+  - Option B would total about 9.6–9.8 h, and C about 7.0–7.2 h.
+- **Fixed before window 2:** `teacher_step.sh` wrote offrig's log with `>`, so a resume overwrote the previous window's
+  log. It now appends (`>>`). Window 1's log was also saved as `run.window1.log` (sha256 6d67097f…).
+- **Reported before training:** C's kept items per cell, split by label (supported and unsupported), next to B-full and
+  B-matched.
+- **Recorded, not changed:** 147 of window 1's 442 kept verdicts have an empty `evidence_quote`, all on unsupported
+  claims. offrig's quote rule accepts that on unsupported, and `make_targets.py c` keeps it as given.
+- **What's next:** window 2 resumes from item 474 with the same command, apart from `STOP_AFTER`, under the Publisher's
+  grant.
 
 **Argon's review (recorded here, as the plan requires before any leg):**
 - **Round 1** (3bfd3e8): CONDITIONAL PASS. Blocking B1 (the target builder, and C's filter on `final_verdict`) and B2

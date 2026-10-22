@@ -19,7 +19,8 @@ NANO an ordinary library update (entries filed or revised, results added).
   - 1.3.1's third-party notices: certifi, MPL-2.0 §3.2, PyInstaller's bootloader exception, CPython's PSF licence.
 - Runs: 15u (Track B flaw run 2, results, 16.16), 15x (T10 critique, tooling-fault, 12.52), p4 and p5 (card and
   session-ceiling probes). Phase 5 is at 112.77 of 400.
-- distill-ladder: teacher window 1's per-level figures, and the truncation finding that holds window 2.
+- distill-ladder: teacher window 1's per-level figures; the truncation consult's verdict (keep `num_predict` 4096, option A,
+  about 3.1 h of 5090 left); `teacher_step.sh` appends to its log so a resume keeps the previous window's.
 - An unhashable run `outcome` is reported as a problem instead of raising TypeError (layout.py and runs.py).
 
 ## [1.1.23.1.25] - 2026-10-22

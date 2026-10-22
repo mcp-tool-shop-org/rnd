@@ -390,3 +390,34 @@ licence entries are pinned in the window receipts (§6 pins), and rung 0 records
 - **The noise floor** (Argon's consult, 2026-10-22): T10 keeps single-sample verdicts at the Muse card as designed. Its
   readout states Track A's measured noise floor: 7/102 verdict flips and 8/219 P0 outcome flips between two sessions
   on identical prompts.
+
+## 13. The write window, and the kind B gap (2026-10-22)
+
+- **Window 15l, the write window** (A100, role-set `30c6c37`, cap 26). It booked 16.38 units, with an exec wall of
+  10,949 s.
+  - **58 of 60 drafts awaiting critique.** 2 were dropped, both kind B after 3 attempts: T10-B-05 and T10-B-07.
+  - By kind: C 18, D 16, A 9, E 9, B 6. model_errors 0, and the andon didn't trip (drop share 0.034).
+  - The plan sha matched the freeze (`a7432da6`). Pool `51afb3cd` and training tar `12f2bffa` were as pinned.
+  - Refusals along the way: GATE 7, PUZZLE 7, ASSEMBLY 5, FRAME 5, TRUTH_QUOTE 3, SPENT 2.
+  - **The verbatim repair fired on no slot.** Both slots the repair was built for survived: T10-C-01 at attempt 3,
+    after a trace/verdict disagreement and the heading-line gate, and T10-C-11 at attempt 1.
+- **The kind B gap.** Kind B has no buffers, so the trim refuses to exclude a B slot, and `check_plan` refuses at B 6 of
+  8. R&D confirmed both offline.
+  - **Stub 15m** (CPU, 0.01 units) proved the two-slot path: the plan was screened to exactly T10-B-05 and T10-B-07
+    at `a7432da6`.
+  - **Window 15n** (A100, 2.29 units) re-wrote the two slots at the same plan, code and pins, with a fresh budget of
+    3 attempts each. **Both dropped again,** each time on a different puzzle-check rule.
+- **The pattern:** T10's 8 B slots split by path.
+  - The 5 `solve_first` slots (generated, locked models) all passed.
+  - Of the 3 `freehand` slots (the writer writes the whole puzzle and model): stopping_problem (B-05) and
+    falsifier_first (B-07) failed 6 of 6 attempts, and when_to_stop (B-08) passed at attempt 2.
+  - The Director's standing direction is that kind B comes from a proving generator, not freehand writing. So another
+    re-write, or help for the freehand path, isn't an option.
+- **Next:** an Argon consult chooses among three options:
+  - generators for the freehand structures;
+  - moving the two slots to existing generators, which also needs a change to the one-structure-per-lesson rule;
+  - a trim rule allowing fewer B rows.
+  
+  It also answers whether B-08 must be replaced, and whether a critique of the 58 drafts still holds if the plan sha
+  changes. T10's critique window is built and held until then.
+- **Units:** 15l, 15m and 15n booked 18.68 in all.

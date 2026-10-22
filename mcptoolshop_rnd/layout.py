@@ -349,6 +349,7 @@ def validate_data(root: Path, exp: str, data, registry_ids: set[str] | None = No
                     p.append(f"{where}.why must say what was measured and why the runs share it")
         if "phases" in b:
             p += _phase_problems(b, i)
+            p += _phase_in_force_problems(b, i)
 
     licences = data.get("licences", [])
     if not isinstance(licences, list) or not all(isinstance(x, str) for x in licences):
@@ -430,14 +431,24 @@ def validate_data(root: Path, exp: str, data, registry_ids: set[str] | None = No
                 p.append(f"budgets[{i}]: {rid!r} is named in both {seen_once[rid]} and {where}; a run counts once")
             else:
                 seen_once[rid] = where
-        # A reconciled group's measured total is one figure, so all its runs must fall in one phase.
-        phases = b.get("phases") if isinstance(b.get("phases"), list) and not _phase_problems(b, i) else None
+        phases = b.get("phases") if "phases" in b and not _phase_problems(b, i) else None
         if phases:
-            date_of = {r.get("id"): r.get("date") for r in runs if isinstance(r, dict)}
+            date_of = {r.get("id"): r.get("date") for r in runs if isinstance(r, dict) and isinstance(r.get("id"), str)}
+            # Every counted run falls in a phase: a run from before the first one belongs in excludes, with its why.
+            excluded = set(b.get("excludes") or []) if isinstance(b.get("excludes"), list) else set()
+            for r in runs:
+                if not isinstance(r, dict) or r.get("cost_unit") != b.get("cost_unit") or r.get("id") in excluded:
+                    continue
+                if isinstance(r.get("date"), str) and phase_of(phases, r["date"]) is None:
+                    p.append(f"budgets[{i}]: run {r.get('id')!r} ({r['date']}) comes before the first phase; "
+                             "list it in excludes, with an excludes_why")
+            # A reconciled group's measured total is one figure, so all its runs must fall in one phase.
             for j, g in enumerate(b.get("reconciled") or [] if isinstance(b.get("reconciled"), list) else []):
                 if not (isinstance(g, dict) and isinstance(g.get("runs"), list)):
                     continue
-                spans = {phase_of(phases, date_of.get(rid)) for rid in g["runs"] if isinstance(date_of.get(rid), str)}
+                spans = {phase_of(phases, date_of.get(rid)) for rid in g["runs"]
+                         if isinstance(rid, str) and isinstance(date_of.get(rid), str)}
+                spans.discard(None)  # a run before the first phase is reported above
                 if len(spans) > 1:
                     p.append(f"budgets[{i}].reconciled[{j}] spans phases {', '.join(sorted(str(s) for s in spans))}; "
                              "a measured group must fall in one phase")
@@ -465,7 +476,8 @@ def _phase_problems(b: dict, i: int) -> list[str]:
             p.append(f"{where} needs {', '.join(sorted(PHASE_KEYS))}, and may add closed (spending is computed, never typed)")
         if not (isinstance(ph.get("name"), str) and ph["name"].strip()) or ph.get("name") in names:
             p.append(f"{where}.name must be a non-empty name of its own")
-        names.add(ph.get("name"))
+        else:
+            names.add(ph["name"])
         if not _number(ph.get("cap")) or ph["cap"] <= 0:
             p.append(f"{where}.cap must be a positive number")
         if not (isinstance(ph.get("set_by"), str) and ph["set_by"].strip()):
@@ -478,8 +490,22 @@ def _phase_problems(b: dict, i: int) -> list[str]:
             last = ph["from"]
         if "closed" in ph and not isinstance(ph["closed"], bool):
             p.append(f"{where}.closed must be true or false")
-    if not p and isinstance(phases[-1], dict) and b.get("cap") != phases[-1].get("cap"):
-        p.append(f"budgets[{i}].cap must equal its current phase's cap ({phases[-1].get('cap')})")
+        elif j < len(phases) - 1 and ph.get("closed") is not True:
+            p.append(f"{where} must be closed: only the last phase is open")
+    return p
+
+
+def _phase_in_force_problems(b: dict, i: int) -> list[str]:
+    """The budget's own cap and set_by are the current (last) phase's, so they always mean the cap in force."""
+
+    cur = b["phases"][-1] if isinstance(b.get("phases"), list) and b["phases"] else None
+    if not isinstance(cur, dict):
+        return []
+    p = []
+    if b.get("cap") != cur.get("cap"):
+        p.append(f"budgets[{i}].cap must equal its current phase's cap ({cur.get('cap')})")
+    if b.get("set_by") != cur.get("set_by"):
+        p.append(f"budgets[{i}].set_by must equal its current phase's set_by")
     return p
 
 

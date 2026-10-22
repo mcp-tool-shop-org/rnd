@@ -512,7 +512,6 @@ def cmd_ledger(args):
             phase_rows.append({"name": ph["name"], "from": ph["from"], "closed": bool(ph.get("closed")),
                                "cap": ph["cap"], "set_by": ph["set_by"], "spent": got["spent"], "runs": got["runs"],
                                "left": round(ph["cap"] - got["spent"], 4)})
-        before = by_phase.get(unit, {}).get(None)
         rows.append({"cost_unit": unit, "cap": b["cap"] if b else None, "set_by": b["set_by"] if b else None,
                      # With phases, the budget's cap is the current phase's, so "left" is that phase's.
                      "spent": s["spent"],
@@ -520,7 +519,7 @@ def cmd_ledger(args):
                      "runs": s["runs"], "by_basis": s["by_basis"], "reconciled": recs,
                      "outside_cap": {"runs": sorted(s["outside"]), "cost": s["outside_cost"],
                                      "why": b["excludes_why"] if b else None},
-                     "phases": phase_rows, "before_phases": before})
+                     "phases": phase_rows})
 
     def text(data):
         rs = data["units"]
@@ -544,9 +543,6 @@ def cmd_ledger(args):
                 state = "closed" if ph["closed"] else "open"
                 print(f"              phase {ph['name']} (from {ph['from']}, {state}): spent {ph['spent']} over "
                       f"{ph['runs']} runs; cap {ph['cap']} (set by {ph['set_by']}), left {ph['left']}")
-            if r["before_phases"]:
-                bp = r["before_phases"]
-                print(f"              before the first phase: {bp['spent']} over {bp['runs']} runs")
         if not rs:
             print("  no budgets and no runs")
     emit(args, {"experiment": args.experiment, "units": rows}, text)

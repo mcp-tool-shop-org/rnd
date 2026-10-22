@@ -8,7 +8,7 @@
   {
    "cost_unit": "colab_units",
    "cap": 400,
-   "set_by": "the Director, by phase: phases 0-4 under 300 (200 on 2026-10-17, raised to 300 on 2026-10-18); phase 5 under 400 (150 on 2026-10-21, raised to 400 on 2026-10-22)",
+   "set_by": "the Director (150 on 2026-10-21, raised to 400 on 2026-10-22)",
    "excludes": [
     "1",
     "2",

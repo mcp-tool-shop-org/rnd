@@ -346,6 +346,13 @@ class PhaseBudgetTests(RunsBase):
         # A malformed run id in a group is reported, never a crash.
         odd = self.budget(reconciled=[{"runs": [[], "4"], "measured": 1.0, "why": "x"}])
         self.assertTrue(layout.validate_data(self.root, "demo", record("demo", runs=self.runs_(), budgets=[odd])))
+        # Malformed excludes, run ids and dates are reported, never a crash or a false "before the first phase".
+        weird = [*self.runs_(), {**self.runs_()[1], "id": [], "date": "2026-10-17"},
+                 {**self.runs_()[1], "id": "bad-date", "date": "10/20/2026"}]
+        weird_msgs = " | ".join(layout.validate_data(self.root, "demo", record(
+            "demo", runs=weird, budgets=[self.budget(excludes=[[], "1"])])))
+        self.assertIn("excludes must be a list of run ids", weird_msgs)
+        self.assertNotIn("'bad-date' (10/20/2026) comes before the first phase", weird_msgs)
         spans = self.budget(reconciled=[{"runs": ["6", "15a"], "measured": 3.0, "why": "overlapped"}])
         span_msgs = " | ".join(layout.validate_data(self.root, "demo", record("demo", runs=self.runs_(), budgets=[spans])))
         self.assertIn("reconciled[0] spans phases 0-4, 5", span_msgs)

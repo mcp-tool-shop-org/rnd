@@ -409,7 +409,7 @@ def validate_data(root: Path, exp: str, data, registry_ids: set[str] | None = No
             p.append(f"runs[{i}].pins must be an object")
 
     # An excluded run must be a recorded run in the budget's unit, so a typo can't hide spending.
-    unit_of = {r.get("id"): r.get("cost_unit") for r in runs if isinstance(r, dict)}
+    unit_of = {r.get("id"): r.get("cost_unit") for r in runs if isinstance(r, dict) and isinstance(r.get("id"), str)}
     for i, b in enumerate(budgets):
         if not isinstance(b, dict):
             continue
@@ -433,13 +433,16 @@ def validate_data(root: Path, exp: str, data, registry_ids: set[str] | None = No
                 seen_once[rid] = where
         phases = b.get("phases") if "phases" in b and not _phase_problems(b, i) else None
         if phases:
-            date_of = {r.get("id"): r.get("date") for r in runs if isinstance(r, dict) and isinstance(r.get("id"), str)}
+            date_of = {r["id"]: r["date"] for r in runs if isinstance(r, dict) and isinstance(r.get("id"), str)
+                       and isinstance(r.get("date"), str) and DATE_RE.match(r["date"])}
             # Every counted run falls in a phase: a run from before the first one belongs in excludes, with its why.
-            excluded = set(b.get("excludes") or []) if isinstance(b.get("excludes"), list) else set()
+            excluded = {x for x in b["excludes"] if isinstance(x, str)} if isinstance(b.get("excludes"), list) else set()
             for r in runs:
-                if not isinstance(r, dict) or r.get("cost_unit") != b.get("cost_unit") or r.get("id") in excluded:
+                if not isinstance(r, dict) or not isinstance(r.get("id"), str):
                     continue
-                if isinstance(r.get("date"), str) and phase_of(phases, r["date"]) is None:
+                if r.get("cost_unit") != b.get("cost_unit") or r["id"] in excluded:
+                    continue
+                if isinstance(r.get("date"), str) and DATE_RE.match(r["date"]) and phase_of(phases, r["date"]) is None:
                     p.append(f"budgets[{i}]: run {r.get('id')!r} ({r['date']}) comes before the first phase; "
                              "list it in excludes, with an excludes_why")
             # A reconciled group's measured total is one figure, so all its runs must fall in one phase.

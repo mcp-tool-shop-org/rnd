@@ -1,21 +1,20 @@
 # rnd: how it works
 
-Mapped at 2026-10-19 from commit 96f1277 by Atlas 1.24.0.
+Mapped at 2026-10-22 from commit 6310311 by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-14 parts, mostly Python (131 files), shell (28), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
+14 parts, mostly Python (141 files), shell (29), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-18 (d3db539)
+## What changed since 2026-10-19 (96f1277)
 
-- README.md is now also read by experiments/stage1-regeneration/experiment.json, tests/test_datapack.py, tests/test_layout.py and tests/test_runs.py.
-- docs/tag-page.md is now read by tests/test_layout.py.
-- experiments/natural-errors/data/answers.json is now also read by docs/layout.json.
-- And 86 more new writers and readers of places.
-- scripts/hooks/pre-push is new and belongs to no part, so atlas check fails on it against the previous map.
-- 42 files added and 19 changed content, across 7 parts.
+- README.md is now also read by experiments/cuda-python-5090-rung/experiment.json and tests/test_rawdata.py.
+- SECURITY.md is now read by tests/test_rawdata.py.
+- docs/raw-data-rules/receipts.json is now read by tests/test_rawdata.py.
+- And 9 more new writers and readers of places.
+- 64 files added and 33 changed content, across 8 parts.
 
 ## What comes in
 
@@ -62,9 +61,11 @@ the repository root holds only shell files, which this map does not read, so wha
 - **experiments/atlas-mcp-utility/run.py** and **tests/test_atlas_mcp_utility_run.py** changed together in 15 of 15 commits.
 - **rnd/cli.py** and **tests/test_rnd.py** changed together in 4 of 8 commits.
 
+1 file changed together with its own test, as expected.
+
 Confidence is low: fewer than 25 source files reach 10 revisions in the window.
 
-Window: 180 days; a pair counts from 3 shared commits, since 4 source files reach 10 revisions; the floor rises to 10 when 25 do.
+Window: 180 days; a pair counts from 3 shared commits, since 5 source files reach 10 revisions; the floor rises to 10 when 25 do.
 
 ## What no test touches
 
@@ -116,7 +117,7 @@ These are candidates from names and call order, not a judgement.
 
 ## Hand-authored
 
-People write .claude/, .github/, catalogs/, datapacks/ and docs/; 20 writes with paths built at run time may land here.
+People write .claude/, .github/, catalogs/, datapacks/ and docs/; 25 writes with paths built at run time may land here.
 
 ## Where to start
 
@@ -126,11 +127,11 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 
 ## What this map cannot see
 
-- 9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.
-- 20 writes and 36 reads use paths built at run time and are not named here.
+- 11 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 8 more.
+- 25 writes and 45 reads use paths built at run time and are not named here.
 - 7 writes go to places this repository does not track, so they are not listed as generated.
-- 32 writes and 100 reads go to a path their caller passes, not to this repository.
-- 9 reads go to the directory the command is run in (README.md, entries, experiments and 2 more places), not to this repository.
+- 40 writes and 115 reads go to a path their caller passes, not to this repository.
+- 12 reads go to the directory the command is run in (README.md, SECURITY.md, entries and 3 more places), not to this repository.
 - 1 read goes to the directory the command is run in or a path its caller passes, not to this repository.
 - 1 read goes to the home directory (.claude/), not to this repository.
 - 4 files belong to no part: scripts/colab/collect_windows.py, scripts/colab/probe.py, scripts/colab/rates.sh and 1 more.

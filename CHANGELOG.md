@@ -11,6 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.23] - 2026-10-22
+
+- Track B bank V write, gold check and run 1; T10 B gap closed (write 15w); distill-ladder prep and Argon rounds 1-2; x402/MPP claims checked; xrpl-knowledge waves 11-12 promoted; run records
+- Updated `2026-10-20-live-testnet-runs-surface-defects-in-layers-each-fix-exposed`: Live testnet runs surface defects in layers: each fix exposed the next
+- Updated `2026-10-20-xrpl-agentic-payments-x402-the-ai-starter-kit-and-mpp`: XRPL agentic payments: x402, the AI Starter Kit and MPP
+- Updated experiment `distill-ladder`
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.23.1.22] - 2026-10-22
 
 - Track B bank V slot list frozen

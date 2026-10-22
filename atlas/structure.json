@@ -40,7 +40,7 @@
           "path": ".github/workflows/pages.yml"
         },
         {
-          "hash": "c15b1438c2903a27db305ac6c710607dfe70d462eba4aa417bafea0dc620a799",
+          "hash": "dcbd209fbc41219a686f1a00d25152e511b171d770c8734cc3ccc7120f2d764a",
           "path": ".github/workflows/release.yml"
         }
       ],
@@ -145,8 +145,72 @@
       "externals": 0,
       "files": [
         {
-          "hash": "69319fa780c870549dab68102c4728ebfc7e3ecdd2739ea73ffccbb7e8a3d270",
+          "hash": "7d62398f77c1af3240a97d8035a76cafd1a5cca6021958caa82f10a19de941e7",
+          "path": "docs/argon-ai-studio-system-instructions.md"
+        },
+        {
+          "hash": "7a32885db792b5dec1adedc5dffba55ff71120e75e986b08545d06db4bbed766",
           "path": "docs/layout.json"
+        },
+        {
+          "hash": "bedf43ffcc0bb39b2db8e86b297252554c5feac28aab6efe85d18f9b4ac74a04",
+          "path": "docs/raw-data-rules/receipts.json"
+        },
+        {
+          "hash": "97be53b1bddb1a735c057ac7227d3bc73034dc21b86c015a9f5ec8cf98f4292c",
+          "path": "docs/raw-data-rules/xrpl-lab-runs.json"
+        },
+        {
+          "hash": "b2de06fa9c8ef8189866dc5efad90d4eac5a9e523273c841ee1ab997d8fb512c",
+          "path": "docs/scale-plan/PLAN.md"
+        },
+        {
+          "hash": "f8e34a0257f67b2811d06512f1332aecb85002d688b3f6eee52043eeb9e9384d",
+          "path": "docs/scale-plan/history/PLAN-v1.md"
+        },
+        {
+          "hash": "f94e35b5cc6f2726267e6204e04b6908e94fac5d74b7d36d6bca5b501ef22304",
+          "path": "docs/scale-plan/history/PLAN-v2.md"
+        },
+        {
+          "hash": "aca5e14bbdd26f5905a348793558b64ac05c30ddf05b9212ddd9ab3c79122741",
+          "path": "docs/scale-plan/history/PLAN-v3.md"
+        },
+        {
+          "hash": "e39668dc84564a8f8efccb99d74952dd4132ab026909726598b6a679e94276d2",
+          "path": "docs/scale-plan/history/argon-brief-round1.md"
+        },
+        {
+          "hash": "b1c54fbdd0b3bcff4f66c657afc937e444fb146e24d5116c59a33fea11fd0903",
+          "path": "docs/scale-plan/history/argon-brief-round2.md"
+        },
+        {
+          "hash": "41a7225201a3f171582dbc52e068af8e93b3d10db3aad06204dab21a0bd36490",
+          "path": "docs/scale-plan/history/argon-brief-round3.md"
+        },
+        {
+          "hash": "097f5b8d0999471c188e8aba8686af3cf47dc977175337cc1191f35d7681a6ba",
+          "path": "docs/scale-plan/history/argon-brief-round3b.md"
+        },
+        {
+          "hash": "12129e1f8f9e66665e61eacacd2e2790110f1d7d92afafabe696ae62ef402dcd",
+          "path": "docs/scale-plan/history/plan-v3-to-v3.1.diff"
+        },
+        {
+          "hash": "db9b2d72e77c332ef2c0af663d6a6c2a2660c8e0dda41c4b9902ee6773f8d0d6",
+          "path": "docs/scale-plan/history/rnd-scale-plan-v1-code.txt"
+        },
+        {
+          "hash": "833b16f44d28f3b501668425deb72d3e6cd77e3c604e3b9c808bde085aeedb5f",
+          "path": "docs/scale-plan/history/rnd-scale-plan-v2-code.txt"
+        },
+        {
+          "hash": "16681bdac28872f5fbf634041106d04a357c7a6bd50883c758ea3c2c661c810e",
+          "path": "docs/scale-plan/history/rnd-scale-plan-v3-code.txt"
+        },
+        {
+          "hash": "8cd1f6409e0a661634a8412c5fbbbc478b2faa35457bad6f1a3f5713d18f5b42",
+          "path": "docs/scale-plan/history/rnd-scale-plan-v3.1-code.txt"
         },
         {
           "hash": "d1041b9d7b299b3f305020952c93a8119f83d3d2592bdd30f8ecf0173161a308",
@@ -192,7 +256,7 @@
           "path": "entries/2026/2026-10-07-cublas.md"
         },
         {
-          "hash": "3ec9ba9d08719fc7631226ec6a31a593367929dc381bc0c7ff2cd09411c33790",
+          "hash": "e8e7ef9e4434b3141bee15230cc729afb9862bc8810812a845b9459b144850b7",
           "path": "entries/2026/2026-10-07-cuda-13-4-developer-experience.md"
         },
         {
@@ -224,7 +288,7 @@
           "path": "entries/2026/2026-10-07-cuda-tile-programming.md"
         },
         {
-          "hash": "3e4277fe5597ed2b1aa30b9e2c118c439cdbe80db23ce39056b7865fb8d9a363",
+          "hash": "fa8d73f89a21b2d483de4a29c8b30bfd3009dab260506993899ecae925c0ef7a",
           "path": "entries/2026/2026-10-07-cutile-on-sm120.md"
         },
         {
@@ -260,7 +324,7 @@
           "path": "entries/2026/2026-10-07-nvidia-rubin-architecture.md"
         },
         {
-          "hash": "77744f0f81a536a0715d53d99bdf9875c5ef11cac554530e3e1c35035ed3597f",
+          "hash": "288be8491350e027e0a397c82523facca1084d45f068192269922f0cf88b7d9b",
           "path": "entries/2026/2026-10-07-open-jev-style-decision-models.md"
         },
         {
@@ -280,7 +344,7 @@
           "path": "entries/2026/2026-10-07-ptx-isa-9-4.md"
         },
         {
-          "hash": "fb3b8db58c260b835378e97837f9e62ec72b62f2d3ccbe010c98037e3677ae6d",
+          "hash": "cede54194061fe8aedf57bab90836b50ac6084971eb14da323c6f2f8c92d7c8b",
           "path": "entries/2026/2026-10-07-qwen32b-judge-position-bias.md"
         },
         {
@@ -316,11 +380,11 @@
           "path": "entries/2026/2026-10-07-uv-extra-index-priority-cpu-torch.md"
         },
         {
-          "hash": "96dd8eeff26c35e28df9cf5df8c2fd76be646e7aa9046d8b82aa89ea52698e7d",
+          "hash": "a9565e2e26a8d315af60312ce0515444f9223e9509c4d307fa565714ff0e8a87",
           "path": "entries/2026/2026-10-08-aligner-misdates-cause-sung-dropouts.md"
         },
         {
-          "hash": "236504c7a91bcaf42bbf9689f1f2d769b1a28e2954ce8e138d17b865fd122352",
+          "hash": "77c7ce6b3bf9a1fb6978925de69a4bc11043c6091d5f8d1e96f5eea02b238c9c",
           "path": "entries/2026/2026-10-08-dataset-recipes-for-critic-jury-roles-designing-roles-by-dat.md"
         },
         {
@@ -344,7 +408,7 @@
           "path": "entries/2026/2026-10-08-phrase-end-hold-removes-the-stutter.md"
         },
         {
-          "hash": "a354d43311cf46b48974332d99db65efbd6c7b4dc368ae998a5c140bd6cc6ab9",
+          "hash": "bfb84bc7a7733e104fd7bcbc31def4ecc0850db285a26f6c5ccf8afd1fff77a3",
           "path": "entries/2026/2026-10-08-three-follow-up-studies-for-critic-recipes-hard-pairs-two-pl.md"
         },
         {
@@ -352,7 +416,7 @@
           "path": "entries/2026/2026-10-08-translategemma-failure-modes-on-readme-tables.md"
         },
         {
-          "hash": "8d93ca81e43381f9292560a55e4e5730c1d0fc4afa9530b9a62ab31cf8216dad",
+          "hash": "a9c7ea475f8a9769b9cc86e8b13bb273bda6d0adc8f7121d7f5f32421c2298b6",
           "path": "entries/2026/2026-10-08-voice-gate-pyannote-segmentation-on-sung-vocals.md"
         },
         {
@@ -396,15 +460,15 @@
           "path": "entries/2026/2026-10-13-atlas-testing-os-rnd-buildup.md"
         },
         {
-          "hash": "b6c408910a40cdda417184336d9f5a930ff437ec7611a5b164471ac9f0f6d495",
+          "hash": "806b3c5686ddbc3f18a2bd7978d1d09e2d928f4d4ca4d6e8af7367760e5bbe0c",
           "path": "entries/2026/2026-10-13-claude-code-read-deny-rules-do-not-stop-a-grep-walk.md"
         },
         {
-          "hash": "5b8c8a1d4c085f636cd35e6ae66d487734868c73e08f1cf768939a6a9259535e",
+          "hash": "982449f1baf5f112d2406ed2aa27bb4f80eba3768f7719107532532c7c491758",
           "path": "entries/2026/2026-10-13-claude-code-starts-a-turn-before-mcp-servers-connect.md"
         },
         {
-          "hash": "b9f0a021e9de64f7d72a76c194b8d6c1dd80920f986ae303e0a8ab4fa4d55518",
+          "hash": "5cc97dbadd751593d0b5de2b43bb217e016bb6187a577a33140296f0154504d1",
           "path": "entries/2026/2026-10-13-docker-sandboxes-on-the-rig-from-signup-to-a-pinned-pilot-wo.md"
         },
         {
@@ -416,7 +480,7 @@
           "path": "entries/2026/2026-10-13-multi-repository-atlas-research-grounding-for-the-build-up.md"
         },
         {
-          "hash": "a198748bbef7a25037a840d1a12aba62b2ca3cdcc69c4e573e505c8ca114141d",
+          "hash": "ade81a4bfdc83011a7192fe8c47aeaaff7a3a05cd16e8d3677d737f534da541b",
           "path": "entries/2026/2026-10-13-nemo-relay-first-trial-in-the-sandbox.md"
         },
         {
@@ -424,11 +488,11 @@
           "path": "entries/2026/2026-10-13-nemotron-lightning-needs-its-context-set-for-claude-code.md"
         },
         {
-          "hash": "2224d9db3f5aa1205b08a1685833c04985ba78deb20b103cc24e133cc55de4c9",
+          "hash": "6c24fc16e8eb4b736cb13a52e033c7f10a6b55f415a9688026976ef3c6a06eb1",
           "path": "entries/2026/2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ.md"
         },
         {
-          "hash": "a90f56b0062f66dc5b767c91f76eb18067e30cce4de582083a05f319a7962b13",
+          "hash": "5e08235c9dd905061c5b6518ff88fd16d3f94145aef6b3b7009108fe92a3ccb5",
           "path": "entries/2026/2026-10-13-nvidia-pair-a-lan-inference-router-and-how-it-compares-with-.md"
         },
         {
@@ -436,7 +500,19 @@
           "path": "entries/2026/2026-10-13-the-probe-was-the-contention-a-process-walk-inside-the-measu.md"
         },
         {
-          "hash": "8ec88497c826b4ed8d87e61d19a6ced91626a3de8ad362527c40a361dcfa3dff",
+          "hash": "6a1e2a8a5f21696ddd2082183360d6395c083ca6546b15e8a6b5ef07a789e776",
+          "path": "entries/2026/2026-10-20-cuda-python-on-5090.md"
+        },
+        {
+          "hash": "07917c56ab3d805b071da6b259b248e520ba671afd3188fdff8579acee625d87",
+          "path": "entries/2026/2026-10-20-live-testnet-runs-surface-defects-in-layers-each-fix-exposed.md"
+        },
+        {
+          "hash": "9979bd6da84d55917114bbce777afe1c8c936f7ed92aadd6d2a8c072d04a365f",
+          "path": "entries/2026/2026-10-20-xrpl-agentic-payments-x402-the-ai-starter-kit-and-mpp.md"
+        },
+        {
+          "hash": "284503f06d3f2f6017174af3540a70e10b7b1326bdda33eb283fe1b5c2b7804d",
           "path": "entries/2026/embeddinggemma-2.md"
         },
         {
@@ -455,10 +531,10 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 18,
+      "dynamicReads": 23,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
-      "dynamicWrites": 9,
+      "dynamicWrites": 13,
       "entryPoints": [],
       "externals": 0,
       "files": [
@@ -788,6 +864,10 @@
           "path": "experiments/charts/cuda-probe.svg"
         },
         {
+          "hash": "84caaf65d8ce8767f02d2bd1f82c1b86529ebc3825d19c59be0a8b4eb50ccc24",
+          "path": "experiments/charts/desk-vram.svg"
+        },
+        {
           "hash": "9e728527daf81b6590071441b0c136579bf941c0dea2ae6eb6411b34ead6c326",
           "path": "experiments/charts/e4b-igpu-latency.svg"
         },
@@ -820,6 +900,7 @@
             "chart_critic_calls",
             "chart_critic_catch",
             "chart_cuda",
+            "chart_desk_vram",
             "chart_e4b",
             "chart_e4b_latency",
             "chart_e4b_pilot",
@@ -863,34 +944,34 @@
             {
               "in": "key",
               "kind": "raise",
-              "line": 765
+              "line": 766
             },
             {
               "in": "e4b_block_paths",
               "kind": "raise",
-              "line": 770
+              "line": 771
             },
             {
               "in": "e4b_rule",
               "kind": "raise",
-              "line": 794
+              "line": 795
             },
             {
               "in": "chart_e4b_latency",
               "kind": "raise",
-              "line": 980
+              "line": 981
             },
             {
               "in": "manifest",
               "kind": "except",
-              "line": 1255
+              "line": 1283
             }
           ],
-          "hash": "b8b7809c3e92c241c2c070bed091742c09843c965c069fb0b463995ec31b3281",
+          "hash": "b77df3a7e926fbdfa51d0613473605de10635f7e30e4a7dac06be8015e0c17f3",
           "path": "experiments/charts/make_charts.py"
         },
         {
-          "hash": "8bf680c272966c1d3587becefc698c712e3d096a49c1f774f4a31ed2a44ccb87",
+          "hash": "65be0f6f770c9591fa888bf845a20fb6ba86169355edbf20a4e348e66d5e72c0",
           "path": "experiments/charts/manifest.json"
         },
         {
@@ -1541,6 +1622,59 @@
           "path": "experiments/cuda-graphs/triton_probe.py"
         },
         {
+          "hash": "a45ee7a52c0f8d2ccb58bf065434b6d789c9511723d03842d147e7be4aae8b7c",
+          "path": "experiments/cuda-python-5090-rung/README.md"
+        },
+        {
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "path": "experiments/cuda-python-5090-rung/data/.gitkeep"
+        },
+        {
+          "hash": "dca4f87d2607a113a78943b27122ef6765f63c172342dfce9c58c97deee2444c",
+          "path": "experiments/cuda-python-5090-rung/data/env-freeze.txt"
+        },
+        {
+          "hash": "abe36379052c82cf0def9f70564066450b8349002c3b90b94be8b3527b4923b0",
+          "path": "experiments/cuda-python-5090-rung/experiment.json"
+        },
+        {
+          "hash": "3cf9319a74b61f99563802db5b72baf8e4ae165385f9972e5837aa3c571de31d",
+          "path": "experiments/cuda-python-5090-rung/results/cupy-runtime-2026-10-20.txt"
+        },
+        {
+          "hash": "40dc4381c8413b4455869f2a7206ae66f54101abb57c0b654f81d0ef7a897de5",
+          "path": "experiments/cuda-python-5090-rung/results/run1-numpy-2.5.4.jsonl"
+        },
+        {
+          "hash": "83b980837b3fceaf3609239269b8c924fb1f23474fb017ac0439cdecb58bdeef",
+          "path": "experiments/cuda-python-5090-rung/results/run2-numpy-2.4.6.jsonl"
+        },
+        {
+          "hash": "798dbfc68a2395b0b944939d9ed29c22b9c76e95465857a7a859a8d30e528c62",
+          "path": "experiments/cuda-python-5090-rung/scripts/cupy_runtime_check.py"
+        },
+        {
+          "exports": [
+            "cc_of",
+            "one",
+            "t_compute",
+            "t_cuda_core",
+            "t_cupy",
+            "t_numba",
+            "t_nvmath",
+            "t_tile"
+          ],
+          "failurePaths": [
+            {
+              "in": "one",
+              "kind": "except",
+              "line": 118
+            }
+          ],
+          "hash": "c710ab7c3b93bffb3aee44c4baa46ef0c1ae052123721cbbccb8743fe5dce1d7",
+          "path": "experiments/cuda-python-5090-rung/scripts/smoke_rung.py"
+        },
+        {
           "hash": "1768a1e03109f4e9cc81262d7422f5b999b74bb9339169653783c842cad77630",
           "path": "experiments/data-designer/README.md"
         },
@@ -1800,11 +1934,39 @@
           "path": "experiments/dataset-desk/argon-pass-3-followup-brief.md"
         },
         {
+          "hash": "f08fe88f5a2061e9d773f93047592bae9caf537708ee27383c63fcdb49ba5e85",
+          "path": "experiments/dataset-desk/calibration/README.md"
+        },
+        {
+          "hash": "2693b859293b0ef3d721fba12fec5c55e00585a7743ddd38faae7242491a1329",
+          "path": "experiments/dataset-desk/calibration/data/mirror-dhash.json"
+        },
+        {
+          "hash": "67e23c407da98a9e6a7b225fbe5d2ef04657a224e76baa3a9c3814045d7cc540",
+          "path": "experiments/dataset-desk/calibration/data/registry-25d9cdd5.json"
+        },
+        {
+          "hash": "6ba9c95cfb94a678d4445380bfb61bcd3ac5f03c77de82e2fa9fb62e50010d28",
+          "path": "experiments/dataset-desk/calibration/data/rung1-dhash.json"
+        },
+        {
+          "hash": "c74f0f67a452d371cd2c8893ff934cf8db78ae5189bc72a5b124322573eac442",
+          "path": "experiments/dataset-desk/calibration/data/rung2.json"
+        },
+        {
+          "hash": "3b1898b00e218d3b6ccaf9dcd8d4bbc0cf8dcc18f0b9cd3fc9b712c72e8e72d8",
+          "path": "experiments/dataset-desk/calibration/data/rung2b-runs.json"
+        },
+        {
+          "hash": "881ffee9088ca608a803bd1936c9344f1638236ab001f7ed7969a2a80c258986",
+          "path": "experiments/dataset-desk/calibration/data/rung2b.json"
+        },
+        {
           "hash": "d013cbcd746cdbd83d567ebedd74725dd683b889c8e4e24e3883e7cc716ffcc8",
           "path": "experiments/dataset-desk/design.md"
         },
         {
-          "hash": "5faa4247fbfe27f4ffac4d1baa4f51bdc706add1d1aefd8a26ce6d03411f1551",
+          "hash": "4ae326b0f86014d934b638d90cd2e234b25d39bb1320fba1210dadac93f8fd58",
           "path": "experiments/distill-ladder/PLAN.md"
         },
         {
@@ -1818,6 +1980,81 @@
           ],
           "hash": "bf1c23008fd9a72d882af6aa736dbfcfc46a0ddd258791c39cef5ecdc92ef820",
           "path": "experiments/distill-ladder/dedupe.py"
+        },
+        {
+          "exports": [
+            "main",
+            "make_handler"
+          ],
+          "hash": "22e962c3b259748a61fec7dae7dc052090de1ed3245e5c1882157f2f61d0d0d1",
+          "path": "experiments/distill-ladder/fake_ollama.py"
+        },
+        {
+          "exports": [
+            "cell_list",
+            "main"
+          ],
+          "hash": "f89276a3bb2a97986fc4df4948239c91a9d9625fce8d70b573cf6e01297a0879",
+          "path": "experiments/distill-ladder/make_ladder_v2.py"
+        },
+        {
+          "exports": [
+            "main",
+            "oracle",
+            "prompts",
+            "read",
+            "sft_row",
+            "trace",
+            "write"
+          ],
+          "failurePaths": [
+            {
+              "in": "prompts",
+              "kind": "raise",
+              "line": 49
+            },
+            {
+              "in": "oracle",
+              "kind": "raise",
+              "line": 91
+            },
+            {
+              "in": "oracle",
+              "kind": "raise",
+              "line": 97
+            },
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 128
+            },
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 136
+            },
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 147
+            }
+          ],
+          "hash": "0b7f1c0919b33ca3f5d9b8dc2552113fa3abf7aecb0d82955e2d638cd100a07f",
+          "path": "experiments/distill-ladder/make_targets.py"
+        },
+        {
+          "exports": [
+            "main"
+          ],
+          "hash": "478a938a42d3a3793467a28a5e91caff3a3e14207fdd213c2fa7a354d4f42ee5",
+          "importsFiles": [
+            "experiments/distill-ladder/dedupe.py"
+          ],
+          "path": "experiments/distill-ladder/make_train.py"
+        },
+        {
+          "hash": "4b822aa143ddead52898dda5f92de6c3bac61a4984f3a43116387b25376bc40b",
+          "path": "experiments/distill-ladder/teacher_step.sh"
         },
         {
           "hash": "e2fe5ca2eaff3b0ba7ae8c6cab41c08621d1af87215e0b8a3a9cc4f5ba051153",
@@ -3827,16 +4064,28 @@
           "path": "experiments/stage1-regeneration/critic-signal/PHASE-2-3.md"
         },
         {
-          "hash": "10c475a3a0f2005277c1a3900913d98783226abac6f7c3dbbadd5d35f54410f9",
+          "hash": "c5c3b5e73da260559b910f2b49c8a4ee4186bc3f5f62e84dc38eb98385c8f8d5",
           "path": "experiments/stage1-regeneration/critic-signal/PHASE-4.md"
         },
         {
-          "hash": "5b7ef1aea55ef2f8c205aca46cc25cfad102e8f354db09705ba91538f75dc38d",
+          "hash": "dc76a1e5467932109d406222a9acb9a29d3326c2a2eb5f09ad960c533e19673d",
           "path": "experiments/stage1-regeneration/critic-signal/PLAN-ROUND4.md"
         },
         {
           "hash": "f1dfbf695e3775327b4760e1c5446acdd3d96a6fe5474fb0ac638c9d7bba9002",
           "path": "experiments/stage1-regeneration/critic-signal/SYNTHESIS.md"
+        },
+        {
+          "hash": "a54e731d20fb2b72452ad9f0c449964ebcf4a806f054476a7ee03c5257c8214c",
+          "path": "experiments/stage1-regeneration/critic-signal/TRACK-B-DESIGN.md"
+        },
+        {
+          "hash": "d562bb82c2bdd6ae3340c4087e8132d7896d6b25916f1a8e7aefffbbab27f2e8",
+          "path": "experiments/stage1-regeneration/critic-signal/TRACK-B-LABELS.md"
+        },
+        {
+          "hash": "befabf421d586b1b0b2e5d2c1c353fafe1e1b0ca1e90d500d9a8f1ff8efb8229",
+          "path": "experiments/stage1-regeneration/critic-signal/TRACK-B-STAGE1.md"
         },
         {
           "hash": "d8c2b838d2a616e3f435bb3a851cce931b5c8e4c4b868bfa79a60d0cc84d0ecc",
@@ -3895,8 +4144,40 @@
           "path": "experiments/stage1-regeneration/critic-signal/data/confirmation-slots.json"
         },
         {
+          "hash": "759ecc0a6f437ff232754a1e1ca3cc3bd49418ea876a670a1cef79b032963638",
+          "path": "experiments/stage1-regeneration/critic-signal/data/nearcopy-calibration-2026-10-21.json"
+        },
+        {
           "hash": "012017174bd0e5ff07a921bcacf0e21730c138720d486950513af7d83d0b5e4c",
           "path": "experiments/stage1-regeneration/critic-signal/data/outcomes.csv"
+        },
+        {
+          "hash": "a54a746ac4f3d4dc3ccd440fe3039de4bc6e68736c21dfff5f59e22da10086c1",
+          "path": "experiments/stage1-regeneration/critic-signal/data/track-a-gold-2026-10-21.json"
+        },
+        {
+          "hash": "a29bcec5623af4f6d379a959958183abf1ade303cdd5186534de4333b8a8facf",
+          "path": "experiments/stage1-regeneration/critic-signal/data/track-a-nearcopy-2026-10-21.json"
+        },
+        {
+          "hash": "0bac0f7fbff5875d388e5b653ec5eb158eb5c56abf9abebdd1254e8a2c319d64",
+          "path": "experiments/stage1-regeneration/critic-signal/data/track-a-result-2026-10-22.json"
+        },
+        {
+          "hash": "3ce40c532025b7bb35e6fda8c654c11cce55487ae5e90b9b79cb01199d70dc0a",
+          "path": "experiments/stage1-regeneration/critic-signal/data/track-a-slots-10c1ebf.json"
+        },
+        {
+          "hash": "bdc609c45d88dd94e58a4c4f2f33bbbf150dd2005ed2f6785914adc3f1bc1e59",
+          "path": "experiments/stage1-regeneration/critic-signal/data/track-b-gold-2026-10-22.json"
+        },
+        {
+          "hash": "582081e011c028c2c5de70792e240378c5324cb80e7f29c1b57cbf1ec685a120",
+          "path": "experiments/stage1-regeneration/critic-signal/data/track-b-labels.json"
+        },
+        {
+          "hash": "33da66d7bdf18aa54a703c2ef1260b1be1ca8531cd70f6fdd584a05434e4a7b5",
+          "path": "experiments/stage1-regeneration/critic-signal/data/track-b-vslots-bd17c93.json"
         },
         {
           "hash": "6d3d74d2a667fe498d2873d32e4e76071662d4807de12a25f8771148b818858d",
@@ -3911,7 +4192,59 @@
           "path": "experiments/stage1-regeneration/critic-signal/scripts/extract_data.py"
         },
         {
-          "hash": "7e36b426e3db27e7fe2c801730f2b6b021f7340ba9ca931168cb9e8c4c2419de",
+          "exports": [
+            "char_ngrams",
+            "cp_lower_all",
+            "cp_upper_zero",
+            "jaccard",
+            "line_set",
+            "main",
+            "norm",
+            "p_close",
+            "p_template",
+            "parse_candidate",
+            "quantile",
+            "rng_for",
+            "strip_quotes"
+          ],
+          "failurePaths": [
+            {
+              "kind": "raise",
+              "line": 272
+            }
+          ],
+          "hash": "84e2c255ba5e56390a1a403fb876914e058b8807b356d4128c56c6d8d9e7d082",
+          "path": "experiments/stage1-regeneration/critic-signal/scripts/nearcopy_calibration.py"
+        },
+        {
+          "exports": [
+            "load",
+            "main"
+          ],
+          "failurePaths": [
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 44
+            },
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 51
+            },
+            {
+              "kind": "raise",
+              "line": 94
+            }
+          ],
+          "hash": "bc5778fba9ef343c4401a6743a7540cbe3979d0a65f1a909f028cdac4a7d4e82",
+          "importsFiles": [
+            "experiments/stage1-regeneration/critic-signal/scripts/nearcopy_calibration.py"
+          ],
+          "path": "experiments/stage1-regeneration/critic-signal/scripts/track_a_nearcopy_rung.py"
+        },
+        {
+          "hash": "b97612a3f5ba52b47216634a593e988c8cdf2a7eb34726637f2c7e2f8ac70ccf",
           "path": "experiments/stage1-regeneration/experiment.json"
         },
         {
@@ -3927,16 +4260,20 @@
             {
               "in": "main",
               "kind": "except",
-              "line": 107
+              "line": 117
             }
           ],
-          "hash": "786cb5c26e3365285c652c8538256da5ee6d0d265408f369163cc82d9be09624",
+          "hash": "5aca1eb4a74f73744df65038084be800115348587db96df75e76c12d38de01bc",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/layout.py",
             "mcptoolshop_rnd/runs.py"
           ],
           "path": "experiments/stage1-regeneration/scripts/backfill_runs.py"
+        },
+        {
+          "hash": "2ab07a06f6567511fbdb68ddbf80f7c88cad3a478cbe05b87baf179682e2a220",
+          "path": "experiments/stage1-regeneration/t10/DESIGN.md"
         },
         {
           "hash": "bc84c4b6b1dead31a83df8b93e8540465d01592b7c18040a5e96f412b025a20a",
@@ -4922,11 +5259,11 @@
       "origin": "mixed",
       "outsidePlaces": [
         {
-          "reads": 48,
+          "reads": 50,
           "where": [
             "caller"
           ],
-          "writes": 12
+          "writes": 13
         },
         {
           "reads": 1,
@@ -4944,8 +5281,8 @@
           "writes": 0
         }
       ],
-      "outsideReads": 50,
-      "outsideWrites": 12,
+      "outsideReads": 52,
+      "outsideWrites": 13,
       "role": "code",
       "testRunners": [
         "unittest"
@@ -4963,12 +5300,12 @@
           "why": "unplaced"
         },
         {
-          "path": "experiments/verifier-gold/build_grounded.py",
+          "path": "experiments/distill-ladder/make_ladder_v2.py",
           "specifier": null,
           "why": "dynamic"
         }
       ],
-      "unresolvedSites": 3
+      "unresolvedSites": 5
     },
     {
       "dynamicReads": 0,
@@ -5165,10 +5502,10 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 18,
+      "dynamicReads": 22,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
-      "dynamicWrites": 11,
+      "dynamicWrites": 12,
       "entryPoints": [
         "mcptoolshop_rnd/cli.py"
       ],
@@ -5176,7 +5513,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "375fe17062809425d8abc9d571eb29c21b69b4e5b5db287db015c7e7e59efd05",
+          "hash": "40aeea5463139a42b46eefae7607107e4364d32a5d904b5b70b063a28f755ffe",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -5374,65 +5711,65 @@
             {
               "in": "cmd_raw",
               "kind": "except",
-              "line": 581
+              "line": 610
             },
             {
               "in": "cmd_raw",
               "kind": "except",
-              "line": 583
+              "line": 612
             },
             {
               "in": "_git_head",
               "kind": "except",
-              "line": 624
+              "line": 653
             },
             {
               "in": "cmd_probe",
               "kind": "except",
-              "line": 639
+              "line": 668
             },
             {
               "in": "cmd_watch",
               "kind": "except",
-              "line": 673
+              "line": 702
             },
             {
               "in": "cmd_collect",
               "kind": "except",
-              "line": 735
+              "line": 764
             },
             {
               "in": "cmd_datapack",
               "kind": "except",
-              "line": 772
+              "line": 801
             },
             {
               "in": "cmd_datapack",
               "kind": "except",
-              "line": 802
+              "line": 831
             },
             {
               "in": "cmd_abmine",
               "kind": "except",
-              "line": 811
+              "line": 840
             },
             {
               "in": "cmd_abmine",
               "kind": "except",
-              "line": 822
+              "line": 851
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 1013
+              "line": 1054
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 1015
+              "line": 1056
             }
           ],
-          "hash": "11c7df83828652bf6d376dde616e2d72f2adf97d2cd109a568ebf76196a53c62",
+          "hash": "cb7aad063e4dc4b34aba254b58209bddf2b63151d917b4c4de94e8ef258ff087",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/abmine.py",
@@ -5442,6 +5779,7 @@
             "mcptoolshop_rnd/layout.py",
             "mcptoolshop_rnd/model.py",
             "mcptoolshop_rnd/probe.py",
+            "mcptoolshop_rnd/rawdata.py",
             "mcptoolshop_rnd/readouts.py",
             "mcptoolshop_rnd/release.py",
             "mcptoolshop_rnd/runs.py",
@@ -5908,7 +6246,7 @@
                   }
                 },
                 {
-                  "line": 556,
+                  "line": 559,
                   "name": "private_root",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5916,8 +6254,32 @@
                 },
                 {
                   "branch": "args.action == \"verify\"",
-                  "line": 559,
+                  "line": 568,
                   "name": "verify",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "branch": "args.json",
+                  "line": 572,
+                  "name": "as_json",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "branch": "args.action == \"relicense\"",
+                  "line": 587,
+                  "name": "load_rules",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "branch": "args.action == \"relicense\"",
+                  "line": 587,
+                  "name": "relicense",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
@@ -5932,7 +6294,21 @@
                   "via": "_reasons"
                 },
                 {
-                  "line": 572,
+                  "line": 598,
+                  "name": "load_rules",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 598,
+                  "name": "rules_classifier",
+                  "target": {
+                    "file": "mcptoolshop_rnd/__init__.py"
+                  }
+                },
+                {
+                  "line": 601,
                   "name": "ingest_tree",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5947,7 +6323,7 @@
                   "via": "_pinned_text"
                 },
                 {
-                  "line": 578,
+                  "line": 607,
                   "name": "ingest_private",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -5986,7 +6362,7 @@
                   "via": "open_db"
                 },
                 {
-                  "line": 638,
+                  "line": 667,
                   "name": "probe",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -6001,28 +6377,28 @@
             {
               "calls": [
                 {
-                  "line": 666,
+                  "line": 695,
                   "name": "load_watchlist",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 672,
+                  "line": 701,
                   "name": "load_state",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 675,
+                  "line": 704,
                   "name": "check",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 677,
+                  "line": 706,
                   "name": "save_state",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -6038,7 +6414,7 @@
               "calls": [
                 {
                   "branch": "not args.name",
-                  "line": 710,
+                  "line": 739,
                   "name": "experiments",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -6046,14 +6422,14 @@
                 },
                 {
                   "branch": "not args.name",
-                  "line": 711,
+                  "line": 740,
                   "name": "load_spec",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 721,
+                  "line": 750,
                   "name": "run",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -6069,7 +6445,7 @@
               "calls": [
                 {
                   "branch": "args.action == \"list\"",
-                  "line": 743,
+                  "line": 772,
                   "name": "manifests",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -6077,7 +6453,7 @@
                 },
                 {
                   "branch": "args.action == \"list\"",
-                  "line": 744,
+                  "line": 773,
                   "name": "load",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -6085,7 +6461,7 @@
                 },
                 {
                   "branch": "args.action == \"build\"",
-                  "line": 768,
+                  "line": 797,
                   "name": "load",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -6093,7 +6469,7 @@
                 },
                 {
                   "branch": "args.action == \"build\"",
-                  "line": 776,
+                  "line": 805,
                   "name": "build",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -6101,7 +6477,7 @@
                 },
                 {
                   "branch": "args.action == \"build\"",
-                  "line": 781,
+                  "line": 810,
                   "name": "write",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -6109,7 +6485,7 @@
                 },
                 {
                   "branch": "args.action == \"verify\"",
-                  "line": 789,
+                  "line": 818,
                   "name": "load",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -6117,7 +6493,7 @@
                 },
                 {
                   "branch": "args.action == \"verify\"",
-                  "line": 790,
+                  "line": 819,
                   "name": "verify",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -6132,21 +6508,21 @@
             {
               "calls": [
                 {
-                  "line": 810,
+                  "line": 839,
                   "name": "load_record_file",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 828,
+                  "line": 857,
                   "name": "analyze",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
                   }
                 },
                 {
-                  "line": 829,
+                  "line": 858,
                   "name": "render",
                   "target": {
                     "file": "mcptoolshop_rnd/__init__.py"
@@ -6379,45 +6755,45 @@
             {
               "in": "library_files",
               "kind": "except",
-              "line": 74
+              "line": 86
             },
             {
               "in": "load_baseline",
               "kind": "except",
-              "line": 103
+              "line": 115
             },
             {
               "in": "private_manifest",
               "kind": "except",
-              "line": 162
+              "line": 174
             },
             {
               "in": "validate_record",
               "kind": "except",
-              "line": 261
+              "line": 273
             },
             {
               "in": "registry_ids",
               "kind": "except",
-              "line": 430
+              "line": 442
             },
             {
               "in": "new_experiment",
               "kind": "raise",
-              "line": 457
+              "line": 469
             },
             {
               "in": "new_experiment",
               "kind": "raise",
-              "line": 460
+              "line": 472
             },
             {
               "in": "new_experiment",
               "kind": "raise",
-              "line": 464
+              "line": 476
             }
           ],
-          "hash": "98950a1232e0990f43ddd58c2e618eccf60915e995670055a80fea04c4b4db4b",
+          "hash": "a598d9891578397bd9ea2a20a327991669e00caad7dffabeef3c65281075193e",
           "path": "mcptoolshop_rnd/layout.py"
         },
         {
@@ -7399,6 +7775,152 @@
         },
         {
           "exports": [
+            "as_json",
+            "blob_rel",
+            "group_of",
+            "ingest_private",
+            "ingest_tree",
+            "load_rules",
+            "plan_runs",
+            "relicense",
+            "rules_classifier",
+            "run_dirs_of",
+            "run_id",
+            "sha256_file",
+            "store_root",
+            "verify"
+          ],
+          "failurePaths": [
+            {
+              "in": "store_root",
+              "kind": "except",
+              "line": 70
+            },
+            {
+              "in": "store_root",
+              "kind": "raise",
+              "line": 71
+            },
+            {
+              "in": "store_root",
+              "kind": "raise",
+              "line": 74
+            },
+            {
+              "in": "load_rules",
+              "kind": "except",
+              "line": 124
+            },
+            {
+              "in": "load_rules",
+              "kind": "raise",
+              "line": 125
+            },
+            {
+              "in": "load_rules",
+              "kind": "raise",
+              "line": 127
+            },
+            {
+              "in": "load_rules",
+              "kind": "raise",
+              "line": 130
+            },
+            {
+              "in": "load_rules",
+              "kind": "raise",
+              "line": 133
+            },
+            {
+              "in": "_place_blob",
+              "kind": "raise",
+              "line": 191
+            },
+            {
+              "in": "_place_blob",
+              "kind": "except",
+              "line": 202
+            },
+            {
+              "in": "_place_blob",
+              "kind": "raise",
+              "line": 203
+            },
+            {
+              "in": "_place_blob",
+              "kind": "raise",
+              "line": 211
+            },
+            {
+              "in": "_copy_checked",
+              "kind": "raise",
+              "line": 235
+            },
+            {
+              "in": "ingest_tree",
+              "kind": "raise",
+              "line": 246
+            },
+            {
+              "in": "ingest_tree",
+              "kind": "raise",
+              "line": 264
+            },
+            {
+              "in": "ingest_tree",
+              "kind": "raise",
+              "line": 292
+            },
+            {
+              "in": "ingest_private",
+              "kind": "raise",
+              "line": 352
+            },
+            {
+              "in": "ingest_private",
+              "kind": "raise",
+              "line": 366
+            },
+            {
+              "in": "ingest_private",
+              "kind": "raise",
+              "line": 369
+            },
+            {
+              "in": "_lines_matching",
+              "kind": "except",
+              "line": 419
+            },
+            {
+              "in": "verify",
+              "kind": "except",
+              "line": 511
+            },
+            {
+              "in": "verify",
+              "kind": "except",
+              "line": 520
+            },
+            {
+              "in": "verify",
+              "kind": "except",
+              "line": 548
+            },
+            {
+              "in": "relicense",
+              "kind": "raise",
+              "line": 606
+            }
+          ],
+          "hash": "bf3ad8f1570c868b4fe76e6081cc7447f2672d8ae94a736ffda5d016fd011595",
+          "importsFiles": [
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/layout.py"
+          ],
+          "path": "mcptoolshop_rnd/rawdata.py"
+        },
+        {
+          "exports": [
             "knowledge_bases",
             "prefix_query",
             "root_dir",
@@ -7705,16 +8227,23 @@
       "origin": "authored",
       "outsidePlaces": [
         {
-          "reads": 52,
+          "reads": 65,
           "where": [
             "caller"
           ],
-          "writes": 19
+          "writes": 26
+        },
+        {
+          "reads": 2,
+          "where": [
+            "cwd:README.md"
+          ],
+          "writes": 0
         },
         {
           "reads": 1,
           "where": [
-            "cwd:README.md"
+            "cwd:SECURITY.md"
           ],
           "writes": 0
         },
@@ -7740,20 +8269,20 @@
           "writes": 0
         },
         {
-          "reads": 4,
+          "reads": 5,
           "where": [
             "cwd:licences"
           ],
           "writes": 0
         }
       ],
-      "outsideReads": 61,
-      "outsideWrites": 19,
+      "outsideReads": 77,
+      "outsideWrites": 26,
       "role": "code",
       "testRunners": [
         "unittest"
       ],
-      "testedBy": 19,
+      "testedBy": 20,
       "unresolvedNamed": [
         {
           "path": "mcptoolshop_rnd/collect.py",
@@ -7829,7 +8358,7 @@
           "path": ".gitignore"
         },
         {
-          "hash": "f16823a8af8495935992b89bfa167a5acb433385bf72e8ed675c25db4911f84a",
+          "hash": "ff1a4c2cdb507cae16aa5929f57b11f5f0333c72437fc3346af5e7c215b2cde8",
           "path": "CHANGELOG.md"
         },
         {
@@ -7968,6 +8497,10 @@
           "path": "site/public/charts/cuda-probe.svg"
         },
         {
+          "hash": "84caaf65d8ce8767f02d2bd1f82c1b86529ebc3825d19c59be0a8b4eb50ccc24",
+          "path": "site/public/charts/desk-vram.svg"
+        },
+        {
           "hash": "9e728527daf81b6590071441b0c136579bf941c0dea2ae6eb6411b34ead6c326",
           "path": "site/public/charts/e4b-igpu-latency.svg"
         },
@@ -8020,11 +8553,11 @@
           "path": "site/public/charts/vocal-timing.svg"
         },
         {
-          "hash": "7c0493f268a2eef0ac8c3d3209e45dd6836c644dc78164b0e24b66114ff5f8e0",
+          "hash": "d577f76a70e30204ba567b4f6d35efeee16d0cf0fdfb4f13f047e566d03d9931",
           "path": "site/public/favicon.svg"
         },
         {
-          "hash": "c5b3357043f570eb618ec6a54a16cd8f57842c60303328b3793466f9a426e1ff",
+          "hash": "ecf4cb2bd6a1ef2097ad13be641c8d5bab26a81769c80c9286874470509a184f",
           "path": "site/src/assets/logo.png"
         },
         {
@@ -8113,7 +8646,7 @@
           "path": "site/src/content/docs/handbook/architecture.md"
         },
         {
-          "hash": "a9a7fe4fa34f781e936d50bf22934d417091b3250a61df051e007840b16f8842",
+          "hash": "1d7ff9910e9d8c9157cdfdfdd8865ee977011b9df7dca458f00e5b075c87548a",
           "path": "site/src/content/docs/handbook/data-layout.md"
         },
         {
@@ -8217,11 +8750,35 @@
           "path": "site/src/content/docs/newsletter/issue-14.md"
         },
         {
+          "hash": "0b6dfc852145b89395ce9cb2dd22ab1298f24383b058040e9f75de092a29d91d",
+          "path": "site/src/content/docs/newsletter/issue-16.md"
+        },
+        {
+          "hash": "454eb0b5a0f0b3ff42c9e06123462e30cda3a5985647cda831754a3b53899a12",
+          "path": "site/src/content/docs/newsletter/issue-17.md"
+        },
+        {
+          "hash": "0dca4c763add4f1c0cec5bf4208667949ce34f2ee7807e03a3acb06b3e747ad8",
+          "path": "site/src/content/docs/newsletter/issue-18.md"
+        },
+        {
+          "hash": "ce1d53feb3f1073af1816037809e19433348fad4d56f6205f9a2778dfc82c98f",
+          "path": "site/src/content/docs/newsletter/issue-19.md"
+        },
+        {
+          "hash": "e544b380f4e44fb2fc7a39e2664ab28d813658457720c011de472a5d29854e10",
+          "path": "site/src/content/docs/newsletter/issue-20.md"
+        },
+        {
+          "hash": "29c8e812beb94342e1e07f733cb7782d720d2a7e0fe96315c6f9cb3b7543cab7",
+          "path": "site/src/content/docs/newsletter/issue-21.md"
+        },
+        {
           "hash": "15e52b4b677090a1b5123840efa4fa14447c28189b60b2d851389352c81db4cc",
           "path": "site/src/content/docs/watch/2026-10-13.md"
         },
         {
-          "hash": "027fd1be4e41d78c087d36c683985cb3417ad113813dc6bd8aa74cb9d461dbfe",
+          "hash": "7d5cd45674609543a1b57343373f75806535be6d51eed938376cb1bfc7ee662b",
           "importOrder": [
             "site/src/styles/global.css",
             "site/src/site-config.ts"
@@ -8242,7 +8799,7 @@
           "path": "site/src/styles/global.css"
         },
         {
-          "hash": "24b45fedf53d3a6006460ec44018e4a99dc1dfe0da1ad5410c78772d65fabb2a",
+          "hash": "9ca8b9dc3c65c74c32f071b04292ebd31d13954e538cc39f4d36c609f9359500",
           "path": "site/src/styles/starlight-custom.css"
         },
         {
@@ -8640,6 +9197,32 @@
         },
         {
           "exports": [
+            "make_receipts",
+            "make_stores",
+            "rmtree_force"
+          ],
+          "hash": "76d041c6d52642edda01dfb7112d78edaf70643ee55f7a75553f955cfba12b81",
+          "importOrder": [
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/layout.py",
+            "mcptoolshop_rnd/rawdata.py",
+            "tests/test_cli.py",
+            "tests/test_rnd.py",
+            "mcptoolshop_rnd/cli.py"
+          ],
+          "importsFiles": [
+            "mcptoolshop_rnd/__init__.py",
+            "mcptoolshop_rnd/cli.py",
+            "mcptoolshop_rnd/layout.py",
+            "mcptoolshop_rnd/rawdata.py",
+            "tests/test_cli.py",
+            "tests/test_rnd.py"
+          ],
+          "path": "tests/test_rawdata.py",
+          "testFramework": "unittest"
+        },
+        {
+          "exports": [
             "write"
           ],
           "hash": "c4cefb71edfdfd5492ef43aa00bcde16dbac829b2d380357df9b26be58b00ca8",
@@ -8850,7 +9433,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 25
+          "files": 26
         },
         {
           "boundary": "root",
@@ -8860,7 +9443,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 25
+          "files": 26
         },
         {
           "boundary": "experiments",
@@ -8964,7 +9547,7 @@
         },
         {
           "coverage": true,
-          "files": 25,
+          "files": 26,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -9248,7 +9831,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 25
+          "files": 26
         },
         {
           "boundary": "root",
@@ -9327,7 +9910,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 15
+          "files": 16
         }
       ],
       "readers": [
@@ -9420,8 +10003,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "96f1277c83728b5b78b849304c0a16e043161d40",
-    "tracked": 999
+    "commit": "631031188dc62ffb6e0ec8197203ad89dde5e3e2",
+    "tracked": 1063
   },
   "landings": [
     {
@@ -9554,6 +10137,11 @@
           "confidence": "text"
         },
         {
+          "by": "experiments/cuda-python-5090-rung/experiment.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/stage1-regeneration/experiment.json",
           "call": "literal",
           "confidence": "text"
@@ -9588,6 +10176,12 @@
           "fromTests": true
         },
         {
+          "by": "tests/test_rawdata.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        },
+        {
           "by": "tests/test_runs.py",
           "call": "literal",
           "confidence": "ast",
@@ -9606,12 +10200,80 @@
     {
       "readers": [
         {
+          "by": "tests/test_rawdata.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "SECURITY.md",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "docs/standards.md",
           "call": "--",
           "confidence": "text"
         }
       ],
       "target": "catalogs",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "tests/test_rawdata.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "docs/raw-data-rules/receipts.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "docs/scale-plan/PLAN.md",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "docs/scale-plan/history/argon-brief-round3b.md",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "docs/scale-plan/history/plan-v3-to-v3.1.diff",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "docs/scale-plan/history/rnd-scale-plan-v3.1-code.txt",
       "writers": []
     },
     {
@@ -10062,6 +10724,59 @@
           "confidence": "ast"
         }
       ]
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/dataset-desk/calibration/data",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/dataset-desk/calibration/data/registry-25d9cdd5.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "experiments/dataset-desk/calibration/data/rung2b-runs.json",
+      "writers": []
     },
     {
       "readers": [
@@ -10744,6 +11459,17 @@
         }
       ],
       "target": "experiments/ollama-cuda-backend/sandbox_test.FROZEN.sha256",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/stage1-regeneration/critic-control/known-answer-v1.jsonl",
       "writers": []
     },
     {
@@ -11943,6 +12669,17 @@
     {
       "readers": [
         {
+          "by": "docs/layout.json",
+          "call": "literal",
+          "confidence": "text"
+        }
+      ],
+      "target": "experiments/verifier-gold/diffs/source-publisher-hard.jsonl",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "experiments/verifier-gold/calibration/quote_match_posthoc.py",
           "call": "literal",
           "confidence": "ast"
@@ -12708,7 +13445,7 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 58,
+  "testFiles": 59,
   "testsNotRun": [
     "experiments/cuda-graphs/test_graphed_heads.py",
     "experiments/data-designer/tests/test_lockdown.py",

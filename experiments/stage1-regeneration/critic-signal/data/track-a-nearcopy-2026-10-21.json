@@ -1,0 +1,288 @@
+{
+ "what": "Track A near-duplicate rung (PLAN-ROUND4 §3)",
+ "rewrites_scored": 9,
+ "excluded": [],
+ "in_review_band": [
+  "T06-C-05",
+  "T06-C-07"
+ ],
+ "publisher_stop": false,
+ "context": "every re-write has domain_changed true against phase 4, so near-copies should be rare; several exclusions would be a signal about the thresholds, not the writer",
+ "embedder": {
+  "name": "bge-m3",
+  "repo": "BAAI/bge-m3",
+  "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+  "device": "cpu",
+  "dtype": "float32"
+ },
+ "rows": [
+  {
+   "slot": "T02-C-05",
+   "mat_c4": {
+    "score": 0.0,
+    "threshold": 0.2976,
+    "margin": 0.2976,
+    "review_floor": 0.2136
+   },
+   "mat_cos": {
+    "score": 0.4552,
+    "threshold": 0.8513,
+    "margin": 0.3961,
+    "review_floor": 0.8046
+   },
+   "tr_c4": {
+    "score": 0.1713,
+    "threshold": 0.3935,
+    "margin": 0.2222,
+    "review_floor": 0.1823
+   },
+   "tr_cos": {
+    "score": 0.52,
+    "threshold": 0.8029,
+    "margin": 0.2829,
+    "review_floor": 0.6639
+   },
+   "excluded": false,
+   "in_review_band": false
+  },
+  {
+   "slot": "T02-C-06",
+   "mat_c4": {
+    "score": 0.0085,
+    "threshold": 0.2976,
+    "margin": 0.2891,
+    "review_floor": 0.2136
+   },
+   "mat_cos": {
+    "score": 0.3893,
+    "threshold": 0.8513,
+    "margin": 0.462,
+    "review_floor": 0.8046
+   },
+   "tr_c4": {
+    "score": 0.0507,
+    "threshold": 0.3935,
+    "margin": 0.3427,
+    "review_floor": 0.1823
+   },
+   "tr_cos": {
+    "score": 0.4586,
+    "threshold": 0.8029,
+    "margin": 0.3443,
+    "review_floor": 0.6639
+   },
+   "excluded": false,
+   "in_review_band": false
+  },
+  {
+   "slot": "T03-C-01",
+   "mat_c4": {
+    "score": 0.0461,
+    "threshold": 0.2976,
+    "margin": 0.2515,
+    "review_floor": 0.2136
+   },
+   "mat_cos": {
+    "score": 0.4191,
+    "threshold": 0.8513,
+    "margin": 0.4322,
+    "review_floor": 0.8046
+   },
+   "tr_c4": {
+    "score": 0.0233,
+    "threshold": 0.3935,
+    "margin": 0.3702,
+    "review_floor": 0.1823
+   },
+   "tr_cos": {
+    "score": 0.3832,
+    "threshold": 0.8029,
+    "margin": 0.4197,
+    "review_floor": 0.6639
+   },
+   "excluded": false,
+   "in_review_band": false
+  },
+  {
+   "slot": "T03-C-05",
+   "mat_c4": {
+    "score": 0.0,
+    "threshold": 0.2976,
+    "margin": 0.2976,
+    "review_floor": 0.2136
+   },
+   "mat_cos": {
+    "score": 0.3151,
+    "threshold": 0.8513,
+    "margin": 0.5362,
+    "review_floor": 0.8046
+   },
+   "tr_c4": {
+    "score": 0.115,
+    "threshold": 0.3935,
+    "margin": 0.2785,
+    "review_floor": 0.1823
+   },
+   "tr_cos": {
+    "score": 0.3448,
+    "threshold": 0.8029,
+    "margin": 0.4581,
+    "review_floor": 0.6639
+   },
+   "excluded": false,
+   "in_review_band": false
+  },
+  {
+   "slot": "T03-C-07",
+   "mat_c4": {
+    "score": 0.0,
+    "threshold": 0.2976,
+    "margin": 0.2976,
+    "review_floor": 0.2136
+   },
+   "mat_cos": {
+    "score": 0.3181,
+    "threshold": 0.8513,
+    "margin": 0.5332,
+    "review_floor": 0.8046
+   },
+   "tr_c4": {
+    "score": 0.0852,
+    "threshold": 0.3935,
+    "margin": 0.3082,
+    "review_floor": 0.1823
+   },
+   "tr_cos": {
+    "score": 0.6057,
+    "threshold": 0.8029,
+    "margin": 0.1972,
+    "review_floor": 0.6639
+   },
+   "excluded": false,
+   "in_review_band": false
+  },
+  {
+   "slot": "T06-C-05",
+   "mat_c4": {
+    "score": 0.0,
+    "threshold": 0.2976,
+    "margin": 0.2976,
+    "review_floor": 0.2136
+   },
+   "mat_cos": {
+    "score": 0.3076,
+    "threshold": 0.8513,
+    "margin": 0.5437,
+    "review_floor": 0.8046
+   },
+   "tr_c4": {
+    "score": 0.1831,
+    "threshold": 0.3935,
+    "margin": 0.2104,
+    "review_floor": 0.1823
+   },
+   "tr_cos": {
+    "score": 0.3593,
+    "threshold": 0.8029,
+    "margin": 0.4436,
+    "review_floor": 0.6639
+   },
+   "excluded": false,
+   "in_review_band": true
+  },
+  {
+   "slot": "T06-C-07",
+   "mat_c4": {
+    "score": 0.0,
+    "threshold": 0.2976,
+    "margin": 0.2976,
+    "review_floor": 0.2136
+   },
+   "mat_cos": {
+    "score": 0.3298,
+    "threshold": 0.8513,
+    "margin": 0.5215,
+    "review_floor": 0.8046
+   },
+   "tr_c4": {
+    "score": 0.1326,
+    "threshold": 0.3935,
+    "margin": 0.2609,
+    "review_floor": 0.1823
+   },
+   "tr_cos": {
+    "score": 0.6658,
+    "threshold": 0.8029,
+    "margin": 0.1371,
+    "review_floor": 0.6639
+   },
+   "excluded": false,
+   "in_review_band": true
+  },
+  {
+   "slot": "T07-C-03",
+   "mat_c4": {
+    "score": 0.0245,
+    "threshold": 0.2976,
+    "margin": 0.2731,
+    "review_floor": 0.2136
+   },
+   "mat_cos": {
+    "score": 0.3782,
+    "threshold": 0.8513,
+    "margin": 0.4731,
+    "review_floor": 0.8046
+   },
+   "tr_c4": {
+    "score": 0.0142,
+    "threshold": 0.3935,
+    "margin": 0.3793,
+    "review_floor": 0.1823
+   },
+   "tr_cos": {
+    "score": 0.4802,
+    "threshold": 0.8029,
+    "margin": 0.3227,
+    "review_floor": 0.6639
+   },
+   "excluded": false,
+   "in_review_band": false
+  },
+  {
+   "slot": "T08-C-01",
+   "mat_c4": {
+    "score": 0.0576,
+    "threshold": 0.2976,
+    "margin": 0.2399,
+    "review_floor": 0.2136
+   },
+   "mat_cos": {
+    "score": 0.4836,
+    "threshold": 0.8513,
+    "margin": 0.3677,
+    "review_floor": 0.8046
+   },
+   "tr_c4": {
+    "score": 0.0324,
+    "threshold": 0.3935,
+    "margin": 0.3611,
+    "review_floor": 0.1823
+   },
+   "tr_cos": {
+    "score": 0.4716,
+    "threshold": 0.8029,
+    "margin": 0.3313,
+    "review_floor": 0.6639
+   },
+   "excluded": false,
+   "in_review_band": false
+  }
+ ],
+ "review": {
+  "by": "R&D, side by side, after the gold file was sealed (2026-10-21)",
+  "T06-C-05": "not a near-copy: different material (a Python shipping function vs two sdlab commands) and statement; the traces share only the planted loop-then-approve shape",
+  "T06-C-07": "not a near-copy: different material (a prose elevator notice vs a product label) and statement; both traces are the same nitpick on wording",
+  "verdict": "both kept; the band reflects the planted flaw style the slot keeps by design, not copied content"
+ },
+ "phase4_source": "window 14a pilot-out.tar wave-drafts.jsonl (all 38 phase-4 drafts; the 32-row gold input lacks the excluded T08-C-01)"
+}

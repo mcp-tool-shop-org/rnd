@@ -100,8 +100,58 @@ definition of "none" reduces that without losing the catch.
   4 wrote them all.
   - **The first choice** is odd slots from lessons phase 4 didn't use, checked for eligibility as above. Argon
     notes that T04 and T14 key many slots cannot_tell, which perturb.py can't use for f; rung 0 counts what's there.
-  - **The second choice** is re-writing phase 4's odd slots. That's allowed only if the Publisher shows, before the
-    window, that a re-write gives new material and not a near-copy of phase 4's.
+  - **The second choice** is re-writing phase 4's slots. A re-write counts only if it isn't a near-copy of phase 4's
+    row, as checked by **the near-duplicate rung** below. That replaces v2's "the Publisher shows", which had no tool
+    behind it (corrected 2026-10-21).
+  - **Where it landed (2026-10-21, role-set #100 at 394b8e6, Argon's seed ruling):**
+    - Track A is planned at **seed 1**;
+    - the census gives 24 odd (5 from unused lessons, 10 unused phase-4 slots, 9 re-writes) and 24 even (5, 18, 1);
+    - **10 re-writes in all,** each marked `needs_novelty_check` with fresh domains against phase 4's seed-0 draws.
+  - **The near-duplicate rung** runs after the write window and the gold check, before perturb.py and any critic call.
+    It's free, on CPU (float32, as calibrated), with no GPU grant.
+    - **What it does:** for each of the 10 re-written rows, it embeds the material and the checker trace, and compares
+      each with the same slot's phase-4 row.
+    - **The thresholds, calibrated on prose rows** (the Director's ruling; Argon's consult design, 2026-10-21).
+      Rung 2b's 0.98 was measured on run files, not prose, and isn't used.
+      - **Pool:** the 32 phase-4 kind C drafts.
+        - Positives: 64, deterministic: 32 surface near-copies (P-close) and 32 domain-noun swaps of the same layout
+          and trace skeleton (P-template).
+        - Negatives: all 496 off-diagonal pairs. The hard strata are 109 pairs for material (same lesson or content
+          kind) and 146 for trace (same lesson or planted flaw).
+      - **Measures, per field:**
+        - bge-m3 cosine, through dataset-desk's text embedder on CPU (float32, revision 5617a9f6);
+        - character 4-gram Jaccard;
+        - a trace is scored after stripping verbatim quotes of its material or statement.
+      - **Script and receipt:** `scripts/nearcopy_calibration.py` and `data/nearcopy-calibration-2026-10-21.json` (ids
+        and statistics only; the rows stay private).
+
+      | Field and measure | Hardest negative | Lowest P-close | Threshold (auto) | Recall close / template | FP hard / all |
+      |---|---|---|---|---|---|
+      | Material, char 4-gram | 0.293 | 0.303 | **0.298** | 32/32 / 32/32 | 0/109 / 0/496 |
+      | Material, bge-m3 | 0.846 | 0.796 | **0.851** | 29/32 / 26/32 | 0/109 / 0/496 |
+      | Trace, char 4-gram | 0.293 | 0.494 | **0.393** | 32/32 / 32/32 | 0/146 / 0/496 |
+      | Trace, bge-m3 | 0.751 | 0.855 | **0.803** | 32/32 / 31/32 | 0/146 / 0/496 |
+
+    - **The rule:** a re-write is excluded when **any** of the four scores is at or above its threshold, then topped
+      up under the stopping rule.
+      - On the pool, that rule catches 64 of 64 positives, with 0 of 496 false positives (0 of 199 hard).
+      - **The 95% bounds:** recall at least 95.4%; FP at most 0.6% overall and 1.5% on the hard pairs.
+      - **These bounds are in-sample.** The thresholds were set on this same pool, so they describe the pool, not new
+        rows.
+    - **A review band:** a score from the hard negatives' 95th percentile up to its threshold is read side by side by
+      R&D, after the gold file is sealed.
+    - **Its limits, stated:**
+      - the material's char 4-gram margin is thin (0.293 against 0.303);
+      - the positives are made by a script, so a real re-write that rewords more freely may score lower;
+      - bge-m3 alone misses 3 P-close and 6 P-template materials, which is why the lexical measure is in the rule.
+    - **What the rung's result records** (the Publisher's conditions, 2026-10-21):
+      - **all four scores for each of the 10 re-writes,** with each one's margin to its threshold, not just pass or
+        exclude;
+      - **the context:** all 10 have `domain_changed` true, so near-copies should be rare. If the rung excludes
+        several, read it as a signal about the thresholds, not about the writer, and say so in the result;
+      - **a stop:** if more than 2 of the 10 land in the review band, stop and send the scores to the Publisher before
+        any top-up.
+    - **The scores and exclusions are committed** with the gold file.
   - The even slots can come from the decided even slots those 9 lessons hold that phase 4 never used (Argon counts
     about 16; rung 0 confirms the number).
 - **Gemma 4 31B writes, write-only, with no critic,** as in §9.
@@ -241,3 +291,70 @@ Argon answered all six on 2026-10-19. Each answer is folded into the section nam
 
 - **Models:** Muse-Glimmer-30B (critic) and Gemma 4 31B (writer), as in `DESIGN.md` §0. No new model or source.
 - **§10's critic:** Nemotron-3.5-Super-VL-120B, OpenMDW-1.1, already in `licences/registry.json`.
+
+## Track A's free rungs: results (2026-10-21)
+
+- **Rung 0 (the slot list):** the 48 slots are frozen on role-set `10c1ebf` (`data/track-a-slots-10c1ebf.json`), and
+  the census is unchanged at `e7abbcd` (#102). With the committed excerpt pool (sha `51afb3cd…`), all 14 real-source
+  slots assemble from distinct excerpts.
+- **Rung 1 (Pc on phase 4's stored replies):** it reproduces the table above exactly once PHASE-4's hand-check drops
+  are applied: f 19/22, b 5/5, e 20/20, g 19/19, 20 : 0, and d 4/32 refused, all planted-none. It ran on role-set
+  `e3f9fd1d` with aspire-si-gates 1.7.5, the pair phase 4 was scored with. Later role-set needs gates 1.7.6, and the
+  rescore refuses a gates mismatch. #101 didn't touch the Pc code.
+- **Rung 2 (the flaw prompt):** under `old`, the messages are byte-identical to role-set `89b5f2e`'s code; under
+  `new`, they carry this plan's wording, changing only the guess and none lines.
+- **Rung 3 (CPU stubs on Colab, role-set `e7abbcd`, 0.06 units in all):**
+  - **15a, the write stub:** the 48 ids, seed 1, the pool pinned. 47 of 48 reached awaiting_critique, and all 14
+    real-source drafts carry pool sources. The one drop is a stub MockWriter defect, queued for role-set.
+  - **15b:** flaw prompt `new`, cut at the deadline in seed 1.
+  - **15c:** the resume replayed seed 0 with 0 calls and byte-identical scores, then finished seed 1 (109 reused, 51
+    called).
+  - **15d:** a resume under `old` refused before any call (the journals mixed settings).
+
+## Track A's rows: results (2026-10-21)
+
+- **The write window (15e, A100):** 47 of 48 drafts. T12-C-02 was refused by the gate: Gemma's quote dropped the
+  excerpt's markdown backticks.
+- **The gold check:** R&D keyed all 47 blind before opening the writer's keys.
+  - Verdicts agree on 47 of 47, and planted flaws on 46 of 47.
+  - 43 kept: odd 21, even 22. Both strata are above 20, so there's no top-up.
+  - 4 excluded: 2 UNCLEAR (a qualifier the material never names), 1 flaw label, and 1 draft with no checker_verdict
+    (a new defect class).
+  - The flaw-stem leak pre-screen flags 0. Details: `data/track-a-gold-2026-10-21.json`.
+- **The near-duplicate rung:** 0 of the 9 kept re-writes excluded. 2 fell in the review band and were read side by
+  side; both were kept. 2 is under the Publisher's stop (more than 2). Details: `data/track-a-nearcopy-2026-10-21.json`.
+- **perturb.py at seed 0:** 102 GPU items (d 43, b 7, e 31, f 21).
+- **Rung 4 (a non-mock probe):** passes.
+- **Frozen items:** sha256 `b00f45d09d226f5cc0ed0fae6393d298ef6e256d835f00729d802952d7f1d449`, recorded before any critic call.
+- **One code version for Track A** (agreed with the Publisher, 2026-10-21): both Muse runs (15f old prompt, 15g new
+  prompt) and the offline scoring of P0, Pc-old and Pc-new run at role-set `e7abbcd` with aspire-si-gates 1.7.6. A
+  later role-set change, such as the verbatim-quote repair for T10 that also touches `compare_verdict`, doesn't reach
+  Track A, so the two runs differ only in the flaw prompt.
+
+## Track A's analysis: held (2026-10-22)
+
+- **The premise failed.** The agreement check between the two Muse runs fails. Their verdict prompts are
+  byte-identical (rung 2), and the prompt token counts match on all 102 items. But:
+  - the raw verdict replies differ on 22 of 102;
+  - `critic_verdict` differs on 7;
+  - `critic_deciding` differs on 19;
+  - P0's outcome differs on 8 of 219 scored items.
+
+  Muse's card samples at temperature 1.0 (top_k 64, top_p 0.95), and seed 0 doesn't make GPU sampling reproducible
+  across sessions.
+- **The Publisher ruled** that the question goes to Argon before anything further is computed or reported.
+- **A disclosure:** R&D's analysis script computed the full decision in the same pass, before the ruling arrived, so
+  R&D has seen those figures. They're held, unreported, and have no bearing on the choice of analysis. That choice
+  comes from Argon, who hasn't seen them.
+- **Argon's ruling on the analysis** (consult of 2026-10-22, given without sight of any outcome figure). It's fixed
+  here before anything further is computed.
+  - **Primary:** (a), exactly as pre-registered above.
+  - **Beside it, (b):**
+    - Pc-new′, scored from run 1's verdict check and run 2's flaw check, paired against P0₁ and against Pc-old;
+    - within-run Pc-new against P0₂.
+  - **Thresholds unchanged:** α 0.05 with Holm, and at most 10% false refusals on each d-control stratum.
+  - **The concordance rule:** an arm is adopted automatically, under steps 3–4, only if (a) and (b) agree on
+    qualification and winner. If they diverge, the result counts as noise-bounded, and both tables go to the Director
+    under step 5.
+  - **The noise floor is reported beside the result:** run 1 against run 2 on identical prompts, by call (raw, deciding
+    and verdict), by type, on the primary pool, and by d-control stratum.

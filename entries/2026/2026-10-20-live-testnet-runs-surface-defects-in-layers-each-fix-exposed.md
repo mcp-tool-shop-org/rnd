@@ -62,6 +62,8 @@ faucet's grant, ledger reserves.
 - **The release:** a fourth run, on the code Argon passed in its second review, also passed (9 of 9 tesSUCCESS, pool
   deleted, exit 0). xrpl-lab 2.6.0 was released from #19's merge commit (036c187) on 2026-10-20, to PyPI, npm and GitHub with binaries.
 
+- **Promoted:** readouts-internal `xrpl-knowledge` wave 11, 2026-10-22 (readouts-internal #68): the four XRPL gotchas, on the ammcreate, ammwithdraw, xrpl-py and faucet rows. The run narrative and the studio lessons stay here.
+
 ## Claims
 
 - [verified] Module #30's first live run on XRPL Testnet (xrpl-lab 7acc67c) created no AMM: the wallet was funded three times (300 XRP) while each funding was reported as failed, the issuer's AccountSet never validated, and AMMCreate, AMMDeposit and AMMWithdraw hit the 60 s client timeout with no hash recorded (terNO_RIPPLE / terNO_AMM by simulate afterwards); the report said "2 successful, 0 failed". (via: xrpl-lab main docs/receipts/2.6.0-amm-live-fire/run-1-f9-20261020T2056Z and its README, read by R&D, 2026-10-20)

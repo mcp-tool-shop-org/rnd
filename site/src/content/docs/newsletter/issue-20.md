@@ -132,8 +132,8 @@ So they are grouped by module and by whether they're superseded.
 ## Where it landed
 
 All five releases are out on PyPI and npm, each after outside review and a live check on the reviewed code. The
-course's tests went from 3,447 to 3,556, with coverage at 97%. Two more fixes found along the way are on their way
-out. One adds `--live` to `verify-artifact`, the command the old verify commands now point learners to. The other
+course's tests went from 3,447 to 3,556, with coverage at 97%. Two more fixes found along the way followed. 2.7.6
+adds `--live` to `verify-artifact`, the command the old verify commands now point learners to. 2.7.7, on its way out,
 stops the setup check from reporting a failure that a `--force` retry has already fixed.
 
 ## Method and limits

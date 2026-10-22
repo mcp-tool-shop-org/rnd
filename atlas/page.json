@@ -73,61 +73,52 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 42,
-      "changed": 19,
+      "added": 64,
+      "changed": 33,
       "moved": 0,
-      "parts": 7,
+      "parts": 8,
       "removed": 0
     },
     "items": [
       {
         "kind": "landing",
-        "sentence": "README.md is now also read by experiments/stage1-regeneration/experiment.json, tests/test_datapack.py, tests/test_layout.py and tests/test_runs.py.",
+        "sentence": "README.md is now also read by experiments/cuda-python-5090-rung/experiment.json and tests/test_rawdata.py.",
         "subjects": [
           "README.md",
-          "experiments/stage1-regeneration/experiment.json",
-          "tests/test_datapack.py",
-          "tests/test_layout.py",
-          "tests/test_runs.py"
+          "experiments/cuda-python-5090-rung/experiment.json",
+          "tests/test_rawdata.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "docs/tag-page.md is now read by tests/test_layout.py.",
+        "sentence": "SECURITY.md is now read by tests/test_rawdata.py.",
         "subjects": [
-          "docs/tag-page.md",
-          "tests/test_layout.py"
+          "SECURITY.md",
+          "tests/test_rawdata.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "experiments/natural-errors/data/answers.json is now also read by docs/layout.json.",
+        "sentence": "docs/raw-data-rules/receipts.json is now read by tests/test_rawdata.py.",
         "subjects": [
-          "experiments/natural-errors/data/answers.json",
-          "docs/layout.json"
+          "docs/raw-data-rules/receipts.json",
+          "tests/test_rawdata.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "And 86 more new writers and readers of places.",
+        "sentence": "And 9 more new writers and readers of places.",
         "subjects": []
       },
       {
-        "kind": "unassigned",
-        "sentence": "scripts/hooks/pre-push is new and belongs to no part, so atlas check fails on it against the previous map.",
-        "subjects": [
-          "scripts/hooks/pre-push"
-        ]
-      },
-      {
         "kind": "counts",
-        "sentence": "42 files added and 19 changed content, across 7 parts.",
+        "sentence": "64 files added and 33 changed content, across 8 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "d3db5396d47a4e5202a2bd5c8a91e3b75e0a1ce4",
-      "generatedAt": "2026-10-18T13:46:52.237Z"
+      "commit": "96f1277c83728b5b78b849304c0a16e043161d40",
+      "generatedAt": "2026-10-19T21:53:30.410Z"
     },
     "unchanged": false
   },
@@ -164,13 +155,14 @@
     }
   ],
   "changesTogetherNote": [
+    "1 file changed together with its own test, as expected.",
     "Confidence is low: fewer than 25 source files reach 10 revisions in the window.",
-    "Window: 180 days; a pair counts from 3 shared commits, since 4 source files reach 10 revisions; the floor rises to 10 when 25 do."
+    "Window: 180 days; a pair counts from 3 shared commits, since 5 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
-  "changesTogetherWithTests": 0,
-  "commit": "96f1277c83728b5b78b849304c0a16e043161d40",
+  "changesTogetherWithTests": 1,
+  "commit": "631031188dc62ffb6e0ec8197203ad89dde5e3e2",
   "defaultBranch": "main",
-  "derived": "14 parts, mostly Python (131 files), shell (28), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "14 parts, mostly Python (141 files), shell (29), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -192,7 +184,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 25
+          "files": 26
         },
         {
           "boundary": "root",
@@ -202,7 +194,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 25
+          "files": 26
         },
         {
           "boundary": "experiments",
@@ -246,7 +238,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 25
+          "files": 26
         },
         {
           "boundary": "root",
@@ -317,7 +309,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 15
+          "files": 16
         }
       ],
       "runs": [
@@ -492,13 +484,13 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-19T21:53:30.410Z",
+  "generatedAt": "2026-10-22T18:43:33.031Z",
   "limits": [
-    "9 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/verifier-gold/build_grounded.py` imports a path built at run time; and 6 more.",
-    "20 writes and 36 reads use paths built at run time and are not named here.",
+    "11 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 8 more.",
+    "25 writes and 45 reads use paths built at run time and are not named here.",
     "7 writes go to places this repository does not track, so they are not listed as generated.",
-    "32 writes and 100 reads go to a path their caller passes, not to this repository.",
-    "9 reads go to the directory the command is run in (README.md, entries, experiments and 2 more places), not to this repository.",
+    "40 writes and 115 reads go to a path their caller passes, not to this repository.",
+    "12 reads go to the directory the command is run in (README.md, SECURITY.md, entries and 3 more places), not to this repository.",
     "1 read goes to the directory the command is run in or a path its caller passes, not to this repository.",
     "1 read goes to the home directory (.claude/), not to this repository.",
     "4 files belong to no part: scripts/colab/collect_windows.py, scripts/colab/probe.py, scripts/colab/rates.sh and 1 more.",
@@ -556,13 +548,13 @@
   "startReason": "This path follows rnd (a command people run) from its entry, since CI runs only tests and checks.",
   "summary": "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only).",
   "summaryFrom": "person",
-  "testFiles": 58,
+  "testFiles": 59,
   "testedBy": {
     "experiments": 6,
-    "mcptoolshop_rnd": 19,
+    "mcptoolshop_rnd": 20,
     "rnd": 1
   },
-  "unnamedWrites": 20,
+  "unnamedWrites": 25,
   "unread": [
     {
       "place": "experiments/charts/",

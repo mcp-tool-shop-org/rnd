@@ -115,7 +115,7 @@
       "confidence": "full",
       "highWater": null,
       "name": "experiments",
-      "qualifyingSourceCommits": 64,
+      "qualifyingSourceCommits": 74,
       "rebaseline": null
     },
     {
@@ -155,19 +155,20 @@
         "coChangesOnly": [],
         "collapsed": false,
         "confidence": "low",
-        "importsAndCoChanges": [],
+        "importsAndCoChanges": [
+          "tests"
+        ],
         "importsOnly": [
           "experiments",
-          "rnd",
-          "tests"
+          "rnd"
         ]
       },
-      "cohesion": null,
+      "cohesion": 0,
       "cohesionDropped": false,
       "confidence": "full",
       "highWater": null,
       "name": "mcptoolshop_rnd",
-      "qualifyingSourceCommits": 469,
+      "qualifyingSourceCommits": 500,
       "rebaseline": null
     },
     {
@@ -222,7 +223,9 @@
     },
     {
       "breakage": {
-        "coChangesOnly": [],
+        "coChangesOnly": [
+          "mcptoolshop_rnd"
+        ],
         "collapsed": false,
         "confidence": "low",
         "importsAndCoChanges": [],
@@ -233,7 +236,7 @@
       "confidence": "full",
       "highWater": null,
       "name": "tests",
-      "qualifyingSourceCommits": 30,
+      "qualifyingSourceCommits": 36,
       "rebaseline": null
     }
   ],
@@ -266,8 +269,8 @@
         "path": ".github/workflows/pages.yml"
       },
       {
-        "commits": 3,
-        "lines": 86,
+        "commits": 4,
+        "lines": 88,
         "path": ".github/workflows/release.yml"
       },
       {
@@ -276,8 +279,8 @@
         "path": ".gitignore"
       },
       {
-        "commits": 539,
-        "lines": 3173,
+        "commits": 571,
+        "lines": 3349,
         "path": "CHANGELOG.md"
       },
       {
@@ -426,8 +429,8 @@
         "path": "agent_ab_harness}/shakedown-2/RC03-B2.jsonl"
       },
       {
-        "commits": 37,
-        "lines": 842,
+        "commits": 38,
+        "lines": 869,
         "path": "atlas/README.md"
       },
       {
@@ -436,18 +439,18 @@
         "path": "atlas/boundaries.yaml"
       },
       {
-        "commits": 37,
-        "lines": 2887,
+        "commits": 38,
+        "lines": 2963,
         "path": "atlas/page.json"
       },
       {
-        "commits": 37,
-        "lines": 10506,
+        "commits": 38,
+        "lines": 11068,
         "path": "atlas/statistics.json"
       },
       {
-        "commits": 37,
-        "lines": 17144,
+        "commits": 38,
+        "lines": 19168,
         "path": "atlas/structure.json"
       },
       {
@@ -511,9 +514,89 @@
         "path": "datapacks/natural-errors/spec.json"
       },
       {
-        "commits": 2,
-        "lines": 128,
+        "commits": 1,
+        "lines": 27,
+        "path": "docs/argon-ai-studio-system-instructions.md"
+      },
+      {
+        "commits": 3,
+        "lines": 137,
         "path": "docs/layout.json"
+      },
+      {
+        "commits": 2,
+        "lines": 168,
+        "path": "docs/raw-data-rules/receipts.json"
+      },
+      {
+        "commits": 1,
+        "lines": 83,
+        "path": "docs/raw-data-rules/xrpl-lab-runs.json"
+      },
+      {
+        "commits": 1,
+        "lines": 279,
+        "path": "docs/scale-plan/PLAN.md"
+      },
+      {
+        "commits": 1,
+        "lines": 224,
+        "path": "docs/scale-plan/history/PLAN-v1.md"
+      },
+      {
+        "commits": 1,
+        "lines": 258,
+        "path": "docs/scale-plan/history/PLAN-v2.md"
+      },
+      {
+        "commits": 1,
+        "lines": 275,
+        "path": "docs/scale-plan/history/PLAN-v3.md"
+      },
+      {
+        "commits": 1,
+        "lines": 33,
+        "path": "docs/scale-plan/history/argon-brief-round1.md"
+      },
+      {
+        "commits": 1,
+        "lines": 34,
+        "path": "docs/scale-plan/history/argon-brief-round2.md"
+      },
+      {
+        "commits": 1,
+        "lines": 26,
+        "path": "docs/scale-plan/history/argon-brief-round3.md"
+      },
+      {
+        "commits": 1,
+        "lines": 27,
+        "path": "docs/scale-plan/history/argon-brief-round3b.md"
+      },
+      {
+        "commits": 1,
+        "lines": 82,
+        "path": "docs/scale-plan/history/plan-v3-to-v3.1.diff"
+      },
+      {
+        "commits": 1,
+        "lines": 470,
+        "path": "docs/scale-plan/history/rnd-scale-plan-v1-code.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 261,
+        "path": "docs/scale-plan/history/rnd-scale-plan-v2-code.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 278,
+        "path": "docs/scale-plan/history/rnd-scale-plan-v3-code.txt"
+      },
+      {
+        "commits": 1,
+        "lines": 366,
+        "path": "docs/scale-plan/history/rnd-scale-plan-v3.1-code.txt"
       },
       {
         "commits": 1,
@@ -546,8 +629,8 @@
         "path": "entries/2026/2026-10-07-cublas.md"
       },
       {
-        "commits": 1,
-        "lines": 39,
+        "commits": 2,
+        "lines": 63,
         "path": "entries/2026/2026-10-07-cuda-13-4-developer-experience.md"
       },
       {
@@ -586,8 +669,8 @@
         "path": "entries/2026/2026-10-07-cuda-tile-programming.md"
       },
       {
-        "commits": 1,
-        "lines": 30,
+        "commits": 3,
+        "lines": 42,
         "path": "entries/2026/2026-10-07-cutile-on-sm120.md"
       },
       {
@@ -636,8 +719,8 @@
         "path": "entries/2026/2026-10-07-nvidia-rubin-architecture.md"
       },
       {
-        "commits": 10,
-        "lines": 292,
+        "commits": 11,
+        "lines": 308,
         "path": "entries/2026/2026-10-07-open-jev-style-decision-models.md"
       },
       {
@@ -661,8 +744,8 @@
         "path": "entries/2026/2026-10-07-ptx-isa-9-4.md"
       },
       {
-        "commits": 3,
-        "lines": 79,
+        "commits": 4,
+        "lines": 87,
         "path": "entries/2026/2026-10-07-qwen32b-judge-position-bias.md"
       },
       {
@@ -706,13 +789,13 @@
         "path": "entries/2026/2026-10-07-uv-extra-index-priority-cpu-torch.md"
       },
       {
-        "commits": 1,
-        "lines": 48,
+        "commits": 2,
+        "lines": 50,
         "path": "entries/2026/2026-10-08-aligner-misdates-cause-sung-dropouts.md"
       },
       {
-        "commits": 1,
-        "lines": 240,
+        "commits": 2,
+        "lines": 252,
         "path": "entries/2026/2026-10-08-dataset-recipes-for-critic-jury-roles-designing-roles-by-dat.md"
       },
       {
@@ -741,8 +824,8 @@
         "path": "entries/2026/2026-10-08-phrase-end-hold-removes-the-stutter.md"
       },
       {
-        "commits": 3,
-        "lines": 241,
+        "commits": 4,
+        "lines": 246,
         "path": "entries/2026/2026-10-08-three-follow-up-studies-for-critic-recipes-hard-pairs-two-pl.md"
       },
       {
@@ -751,8 +834,8 @@
         "path": "entries/2026/2026-10-08-translategemma-failure-modes-on-readme-tables.md"
       },
       {
-        "commits": 1,
-        "lines": 68,
+        "commits": 2,
+        "lines": 71,
         "path": "entries/2026/2026-10-08-voice-gate-pyannote-segmentation-on-sung-vocals.md"
       },
       {
@@ -806,18 +889,18 @@
         "path": "entries/2026/2026-10-13-atlas-testing-os-rnd-buildup.md"
       },
       {
-        "commits": 1,
-        "lines": 39,
+        "commits": 3,
+        "lines": 121,
         "path": "entries/2026/2026-10-13-claude-code-read-deny-rules-do-not-stop-a-grep-walk.md"
       },
       {
-        "commits": 1,
-        "lines": 41,
+        "commits": 2,
+        "lines": 56,
         "path": "entries/2026/2026-10-13-claude-code-starts-a-turn-before-mcp-servers-connect.md"
       },
       {
-        "commits": 3,
-        "lines": 131,
+        "commits": 4,
+        "lines": 137,
         "path": "entries/2026/2026-10-13-docker-sandboxes-on-the-rig-from-signup-to-a-pinned-pilot-wo.md"
       },
       {
@@ -831,8 +914,8 @@
         "path": "entries/2026/2026-10-13-multi-repository-atlas-research-grounding-for-the-build-up.md"
       },
       {
-        "commits": 1,
-        "lines": 51,
+        "commits": 2,
+        "lines": 54,
         "path": "entries/2026/2026-10-13-nemo-relay-first-trial-in-the-sandbox.md"
       },
       {
@@ -841,13 +924,13 @@
         "path": "entries/2026/2026-10-13-nemotron-lightning-needs-its-context-set-for-claude-code.md"
       },
       {
-        "commits": 4,
-        "lines": 75,
+        "commits": 5,
+        "lines": 80,
         "path": "entries/2026/2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ.md"
       },
       {
-        "commits": 2,
-        "lines": 57,
+        "commits": 3,
+        "lines": 62,
         "path": "entries/2026/2026-10-13-nvidia-pair-a-lan-inference-router-and-how-it-compares-with-.md"
       },
       {
@@ -856,8 +939,23 @@
         "path": "entries/2026/2026-10-13-the-probe-was-the-contention-a-process-walk-inside-the-measu.md"
       },
       {
-        "commits": 2,
-        "lines": 74,
+        "commits": 3,
+        "lines": 109,
+        "path": "entries/2026/2026-10-20-cuda-python-on-5090.md"
+      },
+      {
+        "commits": 3,
+        "lines": 90,
+        "path": "entries/2026/2026-10-20-live-testnet-runs-surface-defects-in-layers-each-fix-exposed.md"
+      },
+      {
+        "commits": 3,
+        "lines": 109,
+        "path": "entries/2026/2026-10-20-xrpl-agentic-payments-x402-the-ai-starter-kit-and-mpp.md"
+      },
+      {
+        "commits": 3,
+        "lines": 84,
         "path": "entries/2026/embeddinggemma-2.md"
       },
       {
@@ -1102,6 +1200,11 @@
       },
       {
         "commits": 1,
+        "lines": 61,
+        "path": "experiments/charts/desk-vram.svg"
+      },
+      {
+        "commits": 1,
         "lines": 58,
         "path": "experiments/charts/e4b-igpu-latency.svg"
       },
@@ -1131,13 +1234,13 @@
         "path": "experiments/charts/loop-repeats.svg"
       },
       {
-        "commits": 8,
-        "lines": 1495,
+        "commits": 9,
+        "lines": 1524,
         "path": "experiments/charts/make_charts.py"
       },
       {
-        "commits": 7,
-        "lines": 329,
+        "commits": 8,
+        "lines": 343,
         "path": "experiments/charts/manifest.json"
       },
       {
@@ -1876,6 +1979,51 @@
         "path": "experiments/cuda-graphs/triton_probe.py"
       },
       {
+        "commits": 6,
+        "lines": 193,
+        "path": "experiments/cuda-python-5090-rung/README.md"
+      },
+      {
+        "commits": 2,
+        "lines": 0,
+        "path": "experiments/cuda-python-5090-rung/data/.gitkeep"
+      },
+      {
+        "commits": 2,
+        "lines": 66,
+        "path": "experiments/cuda-python-5090-rung/data/env-freeze.txt"
+      },
+      {
+        "commits": 2,
+        "lines": 20,
+        "path": "experiments/cuda-python-5090-rung/experiment.json"
+      },
+      {
+        "commits": 1,
+        "lines": 13,
+        "path": "experiments/cuda-python-5090-rung/results/cupy-runtime-2026-10-20.txt"
+      },
+      {
+        "commits": 2,
+        "lines": 12,
+        "path": "experiments/cuda-python-5090-rung/results/run1-numpy-2.5.4.jsonl"
+      },
+      {
+        "commits": 2,
+        "lines": 12,
+        "path": "experiments/cuda-python-5090-rung/results/run2-numpy-2.4.6.jsonl"
+      },
+      {
+        "commits": 1,
+        "lines": 22,
+        "path": "experiments/cuda-python-5090-rung/scripts/cupy_runtime_check.py"
+      },
+      {
+        "commits": 2,
+        "lines": 262,
+        "path": "experiments/cuda-python-5090-rung/scripts/smoke_rung.py"
+      },
+      {
         "commits": 1,
         "lines": 38,
         "path": "experiments/data-designer/README.md"
@@ -1967,18 +2115,78 @@
       },
       {
         "commits": 1,
+        "lines": 32,
+        "path": "experiments/dataset-desk/calibration/README.md"
+      },
+      {
+        "commits": 1,
+        "lines": 23,
+        "path": "experiments/dataset-desk/calibration/data/mirror-dhash.json"
+      },
+      {
+        "commits": 1,
+        "lines": 11,
+        "path": "experiments/dataset-desk/calibration/data/registry-25d9cdd5.json"
+      },
+      {
+        "commits": 1,
+        "lines": 221,
+        "path": "experiments/dataset-desk/calibration/data/rung1-dhash.json"
+      },
+      {
+        "commits": 1,
+        "lines": 1284,
+        "path": "experiments/dataset-desk/calibration/data/rung2.json"
+      },
+      {
+        "commits": 1,
+        "lines": 58,
+        "path": "experiments/dataset-desk/calibration/data/rung2b-runs.json"
+      },
+      {
+        "commits": 1,
+        "lines": 2018,
+        "path": "experiments/dataset-desk/calibration/data/rung2b.json"
+      },
+      {
+        "commits": 1,
         "lines": 476,
         "path": "experiments/dataset-desk/design.md"
       },
       {
-        "commits": 8,
-        "lines": 401,
+        "commits": 14,
+        "lines": 578,
         "path": "experiments/distill-ladder/PLAN.md"
       },
       {
         "commits": 1,
         "lines": 77,
         "path": "experiments/distill-ladder/dedupe.py"
+      },
+      {
+        "commits": 1,
+        "lines": 105,
+        "path": "experiments/distill-ladder/fake_ollama.py"
+      },
+      {
+        "commits": 1,
+        "lines": 72,
+        "path": "experiments/distill-ladder/make_ladder_v2.py"
+      },
+      {
+        "commits": 3,
+        "lines": 177,
+        "path": "experiments/distill-ladder/make_targets.py"
+      },
+      {
+        "commits": 1,
+        "lines": 54,
+        "path": "experiments/distill-ladder/make_train.py"
+      },
+      {
+        "commits": 2,
+        "lines": 37,
+        "path": "experiments/distill-ladder/teacher_step.sh"
       },
       {
         "commits": 1,
@@ -3216,19 +3424,34 @@
         "path": "experiments/stage1-regeneration/critic-signal/PHASE-2-3.md"
       },
       {
-        "commits": 2,
-        "lines": 146,
+        "commits": 3,
+        "lines": 168,
         "path": "experiments/stage1-regeneration/critic-signal/PHASE-4.md"
       },
       {
-        "commits": 1,
-        "lines": 243,
+        "commits": 2,
+        "lines": 371,
         "path": "experiments/stage1-regeneration/critic-signal/PLAN-ROUND4.md"
       },
       {
         "commits": 2,
         "lines": 124,
         "path": "experiments/stage1-regeneration/critic-signal/SYNTHESIS.md"
+      },
+      {
+        "commits": 2,
+        "lines": 154,
+        "path": "experiments/stage1-regeneration/critic-signal/TRACK-B-DESIGN.md"
+      },
+      {
+        "commits": 1,
+        "lines": 13,
+        "path": "experiments/stage1-regeneration/critic-signal/TRACK-B-LABELS.md"
+      },
+      {
+        "commits": 1,
+        "lines": 45,
+        "path": "experiments/stage1-regeneration/critic-signal/TRACK-B-STAGE1.md"
       },
       {
         "commits": 2,
@@ -3301,9 +3524,49 @@
         "path": "experiments/stage1-regeneration/critic-signal/data/confirmation-slots.json"
       },
       {
+        "commits": 1,
+        "lines": 231,
+        "path": "experiments/stage1-regeneration/critic-signal/data/nearcopy-calibration-2026-10-21.json"
+      },
+      {
         "commits": 2,
         "lines": 1028,
         "path": "experiments/stage1-regeneration/critic-signal/data/outcomes.csv"
+      },
+      {
+        "commits": 1,
+        "lines": 69,
+        "path": "experiments/stage1-regeneration/critic-signal/data/track-a-gold-2026-10-21.json"
+      },
+      {
+        "commits": 1,
+        "lines": 288,
+        "path": "experiments/stage1-regeneration/critic-signal/data/track-a-nearcopy-2026-10-21.json"
+      },
+      {
+        "commits": 1,
+        "lines": 122,
+        "path": "experiments/stage1-regeneration/critic-signal/data/track-a-result-2026-10-22.json"
+      },
+      {
+        "commits": 1,
+        "lines": 2045,
+        "path": "experiments/stage1-regeneration/critic-signal/data/track-a-slots-10c1ebf.json"
+      },
+      {
+        "commits": 1,
+        "lines": 82,
+        "path": "experiments/stage1-regeneration/critic-signal/data/track-b-gold-2026-10-22.json"
+      },
+      {
+        "commits": 1,
+        "lines": 6,
+        "path": "experiments/stage1-regeneration/critic-signal/data/track-b-labels.json"
+      },
+      {
+        "commits": 1,
+        "lines": 5637,
+        "path": "experiments/stage1-regeneration/critic-signal/data/track-b-vslots-bd17c93.json"
       },
       {
         "commits": 2,
@@ -3322,7 +3585,17 @@
       },
       {
         "commits": 1,
-        "lines": 1215,
+        "lines": 272,
+        "path": "experiments/stage1-regeneration/critic-signal/scripts/nearcopy_calibration.py"
+      },
+      {
+        "commits": 1,
+        "lines": 94,
+        "path": "experiments/stage1-regeneration/critic-signal/scripts/track_a_nearcopy_rung.py"
+      },
+      {
+        "commits": 3,
+        "lines": 1483,
         "path": "experiments/stage1-regeneration/experiment.json"
       },
       {
@@ -3331,9 +3604,14 @@
         "path": "experiments/stage1-regeneration/pilot/qwen3.8-w0-calls.json"
       },
       {
-        "commits": 1,
-        "lines": 122,
+        "commits": 2,
+        "lines": 134,
         "path": "experiments/stage1-regeneration/scripts/backfill_runs.py"
+      },
+      {
+        "commits": 2,
+        "lines": 423,
+        "path": "experiments/stage1-regeneration/t10/DESIGN.md"
       },
       {
         "commits": 71,
@@ -4521,8 +4799,8 @@
         "path": "licences/snapshot.py"
       },
       {
-        "commits": 508,
-        "lines": 1017,
+        "commits": 540,
+        "lines": 1081,
         "path": "mcptoolshop_rnd/__init__.py"
       },
       {
@@ -4536,8 +4814,8 @@
         "path": "mcptoolshop_rnd/abmine.py"
       },
       {
-        "commits": 8,
-        "lines": 498,
+        "commits": 13,
+        "lines": 652,
         "path": "mcptoolshop_rnd/cli.py"
       },
       {
@@ -4551,8 +4829,8 @@
         "path": "mcptoolshop_rnd/datapack.py"
       },
       {
-        "commits": 2,
-        "lines": 474,
+        "commits": 4,
+        "lines": 516,
         "path": "mcptoolshop_rnd/layout.py"
       },
       {
@@ -4611,13 +4889,18 @@
         "path": "mcptoolshop_rnd/probe.py"
       },
       {
+        "commits": 5,
+        "lines": 684,
+        "path": "mcptoolshop_rnd/rawdata.py"
+      },
+      {
         "commits": 1,
         "lines": 38,
         "path": "mcptoolshop_rnd/run_vocabulary.json"
       },
       {
-        "commits": 1,
-        "lines": 240,
+        "commits": 2,
+        "lines": 274,
         "path": "mcptoolshop_rnd/runs.py"
       },
       {
@@ -4741,6 +5024,11 @@
         "path": "scripts/colab/rates.sh"
       },
       {
+        "commits": 1,
+        "lines": 10,
+        "path": "scripts/hooks/pre-push"
+      },
+      {
         "commits": 3,
         "lines": 50,
         "path": "site/astro.config.mjs"
@@ -4794,6 +5082,11 @@
         "commits": 1,
         "lines": 65,
         "path": "site/public/charts/cuda-probe.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 61,
+        "path": "site/public/charts/desk-vram.svg"
       },
       {
         "commits": 1,
@@ -4861,12 +5154,12 @@
         "path": "site/public/charts/vocal-timing.svg"
       },
       {
-        "commits": 2,
-        "lines": 12,
+        "commits": 3,
+        "lines": 20,
         "path": "site/public/favicon.svg"
       },
       {
-        "commits": 2,
+        "commits": 3,
         "lines": 0,
         "path": "site/src/assets/logo.png"
       },
@@ -4976,8 +5269,8 @@
         "path": "site/src/content/docs/handbook/architecture.md"
       },
       {
-        "commits": 2,
-        "lines": 142,
+        "commits": 7,
+        "lines": 224,
         "path": "site/src/content/docs/handbook/data-layout.md"
       },
       {
@@ -5106,13 +5399,43 @@
         "path": "site/src/content/docs/newsletter/issue-14.md"
       },
       {
+        "commits": 1,
+        "lines": 156,
+        "path": "site/src/content/docs/newsletter/issue-16.md"
+      },
+      {
+        "commits": 1,
+        "lines": 106,
+        "path": "site/src/content/docs/newsletter/issue-17.md"
+      },
+      {
+        "commits": 1,
+        "lines": 109,
+        "path": "site/src/content/docs/newsletter/issue-18.md"
+      },
+      {
+        "commits": 1,
+        "lines": 123,
+        "path": "site/src/content/docs/newsletter/issue-19.md"
+      },
+      {
+        "commits": 1,
+        "lines": 150,
+        "path": "site/src/content/docs/newsletter/issue-20.md"
+      },
+      {
+        "commits": 1,
+        "lines": 118,
+        "path": "site/src/content/docs/newsletter/issue-21.md"
+      },
+      {
         "commits": 2,
         "lines": 129,
         "path": "site/src/content/docs/watch/2026-10-13.md"
       },
       {
-        "commits": 3,
-        "lines": 148,
+        "commits": 4,
+        "lines": 151,
         "path": "site/src/pages/index.astro"
       },
       {
@@ -5126,8 +5449,8 @@
         "path": "site/src/styles/global.css"
       },
       {
-        "commits": 2,
-        "lines": 11,
+        "commits": 3,
+        "lines": 23,
         "path": "site/src/styles/starlight-custom.css"
       },
       {
@@ -5356,8 +5679,8 @@
         "path": "tests/test_e4b_charts.py"
       },
       {
-        "commits": 1,
-        "lines": 292,
+        "commits": 2,
+        "lines": 314,
         "path": "tests/test_layout.py"
       },
       {
@@ -5391,13 +5714,18 @@
         "path": "tests/test_probe.py"
       },
       {
+        "commits": 6,
+        "lines": 750,
+        "path": "tests/test_rawdata.py"
+      },
+      {
         "commits": 7,
         "lines": 331,
         "path": "tests/test_rnd.py"
       },
       {
-        "commits": 1,
-        "lines": 283,
+        "commits": 2,
+        "lines": 293,
         "path": "tests/test_runs.py"
       },
       {
@@ -5426,58 +5754,58 @@
     "level": "low",
     "reason": "fewer than 25 source files reach 10 revisions in the window"
   },
-  "generatedAt": "2026-10-19T21:53:30.410Z",
+  "generatedAt": "2026-10-22T18:43:33.031Z",
   "generatedFrom": {
-    "commit": "96f1277c83728b5b78b849304c0a16e043161d40"
+    "commit": "631031188dc62ffb6e0ec8197203ad89dde5e3e2"
   },
   "pairs": [
     {
       "a": "CHANGELOG.md",
       "b": "mcptoolshop_rnd/__init__.py",
-      "either": 500,
-      "shared": 469,
-      "strength": 0.938
+      "either": 531,
+      "shared": 500,
+      "strength": 0.94162
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/page.json",
-      "either": 32,
-      "shared": 32,
+      "either": 33,
+      "shared": 33,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/statistics.json",
-      "either": 32,
-      "shared": 32,
+      "either": 33,
+      "shared": 33,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/structure.json",
-      "either": 32,
-      "shared": 32,
+      "either": 33,
+      "shared": 33,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/statistics.json",
-      "either": 32,
-      "shared": 32,
+      "either": 33,
+      "shared": 33,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/structure.json",
-      "either": 32,
-      "shared": 32,
+      "either": 33,
+      "shared": 33,
       "strength": 1
     },
     {
       "a": "atlas/statistics.json",
       "b": "atlas/structure.json",
-      "either": 32,
-      "shared": 32,
+      "either": 33,
+      "shared": 33,
       "strength": 1
     },
     {
@@ -5502,6 +5830,13 @@
       "strength": 1
     },
     {
+      "a": "experiments/charts/make_charts.py",
+      "b": "experiments/charts/manifest.json",
+      "either": 6,
+      "shared": 5,
+      "strength": 0.833333
+    },
+    {
       "a": "experiments/generated-content-terms/README.md",
       "b": "licences/registry.json",
       "either": 9,
@@ -5509,11 +5844,32 @@
       "strength": 0.555556
     },
     {
+      "a": "mcptoolshop_rnd/rawdata.py",
+      "b": "site/src/content/docs/handbook/data-layout.md",
+      "either": 7,
+      "shared": 5,
+      "strength": 0.714286
+    },
+    {
+      "a": "mcptoolshop_rnd/rawdata.py",
+      "b": "tests/test_rawdata.py",
+      "either": 6,
+      "shared": 5,
+      "strength": 0.833333
+    },
+    {
       "a": "rnd/cli.py",
       "b": "tests/test_rnd.py",
       "either": 8,
       "shared": 4,
       "strength": 0.5
+    },
+    {
+      "a": "site/src/content/docs/handbook/data-layout.md",
+      "b": "tests/test_rawdata.py",
+      "either": 8,
+      "shared": 5,
+      "strength": 0.625
     }
   ],
   "parameters": {
@@ -5526,16 +5882,16 @@
     "floor": "fallen",
     "floorHeld": false,
     "floorTrigger": "revision-depth",
-    "headDate": "2026-10-19T17:29:05-04:00",
-    "inScopeFiles": 1004,
+    "headDate": "2026-10-22T14:42:04-04:00",
+    "inScopeFiles": 1068,
     "pinnedStart": null,
     "priorFloor": "fallen",
-    "qualifyingCommits": 543,
+    "qualifyingCommits": 587,
     "qualifyingMinimum": 30,
     "revisions": 5,
     "shared": 10,
     "sharedFloorUsed": 3,
-    "since": "2026-04-22T21:29:05.000Z",
+    "since": "2026-04-25T18:42:04.000Z",
     "sourceExtensions": [
       ".js",
       ".mjs",
@@ -5551,7 +5907,7 @@
     ],
     "sourceFileReach": 20,
     "sourceFileRise": 25,
-    "sourceFilesReachingStrongFloor": 4,
+    "sourceFilesReachingStrongFloor": 5,
     "strength": 0.5,
     "windowDays": 180
   },

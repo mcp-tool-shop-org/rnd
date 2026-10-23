@@ -5,7 +5,7 @@ issue: 25
 date: 2026-10-23
 highlights:
   - "<strong>A scan that couldn't see in.</strong> The identity scan passed the packaged programs because they are compressed. Unpacked, the same files held 28 lines from third-party libraries. The scanner now unpacks them itself."
-  - "<strong>A CI folder in the release.</strong> All three XRPL Camp 1.5.0 programs carry a small install record naming the GitHub runner's checkout folder. 1.5.1 removes it, and the release gate now refuses any program that carries one."
+  - "<strong>A CI folder in the release.</strong> All three XRPL Camp 1.5.0 programs carry a small install record naming the GitHub runner's checkout folder. A second build-machine path turned up in Python's own settings file. 1.5.1 removes both, and the release gate now refuses any program that carries either."
   - "<strong>Notices for a bundled Python.</strong> A packaged program carries a copy of Python and the C libraries built into it, and their licences ask to travel with it. A hand-written summary is being replaced with the exact texts, copied from pinned sources."
   - "<strong>Caught in review.</strong> The first version of that fix broke `trail licenses` for anyone who installed with pip on a different Python. A review on Python 3.13 found it before release."
 ---
@@ -117,15 +117,34 @@ In the fourth version:
 - The same build showed the notices listing three libraries that were installed but never packed (Deprecated,
   mdit-py-plugins and wrapt). The list is now trimmed to what the program actually contains.
 
+## A second path, in Python's own settings
+
+The Linux build checks for both tools then found one more build-machine path, and this one wasn't in an install
+record. Python keeps a small settings module, `_sysconfigdata`, that records where the interpreter itself is
+installed. About 20 of its entries, such as the install prefix and the folder for programs, hold that location, and
+PyInstaller packs the module like any other.
+
+The build tool, uv, installs Python under the build machine's user account. So on GitHub's Linux machines those
+entries name a folder under the `runner` account's home, and XRPL Camp 1.5.0's Linux program carries them alongside
+its install record. Like the install record, it's a CI machine's folder, not a person's.
+
+The ruling was the same as for the install record: it's the studio's own build setup, so it gets fixed, not excused.
+- **The build** installs Python into a neutral folder outside any user's home.
+- **The bundle check** reads `_sysconfigdata` from inside the finished program, and fails if it names a home folder.
+- **The 1.5.0 programs stay as released,** and their receipts record both paths.
+
 ## Where things stand
 
-- **XRPL Camp 1.5.0:** released and live-checked through npm on Windows and Linux.
-- **XRPL Camp 1.5.1:** built, and passed both the studio's own review and the independent review. The Linux build
-  check is running now.
-- **Escape the Valley 1.3.1:** the fourth version of its notices passed both the studio's code review and the
-  independent review. The Linux build check is running now. It ships after that and its full release checklist.
-- **macOS:** neither program's macOS build can run on the studio's machines, so macOS is first exercised at release.
-  The receipts say so.
+- **XRPL Camp 1.5.0:** released and live-checked through npm on Windows and Linux. Its programs carry both
+  build-machine paths described above.
+- **XRPL Camp 1.5.1:** passed the studio's own review, the independent review, and a Linux build check. That check
+  found the `_sysconfigdata` path, and the fix for it is being built. It then goes through review and the build check
+  again.
+- **Escape the Valley 1.3.1:** the fourth version of its notices passed the studio's code review, the independent
+  review, and a Linux build check. The Linux check confirmed the notices file block by block against its sources. It
+  takes the same `_sysconfigdata` fix as XRPL Camp before it ships with its full release checklist.
+- **macOS:** neither program's macOS build can run on the studio's machines. So macOS, including what its
+  `_sysconfigdata` holds, is first checked unpacked at release, and the receipts say so.
 
 *Records:*
 - XRPL Camp 1.5.0 ([release](https://github.com/mcp-tool-shop-org/xrpl-camp/releases/tag/v1.5.0)), its treatment

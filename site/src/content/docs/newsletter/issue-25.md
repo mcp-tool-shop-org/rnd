@@ -82,8 +82,9 @@ Python itself, and the C libraries compiled into Python: OpenSSL, zlib, bzip2, l
 Escape the Valley 1.3.1 adds a `trail licenses` command and a notices file attached to each release. Getting
 the Python part right took four rounds:
 
-1. **The first version** copied Python's own licence file from the build machine. On Windows that file runs to 445
-   lines and includes notices for some of the bundled libraries. On Linux and macOS it runs to 277 lines and **mentions none of them**.
+1. **The first version** copied Python's own licence file from the build machine. For the Python that ships
+   (3.12.13), the Windows copy runs to 502 lines and includes notices for some of the bundled libraries. The Linux
+   copy runs to 279 lines and **mentions none of them**.
 2. **The second version** filled that gap with a summary written for the occasion. Review found it was not the text
    it claimed to be: it cut the bzip2 and mpdecimal licences short, gave OpenSSL a web link instead of the licence,
    and missed code compiled into Python itself, such as the Mersenne Twister random generator.
@@ -119,10 +120,10 @@ In the fourth version:
 ## Where things stand
 
 - **XRPL Camp 1.5.0:** released and live-checked through npm on Windows and Linux.
-- **XRPL Camp 1.5.1:** built and through the studio's own review, with the independent review and the Linux build
-  check running now.
-- **Escape the Valley 1.3.1:** the fourth version of its notices passed the studio's code review, and is in
-  independent review and a Linux build check. It ships after those and its full release checklist.
+- **XRPL Camp 1.5.1:** built, and passed both the studio's own review and the independent review. The Linux build
+  check is running now.
+- **Escape the Valley 1.3.1:** the fourth version of its notices passed both the studio's code review and the
+  independent review. The Linux build check is running now. It ships after that and its full release checklist.
 - **macOS:** neither program's macOS build can run on the studio's machines, so macOS is first exercised at release.
   The receipts say so.
 

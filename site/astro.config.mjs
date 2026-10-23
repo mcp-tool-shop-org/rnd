@@ -18,6 +18,18 @@ export default defineConfig({
         replacesTitle: false,
       },
       disable404Route: true,
+      // Lets feed readers and browsers find the newsletter feed from any page.
+      head: [
+        {
+          tag: 'link',
+          attrs: {
+            rel: 'alternate',
+            type: 'application/rss+xml',
+            title: 'Research and Development: the newsletter',
+            href: '/rnd/newsletter/rss.xml',
+          },
+        },
+      ],
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/mcp-tool-shop-org/rnd' },
       ],

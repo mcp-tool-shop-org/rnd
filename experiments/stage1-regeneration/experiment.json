@@ -1836,6 +1836,149 @@
    "pins": {},
    "projected_cost": null,
    "raw_manifest_id": null
+  },
+  {
+   "id": "17a",
+   "venue": "colab",
+   "hardware": "CPU",
+   "date": "2026-10-23",
+   "cost": 0.03,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 0.12,
+   "outcome": "test",
+   "why": "G4 probe stub: override pin recorded and binary checked before spend; on-VM reassembly not exercised in stub mode (role-set item 16)",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "17b",
+   "venue": "colab",
+   "hardware": "CPU",
+   "date": "2026-10-23",
+   "cost": 0.03,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 0.12,
+   "outcome": "test",
+   "why": "Drift v3 critique stub: full path with both GGUFs and 176 fresh calls; journal fields present; compare.py end to end",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "17d",
+   "venue": "colab",
+   "hardware": "RTX-PRO-6000-Blackwell-Server",
+   "date": "2026-10-23",
+   "cost": 21.85,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 26,
+   "outcome": "results",
+   "why": "G4 probe: G4 binary verified on-VM, cache-off confirmed on the critic path, about 46.7 s per critic call; provisional 1.42x vs A100, below the 1.68x break-even",
+   "pins": {
+    "cache_check": "f238a422"
+   },
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "17c",
+   "venue": "colab",
+   "hardware": "A100-SXM4-40GB",
+   "date": "2026-10-23",
+   "cost": 7.9,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 22,
+   "outcome": "lost-vm",
+   "why": "Session lost 72 of 176 calls in; partial journal recovered from job.log checkpoints; relaunched fresh as 17n to keep one VM per arm",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "17e",
+   "venue": "colab",
+   "hardware": "A100-SXM4-40GB",
+   "date": "2026-10-23",
+   "cost": 17.19,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 22,
+   "outcome": "lost-vm",
+   "why": "VM lost after all 176 calls were checkpointed; salvaged journal gives the first cross-VM reading: 72 of 72 shared critic calls byte-identical between two A100 VMs",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "17g",
+   "venue": "colab",
+   "hardware": "A100-SXM4-40GB",
+   "date": "2026-10-23",
+   "cost": 16.15,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 24,
+   "outcome": "results",
+   "why": "Drift v3 E1: 106 critic-eval items, 318 fresh calls, cache-off confirmed on the A100 critic path; first of the E pair",
+   "pins": {
+    "cache_check": "f238a422"
+   },
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "17h",
+   "venue": "colab",
+   "hardware": "A100-SXM4-40GB",
+   "date": "2026-10-23",
+   "cost": 6.64,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 24,
+   "outcome": "lost-vm",
+   "why": "VM lost 101 of 318 calls in; the salvaged 101 match E1 byte for byte (cross-VM total 173/173)",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "17i",
+   "venue": "colab",
+   "hardware": "A100-SXM4-40GB",
+   "date": "2026-10-23",
+   "cost": 1.37,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 5,
+   "outcome": "results",
+   "why": "Drift v3 W1: cache-off confirmed (0 cached tokens where cache-on 16w reused 350); 3 fresh writer calls recorded for the W pair",
+   "pins": {
+    "cache_check": "f238a422"
+   },
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "17n",
+   "venue": "colab",
+   "hardware": "A100-SXM4-40GB",
+   "date": "2026-10-23",
+   "cost": 17.62,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 22,
+   "outcome": "results",
+   "why": "Drift v3 P1r: 176/176 byte-identical with P2 across A100 VMs; cache off; against G4, 65/178 calls drift and G4 is only 1.33x faster at 1.68x the price",
+   "pins": {
+    "cache_check": "f238a422"
+   },
+   "projected_cost": null,
+   "raw_manifest_id": null
   }
  ]
 }

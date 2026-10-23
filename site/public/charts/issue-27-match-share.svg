@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 246" role="img" aria-label="Byte-identical replies as a share of matched calls, against an A100 40 GB" font-family="system-ui, sans-serif" font-size="14">
+<rect width="640" height="246" fill="#ffffff"/>
+<text x="0" y="20" fill="#1f2430" font-weight="600">Byte-identical replies, against an A100 40 GB</text>
+<text x="220" y="60" text-anchor="end" fill="#1f2430">Second A100 40 GB VM</text>
+<rect x="230" y="45" width="330" height="22" fill="#1f2430" opacity="0.10"/>
+<rect x="230" y="45" width="330.0" height="22" fill="#2f7d5b"/>
+<text x="568" y="61" fill="#1f2430">176 of 176</text>
+<text x="220" y="104" text-anchor="end" fill="#1f2430">Third A100 40 GB VM (partial)</text>
+<rect x="230" y="89" width="330" height="22" fill="#1f2430" opacity="0.10"/>
+<rect x="230" y="89" width="330.0" height="22" fill="#2f7d5b"/>
+<text x="568" y="105" fill="#1f2430">72 of 72</text>
+<text x="220" y="148" text-anchor="end" fill="#1f2430">A100 80 GB, same build</text>
+<rect x="230" y="133" width="330" height="22" fill="#1f2430" opacity="0.10"/>
+<rect x="230" y="133" width="330.0" height="22" fill="#2f7d5b"/>
+<text x="568" y="149" fill="#1f2430">178 of 178</text>
+<text x="220" y="192" text-anchor="end" fill="#1f2430">RTX PRO 6000, own build</text>
+<rect x="230" y="177" width="330" height="22" fill="#1f2430" opacity="0.10"/>
+<rect x="230" y="177" width="209.5" height="22" fill="#b4532a"/>
+<text x="568" y="193" fill="#1f2430">113 of 178</text>
+<text x="230" y="238" fill="#1f2430" opacity="0.7" font-size="12">Each bar is one comparison; the grey track is the calls both machines answered.</text>
+</svg>

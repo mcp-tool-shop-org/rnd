@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "pins": {
+    "26f020d334ad79b0:ja": {
+      "lang": "ja",
+      "source": "- **Data touched:** files inside this repo (`entries/`, `instruments/`,\n  `catalogs/`, `experiments/`) and the index `rnd.db`, which it rebuilds. `rnd\n  readouts` opens the readouts knowledge bases **read-only**. `rnd sql` runs\n  against a read-only connection.\n- **Data not touched:** nothing outside the repo and the readouts checkout. It\n  stores no credentials and reads none.\n- **Network:** none, except `rnd catalog sync`, which calls the GitHub API\n  through your own `gh` CLI login when you run it.\n- **Permissions:** ordinary file access. No elevated rights, no background service.\n- **No telemetry.** Nothing is collected or sent.\n- **Public repo hygiene:** before every push, the tree is scanned for\n  home-directory paths and operator identity.",
+      "translation": "- **アクセスされたデータ：**このリポジトリ（`entries/`、`instruments/`、`catalogs/`、`experiments/`）内のファイルと、再構築されるインデックス`rnd.db`。`rnd readouts` opens the readouts knowledge bases **read-only**. `rnd sql`は、読み取り専用接続に対して実行されます。\n- **アクセスされていないデータ：**リポジトリとreadoutsチェックアウトの外部のデータ。認証情報は保存されず、読み取られません。\n- **ネットワーク：**なし。ただし、`rnd catalog sync`は、実行時に、独自の`gh`CLIログインを通じて、GitHub APIを呼び出します。\n- **権限：**通常のファイルアクセス。特別な権限やバックグラウンドサービスはありません。\n- **テレメトリなし。** 何も収集または送信されません。\n- **公開リポジトリの衛生管理：**すべてのプッシュの前に、ツリーはホームディレクトリパスとオペレーターのIDについてスキャンされます。",
+      "pinnedAt": "2026-10-23T04:42:25.563Z"
+    },
+    "2ffc07fa66f94133:ja": {
+      "lang": "ja",
+      "source": "Markdown entries, one topic each",
+      "translation": "Markdown形式のエントリー、各エントリーはひとつのトピック",
+      "pinnedAt": "2026-10-23T04:42:25.554Z"
+    },
+    "b70f171c86644f1d:ja": {
+      "lang": "ja",
+      "source": "one SQLite knowledge base per domain",
+      "translation": "ドメインごとにひとつのSQLite知識ベース",
+      "pinnedAt": "2026-10-23T04:42:25.558Z"
+    }
+  }
+}

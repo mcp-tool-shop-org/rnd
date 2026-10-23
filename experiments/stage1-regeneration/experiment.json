@@ -1894,7 +1894,7 @@
    "cost_basis": "rate_x_runtime",
    "cap": 22,
    "outcome": "lost-vm",
-   "why": "Session lost 72 of 176 calls in; partial journal recovered from job.log checkpoints; relaunched fresh as 17n to keep one VM per arm",
+   "why": "Session lost 72 of the run's 178 calls in; partial journal recovered from job.log checkpoints; relaunched fresh as 17n to keep one VM per arm",
    "pins": {},
    "projected_cost": null,
    "raw_manifest_id": null
@@ -1909,7 +1909,7 @@
    "cost_basis": "rate_x_runtime",
    "cap": 22,
    "outcome": "lost-vm",
-   "why": "VM lost after all 176 calls were checkpointed; salvaged journal gives the first cross-VM reading: 72 of 72 shared critic calls byte-identical between two A100 VMs",
+   "why": "VM lost with 176 of the run's 178 calls checkpointed (the last item's two retries absent; the log can't show whether they ran); salvaged journal gives the first cross-VM reading: 72 of 72 shared critic calls byte-identical between two A100 VMs",
    "pins": {},
    "projected_cost": null,
    "raw_manifest_id": null

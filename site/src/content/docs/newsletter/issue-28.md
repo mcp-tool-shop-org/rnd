@@ -10,6 +10,13 @@ highlights:
   - "<strong>Found in a dialogue.</strong> These came out of an open research conversation with an outside model, not a checklist review."
 ---
 
+:::caution[Correction, 2026-10-23]
+The first version of this issue said all 10 writers given the contradictory side were told to keep the material
+silent. Only the 7 cannot_tell writers were. It also gave the guest-cap item as a clean example of an unmentioned
+detail, though the blind grading below found that item ambiguous; it's replaced by one graded sound. The tea label's
+wording is also made exact. No figure changed.
+:::
+
 The studio builds training data with local language models. A **writer** model drafts each item, and a **critic**
 model checks it. Many items end in a verdict about a short piece of **material** (a notice, a label, a code snippet)
 and a **statement** about it. There are three labels:
@@ -47,7 +54,8 @@ matches": the statement says the same thing, phrased differently.
 
 That second side can't go with cannot_tell. If an equivalent wording in the material matches, the answer is
 supported. Yet in one writing wave of 60 slots, the planner gave that side to **7 cannot_tell slots and 3 unsupported
-slots**. Each of those writers was told both to show a match and to keep the material silent.
+slots**. Each of the 7 cannot_tell writers was told both to show a match and to keep the material silent. The 3
+unsupported writers weren't given the silence line, and the critic voted their items T10 every time.
 
 The critic also votes three times on which lesson an item teaches. Here's what it said about the 12 cannot_tell slots:
 
@@ -57,9 +65,9 @@ The critic also votes three times on which lesson an item teaches. Here's what i
   lesson: the material is silent on a detail, so don't fill it in. The writer had escaped the contradiction by asking
   about something the material never mentions:
   - how to store a cleaner;
-  - a tea's caffeine, on a label that gives only its weight;
+  - a tea's caffeine, on a label whose only quantity is its weight;
   - which floor a service elevator is on;
-  - a guest cap of 50, against a code check with no upper limit.
+  - more than ten utensils, on a box label that lists "Utensils" with no count.
 - **Planned with "judges the exact size":** 3 of the 5 were voted T10 three times out of three. They have one shape:
   the material gives a loose amount ("a few items are redundant", "several team members raised concerns"), and the
   statement claims an exact one ("exactly three"). The other 2 weren't clean. One swapped the North Wing for the South

@@ -1,8 +1,8 @@
 """Check the built newsletter feed (site/dist/newsletter/rss.xml) before the site deploys.
 
 Fails (exit 1) if the feed is missing or doesn't parse, if its item count isn't the number of issue files, if an item
-lacks its full content, if any link or image in it isn't absolute under the site, or if its author fields name anyone
-but the studio. Usage, from site/: python scripts/check_feed.py
+lacks its full content, if any link or image in it isn't absolute under the site, or if it carries any author field
+other than dc:creator mcp-tool-shop. Usage, from site/: python scripts/check_feed.py
 """
 import pathlib
 import re
@@ -11,7 +11,6 @@ import xml.etree.ElementTree as ET
 
 SITE = "https://mcp-tool-shop-org.github.io/rnd/"
 STUDIO = "mcp-tool-shop"
-EDITOR = "64996768+mcp-tool-shop@users.noreply.github.com (mcp-tool-shop)"
 NS = {"content": "http://purl.org/rss/1.0/modules/content/", "dc": "http://purl.org/dc/elements/1.1/",
       "atom": "http://www.w3.org/2005/Atom"}
 
@@ -30,12 +29,13 @@ except ET.ParseError as e:
 items = channel.findall("item")
 if len(items) != len(issues):
     errors.append(f"{len(items)} feed items, but {len(issues)} issue files")
+# The feed names its author only as the studio, in dc:creator; it carries no address fields at all.
+for tag in ("managingEditor", "webMaster", "author"):
+    if channel.find(tag) is not None or any(i.find(tag) is not None for i in channel.findall("item")):
+        errors.append(f"the feed carries a <{tag}> field; it should name only {STUDIO}, in dc:creator")
 self_link = channel.find("atom:link", NS)
 if self_link is None or self_link.get("href") != SITE + "newsletter/rss.xml":
     errors.append("the atom:link self href isn't the feed's own URL")
-for tag in ("managingEditor", "webMaster"):
-    if (channel.findtext(tag) or "") != EDITOR:
-        errors.append(f"channel {tag} isn't the studio's no-reply address")
 
 for item in items:
     title = item.findtext("title") or "(untitled)"

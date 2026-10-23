@@ -10,8 +10,6 @@ const TITLE = 'Research and Development: the newsletter';
 const DESCRIPTION =
   "The studio's research newsletter: what we measured, and what it means. Each issue reports our experiments in " +
   'plain language, with the numbers, the charts, what held up and what didn\'t.';
-// RSS 2.0 wants an email address here; this is the studio's public no-reply address, not a person's.
-const EDITOR = '64996768+mcp-tool-shop@users.noreply.github.com (mcp-tool-shop)';
 
 export function absolutise(html: string, pageUrl: string): string {
   const fix = (url: string) => (url ? new URL(url, pageUrl).href : url);
@@ -51,8 +49,6 @@ export async function GET(context: APIContext) {
       '<language>en</language>',
       `<lastBuildDate>${new Date().toUTCString()}</lastBuildDate>`,
       '<ttl>720</ttl>',
-      `<managingEditor>${EDITOR}</managingEditor>`,
-      `<webMaster>${EDITOR}</webMaster>`,
       `<image><url>${new URL('rss-logo.png', site).href}</url><title>${TITLE}</title><link>${site.href}</link>` +
         '<width>144</width><height>144</height></image>',
     ].join(''),

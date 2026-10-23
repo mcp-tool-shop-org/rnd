@@ -23,6 +23,7 @@ All tests are `unittest.TestCase` classes with no GPU and no external network:
 from __future__ import annotations
 
 import contextlib
+import dataclasses
 import hashlib
 import http.server
 import io
@@ -494,6 +495,19 @@ class ProxyTests(unittest.TestCase):
         self.assertEqual(granite_cfg.transforms, ())
         untouched_out = proxy.transform_request_body({"messages": canned_messages}, granite_cfg)
         self.assertEqual(untouched_out["messages"], canned_messages)
+
+    def test_f3_client_seed_passes_through_and_card_sampling_still_wins(self):
+        """F3: a client's seed reaches upstream (it is not a card value); its other sampling keys are still replaced."""
+        cfg = proxy.load_candidate_config(CARD_VALUES_JSON, candidate="granite-4.2-30b")
+        self.assertNotIn("seed", cfg.sampling)
+        msgs = [{"role": "user", "content": "call"}]
+        out = proxy.transform_request_body({"messages": msgs, "seed": 2, "temperature": 0.0, "top_k": 99}, cfg)
+        self.assertEqual(out["seed"], 2)
+        self.assertEqual(out["temperature"], cfg.sampling["temperature"])
+        self.assertEqual(out["top_k"], cfg.sampling["top_k"])
+        self.assertNotIn("seed", proxy.transform_request_body({"messages": msgs}, cfg))
+        seeded = dataclasses.replace(cfg, sampling={**cfg.sampling, "seed": 7})
+        self.assertEqual(proxy.transform_request_body({"messages": msgs, "seed": 2}, seeded)["seed"], 7)
 
     def test_d2_reattach_thinking_fifo_stripped_synthetic_mismatch_and_max_turns(self):
         """D2, D-F1, D-F3, E1, E3: reattach_thinking handles repeated replies FIFO, stripped fallback, synthetic 'Ok.', edited mismatch, and reattach_max_turns."""

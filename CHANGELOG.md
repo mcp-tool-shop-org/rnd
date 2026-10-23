@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.28] - 2026-10-23
+
+- `localbuilders.proxy` passes a client's `seed` through to llama-server; the card's sampling still replaces every other sampling key, and a card that names a seed wins. Before this, `seed` was stripped with the sampling keys, so role-set's per-call seed never reached the server and every proxied Colab window sampled with a random seed (found from colab-drift window 16w: identical logprobs on two A100 VMs, different tokens sampled). New test `test_f3_client_seed_passes_through_and_card_sampling_still_wins`.
+
 ## [1.1.23.1.27] - 2026-10-23
 
 - runs 15z, 15xs, 15xr, 15xt and offrig-jobs oj1/oj2; offrig --jobs measurement (batching changes answers); distill-ladder teacher leg complete with the kept-by-cell table; licences for CPython 3.12.13 and python-build-standalone 20260510; from_outcome refuses non-mapping pins

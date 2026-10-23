@@ -76,8 +76,10 @@ SAMPLING_KEYS = (
     "mirostat",
     "mirostat_tau",
     "mirostat_eta",
-    "seed",
 )
+# `seed` is not a card value: a client's per-call seed passes through, and a card that names one still wins. Until
+# 1.1.23.1.28 it was stripped here, so role-set's seed never reached llama-server and every proxied call sampled with
+# a random seed (colab-drift window 16w: identical logprobs on two VMs, different tokens sampled).
 
 
 class ProxyConfigError(Exception):

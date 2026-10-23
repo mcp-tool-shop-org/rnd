@@ -96,6 +96,18 @@ an edited text, can't. A sample of every release is replayed by `rnd abmine` (it
 recipe card or the report. A call made with sampling still records the log-probabilities of the tokens it chose;
 the replay checks those.
 
+**Stub coverage (paid GPU windows).** A paid window is preceded by a stub that is free, or a few cents of CPU time, on the exact path: the
+same scripts, inputs and pins, with the model calls swapped for a stub.
+- **Every setup step the paid run will take, the stub takes too:** installs, downloads, unpacks and sha checks, using a
+  small fixture where the real artifact can't run on a CPU. Two paid windows once died on a missing `zstd` that their
+  stub never reached, because the stub skipped the install.
+- **The launch file lists the setup steps the stub exercises and the ones it can't,** with the reason. A step it can't
+  exercise is checked first on the paid run.
+- **The launcher's pre-spend checks are shown to work, not assumed:** run each one against a bad input and show it
+  stops before any VM is created, for example a wrong binary refused, shown with a fake cloud CLI.
+- **Size the stub's cap from what it fetches:** the model files' bytes divided by the measured download speed, plus
+  setup time and the stub run itself. A flat small cap once cut a two-model stub off mid-download.
+
 ## 7. While running and after
 
 - **Pre-registered stop rules** halt everything on a defect: leakage, writes, a start that doesn't match its arm, or untreated runs.

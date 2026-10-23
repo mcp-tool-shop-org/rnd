@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.30] - 2026-10-23
+
+- colab-drift: correct the G4 decision-drift claim (3 verdict changes of 65 drifted calls, not 65)
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.23.1.29] - 2026-10-23
 
 - run records 16/17 (drift v3, offrig Colab baseline), colab-drift and offrig results write-ups, handbook stub coverage

@@ -19,8 +19,10 @@ sampling block).
 - **Models:** muse-glimmer-30b Q8_0 as critic and gemma-4-31b-it Q8_0 as writer, on the T10 pilot. The run resumes
   after the first writing wave (w0) from 15w's sealed drafts, so every arm critiques the same drafts.
 - **GPU:** Colab A100-SXM4-40GB. G4 and C80 are the exceptions, below.
-- **Comparison:** compare.py matches calls by request key and compares the completions byte for byte. A "decision
-  drift" is a change in a verdict field.
+- **Comparison:** compare.py matches calls by request key and compares the completions byte for byte. Its "decision
+  drift" counts a change in any parsed line: VERDICT, DECIDING (the quoted span), TRAIT, CONTRASTED or a flaw label.
+  CONTRASTED is self-check scaffolding the pipeline doesn't read, so a "decision drift" isn't necessarily a changed
+  verdict. The G4 section breaks the changes down by field.
 
 ## Cache off, verified on every arm that returned its log
 
@@ -61,8 +63,21 @@ rebuilt journal holds 176 calls to 174 distinct requests. A third replicate (P3)
 ## A different GPU and binary: G4 (RTX PRO 6000 Blackwell, build 39742d8a)
 
 G4 sent the same requests, with the cache off, to its own sm_120 build of the same llama.cpp commit. Against P1r:
-- **113 of 178 calls exact, and 65 drifted, every one with a decision change.** The first divergence is at T10-C-01's
-  first trait call. G4 made 179 calls: one extra retry (T10-C-04's verdict, attempt 1) that no A100 run needed, a
+- **113 of 178 calls exact, and 65 drifted.** The first divergence is at T10-C-01's first trait call.
+- **Which lines changed** (corrected 2026-10-23; this section first said every drifted call changed a decision, which
+  counted scaffolding and quote changes as decisions):
+
+  | What changed | Calls |
+  |---|---|
+  | only CONTRASTED (scaffolding the pipeline doesn't read) | 27 |
+  | the TRAIT vote (11 alone, 10 with CONTRASTED) | 21 |
+  | only DECIDING (the quoted span) | 10 |
+  | a flaw label | 4 |
+  | VERDICT (and DECIDING) | 3 |
+
+  The 3 verdict changes are all `unsupported` on the A100 against `cannot_tell` on G4 (T10-D-02, T10-C-06, T10-C-09).
+  Verdicts held on 49 of 52 verdict and twin-verdict calls, close to the offrig bench's 29 of 30 against the 5090.
+  This breakdown was found by Antigravity in a research dialogue, and R&D recounted it from the journals. G4 made 179 calls: one extra retry (T10-C-04's verdict, attempt 1) that no A100 run needed, a
   knock-on of its drift.
 - Both the GPU and the binary differ, so this run can't say which one causes the drift. C80, below, changes only the
   A100's memory size.

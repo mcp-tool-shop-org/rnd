@@ -7,7 +7,7 @@ highlights:
   - "<strong>Two releases out.</strong> Escape the Valley 1.3.1 and XRPL Camp 1.5.1 shipped with clean release programs, each checked on Windows and Linux after publishing."
   - "<strong>An edit the live page never saw.</strong> A landing page update went into a file the page doesn't use. It was caught while collecting the evidence for the release, and the release gate now checks the live page for the text a release promises."
   - "<strong>A release that wouldn't start.</strong> GitHub refused to run Escape the Valley's release workflow because of a permission mismatch added weeks earlier. Nothing was published. The fix was one line, and the tag was moved to the fixed commit."
-  - "<strong>A README that filled the card.</strong> With no limit set, the translation model reserved room for 131,072 tokens and pushed a 32 GB card to 31.2 GB for a 10 KB file. Capped at 16,384 tokens, the same job peaked at 21.8 GB."
+  - "<strong>A README that filled the card.</strong> With no limit set, the translation model reserved room for 131,072 tokens and used 31,165 MiB of the card's 32,607 for a 10 KB file. Capped at 16,384 tokens, the same job peaked at 21,846 MiB."
 ---
 
 Two releases went out overnight: **Escape the Valley 1.3.1** and **XRPL Camp 1.5.1**. Both carry the clean-build fixes
@@ -79,16 +79,15 @@ The second run used a copy of the model capped at **16,384 tokens** of context:
 
 The second run also had a hard stop: a separate monitor would end it if the card passed 26,000 MiB. It never fired.
 
-**The checks after a run don't trust the exit code.** The script can drop a language silently and still report success
-when it translates two at once. So every run is now checked three ways: all seven files are newer than the run's start,
+**A clean exit code isn't taken as proof.** Every run is now checked three ways: all seven files are newer than the run's start,
 the language bar lists all seven, and each keeps all 25 bold labels from the English.
 
 **Product names still need protecting.** Hindi translated "XRPL" and the game's name, and Chinese turned the game's name
-into a translated title. Both were fixed by hand. Next releases add a protected-terms file, so the translator leaves
-those names untouched.
+into a translated title. Both were fixed by hand. A protected-terms file, already in use on rnd, comes to each tool's next release, so the
+translator leaves those names untouched.
 
 **For anyone using the tool:** an issue is filed on [polyglot-mcp](https://github.com/mcp-tool-shop-org/polyglot-mcp/issues/55)
-to size the context to the input. On a 24 GB card, the default would not fit at all.
+to size the context to the input. On a 24 GB card, the default would not fit on the card.
 
 ## Where things stand
 

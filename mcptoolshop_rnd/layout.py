@@ -390,7 +390,7 @@ def validate_data(root: Path, exp: str, data, registry_ids: set[str] | None = No
             p.append(f"runs[{i}].cost_unit must be one of {', '.join(COST_UNITS)}")
         if r.get("projected_cost") is not None and not _number(r["projected_cost"]):
             p.append(f"runs[{i}].projected_cost must be a number or null")
-        if r.get("outcome") in ALIASES:
+        if isinstance(r.get("outcome"), str) and r["outcome"] in ALIASES:
             p.append(f"runs[{i}].outcome {r['outcome']!r} is an alias; record it as {ALIASES[r['outcome']]!r}")
         elif r.get("outcome") not in OUTCOMES:
             p.append(f"runs[{i}].outcome must be one of {', '.join(OUTCOMES)}")

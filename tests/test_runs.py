@@ -231,6 +231,13 @@ class RunObjectTests(RunsBase):
         self.assertEqual(runs.from_outcome({"run": {**self.RUN, "outcome": "not-assigned", "cost": 0}})["outcome"],
                          "no-capacity")
 
+    def test_an_unhashable_outcome_is_reported_not_raised(self):
+        for bad in ([], {}):
+            run = runs.from_outcome({"run": {**self.RUN, "outcome": bad}})
+            self.assertEqual(run["outcome"], bad)
+            problems = layout.validate_data(self.root, "demo", record("demo", runs=[run]))
+            self.assertIn("runs[0].outcome must be one of", " ".join(problems))
+
     def test_options_must_agree_with_a_run_object(self):
         self.assertEqual(runs.from_outcome({"run": self.RUN}, venue="colab")["venue"], "colab")
         with self.assertRaises(runs.RecordError):

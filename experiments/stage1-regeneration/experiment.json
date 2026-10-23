@@ -1583,6 +1583,64 @@
    "pins": {},
    "projected_cost": null,
    "raw_manifest_id": null
+  },
+  {
+   "id": "p4",
+   "venue": "colab",
+   "hardware": "G4",
+   "date": "2026-10-22",
+   "cost": 0.13,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "outcome": "test",
+   "why": "Card probe after the plan upgrade: H100 refused; G4 is an RTX PRO 6000 Blackwell 96 GB (about 8.90/hr); A100 --high-mem is the 80 GB A100 (about 6.77/hr)",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "15x",
+   "venue": "colab",
+   "hardware": "A100",
+   "date": "2026-10-22",
+   "cost": 12.52,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 23,
+   "outcome": "tooling-fault",
+   "why": "T10 critique stopped after 118 critic calls: role-set _need_models demands a sidecar model for every kind-B training row, stricter than the gates (verification items carry none); hit on the first accepted apply slot. Journal kept for a resume",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "15u",
+   "venue": "colab",
+   "hardware": "A100",
+   "date": "2026-10-22",
+   "cost": 16.16,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 28,
+   "outcome": "results",
+   "why": "Track B flaw run 2: trackb prompt, 3 votes, 106 of 106 scored on run 1's verdicts (318 flaw calls, 0 verdict calls)",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "p5",
+   "venue": "colab",
+   "hardware": "CPU",
+   "date": "2026-10-22",
+   "cost": 2.03,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "outcome": "test",
+   "why": "Session-ceiling probe: 3 each of A100, G4, L4, T4 and 5 CPU at once (17 sessions); H100 unavailable",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
   }
  ]
 }

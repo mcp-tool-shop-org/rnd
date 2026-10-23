@@ -854,6 +854,408 @@
       "notes": "Read by R&D on 2026-10-22 for Escape the Valley 2.0's native voice, at the Editor's request.",
       "snapshot_sha256": "0ffddef9e48f8a09aed5caf2d44f7ba1c1be2d9b8e0a6f693b1635b2d5566645",
       "snapshot_file": "2026-10-22/sherpa-onnx-licence.txt"
+    },
+    {
+      "id": "misaki-licence",
+      "owner": "hexgrad (misaki)",
+      "kind": "licence",
+      "covers": [
+        "misaki, Kokoro's grapheme-to-phoneme dictionaries, used as data by the native voice route"
+      ],
+      "url": "https://raw.githubusercontent.com/hexgrad/misaki/fba1236595f2d2bf21d414ba6e57d25256afada3/LICENSE",
+      "page_date": "Apache License Version 2.0, January 2004 (commit fba1236; no release tags)",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "Apache License",
+        "Version 2.0, January 2004"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "Apache-2.0: shipping its dictionaries carries the licence text and any NOTICE",
+        "Read at commit fba1236 because the repository has no tags or releases; pin the same commit in the build",
+        "The spike (PR #26, S3) fetched us_gold/us_silver/gb_gold/gb_silver.json from misaki's main branch. Phase 7 pins them to commit fba1236 and hashes each file"
+      ],
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 2.0's native build (the Rust spikes, escape-the-valley PR #26), at a pinned ref.",
+      "snapshot_sha256": "0ffddef9e48f8a09aed5caf2d44f7ba1c1be2d9b8e0a6f693b1635b2d5566645",
+      "snapshot_file": "2026-10-22/misaki-licence.txt"
+    },
+    {
+      "id": "cmudict-licence",
+      "owner": "Carnegie Mellon University (CMU Pronouncing Dictionary)",
+      "kind": "licence",
+      "covers": [
+        "The CMU Pronouncing Dictionary, the native voice route's fallback word list"
+      ],
+      "url": "https://raw.githubusercontent.com/cmusphinx/cmudict/74790861f652b15e4ac49015a90074ad62a27690/LICENSE",
+      "page_date": "Copyright (C) 1993-2015 Carnegie Mellon University (commit 7479086; no release tags)",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "Copyright (C) 1993-2015 Carnegie Mellon University. All rights reserved.",
+        "Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "BSD-style (two clauses): the file itself counts as source code, so shipping it keeps the notice; a binary that embeds it reproduces the notice in its documentation",
+        "Read at commit 7479086 because the repository has no tags or releases",
+        "The spike fetched cmudict.dict from master; Phase 7 pins it to commit 7479086 and hashes it"
+      ],
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 2.0's native build (the Rust spikes, escape-the-valley PR #26), at a pinned ref.",
+      "snapshot_sha256": "7bfabdd5ef01151c99c3a0f6c626c8292cb635c26d955a886b4431f9dd8f6771",
+      "snapshot_file": "2026-10-22/cmudict-licence.txt"
+    },
+    {
+      "id": "kokoro-onnx-licence",
+      "owner": "thewh1teagle (kokoro-onnx)",
+      "kind": "licence",
+      "covers": [
+        "kokoro-onnx (thewh1teagle): the reference Python runtime the native voice spike followed, and the source of the spike's model files (release model-files-v1.0)"
+      ],
+      "url": "https://raw.githubusercontent.com/thewh1teagle/kokoro-onnx/3596b26764286a7de9d90c363e988d50578918e5/LICENSE",
+      "page_date": "MIT License, Copyright (c) 2025 github.com/thewh1teagle (commit 3596b26)",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "MIT License",
+        "The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT: a shipped binary carries the copyright line and licence text (a third-party notices file) if any of its code is carried over",
+        "Its tags name model-file releases only, so it was read at commit 3596b26",
+        "The spike (escape-the-valley PR #26, S3) downloads kokoro-v1.0.onnx and voices-v1.0.bin from this repository's model-files-v1.0 release. The release text names the ONNX file an optimised f32 version from taylorchu/kokoro-onnx (kokoro-onnx-taylorchu-licence) and states no licence for the files; the README says 'kokoro model: Apache 2.0'. So the chain is Kokoro-82M (Apache-2.0) → taylorchu's ONNX conversion (MIT repo) → this release",
+        "Before shipping (ETV Phase 7): pin the release asset by sha256, record the chain in the notices, and prefer a conversion the studio can reproduce from Kokoro-82M itself"
+      ],
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 2.0's native build (the Rust spikes, escape-the-valley PR #26), at a pinned ref.",
+      "snapshot_sha256": "17f57e54d6b42dd9ff888c22af34417d9088d3a7440c4a31f792d03c29ebd921",
+      "snapshot_file": "2026-10-22/kokoro-onnx-licence.txt"
+    },
+    {
+      "id": "ort-licence",
+      "owner": "pyke.io (ort)",
+      "kind": "licence",
+      "covers": [
+        "ort, the Rust bindings to ONNX Runtime used by the native voice route"
+      ],
+      "url": "https://raw.githubusercontent.com/pykeio/ort/v2.0.0-rc.15/LICENSE-MIT",
+      "page_date": "MIT License, Copyright (c) 2023-2026 pyke.io (tag v2.0.0-rc.15; dual MIT OR Apache-2.0)",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "MIT License",
+        "Copyright (c) 2023-2026 pyke.io"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT (it is dual-licensed MIT OR Apache-2.0; we take MIT): a shipped binary carries the copyright line and licence text (a third-party notices file)",
+        "The newest tag is a release candidate (v2.0.0-rc.15); the build pins the version the spike used"
+      ],
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 2.0's native build (the Rust spikes, escape-the-valley PR #26), at a pinned ref.",
+      "snapshot_sha256": "6bb09993106f009fb9d3d6bbac9bed5e365da0a1e11d10d9951c9f55ef9f4f4d",
+      "snapshot_file": "2026-10-22/ort-licence.txt"
+    },
+    {
+      "id": "onnxruntime-licence",
+      "owner": "Microsoft (ONNX Runtime)",
+      "kind": "licence",
+      "covers": [
+        "ONNX Runtime, which runs Kokoro-82M in the native voice route, linked into the binary"
+      ],
+      "url": "https://raw.githubusercontent.com/microsoft/onnxruntime/v1.31.0/LICENSE",
+      "page_date": "MIT License, Copyright (c) Microsoft Corporation (tag v1.31.0)",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "MIT License",
+        "Copyright (c) Microsoft Corporation"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT: a shipped binary carries the copyright line and licence text (a third-party notices file)",
+        "ONNX Runtime ships its own ThirdPartyNotices.txt for code it bundles; a binary that links it carries that file too. Not read line by line here"
+      ],
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 2.0's native build (the Rust spikes, escape-the-valley PR #26), at a pinned ref.",
+      "snapshot_sha256": "50da1661589023a2668812fdacb204e4014c41269baa1558897b61290fd28c78",
+      "snapshot_file": "2026-10-22/onnxruntime-licence.txt"
+    },
+    {
+      "id": "xrpl-rust-licence",
+      "owner": "Tanveer Wahid, now under XRPLF (xrpl-rust)",
+      "kind": "licence",
+      "covers": [
+        "xrpl-rust 1.3.0 on crates.io (library name `xrpl`), the native ledger client; not the separate `xrpl` crate on crates.io"
+      ],
+      "url": "https://raw.githubusercontent.com/XRPLF/xrpl-rust/v1.3.0/LICENSE",
+      "page_date": "Copyright (c) 2021, Tanveer Wahid (ISC; tag v1.3.0)",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "Copyright (c) 2021, Tanveer Wahid",
+        "provided that the above copyright notice and this permission notice appear in all copies."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "ISC: a shipped binary carries the copyright line and licence text (a third-party notices file)",
+        "Its Cargo.toml at v1.3.0 names the crate xrpl-rust with library name xrpl, and pins secp256k1 0.30.0",
+        "A later tag, xrpl-sdk@2.0.0, exists; it was not read"
+      ],
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 2.0's native build (the Rust spikes, escape-the-valley PR #26), at a pinned ref.",
+      "snapshot_sha256": "7290d023eaecb8ad4445f2cdea77129ab9b70b690b5540b20fa6388f81be97c2",
+      "snapshot_file": "2026-10-22/xrpl-rust-licence.txt"
+    },
+    {
+      "id": "secp256k1-licence",
+      "owner": "rust-bitcoin (secp256k1)",
+      "kind": "licence",
+      "covers": [
+        "secp256k1 0.30.0, the signing crate xrpl-rust 1.3.0 depends on"
+      ],
+      "url": "https://raw.githubusercontent.com/rust-bitcoin/rust-secp256k1/secp256k1-0.30.0/LICENSE",
+      "page_date": "CC0 1.0 Universal (tag secp256k1-0.30.0)",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "CC0 1.0 Universal"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "CC0: no conditions. It is 0.30.0 because xrpl-rust 1.3.0 pins it; the newest release is 0.33.1"
+      ],
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 2.0's native build (the Rust spikes, escape-the-valley PR #26), at a pinned ref.",
+      "snapshot_sha256": "05d9f1a0af61535887a399e161c9d14d1f898043b61d05fe4854ed8c6460179c",
+      "snapshot_file": "2026-10-22/secp256k1-licence.txt"
+    },
+    {
+      "id": "webpki-root-certs-licence",
+      "owner": "rustls (webpki-roots repository: webpki-root-certs)",
+      "kind": "licence",
+      "covers": [
+        "webpki-root-certs 1.0.10, Mozilla's root certificates; in the ETV spikes' Cargo.lock as a build-time dependency of ort-sys's download-binaries path (via ureq)"
+      ],
+      "url": "https://raw.githubusercontent.com/rustls/webpki-roots/v/1.0.10/LICENSE-CCADB",
+      "page_date": "Community Data License Agreement - Permissive - Version 2.0 (tag v/1.0.10)",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "Community Data License Agreement - Permissive - Version 2.0",
+        "so long as the Data Recipient makes available the text of this agreement with the shared Data."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "CDLA-Permissive-2.0 (webpki-root-certs/Cargo.toml license field at v/1.0.10, read with WebFetch): whoever shares the certificate data makes the agreement's text available with it",
+        "In the spikes it is a build dependency: ort-sys's download-binaries feature pulls ureq, which fetches ONNX Runtime at build time. A build dependency is not linked into the game binary, so the condition attaches only if a runtime crate pulls it in. Check the shipping Cargo.lock at ETV Phase 7 (cargo tree -e normal)",
+        "Corrected 2026-10-22 before merge: first drafted as webpki-roots for the ledger client's TLS. The spikes' lockfile holds webpki-root-certs, not webpki-roots, and xrpl-rust's json-rpc path doesn't use it. Both crates live in the rustls/webpki-roots repository under the same LICENSE-CCADB"
+      ],
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 2.0's native build (the Rust spikes, escape-the-valley PR #26), at a pinned ref.",
+      "snapshot_sha256": "44912421a0a0528813512b50b09d1219268c6770a8a37b4095af012a6fe8ec36",
+      "snapshot_file": "2026-10-22/webpki-root-certs-licence.txt"
+    },
+    {
+      "id": "rodio-licence",
+      "owner": "The Rodio Project Contributors (rodio)",
+      "kind": "licence",
+      "covers": [
+        "rodio, audio playback only, in the native voice route"
+      ],
+      "url": "https://raw.githubusercontent.com/RustAudio/rodio/v0.23.0/LICENSE-MIT",
+      "page_date": "Copyright (c) The Rodio Project Contributors (MIT; tag v0.23.0; dual MIT OR Apache-2.0)",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "Copyright (c) The Rodio Project Contributors",
+        "The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT (dual-licensed MIT OR Apache-2.0; we take MIT): a shipped binary carries the copyright line and licence text (a third-party notices file)",
+        "The Editor read it first at v0.23.0 (LICENSE-MIT, LICENSE-APACHE and Cargo.toml); R&D re-read it here"
+      ],
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 2.0's native build (the Rust spikes, escape-the-valley PR #26), at a pinned ref.",
+      "snapshot_sha256": "374925befba27c0fbb190acf8e0bbd3264c33afd707e3c8dfca6a9d7f2407f57",
+      "snapshot_file": "2026-10-22/rodio-licence.txt"
+    },
+    {
+      "id": "certifi-licence",
+      "owner": "certifi (python-certifi)",
+      "kind": "licence",
+      "covers": [
+        "certifi 2026.10.19, the CA bundle bundled unmodified in Escape the Valley's PyInstaller binaries (via httpx)"
+      ],
+      "url": "https://raw.githubusercontent.com/certifi/python-certifi/2026.10.19/LICENSE",
+      "page_date": "certifi LICENSE (MPL-2.0 block; tag 2026.10.19)",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "This package contains a modified version of ca-bundle.crt",
+        "This Source Code Form is subject to the terms of the Mozilla Public License"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MPL-2.0: a binary that ships it must also tell recipients where to get its source (see mpl-2.0-licence §3.2(a)). The file's own URLs point to Mozilla's certdata.txt at tip and to the MPL text, not to certifi's modified bundle, so they don't do this",
+        "So the notices file names the exact version and its source: the PyPI sdist certifi-2026.10.19.tar.gz and github.com/certifi/python-certifi at tag 2026.10.19",
+        "The source line is generated for any MPL, LGPL or GPL-family entry, so a later version or dependency can't slip past"
+      ],
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 1.3.1's third-party notices (escape-the-valley PR #25, issue #28), at a pinned ref.",
+      "snapshot_sha256": "3a32ae6fd1e6f82723772d8892771f07ca4f6309b01587ac04c6fe93c74f9bae",
+      "snapshot_file": "2026-10-22/certifi-licence.txt"
+    },
+    {
+      "id": "mpl-2.0-licence",
+      "owner": "Mozilla Foundation (MPL 2.0)",
+      "kind": "licence",
+      "covers": [
+        "Mozilla Public License 2.0, the licence of certifi and any other MPL dependency the studio ships in a binary"
+      ],
+      "url": "https://www.mozilla.org/media/MPL/2.0/index.txt",
+      "page_date": "Mozilla Public License Version 2.0",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "If You distribute Covered Software in Executable Form then",
+        "You must inform recipients of the Executable Form how they can obtain a copy of such Source Code Form"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "§3.2(a): distributing Covered Software in executable form means making its source available and telling recipients how to get it, at no more than the cost of distribution",
+        "§3.2(b): the executable may be distributed under other terms, so long as they don't limit recipients' rights in the source",
+        "File-level copyleft: only the MPL files themselves (here certifi's), not the game"
+      ],
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 1.3.1's third-party notices (escape-the-valley PR #25, issue #28), at a pinned ref.",
+      "snapshot_sha256": "e8ba82e63ba908724aaee6043943c5a2629b9ebf1af581ea0eea19a713123685",
+      "snapshot_file": "2026-10-22/mpl-2.0-licence.txt"
+    },
+    {
+      "id": "pyinstaller-licence",
+      "owner": "PyInstaller Development Team",
+      "kind": "licence",
+      "covers": [
+        "PyInstaller's bootloader and run-time hooks, embedded in every Escape the Valley binary"
+      ],
+      "url": "https://raw.githubusercontent.com/pyinstaller/pyinstaller/v6.22.3/COPYING.txt",
+      "page_date": "The PyInstaller licensing terms (tag v6.22.3, the latest release)",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "Bootloader Exception",
+        "the authors give you unlimited permission to link or embed compiled bootloader",
+        "these files are now licensed under the Apache License, Version 2.0."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "GPL-2.0-or-later with the Bootloader Exception: embedding the unmodified bootloader in a combined executable and distributing it carries no GPL obligation, so no source line is needed",
+        "The GPL still applies to modifying the bootloader or distributing it unlinked; a modified bootloader would need a fresh read",
+        "Run-time hooks are Apache-2.0: the notices file includes COPYING.txt, which carries the full GPL-2.0 and Apache-2.0 texts",
+        "The build pins pyinstaller>=6.9.0; re-read COPYING.txt if a later major release changes it"
+      ],
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 1.3.1's third-party notices (escape-the-valley PR #25, issue #28), at a pinned ref.",
+      "snapshot_sha256": "f2d6310e2ca624ec078ddbd868c09189990e9c1cef132516a4e819186f5c367f",
+      "snapshot_file": "2026-10-22/pyinstaller-licence.txt"
+    },
+    {
+      "id": "cpython-licence",
+      "owner": "Python Software Foundation (CPython)",
+      "kind": "licence",
+      "covers": [
+        "The CPython runtime frozen into Escape the Valley's PyInstaller binaries"
+      ],
+      "url": "https://raw.githubusercontent.com/python/cpython/v3.12.12/LICENSE",
+      "page_date": "CPython LICENSE (tag v3.12.12)",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "PYTHON SOFTWARE FOUNDATION LICENSE VERSION 2",
+        "provided, however, that PSF's License Agreement and PSF's notice of copyright",
+        "Some software incorporated into Python is under different licenses."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "PSF §2: a binary that carries Python keeps PSF's licence agreement and copyright notice, so the notices file includes the runtime's LICENSE",
+        "The repository LICENSE covers Python's own terms only. The libraries the build links (OpenSSL, libffi, zlib, expat, bzip2, xz, sqlite, mpdecimal) carry their own licences, which come from the build: python.org's Windows LICENSE.txt appends them; python-build-standalone (what uv installs) ships copies of the licence texts in its archive",
+        "python-build-standalone builds against libedit, not readline, and disables _gdbm to avoid GPL links; releases before 2023 may link readline. Check the build in use"
+      ],
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 1.3.1's third-party notices (escape-the-valley PR #25, issue #28), at a pinned ref.",
+      "snapshot_sha256": "350fbb5f093f61337b130b56e5a7119129c68975bebc1e7dd247d0206313d0e1",
+      "snapshot_file": "2026-10-22/cpython-licence.txt"
+    },
+    {
+      "id": "kokoro-onnx-taylorchu-licence",
+      "owner": "taylorchu (kokoro-onnx)",
+      "kind": "licence",
+      "covers": [
+        "taylorchu/kokoro-onnx, the ONNX conversion of Kokoro-82M that thewh1teagle's model-files-v1.0 release optimises"
+      ],
+      "url": "https://raw.githubusercontent.com/taylorchu/kokoro-onnx/de4c145318ec8e67c8026982b9dab8f572a1f57b/LICENSE",
+      "page_date": "MIT License, Copyright (c) 2025 taylorchu (commit de4c145)",
+      "read_date": "2026-10-22",
+      "clauses": [
+        "MIT License",
+        "Copyright (c) 2025 taylorchu"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT covers the repository's code; its README names the model an ONNX optimised version of hexgrad/Kokoro-82M but states no licence for the ONNX files themselves. The weights' licence follows Kokoro-82M (Apache-2.0, kokoro-82m-model-card)"
+      ],
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 1.3.1's third-party notices (escape-the-valley PR #25, issue #28), at a pinned ref.",
+      "snapshot_sha256": "5eeb76973189dd7ee5d71dd3af4b097f7c9ca6133ce618717e8a0f0185a02e11",
+      "snapshot_file": "2026-10-22/kokoro-onnx-taylorchu-licence.txt"
     }
   ]
 }

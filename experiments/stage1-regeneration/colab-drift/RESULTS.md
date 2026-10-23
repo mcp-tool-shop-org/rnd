@@ -19,7 +19,7 @@ sampling block).
 - **Models:** muse-glimmer-30b Q8_0 as critic and gemma-4-31b-it Q8_0 as writer, on the T10 pilot. The run resumes
   after the first writing wave (w0) from 15w's sealed drafts, so every arm critiques the same drafts.
 - **GPU:** Colab A100-SXM4-40GB. G4 and C80 are the exceptions, below.
-- **Comparison:** compare.py matches calls by request key and compares the completions byte for byte. Its "decision
+- **Comparison:** [compare.py](scripts/compare.py) matches calls by request key and compares the completions byte for byte. Its "decision
   drift" counts a change in any parsed line: VERDICT, DECIDING (the quoted span), TRAIT, CONTRASTED or a flaw label.
   CONTRASTED is self-check scaffolding the pipeline doesn't read, so a "decision drift" isn't necessarily a changed
   verdict. The G4 section breaks the changes down by field.

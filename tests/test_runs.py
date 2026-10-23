@@ -231,6 +231,13 @@ class RunObjectTests(RunsBase):
         self.assertEqual(runs.from_outcome({"run": {**self.RUN, "outcome": "not-assigned", "cost": 0}})["outcome"],
                          "no-capacity")
 
+    def test_non_mapping_pins_are_refused_not_raised(self):
+        for bad in ([1], ["ab"], 1, "x", [], "", 0, False):
+            with self.assertRaises(runs.RecordError):
+                runs.from_outcome({"run": {**self.RUN, "pins": bad}})
+            with self.assertRaises(runs.RecordError):
+                runs.from_outcome({"pins": bad, "window": "w", "date": "2026-10-23"})
+
     def test_an_unhashable_outcome_is_reported_not_raised(self):
         for bad in ([], {}):
             run = runs.from_outcome({"run": {**self.RUN, "outcome": bad}})

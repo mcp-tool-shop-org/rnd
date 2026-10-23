@@ -1,0 +1,41 @@
+{
+ "schema": "rnd-experiment/v1",
+ "name": "offrig-jobs",
+ "status": "closed",
+ "design": "README.md",
+ "template": "ab-experiments",
+ "budgets": [],
+ "licences": [],
+ "runs": [
+  {
+   "id": "oj1",
+   "venue": "rig",
+   "hardware": "RTX 5090",
+   "date": "2026-10-22",
+   "cost": 0.01,
+   "cost_unit": "rig_hours",
+   "cost_basis": "rate_x_runtime",
+   "cap": 1.25,
+   "outcome": "tooling-fault",
+   "why": "attempt 1 (runner a9f1589e): A1 failed at 21 s, offrig's auto-ctx probe gave up at 16 s on a cold model load (HTTP 499); runner mislabelled it offloaded; files kept in runs-attempt1; offrig ticket filed",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "oj2",
+   "venue": "rig",
+   "hardware": "RTX 5090",
+   "date": "2026-10-22",
+   "cost": 0.59,
+   "cost_unit": "rig_hours",
+   "cost_basis": "rate_x_runtime",
+   "cap": 1.25,
+   "outcome": "results",
+   "why": "attempt 2 (runner 8ff170ba): A1, A2, B ran; B 1.59x throughput but changes answers (A2 vs A1 zero on every field; B vs A1 1 verdict, 15 reasoning); C, D skipped as over 26 GiB on corrected estimates 35.8 and 29.0 (the logged reason was empty: an estimator crash, disclosed); verdict no --jobs>1 on pinned studies",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  }
+ ]
+}

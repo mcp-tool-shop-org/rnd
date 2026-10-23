@@ -449,6 +449,44 @@ facts at source.
 **Before any card time:** an Argon review of this plan, its verdict recorded here, then the Director's go. Each
 leg after that is its own grant request to the Publisher, naming peak VRAM and duration.
 
+## Teacher leg: complete (2026-10-23)
+
+Teacher leg complete 2026-10-23 (windows 1+2, gemma4:31b, think on, structured on, num_predict 4096): 1647 verdicts, 1611 kept (final_verdict == label), 25 truncated, 11 missed, 0 model errors.
+
+Finding: losses lean unsupported at the top of the ladder. 21 of 25 truncations and 7 of 11 misses are unsupported items; L8 keeps 37 supported but 25 unsupported. Arm C's hardest items are therefore label-imbalanced; B-matched trains on the same 1611, so the selection cancels between the arms, but the imbalance is reported, not hidden.
+
+| Cell | n (S/U) | kept S | kept U | truncated S/U | missed S/U |
+|---|---|---|---|---|---|
+| L1 | 15 (8/7) | 8 | 7 | 0/0 | 0/0 |
+| L2 | 13 (4/9) | 4 | 9 | 0/0 | 0/0 |
+| L3 | 78 (39/39) | 39 | 39 | 0/0 | 0/0 |
+| L4 | 77 (38/39) | 38 | 39 | 0/0 | 0/0 |
+| L5 | 78 (39/39) | 39 | 39 | 0/0 | 0/0 |
+| L6 | 78 (39/39) | 36 | 32 | 0/0 | 3/7 |
+| L7 | 78 (39/39) | 37 | 32 | 2/7 | 0/0 |
+| L8 | 78 (39/39) | 37 | 25 | 2/14 | 0/0 |
+| steps=1 | 78 (39/39) | 39 | 39 | 0/0 | 0/0 |
+| steps=2 | 78 (39/39) | 39 | 39 | 0/0 | 0/0 |
+| steps=3 | 78 (39/39) | 39 | 39 | 0/0 | 0/0 |
+| precedence=1 | 78 (39/39) | 39 | 39 | 0/0 | 0/0 |
+| precedence=2 | 78 (39/39) | 39 | 39 | 0/0 | 0/0 |
+| precedence=3 | 78 (39/39) | 39 | 39 | 0/0 | 0/0 |
+| traps=1 | 20 (7/13) | 7 | 13 | 0/0 | 0/0 |
+| traps=2 | 21 (11/10) | 11 | 10 | 0/0 | 0/0 |
+| traps=3 | 57 (24/33) | 24 | 33 | 0/0 | 0/0 |
+| control=1 | 70 (38/32) | 38 | 32 | 0/0 | 0/0 |
+| control=2 | 72 (37/35) | 37 | 35 | 0/0 | 0/0 |
+| control=3 | 78 (39/39) | 39 | 39 | 0/0 | 0/0 |
+| units=1 | 44 (24/20) | 24 | 20 | 0/0 | 0/0 |
+| units=2 | 47 (22/25) | 22 | 25 | 0/0 | 0/0 |
+| units=3 | 42 (22/20) | 22 | 20 | 0/0 | 0/0 |
+| nearmiss=1 | 78 (39/39) | 39 | 39 | 0/0 | 0/0 |
+| nearmiss=2 | 77 (38/39) | 37 | 39 | 0/0 | 1/0 |
+| nearmiss=3 | 78 (39/39) | 39 | 39 | 0/0 | 0/0 |
+| All | 1647 (819/828) | 811 | 800 | 4/21 | 4/7 |
+
+Window 2 resumed at item 474 on the same run directory (19:51 to 22:54 local, about 3.05 h, 0 model errors, the log appended to window 1's). Arm C keeps the 1611 matches; B-matched trains on the same 1611.
+
 ## What the Director will see, step by step
 
 1. **The "before" curve (arm A):** where a 1.7B model falls off on its own.

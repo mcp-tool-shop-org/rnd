@@ -32,8 +32,9 @@ class RecordError(Exception):
 
 
 def _pins(value) -> dict:
-    """An outcome's pins as a dict; anything else but empty is refused, not passed to dict() to raise TypeError."""
-    if not value:
+    """An outcome's pins as a dict; None or a missing key is empty, and any other non-mapping is refused (never passed
+    to dict(), which would raise TypeError)."""
+    if value is None:
         return {}
     if not isinstance(value, dict):
         raise RecordError("OUTCOME_SHAPE", "outcome.json's pins must be an object")

@@ -232,7 +232,7 @@ class RunObjectTests(RunsBase):
                          "no-capacity")
 
     def test_non_mapping_pins_are_refused_not_raised(self):
-        for bad in ([1], ["ab"], 1, "x"):
+        for bad in ([1], ["ab"], 1, "x", [], "", 0, False):
             with self.assertRaises(runs.RecordError):
                 runs.from_outcome({"run": {**self.RUN, "pins": bad}})
             with self.assertRaises(runs.RecordError):

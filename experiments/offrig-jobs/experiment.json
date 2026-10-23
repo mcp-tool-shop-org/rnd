@@ -1,7 +1,7 @@
 {
  "schema": "rnd-experiment/v1",
  "name": "offrig-jobs",
- "status": "designing",
+ "status": "closed",
  "design": "README.md",
  "template": "ab-experiments",
  "budgets": [],

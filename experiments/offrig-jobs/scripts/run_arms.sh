@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Published copy: the four paths below are set by the caller (the run used local paths on the rig).
+# Published copy: the four paths below are set by the caller (the run used local paths on the rig). Line 54 is corrected here: in the run (8ff170ba) a literal newline inside that f-string crashed the C/D estimator (RESULTS.md).
 # offrig --jobs measurement (plan offrig-jobs-measurement-plan.md, sha f680591b). Runs arms A1 A2 B C D in order on
 # the 5090 under the Publisher's grant. Each arm: stop Ollama, start `ollama serve` with that arm's environment, guard
 # (watchdog heartbeat, empty card, studio backend), run offrig verify calibrate on bench30 with --jobs N in its own
@@ -51,8 +51,7 @@ meas=pk(bfile)-peak if os.path.exists(bfile) else None   # B has 2 sequences, A1
 per_f16=max(th_f16, meas or 0)
 per=per_f16*(1 if KV=="f16" else 1.0625/2)
 est=peak-per_f16+P*per
-open(os.path.join(os.path.dirname(smi),"kv-increment.txt"),"w").write(f"theory_f16_GiB {th_f16:.2f} measured_B_minus_A1_GiB {meas if meas is None else round(meas,2)} used {per_f16:.2f}
-")
+open(os.path.join(os.path.dirname(smi),"kv-increment.txt"),"w").write(f"theory_f16_GiB {th_f16:.2f} measured_B_minus_A1_GiB {meas if meas is None else round(meas,2)} used {per_f16:.2f}\n")
 print(f"   estimate {a}: A1 peak {peak:.1f} GiB - 1 x {per_f16:.2f} + {P} x {per:.2f} = {est:.1f} GiB (theory f16 {th_f16:.2f}, measured B-A1 {meas if meas is None else round(meas,2)})")
 sys.exit(0 if est<=26 else 1)
 PY

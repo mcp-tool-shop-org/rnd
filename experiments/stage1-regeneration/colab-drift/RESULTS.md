@@ -37,11 +37,11 @@ cached token, and on any record that has neither field.
 | C80 | critique, A100 80 GB | 178 | 0 |
 
 The checker also passes a positive control: on 16w, run with the cache on, it flags 3 of 4 calls as reusing cached
-tokens (7,016 and 350 tokens).
+tokens: 3 of 4 calls, with 7,016, 350 and 350 cached tokens.
 
 ## Result: A100 against A100, byte-identical everywhere
 
-| Comparison | Role | Keys matched | Exact | Drift |
+| Comparison | Role | Calls matched | Exact | Drift |
 |---|---|---|---|---|
 | P1r vs P2 | critique | 176 | 176 | 0 |
 | P1r vs P1 (partial) | critique | 72 | 72 | 0 |
@@ -49,16 +49,21 @@ tokens (7,016 and 350 tokens).
 | E2 (partial) vs E1 | critic-eval flaw votes | 101 | 101 | 0 |
 | W2 vs W1 | writer (16w's three slots) | 3 | 3 | 0 |
 
-**Three A100 VMs agree byte for byte on every critique request they share, across all 176 unique keys.** Critic-eval
+**Three A100 VMs agree byte for byte on every critique call they share, across all 176 calls.** Critic-eval
 and the writer agree too. The writer requests that diverged in 16w now match, which confirms the seed fix on the path
-where the bug showed. A third replicate (P3) was held in reserve and not run, because neither of its triggers fired
+where the bug showed.
+
+Calls are paired by request key. P1r and C80 each made 178 calls to 176 distinct requests: role-set sent two
+attempt-0 verdict requests twice, identically (T10-D-01 and T10-D-09, a known role-set defect, ticket item 17). P2's
+rebuilt journal holds 176 calls to 174 distinct requests. A third replicate (P3) was held in reserve and not run, because neither of its triggers fired
 (an isolated mismatch, or a split between hosts).
 
 ## A different GPU and binary: G4 (RTX PRO 6000 Blackwell, build 39742d8a)
 
 G4 sent the same requests, with the cache off, to its own sm_120 build of the same llama.cpp commit. Against P1r:
-- **113 of 178 keys exact, and 65 drifted, every one with a decision change.** The first divergence is at T10-C-01's
-  first trait call.
+- **113 of 178 calls exact, and 65 drifted, every one with a decision change.** The first divergence is at T10-C-01's
+  first trait call. G4 made 179 calls: one extra retry (T10-C-04's verdict, attempt 1) that no A100 run needed, a
+  knock-on of its drift.
 - Both the GPU and the binary differ, so this run can't say which one causes the drift. C80, below, changes only the
   A100's memory size.
 - **Don't pool G4 results with A100 results.**
@@ -80,7 +85,7 @@ the same tokens in the same order to compare one to one; the ratio comes from to
 
 C80 ran on a Colab A100-SXM4-80GB with the same llama-server binary (b4659b3f) and the same requests, with the cache
 off (178 records, 0 with cached tokens). Against P1r:
-- **178 of 178 keys exact, no drift.** The 80 GB card gives the same bytes as the 40 GB card.
+- **178 of 178 calls exact, no drift.** The 80 GB card gives the same bytes as the 40 GB card.
 - So G4's drift doesn't come from the amount of memory on the card. Among the things this study varied, it comes from
   the Blackwell GPU, its sm_120 binary, or both.
 - C80's results can be pooled with the 40 GB A100 arms.
@@ -96,19 +101,23 @@ off (178 records, 0 with cached tokens). Against P1r:
 The 80 GB card costs about 1.28× the 40 GB per hour (6.77 against 5.3 units), so for this job it costs about 15% more
 per call. It's worth choosing only when a model or batch needs more than 40 GB.
 
-## Lost VMs, and why no data was lost
+## Lost VMs, and what the logs kept
 
 Three of the six long A100 windows lost their VMs:
 - P1 at 1 h 30 m, partway through a wave;
-- P2 at 3 h 16 m, after its last call;
+- P2 at 3 h 16 m. Its rebuilt record stops 2 calls before the end of the run;
 - E2 at 1 h 16 m.
 
 Each loss happened while 3–4 Colab sessions were running. Two of the three lost VMs were the oldest session running,
 and one wasn't. Three losses are too few to name a cause, so this is recorded, not explained.
 
-No call data was lost. The job writes every call's journal row into its log as it goes, and the journals were rebuilt
-from the logs. P1r closed normally, and its rebuilt journal equals the official one on 178 of 178 rows, so the rebuilt
-P1, P2 and E2 journals can be trusted. What a loss does cost is the generations log (timings and cache readings) and
+Each call writes its journal row into the job's log as a compressed line, and the rig downloads that log from the VM
+every 2 minutes while the job runs (`smoke_window.sh`, `PIN_WATCH_S` default 120). When a VM is lost, the rig keeps
+its last copy, at most about 2 minutes behind, and the journals were rebuilt from it. P1r closed normally, and its
+rebuilt journal equals the official one on 178 of 178 rows, so the rebuild itself is faithful. On one lost VM it
+stopped short: P2's rebuilt journal (176 checkpoint lines in its log) is missing
+exactly P1r's last two calls, T10-D-AP-06's trait retries (attempts 1 and 2). The log can't show whether P2 made
+those calls and lost them in the final fetch interval, or the VM died first. What a loss does cost is the generations log (timings and cache readings) and
 the run record. Streaming those into the log the same way is filed as role-set work.
 
 ## Cost

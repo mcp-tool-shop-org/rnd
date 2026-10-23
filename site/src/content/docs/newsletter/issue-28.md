@@ -95,7 +95,7 @@ Two graders worked separately: Antigravity, in a fresh conversation, and the R&D
 only if both graders and its stored label agreed, and neither grader flagged it as unclear. Anything else counted as
 **ambiguous**, with no tiebreak.
 
-![The 30-item panel: 23 sound (10 cannot_tell, 7 supported, 6 unsupported) and 7 ambiguous. On 2 of the ambiguous items every label agreed but a grader flagged it unclear; on 5 the labels disagreed. On 3 of the 4 Track A trap items, both graders broke the stored label](/rnd/charts/issue-28-blind-panel.svg)
+![The 30-item panel: 23 sound (10 cannot_tell, 7 supported, 6 unsupported) and 7 ambiguous. On 2 of the ambiguous items every label agreed but a grader flagged it unclear; on 5 the labels disagreed. On 3 of the 4 Track A trap items, both graders broke the stored label](/rnd/charts/issue-28-graded-panel.svg)
 
 One ambiguous item shows the critic doing its job. Its stored label was supported, and the critic refused it. Both
 graders read cannot_tell. The statement named a payroll portal that the material never mentions. That draft's flaw

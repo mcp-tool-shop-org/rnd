@@ -1,20 +1,18 @@
 # rnd: how it works
 
-Mapped at 2026-10-22 from commit 6310311 by Atlas 1.24.0.
+Mapped at 2026-10-23 from commit 4e6168c by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-14 parts, mostly Python (141 files), shell (29), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
+14 parts, mostly Python (141 files), shell (30), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-19 (96f1277)
+## What changed since 2026-10-22 (6310311)
 
-- README.md is now also read by experiments/cuda-python-5090-rung/experiment.json and tests/test_rawdata.py.
-- SECURITY.md is now read by tests/test_rawdata.py.
-- docs/raw-data-rules/receipts.json is now read by tests/test_rawdata.py.
-- And 9 more new writers and readers of places.
-- 64 files added and 33 changed content, across 8 parts.
+- README.md is now also read by experiments/offrig-jobs/experiment.json.
+- experiments/natural-errors/ is now also read by README.es.md, README.fr.md, README.hi.md, README.it.md, README.ja.md, README.pt-BR.md and README.zh.md.
+- 20 files added and 26 changed content, across 7 parts.
 
 ## What comes in
 
@@ -59,9 +57,12 @@ the repository root holds only shell files, which this map does not read, so wha
 ## What tends to change together
 
 - **experiments/atlas-mcp-utility/run.py** and **tests/test_atlas_mcp_utility_run.py** changed together in 15 of 15 commits.
+- **mcptoolshop_rnd/layout.py** and **mcptoolshop_rnd/runs.py** changed together in 4 of 7 commits, inside the mcptoolshop_rnd part.
+- **mcptoolshop_rnd/layout.py** and **tests/test_runs.py** changed together in 4 of 7 commits, and the tests part imports the mcptoolshop_rnd part.
+- **mcptoolshop_rnd/localbuilders/proxy.py** and **tests/test_localbuilders.py** changed together in 4 of 7 commits, and the tests part imports the mcptoolshop_rnd part.
 - **rnd/cli.py** and **tests/test_rnd.py** changed together in 4 of 8 commits.
 
-1 file changed together with its own test, as expected.
+2 files changed together with their own tests, as expected.
 
 Confidence is low: fewer than 25 source files reach 10 revisions in the window.
 

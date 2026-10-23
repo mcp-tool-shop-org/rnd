@@ -73,52 +73,44 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 64,
-      "changed": 33,
+      "added": 20,
+      "changed": 26,
       "moved": 0,
-      "parts": 8,
+      "parts": 7,
       "removed": 0
     },
     "items": [
       {
         "kind": "landing",
-        "sentence": "README.md is now also read by experiments/cuda-python-5090-rung/experiment.json and tests/test_rawdata.py.",
+        "sentence": "README.md is now also read by experiments/offrig-jobs/experiment.json.",
         "subjects": [
           "README.md",
-          "experiments/cuda-python-5090-rung/experiment.json",
-          "tests/test_rawdata.py"
+          "experiments/offrig-jobs/experiment.json"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "SECURITY.md is now read by tests/test_rawdata.py.",
+        "sentence": "experiments/natural-errors/ is now also read by README.es.md, README.fr.md, README.hi.md, README.it.md, README.ja.md, README.pt-BR.md and README.zh.md.",
         "subjects": [
-          "SECURITY.md",
-          "tests/test_rawdata.py"
+          "experiments/natural-errors/",
+          "README.es.md",
+          "README.fr.md",
+          "README.hi.md",
+          "README.it.md",
+          "README.ja.md",
+          "README.pt-BR.md",
+          "README.zh.md"
         ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "docs/raw-data-rules/receipts.json is now read by tests/test_rawdata.py.",
-        "subjects": [
-          "docs/raw-data-rules/receipts.json",
-          "tests/test_rawdata.py"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "And 9 more new writers and readers of places.",
-        "subjects": []
       },
       {
         "kind": "counts",
-        "sentence": "64 files added and 33 changed content, across 8 parts.",
+        "sentence": "20 files added and 26 changed content, across 7 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "96f1277c83728b5b78b849304c0a16e043161d40",
-      "generatedAt": "2026-10-19T21:53:30.410Z"
+      "commit": "631031188dc62ffb6e0ec8197203ad89dde5e3e2",
+      "generatedAt": "2026-10-22T18:43:33.031Z"
     },
     "unchanged": false
   },
@@ -139,6 +131,51 @@
       "shared": 15
     },
     {
+      "a": "mcptoolshop_rnd/layout.py",
+      "b": "mcptoolshop_rnd/runs.py",
+      "either": 7,
+      "partLabels": [
+        "mcptoolshop_rnd",
+        "mcptoolshop_rnd"
+      ],
+      "parts": [
+        "mcptoolshop_rnd",
+        "mcptoolshop_rnd"
+      ],
+      "relation": "inside",
+      "shared": 4
+    },
+    {
+      "a": "mcptoolshop_rnd/layout.py",
+      "b": "tests/test_runs.py",
+      "either": 7,
+      "partLabels": [
+        "mcptoolshop_rnd",
+        "tests"
+      ],
+      "parts": [
+        "mcptoolshop_rnd",
+        "tests"
+      ],
+      "relation": "b-imports-a",
+      "shared": 4
+    },
+    {
+      "a": "mcptoolshop_rnd/localbuilders/proxy.py",
+      "b": "tests/test_localbuilders.py",
+      "either": 7,
+      "partLabels": [
+        "mcptoolshop_rnd",
+        "tests"
+      ],
+      "parts": [
+        "mcptoolshop_rnd",
+        "tests"
+      ],
+      "relation": "b-imports-a",
+      "shared": 4
+    },
+    {
       "a": "rnd/cli.py",
       "b": "tests/test_rnd.py",
       "either": 8,
@@ -155,14 +192,14 @@
     }
   ],
   "changesTogetherNote": [
-    "1 file changed together with its own test, as expected.",
+    "2 files changed together with their own tests, as expected.",
     "Confidence is low: fewer than 25 source files reach 10 revisions in the window.",
     "Window: 180 days; a pair counts from 3 shared commits, since 5 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
-  "changesTogetherWithTests": 1,
-  "commit": "631031188dc62ffb6e0ec8197203ad89dde5e3e2",
+  "changesTogetherWithTests": 2,
+  "commit": "4e6168c698cf222882a1f599ae8e9123c07d129d",
   "defaultBranch": "main",
-  "derived": "14 parts, mostly Python (141 files), shell (29), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "14 parts, mostly Python (141 files), shell (30), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -484,7 +521,7 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-22T18:43:33.031Z",
+  "generatedAt": "2026-10-23T20:38:28.189Z",
   "limits": [
     "11 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 8 more.",
     "25 writes and 45 reads use paths built at run time and are not named here.",

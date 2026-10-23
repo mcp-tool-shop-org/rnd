@@ -2013,6 +2013,21 @@
    },
    "projected_cost": null,
    "raw_manifest_id": null
+  },
+  {
+   "id": "16x",
+   "venue": "colab",
+   "hardware": "CPU",
+   "date": "2026-10-23",
+   "cost": 0.02,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 0.05,
+   "outcome": "test",
+   "why": "Drift v3 critic-eval stub: full 106-item path with no replay before the paid E arms",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
   }
  ]
 }

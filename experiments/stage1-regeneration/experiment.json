@@ -1641,6 +1641,66 @@
    "pins": {},
    "projected_cost": null,
    "raw_manifest_id": null
+  },
+  {
+   "id": "15z",
+   "venue": "colab",
+   "hardware": "CPU",
+   "date": "2026-10-23",
+   "cost": 0.02,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 0.05,
+   "outcome": "test",
+   "why": "T10 critique resume stub at role-set 727daa9: 118 journal calls replayed, 60 new; T10-C-AP-01 passes check_against (the 15x fault), no ModelsMissing; w1 sealed",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "15xs",
+   "venue": "colab",
+   "hardware": "CPU",
+   "date": "2026-10-23",
+   "cost": 0.02,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 0.05,
+   "outcome": "test",
+   "why": "Rewrite-path stub: w2 rewrote only the 4 needs_rewrite with the critic reasons, w3 critiqued them; 1 writer and 5 critic calls per slot priced 15xt",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "15xr",
+   "venue": "colab",
+   "hardware": "A100-SXM4-40GB",
+   "date": "2026-10-23",
+   "cost": 5.74,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 10,
+   "outcome": "results",
+   "why": "T10 critique resume after the #109 fix: replay reused 118, w1 sealed 54/4/2, 11 apply accepts, 0 ModelsMissing; 4 needs_rewrite go to a rewrite window",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "15xt",
+   "venue": "colab",
+   "hardware": "A100-SXM4-40GB",
+   "date": "2026-10-23",
+   "cost": 4.56,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 6,
+   "outcome": "results",
+   "why": "T10 rewrite of 4 needs_rewrite: 1 accepted, 1 needs_rewrite, 2 dropped; T10/D cell halt (andon) on critic-unsupported vs key, design ruling before any further T10 window",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
   }
  ]
 }

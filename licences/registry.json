@@ -1256,6 +1256,62 @@
       "notes": "Read by R&D on 2026-10-22 for Escape the Valley 1.3.1's third-party notices (escape-the-valley PR #25, issue #28), at a pinned ref.",
       "snapshot_sha256": "5eeb76973189dd7ee5d71dd3af4b097f7c9ca6133ce618717e8a0f0185a02e11",
       "snapshot_file": "2026-10-22/kokoro-onnx-taylorchu-licence.txt"
+    },
+    {
+      "id": "cpython-licence-3.12.13",
+      "owner": "Python Software Foundation (CPython)",
+      "kind": "licence",
+      "covers": [
+        "The CPython 3.12.13 runtime frozen into Escape the Valley 1.3.1 and XRPL Camp 1.5.1 PyInstaller binaries (uv 0.11.18, python-build-standalone 20260510)"
+      ],
+      "url": "https://raw.githubusercontent.com/python/cpython/v3.12.13/LICENSE",
+      "page_date": "CPython LICENSE (tag v3.12.13)",
+      "read_date": "2026-10-23",
+      "clauses": [
+        "PYTHON SOFTWARE FOUNDATION LICENSE VERSION 2",
+        "provided, however, that PSF's License Agreement and PSF's notice of copyright",
+        "Some software incorporated into Python is under different licenses."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "PSF section 2: a binary that carries Python keeps PSF's licence agreement and copyright notice",
+        "The LICENSE text at v3.12.13 is byte-identical to v3.12.12's (same sha256 of the extracted text); the incorporated-software notices come from Doc/license.rst at the same tag, vendored verbatim by the release (escape-the-valley PR #25)"
+      ],
+      "notes": "Read by R&D on 2026-10-23 for the bundled interpreter the 1.3.1 and 1.5.1 releases pin (the Editor confirmed Doc/license.rst at v3.12.13 against the vendored copy, sha 341832873f...).",
+      "snapshot_sha256": "350fbb5f093f61337b130b56e5a7119129c68975bebc1e7dd247d0206313d0e1",
+      "snapshot_file": "2026-10-23/cpython-licence-3.12.13.txt"
+    },
+    {
+      "id": "python-build-standalone-licence",
+      "owner": "Astral (python-build-standalone)",
+      "kind": "licence",
+      "covers": [
+        "python-build-standalone release 20260510: the cpython-3.12.13 full archives (x86_64-unknown-linux-gnu pgo+lto, aarch64-apple-darwin pgo+lto, x86_64-pc-windows-msvc pgo) whose python/licenses/ texts are vendored into the 1.3.1 and 1.5.1 notices; the install-only builds uv installs"
+      ],
+      "url": "https://raw.githubusercontent.com/astral-sh/python-build-standalone/20260510/LICENSE",
+      "page_date": "python-build-standalone LICENSE (tag 20260510)",
+      "read_date": "2026-10-23",
+      "clauses": [
+        "Mozilla Public License Version 2.0"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MPL-2.0 covers the build project's own files; the built distributions carry each component's licence (CPython PSF, OpenSSL Apache-2.0, bzip2, expat, libffi, liblzma, libuuid, mpdecimal, sqlite, zlib, and on Linux libedit and ncurses), shipped as python/licenses/LICENSE.*.txt in the full archive only, not the install-only archive uv installs",
+        "Archive sha256s, checked against the release's SHA256SUMS by the build and the Editor: linux 3d59ae16..., macOS 0750a735..., windows e6dd2577..."
+      ],
+      "notes": "Read by R&D on 2026-10-23 at the release tag the 1.3.1 and 1.5.1 builds pin (escape-the-valley PR #25, xrpl-camp PR #25).",
+      "snapshot_sha256": "a7fae6cb34ec631564f892e475d03e5d8781b78949caf5c54d404d384e30fffe",
+      "snapshot_file": "2026-10-23/python-build-standalone-licence.txt"
     }
   ]
 }

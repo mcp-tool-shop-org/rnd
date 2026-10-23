@@ -31,6 +31,15 @@ class RecordError(Exception):
         self.code, self.hint = code, hint
 
 
+def _pins(value) -> dict:
+    """An outcome's pins as a dict; anything else but empty is refused, not passed to dict() to raise TypeError."""
+    if not value:
+        return {}
+    if not isinstance(value, dict):
+        raise RecordError("OUTCOME_SHAPE", "outcome.json's pins must be an object")
+    return dict(value)
+
+
 def from_outcome(outcome: dict, **given) -> dict:
     """A run from an outcome.json.
 
@@ -46,7 +55,7 @@ def from_outcome(outcome: dict, **given) -> dict:
         if not isinstance(outcome["run"], dict):
             raise RecordError("OUTCOME_SHAPE", "outcome.json's run must be an object")
         run = {k: v for k, v in outcome["run"].items() if k != "pins"}
-        pins = dict(outcome["run"].get("pins") or {})
+        pins = _pins(outcome["run"].get("pins"))
     else:
         run = {}
         for src, dst in OUTCOME_MAP.items():
@@ -55,7 +64,7 @@ def from_outcome(outcome: dict, **given) -> dict:
         for key in SHARED:
             if outcome.get(key) is not None:
                 run[key] = outcome[key]
-        pins = dict(outcome.get("pins") or {})
+        pins = _pins(outcome.get("pins"))
         if outcome.get("commit"):
             pins.setdefault("commit", outcome["commit"])
     for key, value in given.items():

@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.27] - 2026-10-23
+
+- runs 15z, 15xs, 15xr, 15xt and offrig-jobs oj1/oj2; offrig --jobs measurement (batching changes answers); distill-ladder teacher leg complete with the kept-by-cell table; licences for CPython 3.12.13 and python-build-standalone 20260510; from_outcome refuses non-mapping pins
+- Updated experiment `distill-ladder`
+- Added experiment `offrig-jobs`
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.23.1.26] - 2026-10-22
 
 - Licences: fourteen entries for Escape the Valley, each read at a pinned ref and checked with WebFetch.

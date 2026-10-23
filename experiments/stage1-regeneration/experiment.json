@@ -1979,6 +1979,40 @@
    },
    "projected_cost": null,
    "raw_manifest_id": null
+  },
+  {
+   "id": "17f",
+   "venue": "colab",
+   "hardware": "A100-SXM4-80GB",
+   "date": "2026-10-23",
+   "cost": 20.47,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 28,
+   "outcome": "results",
+   "why": "Drift v3 card arm: A100 80 GB byte-identical to 40 GB on all 178 critic calls; 1.11x faster at 1.28x the rate; study complete",
+   "pins": {
+    "cache_check": "f238a422"
+   },
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "17j",
+   "venue": "colab",
+   "hardware": "A100-SXM4-40GB",
+   "date": "2026-10-23",
+   "cost": 1.37,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": 5,
+   "outcome": "results",
+   "why": "Drift v3 W2: writer calls byte-identical with W1 across A100 VMs, confirming the seed fix on the path where 16w drifted",
+   "pins": {
+    "cache_check": "f238a422"
+   },
+   "projected_cost": null,
+   "raw_manifest_id": null
   }
  ]
 }

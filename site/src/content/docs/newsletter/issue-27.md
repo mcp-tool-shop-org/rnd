@@ -1,14 +1,21 @@
 ---
 title: "Same request, same seed, same bytes?"
-description: "If you send a language model the same request with the same seed, do you get the same answer back on a different machine? We sent the same critic requests to five rented Colab GPUs. Every A100 gave back identical bytes, including one with twice the memory. A Blackwell card on its own build gave back different answers on 65 of them. Getting there first meant finding a bug of our own that had been dropping the seed."
+description: "If you send a language model the same request with the same seed, do you get the same answer back on a different machine? We sent the same critic requests to five rented Colab GPUs. Every A100 gave back identical bytes, including one with twice the memory. A Blackwell card on its own build gave back different text on 65 of them, though only 3 verdicts changed. Getting there first meant finding a bug of our own that had been dropping the seed."
 issue: 27
 date: 2026-10-23
 highlights:
   - "<strong>The seed never arrived.</strong> A first re-run gave the same model scores on two A100s but different words. The cause was our own proxy, which dropped the seed before the request reached the model."
   - "<strong>Three A100s, one answer.</strong> With the seed passed through and the prompt cache off, three separate A100 VMs agreed byte for byte on all 176 critique calls they shared. An 80 GB A100 matched the 40 GB one on 178 of 178."
-  - "<strong>A different card, different answers.</strong> An RTX PRO 6000 Blackwell, on its own build of the same server, matched on 113 of 178. Every one of the other 65 changed a verdict. It was 1.33× faster at 1.68× the price."
+  - "<strong>A different card, different text.</strong> An RTX PRO 6000 Blackwell, on its own build of the same server, matched on 113 of 178. The other 65 changed in their text, but only 3 changed a verdict. It was 1.33× faster at 1.68× the price."
   - "<strong>Three VMs lost, the logs kept.</strong> Colab took back three of six long sessions. Each call's record goes into a log the rig copies every 2 minutes. What the log held was rebuilt; on one lost VM it stopped two calls short of the end."
 ---
+
+:::caution[Correction, 2026-10-23]
+The first version of this issue said that every one of the 65 calls that changed on the RTX PRO 6000 changed a
+verdict. That was wrong. Our comparison script counted a change in any labelled line of the critic's reply as a
+"decision" change, including lines that aren't verdicts. Only 3 of the 65 changed a verdict. The table and the section
+on the Blackwell card below now give the measured breakdown. The A100 results are unchanged.
+:::
 
 The studio builds training data with local language models. One model writes, and a second model, the **critic**,
 checks what it wrote. Everything is pinned so a study can be run again: the model files, the server build, the
@@ -48,8 +55,8 @@ test, which had the cache on. It flagged 3 of the 4 calls, with 7,016, 350 and 3
   Gemma 4 31B as writer, both at 8-bit), with one request at a time.
 - **One VM per arm.** Each arm ran in its own Colab session.
 - **Matched by request.** Every request has a key, a hash of its role, messages and settings. A comparison script
-  matches the calls by key and compares the replies byte for byte. When bytes differ, it also checks whether a verdict
-  changed.
+  matches the calls by key and compares the replies byte for byte. When bytes differ, it also reports which labelled
+  lines of the critic's reply changed.
 
 ## The result
 
@@ -60,7 +67,7 @@ test, which had the cache on. It flagged 3 of the 4 calls, with 7,016, 350 and 3
 | A second A100 40 GB VM | 176 | 176 | 0 |
 | A third A100 40 GB VM (stopped partway) | 72 | 72 | 0 |
 | A100 80 GB, same server build | 178 | 178 | 0 |
-| RTX PRO 6000 Blackwell, its own build | 178 | 113 | 65 |
+| RTX PRO 6000 Blackwell, its own build | 178 | 113 | 3 of 52 verdict calls |
 
 178 calls cover 176 distinct requests; two were sent twice, identically.
 
@@ -71,8 +78,23 @@ that diverged in the first test now match too, which shows the seed fix working 
 with 80 GB of memory instead of 40, on the same server build.
 
 **The Blackwell card is different.** The RTX PRO 6000 needs its own build of the server, compiled for its newer
-architecture. On that build, 65 of the 178 replies changed, and every one of those 65 changed a verdict, not just
-some wording. Because both the card and the build differ, this run can't say which one is responsible. The 80 GB A100
+architecture. On that build, 65 of the 178 replies changed. A critic's reply is a short form with labelled lines: a
+vote on a trait, a flaw label, a quoted passage it based the call on, a contrast note the pipeline doesn't read, and
+on 52 of the calls, a verdict. Here's which lines changed in the 65:
+
+| What changed | Calls |
+|---|---|
+| Only the contrast note, which the pipeline doesn't read | 27 |
+| The trait vote (11 alone, 10 with the contrast note) | 21 |
+| Only the quoted passage | 10 |
+| A flaw label | 4 |
+| The verdict | 3 |
+
+So the verdict held on 49 of 52 verdict calls, about 94%. All 3 changes went the same way: "unsupported" on the A100
+became "cannot tell" on the Blackwell card. That's close to the second study below, where a different card changed 1
+verdict in 30. The text differs often; the verdict rarely does.
+
+Because both the card and the build differ, this run can't say which one is responsible. The 80 GB A100
 does rule out one explanation: the amount of memory doesn't matter. In practice we keep the two apart. Results from
 the Blackwell card are never pooled with the A100's.
 

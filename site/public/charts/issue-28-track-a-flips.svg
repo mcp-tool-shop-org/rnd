@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 336" role="img" aria-label="Three-label line showing 6 of 7 verdict flips between unsupported and cannot_tell across two runs of 102 Track A items, plus the 43 intact items below" font-family="system-ui, sans-serif" font-size="14">
+<rect width="688" height="336" fill="#ffffff"/>
+<text x="344" y="32" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="15">Where the critic wobbles across two runs of 102 Track A items</text>
+<text x="344" y="52" text-anchor="middle" fill="#5b6272" font-size="12">Two runs with the same verdict prompt: 95 items stayed the same, 7 flipped</text>
+
+<!-- Arc 1: 1 flip between supported (x=114) and unsupported (x=344) -->
+<path d="M 140 124 Q 229 84 318 124" fill="none" stroke="#8a8f98" stroke-width="2"/>
+<polygon points="140,124 148,118 146,127" fill="#8a8f98"/>
+<polygon points="318,124 310,118 312,127" fill="#8a8f98"/>
+<rect x="181" y="74" width="96" height="22" rx="4" fill="#ffffff"/>
+<text x="229" y="90" text-anchor="middle" fill="#5b6272" font-weight="600" font-size="12">1 of 7 flips</text>
+
+<!-- Arc 2: 6 flips between unsupported (x=344) and cannot_tell (x=574) -->
+<path d="M 370 124 Q 459 72 548 124" fill="none" stroke="#b4532a" stroke-width="4.5"/>
+<polygon points="366,126 378,116 375,128" fill="#b4532a"/>
+<polygon points="552,126 540,116 543,128" fill="#b4532a"/>
+<rect x="395" y="64" width="128" height="26" rx="4" fill="#b4532a"/>
+<text x="459" y="82" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="13">6 of 7 flips</text>
+
+<!-- Baseline connecting the three verdict labels -->
+<line x1="114" y1="156" x2="574" y2="156" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+<!-- Point 1: supported -->
+<rect x="28" y="128" width="172" height="60" rx="4" fill="#2f7d5b"/>
+<text x="114" y="149" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="14">supported</text>
+<text x="114" y="166" text-anchor="middle" fill="#ffffff" font-size="12">“material shows it”</text>
+<text x="114" y="182" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12">28 stayed the same</text>
+
+<!-- Point 2: unsupported -->
+<rect x="258" y="128" width="172" height="60" rx="4" fill="#2f7d5b"/>
+<text x="344" y="149" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="14">unsupported</text>
+<text x="344" y="166" text-anchor="middle" fill="#ffffff" font-size="12">“material rules it out”</text>
+<text x="344" y="182" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12">41 stayed the same</text>
+
+<!-- Point 3: cannot_tell -->
+<rect x="488" y="128" width="172" height="60" rx="4" fill="#2f7d5b"/>
+<text x="574" y="149" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="14">cannot_tell</text>
+<text x="574" y="166" text-anchor="middle" fill="#ffffff" font-size="12">“material says nothing”</text>
+<text x="574" y="182" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12">26 stayed the same</text>
+
+<text x="344" y="208" text-anchor="middle" fill="#5b6272" font-size="12">0 flips between supported and cannot_tell (28 + 41 + 26 = 95 stable items).</text>
+
+<!-- Intact items bar under the three-label line -->
+<text x="28" y="242" fill="#1f2430" font-weight="600" font-size="13">The 43 intact items (unchanged controls): 3 refused at least once</text>
+<rect x="28" y="254" width="587" height="26" rx="3" fill="#2f7d5b"/>
+<text x="321" y="272" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12">40 accepted in both runs</text>
+<rect x="617" y="254" width="27" height="26" rx="3" fill="#8a8f98"/>
+<text x="630.5" y="272" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12">2</text>
+<rect x="646" y="254" width="14" height="26" rx="3" fill="#b4532a"/>
+<text x="653" y="272" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="11">1</text>
+
+<rect x="28" y="294" width="10" height="10" fill="#2f7d5b"/>
+<text x="44" y="303" fill="#1f2430" font-size="12">accepted both times (40)</text>
+<rect x="218" y="294" width="10" height="10" fill="#8a8f98"/>
+<text x="234" y="303" fill="#1f2430" font-size="12">refused in one run only, noise (2)</text>
+<rect x="462" y="294" width="10" height="10" fill="#b4532a"/>
+<text x="478" y="303" fill="#1f2430" font-size="12">refused in both runs (1)</text>
+</svg>

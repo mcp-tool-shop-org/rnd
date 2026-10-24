@@ -24,4 +24,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     font-size: var(--sl-text-sm);
     color: var(--sl-color-gray-3);
   }
+  /* The line sits outside .sl-markdown-content, so Starlight's prose link colour doesn't reach it. */
+  .issue-subscribe a {
+    color: var(--sl-color-text-accent);
+  }
+  .issue-subscribe a:hover {
+    color: var(--sl-color-white);
+  }
 </style>

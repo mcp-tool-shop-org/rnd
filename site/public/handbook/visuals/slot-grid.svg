@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 260" role="img" aria-label="Minimal slot-grid template example" font-family="system-ui, sans-serif" font-size="14">
+<rect width="688" height="260" fill="#ffffff"/>
+<text x="344" y="34" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="15">Slot grid: small discrete N grouped by condition and coloured by outcome</text>
+
+<text x="344" y="72" text-anchor="middle" fill="#1f2430" font-size="13">Condition A (5 slots)</text>
+<rect x="133" y="84" width="78" height="44" rx="4" fill="#b4532a"/>
+<text x="172" y="111" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12">T14</text>
+<rect x="219" y="84" width="78" height="44" rx="4" fill="#b4532a"/>
+<text x="258" y="111" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12">T14</text>
+<rect x="305" y="84" width="78" height="44" rx="4" fill="#b4532a"/>
+<text x="344" y="111" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12">T14</text>
+<rect x="391" y="84" width="78" height="44" rx="4" fill="#b4532a"/>
+<text x="430" y="111" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12">T14</text>
+<rect x="477" y="84" width="78" height="44" rx="4" fill="#8a8f98"/>
+<text x="516" y="111" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12">neither</text>
+
+<text x="344" y="158" text-anchor="middle" fill="#1f2430" font-size="13">Condition B (3 slots)</text>
+<rect x="219" y="170" width="78" height="44" rx="4" fill="#2f7d5b"/>
+<text x="258" y="197" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12">T10</text>
+<rect x="305" y="170" width="78" height="44" rx="4" fill="#2f7d5b"/>
+<text x="344" y="197" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12">T10</text>
+<rect x="391" y="170" width="78" height="44" rx="4" fill="#2f7d5b"/>
+<text x="430" y="197" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12">T10</text>
+
+<rect x="114" y="232" width="12" height="12" fill="#2f7d5b"/>
+<text x="132" y="242" fill="#1f2430" font-size="12">target lesson (T10)</text>
+<rect x="278" y="232" width="12" height="12" fill="#b4532a"/>
+<text x="296" y="242" fill="#1f2430" font-size="12">other lesson (T14)</text>
+<rect x="438" y="232" width="12" height="12" fill="#8a8f98"/>
+<text x="456" y="242" fill="#1f2430" font-size="12">no majority</text>
+</svg>

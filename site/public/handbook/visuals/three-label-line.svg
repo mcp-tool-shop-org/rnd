@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 236" role="img" aria-label="Minimal three-label line template example" font-family="system-ui, sans-serif" font-size="14">
+<rect width="688" height="236" fill="#ffffff"/>
+<text x="344" y="32" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="15">Three-label line: where answers cross a boundary between runs</text>
+<text x="344" y="52" text-anchor="middle" fill="#5b6272" font-size="12">Two runs over 102 items: 95 stayed the same, 7 flipped</text>
+
+<path d="M 140 124 Q 229 84 318 124" fill="none" stroke="#8a8f98" stroke-width="2"/>
+<polygon points="140,124 148,118 146,127" fill="#8a8f98"/>
+<polygon points="318,124 310,118 312,127" fill="#8a8f98"/>
+<text x="229" y="90" text-anchor="middle" fill="#5b6272" font-weight="600" font-size="12">1 of 7 flips</text>
+
+<path d="M 370 124 Q 459 72 548 124" fill="none" stroke="#b4532a" stroke-width="4.5"/>
+<polygon points="366,126 378,116 375,128" fill="#b4532a"/>
+<polygon points="552,126 540,116 543,128" fill="#b4532a"/>
+<rect x="395" y="64" width="128" height="26" rx="4" fill="#b4532a"/>
+<text x="459" y="82" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="13">6 of 7 flips</text>
+
+<line x1="114" y1="156" x2="574" y2="156" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+<rect x="28" y="128" width="172" height="60" rx="4" fill="#2f7d5b"/>
+<text x="114" y="150" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="14">supported</text>
+<text x="114" y="174" text-anchor="middle" fill="#ffffff" font-size="12">28 stayed the same</text>
+
+<rect x="258" y="128" width="172" height="60" rx="4" fill="#2f7d5b"/>
+<text x="344" y="150" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="14">unsupported</text>
+<text x="344" y="174" text-anchor="middle" fill="#ffffff" font-size="12">41 stayed the same</text>
+
+<rect x="488" y="128" width="172" height="60" rx="4" fill="#2f7d5b"/>
+<text x="574" y="150" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="14">cannot_tell</text>
+<text x="574" y="174" text-anchor="middle" fill="#ffffff" font-size="12">26 stayed the same</text>
+
+<text x="344" y="214" text-anchor="middle" fill="#5b6272" font-size="12">0 flips between supported and cannot_tell.</text>
+</svg>

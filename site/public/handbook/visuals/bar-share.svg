@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 220" role="img" aria-label="Minimal bar-share template example" font-family="system-ui, sans-serif" font-size="14">
+<rect width="688" height="220" fill="#ffffff"/>
+<text x="344" y="32" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="15">Bar share: what the chart shows in one plain sentence</text>
+<text x="344" y="52" text-anchor="middle" fill="#5b6272" font-size="12">Optional subtitle naming the denominator and the comparison</text>
+
+<text x="234" y="92" text-anchor="end" fill="#1f2430" font-size="13">Group A (matches target)</text>
+<rect x="244" y="76" width="330" height="22" fill="#1f2430" opacity="0.10"/>
+<rect x="244" y="76" width="330" height="22" fill="#2f7d5b"/>
+<text x="584" y="92" fill="#1f2430" font-size="13">176 of 176</text>
+
+<text x="234" y="132" text-anchor="end" fill="#1f2430" font-size="13">Group B (drifts or flips)</text>
+<rect x="244" y="116" width="330" height="22" fill="#1f2430" opacity="0.10"/>
+<rect x="244" y="116" width="209.5" height="22" fill="#b4532a"/>
+<text x="584" y="132" fill="#1f2430" font-size="13">113 of 178</text>
+
+<text x="234" y="172" text-anchor="end" fill="#1f2430" font-size="13">Group C (neutral baseline)</text>
+<rect x="244" y="156" width="330" height="22" fill="#1f2430" opacity="0.10"/>
+<rect x="244" y="156" width="165" height="22" fill="#8a8f98"/>
+<text x="584" y="172" fill="#1f2430" font-size="13">89 of 178</text>
+
+<text x="344" y="204" text-anchor="middle" fill="#5b6272" font-size="12">The grey track is the denominator for that row; the filled bar is the numerator.</text>
+</svg>

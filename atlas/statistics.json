@@ -218,7 +218,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "site",
-      "qualifyingSourceCommits": 4,
+      "qualifyingSourceCommits": 6,
       "rebaseline": null
     },
     {
@@ -439,8 +439,8 @@
         "path": "agent_ab_harness}/shakedown-2/RC03-B2.jsonl"
       },
       {
-        "commits": 40,
-        "lines": 919,
+        "commits": 41,
+        "lines": 950,
         "path": "atlas/README.md"
       },
       {
@@ -449,18 +449,18 @@
         "path": "atlas/boundaries.yaml"
       },
       {
-        "commits": 40,
-        "lines": 3134,
+        "commits": 41,
+        "lines": 3218,
         "path": "atlas/page.json"
       },
       {
-        "commits": 40,
-        "lines": 12084,
+        "commits": 41,
+        "lines": 12268,
         "path": "atlas/statistics.json"
       },
       {
-        "commits": 40,
-        "lines": 20518,
+        "commits": 41,
+        "lines": 20733,
         "path": "atlas/structure.json"
       },
       {
@@ -5104,9 +5104,19 @@
         "path": "site/package.json"
       },
       {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/calibration-grounded.png"
+      },
+      {
         "commits": 2,
         "lines": 133,
         "path": "site/public/charts/calibration-grounded.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/calibration-reasoning.png"
       },
       {
         "commits": 2,
@@ -5114,14 +5124,29 @@
         "path": "site/public/charts/calibration-reasoning.svg"
       },
       {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/critic-calls.png"
+      },
+      {
         "commits": 2,
         "lines": 644,
         "path": "site/public/charts/critic-calls.svg"
       },
       {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/critic-catch.png"
+      },
+      {
         "commits": 2,
         "lines": 196,
         "path": "site/public/charts/critic-catch.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/critic-confirmation-slots.png"
       },
       {
         "commits": 2,
@@ -5130,8 +5155,18 @@
       },
       {
         "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/cuda-graphs.png"
+      },
+      {
+        "commits": 1,
         "lines": 47,
         "path": "site/public/charts/cuda-graphs.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/cuda-kev-band.png"
       },
       {
         "commits": 1,
@@ -5140,8 +5175,18 @@
       },
       {
         "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/cuda-probe.png"
+      },
+      {
+        "commits": 1,
         "lines": 65,
         "path": "site/public/charts/cuda-probe.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/desk-vram.png"
       },
       {
         "commits": 1,
@@ -5150,8 +5195,18 @@
       },
       {
         "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/e4b-igpu-latency.png"
+      },
+      {
+        "commits": 1,
         "lines": 58,
         "path": "site/public/charts/e4b-igpu-latency.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/e4b-pilot-clock.png"
       },
       {
         "commits": 1,
@@ -5160,8 +5215,18 @@
       },
       {
         "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/e4b-triplet-effects.png"
+      },
+      {
+        "commits": 1,
         "lines": 95,
         "path": "site/public/charts/e4b-triplet-effects.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/e4b-verdict.png"
       },
       {
         "commits": 1,
@@ -5169,9 +5234,19 @@
         "path": "site/public/charts/e4b-verdict.svg"
       },
       {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/error-lean.png"
+      },
+      {
         "commits": 2,
         "lines": 174,
         "path": "site/public/charts/error-lean.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/issue-27-match-share.png"
       },
       {
         "commits": 2,
@@ -5180,8 +5255,18 @@
       },
       {
         "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/issue-28-bench-ahead.png"
+      },
+      {
+        "commits": 1,
         "lines": 29,
         "path": "site/public/charts/issue-28-bench-ahead.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/issue-28-causes-map.png"
       },
       {
         "commits": 1,
@@ -5190,8 +5275,18 @@
       },
       {
         "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/issue-28-contradictory-brief.png"
+      },
+      {
+        "commits": 1,
         "lines": 45,
         "path": "site/public/charts/issue-28-contradictory-brief.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/issue-28-graded-panel.png"
       },
       {
         "commits": 1,
@@ -5200,8 +5295,18 @@
       },
       {
         "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/issue-28-hesitation-spread.png"
+      },
+      {
+        "commits": 1,
         "lines": 42,
         "path": "site/public/charts/issue-28-hesitation-spread.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/issue-28-slot-sides.png"
       },
       {
         "commits": 2,
@@ -5210,8 +5315,18 @@
       },
       {
         "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/issue-28-track-a-flips.png"
+      },
+      {
+        "commits": 1,
         "lines": 58,
         "path": "site/public/charts/issue-28-track-a-flips.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/loop-repeats.png"
       },
       {
         "commits": 2,
@@ -5220,8 +5335,18 @@
       },
       {
         "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/math-ladder.png"
+      },
+      {
+        "commits": 1,
         "lines": 91,
         "path": "site/public/charts/math-ladder.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/npu-vs-cpu.png"
       },
       {
         "commits": 1,
@@ -5229,14 +5354,34 @@
         "path": "site/public/charts/npu-vs-cpu.svg"
       },
       {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/pilot-thinking-budget.png"
+      },
+      {
         "commits": 2,
         "lines": 192,
         "path": "site/public/charts/pilot-thinking-budget.svg"
       },
       {
+        "commits": 1,
+        "lines": 182,
+        "path": "site/public/charts/png-manifest.json"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/reasoning-default.png"
+      },
+      {
         "commits": 2,
         "lines": 96,
         "path": "site/public/charts/reasoning-default.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/thinking-off-vs-on.png"
       },
       {
         "commits": 2,
@@ -5245,8 +5390,18 @@
       },
       {
         "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/vocal-pitch.png"
+      },
+      {
+        "commits": 1,
         "lines": 812,
         "path": "site/public/charts/vocal-pitch.svg"
+      },
+      {
+        "commits": 1,
+        "lines": 0,
+        "path": "site/public/charts/vocal-timing.png"
       },
       {
         "commits": 1,
@@ -5264,9 +5419,14 @@
         "path": "site/public/rss-logo.png"
       },
       {
-        "commits": 2,
-        "lines": 78,
+        "commits": 3,
+        "lines": 117,
         "path": "site/scripts/check_feed.py"
+      },
+      {
+        "commits": 2,
+        "lines": 111,
+        "path": "site/scripts/render_chart_pngs.py"
       },
       {
         "commits": 3,
@@ -5589,8 +5749,8 @@
         "path": "site/src/pages/index.astro"
       },
       {
-        "commits": 1,
-        "lines": 67,
+        "commits": 2,
+        "lines": 145,
         "path": "site/src/pages/newsletter/rss.xml.ts"
       },
       {
@@ -5914,9 +6074,9 @@
     "level": "low",
     "reason": "fewer than 25 source files reach 10 revisions in the window"
   },
-  "generatedAt": "2026-10-24T05:21:31.219Z",
+  "generatedAt": "2026-10-24T05:37:12.726Z",
   "generatedFrom": {
-    "commit": "6d2d5b404253253d6334867f74e34be86c53417e"
+    "commit": "24ea150e9e0c7de47aceeb9631a758da65fc3f0b"
   },
   "pairs": [
     {
@@ -6076,43 +6236,43 @@
     {
       "a": "atlas/README.md",
       "b": "atlas/page.json",
-      "either": 35,
-      "shared": 35,
+      "either": 36,
+      "shared": 36,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/statistics.json",
-      "either": 35,
-      "shared": 35,
+      "either": 36,
+      "shared": 36,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/structure.json",
-      "either": 35,
-      "shared": 35,
+      "either": 36,
+      "shared": 36,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/statistics.json",
-      "either": 35,
-      "shared": 35,
+      "either": 36,
+      "shared": 36,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/structure.json",
-      "either": 35,
-      "shared": 35,
+      "either": 36,
+      "shared": 36,
       "strength": 1
     },
     {
       "a": "atlas/statistics.json",
       "b": "atlas/structure.json",
-      "either": 35,
-      "shared": 35,
+      "either": 36,
+      "shared": 36,
       "strength": 1
     },
     {
@@ -6224,16 +6384,16 @@
     "floor": "fallen",
     "floorHeld": false,
     "floorTrigger": "revision-depth",
-    "headDate": "2026-10-23T22:33:28-04:00",
-    "inScopeFiles": 1100,
+    "headDate": "2026-10-24T01:32:57-04:00",
+    "inScopeFiles": 1132,
     "pinnedStart": null,
     "priorFloor": "fallen",
-    "qualifyingCommits": 594,
+    "qualifyingCommits": 596,
     "qualifyingMinimum": 30,
     "revisions": 5,
     "shared": 10,
     "sharedFloorUsed": 3,
-    "since": "2026-04-27T02:33:28.000Z",
+    "since": "2026-04-27T05:32:57.000Z",
     "sourceExtensions": [
       ".js",
       ".mjs",

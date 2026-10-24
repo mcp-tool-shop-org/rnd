@@ -8541,120 +8541,244 @@
           "path": "site/package.json"
         },
         {
+          "hash": "3b06a13580c5ee859d92988f0e53668b0dca8d7889129d511f81608056860246",
+          "path": "site/public/charts/calibration-grounded.png"
+        },
+        {
           "hash": "4cf201aac16382ad422bb978b1d231ba284bee45857281585a7c7d7e86264813",
           "path": "site/public/charts/calibration-grounded.svg"
+        },
+        {
+          "hash": "e30eb45539fe54664077b74e3f6996c3b36673f22b65af2d66e0a305493e47bc",
+          "path": "site/public/charts/calibration-reasoning.png"
         },
         {
           "hash": "632dfead0cbc95cb68b0b07721ed359c3e6ab206846e460212bc6ee23527305e",
           "path": "site/public/charts/calibration-reasoning.svg"
         },
         {
+          "hash": "e044293d60e6fd771231588f6c8548fd85be4975477ad9464fa2e9942484af05",
+          "path": "site/public/charts/critic-calls.png"
+        },
+        {
           "hash": "54a98963bc6cb1771523d524fd2f0fea45152d9e30c0816e7bd066026b4bc483",
           "path": "site/public/charts/critic-calls.svg"
+        },
+        {
+          "hash": "5daed15b74cece542498bb5c0bc19650c0f7e9a1e60a5d442ee2f0e67e11dc6e",
+          "path": "site/public/charts/critic-catch.png"
         },
         {
           "hash": "358041a4337578dc4cb4d7de0b86007456a15b7e3001a8f17e4be9c8e698147b",
           "path": "site/public/charts/critic-catch.svg"
         },
         {
+          "hash": "00ac7af124258eff97dfc1949f47c678d342b699d0a6124479206e3f0ba488c4",
+          "path": "site/public/charts/critic-confirmation-slots.png"
+        },
+        {
           "hash": "ad6a42f8641e285efb604705deb0e36c15ccd3c9aeae867e06dfc11d20daf850",
           "path": "site/public/charts/critic-confirmation-slots.svg"
+        },
+        {
+          "hash": "3a5480c9fa51087cbcdcaf3811fb4a0239147b7f2972a93a8b24905b3de0aee3",
+          "path": "site/public/charts/cuda-graphs.png"
         },
         {
           "hash": "e247acd6efeccc978ecf589368299b351c560ac73a65a07c84f40728f3d81df6",
           "path": "site/public/charts/cuda-graphs.svg"
         },
         {
+          "hash": "a35e6c80d5a0e4ac54688aaf8a9fdb35bcc7ffdc1e4e380dba676298da7cf47f",
+          "path": "site/public/charts/cuda-kev-band.png"
+        },
+        {
           "hash": "cf26a1f6e2bad29d33d0c3ef1d22506075801bb3fc262019c149bc090085cbbe",
           "path": "site/public/charts/cuda-kev-band.svg"
+        },
+        {
+          "hash": "b5b7b843d79ec2c7e36c2c076257edfa955c7026e3741059a7f3a23da83ec69a",
+          "path": "site/public/charts/cuda-probe.png"
         },
         {
           "hash": "adb038b29668684f73885dd88bf2ea77f99318957d1c9404378a6d9113b5ab4c",
           "path": "site/public/charts/cuda-probe.svg"
         },
         {
+          "hash": "3e6f8f6c495c1a49fc4be9c62f1e73f998faefaa7ff0e167b7beda86735a0c14",
+          "path": "site/public/charts/desk-vram.png"
+        },
+        {
           "hash": "84caaf65d8ce8767f02d2bd1f82c1b86529ebc3825d19c59be0a8b4eb50ccc24",
           "path": "site/public/charts/desk-vram.svg"
+        },
+        {
+          "hash": "f795507acb39380867fa990bf38feb099b2c27ecfb651eddf5696003f75a150f",
+          "path": "site/public/charts/e4b-igpu-latency.png"
         },
         {
           "hash": "9e728527daf81b6590071441b0c136579bf941c0dea2ae6eb6411b34ead6c326",
           "path": "site/public/charts/e4b-igpu-latency.svg"
         },
         {
+          "hash": "cf282facad19baeb8b8136998bbff7c0658ea0cac86c5c47f8b432ec4e93574a",
+          "path": "site/public/charts/e4b-pilot-clock.png"
+        },
+        {
           "hash": "f16a98f31a37d4b4b939b97266d28f3fa0d5ba511d9c4cb7f546ed29c38625ae",
           "path": "site/public/charts/e4b-pilot-clock.svg"
+        },
+        {
+          "hash": "06dcc82d392c12dd0d74bbc6a61d0b3a166ca592e5eed859704a2fce0a860a86",
+          "path": "site/public/charts/e4b-triplet-effects.png"
         },
         {
           "hash": "1ad7620c2e657da7339ab996752a5ac8be65388661dadc2ef3d3aee5db0a8d2b",
           "path": "site/public/charts/e4b-triplet-effects.svg"
         },
         {
+          "hash": "9f4c31504c6334a480f8773cfc1482787b8f1adef693430776bad772a340327f",
+          "path": "site/public/charts/e4b-verdict.png"
+        },
+        {
           "hash": "9eac5848dcd2af87a0ff2a23d15216d9298d935a0a9e94411f383d1d1b77a3ea",
           "path": "site/public/charts/e4b-verdict.svg"
+        },
+        {
+          "hash": "86c7fcabc1b1b4a1909825f2aac61a3e8f7e5c746cb78cf747631e8e9aabcf60",
+          "path": "site/public/charts/error-lean.png"
         },
         {
           "hash": "62da7d5aaa530001e06e45619a0830ba52b30136960ea489a8ad870a3853bb92",
           "path": "site/public/charts/error-lean.svg"
         },
         {
+          "hash": "bf982eebfcd12130822c2841dc079d6ee5a7a141c371935841c2dc23aae382bb",
+          "path": "site/public/charts/issue-27-match-share.png"
+        },
+        {
           "hash": "f733f613367cc20794290366d291572741c2be0892288bdf0b8c88e22c7048f7",
           "path": "site/public/charts/issue-27-match-share.svg"
+        },
+        {
+          "hash": "da1dd4b4828f8805b58549d83a4e37e7a1252909090e55d0be04a3f355f023c4",
+          "path": "site/public/charts/issue-28-bench-ahead.png"
         },
         {
           "hash": "c1d0f612665b1c712d8103bc0502baded79643c6422c51a9ed3a3a28e42aa811",
           "path": "site/public/charts/issue-28-bench-ahead.svg"
         },
         {
+          "hash": "1d0050a3e9704e3b02ede17494a0bcd525301a34eb8c79475f35854eb4550499",
+          "path": "site/public/charts/issue-28-causes-map.png"
+        },
+        {
           "hash": "4b2eba08f1168749d2aa2f3fe05c0f187dbf6b61d51086ba61c9e9d989568cf3",
           "path": "site/public/charts/issue-28-causes-map.svg"
+        },
+        {
+          "hash": "0f78e60fee5519361be9fd84beaee35c9313f0f72ce03cad54500d080005ba53",
+          "path": "site/public/charts/issue-28-contradictory-brief.png"
         },
         {
           "hash": "7f58fba49ff689cba2dac9a932282d02984a36def29a7d173e4c8b5a0e6cb2da",
           "path": "site/public/charts/issue-28-contradictory-brief.svg"
         },
         {
+          "hash": "650fcb9353ad9ecbacebcad38a1455ad74e154f69a6e0264ca8d56c7d8fecfd8",
+          "path": "site/public/charts/issue-28-graded-panel.png"
+        },
+        {
           "hash": "321b298409793d7ef8a330df92527ba35387c4b48e3fd7710fc3c9ce9a19970a",
           "path": "site/public/charts/issue-28-graded-panel.svg"
+        },
+        {
+          "hash": "d9105b7ecb6ab8b524426d7d5908a857d829f0624443d291a227174de3af8466",
+          "path": "site/public/charts/issue-28-hesitation-spread.png"
         },
         {
           "hash": "b1b9039b2e9fbebfea0029c1219e29d4d6b12742913954da7c1fe7713ae7926a",
           "path": "site/public/charts/issue-28-hesitation-spread.svg"
         },
         {
+          "hash": "27b42ac766e72f37a50c650ab62610e6f4d10256e5e21ad6e92d3d90b76811df",
+          "path": "site/public/charts/issue-28-slot-sides.png"
+        },
+        {
           "hash": "bf7e7cfa5f4a0e46d93f19b1b0bcb876f5f4b6640ae6cfbf63ccefb8bad250bc",
           "path": "site/public/charts/issue-28-slot-sides.svg"
+        },
+        {
+          "hash": "ee5d28bf47304af6cd5aed2d0fbe2edb72c5c0db8c9d1381a2939b4f90dd6112",
+          "path": "site/public/charts/issue-28-track-a-flips.png"
         },
         {
           "hash": "e141f773d02ff855c00ac7c5d6de5d189b9cd0165c314c934996fe3b1a8c9d19",
           "path": "site/public/charts/issue-28-track-a-flips.svg"
         },
         {
+          "hash": "f7527ae4d3ec14612ffea5b9fafd1f68c1bba4d89e99aae489192b50836155d3",
+          "path": "site/public/charts/loop-repeats.png"
+        },
+        {
           "hash": "42faeeee21377286ae0afc0bcc7f4a55f902bfbe05a9d41042bfcff6ee54d0f7",
           "path": "site/public/charts/loop-repeats.svg"
+        },
+        {
+          "hash": "04fed68eba04ec3d499009822830eeacc8a2830cb24280ce6dcd43dbe0552ab4",
+          "path": "site/public/charts/math-ladder.png"
         },
         {
           "hash": "a37469574167e77310139fe648a0815056c8e1be6fb53dceb71771e7d92a0657",
           "path": "site/public/charts/math-ladder.svg"
         },
         {
+          "hash": "7886379cb43c5ac942ecd8ba4d7340849263bd0d2430a6f17a36ef69a417e704",
+          "path": "site/public/charts/npu-vs-cpu.png"
+        },
+        {
           "hash": "719322220fe7796e5174c0229b20f99677403104b93fff598b77bf1420a161c3",
           "path": "site/public/charts/npu-vs-cpu.svg"
+        },
+        {
+          "hash": "0f5f0ef88befbe9343604baae04f69a9ae23ed614d7eec812456e460f8662dc4",
+          "path": "site/public/charts/pilot-thinking-budget.png"
         },
         {
           "hash": "d03b18f61713c18593ca29dbfdc201d4953576cf364ed41e8cebece4b502e49d",
           "path": "site/public/charts/pilot-thinking-budget.svg"
         },
         {
+          "hash": "3b873bb53001b77de15804ea2c5e38f3845d7e78289d0b53afdc03369ca294de",
+          "path": "site/public/charts/png-manifest.json"
+        },
+        {
+          "hash": "46eab5952adb7435982ee215d32641ce9961eb3729fd7785ac701c8d9103077a",
+          "path": "site/public/charts/reasoning-default.png"
+        },
+        {
           "hash": "8135efa8483a0544562c094aa6ffe937b5dad7277bb11633f2cb6f908ace8ba5",
           "path": "site/public/charts/reasoning-default.svg"
+        },
+        {
+          "hash": "37063265aa13aa6b403faed3671bbd9af130429d47eb0a4f720fbbc639af5f96",
+          "path": "site/public/charts/thinking-off-vs-on.png"
         },
         {
           "hash": "4f81e4436e37fd793f1b07ae5a81ccd151c77efde1b6939002c90a4ad2848e21",
           "path": "site/public/charts/thinking-off-vs-on.svg"
         },
         {
+          "hash": "983739a9b9ff5bbbbaff77e98da0c4d21f96ca916cb187e8401a2fb26361fb69",
+          "path": "site/public/charts/vocal-pitch.png"
+        },
+        {
           "hash": "750269f8921527796fa86f28b8484beaf58de1226c458eaea168a647bbdc46ef",
           "path": "site/public/charts/vocal-pitch.svg"
+        },
+        {
+          "hash": "d95a3cf81725c22dd4a11a8c13a94e1c9dd4c84de411a9a93d3dcc611e695fc7",
+          "path": "site/public/charts/vocal-timing.png"
         },
         {
           "hash": "916d59af421b45c34cb293ce9fc2265dcaebb9f1693b6f90519a1e7978370698",
@@ -8677,12 +8801,23 @@
           "failurePaths": [
             {
               "kind": "except",
-              "line": 44
+              "line": 45
             }
           ],
-          "hash": "85f0b7032d0404ec07ae762b4fcc8b0d387c713ae135eefacff9fd1517616271",
+          "hash": "4f3c986180a5a2d63caba6e2d3ce69c01fab2956e0bc843282b8535acab2c6bc",
           "path": "site/scripts/check_feed.py",
           "sequences": []
+        },
+        {
+          "exports": [
+            "main",
+            "png_size",
+            "render",
+            "sha256",
+            "svg_size"
+          ],
+          "hash": "8d34153cf9360f2bbca7d30416fbb534e72e24d132bc9a70b7ccff7b06a2c0ad",
+          "path": "site/scripts/render_chart_pngs.py"
         },
         {
           "hash": "ecf4cb2bd6a1ef2097ad13be641c8d5bab26a81769c80c9286874470509a184f",
@@ -8953,9 +9088,13 @@
           "exports": [
             "GET",
             "absolutise",
-            "emailImage"
+            "emailImage",
+            "issuePubDate"
           ],
-          "hash": "158cc100ea3838d1409cb99d3009f1443bebba471c20dc05274230fa499d2817",
+          "hash": "b49266b0d5022eaafe264ebc54e46f55e4d4c8a3d92d4480cba2149d0f187e7e",
+          "importsFiles": [
+            "site/public/charts/png-manifest.json"
+          ],
           "path": "site/src/pages/newsletter/rss.xml.ts"
         },
         {
@@ -8982,16 +9121,19 @@
       "importConfidence": "full",
       "name": "site",
       "origin": "mixed",
-      "role": "docs",
-      "testedBy": 0,
-      "unresolvedNamed": [
+      "outsidePlaces": [
         {
-          "path": "site/src/pages/newsletter/rss.xml.ts",
-          "specifier": "../../../public/charts/png-manifest.json",
-          "why": "missing"
+          "reads": 3,
+          "where": [
+            "caller"
+          ],
+          "writes": 0
         }
       ],
-      "unresolvedSites": 1
+      "outsideReads": 3,
+      "role": "docs",
+      "testedBy": 0,
+      "unresolvedSites": 0
     },
     {
       "dynamicReads": 0,
@@ -9685,6 +9827,12 @@
           "target": "instruments"
         },
         {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config",
+          "target": "site/public/charts"
+        },
+        {
           "by": "site/scripts/check_feed.py",
           "call": "glob",
           "confidence": "ast",
@@ -9699,6 +9847,24 @@
         {
           "by": "site/scripts/check_feed.py",
           "call": "read_text",
+          "confidence": "ast",
+          "target": "site/public/charts"
+        },
+        {
+          "by": "site/scripts/render_chart_pngs.py",
+          "call": "glob",
+          "confidence": "ast",
+          "target": "site/public/charts"
+        },
+        {
+          "by": "site/scripts/render_chart_pngs.py",
+          "call": "read_text",
+          "confidence": "ast",
+          "target": "site/public/charts"
+        },
+        {
+          "by": "site/src/pages/newsletter/rss.xml.ts",
+          "call": "import",
           "confidence": "ast",
           "target": "site/public/charts"
         }
@@ -9891,7 +10057,7 @@
         {
           "boundary": "site",
           "depth": 0,
-          "files": 7
+          "files": 8
         }
       ],
       "readers": [],
@@ -10221,8 +10387,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "6d2d5b404253253d6334867f74e34be86c53417e",
-    "tracked": 1095
+    "commit": "24ea150e9e0c7de47aceeb9631a758da65fc3f0b",
+    "tracked": 1127
   },
   "landings": [
     {
@@ -13480,6 +13646,11 @@
           "by": "site/scripts/check_feed.py",
           "call": "read_bytes",
           "confidence": "ast"
+        },
+        {
+          "by": "site/scripts/render_chart_pngs.py",
+          "call": "glob",
+          "confidence": "ast"
         }
       ],
       "target": "site/public/charts",
@@ -13493,12 +13664,688 @@
     {
       "readers": [
         {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/calibration-grounded.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/calibration-grounded.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/calibration-reasoning.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/calibration-reasoning.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/critic-calls.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/critic-calls.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/critic-catch.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/critic-catch.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/critic-confirmation-slots.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/critic-confirmation-slots.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/cuda-graphs.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/cuda-graphs.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/cuda-kev-band.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/cuda-kev-band.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/cuda-probe.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/cuda-probe.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/desk-vram.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/desk-vram.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/e4b-igpu-latency.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/e4b-igpu-latency.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/e4b-pilot-clock.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/e4b-pilot-clock.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/e4b-triplet-effects.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/e4b-triplet-effects.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/e4b-verdict.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/e4b-verdict.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/error-lean.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/error-lean.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-27-match-share.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-27-match-share.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-28-bench-ahead.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-28-bench-ahead.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-28-causes-map.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-28-causes-map.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-28-contradictory-brief.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-28-contradictory-brief.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-28-graded-panel.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-28-graded-panel.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-28-hesitation-spread.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-28-hesitation-spread.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-28-slot-sides.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-28-slot-sides.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-28-track-a-flips.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-28-track-a-flips.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/loop-repeats.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/loop-repeats.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/math-ladder.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/math-ladder.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/npu-vs-cpu.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/npu-vs-cpu.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/pilot-thinking-budget.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/pilot-thinking-budget.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "site/scripts/check_feed.py",
           "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "site/scripts/render_chart_pngs.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "site/src/pages/newsletter/rss.xml.ts",
+          "call": "import",
           "confidence": "ast"
         }
       ],
       "target": "site/public/charts/png-manifest.json",
+      "writers": [
+        {
+          "by": "site/scripts/render_chart_pngs.py",
+          "confidence": "ast",
+          "stamps": true
+        }
+      ]
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/reasoning-default.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/reasoning-default.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/thinking-off-vs-on.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/thinking-off-vs-on.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/vocal-pitch.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/vocal-pitch.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/vocal-timing.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/vocal-timing.svg",
       "writers": []
     },
     {

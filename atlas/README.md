@@ -1,21 +1,20 @@
 # rnd: how it works
 
-Mapped at 2026-10-24 from commit 6d2d5b4 by Atlas 1.24.0.
+Mapped at 2026-10-24 from commit 24ea150 by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-14 parts, mostly Python (144 files), shell (30), TypeScript (3), CSS (2), HTML (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
+14 parts, mostly Python (145 files), shell (30), TypeScript (3), CSS (2), HTML (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-23 (4e6168c)
+## What changed since 2026-10-24 (6d2d5b4)
 
-- Deploy site to GitHub Pages now also runs site/scripts/check_feed.py.
-- experiments/stage1-regeneration/colab-drift/scripts/compare.py is now read by tests/test_colab_drift_compare.py.
-- site/ is now read by site/scripts/check_feed.py.
-- site/public/charts/ is now read by site/scripts/check_feed.py.
-- And 2 more new writers and readers of places.
-- 12 files added and 10 changed content, across 5 parts.
+- site/public/charts/png-manifest.json is now written by site/scripts/render_chart_pngs.py.
+- site/public/charts/ is now also read by site/scripts/render_chart_pngs.py.
+- site/public/charts/calibration-grounded.png is now read by site/public/charts/png-manifest.json.
+- And 60 more new writers and readers of places.
+- 32 files added and 2 changed content, across 1 part.
 
 ## What comes in
 
@@ -36,7 +35,7 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 - **entries/** is read by experiments/embeddinggemma-2/harness/build_corpus.py, and by 2 tests.
 - **experiments/charts/** has no reader in this repository.
 - **instruments/** is read by experiments/embeddinggemma-2/harness/build_corpus.py.
-- **site/public/charts/** is read by site/scripts/check_feed.py.
+- **site/public/charts/** is read by site/scripts/check_feed.py and site/src/pages/newsletter/rss.xml.ts.
 
 ## The other doors
 
@@ -116,6 +115,7 @@ These are candidates from names and call order, not a judgement.
 - **instruments/** is written by mcptoolshop_rnd/cli.py.
 - **licences/registry.json** has a block written by licences/snapshot.py.
 - **site/public/charts/** is written by experiments/charts/make_charts.py.
+- **site/public/charts/png-manifest.json** has a block written by site/scripts/render_chart_pngs.py.
 
 ## Hand-authored
 
@@ -129,10 +129,10 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 
 ## What this map cannot see
 
-- 12 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 9 more.
+- 11 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 8 more.
 - 25 writes and 46 reads use paths built at run time and are not named here.
 - 7 writes go to places this repository does not track, so they are not listed as generated.
-- 40 writes and 116 reads go to a path their caller passes, not to this repository.
+- 40 writes and 119 reads go to a path their caller passes, not to this repository.
 - 12 reads go to the directory the command is run in (README.md, SECURITY.md, entries and 3 more places), not to this repository.
 - 1 read goes to the directory the command is run in or a path its caller passes, not to this repository.
 - 1 read goes to the home directory (.claude/), not to this repository.

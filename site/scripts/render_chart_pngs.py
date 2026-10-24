@@ -100,7 +100,7 @@ def main() -> int:
         print(f"rendered {png.name} {pw}x{ph}")
     for name in [n for n in manifest if not (CHARTS / n).exists()]:
         del manifest[name]
-    MANIFEST.write_text(json.dumps(dict(sorted(manifest.items())), indent=2) + "\n", encoding="utf-8")
+    MANIFEST.write_text(json.dumps(dict(sorted(manifest.items())), indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"render_chart_pngs: {rendered} rendered, {len(svgs)} charts in the manifest")
     return 0
 

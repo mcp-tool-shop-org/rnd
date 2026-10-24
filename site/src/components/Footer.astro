@@ -1,0 +1,27 @@
+---
+// Starlight's footer, plus a quiet subscribe line at the end of each newsletter issue, for a reader who arrived from
+// a shared link and finished reading.
+import Default from '@astrojs/starlight/components/Footer.astro';
+
+const isIssue = /^newsletter\/issue-\d+$/.test(Astro.locals.starlightRoute.id);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+{
+  isIssue && (
+    <p class="issue-subscribe">
+      Get each issue by email or RSS: <a href={`${base}/newsletter/subscribe/`}>Subscribe</a>
+    </p>
+  )
+}
+<Default><slot /></Default>
+
+<style>
+  .issue-subscribe {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--sl-color-hairline);
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+</style>

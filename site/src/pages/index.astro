@@ -70,9 +70,21 @@ const useIt = config.sections.find((s) => s.id === 'use-it');
       </div>
     )}
     {latest && (
-      <p class="mt-4 text-sm text-muted">
-        <a class="text-accent underline" href={`${base}/newsletter/rss.xml`}>Subscribe via RSS</a>: paste that link into
-        any feed reader and each new issue arrives in full there. <a class="text-accent underline" href={`${base}/newsletter/subscribe/`}>What's RSS?</a>
+      <form class="mt-6 max-w-xl" action="https://buttondown.com/api/emails/embed-subscribe/rnd-news" method="post">
+        <label for="subscribe-email" class="block text-sm text-muted">Get each issue by email</label>
+        <div class="mt-2 flex flex-wrap gap-2">
+          <input type="email" id="subscribe-email" name="email" autocomplete="email" required placeholder="you@example.com"
+                 class="min-w-0 flex-1 basis-64 rounded-xl border border-edge bg-transparent px-4 py-2.5 text-sm text-body placeholder:text-dim" />
+          <button type="submit" class="rounded-xl bg-action px-5 py-2.5 text-sm font-medium text-action-text hover:bg-action-hover">
+            Subscribe
+          </button>
+        </div>
+      </form>
+      <p class="mt-3 text-sm text-muted">
+        Each issue arrives by email when it's published. Buttondown, the service that sends it, emails you a link to
+        confirm first, and every issue has a one-click unsubscribe link. Your address goes to Buttondown only; this site
+        stores nothing. Or <a class="text-accent underline" href={`${base}/newsletter/rss.xml`}>subscribe via RSS</a>{' '}
+        (<a class="text-accent underline" href={`${base}/newsletter/subscribe/`}>what's RSS?</a>).
       </p>
     )}
   </Section>

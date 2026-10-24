@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 320" role="img" aria-label="Comparison showing median label switches in the critic's thinking alongside the share of the 7 verdict flips caught by the top 10 and top 20 most hesitant items" font-family="system-ui, sans-serif" font-size="14">
+<rect width="688" height="320" fill="#ffffff"/>
+<text x="344" y="32" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="15">Hesitation separates groups on average, but misses most flips as a cutoff</text>
+
+<!-- Part 1: Medians -->
+<text x="24" y="60" fill="#1f2430" font-weight="600" font-size="13">1. Median label switches per call across the two Track A runs (204 calls)</text>
+
+<text x="290" y="86" text-anchor="end" fill="#1f2430" font-size="12">On items whose verdict flipped (14 calls)</text>
+<rect x="300" y="72" width="270" height="20" fill="#1f2430" opacity="0.10"/>
+<rect x="300" y="72" width="240" height="20" fill="#b4532a"/>
+<text x="578" y="87" fill="#1f2430" font-weight="600" font-size="12">12 switches</text>
+
+<text x="290" y="114" text-anchor="end" fill="#1f2430" font-size="12">On items that stayed the same (190 calls)</text>
+<rect x="300" y="100" width="270" height="20" fill="#1f2430" opacity="0.10"/>
+<rect x="300" y="100" width="120" height="20" fill="#8a8f98"/>
+<text x="578" y="115" fill="#1f2430" font-size="12">6 switches</text>
+
+<text x="290" y="142" text-anchor="end" fill="#1f2430" font-size="12">On intact items it refused (4 calls)</text>
+<rect x="300" y="128" width="270" height="20" fill="#1f2430" opacity="0.10"/>
+<rect x="300" y="128" width="270" height="20" fill="#b4532a"/>
+<text x="578" y="143" fill="#1f2430" font-weight="600" font-size="12">13.5 switches</text>
+
+<text x="290" y="170" text-anchor="end" fill="#1f2430" font-size="12">On intact items it accepted (82 calls)</text>
+<rect x="300" y="156" width="270" height="20" fill="#1f2430" opacity="0.10"/>
+<rect x="300" y="156" width="60" height="20" fill="#2f7d5b"/>
+<text x="578" y="171" fill="#1f2430" font-size="12">3 switches</text>
+
+<!-- Part 2: Ranking coverage (Top 10 and Top 20) -->
+<text x="24" y="206" fill="#1f2430" font-weight="600" font-size="13">2. How many of the 7 flipped items a ranking by switch count catches</text>
+
+<text x="290" y="234" text-anchor="end" fill="#1f2430" font-size="12">Top 10 most hesitant items (of 102)</text>
+<rect x="300" y="220" width="270" height="20" fill="#1f2430" opacity="0.10"/>
+<rect x="300" y="220" width="38.6" height="20" fill="#b4532a"/>
+<text x="578" y="235" fill="#1f2430" font-weight="600" font-size="12">1 of 7 flips</text>
+
+<text x="290" y="262" text-anchor="end" fill="#1f2430" font-size="12">Top 20 most hesitant items (of 102)</text>
+<rect x="300" y="248" width="270" height="20" fill="#1f2430" opacity="0.10"/>
+<rect x="300" y="248" width="154.3" height="20" fill="#b4532a"/>
+<text x="578" y="263" fill="#1f2430" font-weight="600" font-size="12">4 of 7 flips</text>
+
+<text x="344" y="294" text-anchor="middle" fill="#5b6272" font-size="12">Ranked by higher switch count across the two runs; 9 of the top 10 items stayed the same.</text>
+</svg>

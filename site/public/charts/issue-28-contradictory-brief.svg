@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 284" role="img" aria-label="Flow diagram showing how pairing cannot_tell with the match side of T10 in one writing wave creates a contradictory brief and produces T14 3/3 votes on 6 of 7 slots" font-family="system-ui, sans-serif" font-size="14">
+<rect width="688" height="284" fill="#ffffff"/>
+<text x="344" y="32" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="15">A brief that contradicts itself in one writing wave (7 cannot_tell slots)</text>
+<text x="344" y="52" text-anchor="middle" fill="#5b6272" font-size="12">Two instructions collide when the planner pairs T10’s match side with a cannot_tell verdict</text>
+
+<!-- Left boxes: Two writer instructions (x=24..248, width=224) -->
+<rect x="24" y="72" width="224" height="72" rx="4" fill="#ffffff" stroke="#b4532a" stroke-width="1.5"/>
+<text x="34" y="91" fill="#b4532a" font-weight="600" font-size="12">1. The side it teaches</text>
+<text x="34" y="108" fill="#1f2430" font-weight="600" font-size="11.5">“an equivalent wording</text>
+<text x="34" y="122" fill="#1f2430" font-weight="600" font-size="11.5">still matches”</text>
+<text x="34" y="137" fill="#5b6272" font-size="11">Asks the writer to show a match</text>
+
+<rect x="24" y="156" width="224" height="68" rx="4" fill="#ffffff" stroke="#b4532a" stroke-width="1.5"/>
+<text x="34" y="176" fill="#b4532a" font-weight="600" font-size="12">2. The verdict it must reach</text>
+<text x="34" y="194" fill="#1f2430" font-weight="600" font-size="12">cannot_tell</text>
+<text x="34" y="211" fill="#5b6272" font-size="11">“The material must be silent…”</text>
+
+<!-- Connectors to middle box -->
+<path d="M 248 108 L 276 138" stroke="#b4532a" stroke-width="1.8" fill="none"/>
+<path d="M 248 190 L 276 160" stroke="#b4532a" stroke-width="1.8" fill="none"/>
+
+<!-- Middle box: Writer escape hatch (x=276..472, width=196) -->
+<rect x="276" y="86" width="196" height="124" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5"/>
+<text x="288" y="107" fill="#1f2430" font-weight="600" font-size="12.5">Writer’s escape hatch</text>
+<text x="288" y="124" fill="#5b6272" font-size="11">Asks an unmentioned detail:</text>
+<text x="288" y="143" fill="#1f2430" font-size="11.5">• how to store a cleaner</text>
+<text x="288" y="160" fill="#1f2430" font-size="11.5">• a tea’s caffeine</text>
+<text x="288" y="177" fill="#1f2430" font-size="11.5">• service elevator floor</text>
+<text x="288" y="194" fill="#1f2430" font-size="11.5">• more than ten utensils</text>
+
+<!-- Connector to right box -->
+<line x1="472" y1="148" x2="496" y2="148" stroke="#b4532a" stroke-width="1.8"/>
+<polygon points="496,148 488,144 488,152" fill="#b4532a"/>
+
+<!-- Right box: Critic outcome (x=496..664, width=168) -->
+<rect x="496" y="86" width="168" height="124" rx="4" fill="#b4532a"/>
+<text x="580" y="109" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12.5">Critic’s trait vote</text>
+<text x="580" y="132" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="13">6 of 7 voted T14</text>
+<text x="580" y="149" text-anchor="middle" fill="#ffffff" font-size="11">(3/3 votes: silence)</text>
+<text x="580" y="174" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12">0 of 7 voted T10</text>
+<text x="580" y="191" text-anchor="middle" fill="#ffffff" font-size="11">(the 7th voted neither)</text>
+
+<text x="344" y="246" text-anchor="middle" fill="#5b6272" font-size="12">In the same 60-slot wave, that side also went to 7 supported slots and 3 unsupported slots</text>
+<text x="344" y="264" text-anchor="middle" fill="#5b6272" font-size="12">(the 3 unsupported writers got no silence line, and the critic voted their items T10 3/3).</text>
+</svg>

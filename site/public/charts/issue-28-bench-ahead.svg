@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 248" role="img" aria-label="Planned 30 by 3 by 2 critic benchmark and its fixed decision rule on the 23 sound items" font-family="system-ui, sans-serif" font-size="14">
+<rect width="688" height="248" fill="#ffffff"/>
+<rect x="12" y="12" width="664" height="224" rx="6" fill="none" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="6 4"/>
+
+<text x="344" y="38" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="15">Planned bench: testing the label definitions (not yet measured)</text>
+<text x="344" y="58" text-anchor="middle" fill="#5b6272" font-size="12">30 items × 3 seeds × 2 prompts = 180 verdict calls on one rented A100</text>
+
+<!-- Left box: 30 x 3 x 2 design (dashed) -->
+<rect x="28" y="76" width="296" height="126" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="42" y="98" fill="#1f2430" font-weight="600" font-size="13">Planned run (30 × 3 × 2)</text>
+<text x="42" y="120" fill="#1f2430" font-size="12">• 30 blind-graded items (10 per label):</text>
+<text x="54" y="138" fill="#5b6272" font-size="12">23 sound items scored; 7 ambiguous apart</text>
+<text x="42" y="160" fill="#1f2430" font-size="12">• 3 seeds per prompt</text>
+<text x="42" y="182" fill="#1f2430" font-size="12">• 2 prompts: today’s vs. + writer’s definitions</text>
+
+<!-- Dashed arrow -->
+<line x1="324" y1="139" x2="356" y2="139" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="4 3"/>
+<polygon points="360,139 353,135 353,143" fill="#8a8f98"/>
+
+<!-- Right box: Decision rule fixed in advance (dashed green) -->
+<rect x="364" y="76" width="296" height="126" rx="4" fill="#ffffff" stroke="#2f7d5b" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="378" y="98" fill="#2f7d5b" font-weight="600" font-size="13">Decision rule (fixed before any run)</text>
+<text x="378" y="120" fill="#1f2430" font-size="12">Recommend adding the definitions only if,</text>
+<text x="378" y="136" fill="#1f2430" font-size="12">on the 23 sound items:</text>
+<text x="378" y="160" fill="#1f2430" font-weight="600" font-size="12">1. False refusals fall by at least half;</text>
+<text x="378" y="182" fill="#1f2430" font-weight="600" font-size="12">2. Wrong accepts rise by at most 1 item.</text>
+
+<text x="344" y="222" text-anchor="middle" fill="#5b6272" font-size="12">Status: design and graded key file locked; A100 run pending.</text>
+</svg>

@@ -9,3 +9,54 @@
   --sl-color-accent: #1b4f9c;
   --sl-color-accent-high: #13284d;
 }
+
+/* Email subscribe form on newsletter/subscribe (plain HTML post to Buttondown). */
+.rnd-subscribe {
+  margin-top: 1rem;
+}
+.rnd-subscribe label {
+  display: block;
+  font-size: var(--sl-text-sm);
+  color: var(--sl-color-gray-2);
+}
+.rnd-subscribe-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.375rem;
+}
+.rnd-subscribe input[type='email'] {
+  flex: 1 1 16rem;
+  min-width: 0;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--sl-color-gray-3);
+  border-radius: 0.5rem;
+  background: var(--sl-color-black);
+  color: var(--sl-color-white);
+  font: inherit;
+}
+.rnd-subscribe button {
+  padding: 0.55rem 1.1rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--sl-color-accent);
+  color: #ffffff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.rnd-subscribe button:hover {
+  filter: brightness(0.9);
+}
+/* Same mid-gray border in both themes (Starlight swaps gray-3 and gray-4), >= 3:1; light hover lightens. */
+:root[data-theme='light'] .rnd-subscribe input[type='email'] {
+  border-color: var(--sl-color-gray-4);
+}
+:root[data-theme='light'] .rnd-subscribe button:hover {
+  filter: brightness(1.12);
+}
+.rnd-subscribe input[type='email']:focus-visible,
+.rnd-subscribe button:focus-visible {
+  outline: 2px solid var(--sl-color-accent-high);
+  outline-offset: 2px;
+}

@@ -2,6 +2,7 @@
 <rect width="688" height="308" fill="#ffffff"/>
 <text x="344" y="32" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="15">Definitions end cannot_tell refusals but start unsupported ones</text>
 <text x="344" y="52" text-anchor="middle" fill="#5b6272" font-size="12">Pooled false refusals over 6 seeds on the 23 sound items, split by the item’s true label</text>
+<g transform="translate(26.8 0)">
 
 <text x="24" y="80" fill="#1f2430" font-weight="600" font-size="13">1. cannot_tell (10 sound items, 60 calls per prompt)</text>
 <text x="234" y="104" text-anchor="end" fill="#5b6272" font-size="12">Prompt A (no definitions)</text>
@@ -34,4 +35,5 @@
 <rect x="244" y="278" width="162" height="18" fill="#1f2430" opacity="0.10"/>
 <rect x="244" y="278" width="27" height="18" fill="#b4532a"/>
 <text x="416" y="292" fill="#b4532a" font-weight="600" font-size="12">6 of 36 refused</text>
+</g>
 </svg>

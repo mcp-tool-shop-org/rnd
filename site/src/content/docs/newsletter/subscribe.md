@@ -18,7 +18,7 @@ There are two ways to get each new issue: by email, or through the RSS feed in a
   </div>
 </form>
 
-You'll get each issue by email when it's published. Buttondown, the service that sends the newsletter, first emails
+You'll get each issue by email when it's published. Issues come out most days, usually one or two. Buttondown, the service that sends the newsletter, first emails
 you a link to confirm, and every issue has a one-click unsubscribe link. Your address goes to Buttondown only; this site
 stores nothing.
 

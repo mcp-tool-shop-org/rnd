@@ -1,3 +1,3 @@
 """The studio R&D seat: a Markdown research library with a rebuildable SQLite index."""
 
-__version__ = "1.1.23.1.30"
+__version__ = "1.1.23.1.31"

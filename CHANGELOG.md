@@ -11,6 +11,15 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.31] - 2026-10-23
+
+- newsletter: issue 28 (#220); the RSS feed, its CI check and the zod pin (#221-#223); the issue 28 correction with
+  seven Antigravity-designed charts, plus issue 27's chart margin (#224)
+- colab-drift: compare.py in the repo, reading each reply as role-set does, with evidence_drift for DECIDING on
+  verdict calls; the G4 counts hold (65 drifted, 28 decision, 3 verdict, 10 evidence) (#225)
+- stage1-regeneration: run records 18a-18e with stubs, 19s, 19a, probes p6 and p7; phase 5 cap 500, shared across
+  experiments (#225)
+
 ## [1.1.23.1.30] - 2026-10-23
 
 - colab-drift: correct the G4 decision-drift claim (3 verdict changes of 65 drifted calls, not 65)

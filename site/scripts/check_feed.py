@@ -2,12 +2,21 @@
 
 Fails (exit 1) if the feed is missing or doesn't parse, if its item count isn't the number of issue files, if an item
 lacks its full content, if an item lacks its date or description, if any link or image in it is relative,
-misses the /rnd base or names a page the build didn't make, or if it carries any author field
-other than dc:creator mcp-tool-shop. Usage, from site/: python scripts/check_feed.py
+misses the /rnd base or names a page the build didn't make, if it carries any author field
+other than dc:creator mcp-tool-shop, if its HTML has a <div> or a class attribute (it is also the
+email edition), if an image in it is an SVG (email clients don't show SVG), or if a chart's PNG
+is missing, older than its SVG, or not the one recorded (charts/png-manifest.json; re-run
+scripts/render_chart_pngs.py).
+Usage, from site/: python scripts/check_feed.py
+With --charts-only it checks only the chart PNGs, which needs no build; PR CI runs it that way.
 """
+import hashlib
+import json
 import pathlib
 import re
+import struct
 import sys
+import urllib.parse
 import xml.etree.ElementTree as ET
 
 SITE = "https://mcp-tool-shop-org.github.io/rnd/"
@@ -27,9 +36,45 @@ TOP_LEVEL = {p.name for p in dist.iterdir()} if dist.is_dir() else set()
 
 def built(url: str) -> bool:
     """True when a SITE URL names a page or file in dist (a fragment or query is ignored)."""
-    path = url[len(SITE):].split("#")[0].split("?")[0]
+    path = urllib.parse.unquote(url[len(SITE):].split("#")[0].split("?")[0])
     target = dist / path
     return target.is_file() or (target / "index.html").is_file()
+
+
+def svg_digest(svg: pathlib.Path) -> str:
+    """sha256 of an SVG with CRLF read as LF, so a Windows working copy and CI's LF checkout agree."""
+    return hashlib.sha256(svg.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
+def chart_errors() -> list[str]:
+    """Every chart has the PNG made from its current SVG, at most 1200x1200 (Buttondown's recommended maximum)."""
+    found = []
+    charts = here / "public" / "charts"
+    manifest_path = charts / "png-manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.is_file() else {}
+    for svg in sorted(charts.glob("*.svg")):
+        entry = manifest.get(svg.name)
+        png = charts / (entry or {}).get("png", svg.with_suffix(".png").name)
+        if not entry or not png.is_file():
+            found.append(f"chart {svg.name} has no PNG; run scripts/render_chart_pngs.py")
+        elif entry.get("svg_sha256") != svg_digest(svg):
+            found.append(f"chart {svg.name} changed since its PNG was made; run scripts/render_chart_pngs.py")
+        elif entry.get("png_sha256") != hashlib.sha256(png.read_bytes()).hexdigest():
+            found.append(f"chart {png.name} isn't the PNG the manifest recorded; run scripts/render_chart_pngs.py")
+        else:
+            w, h = struct.unpack(">II", png.read_bytes()[16:24])
+            if (w, h) != (entry.get("width"), entry.get("height")) or w > 1200 or h > 1200:
+                found.append(f"chart {png.name} is {w}x{h}; expected the manifest's size, at most 1200x1200")
+    return found
+
+
+if "--charts-only" in sys.argv[1:]:
+    errors = chart_errors()
+    if errors:
+        print("check_feed: FAIL", *errors, sep="\n  ")
+        sys.exit(1)
+    print("check_feed: OK, every chart has its current PNG")
+    sys.exit(0)
 
 if not feed.is_file():
     sys.exit(f"check_feed: {feed} is missing; run the build first")
@@ -69,6 +114,18 @@ for item in items:
             errors.append(f"{title}: link to this site without the /rnd base: {url}")
         elif url.startswith(SITE) and not built(url):
             errors.append(f"{title}: links to a page or file the build didn't make: {url}")
+    # The feed is also the email edition (Buttondown): classless <div>s can error in its editor, and class names do
+    # nothing in email, where styles must be inline.
+    if re.search(r"<div[\s>]", html):
+        errors.append(f"{title}: content has a <div>; email HTML should carry none")
+    if " class=" in html:
+        errors.append(f"{title}: content has a class attribute; email styles must be inline")
+    # Gmail and Outlook don't show SVG images.
+    for src in re.findall(r'<img[^>]*\ssrc="([^"]*)"', html):
+        if urllib.parse.urlsplit(src).path.lower().endswith(".svg"):
+            errors.append(f"{title}: image is an SVG, which email clients don't show: {src}")
+
+errors += chart_errors()
 
 if errors:
     print("check_feed: FAIL", *errors, sep="\n  ")

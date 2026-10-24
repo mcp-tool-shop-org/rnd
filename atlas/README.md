@@ -1,30 +1,32 @@
 # rnd: how it works
 
-Mapped at 2026-10-23 from commit 4e6168c by Atlas 1.24.0.
+Mapped at 2026-10-24 from commit 24ea150 by Atlas 1.24.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-14 parts, mostly Python (141 files), shell (30), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
+14 parts, mostly Python (145 files), shell (30), TypeScript (3), CSS (2), HTML (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-22 (6310311)
+## What changed since 2026-10-24 (6d2d5b4)
 
-- README.md is now also read by experiments/offrig-jobs/experiment.json.
-- experiments/natural-errors/ is now also read by README.es.md, README.fr.md, README.hi.md, README.it.md, README.ja.md, README.pt-BR.md and README.zh.md.
-- 20 files added and 26 changed content, across 7 parts.
+- site/public/charts/png-manifest.json is now written by site/scripts/render_chart_pngs.py.
+- site/public/charts/ is now also read by site/scripts/render_chart_pngs.py.
+- site/public/charts/calibration-grounded.png is now read by site/public/charts/png-manifest.json.
+- And 60 more new writers and readers of places.
+- 32 files added and 2 changed content, across 1 part.
 
 ## What comes in
 
 1. **CI.** On a pull request to main; on a push to main touching 13 paths; or by hand. Runs verify.sh and tests/; checks mcptoolshop_rnd/.
 2. **Release.** When a release is published; or by hand. Runs mcptoolshop_rnd/__init__.py and verify.sh; checks mcptoolshop_rnd/.
-3. **Deploy site to GitHub Pages.** On a push to main touching 2 paths; or by hand. Runs site/astro.config.mjs and site/src/.
+3. **Deploy site to GitHub Pages.** On a push to main touching 2 paths; or by hand. Runs site/scripts/check_feed.py, site/astro.config.mjs and site/src/.
 4. **rnd** (a command people run). Runs mcptoolshop_rnd/cli.py.
 
 ## What happens through CI
 
 1. The workflow runs verify.sh in the repository root and tests/ in tests; it checks mcptoolshop_rnd/ in mcptoolshop_rnd.
-2. That reaches experiments (6 files) and rnd (1 file).
+2. That reaches experiments (7 files) and rnd (1 file).
 3. It writes to entries/, experiments/charts/, instruments/ and site/public/charts/.
 4. It uploads coverage to Codecov.
 
@@ -33,13 +35,13 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 - **entries/** is read by experiments/embeddinggemma-2/harness/build_corpus.py, and by 2 tests.
 - **experiments/charts/** has no reader in this repository.
 - **instruments/** is read by experiments/embeddinggemma-2/harness/build_corpus.py.
-- **site/public/charts/** has no reader in this repository.
+- **site/public/charts/** is read by site/scripts/check_feed.py and site/src/pages/newsletter/rss.xml.ts.
 
 ## The other doors
 
 **Release** runs mcptoolshop_rnd/__init__.py and verify.sh, checks mcptoolshop_rnd/, and publishes to PyPI.
 
-**Deploy site to GitHub Pages** runs site/astro.config.mjs and site/src/, and deploys the site.
+**Deploy site to GitHub Pages** runs site/scripts/check_feed.py, site/astro.config.mjs and site/src/, and deploys the site.
 
 **rnd** (a command people run) runs mcptoolshop_rnd/cli.py and writes to entries/ and instruments/.
 
@@ -87,8 +89,6 @@ the repository root holds only shell files, which this map does not read, so whe
 - **experiments/verifier-gold/crossfamily/blind_key.json** is written by experiments/verifier-gold/crossfamily/make_sample.py and read by nothing else in this repository.
 - **experiments/verifier-gold/crossfamily/sample.jsonl** is written by experiments/verifier-gold/crossfamily/make_sample.py and read by nothing else in this repository.
 
-And 1 more place.
-
 ## Helpers that look duplicated
 
 These are candidates from names and call order, not a judgement.
@@ -115,6 +115,7 @@ These are candidates from names and call order, not a judgement.
 - **instruments/** is written by mcptoolshop_rnd/cli.py.
 - **licences/registry.json** has a block written by licences/snapshot.py.
 - **site/public/charts/** is written by experiments/charts/make_charts.py.
+- **site/public/charts/png-manifest.json** has a block written by site/scripts/render_chart_pngs.py.
 
 ## Hand-authored
 
@@ -129,9 +130,9 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 ## What this map cannot see
 
 - 11 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 8 more.
-- 25 writes and 45 reads use paths built at run time and are not named here.
+- 25 writes and 46 reads use paths built at run time and are not named here.
 - 7 writes go to places this repository does not track, so they are not listed as generated.
-- 40 writes and 115 reads go to a path their caller passes, not to this repository.
+- 40 writes and 119 reads go to a path their caller passes, not to this repository.
 - 12 reads go to the directory the command is run in (README.md, SECURITY.md, entries and 3 more places), not to this repository.
 - 1 read goes to the directory the command is run in or a path its caller passes, not to this repository.
 - 1 read goes to the home directory (.claude/), not to this repository.

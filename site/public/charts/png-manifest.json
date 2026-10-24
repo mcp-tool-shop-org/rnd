@@ -1,180 +1,210 @@
 {
   "calibration-grounded.svg": {
     "png": "calibration-grounded.png",
+    "png_sha256": "3b06a13580c5ee859d92988f0e53668b0dca8d7889129d511f81608056860246",
     "svg_sha256": "4cf201aac16382ad422bb978b1d231ba284bee45857281585a7c7d7e86264813",
     "width": 1200,
     "height": 465
   },
   "calibration-reasoning.svg": {
     "png": "calibration-reasoning.png",
+    "png_sha256": "e30eb45539fe54664077b74e3f6996c3b36673f22b65af2d66e0a305493e47bc",
     "svg_sha256": "632dfead0cbc95cb68b0b07721ed359c3e6ab206846e460212bc6ee23527305e",
     "width": 1200,
     "height": 465
   },
   "critic-calls.svg": {
     "png": "critic-calls.png",
+    "png_sha256": "e044293d60e6fd771231588f6c8548fd85be4975477ad9464fa2e9942484af05",
     "svg_sha256": "54a98963bc6cb1771523d524fd2f0fea45152d9e30c0816e7bd066026b4bc483",
     "width": 1200,
     "height": 478
   },
   "critic-catch.svg": {
     "png": "critic-catch.png",
+    "png_sha256": "5daed15b74cece542498bb5c0bc19650c0f7e9a1e60a5d442ee2f0e67e11dc6e",
     "svg_sha256": "358041a4337578dc4cb4d7de0b86007456a15b7e3001a8f17e4be9c8e698147b",
     "width": 1200,
     "height": 432
   },
   "critic-confirmation-slots.svg": {
     "png": "critic-confirmation-slots.png",
+    "png_sha256": "00ac7af124258eff97dfc1949f47c678d342b699d0a6124479206e3f0ba488c4",
     "svg_sha256": "ad6a42f8641e285efb604705deb0e36c15ccd3c9aeae867e06dfc11d20daf850",
     "width": 1200,
     "height": 568
   },
   "cuda-graphs.svg": {
     "png": "cuda-graphs.png",
+    "png_sha256": "3a5480c9fa51087cbcdcaf3811fb4a0239147b7f2972a93a8b24905b3de0aee3",
     "svg_sha256": "e247acd6efeccc978ecf589368299b351c560ac73a65a07c84f40728f3d81df6",
     "width": 1200,
     "height": 385
   },
   "cuda-kev-band.svg": {
     "png": "cuda-kev-band.png",
+    "png_sha256": "a35e6c80d5a0e4ac54688aaf8a9fdb35bcc7ffdc1e4e380dba676298da7cf47f",
     "svg_sha256": "cf26a1f6e2bad29d33d0c3ef1d22506075801bb3fc262019c149bc090085cbbe",
     "width": 1200,
     "height": 369
   },
   "cuda-probe.svg": {
     "png": "cuda-probe.png",
+    "png_sha256": "b5b7b843d79ec2c7e36c2c076257edfa955c7026e3741059a7f3a23da83ec69a",
     "svg_sha256": "adb038b29668684f73885dd88bf2ea77f99318957d1c9404378a6d9113b5ab4c",
     "width": 1200,
     "height": 512
   },
   "desk-vram.svg": {
     "png": "desk-vram.png",
+    "png_sha256": "3e6f8f6c495c1a49fc4be9c62f1e73f998faefaa7ff0e167b7beda86735a0c14",
     "svg_sha256": "84caaf65d8ce8767f02d2bd1f82c1b86529ebc3825d19c59be0a8b4eb50ccc24",
     "width": 1200,
     "height": 480
   },
   "e4b-igpu-latency.svg": {
     "png": "e4b-igpu-latency.png",
+    "png_sha256": "f795507acb39380867fa990bf38feb099b2c27ecfb651eddf5696003f75a150f",
     "svg_sha256": "9e728527daf81b6590071441b0c136579bf941c0dea2ae6eb6411b34ead6c326",
     "width": 1200,
     "height": 414
   },
   "e4b-pilot-clock.svg": {
     "png": "e4b-pilot-clock.png",
+    "png_sha256": "cf282facad19baeb8b8136998bbff7c0658ea0cac86c5c47f8b432ec4e93574a",
     "svg_sha256": "f16a98f31a37d4b4b939b97266d28f3fa0d5ba511d9c4cb7f546ed29c38625ae",
     "width": 1200,
     "height": 539
   },
   "e4b-triplet-effects.svg": {
     "png": "e4b-triplet-effects.png",
+    "png_sha256": "06dcc82d392c12dd0d74bbc6a61d0b3a166ca592e5eed859704a2fce0a860a86",
     "svg_sha256": "1ad7620c2e657da7339ab996752a5ac8be65388661dadc2ef3d3aee5db0a8d2b",
     "width": 1200,
     "height": 499
   },
   "e4b-verdict.svg": {
     "png": "e4b-verdict.png",
+    "png_sha256": "9f4c31504c6334a480f8773cfc1482787b8f1adef693430776bad772a340327f",
     "svg_sha256": "9eac5848dcd2af87a0ff2a23d15216d9298d935a0a9e94411f383d1d1b77a3ea",
     "width": 1200,
     "height": 472
   },
   "error-lean.svg": {
     "png": "error-lean.png",
+    "png_sha256": "86c7fcabc1b1b4a1909825f2aac61a3e8f7e5c746cb78cf747631e8e9aabcf60",
     "svg_sha256": "62da7d5aaa530001e06e45619a0830ba52b30136960ea489a8ad870a3853bb92",
     "width": 1200,
     "height": 581
   },
   "issue-27-match-share.svg": {
     "png": "issue-27-match-share.png",
+    "png_sha256": "bf982eebfcd12130822c2841dc079d6ee5a7a141c371935841c2dc23aae382bb",
     "svg_sha256": "f733f613367cc20794290366d291572741c2be0892288bdf0b8c88e22c7048f7",
     "width": 1200,
     "height": 499
   },
   "issue-28-bench-ahead.svg": {
     "png": "issue-28-bench-ahead.png",
+    "png_sha256": "da1dd4b4828f8805b58549d83a4e37e7a1252909090e55d0be04a3f355f023c4",
     "svg_sha256": "c1d0f612665b1c712d8103bc0502baded79643c6422c51a9ed3a3a28e42aa811",
     "width": 1200,
     "height": 433
   },
   "issue-28-causes-map.svg": {
     "png": "issue-28-causes-map.png",
+    "png_sha256": "1d0050a3e9704e3b02ede17494a0bcd525301a34eb8c79475f35854eb4550499",
     "svg_sha256": "4b2eba08f1168749d2aa2f3fe05c0f187dbf6b61d51086ba61c9e9d989568cf3",
     "width": 1200,
     "height": 460
   },
   "issue-28-contradictory-brief.svg": {
     "png": "issue-28-contradictory-brief.png",
+    "png_sha256": "0f78e60fee5519361be9fd84beaee35c9313f0f72ce03cad54500d080005ba53",
     "svg_sha256": "7f58fba49ff689cba2dac9a932282d02984a36def29a7d173e4c8b5a0e6cb2da",
     "width": 1200,
     "height": 495
   },
   "issue-28-graded-panel.svg": {
     "png": "issue-28-graded-panel.png",
+    "png_sha256": "650fcb9353ad9ecbacebcad38a1455ad74e154f69a6e0264ca8d56c7d8fecfd8",
     "svg_sha256": "321b298409793d7ef8a330df92527ba35387c4b48e3fd7710fc3c9ce9a19970a",
     "width": 1200,
     "height": 537
   },
   "issue-28-hesitation-spread.svg": {
     "png": "issue-28-hesitation-spread.png",
+    "png_sha256": "d9105b7ecb6ab8b524426d7d5908a857d829f0624443d291a227174de3af8466",
     "svg_sha256": "b1b9039b2e9fbebfea0029c1219e29d4d6b12742913954da7c1fe7713ae7926a",
     "width": 1200,
     "height": 558
   },
   "issue-28-slot-sides.svg": {
     "png": "issue-28-slot-sides.png",
+    "png_sha256": "27b42ac766e72f37a50c650ab62610e6f4d10256e5e21ad6e92d3d90b76811df",
     "svg_sha256": "bf7e7cfa5f4a0e46d93f19b1b0bcb876f5f4b6640ae6cfbf63ccefb8bad250bc",
     "width": 1200,
     "height": 593
   },
   "issue-28-track-a-flips.svg": {
     "png": "issue-28-track-a-flips.png",
+    "png_sha256": "ee5d28bf47304af6cd5aed2d0fbe2edb72c5c0db8c9d1381a2939b4f90dd6112",
     "svg_sha256": "e141f773d02ff855c00ac7c5d6de5d189b9cd0165c314c934996fe3b1a8c9d19",
     "width": 1200,
     "height": 586
   },
   "loop-repeats.svg": {
     "png": "loop-repeats.png",
+    "png_sha256": "f7527ae4d3ec14612ffea5b9fafd1f68c1bba4d89e99aae489192b50836155d3",
     "svg_sha256": "42faeeee21377286ae0afc0bcc7f4a55f902bfbe05a9d41042bfcff6ee54d0f7",
     "width": 1200,
     "height": 347
   },
   "math-ladder.svg": {
     "png": "math-ladder.png",
+    "png_sha256": "04fed68eba04ec3d499009822830eeacc8a2830cb24280ce6dcd43dbe0552ab4",
     "svg_sha256": "a37469574167e77310139fe648a0815056c8e1be6fb53dceb71771e7d92a0657",
     "width": 1200,
     "height": 589
   },
   "npu-vs-cpu.svg": {
     "png": "npu-vs-cpu.png",
+    "png_sha256": "7886379cb43c5ac942ecd8ba4d7340849263bd0d2430a6f17a36ef69a417e704",
     "svg_sha256": "719322220fe7796e5174c0229b20f99677403104b93fff598b77bf1420a161c3",
     "width": 1200,
     "height": 457
   },
   "pilot-thinking-budget.svg": {
     "png": "pilot-thinking-budget.png",
+    "png_sha256": "0f5f0ef88befbe9343604baae04f69a9ae23ed614d7eec812456e460f8662dc4",
     "svg_sha256": "d03b18f61713c18593ca29dbfdc201d4953576cf364ed41e8cebece4b502e49d",
     "width": 1200,
     "height": 625
   },
   "reasoning-default.svg": {
     "png": "reasoning-default.png",
+    "png_sha256": "46eab5952adb7435982ee215d32641ce9961eb3729fd7785ac701c8d9103077a",
     "svg_sha256": "8135efa8483a0544562c094aa6ffe937b5dad7277bb11633f2cb6f908ace8ba5",
     "width": 1200,
     "height": 349
   },
   "thinking-off-vs-on.svg": {
     "png": "thinking-off-vs-on.png",
+    "png_sha256": "37063265aa13aa6b403faed3671bbd9af130429d47eb0a4f720fbbc639af5f96",
     "svg_sha256": "4f81e4436e37fd793f1b07ae5a81ccd151c77efde1b6939002c90a4ad2848e21",
     "width": 1200,
     "height": 571
   },
   "vocal-pitch.svg": {
     "png": "vocal-pitch.png",
+    "png_sha256": "983739a9b9ff5bbbbaff77e98da0c4d21f96ca916cb187e8401a2fb26361fb69",
     "svg_sha256": "750269f8921527796fa86f28b8484beaf58de1226c458eaea168a647bbdc46ef",
     "width": 1200,
     "height": 737
   },
   "vocal-timing.svg": {
     "png": "vocal-timing.png",
+    "png_sha256": "d95a3cf81725c22dd4a11a8c13a94e1c9dd4c84de411a9a93d3dcc611e695fc7",
     "svg_sha256": "916d59af421b45c34cb293ce9fc2265dcaebb9f1693b6f90519a1e7978370698",
     "width": 1200,
     "height": 674

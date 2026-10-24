@@ -16,6 +16,8 @@ on:
       - "uv.lock"
       - ".coveragerc"
       - "codecov.yml"
+      - "site/public/charts/**"
+      - "site/scripts/**"
       - ".github/workflows/**"
   pull_request:
     branches: [main]
@@ -50,6 +52,12 @@ jobs:
 
       - name: Verify (tests, library check, index build, smoke)
         run: bash verify.sh
+
+      # The full feed check runs in pages.yml after the build; this part needs no build, so a PR that changes a
+      # chart without re-rendering its PNG fails here instead of at deploy.
+      - name: Chart PNGs current (email edition)
+        if: matrix.python-version == '3.12'
+        run: python site/scripts/check_feed.py --charts-only
 
       - name: Coverage
         if: matrix.python-version == '3.12'

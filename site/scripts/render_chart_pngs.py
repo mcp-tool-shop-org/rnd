@@ -38,6 +38,11 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def svg_sha256(path: Path) -> str:
+    # CRLF read as LF: an SVG saved on Windows hashes the same as CI's LF checkout (.gitattributes keeps text LF).
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
 def svg_size(path: Path) -> tuple[float, float]:
     head = re.search(r"<svg\b[^>]*>", path.read_text(encoding="utf-8"))
     box = head and re.search(r'viewBox="\s*[-\d.]+[\s,]+[-\d.]+[\s,]+([\d.]+)[\s,]+([\d.]+)\s*"', head.group(0))
@@ -88,14 +93,15 @@ def main() -> int:
     rendered = 0
     for svg in svgs:
         png = svg.with_suffix(".png")
-        digest = sha256(svg)
+        digest = svg_sha256(svg)
         entry = manifest.get(svg.name)
-        if not args.all and entry and entry.get("svg_sha256") == digest and png.exists():
+        current = entry and png.exists() and entry.get("svg_sha256") == digest and entry.get("png_sha256") == sha256(png)
+        if not args.all and current:
             continue
         pw, ph = render(browser, svg, png)
         if pw != WIDTH or ph > WIDTH:
             sys.exit(f"render_chart_pngs: {png.name} came out {pw}x{ph}, expected {WIDTH} wide and at most {WIDTH} tall")
-        manifest[svg.name] = {"png": png.name, "svg_sha256": digest, "width": pw, "height": ph}
+        manifest[svg.name] = {"png": png.name, "png_sha256": sha256(png), "svg_sha256": digest, "width": pw, "height": ph}
         rendered += 1
         print(f"rendered {png.name} {pw}x{ph}")
     for name in [n for n in manifest if not (CHARTS / n).exists()]:

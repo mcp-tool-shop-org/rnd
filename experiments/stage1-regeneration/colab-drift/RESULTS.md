@@ -19,10 +19,11 @@ sampling block).
 - **Models:** muse-glimmer-30b Q8_0 as critic and gemma-4-31b-it Q8_0 as writer, on the T10 pilot. The run resumes
   after the first writing wave (w0) from 15w's sealed drafts, so every arm critiques the same drafts.
 - **GPU:** Colab A100-SXM4-40GB. G4 and C80 are the exceptions, below.
-- **Comparison:** [compare.py](scripts/compare.py) matches calls by request key and compares the completions byte for byte. Its "decision
-  drift" counts a change in any parsed line: VERDICT, DECIDING (the quoted span), TRAIT, CONTRASTED or a flaw label.
-  CONTRASTED is self-check scaffolding the pipeline doesn't read, so a "decision drift" isn't necessarily a changed
-  verdict. The G4 section breaks the changes down by field.
+- **Comparison:** [compare.py](scripts/compare.py) matches calls by request key and compares the completions byte for
+  byte. A drifted reply is read the way role-set reads that check's reply. `decision_drift` counts a changed decision
+  label (VERDICT, TRAIT, ANSWER or a flaw label), `verdict_drift` a changed VERDICT, and `evidence_drift` a changed
+  DECIDING quote on a verdict call, where role-set acts on it. CONTRASTED is self-check scaffolding role-set never
+  parses. The G4 section breaks the changes down by field.
 
 ## Cache off, verified on every arm that returned its log
 
@@ -71,9 +72,17 @@ G4 sent the same requests, with the cache off, to its own sm_120 build of the sa
   |---|---|
   | only CONTRASTED (scaffolding the pipeline doesn't read) | 27 |
   | the TRAIT vote (11 alone, 10 with CONTRASTED) | 21 |
-  | only DECIDING (the quoted span) | 10 |
+  | only DECIDING (the quoted span), on a verdict call | 7 |
+  | only DECIDING, on a twin-verdict call (role-set doesn't read it there) | 2 |
+  | only emphasis or spacing in a twin-verdict reply (nothing role-set reads) | 1 |
   | a flaw label | 4 |
   | VERDICT (and DECIDING) | 3 |
+
+  Recounted 2026-10-24 with compare.py reading each reply as role-set does (Argon's review of rnd #225): the totals
+  are unchanged (65 drifted, 28 changed a decision label, 3 a verdict). The quote matters too. On a verdict call
+  role-set voids a DECIDING line that isn't verbatim in the material, and on supported and unsupported keys it
+  refuses evidence that doesn't cover the key's. So the 10 verdict calls whose DECIDING changed (7 alone, 3 with the
+  verdict) are counted as `evidence_drift`: calls where the outcome could change. T10-C-04's extra retry below is one.
 
   The 3 verdict changes are all `unsupported` on the A100 against `cannot_tell` on G4 (T10-D-02, T10-C-06, T10-C-09).
   Verdicts held on 49 of 52 verdict and twin-verdict calls, close to the offrig bench's 29 of 30 against the 5090.

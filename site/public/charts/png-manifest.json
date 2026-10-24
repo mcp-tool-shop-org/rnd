@@ -153,6 +153,27 @@
     "width": 1200,
     "height": 586
   },
+  "issue-29-refusal-concentration.svg": {
+    "png": "issue-29-refusal-concentration.png",
+    "png_sha256": "a37d785e549cd9ce81806ff52640b6d7a301f20b46e41d6084b576743a645fb8",
+    "svg_sha256": "6459800a7ee862178b56c3820c7c11580c08c41e8083b1c9f8369dfdb38391bc",
+    "width": 1200,
+    "height": 558
+  },
+  "issue-29-rule-runs.svg": {
+    "png": "issue-29-rule-runs.png",
+    "png_sha256": "d0af27100a80fa76e436e7327ecfda52927b6353461abb7ae259536047bc29b5",
+    "svg_sha256": "08f93b28305d2db29b462ae7403b98082ece9b248b6f7661b8d1cc6416d83206",
+    "width": 1200,
+    "height": 537
+  },
+  "issue-29-trade-by-label.svg": {
+    "png": "issue-29-trade-by-label.png",
+    "png_sha256": "c59b580882bd348b2081627d81476a2cdb743ccf879ed59eb425e57b5c4aae29",
+    "svg_sha256": "663fd9ac44ef76a67b5fe24c9d178e6e7cab1dd2f69d2bb8845815b60a8e7373",
+    "width": 1200,
+    "height": 537
+  },
   "loop-repeats.svg": {
     "png": "loop-repeats.png",
     "png_sha256": "f7527ae4d3ec14612ffea5b9fafd1f68c1bba4d89e99aae489192b50836155d3",

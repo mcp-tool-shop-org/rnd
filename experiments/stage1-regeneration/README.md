@@ -25,4 +25,10 @@ re-read every licence clause Argon cited ([argon-answer.md](argon-answer.md)). T
 - **Money:** the frontier tier is out of reach at today's RunPod balance. A big-writer pilot fits; the full
   big-writer run needs a top-up, which is the maintainer's call after the pilot.
 
+**The phase 5 budget is shared (2026-10-24).** Phase 5's 500 Colab units (experiment.json) cover the whole exploratory
+phase, across experiments. offrig-jobs' Colab windows (16o, 16t, 16u, 17k, 17l, 17p, 17q, 17r: 7.85 units) count
+against it too, so `rnd ledger` reads this experiment's phase 5 low by that much. Where per-run figures disagree with
+the account balance (some are upper-bound estimates, such as probes p6 and p7), the balance is the authority. The
+Publisher's units ledger settles on it: 313.97 at 2026-10-24 01:40Z, where the per-run figures sum to 318.52.
+
 **Related:** `experiments/local-builders` (J1 is the writer selection, amendment A), `instruments/colab.md`.

@@ -1,0 +1,182 @@
+{
+  "calibration-grounded.svg": {
+    "png": "calibration-grounded.png",
+    "svg_sha256": "4cf201aac16382ad422bb978b1d231ba284bee45857281585a7c7d7e86264813",
+    "width": 1200,
+    "height": 465
+  },
+  "calibration-reasoning.svg": {
+    "png": "calibration-reasoning.png",
+    "svg_sha256": "632dfead0cbc95cb68b0b07721ed359c3e6ab206846e460212bc6ee23527305e",
+    "width": 1200,
+    "height": 465
+  },
+  "critic-calls.svg": {
+    "png": "critic-calls.png",
+    "svg_sha256": "54a98963bc6cb1771523d524fd2f0fea45152d9e30c0816e7bd066026b4bc483",
+    "width": 1200,
+    "height": 478
+  },
+  "critic-catch.svg": {
+    "png": "critic-catch.png",
+    "svg_sha256": "358041a4337578dc4cb4d7de0b86007456a15b7e3001a8f17e4be9c8e698147b",
+    "width": 1200,
+    "height": 432
+  },
+  "critic-confirmation-slots.svg": {
+    "png": "critic-confirmation-slots.png",
+    "svg_sha256": "ad6a42f8641e285efb604705deb0e36c15ccd3c9aeae867e06dfc11d20daf850",
+    "width": 1200,
+    "height": 568
+  },
+  "cuda-graphs.svg": {
+    "png": "cuda-graphs.png",
+    "svg_sha256": "e247acd6efeccc978ecf589368299b351c560ac73a65a07c84f40728f3d81df6",
+    "width": 1200,
+    "height": 385
+  },
+  "cuda-kev-band.svg": {
+    "png": "cuda-kev-band.png",
+    "svg_sha256": "cf26a1f6e2bad29d33d0c3ef1d22506075801bb3fc262019c149bc090085cbbe",
+    "width": 1200,
+    "height": 369
+  },
+  "cuda-probe.svg": {
+    "png": "cuda-probe.png",
+    "svg_sha256": "adb038b29668684f73885dd88bf2ea77f99318957d1c9404378a6d9113b5ab4c",
+    "width": 1200,
+    "height": 512
+  },
+  "desk-vram.svg": {
+    "png": "desk-vram.png",
+    "svg_sha256": "84caaf65d8ce8767f02d2bd1f82c1b86529ebc3825d19c59be0a8b4eb50ccc24",
+    "width": 1200,
+    "height": 480
+  },
+  "e4b-igpu-latency.svg": {
+    "png": "e4b-igpu-latency.png",
+    "svg_sha256": "9e728527daf81b6590071441b0c136579bf941c0dea2ae6eb6411b34ead6c326",
+    "width": 1200,
+    "height": 414
+  },
+  "e4b-pilot-clock.svg": {
+    "png": "e4b-pilot-clock.png",
+    "svg_sha256": "f16a98f31a37d4b4b939b97266d28f3fa0d5ba511d9c4cb7f546ed29c38625ae",
+    "width": 1200,
+    "height": 539
+  },
+  "e4b-triplet-effects.svg": {
+    "png": "e4b-triplet-effects.png",
+    "svg_sha256": "1ad7620c2e657da7339ab996752a5ac8be65388661dadc2ef3d3aee5db0a8d2b",
+    "width": 1200,
+    "height": 499
+  },
+  "e4b-verdict.svg": {
+    "png": "e4b-verdict.png",
+    "svg_sha256": "9eac5848dcd2af87a0ff2a23d15216d9298d935a0a9e94411f383d1d1b77a3ea",
+    "width": 1200,
+    "height": 472
+  },
+  "error-lean.svg": {
+    "png": "error-lean.png",
+    "svg_sha256": "62da7d5aaa530001e06e45619a0830ba52b30136960ea489a8ad870a3853bb92",
+    "width": 1200,
+    "height": 581
+  },
+  "issue-27-match-share.svg": {
+    "png": "issue-27-match-share.png",
+    "svg_sha256": "f733f613367cc20794290366d291572741c2be0892288bdf0b8c88e22c7048f7",
+    "width": 1200,
+    "height": 499
+  },
+  "issue-28-bench-ahead.svg": {
+    "png": "issue-28-bench-ahead.png",
+    "svg_sha256": "c1d0f612665b1c712d8103bc0502baded79643c6422c51a9ed3a3a28e42aa811",
+    "width": 1200,
+    "height": 433
+  },
+  "issue-28-causes-map.svg": {
+    "png": "issue-28-causes-map.png",
+    "svg_sha256": "4b2eba08f1168749d2aa2f3fe05c0f187dbf6b61d51086ba61c9e9d989568cf3",
+    "width": 1200,
+    "height": 460
+  },
+  "issue-28-contradictory-brief.svg": {
+    "png": "issue-28-contradictory-brief.png",
+    "svg_sha256": "7f58fba49ff689cba2dac9a932282d02984a36def29a7d173e4c8b5a0e6cb2da",
+    "width": 1200,
+    "height": 495
+  },
+  "issue-28-graded-panel.svg": {
+    "png": "issue-28-graded-panel.png",
+    "svg_sha256": "321b298409793d7ef8a330df92527ba35387c4b48e3fd7710fc3c9ce9a19970a",
+    "width": 1200,
+    "height": 537
+  },
+  "issue-28-hesitation-spread.svg": {
+    "png": "issue-28-hesitation-spread.png",
+    "svg_sha256": "b1b9039b2e9fbebfea0029c1219e29d4d6b12742913954da7c1fe7713ae7926a",
+    "width": 1200,
+    "height": 558
+  },
+  "issue-28-slot-sides.svg": {
+    "png": "issue-28-slot-sides.png",
+    "svg_sha256": "bf7e7cfa5f4a0e46d93f19b1b0bcb876f5f4b6640ae6cfbf63ccefb8bad250bc",
+    "width": 1200,
+    "height": 593
+  },
+  "issue-28-track-a-flips.svg": {
+    "png": "issue-28-track-a-flips.png",
+    "svg_sha256": "e141f773d02ff855c00ac7c5d6de5d189b9cd0165c314c934996fe3b1a8c9d19",
+    "width": 1200,
+    "height": 586
+  },
+  "loop-repeats.svg": {
+    "png": "loop-repeats.png",
+    "svg_sha256": "42faeeee21377286ae0afc0bcc7f4a55f902bfbe05a9d41042bfcff6ee54d0f7",
+    "width": 1200,
+    "height": 347
+  },
+  "math-ladder.svg": {
+    "png": "math-ladder.png",
+    "svg_sha256": "a37469574167e77310139fe648a0815056c8e1be6fb53dceb71771e7d92a0657",
+    "width": 1200,
+    "height": 589
+  },
+  "npu-vs-cpu.svg": {
+    "png": "npu-vs-cpu.png",
+    "svg_sha256": "719322220fe7796e5174c0229b20f99677403104b93fff598b77bf1420a161c3",
+    "width": 1200,
+    "height": 457
+  },
+  "pilot-thinking-budget.svg": {
+    "png": "pilot-thinking-budget.png",
+    "svg_sha256": "d03b18f61713c18593ca29dbfdc201d4953576cf364ed41e8cebece4b502e49d",
+    "width": 1200,
+    "height": 625
+  },
+  "reasoning-default.svg": {
+    "png": "reasoning-default.png",
+    "svg_sha256": "8135efa8483a0544562c094aa6ffe937b5dad7277bb11633f2cb6f908ace8ba5",
+    "width": 1200,
+    "height": 349
+  },
+  "thinking-off-vs-on.svg": {
+    "png": "thinking-off-vs-on.png",
+    "svg_sha256": "4f81e4436e37fd793f1b07ae5a81ccd151c77efde1b6939002c90a4ad2848e21",
+    "width": 1200,
+    "height": 571
+  },
+  "vocal-pitch.svg": {
+    "png": "vocal-pitch.png",
+    "svg_sha256": "750269f8921527796fa86f28b8484beaf58de1226c458eaea168a647bbdc46ef",
+    "width": 1200,
+    "height": 737
+  },
+  "vocal-timing.svg": {
+    "png": "vocal-timing.png",
+    "svg_sha256": "916d59af421b45c34cb293ce9fc2265dcaebb9f1693b6f90519a1e7978370698",
+    "width": 1200,
+    "height": 674
+  }
+}

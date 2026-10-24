@@ -4057,7 +4057,7 @@
           "path": "experiments/stage1-regeneration/PROVENANCE.md"
         },
         {
-          "hash": "c5abc4be7ba54b59be1afdf1e1e7e44da33949315b897c02ee7071186a2979ed",
+          "hash": "44fec1cfda7d1141fc2d0ad374204c18bcc74d380705c6a59e40697d21106431",
           "path": "experiments/stage1-regeneration/README.md"
         },
         {
@@ -4065,8 +4065,27 @@
           "path": "experiments/stage1-regeneration/argon-answer.md"
         },
         {
-          "hash": "de1dea3dd360b5c8f8cad47a5b06511c05e7e86956e730de706436db29f5f410",
+          "hash": "40c5a3ccc7e6b141661525322eb61c671d8ab0d4ff4ba506525de93b9c87b1d4",
           "path": "experiments/stage1-regeneration/colab-drift/RESULTS.md"
+        },
+        {
+          "exports": [
+            "fields",
+            "ident",
+            "load",
+            "main",
+            "score",
+            "text"
+          ],
+          "failurePaths": [
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 204
+            }
+          ],
+          "hash": "26570cdf3aa44bc4270c3da2d51b66736f9f430dddb07cdaf48e13cc0dd78dd5",
+          "path": "experiments/stage1-regeneration/colab-drift/scripts/compare.py"
         },
         {
           "hash": "511a50c50dd4e186e86d86eaa53d112a017d02d07de8752e9cc02dbb060e5d6e",
@@ -4280,7 +4299,7 @@
           "path": "experiments/stage1-regeneration/critic-signal/scripts/track_a_nearcopy_rung.py"
         },
         {
-          "hash": "06618f194f43ae5458e576d16d87d555728d99e06d1ae3d47647d62162810921",
+          "hash": "f90faba3a154dccef77498ccb9c3b0cf74d12d42863ff75705424996b98e51c7",
           "path": "experiments/stage1-regeneration/experiment.json"
         },
         {
@@ -5295,7 +5314,7 @@
       "origin": "mixed",
       "outsidePlaces": [
         {
-          "reads": 50,
+          "reads": 51,
           "where": [
             "caller"
           ],
@@ -5317,13 +5336,13 @@
           "writes": 0
         }
       ],
-      "outsideReads": 52,
+      "outsideReads": 53,
       "outsideWrites": 13,
       "role": "code",
       "testRunners": [
         "unittest"
       ],
-      "testedBy": 6,
+      "testedBy": 7,
       "unresolvedNamed": [
         {
           "path": "experiments/data-designer/tests/test_lockdown.py",
@@ -5549,7 +5568,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "290442ecece10181fdfb975650dd0c3296089b08ce66d48301599debd3b3bdcb",
+          "hash": "4a1c7681799ca6a1a313084cb4b6bad67d15e5aec02981c0364f375f85df8708",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -8415,7 +8434,7 @@
           "path": ".polyglot-terms.json"
         },
         {
-          "hash": "0950b5b4037215d572b3b936068f82f7754c690039c86ac4110458f7d089bf73",
+          "hash": "bc08422c553f1f13bea11d4edc0e51ab5a2650ccc7111d236f8782cd81a4eb27",
           "path": "CHANGELOG.md"
         },
         {
@@ -8502,7 +8521,7 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 0,
+      "dynamicReads": 1,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
       "dynamicWrites": 0,
@@ -8514,11 +8533,11 @@
           "path": "site/astro.config.mjs"
         },
         {
-          "hash": "e5d4610a0e49936e82df09875b426363246766a66b51efb816805234145116f1",
+          "hash": "532b35397cd2f19b8dbcdbef8abe6b5bd31f63b4eca835cc3cd5aa8619924b60",
           "path": "site/package-lock.json"
         },
         {
-          "hash": "215d482f94aecda5eca35befe06f4c9003c0fdb9f25ce229bc2b4abbb4f439df",
+          "hash": "f7a227727ff5826b24a734286bb7d1094b8a8bd3b91a0a0f294ac48dacc27424",
           "path": "site/package.json"
         },
         {
@@ -8578,12 +8597,36 @@
           "path": "site/public/charts/error-lean.svg"
         },
         {
-          "hash": "0c5dc589f87e05a1e7437f8c6ec420cd2845408435d8ccfcfcd07ef5360f73fa",
+          "hash": "f733f613367cc20794290366d291572741c2be0892288bdf0b8c88e22c7048f7",
           "path": "site/public/charts/issue-27-match-share.svg"
         },
         {
-          "hash": "82d883c9fb23c6ad25f039aeb53be7146f099fa95eb6888545b04cc97714b036",
+          "hash": "c1d0f612665b1c712d8103bc0502baded79643c6422c51a9ed3a3a28e42aa811",
+          "path": "site/public/charts/issue-28-bench-ahead.svg"
+        },
+        {
+          "hash": "4b2eba08f1168749d2aa2f3fe05c0f187dbf6b61d51086ba61c9e9d989568cf3",
+          "path": "site/public/charts/issue-28-causes-map.svg"
+        },
+        {
+          "hash": "7f58fba49ff689cba2dac9a932282d02984a36def29a7d173e4c8b5a0e6cb2da",
+          "path": "site/public/charts/issue-28-contradictory-brief.svg"
+        },
+        {
+          "hash": "321b298409793d7ef8a330df92527ba35387c4b48e3fd7710fc3c9ce9a19970a",
+          "path": "site/public/charts/issue-28-graded-panel.svg"
+        },
+        {
+          "hash": "b1b9039b2e9fbebfea0029c1219e29d4d6b12742913954da7c1fe7713ae7926a",
+          "path": "site/public/charts/issue-28-hesitation-spread.svg"
+        },
+        {
+          "hash": "bf7e7cfa5f4a0e46d93f19b1b0bcb876f5f4b6640ae6cfbf63ccefb8bad250bc",
           "path": "site/public/charts/issue-28-slot-sides.svg"
+        },
+        {
+          "hash": "e141f773d02ff855c00ac7c5d6de5d189b9cd0165c314c934996fe3b1a8c9d19",
+          "path": "site/public/charts/issue-28-track-a-flips.svg"
         },
         {
           "hash": "42faeeee21377286ae0afc0bcc7f4a55f902bfbe05a9d41042bfcff6ee54d0f7",
@@ -8620,6 +8663,26 @@
         {
           "hash": "d577f76a70e30204ba567b4f6d35efeee16d0cf0fdfb4f13f047e566d03d9931",
           "path": "site/public/favicon.svg"
+        },
+        {
+          "hash": "ae5e29ea219b139dd82014b3770eadea1a7d0a0ebc2855edfabf993133f7b967",
+          "path": "site/public/rss-logo.png"
+        },
+        {
+          "entry": "built",
+          "entryRule": 1,
+          "exports": [
+            "built"
+          ],
+          "failurePaths": [
+            {
+              "kind": "except",
+              "line": 44
+            }
+          ],
+          "hash": "85f0b7032d0404ec07ae762b4fcc8b0d387c713ae135eefacff9fd1517616271",
+          "path": "site/scripts/check_feed.py",
+          "sequences": []
         },
         {
           "hash": "ecf4cb2bd6a1ef2097ad13be641c8d5bab26a81769c80c9286874470509a184f",
@@ -8863,8 +8926,12 @@
           "path": "site/src/content/docs/newsletter/issue-27.md"
         },
         {
-          "hash": "bac7aee24136d4f6d51a5ae1b5ed383e2778ea07f1288a8699ac566b4d4e4bfa",
+          "hash": "4ba58cd589d7981612f5bcb14ed40f393304512858ac6382ef85fe507b1e497d",
           "path": "site/src/content/docs/newsletter/issue-28.md"
+        },
+        {
+          "hash": "148a2d91b247ead1b8ea065c6b3c759958dfeec6bed8be51533e5fba43ee77da",
+          "path": "site/src/content/docs/newsletter/subscribe.md"
         },
         {
           "hash": "15e52b4b677090a1b5123840efa4fa14447c28189b60b2d851389352c81db4cc",
@@ -8881,6 +8948,15 @@
             "site/src/styles/global.css"
           ],
           "path": "site/src/pages/index.astro"
+        },
+        {
+          "exports": [
+            "GET",
+            "absolutise",
+            "emailImage"
+          ],
+          "hash": "158cc100ea3838d1409cb99d3009f1443bebba471c20dc05274230fa499d2817",
+          "path": "site/src/pages/newsletter/rss.xml.ts"
         },
         {
           "constantOnly": true,
@@ -8908,7 +8984,14 @@
       "origin": "mixed",
       "role": "docs",
       "testedBy": 0,
-      "unresolvedSites": 0
+      "unresolvedNamed": [
+        {
+          "path": "site/src/pages/newsletter/rss.xml.ts",
+          "specifier": "../../../public/charts/png-manifest.json",
+          "why": "missing"
+        }
+      ],
+      "unresolvedSites": 1
     },
     {
       "dynamicReads": 0,
@@ -9131,6 +9214,17 @@
             "tests/test_rnd.py"
           ],
           "path": "tests/test_cli.py",
+          "testFramework": "unittest"
+        },
+        {
+          "exports": [
+            "score"
+          ],
+          "hash": "de842263331b7200664732a3244a1e186cd5007d0d2a8c0acc37df2fc5c36313",
+          "importsFiles": [
+            "experiments/stage1-regeneration/colab-drift/scripts/compare.py"
+          ],
+          "path": "tests/test_colab_drift_compare.py",
           "testFramework": "unittest"
         },
         {
@@ -9536,7 +9630,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 26
+          "files": 27
         },
         {
           "boundary": "experiments",
@@ -9545,7 +9639,7 @@
             "file": "experiments/agent-ab-harness/run.py",
             "from": "tests/test_agent_ab_harness_run.py"
           },
-          "files": 6
+          "files": 7
         },
         {
           "boundary": "rnd",
@@ -9589,6 +9683,24 @@
           "call": "literal",
           "confidence": "ast",
           "target": "instruments"
+        },
+        {
+          "by": "site/scripts/check_feed.py",
+          "call": "glob",
+          "confidence": "ast",
+          "target": "site/public/charts"
+        },
+        {
+          "by": "site/scripts/check_feed.py",
+          "call": "read_bytes",
+          "confidence": "ast",
+          "target": "site/public/charts"
+        },
+        {
+          "by": "site/scripts/check_feed.py",
+          "call": "read_text",
+          "confidence": "ast",
+          "target": "site/public/charts"
         }
       ],
       "runs": [
@@ -9640,7 +9752,7 @@
         },
         {
           "coverage": true,
-          "files": 26,
+          "files": 27,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -9779,7 +9891,7 @@
         {
           "boundary": "site",
           "depth": 0,
-          "files": 5
+          "files": 7
         }
       ],
       "readers": [],
@@ -9792,6 +9904,11 @@
           "via": "astro build"
         },
         {
+          "job": "build",
+          "path": "site/scripts/check_feed.py",
+          "runKind": "executes"
+        },
+        {
           "directory": true,
           "job": "build",
           "matched": true,
@@ -9800,7 +9917,7 @@
           "via": "astro build"
         }
       ],
-      "runsCount": 2,
+      "runsCount": 3,
       "secrets": [],
       "sends": {
         "deploysPages": true,
@@ -10104,8 +10221,8 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "4e6168c698cf222882a1f599ae8e9123c07d129d",
-    "tracked": 1083
+    "commit": "6d2d5b404253253d6334867f74e34be86c53417e",
+    "tracked": 1095
   },
   "landings": [
     {
@@ -11600,6 +11717,18 @@
         }
       ],
       "target": "experiments/ollama-cuda-backend/sandbox_test.FROZEN.sha256",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "tests/test_colab_drift_compare.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "experiments/stage1-regeneration/colab-drift/scripts/compare.py",
       "writers": []
     },
     {
@@ -13321,6 +13450,17 @@
     {
       "readers": [
         {
+          "by": "site/scripts/check_feed.py",
+          "call": "iterdir",
+          "confidence": "ast"
+        }
+      ],
+      "target": "site",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "experiments/agent-ab-harness/tasks.json",
           "call": "literal",
           "confidence": "text"
@@ -13330,7 +13470,18 @@
       "writers": []
     },
     {
-      "readers": [],
+      "readers": [
+        {
+          "by": "site/scripts/check_feed.py",
+          "call": "glob",
+          "confidence": "ast"
+        },
+        {
+          "by": "site/scripts/check_feed.py",
+          "call": "read_bytes",
+          "confidence": "ast"
+        }
+      ],
       "target": "site/public/charts",
       "writers": [
         {
@@ -13338,6 +13489,17 @@
           "confidence": "ast"
         }
       ]
+    },
+    {
+      "readers": [
+        {
+          "by": "site/scripts/check_feed.py",
+          "call": "read_text",
+          "confidence": "ast"
+        }
+      ],
+      "target": "site/public/charts/png-manifest.json",
+      "writers": []
     },
     {
       "readers": [
@@ -13400,6 +13562,11 @@
         {
           "by": "site/astro.config.mjs",
           "call": "autogenerate",
+          "confidence": "ast"
+        },
+        {
+          "by": "site/scripts/check_feed.py",
+          "call": "glob",
           "confidence": "ast"
         }
       ],
@@ -13586,7 +13753,7 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 59,
+  "testFiles": 60,
   "testsNotRun": [
     "experiments/cuda-graphs/test_graphed_heads.py",
     "experiments/data-designer/tests/test_lockdown.py",

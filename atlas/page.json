@@ -73,44 +73,59 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 20,
-      "changed": 26,
+      "added": 12,
+      "changed": 10,
       "moved": 0,
-      "parts": 7,
+      "parts": 5,
       "removed": 0
     },
     "items": [
       {
-        "kind": "landing",
-        "sentence": "README.md is now also read by experiments/offrig-jobs/experiment.json.",
+        "kind": "door",
+        "sentence": "Deploy site to GitHub Pages now also runs site/scripts/check_feed.py.",
         "subjects": [
-          "README.md",
-          "experiments/offrig-jobs/experiment.json"
+          ".github/workflows/pages.yml",
+          "site/scripts/check_feed.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "experiments/natural-errors/ is now also read by README.es.md, README.fr.md, README.hi.md, README.it.md, README.ja.md, README.pt-BR.md and README.zh.md.",
+        "sentence": "experiments/stage1-regeneration/colab-drift/scripts/compare.py is now read by tests/test_colab_drift_compare.py.",
         "subjects": [
-          "experiments/natural-errors/",
-          "README.es.md",
-          "README.fr.md",
-          "README.hi.md",
-          "README.it.md",
-          "README.ja.md",
-          "README.pt-BR.md",
-          "README.zh.md"
+          "experiments/stage1-regeneration/colab-drift/scripts/compare.py",
+          "tests/test_colab_drift_compare.py"
         ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "site/ is now read by site/scripts/check_feed.py.",
+        "subjects": [
+          "site/",
+          "site/scripts/check_feed.py"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "site/public/charts/ is now read by site/scripts/check_feed.py.",
+        "subjects": [
+          "site/public/charts/",
+          "site/scripts/check_feed.py"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "And 2 more new writers and readers of places.",
+        "subjects": []
       },
       {
         "kind": "counts",
-        "sentence": "20 files added and 26 changed content, across 7 parts.",
+        "sentence": "12 files added and 10 changed content, across 5 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "631031188dc62ffb6e0ec8197203ad89dde5e3e2",
-      "generatedAt": "2026-10-22T18:43:33.031Z"
+      "commit": "4e6168c698cf222882a1f599ae8e9123c07d129d",
+      "generatedAt": "2026-10-23T20:38:28.189Z"
     },
     "unchanged": false
   },
@@ -197,9 +212,9 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 5 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 2,
-  "commit": "4e6168c698cf222882a1f599ae8e9123c07d129d",
+  "commit": "6d2d5b404253253d6334867f74e34be86c53417e",
   "defaultBranch": "main",
-  "derived": "14 parts, mostly Python (141 files), shell (30), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "14 parts, mostly Python (144 files), shell (30), TypeScript (3), CSS (2), HTML (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -231,12 +246,12 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 26
+          "files": 27
         },
         {
           "boundary": "experiments",
           "depth": 1,
-          "files": 6
+          "files": 7
         },
         {
           "boundary": "rnd",
@@ -311,14 +326,15 @@
         {
           "boundary": "site",
           "depth": 0,
-          "files": 5
+          "files": 7
         }
       ],
       "runs": [
+        "site/scripts/check_feed.py",
         "site/astro.config.mjs",
         "site/src/"
       ],
-      "runsCount": 2,
+      "runsCount": 3,
       "runsMore": 0,
       "sends": [
         "deploys the site"
@@ -521,12 +537,12 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-23T20:38:28.189Z",
+  "generatedAt": "2026-10-24T05:21:31.219Z",
   "limits": [
-    "11 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 8 more.",
-    "25 writes and 45 reads use paths built at run time and are not named here.",
+    "12 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 9 more.",
+    "25 writes and 46 reads use paths built at run time and are not named here.",
     "7 writes go to places this repository does not track, so they are not listed as generated.",
-    "40 writes and 115 reads go to a path their caller passes, not to this repository.",
+    "40 writes and 116 reads go to a path their caller passes, not to this repository.",
     "12 reads go to the directory the command is run in (README.md, SECURITY.md, entries and 3 more places), not to this repository.",
     "1 read goes to the directory the command is run in or a path its caller passes, not to this repository.",
     "1 read goes to the home directory (.claude/), not to this repository.",
@@ -570,7 +586,9 @@
       "target": "instruments/"
     },
     {
-      "readers": [],
+      "readers": [
+        "site/scripts/check_feed.py"
+      ],
       "target": "site/public/charts/"
     }
   ],
@@ -585,9 +603,9 @@
   "startReason": "This path follows rnd (a command people run) from its entry, since CI runs only tests and checks.",
   "summary": "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only).",
   "summaryFrom": "person",
-  "testFiles": 59,
+  "testFiles": 60,
   "testedBy": {
-    "experiments": 6,
+    "experiments": 7,
     "mcptoolshop_rnd": 20,
     "rnd": 1
   },
@@ -647,9 +665,7 @@
   ],
   "unreadCodeUses": "the repository root holds only shell files, which this map does not read, so what uses it cannot be seen.",
   "unreadFiles": 0,
-  "unreadNote": [
-    "And 1 more place."
-  ],
+  "unreadNote": [],
   "untested": [],
   "untestedNote": [
     "the repository root holds only shell files, which this map does not read, so whether a test touches it cannot be seen.",

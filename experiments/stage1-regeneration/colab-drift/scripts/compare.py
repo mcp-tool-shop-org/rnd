@@ -21,6 +21,15 @@ outcome, so evidence_drift counts the calls where it could. (2026-10-23: the G4 
 a decision and said 65 of 65 drifts changed a decision; 3 changed a verdict. 2026-10-24: DECIDING had then been left
 out entirely, though role-set acts on it on verdict calls; evidence_drift now counts it.)
 
+Known limits (Argon's review round 2, 2026-10-24; none occurs in the T10 drift journals):
+- `answer`: role-set reads the last ANSWER line through closed_answer and same_answer, which void an answer with
+  "because" or "since" and treat a reordered map or a leading article as the same answer. This reads the text only, so
+  it can count those as decision drift. Port closed_answer before comparing kind B journals.
+- `verdict`: role-set repairs a DECIDING quote against the material (backticks, link marks, trailing punctuation)
+  before checking it; without the material this can't, so `evidence_drift` can count a quote role-set would accept
+  unchanged. It is an upper bound.
+- With no `check` recorded, a bare trait id ("T03") isn't read as a trait.
+
 Keys in the fresh journal that are in no reference are reported as unmatched, which voids an arm until explained, and
 reference rows no fresh row consumed are counted per reference (`ref_unconsumed`), so a fresh run that stopped early
 shows. A key in two named references is refused: compare against replicate references one at a time. Prints one JSON

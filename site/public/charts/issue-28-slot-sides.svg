@@ -3,6 +3,7 @@
 <text x="344.0" y="38" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="15">What the critic said each cannot_tell item teaches, by how it was planned</text>
 
 <text x="344.0" y="76" text-anchor="middle" fill="#1f2430">Planned: “an equivalent wording still matches” <tspan fill="#5b6272" font-size="13">(7 slots: 6 voted T14, 0 voted T10)</tspan></text>
+<g transform="translate(-10.0 0)">
 <rect x="47.0" y="90" width="78" height="50" rx="4" fill="#b4532a"/>
 <text x="86.0" y="112" text-anchor="middle" fill="#ffffff" font-weight="600">T14</text>
 <text x="86.0" y="130" text-anchor="middle" fill="#ffffff" font-size="12">silence (3/3)</text>
@@ -59,4 +60,5 @@
 <rect x="526.0" y="275" width="12" height="12" fill="#8a8f98"/>
 <text x="544.0" y="286" fill="#1f2430" font-size="12">no T10 or T14 majority</text>
 <text x="344.0" y="314" text-anchor="middle" fill="#5b6272" font-size="12">Each box is one cannot_tell slot; its colour and fraction show the majority of the critic’s three trait votes.</text>
+</g>
 </svg>

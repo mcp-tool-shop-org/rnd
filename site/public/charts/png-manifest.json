@@ -99,8 +99,8 @@
   },
   "issue-27-match-share.svg": {
     "png": "issue-27-match-share.png",
-    "png_sha256": "bf982eebfcd12130822c2841dc079d6ee5a7a141c371935841c2dc23aae382bb",
-    "svg_sha256": "f733f613367cc20794290366d291572741c2be0892288bdf0b8c88e22c7048f7",
+    "png_sha256": "014bef20889fa4843f7556f0da612a275b864cce4a2a719ec303913b27ee29cc",
+    "svg_sha256": "5eeea2b48120c8b6377928fea5824a1a6cc3a963a7fcc9e223bd8d028ca2521a",
     "width": 1200,
     "height": 499
   },
@@ -134,15 +134,15 @@
   },
   "issue-28-hesitation-spread.svg": {
     "png": "issue-28-hesitation-spread.png",
-    "png_sha256": "d9105b7ecb6ab8b524426d7d5908a857d829f0624443d291a227174de3af8466",
-    "svg_sha256": "b1b9039b2e9fbebfea0029c1219e29d4d6b12742913954da7c1fe7713ae7926a",
+    "png_sha256": "e64818854a75929e23c6cd95d199ecbb90f015733bca9bcea68f5ec01913d965",
+    "svg_sha256": "fdd86215972525cfe545b01b835280908fd883c3bd6216cbe0e8004c96690745",
     "width": 1200,
     "height": 558
   },
   "issue-28-slot-sides.svg": {
     "png": "issue-28-slot-sides.png",
-    "png_sha256": "27b42ac766e72f37a50c650ab62610e6f4d10256e5e21ad6e92d3d90b76811df",
-    "svg_sha256": "bf7e7cfa5f4a0e46d93f19b1b0bcb876f5f4b6640ae6cfbf63ccefb8bad250bc",
+    "png_sha256": "c4f3def3d8f7c937f5cab272cf612b99081b015206dfc14fcdd0be7a77b18f88",
+    "svg_sha256": "618cbfebbeae5d005fc91e41c8234f3b3cb6849bbe0ee2f398b5c317541d591b",
     "width": 1200,
     "height": 593
   },
@@ -162,15 +162,15 @@
   },
   "issue-29-rule-runs.svg": {
     "png": "issue-29-rule-runs.png",
-    "png_sha256": "d0af27100a80fa76e436e7327ecfda52927b6353461abb7ae259536047bc29b5",
-    "svg_sha256": "08f93b28305d2db29b462ae7403b98082ece9b248b6f7661b8d1cc6416d83206",
+    "png_sha256": "9b4471991d367533d0bac150fe85a408af79a2b571afd9abb0ffd7b934f987b0",
+    "svg_sha256": "1d4269dc97bd8a37b28646faffb197cf48497815e9746873294ac82d3da5e96e",
     "width": 1200,
     "height": 537
   },
   "issue-29-trade-by-label.svg": {
     "png": "issue-29-trade-by-label.png",
-    "png_sha256": "c59b580882bd348b2081627d81476a2cdb743ccf879ed59eb425e57b5c4aae29",
-    "svg_sha256": "663fd9ac44ef76a67b5fe24c9d178e6e7cab1dd2f69d2bb8845815b60a8e7373",
+    "png_sha256": "580e7a78d6d4557d2a5253b8363c31dd2fc68e403e228da9808265303ae0455b",
+    "svg_sha256": "b8dfdde57e0af0c112917ba0c73ff10593c285864b47acae4dbe0f4268a36a80",
     "width": 1200,
     "height": 537
   },

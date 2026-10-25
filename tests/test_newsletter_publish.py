@@ -206,5 +206,99 @@ class NpmTests(unittest.TestCase):
         self.assertNotIn("load_dataset", readme)
 
 
+class PypiTests(unittest.TestCase):
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.tmp = pathlib.Path(self._tmp.name)
+        self.src = self.tmp / "newsletter"
+        self.src.mkdir()
+        write(self.src, "issue-01.md", 1)
+        write(self.src, "issue-03.md", 3)
+        self.out = self.tmp / "out"
+        sync.build(self.out, self.src)
+        self.pkg = self.tmp / "pypi"
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def test_package_contents(self):
+        sync.build_pypi(self.out, self.pkg, "1.3.0", "MIT License\n")
+        files = sorted(p.relative_to(self.pkg).as_posix() for p in self.pkg.rglob("*") if p.is_file())
+        self.assertEqual(files, ["LICENSE", "README.md", "pyproject.toml", "src/rnd_newsletter/__init__.py",
+                                 "src/rnd_newsletter/data/issues.jsonl", "src/rnd_newsletter/data/issues/issue-01.md",
+                                 "src/rnd_newsletter/data/issues/issue-03.md"])
+        pyproject = (self.pkg / "pyproject.toml").read_text(encoding="utf-8")
+        for line in ('name = "mcptoolshop-rnd-newsletter"', 'version = "1.3.0"', 'requires-python = ">=3.10"',
+                     'license = "MIT"', 'dependencies = []', '{ name = "mcp-tool-shop" }',
+                     'rnd_newsletter = ["data/issues.jsonl", "data/issues/*.md"]',
+                     '"Hugging Face" = "https://huggingface.co/datasets/mcp-tool-shop/rnd-newsletter"',
+                     'npm = "https://www.npmjs.com/package/@rnd-news/newsletter"'):
+            self.assertIn(line, pyproject)
+        readme = (self.pkg / "README.md").read_text(encoding="utf-8")
+        self.assertIn("import rnd_newsletter", readme)
+        self.assertNotIn("require(", readme)
+        self.assertNotIn("index.json", readme)
+
+    def test_the_api_on_a_fixture(self):
+        sync.build_pypi(self.out, self.pkg, "1.3.0", "MIT License\n")
+        spec = importlib.util.spec_from_file_location(
+            "rnd_newsletter", self.pkg / "src" / "rnd_newsletter" / "__init__.py",
+            submodule_search_locations=[str(self.pkg / "src" / "rnd_newsletter")])
+        module = importlib.util.module_from_spec(spec)
+        with mock.patch.dict("sys.modules", {"rnd_newsletter": module}):
+            spec.loader.exec_module(module)
+            self.assertEqual(module.__version__, "1.3.0")
+            self.assertEqual([i["issue"] for i in module.issues()], [1, 3])
+            self.assertEqual(module.latest()["issue"], 3)
+            self.assertEqual(module.issue(1)["title"], 'A "quoted" title: with a colon')
+            with self.assertRaises(KeyError):
+                module.issue(2)
+
+    def test_cli_needs_a_version_in_npm_form(self):
+        self.assertEqual(sync.main(["pypi-package", "--out", str(self.out), "--pkg", str(self.pkg)]), 1)
+        self.assertEqual(sync.main(["pypi-package", "--out", str(self.out), "--pkg", str(self.pkg), "--version", "2.0"]), 1)
+        self.assertEqual(sync.main(["pypi-package", "--out", str(self.out), "--pkg", str(self.pkg), "--version", "1.3.0"]), 0)
+        self.assertTrue((self.pkg / "pyproject.toml").is_file())
+
+
+class ReleaseTests(unittest.TestCase):
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.tmp = pathlib.Path(self._tmp.name)
+        self.src = self.tmp / "newsletter"
+        self.src.mkdir()
+        for n in (29, 30, 31):
+            write(self.src, f"issue-{n}.md", n)
+        self.rows = sync.build(self.tmp / "out", self.src)
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def test_tags_never_look_like_tool_versions(self):
+        self.assertEqual(sync.release_tag("issue-30"), "newsletter-issue-30")
+        self.assertNotRegex(sync.release_tag("issue-30"), r"^v\d+(\.\d+){4}$")
+
+    def test_only_new_issues_from_30_are_due(self):
+        due = sync.releases_due(self.rows, existing=set())
+        self.assertEqual([d["tag"] for d in due], ["newsletter-issue-30", "newsletter-issue-31"])
+        due = sync.releases_due(self.rows, existing={"newsletter-issue-30", "v1.1.23.1.35"})
+        self.assertEqual([d["tag"] for d in due], ["newsletter-issue-31"])
+        self.assertEqual(sync.releases_due(self.rows, existing={"newsletter-issue-30", "newsletter-issue-31"}), [])
+
+    def test_release_title_and_notes(self):
+        item = sync.releases_due(self.rows, existing=set())[0]
+        self.assertEqual(item["title"], 'A "quoted" title: with a colon')
+        self.assertEqual(item["stem"], "issue-30")
+        notes = item["notes"]
+        self.assertTrue(notes.startswith("Plain description.\n"))
+        self.assertIn("- One. First.", notes)
+        self.assertNotIn("<strong>", notes)
+        for link in (sync.SITE + "newsletter/issue-30/", "https://huggingface.co/datasets/mcp-tool-shop/rnd-newsletter",
+                     "https://www.npmjs.com/package/@rnd-news/newsletter",
+                     "https://pypi.org/project/mcptoolshop-rnd-newsletter/"):
+            self.assertIn(link, notes)
+        self.assertIn("`issue-30.md`", notes)
+
+
 if __name__ == "__main__":
     unittest.main()

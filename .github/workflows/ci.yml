@@ -77,6 +77,18 @@ jobs:
           disable_search: true
           files: coverage.xml
 
+      # The newsletter's PyPI package (site/scripts/newsletter_publish.py) builds, installs in a clean venv and imports.
+      - name: Newsletter wheel installs and imports
+        if: matrix.python-version == '3.12'
+        run: |
+          python site/scripts/newsletter_publish.py build --out /tmp/nl-out
+          python site/scripts/newsletter_publish.py pypi-package --out /tmp/nl-out --pkg /tmp/nl-pypi --version 1.0.0
+          python -m pip install build==1.6.1
+          python -m build --wheel -o /tmp/nl-dist /tmp/nl-pypi
+          python -m venv /tmp/nl-venv
+          /tmp/nl-venv/bin/pip install -q /tmp/nl-dist/*.whl
+          (cd /tmp && /tmp/nl-venv/bin/python -c "import rnd_newsletter as r; assert r.issues() and r.latest() == r.issues()[-1]; print(r.__version__, len(r.issues()))")
+
       - name: Package (build, twine check, install smoke)
         if: matrix.python-version == '3.12'
         run: |

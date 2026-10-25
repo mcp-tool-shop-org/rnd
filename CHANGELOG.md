@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.36] - 2026-10-25
+
+- newsletter: publish to PyPI as mcptoolshop-rnd-newsletter and as one GitHub release per new issue
+
 ## [1.1.23.1.35] - 2026-10-25
 
 - newsletter: mirror the published issues to the Hugging Face dataset mcp-tool-shop/rnd-newsletter and to npm as @rnd-news/newsletter (Trusted Publishing) after each Pages deploy

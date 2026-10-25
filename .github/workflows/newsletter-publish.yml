@@ -1,19 +1,23 @@
 name: Publish the newsletter
 
-# Mirrors the published newsletter issues to the Hugging Face dataset mcp-tool-shop/rnd-newsletter and to npm as
-# @rnd-news/newsletter, after each successful Pages deploy of main, or by hand. One builder
-# (site/scripts/newsletter_publish.py), two uploads. Not push-triggered, so it doesn't count against the two-file cap
-# for push-triggered workflows (ci.yml and pages.yml). The npm Trusted Publisher is bound to this file name and the
-# newsletter-release environment; renaming either breaks the publish.
+# Mirrors the published newsletter issues to the Hugging Face dataset mcp-tool-shop/rnd-newsletter, to npm as
+# @rnd-news/newsletter and to PyPI as mcptoolshop-rnd-newsletter, after each successful Pages deploy of main, or by
+# hand, and creates one GitHub release per new issue. One builder (site/scripts/newsletter_publish.py). Not
+# push-triggered, so it doesn't count against the two-file cap for push-triggered workflows (ci.yml and pages.yml).
+# The npm and PyPI Trusted Publishers are bound to this file name and to the newsletter-release and newsletter-pypi
+# environments; renaming any of them breaks the publish.
 #
 # Standards compliance (0-3):
-# - PIN_PER_STEP 2: every action is pinned to a commit SHA, huggingface_hub and npm to exact versions; both jobs build
-#   from the commit the Pages deploy built (workflow_run head_sha), or main for a manual run.
+# - PIN_PER_STEP 2: every action is pinned to a commit SHA; huggingface_hub, npm, build and twine to exact
+#   versions; every job builds from the commit the Pages deploy built (workflow_run head_sha), or main for a manual run.
 # - ANDON_AUTHORITY 2: the build fails on any unreadable or inconsistent issue file, and no upload runs after a
-#   failed build. npm publishes only when the planned version is new (npm view checked first).
+#   failed build. npm publishes only when the planned version is new (npm view checked first); PyPI takes npm's
+#   version and publishes only when PyPI doesn't have it yet.
 # - NAMED_COMPENSATORS 2: see the table below.
 # - DECOMPOSE_BY_SECRETS 2: HF_TOKEN is set only in the HF upload step. The npm job holds no token: it authenticates
-#   by OIDC, with id-token: write on that job alone, inside the newsletter-release environment.
+#   by OIDC, with id-token: write on that job alone, inside the newsletter-release environment; the pypi job the same,
+#   inside newsletter-pypi. Both environments allow main only. The github-release job holds contents: write and the
+#   workflow's own GITHUB_TOKEN, nothing else.
 # - UNCERTAINTY_GATED_HUMANS 2: issues reach main only after the Director's go; the first backfill is a manual
 #   workflow_dispatch run reported to the Publisher.
 # - EXTERNAL_VERIFIER: n/a, no specialized claims.
@@ -24,6 +28,8 @@ name: Publish the newsletter
 # | HF create_repo (first run)      | Delete the dataset repo in its Hugging Face settings                    | No dataset; the site is unaffected       | Mike  |
 # | HF upload_folder commit         | Revert the commit in the Hugging Face repo's history, or delete files   | The dataset as before the sync           | Mike  |
 # | npm publish @rnd-news/newsletter | npm deprecate @rnd-news/newsletter@<v> "<reason>" (no unpublish after 72 h) | The version stays, marked deprecated     | Mike  |
+# | PyPI upload mcptoolshop-rnd-newsletter | Yank it on pypi.org (Manage -> Releases -> Yank)                   | The version stays, yanked (pip skips it)  | Mike  |
+# | GitHub release newsletter-issue-NN | gh release delete newsletter-issue-NN --cleanup-tag                  | No release and no tag for that issue      | Mike  |
 
 on:
   workflow_run:
@@ -85,6 +91,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: newsletter-release
+    outputs:
+      version: ${{ steps.plan.outputs.version }}
     permissions:
       contents: read
       id-token: write  # npm Trusted Publishing (OIDC) and provenance; no stored token
@@ -133,3 +141,94 @@ jobs:
         if: steps.plan.outputs.publish == 'true'
         working-directory: nl-pkg
         run: npm publish --provenance --access public
+
+  pypi:
+    needs: npm
+    # This job runs with the repo's secrets (or its OIDC identity), so it runs only from main: a manual dispatch of
+    # main, or a workflow_run of a successful push or manual run of main in this repository, never a fork or a PR.
+    if: >-
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_dispatch') &&
+       github.event.workflow_run.head_branch == 'main' &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: newsletter-pypi
+    permissions:
+      contents: read
+      id-token: write  # PyPI Trusted Publishing (OIDC) and attestations; no stored token
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || 'main' }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Build (no token)
+        run: python3 -I site/scripts/newsletter_publish.py build --out nl-out
+
+      # The version is the one the npm job planned, so the two registries stay in step.
+      - name: Check PyPI and assemble the package
+        id: plan
+        env:
+          SOURCE_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+          VERSION: ${{ needs.npm.outputs.version }}
+        run: python3 site/scripts/newsletter_publish.py pypi-plan --out nl-out --pkg nl-pypi --version "$VERSION"
+
+      - name: Build and check the distributions
+        if: steps.plan.outputs.publish == 'true'
+        working-directory: nl-pypi
+        run: |
+          python -m pip install build==1.6.1 twine==7.0.0
+          python -m build -o dist
+          python -m twine check --strict dist/*
+          python -m venv /tmp/nl-venv
+          /tmp/nl-venv/bin/pip install -q dist/*.whl
+          (cd /tmp && /tmp/nl-venv/bin/python -c "import rnd_newsletter as r; assert r.latest()['issue'] == r.issues()[-1]['issue']; print(r.__version__, len(r.issues()))")
+
+      - name: Publish mcptoolshop-rnd-newsletter (OIDC, attestations)
+        if: steps.plan.outputs.publish == 'true'
+        uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086 # v1.14.3
+        with:
+          packages-dir: nl-pypi/dist
+          attestations: true
+
+  github-release:
+    needs: [huggingface, pypi]
+    # This job runs with the repo's secrets (or its OIDC identity), so it runs only from main: a manual dispatch of
+    # main, or a workflow_run of a successful push or manual run of main in this repository, never a fork or a PR.
+    if: >-
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_dispatch') &&
+       github.event.workflow_run.head_branch == 'main' &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write  # create the newsletter-issue-NN release and tag
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || 'main' }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Build (no token)
+        run: python3 -I site/scripts/newsletter_publish.py build --out nl-out
+
+      # One release per new issue from issue 30 on, tagged newsletter-issue-NN on the published commit, never marked
+      # Latest, so the tool's own releases stay Latest. An existing release is skipped.
+      - name: Create the release for each new issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          SOURCE_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+        run: python3 site/scripts/newsletter_publish.py releases --out nl-out

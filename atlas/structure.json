@@ -32,11 +32,11 @@
       "externals": 0,
       "files": [
         {
-          "hash": "802cabddbfad46a49e83300df919232cd10f6c087901442328651dcae29985de",
+          "hash": "ba04fddfb1506b47e504bfc4edff5562d4ac4a2cf53f834ca22bfcd2e82360b7",
           "path": ".github/workflows/ci.yml"
         },
         {
-          "hash": "e16951054599d4e80fd7a62477429e89181914e83ebacd3fcce1a9be06b3c468",
+          "hash": "5a6ad28f5c0eca6362d7637abdea8198154d013f9bc4f965e9a2db14e10ae873",
           "path": ".github/workflows/newsletter-publish.yml"
         },
         {
@@ -44,7 +44,7 @@
           "path": ".github/workflows/pages.yml"
         },
         {
-          "hash": "dcbd209fbc41219a686f1a00d25152e511b171d770c8734cc3ccc7120f2d764a",
+          "hash": "913923a9830d9bb24e420a069ab7d9333cd9c5ce381a067d65f512fe60633364",
           "path": ".github/workflows/release.yml"
         }
       ],
@@ -8525,7 +8525,7 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 3,
+      "dynamicReads": 4,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
       "dynamicWrites": 0,
@@ -8917,46 +8917,47 @@
             "absolutise",
             "build",
             "build_npm",
+            "build_pypi",
             "content_digest",
             "dataset_card",
+            "github_releases",
             "main",
             "npm_published",
             "npm_readme",
             "parse_issue",
             "plan_version",
             "published_issues",
+            "pypi_has",
+            "release_notes",
+            "release_tag",
+            "releases_due",
             "upload"
           ],
           "failurePaths": [
             {
               "in": "_scalar",
               "kind": "except",
-              "line": 64
+              "line": 69
             },
             {
               "in": "_scalar",
               "kind": "raise",
-              "line": 65
+              "line": 70
             },
             {
               "in": "_scalar",
               "kind": "raise",
-              "line": 68
+              "line": 73
             },
             {
               "in": "parse_issue",
               "kind": "raise",
-              "line": 81
+              "line": 86
             },
             {
               "in": "parse_issue",
               "kind": "raise",
-              "line": 84
-            },
-            {
-              "in": "parse_issue",
-              "kind": "raise",
-              "line": 94
+              "line": 89
             },
             {
               "in": "parse_issue",
@@ -8964,43 +8965,98 @@
               "line": 99
             },
             {
-              "in": "published_issues",
+              "in": "parse_issue",
               "kind": "raise",
-              "line": 136
+              "line": 104
             },
             {
               "in": "published_issues",
               "kind": "raise",
-              "line": 138
+              "line": 141
             },
             {
               "in": "published_issues",
               "kind": "raise",
-              "line": 142
+              "line": 143
             },
             {
               "in": "published_issues",
               "kind": "raise",
-              "line": 145
+              "line": 147
+            },
+            {
+              "in": "published_issues",
+              "kind": "raise",
+              "line": 150
+            },
+            {
+              "in": "plan_version",
+              "kind": "raise",
+              "line": 280
             },
             {
               "in": "npm_published",
               "kind": "raise",
-              "line": 343
+              "line": 353
+            },
+            {
+              "in": "npm_published",
+              "kind": "raise",
+              "line": 360
+            },
+            {
+              "in": "pypi_has",
+              "kind": "except",
+              "line": 474
+            },
+            {
+              "in": "pypi_has",
+              "kind": "raise",
+              "line": 477
+            },
+            {
+              "in": "pypi_has",
+              "kind": "except",
+              "line": 478
+            },
+            {
+              "in": "pypi_has",
+              "kind": "raise",
+              "line": 479
+            },
+            {
+              "in": "github_releases",
+              "kind": "raise",
+              "line": 525
+            },
+            {
+              "in": "github_releases",
+              "kind": "raise",
+              "line": 536
+            },
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 573
+            },
+            {
+              "in": "main",
+              "kind": "raise",
+              "line": 579
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 390
+              "line": 602
             }
           ],
-          "hash": "9c597596fef8c540a4c2493cac6f311c82151ce6d107b206451de98cf8fbd484",
+          "hash": "e8f7cc60d2ab765111407a6df30485e03c0e2a28b1cd18f34178d04b49fd0455",
           "path": "site/scripts/newsletter_publish.py",
           "sequences": [
             {
               "calls": [
                 {
-                  "line": 128,
+                  "line": 133,
                   "name": "glob",
                   "target": null
                 }
@@ -9013,7 +9069,7 @@
             {
               "calls": [
                 {
-                  "line": 128,
+                  "line": 133,
                   "name": "glob",
                   "target": null,
                   "via": "published_issues"
@@ -9028,7 +9084,7 @@
               "calls": [
                 {
                   "branch": "args.step == \"build\"",
-                  "line": 128,
+                  "line": 133,
                   "name": "glob",
                   "target": null,
                   "via": "published_issues"
@@ -9179,7 +9235,7 @@
           "path": "site/src/content/docs/handbook/model-comparisons.md"
         },
         {
-          "hash": "cbf41d2e67abc66b0c78f61e74a7c95115d3190e70a4bcb926efd6ab24445e14",
+          "hash": "3b4a9902ac60b14a8ede694ce2ac4be3343a6f1ddb6e06878d4972cf4d248b8a",
           "path": "site/src/content/docs/handbook/newsletter-issues.md"
         },
         {
@@ -9377,15 +9433,15 @@
       "origin": "mixed",
       "outsidePlaces": [
         {
-          "reads": 13,
+          "reads": 17,
           "where": [
             "caller"
           ],
-          "writes": 9
+          "writes": 17
         }
       ],
-      "outsideReads": 13,
-      "outsideWrites": 9,
+      "outsideReads": 17,
+      "outsideWrites": 17,
       "role": "docs",
       "testRunners": [
         "unittest"
@@ -9749,7 +9805,7 @@
           "exports": [
             "write"
           ],
-          "hash": "1cd57b96a4a2e295d873768d24d49334ef14b2e1a96501e871085ca55acf4494",
+          "hash": "09bac2213d0fcacbef6c0565c572ea2dd0f5897d6fda4e0b00b7ec12730a3c53",
           "importsFiles": [
             "site/scripts/newsletter_publish.py"
           ],
@@ -9911,12 +9967,12 @@
           "why": "dynamic"
         },
         {
-          "path": "tests/test_packaging.py",
-          "specifier": "rnd.cli",
-          "why": "unplaced"
+          "path": "tests/test_newsletter_publish.py",
+          "specifier": null,
+          "why": "dynamic"
         }
       ],
-      "unresolvedSites": 4
+      "unresolvedSites": 5
     }
   ],
   "doors": [
@@ -9954,6 +10010,15 @@
             "python"
           ],
           "step": "Coverage"
+        },
+        {
+          "dir": "",
+          "job": "ci",
+          "programs": [
+            "cd",
+            "python"
+          ],
+          "step": "Newsletter wheel installs and imports"
         },
         {
           "dir": "",
@@ -10015,7 +10080,7 @@
                   "range": ">=22.0.0 <23.0.0-0"
                 }
               ],
-              "step": "8",
+              "step": "9",
               "uses": "actions/setup-node",
               "version": "22"
             }
@@ -10165,6 +10230,11 @@
           "runKind": "executes"
         },
         {
+          "job": "ci",
+          "path": "site/scripts/newsletter_publish.py",
+          "runKind": "executes"
+        },
+        {
           "directory": true,
           "job": "ci",
           "matched": true,
@@ -10178,7 +10248,7 @@
           "runKind": "executes"
         }
       ],
-      "runsCount": 4,
+      "runsCount": 5,
       "secrets": [],
       "sends": {
         "deploysPages": false,
@@ -10320,6 +10390,46 @@
             "npm"
           ],
           "step": "Publish @rnd-news/newsletter with provenance (OIDC)"
+        },
+        {
+          "dir": "",
+          "job": "pypi",
+          "programs": [
+            "python3"
+          ],
+          "step": "Build (no token)"
+        },
+        {
+          "dir": "",
+          "job": "pypi",
+          "programs": [
+            "python3"
+          ],
+          "step": "Check PyPI and assemble the package"
+        },
+        {
+          "job": "pypi",
+          "programs": [
+            "cd",
+            "python"
+          ],
+          "step": "Build and check the distributions"
+        },
+        {
+          "dir": "",
+          "job": "github-release",
+          "programs": [
+            "python3"
+          ],
+          "step": "Build (no token)"
+        },
+        {
+          "dir": "",
+          "job": "github-release",
+          "programs": [
+            "python3"
+          ],
+          "step": "Create the release for each new issue"
         }
       ],
       "elsewhere": [],
@@ -10396,6 +10506,67 @@
               "version": "22"
             }
           ]
+        },
+        {
+          "basis": "declared",
+          "environment": {
+            "name": "newsletter-pypi"
+          },
+          "name": "pypi",
+          "runsOn": [
+            {
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "platform": {
+                "cpu": "x64",
+                "libc": "glibc",
+                "os": "linux"
+              }
+            }
+          ],
+          "setup": [
+            {
+              "ranges": [
+                {
+                  "from": "3.12",
+                  "range": ">=3.12.0 <3.13.0-0"
+                }
+              ],
+              "step": "1",
+              "uses": "actions/setup-python",
+              "version": "3.12"
+            }
+          ]
+        },
+        {
+          "basis": "declared",
+          "name": "github-release",
+          "runsOn": [
+            {
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "platform": {
+                "cpu": "x64",
+                "libc": "glibc",
+                "os": "linux"
+              }
+            }
+          ],
+          "setup": [
+            {
+              "ranges": [
+                {
+                  "from": "3.12",
+                  "range": ">=3.12.0 <3.13.0-0"
+                }
+              ],
+              "step": "1",
+              "uses": "actions/setup-python",
+              "version": "3.12"
+            }
+          ]
         }
       ],
       "landings": [],
@@ -10403,6 +10574,7 @@
       "name": "Publish the newsletter",
       "permissions": [
         "contents:read",
+        "contents:write",
         "id-token:write"
       ],
       "pushes": false,
@@ -10416,12 +10588,22 @@
       "readers": [],
       "runs": [
         {
+          "job": "github-release",
+          "path": "site/scripts/newsletter_publish.py",
+          "runKind": "executes"
+        },
+        {
           "job": "huggingface",
           "path": "site/scripts/newsletter_publish.py",
           "runKind": "executes"
         },
         {
           "job": "npm",
+          "path": "site/scripts/newsletter_publish.py",
+          "runKind": "executes"
+        },
+        {
+          "job": "pypi",
           "path": "site/scripts/newsletter_publish.py",
           "runKind": "executes"
         }
@@ -10438,7 +10620,8 @@
         "opensPullRequests": false,
         "publishes": true,
         "publishesTo": [
-          "npm"
+          "npm",
+          "pypi"
         ],
         "releases": false
       },
@@ -10463,9 +10646,10 @@
       "uses": [
         "actions/checkout",
         "actions/setup-node",
-        "actions/setup-python"
+        "actions/setup-python",
+        "pypa/gh-action-pypi-publish"
       ],
-      "usesWorkflowToken": false
+      "usesWorkflowToken": true
     },
     {
       "checksCount": 0,
@@ -10629,6 +10813,15 @@
           "dir": "",
           "job": "pypi",
           "programs": [
+            "4",
+            "echo"
+          ],
+          "step": "Only tool version tags publish"
+        },
+        {
+          "dir": "",
+          "job": "pypi",
+          "programs": [
             "echo",
             "gh",
             "test"
@@ -10699,7 +10892,7 @@
                   "range": ">=3.12.0 <3.13.0-0"
                 }
               ],
-              "step": "2",
+              "step": "3",
               "uses": "actions/setup-python",
               "version": "3.12"
             }
@@ -10896,7 +11089,7 @@
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "caae8cbbb866d47d54e4f9ad5e52055f5c3167c1",
+    "commit": "50b42f15451f139070088a1158eb56265995550d",
     "tracked": 1152
   },
   "landings": [
@@ -10982,6 +11175,17 @@
           "by": "pyproject.toml",
           "call": "configuration",
           "confidence": "config"
+        },
+        {
+          "by": "site/scripts/newsletter_publish.py",
+          "call": "read_text",
+          "confidence": "ast"
+        },
+        {
+          "by": "tests/test_newsletter_publish.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
         }
       ],
       "target": "LICENSE",
@@ -14123,6 +14327,12 @@
     },
     {
       "readers": [
+        {
+          "by": "tests/test_newsletter_publish.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        },
         {
           "by": "tests/test_packaging.py",
           "call": "read_text",

@@ -83,90 +83,47 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 25,
-      "changed": 19,
+      "added": 0,
+      "changed": 6,
       "moved": 0,
-      "parts": 6,
+      "parts": 3,
       "removed": 0
     },
     "items": [
       {
-        "kind": "import-added",
-        "sentence": "tests now imports site.",
-        "subjects": [
-          "tests",
-          "site"
-        ]
-      },
-      {
         "kind": "door",
-        "sentence": "CI's push trigger now also names `site/public/charts/**` and `site/scripts/**`.",
-        "subjects": [
-          ".github/workflows/ci.yml"
-        ]
-      },
-      {
-        "kind": "door",
-        "sentence": "CI now also runs site/scripts/check_feed.py.",
+        "sentence": "CI now also runs site/scripts/newsletter_publish.py.",
         "subjects": [
           ".github/workflows/ci.yml",
-          "site/scripts/check_feed.py"
-        ]
-      },
-      {
-        "kind": "door",
-        "sentence": "Publish the newsletter (.github/workflows/newsletter-publish.yml) is a new door. It starts when the workflow Deploy site to GitHub Pages completes; or by hand. It runs site/scripts/newsletter_publish.py.",
-        "subjects": [
-          ".github/workflows/newsletter-publish.yml",
           "site/scripts/newsletter_publish.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "README.md is now also read by site/scripts/newsletter_publish.py and tests/test_newsletter_publish.py.",
+        "sentence": "LICENSE is now also read by site/scripts/newsletter_publish.py and tests/test_newsletter_publish.py.",
         "subjects": [
-          "README.md",
+          "LICENSE",
           "site/scripts/newsletter_publish.py",
           "tests/test_newsletter_publish.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "site/public/charts/issue-29-refusal-concentration.png is now read by site/public/charts/png-manifest.json.",
+        "sentence": "pyproject.toml is now also read by tests/test_newsletter_publish.py.",
         "subjects": [
-          "site/public/charts/issue-29-refusal-concentration.png",
-          "site/public/charts/png-manifest.json"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "site/public/charts/issue-29-refusal-concentration.svg is now read by site/public/charts/png-manifest.json.",
-        "subjects": [
-          "site/public/charts/issue-29-refusal-concentration.svg",
-          "site/public/charts/png-manifest.json"
-        ]
-      },
-      {
-        "kind": "landing",
-        "sentence": "And 12 more new writers and readers of places.",
-        "subjects": []
-      },
-      {
-        "kind": "sequence",
-        "sentence": "site/scripts/check_feed.py now starts at `chart_errors`; it started at `built`.",
-        "subjects": [
-          "site/scripts/check_feed.py"
+          "pyproject.toml",
+          "tests/test_newsletter_publish.py"
         ]
       },
       {
         "kind": "counts",
-        "sentence": "25 files added and 19 changed content, across 6 parts.",
+        "sentence": "6 files changed content, across 3 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "24ea150e9e0c7de47aceeb9631a758da65fc3f0b",
-      "generatedAt": "2026-10-24T05:37:12.726Z"
+      "commit": "caae8cbbb866d47d54e4f9ad5e52055f5c3167c1",
+      "generatedAt": "2026-10-25T19:44:32.974Z"
     },
     "unchanged": false
   },
@@ -253,7 +210,7 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 5 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 2,
-  "commit": "caae8cbbb866d47d54e4f9ad5e52055f5c3167c1",
+  "commit": "50b42f15451f139070088a1158eb56265995550d",
   "defaultBranch": "main",
   "derived": "14 parts, mostly Python (147 files), shell (30), TypeScript (3), Astro (2), CSS (2), HTML (2), JavaScript (1) and PowerShell (1). Work enters through 5 doors; the busiest is CI, which reaches 6 parts. It publishes to npm and PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
@@ -307,11 +264,12 @@
       ],
       "runs": [
         "site/scripts/check_feed.py",
+        "site/scripts/newsletter_publish.py",
         "verify.sh",
         "tests/"
       ],
-      "runsCount": 3,
-      "runsMore": 0,
+      "runsCount": 4,
+      "runsMore": 28,
       "sends": [
         "uploads coverage to Codecov"
       ],
@@ -414,7 +372,7 @@
       "runsCount": 1,
       "runsMore": 0,
       "sends": [
-        "publishes to npm"
+        "publishes to npm and PyPI"
       ],
       "stages": [],
       "triggers": [
@@ -621,12 +579,12 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-25T19:44:32.974Z",
+  "generatedAt": "2026-10-25T20:07:20.999Z",
   "limits": [
-    "11 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 8 more.",
-    "25 writes and 48 reads use paths built at run time and are not named here.",
+    "12 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 9 more.",
+    "25 writes and 49 reads use paths built at run time and are not named here.",
     "7 writes go to places this repository does not track, so they are not listed as generated.",
-    "49 writes and 129 reads go to a path their caller passes, not to this repository.",
+    "57 writes and 133 reads go to a path their caller passes, not to this repository.",
     "12 reads go to the directory the command is run in (README.md, SECURITY.md, entries and 3 more places), not to this repository.",
     "1 read goes to the directory the command is run in or a path its caller passes, not to this repository.",
     "1 read goes to the home directory (.claude/), not to this repository.",

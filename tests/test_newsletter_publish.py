@@ -157,8 +157,15 @@ class NpmTests(unittest.TestCase):
         self.assertEqual(sync.plan_version(2, {}, self.digest), ("1.2.0", True))
         self.assertEqual(sync.plan_version(2, {"0.0.0": None, "1.1.0": "a", "1.1.3": "b"}, self.digest), ("1.2.0", True))
         self.assertEqual(sync.plan_version(2, {"1.2.0": "older", "1.2.1": "old"}, self.digest), ("1.2.2", True))
-        self.assertEqual(sync.plan_version(2, {"1.2.0": "older", "1.2.1": None}, self.digest), ("1.2.2", True))
+        # an older revision without a readable digest doesn't matter; only the newest is compared
+        self.assertEqual(sync.plan_version(2, {"1.2.0": None, "1.2.1": "old"}, self.digest), ("1.2.2", True))
         self.assertEqual(sync.plan_version(12, {"1.1.0": self.digest}, self.digest), ("1.12.0", True))
+
+    def test_an_unreadable_digest_on_the_newest_version_refuses_instead_of_republishing(self):
+        with self.assertRaises(sync.BuildError):
+            sync.plan_version(2, {"1.2.0": "older", "1.2.1": None}, self.digest)
+        with self.assertRaises(sync.BuildError):
+            sync.plan_version(2, {"1.2.0": None}, self.digest)
 
     def test_rerun_with_the_same_content_skips(self):
         self.assertEqual(sync.plan_version(2, {"1.2.0": "older", "1.2.1": self.digest}, self.digest), ("1.2.1", False))

@@ -259,6 +259,9 @@ def plan_version(latest_issue: int, published: dict[str, str | None], digest: st
     Versions are 1.<latest issue>.<revision>. With nothing published for this issue, publish 1.N.0. If the newest
     1.N.R carries this build's content digest, skip (a rerun). Otherwise publish 1.N.(R+1): a correction to issues
     already published. `published` maps each published version to its contentSha256 (None if unknown).
+
+    An unknown digest on the newest 1.N.R refuses the plan rather than publishing 1.N.(R+1): a version can't be taken
+    back after 72 hours, so a failed lookup must never turn into a needless release.
     """
     revisions = []
     for version, seen in published.items():
@@ -268,6 +271,8 @@ def plan_version(latest_issue: int, published: dict[str, str | None], digest: st
     if not revisions:
         return f"1.{latest_issue}.0", True
     revision, seen = max(revisions)
+    if seen is None:
+        raise BuildError(f"can't read the contentSha256 of 1.{latest_issue}.{revision}; refusing to publish")
     if seen == digest:
         return f"1.{latest_issue}.{revision}", False
     return f"1.{latest_issue}.{revision + 1}", True
@@ -346,6 +351,8 @@ def npm_published(name: str = NPM_NAME) -> dict[str, str | None]:  # pragma: no 
     found: dict[str, str | None] = {}
     for version in versions:
         field = subprocess.run(["npm", "view", f"{name}@{version}", "contentSha256"], capture_output=True, text=True)
+        if field.returncode != 0:
+            raise BuildError(f"npm view {name}@{version} failed: {field.stderr.strip()[:300]}")
         found[version] = field.stdout.strip() or None
     return found
 

@@ -41,10 +41,10 @@ permissions:
 
 jobs:
   huggingface:
-    # A workflow_run runs with this repo's secrets, so it must come from a successful push or manual run of main in
-    # this repository, never from a fork or a pull request.
+    # This job runs with the repo's secrets (or its OIDC identity), so it runs only from main: a manual dispatch of
+    # main, or a workflow_run of a successful push or manual run of main in this repository, never a fork or a PR.
     if: >-
-      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
       (github.event.workflow_run.conclusion == 'success' &&
        (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_dispatch') &&
        github.event.workflow_run.head_branch == 'main' &&
@@ -74,10 +74,10 @@ jobs:
         run: python3 site/scripts/newsletter_publish.py upload --out nl-out
 
   npm:
-    # A workflow_run runs with this repo's secrets, so it must come from a successful push or manual run of main in
-    # this repository, never from a fork or a pull request.
+    # This job runs with the repo's secrets (or its OIDC identity), so it runs only from main: a manual dispatch of
+    # main, or a workflow_run of a successful push or manual run of main in this repository, never a fork or a PR.
     if: >-
-      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
       (github.event.workflow_run.conclusion == 'success' &&
        (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_dispatch') &&
        github.event.workflow_run.head_branch == 'main' &&

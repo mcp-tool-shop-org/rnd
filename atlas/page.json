@@ -21,6 +21,16 @@
       "partLabel": "mcptoolshop_rnd"
     },
     {
+      "doors": 3,
+      "importedBy": [],
+      "importedByTests": [
+        "tests"
+      ],
+      "kind": "part",
+      "name": "site",
+      "partLabel": "site"
+    },
+    {
       "doors": 2,
       "importedBy": [],
       "importedByTests": [],
@@ -73,51 +83,90 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 32,
-      "changed": 2,
+      "added": 25,
+      "changed": 19,
       "moved": 0,
-      "parts": 1,
+      "parts": 6,
       "removed": 0
     },
     "items": [
       {
-        "kind": "landing",
-        "sentence": "site/public/charts/png-manifest.json is now written by site/scripts/render_chart_pngs.py.",
+        "kind": "import-added",
+        "sentence": "tests now imports site.",
         "subjects": [
-          "site/public/charts/png-manifest.json",
-          "site/scripts/render_chart_pngs.py"
+          "tests",
+          "site"
+        ]
+      },
+      {
+        "kind": "door",
+        "sentence": "CI's push trigger now also names `site/public/charts/**` and `site/scripts/**`.",
+        "subjects": [
+          ".github/workflows/ci.yml"
+        ]
+      },
+      {
+        "kind": "door",
+        "sentence": "CI now also runs site/scripts/check_feed.py.",
+        "subjects": [
+          ".github/workflows/ci.yml",
+          "site/scripts/check_feed.py"
+        ]
+      },
+      {
+        "kind": "door",
+        "sentence": "Publish the newsletter (.github/workflows/newsletter-publish.yml) is a new door. It starts when the workflow Deploy site to GitHub Pages completes; or by hand. It runs site/scripts/newsletter_publish.py.",
+        "subjects": [
+          ".github/workflows/newsletter-publish.yml",
+          "site/scripts/newsletter_publish.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "site/public/charts/ is now also read by site/scripts/render_chart_pngs.py.",
+        "sentence": "README.md is now also read by site/scripts/newsletter_publish.py and tests/test_newsletter_publish.py.",
         "subjects": [
-          "site/public/charts/",
-          "site/scripts/render_chart_pngs.py"
+          "README.md",
+          "site/scripts/newsletter_publish.py",
+          "tests/test_newsletter_publish.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "site/public/charts/calibration-grounded.png is now read by site/public/charts/png-manifest.json.",
+        "sentence": "site/public/charts/issue-29-refusal-concentration.png is now read by site/public/charts/png-manifest.json.",
         "subjects": [
-          "site/public/charts/calibration-grounded.png",
+          "site/public/charts/issue-29-refusal-concentration.png",
           "site/public/charts/png-manifest.json"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "And 60 more new writers and readers of places.",
+        "sentence": "site/public/charts/issue-29-refusal-concentration.svg is now read by site/public/charts/png-manifest.json.",
+        "subjects": [
+          "site/public/charts/issue-29-refusal-concentration.svg",
+          "site/public/charts/png-manifest.json"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "And 12 more new writers and readers of places.",
         "subjects": []
       },
       {
+        "kind": "sequence",
+        "sentence": "site/scripts/check_feed.py now starts at `chart_errors`; it started at `built`.",
+        "subjects": [
+          "site/scripts/check_feed.py"
+        ]
+      },
+      {
         "kind": "counts",
-        "sentence": "32 files added and 2 changed content, across 1 part.",
+        "sentence": "25 files added and 19 changed content, across 6 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "6d2d5b404253253d6334867f74e34be86c53417e",
-      "generatedAt": "2026-10-24T05:21:31.219Z"
+      "commit": "24ea150e9e0c7de47aceeb9631a758da65fc3f0b",
+      "generatedAt": "2026-10-24T05:37:12.726Z"
     },
     "unchanged": false
   },
@@ -204,9 +253,9 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 5 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 2,
-  "commit": "24ea150e9e0c7de47aceeb9631a758da65fc3f0b",
+  "commit": "caae8cbbb866d47d54e4f9ad5e52055f5c3167c1",
   "defaultBranch": "main",
-  "derived": "14 parts, mostly Python (145 files), shell (30), TypeScript (3), CSS (2), HTML (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "14 parts, mostly Python (147 files), shell (30), TypeScript (3), Astro (2), CSS (2), HTML (2), JavaScript (1) and PowerShell (1). Work enters through 5 doors; the busiest is CI, which reaches 6 parts. It publishes to npm and PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -236,9 +285,14 @@
           "files": 1
         },
         {
+          "boundary": "site",
+          "depth": 0,
+          "files": 2
+        },
+        {
           "boundary": "tests",
           "depth": 0,
-          "files": 27
+          "files": 28
         },
         {
           "boundary": "experiments",
@@ -252,10 +306,11 @@
         }
       ],
       "runs": [
+        "site/scripts/check_feed.py",
         "verify.sh",
         "tests/"
       ],
-      "runsCount": 2,
+      "runsCount": 3,
       "runsMore": 0,
       "sends": [
         "uploads coverage to Codecov"
@@ -263,7 +318,7 @@
       "stages": [],
       "triggers": [
         "on a pull request to main",
-        "on a push to main touching 13 paths",
+        "on a push to main touching 15 paths",
         "or by hand"
       ]
     },
@@ -318,7 +373,7 @@
         {
           "boundary": "site",
           "depth": 0,
-          "files": 8
+          "files": 9
         }
       ],
       "runs": [
@@ -334,6 +389,36 @@
       "stages": [],
       "triggers": [
         "on a push to main touching 2 paths",
+        "or by hand"
+      ]
+    },
+    {
+      "checks": [],
+      "checksCount": 0,
+      "checksMore": 0,
+      "file": ".github/workflows/newsletter-publish.yml",
+      "id": ".github/workflows/newsletter-publish.yml",
+      "landings": [],
+      "name": "Publish the newsletter",
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "site",
+          "depth": 0,
+          "files": 1
+        }
+      ],
+      "runs": [
+        "site/scripts/newsletter_publish.py"
+      ],
+      "runsCount": 1,
+      "runsMore": 0,
+      "sends": [
+        "publishes to npm"
+      ],
+      "stages": [],
+      "triggers": [
+        "when the workflow Deploy site to GitHub Pages completes",
         "or by hand"
       ]
     },
@@ -536,12 +621,12 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-24T05:37:12.726Z",
+  "generatedAt": "2026-10-25T19:44:32.974Z",
   "limits": [
     "11 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 8 more.",
-    "25 writes and 46 reads use paths built at run time and are not named here.",
+    "25 writes and 48 reads use paths built at run time and are not named here.",
     "7 writes go to places this repository does not track, so they are not listed as generated.",
-    "40 writes and 119 reads go to a path their caller passes, not to this repository.",
+    "49 writes and 129 reads go to a path their caller passes, not to this repository.",
     "12 reads go to the directory the command is run in (README.md, SECURITY.md, entries and 3 more places), not to this repository.",
     "1 read goes to the directory the command is run in or a path its caller passes, not to this repository.",
     "1 read goes to the home directory (.claude/), not to this repository.",
@@ -600,10 +685,10 @@
     "entries/",
     "experiments/embeddinggemma-2/harness/build_corpus.py"
   ],
-  "startReason": "This path follows rnd (a command people run) from its entry, since CI runs only tests and checks.",
+  "startReason": "This path follows rnd (a command people run) from its entry, since CI runs only tests, scripts that import no code here and checks.",
   "summary": "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only).",
   "summaryFrom": "person",
-  "testFiles": 60,
+  "testFiles": 61,
   "testedBy": {
     "experiments": 7,
     "mcptoolshop_rnd": 20,

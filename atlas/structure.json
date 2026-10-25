@@ -32,8 +32,12 @@
       "externals": 0,
       "files": [
         {
-          "hash": "89a841bc4ff0a0f398530b46ca9453112fd0c6423edceaeab83f466785008f07",
+          "hash": "802cabddbfad46a49e83300df919232cd10f6c087901442328651dcae29985de",
           "path": ".github/workflows/ci.yml"
+        },
+        {
+          "hash": "e16951054599d4e80fd7a62477429e89181914e83ebacd3fcce1a9be06b3c468",
+          "path": ".github/workflows/newsletter-publish.yml"
         },
         {
           "hash": "14a9ee5ff830bc89384b03f3f7570fc4d834e467013a5cd81a2b5264d7004995",
@@ -5494,7 +5498,7 @@
           "path": "licences/README.md"
         },
         {
-          "hash": "e66a9b57db511d3fb1d5ed93fdf28f3bb72d64aa38b9e20ef79933084547520e",
+          "hash": "f15d3bd69c6f2ce174ba680b09965e4e633c7b94291b794eb640a744858b3dd7",
           "path": "licences/registry.json"
         },
         {
@@ -5568,7 +5572,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "4a1c7681799ca6a1a313084cb4b6bad67d15e5aec02981c0364f375f85df8708",
+          "hash": "2687876802bed018f650f06096723c77972dca3dfc624592cffdd4437c0c3eaf",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -8434,7 +8438,7 @@
           "path": ".polyglot-terms.json"
         },
         {
-          "hash": "bc08422c553f1f13bea11d4edc0e51ab5a2650ccc7111d236f8782cd81a4eb27",
+          "hash": "e4c42a1089b21354bd71b307ff0ad4b412b975ec468f224508ac6aa4a21ef3dc",
           "path": "CHANGELOG.md"
         },
         {
@@ -8521,7 +8525,7 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 1,
+      "dynamicReads": 3,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
       "dynamicWrites": 0,
@@ -8529,15 +8533,15 @@
       "externals": 0,
       "files": [
         {
-          "hash": "de34bf20fdb500b80262b1e9c800cf9110046517ade444b4e8500d0ce84bd0a5",
+          "hash": "b1502054e0f14e412bb1ca9b586543b58e92e7ea7eb8b9368c44051d53883244",
           "path": "site/astro.config.mjs"
         },
         {
-          "hash": "532b35397cd2f19b8dbcdbef8abe6b5bd31f63b4eca835cc3cd5aa8619924b60",
+          "hash": "67f0018a1a7650779a918e90c8df6af2ed755d03e07b3715bce1b42031f0b917",
           "path": "site/package-lock.json"
         },
         {
-          "hash": "f7a227727ff5826b24a734286bb7d1094b8a8bd3b91a0a0f294ac48dacc27424",
+          "hash": "94bb662ec215ccd4e260c504f91d81b7b9e54760e0ff80d9764d7da0863ed99d",
           "path": "site/package.json"
         },
         {
@@ -8653,11 +8657,11 @@
           "path": "site/public/charts/error-lean.svg"
         },
         {
-          "hash": "bf982eebfcd12130822c2841dc079d6ee5a7a141c371935841c2dc23aae382bb",
+          "hash": "014bef20889fa4843f7556f0da612a275b864cce4a2a719ec303913b27ee29cc",
           "path": "site/public/charts/issue-27-match-share.png"
         },
         {
-          "hash": "f733f613367cc20794290366d291572741c2be0892288bdf0b8c88e22c7048f7",
+          "hash": "5eeea2b48120c8b6377928fea5824a1a6cc3a963a7fcc9e223bd8d028ca2521a",
           "path": "site/public/charts/issue-27-match-share.svg"
         },
         {
@@ -8693,19 +8697,19 @@
           "path": "site/public/charts/issue-28-graded-panel.svg"
         },
         {
-          "hash": "d9105b7ecb6ab8b524426d7d5908a857d829f0624443d291a227174de3af8466",
+          "hash": "e64818854a75929e23c6cd95d199ecbb90f015733bca9bcea68f5ec01913d965",
           "path": "site/public/charts/issue-28-hesitation-spread.png"
         },
         {
-          "hash": "b1b9039b2e9fbebfea0029c1219e29d4d6b12742913954da7c1fe7713ae7926a",
+          "hash": "fdd86215972525cfe545b01b835280908fd883c3bd6216cbe0e8004c96690745",
           "path": "site/public/charts/issue-28-hesitation-spread.svg"
         },
         {
-          "hash": "27b42ac766e72f37a50c650ab62610e6f4d10256e5e21ad6e92d3d90b76811df",
+          "hash": "c4f3def3d8f7c937f5cab272cf612b99081b015206dfc14fcdd0be7a77b18f88",
           "path": "site/public/charts/issue-28-slot-sides.png"
         },
         {
-          "hash": "bf7e7cfa5f4a0e46d93f19b1b0bcb876f5f4b6640ae6cfbf63ccefb8bad250bc",
+          "hash": "618cbfebbeae5d005fc91e41c8234f3b3cb6849bbe0ee2f398b5c317541d591b",
           "path": "site/public/charts/issue-28-slot-sides.svg"
         },
         {
@@ -8715,6 +8719,54 @@
         {
           "hash": "e141f773d02ff855c00ac7c5d6de5d189b9cd0165c314c934996fe3b1a8c9d19",
           "path": "site/public/charts/issue-28-track-a-flips.svg"
+        },
+        {
+          "hash": "a37d785e549cd9ce81806ff52640b6d7a301f20b46e41d6084b576743a645fb8",
+          "path": "site/public/charts/issue-29-refusal-concentration.png"
+        },
+        {
+          "hash": "6459800a7ee862178b56c3820c7c11580c08c41e8083b1c9f8369dfdb38391bc",
+          "path": "site/public/charts/issue-29-refusal-concentration.svg"
+        },
+        {
+          "hash": "9b4471991d367533d0bac150fe85a408af79a2b571afd9abb0ffd7b934f987b0",
+          "path": "site/public/charts/issue-29-rule-runs.png"
+        },
+        {
+          "hash": "1d4269dc97bd8a37b28646faffb197cf48497815e9746873294ac82d3da5e96e",
+          "path": "site/public/charts/issue-29-rule-runs.svg"
+        },
+        {
+          "hash": "580e7a78d6d4557d2a5253b8363c31dd2fc68e403e228da9808265303ae0455b",
+          "path": "site/public/charts/issue-29-trade-by-label.png"
+        },
+        {
+          "hash": "b8dfdde57e0af0c112917ba0c73ff10593c285864b47acae4dbe0f4268a36a80",
+          "path": "site/public/charts/issue-29-trade-by-label.svg"
+        },
+        {
+          "hash": "9cedfe5d1b0902c87cc2bd0f03298175b82a89a8ae4b68ecfb71c94f86fef8af",
+          "path": "site/public/charts/issue-30-crash-kill-resume.png"
+        },
+        {
+          "hash": "f591fb6735a729b89969e82321f187491e464b027d0d97f26c48d3025ee60432",
+          "path": "site/public/charts/issue-30-crash-kill-resume.svg"
+        },
+        {
+          "hash": "99375b6bea34d3c55abe477efde39df0dadfb6085f522b8162418e37189def3c",
+          "path": "site/public/charts/issue-30-crash-torn-file.png"
+        },
+        {
+          "hash": "ea10266045ae9a50b113a65f9d25f289d5fd2600bd1eea6d73db16f8a2bc25b9",
+          "path": "site/public/charts/issue-30-crash-torn-file.svg"
+        },
+        {
+          "hash": "34141c7b7f7b8ad5f5bbce5cbec5fd51b00ce1cb2867b2ce035d8a84da74a299",
+          "path": "site/public/charts/issue-30-lab-pilot-map.png"
+        },
+        {
+          "hash": "c90b30f7bb717aebcece7126e0f55c5bd26d3f9cc4448cd28736002871576922",
+          "path": "site/public/charts/issue-30-lab-pilot-map.svg"
         },
         {
           "hash": "f7527ae4d3ec14612ffea5b9fafd1f68c1bba4d89e99aae489192b50836155d3",
@@ -8749,7 +8801,7 @@
           "path": "site/public/charts/pilot-thinking-budget.svg"
         },
         {
-          "hash": "3b873bb53001b77de15804ea2c5e38f3845d7e78289d0b53afdc03369ca294de",
+          "hash": "fc2e893c29ad07184aaac1faa6d148a7d2ad445db7117a73de477af4f3e130aa",
           "path": "site/public/charts/png-manifest.json"
         },
         {
@@ -8789,24 +8841,205 @@
           "path": "site/public/favicon.svg"
         },
         {
+          "hash": "08cc89fca0e7a913c4d40dcbbb9ee0e0f28124bedca0ee682bb655cc6e609969",
+          "path": "site/public/handbook/visuals/bar-share.svg"
+        },
+        {
+          "hash": "3909e4df87ddd1294c279c9b7b594d1926171b53d63eac68054b1e674fd7a7c8",
+          "path": "site/public/handbook/visuals/process-map.svg"
+        },
+        {
+          "hash": "ec0a7e2953d7e6d8389b29e7509f085bfaca0f64940135e6369b88dafc93d0b0",
+          "path": "site/public/handbook/visuals/ranking-coverage.svg"
+        },
+        {
+          "hash": "ada6758993974e353605c09b384a4535cfb293c1048a02ea5e04c56f85734fde",
+          "path": "site/public/handbook/visuals/slot-grid.svg"
+        },
+        {
+          "hash": "b9109b5921dc97281b25754d892e6a1596517c49d803a9dbb404c1a7c135e93c",
+          "path": "site/public/handbook/visuals/three-label-line.svg"
+        },
+        {
           "hash": "ae5e29ea219b139dd82014b3770eadea1a7d0a0ebc2855edfabf993133f7b967",
           "path": "site/public/rss-logo.png"
         },
         {
-          "entry": "built",
+          "entry": "chart_errors",
           "entryRule": 1,
           "exports": [
-            "built"
+            "built",
+            "chart_errors",
+            "svg_digest"
           ],
           "failurePaths": [
             {
               "kind": "except",
-              "line": 45
+              "line": 84
             }
           ],
-          "hash": "4f3c986180a5a2d63caba6e2d3ce69c01fab2956e0bc843282b8535acab2c6bc",
+          "hash": "221eb480a67708d58daa751928979fb1128df2ec0bb83ac14e5237f9b6226bf7",
           "path": "site/scripts/check_feed.py",
-          "sequences": []
+          "sequences": [
+            {
+              "calls": [
+                {
+                  "line": 47,
+                  "name": "read_bytes",
+                  "target": null
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "svg_digest"
+            },
+            {
+              "calls": [
+                {
+                  "line": 47,
+                  "name": "read_bytes",
+                  "target": null,
+                  "via": "svg_digest"
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": true,
+              "isDefaultExport": false,
+              "name": "chart_errors"
+            }
+          ]
+        },
+        {
+          "entry": "main",
+          "entryRule": 1,
+          "exports": [
+            "absolutise",
+            "build",
+            "build_npm",
+            "content_digest",
+            "dataset_card",
+            "main",
+            "npm_published",
+            "npm_readme",
+            "parse_issue",
+            "plan_version",
+            "published_issues",
+            "upload"
+          ],
+          "failurePaths": [
+            {
+              "in": "_scalar",
+              "kind": "except",
+              "line": 64
+            },
+            {
+              "in": "_scalar",
+              "kind": "raise",
+              "line": 65
+            },
+            {
+              "in": "_scalar",
+              "kind": "raise",
+              "line": 68
+            },
+            {
+              "in": "parse_issue",
+              "kind": "raise",
+              "line": 81
+            },
+            {
+              "in": "parse_issue",
+              "kind": "raise",
+              "line": 84
+            },
+            {
+              "in": "parse_issue",
+              "kind": "raise",
+              "line": 94
+            },
+            {
+              "in": "parse_issue",
+              "kind": "raise",
+              "line": 99
+            },
+            {
+              "in": "published_issues",
+              "kind": "raise",
+              "line": 136
+            },
+            {
+              "in": "published_issues",
+              "kind": "raise",
+              "line": 138
+            },
+            {
+              "in": "published_issues",
+              "kind": "raise",
+              "line": 142
+            },
+            {
+              "in": "published_issues",
+              "kind": "raise",
+              "line": 145
+            },
+            {
+              "in": "npm_published",
+              "kind": "raise",
+              "line": 343
+            },
+            {
+              "in": "main",
+              "kind": "except",
+              "line": 390
+            }
+          ],
+          "hash": "9c597596fef8c540a4c2493cac6f311c82151ce6d107b206451de98cf8fbd484",
+          "path": "site/scripts/newsletter_publish.py",
+          "sequences": [
+            {
+              "calls": [
+                {
+                  "line": 128,
+                  "name": "glob",
+                  "target": null
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "published_issues"
+            },
+            {
+              "calls": [
+                {
+                  "line": 128,
+                  "name": "glob",
+                  "target": null,
+                  "via": "published_issues"
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "build"
+            },
+            {
+              "calls": [
+                {
+                  "branch": "args.step == \"build\"",
+                  "line": 128,
+                  "name": "glob",
+                  "target": null,
+                  "via": "published_issues"
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": true,
+              "isDefaultExport": false,
+              "name": "main"
+            }
+          ]
         },
         {
           "exports": [
@@ -8814,14 +9047,19 @@
             "png_size",
             "render",
             "sha256",
+            "svg_sha256",
             "svg_size"
           ],
-          "hash": "8d34153cf9360f2bbca7d30416fbb534e72e24d132bc9a70b7ccff7b06a2c0ad",
+          "hash": "0acd7de9d8e23e19678041d30d41423ba25f844248402972e7939cd60c2f44a9",
           "path": "site/scripts/render_chart_pngs.py"
         },
         {
           "hash": "ecf4cb2bd6a1ef2097ad13be641c8d5bab26a81769c80c9286874470509a184f",
           "path": "site/src/assets/logo.png"
+        },
+        {
+          "hash": "c708fe421990e25cb0fe634722a7fc368c014c886d4b18f750e479dd2383e29f",
+          "path": "site/src/components/Footer.astro"
         },
         {
           "constantOnly": true,
@@ -8939,6 +9177,14 @@
         {
           "hash": "0527c1428fb2c1ded99a9f0c68f5939b620cf484cba749561d60841e3ae4bf09",
           "path": "site/src/content/docs/handbook/model-comparisons.md"
+        },
+        {
+          "hash": "cbf41d2e67abc66b0c78f61e74a7c95115d3190e70a4bcb926efd6ab24445e14",
+          "path": "site/src/content/docs/handbook/newsletter-issues.md"
+        },
+        {
+          "hash": "bb79a4160f926bc188d9ecbd4bb21cf9140e2cb4df1e0ddef4de0fb40d1e98e0",
+          "path": "site/src/content/docs/handbook/newsletter-visuals.md"
         },
         {
           "hash": "6a51f1ab5d4d3d63e68b79738880b79fd205d95bbe042918db0db9d4de0f7ae1",
@@ -9065,7 +9311,15 @@
           "path": "site/src/content/docs/newsletter/issue-28.md"
         },
         {
-          "hash": "148a2d91b247ead1b8ea065c6b3c759958dfeec6bed8be51533e5fba43ee77da",
+          "hash": "ab2e2552a4557b5b7a9f8169b6e3a14595b87767eb5f6726deea38ca6c663cb9",
+          "path": "site/src/content/docs/newsletter/issue-29.md"
+        },
+        {
+          "hash": "e71b2fb7f935f842a085ab6471774e5fb0584c5120e9f32f41b668511fc8585c",
+          "path": "site/src/content/docs/newsletter/issue-30.md"
+        },
+        {
+          "hash": "6140c74208f37896402e83b3fe601574a32d534b2684b8042a132863b931c752",
           "path": "site/src/content/docs/newsletter/subscribe.md"
         },
         {
@@ -9073,7 +9327,7 @@
           "path": "site/src/content/docs/watch/2026-10-13.md"
         },
         {
-          "hash": "7c0a1580d338d459dbe935cfc23091f530424560600bc50f0c59597ddd714a2d",
+          "hash": "58d293b133c814cf50bc6db2727e02479e812887a71d7b9c5c5d88d82aacb06e",
           "importOrder": [
             "site/src/styles/global.css",
             "site/src/site-config.ts"
@@ -9107,7 +9361,7 @@
           "path": "site/src/styles/global.css"
         },
         {
-          "hash": "9ca8b9dc3c65c74c32f071b04292ebd31d13954e538cc39f4d36c609f9359500",
+          "hash": "5d2852dfc85d4902bb015aeefd6f4fc4336b7c0a75ad6eed1387d991ca7d2107",
           "path": "site/src/styles/starlight-custom.css"
         },
         {
@@ -9123,16 +9377,20 @@
       "origin": "mixed",
       "outsidePlaces": [
         {
-          "reads": 3,
+          "reads": 13,
           "where": [
             "caller"
           ],
-          "writes": 0
+          "writes": 9
         }
       ],
-      "outsideReads": 3,
+      "outsideReads": 13,
+      "outsideWrites": 9,
       "role": "docs",
-      "testedBy": 0,
+      "testRunners": [
+        "unittest"
+      ],
+      "testedBy": 1,
       "unresolvedSites": 0
     },
     {
@@ -9489,6 +9747,17 @@
         },
         {
           "exports": [
+            "write"
+          ],
+          "hash": "1cd57b96a4a2e295d873768d24d49334ef14b2e1a96501e871085ca55acf4494",
+          "importsFiles": [
+            "site/scripts/newsletter_publish.py"
+          ],
+          "path": "tests/test_newsletter_publish.py",
+          "testFramework": "unittest"
+        },
+        {
+          "exports": [
             "run_py"
           ],
           "hash": "ce5c68d2762b73f144e3421165118dc173113c224b5d04df57ec4baef760411c",
@@ -9676,6 +9945,14 @@
           "programs": [
             "python"
           ],
+          "step": "Chart PNGs current (email edition)"
+        },
+        {
+          "dir": "",
+          "job": "ci",
+          "programs": [
+            "python"
+          ],
           "step": "Coverage"
         },
         {
@@ -9738,7 +10015,7 @@
                   "range": ">=22.0.0 <23.0.0-0"
                 }
               ],
-              "step": "7",
+              "step": "8",
               "uses": "actions/setup-node",
               "version": "22"
             }
@@ -9770,9 +10047,14 @@
           "files": 1
         },
         {
+          "boundary": "site",
+          "depth": 0,
+          "files": 2
+        },
+        {
           "boundary": "tests",
           "depth": 0,
-          "files": 27
+          "files": 28
         },
         {
           "boundary": "experiments",
@@ -9878,6 +10160,11 @@
           "via": "build pyproject.toml"
         },
         {
+          "job": "ci",
+          "path": "site/scripts/check_feed.py",
+          "runKind": "executes"
+        },
+        {
           "directory": true,
           "job": "ci",
           "matched": true,
@@ -9891,7 +10178,7 @@
           "runKind": "executes"
         }
       ],
-      "runsCount": 3,
+      "runsCount": 4,
       "secrets": [],
       "sends": {
         "deploysPages": false,
@@ -9918,7 +10205,7 @@
         },
         {
           "coverage": true,
-          "files": 27,
+          "files": 28,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -9947,6 +10234,8 @@
             "mcptoolshop_rnd/**",
             "pyproject.toml",
             "rnd/**",
+            "site/public/charts/**",
+            "site/scripts/**",
             "tests/**",
             "uv.lock",
             "verify.sh"
@@ -9961,6 +10250,220 @@
         "actions/setup-node",
         "actions/setup-python",
         "codecov/codecov-action"
+      ],
+      "usesWorkflowToken": false
+    },
+    {
+      "checksCount": 0,
+      "commands": [
+        {
+          "dir": "",
+          "job": "huggingface",
+          "programs": [
+            "python3"
+          ],
+          "step": "Build (no token)"
+        },
+        {
+          "dir": "",
+          "job": "huggingface",
+          "programs": [
+            "python"
+          ],
+          "step": "Install huggingface_hub"
+        },
+        {
+          "dir": "",
+          "job": "huggingface",
+          "programs": [
+            "python3"
+          ],
+          "step": "Upload to mcp-tool-shop/rnd-newsletter"
+        },
+        {
+          "dir": "",
+          "job": "npm",
+          "programs": [
+            "cd",
+            "echo",
+            "mkdir",
+            "npm"
+          ],
+          "step": "Install npm 11.6.2 in a sandbox"
+        },
+        {
+          "dir": "",
+          "job": "npm",
+          "programs": [
+            "python3"
+          ],
+          "step": "Build (no token)"
+        },
+        {
+          "dir": "",
+          "job": "npm",
+          "programs": [
+            "python3"
+          ],
+          "step": "Plan the version and assemble the package"
+        },
+        {
+          "job": "npm",
+          "programs": [
+            "npm"
+          ],
+          "step": "Check the package shape"
+        },
+        {
+          "job": "npm",
+          "programs": [
+            "npm"
+          ],
+          "step": "Publish @rnd-news/newsletter with provenance (OIDC)"
+        }
+      ],
+      "elsewhere": [],
+      "file": ".github/workflows/newsletter-publish.yml",
+      "jobs": [
+        {
+          "basis": "declared",
+          "name": "huggingface",
+          "runsOn": [
+            {
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "platform": {
+                "cpu": "x64",
+                "libc": "glibc",
+                "os": "linux"
+              }
+            }
+          ],
+          "setup": [
+            {
+              "ranges": [
+                {
+                  "from": "3.12",
+                  "range": ">=3.12.0 <3.13.0-0"
+                }
+              ],
+              "step": "1",
+              "uses": "actions/setup-python",
+              "version": "3.12"
+            }
+          ]
+        },
+        {
+          "basis": "declared",
+          "environment": {
+            "name": "newsletter-release"
+          },
+          "name": "npm",
+          "runsOn": [
+            {
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "platform": {
+                "cpu": "x64",
+                "libc": "glibc",
+                "os": "linux"
+              }
+            }
+          ],
+          "setup": [
+            {
+              "ranges": [
+                {
+                  "from": "3.12",
+                  "range": ">=3.12.0 <3.13.0-0"
+                }
+              ],
+              "step": "1",
+              "uses": "actions/setup-python",
+              "version": "3.12"
+            },
+            {
+              "ranges": [
+                {
+                  "from": "22",
+                  "range": ">=22.0.0 <23.0.0-0"
+                }
+              ],
+              "step": "2",
+              "uses": "actions/setup-node",
+              "version": "22"
+            }
+          ]
+        }
+      ],
+      "landings": [],
+      "mentions": [],
+      "name": "Publish the newsletter",
+      "permissions": [
+        "contents:read",
+        "id-token:write"
+      ],
+      "pushes": false,
+      "reach": [
+        {
+          "boundary": "site",
+          "depth": 0,
+          "files": 1
+        }
+      ],
+      "readers": [],
+      "runs": [
+        {
+          "job": "huggingface",
+          "path": "site/scripts/newsletter_publish.py",
+          "runKind": "executes"
+        },
+        {
+          "job": "npm",
+          "path": "site/scripts/newsletter_publish.py",
+          "runKind": "executes"
+        }
+      ],
+      "runsCount": 1,
+      "secrets": [
+        "RND_TOKEN"
+      ],
+      "sends": {
+        "deploysPages": false,
+        "dispatchesTo": [],
+        "opensIssues": false,
+        "opensIssuesOnFailure": false,
+        "opensPullRequests": false,
+        "publishes": true,
+        "publishesTo": [
+          "npm"
+        ],
+        "releases": false
+      },
+      "stages": [],
+      "triggers": [
+        {
+          "event": "workflow_dispatch"
+        },
+        {
+          "branches": [
+            "main"
+          ],
+          "event": "workflow_run",
+          "types": [
+            "completed"
+          ],
+          "workflows": [
+            "Deploy site to GitHub Pages"
+          ]
+        }
+      ],
+      "uses": [
+        "actions/checkout",
+        "actions/setup-node",
+        "actions/setup-python"
       ],
       "usesWorkflowToken": false
     },
@@ -10057,7 +10560,7 @@
         {
           "boundary": "site",
           "depth": 0,
-          "files": 8
+          "files": 9
         }
       ],
       "readers": [],
@@ -10383,12 +10886,18 @@
       "fromTests": true,
       "kind": "file",
       "to": "rnd"
+    },
+    {
+      "from": "tests",
+      "fromTests": true,
+      "kind": "file",
+      "to": "site"
     }
   ],
   "engine": "1.24.0",
   "generatedFrom": {
-    "commit": "24ea150e9e0c7de47aceeb9631a758da65fc3f0b",
-    "tracked": 1127
+    "commit": "caae8cbbb866d47d54e4f9ad5e52055f5c3167c1",
+    "tracked": 1152
   },
   "landings": [
     {
@@ -10541,6 +11050,11 @@
           "confidence": "config"
         },
         {
+          "by": "site/scripts/newsletter_publish.py",
+          "call": "literal",
+          "confidence": "ast"
+        },
+        {
           "by": "tests/test_agent_ab_harness_run.py",
           "call": "literal",
           "confidence": "ast",
@@ -10560,6 +11074,12 @@
         },
         {
           "by": "tests/test_layout.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        },
+        {
+          "by": "tests/test_newsletter_publish.py",
           "call": "literal",
           "confidence": "ast",
           "fromTests": true
@@ -14153,6 +14673,138 @@
           "confidence": "config"
         }
       ],
+      "target": "site/public/charts/issue-29-refusal-concentration.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-29-refusal-concentration.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-29-rule-runs.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-29-rule-runs.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-29-trade-by-label.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-29-trade-by-label.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-30-crash-kill-resume.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-30-crash-kill-resume.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-30-crash-torn-file.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-30-crash-torn-file.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-30-lab-pilot-map.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-30-lab-pilot-map.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
       "target": "site/public/charts/loop-repeats.png",
       "writers": []
     },
@@ -14351,6 +15003,18 @@
     {
       "readers": [
         {
+          "by": "tests/test_newsletter_publish.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "site/scripts/newsletter_publish.py",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "site/astro.config.mjs",
           "call": "content-collection",
           "confidence": "ast"
@@ -14414,6 +15078,11 @@
         {
           "by": "site/scripts/check_feed.py",
           "call": "glob",
+          "confidence": "ast"
+        },
+        {
+          "by": "site/scripts/newsletter_publish.py",
+          "call": "literal",
           "confidence": "ast"
         }
       ],
@@ -14600,7 +15269,7 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 60,
+  "testFiles": 61,
   "testsNotRun": [
     "experiments/cuda-graphs/test_graphed_heads.py",
     "experiments/data-designer/tests/test_lockdown.py",

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.35] - 2026-10-25
+
+- newsletter: mirror the published issues to the Hugging Face dataset mcp-tool-shop/rnd-newsletter after each Pages deploy
+
 ## [1.1.23.1.34] - 2026-10-25
 
 - newsletter: issue 30, the first daily issue; check_feed's 90 KB rule; handbook page on newsletter issues

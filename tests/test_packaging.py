@@ -81,7 +81,7 @@ class ManifestTests(unittest.TestCase):
 
     def test_version_matches_the_tag(self):
         try:
-            r = subprocess.run(["git", "describe", "--exact-match", "--tags", "HEAD"], cwd=REPO,
+            r = subprocess.run(["git", "describe", "--exact-match", "--tags", "--match", "v*", "HEAD"], cwd=REPO,
                                capture_output=True, text=True, timeout=30)
         except OSError:
             self.skipTest("git not available")

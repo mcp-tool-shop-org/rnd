@@ -102,7 +102,8 @@ export async function GET(context: APIContext) {
   const site = new URL(import.meta.env.BASE_URL.replace(/\/?$/, '/'), context.site);
   const feedUrl = new URL('newsletter/rss.xml', site).href;
   const issues = (await getCollection('docs'))
-    .filter((d) => d.id.startsWith('newsletter/') && d.data.issue)
+    // A page marked draft: true never reaches the feed: Buttondown emails every new feed item to subscribers.
+    .filter((d) => d.id.startsWith('newsletter/') && d.data.issue && !d.data.draft)
     .sort((a, b) => (b.data.issue ?? 0) - (a.data.issue ?? 0));
 
   return rss({

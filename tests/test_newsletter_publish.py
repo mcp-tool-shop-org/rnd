@@ -106,6 +106,15 @@ class BuildTests(unittest.TestCase):
         with self.assertRaises(sync.BuildError):
             sync.build(self.out, self.src)
 
+    def test_any_draft_spelling_but_lowercase_true_or_false_stops_the_build(self):
+        write(self.src, "issue-01.md", 1)
+        for value in ("True", "TRUE", "yes", '"true"'):
+            write(self.src, "issue-02.md", 2, extra=f"draft: {value}\n")
+            with self.assertRaises(sync.BuildError):
+                sync.build(self.out, self.src)
+        write(self.src, "issue-02.md", 2, extra="draft: false\n")
+        self.assertEqual([r["issue"] for r in sync.build(self.out, self.src)], [1, 2])
+
     def test_unreadable_front_matter_stops_the_build(self):
         (self.src / "issue-01.md").write_text("no front matter\n", encoding="utf-8")
         with self.assertRaises(sync.BuildError):

@@ -132,6 +132,10 @@ def published_issues(newsletter: pathlib.Path = NEWSLETTER) -> list[dict]:
     rows, seen = [], {}
     for path in sorted(newsletter.glob("issue-*.md")):
         meta, body = parse_issue(path.read_text(encoding="utf-8"), path.name)
+        # Astro reads True or TRUE as true and leaves the page out; anything but lowercase true/false stops the build
+        # here, so a draft can never be published by a spelling the two readers disagree on.
+        if "draft" in meta and not isinstance(meta["draft"], bool):
+            raise BuildError(f"{path.name}: draft must be lowercase true or false, not {meta['draft']!r}")
         if meta.get("draft") is True:
             continue
         number = meta.get("issue")

@@ -1,6 +1,6 @@
 # rnd: how it works
 
-Mapped at 2026-10-25 from commit caae8cb by Atlas 1.24.0.
+Mapped at 2026-10-25 from commit 50b42f1 by Atlas 1.24.0.
 
 ## What this is
 
@@ -8,22 +8,16 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 
 14 parts, mostly Python (147 files), shell (30), TypeScript (3), Astro (2), CSS (2), HTML (2), JavaScript (1) and PowerShell (1). Work enters through 5 doors; the busiest is CI, which reaches 6 parts. It publishes to npm and PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-24 (24ea150)
+## What changed since 2026-10-25 (caae8cb)
 
-- tests now imports site.
-- CI's push trigger now also names `site/public/charts/**` and `site/scripts/**`.
-- CI now also runs site/scripts/check_feed.py.
-- Publish the newsletter (.github/workflows/newsletter-publish.yml) is a new door. It starts when the workflow Deploy site to GitHub Pages completes; or by hand. It runs site/scripts/newsletter_publish.py.
-- README.md is now also read by site/scripts/newsletter_publish.py and tests/test_newsletter_publish.py.
-- site/public/charts/issue-29-refusal-concentration.png is now read by site/public/charts/png-manifest.json.
-- site/public/charts/issue-29-refusal-concentration.svg is now read by site/public/charts/png-manifest.json.
-- And 12 more new writers and readers of places.
-- site/scripts/check_feed.py now starts at `chart_errors`; it started at `built`.
-- 25 files added and 19 changed content, across 6 parts.
+- CI now also runs site/scripts/newsletter_publish.py.
+- LICENSE is now also read by site/scripts/newsletter_publish.py and tests/test_newsletter_publish.py.
+- pyproject.toml is now also read by tests/test_newsletter_publish.py.
+- 6 files changed content, across 3 parts.
 
 ## What comes in
 
-1. **CI.** On a pull request to main; on a push to main touching 15 paths; or by hand. Runs site/scripts/check_feed.py, verify.sh and tests/; checks mcptoolshop_rnd/.
+1. **CI.** On a pull request to main; on a push to main touching 15 paths; or by hand. Runs site/scripts/check_feed.py, site/scripts/newsletter_publish.py, verify.sh and 28 more; checks mcptoolshop_rnd/.
 2. **Release.** When a release is published; or by hand. Runs mcptoolshop_rnd/__init__.py and verify.sh; checks mcptoolshop_rnd/.
 3. **Deploy site to GitHub Pages.** On a push to main touching 2 paths; or by hand. Runs site/scripts/check_feed.py, site/astro.config.mjs and site/src/.
 4. **Publish the newsletter.** When the workflow Deploy site to GitHub Pages completes; or by hand. Runs site/scripts/newsletter_publish.py.
@@ -31,7 +25,7 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 
 ## What happens through CI
 
-1. The workflow runs verify.sh in the repository root, site/scripts/check_feed.py in site and tests/ in tests; it checks mcptoolshop_rnd/ in mcptoolshop_rnd.
+1. The workflow runs verify.sh in the repository root, site/scripts/check_feed.py and site/scripts/newsletter_publish.py in site, and tests/ in tests; it checks mcptoolshop_rnd/ in mcptoolshop_rnd.
 2. That reaches experiments (7 files) and rnd (1 file).
 3. It writes to entries/, experiments/charts/, instruments/ and site/public/charts/.
 4. It uploads coverage to Codecov.
@@ -49,7 +43,7 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 
 **Deploy site to GitHub Pages** runs site/scripts/check_feed.py, site/astro.config.mjs and site/src/, and deploys the site.
 
-**Publish the newsletter** runs site/scripts/newsletter_publish.py and publishes to npm.
+**Publish the newsletter** runs site/scripts/newsletter_publish.py and publishes to npm and PyPI.
 
 **rnd** (a command people run) runs mcptoolshop_rnd/cli.py and writes to entries/ and instruments/.
 
@@ -138,10 +132,10 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 
 ## What this map cannot see
 
-- 11 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 8 more.
-- 25 writes and 48 reads use paths built at run time and are not named here.
+- 12 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 9 more.
+- 25 writes and 49 reads use paths built at run time and are not named here.
 - 7 writes go to places this repository does not track, so they are not listed as generated.
-- 49 writes and 129 reads go to a path their caller passes, not to this repository.
+- 57 writes and 133 reads go to a path their caller passes, not to this repository.
 - 12 reads go to the directory the command is run in (README.md, SECURITY.md, entries and 3 more places), not to this repository.
 - 1 read goes to the directory the command is run in or a path its caller passes, not to this repository.
 - 1 read goes to the home directory (.claude/), not to this repository.

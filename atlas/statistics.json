@@ -220,7 +220,7 @@
       "confidence": "low",
       "highWater": null,
       "name": "site",
-      "qualifyingSourceCommits": 7,
+      "qualifyingSourceCommits": 8,
       "rebaseline": null
     },
     {
@@ -238,7 +238,7 @@
       "confidence": "full",
       "highWater": null,
       "name": "tests",
-      "qualifyingSourceCommits": 41,
+      "qualifyingSourceCommits": 42,
       "rebaseline": null
     }
   ],
@@ -266,13 +266,8 @@
         "path": ".github/workflows/ci.yml"
       },
       {
-        "commits": 2,
-        "lines": 128,
-        "path": ".github/workflows/hf-newsletter.yml"
-      },
-      {
         "commits": 1,
-        "lines": 118,
+        "lines": 135,
         "path": ".github/workflows/newsletter-publish.yml"
       },
       {
@@ -301,8 +296,8 @@
         "path": ".polyglot-terms.json"
       },
       {
-        "commits": 584,
-        "lines": 3419,
+        "commits": 583,
+        "lines": 3417,
         "path": "CHANGELOG.md"
       },
       {
@@ -451,8 +446,8 @@
         "path": "agent_ab_harness}/shakedown-2/RC03-B2.jsonl"
       },
       {
-        "commits": 41,
-        "lines": 948,
+        "commits": 42,
+        "lines": 985,
         "path": "atlas/README.md"
       },
       {
@@ -461,18 +456,18 @@
         "path": "atlas/boundaries.yaml"
       },
       {
-        "commits": 41,
-        "lines": 3218,
+        "commits": 42,
+        "lines": 3355,
         "path": "atlas/page.json"
       },
       {
-        "commits": 41,
-        "lines": 12426,
+        "commits": 42,
+        "lines": 12673,
         "path": "atlas/statistics.json"
       },
       {
-        "commits": 41,
-        "lines": 21624,
+        "commits": 42,
+        "lines": 22425,
         "path": "atlas/structure.json"
       },
       {
@@ -5021,11 +5016,6 @@
         "path": "mcptoolshop_rnd}/store.py"
       },
       {
-        "commits": 1,
-        "lines": 169,
-        "path": "newsletter_publish.py}"
-      },
-      {
         "commits": 5,
         "lines": 63,
         "path": "pyproject.toml"
@@ -5527,8 +5517,8 @@
       },
       {
         "commits": 1,
-        "lines": 279,
-        "path": "site/scripts/hf_newsletter_sync.py"
+        "lines": 412,
+        "path": "site/scripts/newsletter_publish.py"
       },
       {
         "commits": 1,
@@ -5691,8 +5681,8 @@
         "path": "site/src/content/docs/handbook/model-comparisons.md"
       },
       {
-        "commits": 3,
-        "lines": 47,
+        "commits": 2,
+        "lines": 45,
         "path": "site/src/content/docs/handbook/newsletter-issues.md"
       },
       {
@@ -5917,11 +5907,6 @@
       },
       {
         "commits": 1,
-        "lines": 65,
-        "path": "test_newsletter_publish.py}"
-      },
-      {
-        "commits": 1,
         "lines": 0,
         "path": "tests/__init__.py"
       },
@@ -6136,11 +6121,6 @@
         "path": "tests/test_e4b_charts.py"
       },
       {
-        "commits": 1,
-        "lines": 142,
-        "path": "tests/test_hf_newsletter_sync.py"
-      },
-      {
         "commits": 2,
         "lines": 314,
         "path": "tests/test_layout.py"
@@ -6159,6 +6139,11 @@
         "commits": 1,
         "lines": 123,
         "path": "tests/test_math_ladder_properties.py"
+      },
+      {
+        "commits": 1,
+        "lines": 210,
+        "path": "tests/test_newsletter_publish.py"
       },
       {
         "commits": 3,
@@ -6216,17 +6201,17 @@
     "level": "low",
     "reason": "fewer than 25 source files reach 10 revisions in the window"
   },
-  "generatedAt": "2026-10-25T19:44:32.974Z",
+  "generatedAt": "2026-10-25T20:07:20.999Z",
   "generatedFrom": {
-    "commit": "caae8cbbb866d47d54e4f9ad5e52055f5c3167c1"
+    "commit": "50b42f15451f139070088a1158eb56265995550d"
   },
   "pairs": [
     {
       "a": "CHANGELOG.md",
       "b": "mcptoolshop_rnd/__init__.py",
-      "either": 544,
+      "either": 543,
       "shared": 512,
-      "strength": 0.941176
+      "strength": 0.94291
     },
     {
       "a": "README.es.md",
@@ -6378,43 +6363,43 @@
     {
       "a": "atlas/README.md",
       "b": "atlas/page.json",
-      "either": 36,
-      "shared": 36,
+      "either": 37,
+      "shared": 37,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/statistics.json",
-      "either": 36,
-      "shared": 36,
+      "either": 37,
+      "shared": 37,
       "strength": 1
     },
     {
       "a": "atlas/README.md",
       "b": "atlas/structure.json",
-      "either": 36,
-      "shared": 36,
+      "either": 37,
+      "shared": 37,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/statistics.json",
-      "either": 36,
-      "shared": 36,
+      "either": 37,
+      "shared": 37,
       "strength": 1
     },
     {
       "a": "atlas/page.json",
       "b": "atlas/structure.json",
-      "either": 36,
-      "shared": 36,
+      "either": 37,
+      "shared": 37,
       "strength": 1
     },
     {
       "a": "atlas/statistics.json",
       "b": "atlas/structure.json",
-      "either": 36,
-      "shared": 36,
+      "either": 37,
+      "shared": 37,
       "strength": 1
     },
     {
@@ -6533,16 +6518,16 @@
     "floor": "fallen",
     "floorHeld": false,
     "floorTrigger": "revision-depth",
-    "headDate": "2026-10-25T15:44:19-04:00",
+    "headDate": "2026-10-25T15:59:44-04:00",
     "inScopeFiles": 1157,
     "pinnedStart": null,
     "priorFloor": "fallen",
-    "qualifyingCommits": 607,
+    "qualifyingCommits": 606,
     "qualifyingMinimum": 30,
     "revisions": 5,
     "shared": 10,
     "sharedFloorUsed": 3,
-    "since": "2026-04-28T19:44:19.000Z",
+    "since": "2026-04-28T19:59:44.000Z",
     "sourceExtensions": [
       ".js",
       ".mjs",

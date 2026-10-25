@@ -1,9 +1,12 @@
-"""Publish the rnd newsletter: to Hugging Face as the dataset mcp-tool-shop/rnd-newsletter, and to npm as
-@rnd-news/newsletter. One builder, two uploads, run by .github/workflows/newsletter-publish.yml.
+"""Publish the rnd newsletter: to Hugging Face as the dataset mcp-tool-shop/rnd-newsletter, to npm as
+@rnd-news/newsletter, to PyPI as mcptoolshop-rnd-newsletter, and as one GitHub release per new issue. One builder,
+run by .github/workflows/newsletter-publish.yml.
 
   python site/scripts/newsletter_publish.py build --out nl-out                  # no secrets
   python site/scripts/newsletter_publish.py upload --out nl-out                 # HF_TOKEN + huggingface_hub
   python site/scripts/newsletter_publish.py npm-plan --out nl-out --pkg nl-pkg  # reads npm, writes the package
+  python site/scripts/newsletter_publish.py pypi-plan --out nl-out --pkg nl-pypi --version 1.N.R   # reads PyPI
+  python site/scripts/newsletter_publish.py releases --out nl-out               # GH_TOKEN + SOURCE_SHA; gh CLI
 
 The build reads only published issues: site/src/content/docs/newsletter/issue-*.md on the checked-out commit, with
 an integer `issue` in the front matter and no `draft: true`. Drafts and held articles live outside this repository,
@@ -41,7 +44,9 @@ import hashlib
 import re
 import subprocess
 import sys
+import urllib.error
 import urllib.parse
+import urllib.request
 
 REPO_ID = "mcp-tool-shop/rnd-newsletter"
 SITE = "https://mcp-tool-shop-org.github.io/rnd/"
@@ -357,6 +362,182 @@ def npm_published(name: str = NPM_NAME) -> dict[str, str | None]:  # pragma: no 
     return found
 
 
+PYPI_NAME = "mcptoolshop-rnd-newsletter"
+PYPI_IMPORT = "rnd_newsletter"
+SETUPTOOLS_PIN = "setuptools==80.9.0"
+
+PYPI_INIT = '''"""The rnd newsletter of mcp-tool-shop: every published issue, as data.
+
+    import rnd_newsletter
+    rnd_newsletter.latest()["title"]
+    rnd_newsletter.issue(30)["url"]
+    [i["issue"] for i in rnd_newsletter.issues()]
+
+Each issue is a dict with issue, date, title, description, highlights, url and body_markdown. The Markdown pages are
+also in the package, under rnd_newsletter/data/issues/.
+"""
+from __future__ import annotations
+
+import json
+from importlib.resources import files
+
+__version__ = "{version}"
+__all__ = ["issues", "issue", "latest", "__version__"]
+
+
+def issues() -> list[dict]:
+    """Every published issue, oldest first."""
+    text = files(__name__).joinpath("data", "issues.jsonl").read_text(encoding="utf-8")
+    return [json.loads(line) for line in text.splitlines() if line.strip()]
+
+
+def issue(number: int) -> dict:
+    """One issue by its number; KeyError if there is no published issue with that number."""
+    for entry in issues():
+        if entry["issue"] == number:
+            return entry
+    raise KeyError(f"no published issue {{number}}")
+
+
+def latest() -> dict:
+    """The newest published issue."""
+    return issues()[-1]
+'''
+
+
+def build_pypi(out: pathlib.Path, pkg: pathlib.Path, version: str, license_text: str) -> None:
+    """Assemble the pure-data Python package from a built folder: pyproject.toml, README, LICENSE and the data."""
+    rows = [json.loads(line) for line in (out / "data" / "issues.jsonl").read_text(encoding="utf-8").splitlines()]
+    src = pkg / "src" / PYPI_IMPORT
+    (src / "data" / "issues").mkdir(parents=True, exist_ok=True)
+    for page in sorted((out / "issues").glob("*.md")):
+        (src / "data" / "issues" / page.name).write_bytes(page.read_bytes())
+    (src / "data" / "issues.jsonl").write_bytes((out / "data" / "issues.jsonl").read_bytes())
+    (src / "__init__.py").write_bytes(PYPI_INIT.format(version=version).encode("utf-8"))
+    (pkg / "LICENSE").write_bytes(license_text.encode("utf-8"))
+    readme = npm_readme(rows)
+    readme = readme[:readme.index("## Load it")] + (
+        "## Load it\n\n"
+        "```python\n"
+        "import rnd_newsletter\n\n"
+        "rnd_newsletter.latest()        # the newest issue, a dict\n"
+        "rnd_newsletter.issue(30)       # one issue by number\n"
+        "rnd_newsletter.issues()        # every issue, oldest first\n"
+        "```\n\n"
+        "No dependencies; Python 3.10 or newer. The same data is on Hugging Face as "
+        f"[{REPO_ID}](https://huggingface.co/datasets/{REPO_ID}) and on npm as `{NPM_NAME}`.\n\n"
+    ) + readme[readme.index("## Licence and author"):]
+    readme = readme.replace("This package mirrors", "This package mirrors").replace(
+        "- `index.json`: the package's main export, one entry per issue without its body.\n", "")
+    (pkg / "README.md").write_bytes(readme.encode("utf-8"))
+    pyproject = f'''[build-system]
+requires = ["{SETUPTOOLS_PIN}"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "{PYPI_NAME}"
+version = "{version}"
+description = "The research newsletter of mcp-tool-shop: every published issue as data."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{{ name = "{STUDIO}" }}]
+keywords = ["newsletter", "research", "machine-learning", "dataset"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "{SITE}newsletter/"
+Source = "https://github.com/mcp-tool-shop-org/rnd"
+"Hugging Face" = "https://huggingface.co/datasets/{REPO_ID}"
+npm = "https://www.npmjs.com/package/{NPM_NAME}"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+{PYPI_IMPORT} = ["data/issues.jsonl", "data/issues/*.md"]
+'''
+    (pkg / "pyproject.toml").write_bytes(pyproject.encode("utf-8"))
+
+
+def pypi_has(version: str, name: str = PYPI_NAME) -> bool:  # pragma: no cover - network
+    """Whether PyPI already has this version (its JSON API; a 404 means not published)."""
+    url = f"https://pypi.org/pypi/{name}/{version}/json"
+    try:
+        with urllib.request.urlopen(url, timeout=30) as response:  # noqa: S310 - fixed https URL
+            return response.status == 200
+    except urllib.error.HTTPError as exc:
+        if exc.code == 404:
+            return False
+        raise BuildError(f"PyPI lookup for {version} failed: HTTP {exc.code}") from exc
+    except OSError as exc:
+        raise BuildError(f"PyPI lookup for {version} failed: {exc}") from exc
+
+
+FIRST_RELEASED_ISSUE = 30  # issues 1-29 get no GitHub release unless that is decided separately
+
+
+def release_tag(stem: str) -> str:
+    """The GitHub release tag for an issue page stem: issue-30 -> newsletter-issue-30. Never a tool version tag."""
+    return f"newsletter-{stem}"
+
+
+def release_notes(row: dict) -> str:
+    """The release body: the description, the highlights as plain-text bullets, and where to read it."""
+    stem = row["url"].rstrip("/").rsplit("/", 1)[1]
+    plain = [re.sub(r"<[^>]+>", "", h).strip() for h in row["highlights"]]
+    lines = [row["description"], ""]
+    lines += [f"- {h}" for h in plain]
+    lines += [
+        "",
+        f"- **Read it:** {row['url']}",
+        f"- **Hugging Face:** https://huggingface.co/datasets/{REPO_ID}",
+        f"- **npm:** https://www.npmjs.com/package/{NPM_NAME}",
+        f"- **PyPI:** https://pypi.org/project/{PYPI_NAME}/",
+        "",
+        f"The issue's Markdown is attached as `{stem}.md`. Issue {row['issue']}, {row['date']}, by {STUDIO}.",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def releases_due(rows: list[dict], existing: set[str], first: int = FIRST_RELEASED_ISSUE) -> list[dict]:
+    """Issues from `first` on that have no release yet, oldest first. Each entry: tag, title, notes, stem."""
+    due = []
+    for row in rows:
+        stem = row["url"].rstrip("/").rsplit("/", 1)[1]
+        tag = release_tag(stem)
+        if row["issue"] >= first and tag not in existing:
+            due.append({"tag": tag, "title": row["title"], "notes": release_notes(row), "stem": stem})
+    return due
+
+
+def github_releases(out: pathlib.Path, target: str) -> list[str]:  # pragma: no cover - network
+    """Create the GitHub release for each issue that is due. Returns the tags created."""
+    rows = [json.loads(line) for line in (out / "data" / "issues.jsonl").read_text(encoding="utf-8").splitlines()]
+    listed = subprocess.run(["gh", "release", "list", "--limit", "1000", "--json", "tagName"],
+                            capture_output=True, text=True)
+    if listed.returncode != 0:
+        raise BuildError(f"gh release list failed: {listed.stderr.strip()[:300]}")
+    existing = {r["tagName"] for r in json.loads(listed.stdout or "[]")}
+    created = []
+    for item in releases_due(rows, existing):
+        notes = out / f"{item['stem']}.release-notes.md"
+        notes.write_text(item["notes"], encoding="utf-8")
+        made = subprocess.run(
+            ["gh", "release", "create", item["tag"], str(out / "issues" / f"{item['stem']}.md"),
+             "--target", target, "--title", item["title"], "--notes-file", str(notes), "--latest=false"],
+            capture_output=True, text=True)
+        if made.returncode != 0:
+            raise BuildError(f"gh release create {item['tag']} failed: {made.stderr.strip()[:300]}")
+        created.append(item["tag"])
+    return created
+
+
 def upload(out: pathlib.Path, token: str) -> str | None:  # pragma: no cover - network
     """One commit with every file in out; files no longer built are deleted from the repo. Returns the commit url."""
     from huggingface_hub import HfApi
@@ -376,15 +557,38 @@ def upload(out: pathlib.Path, token: str) -> str | None:  # pragma: no cover - n
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n", 1)[0])
-    parser.add_argument("step", choices=("build", "upload", "npm-plan"))
+    parser.add_argument("step", choices=("build", "upload", "npm-plan", "pypi-package", "pypi-plan", "releases"))
     parser.add_argument("--out", type=pathlib.Path, default=pathlib.Path("nl-out"))
     parser.add_argument("--pkg", type=pathlib.Path, default=pathlib.Path("nl-pkg"))
+    parser.add_argument("--version", help="pypi steps: the version npm planned, 1.<issue>.<revision>")
     args = parser.parse_args(argv)
     try:
         if args.step == "build":
             rows = build(args.out)
             print(f"built {len(rows)} issues into {args.out}")
             return 0
+        if args.step == "releases":  # pragma: no cover - network
+            target = os.environ.get("SOURCE_SHA", "")
+            if not re.fullmatch(r"[0-9a-f]{40}", target):
+                raise BuildError("SOURCE_SHA must be the 40-hex commit the issues were built from")
+            created = github_releases(args.out, target)
+            print(f"GitHub releases created at rnd {target}: {', '.join(created) or 'none due'}")
+            return 0
+        if args.step in ("pypi-package", "pypi-plan"):
+            if not args.version or not re.fullmatch(r"1\.\d+\.\d+", args.version):
+                raise BuildError(f"--version must be 1.<issue>.<revision>, got {args.version!r}")
+            build_pypi(args.out, args.pkg, args.version, (ROOT / "LICENSE").read_text(encoding="utf-8"))
+            if args.step == "pypi-package":
+                print(f"{PYPI_NAME} {args.version} assembled in {args.pkg}")
+                return 0
+            publish = not pypi_has(args.version)  # pragma: no cover - network
+            source = os.environ.get("SOURCE_SHA", "unknown")  # pragma: no cover - network
+            print(f"{PYPI_NAME} {args.version} from rnd {source}: "  # pragma: no cover - network
+                  f"{'publish' if publish else 'already on PyPI, skip'}")
+            if os.environ.get("GITHUB_OUTPUT"):  # pragma: no cover - network
+                with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
+                    fh.write(f"publish={'true' if publish else 'false'}\n")
+            return 0  # pragma: no cover - network
         if args.step == "npm-plan":  # pragma: no cover - network
             rows = [json.loads(x) for x in (args.out / "data" / "issues.jsonl").read_text(encoding="utf-8").splitlines()]
             version, publish = plan_version(rows[-1]["issue"], npm_published(), content_digest(args.out))

@@ -33,6 +33,10 @@ concurrency:
 
 jobs:
   pypi:
+    # A newsletter-issue-NN release (newsletter-publish.yml) must not even start this job, so it never enters the pypi
+    # environment or receives an OIDC token. Expressions have no regex, so this checks the v prefix; the guard step
+    # below checks the exact tool version form.
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.event.release.tag_name, 'v')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment: pypi

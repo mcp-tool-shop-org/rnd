@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.32] - 2026-10-24
+
+- licences: six C2 sweep models read at source (phi3.5, nomic-embed, bge-base, bge-reranker, nli-deberta, Qwen3-Embedding)
+
 ## [1.1.23.1.31] - 2026-10-23
 
 - newsletter: issue 28 (#220); the RSS feed, its CI check and the zod pin (#221-#223); the issue 28 correction with

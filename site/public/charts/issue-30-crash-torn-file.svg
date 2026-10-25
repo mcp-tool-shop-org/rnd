@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 300" font-family="system-ui, sans-serif" font-size="14" role="img" aria-label="Two-lane process diagram comparing the old code and the fixed code on the same torn file of 36,498 events plus a 328-byte fragment: the old code glues the first of 60 new events onto the fragment, loses 1 event at 36,557 loaded, breaks the chain at position 36,500, and refuses to open; the fixed code writes a newline first, loads all 36,558 events with 0 gaps, and opens cleanly.">
+  <rect width="688" height="300" fill="#ffffff"/>
+
+  <text x="344" y="30" text-anchor="middle" font-size="15" font-weight="600" fill="#1f2430">Resuming the same torn log: the old code vs the fixed code</text>
+  <text x="344" y="48" text-anchor="middle" font-size="12" fill="#5b6272">Start file: 36,498 valid events from the killed VM + 328 bytes of a 657-byte line (no newline)</text>
+
+  <!-- Shared input box (x=24..168) -->
+  <rect x="24" y="96" width="144" height="128" rx="4" fill="#ffffff" stroke="#1f2430" stroke-width="1.5"/>
+  <text x="96" y="120" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1f2430">Torn store file</text>
+  <text x="96" y="142" text-anchor="middle" font-size="11.5" fill="#1f2430">36,498 valid events</text>
+  <text x="96" y="162" text-anchor="middle" font-size="11.5" font-weight="600" fill="#b4532a">+ 328-byte tear</text>
+  <text x="96" y="180" text-anchor="middle" font-size="11" fill="#5b6272">of a 657-byte line</text>
+  <text x="96" y="196" text-anchor="middle" font-size="11" fill="#5b6272">(no line ending)</text>
+
+  <!-- Connectors from start box to the two lanes -->
+  <path d="M 168 136 L 180 136 L 180 109 L 192 109" fill="none" stroke="#b4532a" stroke-width="1.5"/>
+  <polygon points="189,105 195,109 189,113" fill="#b4532a"/>
+  <path d="M 168 184 L 180 184 L 180 211 L 192 211" fill="none" stroke="#2f7d5b" stroke-width="1.5"/>
+  <polygon points="189,207 195,211 189,215" fill="#2f7d5b"/>
+
+  <!-- Top lane: Old code -->
+  <rect x="196" y="66" width="218" height="86" rx="4" fill="#ffffff" stroke="#b4532a" stroke-width="1.5"/>
+  <text x="305" y="86" text-anchor="middle" font-size="12.5" font-weight="600" fill="#b4532a">Old code: resume + add 60</text>
+  <text x="305" y="106" text-anchor="middle" font-size="11.5" fill="#1f2430">Skips 1 tear (36,498 loaded)</text>
+  <text x="305" y="124" text-anchor="middle" font-size="11.5" font-weight="600" fill="#b4532a">Glues event 1 onto torn line</text>
+  <text x="305" y="141" text-anchor="middle" font-size="11" fill="#5b6272">No newline written before append</text>
+
+  <line x1="414" y1="109" x2="434" y2="109" stroke="#b4532a" stroke-width="1.5"/>
+  <polygon points="431,105 437,109 431,113" fill="#b4532a"/>
+
+  <rect x="438" y="66" width="226" height="86" rx="4" fill="#b4532a"/>
+  <text x="551" y="86" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff">Next open: refuses to open</text>
+  <text x="551" y="106" text-anchor="middle" font-size="11.5" fill="#ffffff">Glued line skipped (1 lost)</text>
+  <text x="551" y="124" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">36,557 loaded · breaks at 36,500</text>
+  <text x="551" y="141" text-anchor="middle" font-size="11" fill="#ffffff">1 gap · previous hash mismatch</text>
+
+  <!-- Bottom lane: Fixed code -->
+  <rect x="196" y="168" width="218" height="86" rx="4" fill="#ffffff" stroke="#2f7d5b" stroke-width="1.5"/>
+  <text x="305" y="188" text-anchor="middle" font-size="12.5" font-weight="600" fill="#2f7d5b">Fixed code: resume + add 60</text>
+  <text x="305" y="208" text-anchor="middle" font-size="11.5" fill="#1f2430">Skips 1 tear (36,498 loaded)</text>
+  <text x="305" y="226" text-anchor="middle" font-size="11.5" font-weight="600" fill="#2f7d5b">Writes a newline before event 1</text>
+  <text x="305" y="243" text-anchor="middle" font-size="11" fill="#5b6272">Fragment stays on its own line</text>
+
+  <line x1="414" y1="211" x2="434" y2="211" stroke="#2f7d5b" stroke-width="1.5"/>
+  <polygon points="431,207 437,211 431,215" fill="#2f7d5b"/>
+
+  <rect x="438" y="168" width="226" height="86" rx="4" fill="#2f7d5b"/>
+  <text x="551" y="188" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff">Next open: opens cleanly</text>
+  <text x="551" y="208" text-anchor="middle" font-size="11.5" fill="#ffffff">Only fragment skipped (0 lost)</text>
+  <text x="551" y="226" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">36,558 loaded · chain valid</text>
+  <text x="551" y="243" text-anchor="middle" font-size="11" fill="#ffffff">0 gaps · 0 duplicate ids</text>
+
+  <text x="344" y="278" text-anchor="middle" font-size="12" fill="#5b6272">Run on our own machine at 0 Colab units; the fix shipped in Attestia 2.1.2.</text>
+</svg>

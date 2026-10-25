@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 320" font-family="system-ui, sans-serif" font-size="14" role="img" aria-label="Line chart and zoomed callout of events across the hard kill at 3,654 seconds and the resume 56 seconds later, from 0 to 36,516 on the first machine, stepping back 18 events to the 36,498-event copy, and rising to 63,498 events on the second machine.">
+  <rect width="688" height="320" fill="#ffffff"/>
+
+  <text x="344" y="30" text-anchor="middle" font-size="15" font-weight="600" fill="#1f2430">Events across the hard kill on machine 1 and the resume on machine 2</text>
+  <text x="344" y="48" text-anchor="middle" font-size="12" fill="#5b6272">10 events/s: 36,498 kept in the last 60 s copy, at least 18 lost at the kill, 27,000 added after 56 s</text>
+
+  <!-- Left panel: full run timeline (x=24..440) -->
+  <rect x="24" y="62" width="416" height="220" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5"/>
+  <text x="38" y="82" font-size="12.5" font-weight="600" fill="#1f2430">Head position across both machines (0 to 63,498)</text>
+
+  <!-- Horizontal reference lines -->
+  <line x1="88" y1="94.0" x2="422" y2="94.0" stroke="#8a8f98" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="88" y1="156.9" x2="422" y2="156.9" stroke="#8a8f98" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="88" y1="242" x2="422" y2="242" stroke="#8a8f98" stroke-width="1.5"/>
+
+  <!-- Y axis labels -->
+  <text x="80" y="98" text-anchor="end" font-size="11.5" font-weight="600" fill="#2f7d5b">63,498</text>
+  <text x="80" y="161" text-anchor="end" font-size="11.5" font-weight="600" fill="#1f2430">36,498</text>
+  <text x="80" y="245" text-anchor="end" font-size="11.5" fill="#5b6272">0</text>
+
+  <!-- Gap shading and kill/resume vertical markers -->
+  <rect x="273" y="90" width="12" height="152" fill="#1f2430" opacity="0.10"/>
+  <line x1="273" y1="90" x2="273" y2="242" stroke="#b4532a" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="285" y1="90" x2="285" y2="242" stroke="#2f7d5b" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Phase A and Phase B trajectories -->
+  <polyline fill="none" stroke="#1f2430" stroke-width="2.5" points="88.0,242.0 88.3,241.9 94.4,239.1 100.5,236.2 106.7,233.4 112.8,230.6 118.9,227.8 125.1,224.9 131.2,222.1 137.4,219.3 143.6,216.4 149.7,213.6 155.9,210.7 162.0,207.9 168.2,205.1 174.4,202.2 180.6,199.4 186.7,196.5 192.9,193.7 199.1,190.9 205.3,188.0 211.5,185.2 217.6,182.3 223.8,179.5 230.0,176.6 236.2,173.8 242.4,170.9 248.6,168.1 254.8,165.2 261.0,162.4 267.2,159.5 273.0,156.9"/>
+  <polyline fill="none" stroke="#2f7d5b" stroke-width="2.5" points="285.0,156.9 285.3,156.8 290.4,154.4 295.6,152.1 300.8,149.7 305.9,147.3 311.1,144.9 316.3,142.6 321.5,140.2 326.6,137.8 331.8,135.4 337.0,133.1 342.1,130.7 347.3,128.3 352.5,125.9 357.7,123.6 362.8,121.2 368.0,118.8 373.2,116.4 378.4,114.0 383.5,111.7 388.7,109.3 393.9,106.9 399.1,104.5 404.2,102.2 409.4,99.8 414.6,97.4 419.8,95.0 422.0,94.0"/>
+
+  <!-- Key points -->
+  <circle cx="273" cy="156.9" r="3.5" fill="#b4532a"/>
+  <circle cx="285" cy="156.9" r="3.5" fill="#1f2430"/>
+  <circle cx="422" cy="94.0" r="3.5" fill="#2f7d5b"/>
+
+  <!-- In-plot annotations (placed in open whitespace below each trajectory) -->
+  <text x="100" y="175" font-size="11.5" font-weight="600" fill="#1f2430">Machine 1 (10/s)</text>
+  <text x="100" y="190" font-size="11" fill="#5b6272">719 reports</text>
+  <text x="356" y="182" text-anchor="middle" font-size="11.5" font-weight="600" fill="#2f7d5b">Machine 2 (10/s)</text>
+  <text x="356" y="197" text-anchor="middle" font-size="11" fill="#5b6272">+27,000 (529 reports)</text>
+  <text x="291" y="234" font-size="11" font-weight="600" fill="#b4532a">← 56 s gap</text>
+
+  <!-- X axis labels -->
+  <text x="88" y="260" font-size="11" fill="#5b6272">0 s</text>
+  <text x="273" y="260" text-anchor="middle" font-size="11" font-weight="600" fill="#b4532a">Kill at 3,654 s</text>
+  <text x="422" y="260" text-anchor="end" font-size="11" fill="#5b6272">End (+2,700 s)</text>
+  <text x="255" y="274" text-anchor="middle" font-size="11" fill="#5b6272">Copied off machine 1 every 60 s</text>
+
+  <!-- Right panel: zoomed step-down at the kill (x=452..664) -->
+  <rect x="452" y="62" width="212" height="220" rx="4" fill="#ffffff" stroke="#b4532a" stroke-width="1.5"/>
+  <text x="558" y="82" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1f2430">At the kill (step detail)</text>
+
+  <!-- Box 1: Machine 1 last report -->
+  <rect x="462" y="92" width="192" height="46" rx="4" fill="#ffffff" stroke="#b4532a" stroke-width="1.5"/>
+  <text x="558" y="110" text-anchor="middle" font-size="11.5" font-weight="600" fill="#b4532a">Last report: 36,516 events</text>
+  <text x="558" y="127" text-anchor="middle" font-size="11" fill="#5b6272">1 s before kill at 3,654 s</text>
+
+  <line x1="504" y1="138" x2="504" y2="156" stroke="#b4532a" stroke-width="1.5"/>
+  <polygon points="500,153 508,153 504,159" fill="#b4532a"/>
+  <text x="516" y="152" font-size="11" font-weight="600" fill="#b4532a">at least 18 lost · 56 s gap</text>
+
+  <!-- Box 2: Last 60 s copy -->
+  <rect x="462" y="160" width="192" height="46" rx="4" fill="#ffffff" stroke="#1f2430" stroke-width="1.5"/>
+  <text x="558" y="178" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1f2430">60 s copy: 36,498 valid</text>
+  <text x="558" y="195" text-anchor="middle" font-size="11" fill="#5b6272">0 torn lines · fix did not run</text>
+
+  <line x1="504" y1="206" x2="504" y2="224" stroke="#2f7d5b" stroke-width="1.5"/>
+  <polygon points="500,221 508,221 504,227" fill="#2f7d5b"/>
+  <text x="516" y="220" font-size="11" font-weight="600" fill="#2f7d5b">+27,000 on machine 2</text>
+
+  <!-- Box 3: Machine 2 final store -->
+  <rect x="462" y="228" width="192" height="44" rx="4" fill="#2f7d5b"/>
+  <text x="558" y="246" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Final store: 63,498 valid</text>
+  <text x="558" y="262" text-anchor="middle" font-size="11" fill="#ffffff">0 gaps · 0 duplicate ids</text>
+
+  <text x="344" y="302" text-anchor="middle" font-size="12" fill="#5b6272">Resuming from the 60 s copy kept all 36,498 copied events; at least 18 written after it died with the VM.</text>
+</svg>

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.34] - 2026-10-25
+
+- newsletter: issue 30, the first daily issue; check_feed's 90 KB rule; handbook page on newsletter issues
+
 ## [1.1.23.1.33] - 2026-10-25
 
 - licences: Qwen3.6-35B-A3B and Granite 4.2 8B for pilot B (outside check by hand, 2026-10-25)

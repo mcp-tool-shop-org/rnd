@@ -174,6 +174,27 @@
     "width": 1200,
     "height": 537
   },
+  "issue-30-crash-kill-resume.svg": {
+    "png": "issue-30-crash-kill-resume.png",
+    "png_sha256": "9cedfe5d1b0902c87cc2bd0f03298175b82a89a8ae4b68ecfb71c94f86fef8af",
+    "svg_sha256": "f591fb6735a729b89969e82321f187491e464b027d0d97f26c48d3025ee60432",
+    "width": 1200,
+    "height": 558
+  },
+  "issue-30-crash-torn-file.svg": {
+    "png": "issue-30-crash-torn-file.png",
+    "png_sha256": "99375b6bea34d3c55abe477efde39df0dadfb6085f522b8162418e37189def3c",
+    "svg_sha256": "ea10266045ae9a50b113a65f9d25f289d5fd2600bd1eea6d73db16f8a2bc25b9",
+    "width": 1200,
+    "height": 523
+  },
+  "issue-30-lab-pilot-map.svg": {
+    "png": "issue-30-lab-pilot-map.png",
+    "png_sha256": "34141c7b7f7b8ad5f5bbce5cbec5fd51b00ce1cb2867b2ce035d8a84da74a299",
+    "svg_sha256": "c90b30f7bb717aebcece7126e0f55c5bd26d3f9cc4448cd28736002871576922",
+    "width": 1200,
+    "height": 579
+  },
   "loop-repeats.svg": {
     "png": "loop-repeats.png",
     "png_sha256": "f7527ae4d3ec14612ffea5b9fafd1f68c1bba4d89e99aae489192b50836155d3",

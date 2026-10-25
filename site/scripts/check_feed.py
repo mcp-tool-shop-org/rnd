@@ -28,8 +28,7 @@ NS = {"content": "http://purl.org/rss/1.0/modules/content/", "dc": "http://purl.
 
 here = pathlib.Path(__file__).resolve().parent.parent
 feed = here / "dist" / "newsletter" / "rss.xml"
-issues = sorted((here / "src" / "content" / "docs" / "newsletter").glob("issue-*.md"))
-errors = []
+NEWSLETTER = here / "src" / "content" / "docs" / "newsletter"
 dist = here / "dist"
 # Top-level folders of this site's build; a host URL starting with one of them has lost its /rnd base.
 TOP_LEVEL = {p.name for p in dist.iterdir()} if dist.is_dir() else set()
@@ -69,70 +68,102 @@ def chart_errors() -> list[str]:
     return found
 
 
-if "--charts-only" in sys.argv[1:]:
-    errors = chart_errors()
+def is_draft(page: pathlib.Path) -> bool:
+    """True when an issue file's front matter says draft: true. A draft must never reach the feed, which is also the
+    email edition: Buttondown sends every new feed item to subscribers."""
+    text = page.read_text(encoding="utf-8").replace("\r\n", "\n")
+    if not text.startswith("---\n"):
+        return False
+    end = text.find("\n---\n", 4)
+    front = text[4:end] if end >= 0 else ""
+    return re.search(r"^draft:\s*true\s*$", front, re.MULTILINE) is not None
+
+
+def published_pages(newsletter: pathlib.Path = NEWSLETTER) -> tuple[list[pathlib.Path], list[pathlib.Path]]:
+    """The newsletter's issue files, split into (published, drafts)."""
+    pages = sorted(newsletter.glob("issue-*.md"))
+    return [p for p in pages if not is_draft(p)], [p for p in pages if is_draft(p)]
+
+
+def draft_errors(item_links: list[str], drafts: list[pathlib.Path]) -> list[str]:
+    """One error per draft issue that the feed carries."""
+    links = {link.rstrip("/") for link in item_links}
+    return [f"{d.name} is a draft but is in the feed, so it would be emailed"
+            for d in drafts if f"{SITE}newsletter/{d.stem}" in links]
+
+
+def main() -> None:
+    errors: list[str] = []
+    if "--charts-only" in sys.argv[1:]:
+        errors = chart_errors()
+        if errors:
+            print("check_feed: FAIL", *errors, sep="\n  ")
+            sys.exit(1)
+        print("check_feed: OK, every chart has its current PNG")
+        sys.exit(0)
+
+    if not feed.is_file():
+        sys.exit(f"check_feed: {feed} is missing; run the build first")
+    try:
+        channel = ET.parse(feed).getroot().find("channel")
+    except ET.ParseError as e:
+        sys.exit(f"check_feed: rss.xml doesn't parse: {e}")
+
+    items = channel.findall("item")
+    issues, drafts = published_pages()
+    if len(items) != len(issues):
+        errors.append(f"{len(items)} feed items, but {len(issues)} published issue files")
+    errors += draft_errors([i.findtext("link") or "" for i in items], drafts)
+    # The feed names its author only as the studio, in dc:creator; it carries no address fields at all.
+    for tag in ("managingEditor", "webMaster", "author"):
+        if channel.find(tag) is not None or any(i.find(tag) is not None for i in channel.findall("item")):
+            errors.append(f"the feed carries a <{tag}> field; it should name only {STUDIO}, in dc:creator")
+    self_link = channel.find("atom:link", NS)
+    if self_link is None or self_link.get("href") != SITE + "newsletter/rss.xml":
+        errors.append("the atom:link self href isn't the feed's own URL")
+
+    for item in items:
+        title = item.findtext("title") or "(untitled)"
+        if not (item.findtext("link") or "").startswith(SITE):
+            errors.append(f"{title}: link isn't under {SITE}")
+        if (item.findtext("dc:creator", namespaces=NS) or "") != STUDIO:
+            errors.append(f"{title}: dc:creator isn't {STUDIO}")
+        html = item.findtext("content:encoded", namespaces=NS) or ""
+        if len(html) < 200:
+            errors.append(f"{title}: content:encoded is missing or empty")
+        # Gmail clips an email whose HTML passes about 102 KB, and a daily issue holds several articles.
+        size = len(html.encode("utf-8"))
+        if size > MAX_EMAIL_BYTES:
+            errors.append(f"{title}: content is {size} bytes, over {MAX_EMAIL_BYTES}; Gmail would clip the email")
+        for field in ("pubDate", "description"):
+            if not (item.findtext(field) or "").strip():
+                errors.append(f"{title}: <{field}> is missing or empty")
+        for url in re.findall(r'(?:href|src)="([^"]*)"', html):
+            if not url.startswith(("https://", "http://", "mailto:")):
+                errors.append(f"{title}: relative URL in content: {url}")
+            # A link to this site that misses the /rnd base, or names a page or file the build didn't make, is broken.
+            elif url.startswith(HOST) and not url.startswith(SITE) and url.split("/")[3] in TOP_LEVEL:
+                errors.append(f"{title}: link to this site without the /rnd base: {url}")
+            elif url.startswith(SITE) and not built(url):
+                errors.append(f"{title}: links to a page or file the build didn't make: {url}")
+        # The feed is also the email edition (Buttondown): classless <div>s can error in its editor, and class names do
+        # nothing in email, where styles must be inline.
+        if re.search(r"<div[\s>]", html):
+            errors.append(f"{title}: content has a <div>; email HTML should carry none")
+        if " class=" in html:
+            errors.append(f"{title}: content has a class attribute; email styles must be inline")
+        # Gmail and Outlook don't show SVG images.
+        for src in re.findall(r'<img[^>]*\ssrc="([^"]*)"', html):
+            if urllib.parse.urlsplit(src).path.lower().endswith(".svg"):
+                errors.append(f"{title}: image is an SVG, which email clients don't show: {src}")
+
+    errors += chart_errors()
+
     if errors:
         print("check_feed: FAIL", *errors, sep="\n  ")
         sys.exit(1)
-    print("check_feed: OK, every chart has its current PNG")
-    sys.exit(0)
+    print(f"check_feed: OK, {len(items)} items, one per published issue file; {len(drafts)} drafts left out")
 
-if not feed.is_file():
-    sys.exit(f"check_feed: {feed} is missing; run the build first")
-try:
-    channel = ET.parse(feed).getroot().find("channel")
-except ET.ParseError as e:
-    sys.exit(f"check_feed: rss.xml doesn't parse: {e}")
 
-items = channel.findall("item")
-if len(items) != len(issues):
-    errors.append(f"{len(items)} feed items, but {len(issues)} issue files")
-# The feed names its author only as the studio, in dc:creator; it carries no address fields at all.
-for tag in ("managingEditor", "webMaster", "author"):
-    if channel.find(tag) is not None or any(i.find(tag) is not None for i in channel.findall("item")):
-        errors.append(f"the feed carries a <{tag}> field; it should name only {STUDIO}, in dc:creator")
-self_link = channel.find("atom:link", NS)
-if self_link is None or self_link.get("href") != SITE + "newsletter/rss.xml":
-    errors.append("the atom:link self href isn't the feed's own URL")
-
-for item in items:
-    title = item.findtext("title") or "(untitled)"
-    if not (item.findtext("link") or "").startswith(SITE):
-        errors.append(f"{title}: link isn't under {SITE}")
-    if (item.findtext("dc:creator", namespaces=NS) or "") != STUDIO:
-        errors.append(f"{title}: dc:creator isn't {STUDIO}")
-    html = item.findtext("content:encoded", namespaces=NS) or ""
-    if len(html) < 200:
-        errors.append(f"{title}: content:encoded is missing or empty")
-    # Gmail clips an email whose HTML passes about 102 KB, and a daily issue holds several articles.
-    size = len(html.encode("utf-8"))
-    if size > MAX_EMAIL_BYTES:
-        errors.append(f"{title}: content is {size} bytes, over {MAX_EMAIL_BYTES}; Gmail would clip the email")
-    for field in ("pubDate", "description"):
-        if not (item.findtext(field) or "").strip():
-            errors.append(f"{title}: <{field}> is missing or empty")
-    for url in re.findall(r'(?:href|src)="([^"]*)"', html):
-        if not url.startswith(("https://", "http://", "mailto:")):
-            errors.append(f"{title}: relative URL in content: {url}")
-        # A link to this site that misses the /rnd base, or names a page or file the build didn't make, is broken.
-        elif url.startswith(HOST) and not url.startswith(SITE) and url.split("/")[3] in TOP_LEVEL:
-            errors.append(f"{title}: link to this site without the /rnd base: {url}")
-        elif url.startswith(SITE) and not built(url):
-            errors.append(f"{title}: links to a page or file the build didn't make: {url}")
-    # The feed is also the email edition (Buttondown): classless <div>s can error in its editor, and class names do
-    # nothing in email, where styles must be inline.
-    if re.search(r"<div[\s>]", html):
-        errors.append(f"{title}: content has a <div>; email HTML should carry none")
-    if " class=" in html:
-        errors.append(f"{title}: content has a class attribute; email styles must be inline")
-    # Gmail and Outlook don't show SVG images.
-    for src in re.findall(r'<img[^>]*\ssrc="([^"]*)"', html):
-        if urllib.parse.urlsplit(src).path.lower().endswith(".svg"):
-            errors.append(f"{title}: image is an SVG, which email clients don't show: {src}")
-
-errors += chart_errors()
-
-if errors:
-    print("check_feed: FAIL", *errors, sep="\n  ")
-    sys.exit(1)
-print(f"check_feed: OK, {len(items)} items, one per issue file")
+if __name__ == "__main__":
+    main()

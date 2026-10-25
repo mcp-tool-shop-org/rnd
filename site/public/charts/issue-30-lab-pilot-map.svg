@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 332" font-family="system-ui, sans-serif" font-size="14" role="img" aria-label="Slot grid of the 24 cells in the T10 pilot map across 4 quantity misreadings, 2 subjects (lamps and cups), and 3 difficulties (d2, d3, d4): 12 cells are buildable today with 5 items each (60 items total, 48 train and 12 eval), and 12 cells stay in the map at capacity 0.">
+  <rect width="688" height="332" fill="#ffffff"/>
+
+  <text x="344" y="30" text-anchor="middle" font-size="15" font-weight="600" fill="#1f2430">The first pilot map: 24 pre-registered cells for reading a quantity (T10)</text>
+  <text x="344" y="48" text-anchor="middle" font-size="12" fill="#5b6272">12 buildable cells at 5 items each (60 items: 48 train, 12 eval) and 12 cells at capacity 0</text>
+
+  <!-- Subject group headers -->
+  <text x="344" y="72" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1f2430">Lamps (30 items)</text>
+  <line x1="242" y1="77" x2="446" y2="77" stroke="#8a8f98" stroke-width="1"/>
+  <text x="562" y="72" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1f2430">Cups (30 items)</text>
+  <line x1="460" y1="77" x2="664" y2="77" stroke="#8a8f98" stroke-width="1"/>
+
+  <text x="24" y="92" font-size="11.5" font-weight="600" fill="#5b6272">Misreading family</text>
+  <text x="274" y="92" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">d2</text>
+  <text x="344" y="92" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">d3</text>
+  <text x="414" y="92" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">d4</text>
+  <text x="492" y="92" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">d2</text>
+  <text x="562" y="92" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">d3</text>
+  <text x="632" y="92" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">d4</text>
+
+  <text x="24" y="116" font-size="12.5" font-weight="600" fill="#1f2430">Exact read as minimum</text>
+  <text x="24" y="132" font-size="11" fill="#5b6272">exact_read_as_floor · 6 cells</text>
+  <rect x="242" y="100" width="64" height="38" rx="4" fill="#2f7d5b"/>
+  <text x="274" y="117" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">5 items</text>
+  <text x="274" y="131" text-anchor="middle" font-size="11" fill="#ffffff">cap 5</text>
+  <rect x="312" y="100" width="64" height="38" rx="4" fill="#2f7d5b"/>
+  <text x="344" y="117" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">5 items</text>
+  <text x="344" y="131" text-anchor="middle" font-size="11" fill="#ffffff">cap 5</text>
+  <rect x="382" y="100" width="64" height="38" rx="4" fill="#2f7d5b"/>
+  <text x="414" y="117" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">5 items</text>
+  <text x="414" y="131" text-anchor="middle" font-size="11" fill="#ffffff">cap 5</text>
+  <rect x="460" y="100" width="64" height="38" rx="4" fill="#2f7d5b"/>
+  <text x="492" y="117" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">5 items</text>
+  <text x="492" y="131" text-anchor="middle" font-size="11" fill="#ffffff">cap 5</text>
+  <rect x="530" y="100" width="64" height="38" rx="4" fill="#2f7d5b"/>
+  <text x="562" y="117" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">5 items</text>
+  <text x="562" y="131" text-anchor="middle" font-size="11" fill="#ffffff">cap 5</text>
+  <rect x="600" y="100" width="64" height="38" rx="4" fill="#2f7d5b"/>
+  <text x="632" y="117" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">5 items</text>
+  <text x="632" y="131" text-anchor="middle" font-size="11" fill="#ffffff">cap 5</text>
+  <text x="24" y="162" font-size="12.5" font-weight="600" fill="#1f2430">Exact read as maximum</text>
+  <text x="24" y="178" font-size="11" fill="#5b6272">exact_read_as_ceiling · 6 cells</text>
+  <rect x="242" y="146" width="64" height="38" rx="4" fill="#2f7d5b"/>
+  <text x="274" y="163" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">5 items</text>
+  <text x="274" y="177" text-anchor="middle" font-size="11" fill="#ffffff">cap 5</text>
+  <rect x="312" y="146" width="64" height="38" rx="4" fill="#2f7d5b"/>
+  <text x="344" y="163" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">5 items</text>
+  <text x="344" y="177" text-anchor="middle" font-size="11" fill="#ffffff">cap 5</text>
+  <rect x="382" y="146" width="64" height="38" rx="4" fill="#2f7d5b"/>
+  <text x="414" y="163" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">5 items</text>
+  <text x="414" y="177" text-anchor="middle" font-size="11" fill="#ffffff">cap 5</text>
+  <rect x="460" y="146" width="64" height="38" rx="4" fill="#2f7d5b"/>
+  <text x="492" y="163" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">5 items</text>
+  <text x="492" y="177" text-anchor="middle" font-size="11" fill="#ffffff">cap 5</text>
+  <rect x="530" y="146" width="64" height="38" rx="4" fill="#2f7d5b"/>
+  <text x="562" y="163" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">5 items</text>
+  <text x="562" y="177" text-anchor="middle" font-size="11" fill="#ffffff">cap 5</text>
+  <rect x="600" y="146" width="64" height="38" rx="4" fill="#2f7d5b"/>
+  <text x="632" y="163" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">5 items</text>
+  <text x="632" y="177" text-anchor="middle" font-size="11" fill="#ffffff">cap 5</text>
+  <text x="24" y="208" font-size="12.5" font-weight="600" fill="#1f2430">Minimum read as exact</text>
+  <text x="24" y="224" font-size="11" fill="#5b6272">floor_read_as_exact · 6 cells</text>
+  <rect x="242" y="192" width="64" height="38" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="274" y="209" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">0 items</text>
+  <text x="274" y="223" text-anchor="middle" font-size="11" fill="#5b6272">cap 0</text>
+  <rect x="312" y="192" width="64" height="38" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="344" y="209" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">0 items</text>
+  <text x="344" y="223" text-anchor="middle" font-size="11" fill="#5b6272">cap 0</text>
+  <rect x="382" y="192" width="64" height="38" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="414" y="209" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">0 items</text>
+  <text x="414" y="223" text-anchor="middle" font-size="11" fill="#5b6272">cap 0</text>
+  <rect x="460" y="192" width="64" height="38" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="492" y="209" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">0 items</text>
+  <text x="492" y="223" text-anchor="middle" font-size="11" fill="#5b6272">cap 0</text>
+  <rect x="530" y="192" width="64" height="38" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="562" y="209" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">0 items</text>
+  <text x="562" y="223" text-anchor="middle" font-size="11" fill="#5b6272">cap 0</text>
+  <rect x="600" y="192" width="64" height="38" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="632" y="209" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">0 items</text>
+  <text x="632" y="223" text-anchor="middle" font-size="11" fill="#5b6272">cap 0</text>
+  <text x="24" y="254" font-size="12.5" font-weight="600" fill="#1f2430">Maximum read as exact</text>
+  <text x="24" y="270" font-size="11" fill="#5b6272">ceiling_read_as_exact · 6 cells</text>
+  <rect x="242" y="238" width="64" height="38" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="274" y="255" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">0 items</text>
+  <text x="274" y="269" text-anchor="middle" font-size="11" fill="#5b6272">cap 0</text>
+  <rect x="312" y="238" width="64" height="38" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="344" y="255" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">0 items</text>
+  <text x="344" y="269" text-anchor="middle" font-size="11" fill="#5b6272">cap 0</text>
+  <rect x="382" y="238" width="64" height="38" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="414" y="255" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">0 items</text>
+  <text x="414" y="269" text-anchor="middle" font-size="11" fill="#5b6272">cap 0</text>
+  <rect x="460" y="238" width="64" height="38" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="492" y="255" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">0 items</text>
+  <text x="492" y="269" text-anchor="middle" font-size="11" fill="#5b6272">cap 0</text>
+  <rect x="530" y="238" width="64" height="38" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="562" y="255" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">0 items</text>
+  <text x="562" y="269" text-anchor="middle" font-size="11" fill="#5b6272">cap 0</text>
+  <rect x="600" y="238" width="64" height="38" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="632" y="255" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b6272">0 items</text>
+  <text x="632" y="269" text-anchor="middle" font-size="11" fill="#5b6272">cap 0</text>
+
+  <!-- Legend -->
+  <rect x="64" y="286" width="14" height="14" rx="2" fill="#2f7d5b"/>
+  <text x="84" y="297" font-size="11.5" fill="#1f2430">Buildable today: 12 cells × 5 = 60 items</text>
+  <rect x="336" y="286" width="14" height="14" rx="2" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="356" y="297" font-size="11.5" fill="#5b6272">Capacity 0: 12 cells (generator can't build yet)</text>
+
+  <text x="344" y="314" text-anchor="middle" font-size="12" fill="#5b6272">Fixed rules before generation: 1.0 proof rate, 50% passing per class, at most 1 defect in 20.</text>
+</svg>

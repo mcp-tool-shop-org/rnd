@@ -60,7 +60,7 @@ The copy held **36,498 events, all valid**. The new machine carried on writing a
 held **63,498 events: a valid chain, no gaps and no duplicates**. Its first 36,498 events are byte for byte the copy
 it started from, and its first new event links to the copy's last.
 
-<!-- Chart 1 goes here: events across the kill and the resume (Argon visuals, card ew). -->
+![Line chart of events across the hard kill at 3,654 seconds and the resume 56 seconds later, with a step detail beside it. Machine 1 rises at 10 events a second to its last report of 36,516 events, one second before the kill. The last 60-second copy held 36,498 valid events, so at least 18 were lost with the machine. Machine 2 opened that copy 56 seconds later and added 27,000 events to finish at 63,498 valid events, with 0 gaps and 0 duplicate ids](/rnd/charts/issue-30-crash-kill-resume.svg)
 
 ### What the kill didn't test
 
@@ -85,7 +85,7 @@ old code and once with the fixed code, on our own machine.
 - **The fixed code** skipped the fragment, added the same 60 events, and lost none. The chain was valid with no gaps,
   and the store opened again cleanly.
 
-<!-- Chart 2 goes here: the old code and the fixed code on the same torn file (Argon visuals, card ew). -->
+![Two lanes from the same start: a store of 36,498 valid events plus the first 328 bytes of a 657-byte line, with no line ending. The old code skips the tear, adds 60 events, and glues the first one onto the torn line; the next open skips that line too, so 1 event is lost, 36,557 load, the chain breaks at position 36,500, and the store refuses to open. The fixed code writes a line ending before its first event, so only the fragment is skipped, 36,558 load, the chain is valid with 0 gaps, and the store opens](/rnd/charts/issue-30-crash-torn-file.svg)
 
 ### What it cost
 
@@ -142,9 +142,9 @@ The rules for the finished set were fixed before anything is generated:
 - at least half the items passing in each class;
 - a sample of 20 items read by a person, with at most 1 defect.
 
-<!-- Chart 3 (optional) goes here: the pilot map, 24 cells, 12 buildable and 12 at capacity 0 (Argon visuals). -->
+![Grid of the 24 cells in the first pilot map: 4 misreading families by 2 subjects (lamps, cups) by 3 difficulties. The 12 cells for an exact amount read as a minimum or as a maximum are buildable, at 5 items each, 60 items in all (48 train, 12 eval). The 12 cells for a minimum or a maximum read as exact are in the map at capacity 0, because the generator can't build them yet. Fixed rules: a proof rate of 1.0, at least half passing per class, at most 1 defect in a sample of 20](/rnd/charts/issue-30-lab-pilot-map.svg)
 
-### Where it stands
+### Where the lab stands
 
 The repository has a map checker, the project files and their fingerprint, and, as of today, the first part of the
 pilot: the interface every generator follows, and an adapter that drives the studio's existing puzzle generator
@@ -163,7 +163,7 @@ receipt. Where no receipt measures something, we say so.
 | Card | Memory | Rate (units an hour) | Sessions | What went wrong |
 |---|---|---|---|---|
 | A100, 40 GB | 40,960 MiB | 5.3 | 62 or more | 3 sessions lost mid-run on 23 October, plus one machine dropped mid-download and one session pruned earlier; 3 full four-hour windows with no loss |
-| A100, 80 GB | 81,920 MiB | 6.77 | about 8 | 1 session lost after 132 seconds (from 2 windows) |
+| A100, 80 GB | 81,920 MiB | 6.77 | about 8 | 1 session ended at 132 seconds when we stopped it (from 2 windows; the other ran 10,732 seconds clean) |
 | RTX PRO 6000 (G4) | 97,887 MiB | 8.9 | about 9 | none (from 2 windows); one ran 8,680 seconds clean |
 | L4 | 23,034 MiB | 1.54 | about 8 | only one window used it |
 | T4 | not measured | about 1.07, worked out, not read | assigned 6 times | never used |
@@ -180,12 +180,10 @@ On the same job, a critic model checking items:
 - the **RTX PRO 6000** took a median 46.7 seconds a call against the 40 GB A100's 66.5: about 1.4 times as fast, at
   1.68 times the price;
 - the **80 GB A100** ran the model 1.11 times as fast as the 40 GB one, at 1.28 times the price, with identical
-  output on all 178 items compared.
+  output on all 178 calls compared.
 
 So for that job, the cheaper card cost less per result. That holds for that job only. Another model or another size
 can change it.
-
-<!-- Chart 4 (optional) goes here: the cards side by side (Argon visuals). -->
 
 ### What no receipt measures yet
 

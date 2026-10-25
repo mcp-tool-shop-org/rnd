@@ -636,7 +636,11 @@
         "Qwen3.6-35B-A3B",
         "Gemma 4 31B",
         "Granite 4.2",
-        "Qwen2.5-32B"
+        "Qwen2.5-32B",
+        "nomic-ai/nomic-embed-text-v1.5",
+        "BAAI/bge-reranker-v2-m3",
+        "cross-encoder/nli-deberta-v3-base",
+        "Qwen/Qwen3-Embedding-0.6B"
       ],
       "url": "https://www.apache.org/licenses/LICENSE-2.0",
       "page_date": "2004-01",
@@ -1312,6 +1316,168 @@
       "notes": "Read by R&D on 2026-10-23 at the release tag the 1.3.1 and 1.5.1 builds pin (escape-the-valley PR #25, xrpl-camp PR #25).",
       "snapshot_sha256": "a7fae6cb34ec631564f892e475d03e5d8781b78949caf5c54d404d384e30fffe",
       "snapshot_file": "2026-10-23/python-build-standalone-licence.txt"
+    },
+    {
+      "id": "phi-3.5-mini-instruct-licence",
+      "owner": "Microsoft",
+      "kind": "model-licence",
+      "covers": [
+        "phi3.5:3.8b",
+        "microsoft/Phi-3.5-mini-instruct"
+      ],
+      "url": "https://huggingface.co/microsoft/Phi-3.5-mini-instruct/blob/main/LICENSE",
+      "page_date": "2026-05 (archive); LICENSE file undated",
+      "read_date": "2026-10-24",
+      "clauses": [],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "notes": "Plain MIT text with a Microsoft copyright line, no extra terms. Card says it adds no restriction to the licence. Card is saved as phi35-card.txt (sha cab9d7e23368cf9e8ba469e6c9facf2535f4d32eb9381a604d6d6757f9915b94).",
+      "snapshot_sha256": "0ac2c84cb42399031127325c8c5b8f6bb988ff9e2c689d89e56253f834162d3a",
+      "snapshot_file": "2026-10-24/phi-3.5-mini-instruct-licence.txt",
+      "archive_url": "http://web.archive.org/web/20260511060842/https://huggingface.co/microsoft/Phi-3.5-mini-instruct/blob/main/LICENSE",
+      "restriction_search": "Read LICENSE and full card; card has a responsible-AI section and a disclaimer line but no use restriction or acceptable-use policy link. No bar found."
+    },
+    {
+      "id": "ollama-phi3.5-licence",
+      "owner": "Ollama (redistributing Microsoft's weights)",
+      "kind": "model-licence",
+      "covers": [
+        "phi3.5:3.8b"
+      ],
+      "url": "https://ollama.com/library/phi3.5:3.8b/blobs/c5f9f560a704",
+      "page_date": "2026-10-24 (live fetch; HTML snapshot)",
+      "read_date": "2026-10-24",
+      "clauses": [],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "notes": "Ollama's licence layer for the tag is the same MIT text (1.1kB). Snapshot is HTML; the tag page is saved as ollama-phi3.5.txt (sha 2c90ad5714d2b51eb7c8e8f78ee37a8e3cafd3e9bee968a213e56eaf8a98dd3d).",
+      "snapshot_sha256": "e7674c856fbff94bc5827c7cf3474cb5e7d4a6fd5e8679ba75917486c4906c63",
+      "snapshot_file": "2026-10-24/ollama-phi3.5-licence.txt",
+      "archive_url": "http://web.archive.org/web/20260909180112/https://ollama.com/library/phi3.5",
+      "restriction_search": "Read the licence blob and the tag page; the licence text matches the HF LICENSE. No extra terms. No bar found."
+    },
+    {
+      "id": "nomic-embed-text-v1.5-card",
+      "owner": "Nomic AI",
+      "kind": "model-card",
+      "covers": [
+        "nomic-ai/nomic-embed-text-v1.5"
+      ],
+      "url": "https://huggingface.co/nomic-ai/nomic-embed-text-v1.5",
+      "page_date": "revision e9b6763 card; repo last modified 2026-04-07",
+      "read_date": "2026-10-24",
+      "clauses": [],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "notes": "Card front matter says apache-2.0. Repo has no LICENSE file (only README). Not gated. Checked the pinned revision's card, which matches the live value.",
+      "snapshot_sha256": "96a3837ae669c25dee466137c9a855b29811f7cb3e6e94c4e1a28fb3d909062d",
+      "snapshot_file": "2026-10-24/nomic-embed-text-v1.5-card.txt",
+      "archive_url": "http://web.archive.org/web/20261009054906/https://huggingface.co/nomic-ai/nomic-embed-text-v1.5",
+      "restriction_search": "Read the license field at the pinned revision and the API record (gated=False, file list). No use restriction or policy link found. No bar found."
+    },
+    {
+      "id": "bge-base-en-v1.5-card",
+      "owner": "BAAI",
+      "kind": "model-card",
+      "covers": [
+        "BAAI/bge-base-en-v1.5"
+      ],
+      "url": "https://huggingface.co/BAAI/bge-base-en-v1.5",
+      "page_date": "repo last modified 2024-02-21",
+      "read_date": "2026-10-24",
+      "clauses": [],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "notes": "Card front matter says mit; License section says FlagEmbedding is MIT and the models can be used commercially free of charge. No LICENSE file in this repo. Not gated.",
+      "snapshot_sha256": "93878921d2ff4b16147edcb767b1e2d27bc41ffff488fde84bb30a27c25b7918",
+      "snapshot_file": "2026-10-24/bge-base-en-v1.5-card.txt",
+      "archive_url": "http://web.archive.org/web/20261010154443/https://huggingface.co/BAAI/bge-base-en-v1.5",
+      "restriction_search": "Read the card's license field and License section, plus the API record. No further terms. No bar found."
+    },
+    {
+      "id": "bge-reranker-v2-m3-card",
+      "owner": "BAAI",
+      "kind": "model-card",
+      "covers": [
+        "BAAI/bge-reranker-v2-m3"
+      ],
+      "url": "https://huggingface.co/BAAI/bge-reranker-v2-m3",
+      "page_date": "repo last modified 2024-06-24",
+      "read_date": "2026-10-24",
+      "clauses": [],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "notes": "Card front matter says apache-2.0. No LICENSE file; no licence section in the body. Not gated. Differs from bge-base (MIT) but both are permissive.",
+      "snapshot_sha256": "892f28e80ed64f67ad1798ed3697f3458f17ab27753a28a929788fe41583cb2e",
+      "snapshot_file": "2026-10-24/bge-reranker-v2-m3-card.txt",
+      "archive_url": "http://web.archive.org/web/20260929112759/https://huggingface.co/BAAI/bge-reranker-v2-m3",
+      "restriction_search": "Grepped the card for licence, terms, restriction, commercial, prohibit; only the front matter matched. No bar found."
+    },
+    {
+      "id": "nli-deberta-v3-base-card",
+      "owner": "cross-encoder (Sentence-Transformers community)",
+      "kind": "model-card",
+      "covers": [
+        "cross-encoder/nli-deberta-v3-base"
+      ],
+      "url": "https://huggingface.co/cross-encoder/nli-deberta-v3-base",
+      "page_date": "repo last modified 2025-04-11",
+      "read_date": "2026-10-24",
+      "clauses": [],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "notes": "Card front matter says apache-2.0. No LICENSE file. Not gated. Card does not state what NLI training data (SNLI, MultiNLI) terms apply; that is the model's training set, not a term on using the weights.",
+      "snapshot_sha256": "776f8d9b0589d66d8a87ae3d12c19a2fb3825ee59398dbdc16c96407c539b33a",
+      "snapshot_file": "2026-10-24/nli-deberta-v3-base-card.txt",
+      "archive_url": "http://web.archive.org/web/20260929112426/https://huggingface.co/cross-encoder/nli-deberta-v3-base",
+      "restriction_search": "Read the whole short card and API record. No restriction found; training-data licences not examined (outside this task). No bar found."
+    },
+    {
+      "id": "qwen3-embedding-0.6b-card",
+      "owner": "Alibaba Qwen",
+      "kind": "model-card",
+      "covers": [
+        "Qwen/Qwen3-Embedding-0.6B"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
+      "page_date": "repo last modified 2026-04-20",
+      "read_date": "2026-10-24",
+      "clauses": [],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "notes": "Card front matter says apache-2.0. The repo has no LICENSE file (raw LICENSE returned 404). Not gated.",
+      "snapshot_sha256": "7f91c0f408ca82ec1213b8aac4ce129f465fa2d508a4a1ffeee4e99b66f82b4b",
+      "snapshot_file": "2026-10-24/qwen3-embedding-0.6b-card.txt",
+      "archive_url": "http://web.archive.org/web/20261016225955/https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
+      "restriction_search": "Read the card, grepped for terms/restrictions, checked API file list and the LICENSE URL (404). No bar found."
     }
   ]
 }

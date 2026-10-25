@@ -1,4 +1,4 @@
-"""Offline tests for site/scripts/hf_newsletter_sync.py: the build step only, no network and no token."""
+"""Offline tests for site/scripts/newsletter_publish.py: the build, the npm package and the version plan. No network."""
 import importlib.util
 import json
 import os
@@ -8,7 +8,7 @@ import unittest
 from unittest import mock
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-_spec = importlib.util.spec_from_file_location("hf_newsletter_sync", ROOT / "site" / "scripts" / "hf_newsletter_sync.py")
+_spec = importlib.util.spec_from_file_location("newsletter_publish", ROOT / "site" / "scripts" / "newsletter_publish.py")
 sync = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(sync)
 
@@ -136,6 +136,67 @@ class BuildTests(unittest.TestCase):
         for row in rows:
             self.assertTrue(row["title"] and row["description"] and row["body_markdown"])
             self.assertRegex(row["date"], r"^\d{4}-\d{2}-\d{2}$")
+
+
+class NpmTests(unittest.TestCase):
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.tmp = pathlib.Path(self._tmp.name)
+        self.src = self.tmp / "newsletter"
+        self.src.mkdir()
+        write(self.src, "issue-01.md", 1)
+        write(self.src, "issue-02.md", 2)
+        self.out = self.tmp / "out"
+        sync.build(self.out, self.src)
+        self.digest = sync.content_digest(self.out)
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def test_version_derivation(self):
+        self.assertEqual(sync.plan_version(2, {}, self.digest), ("1.2.0", True))
+        self.assertEqual(sync.plan_version(2, {"0.0.0": None, "1.1.0": "a", "1.1.3": "b"}, self.digest), ("1.2.0", True))
+        self.assertEqual(sync.plan_version(2, {"1.2.0": "older", "1.2.1": "old"}, self.digest), ("1.2.2", True))
+        self.assertEqual(sync.plan_version(2, {"1.2.0": "older", "1.2.1": None}, self.digest), ("1.2.2", True))
+        self.assertEqual(sync.plan_version(12, {"1.1.0": self.digest}, self.digest), ("1.12.0", True))
+
+    def test_rerun_with_the_same_content_skips(self):
+        self.assertEqual(sync.plan_version(2, {"1.2.0": "older", "1.2.1": self.digest}, self.digest), ("1.2.1", False))
+        sync.build(self.out, self.src)
+        self.assertEqual(sync.content_digest(self.out), self.digest)
+
+    def test_a_correction_changes_the_digest(self):
+        (self.src / "issue-01.md").write_text(ISSUE.format(n=1, extra="").replace("First.", "First, corrected."),
+                                              encoding="utf-8")
+        sync.build(self.out, self.src)
+        self.assertNotEqual(sync.content_digest(self.out), self.digest)
+
+    def test_package_contents(self):
+        pkg = self.tmp / "pkg"
+        sync.build_npm(self.out, pkg, "1.2.0")
+        files = sorted(p.relative_to(pkg).as_posix() for p in pkg.rglob("*") if p.is_file())
+        self.assertEqual(files, ["README.md", "data/issues.jsonl", "index.json", "issues/issue-01.md",
+                                 "issues/issue-02.md", "package.json"])
+        manifest = json.loads((pkg / "package.json").read_text(encoding="utf-8"))
+        self.assertEqual(manifest["name"], "@rnd-news/newsletter")
+        self.assertEqual(manifest["version"], "1.2.0")
+        self.assertEqual(manifest["author"], "mcp-tool-shop")
+        self.assertEqual(manifest["license"], "MIT")
+        self.assertEqual(manifest["repository"]["url"], "git+https://github.com/mcp-tool-shop-org/rnd.git")
+        self.assertEqual(manifest["homepage"], sync.SITE + "newsletter/")
+        self.assertEqual(manifest["main"], "index.json")
+        self.assertEqual(manifest["contentSha256"], self.digest)
+        self.assertEqual(set(manifest["files"]), {"README.md", "index.json", "data/issues.jsonl", "issues/"})
+        index = json.loads((pkg / "index.json").read_text(encoding="utf-8"))
+        self.assertEqual([e["issue"] for e in index], [1, 2])
+        self.assertEqual(index[0]["file"], "issues/issue-01.md")
+        self.assertNotIn("body_markdown", index[0])
+        self.assertEqual((pkg / "data" / "issues.jsonl").read_bytes(), (self.out / "data" / "issues.jsonl").read_bytes())
+        readme = (pkg / "README.md").read_text(encoding="utf-8")
+        self.assertFalse(readme.startswith("---"))
+        self.assertIn('require("@rnd-news/newsletter")', readme)
+        self.assertIn("`index.json`", readme)
+        self.assertNotIn("load_dataset", readme)
 
 
 if __name__ == "__main__":

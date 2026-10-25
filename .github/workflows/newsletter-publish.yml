@@ -1,0 +1,118 @@
+name: Publish the newsletter
+
+# Mirrors the published newsletter issues to the Hugging Face dataset mcp-tool-shop/rnd-newsletter and to npm as
+# @rnd-news/newsletter, after each successful Pages deploy of main, or by hand. One builder
+# (site/scripts/newsletter_publish.py), two uploads. Not push-triggered, so it doesn't count against the two-file cap
+# for push-triggered workflows (ci.yml and pages.yml). The npm Trusted Publisher is bound to this file name and the
+# newsletter-release environment; renaming either breaks the publish.
+#
+# Standards compliance (0-3):
+# - PIN_PER_STEP 2: every action is pinned to a commit SHA, huggingface_hub and npm to exact versions; both jobs build
+#   from the commit the Pages deploy built (workflow_run head_sha), or main for a manual run.
+# - ANDON_AUTHORITY 2: the build fails on any unreadable or inconsistent issue file, and no upload runs after a
+#   failed build. npm publishes only when the planned version is new (npm view checked first).
+# - NAMED_COMPENSATORS 2: see the table below.
+# - DECOMPOSE_BY_SECRETS 2: HF_TOKEN is set only in the HF upload step. The npm job holds no token: it authenticates
+#   by OIDC, with id-token: write on that job alone, inside the newsletter-release environment.
+# - UNCERTAINTY_GATED_HUMANS 2: issues reach main only after the Director's go; the first backfill is a manual
+#   workflow_dispatch run reported to the Publisher.
+# - EXTERNAL_VERIFIER: n/a, no specialized claims.
+#
+# Compensators:
+# | Action                          | Undo                                                                    | State after undo                         | Owner |
+# |---------------------------------|-------------------------------------------------------------------------|------------------------------------------|-------|
+# | HF create_repo (first run)      | Delete the dataset repo in its Hugging Face settings                    | No dataset; the site is unaffected       | Mike  |
+# | HF upload_folder commit         | Revert the commit in the Hugging Face repo's history, or delete files   | The dataset as before the sync           | Mike  |
+# | npm publish @rnd-news/newsletter | npm deprecate @rnd-news/newsletter@<v> "<reason>" (no unpublish after 72 h) | The version stays, marked deprecated     | Mike  |
+
+on:
+  workflow_run:
+    workflows: ["Deploy site to GitHub Pages"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  huggingface:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || 'main' }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Build (no token)
+        run: python3 -I site/scripts/newsletter_publish.py build --out nl-out
+
+      - name: Install huggingface_hub
+        run: python -m pip install huggingface_hub==1.33.0
+
+      - name: Upload to mcp-tool-shop/rnd-newsletter
+        env:
+          HF_TOKEN: ${{ secrets.RND_TOKEN }}
+        run: python3 site/scripts/newsletter_publish.py upload --out nl-out
+
+  npm:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: newsletter-release
+    permissions:
+      contents: read
+      id-token: write  # npm Trusted Publishing (OIDC) and provenance; no stored token
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || 'main' }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22
+          registry-url: "https://registry.npmjs.org"
+
+      # Node 22's bundled npm 10.x can't do OIDC publishing, and upgrading it in place breaks it; install a pinned
+      # npm >= 11.5 into a sandbox and put it first on PATH (the org's release template).
+      - name: Install npm 11.6.2 in a sandbox
+        run: |
+          SANDBOX="$HOME/.npm-cli-sandbox"
+          mkdir -p "$SANDBOX"
+          cd "$SANDBOX"
+          echo '{"name":"npm-cli-sandbox","version":"0.0.0","private":true}' > package.json
+          npm install --no-save --no-audit --no-fund --silent npm@11.6.2
+          echo "$SANDBOX/node_modules/.bin" >> "$GITHUB_PATH"
+          "$SANDBOX/node_modules/.bin/npm" --version
+
+      - name: Build (no token)
+        run: python3 -I site/scripts/newsletter_publish.py build --out nl-out
+
+      - name: Plan the version and assemble the package
+        id: plan
+        run: python3 site/scripts/newsletter_publish.py npm-plan --out nl-out --pkg nl-pkg
+
+      - name: Check the package shape
+        if: steps.plan.outputs.publish == 'true'
+        working-directory: nl-pkg
+        run: npm pack --dry-run
+
+      - name: Publish @rnd-news/newsletter with provenance (OIDC)
+        if: steps.plan.outputs.publish == 'true'
+        working-directory: nl-pkg
+        run: npm publish --provenance --access public

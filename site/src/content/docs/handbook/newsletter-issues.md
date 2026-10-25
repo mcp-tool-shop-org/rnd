@@ -32,7 +32,7 @@ The charts and diagrams follow [Newsletter visuals](/rnd/handbook/newsletter-vis
 - **By 19:30 UTC:** one draft, to the Publisher and to Antigravity, in one ticket that covers every article's technical
   claims and the visuals.
 - **Then:** fixes, the Publisher's read, and the Director's word. No email goes out without it.
-- **After it's live:** `.github/workflows/hf-newsletter.yml` mirrors the published issues to the Hugging Face dataset [mcp-tool-shop/rnd-newsletter](https://huggingface.co/datasets/mcp-tool-shop/rnd-newsletter) once the Pages deploy succeeds. It reads only `issue-*.md` files on main with an issue number and no `draft: true`.
+- **After it's live:** `.github/workflows/newsletter-publish.yml` mirrors the published issues to the Hugging Face dataset [mcp-tool-shop/rnd-newsletter](https://huggingface.co/datasets/mcp-tool-shop/rnd-newsletter) and to npm as [@rnd-news/newsletter](https://www.npmjs.com/package/@rnd-news/newsletter) once the Pages deploy succeeds. It reads only `issue-*.md` files on main with an issue number and no `draft: true`. The npm version is `1.<latest issue>.<revision>`; a correction to a published issue bumps the revision.
 - **A quiet day gets no issue.** If one is skipped, the next issue's opening says so.
 
 ## Rules for every article

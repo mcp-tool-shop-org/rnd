@@ -1,11 +1,11 @@
-"""Publish the rnd newsletter to Hugging Face as the dataset repo mcp-tool-shop/rnd-newsletter.
+"""Publish the rnd newsletter: to Hugging Face as the dataset mcp-tool-shop/rnd-newsletter, and to npm as
+@rnd-news/newsletter. One builder, two uploads, run by .github/workflows/newsletter-publish.yml.
 
-Two steps, so the build can be tested offline and the token is only present for the upload:
+  python site/scripts/newsletter_publish.py build --out nl-out                  # no secrets
+  python site/scripts/newsletter_publish.py upload --out nl-out                 # HF_TOKEN + huggingface_hub
+  python site/scripts/newsletter_publish.py npm-plan --out nl-out --pkg nl-pkg  # reads npm, writes the package
 
-  python site/scripts/hf_newsletter_sync.py build --out hf-out
-  python site/scripts/hf_newsletter_sync.py upload --out hf-out      # needs HF_TOKEN and huggingface_hub
-
-The build reads only published issues: site/src/content/docs/newsletter/issue-*.md on the checked-out branch, with
+The build reads only published issues: site/src/content/docs/newsletter/issue-*.md on the checked-out commit, with
 an integer `issue` in the front matter and no `draft: true`. Drafts and held articles live outside this repository,
 so they can't reach it. It writes:
 
@@ -13,18 +13,20 @@ so they can't reach it. It writes:
   data/issues.jsonl     one row per issue: issue, date, title, description, highlights, url, body_markdown
   README.md             the dataset card
 
-The output is byte-for-byte the same for the same issues, so a rerun changes nothing. The upload is one
-upload_folder commit; huggingface_hub skips the commit when no file differs from the repo, so a run with no new
-issue makes no commit.
+The output is byte-for-byte the same for the same issues. The HF upload is one upload_folder commit, and
+huggingface_hub makes no commit when no file differs. The npm package (package.json, README, index.json, data/,
+issues/) is versioned 1.<latest issue>.<revision>, carries the build's contentSha256, and is published only when
+that exact content isn't already the newest version for the issue, so reruns publish nothing.
 
 Standards compliance (workflow standards, scored 0-3):
-- PIN_PER_STEP 2: huggingface_hub and every action are pinned in .github/workflows/hf-newsletter.yml; the build is
+- PIN_PER_STEP 2: huggingface_hub, npm and every action are pinned in .github/workflows/newsletter-publish.yml; the build is
   deterministic from the checked-out commit.
 - ANDON_AUTHORITY 2: any parse error, a duplicate issue number or a file name that doesn't match its issue number
   stops the build before anything is uploaded.
-- NAMED_COMPENSATORS 2: the one irreversible step is an HF dataset commit (see the compensators table in the
-  workflow file).
-- DECOMPOSE_BY_SECRETS 2: build (no secret) and upload (HF_TOKEN only) are separate steps.
+- NAMED_COMPENSATORS 2: the irreversible steps are an HF dataset commit and an npm publish (see the compensators
+  table in the workflow file).
+- DECOMPOSE_BY_SECRETS 2: the build needs no secret; HF_TOKEN is set only for the HF upload step, and the npm publish
+  authenticates by OIDC in its own job and environment.
 - UNCERTAINTY_GATED_HUMANS 2: the newsletter is already public and Director-approved before it reaches main; this
   only mirrors it. The first backfill is a manual workflow_dispatch run.
 - EXTERNAL_VERIFIER: n/a, no specialized claims.
@@ -35,7 +37,9 @@ import argparse
 import json
 import os
 import pathlib
+import hashlib
 import re
+import subprocess
 import sys
 import urllib.parse
 
@@ -236,6 +240,116 @@ def build(out: pathlib.Path, newsletter: pathlib.Path = NEWSLETTER) -> list[dict
     return rows
 
 
+NPM_NAME = "@rnd-news/newsletter"
+NPM_FILES = ("README.md", "index.json", "data/issues.jsonl", "issues/")
+
+
+def content_digest(out: pathlib.Path) -> str:
+    """sha256 over the built issues and data, in a fixed order, so a correction to any issue changes it."""
+    digest = hashlib.sha256()
+    for path in sorted([out / "data" / "issues.jsonl", *(out / "issues").glob("*.md")]):
+        digest.update(path.relative_to(out).as_posix().encode("utf-8") + b"\0")
+        digest.update(path.read_bytes() + b"\0")
+    return digest.hexdigest()
+
+
+def plan_version(latest_issue: int, published: dict[str, str | None], digest: str) -> tuple[str, bool]:
+    """The npm version for this build, and whether to publish it.
+
+    Versions are 1.<latest issue>.<revision>. With nothing published for this issue, publish 1.N.0. If the newest
+    1.N.R carries this build's content digest, skip (a rerun). Otherwise publish 1.N.(R+1): a correction to issues
+    already published. `published` maps each published version to its contentSha256 (None if unknown).
+    """
+    revisions = []
+    for version, seen in published.items():
+        match = re.fullmatch(rf"1\.{latest_issue}\.(\d+)", version)
+        if match:
+            revisions.append((int(match.group(1)), seen))
+    if not revisions:
+        return f"1.{latest_issue}.0", True
+    revision, seen = max(revisions)
+    if seen == digest:
+        return f"1.{latest_issue}.{revision}", False
+    return f"1.{latest_issue}.{revision + 1}", True
+
+
+def npm_readme(rows: list[dict]) -> str:
+    card = dataset_card(rows)
+    body = card.split("\n---\n", 1)[1].lstrip("\n")
+    load_python = body[body.index("## Load it"):body.index("## Licence and author")]
+    load_js = (
+        "## Load it\n\n"
+        "```js\n"
+        f'const index = require("{NPM_NAME}");          // one entry per issue, newest last\n'
+        "```\n\n"
+        "```js\n"
+        f'import index from "{NPM_NAME}" with {{ type: "json" }};\n'
+        "```\n\n"
+        "Each entry gives the issue's number, date, title, description, highlights, url and `file`, the path of its\n"
+        f"Markdown inside the package (`{NPM_NAME}/issues/issue-NN.md`). `data/issues.jsonl` holds the full rows,\n"
+        f"bodies included. The same data is on Hugging Face as [{REPO_ID}](https://huggingface.co/datasets/{REPO_ID}).\n\n"
+    )
+    body = body.replace(load_python, load_js).replace("This dataset mirrors", "This package mirrors")
+    body = body.replace(
+        "- `issues/issue-NN.md`:",
+        "- `index.json`: the package's main export, one entry per issue without its body.\n- `issues/issue-NN.md`:",
+    )
+    return body
+
+
+def build_npm(out: pathlib.Path, pkg: pathlib.Path, version: str) -> None:
+    """Assemble the npm package from a built folder: package.json, README, index.json, data/ and issues/."""
+    rows = [json.loads(line) for line in (out / "data" / "issues.jsonl").read_text(encoding="utf-8").splitlines()]
+    (pkg / "issues").mkdir(parents=True, exist_ok=True)
+    (pkg / "data").mkdir(parents=True, exist_ok=True)
+    for page in sorted((out / "issues").glob("*.md")):
+        (pkg / "issues" / page.name).write_bytes(page.read_bytes())
+    (pkg / "data" / "issues.jsonl").write_bytes((out / "data" / "issues.jsonl").read_bytes())
+    index = [
+        {**{k: r[k] for k in FIELDS if k != "body_markdown"}, "file": f"issues/{r['url'].rstrip('/').rsplit('/', 1)[1]}.md"}
+        for r in rows
+    ]
+    (pkg / "index.json").write_bytes((json.dumps(index, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
+    (pkg / "README.md").write_bytes(npm_readme(rows).encode("utf-8"))
+    manifest = {
+        "name": NPM_NAME,
+        "version": version,
+        "description": "The research newsletter of mcp-tool-shop: every published issue as Markdown and JSON.",
+        "author": STUDIO,
+        "license": "MIT",
+        "homepage": SITE + "newsletter/",
+        "repository": {"type": "git", "url": "git+https://github.com/mcp-tool-shop-org/rnd.git"},
+        "keywords": ["newsletter", "research", "machine-learning", "dataset"],
+        "main": "index.json",
+        "exports": {
+            ".": "./index.json",
+            "./index.json": "./index.json",
+            "./data/issues.jsonl": "./data/issues.jsonl",
+            "./issues/*": "./issues/*",
+            "./package.json": "./package.json",
+        },
+        "files": list(NPM_FILES),
+        "contentSha256": content_digest(out),
+    }
+    (pkg / "package.json").write_bytes((json.dumps(manifest, indent=2) + "\n").encode("utf-8"))
+
+
+def npm_published(name: str = NPM_NAME) -> dict[str, str | None]:  # pragma: no cover - network
+    """Published versions and their contentSha256, read with `npm view`. An unpublished name gives {}."""
+    run = subprocess.run(["npm", "view", name, "versions", "--json"], capture_output=True, text=True)
+    if run.returncode != 0:
+        if "E404" in run.stderr or "404" in run.stderr:
+            return {}
+        raise BuildError(f"npm view failed: {run.stderr.strip()[:300]}")
+    versions = json.loads(run.stdout or "[]")
+    versions = [versions] if isinstance(versions, str) else versions
+    found: dict[str, str | None] = {}
+    for version in versions:
+        field = subprocess.run(["npm", "view", f"{name}@{version}", "contentSha256"], capture_output=True, text=True)
+        found[version] = field.stdout.strip() or None
+    return found
+
+
 def upload(out: pathlib.Path, token: str) -> str | None:  # pragma: no cover - network
     """One commit with every file in out; files no longer built are deleted from the repo. Returns the commit url."""
     from huggingface_hub import HfApi
@@ -255,17 +369,28 @@ def upload(out: pathlib.Path, token: str) -> str | None:  # pragma: no cover - n
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n", 1)[0])
-    parser.add_argument("step", choices=("build", "upload"))
-    parser.add_argument("--out", type=pathlib.Path, default=pathlib.Path("hf-out"))
+    parser.add_argument("step", choices=("build", "upload", "npm-plan"))
+    parser.add_argument("--out", type=pathlib.Path, default=pathlib.Path("nl-out"))
+    parser.add_argument("--pkg", type=pathlib.Path, default=pathlib.Path("nl-pkg"))
     args = parser.parse_args(argv)
-    if args.step == "build":
-        try:
+    try:
+        if args.step == "build":
             rows = build(args.out)
-        except BuildError as exc:
-            print(json.dumps({"code": "build", "message": str(exc), "hint": "fix the issue file"}), file=sys.stderr)
-            return 1
-        print(f"built {len(rows)} issues into {args.out}")
-        return 0
+            print(f"built {len(rows)} issues into {args.out}")
+            return 0
+        if args.step == "npm-plan":  # pragma: no cover - network
+            rows = [json.loads(x) for x in (args.out / "data" / "issues.jsonl").read_text(encoding="utf-8").splitlines()]
+            version, publish = plan_version(rows[-1]["issue"], npm_published(), content_digest(args.out))
+            build_npm(args.out, args.pkg, version)
+            print(f"{NPM_NAME}@{version}: {'publish' if publish else 'already published, skip'}")
+            if os.environ.get("GITHUB_OUTPUT"):
+                with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
+                    fh.write(f"version={version}\npublish={'true' if publish else 'false'}\n")
+            return 0
+    except BuildError as exc:
+        print(json.dumps({"code": "build", "message": str(exc), "hint": "fix the issue file or the npm state"}),
+              file=sys.stderr)
+        return 1
     token = os.environ.get("HF_TOKEN", "")
     if not token:
         print(json.dumps({"code": "no-token", "message": "HF_TOKEN is not set", "hint": "run in the workflow"}),

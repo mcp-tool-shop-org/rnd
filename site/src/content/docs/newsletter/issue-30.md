@@ -162,16 +162,16 @@ receipt. Where no receipt measures something, we say so.
 
 | Card | Memory | Rate (units an hour) | Sessions | What went wrong |
 |---|---|---|---|---|
-| A100, 40 GB | 40,960 MiB | 5.3 | 62 or more | 3 sessions lost mid-run, all on 23 October; 3 full four-hour windows with no loss |
-| A100, 80 GB | 81,920 MiB | 6.77 | about 8 | 1 session lost after 132 seconds |
-| RTX PRO 6000 (G4) | 97,887 MiB | 8.9 | about 9 | none; one window ran 8,680 seconds clean |
+| A100, 40 GB | 40,960 MiB | 5.3 | 62 or more | 3 sessions lost mid-run on 23 October, plus one machine dropped mid-download and one session pruned earlier; 3 full four-hour windows with no loss |
+| A100, 80 GB | 81,920 MiB | 6.77 | about 8 | 1 session lost after 132 seconds (from 2 windows) |
+| RTX PRO 6000 (G4) | 97,887 MiB | 8.9 | about 9 | none (from 2 windows); one ran 8,680 seconds clean |
 | L4 | 23,034 MiB | 1.54 | about 8 | only one window used it |
 | T4 | not measured | about 1.07, worked out, not read | assigned 6 times | never used |
 | H100 | — | — | never assigned | refused 5 times, "Service Unavailable" |
 | CPU (standard) | 12.3 GB of RAM free | 0.08 | 41 or more | the download check rejected 5 of 52 tries as too slow |
 
-The plan allows up to 20 sessions at once: 3 of each GPU card (the 80 GB A100 has its own pool of 3) and 5 CPU
-machines. The next request is refused.
+The plan allows up to 20 sessions at once: 3 each of the five GPU cards we can be assigned (the two A100s, the RTX PRO 6000, the L4 and
+the T4) and 5 CPU machines. The next request is refused.
 
 ### Faster isn't always cheaper
 

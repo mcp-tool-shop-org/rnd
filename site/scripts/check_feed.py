@@ -6,7 +6,7 @@ misses the /rnd base or names a page the build didn't make, if it carries any au
 other than dc:creator mcp-tool-shop, if its HTML has a <div> or a class attribute (it is also the
 email edition), if an image in it is an SVG (email clients don't show SVG), or if a chart's PNG
 is missing, older than its SVG, or not the one recorded (charts/png-manifest.json; re-run
-scripts/render_chart_pngs.py).
+scripts/render_chart_pngs.py), or if an item's HTML is over 90,000 bytes (Gmail clips an email at about 102 KB).
 Usage, from site/: python scripts/check_feed.py
 With --charts-only it checks only the chart PNGs, which needs no build; PR CI runs it that way.
 """
@@ -22,6 +22,7 @@ import xml.etree.ElementTree as ET
 SITE = "https://mcp-tool-shop-org.github.io/rnd/"
 STUDIO = "mcp-tool-shop"
 HOST = "https://mcp-tool-shop-org.github.io/"
+MAX_EMAIL_BYTES = 90_000
 NS = {"content": "http://purl.org/rss/1.0/modules/content/", "dc": "http://purl.org/dc/elements/1.1/",
       "atom": "http://www.w3.org/2005/Atom"}
 
@@ -103,6 +104,10 @@ for item in items:
     html = item.findtext("content:encoded", namespaces=NS) or ""
     if len(html) < 200:
         errors.append(f"{title}: content:encoded is missing or empty")
+    # Gmail clips an email whose HTML passes about 102 KB, and a daily issue holds several articles.
+    size = len(html.encode("utf-8"))
+    if size > MAX_EMAIL_BYTES:
+        errors.append(f"{title}: content is {size} bytes, over {MAX_EMAIL_BYTES}; Gmail would clip the email")
     for field in ("pubDate", "description"):
         if not (item.findtext(field) or "").strip():
             errors.append(f"{title}: <{field}> is missing or empty")

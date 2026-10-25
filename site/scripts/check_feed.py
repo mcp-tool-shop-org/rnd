@@ -68,6 +68,11 @@ def chart_errors() -> list[str]:
     return found
 
 
+class DraftSpellingError(ValueError):
+    """A draft: value other than lowercase true or false. Astro reads True or TRUE as true, the publish script would
+    not, so any other spelling stops the check and a person fixes it."""
+
+
 def is_draft(page: pathlib.Path) -> bool:
     """True when an issue file's front matter says draft: true. A draft must never reach the feed, which is also the
     email edition: Buttondown sends every new feed item to subscribers."""
@@ -76,13 +81,20 @@ def is_draft(page: pathlib.Path) -> bool:
         return False
     end = text.find("\n---\n", 4)
     front = text[4:end] if end >= 0 else ""
-    return re.search(r"^draft:\s*true\s*$", front, re.MULTILINE) is not None
+    match = re.search(r"^draft:(.*)$", front, re.MULTILINE)
+    if match is None:
+        return False
+    value = match.group(1).strip()
+    if value not in ("true", "false"):
+        raise DraftSpellingError(f"{page.name}: draft must be lowercase true or false, not {value!r}")
+    return value == "true"
 
 
 def published_pages(newsletter: pathlib.Path = NEWSLETTER) -> tuple[list[pathlib.Path], list[pathlib.Path]]:
-    """The newsletter's issue files, split into (published, drafts)."""
+    """The newsletter's issue files, split into (published, drafts). Raises DraftSpellingError on a bad draft value."""
     pages = sorted(newsletter.glob("issue-*.md"))
-    return [p for p in pages if not is_draft(p)], [p for p in pages if is_draft(p)]
+    flags = {p: is_draft(p) for p in pages}
+    return [p for p in pages if not flags[p]], [p for p in pages if flags[p]]
 
 
 def draft_errors(item_links: list[str], drafts: list[pathlib.Path]) -> list[str]:
@@ -110,7 +122,10 @@ def main() -> None:
         sys.exit(f"check_feed: rss.xml doesn't parse: {e}")
 
     items = channel.findall("item")
-    issues, drafts = published_pages()
+    try:
+        issues, drafts = published_pages()
+    except DraftSpellingError as e:
+        sys.exit(f"check_feed: FAIL\n  {e}")
     if len(items) != len(issues):
         errors.append(f"{len(items)} feed items, but {len(issues)} published issue files")
     errors += draft_errors([i.findtext("link") or "" for i in items], drafts)

@@ -24,6 +24,16 @@ class DraftTests(unittest.TestCase):
     def tearDown(self):
         self._tmp.cleanup()
 
+    def test_any_draft_spelling_but_lowercase_true_or_false_stops_the_check(self):
+        for value in ("True", "TRUE", "yes", '"true"'):
+            page = self.dir / "issue-40.md"
+            page.write_text(PAGE.format(n=40, extra=f"draft: {value}\n"), encoding="utf-8")
+            with self.assertRaises(check_feed.DraftSpellingError):
+                check_feed.is_draft(page)
+            with self.assertRaises(check_feed.DraftSpellingError):
+                check_feed.published_pages(self.dir)
+            page.unlink()
+
     def test_is_draft_reads_only_the_front_matter(self):
         self.assertFalse(check_feed.is_draft(self.dir / "issue-30.md"))
         self.assertTrue(check_feed.is_draft(self.dir / "issue-31.md"))

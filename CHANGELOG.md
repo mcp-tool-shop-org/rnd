@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.33] - 2026-10-25
+
+- licences: Qwen3.6-35B-A3B and Granite 4.2 8B for pilot B (outside check by hand, 2026-10-25)
+
 ## [1.1.23.1.32] - 2026-10-24
 
 - licences: six C2 sweep models read at source (phi3.5, nomic-embed, bge-base, bge-reranker, nli-deberta, Qwen3-Embedding)

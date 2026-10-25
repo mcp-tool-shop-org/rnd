@@ -383,7 +383,7 @@
         "evaluation": "allowed",
         "code": "allowed"
       },
-      "notes": "Each model card names OpenMDW-1.1 as its governing terms (nemotron-model-cards). The Ollama tag for Lightning bundles a different NVIDIA licence; the card governs. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
+      "notes": "Each model card names OpenMDW-1.1 as its governing terms (nemotron-model-cards). The Ollama tag for Lightning bundles a different NVIDIA licence; the card governs. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'. Outside check for pilot B (Nemotron-3.5-Lightning as a blind reader): Gemini Argon (AI Studio) by hand, 2026-10-25, confirmed OpenMDW-1.1 governs, with no restriction or obligation on outputs (paragraph 6). A Gemini Pro answer the same day analysed the NVIDIA Open Model License instead; that licence is not the one of record.",
       "snapshot_sha256": "c709632b442a6da23660cc64546b1d02a3a5ba1c26b19cb658d2a4ccd1cf4ab6",
       "snapshot_file": "2026-10-17/openmdw-1.1.txt",
       "archive_url": "http://web.archive.org/web/20261011054331/https://openmdw.ai/license/1-1/"
@@ -1478,6 +1478,144 @@
       "snapshot_file": "2026-10-24/qwen3-embedding-0.6b-card.txt",
       "archive_url": "http://web.archive.org/web/20261016225955/https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
       "restriction_search": "Read the card, grepped for terms/restrictions, checked API file list and the LICENSE URL (404). No bar found."
+    },
+    {
+      "id": "qwen3.6-35b-a3b-licence",
+      "owner": "Alibaba Cloud (Qwen team)",
+      "kind": "model-licence",
+      "covers": [
+        "Qwen/Qwen3.6-35B-A3B",
+        "Qwen/Qwen3.6-35B-A3B-FP8",
+        "Ollama qwen3.6:35b"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/blob/main/LICENSE",
+      "page_date": "2026-04-24 (HF repo last modified)",
+      "read_date": "2026-10-25",
+      "clauses": [
+        "You may reproduce and distribute copies of the",
+        "Subject to the terms and conditions of"
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Redistributing weights or derivative works: give recipients a copy of Apache-2.0, mark modified files, keep notices.",
+        "No condition attaches to model outputs; the text has no output clause."
+      ],
+      "notes": "Standard Apache-2.0 text, no custom Qwen clauses. Repo id Qwen/Qwen3.6-35B-A3B; card says license: apache-2.0. Quoted clauses are the grant and redistribution terms (weights/derivatives, not outputs). Silence on outputs is not a bar. Outside check: Gemini Pro and Gemini Argon (AI Studio) by hand, 2026-10-25. Both found no clause barring an openly published dataset written by Qwen3.6-35B-A3B and filtered by Granite 4.2 8B and Nemotron-3.5-Lightning as blind readers, and no obligation on the dataset. The verdict rests on running the models as open weights on our own compute and publishing only the writer's text. R&D re-checked every quoted clause at its live source on 2026-10-25.",
+      "snapshot_sha256": "50cbab8a892c5f2993b8c7351a99182507472def3b1374558308605d99b86b32",
+      "snapshot_file": "2026-10-25/qwen3.6-35b-a3b-licence.txt",
+      "archive_url": "none found for the LICENSE blob URL; card page: https://web.archive.org/web/20261016112924/https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+      "restriction_search": "Searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training; hits are in clauses; none restricts outputs."
+    },
+    {
+      "id": "qwen3.6-35b-a3b-hf-card",
+      "owner": "Alibaba Cloud (Qwen team)",
+      "kind": "model-card",
+      "covers": [
+        "Qwen/Qwen3.6-35B-A3B"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+      "page_date": "2026-04-24",
+      "read_date": "2026-10-25",
+      "clauses": [
+        "license: apache-2.0"
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [],
+      "notes": "Card declares Apache-2.0 and links the LICENSE file. No use-policy, output or distillation language found. Ollama tag qwen3.6:35b (library lists 27b, 35b, latest, -mlx). Outside check: Gemini Pro and Gemini Argon (AI Studio) by hand, 2026-10-25. Both found no clause barring an openly published dataset written by Qwen3.6-35B-A3B and filtered by Granite 4.2 8B and Nemotron-3.5-Lightning as blind readers, and no obligation on the dataset. The verdict rests on running the models as open weights on our own compute and publishing only the writer's text. R&D re-checked every quoted clause at its live source on 2026-10-25.",
+      "snapshot_sha256": "c4ddaa065649ff6352648f64747a16eda31726f3e34add94ce04abb461c77b75",
+      "snapshot_file": "2026-10-25/qwen3.6-35b-a3b-hf-card.txt",
+      "archive_url": "https://web.archive.org/web/20261016112924/https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+      "restriction_search": "Searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training; hits are in clauses; none restricts outputs."
+    },
+    {
+      "id": "qwen3.6-ollama-page",
+      "owner": "Ollama (listing of Qwen3.6)",
+      "kind": "model-card",
+      "covers": [
+        "qwen3.6:35b"
+      ],
+      "url": "https://ollama.com/library/qwen3.6",
+      "page_date": "2026-10-25 (fetched; no page date shown)",
+      "read_date": "2026-10-25",
+      "clauses": [],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [],
+      "notes": "Listing only. Tag qwen3.6:35b exists; the page shows a 35b_a3b figure, so it is taken to be the same weights (not independently confirmed). Licence evidence is the HF repo. Outside check: Gemini Pro and Gemini Argon (AI Studio) by hand, 2026-10-25. Both found no clause barring an openly published dataset written by Qwen3.6-35B-A3B and filtered by Granite 4.2 8B and Nemotron-3.5-Lightning as blind readers, and no obligation on the dataset. The verdict rests on running the models as open weights on our own compute and publishing only the writer's text. R&D re-checked every quoted clause at its live source on 2026-10-25.",
+      "snapshot_sha256": "32eebcd644996bca3a03a6a5384f69bb67d3e0e9073fa90c49d921ef6865af0b",
+      "snapshot_file": "2026-10-25/qwen3.6-ollama-page.txt",
+      "archive_url": "https://web.archive.org/web/20261011030033/https://ollama.com/library/qwen3.6",
+      "restriction_search": "Searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training; hits are in clauses; none restricts outputs."
+    },
+    {
+      "id": "granite-4.2-8b-hf-card",
+      "owner": "IBM (Granite Team)",
+      "kind": "model-card",
+      "covers": [
+        "ibm-granite/granite-4.2-8b",
+        "ibm-granite/granite-4.2-8b-GGUF",
+        "Ollama granite4.2:8b"
+      ],
+      "url": "https://huggingface.co/ibm-granite/granite-4.2-8b",
+      "page_date": "2026-10-20 (HF repo last modified)",
+      "read_date": "2026-10-25",
+      "clauses": [
+        "license: apache-2.0",
+        "All Granite models are released under the Apache 2.0 license"
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Redistributing weights or derivatives: Apache-2.0 licence copy and notices.",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "Reasoning-mode instruct model (think tags). Local tag: Ollama granite4.2:8b (also :3b, :30b, :8b-q8_0, latest). No LICENSE file was served at /raw/main/LICENSE, so evidence is the card front matter and card text plus the Apache 2.0 link; the Apache text itself was not read from this repo. Training-data sources listed in the card are not output restrictions. Outside check: Gemini Pro and Gemini Argon (AI Studio) by hand, 2026-10-25. Both found no clause barring an openly published dataset written by Qwen3.6-35B-A3B and filtered by Granite 4.2 8B and Nemotron-3.5-Lightning as blind readers, and no obligation on the dataset. The verdict rests on running the models as open weights on our own compute and publishing only the writer's text. R&D re-checked every quoted clause at its live source on 2026-10-25.",
+      "snapshot_sha256": "01396b1a8596586986fea22cfaa86d0255d19113d71fe09e0b69cc2bfa4307da",
+      "snapshot_file": "2026-10-25/granite-4.2-8b-hf-card.txt",
+      "archive_url": "https://web.archive.org/web/20261013044551/https://huggingface.co/ibm-granite/granite-4.2-8b",
+      "restriction_search": "Searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training; hits are in clauses; none restricts outputs."
+    },
+    {
+      "id": "granite4.2-ollama-page",
+      "owner": "Ollama (listing of IBM Granite)",
+      "kind": "model-card",
+      "covers": [
+        "granite4.2:8b"
+      ],
+      "url": "https://ollama.com/library/granite4.2",
+      "page_date": "2026-10-25 (fetched; no page date shown)",
+      "read_date": "2026-10-25",
+      "clauses": [],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [],
+      "notes": "Ollama listing repeats Apache 2.0; tag granite4.2:8b confirmed present. Outside check: Gemini Pro and Gemini Argon (AI Studio) by hand, 2026-10-25. Both found no clause barring an openly published dataset written by Qwen3.6-35B-A3B and filtered by Granite 4.2 8B and Nemotron-3.5-Lightning as blind readers, and no obligation on the dataset. The verdict rests on running the models as open weights on our own compute and publishing only the writer's text. R&D re-checked every quoted clause at its live source on 2026-10-25.",
+      "snapshot_sha256": "2d3c9424e95ac7a2de98a67eca41a5f43bd0459053db71c20c2ee024c128afff",
+      "snapshot_file": "2026-10-25/granite4.2-ollama-page.txt",
+      "archive_url": "https://web.archive.org/web/20261008155928/https://ollama.com/library/granite4.2",
+      "restriction_search": "Searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training; hits are in clauses; none restricts outputs."
     }
   ]
 }

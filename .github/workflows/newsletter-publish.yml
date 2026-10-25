@@ -41,7 +41,14 @@ permissions:
 
 jobs:
   huggingface:
-    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    # A workflow_run runs with this repo's secrets, so it must come from a successful push or manual run of main in
+    # this repository, never from a fork or a pull request.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_dispatch') &&
+       github.event.workflow_run.head_branch == 'main' &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -63,10 +70,18 @@ jobs:
       - name: Upload to mcp-tool-shop/rnd-newsletter
         env:
           HF_TOKEN: ${{ secrets.RND_TOKEN }}
+          SOURCE_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
         run: python3 site/scripts/newsletter_publish.py upload --out nl-out
 
   npm:
-    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    # A workflow_run runs with this repo's secrets, so it must come from a successful push or manual run of main in
+    # this repository, never from a fork or a pull request.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_dispatch') &&
+       github.event.workflow_run.head_branch == 'main' &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: newsletter-release
@@ -105,6 +120,8 @@ jobs:
 
       - name: Plan the version and assemble the package
         id: plan
+        env:
+          SOURCE_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
         run: python3 site/scripts/newsletter_publish.py npm-plan --out nl-out --pkg nl-pkg
 
       - name: Check the package shape

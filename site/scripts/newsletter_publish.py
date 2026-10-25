@@ -361,7 +361,7 @@ def upload(out: pathlib.Path, token: str) -> str | None:  # pragma: no cover - n
         repo_id=REPO_ID,
         repo_type="dataset",
         folder_path=str(out),
-        commit_message=f"Sync the newsletter from rnd ({count} issues)",
+        commit_message=f"Sync the newsletter from rnd {os.environ.get('SOURCE_SHA') or 'unknown'} ({count} issues)",
         delete_patterns=["issues/*.md"],
     )
     return getattr(info, "commit_url", None) or str(info)
@@ -382,7 +382,8 @@ def main(argv: list[str] | None = None) -> int:
             rows = [json.loads(x) for x in (args.out / "data" / "issues.jsonl").read_text(encoding="utf-8").splitlines()]
             version, publish = plan_version(rows[-1]["issue"], npm_published(), content_digest(args.out))
             build_npm(args.out, args.pkg, version)
-            print(f"{NPM_NAME}@{version}: {'publish' if publish else 'already published, skip'}")
+            source = os.environ.get("SOURCE_SHA", "unknown")
+            print(f"{NPM_NAME}@{version} from rnd {source}: {'publish' if publish else 'already published, skip'}")
             if os.environ.get("GITHUB_OUTPUT"):
                 with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
                     fh.write(f"version={version}\npublish={'true' if publish else 'false'}\n")

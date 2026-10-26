@@ -1,6 +1,6 @@
 ---
 title: "26 October: our speed table was timing a cache, plus three releases and a newsletter that travels"
-description: "Three small test runs on a rented T4 showed that interlock's generate ladder timed a prompt cache instead of the prompt, and counted queued requests as parallel ones. We fixed it in four releases and corrected the docs. Also: Attestia 2.1.3, RepoMesh 2.5.0 and Cognate 1.0.0 shipped, and this newsletter now publishes itself to Hugging Face, npm, PyPI and GitHub."
+description: "Three small test runs on a rented T4 showed that interlock's generate ladder timed a prompt cache instead of the prompt, and counted queued requests as parallel ones. We fixed it in three releases and corrected the docs. Also: Attestia 2.1.3, RepoMesh 2.5.0 and Cognate 1.0.0 shipped, and this newsletter now publishes itself to Hugging Face, npm, PyPI and GitHub."
 issue: 31
 date: 2026-10-26
 highlights:
@@ -63,15 +63,16 @@ On the fixed ladder, some long, busy cells ran out of room. Part of the model di
 the processor until the request timed out, or the machine's memory filled and the run was killed. Those are honest
 "too big for this card" results, but they were recorded as a timeout or as unmeasured. **interlock 1.0.7** reads the
 load from Ollama's log before any timed call, records those cells as out of memory, and scales each cell's timeout
-from its own first call.
+from a calibration call of its own.
 
 ### What's still valid, and the correction
 
-The speed of one stream of tokens, the largest context each card holds, and the embedding throughput were never
-affected. The first-token times and the speeds with more than one request at a time, from 1.0.5 and earlier, were
+The speed of one stream of tokens and the largest context each card holds were not affected; the embedding
+throughput runs on a different path and wasn't part of these defects. Rows from 1.0.4 and earlier also overstate
+their prompt length about twice over, so their one-stream speeds belong to a prompt about half as long as labelled. The first-token times and the speeds with more than one request at a time, from 1.0.5 and earlier, were
 not valid measures. interlock no longer uses them, and its README and handbook carry a correction notice.
 
-The three rungs cost about 1.3 of the 800 units set aside for this sweep. With the real timings, the whole sweep is
+The trial runs so far, three on a CPU and four on the T4, cost about 1.3 of the 800 units set aside for this sweep. With the real timings, the whole sweep is
 now priced at about 328 to 347 units.
 
 ## Three proof products ship

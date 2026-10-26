@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.37] - 2026-10-26
+
+- newsletter: issue 31 (the generate-ladder correction, three releases, the newsletter mirrors)
+
 ## [1.1.23.1.36] - 2026-10-25
 
 - newsletter: publish to PyPI as mcptoolshop-rnd-newsletter and as one GitHub release per new issue

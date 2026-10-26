@@ -1616,6 +1616,53 @@
       "snapshot_file": "2026-10-25/granite4.2-ollama-page.txt",
       "archive_url": "https://web.archive.org/web/20261008155928/https://ollama.com/library/granite4.2",
       "restriction_search": "Searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training; hits are in clauses; none restricts outputs."
+    },
+    {
+      "id": "qwen3-8b-card",
+      "owner": "Alibaba Qwen",
+      "kind": "model-card",
+      "covers": [
+        "Qwen/Qwen3-8B",
+        "qwen3:8b (Ollama library: q4_K_M, q8_0, fp16)"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3-8B",
+      "page_date": "repo last modified 2025-07-26",
+      "read_date": "2026-10-26",
+      "clauses": [],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "notes": "Card front matter says apache-2.0 and links the repo's LICENSE file, which is the Apache License 2.0 text (raw LICENSE returned 200). Not gated. Covers the C2 sweep's qwen3:8b library quants on Colab (speed and memory measurement; no output kept).",
+      "restriction_search": "Read the card and the HF API metadata (license tag apache-2.0, gated false), fetched the raw LICENSE (Apache-2.0 text). No restricting clause found.",
+      "snapshot_sha256": "178a042383482e10bef579d73b9b4035e59dd76ab68371e031076e4d5d685a8d",
+      "snapshot_file": "2026-10-26/qwen3-8b-card.txt",
+      "archive_url": "http://web.archive.org/web/20261013224905/https://huggingface.co/Qwen/Qwen3-8B"
+    },
+    {
+      "id": "qwen3-8b-gguf-card",
+      "owner": "Alibaba Qwen",
+      "kind": "model-card",
+      "covers": [
+        "Qwen/Qwen3-8B-GGUF (rev 7c41481f57cb95916b40956ab2f0b139b296d974, Qwen3-8B-Q6_K.gguf)"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3-8B-GGUF",
+      "page_date": "repo last modified 2025-05-21",
+      "read_date": "2026-10-26",
+      "clauses": [],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "notes": "Card front matter says apache-2.0, and the repo ships a LICENSE file. Not gated. Source of the C2 sweep's qwen3:8b Q6_K (GGUF path).",
+      "restriction_search": "Read the card and the HF API metadata (license apache-2.0, gated false, LICENSE file present). No restricting clause found.",
+      "snapshot_sha256": "5a0bb6a84c0343e2dc4b0066a4565c4f325718f607a2636d6fd8e021e2f229b7",
+      "snapshot_file": "2026-10-26/qwen3-8b-gguf-card.txt",
+      "archive_url": "http://web.archive.org/web/20261001153337/https://huggingface.co/Qwen/Qwen3-8B-GGUF"
     }
   ]
 }

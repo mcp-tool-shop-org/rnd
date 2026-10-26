@@ -48,14 +48,16 @@ The second rung found three problems at once, all confirmed in Ollama's own sour
   ladder sent four or eight at once, they waited in line, and the way it added up their speeds left out the wait. So
   "four at once" read close to four times one stream.
 
-**interlock 1.0.6** fixes all three. Each timed call starts differently, so nothing is cached. The server gets as
-many slots as the cell has requests. And combined speed is total tokens over the wall-clock time of the whole pass.
-A first-token time that doesn't grow with the prompt now counts as unmeasured.
+**interlock 1.0.6** fixes all three. Each timed call begins with a short prefix of its own,
+so nothing is cached. The server gets as
+many slots as the cell has requests. And combined speed is total tokens over the pass's decode window, from the first decode start to the last
+finish. A prompt-read time that doesn't grow with the prompt now counts as unmeasured.
 
-Measured that way on our own machine (an RTX 5090), the time to read the prompt grows as it should: **23 ms at 512 tokens, 100 ms
+We check every change on our own machine first, where a run costs nothing. Measured that way there (on an RTX
+5090), the time to read the prompt grows as it should: **23 ms at 512 tokens, 100 ms
 at 2k, 463 ms at 8k, 1,244 ms at 16k and 3,791 ms at 32k.**
 
-<!-- Chart 1: prefill time against prompt length (ladder v3, phi3.5, one request: 23 / 100 / 463 / 1,244 / 3,791 ms at 512 / 2k / 8k / 16k / 32k), beside the old cached readings on the T4 (15 ms at 512, 33 ms at 8k). Argon designs. -->
+![Log-scale chart of the time to read the prompt against prompt length, for phi3.5 with one request. On the fixed ladder on an RTX 5090, with no cache, it grows from 23 ms at 512 tokens to 100 ms at 2k, 463 ms at 8k, 1,244 ms at 16k and 3,791 ms at 32k. The old ladder on the Colab T4, with the prompt cached, read 15 ms at 512 tokens and 33 ms at 8k. Different cards, so only the shapes compare](/rnd/charts/issue-31-ladder-prefill.svg)
 
 ### Rung 3: out of room, mislabelled
 

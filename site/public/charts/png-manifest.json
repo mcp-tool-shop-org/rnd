@@ -195,6 +195,13 @@
     "width": 1200,
     "height": 579
   },
+  "issue-31-ladder-prefill.svg": {
+    "png": "issue-31-ladder-prefill.png",
+    "png_sha256": "9d1cd58b609a57d98f659c5af5a91c22802f059157671bf3444212caedd67572",
+    "svg_sha256": "afb290bff9c4ecdfad4d9f57451f6a3003a5ac3b8c9f112ac5a20f1234b2849a",
+    "width": 1200,
+    "height": 558
+  },
   "loop-repeats.svg": {
     "png": "loop-repeats.png",
     "png_sha256": "f7527ae4d3ec14612ffea5b9fafd1f68c1bba4d89e99aae489192b50836155d3",

@@ -105,5 +105,5 @@ On today's T4 runs, the Colab machine's memory limit stopped some of the largest
 spilled out of the card into the machine's memory, the limit killed the model server at about 11.5 GB of its own
 memory. In three runs the process running our harness was killed a moment later as well (two seen directly, one
 inferred from its logs); the rows written up to that point were kept, but the rest of that step was lost. The run
-launcher now notices a dead run and stops it within about two minutes, instead of waiting out its full time. A change
-to interlock for these cells is being built; it isn't released yet.
+launcher now notices a dead run and stops it within about two minutes, instead of waiting out its full time. A check
+that refuses such cells before they load is being built for interlock 1.0.11.

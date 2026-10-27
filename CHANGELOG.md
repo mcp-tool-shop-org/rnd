@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.39] - 2026-10-27
+
+- newsletter: issue 32, a spotlight on AI Jam Sessions, interlock and XRPL Camp
+
 ## [1.1.23.1.38] - 2026-10-26
 
 - licences: Qwen3-8B and its GGUF repo (Apache-2.0) for the C2 T4 sweep

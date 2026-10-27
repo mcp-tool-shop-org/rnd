@@ -640,7 +640,8 @@
         "nomic-ai/nomic-embed-text-v1.5",
         "BAAI/bge-reranker-v2-m3",
         "cross-encoder/nli-deberta-v3-base",
-        "Qwen/Qwen3-Embedding-0.6B"
+        "Qwen/Qwen3-Embedding-0.6B",
+        "Mistral Small 3.2 24B"
       ],
       "url": "https://www.apache.org/licenses/LICENSE-2.0",
       "page_date": "2004-01",
@@ -1663,6 +1664,65 @@
       "snapshot_sha256": "5a0bb6a84c0343e2dc4b0066a4565c4f325718f607a2636d6fd8e021e2f229b7",
       "snapshot_file": "2026-10-26/qwen3-8b-gguf-card.txt",
       "archive_url": "http://web.archive.org/web/20261001153337/https://huggingface.co/Qwen/Qwen3-8B-GGUF"
+    },
+    {
+      "id": "mistral-small-3.2-24b-hf-card",
+      "owner": "Mistral AI",
+      "kind": "model-card",
+      "covers": [
+        "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+        "Ollama mistral-small3.2:24b"
+      ],
+      "url": "https://huggingface.co/mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+      "page_date": "HF commit 95a6d26c4bfb886c58daf9d3f7332c857cb27b43",
+      "read_date": "2026-10-27",
+      "clauses": [
+        "license: apache-2.0"
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Redistributing weights or derivatives: Apache-2.0 licence copy and notices.",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "Dense 24B instruct model, chosen 2026-10-27 as the second blind-reader family for reasoning-dataset-lab's value certification (pilot B); its yes/no filters items and its text is never published. No LICENSE file is served in the HF repo and it isn't gated; evidence is the card front matter (license: apache-2.0) plus the Ollama tag's bundled licence layer, which is the unmodified Apache-2.0 text (mistral-small3.2-ollama-page). The only other terms link on the card is Mistral's Privacy Policy, which attaches to the hosted service, not to local open weights; if the model is ever routed through Mistral's API or Le Chat, re-read those terms first. Outside check: Grok/Gemini by hand (product not named), 2026-10-27: no clause bars the blind-reader use and no obligation attaches to the dataset (sections 1, 4 and 6 of Apache-2.0). Newer Mistral releases exist (Small 4 119B MoE, Ministral 3 14B); Small 3.2 is the dense model that fits a Colab A100 40 GB.",
+      "snapshot_sha256": "48d492d5ded3dfb80ab53033391c7ada71f42037e442758d9eb29fdb08929edb",
+      "snapshot_file": "2026-10-27/mistral-small-3.2-24b-hf-card.md",
+      "archive_url": "",
+      "restriction_search": "Card front matter and text read in full at commit 95a6d26c: the only licence statement is 'license: apache-2.0'; no acceptable-use policy, no output clause, no gating. The repo file list (API) has no LICENSE or NOTICE file."
+    },
+    {
+      "id": "mistral-small3.2-ollama-page",
+      "owner": "Ollama (library page for Mistral AI's model)",
+      "kind": "model-licence",
+      "covers": [
+        "Ollama mistral-small3.2:24b (manifest sha256 5a408ab55df5c1b5cf46533c368813b30bf9e4d8fc39263bf2a3338cfa3b895b; model layer 41a5b0c3…; licence layer 43070e2d…)"
+      ],
+      "url": "https://ollama.com/library/mistral-small3.2",
+      "page_date": "registry manifest read 2026-10-27",
+      "read_date": "2026-10-27",
+      "clauses": [
+        "Apache License, Version 2.0, January 2004 (the bundled licence layer, unmodified)"
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Redistributing weights or derivatives: Apache-2.0 licence copy and notices.",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "The Ollama tag's licence layer (sha256 43070e2d…) is byte-identical to apache.org's LICENSE-2.0.txt except a trailing newline, so the bundled licence is plain Apache-2.0 with nothing added. The manifest carries no HF commit or weights hash, so source_match stays unconfirmed in the lab's pin.",
+      "snapshot_sha256": "43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1",
+      "snapshot_file": "2026-10-27/mistral-small3.2-ollama-licence.txt",
+      "archive_url": "",
+      "restriction_search": "The licence layer read in full: Apache-2.0 sections 1-9, no added terms. Ollama's own terms (ollama-terms) govern the download service, not the model."
     }
   ]
 }

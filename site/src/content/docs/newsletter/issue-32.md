@@ -40,8 +40,8 @@ It has 56 MCP tools in all, and installs from npm as `@mcptoolshop/ai-jam-sessio
 
 Version 2.8.0 added whole songs sung by a synthetic voice on the piano's clock: Amazing Grace and America the
 Beautiful, every verse. The Battle Hymn of the Republic followed on the [landing
-page](https://mcp-tool-shop-org.github.io/ai-jam-sessions/#listen). Each performance is built from sixteen takes of a
-singer conditioned on the score, with one take chosen for each phrase and checked for timing and pitch by two
+page](https://mcp-tool-shop-org.github.io/ai-jam-sessions/#listen). The performances were rendered offline on a rented GPU,
+not by the server's own sound engines. Each is built from sixteen takes of a singer conditioned on the score, with one take chosen for each phrase and checked for timing and pitch by two
 instruments each, then passed by ear.
 
 | | Amazing Grace | America the Beautiful | Battle Hymn |

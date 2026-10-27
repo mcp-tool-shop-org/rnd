@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.38] - 2026-10-26
+
+- licences: Qwen3-8B and its GGUF repo (Apache-2.0) for the C2 T4 sweep
+
 ## [1.1.23.1.37] - 2026-10-26
 
 - newsletter: issue 31 (the generate-ladder correction, three releases, the newsletter mirrors)

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.40] - 2026-10-27
+
+- licences for Mistral Small 3.2 24B, the c2 second-reader family for reasoning-dataset-lab (HF card, Ollama licence layer; outside check recorded)
+
 ## [1.1.23.1.39] - 2026-10-27
 
 - newsletter: issue 32, a spotlight on AI Jam Sessions, interlock and XRPL Camp

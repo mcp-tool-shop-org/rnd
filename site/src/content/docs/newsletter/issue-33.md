@@ -4,7 +4,7 @@ description: "Yesterday the T4 part of the C2 sweep finished. Replayed over the 
 issue: 33
 date: 2026-10-28
 highlights:
-  - "<strong>The T4 sweep is done.</strong> Three repetitions on Colab's T4 card closed on 27 October. The sweep has spent 19.572 of the 800 units set aside for it."
+  - "<strong>The T4 sweep is done.</strong> Three repetitions on Colab's T4 card closed on 27 October. By the end of the T4 part the sweep had spent 19.572 of the 800 units set aside for it; the L4 and A100 cards started running overnight."
   - "<strong>A check that held on a live run.</strong> interlock 1.0.11 refuses a cell whose memory would overflow the machine, before loading it. On its first live windows, for phi3.5 it refused the same five cells in each of four quants, and nothing crashed."
   - "<strong>A ready-made critic, failed.</strong> An off-the-shelf language-inference model read real supporting quotes as support 21% and 7% of the time, against a pre-set bar of 85%. It won't be used."
   - "<strong>Cognate chooses between plans.</strong> civility-kernel joins Cognate: it drops plans that break a hard rule, scores the rest, and executes the best or asks a person. Its decisions can now be hashed and recorded."
@@ -68,8 +68,9 @@ kills.
 
 The T4 part of C2 ran three repetitions, finishing with window s3a2 on the evening of 27 October. Not every window
 came back whole: one stopped at its spending cap, one was lost to the memory limit before the fix, one was stopped by the launcher after the same kill,
-and one was lost twice when our own machine restarted, then re-run in full. With the trial runs before them, C2 has
-spent **19.572 of the 800 units** set aside for it. The T4 bills **1.07 units an hour**.
+and one was lost twice when our own machine restarted, then re-run in full. By the end of the T4 part, counting the
+trial runs before it, C2 had spent **19.572 of the 800 units** set aside for it. The other cards began overnight. The
+T4 bills **1.07 units an hour**.
 
 ## A ready-made critic fails its test
 

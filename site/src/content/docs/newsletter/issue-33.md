@@ -113,8 +113,8 @@ uncertain, asks a person. If no plan survives, it asks the person to relax a rul
 
 ### Three fixes on the way in
 
-- **A cache keyed on too little.** The kernel remembered its last result by the policy's version alone, so two
-  policies with the same version but different weights or constraints got the first one's answer. The cache is gone.
+- **A cache keyed on too little.** From the policy, the kernel's compile cache read only the version, so two
+  policies with the same version but different weights or constraints got the first one's rules. The cache is gone.
 - **Decisions that can be reproduced.** A caller can now supply the decision's id and time; then the same inputs give
   a byte-identical record.
 - **A number JSON can't hold.** A plan that broke a rule was scored minus infinity, which JSON writes as `null`, so a
@@ -123,7 +123,8 @@ uncertain, asks a person. If no plan survives, it asks the person to relax a rul
 ### What it adds
 
 A decision can now be hashed in the form Cognate's run pre-registration uses, and recorded on its event log. The record
-carries the outcome and which rules each rejected plan broke, and never the plans' steps.
+carries the outcome and which rules each rejected plan broke, and never the plans' steps; the chosen plan's digest
+still covers them, so a step changed afterwards no longer matches.
 
 The new package has **164 tests**: 143 carried over and 21 new. Its tests cover **91.89%** of its lines (578 of 629),
 against a floor of 90%. It is on Cognate's main branch and not yet in a release.

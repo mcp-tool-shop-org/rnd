@@ -27,8 +27,8 @@ its limit killed the model server, three times taking our harness down with it.
 ### The fix, checked against the past first
 
 **interlock 1.0.11**, released on 27 October, works out before each cell how much of the machine's memory the
-cell's working cache would need, from the cell before it. If that is over the machine's limit, the cell is recorded
-as out of memory and never loaded.
+cell's working cache would need, from the cell before it. If that, with a 5% margin added, is over the machine's
+limit (12,954 MiB on a T4), the cell is recorded as out of memory and never loaded.
 
 Before it ran live, it was replayed over the seven T4 windows already on record. Of 234 loads, 12 were the first of
 their run and can't be projected. Of the other 222, it refused **all 34 loads that had been killed** and **none of
@@ -38,21 +38,20 @@ the 188 that had completed**.
 
 The first window on 1.0.11, s2c, ran phi3.5 at Q4_K_M: 21 cells, 13 measured and 8 out of memory. Five of those
 eight were refused by the new check before loading. Two were the exact cells that had killed the harness in windows
-s2a and s2a2; the check projected them at **15,544 MiB** and **42,349 MiB**. The machine's memory log showed
+s2a and s2a2; with the margin, the check projected them at **15,544 MiB** and **42,349 MiB**. The machine's memory log showed
 **no model-server kills and no harness kills.**
 
 The last window, s3a2, ran all four phi3.5 quants on 1.0.11 and refused the same five cells in each, again with no
 kills.
 
-<!-- Chart 1 (Argon designs, if the data earns it): projected host memory for the cells the check judged, against the T4 machine's limit. Refused: 15,544 / 16,602 / 42,349 / 44,364 / 99,886 MiB; the largest completed projection on record, 12,021 MiB; the false-refusal band 12,337 to 12,954 MiB. -->
-
 ### Its limits, stated with it
 
 - The first cell of each run is never projected, because there's nothing earlier to scale from. No first cell on
   record was killed.
-- It can refuse a cell that would have fitted. On a T4 that can happen between **12,337 and 12,954 MiB** of
-  projected memory, because the projection overstates a partly offloaded load. The closest completed load on
-  record projected **12,021 MiB**.
+- It can refuse a cell that would have fitted. A cell projected at **12,337 to 12,954 MiB** is under the T4's
+  limit, but the margin lifts it over, so it is refused; and the projection overstates a partly offloaded load. The
+  closest completed load on record was projected at **12,021 MiB** (12,622 with the margin), 316 MiB short of
+  that band.
 
 ### What the sweep cost
 

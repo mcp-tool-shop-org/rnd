@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.41] - 2026-10-27
+
+- newsletter: issue 33 (the T4 sweep and interlock 1.0.11's host-memory check; aspire-si S1)
+
 ## [1.1.23.1.40] - 2026-10-27
 
 - licences for Mistral Small 3.2 24B, the c2 second-reader family for reasoning-dataset-lab (HF card, Ollama licence layer; outside check recorded)

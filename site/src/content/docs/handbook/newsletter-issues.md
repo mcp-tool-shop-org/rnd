@@ -18,15 +18,57 @@ The charts and diagrams follow [Newsletter visuals](/rnd/handbook/newsletter-vis
 - **The page opens** with a sentence or two, then an "In this issue" list linking to each article's anchor.
 - **Each article is an H2,** with its own sections as H3 and its own charts. Chart files are named
   `issue-NN-<article>-<name>.svg`.
+- **The last H2 is the daily watch,** after the last article and before anything else. See [The daily watch](#the-daily-watch).
 - **Size:** `scripts/check_feed.py` fails an issue whose feed HTML is over 90,000 bytes, because Gmail clips an email
   at about 102 KB. A day with more than that splits its least urgent article into the next day's issue.
+
+## The daily watch
+
+From issue 33, every issue ends with the daily watch: what changed since the last issue in the tools, models and
+sources the studio follows, in the voice of the [weekly watch](/rnd/watch/2026-10-26/). It may repeat what Monday's
+weekly watch covers. R&D runs the check and drops the day's block, each item already read against its own release
+notes, into the Editor's inbox. The Editor owns the page.
+
+- **Where:** the last H2, `## The daily watch`, after the last article, and the last entry of "In this issue".
+- **How it opens:** one line in italics saying what the items are new since, and what they were checked against.
+- **Each item** is one paragraph:
+  - the name and version in bold;
+  - in brackets, who makes it, the release date and a link to the release notes;
+  - what changed, in a sentence or two;
+  - what it means for us;
+  - *What we'll do:* (or *What we did:*), then the action, or "nothing for now" and why.
+- **A quiet day** keeps the heading and says, in one line, that nothing notable came in since the last issue.
+- **Highlights:** the watch adds one only when we acted on an item that day. The feed needs no change: the watch is
+  part of the issue page, so it is in the feed item, the email and the mirrors, and it counts toward the 90,000-byte
+  limit.
+- **The rules of every article apply.** A fix in someone else's tool appears once its release is public; no item goes
+  in without R&D's check of its own source.
+
+### The template
+
+```markdown
+## The daily watch
+
+*New since the last issue, checked against each release's own notes.*
+
+**<Name> <version>** (<maker>, released <YYYY-MM-DD>; [release notes](https://example.com/release)). <What
+changed.> For us, <what it means>. *What we'll do:* <the action>.
+```
+
+A quiet day:
+
+```markdown
+## The daily watch
+
+Nothing notable came in since the last issue.
+```
 
 ## The day
 
 - **Cut-off: 18:00 UTC.** Work after it goes into the next day's issue.
 - **Gathering:**
   - the Book Keeper: receipts, the units ledger and run records;
-  - R&D: results and verdicts;
+  - R&D: results and verdicts, and the daily watch block, checked, by the cut-off;
   - the Publisher: merged PRs, releases, and which security pieces are released and cleared;
   - the Editor: the review replies, then writes.
 - **By 19:30 UTC:** one draft, to the Publisher and to Antigravity, in one ticket that covers every article's technical

@@ -1,6 +1,6 @@
 ---
 title: "28 October: the T4 sweep is done, a ready-made critic fails its test, and Cognate learns to choose between plans"
-description: "Yesterday the T4 part of the C2 sweep finished. Replayed over the earlier windows, interlock 1.0.11's new check would have refused every load that had been killed and none that had completed; on its live windows, nothing crashed. We also tested whether an off-the-shelf language-inference model could check our verifier's quotes. It couldn't: on real supporting quotes it agreed 21% and 7% of the time, against a bar of 85%. And Cognate took in a plan chooser, with three fixes on the way in. In reasoning-dataset-lab, two models agreeing certified 26 test sets, and a blind second key found only 3 of them sound. Overnight, a CPU-only test run turned out to be on the GPU, and CPU runs now hide every route to it. The issue ends with the first daily watch."
+description: "Yesterday the T4 part of the C2 sweep finished. Replayed over the earlier windows, interlock 1.0.11's new check would have refused every load that had been killed and none that had completed; on its live windows, nothing crashed. We also tested whether an off-the-shelf language-inference model could check our verifier's quotes. It couldn't: on real supporting quotes it agreed 21% and 7% of the time, against a bar of 85%. And Cognate took in a plan chooser, with three fixes on the way in. In reasoning-dataset-lab, two models agreeing certified 26 test sets, and a blind second key found only 3 of them sound. A first paid run on batching found that it rewrites most of a model's replies, though few of its verdicts. Overnight, a CPU-only test run turned out to be on the GPU, and CPU runs now hide every route to it. The issue ends with the first daily watch."
 issue: 33
 date: 2026-10-28
 highlights:
@@ -9,12 +9,14 @@ highlights:
   - "<strong>A ready-made critic, failed.</strong> An off-the-shelf language-inference model read real supporting quotes as support 21% and 7% of the time, against a pre-set bar of 85%. It won't be used."
   - "<strong>Cognate chooses between plans.</strong> civility-kernel joins Cognate: it drops plans that break a hard rule, scores the rest, and executes the best or asks a person. Its decisions can now be hashed and recorded."
   - "<strong>Two readers agreeing wasn't enough.</strong> Two models certified 26 of 50 test sets, but a blind second key found only 3 that hold a contradiction on every pair. The sets are being rewritten before any rerun."
+  - "<strong>Batch 1 for verdicts that must repeat.</strong> Served one request at a time, a 30B model repeated all 60 replies. Batched eight at a time, only 1 of 60 matched. Verdicts moved far less, on 1 to 4 of 60."
   - "<strong>CPU runs now hide every GPU.</strong> A CPU-only test server that hid only CUDA put a 24B model on the RTX 5090 through Vulkan. CPU runs now hide every route, ask for no GPU layers, and stop if the server takes any of the card's memory."
 ---
 
 Two results from 27 October: a sweep that finished, with a fix that held on its first live windows, and a test that
 failed, as its pre-registration said it might. Then a change that landed overnight in Cognate, a certification that two
-models agreed on and a second key didn't, a CPU run that turned out to be on the GPU, and, from this issue on, a short daily watch at the end.
+models agreed on and a second key didn't, a test of what batching does to a model's replies, a CPU run that turned
+out to be on the GPU, and, from this issue on, a short daily watch at the end.
 
 **In this issue:**
 
@@ -22,8 +24,9 @@ models agreed on and a second key didn't, a CPU run that turned out to be on the
 2. [A ready-made critic fails its test](#a-ready-made-critic-fails-its-test)
 3. [Cognate learns to choose between plans](#cognate-learns-to-choose-between-plans)
 4. [Two readers agreed, and it wasn't enough](#two-readers-agreed-and-it-wasnt-enough)
-5. [A CPU run that wasn't](#a-cpu-run-that-wasnt)
-6. [The daily watch](#the-daily-watch)
+5. [Batching rewrites a model's replies](#batching-rewrites-a-models-replies)
+6. [A CPU run that wasn't](#a-cpu-run-that-wasnt)
+7. [The daily watch](#the-daily-watch)
 
 ## The T4 sweep is done, and the host-memory check held
 
@@ -182,6 +185,39 @@ contradiction. That's a finding about the test sets, not a measurement of the re
 some of the second key's calls are strict ones (most people would read "the transformer" as a two-winding unit). The
 sets are being rewritten before any rerun, under four rules: one axis per attribute, no relative terms ("higher"), no
 label that contains another value, and no values that can occur together on one unit.
+
+## Batching rewrites a model's replies
+
+A model served one request at a time gives the same reply to the same request, if the seed and settings are fixed.
+Servers are faster when they batch several requests together, but batching changes the arithmetic. We wanted to know
+how much it changes the answers.
+
+On 28 October we ran Muse Glimmer 30B on a Colab A100 (40 GB) under llama.cpp's server, and sent it the same 60
+critic requests, each asking for a verdict, at batch widths 1, 2, 4 and 8 (the server's slot count). Widths 1 and 4
+were run twice. The seed, the settings and the server build were fixed. (The study's code is public, in
+[role-set](https://github.com/mcp-tool-shop-org/role-set), under `scripts/batchdrift/`.)
+
+| Compared with batch 1 | Identical replies | Verdict changed |
+|---|---|---|
+| Batch 1, run again | 60 of 60 | 0 |
+| Batch 2 | 30 of 60 | 3 |
+| Batch 4 | 12 of 60 | 1 |
+| Batch 4, second run | 12 of 60 | 3 |
+| Batch 8 | 1 of 60 | 1 |
+
+- **Batch 1 is deterministic** on this card and build. It matched itself on all 60, and matched an earlier reference
+  run on all 60.
+- **Batching rewrites most replies**: half of them at width 2, all but one at width 8.
+- **And a batched run doesn't repeat itself.** Batch 4 run twice gave the same reply on only 37 of 60.
+- **Verdicts move much less than the text.** They changed on 1 to 4 of the 60 requests in each comparison. With 60
+  requests that is still loose: the 95% intervals reach about 16%.
+
+### What we take from it
+
+Any verdict that has to be reproducible runs at batch 1. Batched runs are their own tier, and their replies can't be
+compared one by one with batch 1's. Two limits: we recorded the server's slot count but not how many requests the
+client kept in flight, so we can't yet say every slot was full. And this is one model on one card under one build;
+other engines and cards may behave differently.
 
 ## A CPU run that wasn't
 

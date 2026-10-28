@@ -1,6 +1,6 @@
 ---
 title: "28 October: the T4 sweep is done, a ready-made critic fails its test, and Cognate learns to choose between plans"
-description: "Yesterday the T4 part of the C2 sweep finished. Replayed over the earlier windows, interlock 1.0.11's new check would have refused every load that had been killed and none that had completed; on its live windows, nothing crashed. We also tested whether an off-the-shelf language-inference model could check our verifier's quotes. It couldn't: on real supporting quotes it agreed 21% and 7% of the time, against a bar of 85%. And Cognate took in a plan chooser, with three fixes on the way in. The issue ends with the first daily watch."
+description: "Yesterday the T4 part of the C2 sweep finished. Replayed over the earlier windows, interlock 1.0.11's new check would have refused every load that had been killed and none that had completed; on its live windows, nothing crashed. We also tested whether an off-the-shelf language-inference model could check our verifier's quotes. It couldn't: on real supporting quotes it agreed 21% and 7% of the time, against a bar of 85%. And Cognate took in a plan chooser, with three fixes on the way in. Overnight, a CPU-only test run turned out to be on the GPU, and CPU runs now hide every route to it. The issue ends with the first daily watch."
 issue: 33
 date: 2026-10-28
 highlights:
@@ -8,18 +8,20 @@ highlights:
   - "<strong>A check that held on a live run.</strong> interlock 1.0.11 refuses a cell whose memory would overflow the machine, before loading it. On its first live windows, for phi3.5 it refused the same five cells in each of four quants, and nothing crashed."
   - "<strong>A ready-made critic, failed.</strong> An off-the-shelf language-inference model read real supporting quotes as support 21% and 7% of the time, against a pre-set bar of 85%. It won't be used."
   - "<strong>Cognate chooses between plans.</strong> civility-kernel joins Cognate: it drops plans that break a hard rule, scores the rest, and executes the best or asks a person. Its decisions can now be hashed and recorded."
+  - "<strong>CPU runs now hide every GPU.</strong> A CPU-only test server that hid only CUDA put a 24B model on the RTX 5090 through Vulkan. CPU runs now hide every route, ask for no GPU layers, and stop if the card's memory rises."
 ---
 
 Two results from 27 October: a sweep that finished, with a fix that held on its first live windows, and a test that
-failed, as its pre-registration said it might. Then a change that landed overnight in Cognate, and, from this issue on,
-a short daily watch at the end.
+failed, as its pre-registration said it might. Then a change that landed overnight in Cognate, a CPU run that turned
+out to be on the GPU, and, from this issue on, a short daily watch at the end.
 
 **In this issue:**
 
 1. [The T4 sweep is done, and the host-memory check held](#the-t4-sweep-is-done-and-the-host-memory-check-held)
 2. [A ready-made critic fails its test](#a-ready-made-critic-fails-its-test)
 3. [Cognate learns to choose between plans](#cognate-learns-to-choose-between-plans)
-4. [The daily watch](#the-daily-watch)
+4. [A CPU run that wasn't](#a-cpu-run-that-wasnt)
+5. [The daily watch](#the-daily-watch)
 
 ## The T4 sweep is done, and the host-memory check held
 
@@ -128,6 +130,43 @@ still covers them, so a step changed afterwards no longer matches.
 
 The new package has **164 tests**: 143 carried over and 21 new. Its tests cover **91.89%** of its lines (578 of 629),
 against a floor of 90%. It is on Cognate's main branch and not yet in a release.
+
+## A CPU run that wasn't
+
+On 28 October we ran a dry run of a 24B model on the rig's processor only, to check a code path before asking for
+time on the RTX 5090. The second Ollama server it started hid CUDA with `CUDA_VISIBLE_DEVICES=-1`, and that was all
+it hid. Ollama 0.40.9 also ships a Vulkan backend, and through it the "CPU" server loaded the model onto the 5090
+anyway: its process held 15,114 MiB of the card's memory for about 29 minutes before we found it and stopped it.
+Nothing broke, but the card was meant to stay free, and the run wasn't measuring what it said.
+
+### The guard
+
+CPU-only runs now do three things:
+
+- **Hide every GPU route**, not just one. The server starts with CUDA, Vulkan and HIP hidden.
+- **Ask for no GPU layers on every request.** A small wrapper adds `num_gpu: 0` to each call, so a backend we didn't
+  think of still gets no layers.
+- **Check, and stop on a rise.** Every 10 seconds a guard reads the GPU memory held by the server's own processes and
+  the card's total, and stops the job unless the server holds nothing and the total hasn't risen.
+
+We tested the stop path three ways, including a forced baseline and a live run that failed closed on a counter it
+couldn't read. Then the guard passed on a 4B model and on the same 24B model: both runs reported `library=cpu`, the
+24B server started with no GPU layers (`-ngl 0`), the server held 0 MiB of the card, and the card's total went down
+slightly over each run rather than up.
+
+### A two-second name
+
+The same night turned up a smaller cost. An embedding job that talked to Ollama at `localhost` hit its 15-minute stop
+(902.4 s) without finishing. Each call was taking about 2 seconds against hundredths of a second at `127.0.0.1`,
+most likely because the rig tries IPv6 first and falls back. With `127.0.0.1` the whole job took 30.8 seconds.
+
+### A study whose retrieval can't miss
+
+That job was the retrieval arm of a study we're preparing: how a model's tool choice holds up as the list of tools
+grows. (Its code is public, in [role-set](https://github.com/mcp-tool-shop-org/role-set), under `scripts/toolcount/`.)
+With real embeddings, the arm found the right tool in its top five for all 170 answerable items, at every list size
+from 10 to 100. That isn't a result: the study's paid run hasn't happened. It says something about the items, which
+name their tool almost word for word. The study will report that alongside whatever it finds.
 
 ## The daily watch
 

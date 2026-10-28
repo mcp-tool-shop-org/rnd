@@ -288,9 +288,13 @@ today at 12:00 PM ET; [watch on YouTube](https://www.youtube.com/watch?v=i9FZyG9
 Physical AI team will cover serving world models for video generation, which trades latency against throughput
 differently from serving language models. They'll show Cosmos 3 Super benchmarks through vLLM-Omni on HGX B200 and
 H200 systems, across four layouts from one eight-GPU replica to eight single-GPU replicas, with which settings to hold
-fixed and how to check the generated clips are whole and actually move. For us, our plan for robotics in simulation
-names Cosmos 3, though nothing has run and the licence read comes first. This talk is about the large Super model on
-datacentre cards, so it bears on how we benchmark more than on anything we'd run, and its fixed settings and clip
-checks are close to what our own throughput studies ask for. *What we'll do:* watch the recording, and note what it
-says on benchmarking method and on the licence and availability of the Cosmos 3 Super weights. Nothing changes on
-the robotics plan before the licence read.
+fixed and how to check the generated clips are whole and actually move. Its measure is, in the description's words,
+"validated video-seconds per node-hour", and the description links a public
+[benchmark repository](https://github.com/nebius/nebius-physical-ai) for reproducing it. For us, the trade-off is the
+one the batching study above ran into from the other side: serving several requests at once changed most of a model's
+replies. We don't serve video models on datacentre cards, but the method is the part we can use: what to hold
+constant between runs, counting only output that passes a check, and when more replicas or more concurrency stop
+helping. Cosmos 3 also sits in our plan for robotics in simulation, which hasn't started, and its licence is read
+before anything is run. *What we'll do:* read the benchmark repository and the talk's blog post, and compare their
+list of settings to hold constant and their checks on output with the protocols of our batching study. We won't run
+anything from it, and nothing changes in the robotics plan before the Cosmos licence has been read.

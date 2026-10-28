@@ -1,6 +1,6 @@
 ---
 title: "28 October: the T4 sweep is done, a ready-made critic fails its test, and Cognate learns to choose between plans"
-description: "Yesterday the T4 part of the C2 sweep finished. Replayed over the earlier windows, interlock 1.0.11's new check would have refused every load that had been killed and none that had completed; on its live windows, nothing crashed. We also tested whether an off-the-shelf language-inference model could check our verifier's quotes. It couldn't: on real supporting quotes it agreed 21% and 7% of the time, against a bar of 85%. And Cognate took in a plan chooser, with three fixes on the way in. Overnight, a CPU-only test run turned out to be on the GPU, and CPU runs now hide every route to it. The issue ends with the first daily watch."
+description: "Yesterday the T4 part of the C2 sweep finished. Replayed over the earlier windows, interlock 1.0.11's new check would have refused every load that had been killed and none that had completed; on its live windows, nothing crashed. We also tested whether an off-the-shelf language-inference model could check our verifier's quotes. It couldn't: on real supporting quotes it agreed 21% and 7% of the time, against a bar of 85%. And Cognate took in a plan chooser, with three fixes on the way in. In reasoning-dataset-lab, two models agreeing certified 26 test sets, and a blind second key found only 3 of them sound. Overnight, a CPU-only test run turned out to be on the GPU, and CPU runs now hide every route to it. The issue ends with the first daily watch."
 issue: 33
 date: 2026-10-28
 highlights:
@@ -8,20 +8,22 @@ highlights:
   - "<strong>A check that held on a live run.</strong> interlock 1.0.11 refuses a cell whose memory would overflow the machine, before loading it. On its first live windows, for phi3.5 it refused the same five cells in each of four quants, and nothing crashed."
   - "<strong>A ready-made critic, failed.</strong> An off-the-shelf language-inference model read real supporting quotes as support 21% and 7% of the time, against a pre-set bar of 85%. It won't be used."
   - "<strong>Cognate chooses between plans.</strong> civility-kernel joins Cognate: it drops plans that break a hard rule, scores the rest, and executes the best or asks a person. Its decisions can now be hashed and recorded."
+  - "<strong>Two readers agreeing wasn't enough.</strong> Two models certified 26 of 50 test sets, but a blind second key found only 3 that hold a contradiction on every pair. The sets are being rewritten before any rerun."
   - "<strong>CPU runs now hide every GPU.</strong> A CPU-only test server that hid only CUDA put a 24B model on the RTX 5090 through Vulkan. CPU runs now hide every route, ask for no GPU layers, and stop if the server takes any of the card's memory."
 ---
 
 Two results from 27 October: a sweep that finished, with a fix that held on its first live windows, and a test that
-failed, as its pre-registration said it might. Then a change that landed overnight in Cognate, a CPU run that turned
-out to be on the GPU, and, from this issue on, a short daily watch at the end.
+failed, as its pre-registration said it might. Then a change that landed overnight in Cognate, a certification that two
+models agreed on and a second key didn't, a CPU run that turned out to be on the GPU, and, from this issue on, a short daily watch at the end.
 
 **In this issue:**
 
 1. [The T4 sweep is done, and the host-memory check held](#the-t4-sweep-is-done-and-the-host-memory-check-held)
 2. [A ready-made critic fails its test](#a-ready-made-critic-fails-its-test)
 3. [Cognate learns to choose between plans](#cognate-learns-to-choose-between-plans)
-4. [A CPU run that wasn't](#a-cpu-run-that-wasnt)
-5. [The daily watch](#the-daily-watch)
+4. [Two readers agreed, and it wasn't enough](#two-readers-agreed-and-it-wasnt-enough)
+5. [A CPU run that wasn't](#a-cpu-run-that-wasnt)
+6. [The daily watch](#the-daily-watch)
 
 ## The T4 sweep is done, and the host-memory check held
 
@@ -131,10 +133,57 @@ still covers them, so a step changed afterwards no longer matches.
 The new package has **164 tests**: 143 carried over and 21 new. Its tests cover **91.89%** of its lines (578 of 629),
 against a floor of 90%. It is on Cognate's main branch and not yet in a release.
 
+## Two readers agreed, and it wasn't enough
+
+[reasoning-dataset-lab](https://github.com/mcp-tool-shop-org/reasoning-dataset-lab) builds test sets with a known
+answer. One kind is a set of five values for one attribute of a machine, chosen so that only one can be true of a
+unit: a transformer's vector group, a vessel's berth status, a reactor's coolant. Any two of them then make a
+contradiction, and a test item can be built from each pair. Before a set is used, it is **certified**: two language
+models, each reading blind, must call every one of its 20 ordered pairs a contradiction.
+
+On 28 October the lab ran certification on 50 sets with two readers, Mistral Small 3.2 (24B, thinking off) and
+Nemotron 3.5 Lightning (30B). Both first passed a fixed test on 20 known-compatible pairs (19 and 20 of 20), so neither
+was simply answering "contradiction" to everything.
+
+### The run
+
+- **26 of 50 sets certified**, and 24 went to a review queue. There were 2,000 calls and none failed.
+- Of the pairs that kept a set out, the readers disagreed on 61. Both called 27 compatible. Another 25 were Nemotron
+  runs whose thinking hit the length limit, and those count as failures, not verdicts.
+
+### A second key
+
+Agreement between readers is only worth something if the pairs really are contradictions, so we had every pair of the
+26 certified sets keyed a second time, by a model blind to the readers' verdicts. It was allowed three answers:
+contradiction, arguable, or compatible.
+
+| Pairs | Contradiction | Arguable | Compatible |
+|---|---|---|---|
+| 520 pairs in the 26 certified sets | 272 | 216 | 32 |
+| 27 pairs both readers called compatible | 2 | 19 | 6 |
+
+Only **3 of the 26 certified sets** came back as contradictions on all 20 pairs. The faults are in the sets, and both
+readers missed them the same way:
+
+- Under the collision regulations a vessel that is drifting is still "underway", so *underway* and *adrift* can both
+  hold.
+- A large generator is often cooled by hydrogen and by water at once.
+- A three-winding transformer carries two vector groups.
+
+Our own read of a sample, made before the second key and without sight of it, had named the same kinds of fault.
+
+### What it means
+
+Two readers agreeing is a weak filter for this task: it rules out clear failures, but it doesn't prove a pair is a
+contradiction. That's a finding about the test sets, not a measurement of the readers. "Arguable" is a judgement, and
+some of the second key's calls are strict ones (most people would read "the transformer" as a two-winding unit). The
+sets are being rewritten before any rerun, under four rules: one axis per attribute, no relative terms ("higher"), no
+label that contains another value, and no values that can occur together on one unit.
+
 ## A CPU run that wasn't
 
-On 28 October we ran a dry run of a 24B model on the rig's processor only, to check a code path before asking for
-time on the RTX 5090. The second Ollama server it started hid CUDA with `CUDA_VISIBLE_DEVICES=-1`, and that was all
+On 28 October we ran a dry run of a 24B model, the Mistral reader above, on the rig's processor only, to check a code
+path before asking for time on the RTX 5090. The second Ollama server it started hid CUDA with `CUDA_VISIBLE_DEVICES=-1`, and that was all
 it hid. Ollama 0.40.9 also ships a Vulkan backend, and through it the "CPU" server loaded the model onto the 5090
 anyway: its process held 15,114 MiB of the card's memory for about 29 minutes before we found it and stopped it.
 Nothing broke, but the card was meant to stay free, and the run wasn't measuring what it said.

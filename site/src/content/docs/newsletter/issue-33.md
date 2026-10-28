@@ -9,7 +9,7 @@ highlights:
   - "<strong>A ready-made critic, failed.</strong> An off-the-shelf language-inference model read real supporting quotes as support 21% and 7% of the time, against a pre-set bar of 85%. It won't be used."
   - "<strong>Cognate chooses between plans.</strong> civility-kernel joins Cognate: it drops plans that break a hard rule, scores the rest, and executes the best or asks a person. Its decisions can now be hashed and recorded."
   - "<strong>Two readers agreeing wasn't enough.</strong> Two models certified 26 of 50 test sets, but a blind second key found only 3 that hold a contradiction on every pair. The sets are being rewritten before any rerun."
-  - "<strong>Batch 1 for verdicts that must repeat.</strong> Served one request at a time, a 30B model repeated all 60 replies. Batched eight at a time, only 1 of 60 matched. Verdicts moved far less, on 1 to 4 of 60."
+  - "<strong>Batch 1 for verdicts that must repeat.</strong> Served one request at a time, a 30B model repeated all 60 replies. Batched eight at a time, only 1 of 60 matched. Decisions moved far less, on 1 to 4 of 60."
   - "<strong>CPU runs now hide every GPU.</strong> A CPU-only test server that hid only CUDA put a 24B model on the RTX 5090 through Vulkan. CPU runs now hide every route, ask for no GPU layers, and stop if the server takes any of the card's memory."
 ---
 
@@ -197,7 +197,7 @@ critic requests, each asking for a verdict, at batch widths 1, 2, 4 and 8 (the s
 were run twice. The seed, the settings and the server build were fixed. (The study's code is public, in
 [role-set](https://github.com/mcp-tool-shop-org/role-set), under `scripts/batchdrift/`.)
 
-| Compared with batch 1 | Identical replies | Verdict changed |
+| Compared with batch 1 | Identical replies | Decision changed |
 |---|---|---|
 | Batch 1, run again | 60 of 60 | 0 |
 | Batch 2 | 30 of 60 | 3 |
@@ -209,8 +209,10 @@ were run twice. The seed, the settings and the server build were fixed. (The stu
   run on all 60.
 - **Batching rewrites most replies**: half of them at width 2, all but one at width 8.
 - **And a batched run doesn't repeat itself.** Batch 4 run twice gave the same reply on only 37 of 60.
-- **Verdicts move much less than the text.** They changed on 1 to 4 of the 60 requests in each comparison that involved batching. With 60
-  requests that is still loose: the 95% intervals reach about 16%.
+- **Decisions move much less than the text.** A reply's decision is its verdict plus the fields that say what it
+  covered. It changed on 1 to 4 of the 60 requests in each comparison that involved batching, and the verdict itself
+  on 0 to 4 (batch 8's one change was in a coverage field). With 60 requests that is still loose: the 95% intervals
+  reach about 16%.
 
 ### What we take from it
 

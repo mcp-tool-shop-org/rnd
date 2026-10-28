@@ -79,8 +79,8 @@ of a 95% interval).
 | grounded | **0.210** (of 267) | 0.073 (of 110; upper 0.137) | no |
 | reasoning | **0.071** (of 210) | 0.029 (of 68; upper 0.101) | no |
 
-The model rarely calls a fooling quote support, so that half holds. But it calls most real supporting lines
-"neutral": 473 of 637 on the NPU. It was trained on prose, and these are lines of code. The pre-registration named
+The model rarely calls a fooling quote support, so that half holds. But most of what it reads, it calls
+"neutral": on the NPU, 473 of 637 distinct labels came back neutral. It was trained on prose, and these are lines of code. The pre-registration named
 that risk, and pairs with a prose comment in the code didn't rescue it: on grounded claims, 0.208 with a comment and
 0.153 without.
 

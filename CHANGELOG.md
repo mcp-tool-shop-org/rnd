@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.42] - 2026-10-28
+
+- licences: Cosmos 3 Nano and its three Sim checkpoints under OpenMDW-1.1 (first robotics rung)
+
 ## [1.1.23.1.41] - 2026-10-27
 
 - newsletter: issue 33 (the T4 sweep and interlock 1.0.11's host-memory check; aspire-si S1)

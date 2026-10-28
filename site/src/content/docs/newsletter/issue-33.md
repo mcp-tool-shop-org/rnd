@@ -79,11 +79,11 @@ of a 95% interval).
 | reasoning | **0.071** (of 210) | 0.029 (of 68; upper 0.101) | no |
 
 The model rarely calls a fooling quote support, so that half holds. But most of what it reads, it calls
-"neutral": on the NPU, 473 of 637 distinct labels came back neutral. It was trained on prose, and these are lines of code. The pre-registration named
+"neutral": on the NPU, 498 of the 677 pairs it scored came back neutral. It was trained on prose, and these are lines of code. The pre-registration named
 that risk, and pairs with a prose comment in the code didn't rescue it: on grounded claims, 0.208 with a comment and
 0.153 without.
 
-It ran on both of the rig's Intel devices. They agreed on 636 of 637 labels, and the integrated GPU was about three
+It ran on both of the rig's Intel devices. They agreed on 676 of 677 labels (99.9%), and the integrated GPU was about three
 times faster than the NPU (0.089 s a pair against 0.271 s). That's moot for this model, which fails on both.
 
 ### What it means

@@ -8,7 +8,7 @@ highlights:
   - "<strong>A check that held on a live run.</strong> interlock 1.0.11 refuses a cell whose memory would overflow the machine, before loading it. On its first live windows, for phi3.5 it refused the same five cells in each of four quants, and nothing crashed."
   - "<strong>A ready-made critic, failed.</strong> An off-the-shelf language-inference model read real supporting quotes as support 21% and 7% of the time, against a pre-set bar of 85%. It won't be used."
   - "<strong>Cognate chooses between plans.</strong> civility-kernel joins Cognate: it drops plans that break a hard rule, scores the rest, and executes the best or asks a person. Its decisions can now be hashed and recorded."
-  - "<strong>CPU runs now hide every GPU.</strong> A CPU-only test server that hid only CUDA put a 24B model on the RTX 5090 through Vulkan. CPU runs now hide every route, ask for no GPU layers, and stop if the card's memory rises."
+  - "<strong>CPU runs now hide every GPU.</strong> A CPU-only test server that hid only CUDA put a 24B model on the RTX 5090 through Vulkan. CPU runs now hide every route, ask for no GPU layers, and stop if the server takes any of the card's memory."
 ---
 
 Two results from 27 October: a sweep that finished, with a fix that held on its first live windows, and a test that
@@ -147,7 +147,7 @@ CPU-only runs now do three things:
 - **Ask for no GPU layers on every request.** A small wrapper adds `num_gpu: 0` to each call, so a backend we didn't
   think of still gets no layers.
 - **Check, and stop on a rise.** Every 10 seconds a guard reads the GPU memory held by the server's own processes and
-  the card's total, and stops the job unless the server holds nothing and the total hasn't risen.
+  the card's total, and stops the job unless the server holds nothing and the total hasn't risen by more than 512 MiB.
 
 We tested the stop path three ways, including a forced baseline and a live run that failed closed on a counter it
 couldn't read. Then the guard passed on a 4B model and on the same 24B model: both runs reported `library=cpu`, the

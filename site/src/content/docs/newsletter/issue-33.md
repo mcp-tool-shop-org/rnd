@@ -148,8 +148,9 @@ was simply answering "contradiction" to everything.
 ### The run
 
 - **26 of 50 sets certified**, and 24 went to a review queue. There were 2,000 calls and none failed.
-- Of the pairs that kept a set out, the readers disagreed on 61. Both called 27 compatible. Another 25 were Nemotron
-  runs whose thinking hit the length limit, and those count as failures, not verdicts.
+- 121 pairs kept those 24 sets out. On 55, one reader called a contradiction and the other called the pair compatible. Both readers called
+  27 compatible. Another 25 were Nemotron runs whose thinking hit the length limit, which count as failures, not
+  verdicts. On the other 14, a reader answered "unsure".
 
 ### A second key
 
@@ -170,7 +171,9 @@ readers missed them the same way:
 - A large generator is often cooled by hydrogen and by water at once.
 - A three-winding transformer carries two vector groups.
 
-Our own read of a sample, made before the second key and without sight of it, had named the same kinds of fault.
+Our own read of a sample, made before the second key and without sight of it, had found the first two. The second key
+agreed with every fault that read named, and found others, such as the three-winding transformer, in sets the read
+had called clean.
 
 ### What it means
 

@@ -193,7 +193,8 @@ Servers are faster when they batch several requests together, but batching chang
 how much it changes the answers.
 
 On 28 October we ran Muse Glimmer 30B on a Colab A100 (40 GB) under llama.cpp's server, and sent it the same 60
-critic requests, each asking for a verdict, at batch widths 1, 2, 4 and 8 (the server's slot count). Widths 1 and 4
+critic requests (52 asking for a verdict, 8 for the flaw in a check) at batch widths 1, 2, 4 and 8 (the server's slot
+count). Widths 1 and 4
 were run twice. The seed, the settings and the server build were fixed. (The study's code is public, in
 [role-set](https://github.com/mcp-tool-shop-org/role-set), under `scripts/batchdrift/`.)
 
@@ -209,9 +210,10 @@ were run twice. The seed, the settings and the server build were fixed. (The stu
   run on all 60.
 - **Batching rewrites most replies**: half of them at width 2, all but one at width 8.
 - **And a batched run doesn't repeat itself.** Batch 4 run twice gave the same reply on only 37 of 60.
-- **Decisions move much less than the text.** A reply's decision is its verdict plus the fields that say what it
-  covered. It changed on 1 to 4 of the 60 requests in each comparison that involved batching, and the verdict itself
-  on 0 to 4 (batch 8's one change was in a coverage field). With 60 requests that is still loose: the 95% intervals
+- **Decisions move much less than the text.** A reply's decision is its verdict (or, for a flaw request, the flaw
+  it names) plus the fields that say what it covered. It changed on 1 to 4 of the 60 requests in each comparison that
+  involved batching. The verdict itself changed on 0 to 4, no flaw label changed, and batch 8's one change was in a
+  coverage field. With 60 requests that is still loose: the 95% intervals
   reach about 16%.
 
 ### What we take from it

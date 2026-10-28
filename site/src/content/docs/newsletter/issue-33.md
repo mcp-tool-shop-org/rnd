@@ -282,3 +282,15 @@ next pin. *What we'll do:* check it on a CPU run before anything paid.
 Its listed changes are on the Apple-silicon side (MLX, faster prompt processing), an updated llama.cpp, and Liquid AI's
 new LFM3 models, which run on Apple hardware only for now. For us, the C2 sweep ran on 0.40.11. *What we'll do:*
 nothing for now; C2 stays on 0.40.11, so its windows stay comparable.
+
+**Serving World Models: Latency vs Throughput with NVIDIA Cosmos 3 Super on Nebius** (NVIDIA Developer livestream,
+today at 12:00 PM ET; [watch on YouTube](https://www.youtube.com/watch?v=i9FZyG9-Gx0)). Two speakers from Nebius's
+Physical AI team will cover serving world models for video generation, which trades latency against throughput
+differently from serving language models. They'll show Cosmos 3 Super benchmarks through vLLM-Omni on HGX B200 and
+H200 systems, across four layouts from one eight-GPU replica to eight single-GPU replicas, with which settings to hold
+fixed and how to check the generated clips are whole and actually move. For us, our plan for robotics in simulation
+names Cosmos 3, though nothing has run and the licence read comes first. This talk is about the large Super model on
+datacentre cards, so it bears on how we benchmark more than on anything we'd run, and its fixed settings and clip
+checks are close to what our own throughput studies ask for. *What we'll do:* watch the recording, and note what it
+says on benchmarking method and on the licence and availability of the Cosmos 3 Super weights. Nothing changes on
+the robotics plan before the licence read.

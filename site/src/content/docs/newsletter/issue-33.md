@@ -5,7 +5,7 @@ issue: 33
 date: 2026-10-28
 highlights:
   - "<strong>The T4 sweep is done.</strong> Three repetitions on Colab's T4 card closed on 27 October. The sweep has spent 19.572 of the 800 units set aside for it."
-  - "<strong>A check that held on a live run.</strong> interlock 1.0.11 refuses a cell whose memory would overflow the machine, before loading it. On its first live windows it refused the same five cells per model and quant, and nothing crashed."
+  - "<strong>A check that held on a live run.</strong> interlock 1.0.11 refuses a cell whose memory would overflow the machine, before loading it. On its first live windows, for phi3.5 it refused the same five cells in each of four quants, and nothing crashed."
   - "<strong>A ready-made critic, failed.</strong> An off-the-shelf language-inference model read real supporting quotes as support 21% and 7% of the time, against a pre-set bar of 85%. It won't be used."
 ---
 

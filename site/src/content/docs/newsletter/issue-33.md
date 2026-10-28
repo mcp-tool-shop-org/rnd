@@ -262,7 +262,7 @@ name their tool almost word for word. The study will report that alongside whate
 
 ## The daily watch
 
-*New since the [weekly watch](/rnd/watch/2026-10-26/) of 26 October, checked against each release's own notes.*
+*New since the [weekly watch](/rnd/watch/2026-10-26/) of 26 October, checked against each item's own source.*
 
 **NeMo Relay 0.11.0** (NVIDIA, released 2026-10-28;
 [release notes](https://github.com/NVIDIA/NeMo-Relay/releases/tag/0.11.0)). This is the agent-tracing tool we tried in
@@ -295,6 +295,27 @@ one the batching study above ran into from the other side: serving several reque
 replies. We don't serve video models on datacentre cards, but the method is the part we can use: what to hold
 constant between runs, counting only output that passes a check, and when more replicas or more concurrency stop
 helping. Cosmos 3 also sits in our plan for robotics in simulation, which hasn't started, and its licence is read
-before anything is run. *What we'll do:* read the benchmark repository and the talk's blog post, and compare their
-list of settings to hold constant and their checks on output with the protocols of our batching study. We won't run
-anything from it, and nothing changes in the robotics plan before the Cosmos licence has been read.
+before anything is run. *What we'll do:* read the benchmark repository and the talk's written version (next item),
+and compare their list of settings to hold constant and their checks on output with the protocols of our batching
+study. We won't run anything from it, and nothing changes in the robotics plan before the Cosmos licence has been read.
+
+**Serving world models: Request latency and node throughput tradeoffs** (Nebius, published 2026-10-26;
+[the post](https://nebius.com/blog/posts/serving-world-models-latency-node-throughput)). The written version of the
+talk, by the same two speakers, and the post the talk links as its technical blog. It serves Cosmos 3 Super through
+vLLM-Omni on eight-GPU B200 and H200 nodes split four ways. By the authors' figures, on B200 eight one-GPU replicas
+gave 42.5% more validated video per node-hour than one eight-GPU replica, at 5.5 times the mean request latency
+(378.1 s against 68.5 s); on H200 the gain was 25.7%, at 6.3 times. Only clips that pass a validation check count,
+while failed attempts still use the node's time. The post lists what it held constant, from the model revision and
+container to the seeds, resolution, frame count and denoising steps, and it ran one request at a time per replica.
+For us, it is the batching study's trade-off put in node terms: the layout with the most output per node is the one
+with the slowest single request, and its method is close to ours. *What we'll do:* compare its list of what's held
+constant, and its validation check, with our batching protocol. We run nothing from it.
+
+**NVIDIA Cosmos Opens New Tools to Train, Evaluate and Deploy World Models** (NVIDIA, published 2026-10-21;
+[the post](https://blogs.nvidia.com/blog/cosmos-open-train-evaluate-deploy-world-models/)). It announces Cosmos Data
+Factory (tools and blueprints to label, curate, augment and evaluate training data), the Cosmos Framework (training,
+optimisation and deployment tools offered as agent skills), Cosmos 3 Nano checkpoints for testing autonomous policies
+in simulation, updated Cosmos 3 NIM microservices that NVIDIA says give "up to 2x faster inference with no quality loss in
+validated configurations", and version 3.3 of its Metropolis blueprint for video search and summarization (VSS). For us, the Nano simulation checkpoints are the part closest to our plan for
+robotics in simulation, and the post states no licence terms for any of it. *What we'll do:* read the licences on the
+checkpoints' own model cards and repositories, as part of the planned licence read, before anything is run.

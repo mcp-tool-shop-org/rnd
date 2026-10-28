@@ -209,7 +209,7 @@ were run twice. The seed, the settings and the server build were fixed. (The stu
   run on all 60.
 - **Batching rewrites most replies**: half of them at width 2, all but one at width 8.
 - **And a batched run doesn't repeat itself.** Batch 4 run twice gave the same reply on only 37 of 60.
-- **Verdicts move much less than the text.** They changed on 1 to 4 of the 60 requests in each comparison. With 60
+- **Verdicts move much less than the text.** They changed on 1 to 4 of the 60 requests in each comparison that involved batching. With 60
   requests that is still loose: the 95% intervals reach about 16%.
 
 ### What we take from it

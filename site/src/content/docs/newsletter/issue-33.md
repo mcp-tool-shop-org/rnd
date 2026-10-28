@@ -1,6 +1,6 @@
 ---
 title: "28 October: the T4 sweep is done, and a ready-made critic fails its test"
-description: "Yesterday the T4 part of the C2 sweep finished, and interlock 1.0.11's new check refused, before loading, every cell that had crashed the machine before, with none crashing. We also tested whether an off-the-shelf language-inference model could check our verifier's quotes. It couldn't: on real supporting quotes it agreed 21% and 7% of the time, against a bar of 85%."
+description: "Yesterday the T4 part of the C2 sweep finished. Replayed over the earlier windows, interlock 1.0.11's new check would have refused every load that had been killed and none that had completed; on its live windows, nothing crashed. We also tested whether an off-the-shelf language-inference model could check our verifier's quotes. It couldn't: on real supporting quotes it agreed 21% and 7% of the time, against a bar of 85%."
 issue: 33
 date: 2026-10-28
 highlights:
@@ -9,7 +9,7 @@ highlights:
   - "<strong>A ready-made critic, failed.</strong> An off-the-shelf language-inference model read real supporting quotes as support 21% and 7% of the time, against a pre-set bar of 85%. It won't be used."
 ---
 
-Two results from 27 October: a sweep that finished with a fix that worked, and a test that failed, as its
+Two results from 27 October: a sweep that finished, with a fix that held on its first live windows, and a test that failed, as its
 pre-registration said it might.
 
 **In this issue:**

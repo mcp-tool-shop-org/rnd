@@ -13,6 +13,13 @@
     "width": 1200,
     "height": 465
   },
+  "colab-golden-path-eight-steps.svg": {
+    "png": "colab-golden-path-eight-steps.png",
+    "png_sha256": "a9e524951dfe60af87eb37bddec9660b873fd6244c9d00b484ae1cfee005b1ef",
+    "svg_sha256": "c4aed5576548c2afc252279f8c95a8767e81eb8ad7048edafb5a1f7739de1194",
+    "width": 1200,
+    "height": 537
+  },
   "critic-calls.svg": {
     "png": "critic-calls.png",
     "png_sha256": "e044293d60e6fd771231588f6c8548fd85be4975477ad9464fa2e9942484af05",

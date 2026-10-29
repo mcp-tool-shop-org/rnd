@@ -10,6 +10,7 @@ Claude Code drives it from the rig through Google's `google-colab-cli`, and nobo
 the path we settled on after the Stage 1 writer pilot spent about half of its first 71 units on windows that gave
 nothing back ([issue 11](../../newsletter/issue-11/)). Every rule below exists because a window failed without it.
 The raw data behind it, one row per window, is in [`experiments/colab-golden-path/data`](https://github.com/mcp-tool-shop-org/rnd/tree/main/experiments/colab-golden-path/data).
+For the short version written for any Colab plan, see [Colab golden path, for any plan](../colab-golden-path/).
 
 The working code is in role-set (`scripts/colab/`): `smoke_window.sh` runs a window from the rig, `pin_window.py` is
 the job on the VM, `vm_gate.py` is the health gate, and `tests/fake_colab/colab` is a fake CLI for tests.

@@ -612,7 +612,8 @@
       "covers": [
         "Nemotron-4-340B",
         "NVIDIA-Nemotron-3-Super-120B (Dec 2025)",
-        "the licence bundled in the Ollama nemotron-3.5-lightning tag"
+        "the licence bundled in the Ollama nemotron-3.5-lightning tag",
+        "qybaihe/mu-judge-nemotron-nano-4b"
       ],
       "url": "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/",
       "page_date": "2025-10-24",
@@ -1727,6 +1728,212 @@
       "snapshot_file": "2026-10-27/mistral-small3.2-ollama-licence.txt",
       "archive_url": "",
       "restriction_search": "The licence layer read in full: Apache-2.0 sections 1-9, no added terms. Ollama's own terms (ollama-terms) govern the download service, not the model."
+    },
+    {
+      "id": "mu-judge-nemotron-nano-4b-card",
+      "owner": "qybaihe",
+      "kind": "model-card",
+      "covers": [
+        "qybaihe/mu-judge-nemotron-nano-4b"
+      ],
+      "url": "https://huggingface.co/qybaihe/mu-judge-nemotron-nano-4b",
+      "page_date": "HF commit 20013889998b8c73a4263620ae6e4ebb407bf30a (repo last modified 2026-10-23)",
+      "read_date": "2026-10-29",
+      "clauses": [
+        "License: nvidia-open-model-license",
+        "The weights are a derivative of NVIDIA Nemotron 3 Nano 4B and are released under the NVIDIA Open Model License. The training and serving code is MIT."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [],
+      "notes": "Card front matter declares license: other, license_name: nvidia-open-model-license, and links to nvidia-open-model-license; the License section repeats that the weights are released under the NVIDIA Open Model License and the training and serving code is MIT. Not gated. Read at revision 20013889998b8c73a4263620ae6e4ebb407bf30a for the small-judge bake-off.",
+      "restriction_search": "Searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, guardrail, strictly; hits are in the description and License section; none restricts evaluation or outputs.",
+      "snapshot_sha256": "d369794fd90e15511235015393e1c959b2bb36590b83cac96e123260c53fc34a",
+      "snapshot_file": "2026-10-29/mu-judge-nemotron-nano-4b-card.txt",
+      "archive_url": null
+    },
+    {
+      "id": "nemotron-3-nano-4b-card",
+      "owner": "NVIDIA",
+      "kind": "model-card",
+      "covers": [
+        "nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16"
+      ],
+      "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16",
+      "page_date": "Release Date 2026-03-16; HF commit dfaf35de3e30f1867dd8dbc38a7fc9fb52d3914f (last modified 2026-03-20)",
+      "read_date": "2026-10-29",
+      "clauses": [
+        "License: nvidia-nemotron-open-model-license",
+        "This model is ready for commercial use.",
+        "Governing Terms: Use of this model is governed by the NVIDIA Nemotron Open Model License ."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [],
+      "notes": "Base model for mu-judge-nemotron-nano-4b and the untuned base control in the small-judge bake-off. Card front matter declares license_name: nvidia-nemotron-open-model-license and links to nvidia-nemotron-open-model-license (the repo LICENSE file is 0 bytes). Not gated. The Ethical Considerations section advises against circumventing safety guardrails without a similar guardrail; that is advisory text on the card, and the governing licence (nvidia-nemotron-open-model-license) has no guardrail clause.",
+      "restriction_search": "Searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, guardrail, strictly; checked governing terms and ethical considerations; no clause restricts evaluation or outputs.",
+      "snapshot_sha256": "74a82d150e3da553813b9f4518acc12a8b217682aa8833a3c033c9f8f0c30492",
+      "snapshot_file": "2026-10-29/nemotron-3-nano-4b-card.txt",
+      "archive_url": null
+    },
+    {
+      "id": "nvidia-nemotron-open-model-license",
+      "owner": "NVIDIA",
+      "kind": "model-licence",
+      "covers": [
+        "nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16"
+      ],
+      "url": "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-nemotron-open-model-license/",
+      "page_date": "2025-12-15 (Last Modified)",
+      "read_date": "2026-10-29",
+      "clauses": [
+        "Works are commercially usable. You are free to create and distribute Derivative Works. NVIDIA does not claim ownership to any outputs generated using the Works or Derivative Works.",
+        "NVIDIA hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in source or object form."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Redistributing the Work or Derivative Works: give recipients a copy of the License, retain notices, and include the attribution notice in a NOTICE file if one is distributed (§3).",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "A separate agreement from nvidia-open-model-license, linked from the NVIDIA-Nemotron-3-Nano-4B-BF16 card (license_link). Grant is perpetual and irrevocable (§2), terminating only if You file patent or copyright infringement litigation against the Work or its output. Contains no guardrail termination clause.",
+      "restriction_search": "Read full licence text (Sections 1-10) and searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, guardrail, strictly; no restriction on evaluation or outputs.",
+      "snapshot_sha256": "9c0ed40e21873a56383e4af807661ebf05fbfe33b3dd2e881562162f14ab3629",
+      "snapshot_file": "2026-10-29/nvidia-nemotron-open-model-license.txt",
+      "archive_url": null
+    },
+    {
+      "id": "d3-mini-card",
+      "owner": "vLLM Semantic Router Team (vllm-sr)",
+      "kind": "model-card",
+      "covers": [
+        "vllm-sr/d3-mini"
+      ],
+      "url": "https://huggingface.co/vllm-sr/d3-mini",
+      "page_date": "HF commit bd0090dd758d32ba59ef5c749910a8e87fc4391f (repo last modified 2026-10-17)",
+      "read_date": "2026-10-29",
+      "clauses": [
+        "License: apache-2.0",
+        "License Apache-2.0 ( LICENSE ). Built on Qwen/Qwen3.5-4B (Apache-2.0)."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "Redistributing weights, remote code or derivatives: Apache-2.0 licence copy and NOTICE (Copyright 2026 vLLM Semantic Router Team; Built on Qwen/Qwen3.5-4B).",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "Covers both the d3-mini weights and the remote code in the repo (d3_engine.py, d3_fast.py, d3_format.py, d3_kernels.py, d3_runtime.py, d3_server.py) at revision bd0090dd758d32ba59ef5c749910a8e87fc4391f. The repo ships the standard Apache-2.0 LICENSE text and a NOTICE file. Not gated.",
+      "restriction_search": "Read the card, raw LICENSE and NOTICE at revision bd0090dd; searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, guardrail, strictly; no restriction found.",
+      "snapshot_sha256": "24f238248901a47321f62c4eacaabe90eb09d52c3b9fefabaa26ee82d5700fbf",
+      "snapshot_file": "2026-10-29/d3-mini-card.txt",
+      "archive_url": null
+    },
+    {
+      "id": "granite-guardian-4.1-8b-card",
+      "owner": "IBM Research (Granite)",
+      "kind": "model-card",
+      "covers": [
+        "ibm-granite/granite-guardian-4.1-8b"
+      ],
+      "url": "https://huggingface.co/ibm-granite/granite-guardian-4.1-8b",
+      "page_date": "Release Date 2026-04; HF commit ab01ccca5dcfb80246369a086a4a87a29198f5af (last modified 2026-08-27)",
+      "read_date": "2026-10-29",
+      "clauses": [
+        "License: apache-2.0",
+        "Intended Use: The guardian model must be used strictly for the prescribed scoring mode, which generates yes/no outputs based on the specified template."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Redistributing weights or derivatives: Apache-2.0 licence copy and notices.",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "Card front matter and Model Summary state Apache-2.0 (base model ibm-granite/granite-4.1-8b). Not gated; no separate LICENSE file in the repo. The Usage and Scope of Use sections state that the model must be used strictly for the prescribed scoring mode generating yes/no outputs based on the specified template, warning that deviation may lead to unexpected or unsafe outputs; the bake-off runs it in that prescribed scoring mode, and the licence remains Apache-2.0.",
+      "restriction_search": "Searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, guardrail, strictly; checked Usage and Scope of Use; the scoring-mode statement is quoted in clauses and matches our evaluation use.",
+      "snapshot_sha256": "48cafcce6200c502df1fcaf989ebe7dd911fd32d1f33816e51f5465e053ea424",
+      "snapshot_file": "2026-10-29/granite-guardian-4.1-8b-card.txt",
+      "archive_url": null
+    },
+    {
+      "id": "flow-judge-v0.1-card",
+      "owner": "Flow AI (flowaicom)",
+      "kind": "model-card",
+      "covers": [
+        "flowaicom/Flow-Judge-v0.1"
+      ],
+      "url": "https://huggingface.co/flowaicom/Flow-Judge-v0.1",
+      "page_date": "HF commit b7a47acd7c86e981145168e4dea1bef7d84a0894 (repo last modified 2024-10-07)",
+      "read_date": "2026-10-29",
+      "clauses": [
+        "License: apache-2.0",
+        "We opted for the Apache 2.0 license for Flow Judge to provide the community with an open, small yet powerful LM evaluator."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Redistributing weights or derivatives: Apache-2.0 licence copy and notices.",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "Fine-tuned from microsoft/Phi-3.5-mini-instruct (MIT, phi-3.5-mini-instruct-licence). Card front matter declares license: apache-2.0 and the License section states Apache 2.0; the front matter license_link (/resolve/main/LICENSE) returns 404 because no LICENSE file is in the repo. Not gated.",
+      "restriction_search": "Searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, guardrail, strictly; hits are in prompt instructions and dataset descriptions; no restriction on evaluation or outputs.",
+      "snapshot_sha256": "ad6e30b297cece94a5ea6aa69358d8cd7e0f3a51d8a961cc4044c321692bcfa7",
+      "snapshot_file": "2026-10-29/flow-judge-v0.1-card.txt",
+      "archive_url": null
+    },
+    {
+      "id": "nanogpt-jax-181m-card",
+      "owner": "cataluna84",
+      "kind": "model-card",
+      "covers": [
+        "cataluna84/nanogpt-jax-181m (revision f166830d40ab2cbd5fcb01ef522fea5d6102753b)",
+        "github.com/cataluna84/llm-architectures (commit ecd6555527ced58d6a81d6d664407d68b77dac42)"
+      ],
+      "url": "https://huggingface.co/cataluna84/nanogpt-jax-181m",
+      "page_date": "HF commit f166830d40ab2cbd5fcb01ef522fea5d6102753b (repo last modified 2026-07-26); code commit ecd6555527ced58d6a81d6d664407d68b77dac42",
+      "read_date": "2026-10-29",
+      "clauses": [
+        "License: apache-2.0",
+        "Built on the pure-JAX nanoGPT design; see the repository for full attribution and the LICENSE ."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "Redistributing weights, code or derivatives: Apache-2.0 licence copy and notices.",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "Covers the TPU R2 and R2b checkpoint (base/params/ and sft/params/) and its pure-JAX training and inference code at github.com/cataluna84/llm-architectures commit ecd6555527ced58d6a81d6d664407d68b77dac42. The HF card declares license: apache-2.0 and points to the GitHub repository for the LICENSE; the raw LICENSE at commit ecd6555527ced58d6a81d6d664407d68b77dac42 was read on 2026-10-29 and is the unmodified Apache License 2.0 text (sha256 17dd6bd29c77f0eb8aa1aa6b2bad62b77d24b47e2dc93fb8f14ba1a8de7d601e). The card Limitations note 'Research and educational artifact. Do not deploy it anywhere its output is trusted' describes the 181M model's accuracy at chance on benchmarks, not a legal restriction.",
+      "restriction_search": "Read the HF card and the GitHub LICENSE at commit ecd6555; searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, guardrail, strictly; no legal restriction found.",
+      "snapshot_sha256": "cfe7caa9587cc71bd626e5c97102d732bd1f6198575237e078df27f1b3bcfd54",
+      "snapshot_file": "2026-10-29/nanogpt-jax-181m-card.txt",
+      "archive_url": null
     }
   ]
 }

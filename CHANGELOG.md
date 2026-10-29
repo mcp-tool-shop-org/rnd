@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.45] - 2026-10-29
+
+- licences for the judge bake-off and the TPU nanoGPT checkpoint
+
 ## [1.1.23.1.44] - 2026-10-29
 
 - watchlist: add Holoscan SDK releases

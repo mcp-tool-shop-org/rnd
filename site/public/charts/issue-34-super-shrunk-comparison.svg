@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 338" width="100%">
+  <style>
+    text { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+    .h1 { font-size: 12.5px; font-weight: 700; fill: #ffffff; }
+    .sub { font-size: 10px; font-weight: 600; fill: #8a8f98; }
+    .lbl { font-size: 10.5px; font-weight: 700; fill: #ffffff; }
+    .lbl-m { font-size: 10px; font-weight: 600; fill: #8a8f98; }
+    .val { font-size: 10.5px; font-weight: 700; fill: #ffffff; }
+    .val-g { font-size: 10.5px; font-weight: 700; fill: #2f7d5b; }
+    .val-a { font-size: 10.5px; font-weight: 700; fill: #b4532a; }
+    .val-m { font-size: 10px; font-weight: 600; fill: #8a8f98; }
+    .ax { font-size: 9px; font-weight: 600; fill: #8a8f98; }
+    .sm { font-size: 9px; font-weight: 600; fill: #ffffff; }
+    .sm-g { font-size: 9px; font-weight: 700; fill: #2f7d5b; }
+    .sm-m { font-size: 9px; font-weight: 600; fill: #8a8f98; }
+  </style>
+  <rect x="24" y="10" width="640" height="206" rx="4" fill="#1f2430" stroke="#5b6272" stroke-width="1"/>
+  <text class="h1" x="34" y="27">Shrunk Super versions vs full-precision BF16 (21 shared clips: 8 prompts and 3 seeds)</text>
+  <text class="sub" x="34" y="41">LPIPS distance to BF16 (0 = identical; ticks = 3 seed means)</text>
+  <text class="sub" x="518" y="41" text-anchor="middle">Step time</text>
+  <text class="sub" x="609" y="41" text-anchor="middle">480p peak MiB</text>
+  <line x1="196.0" y1="47" x2="196.0" y2="196" stroke="#5b6272" stroke-width="0.75" stroke-dasharray="2,2"/>
+  <text class="ax" x="196.0" y="209" text-anchor="middle">0.0</text>
+  <line x1="236.0" y1="47" x2="236.0" y2="196" stroke="#5b6272" stroke-width="0.75" stroke-dasharray="2,2"/>
+  <text class="ax" x="236.0" y="209" text-anchor="middle">0.1</text>
+  <line x1="276.0" y1="47" x2="276.0" y2="196" stroke="#5b6272" stroke-width="0.75" stroke-dasharray="2,2"/>
+  <text class="ax" x="276.0" y="209" text-anchor="middle">0.2</text>
+  <line x1="316.0" y1="47" x2="316.0" y2="196" stroke="#5b6272" stroke-width="0.75" stroke-dasharray="2,2"/>
+  <text class="ax" x="316.0" y="209" text-anchor="middle">0.3</text>
+  <line x1="356.0" y1="47" x2="356.0" y2="196" stroke="#5b6272" stroke-width="0.75" stroke-dasharray="2,2"/>
+  <text class="ax" x="356.0" y="209" text-anchor="middle">0.4</text>
+  <line x1="396.0" y1="47" x2="396.0" y2="196" stroke="#5b6272" stroke-width="0.75" stroke-dasharray="2,2"/>
+  <text class="ax" x="396.0" y="209" text-anchor="middle">0.5</text>
+  <line x1="436.0" y1="47" x2="436.0" y2="196" stroke="#5b6272" stroke-width="0.75" stroke-dasharray="2,2"/>
+  <text class="ax" x="436.0" y="209" text-anchor="middle">0.6</text>
+  <line x1="482" y1="31" x2="482" y2="206" stroke="#5b6272" stroke-width="0.75"/>
+  <line x1="554" y1="31" x2="554" y2="206" stroke="#5b6272" stroke-width="0.75"/>
+  <text class="lbl" x="34" y="59">int4 (AutoRound, Intel)</text>
+  <rect x="196.0" y="49" width="128.0" height="12" rx="2" fill="#2f7d5b"/>
+  <line x1="320.6" y1="55" x2="327.2" y2="55" stroke="#ffffff" stroke-width="1.25"/>
+  <line x1="320.6" y1="51" x2="320.6" y2="59" stroke="#ffffff" stroke-width="1.5"/>
+  <line x1="324.6" y1="51" x2="324.6" y2="59" stroke="#ffffff" stroke-width="1.5"/>
+  <line x1="327.2" y1="51" x2="327.2" y2="59" stroke="#ffffff" stroke-width="1.5"/>
+  <text class="val-g" x="332.2" y="59">0.320</text>
+  <text class="val-g" x="518" y="59" text-anchor="middle">3.36 s</text>
+  <text class="val-g" x="609" y="59" text-anchor="middle">39,581 MiB</text>
+  <text class="lbl" x="34" y="80">FP8 (ModelOpt)</text>
+  <rect x="196.0" y="70" width="136.6" height="12" rx="2" fill="#2f7d5b"/>
+  <line x1="320.5" y1="76" x2="341.0" y2="76" stroke="#ffffff" stroke-width="1.25"/>
+  <line x1="320.5" y1="72" x2="320.5" y2="80" stroke="#ffffff" stroke-width="1.5"/>
+  <line x1="336.2" y1="72" x2="336.2" y2="80" stroke="#ffffff" stroke-width="1.5"/>
+  <line x1="341.0" y1="72" x2="341.0" y2="80" stroke="#ffffff" stroke-width="1.5"/>
+  <text class="val-g" x="346.0" y="80">0.341</text>
+  <text class="val" x="518" y="80" text-anchor="middle">3.83 s</text>
+  <text class="val" x="609" y="80" text-anchor="middle">69,954 MiB</text>
+  <text class="lbl" x="34" y="101">NVFP4 (ModelOpt)</text>
+  <rect x="196.0" y="91" width="154.7" height="12" rx="2" fill="#b4532a"/>
+  <line x1="330.6" y1="97" x2="366.6" y2="97" stroke="#ffffff" stroke-width="1.25"/>
+  <line x1="330.6" y1="93" x2="330.6" y2="101" stroke="#ffffff" stroke-width="1.5"/>
+  <line x1="354.9" y1="93" x2="354.9" y2="101" stroke="#ffffff" stroke-width="1.5"/>
+  <line x1="366.6" y1="93" x2="366.6" y2="101" stroke="#ffffff" stroke-width="1.5"/>
+  <text class="val-a" x="371.6" y="101">0.387</text>
+  <text class="val" x="518" y="101" text-anchor="middle">7.12 s</text>
+  <text class="val" x="609" y="101" text-anchor="middle">47,396 MiB</text>
+  <text class="lbl" x="34" y="122">NF4 (bitsandbytes)</text>
+  <rect x="196.0" y="112" width="160.2" height="12" rx="2" fill="#b4532a"/>
+  <line x1="344.8" y1="118" x2="372.3" y2="118" stroke="#ffffff" stroke-width="1.25"/>
+  <line x1="344.8" y1="114" x2="344.8" y2="122" stroke="#ffffff" stroke-width="1.5"/>
+  <line x1="351.6" y1="114" x2="351.6" y2="122" stroke="#ffffff" stroke-width="1.5"/>
+  <line x1="372.3" y1="114" x2="372.3" y2="122" stroke="#ffffff" stroke-width="1.5"/>
+  <text class="val-a" x="377.3" y="122">0.401</text>
+  <text class="val" x="518" y="122" text-anchor="middle">3.37 s</text>
+  <text class="val" x="609" y="122" text-anchor="middle">39,753 MiB</text>
+  <text class="lbl" x="34" y="143">int4 (AutoRound, 2nd)</text>
+  <rect x="196.0" y="133" width="162.4" height="12" rx="2" fill="#b4532a"/>
+  <line x1="349.2" y1="139" x2="371.3" y2="139" stroke="#ffffff" stroke-width="1.25"/>
+  <line x1="349.2" y1="135" x2="349.2" y2="143" stroke="#ffffff" stroke-width="1.5"/>
+  <line x1="354.8" y1="135" x2="354.8" y2="143" stroke="#ffffff" stroke-width="1.5"/>
+  <line x1="371.3" y1="135" x2="371.3" y2="143" stroke="#ffffff" stroke-width="1.5"/>
+  <text class="val-a" x="376.3" y="143">0.406</text>
+  <text class="val" x="518" y="143" text-anchor="middle">3.39 s</text>
+  <text class="val" x="609" y="143" text-anchor="middle">41,066 MiB</text>
+  <line x1="34" y1="157" x2="654" y2="157" stroke="#5b6272" stroke-width="1" stroke-dasharray="4,3"/>
+  <text class="ax" x="34" y="170">Separate 16B model baseline (not a Super contender):</text>
+  <text class="lbl-m" x="34" y="187">Nano BF16 (16B baseline)</text>
+  <rect x="196.0" y="177" width="231.1" height="12" rx="2" fill="#8a8f98"/>
+  <line x1="426.0" y1="183" x2="428.4" y2="183" stroke="#ffffff" stroke-width="1.25"/>
+  <line x1="426.0" y1="179" x2="426.0" y2="187" stroke="#ffffff" stroke-width="1.5"/>
+  <line x1="426.8" y1="179" x2="426.8" y2="187" stroke="#ffffff" stroke-width="1.5"/>
+  <line x1="428.4" y1="179" x2="428.4" y2="187" stroke="#ffffff" stroke-width="1.5"/>
+  <text class="val-m" x="433.4" y="187">0.578</text>
+  <text class="val-m" x="518" y="187" text-anchor="middle">0.81 s</text>
+  <text class="val-m" x="609" y="187" text-anchor="middle">36,002 MiB</text>
+  <rect x="24" y="224" width="350" height="104" rx="4" fill="#1f2430" stroke="#5b6272" stroke-width="1"/>
+  <text class="lbl" x="34" y="240">Paired LPIPS vs FP8 (95% bootstrap CI, 21 clips)</text>
+  <text class="ax" x="34" y="253">FP8 &#8722; version (0 = tie; &gt;0 closer than FP8; &lt;0 trails FP8)</text>
+  <line x1="138.0" y1="258" x2="138.0" y2="322" stroke="#ffffff" stroke-width="1" stroke-dasharray="2,2"/>
+  <text class="sm" x="34" y="270">Intel int4</text>
+  <line x1="133.0" y1="266.5" x2="159.0" y2="266.5" stroke="#2f7d5b" stroke-width="2"/>
+  <line x1="133.0" y1="263.5" x2="133.0" y2="269.5" stroke="#2f7d5b" stroke-width="1.5"/>
+  <line x1="159.0" y1="263.5" x2="159.0" y2="269.5" stroke="#2f7d5b" stroke-width="1.5"/>
+  <circle cx="145.7" cy="266.5" r="2.8" fill="#2f7d5b" stroke="#ffffff" stroke-width="1"/>
+  <text class="sm-g" x="165" y="270">+0.021 [−0.014, +0.058] · 9/21, p=0.66</text>
+  <text class="sm" x="34" y="286">NVFP4</text>
+  <line x1="109.1" y1="282.5" x2="133.4" y2="282.5" stroke="#b4532a" stroke-width="2"/>
+  <line x1="109.1" y1="279.5" x2="109.1" y2="285.5" stroke="#b4532a" stroke-width="1.5"/>
+  <line x1="133.4" y1="279.5" x2="133.4" y2="285.5" stroke="#b4532a" stroke-width="1.5"/>
+  <circle cx="121.7" cy="282.5" r="2.8" fill="#b4532a" stroke="#ffffff" stroke-width="1"/>
+  <text class="sm-m" x="165" y="286">−0.045 [−0.080, −0.013] · 16/21, p=0.027</text>
+  <text class="sm" x="34" y="302">NF4</text>
+  <line x1="100.4" y1="298.5" x2="132.8" y2="298.5" stroke="#b4532a" stroke-width="2"/>
+  <line x1="100.4" y1="295.5" x2="100.4" y2="301.5" stroke="#b4532a" stroke-width="1.5"/>
+  <line x1="132.8" y1="295.5" x2="132.8" y2="301.5" stroke="#b4532a" stroke-width="1.5"/>
+  <circle cx="116.7" cy="298.5" r="2.8" fill="#b4532a" stroke="#ffffff" stroke-width="1"/>
+  <text class="sm-m" x="165" y="302">−0.059 [−0.104, −0.014] · 15/21, p=0.078</text>
+  <text class="sm" x="34" y="318">2nd int4</text>
+  <line x1="95.2" y1="314.5" x2="132.9" y2="314.5" stroke="#b4532a" stroke-width="2"/>
+  <line x1="95.2" y1="311.5" x2="95.2" y2="317.5" stroke="#b4532a" stroke-width="1.5"/>
+  <line x1="132.9" y1="311.5" x2="132.9" y2="317.5" stroke="#b4532a" stroke-width="1.5"/>
+  <circle cx="114.7" cy="314.5" r="2.8" fill="#b4532a" stroke="#ffffff" stroke-width="1"/>
+  <text class="sm-m" x="165" y="318">−0.065 [−0.119, −0.014] · 15/21, p=0.078</text>
+  <rect x="384" y="224" width="280" height="104" rx="4" fill="#1f2430" stroke="#2f7d5b" stroke-width="1" stroke-dasharray="5,3"/>
+  <text class="lbl" x="394" y="240">Working choice: Intel&#39;s int4 (provisional)</text>
+  <text class="sm" x="394" y="252">Not separable from FP8 on fidelity (CI crosses 0);</text>
+  <text class="sm" x="394" y="263">ahead on speed (3.36 vs 3.83 s),</text>
+  <text class="sm" x="394" y="274">480p MiB (39,581 vs 69,954), and</text>
+  <text class="sm" x="394" y="285">seed spread (0.311&#8211;0.328 vs 0.311&#8211;0.363).</text>
+  <text class="ax" x="394" y="298">Reverts to FP8 if any pending check prefers FP8:</text>
+  <text class="sm-m" x="394" y="310">1. Reference-free scores   2. VLM pairwise judge</text>
+  <text class="sm-m" x="394" y="322">3. Blind human preference test (&gt; run-to-run spread)</text>
+</svg>

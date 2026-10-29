@@ -14,6 +14,7 @@ NANO an ordinary library update (entries filed or revised, results added).
 ## [1.1.23.1.45] - 2026-10-29
 
 - licences for the judge bake-off and the TPU nanoGPT checkpoint
+- licences: add `mu-judge-nemotron-code` (MIT at `qybaihe/mu-judge-nemotron` commit `ab21eb91`) for the mu-judge prompt-format and serving code
 
 ## [1.1.23.1.44] - 2026-10-29
 

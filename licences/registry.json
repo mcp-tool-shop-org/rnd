@@ -1757,6 +1757,38 @@
       "archive_url": null
     },
     {
+      "id": "mu-judge-nemotron-code",
+      "owner": "qybaihe (mu-judge-nemotron)",
+      "kind": "licence",
+      "covers": [
+        "github.com/qybaihe/mu-judge-nemotron at commit ab21eb918dba040fff8d57a7fa45c8d74af37c47 (the mu-judge prompt-format and serving code, including pipeline/judge_format.py and serve/systemone_server.py)"
+      ],
+      "url": "https://raw.githubusercontent.com/qybaihe/mu-judge-nemotron/ab21eb918dba040fff8d57a7fa45c8d74af37c47/LICENSE",
+      "page_date": "MIT License, Copyright (c) 2026 qybaihe (commit ab21eb918dba040fff8d57a7fa45c8d74af37c47, 2026-10-29)",
+      "read_date": "2026-10-29",
+      "clauses": [
+        "MIT License",
+        "Copyright (c) 2026 qybaihe",
+        "Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction",
+        "The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT: include the copyright notice and permission notice in all copies or substantial portions of the Software.",
+        "No condition attaches to evaluation runs or model outputs."
+      ],
+      "notes": "Covers the mu-judge prompt-format and serving code at github.com/qybaihe/mu-judge-nemotron commit ab21eb918dba040fff8d57a7fa45c8d74af37c47. Read LICENSE (raw sha256 e78c9ae7d26822fd2651a659a7140ba42672b7272b6f1c837e34810103ec1035), pyproject.toml (declares license = \"MIT\") and pipeline/judge_format.py (raw sha256 6a1eae04ef35fbe34f9200552d9d8bd8f5061081680b9d4303814d9dbee17bcd), the fixed prompt format the small-judge bake-off uses. The trained weights in qybaihe/mu-judge-nemotron-nano-4b carry their own entry (mu-judge-nemotron-nano-4b-card, nvidia-open-model-license).",
+      "restriction_search": "Read LICENSE, pipeline/judge_format.py, serve/systemone_server.py, pyproject.toml and README.md at commit ab21eb918dba040fff8d57a7fa45c8d74af37c47; searched for prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, guardrail, strictly; plain MIT text with no additional restrictions.",
+      "snapshot_sha256": "72b37e8a1332bb91c02c6acf6c167bba75e91dcfcaa2d971dda2b928967f8763",
+      "snapshot_file": "2026-10-29/mu-judge-nemotron-code.txt",
+      "archive_url": null
+    },
+    {
       "id": "nemotron-3-nano-4b-card",
       "owner": "NVIDIA",
       "kind": "model-card",

@@ -40,6 +40,7 @@ see that it answers. It authenticates with Application Default Credentials by de
 | Card | VRAM | Units/hr |
 |---|---|---|
 | CPU only | — | 0.08 |
+| CPU (high-memory) | — | 0.26 |
 | T4 | 16 GB | 1.07 |
 | L4 | 24 GB | 1.54 |
 | A100 | 40 GB | 5.30 |
@@ -183,12 +184,15 @@ We price **per job** (hours × rate), not per hour. A faster card at a higher ra
   - The 3 missing cells are recorded as "not reached at the wall", not as failures, and the window was not re-run.
   - We re-run only when nothing usable came back: a bad host, or a failed download.
 - **Keep walls short.** Ours are four hours or less, well under any plan's limit.
-  - Colab does drop VMs. We know of five lost GPU sessions:
+  - Colab does drop VMs. We know of six GPU sessions that lost their VM partway through a job:
     - On 2026-10-17, one about ten minutes in, during a model download.
     - On the same day, one at 79 minutes, with no other session running.
     - On 2026-10-23, three of that day's six long A100 windows, between about 1 h 15 m and 3 h 15 m in. Each was lost
       while 3 or 4 GPU sessions were live, but those were also the same few hours of the day, so the two causes can't
       be told apart.
+    - On 2026-10-29, one A100 window about two hours in, with five sessions live including itself: the same pattern.
+    - Two more, on 2026-10-17, never got a working connection to the VM at all, so no job ran. We don't count them
+      as losses partway through a job.
   - That's thin data and it guarantees nothing, but it's part of why we cap ourselves at 8 sessions at once.
 - **A failed open may still bill.** When `colab new` fails or times out on your side, Google may still have assigned
   the VM. It then shows in `colab sessions` as an unnamed `[?]` entry. Stop-by-name can't reach it, and it bills until
@@ -196,10 +200,15 @@ We price **per job** (hours × rate), not per hour. A faster card at a higher ra
   - So after any failed or timed-out `colab new`, list the sessions yourself, look for an unnamed entry of the hardware
     you asked for, and watch your balance.
   - We've seen this twice. The one we caught is booked like any other window, and a fix to our launcher is queued.
-- **A dropped window resumes; it doesn't restart.** Every call is checkpointed as it runs, so a lost VM costs minutes,
-  not data. The next window replays the saved calls and runs only what's missing.
-- **Secrets stay out of the receipts.** Tokens reach the VM only through the environment, and they are never printed
-  or written to a kept file. The command-line tool itself prints a short-lived runtime token in the URL when an upload
+- **A dropped window resumes, if its checkpoints got home.** Every call is checkpointed as it runs.
+  - When the checkpoints had reached our machine before the loss, the next window replayed them and ran only what
+    was missing.
+  - In the 2026-10-29 loss they lived only on the VM, so the 675 calls it had made were lost.
+  - So we're building a periodic copy-back of the call journal into our launcher, so that a lost VM costs minutes,
+    not the window.
+- **Secrets stay out of the receipts.** Our launchers never put a token on a command line, into `--env` or into a
+  log. The rig writes the token to an owner-only file, uploads it to the VM's RAM-backed `/dev/shm` and deletes its own
+  copy; the job reads it once and deletes it. The command-line tool itself prints a short-lived runtime token in the URL when an upload
   fails, so any log that keeps its output is scrubbed first. Then, before any receipt is committed, a scan checks that
   no token or session URL appears.
 

@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 346" role="img" aria-label="Declining on 30 no-tool requests and picking accuracy on 170 tool requests plotted against prompt length in tokens for Granite 4.2 8B and Qwen3.8-27B with Wilson 95% confidence intervals, no trend line, and an interim Gemma 4 31B running note" font-family="system-ui, sans-serif" font-size="14">
+<rect width="688" height="346" fill="#ffffff"/>
+<text x="344" y="30" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="15">Tool lists up to 100: picking held flat, declining dipped on long prompts</text>
+<text x="344" y="48" text-anchor="middle" fill="#5b6272" font-size="12">30 no-tool and 170 tool calls per cell; Wilson 95% intervals · Interim: Gemma running</text>
+
+<!-- Left top strip: Flat tool-picking accuracy (170 calls per cell) -->
+<text x="24" y="70" fill="#1f2430" font-weight="600" font-size="11.5">Picking a tool (170 calls): flat at 0.965–1.00</text>
+<rect x="24" y="76" width="324" height="16" fill="#2f7d5b"/>
+<text x="186" y="88" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="11">Granite 164–170 of 170 · Qwen 169–170 of 170</text>
+
+<!-- Left main panel: Declining vs Granite prompt length (tokens), no trend line -->
+<text x="24" y="108" fill="#1f2430" font-weight="600" font-size="11.5">Declining on 30 no-tool calls (Wilson 95% CI)</text>
+<line x1="46" y1="118.0" x2="348" y2="118.0" stroke="#8a8f98" stroke-width="0.7" stroke-dasharray="2,2"/>
+<text x="24" y="122.0" fill="#5b6272" font-size="11">1.0</text>
+<line x1="46" y1="166.0" x2="348" y2="166.0" stroke="#8a8f98" stroke-width="0.7" stroke-dasharray="2,2"/>
+<text x="24" y="170.0" fill="#5b6272" font-size="11">0.8</text>
+<line x1="46" y1="214.0" x2="348" y2="214.0" stroke="#8a8f98" stroke-width="0.7" stroke-dasharray="2,2"/>
+<text x="24" y="218.0" fill="#5b6272" font-size="11">0.6</text>
+<line x1="46" y1="262.0" x2="348" y2="262.0" stroke="#8a8f98" stroke-width="0.7" stroke-dasharray="2,2"/>
+<text x="24" y="266.0" fill="#5b6272" font-size="11">0.4</text>
+<line x1="46" y1="262" x2="348" y2="262" stroke="#1f2430" stroke-width="1"/>
+<line x1="65.3" y1="262" x2="65.3" y2="266" stroke="#1f2430" stroke-width="1"/>
+<text x="65.3" y="278" text-anchor="middle" fill="#5b6272" font-size="11">1k</text>
+<line x1="162.0" y1="262" x2="162.0" y2="266" stroke="#1f2430" stroke-width="1"/>
+<text x="162.0" y="278" text-anchor="middle" fill="#5b6272" font-size="11">6k</text>
+<line x1="239.3" y1="262" x2="239.3" y2="266" stroke="#1f2430" stroke-width="1"/>
+<text x="239.3" y="278" text-anchor="middle" fill="#5b6272" font-size="11">10k</text>
+<line x1="336.0" y1="262" x2="336.0" y2="266" stroke="#1f2430" stroke-width="1"/>
+<text x="336.0" y="278" text-anchor="middle" fill="#5b6272" font-size="11">15k tok</text>
+<text x="197" y="294" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="11">Granite prompt length (tokens, no trend line)</text>
+<line x1="67.6" y1="118.0" x2="67.6" y2="145.2" stroke="#2f7d5b" stroke-width="1.6"/>
+<line x1="65.39999999999999" y1="118.0" x2="69.8" y2="118.0" stroke="#2f7d5b" stroke-width="1.4"/>
+<line x1="65.39999999999999" y1="145.2" x2="69.8" y2="145.2" stroke="#2f7d5b" stroke-width="1.4"/>
+<circle cx="67.6" cy="118.0" r="3.0" fill="#2f7d5b"/>
+<line x1="63.2" y1="122.4" x2="63.2" y2="169.2" stroke="#1f2430" stroke-width="2.0"/>
+<line x1="60.400000000000006" y1="122.4" x2="66.0" y2="122.4" stroke="#1f2430" stroke-width="1.6"/>
+<line x1="60.400000000000006" y1="169.2" x2="66.0" y2="169.2" stroke="#1f2430" stroke-width="1.6"/>
+<circle cx="63.2" cy="134.0" r="3.5" fill="#1f2430"/>
+<line x1="81.8" y1="118.0" x2="81.8" y2="145.2" stroke="#2f7d5b" stroke-width="1.6"/>
+<line x1="79.6" y1="118.0" x2="84.0" y2="118.0" stroke="#2f7d5b" stroke-width="1.4"/>
+<line x1="79.6" y1="145.2" x2="84.0" y2="145.2" stroke="#2f7d5b" stroke-width="1.4"/>
+<circle cx="81.8" cy="118.0" r="3.0" fill="#2f7d5b"/>
+<line x1="77.4" y1="119.4" x2="77.4" y2="158.0" stroke="#1f2430" stroke-width="2.0"/>
+<line x1="74.60000000000001" y1="119.4" x2="80.2" y2="119.4" stroke="#1f2430" stroke-width="1.6"/>
+<line x1="74.60000000000001" y1="158.0" x2="80.2" y2="158.0" stroke="#1f2430" stroke-width="1.6"/>
+<circle cx="77.4" cy="126.0" r="3.5" fill="#1f2430"/>
+<line x1="109.8" y1="118.0" x2="109.8" y2="145.2" stroke="#2f7d5b" stroke-width="1.6"/>
+<line x1="107.6" y1="118.0" x2="112.0" y2="118.0" stroke="#2f7d5b" stroke-width="1.4"/>
+<line x1="107.6" y1="145.2" x2="112.0" y2="145.2" stroke="#2f7d5b" stroke-width="1.4"/>
+<circle cx="109.8" cy="118.0" r="3.0" fill="#2f7d5b"/>
+<line x1="105.4" y1="130.7" x2="105.4" y2="189.2" stroke="#1f2430" stroke-width="2.0"/>
+<line x1="102.60000000000001" y1="130.7" x2="108.2" y2="130.7" stroke="#1f2430" stroke-width="1.6"/>
+<line x1="102.60000000000001" y1="189.2" x2="108.2" y2="189.2" stroke="#1f2430" stroke-width="1.6"/>
+<circle cx="105.4" cy="150.0" r="3.5" fill="#1f2430"/>
+<line x1="166.3" y1="119.4" x2="166.3" y2="158.0" stroke="#2f7d5b" stroke-width="1.6"/>
+<line x1="164.10000000000002" y1="119.4" x2="168.5" y2="119.4" stroke="#2f7d5b" stroke-width="1.4"/>
+<line x1="164.10000000000002" y1="158.0" x2="168.5" y2="158.0" stroke="#2f7d5b" stroke-width="1.4"/>
+<circle cx="166.3" cy="126.0" r="3.0" fill="#2f7d5b"/>
+<line x1="161.9" y1="170.5" x2="161.9" y2="248.8" stroke="#b4532a" stroke-width="2.0"/>
+<line x1="159.1" y1="170.5" x2="164.70000000000002" y2="170.5" stroke="#b4532a" stroke-width="1.6"/>
+<line x1="159.1" y1="248.8" x2="164.70000000000002" y2="248.8" stroke="#b4532a" stroke-width="1.6"/>
+<circle cx="161.9" cy="206.0" r="3.5" fill="#b4532a"/>
+<line x1="250.4" y1="126.3" x2="250.4" y2="179.5" stroke="#2f7d5b" stroke-width="1.6"/>
+<line x1="248.20000000000002" y1="126.3" x2="252.6" y2="126.3" stroke="#2f7d5b" stroke-width="1.4"/>
+<line x1="248.20000000000002" y1="179.5" x2="252.6" y2="179.5" stroke="#2f7d5b" stroke-width="1.4"/>
+<circle cx="250.4" cy="142.0" r="3.0" fill="#2f7d5b"/>
+<line x1="246.0" y1="152.0" x2="246.0" y2="224.7" stroke="#1f2430" stroke-width="2.0"/>
+<line x1="243.2" y1="152.0" x2="248.8" y2="152.0" stroke="#1f2430" stroke-width="1.6"/>
+<line x1="243.2" y1="224.7" x2="248.8" y2="224.7" stroke="#1f2430" stroke-width="1.6"/>
+<circle cx="246.0" cy="182.0" r="3.5" fill="#1f2430"/>
+<line x1="304.8" y1="119.4" x2="304.8" y2="158.0" stroke="#2f7d5b" stroke-width="1.6"/>
+<line x1="302.6" y1="119.4" x2="307.0" y2="119.4" stroke="#2f7d5b" stroke-width="1.4"/>
+<line x1="302.6" y1="158.0" x2="307.0" y2="158.0" stroke="#2f7d5b" stroke-width="1.4"/>
+<circle cx="304.8" cy="126.0" r="3.0" fill="#2f7d5b"/>
+<line x1="300.4" y1="177.0" x2="300.4" y2="256.4" stroke="#b4532a" stroke-width="2.0"/>
+<line x1="297.59999999999997" y1="177.0" x2="303.2" y2="177.0" stroke="#b4532a" stroke-width="1.6"/>
+<line x1="297.59999999999997" y1="256.4" x2="303.2" y2="256.4" stroke="#b4532a" stroke-width="1.6"/>
+<circle cx="300.4" cy="214.0" r="3.5" fill="#b4532a"/>
+<line x1="334.4" y1="122.4" x2="334.4" y2="169.2" stroke="#2f7d5b" stroke-width="1.6"/>
+<line x1="332.2" y1="122.4" x2="336.59999999999997" y2="122.4" stroke="#2f7d5b" stroke-width="1.4"/>
+<line x1="332.2" y1="169.2" x2="336.59999999999997" y2="169.2" stroke="#2f7d5b" stroke-width="1.4"/>
+<circle cx="334.4" cy="134.0" r="3.0" fill="#2f7d5b"/>
+<line x1="330.0" y1="126.3" x2="330.0" y2="179.5" stroke="#1f2430" stroke-width="2.0"/>
+<line x1="327.2" y1="126.3" x2="332.8" y2="126.3" stroke="#1f2430" stroke-width="1.6"/>
+<line x1="327.2" y1="179.5" x2="332.8" y2="179.5" stroke="#1f2430" stroke-width="1.6"/>
+<circle cx="330.0" cy="142.0" r="3.5" fill="#1f2430"/>
+<text x="50" y="206" fill="#1f2430" font-size="11">5–20: 26–29/30</text>
+<text x="154" y="236" text-anchor="end" fill="#b4532a" font-weight="600" font-size="11">40: 19/30*</text>
+<text x="238" y="206" text-anchor="end" fill="#1f2430" font-size="11">70: 22/30</text>
+<text x="294" y="248" text-anchor="end" fill="#b4532a" font-weight="600" font-size="11">padded 10: 18/30*</text>
+<text x="306" y="196" fill="#1f2430" font-weight="600" font-size="11">100: 27/30</text>
+<circle cx="378" cy="68" r="3.5" fill="#1f2430"/>
+<circle cx="387" cy="68" r="3.5" fill="#b4532a"/>
+<text x="394" y="72" fill="#1f2430" font-weight="600" font-size="11">Granite 4.2 8B (*sig.)</text>
+<circle cx="534" cy="68" r="3.5" fill="#2f7d5b"/>
+<text x="542" y="72" fill="#2f7d5b" font-weight="600" font-size="11">Qwen3.8-27B (pooled)</text>
+<!-- Right panel: exact counts and Wilson 95% intervals -->
+<text x="374" y="92" fill="#1f2430" font-weight="600" font-size="11">Arm (tokens)</text>
+<text x="470" y="92" fill="#1f2430" font-weight="600" font-size="11">Granite (95% CI)</text>
+<text x="664" y="92" text-anchor="end" fill="#2f7d5b" font-weight="600" font-size="11">Qwen (95% CI)</text>
+<text x="374" y="110" fill="#1f2430" font-size="11">5 (1,004)</text>
+<text x="470" y="110" fill="#1f2430" font-size="11">28/30 (.79–.98)</text>
+<text x="664" y="110" text-anchor="end" fill="#2f7d5b" font-size="11">30/30 (.89–1.0)</text>
+<text x="374" y="127" fill="#1f2430" font-size="11">10 (1,737)</text>
+<text x="470" y="127" fill="#1f2430" font-size="11">29/30 (.83–.99)</text>
+<text x="664" y="127" text-anchor="end" fill="#2f7d5b" font-size="11">30/30 (.89–1.0)</text>
+<text x="374" y="144" fill="#1f2430" font-size="11">20 (3,184)</text>
+<text x="470" y="144" fill="#1f2430" font-size="11">26/30 (.70–.95)</text>
+<text x="664" y="144" text-anchor="end" fill="#2f7d5b" font-size="11">30/30 (.89–1.0)</text>
+<text x="374" y="161" fill="#1f2430" font-size="11">40 (6,108)</text>
+<text x="470" y="161" fill="#b4532a" font-weight="600" font-size="11">19/30* (.46–.78)</text>
+<text x="664" y="161" text-anchor="end" fill="#2f7d5b" font-size="11">29/30 (.83–.99)</text>
+<text x="374" y="178" fill="#1f2430" font-size="11">70 (10,457)</text>
+<text x="470" y="178" fill="#1f2430" font-size="11">22/30 (.56–.86)</text>
+<text x="664" y="178" text-anchor="end" fill="#2f7d5b" font-size="11">27/30 (.74–.97)</text>
+<text x="374" y="195" fill="#1f2430" font-size="11">10 pad (13,270)</text>
+<text x="470" y="195" fill="#b4532a" font-weight="600" font-size="11">18/30* (.42–.75)</text>
+<text x="664" y="195" text-anchor="end" fill="#2f7d5b" font-size="11">29/30 (.83–.99)</text>
+<text x="374" y="212" fill="#1f2430" font-size="11">100 (14,804)</text>
+<text x="470" y="212" fill="#1f2430" font-size="11">27/30 (.74–.97)</text>
+<text x="664" y="212" text-anchor="end" fill="#2f7d5b" font-size="11">28/30 (.79–.98)</text>
+<text x="374" y="229" fill="#1f2430" font-size="11">Top-5 (~1,040)</text>
+<text x="470" y="229" fill="#2f7d5b" font-weight="600" font-size="11">27–30 (.74–1.0)</text>
+<text x="664" y="229" text-anchor="end" fill="#2f7d5b" font-size="11">29–30 (.83–1.0)</text>
+<!-- Dashed status card: Interim, Gemma running -->
+<rect x="374" y="242" width="290" height="50" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="519" y="261" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="11.5">Interim: Gemma 4 31B running</text>
+<text x="519" y="280" text-anchor="middle" fill="#5b6272" font-size="11">Qwen pools 2 halves · 1 request = 3.3 pts</text>
+
+<text x="344" y="310" text-anchor="middle" fill="#5b6272" font-size="12">*Significant after Holm's correction over 11 comparisons: 40 tools p = 0.02,</text>
+<text x="344" y="325" text-anchor="middle" fill="#5b6272" font-size="12">padded 10 p = 0.011; 70 tools p = 0.35, not significant.</text>
+</svg>

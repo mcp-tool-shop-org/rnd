@@ -209,6 +209,34 @@
     "width": 1200,
     "height": 558
   },
+  "issue-34-bimanual-window.svg": {
+    "png": "issue-34-bimanual-window.png",
+    "png_sha256": "04f2bd10d38963d1001c30f8ab1b17e9a18e2977c33ee03984743f3172c8ff5f",
+    "svg_sha256": "d2563cee8ddb9f01d2e489c74f3679d2cbed3e6032fdfe1a66a7a1a2cc6f3aac",
+    "width": 1200,
+    "height": 523
+  },
+  "issue-34-certification-repair.svg": {
+    "png": "issue-34-certification-repair.png",
+    "png_sha256": "0272a0cf650e9f8fcd2f0d5c0756efcabac2a0d2f2c8f407e4564f2ad06797f8",
+    "svg_sha256": "14f3f402cf98c4f4aa08bed705f73a9a74784db2371a476c22e61293a771cf25",
+    "width": 1200,
+    "height": 586
+  },
+  "issue-34-super-shrunk-comparison.svg": {
+    "png": "issue-34-super-shrunk-comparison.png",
+    "png_sha256": "463da577a9d858e8026ec7898ac98d4879456ef87204fb60142913f401f9474e",
+    "svg_sha256": "eb99c772478617fb84972134dc6b89fbc19908fbd58910e4b38fa6ff6161c7e1",
+    "width": 1200,
+    "height": 590
+  },
+  "issue-34-tool-count-abstention.svg": {
+    "png": "issue-34-tool-count-abstention.png",
+    "png_sha256": "fa7103e1439e3b19d9591330c7a8dc6ed5721378b6ac1d6190af8ffca94aa3b9",
+    "svg_sha256": "36116ac87119c990a19bc734e9368d49a04201f1069529338defbe09b16c4ccb",
+    "width": 1200,
+    "height": 603
+  },
   "loop-repeats.svg": {
     "png": "loop-repeats.png",
     "png_sha256": "f7527ae4d3ec14612ffea5b9fafd1f68c1bba4d89e99aae489192b50836155d3",

@@ -184,13 +184,13 @@ We price **per job** (hours × rate), not per hour. A faster card at a higher ra
   - The 3 missing cells are recorded as "not reached at the wall", not as failures, and the window was not re-run.
   - We re-run only when nothing usable came back: a bad host, or a failed download.
 - **Keep walls short.** Ours are four hours or less, well under any plan's limit.
-  - Colab does drop VMs. We know of six GPU sessions that lost their VM partway through a job:
+  - Colab does drop VMs. We know of eight GPU sessions that lost their VM partway through a job:
     - On 2026-10-17, one about ten minutes in, during a model download.
     - On the same day, one at 79 minutes, with no other session running.
     - On 2026-10-23, three of that day's six long A100 windows, between about 1 h 15 m and 3 h 15 m in. Each was lost
       while 3 or 4 GPU sessions were live, but those were also the same few hours of the day, so the two causes can't
       be told apart.
-    - On 2026-10-29, one A100 window about two hours in, with five sessions live including itself: the same pattern.
+    - On 2026-10-29, three A100 sessions in the same region, all within about four minutes of each other.
     - Two more, on 2026-10-17, never got a working connection to the VM at all, so no job ran. We don't count them
       as losses partway through a job.
   - That's thin data and it guarantees nothing, but it's part of why we cap ourselves at 8 sessions at once.

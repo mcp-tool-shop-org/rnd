@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.44] - 2026-10-29
+
+- watchlist: add Holoscan SDK releases
+
 ## [1.1.23.1.43] - 2026-10-29
 
 - newsletter: issue 34 (the repaired reasoning-dataset-lab sets, a tool-count test, Cosmos 3 on rented cards, rnd-data, GitHub Universe); handbook: the daily watch section brought to the current format

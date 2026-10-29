@@ -7,6 +7,7 @@
     {"id": "nvidia-skills", "kind": "github-commits", "url": "https://github.com/NVIDIA/skills", "why": "the skills catalogue mirrored in catalogs/nvidia-skills; run `rnd catalog sync` when it moves"},
     {"id": "nemo-relay", "kind": "github-releases", "url": "https://github.com/NVIDIA/NeMo-Relay", "why": "planned instrument: agent tracing (instruments/nemo-relay.md)"},
     {"id": "nvidia-pair", "kind": "github-releases", "url": "https://github.com/NVIDIA/Personal-AI-Router", "why": "the LAN router compared with interlock (briefs/pair-and-interlock)"},
+    {"id": "holoscan-sdk", "kind": "github-releases", "url": "https://github.com/nvidia-holoscan/holoscan-sdk", "why": "NVIDIA's real-time streaming AI and robotic-control SDK (v5.0.0 GA 2026-10-21, CUDA 13.2); a candidate runtime for later robotics-in-simulation work, so new stable releases should reach the watch"},
     {"id": "ollama", "kind": "github-releases", "url": "https://github.com/ollama/ollama", "why": "the 5090 serving engine; a new version can change behaviour the experiments depend on"},
     {"id": "llama-cpp", "kind": "github-releases", "url": "https://github.com/ggml-org/llama.cpp", "why": "the engine under Ollama; report notable releases only"},
     {"id": "openvino", "kind": "github-releases", "url": "https://github.com/openvinotoolkit/openvino", "why": "the Intel NPU and iGPU lane"},

@@ -613,7 +613,8 @@
         "Nemotron-4-340B",
         "NVIDIA-Nemotron-3-Super-120B (Dec 2025)",
         "the licence bundled in the Ollama nemotron-3.5-lightning tag",
-        "qybaihe/mu-judge-nemotron-nano-4b"
+        "qybaihe/mu-judge-nemotron-nano-4b",
+        "Ollama nemotron-3.5-lightning:30b (llamacpp manifest e6905fffe2e2, licence layer 215a3316f0f1)"
       ],
       "url": "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/",
       "page_date": "2025-10-24",
@@ -1604,7 +1605,8 @@
       "owner": "Ollama (listing of IBM Granite)",
       "kind": "model-card",
       "covers": [
-        "granite4.2:8b"
+        "granite4.2:8b",
+        "granite4.2:30b"
       ],
       "url": "https://ollama.com/library/granite4.2",
       "page_date": "2026-10-25 (fetched; no page date shown)",
@@ -1965,6 +1967,197 @@
       "restriction_search": "Read the HF card and the GitHub LICENSE at commit ecd6555; searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, guardrail, strictly; no legal restriction found.",
       "snapshot_sha256": "cfe7caa9587cc71bd626e5c97102d732bd1f6198575237e078df27f1b3bcfd54",
       "snapshot_file": "2026-10-29/nanogpt-jax-181m-card.txt",
+      "archive_url": null
+    },
+    {
+      "id": "granite4.2-30b-hf-card",
+      "owner": "IBM (Granite Team)",
+      "kind": "model-card",
+      "covers": [
+        "ibm-granite/granite-4.2-30b (revision 9e668ce1c538387ef24d3644e9b0606647762636)",
+        "ibm-granite/granite-4.2-30b-GGUF (revision 27b350a791e81d9a4d1ddca1c49282e9ec533768)",
+        "Ollama granite4.2:30b (manifest be22829aa92aad40153c3b2cfd628269ac9281967e74c44d96750568a5af8ed4; model layer f299dace85d7; licence layer 58d1e17ffe51)"
+      ],
+      "url": "https://huggingface.co/ibm-granite/granite-4.2-30b",
+      "page_date": "Release Date August 25, 2026; HF commit 9e668ce1c538387ef24d3644e9b0606647762636 (last modified 2026-09-04)",
+      "read_date": "2026-10-29",
+      "clauses": [
+        "License: apache-2.0",
+        "All Granite models are released under the Apache 2.0 license, enabling unrestricted commercial and academic use.",
+        "Apache 2.0 Licensed: Fully open for commercial and research use."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Redistributing weights or derivatives: Apache-2.0 licence copy and notices.",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "Hybrid MoE reasoning instruct model (29B total parameters, 3B active). Card front matter declares license: apache-2.0 and links to https://www.apache.org/licenses/LICENSE-2.0; no separate LICENSE file is served in the HF repo and the repo is not gated. On Ollama, granite4.2:30b (manifest sha256 be22829aa92aad40153c3b2cfd628269ac9281967e74c44d96750568a5af8ed4, 18 GB Q4_K_M weights layer f299dace85d7) bundles licence blob 58d1e17ffe51 (11,357 bytes, unmodified Apache License 2.0 text) and links to the IBM Granite 4.2 collection on Hugging Face and apache.org/licenses/LICENSE-2.0.",
+      "restriction_search": "Read the HF card at commit 9e668ce1 and the Ollama granite4.2:30b tag and licence blob (58d1e17ffe51); searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, policy; hits are in clauses and benchmark descriptions; none restricts evaluation or outputs.",
+      "snapshot_sha256": "6edeaa083fcfc555c6858874295c77991108e39b75a458eefc2c4b450ff9e18e",
+      "snapshot_file": "2026-10-29/granite4.2-30b-hf-card.txt",
+      "archive_url": null
+    },
+    {
+      "id": "mistral-small3.2-24b-card",
+      "owner": "Mistral AI",
+      "kind": "model-card",
+      "covers": [
+        "mistralai/Mistral-Small-3.2-24B-Instruct-2506 (revision 95a6d26c4bfb886c58daf9d3f7332c857cb27b43)",
+        "Ollama mistral-small3.2:24b (manifest 5a408ab55df5c1b5cf46533c368813b30bf9e4d8fc39263bf2a3338cfa3b895b; model layer 41a5b0c36a28; licence layer 43070e2d4e53)"
+      ],
+      "url": "https://huggingface.co/mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+      "page_date": "HF commit 95a6d26c4bfb886c58daf9d3f7332c857cb27b43 (repo last modified 2025-12-22)",
+      "read_date": "2026-10-29",
+      "clauses": [
+        "License: apache-2.0",
+        "Mistral-Small-3.2-24B-Instruct-2506 is a minor update of Mistral-Small-3.1-24B-Instruct-2503 ."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Redistributing weights or derivatives: Apache-2.0 licence copy and notices.",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "Upstream Mistral Small 3.2 24B Instruct card, re-read and snapshotted via snapshot.py on 2026-10-29 at commit 95a6d26c4bfb886c58daf9d3f7332c857cb27b43 (see also mistral-small-3.2-24b-hf-card and mistral-small3.2-ollama-page). Card front matter declares license: apache-2.0; the repo is not gated and ships no separate LICENSE file. On Ollama, mistral-small3.2:24b (manifest sha256 5a408ab55df5c1b5cf46533c368813b30bf9e4d8fc39263bf2a3338cfa3b895b, 15 GB Q4_K_M weights layer 41a5b0c36a28) links to this HF repo and bundles licence layer 43070e2d4e53 (11,358 bytes, unmodified Apache License 2.0 text, apache-2.0). The Mistral Privacy Policy link at the bottom of the card applies to Mistral's hosted services, not local open-weight execution.",
+      "restriction_search": "Read the HF card at commit 95a6d26c and the Ollama mistral-small3.2:24b tag and licence blob (43070e2d4e53); searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, policy; no restriction on evaluation or outputs.",
+      "snapshot_sha256": "903fd948594d493f5831f93bde6ddb36d6dd52e5adc495c00b802546043d52d5",
+      "snapshot_file": "2026-10-29/mistral-small3.2-24b-card.txt",
+      "archive_url": null
+    },
+    {
+      "id": "gemma4-31b-card",
+      "owner": "Google DeepMind",
+      "kind": "model-card",
+      "covers": [
+        "google/gemma-4-31B-it (revision 842da3794eaa0b77d5f08bae87a17459d91ff475)",
+        "google/gemma-4-31B (revision 5bbc2fb1c1b2c611d06e3d9f23c170ba21659d89)",
+        "Ollama gemma4:31b (llamacpp manifest 17ba34c06c801ba22f6047bab21ced9429c6d43e0e42ecf339b0f3e5a61e8d97, licence layer 7339fa418c9a; mlx manifest 92808281a855, licence layer a59e1ee2d202)"
+      ],
+      "url": "https://huggingface.co/google/gemma-4-31B-it",
+      "page_date": "HF commit 842da3794eaa0b77d5f08bae87a17459d91ff475 (repo last modified 2026-07-20)",
+      "read_date": "2026-10-29",
+      "clauses": [
+        "License: apache-2.0",
+        "License : Apache 2.0 | Authors : Google DeepMind",
+        "Natural Language Processing (NLP) and VLM Research : These models can serve as a foundation for researchers to experiment with VLM and NLP techniques, develop algorithms, and contribute to the advancement of the field."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Redistributing weights or derivatives: Apache-2.0 licence copy and notices.",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "Dense 31B multimodal instruct model. Card front matter declares license: apache-2.0 and license_link: https://ai.google.dev/gemma/docs/gemma_4_license (which is the plain Apache License 2.0 text, last updated 2026-04-01), and the repo is not gated. On Ollama, gemma4:31b serves two variants that both bundle the unmodified Apache-2.0 text: llamacpp (manifest sha256 17ba34c06c801ba22f6047bab21ced9429c6d43e0e42ecf339b0f3e5a61e8d97, 20 GB Q4_K_M weights layer cd20f2b3f2e3, projector 6357a8a2d521, licence layer 7339fa418c9a) and mlx (manifest 92808281a855, licence layer a59e1ee2d202). Relation to apache-2.0 and gemma-prohibited-use-policy: https://ai.google.dev/gemma/terms (last modified 2026-04-01) states that the Gemma Terms of Use and Prohibited Use Policy apply to the models in its Appendix (Gemma 1-3) and directs Gemma 4 to the Gemma 4 license (plain Apache-2.0), and neither the card nor the Ollama tag references gemma-prohibited-use-policy. Re-read gemma-prohibited-use-policy (last modified 2024-02-21) in full on 2026-10-29: even if it applied, no clause in it bears on or restricts an evaluation that asks the model questions about fictional people's perceptions and beliefs (its Section 3 privacy clause applies only to sensitive personal or private information about real individuals without required legal consent, and Section 4 deception clauses apply to impersonating living or dead individuals to deceive).",
+      "restriction_search": "Read the HF card at commit 842da379, ai.google.dev/gemma/docs/gemma_4_license, ai.google.dev/gemma/terms, ai.google.dev/gemma/prohibited_use_policy, and the Ollama gemma4:31b tag and licence blobs (7339fa418c9a, a59e1ee2d202); searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, policy; no clause restricts evaluation or outputs.",
+      "snapshot_sha256": "0351b26e05c2971f46589e46292a0654d0055cbab5e2d1a996f169f881d6ed3b",
+      "snapshot_file": "2026-10-29/gemma4-31b-card.txt",
+      "archive_url": null
+    },
+    {
+      "id": "nemotron-3.5-lightning-30b-card",
+      "owner": "NVIDIA",
+      "kind": "model-card",
+      "covers": [
+        "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16 (revision a9904d24bcc1d289a1950fa9d2b978c47cf903b9)",
+        "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 (revision bee7596271d1495f6992ae224aefde4410e816b8)",
+        "Ollama nemotron-3.5-lightning:30b (llamacpp manifest e6905fffe2e2d9bbe325a9a2d2e074e3bd32683721bc6dfba409dede2f17f4dc, licence layer 215a3316f0f1; mlx manifest 29a422b3cf50, licence layer de0520fe3613)"
+      ],
+      "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+      "page_date": "Release Date August 11, 2026; HF commit a9904d24bcc1d289a1950fa9d2b978c47cf903b9 (last modified 2026-08-24)",
+      "read_date": "2026-10-29",
+      "clauses": [
+        "License: openmdw-1.1",
+        "This model is ready for commercial use.",
+        "Governing Download Terms: Use of this model is governed by the OpenMDW-1.1 model license ."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [],
+      "notes": "Hybrid Mamba-Transformer MoE model (30B total, 3.5B active). Card front matter at commit a9904d24bcc1d289a1950fa9d2b978c47cf903b9 (and NVFP4 at commit bee7596271d1495f6992ae224aefde4410e816b8) declares license: openmdw-1.1, links to https://openmdw.ai/license/1-1/, and ships the OpenMDW License Agreement v1.1 text in the repo LICENSE file (existing entry openmdw-1.1). Not gated. By contrast, the Ollama tag nemotron-3.5-lightning:30b does not bundle OpenMDW-1.1: its llamacpp variant (manifest sha256 e6905fffe2e2d9bbe325a9a2d2e074e3bd32683721bc6dfba409dede2f17f4dc, 25 GB Q4_K_M weights layer 5c19f6282f4f) bundles the NVIDIA Open Model License Agreement dated October 24, 2025 (licence blob 215a3316f0f1, 10,084 bytes; existing entry nvidia-open-model-license, whose covers is extended here), and its mlx variant (manifest 29a422b3cf50) bundles the NVIDIA Open Model Agreement dated April 2, 2026 (blob de0520fe3613). Under both openmdw-1.1 and nvidia-open-model-license, evaluation and outputs are unrestricted.",
+      "restriction_search": "Read the HF card and repo LICENSE at commit a9904d24 and the Ollama nemotron-3.5-lightning:30b tag and licence blobs (215a3316f0f1, de0520fe3613); searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, guardrail, policy; no clause restricts evaluation or outputs.",
+      "snapshot_sha256": "5b1cb7cd05265af04ba854b7d891ce03fa80a8bc5c208e94d5e0cdbaae8ec102",
+      "snapshot_file": "2026-10-29/nemotron-3.5-lightning-30b-card.txt",
+      "archive_url": null
+    },
+    {
+      "id": "qwen3-vl-8b-instruct-card",
+      "owner": "Alibaba Cloud (Qwen team)",
+      "kind": "model-card",
+      "covers": [
+        "Qwen/Qwen3-VL-8B-Instruct (revision 0c351dd01ed87e9c1b53cbc748cba10e6187ff3b)",
+        "Ollama qwen3-vl:8b-instruct (manifest 70e58e37beb15464e19aa903dedb2cba828b89c0fb186f75ff2738c7347b96eb; model layer a0c1f7c1356e; projector layer 85aa79666ee7; licence layer 7339fa418c9a)"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
+      "page_date": "HF commit 0c351dd01ed87e9c1b53cbc748cba10e6187ff3b (repo last modified 2025-10-15)",
+      "read_date": "2026-10-29",
+      "clauses": [
+        "License: apache-2.0",
+        "This is the weight repository for Qwen3-VL-8B-Instruct."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Redistributing weights or derivatives: Apache-2.0 licence copy and notices.",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "Dense 8B vision-language instruct model, used as a local VLM judge. Card front matter at commit 0c351dd01ed87e9c1b53cbc748cba10e6187ff3b declares license: apache-2.0 and links to https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct/blob/main/LICENSE (no separate LICENSE file is present in the repo file list; the repo is not gated). On Ollama, qwen3-vl:8b-instruct (manifest sha256 70e58e37beb15464e19aa903dedb2cba828b89c0fb186f75ff2738c7347b96eb, 6.2 GB total: 8.19B Q4_K_M model layer a0c1f7c1356e and 576M clip projector layer 85aa79666ee7) bundles licence layer 7339fa418c9a (11,358 bytes, unmodified Apache License 2.0 text, apache-2.0).",
+      "restriction_search": "Read the HF card at commit 0c351dd0 and the Ollama qwen3-vl:8b-instruct tag and licence blob (7339fa418c9a); searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, policy; hits are in architecture and benchmark descriptions; none restricts evaluation or outputs.",
+      "snapshot_sha256": "8d76046ad116b086d0360750c3bd11a1796d7e3a04f4b707682ebb1c1941c4e0",
+      "snapshot_file": "2026-10-29/qwen3-vl-8b-instruct-card.txt",
+      "archive_url": null
+    },
+    {
+      "id": "qwen3-vl-30b-card",
+      "owner": "Alibaba Cloud (Qwen team)",
+      "kind": "model-card",
+      "covers": [
+        "Qwen/Qwen3-VL-30B-A3B-Thinking (revision d0ed0380729be07a546fdefafbb4fe411f341e92)",
+        "Qwen/Qwen3-VL-30B-A3B-Instruct (revision 9c4b90e1e4ba969fd3b5378b57d966d725f1b86c)",
+        "Ollama qwen3-vl:30b and qwen3-vl:30b-a3b-thinking (manifest eda0be1008774ea4e575187712b9a3b1201f3e66e7ecff899cc295db1cf00248; model layer b1da6f96a2e4; licence layer 7339fa418c9a)",
+        "Ollama qwen3-vl:30b-a3b-instruct (manifest 9b053ed92b6a3f0b906f4808f1e37bf8bda3708b9ebf55744711772890357c0d; model layer 884457e79121; projector layer 04d9a35e6bb6; licence layer 7339fa418c9a)"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3-VL-30B-A3B-Thinking",
+      "page_date": "HF commit d0ed0380729be07a546fdefafbb4fe411f341e92 (repo last modified 2025-11-26)",
+      "read_date": "2026-10-29",
+      "clauses": [
+        "License: apache-2.0",
+        "This is the weight repository for Qwen3-VL-30B-A3B-Thinking."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Redistributing weights or derivatives: Apache-2.0 licence copy and notices.",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "MoE 30B-A3B vision-language model, used as the second local VLM judge. On Ollama, qwen3-vl:30b has the exact same manifest digest as qwen3-vl:30b-a3b-thinking (sha256 eda0be1008774ea4e575187712b9a3b1201f3e66e7ecff899cc295db1cf00248, 20 GB Q4_K_M weights layer b1da6f96a2e4, renderer qwen3-vl-thinking, parser qwen3-thinking), so qwen3-vl:30b serves the Thinking checkpoint (Qwen/Qwen3-VL-30B-A3B-Thinking, read here at commit d0ed0380729be07a546fdefafbb4fe411f341e92). The separate instruct tag qwen3-vl:30b-a3b-instruct has manifest digest 9b053ed92b6a3f0b906f4808f1e37bf8bda3708b9ebf55744711772890357c0d (20 GB Q4_K_M weights layer 884457e79121, clip projector 04d9a35e6bb6) corresponding to Qwen/Qwen3-VL-30B-A3B-Instruct (also read on 2026-10-29 at commit 9c4b90e1e4ba969fd3b5378b57d966d725f1b86c). Both HF cards are ungated and declare license: apache-2.0 in their front matter (no separate LICENSE file in either repo), and both Ollama tags bundle the identical licence layer 7339fa418c9a (11,358 bytes, unmodified Apache License 2.0 text, apache-2.0).",
+      "restriction_search": "Read both HF cards (Thinking at commit d0ed0380 and Instruct at commit 9c4b90e1) and the Ollama qwen3-vl:30b, :30b-a3b-thinking, and :30b-a3b-instruct tags and licence blob (7339fa418c9a); searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, policy; hits are in architecture and benchmark descriptions; none restricts evaluation or outputs.",
+      "snapshot_sha256": "4c50d5406776bb94d6297f1a483c6cdda103e7be15b1c40cce4f0ca236ddf290",
+      "snapshot_file": "2026-10-29/qwen3-vl-30b-card.txt",
       "archive_url": null
     }
   ]

@@ -1,13 +1,13 @@
 ---
 title: '29 October: repaired test sets certify 44 of 50, long tool lists cost a model its "no", and Cosmos 3 on one rented card'
-description: "Rewritten so that every pair is a clear contradiction, and keyed blind before any reader saw them, the reasoning-dataset-lab sets certified 44 of 50, against 26 before; the thinking setting we suspected turned out not to be what cut the length stops. A test of tool lists from 5 to 100 found that two local models kept picking the right tool, but one of them declined less often when the prompt grew long, and retrieving five tools kept its \"no\" intact. NVIDIA's Cosmos 3 made its first clips on rented cards: one Nano clip on one card, a 30-second rollout from the two-armed robot checkpoint, and five shrunk versions of the bigger Super model, of which Intel's int4 export is our working choice for now. Then the raw files behind our figures get a public home, a read of GitHub's Universe announcements, notes in brief, and the daily watch."
+description: "Rewritten so that every pair is a clear contradiction, and keyed blind before any reader saw them, the reasoning-dataset-lab sets certified 44 of 50, against 26 before; the thinking setting we suspected turned out not to be what cut the length stops. A test of tool lists from 5 to 100 found that two local models kept picking the right tool, but one of them declined less often when the prompt grew long, and retrieving five tools kept its \"no\" intact. NVIDIA's Cosmos 3 made its first clips on rented cards: one Nano clip on one card, a 30-second rollout from the two-armed robot checkpoint, and five shrunk versions of the bigger Super model, of which Intel's int4 export is our provisional choice. Then the raw files behind our figures get a public home, a read of GitHub's Universe announcements, notes in brief, and the daily watch."
 issue: 34
 date: 2026-10-29
 highlights:
   - "<strong>44 of 50 sets certified.</strong> Every pair rewritten to be a clear contradiction and keyed blind first, the sets certified 44 of 50, against 26 before. The cleaner sets, not the thinking setting, cut the length stops."
   - "<strong>Long tool lists held; the \"no\" slipped.</strong> With 5 to 100 tools, Granite 4.2 8B and Qwen3.8-27B kept picking the right tool. Granite declined 19 of 30 no-tool requests at 40 tools and 18 on a padded 10-tool prompt; retrieving five tools kept it at 27 to 30."
   - "<strong>A world model on one rented card.</strong> Cosmos 3 Nano made an 8-second clip on one RTX PRO 6000 card in a 628-second window, about 1.55 compute units, with generation within 2% of our estimate."
-  - "<strong>Super on one card, for now in int4.</strong> Five shrunk versions of Cosmos 3 Super ran on one G4. Intel's int4 export wasn't separable from FP8 on fidelity, and ran faster in less memory, so it's our working choice for now."
+  - "<strong>Super on one card, for now in int4.</strong> Five shrunk versions of Cosmos 3 Super ran on one G4. Intel's int4 export wasn't separable from FP8 on fidelity, and ran faster in less memory, so it's our provisional choice."
   - "<strong>rnd-data is public.</strong> The raw files behind our figures, 111 runs so far, now have a repository of their own."
   - "<strong>GitHub Universe 2026.</strong> We read the agent-centred announcements on GitHub's own pages, and checked an AI search summary of them against those pages."
 ---
@@ -188,6 +188,8 @@ benchmark. Closed-loop control is the next rung, and it isn't designed yet.
 
 ### Super, shrunk to fit one card
 
+*Corrected 30 October: see the last limit below.*
+
 Super won't fit a single Colab card in BF16. Uploads on Hugging Face shrink it, so we asked which of them
 run on one G4, how fast, and in how much memory. Each made the same three 61-frame clips at 480p (35 steps, the same
 prompts and seed), plus a 50-step still:
@@ -232,10 +234,10 @@ Paired clip by clip against FP8:
 
 The two are not separable on fidelity, and on everything else measured Intel's int4 is ahead. It took 3.36 s a step against
 FP8's 3.83 in the wider round, and peaked at 39,581 MiB at 480p against 69,954. It ran 720p in 45,680 MiB against
-76,054, and had the narrowest spread across the three seeds of any Super version (0.311 to 0.328). So it's our working
-choice, for now. It goes back to FP8 if any of three checks still to run prefers FP8 by more than that check's own
-run-to-run spread: scores that need no reference, a vision-language model judging clips in pairs, and a blind
-preference test by people.
+76,054, and had the narrowest spread across the three seeds of any Super version (0.311 to 0.328). So it's our
+provisional choice. It stays provisional until a re-run with prompts that fit a 2.5-second clip and a blind ranking by
+people, both still being designed, support it; it goes back to FP8 if they prefer FP8 by more than their own
+run-to-run spread.
 
 The scores have limits:
 
@@ -246,10 +248,15 @@ The scores have limits:
 - **The card counts too.** Part of each gap comes from the card, not from the shrinking. On the first round's clips,
   FP8 on the B200 scored 0.345 against full precision on that same card, and FP8 on the G4 scored 0.193 against FP8 on
   the B200.
+- **Three prompts ask too much of the clip.** Three of the eight prompts (a box picked up and placed on a pallet, a
+  bowl handed between grippers into a rack, and a robot walking through a door) ask for more than a 2.5-second clip
+  can show, so no version finishes them. The scores compare each version with full precision on the same prompt, so
+  they still hold, but they don't show whether any clip is good. We are re-running the comparison with prompts that
+  fit.
 
 Why FP8 is no faster than the 4-bit versions here hasn't been looked into.
 
-![Five shrunk versions of Cosmos 3 Super against the full-precision model over 21 shared clips (8 prompts and 3 seeds), plus the smaller 16B Nano model at full precision as a separate baseline. Mean LPIPS distance to full precision (0 is identical, lower is closer), with the range of the three seed means, time a step and peak memory at 480p: Intel's int4 AutoRound 0.320 (seeds 0.311–0.328; 3.36 s; 39,581 MiB), FP8 0.341 (0.311–0.363; 3.83 s; 69,954 MiB), NVFP4 0.387 (0.337–0.426; 7.12 s; 47,396 MiB), NF4 (bitsandbytes) 0.401 (0.372–0.441; 3.37 s; 39,753 MiB), a second int4 AutoRound export 0.406 (0.383–0.438; 3.39 s; 41,066 MiB), and Nano 0.578 (0.575–0.581; 0.81 s; 36,002 MiB). Paired against FP8, Intel's int4 is not separable on fidelity (FP8's mean 0.021 higher, 95% interval −0.014 to +0.058, FP8 closer on 9 of 21 clips, p = 0.66); the other three trail FP8, with intervals entirely below zero. Intel's int4 is the provisional working choice, and goes back to FP8 if reference-free scores, a vision-language judge or a blind preference test by people prefer FP8 by more than their own run-to-run spread.](/rnd/charts/issue-34-super-shrunk-comparison.svg)
+![Five shrunk versions of Cosmos 3 Super against the full-precision model over 21 shared clips (8 prompts and 3 seeds), plus the smaller 16B Nano model at full precision as a separate baseline. Mean LPIPS distance to full precision (0 is identical, lower is closer), with the range of the three seed means, time a step and peak memory at 480p: Intel's int4 AutoRound 0.320 (seeds 0.311–0.328; 3.36 s; 39,581 MiB), FP8 0.341 (0.311–0.363; 3.83 s; 69,954 MiB), NVFP4 0.387 (0.337–0.426; 7.12 s; 47,396 MiB), NF4 (bitsandbytes) 0.401 (0.372–0.441; 3.37 s; 39,753 MiB), a second int4 AutoRound export 0.406 (0.383–0.438; 3.39 s; 41,066 MiB), and Nano 0.578 (0.575–0.581; 0.81 s; 36,002 MiB). Paired against FP8, Intel's int4 is not separable on fidelity (FP8's mean 0.021 higher, 95% interval −0.014 to +0.058, FP8 closer on 9 of 21 clips, p = 0.66); the other three trail FP8, with intervals entirely below zero. Intel's int4 is the provisional choice, to be re-checked in a re-run with prompts that fit the clip and a blind ranking by people.](/rnd/charts/issue-34-super-shrunk-comparison.svg)
 
 ### The reference: full precision on one B200
 

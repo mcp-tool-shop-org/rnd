@@ -120,12 +120,12 @@
   <circle cx="114.7" cy="314.5" r="2.8" fill="#b4532a" stroke="#ffffff" stroke-width="1"/>
   <text class="sm-m" x="165" y="318">−0.065 [−0.119, −0.014] · 15/21, p=0.078</text>
   <rect x="384" y="224" width="280" height="104" rx="4" fill="#1f2430" stroke="#2f7d5b" stroke-width="1" stroke-dasharray="5,3"/>
-  <text class="lbl" x="394" y="240">Working choice: Intel&#39;s int4 (provisional)</text>
+  <text class="lbl" x="394" y="240">Provisional choice: Intel&#39;s int4</text>
   <text class="sm" x="394" y="252">Not separable from FP8 on fidelity (CI crosses 0);</text>
   <text class="sm" x="394" y="263">ahead on speed (3.36 vs 3.83 s),</text>
   <text class="sm" x="394" y="274">480p MiB (39,581 vs 69,954), and</text>
   <text class="sm" x="394" y="285">seed spread (0.311&#8211;0.328 vs 0.311&#8211;0.363).</text>
-  <text class="ax" x="394" y="298">Reverts to FP8 if any pending check prefers FP8:</text>
-  <text class="sm-m" x="394" y="310">1. Reference-free scores   2. VLM pairwise judge</text>
-  <text class="sm-m" x="394" y="322">3. Blind human preference test (&gt; run-to-run spread)</text>
+  <text class="ax" x="394" y="298">To be re-checked in a new comparison:</text>
+  <text class="sm-m" x="394" y="310">1. Prompts that fit a 2.5 s clip</text>
+  <text class="sm-m" x="394" y="322">2. A blind human ranking, still being designed</text>
 </svg>

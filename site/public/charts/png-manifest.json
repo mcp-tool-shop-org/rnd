@@ -237,6 +237,13 @@
     "width": 1200,
     "height": 603
   },
+  "issue-35-tool-count-abstention-v2.svg": {
+    "png": "issue-35-tool-count-abstention-v2.png",
+    "png_sha256": "bfaedba0ef50bef140fdf2bb954e37f4a894b4ae3076244864d3ca80183ba0fc",
+    "svg_sha256": "4ff76a82f0e03114f706a6f6780bb9903a268e28fa81fcc0555e0a15a4b2b280",
+    "width": 1200,
+    "height": 593
+  },
   "loop-repeats.svg": {
     "png": "loop-repeats.png",
     "png_sha256": "f7527ae4d3ec14612ffea5b9fafd1f68c1bba4d89e99aae489192b50836155d3",

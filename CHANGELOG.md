@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.49] - 2026-10-30
+
+- Newsletter issue 35 (30 October): the bake-off shortcut check recalibrated, Gemma 4 31B on long tool lists, Cosmos 3's four versions on one B200 (operations only), notes in brief and the daily watch.
+
 ## [1.1.23.1.48] - 2026-10-30
 
 - licences: d3-mini code file list and Flow-Judge licence of record

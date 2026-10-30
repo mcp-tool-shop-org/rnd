@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.48] - 2026-10-30
+
+- licences: d3-mini code file list and Flow-Judge licence of record
+
 ## [1.1.23.1.47] - 2026-10-29
 
 - Newsletter issue 34 corrected: three of the eight Super prompts ask more than a 2.5-second clip can show, so the scores show closeness to full precision but not whether a clip is good; int4 is now the provisional choice, to be re-checked with prompts that fit and a blind ranking by people. Chart text updated to match; no numbers changed.

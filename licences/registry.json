@@ -1872,7 +1872,7 @@
         "Redistributing weights, remote code or derivatives: Apache-2.0 licence copy and NOTICE (Copyright 2026 vLLM Semantic Router Team; Built on Qwen/Qwen3.5-4B).",
         "No condition attaches to model outputs."
       ],
-      "notes": "Covers both the d3-mini weights and the remote code in the repo (d3_engine.py, d3_fast.py, d3_format.py, d3_kernels.py, d3_runtime.py, d3_server.py) at revision bd0090dd758d32ba59ef5c749910a8e87fc4391f. The repo ships the standard Apache-2.0 LICENSE text and a NOTICE file. Not gated.",
+      "notes": "Covers both the d3-mini weights and the remote code in the repo, eight files (d3_engine.py, d3_fast.py, d3_format.py, d3_kernels.py, d3_runtime.py, d3_server.py, modeling_d3.py, pipeline_d3.py) at revision bd0090dd758d32ba59ef5c749910a8e87fc4391f; the list was corrected on 2026-10-30 from the repo's file listing at that revision, which showed two files the first read had not listed. The repo ships the standard Apache-2.0 LICENSE text and a NOTICE file. Not gated.",
       "restriction_search": "Read the card, raw LICENSE and NOTICE at revision bd0090dd; searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, guardrail, strictly; no restriction found.",
       "snapshot_sha256": "24f238248901a47321f62c4eacaabe90eb09d52c3b9fefabaa26ee82d5700fbf",
       "snapshot_file": "2026-10-29/d3-mini-card.txt",
@@ -1932,7 +1932,7 @@
         "Redistributing weights or derivatives: Apache-2.0 licence copy and notices.",
         "No condition attaches to model outputs."
       ],
-      "notes": "Fine-tuned from microsoft/Phi-3.5-mini-instruct (MIT, phi-3.5-mini-instruct-licence). Card front matter declares license: apache-2.0 and the License section states Apache 2.0; the front matter license_link (/resolve/main/LICENSE) returns 404 because no LICENSE file is in the repo. Not gated.",
+      "notes": "Fine-tuned from microsoft/Phi-3.5-mini-instruct (MIT, phi-3.5-mini-instruct-licence). Card front matter declares license: apache-2.0 and the License section states Apache 2.0; the front matter license_link (/resolve/main/LICENSE) returns 404 because no LICENSE file is in the repo. With no LICENSE file in the repo, the card's Apache-2.0 declaration is the licence of record for the weights; the base model's MIT licence (phi-3.5-mini-instruct-licence) is noted alongside it. Not gated.",
       "restriction_search": "Searched snapshot for: prohibit, restrict, output, derivative, distill, synthetic, training, commercial, compete, guardrail, strictly; hits are in prompt instructions and dataset descriptions; no restriction on evaluation or outputs.",
       "snapshot_sha256": "ad6e30b297cece94a5ea6aa69358d8cd7e0f3a51d8a961cc4044c321692bcfa7",
       "snapshot_file": "2026-10-29/flow-judge-v0.1-card.txt",

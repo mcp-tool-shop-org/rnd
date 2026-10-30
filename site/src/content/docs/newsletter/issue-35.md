@@ -1,10 +1,10 @@
 ---
 title: '30 October: a leak check that cried wolf, a perfect score on long tool lists, and Cosmos 3 on one card'
-description: "Our check for shortcuts in the judge bake-off's test sets was failing sets that had none; a calibrated rule now false-fails 0.5% of them, says plainly how small a leak it can see, and passes the repaired pilot set. Gemma 4 31B made no mistakes on tool lists from 5 to 100, which also means this test can't find its limit. All four Cosmos 3 versions for the next comparison ran on one rented B200. Then notes in brief and the daily watch."
+description: "Our check for shortcuts in the judge bake-off's test sets was failing sets that had none; a calibrated rule now false-fails at most 0.5% of them, says plainly how small a leak it can see, and passes the repaired pilot set. Gemma 4 31B made no mistakes on tool lists from 5 to 100, which also means this test can't find its limit. All four Cosmos 3 versions for the next comparison ran on one rented B200. Then notes in brief and the daily watch."
 issue: 35
 date: 2026-10-30
 highlights:
-  - "<strong>A leak check that cried wolf.</strong> The old 5-point rule failed 80% to 98.5% of test sets with no shortcut at all. The calibrated rule fails 0.5%, still catches all twelve planted leaks, and at 38 triads screens out only leaks above about 23 points."
+  - "<strong>A leak check that cried wolf.</strong> The old 5-point rule failed 80% to 98.5% of test sets with no shortcut at all. The calibrated rule fails at most 0.5%, still catches all twelve planted leaks, and at 38 triads screens out only leaks above about 23 points."
   - "<strong>Gemma 4 31B: 170 of 170, 30 of 30.</strong> No mistakes on tool lists from 5 to 100, in all 12 conditions. Granite 4.2 8B is still the only model whose \"no\" slipped."
   - "<strong>Cosmos 3, four versions on one card.</strong> 144 clips on one rented B200, 36 per version, for a comparison by people that is still being designed. An operations note, not a quality result."
   - "<strong>A small model on one TPU chip.</strong> int8 weights moved the loss by 0.0005, but changed the generated text on three of four prompts."
@@ -67,7 +67,7 @@ signal, the old rule still failed between 80% and 98.5% of those sets, depending
 inside a Wilson interval (Wilson, 1927) widened for the number of features tested at once with the Holm correction
 (Holm, 1979). The rule was chosen on the shuffled sets and on twelve planted leaks (one of them a copy of the leak from our
 first pilot set) before it ran on the rebuilt pilot set, and it isn't tuned on that set:
-- on the shuffled sets it failed 0.5% of the time, and an independent re-run with two more random seeds failed 0 of
+- on the shuffled sets it failed at most 0.5% of the time, and an independent re-run with two more random seeds failed 0 of
   200 and 0 of 200;
 - all twelve planted leaks still fail it, including a copy of the leak we found in our first pilot set.
 
@@ -111,7 +111,7 @@ that comparison is still being designed.
 [Colab golden path, for any plan](/rnd/handbook/colab-golden-path/). It is the way we run paid GPU jobs on Google
 Colab without surprises:
 - a "window" is one session, one job, a spending cap and a time limit;
-- eight steps, starting with a CPU test run on the exact path;
+- eight steps, with a CPU test run on the exact path before any paid card opens;
 - the guards, each tied to the run that proved it;
 - a worked example that cost under two hundredths of a unit.
 

@@ -6,10 +6,9 @@ import chartPngs from '../../../public/charts/png-manifest.json';
 
 // The newsletter's RSS 2.0 feed, at /rnd/newsletter/rss.xml: one item per issue, newest first, with the full issue
 // in content:encoded so it reads in a feed reader. The HTML is the same render Starlight shows on the site
-// (asides included), sanitised, with every link and image made absolute. Charts point at their PNG copies, since
-// Gmail and Outlook don't show SVG and Buttondown sends this feed as email; scripts/render_chart_pngs.py makes them.
-// For the same reason the HTML carries its own inline styles (asides, tables) and no classless <div>s, which
-// Buttondown's editor can reject.
+// (asides included), sanitised, with every link and image made absolute. Charts point at their PNG copies, which
+// every feed reader shows; scripts/render_chart_pngs.py makes them. The HTML carries its own inline styles (asides,
+// tables), since a feed reader applies none of the site's CSS.
 const TITLE = 'Research and Development: the newsletter';
 const DESCRIPTION =
   "The studio's research newsletter: what we measured, and what it means. Each issue reports our experiments in " +
@@ -102,7 +101,7 @@ export async function GET(context: APIContext) {
   const site = new URL(import.meta.env.BASE_URL.replace(/\/?$/, '/'), context.site);
   const feedUrl = new URL('newsletter/rss.xml', site).href;
   const issues = (await getCollection('docs'))
-    // A page marked draft: true never reaches the feed: Buttondown emails every new feed item to subscribers.
+    // A page marked draft: true never reaches the feed: anything in the feed is published to every reader.
     .filter((d) => d.id.startsWith('newsletter/') && d.data.issue && !d.data.draft)
     .sort((a, b) => (b.data.issue ?? 0) - (a.data.issue ?? 0));
 

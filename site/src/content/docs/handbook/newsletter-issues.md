@@ -11,7 +11,7 @@ The charts and diagrams follow [Newsletter visuals](/rnd/handbook/newsletter-vis
 ## The shape
 
 - **One page per day:** `site/src/content/docs/newsletter/issue-NN.md`, with NN continuing the count. The feed makes
-  one item per issue file, so Buttondown makes one draft a day.
+  one item per issue file.
 - **The title** is the day and the day's articles in a line, for example "25 October: a crash test, a lab for tests
   with proven answers, and our Colab cards measured".
 - **`highlights`** in the front matter has one line per article. The landing page shows them.
@@ -19,8 +19,6 @@ The charts and diagrams follow [Newsletter visuals](/rnd/handbook/newsletter-vis
 - **Each article is an H2,** with its own sections as H3 and its own charts. Chart files are named
   `issue-NN-<article>-<name>.svg`.
 - **The last H2 is the daily watch,** after the last article and before anything else. See [The daily watch](#the-daily-watch).
-- **Size:** `scripts/check_feed.py` fails an issue whose feed HTML is over 90,000 bytes, because Gmail clips an email
-  at about 102 KB. A day with more than that splits its least urgent article into the next day's issue.
 
 ## The daily watch
 
@@ -43,8 +41,7 @@ into the Editor's inbox. The Editor merges it, spot-checks it, logs it and owns 
   ends "A quiet day on the watchlist." and that line goes in as it is.
 - **No file by the build:** the heading stays, and the section says in one line that the watch had nothing new. It is
   never left blank.
-- **Highlights:** the watch adds none. It is part of the issue page, so it is in the feed item, the email and the
-  mirrors, and it counts toward the 90,000-byte limit.
+- **Highlights:** the watch adds none. It is part of the issue page, so it is in the feed item and the mirrors.
 - **The rules of every article apply.** A fix in someone else's tool appears once its release is public; no item goes
   in without R&D's check of its own source.
 - **The Editor's spot-check:** before the build, the Editor opens the links of 2 or 3 bullets and checks the date, the
@@ -103,7 +100,7 @@ The daily watch had nothing new since the last issue.
   - the Editor: the review replies, then writes.
 - **By 19:30 UTC:** one draft, to the Publisher and to Antigravity, in one ticket that covers every article's technical
   claims and the visuals.
-- **Then:** fixes, the Publisher's read, and the Director's word. No email goes out without it.
+- **Then:** fixes and the Publisher's read. The merge publishes the issue, so nothing merges before that read.
 - **After it's live:** `.github/workflows/newsletter-publish.yml` mirrors the published issues to the Hugging Face dataset [mcp-tool-shop/rnd-newsletter](https://huggingface.co/datasets/mcp-tool-shop/rnd-newsletter), to npm as [@rnd-news/newsletter](https://www.npmjs.com/package/@rnd-news/newsletter) and to PyPI as [mcptoolshop-rnd-newsletter](https://pypi.org/project/mcptoolshop-rnd-newsletter/) once the Pages deploy succeeds. It reads only `issue-*.md` files on main with an issue number and no `draft: true`. The npm and PyPI version is `1.<latest issue>.<revision>`; a correction to a published issue bumps the revision.
 - **A quiet day gets no issue.** If one is skipped, the next issue's opening says so.
 

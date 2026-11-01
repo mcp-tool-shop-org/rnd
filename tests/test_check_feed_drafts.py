@@ -1,4 +1,4 @@
-"""A newsletter page marked draft: true must never reach the feed, which Buttondown emails to subscribers."""
+"""A newsletter page marked draft: true must never reach the feed, which publishes it to every reader."""
 import importlib.util
 import pathlib
 import tempfile

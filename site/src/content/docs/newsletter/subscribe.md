@@ -1,26 +1,13 @@
 ---
-title: "Subscribe"
-description: "Get every new issue of the newsletter by email or in a feed reader."
+title: "Follow the newsletter"
+description: "Follow every new issue of the newsletter in a feed reader, or as data from Hugging Face, npm or PyPI."
 sidebar:
   order: 0
-  label: "Subscribe"
+  label: "Follow"
 ---
 
-There are two ways to get each new issue: by email, or through the RSS feed in a feed reader.
-
-## By email
-
-<form class="rnd-subscribe" action="https://buttondown.com/api/emails/embed-subscribe/rnd-news" method="post">
-  <label for="rnd-subscribe-email">Email address</label>
-  <div class="rnd-subscribe-row">
-    <input type="email" id="rnd-subscribe-email" name="email" autocomplete="email" required placeholder="you@example.com" />
-    <button type="submit">Subscribe</button>
-  </div>
-</form>
-
-You'll get each issue by email when it's published. Issues come out most days, usually one or two. Buttondown, the service that sends the newsletter, first emails
-you a link to confirm, and every issue has a one-click unsubscribe link. Your address goes to Buttondown only; this site
-stores nothing.
+Every issue is published here on the site. To follow new issues, use the RSS feed in a feed reader, or take the issues
+as data from one of the mirrors.
 
 ## By RSS
 
@@ -31,14 +18,22 @@ The newsletter has an RSS feed:
 ### What RSS is
 
 RSS is a plain, open way to follow a site. A **feed reader** checks the feed for you and shows each new issue when it
-appears, so you don't have to come back and look. There's no account with us, no email address and no tracking: the
+appears, so you don't have to come back and look. There's no account with us, no address to give and no tracking: the
 reader simply fetches a public file.
 
 ### How to use it
 
 1. Open a feed reader. Free ones include NetNewsWire (Mac and iPhone), Feedly and Inoreader (web), and Thunderbird
-   (desktop). Many browsers and email apps can read feeds too.
-2. Choose "add feed" or "subscribe", and paste the link above.
+   (desktop). Many browsers can read feeds too.
+2. Choose "add feed", and paste the link above.
 3. That's it. Each new issue arrives in full, with its tables and charts, and links back to the page here.
 
 The feed carries every issue, newest first. A correction to an issue shows up as that issue's updated text.
+
+## As data
+
+Every published issue is also mirrored as data, updated after each issue goes live:
+
+- **Hugging Face:** the dataset [mcp-tool-shop/rnd-newsletter](https://huggingface.co/datasets/mcp-tool-shop/rnd-newsletter).
+- **npm:** the package [@rnd-news/newsletter](https://www.npmjs.com/package/@rnd-news/newsletter).
+- **PyPI:** the package [mcptoolshop-rnd-newsletter](https://pypi.org/project/mcptoolshop-rnd-newsletter/).

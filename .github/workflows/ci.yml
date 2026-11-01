@@ -55,7 +55,7 @@ jobs:
 
       # The full feed check runs in pages.yml after the build; this part needs no build, so a PR that changes a
       # chart without re-rendering its PNG fails here instead of at deploy.
-      - name: Chart PNGs current (email edition)
+      - name: Chart PNGs current (feed copies)
         if: matrix.python-version == '3.12'
         run: python site/scripts/check_feed.py --charts-only
 

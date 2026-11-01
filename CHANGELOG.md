@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.50] - 2026-10-31
+
+- Newsletter: the email edition is retired. The landing-page form, the Buttondown text and the per-issue subscribe line are removed; /newsletter/subscribe/ is now "Follow the newsletter" (RSS plus the Hugging Face, npm and PyPI mirrors); the feed check drops its email-only rules and keeps the draft guard and PNG chart copies; issue 30 now says "one issue a day".
+
 ## [1.1.23.1.49] - 2026-10-30
 
 - Newsletter issue 35 (30 October): the bake-off shortcut check recalibrated, Gemma 4 31B on long tool lists, Cosmos 3's four versions on one B200 (operations only), notes in brief and the daily watch.

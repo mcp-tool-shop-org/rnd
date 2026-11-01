@@ -1,8 +1,7 @@
-"""Render a PNG beside each chart SVG, for the email edition of the newsletter.
+"""Render a PNG beside each chart SVG, for the newsletter's RSS feed.
 
-Gmail and Outlook don't show SVG images, so the feed (which Buttondown turns into email) points at a PNG copy of
-each chart; the web pages keep the SVG. Each PNG is 1200 px wide, Buttondown's recommended maximum, which is 2x an
-email's ~600 px column. Rendering uses headless Edge or Chrome, so the text is drawn the way a browser draws it.
+The feed points at a PNG copy of each chart, which every feed reader shows; the web pages keep the SVG. Each PNG is
+1200 px wide. Rendering uses headless Edge or Chrome, so the text is drawn the way a browser draws it.
 
 charts/png-manifest.json records the SVG's sha256 and the PNG's size; scripts/check_feed.py fails the build when an
 SVG has changed since its PNG was made. Re-run this after adding or editing a chart:

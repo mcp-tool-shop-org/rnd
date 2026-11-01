@@ -3,10 +3,9 @@
 Fails (exit 1) if the feed is missing or doesn't parse, if its item count isn't the number of issue files, if an item
 lacks its full content, if an item lacks its date or description, if any link or image in it is relative,
 misses the /rnd base or names a page the build didn't make, if it carries any author field
-other than dc:creator mcp-tool-shop, if its HTML has a <div> or a class attribute (it is also the
-email edition), if an image in it is an SVG (email clients don't show SVG), or if a chart's PNG
-is missing, older than its SVG, or not the one recorded (charts/png-manifest.json; re-run
-scripts/render_chart_pngs.py), or if an item's HTML is over 90,000 bytes (Gmail clips an email at about 102 KB).
+other than dc:creator mcp-tool-shop, if an image in it is an SVG (the feed carries PNG copies, which every reader
+shows), if a draft issue is in it, or if a chart's PNG is missing, older than its SVG, or not the one recorded
+(charts/png-manifest.json; re-run scripts/render_chart_pngs.py).
 Usage, from site/: python scripts/check_feed.py
 With --charts-only it checks only the chart PNGs, which needs no build; PR CI runs it that way.
 """
@@ -22,7 +21,6 @@ import xml.etree.ElementTree as ET
 SITE = "https://mcp-tool-shop-org.github.io/rnd/"
 STUDIO = "mcp-tool-shop"
 HOST = "https://mcp-tool-shop-org.github.io/"
-MAX_EMAIL_BYTES = 90_000
 NS = {"content": "http://purl.org/rss/1.0/modules/content/", "dc": "http://purl.org/dc/elements/1.1/",
       "atom": "http://www.w3.org/2005/Atom"}
 
@@ -47,7 +45,7 @@ def svg_digest(svg: pathlib.Path) -> str:
 
 
 def chart_errors() -> list[str]:
-    """Every chart has the PNG made from its current SVG, at most 1200x1200 (Buttondown's recommended maximum)."""
+    """Every chart has the PNG made from its current SVG, at most 1200x1200."""
     found = []
     charts = here / "public" / "charts"
     manifest_path = charts / "png-manifest.json"
@@ -74,8 +72,8 @@ class DraftSpellingError(ValueError):
 
 
 def is_draft(page: pathlib.Path) -> bool:
-    """True when an issue file's front matter says draft: true. A draft must never reach the feed, which is also the
-    email edition: Buttondown sends every new feed item to subscribers."""
+    """True when an issue file's front matter says draft: true. A draft must never reach the feed: anything in it is
+    published to every feed reader."""
     text = page.read_text(encoding="utf-8").replace("\r\n", "\n")
     if not text.startswith("---\n"):
         return False
@@ -100,7 +98,7 @@ def published_pages(newsletter: pathlib.Path = NEWSLETTER) -> tuple[list[pathlib
 def draft_errors(item_links: list[str], drafts: list[pathlib.Path]) -> list[str]:
     """One error per draft issue that the feed carries."""
     links = {link.rstrip("/") for link in item_links}
-    return [f"{d.name} is a draft but is in the feed, so it would be emailed"
+    return [f"{d.name} is a draft but is in the feed, so it would be published"
             for d in drafts if f"{SITE}newsletter/{d.stem}" in links]
 
 
@@ -146,10 +144,6 @@ def main() -> None:
         html = item.findtext("content:encoded", namespaces=NS) or ""
         if len(html) < 200:
             errors.append(f"{title}: content:encoded is missing or empty")
-        # Gmail clips an email whose HTML passes about 102 KB, and a daily issue holds several articles.
-        size = len(html.encode("utf-8"))
-        if size > MAX_EMAIL_BYTES:
-            errors.append(f"{title}: content is {size} bytes, over {MAX_EMAIL_BYTES}; Gmail would clip the email")
         for field in ("pubDate", "description"):
             if not (item.findtext(field) or "").strip():
                 errors.append(f"{title}: <{field}> is missing or empty")
@@ -161,16 +155,10 @@ def main() -> None:
                 errors.append(f"{title}: link to this site without the /rnd base: {url}")
             elif url.startswith(SITE) and not built(url):
                 errors.append(f"{title}: links to a page or file the build didn't make: {url}")
-        # The feed is also the email edition (Buttondown): classless <div>s can error in its editor, and class names do
-        # nothing in email, where styles must be inline.
-        if re.search(r"<div[\s>]", html):
-            errors.append(f"{title}: content has a <div>; email HTML should carry none")
-        if " class=" in html:
-            errors.append(f"{title}: content has a class attribute; email styles must be inline")
-        # Gmail and Outlook don't show SVG images.
+        # The feed carries PNG copies of the charts, which every reader shows.
         for src in re.findall(r'<img[^>]*\ssrc="([^"]*)"', html):
             if urllib.parse.urlsplit(src).path.lower().endswith(".svg"):
-                errors.append(f"{title}: image is an SVG, which email clients don't show: {src}")
+                errors.append(f"{title}: image is an SVG; the feed should carry its PNG copy: {src}")
 
     errors += chart_errors()
 

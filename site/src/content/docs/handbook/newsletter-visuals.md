@@ -35,9 +35,9 @@ issue 28's.
    - **Files:** charts go in `site/public/charts/issue-NN-<name>.svg` and are referenced as `/rnd/charts/...`.
      - Never put a word in a filename that the repo's pre-push check reads as private (`blind`, `hidden`, `private`,
        `secret`, `sealed`, `gold`). For example, `graded-panel`, not `blind-panel`.
-   - **Email copies:** run `python scripts/render_chart_pngs.py` from `site/` after adding or editing a chart, and
+   - **PNG copies:** run `python scripts/render_chart_pngs.py` from `site/` after adding or editing a chart, and
      commit the PNG and `charts/png-manifest.json` with it.
-     - The feed, which is also the email edition, shows the PNG, because Gmail and Outlook don't show SVG.
+     - The feed shows the PNG, which every feed reader can display.
      - CI fails a pull request whose chart has no current PNG.
    - **Alt text:** every image's alt text carries its numbers in a plain sentence, so a screen reader, or a feed reader
      with images off, loses nothing. Antigravity drafts the alt text alongside each SVG, and the desk checks it.

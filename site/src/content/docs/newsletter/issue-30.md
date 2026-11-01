@@ -9,7 +9,7 @@ highlights:
   - "<strong>Each Colab card, measured.</strong> From 21 windows of receipts: what each card has, what it costs per hour, how often a session was lost, and what no receipt has measured yet."
 ---
 
-This is the first of the daily issues: one email a day, with an article for each piece of the day's work worth
+This is the first of the daily issues: one issue a day, with an article for each piece of the day's work worth
 reporting. Today has three.
 
 **In this issue:**

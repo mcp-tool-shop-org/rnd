@@ -52,7 +52,7 @@ export default defineConfig({
         },
       ],
       customCss: ['./src/styles/starlight-custom.css'],
-      // Adds a subscribe line to the end of each newsletter issue.
+      // Adds a follow-by-RSS line to the end of each newsletter issue.
       components: { Footer: './src/components/Footer.astro' },
     }),
   ],

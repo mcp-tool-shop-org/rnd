@@ -13,7 +13,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [1.1.23.1.52] - 2026-11-01
 
-- newsletter issue 36 (2 November)
+- weekly watch 2026-11-02: NeMo Relay 0.11.0, PyTorch 2.15.0, LFM3, skills sync, watch page
+- Updated `2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ`: NVIDIA NeMo Relay: tracing agent harnesses, Claude Code included
+- Added `2026-11-01-liquid-ai-lfm3-small-long-context-models-in-ollama`: Liquid AI LFM3: small long-context models in Ollama
+- Added `2026-11-01-pytorch-2-15-0`: PyTorch 2.15.0
+- Updated catalog `nvidia-skills`
 
 ## [1.1.23.1.51] - 2026-11-01
 

@@ -60,6 +60,8 @@ The Relay CLI wraps Claude Code, Codex and pi directly (`nemo-relay claude`). He
 - [unverified] Relay sends no telemetry to NVIDIA when run locally. Observed in one run only: in R&D's 2026-10-20 re-run under sbx's Balanced policy, the policy log showed no host other than Anthropic's (see the first-trial entry). One observation is not a guarantee.
 - [verified] Relay 0.10.1's transparent `nemo-relay claude` writes ATOF events and ATIF trajectories to local files when its observability plugin enables them. (via: R&D's re-run in `atlas-pilot`, 2026-10-20)
 
+- [verified] Relay 0.11.0 (stable, 2026-10-28) changes hook behaviour: local hooks now verify TLS, tool checks fail closed by default, a failed delivery returns exit code 2, and generated hooks use `PreToolUse` with no separate permission-request hook. It also requires Node.js 24.13.1 or later, and launcher traces now continue through Claude Code hooks. Any wiring into the studio's harnesses must account for the fail-closed default, because a Relay outage would now block tool calls rather than let them through. A 0.11.1 beta exists; it is a pre-release and is not used. (via: the 0.11.0 release notes on GitHub, read 2026-11-02)
+
 ## Sources
 
 - [primary] https://docs.nvidia.com/nemo/relay/nemo-relay-cli/basic-usage — the CLI's integrations and gateway modes
@@ -67,4 +69,5 @@ The Relay CLI wraps Claude Code, Codex and pi directly (`nemo-relay claude`). He
 - [primary] https://docs.nvidia.com/nemo/relay/instrument-applications/about — instrumenting applications
 - [aggregator] https://prismix.dev/news/cd3206004eeb — summary of "Tracing Agent Harness Behavior with NVIDIA NeMo Relay"
 - [aggregator] https://quantumzeitgeist.com/?p=357425 — news summary
+- [primary] https://github.com/NVIDIA/NeMo-Relay/releases/tag/0.11.0 — 0.11.0 release notes
 - [primary] https://github.com/NVIDIA/skills — the `nemo-relay` skill family (mirrored in this library's catalogs/nvidia-skills)

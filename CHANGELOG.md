@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.53] - 2026-11-01
+
+- newsletter issue 36 (2 November)
+
 ## [1.1.23.1.52] - 2026-11-01
 
 - weekly watch 2026-11-02: NeMo Relay 0.11.0, PyTorch 2.15.0, LFM3, skills sync, watch page

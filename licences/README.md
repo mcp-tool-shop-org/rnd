@@ -16,6 +16,14 @@ signed contract that is silent, leaves the use free. The verdicts below that res
 (`licences/registry.json`). The ones that rest on explicit clauses (Google's ML clause, xAI's distillation ban,
 Anthropic's training-target rule, the Kimi app's non-commercial clause) stand.
 
+*Revised 2026-11-02 (the maintainer's decision).* Google's ML clause is read by its purpose: it bars building a rival
+general-purpose assistant from Google output, not every model that Google-written text touches. A narrow,
+purpose-built model or dataset (a judge, a classifier, a narrator, a task model) may use it, with a provenance note
+naming the Google tool that wrote it. The clause's own words carry no "competing" qualifier, so this verdict rests on
+the maintainer's judgement, and the `google-tos` and `antigravity-terms` entries say so.
+The reading is revisited if Google restricts a specific use or asks. Provenance on every row derived from Google
+output stays the safeguard.
+
 This folder is the documented search: one entry per page the studio relies on.
 
 **This is a reading of published terms, not legal advice.**

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.52] - 2026-11-01
+
+- newsletter issue 36 (2 November)
+
 ## [1.1.23.1.51] - 2026-11-01
 
 - watchlist: the CUDA 13.4 cuBLAS Grouped GEMM bug on Blackwell (cuda-toolkit and pytorch entries)

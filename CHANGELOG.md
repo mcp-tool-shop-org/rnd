@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.55] - 2026-11-03
+
+- newsletter issue 37 (3 November)
+
 ## [1.1.23.1.54] - 2026-11-02
 
 - licences: Google ML clause read by purpose (narrow purpose-built training allowed with provenance)

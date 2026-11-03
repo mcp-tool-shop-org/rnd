@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.56] - 2026-11-03
+
+- measured 2026-11-03: judge timings and the S2 memory fix (counts only)
+- Added `2026-11-03-measured-2026-11-03-five-judges-timed-on-an-a100-and-the-s2-`: Measured 2026-11-03: five judges timed on an A100, and the S2 memory fix
+
 ## [1.1.23.1.55] - 2026-11-03
 
 - newsletter issue 37 (3 November)

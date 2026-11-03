@@ -50,6 +50,26 @@ Second, the aspire-si GRPO smoke test S2 (path a) now passes at its registered s
   - **A short probe** (256 generated tokens on the longest prompt): restoring bf16 on those weights cut the card peak from 18,189 to 12,858 MiB, and static weights from 8.05 to 5.73 GiB.
 - **10 of 40 prompt groups had zero reward variance** (95% interval about 13–41%), so they gave no learning signal. A fix is decided for the training plan; it is not yet built.
 
+**The judge comparison's counted run, window plan: PLANNED, NOT RUN** (R&D's estimate from the times above, at the live Colab A100-40 rate of 6.73 units/h, read 2026-11-03)
+- **The counted run:** 2,580 calls per judge (430 triads × 3 claims × 2 orders), on one card type, A100 40 GB.
+- **Six windows,** each downloading only its own judges:
+
+| Window | Judges | Calls | Expected s (central / cautious) | Ceiling (units) |
+|---|---|---|---|---|
+| flow 1–5 (one per shard) | flow-judge-v0.1, 1/5 of its calls each | 516 each | 3,295 / 4,004 each | 8.97 each |
+| fast | granite, mu, nemotron, d3-mini | 2,580 each | 2,294 / 2,880 | 6.73 |
+
+- **Two waves of three A100 sessions** (at most three open at once): about **2 h** of wall clock, against about **5.2 h** in sequence.
+- **Units:** **35.1 expected, 42.8 cautious** (call time × 1.2, setup × 1.5). The ceilings sum to **51.6**. The worst case with three windows open at their ceilings is 26.9.
+- **Setup per window**, measured on the d3-only window: 115 s fixed plus 10.2 s per GB of weights.
+- **Prerequisites before any counted window:**
+  - the launcher's child-timeout forwarding and a real cost cap at the live rate;
+  - splitting a judge into disjoint shards, with a merge check (the union equals the schedule, no overlap, pins equal);
+  - resume within a shard;
+  - a CPU stub of two parallel shards plus the merge.
+  
+  None of these is merged yet.
+
 ## Studio relevance
 
 Reference numbers for the newsletter and for planning:
@@ -61,6 +81,7 @@ Reference numbers for the newsletter and for planning:
 - [verified] flow-judge-v0.1 averaged 5.934 s per call on an A100 40 GB, over 20 calls; the other four judges averaged under 0.3 s. (via: R&D, judge done-files timeone-02 and timeone-d3, 2026-11-03)
 - [verified] S2 path (a) completed 20 of 20 steps at G 8 and cap 2,048, with an nvidia-smi peak of 22,484 MiB. (via: R&D, run readout and run.meta, 2026-11-03; also aspire-si #180's run record)
 - [verified] The peak allocation phase is the training forward, at 17.82 GiB allocated in the registered steps. (via: R&D, phase log of the run, 2026-11-03)
+- [unverified] The counted run is planned at about 35.1 units expected (42.8 cautious) in six windows; it has not run. (an estimate, not a measurement)
 - [verified] Restoring bf16 on the non-quantised weights cut the probe's card peak from 18,189 to 12,858 MiB at 256 tokens. (via: R&D, probe A/B JSON, 2026-11-03)
 
 ## Sources

@@ -7,7 +7,7 @@ highlights:
   - "<strong>Every judge timed on an A100.</strong> 20 calls each, every reply parsed: flow-judge-v0.1 5.93 s a call, the other four 0.10 to 0.28 s. The counted run is planned at about 35 units in six windows. No judge has been scored."
   - "<strong>aspire-si's memory test passes.</strong> The registered shape peaked at 22,484 MiB against the 31,200 MiB line, after a fix for a KV cache kept in 32-bit floats."
   - "<strong>Two releases.</strong> rnd 1.1.23.1.55, and rnd-data 0.1.0, a read-only reader for the store of raw data behind our research."
-  - "<strong>A heartbeat should prove the work happened.</strong> Our GPU watchdog went blind for two days and still looked healthy."
+  - "<strong>A heartbeat should prove the work happened.</strong> Our GPU watchdog went blind for almost two days and still looked healthy."
 ---
 
 The judge bake-off reaches a datacentre GPU, aspire-si's memory test passes at full size, and two releases. Then a
@@ -82,7 +82,7 @@ week.
 
 Before aspire-si trains on the local 5090, a smoke test checks that its training loop fits the card at the size we
 registered: 20 steps, 32 prompts, 8 answers per prompt, up to 2,048 tokens each. On 3 November it passed. Memory
-peaked at 22,484 MiB against the 31,200 MiB line, and the peak was in the training pass, not in generating answers.
+peaked at 22,484 MiB against the 31,200 MiB line, and allocated memory peaked in the training pass.
 
 | Phase ending at | Most allocated (GiB) | Most reserved (GiB) |
 |---|---|---|
@@ -101,8 +101,8 @@ restoring 16-bit (bf16) weights for the embeddings, output layer and norms, whic
 cut the card's peak from 18,189 MiB to 12,858 MiB ([aspire-si #180](https://github.com/mcp-tool-shop-org/aspire-si/pull/180)).
 
 In 10 of the 40 prompt groups (25%, with a 95% interval of about 13 to 41%), all eight answers got the same reward,
-so those groups give the model nothing to learn from. A fix is decided for the training plan but not yet implemented
-or run.
+so those groups give the model nothing to learn from. A fix has since been built
+([aspire-si #181](https://github.com/mcp-tool-shop-org/aspire-si/pull/181)); its first results will follow.
 
 The run also measured generation speed: 66.8 tokens a second. At that speed the full plan would take roughly 74 to 97
 hours of card time, about one and a half to nearly three times the plan's first guess of 36 to 48 hours. That
@@ -117,11 +117,11 @@ projection is provisional, because the plan's step count isn't fixed yet.
 
 ## A heartbeat should prove the work happened
 
-The rig's GPU watchdog went blind for two days after a driver changed one of the fields it reads, and it still looked
+The rig's GPU watchdog went blind for almost two days after a driver changed one of the fields it reads, and it still looked
 healthy, because its heartbeat was written on every loop whether or not it had read anything. It now writes the
 heartbeat only after a reading parses, and marks itself blind after five bad readings in a row. We proved the fix by
-setting its line far below normal use and watching it trip. Our GPU study kits run their own separate guard, which
-logged readings throughout.
+setting its line far below normal use and watching it trip. Some of our study kits run their own separate guard, which
+logged readings.
 
 Two lessons: write a heartbeat only after the work it stands for has happened, and test a safety check with a case it
 must catch.

@@ -29,7 +29,7 @@ Second, the aspire-si GRPO smoke test S2 (path a) now passes at its registered s
 | nemotron-3-nano-4b | 0.098 | 0.074 | 31.1 | 35.6 | 8,438 |
 
 - **The two load columns measure different things.** "Model load (child)" is the judge process's own load time, from process start to model loaded. "Load + overhead (parent)" is the window's wall time for that judge minus its call time, so it also counts process start, imports and result handling. A chart of load time should use the first column; window planning uses the second.
-- flow-judge writes feedback text before its score: median 92 words, at most 200. It is about 46× slower per call than the next judge, so it dominates the cost of the counted run.
+- flow-judge writes feedback text before its score: median 92 words, at most 200. It is about 21× slower per call than the next slowest judge (granite-guardian-4.1-8b, 0.282 s), so it dominates the cost of the counted run.
 - d3-mini first failed to load on the A100: its runtime needs a numbered device (`cuda:0`), and the launcher passed `cuda`. That was fixed in reasoning-dataset-lab #62, and a d3-only window then timed it.
 
 **S2 path (a), the registered 20 steps** (G 8, 32 prompts, completion cap 2,048), with a dated set of memory flags:

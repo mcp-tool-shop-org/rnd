@@ -14,6 +14,7 @@ NANO an ordinary library update (entries filed or revised, results added).
 ## [1.1.23.1.58] - 2026-11-03
 
 - newsletter issue 38 (4 November)
+- Corrected the 3 November entry: flow-judge is about 21× slower per call than the next slowest judge, not 46× (46× was against d3-mini).
 
 ## [1.1.23.1.57] - 2026-11-03
 

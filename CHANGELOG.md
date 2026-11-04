@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.58] - 2026-11-03
+
+- newsletter issue 38 (4 November), with four charts (judge call times, S2 memory by phase, zero-variance groups, the heartbeat lesson) and the daily watch
+- Corrected the 3 November entry: flow-judge is about 21× slower per call than the next slowest judge, not 46× (46× was against d3-mini).
+
 ## [1.1.23.1.57] - 2026-11-03
 
 - add the judge comparison's window plan (planned, not run)

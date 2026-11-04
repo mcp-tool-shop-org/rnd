@@ -244,6 +244,34 @@
     "width": 1200,
     "height": 593
   },
+  "issue-38-heartbeat-lesson.svg": {
+    "png": "issue-38-heartbeat-lesson.png",
+    "png_sha256": "3a8a8dadda846a0dd5f070713b645e1a565ed5fba13cac7ddc05326ec66ece36",
+    "svg_sha256": "9091e40f98949636d63b8a542a2ba9ad2c51b8bd973db9b180d771d70da7343c",
+    "width": 1200,
+    "height": 499
+  },
+  "issue-38-judge-call-times.svg": {
+    "png": "issue-38-judge-call-times.png",
+    "png_sha256": "7de0d009df5e6b84ef70008c5df2486284d19ce9eb62152e8be0598aad5e7f76",
+    "svg_sha256": "a9879d31812ccfc5cdeffefe7a761008a12b74e73b8ae579ead4e0fc01295eba",
+    "width": 1200,
+    "height": 537
+  },
+  "issue-38-s2-phase-memory.svg": {
+    "png": "issue-38-s2-phase-memory.png",
+    "png_sha256": "1ae990d7c98f4a87e728e0059efdd0e45c8d3a0dedc214f735ffe38f7015a9c8",
+    "svg_sha256": "27d420736950184ef083ff2100fbd0457f5431cb604676891604e6f0ec1edfe2",
+    "width": 1200,
+    "height": 558
+  },
+  "issue-38-zero-variance-groups.svg": {
+    "png": "issue-38-zero-variance-groups.png",
+    "png_sha256": "e67410f6bc3b26fbc3177ba52eee5e19c9c66318628e5f89b381ccd6592088bf",
+    "svg_sha256": "71099b6a381f0752f4d53c6a28ee5aa8bb2eafee4c99a57c63a24a4209e92976",
+    "width": 1200,
+    "height": 474
+  },
   "loop-repeats.svg": {
     "png": "loop-repeats.png",
     "png_sha256": "f7527ae4d3ec14612ffea5b9fafd1f68c1bba4d89e99aae489192b50836155d3",

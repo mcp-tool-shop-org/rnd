@@ -136,7 +136,9 @@ must catch.
 
 ## The daily watch
 
-2 new since [issue 37](/rnd/newsletter/issue-37/).
+4 new since [issue 37](/rnd/newsletter/issue-37/).
 
 - **Claude Code v2.1.318** (2026-11-04): `claude -p` JSON results and `claude auth status` now carry the date a stored sign-in ends (`credential_expires_at`, `loginExpiresAt`); unattended runs stop rewriting `~/.claude.json` when nothing in it changed; and a mod's `turn.step` hook can no longer make a cut-off or stopped reply finish as a success in headless runs ([release notes](https://github.com/anthropics/claude-code/releases/tag/v2.1.318)).
 - **ComfyUI v0.44.0** (2026-11-04): fixes `fp8_e4m3fn_fast` falling back to bf16 compute under dynamic VRAM and a VAE compute-dtype crash on the LTX 2.5 decoder; adds a node to set the VAE compute dtype, and ProRes video saving ([release notes](https://github.com/Comfy-Org/ComfyUI/releases/tag/v0.44.0)).
+- **llama.cpp v0.9.0** (2026-11-04): an OCP FP8 E4M3 tensor type, a `flash_attn_ext_rows` op that makes the unified KV cache efficient for multi-sequence inference, and a batched tensor-copy API; Mistral Large 4, Chatterbox TTS and Nemotron 3.5 Transcribe are added, and ggml moves to v0.29.0 with NCCL multi-node tensor parallelism ([release notes](https://github.com/ggml-org/llama.cpp/releases/tag/v0.9.0)).
+- **NVIDIA/skills** (2026-11-04, 6 commits): cable-insertion policy skills from NVIDIA's 3 November Isaac release, the NuRec skills routed to their product repos, validation signatures attached, and the catalogue metadata regenerated ([latest commit](https://github.com/NVIDIA/skills/commit/ade68cb2399281c40fa665406f53a28f1ab52ec1)).

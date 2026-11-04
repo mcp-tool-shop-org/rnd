@@ -59,8 +59,7 @@ accepts, measured on development banks of 160 renderings, with the decision rule
   against 127 of 160 with the baseline prompt. The writer didn't use the listed forms.
 - **Stage 4, sentence shapes assigned by code: not adopted.** 89 of 160, against 120 of 160 for the baseline, so the
   development gate failed and there was no confirmatory run. It also turned up a defect: 16 renderings per arm (10%)
-  were never generated, because the prompt plus the output budget went over the writer's context limit; they count
-  as failures in both arms.
+  were never generated, because the prompt plus the output budget went over the writer's context limit.
 - **Stage 5, code moves and rewritten speech: passed its development gates.** The development run passed all 7
   pre-registered gates. First drafts passed 126 of 160, against a floor of 112, and 132 of 160 after the pipeline.
   Code swaps kept 2,501 of 2,501; speech rewrites kept 350 of 358; 0 renderings went over the context limit.

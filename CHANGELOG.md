@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.58] - 2026-11-03
+
+- newsletter issue 38 (4 November)
+
 ## [1.1.23.1.57] - 2026-11-03
 
 - add the judge comparison's window plan (planned, not run)

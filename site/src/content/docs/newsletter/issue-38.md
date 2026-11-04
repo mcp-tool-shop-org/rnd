@@ -34,6 +34,8 @@ ran on a rented A100 40 GB:
   and a d3-only A100 run then timed it: 20 calls, all parsed.
 - The two A100 windows cost 2.10 Colab units together.
 
+![Horizontal log-scale bar chart of the five judges timed on an A100 40 GB across 20 calls each in two windows (batch 1, greedy; timing only, no judge scored): mean time per call is 5.934 s for flow-judge-v0.1, 0.282 s for granite-guardian-4.1-8b, 0.128 s for d3-mini, 0.102 s for mu-judge, and 0.098 s for nemotron-3-nano-4b; paired child-process model load times on a linear scale are 30.6 s for flow-judge-v0.1, 60.3 s for granite-guardian-4.1-8b, 32.85 s for d3-mini, 31.2 s for mu-judge, and 31.1 s for nemotron-3-nano-4b.](/rnd/charts/issue-38-judge-call-times.svg)
+
 | Judge | Mean per call | Model load |
 |---|---|---|
 | flow-judge-v0.1 | 5.934 s | 30.6 s |
@@ -91,6 +93,8 @@ peaked at 22,484 MiB against the 31,200 MiB line, and allocated memory peaked in
 | training forward | 17.82 | 19.31 |
 | training backward | 17.82 | 19.31 |
 
+![Horizontal bar chart of S2 path a torch allocator memory by phase across the registered 20 steps on the RTX 5090 (G = 8, 32 prompts, completion cap 2,048, 20 of 20 steps completed with verdict S2-OK): rollout is 8.67 GiB max allocated and 19.62 GiB max reserved, reference forward is 11.69 GiB max allocated and 13.63 GiB max reserved, training forward holds the allocation peak at 17.82 GiB max allocated and 19.31 GiB max reserved, and training backward is 17.82 GiB max allocated and 19.31 GiB max reserved; a separate nvidia-smi card-total note records the 22,484 MiB sampler peak against the 31,200 MiB watchdog line, and a footnote records the 2 pre-run stress steps at 2,048 forced tokens peaking at 18.07 GiB allocated and 19.57 GiB reserved in training forward.](/rnd/charts/issue-38-s2-phase-memory.svg)
+
 These are PyTorch's own figures for the registered steps. The 22,484 MiB peak is the card's total from `nvidia-smi`,
 which also counts the desktop and the CUDA context, so the two don't share an axis.
 
@@ -103,6 +107,8 @@ cut the card's peak from 18,189 MiB to 12,858 MiB ([aspire-si #180](https://gith
 In 10 of the 40 prompt groups (25%, with a 95% interval of about 13 to 41%), all eight answers got the same reward,
 so those groups give the model nothing to learn from. A fix has since been built
 ([aspire-si #181](https://github.com/mcp-tool-shop-org/aspire-si/pull/181)); its first results will follow.
+
+![Bar share chart of S2 path a prompt groups across 20 steps on 32 tune prompts (2 groups per step, G = 8 completions each): 10 of 40 groups (25%) had zero reward variance where all 8 completions scored the same (8 of 10 steps with such a group had mean reward +0.89 to +1.04) and 30 of 40 groups (75%) had active reward variance, with a 95% confidence interval whisker at 14.2% to 40.2% by Wilson score (12.7% to 41.2% by Clopper-Pearson exact, or about 13% to 41%), plus a dashed box noting that leaving zero-variance groups out of the loss (KL included) and mean-centring advantages without dividing by standard deviation is built in aspire-si #181, with first results to follow.](/rnd/charts/issue-38-zero-variance-groups.svg)
 
 The run also measured generation speed: 66.8 tokens a second. At that speed the full plan would take roughly 74 to 97
 hours of card time, about one and a half to nearly three times the plan's first guess of 36 to 48 hours. That
@@ -123,10 +129,14 @@ heartbeat only after a reading parses, and marks itself blind after five bad rea
 setting its line far below normal use and watching it trip. Some of our study kits run their own separate guard, which
 logged readings.
 
+![Two-row concept diagram titled A heartbeat should prove the work happened: before, the watchdog loop polled the card and wrote the heartbeat whether or not it read the card; after, the heartbeat is written only after a reading parses, an unparsed reading writes no heartbeat update, and five bad readings in a row write a blind marker.](/rnd/charts/issue-38-heartbeat-lesson.svg)
+
 Two lessons: write a heartbeat only after the work it stands for has happened, and test a safety check with a case it
 must catch.
 
 ## The daily watch
 
-<!-- PLACEHOLDER: R&D's daily watch block for 4 November goes here before merge. Do not merge with this comment. -->
-**The daily watch for 4 November is still being checked and will be added here before this issue publishes.**
+2 new since [issue 37](/rnd/newsletter/issue-37/).
+
+- **Claude Code v2.1.318** (2026-11-04): `claude -p` JSON results and `claude auth status` now carry the date a stored sign-in ends (`credential_expires_at`, `loginExpiresAt`); unattended runs stop rewriting `~/.claude.json` when nothing in it changed; and a mod's `turn.step` hook can no longer make a cut-off or stopped reply finish as a success in headless runs ([release notes](https://github.com/anthropics/claude-code/releases/tag/v2.1.318)).
+- **ComfyUI v0.44.0** (2026-11-04): fixes `fp8_e4m3fn_fast` falling back to bf16 compute under dynamic VRAM and a VAE compute-dtype crash on the LTX 2.5 decoder; adds a node to set the VAE compute dtype, and ProRes video saving ([release notes](https://github.com/Comfy-Org/ComfyUI/releases/tag/v0.44.0)).

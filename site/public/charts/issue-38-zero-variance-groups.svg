@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 272" role="img" aria-label="Bar share chart showing 10 of 40 prompt groups (25%) with zero reward variance in S2 path a, with Wilson 95% confidence interval 14.2% to 40.2% and Clopper-Pearson 95% interval 12.7% to 41.2%" font-family="system-ui, sans-serif" font-size="14">
+<rect width="688" height="272" fill="#ffffff"/>
+<text x="344" y="32" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="15">S2 prompt groups: 10 of 40 (25%) produced zero reward variance</text>
+<text x="344" y="52" text-anchor="middle" fill="#5b6272" font-size="12">20 steps on 32 tune prompts (2 groups per step, G = 8; all 8 completions scored the same)</text>
+<text x="24" y="74" text-anchor="start" fill="#1f2430" font-weight="600" font-size="11.5">Wilson 95% CI: 14.2%-40.2% (Clopper-Pearson: 12.7%-41.2%, ~13-41%)</text>
+<line x1="114.9" y1="84" x2="281.3" y2="84" stroke="#1f2430" stroke-width="2"/>
+<line x1="114.9" y1="79" x2="114.9" y2="89" stroke="#1f2430" stroke-width="2"/>
+<line x1="281.3" y1="79" x2="281.3" y2="89" stroke="#1f2430" stroke-width="2"/>
+<line x1="184.0" y1="78" x2="184.0" y2="96" stroke="#b4532a" stroke-width="2"/>
+<rect x="24.0" y="96" width="640.0" height="28" rx="4" fill="#1f2430" opacity="0.10"/>
+<rect x="24.0" y="96" width="160" height="28" rx="4" fill="#b4532a"/>
+<text x="104" y="115" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12.5">10 of 40 (25%)</text>
+<rect x="184.0" y="96" width="480" height="28" rx="4" fill="#2f7d5b"/>
+<text x="424" y="115" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="12.5">30 of 40 groups (75%): active reward variance</text>
+<text x="24" y="144" text-anchor="start" fill="#b4532a" font-weight="600" font-size="12">Zero reward variance: no policy gradient (8 of 10 steps had mean reward +0.89 to +1.04)</text>
+<rect x="25" y="160" width="638" height="68" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="344" y="183" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="13">Fix built in aspire-si #181 · first results to follow</text>
+<text x="344" y="203" text-anchor="middle" fill="#5b6272" font-size="11.5">Leave zero-variance groups out of the whole loss (KL term included) and mean-centre</text>
+<text x="344" y="219" text-anchor="middle" fill="#5b6272" font-size="11.5">advantages without dividing by group standard deviation (built, not yet reported).</text>
+<text x="344" y="250" text-anchor="middle" fill="#5b6272" font-size="11.5">Whisker marks the 95% confidence interval on 10/40 (25%); dashed border marks the fix.</text>
+</svg>

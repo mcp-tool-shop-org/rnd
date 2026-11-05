@@ -90,4 +90,8 @@ goes further, including the shortcut probe that tests whether surface features o
 
 ## The daily watch
 
-<!-- PLACEHOLDER: the daily watch for 5 November goes here before merge. -->
+3 new since [issue 38](/rnd/newsletter/issue-38/).
+
+- **CUDA Toolkit 13.5** (2026-11-04): NVIDIA's announcement leads with general-availability support for its Vera Rubin GPUs ([announcement](https://developer.nvidia.com/blog/nvidia-cuda-13-5-brings-nvidia-vera-rubin-ga-support/), [release notes](https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html)).
+- **Ollama v0.40.15-rc1** (pre-release, 2026-11-03): the MLX backend loads its bundled CUDA libraries in-process on Linux, and MiMo V2.6 models are supported ([release notes](https://github.com/ollama/ollama/releases/tag/v0.40.15-rc1)).
+- **NVIDIA/skills** (2026-11-04 to 2026-11-05, 11 commits): a cuDF query-engine builder skill and cuEquivariance skills registered under BioNeMo Libraries, the NVFlare, cuDF and BioNeMo skills synced, product mappings applied for FLARE and Holoscan, and the catalogue metadata regenerated ([latest commit](https://github.com/NVIDIA/skills/commit/69d2dd4402b376ee812ea3a8ea24c9fb1c90a29e)).

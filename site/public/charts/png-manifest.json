@@ -272,6 +272,20 @@
     "width": 1200,
     "height": 474
   },
+  "issue-39-scene-to-item.svg": {
+    "png": "issue-39-scene-to-item.png",
+    "png_sha256": "47849b81a0b1dd81dd8d3529ead58a0c99b442e96fd9bd0f53999f56518660c6",
+    "svg_sha256": "6797aeae3f1a3fb4ac232233e022cabc32c7913449e06f6102783c99c749f5cc",
+    "width": 1200,
+    "height": 569
+  },
+  "issue-39-stage-comparisons.svg": {
+    "png": "issue-39-stage-comparisons.png",
+    "png_sha256": "84416a7dd480dd4440ac3b15a528e64610f4a9a5d323a43a7c605f0a12bae386",
+    "svg_sha256": "17120df4b4bafc5d2ae918bf00430611a3258555cd1779a4f1aad8bae2f8fbc4",
+    "width": 1200,
+    "height": 579
+  },
   "loop-repeats.svg": {
     "png": "loop-repeats.png",
     "png_sha256": "f7527ae4d3ec14612ffea5b9fafd1f68c1bba4d89e99aae489192b50836155d3",

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.59] - 2026-11-04
+
+- newsletter issue 39 (5 November): the dataset labs, and udlab public as a v0.1.0 prototype, with two charts (the three stages against their baselines and floor, how a scene becomes an item) and the daily watch
+
 ## [1.1.23.1.58] - 2026-11-03
 
 - newsletter issue 38 (4 November), with four charts (judge call times, S2 memory by phase, zero-variance groups, the heartbeat lesson) and the daily watch

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 326" role="img" aria-label="Process diagram of how udlab turns a planned scene into a checked item across 5 code steps and 1 writer model step: code plans the scene events, rules in code compute the beliefs and answer key, code seals the key with a private seed that no model writes or grades, the local writer model qwen3.6:35b puts the planned scene into prose without touching the key, code checks every prose rendering against the plan, and only renderings that pass the code check count" font-family="system-ui, sans-serif" font-size="14">
+<rect width="688" height="326" fill="#ffffff"/>
+<text x="344" y="30" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="15">How a scene becomes an item: the model words it and never touches the key</text>
+<text x="344" y="49" text-anchor="middle" fill="#5b6272" font-size="12">5 steps in code (green) and 1 step in the local writer model (rust), in the README&#39;s words</text>
+
+<!-- Row 1: Code-made key track (Boxes 1, 2, 3 - all CODE) -->
+<!-- Box 1: Planned by code -->
+<rect x="24" y="68" width="192" height="90" rx="4" fill="#ffffff" stroke="#2f7d5b" stroke-width="1.5"/>
+<rect x="24" y="68" width="192" height="22" rx="4" fill="#2f7d5b"/>
+<text x="120" y="83" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="11.5">1. CODE · Planned scene</text>
+<text x="120" y="106" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="11">Planned by code: events</text>
+<text x="120" y="123" text-anchor="middle" fill="#5b6272" font-size="11">who moved, who could see,</text>
+<text x="120" y="140" text-anchor="middle" fill="#5b6272" font-size="11">who said what, who heard</text>
+
+<line x1="216" y1="113" x2="248" y2="113" stroke="#2f7d5b" stroke-width="1.8"/>
+<polygon points="248,113 240,109 240,117" fill="#2f7d5b"/>
+
+<!-- Box 2: Rules in code compute beliefs & key -->
+<rect x="248" y="68" width="192" height="90" rx="4" fill="#ffffff" stroke="#2f7d5b" stroke-width="1.5"/>
+<rect x="248" y="68" width="192" height="22" rx="4" fill="#2f7d5b"/>
+<text x="344" y="83" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="11.5">2. CODE · Rules in code</text>
+<text x="344" y="106" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="11">Key is computed, not judged</text>
+<text x="344" y="123" text-anchor="middle" fill="#5b6272" font-size="11">Out of sight when moved:</text>
+<text x="344" y="140" text-anchor="middle" fill="#5b6272" font-size="11">believes where last seen</text>
+
+<line x1="440" y1="113" x2="472" y2="113" stroke="#2f7d5b" stroke-width="1.8"/>
+<polygon points="472,113 464,109 464,117" fill="#2f7d5b"/>
+
+<!-- Box 3: Sealed with a private seed -->
+<rect x="472" y="68" width="192" height="90" rx="4" fill="#ffffff" stroke="#2f7d5b" stroke-width="1.5"/>
+<rect x="472" y="68" width="192" height="22" rx="4" fill="#2f7d5b"/>
+<text x="568" y="83" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="11.5">3. CODE · Code-made key</text>
+<text x="568" y="106" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="11">Sealed with a private seed</text>
+<text x="568" y="123" text-anchor="middle" fill="#5b6272" font-size="11">Never written or graded</text>
+<text x="568" y="140" text-anchor="middle" fill="#2f7d5b" font-weight="600" font-size="11">by a model (from plan)</text>
+
+<!-- Connector from Box 1 (plan) to Box 4 (writer model), plus key-isolation barrier -->
+<line x1="120" y1="158" x2="120" y2="198" stroke="#8a8f98" stroke-width="1.8"/>
+<polygon points="120,198 116,190 124,190" fill="#8a8f98"/>
+<text x="132" y="182" fill="#1f2430" font-weight="600" font-size="11">Plan goes to writer (never the key)</text>
+<line x1="356" y1="178" x2="664" y2="178" stroke="#b4532a" stroke-width="1.2" stroke-dasharray="4,3"/>
+<text x="510" y="192" text-anchor="middle" fill="#b4532a" font-weight="600" font-size="11">No model path: writer never touches the key</text>
+
+<!-- Row 2: Prose rendering and code check track (Box 4 MODEL, Boxes 5 & 6 CODE) -->
+<!-- Box 4: Local writer model (ONLY MODEL STEP) -->
+<rect x="24" y="200" width="192" height="90" rx="4" fill="#ffffff" stroke="#b4532a" stroke-width="2"/>
+<rect x="24" y="200" width="192" height="22" rx="4" fill="#b4532a"/>
+<text x="120" y="215" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="11.5">4. MODEL · Writer model</text>
+<text x="120" y="238" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="11">Put into prose by a local</text>
+<text x="120" y="255" text-anchor="middle" fill="#5b6272" font-size="11">writer model (qwen3.6:35b)</text>
+<text x="120" y="272" text-anchor="middle" fill="#b4532a" font-weight="600" font-size="11">Only words the planned scene</text>
+
+<line x1="216" y1="245" x2="248" y2="245" stroke="#8a8f98" stroke-width="1.8"/>
+<polygon points="248,245 240,241 240,249" fill="#8a8f98"/>
+
+<!-- Box 5: Checked by code against the plan -->
+<rect x="248" y="200" width="192" height="90" rx="4" fill="#ffffff" stroke="#2f7d5b" stroke-width="1.5"/>
+<rect x="248" y="200" width="192" height="22" rx="4" fill="#2f7d5b"/>
+<text x="344" y="215" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="11.5">5. CODE · Checked by code</text>
+<text x="344" y="238" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="11">Every prose rendering is</text>
+<text x="344" y="255" text-anchor="middle" fill="#5b6272" font-size="11">checked by code against</text>
+<text x="344" y="272" text-anchor="middle" fill="#5b6272" font-size="11">the plan (Stage 5 swaps)</text>
+
+<line x1="440" y1="245" x2="472" y2="245" stroke="#2f7d5b" stroke-width="1.8"/>
+<polygon points="472,245 464,241 464,249" fill="#2f7d5b"/>
+
+<!-- Box 6: Before it counts (passed vs not passed) -->
+<rect x="472" y="200" width="192" height="90" rx="4" fill="#ffffff" stroke="#1f2430" stroke-width="1.5"/>
+<rect x="472" y="200" width="192" height="22" rx="4" fill="#1f2430"/>
+<text x="568" y="215" text-anchor="middle" fill="#ffffff" font-weight="600" font-size="11.5">6. CODE · Before it counts</text>
+<text x="568" y="238" text-anchor="middle" fill="#2f7d5b" font-weight="600" font-size="11">Renderings passed: count</text>
+<text x="568" y="255" text-anchor="middle" fill="#b4532a" font-weight="600" font-size="11">Fails check: not counted</text>
+<text x="568" y="272" text-anchor="middle" fill="#5b6272" font-size="11">Checked before it counts</text>
+
+<text x="344" y="311" text-anchor="middle" fill="#5b6272" font-size="11.5">Boxes 1, 2, 3, 5 and 6 run in code; only Box 4 is a model (words the scene, never grades it).</text>
+</svg>

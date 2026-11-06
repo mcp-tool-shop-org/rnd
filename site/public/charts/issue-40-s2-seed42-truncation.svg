@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 292" role="img" aria-label="Horizontal bar chart of cut-off answers across the first 120 updates (3 chunks of 40 updates, 1,280 completions per chunk) in S2 seed 42: chunk 1 is 24 of 1,280 (1.88%), chunk 2 is 14 of 1,280 (1.09%), chunk 3 is 16 of 1,280 (1.25%), and the run total is 54 of 3,840 (1.41%), plotted against the 4.2% flag line and 20% stop line with a note that the 10-update rolling peak reached 5.0% at updates 39 to 47" font-family="system-ui, sans-serif" font-size="14">
+<rect width="688" height="292" fill="#ffffff"/>
+<line x1="24" y1="64" x2="664" y2="64" stroke="#8a8f98" stroke-width="1"/>
+<text x="344" y="30" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="15">S2 seed 42: cut-off answers stayed under 2% in each of the first three chunks</text>
+<text x="344" y="50" text-anchor="middle" fill="#5b6272" font-size="12">First 120 updates (40 updates = 1,280 answers per chunk; paused after chunk 3)</text>
+<text x="204.0" y="82" text-anchor="middle" fill="#5b6272" font-size="11.5">0%</text>
+<text x="262.8" y="82" text-anchor="middle" fill="#b4532a" font-weight="600" font-size="11.5">4.2% flag</text>
+<text x="484.0" y="82" text-anchor="middle" fill="#1f2430" font-weight="600" font-size="11.5">20% stop line</text>
+<text x="194" y="108" text-anchor="end" fill="#1f2430" font-size="12.5">Chunk 1 (updates 0-39)</text>
+<rect x="204.0" y="93" width="280.0" height="20" rx="2" fill="#1f2430" opacity="0.10"/>
+<rect x="204.0" y="93" width="26.2" height="20" rx="2" fill="#2f7d5b"/>
+<text x="494" y="108" text-anchor="start" fill="#1f2430" font-size="12.5">24 of 1,280 (1.88%)</text>
+<text x="194" y="140" text-anchor="end" fill="#1f2430" font-size="12.5">Chunk 2 (updates 40-79)</text>
+<rect x="204.0" y="125" width="280.0" height="20" rx="2" fill="#1f2430" opacity="0.10"/>
+<rect x="204.0" y="125" width="15.3" height="20" rx="2" fill="#2f7d5b"/>
+<text x="494" y="140" text-anchor="start" fill="#1f2430" font-size="12.5">14 of 1,280 (1.09%)</text>
+<text x="194" y="172" text-anchor="end" fill="#1f2430" font-size="12.5">Chunk 3 (updates 80-119)</text>
+<rect x="204.0" y="157" width="280.0" height="20" rx="2" fill="#1f2430" opacity="0.10"/>
+<rect x="204.0" y="157" width="17.5" height="20" rx="2" fill="#2f7d5b"/>
+<text x="494" y="172" text-anchor="start" fill="#1f2430" font-size="12.5">16 of 1,280 (1.25%)</text>
+<line x1="64" y1="186" x2="646" y2="186" stroke="#8a8f98" stroke-width="1" opacity="0.5"/>
+<text x="194" y="208" text-anchor="end" fill="#1f2430" font-weight="600" font-size="12.5">Run total (120 updates)</text>
+<rect x="204.0" y="193" width="280.0" height="20" rx="2" fill="#1f2430" opacity="0.10"/>
+<rect x="204.0" y="193" width="19.7" height="20" rx="2" fill="#1f2430"/>
+<text x="494" y="208" text-anchor="start" fill="#1f2430" font-weight="600" font-size="12.5">54 of 3,840 (1.41%)</text>
+<line x1="262.8" y1="88" x2="262.8" y2="218" stroke="#b4532a" stroke-width="1.5" stroke-dasharray="4,3"/>
+<line x1="484.0" y1="88" x2="484.0" y2="218" stroke="#1f2430" stroke-width="1.5"/>
+<rect x="25" y="226" width="638" height="28" rx="4" fill="#ffffff" stroke="#8a8f98" stroke-width="1.5"/>
+<text x="344" y="244" text-anchor="middle" fill="#1f2430" font-size="11.5">10-update rolling rate: rolling peak 5.0% (updates 39-47), flag line 4.2%, stop line 20%.</text>
+<line x1="24" y1="262" x2="664" y2="262" stroke="#8a8f98" stroke-width="1"/>
+<text x="344" y="278" text-anchor="middle" fill="#5b6272" font-size="11.5">Grey track spans 0% to the 20% stop line; filled bar shows cut-off share per chunk.</text>
+</svg>

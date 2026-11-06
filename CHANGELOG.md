@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.60] - 2026-11-06
+
+- newsletter issue 40 (6 November): the Colab memory guard that counted the page cache (style-dataset-lab #64, #65), time-bounded Colab locks (#63), aspire-si S2 at 120 updates, and the daily watch
+
 ## [1.1.23.1.59] - 2026-11-04
 
 - newsletter issue 39 (5 November): the dataset labs, and udlab public as a v0.1.0 prototype, with two charts (the three stages against their baselines and floor, how a scene becomes an item) and the daily watch

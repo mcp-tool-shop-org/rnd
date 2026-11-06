@@ -23,7 +23,7 @@ library shipped. Then aspire-si's training run, and the daily watch.
 
 [style-dataset-lab](https://github.com/mcp-tool-shop-org/style-dataset-lab) trains image models on Google Colab when a
 job is too big for our local card. On 6 November we ran its third lane, a fine-tune of the Qwen-Image model, for the
-first time on a **G4**: Colab's RTX PRO 6000 Blackwell card with 96 GB of memory. Three earlier tries on Colab's 80 GB
+first time on a **G4**: Colab's RTX PRO 6000 Blackwell card, sold as 96 GB (97,887 MiB as the machine reports it). Three earlier tries on Colab's 80 GB
 A100 had found no card free; the G4 opened at once.
 
 Everything before training passed:
@@ -98,7 +98,7 @@ answers, each answer is scored, and the model is nudged toward the answers that 
 [Issue 38](/rnd/newsletter/issue-38/) covered the memory test that cleared it to run. The run goes in chunks of 40
 updates, each checked before the next is allowed to start.
 
-Seed 42's first three chunks, 120 updates, all passed their checks. Chunks 2 and 3 took 3.37 and 3.23 hours with the
+Seed 42's first three chunks, 120 of its 197 planned updates (394 training items, two passes, four per update), all passed their checks. Chunks 2 and 3 took 3.37 and 3.23 hours with the
 card capped at 480 W. Card memory peaked at about 23.2 GB, and there were no hardware errors.
 
 | Chunk | Updates | Answers cut off at the length limit | Groups with no reward spread |
@@ -119,7 +119,7 @@ the end of chunk 1, where 9 of the 32 answers at update 39 were cut off; it fell
 learn from. Here that was 51 of 480 groups (10.6%).
 
 These are numbers about the run's health, not results: nothing has been evaluated yet. The run is paused after chunk 3
-and resumes at update 120.
+and resumes at update 120 of 197.
 
 ## The daily watch
 

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.61] - 2026-11-09
+
+- newsletter issue 41 (9 November), the guard that cried wolf
+
 ## [1.1.23.1.60] - 2026-11-06
 
 - newsletter issue 40 (6 November): the Colab memory guard that counted the page cache (style-dataset-lab #64, #65), time-bounded Colab locks (#63), aspire-si S2 at 120 updates, and the daily watch

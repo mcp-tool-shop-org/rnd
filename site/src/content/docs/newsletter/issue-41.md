@@ -158,6 +158,10 @@ sources. Release notes below were read at the source.
 - **llama.cpp** shipped builds through b12211 in the week. One change on 8 November removed `clip.h` and merged
   the multimodal code into `mtmd` ([#31865](https://github.com/ggml-org/llama.cpp/pull/31865)), which matters the next
   time we rebuild Ollama's backend against a newer llama.cpp.
+- **llama.cpp, a determinism fix** (8 November, build b12208): on CUDA, the routine that picks the top few candidate
+  tokens now settles ties the same way every time
+  ([#31084](https://github.com/ggml-org/llama.cpp/pull/31084)). It's the same family of problem as the cache story
+  above: results that should repeat, and didn't always.
 - **ComfyUI 0.44.0** (4 November) adds a node to set the image decoder's compute precision, and new targets for the
   Flux video upscale node. ([release notes](https://github.com/Comfy-Org/ComfyUI/releases/tag/v0.44.0))
 - **Docker Engine 29.9.3** (3 November) is a security release, including fixes for a possible CPU exhaustion on crafted
@@ -169,6 +173,10 @@ sources. Release notes below were read at the source.
 
 Nothing new this week from PyTorch, OpenVINO, NeMo Relay, PAIR, Docker Desktop, Docker Sandboxes or Docker Model
 Runner.
+
+**Since Friday (7 to 9 November):** a quiet weekend. Of our watched projects, only llama.cpp shipped, with 29 routine
+builds (b12182 to b12220), including the determinism fix above. There were no new releases of Ollama, ComfyUI,
+Claude Code, PyTorch, transformers, TRL, OpenVINO, NeMo Relay, PAIR, Holoscan, Docker Engine or Docker Model Runner.
 
 **How the watch works.** A script lists every new item from our sources; a research agent and Gemini's Deep Research
 each read the week; R&D and the Publisher check what matters against the release notes themselves. This week that

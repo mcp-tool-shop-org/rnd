@@ -4,7 +4,7 @@ description: "aspire-si's training run stopped two of its three seeds on a guard
 issue: 41
 date: 2026-11-09
 highlights:
-  - "<strong>A guard that cried wolf.</strong> aspire-si's S2 run stopped seeds 42 and 44 on its U2 guard. Measured on all three seeds, that guard would stop a healthy run 81% of the time. Running both seeds on with the guard switched off showed nothing wrong."
+  - "<strong>A guard that cried wolf.</strong> aspire-si's S2 run stopped seeds 42 and 44 on its U2 guard. Measured on all three seeds, that guard would stop a healthy run 81% of the time. Running both seeds on with the guard set to monitor only showed nothing wrong."
   - "<strong>Same server, same question, two answers.</strong> Our inference server gave different log-probabilities on 45 of 50 prompts when asked twice. The cause was its prompt cache. With the cache off, 401 of 401 repeat readings matched to the last bit."
   - "<strong>A judge result re-checked.</strong> Our reference judge's 145 of 149 stands exactly with the cache off. A second, larger judge moves by up to 5 pairs, and its row now says so."
 ---
@@ -43,8 +43,8 @@ guards for that. It counts warning events in each window of training and stops t
 times in 41 windows, about 0.46 per window. At that rate, U2's rule would stop a perfectly healthy run within 20
 windows **81% of the time**. The guard was mostly measuring its own noise.
 
-**Checking that, rather than assuming it.** We ran seeds 42 and 44 on for 30 more updates each, with U2 switched off
-and every number still logged. These runs are **exploratory**: they don't count toward the registered result. If
+**Checking that, rather than assuming it.** We ran seeds 42 and 44 on for 30 more updates each, with U2 set to
+monitor only (still counting, but unable to stop the run). These runs are **exploratory**: they don't count toward the registered result. If
 something had really been going wrong, these windows would have shown it. Neither did: U2's rule never triggered again
 in either run. Both stops look like false alarms.
 
@@ -52,8 +52,8 @@ in either run. Both stops look like false alarms.
 pre-registered before it runs and never pooled with seeds 42–44:
 - the warning guards now use a **CUSUM**, a running total that only rises when events come faster than the measured
   normal rate, with limits set from the 41 measured windows;
-- one of the guards no longer stops the run on its own: a trip first gets a confirmation pass, on a fixed set of 184
-  questions with the sampling randomness turned off;
+- a guard trip no longer stops the run on its own: it first gets a confirmation pass with the sampling randomness
+  turned off, on a fixed set of 128 or 184 questions depending on the guard, and only a confirmed trip stops it;
 - seeds 45, 46 and 47 run the new series.
 
 The v1.1 trainer is merged ([aspire-si #196](https://github.com/mcp-tool-shop-org/aspire-si/pull/196)). The script that
@@ -127,11 +127,12 @@ Eleven of our repositories ship such a Linux build.
 
 One had already shipped since the change: escape-the-valley 1.3.3, built on 26.04. We unpacked it and checked every one of
 its 44 bundled libraries. The newest core-library version any of them needs is 2.17, from 2012, so it runs on older
-systems. It's fine, but only because of how its Python was packaged. A part compiled on the new image would have
-needed 2.43, and nothing would have warned us.
+systems. It's fine, but only because of how its Python was packaged. A part compiled on the new image could
+have needed up to 2.43, the version 26.04 ships, and nothing would have warned us.
 
-From now on, Linux release builds run inside an Ubuntu 22.04 container, with a check that fails the build if any shipped
-file needs more than 22.04 provides. We're making the change repository by repository as we work in each one.
+Linux release builds will move into an Ubuntu 22.04 container, with a check that fails the build if any shipped file
+needs more than 22.04 provides. The first change is queued, and we're making it repository by repository as we work in
+each one.
 
 ## The weekly watch
 
@@ -145,7 +146,7 @@ sources. Release notes below were read at the source.
   in 0.40.14: Ollama's OpenAI-compatible endpoints now use **a model's own default sampling settings** when a request
   doesn't set `temperature` or `top_p`, instead of 1.0. We checked our code: one client, in
   [offrig](https://github.com/mcp-tool-shop-org/offrig), sends neither. It talks to a pinned older Ollama today, and a change to set both
-  explicitly is queued. ([0.40.14 release notes](https://github.com/ollama/ollama/releases/tag/v0.40.14))
+  explicitly is planned. ([0.40.14 release notes](https://github.com/ollama/ollama/releases/tag/v0.40.14))
 - **The Ubuntu 26.04 build image**, covered above.
 
 ### Worth knowing
@@ -158,7 +159,7 @@ sources. Release notes below were read at the source.
   the multimodal code into `mtmd` ([#31865](https://github.com/ggml-org/llama.cpp/pull/31865)), which matters the next
   time we rebuild Ollama's backend against a newer llama.cpp.
 - **ComfyUI 0.44.0** (4 November) adds a node to set the image decoder's compute precision, and new targets for the
-  Flux video upscale node. ([release notes](https://github.com/comfyanonymous/ComfyUI/releases/tag/v0.44.0))
+  Flux video upscale node. ([release notes](https://github.com/Comfy-Org/ComfyUI/releases/tag/v0.44.0))
 - **Docker Engine 29.9.3** (3 November) is a security release, including fixes for a possible CPU exhaustion on crafted
   RSA keys and a possible crash when decompressing zstd data.
   ([release notes](https://github.com/moby/moby/releases/tag/docker-v29.9.3))

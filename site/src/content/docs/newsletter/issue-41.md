@@ -178,13 +178,14 @@ Runner.
 builds (b12182 to b12220), including the determinism fix above. There were no new releases of Ollama, ComfyUI,
 Claude Code, PyTorch, transformers, TRL, OpenVINO, NeMo Relay, PAIR, Holoscan, Docker Engine or Docker Model Runner.
 
-One thing to watch if you run ComfyUI on Windows with an RTX 50-series card: since 0.44, which brought in a new
-video-memory manager (comfy-aimdo 0.6.0), users have opened several crash reports, all still unconfirmed by the
-maintainers. They include a hard crash inside its `aimdo.dll` during video generation
-([#17606](https://github.com/Comfy-Org/ComfyUI/issues/17606), 8 November), a crash on the second prompt with its
-dynamic memory option on ([#17609](https://github.com/Comfy-Org/ComfyUI/issues/17609)), and system-wide stutter that
-wasn't there on 0.42 ([#17578](https://github.com/Comfy-Org/ComfyUI/issues/17578)). Our own image machine runs
-an older ComfyUI (0.23), so we're not affected, but these reports are worth reading before an upgrade.
+One thing to watch if you run ComfyUI 0.44 on Windows: users have opened several crash and slowdown reports since
+that release, all still unconfirmed by the maintainers. Two point at its dynamic video-memory manager (comfy-aimdo
+0.6.0) on RTX 50-series cards: a hard crash inside `aimdo.dll` during video generation
+([#17606](https://github.com/Comfy-Org/ComfyUI/issues/17606), 8 November) and system-wide stutter that wasn't there
+on 0.42 ([#17578](https://github.com/Comfy-Org/ComfyUI/issues/17578)). A third, on an RTX 4060 Ti, crashes on the
+second prompt with dynamic memory on ([#17609](https://github.com/Comfy-Org/ComfyUI/issues/17609)). Our own image
+machine runs an older ComfyUI (0.23, with comfy-aimdo 0.4.7), so we haven't hit these, but they're worth reading
+before an upgrade.
 
 **How the watch works.** A script lists every new item from our sources; a research agent and Gemini's Deep Research
 each read the week; R&D and the Publisher check what matters against the release notes themselves. This week that

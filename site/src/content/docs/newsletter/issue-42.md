@@ -28,10 +28,10 @@ first and checked it. And a plan to speed up our exams turned out to promise far
 training on our RTX 5090, run in five chunks of about three and a half hours each, with the first chunk also carrying a
 long check of the untrained model.
 
-**Where seed 45 stands.** Chunks 1 to 4 have run, 160 of its 197 updates, and the run's own checker passed every one.
-None of them needed a confirmation pass, the extra check a guard must pass before it can stop the run. Chunk 5, the last
-37 updates, started at 03:40 ET this morning.
-<!-- PUBLISHER: replace with the chunk 5 and seed-level result if it lands before release. -->
+**Seed 45 is complete.** All 197 updates ran, in five chunks, and the run's own checker passed every chunk. No guard
+called for a confirmation pass, the extra check a guard must pass before it can stop the run, and the run never stopped
+for review. The last chunk finished at 06:42 ET this morning. Seeds 46 and 47 come next. No result is compared across
+seeds until all three are done.
 
 **The warning checks.** Besides the guards, the run has five **canaries**: cheaper checks that look for early signs that
 the model is learning a bad habit. One of them looks at the quotes the model gives as evidence. It counts how often a

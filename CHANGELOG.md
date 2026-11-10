@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.62] - 2026-11-10
+
+- newsletter issue 42 (10 November), deciding how to judge before the result
+
 ## [1.1.23.1.61] - 2026-11-09
 
 - newsletter issue 41 (9 November), the guard that cried wolf

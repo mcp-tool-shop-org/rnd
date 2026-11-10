@@ -6,7 +6,7 @@ date: 2026-11-10
 draft: true
 highlights:
   - "<strong>Deciding how to judge before the result.</strong> One of the five warning checks in aspire-si's S2 v1.1 run went over its line at one reading. Two in a row would stop the run for review, and the study record didn't say how that review works. We wrote the rules down before the next reading. It came in clean."
-  - "<strong>A second engine, checked first.</strong> vLLM could run our bulk jobs many requests at a time. A Deep Research report on it got two things wrong that we checked at source. One small trial is planned, and its output will never be mixed with Ollama's."
+  - "<strong>A second engine, checked first.</strong> vLLM could run our bulk jobs many requests at a time. A Deep Research report on it got two things wrong that we checked at source. The first trial got half-way: the speed sweep ran, and a defect in our own script stopped the rest. Its output will never be mixed with Ollama's."
   - "<strong>Eight at a time isn't eight times faster.</strong> Batching the next study's evaluation pass by eight would make it about 2.15 times faster. Up to a third of the time can go to a dozen answers that may never stop."
 ---
 
@@ -102,13 +102,41 @@ from an earlier one. For a fixed list of questions there's a way round that: run
 order, with prompt caching off, so the batches come out the same each time. That repeats run to run. It still doesn't
 match asking each question alone. That's the same lesson as issue 41's prompt cache, from another direction.
 
-**What we'll do.** One small trial, after seed 45 finishes. First, June's 1 / 16 / 64 sweep again on both engines, with
+**The plan.** One small trial, after seed 45 finished. First, June's 1 / 16 / 64 sweep again on both engines, with
 the same 7B model (each engine's own 4-bit format, so the tables say "engine and format"), this time saved. Then an
 8-billion-parameter model at full precision on about 100 public questions with 8 answers each, under an hour of card
 time. It passes only if three things hold:
 1. memory stays under the card's safety limit and is fully freed afterwards;
 2. the same 50 questions at temperature 0, run twice, give the same answers;
 3. long answers (up to 2,048 tokens) end cleanly.
+
+**How far it got.** It started this morning in the gap between seeds, and got about half-way.
+
+The vLLM sweep ran: 648 requests, none failed, 256 tokens each.
+
+| Requests at once | Tokens per second, all requests together |
+|---|---|
+| 1 | 81 |
+| 16 | 1,079 |
+| 64 | 2,697 |
+
+This is a first look, not a result to decide on. The card was held at 480 W and its clocks weren't locked. And we
+found afterwards, in the server's log, that vLLM had applied the model's own default settings, including a repetition
+penalty of 1.05, which adds work to every token. vLLM does that unless it's started with `--generation-config vllm`.
+So these figures can't be set beside June's, or beside a run with neutral settings. Two starts failed before the one
+that counted: a build tool wasn't on the path, and then vLLM's faster sampler wouldn't compile here (the CUDA 12.8
+compiler refuses GCC 15.2), so the sweep used the standard one.
+
+The second part measured nothing. The 8B model loaded, peaked at 28,093 MiB against a limit of 28,400, and freed its
+memory afterwards. Then the first request failed in our own script: it passed vLLM the tokenizer's output as it came,
+and in the tokenizer library's current version that is a dictionary-like object, not a plain list of numbers. That's
+our defect, not the engine's, and one a review should have caught. The review before the run covered the launch script
+and the sweep scripts, and not this one. From now on every script that runs on the card gets the review, and a test
+with the real tokenizer on the CPU first. The fix is being built, and the rerun gets its own slot between training
+chunks.
+
+The Ollama half of the sweep wasn't run. The same-model comparison moves to a later run with the clocks locked at full
+power, neutral settings on both engines, and the same penalty set on each.
 
 If it passes, vLLM becomes an option for new jobs, chosen at the start of a study and fixed for all of it. Its output is
 never mixed with Ollama's in one result, because two engines are two models as far as our measurements go. The larger

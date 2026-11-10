@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.62] - 2026-11-10
+
+- licences: Qwen2.5-7B-Instruct (bf16, AWQ, GGUF) added under apache-2.0 for the vLLM trial's same-model sweep
+
 ## [1.1.23.1.61] - 2026-11-09
 
 - newsletter issue 41 (9 November), the guard that cried wolf

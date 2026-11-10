@@ -7,7 +7,7 @@ draft: true
 highlights:
   - "<strong>Deciding how to judge before the result.</strong> One of the five warning checks in aspire-si's S2 v1.1 run went over its line at one reading. Two in a row would stop the run for review, and the study record didn't say how that review works. We wrote the rules down before the next reading. It came in clean."
   - "<strong>A second engine, checked first.</strong> vLLM could run our bulk jobs many requests at a time. A Deep Research report on it got two things wrong that we checked at source. The first trial got half-way: the speed sweep ran, and a defect in our own script stopped the rest. Its output will never be mixed with Ollama's."
-  - "<strong>Eight at a time isn't eight times faster.</strong> Batching the next study's evaluation pass by eight would make it about 2.15 times faster. Up to a third of the time can go to a dozen answers that may never stop."
+  - "<strong>Eight at a time isn't eight times faster.</strong> Batching the next study's evaluation pass by eight would make it about 2.15 times faster. Up to 35% of the time can go to a dozen answers that may never stop."
 ---
 
 A night of procedure. A warning light in a training run flickered once, and the rule for what happens next had to be
@@ -152,11 +152,11 @@ about the same time as one that decodes a single answer.
 
 We asked Argon (Gemini 4 Argon, in Antigravity) to design it, and checked its arithmetic with our own script:
 
-![Bar chart titled "Up to a third of the 83-minute pass may go to 12 flagged answers; batching by eight only halves it". Three bars on one scale. The first, solid and measured: the 184-item pass one question at a time, 83 minutes. The second, dashed and arithmetic: an upper bound of 29.08 minutes for the 12 answers flagged as cut off or malformed, 12 × 2,048 tokens × 71 ms. The third, dashed and arithmetic: the same pass in 23 batches of 8, 38.60 minutes, 32,617 steps × 71 ms, 2.15 times faster rather than 8. The note says "12 flagged" is an upper bound on answers cut at the length limit, not a count of them; both estimates use the 71 ms step measured with 8 answers decoded together (160 rollouts); the step time one item at a time was inferred from the 83-minute total, not measured; batching gives about 2.15 times because each batch waits for its slowest answer.](/rnd/charts/issue-42-exam-time.svg)
+![Bar chart titled "Up to 35% of the 83-minute pass may go to 12 flagged answers; batching by eight only halves it". Three bars on one scale. The first, solid and measured: the 184-item pass one question at a time, 83 minutes. The second, dashed and arithmetic: an upper bound of 29.08 minutes for the 12 answers flagged as cut off or malformed, 12 × 2,048 tokens × 71 ms. The third, dashed and arithmetic: the same pass in 23 batches of 8, 38.60 minutes, 32,617 steps × 71 ms, 2.15 times faster rather than 8. The note says "12 flagged" is an upper bound on answers cut at the length limit, not a count of them; both estimates use the 71 ms step measured with 8 answers decoded together (160 rollouts); the step time one item at a time was inferred from the 83-minute total, not measured; batching gives about 2.15 times because each batch waits for its slowest answer.](/rnd/charts/issue-42-exam-time.svg)
 
 **Why only about twice as fast.** Most answers stop by themselves after a few hundred words. Up to a dozen of the 184
 may not: in the untrained model's exam, 12 were flagged as cut off or malformed, and each one that runs to the
-2,048-token cap costs about 145 seconds. Together that is up to a third of the whole exam. In a batch, the whole batch
+2,048-token cap costs about 145 seconds. Together that is up to 35% of the whole exam. In a batch, the whole batch
 waits for its slowest answer. So batches of eight, with those long answers spread across them, come to about 38.6
 minutes: **2.15 times faster**, not eight. The design's suggestion for more: put the long answers in a batch of their
 own, and choose the cap from the answer lengths we actually measure.

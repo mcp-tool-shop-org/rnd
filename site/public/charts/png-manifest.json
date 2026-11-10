@@ -300,6 +300,13 @@
     "width": 1200,
     "height": 509
   },
+  "issue-42-exam-time.svg": {
+    "png": "issue-42-exam-time.png",
+    "png_sha256": "6928ef82e4ce7ed9ef820151494c62369a42a7c3a767098fdadae95de1454f0a",
+    "svg_sha256": "e9acecaf9141cd20f1ace203611f7359cadc19b69731395b784462db78a86546",
+    "width": 1200,
+    "height": 534
+  },
   "loop-repeats.svg": {
     "png": "loop-repeats.png",
     "png_sha256": "f7527ae4d3ec14612ffea5b9fafd1f68c1bba4d89e99aae489192b50836155d3",

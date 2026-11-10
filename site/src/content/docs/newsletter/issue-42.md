@@ -72,11 +72,15 @@ like a few hundred questions to a judge model or eight sampled answers per quest
 faster on an engine built to serve many requests at once. [vLLM](https://github.com/vllm-project/vllm) is the best-known
 one. We don't want to replace Ollama; we want vLLM as a second option.
 
-**What we already knew, and what we couldn't show.** In June we had vLLM 0.22 running on this card under WSL2 (Linux
-inside Windows), serving a 4-bit 7B model, and swept it at 1, 16 and 64 requests at once. We meant to chart that sweep
-here. When we went to recount it, the raw output was gone: the script printed to a terminal and nothing was saved, so
-the throughput figures we remembered can't be checked, and we aren't printing them. The trial below reruns the same
-sweep and keeps its output. A later attempt to start vLLM with a different model failed with an error saying a memory
+**What we already knew, and what we can't compare.** In June we had vLLM 0.22 running on this card under WSL2 (Linux
+inside Windows), serving a 4-bit 7B model, and swept it at 1, 16 and 64 requests at once. The script's raw output
+wasn't kept, but our engine notes recorded the results the same day: about **65** tokens per second with one request,
+**1,912** with 16, and **4,138** with 64, counting all the requests together. At 64 requests the card drew up to 579 W,
+past the 480 W limit we now run it at.
+
+We meant to set that beside Ollama. When we checked, the Ollama figure in the same notes was for a different, much
+larger model, so it isn't a comparison, and we're not drawing one. The trial below measures both engines on the same
+model and keeps the output. A later attempt to start vLLM with a different model failed with an error saying a memory
 feature ("UVA") wasn't available, and nothing had been tried since.
 
 **What the research said.** We asked Gemini's Deep Research what it takes to run vLLM well on this machine today. Its
@@ -98,7 +102,8 @@ from an earlier one. For a fixed list of questions there's a way round that: run
 order, with prompt caching off, so the batches come out the same each time. That repeats run to run. It still doesn't
 match asking each question alone. That's the same lesson as issue 41's prompt cache, from another direction.
 
-**What we'll do.** One small trial, after seed 45 finishes: June's 1 / 16 / 64 sweep again, this time saved, then an
+**What we'll do.** One small trial, after seed 45 finishes: June's 1 / 16 / 64 sweep again on both engines with the same
+model, this time saved, then an
 8-billion-parameter model at full precision on about 100 public questions with 8 answers each, under an hour of card
 time. It passes only if three things hold:
 1. memory stays under the card's safety limit and is fully freed afterwards;

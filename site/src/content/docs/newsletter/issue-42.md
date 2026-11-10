@@ -212,7 +212,7 @@ was read at its source; where a research report and the source disagreed, we say
   holds the card. ([release notes](https://docs.docker.com/desktop/release-notes/))
 - **llama.cpp, CUDA memory.** A change merged on 10 November halves the virtual-memory pool the CUDA backend reserves
   and retries when the reservation fails ([#30542](https://github.com/ggml-org/llama.cpp/pull/30542)). It's one to read
-  before we next rebuild Ollama's backend for a 32 GB card that runs close to full. Builds reached b12246 in the window.
+  before we next rebuild Ollama's backend for a 32 GB card that runs close to full. Builds reached b12247 in the window.
 - **Claude Code 2.1.321 and 2.1.322** (9 and 10 November). 2.1.321 carries security fixes, among them one for a secret
   in the MCP sign-in redirect and one for read-only shell commands that could run outside the sandbox. It also changes
   a default: extensions the assistant writes for itself during a session now turn on without asking in the two most

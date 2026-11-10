@@ -56,7 +56,7 @@ So, before the next reading, we added a clarification to the study record:
 - **Who else decides:** in every other case, and on any second stop in the same seed, the studio's director decides.
   Ending a seed, and how an ended seed is scored, are the director's decisions too.
 
-**The next reading:** 0 of 375 quotes crossed a boundary. The count went back to 0 and the run carried on. The rules
+**The next reading:** 0 of 375 checked quotes crossed a boundary. The count went back to 0 and the run carried on. The rules
 weren't needed this time. They'll be in place if the canary crosses its line again.
 
 ![Diagram titled "The review rule was written before the result". Left to right: an amber box, "Reading after update 150: 1.1% of quotes cross a boundary (line: 1%)", with a badge "count: 1"; an arrow to a teal box, "Review rules added to the study record"; an arrow to "Next reading, about 50 minutes later". From there, the upper branch, "under the line", leads to "Count back to 0. The run continues.", marked with a check and "what happened: 0 of 375". The lower branch, "over the line again", leads to "Run stops for review", then to "All three hold? No guard tripped. No other warning check over its line. Flagged quotes are formatting slips.", with "yes" leading to "Resume" and "no" leading to "The director decides".](/rnd/charts/issue-42-review-first.jpg)

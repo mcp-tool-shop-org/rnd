@@ -178,7 +178,54 @@ Nothing here changes seeds 45 to 47. Their exams stay exactly as they were regis
 
 ## The daily watch
 
-<!-- PUBLISHER: daily watch goes here (R&D's rnd watch block + the Deep Research watch seed planted just before release). -->
+Last issue's weekly watch ran to 8 November. This one covers 9 November to the morning of the 10th. Every item below
+was read at its source; where a research report and the source disagreed, we say so.
+
+### What we checked in our own code
+
+- **RunPod retires its REST API v1 on 15 November 2026.** The research report said the GraphQL API goes the same day.
+  RunPod's release notes say otherwise: GraphQL is retired in early 2027. Our rented-GPU tool,
+  [offrig](https://github.com/mcp-tool-shop-org/offrig), already calls REST v2, so Sunday changes nothing for it. It
+  uses GraphQL for one thing, the account balance, and that call is tracked in
+  [offrig #66](https://github.com/mcp-tool-shop-org/offrig/issues/66).
+  ([RunPod release notes](https://docs.runpod.io/release-notes))
+- **Ollama 0.40.16** (9 November). Its OpenAI-compatible `/v1/responses` endpoint now honours `truncation` instead of
+  cutting input silently, and `/v1/models` returns an empty list rather than `null` when no model is installed. Nothing
+  of ours calls `/v1/responses`. offrig lists a rented machine's models through `/v1/models`; the only difference it
+  will see is on a machine with no model at all. The release also adds CUDA 13.5 for Windows on ARM64. That isn't our
+  x64 card, so we stay on our own 0.40.15 build while the study runs.
+  ([0.40.16 release notes](https://github.com/ollama/ollama/releases/tag/v0.40.16))
+- **llama.cpp b12242** (10 November) stops using lazy grammar when a request sets `response_format` together with
+  tools ([#31956](https://github.com/ggml-org/llama.cpp/pull/31956)). We searched every repository we keep: none of
+  our callers sets both in one request.
+- **Two npm packages were flagged as malware** on 9 November: `@massnerder/x402-scraper-mcp`
+  ([GHSA-whr8-5pp9-f7v2](https://github.com/advisories/GHSA-whr8-5pp9-f7v2)) and
+  `@aaron205whitmore/postcss-animate-utils`
+  ([GHSA-m9hr-p67c-66gp](https://github.com/advisories/GHSA-m9hr-p67c-66gp)). Neither name appears in our package
+  files. The first is worth a second look for what it pretends to be: a tool server for AI assistants.
+
+### Worth knowing
+
+- **Docker Desktop 4.99.0** (9 November) fixes two Windows problems that fit a machine like ours: a Windows update
+  could stop Docker Desktop abruptly and corrupt its engine databases, and WSL 2 distributions had their DNS cache
+  flushed every 30 seconds while Docker Desktop ran. We haven't updated yet; no update happens while a training run
+  holds the card. ([release notes](https://docs.docker.com/desktop/release-notes/))
+- **llama.cpp, CUDA memory.** A change merged on 10 November halves the virtual-memory pool the CUDA backend reserves
+  and retries when the reservation fails ([#30542](https://github.com/ggml-org/llama.cpp/pull/30542)). It's one to read
+  before we next rebuild Ollama's backend for a 32 GB card that runs close to full. Builds reached b12246 in the window.
+- **Claude Code 2.1.321 and 2.1.322** (9 and 10 November). 2.1.321 carries security fixes, among them one for a secret
+  in the MCP sign-in redirect and one for read-only shell commands that could run outside the sandbox. It also changes
+  a default: extensions the assistant writes for itself during a session now turn on without asking in the two most
+  permissive modes. 2.1.322 adds fast mode on Vertex.
+  ([changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md))
+- **NeMo Relay 0.11.1** (9 November) has one breaking change: a Claude Code turn that ends in a stop failure is now
+  recorded as a failed turn. ([release notes](https://github.com/NVIDIA/NeMo-Relay/releases/tag/0.11.1))
+- **NVIDIA's skills catalogue** gained an ALCHEMI Toolkit skill and FastGen skills on 9 November, and on the 10th a
+  fix to how its skill finder reads the catalogue when one tool is missing. We keep a mirror of that catalogue, so the
+  mirror is now behind. ([commits](https://github.com/NVIDIA/skills/commits/main))
+
+**Held back.** The report also carried a model's download size, a pricing change and two security stories that we
+could trace only to news sites or forums, not to the people who published them. They aren't here.
 
 **How the watch works.** A script lists every new item from our sources; a research agent and Gemini's Deep Research
 look through it; we read the primary source for anything we report, and hold anything we couldn't check.

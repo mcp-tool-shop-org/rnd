@@ -3,7 +3,7 @@ title: "10 November: deciding how to judge before the result"
 description: "A warning check in aspire-si's new training series went over its line once, and we wrote down how a stop would be reviewed before the next reading came in. Also: whether to add vLLM beside Ollama, where a research report was wrong on two counts we checked, why batching an evaluation pass by eight makes it about twice as fast and not eight times, and the daily watch."
 issue: 42
 date: 2026-11-10
-draft: true
+draft: false
 highlights:
   - "<strong>Deciding how to judge before the result.</strong> One of the five warning checks in aspire-si's S2 v1.1 run went over its line at one reading. Two in a row would stop the run for review, and the study record didn't say how that review works. We wrote the rules down before the next reading. It came in clean."
   - "<strong>A second engine, checked first.</strong> vLLM could run our bulk jobs many requests at a time. A Deep Research report on it got two things wrong that we checked at source. The first trial got half-way: the speed sweep ran, and a defect in our own script stopped the rest. Its output will never be mixed with Ollama's."

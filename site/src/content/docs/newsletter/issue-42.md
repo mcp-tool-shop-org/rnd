@@ -7,7 +7,7 @@ draft: true
 highlights:
   - "<strong>Deciding how to judge before the result.</strong> One of the five warning checks in aspire-si's S2 v1.1 run went over its line at one reading. Two in a row would stop the run for review, and the study record didn't say how that review works. We wrote the rules down before the next reading. It came in clean."
   - "<strong>A second engine, checked first.</strong> vLLM could run our bulk jobs many requests at a time. A Deep Research report on it got two things wrong that we checked at source. One small trial is planned, and its output will never be mixed with Ollama's."
-  - "<strong>Eight at a time isn't eight times faster.</strong> Batching the next study's evaluation pass by eight would make it about 2.15 times faster. Most of the time goes to a dozen answers that never stop."
+  - "<strong>Eight at a time isn't eight times faster.</strong> Batching the next study's evaluation pass by eight would make it about 2.15 times faster. Up to a third of the time can go to a dozen answers that may never stop."
 ---
 
 A night of procedure. A warning light in a training run flickered once, and the rule for what happens next had to be
@@ -119,19 +119,19 @@ versions, which count as new models.
 
 The training run above stops now and then to take an exam: 184 fixed questions, answered with the randomness switched
 off, one question at a time. Each exam takes about 83 minutes, and a run can need several. For the next study we
-wanted it faster. The obvious move is to answer eight questions at once, since the card does almost the same work per
-step for eight answers as for one.
+wanted it faster. The obvious move is to answer eight questions at once, since a step that decodes eight answers takes
+about the same time as one that decodes a single answer.
 
 We asked Argon (Gemini 4 Argon, in Antigravity) to design it, and checked its arithmetic with our own script:
 
 ![TODO V2 chart](/rnd/charts/issue-42-exam-time.png)
 
-**Why only about twice as fast.** Most answers stop by themselves after a few hundred words. About a dozen of the 184
-don't: they run on to the 2,048-token cap, at about 145 seconds each, up to a third of the whole exam. In a batch, the
-whole batch waits for its slowest answer. So batches of eight, with those long answers spread across them, come to
-about 38.6 minutes: **2.15 times faster**, not eight. Most of the remaining gain would come from putting the long
-answers in a batch of their own and from choosing the cap from the answer lengths we actually measure, not from batching
-alone.
+**Why only about twice as fast.** Most answers stop by themselves after a few hundred words. Up to a dozen of the 184
+may not: in the untrained model's exam, 12 were flagged as cut off or malformed, and each one that runs to the
+2,048-token cap costs about 145 seconds. Together that is up to a third of the whole exam. In a batch, the whole batch
+waits for its slowest answer. So batches of eight, with those long answers spread across them, come to about 38.6
+minutes: **2.15 times faster**, not eight. The design's suggestion for more: put the long answers in a batch of their
+own, and choose the cap from the answer lengths we actually measure.
 
 **What batching changes.** The same question can get a slightly different answer when it shares a batch with other
 questions, because the card's arithmetic isn't exactly the same at every batch size. The
@@ -143,7 +143,7 @@ batches of four, and batches of four shuffled.
 
 **What we checked and didn't accept.** The design cited 15 outside sources, all marked by the designer as not opened. We
 opened the five that mattered most. Three of its figures weren't in them, including a memory size the NVIDIA page puts at
-about 24 MB, not 32, and two speed costs no source gives. None of those figures will go into the next study's plan until
+about 24 MiB, not 32, and two speed costs no source gives. None of those figures will go into the next study's plan until
 we've measured them here.
 
 Nothing here changes seeds 45 to 47. Their exams stay exactly as they were registered.

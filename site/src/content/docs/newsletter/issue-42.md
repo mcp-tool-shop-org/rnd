@@ -104,8 +104,8 @@ match asking each question alone. That's the same lesson as issue 41's prompt ca
 
 **The plan.** One small trial, after seed 45 finished. First, June's 1 / 16 / 64 sweep again on both engines, with
 the same 7B model (each engine's own 4-bit format, so the tables say "engine and format"), this time saved. Then an
-8-billion-parameter model at full precision on about 100 public questions with 8 answers each, under an hour of card
-time. It passes only if three things hold:
+8-billion-parameter model at full precision on about 100 public questions with 8 answers each, about an hour of card
+time for that part. It passes only if three things hold:
 1. memory stays under the card's safety limit and is fully freed afterwards;
 2. the same 50 questions at temperature 0, run twice, give the same answers;
 3. long answers (up to 2,048 tokens) end cleanly.

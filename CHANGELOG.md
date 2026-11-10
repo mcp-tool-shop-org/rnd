@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.65] - 2026-11-10
+
+- licences: Ripple-65B-Preview (model card) and AtomicChat's GGUF quantization added under apache-2.0, for a rented-GPU first look (planned, not run)
+
 ## [1.1.23.1.64] - 2026-11-10
 
 - rig fact: WHEA records in the System log as read 2026-11-10 (911 id 17 at boot or driver install, 4 id 1 unexplained; none inside a training window)

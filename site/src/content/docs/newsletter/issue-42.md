@@ -59,7 +59,7 @@ So, before the next reading, we added a clarification to the study record:
 **The next reading:** 0 of 375 quotes crossed a boundary. The count went back to 0 and the run carried on. The rules
 weren't needed this time. They'll be in place if the canary crosses its line again.
 
-![TODO V3 diagram](/rnd/charts/issue-42-review-first.png)
+![Diagram titled "The review rule was written before the result". Left to right: an amber box, "Reading after update 150: 1.1% of quotes cross a boundary (line: 1%)", with a badge "count: 1"; an arrow to a teal box, "Review rules added to the study record"; an arrow to "Next reading, about 50 minutes later". From there, the upper branch, "under the line", leads to "Count back to 0. The run continues.", marked with a check and "what happened: 0 of 375". The lower branch, "over the line again", leads to "Run stops for review", then to "All three hold? No guard tripped. No other warning check over its line. Flagged quotes are formatting slips.", with "yes" leading to "Resume" and "no" leading to "The director decides".](/rnd/charts/issue-42-review-first.jpg)
 
 One more thing we learned on the way: the run stores the counts for each reading, not the flagged quotes themselves. A
 review would have to recount them from the saved answers with the run's own, unchanged checking code, and the recount
@@ -124,7 +124,7 @@ about the same time as one that decodes a single answer.
 
 We asked Argon (Gemini 4 Argon, in Antigravity) to design it, and checked its arithmetic with our own script:
 
-![TODO V2 chart](/rnd/charts/issue-42-exam-time.png)
+![Bar chart titled "Up to a third of the 83-minute pass may go to 12 flagged answers; batching by eight only halves it". Three bars on one scale. The first, solid and measured: the 184-item pass one question at a time, 83 minutes. The second, dashed and arithmetic: an upper bound of 29.08 minutes for the 12 answers flagged as cut off or malformed, 12 × 2,048 tokens × 71 ms. The third, dashed and arithmetic: the same pass in 23 batches of 8, 38.60 minutes, 32,617 steps × 71 ms, 2.15 times faster rather than 8. The note says "12 flagged" is an upper bound on answers cut at the length limit, not a count of them; both estimates use the 71 ms step measured with 8 answers decoded together (160 rollouts); the step time one item at a time was inferred from the 83-minute total, not measured; batching gives about 2.15 times because each batch waits for its slowest answer.](/rnd/charts/issue-42-exam-time.svg)
 
 **Why only about twice as fast.** Most answers stop by themselves after a few hundred words. Up to a dozen of the 184
 may not: in the untrained model's exam, 12 were flagged as cut off or malformed, and each one that runs to the

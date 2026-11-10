@@ -2164,6 +2164,66 @@
       "snapshot_sha256": "4c50d5406776bb94d6297f1a483c6cdda103e7be15b1c40cce4f0ca236ddf290",
       "snapshot_file": "2026-10-29/qwen3-vl-30b-card.txt",
       "archive_url": null
+    },
+    {
+      "id": "ripple-65b-preview-card",
+      "owner": "Ricursive Intelligence (ricursiveAI)",
+      "kind": "model-card",
+      "covers": [
+        "ricursiveAI/Ripple-65B-Preview (revision b172323ffd63e62de9ce1ba3830dfffe493c7671; BF16 safetensors, custom code)"
+      ],
+      "url": "https://huggingface.co/ricursiveAI/Ripple-65B-Preview",
+      "page_date": "HF commit b172323ffd63e62de9ce1ba3830dfffe493c7671 (repo last modified 2026-11-10)",
+      "read_date": "2026-11-10",
+      "clauses": [
+        "License: apache-2.0",
+        "This repo contains the BF16 instruction-tuned model."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Redistributing weights or derivatives: Apache-2.0 licence copy and notices.",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "65B dense model, the base of the GGUF files in ripple-65b-preview-gguf-card. Card front matter says license: apache-2.0, and the repo ships a LICENSE file (11,357 bytes, sha256 58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd, Apache License 2.0 text). Not gated (HF API, 2026-11-10). The safetensors route needs the repo's own model code (custom_code tag); the studio's plan uses the GGUF route and does not run that code. Benchmark scores on the card are the publisher's own and are not relied on here.",
+      "restriction_search": "Read the card (README.md at commit b172323f, 12,403 bytes, sha256 ed70eb22e97599dedae352eacdd532f4bcf5ade5ac23f9c69fc70a9d552e73ae), the LICENSE file and the HF API metadata (license apache-2.0, gated false). Searched the card for: prohibit, restrict, output, derivative, distill, synthetic, commercial, compet, policy, acceptable, terms; the only hits are 'synthetic' in the training-data description; none restricts evaluation or outputs. No separate use policy is linked from the card.",
+      "snapshot_sha256": "77cfc2968dc217c505c7d2b6d2b9bd1703bc10948969efc130bca1fc63354adf",
+      "snapshot_file": "2026-11-10/ripple-65b-preview-card.txt",
+      "archive_url": "http://web.archive.org/web/20261110144945/https://huggingface.co/ricursiveAI/Ripple-65B-Preview"
+    },
+    {
+      "id": "ripple-65b-preview-gguf-card",
+      "owner": "AtomicChat (quantizer); model by Ricursive Intelligence",
+      "kind": "model-card",
+      "covers": [
+        "AtomicChat/Ripple-65B-Preview-GGUF (revision df550a7178a87bbfb6ee2bdbd37603c553d536ee; Ripple-65B-Preview-Q8_0-00001-of-00002.gguf and -00002-of-00002.gguf)"
+      ],
+      "url": "https://huggingface.co/AtomicChat/Ripple-65B-Preview-GGUF",
+      "page_date": "HF commit df550a7178a87bbfb6ee2bdbd37603c553d536ee (repo last modified 2026-11-06)",
+      "read_date": "2026-11-10",
+      "clauses": [
+        "License: apache-2.0",
+        "Quantized by AtomicChat."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Redistributing weights or derivatives: Apache-2.0 licence copy and notices.",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "GGUF quantizations of ricursiveAI/Ripple-65B-Preview (see ripple-65b-preview-card), the planned source of the Q8_0 files for a rented-GPU first look. Card front matter says license: apache-2.0; the repo ships the same LICENSE file as the base repo (sha256 58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd), and the card says it comes from the base model. Not gated (HF API, 2026-11-10). The card says the files load on stock llama.cpp b12167 or newer with no patch (ggml-org/llama.cpp PR #31692, merge commit fecdc81eec0922b229e7e6f4069cea603e10d6a7, which GitHub's compare shows inside tag b12167); that is the quantizer's claim until the studio's own build loads a file. The quantizer's quality figures are its own and are not relied on here.",
+      "restriction_search": "Read the card (README.md at commit df550a71, 7,839 bytes, sha256 c67c92d7144eafe3630977489ffd5c0dddb2bd11ba56997675e7e4e57b99bbcd), the LICENSE file and the HF API metadata (license apache-2.0, gated false). Searched the card for: prohibit, restrict, output, derivative, distill, synthetic, commercial, compet, policy, acceptable, terms; no hits. No restricting clause found.",
+      "snapshot_sha256": "f77c32414578d1247aa4faf3f54cfc41a654dcfef04a970c1af42c3687dfa318",
+      "snapshot_file": "2026-11-10/ripple-65b-preview-gguf-card.txt",
+      "archive_url": "http://web.archive.org/web/20261105034755/https://huggingface.co/AtomicChat/Ripple-65B-Preview-GGUF"
     }
   ]
 }

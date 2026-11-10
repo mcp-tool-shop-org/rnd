@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.64] - 2026-11-10
+
+- rig fact: WHEA records in the System log as read 2026-11-10 (911 id 17 at boot or driver install, 4 id 1 unexplained; none inside a training window)
+- Added `2026-11-10-robot-rig-whea-records-at-boot-and-driver-install`: Robot rig WHEA records at boot and driver install, read 2026-11-10
+
 ## [1.1.23.1.63] - 2026-11-10
 
 - licences: Qwen2.5-7B-Instruct (bf16, AWQ, GGUF) added under apache-2.0 for the vLLM trial's same-model sweep

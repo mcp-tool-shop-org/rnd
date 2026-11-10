@@ -79,8 +79,8 @@ wasn't kept, but our engine notes recorded the results the same day: about **65*
 past the 480 W limit we now run it at.
 
 We meant to set that beside Ollama. When we checked, the Ollama figure in the same notes was for a different, much
-larger model, so it isn't a comparison, and we're not drawing one. The trial below measures both engines on the same
-model and keeps the output. A later attempt to start vLLM with a different model failed with an error saying a memory
+larger model, so it isn't a comparison, and we're not drawing one. The trial below runs both engines on the same
+model, each in its own 4-bit format, and keeps the output. A later attempt to start vLLM with a different model failed with an error saying a memory
 feature ("UVA") wasn't available, and nothing had been tried since.
 
 **What the research said.** We asked Gemini's Deep Research what it takes to run vLLM well on this machine today. Its
@@ -102,8 +102,8 @@ from an earlier one. For a fixed list of questions there's a way round that: run
 order, with prompt caching off, so the batches come out the same each time. That repeats run to run. It still doesn't
 match asking each question alone. That's the same lesson as issue 41's prompt cache, from another direction.
 
-**What we'll do.** One small trial, after seed 45 finishes: June's 1 / 16 / 64 sweep again on both engines with the same
-model, this time saved, then an
+**What we'll do.** One small trial, after seed 45 finishes. First, June's 1 / 16 / 64 sweep again on both engines, with
+the same 7B model (each engine's own 4-bit format, so the tables say "engine and format"), this time saved. Then an
 8-billion-parameter model at full precision on about 100 public questions with 8 answers each, under an hour of card
 time. It passes only if three things hold:
 1. memory stays under the card's safety limit and is fully freed afterwards;

@@ -113,7 +113,8 @@ That overlay caught invented toe positions that no other check had caught. It no
 onto our rig. E10 fed the model more frames per second of the same motion: the step-to-step jumps in the driving signal fell by 41%,
 while the performance itself barely changed (8.6%). It looked better, so it was adopted. E10 also showed something
 uncomfortable: the **whole scene** changed. A person appeared in the bar who wasn't asked for. E10 had changed the seed
-and the clip length together, so the record doesn't yet say which one did it. Since then, a claim about a scene needs two seeds before we believe it.
+and the clip length together. The test that would separate the two was never run: the change read as a gain, and
+which of the two caused it stays an open question rather than a problem to fix. Since then, a claim about a scene needs two seeds before we believe it.
 
 **E11: what happens with no control at all?** In three waves. Wave 1: give the model only a start frame. The character's
 features survived to the last frame with no help, but our empty studio turned into a bar with at least four people in it

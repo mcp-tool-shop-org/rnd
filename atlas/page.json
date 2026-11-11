@@ -69,6 +69,7 @@
       ]
     },
     {
+      "into": true,
       "kind": "place",
       "readers": [
         "experiments",
@@ -83,47 +84,66 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 0,
-      "changed": 6,
+      "added": 65,
+      "changed": 25,
       "moved": 0,
-      "parts": 3,
+      "parts": 9,
       "removed": 0
     },
     "items": [
       {
-        "kind": "door",
-        "sentence": "CI now also runs site/scripts/newsletter_publish.py.",
+        "kind": "landing",
+        "sentence": "experiments/colab-golden-path/data/windows/window*/gate.jsonl is now read by experiments/colab-golden-path/figures.py.",
         "subjects": [
-          ".github/workflows/ci.yml",
-          "site/scripts/newsletter_publish.py"
+          "experiments/colab-golden-path/data/windows/window*/gate.jsonl",
+          "experiments/colab-golden-path/figures.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "LICENSE is now also read by site/scripts/newsletter_publish.py and tests/test_newsletter_publish.py.",
+        "sentence": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-*-tune/metrics.json is now read by experiments/charts/make_charts.py.",
         "subjects": [
-          "LICENSE",
-          "site/scripts/newsletter_publish.py",
-          "tests/test_newsletter_publish.py"
+          "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-*-tune/metrics.json",
+          "experiments/charts/make_charts.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "pyproject.toml is now also read by tests/test_newsletter_publish.py.",
+        "sentence": "site/public/charts/*.svg is now read by site/scripts/check_feed.py and site/scripts/render_chart_pngs.py.",
         "subjects": [
-          "pyproject.toml",
-          "tests/test_newsletter_publish.py"
+          "site/public/charts/*.svg",
+          "site/scripts/check_feed.py",
+          "site/scripts/render_chart_pngs.py"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "And 37 more new writers and readers of places.",
+        "subjects": []
+      },
+      {
+        "kind": "origin",
+        "sentence": "entries was generated and is now mixed.",
+        "subjects": [
+          "entries"
+        ]
+      },
+      {
+        "kind": "sequence",
+        "sentence": "site/scripts/check_feed.py now starts at `main`; it started at `chart_errors`.",
+        "subjects": [
+          "site/scripts/check_feed.py"
         ]
       },
       {
         "kind": "counts",
-        "sentence": "6 files changed content, across 3 parts.",
+        "sentence": "65 files added and 25 changed content, across 9 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "caae8cbbb866d47d54e4f9ad5e52055f5c3167c1",
-      "generatedAt": "2026-10-25T19:44:32.974Z"
+      "commit": "50b42f15451f139070088a1158eb56265995550d",
+      "generatedAt": "2026-10-25T20:07:20.999Z"
     },
     "unchanged": false
   },
@@ -210,9 +230,9 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 5 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 2,
-  "commit": "50b42f15451f139070088a1158eb56265995550d",
+  "commit": "a68ab3c766a5f865c8e1597606f1394a281e4233",
   "defaultBranch": "main",
-  "derived": "14 parts, mostly Python (147 files), shell (30), TypeScript (3), Astro (2), CSS (2), HTML (2), JavaScript (1) and PowerShell (1). Work enters through 5 doors; the busiest is CI, which reaches 6 parts. It publishes to npm and PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "14 parts, mostly Python (148 files), shell (30), TypeScript (3), Astro (2), CSS (2), HTML (2), JavaScript (1) and PowerShell (1). Work enters through 5 doors; the busiest is CI, which reaches 6 parts. It publishes to npm and PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -249,7 +269,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 28
+          "files": 29
         },
         {
           "boundary": "experiments",
@@ -269,7 +289,7 @@
         "tests/"
       ],
       "runsCount": 4,
-      "runsMore": 28,
+      "runsMore": 29,
       "sends": [
         "uploads coverage to Codecov"
       ],
@@ -441,9 +461,10 @@
       "to": "mcptoolshop_rnd"
     }
   ],
-  "engine": "1.24.0",
+  "engine": "1.26.0",
   "generated": [
     {
+      "into": true,
       "place": "entries/",
       "sources": [
         "entries/_template.md"
@@ -453,6 +474,7 @@
       ]
     },
     {
+      "into": true,
       "place": "experiments/charts/",
       "writers": [
         "experiments/charts/make_charts.py"
@@ -510,6 +532,7 @@
       ]
     },
     {
+      "into": true,
       "place": "experiments/ollama-cuda-backend/",
       "sources": [
         "experiments/ollama-cuda-backend/diag_test-v4-draft.py"
@@ -519,6 +542,7 @@
       ]
     },
     {
+      "into": true,
       "place": "experiments/ollama-cuda-backend/diag/",
       "sources": [
         "experiments/ollama-cuda-backend/diag/diag_test.FROZEN.sha256",
@@ -529,6 +553,7 @@
       ]
     },
     {
+      "into": true,
       "place": "experiments/verifier-gold/crossfamily/",
       "writers": [
         "experiments/verifier-gold/crossfamily/run_labeller.py"
@@ -579,15 +604,15 @@
       ]
     }
   ],
-  "generatedAt": "2026-10-25T20:07:20.999Z",
+  "generatedAt": "2026-11-11T22:36:05.073Z",
   "limits": [
     "12 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 9 more.",
-    "25 writes and 49 reads use paths built at run time and are not named here.",
+    "24 writes and 36 reads use paths built at run time and are not named here.",
     "7 writes go to places this repository does not track, so they are not listed as generated.",
-    "57 writes and 133 reads go to a path their caller passes, not to this repository.",
+    "58 writes and 141 reads go to a path their caller passes, not to this repository.",
     "12 reads go to the directory the command is run in (README.md, SECURITY.md, entries and 3 more places), not to this repository.",
-    "1 read goes to the directory the command is run in or a path its caller passes, not to this repository.",
-    "1 read goes to the home directory (.claude/), not to this repository.",
+    "2 reads go to the directory the command is run in or a path their caller passes, not to this repository.",
+    "2 reads go to the home directory (.claude/), not to this repository.",
     "4 files belong to no part: scripts/colab/collect_windows.py, scripts/colab/probe.py, scripts/colab/rates.sh and 1 more.",
     "Statistics confidence is low: fewer than 25 source files reach 10 revisions in the window."
   ],
@@ -646,57 +671,139 @@
   "startReason": "This path follows rnd (a command people run) from its entry, since CI runs only tests, scripts that import no code here and checks.",
   "summary": "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only).",
   "summaryFrom": "person",
-  "testFiles": 61,
+  "testFiles": 62,
   "testedBy": {
     "experiments": 7,
     "mcptoolshop_rnd": 20,
     "rnd": 1
   },
-  "unnamedWrites": 25,
+  "testedCodeParts": 3,
+  "unnamedWrites": 24,
   "unread": [
     {
+      "into": true,
+      "mayRead": {
+        "by": [
+          "experiments/embeddinggemma-2/harness/score.py",
+          "mcptoolshop_rnd/store.py"
+        ],
+        "patterns": [
+          "*.json"
+        ]
+      },
       "place": "experiments/charts/",
       "writers": [
         "experiments/charts/make_charts.py"
       ]
     },
     {
+      "mayRead": {
+        "by": [
+          "experiments/embeddinggemma-2/harness/score.py",
+          "mcptoolshop_rnd/store.py"
+        ],
+        "patterns": [
+          "*.json"
+        ]
+      },
       "place": "experiments/colab-golden-path/figures.json",
       "writers": [
         "experiments/colab-golden-path/figures.py"
       ]
     },
     {
+      "mayRead": {
+        "by": [
+          "experiments/embeddinggemma-2/harness/score.py",
+          "mcptoolshop_rnd/store.py"
+        ],
+        "patterns": [
+          "*.json"
+        ]
+      },
       "place": "experiments/natural-errors/data/baselines_p1.json",
       "writers": [
         "experiments/natural-errors/baselines_p1.py"
       ]
     },
     {
+      "mayRead": {
+        "by": [
+          "experiments/embeddinggemma-2/harness/score.py",
+          "mcptoolshop_rnd/store.py"
+        ],
+        "patterns": [
+          "*.json"
+        ]
+      },
       "place": "experiments/natural-errors/data/corrections.json",
       "writers": [
         "experiments/natural-errors/build_corrections.py"
       ]
     },
     {
+      "into": true,
+      "mayRead": {
+        "by": [
+          "experiments/embeddinggemma-2/harness/check_grades.py",
+          "experiments/embeddinggemma-2/harness/grading.py",
+          "experiments/embeddinggemma-2/harness/score.py",
+          "mcptoolshop_rnd/store.py"
+        ],
+        "patterns": [
+          "*.json",
+          "*.jsonl"
+        ]
+      },
       "place": "experiments/ollama-cuda-backend/",
       "writers": [
         "experiments/ollama-cuda-backend/diag_test-v4-draft.py"
       ]
     },
     {
+      "into": true,
+      "mayRead": {
+        "by": [
+          "experiments/embeddinggemma-2/harness/check_grades.py",
+          "experiments/embeddinggemma-2/harness/grading.py",
+          "experiments/embeddinggemma-2/harness/score.py",
+          "mcptoolshop_rnd/store.py"
+        ],
+        "patterns": [
+          "*.json",
+          "*.jsonl"
+        ]
+      },
       "place": "experiments/verifier-gold/crossfamily/",
       "writers": [
         "experiments/verifier-gold/crossfamily/run_labeller.py"
       ]
     },
     {
+      "mayRead": {
+        "by": [
+          "experiments/embeddinggemma-2/harness/score.py",
+          "mcptoolshop_rnd/store.py"
+        ],
+        "patterns": [
+          "*.json"
+        ]
+      },
       "place": "experiments/verifier-gold/crossfamily/blind_key.json",
       "writers": [
         "experiments/verifier-gold/crossfamily/make_sample.py"
       ]
     },
     {
+      "mayRead": {
+        "by": [
+          "experiments/embeddinggemma-2/harness/check_grades.py",
+          "experiments/embeddinggemma-2/harness/grading.py"
+        ],
+        "patterns": [
+          "*.jsonl"
+        ]
+      },
       "place": "experiments/verifier-gold/crossfamily/sample.jsonl",
       "writers": [
         "experiments/verifier-gold/crossfamily/make_sample.py"

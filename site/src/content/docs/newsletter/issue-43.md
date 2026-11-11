@@ -302,6 +302,8 @@ what they're good for, and checked what we could.
 The short answer: a single TPU chip is a fast matrix engine that wants to be fed **many requests at once**, with shapes
 it has already compiled for. It is not a drop-in GPU.
 
+![Diagram titled "A single TPU chip wants many requests at once". Left panel, "One request at a time": a TPU chip reads the model weights from memory, with "memory: every weight read once per word", and one token comes out; caption: "Speed is set by memory bandwidth. Our RTX 5090 (1,792 GB/s) matches a v6e-1 (1,638 GB/s)." Right panel, "Many requests at once": the same chip and memory, with many request lanes going in and many token streams coming out; caption: "Each weight read now serves many answers at once. This is where a TPU chip earns its keep." An amber strip along the bottom: "First, it compiles for every input shape it sees: 1.5 to 34 minutes reported. Change the shape and it compiles again."](/rnd/charts/issue-43-tpu.jpg)
+
 - **Where it would help us.** Running a translation model like TranslateGemma on a batch of text, while our own card is
   busy training. Today our README translations run on the RTX 5090 and wait whenever a training chunk holds it. Also
   batched scoring with small models, and small-model fine-tuning in JAX, Google's numerical library.

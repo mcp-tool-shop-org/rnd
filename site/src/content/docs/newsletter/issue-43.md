@@ -1,18 +1,18 @@
 ---
 title: "11 November: you block the shot, the model shoots it"
-description: "A long look at armature, our tool for making AI video follow a 3D scene we authored: the idea, fourteen experiments and their wrong turns, and what the field looks like now. Also: Blender 5.3 against it, a memory warning whose first explanation didn't survive a fact-check, a training run stopped by its own guard after it had finished, one model name with two licences, what two single-chip TPUs are good for, and the daily watch."
+description: "A long look at armature, our tool for making AI video follow a 3D scene we authored: the idea, fourteen experiments (thirteen run, one withdrawn) and their wrong turns, and what the field looks like now. Also: Blender 5.3 against it, a memory warning whose first explanation didn't survive a fact-check, a training run stopped by its own guard after it had finished, one model name with two licences, what two single-chip TPUs are good for, and the daily watch."
 issue: 43
 date: 2026-11-11
 draft: true
 highlights:
-  - "<strong>You block the shot. The model shoots it.</strong> armature stages a character in Blender and makes a video model follow it. Fourteen experiments in, the model reads geometry rather than tone, identity holds through a hosted model that has never seen our character, and the most confident predictions we wrote down were the ones that missed."
+  - "<strong>You block the shot. The model shoots it.</strong> armature stages a character in Blender and makes a video model follow it. Thirteen experiments in, the model reads geometry rather than tone, identity holds through a hosted model that has never seen our character, and the most confident predictions we wrote down were the ones that missed."
   - "<strong>Blender 5.3 arrived, and armature didn't notice.</strong> 3,166 of armature's Blender tests pass on 5.3 (18 skipped), and the ones that start real Blender pass on both graphics backends."
   - "<strong>Finished, then stopped.</strong> A style-training run on a rented 96 GB card reached all 500 steps and saved both checkpoints. Then its own stall guard fired on a phase it wasn't meant to watch."
 ---
 
 This issue goes deep on one of our repositories. armature is the tool that is supposed to let us make cutscenes with
-AI video while keeping our own characters, in our own staging, in every frame. It has run fourteen experiments in three
-months, and almost every one changed what we thought it was. We read back through all of them for this issue.
+AI video while keeping our own characters, in our own staging, in every frame. It has designed fourteen experiments in three
+months and run thirteen of them, and almost every one changed what we thought it was. We read back through all of them for this issue.
 
 The night also brought Blender 5.3, which armature depends on, a memory warning in a training run, a rented GPU job
 that was stopped after it had finished, a licence that changed between two versions of the same model, and a first look
@@ -39,7 +39,7 @@ you get a knight, a walk and a bar, but not ours, and not where we put him.
 and hoping, we hand it a 3D character we built, posed and animated and placed in front of a camera we chose. The
 geometry is ours; the life is the model's.
 
-![Diagram titled "You block the shot. The model shoots it." Four columns, left to right. "Authored by us": a wooden mannequin, with "character mesh (GLB)", "pose and animation", "camera and staging". "Headless Blender": "renders, frame by frame:" depth, surface normals, silhouette mask, edges, pose sticks, each with a small thumbnail. "Three routes into a video model": "Driven: pose sticks steer the motion"; "Free: an authored start frame, the model moves the camera"; "Composed: authored reference images, the model decides the shots". "Footage": a film strip, "the same character, at a known pose, every frame". Along the bottom, an amber band: "Gates before every paid run: is the character named? is every model's licence commercial? does the graph actually load the weights it claims?"](/rnd/charts/issue-43-armature-pipeline.jpg)
+![Diagram titled "You block the shot. The model shoots it." Four columns, left to right. "Authored by us": a wooden mannequin, with "character mesh (GLB)", "pose and animation", "camera and staging". "Headless Blender": "renders, frame by frame:" depth, surface normals, silhouette mask, edges, pose sticks, each with a small thumbnail. "Three routes into a video model": "Driven: pose sticks steer the motion"; "Free: an authored start frame, the camera follows an explicit path"; "Composed: authored reference images, the model decides the shots". "Footage": a film strip, "the same character, in the staging we authored". Along the bottom, an amber band: "Gates before every paid run: is the character named? is every model's licence commercial? does the graph actually load the weights it claims?"](/rnd/charts/issue-43-armature-pipeline.jpg)
 
 ### How it works
 
@@ -62,8 +62,9 @@ and a closing ruling afterwards says what was learned. Reading them in order is 
 **E01: can Blender produce the same control images every time?** Yes, byte for byte, across two separate runs. On the
 way, a check caught a real defect: Blender's model importer quietly adds a hidden sphere to the scene, and our script
 swept it into the "character". The other lesson was humbler. The experiment's first choice of test subject was a sword,
-fifteen times longer than it was wide, which tells you nothing about a body. And none of the four test models had
-bones named for a body (three had bones, called things like bone_0 to bone_29), so pose sticks were impossible.
+fifteen times longer than it was wide, which tells you nothing about a body. And only two of the four test models had
+real bones, none of them named for a body (a third imported as 30 empty markers called bone_0 to bone_29), so pose
+sticks were impossible.
 
 **E02: does a rendered control actually steer a video model?** This was the question the whole tool rested on. With the
 control present, the model's motion tracked it (a timing correlation of +0.521); without it, nothing (−0.065). Then the
@@ -112,7 +113,7 @@ predicted the face would read as our character's in about 30% of frames; it did 
 character stood in came from the prompt alone. A check we added that day overlays the pose sticks on the Blender render
 before anything is spent:
 
-![Three frames, 0, 32 and 64, of a wooden mannequin dancing in a grey Blender studio, with its pose skeleton drawn over it: coloured lines and numbered joints at the head, shoulders, elbows, wrists, hips, knees, ankles and toes. The skeleton sits exactly on the body in every frame.](/rnd/charts/issue-43-armature-e08-sticks.jpg)
+![Three frames, 0, 32 and 64, of a wooden mannequin dancing in a grey Blender studio, with its pose skeleton drawn over it: coloured lines and numbered joints at the head, shoulders, elbows, wrists, hips, knees, ankles and toes. The skeleton follows the body in every frame; the toe markers sit just outside the feet, and the finger fans are drawn in, not measured.](/rnd/charts/issue-43-armature-e08-sticks.jpg)
 
 That overlay caught invented toe positions that no other check had caught. It now runs before every spend.
 
@@ -120,7 +121,7 @@ That overlay caught invented toe positions that no other check had caught. It no
 onto our rig. E10 fed the model more frames per second of the same motion: the step-to-step jumps in the driving signal fell by 41%,
 while the performance itself barely changed (8.6%). It looked better, so it was adopted. E10 also showed something
 uncomfortable: the **whole scene** changed. A person appeared in the bar who wasn't asked for. E10 had changed the seed
-and the clip length together. The test that would separate the two was never run: the change read as a gain, and
+and the clip length together. The test that would separate the two lapsed unrun: the change read as a gain, and
 which of the two caused it stays an open question rather than a problem to fix. Since then, a claim about a scene needs two seeds before we believe it.
 
 **E11: what happens with no control at all?** In three waves. Wave 1: give the model only a start frame. The character's
@@ -134,7 +135,7 @@ pixel across 81 frames, and failed anyway: it faithfully kept the empty void we 
 **E12: give it a real room.** With a real scene in the start frame, the world held to the last frame on two seeds. And a
 setting we had inherited without testing fell. Two sampler settings were the only things changed between these panels:
 
-![A grid comparing the same two seeds at frames 40 and 80, left column at the old settings and right column at the new ones, with the start frame, weights, steps and prompt byte-identical. On the left, the wooden figure is smeared and partly transparent in a crowded bar; on seed 2026081233 at frame 80 its head blurs into a fan of copies. On the right, the figure is sharp and solid, mid-dance, in the same bar. In the bottom-right panel, several people in the crowd have turned into wooden figures too.](/rnd/charts/issue-43-armature-e12-settings.jpg)
+![A grid of three rows, seed 2026081233 at frames 40 and 80 and seed 2026081241 at frame 80, left column at the old settings and right column at the new ones, with the start frame, weights, steps and prompt byte-identical. On the left, the wooden figure is smeared and partly transparent in a crowded bar; on seed 2026081233 at frame 80 its head is a featureless blur. On the right, the figure is sharp and solid, mid-dance, in the same bar. In the bottom-right panel, several people in the crowd have turned into wooden figures too.](/rnd/charts/issue-43-armature-e12-settings.jpg)
 
 At the old settings (guidance 3.5, the "euler" sampler), seeds lost a head and grew a limb; at the settings the model's
 own catalogue lists (6.0, "uni_pc"), the same seeds held the figure to frame 80. The cost is in the last panel, on one seed of the two: stronger
@@ -143,7 +144,7 @@ Hands and arms at speed still fail by frame 80, at either setting.
 
 **E13: through a model that has never seen our character.** We gave a hosted reference-to-video model only our authored
 references, no control at all. Predictions written down blind beforehand expected a model trained on humans to overwrite a wooden figure's
-structure, three of them in all. None was right: identity held on both arms and both seeds. The reference backgrounds also
+structure, four clauses in all across the spec and the run. None was right: identity held on both arms and both seeds. The reference backgrounds also
 steered the world, grey plates giving a grey studio and a warm bar clip a warm interior, though four generations
 aren't enough to say whether that's the references bleeding through or the model's own default. Holes in the
 character's texture came through too, and fixing them upstream is now the top priority. The record calls the wrong
@@ -159,7 +160,8 @@ predictions broke the pessimism streak: this time a prediction erred the other w
 armature's README calls the thesis "measured at product level". It holds three routes, and none is the default because
 it came first:
 - **Driven**: pose sticks steer a dance model. Proven at shot level, and parked.
-- **Free**: an authored start frame, and the model moves the camera. Identity holds without help; a real room holds on
+- **Free**: an authored start frame on camera-control weights; the camera follows an explicit path, and the model
+  decides the movement. Identity holds without help; a real room holds on
   two seeds.
 - **Composed**: authored references into a hosted model. Identity held; the model decides the shots.
 
@@ -201,7 +203,7 @@ interactive viewport only, and armature renders headless.
 
 **What we measured.** We installed 5.3 beside 5.2 and ran armature's Blender tests against it:
 - **3,166 passed, 18 skipped**, on 5.3 with its default backend.
-- The tests that start a real Blender process (107 of them, in 8 files): **107 passed, 5 skipped on Vulkan, and 107
+- The tests that start a real Blender process (112 of them, in 8 files): **107 passed, 5 skipped on Vulkan, and 107
   passed, 5 skipped with OpenGL forced.**
 
 So the old single-group compositor path still drives a background render on 5.3, and armature's checks pass on either
@@ -227,10 +229,10 @@ The same model name changed licence between versions. And every one of these rep
 with the same name, `model.safetensors`, so a check that only reads file names can't tell an allowed checkpoint from a
 forbidden one.
 
-armature already refuses a paid run whose workflow loads a known non-commercial model, but its list named only two pose
-models. A change in review adds the larger Depth Anything models, InsightFace, and the SMPL body models. Its first draft
+armature already refuses a paid run whose workflow loads a known non-commercial model, but among preprocessors its list named
+only two pose models. A change in review adds the larger Depth Anything models, InsightFace, and the SMPL body models. Its first draft
 also blocked DA3-Large-1.1 along with 1.0. That is in review now, and the plan is to tie each entry to a repository and
-revision rather than a name. The simpler protection is the one armature already has: it renders depth, masks and pose
+revision rather than a name, which is still in review. The simpler protection is the one armature already has: it renders depth, masks and pose
 straight out of Blender, so none of these models is needed at all.
 
 ## A warning line, read before it was acted on
@@ -276,12 +278,12 @@ the series) also answered the question we'd guessed at, and the answer was neith
 - An update isn't two halves. It is four rounds, one per group of questions: the model writes its answers (30 to 155
   seconds), then a short pass learns from them (2 to 15 seconds, longer next to a save).
 - Readings taken while the model was writing answers ran 10,574 / 13,756 / 23,311 MiB. Readings taken while it was
-  learning ran 10,672 / 11,546 / 23,279 MiB. **Both kinds of work reach about 23.3 GB, and both drop to about 10.6 GB.**
+  learning ran 10,672 / 11,546 / 23,279 MiB. **Both kinds of work reach about 23,300 MiB, and both drop to about 10,600 MiB.**
   Which part of the update we happen to sample doesn't set the level.
 
 ![Across 120 nvidia-smi readings read about every 6.8 s from 05:12:19 to 05:25:51 Eastern time, card memory has a low of 10,574 MiB, a middle (median) of 13,150.5 MiB (sitting below the 15,500 MiB report-at-once line on 102 of 120 readings and above it on 18), and a high of 23,311 MiB, with similar lows and highs across both training phases (99 rollout readings spanning 10,574 to 23,311 MiB, median 13,756 MiB; 21 scoring-and-learning readings spanning 10,672 to 23,279 MiB, median 11,546 MiB), alongside two earlier 2-minute summary-only series of 24 readings each at 04:17–04:19 (10,176 / 15,742 / 15,916 MiB) and 04:20–04:22 (10,529 / 15,781 / 22,943 MiB).](/rnd/charts/issue-43-memory-ten-minutes.svg)
 
-So the two short series that read about 15.7 GB in the middle weren't repeated over ten minutes, and why they ran high
+So the two short series that read about 15,750 MiB in the middle weren't repeated over ten minutes, and why they ran high
 is still unmeasured. What we have instead is a better instrument, and an explanation withdrawn rather than confirmed.
 
 **And one more save.** At the save after update 190, another ten-minute series read 10,016 / **15,083** / 19,531 MiB:
@@ -312,7 +314,7 @@ and the guard treated a missing phase as "still in setup". A second guard in the
 on the rented machine, already skips half-written blocks. The stall guard didn't.
 
 While reading the run's files we found one more: the memory guard read about 340 MB, against the trainer's roughly
-13 GB, because it was reading the wrong process group. A guard that sees a twentieth of the memory can't protect much.
+13 GB, because it was reading the wrong process group. A guard that sees about a fortieth of the memory can't protect much.
 
 The fix, in review now, makes the stall guard skip half-written blocks, records both memory readings and uses the
 larger, and adds three facts to the run record: steps done, whether the final checkpoint exists, and whether training
@@ -325,7 +327,7 @@ capacity"). A refusal costs nothing; it tries again in daytime.
 
 Our Colab plan can open two kinds of TPU, Google's own AI chips, as well as GPUs: a **v5e-1** at about 2.92 compute
 units an hour and a **v6e-1** at about 4.08, one chip each. We have barely used them, so we asked a Deep Research report
-what they're good for, and checked what we could.
+what they're good for. We checked one thing ourselves, marked below; the rest is the report's account.
 
 The short answer: a single TPU chip is a fast matrix engine that wants to be fed **many requests at once**, with shapes
 it has already compiled for. It is not a drop-in GPU.
@@ -335,18 +337,19 @@ it has already compiled for. It is not a drop-in GPU.
 - **Where it would help us.** Running a translation model like TranslateGemma on a batch of text, while our own card is
   busy training. Today our README translations run on the RTX 5090 and wait whenever a training chunk holds it. Also
   batched scoring with small models, and small-model fine-tuning in JAX, Google's numerical library.
-- **Where it wouldn't.** Generating one answer at a time is limited by memory bandwidth, and our RTX 5090 (1,792 GB/s,
-  free to us) matches the v6e-1 (1,638 GB/s) and roughly doubles the v5e-1. Our image model, Qwen-Image, is too big
-  for either chip, and none of the controlled video models armature uses has a TPU version.
+- **Where it wouldn't.** Per the report, generating one answer at a time is limited by memory bandwidth, and our RTX
+  5090 (1,792 GB/s, free to us) matches the v6e-1 (1,638 GB/s) and roughly doubles the v5e-1. It also reports that
+  our image model, Qwen-Image, is too big for either chip, and that none of the controlled video models armature uses
+  has a TPU version.
 - **The trap.** Before a TPU produces anything it compiles the model for the exact shapes it will see, and the report
   found that taking anywhere from 1.5 to 34 minutes. Change the length of the input and it compiles again. Colab's own
   `colab run` command gives up after 30 seconds without output by default; we checked that against our copy of the
   tool. Our TPU launcher uses a different command, so it isn't affected, but any new TPU job has to plan for it.
-- **And the numbers differ.** A TPU rounds its arithmetic differently from a GPU, enough to change which word a model
+- **And the numbers differ.** The report finds a TPU rounds its arithmetic differently from a GPU, enough to change which word a model
   picks on a long answer. We already never pool results across hardware; the report gives one more reason.
 
-We will try one small test: TranslateGemma on a v6e-1, translating one README in pieces small enough for its 2,000-token
-limit. If it works, translations stop waiting for the training card.
+We will try one small test: TranslateGemma on a v6e-1, translating one README in pieces small enough for the 2,000-token
+input limit the report gives for it. If it works, translations stop waiting for the training card.
 
 ## The daily watch
 

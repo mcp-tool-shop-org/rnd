@@ -62,13 +62,13 @@ and a closing ruling afterwards says what was learned. Reading them in order is 
 **E01: can Blender produce the same control images every time?** Yes, byte for byte, across two separate runs. On the
 way, a check caught a real defect: Blender's model importer quietly adds a hidden sphere to the scene, and our script
 swept it into the "character". The other lesson was humbler. The experiment's first choice of test subject was a sword,
-fifteen times longer than it was wide, which tells you nothing about a body. And not one of the four test models had
-named bones, so pose sticks were impossible.
+fifteen times longer than it was wide, which tells you nothing about a body. And none of the four test models had
+bones named for a body (three had bones, called things like bone_0 to bone_29), so pose sticks were impossible.
 
 **E02: does a rendered control actually steer a video model?** This was the question the whole tool rested on. With the
-control present, the model's motion tracked it (a timing correlation of +0.52); without it, nothing (−0.07). Then the
+control present, the model's motion tracked it (a timing correlation of +0.52); without it, nothing (−0.06). Then the
 surprise: we inverted the control images, so bright became dark, and tracking held (+0.58). The model was reading
-**geometry, not brightness**. One more thing was written down that day: a first experiment's subject is the test's
+**geometry, not brightness**. Its own record puts it this way: whatever the model is reading, it is reading the geometry, not the tone. One more thing was written down that day: a first experiment's subject is the test's
 input, not the product's ceiling. A turntable of one figure had started to look like "what armature is for".
 
 **E03: does authored motion come through?** The arm the control swung moved 85 degrees; the arm we left still moved
@@ -96,7 +96,7 @@ outline; the reference owns the surface**, its material and costume. Where the c
 the stick figure doesn't have, the reference can add shape.
 
 **E07: building the skeleton.** Seven rounds and no money spent. A rigged character with 22 named bones. Two shortcuts
-failed instructively: an automatic retopology tool reported a tiny overall error (under 0.4%) while gouging a trench
+failed instructively: an automatic retopology tool reported a tiny overall error (0.14% to 0.34%) while gouging a trench
 through the mouth, and a popular remeshing add-on was ruled not safe for commercial use. Repairing the
 original mesh worked; rebuilding it didn't.
 
@@ -110,18 +110,18 @@ before anything is spent:
 That overlay caught invented toe positions that no other check had caught. It now runs before every spend.
 
 **E09 and E10: a cleaner chain.** E09 measured how faithfully a motion survives being lifted from video and put back
-onto our rig. E10 fed the model more frames per second of the same motion: the frame-to-frame jitter fell by 41% and
-the performance itself barely changed (8.6%). It looked better, so it was adopted. E10 also showed something
-uncomfortable: run the same request with a different seed and the **whole scene** changed. A person appeared in the bar
-who wasn't asked for. Since then, a claim about a scene needs two seeds before we believe it.
+onto our rig. E10 fed the model more frames per second of the same motion: the step-to-step jumps in the driving signal fell by 41%,
+while the performance itself barely changed (8.6%). It looked better, so it was adopted. E10 also showed something
+uncomfortable: the **whole scene** changed. A person appeared in the bar who wasn't asked for. E10 had changed the seed
+and the clip length together, so the record doesn't yet say which one did it. Since then, a claim about a scene needs two seeds before we believe it.
 
 **E11: what happens with no control at all?** In three waves. Wave 1: give the model only a start frame. The character's
-features survived to the last frame with no help, but our empty studio turned into a bar with four people in it by
-frame 8, and the camera pushed in on its own. Wave 2 was a lesson about checks: every gate was green, and the result was
-81 frames of noise. The graph had wired a camera input into a model that had no channel for it; our licence record was
+features survived to the last frame with no help, but our empty studio turned into a bar with at least four people in it
+by frame 8, and the camera pushed in on its own. Wave 2 was a lesson about checks: every gate was green, and the result was
+65 frames with nothing recognisable after the first. The graph had wired a camera input into a model that had no channel for it; our licence record was
 for weights the graph never loaded. Hence a rule now in the repo's charter: **a licence row is not a wiring claim**,
 and a new gate that checks the graph loads what it claims. Wave 3, with the right weights, held the camera to within a
-pixel across 81 frames, and failed anyway: it faithfully kept the empty grey void we had handed it.
+pixel across 81 frames, and failed anyway: it faithfully kept the empty void we had handed it. Each wave was a single seed.
 
 **E12: give it a real room.** With a real scene in the start frame, the world held to the last frame on two seeds. And a
 setting we had inherited without testing fell. Two sampler settings were the only things changed between these panels:
@@ -129,19 +129,21 @@ setting we had inherited without testing fell. Two sampler settings were the onl
 ![A grid comparing the same two seeds at frames 40 and 80, left column at the old settings and right column at the new ones, with the start frame, weights, steps and prompt byte-identical. On the left, the wooden figure is smeared and partly transparent in a crowded bar; on seed 2026081233 at frame 80 its head blurs into a fan of copies. On the right, the figure is sharp and solid, mid-dance, in the same bar. In the bottom-right panel, several people in the crowd have turned into wooden figures too.](/rnd/charts/issue-43-armature-e12-settings.jpg)
 
 At the old settings (guidance 3.5, the "euler" sampler), seeds lost a head and grew a limb; at the settings the model's
-own catalogue lists (6.0, "uni_pc"), the same seeds held the figure to frame 80. The cost is in the last panel: stronger
+own catalogue lists (6.0, "uni_pc"), the same seeds held the figure to frame 80. The cost is in the last panel, on one seed of the two: stronger
 adherence pushed our "wooden figure" description onto the crowd. The fix is to scope that description to the subject.
 Hands and arms at speed still fail by frame 80, at either setting.
 
 **E13: through a model that has never seen our character.** We gave a hosted reference-to-video model only our authored
-references, no control at all. Three predictions written down blind beforehand expected a model trained on humans to overwrite a wooden
-figure's structure. None was right: identity held on both arms and both seeds. The reference backgrounds also
-steered the world, grey plates giving a grey studio and a warm bar clip a warm interior. The record calls the wrong
+references, no control at all. Predictions written down blind beforehand expected a model trained on humans to overwrite a wooden figure's
+structure, three of them in all. None was right: identity held on both arms and both seeds. The reference backgrounds also
+steered the world, grey plates giving a grey studio and a warm bar clip a warm interior, though four generations
+aren't enough to say whether that's the references bleeding through or the model's own default. Holes in the
+character's texture came through too, and fixing them upstream is now the top priority. The record calls the wrong
 predictions the third sighting in a row of one-directional pessimism about these models, and writes that down as
 something to correct for.
 
-**E14: a style lever.** A style LoRA (a small add-on that shifts a model's look) applied to the free route held the
-character on one arm and lost it on the other, where an arm morphed and the legs fused by frame 80. Its blind
+**E14: a style lever.** A style LoRA (a small add-on that shifts a model's look) applied to the free route carried the new style on both arms, held the
+character on one and lost it on the other, where an arm morphed and the legs fused by frame 80. Its blind
 predictions broke the pessimism streak: this time a prediction erred the other way. Miscalibration runs both ways.
 
 ### Where it stands
@@ -159,21 +161,21 @@ about camera accuracy on photographic worlds until it has an instrument that can
 
 ### What the field looks like now
 
-We ran a Deep Research report on controllable video in late 2026 and checked the parts we'd act on at source. The
-headline: Lightricks has published **LTX-2.5 Layout-to-Render**, which turns a clay or simple-shape playblast from
-Blender plus one painted start frame into styled video. That is armature's idea, built into a model. Its card asks for
-two things we had learned the hard way: never use the raw grey render as the first frame, and keep words like "clay"
+We ran a Deep Research report on controllable video in late 2026. We opened only a few of its sources ourselves (the
+model listings for the two items below that matter most to us); the rest is the report's account. The headline: Lightricks has published **LTX-2.5 Layout-to-Render**, which turns a clay or simple-shape playblast from
+Blender plus one painted start frame into styled video. That is armature's idea, built into a model. We confirmed the model is listed. Per the report, its card
+also takes optional middle and end frames, and asks for two things we had learned the hard way: never use the raw grey render as the first frame, and keep words like "clay"
 and "3D" out of the prompt. Its repository is gated behind Lightricks' own licence, which we haven't accepted, so for
 now it's a candidate route, not a tool.
 
-Three other findings line up with what the experiments found:
+Three other findings, from the report, line up with what the experiments found:
 - **Human-pose models force human proportions.** A stylized or non-human character driven by a standard human skeleton
   gets adult shoulders and limbs. Driving from depth, outlines and masks, or from the character's own rig, avoids that,
   which is what armature already does.
 - **Identity scores need cropping.** A standard "subject consistency" score is corrupted by the background; cropping to
   the character fixes it. And a camera check has to come first, because a model that ignores the camera scores falsely
   well on identity.
-- **The licence traps are in the small models,** not the big ones. More on that below.
+- **The licence traps are in the small preprocessing models,** not the big ones. More on that below.
 
 ## Blender 5.3 arrived, and armature didn't notice
 

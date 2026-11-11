@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.70] - 2026-11-11
+
+- licences: EmbeddingGemma 2 card (Apache-2.0 + Gemma Prohibited Use Policy, read 2026-11-11)
+
 ## [1.1.23.1.69] - 2026-11-11
 
 - licences: Qwen-Image-2512 card (Apache-2.0, read 2026-11-11)

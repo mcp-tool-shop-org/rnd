@@ -3,7 +3,7 @@ title: "11 November: you block the shot, the model shoots it"
 description: "A long look at armature, our tool for making AI video follow a 3D scene we authored: the idea, fourteen experiments (thirteen run, one withdrawn) and their wrong turns, and what the field looks like now. Also: Blender 5.3 against it, a memory warning whose first explanation didn't survive a fact-check, a training run stopped by its own guard after it had finished, one model name with two licences, what two single-chip TPUs are good for, and the daily watch."
 issue: 43
 date: 2026-11-11
-draft: true
+draft: false
 highlights:
   - "<strong>You block the shot. The model shoots it.</strong> armature stages a character in Blender and makes a video model follow it. Thirteen experiments in, the model reads geometry rather than tone, identity holds through a hosted model that has never seen our character, and the most confident predictions we wrote down were the ones that missed."
   - "<strong>Blender 5.3 arrived, and armature didn't notice.</strong> 3,166 of armature's Blender tests pass on 5.3 (18 skipped), and the ones that start real Blender pass on both graphics backends."
@@ -353,4 +353,20 @@ input limit the report gives for it. If it works, translations stop waiting for 
 
 ## The daily watch
 
-<!-- PLACEHOLDER: R&D's morning watch block (11 November) goes here. -->
+Yesterday's watch ran to 16:04 UTC on 10 November; this one picks up there and runs to the morning of the 11th.
+Every version and date below was read again at its source, and every description comes from the release notes, not
+from a summary. Two things the scout reported were cut: one launch fell four minutes before the window, and one
+memory fix was described as helping our card when its notes limit it to GPUs that share memory with the system.
+
+The item that touches us most is the first. Every Colab window this studio runs goes through `colab`, at 0.7.4, and
+0.8.0 removes a subcommand. Before we upgrade, our launch scripts get checked for it.
+
+*2026-11-10 16:04 to 2026-11-11 13:35 UTC*
+
+- **google-colab-cli 0.8.0**, 2026-11-10. [PyPI](https://pypi.org/project/google-colab-cli/0.8.0/) · [changelog at the tag](https://github.com/googlecolab/google-colab-cli/blob/v0.8.0/CHANGELOG.md). `colab ssh -s NAME -- CMD` runs one command on an existing runtime and returns its exit status. Breaking: the `colab console` subcommand is removed; use `colab ssh` or pipe `!` lines to `colab exec`. The changelog at the v0.8.0 tag lists these under "Unreleased" (it has no 0.8.0 heading). We run 0.7.4. gpu-stack · licence: not checked
+- **llama.cpp b12284**, 2026-11-11. [Release](https://github.com/ggml-org/llama.cpp/releases/tag/b12284). CUDA gains OCP FP8 support, including an FP8 matrix-vector path; the release's own benchmark ran on a Blackwell card. runtimes · licence: not checked
+- **llama.cpp b12263**, 2026-11-11. [Release](https://github.com/ggml-org/llama.cpp/releases/tag/b12263). CUDA's virtual-memory pool now reserves at most 8 GB on GPUs that share memory with the system, and halves the reservation and retries when the address reservation fails, rather than stopping. runtimes · licence: not checked
+- **Docker Sandboxes v0.53.0**, 2026-11-11. [Release](https://github.com/docker/sbx-releases/releases/tag/v0.53.0). Sandboxed Claude Code can use Claude in Chrome (setting `claude.chrome`); Remote Control keeps credentials on the host (`claude.remoteControl`); local disk-usage reports; kits can get an automatic loopback port. Breaking: the built-in `gemini` agent is retired; `DOCKER_SANDBOXES_USE_DHI` is no longer read; scripted `sbx logout` needs `-y`; `sbx exec` loses `--detach` and `--privileged`; HTTP policy matching on paths and query values is now case-insensitive. agent-tools · licence: not checked
+- **ComfyUI v0.45.0**, 2026-11-10. [Release](https://github.com/Comfy-Org/ComfyUI/releases/tag/v0.45.0). SeedVR2's VAE slices to the free memory; Qwen 3.x gets combined linear weights, video input and a fix for an FP8 crash when generating text; Get Video Components holds decoded frames once instead of twice; new models RelayVSR, WeVisOne-VL and UltraTex. `local_web_sso` and `partner_node_token` are now on by default. creative · licence: not checked
+
+Pre-releases seen and left out: Ollama v0.40.17-rc0; llama.cpp builds b12254 to b12282 other than the two above.

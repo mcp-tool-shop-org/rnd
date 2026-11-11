@@ -66,9 +66,16 @@ fifteen times longer than it was wide, which tells you nothing about a body. And
 bones named for a body (three had bones, called things like bone_0 to bone_29), so pose sticks were impossible.
 
 **E02: does a rendered control actually steer a video model?** This was the question the whole tool rested on. With the
-control present, the model's motion tracked it (a timing correlation of +0.52); without it, nothing (−0.06). Then the
-surprise: we inverted the control images, so bright became dark, and tracking held (+0.58). The model was reading
-**geometry, not brightness**. Its own record puts it this way: whatever the model is reading, it is reading the geometry, not the tone. One more thing was written down that day: a first experiment's subject is the test's
+control present, the model's motion tracked it (a timing correlation of +0.521); without it, nothing (−0.065). Then the
+surprise: we inverted the control images, so bright became dark, and tracking held (+0.581). The model was reading
+**geometry, not brightness**. Its own record puts it this way: whatever the model is reading, it is reading the geometry, not the tone.
+
+![On a timing-correlation axis from −1.0 to +1.0 (1 generation per E02 arm; fixed-seed repeats are bit-identical with 0 measurement noise), near-bright control A1a is +0.521 and near-dark control A1b is +0.581 — a 0.060 difference that sits well inside the E04 between-seed 1-SD yardsticks of 0.1689 (bright, larger) and 0.1571 (dark), not a confidence interval — while no-control A2 sits at −0.065, 0.586 to 0.646 below the two control arms, showing the model follows geometry rather than brightness.](/rnd/charts/issue-43-geometry-not-brightness.svg)
+
+Each bar is one generation, and repeats at a fixed seed are bit-identical, so the bars carry no measurement noise. The
+yardsticks underneath are the between-seed spread E04 measured later. One footnote from E04's own ruling: the +0.521 was
+measured on a lossless re-run of the bright condition; the original run's compressed frames read +0.545. The
+condition is the same, so the point stands. One more thing was written down that day: a first experiment's subject is the test's
 input, not the product's ceiling. A turntable of one figure had started to look like "what armature is for".
 
 **E03: does authored motion come through?** The arm the control swung moved 85 degrees; the arm we left still moved
@@ -271,6 +278,8 @@ the series) also answered the question we'd guessed at, and the answer was neith
 - Readings taken while the model was writing answers ran 10,574 / 13,756 / 23,311 MiB. Readings taken while it was
   learning ran 10,672 / 11,546 / 23,279 MiB. **Both kinds of work reach about 23.3 GB, and both drop to about 10.6 GB.**
   Which part of the update we happen to sample doesn't set the level.
+
+![Across 120 nvidia-smi readings read about every 6.8 s from 05:12:19 to 05:25:51 Eastern time, card memory has a low of 10,574 MiB, a middle (median) of 13,150.5 MiB (sitting below the 15,500 MiB report-at-once line on 102 of 120 readings and above it on 18), and a high of 23,311 MiB, with similar lows and highs across both training phases (99 rollout readings spanning 10,574 to 23,311 MiB, median 13,756 MiB; 21 scoring-and-learning readings spanning 10,672 to 23,279 MiB, median 11,546 MiB), alongside two earlier 2-minute summary-only series of 24 readings each at 04:17–04:19 (10,176 / 15,742 / 15,916 MiB) and 04:20–04:22 (10,529 / 15,781 / 22,943 MiB).](/rnd/charts/issue-43-memory-ten-minutes.svg)
 
 So the two short series that read about 15.7 GB in the middle weren't repeated over ten minutes, and why they ran high
 is still unmeasured. What we have instead is a better instrument, and an explanation withdrawn rather than confirmed.

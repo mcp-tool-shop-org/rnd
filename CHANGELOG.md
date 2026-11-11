@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.68] - 2026-11-11
+
+- newsletter issue 43 (11 November), you block the shot, the model shoots it: an armature feature (the idea, the pipeline, experiments E01-E14, where it stands, the field), Blender 5.3 against armature, Depth Anything 3's two licences, the seed-46 memory line, a Colab stall guard, single-chip TPUs
+
 ## [1.1.23.1.67] - 2026-11-11
 
 - licences: Gemma Terms of Use (TranslateGemma, also polyglot's translategemma), Qwen-Image and its ComfyUI repack, TAESD, and the Qwen2.5-0.5B test GGUF

@@ -307,6 +307,20 @@
     "width": 1200,
     "height": 534
   },
+  "issue-43-geometry-not-brightness.svg": {
+    "png": "issue-43-geometry-not-brightness.png",
+    "png_sha256": "178edb55c1780a031960c977391603f1162efd5b06659d86184c1281a8fb6ffd",
+    "svg_sha256": "42c09d33596846d196549365ca67b2f6908cac8bb3b588353e19c52a097cfc7f",
+    "width": 1200,
+    "height": 558
+  },
+  "issue-43-memory-ten-minutes.svg": {
+    "png": "issue-43-memory-ten-minutes.png",
+    "png_sha256": "c3f116dda62fa6ef7274b0d206fdca7e766cb38a1c22faaa31e4a6346c43a5af",
+    "svg_sha256": "bc39c100e56b8256e2055dcaa7c64d4f4d41f91b9f7c90d753647b4f9e89790f",
+    "width": 1200,
+    "height": 593
+  },
   "loop-repeats.svg": {
     "png": "loop-repeats.png",
     "png_sha256": "f7527ae4d3ec14612ffea5b9fafd1f68c1bba4d89e99aae489192b50836155d3",

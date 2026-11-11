@@ -275,6 +275,12 @@ the series) also answered the question we'd guessed at, and the answer was neith
 So the two short series that read about 15.7 GB in the middle weren't repeated over ten minutes, and why they ran high
 is still unmeasured. What we have instead is a better instrument, and an explanation withdrawn rather than confirmed.
 
+**And one more save.** At the save after update 190, another ten-minute series read 10,016 / **15,083** / 19,531 MiB:
+the lowest reading the lowest of the run so far, the highest below every earlier series, and the middle reading back up
+near the line. So even over ten minutes the middle reading wanders by nearly 2 GB from one save to the next while the
+floor and the peak stay put. That is a lesson about the line itself: a middle reading is a noisy thing to put an alarm
+on, and the floor and the peak are what tell you whether memory is growing.
+
 ## Finished, then stopped
 
 For the first time in four days, a rented Colab card ran one of our jobs: a 500-step style-training rung for

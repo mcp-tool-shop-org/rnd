@@ -251,19 +251,29 @@ from one save to the next. Neither had happened. The lowest reading was in line 
 about 170 MiB of chunk 1's highest. The trainer's own measure of the memory it had allocated peaked at 18,466 MiB in this
 chunk, lower than the 19,677 MiB peak in chunk 3. Nothing else was on the card.
 
-**What we don't know yet.** Our first explanation was that two minutes of readings is shorter than one training
-update, so a series lands mostly in one part of it. Our fact-check pushed back: nothing tied a reading to a part of
-the update, so that was a guess. Each update spends about 259 seconds having the model write answers and about 28
-seconds learning from them, so even a long series is mostly the first part. And the trainer's own peak, 18,466 MiB,
-sat above every reading in that first series, which fits the peak falling in the short learning part that two minutes
-can miss. A second short series a few minutes later read 10,529, 15,781 and 22,943 MiB.
+**Our first explanation, and why it didn't hold.** We first thought two minutes of readings is shorter than one
+training update, so a short series lands mostly in one part of it, and this one had caught the memory-heavy part. Our
+fact-check pushed back before we published: nothing tied any reading to a part of the update, so that was a guess. A
+second short series a few minutes later read 10,529, 15,781 and 22,943 MiB.
 
-**What we changed.** From the next save, the series runs for ten minutes (120 readings), with every reading
-time-stamped so it can be lined up with the run's own record of when each part of the update started. The rule for
-stopping is written down in advance: hold the run at a save only if the ten-minute middle reading is over the line
-**and** the lowest or highest reading has risen past what the earlier chunks showed.
+**What we changed.** From the next save, the series ran for ten minutes, with every reading time-stamped and lined up
+against the run's own clock. The rule for stopping was written down before the reading: hold the run at a save only if
+the ten-minute middle reading is over the line **and** the lowest or highest reading has risen past what the earlier
+chunks showed.
 
-<!-- PLACEHOLDER: the step-180 ten-minute series result and its chart go here before publish. -->
+**What the ten-minute series showed.** At the save after update 180, 120 readings came in at 10,574 / **13,150.5** /
+23,311 MiB: the middle reading well under the line, the lowest in line with every earlier chunk, and the highest just
+under chunk 2's 23,372. No hold. Lining the readings up with the run's clock (the two clocks drifted 0.002 seconds over
+the series) also answered the question we'd guessed at, and the answer was neither guess:
+
+- An update isn't two halves. It is four rounds, one per group of questions: the model writes its answers (30 to 155
+  seconds), then a short pass learns from them (2 to 15 seconds, longer next to a save).
+- Readings taken while the model was writing answers ran 10,574 / 13,756 / 23,311 MiB. Readings taken while it was
+  learning ran 10,672 / 11,546 / 23,279 MiB. **Both kinds of work reach about 23.3 GB, and both drop to about 10.6 GB.**
+  Which part of the update we happen to sample doesn't set the level.
+
+So the two short series that read about 15.7 GB in the middle weren't repeated over ten minutes, and why they ran high
+is still unmeasured. What we have instead is a better instrument, and an explanation withdrawn rather than confirmed.
 
 ## Finished, then stopped
 

@@ -179,11 +179,11 @@ and "3D" out of the prompt. Its repository is gated behind Lightricks' own licen
 now it's a candidate route, not a tool.
 
 Three other findings, from the report, line up with what the experiments found:
-- **Human-pose models force human proportions.** A stylized or non-human character driven by a standard human skeleton
-  gets adult shoulders and limbs. Driving from depth, outlines and masks, or from the character's own rig, avoids that,
-  which is what armature already does.
-- **Identity scores need cropping.** A standard "subject consistency" score is corrupted by the background; cropping to
-  the character fixes it. And a camera check has to come first, because a model that ignores the camera scores falsely
+- **Standard human-pose driving can force human proportions.** Per the report, driving Wan2.2-Animate v1 with a
+  standard human skeleton gives a stylized or non-human character adult shoulders and limbs. Driving from depth,
+  outlines and masks, or from the character's own rig, avoids that, which is what armature already does.
+- **Identity scores need cropping.** Per the report, a standard "subject consistency" score is corrupted by the
+  background, and cropping to the character fixes it. And a camera check has to come first, because a model that ignores the camera scores falsely
   well on identity.
 - **The licence traps are in the small preprocessing models,** not the big ones. More on that below.
 

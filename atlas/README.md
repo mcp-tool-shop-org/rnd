@@ -1,23 +1,26 @@
 # rnd: how it works
 
-Mapped at 2026-10-25 from commit 50b42f1 by Atlas 1.24.0.
+Mapped at 2026-11-11 from commit a68ab3c by Atlas 1.26.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-14 parts, mostly Python (147 files), shell (30), TypeScript (3), Astro (2), CSS (2), HTML (2), JavaScript (1) and PowerShell (1). Work enters through 5 doors; the busiest is CI, which reaches 6 parts. It publishes to npm and PyPI. It deploys a site to GitHub Pages. People run rnd.
+14 parts, mostly Python (148 files), shell (30), TypeScript (3), Astro (2), CSS (2), HTML (2), JavaScript (1) and PowerShell (1). Work enters through 5 doors; the busiest is CI, which reaches 6 parts. It publishes to npm and PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-10-25 (caae8cb)
+## What changed since 2026-10-25 (50b42f1)
 
-- CI now also runs site/scripts/newsletter_publish.py.
-- LICENSE is now also read by site/scripts/newsletter_publish.py and tests/test_newsletter_publish.py.
-- pyproject.toml is now also read by tests/test_newsletter_publish.py.
-- 6 files changed content, across 3 parts.
+- experiments/colab-golden-path/data/windows/window*/gate.jsonl is now read by experiments/colab-golden-path/figures.py.
+- experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-*-tune/metrics.json is now read by experiments/charts/make_charts.py.
+- site/public/charts/*.svg is now read by site/scripts/check_feed.py and site/scripts/render_chart_pngs.py.
+- And 37 more new writers and readers of places.
+- entries was generated and is now mixed.
+- site/scripts/check_feed.py now starts at `main`; it started at `chart_errors`.
+- 65 files added and 25 changed content, across 9 parts.
 
 ## What comes in
 
-1. **CI.** On a pull request to main; on a push to main touching 15 paths; or by hand. Runs site/scripts/check_feed.py, site/scripts/newsletter_publish.py, verify.sh and 28 more; checks mcptoolshop_rnd/.
+1. **CI.** On a pull request to main; on a push to main touching 15 paths; or by hand. Runs site/scripts/check_feed.py, site/scripts/newsletter_publish.py, verify.sh and 29 more; checks mcptoolshop_rnd/.
 2. **Release.** When a release is published; or by hand. Runs mcptoolshop_rnd/__init__.py and verify.sh; checks mcptoolshop_rnd/.
 3. **Deploy site to GitHub Pages.** On a push to main touching 2 paths; or by hand. Runs site/scripts/check_feed.py, site/astro.config.mjs and site/src/.
 4. **Publish the newsletter.** When the workflow Deploy site to GitHub Pages completes; or by hand. Runs site/scripts/newsletter_publish.py.
@@ -55,7 +58,7 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 - **experiments** is imported only from tests, by 1 part (tests), and sits on the path of 1 door.
 - **rnd** is imported only from tests, by 1 part (tests), and sits on the path of 1 door.
 - **experiments/natural-errors/data/** is written by experiments and read by experiments; a hand edit reaches every reader.
-- **entries/** is written by mcptoolshop_rnd and read by experiments and mcptoolshop_rnd, and by 2 tests; a hand edit reaches every reader.
+- **entries/** holds files written by mcptoolshop_rnd and read by experiments and mcptoolshop_rnd, and by 2 tests; a hand edit reaches every reader.
 
 the repository root holds only shell files, which this map does not read, so what uses it cannot be seen.
 
@@ -83,14 +86,14 @@ the repository root holds only shell files, which this map does not read, so whe
 
 ## Written but never read
 
-- **experiments/charts/** is written by experiments/charts/make_charts.py and read by nothing else in this repository.
-- **experiments/colab-golden-path/figures.json** is written by experiments/colab-golden-path/figures.py and read by nothing else in this repository.
-- **experiments/natural-errors/data/baselines_p1.json** is written by experiments/natural-errors/baselines_p1.py and read by nothing else in this repository.
-- **experiments/natural-errors/data/corrections.json** is written by experiments/natural-errors/build_corrections.py and read by nothing else in this repository.
-- **experiments/ollama-cuda-backend/** is written by experiments/ollama-cuda-backend/diag_test-v4-draft.py and read by nothing else in this repository.
-- **experiments/verifier-gold/crossfamily/** is written by experiments/verifier-gold/crossfamily/run_labeller.py and read by nothing else in this repository.
-- **experiments/verifier-gold/crossfamily/blind_key.json** is written by experiments/verifier-gold/crossfamily/make_sample.py and read by nothing else in this repository.
-- **experiments/verifier-gold/crossfamily/sample.jsonl** is written by experiments/verifier-gold/crossfamily/make_sample.py and read by nothing else in this repository.
+- **experiments/charts/** holds files written by experiments/charts/make_charts.py and read by nothing else this map can name: experiments/embeddinggemma-2/harness/score.py and mcptoolshop_rnd/store.py read `*.json` under a directory chosen at run time, which may include it.
+- **experiments/colab-golden-path/figures.json** is written by experiments/colab-golden-path/figures.py and read by nothing else this map can name: experiments/embeddinggemma-2/harness/score.py and mcptoolshop_rnd/store.py read `*.json` under a directory chosen at run time, which may include it.
+- **experiments/natural-errors/data/baselines_p1.json** is written by experiments/natural-errors/baselines_p1.py and read by nothing else this map can name: experiments/embeddinggemma-2/harness/score.py and mcptoolshop_rnd/store.py read `*.json` under a directory chosen at run time, which may include it.
+- **experiments/natural-errors/data/corrections.json** is written by experiments/natural-errors/build_corrections.py and read by nothing else this map can name: experiments/embeddinggemma-2/harness/score.py and mcptoolshop_rnd/store.py read `*.json` under a directory chosen at run time, which may include it.
+- **experiments/ollama-cuda-backend/** holds files written by experiments/ollama-cuda-backend/diag_test-v4-draft.py and read by nothing else this map can name: experiments/embeddinggemma-2/harness/check_grades.py, experiments/embeddinggemma-2/harness/grading.py, experiments/embeddinggemma-2/harness/score.py and 1 more file read `*.json` and `*.jsonl` under a directory chosen at run time, which may include it.
+- **experiments/verifier-gold/crossfamily/** holds files written by experiments/verifier-gold/crossfamily/run_labeller.py and read by nothing else this map can name: experiments/embeddinggemma-2/harness/check_grades.py, experiments/embeddinggemma-2/harness/grading.py, experiments/embeddinggemma-2/harness/score.py and 1 more file read `*.json` and `*.jsonl` under a directory chosen at run time, which may include it.
+- **experiments/verifier-gold/crossfamily/blind_key.json** is written by experiments/verifier-gold/crossfamily/make_sample.py and read by nothing else this map can name: experiments/embeddinggemma-2/harness/score.py and mcptoolshop_rnd/store.py read `*.json` under a directory chosen at run time, which may include it.
+- **experiments/verifier-gold/crossfamily/sample.jsonl** is written by experiments/verifier-gold/crossfamily/make_sample.py and read by nothing else this map can name: experiments/embeddinggemma-2/harness/check_grades.py and experiments/embeddinggemma-2/harness/grading.py read `*.jsonl` under a directory chosen at run time, which may include it.
 
 ## Helpers that look duplicated
 
@@ -100,8 +103,8 @@ These are candidates from names and call order, not a judgement.
 
 ## Generated, never hand-edited
 
-- **entries/** is written by mcptoolshop_rnd/cli.py, except entries/_template.md, which it reads and people write.
-- **experiments/charts/** is written by experiments/charts/make_charts.py.
+- **entries/** holds files written by mcptoolshop_rnd/cli.py, except entries/_template.md, which it reads and people write.
+- **experiments/charts/** holds files written by experiments/charts/make_charts.py.
 - **experiments/colab-golden-path/figures.json** is written by experiments/colab-golden-path/figures.py.
 - **experiments/e4b/results/** is written by experiments/e4b/extract.py.
 - **experiments/kev-judge-finetune/results/summary.json** is written by experiments/kev-judge-finetune/summarise.py.
@@ -109,9 +112,9 @@ These are candidates from names and call order, not a judgement.
 - **experiments/natural-errors/data/baselines_p1.json** is written by experiments/natural-errors/baselines_p1.py.
 - **experiments/natural-errors/data/corrections.json** is written by experiments/natural-errors/build_corrections.py.
 - **experiments/natural-errors/data/split.json** is written once by experiments/natural-errors/make_split.py when absent.
-- **experiments/ollama-cuda-backend/** is written by experiments/ollama-cuda-backend/diag_test-v4-draft.py, except experiments/ollama-cuda-backend/diag_test-v4-draft.py, which it reads and people write.
-- **experiments/ollama-cuda-backend/diag/** is written by experiments/ollama-cuda-backend/diag/diag_test.py (a test), except experiments/ollama-cuda-backend/diag/diag_test.FROZEN.sha256 and experiments/ollama-cuda-backend/diag/diag_test.py, which it reads and people write.
-- **experiments/verifier-gold/crossfamily/** is written by experiments/verifier-gold/crossfamily/run_labeller.py.
+- **experiments/ollama-cuda-backend/** holds files written by experiments/ollama-cuda-backend/diag_test-v4-draft.py, except experiments/ollama-cuda-backend/diag_test-v4-draft.py, which it reads and people write.
+- **experiments/ollama-cuda-backend/diag/** holds files written by experiments/ollama-cuda-backend/diag/diag_test.py (a test), except experiments/ollama-cuda-backend/diag/diag_test.FROZEN.sha256 and experiments/ollama-cuda-backend/diag/diag_test.py, which it reads and people write.
+- **experiments/verifier-gold/crossfamily/** holds files written by experiments/verifier-gold/crossfamily/run_labeller.py.
 - **experiments/verifier-gold/crossfamily/blind_in.json** is written by experiments/verifier-gold/crossfamily/make_sample.py.
 - **experiments/verifier-gold/crossfamily/blind_key.json** is written by experiments/verifier-gold/crossfamily/make_sample.py.
 - **experiments/verifier-gold/crossfamily/sample.jsonl** is written by experiments/verifier-gold/crossfamily/make_sample.py.
@@ -122,7 +125,7 @@ These are candidates from names and call order, not a judgement.
 
 ## Hand-authored
 
-People write .claude/, .github/, catalogs/, datapacks/ and docs/; 25 writes with paths built at run time may land here.
+People write .claude/, .github/, catalogs/, datapacks/ and docs/; 24 writes with paths built at run time may land here.
 
 ## Where to start
 
@@ -133,12 +136,12 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 ## What this map cannot see
 
 - 12 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 9 more.
-- 25 writes and 49 reads use paths built at run time and are not named here.
+- 24 writes and 36 reads use paths built at run time and are not named here.
 - 7 writes go to places this repository does not track, so they are not listed as generated.
-- 57 writes and 133 reads go to a path their caller passes, not to this repository.
+- 58 writes and 141 reads go to a path their caller passes, not to this repository.
 - 12 reads go to the directory the command is run in (README.md, SECURITY.md, entries and 3 more places), not to this repository.
-- 1 read goes to the directory the command is run in or a path its caller passes, not to this repository.
-- 1 read goes to the home directory (.claude/), not to this repository.
+- 2 reads go to the directory the command is run in or a path their caller passes, not to this repository.
+- 2 reads go to the home directory (.claude/), not to this repository.
 - 4 files belong to no part: scripts/colab/collect_windows.py, scripts/colab/probe.py, scripts/colab/rates.sh and 1 more.
 - Statistics confidence is low: fewer than 25 source files reach 10 revisions in the window.
 

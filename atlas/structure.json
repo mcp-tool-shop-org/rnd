@@ -32,7 +32,7 @@
       "externals": 0,
       "files": [
         {
-          "hash": "ba04fddfb1506b47e504bfc4edff5562d4ac4a2cf53f834ca22bfcd2e82360b7",
+          "hash": "95a2e1822cafed30014b55432de0a85b872ebc6203bd7a53640f9bf1583f93a2",
           "path": ".github/workflows/ci.yml"
         },
         {
@@ -44,7 +44,7 @@
           "path": ".github/workflows/pages.yml"
         },
         {
-          "hash": "913923a9830d9bb24e420a069ab7d9333cd9c5ce381a067d65f512fe60633364",
+          "hash": "eb48f4596ba7964fce7ccf143feb73368f466c51f01d869e930c49f8fcb57080",
           "path": ".github/workflows/release.yml"
         }
       ],
@@ -71,7 +71,7 @@
           "path": "catalogs/nvidia-skills/README.md"
         },
         {
-          "hash": "08ea84babc37a2a766118dfe1f2dd16ec7042012ee8c9e17a709312392170268",
+          "hash": "a44c3abbee977207dbeee041f62c3c89570adc4654dcd905c778f6bc8b627472",
           "path": "catalogs/nvidia-skills/catalog.json"
         },
         {
@@ -221,7 +221,7 @@
           "path": "docs/standards.md"
         },
         {
-          "hash": "eeaed3b53df0234966ff92ee7d9f6ab73354697e2ec30ee779f576ade87fdf76",
+          "hash": "b3fd9b975044b61a9f40644619cbe8edaf3e524f4b74d28d972007060eee8030",
           "path": "docs/watchlist.json"
         }
       ],
@@ -492,7 +492,7 @@
           "path": "entries/2026/2026-10-13-nemotron-lightning-needs-its-context-set-for-claude-code.md"
         },
         {
-          "hash": "6c24fc16e8eb4b736cb13a52e033c7f10a6b55f415a9688026976ef3c6a06eb1",
+          "hash": "24954b309a822c1de424587d5631313e881871438cbe4ad0ea6b6c436d49a86f",
           "path": "entries/2026/2026-10-13-nvidia-nemo-relay-tracing-agent-harnesses-claude-code-includ.md"
         },
         {
@@ -516,6 +516,22 @@
           "path": "entries/2026/2026-10-20-xrpl-agentic-payments-x402-the-ai-starter-kit-and-mpp.md"
         },
         {
+          "hash": "1f412b319e98ecb052537b8fb1d8ab750fe6de610938622f6e2c420977c11d3d",
+          "path": "entries/2026/2026-11-01-liquid-ai-lfm3-small-long-context-models-in-ollama.md"
+        },
+        {
+          "hash": "7583b94f91b9d45591762a4153a1a839ad1792384a8bdc1b95fb38e69e8f493f",
+          "path": "entries/2026/2026-11-01-pytorch-2-15-0.md"
+        },
+        {
+          "hash": "d5ac5c7fd7ed5fb5ad7406f62cf8dbffff6e335e6d6c20779b125b70189f171e",
+          "path": "entries/2026/2026-11-03-measured-2026-11-03-five-judges-timed-on-an-a100-and-the-s2-.md"
+        },
+        {
+          "hash": "42ff73f6aa41da57bda1cc7fa18864c4adb3b45e601bc4eeb47a195298f3ca65",
+          "path": "entries/2026/2026-11-10-robot-rig-whea-records-at-boot-and-driver-install.md"
+        },
+        {
           "hash": "284503f06d3f2f6017174af3540a70e10b7b1326bdda33eb283fe1b5c2b7804d",
           "path": "entries/2026/embeddinggemma-2.md"
         },
@@ -529,13 +545,13 @@
       ],
       "importConfidence": "full",
       "name": "entries",
-      "origin": "generated",
+      "origin": "mixed",
       "role": "docs",
       "testedBy": 0,
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 23,
+      "dynamicReads": 18,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
       "dynamicWrites": 13,
@@ -5318,14 +5334,14 @@
       "origin": "mixed",
       "outsidePlaces": [
         {
-          "reads": 51,
+          "reads": 52,
           "where": [
             "caller"
           ],
           "writes": 13
         },
         {
-          "reads": 1,
+          "reads": 2,
           "where": [
             "caller",
             "cwd"
@@ -5333,14 +5349,14 @@
           "writes": 0
         },
         {
-          "reads": 1,
+          "reads": 2,
           "where": [
             "home:.claude/"
           ],
           "writes": 0
         }
       ],
-      "outsideReads": 53,
+      "outsideReads": 56,
       "outsideWrites": 13,
       "role": "code",
       "testRunners": [
@@ -5494,11 +5510,11 @@
       "externals": 0,
       "files": [
         {
-          "hash": "613919758a93dfe4eeee4499c61f0af1c8b1058405abaccd82ad1c9ed84490c4",
+          "hash": "f58b1475de3bca6ad92289e8c481d64f0e3564d75e66e9c88503602f01bfefde",
           "path": "licences/README.md"
         },
         {
-          "hash": "f15d3bd69c6f2ce174ba680b09965e4e633c7b94291b794eb640a744858b3dd7",
+          "hash": "f7f06a1a0d556b7a735e1af4ac7e80e72f4c2fb116a2717bbcfc30e0b2e9802d",
           "path": "licences/registry.json"
         },
         {
@@ -5561,10 +5577,10 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 22,
+      "dynamicReads": 17,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
-      "dynamicWrites": 12,
+      "dynamicWrites": 11,
       "entryPoints": [
         "mcptoolshop_rnd/cli.py"
       ],
@@ -5572,7 +5588,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "2687876802bed018f650f06096723c77972dca3dfc624592cffdd4437c0c3eaf",
+          "hash": "aa7ff7c3695ab65d766e6017d4163414a9652f1e9133c263151ba24dbc94bb35",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -8299,11 +8315,11 @@
       "origin": "authored",
       "outsidePlaces": [
         {
-          "reads": 65,
+          "reads": 70,
           "where": [
             "caller"
           ],
-          "writes": 26
+          "writes": 27
         },
         {
           "reads": 2,
@@ -8348,8 +8364,8 @@
           "writes": 0
         }
       ],
-      "outsideReads": 77,
-      "outsideWrites": 26,
+      "outsideReads": 82,
+      "outsideWrites": 27,
       "role": "code",
       "testRunners": [
         "unittest"
@@ -8438,7 +8454,7 @@
           "path": ".polyglot-terms.json"
         },
         {
-          "hash": "e4c42a1089b21354bd71b307ff0ad4b412b975ec468f224508ac6aa4a21ef3dc",
+          "hash": "d6eae53eb386829a70e2b930d8b759f110bcac6aa2caeb3628360dfbeab98aec",
           "path": "CHANGELOG.md"
         },
         {
@@ -8525,7 +8541,7 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 4,
+      "dynamicReads": 1,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
       "dynamicWrites": 0,
@@ -8533,7 +8549,7 @@
       "externals": 0,
       "files": [
         {
-          "hash": "b1502054e0f14e412bb1ca9b586543b58e92e7ea7eb8b9368c44051d53883244",
+          "hash": "eb5cb81e88a4333f09803883ef4f5d3b528cf7ef7065e34352800f2049a77343",
           "path": "site/astro.config.mjs"
         },
         {
@@ -8559,6 +8575,14 @@
         {
           "hash": "632dfead0cbc95cb68b0b07721ed359c3e6ab206846e460212bc6ee23527305e",
           "path": "site/public/charts/calibration-reasoning.svg"
+        },
+        {
+          "hash": "a9e524951dfe60af87eb37bddec9660b873fd6244c9d00b484ae1cfee005b1ef",
+          "path": "site/public/charts/colab-golden-path-eight-steps.png"
+        },
+        {
+          "hash": "c4aed5576548c2afc252279f8c95a8767e81eb8ad7048edafb5a1f7739de1194",
+          "path": "site/public/charts/colab-golden-path-eight-steps.svg"
         },
         {
           "hash": "e044293d60e6fd771231588f6c8548fd85be4975477ad9464fa2e9942484af05",
@@ -8769,6 +8793,174 @@
           "path": "site/public/charts/issue-30-lab-pilot-map.svg"
         },
         {
+          "hash": "9d1cd58b609a57d98f659c5af5a91c22802f059157671bf3444212caedd67572",
+          "path": "site/public/charts/issue-31-ladder-prefill.png"
+        },
+        {
+          "hash": "afb290bff9c4ecdfad4d9f57451f6a3003a5ac3b8c9f112ac5a20f1234b2849a",
+          "path": "site/public/charts/issue-31-ladder-prefill.svg"
+        },
+        {
+          "hash": "04f2bd10d38963d1001c30f8ab1b17e9a18e2977c33ee03984743f3172c8ff5f",
+          "path": "site/public/charts/issue-34-bimanual-window.png"
+        },
+        {
+          "hash": "d2563cee8ddb9f01d2e489c74f3679d2cbed3e6032fdfe1a66a7a1a2cc6f3aac",
+          "path": "site/public/charts/issue-34-bimanual-window.svg"
+        },
+        {
+          "hash": "0272a0cf650e9f8fcd2f0d5c0756efcabac2a0d2f2c8f407e4564f2ad06797f8",
+          "path": "site/public/charts/issue-34-certification-repair.png"
+        },
+        {
+          "hash": "14f3f402cf98c4f4aa08bed705f73a9a74784db2371a476c22e61293a771cf25",
+          "path": "site/public/charts/issue-34-certification-repair.svg"
+        },
+        {
+          "hash": "e8feb2f56290fe8e96b724bef4afe45d1b4c8529981eb3e046539996ff8f1522",
+          "path": "site/public/charts/issue-34-super-shrunk-comparison.png"
+        },
+        {
+          "hash": "4f4caecf11104326824447f5e129afb4b55d21390373896edd7aaef5258a79f0",
+          "path": "site/public/charts/issue-34-super-shrunk-comparison.svg"
+        },
+        {
+          "hash": "fa7103e1439e3b19d9591330c7a8dc6ed5721378b6ac1d6190af8ffca94aa3b9",
+          "path": "site/public/charts/issue-34-tool-count-abstention.png"
+        },
+        {
+          "hash": "36116ac87119c990a19bc734e9368d49a04201f1069529338defbe09b16c4ccb",
+          "path": "site/public/charts/issue-34-tool-count-abstention.svg"
+        },
+        {
+          "hash": "bfaedba0ef50bef140fdf2bb954e37f4a894b4ae3076244864d3ca80183ba0fc",
+          "path": "site/public/charts/issue-35-tool-count-abstention-v2.png"
+        },
+        {
+          "hash": "4ff76a82f0e03114f706a6f6780bb9903a268e28fa81fcc0555e0a15a4b2b280",
+          "path": "site/public/charts/issue-35-tool-count-abstention-v2.svg"
+        },
+        {
+          "hash": "3a8a8dadda846a0dd5f070713b645e1a565ed5fba13cac7ddc05326ec66ece36",
+          "path": "site/public/charts/issue-38-heartbeat-lesson.png"
+        },
+        {
+          "hash": "9091e40f98949636d63b8a542a2ba9ad2c51b8bd973db9b180d771d70da7343c",
+          "path": "site/public/charts/issue-38-heartbeat-lesson.svg"
+        },
+        {
+          "hash": "7de0d009df5e6b84ef70008c5df2486284d19ce9eb62152e8be0598aad5e7f76",
+          "path": "site/public/charts/issue-38-judge-call-times.png"
+        },
+        {
+          "hash": "a9879d31812ccfc5cdeffefe7a761008a12b74e73b8ae579ead4e0fc01295eba",
+          "path": "site/public/charts/issue-38-judge-call-times.svg"
+        },
+        {
+          "hash": "1ae990d7c98f4a87e728e0059efdd0e45c8d3a0dedc214f735ffe38f7015a9c8",
+          "path": "site/public/charts/issue-38-s2-phase-memory.png"
+        },
+        {
+          "hash": "27d420736950184ef083ff2100fbd0457f5431cb604676891604e6f0ec1edfe2",
+          "path": "site/public/charts/issue-38-s2-phase-memory.svg"
+        },
+        {
+          "hash": "e67410f6bc3b26fbc3177ba52eee5e19c9c66318628e5f89b381ccd6592088bf",
+          "path": "site/public/charts/issue-38-zero-variance-groups.png"
+        },
+        {
+          "hash": "71099b6a381f0752f4d53c6a28ee5aa8bb2eafee4c99a57c63a24a4209e92976",
+          "path": "site/public/charts/issue-38-zero-variance-groups.svg"
+        },
+        {
+          "hash": "47849b81a0b1dd81dd8d3529ead58a0c99b442e96fd9bd0f53999f56518660c6",
+          "path": "site/public/charts/issue-39-scene-to-item.png"
+        },
+        {
+          "hash": "6797aeae3f1a3fb4ac232233e022cabc32c7913449e06f6102783c99c749f5cc",
+          "path": "site/public/charts/issue-39-scene-to-item.svg"
+        },
+        {
+          "hash": "84416a7dd480dd4440ac3b15a528e64610f4a9a5d323a43a7c605f0a12bae386",
+          "path": "site/public/charts/issue-39-stage-comparisons.png"
+        },
+        {
+          "hash": "17120df4b4bafc5d2ae918bf00430611a3258555cd1779a4f1aad8bae2f8fbc4",
+          "path": "site/public/charts/issue-39-stage-comparisons.svg"
+        },
+        {
+          "hash": "be6f891ea0614ec45adf24913156301d6dd81641402124e80f137b2fcd652fea",
+          "path": "site/public/charts/issue-40-guard-counted-cache.png"
+        },
+        {
+          "hash": "59a0aa60acc770dec58026253c9d5de125cf6a7bef33568e77cdb6870abfdcb5",
+          "path": "site/public/charts/issue-40-guard-counted-cache.svg"
+        },
+        {
+          "hash": "befb39e031eb31e9f7b83057ad3d4b7c0dc866a06446d018647a8470932d24cf",
+          "path": "site/public/charts/issue-40-guard-diagram.jpg"
+        },
+        {
+          "hash": "4ca23ff58ef946f07444f604a99d02371d43d5b4cbbf5683df8483ff6b6f1b31",
+          "path": "site/public/charts/issue-40-locks-diagram.jpg"
+        },
+        {
+          "hash": "387aa8303865c5c7209794d15da8cf98e24e861239cd872cad199f66e8759020",
+          "path": "site/public/charts/issue-40-s2-seed42-truncation.png"
+        },
+        {
+          "hash": "d7ed2dc100f0b166b2d61f06f0a79a7775117dddc8dfdaa1986c8c4ffff9250a",
+          "path": "site/public/charts/issue-40-s2-seed42-truncation.svg"
+        },
+        {
+          "hash": "6928ef82e4ce7ed9ef820151494c62369a42a7c3a767098fdadae95de1454f0a",
+          "path": "site/public/charts/issue-42-exam-time.png"
+        },
+        {
+          "hash": "e9acecaf9141cd20f1ace203611f7359cadc19b69731395b784462db78a86546",
+          "path": "site/public/charts/issue-42-exam-time.svg"
+        },
+        {
+          "hash": "92ef44dfe02c858f1fa626e378f5837738f27d18f4c67cd3294b85614a3ccb16",
+          "path": "site/public/charts/issue-42-review-first.jpg"
+        },
+        {
+          "hash": "80e681541d21a6ed3d0a50071a2f1910b5467c2313022e8de19251b8ba087af2",
+          "path": "site/public/charts/issue-43-armature-e08-sticks.jpg"
+        },
+        {
+          "hash": "f67e0ba465220a5590ceb688db2f2d7895825558e714c8e5a5e828f4406ffb13",
+          "path": "site/public/charts/issue-43-armature-e12-settings.jpg"
+        },
+        {
+          "hash": "8ecd9237af54c2810157c6f21efede584cb54aeeab10cbd81559653f42bbaef4",
+          "path": "site/public/charts/issue-43-armature-pipeline.jpg"
+        },
+        {
+          "hash": "178edb55c1780a031960c977391603f1162efd5b06659d86184c1281a8fb6ffd",
+          "path": "site/public/charts/issue-43-geometry-not-brightness.png"
+        },
+        {
+          "hash": "42c09d33596846d196549365ca67b2f6908cac8bb3b588353e19c52a097cfc7f",
+          "path": "site/public/charts/issue-43-geometry-not-brightness.svg"
+        },
+        {
+          "hash": "c3f116dda62fa6ef7274b0d206fdca7e766cb38a1c22faaa31e4a6346c43a5af",
+          "path": "site/public/charts/issue-43-memory-ten-minutes.png"
+        },
+        {
+          "hash": "bc39c100e56b8256e2055dcaa7c64d4f4d41f91b9f7c90d753647b4f9e89790f",
+          "path": "site/public/charts/issue-43-memory-ten-minutes.svg"
+        },
+        {
+          "hash": "ed59da065c50480db31ae15c66ef182a5fa1d5bdf4f11ca4ce81a86086700f67",
+          "path": "site/public/charts/issue-43-stall-guard.jpg"
+        },
+        {
+          "hash": "e6b97be6e912bf78e7290be53f0688b431af3ba8d8a01913eac403a3769fda1d",
+          "path": "site/public/charts/issue-43-tpu.jpg"
+        },
+        {
           "hash": "f7527ae4d3ec14612ffea5b9fafd1f68c1bba4d89e99aae489192b50836155d3",
           "path": "site/public/charts/loop-repeats.png"
         },
@@ -8801,7 +8993,7 @@
           "path": "site/public/charts/pilot-thinking-budget.svg"
         },
         {
-          "hash": "fc2e893c29ad07184aaac1faa6d148a7d2ad445db7117a73de477af4f3e130aa",
+          "hash": "41012f3d508a6df4406bcdf1394231c3ec2682aaffaa093ea33cf8a00468ea4f",
           "path": "site/public/charts/png-manifest.json"
         },
         {
@@ -8865,26 +9057,41 @@
           "path": "site/public/rss-logo.png"
         },
         {
-          "entry": "chart_errors",
+          "entry": "main",
           "entryRule": 1,
           "exports": [
             "built",
             "chart_errors",
+            "draft_errors",
+            "is_draft",
+            "main",
+            "published_pages",
             "svg_digest"
           ],
           "failurePaths": [
             {
+              "in": "is_draft",
+              "kind": "raise",
+              "line": 87
+            },
+            {
+              "in": "main",
               "kind": "except",
-              "line": 84
+              "line": 119
+            },
+            {
+              "in": "main",
+              "kind": "except",
+              "line": 125
             }
           ],
-          "hash": "221eb480a67708d58daa751928979fb1128df2ec0bb83ac14e5237f9b6226bf7",
+          "hash": "1e507b9173e29cb6ee80675f112d7f7ea8bca42afb16bc5b8d72a306d3041630",
           "path": "site/scripts/check_feed.py",
           "sequences": [
             {
               "calls": [
                 {
-                  "line": 47,
+                  "line": 44,
                   "name": "read_bytes",
                   "target": null
                 }
@@ -8897,16 +9104,74 @@
             {
               "calls": [
                 {
-                  "line": 47,
+                  "line": 44,
                   "name": "read_bytes",
                   "target": null,
                   "via": "svg_digest"
                 }
               ],
               "exported": true,
-              "invokedAtTopLevel": true,
+              "invokedAtTopLevel": false,
               "isDefaultExport": false,
               "name": "chart_errors"
+            },
+            {
+              "calls": [
+                {
+                  "line": 77,
+                  "name": "read_text",
+                  "target": null
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "is_draft"
+            },
+            {
+              "calls": [
+                {
+                  "line": 93,
+                  "name": "glob",
+                  "target": null
+                },
+                {
+                  "line": 77,
+                  "name": "read_text",
+                  "target": null,
+                  "via": "is_draft"
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": false,
+              "isDefaultExport": false,
+              "name": "published_pages"
+            },
+            {
+              "calls": [
+                {
+                  "line": 44,
+                  "name": "read_bytes",
+                  "target": null,
+                  "via": "svg_digest"
+                },
+                {
+                  "line": 93,
+                  "name": "glob",
+                  "target": null,
+                  "via": "published_pages"
+                },
+                {
+                  "line": 77,
+                  "name": "read_text",
+                  "target": null,
+                  "via": "is_draft"
+                }
+              ],
+              "exported": true,
+              "invokedAtTopLevel": true,
+              "isDefaultExport": false,
+              "name": "main"
             }
           ]
         },
@@ -8972,12 +9237,12 @@
             {
               "in": "published_issues",
               "kind": "raise",
-              "line": 141
+              "line": 138
             },
             {
               "in": "published_issues",
               "kind": "raise",
-              "line": 143
+              "line": 145
             },
             {
               "in": "published_issues",
@@ -8987,32 +9252,27 @@
             {
               "in": "published_issues",
               "kind": "raise",
-              "line": 150
+              "line": 151
+            },
+            {
+              "in": "published_issues",
+              "kind": "raise",
+              "line": 154
             },
             {
               "in": "plan_version",
               "kind": "raise",
-              "line": 280
+              "line": 284
             },
             {
               "in": "npm_published",
               "kind": "raise",
-              "line": 353
+              "line": 357
             },
             {
               "in": "npm_published",
               "kind": "raise",
-              "line": 360
-            },
-            {
-              "in": "pypi_has",
-              "kind": "except",
-              "line": 474
-            },
-            {
-              "in": "pypi_has",
-              "kind": "raise",
-              "line": 477
+              "line": 364
             },
             {
               "in": "pypi_has",
@@ -9022,35 +9282,45 @@
             {
               "in": "pypi_has",
               "kind": "raise",
-              "line": 479
+              "line": 481
+            },
+            {
+              "in": "pypi_has",
+              "kind": "except",
+              "line": 482
+            },
+            {
+              "in": "pypi_has",
+              "kind": "raise",
+              "line": 483
             },
             {
               "in": "github_releases",
               "kind": "raise",
-              "line": 525
+              "line": 529
             },
             {
               "in": "github_releases",
               "kind": "raise",
-              "line": 536
+              "line": 540
             },
             {
               "in": "main",
               "kind": "raise",
-              "line": 573
+              "line": 577
             },
             {
               "in": "main",
               "kind": "raise",
-              "line": 579
+              "line": 583
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 602
+              "line": 606
             }
           ],
-          "hash": "e8f7cc60d2ab765111407a6df30485e03c0e2a28b1cd18f34178d04b49fd0455",
+          "hash": "b47afe14804711419addf050f21da04e5899463aae3ebb065b45a26b0d00af44",
           "path": "site/scripts/newsletter_publish.py",
           "sequences": [
             {
@@ -9106,7 +9376,7 @@
             "svg_sha256",
             "svg_size"
           ],
-          "hash": "0acd7de9d8e23e19678041d30d41423ba25f844248402972e7939cd60c2f44a9",
+          "hash": "49e584e948c40d337f0f47bfa6eeadda235eaccdf8f2733aac5e62fcecb8d78e",
           "path": "site/scripts/render_chart_pngs.py"
         },
         {
@@ -9114,7 +9384,7 @@
           "path": "site/src/assets/logo.png"
         },
         {
-          "hash": "c708fe421990e25cb0fe634722a7fc368c014c886d4b18f750e479dd2383e29f",
+          "hash": "128228944e2543e5818744a394c8a5717d6ba37095f614e766bed3f38afa55a8",
           "path": "site/src/components/Footer.astro"
         },
         {
@@ -9203,6 +9473,10 @@
           "path": "site/src/content/docs/handbook/architecture.md"
         },
         {
+          "hash": "171df29420468b2806c51e9e6288b5c57e83c42e3c5d2ce9d3b58474aef5f6d0",
+          "path": "site/src/content/docs/handbook/colab-golden-path.md"
+        },
+        {
           "hash": "1d7ff9910e9d8c9157cdfdfdd8865ee977011b9df7dca458f00e5b075c87548a",
           "path": "site/src/content/docs/handbook/data-layout.md"
         },
@@ -9235,11 +9509,11 @@
           "path": "site/src/content/docs/handbook/model-comparisons.md"
         },
         {
-          "hash": "3b4a9902ac60b14a8ede694ce2ac4be3343a6f1ddb6e06878d4972cf4d248b8a",
+          "hash": "c7716942b3db9f83d68730cc1d933e06093ed2322ef4fdb60193b00f539b6f4f",
           "path": "site/src/content/docs/handbook/newsletter-issues.md"
         },
         {
-          "hash": "bb79a4160f926bc188d9ecbd4bb21cf9140e2cb4df1e0ddef4de0fb40d1e98e0",
+          "hash": "5c17c63b0cf2c303ecde5d066b0871666a07b40ddf86fbd90b98ebad1bfa1390",
           "path": "site/src/content/docs/handbook/newsletter-visuals.md"
         },
         {
@@ -9255,7 +9529,7 @@
           "path": "site/src/content/docs/handbook/relevance-grading.md"
         },
         {
-          "hash": "f036c20b00cab2f630e534566a41b67e8021b0e6606d30541f2454a75f9ead52",
+          "hash": "91efcfce688a3d106792f95d3a546a1b2367becf13b6bf523fdfe996efcbfb39",
           "path": "site/src/content/docs/handbook/rented-gpu-windows.md"
         },
         {
@@ -9371,11 +9645,63 @@
           "path": "site/src/content/docs/newsletter/issue-29.md"
         },
         {
-          "hash": "e71b2fb7f935f842a085ab6471774e5fb0584c5120e9f32f41b668511fc8585c",
+          "hash": "9e77b4e411f5d1c5fdde629ffa80658af6cd3b54011c62e5c7af1d02bc7fd525",
           "path": "site/src/content/docs/newsletter/issue-30.md"
         },
         {
-          "hash": "6140c74208f37896402e83b3fe601574a32d534b2684b8042a132863b931c752",
+          "hash": "777f44babbc5ca774ec59015b7d122b36ea70bb78bd31bb1d981d52a350b2442",
+          "path": "site/src/content/docs/newsletter/issue-31.md"
+        },
+        {
+          "hash": "0a4b6281f4df8f62d0365a873af0937d6c93eb6e95a8f21ef3cdcd6b1295afd6",
+          "path": "site/src/content/docs/newsletter/issue-32.md"
+        },
+        {
+          "hash": "00f8ab27ee8bfbb853da67ae3798817445fd69b6e9828f0141796a826e901ab5",
+          "path": "site/src/content/docs/newsletter/issue-33.md"
+        },
+        {
+          "hash": "13d9fc501d5d0b24cf2e82e54d2310ab088e5e9d2f55f4148e098242839db6cc",
+          "path": "site/src/content/docs/newsletter/issue-34.md"
+        },
+        {
+          "hash": "436a0b3ee46ac93264a3a37840501295d84d083600de4ce1f16c89a18f943c97",
+          "path": "site/src/content/docs/newsletter/issue-35.md"
+        },
+        {
+          "hash": "e66419a57822919b917e860a5bd1c1c3603b46a9fa0f2a348577a3d233e6209b",
+          "path": "site/src/content/docs/newsletter/issue-36.md"
+        },
+        {
+          "hash": "b20afb9ed3eb7e938ac32e844d207ca934cbb3252cbd3ec64b9b847288430149",
+          "path": "site/src/content/docs/newsletter/issue-37.md"
+        },
+        {
+          "hash": "f5a1804ed2b30837edd3389437475b410633342e06e54bd73ad658f8dbaa9c9d",
+          "path": "site/src/content/docs/newsletter/issue-38.md"
+        },
+        {
+          "hash": "d16ab12f848b528b62af4e5fc6bba906d210a9435777bd257660b68283f4a633",
+          "path": "site/src/content/docs/newsletter/issue-39.md"
+        },
+        {
+          "hash": "6f09e39660c48dcf2fba95a77a441393b6cf134a8e776a652b23052472339c94",
+          "path": "site/src/content/docs/newsletter/issue-40.md"
+        },
+        {
+          "hash": "2324f20e2c9c082c016b0b417a342610a9b11ff599ed57c3761d9204fb97b947",
+          "path": "site/src/content/docs/newsletter/issue-41.md"
+        },
+        {
+          "hash": "1e68a0f201273b0c12f2419d94567a94ba29867454eefaa0b6241f4228448305",
+          "path": "site/src/content/docs/newsletter/issue-42.md"
+        },
+        {
+          "hash": "5c10ef9129f7451f6d5bfeee0e34919079330c351e9afd26e221dcc45955134d",
+          "path": "site/src/content/docs/newsletter/issue-43.md"
+        },
+        {
+          "hash": "6563c4947f0e6b4a36ab8753ac95349942d78750060b88a6b164635b1f28606b",
           "path": "site/src/content/docs/newsletter/subscribe.md"
         },
         {
@@ -9383,7 +9709,15 @@
           "path": "site/src/content/docs/watch/2026-10-13.md"
         },
         {
-          "hash": "58d293b133c814cf50bc6db2727e02479e812887a71d7b9c5c5d88d82aacb06e",
+          "hash": "b2378b9accead28daad1c0ead24610a0e9c9022f84829280070e43f0aa01093d",
+          "path": "site/src/content/docs/watch/2026-10-26.md"
+        },
+        {
+          "hash": "c3f1d6b536daa3bc318abc6ad12b768dd33fc8e25c4cf70c4f765c4c38c01495",
+          "path": "site/src/content/docs/watch/2026-11-02.md"
+        },
+        {
+          "hash": "07ffc06e87cec95bdb2429d0f766420b43b73b796aeeb922dc0b1890c1895b04",
           "importOrder": [
             "site/src/styles/global.css",
             "site/src/site-config.ts"
@@ -9401,7 +9735,7 @@
             "emailImage",
             "issuePubDate"
           ],
-          "hash": "b49266b0d5022eaafe264ebc54e46f55e4d4c8a3d92d4480cba2149d0f187e7e",
+          "hash": "d70adf04dd2afc5e40e4bcca5c43806487540aa86abfa8a64f8a60a05f2fe080",
           "importsFiles": [
             "site/public/charts/png-manifest.json"
           ],
@@ -9417,7 +9751,7 @@
           "path": "site/src/styles/global.css"
         },
         {
-          "hash": "5d2852dfc85d4902bb015aeefd6f4fc4336b7c0a75ad6eed1387d991ca7d2107",
+          "hash": "7982e3f825d24804321f13271cec7139d3bc549ee137fccdf2ed9856798f99d7",
           "path": "site/src/styles/starlight-custom.css"
         },
         {
@@ -9433,20 +9767,20 @@
       "origin": "mixed",
       "outsidePlaces": [
         {
-          "reads": 17,
+          "reads": 19,
           "where": [
             "caller"
           ],
           "writes": 17
         }
       ],
-      "outsideReads": 17,
+      "outsideReads": 19,
       "outsideWrites": 17,
       "role": "docs",
       "testRunners": [
         "unittest"
       ],
-      "testedBy": 1,
+      "testedBy": 2,
       "unresolvedSites": 0
     },
     {
@@ -9657,6 +9991,14 @@
           "testFramework": "unittest"
         },
         {
+          "hash": "991177f746a24541ce3eb1dd0c5c75e68869090573602b09711d6b202503f6de",
+          "importsFiles": [
+            "site/scripts/check_feed.py"
+          ],
+          "path": "tests/test_check_feed_drafts.py",
+          "testFramework": "unittest"
+        },
+        {
           "exports": [
             "make_library",
             "make_readouts"
@@ -9805,7 +10147,7 @@
           "exports": [
             "write"
           ],
-          "hash": "09bac2213d0fcacbef6c0565c572ea2dd0f5897d6fda4e0b00b7ec12730a3c53",
+          "hash": "46b93d6e51a343600613df6a58492df1e045c24a80eb8f42a77d34cc12657d4e",
           "importsFiles": [
             "site/scripts/newsletter_publish.py"
           ],
@@ -9816,7 +10158,7 @@
           "exports": [
             "run_py"
           ],
-          "hash": "ce5c68d2762b73f144e3421165118dc173113c224b5d04df57ec4baef760411c",
+          "hash": "93fa611d86661b17bbf0c48635cc66163c7148009cfcd9a757ac7a7a092f845e",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "rnd/__init__.py"
@@ -10001,7 +10343,7 @@
           "programs": [
             "python"
           ],
-          "step": "Chart PNGs current (email edition)"
+          "step": "Chart PNGs current (feed copies)"
         },
         {
           "dir": "",
@@ -10119,7 +10461,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 28
+          "files": 29
         },
         {
           "boundary": "experiments",
@@ -10187,6 +10529,13 @@
         },
         {
           "by": "site/scripts/check_feed.py",
+          "call": "glob",
+          "confidence": "ast",
+          "pattern": "site/public/charts/*.svg",
+          "target": "site/public/charts"
+        },
+        {
+          "by": "site/scripts/check_feed.py",
           "call": "read_bytes",
           "confidence": "ast",
           "target": "site/public/charts"
@@ -10200,6 +10549,19 @@
         {
           "by": "site/scripts/render_chart_pngs.py",
           "call": "glob",
+          "confidence": "ast",
+          "target": "site/public/charts"
+        },
+        {
+          "by": "site/scripts/render_chart_pngs.py",
+          "call": "glob",
+          "confidence": "ast",
+          "pattern": "site/public/charts/*.svg",
+          "target": "site/public/charts"
+        },
+        {
+          "by": "site/scripts/render_chart_pngs.py",
+          "call": "read_bytes",
           "confidence": "ast",
           "target": "site/public/charts"
         },
@@ -10275,7 +10637,7 @@
         },
         {
           "coverage": true,
-          "files": 28,
+          "files": 29,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -11087,10 +11449,10 @@
       "to": "site"
     }
   ],
-  "engine": "1.24.0",
+  "engine": "1.26.0",
   "generatedFrom": {
-    "commit": "50b42f15451f139070088a1158eb56265995550d",
-    "tracked": 1152
+    "commit": "a68ab3c766a5f865c8e1597606f1394a281e4233",
+    "tracked": 1217
   },
   "landings": [
     {
@@ -11432,7 +11794,8 @@
           "by": "mcptoolshop_rnd/cli.py",
           "confidence": "ast"
         }
-      ]
+      ],
+      "writesInto": true
     },
     {
       "readers": [
@@ -11574,6 +11937,16 @@
       ]
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [
         {
           "by": "experiments/agent-ab-harness/run.py",
@@ -11623,6 +11996,16 @@
       "writers": []
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [],
       "target": "experiments/charts",
       "writers": [
@@ -11630,9 +12013,20 @@
           "by": "experiments/charts/make_charts.py",
           "confidence": "ast"
         }
-      ]
+      ],
+      "writesInto": true
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [],
       "target": "experiments/charts/manifest.json",
       "writers": [
@@ -11742,6 +12136,27 @@
       "writers": []
     },
     {
+      "readers": [
+        {
+          "by": "experiments/colab-golden-path/figures.py",
+          "call": "read_text",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/colab-golden-path/data/windows/window*/gate.jsonl",
+      "writers": []
+    },
+    {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [],
       "target": "experiments/colab-golden-path/figures.json",
       "writers": [
@@ -11828,6 +12243,16 @@
       "writers": []
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [],
       "target": "experiments/data-designer/runs/phase0-smoke.json",
       "tracked": false,
@@ -11904,11 +12329,27 @@
       "writers": []
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [
         {
           "by": "experiments/charts/make_charts.py",
           "call": "glob",
           "confidence": "ast"
+        },
+        {
+          "by": "experiments/charts/make_charts.py",
+          "call": "glob",
+          "confidence": "ast",
+          "pattern": "experiments/e4b/results/block-*.json"
         }
       ],
       "target": "experiments/e4b/results",
@@ -11954,6 +12395,16 @@
       "writers": []
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [
         {
           "by": "experiments/charts/make_charts.py",
@@ -12061,6 +12512,16 @@
       "writers": []
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [
         {
           "by": "experiments/kev-judge-finetune/stage_hf.py",
@@ -12140,6 +12601,16 @@
       "writers": []
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [
         {
           "by": "experiments/natural-errors/baselines_p1.py",
@@ -12192,6 +12663,16 @@
       "writers": []
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [],
       "target": "experiments/natural-errors/data/baselines_p1.json",
       "writers": [
@@ -12202,6 +12683,16 @@
       ]
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [],
       "target": "experiments/natural-errors/data/corrections.json",
       "writers": [
@@ -12351,6 +12842,16 @@
       "writers": []
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [
         {
           "by": "experiments/natural-errors/build.py",
@@ -12433,6 +12934,24 @@
       "writers": []
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/check_grades.py",
+          "pattern": "*.jsonl"
+        },
+        {
+          "by": "experiments/embeddinggemma-2/harness/grading.py",
+          "pattern": "*.jsonl"
+        },
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [
         {
           "by": "experiments/ollama-cuda-backend/diag_test-v4-draft.py",
@@ -12446,7 +12965,8 @@
           "by": "experiments/ollama-cuda-backend/diag_test-v4-draft.py",
           "confidence": "ast"
         }
-      ]
+      ],
+      "writesInto": true
     },
     {
       "readers": [
@@ -12477,7 +12997,8 @@
             "main"
           ]
         }
-      ]
+      ],
+      "writesInto": true
     },
     {
       "readers": [
@@ -12491,6 +13012,16 @@
       "writers": []
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [],
       "target": "experiments/ollama-cuda-backend/diag-analysis.json",
       "tracked": false,
@@ -12513,6 +13044,16 @@
       "writers": []
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/check_grades.py",
+          "pattern": "*.jsonl"
+        },
+        {
+          "by": "experiments/embeddinggemma-2/harness/grading.py",
+          "pattern": "*.jsonl"
+        }
+      ],
       "readers": [
         {
           "by": "experiments/ollama-cuda-backend/diag_test-v4-draft.py",
@@ -12912,8 +13453,24 @@
     {
       "readers": [
         {
+          "by": "experiments/charts/make_charts.py",
+          "call": "read_text",
+          "confidence": "ast"
+        }
+      ],
+      "target": "experiments/verifier-gold/calibration/results/2026-10-09-chain/cal-*-tune/metrics.json",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "experiments/verifier-gold/calibration/error_lean_posthoc.py",
           "call": "glob.glob",
+          "confidence": "ast"
+        },
+        {
+          "by": "experiments/verifier-gold/calibration/error_lean_posthoc.py",
+          "call": "open",
           "confidence": "ast"
         }
       ],
@@ -13545,6 +14102,24 @@
       "writers": []
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/check_grades.py",
+          "pattern": "*.jsonl"
+        },
+        {
+          "by": "experiments/embeddinggemma-2/harness/grading.py",
+          "pattern": "*.jsonl"
+        },
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [
         {
           "by": "experiments/verifier-gold/crossfamily/run_labeller.py",
@@ -13558,9 +14133,20 @@
           "by": "experiments/verifier-gold/crossfamily/run_labeller.py",
           "confidence": "ast"
         }
-      ]
+      ],
+      "writesInto": true
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [
         {
           "by": "docs/layout.json",
@@ -13582,6 +14168,16 @@
       ]
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [
         {
           "by": "docs/layout.json",
@@ -13609,6 +14205,16 @@
       "writers": []
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/check_grades.py",
+          "pattern": "*.jsonl"
+        },
+        {
+          "by": "experiments/embeddinggemma-2/harness/grading.py",
+          "pattern": "*.jsonl"
+        }
+      ],
       "readers": [],
       "target": "experiments/verifier-gold/crossfamily/sample.jsonl",
       "writers": [
@@ -14251,6 +14857,16 @@
       ]
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [
         {
           "by": "licences/snapshot.py",
@@ -14366,11 +14982,27 @@
       "writers": []
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [
         {
           "by": "site/scripts/check_feed.py",
           "call": "glob",
           "confidence": "ast"
+        },
+        {
+          "by": "site/scripts/check_feed.py",
+          "call": "glob",
+          "confidence": "ast",
+          "pattern": "site/public/charts/*.svg"
         },
         {
           "by": "site/scripts/check_feed.py",
@@ -14381,6 +15013,12 @@
           "by": "site/scripts/render_chart_pngs.py",
           "call": "glob",
           "confidence": "ast"
+        },
+        {
+          "by": "site/scripts/render_chart_pngs.py",
+          "call": "glob",
+          "confidence": "ast",
+          "pattern": "site/public/charts/*.svg"
         }
       ],
       "target": "site/public/charts",
@@ -14390,6 +15028,27 @@
           "confidence": "ast"
         }
       ]
+    },
+    {
+      "readers": [
+        {
+          "by": "site/scripts/check_feed.py",
+          "call": "read_bytes",
+          "confidence": "ast"
+        },
+        {
+          "by": "site/scripts/render_chart_pngs.py",
+          "call": "read_bytes",
+          "confidence": "ast"
+        },
+        {
+          "by": "site/scripts/render_chart_pngs.py",
+          "call": "read_text",
+          "confidence": "ast"
+        }
+      ],
+      "target": "site/public/charts/*.svg",
+      "writers": []
     },
     {
       "readers": [
@@ -14433,6 +15092,28 @@
         }
       ],
       "target": "site/public/charts/calibration-reasoning.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/colab-golden-path-eight-steps.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/colab-golden-path-eight-steps.svg",
       "writers": []
     },
     {
@@ -15015,6 +15696,380 @@
           "confidence": "config"
         }
       ],
+      "target": "site/public/charts/issue-31-ladder-prefill.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-31-ladder-prefill.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-34-bimanual-window.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-34-bimanual-window.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-34-certification-repair.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-34-certification-repair.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-34-super-shrunk-comparison.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-34-super-shrunk-comparison.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-34-tool-count-abstention.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-34-tool-count-abstention.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-35-tool-count-abstention-v2.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-35-tool-count-abstention-v2.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-38-heartbeat-lesson.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-38-heartbeat-lesson.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-38-judge-call-times.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-38-judge-call-times.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-38-s2-phase-memory.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-38-s2-phase-memory.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-38-zero-variance-groups.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-38-zero-variance-groups.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-39-scene-to-item.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-39-scene-to-item.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-39-stage-comparisons.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-39-stage-comparisons.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-40-guard-counted-cache.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-40-guard-counted-cache.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-40-s2-seed42-truncation.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-40-s2-seed42-truncation.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-42-exam-time.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-42-exam-time.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-43-geometry-not-brightness.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-43-geometry-not-brightness.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-43-memory-ten-minutes.png",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
+      "target": "site/public/charts/issue-43-memory-ten-minutes.svg",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
+          "by": "site/public/charts/png-manifest.json",
+          "call": "configuration",
+          "confidence": "config"
+        }
+      ],
       "target": "site/public/charts/loop-repeats.png",
       "writers": []
     },
@@ -15096,6 +16151,16 @@
       "writers": []
     },
     {
+      "mayReaders": [
+        {
+          "by": "experiments/embeddinggemma-2/harness/score.py",
+          "pattern": "*.json"
+        },
+        {
+          "by": "mcptoolshop_rnd/store.py",
+          "pattern": "*.json"
+        }
+      ],
       "readers": [
         {
           "by": "site/scripts/check_feed.py",
@@ -15213,6 +16278,18 @@
     {
       "readers": [
         {
+          "by": "tests/test_check_feed_drafts.py",
+          "call": "literal",
+          "confidence": "ast",
+          "fromTests": true
+        }
+      ],
+      "target": "site/scripts/check_feed.py",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "tests/test_newsletter_publish.py",
           "call": "literal",
           "confidence": "ast",
@@ -15287,7 +16364,7 @@
         },
         {
           "by": "site/scripts/check_feed.py",
-          "call": "glob",
+          "call": "literal",
           "confidence": "ast"
         },
         {
@@ -15479,7 +16556,7 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 61,
+  "testFiles": 62,
   "testsNotRun": [
     "experiments/cuda-graphs/test_graphed_heads.py",
     "experiments/data-designer/tests/test_lockdown.py",

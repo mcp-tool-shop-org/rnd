@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.67] - 2026-11-11
+
+- licences: Gemma Terms of Use (TranslateGemma, also polyglot's translategemma), Qwen-Image and its ComfyUI repack, TAESD, and the Qwen2.5-0.5B test GGUF
+
 ## [1.1.23.1.65] - 2026-11-10
 
 - licences: Ripple-65B-Preview (model card) and AtomicChat's GGUF quantization added under apache-2.0, for a rented-GPU first look (planned, not run)

@@ -5,13 +5,13 @@ issue: 43
 date: 2026-11-11
 draft: true
 highlights:
-  - "<strong>A warning line, read before it was acted on.</strong> The card-memory warning in aspire-si's seed 46 crossed its line at one save. The peak, the floor and the trainer's own memory said nothing had grown. The two-minute reading had caught one half of a cycle, so we made it ten minutes long."
-  - "<strong>Blender 5.3 arrived, and armature didn't notice.</strong> Every one of armature's 3,166 Blender tests passes on 5.3, and the ones that start real Blender pass on both graphics backends."
+  - "<strong>A warning line, read before it was acted on.</strong> The card-memory warning in aspire-si's seed 46 crossed its line at one save. The peak, the floor and the trainer's own memory said nothing had grown, so the run went on. Why the middle reading moved is still open, so the readings now run ten minutes, time-stamped."
+  - "<strong>Blender 5.3 arrived, and armature didn't notice.</strong> 3,166 of armature's Blender tests pass on 5.3 (18 skipped), and the ones that start real Blender pass on both graphics backends."
   - "<strong>Finished, then stopped.</strong> A style-training run on a rented 96 GB card reached all 500 steps and saved both checkpoints. Then its own stall guard fired on a phase it wasn't meant to watch."
 ---
 
-A night of readings that needed a second look. A memory warning crossed its line and turned out to be measuring when
-we sampled, not how much was used. A guard stopped a training run that had already finished. And one model's licence
+A night of readings that needed a second look. A memory warning crossed its line, and our first explanation for it didn't
+survive a fact-check. A guard stopped a training run that had already finished. And one model's licence
 turned on a version number.
 
 **In this issue:**
@@ -47,14 +47,17 @@ from one save to the next. Neither had happened. The lowest reading was in line 
 about 170 MiB of chunk 1's highest. The trainer's own measure of the memory it had allocated peaked at 18,466 MiB in this
 chunk, lower than the 19,677 MiB peak in chunk 3. Nothing else was on the card.
 
-**What the reading was really measuring.** Each training update has two halves: the model writes answers (the memory-
-heavy half), then it learns from them. Two minutes of readings is shorter than one update, so a series lands mostly in
-one half or the other. This one landed in the heavy half, and its middle reading moved up with it. A second short series
-a few minutes later did the same: 10,529, 15,781 and 22,943 MiB.
+**What we don't know yet.** Our first explanation was that two minutes of readings is shorter than one training
+update, so a series lands mostly in one part of it. Our fact-check pushed back: nothing tied a reading to a part of
+the update, so that was a guess. Each update spends about 259 seconds having the model write answers and about 28
+seconds learning from them, so even a long series is mostly the first part. And the trainer's own peak, 18,466 MiB,
+sat above every reading in that first series, which fits the peak falling in the short learning part that two minutes
+can miss. A second short series a few minutes later read 10,529, 15,781 and 22,943 MiB.
 
-**What we changed.** From the next save, the series runs for ten minutes (120 readings), long enough to cover both
-halves. The rule for stopping is now written down in advance: hold the run at a save only if the ten-minute middle
-reading is over the line **and** the lowest or highest reading has risen past what the earlier chunks showed.
+**What we changed.** From the next save, the series runs for ten minutes (120 readings), with every reading
+time-stamped so it can be lined up with the run's own record of when each part of the update started. The rule for
+stopping is written down in advance: hold the run at a save only if the ten-minute middle reading is over the line
+**and** the lowest or highest reading has risen past what the earlier chunks showed.
 
 <!-- PLACEHOLDER: the step-180 ten-minute series result goes here before publish. -->
 
@@ -132,8 +135,8 @@ forbidden one.
 
 armature already refuses a paid run whose workflow loads a known non-commercial model, but its list named only two pose
 models. A change in review adds the larger Depth Anything models, InsightFace, and the SMPL body models. Its first draft
-blocked DA3-Large-1.1 along with 1.0; the review caught it, and the fix ties each entry to a repository and revision
-rather than a name.
+also blocked DA3-Large-1.1 along with 1.0. That is in review now, and the plan is to tie each entry to a repository and
+revision rather than a name.
 
 ## The daily watch
 

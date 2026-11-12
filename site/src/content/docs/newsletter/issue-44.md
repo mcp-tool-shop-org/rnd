@@ -47,7 +47,6 @@ measured stays sealed), and the translation checks that caught dataset-desk 0.3.
 3. [Keeping the studio current](#keeping-the-studio-current)
 4. [Seeds 45 to 47 finished: how the runs stayed healthy](#seeds-45-to-47-finished-how-the-runs-stayed-healthy)
 5. [dataset-desk 0.3.0, and why the translations needed hand fixes](#dataset-desk-030-and-why-the-translations-needed-hand-fixes)
-6. [The daily watch](#the-daily-watch)
 
 ## Moving the GPU work to Colab, in parallel lanes
 
@@ -62,7 +61,7 @@ So today the studio decided to move GPU work toward Colab wherever it fits, and 
 that has to stay local (the sealed training series, exact local comparisons), and to make the Colab path solid enough that
 more can go there. <!-- src: MEM/feedback-colab-first-path.md:11-16 -->
 
-<!-- DIAGRAM: the anatomy of a Colab window as a ladder of rungs: written request (launcher, checksum, card, cap, wall clock) -> free dry run -> open the VM -> rate gate reads the live price and can stop the window -> CPU stub rung on the real install path -> paid rung -> copy results back, stop own session, check it is gone -> run record and ledger row. Source: LEDGER:385,395-404; SKILL:52-98 -->
+![Diagram titled "Getting one job onto a Colab GPU". Seven boxes, left to right. Two grey boxes under the bracket "free or nearly free": "Free dry run" (prices the window, checks every file hash, no Colab call) and "CPU stub rung" (runs every install step on a cheap CPU machine first). Five teal boxes under the bracket "paid: units are spent here": "Open the GPU" (refuses if the rate is above the ceiling or the card shape is wrong), "Upload in 32 MiB parts" (single uploads fail between 64 and 96 MB), "Run the job" (a wall clock and a units cap stop it, whatever happens), "Fetch and verify" (every file checked by its hash), "Stop and record" (session stopped, cost written to the ledger). A red dashed arrow from "Run the job" to "Stop and record": "trip: cap or wall reached, salvage what arrived, then stop".](/rnd/charts/issue-44-colab-window.jpg)
 
 ### How a window works
 
@@ -377,7 +376,7 @@ With seed 47 finished, the safe window the research describes opened, and three 
 
 - **uv** 0.13.4 → **0.13.7**. <!-- src: FRESH:8; live check `uv version` on 2026-11-12 reads 0.13.7 -->
 - **Node.js** 22.22.3 → **26.13.1**. <!-- src: FRESH:11; live check `node version` on 2026-11-12 reads v26.13.1 -->
-- **Python** 3.10.11 → **3.15.2** as the rig's default interpreter. <!-- UNSOURCED: that 3.15.2 is now the rig default comes from the request for this issue; the Python launcher lists CPython 3.15.2 installed (uv-managed), but the shell we checked from still resolved python to 3.10.11 --> Training and Colab environments are pinned
+- **Python** 3.10.11 → **3.15.2** as the rig's default interpreter. <!-- src: user PATH changed 2026-11-12 ~12:20 ET so uv's 3.15.2 comes before 3.10 (backup E:/AI/Publisher/data/path-user-backup-2026-11-12.txt); 3.10 stays installed --> Training and Colab environments are pinned
   separately and do not follow the default: the Colab launchers, for example, pin exact interpreter builds. <!-- src: LEDGER:377,381 (cpython 3.14.9 and 3.12.15 pinned by build) -->
 
 **Ollama** (0.40.15, with 0.40.16 out), **llama.cpp** (b11433, with b12292 out) and ComfyUI (0.23.0, with 0.45.0 out) are
@@ -497,14 +496,12 @@ What went wrong, by kind:
   safely, and the tool kept the English and flagged it. In dataset-desk, 41 prose lines came back in English at first.
   A segment is then retried on its own, and in dataset-desk three of eight retries recovered a translation. <!-- src: TL-desk.log:554-597 -->
 - **Numbers written in local style.** French writes 4,096 as "4 096", and the number check, which counts digits, saw the
-  pieces and reported "0 096 18 20 4 7" where it expected "0 18 20 4096 7". French also writes decimals with a comma (the
-  shipped French README has "18,7" in its table). In Japanese, a first draft turned the "700" of "700M" into a "7". A
+  pieces and reported "0 096 18 20 4 7" where it expected "0 18 20 4096 7". In Japanese, a first draft turned the "700" of "700M" into a "7". A
   translation can be right and still fail a check that counts characters. <!-- src: TL-rerun.log:397-407 (fr and ja lines); DD sibling E:/AI/_worktrees/backpropagate-1.9.0/README.fr.md:418 (18,7) -->
-  <!-- UNSOURCED: decimal commas as a cause of a lost span: the request for this issue names them; the log shows only the spaced thousands (4 096), and the checker splits numbers at punctuation -->
 - **Links dropped.** The gate caught Japanese text where a handbook link vanished entirely, and French and Italian
   sentences where two different links had been replaced by one of the issue-tracker links. <!-- src: TL-rerun.log:398,403-404,406-407 -->
 - **Full-width parentheses.** The shipped Japanese README wraps that same "700M MAU" clause in full-width parentheses (
-  "（" and "）"), the way Japanese and Chinese are normally written. <!-- src: E:/AI/_worktrees/backpropagate-1.9.0/README.ja.md:417 --> <!-- UNSOURCED: that full-width parentheses cause links to be dropped comes from the request for this issue; the logs and pins show the characters but not the mechanism -->
+  "（" and "）"), the way Japanese and Chinese are normally written. <!-- src: E:/AI/_worktrees/backpropagate-1.9.0/README.ja.md:417 --> <!-- src: backpropagate .polyglot-pins.json, zh and ja pins (a full-width ")" right after "[...](...)" broke the link; the hand fix restored the ASCII paren) -->
 
 **The pins.** When a segment will not translate cleanly, a person fixes it by hand and **pins** it: the correction is
 saved in `.polyglot-pins.json` against a fingerprint of the English sentence and the language, so a rerun reuses
@@ -526,7 +523,3 @@ family. It names two scorers, CometKiwi and XCOMET, as non-commercial and to avo
 
 The fix belongs in polyglot itself, so that placeholders survive a batch: a ticket for it is open, ahead of more
 hand-fixing. <!-- src: BOARD:36 (polyglot code-span ticket) --> The Colab translation lane in article 1 will run the same tool, so the same gates apply there. <!-- src: LEDGER:403 -->
-
-## The daily watch
-
-<!-- DAILY WATCH SLOT: the watch run picks up where issue 43's ended (2026-11-11 13:35 UTC) and runs to the morning of 12 November; the entries (version, date, link, description from the release notes, licence status) come from the watch output, which was not among the sources for this draft. Left empty on purpose. -->

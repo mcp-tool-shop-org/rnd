@@ -5,7 +5,7 @@ issue: 44
 date: 2026-11-12
 draft: true
 highlights:
-  - "<strong>Colab, in parallel lanes.</strong> We started moving GPU work off our own RTX 5090 and onto rented Colab cards. Ten windows ran today for 1.081 compute units in total. The most useful ones were the cheap ones that failed."
+  - "<strong>Colab, in parallel lanes.</strong> We started moving GPU work off our own RTX 5090 and onto rented Colab cards. Sixteen windows ran today for 3.910 compute units in total. Most cost almost nothing, and the failures taught us the most."
   - "<strong>A BIOS update quieted the hardware log.</strong> Windows had logged 915 hardware-error records in five weeks. After HP's BIOS update, four full training chunks ran with none."
   - "<strong>Three seeds finished, guards quiet.</strong> Zero guard trips in 57 guard windows, two single-window canary crossings, and a memory reading that looked like a leak and was a change in what we were sampling."
 ---
@@ -34,7 +34,7 @@ TL = E:/AI/_worktrees/translations-2026-11-12 (the base log; -rerun and -desk ar
 
 The lead is the biggest change of the day: we have started moving GPU work off the one graphics card in our own rig and
 onto rented cards on Google Colab, several jobs at once. We read back through the ledger of Colab windows to write it,
-and today's ten windows, most of which cost almost nothing, taught us more than the expensive ones did.
+and today's sixteen windows, most of which cost almost nothing, taught us more than the dearer ones did.
 
 Around it: the firmware update that ended five weeks of hardware-error records on our RTX 5090 machine, the tool we
 built to tell us when our software is behind, the end of the three training seeds (run health only, since what they
@@ -95,7 +95,7 @@ refused; a fourth on a different card type is fine. <!-- src: MEM/colab-parallel
 windows only across separate studies, one card type per study, one request at a time inside each window, so that any run can
 be replayed exactly. <!-- src: MEM/colab-parallel-windows.md:12-18 --> The reason for care is that rented machines
 disappear: in the first week of measuring, 4 of 53 GPU sessions were lost, and the losses leaned toward the times when several
-sessions were live at once. <!-- src: MEM/colab-parallel-windows.md:33 -->
+sessions were live at once (3 of 12 sessions lost with three or four live, against 1 of 34 with one or two), though the sample could not separate that from which zone the machines ran in. <!-- src: MEM/colab-parallel-windows.md:33 -->
 
 ### The lanes, and where each stands
 
@@ -104,8 +104,8 @@ sessions were live at once. <!-- src: MEM/colab-parallel-windows.md:33 -->
 | **Render** | Runs ComfyUI (an image-generation program built from connected nodes) with no window, rendering the images our canon briefs call for | The CPU stub passed on 6 November, rendering two fixture images with matching hashes in 83 seconds. <!-- src: LEDGER:379 --> The GPU rung needs a new `--render` mode in the launcher, which is out for build. <!-- src: PLAN:1-12; BOARD:32 --> |
 | **Canon writing** | A large open model drafts the written canon and prompts for a game, for a human to approve | Not built. The model we would use carries a usage policy we treat as binding, which means recording which words the model wrote. <!-- src: DESIGN:303; BOARD:32 --> |
 | **LoRA training** | Trains a LoRA (a small add-on that teaches an image model one visual style) | Done on a G4 up to a full 500-step run: the first complete rung, 20 steps, took 495 seconds; the second reached 500 of 500 steps and was stopped by a guard that was wrong (see issue 43); the third, with that guard fixed, passed in 1,298 seconds for 3.624 units. <!-- src: LEDGER:390-392 --> The first paid run on real data waits on one more fix. <!-- src: BOARD:32,36 --> |
-| **Captions** | A vision model drafts descriptions for images flagged as poorly described, for a person to review | The launcher is out for build; the plan is a stub first, then an L4 card at a cap of 3.0 units. <!-- src: BOARD:32 --> (More on the tool in article 5.) |
-| **Translation** | Translates README files with TranslateGemma 27B | The stub passed and the first paid run on a G4 ran to the end, today. Details below. <!-- src: LEDGER:399,403 --> |
+| **Captions** | A vision model drafts descriptions for images flagged as poorly described, for a person to review | The CPU stub passed today on a fixture project of two made-up records, one of them flagged: it drafted one caption (for the flagged record, none for the clean one) in 133 seconds for 0.0096 units, with no image bytes in the results bundle. The paid run is next, on an L4 card at a cap of 3.0 units. <!-- src: LEDGER:406 (BL 110); BOARD:32 (L4, cap 3.0) --> (More on the tool in article 5.) |
+| **Translation** | Translates README files with TranslateGemma 27B | The stub passed, the first paid run on a G4 ran to the end, and a first real batch across parallel windows followed, with mixed results. Details below. <!-- src: LEDGER:399,403,407-410 --> |
 
 Two other jobs share the pool: judge-model windows for the rdlab study, and a probe for Ripple-65B Preview,
 an open, Apache-2.0 coding model of 64.78 billion parameters that is too big for our own card. <!-- src: LEDGER:393-394,397-398,404; MEM/feedback-size-new-models-for-colab-runpod.md:13 -->
@@ -117,7 +117,7 @@ cheap rung.
 
 ### Today, window by window
 
-Ten windows ran between 4:16 and 11:50 a.m. Eastern. Together they cost **1.081 units**. <!-- src: derived from LEDGER:395-404 (sum of booked column; pot 164.728 to 165.809) -->
+Sixteen windows ran between 4:16 a.m. and 12:53 p.m. Eastern. Together they cost **3.910 units**. <!-- src: derived from LEDGER:395-410 (sum of booked column 3.9096; pot 164.728 to 168.638) -->
 
 | # | Time (ET) | Job | Card | What happened | Units |
 |---|---|---|---|---|---|
@@ -131,16 +131,22 @@ Ten windows ran between 4:16 and 11:50 a.m. Eastern. Together they cost **1.081 
 | 106 | 10:14 | translation pilot, try 5 | A100-40 | no capacity | 0 |
 | 107 | 10:18 | translation pilot | G4 | ran to the end in 315 seconds | 0.879 |
 | 108 | 11:50 | Ripple library probe | L4 | refused: shape mismatch | 0.007 |
+| 109 | 12:13 | Ripple library probe, resent | L4 | answered: no CUDA 12 libraries on the GPU image | 0.118 |
+| 110 | 12:29 | captions stub, fixture project | CPU | passed | 0.010 |
+| 111 | 12:38 | translation batch, window 1 | G4 | refused by the rate gate | 0.075 |
+| 112 | 12:38 | translation batch, window 2 | G4 | refused by the rate gate | 0.131 |
+| 113 | 12:38 | translation batch, window 3 | G4 | brand README done; stall guard tripped on the next | 2.219 |
+| 114 | 12:52 | translation batch, window 1b | G4 | stopped by us during the model download | 0.276 |
 
-<!-- src: LEDGER:395-404 (every row; times converted from UTC at -5 h) -->
+<!-- src: LEDGER:395-410 (every row; times converted from UTC at -5 h) -->
 
-<!-- CHART: the ten windows of 12 November (BL 99 to 108) as bars of booked units, with a marker for no-capacity refusals (4, cost 0) and the single paid window (BL 107, 0.879) standing against the rest; source: LEDGER:395-404 -->
+<!-- CHART: the sixteen windows of 12 November (BL 99 to 114) as bars of booked units, with a marker for no-capacity refusals (4, cost 0) and the three largest windows labelled (BL 113, 2.219; BL 107, 0.879; BL 114, 0.276); source: LEDGER:395-410 -->
 
 #### How big a file can we send? (and what that decides)
 
 The first Ripple stub tried to upload its 216 MB program to the Colab machine last night and got an HTTP 500 error about
 nine seconds in. <!-- src: LEDGER:394 --> Rather than guess, we measured. A probe uploaded files of 16, 32 and 64 MB, and all three arrived with
-matching checksums at about 1.8 MB a second. At 96 MB the server answered **HTTP 400** in two seconds. The probe stops at its first
+matching checksums at about 1.5 to 1.8 MB a second. At 96 MB the server answered **HTTP 400** in two seconds. The probe stops at its first
 failure, so 128 to 200 MB were never tried; the single-upload ceiling sits somewhere between 64 and 96 MB.
 <!-- src: PROBE:56 (64 MB, 35.2 s), PROBE:62-66 (96 MB, http_status 400); LEDGER:398 -->
 
@@ -150,8 +156,8 @@ All ten input files matched. <!-- src: LEDGER:397 --> Downloads were never the p
 intact, at 16.3 to 18.2 MB a second, and found no ceiling. <!-- src: PROBE:82-142 (rates computed from size over seconds) -->
 
 The practical rule falls out of the speeds. Pushing a model's weights up from our rig at 1.8 MB a second would take
-hours, so the Colab machine fetches them itself from Hugging Face: the 57.7 GB Qwen-Image model arrived in about 165
-seconds, at 343 MB a second. <!-- src: LEDGER:390,391 (57.7 GB in 168 s and 163 s) --> Small files go up; big ones come down from the source.
+hours, so the Colab machine fetches them itself from Hugging Face: the 57.7 GB Qwen-Image model arrived in 163 to 168
+seconds (343 MB a second in the first run). <!-- src: LEDGER:390,391 (57.7 GB in 168 s and 163 s; 343 MB/s at 168 s) --> Small files go up; big ones come down from the source.
 
 <!-- CHART: upload sizes 16, 32, 64 MB passing and 96 MB failing with HTTP 400, beside download sizes 256 to 2,048 MB all passing at 16.3 to 18.2 MB/s; source: PROBE (uploads[], downloads[]) -->
 
@@ -166,18 +172,18 @@ that question, and a GPU has to. The cheapest GPU is an L4, so a probe on an L4 
 
 It was **refused at the shape check**, within eleven seconds, for 0.007 units. The launcher had assumed an L4 comes in a
 high-memory "shape", and the session reported the standard one. Our own earlier measurement, from 9 November, already said an L4
-has exactly one shape, the standard one; the request had not been checked against it. <!-- src: LEDGER:404 --> The check did its job: a refusal that early is a far cheaper way to find a wrong assumption than an upload. The library question is still unanswered, and
-the fix to the launcher's table of shapes is owed.
+has exactly one shape, the standard one; the request had not been checked against it. <!-- src: LEDGER:404 --> The check did its job: a refusal that early is a far cheaper way to find a wrong assumption than an upload.
+
+With the table of shapes fixed, the probe was resent at 12:13 p.m. and answered the question in 219 seconds for 0.118 units. The shape matched, the program went up in seven parts with no retries, and the image's record says its CUDA is version 13.0 only, with driver 580.82.07: no CUDA 12 folder, and `libcudart.so.12`, `libcublas.so.12` and `libcublasLt.so.12` do not resolve. So the Ripple program, which is linked against CUDA 12 libraries, cannot run on the Colab GPU image as it stands. It needs a build against CUDA 13.0 (the driver tops out there) or its libraries shipped beside it. <!-- src: LEDGER:405 (BL 109) -->
 
 #### The A100-40 would not open; the G4 always did
 
 The translation pilot was meant for an A100 with 40 GB. Of five attempts today, four were refused with "Service
-Unavailable": Colab had none of that card free. <!-- src: LEDGER:395,396,400-402 (BL 99, 104, 105, 106 refused; BL 100 opened) --> A refusal costs nothing, and there is a
-rule to match: three tries, at least half an hour apart, then stop and report. Across the last week the ledger counts the
+Unavailable": Colab had none of that card free. <!-- src: LEDGER:395,396,400-402 (BL 99, 104, 105, 106 refused; BL 100 opened) --> A refusal costs nothing, and the approved set had a shape to match: three tries, at least half an hour apart, then stop and report. Since 6 November the ledger counts the
 A100-40 opening twice and refusing about a dozen times, while the G4 had opened six times out of six before today's
 pilot, and opened again for it. <!-- src: LEDGER:402 -->
 
-That fits what Colab's own client documents. Its code distinguishes **HTTP 412**, a permanent "too many assignments"
+That fits what Colab's own client documents. Its documentation distinguishes **HTTP 412**, a permanent "too many assignments"
 that should never be retried, from 502, 503 and 504, which mean the pool is out of that card and are retried three times
 with 10, 20 and 40 seconds of backoff. All our refusals today were the second kind. <!-- src: H18:40 --> The G4 costs more an hour (10.05
 units, against 6.73 for an A100-40) but opening at all beats a cheaper card that does not. <!-- src: LEDGER:403 (10.05/h), LEDGER:393,384 (6.73/h A100-40) -->
@@ -188,8 +194,19 @@ On the G4 the pilot ran for **315 seconds, about five minutes, for 0.879 units**
 0.867). It produced seven translated READMEs, a bundle with matching checksums (8 of 8), and no stray carriage-return
 characters. <!-- src: LEDGER:403 --> The 27-billion-parameter translation model sat entirely on the card, using 28,461 MiB. <!-- src: LEDGER:403 (translategemma:27b 100% on GPU, 28,461 MiB) -->
 Two things are open. We told the model to use a 4,096-token window, but its own report says 131,072, with a
-49,152 MiB memory cache, so the setting did not do what we thought. And the translations have not yet been compared with
+49,152 MiB memory cache, so the setting did not do what we thought (the batch below points at the cause). And the translations have not yet been compared with
 what the 5090 produces. <!-- src: LEDGER:403 (PINNED_TRANSLATOR_CONTEXT 4096 vs fit_probe 131,072; acceptance 4 open) -->
+
+#### The translation batch: three windows at once, and a stall
+
+Later in the day the translation lane ran its first real batch: several repositories' READMEs, split across parallel G4 windows. It did not go to plan, and the ledger shows how.
+
+- **Two windows were refused by our own rate gate.** Window 1 (27 seconds, 0.075 units) and window 2 (about 47 seconds, 0.131) each read the *account's* hourly rate (30.15 with three G4s open, 20.1 with two) against the 10.5 limit meant for one window. The gate had read its baseline before the neighbouring windows opened. That is a defect in our launcher, not in Colab, and a fix (polyglot #80) is named in the ledger. <!-- src: LEDGER:407,408 -->
+- **One window finished a README, then stalled.** Window 3 ran alone at 10.05 units an hour. It translated the brand README into all seven languages (no lost spans, nothing left untranslated, 284 seconds). Then the 300-second stall guard tripped, with no output on the French translation of the comfy-headless README (21.7 KB). The window ran 795 seconds for 2.219 units, and five READMEs were not reached. <!-- src: LEDGER:409 -->
+- **The likely cause is the same open item as the pilot's.** Ollama ran one slot at a 131,072-token context (a 49 GB cache) although 4,096 was requested. R&D's diagnosis, which the ledger records as the lead suspect, is that the context setting was never enforced. Two fixes are owed: enforce the context setting, and have the launcher report progress for each segment so the guard can tell slow from stuck. <!-- src: LEDGER:403,409 -->
+- **The fourth window was stopped by us.** Window 1b (99 seconds, 0.276 units) was stopped during the model download, because the next README, offrig's at 52.9 KB, would very likely have hit the same stall. A second window, 2b, was held and never launched. <!-- src: LEDGER:410 -->
+
+The four windows of the batch cost 2.701 units between them, and found two defects and an unenforced setting. <!-- src: derived from LEDGER:407-410 (0.075 + 0.131 + 2.219 + 0.276) -->
 
 #### The lesson: a first paid rung without a stub
 
@@ -233,7 +250,7 @@ claims against their sources. The checked results below are the ones that held; 
   FUSE mount can be ten times slower. <!-- src: H18:17 -->
 - **Model collapse in render-to-LoRA loops.** Training on your own model's renders narrows its range. The advice from the
   research (Gerstgrasser et al., 2024, arXiv 2404.01413, on accumulating real data beside synthetic; Drayson et al., EMNLP
-  2025) is to keep human-made images as anchors, let synthetic images fill only named gaps, and keep the written canon
+  2025, on text drifting when a model feeds on its own text) is to keep human-made images as anchors, let synthetic images fill only named gaps, and keep the written canon
   fixed while validating model-written additions against a schema. <!-- src: H18:27,29 -->
 - **Licences.** All nine licence claims the report relied on matched the sources. The ruled-out names were confirmed too:
   one FLUX.2 klein size under a non-commercial licence, one background-removal model under CC BY-NC 4.0 (BiRefNet, MIT,
@@ -246,10 +263,10 @@ claims against their sources. The checked results below are the ones that held; 
 
 ### What is next
 
-The render lane's launcher, the LoRA lane's last fix and the caption lane's launcher are all in review; the paid runs wait
-on them. The unit balance expires in about ten days, and we are holding Colab's command-line client at its current
-version until a 25 November audit, because 0.8.0 removes one subcommand and changes what `--timeout` means. <!-- src: BOARD:31,32,36; FRESH:16 --> Total
-spent from the backlog pot so far: 165.809 of 400 units. <!-- src: LEDGER:404 -->
+The render lane's launcher change and the LoRA lane's last fix are still out for build, and the captions lane has its stub behind it; the paid runs wait
+on them, and the translation lane waits on the two fixes above. The unit balance expires in about ten days, and we are holding Colab's command-line client at its current
+version until a 25 November audit, because 0.8.0 makes `--timeout` an idle limit. <!-- src: BOARD:31,32,36; FRESH:16 --> Total
+spent from the backlog pot so far: 168.638 of 400 units. <!-- src: LEDGER:410 -->
 
 ## A BIOS update, and the hardware errors that stopped
 
@@ -262,14 +279,14 @@ Windows keeps a hardware-error log (WHEA, Windows Hardware Error Architecture). 
 going back to 5 October: 911 of **Event 17**, a report about the PCI Express connection (the wiring between the card
 and the motherboard), and four of **Event 1**, a different record. <!-- src: WHEA:13,22-23,94 -->
 
-Every one of the 911 Event 17 records was identical in content: an "Unsupported Request", reported as an advisory
-non-fatal error, with a "header log overflow" flag. Each followed either a boot (within 22 seconds) or an
+Every one of the 911 Event 17 records carried the same status values: an "Unsupported Request", reported as an advisory
+non-fatal error, with a "header log overflow" flag (two functions of the card reported them). Each followed either a boot (within 22 seconds) or an
 installation of the display driver (within 5), and none fell inside a training window we checked. <!-- src: WHEA:25-41,68-70 --> Each driver install was followed by a burst of exactly 37. <!-- src: WHEA:41 -->
 
 Read plainly, an Unsupported Request is the card answering "there is nothing here" to a question aimed at a spot
-where no device exists. The records fit something scanning the card's bus for devices that are not there. Nothing in
-them was a link error. That reading came from an analysis we then checked against the records; the status bits and
-timing fit it, and nothing in the log contradicts it. <!-- src: WHEA:101 (unverified status as written there) -->
+where no device exists. The records fit something scanning the card's bus for devices that are not there. None of the
+status bits is a link error. That reading came from an AI analysis of the records, not from a measurement; the status bits and
+timing fit it and nothing in the log contradicts it, but we have it down as unverified, and which component does the scanning is not identified. <!-- src: WHEA:101 (unverified status as written there) -->
 
 The four Event 1 records were different. They were the firmware handing Windows a crash log from the processor
 platform at four boots in late October. Comparing them byte by byte showed **one capture replayed four times**: of
@@ -280,17 +297,15 @@ platform at four boots in late October. Comparing them byte by byte showed **one
 ### What the research found
 
 We sent the records to a Deep Research report and then checked what it said against the machine and the sources.
-Several things it said turned out wrong or unsupported: three of the six web pages we opened were misdescribed (an
-issue number, a date, a release number), one article number could not be found, and the claim that a Windows
+Several things it said turned out wrong or unsupported: three of the six web pages we opened were misdescribed (two issue reports and a release number), one article number could not be found, and the claim that a Windows
 build ended the cluster was not supported. <!-- src: H11:18,20,22,24,53 --> The useful results were that Fast Startup is off on the machine, so it did not explain the
-boot records, and that the Event 1 records are not about the graphics card at all. <!-- src: H11:19,34 --> Its advice on that day was to change no
-setting on the rig, which we did not. <!-- src: H11:59 --> We filed written reports with NVIDIA, Microsoft and HP on 10 November. <!-- src: E:/AI/Publisher/docs/drafts/vendor/filing-texts.md:44; E:/AI/Publisher/docs/board-history/BOARD-2026-11-11-1055.md:19 -->
+boot records, and that the Event 1 records are not about the graphics card at all. <!-- src: H11:19,34 --> Our reading on that day was to change no
+setting on the rig, and we did not. <!-- src: H11:59 --> We filed written reports with NVIDIA, Microsoft and HP on 10 November. <!-- src: E:/AI/Publisher/docs/drafts/vendor/filing-texts.md:44; E:/AI/Publisher/docs/board-history/BOARD-2026-11-11-1055.md:19 -->
 
 ### The fix
 
 Reading HP's release notes for the machine's BIOS, we found that version F.21 lists a fix for Event ID 17 warnings
-that led to a black screen and the GPU fans running at full speed. Over 30 days the machine had logged 743 of them,
-all on the 5090, 37 to 74 for every boot. (That is a shorter count than the 915 above, read over a different span.) <!-- src: S2:391-394 (T15a) -->
+that led to a black screen and the GPU fans running at full speed. A separate count from the event log, over 30 days, found 743 Event 17 records, all on the 5090, 37 to 74 for every boot. (That is a different count from the 915 above, taken over a different span and by a different method; our own burst count of the 915-record log found bursts from 2 to 39 records, so "per boot" is a rough figure.) <!-- src: S2:391-394 (T15a) -->
 
 On 11 November, between seed 47's first and second training chunks, the BIOS was updated from F.20 to F.22 (F.22 is dated
 27 May 2026). <!-- src: S2:388-389 (F.22 dated 05/27/2026); RIG:26 --> The flash had a side effect we are glad we have a guard for: the card's power limit,
@@ -299,7 +314,7 @@ until it was re-applied by hand. <!-- src: S2:398-400 -->
 
 ### The evidence
 
-- **Before:** 37 to 74 Event 17 records at each boot, and none inside any training window. <!-- src: RIG:26; WHEA:68-70 -->
+- **Before:** Event 17 records at boots and driver installs (37 to 74 per boot on the separate 30-day count, 37 after each driver install in the 915-record log), and none inside any of the six training windows we checked. <!-- src: RIG:26; WHEA:68-70 -->
 - **After:** the log since the first F.22 boot at 16:25 held zero WHEA records when chunk 2 ended, and each of the four
   full training chunks on F.22 (chunks 2 to 5, about three hours each) closed with zero Event 17 and zero Event 1.
   <!-- src: RIG:21,23,24,26 -->
@@ -308,9 +323,8 @@ until it was re-applied by hand. <!-- src: S2:398-400 -->
 <!-- CHART: Event 17 records per boot before F.22 (range 37 to 74, source RIG:26 and S2:391-394) against 0 after at each of chunks 2 to 5 (source RIG:21,23,24,26); training windows at 0 both sides (RIG, WHEA:68-70); label it as counts of one machine -->
 
 Caveats we would put on any claim: one machine; "four clean chunks" is four observations, and only the chunk-2 reading
-covered a whole boot; and the log we first read went back only five weeks, with older records already
-rolled out of it. We are not saying the card was ever unhealthy, or that the BIOS is the only thing that changed. We
-are saying a record that appeared at every boot for at least five weeks has not appeared since. The note to the three
+covered a whole boot; and the log we read starts on 5 October, so we cannot say what came before. We are not saying the card was ever unhealthy, or that the BIOS is the only thing that changed. We
+are saying a record that followed boots and driver installs for at least five weeks has not appeared since. The note to the three
 vendors, that F.22 fixed it, is the next step. <!-- src: RIG:26 ("one chunk is one observation"); BOARD:39 (waiting on the vendor note); E:/AI/Publisher/docs/board-history/BOARD-2026-11-12-0800.md:26 -->
 
 ## Keeping the studio current
@@ -376,15 +390,15 @@ With seed 47 finished, the safe window the research describes opened, and three 
 
 - **uv** 0.13.4 → **0.13.7**. <!-- src: FRESH:8; live check `uv version` on 2026-11-12 reads 0.13.7 -->
 - **Node.js** 22.22.3 → **26.13.1**. <!-- src: FRESH:11; live check `node version` on 2026-11-12 reads v26.13.1 -->
-- **Python** 3.10.11 → **3.15.2** as the rig's default interpreter. <!-- src: user PATH changed 2026-11-12 ~12:20 ET so uv's 3.15.2 comes before 3.10 (backup E:/AI/Publisher/data/path-user-backup-2026-11-12.txt); 3.10 stays installed --> Training and Colab environments are pinned
-  separately and do not follow the default: the Colab launchers, for example, pin exact interpreter builds. <!-- src: LEDGER:377,381 (cpython 3.14.9 and 3.12.15 pinned by build) -->
+- **Python** 3.10.11 → **3.15.2** as the rig's default interpreter. <!-- src: user PATH changed 2026-11-12 so .local\bin (uv's 3.15.2) comes before Python310 (old PATH backed up at E:/AI/Publisher/data/path-user-backup-2026-11-12.txt; live check: .local\bin\python.exe reports 3.15.2); 3.10 stays installed --> Training and Colab environments are pinned
+  separately and do not follow the default: the Colab launchers, for example, pin exact interpreter builds. <!-- src: LEDGER:379,381 (cpython 3.14.9 and 3.12.15 pinned by build) -->
 
 **Ollama** (0.40.15, with 0.40.16 out), **llama.cpp** (b11433, with b12292 out) and ComfyUI (0.23.0, with 0.45.0 out) are
-not yet moved; Ollama and llama.cpp are still being built and gated, for the reason the watcher is built around. The last time we changed the model server, on 9 November, we did it only after a gate: a
+not yet moved; Ollama and llama.cpp are next, each to go through a gate first, for the reason the watcher is built around. The last time we changed the model server, on 9 November, we did it only after a gate: a
 first try with 50 prompts failed because the stock server gave different answers on 45 of them depending on its state, and
 the second, with the cache off, 401 teacher-forced items and a comparison of probability distributions, passed (mean KL
 divergence 0.0005, speed 0.987 of the old one). <!-- src: RIG:11,15 --> Both new builds go through the same gate, and the
-board flags a CUDA FP8 change in llama.cpp's notes to read first. <!-- src: BOARD:27 -->
+board flags the FP8 items in llama.cpp's notes to read first. <!-- src: BOARD:27 -->
 
 <!-- DIAGRAM: the adoption pipeline: watcher detects every upstream release -> cooldown (7 days; security fixes skip it) -> equivalence gate (e.g. the Ollama gate: 401 items, KL, speed) -> promote at an experiment boundary; sealed series never move mid-series; every pin carries owner, reason, expiry. Source: H17:15-20; RIG:11,15 -->
 
@@ -438,8 +452,8 @@ their union, which is **184 items**. Step 0 took about 141.5 minutes, so the rat
 No seed ran a confirmation pass, so no decision rested on the wrong figure. <!-- src: S2:18-19 --> It matters for planning: the next study wants these
 passes batched, and a batched speed-up has to be measured against 46 seconds, not 27. <!-- src: S2:24-25; BOARD:14 (item D: batched greedy passes) -->
 
-Run totals in brief: all five of seed 47's chunks were valid, as were seed 46's; the card peaked between 23,270 and 23,588 MiB per
-chunk, and its highest power readings were 494 to 496 watts against a 480-watt cap; and the BIOS change in article 2 fell between seed 47's first and second chunks and is recorded in
+Run totals in brief: all five of seed 47's chunks were valid, as were seed 46's; on seed 47 the card peaked between 23,270 and 23,588 MiB per
+chunk, and its highest power readings, chunk by chunk from chunk 2 to 5, were 493.8 to 496.4 watts against a 480-watt cap; and the BIOS change in article 2 fell between seed 47's first and second chunks and is recorded in
 the run notes so any difference between chunks can be read against it. <!-- src: S2:565-571; E:/AI/Publisher/docs/board-history/BOARD-2026-11-12-0800.md:38 (seed 46 all chunks VALID); S2:386-397 -->
 
 ## dataset-desk 0.3.0, and why the translations needed hand fixes
@@ -455,7 +469,7 @@ automatically. <!-- src: DD/README.md:29 -->
 
 0.3.0 (released 12 November, with 235 tests at 94% line coverage) is about **training captions**. <!-- src: DD/CHANGELOG.md:10; git log 3b08d4f message in DD (235 tests, 94%) -->
 
-- **Drafts only for flagged records.** A model-free gate flags captions that are not descriptions. Only flagged records are
+- **Drafts only for flagged records.** A model-free gate flags captions that are not descriptions. By default only flagged records are
   drafted by a vision model (Qwen3-VL-8B-Instruct, Apache 2.0, pinned to a revision), and only into a review queue and a
   **blind worksheet**: each flagged image beside three to five similar ones, with no prompt shown. A person edits it, and
   the edits are re-imported with the reviewer's name. A draft is never written straight into a training caption. <!-- src: DD/CHANGELOG.md:19-30,32-35 (drafter, flagged-only); DD/README.md:63 (blind worksheet) -->
@@ -500,7 +514,7 @@ What went wrong, by kind:
   translation can be right and still fail a check that counts characters. <!-- src: TL-rerun.log:397-407 (fr and ja lines); DD sibling E:/AI/_worktrees/backpropagate-1.9.0/README.fr.md:418 (18,7) -->
 - **Links dropped.** The gate caught Japanese text where a handbook link vanished entirely, and French and Italian
   sentences where two different links had been replaced by one of the issue-tracker links. <!-- src: TL-rerun.log:398,403-404,406-407 -->
-- **Full-width parentheses.** The shipped Japanese README wraps that same "700M MAU" clause in full-width parentheses (
+- **Full-width parentheses.** The hand-fixed Japanese line for that same "700M MAU" clause uses full-width parentheses (
   "（" and "）"), the way Japanese and Chinese are normally written. <!-- src: E:/AI/_worktrees/backpropagate-1.9.0/README.ja.md:417 --> <!-- src: backpropagate .polyglot-pins.json, zh and ja pins (a full-width ")" right after "[...](...)" broke the link; the hand fix restored the ASCII paren) -->
 
 **The pins.** When a segment will not translate cleanly, a person fixes it by hand and **pins** it: the correction is
@@ -521,5 +535,5 @@ family. It names two scorers, CometKiwi and XCOMET, as non-commercial and to avo
 
 ### What is next
 
-The fix belongs in polyglot itself, so that placeholders survive a batch: a ticket for it is open, ahead of more
+The fix belongs in polyglot itself, so that placeholders survive a batch: a ticket for it is next on the list, ahead of more
 hand-fixing. <!-- src: BOARD:36 (polyglot code-span ticket) --> The Colab translation lane in article 1 will run the same tool, so the same gates apply there. <!-- src: LEDGER:403 -->

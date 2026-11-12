@@ -56,7 +56,7 @@ receipts at the end. Every window passes through the same steps:
 - **The rate gate.** Colab reports only the whole account's hourly rate, so the launcher reads it before and after the session opens, takes the difference as this window's price, and stops if it is above the request's
   limit. It earned its place on 6 November: an A100 card with 80 GB was expected at 6.77 units an hour, read 8.88, and
   was stopped 53 seconds in, for 0.131 units.
-- **A CPU stub rung before any paid step.** (A rung is one step on a ladder of checks, each dearer than the last.) The same path runs first on a cheap CPU-only session: it installs the same
+- **A CPU stub rung before a lane's first GPU run.** (A rung is one step on a ladder of checks, each dearer than the last.) Once per lane, before its first paid GPU window, the same path runs in a separate cheap CPU-only session, which costs a few thousandths of a unit: it installs the same
   software, from the same pinned files, on the real Colab image, and stops before the expensive part. Today's stub of the
   translation job ran 81 seconds and cost 0.0059 units; the paid run that followed it cost 0.879. A stub is
   roughly 150 times cheaper than the thing it protects.
@@ -175,12 +175,12 @@ Later in the day the translation lane ran its first real batch: several reposito
 
 - **Two windows were refused by our own rate gate.** Window 1 (27 seconds, 0.075 units) and window 2 (about 47 seconds, 0.131) each read the *account's* hourly rate (30.15 with three G4s open, 20.1 with two) against the 10.5 limit meant for one window. The gate had read its baseline before the neighbouring windows opened. That is a defect in our launcher, not in Colab, and a fix (change #80 in polyglot-mcp, the translation tool) is named in the ledger.
 - **One window finished a README, then stalled.** Window 3 ran alone at 10.05 units an hour. It translated the brand README into all seven languages (no lost spans, nothing left untranslated, 284 seconds). Then the 300-second stall guard tripped, with no output on the French translation of the comfy-headless README (21.7 KB). The window ran 795 seconds for 2.219 units, and five READMEs were not reached.
-- **The likely cause is the same open item as the pilot's.** Ollama ran one slot at a 131,072-token context (a 49 GB cache) although 4,096 was requested. R&D's diagnosis, which the ledger records as the lead suspect, is that the context setting was never enforced. Two fixes are owed: enforce the context setting, and have the launcher report progress for each segment so the guard can tell slow from stuck.
+- **The likely cause is the same open item as the pilot's.** Ollama ran one slot at a 131,072-token context (a cache of 49,152 MiB, 48 GiB) although 4,096 was requested. R&D's diagnosis, which the ledger records as the lead suspect, is that the context setting was never enforced. Two fixes are owed: enforce the context setting, and have the launcher report progress for each segment so the guard can tell slow from stuck.
 - **The fourth window was stopped by us.** Window 1b (99 seconds, 0.276 units) was stopped during the model download, because the next README, offrig's at 52.9 KB, would very likely have hit the same stall. A second window, 2b, was held and never launched.
 
 The four windows of the batch cost 2.701 units between them, and found two defects and an unenforced setting.
 
-**Update, 2:30 p.m.** Both fixes were merged and a second batch ran on four G4s at once. The rate gate now books each window at its own rate and passed in all four; the context setting held (8,192 tokens, a 3 GB cache instead of 49 GB); and comfy-headless, the README that stalled above, finished all seven languages in under three minutes. Only that one README came back, though. Two READMEs failed the protected-span gate in several languages, a third window lost its connection during setup, and when a window failed its rescue bundle left the finished translations of the other READMEs behind. The second batch cost 6.864 units, and the next fix keeps finished work on every exit and lets a window skip a failing README and go on.
+**Update, 2:30 p.m.** Both fixes were merged and a second batch ran on four G4s at once. The rate gate now books each window at its own rate and passed in all four; the context setting held (8,192 tokens, a 3 GiB cache instead of 48 GiB); and comfy-headless, the README that stalled above, finished all seven languages in under three minutes. Only that one README came back, though. Two READMEs failed the protected-span gate in several languages, a third window lost its connection during setup, and when a window failed its rescue bundle left the finished translations of the other READMEs behind. The second batch cost 6.864 units, and the next fix keeps finished work on every exit and lets a window skip a failing README and go on.
 
 #### The lesson: a first paid rung without a stub
 
@@ -220,9 +220,9 @@ claims against their sources. The checked results below are the ones that held; 
 - **Which card renders.** RunPod's published benchmark has Qwen-Image-2512 peaking near 46 GB, and an RTX PRO 6000
   (our G4) at 18.03 seconds an image against 29.12 for an A100-80. Copy weights to the machine's local disk before starting: loading over a network or
   FUSE mount can be ten times slower.
-- **Model collapse in render-to-LoRA loops.** Training on your own model's renders narrows its range. The advice from the
-  research (Gerstgrasser et al., 2024, arXiv 2404.01413, on accumulating real data beside synthetic; Drayson et al., EMNLP
-  2025, on text drifting when a model feeds on its own text) is to keep human-made images as anchors, let synthetic images fill only named gaps, and keep the written canon
+- **Model collapse in render-to-LoRA loops.** Training on your own model's renders narrows its range. The papers the
+  research cites (Gerstgrasser et al., 2024, arXiv 2404.01413, on accumulating real data beside synthetic rather than replacing it; Drayson et al., EMNLP
+  2025, on recursive fine-tuning on a model's own text) support keeping real data in the mix. Our own rules built on that, not tested by those papers, are to keep human-made images as anchors, let synthetic images fill only named gaps, and keep the written canon
   fixed while validating model-written additions against a schema.
 - **Licences.** All nine licence claims the report relied on matched the sources. The ruled-out names were confirmed too:
   one FLUX.2 klein size under a non-commercial licence, one background-removal model under CC BY-NC 4.0 (BiRefNet, MIT,
@@ -255,8 +255,8 @@ Every one of the 911 Event 17 records carried the same status values: an "Unsupp
 non-fatal error, with a "header log overflow" flag (two functions of the card reported them). Each followed either a boot (within 22 seconds) or an
 installation of the display driver (within 5), and none fell inside a training window we checked. Each driver install was followed by a burst of exactly 37.
 
-Read plainly, an Unsupported Request is the card answering "there is nothing here" to a question aimed at a spot
-where no device exists. The records fit something probing the card for functions or addresses it does not have. None of the
+Read plainly, an Unsupported Request is the card answering "I don't handle that" to a request it does not support, such as an
+access to something it does not implement. The records fit something probing the card for functions or addresses it does not have. None of the
 status bits is a link error. That reading came from an AI analysis of the records, not from a measurement; the status bits and
 timing fit it and nothing in the log contradicts it, but we have it down as unverified, and which component does the scanning is not identified.
 
@@ -360,7 +360,7 @@ With seed 47 finished, the safe window the research describes opened, and three 
 not yet moved; Ollama and llama.cpp are next, each to go through a gate first, for the reason the watcher is built around. The last time we changed the model server, on 9 November, we did it only after a gate: a
 first try with 50 prompts failed because the stock server gave different answers on 45 of them depending on its state, and
 the second, with the cache off, 401 teacher-forced items and a comparison of probability distributions, passed (mean KL
-divergence 0.0005, speed 0.987 of the old one). Both new builds go through the same gate, and the
+divergence 0.0005, speed 0.987 of the old one). Both new builds go through the same gate, and our status
 board flags the FP8 items in llama.cpp's notes to read first.
 
 ## Seeds 45 to 47 finished: how the runs stayed healthy
@@ -410,7 +410,7 @@ No seed ran a confirmation pass, so no decision rested on the wrong figure. It m
 passes batched, and a batched speed-up has to be measured against 46 seconds, not 27.
 
 Run totals in brief: all five of seed 47's chunks were valid, as were seed 46's; on seed 47 the card peaked between 23,270 and 23,588 MiB per
-chunk, and its highest power readings, chunk by chunk from chunk 2 to 5, were 493.8 to 496.4 watts against a 480-watt cap; and the BIOS change in article 2 fell between seed 47's first and second chunks and is recorded in
+chunk, and its highest power readings, chunk by chunk from chunk 2 to 5, were 493.8 to 496.4 watts against a 480-watt cap (momentary samples; the card enforces its limit as an average); and the BIOS change in article 2 fell between seed 47's first and second chunks and is recorded in
 the run notes so any difference between chunks can be read against it.
 
 ## dataset-desk 0.3.0, and why the translations needed hand fixes
@@ -419,7 +419,7 @@ the run notes so any difference between chunks can be read against it.
 finds the copies, near-copies and odd ones out, searches a set by words or by picture, and checks that each image's
 description really describes it. A style LoRA learns from images and captions, and two quiet
 defects spoil both. Repeats teach one image twice. And descriptions that are not descriptions (a caption copied from the
-generation prompt, one ruling pasted onto 54 images) tell the model nothing about the picture. It never changes a project folder and never removes anything
+generation prompt, the same sentence pasted onto 54 images as their caption) tell the model nothing about the picture. It never changes a project folder and never removes anything
 automatically.
 
 ### What 0.3.0 adds
@@ -464,7 +464,7 @@ What went wrong, by kind:
   snippets, the model returned the sentences with placeholders moved, dropped or changed, so they could not be put back
   safely, and the tool kept the English and flagged it. In dataset-desk, 41 prose lines came back in English at first.
   A segment is then retried on its own, and in dataset-desk three of eight retries recovered a translation.
-- **Numbers written in local style.** French writes 4,096 as "4 096", and the number check, which counts digits, saw the
+- **Numbers written in local style.** French writes 4,096 as "4 096", and the number check, which compares the runs of digits, saw the
   pieces and reported "0 096 18 20 4 7" where it expected "0 18 20 4096 7". In Japanese, a first draft turned the "700" of "700M" into a "7", which is right: Japanese counts large numbers in units of 100 million (億), so 700 million is 7億. A
   translation can be right and still fail a check that counts characters.
 - **Links dropped.** The gate caught Japanese text where a handbook link vanished entirely, and French and Italian

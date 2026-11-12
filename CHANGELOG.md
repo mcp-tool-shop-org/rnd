@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.71] - 2026-11-12
+
+- newsletter issue 44 (12 November), the GPU work moves to Colab, and a BIOS update quiets the log: a Colab feature (how a window works, today's ten windows, the lanes, the field), the F.22 BIOS fix for 915 WHEA records, the freshness watcher and today's upgrades, seeds 45 to 47 run health, dataset-desk 0.3.0 and its translation pins
+
 ## [1.1.23.1.70] - 2026-11-11
 
 - licences: EmbeddingGemma 2 card (Apache-2.0 + Gemma Prohibited Use Policy, read 2026-11-11)

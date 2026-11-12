@@ -1,12 +1,12 @@
 ---
 title: "12 November: the GPU work moves to Colab, and a BIOS update quiets the log"
-description: "A long look at running our GPU work on Google Colab in parallel lanes: how a paid window works, what we measured on the way (upload limits, a missing driver library, cards that would not open), what the research says about the field, and where each lane stands. Also: the firmware update that stopped 915 hardware-error records, a freshness watcher for our software stack, three training seeds finished with their guards quiet, and why dataset-desk 0.3.0's README translations needed hand fixes."
+description: "A long look at running our GPU work on Google Colab in parallel lanes: how a paid window works, what we measured on the way (upload limits, missing CUDA libraries, cards that would not open), what the research says about the field, and where each lane stands. Also: the firmware update after which a five-week run of hardware-error records stopped, a freshness watcher for our software stack, three training seeds finished with their guards quiet, and why dataset-desk 0.3.0's README translations needed hand fixes."
 issue: 44
 date: 2026-11-12
 draft: false
 highlights:
   - "<strong>Colab, in parallel lanes.</strong> We started moving GPU work off our own RTX 5090 and onto rented Colab cards. Sixteen windows ran today for 3.910 compute units in total. Most cost almost nothing, and the failures taught us the most."
-  - "<strong>A BIOS update quieted the hardware log.</strong> Windows had logged 915 hardware-error records in five weeks. After HP's BIOS update, four full training chunks ran with none."
+  - "<strong>A BIOS update quieted the hardware log.</strong> Windows had logged 915 hardware-error records in five weeks. Since HP's BIOS update the record has not appeared, through one logged boot and four training chunks."
   - "<strong>Three seeds finished, guards quiet.</strong> Zero guard trips in 57 guard windows, two single-window canary crossings, and a memory reading that looked like a leak and was a change in what we were sampling."
 ---
 
@@ -48,15 +48,15 @@ receipts at the end. Every window passes through the same steps:
 
 - **A written request.** It names the launcher script and that script's checksum (so we know it is the file we
   reviewed), the card, a **cap** in compute units and a **wall clock** in seconds. The effective ceiling is whichever is
-  smaller: the cap, or the wall time multiplied by the card's hourly rate. The G4 pilot that ran today had a
+  smaller: the cap, or the wall time multiplied by the card's hourly rate. The G4 (an RTX PRO 6000 card with 96 GB of memory) pilot that ran today had a
   cap of 9.40 units, a maximum acceptable rate of 10.5 units an hour and a wall of 1,800 seconds.
   At its real rate, 10.05 an hour, 1,800 seconds would cost 5.025 units, so the wall, not the cap, was what bound it.
 - **A free dry run.** The launcher runs every check that costs nothing, such as whether the files match their checksums and
   whether the request is complete, before it opens a session.
-- **The rate gate.** After the session opens, the launcher reads the live price and stops if it is above the request's
+- **The rate gate.** Colab reports only the whole account's hourly rate, so the launcher reads it before and after the session opens, takes the difference as this window's price, and stops if it is above the request's
   limit. It earned its place on 6 November: an A100 card with 80 GB was expected at 6.77 units an hour, read 8.88, and
   was stopped 53 seconds in, for 0.131 units.
-- **A CPU stub rung before any paid step.** The same path runs first on a cheap CPU-only session: it installs the same
+- **A CPU stub rung before any paid step.** (A rung is one step on a ladder of checks, each dearer than the last.) The same path runs first on a cheap CPU-only session: it installs the same
   software, from the same pinned files, on the real Colab image, and stops before the expensive part. Today's stub of the
   translation job ran 81 seconds and cost 0.0059 units; the paid run that followed it cost 0.879. A stub is
   roughly 150 times cheaper than the thing it protects.
@@ -67,12 +67,12 @@ receipts at the end. Every window passes through the same steps:
   account balance happened to do, so numbers from different windows can be added honestly.
 
 Colab lets us hold up to twenty sessions at once, in separate pools: three A100-40 cards, three A100-80, three G4, three
-L4, three T4 and five CPU. At that ceiling it billed 71.14 units an hour. A fourth session in a full pool is
+L4, three T4 and five CPU. At that ceiling, when we measured it on 23 October (before Colab raised its rates on 29 October), it billed 71.14 units an hour. A fourth session in a full pool is
 refused; a fourth on a different card type is fine. Our own rule is stricter than the limit: parallel
 windows only across separate studies, one card type per study, one request at a time inside each window, so that any run can
 be replayed exactly. The reason for care is that rented machines
 disappear: in the first week of measuring, 4 of 53 GPU sessions were lost, and the losses leaned toward the times when several
-sessions were live at once (3 of 12 sessions lost with three or four live, against 1 of 34 with one or two), though the sample could not separate that from which zone the machines ran in.
+sessions were live at once (3 of 12 sessions lost with three or four live, against 1 of 34 with one or two; the other 7 sessions were not counted in that split), though the sample could not separate that from which zone the machines ran in.
 
 ### The lanes, and where each stands
 
@@ -81,22 +81,21 @@ sessions were live at once (3 of 12 sessions lost with three or four live, again
 | **Render** | Runs ComfyUI (an image-generation program built from connected nodes) with no window, rendering the images our canon briefs call for | The CPU stub passed on 6 November, rendering two fixture images with matching hashes in 83 seconds. The GPU rung needs a new `--render` mode in the launcher, which is out for build. |
 | **Canon writing** | A large open model drafts the written canon and prompts for a game, for a human to approve | Not built. The model we would use carries a usage policy we treat as binding, which means recording which words the model wrote. |
 | **LoRA training** | Trains a LoRA (a small add-on that teaches an image model one visual style) | Done on a G4 up to a full 500-step run: the first complete rung, 20 steps, took 495 seconds; the second reached 500 of 500 steps and was stopped by a guard that was wrong (see issue 43); the third, with that guard fixed, passed in 1,298 seconds for 3.624 units. The first paid run on real data waits on one more fix. |
-| **Captions** | A vision model drafts descriptions for images flagged as poorly described, for a person to review | The CPU stub passed today on a fixture project of two made-up records, one of them flagged: it drafted one caption (for the flagged record, none for the clean one) in 133 seconds for 0.0096 units, with no image bytes in the results bundle. The paid run is next, on an L4 card at a cap of 3.0 units. (More on the tool in article 5.) |
+| **Captions** | A vision model drafts descriptions for images flagged as poorly described, for a person to review | The CPU stub passed today on a fixture project of two made-up records, one of them flagged: with a stand-in drafter in place of the vision model, it drafted one caption (for the flagged record, none for the clean one) in 133 seconds for 0.0096 units, with no image bytes in the results bundle. The paid run is next, on an L4 card at a cap of 3.0 units. (More on the tool in article 5.) |
 | **Translation** | Translates README files with TranslateGemma 27B | The stub passed, the first paid run on a G4 ran to the end, and a first real batch across parallel windows followed, with mixed results. Details below. |
 
-Two other jobs share the pool: judge-model windows for the rdlab study, and a probe for Ripple-65B Preview,
+Two other jobs share the pool: judge-model windows for the rdlab study (which compares small models used as judges), and a probe for Ripple-65B Preview,
 an open, Apache-2.0 coding model of 64.78 billion parameters that is too big for our own card.
 
-One question we have not settled: our plan names an A100 with 40 GB as the first render card, but the benchmark the
-research cites has Qwen-Image-2512, the render model, peaking near 46 GB in full precision, which is more than that card
-holds. Either the plan's card changes or a measurement shows it spills gracefully. We would rather learn that on a
-cheap rung.
+One question we had open: our plan named an A100 with 40 GB as the first render card, but the benchmark the
+research cites has Qwen-Image-2512, the render model, peaking near 46 GB in 16-bit precision (bf16), which is more than that card
+holds. It is now settled the other way: the render lane runs on the G4, which holds it with room to spare.
 
 ### Today, window by window
 
 Sixteen windows ran between 4:16 a.m. and 12:53 p.m. Eastern. Together they cost **3.910 units**.
 
-| # | Time (ET) | Job | Card | What happened | Units |
+| Ledger row (BL) | Time (ET) | Job | Card | What happened | Units |
 |---|---|---|---|---|---|
 | 99 | 04:16 | translation pilot | A100-40 | no capacity | 0 |
 | 100 | 04:48 | translation pilot, try 2 | A100-40 | opened; stopped at setup, no `zstd` | 0.140 |
@@ -126,7 +125,7 @@ failure, so 128 to 200 MB were never tried; the single-upload ceiling sits somew
 
 The fix, built before the probe and confirmed by the first stub that used it, is to send big files in **chunks**: seven
 parts of 32 MiB for the 216 MB program, put back together on the machine and checked against the whole file's checksum.
-All ten input files matched. Downloads were never the problem: we pulled files from 256 MB up to 2,048 MB, every one
+All ten input files (the program and nine small ones) matched. Downloads were never the problem: we pulled files from 256 MB up to 2,048 MB, every one
 intact, at 16.3 to 18.2 MB a second, and found no ceiling.
 
 The practical rule falls out of the speeds. Pushing a model's weights up from our rig at 1.8 MB a second would take
@@ -153,46 +152,47 @@ With the table of shapes fixed, the probe was resent at 12:13 p.m. and answered 
 #### The A100-40 would not open; the G4 always did
 
 The translation pilot was meant for an A100 with 40 GB. Of five attempts today, four were refused with "Service
-Unavailable": Colab had none of that card free. A refusal costs nothing, and the approved set had a shape to match: three tries, at least half an hour apart, then stop and report. Since 6 November the ledger counts the
+Unavailable": Colab had none of that card free. A refusal costs no units, and the approved plan allowed three tries at least half an hour apart, then stop and report; the 4:48 a.m. try opened and failed for another reason (below), so a fresh set of three followed after its fix. Since 6 November the ledger counts the
 A100-40 opening twice and refusing about a dozen times, while the G4 had opened six times out of six before today's
 pilot, and opened again for it.
 
-That fits what Colab's own client documents. Its documentation distinguishes **HTTP 412**, a permanent "too many assignments"
-that should never be retried, from 502, 503 and 504, which mean the pool is out of that card and are retried three times
-with 10, 20 and 40 seconds of backoff. All our refusals today were the second kind. The G4 costs more an hour (10.05
+That fits what Colab's own client documents. Its client treats **HTTP 412** (which it reads as "too many assignments") as something not to retry, and retries 502, 503 and 504
+(gateway errors and "Service Unavailable", the pool being out of that card) three times with 10, 20 and 40 seconds of backoff. All our refusals today were the second kind. The G4 costs more an hour (10.05
 units, against 6.73 for an A100-40) but opening at all beats a cheaper card that does not.
 
 #### The translation pilot
 
 On the G4 the pilot ran for **315 seconds, about five minutes, for 0.879 units** (the launcher's own estimate was
 0.867). It produced seven translated READMEs, a bundle with matching checksums (8 of 8), and no stray carriage-return
-characters. The 27-billion-parameter translation model sat entirely on the card, using 28,461 MiB.
-Two things are open. We told the model to use a 4,096-token window, but its own report says 131,072, with a
-49,152 MiB memory cache, so the setting did not do what we thought (the batch below points at the cause). And the translations have not yet been compared with
+characters. The 27-billion-parameter translation model sat entirely on the card, which showed 28,461 MiB in use.
+Two things are open. We told the model to use a 4,096-token window, but its own report says 131,072, and it reported a
+49,152 MiB cache for that window (more than the card showed in use, so a planned size rather than memory taken), so the setting did not do what we thought (the batch below points at the cause). And the translations have not yet been compared with
 what the 5090 produces.
 
 #### The translation batch: three windows at once, and a stall
 
 Later in the day the translation lane ran its first real batch: several repositories' READMEs, split across parallel G4 windows. It did not go to plan, and the ledger shows how.
 
-- **Two windows were refused by our own rate gate.** Window 1 (27 seconds, 0.075 units) and window 2 (about 47 seconds, 0.131) each read the *account's* hourly rate (30.15 with three G4s open, 20.1 with two) against the 10.5 limit meant for one window. The gate had read its baseline before the neighbouring windows opened. That is a defect in our launcher, not in Colab, and a fix (polyglot #80) is named in the ledger.
+- **Two windows were refused by our own rate gate.** Window 1 (27 seconds, 0.075 units) and window 2 (about 47 seconds, 0.131) each read the *account's* hourly rate (30.15 with three G4s open, 20.1 with two) against the 10.5 limit meant for one window. The gate had read its baseline before the neighbouring windows opened. That is a defect in our launcher, not in Colab, and a fix (change #80 in polyglot-mcp, the translation tool) is named in the ledger.
 - **One window finished a README, then stalled.** Window 3 ran alone at 10.05 units an hour. It translated the brand README into all seven languages (no lost spans, nothing left untranslated, 284 seconds). Then the 300-second stall guard tripped, with no output on the French translation of the comfy-headless README (21.7 KB). The window ran 795 seconds for 2.219 units, and five READMEs were not reached.
 - **The likely cause is the same open item as the pilot's.** Ollama ran one slot at a 131,072-token context (a 49 GB cache) although 4,096 was requested. R&D's diagnosis, which the ledger records as the lead suspect, is that the context setting was never enforced. Two fixes are owed: enforce the context setting, and have the launcher report progress for each segment so the guard can tell slow from stuck.
 - **The fourth window was stopped by us.** Window 1b (99 seconds, 0.276 units) was stopped during the model download, because the next README, offrig's at 52.9 KB, would very likely have hit the same stall. A second window, 2b, was held and never launched.
 
 The four windows of the batch cost 2.701 units between them, and found two defects and an unenforced setting.
 
+**Update, 2:30 p.m.** Both fixes were merged and a second batch ran on four G4s at once. The rate gate now books each window at its own rate and passed in all four; the context setting held (8,192 tokens, a 3 GB cache instead of 49 GB); and comfy-headless, the README that stalled above, finished all seven languages in under three minutes. Only that one README came back, though. Two READMEs failed the protected-span gate in several languages, a third window lost its connection during setup, and when a window failed its rescue bundle left the finished translations of the other READMEs behind. The second batch cost 6.864 units, and the next fix keeps finished work on every exit and lets a window skip a failing README and go on.
+
 #### The lesson: a first paid rung without a stub
 
-The pilot's first try, at 4:48 a.m., did open an A100. It lasted 75 seconds. The translation program, Ollama,
+The pilot's second try, at 4:48 a.m., the first to get a card, did open an A100. It lasted 75 seconds. The translation program, Ollama,
 is shipped as a `.tar.zst` archive, and the Colab image has no `zstd` tool to unpack it, so setup stopped. Cost: 0.140
 units. We had booked the first paid rung with no CPU stub in front of it.
 
 The sting is that we had met this exact fault before. On 23 October a stub that skipped the real Ollama install let two paid runs
 fail on the same missing tool, and the guidance written then says: "a stub must run every install and unpack step the paid
 run will." It was in the file; this lane's request did not apply it. Two things changed. A stub that runs the real install path is
-now a rule for **every** first paid rung of a lane. And the stub at 9:03 a.m. ran the six steps in order (shred the
-token, install Node from a pinned file, download Ollama from a pinned file, install `zstd` v1.5.5, unpack, start the
+now a rule for **every** first paid rung of a lane. And the stub at 9:03 a.m. ran the six steps in order (shred the copy of the login token that went up with the job, once read;
+install Node from a pinned file, download Ollama from a pinned file, install `zstd` v1.5.5, unpack, start the
 server), stopped before the model download, and passed in 81 seconds for 0.0059 units. The paid G4 run then found
 `zstd` in place.
 
@@ -202,7 +202,7 @@ We asked a Deep Research report what is known about running parallel image-and-t
 claims against their sources. The checked results below are the ones that held; the claims that did not hold were left out.
 
 - **Concurrency, and 412 against 503.** As above: the client documents them, and they match the per-pool limits we
-  measured ourselves. A 412 means stop and wait; a 503 means try again later.
+  measured ourselves. A 412 means stop; a 503 means the pool is empty for now. Since then we have stopped trying for the A100 at all: another paying account was blocked after about ten refused allocations in one day.
 - **Long connections go stale.** The login token lasts an hour, and ordinary commands refresh it but long-lived live
   connections do not. The safe pattern is to run work detached on the machine and poll with short commands. This agrees
   with what we saw: a long `colab exec` goes quiet at 50 to 60 minutes while the job carries on.
@@ -218,8 +218,7 @@ claims against their sources. The checked results below are the ones that held; 
 - **Cost per accepted image.** The cost that matters is raw cost divided by the share of images accepted. We do not yet
   record acceptance in the ledger, so cost per keeper is invisible.
 - **Which card renders.** RunPod's published benchmark has Qwen-Image-2512 peaking near 46 GB, and an RTX PRO 6000
-  (our G4) at 18.03 seconds an image against 29.12 for an A100-80, with the benchmark's own warning that host variance
-  makes cross-card comparison soft. Copy weights to the machine's local disk before starting: loading over a network or
+  (our G4) at 18.03 seconds an image against 29.12 for an A100-80. Copy weights to the machine's local disk before starting: loading over a network or
   FUSE mount can be ten times slower.
 - **Model collapse in render-to-LoRA loops.** Training on your own model's renders narrows its range. The advice from the
   research (Gerstgrasser et al., 2024, arXiv 2404.01413, on accumulating real data beside synthetic; Drayson et al., EMNLP
@@ -239,7 +238,7 @@ claims against their sources. The checked results below are the ones that held; 
 The render lane's launcher change and the LoRA lane's last fix are still out for build, and the captions lane has its stub behind it; the paid runs wait
 on them, and the translation lane waits on the two fixes above. The unit balance expires in about ten days, and we are holding Colab's command-line client at its current
 version until a 25 November audit, because 0.8.0 makes `--timeout` an idle limit. Total
-spent from the backlog pot so far: 168.638 of 400 units.
+spent so far from the backlog pot (a 400-unit share of the balance set aside for experiment work): 168.638 units.
 
 ## A BIOS update, and the hardware errors that stopped
 
@@ -257,7 +256,7 @@ non-fatal error, with a "header log overflow" flag (two functions of the card re
 installation of the display driver (within 5), and none fell inside a training window we checked. Each driver install was followed by a burst of exactly 37.
 
 Read plainly, an Unsupported Request is the card answering "there is nothing here" to a question aimed at a spot
-where no device exists. The records fit something scanning the card's bus for devices that are not there. None of the
+where no device exists. The records fit something probing the card for functions or addresses it does not have. None of the
 status bits is a link error. That reading came from an AI analysis of the records, not from a measurement; the status bits and
 timing fit it and nothing in the log contradicts it, but we have it down as unverified, and which component does the scanning is not identified.
 
@@ -293,7 +292,7 @@ until it was re-applied by hand.
 Caveats we would put on any claim: one machine; "four clean chunks" is four observations, and only the chunk-2 reading
 covered a whole boot; and the log we read starts on 5 October, so we cannot say what came before. We are not saying the card was ever unhealthy, or that the BIOS is the only thing that changed. We
 are saying a record that followed boots and driver installs for at least five weeks has not appeared since. The note to the three
-vendors, that F.22 fixed it, is the next step.
+vendors, that the record has not returned since F.22, is the next step; more boots and the next driver install will tell us more.
 
 ## Keeping the studio current
 
@@ -321,12 +320,12 @@ comparable. It also watches watched **model families** for new releases, and fla
 our permissive list for a human to read. In the first run, five new models turned up: three FLUX klein repositories (licence "other", gated) went to review, and
 two (one Apache 2.0, one MIT) did not.
 
-Some things it cannot see, and says so: NVIDIA's driver (no public interface), the HP BIOS page (needs a browser), the
+Some things it cannot see, and says so: NVIDIA's driver (no documented version interface), the HP BIOS page (our watcher would need a browser for it), the
 Windows build and fleet repositories' dependency advisories.
 
 ### What the research said
 
-Seed 17 asked how a small team keeps a stack current. Its answers, as we kept them:
+Research seed 17 (our numbered research questions, not a training seed) asked how a small team keeps a stack current. Its answers, as we kept them:
 
 - **Split discovery from promotion.** Detect every release automatically, wait out a cooldown (seven days is common;
   security fixes skip it), run an equivalence test, and only then adopt, at the boundary between experiments. A sealed
@@ -336,7 +335,7 @@ Seed 17 asked how a small team keeps a stack current. Its answers, as we kept th
   repository names (Qwen-Image became Qwen-Image-2512).
 - **Pins carry intent.** An owner, a reason and an expiry. A pin with no reason counts as drift.
 - **Python has two answers.** Pure-Python packages can test on 3.15; environments built on CUDA and torch should stay on
-  3.12 or 3.13 until the big libraries ship verified wheels. Python 3.10 reached end of life on 1 October, so the rig's
+  a version the big libraries already ship wheels for, not 3.15. Python 3.10 reached end of life on 1 October, so the rig's
   default was past it.
 - **Count the hardware.** Check for WHEA errors, GPU errors and the PCIe link speed on a schedule, and flash firmware only
   between series.
@@ -392,7 +391,7 @@ on healthy runs.
 ### The memory median that was not a leak
 
 As in issue 43, we sampled the card's memory every five seconds after each save. At step 190, in seed 47's last chunk, the
-middle reading was **15,918.5 MiB**, over our 15,500 report line. The hold rule did not fire: the highest reading stayed
+middle reading was **15,918.5 MiB**, over our 15,500 report line. The hold rule (pause the run if memory is growing) did not fire: the highest post-save reading stayed
 under the 23,372 reference and the lowest fell (10,179 to 9,654).
 
 We reported it at once and then split the readings by what the trainer was doing at that moment. The median during the
@@ -405,7 +404,7 @@ poor alarm; the floor and the ceiling say whether memory is growing, and the pha
 
 Before training, the run takes a "step 0" pass: every item is run once at temperature zero, which means the model
 always picks its likeliest next word, so the same input gives the same output. Our notes had said that pass covered 312 items and ran at about 27 seconds
-an item. On 12 November we corrected it: two of the sets are nested (one is drawn from the other), and the code runs
+an item. On 12 November we corrected it: the pass covers several item sets, two of them are nested (one is drawn from the other), and the code runs
 their union, which is **184 items**. Step 0 took about 141.5 minutes, so the rate is about **46 seconds an item**.
 No seed ran a confirmation pass, so no decision rested on the wrong figure. It matters for planning: the next study wants these
 passes batched, and a batched speed-up has to be measured against 46 seconds, not 27.
@@ -466,18 +465,18 @@ What went wrong, by kind:
   safely, and the tool kept the English and flagged it. In dataset-desk, 41 prose lines came back in English at first.
   A segment is then retried on its own, and in dataset-desk three of eight retries recovered a translation.
 - **Numbers written in local style.** French writes 4,096 as "4 096", and the number check, which counts digits, saw the
-  pieces and reported "0 096 18 20 4 7" where it expected "0 18 20 4096 7". In Japanese, a first draft turned the "700" of "700M" into a "7". A
+  pieces and reported "0 096 18 20 4 7" where it expected "0 18 20 4096 7". In Japanese, a first draft turned the "700" of "700M" into a "7", which is right: Japanese counts large numbers in units of 100 million (億), so 700 million is 7億. A
   translation can be right and still fail a check that counts characters.
 - **Links dropped.** The gate caught Japanese text where a handbook link vanished entirely, and French and Italian
   sentences where two different links had been replaced by one of the issue-tracker links.
-- **Full-width parentheses.** The hand-fixed Japanese line for that same "700M MAU" clause uses full-width parentheses (
+- **Full-width parentheses (not a failure).** The hand-fixed Japanese line for that same "700M MAU" clause uses full-width parentheses (
   "（" and "）"), the way Japanese and Chinese are normally written.
 
 **The pins.** When a segment will not translate cleanly, a person fixes it by hand and **pins** it: the correction is
 saved in `.polyglot-pins.json` against a fingerprint of the English sentence and the language, so a rerun reuses
 the fix instead of asking the model again. dataset-desk's release holds seven pins, written at 6:50 a.m., and backpropagate's holds nine, across five
 languages. All seven languages then passed both gates.
-It matters for release order: a release tag cannot be changed after it is cut, so translations are finished first, and
+It matters for release order: we treat a release tag as permanent once it is cut, so translations are finished first, and
 our release check blocks a release whose README translations are stale.
 
 ### What the field says

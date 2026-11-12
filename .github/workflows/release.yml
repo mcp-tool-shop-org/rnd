@@ -33,7 +33,7 @@ concurrency:
 
 jobs:
   pypi:
-    # A newsletter-issue-NN release (newsletter-publish.yml) must not even start this job, so it never enters the pypi
+    # A release whose tag does not start with v must not even start this job, so it never enters the pypi
     # environment or receives an OIDC token. Expressions have no regex, so this checks the v prefix; the guard step
     # below checks the exact tool version form.
     if: github.event_name == 'workflow_dispatch' || startsWith(github.event.release.tag_name, 'v')
@@ -47,7 +47,7 @@ jobs:
     env:
       TAG: ${{ inputs.tag || github.ref_name }}
     steps:
-      # A newsletter-issue-NN release (newsletter-publish.yml) is not a tool release: skip it, without failing.
+      # A tag that is not a tool version is not a tool release: skip it, without failing.
       - name: Only tool version tags publish
         id: guard
         run: |

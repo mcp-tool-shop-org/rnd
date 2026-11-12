@@ -35,7 +35,7 @@ severity. P0 (backups) began on the Director's go on 2026-10-19. P1–P3 wait on
 | Part | Files | Size | Notes |
 |---|---|---|---|
 | `experiments/` | 697 | 33.7 MB | 24.4 MB of it is `verifier-gold/` (197 files) |
-| `site/` | 78 | 1.9 MB | the newsletter and handbook |
+| `site/` | 78 | 1.9 MB | the research briefs, the weekly watch and the handbook |
 | `tests/` | 51 | 0.65 MB | |
 | `entries/` | 67 | 0.36 MB | the library's source of truth |
 | the rest | | about 1.5 MB | code, catalogues, instruments, licences, data-pack manifests |

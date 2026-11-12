@@ -6,7 +6,7 @@ phase 0 added in front. It comes before the T10 lesson's writer run, which waits
 
 ## Why this study exists
 
-The writer screen (rnd newsletter issue 11, windows 12b–12h) and its two follow-on windows (W-A, W-B) chose writers
+The writer screen (windows 12b–12h) and its two follow-on windows (W-A, W-B) chose writers
 by what a critic accepted. The critic barely refused anything:
 - Muse accepted 35 of 36 first drafts in the screen.
 - The rescore (window 13t) gave a second critic from another family, Lightning, a blind sample: it accepted all 7,

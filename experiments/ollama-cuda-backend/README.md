@@ -1,6 +1,6 @@
 # The studio's CUDA backend for Ollama
 
-The studio runs its own `ggml-cuda.dll` for Ollama on the RTX 5090: Ollama's own llama.cpp pin, built with CUDA 13.4 for compute capability 12.0 only. This folder holds the build records, the sandbox test and the diagnosis that followed it. The story is in [newsletter issue 9](https://mcp-tool-shop-org.github.io/rnd/newsletter/issue-09/).
+The studio runs its own `ggml-cuda.dll` for Ollama on the RTX 5090: Ollama's own llama.cpp pin, built with CUDA 13.4 for compute capability 12.0 only. This folder holds the build records, the sandbox test and the diagnosis that followed it.
 
 **Status, 2026-10-15:**
 - **The 0.40.4 build to the studio standard,** on CUDA 13.4 Update 2, is built (see `build-0.40.4-cuda-13.4.3.md`).

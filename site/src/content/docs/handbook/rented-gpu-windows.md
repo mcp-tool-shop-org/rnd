@@ -8,7 +8,7 @@ sidebar:
 A **window** is one rented Colab session that does one job: convert a model, run a wave of writing, critique a batch.
 Claude Code drives it from the rig through Google's `google-colab-cli`, and nobody watches a notebook. This page is
 the path we settled on after the Stage 1 writer pilot spent about half of its first 71 units on windows that gave
-nothing back ([issue 11](../../newsletter/issue-11/)). Every rule below exists because a window failed without it.
+nothing back. Every rule below exists because a window failed without it.
 The raw data behind it, one row per window, is in [`experiments/colab-golden-path/data`](https://github.com/mcp-tool-shop-org/rnd/tree/main/experiments/colab-golden-path/data).
 For the short version written for any Colab plan, see [Colab golden path, for any plan](../colab-golden-path/).
 

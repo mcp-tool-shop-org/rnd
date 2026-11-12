@@ -3,7 +3,7 @@
   python experiments/charts/make_charts.py
 
 Writes SVG files and manifest.json (each input's path, git commit and sha256) into experiments/charts/, and a
-copy of each SVG into site/public/charts/ for the site's briefs and newsletter.
+copy of each SVG into site/public/charts/ for the site's briefs.
 Standard library only. CPU for a few seconds; render outside any quiet-CPU device window.
 
 Conventions (agreed with the Publisher and ASPIRE, 2026-10-09):

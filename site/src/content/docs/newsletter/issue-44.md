@@ -140,7 +140,7 @@ Sixteen windows ran between 4:16 a.m. and 12:53 p.m. Eastern. Together they cost
 
 <!-- src: LEDGER:395-410 (every row; times converted from UTC at -5 h) -->
 
-<!-- CHART: the sixteen windows of 12 November (BL 99 to 114) as bars of booked units, with a marker for no-capacity refusals (4, cost 0) and the three largest windows labelled (BL 113, 2.219; BL 107, 0.879; BL 114, 0.276); source: LEDGER:395-410 -->
+![Horizontal bar chart titled "Sixteen Colab windows on 12 November cost 3.9 units, and most of what they taught us was cheap". One bar per window, BL 99 to BL 114, coloured teal for windows that ran, grey for no capacity or refused before work, red for windows stopped by a guard or by us. Four A100 tries booked 0.000. The largest bar is BL 113, the README batch window that finished one README then stalled, at 2.219 units; next is the translation pilot on the G4, BL 107, at 0.879. Every other window booked under 0.3 units.](/rnd/charts/issue-44-colab-windows.svg)
 
 #### How big a file can we send? (and what that decides)
 
@@ -159,7 +159,7 @@ The practical rule falls out of the speeds. Pushing a model's weights up from ou
 hours, so the Colab machine fetches them itself from Hugging Face: the 57.7 GB Qwen-Image model arrived in 163 to 168
 seconds (343 MB a second in the first run). <!-- src: LEDGER:390,391 (57.7 GB in 168 s and 163 s; 343 MB/s at 168 s) --> Small files go up; big ones come down from the source.
 
-<!-- CHART: upload sizes 16, 32, 64 MB passing and 96 MB failing with HTTP 400, beside download sizes 256 to 2,048 MB all passing at 16.3 to 18.2 MB/s; source: PROBE (uploads[], downloads[]) -->
+![Two-panel chart titled "Colab takes downloads up to 2 GB in one piece, but a single upload fails between 64 and 96 MB". Left panel, single upload: 16 MB in 10.3 seconds, 32 MB in 18.2, 64 MB in 35.2, all passed; 96 MB failed with HTTP 400 after 2.0 seconds. Right panel, single download: 256 MB in 14.5 seconds, 512 in 28.4, 768 in 42.8, 1,024 in 56.2, 1,536 in 93.9 and 2,048 in 112.5, all passed, about 17 to 18 MB a second.](/rnd/charts/issue-44-colab-transfer-limits.svg)
 
 #### The cheap machine has no CUDA
 

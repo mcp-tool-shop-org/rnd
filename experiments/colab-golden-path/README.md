@@ -2,8 +2,7 @@
 
 **What this is.** The record behind the studio's way of running model work on rented Colab GPUs from Claude Code,
 built over the Stage 1 writer pilot (2026-10-16 to 2026-10-18). The path itself is the handbook page
-[Rented GPU windows](../../site/src/content/docs/handbook/rented-gpu-windows.md). The story, with the numbers, is
-newsletter issue 13.
+[Rented GPU windows](../../site/src/content/docs/handbook/rented-gpu-windows.md).
 
 - [`figures.py`](figures.py) computes every figure issue 13 quotes from the data into [`figures.json`](figures.json).
 - [`data/`](data/): one row per window (49) with its card, spend, outcome and the reason, the small records

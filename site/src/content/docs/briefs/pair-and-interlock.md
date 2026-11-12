@@ -76,7 +76,7 @@ Read against PAIR's list of limits, interlock's experiments measure exactly what
 |---|---|
 | whether a model is warm, and what a cold load costs | **E1:** what a cold load costs on each Intel device, in units of that device's own warm call, and when a model should stay resident |
 | capacity: how much context a model can hold before it spills out of VRAM | **E5:** for each of six local 5090 models, the largest context window that stays fully resident. Four hold their full trained window; gemma4:31b holds 86016 of its 262144, and granite4.1:30b 43008 of its 131072 |
-| whether two workloads slow each other down | **E4b:** running the 5090 beside the NPU or the iGPU changes its decode rate by under 1.4%, and the Intel devices' latency by at most about 5%, all inside a pre-registered ±10% band ([the E4b results](/rnd/newsletter/issue-04/)) |
+| whether two workloads slow each other down | **E4b:** running the 5090 beside the NPU or the iGPU changes its decode rate by under 1.4%, and the Intel devices' latency by at most about 5%, all inside a pre-registered ±10% band |
 
 E4b is the clearest example. PAIR's whole model assumes a busy GPU is a slower GPU, which is reasonable for one
 device. interlock asked a narrower question: when two *different* devices share a machine, do they get in each

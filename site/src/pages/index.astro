@@ -6,17 +6,12 @@ import Section from '@mcptoolshop/site-theme/components/Section.astro';
 import CodeCardGrid from '@mcptoolshop/site-theme/components/CodeCardGrid.astro';
 import { config } from '../site-config';
 
-// The landing page is the newsletter: the latest issue up top, back issues and the brief directory below.
+// The landing page: the weekly watch and the research briefs directory.
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const docs = await getCollection('docs');
-const issues = docs
-  .filter((d) => d.id.startsWith('newsletter/') && d.data.issue)
-  .sort((a, b) => (b.data.issue ?? 0) - (a.data.issue ?? 0));
 const briefs = docs
   .filter((d) => d.id.startsWith('briefs/') && d.id !== 'briefs' && d.id !== 'briefs/index')
   .sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? '') || a.data.title.localeCompare(b.data.title));
-const latest = issues[0];
-const back = issues.slice(1);
 // The weekly watch: what changed in the tools and models we run, newest first.
 const watches = docs
   .filter((d) => d.id.startsWith('watch/') && d.data.date)
@@ -37,45 +32,20 @@ const useIt = config.sections.find((s) => s.id === 'use-it');
   npmUrl={config.npmUrl}
   footerText={config.footerText}
   nav={[
-    { href: '#latest', label: 'Latest issue' },
     { href: '#watch', label: 'The watch' },
     { href: '#briefs', label: 'Research briefs' },
-    { href: '#archive', label: 'Back issues' },
     { href: '#use-it', label: 'Use it' },
   ]}
 >
-  <link slot="head" rel="alternate" type="application/rss+xml" title="Research and Development: the newsletter" href={`${base}/newsletter/rss.xml`} />
   <header class="pt-16">
-    <p class="text-sm font-medium uppercase tracking-widest text-dim">The bench · studio research newsletter</p>
+    <p class="text-sm font-medium uppercase tracking-widest text-dim">The bench · studio research notes</p>
     <h1 class="mt-3 max-w-3xl text-4xl font-semibold tracking-tight md:text-5xl">
       What we measured, and what it means.
     </h1>
     <p class="mt-4 max-w-2xl text-lg text-muted">
-      Each issue reports the studio's experiments in plain language: the numbers, the charts, what held up and
-      what didn't. Every figure links back to a committed receipt. Interim and disproved results stay visible
-      and are labelled.
+      The studio's research notes and briefs.
     </p>
   </header>
-
-  <Section id="latest" title={latest ? `Issue ${latest.data.issue}: ${latest.data.title}` : 'Latest issue'}
-           subtitle={latest ? `${latest.data.date ?? ''} · ${latest.data.description ?? ''}` : 'The first issue is in preparation.'}>
-    {latest && (
-      <div class="mt-6 rounded-2xl border border-edge bg-surface-raised/40 p-6">
-        <ul class="list-disc space-y-2 pl-5 text-body">
-          {(latest.data.highlights ?? []).map((h) => <li set:html={h} />)}
-        </ul>
-        <a href={`${base}/${latest.id}/`} class="mt-6 inline-flex rounded-xl bg-action px-5 py-2.5 text-sm font-medium text-action-text hover:bg-action-hover">
-          Read issue {latest.data.issue}
-        </a>
-      </div>
-    )}
-    {latest && (
-      <p class="mt-6 text-sm text-muted">
-        Follow new issues <a class="text-accent underline" href={`${base}/newsletter/rss.xml`}>by RSS</a>{' '}
-        (<a class="text-accent underline" href={`${base}/newsletter/subscribe/`}>how to follow</a>).
-      </p>
-    )}
-  </Section>
 
   <Section id="watch" title="The watch" subtitle="Every Monday: what changed in the tools and models the studio runs on, what it means for our work, and what we did about it.">
     {watch ? (
@@ -109,19 +79,6 @@ const useIt = config.sections.find((s) => s.id === 'use-it');
         </a>
       ))}
     </div>
-  </Section>
-
-  <Section id="archive" title="Back issues" subtitle={back.length ? undefined : 'None yet: this is where earlier issues will be listed.'}>
-    {back.length > 0 && (
-      <ul class="mt-6 space-y-2">
-        {back.map((i) => (
-          <li><a class="text-accent underline" href={`${base}/${i.id}/`}>Issue {i.data.issue}: {i.data.title}</a> <span class="text-dim">· {i.data.date}</span></li>
-        ))}
-      </ul>
-    )}
-    {back.length > 0 && (
-      <p class="mt-4 text-sm text-dim">There's no issue 12: the number was skipped.</p>
-    )}
   </Section>
 
   {useIt && useIt.kind === 'code-cards' && (

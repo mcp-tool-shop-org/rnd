@@ -28,4 +28,4 @@ Status labels mean the same thing everywhere:
 Pre-registered and post hoc results are labelled on every chart. A post hoc result is one we went looking for
 after seeing the data; it's useful, but weaker.
 
-Start from the [newsletter](../) for what changed lately, or pick a brief from the sidebar.
+Pick a brief from the sidebar, or see what changed lately in the [weekly watch](../watch/).

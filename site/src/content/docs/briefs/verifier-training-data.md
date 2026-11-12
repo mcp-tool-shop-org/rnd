@@ -61,8 +61,6 @@ candidate writers on rented A100s.
 - **Thinking is most of the cost.** One writer spent 95% of its output on reasoning, about 12,000 tokens per practice row. So
   the pilot became an 8-row screen, and cost per accepted row is now part of the readout.
 
-→ [Issue 11](/rnd/newsletter/issue-11/) has the data and the method.
-
 ## Update, 2026-10-19: testing the critic
 
 The critic accepted 35 of 36 rows from one writer in the screen, so the critic itself was tested. Good rows were
@@ -74,8 +72,6 @@ broken on purpose and given to two critics, Muse-Glimmer-30B and Nemotron-3.5-Li
 - **The pre-registered test says "not shown" yet.** The result was 6 : 0 for Muse and 7 : 0 for Lightning, but the
   multiple-test correction committed in advance gives 0.0625. A confirmation test on fresh rows comes next, as a
   single pre-registered comparison.
-
-→ [Issue 14](/rnd/newsletter/issue-14/) has the data and the method.
 
 ## Caveats
 

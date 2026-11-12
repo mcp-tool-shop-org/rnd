@@ -18,18 +18,6 @@ export default defineConfig({
         replacesTitle: false,
       },
       disable404Route: true,
-      // Lets feed readers and browsers find the newsletter feed from any page.
-      head: [
-        {
-          tag: 'link',
-          attrs: {
-            rel: 'alternate',
-            type: 'application/rss+xml',
-            title: 'Research and Development: the newsletter',
-            href: '/rnd/newsletter/rss.xml',
-          },
-        },
-      ],
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/mcp-tool-shop-org/rnd' },
       ],
@@ -37,10 +25,6 @@ export default defineConfig({
         {
           label: 'Research briefs',
           items: [{ autogenerate: { directory: 'briefs' } }],
-        },
-        {
-          label: 'Newsletter',
-          items: [{ autogenerate: { directory: 'newsletter' } }],
         },
         {
           label: 'The watch (weekly)',
@@ -52,8 +36,6 @@ export default defineConfig({
         },
       ],
       customCss: ['./src/styles/starlight-custom.css'],
-      // Adds a follow-by-RSS line to the end of each newsletter issue.
-      components: { Footer: './src/components/Footer.astro' },
     }),
   ],
   vite: {

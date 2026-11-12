@@ -1,8 +1,7 @@
 # Dataset desk calibration: rungs 2 and 2b
 
 These are the measurements behind the desk's duplicate thresholds, run on the RTX 5090 on 2026-10-19 and 2026-10-20.
-[Newsletter issue 16](../../../site/src/content/docs/newsletter/issue-16.md) tells the story. This folder holds the
-numbers only. The art and the text of the run files aren't published.
+This folder holds the numbers only. The art and the text of the run files aren't published.
 
 | File | What it holds |
 |---|---|

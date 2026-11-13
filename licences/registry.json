@@ -701,13 +701,20 @@
       "kind": "service-terms",
       "covers": [
         "Gemini API",
-        "Google AI Studio"
+        "Google AI Studio",
+        "Gemini 3 Pro Image (Nano Banana Pro, gemini-3-pro-image) in the Google AI Studio Playground"
       ],
-      "url": "https://ai.google.dev/gemini-api/terms",
-      "page_date": "2026-04-28 (last updated)",
-      "read_date": "2026-10-16",
+      "url": "https://aistudio.google.com/docs/terms.md",
+      "page_date": "Effective March 23, 2026",
+      "read_date": "2026-11-13",
       "clauses": [
-        "You may not use the Services to develop models that compete with the Services (e.g., Gemini API or Google AI Studio)."
+        "You may not use the Services to develop models that compete with the Services (e.g., Gemini API or Google AI Studio).",
+        "Google won't claim ownership over that content.",
+        "Google may generate the same or similar content for others",
+        "You're responsible for your use of generated content",
+        "Your access to Google AI Studio is a \"Paid Service\" even when it is offered free of charge, as long as the account you are using to access Google AI Studio has access to a Cloud Project with an associated and active",
+        "When you use Paid Services, including, for example, the paid quota of the Gemini API, Google doesn't use your prompts",
+        "For Paid Services, Google logs prompts and responses for a limited period of time, solely for detecting and preventing violations of the"
       ],
       "uses": {
         "assets": "allowed",
@@ -717,12 +724,15 @@
       },
       "conditions": [
         "Only models or products that don't compete with the Gemini API or AI Studio",
-        "Prospective: covers only output generated through the API, not earlier consumer-plan output"
+        "Prospective: covers only output generated through the API, not earlier consumer-plan output",
+        "Generated content: Google claims no ownership but may generate the same or similar content for others; the studio is responsible for its use of it",
+        "Data use differs by account type: the Paid Services terms (an account with a Cloud Project and active Cloud Billing) say prompts and responses are not used to improve products; the Unpaid Services terms say they are. Which applied to a given generation is a fact of the account, not of this page"
       ],
-      "notes": "The clean route for future Google-written ML tooling (a paid API key, the maintainer's decision). The consumer ToS clause (google-tos) does not apply here. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'.",
-      "snapshot_sha256": "296d96034f56cc95ddbf4be680e92510a4fd38d651d6499dff2fcfc079305cec",
-      "snapshot_file": "2026-10-17/gemini-api-terms.txt",
-      "archive_url": null
+      "notes": "The clean route for future Google-written ML tooling (a paid API key, the maintainer's decision). The consumer ToS clause (google-tos) does not apply here. Revised 2026-10-17: verdicts follow the clause rule (barred only by a quoted clause); 'proven' became 'allowed'. Read again 2026-11-13: the page now lives at aistudio.google.com/docs/terms (ai.google.dev/gemini-api/terms redirects there with a 301); its text is embedded in the HTML as Markdown, so `url` points at the Markdown form (`.md`) that the snapshot tool can read, and the page's own date is 'Effective March 23, 2026'. 2026-11-13: the studio's Escape the Valley woodcut art was generated in the Google AI Studio Playground (Gemini 3 Pro Image, Nano Banana Pro) under these terms. No clause restricts commercial use or redistribution of generated images; the art is to be released under CC BY 4.0 with an AI-generation notice (see google-generative-ai-prohibited-use-policy and gemini-api-image-generation-docs for the provenance and watermark points). Training on generated images stays under the competing-model condition above.",
+      "snapshot_sha256": "23e625fa135266764bbe675f342f62562f9d652ec9badc7a8f3bdb17ffb8ac23",
+      "snapshot_file": "2026-11-13/gemini-api-terms.txt",
+      "archive_url": null,
+      "restriction_search": "Read the page's Markdown source on 2026-11-13 (22,163 chars of page text): Use of Generated Content, Unpaid Services, Paid Services and the 'develop models that compete' paragraph. The only restriction touching generated output is the competing-model clause; the generated-content section disclaims ownership and puts responsibility for use on the user."
     },
     {
       "id": "google-cloud-service-terms",
@@ -2420,6 +2430,90 @@
       "snapshot_file": "2026-11-11/embeddinggemma-2-card.txt",
       "archive_url": "http://web.archive.org/web/20261111211825/https://huggingface.co/google/embeddinggemma-2",
       "restriction_search": "Read the card (22,588 chars of page text) and searched for prohibit, must, policy, terms, restrict, misuse: the one term is the Prohibited Use Policy line (card README line 284 at f9972ac22e69). No output or training clause."
+    },
+    {
+      "id": "google-generative-ai-prohibited-use-policy",
+      "owner": "Google",
+      "kind": "usage-policy",
+      "covers": [
+        "Google generative AI products and services that refer to this policy, including Gemini API and Google AI Studio"
+      ],
+      "url": "https://policies.google.com/terms/generative-ai/use-policy",
+      "page_date": "Last Modified: December 17, 2024",
+      "read_date": "2026-11-13",
+      "clauses": [
+        "Misrepresenting the provenance of generated content by claiming it was created solely by a human, in order to deceive."
+      ],
+      "uses": {
+        "assets": "conditions",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Generated art is disclosed as AI-generated wherever it is published; never present it as made solely by a human"
+      ],
+      "notes": "The policy is the one the Gemini API terms point to for abuse logging. Its provenance clause bars deceptive human-only claims; disclosure keeps the studio's use clear of it. The policy also bars content that infringes others' rights, sexually explicit or hateful content and similar; none of that bears on the studio's game art. It says exceptions may be made for artistic considerations. Read 2026-11-13 for the Escape the Valley woodcut art generated with Gemini 3 Pro Image.",
+      "restriction_search": "Read the full page text (3,972 chars) on 2026-11-13: sections on dangerous or illegal activity, security, sexually explicit, violent or hateful content, and misinformation or misrepresentation. The only clause that bears on how generated art is presented is the provenance clause; no clause restricts commercial use, redistribution or licensing of generated output.",
+      "snapshot_sha256": "48af2df074564edb7c0cadbdbd2aa353b8f9d5cfcb74da3bb179bdee79467621",
+      "snapshot_file": "2026-11-13/google-generative-ai-prohibited-use-policy.txt",
+      "archive_url": "http://web.archive.org/web/20261111193212/https://policies.google.com/terms/generative-ai/use-policy"
+    },
+    {
+      "id": "gemini-api-image-generation-docs",
+      "owner": "Google",
+      "kind": "documentation",
+      "covers": [
+        "Gemini image generation (Nano Banana models, including gemini-3-pro-image) as documented for the Gemini API and Google AI Studio"
+      ],
+      "url": "https://aistudio.google.com/docs/image-generation.md",
+      "page_date": "none shown",
+      "read_date": "2026-11-13",
+      "clauses": [
+        "All generated images include a [SynthID watermark](https://ai.google.dev/responsible/docs/safeguards/synthid)."
+      ],
+      "uses": {
+        "assets": "conditions",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Say wherever the art is published that the images carry a SynthID watermark (and that they are AI-generated)"
+      ],
+      "notes": "Documentation, not a contract. The human page is ai.google.dev/gemini-api/docs/image-generation, which 301-redirects to aistudio.google.com/docs/image-generation; `url` is the Markdown source of that page, which the snapshot tool can read. It lists gemini-3-pro-image as Nano Banana Pro. The page states a fact about outputs (a SynthID watermark) and sets no usage restriction; training on generated images stays under the competing-model condition in gemini-api-terms.",
+      "restriction_search": "Searched the page's Markdown (205,209 chars of page text) for SynthID, watermark, licen, commercial, prohibit, restrict: the watermark sentence is the only provision bearing on use of the images (the brackets and URL in the quoted clause are the page's Markdown link syntax); no licence or restriction wording.",
+      "snapshot_sha256": "248c40898ad1f5e344a234419db090f530ac50b91799cf4b549577296711c585",
+      "snapshot_file": "2026-11-13/gemini-api-image-generation-docs.txt",
+      "archive_url": null
+    },
+    {
+      "id": "google-ai-studio-plans-page",
+      "owner": "Google",
+      "kind": "service-page",
+      "covers": [
+        "Google AI Pro and Ultra subscription plans in Google AI Studio (Playground and Build)"
+      ],
+      "url": "https://aistudio.google.com/docs/google-ai-plans.md",
+      "page_date": "none shown",
+      "read_date": "2026-11-13",
+      "clauses": [
+        "Google AI Pro and Ultra subscriptions unlock paid models and higher rate limits.",
+        "These benefits apply to the Google AI Studio Playground",
+        "When you reach your daily subscription quota in AI Studio, you can continue working by using a Gemini API key."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [],
+      "notes": "Describes plan benefits only; it contains no terms on generated output. Its 'Limitations' list says plan benefits apply only within the AI Studio web interface and that Gemini API usage by API key is billed separately. The Playground use is therefore under the Gemini API Additional Terms (gemini-api-terms). The page does not say whether a subscription account counts as a Paid Service under those terms; that turns on the Cloud Billing wording quoted in gemini-api-terms. The human URL is aistudio.google.com/docs/google-ai-plans; `url` is its Markdown form for the snapshot tool. The page shows no date.",
+      "restriction_search": "Read the whole page (4,840 chars of page text) on 2026-11-13 for any term on generated content, ownership, commercial use or redistribution: none present.",
+      "snapshot_sha256": "93e234cc7ef72f83847a34b2a1e1eaf92053c6162ed769c94085e98532f772fc",
+      "snapshot_file": "2026-11-13/google-ai-studio-plans-page.txt",
+      "archive_url": "http://web.archive.org/web/20261103103522/https://aistudio.google.com/docs/google-ai-plans.md"
     }
   ]
 }

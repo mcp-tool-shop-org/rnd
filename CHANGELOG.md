@@ -11,6 +11,15 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.72] - 2026-11-13
+
+- licences: Google image-generation terms (Gemini API terms re-read, prohibited use policy, image docs, AI Studio plans), read 2026-11-13
+- Updated experiment `charts`
+- Updated experiment `colab-golden-path`
+- Updated experiment `dataset-desk`
+- Updated experiment `ollama-cuda-backend`
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.23.1.71] - 2026-11-12
 
 - newsletter issue 44 (12 November), the GPU work moves to Colab, and a BIOS update quiets the log: a Colab feature (how a window works, today's ten windows, the lanes, the field), the F.22 BIOS fix for 915 WHEA records, the freshness watcher and today's upgrades, seeds 45 to 47 run health, dataset-desk 0.3.0 and its translation pins

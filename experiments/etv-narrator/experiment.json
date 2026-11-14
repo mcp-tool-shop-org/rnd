@@ -1,0 +1,71 @@
+{
+ "schema": "rnd-experiment/v1",
+ "name": "etv-narrator",
+ "status": "running",
+ "design": "README.md",
+ "template": null,
+ "budgets": [],
+ "licences": [],
+ "runs": [
+  {
+   "id": "s1",
+   "venue": "rig",
+   "hardware": "RTX 5090",
+   "date": "2026-11-13",
+   "cost": 1.38,
+   "cost_unit": "rig_hours",
+   "cost_basis": "rate_x_runtime",
+   "cap": null,
+   "outcome": "results",
+   "why": "plain, cited, text arms, 19,440 calls; 82 min 44 s of a 120 min wall",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "s2",
+   "venue": "rig",
+   "hardware": "RTX 5090",
+   "date": "2026-11-13",
+   "cost": 0.45,
+   "cost_unit": "rig_hours",
+   "cost_basis": "rate_x_runtime",
+   "cap": null,
+   "outcome": "results",
+   "why": "plain re-check after #85, 6,480 calls; 27 min 8 s of a 2,100 s wall",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "s3",
+   "venue": "rig",
+   "hardware": "RTX 5090",
+   "date": "2026-11-13",
+   "cost": 3.52,
+   "cost_unit": "rig_hours",
+   "cost_basis": "rate_x_runtime",
+   "cap": null,
+   "outcome": "results",
+   "why": "seven arms, 52,771 calls; 3 h 31 min of a 4 h wall",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "s4",
+   "venue": "rig",
+   "hardware": "RTX 5090",
+   "date": "2026-11-13",
+   "cost": 2.45,
+   "cost_unit": "rig_hours",
+   "cost_basis": "rate_x_runtime",
+   "cap": null,
+   "outcome": "results",
+   "why": "three full arms and three latency arms, 32,003 calls; 2 h 27 min of a 3 h wall",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  }
+ ]
+}

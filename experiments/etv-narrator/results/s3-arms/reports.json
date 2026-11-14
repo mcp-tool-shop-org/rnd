@@ -1,0 +1,6107 @@
+{
+ "briefstop/plain-chronicler-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "brief-by-stop",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 707,
+    "fallback_slots": 13,
+    "turns_with_fallback": 9,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 13,
+    "rejects_by_code": {
+     "choice_parroting": 1,
+     "mid_sentence_capital": 2,
+     "unauthorised_resource_noun": 10
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "choice_parroting": 1,
+     "mid_sentence_capital": 2,
+     "unauthorised_resource_noun": 10
+    },
+    "lines_breaking_more_than_one_rule": 0,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 707,
+    "distinct_openings": 78,
+    "unique_opening_share": 0.03536067892503536,
+    "top_openings": [
+     {
+      "opening": "mud grips the",
+      "count": 184
+     },
+     {
+      "opening": "mud deepens",
+      "count": 173
+     },
+     {
+      "opening": "mud swells under",
+      "count": 58
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 32
+     },
+     {
+      "opening": "mud sucks at",
+      "count": 24
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 80,
+     "p50_ms": 108,
+     "p95_ms": 149,
+     "max_ms": 3143
+    },
+    "fallback_rate_slots": 0.018055555555555554,
+    "fallback_rate_turns": 0.025,
+    "latency": {
+     "calls": 720,
+     "min_ms": 38,
+     "p50_ms": 53,
+     "p95_ms": 95,
+     "max_ms": 3095
+    }
+   }
+  ]
+ },
+ "briefstop/plain-chronicler-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "brief-by-stop",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 326,
+    "fallback_slots": 394,
+    "turns_with_fallback": 269,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 394,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 7,
+     "choice_parroting": 12,
+     "death_words": 1,
+     "draft_animal_species": 46,
+     "invalid_punctuation": 1,
+     "numbers_digits_or_units": 34,
+     "personal_pronoun": 8,
+     "quantifier_before_resource_or_half": 232,
+     "unauthorised_resource_noun": 53
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 14,
+     "choice_parroting": 22,
+     "death_words": 6,
+     "draft_animal_species": 57,
+     "invalid_punctuation": 1,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 40,
+     "personal_pronoun": 26,
+     "quantifier_before_resource_or_half": 233,
+     "unauthorised_resource_noun": 253
+    },
+    "lines_breaking_more_than_one_rule": 219,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 326,
+    "distinct_openings": 69,
+    "unique_opening_share": 0.08282208588957055,
+    "top_openings": [
+     {
+      "opening": "mud grips the",
+      "count": 53
+     },
+     {
+      "opening": "mud sucks at",
+      "count": 37
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 25
+     },
+     {
+      "opening": "mud deepens in",
+      "count": 19
+     },
+     {
+      "opening": "mud deepens wind",
+      "count": 19
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 472,
+     "p50_ms": 548,
+     "p95_ms": 607,
+     "max_ms": 3665
+    },
+    "fallback_rate_slots": 0.5472222222222223,
+    "fallback_rate_turns": 0.7472222222222222,
+    "latency": {
+     "calls": 720,
+     "min_ms": 208,
+     "p50_ms": 271,
+     "p95_ms": 330,
+     "max_ms": 3406
+    }
+   }
+  ]
+ },
+ "briefstop/plain-chronicler-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "brief-by-stop",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 363,
+    "fallback_slots": 357,
+    "turns_with_fallback": 248,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 357,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 6,
+     "choice_parroting": 6,
+     "draft_animal_species": 32,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 13,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 33,
+     "personal_pronoun": 17,
+     "quantifier_before_resource_or_half": 206,
+     "unauthorised_resource_noun": 42
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 9,
+     "choice_parroting": 14,
+     "death_words": 1,
+     "draft_animal_species": 39,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 13,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 37,
+     "personal_pronoun": 23,
+     "quantifier_before_resource_or_half": 210,
+     "unauthorised_resource_noun": 218
+    },
+    "lines_breaking_more_than_one_rule": 191,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 363,
+    "distinct_openings": 79,
+    "unique_opening_share": 0.07713498622589532,
+    "top_openings": [
+     {
+      "opening": "mud grips the",
+      "count": 61
+     },
+     {
+      "opening": "mud sucks at",
+      "count": 41
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 28
+     },
+     {
+      "opening": "mud deepens wind",
+      "count": 24
+     },
+     {
+      "opening": "mud deepens in",
+      "count": 17
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 362,
+     "p50_ms": 464,
+     "p95_ms": 521,
+     "max_ms": 3545
+    },
+    "fallback_rate_slots": 0.49583333333333335,
+    "fallback_rate_turns": 0.6888888888888889,
+    "latency": {
+     "calls": 720,
+     "min_ms": 168,
+     "p50_ms": 228,
+     "p95_ms": 284,
+     "max_ms": 3341
+    }
+   }
+  ]
+ },
+ "briefstop/plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "brief-by-stop",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 565,
+    "fallback_slots": 155,
+    "turns_with_fallback": 110,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 155,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 7,
+     "death_words": 4,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 2,
+     "personal_pronoun": 25,
+     "unauthorised_resource_noun": 116
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 7,
+     "death_words": 4,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 2,
+     "personal_pronoun": 25,
+     "unauthorised_resource_noun": 116
+    },
+    "lines_breaking_more_than_one_rule": 0,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 565,
+    "distinct_openings": 165,
+    "unique_opening_share": 0.10088495575221239,
+    "top_openings": [
+     {
+      "opening": "the wind hums",
+      "count": 47
+     },
+     {
+      "opening": "mud grips the",
+      "count": 36
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 32
+     },
+     {
+      "opening": "the sun dips",
+      "count": 20
+     },
+     {
+      "opening": "the wind stirs",
+      "count": 20
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 89,
+     "p50_ms": 119,
+     "p95_ms": 161,
+     "max_ms": 3100
+    },
+    "fallback_rate_slots": 0.2152777777777778,
+    "fallback_rate_turns": 0.3055555555555556,
+    "latency": {
+     "calls": 720,
+     "min_ms": 40,
+     "p50_ms": 58,
+     "p95_ms": 99,
+     "max_ms": 3057
+    }
+   }
+  ]
+ },
+ "briefstop/plain-fireside-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "brief-by-stop",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 316,
+    "fallback_slots": 404,
+    "turns_with_fallback": 275,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 403,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 28,
+     "choice_parroting": 3,
+     "death_words": 6,
+     "draft_animal_species": 2,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 1,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 71,
+     "personal_pronoun": 23,
+     "quantifier_before_resource_or_half": 84,
+     "unauthorised_resource_noun": 183
+    },
+    "lines_checked": 719,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 74,
+     "choice_parroting": 17,
+     "death_words": 9,
+     "draft_animal_species": 4,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 1,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 74,
+     "personal_pronoun": 31,
+     "quantifier_before_resource_or_half": 84,
+     "unauthorised_resource_noun": 282
+    },
+    "lines_breaking_more_than_one_rule": 155,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 316,
+    "distinct_openings": 101,
+    "unique_opening_share": 0.14240506329113925,
+    "top_openings": [
+     {
+      "opening": "smoke curls from",
+      "count": 26
+     },
+     {
+      "opening": "the wind hums",
+      "count": 25
+     },
+     {
+      "opening": "the wind stirs",
+      "count": 22
+     },
+     {
+      "opening": "the fire crackles",
+      "count": 16
+     },
+     {
+      "opening": "the wind pulls",
+      "count": 13
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 462,
+     "p50_ms": 550,
+     "p95_ms": 627,
+     "max_ms": 4166
+    },
+    "fallback_rate_slots": 0.5611111111111111,
+    "fallback_rate_turns": 0.7638888888888888,
+    "latency": {
+     "calls": 720,
+     "min_ms": 186,
+     "p50_ms": 269,
+     "p95_ms": 340,
+     "max_ms": 3937
+    }
+   }
+  ]
+ },
+ "briefstop/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "brief-by-stop",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 252,
+    "fallback_slots": 468,
+    "turns_with_fallback": 293,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 467,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 13,
+     "choice_parroting": 6,
+     "death_words": 4,
+     "draft_animal_species": 1,
+     "invalid_punctuation": 3,
+     "length_cap_exceeded": 187,
+     "numbers_digits_or_units": 48,
+     "personal_pronoun": 18,
+     "quantifier_before_resource_or_half": 42,
+     "unauthorised_resource_noun": 145
+    },
+    "lines_checked": 719,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 44,
+     "choice_parroting": 10,
+     "death_words": 5,
+     "draft_animal_species": 4,
+     "invalid_punctuation": 3,
+     "length_cap_exceeded": 187,
+     "numbers_digits_or_units": 59,
+     "personal_pronoun": 18,
+     "quantifier_before_resource_or_half": 62,
+     "unauthorised_resource_noun": 278
+    },
+    "lines_breaking_more_than_one_rule": 165,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 252,
+    "distinct_openings": 112,
+    "unique_opening_share": 0.2261904761904762,
+    "top_openings": [
+     {
+      "opening": "the wind hums",
+      "count": 19
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 18
+     },
+     {
+      "opening": "a man with",
+      "count": 7
+     },
+     {
+      "opening": "the fire crackles",
+      "count": 7
+     },
+     {
+      "opening": "a sharp cry",
+      "count": 6
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 350,
+     "p50_ms": 475,
+     "p95_ms": 570,
+     "max_ms": 3423
+    },
+    "fallback_rate_slots": 0.65,
+    "fallback_rate_turns": 0.8138888888888889,
+    "latency": {
+     "calls": 720,
+     "min_ms": 161,
+     "p50_ms": 237,
+     "p95_ms": 305,
+     "max_ms": 3244
+    }
+   }
+  ]
+ },
+ "briefstop/plain-lantern-bearer-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "brief-by-stop",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 687,
+    "fallback_slots": 33,
+    "turns_with_fallback": 27,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 33,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 3,
+     "choice_parroting": 1,
+     "death_words": 2,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 6,
+     "personal_pronoun": 14,
+     "unauthorised_resource_noun": 6
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 3,
+     "choice_parroting": 1,
+     "death_words": 2,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 6,
+     "personal_pronoun": 14,
+     "unauthorised_resource_noun": 6
+    },
+    "lines_breaking_more_than_one_rule": 0,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 687,
+    "distinct_openings": 148,
+    "unique_opening_share": 0.09315866084425037,
+    "top_openings": [
+     {
+      "opening": "mud pools stretch",
+      "count": 258
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 33
+     },
+     {
+      "opening": "wind hums through",
+      "count": 16
+     },
+     {
+      "opening": "the riverbed yields",
+      "count": 12
+     },
+     {
+      "opening": "dust spirals upward",
+      "count": 10
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 88,
+     "p50_ms": 119,
+     "p95_ms": 163,
+     "max_ms": 3233
+    },
+    "fallback_rate_slots": 0.04583333333333333,
+    "fallback_rate_turns": 0.075,
+    "latency": {
+     "calls": 720,
+     "min_ms": 41,
+     "p50_ms": 58,
+     "p95_ms": 99,
+     "max_ms": 3186
+    }
+   }
+  ]
+ },
+ "briefstop/plain-lantern-bearer-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "brief-by-stop",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 352,
+    "fallback_slots": 368,
+    "turns_with_fallback": 242,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 368,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 8,
+     "choice_parroting": 5,
+     "death_words": 2,
+     "length_cap_exceeded": 11,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 125,
+     "personal_pronoun": 20,
+     "quantifier_before_resource_or_half": 157,
+     "unauthorised_resource_noun": 39
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 13,
+     "choice_parroting": 17,
+     "death_words": 5,
+     "length_cap_exceeded": 11,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 141,
+     "personal_pronoun": 32,
+     "quantifier_before_resource_or_half": 158,
+     "unauthorised_resource_noun": 202
+    },
+    "lines_breaking_more_than_one_rule": 189,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 352,
+    "distinct_openings": 105,
+    "unique_opening_share": 0.13068181818181818,
+    "top_openings": [
+     {
+      "opening": "mud pools stretch",
+      "count": 60
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 28
+     },
+     {
+      "opening": "the sun dips",
+      "count": 24
+     },
+     {
+      "opening": "dust spirals in",
+      "count": 12
+     },
+     {
+      "opening": "the riverbed yields",
+      "count": 12
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 430,
+     "p50_ms": 559,
+     "p95_ms": 636,
+     "max_ms": 3526
+    },
+    "fallback_rate_slots": 0.5111111111111111,
+    "fallback_rate_turns": 0.6722222222222223,
+    "latency": {
+     "calls": 720,
+     "min_ms": 207,
+     "p50_ms": 275,
+     "p95_ms": 345,
+     "max_ms": 3273
+    }
+   }
+  ]
+ },
+ "briefstop/plain-lantern-bearer-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "brief-by-stop",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 309,
+    "fallback_slots": 411,
+    "turns_with_fallback": 264,
+    "timeouts": 0,
+    "bad_json": 6,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 405,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 8,
+     "choice_parroting": 1,
+     "death_words": 2,
+     "length_cap_exceeded": 182,
+     "numbers_digits_or_units": 66,
+     "personal_pronoun": 24,
+     "quantifier_before_resource_or_half": 96,
+     "unauthorised_resource_noun": 26
+    },
+    "lines_checked": 714,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 13,
+     "choice_parroting": 7,
+     "death_words": 2,
+     "length_cap_exceeded": 182,
+     "numbers_digits_or_units": 100,
+     "personal_pronoun": 29,
+     "quantifier_before_resource_or_half": 137,
+     "unauthorised_resource_noun": 181
+    },
+    "lines_breaking_more_than_one_rule": 189,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 309,
+    "distinct_openings": 110,
+    "unique_opening_share": 0.18770226537216828,
+    "top_openings": [
+     {
+      "opening": "mud pools stretch",
+      "count": 43
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 22
+     },
+     {
+      "opening": "the sun dips",
+      "count": 13
+     },
+     {
+      "opening": "the riverbed yields",
+      "count": 12
+     },
+     {
+      "opening": "armed figures step",
+      "count": 9
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 311,
+     "p50_ms": 462,
+     "p95_ms": 583,
+     "max_ms": 3210
+    },
+    "fallback_rate_slots": 0.5708333333333333,
+    "fallback_rate_turns": 0.7333333333333333,
+    "latency": {
+     "calls": 720,
+     "min_ms": 143,
+     "p50_ms": 228,
+     "p95_ms": 311,
+     "max_ms": 3042
+    }
+   }
+  ]
+ },
+ "cand-modelcard/plain-chronicler-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 650,
+    "fallback_slots": 70,
+    "turns_with_fallback": 60,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 70,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 3,
+     "draft_animal_species": 7,
+     "numbers_digits_or_units": 1,
+     "personal_pronoun": 10,
+     "quantifier_before_resource_or_half": 44,
+     "unauthorised_resource_noun": 4
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 6,
+     "draft_animal_species": 7,
+     "numbers_digits_or_units": 1,
+     "personal_pronoun": 10,
+     "quantifier_before_resource_or_half": 44,
+     "unauthorised_resource_noun": 38
+    },
+    "lines_breaking_more_than_one_rule": 37,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 650,
+    "distinct_openings": 146,
+    "unique_opening_share": 0.1076923076923077,
+    "top_openings": [
+     {
+      "opening": "mud grips the",
+      "count": 84
+     },
+     {
+      "opening": "mud sucks at",
+      "count": 67
+     },
+     {
+      "opening": "mud deepens wind",
+      "count": 38
+     },
+     {
+      "opening": "mud swells under",
+      "count": 36
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 32
+     }
+    ],
+    "calls_made": 1086,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 253,
+     "p50_ms": 448,
+     "p95_ms": 884,
+     "max_ms": 3863
+    },
+    "fallback_rate_slots": 0.09722222222222222,
+    "fallback_rate_turns": 0.16666666666666666,
+    "latency": {
+     "calls": 720,
+     "min_ms": 117,
+     "p50_ms": 185,
+     "p95_ms": 485,
+     "max_ms": 3716
+    }
+   }
+  ]
+ },
+ "cand-modelcard/plain-chronicler-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 516,
+    "fallback_slots": 204,
+    "turns_with_fallback": 155,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 204,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 4,
+     "choice_parroting": 6,
+     "death_words": 1,
+     "draft_animal_species": 22,
+     "invalid_punctuation": 2,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 19,
+     "personal_pronoun": 6,
+     "quantifier_before_resource_or_half": 119,
+     "unauthorised_resource_noun": 23
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 8,
+     "choice_parroting": 16,
+     "death_words": 2,
+     "draft_animal_species": 33,
+     "invalid_punctuation": 2,
+     "mid_sentence_capital": 3,
+     "numbers_digits_or_units": 22,
+     "personal_pronoun": 12,
+     "quantifier_before_resource_or_half": 119,
+     "unauthorised_resource_noun": 122
+    },
+    "lines_breaking_more_than_one_rule": 117,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 516,
+    "distinct_openings": 118,
+    "unique_opening_share": 0.10271317829457365,
+    "top_openings": [
+     {
+      "opening": "mud grips the",
+      "count": 77
+     },
+     {
+      "opening": "mud sucks at",
+      "count": 43
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 32
+     },
+     {
+      "opening": "mud swells under",
+      "count": 29
+     },
+     {
+      "opening": "mud deepens in",
+      "count": 22
+     }
+    ],
+    "calls_made": 1441,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 476,
+     "p50_ms": 1051,
+     "p95_ms": 1633,
+     "max_ms": 4030
+    },
+    "fallback_rate_slots": 0.2833333333333333,
+    "fallback_rate_turns": 0.4305555555555556,
+    "latency": {
+     "calls": 720,
+     "min_ms": 214,
+     "p50_ms": 527,
+     "p95_ms": 851,
+     "max_ms": 3767
+    }
+   }
+  ]
+ },
+ "cand-modelcard/plain-chronicler-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 578,
+    "fallback_slots": 142,
+    "turns_with_fallback": 117,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 142,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 4,
+     "choice_parroting": 4,
+     "death_words": 1,
+     "draft_animal_species": 9,
+     "invalid_punctuation": 2,
+     "numbers_digits_or_units": 14,
+     "personal_pronoun": 5,
+     "quantifier_before_resource_or_half": 82,
+     "unauthorised_resource_noun": 21
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 8,
+     "choice_parroting": 10,
+     "death_words": 1,
+     "draft_animal_species": 12,
+     "invalid_punctuation": 2,
+     "numbers_digits_or_units": 17,
+     "personal_pronoun": 12,
+     "quantifier_before_resource_or_half": 83,
+     "unauthorised_resource_noun": 89
+    },
+    "lines_breaking_more_than_one_rule": 82,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 578,
+    "distinct_openings": 129,
+    "unique_opening_share": 0.0847750865051903,
+    "top_openings": [
+     {
+      "opening": "mud grips the",
+      "count": 78
+     },
+     {
+      "opening": "mud sucks at",
+      "count": 43
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 32
+     },
+     {
+      "opening": "mud deepens wind",
+      "count": 24
+     },
+     {
+      "opening": "mud swells under",
+      "count": 23
+     }
+    ],
+    "calls_made": 1296,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 396,
+     "p50_ms": 789,
+     "p95_ms": 1286,
+     "max_ms": 3801
+    },
+    "fallback_rate_slots": 0.19722222222222222,
+    "fallback_rate_turns": 0.325,
+    "latency": {
+     "calls": 720,
+     "min_ms": 165,
+     "p50_ms": 372,
+     "p95_ms": 682,
+     "max_ms": 3587
+    }
+   }
+  ]
+ },
+ "cand-modelcard/plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 567,
+    "fallback_slots": 153,
+    "turns_with_fallback": 109,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 152,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 2,
+     "death_words": 2,
+     "draft_animal_species": 1,
+     "numbers_digits_or_units": 20,
+     "personal_pronoun": 16,
+     "quantifier_before_resource_or_half": 11,
+     "unauthorised_resource_noun": 99
+    },
+    "lines_checked": 719,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 8,
+     "choice_parroting": 2,
+     "death_words": 2,
+     "draft_animal_species": 1,
+     "numbers_digits_or_units": 20,
+     "personal_pronoun": 16,
+     "quantifier_before_resource_or_half": 11,
+     "unauthorised_resource_noun": 120
+    },
+    "lines_breaking_more_than_one_rule": 26,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 567,
+    "distinct_openings": 211,
+    "unique_opening_share": 0.18518518518518517,
+    "top_openings": [
+     {
+      "opening": "mud grips the",
+      "count": 31
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 30
+     },
+     {
+      "opening": "the wind hums",
+      "count": 26
+     },
+     {
+      "opening": "wind hums through",
+      "count": 18
+     },
+     {
+      "opening": "sun dips low",
+      "count": 15
+     }
+    ],
+    "calls_made": 1243,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 255,
+     "p50_ms": 578,
+     "p95_ms": 1107,
+     "max_ms": 3976
+    },
+    "fallback_rate_slots": 0.2125,
+    "fallback_rate_turns": 0.30277777777777776,
+    "latency": {
+     "calls": 720,
+     "min_ms": 115,
+     "p50_ms": 276,
+     "p95_ms": 611,
+     "max_ms": 3813
+    }
+   }
+  ]
+ },
+ "cand-modelcard/plain-fireside-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 505,
+    "fallback_slots": 215,
+    "turns_with_fallback": 165,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 215,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 7,
+     "choice_parroting": 2,
+     "death_words": 4,
+     "draft_animal_species": 1,
+     "invalid_punctuation": 1,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 31,
+     "personal_pronoun": 9,
+     "quantifier_before_resource_or_half": 44,
+     "unauthorised_resource_noun": 114
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 35,
+     "choice_parroting": 6,
+     "death_words": 4,
+     "draft_animal_species": 2,
+     "invalid_punctuation": 1,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 31,
+     "personal_pronoun": 14,
+     "quantifier_before_resource_or_half": 44,
+     "unauthorised_resource_noun": 172
+    },
+    "lines_breaking_more_than_one_rule": 86,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 505,
+    "distinct_openings": 181,
+    "unique_opening_share": 0.1801980198019802,
+    "top_openings": [
+     {
+      "opening": "the wind hums",
+      "count": 42
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 31
+     },
+     {
+      "opening": "the wind stirs",
+      "count": 27
+     },
+     {
+      "opening": "the fire crackles",
+      "count": 20
+     },
+     {
+      "opening": "the sun dips",
+      "count": 16
+     }
+    ],
+    "calls_made": 1403,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 463,
+     "p50_ms": 1047,
+     "p95_ms": 1640,
+     "max_ms": 3880
+    },
+    "fallback_rate_slots": 0.2986111111111111,
+    "fallback_rate_turns": 0.4583333333333333,
+    "latency": {
+     "calls": 720,
+     "min_ms": 206,
+     "p50_ms": 511,
+     "p95_ms": 869,
+     "max_ms": 3641
+    }
+   }
+  ]
+ },
+ "cand-modelcard/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 529,
+    "fallback_slots": 191,
+    "turns_with_fallback": 139,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 191,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 5,
+     "death_words": 2,
+     "draft_animal_species": 1,
+     "numbers_digits_or_units": 37,
+     "personal_pronoun": 13,
+     "quantifier_before_resource_or_half": 30,
+     "unauthorised_resource_noun": 103
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 18,
+     "choice_parroting": 8,
+     "death_words": 2,
+     "draft_animal_species": 2,
+     "numbers_digits_or_units": 39,
+     "personal_pronoun": 17,
+     "quantifier_before_resource_or_half": 30,
+     "unauthorised_resource_noun": 140
+    },
+    "lines_breaking_more_than_one_rule": 61,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 529,
+    "distinct_openings": 204,
+    "unique_opening_share": 0.21739130434782608,
+    "top_openings": [
+     {
+      "opening": "the wind hums",
+      "count": 46
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 31
+     },
+     {
+      "opening": "mud grips the",
+      "count": 20
+     },
+     {
+      "opening": "the wind stirs",
+      "count": 13
+     },
+     {
+      "opening": "the fire crackles",
+      "count": 11
+     }
+    ],
+    "calls_made": 1389,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 380,
+     "p50_ms": 859,
+     "p95_ms": 1441,
+     "max_ms": 5156
+    },
+    "fallback_rate_slots": 0.2652777777777778,
+    "fallback_rate_turns": 0.3861111111111111,
+    "latency": {
+     "calls": 720,
+     "min_ms": 165,
+     "p50_ms": 428,
+     "p95_ms": 768,
+     "max_ms": 4600
+    }
+   }
+  ]
+ },
+ "cand-modelcard/plain-lantern-bearer-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 672,
+    "fallback_slots": 48,
+    "turns_with_fallback": 36,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 48,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 3,
+     "numbers_digits_or_units": 7,
+     "personal_pronoun": 21,
+     "quantifier_before_resource_or_half": 8,
+     "unauthorised_resource_noun": 7
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 3,
+     "numbers_digits_or_units": 8,
+     "personal_pronoun": 21,
+     "quantifier_before_resource_or_half": 8,
+     "unauthorised_resource_noun": 14
+    },
+    "lines_breaking_more_than_one_rule": 7,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 672,
+    "distinct_openings": 207,
+    "unique_opening_share": 0.15178571428571427,
+    "top_openings": [
+     {
+      "opening": "mud pools stretch",
+      "count": 163
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 32
+     },
+     {
+      "opening": "mud pulls at",
+      "count": 20
+     },
+     {
+      "opening": "wind hums through",
+      "count": 19
+     },
+     {
+      "opening": "the sun dips",
+      "count": 11
+     }
+    ],
+    "calls_made": 978,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 244,
+     "p50_ms": 365,
+     "p95_ms": 744,
+     "max_ms": 3535
+    },
+    "fallback_rate_slots": 0.06666666666666667,
+    "fallback_rate_turns": 0.1,
+    "latency": {
+     "calls": 720,
+     "min_ms": 113,
+     "p50_ms": 168,
+     "p95_ms": 438,
+     "max_ms": 3384
+    }
+   }
+  ]
+ },
+ "cand-modelcard/plain-lantern-bearer-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 553,
+    "fallback_slots": 167,
+    "turns_with_fallback": 126,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 166,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 10,
+     "choice_parroting": 2,
+     "numbers_digits_or_units": 39,
+     "personal_pronoun": 18,
+     "quantifier_before_resource_or_half": 71,
+     "unauthorised_resource_noun": 26
+    },
+    "lines_checked": 719,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 14,
+     "choice_parroting": 6,
+     "numbers_digits_or_units": 49,
+     "personal_pronoun": 27,
+     "quantifier_before_resource_or_half": 71,
+     "unauthorised_resource_noun": 97
+    },
+    "lines_breaking_more_than_one_rule": 86,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 553,
+    "distinct_openings": 171,
+    "unique_opening_share": 0.13924050632911392,
+    "top_openings": [
+     {
+      "opening": "mud pools stretch",
+      "count": 77
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 32
+     },
+     {
+      "opening": "mud grips the",
+      "count": 19
+     },
+     {
+      "opening": "the sun dips",
+      "count": 15
+     },
+     {
+      "opening": "the wind moves",
+      "count": 14
+     }
+    ],
+    "calls_made": 1324,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 469,
+     "p50_ms": 980,
+     "p95_ms": 1661,
+     "max_ms": 4013
+    },
+    "fallback_rate_slots": 0.23194444444444445,
+    "fallback_rate_turns": 0.35,
+    "latency": {
+     "calls": 720,
+     "min_ms": 217,
+     "p50_ms": 469,
+     "p95_ms": 880,
+     "max_ms": 3788
+    }
+   }
+  ]
+ },
+ "cand-modelcard/plain-lantern-bearer-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 589,
+    "fallback_slots": 131,
+    "turns_with_fallback": 103,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 130,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 5,
+     "numbers_digits_or_units": 34,
+     "personal_pronoun": 19,
+     "quantifier_before_resource_or_half": 54,
+     "unauthorised_resource_noun": 18
+    },
+    "lines_checked": 719,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 6,
+     "choice_parroting": 5,
+     "numbers_digits_or_units": 39,
+     "personal_pronoun": 22,
+     "quantifier_before_resource_or_half": 54,
+     "unauthorised_resource_noun": 74
+    },
+    "lines_breaking_more_than_one_rule": 65,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 589,
+    "distinct_openings": 188,
+    "unique_opening_share": 0.14431239388794567,
+    "top_openings": [
+     {
+      "opening": "mud pools stretch",
+      "count": 97
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 31
+     },
+     {
+      "opening": "wind hums through",
+      "count": 15
+     },
+     {
+      "opening": "mud pulls at",
+      "count": 14
+     },
+     {
+      "opening": "the sun dips",
+      "count": 13
+     }
+    ],
+    "calls_made": 1219,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 369,
+     "p50_ms": 716,
+     "p95_ms": 1275,
+     "max_ms": 4032
+    },
+    "fallback_rate_slots": 0.18194444444444444,
+    "fallback_rate_turns": 0.2861111111111111,
+    "latency": {
+     "calls": 720,
+     "min_ms": 159,
+     "p50_ms": 279,
+     "p95_ms": 691,
+     "max_ms": 3460
+    }
+   }
+  ]
+ },
+ "combo/plain-chronicler-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 645,
+    "fallback_slots": 75,
+    "turns_with_fallback": 67,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 75,
+    "rejects_by_code": {
+     "choice_parroting": 2,
+     "personal_pronoun": 5,
+     "unauthorised_resource_noun": 68
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "choice_parroting": 2,
+     "personal_pronoun": 7,
+     "unauthorised_resource_noun": 68
+    },
+    "lines_breaking_more_than_one_rule": 2,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 645,
+    "distinct_openings": 203,
+    "unique_opening_share": 0.16589147286821707,
+    "top_openings": [
+     {
+      "opening": "mud swells under",
+      "count": 97
+     },
+     {
+      "opening": "mud grips the",
+      "count": 57
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 33
+     },
+     {
+      "opening": "mud sucks at",
+      "count": 32
+     },
+     {
+      "opening": "wind hums through",
+      "count": 25
+     }
+    ],
+    "calls_made": 1062,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 174,
+     "p50_ms": 291,
+     "p95_ms": 615,
+     "max_ms": 4124
+    },
+    "fallback_rate_slots": 0.10416666666666667,
+    "fallback_rate_turns": 0.18611111111111112,
+    "latency": {
+     "calls": 720,
+     "min_ms": 80,
+     "p50_ms": 128,
+     "p95_ms": 361,
+     "max_ms": 3996
+    }
+   }
+  ]
+ },
+ "combo/plain-chronicler-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 605,
+    "fallback_slots": 115,
+    "turns_with_fallback": 95,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 115,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 2,
+     "mid_sentence_capital": 1,
+     "personal_pronoun": 4,
+     "quantifier_before_resource_or_half": 3,
+     "unauthorised_resource_noun": 103
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 6,
+     "choice_parroting": 4,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 1,
+     "personal_pronoun": 5,
+     "quantifier_before_resource_or_half": 3,
+     "unauthorised_resource_noun": 107
+    },
+    "lines_breaking_more_than_one_rule": 10,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 605,
+    "distinct_openings": 152,
+    "unique_opening_share": 0.1024793388429752,
+    "top_openings": [
+     {
+      "opening": "mud swells under",
+      "count": 101
+     },
+     {
+      "opening": "mud grips the",
+      "count": 56
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 32
+     },
+     {
+      "opening": "mud sucks at",
+      "count": 26
+     },
+     {
+      "opening": "mud deepens in",
+      "count": 25
+     }
+    ],
+    "calls_made": 1187,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 264,
+     "p50_ms": 509,
+     "p95_ms": 939,
+     "max_ms": 4131
+    },
+    "fallback_rate_slots": 0.1597222222222222,
+    "fallback_rate_turns": 0.2638888888888889,
+    "latency": {
+     "calls": 720,
+     "min_ms": 113,
+     "p50_ms": 207,
+     "p95_ms": 520,
+     "max_ms": 3957
+    }
+   }
+  ]
+ },
+ "combo/plain-chronicler-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 631,
+    "fallback_slots": 89,
+    "turns_with_fallback": 77,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 89,
+    "rejects_by_code": {
+     "choice_parroting": 2,
+     "personal_pronoun": 2,
+     "unauthorised_resource_noun": 85
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "choice_parroting": 2,
+     "personal_pronoun": 7,
+     "unauthorised_resource_noun": 85
+    },
+    "lines_breaking_more_than_one_rule": 5,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 631,
+    "distinct_openings": 191,
+    "unique_opening_share": 0.16957210776545167,
+    "top_openings": [
+     {
+      "opening": "mud swells under",
+      "count": 111
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 32
+     },
+     {
+      "opening": "mud grips the",
+      "count": 30
+     },
+     {
+      "opening": "mud sucks at",
+      "count": 29
+     },
+     {
+      "opening": "wind hums through",
+      "count": 23
+     }
+    ],
+    "calls_made": 1125,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 211,
+     "p50_ms": 344,
+     "p95_ms": 707,
+     "max_ms": 3568
+    },
+    "fallback_rate_slots": 0.12361111111111112,
+    "fallback_rate_turns": 0.21388888888888888,
+    "latency": {
+     "calls": 720,
+     "min_ms": 88,
+     "p50_ms": 153,
+     "p95_ms": 382,
+     "max_ms": 3441
+    }
+   }
+  ]
+ },
+ "combo/plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 699,
+    "fallback_slots": 21,
+    "turns_with_fallback": 15,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 21,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 4,
+     "death_words": 4,
+     "invalid_punctuation": 1,
+     "numbers_digits_or_units": 2,
+     "personal_pronoun": 4,
+     "unauthorised_resource_noun": 6
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 4,
+     "death_words": 4,
+     "draft_animal_species": 368,
+     "invalid_punctuation": 1,
+     "numbers_digits_or_units": 2,
+     "personal_pronoun": 5,
+     "unauthorised_resource_noun": 8
+    },
+    "lines_breaking_more_than_one_rule": 3,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 699,
+    "distinct_openings": 191,
+    "unique_opening_share": 0.1044349070100143,
+    "top_openings": [
+     {
+      "opening": "oxen slow in",
+      "count": 48
+     },
+     {
+      "opening": "oxen step slow",
+      "count": 42
+     },
+     {
+      "opening": "oxen step through",
+      "count": 32
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 31
+     },
+     {
+      "opening": "oxen low in",
+      "count": 17
+     }
+    ],
+    "calls_made": 824,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 167,
+     "p50_ms": 222,
+     "p95_ms": 386,
+     "max_ms": 3483
+    },
+    "fallback_rate_slots": 0.029166666666666667,
+    "fallback_rate_turns": 0.041666666666666664,
+    "latency": {
+     "calls": 720,
+     "min_ms": 80,
+     "p50_ms": 107,
+     "p95_ms": 234,
+     "max_ms": 3385
+    }
+   }
+  ]
+ },
+ "combo/plain-fireside-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 663,
+    "fallback_slots": 57,
+    "turns_with_fallback": 45,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 57,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 7,
+     "death_words": 4,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 7,
+     "quantifier_before_resource_or_half": 5,
+     "unauthorised_resource_noun": 32
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 10,
+     "choice_parroting": 1,
+     "death_words": 4,
+     "draft_animal_species": 661,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 7,
+     "personal_pronoun": 3,
+     "quantifier_before_resource_or_half": 5,
+     "unauthorised_resource_noun": 42
+    },
+    "lines_breaking_more_than_one_rule": 51,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 663,
+    "distinct_openings": 151,
+    "unique_opening_share": 0.09954751131221719,
+    "top_openings": [
+     {
+      "opening": "the wagon groans",
+      "count": 95
+     },
+     {
+      "opening": "the wagon creaks",
+      "count": 39
+     },
+     {
+      "opening": "the oxen slow",
+      "count": 34
+     },
+     {
+      "opening": "the oxen step",
+      "count": 33
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 32
+     }
+    ],
+    "calls_made": 1050,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 345,
+     "p50_ms": 556,
+     "p95_ms": 1192,
+     "max_ms": 3433
+    },
+    "fallback_rate_slots": 0.07916666666666666,
+    "fallback_rate_turns": 0.125,
+    "latency": {
+     "calls": 720,
+     "min_ms": 118,
+     "p50_ms": 244,
+     "p95_ms": 690,
+     "max_ms": 3248
+    }
+   }
+  ]
+ },
+ "combo/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 700,
+    "fallback_slots": 20,
+    "turns_with_fallback": 15,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 20,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 4,
+     "choice_parroting": 1,
+     "death_words": 4,
+     "numbers_digits_or_units": 4,
+     "quantifier_before_resource_or_half": 1,
+     "unauthorised_resource_noun": 6
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 4,
+     "choice_parroting": 1,
+     "death_words": 4,
+     "draft_animal_species": 579,
+     "numbers_digits_or_units": 4,
+     "quantifier_before_resource_or_half": 1,
+     "unauthorised_resource_noun": 7
+    },
+    "lines_breaking_more_than_one_rule": 9,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 700,
+    "distinct_openings": 175,
+    "unique_opening_share": 0.08714285714285715,
+    "top_openings": [
+     {
+      "opening": "the oxen slow",
+      "count": 34
+     },
+     {
+      "opening": "oxen slow in",
+      "count": 32
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 32
+     },
+     {
+      "opening": "oxen step slow",
+      "count": 26
+     },
+     {
+      "opening": "the oxen move",
+      "count": 19
+     }
+    ],
+    "calls_made": 849,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 219,
+     "p50_ms": 303,
+     "p95_ms": 576,
+     "max_ms": 3132
+    },
+    "fallback_rate_slots": 0.027777777777777776,
+    "fallback_rate_turns": 0.041666666666666664,
+    "latency": {
+     "calls": 720,
+     "min_ms": 101,
+     "p50_ms": 147,
+     "p95_ms": 345,
+     "max_ms": 3007
+    }
+   }
+  ]
+ },
+ "combo/plain-lantern-bearer-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 697,
+    "fallback_slots": 23,
+    "turns_with_fallback": 17,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 23,
+    "rejects_by_code": {
+     "death_words": 2,
+     "numbers_digits_or_units": 1,
+     "personal_pronoun": 16,
+     "unauthorised_resource_noun": 4
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "death_words": 2,
+     "numbers_digits_or_units": 1,
+     "personal_pronoun": 16,
+     "unauthorised_resource_noun": 4
+    },
+    "lines_breaking_more_than_one_rule": 0,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 697,
+    "distinct_openings": 244,
+    "unique_opening_share": 0.1750358680057389,
+    "top_openings": [
+     {
+      "opening": "mud pools stretch",
+      "count": 109
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 25
+     },
+     {
+      "opening": "wind hums through",
+      "count": 22
+     },
+     {
+      "opening": "mud pulls at",
+      "count": 15
+     },
+     {
+      "opening": "the river bends",
+      "count": 12
+     }
+    ],
+    "calls_made": 866,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 171,
+     "p50_ms": 227,
+     "p95_ms": 424,
+     "max_ms": 3118
+    },
+    "fallback_rate_slots": 0.03194444444444444,
+    "fallback_rate_turns": 0.04722222222222222,
+    "latency": {
+     "calls": 720,
+     "min_ms": 78,
+     "p50_ms": 107,
+     "p95_ms": 240,
+     "max_ms": 3008
+    }
+   }
+  ]
+ },
+ "combo/plain-lantern-bearer-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 634,
+    "fallback_slots": 86,
+    "turns_with_fallback": 65,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 86,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 14,
+     "choice_parroting": 2,
+     "death_words": 1,
+     "numbers_digits_or_units": 16,
+     "personal_pronoun": 23,
+     "quantifier_before_resource_or_half": 3,
+     "unauthorised_resource_noun": 27
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 25,
+     "choice_parroting": 2,
+     "death_words": 1,
+     "numbers_digits_or_units": 16,
+     "personal_pronoun": 28,
+     "quantifier_before_resource_or_half": 3,
+     "unauthorised_resource_noun": 31
+    },
+    "lines_breaking_more_than_one_rule": 17,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 634,
+    "distinct_openings": 193,
+    "unique_opening_share": 0.1277602523659306,
+    "top_openings": [
+     {
+      "opening": "the trees lean",
+      "count": 33
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 31
+     },
+     {
+      "opening": "the path curves",
+      "count": 28
+     },
+     {
+      "opening": "the sun dips",
+      "count": 19
+     },
+     {
+      "opening": "the mud holds",
+      "count": 17
+     }
+    ],
+    "calls_made": 1099,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 319,
+     "p50_ms": 587,
+     "p95_ms": 1178,
+     "max_ms": 3508
+    },
+    "fallback_rate_slots": 0.11944444444444445,
+    "fallback_rate_turns": 0.18055555555555555,
+    "latency": {
+     "calls": 720,
+     "min_ms": 136,
+     "p50_ms": 250,
+     "p95_ms": 671,
+     "max_ms": 3230
+    }
+   }
+  ]
+ },
+ "combo/plain-lantern-bearer-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+model-card-sampling+candidates-3+trim-to-cap",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 679,
+    "fallback_slots": 41,
+    "turns_with_fallback": 30,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 41,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 4,
+     "choice_parroting": 1,
+     "death_words": 2,
+     "numbers_digits_or_units": 7,
+     "personal_pronoun": 22,
+     "unauthorised_resource_noun": 5
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 4,
+     "choice_parroting": 1,
+     "death_words": 2,
+     "numbers_digits_or_units": 7,
+     "personal_pronoun": 23,
+     "unauthorised_resource_noun": 5
+    },
+    "lines_breaking_more_than_one_rule": 1,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 679,
+    "distinct_openings": 236,
+    "unique_opening_share": 0.17083946980854198,
+    "top_openings": [
+     {
+      "opening": "mud pools stretch",
+      "count": 64
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 31
+     },
+     {
+      "opening": "the river bends",
+      "count": 24
+     },
+     {
+      "opening": "the sun dips",
+      "count": 21
+     },
+     {
+      "opening": "the path bends",
+      "count": 18
+     }
+    ],
+    "calls_made": 930,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 205,
+     "p50_ms": 296,
+     "p95_ms": 631,
+     "max_ms": 3317
+    },
+    "fallback_rate_slots": 0.05694444444444444,
+    "fallback_rate_turns": 0.08333333333333333,
+    "latency": {
+     "calls": 720,
+     "min_ms": 90,
+     "p50_ms": 140,
+     "p95_ms": 359,
+     "max_ms": 3208
+    }
+   }
+  ]
+ },
+ "fp16/plain-chronicler-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-fp16",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "259cbeb0f33b4fdd229120e5c9dc385bcc6e93ab89c7d6b3b1b43303b8b67b6e",
+  "model_quantization": "F16",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 235,
+    "fallback_slots": 485,
+    "turns_with_fallback": 300,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 485,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 7,
+     "choice_parroting": 6,
+     "death_words": 6,
+     "draft_animal_species": 4,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 139,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 18,
+     "personal_pronoun": 16,
+     "quantifier_before_resource_or_half": 140,
+     "unauthorised_resource_noun": 147
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 12,
+     "choice_parroting": 15,
+     "death_words": 7,
+     "draft_animal_species": 14,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 139,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 21,
+     "personal_pronoun": 50,
+     "quantifier_before_resource_or_half": 181,
+     "unauthorised_resource_noun": 336
+    },
+    "lines_breaking_more_than_one_rule": 233,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 235,
+    "distinct_openings": 92,
+    "unique_opening_share": 0.1829787234042553,
+    "top_openings": [
+     {
+      "opening": "mud grips the",
+      "count": 13
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 13
+     },
+     {
+      "opening": "mud grips wagon",
+      "count": 12
+     },
+     {
+      "opening": "wind hums through",
+      "count": 12
+     },
+     {
+      "opening": "riverbed yields under",
+      "count": 9
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 451,
+     "p50_ms": 603,
+     "p95_ms": 699,
+     "max_ms": 4687
+    },
+    "fallback_rate_slots": 0.6736111111111112,
+    "fallback_rate_turns": 0.8333333333333334,
+    "latency": {
+     "calls": 720,
+     "min_ms": 219,
+     "p50_ms": 296,
+     "p95_ms": 370,
+     "max_ms": 4411
+    }
+   }
+  ]
+ },
+ "fp16/plain-chronicler-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-fp16",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "259cbeb0f33b4fdd229120e5c9dc385bcc6e93ab89c7d6b3b1b43303b8b67b6e",
+  "model_quantization": "F16",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 168,
+    "fallback_slots": 552,
+    "turns_with_fallback": 325,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 552,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 10,
+     "death_words": 3,
+     "draft_animal_species": 16,
+     "invalid_punctuation": 11,
+     "mid_sentence_capital": 6,
+     "numbers_digits_or_units": 33,
+     "personal_pronoun": 12,
+     "quantifier_before_resource_or_half": 292,
+     "unauthorised_resource_noun": 168
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 16,
+     "choice_parroting": 40,
+     "death_words": 20,
+     "draft_animal_species": 38,
+     "invalid_punctuation": 11,
+     "mid_sentence_capital": 8,
+     "numbers_digits_or_units": 45,
+     "personal_pronoun": 68,
+     "quantifier_before_resource_or_half": 300,
+     "unauthorised_resource_noun": 459
+    },
+    "lines_breaking_more_than_one_rule": 341,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 168,
+    "distinct_openings": 53,
+    "unique_opening_share": 0.13690476190476192,
+    "top_openings": [
+     {
+      "opening": "smoke curls from",
+      "count": 26
+     },
+     {
+      "opening": "mud grips the",
+      "count": 23
+     },
+     {
+      "opening": "mud deep in",
+      "count": 7
+     },
+     {
+      "opening": "mud deepens under",
+      "count": 7
+     },
+     {
+      "opening": "dust whirls above",
+      "count": 6
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 952,
+     "p50_ms": 1120,
+     "p95_ms": 1212,
+     "max_ms": 5994
+    },
+    "fallback_rate_slots": 0.7666666666666667,
+    "fallback_rate_turns": 0.9027777777777778,
+    "latency": {
+     "calls": 720,
+     "min_ms": 415,
+     "p50_ms": 557,
+     "p95_ms": 634,
+     "max_ms": 5468
+    }
+   }
+  ]
+ },
+ "fp16/plain-chronicler-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-fp16",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "259cbeb0f33b4fdd229120e5c9dc385bcc6e93ab89c7d6b3b1b43303b8b67b6e",
+  "model_quantization": "F16",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 223,
+    "fallback_slots": 497,
+    "turns_with_fallback": 295,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 497,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 5,
+     "death_words": 6,
+     "draft_animal_species": 18,
+     "invalid_punctuation": 2,
+     "length_cap_exceeded": 26,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 27,
+     "personal_pronoun": 19,
+     "quantifier_before_resource_or_half": 239,
+     "unauthorised_resource_noun": 152
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 4,
+     "choice_parroting": 24,
+     "death_words": 14,
+     "draft_animal_species": 33,
+     "invalid_punctuation": 2,
+     "length_cap_exceeded": 27,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 33,
+     "personal_pronoun": 72,
+     "quantifier_before_resource_or_half": 248,
+     "unauthorised_resource_noun": 388
+    },
+    "lines_breaking_more_than_one_rule": 281,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 223,
+    "distinct_openings": 81,
+    "unique_opening_share": 0.15246636771300448,
+    "top_openings": [
+     {
+      "opening": "mud grips the",
+      "count": 24
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 24
+     },
+     {
+      "opening": "dust whirls above",
+      "count": 11
+     },
+     {
+      "opening": "wind hums through",
+      "count": 9
+     },
+     {
+      "opening": "riverbed yields under",
+      "count": 7
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 743,
+     "p50_ms": 873,
+     "p95_ms": 974,
+     "max_ms": 5236
+    },
+    "fallback_rate_slots": 0.6902777777777778,
+    "fallback_rate_turns": 0.8194444444444444,
+    "latency": {
+     "calls": 720,
+     "min_ms": 333,
+     "p50_ms": 435,
+     "p95_ms": 522,
+     "max_ms": 4843
+    }
+   }
+  ]
+ },
+ "fp16/plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-fp16",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "259cbeb0f33b4fdd229120e5c9dc385bcc6e93ab89c7d6b3b1b43303b8b67b6e",
+  "model_quantization": "F16",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 205,
+    "fallback_slots": 515,
+    "turns_with_fallback": 304,
+    "timeouts": 0,
+    "bad_json": 2,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 513,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 9,
+     "choice_parroting": 1,
+     "death_words": 4,
+     "draft_animal_species": 1,
+     "length_cap_exceeded": 340,
+     "numbers_digits_or_units": 19,
+     "personal_pronoun": 16,
+     "quantifier_before_resource_or_half": 31,
+     "unauthorised_resource_noun": 92
+    },
+    "lines_checked": 718,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 42,
+     "choice_parroting": 7,
+     "death_words": 8,
+     "draft_animal_species": 5,
+     "length_cap_exceeded": 340,
+     "numbers_digits_or_units": 39,
+     "personal_pronoun": 18,
+     "quantifier_before_resource_or_half": 61,
+     "unauthorised_resource_noun": 249
+    },
+    "lines_breaking_more_than_one_rule": 203,
+    "unit_rule_coin_rejects": 1,
+    "accepted_lines": 205,
+    "distinct_openings": 96,
+    "unique_opening_share": 0.24878048780487805,
+    "top_openings": [
+     {
+      "opening": "smoke curls from",
+      "count": 9
+     },
+     {
+      "opening": "sun bleeds low",
+      "count": 9
+     },
+     {
+      "opening": "a sharp cry",
+      "count": 8
+     },
+     {
+      "opening": "a shape moves",
+      "count": 7
+     },
+     {
+      "opening": "armed figures step",
+      "count": 6
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 431,
+     "p50_ms": 624,
+     "p95_ms": 904,
+     "max_ms": 6336
+    },
+    "fallback_rate_slots": 0.7152777777777778,
+    "fallback_rate_turns": 0.8444444444444444,
+    "latency": {
+     "calls": 720,
+     "min_ms": 199,
+     "p50_ms": 305,
+     "p95_ms": 488,
+     "max_ms": 5983
+    }
+   }
+  ]
+ },
+ "fp16/plain-fireside-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-fp16",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "259cbeb0f33b4fdd229120e5c9dc385bcc6e93ab89c7d6b3b1b43303b8b67b6e",
+  "model_quantization": "F16",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 305,
+    "fallback_slots": 415,
+    "turns_with_fallback": 281,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 414,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 55,
+     "choice_parroting": 6,
+     "death_words": 9,
+     "draft_animal_species": 4,
+     "invalid_punctuation": 6,
+     "length_cap_exceeded": 21,
+     "numbers_digits_or_units": 23,
+     "personal_pronoun": 11,
+     "quantifier_before_resource_or_half": 87,
+     "unauthorised_resource_noun": 192
+    },
+    "lines_checked": 719,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 122,
+     "choice_parroting": 25,
+     "death_words": 12,
+     "draft_animal_species": 6,
+     "invalid_punctuation": 6,
+     "length_cap_exceeded": 21,
+     "numbers_digits_or_units": 25,
+     "personal_pronoun": 13,
+     "quantifier_before_resource_or_half": 89,
+     "unauthorised_resource_noun": 304
+    },
+    "lines_breaking_more_than_one_rule": 175,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 305,
+    "distinct_openings": 98,
+    "unique_opening_share": 0.11147540983606558,
+    "top_openings": [
+     {
+      "opening": "the wind carries",
+      "count": 42
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 24
+     },
+     {
+      "opening": "armed figures step",
+      "count": 11
+     },
+     {
+      "opening": "the axle groans",
+      "count": 9
+     },
+     {
+      "opening": "the wind hums",
+      "count": 9
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 914,
+     "p50_ms": 1136,
+     "p95_ms": 1303,
+     "max_ms": 5635
+    },
+    "fallback_rate_slots": 0.5763888888888888,
+    "fallback_rate_turns": 0.7805555555555556,
+    "latency": {
+     "calls": 720,
+     "min_ms": 417,
+     "p50_ms": 566,
+     "p95_ms": 681,
+     "max_ms": 5143
+    }
+   }
+  ]
+ },
+ "fp16/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-fp16",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "259cbeb0f33b4fdd229120e5c9dc385bcc6e93ab89c7d6b3b1b43303b8b67b6e",
+  "model_quantization": "F16",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 258,
+    "fallback_slots": 462,
+    "turns_with_fallback": 295,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 461,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 17,
+     "choice_parroting": 3,
+     "draft_animal_species": 6,
+     "invalid_punctuation": 3,
+     "length_cap_exceeded": 159,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 29,
+     "personal_pronoun": 19,
+     "quantifier_before_resource_or_half": 56,
+     "unauthorised_resource_noun": 168
+    },
+    "lines_checked": 719,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 71,
+     "choice_parroting": 16,
+     "death_words": 5,
+     "draft_animal_species": 7,
+     "invalid_punctuation": 3,
+     "length_cap_exceeded": 161,
+     "mid_sentence_capital": 3,
+     "numbers_digits_or_units": 33,
+     "personal_pronoun": 24,
+     "quantifier_before_resource_or_half": 70,
+     "unauthorised_resource_noun": 281
+    },
+    "lines_breaking_more_than_one_rule": 178,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 258,
+    "distinct_openings": 111,
+    "unique_opening_share": 0.20930232558139536,
+    "top_openings": [
+     {
+      "opening": "smoke curls from",
+      "count": 17
+     },
+     {
+      "opening": "the wind carries",
+      "count": 16
+     },
+     {
+      "opening": "a sharp cry",
+      "count": 8
+     },
+     {
+      "opening": "armed figures step",
+      "count": 8
+     },
+     {
+      "opening": "wind hums through",
+      "count": 7
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 712,
+     "p50_ms": 860,
+     "p95_ms": 1019,
+     "max_ms": 5911
+    },
+    "fallback_rate_slots": 0.6416666666666667,
+    "fallback_rate_turns": 0.8194444444444444,
+    "latency": {
+     "calls": 720,
+     "min_ms": 296,
+     "p50_ms": 429,
+     "p95_ms": 542,
+     "max_ms": 5528
+    }
+   }
+  ]
+ },
+ "fp16/plain-lantern-bearer-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-fp16",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "259cbeb0f33b4fdd229120e5c9dc385bcc6e93ab89c7d6b3b1b43303b8b67b6e",
+  "model_quantization": "F16",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 283,
+    "fallback_slots": 437,
+    "turns_with_fallback": 292,
+    "timeouts": 0,
+    "bad_json": 3,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 434,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 6,
+     "choice_parroting": 1,
+     "death_words": 5,
+     "invalid_punctuation": 2,
+     "length_cap_exceeded": 273,
+     "numbers_digits_or_units": 58,
+     "personal_pronoun": 23,
+     "quantifier_before_resource_or_half": 53,
+     "unauthorised_resource_noun": 13
+    },
+    "lines_checked": 717,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 14,
+     "choice_parroting": 2,
+     "death_words": 8,
+     "invalid_punctuation": 2,
+     "length_cap_exceeded": 275,
+     "numbers_digits_or_units": 100,
+     "personal_pronoun": 28,
+     "quantifier_before_resource_or_half": 130,
+     "unauthorised_resource_noun": 141
+    },
+    "lines_breaking_more_than_one_rule": 173,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 283,
+    "distinct_openings": 106,
+    "unique_opening_share": 0.19081272084805653,
+    "top_openings": [
+     {
+      "opening": "mud pools stretch",
+      "count": 44
+     },
+     {
+      "opening": "armed figures step",
+      "count": 12
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 12
+     },
+     {
+      "opening": "snow falls in",
+      "count": 9
+     },
+     {
+      "opening": "smoke curls in",
+      "count": 8
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 433,
+     "p50_ms": 581,
+     "p95_ms": 785,
+     "max_ms": 5631
+    },
+    "fallback_rate_slots": 0.6069444444444444,
+    "fallback_rate_turns": 0.8111111111111111,
+    "latency": {
+     "calls": 720,
+     "min_ms": 194,
+     "p50_ms": 283,
+     "p95_ms": 418,
+     "max_ms": 5379
+    }
+   }
+  ]
+ },
+ "fp16/plain-lantern-bearer-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-fp16",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "259cbeb0f33b4fdd229120e5c9dc385bcc6e93ab89c7d6b3b1b43303b8b67b6e",
+  "model_quantization": "F16",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 238,
+    "fallback_slots": 482,
+    "turns_with_fallback": 299,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 482,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 15,
+     "choice_parroting": 6,
+     "death_words": 2,
+     "invalid_punctuation": 13,
+     "length_cap_exceeded": 22,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 116,
+     "personal_pronoun": 21,
+     "quantifier_before_resource_or_half": 211,
+     "unauthorised_resource_noun": 75
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 55,
+     "choice_parroting": 20,
+     "death_words": 2,
+     "invalid_punctuation": 13,
+     "length_cap_exceeded": 22,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 178,
+     "personal_pronoun": 37,
+     "quantifier_before_resource_or_half": 230,
+     "unauthorised_resource_noun": 305
+    },
+    "lines_breaking_more_than_one_rule": 278,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 238,
+    "distinct_openings": 88,
+    "unique_opening_share": 0.1638655462184874,
+    "top_openings": [
+     {
+      "opening": "smoke curls from",
+      "count": 31
+     },
+     {
+      "opening": "mud pools stretch",
+      "count": 16
+     },
+     {
+      "opening": "the sun dips",
+      "count": 9
+     },
+     {
+      "opening": "wind slips through",
+      "count": 8
+     },
+     {
+      "opening": "the trees lean",
+      "count": 7
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 914,
+     "p50_ms": 1098,
+     "p95_ms": 1250,
+     "max_ms": 6058
+    },
+    "fallback_rate_slots": 0.6694444444444444,
+    "fallback_rate_turns": 0.8305555555555556,
+    "latency": {
+     "calls": 720,
+     "min_ms": 418,
+     "p50_ms": 547,
+     "p95_ms": 651,
+     "max_ms": 5607
+    }
+   }
+  ]
+ },
+ "fp16/plain-lantern-bearer-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-fp16",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "259cbeb0f33b4fdd229120e5c9dc385bcc6e93ab89c7d6b3b1b43303b8b67b6e",
+  "model_quantization": "F16",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 239,
+    "fallback_slots": 481,
+    "turns_with_fallback": 301,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 481,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 16,
+     "choice_parroting": 3,
+     "death_words": 4,
+     "length_cap_exceeded": 187,
+     "numbers_digits_or_units": 96,
+     "personal_pronoun": 12,
+     "quantifier_before_resource_or_half": 139,
+     "unauthorised_resource_noun": 24
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 35,
+     "choice_parroting": 8,
+     "death_words": 6,
+     "length_cap_exceeded": 187,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 172,
+     "personal_pronoun": 25,
+     "quantifier_before_resource_or_half": 211,
+     "unauthorised_resource_noun": 232
+    },
+    "lines_breaking_more_than_one_rule": 265,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 239,
+    "distinct_openings": 88,
+    "unique_opening_share": 0.1799163179916318,
+    "top_openings": [
+     {
+      "opening": "smoke curls from",
+      "count": 25
+     },
+     {
+      "opening": "mud pools stretch",
+      "count": 24
+     },
+     {
+      "opening": "the riverbed yields",
+      "count": 11
+     },
+     {
+      "opening": "the sun dips",
+      "count": 9
+     },
+     {
+      "opening": "small hands press",
+      "count": 8
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 654,
+     "p50_ms": 864,
+     "p95_ms": 1030,
+     "max_ms": 5923
+    },
+    "fallback_rate_slots": 0.6680555555555555,
+    "fallback_rate_turns": 0.8361111111111111,
+    "latency": {
+     "calls": 720,
+     "min_ms": 262,
+     "p50_ms": 429,
+     "p95_ms": 549,
+     "max_ms": 5538
+    }
+   }
+  ]
+ },
+ "modelcard/plain-chronicler-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 395,
+    "fallback_slots": 325,
+    "turns_with_fallback": 243,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 325,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 5,
+     "choice_parroting": 7,
+     "draft_animal_species": 14,
+     "length_cap_exceeded": 126,
+     "numbers_digits_or_units": 16,
+     "personal_pronoun": 17,
+     "quantifier_before_resource_or_half": 119,
+     "unauthorised_resource_noun": 21
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 5,
+     "choice_parroting": 12,
+     "draft_animal_species": 20,
+     "length_cap_exceeded": 126,
+     "numbers_digits_or_units": 21,
+     "personal_pronoun": 18,
+     "quantifier_before_resource_or_half": 162,
+     "unauthorised_resource_noun": 159
+    },
+    "lines_breaking_more_than_one_rule": 154,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 395,
+    "distinct_openings": 119,
+    "unique_opening_share": 0.1569620253164557,
+    "top_openings": [
+     {
+      "opening": "mud sucks at",
+      "count": 37
+     },
+     {
+      "opening": "mud grips the",
+      "count": 32
+     },
+     {
+      "opening": "mud deepens wind",
+      "count": 27
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 20
+     },
+     {
+      "opening": "mud deepens sun",
+      "count": 16
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 247,
+     "p50_ms": 346,
+     "p95_ms": 407,
+     "max_ms": 3830
+    },
+    "fallback_rate_slots": 0.4513888888888889,
+    "fallback_rate_turns": 0.675,
+    "latency": {
+     "calls": 720,
+     "min_ms": 115,
+     "p50_ms": 170,
+     "p95_ms": 220,
+     "max_ms": 3675
+    }
+   }
+  ]
+ },
+ "modelcard/plain-chronicler-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 272,
+    "fallback_slots": 448,
+    "turns_with_fallback": 295,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 448,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 13,
+     "choice_parroting": 6,
+     "death_words": 2,
+     "draft_animal_species": 37,
+     "invalid_punctuation": 3,
+     "numbers_digits_or_units": 41,
+     "personal_pronoun": 9,
+     "quantifier_before_resource_or_half": 263,
+     "unauthorised_resource_noun": 74
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 18,
+     "choice_parroting": 13,
+     "death_words": 3,
+     "draft_animal_species": 57,
+     "invalid_punctuation": 3,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 57,
+     "personal_pronoun": 28,
+     "quantifier_before_resource_or_half": 264,
+     "unauthorised_resource_noun": 305
+    },
+    "lines_breaking_more_than_one_rule": 256,
+    "unit_rule_coin_rejects": 2,
+    "accepted_lines": 272,
+    "distinct_openings": 84,
+    "unique_opening_share": 0.16544117647058823,
+    "top_openings": [
+     {
+      "opening": "mud grips the",
+      "count": 29
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 26
+     },
+     {
+      "opening": "mud sucks at",
+      "count": 20
+     },
+     {
+      "opening": "mud slicks the",
+      "count": 15
+     },
+     {
+      "opening": "mud swells under",
+      "count": 14
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 460,
+     "p50_ms": 552,
+     "p95_ms": 613,
+     "max_ms": 3738
+    },
+    "fallback_rate_slots": 0.6222222222222222,
+    "fallback_rate_turns": 0.8194444444444444,
+    "latency": {
+     "calls": 720,
+     "min_ms": 210,
+     "p50_ms": 273,
+     "p95_ms": 329,
+     "max_ms": 3487
+    }
+   }
+  ]
+ },
+ "modelcard/plain-chronicler-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 356,
+    "fallback_slots": 364,
+    "turns_with_fallback": 264,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 363,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 7,
+     "choice_parroting": 5,
+     "draft_animal_species": 16,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 21,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 42,
+     "personal_pronoun": 20,
+     "quantifier_before_resource_or_half": 204,
+     "unauthorised_resource_noun": 46
+    },
+    "lines_checked": 719,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 9,
+     "choice_parroting": 18,
+     "death_words": 1,
+     "draft_animal_species": 30,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 21,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 49,
+     "personal_pronoun": 29,
+     "quantifier_before_resource_or_half": 215,
+     "unauthorised_resource_noun": 234
+    },
+    "lines_breaking_more_than_one_rule": 213,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 356,
+    "distinct_openings": 100,
+    "unique_opening_share": 0.10955056179775281,
+    "top_openings": [
+     {
+      "opening": "mud grips the",
+      "count": 51
+     },
+     {
+      "opening": "mud sucks at",
+      "count": 25
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 24
+     },
+     {
+      "opening": "mud deepens wind",
+      "count": 16
+     },
+     {
+      "opening": "mud swells under",
+      "count": 16
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 382,
+     "p50_ms": 461,
+     "p95_ms": 528,
+     "max_ms": 4087
+    },
+    "fallback_rate_slots": 0.5055555555555555,
+    "fallback_rate_turns": 0.7333333333333333,
+    "latency": {
+     "calls": 720,
+     "min_ms": 157,
+     "p50_ms": 227,
+     "p95_ms": 286,
+     "max_ms": 3860
+    }
+   }
+  ]
+ },
+ "modelcard/plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 210,
+    "fallback_slots": 510,
+    "turns_with_fallback": 316,
+    "timeouts": 0,
+    "bad_json": 7,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 503,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 8,
+     "choice_parroting": 1,
+     "death_words": 4,
+     "length_cap_exceeded": 341,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 29,
+     "personal_pronoun": 26,
+     "quantifier_before_resource_or_half": 15,
+     "unauthorised_resource_noun": 78
+    },
+    "lines_checked": 713,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 39,
+     "choice_parroting": 12,
+     "death_words": 5,
+     "draft_animal_species": 3,
+     "length_cap_exceeded": 341,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 47,
+     "personal_pronoun": 31,
+     "quantifier_before_resource_or_half": 37,
+     "unauthorised_resource_noun": 240
+    },
+    "lines_breaking_more_than_one_rule": 205,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 210,
+    "distinct_openings": 108,
+    "unique_opening_share": 0.2904761904761905,
+    "top_openings": [
+     {
+      "opening": "smoke curls from",
+      "count": 16
+     },
+     {
+      "opening": "mud grips the",
+      "count": 14
+     },
+     {
+      "opening": "a sharp cry",
+      "count": 8
+     },
+     {
+      "opening": "armed figures step",
+      "count": 7
+     },
+     {
+      "opening": "sun dips low",
+      "count": 5
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 249,
+     "p50_ms": 362,
+     "p95_ms": 547,
+     "max_ms": 3680
+    },
+    "fallback_rate_slots": 0.7083333333333334,
+    "fallback_rate_turns": 0.8777777777777778,
+    "latency": {
+     "calls": 720,
+     "min_ms": 111,
+     "p50_ms": 174,
+     "p95_ms": 306,
+     "max_ms": 3529
+    }
+   }
+  ]
+ },
+ "modelcard/plain-fireside-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 316,
+    "fallback_slots": 404,
+    "turns_with_fallback": 267,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 403,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 26,
+     "choice_parroting": 6,
+     "death_words": 4,
+     "draft_animal_species": 8,
+     "invalid_punctuation": 2,
+     "length_cap_exceeded": 5,
+     "mid_sentence_capital": 5,
+     "numbers_digits_or_units": 55,
+     "personal_pronoun": 19,
+     "quantifier_before_resource_or_half": 99,
+     "unauthorised_resource_noun": 174
+    },
+    "lines_checked": 719,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 62,
+     "choice_parroting": 13,
+     "death_words": 8,
+     "draft_animal_species": 11,
+     "invalid_punctuation": 2,
+     "length_cap_exceeded": 5,
+     "mid_sentence_capital": 6,
+     "numbers_digits_or_units": 62,
+     "personal_pronoun": 23,
+     "quantifier_before_resource_or_half": 101,
+     "unauthorised_resource_noun": 283
+    },
+    "lines_breaking_more_than_one_rule": 148,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 316,
+    "distinct_openings": 122,
+    "unique_opening_share": 0.2120253164556962,
+    "top_openings": [
+     {
+      "opening": "smoke curls from",
+      "count": 31
+     },
+     {
+      "opening": "the wind hums",
+      "count": 27
+     },
+     {
+      "opening": "the wind stirs",
+      "count": 17
+     },
+     {
+      "opening": "the fire crackles",
+      "count": 16
+     },
+     {
+      "opening": "the sun dips",
+      "count": 10
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 459,
+     "p50_ms": 555,
+     "p95_ms": 628,
+     "max_ms": 4020
+    },
+    "fallback_rate_slots": 0.5611111111111111,
+    "fallback_rate_turns": 0.7416666666666667,
+    "latency": {
+     "calls": 720,
+     "min_ms": 198,
+     "p50_ms": 275,
+     "p95_ms": 341,
+     "max_ms": 3781
+    }
+   }
+  ]
+ },
+ "modelcard/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 244,
+    "fallback_slots": 476,
+    "turns_with_fallback": 304,
+    "timeouts": 0,
+    "bad_json": 4,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 472,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 22,
+     "choice_parroting": 2,
+     "death_words": 3,
+     "draft_animal_species": 4,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 188,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 50,
+     "personal_pronoun": 20,
+     "quantifier_before_resource_or_half": 56,
+     "unauthorised_resource_noun": 124
+    },
+    "lines_checked": 716,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 58,
+     "choice_parroting": 5,
+     "death_words": 6,
+     "draft_animal_species": 7,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 188,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 64,
+     "personal_pronoun": 26,
+     "quantifier_before_resource_or_half": 76,
+     "unauthorised_resource_noun": 281
+    },
+    "lines_breaking_more_than_one_rule": 200,
+    "unit_rule_coin_rejects": 1,
+    "accepted_lines": 244,
+    "distinct_openings": 115,
+    "unique_opening_share": 0.26639344262295084,
+    "top_openings": [
+     {
+      "opening": "the wind hums",
+      "count": 17
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 14
+     },
+     {
+      "opening": "mud grips the",
+      "count": 9
+     },
+     {
+      "opening": "the wind stirs",
+      "count": 8
+     },
+     {
+      "opening": "the axle groans",
+      "count": 7
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 344,
+     "p50_ms": 476,
+     "p95_ms": 582,
+     "max_ms": 3605
+    },
+    "fallback_rate_slots": 0.6611111111111111,
+    "fallback_rate_turns": 0.8444444444444444,
+    "latency": {
+     "calls": 720,
+     "min_ms": 159,
+     "p50_ms": 235,
+     "p95_ms": 310,
+     "max_ms": 3428
+    }
+   }
+  ]
+ },
+ "modelcard/plain-lantern-bearer-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 393,
+    "fallback_slots": 327,
+    "turns_with_fallback": 231,
+    "timeouts": 0,
+    "bad_json": 4,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 323,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 6,
+     "choice_parroting": 2,
+     "death_words": 3,
+     "length_cap_exceeded": 210,
+     "numbers_digits_or_units": 36,
+     "personal_pronoun": 22,
+     "quantifier_before_resource_or_half": 21,
+     "unauthorised_resource_noun": 23
+    },
+    "lines_checked": 716,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 10,
+     "choice_parroting": 5,
+     "death_words": 3,
+     "length_cap_exceeded": 210,
+     "numbers_digits_or_units": 74,
+     "personal_pronoun": 30,
+     "quantifier_before_resource_or_half": 53,
+     "unauthorised_resource_noun": 84
+    },
+    "lines_breaking_more_than_one_rule": 99,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 393,
+    "distinct_openings": 155,
+    "unique_opening_share": 0.22391857506361323,
+    "top_openings": [
+     {
+      "opening": "mud pools stretch",
+      "count": 82
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 28
+     },
+     {
+      "opening": "mud pulls at",
+      "count": 11
+     },
+     {
+      "opening": "the sun dips",
+      "count": 10
+     },
+     {
+      "opening": "snow falls thick",
+      "count": 7
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 249,
+     "p50_ms": 315,
+     "p95_ms": 448,
+     "max_ms": 3726
+    },
+    "fallback_rate_slots": 0.45416666666666666,
+    "fallback_rate_turns": 0.6416666666666667,
+    "latency": {
+     "calls": 720,
+     "min_ms": 106,
+     "p50_ms": 155,
+     "p95_ms": 233,
+     "max_ms": 3571
+    }
+   }
+  ]
+ },
+ "modelcard/plain-lantern-bearer-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 347,
+    "fallback_slots": 373,
+    "turns_with_fallback": 255,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 372,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 10,
+     "choice_parroting": 7,
+     "death_words": 2,
+     "length_cap_exceeded": 14,
+     "numbers_digits_or_units": 127,
+     "personal_pronoun": 19,
+     "quantifier_before_resource_or_half": 145,
+     "unauthorised_resource_noun": 48
+    },
+    "lines_checked": 719,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 19,
+     "choice_parroting": 14,
+     "death_words": 3,
+     "draft_animal_species": 1,
+     "length_cap_exceeded": 14,
+     "numbers_digits_or_units": 149,
+     "personal_pronoun": 32,
+     "quantifier_before_resource_or_half": 150,
+     "unauthorised_resource_noun": 199
+    },
+    "lines_breaking_more_than_one_rule": 174,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 347,
+    "distinct_openings": 127,
+    "unique_opening_share": 0.19020172910662825,
+    "top_openings": [
+     {
+      "opening": "mud pools stretch",
+      "count": 39
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 32
+     },
+     {
+      "opening": "the sun dips",
+      "count": 11
+     },
+     {
+      "opening": "the wind moves",
+      "count": 11
+     },
+     {
+      "opening": "the axle groans",
+      "count": 9
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 451,
+     "p50_ms": 556,
+     "p95_ms": 640,
+     "max_ms": 3721
+    },
+    "fallback_rate_slots": 0.5180555555555556,
+    "fallback_rate_turns": 0.7083333333333334,
+    "latency": {
+     "calls": 720,
+     "min_ms": 202,
+     "p50_ms": 275,
+     "p95_ms": 347,
+     "max_ms": 3505
+    }
+   }
+  ]
+ },
+ "modelcard/plain-lantern-bearer-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "model-card-sampling",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 303,
+    "fallback_slots": 417,
+    "turns_with_fallback": 285,
+    "timeouts": 0,
+    "bad_json": 5,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 412,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 7,
+     "choice_parroting": 1,
+     "death_words": 3,
+     "invalid_punctuation": 2,
+     "length_cap_exceeded": 179,
+     "numbers_digits_or_units": 92,
+     "personal_pronoun": 23,
+     "quantifier_before_resource_or_half": 81,
+     "unauthorised_resource_noun": 24
+    },
+    "lines_checked": 715,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 12,
+     "choice_parroting": 5,
+     "death_words": 3,
+     "invalid_punctuation": 2,
+     "length_cap_exceeded": 179,
+     "numbers_digits_or_units": 134,
+     "personal_pronoun": 26,
+     "quantifier_before_resource_or_half": 118,
+     "unauthorised_resource_noun": 150
+    },
+    "lines_breaking_more_than_one_rule": 167,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 303,
+    "distinct_openings": 131,
+    "unique_opening_share": 0.22772277227722773,
+    "top_openings": [
+     {
+      "opening": "mud pools stretch",
+      "count": 36
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 23
+     },
+     {
+      "opening": "wind hums through",
+      "count": 8
+     },
+     {
+      "opening": "dust spirals in",
+      "count": 6
+     },
+     {
+      "opening": "mud pulls at",
+      "count": 6
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 313,
+     "p50_ms": 460,
+     "p95_ms": 556,
+     "max_ms": 3707
+    },
+    "fallback_rate_slots": 0.5791666666666667,
+    "fallback_rate_turns": 0.7916666666666666,
+    "latency": {
+     "calls": 720,
+     "min_ms": 145,
+     "p50_ms": 224,
+     "p95_ms": 296,
+     "max_ms": 3496
+    }
+   }
+  ]
+ },
+ "positive/plain-chronicler-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "positive",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 267,
+    "fallback_slots": 453,
+    "turns_with_fallback": 296,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 453,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 7,
+     "choice_parroting": 2,
+     "death_words": 3,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 158,
+     "numbers_digits_or_units": 3,
+     "personal_pronoun": 43,
+     "quantifier_before_resource_or_half": 14,
+     "unauthorised_resource_noun": 222
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 20,
+     "choice_parroting": 27,
+     "death_words": 3,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 159,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 6,
+     "personal_pronoun": 100,
+     "quantifier_before_resource_or_half": 23,
+     "unauthorised_resource_noun": 316
+    },
+    "lines_breaking_more_than_one_rule": 171,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 267,
+    "distinct_openings": 91,
+    "unique_opening_share": 0.16104868913857678,
+    "top_openings": [
+     {
+      "opening": "mud grips the",
+      "count": 26
+     },
+     {
+      "opening": "mud sucks at",
+      "count": 24
+     },
+     {
+      "opening": "mud deepens wind",
+      "count": 23
+     },
+     {
+      "opening": "wind sings through",
+      "count": 17
+     },
+     {
+      "opening": "snow falls thick",
+      "count": 9
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 282,
+     "p50_ms": 365,
+     "p95_ms": 421,
+     "max_ms": 4073
+    },
+    "fallback_rate_slots": 0.6291666666666667,
+    "fallback_rate_turns": 0.8222222222222222,
+    "latency": {
+     "calls": 720,
+     "min_ms": 123,
+     "p50_ms": 179,
+     "p95_ms": 227,
+     "max_ms": 3928
+    }
+   }
+  ]
+ },
+ "positive/plain-chronicler-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "positive",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 181,
+    "fallback_slots": 539,
+    "turns_with_fallback": 324,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 539,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 12,
+     "choice_parroting": 6,
+     "death_words": 14,
+     "invalid_punctuation": 76,
+     "mid_sentence_capital": 4,
+     "numbers_digits_or_units": 19,
+     "personal_pronoun": 68,
+     "quantifier_before_resource_or_half": 42,
+     "unauthorised_resource_noun": 298
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 42,
+     "choice_parroting": 44,
+     "death_words": 21,
+     "invalid_punctuation": 76,
+     "mid_sentence_capital": 9,
+     "numbers_digits_or_units": 24,
+     "personal_pronoun": 191,
+     "quantifier_before_resource_or_half": 50,
+     "unauthorised_resource_noun": 408
+    },
+    "lines_breaking_more_than_one_rule": 234,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 181,
+    "distinct_openings": 66,
+    "unique_opening_share": 0.19337016574585636,
+    "top_openings": [
+     {
+      "opening": "mud sucks at",
+      "count": 23
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 20
+     },
+     {
+      "opening": "mud grips the",
+      "count": 17
+     },
+     {
+      "opening": "the riverbed gives",
+      "count": 9
+     },
+     {
+      "opening": "mud glistens in",
+      "count": 6
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 490,
+     "p50_ms": 569,
+     "p95_ms": 627,
+     "max_ms": 3752
+    },
+    "fallback_rate_slots": 0.7486111111111111,
+    "fallback_rate_turns": 0.9,
+    "latency": {
+     "calls": 720,
+     "min_ms": 216,
+     "p50_ms": 285,
+     "p95_ms": 337,
+     "max_ms": 3485
+    }
+   }
+  ]
+ },
+ "positive/plain-chronicler-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "positive",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 233,
+    "fallback_slots": 487,
+    "turns_with_fallback": 300,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 487,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 12,
+     "choice_parroting": 8,
+     "death_words": 8,
+     "draft_animal_species": 1,
+     "invalid_punctuation": 10,
+     "length_cap_exceeded": 21,
+     "mid_sentence_capital": 7,
+     "numbers_digits_or_units": 11,
+     "personal_pronoun": 65,
+     "quantifier_before_resource_or_half": 29,
+     "unauthorised_resource_noun": 315
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 27,
+     "choice_parroting": 42,
+     "death_words": 11,
+     "draft_animal_species": 1,
+     "invalid_punctuation": 10,
+     "length_cap_exceeded": 21,
+     "mid_sentence_capital": 8,
+     "numbers_digits_or_units": 12,
+     "personal_pronoun": 137,
+     "quantifier_before_resource_or_half": 34,
+     "unauthorised_resource_noun": 371
+    },
+    "lines_breaking_more_than_one_rule": 153,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 233,
+    "distinct_openings": 75,
+    "unique_opening_share": 0.15450643776824036,
+    "top_openings": [
+     {
+      "opening": "smoke curls from",
+      "count": 28
+     },
+     {
+      "opening": "mud sucks at",
+      "count": 25
+     },
+     {
+      "opening": "mud grips the",
+      "count": 22
+     },
+     {
+      "opening": "wind sings through",
+      "count": 13
+     },
+     {
+      "opening": "the riverbed gives",
+      "count": 8
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 388,
+     "p50_ms": 474,
+     "p95_ms": 520,
+     "max_ms": 3665
+    },
+    "fallback_rate_slots": 0.6763888888888889,
+    "fallback_rate_turns": 0.8333333333333334,
+    "latency": {
+     "calls": 720,
+     "min_ms": 160,
+     "p50_ms": 236,
+     "p95_ms": 284,
+     "max_ms": 3460
+    }
+   }
+  ]
+ },
+ "positive/plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "positive",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 209,
+    "fallback_slots": 511,
+    "turns_with_fallback": 317,
+    "timeouts": 0,
+    "bad_json": 6,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 505,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 8,
+     "choice_parroting": 2,
+     "death_words": 5,
+     "invalid_punctuation": 8,
+     "length_cap_exceeded": 431,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 4,
+     "personal_pronoun": 24,
+     "quantifier_before_resource_or_half": 4,
+     "unauthorised_resource_noun": 18
+    },
+    "lines_checked": 714,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 80,
+     "choice_parroting": 22,
+     "death_words": 13,
+     "draft_animal_species": 1,
+     "invalid_punctuation": 8,
+     "length_cap_exceeded": 439,
+     "mid_sentence_capital": 12,
+     "numbers_digits_or_units": 8,
+     "personal_pronoun": 48,
+     "quantifier_before_resource_or_half": 8,
+     "unauthorised_resource_noun": 149
+    },
+    "lines_breaking_more_than_one_rule": 234,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 209,
+    "distinct_openings": 83,
+    "unique_opening_share": 0.19617224880382775,
+    "top_openings": [
+     {
+      "opening": "smoke curls from",
+      "count": 15
+     },
+     {
+      "opening": "the fire crackles",
+      "count": 13
+     },
+     {
+      "opening": "the fire sputters",
+      "count": 10
+     },
+     {
+      "opening": "a sharp cry",
+      "count": 8
+     },
+     {
+      "opening": "the wind carries",
+      "count": 8
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 270,
+     "p50_ms": 428,
+     "p95_ms": 638,
+     "max_ms": 3610
+    },
+    "fallback_rate_slots": 0.7097222222222223,
+    "fallback_rate_turns": 0.8805555555555555,
+    "latency": {
+     "calls": 720,
+     "min_ms": 103,
+     "p50_ms": 210,
+     "p95_ms": 346,
+     "max_ms": 3464
+    }
+   }
+  ]
+ },
+ "positive/plain-fireside-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "positive",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 333,
+    "fallback_slots": 387,
+    "turns_with_fallback": 260,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 387,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 58,
+     "choice_parroting": 7,
+     "death_words": 17,
+     "draft_animal_species": 1,
+     "invalid_punctuation": 19,
+     "length_cap_exceeded": 18,
+     "mid_sentence_capital": 12,
+     "numbers_digits_or_units": 17,
+     "personal_pronoun": 26,
+     "quantifier_before_resource_or_half": 9,
+     "unauthorised_resource_noun": 203
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 98,
+     "choice_parroting": 28,
+     "death_words": 17,
+     "draft_animal_species": 2,
+     "invalid_punctuation": 19,
+     "length_cap_exceeded": 18,
+     "mid_sentence_capital": 13,
+     "numbers_digits_or_units": 17,
+     "personal_pronoun": 39,
+     "quantifier_before_resource_or_half": 10,
+     "unauthorised_resource_noun": 242
+    },
+    "lines_breaking_more_than_one_rule": 102,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 333,
+    "distinct_openings": 92,
+    "unique_opening_share": 0.1111111111111111,
+    "top_openings": [
+     {
+      "opening": "smoke curls from",
+      "count": 23
+     },
+     {
+      "opening": "the fire crackles",
+      "count": 23
+     },
+     {
+      "opening": "the party settles",
+      "count": 20
+     },
+     {
+      "opening": "the wind hums",
+      "count": 16
+     },
+     {
+      "opening": "the wind stirs",
+      "count": 15
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 506,
+     "p50_ms": 599,
+     "p95_ms": 691,
+     "max_ms": 3760
+    },
+    "fallback_rate_slots": 0.5375,
+    "fallback_rate_turns": 0.7222222222222222,
+    "latency": {
+     "calls": 720,
+     "min_ms": 222,
+     "p50_ms": 297,
+     "p95_ms": 373,
+     "max_ms": 3519
+    }
+   }
+  ]
+ },
+ "positive/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "positive",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 278,
+    "fallback_slots": 442,
+    "turns_with_fallback": 280,
+    "timeouts": 0,
+    "bad_json": 5,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 437,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 20,
+     "choice_parroting": 3,
+     "death_words": 12,
+     "draft_animal_species": 1,
+     "invalid_punctuation": 11,
+     "length_cap_exceeded": 261,
+     "mid_sentence_capital": 6,
+     "numbers_digits_or_units": 6,
+     "personal_pronoun": 26,
+     "quantifier_before_resource_or_half": 10,
+     "unauthorised_resource_noun": 81
+    },
+    "lines_checked": 715,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 74,
+     "choice_parroting": 22,
+     "death_words": 15,
+     "draft_animal_species": 2,
+     "invalid_punctuation": 11,
+     "length_cap_exceeded": 270,
+     "mid_sentence_capital": 11,
+     "numbers_digits_or_units": 12,
+     "personal_pronoun": 43,
+     "quantifier_before_resource_or_half": 12,
+     "unauthorised_resource_noun": 190
+    },
+    "lines_breaking_more_than_one_rule": 183,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 278,
+    "distinct_openings": 90,
+    "unique_opening_share": 0.13309352517985612,
+    "top_openings": [
+     {
+      "opening": "smoke curls from",
+      "count": 21
+     },
+     {
+      "opening": "the fire crackles",
+      "count": 11
+     },
+     {
+      "opening": "the bridge creaks",
+      "count": 9
+     },
+     {
+      "opening": "the party settles",
+      "count": 9
+     },
+     {
+      "opening": "the wind carries",
+      "count": 9
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 412,
+     "p50_ms": 515,
+     "p95_ms": 638,
+     "max_ms": 3693
+    },
+    "fallback_rate_slots": 0.6138888888888889,
+    "fallback_rate_turns": 0.7777777777777778,
+    "latency": {
+     "calls": 720,
+     "min_ms": 144,
+     "p50_ms": 260,
+     "p95_ms": 339,
+     "max_ms": 3474
+    }
+   }
+  ]
+ },
+ "positive/plain-lantern-bearer-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "positive",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 291,
+    "fallback_slots": 429,
+    "turns_with_fallback": 272,
+    "timeouts": 0,
+    "bad_json": 7,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 422,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 5,
+     "choice_parroting": 3,
+     "death_words": 5,
+     "invalid_punctuation": 2,
+     "length_cap_exceeded": 320,
+     "mid_sentence_capital": 5,
+     "numbers_digits_or_units": 26,
+     "personal_pronoun": 31,
+     "quantifier_before_resource_or_half": 5,
+     "unauthorised_resource_noun": 20
+    },
+    "lines_checked": 713,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 30,
+     "choice_parroting": 8,
+     "death_words": 6,
+     "invalid_punctuation": 2,
+     "length_cap_exceeded": 322,
+     "mid_sentence_capital": 6,
+     "numbers_digits_or_units": 72,
+     "personal_pronoun": 36,
+     "quantifier_before_resource_or_half": 31,
+     "unauthorised_resource_noun": 108
+    },
+    "lines_breaking_more_than_one_rule": 141,
+    "unit_rule_coin_rejects": 2,
+    "accepted_lines": 291,
+    "distinct_openings": 96,
+    "unique_opening_share": 0.13402061855670103,
+    "top_openings": [
+     {
+      "opening": "the mud holds",
+      "count": 19
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 14
+     },
+     {
+      "opening": "the path curves",
+      "count": 14
+     },
+     {
+      "opening": "the trail bends",
+      "count": 11
+     },
+     {
+      "opening": "mold spreads in",
+      "count": 10
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 243,
+     "p50_ms": 371,
+     "p95_ms": 610,
+     "max_ms": 3584
+    },
+    "fallback_rate_slots": 0.5958333333333333,
+    "fallback_rate_turns": 0.7555555555555555,
+    "latency": {
+     "calls": 720,
+     "min_ms": 114,
+     "p50_ms": 184,
+     "p95_ms": 354,
+     "max_ms": 3437
+    }
+   }
+  ]
+ },
+ "positive/plain-lantern-bearer-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "positive",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 284,
+    "fallback_slots": 436,
+    "turns_with_fallback": 293,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 435,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 25,
+     "choice_parroting": 11,
+     "death_words": 8,
+     "invalid_punctuation": 11,
+     "length_cap_exceeded": 55,
+     "mid_sentence_capital": 10,
+     "numbers_digits_or_units": 54,
+     "personal_pronoun": 36,
+     "quantifier_before_resource_or_half": 29,
+     "unauthorised_resource_noun": 196
+    },
+    "lines_checked": 719,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 60,
+     "choice_parroting": 20,
+     "death_words": 14,
+     "invalid_punctuation": 11,
+     "length_cap_exceeded": 57,
+     "mid_sentence_capital": 13,
+     "numbers_digits_or_units": 72,
+     "personal_pronoun": 64,
+     "quantifier_before_resource_or_half": 31,
+     "unauthorised_resource_noun": 277
+    },
+    "lines_breaking_more_than_one_rule": 148,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 284,
+    "distinct_openings": 92,
+    "unique_opening_share": 0.14084507042253522,
+    "top_openings": [
+     {
+      "opening": "smoke curls from",
+      "count": 16
+     },
+     {
+      "opening": "the mud holds",
+      "count": 16
+     },
+     {
+      "opening": "the wind carries",
+      "count": 10
+     },
+     {
+      "opening": "the wind sings",
+      "count": 10
+     },
+     {
+      "opening": "the path curves",
+      "count": 9
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 495,
+     "p50_ms": 612,
+     "p95_ms": 722,
+     "max_ms": 4428
+    },
+    "fallback_rate_slots": 0.6055555555555555,
+    "fallback_rate_turns": 0.8138888888888889,
+    "latency": {
+     "calls": 720,
+     "min_ms": 216,
+     "p50_ms": 306,
+     "p95_ms": 390,
+     "max_ms": 4156
+    }
+   }
+  ]
+ },
+ "positive/plain-lantern-bearer-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "positive",
+  "format_schema": "plain",
+  "experiment": "shipped",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 278,
+    "fallback_slots": 442,
+    "turns_with_fallback": 295,
+    "timeouts": 0,
+    "bad_json": 16,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 426,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 8,
+     "choice_parroting": 5,
+     "death_words": 5,
+     "invalid_punctuation": 5,
+     "length_cap_exceeded": 241,
+     "mid_sentence_capital": 3,
+     "numbers_digits_or_units": 32,
+     "personal_pronoun": 27,
+     "quantifier_before_resource_or_half": 14,
+     "unauthorised_resource_noun": 86
+    },
+    "lines_checked": 704,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 39,
+     "choice_parroting": 12,
+     "death_words": 6,
+     "invalid_punctuation": 5,
+     "length_cap_exceeded": 244,
+     "mid_sentence_capital": 9,
+     "numbers_digits_or_units": 65,
+     "personal_pronoun": 43,
+     "quantifier_before_resource_or_half": 24,
+     "unauthorised_resource_noun": 181
+    },
+    "lines_breaking_more_than_one_rule": 156,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 278,
+    "distinct_openings": 95,
+    "unique_opening_share": 0.1366906474820144,
+    "top_openings": [
+     {
+      "opening": "smoke curls from",
+      "count": 18
+     },
+     {
+      "opening": "the mud holds",
+      "count": 17
+     },
+     {
+      "opening": "the path curves",
+      "count": 8
+     },
+     {
+      "opening": "armed figures step",
+      "count": 7
+     },
+     {
+      "opening": "the dust whirls",
+      "count": 7
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 387,
+     "p50_ms": 511,
+     "p95_ms": 656,
+     "max_ms": 3711
+    },
+    "fallback_rate_slots": 0.6138888888888889,
+    "fallback_rate_turns": 0.8194444444444444,
+    "latency": {
+     "calls": 720,
+     "min_ms": 167,
+     "p50_ms": 254,
+     "p95_ms": 361,
+     "max_ms": 3471
+    }
+   }
+  ]
+ },
+ "rulings/plain-chronicler-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 494,
+    "fallback_slots": 226,
+    "turns_with_fallback": 154,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 226,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 7,
+     "death_words": 8,
+     "length_cap_exceeded": 4,
+     "personal_pronoun": 4,
+     "quantifier_before_resource_or_half": 1,
+     "unauthorised_resource_noun": 201
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 8,
+     "death_words": 8,
+     "length_cap_exceeded": 4,
+     "personal_pronoun": 5,
+     "quantifier_before_resource_or_half": 1,
+     "unauthorised_resource_noun": 208
+    },
+    "lines_breaking_more_than_one_rule": 9,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 494,
+    "distinct_openings": 156,
+    "unique_opening_share": 0.15182186234817813,
+    "top_openings": [
+     {
+      "opening": "mud swells under",
+      "count": 66
+     },
+     {
+      "opening": "mud grips the",
+      "count": 42
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 29
+     },
+     {
+      "opening": "wind hums through",
+      "count": 23
+     },
+     {
+      "opening": "mud deepens wind",
+      "count": 20
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 169,
+     "p50_ms": 250,
+     "p95_ms": 309,
+     "max_ms": 3528
+    },
+    "fallback_rate_slots": 0.3138888888888889,
+    "fallback_rate_turns": 0.42777777777777776,
+    "latency": {
+     "calls": 720,
+     "min_ms": 79,
+     "p50_ms": 118,
+     "p95_ms": 178,
+     "max_ms": 3400
+    }
+   }
+  ]
+ },
+ "rulings/plain-chronicler-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 396,
+    "fallback_slots": 324,
+    "turns_with_fallback": 231,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 324,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 5,
+     "choice_parroting": 2,
+     "death_words": 1,
+     "invalid_punctuation": 1,
+     "mid_sentence_capital": 6,
+     "numbers_digits_or_units": 7,
+     "personal_pronoun": 8,
+     "quantifier_before_resource_or_half": 6,
+     "unauthorised_resource_noun": 288
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 9,
+     "choice_parroting": 5,
+     "death_words": 1,
+     "invalid_punctuation": 1,
+     "mid_sentence_capital": 6,
+     "numbers_digits_or_units": 7,
+     "personal_pronoun": 18,
+     "quantifier_before_resource_or_half": 7,
+     "unauthorised_resource_noun": 296
+    },
+    "lines_breaking_more_than_one_rule": 23,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 396,
+    "distinct_openings": 97,
+    "unique_opening_share": 0.10353535353535354,
+    "top_openings": [
+     {
+      "opening": "mud swells under",
+      "count": 91
+     },
+     {
+      "opening": "mud grips the",
+      "count": 53
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 24
+     },
+     {
+      "opening": "wind hums through",
+      "count": 13
+     },
+     {
+      "opening": "mud sucks at",
+      "count": 9
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 264,
+     "p50_ms": 356,
+     "p95_ms": 422,
+     "max_ms": 3831
+    },
+    "fallback_rate_slots": 0.45,
+    "fallback_rate_turns": 0.6416666666666667,
+    "latency": {
+     "calls": 720,
+     "min_ms": 114,
+     "p50_ms": 178,
+     "p95_ms": 231,
+     "max_ms": 3684
+    }
+   }
+  ]
+ },
+ "rulings/plain-chronicler-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 444,
+    "fallback_slots": 276,
+    "turns_with_fallback": 195,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 276,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 3,
+     "choice_parroting": 7,
+     "death_words": 5,
+     "numbers_digits_or_units": 3,
+     "personal_pronoun": 9,
+     "quantifier_before_resource_or_half": 3,
+     "unauthorised_resource_noun": 246
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 3,
+     "choice_parroting": 8,
+     "death_words": 5,
+     "numbers_digits_or_units": 3,
+     "personal_pronoun": 16,
+     "quantifier_before_resource_or_half": 3,
+     "unauthorised_resource_noun": 250
+    },
+    "lines_breaking_more_than_one_rule": 12,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 444,
+    "distinct_openings": 125,
+    "unique_opening_share": 0.13288288288288289,
+    "top_openings": [
+     {
+      "opening": "mud swells under",
+      "count": 59
+     },
+     {
+      "opening": "mud grips the",
+      "count": 34
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 31
+     },
+     {
+      "opening": "mud deepens wind",
+      "count": 25
+     },
+     {
+      "opening": "wind hums through",
+      "count": 23
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 198,
+     "p50_ms": 267,
+     "p95_ms": 314,
+     "max_ms": 3482
+    },
+    "fallback_rate_slots": 0.38333333333333336,
+    "fallback_rate_turns": 0.5416666666666666,
+    "latency": {
+     "calls": 720,
+     "min_ms": 88,
+     "p50_ms": 129,
+     "p95_ms": 179,
+     "max_ms": 3351
+    }
+   }
+  ]
+ },
+ "rulings/plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 656,
+    "fallback_slots": 64,
+    "turns_with_fallback": 55,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 64,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 11,
+     "death_words": 5,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 3,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 10,
+     "personal_pronoun": 15,
+     "quantifier_before_resource_or_half": 2,
+     "unauthorised_resource_noun": 16
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 11,
+     "death_words": 5,
+     "draft_animal_species": 368,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 3,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 10,
+     "personal_pronoun": 16,
+     "quantifier_before_resource_or_half": 2,
+     "unauthorised_resource_noun": 18
+    },
+    "lines_breaking_more_than_one_rule": 24,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 656,
+    "distinct_openings": 145,
+    "unique_opening_share": 0.06707317073170732,
+    "top_openings": [
+     {
+      "opening": "oxen step slow",
+      "count": 70
+     },
+     {
+      "opening": "oxen slow in",
+      "count": 66
+     },
+     {
+      "opening": "oxen step through",
+      "count": 42
+     },
+     {
+      "opening": "oxen low in",
+      "count": 39
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 32
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 173,
+     "p50_ms": 215,
+     "p95_ms": 264,
+     "max_ms": 3234
+    },
+    "fallback_rate_slots": 0.08888888888888889,
+    "fallback_rate_turns": 0.1527777777777778,
+    "latency": {
+     "calls": 720,
+     "min_ms": 78,
+     "p50_ms": 105,
+     "p95_ms": 148,
+     "max_ms": 3131
+    }
+   }
+  ]
+ },
+ "rulings/plain-fireside-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 538,
+    "fallback_slots": 182,
+    "turns_with_fallback": 146,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 182,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 52,
+     "choice_parroting": 3,
+     "death_words": 6,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 1,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 14,
+     "personal_pronoun": 4,
+     "quantifier_before_resource_or_half": 3,
+     "unauthorised_resource_noun": 97
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 67,
+     "choice_parroting": 5,
+     "death_words": 6,
+     "draft_animal_species": 654,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 1,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 14,
+     "personal_pronoun": 4,
+     "quantifier_before_resource_or_half": 3,
+     "unauthorised_resource_noun": 102
+    },
+    "lines_breaking_more_than_one_rule": 169,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 538,
+    "distinct_openings": 112,
+    "unique_opening_share": 0.07992565055762081,
+    "top_openings": [
+     {
+      "opening": "the wagon groans",
+      "count": 73
+     },
+     {
+      "opening": "the oxen move",
+      "count": 44
+     },
+     {
+      "opening": "the oxen slow",
+      "count": 41
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 30
+     },
+     {
+      "opening": "the oxen stand",
+      "count": 18
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 306,
+     "p50_ms": 465,
+     "p95_ms": 551,
+     "max_ms": 3776
+    },
+    "fallback_rate_slots": 0.25277777777777777,
+    "fallback_rate_turns": 0.40555555555555556,
+    "latency": {
+     "calls": 720,
+     "min_ms": 131,
+     "p50_ms": 232,
+     "p95_ms": 294,
+     "max_ms": 3565
+    }
+   }
+  ]
+ },
+ "rulings/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 656,
+    "fallback_slots": 64,
+    "turns_with_fallback": 52,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 64,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 9,
+     "choice_parroting": 2,
+     "death_words": 4,
+     "length_cap_exceeded": 2,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 7,
+     "personal_pronoun": 2,
+     "quantifier_before_resource_or_half": 8,
+     "unauthorised_resource_noun": 29
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 9,
+     "choice_parroting": 2,
+     "death_words": 6,
+     "draft_animal_species": 587,
+     "length_cap_exceeded": 2,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 7,
+     "personal_pronoun": 2,
+     "quantifier_before_resource_or_half": 8,
+     "unauthorised_resource_noun": 37
+    },
+    "lines_breaking_more_than_one_rule": 48,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 656,
+    "distinct_openings": 139,
+    "unique_opening_share": 0.057926829268292686,
+    "top_openings": [
+     {
+      "opening": "oxen step through",
+      "count": 41
+     },
+     {
+      "opening": "oxen step slow",
+      "count": 40
+     },
+     {
+      "opening": "oxen slow in",
+      "count": 37
+     },
+     {
+      "opening": "the oxen slow",
+      "count": 34
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 32
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 221,
+     "p50_ms": 295,
+     "p95_ms": 387,
+     "max_ms": 3170
+    },
+    "fallback_rate_slots": 0.08888888888888889,
+    "fallback_rate_turns": 0.14444444444444443,
+    "latency": {
+     "calls": 720,
+     "min_ms": 100,
+     "p50_ms": 144,
+     "p95_ms": 201,
+     "max_ms": 3056
+    }
+   }
+  ]
+ },
+ "rulings/plain-lantern-bearer-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 615,
+    "fallback_slots": 105,
+    "turns_with_fallback": 77,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 104,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "death_words": 4,
+     "numbers_digits_or_units": 52,
+     "personal_pronoun": 27,
+     "unauthorised_resource_noun": 20
+    },
+    "lines_checked": 719,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 1,
+     "death_words": 6,
+     "numbers_digits_or_units": 52,
+     "personal_pronoun": 27,
+     "unauthorised_resource_noun": 20
+    },
+    "lines_breaking_more_than_one_rule": 2,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 615,
+    "distinct_openings": 168,
+    "unique_opening_share": 0.12357723577235773,
+    "top_openings": [
+     {
+      "opening": "mud pools stretch",
+      "count": 144
+     },
+     {
+      "opening": "wind hums through",
+      "count": 29
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 20
+     },
+     {
+      "opening": "the river bends",
+      "count": 18
+     },
+     {
+      "opening": "the sky bends",
+      "count": 15
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 177,
+     "p50_ms": 221,
+     "p95_ms": 275,
+     "max_ms": 3690
+    },
+    "fallback_rate_slots": 0.14583333333333334,
+    "fallback_rate_turns": 0.21388888888888888,
+    "latency": {
+     "calls": 720,
+     "min_ms": 83,
+     "p50_ms": 108,
+     "p95_ms": 155,
+     "max_ms": 3583
+    }
+   }
+  ]
+ },
+ "rulings/plain-lantern-bearer-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 455,
+    "fallback_slots": 265,
+    "turns_with_fallback": 196,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 265,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 47,
+     "choice_parroting": 4,
+     "death_words": 6,
+     "length_cap_exceeded": 4,
+     "numbers_digits_or_units": 93,
+     "personal_pronoun": 32,
+     "quantifier_before_resource_or_half": 5,
+     "unauthorised_resource_noun": 74
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 64,
+     "choice_parroting": 5,
+     "death_words": 6,
+     "length_cap_exceeded": 4,
+     "numbers_digits_or_units": 95,
+     "personal_pronoun": 44,
+     "quantifier_before_resource_or_half": 5,
+     "unauthorised_resource_noun": 89
+    },
+    "lines_breaking_more_than_one_rule": 40,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 455,
+    "distinct_openings": 129,
+    "unique_opening_share": 0.13846153846153847,
+    "top_openings": [
+     {
+      "opening": "the path curves",
+      "count": 33
+     },
+     {
+      "opening": "the sun dips",
+      "count": 28
+     },
+     {
+      "opening": "the trees lean",
+      "count": 28
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 27
+     },
+     {
+      "opening": "the wind moves",
+      "count": 18
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 297,
+     "p50_ms": 463,
+     "p95_ms": 575,
+     "max_ms": 3667
+    },
+    "fallback_rate_slots": 0.3680555555555556,
+    "fallback_rate_turns": 0.5444444444444444,
+    "latency": {
+     "calls": 720,
+     "min_ms": 139,
+     "p50_ms": 230,
+     "p95_ms": 303,
+     "max_ms": 3469
+    }
+   }
+  ]
+ },
+ "rulings/plain-lantern-bearer-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt",
+  "model_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "model_quantization": "Q4_K_M",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 578,
+    "fallback_slots": 142,
+    "turns_with_fallback": 106,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 142,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 14,
+     "choice_parroting": 3,
+     "death_words": 5,
+     "length_cap_exceeded": 2,
+     "numbers_digits_or_units": 65,
+     "personal_pronoun": 25,
+     "quantifier_before_resource_or_half": 1,
+     "unauthorised_resource_noun": 27
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 21,
+     "choice_parroting": 3,
+     "death_words": 5,
+     "length_cap_exceeded": 2,
+     "numbers_digits_or_units": 67,
+     "personal_pronoun": 29,
+     "quantifier_before_resource_or_half": 1,
+     "unauthorised_resource_noun": 32
+    },
+    "lines_breaking_more_than_one_rule": 17,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 578,
+    "distinct_openings": 149,
+    "unique_opening_share": 0.10380622837370242,
+    "top_openings": [
+     {
+      "opening": "mud pools stretch",
+      "count": 85
+     },
+     {
+      "opening": "smoke curls from",
+      "count": 29
+     },
+     {
+      "opening": "the sun dips",
+      "count": 26
+     },
+     {
+      "opening": "the river bends",
+      "count": 20
+     },
+     {
+      "opening": "the path curves",
+      "count": 17
+     }
+    ],
+    "calls_made": 720,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 213,
+     "p50_ms": 290,
+     "p95_ms": 365,
+     "max_ms": 3925
+    },
+    "fallback_rate_slots": 0.19722222222222222,
+    "fallback_rate_turns": 0.29444444444444445,
+    "latency": {
+     "calls": 720,
+     "min_ms": 104,
+     "p50_ms": 142,
+     "p95_ms": 196,
+     "max_ms": 3808
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,23 @@
+CELL chronicler brief: accepted 496 of 720
+CELL chronicler standard: accepted 632 of 720
+CELL chronicler rich: accepted 403 of 720
+CELL fireside brief: accepted 450 of 720
+CELL fireside standard: accepted 474 of 720
+CELL fireside rich: accepted 326 of 720
+CELL lantern-bearer brief: accepted 465 of 720
+CELL lantern-bearer standard: accepted 494 of 720
+CELL lantern-bearer rich: accepted 229 of 720
+SLOTS 6480
+CODE accepted: before 2496 after 3969
+CODE bad_slot_json: before 170 after 170
+CODE band_banned_vocabulary: before 137 after 212
+CODE choice_parroting: before 7 after 24
+CODE death_words: before 16 after 37
+CODE draft_animal_species: before 5 after 19
+CODE invalid_punctuation: before 215 after 40
+CODE length_cap_exceeded: before 2001 after 638
+CODE mid_sentence_capital: before 12 after 14
+CODE numbers_digits_or_units: before 774 after 333
+CODE personal_pronoun: before 24 after 112
+CODE quantifier_before_resource_or_half: before 174 after 417
+CODE unauthorised_resource_noun: before 449 after 495

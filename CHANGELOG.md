@@ -11,6 +11,16 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.73] - 2026-11-13
+
+- ETV narrator sessions 1-4 receipts
+- Updated experiment `charts`
+- Updated experiment `colab-golden-path`
+- Updated experiment `dataset-desk`
+- Added experiment `etv-narrator`
+- Updated experiment `ollama-cuda-backend`
+- Updated experiment `stage1-regeneration`
+
 ## [1.1.23.1.72] - 2026-11-13
 
 - licences: Google image-generation terms (Gemini API terms re-read, prohibited use policy, image docs, AI Studio plans), read 2026-11-13

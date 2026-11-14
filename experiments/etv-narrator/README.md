@@ -166,6 +166,17 @@ judgement on a small sample (direction only, not a measured rate).
 - [cloud-claude/READING-SAMPLE-side-by-side-standard-360.md](cloud-claude/READING-SAMPLE-side-by-side-standard-360.md):
   the same with Fable 5.2 added, over all 360 turns, 10 turns per voice (29 read). Same rule.
 
+**Licence basis for publishing these lines** (a reading of published terms, not legal advice;
+registry: `licences/registry.json`):
+
+- **Claude lines (Haiku 5.5, Sonnet 5.5, Opus 5.5, Fable 5.2):** produced through the Claude
+  API, which falls under `anthropic-commercial-terms` (covers "Claude API"; `assets` use
+  allowed; its only clause concerns competing products and training, not publishing outputs).
+  Publishing reading samples is an assets use.
+- **Qwen lines (qwen3:4b-instruct-2507, and the 14B and 3.5 models of the later session):**
+  `qwen3-4b-instruct-2507-card`, `qwen3-14b-card`, `qwen3.5-4b-card` and `qwen3.5-9b-card`,
+  added with this change, all read 2026-11-13: Apache-2.0, not gated, no clause on outputs.
+
 ## Caveats the run records carry
 
 - The all-rules counts for `draft_animal_species` in the two session 3 arms with the

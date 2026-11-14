@@ -1,6 +1,6 @@
-# Escape the Valley narrator: fallback-rate sessions 1-4
+# Escape the Valley narrator: fallback-rate sessions 1-5
 
-**Status: sessions 1 to 4 run and filed as receipts; session 5 and the cloud comparison are filed separately.**
+**Status: sessions 1 to 5 and the Claude API comparison run and filed as receipts.**
 Template: none (a sequence of measured sessions, each answering the one before).
 
 All figures below are copied from the sessions' own run records, filed beside this page.
@@ -39,6 +39,7 @@ question: does a line that passes the rules also say what happened on the turn?
 | 2 | [results/s2-recheck](results/s2-recheck/) | 2026-11-13 | plain, after the first fix (#85) | fallback 61.5% to 55.5%; paired by turn +5.9 points of lines accepted (95% interval +3.3 to +8.6); Rich much better, Standard worse |
 | 3 | [results/s3-arms](results/s3-arms/) | 2026-11-13 | seven arms (52,771 calls) against session 2 | rulings prompt with up to three candidates and trimming: 55.5% to 8.1% (+47.4 points, interval +45.1 to +49.7); unquantised model and positive wording did not help |
 | 4 | [results/s4-says-what-happened](results/s4-says-what-happened/) | 2026-11-13 | truth rules, outcome lead, repetition rules; three weak-card latency arms (32,003 calls) | 82.9% of lines pass every rule and say what happened, against 78.1% for session 3's best arm scored the same way (+4.9 points, interval +2.5 to +7.2); with part of the model off the GPU a turn takes 5 to 22 times longer |
+| 5 | [s5-larger-local](s5-larger-local/) | 2026-11-13 | the session 4 shipping shape on four larger or newer local models (45,109 calls) | no larger or newer local model beats the 4B ship arm: `qwen3:8b` is level (82.2% against 82.9% good lines; paired -0.7 points, 95% interval -2.8 to +1.3) at 1.4 times the turn time; `qwen3.5:4b` is a little worse (80.5%); `qwen3:14b` (70.9%) and `qwen3.5:9b` (73.1%) are clearly worse |
 
 Times in the run records are written "EST", which is Eastern time on those dates.
 
@@ -59,6 +60,9 @@ Times in the run records are written "EST", which is Eastern time on those dates
   (says-what-happened truth rules, outcome lead, no repeated opening, no event-text copy),
   `ship` (swh plus brief-by-stop), and latency arms `lat-half`, `lat-quarter`, `lat-cpu`
   (18, 9 and 0 of the model's 36 blocks on the GPU).
+- **Session 5.** Session 4's `ship` shape unchanged, with only the model swapped: `qwen3:8b`,
+  `qwen3:14b`, `qwen3.5:4b` and `qwen3.5:9b` (all Q4_K_M, local Ollama, 360 turns, 6,480 lines
+  per arm), paired by turn against the 4B `ship` arm.
 
 ## What each session folder holds
 
@@ -76,10 +80,9 @@ Times in the run records are written "EST", which is Eastern time on those dates
   the four sessions), plus scripts, logs and VRAM readings. Each cell's `stdout.txt`
   repeats its report and its `stderr.txt` is empty, so neither is listed.
 
-Not filed here: the reading samples (a hand reading of accepted lines, filed separately),
-the per-row re-score JSONs, session 5 (larger local models) and the Claude comparison.
-Where a run record or the session 4 re-score names them, read those references as pointing
-at records not yet filed in this repository.
+Not filed here: the per-row re-score JSONs and the raw rows (listed in each `KEPT-ON-RIG.tsv`;
+session 5's list also names its stdout and stderr copies). The reading samples, session 5 and
+the Claude comparison are filed in their own folders below.
 
 ## Results, in order
 
@@ -109,6 +112,44 @@ at records not yet filed in this repository.
    the choice label, three-word repeated openings with the lead's own subjects exempt)
    moves the ship arm's good lines from 82.9% to 85.7% (a lower bound, because the harness
    kept only the last candidate); the cloud rows in that file belong to a later record.
+
+## Session 5: larger and newer local models
+
+Run record: [s5-larger-local/RUN-RECORD.md](s5-larger-local/RUN-RECORD.md); tables for all arms
+(recorded and re-scored under the two agreed checker changes): `ALL-ARMS-tables.md` and
+`ALL-ARMS-rescored-tables.md`; every per-cell report bundled in `reports.json` (arms and the
+20-turn thinking-check cells); raw rows, logs and scripts listed by name, size and sha256 in
+`KEPT-ON-RIG.tsv` (about 86 MB of rows). The two tables files were written with CRLF on the
+rig and are stored here with LF (rig sha256 / LF sha256, first 12 characters: all-arms
+`4b6c2cc89df4` / `608be9715bda`; re-scored `b676e68df0a1` / `59076b57ab7f`); the run record
+(`ef3a06075f74`) and the reading sample (`ca02060c0b1c`) are byte-identical to the rig copies.
+
+**Verdict (the run record's):** no larger or newer local model beats the shipping 4B model.
+Good lines are those that pass every rule and say what happened; paired by turn against the
+4B `ship` arm (82.9%; 85.7% re-scored):
+
+| model | good lines | paired vs ship, points (95%) | re-scored | turn latency p50 / p95 |
+|---|---:|---|---:|---|
+| `qwen3:8b` | 82.2% | -0.7 (-2.8 to +1.3) | 86.1% | 507 / 1,288 ms |
+| `qwen3:14b` | 70.9% | -12.1 (-14.5 to -9.7) | 74.0% | 1,226 / 2,835 ms |
+| `qwen3.5:4b` | 80.5% | -2.5 (-4.3 to -0.6) | 83.9% | 855 / 2,127 ms |
+| `qwen3.5:9b` | 73.1% | -9.8 (-11.7 to -7.9) | 75.5% | 1,315 / 2,762 ms |
+
+`qwen3:8b` is level with the 4B at 1.4 times the turn time; `qwen3.5:4b` is a little worse and
+drops most deaths (it carries the death as the main fact on 38.2% of the turns that need it,
+against 85.3% for the 4B). No arm's accepted lines state a false supply fact, copy the event
+text or repeat an opening. Each model passed a thinking check first (no thinking, no empty
+answer, median line time under a limit); the limit was scaled by model file size, a deviation
+the run record states. The arms ran on one RTX 5090 at 14,359 s of a 16,200 s wall. Caveats from
+the record: one build and the Claude API cells overlapped some arms, so two `qwen3:8b` cells'
+latency is not comparable (their fallback rates are), and the 4B baseline's latency was itself
+taken with other work running. All figures `[unverified]`.
+
+**Taboo leak (from the reading sample, one reader's judgement):** `qwen3:8b` writes lines that
+break the party's own taboo (for example "no river water") by inventing a riverbank or river
+scenery on most turns, and once has the party drink there; the rule checker does not catch it.
+The reading recommends a taboo and doctrine check and a "no invented water source" rule with
+the scene-slot rules.
 
 ## Cloud comparison: the Claude API (2026-11-13)
 
@@ -145,7 +186,7 @@ sessions 1 to 4) and `KEPT-ON-RIG.tsv`.
 
 ## Reading samples
 
-Four files hold lines the narrator wrote, shown with the facts the model was given, so a
+Five files hold lines the narrator wrote, shown with the facts the model was given, so a
 reader can judge whether the lines read well, which the rates cannot say. Each is filed
 as written on 2026-11-13; the repository stores text with LF line endings, so three files
 written with CRLF on the rig differ from the rig copy in line endings only. sha256 on the rig
@@ -169,6 +210,13 @@ small sample (direction only, not a measured rate).
   the first unused turn accepted by the most models.
 - [cloud-claude/READING-SAMPLE-side-by-side-standard-360.md](cloud-claude/READING-SAMPLE-side-by-side-standard-360.md):
   the same with Fable 5.2 added, over all 360 turns, 10 turns per voice (29 read). Same rule.
+- [s5-larger-local/READING-SAMPLE-8b-beside-ship.md](s5-larger-local/READING-SAMPLE-8b-beside-ship.md):
+  session 5's best arm by good lines (`qwen3:8b`) beside session 4's ship sample, 30 slots each
+  (29 shown), 10 per voice, chosen by the same rule as the ship sample (for each category, the
+  first unused turn in turn-set order whose outcome line was accepted; lengths rotate); the two
+  arms can land on different turns where one fell back. Its R&D reading (about 19 of 29 good
+  for `qwen3:8b` against about 14 of 29 for the 4B, direction only, n = 29) is one reader's
+  judgement.
 
 **Licence basis for publishing these lines** (a reading of published terms, not legal advice;
 registry: `licences/registry.json`):
@@ -177,9 +225,10 @@ registry: `licences/registry.json`):
   API, which falls under `anthropic-commercial-terms` (covers "Claude API"; `assets` use
   allowed; its only clause concerns competing products and training, not publishing outputs).
   Publishing reading samples is an assets use.
-- **Qwen lines (qwen3:4b-instruct-2507, and the 14B and 3.5 models of the later session):**
-  `qwen3-4b-instruct-2507-card`, `qwen3-14b-card`, `qwen3.5-4b-card` and `qwen3.5-9b-card`,
-  added with this change, all read 2026-11-13: Apache-2.0, not gated, no clause on outputs.
+- **Qwen lines (qwen3:4b-instruct-2507, and the 8B, 14B and 3.5 models of session 5; the
+  8B sample cites `qwen3-8b-card`):** `qwen3-4b-instruct-2507-card`, `qwen3-8b-card`,
+  `qwen3-14b-card`, `qwen3.5-4b-card` and `qwen3.5-9b-card`. The 4B, 14B and 3.5 entries were
+  read 2026-11-13 and the 8B entry 2026-10-26: Apache-2.0, not gated, no clause on outputs.
 
 ## Caveats the run records carry
 

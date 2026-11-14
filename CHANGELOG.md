@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.79] - 2026-11-13
+
+- ETV session 5 (larger local models) receipts
+- Updated experiment `etv-narrator`
+
 ## [1.1.23.1.78] - 2026-11-13
 
 - judge bake-off: selected, not adopted; D4 check result; 19b decisions dated

@@ -78,7 +78,8 @@ Found through a Gemini Deep Research report (2026-11-12); claims checked as mark
 - **Spend:** the largest sink was the evaluation lane, then volume rendering, then a LoRA lane; the target was three
   G4s kept busy.
 
-Open for the Director and not decided here: object storage as a data plane, and how to use surplus units.
+Decided by the Director on 2026-11-12: object storage is a private Hugging Face Storage Bucket, and surplus units go to
+4-8 seeds per asset with automatic scoring.
 
 relevance: `act`, and mostly done. The next paid window should still use the launcher and boot assert.
 

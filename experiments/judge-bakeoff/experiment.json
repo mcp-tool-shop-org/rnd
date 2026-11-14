@@ -17,7 +17,7 @@
    "cost_basis": "rate_x_runtime",
    "cap": null,
    "outcome": "results",
-   "why": "six windows: four lock-check (one A100, one pre-fix G4 diagnostic) and two counted shards; 29.058459 units for the four successful G4 windows, 33.237715 in all (recomputed from the ledger rows); winner d3-mini with a perfect score that is unchecked",
+   "why": "six windows: four lock-check (one A100, one pre-fix G4 diagnostic) and two counted shards; 29.058459 units for the four successful G4 windows, 33.237715 in all (recomputed from the ledger rows); selected winner d3-mini, not adopted; perfect score checked 2026-11-13: no leak, binary task, transfer untested",
    "pins": {},
    "projected_cost": null,
    "raw_manifest_id": null

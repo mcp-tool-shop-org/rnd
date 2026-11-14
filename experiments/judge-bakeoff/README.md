@@ -28,7 +28,9 @@ per class: supported, unsupported, cannot tell).
 
 ## Result
 
-Winner under the preregistered rule: **`d3-mini`**, the only eligible judge. The rule (from
+The reply's selected winner is **`d3-mini`** (the only judge clearing the floors). Not adopted.
+The perfect score was checked on the rig on 2026-11-13: no leak was found, the task is binary and transfer
+is untested (see Cautions). The selection rule (from
 the score summary): a judge is eligible only if it clears all the floors, namely the
 one-sided 95% lower bound of AND-gate precision at least 0.86, of AND-gate recall at least
 0.45, per-negative-class precision (unsupported, and cannot-tell) at least 0.85, and
@@ -57,15 +59,25 @@ Trivial baselines in the same summary: always-no 0.6667 class-balanced, always-y
 - 12,900 of 12,900 rows matched the exact assembled prompt hash.
 - Combined-outputs hash and schedule hash are in `results/counted430-g4.md`.
 
-## Cautions, read before relying on the winner
+## Cautions, read before relying on the selection
 
-1. **A perfect score.** `d3-mini` scores 1.0000 on every measure over 1,260 items, with
-   zero flips and an AUROC of 1.0000. No record filed here checks that for leakage, a
-   scoring artefact or a readout that sees the label. `[unverified]`; treat it as a result
-   to re-examine, not a settled win.
-2. **The summary's own banner reads "shakedown, decision rule not applied".** The winner
-   line is from the same file's winner-selection block, and the reply calls it the selected
-   winner. Whether the rule was formally applied is for the Publisher to confirm.
+1. **A perfect score, checked for leaks on 2026-11-13 (R&D, on the rig, aggregates only).** `d3-mini` scores
+   1.0000 on every measure over 1,260 items, with zero flips and an AUROC of 1.0000. The check found:
+   - **No judge-visible leak.** Its input is the material and the claim only, the same facts every judge gets, and
+     12,900 of 12,900 assembled prompts matched their hashes.
+   - **The part passed the surface-feature probe.**
+   - **A shuffled-key control falls to chance:** mean agreement 0.555 over 200 permutations, against about 5/9
+     expected.
+   - **It is the full counted part,** not a subset.
+
+   So the score is real agreement with the keys, but two things stay open before any adoption:
+   - **The pass is binary** ("is the claim supported?"). It separates supported from not-supported, and does not test
+     unsupported against cannot-tell.
+   - **Transfer is untested.** It is not known whether the model was trained on procedurally generated fact tables
+     like these; a held-out item family from a different generator would show whether the result transfers.
+2. **The summary's own banner reads "shakedown, decision rule not applied".** The selection line comes from the same
+   file's selection block, where the reply calls it the selected winner. Whether the rule was formally applied is for
+   the Publisher to confirm.
 3. The summary lists ECE, reliability curves, per-closure breakdowns and three-way pass
    metrics as exploratory only.
 
@@ -75,6 +87,6 @@ Sealed answer keys, per-item rows and the sealed score rows; item text and promp
 
 ## Studio relevance
 
-relevance: `act` (re-examine the perfect score before adopting `d3-mini`).
+relevance: `act` (selected, not adopted: settle the binary-task and transfer questions before adopting `d3-mini`).
 
 Promoted: not yet.

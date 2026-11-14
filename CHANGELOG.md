@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.82] - 2026-11-14
+
+- webpki-root-certs 1.0.12 licence entry extended
+
 ## [1.1.23.1.81] - 2026-11-13
 
 - Seed 24 fact-check flips; ETV reading samples moved into results/

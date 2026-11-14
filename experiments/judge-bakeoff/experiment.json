@@ -1,0 +1,26 @@
+{
+ "schema": "rnd-experiment/v1",
+ "name": "judge-bakeoff",
+ "status": "running",
+ "design": "README.md",
+ "template": null,
+ "budgets": [],
+ "licences": [],
+ "runs": [
+  {
+   "id": "counted430-g4",
+   "venue": "colab",
+   "hardware": "G4 Standard (plus one A100 lock-check window before the A100 stop ruling)",
+   "date": "2026-11-12",
+   "cost": 33.24,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": null,
+   "outcome": "results",
+   "why": "six windows: four lock-check (one A100, one pre-fix G4 diagnostic) and two counted shards; 29.058459 units for the four successful G4 windows, 33.237715 in all (recomputed from the ledger rows); winner d3-mini with a perfect score that is unchecked",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  }
+ ]
+}

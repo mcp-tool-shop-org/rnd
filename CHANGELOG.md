@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.76] - 2026-11-13
+
+- Colab campaign results: judge bake-off, jam quant and E-R, ledgers
+- Added experiment `ai-jam-colab`
+- Added experiment `colab-campaign-2026-11`
+- Added experiment `judge-bakeoff`
+
 ## [1.1.23.1.75] - 2026-11-13
 
 - ETV reading samples

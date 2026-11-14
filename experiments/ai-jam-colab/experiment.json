@@ -1,0 +1,56 @@
+{
+ "schema": "rnd-experiment/v1",
+ "name": "ai-jam-colab",
+ "status": "running",
+ "design": "README.md",
+ "template": null,
+ "budgets": [],
+ "licences": [],
+ "runs": [
+  {
+   "id": "3a-b2-qmat",
+   "venue": "colab",
+   "hardware": "G4 Standard and CPU stubs",
+   "date": "2026-11-12",
+   "cost": 23.31,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": null,
+   "outcome": "results",
+   "why": "7 windows (3 CPU stubs, 4 G4); the last G4 window completed 36 of 36 cells; three earlier G4 windows were tooling-fix bring-ups (7.234303 units)",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "3b-er-distill",
+   "venue": "colab",
+   "hardware": "G4 Standard and a CPU stub",
+   "date": "2026-11-13",
+   "cost": 19.45,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": null,
+   "outcome": "results",
+   "why": "4 windows (1 CPU stub, 3 G4); teacher distillation then two 4B LoRAs; full_voiced pass@1 6.38% to 87.23% on 47 held-out windows",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "3c-er-scale-quant",
+   "venue": "colab",
+   "hardware": "G4 Standard and a CPU stub",
+   "date": "2026-11-13",
+   "cost": 5.93,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": null,
+   "outcome": "results",
+   "why": "3 windows (1 CPU stub, 2 G4; the first G4 window stopped on an input hash pin, 0.44 units); 16 of 16 units: scale and licence ablation plus 12 GGUF cells",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  }
+ ]
+}

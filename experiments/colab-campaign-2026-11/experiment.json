@@ -1,0 +1,41 @@
+{
+ "schema": "rnd-experiment/v1",
+ "name": "colab-campaign-2026-11",
+ "status": "running",
+ "design": "README.md",
+ "template": null,
+ "budgets": [],
+ "licences": [],
+ "runs": [
+  {
+   "id": "lora-lane-1113",
+   "venue": "colab",
+   "hardware": "G4 Standard",
+   "date": "2026-11-13",
+   "cost": 91.86,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": null,
+   "outcome": "partial",
+   "why": "10 LoRA training windows: 6 ok, 4 ended on a guard (dead harness, setup stall, cap, stall); windows that did not train cost 17.454399 units",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  },
+  {
+   "id": "other-lanes-1112",
+   "venue": "colab",
+   "hardware": "G4 Standard, L4 and CPU high-mem",
+   "date": "2026-11-12",
+   "cost": 21.94,
+   "cost_unit": "colab_units",
+   "cost_basis": "rate_x_runtime",
+   "cap": null,
+   "outcome": "results",
+   "why": "14 windows outside the bake-off and jam tracks: an item-level base pass lane (3), private art caption drafting (6) and private art preview rendering (5); 9.363365 + 2.572104 + 10.002160 units",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
+  }
+ ]
+}

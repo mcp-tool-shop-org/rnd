@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.84] - 2026-11-14
+
+- licences: 10 crates for roll 3.0's Rust core
+
 ## [1.1.23.1.83] - 2026-11-14
 
 - xrpl-js-isc licence entry

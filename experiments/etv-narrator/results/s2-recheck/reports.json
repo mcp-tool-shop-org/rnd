@@ -1,0 +1,435 @@
+{
+ "plain-chronicler-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 383,
+    "fallback_slots": 337,
+    "turns_with_fallback": 243,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 336,
+    "rejects_by_code": {
+     "choice_parroting": 8,
+     "death_words": 1,
+     "draft_animal_species": 20,
+     "length_cap_exceeded": 109,
+     "numbers_digits_or_units": 11,
+     "personal_pronoun": 26,
+     "quantifier_before_resource_or_half": 136,
+     "unauthorised_resource_noun": 25
+    },
+    "fallback_rate_slots": 0.46805555555555556,
+    "fallback_rate_turns": 0.675,
+    "latency": {
+     "calls": 720,
+     "min_ms": 121,
+     "p50_ms": 172,
+     "p95_ms": 225,
+     "max_ms": 3062
+    }
+   }
+  ]
+ },
+ "plain-chronicler-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 326,
+    "fallback_slots": 394,
+    "turns_with_fallback": 269,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 394,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 7,
+     "choice_parroting": 12,
+     "death_words": 1,
+     "draft_animal_species": 46,
+     "invalid_punctuation": 1,
+     "numbers_digits_or_units": 34,
+     "personal_pronoun": 8,
+     "quantifier_before_resource_or_half": 232,
+     "unauthorised_resource_noun": 53
+    },
+    "fallback_rate_slots": 0.5472222222222223,
+    "fallback_rate_turns": 0.7472222222222222,
+    "latency": {
+     "calls": 720,
+     "min_ms": 213,
+     "p50_ms": 280,
+     "p95_ms": 335,
+     "max_ms": 3265
+    }
+   }
+  ]
+ },
+ "plain-chronicler-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 363,
+    "fallback_slots": 357,
+    "turns_with_fallback": 248,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 357,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 6,
+     "choice_parroting": 6,
+     "draft_animal_species": 32,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 13,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 33,
+     "personal_pronoun": 17,
+     "quantifier_before_resource_or_half": 206,
+     "unauthorised_resource_noun": 42
+    },
+    "fallback_rate_slots": 0.49583333333333335,
+    "fallback_rate_turns": 0.6888888888888889,
+    "latency": {
+     "calls": 720,
+     "min_ms": 174,
+     "p50_ms": 232,
+     "p95_ms": 281,
+     "max_ms": 4143
+    }
+   }
+  ]
+ },
+ "plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 198,
+    "fallback_slots": 522,
+    "turns_with_fallback": 317,
+    "timeouts": 0,
+    "bad_json": 3,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 519,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 2,
+     "death_words": 5,
+     "draft_animal_species": 2,
+     "length_cap_exceeded": 358,
+     "numbers_digits_or_units": 21,
+     "personal_pronoun": 26,
+     "quantifier_before_resource_or_half": 15,
+     "unauthorised_resource_noun": 88
+    },
+    "fallback_rate_slots": 0.725,
+    "fallback_rate_turns": 0.8805555555555555,
+    "latency": {
+     "calls": 720,
+     "min_ms": 108,
+     "p50_ms": 177,
+     "p95_ms": 321,
+     "max_ms": 4262
+    }
+   }
+  ]
+ },
+ "plain-fireside-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 315,
+    "fallback_slots": 405,
+    "turns_with_fallback": 276,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 404,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 28,
+     "choice_parroting": 3,
+     "death_words": 5,
+     "draft_animal_species": 2,
+     "invalid_punctuation": 1,
+     "length_cap_exceeded": 4,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 71,
+     "personal_pronoun": 23,
+     "quantifier_before_resource_or_half": 84,
+     "unauthorised_resource_noun": 182
+    },
+    "fallback_rate_slots": 0.5625,
+    "fallback_rate_turns": 0.7666666666666667,
+    "latency": {
+     "calls": 720,
+     "min_ms": 207,
+     "p50_ms": 292,
+     "p95_ms": 358,
+     "max_ms": 3664
+    }
+   }
+  ]
+ },
+ "plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 252,
+    "fallback_slots": 468,
+    "turns_with_fallback": 293,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 467,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 13,
+     "choice_parroting": 6,
+     "death_words": 4,
+     "draft_animal_species": 1,
+     "length_cap_exceeded": 191,
+     "numbers_digits_or_units": 47,
+     "personal_pronoun": 17,
+     "quantifier_before_resource_or_half": 43,
+     "unauthorised_resource_noun": 145
+    },
+    "fallback_rate_slots": 0.65,
+    "fallback_rate_turns": 0.8138888888888889,
+    "latency": {
+     "calls": 720,
+     "min_ms": 163,
+     "p50_ms": 243,
+     "p95_ms": 310,
+     "max_ms": 3119
+    }
+   }
+  ]
+ },
+ "plain-lantern-bearer-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 383,
+    "fallback_slots": 337,
+    "turns_with_fallback": 236,
+    "timeouts": 0,
+    "bad_json": 6,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 331,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 5,
+     "choice_parroting": 4,
+     "death_words": 2,
+     "invalid_punctuation": 2,
+     "length_cap_exceeded": 218,
+     "numbers_digits_or_units": 38,
+     "personal_pronoun": 19,
+     "quantifier_before_resource_or_half": 32,
+     "unauthorised_resource_noun": 11
+    },
+    "fallback_rate_slots": 0.46805555555555556,
+    "fallback_rate_turns": 0.6555555555555556,
+    "latency": {
+     "calls": 720,
+     "min_ms": 123,
+     "p50_ms": 169,
+     "p95_ms": 266,
+     "max_ms": 3418
+    }
+   }
+  ]
+ },
+ "plain-lantern-bearer-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 352,
+    "fallback_slots": 368,
+    "turns_with_fallback": 242,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 368,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 8,
+     "choice_parroting": 5,
+     "death_words": 2,
+     "length_cap_exceeded": 11,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 125,
+     "personal_pronoun": 20,
+     "quantifier_before_resource_or_half": 157,
+     "unauthorised_resource_noun": 39
+    },
+    "fallback_rate_slots": 0.5111111111111111,
+    "fallback_rate_turns": 0.6722222222222223,
+    "latency": {
+     "calls": 720,
+     "min_ms": 219,
+     "p50_ms": 291,
+     "p95_ms": 363,
+     "max_ms": 3516
+    }
+   }
+  ]
+ },
+ "plain-lantern-bearer-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "095455fb593311ecdb76b139aa1ad20220807bdf7bcd4d236ec648e276c13769",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 10000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 309,
+    "fallback_slots": 411,
+    "turns_with_fallback": 264,
+    "timeouts": 0,
+    "bad_json": 6,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 405,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 8,
+     "choice_parroting": 1,
+     "death_words": 2,
+     "length_cap_exceeded": 182,
+     "numbers_digits_or_units": 66,
+     "personal_pronoun": 24,
+     "quantifier_before_resource_or_half": 96,
+     "unauthorised_resource_noun": 26
+    },
+    "fallback_rate_slots": 0.5708333333333333,
+    "fallback_rate_turns": 0.7333333333333333,
+    "latency": {
+     "calls": 720,
+     "min_ms": 157,
+     "p50_ms": 245,
+     "p95_ms": 332,
+     "max_ms": 4071
+    }
+   }
+  ]
+ }
+}

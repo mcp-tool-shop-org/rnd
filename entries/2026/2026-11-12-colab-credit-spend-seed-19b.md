@@ -19,6 +19,8 @@ table were not checked and are treated as estimates.
 Its main value was six places where it contradicted the studio's own plan, most of them about risk to the paid
 account and about assumptions the studio had never measured.
 
+Found through a Gemini Deep Research report (2026-11-12); claims checked as marked.
+
 ## Key points
 
 - **Refused allocations are not free.** A tracker report describes a paying account blocked on 2026-11-06 after about
@@ -94,7 +96,6 @@ relevance: `act`, and mostly done. The next paid window should still use the lau
 
 ## Sources
 
-- [aggregator] https://gemini.google.com/app/e07081f2f1fc21bc — Gemini Deep Research report "Turning 1,800 Expiring Colab Compute Units into Commercial Studio Output" (seed 19b, 2026-11-12; account-private chat)
 - [primary] https://github.com/googlecolab/colabtools/issues/6206 — Google Colab tracker (ban report)
 - [primary] https://github.com/googlecolab/colabtools/issues/6194 — Google Colab tracker (G4 rate rise)
 - [primary] https://github.com/googlecolab/colabtools/issues/5979 — Google Colab tracker (paid runtime killed)

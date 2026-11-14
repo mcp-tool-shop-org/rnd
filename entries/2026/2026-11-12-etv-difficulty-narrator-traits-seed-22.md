@@ -17,6 +17,8 @@ the game's code, so its "inference" tags are guesses. R&D checked proportionally
 at source, and the load-bearing numbers by recomputation. The model licences and names held; much of the difficulty
 and speed evidence is the report's inference or mixed-source estimate.
 
+Found through a Gemini Deep Research report (2026-11-12); claims checked as marked.
+
 ## Key points
 
 - **Licences read at source (2026-11-12):** Qwen3-4B-Instruct-2507, Qwen3-1.7B, Gemma 4 E4B (and its family),
@@ -102,7 +104,6 @@ relevance: `act`.
 
 ## Sources
 
-- [aggregator] https://gemini.google.com/app/b0dbf389c5813f1c — Gemini Deep Research report on ETV difficulty, narrator model and traits (seed 22, 2026-11-12; account-private chat)
 - [primary] https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507 — Alibaba Qwen (Apache-2.0)
 - [primary] https://huggingface.co/microsoft/Phi-4-mini-instruct — Microsoft (MIT)
 - [primary] https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct — Meta (Llama 3.2 Community License)

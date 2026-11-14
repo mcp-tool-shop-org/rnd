@@ -18,6 +18,8 @@ was opened, so any paper must be checked at source before a decision or a public
 claims against the game's code (at the commit after the first fix) and against session 1's reports. The useful part
 is nine contradictions with the studio's own method, six of which the Publisher agreed as written.
 
+Found through a Gemini Deep Research report (2026-11-13); claims checked as marked.
+
 ## Key points
 
 - **The arm comparison was inside the noise.** Eighteen calls share each turn, so 360 turns resolve about 2.8 to
@@ -89,5 +91,4 @@ relevance: `act`; the cheap-fix experiments it prompted are done.
 
 ## Sources
 
-- [aggregator] https://gemini.google.com/app/35a5c8bba065d454 — Gemini Deep Research report on small local model narration under hard rules (seed 23, 2026-11-13; account-private chat)
 - [rig] experiments/etv-narrator — the measured sessions that followed (session reports and run records, 2026-11-13)

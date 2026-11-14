@@ -17,6 +17,8 @@ strong on repetition maths, AI disclosure, accessibility and random-number desig
 length, save systems or onboarding. R&D checked three items at source and one number by recomputation; the rest is
 Gemini's assertion, tagged by how well it is supported.
 
+Found through a Gemini Deep Research report (2026-11-13); claims checked as marked.
+
 ## Key points
 
 - **Decoupling format from content may help prose.** Strict schema decoding in one step is reported to cost quality,
@@ -84,7 +86,6 @@ relevance: `act` (five small build items). Later measurements of the narrator ar
 
 ## Sources
 
-- [aggregator] https://gemini.google.com/app/eb83be42e151f56f — Gemini Deep Research notes, "Escape the Valley build-out" (seed 21b, read 2026-11-13; no final report was produced; account-private chat)
 - [primary] https://arxiv.org/abs/2608.11539 — Bazzaz and Cooper, player perceptions of generative AI in games, a Steam review analysis
 - [primary] https://arxiv.org/abs/2408.02442 — Tam et al., "Let Me Speak Freely?"
-- [secondary] https://xogium.me/the-text-mode-lie-why-modern-tuis-are-a-nightmare-for-accessibility — xogium.me, 2026-01-05
+- [aggregator] https://xogium.me/the-text-mode-lie-why-modern-tuis-are-a-nightmare-for-accessibility — xogium.me, 2026-01-05

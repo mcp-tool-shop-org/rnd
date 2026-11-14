@@ -17,6 +17,8 @@ deadline: the XRPL Testnet and Devnet are wiped on 2026-11-25, which would make 
 before then fail a live check. Second, the report's top-ranked modules rest on amendment status it could not have
 had right, so wave 1 was re-ranked.
 
+Found through a Gemini Deep Research report (2026-11-13); claims checked as marked.
+
 ## Key points
 
 - **Testnet and Devnet reset, Wednesday 2026-11-25.** All accounts, transactions, balances, offers, AMMs and escrows
@@ -85,7 +87,6 @@ All work stays on Testnet, dry-run or local. relevance: `act` (the reset deadlin
 
 ## Sources
 
-- [aggregator] https://gemini.google.com/app/3ec4bd9fe7c8dfb8 — Gemini Deep Research report "Evidence-Based XRPL Lab Expansion" (seed 20, 2026-11-13; account-private chat)
 - [primary] https://xrpl.org/blog/2026/testnet-devnet-reset — xrpl.org (Testnet and Devnet reset notice)
 - [primary] https://xrpl.org/resources/known-amendments — xrpl.org (Known Amendments, data snapshot 2026-09-16)
 - [primary] https://github.com/mcp-tool-shop-org/xrpl-lab — the studio's xrpl-lab repo (releases, code)

@@ -11,6 +11,15 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.77] - 2026-11-13
+
+- Research harvests seeds 19b to 23 filed
+- Added `2026-11-12-colab-credit-spend-seed-19b`: Spending about 1,800 expiring Colab units: what the Deep Research report changed (seed 19b)
+- Added `2026-11-12-etv-difficulty-narrator-traits-seed-22`: Escape the Valley: difficulty target, narrator model shortlist and party traits (seed 22)
+- Added `2026-11-13-etv-build-out-research-notes-seed-21b`: Escape the Valley build-out: what a Deep Research run's notes said, and what held (seed 21b)
+- Added `2026-11-13-small-model-narrator-seed-23`: Cutting a small local narrator's fallback rate under hard rules: what the report said and what was ruled (seed 23)
+- Added `2026-11-13-xrpl-lab-expansion-seed-20`: Expanding xrpl-lab: the Testnet reset deadline and a corrected module plan (seed 20)
+
 ## [1.1.23.1.76] - 2026-11-13
 
 - Colab campaign results: judge bake-off, jam quant and E-R, ledgers

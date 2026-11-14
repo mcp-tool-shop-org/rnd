@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.80] - 2026-11-13
+
+- Seed 24 harvest filed
+- Added `2026-11-13-answer-key-trust-research-seed-24`: How far can an answer key be trusted? Evidence for rdlab's claims (seed 24)
+
 ## [1.1.23.1.79] - 2026-11-13
 
 - ETV session 5 (larger local models) receipts

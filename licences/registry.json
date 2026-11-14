@@ -2641,6 +2641,285 @@
       "restriction_search": "Read the root LICENSE and both per-package LICENSE files and both package.json licence fields at the commit; the only condition is the notice requirement. No restriction on use, training or evaluation found.",
       "snapshot_sha256": "a412f4b9b0fc20062e2cf01af9d789ec8c3543402e386c5a42b098ab49d4e532",
       "snapshot_file": "2026-11-14/xrpl-js-isc.txt"
+    },
+    {
+      "id": "serde-licence",
+      "owner": "serde developers (serde)",
+      "kind": "licence",
+      "covers": [
+        "serde 1.0.229 (crates.io checksum 4148590afeba…): roll-core, roll-cli, roll-mcp; default-features off, alloc + derive"
+      ],
+      "url": "https://raw.githubusercontent.com/serde-rs/serde/v1.0.229/LICENSE-MIT",
+      "page_date": "MIT; tag v1.0.229; no copyright line in LICENSE-MIT",
+      "read_date": "2026-11-14",
+      "clauses": [
+        "The above copyright notice and this permission notice shall be included in all"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT (dual-licensed MIT OR Apache-2.0; we take MIT): a shipped binary or bundle carries the copyright line and licence text (a third-party notices file)",
+        "Its LICENSE-MIT has no copyright line; the notices file names the crate, its repository and the licence text"
+      ],
+      "notes": "Read by R&D on 2026-11-14 for roll 3.0 (Rust core, Director-approved design draft 1, spec sha256 8c8a09a6). The published .crate was downloaded, its sha256 matched crates.io's checksum, and its LICENSE-MIT is byte-identical to the file at the pinned URL.",
+      "snapshot_sha256": "fe2a9817987f862eaced948f0468c7f51d2fedfc48c5c505b246a49a3870e9a5",
+      "snapshot_file": "2026-11-14/serde-licence.txt"
+    },
+    {
+      "id": "serde-json-licence",
+      "owner": "serde developers (serde_json)",
+      "kind": "licence",
+      "covers": [
+        "serde_json 1.0.154 (checksum e7e9cc8b1b85…): canonical receipt JSON; preserve_order must stay off (src/map.rs:3 — the map is a BTreeMap by default)"
+      ],
+      "url": "https://raw.githubusercontent.com/serde-rs/json/v1.0.154/LICENSE-MIT",
+      "page_date": "MIT; tag v1.0.154; no copyright line in LICENSE-MIT",
+      "read_date": "2026-11-14",
+      "clauses": [
+        "The above copyright notice and this permission notice shall be included in all"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT (dual-licensed MIT OR Apache-2.0; we take MIT): a shipped binary or bundle carries the copyright line and licence text (a third-party notices file)",
+        "Its LICENSE-MIT has no copyright line; the notices file names the crate, its repository and the licence text"
+      ],
+      "notes": "Read by R&D on 2026-11-14 for roll 3.0 (Rust core, Director-approved design draft 1, spec sha256 8c8a09a6). The published .crate was downloaded, its sha256 matched crates.io's checksum, and its LICENSE-MIT is byte-identical to the file at the pinned URL.",
+      "snapshot_sha256": "fe2a9817987f862eaced948f0468c7f51d2fedfc48c5c505b246a49a3870e9a5",
+      "snapshot_file": "2026-11-14/serde-json-licence.txt"
+    },
+    {
+      "id": "rand-core-licence",
+      "owner": "The Rand Project Developers (rand_core)",
+      "kind": "licence",
+      "covers": [
+        "rand_core 0.10.1 (checksum 63b8176103e1…): roll-core's Rng/SeedableRng traits"
+      ],
+      "url": "https://raw.githubusercontent.com/rust-random/rand_core/v0.10.1/LICENSE-MIT",
+      "page_date": "Copyright (c) 2018-2026 The Rand Project Developers (MIT; tag v0.10.1)",
+      "read_date": "2026-11-14",
+      "clauses": [
+        "Copyright (c) 2018-2026 The Rand Project Developers",
+        "The above copyright notice and this permission notice shall be included in all"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT (dual-licensed MIT OR Apache-2.0; we take MIT): a shipped binary or bundle carries the copyright line and licence text (a third-party notices file)",
+        "The spec says RngCore was renamed to Rng in 0.10. At 0.10.1 `pub trait Rng` is the main trait (src/lib.rs:49) and `pub trait RngCore: Rng {}` remains (src/lib.rs:257): partly right"
+      ],
+      "notes": "Read by R&D on 2026-11-14 for roll 3.0 (Rust core, Director-approved design draft 1, spec sha256 8c8a09a6). The published .crate was downloaded, its sha256 matched crates.io's checksum, and its LICENSE-MIT is byte-identical to the file at the pinned URL.",
+      "snapshot_sha256": "f19347226b493ced6077135ff987bc0eb5ce0b86202930506c9110d54a82f37a",
+      "snapshot_file": "2026-11-14/rand-core-licence.txt"
+    },
+    {
+      "id": "rand-chacha-licence",
+      "owner": "Developers of the Rand project (rand_chacha, now in rust-random/rngs)",
+      "kind": "licence",
+      "covers": [
+        "rand_chacha 0.10.0 (checksum 3e6af7f3e25d…): ChaCha12Rng (src/chacha.rs:288), roll-core's PRNG; pulls ppv-lite86 with the simd feature"
+      ],
+      "url": "https://raw.githubusercontent.com/rust-random/rngs/1172d82adc728aaf0c56b8e6b703876b51c041a3/rand_chacha/LICENSE-MIT",
+      "page_date": "Copyright 2018 Developers of the Rand project (MIT; commit 1172d82a from .cargo_vcs_info.json)",
+      "read_date": "2026-11-14",
+      "clauses": [
+        "Copyright 2018 Developers of the Rand project",
+        "The above copyright notice and this permission notice shall be included in all"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT (dual-licensed MIT OR Apache-2.0; we take MIT): a shipped binary or bundle carries the copyright line and licence text (a third-party notices file)",
+        "Its Cargo.toml names repository rust-random/rand, but the published commit 1172d82a is in rust-random/rngs (no rand_chacha tag there); pinned by commit",
+        "`#![forbid(unsafe_code)]` is at src/lib.rs:87 (the spec cited :171)"
+      ],
+      "notes": "Read by R&D on 2026-11-14 for roll 3.0 (Rust core, Director-approved design draft 1, spec sha256 8c8a09a6). The published .crate was downloaded, its sha256 matched crates.io's checksum, and its LICENSE-MIT is byte-identical to the file at the pinned URL.",
+      "snapshot_sha256": "d13eb3644fef1189a95d78f7362685d943ba495d04666e1c8abf156aa87eb557",
+      "snapshot_file": "2026-11-14/rand-chacha-licence.txt"
+    },
+    {
+      "id": "sha2-licence",
+      "owner": "The RustCrypto Project Developers (sha2)",
+      "kind": "licence",
+      "covers": [
+        "sha2 0.11.1 (checksum 47d7069beb7d…): SHA-256 for the RollAddress KDF and receipt digests; Cargo.toml `build = false` (line 18)"
+      ],
+      "url": "https://raw.githubusercontent.com/RustCrypto/hashes/sha2-v0.11.1/sha2/LICENSE-MIT",
+      "page_date": "Copyright (c) 2016-2026 The RustCrypto Project Developers (MIT; tag sha2-v0.11.1)",
+      "read_date": "2026-11-14",
+      "clauses": [
+        "Copyright (c) 2016-2026 The RustCrypto Project Developers",
+        "The above copyright notice and this permission notice shall be included in all"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT (dual-licensed MIT OR Apache-2.0; we take MIT): a shipped binary or bundle carries the copyright line and licence text (a third-party notices file)",
+        "The licence file also names Artyom Pavlov (2016); the notices file carries both lines"
+      ],
+      "notes": "Read by R&D on 2026-11-14 for roll 3.0 (Rust core, Director-approved design draft 1, spec sha256 8c8a09a6). The published .crate was downloaded, its sha256 matched crates.io's checksum, and its LICENSE-MIT is byte-identical to the file at the pinned URL.",
+      "snapshot_sha256": "3278167e3626545e878297b272945dc46931e6ce63251592ed5cc14fa50d2498",
+      "snapshot_file": "2026-11-14/sha2-licence.txt"
+    },
+    {
+      "id": "digest-licence",
+      "owner": "RustCrypto Developers (digest)",
+      "kind": "licence",
+      "covers": [
+        "digest 0.11.3 (checksum f1dd6dbb5841…): transitive via sha2 (sha2's Cargo.toml asks digest 0.11)"
+      ],
+      "url": "https://raw.githubusercontent.com/RustCrypto/traits/digest-v0.11.3/digest/LICENSE-MIT",
+      "page_date": "Copyright (c) 2017-2025 RustCrypto Developers (MIT; tag digest-v0.11.3)",
+      "read_date": "2026-11-14",
+      "clauses": [
+        "Copyright (c) 2017-2025 RustCrypto Developers",
+        "The above copyright notice and this permission notice shall be included in all"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT (dual-licensed MIT OR Apache-2.0; we take MIT): a shipped binary or bundle carries the copyright line and licence text (a third-party notices file)",
+        "The licence file also names Artyom Pavlov (2017); the notices file carries both lines",
+        "Version from the spec; the build's Cargo.lock is the authority and is re-checked at the first build PR"
+      ],
+      "notes": "Read by R&D on 2026-11-14 for roll 3.0 (Rust core, Director-approved design draft 1, spec sha256 8c8a09a6). The published .crate was downloaded, its sha256 matched crates.io's checksum, and its LICENSE-MIT is byte-identical to the file at the pinned URL.",
+      "snapshot_sha256": "96dd5b9548d184de34fc27fa95bae4edfbcb9a2043b7a74de57e84aadf73b696",
+      "snapshot_file": "2026-11-14/digest-licence.txt"
+    },
+    {
+      "id": "ppv-lite86-licence",
+      "owner": "The CryptoCorrosion Contributors (ppv-lite86)",
+      "kind": "licence",
+      "covers": [
+        "ppv-lite86 0.2.21 (checksum 85eae3c4ed2f…): transitive via rand_chacha; SIMD unless its no_simd feature is on (Cargo.toml:47)"
+      ],
+      "url": "https://raw.githubusercontent.com/cryptocorrosion/cryptocorrosion/ppv-lite86-0.2.21/utils-simd/ppv-lite86/LICENSE-MIT",
+      "page_date": "Copyright (c) 2019 The CryptoCorrosion Contributors (MIT; tag ppv-lite86-0.2.21)",
+      "read_date": "2026-11-14",
+      "clauses": [
+        "Copyright (c) 2019 The CryptoCorrosion Contributors",
+        "The above copyright notice and this permission notice shall be included in all"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT (dual-licensed MIT OR Apache-2.0; we take MIT): a shipped binary or bundle carries the copyright line and licence text (a third-party notices file)",
+        "Version from the spec; the build's Cargo.lock is the authority and is re-checked at the first build PR"
+      ],
+      "notes": "Read by R&D on 2026-11-14 for roll 3.0 (Rust core, Director-approved design draft 1, spec sha256 8c8a09a6). The published .crate was downloaded, its sha256 matched crates.io's checksum, and its LICENSE-MIT is byte-identical to the file at the pinned URL.",
+      "snapshot_sha256": "6dc6d588fd12c7a56f2e7f04540892f1bf5528a233e4d48b2b975cc765e7b080",
+      "snapshot_file": "2026-11-14/ppv-lite86-licence.txt"
+    },
+    {
+      "id": "clap-licence",
+      "owner": "clap individual contributors (clap)",
+      "kind": "licence",
+      "covers": [
+        "clap 4.6.7 (checksum aa8876b300ab…): roll-cli argument parsing only"
+      ],
+      "url": "https://raw.githubusercontent.com/clap-rs/clap/v4.6.7/LICENSE-MIT",
+      "page_date": "Copyright (c) Individual contributors (MIT; tag v4.6.7)",
+      "read_date": "2026-11-14",
+      "clauses": [
+        "Copyright (c) Individual contributors",
+        "The above copyright notice and this permission notice shall be included in all"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT (dual-licensed MIT OR Apache-2.0; we take MIT): a shipped binary or bundle carries the copyright line and licence text (a third-party notices file)"
+      ],
+      "notes": "Read by R&D on 2026-11-14 for roll 3.0 (Rust core, Director-approved design draft 1, spec sha256 8c8a09a6). The published .crate was downloaded, its sha256 matched crates.io's checksum, and its LICENSE-MIT is byte-identical to the file at the pinned URL.",
+      "snapshot_sha256": "970a729dace5d76f575938d7e5c4a87e92a0d1699e7a5001b463aaa1851a1426",
+      "snapshot_file": "2026-11-14/clap-licence.txt"
+    },
+    {
+      "id": "getrandom-licence",
+      "owner": "The rust-random Project Developers (getrandom)",
+      "kind": "licence",
+      "covers": [
+        "getrandom 0.4.3 (checksum 300e883d756b…): roll-cli only, OS entropy when no seed is given (`pub fn fill`, src/lib.rs:87); never linked by roll-core"
+      ],
+      "url": "https://raw.githubusercontent.com/rust-random/getrandom/v0.4.3/LICENSE-MIT",
+      "page_date": "Copyright (c) 2018-2026 The rust-random Project Developers (MIT; tag v0.4.3)",
+      "read_date": "2026-11-14",
+      "clauses": [
+        "Copyright (c) 2018-2026 The rust-random Project Developers",
+        "The above copyright notice and this permission notice shall be included in all"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT (dual-licensed MIT OR Apache-2.0; we take MIT): a shipped binary or bundle carries the copyright line and licence text (a third-party notices file)",
+        "The licence file also names The Rust Project Developers (2014); the notices file carries both lines"
+      ],
+      "notes": "Read by R&D on 2026-11-14 for roll 3.0 (Rust core, Director-approved design draft 1, spec sha256 8c8a09a6). The published .crate was downloaded, its sha256 matched crates.io's checksum, and its LICENSE-MIT is byte-identical to the file at the pinned URL.",
+      "snapshot_sha256": "cb140e49d1fab067368f600b35180ac7db34064581a51d37730d2c6ac8864a15",
+      "snapshot_file": "2026-11-14/getrandom-licence.txt"
+    },
+    {
+      "id": "proptest-licence",
+      "owner": "FullContact, Inc and contributors (proptest)",
+      "kind": "licence",
+      "covers": [
+        "proptest 1.12.0 (checksum b8530004ccb1…): roll-core dev-dependency only (property tests); not shipped"
+      ],
+      "url": "https://raw.githubusercontent.com/proptest-rs/proptest/v1.12.0/proptest/LICENSE-MIT",
+      "page_date": "Copyright (c) 2016 FullContact, Inc (MIT; tag v1.12.0)",
+      "read_date": "2026-11-14",
+      "clauses": [
+        "Copyright (c) 2016 FullContact, Inc",
+        "The above copyright notice and this permission notice shall be included in all"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT (dual-licensed MIT OR Apache-2.0; we take MIT): a shipped binary or bundle carries the copyright line and licence text (a third-party notices file)",
+        "A dev-dependency is not in a shipped binary, so the notice condition does not attach unless that changes"
+      ],
+      "notes": "Read by R&D on 2026-11-14 for roll 3.0 (Rust core, Director-approved design draft 1, spec sha256 8c8a09a6). The published .crate was downloaded, its sha256 matched crates.io's checksum, and its LICENSE-MIT is byte-identical to the file at the pinned URL.",
+      "snapshot_sha256": "a446c7b8ff1cb4000cbfd517d69244e816cfea75b01344105d74d64906a955b2",
+      "snapshot_file": "2026-11-14/proptest-licence.txt"
     }
   ]
 }

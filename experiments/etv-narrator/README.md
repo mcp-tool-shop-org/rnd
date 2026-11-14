@@ -143,6 +143,44 @@ sessions 1 to 4) and `KEPT-ON-RIG.tsv`.
   the header name `x-api-key` in the run record's prose, never a key value.
 - `[unverified]`: figures are the run record's own; no second check was run.
 
+## Reading samples
+
+Four files hold lines the narrator wrote, shown with the facts the model was given, so a
+reader can judge whether the lines read well, which the rates cannot say. Each is filed
+as written on 2026-11-13; the repository stores text with LF line endings, so three files
+written with CRLF on the rig differ from the rig copy in line endings only. sha256 on the rig
+(CRLF) and here (LF): combo-30 f620fe602e00… / 05cc3388c94d…; ship-29 52b364d9bd79… /
+8191c5e80bc5…; side-by-side-standard 818d6d9c7308… / 79672a873bbd…; side-by-side-standard-360
+0a55914c80c2… (LF on both). The "R&D reading" section in each is one reader's judgement on a
+small sample (direction only, not a measured rate).
+
+- [s3-arms/READING-SAMPLE-combo-30.md](s3-arms/READING-SAMPLE-combo-30.md): 30 accepted
+  lines (29 shown) from session 3's combination arm, 10 per voice. Chosen by rule, not by
+  taste: for each category, the first unused turn in turn-set order whose line was accepted;
+  lengths rotate. The reading finds accepted lines that contradict their turn's facts.
+- [s4-says-what-happened/READING-SAMPLE-ship-29.md](s4-says-what-happened/READING-SAMPLE-ship-29.md):
+  30 slots (29 shown) from session 4's ship arm, 10 per voice. Chosen by rule, not by taste:
+  for each category, the first unused turn in turn-set order whose outcome line was accepted;
+  lengths rotate. Its reading compares against the session 3 sample.
+- [cloud-claude/READING-SAMPLE-side-by-side-standard.md](cloud-claude/READING-SAMPLE-side-by-side-standard.md):
+  the local ship arm, Haiku 5.5 and Opus 5.5 side by side at Standard length, on the 114
+  common turns. Chosen by rule, not by taste: for each category, the first unused turn in
+  turn-set order whose outcome line was accepted by every model listed; if there is none,
+  the first unused turn accepted by the most models.
+- [cloud-claude/READING-SAMPLE-side-by-side-standard-360.md](cloud-claude/READING-SAMPLE-side-by-side-standard-360.md):
+  the same with Fable 5.2 added, over all 360 turns, 10 turns per voice (29 read). Same rule.
+
+**Licence basis for publishing these lines** (a reading of published terms, not legal advice;
+registry: `licences/registry.json`):
+
+- **Claude lines (Haiku 5.5, Sonnet 5.5, Opus 5.5, Fable 5.2):** produced through the Claude
+  API, which falls under `anthropic-commercial-terms` (covers "Claude API"; `assets` use
+  allowed; its only clause concerns competing products and training, not publishing outputs).
+  Publishing reading samples is an assets use.
+- **Qwen lines (qwen3:4b-instruct-2507, and the 14B and 3.5 models of the later session):**
+  `qwen3-4b-instruct-2507-card`, `qwen3-14b-card`, `qwen3.5-4b-card` and `qwen3.5-9b-card`,
+  added with this change, all read 2026-11-13: Apache-2.0, not gated, no clause on outputs.
+
 ## Caveats the run records carry
 
 - The all-rules counts for `draft_animal_species` in the two session 3 arms with the

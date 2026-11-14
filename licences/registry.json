@@ -2514,6 +2514,102 @@
       "snapshot_sha256": "93e234cc7ef72f83847a34b2a1e1eaf92053c6162ed769c94085e98532f772fc",
       "snapshot_file": "2026-11-13/google-ai-studio-plans-page.txt",
       "archive_url": "http://web.archive.org/web/20261103103522/https://aistudio.google.com/docs/google-ai-plans.md"
+    },
+    {
+      "id": "qwen3-4b-instruct-2507-card",
+      "owner": "Alibaba Qwen",
+      "kind": "model-card",
+      "covers": [
+        "Qwen/Qwen3-4B-Instruct-2507",
+        "Ollama qwen3:4b-instruct-2507 (tags q4_K_M and fp16)"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "page_date": "repo last modified 2025-09-17",
+      "read_date": "2026-11-13",
+      "clauses": [],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "notes": "Card front matter says apache-2.0 and the repo's LICENSE file is the Apache License 2.0 text (raw LICENSE returned 200). Not gated. The ETV narrator (the ship arm of the fallback-rate sessions) and its unquantised comparison arm run this model as qwen3:4b-instruct-2507-q4_K_M and -fp16 through the local Ollama daemon. Its text appears in the ETV reading samples. The Ollama tags exist (library page read 2026-11-13); they are taken to be this repo's weights, not independently confirmed byte for byte.",
+      "restriction_search": "Read the card and the HF API metadata (license tag apache-2.0, gated false), fetched the raw LICENSE (Apache-2.0 text). Counted prohibit, restrict, must not, policy, terms, distill and synthetic in the card text: 0 each; one 'license' (the front matter). No restricting clause found.",
+      "snapshot_sha256": "237b38a1dc13a3d8effce69f596682b0b4e6ac95b18f1c591a113eb2830dd4f2",
+      "snapshot_file": "2026-11-13/qwen3-4b-instruct-2507-card.txt",
+      "archive_url": "http://web.archive.org/web/20261025013220/https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507"
+    },
+    {
+      "id": "qwen3-14b-card",
+      "owner": "Alibaba Qwen",
+      "kind": "model-card",
+      "covers": [
+        "Qwen/Qwen3-14B",
+        "Ollama qwen3:14b"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3-14B",
+      "page_date": "repo last modified 2025-07-26",
+      "read_date": "2026-11-13",
+      "clauses": [],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "notes": "Card front matter says apache-2.0 and the repo's LICENSE file is the Apache License 2.0 text (raw LICENSE returned 200). Not gated. Run locally as qwen3:14b in the ETV session 5 larger-model arms. The Ollama tag exists (library page read 2026-11-13); taken to be this repo's weights, not independently confirmed byte for byte.",
+      "restriction_search": "Read the card and the HF API metadata (license tag apache-2.0, gated false), fetched the raw LICENSE (Apache-2.0 text). Counted prohibit, restrict, must not, policy, terms, distill and synthetic in the card text: 0 each; one 'license' (the front matter). No restricting clause found.",
+      "snapshot_sha256": "ea9195936c15ad66801cf853089bd13ac3d1e78b6d1b7bb834d08bc47f10f7a6",
+      "snapshot_file": "2026-11-13/qwen3-14b-card.txt",
+      "archive_url": "http://web.archive.org/web/20261101194310/https://huggingface.co/Qwen/Qwen3-14B"
+    },
+    {
+      "id": "qwen3.5-4b-card",
+      "owner": "Alibaba Qwen",
+      "kind": "model-card",
+      "covers": [
+        "Qwen/Qwen3.5-4B",
+        "Ollama qwen3.5:4b"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3.5-4B",
+      "page_date": "repo last modified 2026-03-02",
+      "read_date": "2026-11-13",
+      "clauses": [],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "notes": "Card front matter says apache-2.0 and the repo's LICENSE file is the Apache License 2.0 text (raw LICENSE returned 200). Not gated. Named for the ETV session 5 (larger and newer local models) arms as qwen3.5:4b. The repo id was found by matching the Ollama tag name to the Hugging Face repo of the same name; the Ollama library page gives no repo id, so the mapping is uncertain and not independently confirmed.",
+      "restriction_search": "Read the card and the HF API metadata (license tag apache-2.0, gated false), fetched the raw LICENSE (Apache-2.0 text). Counted prohibit, restrict, must not, policy, terms, distill and synthetic in the card text: 0 each; one 'license' (the front matter). No restricting clause found.",
+      "snapshot_sha256": "785823354f36b768529031853387d84dfa51453211fde29221c6f608eb5bc17e",
+      "snapshot_file": "2026-11-13/qwen3.5-4b-card.txt",
+      "archive_url": "http://web.archive.org/web/20261106135005/https://huggingface.co/Qwen/Qwen3.5-4B"
+    },
+    {
+      "id": "qwen3.5-9b-card",
+      "owner": "Alibaba Qwen",
+      "kind": "model-card",
+      "covers": [
+        "Qwen/Qwen3.5-9B",
+        "Ollama qwen3.5:9b"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3.5-9B",
+      "page_date": "repo last modified 2026-03-02",
+      "read_date": "2026-11-13",
+      "clauses": [],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "notes": "Card front matter says apache-2.0 and the repo's LICENSE file is the Apache License 2.0 text (raw LICENSE returned 200). Not gated. Named for the ETV session 5 (larger and newer local models) arms as qwen3.5:9b. The repo id was found by matching the Ollama tag name to the Hugging Face repo of the same name; the Ollama library page gives no repo id, so the mapping is uncertain and not independently confirmed.",
+      "restriction_search": "Read the card and the HF API metadata (license tag apache-2.0, gated false), fetched the raw LICENSE (Apache-2.0 text). Counted prohibit, restrict, must not, policy, terms, distill and synthetic in the card text: 0 each; one 'license' (the front matter). No restricting clause found.",
+      "snapshot_sha256": "88c4f4950fe468439df1c559e95142e153d077482cae5157ff3f8f0bd69ea066",
+      "snapshot_file": "2026-11-13/qwen3.5-9b-card.txt",
+      "archive_url": "http://web.archive.org/web/20261109131152/https://huggingface.co/Qwen/Qwen3.5-9B"
     }
   ]
 }

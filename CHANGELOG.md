@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.83] - 2026-11-14
+
+- xrpl-js-isc licence entry
+
 ## [1.1.23.1.82] - 2026-11-14
 
 - webpki-root-certs 1.0.12 licence entry extended

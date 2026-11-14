@@ -1085,11 +1085,12 @@
       "owner": "rustls (webpki-roots repository: webpki-root-certs)",
       "kind": "licence",
       "covers": [
-        "webpki-root-certs 1.0.10, Mozilla's root certificates; in the ETV spikes' Cargo.lock as a build-time dependency of ort-sys's download-binaries path (via ureq)"
+        "webpki-root-certs 1.0.10, Mozilla's root certificates; in the ETV spikes' Cargo.lock as a build-time dependency of ort-sys's download-binaries path (via ureq)",
+        "webpki-root-certs 1.0.12, a runtime dependency of the ETV narrator's Claude transport (ureq native-tls), shipped in the game binary"
       ],
-      "url": "https://raw.githubusercontent.com/rustls/webpki-roots/v/1.0.10/LICENSE-CCADB",
-      "page_date": "Community Data License Agreement - Permissive - Version 2.0 (tag v/1.0.10)",
-      "read_date": "2026-10-22",
+      "url": "https://raw.githubusercontent.com/rustls/webpki-roots/v/1.0.12/LICENSE-CCADB",
+      "page_date": "Community Data License Agreement - Permissive - Version 2.0 (tag v/1.0.12)",
+      "read_date": "2026-11-14",
       "clauses": [
         "Community Data License Agreement - Permissive - Version 2.0",
         "so long as the Data Recipient makes available the text of this agreement with the shared Data."
@@ -1103,11 +1104,13 @@
       "conditions": [
         "CDLA-Permissive-2.0 (webpki-root-certs/Cargo.toml license field at v/1.0.10, read with WebFetch): whoever shares the certificate data makes the agreement's text available with it",
         "In the spikes it is a build dependency: ort-sys's download-binaries feature pulls ureq, which fetches ONNX Runtime at build time. A build dependency is not linked into the game binary, so the condition attaches only if a runtime crate pulls it in. Check the shipping Cargo.lock at ETV Phase 7 (cargo tree -e normal)",
-        "Corrected 2026-10-22 before merge: first drafted as webpki-roots for the ledger client's TLS. The spikes' lockfile holds webpki-root-certs, not webpki-roots, and xrpl-rust's json-rpc path doesn't use it. Both crates live in the rustls/webpki-roots repository under the same LICENSE-CCADB"
+        "Corrected 2026-10-22 before merge: first drafted as webpki-roots for the ledger client's TLS. The spikes' lockfile holds webpki-root-certs, not webpki-roots, and xrpl-rust's json-rpc path doesn't use it. Both crates live in the rustls/webpki-roots repository under the same LICENSE-CCADB",
+        "Publisher ruling 2026-11-14 (Option A): CDLA-Permissive-2.0 is allowed for this crate only, and the condition is met by shipping the full CDLA-Permissive-2.0 text in the game's generated notices",
+        "Re-read 2026-11-14 for 1.0.12: the crates.io API's license field for 1.0.12 is CDLA-Permissive-2.0 (not yanked, created 2026-11-10); webpki-root-certs/Cargo.toml at tag v/1.0.12 says license = CDLA-Permissive-2.0; LICENSE-CCADB at that tag is the CDLA-Permissive-2.0 text; cdla.dev's text of section 2.1 says a Data Recipient may share Data so long as it makes available the text of this agreement with the shared Data"
       ],
-      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 2.0's native build (the Rust spikes, escape-the-valley PR #26), at a pinned ref.",
+      "notes": "Read by R&D on 2026-10-22 for Escape the Valley 2.0's native build (the Rust spikes, escape-the-valley PR #26), at a pinned ref. Extended 2026-11-14 for 1.0.12: the 2026-10-22 note's \"build dependency only\" no longer holds for this use, since webpki-root-certs 1.0.12 is a runtime dependency of the ETV narrator's Claude transport and is shipped in the game binary, so the condition now attaches. A copy of cdla.dev's text was also snapshotted (sha256 191f4e720836881aee064a5d2c3682af81e888a92f81bf28eaab4dc1d7e9b785, file 2026-11-14/webpki-root-certs-licence-cdla-text.txt).",
       "snapshot_sha256": "44912421a0a0528813512b50b09d1219268c6770a8a37b4095af012a6fe8ec36",
-      "snapshot_file": "2026-10-22/webpki-root-certs-licence.txt"
+      "snapshot_file": "2026-11-14/webpki-root-certs-licence.txt"
     },
     {
       "id": "rodio-licence",

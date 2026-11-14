@@ -143,6 +143,29 @@ sessions 1 to 4) and `KEPT-ON-RIG.tsv`.
   the header name `x-api-key` in the run record's prose, never a key value.
 - `[unverified]`: figures are the run record's own; no second check was run.
 
+## Reading samples
+
+Four files hold lines the narrator wrote, shown with the facts the model was given, so a
+reader can judge whether the lines read well, which the rates cannot say. Each is filed
+byte for byte as written on 2026-11-13. The "R&D reading" section in each is one reader's
+judgement on a small sample (direction only, not a measured rate).
+
+- [s3-arms/READING-SAMPLE-combo-30.md](s3-arms/READING-SAMPLE-combo-30.md): 30 accepted
+  lines (29 shown) from session 3's combination arm, 10 per voice. Chosen by rule, not by
+  taste: for each category, the first unused turn in turn-set order whose line was accepted;
+  lengths rotate. The reading finds accepted lines that contradict their turn's facts.
+- [s4-says-what-happened/READING-SAMPLE-ship-29.md](s4-says-what-happened/READING-SAMPLE-ship-29.md):
+  30 slots (29 shown) from session 4's ship arm, 10 per voice. Chosen by rule, not by taste:
+  for each category, the first unused turn in turn-set order whose outcome line was accepted;
+  lengths rotate. Its reading compares against the session 3 sample.
+- [cloud-claude/READING-SAMPLE-side-by-side-standard.md](cloud-claude/READING-SAMPLE-side-by-side-standard.md):
+  the local ship arm, Haiku 5.5 and Opus 5.5 side by side at Standard length, on the 114
+  common turns. Chosen by rule, not by taste: for each category, the first unused turn in
+  turn-set order whose outcome line was accepted by every model listed; if there is none,
+  the first unused turn accepted by the most models.
+- [cloud-claude/READING-SAMPLE-side-by-side-standard-360.md](cloud-claude/READING-SAMPLE-side-by-side-standard-360.md):
+  the same with Fable 5.2 added, over all 360 turns, 10 turns per voice (29 read). Same rule.
+
 ## Caveats the run records carry
 
 - The all-rules counts for `draft_animal_species` in the two session 3 arms with the

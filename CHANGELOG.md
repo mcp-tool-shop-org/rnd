@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.75] - 2026-11-13
+
+- ETV reading samples
+- Updated experiment `etv-narrator`
+
 ## [1.1.23.1.74] - 2026-11-13
 
 - ETV Claude API comparison receipts

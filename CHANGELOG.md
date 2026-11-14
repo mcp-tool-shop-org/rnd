@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.78] - 2026-11-13
+
+- judge bake-off: selected, not adopted; D4 check result; 19b decisions dated
+- Updated `2026-11-12-colab-credit-spend-seed-19b`: Spending about 1,800 expiring Colab units: what the Deep Research report changed (seed 19b)
+- Updated experiment `judge-bakeoff`
+
 ## [1.1.23.1.77] - 2026-11-13
 
 - Research harvests seeds 19b to 23 filed

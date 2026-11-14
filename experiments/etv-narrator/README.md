@@ -110,6 +110,39 @@ at records not yet filed in this repository.
    moves the ship arm's good lines from 82.9% to 85.7% (a lower bound, because the harness
    kept only the last candidate); the cloud rows in that file belong to a later record.
 
+## Cloud comparison: the Claude API (2026-11-13)
+
+The same shipping shape and the same 360 turns, run through the Claude API to see whether
+a larger model beats the local 4B one. Filed in [cloud-claude](cloud-claude/):
+`RUN-RECORD.md`, the per-arm tables (`HAIKU-tables.md`, `STANDARD-360-tables.md`,
+`SONNET-tables.md`, `OPUS-tables.md` and the two partial tables), `ledgers.json` (every
+cost ledger plus totals per stage), `reports.json` (every per-cell report, bundled as for
+sessions 1 to 4) and `KEPT-ON-RIG.tsv`.
+
+- **Models and cells:** Haiku 5.5 on all nine cells and a 300-token re-run of its cut lines;
+  Sonnet 5.5 on Fireside Brief; Opus 5.5 and Fable 5.2 on the three Standard cells.
+- **Money:** $66.31 spent (the sum of the ledgers recomputes to $66.3119) against a cap of
+  $75 set by the Director. The run halted once, at 19:38:14 EST, on the account's own spend
+  limit, and resumed at 19:47 EST after the Director raised that limit. The key was deleted
+  after the run and the test is closed; the run record carries that line.
+- **Headline (the run record's figures):** on the three Standard cells every Claude model
+  writes fewer lines that pass the rules as they stand than the local model (local 84.1%,
+  Fable 5.2 80.7%, Opus 5.5 78.8%, Haiku 5.5 76.2%), mostly by the choice-parroting rule.
+  Under the two checker changes of the session 4 re-score the order turns over (local 86.1%,
+  Fable 91.5%, Opus 89.3%, Haiku 85.6%), at 9 to 19 times the local latency per turn. On
+  Fireside Brief, Sonnet 5.5 is level with the local model (81.5% against 80.6%).
+- **Not replayable byte for byte:** the API takes no seed and no sampling settings; instead
+  every raw response is kept on the rig with its request id.
+- **Left out of the repository:** the call logs and row files (raw Claude completions), halt
+  files and stdout/stderr, the reading samples, scripts and logs. All are listed in
+  `KEPT-ON-RIG.tsv` by relative name, bytes and sha256.
+- **Ledger counts:** `ledgers.json` sums to 21,590 requests against the record's 21,464
+  answered calls; the 126 extra are the 125 requests that never left the machine (TLS trust
+  store, $0) and one halted request. Dollars agree.
+- **Key hygiene:** the files filed here were searched for key strings; the only matches are
+  the header name `x-api-key` in the run record's prose, never a key value.
+- `[unverified]`: figures are the run record's own; no second check was run.
+
 ## Caveats the run records carry
 
 - The all-rules counts for `draft_animal_species` in the two session 3 arms with the

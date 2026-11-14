@@ -66,6 +66,21 @@
    "pins": {},
    "projected_cost": null,
    "raw_manifest_id": null
+  },
+  {
+   "id": "cloud-claude",
+   "venue": "rig",
+   "hardware": "Claude API (Haiku 5.5, Sonnet 5.5, Opus 5.5, Fable 5.2); harness on the local rig",
+   "date": "2026-11-13",
+   "cost": 66.31,
+   "cost_unit": "usd",
+   "cost_basis": "rate_x_runtime",
+   "cap": 75,
+   "outcome": "results",
+   "why": "venue is the rig because the harness ran there; the model calls went to the Claude API (schema allows only rig, colab, runpod). Claude comparison against the local 4B narrator: pilot, full Haiku arm and 300-token supplement, Sonnet Fireside Brief, Opus and Fable on the three Standard cells; 21,464 calls answered; halted once at 19:38:14 EST by the account's own spend limit and resumed 19:47 EST; cap of $75 set by the Director",
+   "pins": {},
+   "projected_cost": null,
+   "raw_manifest_id": null
   }
  ]
 }

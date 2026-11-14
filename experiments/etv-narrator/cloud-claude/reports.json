@@ -1,0 +1,7052 @@
+{
+ "fable-probe/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 10,
+  "model": "claude-fable-5-2",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 10,
+    "slots": 20,
+    "accepted_slots": 16,
+    "fallback_slots": 4,
+    "turns_with_fallback": 2,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 4,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 2,
+     "unauthorised_resource_noun": 2
+    },
+    "lines_checked": 20,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 3,
+     "unauthorised_resource_noun": 2
+    },
+    "lines_breaking_more_than_one_rule": 1,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 16,
+    "distinct_openings": 13,
+    "unique_opening_share": 0.6875,
+    "top_openings": [
+     {
+      "opening": "a traveller dies",
+      "count": 3
+     },
+     {
+      "opening": "the last of",
+      "count": 2
+     }
+    ],
+    "says_what_happened_pass": 16,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.8,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.3125,
+    "top_content_words": [
+     {
+      "word": "shoulders",
+      "lines": 11
+     },
+     {
+      "word": "travellers",
+      "lines": 7
+     },
+     {
+      "word": "empty",
+      "lines": 5
+     },
+     {
+      "word": "last",
+      "lines": 5
+     },
+     {
+      "word": "night",
+      "lines": 5
+     },
+     {
+      "word": "oxen",
+      "lines": 5
+     },
+     {
+      "word": "sits",
+      "lines": 5
+     },
+     {
+      "word": "wagon",
+      "lines": 5
+     }
+    ],
+    "calls_made": 29,
+    "latency_turn": {
+     "calls": 10,
+     "min_ms": 2930,
+     "p50_ms": 3681,
+     "p95_ms": 10410,
+     "max_ms": 10410
+    },
+    "fallback_rate_slots": 0.2,
+    "fallback_rate_turns": 0.2,
+    "latency": {
+     "calls": 20,
+     "min_ms": 1401,
+     "p50_ms": 1667,
+     "p95_ms": 5624,
+     "max_ms": 8671
+    }
+   }
+  ]
+ },
+ "fable/plain-chronicler-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-fable-5-2",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 583,
+    "fallback_slots": 137,
+    "turns_with_fallback": 113,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 137,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 6,
+     "choice_parroting": 59,
+     "draft_animal_species": 2,
+     "event_text_copied": 9,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 12,
+     "repeated_opening": 23,
+     "unauthorised_resource_noun": 25
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 8,
+     "choice_parroting": 69,
+     "draft_animal_species": 2,
+     "event_text_copied": 10,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 12,
+     "unauthorised_resource_noun": 28
+    },
+    "lines_breaking_more_than_one_rule": 16,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 583,
+    "distinct_openings": 197,
+    "unique_opening_share": 0.2109777015437393,
+    "top_openings": [
+     {
+      "opening": "the wagon rolls",
+      "count": 96
+     },
+     {
+      "opening": "the party rests",
+      "count": 35
+     },
+     {
+      "opening": "the party travels",
+      "count": 35
+     },
+     {
+      "opening": "evening settles over",
+      "count": 32
+     },
+     {
+      "opening": "night settles over",
+      "count": 25
+     }
+    ],
+    "says_what_happened_pass": 583,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.8097222222222222,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "wagon",
+      "lines": 295
+     },
+     {
+      "word": "grass",
+      "lines": 162
+     },
+     {
+      "word": "water",
+      "lines": 162
+     },
+     {
+      "word": "wind",
+      "lines": 147
+     },
+     {
+      "word": "nobody",
+      "lines": 142
+     },
+     {
+      "word": "wheels",
+      "lines": 130
+     },
+     {
+      "word": "food",
+      "lines": 126
+     },
+     {
+      "word": "party",
+      "lines": 126
+     }
+    ],
+    "calls_made": 1053,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 2111,
+     "p50_ms": 3017,
+     "p95_ms": 8347,
+     "max_ms": 14842
+    },
+    "fallback_rate_slots": 0.19027777777777777,
+    "fallback_rate_turns": 0.3138888888888889,
+    "latency": {
+     "calls": 720,
+     "min_ms": 941,
+     "p50_ms": 1404,
+     "p95_ms": 4524,
+     "max_ms": 10370
+    }
+   }
+  ]
+ },
+ "fable/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-fable-5-2",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 592,
+    "fallback_slots": 128,
+    "turns_with_fallback": 104,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 128,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 7,
+     "choice_parroting": 65,
+     "event_text_copied": 3,
+     "numbers_digits_or_units": 13,
+     "quantifier_before_resource_or_half": 1,
+     "repeated_opening": 11,
+     "supply_state_contradiction": 1,
+     "unauthorised_resource_noun": 27
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 10,
+     "choice_parroting": 76,
+     "event_text_copied": 4,
+     "numbers_digits_or_units": 13,
+     "quantifier_before_resource_or_half": 1,
+     "supply_state_contradiction": 2,
+     "unauthorised_resource_noun": 30
+    },
+    "lines_breaking_more_than_one_rule": 17,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 592,
+    "distinct_openings": 210,
+    "unique_opening_share": 0.23817567567567569,
+    "top_openings": [
+     {
+      "opening": "the party travels",
+      "count": 104
+     },
+     {
+      "opening": "the party rests",
+      "count": 32
+     },
+     {
+      "opening": "evening settles over",
+      "count": 26
+     },
+     {
+      "opening": "a traveller dies",
+      "count": 23
+     },
+     {
+      "opening": "night settles over",
+      "count": 18
+     }
+    ],
+    "says_what_happened_pass": 592,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.8222222222222222,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.36993243243243246,
+    "top_content_words": [
+     {
+      "word": "shoulders",
+      "lines": 412
+     },
+     {
+      "word": "travellers",
+      "lines": 322
+     },
+     {
+      "word": "party",
+      "lines": 225
+     },
+     {
+      "word": "oxen",
+      "lines": 218
+     },
+     {
+      "word": "water",
+      "lines": 171
+     },
+     {
+      "word": "nobody",
+      "lines": 153
+     },
+     {
+      "word": "dark",
+      "lines": 152
+     },
+     {
+      "word": "rule",
+      "lines": 144
+     }
+    ],
+    "calls_made": 1056,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 2430,
+     "p50_ms": 3651,
+     "p95_ms": 9709,
+     "max_ms": 21964
+    },
+    "fallback_rate_slots": 0.17777777777777778,
+    "fallback_rate_turns": 0.28888888888888886,
+    "latency": {
+     "calls": 720,
+     "min_ms": 1110,
+     "p50_ms": 1654,
+     "p95_ms": 5238,
+     "max_ms": 17778
+    }
+   }
+  ]
+ },
+ "fable/plain-lantern-bearer-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-fable-5-2",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 569,
+    "fallback_slots": 151,
+    "turns_with_fallback": 120,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 151,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 19,
+     "choice_parroting": 73,
+     "event_text_copied": 5,
+     "numbers_digits_or_units": 12,
+     "quantifier_before_resource_or_half": 1,
+     "repeated_opening": 18,
+     "unauthorised_resource_noun": 23
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 23,
+     "choice_parroting": 79,
+     "event_text_copied": 5,
+     "numbers_digits_or_units": 12,
+     "quantifier_before_resource_or_half": 1,
+     "unauthorised_resource_noun": 25
+    },
+    "lines_breaking_more_than_one_rule": 12,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 569,
+    "distinct_openings": 190,
+    "unique_opening_share": 0.210896309314587,
+    "top_openings": [
+     {
+      "opening": "the wagon rolls",
+      "count": 104
+     },
+     {
+      "opening": "the party rests",
+      "count": 35
+     },
+     {
+      "opening": "the party travels",
+      "count": 29
+     },
+     {
+      "opening": "night settles over",
+      "count": 28
+     },
+     {
+      "opening": "evening settles over",
+      "count": 27
+     }
+    ],
+    "says_what_happened_pass": 569,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.7902777777777777,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "wagon",
+      "lines": 276
+     },
+     {
+      "word": "wheels",
+      "lines": 262
+     },
+     {
+      "word": "water",
+      "lines": 187
+     },
+     {
+      "word": "little",
+      "lines": 179
+     },
+     {
+      "word": "grass",
+      "lines": 153
+     },
+     {
+      "word": "wind",
+      "lines": 150
+     },
+     {
+      "word": "food",
+      "lines": 149
+     },
+     {
+      "word": "rolls",
+      "lines": 126
+     }
+    ],
+    "calls_made": 1109,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 2261,
+     "p50_ms": 3644,
+     "p95_ms": 9684,
+     "max_ms": 15595
+    },
+    "fallback_rate_slots": 0.20972222222222223,
+    "fallback_rate_turns": 0.3333333333333333,
+    "latency": {
+     "calls": 720,
+     "min_ms": 940,
+     "p50_ms": 1575,
+     "p95_ms": 5092,
+     "max_ms": 11015
+    }
+   }
+  ]
+ },
+ "haiku-joined-300/plain-chronicler-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 619,
+    "fallback_slots": 101,
+    "turns_with_fallback": 85,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 101,
+    "rejects_by_code": {
+     "choice_parroting": 36,
+     "death_words": 2,
+     "draft_animal_species": 1,
+     "event_text_copied": 5,
+     "mid_sentence_capital": 3,
+     "numbers_digits_or_units": 9,
+     "personal_pronoun": 8,
+     "repeated_opening": 26,
+     "unauthorised_resource_noun": 11
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "choice_parroting": 45,
+     "death_words": 2,
+     "draft_animal_species": 1,
+     "event_text_copied": 5,
+     "mid_sentence_capital": 3,
+     "numbers_digits_or_units": 9,
+     "personal_pronoun": 8,
+     "unauthorised_resource_noun": 11
+    },
+    "lines_breaking_more_than_one_rule": 9,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 619,
+    "distinct_openings": 254,
+    "unique_opening_share": 0.2827140549273021,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 108
+     },
+     {
+      "opening": "the party rested",
+      "count": 31
+     },
+     {
+      "opening": "a traveller died",
+      "count": 20
+     },
+     {
+      "opening": "the wagon sits",
+      "count": 20
+     },
+     {
+      "opening": "the party reached",
+      "count": 19
+     }
+    ],
+    "says_what_happened_pass": 619,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.8597222222222223,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 291
+     },
+     {
+      "word": "night",
+      "lines": 116
+     },
+     {
+      "word": "travelled",
+      "lines": 108
+     },
+     {
+      "word": "evening",
+      "lines": 90
+     },
+     {
+      "word": "wagon",
+      "lines": 90
+     },
+     {
+      "word": "forest",
+      "lines": 79
+     },
+     {
+      "word": "morning",
+      "lines": 73
+     },
+     {
+      "word": "plains",
+      "lines": 66
+     }
+    ],
+    "calls_made": 1031,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 1403,
+     "p50_ms": 2298,
+     "p95_ms": 6066,
+     "max_ms": 8471
+    },
+    "fallback_rate_slots": 0.14027777777777778,
+    "fallback_rate_turns": 0.2361111111111111,
+    "latency": {
+     "calls": 720,
+     "min_ms": 571,
+     "p50_ms": 1022,
+     "p95_ms": 3245,
+     "max_ms": 5815
+    }
+   }
+  ]
+ },
+ "haiku-joined-300/plain-chronicler-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 487,
+    "fallback_slots": 233,
+    "turns_with_fallback": 151,
+    "timeouts": 0,
+    "bad_json": 8,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 225,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 4,
+     "choice_parroting": 62,
+     "death_words": 3,
+     "draft_animal_species": 12,
+     "ending_not_conveyed": 1,
+     "event_text_copied": 6,
+     "mid_sentence_capital": 12,
+     "numbers_digits_or_units": 15,
+     "personal_pronoun": 18,
+     "quantifier_before_resource_or_half": 2,
+     "repeated_opening": 31,
+     "supply_state_contradiction": 1,
+     "unauthorised_resource_noun": 58
+    },
+    "lines_checked": 712,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 7,
+     "choice_parroting": 106,
+     "death_not_conveyed": 1,
+     "death_words": 4,
+     "draft_animal_species": 20,
+     "ending_not_conveyed": 1,
+     "event_text_copied": 9,
+     "mid_sentence_capital": 12,
+     "numbers_digits_or_units": 15,
+     "personal_pronoun": 42,
+     "quantifier_before_resource_or_half": 2,
+     "supply_state_contradiction": 4,
+     "unauthorised_resource_noun": 68
+    },
+    "lines_breaking_more_than_one_rule": 71,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 487,
+    "distinct_openings": 158,
+    "unique_opening_share": 0.19301848049281314,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 102
+     },
+     {
+      "opening": "the party rested",
+      "count": 32
+     },
+     {
+      "opening": "the party reached",
+      "count": 30
+     },
+     {
+      "opening": "a traveller died",
+      "count": 23
+     },
+     {
+      "opening": "the camp sits",
+      "count": 14
+     }
+    ],
+    "says_what_happened_pass": 487,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.6763888888888889,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 374
+     },
+     {
+      "word": "wagon",
+      "lines": 226
+     },
+     {
+      "word": "wheels",
+      "lines": 165
+     },
+     {
+      "word": "water",
+      "lines": 158
+     },
+     {
+      "word": "grey",
+      "lines": 144
+     },
+     {
+      "word": "night",
+      "lines": 140
+     },
+     {
+      "word": "plains",
+      "lines": 140
+     },
+     {
+      "word": "food",
+      "lines": 124
+     }
+    ],
+    "calls_made": 1371,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 2126,
+     "p50_ms": 5775,
+     "p95_ms": 10542,
+     "max_ms": 14766
+    },
+    "fallback_rate_slots": 0.3236111111111111,
+    "fallback_rate_turns": 0.41944444444444445,
+    "latency": {
+     "calls": 720,
+     "min_ms": 872,
+     "p50_ms": 2556,
+     "p95_ms": 5926,
+     "max_ms": 11441
+    }
+   }
+  ]
+ },
+ "haiku-joined-300/plain-chronicler-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 512,
+    "fallback_slots": 208,
+    "turns_with_fallback": 130,
+    "timeouts": 0,
+    "bad_json": 7,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 201,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 67,
+     "death_words": 2,
+     "draft_animal_species": 2,
+     "event_text_copied": 8,
+     "mid_sentence_capital": 7,
+     "numbers_digits_or_units": 15,
+     "personal_pronoun": 31,
+     "quantifier_before_resource_or_half": 1,
+     "repeated_opening": 19,
+     "supply_state_contradiction": 2,
+     "unauthorised_resource_noun": 46
+    },
+    "lines_checked": 713,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 106,
+     "death_not_conveyed": 1,
+     "death_words": 3,
+     "draft_animal_species": 2,
+     "event_text_copied": 10,
+     "mid_sentence_capital": 7,
+     "numbers_digits_or_units": 15,
+     "personal_pronoun": 50,
+     "quantifier_before_resource_or_half": 1,
+     "supply_state_contradiction": 3,
+     "unauthorised_resource_noun": 50
+    },
+    "lines_breaking_more_than_one_rule": 55,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 512,
+    "distinct_openings": 163,
+    "unique_opening_share": 0.185546875,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 107
+     },
+     {
+      "opening": "the party rested",
+      "count": 36
+     },
+     {
+      "opening": "the party reached",
+      "count": 31
+     },
+     {
+      "opening": "a traveller died",
+      "count": 21
+     },
+     {
+      "opening": "evening settles over",
+      "count": 15
+     }
+    ],
+    "says_what_happened_pass": 512,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.7111111111111111,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 348
+     },
+     {
+      "word": "night",
+      "lines": 166
+     },
+     {
+      "word": "wagon",
+      "lines": 164
+     },
+     {
+      "word": "plains",
+      "lines": 127
+     },
+     {
+      "word": "wheels",
+      "lines": 113
+     },
+     {
+      "word": "water",
+      "lines": 108
+     },
+     {
+      "word": "travelled",
+      "lines": 107
+     },
+     {
+      "word": "cold",
+      "lines": 100
+     }
+    ],
+    "calls_made": 1290,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 1922,
+     "p50_ms": 4573,
+     "p95_ms": 9366,
+     "max_ms": 11757
+    },
+    "fallback_rate_slots": 0.28888888888888886,
+    "fallback_rate_turns": 0.3611111111111111,
+    "latency": {
+     "calls": 720,
+     "min_ms": 828,
+     "p50_ms": 1973,
+     "p95_ms": 5068,
+     "max_ms": 8135
+    }
+   }
+  ]
+ },
+ "haiku-joined-300/plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 589,
+    "fallback_slots": 131,
+    "turns_with_fallback": 100,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 131,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 55,
+     "death_not_conveyed": 1,
+     "ending_not_conveyed": 1,
+     "event_text_copied": 3,
+     "length_cap_exceeded": 25,
+     "mid_sentence_capital": 7,
+     "numbers_digits_or_units": 11,
+     "personal_pronoun": 2,
+     "repeated_opening": 14,
+     "unauthorised_resource_noun": 11
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 70,
+     "death_not_conveyed": 1,
+     "ending_not_conveyed": 1,
+     "event_text_copied": 3,
+     "length_cap_exceeded": 25,
+     "mid_sentence_capital": 8,
+     "numbers_digits_or_units": 12,
+     "personal_pronoun": 2,
+     "unauthorised_resource_noun": 18
+    },
+    "lines_breaking_more_than_one_rule": 25,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 589,
+    "distinct_openings": 235,
+    "unique_opening_share": 0.2801358234295416,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 109
+     },
+     {
+      "opening": "the party rested",
+      "count": 38
+     },
+     {
+      "opening": "the party arrived",
+      "count": 18
+     },
+     {
+      "opening": "a traveller has",
+      "count": 16
+     },
+     {
+      "opening": "the oxen stand",
+      "count": 13
+     }
+    ],
+    "says_what_happened_pass": 589,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.8180555555555555,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.3853989813242784,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 265
+     },
+     {
+      "word": "oxen",
+      "lines": 226
+     },
+     {
+      "word": "travelled",
+      "lines": 109
+     },
+     {
+      "word": "morning",
+      "lines": 93
+     },
+     {
+      "word": "wagon",
+      "lines": 91
+     },
+     {
+      "word": "evening",
+      "lines": 85
+     },
+     {
+      "word": "plains",
+      "lines": 83
+     },
+     {
+      "word": "light",
+      "lines": 78
+     }
+    ],
+    "calls_made": 1156,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 1263,
+     "p50_ms": 3076,
+     "p95_ms": 6984,
+     "max_ms": 10497
+    },
+    "fallback_rate_slots": 0.18194444444444444,
+    "fallback_rate_turns": 0.2777777777777778,
+    "latency": {
+     "calls": 720,
+     "min_ms": 590,
+     "p50_ms": 1159,
+     "p95_ms": 4005,
+     "max_ms": 7712
+    }
+   }
+  ]
+ },
+ "haiku-joined-300/plain-fireside-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 502,
+    "fallback_slots": 218,
+    "turns_with_fallback": 153,
+    "timeouts": 0,
+    "bad_json": 76,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 142,
+    "rejects_by_code": {
+     "choice_parroting": 53,
+     "death_not_conveyed": 3,
+     "event_text_copied": 5,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 12,
+     "personal_pronoun": 5,
+     "quantifier_before_resource_or_half": 2,
+     "repeated_opening": 10,
+     "unauthorised_resource_noun": 50
+    },
+    "lines_checked": 644,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 5,
+     "choice_parroting": 68,
+     "death_not_conveyed": 4,
+     "event_text_copied": 6,
+     "mid_sentence_capital": 3,
+     "numbers_digits_or_units": 12,
+     "personal_pronoun": 10,
+     "quantifier_before_resource_or_half": 2,
+     "unauthorised_resource_noun": 53
+    },
+    "lines_breaking_more_than_one_rule": 27,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 502,
+    "distinct_openings": 138,
+    "unique_opening_share": 0.12350597609561753,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 101
+     },
+     {
+      "opening": "the party rested",
+      "count": 33
+     },
+     {
+      "opening": "the party arrived",
+      "count": 19
+     },
+     {
+      "opening": "the party reached",
+      "count": 12
+     },
+     {
+      "opening": "at hazelwick the",
+      "count": 11
+     }
+    ],
+    "says_what_happened_pass": 502,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.6972222222222222,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.9482071713147411,
+    "top_content_words": [
+     {
+      "word": "oxen",
+      "lines": 474
+     },
+     {
+      "word": "party",
+      "lines": 286
+     },
+     {
+      "word": "travellers",
+      "lines": 281
+     },
+     {
+      "word": "wagon",
+      "lines": 176
+     },
+     {
+      "word": "wheels",
+      "lines": 174
+     },
+     {
+      "word": "plains",
+      "lines": 161
+     },
+     {
+      "word": "shoulders",
+      "lines": 160
+     },
+     {
+      "word": "water",
+      "lines": 153
+     }
+    ],
+    "calls_made": 1412,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 2915,
+     "p50_ms": 7142,
+     "p95_ms": 12726,
+     "max_ms": 16228
+    },
+    "fallback_rate_slots": 0.30277777777777776,
+    "fallback_rate_turns": 0.425,
+    "latency": {
+     "calls": 720,
+     "min_ms": 1166,
+     "p50_ms": 3704,
+     "p95_ms": 6976,
+     "max_ms": 11339
+    }
+   }
+  ]
+ },
+ "haiku-joined-300/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 583,
+    "fallback_slots": 137,
+    "turns_with_fallback": 100,
+    "timeouts": 0,
+    "bad_json": 28,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 109,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 52,
+     "event_text_copied": 5,
+     "mid_sentence_capital": 5,
+     "numbers_digits_or_units": 10,
+     "repeated_opening": 7,
+     "unauthorised_resource_noun": 29
+    },
+    "lines_checked": 692,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 60,
+     "death_not_conveyed": 3,
+     "event_text_copied": 5,
+     "mid_sentence_capital": 5,
+     "numbers_digits_or_units": 10,
+     "unauthorised_resource_noun": 31
+    },
+    "lines_breaking_more_than_one_rule": 12,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 583,
+    "distinct_openings": 151,
+    "unique_opening_share": 0.1234991423670669,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 108
+     },
+     {
+      "opening": "the party rested",
+      "count": 38
+     },
+     {
+      "opening": "the party reached",
+      "count": 27
+     },
+     {
+      "opening": "evening settles over",
+      "count": 21
+     },
+     {
+      "opening": "at night in",
+      "count": 17
+     }
+    ],
+    "says_what_happened_pass": 583,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.8097222222222222,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.8627787307032591,
+    "top_content_words": [
+     {
+      "word": "oxen",
+      "lines": 503
+     },
+     {
+      "word": "party",
+      "lines": 291
+     },
+     {
+      "word": "travellers",
+      "lines": 174
+     },
+     {
+      "word": "night",
+      "lines": 153
+     },
+     {
+      "word": "plains",
+      "lines": 150
+     },
+     {
+      "word": "wheels",
+      "lines": 136
+     },
+     {
+      "word": "cold",
+      "lines": 131
+     },
+     {
+      "word": "wagon",
+      "lines": 131
+     }
+    ],
+    "calls_made": 1165,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 2469,
+     "p50_ms": 4674,
+     "p95_ms": 10003,
+     "max_ms": 13078
+    },
+    "fallback_rate_slots": 0.19027777777777777,
+    "fallback_rate_turns": 0.2777777777777778,
+    "latency": {
+     "calls": 720,
+     "min_ms": 1085,
+     "p50_ms": 2001,
+     "p95_ms": 5649,
+     "max_ms": 8643
+    }
+   }
+  ]
+ },
+ "haiku-joined-300/plain-lantern-bearer-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 624,
+    "fallback_slots": 96,
+    "turns_with_fallback": 73,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 96,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 41,
+     "event_text_copied": 6,
+     "length_cap_exceeded": 9,
+     "mid_sentence_capital": 5,
+     "numbers_digits_or_units": 11,
+     "personal_pronoun": 2,
+     "repeated_opening": 7,
+     "unauthorised_resource_noun": 14
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 55,
+     "event_text_copied": 10,
+     "length_cap_exceeded": 9,
+     "mid_sentence_capital": 5,
+     "numbers_digits_or_units": 12,
+     "personal_pronoun": 4,
+     "unauthorised_resource_noun": 17
+    },
+    "lines_breaking_more_than_one_rule": 22,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 624,
+    "distinct_openings": 263,
+    "unique_opening_share": 0.30128205128205127,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 112
+     },
+     {
+      "opening": "the party rested",
+      "count": 37
+     },
+     {
+      "opening": "the party arrived",
+      "count": 27
+     },
+     {
+      "opening": "the camp sits",
+      "count": 26
+     },
+     {
+      "opening": "a traveller died",
+      "count": 15
+     }
+    ],
+    "says_what_happened_pass": 624,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.8666666666666667,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 275
+     },
+     {
+      "word": "night",
+      "lines": 117
+     },
+     {
+      "word": "travelled",
+      "lines": 112
+     },
+     {
+      "word": "wind",
+      "lines": 96
+     },
+     {
+      "word": "plains",
+      "lines": 87
+     },
+     {
+      "word": "forest",
+      "lines": 72
+     },
+     {
+      "word": "evening",
+      "lines": 71
+     },
+     {
+      "word": "grass",
+      "lines": 69
+     }
+    ],
+    "calls_made": 1016,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 1315,
+     "p50_ms": 2322,
+     "p95_ms": 6217,
+     "max_ms": 9314
+    },
+    "fallback_rate_slots": 0.13333333333333333,
+    "fallback_rate_turns": 0.20277777777777778,
+    "latency": {
+     "calls": 720,
+     "min_ms": 564,
+     "p50_ms": 1026,
+     "p95_ms": 3444,
+     "max_ms": 6560
+    }
+   }
+  ]
+ },
+ "haiku-joined-300/plain-lantern-bearer-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 501,
+    "fallback_slots": 219,
+    "turns_with_fallback": 144,
+    "timeouts": 0,
+    "bad_json": 40,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 179,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 53,
+     "death_words": 3,
+     "event_text_copied": 1,
+     "mid_sentence_capital": 6,
+     "numbers_digits_or_units": 17,
+     "personal_pronoun": 14,
+     "quantifier_before_resource_or_half": 8,
+     "repeated_opening": 17,
+     "unauthorised_resource_noun": 58
+    },
+    "lines_checked": 680,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 11,
+     "choice_parroting": 88,
+     "death_words": 3,
+     "event_text_copied": 5,
+     "mid_sentence_capital": 7,
+     "numbers_digits_or_units": 19,
+     "personal_pronoun": 22,
+     "quantifier_before_resource_or_half": 8,
+     "supply_state_contradiction": 2,
+     "unauthorised_resource_noun": 69
+    },
+    "lines_breaking_more_than_one_rule": 60,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 501,
+    "distinct_openings": 157,
+    "unique_opening_share": 0.17564870259481039,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 100
+     },
+     {
+      "opening": "the party rested",
+      "count": 38
+     },
+     {
+      "opening": "the party arrived",
+      "count": 26
+     },
+     {
+      "opening": "a traveller has",
+      "count": 17
+     },
+     {
+      "opening": "at night in",
+      "count": 13
+     }
+    ],
+    "says_what_happened_pass": 501,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.6958333333333333,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 281
+     },
+     {
+      "word": "water",
+      "lines": 225
+     },
+     {
+      "word": "river",
+      "lines": 189
+     },
+     {
+      "word": "plains",
+      "lines": 166
+     },
+     {
+      "word": "night",
+      "lines": 154
+     },
+     {
+      "word": "wind",
+      "lines": 145
+     },
+     {
+      "word": "across",
+      "lines": 141
+     },
+     {
+      "word": "sound",
+      "lines": 132
+     }
+    ],
+    "calls_made": 1375,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 2430,
+     "p50_ms": 6404,
+     "p95_ms": 12010,
+     "max_ms": 16055
+    },
+    "fallback_rate_slots": 0.30416666666666664,
+    "fallback_rate_turns": 0.4,
+    "latency": {
+     "calls": 720,
+     "min_ms": 1054,
+     "p50_ms": 3050,
+     "p95_ms": 6594,
+     "max_ms": 9346
+    }
+   }
+  ]
+ },
+ "haiku-joined-300/plain-lantern-bearer-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 552,
+    "fallback_slots": 168,
+    "turns_with_fallback": 116,
+    "timeouts": 0,
+    "bad_json": 17,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 151,
+    "rejects_by_code": {
+     "action_with_no_one_left": 1,
+     "band_banned_vocabulary": 5,
+     "choice_parroting": 63,
+     "death_words": 1,
+     "event_text_copied": 7,
+     "mid_sentence_capital": 4,
+     "numbers_digits_or_units": 12,
+     "personal_pronoun": 8,
+     "quantifier_before_resource_or_half": 1,
+     "repeated_opening": 9,
+     "unauthorised_resource_noun": 40
+    },
+    "lines_checked": 703,
+    "rejects_all_rules": {
+     "action_with_no_one_left": 1,
+     "band_banned_vocabulary": 7,
+     "choice_parroting": 90,
+     "death_words": 1,
+     "event_text_copied": 10,
+     "mid_sentence_capital": 4,
+     "numbers_digits_or_units": 12,
+     "personal_pronoun": 10,
+     "quantifier_before_resource_or_half": 1,
+     "unauthorised_resource_noun": 45
+    },
+    "lines_breaking_more_than_one_rule": 35,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 552,
+    "distinct_openings": 162,
+    "unique_opening_share": 0.17028985507246377,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 108
+     },
+     {
+      "opening": "the party rested",
+      "count": 38
+     },
+     {
+      "opening": "the party arrived",
+      "count": 22
+     },
+     {
+      "opening": "a traveller has",
+      "count": 15
+     },
+     {
+      "opening": "evening settles over",
+      "count": 15
+     }
+    ],
+    "says_what_happened_pass": 552,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.7666666666666667,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 280
+     },
+     {
+      "word": "night",
+      "lines": 161
+     },
+     {
+      "word": "plains",
+      "lines": 157
+     },
+     {
+      "word": "river",
+      "lines": 152
+     },
+     {
+      "word": "water",
+      "lines": 146
+     },
+     {
+      "word": "evening",
+      "lines": 115
+     },
+     {
+      "word": "forest",
+      "lines": 109
+     },
+     {
+      "word": "travelled",
+      "lines": 108
+     }
+    ],
+    "calls_made": 1221,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 2289,
+     "p50_ms": 4688,
+     "p95_ms": 10005,
+     "max_ms": 12765
+    },
+    "fallback_rate_slots": 0.23333333333333334,
+    "fallback_rate_turns": 0.32222222222222224,
+    "latency": {
+     "calls": 720,
+     "min_ms": 963,
+     "p50_ms": 2026,
+     "p95_ms": 5358,
+     "max_ms": 8526
+    }
+   }
+  ]
+ },
+ "haiku-supplement-300/plain-chronicler-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 36,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "rich",
+    "turns": 36,
+    "slots": 72,
+    "accepted_slots": 53,
+    "fallback_slots": 19,
+    "turns_with_fallback": 14,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 19,
+    "rejects_by_code": {
+     "choice_parroting": 2,
+     "death_words": 1,
+     "draft_animal_species": 3,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 5,
+     "personal_pronoun": 1,
+     "repeated_opening": 1,
+     "unauthorised_resource_noun": 5
+    },
+    "lines_checked": 72,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 5,
+     "death_words": 1,
+     "draft_animal_species": 6,
+     "event_text_copied": 2,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 5,
+     "personal_pronoun": 2,
+     "unauthorised_resource_noun": 7
+    },
+    "lines_breaking_more_than_one_rule": 12,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 53,
+    "distinct_openings": 27,
+    "unique_opening_share": 0.33962264150943394,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 13
+     },
+     {
+      "opening": "the party rested",
+      "count": 5
+     },
+     {
+      "opening": "the party reached",
+      "count": 4
+     },
+     {
+      "opening": "the scar sits",
+      "count": 3
+     },
+     {
+      "opening": "evening settles over",
+      "count": 2
+     }
+    ],
+    "says_what_happened_pass": 53,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.7361111111111112,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 45
+     },
+     {
+      "word": "wagon",
+      "lines": 28
+     },
+     {
+      "word": "water",
+      "lines": 20
+     },
+     {
+      "word": "wheels",
+      "lines": 19
+     },
+     {
+      "word": "down",
+      "lines": 18
+     },
+     {
+      "word": "food",
+      "lines": 18
+     },
+     {
+      "word": "cold",
+      "lines": 15
+     },
+     {
+      "word": "grass",
+      "lines": 15
+     }
+    ],
+    "calls_made": 137,
+    "latency_turn": {
+     "calls": 36,
+     "min_ms": 2428,
+     "p50_ms": 6283,
+     "p95_ms": 10276,
+     "max_ms": 10338
+    },
+    "fallback_rate_slots": 0.2638888888888889,
+    "fallback_rate_turns": 0.3888888888888889,
+    "latency": {
+     "calls": 72,
+     "min_ms": 1075,
+     "p50_ms": 2671,
+     "p95_ms": 6164,
+     "max_ms": 7583
+    }
+   }
+  ]
+ },
+ "haiku-supplement-300/plain-chronicler-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 23,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "standard",
+    "turns": 23,
+    "slots": 46,
+    "accepted_slots": 29,
+    "fallback_slots": 17,
+    "turns_with_fallback": 11,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 17,
+    "rejects_by_code": {
+     "choice_parroting": 5,
+     "mid_sentence_capital": 1,
+     "personal_pronoun": 3,
+     "repeated_opening": 2,
+     "unauthorised_resource_noun": 6
+    },
+    "lines_checked": 46,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 10,
+     "draft_animal_species": 1,
+     "mid_sentence_capital": 1,
+     "personal_pronoun": 6,
+     "supply_state_contradiction": 1,
+     "unauthorised_resource_noun": 7
+    },
+    "lines_breaking_more_than_one_rule": 8,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 29,
+    "distinct_openings": 19,
+    "unique_opening_share": 0.5517241379310345,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 7
+     },
+     {
+      "opening": "evening settles over",
+      "count": 3
+     },
+     {
+      "opening": "the party rested",
+      "count": 3
+     }
+    ],
+    "says_what_happened_pass": 29,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.6304347826086957,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 23
+     },
+     {
+      "word": "wheels",
+      "lines": 12
+     },
+     {
+      "word": "wagon",
+      "lines": 11
+     },
+     {
+      "word": "night",
+      "lines": 9
+     },
+     {
+      "word": "evening",
+      "lines": 7
+     },
+     {
+      "word": "travelled",
+      "lines": 7
+     },
+     {
+      "word": "forest",
+      "lines": 6
+     },
+     {
+      "word": "morning",
+      "lines": 6
+     }
+    ],
+    "calls_made": 90,
+    "latency_turn": {
+     "calls": 23,
+     "min_ms": 2492,
+     "p50_ms": 5993,
+     "p95_ms": 9392,
+     "max_ms": 10646
+    },
+    "fallback_rate_slots": 0.3695652173913043,
+    "fallback_rate_turns": 0.4782608695652174,
+    "latency": {
+     "calls": 46,
+     "min_ms": 1045,
+     "p50_ms": 2321,
+     "p95_ms": 5526,
+     "max_ms": 6189
+    }
+   }
+  ]
+ },
+ "haiku-supplement-300/plain-fireside-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 201,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "rich",
+    "turns": 201,
+    "slots": 402,
+    "accepted_slots": 265,
+    "fallback_slots": 137,
+    "turns_with_fallback": 90,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 43,
+    "not_called": 0,
+    "rule_rejects": 94,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 33,
+     "death_not_conveyed": 1,
+     "event_text_copied": 2,
+     "invalid_punctuation": 1,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 10,
+     "personal_pronoun": 3,
+     "quantifier_before_resource_or_half": 2,
+     "repeated_opening": 4,
+     "unauthorised_resource_noun": 34
+    },
+    "lines_checked": 359,
+    "rejects_all_rules": {
+     "action_with_no_one_left": 1,
+     "band_banned_vocabulary": 4,
+     "choice_parroting": 51,
+     "death_not_conveyed": 2,
+     "event_text_copied": 2,
+     "invalid_punctuation": 1,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 10,
+     "personal_pronoun": 4,
+     "quantifier_before_resource_or_half": 2,
+     "supply_state_contradiction": 1,
+     "unauthorised_resource_noun": 37
+    },
+    "lines_breaking_more_than_one_rule": 24,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 265,
+    "distinct_openings": 103,
+    "unique_opening_share": 0.22641509433962265,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 50
+     },
+     {
+      "opening": "the party rested",
+      "count": 13
+     },
+     {
+      "opening": "the party reached",
+      "count": 10
+     },
+     {
+      "opening": "at night in",
+      "count": 9
+     },
+     {
+      "opening": "the party arrived",
+      "count": 9
+     }
+    ],
+    "says_what_happened_pass": 265,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.6592039800995025,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.9622641509433962,
+    "top_content_words": [
+     {
+      "word": "oxen",
+      "lines": 255
+     },
+     {
+      "word": "travellers",
+      "lines": 144
+     },
+     {
+      "word": "party",
+      "lines": 140
+     },
+     {
+      "word": "wheels",
+      "lines": 95
+     },
+     {
+      "word": "wagon",
+      "lines": 91
+     },
+     {
+      "word": "shoulders",
+      "lines": 85
+     },
+     {
+      "word": "heads",
+      "lines": 84
+     },
+     {
+      "word": "water",
+      "lines": 74
+     }
+    ],
+    "calls_made": 765,
+    "latency_turn": {
+     "calls": 201,
+     "min_ms": 0,
+     "p50_ms": 5854,
+     "p95_ms": 12531,
+     "max_ms": 16466
+    },
+    "fallback_rate_slots": 0.3407960199004975,
+    "fallback_rate_turns": 0.44776119402985076,
+    "latency": {
+     "calls": 402,
+     "min_ms": 0,
+     "p50_ms": 2372,
+     "p95_ms": 6666,
+     "max_ms": 10836
+    }
+   }
+  ]
+ },
+ "haiku-supplement-300/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 110,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 110,
+    "slots": 220,
+    "accepted_slots": 161,
+    "fallback_slots": 59,
+    "turns_with_fallback": 44,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 59,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 3,
+     "choice_parroting": 30,
+     "death_not_conveyed": 1,
+     "event_text_copied": 1,
+     "length_cap_exceeded": 1,
+     "mid_sentence_capital": 3,
+     "numbers_digits_or_units": 9,
+     "unauthorised_resource_noun": 11
+    },
+    "lines_checked": 220,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 3,
+     "choice_parroting": 37,
+     "death_not_conveyed": 1,
+     "event_text_copied": 1,
+     "length_cap_exceeded": 1,
+     "mid_sentence_capital": 4,
+     "numbers_digits_or_units": 9,
+     "unauthorised_resource_noun": 14
+    },
+    "lines_breaking_more_than_one_rule": 9,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 161,
+    "distinct_openings": 84,
+    "unique_opening_share": 0.36024844720496896,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 30
+     },
+     {
+      "opening": "evening settles over",
+      "count": 6
+     },
+     {
+      "opening": "the party reached",
+      "count": 6
+     },
+     {
+      "opening": "the party rested",
+      "count": 6
+     },
+     {
+      "opening": "at night in",
+      "count": 5
+     }
+    ],
+    "says_what_happened_pass": 161,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.7318181818181818,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.84472049689441,
+    "top_content_words": [
+     {
+      "word": "oxen",
+      "lines": 135
+     },
+     {
+      "word": "party",
+      "lines": 73
+     },
+     {
+      "word": "plains",
+      "lines": 50
+     },
+     {
+      "word": "afternoon",
+      "lines": 43
+     },
+     {
+      "word": "wheels",
+      "lines": 42
+     },
+     {
+      "word": "travellers",
+      "lines": 40
+     },
+     {
+      "word": "evening",
+      "lines": 37
+     },
+     {
+      "word": "night",
+      "lines": 35
+     }
+    ],
+    "calls_made": 374,
+    "latency_turn": {
+     "calls": 110,
+     "min_ms": 2552,
+     "p50_ms": 4683,
+     "p95_ms": 10918,
+     "max_ms": 13417
+    },
+    "fallback_rate_slots": 0.2681818181818182,
+    "fallback_rate_turns": 0.4,
+    "latency": {
+     "calls": 220,
+     "min_ms": 1050,
+     "p50_ms": 2072,
+     "p95_ms": 5767,
+     "max_ms": 7908
+    }
+   }
+  ]
+ },
+ "haiku-supplement-300/plain-lantern-bearer-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 119,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "rich",
+    "turns": 119,
+    "slots": 238,
+    "accepted_slots": 168,
+    "fallback_slots": 70,
+    "turns_with_fallback": 45,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 70,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 23,
+     "event_text_copied": 1,
+     "mid_sentence_capital": 3,
+     "numbers_digits_or_units": 7,
+     "personal_pronoun": 5,
+     "quantifier_before_resource_or_half": 4,
+     "repeated_opening": 1,
+     "unauthorised_resource_noun": 24
+    },
+    "lines_checked": 238,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 35,
+     "event_text_copied": 1,
+     "mid_sentence_capital": 3,
+     "numbers_digits_or_units": 7,
+     "personal_pronoun": 10,
+     "quantifier_before_resource_or_half": 4,
+     "unauthorised_resource_noun": 30
+    },
+    "lines_breaking_more_than_one_rule": 21,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 168,
+    "distinct_openings": 85,
+    "unique_opening_share": 0.38095238095238093,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 36
+     },
+     {
+      "opening": "the party rested",
+      "count": 9
+     },
+     {
+      "opening": "the party arrived",
+      "count": 8
+     },
+     {
+      "opening": "at hazelwick the",
+      "count": 5
+     },
+     {
+      "opening": "smoke climbs from",
+      "count": 5
+     }
+    ],
+    "says_what_happened_pass": 168,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.7058823529411765,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 91
+     },
+     {
+      "word": "plains",
+      "lines": 62
+     },
+     {
+      "word": "water",
+      "lines": 61
+     },
+     {
+      "word": "river",
+      "lines": 52
+     },
+     {
+      "word": "flat",
+      "lines": 51
+     },
+     {
+      "word": "little",
+      "lines": 50
+     },
+     {
+      "word": "grass",
+      "lines": 48
+     },
+     {
+      "word": "wind",
+      "lines": 47
+     }
+    ],
+    "calls_made": 426,
+    "latency_turn": {
+     "calls": 119,
+     "min_ms": 2584,
+     "p50_ms": 6231,
+     "p95_ms": 12095,
+     "max_ms": 15456
+    },
+    "fallback_rate_slots": 0.29411764705882354,
+    "fallback_rate_turns": 0.37815126050420167,
+    "latency": {
+     "calls": 238,
+     "min_ms": 1071,
+     "p50_ms": 2526,
+     "p95_ms": 6585,
+     "max_ms": 8682
+    }
+   }
+  ]
+ },
+ "haiku-supplement-300/plain-lantern-bearer-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 67,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "standard",
+    "turns": 67,
+    "slots": 134,
+    "accepted_slots": 94,
+    "fallback_slots": 40,
+    "turns_with_fallback": 33,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 40,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 24,
+     "draft_animal_species": 1,
+     "personal_pronoun": 3,
+     "quantifier_before_resource_or_half": 1,
+     "unauthorised_resource_noun": 10
+    },
+    "lines_checked": 134,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 34,
+     "draft_animal_species": 1,
+     "event_text_copied": 1,
+     "personal_pronoun": 4,
+     "quantifier_before_resource_or_half": 1,
+     "unauthorised_resource_noun": 11
+    },
+    "lines_breaking_more_than_one_rule": 12,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 94,
+    "distinct_openings": 62,
+    "unique_opening_share": 0.5,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 16
+     },
+     {
+      "opening": "at stonecross the",
+      "count": 3
+     },
+     {
+      "opening": "the dust devil",
+      "count": 3
+     },
+     {
+      "opening": "the party reaches",
+      "count": 3
+     },
+     {
+      "opening": "a traveller died",
+      "count": 2
+     }
+    ],
+    "says_what_happened_pass": 94,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.7014925373134329,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 40
+     },
+     {
+      "word": "evening",
+      "lines": 31
+     },
+     {
+      "word": "plains",
+      "lines": 30
+     },
+     {
+      "word": "river",
+      "lines": 21
+     },
+     {
+      "word": "flat",
+      "lines": 20
+     },
+     {
+      "word": "wheels",
+      "lines": 20
+     },
+     {
+      "word": "light",
+      "lines": 17
+     },
+     {
+      "word": "morning",
+      "lines": 17
+     }
+    ],
+    "calls_made": 242,
+    "latency_turn": {
+     "calls": 67,
+     "min_ms": 2524,
+     "p50_ms": 5887,
+     "p95_ms": 9601,
+     "max_ms": 10422
+    },
+    "fallback_rate_slots": 0.29850746268656714,
+    "fallback_rate_turns": 0.4925373134328358,
+    "latency": {
+     "calls": 134,
+     "min_ms": 1081,
+     "p50_ms": 2255,
+     "p95_ms": 5313,
+     "max_ms": 6248
+    }
+   }
+  ]
+ },
+ "haiku/plain-chronicler-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 619,
+    "fallback_slots": 101,
+    "turns_with_fallback": 85,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 101,
+    "rejects_by_code": {
+     "choice_parroting": 36,
+     "death_words": 2,
+     "draft_animal_species": 1,
+     "event_text_copied": 5,
+     "mid_sentence_capital": 3,
+     "numbers_digits_or_units": 9,
+     "personal_pronoun": 8,
+     "repeated_opening": 26,
+     "unauthorised_resource_noun": 11
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "choice_parroting": 45,
+     "death_words": 2,
+     "draft_animal_species": 1,
+     "event_text_copied": 5,
+     "mid_sentence_capital": 3,
+     "numbers_digits_or_units": 9,
+     "personal_pronoun": 8,
+     "unauthorised_resource_noun": 11
+    },
+    "lines_breaking_more_than_one_rule": 9,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 619,
+    "distinct_openings": 254,
+    "unique_opening_share": 0.2827140549273021,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 108
+     },
+     {
+      "opening": "the party rested",
+      "count": 31
+     },
+     {
+      "opening": "a traveller died",
+      "count": 20
+     },
+     {
+      "opening": "the wagon sits",
+      "count": 20
+     },
+     {
+      "opening": "the party reached",
+      "count": 19
+     }
+    ],
+    "says_what_happened_pass": 619,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.8597222222222223,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 291
+     },
+     {
+      "word": "night",
+      "lines": 116
+     },
+     {
+      "word": "travelled",
+      "lines": 108
+     },
+     {
+      "word": "evening",
+      "lines": 90
+     },
+     {
+      "word": "wagon",
+      "lines": 90
+     },
+     {
+      "word": "forest",
+      "lines": 79
+     },
+     {
+      "word": "morning",
+      "lines": 73
+     },
+     {
+      "word": "plains",
+      "lines": 66
+     }
+    ],
+    "calls_made": 1031,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 1403,
+     "p50_ms": 2298,
+     "p95_ms": 6066,
+     "max_ms": 8471
+    },
+    "fallback_rate_slots": 0.14027777777777778,
+    "fallback_rate_turns": 0.2361111111111111,
+    "latency": {
+     "calls": 720,
+     "min_ms": 571,
+     "p50_ms": 1022,
+     "p95_ms": 3245,
+     "max_ms": 5815
+    }
+   }
+  ]
+ },
+ "haiku/plain-chronicler-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 487,
+    "fallback_slots": 233,
+    "turns_with_fallback": 151,
+    "timeouts": 0,
+    "bad_json": 8,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 225,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 4,
+     "choice_parroting": 62,
+     "death_words": 3,
+     "draft_animal_species": 12,
+     "ending_not_conveyed": 1,
+     "event_text_copied": 6,
+     "mid_sentence_capital": 12,
+     "numbers_digits_or_units": 15,
+     "personal_pronoun": 18,
+     "quantifier_before_resource_or_half": 2,
+     "repeated_opening": 31,
+     "supply_state_contradiction": 1,
+     "unauthorised_resource_noun": 58
+    },
+    "lines_checked": 712,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 7,
+     "choice_parroting": 106,
+     "death_not_conveyed": 1,
+     "death_words": 4,
+     "draft_animal_species": 20,
+     "ending_not_conveyed": 1,
+     "event_text_copied": 9,
+     "mid_sentence_capital": 12,
+     "numbers_digits_or_units": 15,
+     "personal_pronoun": 42,
+     "quantifier_before_resource_or_half": 2,
+     "supply_state_contradiction": 4,
+     "unauthorised_resource_noun": 68
+    },
+    "lines_breaking_more_than_one_rule": 71,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 487,
+    "distinct_openings": 158,
+    "unique_opening_share": 0.19301848049281314,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 102
+     },
+     {
+      "opening": "the party rested",
+      "count": 32
+     },
+     {
+      "opening": "the party reached",
+      "count": 30
+     },
+     {
+      "opening": "a traveller died",
+      "count": 23
+     },
+     {
+      "opening": "the camp sits",
+      "count": 14
+     }
+    ],
+    "says_what_happened_pass": 487,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.6763888888888889,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 374
+     },
+     {
+      "word": "wagon",
+      "lines": 226
+     },
+     {
+      "word": "wheels",
+      "lines": 165
+     },
+     {
+      "word": "water",
+      "lines": 158
+     },
+     {
+      "word": "grey",
+      "lines": 144
+     },
+     {
+      "word": "night",
+      "lines": 140
+     },
+     {
+      "word": "plains",
+      "lines": 140
+     },
+     {
+      "word": "food",
+      "lines": 124
+     }
+    ],
+    "calls_made": 1371,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 2126,
+     "p50_ms": 5775,
+     "p95_ms": 10542,
+     "max_ms": 14766
+    },
+    "fallback_rate_slots": 0.3236111111111111,
+    "fallback_rate_turns": 0.41944444444444445,
+    "latency": {
+     "calls": 720,
+     "min_ms": 872,
+     "p50_ms": 2556,
+     "p95_ms": 5926,
+     "max_ms": 11441
+    }
+   }
+  ]
+ },
+ "haiku/plain-chronicler-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 512,
+    "fallback_slots": 208,
+    "turns_with_fallback": 130,
+    "timeouts": 0,
+    "bad_json": 7,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 201,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 67,
+     "death_words": 2,
+     "draft_animal_species": 2,
+     "event_text_copied": 8,
+     "mid_sentence_capital": 7,
+     "numbers_digits_or_units": 15,
+     "personal_pronoun": 31,
+     "quantifier_before_resource_or_half": 1,
+     "repeated_opening": 19,
+     "supply_state_contradiction": 2,
+     "unauthorised_resource_noun": 46
+    },
+    "lines_checked": 713,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 106,
+     "death_not_conveyed": 1,
+     "death_words": 3,
+     "draft_animal_species": 2,
+     "event_text_copied": 10,
+     "mid_sentence_capital": 7,
+     "numbers_digits_or_units": 15,
+     "personal_pronoun": 50,
+     "quantifier_before_resource_or_half": 1,
+     "supply_state_contradiction": 3,
+     "unauthorised_resource_noun": 50
+    },
+    "lines_breaking_more_than_one_rule": 55,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 512,
+    "distinct_openings": 163,
+    "unique_opening_share": 0.185546875,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 107
+     },
+     {
+      "opening": "the party rested",
+      "count": 36
+     },
+     {
+      "opening": "the party reached",
+      "count": 31
+     },
+     {
+      "opening": "a traveller died",
+      "count": 21
+     },
+     {
+      "opening": "evening settles over",
+      "count": 15
+     }
+    ],
+    "says_what_happened_pass": 512,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.7111111111111111,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 348
+     },
+     {
+      "word": "night",
+      "lines": 166
+     },
+     {
+      "word": "wagon",
+      "lines": 164
+     },
+     {
+      "word": "plains",
+      "lines": 127
+     },
+     {
+      "word": "wheels",
+      "lines": 113
+     },
+     {
+      "word": "water",
+      "lines": 108
+     },
+     {
+      "word": "travelled",
+      "lines": 107
+     },
+     {
+      "word": "cold",
+      "lines": 100
+     }
+    ],
+    "calls_made": 1290,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 1922,
+     "p50_ms": 4573,
+     "p95_ms": 9366,
+     "max_ms": 11757
+    },
+    "fallback_rate_slots": 0.28888888888888886,
+    "fallback_rate_turns": 0.3611111111111111,
+    "latency": {
+     "calls": 720,
+     "min_ms": 828,
+     "p50_ms": 1973,
+     "p95_ms": 5068,
+     "max_ms": 8135
+    }
+   }
+  ]
+ },
+ "haiku/plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 589,
+    "fallback_slots": 131,
+    "turns_with_fallback": 100,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 131,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 55,
+     "death_not_conveyed": 1,
+     "ending_not_conveyed": 1,
+     "event_text_copied": 3,
+     "length_cap_exceeded": 25,
+     "mid_sentence_capital": 7,
+     "numbers_digits_or_units": 11,
+     "personal_pronoun": 2,
+     "repeated_opening": 14,
+     "unauthorised_resource_noun": 11
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 70,
+     "death_not_conveyed": 1,
+     "ending_not_conveyed": 1,
+     "event_text_copied": 3,
+     "length_cap_exceeded": 25,
+     "mid_sentence_capital": 8,
+     "numbers_digits_or_units": 12,
+     "personal_pronoun": 2,
+     "unauthorised_resource_noun": 18
+    },
+    "lines_breaking_more_than_one_rule": 25,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 589,
+    "distinct_openings": 235,
+    "unique_opening_share": 0.2801358234295416,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 109
+     },
+     {
+      "opening": "the party rested",
+      "count": 38
+     },
+     {
+      "opening": "the party arrived",
+      "count": 18
+     },
+     {
+      "opening": "a traveller has",
+      "count": 16
+     },
+     {
+      "opening": "the oxen stand",
+      "count": 13
+     }
+    ],
+    "says_what_happened_pass": 589,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.8180555555555555,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.3853989813242784,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 265
+     },
+     {
+      "word": "oxen",
+      "lines": 226
+     },
+     {
+      "word": "travelled",
+      "lines": 109
+     },
+     {
+      "word": "morning",
+      "lines": 93
+     },
+     {
+      "word": "wagon",
+      "lines": 91
+     },
+     {
+      "word": "evening",
+      "lines": 85
+     },
+     {
+      "word": "plains",
+      "lines": 83
+     },
+     {
+      "word": "light",
+      "lines": 78
+     }
+    ],
+    "calls_made": 1156,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 1263,
+     "p50_ms": 3076,
+     "p95_ms": 6984,
+     "max_ms": 10497
+    },
+    "fallback_rate_slots": 0.18194444444444444,
+    "fallback_rate_turns": 0.2777777777777778,
+    "latency": {
+     "calls": 720,
+     "min_ms": 590,
+     "p50_ms": 1159,
+     "p95_ms": 4005,
+     "max_ms": 7712
+    }
+   }
+  ]
+ },
+ "haiku/plain-fireside-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 502,
+    "fallback_slots": 218,
+    "turns_with_fallback": 153,
+    "timeouts": 0,
+    "bad_json": 76,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 142,
+    "rejects_by_code": {
+     "choice_parroting": 53,
+     "death_not_conveyed": 3,
+     "event_text_copied": 5,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 12,
+     "personal_pronoun": 5,
+     "quantifier_before_resource_or_half": 2,
+     "repeated_opening": 10,
+     "unauthorised_resource_noun": 50
+    },
+    "lines_checked": 644,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 5,
+     "choice_parroting": 68,
+     "death_not_conveyed": 4,
+     "event_text_copied": 6,
+     "mid_sentence_capital": 3,
+     "numbers_digits_or_units": 12,
+     "personal_pronoun": 10,
+     "quantifier_before_resource_or_half": 2,
+     "unauthorised_resource_noun": 53
+    },
+    "lines_breaking_more_than_one_rule": 27,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 502,
+    "distinct_openings": 138,
+    "unique_opening_share": 0.12350597609561753,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 101
+     },
+     {
+      "opening": "the party rested",
+      "count": 33
+     },
+     {
+      "opening": "the party arrived",
+      "count": 19
+     },
+     {
+      "opening": "the party reached",
+      "count": 12
+     },
+     {
+      "opening": "at hazelwick the",
+      "count": 11
+     }
+    ],
+    "says_what_happened_pass": 502,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.6972222222222222,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.9482071713147411,
+    "top_content_words": [
+     {
+      "word": "oxen",
+      "lines": 474
+     },
+     {
+      "word": "party",
+      "lines": 286
+     },
+     {
+      "word": "travellers",
+      "lines": 281
+     },
+     {
+      "word": "wagon",
+      "lines": 176
+     },
+     {
+      "word": "wheels",
+      "lines": 174
+     },
+     {
+      "word": "plains",
+      "lines": 161
+     },
+     {
+      "word": "shoulders",
+      "lines": 160
+     },
+     {
+      "word": "water",
+      "lines": 153
+     }
+    ],
+    "calls_made": 1412,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 2915,
+     "p50_ms": 7142,
+     "p95_ms": 12726,
+     "max_ms": 16228
+    },
+    "fallback_rate_slots": 0.30277777777777776,
+    "fallback_rate_turns": 0.425,
+    "latency": {
+     "calls": 720,
+     "min_ms": 1166,
+     "p50_ms": 3704,
+     "p95_ms": 6976,
+     "max_ms": 11339
+    }
+   }
+  ]
+ },
+ "haiku/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 583,
+    "fallback_slots": 137,
+    "turns_with_fallback": 100,
+    "timeouts": 0,
+    "bad_json": 28,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 109,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 52,
+     "event_text_copied": 5,
+     "mid_sentence_capital": 5,
+     "numbers_digits_or_units": 10,
+     "repeated_opening": 7,
+     "unauthorised_resource_noun": 29
+    },
+    "lines_checked": 692,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 60,
+     "death_not_conveyed": 3,
+     "event_text_copied": 5,
+     "mid_sentence_capital": 5,
+     "numbers_digits_or_units": 10,
+     "unauthorised_resource_noun": 31
+    },
+    "lines_breaking_more_than_one_rule": 12,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 583,
+    "distinct_openings": 151,
+    "unique_opening_share": 0.1234991423670669,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 108
+     },
+     {
+      "opening": "the party rested",
+      "count": 38
+     },
+     {
+      "opening": "the party reached",
+      "count": 27
+     },
+     {
+      "opening": "evening settles over",
+      "count": 21
+     },
+     {
+      "opening": "at night in",
+      "count": 17
+     }
+    ],
+    "says_what_happened_pass": 583,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.8097222222222222,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.8627787307032591,
+    "top_content_words": [
+     {
+      "word": "oxen",
+      "lines": 503
+     },
+     {
+      "word": "party",
+      "lines": 291
+     },
+     {
+      "word": "travellers",
+      "lines": 174
+     },
+     {
+      "word": "night",
+      "lines": 153
+     },
+     {
+      "word": "plains",
+      "lines": 150
+     },
+     {
+      "word": "wheels",
+      "lines": 136
+     },
+     {
+      "word": "cold",
+      "lines": 131
+     },
+     {
+      "word": "wagon",
+      "lines": 131
+     }
+    ],
+    "calls_made": 1165,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 2469,
+     "p50_ms": 4674,
+     "p95_ms": 10003,
+     "max_ms": 13078
+    },
+    "fallback_rate_slots": 0.19027777777777777,
+    "fallback_rate_turns": 0.2777777777777778,
+    "latency": {
+     "calls": 720,
+     "min_ms": 1085,
+     "p50_ms": 2001,
+     "p95_ms": 5649,
+     "max_ms": 8643
+    }
+   }
+  ]
+ },
+ "haiku/plain-lantern-bearer-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 624,
+    "fallback_slots": 96,
+    "turns_with_fallback": 73,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 96,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 41,
+     "event_text_copied": 6,
+     "length_cap_exceeded": 9,
+     "mid_sentence_capital": 5,
+     "numbers_digits_or_units": 11,
+     "personal_pronoun": 2,
+     "repeated_opening": 7,
+     "unauthorised_resource_noun": 14
+    },
+    "lines_checked": 720,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 55,
+     "event_text_copied": 10,
+     "length_cap_exceeded": 9,
+     "mid_sentence_capital": 5,
+     "numbers_digits_or_units": 12,
+     "personal_pronoun": 4,
+     "unauthorised_resource_noun": 17
+    },
+    "lines_breaking_more_than_one_rule": 22,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 624,
+    "distinct_openings": 263,
+    "unique_opening_share": 0.30128205128205127,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 112
+     },
+     {
+      "opening": "the party rested",
+      "count": 37
+     },
+     {
+      "opening": "the party arrived",
+      "count": 27
+     },
+     {
+      "opening": "the camp sits",
+      "count": 26
+     },
+     {
+      "opening": "a traveller died",
+      "count": 15
+     }
+    ],
+    "says_what_happened_pass": 624,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.8666666666666667,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 275
+     },
+     {
+      "word": "night",
+      "lines": 117
+     },
+     {
+      "word": "travelled",
+      "lines": 112
+     },
+     {
+      "word": "wind",
+      "lines": 96
+     },
+     {
+      "word": "plains",
+      "lines": 87
+     },
+     {
+      "word": "forest",
+      "lines": 72
+     },
+     {
+      "word": "evening",
+      "lines": 71
+     },
+     {
+      "word": "grass",
+      "lines": 69
+     }
+    ],
+    "calls_made": 1016,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 1315,
+     "p50_ms": 2322,
+     "p95_ms": 6217,
+     "max_ms": 9314
+    },
+    "fallback_rate_slots": 0.13333333333333333,
+    "fallback_rate_turns": 0.20277777777777778,
+    "latency": {
+     "calls": 720,
+     "min_ms": 564,
+     "p50_ms": 1026,
+     "p95_ms": 3444,
+     "max_ms": 6560
+    }
+   }
+  ]
+ },
+ "haiku/plain-lantern-bearer-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "rich",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 501,
+    "fallback_slots": 219,
+    "turns_with_fallback": 144,
+    "timeouts": 0,
+    "bad_json": 40,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 179,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 53,
+     "death_words": 3,
+     "event_text_copied": 1,
+     "mid_sentence_capital": 6,
+     "numbers_digits_or_units": 17,
+     "personal_pronoun": 14,
+     "quantifier_before_resource_or_half": 8,
+     "repeated_opening": 17,
+     "unauthorised_resource_noun": 58
+    },
+    "lines_checked": 680,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 11,
+     "choice_parroting": 88,
+     "death_words": 3,
+     "event_text_copied": 5,
+     "mid_sentence_capital": 7,
+     "numbers_digits_or_units": 19,
+     "personal_pronoun": 22,
+     "quantifier_before_resource_or_half": 8,
+     "supply_state_contradiction": 2,
+     "unauthorised_resource_noun": 69
+    },
+    "lines_breaking_more_than_one_rule": 60,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 501,
+    "distinct_openings": 157,
+    "unique_opening_share": 0.17564870259481039,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 100
+     },
+     {
+      "opening": "the party rested",
+      "count": 38
+     },
+     {
+      "opening": "the party arrived",
+      "count": 26
+     },
+     {
+      "opening": "a traveller has",
+      "count": 17
+     },
+     {
+      "opening": "at night in",
+      "count": 13
+     }
+    ],
+    "says_what_happened_pass": 501,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.6958333333333333,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 281
+     },
+     {
+      "word": "water",
+      "lines": 225
+     },
+     {
+      "word": "river",
+      "lines": 189
+     },
+     {
+      "word": "plains",
+      "lines": 166
+     },
+     {
+      "word": "night",
+      "lines": 154
+     },
+     {
+      "word": "wind",
+      "lines": 145
+     },
+     {
+      "word": "across",
+      "lines": 141
+     },
+     {
+      "word": "sound",
+      "lines": 132
+     }
+    ],
+    "calls_made": 1375,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 2430,
+     "p50_ms": 6404,
+     "p95_ms": 12010,
+     "max_ms": 16055
+    },
+    "fallback_rate_slots": 0.30416666666666664,
+    "fallback_rate_turns": 0.4,
+    "latency": {
+     "calls": 720,
+     "min_ms": 1054,
+     "p50_ms": 3050,
+     "p95_ms": 6594,
+     "max_ms": 9346
+    }
+   }
+  ]
+ },
+ "haiku/plain-lantern-bearer-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 552,
+    "fallback_slots": 168,
+    "turns_with_fallback": 116,
+    "timeouts": 0,
+    "bad_json": 17,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 151,
+    "rejects_by_code": {
+     "action_with_no_one_left": 1,
+     "band_banned_vocabulary": 5,
+     "choice_parroting": 63,
+     "death_words": 1,
+     "event_text_copied": 7,
+     "mid_sentence_capital": 4,
+     "numbers_digits_or_units": 12,
+     "personal_pronoun": 8,
+     "quantifier_before_resource_or_half": 1,
+     "repeated_opening": 9,
+     "unauthorised_resource_noun": 40
+    },
+    "lines_checked": 703,
+    "rejects_all_rules": {
+     "action_with_no_one_left": 1,
+     "band_banned_vocabulary": 7,
+     "choice_parroting": 90,
+     "death_words": 1,
+     "event_text_copied": 10,
+     "mid_sentence_capital": 4,
+     "numbers_digits_or_units": 12,
+     "personal_pronoun": 10,
+     "quantifier_before_resource_or_half": 1,
+     "unauthorised_resource_noun": 45
+    },
+    "lines_breaking_more_than_one_rule": 35,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 552,
+    "distinct_openings": 162,
+    "unique_opening_share": 0.17028985507246377,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 108
+     },
+     {
+      "opening": "the party rested",
+      "count": 38
+     },
+     {
+      "opening": "the party arrived",
+      "count": 22
+     },
+     {
+      "opening": "a traveller has",
+      "count": 15
+     },
+     {
+      "opening": "evening settles over",
+      "count": 15
+     }
+    ],
+    "says_what_happened_pass": 552,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.7666666666666667,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 280
+     },
+     {
+      "word": "night",
+      "lines": 161
+     },
+     {
+      "word": "plains",
+      "lines": 157
+     },
+     {
+      "word": "river",
+      "lines": 152
+     },
+     {
+      "word": "water",
+      "lines": 146
+     },
+     {
+      "word": "evening",
+      "lines": 115
+     },
+     {
+      "word": "forest",
+      "lines": 109
+     },
+     {
+      "word": "travelled",
+      "lines": 108
+     }
+    ],
+    "calls_made": 1221,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 2289,
+     "p50_ms": 4688,
+     "p95_ms": 10005,
+     "max_ms": 12765
+    },
+    "fallback_rate_slots": 0.23333333333333334,
+    "fallback_rate_turns": 0.32222222222222224,
+    "latency": {
+     "calls": 720,
+     "min_ms": 963,
+     "p50_ms": 2026,
+     "p95_ms": 5358,
+     "max_ms": 8526
+    }
+   }
+  ]
+ },
+ "opus-joined/plain-chronicler-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-opus-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 186,
+    "fallback_slots": 534,
+    "turns_with_fallback": 280,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 480,
+    "not_called": 0,
+    "rule_rejects": 54,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 3,
+     "choice_parroting": 19,
+     "death_words": 1,
+     "event_text_copied": 2,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 4,
+     "quantifier_before_resource_or_half": 1,
+     "repeated_opening": 6,
+     "supply_state_contradiction": 1,
+     "unauthorised_resource_noun": 15
+    },
+    "lines_checked": 240,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 4,
+     "choice_parroting": 30,
+     "death_words": 1,
+     "event_text_copied": 3,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 4,
+     "quantifier_before_resource_or_half": 1,
+     "supply_state_contradiction": 1,
+     "unauthorised_resource_noun": 16
+    },
+    "lines_breaking_more_than_one_rule": 13,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 186,
+    "distinct_openings": 88,
+    "unique_opening_share": 0.3279569892473118,
+    "top_openings": [
+     {
+      "opening": "the party travels",
+      "count": 27
+     },
+     {
+      "opening": "the party rests",
+      "count": 13
+     },
+     {
+      "opening": "a traveller dies",
+      "count": 12
+     },
+     {
+      "opening": "night settles over",
+      "count": 11
+     },
+     {
+      "opening": "evening settles over",
+      "count": 6
+     }
+    ],
+    "says_what_happened_pass": 186,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.25833333333333336,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 87
+     },
+     {
+      "word": "water",
+      "lines": 81
+     },
+     {
+      "word": "wagon",
+      "lines": 71
+     },
+     {
+      "word": "food",
+      "lines": 50
+     },
+     {
+      "word": "wind",
+      "lines": 50
+     },
+     {
+      "word": "near",
+      "lines": 48
+     },
+     {
+      "word": "river",
+      "lines": 48
+     },
+     {
+      "word": "evening",
+      "lines": 47
+     }
+    ],
+    "calls_made": 1837,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 13052,
+     "max_ms": 22007
+    },
+    "fallback_rate_slots": 0.7416666666666667,
+    "fallback_rate_turns": 0.7777777777777778,
+    "latency": {
+     "calls": 720,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 6835,
+     "max_ms": 13805
+    }
+   }
+  ]
+ },
+ "opus-joined/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-opus-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 186,
+    "fallback_slots": 534,
+    "turns_with_fallback": 276,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 492,
+    "not_called": 0,
+    "rule_rejects": 42,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 6,
+     "choice_parroting": 20,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 3,
+     "repeated_opening": 1,
+     "unauthorised_resource_noun": 11
+    },
+    "lines_checked": 228,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 6,
+     "choice_parroting": 29,
+     "event_text_copied": 1,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 3,
+     "unauthorised_resource_noun": 11
+    },
+    "lines_breaking_more_than_one_rule": 9,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 186,
+    "distinct_openings": 86,
+    "unique_opening_share": 0.2956989247311828,
+    "top_openings": [
+     {
+      "opening": "the party travels",
+      "count": 26
+     },
+     {
+      "opening": "a traveller dies",
+      "count": 12
+     },
+     {
+      "opening": "the party rests",
+      "count": 12
+     },
+     {
+      "opening": "the party arrives",
+      "count": 10
+     },
+     {
+      "opening": "night settles over",
+      "count": 6
+     }
+    ],
+    "says_what_happened_pass": 186,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.25833333333333336,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.3655913978494624,
+    "top_content_words": [
+     {
+      "word": "travellers",
+      "lines": 105
+     },
+     {
+      "word": "party",
+      "lines": 89
+     },
+     {
+      "word": "shoulders",
+      "lines": 78
+     },
+     {
+      "word": "oxen",
+      "lines": 68
+     },
+     {
+      "word": "water",
+      "lines": 57
+     },
+     {
+      "word": "dark",
+      "lines": 46
+     },
+     {
+      "word": "morning",
+      "lines": 42
+     },
+     {
+      "word": "close",
+      "lines": 41
+     }
+    ],
+    "calls_made": 1821,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 13850,
+     "max_ms": 24645
+    },
+    "fallback_rate_slots": 0.7416666666666667,
+    "fallback_rate_turns": 0.7666666666666667,
+    "latency": {
+     "calls": 720,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 6839,
+     "max_ms": 16365
+    }
+   }
+  ]
+ },
+ "opus-joined/plain-lantern-bearer-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-opus-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 188,
+    "fallback_slots": 532,
+    "turns_with_fallback": 278,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 489,
+    "not_called": 0,
+    "rule_rejects": 43,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 7,
+     "choice_parroting": 19,
+     "event_text_copied": 2,
+     "numbers_digits_or_units": 5,
+     "repeated_opening": 1,
+     "supply_state_contradiction": 1,
+     "unauthorised_resource_noun": 8
+    },
+    "lines_checked": 231,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 8,
+     "choice_parroting": 27,
+     "event_text_copied": 2,
+     "numbers_digits_or_units": 5,
+     "supply_state_contradiction": 1,
+     "unauthorised_resource_noun": 9
+    },
+    "lines_breaking_more_than_one_rule": 9,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 188,
+    "distinct_openings": 84,
+    "unique_opening_share": 0.2553191489361702,
+    "top_openings": [
+     {
+      "opening": "the party travels",
+      "count": 24
+     },
+     {
+      "opening": "the party rests",
+      "count": 14
+     },
+     {
+      "opening": "a traveller dies",
+      "count": 11
+     },
+     {
+      "opening": "the party arrives",
+      "count": 7
+     },
+     {
+      "opening": "evening settles over",
+      "count": 6
+     }
+    ],
+    "says_what_happened_pass": 188,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.2611111111111111,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "wheels",
+      "lines": 102
+     },
+     {
+      "word": "party",
+      "lines": 73
+     },
+     {
+      "word": "water",
+      "lines": 66
+     },
+     {
+      "word": "wagon",
+      "lines": 56
+     },
+     {
+      "word": "food",
+      "lines": 51
+     },
+     {
+      "word": "wind",
+      "lines": 45
+     },
+     {
+      "word": "evening",
+      "lines": 41
+     },
+     {
+      "word": "moment",
+      "lines": 37
+     }
+    ],
+    "calls_made": 1822,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 11871,
+     "max_ms": 26994
+    },
+    "fallback_rate_slots": 0.7388888888888889,
+    "fallback_rate_turns": 0.7722222222222223,
+    "latency": {
+     "calls": 720,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 6663,
+     "max_ms": 16792
+    }
+   }
+  ]
+ },
+ "opus-probe/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 10,
+  "model": "claude-opus-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 10,
+    "slots": 20,
+    "accepted_slots": 18,
+    "fallback_slots": 2,
+    "turns_with_fallback": 1,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 2,
+    "rejects_by_code": {
+     "unauthorised_resource_noun": 2
+    },
+    "lines_checked": 20,
+    "rejects_all_rules": {
+     "unauthorised_resource_noun": 2
+    },
+    "lines_breaking_more_than_one_rule": 0,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 18,
+    "distinct_openings": 16,
+    "unique_opening_share": 0.8333333333333334,
+    "top_openings": [
+     {
+      "opening": "a traveller dies",
+      "count": 3
+     }
+    ],
+    "says_what_happened_pass": 18,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.9,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.16666666666666666,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 10
+     },
+     {
+      "word": "travellers",
+      "lines": 8
+     },
+     {
+      "word": "swamp",
+      "lines": 7
+     },
+     {
+      "word": "dark",
+      "lines": 6
+     },
+     {
+      "word": "descent",
+      "lines": 5
+     },
+     {
+      "word": "hollow",
+      "lines": 5
+     },
+     {
+      "word": "long",
+      "lines": 5
+     },
+     {
+      "word": "bridge",
+      "lines": 4
+     }
+    ],
+    "calls_made": 28,
+    "latency_turn": {
+     "calls": 10,
+     "min_ms": 4141,
+     "p50_ms": 7510,
+     "p95_ms": 14028,
+     "max_ms": 14028
+    },
+    "fallback_rate_slots": 0.1,
+    "fallback_rate_turns": 0.1,
+    "latency": {
+     "calls": 20,
+     "min_ms": 1544,
+     "p50_ms": 3012,
+     "p95_ms": 8435,
+     "max_ms": 11058
+    }
+   }
+  ]
+ },
+ "opus-rest/plain-chronicler-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 240,
+  "model": "claude-opus-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "standard",
+    "turns": 240,
+    "slots": 480,
+    "accepted_slots": 367,
+    "fallback_slots": 113,
+    "turns_with_fallback": 88,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 112,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 50,
+     "draft_animal_species": 13,
+     "event_text_copied": 3,
+     "numbers_digits_or_units": 7,
+     "quantifier_before_resource_or_half": 1,
+     "repeated_opening": 5,
+     "supply_state_contradiction": 2,
+     "unauthorised_resource_noun": 29
+    },
+    "lines_checked": 479,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 3,
+     "choice_parroting": 70,
+     "draft_animal_species": 15,
+     "event_text_copied": 3,
+     "numbers_digits_or_units": 7,
+     "quantifier_before_resource_or_half": 1,
+     "supply_state_contradiction": 2,
+     "unauthorised_resource_noun": 31
+    },
+    "lines_breaking_more_than_one_rule": 25,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 367,
+    "distinct_openings": 143,
+    "unique_opening_share": 0.2670299727520436,
+    "top_openings": [
+     {
+      "opening": "the party travels",
+      "count": 73
+     },
+     {
+      "opening": "evening settles over",
+      "count": 20
+     },
+     {
+      "opening": "the party rests",
+      "count": 20
+     },
+     {
+      "opening": "night settles over",
+      "count": 13
+     },
+     {
+      "opening": "a traveller dies",
+      "count": 12
+     }
+    ],
+    "says_what_happened_pass": 367,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.7645833333333333,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 165
+     },
+     {
+      "word": "water",
+      "lines": 152
+     },
+     {
+      "word": "wagon",
+      "lines": 146
+     },
+     {
+      "word": "near",
+      "lines": 121
+     },
+     {
+      "word": "food",
+      "lines": 101
+     },
+     {
+      "word": "wind",
+      "lines": 96
+     },
+     {
+      "word": "grass",
+      "lines": 93
+     },
+     {
+      "word": "wheels",
+      "lines": 88
+     }
+    ],
+    "calls_made": 810,
+    "latency_turn": {
+     "calls": 240,
+     "min_ms": 3557,
+     "p50_ms": 7614,
+     "p95_ms": 14248,
+     "max_ms": 18511
+    },
+    "fallback_rate_slots": 0.23541666666666666,
+    "fallback_rate_turns": 0.36666666666666664,
+    "latency": {
+     "calls": 480,
+     "min_ms": 1454,
+     "p50_ms": 2776,
+     "p95_ms": 7766,
+     "max_ms": 15062
+    }
+   }
+  ]
+ },
+ "opus-rest/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 246,
+  "model": "claude-opus-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 246,
+    "slots": 492,
+    "accepted_slots": 385,
+    "fallback_slots": 107,
+    "turns_with_fallback": 78,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 107,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 6,
+     "choice_parroting": 50,
+     "event_text_copied": 1,
+     "numbers_digits_or_units": 9,
+     "personal_pronoun": 3,
+     "quantifier_before_resource_or_half": 1,
+     "repeated_opening": 6,
+     "unauthorised_resource_noun": 31
+    },
+    "lines_checked": 492,
+    "rejects_all_rules": {
+     "action_with_no_one_left": 1,
+     "band_banned_vocabulary": 8,
+     "choice_parroting": 71,
+     "event_text_copied": 1,
+     "numbers_digits_or_units": 9,
+     "personal_pronoun": 3,
+     "quantifier_before_resource_or_half": 1,
+     "unauthorised_resource_noun": 31
+    },
+    "lines_breaking_more_than_one_rule": 23,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 385,
+    "distinct_openings": 141,
+    "unique_opening_share": 0.2597402597402597,
+    "top_openings": [
+     {
+      "opening": "the party travels",
+      "count": 77
+     },
+     {
+      "opening": "the party rests",
+      "count": 22
+     },
+     {
+      "opening": "the party arrives",
+      "count": 21
+     },
+     {
+      "opening": "near whitmarsh the",
+      "count": 16
+     },
+     {
+      "opening": "evening settles over",
+      "count": 12
+     }
+    ],
+    "says_what_happened_pass": 385,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.782520325203252,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.3974025974025974,
+    "top_content_words": [
+     {
+      "word": "travellers",
+      "lines": 220
+     },
+     {
+      "word": "party",
+      "lines": 182
+     },
+     {
+      "word": "oxen",
+      "lines": 152
+     },
+     {
+      "word": "shoulders",
+      "lines": 145
+     },
+     {
+      "word": "near",
+      "lines": 125
+     },
+     {
+      "word": "water",
+      "lines": 114
+     },
+     {
+      "word": "dark",
+      "lines": 90
+     },
+     {
+      "word": "food",
+      "lines": 81
+     }
+    ],
+    "calls_made": 778,
+    "latency_turn": {
+     "calls": 246,
+     "min_ms": 4163,
+     "p50_ms": 7983,
+     "p95_ms": 16612,
+     "max_ms": 28798
+    },
+    "fallback_rate_slots": 0.21747967479674796,
+    "fallback_rate_turns": 0.3170731707317073,
+    "latency": {
+     "calls": 492,
+     "min_ms": 1504,
+     "p50_ms": 2908,
+     "p95_ms": 9252,
+     "max_ms": 15708
+    }
+   }
+  ]
+ },
+ "opus-rest/plain-lantern-bearer-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 245,
+  "model": "claude-opus-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "standard",
+    "turns": 245,
+    "slots": 490,
+    "accepted_slots": 391,
+    "fallback_slots": 99,
+    "turns_with_fallback": 76,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 99,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 6,
+     "choice_parroting": 61,
+     "numbers_digits_or_units": 8,
+     "quantifier_before_resource_or_half": 1,
+     "repeated_opening": 1,
+     "unauthorised_resource_noun": 22
+    },
+    "lines_checked": 490,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 8,
+     "choice_parroting": 70,
+     "event_text_copied": 1,
+     "numbers_digits_or_units": 8,
+     "quantifier_before_resource_or_half": 1,
+     "unauthorised_resource_noun": 22
+    },
+    "lines_breaking_more_than_one_rule": 12,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 391,
+    "distinct_openings": 157,
+    "unique_opening_share": 0.26342710997442453,
+    "top_openings": [
+     {
+      "opening": "the party travels",
+      "count": 62
+     },
+     {
+      "opening": "the party rests",
+      "count": 21
+     },
+     {
+      "opening": "the wagon rolls",
+      "count": 15
+     },
+     {
+      "opening": "the party arrives",
+      "count": 14
+     },
+     {
+      "opening": "a traveller dies",
+      "count": 11
+     }
+    ],
+    "says_what_happened_pass": 391,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.7979591836734694,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "wheels",
+      "lines": 217
+     },
+     {
+      "word": "water",
+      "lines": 141
+     },
+     {
+      "word": "party",
+      "lines": 131
+     },
+     {
+      "word": "near",
+      "lines": 126
+     },
+     {
+      "word": "wagon",
+      "lines": 119
+     },
+     {
+      "word": "food",
+      "lines": 109
+     },
+     {
+      "word": "moment",
+      "lines": 90
+     },
+     {
+      "word": "wind",
+      "lines": 89
+     }
+    ],
+    "calls_made": 757,
+    "latency_turn": {
+     "calls": 245,
+     "min_ms": 4184,
+     "p50_ms": 7326,
+     "p95_ms": 15636,
+     "max_ms": 21192
+    },
+    "fallback_rate_slots": 0.20204081632653062,
+    "fallback_rate_turns": 0.31020408163265306,
+    "latency": {
+     "calls": 490,
+     "min_ms": 1674,
+     "p50_ms": 2662,
+     "p95_ms": 7642,
+     "max_ms": 16656
+    }
+   }
+  ]
+ },
+ "opus/plain-chronicler-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-opus-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 186,
+    "fallback_slots": 534,
+    "turns_with_fallback": 280,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 480,
+    "not_called": 0,
+    "rule_rejects": 54,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 3,
+     "choice_parroting": 19,
+     "death_words": 1,
+     "event_text_copied": 2,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 4,
+     "quantifier_before_resource_or_half": 1,
+     "repeated_opening": 6,
+     "supply_state_contradiction": 1,
+     "unauthorised_resource_noun": 15
+    },
+    "lines_checked": 240,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 4,
+     "choice_parroting": 30,
+     "death_words": 1,
+     "event_text_copied": 3,
+     "mid_sentence_capital": 2,
+     "numbers_digits_or_units": 4,
+     "quantifier_before_resource_or_half": 1,
+     "supply_state_contradiction": 1,
+     "unauthorised_resource_noun": 16
+    },
+    "lines_breaking_more_than_one_rule": 13,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 186,
+    "distinct_openings": 88,
+    "unique_opening_share": 0.3279569892473118,
+    "top_openings": [
+     {
+      "opening": "the party travels",
+      "count": 27
+     },
+     {
+      "opening": "the party rests",
+      "count": 13
+     },
+     {
+      "opening": "a traveller dies",
+      "count": 12
+     },
+     {
+      "opening": "night settles over",
+      "count": 11
+     },
+     {
+      "opening": "evening settles over",
+      "count": 6
+     }
+    ],
+    "says_what_happened_pass": 186,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.25833333333333336,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 87
+     },
+     {
+      "word": "water",
+      "lines": 81
+     },
+     {
+      "word": "wagon",
+      "lines": 71
+     },
+     {
+      "word": "food",
+      "lines": 50
+     },
+     {
+      "word": "wind",
+      "lines": 50
+     },
+     {
+      "word": "near",
+      "lines": 48
+     },
+     {
+      "word": "river",
+      "lines": 48
+     },
+     {
+      "word": "evening",
+      "lines": 47
+     }
+    ],
+    "calls_made": 1837,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 13052,
+     "max_ms": 22007
+    },
+    "fallback_rate_slots": 0.7416666666666667,
+    "fallback_rate_turns": 0.7777777777777778,
+    "latency": {
+     "calls": 720,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 6835,
+     "max_ms": 13805
+    }
+   }
+  ]
+ },
+ "opus/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-opus-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 186,
+    "fallback_slots": 534,
+    "turns_with_fallback": 276,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 492,
+    "not_called": 0,
+    "rule_rejects": 42,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 6,
+     "choice_parroting": 20,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 3,
+     "repeated_opening": 1,
+     "unauthorised_resource_noun": 11
+    },
+    "lines_checked": 228,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 6,
+     "choice_parroting": 29,
+     "event_text_copied": 1,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 3,
+     "unauthorised_resource_noun": 11
+    },
+    "lines_breaking_more_than_one_rule": 9,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 186,
+    "distinct_openings": 86,
+    "unique_opening_share": 0.2956989247311828,
+    "top_openings": [
+     {
+      "opening": "the party travels",
+      "count": 26
+     },
+     {
+      "opening": "a traveller dies",
+      "count": 12
+     },
+     {
+      "opening": "the party rests",
+      "count": 12
+     },
+     {
+      "opening": "the party arrives",
+      "count": 10
+     },
+     {
+      "opening": "night settles over",
+      "count": 6
+     }
+    ],
+    "says_what_happened_pass": 186,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.25833333333333336,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.3655913978494624,
+    "top_content_words": [
+     {
+      "word": "travellers",
+      "lines": 105
+     },
+     {
+      "word": "party",
+      "lines": 89
+     },
+     {
+      "word": "shoulders",
+      "lines": 78
+     },
+     {
+      "word": "oxen",
+      "lines": 68
+     },
+     {
+      "word": "water",
+      "lines": 57
+     },
+     {
+      "word": "dark",
+      "lines": 46
+     },
+     {
+      "word": "morning",
+      "lines": 42
+     },
+     {
+      "word": "close",
+      "lines": 41
+     }
+    ],
+    "calls_made": 1821,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 13850,
+     "max_ms": 24645
+    },
+    "fallback_rate_slots": 0.7416666666666667,
+    "fallback_rate_turns": 0.7666666666666667,
+    "latency": {
+     "calls": 720,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 6839,
+     "max_ms": 16365
+    }
+   }
+  ]
+ },
+ "opus/plain-lantern-bearer-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-opus-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "standard",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 188,
+    "fallback_slots": 532,
+    "turns_with_fallback": 278,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 489,
+    "not_called": 0,
+    "rule_rejects": 43,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 7,
+     "choice_parroting": 19,
+     "event_text_copied": 2,
+     "numbers_digits_or_units": 5,
+     "repeated_opening": 1,
+     "supply_state_contradiction": 1,
+     "unauthorised_resource_noun": 8
+    },
+    "lines_checked": 231,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 8,
+     "choice_parroting": 27,
+     "event_text_copied": 2,
+     "numbers_digits_or_units": 5,
+     "supply_state_contradiction": 1,
+     "unauthorised_resource_noun": 9
+    },
+    "lines_breaking_more_than_one_rule": 9,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 188,
+    "distinct_openings": 84,
+    "unique_opening_share": 0.2553191489361702,
+    "top_openings": [
+     {
+      "opening": "the party travels",
+      "count": 24
+     },
+     {
+      "opening": "the party rests",
+      "count": 14
+     },
+     {
+      "opening": "a traveller dies",
+      "count": 11
+     },
+     {
+      "opening": "the party arrives",
+      "count": 7
+     },
+     {
+      "opening": "evening settles over",
+      "count": 6
+     }
+    ],
+    "says_what_happened_pass": 188,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.2611111111111111,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "wheels",
+      "lines": 102
+     },
+     {
+      "word": "party",
+      "lines": 73
+     },
+     {
+      "word": "water",
+      "lines": 66
+     },
+     {
+      "word": "wagon",
+      "lines": 56
+     },
+     {
+      "word": "food",
+      "lines": 51
+     },
+     {
+      "word": "wind",
+      "lines": 45
+     },
+     {
+      "word": "evening",
+      "lines": 41
+     },
+     {
+      "word": "moment",
+      "lines": 37
+     }
+    ],
+    "calls_made": 1822,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 11871,
+     "max_ms": 26994
+    },
+    "fallback_rate_slots": 0.7388888888888889,
+    "fallback_rate_turns": 0.7722222222222223,
+    "latency": {
+     "calls": 720,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 6663,
+     "max_ms": 16792
+    }
+   }
+  ]
+ },
+ "pilot-attempt1-network-failed/plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 20,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 20,
+    "slots": 40,
+    "accepted_slots": 0,
+    "fallback_slots": 40,
+    "turns_with_fallback": 20,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 40,
+    "not_called": 0,
+    "rule_rejects": 0,
+    "rejects_by_code": {},
+    "lines_checked": 0,
+    "rejects_all_rules": {},
+    "lines_breaking_more_than_one_rule": 0,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 0,
+    "distinct_openings": 0,
+    "unique_opening_share": 0.0,
+    "top_openings": [],
+    "says_what_happened_pass": 0,
+    "says_what_happened_rate": 0.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.0,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [],
+    "calls_made": 120,
+    "latency_turn": {
+     "calls": 20,
+     "min_ms": 468,
+     "p50_ms": 686,
+     "p95_ms": 1064,
+     "max_ms": 1289
+    },
+    "fallback_rate_slots": 1.0,
+    "fallback_rate_turns": 1.0,
+    "latency": {
+     "calls": 40,
+     "min_ms": 231,
+     "p50_ms": 357,
+     "p95_ms": 548,
+     "max_ms": 741
+    }
+   }
+  ]
+ },
+ "pilot-attempt2-tls-roots/plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 20,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 20,
+    "slots": 40,
+    "accepted_slots": 0,
+    "fallback_slots": 40,
+    "turns_with_fallback": 20,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 40,
+    "not_called": 0,
+    "rule_rejects": 0,
+    "rejects_by_code": {},
+    "lines_checked": 0,
+    "rejects_all_rules": {},
+    "lines_breaking_more_than_one_rule": 0,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 0,
+    "distinct_openings": 0,
+    "unique_opening_share": 0.0,
+    "top_openings": [],
+    "says_what_happened_pass": 0,
+    "says_what_happened_rate": 0.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.0,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [],
+    "calls_made": 120,
+    "latency_turn": {
+     "calls": 20,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 0,
+     "max_ms": 493
+    },
+    "fallback_rate_slots": 1.0,
+    "fallback_rate_turns": 1.0,
+    "latency": {
+     "calls": 40,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 0,
+     "max_ms": 302
+    }
+   }
+  ]
+ },
+ "pilot/plain-chronicler-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 20,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "brief",
+    "turns": 20,
+    "slots": 40,
+    "accepted_slots": 31,
+    "fallback_slots": 9,
+    "turns_with_fallback": 6,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 9,
+    "rejects_by_code": {
+     "choice_parroting": 2,
+     "event_text_copied": 1,
+     "mid_sentence_capital": 1,
+     "repeated_opening": 4,
+     "unauthorised_resource_noun": 1
+    },
+    "lines_checked": 40,
+    "rejects_all_rules": {
+     "choice_parroting": 2,
+     "event_text_copied": 1,
+     "mid_sentence_capital": 1,
+     "unauthorised_resource_noun": 1
+    },
+    "lines_breaking_more_than_one_rule": 0,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 31,
+    "distinct_openings": 23,
+    "unique_opening_share": 0.5161290322580645,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 3
+     },
+     {
+      "opening": "a traveller died",
+      "count": 2
+     },
+     {
+      "opening": "the night air",
+      "count": 2
+     },
+     {
+      "opening": "the party arrived",
+      "count": 2
+     },
+     {
+      "opening": "the party gave",
+      "count": 2
+     }
+    ],
+    "says_what_happened_pass": 31,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.775,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 15
+     },
+     {
+      "word": "cold",
+      "lines": 7
+     },
+     {
+      "word": "night",
+      "lines": 6
+     },
+     {
+      "word": "swamp",
+      "lines": 6
+     },
+     {
+      "word": "evening",
+      "lines": 5
+     },
+     {
+      "word": "camp",
+      "lines": 3
+     },
+     {
+      "word": "light",
+      "lines": 3
+     },
+     {
+      "word": "plains",
+      "lines": 3
+     }
+    ],
+    "calls_made": 62,
+    "latency_turn": {
+     "calls": 20,
+     "min_ms": 1607,
+     "p50_ms": 2124,
+     "p95_ms": 5240,
+     "max_ms": 5396
+    },
+    "fallback_rate_slots": 0.225,
+    "fallback_rate_turns": 0.3,
+    "latency": {
+     "calls": 40,
+     "min_ms": 685,
+     "p50_ms": 1053,
+     "p95_ms": 2750,
+     "max_ms": 3059
+    }
+   }
+  ]
+ },
+ "pilot/plain-chronicler-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 20,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "rich",
+    "turns": 20,
+    "slots": 40,
+    "accepted_slots": 26,
+    "fallback_slots": 14,
+    "turns_with_fallback": 9,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 14,
+    "rejects_by_code": {
+     "choice_parroting": 3,
+     "death_words": 2,
+     "mid_sentence_capital": 1,
+     "personal_pronoun": 2,
+     "repeated_opening": 2,
+     "unauthorised_resource_noun": 4
+    },
+    "lines_checked": 40,
+    "rejects_all_rules": {
+     "choice_parroting": 4,
+     "death_words": 2,
+     "mid_sentence_capital": 1,
+     "personal_pronoun": 2,
+     "unauthorised_resource_noun": 5
+    },
+    "lines_breaking_more_than_one_rule": 2,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 26,
+    "distinct_openings": 21,
+    "unique_opening_share": 0.6923076923076923,
+    "top_openings": [
+     {
+      "opening": "the party rested",
+      "count": 4
+     },
+     {
+      "opening": "a traveller died",
+      "count": 2
+     },
+     {
+      "opening": "the party travelled",
+      "count": 2
+     }
+    ],
+    "says_what_happened_pass": 26,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.65,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 20
+     },
+     {
+      "word": "water",
+      "lines": 14
+     },
+     {
+      "word": "night",
+      "lines": 13
+     },
+     {
+      "word": "fire",
+      "lines": 10
+     },
+     {
+      "word": "cold",
+      "lines": 9
+     },
+     {
+      "word": "swamp",
+      "lines": 9
+     },
+     {
+      "word": "down",
+      "lines": 8
+     },
+     {
+      "word": "food",
+      "lines": 7
+     }
+    ],
+    "calls_made": 74,
+    "latency_turn": {
+     "calls": 20,
+     "min_ms": 2328,
+     "p50_ms": 5807,
+     "p95_ms": 9267,
+     "max_ms": 9915
+    },
+    "fallback_rate_slots": 0.35,
+    "fallback_rate_turns": 0.45,
+    "latency": {
+     "calls": 40,
+     "min_ms": 1048,
+     "p50_ms": 2155,
+     "p95_ms": 5338,
+     "max_ms": 5834
+    }
+   }
+  ]
+ },
+ "pilot/plain-chronicler-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 20,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Chronicler",
+    "length": "standard",
+    "turns": 20,
+    "slots": 40,
+    "accepted_slots": 30,
+    "fallback_slots": 10,
+    "turns_with_fallback": 6,
+    "timeouts": 0,
+    "bad_json": 1,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 9,
+    "rejects_by_code": {
+     "choice_parroting": 1,
+     "personal_pronoun": 3,
+     "repeated_opening": 1,
+     "unauthorised_resource_noun": 4
+    },
+    "lines_checked": 39,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 4,
+     "draft_animal_species": 1,
+     "event_text_copied": 2,
+     "personal_pronoun": 5,
+     "unauthorised_resource_noun": 4
+    },
+    "lines_breaking_more_than_one_rule": 4,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 30,
+    "distinct_openings": 22,
+    "unique_opening_share": 0.5666666666666667,
+    "top_openings": [
+     {
+      "opening": "the party rested",
+      "count": 4
+     },
+     {
+      "opening": "a traveller died",
+      "count": 3
+     },
+     {
+      "opening": "the party reached",
+      "count": 2
+     },
+     {
+      "opening": "the party travelled",
+      "count": 2
+     },
+     {
+      "opening": "the switchback sits",
+      "count": 2
+     }
+    ],
+    "says_what_happened_pass": 30,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.75,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 17
+     },
+     {
+      "word": "night",
+      "lines": 14
+     },
+     {
+      "word": "swamp",
+      "lines": 10
+     },
+     {
+      "word": "cold",
+      "lines": 9
+     },
+     {
+      "word": "fire",
+      "lines": 7
+     },
+     {
+      "word": "wheels",
+      "lines": 7
+     },
+     {
+      "word": "water",
+      "lines": 6
+     },
+     {
+      "word": "descent",
+      "lines": 5
+     }
+    ],
+    "calls_made": 69,
+    "latency_turn": {
+     "calls": 20,
+     "min_ms": 2836,
+     "p50_ms": 4378,
+     "p95_ms": 11324,
+     "max_ms": 12094
+    },
+    "fallback_rate_slots": 0.25,
+    "fallback_rate_turns": 0.3,
+    "latency": {
+     "calls": 40,
+     "min_ms": 1022,
+     "p50_ms": 2415,
+     "p95_ms": 6107,
+     "max_ms": 8791
+    }
+   }
+  ]
+ },
+ "pilot/plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 20,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 20,
+    "slots": 40,
+    "accepted_slots": 35,
+    "fallback_slots": 5,
+    "turns_with_fallback": 3,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 5,
+    "rejects_by_code": {
+     "choice_parroting": 2,
+     "length_cap_exceeded": 1,
+     "personal_pronoun": 1,
+     "unauthorised_resource_noun": 1
+    },
+    "lines_checked": 40,
+    "rejects_all_rules": {
+     "choice_parroting": 2,
+     "length_cap_exceeded": 1,
+     "personal_pronoun": 1,
+     "unauthorised_resource_noun": 2
+    },
+    "lines_breaking_more_than_one_rule": 1,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 35,
+    "distinct_openings": 26,
+    "unique_opening_share": 0.5428571428571428,
+    "top_openings": [
+     {
+      "opening": "the party rested",
+      "count": 4
+     },
+     {
+      "opening": "a traveller has",
+      "count": 2
+     },
+     {
+      "opening": "small hands reach",
+      "count": 2
+     },
+     {
+      "opening": "the fire at",
+      "count": 2
+     },
+     {
+      "opening": "the party came",
+      "count": 2
+     }
+    ],
+    "says_what_happened_pass": 35,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.875,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.2571428571428571,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 17
+     },
+     {
+      "word": "oxen",
+      "lines": 9
+     },
+     {
+      "word": "swamp",
+      "lines": 9
+     },
+     {
+      "word": "dark",
+      "lines": 7
+     },
+     {
+      "word": "fire",
+      "lines": 7
+     },
+     {
+      "word": "night",
+      "lines": 7
+     },
+     {
+      "word": "cold",
+      "lines": 5
+     },
+     {
+      "word": "morning",
+      "lines": 5
+     }
+    ],
+    "calls_made": 66,
+    "latency_turn": {
+     "calls": 20,
+     "min_ms": 1721,
+     "p50_ms": 3168,
+     "p95_ms": 7197,
+     "max_ms": 7765
+    },
+    "fallback_rate_slots": 0.125,
+    "fallback_rate_turns": 0.15,
+    "latency": {
+     "calls": 40,
+     "min_ms": 784,
+     "p50_ms": 1123,
+     "p95_ms": 4043,
+     "max_ms": 5109
+    }
+   }
+  ]
+ },
+ "pilot/plain-fireside-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 20,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "rich",
+    "turns": 20,
+    "slots": 40,
+    "accepted_slots": 28,
+    "fallback_slots": 12,
+    "turns_with_fallback": 7,
+    "timeouts": 0,
+    "bad_json": 4,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 8,
+    "rejects_by_code": {
+     "choice_parroting": 3,
+     "mid_sentence_capital": 1,
+     "personal_pronoun": 1,
+     "repeated_opening": 1,
+     "unauthorised_resource_noun": 2
+    },
+    "lines_checked": 36,
+    "rejects_all_rules": {
+     "choice_parroting": 3,
+     "mid_sentence_capital": 1,
+     "personal_pronoun": 1,
+     "unauthorised_resource_noun": 3
+    },
+    "lines_breaking_more_than_one_rule": 1,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 28,
+    "distinct_openings": 23,
+    "unique_opening_share": 0.7142857142857143,
+    "top_openings": [
+     {
+      "opening": "the party rested",
+      "count": 4
+     },
+     {
+      "opening": "at night in",
+      "count": 2
+     },
+     {
+      "opening": "the party travelled",
+      "count": 2
+     }
+    ],
+    "says_what_happened_pass": 28,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.7,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.9642857142857143,
+    "top_content_words": [
+     {
+      "word": "oxen",
+      "lines": 27
+     },
+     {
+      "word": "party",
+      "lines": 17
+     },
+     {
+      "word": "fire",
+      "lines": 13
+     },
+     {
+      "word": "stand",
+      "lines": 13
+     },
+     {
+      "word": "travellers",
+      "lines": 13
+     },
+     {
+      "word": "close",
+      "lines": 12
+     },
+     {
+      "word": "cold",
+      "lines": 12
+     },
+     {
+      "word": "heads",
+      "lines": 12
+     }
+    ],
+    "calls_made": 79,
+    "latency_turn": {
+     "calls": 20,
+     "min_ms": 3013,
+     "p50_ms": 7618,
+     "p95_ms": 12386,
+     "max_ms": 13834
+    },
+    "fallback_rate_slots": 0.3,
+    "fallback_rate_turns": 0.35,
+    "latency": {
+     "calls": 40,
+     "min_ms": 1332,
+     "p50_ms": 3980,
+     "p95_ms": 6944,
+     "max_ms": 7176
+    }
+   }
+  ]
+ },
+ "pilot/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 20,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 20,
+    "slots": 40,
+    "accepted_slots": 35,
+    "fallback_slots": 5,
+    "turns_with_fallback": 5,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 5,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 1,
+     "death_not_conveyed": 1,
+     "unauthorised_resource_noun": 2
+    },
+    "lines_checked": 40,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 2,
+     "death_not_conveyed": 1,
+     "unauthorised_resource_noun": 2
+    },
+    "lines_breaking_more_than_one_rule": 1,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 35,
+    "distinct_openings": 26,
+    "unique_opening_share": 0.5714285714285714,
+    "top_openings": [
+     {
+      "opening": "the party rested",
+      "count": 4
+     },
+     {
+      "opening": "at the long",
+      "count": 3
+     },
+     {
+      "opening": "at evening in",
+      "count": 2
+     },
+     {
+      "opening": "at the switchback",
+      "count": 2
+     },
+     {
+      "opening": "the party reached",
+      "count": 2
+     }
+    ],
+    "says_what_happened_pass": 35,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.875,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.8285714285714286,
+    "top_content_words": [
+     {
+      "word": "oxen",
+      "lines": 29
+     },
+     {
+      "word": "party",
+      "lines": 16
+     },
+     {
+      "word": "night",
+      "lines": 13
+     },
+     {
+      "word": "travellers",
+      "lines": 13
+     },
+     {
+      "word": "swamp",
+      "lines": 10
+     },
+     {
+      "word": "close",
+      "lines": 9
+     },
+     {
+      "word": "cold",
+      "lines": 9
+     },
+     {
+      "word": "fire",
+      "lines": 9
+     }
+    ],
+    "calls_made": 63,
+    "latency_turn": {
+     "calls": 20,
+     "min_ms": 2536,
+     "p50_ms": 3946,
+     "p95_ms": 8874,
+     "max_ms": 10357
+    },
+    "fallback_rate_slots": 0.125,
+    "fallback_rate_turns": 0.25,
+    "latency": {
+     "calls": 40,
+     "min_ms": 1166,
+     "p50_ms": 2027,
+     "p95_ms": 5041,
+     "max_ms": 6291
+    }
+   }
+  ]
+ },
+ "pilot/plain-lantern-bearer-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 20,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "brief",
+    "turns": 20,
+    "slots": 40,
+    "accepted_slots": 37,
+    "fallback_slots": 3,
+    "turns_with_fallback": 3,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 3,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 1,
+     "personal_pronoun": 1
+    },
+    "lines_checked": 40,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 2,
+     "event_text_copied": 1,
+     "personal_pronoun": 1
+    },
+    "lines_breaking_more_than_one_rule": 1,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 37,
+    "distinct_openings": 29,
+    "unique_opening_share": 0.6756756756756757,
+    "top_openings": [
+     {
+      "opening": "the party rested",
+      "count": 4
+     },
+     {
+      "opening": "a traveller died",
+      "count": 3
+     },
+     {
+      "opening": "the party travelled",
+      "count": 3
+     },
+     {
+      "opening": "the party arrived",
+      "count": 2
+     }
+    ],
+    "says_what_happened_pass": 37,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.925,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 16
+     },
+     {
+      "word": "swamp",
+      "lines": 10
+     },
+     {
+      "word": "night",
+      "lines": 9
+     },
+     {
+      "word": "light",
+      "lines": 5
+     },
+     {
+      "word": "sits",
+      "lines": 5
+     },
+     {
+      "word": "wind",
+      "lines": 5
+     },
+     {
+      "word": "camp",
+      "lines": 4
+     },
+     {
+      "word": "cold",
+      "lines": 4
+     }
+    ],
+    "calls_made": 55,
+    "latency_turn": {
+     "calls": 20,
+     "min_ms": 1515,
+     "p50_ms": 2151,
+     "p95_ms": 6030,
+     "max_ms": 6878
+    },
+    "fallback_rate_slots": 0.075,
+    "fallback_rate_turns": 0.15,
+    "latency": {
+     "calls": 40,
+     "min_ms": 672,
+     "p50_ms": 904,
+     "p95_ms": 3322,
+     "max_ms": 3556
+    }
+   }
+  ]
+ },
+ "pilot/plain-lantern-bearer-rich": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 20,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "rich",
+    "turns": 20,
+    "slots": 40,
+    "accepted_slots": 26,
+    "fallback_slots": 14,
+    "turns_with_fallback": 8,
+    "timeouts": 0,
+    "bad_json": 3,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 11,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 1,
+     "personal_pronoun": 2,
+     "repeated_opening": 2,
+     "unauthorised_resource_noun": 4
+    },
+    "lines_checked": 37,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 3,
+     "choice_parroting": 3,
+     "personal_pronoun": 2,
+     "unauthorised_resource_noun": 4
+    },
+    "lines_breaking_more_than_one_rule": 3,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 26,
+    "distinct_openings": 22,
+    "unique_opening_share": 0.7307692307692307,
+    "top_openings": [
+     {
+      "opening": "the party rested",
+      "count": 3
+     },
+     {
+      "opening": "at the long",
+      "count": 2
+     },
+     {
+      "opening": "the party travelled",
+      "count": 2
+     }
+    ],
+    "says_what_happened_pass": 26,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.65,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "water",
+      "lines": 18
+     },
+     {
+      "word": "party",
+      "lines": 12
+     },
+     {
+      "word": "night",
+      "lines": 11
+     },
+     {
+      "word": "light",
+      "lines": 10
+     },
+     {
+      "word": "swamp",
+      "lines": 10
+     },
+     {
+      "word": "across",
+      "lines": 9
+     },
+     {
+      "word": "flat",
+      "lines": 9
+     },
+     {
+      "word": "long",
+      "lines": 9
+     }
+    ],
+    "calls_made": 81,
+    "latency_turn": {
+     "calls": 20,
+     "min_ms": 2779,
+     "p50_ms": 7569,
+     "p95_ms": 11070,
+     "max_ms": 13466
+    },
+    "fallback_rate_slots": 0.35,
+    "fallback_rate_turns": 0.4,
+    "latency": {
+     "calls": 40,
+     "min_ms": 1295,
+     "p50_ms": 3698,
+     "p95_ms": 6422,
+     "max_ms": 8415
+    }
+   }
+  ]
+ },
+ "pilot/plain-lantern-bearer-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 20,
+  "model": "claude-haiku-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Lantern-Bearer",
+    "length": "standard",
+    "turns": 20,
+    "slots": 40,
+    "accepted_slots": 31,
+    "fallback_slots": 9,
+    "turns_with_fallback": 6,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 9,
+    "rejects_by_code": {
+     "choice_parroting": 1,
+     "event_text_copied": 2,
+     "personal_pronoun": 1,
+     "repeated_opening": 2,
+     "unauthorised_resource_noun": 3
+    },
+    "lines_checked": 40,
+    "rejects_all_rules": {
+     "choice_parroting": 1,
+     "event_text_copied": 2,
+     "personal_pronoun": 1,
+     "unauthorised_resource_noun": 3
+    },
+    "lines_breaking_more_than_one_rule": 0,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 31,
+    "distinct_openings": 24,
+    "unique_opening_share": 0.6129032258064516,
+    "top_openings": [
+     {
+      "opening": "the party rested",
+      "count": 4
+     },
+     {
+      "opening": "a traveller has",
+      "count": 2
+     },
+     {
+      "opening": "at the scar",
+      "count": 2
+     },
+     {
+      "opening": "the party arrived",
+      "count": 2
+     },
+     {
+      "opening": "the party travelled",
+      "count": 2
+     }
+    ],
+    "says_what_happened_pass": 31,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.775,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [
+     {
+      "word": "night",
+      "lines": 15
+     },
+     {
+      "word": "party",
+      "lines": 14
+     },
+     {
+      "word": "water",
+      "lines": 13
+     },
+     {
+      "word": "cold",
+      "lines": 12
+     },
+     {
+      "word": "swamp",
+      "lines": 12
+     },
+     {
+      "word": "camp",
+      "lines": 9
+     },
+     {
+      "word": "long",
+      "lines": 9
+     },
+     {
+      "word": "wind",
+      "lines": 9
+     }
+    ],
+    "calls_made": 62,
+    "latency_turn": {
+     "calls": 20,
+     "min_ms": 2482,
+     "p50_ms": 3710,
+     "p95_ms": 10041,
+     "max_ms": 10450
+    },
+    "fallback_rate_slots": 0.225,
+    "fallback_rate_turns": 0.3,
+    "latency": {
+     "calls": 40,
+     "min_ms": 1084,
+     "p50_ms": 1829,
+     "p95_ms": 4764,
+     "max_ms": 5686
+    }
+   }
+  ]
+ },
+ "resume-probe/plain-fireside-standard": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 1,
+  "model": "claude-opus-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "standard",
+    "turns": 1,
+    "slots": 2,
+    "accepted_slots": 0,
+    "fallback_slots": 2,
+    "turns_with_fallback": 1,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 2,
+    "not_called": 0,
+    "rule_rejects": 0,
+    "rejects_by_code": {},
+    "lines_checked": 0,
+    "rejects_all_rules": {},
+    "lines_breaking_more_than_one_rule": 0,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 0,
+    "distinct_openings": 0,
+    "unique_opening_share": 0.0,
+    "top_openings": [],
+    "says_what_happened_pass": 0,
+    "says_what_happened_rate": 0.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.0,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0,
+    "top_content_words": [],
+    "calls_made": 6,
+    "latency_turn": {
+     "calls": 1,
+     "min_ms": 2884,
+     "p50_ms": 2884,
+     "p95_ms": 2884,
+     "max_ms": 2884
+    },
+    "fallback_rate_slots": 1.0,
+    "fallback_rate_turns": 1.0,
+    "latency": {
+     "calls": 2,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 2884,
+     "max_ms": 2884
+    }
+   }
+  ]
+ },
+ "sonnet-joined/plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-sonnet-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 234,
+    "fallback_slots": 486,
+    "turns_with_fallback": 256,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 436,
+    "not_called": 0,
+    "rule_rejects": 50,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 13,
+     "length_cap_exceeded": 10,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 6,
+     "repeated_opening": 9,
+     "unauthorised_resource_noun": 10
+    },
+    "lines_checked": 284,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 18,
+     "length_cap_exceeded": 10,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 6,
+     "unauthorised_resource_noun": 15
+    },
+    "lines_breaking_more_than_one_rule": 11,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 234,
+    "distinct_openings": 101,
+    "unique_opening_share": 0.2692307692307692,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 29
+     },
+     {
+      "opening": "the party arrives",
+      "count": 12
+     },
+     {
+      "opening": "the party rests",
+      "count": 12
+     },
+     {
+      "opening": "a traveller died",
+      "count": 8
+     },
+     {
+      "opening": "a traveller dies",
+      "count": 7
+     }
+    ],
+    "says_what_happened_pass": 234,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.325,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.05982905982905983,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 119
+     },
+     {
+      "word": "travellers",
+      "lines": 51
+     },
+     {
+      "word": "evening",
+      "lines": 34
+     },
+     {
+      "word": "dark",
+      "lines": 33
+     },
+     {
+      "word": "morning",
+      "lines": 32
+     },
+     {
+      "word": "wheels",
+      "lines": 32
+     },
+     {
+      "word": "hands",
+      "lines": 31
+     },
+     {
+      "word": "wagon",
+      "lines": 30
+     }
+    ],
+    "calls_made": 1762,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 11861,
+     "max_ms": 24610
+    },
+    "fallback_rate_slots": 0.675,
+    "fallback_rate_turns": 0.7111111111111111,
+    "latency": {
+     "calls": 720,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 6839,
+     "max_ms": 16578
+    }
+   }
+  ]
+ },
+ "sonnet-probe/plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 10,
+  "model": "claude-sonnet-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 10,
+    "slots": 20,
+    "accepted_slots": 16,
+    "fallback_slots": 4,
+    "turns_with_fallback": 3,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 4,
+    "rejects_by_code": {
+     "length_cap_exceeded": 1,
+     "repeated_opening": 1,
+     "unauthorised_resource_noun": 2
+    },
+    "lines_checked": 20,
+    "rejects_all_rules": {
+     "length_cap_exceeded": 1,
+     "unauthorised_resource_noun": 2
+    },
+    "lines_breaking_more_than_one_rule": 0,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 16,
+    "distinct_openings": 14,
+    "unique_opening_share": 0.75,
+    "top_openings": [
+     {
+      "opening": "a traveller died",
+      "count": 2
+     },
+     {
+      "opening": "at broken bridge",
+      "count": 2
+     }
+    ],
+    "says_what_happened_pass": 16,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.8,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.0625,
+    "top_content_words": [
+     {
+      "word": "dark",
+      "lines": 7
+     },
+     {
+      "word": "party",
+      "lines": 6
+     },
+     {
+      "word": "broken",
+      "lines": 5
+     },
+     {
+      "word": "descent",
+      "lines": 5
+     },
+     {
+      "word": "long",
+      "lines": 5
+     },
+     {
+      "word": "swamp",
+      "lines": 5
+     },
+     {
+      "word": "bridge",
+      "lines": 4
+     },
+     {
+      "word": "fire",
+      "lines": 4
+     }
+    ],
+    "calls_made": 36,
+    "latency_turn": {
+     "calls": 10,
+     "min_ms": 2900,
+     "p50_ms": 5249,
+     "p95_ms": 16596,
+     "max_ms": 16596
+    },
+    "fallback_rate_slots": 0.2,
+    "fallback_rate_turns": 0.3,
+    "latency": {
+     "calls": 20,
+     "min_ms": 1118,
+     "p50_ms": 2192,
+     "p95_ms": 6144,
+     "max_ms": 12719
+    }
+   }
+  ]
+ },
+ "sonnet-rest/plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 218,
+  "model": "claude-sonnet-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 218,
+    "slots": 436,
+    "accepted_slots": 353,
+    "fallback_slots": 83,
+    "turns_with_fallback": 67,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 0,
+    "not_called": 0,
+    "rule_rejects": 83,
+    "rejects_by_code": {
+     "choice_parroting": 37,
+     "length_cap_exceeded": 23,
+     "mid_sentence_capital": 3,
+     "numbers_digits_or_units": 4,
+     "repeated_opening": 7,
+     "unauthorised_resource_noun": 9
+    },
+    "lines_checked": 436,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 46,
+     "event_text_copied": 1,
+     "length_cap_exceeded": 23,
+     "mid_sentence_capital": 3,
+     "numbers_digits_or_units": 6,
+     "unauthorised_resource_noun": 14
+    },
+    "lines_breaking_more_than_one_rule": 17,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 353,
+    "distinct_openings": 117,
+    "unique_opening_share": 0.20113314447592068,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 69
+     },
+     {
+      "opening": "the party arrives",
+      "count": 25
+     },
+     {
+      "opening": "the party rests",
+      "count": 15
+     },
+     {
+      "opening": "at stonecross the",
+      "count": 11
+     },
+     {
+      "opening": "at whitmarsh the",
+      "count": 10
+     }
+    ],
+    "says_what_happened_pass": 353,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.8096330275229358,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.059490084985835696,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 180
+     },
+     {
+      "word": "travellers",
+      "lines": 103
+     },
+     {
+      "word": "travelled",
+      "lines": 69
+     },
+     {
+      "word": "dark",
+      "lines": 63
+     },
+     {
+      "word": "evening",
+      "lines": 59
+     },
+     {
+      "word": "grass",
+      "lines": 58
+     },
+     {
+      "word": "wheels",
+      "lines": 57
+     },
+     {
+      "word": "wagon",
+      "lines": 47
+     }
+    ],
+    "calls_made": 701,
+    "latency_turn": {
+     "calls": 218,
+     "min_ms": 2457,
+     "p50_ms": 5228,
+     "p95_ms": 13450,
+     "max_ms": 16704
+    },
+    "fallback_rate_slots": 0.19036697247706422,
+    "fallback_rate_turns": 0.3073394495412844,
+    "latency": {
+     "calls": 436,
+     "min_ms": 1064,
+     "p50_ms": 1912,
+     "p95_ms": 7995,
+     "max_ms": 13194
+    }
+   }
+  ]
+ },
+ "sonnet/plain-fireside-brief": {
+  "schema": "etv-fallback-measure-1",
+  "turn_set_sha256": "59a3e4f8870474d01b775a52071fae9a12629cec0f225606271e9d77f5f8ca46",
+  "turns_in_set": 360,
+  "turns_run": 360,
+  "model": "claude-sonnet-5-5",
+  "endpoint": "http://127.0.0.1:11434",
+  "per_call_timeout_ms": 30000,
+  "warmup_timeout_ms": 30000,
+  "prompt_rules": "shipped",
+  "format_schema": "plain",
+  "experiment": "rulings-prompt+brief-by-stop+model-card-sampling+candidates-3+trim-to-cap+says-what-happened+outcome-lead+no-repeat-opening+no-event-copy",
+  "model_digest": "anthropic-api:2026-10-21",
+  "model_quantization": "hosted",
+  "cells": [
+   {
+    "profile": "Fireside",
+    "length": "brief",
+    "turns": 360,
+    "slots": 720,
+    "accepted_slots": 234,
+    "fallback_slots": 486,
+    "turns_with_fallback": 256,
+    "timeouts": 0,
+    "bad_json": 0,
+    "transport_or_http_errors": 436,
+    "not_called": 0,
+    "rule_rejects": 50,
+    "rejects_by_code": {
+     "band_banned_vocabulary": 1,
+     "choice_parroting": 13,
+     "length_cap_exceeded": 10,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 6,
+     "repeated_opening": 9,
+     "unauthorised_resource_noun": 10
+    },
+    "lines_checked": 284,
+    "rejects_all_rules": {
+     "band_banned_vocabulary": 2,
+     "choice_parroting": 18,
+     "length_cap_exceeded": 10,
+     "mid_sentence_capital": 1,
+     "numbers_digits_or_units": 6,
+     "unauthorised_resource_noun": 15
+    },
+    "lines_breaking_more_than_one_rule": 11,
+    "unit_rule_coin_rejects": 0,
+    "accepted_lines": 234,
+    "distinct_openings": 101,
+    "unique_opening_share": 0.2692307692307692,
+    "top_openings": [
+     {
+      "opening": "the party travelled",
+      "count": 29
+     },
+     {
+      "opening": "the party arrives",
+      "count": 12
+     },
+     {
+      "opening": "the party rests",
+      "count": 12
+     },
+     {
+      "opening": "a traveller died",
+      "count": 8
+     },
+     {
+      "opening": "a traveller dies",
+      "count": 7
+     }
+    ],
+    "says_what_happened_pass": 234,
+    "says_what_happened_rate": 1.0,
+    "says_what_happened_fail_by_code": {},
+    "good_line_rate": 0.325,
+    "accepted_copying_event_text": 0,
+    "accepted_repeating_opening": 0,
+    "oxen_share": 0.05982905982905983,
+    "top_content_words": [
+     {
+      "word": "party",
+      "lines": 119
+     },
+     {
+      "word": "travellers",
+      "lines": 51
+     },
+     {
+      "word": "evening",
+      "lines": 34
+     },
+     {
+      "word": "dark",
+      "lines": 33
+     },
+     {
+      "word": "morning",
+      "lines": 32
+     },
+     {
+      "word": "wheels",
+      "lines": 32
+     },
+     {
+      "word": "hands",
+      "lines": 31
+     },
+     {
+      "word": "wagon",
+      "lines": 30
+     }
+    ],
+    "calls_made": 1762,
+    "latency_turn": {
+     "calls": 360,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 11861,
+     "max_ms": 24610
+    },
+    "fallback_rate_slots": 0.675,
+    "fallback_rate_turns": 0.7111111111111111,
+    "latency": {
+     "calls": 720,
+     "min_ms": 0,
+     "p50_ms": 0,
+     "p95_ms": 6839,
+     "max_ms": 16578
+    }
+   }
+  ]
+ }
+}

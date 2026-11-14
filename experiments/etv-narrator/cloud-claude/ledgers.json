@@ -1,0 +1,227 @@
+{
+ "note": "ledgers: every ledger file as written (one per process; spent_nano is nano-dollars). totals_by_stage and overall_total are recomputed here by summing them (grouping by file name); the run record's own table is the as-written figure.",
+ "overall_total": {
+  "requests": 21590,
+  "spent_nano": 66311880755,
+  "spent_usd_recomputed": 66.3119
+ },
+ "totals_by_stage": {
+  "fable": {
+   "requests": 3218,
+   "spent_nano": 38883808000,
+   "spent_usd_recomputed": 38.8838
+  },
+  "fable-probe": {
+   "requests": 29,
+   "spent_nano": 390504000,
+   "spent_usd_recomputed": 0.3905
+  },
+  "haiku": {
+   "requests": 11037,
+   "spent_nano": 1249078395,
+   "spent_usd_recomputed": 1.2491
+  },
+  "haiku-supplement-300": {
+   "requests": 1907,
+   "spent_nano": 258197280,
+   "spent_usd_recomputed": 0.2582
+  },
+  "opus (halted part)": {
+   "requests": 1098,
+   "spent_nano": 7489808000,
+   "spent_usd_recomputed": 7.4898
+  },
+  "opus-probe": {
+   "requests": 28,
+   "spent_nano": 210152000,
+   "spent_usd_recomputed": 0.2102
+  },
+  "opus-rest": {
+   "requests": 2345,
+   "spent_nano": 15699480000,
+   "spent_usd_recomputed": 15.6995
+  },
+  "pilot (haiku, 9 cells x 20 turns)": {
+   "requests": 736,
+   "spent_nano": 71940380,
+   "spent_usd_recomputed": 0.0719
+  },
+  "resume-probe (opus)": {
+   "requests": 1,
+   "spent_nano": 6064000,
+   "spent_usd_recomputed": 0.0061
+  },
+  "sonnet (halted part)": {
+   "requests": 454,
+   "spent_nano": 786603900,
+   "spent_usd_recomputed": 0.7866
+  },
+  "sonnet-probe": {
+   "requests": 36,
+   "spent_nano": 61437900,
+   "spent_usd_recomputed": 0.0614
+  },
+  "sonnet-rest": {
+   "requests": 701,
+   "spent_nano": 1204806900,
+   "spent_usd_recomputed": 1.2048
+  }
+ },
+ "ledgers": {
+  "ledger": {
+   "requests": 736,
+   "spent_nano": 71940380,
+   "spent_usd": "0.071940"
+  },
+  "ledger-fable-chronicler-standard": {
+   "requests": 1053,
+   "spent_nano": 12088904000,
+   "spent_usd": "12.088904"
+  },
+  "ledger-fable-fireside-standard": {
+   "requests": 1056,
+   "spent_nano": 13529816000,
+   "spent_usd": "13.529816"
+  },
+  "ledger-fable-lantern-bearer-standard": {
+   "requests": 1109,
+   "spent_nano": 13265088000,
+   "spent_usd": "13.265088"
+  },
+  "ledger-fable-probe-fireside-standard": {
+   "requests": 29,
+   "spent_nano": 390504000,
+   "spent_usd": "0.390504"
+  },
+  "ledger-haiku-chronicler-brief": {
+   "requests": 1031,
+   "spent_nano": 72731405,
+   "spent_usd": "0.072731"
+  },
+  "ledger-haiku-chronicler-rich": {
+   "requests": 1371,
+   "spent_nano": 165160420,
+   "spent_usd": "0.165160"
+  },
+  "ledger-haiku-chronicler-standard": {
+   "requests": 1290,
+   "spent_nano": 143634600,
+   "spent_usd": "0.143634"
+  },
+  "ledger-haiku-fireside-brief": {
+   "requests": 1156,
+   "spent_nano": 96630485,
+   "spent_usd": "0.096630"
+  },
+  "ledger-haiku-fireside-rich": {
+   "requests": 1412,
+   "spent_nano": 199281240,
+   "spent_usd": "0.199281"
+  },
+  "ledger-haiku-fireside-standard": {
+   "requests": 1165,
+   "spent_nano": 155010310,
+   "spent_usd": "0.155010"
+  },
+  "ledger-haiku-lantern-bearer-brief": {
+   "requests": 1016,
+   "spent_nano": 77644365,
+   "spent_usd": "0.077644"
+  },
+  "ledger-haiku-lantern-bearer-rich": {
+   "requests": 1375,
+   "spent_nano": 187400590,
+   "spent_usd": "0.187400"
+  },
+  "ledger-haiku-lantern-bearer-standard": {
+   "requests": 1221,
+   "spent_nano": 151584980,
+   "spent_usd": "0.151584"
+  },
+  "ledger-haiku-supplement-300-chronicler-rich": {
+   "requests": 137,
+   "spent_nano": 17113985,
+   "spent_usd": "0.017113"
+  },
+  "ledger-haiku-supplement-300-chronicler-standard": {
+   "requests": 90,
+   "spent_nano": 9753560,
+   "spent_usd": "0.009753"
+  },
+  "ledger-haiku-supplement-300-fireside-rich": {
+   "requests": 638,
+   "spent_nano": 95138200,
+   "spent_usd": "0.095138"
+  },
+  "ledger-haiku-supplement-300-fireside-standard": {
+   "requests": 374,
+   "spent_nano": 48303500,
+   "spent_usd": "0.048303"
+  },
+  "ledger-haiku-supplement-300-lantern-bearer-rich": {
+   "requests": 426,
+   "spent_nano": 59403855,
+   "spent_usd": "0.059403"
+  },
+  "ledger-haiku-supplement-300-lantern-bearer-standard": {
+   "requests": 242,
+   "spent_nano": 28484180,
+   "spent_usd": "0.028484"
+  },
+  "ledger-opus-chronicler-standard": {
+   "requests": 397,
+   "spent_nano": 2523504000,
+   "spent_usd": "2.523504"
+  },
+  "ledger-opus-fireside-standard": {
+   "requests": 346,
+   "spent_nano": 2494900000,
+   "spent_usd": "2.494900"
+  },
+  "ledger-opus-lantern-bearer-standard": {
+   "requests": 355,
+   "spent_nano": 2471404000,
+   "spent_usd": "2.471404"
+  },
+  "ledger-opus-probe-fireside-standard": {
+   "requests": 28,
+   "spent_nano": 210152000,
+   "spent_usd": "0.210152"
+  },
+  "ledger-opus-rest-chronicler-standard": {
+   "requests": 810,
+   "spent_nano": 5126452000,
+   "spent_usd": "5.126452"
+  },
+  "ledger-opus-rest-fireside-standard": {
+   "requests": 778,
+   "spent_nano": 5527232000,
+   "spent_usd": "5.527232"
+  },
+  "ledger-opus-rest-lantern-bearer-standard": {
+   "requests": 757,
+   "spent_nano": 5045796000,
+   "spent_usd": "5.045796"
+  },
+  "ledger-resume-probe-fireside-standard": {
+   "requests": 1,
+   "spent_nano": 6064000,
+   "spent_usd": "0.006064"
+  },
+  "ledger-sonnet-fireside-brief": {
+   "requests": 454,
+   "spent_nano": 786603900,
+   "spent_usd": "0.786603"
+  },
+  "ledger-sonnet-probe-fireside-brief": {
+   "requests": 36,
+   "spent_nano": 61437900,
+   "spent_usd": "0.061437"
+  },
+  "ledger-sonnet-rest-fireside-brief": {
+   "requests": 701,
+   "spent_nano": 1204806900,
+   "spent_usd": "1.204806"
+  }
+ }
+}

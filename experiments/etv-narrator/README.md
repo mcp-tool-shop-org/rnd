@@ -195,11 +195,11 @@ written with CRLF on the rig differ from the rig copy in line endings only. sha2
 0a55914c80c2… (LF on both). The "R&D reading" section in each is one reader's judgement on a
 small sample (direction only, not a measured rate).
 
-- [s3-arms/READING-SAMPLE-combo-30.md](s3-arms/READING-SAMPLE-combo-30.md): 30 accepted
+- [results/s3-arms/READING-SAMPLE-combo-30.md](results/s3-arms/READING-SAMPLE-combo-30.md): 30 accepted
   lines (29 shown) from session 3's combination arm, 10 per voice. Chosen by rule, not by
   taste: for each category, the first unused turn in turn-set order whose line was accepted;
   lengths rotate. The reading finds accepted lines that contradict their turn's facts.
-- [s4-says-what-happened/READING-SAMPLE-ship-29.md](s4-says-what-happened/READING-SAMPLE-ship-29.md):
+- [results/s4-says-what-happened/READING-SAMPLE-ship-29.md](results/s4-says-what-happened/READING-SAMPLE-ship-29.md):
   30 slots (29 shown) from session 4's ship arm, 10 per voice. Chosen by rule, not by taste:
   for each category, the first unused turn in turn-set order whose outcome line was accepted;
   lengths rotate. Its reading compares against the session 3 sample.

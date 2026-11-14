@@ -11,6 +11,12 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.81] - 2026-11-13
+
+- Seed 24 fact-check flips; ETV reading samples moved into results/
+- Updated `2026-11-13-answer-key-trust-research-seed-24`: How far can an answer key be trusted? Evidence for rdlab's claims (seed 24)
+- Updated experiment `etv-narrator`
+
 ## [1.1.23.1.80] - 2026-11-13
 
 - Seed 24 harvest filed

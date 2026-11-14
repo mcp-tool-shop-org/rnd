@@ -2613,6 +2613,34 @@
       "snapshot_sha256": "88c4f4950fe468439df1c559e95142e153d077482cae5157ff3f8f0bd69ea066",
       "snapshot_file": "2026-11-13/qwen3.5-9b-card.txt",
       "archive_url": "http://web.archive.org/web/20261109131152/https://huggingface.co/Qwen/Qwen3.5-9B"
+    },
+    {
+      "id": "xrpl-js-isc",
+      "owner": "XRPLF (the XRP Ledger Foundation)",
+      "kind": "licence",
+      "covers": [
+        "Four files from XRPLF/xrpl.js at commit 0ce90e29186139036018bac23b7b3ef2596dd990, vendored (a subset) into mcp-tool-shop-org/merchant-league tests/vectors/ as serializer and keypair test vectors and the field/type table: packages/ripple-binary-codec/src/enums/definitions.json; packages/ripple-binary-codec/test/fixtures/codec-fixtures.json; packages/ripple-binary-codec/test/fixtures/data-driven-tests.json; packages/ripple-keypairs/test/fixtures/api.json (the ed25519 section)"
+      ],
+      "url": "https://raw.githubusercontent.com/XRPLF/xrpl.js/0ce90e29186139036018bac23b7b3ef2596dd990/LICENSE",
+      "page_date": "ISC License (xrpl.js commit 0ce90e29186139036018bac23b7b3ef2596dd990)",
+      "read_date": "2026-11-14",
+      "clauses": [
+        "provided that the above copyright notice and this permission notice appear in all copies"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "ISC: the copyright notice and the permission notice must appear in all copies. Carry the ISC text and the copyright lines with the vendored files, in tests/vectors/LICENSE-xrpl.js",
+        "The copyright lines to carry: the root LICENSE reads 'Copyright (c) 2012-2015 Ripple Labs Inc.', 'Copyright (c) 2012-2021 Contributors to xrpl.js', 'Copyright (c) 2019-2023 Contributors to xrpl.js' and 'Copyright (c) 2023 The XRPL developers'; ripple-binary-codec's own LICENSE reads 'Copyright (c) 2015 Ripple Labs Inc.'; ripple-keypairs' own LICENSE reads 'Copyright (c) 2012-2015 Ripple Labs Inc.'"
+      ],
+      "notes": "Read at source through the GitHub API and raw files at the pinned commit on 2026-11-14: the root LICENSE is headed 'ISC License'; both packages' package.json carry \"license\": \"ISC\"; each per-package LICENSE has the ISC permission text (ripple-binary-codec's has no ISC heading but the same text); all four covered files exist at the commit. The registry url is the raw file because snapshot.py's fetch of the github.com blob page is rate-limited (HTTP 429); the same file's blob page is https://github.com/XRPLF/xrpl.js/blob/0ce90e29186139036018bac23b7b3ef2596dd990/LICENSE.",
+      "restriction_search": "Read the root LICENSE and both per-package LICENSE files and both package.json licence fields at the commit; the only condition is the notice requirement. No restriction on use, training or evaluation found.",
+      "snapshot_sha256": "a412f4b9b0fc20062e2cf01af9d789ec8c3543402e386c5a42b098ab49d4e532",
+      "snapshot_file": "2026-11-14/xrpl-js-isc.txt"
     }
   ]
 }

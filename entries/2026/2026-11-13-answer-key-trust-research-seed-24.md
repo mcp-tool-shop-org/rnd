@@ -24,21 +24,27 @@ The practical result is a short list of wording limits for rdlab's claims and tw
 - **Solvers prove a key only inside the formal model.** Specification bugs survive formal methods (Rozier 2016). rdlab's
   own third run showed the same shape: 6 of 11 failed pairs were real value-set faults the blind key had missed.
 - **Benchmark keys are wrong more often than assumed.** About 6.5% of MMLU questions were flawed (57% in Virology) in a
-  stratified-sample estimate, not a full re-annotation (Gema et al. 2025, confirmed). At least 9.1% of GSM8K's test
-  split was flawed, and after cleaning, two models tied at 45 errors split to 2 against 17 (Vendrow et al. 2025;
-  not checked).
+  stratified-sample estimate, not a full re-annotation (Gema et al. 2025, confirmed). 120 of GSM8K's 1,319 test
+  items were flawed (110 removed and 10 relabeled), and after cleaning, two models tied at 45 errors split to 2
+  against 17 (Vendrow et al. 2025, confirmed at the authors' page and dataset card). OpenAI's SWE-bench Verified
+  effort had 93 developers review 1,699 samples and filtered out 68.3%. On HumanEval, about 80 times more tests made
+  scores fall and rankings change (EvalPlus). On clean MMLU Virology items GPT-4o fell from first to third and
+  Palmyra X v3 rose from fourth to first.
 - **A jury of models shares blind spots.** Nine judges from seven families gave about 2.18 effective votes (Kohli 2026,
-  confirmed). By the report's own arithmetic from an NLI correlation, a two-family gate is about 1.4 independent
+  confirmed; its ceiling is about 2.56). GPT-4 judges agree with humans about 85% of the time, ties aside (Zheng et
+  al. 2023), and vanilla GPT-4o scores 50.86% on JudgeBench. By the report's own arithmetic from an NLI correlation, a two-family gate is about 1.4 independent
   votes. That is the report's inference, not a measurement.
 - **Rendering drift is real but unmeasured for rdlab.** Open models made a semantic error in 76-86% of zero-shot
-  data-to-text outputs (Kasner and Dusek 2024), a different task with longer outputs. It is not rdlab's rate.
+  data-to-text outputs (Kasner and Dusek 2024, confirmed), a different task with longer outputs. It is not rdlab's rate.
 - **Human final checks suffer automation bias:** a risk ratio of about 1.26 when the tool is 80-90% accurate
   (Goddard, Roudsari and Wyatt 2012).
 - **Pre-registration is associated with fewer positive results.** Large NHLBI trials went from 17 of 30 positive to 2
   of 25 after registration (Kaplan and Irvin 2015, confirmed, with the authors cautious about causation);
-  psychology Registered Reports were 96% against 44% positive (Scheel et al. 2021, not checked). These compare eras
+  psychology Registered Reports were 96% against 44% positive (Scheel et al. 2021, confirmed). These compare eras
   or tracks, so say "associated with".
-- **Older fields faced this:** nursing exams with 47.3% flawed items that helped weak students (Tarrant and Ware 2008).
+- **Older fields faced this:** 47.3% of nursing exam items were flawed; without them the pass rate fell from 94.3%
+  to 90.6%, so flawed items carried borderline students over the pass line (the authors add that they penalised
+  high achievers) (Tarrant and Ware 2008, confirmed).
 - **Practitioners favour real production traces** over synthetic suites, and an open deterministic generator invites
   gaming (Goodhart).
 
@@ -81,11 +87,16 @@ newsletter.
 - [verified] Kaplan and Irvin 2015 (PLOS ONE 10(8) e0132382) report 17 of 30 positive large NHLBI trials before registration against 2 of 25 after, chi-square 12.2, p = 0.0005, and the authors are cautious about causation (via: web check, 2026-11-13)
 - [verified] Gema et al. 2025, "Are We Done with MMLU?" (NAACL 2025), estimate 6.49% flawed MMLU questions and 57% in Virology; the final MMLU-Redux is 5,700 questions (via: web check, 2026-11-13)
 - [unverified] A two-family judge gate gives about 1.4 independent votes (the report's own arithmetic from an NLI correlation; inference)
-- [unverified] At least 9.1% of GSM8K's test split is flawed and two models tied at 45 errors split to 2 against 17 after cleaning (Vendrow et al. 2025, via the report; not checked)
-- [unverified] Open LLMs make a semantic error in 76-86% of zero-shot data-to-text outputs (Kasner and Dusek 2024, via the report; not checked)
+- [verified] 120 of GSM8K's 1,319 test items are ambiguous, inconsistent or miskeyed (110 removed plus 10 relabeled), and two models tied at 45 errors split to 2 against 17 after cleaning (via: Publisher fact-check, 2026-11-14, the authors' GSM8K-Platinum page and the Hugging Face dataset card; the arXiv paper was not read)
+- [verified] Open LLMs' zero-shot data-to-text outputs contain an error in 76-86% of cases by human annotation (Kasner and Dusek 2024) (via: Publisher fact-check, 2026-11-14, arXiv 2401.10186 section 5.1)
 - [unverified] Automation bias carries a risk ratio of about 1.26 when the tool is 80-90% accurate (Goddard et al. 2012, via the report; not checked)
-- [unverified] Psychology Registered Reports were 96% positive against 44% in the standard literature (Scheel et al. 2021, via the report; not checked)
-- [unverified] 47.3% of nursing exam items were flawed, and the flaws helped weak students (Tarrant and Ware 2008, via the report; not checked)
+- [verified] 96% of standard psychology papers report positive results against 44% of Registered Reports (Scheel et al. 2021) (via: Publisher fact-check, 2026-11-14, the Europe PMC and PsyArXiv abstract)
+- [verified] 47.3% of nursing exam items were flawed; the pass rate was 94.3% with them and 90.6% without, and scorers at 80% or more rose from 14.5% to 20.9% (Tarrant and Ware 2008) (via: Publisher fact-check, 2026-11-14, the Europe PMC abstract)
+- [verified] OpenAI's SWE-bench Verified had 93 developers review 1,699 samples and filtered out 68.3% (via: Publisher fact-check, 2026-11-14, OpenAI's announcement page)
+- [verified] EvalPlus (arXiv 2305.01210) adds about 80 times more tests to HumanEval and scores fall and rankings change (via: Publisher fact-check, 2026-11-14, the paper)
+- [verified] GPT-4 judges agree with humans about 85% of the time, ties aside (Zheng et al. 2023, section 4.2) (via: Publisher fact-check, 2026-11-14, the paper)
+- [verified] Vanilla GPT-4o scores 50.86% on JudgeBench (via: Publisher fact-check, 2026-11-14, arXiv 2410.12784)
+- [verified] On clean MMLU Virology items GPT-4o moves from first to third and Palmyra X v3 from fourth to first (Gema et al. 2025, Table 1) (via: Publisher fact-check, 2026-11-14, arXiv 2406.04127v2)
 - [unverified] Specification bugs survive formal verification (Rozier 2016, via the report; not checked)
 - [unverified] rdlab's third run found 6 of 11 failed pairs were real value-set faults the blind key missed (rdlab's own record as supplied with the seed; not re-checked here)
 
@@ -101,6 +112,9 @@ newsletter.
 - [primary] https://www.psychologicalscience.org/journals/ampps/25152459211007467/ — Scheel, Schijen and Lakens 2021, An Excess of Positive Results
 - [primary] https://pubmed.ncbi.nlm.nih.gov/18230093/ — Tarrant and Ware 2008, item-writing flaws in nursing multiple-choice questions
 - [primary] https://aclanthology.org/2024.acl-long.555/ — Balepur et al. 2024, Artifacts or Abduction
+- [primary] https://openai.com/index/introducing-swe-bench-verified/ — OpenAI, SWE-bench Verified announcement
+- [primary] https://arxiv.org/abs/2305.01210 — EvalPlus (more tests for HumanEval)
+- [primary] https://arxiv.org/abs/2410.12784 — JudgeBench
 - [primary] https://arxiv.org/abs/2410.13341 — Dorner, Nastl and Hardt 2025, Limits to scalable evaluation at the frontier
 - [aggregator] https://www.researchgate.net/publication/309744189_Specification_The_Biggest_Bottleneck_in_Formal_Methods_and_Autonomy — Rozier 2016 (a repository copy)
 - [aggregator] https://www.researchgate.net/publication/51230614_Automation_bias_a_systematic_review_of_frequency_effect_mediators_and_mitigators — Goddard, Roudsari and Wyatt 2012 (a repository copy)

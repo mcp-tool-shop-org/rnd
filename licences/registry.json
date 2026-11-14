@@ -2920,6 +2920,35 @@
       "notes": "Read by R&D on 2026-11-14 for roll 3.0 (Rust core, Director-approved design draft 1, spec sha256 8c8a09a6). The published .crate was downloaded, its sha256 matched crates.io's checksum, and its LICENSE-MIT is byte-identical to the file at the pinned URL.",
       "snapshot_sha256": "a446c7b8ff1cb4000cbfd517d69244e816cfea75b01344105d74d64906a955b2",
       "snapshot_file": "2026-11-14/proptest-licence.txt"
+    },
+    {
+      "id": "rippled-isc",
+      "owner": "the XRP Ledger developers (rippled, XRPLF/rippled)",
+      "kind": "licence",
+      "covers": [
+        "rippled 3.4.1 (tag 3.4.1, commit 00e640751460c137636fdb6dae6b4280de355d81): the crypto-condition decoder (src/libxrpl/conditions/Condition.cpp, include/xrpl/conditions/detail/utils.h) ported to Rust in merchant-league's vendored xrpl-rust (`is_preimage_condition`, merchant-league PR #8); also the reference R&D and reviewers read for EscrowCreate rules"
+      ],
+      "url": "https://raw.githubusercontent.com/XRPLF/rippled/3.4.1/LICENSE.md",
+      "page_date": "ISC License; Copyright (c) 2011 Arthur Britto, David Schwartz, Jed McCaleb, Vinnie Falco, Bob Way, Eric Lombrozo, Nikolaos D. Bougalis, Howard Hinnant; Copyright (c) 2012-present the XRP Ledger developers (tag 3.4.1)",
+      "read_date": "2026-11-14",
+      "clauses": [
+        "Copyright (c) 2012-present, the XRP Ledger developers.",
+        "provided that the above\ncopyright notice and this permission notice appear in all copies."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "ISC: a port or copy carries both copyright lines and the permission notice (in the ported module's header or a LICENSE-rippled file beside it, and in a shipped binary's third-party notices)",
+        "The licence is the repository-level LICENSE.md at the tag; the ported source files carry no per-file licence header (checked: Condition.cpp at 3.4.1 starts with #include lines)",
+        "A port of the logic is still a copy for this purpose when it follows the source closely (merchant-league #8 says it ports the decoder 'faithfully'), so the notice applies"
+      ],
+      "notes": "Read by R&D on 2026-11-14 at tag 3.4.1 (tag object 336191572a5bf3e119f6bcdfbf9d60b25d30363d), for merchant-league PR #8's condition decoder port; the Publisher asked for this entry and for the notice in the port.",
+      "snapshot_sha256": "081452f91cf186b33135f9867344ddf370035bc0219e14e5bc0a8fbb1fd3ddbe",
+      "snapshot_file": "2026-11-14/rippled-isc.txt"
     }
   ]
 }

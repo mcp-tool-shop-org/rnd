@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.85] - 2026-11-14
+
+- licences: rippled-isc (ISC, for merchant-league's port of rippled's condition decoder)
+
 ## [1.1.23.1.84] - 2026-11-14
 
 - licences: 10 crates for roll 3.0's Rust core

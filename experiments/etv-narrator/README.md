@@ -147,8 +147,12 @@ sessions 1 to 4) and `KEPT-ON-RIG.tsv`.
 
 Four files hold lines the narrator wrote, shown with the facts the model was given, so a
 reader can judge whether the lines read well, which the rates cannot say. Each is filed
-byte for byte as written on 2026-11-13. The "R&D reading" section in each is one reader's
-judgement on a small sample (direction only, not a measured rate).
+as written on 2026-11-13; the repository stores text with LF line endings, so three files
+written with CRLF on the rig differ from the rig copy in line endings only. sha256 on the rig
+(CRLF) and here (LF): combo-30 f620fe602e00… / 05cc3388c94d…; ship-29 52b364d9bd79… /
+8191c5e80bc5…; side-by-side-standard 818d6d9c7308… / 79672a873bbd…; side-by-side-standard-360
+0a55914c80c2… (LF on both). The "R&D reading" section in each is one reader's judgement on a
+small sample (direction only, not a measured rate).
 
 - [s3-arms/READING-SAMPLE-combo-30.md](s3-arms/READING-SAMPLE-combo-30.md): 30 accepted
   lines (29 shown) from session 3's combination arm, 10 per voice. Chosen by rule, not by

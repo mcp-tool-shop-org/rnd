@@ -2949,6 +2949,66 @@
       "notes": "Read by R&D on 2026-11-14 at tag 3.4.1 (tag object 336191572a5bf3e119f6bcdfbf9d60b25d30363d), for merchant-league PR #8's condition decoder port; the Publisher asked for this entry and for the notice in the port.",
       "snapshot_sha256": "081452f91cf186b33135f9867344ddf370035bc0219e14e5bc0a8fbb1fd3ddbe",
       "snapshot_file": "2026-11-14/rippled-isc.txt"
+    },
+    {
+      "id": "gpt-oss-120b-licence",
+      "owner": "OpenAI",
+      "kind": "model-licence",
+      "covers": [
+        "openai/gpt-oss-120b",
+        "openai/gpt-oss-120b original/* (MXFP4 MoE weights)"
+      ],
+      "url": "https://huggingface.co/openai/gpt-oss-120b/raw/main/LICENSE",
+      "page_date": "2025-08-26 (HF repo last modified; revision b5c939de8f754692c1647ca79fbf85e8c1e70f8a)",
+      "read_date": "2026-11-15",
+      "clauses": [
+        "You may reproduce and distribute copies of the",
+        "Subject to the terms and conditions of"
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Redistributing weights or derivative works: give recipients a copy of Apache-2.0, mark modified files, keep notices.",
+        "No condition attaches to model outputs; the text has no output clause.",
+        "Use is also subject to the repo's USAGE_POLICY (entry gpt-oss-120b-usage-policy): comply with applicable law."
+      ],
+      "notes": "Standard Apache-2.0 text, no custom clauses (checked 2026-11-15 by R&D against the LICENSE file at the repo revision above). Card front matter: license: apache-2.0; HF API: not gated; GitHub openai/gpt-oss: Apache-2.0. Card says the model must be used with the harmony response format, MXFP4 MoE weights, reasoning effort low/medium/high set in the system prompt. Read for the merchant-league v2 Colab playtests (open weights on Colab G4; the model's text is game moves, not published as a dataset). Quoted clauses are the grant and redistribution terms (weights/derivatives, not outputs). Silence on outputs is not a bar (licences/README rule of 2026-10-16).",
+      "snapshot_sha256": "0ffddef9e48f8a09aed5caf2d44f7ba1c1be2d9b8e0a6f693b1635b2d5566645",
+      "snapshot_file": "2026-11-15/gpt-oss-120b-licence.txt",
+      "archive_url": "none found 2026-11-15",
+      "restriction_search": "Searched LICENSE for: prohibit, restrict, output, derivative, distill, synthetic, training; hits are in standard Apache clauses on derivative works of the Work; none restricts outputs."
+    },
+    {
+      "id": "gpt-oss-120b-usage-policy",
+      "owner": "OpenAI",
+      "kind": "use-policy",
+      "covers": [
+        "openai/gpt-oss-120b"
+      ],
+      "url": "https://huggingface.co/openai/gpt-oss-120b/raw/main/USAGE_POLICY",
+      "page_date": "2025-08-26 (HF repo last modified)",
+      "read_date": "2026-11-15",
+      "clauses": [
+        "you agree to comply with all applicable law"
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [
+        "Comply with applicable law."
+      ],
+      "notes": "Two sentences: an aim of safe, responsible and democratic use with user control, and agreement to comply with all applicable law. No clause on outputs, training on outputs, distillation or evaluation (read 2026-11-15 by R&D).",
+      "snapshot_sha256": "94e97780d8465b6b2dd04a2a893503340abef880d64b10b25d9bfb984ea35403",
+      "snapshot_file": "2026-11-15/gpt-oss-120b-usage-policy.txt",
+      "archive_url": "available per archive.org API on 2026-11-15 (closest copy exists)",
+      "restriction_search": "Whole text read; no prohibit/restrict/output/distill/training clause."
     }
   ]
 }

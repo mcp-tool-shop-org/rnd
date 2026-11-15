@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.24.0.1] - 2026-11-15
+
+- licences: GPT-OSS-120B licence and usage policy read at source (v2 Colab playtests)
+
 ## [1.1.24.0.0] - 2026-11-15
 
 - run vocabulary: venue `api` (a cloud model API billed per call; the venue is where the model ran, not the harness) and cost basis `per_call` (the sum of each call's billed price), with `basis_venues` so `rnd check` refuses `per_call` outside `api`; additive, every existing record still validates (punchlist D3)

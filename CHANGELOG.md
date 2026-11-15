@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.24.0.4] - 2026-11-15
+
+- licences: d3-flash, elephant-1 (+ OneJev and decision-index code), DeBERTa-v3-large NLI, read at source for the D5c judge window
+
 ## [1.1.24.0.3] - 2026-11-15
 
 - licences: re-read embeddinggemma-2-card, gemini-api-image-generation-docs and kimi-k3-licence; manual-read path for entries the snapshot tool can't fetch (census-naics-2022)

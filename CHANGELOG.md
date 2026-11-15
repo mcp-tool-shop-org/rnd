@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.23.1.86] - 2026-11-15
+
+- XRPL Testnet and Devnet reset releases: engineering note (xrpl-lab 2.8.0, xrpl-camp 1.6.0, sovereignty 2.4.0, the reset-verdict design)
+- Added `2026-11-15-xrpl-test-network-reset-releases`: Releases for the XRPL Testnet and Devnet reset: xrpl-lab 2.8.0, xrpl-camp 1.6.0, sovereignty 2.4.0
+
 ## [1.1.23.1.85] - 2026-11-14
 
 - licences: rippled-isc (ISC, for merchant-league's port of rippled's condition decoder)

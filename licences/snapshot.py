@@ -6,6 +6,12 @@ For each entry, the page is fetched, its visible text extracted, and the sha256 
 snapshot's relative path. Each quoted clause is checked against the text (whitespace and quote marks normalised),
 so a clause that no longer appears on the live page shows up as MISSING. The Wayback Machine's availability API is
 asked for its closest snapshot (a read; nothing is submitted to the archive). Without --write it only reports.
+
+An entry with "read_method": "manual" is one the tool can't fetch (a page that refuses scripts, a PDF needing a reader the
+rnd package doesn't carry). It was read by hand: someone saved a copy under the snapshot root (the parent of
+<snapshot-dir>) at its snapshot_file, recorded the read date, the quoted clauses and the copy's text sha256. For those
+entries the tool fetches nothing; it checks that the saved copy still hashes to snapshot_sha256 and still holds every
+clause, and --write leaves the entry untouched.
 """
 
 from __future__ import annotations
@@ -99,6 +105,25 @@ def wayback(url: str) -> str | None:
     return snap.get("url") if snap.get("available") else None
 
 
+def check_manual(e: dict, root: Path) -> int:
+    """Check a hand-read entry against its saved copy (url line, blank line, text). Returns 1 on any problem."""
+    copy = root / e.get("snapshot_file", "")
+    if not e.get("snapshot_file") or not copy.is_file():
+        print(f"{e['id']}: MANUAL read {e['read_date']}: saved copy not found at {e.get('snapshot_file')}")
+        return 1
+    parts = copy.read_text(encoding="utf-8").split("\n", 2)
+    text = parts[2] if len(parts) == 3 else ""
+    digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
+    body = norm(text)
+    clauses = e.get("clauses", [])
+    missing = [c for c in clauses if norm(c) not in body]
+    same = digest == e.get("snapshot_sha256")
+    print(f"{e['id']}: MANUAL read {e['read_date']}: copy sha256 {'ok' if same else 'MISMATCH ' + digest[:12]}"
+          f" clauses {len(clauses) - len(missing)}/{len(clauses)}"
+          f"{' MISSING: ' + '; '.join(m[:60] for m in missing) if missing else ''}")
+    return 0 if same and not missing and clauses else 1
+
+
 def main(argv: list[str]) -> int:
     if not argv:
         print(__doc__)
@@ -109,6 +134,9 @@ def main(argv: list[str]) -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     bad = 0
     for e in reg["entries"]:
+        if e.get("read_method") == "manual":
+            bad += check_manual(e, out_dir.parent)
+            continue
         try:
             text = page_text(fetch(e["url"]))
         except Exception as ex:  # noqa: BLE001 - reported per entry

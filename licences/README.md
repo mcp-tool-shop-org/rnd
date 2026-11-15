@@ -40,6 +40,9 @@ This folder is the documented search: one entry per page the studio relies on.
   - `covers`: the models or services it governs;
   - `snapshot_sha256`: the hash of the page text as fetched on the read date;
   - `archive_url`: the Wayback Machine's closest copy, where one exists.
+  - `read_method`: `manual` for an entry the script can't fetch (a page that refuses scripts, a PDF). It was read by
+    hand: the saved copy, the read date, the quoted clauses and the copy's text sha256 are recorded, and the script
+    checks the saved copy instead of fetching.
 - **[`snapshot.py`](snapshot.py):** fetches every page, checks each quoted clause still appears on it, hashes the
   text, keeps a full-text copy, and asks the Wayback Machine for its closest copy (a read; nothing is submitted).
   Run it to re-check:
@@ -48,6 +51,9 @@ This folder is the documented search: one entry per page the studio relies on.
   python -I licences/snapshot.py <snapshot-dir> --write    # also record hashes in registry.json
   ```
   A clause that no longer appears is reported `MISSING`, and the script exits 1.
+  A `manual` entry is reported `MANUAL`: its saved copy (under the parent of `<snapshot-dir>`) must still hash to
+  `snapshot_sha256` and hold every clause, or the script exits 1. To re-read one, save the page's text as
+  `<url>`, a blank line, then the text; record its sha256, the date and the clauses.
 
 ## Snapshots
 

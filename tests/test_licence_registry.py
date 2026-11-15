@@ -52,6 +52,15 @@ class LicenceRegistry(unittest.TestCase):
             if "snapshot_sha256" in e:
                 self.assertRegex(e["snapshot_sha256"], r"^[0-9a-f]{64}$", e["id"])
 
+    def test_manual_reads_carry_their_copy(self):
+        # a hand-read entry (read_method "manual") is checked only against its saved copy, so it must name one
+        for e in self.entries:
+            if "read_method" in e:
+                self.assertEqual(e["read_method"], "manual", e["id"])
+                self.assertTrue(e["clauses"], f"{e['id']}: a manual read quotes no clause")
+                self.assertRegex(e.get("snapshot_sha256", ""), r"^[0-9a-f]{64}$", e["id"])
+                self.assertTrue(e.get("snapshot_file"), f"{e['id']}: a manual read names no saved copy")
+
     def test_clauses_are_short_quotes(self):
         for e in self.entries:
             for c in e["clauses"]:

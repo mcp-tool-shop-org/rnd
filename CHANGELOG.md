@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.24.0.3] - 2026-11-15
+
+- licences: re-read embeddinggemma-2-card, gemini-api-image-generation-docs and kimi-k3-licence; manual-read path for entries the snapshot tool can't fetch (census-naics-2022)
+
 ## [1.1.24.0.2] - 2026-11-15
 
 - licences: Mistral Small 3.2 Ollama licence layer re-read; entry points at the blob

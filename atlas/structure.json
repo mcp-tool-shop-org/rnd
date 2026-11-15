@@ -528,6 +528,34 @@
           "path": "entries/2026/2026-11-10-robot-rig-whea-records-at-boot-and-driver-install.md"
         },
         {
+          "hash": "6b70f398699ab0993499ab7e183fe00c705cf8f306b0fc1791887c69e7bd6596",
+          "path": "entries/2026/2026-11-12-colab-credit-spend-seed-19b.md"
+        },
+        {
+          "hash": "b97d9c8da673402f198efbdcd1c2c26fcb5aef69de9d3a8c6d0452d208e5fe28",
+          "path": "entries/2026/2026-11-12-etv-difficulty-narrator-traits-seed-22.md"
+        },
+        {
+          "hash": "eddfa6ee1a76a4875ab439ee5f664851f1feb38bcdf63171432eef1b4aa9f8be",
+          "path": "entries/2026/2026-11-13-answer-key-trust-research-seed-24.md"
+        },
+        {
+          "hash": "3cbbdacff5639405e6be0b990a357b78202ec7381fbb1b20518c156ae2137805",
+          "path": "entries/2026/2026-11-13-etv-build-out-research-notes-seed-21b.md"
+        },
+        {
+          "hash": "3495381bb9a78bee021e7f8f2ae906e318feb397ee30e48baeb86d344ceedd38",
+          "path": "entries/2026/2026-11-13-small-model-narrator-seed-23.md"
+        },
+        {
+          "hash": "2fd844a5776129fceb53f1b297987a0256da90c6e8f671f943cb29514cff351a",
+          "path": "entries/2026/2026-11-13-xrpl-lab-expansion-seed-20.md"
+        },
+        {
+          "hash": "56a1147699f4d26e3366b75090641be15f801ae5d4d5699237f5865d433c76e4",
+          "path": "entries/2026/2026-11-15-xrpl-test-network-reset-releases.md"
+        },
+        {
           "hash": "284503f06d3f2f6017174af3540a70e10b7b1326bdda33eb283fe1b5c2b7804d",
           "path": "entries/2026/embeddinggemma-2.md"
         },
@@ -844,6 +872,34 @@
           "path": "experiments/agent-ab-harness/tasks.json"
         },
         {
+          "hash": "92d09629a64d08c94c0062ab0b7d107f0536373de7bd09730e6bcf7ecea9d7e8",
+          "path": "experiments/ai-jam-colab/README.md"
+        },
+        {
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "path": "experiments/ai-jam-colab/data/.gitkeep"
+        },
+        {
+          "hash": "00e0a238f8de58f75d66f8df0403c96657d1a01cc88d5ad692c722e8c629d999",
+          "path": "experiments/ai-jam-colab/experiment.json"
+        },
+        {
+          "hash": "4d009192b1eff2ddbfca18fb1ecdabe6a8109cbc2c52be594cdb87f743a7089a",
+          "path": "experiments/ai-jam-colab/results/b2-quant-matrix.md"
+        },
+        {
+          "hash": "15a7f0938980d432039fd54c04629c9b1198371b4c47faa97ca1ca8ea19c7437",
+          "path": "experiments/ai-jam-colab/results/er-distill-sft.md"
+        },
+        {
+          "hash": "dd541180416128bd3e9c99ce085622377a890209f7bc6eafea7ba94cb0a25f89",
+          "path": "experiments/ai-jam-colab/results/er-scale-and-quant.md"
+        },
+        {
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "path": "experiments/ai-jam-colab/scripts/.gitkeep"
+        },
+        {
           "hash": "8a1ca7be10d8c74dd2227409272b4816287b10435e4c88fcd4e9ed7f73725b15",
           "path": "experiments/atlas-multirepo/security-consult-ap.md"
         },
@@ -1080,6 +1136,30 @@
         {
           "hash": "781ddc2eba63cd4878d458e1d34f128929bc01f32192ce98e7da1850d9a29581",
           "path": "experiments/colab-bottlenecks/argon-brief.md"
+        },
+        {
+          "hash": "d71fb825a105d1ef67623b54ba4cc7f3fd8114eed1a080ba1271dbeb39546644",
+          "path": "experiments/colab-campaign-2026-11/README.md"
+        },
+        {
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "path": "experiments/colab-campaign-2026-11/data/.gitkeep"
+        },
+        {
+          "hash": "a7daf13be41f0dc5494588f648c35287bcc8f3a670cbb2013855a5ed098234eb",
+          "path": "experiments/colab-campaign-2026-11/experiment.json"
+        },
+        {
+          "hash": "b362c27a86196886dc2b32ccb7d1df5175d5b7676df5d6a195161e03dadca9c3",
+          "path": "experiments/colab-campaign-2026-11/results/ledger-2026-11-12.md"
+        },
+        {
+          "hash": "f8661f20ffd0d636aaa592ec603c4c12b12014f1b6c44bb6079e016e2b99321b",
+          "path": "experiments/colab-campaign-2026-11/results/lora-lane-2026-11-13.md"
+        },
+        {
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "path": "experiments/colab-campaign-2026-11/scripts/.gitkeep"
         },
         {
           "hash": "53af49e9ca1b41590e6ff8c10ed3f0e7f40787ae2992b1d0b9255f4173adcb71",
@@ -2716,6 +2796,190 @@
           "path": "experiments/embeddinggemma-2/results/zero-relevance-lock.json"
         },
         {
+          "hash": "f68c837c3cac14a7267672f17198d08bac788ffbd7cde535f6491f88d975e90d",
+          "path": "experiments/etv-narrator/README.md"
+        },
+        {
+          "hash": "4adab911d9e4accc378a1357f3727012793a41a8835aeec48ccb18f0764d3303",
+          "path": "experiments/etv-narrator/cloud-claude/HAIKU-tables.md"
+        },
+        {
+          "hash": "ebd9e6eb512a1d71238f33e3be9b7aa96a589a608cd63ef2e7a22f3bc2728c51",
+          "path": "experiments/etv-narrator/cloud-claude/KEPT-ON-RIG.tsv"
+        },
+        {
+          "hash": "41263921a93b065a61485da7b407614fbca8b4d78c9ec1e9816040aec4d28cdf",
+          "path": "experiments/etv-narrator/cloud-claude/OPUS-partial-tables.md"
+        },
+        {
+          "hash": "85d771e0841a6c4d8cc9401e1a25e024e59392e0fc6090f50824a03d1e9d9931",
+          "path": "experiments/etv-narrator/cloud-claude/OPUS-tables.md"
+        },
+        {
+          "hash": "0a55914c80c2f9d86113d929d7a45681c097982c08b77f5bc2d304be5ef72291",
+          "path": "experiments/etv-narrator/cloud-claude/READING-SAMPLE-side-by-side-standard-360.md"
+        },
+        {
+          "hash": "79672a873bbd260f4baa570383764712eb80d266c1525b5016ce918c36142af4",
+          "path": "experiments/etv-narrator/cloud-claude/READING-SAMPLE-side-by-side-standard.md"
+        },
+        {
+          "hash": "f121e1878f9024983a97042b17cf03bdf3756c8968864c33df6b564dd8fcb339",
+          "path": "experiments/etv-narrator/cloud-claude/RUN-RECORD.md"
+        },
+        {
+          "hash": "ffdf1a988171a9356a3be8579ecd9921d8f8897e6a110a556eeeab614f508891",
+          "path": "experiments/etv-narrator/cloud-claude/SONNET-partial-tables.md"
+        },
+        {
+          "hash": "d2c408e95d1c9010a1577a71a8c9248f46d331824ce5c7bf84f79285b2fcf542",
+          "path": "experiments/etv-narrator/cloud-claude/SONNET-tables.md"
+        },
+        {
+          "hash": "6cfee73a2970253f2fd97b71f7445ed91f78f2b8ec731fb75b3bb6521266ede0",
+          "path": "experiments/etv-narrator/cloud-claude/STANDARD-360-tables.md"
+        },
+        {
+          "hash": "9fb999549814403d8051bc85cfddd43af686b3b7df0e0313458ba920d44b3876",
+          "path": "experiments/etv-narrator/cloud-claude/ledgers.json"
+        },
+        {
+          "hash": "33babba243a617dc50c034121e2f33b887d9d445629771a39be5ea27bc7065ef",
+          "path": "experiments/etv-narrator/cloud-claude/reports.json"
+        },
+        {
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "path": "experiments/etv-narrator/data/.gitkeep"
+        },
+        {
+          "hash": "454442843a53dcf59debddeaec3609feec9a8fcd5eaa939e1a2ec5760b8a33d4",
+          "path": "experiments/etv-narrator/experiment.json"
+        },
+        {
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "path": "experiments/etv-narrator/results/.gitkeep"
+        },
+        {
+          "hash": "68d31a89d4f7780c0d57d93e9af1de581cd55ec268f70279807c103eee8799eb",
+          "path": "experiments/etv-narrator/results/s1/KEPT-ON-RIG.tsv"
+        },
+        {
+          "hash": "558e640b343be666c68fe7b12842f9aa744293400d22adaa58aa475945aab918",
+          "path": "experiments/etv-narrator/results/s1/RECHECK-OFFLINE-checker-only.txt"
+        },
+        {
+          "hash": "cea1414093cb6c4c63a5e7a98896eb22b611ebae696721f4daec62adca3eaf24",
+          "path": "experiments/etv-narrator/results/s1/RUN-RECORD.md"
+        },
+        {
+          "hash": "27b1674e526188d9f15e1b57ecb90eea290f7e6d3add8c246fe012b5e717ac9b",
+          "path": "experiments/etv-narrator/results/s1/SUMMARY-tables.md"
+        },
+        {
+          "hash": "e19b1e8bcc7dcd93dedd87de0a30b16014d39ed43b19f10e941bc64d3c187e25",
+          "path": "experiments/etv-narrator/results/s1/reports.json"
+        },
+        {
+          "hash": "988c7c3f294e47dab7e59ba0196da1ca00b8846f56baebf87917889c525d6dbf",
+          "path": "experiments/etv-narrator/results/s2-recheck/COMPARE-tables.md"
+        },
+        {
+          "hash": "06c4c011d153235f77a62e2960db4aba82d0c5114335eb64571ab615b05661ad",
+          "path": "experiments/etv-narrator/results/s2-recheck/KEPT-ON-RIG.tsv"
+        },
+        {
+          "hash": "4dcd8cbac3caf9f72b6f1e9a0b56810396069b47844a84ef6c7b407cf128dc91",
+          "path": "experiments/etv-narrator/results/s2-recheck/RUN-RECORD.md"
+        },
+        {
+          "hash": "2484761794dd8746479b0284ca0f487f80d312fd4dda8cd025a17b9a030f9f8e",
+          "path": "experiments/etv-narrator/results/s2-recheck/SUMMARY-all-rules.json"
+        },
+        {
+          "hash": "9415a6ac6b83e9459d1c237d6e8448d5751262b1207fd2aaafb9a49b8b61425d",
+          "path": "experiments/etv-narrator/results/s2-recheck/reports.json"
+        },
+        {
+          "hash": "ab803a9cb0c8b35f0006254ad675d7bd279208f48e47c52e4fc141bf7a8b41e2",
+          "path": "experiments/etv-narrator/results/s3-arms/ARM-tables.md"
+        },
+        {
+          "hash": "4051c1f51246bcd411bd6251761f4d0d471ed24437b247eaee905099812c31ac",
+          "path": "experiments/etv-narrator/results/s3-arms/KEPT-ON-RIG.tsv"
+        },
+        {
+          "hash": "360339919643f2c0cadd94bdfe9e0583924e5b29fbd671296dca6e8a74361737",
+          "path": "experiments/etv-narrator/results/s3-arms/PLANNED-STOP-note.txt"
+        },
+        {
+          "hash": "05cc3388c94da1ada045a7ec68c3cf630b726d503b401a6696807375af1bb259",
+          "path": "experiments/etv-narrator/results/s3-arms/READING-SAMPLE-combo-30.md"
+        },
+        {
+          "hash": "36da101e60ddb6f0b5eff8833fba9cc33d6b9e5ca27243de87e86d09da348eaa",
+          "path": "experiments/etv-narrator/results/s3-arms/RESCORE-says-what-happened.md"
+        },
+        {
+          "hash": "3f151593ff89404a11379711ae12a9315a93a28c3370e88e6bfad2e74d053f56",
+          "path": "experiments/etv-narrator/results/s3-arms/RUN-RECORD.md"
+        },
+        {
+          "hash": "75853ec12733bae48f87261aa6870fa237ec948f2113a3764f24964034155219",
+          "path": "experiments/etv-narrator/results/s3-arms/reports.json"
+        },
+        {
+          "hash": "41aff7521dddbce4ce50e74a0ef8e6257f71708168551dadd0eab3560351ace2",
+          "path": "experiments/etv-narrator/results/s4-says-what-happened/ARM-tables.md"
+        },
+        {
+          "hash": "780bd6577dbed740ff8e8a9f108cec0421f1babd870abb0308ff92dc2215c316",
+          "path": "experiments/etv-narrator/results/s4-says-what-happened/KEPT-ON-RIG.tsv"
+        },
+        {
+          "hash": "8191c5e80bc5eaf1aecac52488a017f16b671d8853d861e12ac55553201e31d1",
+          "path": "experiments/etv-narrator/results/s4-says-what-happened/READING-SAMPLE-ship-29.md"
+        },
+        {
+          "hash": "b3d7bcd35e540c3d66c532558d8569663ec773a324c21bd90f415e24f29a81ef",
+          "path": "experiments/etv-narrator/results/s4-says-what-happened/RESCORE-checker2-2026-11-13.md"
+        },
+        {
+          "hash": "4d6450c9e02409edbf206a4570727ceba3a161c63a1ef48a6d3db134586f8889",
+          "path": "experiments/etv-narrator/results/s4-says-what-happened/RUN-RECORD.md"
+        },
+        {
+          "hash": "edb5858cc5bebd33af2fefc9e81fdbefed572fdecfa24d394f7a2d5976d26815",
+          "path": "experiments/etv-narrator/results/s4-says-what-happened/reports.json"
+        },
+        {
+          "hash": "59076b57ab7f0d62b2bcd379fd6359422eee96843c47e05ac8d4c257a46ccd57",
+          "path": "experiments/etv-narrator/s5-larger-local/ALL-ARMS-rescored-tables.md"
+        },
+        {
+          "hash": "608be9715bdaf551bda910a585e5cacfd6cc1e0ef2c764073e2805b1a7b06ef6",
+          "path": "experiments/etv-narrator/s5-larger-local/ALL-ARMS-tables.md"
+        },
+        {
+          "hash": "2201b62789a639af4c11a4055610f2b04c9b03083cd4d2bbbb7905c71b78f19e",
+          "path": "experiments/etv-narrator/s5-larger-local/KEPT-ON-RIG.tsv"
+        },
+        {
+          "hash": "ca02060c0b1ce4b540367499820029f1d31e3eceeecf6dae1420b9fa6b11bee9",
+          "path": "experiments/etv-narrator/s5-larger-local/READING-SAMPLE-8b-beside-ship.md"
+        },
+        {
+          "hash": "ef3a06075f74d51470ef8c4aba3dec225c6c9e263cc1bedb03f3c6fe13fe644d",
+          "path": "experiments/etv-narrator/s5-larger-local/RUN-RECORD.md"
+        },
+        {
+          "hash": "337caffe3904f9772cc8e2eb4a57488363efce5710da10f4e95e910233a73cfb",
+          "path": "experiments/etv-narrator/s5-larger-local/reports.json"
+        },
+        {
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "path": "experiments/etv-narrator/scripts/.gitkeep"
+        },
+        {
           "hash": "fc2dbcf66f3b2b0988585ea9c47644e3277418c4bf3b5c0127b5953d32cac723",
           "path": "experiments/generated-content-terms/README.md"
         },
@@ -3039,6 +3303,26 @@
           ],
           "path": "experiments/interlock-relay/stage1/test_analyze.py",
           "testFramework": "unittest"
+        },
+        {
+          "hash": "2e3e2f0a3a351e844467b1bd42ddd27bd8f54962da2994451cea18d170de04e0",
+          "path": "experiments/judge-bakeoff/README.md"
+        },
+        {
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "path": "experiments/judge-bakeoff/data/.gitkeep"
+        },
+        {
+          "hash": "e59397a6044eafc4bbdc0e64a066a27bf31a96291b86b92c154f42f56ebcb104",
+          "path": "experiments/judge-bakeoff/experiment.json"
+        },
+        {
+          "hash": "90d0d364d37a3a3fb52b2531d3f4b19ce57419f9d3b4264a7ee031bdb5587b10",
+          "path": "experiments/judge-bakeoff/results/counted430-g4.md"
+        },
+        {
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "path": "experiments/judge-bakeoff/scripts/.gitkeep"
         },
         {
           "hash": "204acb78c4a52b40b79ae6eaaea4da6eb1db759f43c7923b851bf65df305c5fe",
@@ -5506,15 +5790,16 @@
       "externals": 0,
       "files": [
         {
-          "hash": "f58b1475de3bca6ad92289e8c481d64f0e3564d75e66e9c88503602f01bfefde",
+          "hash": "004264ed679ef404396ffcc9d70dbf00fd6bfb42856536a54846fbfc037ef16c",
           "path": "licences/README.md"
         },
         {
-          "hash": "f1412361e8c977b751f0f169b29b632132982ba3a2d829548772e0fc59b863bf",
+          "hash": "2feb524d3b6cdb83a2af45cb3f51d02e746caeabe83a19075157553a112e697d",
           "path": "licences/registry.json"
         },
         {
           "exports": [
+            "check_manual",
             "fetch",
             "main",
             "norm",
@@ -5526,29 +5811,29 @@
             {
               "in": "pdf_text",
               "kind": "except",
-              "line": 47
+              "line": 53
             },
             {
               "in": "pdf_text",
               "kind": "raise",
-              "line": 48
+              "line": 54
             },
             {
               "in": "wayback",
               "kind": "except",
-              "line": 96
+              "line": 102
             },
             {
               "in": "main",
               "kind": "except",
-              "line": 114
+              "line": 142
             },
             {
               "kind": "raise",
-              "line": 138
+              "line": 166
             }
           ],
-          "hash": "db9841e3e616c23b32bb012f2e8f4710cc5db73cb99faae34a67ccbab2d87a7c",
+          "hash": "86246950ec344ce30b627df6b5eb30790b4aae7db44d3be2122890920af09d67",
           "path": "licences/snapshot.py"
         }
       ],
@@ -5560,16 +5845,20 @@
       "origin": "mixed",
       "outsidePlaces": [
         {
-          "reads": 0,
+          "reads": 1,
           "where": [
             "caller"
           ],
           "writes": 1
         }
       ],
+      "outsideReads": 1,
       "outsideWrites": 1,
       "role": "data",
-      "testedBy": 0,
+      "testRunners": [
+        "unittest"
+      ],
+      "testedBy": 1,
       "unresolvedSites": 0
     },
     {
@@ -5584,7 +5873,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "53906ecfefe92158dddd92cb02aadc18512e786ed4227b89b4d181f2d0afa6b2",
+          "hash": "23adbd9213d4ae716c80ba28b49920b70c7c1abfea5709eef9874ef784c3fc8b",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -6834,45 +7123,45 @@
             {
               "in": "library_files",
               "kind": "except",
-              "line": 87
+              "line": 89
             },
             {
               "in": "load_baseline",
               "kind": "except",
-              "line": 116
+              "line": 118
             },
             {
               "in": "private_manifest",
               "kind": "except",
-              "line": 175
+              "line": 177
             },
             {
               "in": "validate_record",
               "kind": "except",
-              "line": 274
+              "line": 276
             },
             {
               "in": "registry_ids",
               "kind": "except",
-              "line": 531
+              "line": 536
             },
             {
               "in": "new_experiment",
               "kind": "raise",
-              "line": 558
+              "line": 563
             },
             {
               "in": "new_experiment",
               "kind": "raise",
-              "line": 561
+              "line": 566
             },
             {
               "in": "new_experiment",
               "kind": "raise",
-              "line": 565
+              "line": 570
             }
           ],
-          "hash": "4db1f61befb88504b9fb4b07585f13b3eb2c1800e9f8833f198ad311f6cd8fa8",
+          "hash": "54f22dc8e12edcf9fb19d3ce2cc993fd9ea659d4876f6e572f0a7a8f8806373e",
           "path": "mcptoolshop_rnd/layout.py"
         },
         {
@@ -8096,7 +8385,7 @@
           "path": "mcptoolshop_rnd/release.py"
         },
         {
-          "hash": "4d252900eecc8ed6904211007ef4ed9fe28686e6aa491ffeae203048fce348ca",
+          "hash": "5d2e1c1669657c773da7b30cf23a3d65ca18989ce13932d6cef52fbacdc6d325",
           "path": "mcptoolshop_rnd/run_vocabulary.json"
         },
         {
@@ -8450,7 +8739,7 @@
           "path": ".polyglot-terms.json"
         },
         {
-          "hash": "9986d0899ea115c1752e325798299c9e6e686655829ad69818cfc2893fc3731b",
+          "hash": "fa1cb66dea8a45afad61c6589bc7ef71c5ca840dadf77887a3a2f02fc8db4da6",
           "path": "CHANGELOG.md"
         },
         {
@@ -8549,7 +8838,7 @@
           "path": "site/astro.config.mjs"
         },
         {
-          "hash": "67f0018a1a7650779a918e90c8df6af2ed755d03e07b3715bce1b42031f0b917",
+          "hash": "d3474bc1bcb0564dcf7604edbd9f2091aad925cf471da6e1fed5e9951fcd6c7a",
           "path": "site/package-lock.json"
         },
         {
@@ -8878,7 +9167,7 @@
           "path": "site/src/content/docs/handbook/colab-golden-path.md"
         },
         {
-          "hash": "1d7ff9910e9d8c9157cdfdfdd8865ee977011b9df7dca458f00e5b075c87548a",
+          "hash": "60471040c6fe61d7f9f90a81ac85feeac0b1fa42eacd5189dd82c9de18af6c15",
           "path": "site/src/content/docs/handbook/data-layout.md"
         },
         {
@@ -9296,7 +9585,7 @@
           "exports": [
             "record"
           ],
-          "hash": "8257e70400721013b35cc3f172155a80048af26a29a8167ea1e278f55f198fc3",
+          "hash": "78f6a946611de0802865ba7d6b5aaa1366600156d4afdbd9663f8637743b22b7",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/layout.py",
@@ -9307,8 +9596,19 @@
           "testFramework": "unittest"
         },
         {
-          "hash": "136f2f41d755e3630695021ddc11532e5d031efa7b1d53c1d2b0fc8abd561740",
+          "hash": "aa08cf5f119203b03f969856176dbb5d6bd23683d2806f38a6f41763acafe717",
           "path": "tests/test_licence_registry.py",
+          "testFramework": "unittest"
+        },
+        {
+          "exports": [
+            "entry"
+          ],
+          "hash": "671fde9cfe11ae19cc4508cead3476ea6022c081b1216fa37862de8dfbcfccfb",
+          "importsFiles": [
+            "licences/snapshot.py"
+          ],
+          "path": "tests/test_licence_snapshot_manual.py",
           "testFramework": "unittest"
         },
         {
@@ -9438,7 +9738,7 @@
           "exports": [
             "record"
           ],
-          "hash": "a21d586ee22350cd0af6293729331c38de578686d3a2ee9524530c0247970286",
+          "hash": "c1753766b3721d28d3e54130a55980a323c8b36060a8e7ab11fc7828c1189577",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/layout.py",
@@ -9628,7 +9928,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 27
+          "files": 28
         },
         {
           "boundary": "experiments",
@@ -9638,6 +9938,15 @@
             "from": "tests/test_agent_ab_harness_run.py"
           },
           "files": 7
+        },
+        {
+          "boundary": "licences",
+          "depth": 1,
+          "enters": {
+            "file": "licences/snapshot.py",
+            "from": "tests/test_licence_snapshot_manual.py"
+          },
+          "files": 1
         },
         {
           "boundary": "rnd",
@@ -9763,7 +10072,7 @@
         },
         {
           "coverage": true,
-          "files": 27,
+          "files": 28,
           "job": "ci",
           "runner": "unittest",
           "step": "Coverage"
@@ -10219,6 +10528,12 @@
       "from": "tests",
       "fromTests": true,
       "kind": "file",
+      "to": "licences"
+    },
+    {
+      "from": "tests",
+      "fromTests": true,
+      "kind": "file",
       "to": "mcptoolshop_rnd"
     },
     {
@@ -10230,8 +10545,8 @@
   ],
   "engine": "1.26.0",
   "generatedFrom": {
-    "commit": "9b53fbbae53fcb6a00e911dbc2d5211ead2bcbfd",
-    "tracked": 1096
+    "commit": "2ef559df9d7a8ae6c7400c3360a0dcfb82f0f51f",
+    "tracked": 1168
   },
   "landings": [
     {
@@ -10344,6 +10659,16 @@
           "confidence": "text"
         },
         {
+          "by": "experiments/ai-jam-colab/experiment.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
+          "by": "experiments/colab-campaign-2026-11/experiment.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
           "by": "experiments/colab-golden-path/data/windows/window13e-prebuild-muse-20261018/pin-result.json",
           "call": "literal",
           "confidence": "text"
@@ -10365,6 +10690,16 @@
         },
         {
           "by": "experiments/cuda-python-5090-rung/experiment.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
+          "by": "experiments/etv-narrator/experiment.json",
+          "call": "literal",
+          "confidence": "text"
+        },
+        {
+          "by": "experiments/judge-bakeoff/experiment.json",
           "call": "literal",
           "confidence": "text"
         },
@@ -13642,7 +13977,10 @@
         {
           "by": "licences/snapshot.py",
           "confidence": "ast",
-          "stamps": true
+          "stamps": true,
+          "unless": [
+            "main"
+          ]
         }
       ]
     },
@@ -14538,7 +14876,7 @@
   "overlaps": [],
   "submodules": [],
   "symlinks": [],
-  "testFiles": 60,
+  "testFiles": 61,
   "testsNotRun": [
     "experiments/cuda-graphs/test_graphed_heads.py",
     "experiments/data-designer/tests/test_lockdown.py",

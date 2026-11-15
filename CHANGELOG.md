@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.24.0.0] - 2026-11-15
+
+- run vocabulary: venue `api` (a cloud model API billed per call; the venue is where the model ran, not the harness) and cost basis `per_call` (the sum of each call's billed price), with `basis_venues` so `rnd check` refuses `per_call` outside `api`; additive, every existing record still validates (punchlist D3)
+- etv-narrator: the Claude API comparison run (`cloud-claude`, rnd #287) relabelled from venue `rig` and basis `rate_x_runtime` to `api` and `per_call`
+- handbook: Where data lives, the venues and the per-call basis
+- Updated experiment `etv-narrator`
+
 ## [1.1.23.1.86] - 2026-11-15
 
 - XRPL Testnet and Devnet reset releases: engineering note (xrpl-lab 2.8.0, xrpl-camp 1.6.0, sovereignty 2.4.0, the reset-verdict design)

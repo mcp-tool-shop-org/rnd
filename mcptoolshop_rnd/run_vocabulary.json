@@ -22,7 +22,11 @@
  "cost_bases": {
   "rate_x_runtime": "the rate times the measured runtime",
   "balance": "the provider's balance before and after (Colab's usage balance, offrig's measured ledger)",
-  "estimate": "an estimate, when nothing was measured"
+  "estimate": "an estimate, when nothing was measured",
+  "per_call": "the sum of each call's billed price (tokens or requests times the provider's published rate), from the harness's own per-call ledger"
+ },
+ "basis_venues": {
+  "per_call": ["api"]
  },
  "cost_units": {
   "colab_units": "Colab compute units",
@@ -32,7 +36,8 @@
  "venues": {
   "rig": "the studio rig",
   "colab": "a Colab window",
-  "runpod": "a RunPod pod, through offrig"
+  "runpod": "a RunPod pod, through offrig",
+  "api": "a cloud model API billed per call (the Claude API, for example); the harness may run anywhere, the rig included"
  },
  "id_rule": "The window name as the Publisher writes it (14b, cpu-measure). A retry adds its try (14e-try4), since each try is a separate billed run. An offrig plan names its lane (publisher-plan4), since plan numbers repeat per project. Unique within an experiment."
 }

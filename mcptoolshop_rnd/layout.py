@@ -42,6 +42,8 @@ COST_UNITS = tuple(VOCABULARY["cost_units"])
 VENUES = tuple(VOCABULARY["venues"])
 OUTCOMES = tuple(VOCABULARY["outcomes"])
 COST_BASES = tuple(VOCABULARY["cost_bases"])
+# A cost basis that fits only some venues (per_call: a cloud API billed per call). Absent in older vocabularies.
+BASIS_VENUES = {k: tuple(v) for k, v in VOCABULARY.get("basis_venues", {}).items()}
 WHY_NOT_NEEDED = tuple(VOCABULARY["why_required_unless"])
 ZERO_COST = tuple(VOCABULARY["zero_cost"])
 # Older words the recorder maps to a current outcome; a record always holds the current word.
@@ -401,6 +403,9 @@ def validate_data(root: Path, exp: str, data, registry_ids: set[str] | None = No
                 p.append(f"runs[{i}]: a {r['outcome']} run costs nothing; its cost must be 0")
         if r.get("cost_basis") not in COST_BASES:
             p.append(f"runs[{i}].cost_basis must be one of {', '.join(COST_BASES)}")
+        elif r["cost_basis"] in BASIS_VENUES and r.get("venue") in VENUES and r["venue"] not in BASIS_VENUES[r["cost_basis"]]:
+            p.append(f"runs[{i}]: cost_basis {r['cost_basis']} fits only venue {', '.join(BASIS_VENUES[r['cost_basis']])}, "
+                     f"not {r['venue']}")
         if r.get("cap") is not None and (not _number(r["cap"]) or r["cap"] <= 0):
             p.append(f"runs[{i}].cap must be a positive number or null")
         if r.get("raw_manifest_id") is not None and not isinstance(r["raw_manifest_id"], str):

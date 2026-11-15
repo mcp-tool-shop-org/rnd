@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.24.0.6] - 2026-11-15
+
+- finding: D5c judge window A measured
+- Added `2026-11-15-measured-2026-11-15-d5c-judge-window-a-five-arms-all-fail-th`: Measured 2026-11-15: D5c judge window A, five arms, all fail the three-way bars
+
 ## [1.1.24.0.5] - 2026-11-15
 
 - licences: vllm-sr/d3 (26B) and Qwen3.8-27B

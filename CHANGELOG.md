@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.24.0.5] - 2026-11-15
+
+- licences: vllm-sr/d3 (26B) and Qwen3.8-27B
+
 ## [1.1.24.0.4] - 2026-11-15
 
 - licences: d3-flash, elephant-1 (+ OneJev and decision-index code), DeBERTa-v3-large NLI, read at source for the D5c judge window

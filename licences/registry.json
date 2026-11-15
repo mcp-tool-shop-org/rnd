@@ -3158,6 +3158,65 @@
       "snapshot_sha256": "96a4356666caa8a738c23c6ec19a3515ac4c1f6a60b61c256f5639c71df95a07",
       "snapshot_file": "2026-11-15-judges/deberta-v3-large-mnli-fever-anli-ling-wanli-card.txt",
       "archive_url": null
+    },
+    {
+      "id": "d3-card",
+      "owner": "vLLM Semantic Router Team (vllm-sr)",
+      "kind": "model-card",
+      "covers": [
+        "vllm-sr/d3"
+      ],
+      "url": "https://huggingface.co/vllm-sr/d3/raw/62f07e54c6c3a5ff5f695107377edc43e1a86ea8/README.md",
+      "page_date": "HF commit 62f07e54c6c3a5ff5f695107377edc43e1a86ea8 (repo last modified 2026-11-02)",
+      "read_date": "2026-11-15",
+      "clauses": [
+        "license: apache-2.0",
+        "Apache-2.0 ([LICENSE](LICENSE)). Built on [Qwen/Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B) (Apache-2.0)."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "Redistributing weights, remote code or derivatives: Apache-2.0 licence copy and NOTICE (d3 (Decision 3.0), Copyright 2026 vLLM Semantic Router Team; Built on Qwen/Qwen3.8-27B (Apache-2.0)).",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "The 26.09B (27B-class) Decision 3.0 model. Covers the weights and the eight remote-code files at revision 62f07e54c6c3a5ff5f695107377edc43e1a86ea8. Seven of the eight are byte-identical to d3-mini at its reviewed revision bd0090dd758d32ba59ef5c749910a8e87fc4391f; d3_runtime.py differs only by one added docstring line crediting perplexity-ai/pplx-decider-v1.1-27b for the bidirectional attention approach (diffed 2026-11-15). LICENSE is the standard Apache-2.0 text, identical to d3-mini's (11,357 bytes). Not gated. Base model Qwen/Qwen3.8-27B has its own entry (qwen3.8-27b-card). Read for the D5c fitted two-question and 27B-judge window.",
+      "restriction_search": "Searched the saved text for: prohibit, restrict, non-commercial, distill, compete, guardrail, strictly, synthetic; no restriction found in the card, LICENSE or NOTICE.",
+      "snapshot_sha256": "ea5c78c14ea83520155c5a40295f072dfbfb4866f3450e1f0905e37e526cb44b",
+      "snapshot_file": "2026-11-15-judges/d3-card.txt",
+      "archive_url": null
+    },
+    {
+      "id": "qwen3.8-27b-card",
+      "owner": "Qwen Team, Alibaba Cloud (Qwen)",
+      "kind": "model-card",
+      "covers": [
+        "Qwen/Qwen3.8-27B"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/raw/37561816e66b5b9153b1b64c10968c18c1e6f4a0/README.md",
+      "page_date": "HF commit 37561816e66b5b9153b1b64c10968c18c1e6f4a0",
+      "read_date": "2026-11-15",
+      "clauses": [
+        "license: apache-2.0"
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "Redistributing weights or derivatives: Apache-2.0 licence copy and notices.",
+        "No condition attaches to model outputs."
+      ],
+      "notes": "Base model of vllm-sr/d3. The repo carries the standard Apache-2.0 LICENSE (read at the same revision). Not used directly; recorded because d3 is a fine-tune of it. Not gated.",
+      "restriction_search": "Searched the saved text for: prohibit, restrict, non-commercial, distill, compete, guardrail, strictly, synthetic; no restriction found in the card or LICENSE.",
+      "snapshot_sha256": "d9cbbe69ab677504502958508bec9c5bfe7e08b85aacf48def5bb63bb03303fc",
+      "snapshot_file": "2026-11-15-judges/qwen3.8-27b-card.txt",
+      "archive_url": null
     }
   ]
 }

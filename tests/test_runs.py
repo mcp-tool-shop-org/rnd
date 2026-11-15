@@ -50,6 +50,12 @@ class FromOutcomeTests(RunsBase):
         self.assertIsNone(run["projected_cost"])
         self.assertEqual(layout.validate_data(self.root, "demo", record("demo", runs=[run])), [])
 
+    def test_an_api_outcome_maps_onto_an_api_run(self):
+        run = runs.from_outcome({**OUTCOME, "window": "cloud-claude", "card": "Claude API", "spent": 66.31,
+                                 "basis": "per_call", "cap": 75}, venue="api", cost_unit="usd")
+        self.assertEqual((run["venue"], run["cost_basis"], run["cost_unit"]), ("api", "per_call", "usd"))
+        self.assertEqual(layout.validate_data(self.root, "demo", record("demo", runs=[run])), [])
+
     def test_an_alias_is_mapped_and_never_stored(self):
         run = runs.from_outcome({**OUTCOME, "outcome": "not-assigned", "spent": 0}, venue="colab",
                                 cost_unit="colab_units")

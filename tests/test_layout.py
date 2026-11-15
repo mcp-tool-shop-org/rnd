@@ -228,8 +228,33 @@ class VocabularyTests(LayoutBase):
         self.assertTrue(any("is an alias; record it as 'no-capacity'" in m for m in msgs))
         self.assertTrue(any("runs[1]: a no-capacity run costs nothing" in m for m in msgs))
         self.assertFalse(any(m.startswith("runs[2]") for m in msgs))
-        self.assertEqual(set(layout.COST_BASES), {"rate_x_runtime", "balance", "estimate"})
+        self.assertEqual(set(layout.COST_BASES), {"rate_x_runtime", "balance", "estimate", "per_call"})
         self.assertEqual(layout.VOCABULARY["schema"], "rnd-run-vocabulary/v1")
+
+    def test_an_api_run_is_billed_per_call_and_per_call_fits_only_api(self):
+        api = {**RUN, "id": "cloud-claude", "venue": "api", "hardware": "Claude API", "cost": 66.31,
+               "cost_unit": "usd", "cost_basis": "per_call", "cap": 75}
+        self.experiment("demo", record("demo", runs=[api,
+                                                     {**api, "id": "api-balance", "cost_basis": "balance"},
+                                                     {**api, "id": "rig-per-call", "venue": "rig"},
+                                                     {**api, "id": "colab-per-call", "venue": "colab"}]))
+        msgs = [m for _, m in self.errors()]
+        self.assertFalse(any(m.startswith(("runs[0]", "runs[1]")) for m in msgs), msgs)
+        self.assertIn("runs[2]: cost_basis per_call fits only venue api, not rig", msgs)
+        self.assertIn("runs[3]: cost_basis per_call fits only venue api, not colab", msgs)
+        self.assertEqual(len(msgs), 2, msgs)
+        self.assertIn("api", layout.VENUES)
+        self.assertEqual(layout.BASIS_VENUES, {"per_call": ("api",)})
+
+    def test_records_made_before_the_api_venue_still_validate(self):
+        old = [{**RUN, "id": v, "venue": v, "cost_basis": b} for v, b in
+               (("rig", "rate_x_runtime"), ("colab", "balance"), ("runpod", "estimate"))]
+        self.experiment("demo", record("demo", runs=old))
+        self.assertEqual(self.errors(), [])
+        # an API cost on the rig venue, as rnd #287 first recorded it, is still a valid record
+        self.experiment("legacy", record("legacy", runs=[{**RUN, "venue": "rig", "cost_unit": "usd",
+                                                          "cost_basis": "rate_x_runtime"}]))
+        self.assertEqual(self.errors(), [])
 
     def test_a_boot_fail_run_needs_a_why(self):
         self.experiment("demo", record("demo", runs=[{**RUN, "id": "publisher-plan3", "venue": "runpod",

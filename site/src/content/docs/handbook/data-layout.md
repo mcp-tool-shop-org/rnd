@@ -83,6 +83,13 @@ That makes `README.md`, `experiment.json`, `data/`, `results/`, `scripts/` and a
   [`run_vocabulary.json`](https://github.com/mcp-tool-shop-org/rnd/blob/main/mcptoolshop_rnd/run_vocabulary.json).
   The Publisher's window records (`outcome.json`) use the same file, so a window's record maps onto a run one to
   one. R&D and the Publisher change it only by agreement.
+- **Venues:** `rig`, `colab`, `runpod` and `api`. The venue is where the model ran, not where the harness ran.
+  - A run whose model calls go to a cloud API (the Claude API, for example) is venue `api`, even when its harness
+    runs on the rig. Its hardware names the API and the models.
+  - Its cost basis is `per_call`: the sum of each call's billed price, from the harness's own per-call ledger. Or
+    `balance` or `estimate`, as for any venue.
+  - `per_call` fits only venue `api`, and `rnd check` refuses it anywhere else.
+  - Records made before the `api` venue still validate.
 - **The id rule:**
   - A run's id is the window's name (`14b`).
   - A retry adds its try (`14e-try4`).

@@ -1727,11 +1727,12 @@
       "covers": [
         "Ollama mistral-small3.2:24b (manifest sha256 5a408ab55df5c1b5cf46533c368813b30bf9e4d8fc39263bf2a3338cfa3b895b; model layer 41a5b0c3…; licence layer 43070e2d…)"
       ],
-      "url": "https://ollama.com/library/mistral-small3.2",
-      "page_date": "registry manifest read 2026-10-27",
-      "read_date": "2026-10-27",
+      "url": "https://registry.ollama.ai/v2/library/mistral-small3.2/blobs/sha256:43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1",
+      "page_date": "Ollama licence layer sha256:43070e2d… (manifest library/mistral-small3.2:latest, read 2026-11-15)",
+      "read_date": "2026-11-15",
       "clauses": [
-        "Apache License, Version 2.0, January 2004 (the bundled licence layer, unmodified)"
+        "Version 2.0, January 2004",
+        "Subject to the terms and conditions of this License"
       ],
       "uses": {
         "assets": "allowed",
@@ -1743,9 +1744,9 @@
         "Redistributing weights or derivatives: Apache-2.0 licence copy and notices.",
         "No condition attaches to model outputs."
       ],
-      "notes": "The Ollama tag's licence layer (sha256 43070e2d…) is byte-identical to apache.org's LICENSE-2.0.txt except a trailing newline, so the bundled licence is plain Apache-2.0 with nothing added. The manifest carries no HF commit or weights hash, so source_match stays unconfirmed in the lab's pin.",
-      "snapshot_sha256": "43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1",
-      "snapshot_file": "2026-10-27/mistral-small3.2-ollama-licence.txt",
+      "notes": "The Ollama tag's licence layer (sha256 43070e2d…) is byte-identical to apache.org's LICENSE-2.0.txt except a trailing newline, so the bundled licence is plain Apache-2.0 with nothing added. The manifest carries no HF commit or weights hash, so source_match stays unconfirmed in the lab's pin. Re-read 2026-11-15: the earlier url was the library web page, which does not show the licence text, and the quoted 'clause' carried an annotation, so the clause check could never match. The url now points at the licence layer blob itself (digest from the registry manifest, unchanged since 2026-10-27); its text equals apache.org's LICENSE-2.0.txt apart from one blank line. Library page: https://ollama.com/library/mistral-small3.2. Verdicts unchanged.",
+      "snapshot_sha256": "0ffddef9e48f8a09aed5caf2d44f7ba1c1be2d9b8e0a6f693b1635b2d5566645",
+      "snapshot_file": "2026-11-15-main/mistral-small3.2-ollama-page.txt",
       "archive_url": "",
       "restriction_search": "The licence layer read in full: Apache-2.0 sections 1-9, no added terms. Ollama's own terms (ollama-terms) govern the download service, not the model."
     },

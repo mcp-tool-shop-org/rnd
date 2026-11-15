@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.24.0.2] - 2026-11-15
+
+- licences: Mistral Small 3.2 Ollama licence layer re-read; entry points at the blob
+
 ## [1.1.24.0.1] - 2026-11-15
 
 - licences: GPT-OSS-120B licence and usage policy read at source (v2 Colab playtests)

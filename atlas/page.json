@@ -45,6 +45,16 @@
         "tests"
       ],
       "kind": "part",
+      "name": "licences",
+      "partLabel": "licences"
+    },
+    {
+      "doors": 1,
+      "importedBy": [],
+      "importedByTests": [
+        "tests"
+      ],
+      "kind": "part",
       "name": "rnd",
       "partLabel": "rnd"
     },
@@ -74,54 +84,41 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 0,
-      "changed": 23,
+      "added": 72,
+      "changed": 12,
       "moved": 0,
-      "parts": 8,
-      "removed": 121
+      "parts": 7,
+      "removed": 0
     },
     "items": [
       {
-        "kind": "import-removed",
-        "sentence": "tests no longer imports site.",
+        "kind": "import-added",
+        "sentence": "tests now imports licences.",
         "subjects": [
           "tests",
-          "site"
+          "licences"
         ]
       },
       {
-        "kind": "door",
-        "sentence": "CI no longer runs site/scripts/check_feed.py and site/scripts/newsletter_publish.py.",
+        "kind": "landing",
+        "sentence": "README.md is now also read by experiments/ai-jam-colab/experiment.json, experiments/colab-campaign-2026-11/experiment.json, experiments/etv-narrator/experiment.json and experiments/judge-bakeoff/experiment.json.",
         "subjects": [
-          ".github/workflows/ci.yml",
-          "site/scripts/check_feed.py",
-          "site/scripts/newsletter_publish.py"
-        ]
-      },
-      {
-        "kind": "door",
-        "sentence": "Publish the newsletter (.github/workflows/newsletter-publish.yml) is no longer a door.",
-        "subjects": [
-          ".github/workflows/newsletter-publish.yml"
-        ]
-      },
-      {
-        "kind": "door",
-        "sentence": "Deploy site to GitHub Pages no longer runs site/scripts/check_feed.py.",
-        "subjects": [
-          ".github/workflows/pages.yml",
-          "site/scripts/check_feed.py"
+          "README.md",
+          "experiments/ai-jam-colab/experiment.json",
+          "experiments/colab-campaign-2026-11/experiment.json",
+          "experiments/etv-narrator/experiment.json",
+          "experiments/judge-bakeoff/experiment.json"
         ]
       },
       {
         "kind": "counts",
-        "sentence": "121 files removed and 23 changed content, across 8 parts.",
+        "sentence": "72 files added and 12 changed content, across 7 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "a68ab3c766a5f865c8e1597606f1394a281e4233",
-      "generatedAt": "2026-11-11T22:36:05.073Z"
+      "commit": "9b53fbbae53fcb6a00e911dbc2d5211ead2bcbfd",
+      "generatedAt": "2026-11-12T20:26:41.150Z"
     },
     "unchanged": false
   },
@@ -143,23 +140,8 @@
     },
     {
       "a": "mcptoolshop_rnd/layout.py",
-      "b": "mcptoolshop_rnd/runs.py",
-      "either": 7,
-      "partLabels": [
-        "mcptoolshop_rnd",
-        "mcptoolshop_rnd"
-      ],
-      "parts": [
-        "mcptoolshop_rnd",
-        "mcptoolshop_rnd"
-      ],
-      "relation": "inside",
-      "shared": 4
-    },
-    {
-      "a": "mcptoolshop_rnd/layout.py",
       "b": "tests/test_runs.py",
-      "either": 7,
+      "either": 8,
       "partLabels": [
         "mcptoolshop_rnd",
         "tests"
@@ -169,7 +151,7 @@
         "tests"
       ],
       "relation": "b-imports-a",
-      "shared": 4
+      "shared": 5
     },
     {
       "a": "mcptoolshop_rnd/localbuilders/proxy.py",
@@ -184,6 +166,21 @@
         "tests"
       ],
       "relation": "b-imports-a",
+      "shared": 4
+    },
+    {
+      "a": "mcptoolshop_rnd/layout.py",
+      "b": "mcptoolshop_rnd/runs.py",
+      "either": 8,
+      "partLabels": [
+        "mcptoolshop_rnd",
+        "mcptoolshop_rnd"
+      ],
+      "parts": [
+        "mcptoolshop_rnd",
+        "mcptoolshop_rnd"
+      ],
+      "relation": "inside",
       "shared": 4
     },
     {
@@ -208,9 +205,9 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 5 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 2,
-  "commit": "9b53fbbae53fcb6a00e911dbc2d5211ead2bcbfd",
+  "commit": "2ef559df9d7a8ae6c7400c3360a0dcfb82f0f51f",
   "defaultBranch": "main",
-  "derived": "14 parts, mostly Python (144 files), shell (30), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "14 parts, mostly Python (145 files), shell (30), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 6 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -242,12 +239,17 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 27
+          "files": 28
         },
         {
           "boundary": "experiments",
           "depth": 1,
           "files": 7
+        },
+        {
+          "boundary": "licences",
+          "depth": 1,
+          "files": 1
         },
         {
           "boundary": "rnd",
@@ -544,12 +546,12 @@
       ]
     }
   ],
-  "generatedAt": "2026-11-12T20:26:41.150Z",
+  "generatedAt": "2026-11-15T11:40:48.380Z",
   "limits": [
     "11 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 8 more.",
     "24 writes and 35 reads use paths built at run time and are not named here.",
     "7 writes go to places this repository does not track, so they are not listed as generated.",
-    "41 writes and 124 reads go to a path their caller passes, not to this repository.",
+    "41 writes and 125 reads go to a path their caller passes, not to this repository.",
     "12 reads go to the directory the command is run in (README.md, SECURITY.md, entries and 3 more places), not to this repository.",
     "2 reads go to the directory the command is run in or a path their caller passes, not to this repository.",
     "2 reads go to the home directory (.claude/), not to this repository.",
@@ -604,7 +606,7 @@
   "startReason": "This path follows rnd (a command people run) from its entry, since CI runs only tests and checks.",
   "summary": "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only).",
   "summaryFrom": "person",
-  "testFiles": 60,
+  "testFiles": 61,
   "testedBy": {
     "experiments": 7,
     "mcptoolshop_rnd": 20,

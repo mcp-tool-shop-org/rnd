@@ -1,20 +1,18 @@
 # rnd: how it works
 
-Mapped at 2026-11-12 from commit 9b53fbb by Atlas 1.26.0.
+Mapped at 2026-11-15 from commit 2ef559d by Atlas 1.26.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-14 parts, mostly Python (144 files), shell (30), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 5 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
+14 parts, mostly Python (145 files), shell (30), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 6 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-11-11 (a68ab3c)
+## What changed since 2026-11-12 (9b53fbb)
 
-- tests no longer imports site.
-- CI no longer runs site/scripts/check_feed.py and site/scripts/newsletter_publish.py.
-- Publish the newsletter (.github/workflows/newsletter-publish.yml) is no longer a door.
-- Deploy site to GitHub Pages no longer runs site/scripts/check_feed.py.
-- 121 files removed and 23 changed content, across 8 parts.
+- tests now imports licences.
+- README.md is now also read by experiments/ai-jam-colab/experiment.json, experiments/colab-campaign-2026-11/experiment.json, experiments/etv-narrator/experiment.json and experiments/judge-bakeoff/experiment.json.
+- 72 files added and 12 changed content, across 7 parts.
 
 ## What comes in
 
@@ -26,7 +24,7 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 ## What happens through CI
 
 1. The workflow runs verify.sh in the repository root and tests/ in tests; it checks mcptoolshop_rnd/ in mcptoolshop_rnd.
-2. That reaches experiments (7 files) and rnd (1 file).
+2. That reaches experiments (7 files), licences (1 file) and rnd (1 file).
 3. It writes to entries/, experiments/charts/, instruments/ and site/public/charts/.
 4. It uploads coverage to Codecov.
 
@@ -49,6 +47,7 @@ The studio research bench: Markdown entries with tiered sources and checked clai
 - **mcptoolshop_rnd** is imported by 2 parts (experiments, rnd), and by 1 more only from tests; it sits on the path of 3 doors.
 - **the repository root** is imported by no other part and sits on the path of 2 doors.
 - **experiments** is imported only from tests, by 1 part (tests), and sits on the path of 1 door.
+- **licences** is imported only from tests, by 1 part (tests), and sits on the path of 1 door.
 - **rnd** is imported only from tests, by 1 part (tests), and sits on the path of 1 door.
 - **experiments/natural-errors/data/** is written by experiments and read by experiments; a hand edit reaches every reader.
 - **entries/** holds files written by mcptoolshop_rnd and read by experiments and mcptoolshop_rnd, and by 2 tests; a hand edit reaches every reader.
@@ -58,9 +57,9 @@ the repository root holds only shell files, which this map does not read, so wha
 ## What tends to change together
 
 - **experiments/atlas-mcp-utility/run.py** and **tests/test_atlas_mcp_utility_run.py** changed together in 15 of 15 commits.
-- **mcptoolshop_rnd/layout.py** and **mcptoolshop_rnd/runs.py** changed together in 4 of 7 commits, inside the mcptoolshop_rnd part.
-- **mcptoolshop_rnd/layout.py** and **tests/test_runs.py** changed together in 4 of 7 commits, and the tests part imports the mcptoolshop_rnd part.
+- **mcptoolshop_rnd/layout.py** and **tests/test_runs.py** changed together in 5 of 8 commits, and the tests part imports the mcptoolshop_rnd part.
 - **mcptoolshop_rnd/localbuilders/proxy.py** and **tests/test_localbuilders.py** changed together in 4 of 7 commits, and the tests part imports the mcptoolshop_rnd part.
+- **mcptoolshop_rnd/layout.py** and **mcptoolshop_rnd/runs.py** changed together in 4 of 8 commits, inside the mcptoolshop_rnd part.
 - **rnd/cli.py** and **tests/test_rnd.py** changed together in 4 of 8 commits.
 
 2 files changed together with their own tests, as expected.
@@ -131,7 +130,7 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 - 11 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 8 more.
 - 24 writes and 35 reads use paths built at run time and are not named here.
 - 7 writes go to places this repository does not track, so they are not listed as generated.
-- 41 writes and 124 reads go to a path their caller passes, not to this repository.
+- 41 writes and 125 reads go to a path their caller passes, not to this repository.
 - 12 reads go to the directory the command is run in (README.md, SECURITY.md, entries and 3 more places), not to this repository.
 - 2 reads go to the directory the command is run in or a path their caller passes, not to this repository.
 - 2 reads go to the home directory (.claude/), not to this repository.

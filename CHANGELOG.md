@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.24.0.7] - 2026-11-16
+
+- finding: D5c judge window B measured (the sixth arm, elephant-1, fails; all six fail)
+- Added `2026-11-16-measured-2026-11-16-d5c-judge-window-b-the-sixth-arm-elephan`: Measured 2026-11-16: D5c judge window B, the sixth arm (elephant-1) fails the three-way bars
+
 ## [1.1.24.0.6] - 2026-11-15
 
 - finding: D5c judge window A measured

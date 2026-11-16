@@ -47,7 +47,7 @@ Strict three-way accuracy on the 264 held-out items, with per-class recall (out 
 - [unverified] Its per-class recall is 16/88 supported, 1/88 contradicted and 86/88 can't tell, with 33 order flips.
 - [unverified] The mean probability mass outside the three choice words is 0.548 per call (maximum 0.792).
 - [unverified] The window cost 2.0910 Colab units over 749 s on one G4 card.
-- [verified] A labelled reference row (Gemini 4 Carbon, batched, extended reasoning) answered 264 of 264 held-out items in both fact orders, and 96 of 96 development items (via: R&D's scorer and an independent re-score from separately exported answer sheets by a second seat, 2026-11-16).
+- [verified] A labelled reference row, Gemini 4 Carbon run batched with extended reasoning, answered 264 of 264 held-out items in both fact orders, and 96 of 96 development items (via: R&D's scorer and an independent re-score by a second seat from separately exported answer sheets, 2026-11-16)
 
 ## Sources
 

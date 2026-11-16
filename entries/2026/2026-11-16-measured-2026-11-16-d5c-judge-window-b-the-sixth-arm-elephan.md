@@ -32,11 +32,12 @@ Strict three-way accuracy on the 264 held-out items, with per-class recall (out 
   - the rows file's sha256 matched its completion record, and the rig's and the result archive's copies of the run records were byte-identical.
 - **Much of this judge's probability sits outside the three offered answers.** The mean probability mass not on any of the three choice words was 0.548 per call (largest 0.792), and about the same whichever answer it gave. This is reported as measured; its cause has not been examined.
 - **Item family:** as with window A's generative arms, "at most" items score better (strict 61/132) than "at least" items (42/132). Contradicted recall was 1/44 and 0/44.
+- **The items are answerable from the text.** The same day, as a labelled reference row and not a judge, Gemini 4 Carbon was given the same items in the kit's text form of the same arm (same three labels and descriptions), in batches of 120 with extended reasoning, each batch holding one item per triad. It answered all 264 held-out items correctly in both fact orders (264/264 and 264/264; 88/88 in every class; 0 order flips), and all 96 development items as well. It spent about 67,000 reasoning tokens per batch, roughly 560 per item, where a judge answers in one step. The row is never ranked among the judges and no bar is judged on it.
 - **Timing, for anyone planning a similar window:** building the judge's CUDA extension from source took 424 s, against an estimate of 90 to 240 s; the 720 calls took 77 s after a 15 s load, at a peak of 21,695 MiB of GPU memory.
 
 ## Studio relevance
 
-- No judge and no wording in this six-arm set separates "contradicted" from "can't tell" on temporal claims. Adding another three-way choice arm is not the next step.
+- No judge in this six-arm set separates "contradicted" from "can't tell" on temporal claims, under any wording tried. The reference row shows the cause is not the items or the instruction: a strong reader with room to reason gets every one. The six arms' failure is a limit of those judges answering in one step. The reference row is not a judge candidate (it is a hosted model, batched, with long reasoning), and adding another one-step three-way choice arm is not the next step.
 - The lead is unchanged from window A: the two-question format's ranking signal, with a cut-off fitted on a fresh calibration set and tested on a fresh held-out set under its own pre-registration, and a 27B-class judge scored on that same held-out set.
 - `act`: these results gate which judge, if any, can check three-way claims in the studio's data pipelines. None can yet.
 
@@ -46,9 +47,11 @@ Strict three-way accuracy on the 264 held-out items, with per-class recall (out 
 - [unverified] Its per-class recall is 16/88 supported, 1/88 contradicted and 86/88 can't tell, with 33 order flips.
 - [unverified] The mean probability mass outside the three choice words is 0.548 per call (maximum 0.792).
 - [unverified] The window cost 2.0910 Colab units over 749 s on one G4 card.
+- [verified] A labelled reference row (Gemini 4 Carbon, batched, extended reasoning) answered 264 of 264 held-out items in both fact orders, and 96 of 96 development items (via: R&D's scorer and an independent re-score from separately exported answer sheets by a second seat, 2026-11-16).
 
 ## Sources
 
 - [primary] https://github.com/mcp-tool-shop-org/reasoning-dataset-lab — reasoning-dataset-lab; the judge kit the window ran (commit ed8b4e73, PRs #93, #99, #102, #103, #105)
 - [rig] R&D run receipts (kept local): step-7 score report 8fd5c450…; rows file cba20d3e…; the window's pre-registration (five-arm window ce8e6b97…, with its arm-4 scoring and model-strings addenda), filed before the run; the scorer pins in force (addendum f83a31d0…)
+- [rig] The reference row's pre-registration (written before any item was sent, with two dated notes), its six exported chats and its score report, kept local; the answer sheets were exported twice by independent routes and hash equal
 - [rig] The window A finding in this library: `2026-11-15-measured-2026-11-15-d5c-judge-window-a-five-arms-all-fail-th`

@@ -13,7 +13,7 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [1.1.24.0.8] - 2026-11-17
 
-- licences: scipy (BSD-3), HiGHS, imodels and rulefit (MIT) allowed for evaluation code; TabPFN v2 weights (Prior Labs License 1.1) internal second opinion only. Read for the d5c generator audit (Note 4 v3).
+- licences: scipy (BSD-3), HiGHS, imodels and rulefit (MIT) allowed for evaluation code, each pinned to a release tag. Read for the d5c generator audit (Note 4) and the exact selection of evaluation sets planned for addendum v4.
 
 ## [1.1.24.0.7] - 2026-11-16
 

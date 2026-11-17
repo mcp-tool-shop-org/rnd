@@ -3217,6 +3217,116 @@
       "snapshot_sha256": "d9cbbe69ab677504502958508bec9c5bfe7e08b85aacf48def5bb63bb03303fc",
       "snapshot_file": "2026-11-15-judges/qwen3.8-27b-card.txt",
       "archive_url": null
+    },
+    {
+      "id": "scipy-licence",
+      "owner": "SciPy Developers (scipy)",
+      "kind": "licence",
+      "covers": [
+        "scipy, including scipy.optimize.milp (which calls HiGHS), in the d5c generator audit and in MILP selection of evaluation sets (evaluation-set construction, never training data)"
+      ],
+      "url": "https://raw.githubusercontent.com/scipy/scipy/v1.18.1/LICENSE.txt",
+      "page_date": "SciPy LICENSE.txt at release tag v1.18.1 (BSD 3-Clause)",
+      "read_date": "2026-11-17",
+      "clauses": [
+        "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:",
+        "Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.",
+        "Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.",
+        "Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "BSD 3-Clause: a redistributed copy keeps the copyright notice, the conditions and the disclaimer; the names may not be used to endorse a product"
+      ],
+      "notes": "Read by R&D on 2026-11-17 for d5c Note 4 (the generator audit) and the exact selection planned for addendum v4. MILP selection here is evaluation-set construction: it picks which generated items form the sealed evaluation parts, never training data, so training is n/a. Evaluation code only, run on the rig; nothing is redistributed. URL pinned to a release tag or commit (Publisher, 2026-11-17).",
+      "snapshot_sha256": "5609ac35fb93c19b9ca4d391bf810b26c0b20e5c7ab9d6e991dc532841b313a0",
+      "snapshot_file": "2026-11-17/scipy-licence.txt"
+    },
+    {
+      "id": "highs-licence",
+      "owner": "HiGHS (ERGO-Code)",
+      "kind": "licence",
+      "covers": [
+        "HiGHS, the linear and mixed-integer solver behind scipy.optimize.milp, for MILP selection of evaluation sets in addendum v4 (evaluation-set construction, never training data)"
+      ],
+      "url": "https://raw.githubusercontent.com/ERGO-Code/HiGHS/v1.16.0/LICENSE.txt",
+      "page_date": "HiGHS LICENSE.txt at release tag v1.16.0 (MIT)",
+      "read_date": "2026-11-17",
+      "clauses": [
+        "Permission is hereby granted, free of charge, to any person obtaining a copy of this software",
+        "The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT: a redistributed copy keeps the copyright notice and this permission notice; internal use in evaluation code has no other condition"
+      ],
+      "notes": "Read by R&D on 2026-11-17 for d5c Note 4 (the generator audit) and the exact selection planned for addendum v4. MILP selection here is evaluation-set construction: it picks which generated items form the sealed evaluation parts, never training data, so training is n/a. Evaluation code only, run on the rig; nothing is redistributed. URL pinned to a release tag or commit (Publisher, 2026-11-17).",
+      "snapshot_sha256": "4b439a6d1b0d63ea388f46b5a1c9850a979021d8d99e503cf75d7c4238842645",
+      "snapshot_file": "2026-11-17/highs-licence.txt"
+    },
+    {
+      "id": "imodels-licence",
+      "owner": "imodels (C. Singh and contributors)",
+      "kind": "licence",
+      "covers": [
+        "imodels, for its RuleFit implementation (the descriptive rule search of Note 4 §3)"
+      ],
+      "url": "https://raw.githubusercontent.com/csinva/imodels/v3.0.4/license.md",
+      "page_date": "imodels license.md at release tag v3.0.4 (MIT)",
+      "read_date": "2026-11-17",
+      "clauses": [
+        "Permission is hereby granted, free of charge, to any person obtaining a copy of this software",
+        "The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT: a redistributed copy keeps the copyright notice and this permission notice; internal use in evaluation code has no other condition"
+      ],
+      "notes": "Read by R&D on 2026-11-17 for d5c Note 4 (the generator audit) and the exact selection planned for addendum v4. MILP selection here is evaluation-set construction: it picks which generated items form the sealed evaluation parts, never training data, so training is n/a. Evaluation code only, run on the rig; nothing is redistributed. URL pinned to a release tag or commit (Publisher, 2026-11-17). The licence file's copyright line still reads 'The Python Packaging Authority' (the packaging template's header, never changed upstream); the MIT grant is the same either way.",
+      "snapshot_sha256": "2643ba4ff5a43257f25d446262c2a43aabe7965844196d19376db442d07886e6",
+      "snapshot_file": "2026-11-17/imodels-licence.txt"
+    },
+    {
+      "id": "rulefit-molnar-licence",
+      "owner": "Christoph Molnar (rulefit)",
+      "kind": "licence",
+      "covers": [
+        "rulefit (Python), an alternative RuleFit implementation for Note 4 §3"
+      ],
+      "url": "https://raw.githubusercontent.com/christophM/rulefit/v0.3/LICENSE",
+      "page_date": "rulefit LICENSE at tag v0.3 (MIT)",
+      "read_date": "2026-11-17",
+      "clauses": [
+        "Permission is hereby granted, free of charge, to any person obtaining a copy of this software",
+        "The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT: a redistributed copy keeps the copyright notice and this permission notice; internal use in evaluation code has no other condition"
+      ],
+      "notes": "Read by R&D on 2026-11-17 for d5c Note 4 (the generator audit) and the exact selection planned for addendum v4. MILP selection here is evaluation-set construction: it picks which generated items form the sealed evaluation parts, never training data, so training is n/a. Evaluation code only, run on the rig; nothing is redistributed. URL pinned to a release tag or commit (Publisher, 2026-11-17).",
+      "snapshot_sha256": "a80397d85805b0effeba7d72fc1c9621e519c59fb3133907523377cd99f41ea1",
+      "snapshot_file": "2026-11-17/rulefit-molnar-licence.txt"
     }
   ]
 }

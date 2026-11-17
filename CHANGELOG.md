@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.24.0.9] - 2026-11-17
+
+- licences: numpy, scikit-learn and pandas (d5c pool audit)
+
 ## [1.1.24.0.8] - 2026-11-17
 
 - licences: scipy (BSD-3), HiGHS, imodels and rulefit (MIT) allowed for evaluation code, each pinned to a release tag. Read for the d5c generator audit (Note 4) and the exact selection of evaluation sets planned for addendum v4.

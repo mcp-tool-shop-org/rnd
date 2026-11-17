@@ -3327,6 +3327,94 @@
       "notes": "Read by R&D on 2026-11-17 for d5c Note 4 (the generator audit) and the exact selection planned for addendum v4. MILP selection here is evaluation-set construction: it picks which generated items form the sealed evaluation parts, never training data, so training is n/a. Evaluation code only, run on the rig; nothing is redistributed. URL pinned to a release tag or commit (Publisher, 2026-11-17).",
       "snapshot_sha256": "a80397d85805b0effeba7d72fc1c9621e519c59fb3133907523377cd99f41ea1",
       "snapshot_file": "2026-11-17/rulefit-molnar-licence.txt"
+    },
+    {
+      "id": "numpy-licence",
+      "owner": "NumPy Developers (numpy)",
+      "kind": "licence",
+      "covers": [
+        "numpy 2.5.5, the array library under the d5c pool audit (Note 4 v5) and its scipy, scikit-learn, pandas and imodels dependencies"
+      ],
+      "url": "https://raw.githubusercontent.com/numpy/numpy/v2.5.5/LICENSE.txt",
+      "page_date": "NumPy LICENSE.txt at release tag v2.5.5 (BSD 3-Clause)",
+      "read_date": "2026-11-17",
+      "clauses": [
+        "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:",
+        "Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.",
+        "Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.",
+        "Neither the name of the NumPy Developers nor the names of any contributors may be used to endorse or promote products derived from this software without specific prior written permission."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "BSD 3-Clause: a redistributed copy keeps the copyright notice, the conditions and the disclaimer; the names may not be used to endorse a product",
+        "PyPI lists the wheel's licence as BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0 (bundled components); all permissive, and nothing is redistributed"
+      ],
+      "notes": "Read by R&D on 2026-11-17 for the d5c Note 4 v5 pool audit (the L1-penalised multinomial probe, the permutation statistics, and imodels' RuleFit, which needs them). Evaluation code only, run on the rig; nothing is redistributed, so training is n/a. URL pinned to the release tag of the version the audit venv installs.",
+      "snapshot_sha256": "6b7dbbd2e6dd1bf8cdc9ce51614aa39674136cc3d2d5969b4b7d4d5f12f5fab2",
+      "snapshot_file": "2026-11-17/numpy-licence.txt"
+    },
+    {
+      "id": "scikit-learn-licence",
+      "owner": "The scikit-learn developers (scikit-learn)",
+      "kind": "licence",
+      "covers": [
+        "scikit-learn 1.9.1, for the L1-penalised multinomial logistic regression probe of the d5c pool audit (Note 4 v5 §3) and as imodels' base"
+      ],
+      "url": "https://raw.githubusercontent.com/scikit-learn/scikit-learn/1.9.1/COPYING",
+      "page_date": "scikit-learn COPYING at release tag 1.9.1 (BSD 3-Clause)",
+      "read_date": "2026-11-17",
+      "clauses": [
+        "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:",
+        "Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.",
+        "Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.",
+        "Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "BSD 3-Clause: a redistributed copy keeps the copyright notice, the conditions and the disclaimer; the names may not be used to endorse a product"
+      ],
+      "notes": "Read by R&D on 2026-11-17 for the d5c Note 4 v5 pool audit (the L1-penalised multinomial probe, the permutation statistics, and imodels' RuleFit, which needs them). Evaluation code only, run on the rig; nothing is redistributed, so training is n/a. URL pinned to the release tag of the version the audit venv installs.",
+      "snapshot_sha256": "e98f8b28a4aae51b8c56309b7d0adc3c0c09860180e999d5404d0e160fbdf36f",
+      "snapshot_file": "2026-11-17/scikit-learn-licence.txt"
+    },
+    {
+      "id": "pandas-licence",
+      "owner": "pandas (PyData Development Team and contributors)",
+      "kind": "licence",
+      "covers": [
+        "pandas 3.1.1, a dependency of imodels' RuleFit in the d5c pool audit (Note 4 v5 §3)"
+      ],
+      "url": "https://raw.githubusercontent.com/pandas-dev/pandas/v3.1.1/LICENSE",
+      "page_date": "pandas LICENSE at release tag v3.1.1 (BSD 3-Clause)",
+      "read_date": "2026-11-17",
+      "clauses": [
+        "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:",
+        "Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.",
+        "Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.",
+        "Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "BSD 3-Clause: a redistributed copy keeps the copyright notice, the conditions and the disclaimer; the names may not be used to endorse a product"
+      ],
+      "notes": "Read by R&D on 2026-11-17 for the d5c Note 4 v5 pool audit (the L1-penalised multinomial probe, the permutation statistics, and imodels' RuleFit, which needs them). Evaluation code only, run on the rig; nothing is redistributed, so training is n/a. URL pinned to the release tag of the version the audit venv installs.",
+      "snapshot_sha256": "e130c4a8d96b922a8192aa653f2ce021e2bc5d6b3bf756c5b811d36edccd5163",
+      "snapshot_file": "2026-11-17/pandas-licence.txt"
     }
   ]
 }

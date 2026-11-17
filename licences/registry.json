@@ -3217,6 +3217,144 @@
       "snapshot_sha256": "d9cbbe69ab677504502958508bec9c5bfe7e08b85aacf48def5bb63bb03303fc",
       "snapshot_file": "2026-11-15-judges/qwen3.8-27b-card.txt",
       "archive_url": null
+    },
+    {
+      "id": "scipy-licence",
+      "owner": "SciPy Developers (scipy)",
+      "kind": "licence",
+      "covers": [
+        "scipy, including scipy.optimize.milp (which calls HiGHS), in the d5c generator audit and MILP selection"
+      ],
+      "url": "https://raw.githubusercontent.com/scipy/scipy/main/LICENSE.txt",
+      "page_date": "SciPy LICENSE.txt (BSD 3-Clause, main branch)",
+      "read_date": "2026-11-17",
+      "clauses": [
+        "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:",
+        "Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "BSD 3-Clause: a redistributed copy keeps the copyright notice, the conditions and the disclaimer; the names may not be used to endorse a product"
+      ],
+      "notes": "Read by R&D on 2026-11-17 for d5c Note 4 v3 (the generator audit: G-tests with permutation nulls, an L1 probe, RuleFit as a descriptive rule search, and MILP selection planned for addendum v4). Evaluation code only, run on the rig; nothing is redistributed.",
+      "snapshot_sha256": "5609ac35fb93c19b9ca4d391bf810b26c0b20e5c7ab9d6e991dc532841b313a0",
+      "snapshot_file": "2026-11-17/scipy-licence.txt"
+    },
+    {
+      "id": "highs-licence",
+      "owner": "HiGHS (ERGO-Code)",
+      "kind": "licence",
+      "covers": [
+        "HiGHS, the linear and mixed-integer solver behind scipy.optimize.milp, for exact selection in addendum v4"
+      ],
+      "url": "https://raw.githubusercontent.com/ERGO-Code/HiGHS/master/LICENSE.txt",
+      "page_date": "HiGHS LICENSE.txt (MIT, master branch)",
+      "read_date": "2026-11-17",
+      "clauses": [
+        "Permission is hereby granted, free of charge, to any person obtaining a copy of this software",
+        "The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT: a redistributed copy keeps the copyright notice and this permission notice; internal use in evaluation code has no other condition"
+      ],
+      "notes": "Read by R&D on 2026-11-17 for d5c Note 4 v3 (the generator audit: G-tests with permutation nulls, an L1 probe, RuleFit as a descriptive rule search, and MILP selection planned for addendum v4). Evaluation code only, run on the rig; nothing is redistributed.",
+      "snapshot_sha256": "4b439a6d1b0d63ea388f46b5a1c9850a979021d8d99e503cf75d7c4238842645",
+      "snapshot_file": "2026-11-17/highs-licence.txt"
+    },
+    {
+      "id": "imodels-licence",
+      "owner": "imodels (C. Singh and contributors)",
+      "kind": "licence",
+      "covers": [
+        "imodels, for its RuleFit implementation (the descriptive rule search of Note 4 §3)"
+      ],
+      "url": "https://raw.githubusercontent.com/csinva/imodels/master/license.md",
+      "page_date": "imodels license.md (MIT, master branch)",
+      "read_date": "2026-11-17",
+      "clauses": [
+        "Permission is hereby granted, free of charge, to any person obtaining a copy of this software",
+        "The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT: a redistributed copy keeps the copyright notice and this permission notice; internal use in evaluation code has no other condition"
+      ],
+      "notes": "Read by R&D on 2026-11-17 for d5c Note 4 v3 (the generator audit: G-tests with permutation nulls, an L1 probe, RuleFit as a descriptive rule search, and MILP selection planned for addendum v4). Evaluation code only, run on the rig; nothing is redistributed.",
+      "snapshot_sha256": "2643ba4ff5a43257f25d446262c2a43aabe7965844196d19376db442d07886e6",
+      "snapshot_file": "2026-11-17/imodels-licence.txt"
+    },
+    {
+      "id": "rulefit-molnar-licence",
+      "owner": "Christoph Molnar (rulefit)",
+      "kind": "licence",
+      "covers": [
+        "rulefit (Python), an alternative RuleFit implementation for Note 4 §3"
+      ],
+      "url": "https://raw.githubusercontent.com/christophM/rulefit/master/LICENSE",
+      "page_date": "rulefit LICENSE (MIT, master branch)",
+      "read_date": "2026-11-17",
+      "clauses": [
+        "Permission is hereby granted, free of charge, to any person obtaining a copy of this software",
+        "The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "MIT: a redistributed copy keeps the copyright notice and this permission notice; internal use in evaluation code has no other condition"
+      ],
+      "notes": "Read by R&D on 2026-11-17 for d5c Note 4 v3 (the generator audit: G-tests with permutation nulls, an L1 probe, RuleFit as a descriptive rule search, and MILP selection planned for addendum v4). Evaluation code only, run on the rig; nothing is redistributed.",
+      "snapshot_sha256": "a80397d85805b0effeba7d72fc1c9621e519c59fb3133907523377cd99f41ea1",
+      "snapshot_file": "2026-11-17/rulefit-molnar-licence.txt"
+    },
+    {
+      "id": "tabpfn-v2-weights-licence",
+      "owner": "Prior Labs (TabPFN v2 weights)",
+      "kind": "model-licence",
+      "covers": [
+        "Prior-Labs/TabPFN-v2-clf weights (Prior Labs License 1.1), as an internal second opinion only, never in the d5c gate"
+      ],
+      "url": "https://huggingface.co/Prior-Labs/TabPFN-v2-clf/raw/main/LICENSE.txt",
+      "page_date": "Prior Labs License, Version 1.1, May 2025",
+      "read_date": "2026-11-17",
+      "clauses": [
+        "To clarify, internal benchmarking and testing without external communication shall not qualify as distribution or making available pursuant to this Section 10 and no attribution under this Section 10 shall be required.",
+        "you shall also include “TabPFN” at the beginning of any such AI model name."
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "conditions",
+        "evaluation": "conditions",
+        "code": "conditions"
+      },
+      "conditions": [
+        "§10: internal benchmarking and testing without external communication needs no attribution",
+        "§10(A)/(B): anything distributed or made available that contains its source or weights carries a copy of the licence and displays 'Built with PriorLabs-TabPFN'",
+        "§10: weights or outputs used to improve an AI model that is distributed must start that model's name with 'TabPFN'",
+        "Studio policy (Note 4 v3, Publisher 2026-11-17): internal second opinion only; never in the d5c gate and never in any training-data selection"
+      ],
+      "notes": "Read by R&D on 2026-11-17 from the model repo's LICENSE.txt (the code repo PriorLabs/TabPFN is plain Apache 2.0; the weights carry this licence). The licence is Apache 2.0 with one added paragraph (10).",
+      "snapshot_sha256": "33c4b2858202eebe5b8438d2ec81caf4bd0804a933de5fc212eb38aa896755d7",
+      "snapshot_file": "2026-11-17/tabpfn-v2-weights-licence.txt"
     }
   ]
 }

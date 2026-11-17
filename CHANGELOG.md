@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.24.0.8] - 2026-11-17
+
+- licences: scipy (BSD-3), HiGHS, imodels and rulefit (MIT) allowed for evaluation code; TabPFN v2 weights (Prior Labs License 1.1) internal second opinion only. Read for the d5c generator audit (Note 4 v3).
+
 ## [1.1.24.0.7] - 2026-11-16
 
 - finding: D5c judge window B measured (the sixth arm, elephant-1, fails; all six fail)

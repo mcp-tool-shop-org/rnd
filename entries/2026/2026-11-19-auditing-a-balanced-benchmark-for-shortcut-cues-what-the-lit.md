@@ -86,6 +86,9 @@ same night, with an earlier seed on shortcut-free test items. Their findings are
 
 1. Note 13 to the d5c pre-registration (2026-11-19) carries the pass wording, the selection limit and the re-run
    band. It changes no gate, threshold, feature list or recipe.
+   Two addenda followed the same night, also before any verdict pool: the first adds the rare-cue limit and
+   corrects the note's statement of the selection gap; the second says a failed verdict pool is burned, and a
+   new one is drawn only after a recorded change.
 2. Run the approved diagnostics on a public-seed pool after the current generator fix passes review, within-triad
    correlations first.
 3. Done 2026-11-19: seeds 36 and 37 and the two consults are harvested below. Still open: checking their citations at source.
@@ -175,7 +178,7 @@ that is noted; none of their numbers has been reproduced on a d5c pool.
 - [unverified] Tests correlated with the selection-balanced features are conservative under the audit's shuffle, by roughly the share of their variance those features explain (the review's and the consult's reasoning from rerandomization theory; not measured on d5c)
 - [unverified] A feature negatively correlated within a triad can be flagged too often under a shuffle that ignores triads (an AI Studio consult's derivation; not measured on d5c)
 - [unverified] Five or six judges on about 1,000 triads support tiers but not a full ranking when judges sit within a few percentage points of each other; the detectable gap between two judges is about 3.3 percentage points at 80% power with family-wise control (a Gemini Deep Research report's calculation from assumed correlations; not checked against d5c's scoring)
-- [verified] For one feature present on exactly one claim of every triad, the null variance of a class's count of that feature under a label shuffle across triads is 2K/(3K-1) of its variance under a within-triad shuffle, about two thirds (0.6669 at K = 1,056 triads): binomial K, 1/3 against hypergeometric 3K, K, K (via: R&D algebraic check, 2026-11-19; first derived in an AI Studio consult)
+- [verified] For one feature present on exactly one claim of every triad, the null variance of a class's count of that feature under a label shuffle across triads is 2K/(3K-1) of its variance under a within-triad shuffle, about two thirds (0.6669 at K = 1,056 triads): hypergeometric 3K, K, K against binomial K, 1/3 (via: R&D algebraic check, 2026-11-19; first derived in an AI Studio consult)
 - [unverified] After rerandomization-style selection, the null variance of a linear contrast correlated with the balanced covariates (and the scale of its chi-square statistic) shrinks by up to the squared correlation, down to one minus the squared correlation in the exact-balance limit (Morgan and Rubin 2012; Li, Ding and Rubin 2018; as cited by two consults and a Deep Research report and described by the Gemini 4 Carbon review; papers not read by R&D)
 - [unverified] At 3,000 items and 600 tests, the smallest three-way accuracy lift detectable at 80% power for a common binary cue is about +0.032 to +0.033 (a Gemini Deep Research report's calculation; consistent with R&D's simulation)
 - [unverified] Scoring a triad only when all three items are correct lowers pairwise power from about 75% to about 54% at a 75% baseline (a Gemini Deep Research report's own simulation, code not shown)

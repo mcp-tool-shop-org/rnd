@@ -28,7 +28,7 @@ claim number, where it is visible without reading the facts at all.
   "shared" cells (lookup accuracy above one third, minus the same lookup on shuffled labels; in-sample, so sizes are
   upper bounds).
 - **It is a design effect.** For 8 of the 12 structural features examined, the most skewed value favours the same
-  class in all 11 parts of the pool. Shuffling labels inside triads and inside part and cell give the same null, so the audit's test is
+  class in all 11 parts of the pool (for two more it does not, and for two the value is too rare per part to tell). Shuffling labels inside triads and inside part and cell give the same null, so the audit's test is
   not the problem.
 - **Why balancing afterwards did not work.** The generator swaps whole triads to balance about 20 features. The one
   target examined, the rank distance between the two events, is balanced exactly (it sits below chance). Swapping cannot
@@ -112,7 +112,7 @@ proposed before anyone measured the cue it would create. Both are recorded here 
 ## Claims
 
 - [verified] In all 1,056 triads of the public pool the three claims ask about three different event pairs of one fact set (via: R&D counts-only script on the pool rebuilt from public seeds, 2026-11-19)
-- [verified] For 8 of the 12 structural features examined (rank, degree, incidence and fact-kind features), the most skewed value favours the same class in all 11 parts (via: part 1 of R&D's counts-only study scripts on the same pool, 2026-11-19)
+- [verified] For 8 of the 12 structural features examined (rank, degree, incidence and fact-kind features), the most skewed value favours the same class in all 11 parts; two others do not and two could not be assessed per part (via: part 1 of R&D's counts-only study scripts on the same pool, 2026-11-19)
 - [verified] A one-pair, three-number design on today's fact sets gives a claim-number lookup 0.127 above its within-triad null (via: R&D simulation on 3,144 claim pairs, 2026-11-19)
 - [verified] If triads use numbers (m, m+s, m+2s) with m uniform over M positions, a lookup on the number alone scores 1/3 + 2s/(3M) (via: R&D re-derivation of the consult's formula, 2026-11-19)
 - [verified] Changing two fact numbers reaches all three classes for a fixed claim in 936 of 1,056 claims; changing one never does (via: R&D simulation, numbers 0 to 60 units, both readings agreeing, 2026-11-19)

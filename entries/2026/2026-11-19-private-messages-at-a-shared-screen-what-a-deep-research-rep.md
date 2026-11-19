@@ -32,12 +32,15 @@ next build card regardless.
   fixed time (it suggests 45 to 60 seconds) at one desk that holds the secret goal, notes, inbox and composer. All
   messages are delivered together at the end of the pass. The public turn then shows no private state at all. The
   uniform timer is the point: a player with nothing to send looks the same as one who is writing.
-- **The cheaper design is slow.** Messages written on your own turn and read on the recipient's next turn add no
-  hand-offs. By the report's own arithmetic from seat order, one offer and counter-offer then takes one to two and a
-  half rounds.
+- **The cheaper design costs one round per exchange.** Messages written on your own turn and read on the recipient's
+  next turn add no hand-offs. The report says an offer and counter-offer then take one to two and a half rounds.
+  That arithmetic is wrong. In a six-seat ring, if the recipient sits d turns after the sender, the offer takes d
+  turns and the counter-offer 6 - d, so the pair always takes exactly one round. A third step (the acceptance
+  reaching the other player) brings it to between 7 and 11 turns, under two rounds. The independent reviewer caught
+  this and R&D re-did it.
 - **Swapping seats mid-turn to deliver a message is the worst option.** It shows the room who messaged whom and when,
   and adds two hand-offs per message.
-- **Published games mostly avoided the problem.** By the report's account, hot-seat modes either have no private
+- **The report says published games mostly avoided the problem.** By its account, hot-seat modes either have no private
   messages, queue them to the next turn, or were dropped: it says one strategy game disabled its chat in hot-seat,
   and that the makers of two others left hot-seat out because hidden information could not be kept off a shared
   screen. These are the claims in the report most likely to be wrong in detail, and none was checked.
@@ -45,7 +48,8 @@ next build card regardless.
   report key releases portably; and read-once messages, because players would retype what they read into their
   notes, which adds typing noise.
 - **Terminal habits it lists.** Run in the alternate screen; at each hand-off overwrite the cells, then clear the
-  screen and the scrollback; discard pending input and ignore keys for a short moment so a double key press cannot
+  screen and the scrollback (we do not adopt the scrollback purge: the alternate screen has none of its own, and in
+  many terminals the purge wipes the player's shell history from before the game); discard pending input and ignore keys for a short moment so a double key press cannot
   skip the next curtain; never write private text to the window title or the clipboard; never ring the bell on mail;
   restore the terminal on a crash.
 - **What it asks that we had not.** Whether talking aloud at the table is allowed; whether a message can be
@@ -70,7 +74,7 @@ next build card regardless.
 
 1. v0.1.0 ships private notes and no whispers.
 2. The next Merchant League build card carries the input flush, the dead time, and "nothing private in the window
-   title or clipboard, no bell".
+   title or clipboard, no bell". It does not purge the scrollback.
 3. The design document records the private-pass design in one paragraph, marked as not built.
 4. Before the private pass is built: a playtest plan, since the report found no measurement of any of these patterns.
 
@@ -83,10 +87,10 @@ reason given in the table.
 
 ## Claims
 
-- [unverified] In casual shoulder surfing, the observed person noticed in about 7% of reported incidents (Eiband et al. 2017, as cited by the report; paper not read by R&D)
+- [unverified] In casual shoulder surfing, the observer was noticed in about 7% of the incidents that observers reported (Eiband et al. 2017, as cited by the report and described by the independent review; paper not read by R&D)
 - [unverified] Bystanders read more from a larger display even when the text subtends the same visual angle (Tan and Czerwinski 2003, as cited by the report; not read)
 - [unverified] One strategy game disabled its chat in hot-seat play, and two others left hot-seat out because of hidden information on a shared screen (the report's reading of manuals and developer posts; not checked)
-- [unverified] A turn-queued inbox costs one to two and a half rounds per offer and counter-offer in a six-seat ring (the report's own derivation from seat order)
+- [verified] In a six-seat ring, a turn-queued offer and counter-offer take exactly one round (d + (6 - d) turns), and a three-step exchange takes 7 to 11 turns; the report's figure of up to two and a half rounds is wrong (via: R&D arithmetic, 2026-11-19, after the independent review)
 - [unverified] A private pass of 45 to 60 seconds per seat is enough to read and write a short message (the report's estimate; no measurement cited)
 - [verified] On Windows, the terminal library Merchant League uses delivers key-release events, and handling them as presses placed an order after the curtain (via: independent review of merchant-league pull request 82 by a model from another family, with a probe through the real input loop, 2026-11-19; fixed before merge)
 - [verified] The three arXiv identifiers the report gives for vision and coalition papers exist with matching titles (via: arXiv index lookup of 2303.13307, 2601.18497 and 2502.16339, 2026-11-19; findings not read)
@@ -97,4 +101,4 @@ reason given in the table.
 - [primary] https://github.com/mcp-tool-shop-org/merchant-league/pull/82 — Merchant League, the turn screens and the key-release fix
 - [primary] https://arxiv.org/abs/2303.13307 — Zhang, Ma and Wang 2023, Don't Peek at My Chart (existence checked)
 - [primary] https://arxiv.org/abs/2601.18497 — Cheng, Zhang, Ma and Wang 2026, BAIT (existence checked)
-- [primary] https://arxiv.org/abs/2502.16339 — Kulkarni, Liu, Gaglione and Fried 2025, Dynamic Coalition Structure Detection in Natural Language-based Interactions (existence checked)
+- [primary] https://arxiv.org/abs/2502.16339 — Kulkarni, Liu, Gaglione, Fried and Topcu 2025, Dynamic Coalition Structure Detection in Natural Language-based Interactions (existence checked)

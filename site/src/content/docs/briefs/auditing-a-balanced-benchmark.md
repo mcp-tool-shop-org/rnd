@@ -9,7 +9,7 @@ shelf: not yet (the benchmark is not sealed)
 ## The question
 
 d5c is the studio's test for comparing local models as judges on three-way verification: is a claim supported by
-the facts, contradicted by them, or impossible to tell? Its items are generated in triads over shared facts, and a
+the facts, not supported by them, or impossible to tell? Its items are generated in triads over shared facts, and a
 selection step balances a list of surface features across the three answers. Before a test pool is sealed, an
 audit runs a permutation test on about 600 feature-against-answer associations.
 
@@ -21,8 +21,8 @@ The studio wanted to know what that audit's pass is worth. If it passes, what ma
   detection limit", never "the pool is clean". The d5c pre-registration now says so.
 - **The detection limit is about +0.03 accuracy lift for a common yes/no cue.** In a simulation of the audit's own
   statistics code (608 tests, 3,168 items), a planted cue on about half the items was flagged 27% of the time at
-  lift +0.018, 70% at +0.026, 90% at +0.031 and 100% at +0.041. Two outside calculations land in the same place
-  (+0.031 and +0.032 to +0.033).
+  lift +0.018, 70% at +0.026, 90% at +0.031 and 100% at +0.041. Two outside calculations land near it
+  (+0.032 to +0.033 for a scan of 600 tests; +0.031 with 17 features controlled). Cues with many levels need more.
 - **A rare, pure cue can hide under the effect floor.** The audit flags a feature only if it is significant and
   lifts accuracy by at least +0.02. A feature on 48 of 3,168 items, all with the same answer, lifts accuracy by
   only +0.015. It would be overwhelmingly significant and still not flagged.
@@ -36,14 +36,14 @@ The studio wanted to know what that audit's pass is worth. If it passes, what ma
 - **Most of the statistics held up.** The p-value counts the observed labelling, the family-wise correction is
   the standard one, and putting tests with different numbers of levels on a chi-square scale beat the alternative
   we tried (0.49 against 0.91, where 0.50 is even) on well-filled tables.
-- **Five or six judges on about 1,000 triads can be put in tiers, not in a full order.** One outside report's
-  planning figure is a detectable gap of about 3.3 points between two judges. It is built on assumed correlations,
-  not our data.
+- **Judges that sit within a few percentage points of each other can be put in tiers, not in a full order.** One
+  outside report's planning figure, for five or six judges on about 1,000 triads, is a detectable gap of about 3.3
+  percentage points between two judges. It is unverified and built on assumed correlations, not our data.
 
 ## What changed because of it
 
 - The pre-registration gained a note, written before any verdict pool existed, with the pass wording, the selection
-  limit and the rare-cue limit.
+  limit and a re-run rule for borderline results; an addendum added the rare-cue limit.
 - A set of diagnostics was approved on a public-seed pool: each feature's within-triad correlation, its
   correlation with the balanced features, the share of items the shuffle cannot move, and which tests take the
   family maximum.
@@ -55,8 +55,8 @@ The studio wanted to know what that audit's pass is worth. If it passes, what ma
 - **Nothing here was run on a d5c pool.** The simulation used independent noise features and guessed level counts.
 - **The outside reads are AI output.** Two consults and three Deep Research reports, all from Gemini models. Five
   paper abstracts were read by R&D; the other citations are unchecked.
-- **The first draft of the library entry overstated four things.** An independent review by a model from another
-  family caught them before it merged. The entry records both verdicts.
+- **The first draft of the library entry overstated or mis-sourced five statements.** An independent review by a
+  model from another family failed it, then passed the corrected text. The entry's summary says so.
 - The audit code is not yet public. It is released with the benchmark.
 
 ## Receipts

@@ -20,7 +20,8 @@ and ran a simulation of the audit's own statistics code on synthetic data. The a
 their reports are `[aggregator]` output. The result: most of the design holds, one real gap was found in how the
 audit treats data that has already been selected, and the audit's detection limit now has a first estimate from
 simulation. The pre-registration was amended (Note 13) before any verdict pool existed. An independent review by a
-model from another family (Gemini 4 Carbon) corrected several statements before this entry was merged.
+model from another family (Gemini 4 Carbon) first failed this entry on five overstated or mis-sourced statements,
+then passed the corrected text with follow-ups; its review of this harvest also passed with follow-ups, applied here.
 
 Two Gemini Deep Research seeds and two consults were planted on the open questions on 2026-11-19 and harvested the
 same night, with an earlier seed on shortcut-free test items. Their findings are in "Harvest" below. All five are
@@ -79,7 +80,7 @@ same night, with an earlier seed on shortcut-free test items. Their findings are
 | Tests with different numbers of levels need a common scale | Chi-square tail by degrees of freedom | Kept. It beat z-score scaling in simulation on well-filled tables; sparse tables are unmeasured |
 | Per-replicate conjunction rules lose power | Pooled gate | Confirmed |
 | Balancing against a list leaves cues outside it | Listed features, synthetic conjunction features, and a learned probe on those features | Stated as a limitation. A text-only baseline (claim alone, facts alone) is queued for after the test windows |
-| A small number of judges cannot be fully ordered at this size | To be checked against the scorers | Queued; seed 37 planted |
+| A small number of judges cannot be fully ordered at this size | The scorers judge each arm against pre-registered bars; they hold no pairwise ranking test | No scorer change. After the windows the write-up reports arms in tiers with triad-clustered intervals, labelled post hoc |
 
 ### Decisions and actionables
 
@@ -87,7 +88,7 @@ same night, with an earlier seed on shortcut-free test items. Their findings are
    band. It changes no gate, threshold, feature list or recipe.
 2. Run the approved diagnostics on a public-seed pool after the current generator fix passes review, within-triad
    correlations first.
-3. Harvest seeds 36 and 37 and the two consults, check their load-bearing claims, and update this entry.
+3. Done 2026-11-19: seeds 36 and 37 and the two consults are harvested below. Still open: checking their citations at source.
 4. After the windows: the text-only partial-input baseline, and tiered ranking with clustered intervals.
 
 ### Limits of this study
@@ -106,20 +107,23 @@ that is noted; none of their numbers has been reproduced on a d5c pool.
   features, a shuffle that does not respect the selection is conservative for every feature correlated with the
   balanced ones. This is the rerandomization result from experimental design (Morgan and Rubin 2012; Li, Ding and
   Rubin 2018, as cited by the reads). One report puts numbers on it: where half a feature's variance is explained
-  by the balanced features, family-wise power at 3,000 items falls from 80% to about 17%.
+  by the balanced features, family-wise power at 3,000 items falls from 80% to about 17%, for a cue that a selection-aware test would catch at 80% power.
 - **Three reads raise the same risk in the other direction.** Our selected-pool shuffle moves labels between triads.
-  For a feature that is negatively correlated inside a triad, that underestimates the null spread, by up to a factor
-  of 1.5 when exactly one claim per triad carries the feature. The independent reviewer re-derived this. It can
+  For a feature that is negatively correlated inside a triad, that underestimates the null variance of each class
+  count (and so the scale of the chi-square statistic), by up to a factor of 1.5 when exactly one claim per triad
+  carries the feature. The independent reviewer re-derived this. It can
   cause a false flag, never a false pass. It matters only where within-triad correlation is clearly negative, which
   the approved diagnostics measure.
 - **A cheap selection-aware test exists on paper.** Two reads propose the same shape: remove the balanced features'
-  influence from each tested feature once, then shuffle within triads. One claims seconds of CPU; one offers an
-  exact sampler of balance-respecting within-triad shuffles (Besag and Clifford 1989, as cited). Either would be a
+  influence from each tested feature once, then shuffle within triads. One claims seconds of CPU; one proposes a
+  Markov chain over balance-respecting within-triad shuffles, with exact Monte Carlo p-values in the manner of Besag
+  and Clifford 1989 (the chain is the consult's proposal; the paper is about exact significance tests from such
+  chains). Either would be a
   change to a pre-registered gate, so it waits until after the test windows.
 - **The detection limit agrees across three sources.** Our simulation gives about +0.03 lift for a common binary
   cue. One Deep Research report computes +0.032 to +0.033 at 80% power for 600 tests on 3,000 items. The earlier
   seed computes +0.021 for a single feature and +0.031 with 17 features controlled, at 3,000 items or more.
-- **How to publish a detection limit properly.** Plant cues into the real feature matrix of a public-seed pool, not
+- **One consult's recipe for publishing a detection limit.** Plant cues into the real feature matrix of a public-seed pool, not
   into synthetic noise; use at least 500 replicates per point; cover six cue shapes (common, rare and pure,
   one-class, many weak cues together, a conjunction, a nonlinear single feature); run both the per-feature scan and
   the learned probe; publish the lift detected at 50, 80 and 90% power with Monte Carlo errors.
@@ -150,8 +154,8 @@ that is noted; none of their numbers has been reproduced on a d5c pool.
 | The audit is less sensitive for features correlated with the balanced ones | Not corrected for | Stated as a limitation. A selection-aware test (project out the balanced features, shuffle within triads) is the candidate fix after the windows |
 | A detection limit should be measured on real features across cue shapes | One simulated estimate on synthetic features | Queued for after the windows: the six-shape table on a public-seed pool, scan and probe |
 | "No effect" plus an effect filter is not a magnitude test | Flag = significant and lift at least +0.02 | Rule kept for this benchmark. Three-outcome bounds are a candidate for the next one |
-| Judges should be compared by triad, in tiers | To be checked against the scorers and the pre-registration | Open. Read-only check before the pool is sealed; no scorer change without a ruling |
-| All-three-correct scoring costs power | To be checked against the scorers | Same check |
+| Judges should be compared by triad, in tiers | Checked: the scorers judge each arm against pre-registered bars and hold no pairwise test | Wording only, after the windows: tiers with triad-clustered intervals, labelled post hoc |
+| Strict scoring costs power | The primary rule is strict across both presentation orders, and pre-registered | Kept as pre-registered |
 
 ## Claims
 
@@ -170,12 +174,12 @@ that is noted; none of their numbers has been reproduced on a d5c pool.
 - [verified] The d5c selected-pool shuffle is keyed on part, design cell and four features, and not on the triad (via: R&D code read of the audit, 2026-11-19)
 - [unverified] Tests correlated with the selection-balanced features are conservative under the audit's shuffle, by roughly the share of their variance those features explain (the review's and the consult's reasoning from rerandomization theory; not measured on d5c)
 - [unverified] A feature negatively correlated within a triad can be flagged too often under a shuffle that ignores triads (an AI Studio consult's derivation; not measured on d5c)
-- [unverified] Five or six judges on about 1,000 triads support tiers but not a full ranking; the detectable gap between two judges is about 3.3 points at 80% power with family-wise control (a Gemini Deep Research report's calculation from assumed correlations; not checked against d5c's scoring)
-- [verified] For one feature present on exactly one claim of every triad, a label shuffle across triads has about two thirds of the null variance of a within-triad shuffle (via: derivation in an AI Studio consult, re-derived independently by the Gemini 4 Carbon review, 2026-11-19)
-- [unverified] After rerandomization-style selection, the null variance of a test correlated with the balanced covariates shrinks by about one minus the squared correlation (Morgan and Rubin 2012; Li, Ding and Rubin 2018; as cited by two consults and a Deep Research report, papers not read by R&D)
-- [unverified] At 3,000 items and 600 tests, the smallest three-way accuracy lift detectable at 80% power is about +0.032 to +0.033 (a Gemini Deep Research report's calculation; consistent with R&D's simulation)
+- [unverified] Five or six judges on about 1,000 triads support tiers but not a full ranking when judges sit within a few percentage points of each other; the detectable gap between two judges is about 3.3 percentage points at 80% power with family-wise control (a Gemini Deep Research report's calculation from assumed correlations; not checked against d5c's scoring)
+- [verified] For one feature present on exactly one claim of every triad, the null variance of a class's count of that feature under a label shuffle across triads is 2K/(3K-1) of its variance under a within-triad shuffle, about two thirds (0.6669 at K = 1,056 triads): binomial K, 1/3 against hypergeometric 3K, K, K (via: R&D algebraic check, 2026-11-19; first derived in an AI Studio consult)
+- [unverified] After rerandomization-style selection, the null variance of a linear contrast correlated with the balanced covariates (and the scale of its chi-square statistic) shrinks by up to the squared correlation, down to one minus the squared correlation in the exact-balance limit (Morgan and Rubin 2012; Li, Ding and Rubin 2018; as cited by two consults and a Deep Research report and described by the Gemini 4 Carbon review; papers not read by R&D)
+- [unverified] At 3,000 items and 600 tests, the smallest three-way accuracy lift detectable at 80% power for a common binary cue is about +0.032 to +0.033 (a Gemini Deep Research report's calculation; consistent with R&D's simulation)
 - [unverified] Scoring a triad only when all three items are correct lowers pairwise power from about 75% to about 54% at a 75% baseline (a Gemini Deep Research report's own simulation, code not shown)
-- [unverified] A detection limit should be estimated by planting cues into the real feature matrix with at least 500 replicates per point (Morris, White and Crowther 2019, as cited by a consult; paper not read by R&D)
+- [unverified] A detection limit should be estimated by planting cues into the real feature matrix with at least 500 replicates per point (a consult's recommendation for d5c; it cites Morris, White and Crowther 2019, a general tutorial on designing simulation studies and sizing them from the Monte Carlo error wanted, which does not itself discuss shortcut audits; paper not read by R&D)
 
 ## Sources
 

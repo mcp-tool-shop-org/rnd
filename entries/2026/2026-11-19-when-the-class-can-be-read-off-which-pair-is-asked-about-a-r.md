@@ -27,11 +27,12 @@ claim number, where it is visible without reading the facts at all.
   rank of the two events and for the kinds of fact near them in ordinary cells, and by +0.11 to +0.21 in the smaller
   "shared" cells (lookup accuracy above one third, minus the same lookup on shuffled labels; in-sample, so sizes are
   upper bounds).
-- **It is a design effect.** For 8 of 13 structural features the most skewed value favours the same class in all 11
-  parts of the pool. Shuffling labels inside triads and inside part and cell give the same null, so the audit's test is
+- **It is a design effect.** For 8 of the 12 structural features examined, the most skewed value favours the same
+  class in all 11 parts of the pool. Shuffling labels inside triads and inside part and cell give the same null, so the audit's test is
   not the problem.
-- **Why balancing afterwards did not work.** The generator swaps whole triads to balance about 20 features. It balances
-  what it targets (those sit below chance) but cannot balance features with 100 to 300 values, and no swap helps when
+- **Why balancing afterwards did not work.** The generator swaps whole triads to balance about 20 features. The one
+  target examined, the rank distance between the two events, is balanced exactly (it sits below chance). Swapping cannot
+  balance features with about 100 to 300 values, and no swap helps when
   every triad carries the same skew.
 - **The shared cells are worst** because their recipes give each class its own chain depth and graph family, with six
   triads per part to balance with. Whole feature values hold a single class there.
@@ -44,25 +45,28 @@ claim number, where it is visible without reading the facts at all.
   formula: a lookup on the number alone gains about the spread of the three numbers divided by three times the range of
   the lower bound across triads.
 - **R&D checked that on the pool.** Putting three numbers on each of today's 3,144 usable claim pairs gives a
-  claim-number lookup +0.127 above its null. Our lower bounds span about 0 to 38 units and the gaps are 3 to 14 units,
-  so the wide range the formula asks for is out of reach. The proposal would have added a failure as large as the worst
-  one it removed.
+  claim-number lookup +0.127 above its null. Our lower bounds span -8 to 38 units and the median gap per cell is 3 to 14
+  units, so the wide range the formula asks for is out of reach. The proposal would have added a failure larger than
+  most of the ones it removed (the largest structure cues measured were about +0.2, in the shared cells).
 - **The consult's alternative: one claim, three number-assignments.** Keep the pair, the direction and the claim number
   fixed, and move the bounds across the claim by changing fact numbers. R&D simulated it: one changed number can never
   reach all three classes (it moves one bound), but two numbers reach all three in 936 of 1,056 claims. Where both
-  changed facts touch neither event of the claim (203 claims), the strongest feature in today's audit is exactly zero.
-  Where one touches (733 claims) it is +0.12. A new cue appears in the sum of all numbers (+0.08 to +0.17 in this crude
+  changed facts touch neither event of the claim (203 claims), the feature with the largest lookup in this study
+  (where the claim number sits among the numbers of facts touching the two events) is exactly zero, because those
+  numbers do not change. Where at least one changed fact touches an event (733 claims) it is +0.12. A new cue appears in the sum of all numbers (+0.08 to +0.17 in this crude
   simulation) and would have to be offset.
 - **A prototype, run through the audit's own gate.** R&D retrofitted the one-claim design onto the public pool and ran
   the gate on the result. With no extra rule, the audit's permutation scheme stops being valid (two of the features it
-  blocks on are number comparisons the design now varies) and a within-triad test flags 57 to 104 tests. One rule fixes
+  blocks on are number comparisons the design now varies). A within-triad test then flags 104 tests when any two
+  numbers may change, and 57 when only interior numbers change and a third number is offset to hold the total. One rule fixes
   that: **an edited number never crosses the claim number.** Then every single-number comparison with the claim is the
-  same inside a triad. The best variant built 704 of 1,056 triads and had 15 must-fix tests on 2,112 items, against 44
+  same inside a triad. The best variant (any facts may change, a third number offsets the total, the never-cross rule applies) built 704
+  of 1,056 triads and had 15 must-fix tests on 2,112 items, against 44
   on 3,168 for today's pool (the smaller pool detects less, so the two counts are not like for like). The 15 are two
   signals: the sum of lower-bound numbers along the shortest chain against the claim (+0.03 to +0.06) and the mean of
   upper-bound numbers along it (+0.02 to +0.04). No structure feature is flagged in any variant.
-- **Where the prototype fails.** In the small shared cells only 15 of 264 triads could be built (6%), none where both
-  bound kinds are "at most". Today's skeletons there have too few numbers that can move without crossing the claim.
+- **Where the prototype fails.** In the small shared cells only 15 of 264 triads could be built (6%), and none of the
+  132 in the two cells where the claim's pair shares an "at most" fact. Today's skeletons there have too few numbers that can move without crossing the claim.
 - **A Latin square does not rescue the one-pair design.** Three pairs per fact set, each carrying all three classes,
   with copies rescaled by up to 13 times, still leaves a claim-number cue of +0.07 to +0.10.
 - **Recorded depth is nearly always right.** 25 of 2,112 decided items (1.2%) can be proven by a shorter chain than the
@@ -73,10 +77,11 @@ claim number, where it is visible without reading the facts at all.
   events" is the task itself when the deciding chain has one or two facts (every fact on such a chain touches one of the
   two events) and a shortcut when the chain has three or four. That implies an audit bar that depends on depth, which
   ours does not have.
-- **Other points from the consult, not yet checked:** a generous claim may be provable by a shorter, looser chain than
-  the one recorded as its depth; rejecting single claims after classes are assigned re-creates the bias; audit the
-  generator on a pool ten times the scored one, since 3,168 items detect about +0.03 overall but only about +0.12 inside
-  one 198-item cell; report an all-three-correct rate per triad and cluster errors by triad.
+- **Other points from the consult.** Checked by arithmetic: 3,168 items detect about +0.03 overall but only about
+  +0.12 inside one 198-item cell, which is its case for auditing the generator on a pool ten times the scored one (not
+  run). Partly checked in code: rejecting single claims after classes are assigned can re-create the bias, and our two
+  readings do differ on lower bounds only. Not checked: its advice to report an all-three-correct rate per triad and to
+  cluster errors by triad.
 
 ## Studio relevance
 
@@ -107,7 +112,7 @@ proposed before anyone measured the cue it would create. Both are recorded here 
 ## Claims
 
 - [verified] In all 1,056 triads of the public pool the three claims ask about three different event pairs of one fact set (via: R&D counts-only script on the pool rebuilt from public seeds, 2026-11-19)
-- [verified] For 8 of 13 structural features the most skewed value favours the same class in all 11 parts (via: same script, 2026-11-19)
+- [verified] For 8 of the 12 structural features examined (rank, degree, incidence and fact-kind features), the most skewed value favours the same class in all 11 parts (via: part 1 of R&D's counts-only study scripts on the same pool, 2026-11-19)
 - [verified] A one-pair, three-number design on today's fact sets gives a claim-number lookup 0.127 above its within-triad null (via: R&D simulation on 3,144 claim pairs, 2026-11-19)
 - [verified] If triads use numbers (m, m+s, m+2s) with m uniform over M positions, a lookup on the number alone scores 1/3 + 2s/(3M) (via: R&D re-derivation of the consult's formula, 2026-11-19)
 - [verified] Changing two fact numbers reaches all three classes for a fixed claim in 936 of 1,056 claims; changing one never does (via: R&D simulation, numbers 0 to 60 units, both readings agreeing, 2026-11-19)
@@ -122,8 +127,8 @@ proposed before anyone measured the cue it would create. Both are recorded here 
 ## Sources
 
 - [aggregator] https://aistudio.google.com/ — AI Studio consult, Gemini 4 Carbon (High thinking, search grounding), 2026-11-19: constructions that remove a class-tied-to-pair cue
-- [primary] https://aclanthology.org/2020.findings-emnlp.117/ — Gardner et al. 2020, Evaluating Models' Local Decision Boundaries via Contrast Sets (cited by the consult; not re-read)
-- [primary] https://arxiv.org/abs/1909.12434 — Kaushik, Hovy and Lipton 2020, Learning the Difference that Makes a Difference with Counterfactually-Augmented Data (cited by the consult; not re-read)
-- [primary] https://aclanthology.org/D19-1341/ — Schuster et al. 2019, Towards Debiasing Fact Verification Models (cited by the consult; not re-read)
+- [primary] https://aclanthology.org/2020.findings-emnlp.117/ — Gardner et al. 2020, Evaluating Models' Local Decision Boundaries via Contrast Sets (cited by the consult; not read)
+- [primary] https://arxiv.org/abs/1909.12434 — Kaushik, Hovy and Lipton 2020, Learning the Difference that Makes a Difference with Counterfactually-Augmented Data (cited by the consult; not read)
+- [primary] https://aclanthology.org/D19-1341/ — Schuster et al. 2019, Towards Debiasing Fact Verification Models (cited by the consult; not read)
 - [primary] https://arxiv.org/abs/2402.08939 — Chen et al. 2024, Premise Order Matters in Reasoning with Large Language Models (cited by the consult; not read)
 - [primary] https://arxiv.org/abs/2411.00640 — Miller 2024, Adding Error Bars to Evals (cited by the consult; not read)

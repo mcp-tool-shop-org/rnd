@@ -16,7 +16,7 @@ Here R&D built the alternative from scratch, as a prototype outside the real gen
 events and facts with ONE claim, and the three classes come from three assignments of numbers. On pools of 3,168 items
 from public seeds the audit's listed gate finds 0 must-fix tests and 0 significant ones, with the bar unchanged. A small
 pilot on local judge models then asked whether such items still test reasoning or have become an arithmetic test. On
-180 items of the first, one-family version, the strongest judge's errors were mostly sums of the wrong chain of facts,
+180 items of the one-family version, the strongest judge's errors were mostly sums of the wrong chain of facts,
 not wrong additions. That is a direction from one judge, not a measured property of the benchmark.
 
 The studio has adopted the construction for the next build and recorded the rule changes named below in its
@@ -30,8 +30,8 @@ a verdict on a sealed set.
   same in the three items; only "interior" facts are redrawn. No number on the deciding chain is on a different side of
   the claim number in different items. The width of the feasible range is drawn from one distribution for all three
   classes. The fixed facts carry a share of the bound drawn from almost none to almost all. The totals of all lower and
-  of all upper numbers stay clear of the claim number. Every item is solved under both readings of "after" and must
-  give exactly its target bounds.
+  of all upper numbers stay clear of the claim number. Every item is solved under both readings of "after": it must
+  get the same label under both, and under the plain reading its bounds must equal the drawn targets exactly.
 - **A law that explains the leftovers.** A statistic that leaves out a part of the bound whose spread is M sees the
   class with a lift of about shift / (1.5 × M), where shift is how far the bound moves between classes. Small ends and
   small claim numbers therefore leak; large claim numbers with narrow ranges leak far less (at most +0.010 measured, below).
@@ -41,8 +41,9 @@ a verdict on a sealed set.
   permutation schemes, on a one-family pool, on a sixteen-shape pool and on a twenty-shape pool.
 - **What the listed gate cannot see.** Because almost everything listed is constant inside a triad, the gate has nothing
   left to test. What remains lives in plain statistics of the numbers. R&D measured 13 of them outside the audit
-  (lookup accuracy by cell, minus the same lookup with labels shuffled inside triads): up to +0.194 in the first
-  prototype, +0.027 once claim numbers were 200 to 500 with widths of 5 to 7, and at most +0.010 on the final pool.
+  (lookup accuracy by cell, minus the same lookup with labels shuffled inside triads), all 13 on each pool: the
+  largest was +0.194 on the first prototype, +0.027 once claim numbers were 200 to 500 with widths of 5 to 7 (one
+  family), and +0.010 on the final pool.
   The studio's notes now add those 13 statistics to the audit's gated list and plant the audit's controls on them,
   since the old controls have no feature left to bite on. That is decided and written down; it is not built.
 - **Variety had to be rebuilt.** One skeleton family passes the gate but is thin. The final prototype has twenty
@@ -62,7 +63,8 @@ a verdict on a sealed set.
   and no forks. The strongest judge, a
   27B-class model, was right on 48 of 90 items with claim numbers 30 to 90 and on 54 of 90 with 200 to 500. Chance is
   30. A 4B model scored 43 and 40. A third judge's run is not usable: half its answers were cut off by the output limit.
-- **Where the errors come from.** Sorting all 90 items of each range by the strongest judge's bounds: at least one bound
+- **Where the errors come from.** Sorting the 90 items of each range by the strongest judge's bounds (2 and 5 answers
+  were cut off and are not sorted): at least one bound
   is the sum of no chain in the facts (plain arithmetic or misreading) on 15 and 6 items; both bounds are real sums from
   the facts, a single fact's number or missing, but not the tightest (a decoy or the loose fact) on 53 and 45; both are
   exact on 20 and 34. For this judge three-digit numbers were not harder. For the 4B judge they were: its
@@ -96,10 +98,10 @@ a verdict on a sealed set.
 - [verified] On a 3,168-item prototype pool with twenty skeleton shapes, the audit's main gate reports 0 must-fix and 0 family-wise significant tests under schemes S and W (608 tests each, 2,000 permutations) (via: R&D script calling the audit's gate functions on the pool, public seeds, 2026-11-19)
 - [verified] The same gate reports 44 must-fix tests on the current public selected pool (via: the audit run recorded in the earlier entry, 2026-11-19)
 - [verified] 292 of 304 gate features take one value inside every triad of the prototype pool; the most variable of the rest differs in 2.7% of triads (via: R&D script over the featurised pool, 2026-11-19)
-- [verified] Thirteen number statistics outside the listed features have lookup lifts of at most +0.010 above their within-triad shuffle null on the twenty-shape pool; the largest was +0.027 on the one-family pool and +0.194 in the first prototype (via: R&D lookup script, 200 shuffles, 2026-11-19)
+- [verified] Thirteen number statistics outside the listed features have lookup lifts of at most +0.010 above their within-triad shuffle null on the twenty-shape pool, at most +0.027 on the one-family pool with claim numbers 200 to 500, and at most +0.194 on the first prototype (all 13 measured on each) (via: R&D lookup script, 200 shuffles, 2026-11-19)
 - [verified] Per part of 96 triads the twenty-shape pool has 51 to 78 zero-distance and 45 to 69 backward claims of 288 items, 31 to 38 distinct directed skeletons, and between 5 and 8 events per item (0 to 4 triads with 5) (via: R&D script using the generator's own parsing and skeleton functions on 11 parts, 2026-11-19)
 - [verified] A 27B-class local judge scored 48/90 and 54/90, and a 4B judge 43/90 and 40/90, on 180 one-family prototype items at temperature 0 with thinking off (via: R&D pilot through a local Ollama daemon, every completion kept, 2026-11-19)
-- [verified] For the 27B-class judge, at least one bound is the sum of no chain in the facts on 15 and 6 of 90 items, and both bounds are real chain sums, single-fact numbers or missing but not the tightest on 53 and 45; for the 4B judge the no-chain counts are 23 and 36 (via: R&D script enumerating every chain between the claim events, 2026-11-19)
+- [verified] For the 27B-class judge, at least one bound is the sum of no chain in the facts on 15 and 6 of 90 items, both bounds are real chain sums, single-fact numbers or missing but not the tightest on 53 and 45, both are exact on 20 and 34, and 2 and 5 answers were cut off; for the 4B judge the no-chain counts are 23 and 36 (via: R&D script enumerating every chain between the claim events, 2026-11-19)
 - [verified] 23 and 17 of that judge's correct labels rest on a wrong deciding bound; counting only answers with the deciding bound exact gives 25/90 and 37/90 (via: R&D analysis of the pilot's raw outputs, 2026-11-19)
 - [unverified] A statistic that omits a part of the bound with spread M sees the class with lift about shift / (1.5 × M) (R&D's working rule from four prototype rounds; fits the measured cases, not derived in general)
 - [unverified] The construction will pass a learned probe and the planted-cue controls (not run on any pool of this construction)

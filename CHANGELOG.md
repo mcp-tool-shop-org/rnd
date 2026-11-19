@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.24.0.13] - 2026-11-19
+
+- seed 38 entry: corrections from the independent review (the queued-inbox arithmetic, one source line, scrollback)
+- Updated `2026-11-19-private-messages-at-a-shared-screen-what-a-deep-research-rep`: Private messages at a shared screen: what a Deep Research report says for hot-seat play (seed 38)
+
 ## [1.1.24.0.12] - 2026-11-19
 
 - seed 38: private messages at a shared screen (hot-seat); whispers deferred past merchant-league v0.1.0

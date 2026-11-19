@@ -13,8 +13,8 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [1.1.24.0.15] - 2026-11-19
 
-- one claim, three number-assignments: prototype passes the shortcut gate (0 must-fix), fork family, difficulty pilot on local judges, grounded accuracy
-- Added `2026-11-19-one-claim-three-number-assignments-a-purpose-built-generator`: One claim, three number-assignments: a purpose-built generator passes the shortcut gate, and judges fail at finding the chain
+- one claim, three number-assignments: a prototype passes the audit's listed gate (0 must-fix on public seeds), fork family, a small difficulty pilot on local judges, grounded accuracy decided (not built)
+- Added `2026-11-19-one-claim-three-number-assignments-a-purpose-built-generator`: One claim, three number-assignments: a prototype generator passes the audit's listed gate, and a pilot points at chain-finding
 
 ## [1.1.24.0.14] - 2026-11-19
 

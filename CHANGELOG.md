@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.24.0.14] - 2026-11-19
+
+- class-tied-to-pair: root cause, consult, feasibility prototype
+- Added `2026-11-19-when-the-class-can-be-read-off-which-pair-is-asked-about-a-r`: When the class can be read off which pair is asked about: a root-cause study of a balanced benchmark
+
 ## [1.1.24.0.13] - 2026-11-19
 
 - seed 38 entry: corrections from the independent review (the queued-inbox arithmetic, one source line, scrollback)

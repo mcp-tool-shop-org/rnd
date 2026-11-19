@@ -53,6 +53,20 @@ claim number, where it is visible without reading the facts at all.
   changed facts touch neither event of the claim (203 claims), the strongest feature in today's audit is exactly zero.
   Where one touches (733 claims) it is +0.12. A new cue appears in the sum of all numbers (+0.08 to +0.17 in this crude
   simulation) and would have to be offset.
+- **A prototype, run through the audit's own gate.** R&D retrofitted the one-claim design onto the public pool and ran
+  the gate on the result. With no extra rule, the audit's permutation scheme stops being valid (two of the features it
+  blocks on are number comparisons the design now varies) and a within-triad test flags 57 to 104 tests. One rule fixes
+  that: **an edited number never crosses the claim number.** Then every single-number comparison with the claim is the
+  same inside a triad. The best variant built 704 of 1,056 triads and had 15 must-fix tests on 2,112 items, against 44
+  on 3,168 for today's pool (the smaller pool detects less, so the two counts are not like for like). The 15 are two
+  signals: the sum of lower-bound numbers along the shortest chain against the claim (+0.03 to +0.06) and the mean of
+  upper-bound numbers along it (+0.02 to +0.04). No structure feature is flagged in any variant.
+- **Where the prototype fails.** In the small shared cells only 15 of 264 triads could be built (6%), none where both
+  bound kinds are "at most". Today's skeletons there have too few numbers that can move without crossing the claim.
+- **A Latin square does not rescue the one-pair design.** Three pairs per fact set, each carrying all three classes,
+  with copies rescaled by up to 13 times, still leaves a claim-number cue of +0.07 to +0.10.
+- **Recorded depth is nearly always right.** 25 of 2,112 decided items (1.2%) can be proven by a shorter chain than the
+  tight one.
 - **Every construction moves the cue somewhere.** The useful question is where it lands: in something visible without
   the facts (the claim number), or in the fact numbers on the deciding chain, which is the computation itself.
 - **Where the line is.** The consult argued that "where the claim number sits among the numbers next to the two
@@ -78,11 +92,12 @@ claim number, where it is visible without reading the facts at all.
 
 ### Decisions and actionables
 
-1. Recommended next step, awaiting a ruling: a CPU feasibility study of the one-claim design (two varied interior
-   numbers, chains of three or more facts, totals offset, classes proven before assignment), with yield per cell and a
-   full audit of the result, and the same for a Latin-square design as the fallback that keeps one fact set per triad.
-2. One counts-only test of whether a recorded depth can be undercut by a shorter chain.
-3. The benchmark will not be sealed in the current window.
+1. The feasibility study was run the same day (above). What it leaves is one decision, not yet taken: adopt one-claim
+   triads; decide whether sums along the chain are a shortcut or the computation being tested; audit on a pool ten
+   times the scored one.
+2. If chain sums stay in the gating family, no construction tested here reaches zero.
+3. Shared cells need purpose-built skeletons before the design can be judged there.
+4. The benchmark will not be sealed in the current window.
 
 ### What went wrong on our side
 
@@ -96,6 +111,10 @@ proposed before anyone measured the cue it would create. Both are recorded here 
 - [verified] A one-pair, three-number design on today's fact sets gives a claim-number lookup 0.127 above its within-triad null (via: R&D simulation on 3,144 claim pairs, 2026-11-19)
 - [verified] If triads use numbers (m, m+s, m+2s) with m uniform over M positions, a lookup on the number alone scores 1/3 + 2s/(3M) (via: R&D re-derivation of the consult's formula, 2026-11-19)
 - [verified] Changing two fact numbers reaches all three classes for a fixed claim in 936 of 1,056 claims; changing one never does (via: R&D simulation, numbers 0 to 60 units, both readings agreeing, 2026-11-19)
+- [verified] A retrofit of the one-claim design with the never-cross rule builds 704 of 1,056 triads and has 15 must-fix tests under the audit's scheme S with 2,000 permutations, all on two short-chain sum or mean features (via: R&D prototype script calling the audit's gate functions on the public pool, 2026-11-19)
+- [verified] The same retrofit builds 15 of 264 shared-cell triads (via: same script, 2026-11-19)
+- [verified] With three pairs per fact set each carrying all three classes and copies rescaled by 1, 2, 3, 5, 8 and 13, a claim-number lookup stays 0.074 to 0.099 above its null (via: R&D simulation, 2026-11-19)
+- [verified] 25 of 2,112 supported or unsupported items in the public pool can be proven by a chain with fewer edges than the tight chain (via: R&D hop-limited bound script, 2026-11-19)
 - [unverified] Where the deciding chain has three or more facts, a cue from numbers next to the two events is a shortcut and can be suppressed by putting the variation in interior facts (the consult's argument; our simulation supports the second half on 203 claims)
 - [unverified] Presenting premises in a shuffled order instead of proof order changes LLM deductive accuracy by over 30% (Chen et al. 2024, as cited by the consult; not read by R&D)
 - [unverified] Treating items that share a fact set as independent understates standard errors (Miller 2024, as cited by the consult; not read by R&D)

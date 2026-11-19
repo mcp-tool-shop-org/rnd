@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.24.0.10] - 2026-11-19
+
+- study: the d5c pool audit against the literature and a simulation (selection gap, detection limit about +0.03 lift); seeds 36 and 37 planted
+- Added `2026-11-19-auditing-a-balanced-benchmark-for-shortcut-cues-what-the-lit`: Auditing a balanced benchmark for shortcut cues: what the literature and a simulation say about the d5c pool audit
+
 ## [1.1.24.0.9] - 2026-11-17
 
 - licences: numpy, scikit-learn and pandas (d5c pool audit)

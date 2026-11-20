@@ -213,7 +213,7 @@ Claims can carry stable deterministic `c-<hex>` ids and explicit relations
 ```bash
 python -m rnd claims                               # list indexed claims (--state superseded, --json)
 python -m rnd claims assign <entry>                # add deterministic c-<hex> ids to one entry's claims
-python -m rnd similar <entry> [--limit 5]          # closest older claims in other entries (read-only)
+python -m rnd similar <entry> [--limit 5]          # closest claims in other entries (read-only)
 python -m rnd reconcile <entry>                    # mark older claims (superseded / disputed / supported-by)
 ```
 
@@ -238,20 +238,22 @@ claim that replaced or contradicted them.
 ## What changed (digest)
 
 `rnd digest --since <git ref or YYYY-MM-DD> [--json]` compares the library at an
-earlier commit (read from git objects into a temporary directory without touching
-the working tree, index or `rnd.db`) against the current tree:
+earlier commit (parsed from git objects in memory without touching the working
+tree, git index, `rnd.db` or temp files) against the current tree:
 
 ```bash
 python -m rnd digest --since v1.1.24.0.14
 python -m rnd digest --since 2026-11-19 --json
 ```
 
-It reports entries added, claims added, claim state changes (`old_state -> new_state`
-with what replaced or contradicted them), and questions opened, answered (with
-answering claim ids) and parked, along with counts. Dates resolve to the last
-commit on the current branch at or before the end of that day; claims match by
-`id` when both sides have one, otherwise by `(entry, exact text)` so a reworded
-claim without an id appears as added rather than a state change.
+It reports entries added, claims added, claims removed, claim state changes
+(`old_state -> new_state` with what replaced or contradicted them), and
+questions opened, answered (with answering claim ids) and parked, along with
+counts. A `YYYY-MM-DD` date resolves to the latest commit along the
+first-parent line of the current branch (`HEAD`) whose committer date is on or
+before that day. Claims match by `id` when both sides have one, otherwise by
+`(entry, exact text)`, so a reworded claim without an id appears as one claim
+removed and one claim added, never as a state change.
 
 ## Open questions
 
@@ -366,7 +368,7 @@ python -m rnd watch --no-save --json # look without recording
 python -m rnd watch --only ollama    # one source
 ```
 
-What it saw is kept in a state file outside the repository (`$RND_WATCH_STATE`, else `~/.rnd/watch-state.json`).
+What it saw is kept in a state file outside the repository (`--state`, else `$RND_WATCH_STATE`, else `Path.home() / ".rnd" / "watch-state.json"`, `~/.rnd/watch-state.json`) unless `--no-save` is passed.
 A source's first check is a baseline: it records the current items and reports none as new. A pre-release is never reported as a source's latest version; a newer one is shown beside it. GitHub release notes and commit messages are kept in the JSON output, so a reader doesn't have to fetch each page. A source that
 can't be reached is reported as unknown, and its state is left alone so nothing is skipped silently.
 
@@ -392,12 +394,25 @@ studio's workflow standards.
 ## Security and trust
 
 - **Data touched:** files inside this repo (`entries/`, `questions/`, `changes/`,
-  `instruments/`, `catalogs/`, `experiments/`), the index `rnd.db` and its
-  sibling local miss log `rnd.misses.jsonl`. `rnd readouts` opens the readouts
-  knowledge bases **read-only**. `rnd sql` runs against a read-only connection,
-  and `rnd similar` / `rnd digest` are read-only and never modify the working
-  tree, index or `rnd.db`.
-- **Data not touched:** nothing outside the repo and the readouts checkout. It
+  `instruments/`, `catalogs/`, `experiments/`, `datapacks/`, `docs/layout.json`),
+  the index `rnd.db` (or `--db` / `$RND_DB`) and its sibling miss log
+  `rnd.misses.jsonl` (see below). Outside this repo, `rnd watch` writes its
+  persistent seen-items file to `--state`, `$RND_WATCH_STATE` or
+  `Path.home() / ".rnd" / "watch-state.json"` (`~/.rnd/watch-state.json`),
+  where it stays across runs unless `--no-save` is passed, and `rnd raw`
+  (`ingest`, `private`, `relicense`) writes to the companion stores
+  `--public` / `$RND_DATA` (`../rnd-data`) and `--private` /
+  `$RND_DATA_PRIVATE` (`../rnd-data-private`). `rnd readouts` opens the
+  readouts knowledge bases **read-only**, `rnd collect` reads pinned commits
+  from `--clone` / `../<sibling>` without modifying it, `rnd sql` uses a
+  read-only connection, and `rnd similar` and `rnd digest` run in memory and
+  write nothing anywhere (no temporary files, working-tree edits or index
+  changes).
+- **Data not touched:** no files outside this repo except the explicit paths
+  named above (`rnd watch`'s state file unless `--no-save`, a caller-chosen
+  `--db` / `$RND_DB` and sibling `.misses.jsonl`, `rnd raw`'s `rnd-data` and
+  `rnd-data-private` companion stores, and read-only inputs to `readouts`,
+  `collect`, `datapack verify --copy`, `runs record --from` or `abmine`). It
   stores no credentials and reads none.
 - **Network:** none, except `rnd catalog sync`, `rnd probe` and `rnd watch`,
   which read public metadata or call the GitHub API through your own `gh` CLI

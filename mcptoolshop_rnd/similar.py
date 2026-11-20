@@ -30,15 +30,15 @@ class SimilarError(Exception):
 
 
 def claim_fts_query(text: str) -> str:
-    """Build a safe FTS5 OR query from a claim's non-stopword alphanumeric tokens."""
+    """Build a safe FTS5 OR query from Unicode word tokens matching `porter unicode61`."""
     cleaned = re.sub(r"<!--[\s\S]*?-->", " ", text or "")
     cleaned = re.sub(r"https?://\S+", " ", cleaned)
-    raw_tokens = re.findall(r"[A-Za-z0-9]+", cleaned)
+    raw_tokens = re.findall(r"[^\W_]+", cleaned)
     terms: list[str] = []
     seen: set[str] = set()
     for tok in raw_tokens:
         low = tok.lower()
-        if len(low) < 2 or low in STOPWORDS:
+        if (len(low) < 2 and low.isascii()) or low in STOPWORDS:
             continue
         if low not in seen:
             seen.add(low)
@@ -265,13 +265,17 @@ def render_similar(rep: dict) -> str:
                     f"{b['id']} ({b['entry_id']})" if b.get("entry_id") else b["id"]
                     for b in h.get("contradicted_by", [])
                 )
-                if by_txt:
-                    lines.append(f"          ! contradicted by {by_txt}")
+                lines.append(f"          ! contradicted by {by_txt or 'unlinked'}")
 
     clauses = rep["relation_clauses"]
+    header = (
+        "To link a claim above (for example, for the top hit above), add a clause to the new claim line and run reconcile:"
+        if clauses["supersedes"] != "(supersedes: <id>)"
+        else "To link a claim above, add a clause to the new claim line and run reconcile:"
+    )
     lines.extend([
         "",
-        "To link a claim above, add a clause to the new claim line and run reconcile:",
+        header,
         f"  {clauses['supersedes']}",
         f"  {clauses['contradicts']}",
         f"  {clauses['supports']}",

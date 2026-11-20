@@ -16,8 +16,8 @@
 
 ### Default safety posture
 
-- [x] `[cli|mcp|desktop]` Dangerous actions (kill, delete, restart) require explicit `--allow-*` flag (2026-10-07) — none exist: rnd never kills or restarts; writes are `rnd.db`, its sibling `rnd.misses.jsonl`, `changes/*.md` (consumed by `rnd bump`), `questions/*.md`, entries/bound literals/claim links on explicit commands, and `catalog.json` on `catalog sync`
-- [x] `[cli|mcp|desktop]` File operations constrained to known directories (2026-11-19) — repo tree plus `--db`/$RND_DB (and sibling `.misses.jsonl`), `instruments/` protected from automated writes; readouts opened read-only
+- [x] `[cli|mcp|desktop]` Dangerous actions (kill, delete, restart) require explicit `--allow-*` flag (2026-10-07) — none exist: rnd never kills or restarts; writes are `rnd.db`, its sibling `rnd.misses.jsonl`, `changes/*.md` (consumed by `rnd bump`), `questions/*.md`, entries/bound literals/claim links on explicit commands, `catalog.json` on `catalog sync`, `rnd watch` persistent state (`--state` / `$RND_WATCH_STATE` / `Path.home() / ".rnd" / "watch-state.json"`, skipped with `--no-save`), and `rnd raw` companion stores (`../rnd-data`, `../rnd-data-private`)
+- [x] `[cli|mcp|desktop]` File operations constrained to known directories (2026-11-20) — repo tree (`instruments/` protected from automated writes), `--db` / `$RND_DB` (and sibling `.misses.jsonl`), `rnd watch` state (`--state`, `$RND_WATCH_STATE`, or `Path.home() / ".rnd" / "watch-state.json"`, skipped with `--no-save`), and `rnd raw` companion stores (`--public` / `$RND_DATA` / `../rnd-data` and `--private` / `$RND_DATA_PRIVATE` / `../rnd-data-private`); `readouts`, `collect` source clones, `sql`, `similar` and `digest` are read-only (`similar` and `digest` parse in memory and write no temporary files)
 - [ ] `[mcp]` SKIP: not an MCP server
 - [ ] `[mcp]` SKIP: not an MCP server
 

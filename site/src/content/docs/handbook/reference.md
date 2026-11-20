@@ -82,15 +82,18 @@ python -m rnd similar 2026-10-07-cuda-graphs --limit 3
 
 ### `digest --since <ref|YYYY-MM-DD>`
 
-Read-only summary of entries added, claims added, claim state changes (with
-what replaced or contradicted them), and questions opened, answered (with
-answering claim ids) or parked since `<ref>` (git tag, branch, commit SHA) or
-`<YYYY-MM-DD>` (the last commit on the current branch at or before that day).
-Reads the older commit from git into a temporary directory without touching the
-working tree, git index or `rnd.db`. Claims match by `id` when both sides have
-one, otherwise by `(entry, exact text)` (so reworded claims without ids count as
-added, not state changes). Supports `--json`; unknown refs and dates before
-branch history exit `2`.
+Read-only summary of entries added, claims added, claims removed, claim state
+changes (with what replaced or contradicted them), and questions opened, answered
+(with answering claim ids) or parked since `<ref>` (git tag, branch, commit SHA)
+or `<YYYY-MM-DD>`. A `<YYYY-MM-DD>` date resolves to the latest commit along the
+first-parent line of the current branch (`HEAD`) whose committer date is on or
+before that day. Parses the older commit's blobs from git in memory without
+writing temporary files or touching the working tree, git index or `rnd.db`.
+Claims match by `id` when both sides have one, otherwise by `(entry, exact text)`,
+so a reworded claim without an id appears as one claim removed and one claim
+added, never as a state change. Supports `--json`; unknown refs and dates
+before branch history exit `2` (with a `git fetch` hint on shallow or tagless
+clones), and running outside a git repository exits `3` (`GIT_FAILED`).
 
 ```bash
 python -m rnd digest --since v1.1.24.0.14

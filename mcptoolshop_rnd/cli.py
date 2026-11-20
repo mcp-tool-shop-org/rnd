@@ -1258,14 +1258,14 @@ def build_parser():
     s.add_argument("entry", help="entry id or file path")
 
     s = add("similar", cmd_similar,
-            "list older claims in other entries closest to each claim of one entry (read-only FTS5)")
+            "list claims in other entries closest to each claim of one entry (read-only FTS5)")
     s.add_argument("entry", help="entry id or file path")
     s.add_argument("--limit", type=int, default=5, help="closest claims per claim (default: 5)")
 
     s = add("digest", cmd_digest,
             "summarize entries, claims and questions changed since a git ref or YYYY-MM-DD date (read-only)")
     s.add_argument("--since", required=True, metavar="REF_OR_DATE",
-                   help="git ref (tag, branch, commit SHA) or YYYY-MM-DD date")
+                   help="git ref (tag, branch, commit SHA) or YYYY-MM-DD date (first-parent commit on HEAD at or before that day)")
 
     s = add("sync", cmd_sync, "rewrite bound numbers in Markdown files from experiments/<id>/results.json")
     s.add_argument("paths", nargs="*", help="files or folders to sync (default: entries, questions, briefs, experiments)")

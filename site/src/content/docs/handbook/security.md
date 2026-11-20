@@ -8,19 +8,32 @@ sidebar:
 ## What it touches
 
 - **Reads and writes:** files inside the repo (`entries/`, `questions/`,
-  `changes/`, `instruments/`, `catalogs/`, `experiments/`), the generated index
-  `rnd.db` and, beside it, the local miss log `rnd.misses.jsonl` (see below).
-  `rnd new` writes one new entry file and refuses to overwrite. `rnd catalog sync`
-  rewrites a generated `catalog.json`. `rnd sync` rewrites bound numbers,
+  `changes/`, `instruments/`, `catalogs/`, `experiments/`, `datapacks/`,
+  `docs/layout.json`), the generated index `rnd.db` (or `--db` / `$RND_DB`)
+  and, beside it, the local miss log `rnd.misses.jsonl` (see below). `rnd new`
+  writes one new entry file and refuses to overwrite. `rnd catalog sync` rewrites
+  a generated `catalog.json`. `rnd sync` rewrites bound numbers,
   `rnd claims assign` adds claim ids in the named entry, and `rnd reconcile`
-  updates only the cited claim lines in existing Markdown files.
-- **Reads only:** the readouts knowledge bases, opened in SQLite's read-only
-  mode. `rnd sql` also uses a read-only connection, and `rnd similar` and
-  `rnd digest` never write to the working tree, git index or `rnd.db`.
+  updates only the cited claim lines in existing Markdown files. Outside the
+  repo, `rnd watch` writes its persistent state file to `--state`,
+  `$RND_WATCH_STATE` or `Path.home() / ".rnd" / "watch-state.json"`
+  (`~/.rnd/watch-state.json`), where it stays across runs unless `--no-save`
+  is passed, and `rnd raw` (`ingest`, `private`, `relicense`) writes to the
+  companion stores `--public` / `$RND_DATA` (`../rnd-data`) and `--private` /
+  `$RND_DATA_PRIVATE` (`../rnd-data-private`).
+- **Reads only:** the readouts knowledge bases (opened in SQLite's read-only
+  mode), `rnd collect` source clones (read via `git show`), `rnd sql` (read-only
+  connection), and `rnd similar` and `rnd digest` (parsed in memory without
+  writing temporary files, touching the working tree, changing the git index or
+  modifying `rnd.db`).
 
 ## What it never touches
 
-- Nothing outside the repo and the readouts checkout.
+- No files outside the repo except the explicit paths named above (`rnd watch`'s
+  state file unless `--no-save`, a caller-chosen `--db` / `$RND_DB` and sibling
+  `.misses.jsonl`, `rnd raw`'s `rnd-data` and `rnd-data-private` companion
+  stores, and read-only inputs to `readouts`, `collect`,
+  `datapack verify --copy`, `runs record --from` and `abmine`).
 - No credentials: it neither stores nor reads any.
 - No network, except `rnd catalog sync`, `rnd probe` and `rnd watch`, which read
   public metadata or call the GitHub API through your own `gh` CLI login when you

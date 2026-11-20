@@ -30,11 +30,18 @@ Include:
 `rnd` runs **locally only**.
 
 - **Data touched:** files inside this repo (`entries/`, `questions/`, `changes/`,
-  `instruments/`, `catalogs/`, `experiments/`), the generated index `rnd.db` and its
-  sibling local miss log `rnd.misses.jsonl`. The readouts knowledge bases are opened
-  read-only. `rnd sql` uses a read-only connection, and `rnd similar` and
-  `rnd digest` are read-only (never modifying the working tree, git index or
-  `rnd.db`).
+  `instruments/`, `catalogs/`, `experiments/`, `datapacks/`, `docs/layout.json`),
+  the generated index `rnd.db` (or `--db` / `$RND_DB`) and its sibling local miss
+  log `rnd.misses.jsonl`. Outside this repo, `rnd watch` writes its persistent
+  state file to `--state`, `$RND_WATCH_STATE` or
+  `Path.home() / ".rnd" / "watch-state.json"` (`~/.rnd/watch-state.json`), where
+  it stays across runs unless `--no-save` is passed, and `rnd raw` (`ingest`,
+  `private`, `relicense`) writes to the companion stores `--public` / `$RND_DATA`
+  (`../rnd-data`) and `--private` / `$RND_DATA_PRIVATE` (`../rnd-data-private`).
+  The readouts knowledge bases and `rnd collect` source clones are opened or
+  read read-only. `rnd sql` uses a read-only connection, and `rnd similar` and
+  `rnd digest` parse in memory and write nothing anywhere (no temporary files,
+  working-tree edits, git index changes or `rnd.db` writes).
 - **Network:** none, except `rnd catalog sync`, `rnd probe` and `rnd watch`, which
   read public metadata or call the GitHub API through the user's own `gh` CLI login
   when run.

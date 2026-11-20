@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 import datetime as dt
+import os
 import re
 import subprocess
-import tempfile
 from collections import deque
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 from . import model, questions
 
@@ -20,15 +20,43 @@ class DigestError(Exception):
         self.code, self.hint, self.exit_code = code, hint, exit_code
 
 
-def _run_git(root: Path, *args: str) -> subprocess.CompletedProcess:
+def _run_git(root: Path, *args: str, input_bytes: bytes | None = None) -> subprocess.CompletedProcess:
+    env = {**os.environ, "GIT_NO_LAZY_FETCH": "1"}
     try:
-        return subprocess.run(["git", "-C", str(root), *args], capture_output=True)
+        return subprocess.run(
+            ["git", "-C", str(root), *args],
+            input=input_bytes,
+            capture_output=True,
+            env=env,
+        )
     except OSError as exc:
         raise DigestError("GIT_FAILED", f"git could not run: {exc}", "install git and ensure it is on PATH", exit_code=3) from exc
 
 
+def _ensure_git_worktree(root: Path) -> None:
+    inside = _run_git(root, "rev-parse", "--is-inside-work-tree")
+    if inside.returncode != 0 or inside.stdout.decode("utf-8", "replace").strip() != "true":
+        raise DigestError(
+            "GIT_FAILED",
+            "library directory is not a git repository",
+            "run `rnd digest` inside a git clone of the library",
+            exit_code=3,
+        )
+
+
+def _clone_history_hint(root: Path, *, check_tags: bool = False) -> str:
+    sh = _run_git(root, "rev-parse", "--is-shallow-repository")
+    if sh.returncode == 0 and sh.stdout.decode("utf-8", "replace").strip() == "true":
+        return "; this clone is shallow — run `git fetch --tags --unshallow`"
+    if check_tags:
+        tg = _run_git(root, "tag", "-l")
+        if tg.returncode == 0 and not tg.stdout.strip():
+            return "; this clone has no git tags — run `git fetch --tags`"
+    return ""
+
+
 def resolve_since(root: Path, spec: str) -> tuple[str, str]:
-    """Resolve a git ref or YYYY-MM-DD date (last commit on HEAD at or before that day) to (sha, date)."""
+    """Resolve a git ref or YYYY-MM-DD date (first-parent commit on HEAD at or before that day) to (sha, date)."""
     spec = (spec or "").strip()
     if not spec or spec.startswith("-"):
         raise DigestError("UNKNOWN_REF", f"unknown git ref {spec!r}", "pass a git tag, commit SHA, branch, or YYYY-MM-DD", exit_code=2)
@@ -38,7 +66,8 @@ def resolve_since(root: Path, spec: str) -> tuple[str, str]:
             dt.date.fromisoformat(spec)
         except ValueError:
             raise DigestError("BAD_SINCE", f"invalid calendar date {spec!r}", "pass a valid YYYY-MM-DD date or a git ref", exit_code=2) from None
-        proc = _run_git(root, "log", "--date-order", "--format=%H%x09%ct%x09%cs", "HEAD")
+        _ensure_git_worktree(root)
+        proc = _run_git(root, "log", "--first-parent", "--date-order", "--format=%H%x09%ct%x09%cs", "HEAD")
         if proc.returncode != 0:
             detail = proc.stderr.decode("utf-8", "replace").strip()
             raise DigestError("GIT_FAILED", detail or "git log failed", "run inside a git checkout of the library", exit_code=3)
@@ -53,20 +82,22 @@ def resolve_since(root: Path, spec: str) -> tuple[str, str]:
                 first_sha, _, first_cs = rows[-1]
                 raise DigestError(
                     "BAD_SINCE",
-                    f"no commit on HEAD at or before {spec}",
-                    f"earliest commit on HEAD is {first_sha[:8]} ({first_cs}); pass a date on or after {first_cs} or a git ref",
+                    f"no first-parent commit on HEAD at or before {spec}",
+                    f"earliest first-parent commit on HEAD is {first_sha[:8]} ({first_cs}); "
+                    f"pass a date on or after {first_cs} or a git ref" + _clone_history_hint(root),
                     exit_code=2,
                 )
             raise DigestError("BAD_SINCE", "HEAD has no commits", "commit the library before running digest", exit_code=2)
         best = max(eligible, key=lambda r: (r[1], -r[3]))
         return best[0], best[2]
 
+    _ensure_git_worktree(root)
     proc = _run_git(root, "rev-parse", "--verify", "--quiet", f"{spec}^{{commit}}")
     if proc.returncode != 0:
         raise DigestError(
             "UNKNOWN_REF",
             f"unknown git ref {spec!r}",
-            "pass an existing git tag, branch, commit SHA, or a YYYY-MM-DD date",
+            "pass an existing git tag, branch, commit SHA, or a YYYY-MM-DD date" + _clone_history_hint(root, check_tags=True),
             exit_code=2,
         )
     sha = proc.stdout.decode("utf-8", "replace").strip()
@@ -76,7 +107,7 @@ def resolve_since(root: Path, spec: str) -> tuple[str, str]:
 
 
 def _load_snapshot_at_commit(root: Path, sha: str) -> tuple[list[model.Entry], list[questions.Question]]:
-    """Load entries and questions from `sha` via git objects inside a temporary directory."""
+    """Load entries and questions from `sha` in memory from git objects without writing to disk."""
     tree_proc = _run_git(root, "ls-tree", "-r", "-z", sha, "--", "entries", "instruments", "questions")
     if tree_proc.returncode != 0:
         detail = tree_proc.stderr.decode("utf-8", "replace").strip()
@@ -93,36 +124,41 @@ def _load_snapshot_at_commit(root: Path, sha: str) -> tuple[list[model.Entry], l
         if obj_type == "blob" and rel_path.endswith(".md") and not Path(rel_path).name.startswith("_"):
             blobs.append((obj_sha, rel_path))
 
-    with tempfile.TemporaryDirectory() as td:
-        tmp_root = Path(td)
-        if blobs:
-            batch_in = "".join(f"{b_sha}\n" for b_sha, _ in blobs).encode("ascii")
-            try:
-                cat_proc = subprocess.run(
-                    ["git", "-C", str(root), "cat-file", "--batch"],
-                    input=batch_in,
-                    capture_output=True,
-                    check=True,
-                )
-            except (OSError, subprocess.CalledProcessError) as exc:
-                raise DigestError("GIT_FAILED", f"git cat-file failed for {sha[:8]}: {exc}", exit_code=3) from exc
-            out = cat_proc.stdout
-            pos = 0
-            for _, rel_path in blobs:
-                nl = out.index(b"\n", pos)
-                header = out[pos:nl].decode("ascii").split()
-                size = int(header[2])
-                pos = nl + 1
-                data = out[pos:pos + size]
-                pos += size + 1
-                dest = tmp_root / rel_path
-                dest.parent.mkdir(parents=True, exist_ok=True)
-                dest.write_bytes(data)
+    raw_blobs: dict[str, bytes] = {}
+    if blobs:
+        batch_in = "".join(f"{b_sha}\n" for b_sha, _ in blobs).encode("ascii")
+        cat_proc = _run_git(root, "cat-file", "--batch", input_bytes=batch_in)
+        if cat_proc.returncode != 0:
+            detail = cat_proc.stderr.decode("utf-8", "replace").strip()
+            raise DigestError("GIT_FAILED", detail or f"git cat-file failed for {sha[:8]}", exit_code=3)
+        out = cat_proc.stdout
+        pos = 0
+        for _, rel_path in blobs:
+            nl = out.index(b"\n", pos)
+            header = out[pos:nl].decode("ascii").split()
+            size = int(header[2])
+            pos = nl + 1
+            raw_blobs[rel_path] = out[pos:pos + size]
+            pos += size + 1
 
-        entries, _ = model.load_all(tmp_root)
-        known_ids = {c["id"] for e in entries for c in e.claims if c["id"]}
-        qs, _ = questions.load_all(tmp_root, known_claim_ids=known_ids)
-        return entries, qs
+    def _parse_group(prefixes: tuple[str, ...], loader):
+        items, seen = [], set()
+        for prefix in prefixes:
+            paths = sorted((p for p in raw_blobs if p.startswith(prefix)), key=lambda p: PurePosixPath(p).parts)
+            for rel_path in paths:
+                try:
+                    item, _ = loader(raw_blobs[rel_path].decode("utf-8"), rel_path)
+                except UnicodeDecodeError:
+                    continue
+                if item is not None and item.id not in seen:
+                    seen.add(item.id)
+                    items.append(item)
+        return items
+
+    return (
+        _parse_group(("entries/", "instruments/"), model.load_text),
+        _parse_group(("questions/",), questions.load_text),
+    )
 
 
 def _rel_targets(rels: dict, rel_key: str, owner_map: dict[str, str]) -> list[dict]:
@@ -205,6 +241,18 @@ def compute_digest(root, since_spec: str) -> dict:
         if n_idx not in matched_new
     ]
 
+    claims_removed = [
+        {
+            "entry_id": eid,
+            "ord": ord_idx,
+            "id": oc["id"] or None,
+            "state": oc["state"],
+            "text": oc["text"],
+        }
+        for o_idx, (eid, ord_idx, oc) in enumerate(old_claims)
+        if o_idx not in matched_old
+    ]
+
     claims_state_changed = []
     for o_idx, n_idx in matched_pairs:
         _, _, oc = old_claims[o_idx]
@@ -260,6 +308,7 @@ def compute_digest(root, since_spec: str) -> dict:
         "counts": {
             "entries_added": len(entries_added),
             "claims_added": len(claims_added),
+            "claims_removed": len(claims_removed),
             "claims_state_changed": len(claims_state_changed),
             "questions_opened": len(questions_opened),
             "questions_answered": len(questions_answered),
@@ -267,6 +316,7 @@ def compute_digest(root, since_spec: str) -> dict:
         },
         "entries_added": entries_added,
         "claims_added": claims_added,
+        "claims_removed": claims_removed,
         "claims_state_changed": claims_state_changed,
         "questions_opened": questions_opened,
         "questions_answered": questions_answered,
@@ -281,7 +331,7 @@ def render_digest(rep: dict) -> str:
         f"Digest since {rep['since']} ({rep['since_commit'][:12]}, {rep['since_date']})",
         (
             f"Summary: {c['entries_added']} entries added, {c['claims_added']} claims added, "
-            f"{c['claims_state_changed']} claim state change(s), "
+            f"{c['claims_removed']} claims removed, {c['claims_state_changed']} claim state change(s), "
             f"{c['questions_opened']} question(s) opened, {c['questions_answered']} answered, {c['questions_parked']} parked"
         ),
         "",
@@ -292,6 +342,11 @@ def render_digest(rep: dict) -> str:
 
     lines.extend(["", f"Claims added ({c['claims_added']})"])
     for cl in rep["claims_added"]:
+        cid = cl["id"] or f"{cl['entry_id']}#{cl['ord']}"
+        lines.append(f"  [{cl['state']}] {cid} ({cl['entry_id']}): {cl['text']}")
+
+    lines.extend(["", f"Claims removed ({c['claims_removed']})"])
+    for cl in rep["claims_removed"]:
         cid = cl["id"] or f"{cl['entry_id']}#{cl['ord']}"
         lines.append(f"  [{cl['state']}] {cid} ({cl['entry_id']}): {cl['text']}")
 

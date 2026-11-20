@@ -7,10 +7,12 @@ sidebar:
 
 ## What it touches
 
-- **Reads and writes:** files inside the repo (`entries/`, `instruments/`,
-  `catalogs/`, `experiments/`) and the generated index `rnd.db`. `rnd new` writes
-  one new entry file and refuses to overwrite. `rnd catalog sync` rewrites a
-  generated `catalog.json`.
+- **Reads and writes:** files inside the repo (`entries/`, `questions/`,
+  `changes/`, `instruments/`, `catalogs/`, `experiments/`), the generated index
+  `rnd.db` and, beside it, the local miss log `rnd.misses.jsonl` (see below).
+  `rnd new` writes one new entry file and refuses to overwrite. `rnd catalog sync`
+  rewrites a generated `catalog.json`. `rnd sync`, `rnd claims assign` and
+  `rnd reconcile` rewrite only the lines they name in existing Markdown files.
 - **Reads only:** the readouts knowledge bases, opened in SQLite's read-only
   mode. `rnd sql` also uses a read-only connection.
 
@@ -18,10 +20,22 @@ sidebar:
 
 - Nothing outside the repo and the readouts checkout.
 - No credentials: it neither stores nor reads any.
-- No network, except `rnd catalog sync`, which calls the GitHub API through your
-  own `gh` login when you run it.
-- No telemetry. Nothing is collected or sent.
+- No network, except `rnd catalog sync`, `rnd probe` and `rnd watch`, which read
+  public metadata or call the GitHub API through your own `gh` CLI login when you
+  run them.
 - No background service and no elevated permissions.
+
+## The local-only usage log
+
+Nothing is collected or sent anywhere. One thing is written on your own machine:
+when `rnd search` returns no matches, it appends one line (the UTC time and the
+query) to `rnd.misses.jsonl` beside `rnd.db` (git-ignored in the repo), or to
+`<db>.misses.jsonl` beside the index named by `--db` or `$RND_DB`.
+
+- Set `RND_NO_USAGE=1` to turn it off.
+- Delete the `.misses.jsonl` file at any time to clear it.
+- `rnd stats --usage` prints the count and the most frequent missed queries.
+- No other usage data is recorded.
 
 ## Public-repo hygiene
 

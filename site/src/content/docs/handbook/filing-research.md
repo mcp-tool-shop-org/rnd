@@ -90,8 +90,9 @@ matters, find its primary source.
 |---|---|
 | `[unverified]` | not checked yet (the default) |
 | `[verified]` | checked; must end with `(via: …)` naming what checked it and when |
-| `[disputed]` | sources conflict |
+| `[disputed]` | sources conflict, or a later claim contradicts it |
 | `[wrong]` | checked and false; must say what showed it, with `(via: …)` |
+| `[superseded]` | replaced by a later claim, which it names with `(superseded-by: …)` |
 
 Verification is proportional. Check a claim when it looks wrong, when sources
 conflict, or when a decision depends on it. Do not run a verifier over every
@@ -105,16 +106,68 @@ update the entry when the rest lands.
 `[[entry-id]]` links one entry to another. `rnd show` lists each entry's
 backlinks, and `rnd check` warns about a link that points at no entry.
 
+## Linking a claim to the one it replaces
+
+A new finding often overturns an old claim. Say so on the new claim, by the old
+claim's id, and let `rnd reconcile` mark the old one:
+
+```markdown
+- [verified] [c-7a1f03d2] The fix cuts load time to 2.1 s. (via: bench run, 2026-11-19) (supersedes: c-41c0e9aa)
+```
+
+- `rnd claims assign <entry>` gives an entry's claims stable `c-<hex>` ids.
+- A claim may state `(supersedes: id)`, `(contradicts: id)` or `(supports: id)`.
+  The target must be a claim id.
+- `rnd reconcile <entry>` then marks each older claim in its own file
+  (`superseded-by` and `[superseded]`; `contradicted-by` and `[disputed]`;
+  `supported-by`). It never changes the older claim's sentence.
+- `rnd search` and `rnd show` mark superseded and disputed claims and name the
+  claim that replaced or contradicted them.
+
+## Binding a number to a results file
+
+A number copied by hand from a working file can drift. An experiment can keep its
+public-safe summary numbers in `experiments/<id>/results.json`, and a number in an
+entry, brief, question or experiment note can be bound to a key in it by a comment
+directly after the literal:
+
+```markdown
+The judge scored 84.2%<!-- rnd:experiments/e4b/results.json#accuracy:.1% --> on the held-out split.
+```
+
+The raw file, `grep` and the index keep the plain `84.2%`; GitHub and this site
+show it with no marker. `rnd sync` rewrites every bound number from its results
+file, and `rnd check` fails if one differs.
+
+## Open questions
+
+An open question is one file under `questions/`, made with
+`rnd new-question "<title>"`. Its `status` is `open`, `investigating`, `answered`
+or `parked`. An `answered` question lists, in `answered_by`, the ids of the claims
+that answer it.
+
+## Recording the change
+
+An update does not edit the version or `CHANGELOG.md`. Record it with
+`rnd change "<what changed>"` (add `--level micro` for a new experiment or
+catalogue). The version moves once, when a release pull request runs `rnd bump`.
+
 ## What `rnd check` enforces
 
 Errors (exit 1): unreadable frontmatter, a bad `id`, a missing `title`, a
 `date` not in `YYYY-MM-DD`, an unknown `kind`, `relevance` or `status`, no
 `fields`, an unknown source tier, a URL-less `primary`/`secondary`/`aggregator`
 source, an unknown claim tag, a `verified`/`wrong` claim without `(via: …)`, a
-duplicate `id`, and an instrument missing `instrument_status` or `invoke`.
+duplicate `id`, and an instrument missing `instrument_status` or `invoke`. Also:
+more than one `## Claims` heading in an entry, a duplicate claim id, a relation to
+a claim id that does not exist or a link present on one side only (run
+`rnd reconcile`), a bound number that differs from its results file or names a
+missing file or key, an `answered` question with no existing claim id, and a
+malformed changelog fragment.
 
-Warnings: an entry with no sources (except rig-facts and instruments), and a
-`[[link]]` to no entry.
+Warnings: an entry with no sources (except rig-facts and instruments), a
+`[[link]]` to no entry, and a `[verified]` claim whose `(via: …)` names one of this
+repo's experiments while its text still holds an unbound number.
 
 ## Writing rules
 

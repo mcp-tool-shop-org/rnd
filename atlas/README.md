@@ -1,20 +1,19 @@
 # rnd: how it works
 
-Mapped at 2026-11-20 from commit 0a19b51 by Atlas 1.26.0.
+Mapped at 2026-11-20 from commit 0c14743 by Atlas 1.26.0.
 
 ## What this is
 
 The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only). (written by a person)
 
-14 parts, mostly Python (148 files), shell (30), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 6 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
+16 parts, mostly Python (148 files), shell (30), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 6 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.
 
-## What changed since 2026-11-15 (2ef559d)
+## What changed since 2026-11-20 (0a19b51)
 
-- CHANGELOG.md is now also read by mcptoolshop_rnd/cli.py and tests/test_rnd_1_2.py.
-- README.md is now also read by tests/test_rnd_1_2.py.
-- docs/watchlist.json is now also read by tests/test_rnd_1_2.py.
-- changes/2026-11-19-0a706af2-add-changelog-fragments-rnd-chan.md is new and belongs to no part, so atlas check fails on it against the previous map.
-- 12 files added and 16 changed content, across 8 parts.
+- questions/ is now read by experiments/natural-errors/build.py.
+- changes is a new part, drawn from `changes/**`.
+- questions is a new part, drawn from `questions/**`.
+- 3 files added, 1 removed and 18 changed content, across 7 parts.
 
 ## What comes in
 
@@ -59,10 +58,8 @@ the repository root holds only shell files, which this map does not read, so wha
 ## What tends to change together
 
 - **experiments/atlas-mcp-utility/run.py** and **tests/test_atlas_mcp_utility_run.py** changed together in 15 of 15 commits.
-- **mcptoolshop_rnd/layout.py** and **tests/test_runs.py** changed together in 5 of 8 commits, and the tests part imports the mcptoolshop_rnd part.
 - **mcptoolshop_rnd/localbuilders/proxy.py** and **tests/test_localbuilders.py** changed together in 4 of 7 commits, and the tests part imports the mcptoolshop_rnd part.
-- **mcptoolshop_rnd/layout.py** and **mcptoolshop_rnd/runs.py** changed together in 4 of 8 commits, inside the mcptoolshop_rnd part.
-- **rnd/cli.py** and **tests/test_rnd.py** changed together in 4 of 8 commits.
+- **mcptoolshop_rnd/layout.py** and **tests/test_runs.py** changed together in 5 of 9 commits, and the tests part imports the mcptoolshop_rnd part.
 
 2 files changed together with their own tests, as expected.
 
@@ -119,7 +116,7 @@ These are candidates from names and call order, not a judgement.
 
 ## Hand-authored
 
-People write .claude/, .github/, catalogs/, datapacks/ and docs/; 26 writes with paths built at run time may land here.
+People write .claude/, .github/, catalogs/, changes/, datapacks/, docs/ and questions/; 27 writes with paths built at run time may land here.
 
 ## Where to start
 
@@ -130,13 +127,13 @@ Read those in order to follow one run of rnd end to end. This path follows rnd (
 ## What this map cannot see
 
 - 12 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 9 more.
-- 26 writes and 38 reads use paths built at run time and are not named here.
+- 27 writes and 36 reads use paths built at run time and are not named here.
 - 7 writes go to places this repository does not track, so they are not listed as generated.
 - 44 writes and 138 reads go to a path their caller passes, not to this repository.
 - 14 reads go to the directory the command is run in, not to this repository.
 - 2 reads go to the directory the command is run in or a path their caller passes, not to this repository.
 - 2 reads go to the home directory (.claude/), not to this repository.
-- 5 files belong to no part: changes/2026-11-19-0a706af2-add-changelog-fragments-rnd-chan.md, scripts/colab/collect_windows.py, scripts/colab/probe.py and 2 more.
+- 4 files belong to no part: scripts/colab/collect_windows.py, scripts/colab/probe.py, scripts/colab/rates.sh and 1 more.
 - Statistics confidence is low: fewer than 25 source files reach 10 revisions in the window.
 
 Regenerate with `npx --yes @dogfood-lab/atlas map`.

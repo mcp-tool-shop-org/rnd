@@ -57,9 +57,12 @@ claim and changes only numbers in the facts, do the shortcuts go, and is what is
   of the three pool types and 0 on a pool ten times larger. That zero has no measured detection margin on the number
   statistics yet: the audit's planted-cue controls were designed for the old items and cannot plant a visible cue in
   the new ones, so they are being redesigned. The learned probe's result is not valid as run (its permutation null is
-  biased for this design) and it is being rerun. On the larger pool one small residual was found: one number
-  statistic predicts the answer with a lift of +0.0056, under the +0.02 floor. So there is no pass yet. A follow-up
-  entry will record what the full audit found.
+  biased for this design) and it is being rerun. On the larger pool one residual was found: one number statistic (the
+  sum of all lower numbers minus the claim number) predicts the answer with a lift of +0.0056, under the +0.02 floor.
+  The pool-level figure is small because the cue is rare, not because it is weak: in about 2% of triads, those whose
+  total sits just above a cut-off the construction applies, that statistic nearly determines the answer (for example,
+  of 80 such "at least" items in the lowest two bins, none is supported). The cut-off rule is ours and is being
+  changed. So there is no pass yet. A follow-up entry will record what the full audit found.
 
 ## Caveats
 

@@ -633,8 +633,8 @@ class ClaimsAndReconcileTests(CliBase):
         self.assertEqual(self.run_cli("check")[0], 0)
         (self.root / "entries/2026/2026-02-01-newfence.md").unlink()
 
-        # 2. Entry with two real `## Claims` headings: last heading wins consistently across
-        # reader and writers, first section stays untouched, and `rnd check` reports an error.
+        # 2. Entry with two real `## Claims` headings: `rnd check` reports an error and writers
+        # refuse with MULTIPLE_CLAIMS_HEADINGS without modifying any file.
         dup_entry = (
             "---\n"
             "id: 2026-01-21-duphead\n"
@@ -654,19 +654,18 @@ class ClaimsAndReconcileTests(CliBase):
         )
         p_dup = self.root / "entries/2026/2026-01-21-duphead.md"
         write(self.root, "entries/2026/2026-01-21-duphead.md", dup_entry)
+        dup_bytes = p_dup.read_bytes()
         id_sec2 = model.make_claim_id("2026-01-21-duphead", "Second section claim.")
-        code, out, err = self.run_cli("claims", "assign", "2026-01-21-duphead", "--json")
-        self.assertEqual(code, 0, err)
-        self.assertEqual(json.loads(out)["assigned"], [id_sec2])
-        after_dup = p_dup.read_text(encoding="utf-8")
-        self.assertIn("- [unverified] First section claim.", after_dup)
-        self.assertIn(f"- [unverified] [{id_sec2}] Second section claim.", after_dup)
+        code, _, err = self.run_cli("claims", "assign", "2026-01-21-duphead")
+        self.assertEqual(code, 1)
+        self.assertIn("MULTIPLE_CLAIMS_HEADINGS", err)
+        self.assertEqual(p_dup.read_bytes(), dup_bytes)
         code, _, err = self.run_cli("check")
         self.assertEqual(code, 1)
         self.assertIn("multiple '## Claims' headings (2 found)", err)
 
-        # Reconcile also edits only the active last real Claims section.
-        write(
+        # Reconcile also refuses without writing when target has two real Claims headings.
+        p_newdup = write(
             self.root,
             "entries/2026/2026-02-02-newdup.md",
             ENTRY.replace("2026-01-02-sample", "2026-02-02-newdup").replace(
@@ -674,13 +673,14 @@ class ClaimsAndReconcileTests(CliBase):
                 f"- [verified] Supersedes sec2. (via: bench, 2026-02-02) (supersedes: {id_sec2})",
             ),
         )
+        newdup_bytes = p_newdup.read_bytes()
         code, _, err = self.run_cli("reconcile", "2026-02-02-newdup")
-        self.assertEqual(code, 0, err)
-        after_dup2 = p_dup.read_text(encoding="utf-8")
-        self.assertIn("- [unverified] First section claim.", after_dup2)
-        self.assertIn(f"- [superseded] [{id_sec2}] Second section claim. (superseded-by:", after_dup2)
+        self.assertEqual(code, 1)
+        self.assertIn("MULTIPLE_CLAIMS_HEADINGS", err)
+        self.assertEqual(p_dup.read_bytes(), dup_bytes)
+        self.assertEqual(p_newdup.read_bytes(), newdup_bytes)
         p_dup.unlink()
-        (self.root / "entries/2026/2026-02-02-newdup.md").unlink()
+        p_newdup.unlink()
 
         # 3. Pre-write CLAIM_MISMATCH refusal writes nothing.
         before_bytes = p.read_bytes()

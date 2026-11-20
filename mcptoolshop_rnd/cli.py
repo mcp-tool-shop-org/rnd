@@ -511,18 +511,13 @@ def cmd_bump(args):
         return fail("BAD_FRAGMENT", "malformed changelog fragment(s) under changes/",
                     "run `rnd check` and fix the fragment files", 1)
     try:
-        old = release.read_version(ROOT)
         if fragments:
             levels = [f["level"] for f in fragments] + ([args.level] if args.level else [])
             level = release.highest_level(levels)
-            new = release.bump(old, level)
+            old, new = release.resolve_bump_versions(ROOT, level)
             section = release.fragments_changelog_section(new, fragments, args.note or ())
             if not args.dry_run:
-                cl_path = ROOT / "CHANGELOG.md"
-                if "## [Unreleased]" not in cl_path.read_text(encoding="utf-8"):
-                    raise release.ReleaseError("BAD_CHANGELOG", "CHANGELOG.md has no '## [Unreleased]' heading")
-                release.write_version(ROOT, new)
-                release.insert_changelog(ROOT, section)
+                release.apply_bump(ROOT, new, section)
                 for f in fragments:
                     p = ROOT / f["path"]
                     if p.exists():
@@ -539,12 +534,11 @@ def cmd_bump(args):
             return 0
 
         level = args.level or "nano"
-        new = release.bump(old, level)
+        old, new = release.resolve_bump_versions(ROOT, level)
         since = release.last_tag(ROOT)
         section = release.changelog_section(ROOT, new, release.changes(ROOT, since), args.note or ())
         if not args.dry_run:
-            release.write_version(ROOT, new)
-            release.insert_changelog(ROOT, section)
+            release.apply_bump(ROOT, new, section)
     except release.ReleaseError as exc:
         return fail(exc.code, str(exc), exc.hint, 3 if exc.code == "GIT_FAILED" else 2)
     print(f"{'would bump' if args.dry_run else 'bumped'} {old} -> {new} (changes since {since or 'the first commit'})")

@@ -119,8 +119,9 @@ claim's id, and let `rnd reconcile` mark the old one:
 - A claim may state `(supersedes: id)`, `(contradicts: id)` or `(supports: id)`.
   The target must be a claim id.
 - `rnd reconcile <entry>` then marks each older claim in its own file
-  (`superseded-by` and `[superseded]`; `contradicted-by` and `[disputed]`;
-  `supported-by`). It never changes the older claim's sentence.
+  (`superseded-by` and `[superseded]`; `contradicted-by` and `[disputed]`, or
+  keeping `[wrong]` as `[wrong]` with `contradicted-by`; `supported-by`). It
+  never changes the older claim's sentence.
 - `rnd search` and `rnd show` mark superseded and disputed claims and name the
   claim that replaced or contradicted them.
 
@@ -159,15 +160,20 @@ Errors (exit 1): unreadable frontmatter, a bad `id`, a missing `title`, a
 `fields`, an unknown source tier, a URL-less `primary`/`secondary`/`aggregator`
 source, an unknown claim tag, a `verified`/`wrong` claim without `(via: …)`, a
 duplicate `id`, and an instrument missing `instrument_status` or `invoke`. Also:
-more than one `## Claims` heading in an entry, a duplicate claim id, a relation to
-a claim id that does not exist or a link present on one side only (run
-`rnd reconcile`), a bound number that differs from its results file or names a
-missing file or key, an `answered` question with no existing claim id, and a
-malformed changelog fragment.
+more than one `## Claims` heading in an entry, an unclosed code fence in an entry
+body, a duplicate claim id, a relation to a claim id that does not exist or a
+link present on one side only (run `rnd reconcile`), a bound number that differs
+from its results file or names a missing file or key, an `answered` question
+with no existing claim id, and a malformed changelog fragment.
 
 Warnings: an entry with no sources (except rig-facts and instruments), a
-`[[link]]` to no entry, and a `[verified]` claim whose `(via: …)` names one of this
-repo's experiments while its text still holds an unbound number.
+`[[link]]` to no entry, a `[superseded]` claim with no `(superseded-by: …)`
+link, and a `[verified]` claim whose `(via: …)` names one of this repo's
+experiments while its text still holds an unbound number—ignoring plain integers
+(with no decimal point, percent sign, thousands separator or trailing unit) that
+pair with the preceding word in the entry's title or tags or follow `RTX` or
+`GTX` (3–4 digits) or `CUDA`, `PTX`, `Gemma`, `Llama`, `Qwen`, `Claude`, `GPT`
+or `Phi` (1–2 digits).
 
 ## Writing rules
 

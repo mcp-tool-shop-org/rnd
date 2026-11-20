@@ -3,7 +3,7 @@ title: Can one claim with three sets of numbers remove a benchmark's shortcuts?
 description: In a prototype, the audit's listed tests find nothing, and a small pilot suggests the hard part becomes finding the right chain of facts. Not a verdict on a sealed set, and everything the audit does not list is unproven.
 date: 2026-11-19
 status: interim
-shelf: not yet (prototype only; nothing is built in the real generator yet)
+shelf: not yet (the real build exists and is under audit; no pass yet)
 ---
 
 ## The question
@@ -52,8 +52,12 @@ claim and changes only numbers in the facts, do the shortcuts go, and is what is
   pre-registration before any real pool is drawn: one claim per triad, the fork family, 5 to 8 events per item
   (amended after seeing the data, and recorded as such), decoy facts tagged and verified redundant, the 13 number
   statistics in the audit's list, and the grounded score as a secondary score with its own arm.
-- Nothing is built in the real generator yet. The build must reproduce the zero there and pass what the prototype never ran: the
-  learned probe, both corruption probes, the planted-cue controls and a pool ten times larger.
+- **The real build now exists and is under audit (added the evening of 2026-11-19).** The construction was built in
+  the real generator the same day. On its public-seed pools the audit's main gate found no must-fix test: 0 on each of
+  the three pool types and 0 on a pool ten times larger. The audit's own self-checks did not pass on the new items:
+  its planted-cue controls and its probe tests were designed for the old items and are being reworked for this
+  design. The learned probe found nothing, and its test is under repair. So there is no pass yet. A follow-up entry
+  will record what the full audit found.
 
 ## Caveats
 

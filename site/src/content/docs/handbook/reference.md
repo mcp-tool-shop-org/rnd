@@ -61,8 +61,10 @@ log (see [Security and trust](../security/)).
 `claims` (or `claims list`) lists indexed claims with their id, state and
 relations; `--state verified|unverified|disputed|wrong|superseded` filters and
 `--json` prints machine-readable output. `claims assign <entry>` adds a stable
-`c-<hex>` id to each claim of one entry that has none. Ids are never renumbered,
-and existing entries are not rewritten in bulk.
+`c-<hex>` id to each claim of one entry that has none, refusing
+(`MULTIPLE_CLAIMS_HEADINGS`) without writing if the entry has more than one real
+`## Claims` heading. Ids are never renumbered, and existing entries are not
+rewritten in bulk.
 
 ### `questions`
 
@@ -142,10 +144,12 @@ See [Filing research](../filing-research/#binding-a-number-to-a-results-file).
 
 For each `supersedes`, `contradicts` or `supports` relation in the entry's claims,
 mark the older claim in its own file: `superseded-by` and state `superseded`,
-`contradicted-by` and state `disputed`, or `supported-by`, adding an id if the
-older claim has none. It changes nothing else on that line and no other line, and
-running it twice changes nothing. It refuses (`CLAIM_MISMATCH`) and writes nothing
-if the line it is about to change is not the claim it read.
+`contradicted-by` and state `disputed` (unless already `superseded` or `wrong`,
+keeping `[wrong]` as `[wrong]`), or `supported-by`, adding an id if the older
+claim has none. It changes nothing else on that line and no other line, and
+running it twice changes nothing. It refuses without writing if any file to read
+or update has more than one real `## Claims` heading (`MULTIPLE_CLAIMS_HEADINGS`),
+or if the line it is about to change is not the claim it read (`CLAIM_MISMATCH`).
 
 ### `check`
 
@@ -177,7 +181,9 @@ segments, `MAJOR.MINOR.PATCH.MICRO.NANO`:
 A bump resets the segments after the one it raises (`1.0.0.0.9` → `micro` →
 `1.0.0.1.0`). The CHANGELOG section lists the entries, instruments, experiments and
 catalogues changed since the last `v*` tag, including uncommitted and untracked
-files, plus any `--note` lines. `--dry-run` prints it without writing. The command
+files, plus any `--note` lines. `--dry-run` prints it without writing. If the
+`CHANGELOG.md` write fails after the version file is written, `bump` rolls back
+the version file and recovers on re-run without bumping twice. The command
 prints the commit, tag and push to run next.
 
 ```bash
@@ -221,8 +227,9 @@ Codes include `NO_LIBRARY`, `NOT_FOUND`, `EXISTS`, `BAD_ID`, `INDEX_INVALID`, `S
 `GIT_FAILED`, `INTERNAL` and `INTERRUPTED`, plus the catalogue sync codes. The 1.2
 commands add `BAD_CHANGE` and `BAD_FRAGMENT` (changelog fragments); `BAD_BINDING`,
 `BAD_RESULTS`, `MISSING_KEY`, `BAD_FORMAT`, `BAD_VALUE` and `SYNC_MISMATCH` (bound
-numbers); `CLAIM_NOT_FOUND`, `CLAIM_MISMATCH`, `DUPLICATE_CLAIM_ID` and
-`SELF_RELATION` (claim ids and links); `BAD_STATUS` and `BAD_ANSWERED_BY`
+numbers); `CLAIM_NOT_FOUND`, `CLAIM_MISMATCH`, `DUPLICATE_CLAIM_ID`,
+`MULTIPLE_CLAIMS_HEADINGS` and `SELF_RELATION` (claim ids and links);
+`BAD_STATUS` and `BAD_ANSWERED_BY`
 (questions); `INSTRUMENTS_PROTECTED` (a command that summarises outside content
 was pointed at `instruments/`); and `MISSING_EXTRA` (a command needs an optional
 package that is not installed).

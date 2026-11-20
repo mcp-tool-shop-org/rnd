@@ -174,7 +174,9 @@ python -m rnd bump                                     # release PR: bump once, 
 ```
 
 With no files under `changes/`, `rnd bump [nano|micro|…] [--note …]` keeps its
-git-diff behaviour. `rnd check` reports any malformed fragment as an error.
+git-diff behaviour. If the `CHANGELOG.md` write fails after the version write,
+`rnd bump` rolls the version file back and recovers on re-run without bumping
+twice. `rnd check` reports any malformed fragment as an error.
 
 ## Bound numbers
 
@@ -193,7 +195,9 @@ The judge scored 84.2%<!-- rnd:experiments/e4b/results.json#accuracy:.1% --> on 
   literal differs.
 - `rnd check` treats any out-of-sync bound literal, missing file or missing key
   as an error, and warns on `[verified]` claims whose `(via: …)` names a repo
-  experiment while still holding unbound numbers.
+  experiment while still holding unbound numbers (ignoring numbers that are part
+  of a product/model name such as `RTX 5090` or appear in the entry's own title
+  or tags).
 
 ## Claim ids and links
 
@@ -209,9 +213,14 @@ python -m rnd reconcile <entry>                    # mark older claims (supersed
 `rnd reconcile <entry>` writes only the id (if missing), updated state and
 inverse relation (`superseded-by`, `contradicted-by`, `supported-by`) on the
 older claim's line in its own file without touching its sentence or any other
-line. `rnd check` errors on broken target ids or one-sided links and hints to
-run `rnd reconcile`. `rnd search` and `rnd show` mark `superseded` and
-`disputed` claims and name the claim that replaced or contradicted them.
+line (leaving a `[wrong]` claim `[wrong]` when contradicted). Both
+`rnd claims assign` and `rnd reconcile` refuse (`MULTIPLE_CLAIMS_HEADINGS`)
+without writing if an entry holds more than one real `## Claims` heading.
+`rnd check` errors on broken target ids, one-sided links (hinting to run
+`rnd reconcile` or remove the clause and reset state) or an unclosed code fence,
+and warns on a `[superseded]` claim with no `(superseded-by: …)` link.
+`rnd search` and `rnd show` mark `superseded` and `disputed` claims and name the
+claim that replaced or contradicted them.
 
 ## Open questions
 
@@ -232,7 +241,8 @@ question without an existing claim id as an error. Questions are indexed in
 
 When `rnd search` returns no matches, it appends one JSON line (`time` and
 `query`) to a local `.misses.jsonl` file beside `rnd.db` (`rnd.misses.jsonl` in
-the repo root, git-ignored; or `<db>.misses.jsonl` beside `--db` / `RND_DB`).
+the repo root, git-ignored; or `<stem>.misses.jsonl` beside `--db` / `RND_DB`,
+so `--db foo.db` writes `foo.misses.jsonl` beside it, not `foo.db.misses.jsonl`).
 Nothing else is recorded, nothing is ever sent over the network, `RND_NO_USAGE=1`
 switches logging off, and deleting the file removes it completely.
 `rnd stats --usage` prints the total miss count and the most frequent missed
@@ -362,8 +372,9 @@ studio's workflow standards.
 - **Permissions:** ordinary file access. No elevated rights, no background service.
 - **Local-only usage log:** nothing is collected or sent anywhere. When `rnd search`
   returns no matches, it appends one line (UTC time and query) to `rnd.misses.jsonl`
-  beside `rnd.db` (git-ignored in the repo, or `<db>.misses.jsonl` beside `--db` /
-  `$RND_DB`). Set `RND_NO_USAGE=1` to turn it off, and delete `.misses.jsonl` at any
+  beside `rnd.db` (git-ignored in the repo; with `--db foo.db`, `foo.misses.jsonl`
+  beside it, not `foo.db.misses.jsonl`, and likewise for `$RND_DB`). Set
+  `RND_NO_USAGE=1` to turn it off, and delete the `.misses.jsonl` file at any
   time to clear it. No other usage data is recorded.
 - **Public repo hygiene:** before every push, the tree is scanned for
   home-directory paths and operator identity.

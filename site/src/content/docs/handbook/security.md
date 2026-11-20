@@ -30,8 +30,9 @@ sidebar:
 
 Nothing is collected or sent anywhere. One thing is written on your own machine:
 when `rnd search` returns no matches, it appends one line (the UTC time and the
-query) to `rnd.misses.jsonl` beside `rnd.db` (git-ignored in the repo), or to
-`<db>.misses.jsonl` beside the index named by `--db` or `$RND_DB`.
+query) to `rnd.misses.jsonl` beside `rnd.db` (git-ignored in the repo), or beside
+the index named by `--db` or `$RND_DB` (with `--db foo.db` the file is
+`foo.misses.jsonl` beside it, not `foo.db.misses.jsonl`).
 
 - Set `RND_NO_USAGE=1` to turn it off.
 - Delete the `.misses.jsonl` file at any time to clear it.

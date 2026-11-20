@@ -17,6 +17,7 @@ from . import frontmatter
 
 LEVELS = ("major", "minor", "patch", "micro", "nano")
 VERSION_RE = re.compile(r'^__version__ = "([^"]+)"', re.M)
+CHANGELOG_HEADING_RE = re.compile(r"^## \[([^\]]+)\]", re.M)
 LIBRARY_DIRS = ("entries", "instruments", "experiments", "catalogs")
 CHANGES_DIR = "changes"
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -125,6 +126,47 @@ def insert_changelog(root, section):
     head, tail = text.split(marker, 1)
     rest = tail.lstrip("\n")
     p.write_text(head + marker + "\n\n" + section + ("\n" + rest if rest else ""), encoding="utf-8")
+
+
+def latest_changelog_version(root):
+    """Return the newest released version heading from CHANGELOG.md, or None."""
+    cl_path = Path(root) / "CHANGELOG.md"
+    if not cl_path.is_file():
+        return None
+    for m in CHANGELOG_HEADING_RE.finditer(cl_path.read_text(encoding="utf-8")):
+        ver = m.group(1).strip()
+        if ver.lower() != "unreleased":
+            return ver
+    return None
+
+
+def effective_version_for_bump(root, level):
+    """Return the version to bump from, recovering if an earlier bump wrote __init__.py without CHANGELOG.md."""
+    init_ver = read_version(root)
+    cl_ver = latest_changelog_version(root)
+    if not cl_ver:
+        return init_ver
+    try:
+        if parse(init_ver) > parse(cl_ver) and bump(cl_ver, level) == init_ver:
+            return cl_ver
+    except ReleaseError:
+        return init_ver
+    return init_ver
+
+
+def apply_bump(root, new, section):
+    """Write the new version and CHANGELOG section, rolling back __init__.py if the CHANGELOG write fails."""
+    cl_path = Path(root) / "CHANGELOG.md"
+    if not cl_path.is_file() or "## [Unreleased]" not in cl_path.read_text(encoding="utf-8"):
+        raise ReleaseError("BAD_CHANGELOG", "CHANGELOG.md has no '## [Unreleased]' heading")
+    init_path = Path(root) / "mcptoolshop_rnd" / "__init__.py"
+    orig_init = init_path.read_bytes()
+    write_version(root, new)
+    try:
+        insert_changelog(root, section)
+    except BaseException:
+        init_path.write_bytes(orig_init)
+        raise
 
 
 def add_fragment(root, text, level="nano", today=None):

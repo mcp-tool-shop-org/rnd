@@ -120,14 +120,19 @@ def _slugify(text: str) -> str:
 
 
 def _yaml_scalar(value: str) -> str:
-    needs_quote = " #" in value or value[:1] in ("'", '"', "[", "|", ">")
+    needs_quote = (
+        " #" in value
+        or ": " in value
+        or value.endswith(":")
+        or value[:1] in ("'", '"', "[", "{", "|", ">", "#", "&", "*", "!", "%", "@", "`", "?", "-")
+    )
     if not needs_quote:
         return value
     if '"' not in value:
         return f'"{value}"'
     if "'" not in value:
         return f"'{value}'"
-    return "|\n  " + "\n  ".join(value.splitlines())
+    return "|-\n  " + "\n  ".join(value.splitlines())
 
 
 def new_question(

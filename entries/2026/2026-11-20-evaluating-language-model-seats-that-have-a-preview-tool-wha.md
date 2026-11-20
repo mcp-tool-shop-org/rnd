@@ -31,8 +31,8 @@ tool's effect at frozen game states instead.
   for tens of games. Report with a bootstrap over seed blocks.
 - **Pin the serving stack.** One GPU model, prefix caching off, a generous output limit, and logging of token ids,
   finish reason, and weight and template hashes. Studies it cites find that GPU count, type and batch size (Yuan et al.
-  2025), reuse of a cached prompt prefix (Patodiya 2026) and 4-bit quantisation (Blagojevich 2026) each change model
-  outputs measurably; see Claims for what was checked.
+  2025), reuse of a cached prompt prefix (Patodiya 2026) and 4-bit quantisation (Blagojevich and Sunderland 2026, on
+  two decision models, not agents) each change model outputs measurably; see Claims for what was checked.
 - **Power.** At a two-sided 5% level and 80% power, 16 games per arm unpaired detect about a one-standard-deviation
   effect, and 24 paired seeds at a correlation of 0.5 about 0.6 (0.57 by the normal approximation, 0.60 by the t test;
   the report's 0.55 is wrong). The correlation is a guess until measured.
@@ -61,6 +61,7 @@ tool's effect at frozen game states instead.
 
 - [verified] For one reasoning model under BF16 greedy decoding, accuracy varied by up to 9% with differences in GPU count, GPU type and evaluation batch size together (via: abstract of Yuan et al. 2025, arXiv 2506.09501, read by the harvest clerk and an independent review, 2026-11-20)
 - [verified] Reusing a cached prompt prefix changed 37.4% (16-bit) and 82.5% (4-bit GGUF) of multi-turn tool episodes for one 7B model under llama.cpp (via: abstract of Patodiya 2026, arXiv 2609.04748, read by the harvest clerk, 2026-11-20)
+- [verified] For two decision models (9B and 27B) on 2,400 public decisions, 4-bit builds changed 3.50% to 5.79% of decisions, while restarts, engine swaps, batch size and kernel choice changed 0% to 0.92% (via: abstract of Blagojevich and Sunderland 2026, arXiv 2611.15671, read by R&D, 2026-11-20)
 - [verified] At a two-sided 5% level and 80% power, 16 games against 16 unpaired detect about 1.02 standard deviations (t test; 0.99 normal approximation), and 24 paired seeds at correlation 0.5 about 0.60 (t test; 0.57 normal approximation); the report's 0.55 is wrong (via: recomputed by an independent review and by R&D, 2026-11-20)
 - [unverified] Tool-using agents skip or ignore tool results in 53% to 60% of cases (the report's figure; not on the abstract pages read)
 - [unverified] The seat-to-seat correlation in our game is 0.3 to 0.5 (the report's guess; not measured)
@@ -69,5 +70,5 @@ tool's effect at frozen game states instead.
 
 - [aggregator] https://gemini.google.com/ — Gemini Deep Research (Gemini 4 Carbon, High), 2026-11-20: report on evaluating language-model agents in a multiplayer trading game
 - [primary] https://arxiv.org/abs/2506.09501 — Yuan et al. (2025), Understanding and Mitigating Numerical Sources of Nondeterminism in LLM Inference
-- [primary] https://arxiv.org/abs/2609.04748 — Patodiya (2026), study of prefix-cache reuse and output divergence in multi-turn tool use (abstract read)
-- [primary] https://arxiv.org/abs/2611.15671 — Blagojevich (2026), study of restart and quantisation effects on agent decisions (abstract read)
+- [primary] https://arxiv.org/abs/2609.04748 — Patodiya (2026), Same Request, Different Answer: Quantization Amplifies Cache-Induced Divergence in LLM Serving (abstract read)
+- [primary] https://arxiv.org/abs/2611.15671 — Blagojevich and Sunderland (2026), The Noise Floor of a Quantization Comparison: Engine, restart, batch and kernel drift, measured against 8-bit and 4-bit effects in two decision models (abstract read)

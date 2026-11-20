@@ -219,7 +219,10 @@ files, plus any `--note` lines. `--dry-run` prints it without writing. Both
 in the same folder and swapped with `os.replace`, rolling back `__init__.py` if
 the `CHANGELOG.md` swap fails; if a crash leaves `__init__.py` ahead of
 `CHANGELOG.md`, re-running at the matching level completes it and re-running at
-any other level refuses with `BAD_CHANGELOG` instead of bumping twice. The
+any other level refuses with `BAD_CHANGELOG` instead of bumping twice. One gap
+remains: a crash after both files are swapped but before the fragments under
+`changes/` are deleted leaves them in place, and a re-run would bump a second
+time, so delete those fragments by hand first. The
 command prints the commit, tag and push to run next.
 
 ```bash

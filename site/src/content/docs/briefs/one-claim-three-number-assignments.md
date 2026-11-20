@@ -59,7 +59,7 @@ claim and changes only numbers in the facts, do the shortcuts go, and is what is
   the new ones, so they are being redesigned. The learned probe's result is not valid as run (its permutation null is
   biased for this design) and it is being rerun. On the larger pool the gate as coded flagged one residual: one number
   statistic (the sum of all lower numbers minus the claim number) predicts the answer with a lift of +0.0056, under
-  the +0.02 floor. Six other number-statistic tests reach p = 0.0125 under a plain min-p rule, which the gate's way of
+  the +0.02 floor. At least six other number-statistic tests reach p = 0.0125 under a plain min-p rule, which the gate's way of
   scaling its tests masks. The pool-level figure is small because the cue is rare, not because it is weak: in about
   2% of triads, those whose smallest total sits just above a cut-off the construction applies, that statistic gives a
   lift of +0.26 (of 80 "at least" items in the lowest two bins, 0 are supported and 74 are unsupported). The cut-off

@@ -57,21 +57,23 @@ claim and changes only numbers in the facts, do the shortcuts go, and is what is
   of the three pool types and 0 on a pool ten times larger. That zero has no measured detection margin on the number
   statistics yet: the audit's planted-cue controls were designed for the old items and cannot plant a visible cue in
   the new ones, so they are being redesigned. The learned probe's result is not valid as run (its permutation null is
-  biased for this design) and it is being rerun. On the larger pool one residual was found: one number statistic (the
-  sum of all lower numbers minus the claim number) predicts the answer with a lift of +0.0056, under the +0.02 floor.
-  The pool-level figure is small because the cue is rare, not because it is weak: in about 2% of triads, those whose
-  total sits just above a cut-off the construction applies, that statistic nearly determines the answer (for example,
-  of 80 such "at least" items in the lowest two bins, none is supported). The cut-off rule is ours and is being
+  biased for this design) and it is being rerun. On the larger pool the gate as coded flagged one residual: one number
+  statistic (the sum of all lower numbers minus the claim number) predicts the answer with a lift of +0.0056, under
+  the +0.02 floor. Six other number-statistic tests reach p = 0.0125 under a plain min-p rule, which the gate's way of
+  scaling its tests masks. The pool-level figure is small because the cue is rare, not because it is weak: in about
+  2% of triads, those whose smallest total sits just above a cut-off the construction applies, that statistic gives a
+  lift of +0.26 (of 80 "at least" items in the lowest two bins, 0 are supported and 74 are unsupported). The cut-off
+  rule is ours and is being
   changed. So there is no pass yet. This brief is the state as of the evening of 2026-11-19; later findings go in
   a follow-up entry, not here.
 
 ## Caveats
 
-- **Prototype only.** Public seeds, calibration-size parts, one range of claim numbers and widths. Only the
+- **The findings above are from the prototype.** Public seeds, calibration-size parts, one range of claim numbers and widths. Only the
   audit's listed gate was run. The prototype does not enforce the benchmark's rule that half the supported items
   have zero slack.
-- **The list of 13 statistics is R&D's own.** A cue nobody listed is what the learned probe is for, and it has not
-  been run on this construction.
+- **The list of 13 statistics is R&D's own.** A cue nobody listed is what the learned probe is for; it
+  did not run on the prototype, and its run on the real build is not valid.
 - **The pilot is small:** 180 items of the one-family version, two usable judges, one prompt wording, thinking
   off, working capped at 80 words, no fork items. It gives a direction, not a measured property of the benchmark.
 - **The first drafts of the library entry and of this brief overclaimed.** An independent review by a model from

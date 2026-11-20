@@ -3,8 +3,10 @@
     ".claude/",
     ".github/",
     "catalogs/",
+    "changes/",
     "datapacks/",
-    "docs/"
+    "docs/",
+    "questions/"
   ],
   "breaks": [
     {
@@ -84,54 +86,44 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 12,
-      "changed": 16,
+      "added": 3,
+      "changed": 18,
       "moved": 0,
-      "parts": 8,
-      "removed": 0
+      "parts": 7,
+      "removed": 1
     },
     "items": [
       {
         "kind": "landing",
-        "sentence": "CHANGELOG.md is now also read by mcptoolshop_rnd/cli.py and tests/test_rnd_1_2.py.",
+        "sentence": "questions/ is now read by experiments/natural-errors/build.py.",
         "subjects": [
-          "CHANGELOG.md",
-          "mcptoolshop_rnd/cli.py",
-          "tests/test_rnd_1_2.py"
+          "questions/",
+          "experiments/natural-errors/build.py"
         ]
       },
       {
-        "kind": "landing",
-        "sentence": "README.md is now also read by tests/test_rnd_1_2.py.",
+        "kind": "part",
+        "sentence": "changes is a new part, drawn from `changes/**`.",
         "subjects": [
-          "README.md",
-          "tests/test_rnd_1_2.py"
+          "changes"
         ]
       },
       {
-        "kind": "landing",
-        "sentence": "docs/watchlist.json is now also read by tests/test_rnd_1_2.py.",
+        "kind": "part",
+        "sentence": "questions is a new part, drawn from `questions/**`.",
         "subjects": [
-          "docs/watchlist.json",
-          "tests/test_rnd_1_2.py"
-        ]
-      },
-      {
-        "kind": "unassigned",
-        "sentence": "changes/2026-11-19-0a706af2-add-changelog-fragments-rnd-chan.md is new and belongs to no part, so atlas check fails on it against the previous map.",
-        "subjects": [
-          "changes/2026-11-19-0a706af2-add-changelog-fragments-rnd-chan.md"
+          "questions"
         ]
       },
       {
         "kind": "counts",
-        "sentence": "12 files added and 16 changed content, across 8 parts.",
+        "sentence": "3 files added, 1 removed and 18 changed content, across 7 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "2ef559df9d7a8ae6c7400c3360a0dcfb82f0f51f",
-      "generatedAt": "2026-11-15T11:40:48.380Z"
+      "commit": "0a19b51c4271e7beb0f385d774ec147f87fc3d0b",
+      "generatedAt": "2026-11-20T02:02:17.713Z"
     },
     "unchanged": false
   },
@@ -152,21 +144,6 @@
       "shared": 15
     },
     {
-      "a": "mcptoolshop_rnd/layout.py",
-      "b": "tests/test_runs.py",
-      "either": 8,
-      "partLabels": [
-        "mcptoolshop_rnd",
-        "tests"
-      ],
-      "parts": [
-        "mcptoolshop_rnd",
-        "tests"
-      ],
-      "relation": "b-imports-a",
-      "shared": 5
-    },
-    {
       "a": "mcptoolshop_rnd/localbuilders/proxy.py",
       "b": "tests/test_localbuilders.py",
       "either": 7,
@@ -183,33 +160,18 @@
     },
     {
       "a": "mcptoolshop_rnd/layout.py",
-      "b": "mcptoolshop_rnd/runs.py",
-      "either": 8,
+      "b": "tests/test_runs.py",
+      "either": 9,
       "partLabels": [
         "mcptoolshop_rnd",
-        "mcptoolshop_rnd"
-      ],
-      "parts": [
-        "mcptoolshop_rnd",
-        "mcptoolshop_rnd"
-      ],
-      "relation": "inside",
-      "shared": 4
-    },
-    {
-      "a": "rnd/cli.py",
-      "b": "tests/test_rnd.py",
-      "either": 8,
-      "partLabels": [
-        null,
         "tests"
       ],
       "parts": [
-        null,
+        "mcptoolshop_rnd",
         "tests"
       ],
-      "relation": "unassigned",
-      "shared": 4
+      "relation": "b-imports-a",
+      "shared": 5
     }
   ],
   "changesTogetherNote": [
@@ -218,9 +180,9 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 5 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 2,
-  "commit": "0a19b51c4271e7beb0f385d774ec147f87fc3d0b",
+  "commit": "0c14743c213299b8d29b146fcd10d8c49fc9f455",
   "defaultBranch": "main",
-  "derived": "14 parts, mostly Python (148 files), shell (30), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 6 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "16 parts, mostly Python (148 files), shell (30), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 6 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -559,16 +521,16 @@
       ]
     }
   ],
-  "generatedAt": "2026-11-20T02:02:17.713Z",
+  "generatedAt": "2026-11-20T03:56:36.901Z",
   "limits": [
     "12 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 9 more.",
-    "26 writes and 38 reads use paths built at run time and are not named here.",
+    "27 writes and 36 reads use paths built at run time and are not named here.",
     "7 writes go to places this repository does not track, so they are not listed as generated.",
     "44 writes and 138 reads go to a path their caller passes, not to this repository.",
     "14 reads go to the directory the command is run in, not to this repository.",
     "2 reads go to the directory the command is run in or a path their caller passes, not to this repository.",
     "2 reads go to the home directory (.claude/), not to this repository.",
-    "5 files belong to no part: changes/2026-11-19-0a706af2-add-changelog-fragments-rnd-chan.md, scripts/colab/collect_windows.py, scripts/colab/probe.py and 2 more.",
+    "4 files belong to no part: scripts/colab/collect_windows.py, scripts/colab/probe.py, scripts/colab/rates.sh and 1 more.",
     "Statistics confidence is low: fewer than 25 source files reach 10 revisions in the window."
   ],
   "mainDoor": ".github/workflows/ci.yml",
@@ -576,6 +538,7 @@
     ".claude": ".claude",
     ".github": ".github",
     "catalogs": "catalogs",
+    "changes": "changes",
     "datapacks": "datapacks",
     "docs": "docs",
     "entries": "entries",
@@ -583,12 +546,13 @@
     "instruments": "instruments",
     "licences": "licences",
     "mcptoolshop_rnd": "mcptoolshop_rnd",
+    "questions": "questions",
     "rnd": "rnd",
     "root": "the repository root",
     "site": "site",
     "tests": "tests"
   },
-  "parts": 14,
+  "parts": 16,
   "readers": [
     {
       "readers": [
@@ -626,7 +590,7 @@
     "rnd": 1
   },
   "testedCodeParts": 3,
-  "unnamedWrites": 26,
+  "unnamedWrites": 27,
   "unread": [
     {
       "into": true,

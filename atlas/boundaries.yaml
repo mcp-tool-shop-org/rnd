@@ -12,6 +12,10 @@ boundaries:
     globs:
       - catalogs/**
     role: data
+  - name: changes
+    globs:
+      - changes/**
+    role: docs
   - name: datapacks
     globs:
       - datapacks/**
@@ -40,6 +44,10 @@ boundaries:
     globs:
       - mcptoolshop_rnd/**
     role: code
+  - name: questions
+    globs:
+      - questions/**
+    role: docs
   - name: rnd
     globs:
       - rnd/**

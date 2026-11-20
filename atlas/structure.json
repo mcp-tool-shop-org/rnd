@@ -9,7 +9,7 @@
       "externals": 0,
       "files": [
         {
-          "hash": "8c27e2790c68b81a79dda007b91ebb18e27a78cdf435c22ebbd8a38081cb2d45",
+          "hash": "41ea47b447b4c37181f24ace5c923f093de0116aca729a12992126e711df376d",
           "path": ".claude/CLAUDE.md"
         }
       ],
@@ -86,6 +86,33 @@
       "name": "catalogs",
       "origin": "authored",
       "role": "data",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "path": "changes/.gitkeep"
+        },
+        {
+          "hash": "635a14e842d16690909622e203e08d466c11d8cfe8a86c91aa9cce222002ac5e",
+          "path": "changes/2026-11-19-0b4d3e80-site-handbook-brought-up-to-rnd-.md"
+        }
+      ],
+      "globs": [
+        "changes/**"
+      ],
+      "importConfidence": "full",
+      "name": "changes",
+      "origin": "authored",
+      "role": "docs",
       "testedBy": 0,
       "unresolvedSites": 0
     },
@@ -5886,10 +5913,10 @@
       "unresolvedSites": 0
     },
     {
-      "dynamicReads": 20,
+      "dynamicReads": 18,
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
-      "dynamicWrites": 13,
+      "dynamicWrites": 14,
       "entryPoints": [
         "mcptoolshop_rnd/cli.py"
       ],
@@ -5897,7 +5924,7 @@
       "files": [
         {
           "constantOnly": true,
-          "hash": "355dff02df524c5b224c6ee288393a2460072c4326ad3657b8a4d84f50c62da8",
+          "hash": "5d3f96b100c9f1bda436c2d2a8d1b789f5ca0c51e352d8591b395e4bab022ba3",
           "path": "mcptoolshop_rnd/__init__.py"
         },
         {
@@ -8517,10 +8544,12 @@
         {
           "exports": [
             "assign_claim_ids",
+            "claims_section_span",
             "entry_paths",
             "load",
             "load_all",
             "make_claim_id",
+            "parse_claim_block",
             "parse_claim_line",
             "parse_claims",
             "parse_sources",
@@ -8532,35 +8561,55 @@
             {
               "in": "load",
               "kind": "except",
-              "line": 212
+              "line": 359
+            },
+            {
+              "in": "_plan_claim_line_edits",
+              "kind": "raise",
+              "line": 588
+            },
+            {
+              "in": "_plan_claim_line_edits",
+              "kind": "raise",
+              "line": 599
+            },
+            {
+              "in": "_plan_claim_line_edits",
+              "kind": "raise",
+              "line": 610
             },
             {
               "in": "resolve_entry",
               "kind": "raise",
-              "line": 460
+              "line": 667
             },
             {
               "in": "resolve_entry",
               "kind": "raise",
-              "line": 468
+              "line": 675
             },
             {
               "in": "reconcile_entry",
               "kind": "raise",
-              "line": 540
+              "line": 756
             },
             {
               "in": "reconcile_entry",
               "kind": "raise",
-              "line": 548
+              "line": 764
             },
             {
               "in": "reconcile_entry",
               "kind": "raise",
-              "line": 555
+              "line": 772
+            },
+            {
+              "in": "reconcile_entry",
+              "kind": "raise",
+              "line": 779
             }
           ],
-          "hash": "fdb41f8b52493ee070fe25503276d5945e9384d3529dc364cbfe4a1df437f56a",
+          "hash": "c35f03d1418cd604cd799f6c56b9ec7996a3935ee23e65b6107d52fd93b9bafd",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/frontmatter.py"
@@ -8581,42 +8630,27 @@
             {
               "in": "parse_spec",
               "kind": "raise",
-              "line": 122
+              "line": 128
             },
             {
               "in": "parse_spec",
               "kind": "raise",
-              "line": 129
+              "line": 135
             },
             {
               "in": "_resolve_key",
               "kind": "raise",
-              "line": 146
+              "line": 152
             },
             {
               "in": "_resolve_key",
               "kind": "raise",
-              "line": 148
+              "line": 154
             },
             {
               "in": "load_results_file",
               "kind": "except",
-              "line": 163
-            },
-            {
-              "in": "format_bound_value",
-              "kind": "except",
-              "line": 183
-            },
-            {
-              "in": "format_bound_value",
-              "kind": "raise",
-              "line": 184
-            },
-            {
-              "in": "format_bound_value",
-              "kind": "raise",
-              "line": 186
+              "line": 169
             },
             {
               "in": "format_bound_value",
@@ -8631,50 +8665,80 @@
             {
               "in": "format_bound_value",
               "kind": "raise",
-              "line": 193
+              "line": 192
+            },
+            {
+              "in": "format_bound_value",
+              "kind": "except",
+              "line": 195
+            },
+            {
+              "in": "format_bound_value",
+              "kind": "raise",
+              "line": 196
+            },
+            {
+              "in": "format_bound_value",
+              "kind": "raise",
+              "line": 199
             },
             {
               "in": "_resolve_sync_paths",
               "kind": "raise",
-              "line": 255
+              "line": 261
             },
             {
               "in": "_resolve_sync_paths",
               "kind": "raise",
-              "line": 257
+              "line": 263
             },
             {
               "in": "sync_files",
               "kind": "raise",
-              "line": 290
+              "line": 296
             },
             {
               "in": "sync_files",
               "kind": "raise",
-              "line": 295
+              "line": 302
+            },
+            {
+              "in": "sync_files",
+              "kind": "except",
+              "line": 304
             },
             {
               "in": "sync_files",
               "kind": "raise",
-              "line": 308
+              "line": 305
+            },
+            {
+              "in": "sync_files",
+              "kind": "raise",
+              "line": 317
+            },
+            {
+              "in": "sync_files",
+              "kind": "raise",
+              "line": 326
             },
             {
               "in": "check_all",
               "kind": "except",
-              "line": 379
+              "line": 389
             },
             {
               "in": "check_all",
               "kind": "except",
-              "line": 387
+              "line": 397
             },
             {
               "in": "check_all",
               "kind": "except",
-              "line": 396
+              "line": 406
             }
           ],
-          "hash": "6be648164e1585bda5ad6ae33e0f24df738db69a53a757dcc71596049c70ec03",
+          "hash": "50afa910853866c497676ecd082b5cb7889848cac7642adff6c248c5c4efeaeb",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/layout.py",
@@ -8735,12 +8799,7 @@
             {
               "in": "new_question",
               "kind": "raise",
-              "line": 144
-            },
-            {
-              "in": "new_question",
-              "kind": "raise",
-              "line": 146
+              "line": 147
             },
             {
               "in": "new_question",
@@ -8755,10 +8814,25 @@
             {
               "in": "new_question",
               "kind": "raise",
-              "line": 156
+              "line": 155
+            },
+            {
+              "in": "new_question",
+              "kind": "raise",
+              "line": 162
+            },
+            {
+              "in": "new_question",
+              "kind": "raise",
+              "line": 172
+            },
+            {
+              "in": "new_question",
+              "kind": "raise",
+              "line": 180
             }
           ],
-          "hash": "44b9f8432175ffc7ed1e39a51757cd01b9a46cb573684de4232886d765727860",
+          "hash": "7a65278ba6abfad81fecf040b55fce10ac08f630d91d27ab9c0b50f0da52620e",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/frontmatter.py",
@@ -9353,6 +9427,29 @@
       "dynamicSpawns": 0,
       "dynamicSpawnsInTests": 0,
       "dynamicWrites": 0,
+      "entryPoints": [],
+      "externals": 0,
+      "files": [
+        {
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "path": "questions/.gitkeep"
+        }
+      ],
+      "globs": [
+        "questions/**"
+      ],
+      "importConfidence": "full",
+      "name": "questions",
+      "origin": "authored",
+      "role": "docs",
+      "testedBy": 0,
+      "unresolvedSites": 0
+    },
+    {
+      "dynamicReads": 0,
+      "dynamicSpawns": 0,
+      "dynamicSpawnsInTests": 0,
+      "dynamicWrites": 0,
       "entryPoints": [
         "rnd/__main__.py"
       ],
@@ -9422,7 +9519,7 @@
           "path": ".polyglot-terms.json"
         },
         {
-          "hash": "d04ef4f52e29e8b3ff3dccbb48ae2c8cbb343d9ecb03eb27c42be9d9ee279d17",
+          "hash": "2b150e35d1267b714cb135128f515619e6db52717921640a521ead26c94f4fbe",
           "path": "CHANGELOG.md"
         },
         {
@@ -9430,35 +9527,35 @@
           "path": "LICENSE"
         },
         {
-          "hash": "5f8f5e1ae4fa9b2a1d321607053005bfce72739858ad507bac03912793de2d6c",
+          "hash": "32a1235c778243eb5838ba554aeac66eb9b18379377b499d260d3e856ba4e42c",
           "path": "README.es.md"
         },
         {
-          "hash": "9f3edc39cd73a2879702f098595179f71bba1d3a30eabe6d78bad0e67bd74d62",
+          "hash": "4cb7268b2a18a16bc744e1b015251fc186fad971e204e640317d12a21501ebd4",
           "path": "README.fr.md"
         },
         {
-          "hash": "9c8ca5e79717480bfb2ea575969e54e35444135da30e8288588bcf1a43983b0c",
+          "hash": "0089fd4c558e194864eb2952ea334c81f9d014d94513709004edb8db1dc869e2",
           "path": "README.hi.md"
         },
         {
-          "hash": "06dc4eaa259e60985bd7877a30ec861ce5e0c47812356cc666a4dcbdbe6f5685",
+          "hash": "c33a19eb0554c47fc5e45833332317e184bc276dcd412e57235865c097263546",
           "path": "README.it.md"
         },
         {
-          "hash": "0696eca35ae9692adfc2439d6c1bc539720e482239c65caa773cb4bc5a2f5d8f",
+          "hash": "dedf9f2f9e7ce019c1f18ecde12ae80bb60a8854da9d02d2d72b37801c7a8b7d",
           "path": "README.ja.md"
         },
         {
-          "hash": "9111e5d0d0530c3affdcf17314af21d81ced4f53060cbf4fb90b726dedb04f41",
+          "hash": "ae7c720b91a99f7b9382d8c361ec39888a3993761e0f7bb58f1b5deff7e68b14",
           "path": "README.md"
         },
         {
-          "hash": "b16b2f21f8e76181bfbb43166f9b471b52aebba9b1d245356f0f04043c044e73",
+          "hash": "54627cdbeb027c9748ab53d4ce14ad183c17fcf5eeca771f0045fa879b3b471e",
           "path": "README.pt-BR.md"
         },
         {
-          "hash": "e89a82f3141a95f808bb13ebc94fb98663268cd529688874e637fe803d1786a9",
+          "hash": "fd8adcd79b9bc4d6a61cd1b57398937a9a505fb5ea5abb12150cd6ee1e99227d",
           "path": "README.zh.md"
         },
         {
@@ -9874,7 +9971,7 @@
           "path": "site/src/content/docs/handbook/experiments.md"
         },
         {
-          "hash": "a5efa87b7d28010cb964ccd22910710a2e882079f91d7d1f03939c5e4924bad5",
+          "hash": "a178127058cc30f08a6bbd1bedf6a3d2c1f5e34881531db90fe9e80c227d026c",
           "path": "site/src/content/docs/handbook/filing-research.md"
         },
         {
@@ -9894,7 +9991,7 @@
           "path": "site/src/content/docs/handbook/outside-model-briefs.md"
         },
         {
-          "hash": "20436c3bb64f561adac0e717023687ee088e5ecb9f786f3cf66deb0f466fccb1",
+          "hash": "d8b4eedb5a1a2342b0a27722432725f7bfd34be123b189cf5f69b2504aa9d6f8",
           "path": "site/src/content/docs/handbook/reference.md"
         },
         {
@@ -9906,7 +10003,7 @@
           "path": "site/src/content/docs/handbook/rented-gpu-windows.md"
         },
         {
-          "hash": "c29e1d27d903ac8bc660d1e954edf915583d75a5b3ce333a2c36669ebed471f2",
+          "hash": "b777692b38f1e8b17757ac9b403c6876f06b665a20b5c1ebea302ff1f0e9180f",
           "path": "site/src/content/docs/handbook/security.md"
         },
         {
@@ -10426,7 +10523,7 @@
           "testFramework": "unittest"
         },
         {
-          "hash": "7a91c7f9a6ab28fe5294dfbf844bc4228b5a4a36774180e11516a505ddc73654",
+          "hash": "6b423fdbbe93e29656e5b850b4cdaee6ef8af2e1b8cad932b6d426a8c8e5480d",
           "importsFiles": [
             "mcptoolshop_rnd/__init__.py",
             "mcptoolshop_rnd/catalog.py",
@@ -11257,8 +11354,8 @@
   ],
   "engine": "1.26.0",
   "generatedFrom": {
-    "commit": "0a19b51c4271e7beb0f385d774ec147f87fc3d0b",
-    "tracked": 1180
+    "commit": "0c14743c213299b8d29b146fcd10d8c49fc9f455",
+    "tracked": 1182
   },
   "landings": [
     {
@@ -14794,6 +14891,17 @@
     {
       "readers": [
         {
+          "by": "experiments/natural-errors/build.py",
+          "call": "get",
+          "confidence": "ast"
+        }
+      ],
+      "target": "questions",
+      "writers": []
+    },
+    {
+      "readers": [
+        {
           "by": "experiments/agent-ab-harness/tasks.json",
           "call": "literal",
           "confidence": "text"
@@ -15628,10 +15736,6 @@
     "experiments/ollama-cuda-backend/diag/test_diag_test.py"
   ],
   "unassigned": [
-    {
-      "hash": "04806600ab07b749876934b647ddd8d4c7e93105309f87b1c742e67d74c03202",
-      "path": "changes/2026-11-19-0a706af2-add-changelog-fragments-rnd-chan.md"
-    },
     {
       "exports": [
         "classify",

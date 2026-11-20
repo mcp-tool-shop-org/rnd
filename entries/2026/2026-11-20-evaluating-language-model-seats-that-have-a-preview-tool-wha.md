@@ -30,10 +30,12 @@ tool's effect at frozen game states instead.
 - **Measure near the decision first.** Rejected orders and single-turn regret before season wealth, which is too noisy
   for tens of games. Report with a bootstrap over seed blocks.
 - **Pin the serving stack.** One GPU model, prefix caching off, a generous output limit, and logging of token ids,
-  finish reason, and weight and template hashes. Cross-GPU numerical drift, prefix-cache divergence and 4-bit
-  quantisation each change decisions measurably.
-- **Power.** 16 games per arm unpaired detects about a one-standard-deviation effect; 24 paired seeds at a correlation
-  of 0.5 detect about 0.55. The correlation is a guess until measured.
+  finish reason, and weight and template hashes. Studies it cites find that GPU count, type and batch size (Yuan et al.
+  2025), reuse of a cached prompt prefix (Patodiya 2026) and 4-bit quantisation (Blagojevich 2026) each change model
+  outputs measurably; see Claims for what was checked.
+- **Power.** At a two-sided 5% level and 80% power, 16 games per arm unpaired detect about a one-standard-deviation
+  effect, and 24 paired seeds at a correlation of 0.5 about 0.6 (0.57 by the normal approximation, 0.60 by the t test;
+  the report's 0.55 is wrong). The correlation is a guess until measured.
 - **Its first plan.** A free pre-flight (pinned stack, token-id identity on a repeated game, behaviour past the call
   limit, truncation visible), then 12 tool-off games yielding about 144 frozen states run three ways, with a larger
   whole-game step only if that shows something.
@@ -57,11 +59,15 @@ tool's effect at frozen game states instead.
 
 ## Claims
 
-- [verified] Results from the same model differ across GPU types by up to about 9% (via: abstract of the cited study, fetched by the harvest clerk, 2026-11-20)
-- [verified] Comparing 16 games against 16 unpaired detects an effect of about 1.02 standard deviations, and 24 paired seeds at correlation 0.5 about 0.55 (via: recomputed by the harvest clerk, 2026-11-20)
+- [verified] For one reasoning model under BF16 greedy decoding, accuracy varied by up to 9% with differences in GPU count, GPU type and evaluation batch size together (via: abstract of Yuan et al. 2025, arXiv 2506.09501, read by the harvest clerk and an independent review, 2026-11-20)
+- [verified] Reusing a cached prompt prefix changed 37.4% (16-bit) and 82.5% (4-bit GGUF) of multi-turn tool episodes for one 7B model under llama.cpp (via: abstract of Patodiya 2026, arXiv 2609.04748, read by the harvest clerk, 2026-11-20)
+- [verified] At a two-sided 5% level and 80% power, 16 games against 16 unpaired detect about 1.02 standard deviations (t test; 0.99 normal approximation), and 24 paired seeds at correlation 0.5 about 0.60 (t test; 0.57 normal approximation); the report's 0.55 is wrong (via: recomputed by an independent review and by R&D, 2026-11-20)
 - [unverified] Tool-using agents skip or ignore tool results in 53% to 60% of cases (the report's figure; not on the abstract pages read)
 - [unverified] The seat-to-seat correlation in our game is 0.3 to 0.5 (the report's guess; not measured)
 
 ## Sources
 
 - [aggregator] https://gemini.google.com/ — Gemini Deep Research (Gemini 4 Carbon, High), 2026-11-20: report on evaluating language-model agents in a multiplayer trading game
+- [primary] https://arxiv.org/abs/2506.09501 — Yuan et al. (2025), Understanding and Mitigating Numerical Sources of Nondeterminism in LLM Inference
+- [primary] https://arxiv.org/abs/2609.04748 — Patodiya (2026), study of prefix-cache reuse and output divergence in multi-turn tool use (abstract read)
+- [primary] https://arxiv.org/abs/2611.15671 — Blagojevich (2026), study of restart and quantisation effects on agent decisions (abstract read)

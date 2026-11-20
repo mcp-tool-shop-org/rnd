@@ -33,8 +33,9 @@ overreaches.
 - **Calibration.** Within-triad shuffling gives the exact null. Permutation p-values should be (b + 1)/(B + 1)
   (Phipson and Smyth 2010). At a 30-item slice, the family-wise bar across hundreds of features is stricter than a
   58% purity bar alone, so the purity number rarely binds.
-- **Repair or disclose.** When the label is a function of bounded numbers, removing every cue is not possible in
-  general; balancing one feature moves the lean into correlated ones. The honest output is an upper bound on what a
+- **Repair or disclose.** The report argues that when the label is a function of bounded numbers, removing every cue
+  is not possible in general, and that balancing one feature moves the lean into correlated ones (consistent with
+  Schwartz and Stanovsky 2022 and with our own repairs; its formal argument overreaches, see Claims). The honest output is an upper bound on what a
   restricted cheater can gain at a stated audit size.
 - **How to state a pass.** Audit size; the smallest slice tested as a share of the pool; our own detection margin; a
   one-sided upper bound on a cheater's gain; and what was not tested.
@@ -64,7 +65,7 @@ overreaches.
 
 - [verified] A hypothesis-only model reaches 69.00% on SNLI against a 34.28% majority baseline (via: Poliak et al. 2018, aclanthology S18-2023, harvest clerk, 2026-11-20)
 - [verified] A claim-only model reaches 61.7% on FEVER, and a leading model drops from 81.8% to 58.7% on a symmetric test set (via: Schuster et al. 2019, arXiv 1908.05267, harvest clerk, 2026-11-20)
-- [verified] At B = 2,000 permutations and 600 tests, the smallest attainable family-wise p from a rank-based min-p is about 0.26 (via: recomputed by the harvest clerk, 2026-11-20)
+- [verified] At B = 2,000 permutations and 600 independent tests, the family-wise p floor of a min-p procedure is about 0.26 (1 − (1 − 1/2001)^600); with positively correlated tests the attainable floor can be lower (via: recomputed by the harvest clerk and by an independent review, 2026-11-20)
 - [unverified] Every non-constant linear threshold function of the numbers leaks label information through some single summary (the report's reading of Chow's theorem; it holds only when class totals are stochastically ordered, which a class-invariant reserve breaks)
 - [unverified] With 300 features at a family-wise 0.05, a 30,000-item pool detects a 1.37-point cue with 90% power (the report's figure; not shown or sourced)
 
@@ -73,4 +74,5 @@ overreaches.
 - [aggregator] https://gemini.google.com/ — Gemini Deep Research (Gemini 4 Carbon, High), 2026-11-20: report on auditing procedurally generated benchmarks for single-item answer cues
 - [primary] https://aclanthology.org/S18-2023/ — Poliak, Naradowsky, Haldar, Rudinger, Van Durme (2018), Hypothesis Only Baselines in Natural Language Inference
 - [primary] https://arxiv.org/abs/1908.05267 — Schuster et al. (2019), Towards Debiasing Fact Verification Models
-- [primary] https://aclanthology.org/2022.findings-naacl.168/ — Schwartz and Stanovsky (2022), On the Limitations of Dataset Balancing
+- [primary] https://aclanthology.org/2022.findings-naacl.168/ — Schwartz and Stanovsky (2022), On the Limitations of Dataset Balancing: The Lost Battle Against Spurious Correlations
+- [primary] https://doi.org/10.2202/1544-6115.1585 — Phipson and Smyth (2010), Permutation P-values Should Never Be Zero: Calculating Exact P-values When Permutations Are Randomly Drawn

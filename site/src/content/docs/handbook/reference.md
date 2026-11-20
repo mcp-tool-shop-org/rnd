@@ -66,6 +66,39 @@ relations; `--state verified|unverified|disputed|wrong|superseded` filters and
 `## Claims` heading. Ids are never renumbered, and existing entries are not
 rewritten in bulk.
 
+### `similar <entry>`
+
+Read-only FTS5 lookup of the closest claims in other entries for each claim in
+`<entry>` (id or path). Options: `--limit N` (default `5`), `--json`. Shows
+each hit's claim id (or `entry#position` when unassigned), state, entry, date,
+BM25 score and text, marks `superseded` / `disputed` hits with what replaced or
+contradicted them, and prints `(supersedes: …)`, `(contradicts: …)`,
+`(supports: …)` and `python -m rnd reconcile <entry>`. Never writes `rnd.db` or
+any Markdown file, and exits `0` on any readable entry.
+
+```bash
+python -m rnd similar 2026-10-07-cuda-graphs --limit 3
+```
+
+### `digest --since <ref|YYYY-MM-DD>`
+
+Read-only summary of entries added, claims added, claims removed, claim state
+changes (with what replaced or contradicted them), and questions opened, answered
+(with answering claim ids) or parked since `<ref>` (git tag, branch, commit SHA)
+or `<YYYY-MM-DD>`. A `<YYYY-MM-DD>` date resolves to the latest commit along the
+first-parent line of the current branch (`HEAD`) whose committer date is on or
+before that day. Parses the older commit's blobs from git in memory without
+writing temporary files or touching the working tree, git index or `rnd.db`.
+Claims match by `id` when both sides have one, otherwise by `(entry, exact text)`,
+so a reworded claim without an id appears as one claim removed and one claim
+added, never as a state change. Supports `--json`; unknown refs and dates
+before branch history exit `2` (with a `git fetch` hint on shallow or tagless
+clones), and running outside a git repository exits `3` (`GIT_FAILED`).
+
+```bash
+python -m rnd digest --since v1.1.24.0.14
+```
+
 ### `questions`
 
 Lists the question files under `questions/`. Filters: `--status
@@ -90,7 +123,7 @@ full-text table, with prefix matching (`listener` also finds `listeners`).
 A read-only SQL query against the index. Tables: `entries`, `entry_fields`,
 `entry_tags`, `sources`, `claims`, `claim_relations`, `links`, `questions`,
 `question_fields`, `catalogs`, `catalog_items`, `meta`, plus the FTS tables
-`entries_fts`, `questions_fts` and `catalog_fts`.
+`entries_fts`, `claims_fts`, `questions_fts` and `catalog_fts`.
 
 ```bash
 python -m rnd sql "SELECT confidence, count(*) FROM claims GROUP BY confidence"
@@ -186,7 +219,10 @@ files, plus any `--note` lines. `--dry-run` prints it without writing. Both
 in the same folder and swapped with `os.replace`, rolling back `__init__.py` if
 the `CHANGELOG.md` swap fails; if a crash leaves `__init__.py` ahead of
 `CHANGELOG.md`, re-running at the matching level completes it and re-running at
-any other level refuses with `BAD_CHANGELOG` instead of bumping twice. The
+any other level refuses with `BAD_CHANGELOG` instead of bumping twice. One gap
+remains: a crash after both files are swapped but before the fragments under
+`changes/` are deleted leaves them in place, and a re-run would bump a second
+time, so delete those fragments by hand first. The
 command prints the commit, tag and push to run next.
 
 ```bash
@@ -234,5 +270,6 @@ numbers); `CLAIM_NOT_FOUND`, `CLAIM_MISMATCH`, `DUPLICATE_CLAIM_ID`,
 `MULTIPLE_CLAIMS_HEADINGS` and `SELF_RELATION` (claim ids and links);
 `BAD_STATUS` and `BAD_ANSWERED_BY`
 (questions); `INSTRUMENTS_PROTECTED` (a command that summarises outside content
-was pointed at `instruments/`); and `MISSING_EXTRA` (a command needs an optional
+was pointed at `instruments/`); `UNREADABLE`, `UNKNOWN_REF` and `BAD_SINCE`
+(`similar` and `digest`); and `MISSING_EXTRA` (a command needs an optional
 package that is not installed).

@@ -17,7 +17,7 @@ The stores (scale plan P3; the Director made rnd-data public on 2026-10-19, open
 
 No hash of a private file is ever published: a short label file's hash could be matched by guessing (Argon, round 3).
 
-Ingest never deletes or changes its source. Blobs are copied and hash-checked by default. With `link` (only for a
+Ingest never deletes its source, and changes it only as `link` below describes. Blobs are copied and hash-checked by default. With `link` (only for a
 read-only snapshot, such as the P0 backup, on the same volume as the store), a blob is hard-linked instead: the same
 bytes under a second name, never counted as a second copy, and marked read-only so no in-place write can change it.
 A live tree (the Publisher's working receipts) is always copied: an append to a linked log would change the blob.

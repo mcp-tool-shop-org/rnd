@@ -73,6 +73,8 @@ python -m rnd new "Paper title" --kind paper --field audio --tag pitch
 python -m rnd new-question "Why does X happen?" --field audio
 python -m rnd sync --check                  # verify numbers bound to experiments/<id>/results.json
 python -m rnd check                         # validate every file (exit 1 on errors)
+python -m rnd similar 2026-10-07-cuda-graphs --limit 3  # closest claims in other entries (read-only)
+python -m rnd digest --since v1.1.24.0.14   # entries, claims and questions changed since a tag or date
 python -m rnd sql "SELECT tier, count(*) FROM sources GROUP BY tier"
 python -m rnd change "what changed"         # add a changelog fragment under changes/ (nano by default)
 python -m rnd bump --note "release note"    # release PR: apply changes/ fragments, bump version + CHANGELOG
@@ -176,8 +178,12 @@ python -m rnd bump                                     # release PR: bump once, 
 With no files under `changes/`, `rnd bump [nano|micro|…] [--note …]` keeps its
 git-diff behaviour. Both `__init__.py` and `CHANGELOG.md` are staged through
 temp files and swapped with `os.replace`, rolling back `__init__.py` if the
-CHANGELOG swap fails and completing or refusing (`BAD_CHANGELOG`) an
-interrupted bump on re-run without bumping twice. `rnd check` reports any
+CHANGELOG swap fails. If a crash leaves `__init__.py` ahead of `CHANGELOG.md`,
+re-running at the matching level completes the bump and any other level
+refuses with `BAD_CHANGELOG`. One gap remains: a crash after both files are
+swapped but before the fragments under `changes/` are deleted leaves them in
+place, and a re-run would bump a second time, so delete those fragments by
+hand first. `rnd check` reports any
 malformed fragment as an error.
 
 ## Bound numbers
@@ -211,10 +217,16 @@ Claims can carry stable deterministic `c-<hex>` ids and explicit relations
 ```bash
 python -m rnd claims                               # list indexed claims (--state superseded, --json)
 python -m rnd claims assign <entry>                # add deterministic c-<hex> ids to one entry's claims
+python -m rnd similar <entry> [--limit 5]          # closest claims in other entries (read-only)
 python -m rnd reconcile <entry>                    # mark older claims (superseded / disputed / supported-by)
 ```
 
-`rnd reconcile <entry>` writes only the id (if missing), updated state and
+`rnd similar <entry>` runs a read-only SQLite FTS5 BM25 query over `claims_fts`
+for each claim of `<entry>` against other entries (`--limit` defaults to 5),
+flags `superseded` or `disputed` hits with what replaced or contradicted them,
+prints the exact `(supersedes: id)` / `(contradicts: id)` / `(supports: id)`
+clauses and `rnd reconcile <entry>` command, and never writes `rnd.db` or any
+entry. `rnd reconcile <entry>` writes only the id (if missing), updated state and
 inverse relation (`superseded-by`, `contradicted-by`, `supported-by`) on the
 older claim's line in its own file without touching its sentence or any other
 line (leaving a `[wrong]` claim `[wrong]` when contradicted). Both
@@ -226,6 +238,26 @@ state) or an unclosed code fence,
 and warns on a `[superseded]` claim with no `(superseded-by: …)` link.
 `rnd search` and `rnd show` mark `superseded` and `disputed` claims and name the
 claim that replaced or contradicted them.
+
+## What changed (digest)
+
+`rnd digest --since <git ref or YYYY-MM-DD> [--json]` compares the library at an
+earlier commit (parsed from git objects in memory without touching the working
+tree, git index, `rnd.db` or temp files) against the current tree:
+
+```bash
+python -m rnd digest --since v1.1.24.0.14
+python -m rnd digest --since 2026-11-19 --json
+```
+
+It reports entries added, claims added, claims removed, claim state changes
+(`old_state -> new_state` with what replaced or contradicted them), and
+questions opened, answered (with answering claim ids) and parked, along with
+counts. A `YYYY-MM-DD` date resolves to the latest commit along the
+first-parent line of the current branch (`HEAD`) whose committer date is on or
+before that day. Claims match by `id` when both sides have one, otherwise by
+`(entry, exact text)`, so a reworded claim without an id appears as one claim
+removed and one claim added, never as a state change.
 
 ## Open questions
 
@@ -340,7 +372,7 @@ python -m rnd watch --no-save --json # look without recording
 python -m rnd watch --only ollama    # one source
 ```
 
-What it saw is kept in a state file outside the repository (`$RND_WATCH_STATE`, else `~/.rnd/watch-state.json`).
+What it saw is kept in a state file outside the repository (`--state`, else `$RND_WATCH_STATE`, else `Path.home() / ".rnd" / "watch-state.json"`, `~/.rnd/watch-state.json`) unless `--no-save` is passed.
 A source's first check is a baseline: it records the current items and reports none as new. A pre-release is never reported as a source's latest version; a newer one is shown beside it. GitHub release notes and commit messages are kept in the JSON output, so a reader doesn't have to fetch each page. A source that
 can't be reached is reported as unknown, and its state is left alone so nothing is skipped silently.
 
@@ -365,16 +397,65 @@ studio's workflow standards.
 
 ## Security and trust
 
-- **Data touched:** files inside this repo (`entries/`, `questions/`, `changes/`,
-  `instruments/`, `catalogs/`, `experiments/`), the index `rnd.db` and its
-  sibling local miss log `rnd.misses.jsonl`. `rnd readouts` opens the readouts
-  knowledge bases **read-only**. `rnd sql` runs against a read-only connection.
-- **Data not touched:** nothing outside the repo and the readouts checkout. It
-  stores no credentials and reads none.
+- **Data written**, by where it lands:
+  - **Inside this repo** (the library: `--library`, else `$RND_ROOT`, else the nearest folder at or above
+    the working directory that holds `entries/` and `instruments/`, else the checkout the
+    package runs from): `rnd new` (one new file under `entries/` or `instruments/`, never
+    overwriting), `rnd new-question` (`questions/`), `rnd new-experiment`,
+    `rnd runs record` and `rnd collect <name>` (`experiments/<name>/`),
+    `rnd claims assign`, `rnd reconcile` and `rnd sync` (claim lines and bound
+    numbers in existing Markdown files), `rnd change` (`changes/`), `rnd bump`
+    (`mcptoolshop_rnd/__init__.py` and `CHANGELOG.md`, through temporary files
+    beside each, and it deletes the `changes/` fragments it used),
+    `rnd catalog sync` (`catalogs/<name>/catalog.json`), `rnd datapack build`
+    (`datapacks/<name>/datapack.json`) and `rnd layout` (`docs/layout.json`).
+  - **The index:** `rnd.db`, or the path given by `--db` or `$RND_DB`, with a
+    temporary `.db.tmp` file beside it while it is built. `rnd build` writes it,
+    and every command that reads the index (`search`, `show`, `list`, `tools`,
+    `stats`, `catalog`, `claims`, `questions`, `sql`, `runs`, `ledger`, `where`,
+    `probe`) rebuilds it first when a source file has changed. The miss log
+    `rnd.misses.jsonl` sits beside it (see below).
+  - **Your home folder:** `rnd watch` writes its seen-items file to `--state`, else
+    `$RND_WATCH_STATE`, else `~/.rnd/watch-state.json` (built in code as
+    `Path.home() / ".rnd" / "watch-state.json"`), where it stays across runs. It is written through a `.tmp` file beside it.
+    `--no-save` skips the write.
+  - **The raw-data stores, outside this repo:** `rnd raw ingest`, `rnd raw private` and
+    `rnd raw relicense` write to the public store (`--public`, else `$RND_DATA`,
+    else `../rnd-data`) and the private store (`--private`, else `$RND_DATA_PRIVATE`, else `../rnd-data-private`
+    beside the library; when `rnd raw` is run outside a library, `rnd-data-private`
+    beside the public store). `rnd raw ingest` also puts
+    every file over 256 KB into the blob store, under `blobs/` in the folder
+    named by `$RND_DATA_STORE_D` or by the `"d"` entry of the public store's
+    `store.local.json` (there is no default; without one, ingest refuses). Blobs are written through a `.tmp` file beside them and marked read-only. With `--link` a new blob is
+    a hard link to the source file, so **that source file becomes read-only too** (a blob
+    already in the store is left alone, and so is its source); without `--link` the
+    source is not changed. `rnd raw ingest --update` deletes a run's earlier small files in
+    the two stores before writing the new ones. `--dry-run` writes nothing.
+- **Read, never written:** `rnd readouts` (SQLite read-only mode), `rnd collect` source
+  clones (`git show`), `rnd raw verify`, `rnd datapack verify --copy`,
+  `rnd runs record --from`, `rnd abmine`, and `rnd similar` and `rnd digest`,
+  which work in memory and write nothing anywhere: no temporary file, no
+  working-tree, git index or `rnd.db` change.
+- **Code it runs:** `rnd collect <name>`, with or without `--check`, loads and runs
+  `experiments/<name>/extract.py` (or the module that folder's `collect.json`
+  names) from the library (`mcptoolshop_rnd/collect.py:142-149`). Python may
+  cache that module's bytecode in `experiments/<name>/__pycache__/`. `rnd` limits
+  what it writes itself to `experiments/<name>/`; it does not limit what that
+  module's own code does, so run it only on a library you trust.
+- **Outside the `rnd` command:** the package also ships
+  `mcptoolshop_rnd.localbuilders`, the harness of the local-builders
+  experiment. No `rnd` command runs it. Run directly (for example
+  `python -m mcptoolshop_rnd.localbuilders.runner`), on the rented machine it
+  was written for and partly as root, it creates, deletes and changes the owner and permissions of files under the paths
+  its caller passes (work, home, history, virtual-environment, receipt, log,
+  report, secret-directory and containment-probe paths), and its scorer uses a temporary folder in the operating
+  system's temp folder, removed when it finishes.
+- **Data not touched:** no `rnd` command writes, deletes or changes a file
+  anywhere else. It stores no credentials and reads none.
 - **Network:** none, except `rnd catalog sync`, `rnd probe` and `rnd watch`,
   which read public metadata or call the GitHub API through your own `gh` CLI
   login when you run them.
-- **Permissions:** ordinary file access. No elevated rights, no background service.
+- **Permissions:** ordinary file access. No `rnd` command needs elevated rights, and there is no background service.
 - **Local-only usage log:** nothing is collected or sent anywhere. When `rnd search`
   returns no matches, it appends one line (UTC time and query) to `rnd.misses.jsonl`
   beside `rnd.db` (git-ignored in the repo; with `--db foo.db`, `foo.misses.jsonl`

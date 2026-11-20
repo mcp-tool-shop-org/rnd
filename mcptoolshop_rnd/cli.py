@@ -15,7 +15,7 @@ import traceback
 from datetime import date
 from pathlib import Path
 
-from . import __version__, abmine, catalog, collect, datapack, layout, model, numbers, probe, questions, rawdata, readouts, release, runs, store, watch
+from . import __version__, abmine, catalog, collect, datapack, digest, layout, model, numbers, probe, questions, rawdata, readouts, release, runs, similar, store, watch
 
 SOURCE_ROOT = Path(__file__).resolve().parent.parent
 
@@ -616,6 +616,24 @@ def cmd_reconcile(args):
             print(f"{l['src_id']} ({l['src_entry']}) {l['relation']} {l['dst_id']} ({l['dst_entry']})")
         print(f"reconciled {len(r['links'])} link(s) across {len(r['changed_files'])} changed file(s)")
     emit(args, rep, text)
+    return 0
+
+
+def cmd_similar(args):
+    try:
+        rep = similar.find_similar(ROOT, args.entry, limit=args.limit, db_path=args.db)
+    except similar.SimilarError as exc:
+        return fail(exc.code, str(exc), exc.hint, exc.exit_code)
+    emit(args, rep, lambda r: print(similar.render_similar(r)))
+    return 0
+
+
+def cmd_digest(args):
+    try:
+        rep = digest.compute_digest(ROOT, args.since)
+    except digest.DigestError as exc:
+        return fail(exc.code, str(exc), exc.hint, exc.exit_code)
+    emit(args, rep, lambda r: print(digest.render_digest(r)))
     return 0
 
 
@@ -1239,6 +1257,16 @@ def build_parser():
             "propagate supersedes/contradicts/supports links from an entry to the older claims it cites")
     s.add_argument("entry", help="entry id or file path")
 
+    s = add("similar", cmd_similar,
+            "list claims in other entries closest to each claim of one entry (read-only FTS5)")
+    s.add_argument("entry", help="entry id or file path")
+    s.add_argument("--limit", type=int, default=5, help="closest claims per claim (default: 5)")
+
+    s = add("digest", cmd_digest,
+            "summarize entries, claims and questions changed since a git ref or YYYY-MM-DD date (read-only)")
+    s.add_argument("--since", required=True, metavar="REF_OR_DATE",
+                   help="git ref (tag, branch, commit SHA) or YYYY-MM-DD date (first-parent commit on HEAD at or before that day)")
+
     s = add("sync", cmd_sync, "rewrite bound numbers in Markdown files from experiments/<id>/results.json")
     s.add_argument("paths", nargs="*", help="files or folders to sync (default: entries, questions, briefs, experiments)")
     s.add_argument("--check", action="store_true", help="change nothing; exit 1 if any bound literal differs")
@@ -1342,7 +1370,8 @@ def build_parser():
     s = add("raw", cmd_raw, "ingest raw run outputs into rnd-data (public) and rnd-data-private, verify them, or "
             "reapply a rules file's licences", json_flag=False)
     s.add_argument("action", choices=("ingest", "private", "verify", "relicense"))
-    s.add_argument("source", nargs="?", help="ingest/private: the folder to read (never changed)")
+    s.add_argument("source", nargs="?", help="ingest/private: the folder to read (its files are not changed, except that --link makes each "
+                   "hard-linked file read-only)")
     s.add_argument("--prefix", help="ingest, relicense: the run ids' first part, e.g. receipts")
     s.add_argument("--as", dest="name", help="private: the folder under private/ in rnd-data-private")
     s.add_argument("--reasons", help="a JSON file mapping paths or folder/ prefixes to a private reason")
@@ -1350,7 +1379,8 @@ def build_parser():
                    "relicense: the file whose licences to reapply")
     s.add_argument("--exclude", action="append", help="a path or folder to leave out (repeatable)")
     s.add_argument("--link", action="store_true",
-                   help="ingest: hard-link blobs instead of copying, only from a read-only snapshot on the store's volume")
+                   help="ingest: hard-link blobs instead of copying, only from a read-only snapshot on the store's volume; "
+                   "each linked source file becomes read-only")
     s.add_argument("--update", action="store_true",
                    help="ingest: replace a run whose source changed since it was ingested (git keeps the old manifest)")
     s.add_argument("--dry-run", action="store_true", help="plan and count; write nothing")

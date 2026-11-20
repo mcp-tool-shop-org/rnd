@@ -41,8 +41,9 @@ Include:
 - **No secrets handling:** it does not read, store or transmit credentials.
 - **Local-only usage log:** nothing is collected or sent anywhere. When `rnd search`
   returns no matches, it appends one line (UTC time and query) to `rnd.misses.jsonl`
-  beside `rnd.db` (git-ignored in the repo, or `<db>.misses.jsonl` beside `--db` /
-  `$RND_DB`). Set `RND_NO_USAGE=1` to turn it off, and delete the `.misses.jsonl` file
+  beside `rnd.db` (git-ignored in the repo; with `--db foo.db`, `foo.misses.jsonl`
+  beside it, not `foo.db.misses.jsonl`, and likewise for `$RND_DB`). Set
+  `RND_NO_USAGE=1` to turn it off, and delete the `.misses.jsonl` file
   at any time to clear it. No other usage data is recorded.
 
 Also in scope: content in this public repo that should not be public, such as a

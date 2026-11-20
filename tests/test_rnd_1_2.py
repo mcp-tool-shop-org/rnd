@@ -232,6 +232,64 @@ class BoundNumberTests(CliBase):
         self.assertEqual(code, 0)
         self.assertIn("in sync:", out)
 
+    def test_crlf_mixed_line_endings_and_missing_final_newline_preserved(self):
+        self._setup_demo_experiment()
+        crlf_old = self.root / "entries/2026/2026-01-02-sample.md"
+        crlf_bytes = crlf_old.read_text(encoding="utf-8").replace("\n", "\r\n").encode("utf-8")
+        crlf_old.write_bytes(crlf_bytes)
+
+        # 1. `claims assign` keeps CRLF line endings on every line.
+        code, _, err = self.run_cli("claims", "assign", "2026-01-02-sample")
+        self.assertEqual(code, 0, err)
+        assigned_bytes = crlf_old.read_bytes()
+        self.assertEqual(assigned_bytes.count(b"\r\n"), assigned_bytes.count(b"\n"))
+
+        # 2. `reconcile` keeps CRLF line endings + trailing non-ASCII without turning file to LF.
+        id_s0 = model.make_claim_id("2026-01-02-sample", "Graphs replay with one call.")
+        write(
+            self.root,
+            "entries/2026/2026-01-29-crlfnew.md",
+            ENTRY.replace("2026-01-02-sample", "2026-01-29-crlfnew").replace(
+                "- [unverified] It helps decode more than diffusion.",
+                f"- [verified] [c-crlf0001] Replaces éüï claim. (via: bench, 2026-01-29) (supersedes: {id_s0})",
+            ),
+        )
+        code, _, err = self.run_cli("reconcile", "2026-01-29-crlfnew")
+        self.assertEqual(code, 0, err)
+        reconciled_bytes = crlf_old.read_bytes()
+        self.assertEqual(reconciled_bytes.count(b"\r\n"), reconciled_bytes.count(b"\n"))
+        self.assertIn(b"\r\n- [superseded] ", reconciled_bytes)
+
+        # 3. `sync` preserves CRLF and mixed endings + missing final newline at EOF.
+        crlf_sync = self.root / "entries/2026/2026-01-30-sync-crlf.md"
+        crlf_sync.write_bytes((
+            "---\r\nid: 2026-01-30-sync-crlf\r\ntitle: CRLF\r\ndate: 2026-01-30\r\n"
+            "kind: finding\r\nrelevance: act\r\nfields: [gpu-computing]\r\ntags: [cuda]\r\n---\r\n\r\n"
+            "## Summary\r\n\r\nRate 1.0%<!-- rnd:experiments/demo/results.json#accuracy:.1% -->.\r\n"
+        ).encode("utf-8"))
+        mixed_note = self.root / "experiments/demo/README.md"
+        # Mixed line endings (line 1 CRLF, line 2 LF) and NO trailing newline at EOF.
+        mixed_note.write_bytes(b"First line\r\nSecond 1<!-- rnd:experiments/demo/results.json#count:,d -->")
+        code, _, err = self.run_cli("sync", "entries/2026/2026-01-30-sync-crlf.md", "experiments/demo/README.md")
+        self.assertEqual(code, 0, err)
+        synced_crlf = crlf_sync.read_bytes()
+        self.assertEqual(synced_crlf.count(b"\r\n"), synced_crlf.count(b"\n"))
+        self.assertIn(b"84.2%<!-- rnd:experiments/demo/results.json#accuracy:.1% -->", synced_crlf)
+        self.assertEqual(
+            mixed_note.read_bytes(),
+            b"First line\r\nSecond 1,562<!-- rnd:experiments/demo/results.json#count:,d -->",
+        )
+
+        # 4. Sync MISSING_KEY error names the Markdown file and leaves sibling drifted files untouched (C11).
+        crlf_sync.write_bytes(crlf_sync.read_bytes().replace(b"84.2%", b"10.0%"))
+        sibling_before = crlf_sync.read_bytes()
+        mixed_note.write_bytes(b"Bad 1<!-- rnd:experiments/demo/results.json#missing_key:d -->\n")
+        code, _, err = self.run_cli("sync")
+        self.assertEqual(code, 1)
+        self.assertIn("MISSING_KEY", err)
+        self.assertIn("experiments/demo/README.md: ", err)
+        self.assertEqual(crlf_sync.read_bytes(), sibling_before)
+
     def test_check_errors_on_drifted_literal_missing_file_missing_key_and_bad_bindings(self):
         self._setup_demo_experiment()
         # 1. Drifted literal
@@ -491,7 +549,7 @@ class ClaimsAndReconcileTests(CliBase):
         self.assertIn("link present on one side only", err)
         self.assertIn("rnd reconcile 2026-01-17-onesided", err)
 
-        # Duplicate claim id, malformed id, empty relation, and self-link.
+        # Duplicate claim id, malformed id, and self-link.
         write(
             self.root,
             "entries/2026/2026-01-17-onesided.md",
@@ -499,7 +557,6 @@ class ClaimsAndReconcileTests(CliBase):
                 "- [unverified] It helps decode more than diffusion.",
                 f"- [unverified] [{c0}] Dup id.\n"
                 "- [unverified] [c-bad id] Bad id.\n"
-                "- [unverified] [c-2222bbbb] Empty rel. (supersedes: )\n"
                 "- [unverified] [c-3333cccc] Self rel. (contradicts: c-3333cccc)",
             ),
         )
@@ -507,8 +564,285 @@ class ClaimsAndReconcileTests(CliBase):
         self.assertEqual(code, 1)
         self.assertIn("duplicate claim id", err)
         self.assertIn("must match 'c-<id>'", err)
-        self.assertIn("needs at least one claim id", err)
         self.assertIn("cannot state 'contradicts' on itself", err)
+
+    def test_fenced_and_duplicate_claims_headings_and_claim_mismatch_guard(self):
+        # 1. Entry with fenced `## Claims` headings before one real `## Claims` heading.
+        fenced_entry = (
+            "---\n"
+            "id: 2026-01-20-fence\n"
+            "title: Fence test\n"
+            "date: 2026-01-20\n"
+            "kind: finding\n"
+            "relevance: act\n"
+            "fields: [gpu-computing]\n"
+            "tags: [cuda]\n"
+            "---\n\n"
+            "## Summary\n\n"
+            "```markdown\n"
+            "## Claims\n"
+            "- [unverified] Example inside a fence.\n"
+            "```\n\n"
+            "~~~markdown\n"
+            "## Claims\n"
+            "- [unverified] Second example in tilde fence.\n"
+            "~~~\n\n"
+            "## Claims\n\n"
+            "- [unverified] Real first claim.\n"
+            "- [unverified] Real second claim.\n\n"
+            "## Sources\n\n"
+            "- [rig] bench\n"
+        )
+        p = self.root / "entries/2026/2026-01-20-fence.md"
+        p.write_bytes(fenced_entry.encode("utf-8"))
+        before_bytes = p.read_bytes()
+        id_r0 = model.make_claim_id("2026-01-20-fence", "Real first claim.")
+        id_r1 = model.make_claim_id("2026-01-20-fence", "Real second claim.")
+
+        code, out, err = self.run_cli("claims", "assign", "2026-01-20-fence", "--json")
+        self.assertEqual(code, 0, err)
+        self.assertEqual(json.loads(out)["assigned"], [id_r0, id_r1])
+        after_assign = p.read_bytes()
+        expected_assign = (
+            before_bytes
+            .replace(b"- [unverified] Real first claim.", f"- [unverified] [{id_r0}] Real first claim.".encode())
+            .replace(b"- [unverified] Real second claim.", f"- [unverified] [{id_r1}] Real second claim.".encode())
+        )
+        self.assertEqual(after_assign, expected_assign)
+        self.assertEqual(self.run_cli("check")[0], 0)
+
+        # Fresh fenced copy for reconcile (unassigned real claims, fenced headings ignored).
+        p.write_bytes(fenced_entry.encode("utf-8"))
+        write(
+            self.root,
+            "entries/2026/2026-02-01-newfence.md",
+            ENTRY.replace("2026-01-02-sample", "2026-02-01-newfence").replace(
+                "- [unverified] It helps decode more than diffusion.",
+                f"- [verified] Supersedes real first. (via: bench, 2026-02-01) (supersedes: {id_r0})",
+            ),
+        )
+        code, out, err = self.run_cli("reconcile", "2026-02-01-newfence")
+        self.assertEqual(code, 0, err or out)
+        id_nf = model.make_claim_id("2026-02-01-newfence", "Supersedes real first.")
+        after_rec = p.read_bytes()
+        expected_rec = before_bytes.replace(
+            b"- [unverified] Real first claim.",
+            f"- [superseded] [{id_r0}] Real first claim. (superseded-by: {id_nf})".encode(),
+        )
+        self.assertEqual(after_rec, expected_rec)
+        self.assertEqual(self.run_cli("check")[0], 0)
+        (self.root / "entries/2026/2026-02-01-newfence.md").unlink()
+
+        # 2. Entry with two real `## Claims` headings: last heading wins consistently across
+        # reader and writers, first section stays untouched, and `rnd check` reports an error.
+        dup_entry = (
+            "---\n"
+            "id: 2026-01-21-duphead\n"
+            "title: Duplicate claims headings\n"
+            "date: 2026-01-21\n"
+            "kind: finding\n"
+            "relevance: act\n"
+            "fields: [gpu-computing]\n"
+            "tags: [cuda]\n"
+            "---\n\n"
+            "## Claims\n\n"
+            "- [unverified] First section claim.\n\n"
+            "## Claims\n\n"
+            "- [unverified] Second section claim.\n\n"
+            "## Sources\n\n"
+            "- [rig] bench\n"
+        )
+        p_dup = self.root / "entries/2026/2026-01-21-duphead.md"
+        write(self.root, "entries/2026/2026-01-21-duphead.md", dup_entry)
+        id_sec2 = model.make_claim_id("2026-01-21-duphead", "Second section claim.")
+        code, out, err = self.run_cli("claims", "assign", "2026-01-21-duphead", "--json")
+        self.assertEqual(code, 0, err)
+        self.assertEqual(json.loads(out)["assigned"], [id_sec2])
+        after_dup = p_dup.read_text(encoding="utf-8")
+        self.assertIn("- [unverified] First section claim.", after_dup)
+        self.assertIn(f"- [unverified] [{id_sec2}] Second section claim.", after_dup)
+        code, _, err = self.run_cli("check")
+        self.assertEqual(code, 1)
+        self.assertIn("multiple '## Claims' headings (2 found)", err)
+
+        # Reconcile also edits only the active last real Claims section.
+        write(
+            self.root,
+            "entries/2026/2026-02-02-newdup.md",
+            ENTRY.replace("2026-01-02-sample", "2026-02-02-newdup").replace(
+                "- [unverified] It helps decode more than diffusion.",
+                f"- [verified] Supersedes sec2. (via: bench, 2026-02-02) (supersedes: {id_sec2})",
+            ),
+        )
+        code, _, err = self.run_cli("reconcile", "2026-02-02-newdup")
+        self.assertEqual(code, 0, err)
+        after_dup2 = p_dup.read_text(encoding="utf-8")
+        self.assertIn("- [unverified] First section claim.", after_dup2)
+        self.assertIn(f"- [superseded] [{id_sec2}] Second section claim. (superseded-by:", after_dup2)
+        p_dup.unlink()
+        (self.root / "entries/2026/2026-02-02-newdup.md").unlink()
+
+        # 3. Pre-write CLAIM_MISMATCH refusal writes nothing.
+        before_bytes = p.read_bytes()
+        with self.assertRaises(model.ReconcileError) as ctx:
+            model._apply_claim_line_edits(p, {0: {"assign_id": "c-00000001", "expected_id": "", "expected_text": "Wrong sentence."}})
+        self.assertEqual(ctx.exception.code, "CLAIM_MISMATCH")
+        self.assertEqual(p.read_bytes(), before_bytes)
+
+        # 4. Duplicate claim id across files refuses in reconcile (C8).
+        write(
+            self.root,
+            "entries/2026/2026-02-03-dupa.md",
+            ENTRY.replace("2026-01-02-sample", "2026-02-03-dupa").replace(
+                "- [unverified] It helps decode more than diffusion.",
+                "- [unverified] [c-99998888] Claim A.",
+            ),
+        )
+        write(
+            self.root,
+            "entries/2026/2026-02-04-dupb.md",
+            ENTRY.replace("2026-01-02-sample", "2026-02-04-dupb").replace(
+                "- [unverified] It helps decode more than diffusion.",
+                "- [unverified] [c-99998888] Claim B.",
+            ),
+        )
+        write(
+            self.root,
+            "entries/2026/2026-02-05-dupc.md",
+            ENTRY.replace("2026-01-02-sample", "2026-02-05-dupc").replace(
+                "- [unverified] It helps decode more than diffusion.",
+                "- [verified] Overrides dup. (via: bench, 2026-02-05) (supersedes: c-99998888)",
+            ),
+        )
+        code, _, err = self.run_cli("reconcile", "2026-02-05-dupc")
+        self.assertEqual(code, 1)
+        self.assertIn("DUPLICATE_CLAIM_ID", err)
+
+    def test_reverse_only_link_hint_and_repairs(self):
+        old_p = self.root / "entries/2026/2026-01-02-sample.md"
+        id_s0 = model.make_claim_id("2026-01-02-sample", "Graphs replay with one call.")
+        write(
+            self.root,
+            "entries/2026/2026-01-22-newer.md",
+            ENTRY.replace("2026-01-02-sample", "2026-01-22-newer").replace(
+                "- [unverified] It helps decode more than diffusion.",
+                f"- [verified] [c-new11111] Newer claim. (via: bench, 2026-01-22) (supersedes: {id_s0})",
+            ),
+        )
+        self.assertEqual(self.run_cli("reconcile", "2026-01-22-newer")[0], 0)
+        new_p = self.root / "entries/2026/2026-01-22-newer.md"
+
+        # Break the forward side so only the reverse half remains.
+        new_orig = new_p.read_bytes()
+        new_p.write_text(
+            new_p.read_text(encoding="utf-8").replace(f" (supersedes: {id_s0})", ""),
+            encoding="utf-8",
+        )
+        code, _, err = self.run_cli("check")
+        self.assertEqual(code, 1)
+        self.assertIn("link present on one side only", err)
+        self.assertNotIn(f"); run `rnd reconcile 2026-01-22-newer`", err)
+        self.assertIn(f"add '(supersedes: {id_s0})' to c-new11111", err)
+        self.assertIn("remove '(superseded-by: c-new11111)'", err)
+
+        # Hinted repair 1: restore forward relation and run reconcile -> check clean.
+        new_p.write_bytes(new_orig)
+        self.assertEqual(self.run_cli("reconcile", "2026-01-22-newer")[0], 0)
+        self.assertEqual(self.run_cli("check")[0], 0)
+
+        # Hinted repair 2: remove forward side, then remove stale reverse clause -> check clean.
+        new_p.write_text(
+            new_p.read_text(encoding="utf-8").replace(f" (supersedes: {id_s0})", ""),
+            encoding="utf-8",
+        )
+        self.assertEqual(self.run_cli("check")[0], 1)
+        old_p.write_text(
+            old_p.read_text(encoding="utf-8")
+            .replace("[superseded]", "[verified]")
+            .replace(" (superseded-by: c-new11111)", ""),
+            encoding="utf-8",
+        )
+        self.assertEqual(self.run_cli("check")[0], 0)
+
+    def test_relation_target_must_be_claim_id_not_prose(self):
+        write(
+            self.root,
+            "entries/2026/2026-01-25-prose.md",
+            "---\n"
+            "id: 2026-01-25-prose\n"
+            "title: Prose glosses\n"
+            "date: 2026-01-25\n"
+            "kind: finding\n"
+            "relevance: act\n"
+            "fields: [gpu-computing]\n"
+            "tags: [cuda]\n"
+            "---\n\n"
+            "## Summary\n\nSummary.\n\n"
+            "## Claims\n\n"
+            "- [unverified] Prose ending with a gloss (supports: the earlier benchmark)\n"
+            "- [verified] Gloss before via (supports: the earlier benchmark) (via: docs, 2026-01-25)\n"
+            "- [unverified] Empty rel stays text (supersedes: )\n"
+            "- [verified] Double via keeps first (via: X) (via: Y)\n\n"
+            "## Sources\n\n"
+            "- [rig] bench\n",
+        )
+        e, probs = model.load(self.root / "entries/2026/2026-01-25-prose.md", self.root)
+        self.assertFalse(any(p.level == "error" for p in probs), probs)
+        self.assertEqual(e.claims[0]["relations"], {})
+        self.assertEqual(e.claims[0]["text"], "Prose ending with a gloss (supports: the earlier benchmark)")
+        self.assertEqual(e.claims[1]["relations"], {})
+        self.assertEqual(e.claims[1]["text"], "Gloss before via (supports: the earlier benchmark)")
+        self.assertEqual(e.claims[1]["via"], "docs, 2026-01-25")
+        self.assertEqual(e.claims[2]["relations"], {})
+        self.assertEqual(e.claims[2]["text"], "Empty rel stays text (supersedes: )")
+        self.assertEqual(e.claims[3]["text"], "Double via keeps first (via: X)")
+        self.assertEqual(e.claims[3]["via"], "Y")
+        self.assertEqual(self.run_cli("check")[0], 0)
+
+    def test_wrapped_multiline_claim_reconcile_places_inverse_at_end_and_keeps_words(self):
+        wrapped_entry = (
+            "---\n"
+            "id: 2026-01-26-wrapped\n"
+            "title: Wrapped claim\n"
+            "date: 2026-01-26\n"
+            "kind: finding\n"
+            "relevance: act\n"
+            "fields: [gpu-computing]\n"
+            "tags: [cuda]\n"
+            "---\n\n"
+            "## Summary\n\nSummary.\n\n"
+            "## Claims\n\n"
+            "- [unverified] Old sentence that wraps\n"
+            "  onto a second line. (via: docs, 2026-01-01)\n"
+            "- [verified] Unchanged claim. (via: docs, 2026-01-01)\n\n"
+            "## Sources\n\n"
+            "- [rig] bench\n"
+        )
+        p_wrap = self.root / "entries/2026/2026-01-26-wrapped.md"
+        write(self.root, "entries/2026/2026-01-26-wrapped.md", wrapped_entry)
+        id_w0 = model.make_claim_id("2026-01-26-wrapped", "Old sentence that wraps onto a second line.")
+        write(
+            self.root,
+            "entries/2026/2026-02-06-contradict.md",
+            ENTRY.replace("2026-01-02-sample", "2026-02-06-contradict").replace(
+                "- [unverified] It helps decode more than diffusion.",
+                f"- [verified] [c-cont0001] Refutes wrapped claim. (via: bench, 2026-02-06) (contradicts: {id_w0})",
+            ),
+        )
+        code, out, err = self.run_cli("reconcile", "2026-02-06-contradict")
+        self.assertEqual(code, 0, err or out)
+        after = p_wrap.read_text(encoding="utf-8")
+        self.assertIn(
+            f"- [disputed] [{id_w0}] Old sentence that wraps\n"
+            "  onto a second line. (via: docs, 2026-01-01) (contradicted-by: c-cont0001)\n",
+            after,
+        )
+        self.assertIn("- [verified] Unchanged claim. (via: docs, 2026-01-01)\n", after)
+        # Idempotent second run changes nothing, and check passes cleanly.
+        code, out, _ = self.run_cli("reconcile", "2026-02-06-contradict", "--json")
+        self.assertEqual(code, 0)
+        self.assertEqual(json.loads(out)["changed_files"], [])
+        self.assertEqual(self.run_cli("check")[0], 0)
 
     def test_index_search_show_and_claims_command_surface_superseded_and_disputed_claims(self):
         id_s0 = model.make_claim_id("2026-01-02-sample", "Graphs replay with one call.")
@@ -588,6 +922,39 @@ class QuestionTests(CliBase):
         self.assertEqual(self.run_cli("new-question", "   ")[0], 2)
         self.assertEqual(self.run_cli("new-question", "X", "--id", "Bad ID")[0], 2)
         self.assertEqual(self.run_cli("new-question", "Dup", "--id", "2026-11-19-why-does-latency-spike-at-8k")[0], 2)
+
+    def test_new_question_refuses_invalid_answered_and_roundtrips_complex_title(self):
+        before_q = sorted(p.name for p in (self.root / "questions").glob("*")) if (self.root / "questions").exists() else []
+        code, _, err = self.run_cli("new-question", "Answered without id", "--status", "answered", "--field", "gpu-computing")
+        self.assertEqual(code, 2)
+        self.assertIn("BAD_ANSWERED_BY", err)
+
+        code, _, err = self.run_cli(
+            "new-question", "Answered bad id", "--status", "answered", "--answered-by", "c-deadbeef", "--field", "gpu-computing"
+        )
+        self.assertEqual(code, 2)
+        self.assertIn("CLAIM_NOT_FOUND", err)
+        after_q = sorted(p.name for p in (self.root / "questions").glob("*")) if (self.root / "questions").exists() else []
+        self.assertEqual(after_q, before_q)
+
+        # Valid --answered-by succeeds and passes check.
+        self.run_cli("claims", "assign", "2026-01-02-sample")
+        c0 = model.load(self.root / "entries/2026/2026-01-02-sample.md", self.root)[0].claims[0]["id"]
+        code, out, err = self.run_cli(
+            "new-question", "Answered ok", "--status", "answered", "--answered-by", c0, "--field", "gpu-computing"
+        )
+        self.assertEqual(code, 0, err)
+        self.assertTrue((self.root / out.strip()).is_file())
+        self.assertEqual(self.run_cli("check")[0], 0)
+
+        # Title with '#', '"', and "'" round-trips losslessly (C4).
+        tricky = 'Why #1 is "best" and \'worst\''
+        code, _, err = self.run_cli("new-question", tricky, "--id", "q-tricky", "--field", "gpu-computing", "--date", "2026-11-19")
+        self.assertEqual(code, 0, err)
+        code, out, _ = self.run_cli("questions", "--json")
+        self.assertEqual(code, 0)
+        by_id = {row["id"]: row for row in json.loads(out)}
+        self.assertEqual(by_id["q-tricky"]["title"], tricky)
 
     def test_check_validates_questions_and_errors_on_answered_without_existing_claim_id(self):
         self.run_cli("claims", "assign", "2026-01-02-sample")

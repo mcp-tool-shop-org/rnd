@@ -20,7 +20,7 @@ COMMENT_RE = re.compile(r"<!--\s*rnd:([\s\S]*?)-->")
 RESULTS_FILE_RE = re.compile(r"^experiments/([a-z0-9][a-z0-9._-]*)/results\.json$")
 LITERAL_BEFORE_RE = re.compile(
     r"((?:(?:(?<=^)|(?<=[\s(\[{:;,=*~|\"']))[+\-\u2212])?(?<![0-9A-Za-z._])"
-    r"\d(?:[\d,_]*\d)?(?:\.\d(?:[\d_]*\d)?)?(?:[eE][+\-]?\d+)?%?)$"
+    r"\d(?:[\d,_]*\d)?(?:\.\d(?:[\d_]*\d)?)?(?:[eE][+\-]?\d+)?%?)\Z"
 )
 BOUND_PAIR_RE = re.compile(
     r"(?:(?:(?<=^)|(?<=[\s(\[{:;,=*~|\"']))[+\-\u2212])?(?<![0-9A-Za-z._])"
@@ -38,6 +38,11 @@ class NumbersError(Exception):
         self.code, self.hint, self.exit_code = code, hint, exit_code
 
 
+def _read_raw_text(path: Path) -> str:
+    with open(path, "r", encoding="utf-8", newline="") as fh:
+        return fh.read()
+
+
 def _non_code_ranges(text: str) -> list[tuple[int, int]]:
     """Return [start, end) character ranges outside frontmatter, fenced blocks, and inline code spans."""
     lines = text.splitlines(keepends=True)
@@ -49,7 +54,8 @@ def _non_code_ranges(text: str) -> list[tuple[int, int]]:
         pos += len(line)
 
     i = 0
-    if lines and lines[0].strip() == "---":
+    first_line = lines[0][1:] if lines and lines[0].startswith("\ufeff") else (lines[0] if lines else "")
+    if lines and first_line.strip() == "---":
         for j in range(1, n_lines):
             if lines[j].strip() == "---":
                 i = j + 1
@@ -273,27 +279,30 @@ def sync_files(root: Path, paths: list[str] | None = None, check: bool = False) 
     targets = _resolve_sync_paths(root, paths)
     cache: dict = {}
     inst_dir = (root / "instruments").resolve()
-    pending_writes: list[tuple[Path, str, str]] = []
+    pending_writes: list[tuple[Path, str]] = []
     changed: list[dict] = []
     total_bindings = 0
 
     for path in targets:
         rel = path.relative_to(root.resolve()).as_posix() if path.is_absolute() else path.as_posix()
-        text = path.read_text(encoding="utf-8")
+        text = _read_raw_text(path)
         bindings = find_bindings(text)
         if not bindings:
             continue
-        replacements: list[tuple[int, int, str]] = []
+        replacements: list[tuple[int, int, str, str]] = []
         for b in bindings:
             total_bindings += 1
             if b["literal"] is None:
                 raise NumbersError("BAD_BINDING", f"{rel}: bound comment has no number directly before it",
                                    "place the literal right before <!-- rnd:... -->, e.g. 84.2%<!-- rnd:... -->")
-            rel_file, key, fmt = parse_spec(b["raw_spec"])
-            data, err = load_results_file(root, rel_file, cache)
-            if err:
-                raise NumbersError("BAD_RESULTS", f"{rel}: {err}")
-            expected = format_bound_value(data, rel_file, key, fmt)
+            try:
+                rel_file, key, fmt = parse_spec(b["raw_spec"])
+                data, err = load_results_file(root, rel_file, cache)
+                if err:
+                    raise NumbersError("BAD_RESULTS", err)
+                expected = format_bound_value(data, rel_file, key, fmt)
+            except NumbersError as exc:
+                raise NumbersError(exc.code, f"{rel}: {exc}", exc.hint, exc.exit_code) from None
             if b["literal"] != expected:
                 changed.append({
                     "path": rel,
@@ -302,7 +311,7 @@ def sync_files(root: Path, paths: list[str] | None = None, check: bool = False) 
                     "was": b["literal"],
                     "now": expected,
                 })
-                replacements.append((b["lit_start"], b["lit_end"], expected))
+                replacements.append((b["lit_start"], b["lit_end"], b["literal"], expected))
         if replacements and not check:
             if path.resolve().is_relative_to(inst_dir):
                 raise NumbersError(
@@ -312,14 +321,15 @@ def sync_files(root: Path, paths: list[str] | None = None, check: bool = False) 
                     exit_code=2,
                 )
             new_text = text
-            for start, end, expected in sorted(replacements, reverse=True):
+            for start, end, was_lit, expected in sorted(replacements, reverse=True):
+                if new_text[start:end] != was_lit:
+                    raise NumbersError("SYNC_MISMATCH", f"{rel}: expected {was_lit!r} at bound offset before write")
                 new_text = new_text[:start] + expected + new_text[end:]
-            eol = "\r\n" if "\r\n" in text else "\n"
-            pending_writes.append((path, new_text.replace("\r\n", "\n"), eol))
+            pending_writes.append((path, new_text))
 
     if not check:
-        for path, body, eol in pending_writes:
-            with open(path, "w", encoding="utf-8", newline=eol) as fh:
+        for path, body in pending_writes:
+            with open(path, "w", encoding="utf-8", newline="") as fh:
                 fh.write(body)
 
     return {
@@ -375,7 +385,7 @@ def check_all(root: Path, entries: list[model.Entry] | None = None) -> list[mode
     for path in default_bindable_paths(root):
         rel = path.relative_to(root).as_posix()
         try:
-            text = path.read_text(encoding="utf-8")
+            text = _read_raw_text(path)
         except (OSError, UnicodeDecodeError):
             continue
         for b in find_bindings(text):

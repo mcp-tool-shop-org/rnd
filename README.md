@@ -231,7 +231,8 @@ question without an existing claim id as an error. Questions are indexed in
 ## Local search-miss log
 
 When `rnd search` returns no matches, it appends one JSON line (`time` and
-`query`) to a git-ignored local file beside `rnd.db` (`rnd.misses.jsonl`).
+`query`) to a local `.misses.jsonl` file beside `rnd.db` (`rnd.misses.jsonl` in
+the repo root, git-ignored; or `<db>.misses.jsonl` beside `--db` / `RND_DB`).
 Nothing else is recorded, nothing is ever sent over the network, `RND_NO_USAGE=1`
 switches logging off, and deleting the file removes it completely.
 `rnd stats --usage` prints the total miss count and the most frequent missed
@@ -360,10 +361,10 @@ studio's workflow standards.
   login when you run them.
 - **Permissions:** ordinary file access. No elevated rights, no background service.
 - **Local-only usage log:** nothing is collected or sent anywhere. When `rnd search`
-  returns no matches, it appends one line (UTC time and query) to the git-ignored
-  local file `rnd.misses.jsonl` beside `rnd.db`. Set `RND_NO_USAGE=1` to turn it
-  off, and delete `rnd.misses.jsonl` at any time to clear it. No other usage data
-  is recorded.
+  returns no matches, it appends one line (UTC time and query) to `rnd.misses.jsonl`
+  beside `rnd.db` (git-ignored in the repo, or `<db>.misses.jsonl` beside `--db` /
+  `$RND_DB`). Set `RND_NO_USAGE=1` to turn it off, and delete `.misses.jsonl` at any
+  time to clear it. No other usage data is recorded.
 - **Public repo hygiene:** before every push, the tree is scanned for
   home-directory paths and operator identity.
 

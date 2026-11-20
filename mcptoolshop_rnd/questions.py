@@ -120,11 +120,14 @@ def _slugify(text: str) -> str:
 
 
 def _yaml_scalar(value: str) -> str:
-    if (" #" in value or value[:1] in ("'", '"', "[")) and '"' not in value:
+    needs_quote = " #" in value or value[:1] in ("'", '"', "[", "|", ">")
+    if not needs_quote:
+        return value
+    if '"' not in value:
         return f'"{value}"'
-    if (" #" in value or value[:1] in ("'", '"', "[")) and "'" not in value:
+    if "'" not in value:
         return f"'{value}'"
-    return value
+    return "|\n  " + "\n  ".join(value.splitlines())
 
 
 def new_question(
@@ -150,15 +153,31 @@ def new_question(
     slug = qid or f"{day}-{_slugify(title_clean) or 'question'}"
     if not model.ID_RE.match(slug):
         raise QuestionError("BAD_ID", f"id {slug!r} is not valid", "use lower-case letters, digits and '-'")
-    folder = Path(root) / QUESTIONS_DIR
-    path = folder / f"{slug}.md"
-    if path.exists():
-        raise QuestionError("EXISTS", f"{path.relative_to(root).as_posix()} already exists", "pick another title or --id")
     field_list = [f.strip() for f in (fields or ["general"]) if str(f).strip()]
     if not field_list:
         field_list = ["general"]
     tag_list = [t.strip() for t in (tags or []) if str(t).strip()]
     ans_list = [a.strip() for a in (answered_by or []) if str(a).strip()]
+    if status == "answered" and not ans_list:
+        raise QuestionError(
+            "BAD_ANSWERED_BY",
+            "'answered' question needs --answered-by listing at least one existing claim id",
+            "pass --answered-by c-<id>, or omit --status answered",
+        )
+    if ans_list:
+        entries, _ = model.load_all(root)
+        known_ids = {c["id"] for e in entries for c in e.claims if c["id"]}
+        for cid in ans_list:
+            if cid not in known_ids:
+                raise QuestionError(
+                    "CLAIM_NOT_FOUND",
+                    f"answered_by claim id {cid!r} does not exist",
+                    "check `rnd claims` or run `rnd claims assign <entry>` first",
+                )
+    folder = Path(root) / QUESTIONS_DIR
+    path = folder / f"{slug}.md"
+    if path.exists():
+        raise QuestionError("EXISTS", f"{path.relative_to(root).as_posix()} already exists", "pick another title or --id")
     folder.mkdir(parents=True, exist_ok=True)
     content = (
         f"---\n"

@@ -49,6 +49,8 @@ readouts build (study-swarm), never by copying entries across.
 
 A studio tool that research can use gets a file in `instruments/` with
 `instrument_status: shipped | planned | retired`, `invoke`, `when` and `where`.
+When a repo becomes such a tool, add or update its instrument file in the same
+change.
 
 - **Reviewed-diff rule:** instrument files (`instruments/*.md`) are edited **only
   by the R&D seat**, in a reviewed diff whose PR/commit description lists each

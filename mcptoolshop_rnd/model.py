@@ -52,6 +52,8 @@ DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]*$")
 CLAIM_ID_RE = re.compile(r"^c-[a-z0-9][a-z0-9._-]*$")
 ITEM_RE = re.compile(r"^\s*[-*]\s+\[([A-Za-z-]+)\]\s+(.+?)\s*$")
+CLAIM_HEAD_RE = re.compile(r"^(\s*[-*]\s+)\[([A-Za-z-]+)\](\s+)(\S.*)$")
+NON_CONT_RE = re.compile(r"^\s*(?:[-*+]|\d+[.)]|#{1,6})\s+")
 CLAIM_LINE_RE = re.compile(r"^(\s*[-*]\s+)\[([A-Za-z-]+)\](\s+)(.+?)(\r?\n?)$")
 CLAIM_PREFIX_RE = re.compile(r"^\[(c-[^\]]*)\](?!\()\s*(.*)$")
 CLAUSE_RE = re.compile(
@@ -62,6 +64,8 @@ MDLINK_RE = re.compile(r"\[([^\]]+)\]\((https?://[^)\s]+)\)")
 VIA_RE = re.compile(r"\(via:\s*([^)]+)\)\s*$")
 WIKILINK_RE = re.compile(r"\[\[([a-z0-9][a-z0-9._-]*)\]\]")
 HEADING_RE = re.compile(r"^##\s+(.+?)\s*$", re.M)
+HEADING_LINE_RE = re.compile(r"^##\s+(.+?)\s*$")
+FENCE_RE = re.compile(r"^ {0,3}(`{3,}|~{3,})")
 
 
 class ReconcileError(Exception):
@@ -107,13 +111,87 @@ def _as_list(value):
     return [str(value)]
 
 
+def _read_raw_text(path):
+    with open(path, "r", encoding="utf-8", newline="") as fh:
+        return fh.read()
+
+
+def _split_eol(line):
+    body = line.rstrip("\r\n")
+    return body, line[len(body):]
+
+
+def _body_start_line(lines):
+    if not lines:
+        return 0
+    first = lines[0][1:] if lines[0].startswith("\ufeff") else lines[0]
+    if first.strip() != "---":
+        return 0
+    for i in range(1, len(lines)):
+        if lines[i].strip() == "---":
+            return i + 1
+    return 0
+
+
+def _opening_fence(line_body):
+    fm = FENCE_RE.match(line_body)
+    if not fm:
+        return None
+    marker = fm.group(1)
+    if marker[0] == "`" and "`" in line_body[fm.end():]:
+        return None
+    return marker[0], len(marker)
+
+
+def _is_closing_fence(line_body, fence_ch, fence_n):
+    stripped = line_body.lstrip(" ")
+    if len(line_body) - len(stripped) > 3:
+        return False
+    return stripped.startswith(fence_ch * fence_n) and stripped.lstrip(fence_ch).strip() == ""
+
+
+def _section_spans(lines, start=0):
+    """Yield (lower_heading, body_start_idx, body_end_idx) outside fenced code blocks."""
+    headings = []
+    fence = None
+    for idx in range(start, len(lines)):
+        ln, _ = _split_eol(lines[idx])
+        if fence is not None:
+            if _is_closing_fence(ln, *fence):
+                fence = None
+            continue
+        opened = _opening_fence(ln)
+        if opened is not None:
+            fence = opened
+            continue
+        hm = HEADING_LINE_RE.match(ln)
+        if hm:
+            headings.append((hm.group(1).strip().lower(), idx))
+    spans = []
+    for k, (name, h_idx) in enumerate(headings):
+        end = headings[k + 1][1] if k + 1 < len(headings) else len(lines)
+        spans.append((name, h_idx + 1, end))
+    return spans
+
+
+def claims_section_span(lines, start=0):
+    """Return (span_or_None, real_count) for '## Claims' headings outside code fences.
+
+    When multiple real '## Claims' headings exist, the last heading wins (matching
+    `sections()`), and `real_count > 1` is flagged as an error by `rnd check`.
+    """
+    matches = [(s, e) for name, s, e in _section_spans(lines, start) if name == "claims"]
+    if not matches:
+        return None, 0
+    return matches[-1], len(matches)
+
+
 def sections(body):
-    """Map lower-cased '## heading' -> section text."""
+    """Map lower-cased '## heading' -> section text, ignoring headings inside code fences."""
+    lines = body.splitlines(keepends=True)
     out = {}
-    matches = list(HEADING_RE.finditer(body))
-    for n, m in enumerate(matches):
-        end = matches[n + 1].start() if n + 1 < len(matches) else len(body)
-        out[m.group(1).strip().lower()] = body[m.end():end].strip()
+    for name, start, end in _section_spans(lines, 0):
+        out[name] = "".join(lines[start:end]).strip()
     return out
 
 
@@ -153,12 +231,72 @@ def make_claim_id(entry_id, text, taken=frozenset()):
         salt += 1
 
 
-def parse_claim_line(line):
-    """Parse one claim list item line into a dict, or return None if the line is not a claim item."""
-    m = ITEM_RE.match(line)
+def _match_trailing_clause(cur, seen_via=False):
+    cm = CLAUSE_RE.search(cur)
+    if not cm:
+        return None
+    key, raw_val = cm.group(1), cm.group(2)
+    if key == "via":
+        val = raw_val.strip()
+        if seen_via or not val:
+            return None
+        return cm, "via", val
+    val = raw_val.strip()
+    if not val:
+        return None
+    targets = [t.strip() for t in val.split(",")]
+    if not targets or not all(CLAIM_ID_RE.match(t) for t in targets):
+        return None
+    return cm, key, targets
+
+
+def _is_claim_continuation(line_body):
+    if not line_body.strip():
+        return False
+    if NON_CONT_RE.match(line_body) or line_body.lstrip().startswith(">"):
+        return False
+    if _opening_fence(line_body) is not None:
+        return False
+    return True
+
+
+def _iter_claim_blocks(lines, start=0, end=None):
+    """Yield (block_start, block_end) line index spans inside one Claims slice."""
+    limit = len(lines) if end is None else end
+    i = start
+    fence = None
+    while i < limit:
+        ln, _ = _split_eol(lines[i])
+        if fence is not None:
+            if _is_closing_fence(ln, *fence):
+                fence = None
+            i += 1
+            continue
+        opened = _opening_fence(ln)
+        if opened is not None:
+            fence = opened
+            i += 1
+            continue
+        if CLAIM_HEAD_RE.match(ln):
+            j = i + 1
+            while j < limit and _is_claim_continuation(_split_eol(lines[j])[0]):
+                j += 1
+            yield i, j
+            i = j
+            continue
+        i += 1
+
+
+def parse_claim_block(block_lines):
+    """Parse one claim (single- or multi-line wrapped) block into a dict, or None."""
+    if not block_lines:
+        return None
+    first_body, _ = _split_eol(block_lines[0])
+    m = CLAIM_HEAD_RE.match(first_body)
     if not m:
         return None
-    confidence, rest = m.group(1).lower(), m.group(2)
+    confidence = m.group(2).lower()
+    rest = " ".join([m.group(4).rstrip()] + [ln.strip() for ln in block_lines[1:] if ln.strip()])
     claim_id = ""
     pm = CLAIM_PREFIX_RE.match(rest)
     if pm:
@@ -166,21 +304,24 @@ def parse_claim_line(line):
         rest = pm.group(2).strip()
     peeled = []
     cur = rest.rstrip()
+    seen_via = False
     while True:
-        cm = CLAUSE_RE.search(cur)
-        if not cm:
+        matched = _match_trailing_clause(cur, seen_via=seen_via)
+        if matched is None:
             break
-        peeled.append((cm.group(1), cm.group(2)))
+        cm, key, val = matched
+        if key == "via":
+            seen_via = True
+        peeled.append((key, val))
         cur = cur[:cm.start()].rstrip()
     via = ""
     relations = {}
     for key, val in reversed(peeled):
         if key == "via":
-            via = val.strip()
+            via = val
         else:
-            targets = [t.strip() for t in val.split(",") if t.strip()]
             bucket = relations.setdefault(key, [])
-            for t in targets:
+            for t in val:
                 if t not in bucket:
                     bucket.append(t)
     return {
@@ -193,10 +334,16 @@ def parse_claim_line(line):
     }
 
 
+def parse_claim_line(line):
+    """Parse one claim list item line into a dict, or return None if the line is not a claim item."""
+    return parse_claim_block([line])
+
+
 def parse_claims(text):
+    lines = text.splitlines(keepends=True)
     items = []
-    for line in text.splitlines():
-        parsed = parse_claim_line(line)
+    for b_start, b_end in _iter_claim_blocks(lines):
+        parsed = parse_claim_block(lines[b_start:b_end])
         if parsed is not None:
             items.append(parsed)
     return items
@@ -207,7 +354,7 @@ def load(path, root):
     rel = Path(path).relative_to(root).as_posix()
     problems = []
     try:
-        text = Path(path).read_text(encoding="utf-8")
+        text = _read_raw_text(path)
         meta, body = frontmatter.read(text)
     except (OSError, UnicodeDecodeError, frontmatter.FrontmatterError) as exc:
         return None, [Problem("error", rel, f"unreadable: {exc}")]
@@ -238,6 +385,7 @@ def load(path, root):
         err("'fields' needs at least one research field, e.g. [gpu-computing]")
     tags = _as_list(meta.get("tags"))
 
+    body_lines = body.splitlines(keepends=True)
     secs = sections(body)
     sources = parse_sources(secs.get("sources", ""))
     for s in sources:
@@ -245,7 +393,11 @@ def load(path, root):
             err(f"source tier [{s['tier']}] must be one of {', '.join(TIERS)}")
         if not s["url"] and s["tier"] not in ("user", "rig"):
             err(f"[{s['tier']}] source has no URL: {s['label'][:60]!r}")
-    claims = parse_claims(secs.get("claims", ""))
+    claims_span, claims_count = claims_section_span(body_lines, 0)
+    if claims_count > 1:
+        err(f"multiple '## Claims' headings ({claims_count} found); keep one Claims section")
+    claims_text = "".join(body_lines[claims_span[0]:claims_span[1]]) if claims_span is not None else ""
+    claims = parse_claims(claims_text)
     for c in claims:
         if c["confidence"] not in CONFIDENCE:
             err(f"claim tag [{c['confidence']}] must be one of {', '.join(CONFIDENCE)}")
@@ -254,8 +406,6 @@ def load(path, root):
         if c["id"] and not CLAIM_ID_RE.match(c["id"]):
             err(f"claim id {c['id']!r} must match 'c-<id>' (lower-case letters, digits, '.', '_' or '-')")
         for rel_name, targets in c["relations"].items():
-            if not targets:
-                err(f"claim relation '({rel_name}: ...)' needs at least one claim id")
             for tid in targets:
                 if c["id"] and tid == c["id"]:
                     err(f"claim {c['id']} cannot state '{rel_name}' on itself")
@@ -329,45 +479,49 @@ def load_all(root):
                         continue
                     target = seen_claims.get(tid)
                     if target is None:
+                        if rel_name in FORWARD_RELATIONS:
+                            hint = f"run `rnd reconcile {e.id}`"
+                        else:
+                            hint = (
+                                f"remove stale '({rel_name}: {tid})' from {e.path}, or add "
+                                f"'{inv}: {cid or '<id>'}' on the newer entry and run `rnd reconcile`"
+                            )
                         problems.append(Problem(
                             "error", e.path,
-                            f"claim {cid or '<unassigned>'} states '{rel_name}: {tid}', which does not exist; "
-                            f"run `rnd reconcile {e.id}`"))
+                            f"claim {cid or '<unassigned>'} states '{rel_name}: {tid}', which does not exist; {hint}"))
                         continue
                     other_entry, other_claim = target
-                    hint_entry = e.id if rel_name in FORWARD_RELATIONS else other_entry.id
                     if not cid:
+                        if rel_name in FORWARD_RELATIONS:
+                            hint = f"run `rnd reconcile {e.id}`"
+                        else:
+                            hint = (
+                                f"run `rnd claims assign {e.id}` and add '({inv}: <id>)' to {tid} in "
+                                f"{other_entry.path}, or remove '({rel_name}: {tid})' from {e.path}"
+                            )
                         problems.append(Problem(
                             "error", e.path,
-                            f"claim with '{rel_name}: {tid}' has no id (link present on one side only); "
-                            f"run `rnd reconcile {hint_entry}`"))
+                            f"claim with '{rel_name}: {tid}' has no id (link present on one side only); {hint}"))
                         continue
                     if cid not in other_claim["relations"].get(inv, []):
+                        if rel_name in FORWARD_RELATIONS:
+                            hint = f"run `rnd reconcile {e.id}`"
+                        else:
+                            hint = (
+                                f"add '({inv}: {cid})' to {tid} in {other_entry.path} and run "
+                                f"`rnd reconcile {other_entry.id}`, or remove '({rel_name}: {tid})' from {e.path}"
+                            )
                         problems.append(Problem(
                             "error", e.path,
                             f"claim {cid} states '{rel_name}: {tid}', but {tid} in {other_entry.id} lacks "
-                            f"'{inv}: {cid}' (link present on one side only); run `rnd reconcile {hint_entry}`"))
+                            f"'{inv}: {cid}' (link present on one side only); {hint}"))
     return entries, problems
 
 
 def _claims_section_line_range(lines):
-    """Return (start, end) line indices for the '## Claims' body in splitlines(keepends=True)."""
-    i = 0
-    if lines and lines[0].strip() == "---":
-        i = 1
-        while i < len(lines) and lines[i].strip() != "---":
-            i += 1
-        i += 1
-    while i < len(lines):
-        m = HEADING_RE.match(lines[i].rstrip("\r\n"))
-        if m and m.group(1).strip().lower() == "claims":
-            start = i + 1
-            end = start
-            while end < len(lines) and not HEADING_RE.match(lines[end].rstrip("\r\n")):
-                end += 1
-            return start, end
-        i += 1
-    return None
+    """Return (start, end) line indices for the active '## Claims' body in splitlines(keepends=True)."""
+    span, _ = claims_section_span(lines, _body_start_line(lines))
+    return span
 
 
 def _insert_inverse_clause(rest, inv_rel, src_id):
@@ -375,15 +529,18 @@ def _insert_inverse_clause(rest, inv_rel, src_id):
     trimmed = rest.rstrip()
     clauses = []
     cur = trimmed
+    seen_via = False
     while True:
-        cm = CLAUSE_RE.search(cur)
-        if not cm:
+        matched = _match_trailing_clause(cur, seen_via=seen_via)
+        if matched is None:
             break
-        clauses.append((cm.start(), cm.end(), cm.group(1), cm.group(2)))
+        cm, key, val = matched
+        if key == "via":
+            seen_via = True
+        clauses.append((cm.start(), cm.end(), key, val))
         cur = cur[:cm.start()].rstrip()
-    for start, end, key, val in clauses:
+    for start, end, key, tokens in clauses:
         if key == inv_rel:
-            tokens = [t.strip() for t in val.split(",") if t.strip()]
             if src_id in tokens:
                 return rest
             updated = f"({inv_rel}: {', '.join([*tokens, src_id])})"
@@ -391,50 +548,100 @@ def _insert_inverse_clause(rest, inv_rel, src_id):
     return f"{trimmed} ({inv_rel}: {src_id})"
 
 
-def _rewrite_claim_line(raw_line, new_state=None, assign_id="", add_inverse=()):
-    """Edit one claim line in place, preserving its sentence and every non-claim detail."""
-    m = CLAIM_LINE_RE.match(raw_line)
+def _rewrite_claim_block(block_lines, new_state=None, assign_id="", add_inverse=()):
+    """Edit one (possibly wrapped) claim block in place, keeping words, indentation, and line endings."""
+    if not block_lines:
+        return block_lines
+    first_body, first_eol = _split_eol(block_lines[0])
+    m = CLAIM_HEAD_RE.match(first_body)
     if not m:
-        return raw_line
-    prefix, old_state, ws, rest, eol = m.group(1), m.group(2), m.group(3), m.group(4), m.group(5)
+        return list(block_lines)
+    parsed = parse_claim_block(block_lines)
+    pending_inv = [
+        (rel, src) for rel, src in add_inverse
+        if not (parsed and src in parsed["relations"].get(rel, []))
+    ]
+    prefix, old_state, ws, first_rest = m.group(1), m.group(2), m.group(3), m.group(4)
     state_out = new_state or old_state
-    id_prefix = f"[{assign_id}] " if assign_id and not CLAIM_PREFIX_RE.match(rest) else ""
-    rest_out = rest
-    for inv_rel, src_id in add_inverse:
-        rest_out = _insert_inverse_clause(rest_out, inv_rel, src_id)
-    return f"{prefix}[{state_out}]{ws}{id_prefix}{rest_out}{eol}"
+    needs_id = bool(assign_id and not (parsed and parsed["id"]) and not CLAIM_PREFIX_RE.match(first_rest))
+    id_prefix = f"[{assign_id}] " if needs_id else ""
+    if len(block_lines) == 1:
+        rest_out = f"{id_prefix}{first_rest}"
+        for inv_rel, src_id in pending_inv:
+            rest_out = _insert_inverse_clause(rest_out, inv_rel, src_id)
+        return [f"{prefix}[{state_out}]{ws}{rest_out}{first_eol}"]
+    out = [f"{prefix}[{state_out}]{ws}{id_prefix}{first_rest}{first_eol}", *block_lines[1:-1]]
+    last_body, last_eol = _split_eol(block_lines[-1])
+    for inv_rel, src_id in pending_inv:
+        last_body = _insert_inverse_clause(last_body, inv_rel, src_id)
+    out.append(f"{last_body}{last_eol}")
+    return out
 
 
-def _apply_claim_line_edits(path, edits_by_ord):
-    """Apply {ord: edit_spec} strictly inside ## Claims. Returns True if file bytes changed."""
-    raw = Path(path).read_text(encoding="utf-8")
+def _plan_claim_line_edits(path, edits_by_ord):
+    """Verify every target claim and compute new raw text, or None if unchanged. Writes nothing."""
+    raw = _read_raw_text(path)
     lines = raw.splitlines(keepends=True)
     span = _claims_section_line_range(lines)
     if span is None:
-        return False
+        if edits_by_ord:
+            raise ReconcileError(
+                "CLAIM_MISMATCH",
+                f"{path}: missing '## Claims' section",
+                "check `## Claims` headings and run `rnd check`",
+                exit_code=1,
+            )
+        return None
     start, end = span
-    changed = False
-    ord_idx = 0
-    for idx in range(start, end):
-        if parse_claim_line(lines[idx]) is None:
-            continue
-        spec = edits_by_ord.get(ord_idx)
-        ord_idx += 1
-        if not spec:
-            continue
-        updated = _rewrite_claim_line(
-            lines[idx],
+    blocks = list(_iter_claim_blocks(lines, start, end))
+    for ord_idx, spec in sorted(edits_by_ord.items()):
+        if ord_idx < 0 or ord_idx >= len(blocks):
+            raise ReconcileError(
+                "CLAIM_MISMATCH",
+                f"{path}: claim #{ord_idx} was not found inside the Claims section",
+                "check `## Claims` headings and run `rnd check`",
+                exit_code=1,
+            )
+        b_start, b_end = blocks[ord_idx]
+        live = parse_claim_block(lines[b_start:b_end])
+        exp_id = spec.get("expected_id", "")
+        exp_text = spec.get("expected_text")
+        if live is None or live["id"] != exp_id or (exp_text is not None and live["text"] != exp_text):
+            raise ReconcileError(
+                "CLAIM_MISMATCH",
+                f"{path}: line does not match parsed claim #{ord_idx} (expected id {exp_id!r})",
+                "check `## Claims` headings and run `rnd check`",
+                exit_code=1,
+            )
+
+    replacements = []
+    for ord_idx, spec in sorted(edits_by_ord.items()):
+        b_start, b_end = blocks[ord_idx]
+        old_block = lines[b_start:b_end]
+        updated = _rewrite_claim_block(
+            old_block,
             new_state=spec.get("state"),
             assign_id=spec.get("assign_id", ""),
             add_inverse=spec.get("add_inverse", ()),
         )
-        if updated != lines[idx]:
-            lines[idx] = updated
-            changed = True
-    if changed:
-        with open(path, "w", encoding="utf-8", newline="") as fh:
-            fh.write("".join(lines))
-    return changed
+        if updated != old_block:
+            replacements.append((b_start, b_end, updated))
+    if not replacements:
+        return None
+    new_lines = list(lines)
+    for b_start, b_end, updated in sorted(replacements, reverse=True):
+        new_lines[b_start:b_end] = updated
+    return "".join(new_lines)
+
+
+def _apply_claim_line_edits(path, edits_by_ord):
+    """Apply {ord: edit_spec} strictly inside the Claims section, keeping line endings."""
+    new_raw = _plan_claim_line_edits(path, edits_by_ord)
+    if new_raw is None:
+        return False
+    with open(path, "w", encoding="utf-8", newline="") as fh:
+        fh.write(new_raw)
+    return True
 
 
 def resolve_entry(root, target):
@@ -480,7 +687,7 @@ def assign_claim_ids(root, target):
             continue
         cid = make_claim_id(entry.id, c["text"], taken)
         taken.add(cid)
-        edits[ord_idx] = {"assign_id": cid}
+        edits[ord_idx] = {"assign_id": cid, "expected_id": "", "expected_text": c["text"]}
         assigned.append(cid)
     if edits:
         _apply_claim_line_edits(resolved, edits)
@@ -493,10 +700,13 @@ def reconcile_entry(root, target):
     entry, resolved, entries = resolve_entry(root, target)
     path_by_entry = {e.id: root / e.path for e in entries}
     explicit = {}
+    duplicate_ids = set()
     taken = set()
     for e in entries:
         for ord_idx, c in enumerate(e.claims):
             if c["id"]:
+                if c["id"] in explicit:
+                    duplicate_ids.add(c["id"])
                 explicit[c["id"]] = (e, ord_idx, c)
                 taken.add(c["id"])
     provisional = {}
@@ -512,9 +722,16 @@ def reconcile_entry(root, target):
     file_edits = {}  # entry_id -> {ord_idx: {"state": ..., "assign_id": ..., "add_inverse": [...]}}
     links = []
 
-    def slot(eid, ord_idx):
+    def slot(eid, ord_idx, expected_id, expected_text):
         return file_edits.setdefault(eid, {}).setdefault(
-            ord_idx, {"state": None, "assign_id": "", "add_inverse": []}
+            ord_idx,
+            {
+                "state": None,
+                "assign_id": "",
+                "add_inverse": [],
+                "expected_id": expected_id,
+                "expected_text": expected_text,
+            },
         )
 
     for src_ord, c in enumerate(entry.claims):
@@ -529,12 +746,19 @@ def reconcile_entry(root, target):
                 "",
             ) or make_claim_id(entry.id, c["text"], taken)
             taken.add(src_id)
-            slot(entry.id, src_ord)["assign_id"] = src_id
+            slot(entry.id, src_ord, "", c["text"])["assign_id"] = src_id
 
         for rel_name, tids in forward:
             inv_rel = INVERSE_OF[rel_name]
             new_state = RECONCILE_STATE[rel_name]
             for tid in tids:
+                if tid in duplicate_ids:
+                    raise ReconcileError(
+                        "DUPLICATE_CLAIM_ID",
+                        f"claim id {tid!r} appears more than once in the library",
+                        "run `rnd check` and resolve duplicate claim ids first",
+                        exit_code=1,
+                    )
                 found = explicit.get(tid) or provisional.get(tid)
                 if found is None:
                     raise ReconcileError(
@@ -558,7 +782,7 @@ def reconcile_entry(root, target):
                         "point the relation at another claim id",
                         exit_code=1,
                     )
-                dst_slot = slot(dst_entry.id, dst_ord)
+                dst_slot = slot(dst_entry.id, dst_ord, dst_claim["id"], dst_claim["text"])
                 if not dst_claim["id"]:
                     dst_slot["assign_id"] = tid
                 if new_state == "superseded":
@@ -576,9 +800,16 @@ def reconcile_entry(root, target):
                     "dst_entry": dst_entry.id,
                 })
 
-    changed_files = []
+    planned_writes = []
     for eid, edits in sorted(file_edits.items()):
         p = path_by_entry[eid]
-        if _apply_claim_line_edits(p, edits):
-            changed_files.append(p.relative_to(root).as_posix())
+        new_raw = _plan_claim_line_edits(p, edits)
+        if new_raw is not None:
+            planned_writes.append((p, new_raw))
+
+    changed_files = []
+    for p, new_raw in planned_writes:
+        with open(p, "w", encoding="utf-8", newline="") as fh:
+            fh.write(new_raw)
+        changed_files.append(p.relative_to(root).as_posix())
     return {"entry": entry.id, "links": links, "changed_files": changed_files}

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.2.0.0.0] - 2026-11-19
+
+- Add changelog fragments (rnd change/bump), bound numbers (rnd sync), claim ids and relations (rnd claims/reconcile), question files (rnd new-question/questions), local search-miss log (rnd stats --usage), and instrument/extras rules.
+
 ## [1.1.24.0.16] - 2026-11-19
 
 - site brief for the one-claim study: 'Can one claim with three sets of numbers remove a benchmark's shortcuts?'

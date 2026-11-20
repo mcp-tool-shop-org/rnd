@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.3.0.0.1] - 2026-11-20
+
+- Three Deep Research harvests filed: Colab TPUs for our open-weight work (seed 40), auditing a benchmark generator for answer cues (seed 41), and evaluating language-model seats that have a preview tool (seed 42), each with what it contradicts in our design.
+
 ## [1.3.0.0.0] - 2026-11-20
 
 - Add read-only rnd similar claim lookup and rnd digest history summary

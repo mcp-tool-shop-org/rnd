@@ -178,8 +178,12 @@ python -m rnd bump                                     # release PR: bump once, 
 With no files under `changes/`, `rnd bump [nano|micro|…] [--note …]` keeps its
 git-diff behaviour. Both `__init__.py` and `CHANGELOG.md` are staged through
 temp files and swapped with `os.replace`, rolling back `__init__.py` if the
-CHANGELOG swap fails and completing or refusing (`BAD_CHANGELOG`) an
-interrupted bump on re-run without bumping twice. `rnd check` reports any
+CHANGELOG swap fails. If a crash leaves `__init__.py` ahead of `CHANGELOG.md`,
+re-running at the matching level completes the bump and any other level
+refuses with `BAD_CHANGELOG`. One gap remains: a crash after both files are
+swapped but before the fragments under `changes/` are deleted leaves them in
+place, and a re-run would bump a second time, so delete those fragments by
+hand first. `rnd check` reports any
 malformed fragment as an error.
 
 ## Bound numbers
@@ -393,31 +397,56 @@ studio's workflow standards.
 
 ## Security and trust
 
-- **Data touched:** files inside this repo (`entries/`, `questions/`, `changes/`,
-  `instruments/`, `catalogs/`, `experiments/`, `datapacks/`, `docs/layout.json`),
-  the index `rnd.db` (or `--db` / `$RND_DB`) and its sibling miss log
-  `rnd.misses.jsonl` (see below). Outside this repo, `rnd watch` writes its
-  persistent seen-items file to `--state`, `$RND_WATCH_STATE` or
-  `Path.home() / ".rnd" / "watch-state.json"` (`~/.rnd/watch-state.json`),
-  where it stays across runs unless `--no-save` is passed, and `rnd raw`
-  (`ingest`, `private`, `relicense`) writes to the companion stores
-  `--public` / `$RND_DATA` (`../rnd-data`) and `--private` /
-  `$RND_DATA_PRIVATE` (`../rnd-data-private`). `rnd readouts` opens the
-  readouts knowledge bases **read-only**, `rnd collect` reads pinned commits
-  from `--clone` / `../<sibling>` without modifying it, `rnd sql` uses a
-  read-only connection, and `rnd similar` and `rnd digest` run in memory and
-  write nothing anywhere (no temporary files, working-tree edits or index
-  changes).
-- **Data not touched:** no files outside this repo except the explicit paths
-  named above (`rnd watch`'s state file unless `--no-save`, a caller-chosen
-  `--db` / `$RND_DB` and sibling `.misses.jsonl`, `rnd raw`'s `rnd-data` and
-  `rnd-data-private` companion stores, and read-only inputs to `readouts`,
-  `collect`, `datapack verify --copy`, `runs record --from` or `abmine`). It
-  stores no credentials and reads none.
+- **Data written**, by where it lands:
+  - **Inside this repo:** `rnd new` (one new file under `entries/` or `instruments/`, never
+    overwriting), `rnd new-question` (`questions/`), `rnd new-experiment`,
+    `rnd runs record` and `rnd collect <name>` (`experiments/<name>/`),
+    `rnd claims assign`, `rnd reconcile` and `rnd sync` (claim lines and bound
+    numbers in existing Markdown files), `rnd change` (`changes/`), `rnd bump`
+    (`mcptoolshop_rnd/__init__.py` and `CHANGELOG.md`, through temporary files
+    beside each, and it deletes the `changes/` fragments it used),
+    `rnd catalog sync` (`catalogs/<name>/catalog.json`), `rnd datapack build`
+    (`datapacks/<name>/datapack.json`) and `rnd layout` (`docs/layout.json`).
+  - **The index:** `rnd.db`, or the path given by `--db` or `$RND_DB`, with a
+    temporary `.db.tmp` file beside it while it is built. `rnd build` writes it,
+    and every command that reads the index (`search`, `show`, `list`, `tools`,
+    `stats`, `catalog`, `claims`, `questions`, `sql`, `runs`, `ledger`, `where`,
+    `probe`) rebuilds it first when a source file has changed. The miss log
+    `rnd.misses.jsonl` sits beside it (see below).
+  - **Your home folder:** `rnd watch` writes its seen-items file to `--state`, else
+    `$RND_WATCH_STATE`, else `~/.rnd/watch-state.json` (built in code as
+    `Path.home() / ".rnd" / "watch-state.json"`), where it stays across runs.
+    `--no-save` skips the write.
+  - **The raw-data stores, outside this repo:** `rnd raw ingest`, `rnd raw private` and
+    `rnd raw relicense` write to the public store (`--public`, else `$RND_DATA`,
+    else `../rnd-data`) and the private store (`--private`, else
+    `$RND_DATA_PRIVATE`, else `../rnd-data-private`). `rnd raw ingest` also puts
+    every file over 256 KB into the blob store, under `blobs/` in the folder
+    named by `$RND_DATA_STORE_D` or by the `"d"` entry of the public store's
+    `store.local.json` (there is no default; without one, ingest refuses). Blobs
+    are marked read-only. With `--link` a blob is a hard link to the source file,
+    so **the source file becomes read-only too**; without `--link` the source is
+    not changed. `rnd raw ingest --update` deletes a run's earlier small files in
+    the two stores before writing the new ones. `--dry-run` writes nothing.
+- **Read, never written:** `rnd readouts` (SQLite read-only mode), `rnd collect` source
+  clones (`git show`), `rnd raw verify`, `rnd datapack verify --copy`,
+  `rnd runs record --from`, `rnd abmine`, and `rnd similar` and `rnd digest`,
+  which work in memory and write nothing anywhere: no temporary file, no
+  working-tree, git index or `rnd.db` change.
+- **Outside the `rnd` command:** the package also ships
+  `mcptoolshop_rnd.localbuilders`, the harness of the local-builders
+  experiment. No `rnd` command runs it. Run directly (for example
+  `python -m mcptoolshop_rnd.localbuilders.runner`), on the rented machine it
+  was written for and partly as root, it creates, deletes and changes the
+  owner and permissions of files under the work, receipt and log paths its
+  caller passes, and its scorer uses a temporary folder in the operating
+  system's temp folder, removed when it finishes.
+- **Data not touched:** no `rnd` command writes, deletes or changes a file
+  anywhere else. It stores no credentials and reads none.
 - **Network:** none, except `rnd catalog sync`, `rnd probe` and `rnd watch`,
   which read public metadata or call the GitHub API through your own `gh` CLI
   login when you run them.
-- **Permissions:** ordinary file access. No elevated rights, no background service.
+- **Permissions:** ordinary file access. No `rnd` command needs elevated rights, and there is no background service.
 - **Local-only usage log:** nothing is collected or sent anywhere. When `rnd search`
   returns no matches, it appends one line (UTC time and query) to `rnd.misses.jsonl`
   beside `rnd.db` (git-ignored in the repo; with `--db foo.db`, `foo.misses.jsonl`

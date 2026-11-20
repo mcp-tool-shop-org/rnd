@@ -631,7 +631,9 @@ class DigestCommandTests(CliBase):
 
         empty_tmp = Path(tempfile.mkdtemp())
         self.addCleanup(shutil.rmtree, empty_tmp, True)
-        with mock.patch.dict(os.environ, {"TMP": str(empty_tmp), "TEMP": str(empty_tmp), "TMPDIR": str(empty_tmp)}):
+        # tempfile caches its folder on first use, so the environment alone would not redirect it: set the cache too.
+        with mock.patch.dict(os.environ, {"TMP": str(empty_tmp), "TEMP": str(empty_tmp), "TMPDIR": str(empty_tmp)}), \
+                mock.patch.object(tempfile, "tempdir", str(empty_tmp)):
             code, out, err = self.run_cli("digest", "--since", "v0.1.0", "--json")
         self.assertEqual(code, 0, err)
         rep = json.loads(out)

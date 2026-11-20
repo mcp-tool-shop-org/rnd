@@ -1370,7 +1370,8 @@ def build_parser():
     s = add("raw", cmd_raw, "ingest raw run outputs into rnd-data (public) and rnd-data-private, verify them, or "
             "reapply a rules file's licences", json_flag=False)
     s.add_argument("action", choices=("ingest", "private", "verify", "relicense"))
-    s.add_argument("source", nargs="?", help="ingest/private: the folder to read (never changed)")
+    s.add_argument("source", nargs="?", help="ingest/private: the folder to read (its files are not changed, except that --link makes each "
+                   "hard-linked file read-only)")
     s.add_argument("--prefix", help="ingest, relicense: the run ids' first part, e.g. receipts")
     s.add_argument("--as", dest="name", help="private: the folder under private/ in rnd-data-private")
     s.add_argument("--reasons", help="a JSON file mapping paths or folder/ prefixes to a private reason")
@@ -1378,7 +1379,8 @@ def build_parser():
                    "relicense: the file whose licences to reapply")
     s.add_argument("--exclude", action="append", help="a path or folder to leave out (repeatable)")
     s.add_argument("--link", action="store_true",
-                   help="ingest: hard-link blobs instead of copying, only from a read-only snapshot on the store's volume")
+                   help="ingest: hard-link blobs instead of copying, only from a read-only snapshot on the store's volume; "
+                   "each linked source file becomes read-only")
     s.add_argument("--update", action="store_true",
                    help="ingest: replace a run whose source changed since it was ingested (git keeps the old manifest)")
     s.add_argument("--dry-run", action="store_true", help="plan and count; write nothing")

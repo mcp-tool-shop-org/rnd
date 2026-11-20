@@ -1,5 +1,6 @@
 """The SQLite index (rnd.db). Always rebuildable from the files; never edited."""
 
+from collections import Counter
 import hashlib
 import json
 import os
@@ -8,7 +9,7 @@ import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import catalog, model, runs
+from . import catalog, model, questions, runs
 
 SCHEMA = """
 CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT);
@@ -19,14 +20,20 @@ CREATE TABLE entries (
 CREATE TABLE entry_fields (entry_id TEXT, field TEXT);
 CREATE TABLE entry_tags (entry_id TEXT, tag TEXT);
 CREATE TABLE sources (entry_id TEXT, ord INTEGER, tier TEXT, url TEXT, label TEXT);
-CREATE TABLE claims (entry_id TEXT, ord INTEGER, confidence TEXT, text TEXT, via TEXT);
+CREATE TABLE claims (entry_id TEXT, ord INTEGER, id TEXT, state TEXT, confidence TEXT, text TEXT, via TEXT, relations TEXT);
+CREATE TABLE claim_relations (src_entry_id TEXT, src_id TEXT, rel TEXT, dst_id TEXT, dst_entry_id TEXT);
 CREATE TABLE links (src TEXT, dst TEXT);
+CREATE TABLE questions (
+  id TEXT PRIMARY KEY, path TEXT, title TEXT, date TEXT,
+  status TEXT, fields TEXT, tags TEXT, answered_by TEXT, body TEXT);
+CREATE TABLE question_fields (question_id TEXT, field TEXT);
 CREATE TABLE catalogs (name TEXT PRIMARY KEY, title TEXT, upstream TEXT, ref TEXT,
   synced_at TEXT, license TEXT, count INTEGER, lanes TEXT);
 CREATE TABLE catalog_items (catalog TEXT, name TEXT, family TEXT, lanes TEXT, description TEXT,
   license TEXT, path TEXT, url TEXT, bytes INTEGER, fit TEXT, note TEXT, family_note TEXT,
   PRIMARY KEY (catalog, name));
 CREATE VIRTUAL TABLE entries_fts USING fts5(id UNINDEXED, title, tags, body, tokenize='porter unicode61');
+CREATE VIRTUAL TABLE questions_fts USING fts5(id UNINDEXED, title, fields, body, tokenize='porter unicode61');
 CREATE VIRTUAL TABLE catalog_fts USING fts5(catalog UNINDEXED, name, family, description, note, lanes,
   tokenize='porter unicode61');
 CREATE TABLE experiments (name TEXT PRIMARY KEY, status TEXT, template TEXT, design TEXT);
@@ -42,11 +49,28 @@ CREATE INDEX idx_copies ON copies(sha256);
 CREATE INDEX idx_manifest_sha ON manifest_files(sha256);
 CREATE INDEX idx_fields ON entry_fields(field);
 CREATE INDEX idx_tags ON entry_tags(tag);
+CREATE INDEX idx_claims_id ON claims(id);
+CREATE INDEX idx_claims_state ON claims(state);
+CREATE INDEX idx_question_fields ON question_fields(field);
 """
 
 
 def default_db(root):
     return Path(os.environ.get("RND_DB") or Path(root) / "rnd.db")
+
+
+def misses_path(root, db_path=None):
+    return Path(db_path or default_db(root)).with_suffix(".misses.jsonl")
+
+
+def usage_disabled():
+    return os.environ.get("RND_NO_USAGE", "").strip().lower() in ("1", "true", "yes")
+
+
+def _guard_not_instruments(root, path):
+    inst = (Path(root) / "instruments").resolve()
+    if Path(path).resolve().is_relative_to(inst):
+        raise ValueError(f"refusing to write {path} inside instruments/")
 
 
 SCHEMA_ID = hashlib.sha256(SCHEMA.encode("utf-8")).hexdigest()[:12]
@@ -55,7 +79,7 @@ SCHEMA_ID = hashlib.sha256(SCHEMA.encode("utf-8")).hexdigest()[:12]
 def fingerprint(root):
     """Cheap change detector over every file the index is built from, and the schema it's built with: an rnd
     upgrade that changes the tables rebuilds the index instead of serving the old one."""
-    paths = list(model.entry_paths(root))
+    paths = list(model.entry_paths(root)) + list(questions.question_paths(root))
     for d in catalog.catalog_dirs(root):
         paths.extend(p for p in d.glob("*.json"))
     paths.extend(runs.source_paths(root))
@@ -66,7 +90,12 @@ def fingerprint(root):
 def build(root, db_path=None):
     """Rebuild the index. Returns (counts, problems). Errors leave the old DB in place."""
     db_path = Path(db_path or default_db(root))
+    _guard_not_instruments(root, db_path)
     entries, problems = model.load_all(root)
+    known_claim_ids = {c["id"] for e in entries for c in e.claims if c["id"]}
+    claim_owner = {c["id"]: e.id for e in entries for c in e.claims if c["id"]}
+    qs, q_problems = questions.load_all(root, known_claim_ids=known_claim_ids)
+    problems.extend(q_problems)
     cats = []
     for d in catalog.catalog_dirs(root):
         meta, items, cat_problems = catalog.load(d)
@@ -94,11 +123,29 @@ def build(root, db_path=None):
             con.executemany("INSERT INTO entry_tags VALUES (?,?)", [(e.id, t) for t in e.tags])
             con.executemany("INSERT INTO sources VALUES (?,?,?,?,?)",
                             [(e.id, n, s["tier"], s["url"], s["label"]) for n, s in enumerate(e.sources)])
-            con.executemany("INSERT INTO claims VALUES (?,?,?,?,?)",
-                            [(e.id, n, c["confidence"], c["text"], c["via"]) for n, c in enumerate(e.claims)])
+            con.executemany(
+                "INSERT INTO claims VALUES (?,?,?,?,?,?,?,?)",
+                [(e.id, n, c["id"] or None, c["state"], c["confidence"], c["text"], c["via"],
+                  json.dumps(c["relations"], sort_keys=True)) for n, c in enumerate(e.claims)],
+            )
+            rel_rows = [
+                (e.id, c["id"] or "", rel_name, tid, claim_owner.get(tid, ""))
+                for c in e.claims
+                for rel_name, tids in c["relations"].items()
+                for tid in tids
+            ]
+            if rel_rows:
+                con.executemany("INSERT INTO claim_relations VALUES (?,?,?,?,?)", rel_rows)
             con.executemany("INSERT INTO links VALUES (?,?)", [(e.id, l) for l in e.links])
             con.execute("INSERT INTO entries_fts VALUES (?,?,?,?)",
                         (e.id, e.title, " ".join(e.tags + e.fields), e.body))
+        for q in qs:
+            con.execute("INSERT INTO questions VALUES (?,?,?,?,?,?,?,?,?)", (
+                q.id, q.path, q.title, q.date, q.status,
+                json.dumps(q.fields), json.dumps(q.tags), json.dumps(q.answered_by), q.body))
+            con.executemany("INSERT INTO question_fields VALUES (?,?)", [(q.id, f) for f in q.fields])
+            con.execute("INSERT INTO questions_fts VALUES (?,?,?,?)",
+                        (q.id, q.title, " ".join(q.fields + q.tags), q.body))
         n_items = 0
         for meta, items in cats:
             con.execute("INSERT INTO catalogs VALUES (?,?,?,?,?,?,?,?)", (
@@ -125,7 +172,7 @@ def build(root, db_path=None):
     finally:
         con.close()
     os.replace(tmp, db_path)
-    return {"entries": len(entries), "catalogs": len(cats), "catalog_items": n_items,
+    return {"entries": len(entries), "questions": len(qs), "catalogs": len(cats), "catalog_items": n_items,
             "experiments": len(record_rows["experiments"]), "runs": len(record_rows["runs"]),
             "files": len(record_rows["files"])}, problems
 
@@ -133,6 +180,7 @@ def build(root, db_path=None):
 def connect(root, db_path=None, rebuild=True):
     """Open the index, rebuilding first when any source file changed."""
     db_path = Path(db_path or default_db(root))
+    _guard_not_instruments(root, db_path)
     problems = []
     if rebuild:
         stale = True
@@ -183,6 +231,24 @@ def exact_snippet(words, text, width=60):
     return ""
 
 
+def entry_flagged_claims(con, entry_id):
+    """Return superseded or disputed claims on an entry, with any replacing/contradicting claim ids."""
+    out = []
+    for r in con.execute(
+        "SELECT id, state, text, relations FROM claims "
+        "WHERE entry_id=? AND state IN ('superseded', 'disputed') ORDER BY ord",
+        (entry_id,),
+    ):
+        rels = json.loads(r["relations"] or "{}")
+        rel_key = "superseded-by" if r["state"] == "superseded" else "contradicted-by"
+        targets = []
+        for tid in rels.get(rel_key, []):
+            owner = con.execute("SELECT entry_id FROM claims WHERE id=?", (tid,)).fetchone()
+            targets.append({"id": tid, "entry_id": owner["entry_id"] if owner else ""})
+        out.append({"id": r["id"] or "", "state": r["state"], "text": r["text"], "by": targets})
+    return out
+
+
 def search(con, text, limit=10, raw=False, kind=None, field=None, catalogs=True, entries=True, exact=False):
     """Full-text search. The index stems words (`pair` finds `pairs`, `paired`); with `exact`, results are
     narrowed to rows holding every query word whole and in the same case, so `PAIR` finds the product,
@@ -208,6 +274,8 @@ def search(con, text, limit=10, raw=False, kind=None, field=None, catalogs=True,
         sql += " ORDER BY rank LIMIT ?"
         args.append(fetch)
         found_entries = _narrow([dict(r) for r in con.execute(sql, args)], words, ("ft", "fg", "fb"), "fb", limit)
+        for r in found_entries:
+            r["flagged_claims"] = entry_flagged_claims(con, r["id"])
     if catalogs and not kind and not field:
         sql = ("SELECT c.catalog, c.name, c.family, c.lanes, c.fit, c.url, "
                "snippet(catalog_fts, 3, '[', ']', ' … ', 14) AS snip, bm25(catalog_fts, 0, 6, 3, 1, 2, 2) AS rank, "
@@ -216,6 +284,71 @@ def search(con, text, limit=10, raw=False, kind=None, field=None, catalogs=True,
                "WHERE catalog_fts MATCH ? ORDER BY rank LIMIT ?")
         found_items = _narrow([dict(r) for r in con.execute(sql, [q, fetch])], words, ("fn", "ff", "fd", "fo"), "fd", limit)
     return found_entries, found_items
+
+
+def search_questions(con, text, limit=10, raw=False, field=None, exact=False):
+    """Full-text search across open/answered question files."""
+    q = fts_query(text, raw)
+    if not q:
+        return []
+    words = exact_words(text) if exact and not raw else []
+    fetch = min(max(limit * 20, 200), 2000) if words else limit
+    sql = ("SELECT q.id, q.title, q.status, q.date, q.path, q.fields, q.answered_by, "
+           "snippet(questions_fts, 3, '[', ']', ' … ', 12) AS snip, bm25(questions_fts, 0, 8, 4, 1) AS rank, "
+           "questions_fts.title AS ft, questions_fts.fields AS fg, questions_fts.body AS fb "
+           "FROM questions_fts JOIN questions q ON q.id = questions_fts.id WHERE questions_fts MATCH ?")
+    args = [q]
+    if field:
+        sql += " AND q.id IN (SELECT question_id FROM question_fields WHERE field = ?)"
+        args.append(field)
+    sql += " ORDER BY rank LIMIT ?"
+    args.append(fetch)
+    rows = _narrow([dict(r) for r in con.execute(sql, args)], words, ("ft", "fg", "fb"), "fb", limit)
+    for r in rows:
+        r["fields"] = json.loads(r["fields"] or "[]")
+        r["answered_by"] = json.loads(r["answered_by"] or "[]")
+    return rows
+
+
+def record_search_miss(root, query_text, db_path=None, now=None):
+    """Append one local line {time, query} beside rnd.db when a search returns nothing."""
+    q = str(query_text or "").strip()
+    if usage_disabled() or not q:
+        return False
+    mp = misses_path(root, db_path)
+    _guard_not_instruments(root, mp)
+    ts = now or datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+    mp.parent.mkdir(parents=True, exist_ok=True)
+    with open(mp, "a", encoding="utf-8", newline="\n") as fh:
+        fh.write(json.dumps({"time": ts, "query": q}, ensure_ascii=False) + "\n")
+    return True
+
+
+def read_search_misses(root, db_path=None, top_n=10):
+    """Return total zero-hit search count and most frequent missed queries from the local log."""
+    mp = misses_path(root, db_path)
+    if not mp.is_file():
+        return {"path": mp.name, "misses": 0, "top_misses": []}
+    counts = Counter()
+    total = 0
+    for line in mp.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        q = str(row.get("query") or "").strip()
+        if q:
+            counts[q] += 1
+            total += 1
+    top = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[:top_n]
+    return {
+        "path": mp.name,
+        "misses": total,
+        "top_misses": [{"query": q, "count": n} for q, n in top],
+    }
 
 
 def _narrow(rows, words, text_keys, snip_key, limit):

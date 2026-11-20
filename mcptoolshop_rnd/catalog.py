@@ -8,6 +8,7 @@ Each catalogue lives in catalogs/<name>/:
 
 import base64
 import json
+import re
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
@@ -16,6 +17,7 @@ from . import frontmatter
 
 FITS = ("direct", "adjacent", "general")
 BATCH = 40
+NAME_RE = re.compile(r"^[a-z0-9][a-z0-9._-]*$")
 
 
 class CatalogError(RuntimeError):
@@ -91,7 +93,13 @@ def _gh(args):
 
 
 def sync(root, name, log=print):
-    cat_dir = Path(root) / "catalogs" / name
+    if not isinstance(name, str) or not NAME_RE.match(name):
+        raise CatalogError("CATALOG_UNKNOWN", f"invalid catalogue name {name!r}", "use a folder name under catalogs/")
+    cat_dir = (Path(root) / "catalogs" / name).resolve()
+    catalogs_root = (Path(root) / "catalogs").resolve()
+    inst_root = (Path(root) / "instruments").resolve()
+    if not cat_dir.is_relative_to(catalogs_root) or cat_dir.is_relative_to(inst_root):
+        raise CatalogError("CATALOG_UNKNOWN", f"invalid catalogue path {name!r}")
     source = _read_json(cat_dir / "source.json")
     if source is None:
         raise CatalogError("CATALOG_UNKNOWN", f"no catalogs/{name}/source.json",

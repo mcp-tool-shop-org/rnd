@@ -70,9 +70,12 @@ python -m rnd readouts splice glitch --any  # search the readouts knowledge base
 python -m rnd catalog lanes                 # NVIDIA skills by lane, with studio fit
 python -m rnd catalog list --fit adjacent   # skills worth using when the need arises
 python -m rnd new "Paper title" --kind paper --field audio --tag pitch
+python -m rnd new-question "Why does X happen?" --field audio
+python -m rnd sync --check                  # verify numbers bound to experiments/<id>/results.json
 python -m rnd check                         # validate every file (exit 1 on errors)
 python -m rnd sql "SELECT tier, count(*) FROM sources GROUP BY tier"
-python -m rnd bump --note "what changed"  # micro version bump + CHANGELOG section
+python -m rnd change "what changed"         # add a changelog fragment under changes/ (nano by default)
+python -m rnd bump --note "release note"    # release PR: apply changes/ fragments, bump version + CHANGELOG
 ```
 
 Every listing command takes `--json` for agents. `rnd.cmd` (Windows) and
@@ -97,9 +100,10 @@ both are installed it can replace the alias. The `rnd` command and
 
 The library changes daily, so versions have five segments,
 `MAJOR.MINOR.PATCH.MICRO.NANO`. The first three version the `rnd` tool; MICRO marks a
-structural library change and NANO an ordinary update. `rnd bump` raises the
-last segment by default and writes a CHANGELOG section from the files changed
-since the last tag, so each update gets its own small tagged version.
+structural library change and NANO an ordinary update. Ordinary updates add a
+changelog fragment under `changes/` via `rnd change`; at release time, `rnd bump`
+consumes all fragments, moves the version once by the highest fragment level,
+and writes one CHANGELOG section.
 
 Exit codes: `0` ok · `1` invalid library files · `2` usage error or not found ·
 `3` runtime failure (an external tool, or an unexpected error). Errors print a
@@ -110,9 +114,11 @@ code, a message and a hint; `--debug` adds the traceback.
 | Path | What | Who edits |
 |------|------|-----------|
 | `entries/YYYY/*.md` | Research entries: the source of truth | people and agents |
-| `experiments/<name>/` | Harnesses, pinned inputs and result receipts for rig measurements | people and agents |
+| `questions/*.md` | Open and answered research questions | people and agents |
+| `changes/*.md` | Unreleased changelog fragments (`rnd change`) | people and agents (`rnd bump` consumes) |
+| `experiments/<name>/` | Harnesses, pinned inputs, `results.json`, and result receipts | people and agents |
 | `experiments/<name>/collect.json` | Records collected from a tool repository at pinned commits (`rnd collect`) | people |
-| `instruments/*.md` | Studio tools and protocols the seat can call (`kind: instrument`) | people and agents |
+| `instruments/*.md` | Studio tools and protocols the seat can call (`kind: instrument`) | R&D seat only (reviewed diff) |
 | `catalogs/<name>/source.json` | Where a catalogue comes from | people |
 | `catalogs/<name>/catalog.json` | Pinned snapshot from `rnd catalog sync` | generated; never hand-edit |
 | `catalogs/<name>/review.json` | Studio fit and notes per family and item | people |
@@ -122,6 +128,7 @@ code, a message and a hint; `--debug` adds the traceback.
 | `mcptoolshop_rnd/` | The CLI | code |
 | `rnd/` | Compatibility alias for `mcptoolshop_rnd` | code |
 | `rnd.db` | SQLite FTS5 index, rebuilt automatically when files change | generated; not in git |
+| `rnd.misses.jsonl` | Local zero-hit search log beside `rnd.db` (`RND_NO_USAGE=1` disables) | generated; not in git |
 
 ## Entry format
 
@@ -141,7 +148,7 @@ tags: [cuda-graphs, pytorch]
 ## Studio relevance
 ## Claims
 - [unverified] A checkable statement.
-- [verified] A checked statement. (via: what checked it, date)
+- [verified] [c-a1b2c3d4] A checked statement. (via: what checked it, date)
 ## Sources
 - [primary] https://… — publisher
 ```
@@ -149,9 +156,98 @@ tags: [cuda-graphs, pytorch]
 - **Source tiers:** `primary` (vendor docs, papers, repos), `secondary`
   (reputable write-ups), `aggregator` (summary sites, AI search output),
   `user` (supplied by a person: slides, notes), `rig` (measured on our machines).
-- **Claim confidence:** `unverified`, `verified`, `disputed`, `wrong`. A
-  `verified` or `wrong` claim must say what checked it with `(via: …)`.
+- **Claim confidence:** `unverified`, `verified`, `disputed`, `wrong`,
+  `superseded`. A `verified` or `wrong` claim must say what checked it with
+  `(via: …)`.
 - `[[entry-id]]` links entries; `rnd show` lists backlinks.
+
+## Changelog fragments
+
+Updates do not edit `mcptoolshop_rnd/__init__.py` or `CHANGELOG.md` directly, so
+parallel branches never collide on the version line:
+
+```bash
+python -m rnd change "Add study of XYZ"                # writes changes/YYYY-MM-DD-<hex>-<slug>.md (level: nano)
+python -m rnd change "New tool feature" --level minor  # levels: nano | micro | patch | minor | major
+python -m rnd bump --dry-run                           # preview version bump from changes/ fragments
+python -m rnd bump                                     # release PR: bump once, update CHANGELOG.md, delete fragments
+```
+
+With no files under `changes/`, `rnd bump [nano|micro|…] [--note …]` keeps its
+git-diff behaviour. `rnd check` reports any malformed fragment as an error.
+
+## Bound numbers
+
+An experiment can keep public-safe summary numbers in
+`experiments/<id>/results.json` and bind numbers in entries, briefs or
+experiment notes directly after the literal:
+
+```markdown
+The judge scored 84.2%<!-- rnd:experiments/e4b/results.json#accuracy:.1% --> on the held-out split.
+```
+
+- Raw Markdown, `grep` and the SQLite index keep the plain literal (`84.2%`);
+  GitHub and Starlight render `84.2%` with no visible marker or link.
+- `rnd sync [paths…]` rewrites bound literals from `results.json` using the
+  Python format spec; `rnd sync --check` exits `1` without writing if any
+  literal differs.
+- `rnd check` treats any out-of-sync bound literal, missing file or missing key
+  as an error, and warns on `[verified]` claims whose `(via: …)` names a repo
+  experiment while still holding unbound numbers.
+
+## Claim ids and links
+
+Claims can carry stable deterministic `c-<hex>` ids and explicit relations
+(`supersedes`, `contradicts`, `supports`) to older claims by id:
+
+```bash
+python -m rnd claims                               # list indexed claims (--state superseded, --json)
+python -m rnd claims assign <entry>                # add deterministic c-<hex> ids to one entry's claims
+python -m rnd reconcile <entry>                    # mark older claims (superseded / disputed / supported-by)
+```
+
+`rnd reconcile <entry>` writes only the id (if missing), updated state and
+inverse relation (`superseded-by`, `contradicted-by`, `supported-by`) on the
+older claim's line in its own file without touching its sentence or any other
+line. `rnd check` errors on broken target ids or one-sided links and hints to
+run `rnd reconcile`. `rnd search` and `rnd show` mark `superseded` and
+`disputed` claims and name the claim that replaced or contradicted them.
+
+## Open questions
+
+Open questions live as individual Markdown files under `questions/` with status
+`open`, `investigating`, `answered` or `parked`:
+
+```bash
+python -m rnd new-question "Does X hold on Y?" --field systems
+python -m rnd questions --status open --json
+```
+
+When a question's `status` is `answered`, its frontmatter `answered_by` list
+must name at least one existing claim id; `rnd check` treats an `answered`
+question without an existing claim id as an error. Questions are indexed in
+`rnd.db` and returned by `rnd search` and `rnd show`.
+
+## Local search-miss log
+
+When `rnd search` returns no matches, it appends one JSON line (`time` and
+`query`) to a local `.misses.jsonl` file beside `rnd.db` (`rnd.misses.jsonl` in
+the repo root, git-ignored; or `<db>.misses.jsonl` beside `--db` / `RND_DB`).
+Nothing else is recorded, nothing is ever sent over the network, `RND_NO_USAGE=1`
+switches logging off, and deleting the file removes it completely.
+`rnd stats --usage` prints the total miss count and the most frequent missed
+queries.
+
+## Instrument files and optional extras
+
+- **Instrument files (`instruments/*.md`):** edited only by the R&D seat in a
+  reviewed diff whose description lists each instrument file changed, never by a
+  step or command that summarises outside content (`rnd watch`, `rnd probe`,
+  `rnd collect`, `rnd catalog sync`).
+- **Core dependencies and extras:** `rnd`'s core stays Python standard library
+  only. Any optional extra lives in an opt-in group and is imported lazily; a
+  command that needs a missing extra fails with `MISSING_EXTRA` and an install
+  hint.
 
 ## Data packs
 
@@ -254,16 +350,21 @@ studio's workflow standards.
 
 ## Security and trust
 
-- **Data touched:** files inside this repo (`entries/`, `instruments/`,
-  `catalogs/`, `experiments/`) and the index `rnd.db`, which it rebuilds. `rnd
-  readouts` opens the readouts knowledge bases **read-only**. `rnd sql` runs
-  against a read-only connection.
+- **Data touched:** files inside this repo (`entries/`, `questions/`, `changes/`,
+  `instruments/`, `catalogs/`, `experiments/`), the index `rnd.db` and its
+  sibling local miss log `rnd.misses.jsonl`. `rnd readouts` opens the readouts
+  knowledge bases **read-only**. `rnd sql` runs against a read-only connection.
 - **Data not touched:** nothing outside the repo and the readouts checkout. It
   stores no credentials and reads none.
-- **Network:** none, except `rnd catalog sync`, which calls the GitHub API
-  through your own `gh` CLI login when you run it.
+- **Network:** none, except `rnd catalog sync`, `rnd probe` and `rnd watch`,
+  which read public metadata or call the GitHub API through your own `gh` CLI
+  login when you run them.
 - **Permissions:** ordinary file access. No elevated rights, no background service.
-- **No telemetry.** Nothing is collected or sent.
+- **Local-only usage log:** nothing is collected or sent anywhere. When `rnd search`
+  returns no matches, it appends one line (UTC time and query) to `rnd.misses.jsonl`
+  beside `rnd.db` (git-ignored in the repo, or `<db>.misses.jsonl` beside `--db` /
+  `$RND_DB`). Set `RND_NO_USAGE=1` to turn it off, and delete `.misses.jsonl` at any
+  time to clear it. No other usage data is recorded.
 - **Public repo hygiene:** before every push, the tree is scanned for
   home-directory paths and operator identity.
 

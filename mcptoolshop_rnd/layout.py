@@ -81,16 +81,22 @@ def library_files(root: Path) -> list[str]:
     """Every file git would commit (tracked, or untracked and not ignored), as POSIX paths relative to root.
 
     Without git (a plain copy of the library) every file is walked, skipping .git and staging/ folders."""
+    def _keep(p: str) -> bool:
+        return p != "rnd.db" and not p.endswith((".db.tmp", ".misses.jsonl"))
+
     try:
         out = subprocess.run(["git", "-C", str(root), "ls-files", "-z", "--cached", "--others", "--exclude-standard"],
                              capture_output=True, check=True, timeout=60).stdout
         files = sorted({p for p in out.decode("utf-8").split("\0") if p})
-        return [p for p in files if (root / p).is_file()]
+        return [p for p in files if _keep(p) and (root / p).is_file()]
     except (OSError, subprocess.SubprocessError):
         found = []
         for d, dirs, names in os.walk(root):
             dirs[:] = [x for x in dirs if x not in (".git", "staging", "node_modules", ".venv", "__pycache__")]
-            found += [(Path(d) / n).relative_to(root).as_posix() for n in names]
+            for n in names:
+                rel = (Path(d) / n).relative_to(root).as_posix()
+                if _keep(rel):
+                    found.append(rel)
         return sorted(found)
 
 

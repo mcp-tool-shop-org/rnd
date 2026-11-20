@@ -121,14 +121,14 @@ def spec_problems(spec) -> list[str]:
             out.append(f"{where} is an object")
             continue
         path = s.get("path")
-        if not isinstance(path, str) or not path or path.startswith("/") or ".." in path.split("/"):
+        if not isinstance(path, str) or not path or path.startswith("/") or "\\" in path or ".." in path.split("/"):
             out.append(f"{where}.path is a repository-relative path")
         if not isinstance(s.get("commit"), str) or not SHA_RE.match(s["commit"]):
             out.append(f"{where}.commit is a full 40-hex commit")
         if not isinstance(s.get("sha256"), str) or not SHA256_RE.match(s["sha256"]):
             out.append(f"{where}.sha256 is the 64-hex SHA-256 of the source bytes")
         o = s.get("out")
-        if not isinstance(o, str) or not o.endswith(".json") or o.startswith("/") or ".." in o.split("/"):
+        if not isinstance(o, str) or not o.endswith(".json") or o.startswith("/") or "\\" in o or ".." in o.split("/"):
             out.append(f"{where}.out is a .json path inside the experiment folder")
         elif o in outs:
             out.append(f"{where}.out {o} is written twice")
@@ -211,8 +211,13 @@ def run(root: Path, name: str, clone: Path | None = None, check: bool = False) -
     module = load_module(exp_dir, spec)
     results = [collect_one(exp_dir, spec, source, clone, module) for source in spec["sources"]]
     report = {"experiment": name, "repo": spec["repo"], "files": [], "drift": []}
+    exp_resolved = exp_dir.resolve()
+    inst_resolved = (root / "instruments").resolve()
     for out, text in results:
         target = exp_dir / out
+        target_res = target.resolve()
+        if not target_res.is_relative_to(exp_resolved) or target_res.is_relative_to(inst_resolved):
+            raise CollectError("COLLECT_BAD_SPEC", f"{out} escapes experiments/{name}/")
         if check:
             current = target.read_bytes() if target.is_file() else None
             if current != text.encode("utf-8"):

@@ -66,7 +66,7 @@ and existing entries are not rewritten in bulk.
 
 ### `questions`
 
-Lists the open-question files under `questions/`. Filters: `--status
+Lists the question files under `questions/`. Filters: `--status
 open|investigating|answered|parked`, `--field`. `--json` for machine-readable
 output.
 

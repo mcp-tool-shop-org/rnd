@@ -11,8 +11,9 @@ sidebar:
   `changes/`, `instruments/`, `catalogs/`, `experiments/`), the generated index
   `rnd.db` and, beside it, the local miss log `rnd.misses.jsonl` (see below).
   `rnd new` writes one new entry file and refuses to overwrite. `rnd catalog sync`
-  rewrites a generated `catalog.json`. `rnd sync`, `rnd claims assign` and
-  `rnd reconcile` rewrite only the lines they name in existing Markdown files.
+  rewrites a generated `catalog.json`. `rnd sync` rewrites bound numbers,
+  `rnd claims assign` adds claim ids in the named entry, and `rnd reconcile`
+  updates only the cited claim lines in existing Markdown files.
 - **Reads only:** the readouts knowledge bases, opened in SQLite's read-only
   mode. `rnd sql` also uses a read-only connection.
 

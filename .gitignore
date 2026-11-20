@@ -1,6 +1,8 @@
 rnd.db
 rnd.db.tmp
 *.db.tmp
+rnd.misses.jsonl
+*.misses.jsonl
 __pycache__/
 *.pyc
 .venv/

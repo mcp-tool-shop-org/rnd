@@ -12,12 +12,12 @@
 - [x] `[all]` SECURITY.md exists (report email, supported versions, response timeline) (2026-10-07) — `shipcheck security-docs` executed
 - [x] `[all]` README includes threat model paragraph (data touched, data NOT touched, permissions required) (2026-10-07) — README "Security and trust"
 - [x] `[all]` No secrets, tokens, or credentials in source or diagnostics output (2026-10-07) — `shipcheck secrets` skips (no publishable package); identity scan RESULT CLEAN on the tracked tree
-- [x] `[all]` No telemetry by default (2026-10-07) — stated in README and SECURITY.md
+- [x] `[all]` No telemetry sent (2026-11-19) — nothing is collected or sent; one local git-ignored file (`rnd.misses.jsonl` beside `rnd.db`) records zero-hit search queries unless `RND_NO_USAGE=1` (stated in README)
 
 ### Default safety posture
 
-- [x] `[cli|mcp|desktop]` Dangerous actions (kill, delete, restart) require explicit `--allow-*` flag (2026-10-07) — none exist: rnd never deletes, kills or restarts; writes are rnd.db, a new entry file, and catalog.json on an explicit `catalog sync`
-- [x] `[cli|mcp|desktop]` File operations constrained to known directories (2026-10-07) — repo tree plus `--db`/$RND_DB; readouts opened read-only
+- [x] `[cli|mcp|desktop]` Dangerous actions (kill, delete, restart) require explicit `--allow-*` flag (2026-10-07) — none exist: rnd never kills or restarts; writes are `rnd.db`, its sibling `rnd.misses.jsonl`, `changes/*.md` (consumed by `rnd bump`), `questions/*.md`, entries/bound literals/claim links on explicit commands, and `catalog.json` on `catalog sync`
+- [x] `[cli|mcp|desktop]` File operations constrained to known directories (2026-11-19) — repo tree plus `--db`/$RND_DB (and sibling `.misses.jsonl`), `instruments/` protected from automated writes; readouts opened read-only
 - [ ] `[mcp]` SKIP: not an MCP server
 - [ ] `[mcp]` SKIP: not an MCP server
 

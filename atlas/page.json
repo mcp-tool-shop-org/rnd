@@ -84,41 +84,54 @@
   ],
   "changes": {
     "fileCounts": {
-      "added": 72,
-      "changed": 12,
+      "added": 12,
+      "changed": 16,
       "moved": 0,
-      "parts": 7,
+      "parts": 8,
       "removed": 0
     },
     "items": [
       {
-        "kind": "import-added",
-        "sentence": "tests now imports licences.",
+        "kind": "landing",
+        "sentence": "CHANGELOG.md is now also read by mcptoolshop_rnd/cli.py and tests/test_rnd_1_2.py.",
         "subjects": [
-          "tests",
-          "licences"
+          "CHANGELOG.md",
+          "mcptoolshop_rnd/cli.py",
+          "tests/test_rnd_1_2.py"
         ]
       },
       {
         "kind": "landing",
-        "sentence": "README.md is now also read by experiments/ai-jam-colab/experiment.json, experiments/colab-campaign-2026-11/experiment.json, experiments/etv-narrator/experiment.json and experiments/judge-bakeoff/experiment.json.",
+        "sentence": "README.md is now also read by tests/test_rnd_1_2.py.",
         "subjects": [
           "README.md",
-          "experiments/ai-jam-colab/experiment.json",
-          "experiments/colab-campaign-2026-11/experiment.json",
-          "experiments/etv-narrator/experiment.json",
-          "experiments/judge-bakeoff/experiment.json"
+          "tests/test_rnd_1_2.py"
+        ]
+      },
+      {
+        "kind": "landing",
+        "sentence": "docs/watchlist.json is now also read by tests/test_rnd_1_2.py.",
+        "subjects": [
+          "docs/watchlist.json",
+          "tests/test_rnd_1_2.py"
+        ]
+      },
+      {
+        "kind": "unassigned",
+        "sentence": "changes/2026-11-19-0a706af2-add-changelog-fragments-rnd-chan.md is new and belongs to no part, so atlas check fails on it against the previous map.",
+        "subjects": [
+          "changes/2026-11-19-0a706af2-add-changelog-fragments-rnd-chan.md"
         ]
       },
       {
         "kind": "counts",
-        "sentence": "72 files added and 12 changed content, across 7 parts.",
+        "sentence": "12 files added and 16 changed content, across 8 parts.",
         "subjects": []
       }
     ],
     "since": {
-      "commit": "9b53fbbae53fcb6a00e911dbc2d5211ead2bcbfd",
-      "generatedAt": "2026-11-12T20:26:41.150Z"
+      "commit": "2ef559df9d7a8ae6c7400c3360a0dcfb82f0f51f",
+      "generatedAt": "2026-11-15T11:40:48.380Z"
     },
     "unchanged": false
   },
@@ -205,9 +218,9 @@
     "Window: 180 days; a pair counts from 3 shared commits, since 5 source files reach 10 revisions; the floor rises to 10 when 25 do."
   ],
   "changesTogetherWithTests": 2,
-  "commit": "2ef559df9d7a8ae6c7400c3360a0dcfb82f0f51f",
+  "commit": "0a19b51c4271e7beb0f385d774ec147f87fc3d0b",
   "defaultBranch": "main",
-  "derived": "14 parts, mostly Python (145 files), shell (30), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 6 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
+  "derived": "14 parts, mostly Python (148 files), shell (30), CSS (2), HTML (2), TypeScript (2), Astro (1), JavaScript (1) and PowerShell (1). Work enters through 4 doors; the busiest is CI, which reaches 6 parts. It publishes to PyPI. It deploys a site to GitHub Pages. People run rnd.",
   "doors": [
     {
       "checks": [
@@ -229,7 +242,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 26
+          "files": 28
         },
         {
           "boundary": "root",
@@ -239,7 +252,7 @@
         {
           "boundary": "tests",
           "depth": 0,
-          "files": 28
+          "files": 29
         },
         {
           "boundary": "experiments",
@@ -288,7 +301,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 26
+          "files": 28
         },
         {
           "boundary": "root",
@@ -359,7 +372,7 @@
         {
           "boundary": "mcptoolshop_rnd",
           "depth": 0,
-          "files": 16
+          "files": 18
         }
       ],
       "runs": [
@@ -546,16 +559,16 @@
       ]
     }
   ],
-  "generatedAt": "2026-11-15T11:40:48.380Z",
+  "generatedAt": "2026-11-20T02:02:17.713Z",
   "limits": [
-    "11 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 8 more.",
-    "24 writes and 35 reads use paths built at run time and are not named here.",
+    "12 imports could not be resolved: `experiments/data-designer/tests/test_lockdown.py` imports `egress`, which is no module on its import path and no declared dependency; `experiments/data-designer/tests/test_lockdown.py` imports `studio_lock`, which is no module on its import path and no declared dependency; `experiments/distill-ladder/make_ladder_v2.py` imports a path built at run time; and 9 more.",
+    "26 writes and 38 reads use paths built at run time and are not named here.",
     "7 writes go to places this repository does not track, so they are not listed as generated.",
-    "41 writes and 125 reads go to a path their caller passes, not to this repository.",
-    "12 reads go to the directory the command is run in (README.md, SECURITY.md, entries and 3 more places), not to this repository.",
+    "44 writes and 138 reads go to a path their caller passes, not to this repository.",
+    "14 reads go to the directory the command is run in, not to this repository.",
     "2 reads go to the directory the command is run in or a path their caller passes, not to this repository.",
     "2 reads go to the home directory (.claude/), not to this repository.",
-    "4 files belong to no part: scripts/colab/collect_windows.py, scripts/colab/probe.py, scripts/colab/rates.sh and 1 more.",
+    "5 files belong to no part: changes/2026-11-19-0a706af2-add-changelog-fragments-rnd-chan.md, scripts/colab/collect_windows.py, scripts/colab/probe.py and 2 more.",
     "Statistics confidence is low: fewer than 25 source files reach 10 revisions in the window."
   ],
   "mainDoor": ".github/workflows/ci.yml",
@@ -606,14 +619,14 @@
   "startReason": "This path follows rnd (a command people run) from its entry, since CI runs only tests and checks.",
   "summary": "The studio research bench: Markdown entries with tiered sources and checked claims, rig experiments, an instrument registry and rated catalogues, indexed and searched by the rnd CLI (Python, standard library only).",
   "summaryFrom": "person",
-  "testFiles": 61,
+  "testFiles": 62,
   "testedBy": {
     "experiments": 7,
-    "mcptoolshop_rnd": 20,
+    "mcptoolshop_rnd": 21,
     "rnd": 1
   },
   "testedCodeParts": 3,
-  "unnamedWrites": 24,
+  "unnamedWrites": 26,
   "unread": [
     {
       "into": true,
@@ -683,11 +696,13 @@
           "experiments/embeddinggemma-2/harness/check_grades.py",
           "experiments/embeddinggemma-2/harness/grading.py",
           "experiments/embeddinggemma-2/harness/score.py",
+          "mcptoolshop_rnd/numbers.py",
           "mcptoolshop_rnd/store.py"
         ],
         "patterns": [
           "*.json",
-          "*.jsonl"
+          "*.jsonl",
+          "experiments/**/*.md"
         ]
       },
       "place": "experiments/ollama-cuda-backend/",
@@ -702,11 +717,13 @@
           "experiments/embeddinggemma-2/harness/check_grades.py",
           "experiments/embeddinggemma-2/harness/grading.py",
           "experiments/embeddinggemma-2/harness/score.py",
+          "mcptoolshop_rnd/numbers.py",
           "mcptoolshop_rnd/store.py"
         ],
         "patterns": [
           "*.json",
-          "*.jsonl"
+          "*.jsonl",
+          "experiments/**/*.md"
         ]
       },
       "place": "experiments/verifier-gold/crossfamily/",

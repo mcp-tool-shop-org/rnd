@@ -5,6 +5,7 @@ Exit codes: 0 ok · 1 invalid library files · 2 usage or not found ·
 """
 
 import argparse
+import importlib
 import json
 import os
 import re
@@ -14,7 +15,7 @@ import traceback
 from datetime import date
 from pathlib import Path
 
-from . import __version__, abmine, catalog, collect, datapack, layout, model, probe, rawdata, readouts, release, runs, store, watch
+from . import __version__, abmine, catalog, collect, datapack, layout, model, numbers, probe, questions, rawdata, readouts, release, runs, store, watch
 
 SOURCE_ROOT = Path(__file__).resolve().parent.parent
 
@@ -52,7 +53,32 @@ def report(problems, quiet_warnings=False):
             print(str(p), file=sys.stderr)
 
 
+class MissingExtraError(Exception):
+    def __init__(self, module, extra):
+        super().__init__(f"optional dependency {module!r} is not installed")
+        self.code = "MISSING_EXTRA"
+        self.hint = f'install the opt-in extra: pip install "mcptoolshop-rnd[{extra}]"'
+
+
+def require_extra(module, extra):
+    """Lazily import an opt-in extra's module, or fail with MISSING_EXTRA and an install hint."""
+    try:
+        return importlib.import_module(module)
+    except ImportError as exc:
+        raise MissingExtraError(module, extra) from exc
+
+
+def _in_instruments(path):
+    if ROOT is None or path is None:
+        return False
+    return Path(path).resolve().is_relative_to((ROOT / "instruments").resolve())
+
+
 def open_db(args):
+    target = args.db or store.default_db(ROOT)
+    if _in_instruments(target):
+        sys.exit(fail("INSTRUMENTS_PROTECTED", f"refusing to write index under instruments/: {target}",
+                      "instrument files are edited only by the R&D seat in a reviewed diff"))
     con, problems = store.connect(ROOT, args.db)
     report(problems, quiet_warnings=True)
     if con is None:
@@ -72,13 +98,17 @@ def emit(args, data, text_fn):
 # ---------------------------------------------------------------- commands
 
 def cmd_build(args):
+    target = args.db or store.default_db(ROOT)
+    if _in_instruments(target):
+        return fail("INSTRUMENTS_PROTECTED", f"refusing to write index under instruments/: {target}",
+                    "instrument files are edited only by the R&D seat in a reviewed diff")
     counts, problems = store.build(ROOT, args.db)
     report(problems)
     if counts is None:
         return fail("INDEX_INVALID", "build halted on errors; the previous index was kept",
                     "fix the files named above, then rebuild", 1)
     warnings = sum(p.level == "warning" for p in problems)
-    print(f"built rnd.db: {counts['entries']} entries, {counts['catalogs']} catalogues "
+    print(f"built rnd.db: {counts['entries']} entries, {counts['questions']} questions, {counts['catalogs']} catalogues "
           f"({counts['catalog_items']} items), {counts['experiments']} experiment records, {counts['runs']} runs, "
           f"{counts['files']} files, {warnings} warnings")
     return 0
@@ -86,6 +116,12 @@ def cmd_build(args):
 
 def cmd_check(args):
     entries, problems = model.load_all(ROOT)
+    _, frag_problems = release.load_fragments(ROOT)
+    problems.extend(model.Problem("error", where, msg) for where, msg in frag_problems)
+    problems.extend(numbers.check_all(ROOT, entries))
+    known_claim_ids = {c["id"] for e in entries for c in e.claims if c["id"]}
+    _, q_problems = questions.load_all(ROOT, known_claim_ids=known_claim_ids)
+    problems.extend(q_problems)
     for d in catalog.catalog_dirs(ROOT):
         _, _, cat_problems = catalog.load(d)
         problems.extend(model.Problem("warning" if "no catalog.json" in p else "error", d.name, p)
@@ -103,16 +139,23 @@ def cmd_check(args):
 
 def cmd_search(args):
     con = open_db(args)
+    query_str = " ".join(args.query)
+    include_questions = not args.catalog_only and args.kind in (None, "question")
     try:
-        ents, items = store.search(con, " ".join(args.query), limit=args.limit, raw=args.raw,
+        ents, items = store.search(con, query_str, limit=args.limit, raw=args.raw,
                                    kind=args.kind, field=args.field,
                                    catalogs=not args.entries_only, entries=not args.catalog_only,
                                    exact=args.exact)
+        qs = (store.search_questions(con, query_str, limit=args.limit, raw=args.raw,
+                                     field=args.field, exact=args.exact)
+              if include_questions else [])
     except sqlite3.OperationalError as exc:
         return fail("QUERY_INVALID", str(exc), "drop --raw to search plain words")
 
-    for r in ents + items:
+    for r in ents + items + qs:
         r["snip"] = " ".join(r["snip"].replace("#", " ").split())
+    if not ents and not items and not qs:
+        store.record_search_miss(ROOT, query_str, args.db)
 
     def text(_):
         if ents:
@@ -120,15 +163,31 @@ def cmd_search(args):
             for r in ents:
                 print(f"  {r['id']}  [{r['kind']}/{r['relevance']}] {r['title']}")
                 print(f"      {r['snip'].strip()}")
+                for fc in r.get("flagged_claims", []):
+                    by_txt = ", ".join(
+                        f"{b['id']} ({b['entry_id']})" if b.get("entry_id") else b["id"] for b in fc["by"]
+                    )
+                    cid = fc["id"] or "claim"
+                    if fc["state"] == "superseded":
+                        print(f"      ! [superseded] {cid}: {fc['text'][:90]} — replaced by {by_txt or 'unlinked'}")
+                    else:
+                        tail = f" — contradicted by {by_txt}" if by_txt else ""
+                        print(f"      ! [disputed] {cid}: {fc['text'][:90]}{tail}")
+        if qs:
+            print(f"Questions ({len(qs)})")
+            for q_row in qs:
+                ans = f" (answered by {', '.join(q_row['answered_by'])})" if q_row["answered_by"] else ""
+                print(f"  {q_row['id']}  [question/{q_row['status']}] {q_row['title']}{ans}")
+                print(f"      {q_row['snip'].strip()}")
         if items:
             print(f"Catalogue items ({len(items)})")
             for r in items:
                 fit = f" fit:{r['fit']}" if r["fit"] else ""
                 print(f"  {r['catalog']}:{r['name']}  ({r['family']}{fit})")
                 print(f"      {r['snip'].strip()}")
-        if not ents and not items:
+        if not ents and not items and not qs:
             print("no matches")
-    emit(args, {"entries": ents, "catalog_items": items}, text)
+    emit(args, {"entries": ents, "catalog_items": items, "questions": qs}, text)
     return 0
 
 
@@ -140,20 +199,54 @@ def cmd_show(args):
         if ":" in args.id:
             cat, name = args.id.split(":", 1)
             item = con.execute("SELECT * FROM catalog_items WHERE catalog=? AND name=?", (cat, name)).fetchone()
-        if item is None:
-            hits = [r[0] for r in con.execute("SELECT id FROM entries WHERE id LIKE ? LIMIT 5", (f"%{args.id}%",))]
-            return fail("NOT_FOUND", f"no entry {args.id!r}",
-                        f"did you mean: {', '.join(hits)}" if hits else "try `rnd search <words>`")
-        data = dict(item)
-        emit(args, data, lambda d: print("\n".join(f"{k}: {v}" for k, v in d.items() if v)))
-        return 0
+        if item is not None:
+            data = dict(item)
+            emit(args, data, lambda d: print("\n".join(f"{k}: {v}" for k, v in d.items() if v)))
+            return 0
+        qrow = con.execute("SELECT * FROM questions WHERE id = ?", (args.id,)).fetchone()
+        if qrow is not None:
+            qdata = dict(qrow)
+            qdata["fields"] = json.loads(qdata["fields"] or "[]")
+            qdata["tags"] = json.loads(qdata["tags"] or "[]")
+            qdata["answered_by"] = json.loads(qdata["answered_by"] or "[]")
+
+            def qtext(d):
+                print(f"{d['title']}\n{d['id']} · question · status:{d['status']} · {d['date']} · {d['path']}")
+                print(f"fields: {', '.join(d['fields'])}   tags: {', '.join(d['tags'])}")
+                if d["answered_by"]:
+                    print(f"answered_by: {', '.join(d['answered_by'])}")
+                print()
+                print((ROOT / d["path"]).read_text(encoding="utf-8").split("---", 2)[-1].strip())
+            emit(args, qdata, qtext)
+            return 0
+        hits = [r[0] for r in con.execute(
+            "SELECT id FROM entries WHERE id LIKE ? UNION SELECT id FROM questions WHERE id LIKE ? LIMIT 5",
+            (f"%{args.id}%", f"%{args.id}%"))]
+        return fail("NOT_FOUND", f"no entry {args.id!r}",
+                    f"did you mean: {', '.join(hits)}" if hits else "try `rnd search <words>`")
     data = dict(row)
     data["fields"], data["tags"] = json.loads(data["fields"]), json.loads(data["tags"])
     data["extra"] = json.loads(data["extra"])
     data["sources"] = [dict(r) for r in con.execute(
         "SELECT tier, url, label FROM sources WHERE entry_id=? ORDER BY ord", (args.id,))]
-    data["claims"] = [dict(r) for r in con.execute(
-        "SELECT confidence, text, via FROM claims WHERE entry_id=? ORDER BY ord", (args.id,))]
+    claims = []
+    for r in con.execute("SELECT id, state, confidence, text, via, relations FROM claims WHERE entry_id=? ORDER BY ord",
+                         (args.id,)):
+        cd = dict(r)
+        rels = json.loads(cd["relations"] or "{}")
+        cd["relations"] = rels
+        if cd["state"] == "superseded":
+            cd["replaced_by"] = [
+                {"id": tid, "entry_id": (con.execute("SELECT entry_id FROM claims WHERE id=?", (tid,)).fetchone() or [""])[0]}
+                for tid in rels.get("superseded-by", [])
+            ]
+        if cd["state"] == "disputed":
+            cd["contradicted_by"] = [
+                {"id": tid, "entry_id": (con.execute("SELECT entry_id FROM claims WHERE id=?", (tid,)).fetchone() or [""])[0]}
+                for tid in rels.get("contradicted-by", [])
+            ]
+        claims.append(cd)
+    data["claims"] = claims
     data["linked_from"] = [r[0] for r in con.execute("SELECT src FROM links WHERE dst=?", (args.id,))]
 
     def text(d):
@@ -161,6 +254,21 @@ def cmd_show(args):
         print(f"fields: {', '.join(d['fields'])}   tags: {', '.join(d['tags'])}")
         if d["linked_from"]:
             print(f"linked from: {', '.join(d['linked_from'])}")
+        for c in d["claims"]:
+            cid = c["id"] or "claim"
+            if c["state"] == "superseded":
+                by_txt = ", ".join(
+                    f"{b['id']} ({b['entry_id']})" if b.get("entry_id") else b["id"]
+                    for b in c.get("replaced_by", [])
+                )
+                print(f"! [superseded] {cid}: {c['text']} — replaced by {by_txt or 'unlinked'}")
+            elif c["state"] == "disputed":
+                by_txt = ", ".join(
+                    f"{b['id']} ({b['entry_id']})" if b.get("entry_id") else b["id"]
+                    for b in c.get("contradicted_by", [])
+                )
+                tail = f" — contradicted by {by_txt}" if by_txt else ""
+                print(f"! [disputed] {cid}: {c['text']}{tail}")
         print()
         print((ROOT / d["path"]).read_text(encoding="utf-8").split("---", 2)[-1].strip())
     emit(args, data, text)
@@ -217,6 +325,7 @@ def cmd_stats(args):
     data = {
         "built_at": q("SELECT value FROM meta WHERE key='built_at'")[0][0],
         "entries": q("SELECT count(*) FROM entries")[0][0],
+        "questions": q("SELECT count(*) FROM questions")[0][0],
         "by_kind": q("SELECT kind, count(*) FROM entries GROUP BY kind ORDER BY 2 DESC"),
         "by_relevance": q("SELECT relevance, count(*) FROM entries GROUP BY relevance ORDER BY 2 DESC"),
         "by_field": q("SELECT field, count(*) FROM entry_fields GROUP BY field ORDER BY 2 DESC, 1"),
@@ -224,13 +333,20 @@ def cmd_stats(args):
         "claims_by_confidence": q("SELECT confidence, count(*) FROM claims GROUP BY confidence ORDER BY 2 DESC"),
         "catalogs": q("SELECT name, count, substr(ref,1,12), synced_at FROM catalogs"),
     }
+    if getattr(args, "usage", False):
+        data["usage"] = store.read_search_misses(ROOT, args.db)
 
     def text(d):
-        print(f"index built {d['built_at']} · {d['entries']} entries")
+        print(f"index built {d['built_at']} · {d['entries']} entries · {d['questions']} questions")
         for key in ("by_kind", "by_relevance", "by_field", "sources_by_tier", "claims_by_confidence"):
             print(f"{key}: " + ", ".join(f"{k} {n}" for k, n in d[key]))
         for name, count, ref, synced in d["catalogs"]:
             print(f"catalogue {name}: {count} items @ {ref} (synced {synced})")
+        if "usage" in d:
+            u = d["usage"]
+            print(f"search misses ({u['path']}): {u['misses']}")
+            for m in u["top_misses"]:
+                print(f"  {m['count']:>4}  {m['query']}")
     emit(args, data, text)
     return 0
 
@@ -379,10 +495,51 @@ def cmd_readouts(args):
     return 0
 
 
+def cmd_change(args):
+    try:
+        rel = release.add_fragment(ROOT, args.text, level=args.level)
+    except release.ReleaseError as exc:
+        return fail(exc.code, str(exc), exc.hint)
+    print(rel)
+    return 0
+
+
 def cmd_bump(args):
+    fragments, frag_problems = release.load_fragments(ROOT)
+    if frag_problems:
+        report([model.Problem("error", w, m) for w, m in frag_problems])
+        return fail("BAD_FRAGMENT", "malformed changelog fragment(s) under changes/",
+                    "run `rnd check` and fix the fragment files", 1)
     try:
         old = release.read_version(ROOT)
-        new = release.bump(old, args.level)
+        if fragments:
+            levels = [f["level"] for f in fragments] + ([args.level] if args.level else [])
+            level = release.highest_level(levels)
+            new = release.bump(old, level)
+            section = release.fragments_changelog_section(new, fragments, args.note or ())
+            if not args.dry_run:
+                cl_path = ROOT / "CHANGELOG.md"
+                if "## [Unreleased]" not in cl_path.read_text(encoding="utf-8"):
+                    raise release.ReleaseError("BAD_CHANGELOG", "CHANGELOG.md has no '## [Unreleased]' heading")
+                release.write_version(ROOT, new)
+                release.insert_changelog(ROOT, section)
+                for f in fragments:
+                    p = ROOT / f["path"]
+                    if p.exists():
+                        p.unlink()
+                changes_dir = ROOT / release.CHANGES_DIR
+                if changes_dir.is_dir() and not any(changes_dir.iterdir()):
+                    changes_dir.rmdir()
+            print(f"{'would bump' if args.dry_run else 'bumped'} {old} -> {new} "
+                  f"({len(fragments)} fragment(s), level {level})")
+            print(section.rstrip())
+            if not args.dry_run:
+                print(f"\nnext: git add -A && git commit -m \"rnd {new}\" "
+                      f"&& git tag -a v{new} -m \"rnd {new}\" && git push --follow-tags")
+            return 0
+
+        level = args.level or "nano"
+        new = release.bump(old, level)
         since = release.last_tag(ROOT)
         section = release.changelog_section(ROOT, new, release.changes(ROOT, since), args.note or ())
         if not args.dry_run:
@@ -395,6 +552,121 @@ def cmd_bump(args):
     if not args.dry_run:
         print(f"\nnext: git add mcptoolshop_rnd/__init__.py CHANGELOG.md <your changes> && git commit -m \"rnd {new}\" "
               f"&& git tag -a v{new} -m \"rnd {new}\" && git push --follow-tags")
+    return 0
+
+
+def cmd_sync(args):
+    try:
+        rep = numbers.sync_files(ROOT, paths=args.paths or None, check=args.check)
+    except numbers.NumbersError as exc:
+        return fail(exc.code, str(exc), exc.hint, exc.exit_code)
+
+    def text(r):
+        verb = "would update" if args.check else "updated"
+        for c in r["changed"]:
+            print(f"{verb} {c['path']}#{c['key']}: {c['was']} -> {c['now']}")
+        if not r["changed"]:
+            print(f"in sync: {r['bindings']} bound number(s) across {r['checked_files']} file(s)")
+        elif args.check:
+            print(f"{len(r['changed'])} bound number(s) out of sync; run `rnd sync`")
+    emit(args, rep, text)
+    return 0 if rep["ok"] else 1
+
+
+def cmd_claims(args):
+    if args.action == "assign":
+        if not args.entry:
+            return fail("USAGE", "assign needs an entry id or path", "rnd claims assign <entry>")
+        try:
+            eid, rel, assigned = model.assign_claim_ids(ROOT, args.entry)
+        except model.ReconcileError as exc:
+            return fail(exc.code, str(exc), exc.hint, exc.exit_code)
+        data = {"entry": eid, "path": rel, "assigned": assigned}
+        emit(args, data, lambda d: print(
+            f"{d['path']}: assigned {len(d['assigned'])} claim id(s)"
+            + (f" ({', '.join(d['assigned'])})" if d["assigned"] else " (none needed)")))
+        return 0
+
+    con = open_db(args)
+    sql = ("SELECT c.id, c.entry_id, c.ord, c.state, c.text, c.via, c.relations "
+           "FROM claims c JOIN entries e ON e.id = c.entry_id WHERE 1=1")
+    params = []
+    if args.state:
+        sql += " AND c.state = ?"
+        params.append(args.state)
+    sql += " ORDER BY e.date DESC, c.entry_id, c.ord"
+    rows = []
+    for r in con.execute(sql, params):
+        d = dict(r)
+        d["relations"] = json.loads(d["relations"] or "{}")
+        rows.append(d)
+
+    def text(rs):
+        for r in rs:
+            rel_parts = [f"{k}: {', '.join(v)}" for k, v in r["relations"].items() if v]
+            rel_txt = f" ({'; '.join(rel_parts)})" if rel_parts else ""
+            print(f"  {r['id'] or '-':<12} [{r['state']}] {r['entry_id']} — {r['text']}{rel_txt}")
+        print(f"{len(rs)} claims")
+    emit(args, rows, text)
+    return 0
+
+
+def cmd_reconcile(args):
+    try:
+        rep = model.reconcile_entry(ROOT, args.entry)
+    except model.ReconcileError as exc:
+        return fail(exc.code, str(exc), exc.hint, exc.exit_code)
+
+    def text(r):
+        for l in r["links"]:
+            print(f"{l['src_id']} ({l['src_entry']}) {l['relation']} {l['dst_id']} ({l['dst_entry']})")
+        print(f"reconciled {len(r['links'])} link(s) across {len(r['changed_files'])} changed file(s)")
+    emit(args, rep, text)
+    return 0
+
+
+def cmd_new_question(args):
+    try:
+        rel = questions.new_question(
+            ROOT,
+            args.title,
+            fields=args.field,
+            tags=args.tag,
+            qid=args.id,
+            today=args.date,
+            status=args.status,
+            answered_by=args.answered_by,
+        )
+    except questions.QuestionError as exc:
+        return fail(exc.code, str(exc), exc.hint, exc.exit_code)
+    print(rel)
+    return 0
+
+
+def cmd_questions(args):
+    con = open_db(args)
+    sql, params = "SELECT id, title, status, date, path, fields, tags, answered_by FROM questions WHERE 1=1", []
+    if args.status:
+        sql += " AND status = ?"
+        params.append(args.status)
+    if args.field:
+        sql += " AND id IN (SELECT question_id FROM question_fields WHERE field = ?)"
+        params.append(args.field)
+    sql += " ORDER BY date DESC, id"
+    rows = []
+    for r in con.execute(sql, params):
+        d = dict(r)
+        d["fields"] = json.loads(d["fields"] or "[]")
+        d["tags"] = json.loads(d["tags"] or "[]")
+        d["answered_by"] = json.loads(d["answered_by"] or "[]")
+        rows.append(d)
+
+    def text(rs):
+        for r in rs:
+            ans = f" -> {', '.join(r['answered_by'])}" if r["answered_by"] else ""
+            print(f"{r['date']}  {r['id']:<44} [{r['status']}] {r['title']}{ans}")
+        print(f"{len(rs)} questions")
+    emit(args, rows, text)
     return 0
 
 
@@ -722,6 +994,9 @@ def cmd_probe(args):
 def cmd_watch(args):
     listing = Path(args.list) if args.list else ROOT / "docs" / "watchlist.json"
     state_path = Path(args.state or os.environ.get("RND_WATCH_STATE") or Path.home() / ".rnd" / "watch-state.json")
+    if not args.no_save and _in_instruments(state_path):
+        return fail("INSTRUMENTS_PROTECTED", f"refusing to write watch state under instruments/: {state_path}",
+                    "instrument files are edited only by the R&D seat in a reviewed diff")
     try:
         sources = watch.load_watchlist(listing)
         known = {s["id"] for s in sources}
@@ -908,10 +1183,10 @@ def build_parser():
             sp.add_argument("--json", action="store_true", help="machine-readable output")
         return sp
 
-    add("build", cmd_build, "rebuild rnd.db from entries/, instruments/ and catalogs/", json_flag=False)
-    add("check", cmd_check, "validate every file without touching the index", json_flag=False)
+    add("build", cmd_build, "rebuild rnd.db from entries/, instruments/, questions/ and catalogs/", json_flag=False)
+    add("check", cmd_check, "validate every file (entries, fragments, bound numbers, questions, packs, layout)", json_flag=False)
 
-    s = add("search", cmd_search, "full-text search across entries and catalogues")
+    s = add("search", cmd_search, "full-text search across entries, questions and catalogues")
     s.add_argument("query", nargs="+")
     s.add_argument("--limit", type=int, default=10)
     s.add_argument("--kind", choices=model.KINDS)
@@ -922,7 +1197,7 @@ def build_parser():
     s.add_argument("--exact", action="store_true",
                    help="whole words in the same case, no stemming: `PAIR` finds the product, not 'pairs'")
 
-    s = add("show", cmd_show, "show one entry (or <catalog>:<item>)")
+    s = add("show", cmd_show, "show one entry, question or <catalog>:<item>")
     s.add_argument("id")
 
     s = add("list", cmd_list, "list entries, newest first")
@@ -935,7 +1210,8 @@ def build_parser():
     s = add("tools", cmd_tools, "list the studio instruments this seat can use")
     s.add_argument("--status", choices=model.INSTRUMENT_STATUS)
 
-    add("stats", cmd_stats, "counts by kind, field, source tier and claim confidence")
+    s = add("stats", cmd_stats, "counts by kind, field, source tier, claim confidence and optional local search misses")
+    s.add_argument("--usage", action="store_true", help="include local zero-hit search count and most frequent misses")
 
     s = add("new", cmd_new, "scaffold a new entry file from the template", json_flag=False)
     s.add_argument("title")
@@ -945,6 +1221,33 @@ def build_parser():
     s.add_argument("--tag", action="append")
     s.add_argument("--id")
     s.add_argument("--date")
+
+    s = add("new-question", cmd_new_question, "scaffold a new question file under questions/", json_flag=False)
+    s.add_argument("title")
+    s.add_argument("--field", action="append")
+    s.add_argument("--tag", action="append")
+    s.add_argument("--id")
+    s.add_argument("--date")
+    s.add_argument("--status", choices=questions.STATUSES, default="open")
+    s.add_argument("--answered-by", action="append", metavar="CLAIM_ID",
+                   help="existing claim id(s) answering this question (repeatable)")
+
+    s = add("questions", cmd_questions, "list question files under questions/")
+    s.add_argument("--status", choices=questions.STATUSES)
+    s.add_argument("--field")
+
+    s = add("claims", cmd_claims, "list claims with id/state/relations, or assign stable claim ids to an entry")
+    s.add_argument("action", nargs="?", choices=("list", "assign"), default="list")
+    s.add_argument("entry", nargs="?", help="assign: entry id or file path")
+    s.add_argument("--state", choices=model.CONFIDENCE, help="list: filter by claim state")
+
+    s = add("reconcile", cmd_reconcile,
+            "propagate supersedes/contradicts/supports links from an entry to the older claims it cites")
+    s.add_argument("entry", help="entry id or file path")
+
+    s = add("sync", cmd_sync, "rewrite bound numbers in Markdown files from experiments/<id>/results.json")
+    s.add_argument("paths", nargs="*", help="files or folders to sync (default: entries, questions, briefs, experiments)")
+    s.add_argument("--check", action="store_true", help="change nothing; exit 1 if any bound literal differs")
 
     s = add("new-experiment", cmd_new_experiment,
             "scaffold experiments/<name>/ with experiment.json, data/, results/, scripts/ and a gitignored staging/",
@@ -976,9 +1279,17 @@ def build_parser():
     s.add_argument("--list", action="store_true", help="list the knowledge bases")
     s.add_argument("--root", help="readouts checkout (overrides $RND_READOUTS)")
 
-    s = add("bump", cmd_bump, "raise the version (default: the nano segment) and add a CHANGELOG section", json_flag=False)
-    s.add_argument("level", nargs="?", default="nano", choices=release.LEVELS,
-                   help="major|minor|patch: the tool; micro: library structure; nano: library content (default)")
+    s = add("change", cmd_change, "record a changelog fragment under changes/ without touching the version or CHANGELOG.md",
+            json_flag=False)
+    s.add_argument("text", help="one-line changelog entry text")
+    s.add_argument("--level", default="nano", choices=release.LEVELS,
+                   help="bump level for this fragment (default: nano)")
+
+    s = add("bump", cmd_bump,
+            "consume fragments under changes/ (or raise the version directly) and write one CHANGELOG section",
+            json_flag=False)
+    s.add_argument("level", nargs="?", default=None, choices=release.LEVELS,
+                   help="major|minor|patch: the tool; micro: library structure; nano: library content (default when no fragments)")
     s.add_argument("--note", action="append", help="an extra CHANGELOG line (repeatable)")
     s.add_argument("--dry-run", action="store_true", help="print the new version and CHANGELOG section only")
 
@@ -1082,6 +1393,8 @@ def main(argv=None):
                     "run inside a clone of mcp-tool-shop-org/rnd, or pass --library / set RND_ROOT")
     try:
         return args.fn(args) or 0
+    except MissingExtraError as exc:
+        return fail(exc.code, str(exc), exc.hint)
     except KeyboardInterrupt:
         return fail("INTERRUPTED", "stopped by the user", exit_code=3)
     except Exception as exc:  # last resort: a structured error, never a raw stack by default

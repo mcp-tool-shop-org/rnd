@@ -28,6 +28,7 @@ SQLite index, driven by `python -m rnd`. Read README.md for the format.
   studio" (Studio relevance + `relevance: act | watch | reference`). Research
   from outside the studio's fields is welcome; `reference` is a fine verdict.
 - Run `python -m rnd sync --check` and `python -m rnd check` before committing; both exit 1 on errors.
+- Run `python -m rnd similar <entry>` on a new entry before filing, and link any related older claims or say "unrelated" in the PR description.
 - If a new entry supersedes, contradicts, or supports an older claim by id, run
   `python -m rnd reconcile <entry>` to update the inverse link on the older claim.
 - Update as you go with one changelog fragment per update (never bump the version

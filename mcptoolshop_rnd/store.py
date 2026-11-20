@@ -33,6 +33,7 @@ CREATE TABLE catalog_items (catalog TEXT, name TEXT, family TEXT, lanes TEXT, de
   license TEXT, path TEXT, url TEXT, bytes INTEGER, fit TEXT, note TEXT, family_note TEXT,
   PRIMARY KEY (catalog, name));
 CREATE VIRTUAL TABLE entries_fts USING fts5(id UNINDEXED, title, tags, body, tokenize='porter unicode61');
+CREATE VIRTUAL TABLE claims_fts USING fts5(entry_id UNINDEXED, ord UNINDEXED, text, tokenize='porter unicode61');
 CREATE VIRTUAL TABLE questions_fts USING fts5(id UNINDEXED, title, fields, body, tokenize='porter unicode61');
 CREATE VIRTUAL TABLE catalog_fts USING fts5(catalog UNINDEXED, name, family, description, note, lanes,
   tokenize='porter unicode61');
@@ -128,6 +129,11 @@ def build(root, db_path=None):
                 [(e.id, n, c["id"] or None, c["state"], c["confidence"], c["text"], c["via"],
                   json.dumps(c["relations"], sort_keys=True)) for n, c in enumerate(e.claims)],
             )
+            if e.claims:
+                con.executemany(
+                    "INSERT INTO claims_fts VALUES (?,?,?)",
+                    [(e.id, n, c["text"]) for n, c in enumerate(e.claims)],
+                )
             rel_rows = [
                 (e.id, c["id"] or "", rel_name, tid, claim_owner.get(tid, ""))
                 for c in e.claims

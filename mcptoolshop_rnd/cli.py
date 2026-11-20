@@ -15,7 +15,7 @@ import traceback
 from datetime import date
 from pathlib import Path
 
-from . import __version__, abmine, catalog, collect, datapack, layout, model, numbers, probe, questions, rawdata, readouts, release, runs, store, watch
+from . import __version__, abmine, catalog, collect, datapack, digest, layout, model, numbers, probe, questions, rawdata, readouts, release, runs, similar, store, watch
 
 SOURCE_ROOT = Path(__file__).resolve().parent.parent
 
@@ -622,6 +622,24 @@ def cmd_reconcile(args):
             print(f"{l['src_id']} ({l['src_entry']}) {l['relation']} {l['dst_id']} ({l['dst_entry']})")
         print(f"reconciled {len(r['links'])} link(s) across {len(r['changed_files'])} changed file(s)")
     emit(args, rep, text)
+    return 0
+
+
+def cmd_similar(args):
+    try:
+        rep = similar.find_similar(ROOT, args.entry, limit=args.limit, db_path=args.db)
+    except similar.SimilarError as exc:
+        return fail(exc.code, str(exc), exc.hint, exc.exit_code)
+    emit(args, rep, lambda r: print(similar.render_similar(r)))
+    return 0
+
+
+def cmd_digest(args):
+    try:
+        rep = digest.compute_digest(ROOT, args.since)
+    except digest.DigestError as exc:
+        return fail(exc.code, str(exc), exc.hint, exc.exit_code)
+    emit(args, rep, lambda r: print(digest.render_digest(r)))
     return 0
 
 
@@ -1244,6 +1262,16 @@ def build_parser():
     s = add("reconcile", cmd_reconcile,
             "propagate supersedes/contradicts/supports links from an entry to the older claims it cites")
     s.add_argument("entry", help="entry id or file path")
+
+    s = add("similar", cmd_similar,
+            "list older claims in other entries closest to each claim of one entry (read-only FTS5)")
+    s.add_argument("entry", help="entry id or file path")
+    s.add_argument("--limit", type=int, default=5, help="closest claims per claim (default: 5)")
+
+    s = add("digest", cmd_digest,
+            "summarize entries, claims and questions changed since a git ref or YYYY-MM-DD date (read-only)")
+    s.add_argument("--since", required=True, metavar="REF_OR_DATE",
+                   help="git ref (tag, branch, commit SHA) or YYYY-MM-DD date")
 
     s = add("sync", cmd_sync, "rewrite bound numbers in Markdown files from experiments/<id>/results.json")
     s.add_argument("paths", nargs="*", help="files or folders to sync (default: entries, questions, briefs, experiments)")

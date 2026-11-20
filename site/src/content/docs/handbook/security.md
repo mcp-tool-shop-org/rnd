@@ -15,7 +15,8 @@ sidebar:
   `rnd claims assign` adds claim ids in the named entry, and `rnd reconcile`
   updates only the cited claim lines in existing Markdown files.
 - **Reads only:** the readouts knowledge bases, opened in SQLite's read-only
-  mode. `rnd sql` also uses a read-only connection.
+  mode. `rnd sql` also uses a read-only connection, and `rnd similar` and
+  `rnd digest` never write to the working tree, git index or `rnd.db`.
 
 ## What it never touches
 

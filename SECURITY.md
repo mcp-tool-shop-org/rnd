@@ -32,7 +32,9 @@ Include:
 - **Data touched:** files inside this repo (`entries/`, `questions/`, `changes/`,
   `instruments/`, `catalogs/`, `experiments/`), the generated index `rnd.db` and its
   sibling local miss log `rnd.misses.jsonl`. The readouts knowledge bases are opened
-  read-only. `rnd sql` uses a read-only connection.
+  read-only. `rnd sql` uses a read-only connection, and `rnd similar` and
+  `rnd digest` are read-only (never modifying the working tree, git index or
+  `rnd.db`).
 - **Network:** none, except `rnd catalog sync`, `rnd probe` and `rnd watch`, which
   read public metadata or call the GitHub API through the user's own `gh` CLI login
   when run.

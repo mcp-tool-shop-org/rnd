@@ -73,6 +73,8 @@ python -m rnd new "Paper title" --kind paper --field audio --tag pitch
 python -m rnd new-question "Why does X happen?" --field audio
 python -m rnd sync --check                  # verify numbers bound to experiments/<id>/results.json
 python -m rnd check                         # validate every file (exit 1 on errors)
+python -m rnd similar 2026-10-07-cuda-graphs --limit 3  # closest claims in other entries (read-only)
+python -m rnd digest --since v1.1.24.0.14   # entries, claims and questions changed since a tag or date
 python -m rnd sql "SELECT tier, count(*) FROM sources GROUP BY tier"
 python -m rnd change "what changed"         # add a changelog fragment under changes/ (nano by default)
 python -m rnd bump --note "release note"    # release PR: apply changes/ fragments, bump version + CHANGELOG
@@ -203,15 +205,39 @@ Claims can carry stable deterministic `c-<hex>` ids and explicit relations
 ```bash
 python -m rnd claims                               # list indexed claims (--state superseded, --json)
 python -m rnd claims assign <entry>                # add deterministic c-<hex> ids to one entry's claims
+python -m rnd similar <entry> [--limit 5]          # closest older claims in other entries (read-only)
 python -m rnd reconcile <entry>                    # mark older claims (superseded / disputed / supported-by)
 ```
 
-`rnd reconcile <entry>` writes only the id (if missing), updated state and
+`rnd similar <entry>` runs a read-only SQLite FTS5 BM25 query over `claims_fts`
+for each claim of `<entry>` against other entries (`--limit` defaults to 5),
+flags `superseded` or `disputed` hits with what replaced or contradicted them,
+prints the exact `(supersedes: id)` / `(contradicts: id)` / `(supports: id)`
+clauses and `rnd reconcile <entry>` command, and never writes `rnd.db` or any
+entry. `rnd reconcile <entry>` writes only the id (if missing), updated state and
 inverse relation (`superseded-by`, `contradicted-by`, `supported-by`) on the
 older claim's line in its own file without touching its sentence or any other
 line. `rnd check` errors on broken target ids or one-sided links and hints to
 run `rnd reconcile`. `rnd search` and `rnd show` mark `superseded` and
 `disputed` claims and name the claim that replaced or contradicted them.
+
+## What changed (digest)
+
+`rnd digest --since <git ref or YYYY-MM-DD> [--json]` compares the library at an
+earlier commit (read from git objects into a temporary directory without touching
+the working tree, index or `rnd.db`) against the current tree:
+
+```bash
+python -m rnd digest --since v1.1.24.0.14
+python -m rnd digest --since 2026-11-19 --json
+```
+
+It reports entries added, claims added, claim state changes (`old_state -> new_state`
+with what replaced or contradicted them), and questions opened, answered (with
+answering claim ids) and parked, along with counts. Dates resolve to the last
+commit on the current branch at or before the end of that day; claims match by
+`id` when both sides have one, otherwise by `(entry, exact text)` so a reworded
+claim without an id appears as added rather than a state change.
 
 ## Open questions
 
@@ -353,7 +379,9 @@ studio's workflow standards.
 - **Data touched:** files inside this repo (`entries/`, `questions/`, `changes/`,
   `instruments/`, `catalogs/`, `experiments/`), the index `rnd.db` and its
   sibling local miss log `rnd.misses.jsonl`. `rnd readouts` opens the readouts
-  knowledge bases **read-only**. `rnd sql` runs against a read-only connection.
+  knowledge bases **read-only**. `rnd sql` runs against a read-only connection,
+  and `rnd similar` / `rnd digest` are read-only and never modify the working
+  tree, index or `rnd.db`.
 - **Data not touched:** nothing outside the repo and the readouts checkout. It
   stores no credentials and reads none.
 - **Network:** none, except `rnd catalog sync`, `rnd probe` and `rnd watch`,

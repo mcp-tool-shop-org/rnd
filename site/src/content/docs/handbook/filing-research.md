@@ -116,6 +116,8 @@ claim's id, and let `rnd reconcile` mark the old one:
 ```
 
 - `rnd claims assign <entry>` gives an entry's claims stable `c-<hex>` ids.
+- Run `python -m rnd similar <entry>` before filing to see the closest claims in
+  other entries and print the link clauses and `rnd reconcile` command.
 - A claim may state `(supersedes: id)`, `(contradicts: id)` or `(supports: id)`.
   The target must be a claim id.
 - `rnd reconcile <entry>` then marks each older claim in its own file

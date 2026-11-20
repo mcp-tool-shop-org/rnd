@@ -64,6 +64,36 @@ relations; `--state verified|unverified|disputed|wrong|superseded` filters and
 `c-<hex>` id to each claim of one entry that has none. Ids are never renumbered,
 and existing entries are not rewritten in bulk.
 
+### `similar <entry>`
+
+Read-only FTS5 lookup of the closest claims in other entries for each claim in
+`<entry>` (id or path). Options: `--limit N` (default `5`), `--json`. Shows
+each hit's claim id (or `entry#position` when unassigned), state, entry, date,
+BM25 score and text, marks `superseded` / `disputed` hits with what replaced or
+contradicted them, and prints `(supersedes: …)`, `(contradicts: …)`,
+`(supports: …)` and `python -m rnd reconcile <entry>`. Never writes `rnd.db` or
+any Markdown file, and exits `0` on any readable entry.
+
+```bash
+python -m rnd similar 2026-10-07-cuda-graphs --limit 3
+```
+
+### `digest --since <ref|YYYY-MM-DD>`
+
+Read-only summary of entries added, claims added, claim state changes (with
+what replaced or contradicted them), and questions opened, answered (with
+answering claim ids) or parked since `<ref>` (git tag, branch, commit SHA) or
+`<YYYY-MM-DD>` (the last commit on the current branch at or before that day).
+Reads the older commit from git into a temporary directory without touching the
+working tree, git index or `rnd.db`. Claims match by `id` when both sides have
+one, otherwise by `(entry, exact text)` (so reworded claims without ids count as
+added, not state changes). Supports `--json`; unknown refs and dates before
+branch history exit `2`.
+
+```bash
+python -m rnd digest --since v1.1.24.0.14
+```
+
 ### `questions`
 
 Lists the question files under `questions/`. Filters: `--status
@@ -88,7 +118,7 @@ full-text table, with prefix matching (`listener` also finds `listeners`).
 A read-only SQL query against the index. Tables: `entries`, `entry_fields`,
 `entry_tags`, `sources`, `claims`, `claim_relations`, `links`, `questions`,
 `question_fields`, `catalogs`, `catalog_items`, `meta`, plus the FTS tables
-`entries_fts`, `questions_fts` and `catalog_fts`.
+`entries_fts`, `claims_fts`, `questions_fts` and `catalog_fts`.
 
 ```bash
 python -m rnd sql "SELECT confidence, count(*) FROM claims GROUP BY confidence"
@@ -224,5 +254,6 @@ commands add `BAD_CHANGE` and `BAD_FRAGMENT` (changelog fragments); `BAD_BINDING
 numbers); `CLAIM_NOT_FOUND`, `CLAIM_MISMATCH`, `DUPLICATE_CLAIM_ID` and
 `SELF_RELATION` (claim ids and links); `BAD_STATUS` and `BAD_ANSWERED_BY`
 (questions); `INSTRUMENTS_PROTECTED` (a command that summarises outside content
-was pointed at `instruments/`); and `MISSING_EXTRA` (a command needs an optional
+was pointed at `instruments/`); `UNREADABLE`, `UNKNOWN_REF` and `BAD_SINCE`
+(`similar` and `digest`); and `MISSING_EXTRA` (a command needs an optional
 package that is not installed).

@@ -66,21 +66,16 @@ def _encode_matching_eol(path: Path, text: str) -> bytes:
 def _stage_temp_bytes(path: Path, data: bytes) -> Path:
     fd, tmp_str = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=str(path.parent))
     tmp_path = Path(tmp_str)
-    fh = None
+    fh = os.fdopen(fd, "wb")
     try:
-        fh = os.fdopen(fd, "wb")
-        fh.write(data)
-        fh.flush()
-        os.fsync(fh.fileno())
-        fh.close()
-        fh = None
-    except BaseException:
-        if fh is not None:
+        try:
+            fh.write(data)
+            fh.flush()
+            os.fsync(fh.fileno())
+        finally:
             with contextlib.suppress(OSError):
                 fh.close()
-        else:
-            with contextlib.suppress(OSError):
-                os.close(fd)
+    except BaseException:
         with contextlib.suppress(OSError):
             tmp_path.unlink()
         raise

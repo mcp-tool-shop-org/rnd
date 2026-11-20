@@ -107,6 +107,21 @@ class PartAFollowupTests(CliBase):
         self.assertIsNone(q_bad_yaml)
         self.assertEqual(q_bad_probs[0].level, "error")
 
+        # Cover unreadable-file decode errors in model.load and questions.load.
+        bad_entry_p = self.root / "entries/2026/bad-bytes.md"
+        bad_entry_p.write_bytes(b"\xff\xfe")
+        bad_q_p = self.root / "questions/bad-bytes.md"
+        bad_q_p.parent.mkdir(parents=True, exist_ok=True)
+        bad_q_p.write_bytes(b"\xff\xfe")
+        ent_bytes, probs_bytes = model.load(bad_entry_p, self.root)
+        self.assertIsNone(ent_bytes)
+        self.assertIn("unreadable:", probs_bytes[0].message)
+        q_bytes, q_probs_bytes = questions.load(bad_q_p, self.root)
+        self.assertIsNone(q_bytes)
+        self.assertIn("unreadable:", q_probs_bytes[0].message)
+        bad_entry_p.unlink()
+        bad_q_p.unlink()
+
     def test_unclosed_code_fence_reported_by_name_as_error(self):
         p_backtick = write(
             self.root,
@@ -460,6 +475,23 @@ class PartAFollowupTests(CliBase):
         self.assertFalse(list((self.root / "mcptoolshop_rnd").glob(".*tmp*")))
         self.assertTrue(p_frag.exists())
 
+        # 1b. Failure on the FIRST os.replace inside apply_bump cleans up both temp files and leaves targets untouched.
+        with mock.patch.object(release.os, "replace", side_effect=OSError(13, "First replace denied")):
+            code, _, err = self.run_cli("bump")
+        self.assertEqual(code, 3)
+        self.assertIn("First replace denied", err)
+        self.assertEqual(init_path.read_bytes(), orig_init_bytes)
+        self.assertEqual(cl_path.read_bytes(), orig_cl_bytes)
+        self.assertFalse(list(self.root.glob(".*tmp*")))
+        self.assertFalse(list((self.root / "mcptoolshop_rnd").glob(".*tmp*")))
+
+        # 1c. Direct _atomic_write_bytes os.replace failure cleans up temp file and leaves __init__.py untouched.
+        with mock.patch.object(release.os, "replace", side_effect=OSError(13, "Atomic replace denied")), \
+                self.assertRaises(OSError):
+            release.write_version(self.root, "9.9.9")
+        self.assertEqual(init_path.read_bytes(), orig_init_bytes)
+        self.assertFalse(list((self.root / "mcptoolshop_rnd").glob(".*tmp*")))
+
         # 2. Failure BETWEEN replacing __init__.py and replacing CHANGELOG.md rolls back __init__.py atomically.
         orig_replace = release.os.replace
 
@@ -537,6 +569,14 @@ class PartAFollowupTests(CliBase):
         self.assertEqual(code, 2)
         self.assertIn("BAD_CHANGELOG", err)
         self.assertEqual(init_path.read_bytes(), init_before_bad)
+
+        # 6. Non-version CHANGELOG heading falls back cleanly in resolve_bump_versions without crashing.
+        write(self.root, "CHANGELOG.md", "# Changelog\n\n## [Unreleased]\n\n## [unparsed-tag] - 2026-01-01\n")
+        current_ver = release.read_version(self.root)
+        self.assertEqual(
+            release.resolve_bump_versions(self.root, "nano"),
+            (current_ver, release.bump(current_ver, "nano")),
+        )
 
     def test_collect_resolve_guard_reached_via_symlink_into_instruments(self):
         # Unused regexes removed from model (fix-1 C7).

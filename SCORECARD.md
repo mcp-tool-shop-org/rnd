@@ -2,6 +2,7 @@
 
 **Repo:** rnd
 **Date:** 2026-10-07
+**Note:** this is the assessment as it stood on that date, kept as a record. The tool has changed since: from 1.2 it keeps a local, never-sent search-miss log (see "Security and trust" in the README).
 **Type tags:** `[all]` `[cli]` `[org]`
 
 ## Pre-Remediation Assessment

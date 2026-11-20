@@ -53,11 +53,13 @@ claim and changes only numbers in the facts, do the shortcuts go, and is what is
   (amended after seeing the data, and recorded as such), decoy facts tagged and verified redundant, the 13 number
   statistics in the audit's list, and the grounded score as a secondary score with its own arm.
 - **The real build now exists and is under audit (added the evening of 2026-11-19).** The construction was built in
-  the real generator the same day. On its public-seed pools the audit's main gate found no must-fix test: 0 on each of
-  the three pool types and 0 on a pool ten times larger. The audit's own self-checks did not pass on the new items:
-  its planted-cue controls and its probe tests were designed for the old items and are being reworked for this
-  design. The learned probe found nothing, and its test is under repair. So there is no pass yet. A follow-up entry
-  will record what the full audit found.
+  the real generator the same day. On its public-seed pools the audit's main gate reports no must-fix test: 0 on each
+  of the three pool types and 0 on a pool ten times larger. That zero has no measured detection margin on the number
+  statistics yet: the audit's planted-cue controls were designed for the old items and cannot plant a visible cue in
+  the new ones, so they are being redesigned. The learned probe's result is not valid as run (its permutation null is
+  biased for this design) and it is being rerun. On the larger pool one small residual was found: one number
+  statistic predicts the answer with a lift of +0.0056, under the +0.02 floor. So there is no pass yet. A follow-up
+  entry will record what the full audit found.
 
 ## Caveats
 

@@ -62,7 +62,8 @@ claim and changes only numbers in the facts, do the shortcuts go, and is what is
   The pool-level figure is small because the cue is rare, not because it is weak: in about 2% of triads, those whose
   total sits just above a cut-off the construction applies, that statistic nearly determines the answer (for example,
   of 80 such "at least" items in the lowest two bins, none is supported). The cut-off rule is ours and is being
-  changed. So there is no pass yet. A follow-up entry will record what the full audit found.
+  changed. So there is no pass yet. This brief is the state as of the evening of 2026-11-19; later findings go in
+  a follow-up entry, not here.
 
 ## Caveats
 

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.2.0.0.2] - 2026-11-19
+
+- SECURITY.md scope brought up to rnd 1.2: the local-only usage log, and probe and watch named as network users
+
 ## [1.2.0.0.1] - 2026-11-19
 
 - site handbook brought up to rnd 1.2: the local-only usage log and network use on the security page; change, sync, claims, reconcile, questions and new-question in the reference; claim links, bound numbers, questions and changelog fragments in filing research

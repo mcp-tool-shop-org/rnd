@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.3.0.0.0] - 2026-11-20
+
+- Add read-only rnd similar claim lookup and rnd digest history summary
+- Claims, check, sync, question quoting, and bump safety follow-ups
+- Security statements (README, SECURITY.md, handbook security page, SHIP_GATE.md) rewritten from an inventory of every place `rnd` writes: the index and its temporary file, the watch state in the home folder, the raw-data stores including the blob store, `raw ingest --link` making its source read-only, `raw ingest --update` deleting a run's earlier files, `rnd collect` running the experiment's own module, and the local-builders harness that ships in the package but is run by no `rnd` command
+- README translations refreshed for 1.3 (seven languages)
+
 ## [1.2.0.0.2] - 2026-11-19
 
 - SECURITY.md scope brought up to rnd 1.2: the local-only usage log, and probe and watch named as network users

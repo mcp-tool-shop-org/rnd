@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.1.24.0.16] - 2026-11-19
+
+- site brief for the one-claim study: 'Can one claim with three sets of numbers remove a benchmark's shortcuts?'
+
 ## [1.1.24.0.15] - 2026-11-19
 
 - one claim, three number-assignments: a prototype passes the audit's listed gate (0 must-fix on public seeds), fork family, a small difficulty pilot on local judges, grounded accuracy decided (not built)

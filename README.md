@@ -174,9 +174,11 @@ python -m rnd bump                                     # release PR: bump once, 
 ```
 
 With no files under `changes/`, `rnd bump [nano|micro|…] [--note …]` keeps its
-git-diff behaviour. If the `CHANGELOG.md` write fails after the version write,
-`rnd bump` rolls the version file back and recovers on re-run without bumping
-twice. `rnd check` reports any malformed fragment as an error.
+git-diff behaviour. Both `__init__.py` and `CHANGELOG.md` are staged through
+temp files and swapped with `os.replace`, rolling back `__init__.py` if the
+CHANGELOG swap fails and completing or refusing (`BAD_CHANGELOG`) an
+interrupted bump on re-run without bumping twice. `rnd check` reports any
+malformed fragment as an error.
 
 ## Bound numbers
 
@@ -195,9 +197,11 @@ The judge scored 84.2%<!-- rnd:experiments/e4b/results.json#accuracy:.1% --> on 
   literal differs.
 - `rnd check` treats any out-of-sync bound literal, missing file or missing key
   as an error, and warns on `[verified]` claims whose `(via: …)` names a repo
-  experiment while still holding unbound numbers (ignoring numbers that are part
-  of a product/model name such as `RTX 5090` or appear in the entry's own title
-  or tags).
+  experiment while still holding unbound numbers—ignoring plain integers (with
+  no decimal point, percent sign, thousands separator or trailing unit) that
+  pair with the preceding word in the entry's own title or tags or follow
+  `RTX` or `GTX` (3–4 digits) or `CUDA`, `PTX`, `Gemma`, `Llama`, `Qwen`,
+  `Claude`, `GPT` or `Phi` (1–2 digits).
 
 ## Claim ids and links
 
@@ -217,7 +221,8 @@ line (leaving a `[wrong]` claim `[wrong]` when contradicted). Both
 `rnd claims assign` and `rnd reconcile` refuse (`MULTIPLE_CLAIMS_HEADINGS`)
 without writing if an entry holds more than one real `## Claims` heading.
 `rnd check` errors on broken target ids, one-sided links (hinting to run
-`rnd reconcile` or remove the clause and reset state) or an unclosed code fence,
+`rnd reconcile`, or remove the clause and reset a `superseded` or `disputed`
+state) or an unclosed code fence,
 and warns on a `[superseded]` claim with no `(superseded-by: …)` link.
 `rnd search` and `rnd show` mark `superseded` and `disputed` claims and name the
 claim that replaced or contradicted them.

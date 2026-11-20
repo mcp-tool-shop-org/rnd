@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from mcptoolshop_rnd import collect, model, release
+from mcptoolshop_rnd import collect, model, questions, release
 
 from .test_cli import CliBase
 from .test_rnd import ENTRY, write
@@ -45,9 +45,17 @@ class PartAFollowupTests(CliBase):
         self.assertIn("0 errors, 0 warnings", out)
         p_disp.unlink()
 
-        # 3. Reverse-only hints for superseded-by and contradicted-by both instruct setting state back.
+        # 3. Reverse-only hints: [superseded] and [disputed] instruct setting state back, while [wrong] must NOT.
         id_s0 = model.make_claim_id("2026-01-02-sample", "Graphs replay with one call.")
         id_s1 = model.make_claim_id("2026-01-02-sample", "It helps decode more than diffusion.")
+        other_p = self.root / "entries/2026/2026-01-03-other.md"
+        other_p.write_text(
+            other_p.read_text(encoding="utf-8").replace(
+                "- [unverified] It helps decode more than diffusion.",
+                "- [wrong] [c-oldwrg1] Known false claim. (via: audit, 2026-01-03)",
+            ),
+            encoding="utf-8",
+        )
         p_new = write(
             self.root,
             "entries/2026/2026-01-12-newer.md",
@@ -56,20 +64,48 @@ class PartAFollowupTests(CliBase):
                 f"- [verified] [c-newsup01] Newer supersedes. (via: bench, 2026-01-12) (supersedes: {id_s0})",
             ).replace(
                 "- [unverified] It helps decode more than diffusion.",
-                f"- [verified] [c-newcon02] Newer contradicts. (via: bench, 2026-01-12) (contradicts: {id_s1})",
+                f"- [verified] [c-newcon02] Newer contradicts. (via: bench, 2026-01-12) "
+                f"(contradicts: {id_s1}, c-oldwrg1)",
             ),
         )
         self.assertEqual(self.run_cli("reconcile", "2026-01-12-newer")[0], 0)
         p_new.write_text(
             p_new.read_text(encoding="utf-8")
             .replace(f" (supersedes: {id_s0})", "")
-            .replace(f" (contradicts: {id_s1})", ""),
+            .replace(f" (contradicts: {id_s1}, c-oldwrg1)", ""),
             encoding="utf-8",
         )
         code, _, err = self.run_cli("check")
         self.assertEqual(code, 1)
-        self.assertIn(f"remove '(superseded-by: c-newsup01)' from entries/2026/2026-01-02-sample.md and set its state back", err)
-        self.assertIn(f"remove '(contradicted-by: c-newcon02)' from entries/2026/2026-01-02-sample.md and set its state back", err)
+        self.assertIn("remove '(superseded-by: c-newsup01)' from entries/2026/2026-01-02-sample.md and set its state back", err)
+        self.assertIn("remove '(contradicted-by: c-newcon02)' from entries/2026/2026-01-02-sample.md and set its state back", err)
+        wrong_lines = [ln for ln in err.splitlines() if "c-oldwrg1" in ln]
+        self.assertEqual(len(wrong_lines), 1, err)
+        self.assertIn("remove '(contradicted-by: c-newcon02)' from entries/2026/2026-01-03-other.md", wrong_lines[0])
+        self.assertNotIn("set its state back", wrong_lines[0])
+
+        # Also cover missing-target case on a [wrong] claim (must not suggest setting state back).
+        other_p.write_text(
+            other_p.read_text(encoding="utf-8").replace("c-newcon02", "c-deadbeef"),
+            encoding="utf-8",
+        )
+        code, _, err = self.run_cli("check")
+        self.assertEqual(code, 1)
+        wrong_missing = [ln for ln in err.splitlines() if "c-oldwrg1" in ln]
+        self.assertEqual(len(wrong_missing), 1, err)
+        self.assertIn("remove stale '(contradicted-by: c-deadbeef)' from entries/2026/2026-01-03-other.md,", wrong_missing[0])
+        self.assertNotIn("set its state back", wrong_missing[0])
+
+        # Cover in-memory load_text error paths cleanly.
+        ent_none, probs_none = model.load_text("---\nbad\n", "entries/2026/bad.md")
+        self.assertIsNone(ent_none)
+        self.assertEqual(probs_none[0].level, "error")
+        q_none, q_probs = questions.load_text("no frontmatter\n", "questions/bad.md")
+        self.assertIsNone(q_none)
+        self.assertEqual(q_probs[0].level, "error")
+        q_bad_yaml, q_bad_probs = questions.load_text("---\n[broken\n---\n", "questions/bad2.md")
+        self.assertIsNone(q_bad_yaml)
+        self.assertEqual(q_bad_probs[0].level, "error")
 
     def test_unclosed_code_fence_reported_by_name_as_error(self):
         p_backtick = write(
@@ -308,79 +344,199 @@ class PartAFollowupTests(CliBase):
             "licences": [],
             "runs": [],
         }))
-        p = write(
-            self.root,
-            "entries/2026/2026-01-12-names.md",
-            "---\n"
-            "id: 2026-01-12-names\n"
-            "title: Benchmarking llama 3.1 on RTX 5090\n"
-            "date: 2026-01-12\n"
-            "kind: finding\n"
-            "relevance: act\n"
-            "fields: [gpu-computing]\n"
-            "tags: [rtx-5090, llama-3.1]\n"
-            "---\n\n"
-            "## Summary\n\nSummary.\n\n"
-            "## Claims\n\n"
-            "- [verified] On the RTX 5090, Jev 1.13 and llama 3.1 scored "
-            "84.2%<!-- rnd:experiments/demo/results.json#accuracy:.1% -->. "
-            "(via: experiments/demo/results.json, 2026-11-19)\n\n"
-            "## Sources\n\n- [rig] bench\n",
+
+        def make_entry(eid, title, tags, claims_lines):
+            claims_block = "\n".join(claims_lines)
+            return write(
+                self.root,
+                f"entries/2026/{eid}.md",
+                "---\n"
+                f"id: {eid}\n"
+                f"title: {title}\n"
+                "date: 2026-01-12\n"
+                "kind: finding\n"
+                "relevance: act\n"
+                "fields: [gpu-computing]\n"
+                f"tags: [{', '.join(tags)}]\n"
+                "---\n\n"
+                "## Summary\n\nSummary.\n\n"
+                "## Claims\n\n"
+                f"{claims_block}\n\n"
+                "## Sources\n\n- [rig] bench\n",
+            )
+
+        # 1. Explicit patterns (RTX 5090) and title/tag pairs (Switchyard 2, RTX 5090) do NOT warn.
+        p = make_entry(
+            "2026-01-12-names",
+            "Benchmarking Switchyard 2 on RTX 5090",
+            ["rtx-5090", "switchyard-2"],
+            [
+                "- [verified] On the RTX 5090, Switchyard 2, CUDA 13, and Llama 3 scored "
+                "84.2%<!-- rnd:experiments/demo/results.json#accuracy:.1% -->. "
+                "(via: experiments/demo/results.json, 2026-11-19)",
+            ],
         )
         code, out, err = self.run_cli("check")
         self.assertEqual(code, 0, err)
         self.assertIn("0 errors, 0 warnings", out)
+        p.unlink()
 
-        # Metric names, seed numbers, and numbers with measurement units still trigger warnings.
-        write(
-            self.root,
-            "entries/2026/2026-01-12-names.md",
-            p.read_text(encoding="utf-8").replace(
-                "84.2%<!-- rnd:experiments/demo/results.json#accuracy:.1% -->.",
-                "84.2%<!-- rnd:experiments/demo/results.json#accuracy:.1% --> on Seed 42 with AUC 0.91 and CUDA 10 ms.",
-            ),
+        # 2. Without Switchyard 2 in title/tags, non-pattern Switchyard 2 STILL warns (whereas RTX 5090 stays ignored).
+        p2 = make_entry(
+            "2026-01-12-generic",
+            "Benchmarking results",
+            ["bench"],
+            [
+                "- [verified] Switchyard 2 ran on RTX 5090. (via: experiments/demo/results.json, 2026-11-19)",
+            ],
         )
         code, out, err = self.run_cli("check")
         self.assertEqual(code, 0)
         self.assertIn("0 errors, 1 warnings", out)
-        self.assertIn("42, 0.91, 10", err)
+        self.assertIn("unbound number(s) (2):", err)
+        p2.unlink()
+
+        # 3. Reviewer's three measured sentences + measured figure after RTX 5090 + decimals/percents/units ALL warn.
+        p3 = make_entry(
+            "2026-01-12-rev",
+            "Jev 1.13 and RTX 5090 measurements",
+            ["rtx-5090", "jev-1.13"],
+            [
+                "- [verified] Kev-4B 87.5 on the hard set, against Jev 81.2. (via: experiments/demo/results.json, 2026-11-19)",
+                "- [verified] Across 350 hard pairs the judge never flipped. (via: experiments/demo/results.json, 2026-11-19)",
+                "- [verified] Lifetime completion on Death Road to Canada 20.3 and Spire 12.3. (via: experiments/demo/results.json, 2026-11-19)",
+                "- [verified] RTX 5090 reached 87.5%. (via: experiments/demo/results.json, 2026-11-19)",
+                "- [verified] Jev 1.13 and CUDA 10 ms at Batch 1,562. (via: experiments/demo/results.json, 2026-11-19)",
+            ],
+        )
+        code, out, err = self.run_cli("check")
+        self.assertEqual(code, 0)
+        self.assertIn("0 errors, 5 warnings", out)
+        self.assertIn("(87.5, 81.2)", err)
+        self.assertIn("(350)", err)
+        self.assertIn("(20.3, 12.3)", err)
+        self.assertIn("(87.5%)", err)
+        self.assertIn("(1.13, 10, 1,562)", err)
+        p3.unlink()
 
     def test_bump_failure_between_version_and_changelog_never_bumps_twice(self):
-        # 1. Runtime failure during insert_changelog rolls back __init__.py and keeps fragments.
-        self.run_cli("change", "Fix claims check", "--level", "patch")
-        with mock.patch.object(release, "insert_changelog", side_effect=OSError("disk full")):
+        cl_path = self.root / "CHANGELOG.md"
+        init_path = self.root / "mcptoolshop_rnd/__init__.py"
+        orig_cl_bytes = cl_path.read_bytes()
+        orig_init_bytes = init_path.read_bytes()
+
+        # 1. Partial write failure INSIDE staging CHANGELOG.md temp file (simulates mid-write ENOSPC).
+        #    Both CHANGELOG.md and __init__.py remain completely intact, and no .tmp files linger.
+        p_frag = Path(write(self.root, "changes/2026-11-20-aaaaaaaa-fix-claims-check.md",
+                            "---\nlevel: patch\ndate: 2026-11-20\n---\n\nFix claims check\n"))
+        orig_fdopen = release.os.fdopen
+
+        def failing_cl_fdopen(fd, mode, *args, **kwargs):
+            real_fh = orig_fdopen(fd, mode, *args, **kwargs)
+            failing_cl_fdopen.calls += 1
+            if failing_cl_fdopen.calls == 2:
+                class HalfWriter:
+                    def write(self, data):
+                        real_fh.write(data[:47])
+                        real_fh.flush()
+                        raise OSError(28, "No space left on device")
+                    def flush(self):
+                        real_fh.flush()
+                    def fileno(self):
+                        return real_fh.fileno()
+                    def close(self):
+                        real_fh.close()
+                return HalfWriter()
+            return real_fh
+
+        failing_cl_fdopen.calls = 0
+        with mock.patch.object(release.os, "fdopen", side_effect=failing_cl_fdopen):
             code, _, err = self.run_cli("bump")
         self.assertEqual(code, 3)
-        self.assertIn("disk full", err)
-        self.assertIn('__version__ = "1.0.0"', (self.root / "mcptoolshop_rnd/__init__.py").read_text(encoding="utf-8"))
-        self.assertEqual(len(list((self.root / "changes").glob("*.md"))), 1)
+        self.assertIn("No space left on device", err)
+        self.assertEqual(cl_path.read_bytes(), orig_cl_bytes)
+        self.assertEqual(init_path.read_bytes(), orig_init_bytes)
+        self.assertFalse(list(self.root.glob(".*tmp*")))
+        self.assertFalse(list((self.root / "mcptoolshop_rnd").glob(".*tmp*")))
+        self.assertTrue(p_frag.exists())
 
-        code, out, _ = self.run_cli("bump")
-        self.assertEqual(code, 0)
+        # 2. Failure BETWEEN replacing __init__.py and replacing CHANGELOG.md rolls back __init__.py atomically.
+        orig_replace = release.os.replace
+
+        def fail_second_replace(src, dst):
+            fail_second_replace.calls += 1
+            if fail_second_replace.calls == 2:
+                raise OSError(13, "Permission denied")
+            return orig_replace(src, dst)
+
+        fail_second_replace.calls = 0
+        with mock.patch.object(release.os, "replace", side_effect=fail_second_replace):
+            code, _, err = self.run_cli("bump")
+        self.assertEqual(code, 3)
+        self.assertIn("Permission denied", err)
+        self.assertEqual(init_path.read_bytes(), orig_init_bytes)
+        self.assertEqual(cl_path.read_bytes(), orig_cl_bytes)
+        self.assertFalse(list(self.root.glob(".*tmp*")))
+        self.assertTrue(p_frag.exists())
+
+        # 3. Simulated crash BETWEEN the two os.replace calls: __init__.py is at 1.0.1.0.0, CHANGELOG.md still at 1.0.0.
+        release.write_version(self.root, "1.0.1.0.0")
+        crashed_init_bytes = init_path.read_bytes()
+        patch_frag_bytes = p_frag.read_bytes()
+
+        # 3a. Re-run at a LOWER level (nano) must refuse with BAD_CHANGELOG naming both versions, never bump or clobber.
+        p_frag.write_text("---\nlevel: nano\ndate: 2026-11-20\n---\n\nLower nano note\n", encoding="utf-8")
+        code, _, err = self.run_cli("bump")
+        self.assertEqual(code, 2)
+        self.assertIn("BAD_CHANGELOG", err)
+        self.assertIn("1.0.1.0.0", err)
+        self.assertIn("1.0.0", err)
+        self.assertEqual(init_path.read_bytes(), crashed_init_bytes)
+        self.assertEqual(cl_path.read_bytes(), orig_cl_bytes)
+
+        # 3b. Re-run at the MATCHING level (patch) completes 1.0.1.0.0 cleanly and writes exact expected CHANGELOG bytes.
+        p_frag.write_bytes(patch_frag_bytes)
+        today_iso = __import__("datetime").date.today().isoformat()
+        eol = "\r\n" if b"\r\n" in orig_cl_bytes else "\n"
+        expected_cl = (
+            f"# Changelog\n\n## [Unreleased]\n\n"
+            f"## [1.0.1.0.0] - {today_iso}\n\n"
+            f"- Fix claims check\n\n"
+            f"## [1.0.0] - 2026-01-01\n"
+        ).replace("\n", eol).encode("utf-8")
+        code, out, err = self.run_cli("bump")
+        self.assertEqual(code, 0, err)
         self.assertIn("bumped 1.0.0 -> 1.0.1.0.0", out)
-        self.assertIn('__version__ = "1.0.1.0.0"', (self.root / "mcptoolshop_rnd/__init__.py").read_text(encoding="utf-8"))
-        self.assertIn("## [1.0.1.0.0]", (self.root / "CHANGELOG.md").read_text(encoding="utf-8"))
+        self.assertIn('__version__ = "1.0.1.0.0"', init_path.read_text(encoding="utf-8"))
+        self.assertEqual(cl_path.read_bytes(), expected_cl)
         self.assertFalse((self.root / "changes").exists())
 
-        # 2. Simulated crash state: __init__.py already holds the bumped version 1.0.2.0.0 while CHANGELOG.md
-        #    still stops at 1.0.1.0.0 -> re-run finishes 1.0.2.0.0 instead of raising to 1.0.3.0.0.
-        self.run_cli("change", "Recover interrupted bump", "--level", "patch")
+        # 4. Subsequent crash recovery at higher version 1.0.2.0.0 + lower level without fragments also refuses cleanly.
         release.write_version(self.root, "1.0.2.0.0")
-        code, out, _ = self.run_cli("bump")
-        self.assertEqual(code, 0)
-        self.assertIn("bumped 1.0.1.0.0 -> 1.0.2.0.0", out)
-        self.assertIn('__version__ = "1.0.2.0.0"', (self.root / "mcptoolshop_rnd/__init__.py").read_text(encoding="utf-8"))
-        self.assertIn("## [1.0.2.0.0]", (self.root / "CHANGELOG.md").read_text(encoding="utf-8"))
-        self.assertNotIn("1.0.3.0.0", (self.root / "mcptoolshop_rnd/__init__.py").read_text(encoding="utf-8"))
+        with mock.patch.object(release, "last_tag", return_value=None), \
+                mock.patch.object(release, "changes", return_value=[]):
+            code, _, err = self.run_cli("bump", "nano")
+            self.assertEqual(code, 2)
+            self.assertIn("BAD_CHANGELOG", err)
+            self.assertEqual(cl_path.read_bytes(), expected_cl)
 
-        # 3. Non-fragment bump checks CHANGELOG.md before writing __init__.py.
+            # Matching level finishes 1.0.2.0.0
+            code, out, err = self.run_cli("bump", "patch")
+            self.assertEqual(code, 0, err)
+            self.assertIn("bumped 1.0.1.0.0 -> 1.0.2.0.0", out)
+            self.assertIn("## [1.0.2.0.0]", cl_path.read_text(encoding="utf-8"))
+            self.assertIn("## [1.0.1.0.0]", cl_path.read_text(encoding="utf-8"))
+            self.assertIn("## [1.0.0] - 2026-01-01", cl_path.read_text(encoding="utf-8"))
+
+        # 5. Missing ## [Unreleased] refuses before touching __init__.py or writing temp files.
         write(self.root, "CHANGELOG.md", "# Changelog\n")
+        init_before_bad = init_path.read_bytes()
         with mock.patch.object(release, "last_tag", return_value=None), \
                 mock.patch.object(release, "changes", return_value=[]):
             code, _, err = self.run_cli("bump")
         self.assertEqual(code, 2)
         self.assertIn("BAD_CHANGELOG", err)
-        self.assertIn('__version__ = "1.0.2.0.0"', (self.root / "mcptoolshop_rnd/__init__.py").read_text(encoding="utf-8"))
+        self.assertEqual(init_path.read_bytes(), init_before_bad)
 
     def test_collect_resolve_guard_reached_via_symlink_into_instruments(self):
         # Unused regexes removed from model (fix-1 C7).

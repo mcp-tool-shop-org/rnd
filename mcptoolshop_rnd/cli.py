@@ -514,8 +514,7 @@ def cmd_bump(args):
         if fragments:
             levels = [f["level"] for f in fragments] + ([args.level] if args.level else [])
             level = release.highest_level(levels)
-            old = release.effective_version_for_bump(ROOT, level)
-            new = release.bump(old, level)
+            old, new = release.resolve_bump_versions(ROOT, level)
             section = release.fragments_changelog_section(new, fragments, args.note or ())
             if not args.dry_run:
                 release.apply_bump(ROOT, new, section)
@@ -535,8 +534,7 @@ def cmd_bump(args):
             return 0
 
         level = args.level or "nano"
-        old = release.effective_version_for_bump(ROOT, level)
-        new = release.bump(old, level)
+        old, new = release.resolve_bump_versions(ROOT, level)
         since = release.last_tag(ROOT)
         section = release.changelog_section(ROOT, new, release.changes(ROOT, since), args.note or ())
         if not args.dry_run:

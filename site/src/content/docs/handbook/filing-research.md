@@ -169,9 +169,11 @@ with no existing claim id, and a malformed changelog fragment.
 Warnings: an entry with no sources (except rig-facts and instruments), a
 `[[link]]` to no entry, a `[superseded]` claim with no `(superseded-by: …)`
 link, and a `[verified]` claim whose `(via: …)` names one of this repo's
-experiments while its text still holds an unbound number (ignoring numbers that
-are part of a product/model name such as `RTX 5090` or appear in the entry's
-title or tags).
+experiments while its text still holds an unbound number—ignoring plain integers
+(with no decimal point, percent sign, thousands separator or trailing unit) that
+pair with the preceding word in the entry's title or tags or follow `RTX` or
+`GTX` (3–4 digits) or `CUDA`, `PTX`, `Gemma`, `Llama`, `Qwen`, `Claude`, `GPT`
+or `Phi` (1–2 digits).
 
 ## Writing rules
 

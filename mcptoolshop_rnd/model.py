@@ -370,17 +370,25 @@ def parse_claims(text):
 def load(path, root):
     """Parse one entry file. Returns (entry_or_None, problems)."""
     rel = Path(path).relative_to(root).as_posix()
-    problems = []
     try:
         text = _read_raw_text(path)
+    except (OSError, UnicodeDecodeError) as exc:
+        return None, [Problem("error", rel, f"unreadable: {exc}")]
+    return load_text(text, rel)
+
+
+def load_text(text, rel):
+    """Parse entry text already in memory for library-relative `rel`. Returns (entry_or_None, problems)."""
+    problems = []
+    try:
         meta, body = frontmatter.read(text)
-    except (OSError, UnicodeDecodeError, frontmatter.FrontmatterError) as exc:
+    except frontmatter.FrontmatterError as exc:
         return None, [Problem("error", rel, f"unreadable: {exc}")]
 
     def err(msg):
         problems.append(Problem("error", rel, msg))
 
-    entry_id = str(meta.get("id") or Path(path).stem)
+    entry_id = str(meta.get("id") or Path(rel).stem)
     if not ID_RE.match(entry_id):
         err(f"id {entry_id!r} must be lower-case letters, digits, '.', '_' or '-'")
     title = str(meta.get("title") or "").strip()
@@ -517,7 +525,12 @@ def load_all(root):
             cid = c["id"]
             for rel_name, targets in c["relations"].items():
                 inv = INVERSE_OF[rel_name]
-                state_reset = " and set its state back" if rel_name in ("superseded-by", "contradicted-by") else ""
+                state_reset = (
+                    " and set its state back"
+                    if (rel_name == "superseded-by" and c["state"] == "superseded")
+                    or (rel_name == "contradicted-by" and c["state"] == "disputed")
+                    else ""
+                )
                 for tid in targets:
                     if tid == cid:
                         continue

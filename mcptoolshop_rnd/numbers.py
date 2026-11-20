@@ -30,7 +30,7 @@ UNBOUND_NUM_RE = re.compile(
     r"(?<![A-Za-z0-9_.:/\-])(?:[+\-\u2212])?\d[\d,]*(?:\.\d+)?%?(?!\.[0-9]|,\d|[A-Za-z0-9_:])"
 )
 NAME_NUM_RE = re.compile(
-    r"(?<![A-Za-z0-9_.'\u2019-])([A-Za-z][A-Za-z0-9._-]{1,})\s+(\d+(?:\.\d+)*)(?!%|,\d|\.\d|[A-Za-z0-9_:])"
+    r"(?<![A-Za-z0-9_.'\u2019-])([A-Za-z][A-Za-z0-9._-]{1,})\s+([1-9]\d*)(?!%|\.\d|,\d|/\d|[A-Za-z0-9_:])"
 )
 TRAILING_UNIT_RE = re.compile(
     r"^\s*(?:u?s|ms|ns|sec|secs|seconds?|min|mins|minutes?|hr|hrs|hours?|days?|"
@@ -38,24 +38,11 @@ TRAILING_UNIT_RE = re.compile(
     r"tokens?|tok(?:/s)?|pairs?|records?|phrases?|samples?|examples?|items?|"
     r"prompts?|answers?|sentences?|repeats?|starts?|calls?|requests?)\b"
 )
-NON_PRODUCT_WORDS = frozenset({
-    "a", "about", "above", "acc", "accuracy", "after", "all", "an", "and", "another",
-    "any", "approximately", "are", "around", "as", "at", "auc", "averaged", "batch",
-    "be", "before", "below", "between", "bleu", "both", "brier", "by", "cer", "cost",
-    "count", "down", "dropped", "each", "eer", "epoch", "epochs", "error", "every",
-    "f1", "fell", "figure", "first", "flagged", "fold", "folds", "for", "from",
-    "gained", "gave", "got", "had", "has", "have", "hit", "in", "into", "is", "just",
-    "kappa", "kept", "last", "latency", "left", "line", "lines", "loss", "lost", "made",
-    "mae", "marked", "max", "mean", "measured", "median", "min", "minus", "missed",
-    "mse", "nearly", "needed", "of", "off", "on", "only", "or", "out", "over", "part",
-    "pass", "passes", "peak", "peaked", "per", "phase", "phases", "plus", "precision",
-    "ran", "rate", "reached", "recall", "rmse", "rose", "roughly", "rouge", "rule",
-    "rules", "run", "runs", "saved", "saw", "score", "scored", "section", "seed",
-    "seeds", "set", "shown", "split", "stage", "stages", "step", "steps", "table",
-    "tested", "than", "the", "tier", "tiers", "to", "took", "top", "total", "trial",
-    "trials", "under", "up", "used", "versus", "vs", "was", "wave", "waves", "wer",
-    "were", "with", "within",
-})
+PRODUCT_NAME_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
+    ("RTX/GTX GPU model (3-4 digits)", re.compile(r"^(?:RTX|GTX)\s+[1-9]\d{2,3}$", re.I)),
+    ("CUDA/PTX major version (1-2 digits)", re.compile(r"^(?:CUDA|PTX)\s+[1-9]\d?$", re.I)),
+    ("Model family generation (1-2 digits)", re.compile(r"^(?:Gemma|Llama|Qwen|Claude|GPT|Phi)\s+[1-9]\d?$", re.I)),
+)
 FENCE_RE = re.compile(r"^ {0,3}(`{3,}|~{3,})")
 
 
@@ -391,17 +378,18 @@ def _experiment_patterns(root: Path) -> list[tuple[str, re.Pattern]]:
 
 
 def _strip_name_numbers(cleaned: str, title: str = "", tags: tuple[str, ...] | list[str] = ()) -> str:
-    """Drop numeric tokens that are part of a product/proper name or appear in the entry's title or tags."""
+    """Drop plain-integer tokens paired with a name in the entry's title/tags or matching PRODUCT_NAME_PATTERNS."""
     context_norm = re.sub(r"[-_/]+", " ", " ".join([title or "", *(tags or ())]).lower())
 
     def repl(m: re.Match) -> str:
         word, num = m.group(1), m.group(2)
         if TRAILING_UNIT_RE.match(cleaned[m.end():]):
             return m.group(0)
-        pair_norm = re.sub(r"[-_/]+", " ", f"{word.lower()} {num.lower()}")
+        pair = f"{word} {num}"
+        pair_norm = re.sub(r"[-_/]+", " ", pair.lower())
         if context_norm and re.search(r"(?<![A-Za-z0-9])" + re.escape(pair_norm) + r"(?![A-Za-z0-9])", context_norm):
             return word + " "
-        if word[0].isupper() and not num.startswith("0") and word.lower().rstrip("._-") not in NON_PRODUCT_WORDS:
+        if any(pat.match(pair) for _, pat in PRODUCT_NAME_PATTERNS):
             return word + " "
         return m.group(0)
 

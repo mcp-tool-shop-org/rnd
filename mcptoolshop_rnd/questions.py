@@ -42,14 +42,22 @@ def question_paths(root):
 def load(path, root):
     """Parse one question file. Returns (question_or_None, problems)."""
     rel = Path(path).relative_to(root).as_posix()
-    problems = []
     try:
         text = Path(path).read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError) as exc:
+        return None, [model.Problem("error", rel, f"unreadable: {exc}")]
+    return load_text(text, rel)
+
+
+def load_text(text, rel):
+    """Parse question text already in memory for library-relative `rel`. Returns (question_or_None, problems)."""
+    problems = []
+    try:
         meta_text, body = frontmatter.split(text)
         if meta_text is None:
             return None, [model.Problem("error", rel, "missing frontmatter")]
         meta = frontmatter.parse(meta_text)
-    except (OSError, UnicodeDecodeError, frontmatter.FrontmatterError) as exc:
+    except frontmatter.FrontmatterError as exc:
         return None, [model.Problem("error", rel, f"unreadable: {exc}")]
 
     def err(msg):
@@ -59,7 +67,7 @@ def load(path, root):
     if unknown:
         err(f"unknown question frontmatter keys: {', '.join(unknown)}")
 
-    qid = str(meta.get("id") or Path(path).stem)
+    qid = str(meta.get("id") or Path(rel).stem)
     if not model.ID_RE.match(qid):
         err(f"id {qid!r} must be lower-case letters, digits, '.', '_' or '-'")
     title = str(meta.get("title") or "").strip()

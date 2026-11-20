@@ -181,10 +181,13 @@ segments, `MAJOR.MINOR.PATCH.MICRO.NANO`:
 A bump resets the segments after the one it raises (`1.0.0.0.9` → `micro` →
 `1.0.0.1.0`). The CHANGELOG section lists the entries, instruments, experiments and
 catalogues changed since the last `v*` tag, including uncommitted and untracked
-files, plus any `--note` lines. `--dry-run` prints it without writing. If the
-`CHANGELOG.md` write fails after the version file is written, `bump` rolls back
-the version file and recovers on re-run without bumping twice. The command
-prints the commit, tag and push to run next.
+files, plus any `--note` lines. `--dry-run` prints it without writing. Both
+`mcptoolshop_rnd/__init__.py` and `CHANGELOG.md` are staged through temp files
+in the same folder and swapped with `os.replace`, rolling back `__init__.py` if
+the `CHANGELOG.md` swap fails; if a crash leaves `__init__.py` ahead of
+`CHANGELOG.md`, re-running at the matching level completes it and re-running at
+any other level refuses with `BAD_CHANGELOG` instead of bumping twice. The
+command prints the commit, tag and push to run next.
 
 ```bash
 python -m rnd bump --note "Kev measured against hosted Jev"

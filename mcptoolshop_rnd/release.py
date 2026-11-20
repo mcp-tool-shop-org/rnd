@@ -7,9 +7,12 @@ Versions have five segments, MAJOR.MINOR.PATCH.MICRO.NANO:
 A bump raises one segment and resets the ones after it. `1.0.0` reads as `1.0.0.0.0`.
 """
 
+import contextlib
+import os
 import re
 import secrets
 import subprocess
+import tempfile
 from datetime import date
 from pathlib import Path
 
@@ -55,9 +58,53 @@ def read_version(root):
     return m.group(1)
 
 
+def _encode_matching_eol(path: Path, text: str) -> bytes:
+    eol = "\r\n" if path.is_file() and b"\r\n" in path.read_bytes() else "\n"
+    return text.replace("\r\n", "\n").replace("\n", eol).encode("utf-8")
+
+
+def _stage_temp_bytes(path: Path, data: bytes) -> Path:
+    fd, tmp_str = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=str(path.parent))
+    tmp_path = Path(tmp_str)
+    fh = None
+    try:
+        fh = os.fdopen(fd, "wb")
+        fh.write(data)
+        fh.flush()
+        os.fsync(fh.fileno())
+        fh.close()
+        fh = None
+    except BaseException:
+        if fh is not None:
+            with contextlib.suppress(OSError):
+                fh.close()
+        else:
+            with contextlib.suppress(OSError):
+                os.close(fd)
+        with contextlib.suppress(OSError):
+            tmp_path.unlink()
+        raise
+    return tmp_path
+
+
+def _atomic_write_bytes(path: Path, data: bytes) -> None:
+    tmp_path = _stage_temp_bytes(path, data)
+    try:
+        os.replace(tmp_path, path)
+    except BaseException:
+        with contextlib.suppress(OSError):
+            tmp_path.unlink()
+        raise
+
+
+def _updated_version_text(root, new):
+    p = Path(root) / "mcptoolshop_rnd" / "__init__.py"
+    return VERSION_RE.sub(f'__version__ = "{new}"', p.read_text(encoding="utf-8"))
+
+
 def write_version(root, new):
     p = Path(root) / "mcptoolshop_rnd" / "__init__.py"
-    p.write_text(VERSION_RE.sub(f'__version__ = "{new}"', p.read_text(encoding="utf-8")), encoding="utf-8")
+    _atomic_write_bytes(p, _encode_matching_eol(p, _updated_version_text(root, new)))
 
 
 def _git(root, *args):
@@ -117,15 +164,22 @@ def changelog_section(root, version, changed, notes=(), today=None):
     return "\n".join(lines) + "\n"
 
 
-def insert_changelog(root, section):
+def _updated_changelog_text(root, section):
     p = Path(root) / "CHANGELOG.md"
+    if not p.is_file():
+        raise ReleaseError("BAD_CHANGELOG", "CHANGELOG.md has no '## [Unreleased]' heading")
     text = p.read_text(encoding="utf-8")
     marker = "## [Unreleased]"
     if marker not in text:
         raise ReleaseError("BAD_CHANGELOG", "CHANGELOG.md has no '## [Unreleased]' heading")
     head, tail = text.split(marker, 1)
     rest = tail.lstrip("\n")
-    p.write_text(head + marker + "\n\n" + section + ("\n" + rest if rest else ""), encoding="utf-8")
+    return head + marker + "\n\n" + section + ("\n" + rest if rest else "")
+
+
+def insert_changelog(root, section):
+    p = Path(root) / "CHANGELOG.md"
+    _atomic_write_bytes(p, _encode_matching_eol(p, _updated_changelog_text(root, section)))
 
 
 def latest_changelog_version(root):
@@ -140,32 +194,58 @@ def latest_changelog_version(root):
     return None
 
 
-def effective_version_for_bump(root, level):
-    """Return the version to bump from, recovering if an earlier bump wrote __init__.py without CHANGELOG.md."""
+def resolve_bump_versions(root, level):
+    """Return (old, new) versions to bump, recovering or refusing clearly if __init__.py is ahead of CHANGELOG.md."""
     init_ver = read_version(root)
     cl_ver = latest_changelog_version(root)
-    if not cl_ver:
-        return init_ver
-    try:
-        if parse(init_ver) > parse(cl_ver) and bump(cl_ver, level) == init_ver:
-            return cl_ver
-    except ReleaseError:
-        return init_ver
-    return init_ver
+    if cl_ver:
+        try:
+            init_parsed = parse(init_ver)
+            cl_parsed = parse(cl_ver)
+        except ReleaseError:
+            return init_ver, bump(init_ver, level)
+        if init_parsed > cl_parsed:
+            expected_same = bump(cl_ver, level)
+            if expected_same == init_ver:
+                return cl_ver, init_ver
+            raise ReleaseError(
+                "BAD_CHANGELOG",
+                f"mcptoolshop_rnd/__init__.py is at {init_ver} while CHANGELOG.md stops at {cl_ver} (interrupted bump)",
+                f"re-run `rnd bump` at the level that produced {init_ver} to finish its CHANGELOG section, "
+                f"or restore mcptoolshop_rnd/__init__.py to {cl_ver} first",
+            )
+    return init_ver, bump(init_ver, level)
 
 
 def apply_bump(root, new, section):
-    """Write the new version and CHANGELOG section, rolling back __init__.py if the CHANGELOG write fails."""
-    cl_path = Path(root) / "CHANGELOG.md"
-    if not cl_path.is_file() or "## [Unreleased]" not in cl_path.read_text(encoding="utf-8"):
-        raise ReleaseError("BAD_CHANGELOG", "CHANGELOG.md has no '## [Unreleased]' heading")
+    """Stage both __init__.py and CHANGELOG.md in sibling temp files, then atomically replace both with rollback."""
     init_path = Path(root) / "mcptoolshop_rnd" / "__init__.py"
+    cl_path = Path(root) / "CHANGELOG.md"
     orig_init = init_path.read_bytes()
-    write_version(root, new)
+    new_init_bytes = _encode_matching_eol(init_path, _updated_version_text(root, new))
+    new_cl_bytes = _encode_matching_eol(cl_path, _updated_changelog_text(root, section))
+    tmp_init = _stage_temp_bytes(init_path, new_init_bytes)
     try:
-        insert_changelog(root, section)
+        tmp_cl = _stage_temp_bytes(cl_path, new_cl_bytes)
     except BaseException:
-        init_path.write_bytes(orig_init)
+        with contextlib.suppress(OSError):
+            tmp_init.unlink()
+        raise
+    try:
+        os.replace(tmp_init, init_path)
+    except BaseException:
+        with contextlib.suppress(OSError):
+            tmp_init.unlink()
+        with contextlib.suppress(OSError):
+            tmp_cl.unlink()
+        raise
+    try:
+        os.replace(tmp_cl, cl_path)
+    except BaseException:
+        with contextlib.suppress(OSError):
+            tmp_cl.unlink()
+        with contextlib.suppress(OSError):
+            _atomic_write_bytes(init_path, orig_init)
         raise
 
 

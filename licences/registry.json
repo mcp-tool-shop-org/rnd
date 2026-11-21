@@ -3415,6 +3415,110 @@
       "notes": "Read by R&D on 2026-11-17 for the d5c Note 4 v5 pool audit (the L1-penalised multinomial probe, the permutation statistics, and imodels' RuleFit, which needs them). Evaluation code only, run on the rig; nothing is redistributed, so training is n/a. URL pinned to the release tag of the version the audit venv installs.",
       "snapshot_sha256": "e130c4a8d96b922a8192aa653f2ce021e2bc5d6b3bf756c5b811d36edccd5163",
       "snapshot_file": "2026-11-17/pandas-licence.txt"
+    },
+    {
+      "id": "ink-licence",
+      "owner": "inkle Ltd",
+      "kind": "licence",
+      "covers": [
+        "ink, inkle's narrative scripting language: the compiler and C# runtime (inkle/ink) and inkjs, its JavaScript port (inkle/inkjs, also MIT)"
+      ],
+      "url": "https://raw.githubusercontent.com/inkle/ink/master/LICENSE.txt",
+      "page_date": "MIT License (LICENSE.txt last changed 2025-01-01, commit eb8c10aa27)",
+      "read_date": "2026-11-21",
+      "clauses": [
+        "Permission is hereby granted, free of charge, to any person obtaining a copy"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "Keep the copyright and permission notice in copies or substantial portions of the software"
+      ],
+      "restriction_search": "MIT licence read in full: no term on AI training, competing products or outputs. inkjs's LICENSE.md is MIT too (GitHub licence API, 2026-11-21).",
+      "notes": "Read by R&D on 2026-11-21 for the narrative-facts question (a portable compiled narrative format that every engine interprets). A candidate format with no AI-training or non-competition term.",
+      "snapshot_sha256": "276f6ba9f1d76ea9238eb78f5f5b2e22d5e6edd128080ce3b70d5aea4b5d4695",
+      "snapshot_file": "2026-11-21/ink-licence.txt"
+    },
+    {
+      "id": "yarnspinner-licence",
+      "owner": "Yarn Spinner Pty. Ltd., Secret Lab Pty. Ltd. and Yarn Spinner contributors",
+      "kind": "licence",
+      "covers": [
+        "Yarn Spinner's core compiler and runtime (YarnSpinnerTool/YarnSpinner); the Unity (YarnSpinner-Unity) and Godot C# (YarnSpinner-Godot) integrations, and the archived older Unreal repository (YarnSpinner-Unreal, now YarnSpinner-Unreal-Prototype), also carry MIT licence files"
+      ],
+      "url": "https://raw.githubusercontent.com/YarnSpinnerTool/YarnSpinner/main/LICENSE.md",
+      "page_date": "MIT License (LICENSE.md last changed 2023-10-09, commit 1a5c8a2fc4)",
+      "read_date": "2026-11-21",
+      "clauses": [
+        "Permission is hereby granted, free of charge, to any person obtaining a copy"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "Keep the copyright and permission notice in copies or substantial portions of the software"
+      ],
+      "restriction_search": "MIT licence read in full: no term on AI training, competing products or outputs. GitHub's licence API reports MIT for the Unity, Godot C# and archived Unreal-Prototype repositories (2026-11-21). NOT MIT: the Unreal Engine plugin (YarnSpinner-UnrealEngine) and the Godot GDScript plugin (YarnSpinner-Godot-GDScript) both carry YSPL v1.0 (see yarnspinner-unrealengine-yspl).",
+      "notes": "Read by R&D on 2026-11-21 for the narrative-facts question. The MIT core differs from the YSPL plugins; a reference to 'Yarn Spinner' must say which. Owner corrected on 2026-11-21 after an outside licence-reading check: the notice names Yarn Spinner Pty. Ltd., Secret Lab Pty. Ltd. and the contributors.",
+      "snapshot_sha256": "bd420842addac8ac88ab6e8c22650bd9174d94ee79962a101961580ade02b600",
+      "snapshot_file": "2026-11-21/yarnspinner-licence.txt",
+      "archive_url": "http://web.archive.org/web/20261112131627/https://raw.githubusercontent.com/YarnSpinnerTool/YarnSpinner/main/LICENSE.md"
+    },
+    {
+      "id": "yarnspinner-unrealengine-yspl",
+      "owner": "Yarn Spinner Pty. Ltd.",
+      "kind": "licence",
+      "covers": [
+        "Yarn Spinner for Unreal Engine (YarnSpinnerTool/YarnSpinner-UnrealEngine), under the Yarn Spinner Public Licence (YSPL) version 1.0",
+        "Yarn Spinner for Godot in GDScript (YarnSpinnerTool/YarnSpinner-Godot-GDScript): its LICENSE.md is the same YSPL v1.0 text (identical sha256 of both repositories' licence content through GitHub's licence API, 2026-11-21)"
+      ],
+      "url": "https://raw.githubusercontent.com/YarnSpinnerTool/YarnSpinner-UnrealEngine/main/LICENSE.md",
+      "page_date": "Yarn Spinner Public Licence version 1.0 (LICENSE.md last changed 2026-02-27, commit 0212421866)",
+      "read_date": "2026-11-21",
+      "clauses": [
+        "using the Software, its documentation, or any associated materials to:",
+        "train, fine-tune, or otherwise improve any artificial intelligence system, machine learning model, or large language model;",
+        "include the Software or its documentation in any dataset assembled for the purpose of training AI systems; or",
+        "scrape, extract, or reproduce the Software or its documentation for use in AI code-generation tools or services.",
+        "must take reasonable steps to ensure that such tools do not transmit the Software's source code, documentation, or any substantial portion thereof to any remote server, service, or third party for the purpose of training",
+        "For the avoidance of doubt, this condition does not apply to the transmission of Your own original Yarn scripts or Your own original code that calls the Software's public API.",
+        "You may not use the Software, in whole or in part, to create, develop, distribute, or offer a Competing Product, as defined in Section 1.",
+        "narrative scripting tools or editors",
+        "(e) interactive fiction, visual novel, or text adventure authoring tools; (f) a compiler, runtime, or interpreter for the Yarn language or any substantially similar language.",
+        "(ii) Your tool does not embed, bundle, redistribute, or automatically download the Software for end users; and (iii) Your tool's primary purpose is to extend or support Yarn Spinner, not to replace it.",
+        "You may distribute the Software in compiled or object-code form as an embedded component of a Licensed Product, including for commercial purposes.",
+        "Except as expressly set out in this Section 3.4, You may not distribute the Software in any form.",
+        "You must retain the copyright notice set out at the top of this Licence and include a copy of this Licence in all copies or substantial portions of the Software.",
+        "You must credit Yarn Spinner in a location visible to end users of Your Licensed Product.",
+        "A commercial licence may, for example, modify or remove the attribution, non-competition, or AI training conditions set out above."
+      ],
+      "uses": {
+        "assets": "conditions",
+        "training": "barred",
+        "evaluation": "n/a",
+        "code": "barred"
+      },
+      "conditions": [
+        "Training (section 3.3(a)): the software, its documentation or any associated materials may not train, fine-tune or improve any AI model, go into a training dataset, or be scraped, extracted or reproduced for AI code-generation tools or services",
+        "AI tools (sections 3.3(b) and (c)): where AI tools are used with it as the licence permits, reasonable steps must keep them from sending its source, documentation or any substantial portion to any remote server or third party for training; your own original Yarn scripts and your own code that calls its public API are expressly outside that condition",
+        "Non-competition (sections 1 and 3.2(a)): it may not be used, in whole or in part, to create, develop, distribute or offer a tool whose primary purpose is enabling others to create branching dialogue or interactive narrative systems, narrative scripting tools or editors, dialogue editors, interactive fiction or visual novel authoring tools, or a compiler, runtime or interpreter for the Yarn language or any substantially similar language",
+        "Distribution (section 3.4): only in compiled or object-code form as an embedded component of a Licensed Product (an end-user product with substantial original content); no standalone distribution and no other distribution, so its source may not sit in a public repository; public forks stay under the YSPL alone, free and not used for a competing product (sections 3.4(c) and 6)",
+        "Extension tools (section 3.2(b)): a tool that integrates with Yarn Spinner needs users to obtain their own licence, must never embed, bundle, redistribute or automatically download it, and must aim to extend Yarn Spinner, not replace it",
+        "Attribution (section 3.1): keep the copyright notice and a copy of the licence in all copies or substantial portions, and credit Yarn Spinner where end users of the product can see it",
+        "A commercial licence from the licensor may modify or remove the attribution, non-competition and AI-training conditions (section 7); its availability and terms are at the licensor's discretion",
+        "Breach ends the licence automatically, with a duty to destroy copies (section 9); the law of Tasmania governs (section 14)"
+      ],
+      "restriction_search": "YSPL v1.0 read in full (sections 1 to 15) on 2026-11-21.",
+      "notes": "Read by R&D on 2026-11-21 for the narrative-facts question. R&D's verdict 'code: barred' is for the studio's use: World Forge, any distributed studio tool and any public studio repository must not carry or incorporate it (sections 3.4 and 3.2(b)(ii)); repositories that feed local training must not carry its files or documentation (section 3.3(a)); and agents building the studio's own narrative format or runtime must not read its source or documentation (a conservative reading of section 3.2(a)). If Unreal or Godot users want Yarn Spinner, the safe route is to export Yarn scripts, or compile them with the MIT core, and let them install the plugin under their own licence. A game shipping it in compiled form with the notice, a copy of the licence and the credit is possible ('assets: conditions'). Checked by another model family (Gemini 4 Carbon in AI Studio, High) on 2026-11-21: PASS, with additions that R&D checked against the snapshot and GitHub's licence API.",
+      "snapshot_sha256": "1daa34c6166448e374d4589db76daa5250957d6f8fcbe70a82d2924e225f10bb",
+      "snapshot_file": "2026-11-21/yarnspinner-unrealengine-yspl.txt"
     }
   ]
 }

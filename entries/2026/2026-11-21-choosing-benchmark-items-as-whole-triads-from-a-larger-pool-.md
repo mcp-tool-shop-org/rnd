@@ -43,7 +43,7 @@ repository, and recomputed the single-scan tail simulation.
 
 | Finding | Our design today | Decision |
 |---|---|---|
-| In the report's model (independent labels and scans), a tail audit over many statistics, tails and pools flags false leans often under clean labels | One tail failure was treated as a real lean, to repair or to disclose | We measured the audit's own false-alarm rates on our pools the same day (see the seed 44 entry). The observed tail is rarer than all but 2 of 2,000 label shuffles, so it is disclosed as real, not dismissed as noise |
+| In the report's model (independent item labels, without triad constraints), a tail audit over many statistics, tails and pools flags false leans often under clean labels | One tail failure was treated as a real lean, to repair or to disclose | We measured the audit's own false-alarm rates on our pools the same day (see the seed 44 entry). The observed tail is rarer than all but 2 of 2,000 label shuffles, so it is disclosed as real, not dismissed as noise |
 | Choosing whole triads from a larger pool is cheap and keeps the shared-facts guarantee | Repairs are made only inside the generator, per item | A triad-selection pilot with canary audits is parked for a later benchmark. The current generator gets no second repair |
 | Audit with held-out canary statistics | The audit uses the statistics the generator was tuned against | A candidate for future audits |
 | Small released pools are too small for a standalone audit (the report's table, unchecked) | Pools of a few hundred to a few thousand items | A candidate rule: draw small pools from audited large ones |

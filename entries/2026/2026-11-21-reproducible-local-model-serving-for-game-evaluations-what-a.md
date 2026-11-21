@@ -24,10 +24,11 @@ threads and paper abstracts. R&D re-checked the llama.cpp cache flags in its sou
 - **"Prefix caching off" is three settings, not one.** llama-server has:
   - a per-request prompt cache (`cache_prompt`, or `--no-cache-prompt` at launch);
   - a separate host-RAM prompt cache (`--cache-ram`, on by default at 8192 MiB);
-  - idle-slot saving, on by default, which needs the RAM cache and a unified KV buffer.
+  - idle-slot saving, on by default, which needs the RAM cache (with a unified KV buffer it also clears idle
+    slots).
 
-  `--no-cache-prompt` leaves the host-RAM cache on, and `--cache-ram 0` leaves in-slot prefix reuse on, so turn each
-  off explicitly.
+  By notes in llama.cpp issue 26128, `--no-cache-prompt` leaves the host-RAM cache on, and `--cache-ram 0` leaves
+  in-slot prefix reuse on, so turn each off explicitly.
 - **With no prefix reuse and one slot, llama.cpp reproduces tokens.** One study, across two engines (llama.cpp among
   them) and four weight formats at batch size one, saw all ten serving configurations reproduce every token and
   log-probability without prefix reuse. A maintainer says bit-identical results come from a single slot with no
@@ -36,7 +37,8 @@ threads and paper abstracts. R&D re-checked the llama.cpp cache flags in its sou
   tool episodes at 16-bit and 82.5% at 4-bit. At 4-bit, run-to-run divergence came mainly from llama-server's own
   prompt cache: 20.0 to 28.7% of episodes at its default across five random episode orders, and a 37.5-point shift
   under the canonical order.
-- **vLLM guarantees reproducibility in online serving only in batch-invariant mode.** Drift between cold restarts is
+- **vLLM guarantees reproducibility in online serving only in batch-invariant mode, and only on the same hardware
+  and vLLM version.** Drift between cold restarts is
   reported, from kernel autotuning. The report's proposed fix (a reduction-config flag) was not found in vLLM's source,
   and an issue comment shows drift even with an identical compile cache.
 - **Record more than the settings you send.** That means the full effective sampler set (llama-server applies `min_p`
@@ -52,7 +54,7 @@ threads and paper abstracts. R&D re-checked the llama.cpp cache flags in its sou
 
 | Finding | Our design today | Decision |
 |---|---|---|
-| "Prefix caching off" is three separate settings | The harness card refused to start only if "prefix caching is on" | Adopted in the harness card's addendum: the start check requires all three off, and each is recorded |
+| "Prefix caching off" is three separate settings | The harness card refused to start only if "prefix caching is on" | Adopted in the harness's build plan: the start check requires all three off, and each is recorded |
 | The manifest must capture server and sampler state | Model hash, GPU name and driver, sampling parameters, cache setting, parallel slots | Added: batch and ubatch sizes, unified KV, flash attention, KV types, speculative decoding, context, threads, the full effective sampler set, the chat-template hash, per-request token-id hashes, a hashed GPU identity, SM count, CUDA/OS/WSL versions, and an environment snapshot that excludes anything secret-named |
 | Reply text can hide a divergence that rejoins | Reply bytes compared | Token ids and top-5 log-probabilities are recorded per decision |
 | vLLM is not bit-exact by default | vLLM allowed | A vLLM seat counts as "not shown bit-exact" until it passes a cold-restart check |
@@ -66,7 +68,7 @@ threads and paper abstracts. R&D re-checked the llama.cpp cache flags in its sou
 
 ## Claims
 
-- [verified] llama-server's `--cache-ram` defaults to 8192 MiB, idle-slot saving defaults on and requires the RAM cache and a unified KV buffer, and `cache_prompt` defaults on (via: llama.cpp tools/server/README.md on master, read by the harvest clerk; R&D re-read the same defaults in llama.cpp's common/common.h:594-598 and common/arg.cpp:1363-1366 at tag b9333, commit 35c9b1f39, 2026-11-21)
+- [verified] llama-server's `--cache-ram` defaults to 8192 MiB, idle-slot saving defaults on and requires the RAM cache, and `cache_prompt` defaults on (via: llama.cpp tools/server/README.md on master, read by the harvest clerk; R&D re-read the same defaults in llama.cpp's common/common.h:659-664 and common/arg.cpp:1716-1718 at master commit 1fdda89a, 2026-11-21)
 - [verified] Without prefix reuse, ten serving configurations (two engines, four weight formats) at batch size one reproduced every token and log-probability over 80 episodes (via: abstract of Patodiya 2026, arXiv 2609.04748, read by the harvest clerk, 2026-11-21)
 - [verified] For one 7B model, cache-hit and recompute paths diverged on 37.4% of episodes at 16-bit and 82.5% at 4-bit; at Q4_K_M the server-level prompt cache left 20.0 to 28.7% run-to-run divergence at its default under five random orders, and moved divergence by 37.5 points under the canonical order (via: abstract of Patodiya 2026, arXiv 2609.04748v3, re-read by R&D, 2026-11-21)
 - [verified] vLLM's docs give no default reproducibility guarantee, and reproducible online serving only with batch invariance, a beta mode for compute capability 8.0 and up, on the same hardware and vLLM version (via: vLLM docs/usage/reproducibility.md and docs/features/batch_invariance.md on main, read by the harvest clerk, 2026-11-21)
@@ -82,4 +84,4 @@ threads and paper abstracts. R&D re-checked the llama.cpp cache flags in its sou
 - [primary] https://arxiv.org/abs/2609.04748 — Patodiya (2026), Same Request, Different Answer: Quantization Amplifies Cache-Induced Divergence in LLM Serving (abstract read)
 - [primary] https://github.com/vllm-project/vllm/blob/main/docs/usage/reproducibility.md — vLLM reproducibility documentation
 - [primary] https://github.com/vllm-project/vllm/blob/main/docs/features/batch_invariance.md — vLLM batch invariance documentation
-- [primary] https://github.com/ggml-org/llama.cpp/issues/26128 — llama.cpp issue on the server prompt cache and `--no-cache-prompt` (body read)
+- [primary] https://github.com/ggml-org/llama.cpp/issues/26128 — llama.cpp issue 26128, an RPC-backend crash with the server prompt cache (its workaround notes read)

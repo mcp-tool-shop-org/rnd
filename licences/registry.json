@@ -3477,7 +3477,7 @@
       "kind": "licence",
       "covers": [
         "Yarn Spinner for Unreal Engine (YarnSpinnerTool/YarnSpinner-UnrealEngine), under the Yarn Spinner Public Licence (YSPL) version 1.0",
-        "Yarn Spinner for Godot in GDScript (YarnSpinnerTool/YarnSpinner-Godot-GDScript): its LICENSE.md is the same YSPL v1.0 text (identical sha256 of both repositories' licence content through GitHub's licence API, 2026-11-21)"
+        "Yarn Spinner for Godot in GDScript (YarnSpinnerTool/YarnSpinner-Godot-GDScript), and Yarn Spinner's sample projects for Unreal Engine (YarnSpinnerTool/YarnSpinner-UnrealEngine-Samples) and for Godot (YarnSpinnerTool/YarnSpinner-Godot-Samples): each repository's LICENSE.md is the same YSPL v1.0 text (identical sha256 of the licence content through GitHub's licence API, 2026-11-21)"
       ],
       "url": "https://raw.githubusercontent.com/YarnSpinnerTool/YarnSpinner-UnrealEngine/main/LICENSE.md",
       "page_date": "Yarn Spinner Public Licence version 1.0 (LICENSE.md last changed 2026-02-27, commit 0212421866)",
@@ -3497,12 +3497,15 @@
         "Except as expressly set out in this Section 3.4, You may not distribute the Software in any form.",
         "You must retain the copyright notice set out at the top of this Licence and include a copy of this Licence in all copies or substantial portions of the Software.",
         "You must credit Yarn Spinner in a location visible to end users of Your Licensed Product.",
-        "A commercial licence may, for example, modify or remove the attribution, non-competition, or AI training conditions set out above."
+        "A commercial licence may, for example, modify or remove the attribution, non-competition, or AI training conditions set out above.",
+        "This Licence, and all rights granted under it, terminate automatically and immediately if You fail to comply with any of Your obligations under this Licence.",
+        "If You cure the breach within thirty (30) days of becoming aware of it, and the Licensor has not notified You of termination, the Licence is reinstated retroactively.",
+        "the Contractor agrees in writing to be bound by terms no less restrictive than this Licence with respect to the Software"
       ],
       "uses": {
         "assets": "conditions",
         "training": "barred",
-        "evaluation": "n/a",
+        "evaluation": "barred",
         "code": "barred"
       },
       "conditions": [
@@ -3513,10 +3516,12 @@
         "Extension tools (section 3.2(b)): a tool that integrates with Yarn Spinner needs users to obtain their own licence, must never embed, bundle, redistribute or automatically download it, and must aim to extend Yarn Spinner, not replace it",
         "Attribution (section 3.1): keep the copyright notice and a copy of the licence in all copies or substantial portions, and credit Yarn Spinner where end users of the product can see it",
         "A commercial licence from the licensor may modify or remove the attribution, non-competition and AI-training conditions (section 7); its availability and terms are at the licensor's discretion",
-        "Breach ends the licence automatically, with a duty to destroy copies (section 9); the law of Tasmania governs (section 14)"
+        "Breach ends the licence automatically, with a duty to destroy copies (section 9); the law of Tasmania governs (section 14)",
+        "Evaluation (sections 3.3(a) and (b)): evaluating models on its code or documentation is not among 3.3(b)'s permitted AI uses, and it risks 3.3(a)'s bar on using the Software, its documentation or associated materials to improve any AI system or reproducing them for AI code-generation tools; R&D treats it as barred",
+        "Agent context (section 3.3(a), its third act): its source and documentation may not be copied into agent context, prompt packs, skill files or search indexes, whatever the agent is building; nor sent to hosted models (3.3(c)) or to contractors except under section 4's written terms"
       ],
       "restriction_search": "YSPL v1.0 read in full (sections 1 to 15) on 2026-11-21.",
-      "notes": "Read by R&D on 2026-11-21 for the narrative-facts question. R&D's verdict 'code: barred' is for the studio's use: World Forge, any distributed studio tool and any public studio repository must not carry or incorporate it (sections 3.4 and 3.2(b)(ii)); repositories that feed local training must not carry its files or documentation (section 3.3(a)); and agents building the studio's own narrative format or runtime must not read its source or documentation (a conservative reading of section 3.2(a)). If Unreal or Godot users want Yarn Spinner, the safe route is to export Yarn scripts, or compile them with the MIT core, and let them install the plugin under their own licence. A game shipping it in compiled form with the notice, a copy of the licence and the credit is possible ('assets: conditions'). Checked by another model family (Gemini 4 Carbon in AI Studio, High) on 2026-11-21: PASS, with additions that R&D checked against the snapshot and GitHub's licence API.",
+      "notes": "Read by R&D on 2026-11-21 for the narrative-facts question. R&D's verdict 'code: barred' is for the studio's use: World Forge, any distributed studio tool and any public studio repository must not carry or incorporate it (sections 3.4 and 3.2(b)(ii)); repositories that feed local training must not carry its files or documentation (section 3.3(a)); and agents building the studio's own narrative format or runtime must not read its source or documentation (a conservative reading of section 3.2(a)). If Unreal or Godot users want Yarn Spinner, the safe route is to export Yarn scripts, or compile them with the MIT core, and let them install the plugin under their own licence. A game shipping it in compiled form with the notice, a copy of the licence and the credit is possible ('assets: conditions'). Checked by another model family (Gemini 4 Carbon in AI Studio, High) on 2026-11-21: PASS, with additions that R&D checked against the snapshot and GitHub's licence API. Why the studio abstains from YSPL material entirely: a breach ends the licence automatically and at once (section 9(a)), with every copy to be destroyed (9(b)); the 30-day cure (9(d)) applies only before the licensor gives notice, and some agent actions, such as material learned into a model or sent to a third party, may be impossible to cure. Studio rule (2026-11-21): no seat or agent downloads, vendors, reads, indexes, evaluates on, trains on, or sends any YSPL material, documentation included. Yarn interop is only by exporting .yarn files that users run under their own licence.",
       "snapshot_sha256": "1daa34c6166448e374d4589db76daa5250957d6f8fcbe70a82d2924e225f10bb",
       "snapshot_file": "2026-11-21/yarnspinner-unrealengine-yspl.txt"
     }

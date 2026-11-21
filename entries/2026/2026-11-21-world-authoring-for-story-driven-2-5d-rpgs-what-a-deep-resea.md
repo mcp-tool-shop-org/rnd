@@ -18,9 +18,9 @@ Research run was seeded with a question that named nothing of ours. It covered:
 - how one world feeds several engines;
 - where local models help.
 
-The report is `[aggregator]` AI output. A harvest agent (an AI model) listed 22 of its claims. It checked 14 at
-source, 11 at the source page and 3 through search-result summaries, with 9 confirmed and 5 partly; the other 8 were
-not checked, nor were the report's many other figures or most of its source registry. R&D then re-read several sources
+The report is `[aggregator]` AI output. A harvest agent (an AI model) listed 22 of its claims. It checked 14 of them:
+11 at the source page and 3 through search-result summaries, with 9 confirmed and 5 partly. The other 8 were not
+checked, nor were the report's many other figures or most of its source registry. R&D then re-read several sources
 itself, and checked each finding that bears on our design against World Forge's code at commit 023ff9a and its
 in-flight step-1 branch.
 
@@ -52,7 +52,7 @@ in-flight step-1 branch.
 |---|---|---|
 | One source of truth for the tool-engine contract | World Forge keeps hand-made copies of two engine lists, the hashed keys and the encounter types; the step-1 stage script imports the third, the pack keys, from the engine. The copies had drifted | Kept for now under a written rule (engine first, then the copy, in the same cycle), with tests pinning the remaining copies. The next step generates the lists from the installed engine at build time; only the browser-safe hasher stays a copy, with its equivalence test |
 | Contracts checked by machine on every commit | The contract test on the in-flight step-1 branch pins one engine release, and no job is scheduled. So a new engine release goes unseen, as an older pin did | A weekly job moves the engine pin on a branch, runs CI on it and opens an issue for review |
-| The consumer's validator in the loop | The command-line entry point (`world-forge-export --validate-only`) runs World Forge's own checks, plus one mirrored engine rule since step 1; it imports nothing from the engine | It will run the engine's real gate and intake as a dry run, and list what the engine drops |
+| The consumer's validator in the loop | The command-line entry point (`world-forge-export --validate-only`) runs World Forge's own checks, and the step-1 branch adds one mirrored engine rule (the engine's encounter types); it imports nothing from the engine | It will run the engine's real gate and intake as a dry run, and list what the engine drops |
 | A thin playable slice first | Many editor features have no trigger or no reader, and no exported world has been played yet | Not now. The contract pipeline and the editor's own defects come first. The list of disconnected features stays as a record |
 | Ids that never change | Item placements had no ids (being fixed); no tombstones exist | Decided 2026-11-21: stable ids with a retired-id list come first among the data-model changes, after the editor's own fixes. Nothing already saved is renumbered |
 | Layered states, split files, narrative facts | No story-state model; one project file; no quests or facts authored | Decided 2026-11-21: one file per map, then story-state layers, after stable ids. Who authors narrative facts is decided after a further research report |
@@ -68,7 +68,7 @@ in-flight step-1 branch.
 - [verified] Yarn Spinner tags lines with `#line` ids for localisation, and adds them when they are missing (via: Yarn Spinner docs, read by the harvest agent, 2026-11-21)
 - [verified] LDtk can save each level to its own `.ldtkl` file in a sub-folder, beside the project file (via: LDtk docs page "Optional separate levels", read by R&D, 2026-11-21)
 - [verified] Unreal's World Partition saves each actor to its own file, and streaming can be switched off (via: Epic docs, read by the harvest agent, 2026-11-21)
-- [verified] Larian's Osiris ignores the text before a GUID when that text has no "-"; goals have INIT, KB and EXIT sections; all active goals are sorted alphabetically into one story, whose rules run top to bottom (via: Larian's Osiris Overview page, read by R&D, 2026-11-21)
+- [verified] Larian's Osiris ignores the text before a GUID when that text has no "-"; goals have INIT, KB and EXIT sections; the goals of the active mods are sorted alphabetically into one story, and the rules of active goals run in it from top to bottom (via: Larian's Osiris Overview page, read by R&D, 2026-11-21)
 - [verified] Dead Cells places hand-built rooms onto a designer-drawn concept graph (via: deepnight.net, read by the harvest agent, 2026-11-21)
 - [verified] Skyrim's dungeons used two kit artists, eight level designers and seven kits for 300+ dungeons (via: Game Developer, read by the harvest agent, 2026-11-21)
 - [verified] The Dragon Quest III HD-2D remake uses no special engine and no pixel art in its backgrounds (via: Siliconera interview, read by the harvest agent, 2026-11-21)

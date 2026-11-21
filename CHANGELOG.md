@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.3.0.0.4] - 2026-11-21
+
+- Licences: two entries read at source, the Unreal Engine EULA after update 22 (its AI-training bars removed, with conditions) and Epic's Content License (NoAI content barred from AI datasets, development and inputs)
+- Licences: the Yarn Spinner Public Licence entry now bars evaluation, names its two sample repositories, and records why the studio abstains from YSPL material entirely
+- Three Deep Research harvests filed: seeds 48, 49 and 50 (one world for many engines, an editor for its authors, agents inside the tool)
+- Licences: three narrative-format entries read at source (ink MIT; Yarn Spinner's core MIT; Yarn Spinner for Unreal Engine and its Godot GDScript plugin under the YSPL, which bars AI training, narrative-tool competitors and source in public repositories)
+
 ## [1.3.0.0.3] - 2026-11-21
 
 - A Deep Research harvest filed: seed 46, world authoring for story-driven 2.5D RPGs (one contract source, stable ids, machine-checked contracts, layered world states)

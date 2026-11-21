@@ -3524,6 +3524,65 @@
       "notes": "Read by R&D on 2026-11-21 for the narrative-facts question. R&D's verdict 'code: barred' is for the studio's use: World Forge, any distributed studio tool and any public studio repository must not carry or incorporate it (sections 3.4 and 3.2(b)(ii)); repositories that feed local training must not carry its files or documentation (section 3.3(a)); and agents building the studio's own narrative format or runtime must not read its source or documentation (a conservative reading of section 3.2(a)). If Unreal or Godot users want Yarn Spinner, the safe route is to export Yarn scripts, or compile them with the MIT core, and let them install the plugin under their own licence. A game shipping it in compiled form with the notice, a copy of the licence and the credit is possible ('assets: conditions'). Checked by another model family (Gemini 4 Carbon in AI Studio, High) on 2026-11-21: PASS, with additions that R&D checked against the snapshot and GitHub's licence API. Why the studio abstains from YSPL material entirely: a breach ends the licence automatically and at once (section 9(a)), with every copy to be destroyed (9(b)); the 30-day cure (9(d)) applies only before the licensor gives notice, and some agent actions, such as material learned into a model or sent to a third party, may be impossible to cure. Studio rule (2026-11-21): no seat or agent downloads, vendors, reads, indexes, evaluates on, trains on, or sends any YSPL material, documentation included. Yarn interop is only by exporting .yarn files that users run under their own licence.",
       "snapshot_sha256": "1daa34c6166448e374d4589db76daa5250957d6f8fcbe70a82d2924e225f10bb",
       "snapshot_file": "2026-11-21/yarnspinner-unrealengine-yspl.txt"
+    },
+    {
+      "id": "unreal-engine-eula",
+      "owner": "Epic Games",
+      "kind": "licence",
+      "covers": [
+        "Unreal Engine (the Licensed Technology, Engine Code included) as used for Star Freight and greek-rpg",
+        "MetaHuman characters and animation curves used under the Unreal Engine EULA"
+      ],
+      "url": "https://www.unrealengine.com/eula/unreal",
+      "page_date": "EULA update 22 (change log dated 2026-10-30; Epic's announcement dated 2026-10-29)",
+      "read_date": "2026-11-21",
+      "clauses": [
+        "up to 30 lines of code in length",
+        "may be subject to additional or alternative license terms"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "conditions",
+        "evaluation": "conditions",
+        "code": "conditions"
+      },
+      "notes": "Read at source in a browser on 2026-11-21 (the EULA, its change log at https://www.unrealengine.com/eula-change-log/unreal and Epic's announcement). Update 22 removed the two AI restrictions from section 6(e): the Licensed Technology as training or prompt input for generative AI, and MetaHuman use to build databases or train AI. Section 6(e) now lists six items, none about AI. A check by another model family (Gemini 4 Carbon, AI Studio, 2026-11-21) agreed, with conditions. The snapshot is a text copy of the EULA page saved from the browser, not snapshot.py's fetch; the site refuses automated fetches, so re-read this page in a browser. Training on the engine source tree is not covered by this reading: the bundled third-party licences come first (section 7(b)), and whether publishing weights trained on engine source counts as distributing Engine Code is not answered by these pages. Not legal advice.",
+      "snapshot_sha256": "af0bd3ce66d00a399d6faf576638dcbceb427b2131fc37d9c4f1b46801f3e4c7",
+      "snapshot_file": "2026-11-21/unreal-engine-eula-2026-11-21.txt",
+      "conditions": [
+        "The studio's Epic account must have accepted the update-22 EULA; an existing licensee is bound by it only after accepting it on Epic's page, and that acceptance is the maintainer's own act",
+        "Training and evaluation on the studio's own UE project content and renders: allowed once accepted; Fab or marketplace assets inside them follow their own licence (see epic-content-license)",
+        "Engine source to a hosted model: a short snippet for one specific question only, never whole files and never as training data (the snippet allowance in section 5(a) is for public forum discussion, not AI services)",
+        "Engine source as training data: not relied on; each bundled third-party licence (section 7(b)) and the open distribution question come first",
+        "UEFN, Verse and Fortnite island content, and any custom licence, are outside this reading"
+      ]
+    },
+    {
+      "id": "epic-content-license",
+      "owner": "Epic Games",
+      "kind": "licence",
+      "covers": [
+        "Fab and Unreal Engine Marketplace content licensed under the Epic Content License Agreement"
+      ],
+      "url": "https://www.unrealengine.com/eula/content",
+      "page_date": "not stated on the page (read 2026-11-21)",
+      "read_date": "2026-11-21",
+      "clauses": [
+        "use NoAI Content (i) in datasets utilized by Generative AI Programs",
+        "(ii) in the development of Generative AI Programs",
+        "(iii) as inputs to Generative AI Programs"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "conditions",
+        "evaluation": "conditions",
+        "code": "n/a"
+      },
+      "notes": "Read at source in a browser on 2026-11-21 (sections 5(c)(viii) and 17, Artificial Intelligence). Unreal Engine EULA update 22 does not change this agreement; Epic's announcement says Fab sellers still allow or refuse AI training with the NoAI tag. No snapshot kept: the site refuses automated fetches, so re-read this page in a browser. Not legal advice.",
+      "conditions": [
+        "Content tagged NoAI never goes into a training or evaluation set, into the development of a generative model, or into a generative model as input, rendered frames that show it included",
+        "Content without the NoAI tag: allowed unless its own listing says otherwise; check each asset before it enters a dataset"
+      ]
     }
   ]
 }

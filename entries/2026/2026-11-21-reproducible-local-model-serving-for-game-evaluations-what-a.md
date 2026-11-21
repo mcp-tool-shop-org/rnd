@@ -30,20 +30,21 @@ threads and paper abstracts. R&D re-checked the llama.cpp cache flags in its sou
   off explicitly.
 - **With no prefix reuse and one slot, llama.cpp reproduces tokens.** One study, across two engines (llama.cpp among
   them) and four weight formats at batch size one, saw all ten serving configurations reproduce every token and
-  log-probability without prefix reuse. A maintainer says bit-identical results come from a single slot with no prompt cache.
-- **Prefix reuse moves outputs.** For one 7B model, the cache-hit and recompute paths diverged on 37.4% of multi-turn tool
-  episodes at 16-bit and 82.5% at 4-bit. At 4-bit, run-to-run divergence came mainly from llama-server's own prompt cache:
-  20.0 to 28.7% of episodes at its default across five random episode orders, and a 37.5-point shift under the canonical
-  order.
+  log-probability without prefix reuse. A maintainer says bit-identical results come from a single slot with no
+  prompt cache.
+- **Prefix reuse moves outputs.** For one 7B model, the cache-hit and recompute paths diverged on 37.4% of multi-turn
+  tool episodes at 16-bit and 82.5% at 4-bit. At 4-bit, run-to-run divergence came mainly from llama-server's own
+  prompt cache: 20.0 to 28.7% of episodes at its default across five random episode orders, and a 37.5-point shift
+  under the canonical order.
 - **vLLM guarantees reproducibility in online serving only in batch-invariant mode.** Drift between cold restarts is
   reported, from kernel autotuning. The report's proposed fix (a reduction-config flag) was not found in vLLM's source,
   and an issue comment shows drift even with an identical compile cache.
 - **Record more than the settings you send.** That means the full effective sampler set (llama-server applies `min_p`
   0.05 unless told otherwise), the chat-template hash, a hash of each prompt's token ids, the GPU's identity and SM count,
   and the relevant environment variables. Compare token ids and top-5 log-probabilities, not reply text alone.
-- **Size the pre-flight by the bound you want.** With zero failures in N independent states, each run twice, the 95%
-  upper confidence bound on the per-state failure rate is 1 - 0.05^(1/N): 45% at N = 5, 26% at N = 10, 9.5% at N = 30.
-  This assumes every state carries the same risk.
+- **Size the pre-flight by the bound you want.** With zero failures in N independent states, each run twice,
+  the 95% upper confidence bound on the per-state failure rate is 1 - 0.05^(1/N): 45% at N = 5, 26% at N = 10,
+  9.5% at N = 30. This assumes every state carries the same risk.
 
 ## Studio relevance
 

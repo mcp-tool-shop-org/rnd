@@ -15,17 +15,18 @@ Our generated reasoning benchmark is audited for answer cues before release. The
 - an **edge rule**: no class share of 7/12 or more on any slice of 30 or more items, across 156 tail families.
 
 We asked a Gemini Deep Research run how to control errors across many sparse, nested tail tests like these. The report
-is `[aggregator]` AI output. A harvest clerk checked four of its source claims (several other cited papers could not be fetched) and recomputed its arithmetic. Then, the same day, we
-ran the measurement it recommended on our own pools: a label-blind null of the whole gate.
+is `[aggregator]` AI output. A harvest clerk checked four of its source claims (several other cited papers could not be
+fetched) and recomputed its arithmetic. Then, the same day, we ran the measurement it recommended on our own pools: a
+label-blind null of the whole gate.
 
 ## Key points
 
 - **Permutation p-values are never zero.** Report (b+1)/(B+1), never b/B.
 - **Empirical inner p-values put a floor under the family-wise p.** If each test's inner p is estimated from the same
   permutations, every permutation that is the strict maximum on some test ties the floor. The smallest family-wise p is
-  then roughly the number of distinct "winning" shuffles divided by B+1. Exact inner p-values remove that floor. Under the
-  within-triad null, a slice's count for one label is a fixed part from the triads wholly inside it, plus two binomial
-  sums over the triads split across its boundary.
+  then roughly the number of distinct "winning" shuffles divided by B+1. Exact inner p-values remove that floor.
+  Under the within-triad null, a slice's count for one label is a fixed part from the triads wholly inside it, plus
+  two binomial sums over the triads split across its boundary.
 - **Nested tail slices act like one random walk looked at many times.** By the report's own simulation, which we did not
   check, the effective number of tests grows with the log of the slice-size range.
 - **Report three pools together, not as "1 of 3 fired".** Give a pooled test plus a 2-of-3 partial-conjunction p, with

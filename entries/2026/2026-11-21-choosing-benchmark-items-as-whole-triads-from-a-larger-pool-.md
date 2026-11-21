@@ -15,8 +15,8 @@ class. After a generator repair, its audit still found one leaning slice: 21 of 
 Deep Research run whether choosing items at the pool level would balance cues better than another repair to the
 generator. Pool-level choice here means picking whole triads from a larger generated set.
 
-The report is `[aggregator]` AI output. A harvest clerk checked 11 of its claims at source abstracts and 1 at a code repository, and recomputed the
-single-scan tail simulation.
+The report is `[aggregator]` AI output. A harvest clerk checked 11 of its claims at source abstracts and 1 at a code
+repository, and recomputed the single-scan tail simulation.
 
 ## Key points
 

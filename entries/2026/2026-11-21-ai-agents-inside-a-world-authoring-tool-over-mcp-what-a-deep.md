@@ -26,7 +26,7 @@ source page (through a fetch tool that returns a model-written reading of the pa
 search-result summary, and 1 page came back empty. 8 were confirmed, 7 partly and 1 not found; none was found wrong.
 11 were not checked, and the report itself labels most of its VRAM and latency figures as estimates. The harvest agent
 read the whole report but only the first part of its source list. R&D then decided each of the report's 16
-contradiction rows, and the Publisher ruled on four world-forge technical calls (recorded below).
+contradiction rows, and four world-forge technical calls were then ruled (recorded below).
 
 ## Key points
 
@@ -83,14 +83,14 @@ contradiction rows, and the Publisher ruled on four world-forge technical calls 
    - world, lore and community text are data, never instructions;
    - a pass with no tools turns untrusted text into structured facts, and agents with write tools never see raw community text;
    - tool definitions are pinned by hash;
-   - limits are an adjustable feature, not fixed numbers (decided 2026-11-21): presets run from careful to open, and the default asks before deleting a place or anything else refers to, and before a draft changes more than a moderate number of things, but never blocks ordinary single edits; each draft can be allowed more or less, and per-user defaults live in the settings (the report's "50 entities" is an example, not evidence);
+   - limits are an adjustable feature, not fixed numbers (decided 2026-11-21): presets run from careful to open, and the default asks before deleting a place or anything referenced by another item, and before a draft changes more than a moderate number of things, but never blocks ordinary single edits; each draft can be allowed more or less, and per-user defaults live in the settings (the report's "50 entities" is an example, not evidence);
    - only a person can change a limit, never an agent, and the server enforces this; every limit change is logged; the evaluation set includes an agent that tries to exceed its limit and one that tries to change a limit, and both must be refused;
    - each agent role gets one draft and its own manifest;
    - the operation log is append-only and records agent, model, quantisation, adapter, draft, tool and an argument hash;
    - "thinking off for untrusted text" is tested with injection canaries, not adopted as a rule;
    - the design gets one targeted check by another model family once it is final, because security is the specialised case.
 5. Decided 2026-11-21: no click waits on a model; agent work runs in the background into its draft with a cancel; inline commands target 1 s, measured on the rig with the chosen local model.
-6. Decided 2026-11-21: an evaluation set comes before any write tool ships: about 20 tasks to start, growing toward 50 to 100, scored at zero retries on schema validity and invented-tool rate, draft-scope precision (any change outside scope fails the run), deterministic spatial and graph checks, export checks after the pipeline's next step, and injection canaries. It runs on every change of model, quantisation, prompt or manifest.
+6. Decided 2026-11-21: an evaluation set comes before any write tool ships (R&D plans to start near 20 tasks and grow toward 50 to 100), scored at zero retries on schema validity and invented-tool rate, draft-scope precision (any change outside scope fails the run), deterministic spatial and graph checks, export checks after the pipeline's next step, and injection canaries. It runs on every change of model, quantisation, prompt or manifest.
 
 Four technical rulings, 2026-11-21, all yes:
 - **No CRDT store.** One local server orders every operation. Revisit only if many people need to edit offline at once.
@@ -98,12 +98,14 @@ Four technical rulings, 2026-11-21, all yes:
 - **Relational placement: later, after the tool surface exists.** Measure it on our own 2.5D maps first, since Holodeck's result is from indoor 3D rooms.
 - **No script sandbox for now.** The attack surface is too large and the code-mode results were not checked.
 
-Decided 2026-11-21 by the Director: the limits are the adjustable feature above; he approves the tool wording when the
-tool server is carded; and his corrections to agent drafts are recorded locally in a form usable for later role-adapter
+Decided 2026-11-21 by the project's human director: the limits are the adjustable feature above; the director approves
+the tool wording when the tool server is specified; and the director's corrections to agent drafts are recorded locally in a form usable for later role-adapter
 training (the draft operation, the correction and the outcome; publishing that data is not covered). Also carried into
 the narrative-facts work: a "who knows what" continuity critic and the localisation lock.
 
 ## Claims
+
+Page checks below were read through an AI fetch tool's summary of the source URL (see Summary), not inspected in the raw page source, unless the line says otherwise.
 
 - [verified] Godot's `EditorUndoRedoManager` `create_action` accepts a custom context that overrides the first object's history. Narrowed: the page names `EditorPlugin.get_undo_redo()` as the intended route and shows `EditorInterface.get_editor_undo_redo()` only in an example (via: Godot docs, read by the harvest agent, 2026-11-21)
 - [verified] The jp10b godot-mcp-plugin README says its script and method-call actions are outside undo, while other scene edits go through the editor's undo history (via: the GitHub README, read by the harvest agent, 2026-11-21)
@@ -121,8 +123,8 @@ the narrative-facts work: a "who knows what" continuity critic and the localisat
 - [verified] SimpleTool reports 61.2 ms median latency and up to 9.6 times faster function calling. Narrowed: the abstract says consumer-grade GPU and a 4B-scale model, not an RTX 4090 (via: arXiv:2603.00030 abstract, read by the harvest agent, 2026-11-21)
 - [verified] SceneAgent (13 Nov 2026) is a portable multi-backend scene generation framework evaluated on 69 prompts, with human preference of 78.2 to 89.4% against five baselines (via: arXiv:2611.17821 abstract, read by the harvest agent, 2026-11-21)
 - [unverified] Godot plugins reach the undo manager through `EditorInterface.get_editor_undo_redo()` with paired do and undo calls; the page showed the route only in an example and no full paired example
-- [unverified] GameDevBench's best score is 70.6% with category scores 51.4, 38.4, 33.0 and 32.0. Not found: the page shows 53.8% for the best result, the four values match but the category labels differ
-- [unverified] SceneAgent scored 83.3% overall human preference; not on the abstract
+- [unverified] GameDevBench's best score is 70.6% with category scores 51.4, 38.4, 33.0 and 32.0. Not in the arXiv paper text read, which gave 53.8% as the best result (any later leaderboard update was not checked); the four values match but the category labels differ
+- [unverified] SceneAgent scored 83.3% overall human preference; not on the abstract (the full paper and project page were not checked)
 - [unverified] Google code review has a median change of 24 lines and turnaround under 4 hours; only the abstract was read, which does not give these
 - [unverified] Unreal's undo buffer cannot persist across restarts, with FTransaction and FScopedTransaction behaviour. Not found: the page fetched came back empty
 - [unverified] Kleppmann et al. 2021 on a verified acyclic replicated tree move (PDF unreadable), and the Loro API claims (the page returned 403); not checked

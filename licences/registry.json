@@ -3549,13 +3549,13 @@
         "evaluation": "conditions",
         "code": "conditions"
       },
-      "notes": "Read at source in a browser on 2026-11-21 (the EULA, its change log at https://www.unrealengine.com/eula-change-log/unreal and Epic's announcement of 2026-10-29). Update 22 removed the two AI restrictions from section 6(e): the Licensed Technology (source code included) as training input or as prompt input where the program trains on it, and MetaHuman use to build databases or train AI. Section 6(e) now lists six items, none about AI. Epic's FAQ says a licensee who accepts the new EULA may use Unreal Engine, its source code included, for AI training. What still applies: 'Distribute' (section 4) covers making code available to any other person or entity, and section 5 permits Distribution outside a Product only in the listed ways; the 30-line snippet allowance covers public forums for discussing the snippet and patch or plug-in support, not AI services. Section 7(b): bundled third-party code keeps its own licences, which prevail. The EULA supersedes the MetaHuman Creator EULA for Licensed Technology; that agreement survives only for Content until the Content License is also accepted (section 9). The assets use is n/a because neither this EULA nor update 22 restricts shipping AI-generated output; shipping a UE product follows the EULA's ordinary terms. A check by another model family (Gemini 4 Carbon, AI Studio, 2026-11-21, two passes) agreed, and its second pass found the distribution point, which R&D then read at source. The snapshot is a text copy of the EULA page saved from the browser, not snapshot.py's fetch; the site refuses automated fetches, so re-read this page in a browser. Not legal advice.",
+      "notes": "Read at source in a browser on 2026-11-21 (the EULA, its change log at https://www.unrealengine.com/eula-change-log/unreal and Epic's announcement of 2026-10-29). Update 22 removed the two AI restrictions from section 6(e): the Licensed Technology (source code included) as training input or as prompt input where the program trains on it, and MetaHuman use to build databases or train AI. Section 6(e) now lists six items, none about AI. Epic's FAQ says a licensee who accepts the new EULA may use Unreal Engine, its source code included, for AI training. What still applies: 'Distribute' (section 4) covers making code available to any other person or entity, and section 5 permits Distribution outside a Product only in the listed ways; the 30-line snippet allowance covers public forums for discussing the snippet and patch or plug-in support, not AI services. Section 7(b): bundled third-party code keeps its own licences, which prevail. The EULA supersedes the MetaHuman Creator EULA for Licensed Technology; that agreement survives only for Content until the Content License is also accepted (section 8(b)). The cloud-based MetaHuman Creator on UE 5.5 or earlier stays under its own EULA (see metahuman-creator-eula). The assets use is n/a because neither this EULA nor update 22 restricts shipping AI-generated output; shipping a UE product follows the EULA's ordinary terms. A check by another model family (Gemini 4 Carbon, AI Studio, 2026-11-21, two passes) agreed, and its second pass found the distribution point, which R&D then read at source. The snapshot is a text copy of the EULA page saved from the browser, not snapshot.py's fetch; the site refuses automated fetches, so re-read this page in a browser. Accepted in the studio's Epic account by the maintainer on 2026-11-21: this EULA (update 22) by about 13:43 ET, at https://www.unrealengine.com/eulaprompt/unreal, and the Epic Content License by about 13:44 ET, at https://www.unrealengine.com/eulaprompt/content; Epic's confirmation screens are the record. Not legal advice.",
       "snapshot_sha256": "af0bd3ce66d00a399d6faf576638dcbceb427b2131fc37d9c4f1b46801f3e4c7",
       "snapshot_file": "2026-11-21/unreal-engine-eula-2026-11-21.txt",
       "conditions": [
-        "The studio's Epic account must have accepted the update-22 EULA, and the Epic Content License, so the old MetaHuman Creator EULA is fully superseded; section 8(a) keeps the prior agreement until a licensee accepts, and that acceptance is the maintainer's own act",
+        "Met on 2026-11-21: the studio's Epic account accepted the update-22 EULA (about 13:43 ET) and the Epic Content License (about 13:44 ET), so the old MetaHuman Creator EULA is fully superseded for UE 5.6 and later (section 8(b)); a later amendment binds only once accepted again (section 8(a)), and each acceptance is the maintainer's own act",
         "Training and evaluation on the studio's own UE project content and renders: allowed once accepted; marketplace or Fab assets inside them follow their own licence (see epic-content-license and fab-eula)",
-        "Engine Code (the Engine/ tree, headers included) to any third-party hosted model or AI service, even a short snippet: barred, as a Distribution that section 5 does not permit (sections 4 and 5); read it locally",
+        "Engine Code (the Engine/ tree, headers included) to any third-party hosted model or AI service, even a short snippet: barred, as a Distribution that section 5 does not permit (sections 4 and 5; section 5(a)(i)'s Distribution to another licensee of the same engine version cannot be met by a hosted AI service); read it locally",
         "Engine source as training data: Epic allows it after update 22, but it is not relied on: each bundled third-party licence comes first (section 7(b)), and whether published weights trained on engine source would Distribute Engine Code is unanswered",
         "UEFN, Verse and Fortnite island content, and any custom licence, are outside this reading"
       ]
@@ -3585,10 +3585,10 @@
         "evaluation": "conditions",
         "code": "conditions"
       },
-      "notes": "Read at source in a browser on 2026-11-21 (sections 4, 5(c)(vii), 5(c)(viii) and 17, and the Marketplace Content Addendum). Unreal Engine EULA update 22 does not change this agreement; Epic's announcement says Fab sellers still allow or refuse AI training with the NoAI tag. The NoAI bar covers Generative AI Programs only, defined as technology designed to generate or aid in creating new content. Section 5(c)(vii) applies to all Licensed Content, tagged or not. The assets use is n/a because this agreement restricts the content, not AI-generated output. snapshot_sha256 is the sha256 of the page text as the browser rendered it (34,858 characters, the same at 10:54 and 13:37 on 2026-11-21); no full-text copy is kept, and the site refuses automated fetches, so re-read this page in a browser. Not legal advice.",
+      "notes": "Read at source in a browser on 2026-11-21 (sections 4, 5(c)(vii), 5(c)(viii) and 17, and the Marketplace Content Addendum). Unreal Engine EULA update 22 does not change this agreement; Epic's announcement says Fab sellers still allow or refuse AI training with the NoAI tag. The NoAI bar covers Generative AI Programs only, defined as technology designed to generate or aid in creating new content. Section 5(c)(vii) applies to all Licensed Content, tagged or not. The assets use is n/a because this agreement restricts the content, not AI-generated output. snapshot_sha256 is the sha256 of the page text as the browser rendered it (34,858 characters, the same at 10:54 and 13:37 on 2026-11-21); no full-text copy is kept, and the site refuses automated fetches, so re-read this page in a browser. Accepted in the studio's Epic account by the maintainer on 2026-11-21, by about 13:44 ET, at https://www.unrealengine.com/eulaprompt/content (the agreement also binds on any download or use of Licensed Content). Not legal advice.",
       "conditions": [
         "NoAI Content never goes into a dataset used by a generative AI program, into developing one, or into one as input, rendered frames that show it included",
-        "Any Licensed Content, tagged or not: never published, sold or otherwise made available for others to download or copy, so no raw marketplace assets in a published dataset (section 5(c)(vii))",
+        "Any Licensed Content, tagged or not: never published, sold or otherwise made available for others to download or copy, except as the agreement allows (in a compiled Project or rendered linear media, sections 3 and 5(c)(vii)), so no raw marketplace assets in a published dataset (section 5(c)(vii))",
         "Licensed Content in source format, code plugins included, goes to no third party beyond employees, affiliates and contractors working on the studio's project, so no plugin source to a hosted model (section 4)"
       ],
       "snapshot_sha256": "eefca6fbb2b42ece14b754fdb3c120e81e043094b95aa87cdfc6a784befb67cc"
@@ -3598,7 +3598,8 @@
       "owner": "Epic Games (as marketplace operator; the licence is between the buyer and each Content Licensor)",
       "kind": "licence",
       "covers": [
-        "Content acquired on Fab under the Fab Standard License (listings under CC BY follow that licence instead)"
+        "Content acquired on Fab under the Fab Standard License (listings under CC BY follow that licence instead)",
+        "Fab code plugins (Unreal Engine and Unity plugins), licensed per seat"
       ],
       "url": "https://www.fab.com/eula",
       "page_date": "Last updated October 1st, 2024",
@@ -3606,20 +3607,45 @@
       "clauses": [
         "as training inputs to Generative AI Programs",
         "at the time of your Transaction",
-        "solely operate on the original content"
+        "solely operate on the original content",
+        "you may not Distribute Content on a standalone basis to third parties except to your collaborators",
+        "are offered to you on a per-seat basis"
       ],
       "uses": {
         "assets": "n/a",
         "training": "conditions",
         "evaluation": "conditions",
-        "code": "n/a"
+        "code": "conditions"
       },
-      "notes": "Read at source in a browser on 2026-11-21 (the NoAI restriction and section 16(l), Artificial Intelligence). Its NoAI bar covers datasets used by generative AI programs, their development, and training inputs; it is narrower than the Content License's 'as inputs'. Section 16(l) excludes programs that only operate on the original content, generate tags to classify it, or arrange existing content without creating new content. NoAI status is fixed at the time of the transaction. Not checked: the licence tiers and the rest of the agreement. snapshot_sha256 is the sha256 of the page text as the browser rendered it on 2026-11-21 at 13:37 ET (33,736 characters); the page carries a changing sale banner, so the hash identifies that reading only. No full-text copy is kept: re-read this page in a browser. Not legal advice.",
+      "notes": "Read at source in a browser on 2026-11-21 (the NoAI restriction and section 16(l), Artificial Intelligence). Its NoAI bar covers datasets used by generative AI programs, their development, and training inputs; it is narrower than the Content License's 'as inputs'. Section 16(l) excludes programs that only operate on the original content, generate tags to classify it, or arrange existing content without creating new content. NoAI status is fixed at the time of the transaction. Also read: code plugins are offered per seat, and Content may not be Distributed on a standalone basis beyond collaborators. Not checked: the licence tiers and the rest of the agreement. snapshot_sha256 is the sha256 of the page text as the browser rendered it on 2026-11-21 at 13:37 ET (33,736 characters); the page carries a changing sale banner, so the hash identifies that reading only. No full-text copy is kept: re-read this page in a browser. Not legal advice.",
       "snapshot_sha256": "76599f5f005ea96f80182cf0d45a18aa50c04cb1f93214387ef003837251597f",
       "conditions": [
         "NoAI Content (as tagged at the time of purchase) never goes into a dataset used by a generative AI program, into developing one, or into one as training input, rendered frames that show it included",
-        "Keep a saved copy of each Fab listing at purchase, so its NoAI status at the time of the transaction can be shown later"
+        "Keep a saved copy of each Fab listing at purchase, so its NoAI status at the time of the transaction can be shown later",
+        "Any Fab Content, tagged or not: never Distributed on a standalone basis beyond collaborators working on the studio's project, so no raw Fab assets in a published dataset and no Fab plugin source to a third-party hosted model"
       ]
+    },
+    {
+      "id": "metahuman-creator-eula",
+      "owner": "Epic Games",
+      "kind": "licence",
+      "covers": [
+        "The cloud-based MetaHuman Creator, its presets and generated characters, used with Unreal Engine 5.5 or earlier (MetaHuman with Unreal Engine 5.6 and later follows unreal-engine-eula)"
+      ],
+      "url": "https://www.unrealengine.com/eula/mhc",
+      "page_date": "not stated (banner: applies to the cloud-based MetaHuman Creator on Unreal Engine 5.5 or earlier)",
+      "read_date": "2026-11-21",
+      "clauses": [
+        "for the purpose of building or enhancing any database or training or testing any artificial intelligence, machine learning, deep learning, neural network or similar technology"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "barred",
+        "evaluation": "barred",
+        "code": "n/a"
+      },
+      "notes": "Read at source in a browser on 2026-11-21 at 13:49 ET. The page's banner says this agreement continues to apply to the cloud-based MetaHuman Creator on Unreal Engine 5.5 or earlier, and that MetaHuman with 5.6 and later follows the Unreal Engine EULA, which update 22 cleared for AI training. Restriction (j) bars using the MetaHuman Technology to build a database or to train or test AI. The Unreal Engine EULA (section 8(b)) supersedes this agreement for Licensed Technology, and fully once the Content License is also accepted; both were accepted on 2026-11-21. The bar here is recorded for any MetaHuman material made with the cloud app on 5.5 or earlier. The URL https://www.unrealengine.com/eula/metahuman returns 404. snapshot_sha256 is the sha256 of the page text as the browser rendered it (25,097 characters); no full-text copy is kept. Not legal advice.",
+      "snapshot_sha256": "a8456f4f573ffabd523ffe3a8c25529907c084537464cbbb962d76b326914ac8"
     }
   ]
 }

@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.3.0.0.3] - 2026-11-21
+
+- A Deep Research harvest filed: seed 46, world authoring for story-driven 2.5D RPGs (one contract source, stable ids, machine-checked contracts, layered world states)
+
 ## [1.3.0.0.2] - 2026-11-21
 
 - Three Deep Research harvests filed: seeds 43, 44 and 45 (choosing benchmark items as whole triads, many sparse tail tests with a measured label-blind null, reproducible local model serving)

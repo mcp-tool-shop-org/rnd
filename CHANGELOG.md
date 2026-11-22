@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.3.0.0.5] - 2026-11-22
+
+- seed 53 harvest: measuring a preview tool at frozen states
+- Added `2026-11-22-measuring-a-preview-tool-s-effect-at-frozen-game-states-what`: Measuring a preview tool's effect at frozen game states: what a Deep Research audit found (seed 53)
+
 ## [1.3.0.0.4] - 2026-11-21
 
 - Licences: four entries read at source: the Unreal Engine EULA after update 22 (its AI-training bars removed; Engine Code still goes to no third-party AI service), Epic's Content License for legacy Marketplace content (NoAI content barred from generative-AI datasets, development and inputs), the Fab EULA (NoAI content barred from generative-AI datasets, development and training inputs), and the cloud MetaHuman Creator EULA for UE 5.5 or earlier (AI training and testing barred)

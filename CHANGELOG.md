@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.3.0.0.6] - 2026-11-24
+
+- bit-identical parallel scoring for a game evaluator (seed 56)
+- Added `2026-11-24-bit-identical-parallel-scoring-for-a-game-evaluator-what-a-d`: Bit-identical parallel scoring for a game evaluator: what a Deep Research audit found (seed 56)
+
 ## [1.3.0.0.5] - 2026-11-22
 
 - seed 53 harvest: measuring a preview tool at frozen states

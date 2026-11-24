@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.3.0.0.8] - 2026-11-24
+
+- a Google + NVIDIA learning pathway on scaling and serving JAX on NVIDIA GPUs, filed as reference
+- Added `2026-11-24-jax-on-nvidia-gpus-pathway`: Google + NVIDIA learning pathway — scale and serve JAX models on NVIDIA GPUs
+
 ## [1.3.0.0.7] - 2026-11-24
 
 - the engine family, four audits: state digest, reachable world changes, authored data, every event (seeds 57-60)

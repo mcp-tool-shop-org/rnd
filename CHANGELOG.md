@@ -11,6 +11,14 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.3.0.0.7] - 2026-11-24
+
+- the engine family, four audits: state digest, reachable world changes, authored data, every event (seeds 57-60)
+- Added `2026-11-24-authored-data-that-never-reaches-play-what-a-deep-research-a`: Authored data that never reaches play: what a Deep Research audit found (seed 59)
+- Added `2026-11-24-showing-every-simulation-event-what-a-deep-research-audit-fo`: Showing every simulation event: what a Deep Research audit found (seed 60)
+- Added `2026-11-24-two-languages-one-state-digest-what-a-deep-research-audit-fo`: Two languages, one state digest: what a Deep Research audit found (seed 57)
+- Added `2026-11-24-world-changes-that-play-can-reach-what-a-deep-research-audit`: World changes that play can reach: what a Deep Research audit found (seed 58)
+
 ## [1.3.0.0.6] - 2026-11-24
 
 - bit-identical parallel scoring for a game evaluator (seed 56)

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.3.0.0.10] - 2026-11-24
+
+- LlamaIndex OCRia-1 (4B page-to-Markdown parser, restrictive RAIL-M licence), filed as watch
+- Added `2026-11-24-llamaindex-ocria-1-document-parser`: LlamaIndex OCRia-1 — 4B page-image-to-Markdown parser on Qwen3.5-4B (restrictive RAIL-M licence)
+
 ## [1.3.0.0.9] - 2026-11-24
 
 - MCP turns two: Skills over MCP (beta), Tasks and Elicitation (GA), filed as watch

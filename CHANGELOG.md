@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.3.0.0.9] - 2026-11-24
+
+- MCP turns two: Skills over MCP (beta), Tasks and Elicitation (GA), filed as watch
+- Added `2026-11-24-mcp-turns-two-skills-tasks-elicitation`: MCP turns two — Skills over MCP (beta), Tasks and Elicitation (GA) in Claude and Claude Code
+
 ## [1.3.0.0.8] - 2026-11-24
 
 - a Google + NVIDIA learning pathway on scaling and serving JAX on NVIDIA GPUs, filed as reference

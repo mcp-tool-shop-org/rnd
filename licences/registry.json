@@ -3646,6 +3646,40 @@
       },
       "notes": "Read at source in a browser on 2026-11-21 at 13:49 ET. The page's banner says this agreement continues to apply to the cloud-based MetaHuman Creator on Unreal Engine 5.5 or earlier, and that MetaHuman with 5.6 and later follows the Unreal Engine EULA, which update 22 cleared for AI training. Restriction (j) bars using the MetaHuman Technology to build a database or to train or test AI. The Unreal Engine EULA (section 8(b)) supersedes this agreement for Licensed Technology, and fully once the Content License is also accepted; both were accepted on 2026-11-21. The bar here is recorded for any MetaHuman material made with the cloud app on 5.5 or earlier. The URL https://www.unrealengine.com/eula/metahuman returns 404. snapshot_sha256 is the sha256 of the page text as the browser rendered it (25,097 characters); no full-text copy is kept. Not legal advice.",
       "snapshot_sha256": "a8456f4f573ffabd523ffe3a8c25529907c084537464cbbb962d76b326914ac8"
+    },
+    {
+      "id": "flashinfer-licence",
+      "owner": "FlashInfer community and NVIDIA (flashinfer-ai/flashinfer)",
+      "kind": "licence",
+      "covers": [
+        "flashinfer-python 0.7.3 (in the judge vllm lock)",
+        "flashinfer-jit-cache 0.7.3+cu130 (provider shim) and flashinfer-jit-cache-sm120f 0.7.3+cu130 (prebuilt kernels, incl. fused_moe_120), both built from git 775207de"
+      ],
+      "url": "https://raw.githubusercontent.com/flashinfer-ai/flashinfer/775207deb34055667df89ed618fb4b06fc84de74/LICENSE",
+      "page_date": "LICENSE at git 775207de (the 0.7.3 jit-cache build commit)",
+      "read_date": "2026-11-24",
+      "clauses": [
+        "Apache License",
+        "Version 2.0, January 2004",
+        "BSD 3-Clause \"New\" License",
+        "3rdparty/cutlass",
+        "3rdparty/spdlog"
+      ],
+      "uses": {
+        "assets": "n/a",
+        "training": "n/a",
+        "evaluation": "allowed",
+        "code": "conditions"
+      },
+      "conditions": [
+        "Use as installed from upstream (PyPI and the flashinfer.ai wheel index) on rented pods and the rig, for internal judging and benchmarks, redistributes nothing and is allowed",
+        "Shipping flashinfer or its prebuilt kernels inside anything we distribute carries the Apache-2.0 text and NOTICE, plus the BSD-3-Clause text for CUTLASS and the MIT text for spdlog (the repo's licenses/ folder)",
+        "The jit-cache provider wheels carry only 'License: Apache-2.0' in their METADATA and no licence file; the compiled kernels also contain CUTLASS (BSD-3-Clause) and NVIDIA TensorRT-LLM sources marked Apache-2.0, so the repo LICENSE and licenses/ at the build commit are the terms that apply"
+      ],
+      "notes": "Read by R&D on 2026-11-24 when choosing the prebuilt JIT cache for a rented-pod judge run (no on-pod kernel compile). The registry had no flashinfer entry although flashinfer-python was already in the vllm lock. Not AI-generated content: uses assets and training are n/a.",
+      "snapshot_sha256": "43b9fbb29d65e49f1e6123616662daabcf7c5224268fe76f296540459340b1cc",
+      "snapshot_file": "2026-11-24/flashinfer-licence.txt",
+      "archive_url": null
     }
   ]
 }

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.3.0.0.12] - 2026-11-25
+
+- merchant-league M2 xrpl-rust spike: entry and raw-data rules
+- Added `2026-11-14-xrpl-rust-testnet-spike-merchant-league`: xrpl-rust 1.3.0 Testnet spike for Merchant League: works, not adopted
+
 ## [1.3.0.0.11] - 2026-11-24
 
 - licences: flashinfer (python + prebuilt jit-cache) Apache-2.0 with CUTLASS BSD-3 and spdlog MIT; internal use on pods allowed

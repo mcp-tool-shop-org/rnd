@@ -1,0 +1,54 @@
+{
+ "schema": "rnd-data-rules/v1",
+ "about": "What of merchant-league's M2 xrpl-rust Testnet spike receipt (merchant-league PR #2, branch m2/testnet-spike at 1d031a3e, 2026-11-14) may be public in rnd-data. The spike worked but was not adopted, and the PR is closed with a record; this keeps its evidence. Deny by default for content: a file is public only when a public rule names it, it carries no content marker, and the identity scan passed it. Rules are checked in order: identity (from the reasons file), then private, then content markers, then public; anything left is private as 'unapproved'. Written by R&D on the Publisher's ask (2026-11-25); the Publisher's merge of this file is their agreement, as with receipts.json, and either side changes it only by agreement. The receipt was already redacted on the branch (local paths read <home> or <worktree>); the account addresses are public Testnet addresses and no seed was ever printed or saved. Patterns: 'name' matches the file name, 'path' the path under the source folder (fnmatch; * crosses folders). Licences, first match wins, for public files only: the Rust code and the spike source are MIT (merchant-league's licence); everything else, including the XRPL Testnet ledger records, is CC BY 4.0 (rnd-data's data licence).",
+ "default": "unapproved",
+ "private": [
+  {
+   "name": "*wallet*",
+   "reason": "unapproved",
+   "why": "secrets: a wallet file holds a seed. None exists in this receipt; the rule is a floor"
+  },
+  {
+   "name": "*seed*",
+   "reason": "unapproved",
+   "why": "secrets: anything named for a seed. None exists; the rule is a floor"
+  }
+ ],
+ "content_markers": [],
+ "public": [
+  {
+   "path": "m2-xrpl-rust-spike-2026-11-14/README.md",
+   "why": "the receipt itself (docs/receipts/m2-xrpl-rust-spike-2026-11-14/README.md on the branch): what ran, the verdict, why it is not adopted, the alternative"
+  },
+  {
+   "path": "m2-xrpl-rust-spike-2026-11-14/testnet_spike.rs.txt",
+   "why": "the spike's source as it ran (not compiled anywhere)"
+  },
+  {
+   "path": "m2-xrpl-rust-spike-2026-11-14/raw/*",
+   "why": "the run's raw files: snapshot, step output and exit code, the merchant's validated Testnet history, the cargo audit"
+  },
+  {
+   "path": "m2-xrpl-rust-spike-2026-11-14/league-dice-1d031a3e/*",
+   "why": "crates/league-dice at 1d031a3e: the PREIMAGE-SHA-256 condition and fulfillment encoding the live escrow used, kept because the PR is closed unmerged"
+  }
+ ],
+ "licences": [
+  {
+   "name": "*.rs",
+   "licence": "MIT"
+  },
+  {
+   "name": "*.rs.txt",
+   "licence": "MIT"
+  },
+  {
+   "name": "Cargo.toml",
+   "licence": "MIT"
+  },
+  {
+   "name": "*",
+   "licence": "CC-BY-4.0"
+  }
+ ]
+}

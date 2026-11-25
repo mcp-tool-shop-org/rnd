@@ -11,6 +11,10 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.3.0.0.11] - 2026-11-24
+
+- licences: flashinfer (python + prebuilt jit-cache) Apache-2.0 with CUTLASS BSD-3 and spdlog MIT; internal use on pods allowed
+
 ## [1.3.0.0.10] - 2026-11-24
 
 - LlamaIndex OCRia-1 (4B page-to-Markdown parser, restrictive RAIL-M licence), filed as watch

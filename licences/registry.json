@@ -3680,6 +3680,86 @@
       "snapshot_sha256": "43b9fbb29d65e49f1e6123616662daabcf7c5224268fe76f296540459340b1cc",
       "snapshot_file": "2026-11-24/flashinfer-licence.txt",
       "archive_url": null
+    },
+    {
+      "id": "alpamayo2-edge-card",
+      "owner": "NVIDIA",
+      "kind": "model-card",
+      "covers": [
+        "nvidia/Alpamayo2-Edge (HF commit b92b6aa326bd3e2235db28f248ad5a30b5890e64)"
+      ],
+      "url": "https://huggingface.co/nvidia/Alpamayo2-Edge",
+      "page_date": "Release Date 11/10/2026; HF commit b92b6aa326bd3e2235db28f248ad5a30b5890e64 (2026-11-10)",
+      "read_date": "2026-11-26",
+      "clauses": [
+        "license: openmdw-1.1",
+        "The model weights are released under the [OpenMDW-1.1](https://openmdw.ai/license/1-1/) license.",
+        "Apache License 2.0, as provided in the [Alpamayo 2 Edge source repository](https://github.com/NVlabs/alpamayo2-edge)."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [],
+      "notes": "Weights under OpenMDW-1.1 (see openmdw-1.1: no restriction or obligation on outputs; redistributing the model materials keeps the agreement and its notices). Source code Apache-2.0. The card has no commercial-use sentence. base_model: nvidia/Cosmos3-Edge (cosmos3-edge-card). The driving datasets it was trained and evaluated on carry their own terms: see nvidia-physicalai-av-dataset, which is far narrower. Read from the raw README and commits page on the read date; rnd entry 2026-11-26-nvidia-alpamayo-2-edge."
+    },
+    {
+      "id": "cosmos3-edge-card",
+      "owner": "NVIDIA",
+      "kind": "model-card",
+      "covers": [
+        "nvidia/Cosmos3-Edge (HF commit 6afc1256321c3a8e623d89be3bc5117a1e90f96b; checkpoint updated 2026-08-24)"
+      ],
+      "url": "https://huggingface.co/nvidia/Cosmos3-Edge",
+      "page_date": "Released 07/20/2026; card update notice August 25, 2026; HF commit 6afc1256321c3a8e623d89be3bc5117a1e90f96b (2026-11-12)",
+      "read_date": "2026-11-26",
+      "clauses": [
+        "license_name: openmdw1.1-license",
+        "This model is released under the [OpenMDW1.1](https://openmdw.ai/license/1-1/)",
+        "This model is ready for commercial and non-commercial use."
+      ],
+      "uses": {
+        "assets": "allowed",
+        "training": "allowed",
+        "evaluation": "allowed",
+        "code": "allowed"
+      },
+      "conditions": [],
+      "notes": "Front matter is license: other with license_name openmdw1.1-license and license_link https://openmdw.ai/license/1-1/, i.e. OpenMDW-1.1 (see openmdw-1.1). The backbone of Alpamayo 2 Edge (alpamayo2-edge-card). Read from the raw README and commits page on the read date."
+    },
+    {
+      "id": "nvidia-physicalai-av-dataset",
+      "owner": "NVIDIA",
+      "kind": "dataset-licence",
+      "covers": [
+        "nvidia/PhysicalAI-Autonomous-Vehicles (Hugging Face dataset; gated; HF licence tag nvidia-av-dataset)"
+      ],
+      "url": "https://huggingface.co/datasets/nvidia/PhysicalAI-Autonomous-Vehicles",
+      "page_date": "NVIDIA Autonomous Vehicle Dataset License Agreement (no version or date on the agreement; dataset version 26.11 on the card)",
+      "read_date": "2026-11-26",
+      "clauses": [
+        "solely for your internal development of autonomous vehicles and automated driving assisted systems using NVIDIA technology (\"Purpose\").",
+        "The rights granted to you in Section 1 and 2 are for the Purpose only. You may not use the Dataset for any other purpose.",
+        "You may not create derivative works of the Dataset, sell, rent, sublicense, transfer, distribute, embed, or host the Dataset (in whole or in part), or otherwise make the Dataset (in whole or in part) available to others.",
+        "This Agreement expires twelve (12) months after the date of initial delivery or download of the Dataset.",
+        "Upon termination, you must stop using and destroy all copies of the Dataset.",
+        "You will delete the Dataset upon written notice by NVIDIA"
+      ],
+      "uses": {
+        "assets": "barred",
+        "training": "conditions",
+        "evaluation": "conditions",
+        "code": "n/a"
+      },
+      "conditions": [
+        "Only for internal development of autonomous vehicles or driver-assistance systems using NVIDIA technology (Sections 1, 4.3). Whether an open faithfulness-audit project with no vehicle counts as that purpose is UNDECIDED: put to the maintainer 2026-11-26; no download until it is cleared.",
+        "No derivative works of the dataset, and no hosting, distributing or otherwise making any part of it available (Section 4.6): nothing derived from it ships in a public repo, release or dataset.",
+        "The agreement expires 12 months after first download; on termination all copies are destroyed (Section 8), and NVIDIA may require deletion on notice (Section 4.9).",
+        "The dataset is NVIDIA Confidential Information (Section 3), including results of benchmarking or performance data relating to it."
+      ],
+      "notes": "Gated: access needs a logged-in Hugging Face account that accepts the agreement. Read from the agreement text embedded on the dataset card (the card links LICENSE.pdf, not fetched). Section 1 also says the grant is non-exclusive, revocable, non-transferable and non-sublicensable; Sections 4.1, 4.4 and 4.5 bar surveillance and law-enforcement use, identifying or profiling individuals, sensitive-attribute inference and biometric processing; export controls apply (Section 13.3). 'assets' is barred by Section 4.6; 'training' and 'evaluation' carry the purpose limit above. Report 67 of the Deep Research seeds (2026-11-26) omitted these terms. No download has been made."
     }
   ]
 }

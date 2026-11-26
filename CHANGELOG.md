@@ -11,6 +11,13 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.3.0.0.14] - 2026-11-26
+
+- seeds 64-67 entries; Alpamayo 2 Edge, Cosmos 3 Edge and PhysicalAI-AV licence rows
+- Added `2026-11-26-a-ledger-game-that-is-also-a-model-benchmark-what-the-resear`: A ledger game that is also a model benchmark: what the research says we are missing
+- Added `2026-11-26-what-to-build-around-alpamayo-2-edge-and-the-dataset-licence`: What to build around Alpamayo 2 Edge, and the dataset licence that gates it
+- Added `2026-11-26-when-should-a-model-reason-adaptive-reasoning-for-local-word`: When should a model reason? Adaptive reasoning for local worders and judges
+
 ## [1.3.0.0.13] - 2026-11-26
 
 - entry: NVIDIA Alpamayo 2 Edge (adaptive reasoning, simulator-checked rewards; seeds 66-67 planted)

@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.3.0.0.13] - 2026-11-26
+
+- entry: NVIDIA Alpamayo 2 Edge (adaptive reasoning, simulator-checked rewards; seeds 66-67 planted)
+- Added `2026-11-26-nvidia-alpamayo-2-edge-a-2b-driving-model-that-reasons-only-`: NVIDIA Alpamayo 2 Edge: a 2B driving model that reasons only when it needs to
+
 ## [1.3.0.0.12] - 2026-11-25
 
 - merchant-league M2 xrpl-rust spike: entry and raw-data rules

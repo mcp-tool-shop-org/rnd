@@ -28,8 +28,12 @@ against rdlab's code, the main finding is a gap in what has been measured, not i
   verbalising tasks, and it can hurt through overthinking. This is direction only: several headline numbers in the
   report were not on the cited abstract pages.
 - **Item counts.** A 2-point accuracy difference with about 10% disagreement needs about 2,000 unclustered items
-  (a hand check of the report's power figure). rdlab's 1,260 items, clustered in triads, resolve about 3–4 points.
-  More distinct items help more than more repeats of the same items.
+  (a hand check of the report's power figure). More distinct items help more than more repeats of the same items.
+  - *Corrected 2026-11-26:* an earlier version said this comparison runs on "1,260 items" and resolves "about 3–4
+    points". Both figures were wrong.
+  - The judge's held-out parts are 288 and 264 items, which is 184 groups of three.
+  - A paired, group-clustered comparison on them resolves only a large difference: about 6–7 points at 80% power under
+    central assumptions, and about 9–10 points on either part alone.
 - **Model mix.** The report's compute tables assume dense models. rdlab's models are mostly mixture-of-experts, so those
   tables don't transfer.
 
@@ -38,9 +42,11 @@ against rdlab's code, the main finding is a gap in what has been measured, not i
 `act`, in this order:
 1. **Free, done first.** Mine the existing results for answers stopped by length, unparseable answers, and
    thinking-length against correctness, split by class and difficulty.
+   - *Update 2026-11-26:* skipped. Every candidate result set is either sealed for a counted run that hasn't happened,
+     or not yet published, so none could be read without risking the held-out data.
 2. **Cheap local A/B:** the writer with thinking off, and a sweep of the reader-thinking flag on a slice.
-3. **A non-thinking twin of the judge,** approved by the maintainer (2026-11-26) as a paired arm on the same 1,260 items,
-   scored with the existing scorer. The order is:
+3. **A non-thinking twin of the judge,** approved by the maintainer (2026-11-26) as a paired arm on the same items
+   as the thinking judge (its two held-out parts), scored with the existing scorer. The order is:
    - the free mining above;
    - one consult or research pass on the arm's design;
    - a cloud-GPU window that the maintainer approves.

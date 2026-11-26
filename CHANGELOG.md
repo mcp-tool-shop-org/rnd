@@ -11,6 +11,11 @@ NANO an ordinary library update (entries filed or revised, results added).
 
 ## [Unreleased]
 
+## [1.3.0.0.15] - 2026-11-26
+
+- correct the judge-arm item count in the when-to-reason entry
+- Updated `2026-11-26-when-should-a-model-reason-adaptive-reasoning-for-local-word`: When should a model reason? Adaptive reasoning for local worders and judges
+
 ## [1.3.0.0.14] - 2026-11-26
 
 - seeds 64-67 entries; Alpamayo 2 Edge, Cosmos 3 Edge and PhysicalAI-AV licence rows

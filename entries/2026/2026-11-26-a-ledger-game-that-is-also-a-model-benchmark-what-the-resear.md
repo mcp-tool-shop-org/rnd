@@ -41,9 +41,9 @@ what the other seats were secretly aiming for.
 ## Studio relevance
 
 `act`: the maintainer approved the silent-market arm, scripted baselines and seed-block scheduler as a build card, with
-the accessibility pass next. Two questions are open for the maintainer:
-- whether a lobby that masks which seats are AI is ever acceptable, given that the design discloses AI seats up front;
-- whether a phone or web client should come before Game mode, which would break the offline-only club rule.
+the accessibility pass next. Game mode comes before any phone or web client (the maintainer's decision, 2026-11-26).
+One question stays open: whether a lobby that masks which seats are AI is ever acceptable, given that the design
+discloses AI seats up front.
 
 ## Claims
 

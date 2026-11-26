@@ -18,7 +18,8 @@ is the data. The report did not mention the terms of NVIDIA's own driving datase
 - no derivative works, hosting or redistribution;
 - the licence expires a year after download, and every copy must then be destroyed.
 
-Nothing is built on that dataset until the maintainer settles whether an open audit counts as permitted use.
+**Parked (the maintainer's decision, 2026-11-26):** the licence rows are recorded and nothing else is done. There is no
+project and no audit repo, and nothing touches the dataset.
 
 ## Key points
 
@@ -33,15 +34,16 @@ Nothing is built on that dataset until the maintainer settles whether an open au
   OpenMDW-1.1 (registry rows added).
 - **Not ready yet.** NVIDIA's simulator post-training recipe supports only the larger Alpamayo 1.5. The Edge recipe is
   listed as coming. The reference-free judge checkpoint reads only two front cameras.
-- **Where it should live.** A new standalone repository, not the teacher-critic training project: an explanation audit
+- **Where it would live, if reopened.** A new standalone repository, not the teacher-critic training project: an explanation audit
   is outside that project's stated purpose. Critic-guided training on Alpamayo stays parked until that project's critic
   measurably moves its student and NVIDIA ships the Edge recipe.
 
 ## Studio relevance
 
-`watch`. The next steps wait on the maintainer's answer to one question: is an open faithfulness audit with no vehicle
-"internal development of autonomous vehicles"? The options are to ask NVIDIA, or to build the audit on synthetic
-simulator clips instead. Either way, nothing derived from the NVIDIA dataset would ever ship in a public repo.
+`watch`, parked 2026-11-26 (the maintainer's decision). Only the licence registry rows are kept. There is no project,
+no audit repo, and no download of or work on the NVIDIA dataset. If the idea is reopened, the first question is still
+whether an open faithfulness audit with no vehicle counts as "internal development of autonomous vehicles". Either way,
+nothing derived from the NVIDIA dataset would ever ship in a public repo.
 
 ## Claims
 

@@ -39,10 +39,16 @@ against rdlab's code, the main finding is a gap in what has been measured, not i
 1. **Free, done first.** Mine the existing results for answers stopped by length, unparseable answers, and
    thinking-length against correctness, split by class and difficulty.
 2. **Cheap local A/B:** the writer with thinking off, and a sweep of the reader-thinking flag on a slice.
-3. **A non-thinking twin of the judge,** paired on the same items with the existing scorer. It needs a new adapter and
-   a booked GPU window, and the maintainer's answer on whether a non-thinking arm may enter the bake-off record.
+3. **A non-thinking twin of the judge,** approved by the maintainer (2026-11-26) as a paired arm on the same 1,260 items,
+   scored with the existing scorer. The order is:
+   - the free mining above;
+   - one consult or research pass on the arm's design;
+   - a cloud-GPU window that the maintainer approves.
 
-The temperature question (keep 0 for reproducibility, or follow each model card) is also with the maintainer.
+   It needs a new adapter.
+
+The temperature for thinking models (0 for reproducibility, or each model card's recommended sampling) is a technical
+call R&D makes from evidence in that design pass.
 
 ## Claims
 

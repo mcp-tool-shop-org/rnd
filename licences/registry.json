@@ -3754,7 +3754,7 @@
         "code": "n/a"
       },
       "conditions": [
-        "Only for internal development of autonomous vehicles or driver-assistance systems using NVIDIA technology (Sections 1, 4.3). Whether an open faithfulness-audit project with no vehicle counts as that purpose is UNDECIDED: put to the maintainer 2026-11-26; no download until it is cleared.",
+        "Only for internal development of autonomous vehicles or driver-assistance systems using NVIDIA technology (Sections 1, 4.3). PARKED 2026-11-26 (the maintainer's decision): the studio records these terms only; no project or audit repo, no download, and nothing touches the dataset.",
         "No derivative works of the dataset, and no hosting, distributing or otherwise making any part of it available (Section 4.6): nothing derived from it ships in a public repo, release or dataset.",
         "The agreement expires 12 months after first download; on termination all copies are destroyed (Section 8), and NVIDIA may require deletion on notice (Section 4.9).",
         "The dataset is NVIDIA Confidential Information (Section 3), including results of benchmarking or performance data relating to it."
